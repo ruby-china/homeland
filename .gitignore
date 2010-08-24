@@ -3,6 +3,7 @@ db/*.sqlite3
 log/*.log
 tmp/**/*
 config/database.yml
+config/config.yml
 public/javascripts/cached_*
 public/stylesheets/cached_*
-
+public/uploads/*/*/*/*/*/*

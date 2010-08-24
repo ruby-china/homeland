@@ -1,4 +1,4 @@
-<%= form_for(@user, :url => cpanel_users_path) do |f| %>
+<%= form_for(@user, :url => (@user.id.blank? ? cpanel_users_path : cpanel_user_path(@user.id)) , :html => { :enctype =>  "multipart/form-data" }) do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -17,7 +17,7 @@
   </div>
   <div class="field">
     <%= f.label :passwd %><br />
-    <%= f.text_field :passwd %>
+    <%= f.password_field :passwd %>
   </div>
   <div class="field">
     <%= f.label :name %><br />
@@ -36,9 +36,15 @@
     <%= f.text_field :website %>
   </div>
   <div class="field">
-    <%= f.label :avatar_file_name %><br />
-    <%= f.text_field :avatar_file_name %>
+    <%= f.label :avatar %><br />
+    <%= f.file_field :avatar %>
   </div>
+  <% if !@user.avatar_file_name.blank? %>
+  <div class="field">
+    <label>预览</label><br />
+    <img src="<%= @user.avatar(:normal) %>" />
+  </div>
+  <% end %>
   <div class="field">
     <%= f.label :verified %><br />
     <%= f.check_box :verified %>

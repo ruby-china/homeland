@@ -1,0 +1,32 @@
+development:
+  # 网站名称
+  app_name: "Homeland"
+  # 页脚版权
+  foot_html: "&copy; Homeland."
+  # 网站的域名
+  domain: "127.0.0.1:3000"
+  # 配置图片的域名
+  upload_url: "http://127.0.0.1:3000/uploads"
+  # 图片上传途径
+  upload_root: "/home/user/work/homeland/public/uploads"
+  # 设置管理员，在下面填写需要设置为管理员的用户 email
+  admin_emails: 
+    - "admin@admin.com"
+
+test:
+  app_name: "Homeland"
+  foot_html: "&copy; Homeland."
+  domain: "127.0.0.1:3000"
+  upload_url: "http://127.0.0.1:3000/uploads"
+  upload_root: "/home/user/work/homeland/public/uploads"
+  admin_emails: 
+    - "admin@admin.com"
+
+production:
+  app_name: "Homeland"
+  foot_html: "&copy; Homeland."
+  domain: "127.0.0.1:3000"
+  upload_url: "http://127.0.0.1:3000/uploads"
+  upload_root: "/home/user/work/homeland/public/uploads"
+  admin_emails: 
+    - "admin@admin.com"

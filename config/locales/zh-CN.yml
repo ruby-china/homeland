@@ -135,6 +135,21 @@
         odd: "必须为单数"
         even: "必须为双数"
         record_invalid: "校验失败: %{errors}"
+    models:
+      user: "用户"
+    attributes:
+      user:
+        name: "大名"
+        location: "门牌号"
+        bio: "个人介绍"
+        passwd: "密码"
+        website: "个人主页"
+        avatar: "头像"
+        qq: "QQ"
+        last_logined_at: "上次登录时间"
+        tagline: "签名"
+        state: "状态"
+        verified: "已实名验证"
   
   activemodel:
     errors:
@@ -143,5 +158,7 @@
           one: "有 1 个错误发生导致「%{model}」无法被保存。"
           other: "有 %{count} 个错误发生导致「%{model}」无法被保存。"
         body: "如下字段出现错误："
+
+      
   
 

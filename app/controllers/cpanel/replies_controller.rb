@@ -1,4 +1,4 @@
-class RepliesController < ApplicationController
+class Cpanel::RepliesController < Cpanel::ApplicationController
   # GET /replies
   # GET /replies.xml
   def index

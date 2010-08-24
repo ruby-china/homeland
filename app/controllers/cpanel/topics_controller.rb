@@ -1,4 +1,4 @@
-class TopicsController < ApplicationController
+class Cpanel::TopicsController < Cpanel::ApplicationController
   # GET /topics
   # GET /topics.xml
   def index

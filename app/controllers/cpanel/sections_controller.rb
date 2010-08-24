@@ -1,4 +1,4 @@
-class SectionsController < ApplicationController
+class Cpanel::SectionsController < Cpanel::ApplicationController
   # GET /sections
   # GET /sections.xml
   def index

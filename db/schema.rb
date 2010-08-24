@@ -66,14 +66,15 @@ ActiveRecord::Schema.define(:version => 20100824055944) do
   add_index "topics", ["user_id"], :name => "index_topics_on_user_id"
 
   create_table "users", :force => true do |t|
-    t.string   "email",                           :null => false
-    t.string   "passwd",                          :null => false
-    t.string   "name",                            :null => false
+    t.string   "email",                               :null => false
+    t.string   "passwd",                              :null => false
+    t.string   "name",                                :null => false
     t.string   "location"
     t.string   "bio"
     t.string   "website"
     t.string   "avatar_file_name"
-    t.integer  "state",            :default => 1, :null => false
+    t.boolean  "verified",         :default => false, :null => false
+    t.integer  "state",            :default => 1,     :null => false
     t.string   "qq"
     t.datetime "last_logined_at"
     t.string   "tagline"

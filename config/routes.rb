@@ -1,13 +1,12 @@
 Homeland::Application.routes.draw do
-  resources :replies
-
-  resources :topics
-
-  resources :nodes
-
-  resources :sections
-
-  resources :users
+  namespace :cpanel do 
+    root :controller => :home, :action => :index
+    resources :replies
+    resources :topics
+    resources :nodes
+    resources :sections
+    resources :users
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

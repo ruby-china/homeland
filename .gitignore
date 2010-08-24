@@ -1,0 +1,8 @@
+.bundle
+db/*.sqlite3
+log/*.log
+tmp/**/*
+config/database.yml
+public/javascripts/cached_*
+public/stylesheets/cached_*
+

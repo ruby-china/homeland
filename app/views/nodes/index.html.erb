@@ -1,0 +1,29 @@
+<h1>Listing nodes</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Sort</th>
+    <th>Topics count</th>
+    <th>Summary</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @nodes.each do |node| %>
+  <tr>
+    <td><%= node.name %></td>
+    <td><%= node.sort %></td>
+    <td><%= node.topics_count %></td>
+    <td><%= node.summary %></td>
+    <td><%= link_to 'Show', node %></td>
+    <td><%= link_to 'Edit', edit_node_path(node) %></td>
+    <td><%= link_to 'Destroy', node, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Node', new_node_path %>

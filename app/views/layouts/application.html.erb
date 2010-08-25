@@ -12,7 +12,7 @@
       <table>
         <tr>
           <td id="app_name">
-            <%= APP_CONFIG['app_name'] %> <em>Beta</em></span>
+            <a href="/"><%= APP_CONFIG['app_name'] %></a> <em>Beta</em></span>
           </td>
           <td width="500" id="navbar">
             <a<%= " class='actived'" if params[:controller] == "home" %> href="<%= root_path %>">首页</a>
@@ -36,10 +36,11 @@
   <div id="sitemap" class="container">
     导航: <a href="<%= root_path %>"><%= APP_CONFIG['app_name'] %></a> &gt; <%= yield :sitemap %>
   </div>
-  <div id="main">
+  <div id="main" class="container">
     <%= yield %>
   </div>
-  <div id="footer">
+  <div id="footer" class="container">
+		<p class="suggest">使用 <a href="http://www.mozillaonline.com/" target="_blank" rel="nofollow">Firefox</a> 或 <a href="http://www.google.com/chrome" target="_blank" rel="nofollow">Chrome</a> 浏览访问本站将会获得更佳的视觉体验.</p>
   </div>
 </body>
 </html>

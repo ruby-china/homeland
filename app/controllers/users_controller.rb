@@ -9,8 +9,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      flash[:notice] = "Account registered!"
-      redirect_back_or_default account_url
+      flash[:notice] = "会员注册成功."
+      redirect_back_or_default root_path
     else
       render :action => :new
     end
@@ -28,7 +28,7 @@ class UsersController < ApplicationController
     @user = @current_user # makes our views "cleaner" and more consistent
     if @user.update_attributes(params[:user])
       flash[:notice] = "Account updated!"
-      redirect_to account_url
+      redirect_to root_path
     else
       render :action => :edit
     end

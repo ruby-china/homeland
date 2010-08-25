@@ -1,0 +1,52 @@
+<% content_for :sitemap do %><span class="current">加入社区</span><% end %>
+<div class="leftbox">
+	<div class="box">
+		<h1>加入<%= APP_CONFIG['app_name'] %>社区</h1>
+	<%= form_for(@user) do |f| %>
+	  <% if @user.errors.any? %>
+	    <div id="error_explanation">
+	      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+	      <ul>
+	      <% @user.errors.full_messages.each do |msg| %>
+	        <li><%= msg %></li>
+	      <% end %>
+	      </ul>
+	    </div>
+	  <% end %>
+
+	  <div class="field">
+	    <%= f.label :email %><br />
+	    <%= f.text_field :email %>
+	  </div>  
+	  <div class="field">
+	    <%= f.label :name %><br />
+	    <%= f.text_field :name %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :location %><br />
+	    <%= f.text_field :location %>
+	  </div>
+		<div class="field">
+	    <%= f.label :password %><br />
+	    <%= f.password_field :password %>
+	  </div>
+		<div class="field">
+	    <%= f.label :password_confirmation %><br />
+	    <%= f.password_field :password_confirmation %>
+	  </div>
+	  <div class="actions">
+	    <button class="submit">保存</button>
+	  </div>
+	<% end %>
+	</div>
+</div>
+<div class="sidebar">
+	<div class="box">
+		<h2>注册说明</h2>
+		<p>
+			这里是实名制的社区,我会将会对每一位成员进行真实身份验证,当然这里也欢迎外来人员注册,但我们验证过后的会员将会有小区成员的特别标志.
+		</p>
+	</div>
+</div>
+

@@ -23,7 +23,11 @@
             <a<%= " class='actived'" if params[:controller] == "cpanel/replies" %> href="<%= cpanel_replies_path %>">回复</a>
           </td>
           <td id="userbar">
-            Hello <strong><Jason/strong> <a href="/cpanel/logout">登出</a>
+            <% if @current_user %>
+            你好 <strong><%= @current_user.name %></strong> <a href="<%= logout_path %>">登出</a>
+						<% else %>
+							<a href="<%= register_path %>">加入社区</a> | <a href="<%= login_path %>">登录</a>
+						<% end %>
           </td>
         </tr>
       </table>

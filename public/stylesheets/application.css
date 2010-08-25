@@ -18,7 +18,7 @@ body { text-align:center;
   padding-bottom:30px;
 }
 
-.box { background:#FFF; padding:20px;  
+.box { background:#FFF; padding:10px;  
     margin-bottom:20px;
     *border:1px solid #EEE;
     -moz-border-radius: 8px;
@@ -27,8 +27,8 @@ body { text-align:center;
     -webkit-box-shadow:2px 2px 4px rgba(0, 0, 0, 0.1); }
 .shadow {-moz-box-shadow:4px rgba(0, 0, 0, 0.1);-webkit-box-shadow:2px 2px 4px rgba(0, 0, 0, 0.1);}
 .container { width:960px; margin-left:auto; margin-right:auto; text-align:left; }
-
-
+.leftbox { width:700px; float:left; }
+.sidebar { width:240px; float:right; }
 
 div.field, div.actions {
   margin-bottom: 10px;
@@ -65,6 +65,7 @@ div.field, div.actions {
 
 #header { margin-bottom:20px; line-height:40px; height:40px; color:#EEE; 
   background:#36aa01 url(/images/header_bg.jpg) left top repeat-x; }
+#header .container {  width:940px; }
 #header table { width:100%;  }
 #header table tr td { height:38px; line-height:38px; }
 #header a { color:#FFF; }
@@ -74,8 +75,9 @@ div.field, div.actions {
 #navbar a { font-size:14px; font-weight:bold; margin-right:8px; }
 #navbar a.actived { color:#e7e5b2; text-decoration:none; cursor:default; }
 #userbar { text-align:right; }
-#sitemap { margin-bottom:6px; font-family:sans-serif,arial; }
+#sitemap { margin-bottom:6px; font-family:sans-serif,arial; width:940px;}
 #main h1 { font-size:16px; font-weight:bold; text-align:right; color:#ed5140; margin-bottom:10px; }
+#footer { clear:both; }
 table.grid { border:1px solid #e7e5b2; }
 table.grid tr td {border-top: 1px solid #e7e5b2; border-left: 1px solid #e7e5b2; padding:3px;}
 table.grid tr td.first { border-left: 0px;}

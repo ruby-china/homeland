@@ -33,6 +33,7 @@
     导航: <a href="<%= cpanel_root_path %>">控制台</a> &gt; <%= yield :sitemap %>
   </div>
   <div id="main" class="box container">
+    <%= notice_message %>
     <%= yield %>
   </div>
   <div id="footer" class="container">

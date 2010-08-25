@@ -21,35 +21,32 @@ div.field, div.actions {
 }
 
 .field_with_errors {
-  padding: 2px;
-  background-color: red;
-  display: table;
+  display:inline;
+  color:#b16125;
 }
 
 #error_explanation {
-  width: 450px;
-  border: 2px solid red;
-  padding: 7px;
-  padding-bottom: 0;
-  margin-bottom: 20px;
-  background-color: #f0f0f0;
+  width: 550px;
+  border: 1px solid #e6e6bd;
+  padding: 10px;
+  margin-bottom: 15px;
+  background-color: #ffffcc;
 }
 
 #error_explanation h2 {
   text-align: left;
   font-weight: bold;
-  padding: 5px 5px 5px 15px;
+  margin-bottom:8px;
   font-size: 12px;
-  margin: -7px;
   margin-bottom: 0px;
-  background-color: #c00;
-  color: #fff;
 }
 
+#error_explanation ul { margin:0px 16px; }
 #error_explanation ul li {
   font-size: 12px;
   list-style: square;
 }
+#success_message { border:1px solid #d4e5a6; background:#effbd5; padding:6px 10px; width:550px; margin-bottom:15px; }
 
 #header { margin-bottom:20px; line-height:40px; height:40px; color:#EEE; 
   background:#36aa01 url(/images/header_bg.jpg) left top repeat-x; }

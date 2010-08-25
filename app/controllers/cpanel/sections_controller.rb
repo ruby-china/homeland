@@ -44,7 +44,7 @@ class Cpanel::SectionsController < Cpanel::ApplicationController
 
     respond_to do |format|
       if @section.save
-        format.html { redirect_to(@section, :notice => 'Section was successfully created.') }
+        format.html { redirect_to(cpanel_sections_path, :notice => 'Section was successfully created.') }
         format.xml  { render :xml => @section, :status => :created, :location => @section }
       else
         format.html { render :action => "new" }
@@ -60,7 +60,7 @@ class Cpanel::SectionsController < Cpanel::ApplicationController
 
     respond_to do |format|
       if @section.update_attributes(params[:section])
-        format.html { redirect_to(@section, :notice => 'Section was successfully updated.') }
+        format.html { redirect_to(cpanel_sections_path, :notice => 'Section was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -76,7 +76,7 @@ class Cpanel::SectionsController < Cpanel::ApplicationController
     @section.destroy
 
     respond_to do |format|
-      format.html { redirect_to(sections_url) }
+      format.html { redirect_to(cpanel_sections_url) }
       format.xml  { head :ok }
     end
   end

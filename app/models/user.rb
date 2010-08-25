@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
   validates_presence_of :email, :name, :passwd
+  validates_uniqueness_of :email, :name
+  has_many :topics
+  has_many :replies
   
   # 封面图
   has_attached_file :avatar,

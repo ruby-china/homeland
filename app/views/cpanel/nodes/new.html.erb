@@ -1,5 +1,8 @@
+<% content_for :sitemap do %>
+  <a href="<%= cpanel_nodes_path %>">节点</a> &gt; <span class="current">新建</span>
+<% end %>
 <h1>New node</h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Back', nodes_path %>
+<%= link_to 'Back', cpanel_nodes_path %>

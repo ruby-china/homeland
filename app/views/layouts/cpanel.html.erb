@@ -2,15 +2,41 @@
 <html>
 <head>
   <title>Homeland - Control Panel</title>
-  <%= stylesheet_link_tag :all %>
+  <%= stylesheet_link_tag "application","cpanel", "cache_cpanel_base" %>
   <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tag %>
 </head>
 <body>
-
-  <div class="box container">
+  <div id="header" class="shadow">
+    <div class="container">
+      <table>
+        <tr>
+          <td id="app_name">
+            控制台 <a href="<%= root_path %>">回前台</a>
+          </td>
+          <td width="500" id="navbar">
+            <a<%= " class='actived'" if params[:controller] == "cpanel/home" %> href="<%= cpanel_root_path %>">首页</a>
+            <a<%= " class='actived'" if params[:controller] == "cpanel/users" %> href="<%= cpanel_users_path %>">用户</a>
+            <a<%= " class='actived'" if params[:controller] == "cpanel/sections" %> href="<%= cpanel_sections_path %>">分类</a>
+            <a<%= " class='actived'" if params[:controller] == "cpanel/nodes" %> href="<%= cpanel_nodes_path %>">节点</a>
+            <a<%= " class='actived'" if params[:controller] == "cpanel/topics" %> href="<%= cpanel_topics_path %>">帖子</a>
+            <a<%= " class='actived'" if params[:controller] == "cpanel/replies" %> href="<%= cpanel_replies_path %>">回复</a>
+          </td>
+          <td id="userbar">
+            Hello <strong><Jason/strong> <a href="/cpanel/logout">登出</a>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div id="sitemap" class="container">
+    导航: <a href="<%= cpanel_root_path %>">控制台</a> &gt; <%= yield :sitemap %>
+  </div>
+  <div id="main" class="box container">
     <%= yield %>
   </div>
-
+  <div id="footer" class="container">
+    Powered by opensource project <a href="http://github.com/huacnlee/homeland" target="_blank">Homeland</a>.
+  </div>
 </body>
 </html>

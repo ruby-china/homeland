@@ -1,4 +1,4 @@
-<%= form_for(@node) do |f| %>
+<%= form_for(@node, :url => (@node.id.blank? ? cpanel_nodes_path : cpanel_node_path(@node.id)) ) do |f| %>
   <% if @node.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@node.errors.count, "error") %> prohibited this node from being saved:</h2>
@@ -16,18 +16,18 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
+    <%= f.label :section_id %><br />
+    <%= f.select :section_id, Section.all.collect { |s| [s.name,s.id] } %>
+  </div>
+  <div class="field">
     <%= f.label :sort %><br />
     <%= f.text_field :sort %>
   </div>
   <div class="field">
-    <%= f.label :topics_count %><br />
-    <%= f.text_field :topics_count %>
-  </div>
-  <div class="field">
     <%= f.label :summary %><br />
-    <%= f.text_field :summary %>
+    <%= f.text_area :summary, :class => "middle",:style => "height:80px;" %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <button class="submit">保存</button>
   </div>
 <% end %>

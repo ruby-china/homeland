@@ -2,7 +2,7 @@ class Cpanel::RepliesController < Cpanel::ApplicationController
   # GET /replies
   # GET /replies.xml
   def index
-    @replies = Reply.all
+    @replies = Reply.all(:include => [:topic,:user])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -44,7 +44,7 @@ class Cpanel::RepliesController < Cpanel::ApplicationController
 
     respond_to do |format|
       if @reply.save
-        format.html { redirect_to(@reply, :notice => 'Reply was successfully created.') }
+        format.html { redirect_to(cpanel_replies_path, :notice => 'Reply was successfully created.') }
         format.xml  { render :xml => @reply, :status => :created, :location => @reply }
       else
         format.html { render :action => "new" }
@@ -60,7 +60,7 @@ class Cpanel::RepliesController < Cpanel::ApplicationController
 
     respond_to do |format|
       if @reply.update_attributes(params[:reply])
-        format.html { redirect_to(@reply, :notice => 'Reply was successfully updated.') }
+        format.html { redirect_to(cpanel_replies_path, :notice => 'Reply was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -76,7 +76,7 @@ class Cpanel::RepliesController < Cpanel::ApplicationController
     @reply.destroy
 
     respond_to do |format|
-      format.html { redirect_to(replies_url) }
+      format.html { redirect_to(cpanel_replies_path) }
       format.xml  { head :ok }
     end
   end

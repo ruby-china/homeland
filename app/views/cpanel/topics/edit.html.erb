@@ -1,6 +1,8 @@
+<% content_for :sitemap do %>
+  <a href="<%= cpanel_topics_path %>">帖子</a> &gt; <span class="current">修改</span>
+<% end %>
 <h1>Editing topic</h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @topic %> |
-<%= link_to 'Back', topics_path %>
+<%= link_to 'Back', cpanel_topics_path %>

@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.text_field :email %>
+    <%= f.text_field :email, :class => "middle" %>
   </div>
   <div class="field">
     <%= f.label :passwd %><br />
@@ -28,8 +28,16 @@
     <%= f.text_field :location %>
   </div>
   <div class="field">
+    <%= f.label :qq %><br />
+    <%= f.text_field :qq %>
+  </div>
+  <div class="field">
+    <%= f.label :tagline %><br />
+    <%= f.text_field :tagline, :class => "middle" %>
+  </div>
+  <div class="field">
     <%= f.label :bio %><br />
-    <%= f.text_field :bio %>
+    <%= f.text_area :bio, :class => "middle", :style => "height:60px;" %>
   </div>
   <div class="field">
     <%= f.label :website %><br />
@@ -46,26 +54,18 @@
   </div>
   <% end %>
   <div class="field">
-    <%= f.label :verified %><br />
-    <%= f.check_box :verified %>
+    <%= f.label :verified %>
+    <%= f.check_box :verified, :class => "checkbox" %>
   </div>
   <div class="field">
     <%= f.label :state %><br />
     <%= f.select :state, User::STATE.collect { |s| [s[0],s[1]] } %>
   </div>
   <div class="field">
-    <%= f.label :qq %><br />
-    <%= f.text_field :qq %>
-  </div>
-  <div class="field">
     <%= f.label :last_logined_at %><br />
     <%= f.text_field :last_logined_at, :readonly => true %>
   </div>
-  <div class="field">
-    <%= f.label :tagline %><br />
-    <%= f.text_field :tagline %>
-  </div>
   <div class="actions">
-    <%= f.submit %>
+    <button class="submit">保存</button>
   </div>
 <% end %>

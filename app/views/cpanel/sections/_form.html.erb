@@ -1,4 +1,4 @@
-<%= form_for(@section) do |f| %>
+<%= form_for(@section, :url => (@section.id.blank? ? cpanel_sections_path : cpanel_section_path(@section.id)) ) do |f| %>
   <% if @section.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@section.errors.count, "error") %> prohibited this section from being saved:</h2>
@@ -20,6 +20,6 @@
     <%= f.text_field :sort %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <button class="submit">保存</button>
   </div>
 <% end %>

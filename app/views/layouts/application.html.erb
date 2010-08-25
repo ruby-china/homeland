@@ -2,7 +2,7 @@
 <html>
 <head>
   <title><%= @page_title %><%= APP_CONFIG['app_name'] %></title>
-  <%= stylesheet_link_tag "application", :cache => "cached_application" %>
+  <%= stylesheet_link_tag "application","front", :cache => "cached_front" %>
   <%= yield :styles %>
   <%= csrf_meta_tag %>
 </head>

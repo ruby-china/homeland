@@ -1,25 +1,25 @@
+<% content_for :sitemap do %>
+  <span class="current">分类</span>
+<% end %>
 <h1>Listing sections</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Sort</th>
-    <th></th>
-    <th></th>
-    <th></th>
+<table class="grid">
+  <tr class="head">
+    <td class="first">Name</td>
+    <td>Sort</td>
+    <td></td>
   </tr>
 
 <% @sections.each do |section| %>
   <tr>
-    <td><%= section.name %></td>
+    <td class="first"><%= section.name %></td>
     <td><%= section.sort %></td>
-    <td><%= link_to 'Show', section %></td>
-    <td><%= link_to 'Edit', edit_section_path(section) %></td>
-    <td><%= link_to 'Destroy', section, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Edit', edit_cpanel_section_path(section) %>
+    <%= link_to 'Destroy', cpanel_section_path(section), :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Section', new_section_path %>
+<%= link_to 'New Section', new_cpanel_section_path %>

@@ -2,7 +2,7 @@ class Cpanel::NodesController < Cpanel::ApplicationController
   # GET /nodes
   # GET /nodes.xml
   def index
-    @nodes = Node.all
+    @nodes = Node.all(:include => :section)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -44,7 +44,7 @@ class Cpanel::NodesController < Cpanel::ApplicationController
 
     respond_to do |format|
       if @node.save
-        format.html { redirect_to(@node, :notice => 'Node was successfully created.') }
+        format.html { redirect_to(cpanel_nodes_path, :notice => 'Node was successfully created.') }
         format.xml  { render :xml => @node, :status => :created, :location => @node }
       else
         format.html { render :action => "new" }
@@ -60,7 +60,7 @@ class Cpanel::NodesController < Cpanel::ApplicationController
 
     respond_to do |format|
       if @node.update_attributes(params[:node])
-        format.html { redirect_to(@node, :notice => 'Node was successfully updated.') }
+        format.html { redirect_to(cpanel_nodes_path, :notice => 'Node was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -76,7 +76,7 @@ class Cpanel::NodesController < Cpanel::ApplicationController
     @node.destroy
 
     respond_to do |format|
-      format.html { redirect_to(nodes_url) }
+      format.html { redirect_to(cpanel_nodes_url) }
       format.xml  { head :ok }
     end
   end

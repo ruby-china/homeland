@@ -1,0 +1,13 @@
+<% content_for :sitemap do %>
+  <span class="current">概览</span>
+<% end %>
+<% if !@recent_topics.blank? %>
+<div class="group">
+  <h2>最近帖子</h2>
+  <ul>
+    <% @recent_topics.each do |item| %>
+    <li><a href="<%= edit_cpanel_topic_path(item) %>"><%= truncate(item.title,:length => 50) %></a></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>

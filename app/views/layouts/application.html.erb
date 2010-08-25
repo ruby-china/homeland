@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Homeland</title>
-  <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :defaults %>
+  <title><%= @page_title %><%= APP_CONFIG['app_name'] %></title>
+  <%= stylesheet_link_tag "application", :cache => "cached_application" %>
+  <%= yield :styles %>
   <%= csrf_meta_tag %>
 </head>
 <body>
-
-<%= yield %>
-
+  <div id="header">
+    <div class="container">
+    </div>
+  </div>
+  <div id="main">
+    <%= yield %>
+  </div>
+  <div id="footer">
+  </div>
 </body>
 </html>

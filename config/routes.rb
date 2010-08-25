@@ -1,6 +1,7 @@
 Homeland::Application.routes.draw do
+  root :to => "home#index"
   namespace :cpanel do 
-    root :controller => :home, :action => :index
+    root :to => "home#index"
     resources :replies
     resources :topics
     resources :nodes

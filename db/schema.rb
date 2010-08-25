@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100824055944) do
+ActiveRecord::Schema.define(:version => 20100825092035) do
 
   create_table "counters", :force => true do |t|
     t.string "key",   :null => false
@@ -66,20 +66,28 @@ ActiveRecord::Schema.define(:version => 20100824055944) do
   add_index "topics", ["user_id"], :name => "index_topics_on_user_id"
 
   create_table "users", :force => true do |t|
-    t.string   "email",                               :null => false
-    t.string   "passwd",                              :null => false
-    t.string   "name",                                :null => false
+    t.string   "email",                                  :null => false
+    t.string   "name",                                   :null => false
     t.string   "location"
     t.string   "bio"
     t.string   "website"
     t.string   "avatar_file_name"
-    t.boolean  "verified",         :default => false, :null => false
-    t.integer  "state",            :default => 1,     :null => false
+    t.boolean  "verified",            :default => false, :null => false
+    t.integer  "state",               :default => 1,     :null => false
     t.string   "qq"
-    t.datetime "last_logined_at"
     t.string   "tagline"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "crypted_password",                       :null => false
+    t.string   "password_salt",                          :null => false
+    t.string   "persistence_token",                      :null => false
+    t.string   "single_access_token",                    :null => false
+    t.string   "perishable_token",                       :null => false
+    t.integer  "login_count",         :default => 0,     :null => false
+    t.integer  "failed_login_count",  :default => 0,     :null => false
+    t.datetime "last_login_at"
+    t.string   "current_login_ip"
+    t.string   "last_login_ip"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"

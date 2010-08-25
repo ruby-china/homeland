@@ -1,5 +1,11 @@
 Homeland::Application.routes.draw do
   root :to => "home#index"
+  resources :user_sessions do
+    collection do 
+      get "destroy"
+    end
+  end
+
   namespace :cpanel do 
     root :to => "home#index"
     resources :replies

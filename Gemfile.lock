@@ -1,4 +1,11 @@
 GIT
+  remote: http://github.com/binarylogic/authlogic.git
+  revision: 6e2745b
+  specs:
+    authlogic (2.1.6)
+      activesupport
+
+GIT
   remote: http://github.com/thoughtbot/paperclip.git
   revision: 9e6afe4
   specs:
@@ -78,6 +85,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  authlogic!
   mysql2
   paperclip!
   rails (= 3.0.0.rc2)

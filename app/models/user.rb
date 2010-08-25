@@ -22,4 +22,7 @@ class User < ActiveRecord::Base
     # 屏蔽
     :blocked => 2
   }
+
+  acts_as_authentic do |c|
+  end # block optional
 end

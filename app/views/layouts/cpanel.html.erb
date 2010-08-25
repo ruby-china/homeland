@@ -12,7 +12,7 @@
       <table>
         <tr>
           <td id="app_name">
-            控制台 <a href="<%= root_path %>">回前台</a>
+            控制台 <a href="<%= root_path %>" class="out">回前台</a>
           </td>
           <td width="500" id="navbar">
             <a<%= " class='actived'" if params[:controller] == "cpanel/home" %> href="<%= cpanel_root_path %>">首页</a>
@@ -41,7 +41,7 @@
     <%= yield %>
   </div>
   <div id="footer" class="container">
-    Powered by opensource project <a href="http://github.com/huacnlee/homeland" target="_blank">Homeland</a>.
+    <p class="suggest">使用 <a href="http://www.mozillaonline.com/" target="_blank" rel="nofollow">Firefox</a> 或 <a href="http://www.google.com/chrome" target="_blank" rel="nofollow">Chrome</a> 浏览访问本站将会获得更佳的视觉体验.</p>
   </div>
 </body>
 </html>

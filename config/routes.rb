@@ -5,6 +5,7 @@ Homeland::Application.routes.draw do
   match 'logout', :to => 'home#logout'
   match 'register', :to => 'users#new'
   resources :users
+  resources :topics
 
   namespace :cpanel do 
     root :to => "home#index"

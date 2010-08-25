@@ -1,0 +1,12 @@
+<% content_for :sitemap do %>
+  <a href="<%= topics_path %>">社区论坛</a> &gt; <span class="current">新建贴子</span>
+<% end %>
+<div class="leftbox">
+	<div class="box">
+<h1>新建贴子</h1>
+
+<%= render 'form' %>
+
+	</div>
+</div>
+<%= render 'sidebar' %>

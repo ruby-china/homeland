@@ -1,0 +1,28 @@
+<%= form_for(@topic, :url => (@topic.id.blank? ? topics_path : topic_path(@topic.id))) do |f| %>
+  <% if @topic.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@topic.errors.count, "error") %> prohibited this topic from being saved:</h2>
+      <ul>
+      <% @topic.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title, :class => "middle" %>
+  </div>
+  <div class="field">
+    <%= f.label :node_id %><br />
+    <%= f.select :node_id, Node.all.collect { |n| [n.name,n.id] } %>
+  </div>
+  <div class="field">
+    <%= f.label :body %><br />
+    <%= f.text_area :body, :class => "long", :style => "height:400px" %>
+  </div>
+  <div class="actions">
+    <button class="submit">保存</button>
+  </div>
+<% end %>

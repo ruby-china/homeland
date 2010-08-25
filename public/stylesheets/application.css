@@ -71,7 +71,8 @@ div.field, div.actions {
 #header a { color:#FFF; }
 #app_name { font-size:18px; font-weight:bold; }
 #app_name em { font-size:0.5em; font-weight:normal; color:#e7e5b2;}
-#app_name a { font-size:12px; font-weight:normal; }
+#app_name a { text-decoration: none;} 
+#app_name a.out { font-size:12px; font-weight:normal; text-decoration: underline; }
 #navbar a { font-size:14px; font-weight:bold; margin-right:8px; }
 #navbar a.actived { color:#e7e5b2; text-decoration:none; cursor:default; }
 #userbar { text-align:right; }

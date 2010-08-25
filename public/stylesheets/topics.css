@@ -5,6 +5,9 @@
 .topics .noborder td { border:0;}
 .topics .topic td.avatar { width:48px; padding-right:8px;  }
 .topics .topic td .title { font-size:14px;}
+.topics .topic td .title a:link,
+.topics .topic td .title a:visited {color:#2c64d7; text-decoration: none;}
+.topics .topic td .title a:hover { text-decoration: underline; }
 .topics .topic td p.info { color:#999; }
 .topics .topic td p.info a:link,
 .topics .topic td p.info a:visited { color:#999; }

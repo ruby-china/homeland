@@ -3,7 +3,9 @@ ul, ol { list-style-position:inside; }
 img, iframe { border:0; }
 table {width:100%;border-collapse:collapse;border-spacing:0} 
 html {
-  height:100%;
+  width: 100%;
+  height: 100%;
+  display: table;
   background:#e8fcff url(/images/bg.jpg) bottom left no-repeat;
 }
 a:link, a:visited { color:#34a900; }

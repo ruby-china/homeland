@@ -1,0 +1,11 @@
+.topics { }
+.topics .topic {  }
+.topics .topic td {border-top:1px solid #DDD; padding:10px 0; vertical-align:top; }
+#main .topics .topic td h1 { font-size:16px; text-align: left; line-height:100%;margin-bottom:0px;}
+.topics .noborder td { border:0;}
+.topics .topic td.avatar { width:48px; padding-right:8px;  }
+.topics .topic td .title { font-size:14px;}
+.topics .topic td p.info { color:#999; }
+.topics .topic td p.info a:link,
+.topics .topic td p.info a:visited { color:#999; }
+.topics .topic td .body { line-height:160%; font-size:14px; margin-top:8px;}

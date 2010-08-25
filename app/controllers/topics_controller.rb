@@ -3,7 +3,7 @@ class TopicsController < ApplicationController
   # GET /topics
   # GET /topics.xml
   def index
-    @topics = Topic.all(:include => [:node,:user,:last_reply_user])
+    @topics = Topic.active.all(:include => [:node,:user,:last_reply_user])
   end
 
   # GET /topics/1

@@ -12,7 +12,7 @@ a:link, a:visited { color:#34a900; }
 a:hover { color:#2c64d7; }
 
 body { text-align:center; 
-  font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", STHeiti !important; 
+  font-family: "Helvetica Neue","Yahei", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", STHeiti !important; 
   color:#333;
   font-size:12px;
   padding-bottom:30px;

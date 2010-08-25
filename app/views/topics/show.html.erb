@@ -1,0 +1,34 @@
+<%= render 'base' %>
+<% content_for :sitemap do %>
+  <a href="<%= topics_path %>">社区论坛</a> &gt; <span class="current">查看贴子</span>
+<% end %>
+
+<div class="leftbox">
+	<div class="box">
+		<table class="topics">
+			<tr class="topic noborder">
+		    <td class="avatar">
+					<%= image_tag(@topic.user.avatar(:normal)) %>
+				</td>
+		    <td>
+					<h1><%= truncate(@topic.title, :length => 100) %></h1>
+					<p class="info leader">
+						由 <a href="<%= user_path(@topic.user_id) %>"><%= @topic.user.name %></a> 
+						在 <%= @topic.node.name %> 中发起
+					</p>
+					<p class="info time">
+						<% if @topic.last_reply_user.blank? %>
+							发布于 <%= time_ago_in_words(@topic.created_at) %>
+						<% else %>
+							最后由 <a href="<%= user_path(@topic.last_reply_user_id) %>"><%= @topic.last_reply_user.name %></a> 回复于 <%= time_ago_in_words(@topic.replied_at) %>
+						<% end %>
+					</p>
+					<div class="body">
+						<%= format_topic_body(@topic.body) %>
+					</div>
+				</td>
+		  </tr>
+		</table>
+	</div>
+</div>
+<%= render 'sidebar' %>

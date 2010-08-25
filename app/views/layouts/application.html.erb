@@ -7,9 +7,34 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
-  <div id="header">
+  <div id="header" class="shadow">
     <div class="container">
+      <table>
+        <tr>
+          <td id="app_name">
+            <%= APP_CONFIG['app_name'] %> <em>Beta</em></span>
+          </td>
+          <td width="500" id="navbar">
+            <a<%= " class='actived'" if params[:controller] == "home" %> href="<%= root_path %>">首页</a>
+            <a<%= " class='actived'" if params[:controller] == "topics" %> href="<%= root_path %>">论坛</a>
+						<a<%= " class='actived'" if params[:controller] == "cpanel/topics" %> href="#">邻居</a>
+						<a<%= " class='actived'" if params[:controller] == "cpanel/sections" %> href="#">相册</a>
+            <a<%= " class='actived'" if params[:controller] == "cpanel/sections" %> href="#">记事本</a>
+            <a<%= " class='actived'" if params[:controller] == "cpanel/nodes" %> href="#">记账</a>
+          </td>
+          <td id="userbar">
+						<% if @current_user %>
+            你好 <strong><%= @current_user.name %></strong> <a href="<%= logout_path %>">登出</a>
+						<% else %>
+							<a href="<%= register_path %>">加入社区</a> | <a href="<%= login_path %>">登录</a>
+						<% end %>
+          </td>
+        </tr>
+      </table>
     </div>
+  </div>
+  <div id="sitemap" class="container">
+    导航: <a href="<%= root_path %>"><%= APP_CONFIG['app_name'] %></a> &gt; <%= yield :sitemap %>
   </div>
   <div id="main">
     <%= yield %>

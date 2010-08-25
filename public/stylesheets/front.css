@@ -1,4 +1,6 @@
 
-#home_index { margin:40px auto; line-height:160%; }
+#home_index { line-height:160%; }
 #home_index h1 { color:#34a900; line-height:200%; text-align:center; }
 #home_index h2 { margin-top:10px; font-size:14px; line-height:200%;} 
+
+#login {   }

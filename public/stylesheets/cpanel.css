@@ -12,69 +12,7 @@ pre {
   font-size: 11px;
 }
 
-div.field, div.actions {
-  margin-bottom: 10px;
-}
 
-#notice {
-  color: green;
-}
-
-.field_with_errors {
-  display:inline;
-  color:#b16125;
-}
-
-#error_explanation {
-  width: 550px;
-  border: 1px solid #e6e6bd;
-  padding: 10px;
-  margin-bottom: 15px;
-  background-color: #ffffcc;
-}
-
-#error_explanation h2 {
-  text-align: left;
-  font-weight: bold;
-  margin-bottom:8px;
-  font-size: 12px;
-  margin-bottom: 0px;
-}
-
-#error_explanation ul { margin:0px 16px; }
-#error_explanation ul li {
-  font-size: 12px;
-  list-style: square;
-}
-#success_message { border:1px solid #d4e5a6; background:#effbd5; padding:6px 10px; width:550px; margin-bottom:15px; }
-
-#header { margin-bottom:20px; line-height:40px; height:40px; color:#EEE; 
-  background:#36aa01 url(/images/header_bg.jpg) left top repeat-x; }
-#header table { width:100%;  }
-#header table tr td { height:38px; line-height:38px; }
-#header a { color:#FFF; }
-#app_name { font-size:18px; font-weight:bold; }
-#app_name a { font-size:12px; font-weight:normal; }
-#navbar a { font-size:14px; font-weight:bold; margin-right:8px; }
-#navbar a.actived { color:#e7e5b2; text-decoration:none; cursor:default; }
-#userbar { text-align:right; }
-#sitemap { margin-bottom:6px; font-family:sans-serif,arial; }
-#main h1 { font-size:16px; font-weight:bold; text-align:right; color:#ed5140; margin-bottom:10px; }
-table.grid { border:1px solid #e7e5b2; }
-table.grid tr td {border-top: 1px solid #e7e5b2; border-left: 1px solid #e7e5b2; padding:3px;}
-table.grid tr td.first { border-left: 0px;}
-table.grid tr.head td { color:#706f50; background:#fbf5bf; border-top: 0px;}
-table.grid tr td.choice { width:16px;}
-table.grid tr td.slug { width:200px;}
-table.grid tr td.date { width:60px;}
-table.grid tr td.status { width:38px;}
-textarea,input { width:300px; border:1px solid #DDD; border-left:1px solid #AAA; border-top:1px solid #AAA; padding:2px; }
-textarea:focus, input:focus { background:#fbf5bf; outline:0; }
-input.checkbox { width:auto; }
-textarea.middle,input.middle { width:500px; }
-textarea.long,input.long { width:800px; }
-
-button { padding:2px 20px; }
 
 .group { margin-bottom:20px; }
 .group h2 { font-size:12px; margin-bottom:8px; }

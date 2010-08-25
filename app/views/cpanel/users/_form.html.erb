@@ -16,8 +16,12 @@
     <%= f.text_field :email, :class => "middle" %>
   </div>
   <div class="field">
-    <%= f.label :passwd %><br />
-    <%= f.password_field :passwd %>
+    <%= f.label :password %><br />
+    <%= f.password_field :password %>
+  </div>
+	<div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation %>
   </div>
   <div class="field">
     <%= f.label :name %><br />
@@ -62,8 +66,8 @@
     <%= f.select :state, User::STATE.collect { |s| [s[0],s[1]] } %>
   </div>
   <div class="field">
-    <%= f.label :last_logined_at %><br />
-    <%= f.text_field :last_logined_at, :readonly => true %>
+    <%= f.label :last_login_at %><br />
+    <%= f.text_field :last_login_at, :readonly => true %>
   </div>
   <div class="actions">
     <button class="submit">保存</button>

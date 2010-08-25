@@ -1,10 +1,10 @@
 Homeland::Application.routes.draw do
   root :to => "home#index"
-  resources :user_sessions do
-    collection do 
-      get "destroy"
-    end
-  end
+  match "login", :to => 'home#login'
+  match "login_create", :to => 'home#login_create'
+  match 'logout', :to => 'home#logout'
+  match 'register', :to => 'users#new'
+  resources :users
 
   namespace :cpanel do 
     root :to => "home#index"

@@ -21,6 +21,7 @@
             <a<%= " class='actived'" if params[:controller] == "cpanel/nodes" %> href="<%= cpanel_nodes_path %>">节点</a>
             <a<%= " class='actived'" if params[:controller] == "cpanel/topics" %> href="<%= cpanel_topics_path %>">帖子</a>
             <a<%= " class='actived'" if params[:controller] == "cpanel/replies" %> href="<%= cpanel_replies_path %>">回复</a>
+						<a<%= " class='actived'" if params[:controller] == "cpanel/photos" %> href="<%= cpanel_photos_path %>">图片</a>
           </td>
           <td id="userbar">
             <% if @current_user %>

@@ -1,0 +1,28 @@
+<h1>Listing photos</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Image file name</th>
+    <th>Image file size</th>
+    <th>User</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @photos.each do |photo| %>
+  <tr>
+    <td><%= photo.title %></td>
+    <td><%= image_tag(photo.image(:small)) %></td>
+    <td><%= photo.image_file_size %></td>
+    <td><%= photo.user.name %></td>
+    <td><%= link_to 'Show', cpanel_photo_path(photo) %></td>
+    <td><%= link_to 'Destroy', cpanel_photo_path(photo), :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Photo', new_cpanel_photo_path %>

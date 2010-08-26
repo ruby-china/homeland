@@ -5,8 +5,8 @@
 <% end %>
 
 <div class="leftbox">
-	<div class="box">
-		<table class="topics">
+	<div class="topics box">
+		<table>
 			<tr class="topic noborder">		    
 		    <td>
 					<h1><%= truncate(@topic.title, :length => 100) %></h1>
@@ -21,15 +21,15 @@
 							最后由 <a href="<%= user_path(@topic.last_reply_user_id) %>"><%= @topic.last_reply_user.name %></a> 回复于 <%= time_ago_in_words(@topic.replied_at) %>
 						<% end %>
 					</p>
-					<div class="body">
-						<%= format_topic_body(@topic.body) %>
-					</div>
 				</td>
 				<td class="avatar">
 					<%= image_tag(@topic.user.avatar(:normal)) %>
 				</td>
 		  </tr>
 		</table>
+		<div class="body">
+			<%= format_topic_body(@topic.body) %>
+		</div>
 	</div>
   <% if @replies.blank? %>
     <div class="no_result">

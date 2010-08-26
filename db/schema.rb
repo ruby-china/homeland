@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100825092035) do
+ActiveRecord::Schema.define(:version => 20100826153218) do
 
   create_table "counters", :force => true do |t|
     t.string "key",   :null => false
@@ -28,6 +28,15 @@ ActiveRecord::Schema.define(:version => 20100825092035) do
   end
 
   add_index "nodes", ["section_id"], :name => "index_nodes_on_section_id"
+
+  create_table "photos", :force => true do |t|
+    t.string   "title",                          :null => false
+    t.string   "image_file_name",                :null => false
+    t.integer  "image_file_size", :default => 0, :null => false
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "replies", :force => true do |t|
     t.integer  "topic_id",                  :null => false

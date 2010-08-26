@@ -2,11 +2,14 @@
 <html>
 <head>
   <title><%= raw @page_title %><%= APP_CONFIG['app_name'] %></title>
-  <%= stylesheet_link_tag "application","front", :cache => "cached_front" %>
+  <%= stylesheet_link_tag "application","front","jquery.jdialog", :cache => "cached_front" %>
+	<%= yield :styles %>
   <meta name="keywords" content="<%= @meta_keywords %>" />
   <meta name="description" content="<%= @meta_description %>" />
-  <%= yield :styles %>
   <%= csrf_meta_tag %>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<%= javascript_include_tag "jquery.jdialog", :cache => "cached_application" %>
+	<%= yield :scripts %>
 </head>
 <body>
   <div id="header" class="shadow">

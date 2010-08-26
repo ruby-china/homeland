@@ -1,0 +1,8 @@
+<% content_for :sitemap do %>
+  <a href="<%= cpanel_photos_path %>">图片</a> &gt; <span class="current">上传</span>
+<% end %>
+<h1>New photo</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Back', photos_path %>

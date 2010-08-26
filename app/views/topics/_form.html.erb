@@ -1,3 +1,26 @@
+<% content_for :scripts do %>
+<script type="text/javascript">
+	function appendImageFromUpload(srcs){
+     txtBox = $(".topic_body_text_area");
+     for(var i=0;i<srcs.length;i++){
+       txtBox.val(txtBox.val() + '[img]'+srcs[i]+'[/img]\n');
+     }
+     txtBox.focus();
+     $("#add_image").jDialog.close();
+   }
+
+   function addImageClick(){
+     $("#add_image").jDialog({
+       title:"插入图片",
+       width:"350", 
+       height:"130", 
+       content: '<iframe src="<%= tiny_new_photos_path %>" frameborder="0" style="width:330px; height:130px;"></iframe>',
+       close_on_body_click : false
+     });
+     return false;
+   }
+</script>
+<% end %>
 <%= form_for(@topic, :url => (@topic.id.blank? ? topics_path : topic_path(@topic.id))) do |f| %>
   <%= render "shared/error_messages", :target => @topic %>  
 
@@ -7,8 +30,11 @@
     <%= f.text_field :title, :class => "middle" %>
   </div>
   <div class="field">
+		<div class="edit_tools">
+			<a href="#" onclick="return addImageClick();" id="add_image">上传图片</a>
+		</div>
     <%= f.label :body %><br />
-    <%= f.text_area :body, :class => "long", :style => "height:400px" %>
+    <%= f.text_area :body, :class => "topic_body_text_area long", :style => "height:400px" %>
   </div>
   <div class="actions">
     <button class="button submit">保存</button>

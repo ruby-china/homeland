@@ -1,0 +1,20 @@
+﻿.jdialog_outterbox { text-align:left; height:0px;left:0px;overflow:visible;position:absolute;top:0px;z-index:100;}
+.jdialog_outterbox .jdialog_dialog_popup{height:0px;overflow:visible;position:relative;}
+.jdialog_outterbox div.dialog_loading{background-color:#f2f2f2;border:1px solid #606060;
+  font-size:24px;padding:10px;}
+.dialog_content .dialog_buttons .inputaux,
+.dialog_content .dialog_buttons .inputsubmit{padding-left:10px;padding-right:10px;}
+.jdialog_outterbox .jdialog_dialog_popup{width:215px;}
+.jdialog_outterbox h2{color:#666; font-weight:normal; font-size:12px;padding-bottom:2px;}
+.jdialog_outterbox .contextual_dialog_shadow { margin-top:2px; margin-left:2px;
+  background:url(/images/jquery.jdialog/shadow.png);  }
+.jdialog_outterbox .jdialog_close { background:url(/images/jquery.jdialog/close.gif) left top no-repeat; 
+  width:11px; height:11px; cursor:pointer; top:6px; right:6px; float:right; position:absolute; }
+.jdialog_outterbox .contextual_dialog_content{top:-2px; left:-2px; background:#FFF; position:relative; 
+  border:1px solid #CCC; line-height:15px;padding:6px;}
+.jdialog_outterbox a { text-decoration: underline; }
+.jdialog_outterbox a:hover { text-decoration: underline; color:#333; }
+.jdialog_outterbox .dialog_buttons{ display:none; margin-top:5px;}
+.jdialog_outterbox .dialog_buttons input{margin-right:10px; background:#666; padding:0; height:22px; 
+  border:1px solid #333; border-top:1px solid #CCC; border-left:1px solid #CCC; color:#FFF; line-height:20px;}
+.jdialog_outterbox .dialog_buttons_msg{float:right;}

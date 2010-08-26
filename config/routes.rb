@@ -1,4 +1,6 @@
 Homeland::Application.routes.draw do
+  
+
   root :to => "home#index"
   match "login", :to => 'home#login'
   match "login_create", :to => 'home#login_create'
@@ -12,6 +14,11 @@ Homeland::Application.routes.draw do
       post :reply
     end
   end
+  resources :photos do
+    collection do
+      get :tiny_new
+    end
+  end
 
   namespace :cpanel do 
     root :to => "home#index"
@@ -20,6 +27,7 @@ Homeland::Application.routes.draw do
     resources :nodes
     resources :sections
     resources :users
+    resources :photos
   end
 
   # The priority is based upon order of creation:

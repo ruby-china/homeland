@@ -1,0 +1,3 @@
+<script type="text/javascript">
+	parent.appendImageFromUpload([<%= @photos.collect { |p| "'#{p.image(:normal)}'" }.join(",") %>]);
+</script>

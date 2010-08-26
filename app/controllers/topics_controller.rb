@@ -27,7 +27,7 @@ class TopicsController < ApplicationController
       Node.set_user_last_visited(@current_user.id, @node.id)
     end
     @topics = @node.topics.last_actived.paginate(:page => params[:page],:per_page => 50)
-    set_seo_meta("#{@node.name} &raquo; 社区论坛","#{APP_CONFIG['app_name']}社区#{@node.name}",@node.summary)
+    set_seo_meta("#{@node.name} &raquot; 社区论坛","#{APP_CONFIG['app_name']}社区#{@node.name}",@node.summary)
     render :action => "index"
   end
 
@@ -39,7 +39,7 @@ class TopicsController < ApplicationController
 
   def search
     @topics = Topic.search params[:s], :page => params[:page], :per_page => 50, :include => [:user, :last_reply_user]
-    set_seo_meta("搜索#{params[:s]} &raquot; 社区论坛")
+    set_seo_meta("搜索#{params[:s]} &raquo; 社区论坛")
     render :action => "index"
   end
 
@@ -51,7 +51,7 @@ class TopicsController < ApplicationController
     end
     @node = @topic.node
     @replies = @topic.replies.all
-    set_seo_meta("#{@topic.title} &raquot; 社区论坛")
+    set_seo_meta("#{@topic.title} &raquo; 社区论坛")
   end
 
   # GET /topics/new
@@ -63,6 +63,7 @@ class TopicsController < ApplicationController
     if @node.blank?
       render_404
     end
+    set_seo_meta("发帖子 &raquo; 社区论坛")
   end
 
   def reply
@@ -84,6 +85,7 @@ class TopicsController < ApplicationController
     if @topic.user_id != @current_user.id
       return render_404
     end
+    set_seo_meta("改帖子 &raquo; 社区论坛")
   end
 
   # POST /topics

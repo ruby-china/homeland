@@ -28,6 +28,7 @@
           <td id="userbar">
 						<% if @current_user %>
             你好 <strong><%= @current_user.name %></strong> <a href="<%= logout_path %>">登出</a>
+						<%= link_to "设置", setting_path %>
 						<% else %>
 							<a href="<%= register_path %>">加入社区</a> | <a href="<%= login_path %>">登录</a>
 						<% end %>

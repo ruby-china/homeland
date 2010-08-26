@@ -4,6 +4,7 @@ Homeland::Application.routes.draw do
   match "login_create", :to => 'home#login_create'
   match 'logout', :to => 'home#logout'
   match 'register', :to => 'users#new'
+  match 'setting', :to => 'users#edit', :as => 'setting'
   resources :users
   match "topics/node_:id" => "topics#node", :as => :node_topics
   match "topics/recent" => "topics#recent", :as => :recent_topics

@@ -14,7 +14,7 @@ a:hover { color:#2c64d7; }
 .button,
 .button:link,
 .button:visited { border:0; background:url(/images/buttons.png) left top no-repeat; text-decoration: none;
-  width:114px; height:27px; line-height:26px; display:inline-block; font-size:12px;
+  width:114px; height:27px; line-height:26px; display:inline-block; font-size:12px; outline: none;
   text-align:center; color:#675120;-moz-text-shadow:1px 1px 1px rgba(0, 0, 0, 1);
   -webkit-text-shadow:1px 1px 1x rgba(0, 0, 0, 1);}
 .button:hover { background-position: -27px left; color:#675120;}

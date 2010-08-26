@@ -1,3 +1,4 @@
+# coding: utf-8  
 class HomeController < ApplicationController
   before_filter :require_no_user, :only => [:login, :login_create]
   before_filter :require_user, :only => :logout

@@ -1,3 +1,4 @@
+# coding: utf-8  
 class Cpanel::UsersController < Cpanel::ApplicationController
   # GET /users
   # GET /users.xml

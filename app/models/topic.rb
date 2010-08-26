@@ -1,3 +1,4 @@
+# coding: utf-8  
 class Topic < ActiveRecord::Base
   validates_presence_of :user_id, :title, :body, :node_id
   belongs_to :node, :counter_cache => true

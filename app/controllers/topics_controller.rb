@@ -1,3 +1,4 @@
+# coding: utf-8  
 class TopicsController < ApplicationController
   before_filter :require_user, :only => [:new,:edit,:create,:update,:destroy]
   # GET /topics

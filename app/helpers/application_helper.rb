@@ -1,3 +1,4 @@
+# coding: utf-8  
 module ApplicationHelper
   # return the formatted flash[:notice] html
   def notice_message()

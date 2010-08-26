@@ -1,3 +1,4 @@
+# coding: utf-8  
 class Cpanel::SectionsController < Cpanel::ApplicationController
   # GET /sections
   # GET /sections.xml

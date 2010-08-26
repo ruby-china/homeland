@@ -1,3 +1,4 @@
+# coding: utf-8  
 class UsersController < ApplicationController
   before_filter :require_no_user, :only => [:new, :create]
   before_filter :require_user, :only => [:show, :edit, :update]
@@ -7,7 +8,10 @@ class UsersController < ApplicationController
   end
   
   def create
-    @user = User.new(params[:user])
+    up = params[:user]
+    @user = User.new(up)
+    @user.email = up[:email]
+    @user.name = up[:name]
     if @user.save
       flash[:notice] = "会员注册成功."
       redirect_back_or_default root_path

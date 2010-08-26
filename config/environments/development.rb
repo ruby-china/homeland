@@ -1,3 +1,11 @@
+memcache_options = {
+  :c_threshold => 10_000,
+  :compression => false,
+  :debug => false,
+  :namespace => 'homeland',
+  :readonly => false,
+  :urlencode => false,
+}
 Homeland::Application.configure do
   # Settings specified here will take precedence over those in config/environment.rb
 
@@ -19,6 +27,7 @@ Homeland::Application.configure do
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
+  config.cache_store = [:mem_cache_store,"127.0.0.1:11211",memcache_options]
 
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin

@@ -1,3 +1,11 @@
+.topics .topic td .title a:link,
+.topics .topic td .title a:visited,
+.node_topics td.title a:link,
+.node_topics td.title a:visited {color:#2c64d7; text-decoration: none;}
+.topics .topic td .title a:hover,
+.node_topics td.title a:hover { text-decoration: underline; }
+
+
 .topics { }
 .topics .topic {  }
 .topics .topic td {border-top:1px solid #DDD; padding:10px 0; vertical-align:top; }
@@ -9,3 +17,47 @@
 .topics .topic td p.info a:link,
 .topics .topic td p.info a:visited { color:#999; }
 .topics .topic td .body { line-height:160%; font-size:14px; margin-top:8px;}
+#topics .topic td.replies { width:60px; text-align:right; vertical-align:middle; }
+.topics .topic .replies a.count,
+.topics .topic .replies a.count:visited { line-height: 12px; font-weight: bold; color: white; 
+  background-color: #1c7fdb; display: inline-block; 
+  padding: 2px 10px 2px 10px; 
+  -moz-border-radius: 12px; -webkit-border-radius: 12px; 
+  margin: 18px 12px 0px 0px; text-decoration: none; }
+.topics .topic .replies a.count:hover { color:write; background-color:#1F8AEE; }
+.topics .topic .replies a.state0:link,
+.topics .topic .replies a.state0:visited { background:#DDD; }
+.topics .topic .replies a.state0:hover { background:#1dc115;}
+.topics .topic .replies a.state2:link,
+.topics .topic .replies a.state2:visited { background:#22D419; }
+.topics .topic .replies a.state2:hover {background:#1dc115; }
+.more { padding:8px; border-top:1px solid #DDD; font-size:14px; text-align:right; }
+
+/* topics list in node page */
+.node_topics { margin-bottom:16px; border-bottom:1px solid #DDD;}
+.node_topics tr td { padding:8px; border-top:1px solid #DDD; }
+.node_topics tr.head td { padding-top:14px; color:#CCC; font-weight:bold; font-size:12px; }
+.node_topics tr td.replies { text-align:right; width:50px; }
+.node_topics tr.topic td.replies { font-size:14px; color:green;font-weight:bold; }
+.node_topics tr.topic td.title { font-size:14px; font-weight:bold; }
+.node_topics tr.topic td.author { width:80px;}
+.node_topics tr.topic td.author a { color:#666; font-weight:bold; }
+
+.no_result { margin-bottom:20px; text-align:center; }
+
+#node_info { padding:8px;margin-bottom:8px;padding-top:0px; }
+#node_info h1 { font-size:18px; color:000; display:inline; margin-right:5px; }
+#node_info p { margin-bottom:8px; }
+#node_info p.summary { color:#999; }
+
+
+#replies {}
+#replies .total { padding-bottom:6px; color:#999; }
+#replies .reply { border-top:1px solid #DDD; padding:8px 0;}
+#replies .reply table { width:100%; } 
+#replies .reply table tr td { vertical-align:top; }
+#replies .reply table tr td.face { padding-right:8px; width:48px; }
+#replies .reply .info { margin-top:4px; color:#999;height:20px;}
+#replies .reply .info .name { float:left; }
+#replies .reply .info .time { float:right; text-align:right; }
+#replies .reply .body { line-height:180%; font-size:14px; text-overflow: ellipsis;}

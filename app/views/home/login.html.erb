@@ -1,32 +1,43 @@
-<div class="box">
-<h1>登录<%= APP_CONFIG['app_name'] %></h1>
+<% content_for :sitemap do %><span class="current">登录</span><% end %>
+<div class="leftbox">
+  <div class="box">
+  <h1>登录<%= APP_CONFIG['app_name'] %></h1>
 
-<div class="form">
-<% form_for :user_session, @user_session, :url => login_create_path do |f| %>
-	<% if @user_session.errors.any? %>
-	  <div id="error_explanation">
-	    <h2><%= pluralize(@user_session.errors.count, "错误") %>无法登录.</h2>
-	    <ul>
-	    <% @user_session.errors.full_messages.each do |msg| %>
-	      <li><%= msg %></li>
-	    <% end %>
-	    </ul>
-	  </div>
-	<% end %>
-	<div class="field">
-  <%= f.label :email, "Email:" %><br />
-  <%= f.text_field :email %>
+  <div class="form">
+  <% form_for :user_session, @user_session, :url => login_create_path do |f| %>
+    <% if @user_session.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@user_session.errors.count, "错误") %>无法登录.</h2>
+        <ul>
+        <% @user_session.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="field">
+    <%= f.label :email, "Email:" %><br />
+    <%= f.text_field :email %>
+    </div>
+    <div class="field">
+    <%= f.label :password, "密码:" %><br />
+    <%= f.password_field :password %>
+    </div>
+    <div class="field">
+    <%= f.check_box :remember_me, :class => "checkbox" %><%= f.label :remember_me, "一月之内不用再次登录" %><br />
+    </div>
+    <p>
+    <button type="submit" class="submit">登录</button> 或 <a href="<%= new_user_path %>">注册新用户</a>
+    </p>
+  <% end %>
   </div>
-	<div class="field">
-  <%= f.label :password, "密码:" %><br />
-  <%= f.password_field :password %>
   </div>
-	<div class="field">
-  <%= f.check_box :remember_me, :class => "checkbox" %><%= f.label :remember_me, "一月之内不用再次登录" %><br />
-  </div>
-	<p>
-  <button type="submit" class="submit">登录</button> 或 <a href="<%= new_user_path %>">注册新用户</a>
-	</p>
-<% end %>
 </div>
+<div class="sidebar">
+  <div class="box">
+    <h2>没有帐号吗？</h2>
+    <p>
+      <a href="<%= register_path %>">现在就注册一个</a>
+    </p>
+  </div>
 </div>

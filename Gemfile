@@ -5,6 +5,8 @@ gem 'mysql2'
 gem 'paperclip', :git => 'http://github.com/thoughtbot/paperclip.git'
 gem 'authlogic', :git => 'http://github.com/binarylogic/authlogic.git'
 gem 'sqlite3-ruby', :require => 'sqlite3'
+gem 'will_paginate', '3.0.pre'  
+gem 'memcache-client'
 # gem 'aws-s3', :require => 'aws/s3'
 
 # Bundle gems for the local environment. Make sure to

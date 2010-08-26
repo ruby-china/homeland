@@ -10,13 +10,10 @@
     </div>
   <% end %>
 
+  <%= f.hidden_field :node_id %>
   <div class="field">
     <%= f.label :title %><br />
     <%= f.text_field :title, :class => "middle" %>
-  </div>
-  <div class="field">
-    <%= f.label :node_id %><br />
-    <%= f.select :node_id, Node.all.collect { |n| [n.name,n.id] } %>
   </div>
   <div class="field">
     <%= f.label :body %><br />

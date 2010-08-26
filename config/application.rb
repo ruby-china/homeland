@@ -1,3 +1,4 @@
+# coding: utf-8  
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
@@ -40,3 +41,4 @@ module Homeland
     config.filter_parameters += [:password,:password_confirm]
   end
 end
+

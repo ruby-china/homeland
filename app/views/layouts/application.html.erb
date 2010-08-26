@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= @page_title %><%= APP_CONFIG['app_name'] %></title>
+  <title><%= raw @page_title %><%= APP_CONFIG['app_name'] %></title>
   <%= stylesheet_link_tag "application","front", :cache => "cached_front" %>
+  <meta name="keywords" content="<%= @meta_keywords %>" />
+  <meta name="description" content="<%= @meta_description %>" />
   <%= yield :styles %>
   <%= csrf_meta_tag %>
 </head>

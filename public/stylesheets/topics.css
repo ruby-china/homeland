@@ -38,8 +38,8 @@
 .node_topics { margin-bottom:16px; border-bottom:1px solid #DDD;}
 .node_topics tr td { padding:8px; border-top:1px solid #DDD; }
 .node_topics tr.head td { padding-top:14px; color:#CCC; font-weight:bold; font-size:12px; }
-.node_topics tr td.replies { text-align:right; width:50px; }
-.node_topics tr.topic td.replies { font-size:14px; color:green;font-weight:bold; }
+.node_topics tr.topic td.replies { text-align:right; width:50px; }
+.node_topics tr.topic td.replies {  font-size:14px; color:green;font-weight:bold; }
 .node_topics tr.topic td.title { font-size:14px; font-weight:bold; }
 .node_topics tr.topic td.author { width:80px;}
 .node_topics tr.topic td.author a { color:#666; font-weight:bold; }
@@ -59,6 +59,8 @@
 #replies .reply table tr td { vertical-align:top; }
 #replies .reply table tr td.face { padding-right:8px; width:48px; }
 #replies .reply .info { margin-top:4px; color:#999;height:20px;}
+#replies .reply .info a:link,
+#replies .reply .info a:visited { color:#999;}
 #replies .reply .info .name { float:left; }
 #replies .reply .info .time { float:right; text-align:right; }
 #replies .reply .body { line-height:180%; font-size:14px; text-overflow: ellipsis;}

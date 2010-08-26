@@ -1,14 +1,5 @@
 <%= form_for(@topic, :url => (@topic.id.blank? ? topics_path : topic_path(@topic.id))) do |f| %>
-  <% if @topic.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@topic.errors.count, "error") %> prohibited this topic from being saved:</h2>
-      <ul>
-      <% @topic.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render "shared/error_messages", :target => @topic %>  
 
   <%= f.hidden_field :node_id %>
   <div class="field">

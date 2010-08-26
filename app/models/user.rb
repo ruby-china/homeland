@@ -5,7 +5,8 @@ class User < ActiveRecord::Base
   
   validates_presence_of :email, :name, :password
   validates_uniqueness_of :email, :name
-  validates_format_of     :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
+  validates_format_of     :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, 
+  :message => "不是一个有效的Email."
   has_many :topics
   has_many :replies
   before_create :default_value_for_create

@@ -16,18 +16,15 @@
           <td id="app_name">
             <a href="/"><%= APP_CONFIG['app_name'] %></a> <em>Beta</em></span>
           </td>
-          <td width="500" id="navbar">
-            <a<%= " class='actived'" if params[:controller] == "home" %> href="<%= root_path %>">首页</a>
-            <a<%= " class='actived'" if params[:controller] == "topics" %> href="<%= topics_path %>">社区论坛</a>
-						<a<%= " class='actived'" if params[:controller] == "cpanel/topics" %> href="#">邻居</a>
-						<a<%= " class='actived'" if params[:controller] == "cpanel/sections" %> href="#">相册</a>
-						<a<%= " class='actived'" if params[:controller] == "cpanel/sections" %> href="#">计划</a>
-            <a<%= " class='actived'" if params[:controller] == "cpanel/sections" %> href="#">记事本</a>
-            <a<%= " class='actived'" if params[:controller] == "cpanel/nodes" %> href="#">记账</a>
-          </td>
           <td id="userbar">
 						<% if @current_user %>
-            你好 <strong><%= @current_user.name %></strong> <a href="<%= logout_path %>">登出</a>
+	 	           你好 <strong><%= @current_user.name %></strong>
+							<a href="#">设置</a>
+							<a<%= " class='actived'" if params[:controller] == "cpanel/sections" %> href="#">相册</a>
+							<a<%= " class='actived'" if params[:controller] == "cpanel/sections" %> href="#">计划</a>
+	            <a<%= " class='actived'" if params[:controller] == "cpanel/sections" %> href="#">记事本</a>
+	            <a<%= " class='actived'" if params[:controller] == "cpanel/nodes" %> href="#">记账</a>
+							<a href="<%= logout_path %>">登出</a>
 						<% else %>
 							<a href="<%= register_path %>">加入社区</a> | <a href="<%= login_path %>">登录</a>
 						<% end %>

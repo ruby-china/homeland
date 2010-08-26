@@ -5,6 +5,7 @@
 .topics .topic td .title a:hover,
 .node_topics td.title a:hover { text-decoration: underline; }
 
+.sidebar p { margin-bottom:8px;}
 
 .topics { }
 .topics .topic {  }

@@ -1,6 +1,7 @@
 <%= render 'base' %>
 <% content_for :sitemap do %>
-  <a href="<%= topics_path %>">社区论坛</a> &gt; <span class="current">查看贴子</span>
+	<a href="<%= node_topics_path(@topic.node_id) %>"><%= @topic.node.name %></a> &gt;
+  <span class="current">查看贴子</span>
 <% end %>
 
 <div class="leftbox">
@@ -63,12 +64,12 @@
     <%= notice_message %>
     <h2>回复</h2>
     <% form_for(Reply.new,:url => reply_topic_path(params[:id])) do |f| %>
-      <p class="row">
+      <div class="field">
         <%= f.text_area :body,:class => "long", :style => "height:80px;" %>
-      </p>
-      <p class="buttons">
-        <button type="submit" class="submit">提交回复</button>
-      </p>
+      </div>
+      <div class="buttons">
+        <button type="submit" class="button submit">提交回复</button>
+      </div>
     <% end %>
   </div>
 </div>

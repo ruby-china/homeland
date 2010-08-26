@@ -1,5 +1,6 @@
 # coding: utf-8  
 class Reply < ActiveRecord::Base
+  attr_protected :user_id, :topic_id
   belongs_to :topic, :counter_cache => true
   belongs_to :user
 

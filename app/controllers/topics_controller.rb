@@ -68,6 +68,7 @@ class TopicsController < ApplicationController
   def reply
     @topic = Topic.find(params[:id])
     @reply = @topic.replies.build(params[:reply])
+    @reply.topic_id = params[:id]
     @reply.user_id = @current_user.id
     if @reply.save
       flash[:notice] = "回复成功。"

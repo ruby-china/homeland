@@ -11,6 +11,18 @@ html {
 a:link, a:visited { color:#34a900; }
 a:hover { color:#2c64d7; }
 
+.button,
+.button:link,
+.button:visited { border:0; background:url(/images/buttons.png) left top no-repeat; text-decoration: none;
+  width:114px; height:27px; line-height:26px; display:inline-block; font-size:12px;
+  text-align:center; color:#675120;-moz-text-shadow:1px 1px 1px rgba(0, 0, 0, 1);
+  -webkit-text-shadow:1px 1px 1x rgba(0, 0, 0, 1);}
+.button:hover { background-position: -27px left; color:#675120;}
+.submit,
+.submit:link,
+.submit:visited { background-position: left -54px;color:#214C25; font-size:12px;}
+.submit:hover  { background-position: left -81px;color:#214C25; }
+
 body { text-align:center; 
   font-family: "Helvetica Neue","Yahei", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", STHeiti !important; 
   color:#333;
@@ -20,15 +32,16 @@ body { text-align:center;
 
 .box { background:#FFF; padding:10px;  
     margin-bottom:20px;
-    *border:1px solid #EEE;
+    *border:1px solid #DDD;
     -moz-border-radius: 8px;
     -webkit-border-radius: 8px;
-    -moz-box-shadow:4px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow:2px 2px 4px rgba(0, 0, 0, 0.1);
     -webkit-box-shadow:2px 2px 4px rgba(0, 0, 0, 0.1); }
 .shadow {-moz-box-shadow:4px rgba(0, 0, 0, 0.1);-webkit-box-shadow:2px 2px 4px rgba(0, 0, 0, 0.1);}
 .container { width:960px; margin-left:auto; margin-right:auto; text-align:left; }
 .leftbox { width:700px; float:left; }
 .sidebar { width:240px; float:right; }
+
 
 div.field, div.actions {
   margin-bottom: 10px;

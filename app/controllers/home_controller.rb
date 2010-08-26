@@ -4,6 +4,7 @@ class HomeController < ApplicationController
   before_filter :require_user, :only => :logout
   
   def index
+    
   end
   
   def login

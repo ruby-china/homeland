@@ -7,10 +7,7 @@
 <div class="leftbox">
 	<div class="box">
 		<table class="topics">
-			<tr class="topic noborder">
-		    <td class="avatar">
-					<%= image_tag(@topic.user.avatar(:normal)) %>
-				</td>
+			<tr class="topic noborder">		    
 		    <td>
 					<h1><%= truncate(@topic.title, :length => 100) %></h1>
 					<p class="info leader">
@@ -27,6 +24,9 @@
 					<div class="body">
 						<%= format_topic_body(@topic.body) %>
 					</div>
+				</td>
+				<td class="avatar">
+					<%= image_tag(@topic.user.avatar(:normal)) %>
 				</td>
 		  </tr>
 		</table>

@@ -1,0 +1,11 @@
+<% if target.errors.any? %>  
+ <div class="error_explanation">
+   <h2>有 <%= @user.errors.count %> 处问题导至无法提交:</h2>
+
+   <ul>
+   <% @user.errors.full_messages.each do |msg| %>
+     <li><%= msg %></li>
+   <% end %>
+   </ul>
+ </div>
+<% end %>

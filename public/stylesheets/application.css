@@ -14,7 +14,7 @@ a:hover { color:#2c64d7; }
 .button,
 .button:link,
 .button:visited { border:0; background:url(/images/buttons.png) left top no-repeat; text-decoration: none;
-  width:114px; height:27px; line-height:26px; display:inline-block; font-size:12px;
+  width:114px; height:27px; line-height:26px; display:inline-block; font-size:12px; outline: none;
   text-align:center; color:#675120;-moz-text-shadow:1px 1px 1px rgba(0, 0, 0, 1);
   -webkit-text-shadow:1px 1px 1x rgba(0, 0, 0, 1);}
 .button:hover { background-position: -27px left; color:#675120;}
@@ -53,15 +53,14 @@ div.field, div.actions {
   color:#b16125;
 }
 
-#error_explanation {
-  width: 550px;
+.error_explanation {
   border: 1px solid #e6e6bd;
   padding: 10px;
   margin-bottom: 15px;
   background-color: #ffffcc;
 }
 
-#error_explanation h2 {
+.error_explanation h2 {
   text-align: left;
   font-weight: bold;
   margin-bottom:8px;
@@ -69,12 +68,12 @@ div.field, div.actions {
   margin-bottom: 0px;
 }
 
-#error_explanation ul { margin:0px 16px; }
-#error_explanation ul li {
+.error_explanation ul { margin:0px 16px; }
+.error_explanation ul li {
   font-size: 12px;
   list-style: square;
 }
-#success_message { border:1px solid #d4e5a6; background:#effbd5; padding:6px 10px; width:550px; margin-bottom:15px; }
+#success_message { border:1px solid #d4e5a6; background:#effbd5; padding:6px 10px; margin-bottom:15px; }
 
 .pagination {text-align: center;clear:both; }
 .pagination a {padding: 2px 5px 2px 5px; margin-right:3px; border: 1px solid #4090EB;text-decoration: none;color: #3080CB;}
@@ -107,7 +106,8 @@ table.grid tr td.choice { width:16px;}
 table.grid tr td.slug { width:200px;}
 table.grid tr td.date { width:60px;}
 table.grid tr td.status { width:38px;}
-textarea,input { width:300px; border:1px solid #DDD; border-left:1px solid #AAA; border-top:1px solid #AAA; padding:2px; }
+textarea,input { width:300px; border:1px solid #DDD; font-size:12px; 
+  border-left:1px solid #AAA; border-top:1px solid #AAA; padding:2px; }
 textarea:focus, input:focus { background:#fbf5bf; outline:0; }
 input.checkbox { width:auto; }
 textarea.middle,input.middle { width:500px; }

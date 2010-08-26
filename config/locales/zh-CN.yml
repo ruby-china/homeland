@@ -151,6 +151,9 @@
         tagline: "签名"
         state: "状态"
         verified: "已实名验证"
+      topic:
+        title: "标题"
+        body: "正文"
   
   activemodel:
     errors:

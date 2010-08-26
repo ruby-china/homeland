@@ -1,5 +1,5 @@
 Homeland::Application.routes.draw do
-  root :to => "topics#index"
+  root :to => "home#index"
   match "login", :to => 'home#login'
   match "login_create", :to => 'home#login_create'
   match 'logout', :to => 'home#logout'

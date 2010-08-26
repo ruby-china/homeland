@@ -28,7 +28,7 @@ class TopicsController < ApplicationController
       Node.set_user_last_visited(@current_user.id, @node.id)
     end
     @topics = @node.topics.last_actived.paginate(:page => params[:page],:per_page => 50)
-    set_seo_meta("#{@node.name} &raquot; 社区论坛","#{APP_CONFIG['app_name']}社区#{@node.name}",@node.summary)
+    set_seo_meta("#{@node.name} &raquo; 社区论坛","#{APP_CONFIG['app_name']}社区#{@node.name}",@node.summary)
     render :action => "index"
   end
 

@@ -16,7 +16,7 @@ Node.create(:name => "植物",:summary => "谈论植物种植的心得", :sectio
 Node.create(:name => "宠物",:summary => "猫,狗,鱼,鸟...你在养吗?", :section_id => s1.id)
 s2 = Section.create(:name => "玩乐")
 Node.create(:name => "灌水区",:summary => "没有什么特别的主题,随便聊聊", :section_id => s2.id)
-Node.create(:name => "自言自语",:summary => "", :section_id => s2.id)
+Node.create(:name => "自言自语",:summary => "自言自语,不管别人", :section_id => s2.id)
 Node.create(:name => "电影",:summary => "在这里分享电影下载或电影评价之类的东西", :section_id => s2.id)
 Node.create(:name => "电视",:summary => "电视节目的话题", :section_id => s2.id)
 Node.create(:name => "音乐",:summary => "音乐是可以代替任何语言的东西", :section_id => s2.id)

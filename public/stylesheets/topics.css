@@ -32,14 +32,14 @@
 .topics .topic .replies a.state2:link,
 .topics .topic .replies a.state2:visited { background:#22D419; }
 .topics .topic .replies a.state2:hover {background:#1dc115; }
+.topics tr.topic td.replies { text-align:right; width:50px; font-size:14px; color:green;font-weight:bold; }
 .more { padding:8px; border-top:1px solid #DDD; font-size:14px; text-align:right; }
 
 /* topics list in node page */
 .node_topics { margin-bottom:16px; border-bottom:1px solid #DDD;}
 .node_topics tr td { padding:8px; border-top:1px solid #DDD; }
 .node_topics tr.head td { padding-top:14px; color:#CCC; font-weight:bold; font-size:12px; }
-.node_topics tr.topic td.replies { text-align:right; width:50px; }
-.node_topics tr.topic td.replies {  font-size:14px; color:green;font-weight:bold; }
+
 .node_topics tr.topic td.title { font-size:14px; font-weight:bold; }
 .node_topics tr.topic td.author { width:80px;}
 .node_topics tr.topic td.author a { color:#666; font-weight:bold; }

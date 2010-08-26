@@ -88,8 +88,10 @@ class TopicsController < ApplicationController
   # POST /topics
   # POST /topics.xml
   def create
-    @topic = Topic.new(params[:topic])
+    pt = params[:topic]
+    @topic = Topic.new(pt)
     @topic.user_id = @current_user.id
+    @topic.node_id = params[:node] || pt[:node_id]
 
     if @topic.save
       redirect_to(topics_path, :notice => '帖子创建成功.')
@@ -105,8 +107,12 @@ class TopicsController < ApplicationController
     if @topic.user_id != @current_user.id
       return render_404
     end
+    pt = params[:topic]
+    @topic.node_id = pt[:node_id]
+    @topic.title = pt[:title]
+    @topic.body = pt[:body]
 
-    if @topic.update_attributes(params[:topic])
+    if @topic.save
       redirect_to(topics_path, :notice => '帖子修改成功.')
     else
       render :action => "edit"

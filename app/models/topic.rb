@@ -1,5 +1,6 @@
 # coding: utf-8  
 class Topic < ActiveRecord::Base
+  attr_protected :user_id, :node_id
   validates_presence_of :user_id, :title, :body, :node_id
   belongs_to :node, :counter_cache => true
   belongs_to :user
@@ -12,7 +13,7 @@ class Topic < ActiveRecord::Base
   scope :recents, :order => "id desc", :include => [:user,:last_reply_user,:node]
   before_save :set_replied_at
   def set_replied_at
-      self.replied_at = Time.now
+    self.replied_at = Time.now
   end
   
   # 检查用户是否看过

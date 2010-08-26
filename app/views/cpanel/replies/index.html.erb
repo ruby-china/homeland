@@ -21,7 +21,7 @@
     <td><%= reply.state %></td>
     <td><%= reply.source %></td>
     <td><%= link_to 'Edit', edit_cpanel_reply_path(reply) %>
-    <%= link_to 'Destroy', reply, :confirm => 'Are you sure?', :method => :delete %></td>
+    <%= link_to 'Destroy', cpanel_reply_path(reply), :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

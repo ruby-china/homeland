@@ -53,6 +53,7 @@ GEM
       activesupport (>= 2.3.6)
       mime-types
       treetop (>= 1.4.5)
+    memcache-client (1.8.5)
     mime-types (1.16)
     mysql2 (0.2.3)
     polyglot (0.3.1)
@@ -80,13 +81,16 @@ GEM
     treetop (1.4.8)
       polyglot (>= 0.3.1)
     tzinfo (0.3.23)
+    will_paginate (3.0.pre)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   authlogic!
+  memcache-client
   mysql2
   paperclip!
   rails (= 3.0.0.rc2)
   sqlite3-ruby
+  will_paginate (= 3.0.pre)

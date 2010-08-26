@@ -30,5 +30,46 @@
 		  </tr>
 		</table>
 	</div>
+  <% if @replies.blank? %>
+    <div class="no_result">
+      暂无回复。
+    </div>
+  <% else %>
+  <div id="replies" class="box">
+    <div class="total">
+      截止 <%= l @topic.replied_at, :format => :default %> 共收到 <%= @topic.replies_count %> 条回复
+    </div>
+    <% @replies.each_with_index do |reply,i| %>
+      <div class="reply">
+      <table>
+       <tr>
+          <td class="face"><%= user_avatar_tag(reply.user, :normal) %></td>
+          <td>
+            <div class="info clearfix">
+              <span class="name"><%= user_name_tag(reply.user) %></span>
+              <span class="time">回复于 <%= time_ago_in_words(reply.created_at) %>前, #<%= i + 1 %></span>
+            </div>
+            <div class="body">
+              <%= format_topic_body(reply.body,"",false) %>
+            </div>
+          </td>
+        </tr>
+      </table>
+      </div>
+    <% end %>
+  </div>
+  <% end %>
+  <div id="reply" class="form box">
+    <%= notice_message %>
+    <h2>回复</h2>
+    <% form_for(Reply.new,:url => reply_topic_path(params[:id])) do |f| %>
+      <p class="row">
+        <%= f.text_area :body,:class => "long", :style => "height:80px;" %>
+      </p>
+      <p class="buttons">
+        <button type="submit" class="submit">提交回复</button>
+      </p>
+    <% end %>
+  </div>
 </div>
 <%= render 'sidebar' %>

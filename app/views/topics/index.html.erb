@@ -1,37 +1,89 @@
 <%= render 'base' %>
 <% content_for :sitemap do %>
-  <a href="<%= topics_path %>">社区论坛</a> &gt; <span class="current">最近活跃的帖子</span>
+  <a href="<%= topics_path %>">社区论坛</a> &gt;
+  <% if params[:action] == "node" %>
+    <span class="current"><%= h @node.name %></span>
+  <% elsif params[:action] == "recent" %>
+    <span class="current">最近活跃的50个主题</span>
+  <% elsif params[:action] == "search" %>
+    <span class="current">搜索<%= h params[:s] %></span>
+  <% else %>
+    <span class="current">活跃帖子</span>
+  <% end %>
 <% end %>
 
 <div class="leftbox">
 	<div class="box">
-		<h1>最近活跃的帖子</h1>
-		<table class="topics">
-		<% @topics.each do |topic| %>
-	  <tr class="topic">
-	    <td class="avatar">
-				<%= image_tag(topic.user.avatar(:normal)) %>
-			</td>
-	    <td>
-				<p class="title"><a href="<%= topic_path(topic) %>" title="<%= topic.title %>"><%= truncate(topic.title, :length => 100) %></a></p>
-				<p class="info leader">
-					由 <a href="<%= user_path(topic.user_id) %>"><%= topic.user.name %></a> 
-					在 <%= topic.node.name %> 中发起
-				</p>
-				<p class="info time">
-					<% if topic.last_reply_user.blank? %>
-						发布于 <%= time_ago_in_words(topic.created_at) %>
-					<% else %>
-						最后由 <a href="<%= user_path(topic.last_reply_user_id) %>"><%= topic.last_reply_user.name %></a> 回复于 <%= time_ago_in_words(topic.replied_at) %>
-					<% end %>
-				</p>
-			</td>
-			<td class="replies_count">
-				<%= topic.replies_count %>
-			</td>
-	  </tr>
-		<% end %>
-		</table>
+    <% if !@node.blank? %>
+    <div id="node_info">
+      <p>
+        <h1><%= h @node.name %></h1>
+        <span class="total">共有 <%= @node.topics_count %> 个讨论主题</span>
+      </p>
+      <p class="summary"><%= h @node.summary %></p>
+      <p>
+      <a href="<%= new_topic_path(:node => params[:id]) %>">发贴</a>
+      </p>
+    </div>
+    <% else %>
+      <h1><%= APP_CONFIG['app_name'] %>社区论坛</h1>
+    <% end %>
+    <% if params[:action] == "node" %> 
+      <table class="node_topics">
+        <tr class="head">
+          <td class="replies">回复数</td>
+          <td class="title">标题</td>
+          <td class="author">作者</td>
+          <td class="replied_at">最后回复时间</td>
+        </tr>
+        <% @topics.each do |topic| %>
+        <tr class="topic">
+          <td class="replies"><%= topic.replies_count %></td>
+          <td class="title"><a href="<%= topic_path(topic) %>"><%= truncate(topic.title, :length => 25) %></a></td>
+          <td class="author"><%= user_name_tag(topic.user) %></td>
+          <td class="replied_at"><%= l (topic.replied_at || topic.created_at), :format => :short %></td>
+        </tr>
+        <% end %>
+      </table>
+    <% else %>
+      <table class="topics">
+      <% @topics.each do |topic| %>
+      <tr class="topic">
+        <td class="avatar">
+          <%= image_tag(topic.user.avatar(:normal)) %>
+        </td>
+        <td>
+          <p class="title"><a href="<%= topic_path(topic) %>" title="<%= topic.title %>"><%= truncate(topic.title, :length => 100) %></a></p>
+          <p class="info leader">
+            由 <a href="<%= user_path(topic.user_id) %>"><%= topic.user.name %></a> 
+            在 <a href="<%= node_topics_path(topic.node_id) %>"><%= topic.node.name %></a> 中发起
+          </p>
+          <p class="info time">
+            <% if topic.last_reply_user.blank? %>
+              发布于 <%= time_ago_in_words(topic.created_at) %>前
+            <% else %>
+              最后由 <a href="<%= user_path(topic.last_reply_user_id) %>"><%= topic.last_reply_user.name %></a> 回复于 <%= time_ago_in_words(topic.replied_at) %>前
+            <% end %>
+          </p>
+        </td>
+        <td class="replies">
+          <% readed_state = topic.user_readed?(@current_user.id) if @current_user %>
+          <a href="<%= topic_path(topic.id) %>" title="<%= topic_use_readed_text(readed_state) if @current_user %>" class="count state<%= readed_state if @current_user %>">
+          <%= topic.replies_count %>
+          </a>
+        </td>
+      </tr>
+      <% end %>
+      </table>
+    <% end %>
+      
+    <% if params[:action] == "index" %>
+      <div class="more">
+        <a href="<%= recent_topics_path %>">查看更多最近发布的帖子...</a>
+      </div>
+    <% elsif params[:action] == "node" or params[:action] == "search" %>
+      <%= will_paginate @topics %>
+    <% end %>
 	</div>
 </div>
 <%= render 'sidebar' %>

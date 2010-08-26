@@ -31,6 +31,14 @@ class ApplicationController < ActionController::Base
   def notice_warring(msg)
     flash[:notice] = msg
   end
+
+  def set_seo_meta(title = '',meta_keywords = '', meta_description = '')
+    if title.length > 0
+      @page_title = "#{title} &raquo; "
+    end
+    @meta_keywords = meta_keywords
+    @meta_description = meta_description
+  end
   
   private
     def current_user_session

@@ -41,3 +41,4 @@ module Homeland
     config.filter_parameters += [:password,:password_confirm]
   end
 end
+

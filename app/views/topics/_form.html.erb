@@ -15,10 +15,6 @@
     <%= f.text_field :title, :class => "middle" %>
   </div>
   <div class="field">
-    <%= f.label :node_id %><br />
-    <%= f.select :node_id, Node.all.collect { |n| [n.name,n.id] } %>
-  </div>
-  <div class="field">
     <%= f.label :body %><br />
     <%= f.text_area :body, :class => "long", :style => "height:400px" %>
   </div>

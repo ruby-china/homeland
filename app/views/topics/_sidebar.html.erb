@@ -1,8 +1,47 @@
 <div class="sidebar">
-	<div class="box">
-		<h2>社区论坛</h2>
-		<p>
-			<%= link_to '发新贴', new_topic_path %>
-		</p>
-	</div>
+<% if ["show","new"].index(params[:action]) %>
+  <div class="box">
+    <h2><a href="<%= node_topics_path(@node) %>"><%= @node.name %></a></h2>
+    <% if params[:action] == "new" %>
+    <p class="sumamry">
+      <%= @node.summary %>
+    </p>
+    <% end %>
+    <div class="content">
+      <a href="<%= new_topic_path(:node => @node.id) %>">发布新帖</a>
+    </div>
+  </div>
+<% elsif params[:action] == "index" %>
+  <div class="box">
+    <h2>社区论坛</h2>
+    <p>
+      这里是<%= APP_CONFIG['app_name'] %>社区论坛，大家可以在这里讨论于社区有关的话题。
+    </p>
+    <p>
+      发贴请先进入一个节点以后点击“发布新帖”。
+    </p>
+  </div>
+<% end %>
+<% cache("topic/init_list_sidebar/hot_nodes",:expires_in => 30.minutes) do %>
+  <% if not @hot_nodes.blank? %>
+  <div class="hot_nodes nodes box">
+    <h2>热门节点</h2>
+    <p>
+      <% @hot_nodes.each do |node| %>
+        <a href="<%= node_topics_path(:id => node.id) %>"><%= node.name %></a>
+      <% end %>
+    </p>
+  </div>
+  <% end %>
+<% end %>
+<% if @current_user and (not @user_last_nodes.blank?) %>
+<div class="user_last_nodes nodes box">
+  <h2>最近访问节点</h2>
+  <p>
+    <% @user_last_nodes.each do |node| %>
+      <a href="<%= node_topics_path(:id => node.id) %>"><%= node.name %></a>
+    <% end %>
+  </p>
+</div>
+<% end %>
 </div>

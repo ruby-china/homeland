@@ -98,7 +98,7 @@ class TopicsController < ApplicationController
     @topic.node_id = params[:node] || pt[:node_id]
 
     if @topic.save
-      redirect_to(topics_path, :notice => '帖子创建成功.')
+      redirect_to(topic_path(@topic.id), :notice => '帖子创建成功.')
     else
       render :action => "new"
     end

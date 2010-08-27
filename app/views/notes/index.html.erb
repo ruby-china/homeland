@@ -1,0 +1,22 @@
+<%= content_for :sitemap do %>
+  <span class="current">记事本</span>
+<% end %>
+<div class="leftbox clearfix">
+  <div id="notes" class="box">
+    <h1>我的记事本</h1>
+    <div class="total">已有 <%= @current_user.notes_count %> 条记事</div>
+    <% if @notes.blank? %>
+      <div style="text-align:center; padding:60px 0;">你还没有创建过一个文件。</div>
+    <% else %>
+      <ul class="list">
+      <% @notes.each do |note| %>
+        <li>
+          <p><a class="title" href="<%= note_path(note.id) %>"><%= truncate(note.title, :length => 50) %></a></p>
+          <p class="info"><%= note.word_count %> 个字符, 创建于 <%= time_ago_in_words(note.created_at) %>, <%= note.changes_cout %> 次编辑</p>
+        </li>
+      <% end %>
+      </ul>
+    <% end %>
+  </div>
+</div>
+<%= render "sidebar" %>

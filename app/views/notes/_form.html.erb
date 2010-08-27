@@ -1,0 +1,9 @@
+<%= form_for(@note) do |f| %>
+  <%= render "shared/error_messages", :target => @note %>
+  <div class="field">
+    <%= f.text_area :body, :class => "long", :style => "height:500px" %>
+  </div>
+  <div class="actions">
+    <button type="submit" class="button submit">保存</button> 或 <a href="<%= notes_path %>">取消</a>
+  </div>
+<% end %>

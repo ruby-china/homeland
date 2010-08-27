@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100826153218) do
+ActiveRecord::Schema.define(:version => 20100827081204) do
 
   create_table "counters", :force => true do |t|
     t.string "key",   :null => false
@@ -28,6 +28,18 @@ ActiveRecord::Schema.define(:version => 20100826153218) do
   end
 
   add_index "nodes", ["section_id"], :name => "index_nodes_on_section_id"
+
+  create_table "notes", :force => true do |t|
+    t.string   "title",                       :null => false
+    t.text     "body",                        :null => false
+    t.integer  "user_id",                     :null => false
+    t.integer  "word_count",   :default => 0, :null => false
+    t.integer  "changes_cout", :default => 1, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "notes", ["user_id"], :name => "index_notes_on_user_id"
 
   create_table "photos", :force => true do |t|
     t.string   "title",                          :null => false
@@ -97,6 +109,7 @@ ActiveRecord::Schema.define(:version => 20100826153218) do
     t.datetime "last_login_at"
     t.string   "current_login_ip"
     t.string   "last_login_ip"
+    t.integer  "notes_count",         :default => 0,     :null => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"

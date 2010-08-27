@@ -1,20 +1,11 @@
-<% content_for :sitemap do %><span class="current">登录</span><% end %>
+<%= content_for :sitemap do %><span class="current">登录</span><% end %>
 <div class="leftbox">
   <div class="box">
   <h1>登录<%= APP_CONFIG['app_name'] %></h1>
 
   <div class="form">
-  <% form_for :user_session, @user_session, :url => login_create_path do |f| %>
-    <% if @user_session.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@user_session.errors.count, "错误") %>无法登录.</h2>
-        <ul>
-        <% @user_session.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-        </ul>
-      </div>
-    <% end %>
+  <%= form_for :user_session, :url => login_create_path do |f| %>
+    <%= render "shared/error_messages", :target => @user_session %>
     <div class="field">
     <%= f.label :email, "Email:" %><br />
     <%= f.text_field :email %>

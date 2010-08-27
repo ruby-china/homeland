@@ -1,6 +1,6 @@
 <div class="box">
 	<h1>个人资料</h1>
-	<%= form_for(@user) do |f| %>
+	<%= form_for(@user, :html => { :enctype =>  "multipart/form-data" }) do |f| %>
 	<%= render "shared/error_messages", :target => @user %> 
 	<div class="field">
 		<h3><%= @user.name %></h3>
@@ -9,6 +9,14 @@
 	  <%= f.label :location %><br />
 	  <%= f.text_field :location %>
 	</div>
+  <div class="field">
+    <%= f.label :avatar %><br />
+    <%= f.file_field :avatar %>
+  </div>
+  <div class="field">
+    <label>预览</label><br />
+    <%= image_tag(@user.avatar(:large)) %>
+  </div>
 	<div class="field">
 		<%= f.label :qq %><br />
 		<%= f.text_field :qq %>
@@ -30,3 +38,4 @@
 	</div>
 	<% end %>
 </div>
+

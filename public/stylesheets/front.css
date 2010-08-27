@@ -8,8 +8,8 @@
 textarea.middle,input.middle { width:500px; }
 textarea.long,input.long { width:673px; }
 
-.hot_nodes { line-height:180%; }
-.hot_nodes a { display:inline-block; margin-right:8px;}
+.sidebar .nodes { line-height:180%; }
+.sidebar .nodes a { display:inline-block; margin-right:8px;}
 
 #sections h2 { font-size:12px; color:#999; line-height:200%;}
 #sections ul { list-style: none; }

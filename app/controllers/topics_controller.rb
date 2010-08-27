@@ -18,7 +18,7 @@ class TopicsController < ApplicationController
   # GET /topics.xml
   def index
     @topics = Topic.last_actived.all(:limit => 10)
-    @sections = Section.all
+    @sections = Section.all(:include => [:nodes])
     set_seo_meta("社区论坛","#{APP_CONFIG['app_name']}社区,#{APP_CONFIG['app_name']}论坛,#{APP_CONFIG['app_name']}小区论坛,#{APP_CONFIG['app_name']}业主论坛")
   end
 

@@ -1,3 +1,4 @@
+# coding: utf-8  
 class PhotosController < ApplicationController
   before_filter :require_user, :only => [:tiny_new,:new,:edit,:create,:update,:destroy]
   # GET /photos

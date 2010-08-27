@@ -1,3 +1,4 @@
+# coding: utf-8  
 class Cpanel::PhotosController < Cpanel::ApplicationController
   # GET /photos
   # GET /photos.xml

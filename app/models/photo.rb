@@ -1,3 +1,4 @@
+# coding: utf-8  
 class Photo < ActiveRecord::Base
   attr_protected :user_id
   validates_presence_of :title

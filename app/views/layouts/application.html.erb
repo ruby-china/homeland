@@ -8,7 +8,7 @@
   <meta name="description" content="<%= @meta_description %>" />
   <%= csrf_meta_tag %>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-	<%= javascript_include_tag "jquery.jdialog", :cache => "cached_application" %>
+	<%= javascript_include_tag "rails","jquery.jdialog", :cache => "cached_application" %>
 	<%= yield :scripts %>
 </head>
 <body>

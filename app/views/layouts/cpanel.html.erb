@@ -2,8 +2,9 @@
 <html>
 <head>
   <title>Homeland - Control Panel</title>
-  <%= stylesheet_link_tag "application","cpanel", "cache_cpanel_base" %>
-  <%= javascript_include_tag :defaults %>
+  <%= stylesheet_link_tag "application","cpanel", :cache => "cache_cpanel_base" %>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+  <%= javascript_include_tag "rails", :cache => "cached_rails" %>
   <%= csrf_meta_tag %>
 </head>
 <body>

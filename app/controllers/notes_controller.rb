@@ -5,23 +5,27 @@ class NotesController < ApplicationController
   # GET /notes.xml
   def index
     @notes = @current_user.notes.paginate :page => params[:page], :per_page => 20
+    set_seo_meta("记事本")
   end
 
   # GET /notes/1
   # GET /notes/1.xml
   def show
     @note = Note.find(params[:id])
+    set_seo_meta("查看 &raquo; 记事本")
   end
 
   # GET /notes/new
   # GET /notes/new.xml
   def new
     @note = Note.new
+    set_seo_meta("新建 &raquo; 记事本")
   end
 
   # GET /notes/1/edit
   def edit
     @note = Note.find(params[:id])
+    set_seo_meta("修改 &raquo; 记事本")
   end
 
   # POST /notes

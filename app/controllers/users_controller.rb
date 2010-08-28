@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   
   def new
     @user = User.new
+    set_seo_meta("加入社区")
   end
   
   def create
@@ -22,6 +23,13 @@ class UsersController < ApplicationController
   
   def show
     @user = @current_user
+    if !fragment_exist? "users/show/params[:id]/last_topics"
+      @last_topics = @user.topics.recents.limit(20)
+    end
+    if !fragment_exist? "users/show/params[:id]/last_replies"
+      @last_replies = @user.replies.recents.all(:group => :topic_id, :limit => 50, :include => [:topic])
+    end
+    set_seo_meta("#{@user.name}")
   end
   
   def setting

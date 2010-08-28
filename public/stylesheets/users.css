@@ -1,0 +1,23 @@
+.node_topics td.title a:link,
+.node_topics td.title a:visited {color:#2c64d7; text-decoration: none;}
+.node_topics td.title a:hover { text-decoration: underline; }
+/* topics list in node page */
+.node_topics { margin-bottom:16px; border-bottom:1px solid #DDD;}
+.node_topics tr td { padding:8px; border-top:1px solid #DDD; }
+.node_topics tr.head td { padding-top:14px; color:#CCC; font-weight:bold; font-size:12px; }
+
+.node_topics tr.topic td.title { font-size:14px; font-weight:bold; }
+.node_topics tr.topic td.author { width:80px;}
+.node_topics tr.topic td.author a { color:#666; font-weight:bold; }
+
+
+#main .userinfo h1 { text-align: left; display:inline; }
+.userinfo .tagline { text-align:left; margin-top:-8px; margin-bottom:20px;}
+.userinfo ul { list-style:none; margin-right:20px;  }
+.userinfo ul li { font-size:14px; margin-bottom:6px; padding-bottom:6px; border-bottom:1px solid #DDD;}
+.userinfo ul li label { color:#999; font-size:12px; margin-right:8px; display:inline-block; width:100px; text-align: right;}
+
+#main .bio h2 { text-align:right; margin-bottom:10px; }
+.bio { font-size:12px; line-height:180%; }
+
+.last_replies ul li { line-height:180%;}

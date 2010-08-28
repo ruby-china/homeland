@@ -5,7 +5,7 @@ class Reply < ActiveRecord::Base
   belongs_to :user
 
   validates_presence_of :body
-
+  scope :recents, :order => "id desc"
   after_create :update_parent_last_replied
   def update_parent_last_replied
     self.topic.replied_at = Time.now

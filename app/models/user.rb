@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
     :styles => {
       :small => "16x16#",
       :normal => "48x48#",
-      :large => "80>",
+      :large => "80x80#",
     },
     :url => "#{APP_CONFIG['upload_url']}/:class/:attachment/:hashed_path/:id_:style.jpg",
     :path => "#{APP_CONFIG['upload_root']}/:class/:attachment/:hashed_path/:id_:style.jpg",

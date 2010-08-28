@@ -17,6 +17,9 @@ Homeland::Application.routes.draw do
     member do
       post :reply
     end
+    collection do
+      get :search
+    end
   end
   resources :photos do
     collection do

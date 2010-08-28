@@ -22,6 +22,14 @@ a:hover { color:#2c64d7; }
 .submit:link,
 .submit:visited { background-position: left -54px;color:#214C25; font-size:12px;}
 .submit:hover  { background-position: left -81px;color:#214C25; }
+a.tiny,
+a.tiny:link,
+a.tiny:visited,
+button.tiny,
+button.tiny:link,
+button.tiny:visited  { width:54px; background:url(/images/tiny_buttons.png) left top no-repeat; }
+a.tiny:hover,
+button.tiny:hover { background-position: -27px left; color:#675120; }
 
 body { text-align:center; 
   font-family: "Helvetica Neue","Yahei", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", STHeiti !important; 
@@ -95,6 +103,7 @@ div.field, div.actions {
 #navbar a { font-size:14px; font-weight:bold; margin-right:8px; }
 #navbar a.actived { color:#e7e5b2; text-decoration:none; cursor:default; }
 #userbar { text-align:right; }
+#userbar a { margin:0 4px; }
 #sitemap { margin-bottom:6px; font-family:sans-serif,arial; width:940px;}
 #main h1 { font-size:16px; font-weight:bold; text-align:right; color:#ed5140; margin-bottom:10px; }
 #footer { clear:both; padding-bottom:20px; }
@@ -113,4 +122,4 @@ input.checkbox { width:auto; }
 textarea.middle,input.middle { width:500px; }
 textarea.long,input.long { width:800px; }
 
-button { padding:2px 20px; }
+

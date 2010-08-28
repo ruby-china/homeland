@@ -60,4 +60,8 @@ class Topic < ActiveRecord::Base
   def clear_user_readed
     Rails.cache.write("Topic:user_read:#{self.id}",nil)
   end
+  
+  def self.search(key,options = {})
+    paginate :conditions => "title like '%#{key}%'",:page => 1
+  end
 end

@@ -49,7 +49,7 @@
       <% @topics.each do |topic| %>
       <tr class="topic">
         <td class="avatar">
-          <%= image_tag(topic.user.avatar(:normal)) %>
+					<%= user_avatar_tag(topic.user,:normal) %>
         </td>
         <td>
           <p class="title"><a href="<%= topic_path(topic) %>" title="<%= topic.title %>"><%= truncate(topic.title, :length => 100) %></a></p>

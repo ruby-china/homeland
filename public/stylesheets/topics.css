@@ -64,3 +64,8 @@
 #replies .reply .info .name { float:left; }
 #replies .reply .info .time { float:right; text-align:right; }
 #replies .reply .body { line-height:180%; font-size:14px; text-overflow: ellipsis;}
+
+.edit_tools { float:right; margin-bottom:3px;}
+
+.totals ul{ margin:0 10px;}
+.totals ul li { line-height:150%;}

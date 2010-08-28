@@ -22,6 +22,11 @@
     </p>
   </div>
 <% end %>
+<div class="search box">
+	<form action="<%= search_topics_path %>" method="get">
+		<input type="text" name="key" style="width:140px; padding:4px; margin-right:4px;" /><button class="button tiny" type="submit">搜索</button>
+	</form>
+</div>
 <% cache("topic/init_list_sidebar/hot_nodes",:expires_in => 30.minutes) do %>
   <% if not @hot_nodes.blank? %>
   <div class="hot_nodes nodes box">
@@ -53,5 +58,17 @@
       <li>强烈建议你在提交之前再次确认一下是否还有需要修改的地方，因为我们没有给你提供后期修改的功能。</li>
     </ol>
   </div>
+<% end %>
+<% if params[:action] == "index" %>
+<%= cache("topics/sidebar/totals", :expires_in => 20.minutes) do %>
+<div class="totals box">
+	<h2>统计信息</h2>
+	<ul>
+		<li>社区会员: <%= User.count %> 人</li>
+		<li>贴子数: <%= Topic.count %> 篇</li>
+		<li>回贴数: <%= Topic.count %> 条</li>
+	</ul>
+</div>
+<% end %>
 <% end %>
 </div>

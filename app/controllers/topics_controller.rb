@@ -39,7 +39,7 @@ class TopicsController < ApplicationController
   end
 
   def search
-    @topics = Topic.search params[:s], :page => params[:page], :per_page => 50, :include => [:user, :last_reply_user]
+    @topics = Topic.search(params[:key], :page => params[:page], :per_page => 50, :include => [:user, :last_reply_user])
     set_seo_meta("搜索#{params[:s]} &raquo; 社区论坛")
     render :action => "index"
   end

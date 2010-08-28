@@ -21,12 +21,9 @@
           </td>
           <td id="userbar">
 						<% if @current_user %>
-	 	           你好 <strong><%= @current_user.name %></strong>
-							<a<%= " class='actived'" if params[:controller] == "cpanel/sections" %> href="#">相册</a>
-							<a<%= " class='actived'" if params[:controller] == "cpanel/sections" %> href="#">计划</a>
-              <a<%= " class='actived'" if params[:controller] == "cpanel/notes" %> href="<%= notes_path %>">记事本</a>
-	            <a<%= " class='actived'" if params[:controller] == "cpanel/nodes" %> href="#">记账</a>
-							<%= link_to "设置", setting_path, :class => params[:controller] == "user/edit" ? 'actived' : "" %>
+	 	           你好 <strong><%= user_name_tag @current_user %></strong>, 
+              <a<%= " class='actived'" if params[:controller] == "cpanel/notes" %> href="<%= notes_path %>">记事本</a> | 
+							<%= link_to "设置", setting_path, :class => params[:controller] == "user/edit" ? 'actived' : "" %> | 
 							<a href="<%= logout_path %>">登出</a>
 						<% else %>
 							<a href="<%= register_path %>">加入社区</a> | <a href="<%= login_path %>">登录</a>

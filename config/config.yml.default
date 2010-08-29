@@ -12,6 +12,7 @@ development:
   # 设置管理员，在下面填写需要设置为管理员的用户 email
   admin_emails: 
     - "admin@admin.com"
+  google_analytics_key: ""
 
 test:
   app_name: "Homeland"
@@ -21,6 +22,7 @@ test:
   upload_root: "/home/user/work/homeland/public/uploads"
   admin_emails: 
     - "admin@admin.com"
+  google_analytics_key: ""
 
 production:
   app_name: "Homeland"
@@ -30,3 +32,4 @@ production:
   upload_root: "/home/user/work/homeland/public/uploads"
   admin_emails: 
     - "admin@admin.com"
+  google_analytics_key: ""

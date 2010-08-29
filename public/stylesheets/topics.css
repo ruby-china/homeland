@@ -10,7 +10,7 @@
 .topics { }
 .topics .topic {  }
 .topics .topic td {border-top:1px solid #DDD; padding:10px 0; vertical-align:top; }
-#main .topics .topic td h1 { font-size:16px; text-align: left; line-height:100%;margin-bottom:0px;}
+#main .topics .topic td h1 { font-size:22px; color:#333; margin-top:6px; text-align: left; line-height:100%;margin-bottom:8px;}
 .topics .noborder td { border:0;}
 .topics .topic td.avatar { width:48px; padding-right:8px;  }
 .topics .topic td .title { font-size:14px;}
@@ -18,6 +18,7 @@
 .topics .topic td p.info a:link,
 .topics .topic td p.info a:visited { color:#999; }
 .topics .body { line-height:160%; font-size:14px; margin-top:8px;}
+.topics .body p { margin-bottom:10px; }
 #topics .topic td.replies { width:60px; text-align:right; vertical-align:middle; }
 .topics .topic .replies a.count,
 .topics .topic .replies a.count:visited { line-height: 12px; font-weight: bold; color: white; 

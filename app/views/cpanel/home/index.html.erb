@@ -1,6 +1,7 @@
 <% content_for :sitemap do %>
   <span class="current">概览</span>
 <% end %>
+
 <% if !@recent_topics.blank? %>
 <div class="group">
   <h2>最近帖子</h2>
@@ -11,3 +12,14 @@
   </ul>
 </div>
 <% end %>
+
+<div class="group">
+  <h2>统计信息</h2>
+  <ul>
+		<li>用户: <%= User.cached_count %> 人</li>
+		<li>贴子: <%= Topic.cached_count %> 个</li>
+		<li>回复: <%= Reply.cached_count %> 条</li>
+    <li>记事本: <%= Note.cached_count %> 条</li>
+  </ul>
+</div>
+

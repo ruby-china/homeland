@@ -60,15 +60,13 @@
   </div>
 <% end %>
 <% if params[:action] == "index" %>
-<%= cache("topics/sidebar/totals", :expires_in => 20.minutes) do %>
 <div class="totals box">
 	<h2>统计信息</h2>
 	<ul>
-		<li>社区会员: <%= User.count %> 人</li>
-		<li>贴子数: <%= Topic.count %> 篇</li>
-		<li>回贴数: <%= Topic.count %> 条</li>
+		<li>社区会员: <%= User.cached_count %> 人</li>
+		<li>贴子数: <%= Topic.cached_count %> 个</li>
+		<li>回贴数: <%= Reply.cached_count %> 条</li>
 	</ul>
 </div>
-<% end %>
 <% end %>
 </div>

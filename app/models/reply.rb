@@ -19,4 +19,10 @@ class Reply < ActiveRecord::Base
     m = TopicMailer.create_got_reply(self.topic,self)
     Thread.new { m.deliver }
   end
+  
+  def self.cached_count
+    return Rails.cache.fetch("replies/count",:expires => 1.hours) do
+      self.count
+    end
+  end
 end

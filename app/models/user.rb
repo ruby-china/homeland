@@ -41,5 +41,9 @@ class User < ActiveRecord::Base
     :blocked => 2
   }
 
-  
+  def self.cached_count
+    return Rails.cache.fetch("users/count",:expires => 1.hours) do
+      self.count
+    end
+  end
 end

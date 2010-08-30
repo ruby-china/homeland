@@ -18,4 +18,10 @@ class Note < ActiveRecord::Base
   def update_changes_count
     self.changes_cout += 1
   end
+  
+  def self.cached_count
+    return Rails.cache.fetch("notes/count",:expires => 1.hours) do
+      self.count
+    end
+  end
 end

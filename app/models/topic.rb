@@ -64,4 +64,10 @@ class Topic < ActiveRecord::Base
   def self.search(key,options = {})
     paginate :conditions => "title like '%#{key}%'",:page => 1
   end
+  
+  def self.cached_count
+    return Rails.cache.fetch("topics/count",:expires => 1.hours) do
+      self.count
+    end
+  end
 end

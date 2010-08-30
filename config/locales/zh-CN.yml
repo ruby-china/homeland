@@ -154,6 +154,8 @@
       topic:
         title: "标题"
         body: "正文"
+      reply:
+        body: "回复内容"
   
   activemodel:
     errors:

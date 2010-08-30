@@ -1,7 +1,7 @@
 # coding: utf-8  
 class UsersController < ApplicationController
   before_filter :require_no_user, :only => [:new, :create]
-  before_filter :require_user, :only => [:show, :edit, :update, :setting, :password]
+  before_filter :require_user, :only => [:edit, :update, :setting, :password]
   
   def new
     @user = User.new
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   end
   
   def show
-    @user = @current_user
+    @user = User.find(params[:id])
     if !fragment_exist? "users/show/params[:id]/last_topics"
       @last_topics = @user.topics.recents.limit(20)
     end

@@ -60,6 +60,7 @@
     <% end %>
   </div>
   <% end %>
+	<% if @current_user %>
   <div id="reply" class="form box">
     <%= notice_message %>
     <h2>回复</h2>
@@ -72,5 +73,12 @@
       </div>
     <% end %>
   </div>
+	<% else %>
+	<div id="reply" class="form box">
+		<p style="padding:20px;">
+		需要<a href='<%= login_path %>'>登录</a>后回复方可回复, 如果你还没有账号<a href="<%= register_path %>">点击这里注册</a>。
+		</p>
+	</div>
+	<% end %>
 </div>
 <%= render 'sidebar' %>

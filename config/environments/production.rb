@@ -1,3 +1,4 @@
+# coding: utf-8  
 memcache_options = {
   :c_threshold => 10_000,
   :compression => false,

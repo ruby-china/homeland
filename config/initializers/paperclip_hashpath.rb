@@ -1,3 +1,4 @@
+# coding: utf-8  
 # 扩展 Paperclip 加入hash目录参数 :hashed_path
 require "digest"
 

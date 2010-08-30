@@ -1,3 +1,4 @@
+# coding: utf-8  
 module CacheFrozenFix
   def self.included(base)
     base.extend ClassMethods  

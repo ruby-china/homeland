@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.0.rc2'
+gem 'rails', '3.0.0'
 gem 'mysql2'
 gem 'paperclip', :git => 'http://github.com/thoughtbot/paperclip.git'
 gem 'authlogic', :git => 'http://github.com/binarylogic/authlogic.git'

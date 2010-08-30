@@ -40,6 +40,9 @@
     <%= yield %>
   </div>
   <div id="footer" class="container">
+    <p class="copyright">
+    <%= raw APP_CONFIG['foot_html'] %>
+    </p>
 		<p class="suggest">使用 <a href="http://www.mozillaonline.com/" target="_blank" rel="nofollow">Firefox</a> 或 <a href="http://www.google.com/chrome" target="_blank" rel="nofollow">Chrome</a> 浏览访问本站将会获得更佳的视觉体验.</p>
   </div>
   <script type="text/javascript">

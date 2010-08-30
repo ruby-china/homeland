@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   
   validates_presence_of :email, :name
   validates_presence_of :password, :on => :create
-  validates_uniqueness_of :email, :name
+  validates_uniqueness_of :name
   validates_format_of     :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, 
   :message => "不是一个有效的Email."
   has_many :topics, :dependent => :destroy
@@ -14,6 +14,13 @@ class User < ActiveRecord::Base
   before_create :default_value_for_create
   def default_value_for_create
     self.state = STATE[:normal]
+  end
+  
+  # 注册邮件提醒
+  after_create :send_welcome_mail
+  def send_welcome_mail
+    m = UserMailer.create_welcome(self)
+    Thread.new { m.deliver }
   end
   
   # 封面图

@@ -13,6 +13,8 @@ development:
   admin_emails: 
     - "admin@admin.com"
   google_analytics_key: ""
+  smtp_username: 'support@app.com'
+  smtp_password: '123456'
 
 test:
   app_name: "Homeland"
@@ -23,6 +25,8 @@ test:
   admin_emails: 
     - "admin@admin.com"
   google_analytics_key: ""
+  smtp_username: 'support@app.com'
+  smtp_password: '123456'
 
 production:
   app_name: "Homeland"
@@ -33,3 +37,5 @@ production:
   admin_emails: 
     - "admin@admin.com"
   google_analytics_key: ""
+  smtp_username: 'support@app.com'
+  smtp_password: '123456'

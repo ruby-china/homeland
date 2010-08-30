@@ -1,13 +1,13 @@
 GIT
   remote: http://github.com/binarylogic/authlogic.git
-  revision: 6e2745b5a74c1dbfea0557c6d9bc96f58a24a754
+  revision: 6e2745b
   specs:
     authlogic (2.1.6)
       activesupport
 
 GIT
   remote: http://github.com/thoughtbot/paperclip.git
-  revision: 9e6afe4ff5b6b07bb1d50a4cb4bdd85feb1c9bbf
+  revision: 9e6afe4
   specs:
     paperclip (2.3.3)
       activerecord

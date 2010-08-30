@@ -1,3 +1,4 @@
+# coding: utf-8  
 class UserMailer < BaseMailer  
   def welcome(user)
     @user = user

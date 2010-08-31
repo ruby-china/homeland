@@ -165,6 +165,28 @@
           other: "有 %{count} 个错误发生导致「%{model}」无法被保存。"
         body: "如下字段出现错误："
 
+  authlogic:
+      error_messages:
+        login_blank: '不能为空。'
+        login_not_found: '用户名或密码不正确。'
+        login_invalid: '格式不正确。'
+        consecutive_failed_logins_limit_exceeded: '登录失败次数过多，帐号已被锁定。'
+        email_invalid: '格式不正确。'
+        password_blank: '不能为空'
+        password_invalid: '不正确。'
+        not_active: '帐号还未激活。'
+        not_confirmed: '帐号还未确认信息。'
+        not_approved: '帐号已被限制。'
+        no_authentication_details: You did not provide any details for authentication.
+      models:
+        user_session: '登录信息'
+      attributes:
+        user_session:
+          login: '用户名'
+          email: 'Email'
+          password: '密码'
+          remember_me: '记住登录状态'
+
       
   
 

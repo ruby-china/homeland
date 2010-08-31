@@ -41,6 +41,7 @@ module Homeland
     config.filter_parameters += [:password,:password_confirm]
   end
 end
+I18n.locale = 'zh-CN'
 
 # 配置文件载入
 APP_CONFIG = YAML.load_file("#{Rails.root}/config/config.yml")[Rails.env]

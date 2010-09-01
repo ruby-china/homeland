@@ -23,10 +23,10 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-    if !fragment_exist? "users/show/params[:id]/last_topics"
+    if !fragment_exist? "users/show/#{params[:id]}/last_topics"
       @last_topics = @user.topics.recents.limit(20)
     end
-    if !fragment_exist? "users/show/params[:id]/last_replies"
+    if !fragment_exist? "users/show/#{params[:id]}/last_replies"
       @last_replies = @user.replies.recents.all(:group => :topic_id, :limit => 50, :include => [:topic])
     end
     set_seo_meta("#{@user.name}")

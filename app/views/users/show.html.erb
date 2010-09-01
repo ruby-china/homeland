@@ -28,7 +28,7 @@
 		<p><%= auto_link(simple_format(@user.bio)) %></p>
 	</div>
 	<% end %>
-	<%= cache("users/show/params[:id]/last_topics",:expires_in => 1.hours) do %>
+  <%= cache("users/show/#{params[:id]}/last_topics",:expires_in => 1.hours) do %>
 	<div class="box">
 		<h2>最近发布的贴子</h2>
 		<table class="node_topics">
@@ -50,7 +50,7 @@
 	
 </div>
 <div class="sidebar">
-	<%= cache("users/show/params[:id]/last_replies",:expires_in => 1.hours) do %>
+  <%= cache("users/show/#{params[:id]}/last_replies",:expires_in => 1.hours) do %>
 	<div class="last_replies box">
 		<h2>最近回复过的帖子</h2>
 		<ul>

@@ -29,7 +29,7 @@
 		<% @last_topics.each do |item| %>
 		<li>
 			<span class="node">[<a href="<%= node_topics_path(item.node_id) %>"><%= item.node.name %></a>]</span>
-			<a href="<%= topic_path(item.id) %>"><%= item.title %></a>
+			<a href="<%= topic_path(item.id) %>"><%= truncate(item.title,:length => 30) %></a>
 			</li>
 		<% end %>
 	</ul>
@@ -42,7 +42,7 @@
 		<% @actived_topics.each do |item| %>
 		<li>
 			<span class="node">[<a href="<%= node_topics_path(item.node_id) %>"><%= item.node.name %></a>]</span>
-			<a href="<%= topic_path(item.id) %>"><%= item.title %></a>
+			<a href="<%= topic_path(item.id) %>"><%= truncate(item.title,:length => 30) %></a>
 			</li>
 		<% end %>
 	</ul>

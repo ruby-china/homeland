@@ -20,7 +20,7 @@ class Note < ActiveRecord::Base
   end
   
   def self.cached_count
-    return Rails.cache.fetch("notes/count",:expires => 1.hours) do
+    return Rails.cache.fetch("notes/count",:expires_in => 1.hours) do
       self.count
     end
   end

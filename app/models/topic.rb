@@ -8,7 +8,7 @@ class Topic < ActiveRecord::Base
   has_many :replies, :dependent => :destroy, :include => [:user]
 
   # scopes
-  scope :last_actived, :order => "replied_at desc, id desc", 
+  scope :last_actived, :order => "replied_at desc", 
     :include => [:user,:last_reply_user,:node]
   scope :recents, :order => "id desc", :include => [:user,:last_reply_user,:node]
   before_save :set_replied_at
@@ -66,7 +66,7 @@ class Topic < ActiveRecord::Base
   end
   
   def self.cached_count
-    return Rails.cache.fetch("topics/count",:expires => 1.hours) do
+    return Rails.cache.fetch("topics/count",:expires_in => 1.hours) do
       self.count
     end
   end

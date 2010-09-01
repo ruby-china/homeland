@@ -31,6 +31,8 @@ button.tiny:visited  { width:54px; background:url(/images/tiny_buttons.png) left
 a.tiny:hover,
 button.tiny:hover { background-position: -27px left; color:#675120; }
 
+.clearboth { clear:both;}
+
 body { text-align:center; 
   font-family: "Helvetica Neue","Yahei", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", STHeiti !important; 
   color:#333;

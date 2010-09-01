@@ -3,9 +3,13 @@ class HomeController < ApplicationController
   before_filter :require_no_user, :only => [:login, :login_create]
   before_filter :require_user, :only => :logout
   
+  
   def index
-    if @current_user
-      redirect_to topics_path
+    if !fragment_exist? "home/last_topics"
+      @last_topics = Topic.recents(:include => [:node,:user]).limit(10)
+    end
+    if !fragment_exist? "home/actived_topics"
+      @actived_topics = Topic.last_actived(:include => [:node,:user]).limit(10)
     end
   end
   

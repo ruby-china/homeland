@@ -1,4 +1,7 @@
-<% content_for :sitemap do %><span class="current">首页</span><% end %>
+<%= content_for :sitemap do %><span class="current">首页</span><% end %>
+<%= content_for :styles do %>
+<%= stylesheet_link_tag "home", :cache => "cached_home" %>
+<% end %>
 <div id="home_index" class="box"> 
   <h1>楠香山论坛</h1> 
   <p> 
@@ -19,7 +22,33 @@
     可以叫我小李, 职业是做网站的，我也买了楠香山的房子(5-14-3号)，所以就准备建立这么一个论坛。把小区的管理拿回到自己人手里面。
   </p> 
 </div> 
-<div class="more box">
+<%= cache("home/last_topics",:expires_in => 30.minutes) do %>
+<div id="last_topics" class="topics box">
+	<h2>最新发布的贴子</h2>
+	<ul>
+		<% @last_topics.each do |item| %>
+		<li>
+			<span class="node">[<a href="<%= node_topics_path(item.node_id) %>"><%= item.node.name %></a>]</span>
+			<a href="<%= topic_path(item.id) %>"><%= item.title %></a>
+			</li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
+<%= cache("home/hot_topics",:expires_in => 30.minutes) do %>
+<div id="hot_topics" class="topics box">
+	<h2>最近活跃的贴子</h2>
+	<ul>
+		<% @actived_topics.each do |item| %>
+		<li>
+			<span class="node">[<a href="<%= node_topics_path(item.node_id) %>"><%= item.node.name %></a>]</span>
+			<a href="<%= topic_path(item.id) %>"><%= item.title %></a>
+			</li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
+<div class="more box clearboth">
 	<p style="padding:20px;">
   <a href="<%= register_path %>">立即加入社区</a> 或者 <a href="<%= topics_path %>">先进去随便看看</a>
 	</p>

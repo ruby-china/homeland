@@ -5,7 +5,7 @@ class TopicsController < ApplicationController
 
   private
   def init_list_sidebar 
-   if !fragment_exist? "topic/init_list_sidebar/hot_nodes.#{params[:format]}"
+   if !fragment_exist? "topic/init_list_sidebar/hot_nodes"
       @hot_nodes = Node.hots.all(:limit => 20)
     end
     if @current_user

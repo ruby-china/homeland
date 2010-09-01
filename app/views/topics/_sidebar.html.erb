@@ -27,7 +27,7 @@
 		<input type="text" name="key" style="width:140px; padding:4px; margin-right:4px;" /><button class="button tiny" type="submit">搜索</button>
 	</form>
 </div>
-<% cache("topic/init_list_sidebar/hot_nodes",:expires_in => 30.minutes) do %>
+<%= cache("topic/init_list_sidebar/hot_nodes",:expires_in => 30.minutes) do %>
   <% if not @hot_nodes.blank? %>
   <div class="hot_nodes nodes box">
     <h2>热门节点</h2>

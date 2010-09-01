@@ -6,10 +6,10 @@ class HomeController < ApplicationController
   
   def index
     if !fragment_exist? "home/last_topics"
-      @last_topics = Topic.recents(:include => [:node,:user]).limit(10)
+      @last_topics = Topic.recents.limit(10)
     end
     if !fragment_exist? "home/actived_topics"
-      @actived_topics = Topic.last_actived(:include => [:node,:user]).limit(10)
+      @actived_topics = Topic.last_actived.limit(10)
     end
   end
   

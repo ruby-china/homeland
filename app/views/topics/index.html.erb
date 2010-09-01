@@ -54,14 +54,14 @@
         <td>
           <p class="title"><a href="<%= topic_path(topic) %>" title="<%= topic.title %>"><%= truncate(topic.title, :length => 100) %></a></p>
           <p class="info leader">
-            由 <a href="<%= user_path(topic.user_id) %>"><%= topic.user.name %></a> 
+            由 <%= user_name_tag(topic.user) %>
             在 <a href="<%= node_topics_path(topic.node_id) %>"><%= topic.node.name %></a> 中发起
           </p>
           <p class="info time">
             <% if topic.last_reply_user.blank? %>
               发布于 <%= time_ago_in_words(topic.created_at) %>前
             <% else %>
-              最后由 <a href="<%= user_path(topic.last_reply_user_id) %>"><%= topic.last_reply_user.name %></a> 回复于 <%= time_ago_in_words(topic.replied_at) %>前
+              最后由 <%= user_name_tag(topic.last_reply_user) %> 回复于 <%= time_ago_in_words(topic.replied_at) %>前
             <% end %>
           </p>
         </td>

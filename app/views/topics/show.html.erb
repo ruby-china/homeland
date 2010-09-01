@@ -11,8 +11,8 @@
 		    <td>
 					<h1><%= truncate(@topic.title, :length => 100) %></h1>
 					<p class="info leader">
-						由 <a href="<%= user_path(@topic.user_id) %>"><%= @topic.user.name %></a> 
-						在 <%= @topic.node.name %> 中发起
+						由 <%= user_name_tag(@topic.user,:location => true) %>
+						在 <a href="<%= node_topics_path(@topic.node_id) %>"><%= @topic.node.name %></a> 节点中发起
 					</p>
 					<p class="info time">
 						<% if @topic.last_reply_user.blank? %>
@@ -38,7 +38,7 @@
   <% else %>
   <div id="replies" class="box">
     <div class="total">
-      截止 <%= l @topic.replied_at, :format => :default %> 共收到 <%= @topic.replies_count %> 条回复
+      截止 <%= l @topic.replied_at, :format => :long %>, 共收到 <%= @topic.replies_count %> 条回复
     </div>
     <% @replies.each_with_index do |reply,i| %>
       <div class="reply">
@@ -47,7 +47,7 @@
           <td class="face"><%= user_avatar_tag(reply.user, :normal) %></td>
           <td>
             <div class="info clearfix">
-              <span class="name"><%= user_name_tag(reply.user) %></span>
+              <span class="name"><%= user_name_tag(reply.user,:location => true) %></span>
               <span class="time">回复于 <%= time_ago_in_words(reply.created_at) %>前, #<%= i + 1 %></span>
             </div>
             <div class="body">
@@ -76,7 +76,7 @@
 	<% else %>
 	<div id="reply" class="form box">
 		<p style="padding:20px;">
-		需要<a href='<%= login_path %>'>登录</a>后回复方可回复, 如果你还没有账号<a href="<%= register_path %>">点击这里注册</a>。
+		需要 <a href='<%= login_path %>'>登录</a> 后回复方可回复, 如果你还没有账号 <a href="<%= register_path %>"> 点击这里注册</a>。
 		</p>
 	</div>
 	<% end %>

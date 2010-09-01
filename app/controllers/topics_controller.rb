@@ -1,7 +1,7 @@
 # coding: utf-8  
 class TopicsController < ApplicationController
   before_filter :require_user, :only => [:new,:edit,:create,:update,:destroy,:reply]
-  before_filter :init_list_sidebar, :only => [:index,:recent,:cate,:search]
+  before_filter :init_list_sidebar, :only => [:index,:recent,:show,:cate,:search]
 
   private
   def init_list_sidebar 

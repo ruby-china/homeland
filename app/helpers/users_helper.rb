@@ -5,7 +5,7 @@ module UsersHelper
     result = "<a href=\"#{user_path(user.id)}\" title=\"#{user.name}\">#{user.name}</a>"
     if location
       if !user.location.blank?
-        result += " <span class=\"location\">[#{user.location}]</span>"
+        result += " <span class=\"location\" title=\"门牌号\">[#{user.location}]</span>"
       end
     end
     raw(result)

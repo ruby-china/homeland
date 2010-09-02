@@ -1,6 +1,6 @@
 # coding: utf-8  
 class Topic < ActiveRecord::Base
-  attr_protected :user_id, :node_id
+  attr_protected :user_id
   validates_presence_of :user_id, :title, :body, :node_id
   belongs_to :node, :counter_cache => true
   belongs_to :user

@@ -5,24 +5,24 @@
 
 <table class="grid">
   <tr class="head">
-    <td class="first">Topic</td>
-    <td>Body</td>
+    <td class="first" style="width:600px">Body</td>
+		<td>Topic</td>
     <td>User</td>
-    <td>State</td>
-    <td>Source</td>
+    <td>At</td>
+
     <td></td>
   </tr>
 
 <% @replies.each do |reply| %>
   <tr>
-    <td class="first"><%= reply.topic.title %></td>
-    <td><%= truncate(reply.body, :length => 50) %></td>
+    <td class="first"><%= truncate(reply.body, :length => 50) %></td>
+	  <td><a href="<%= topic_path(reply.topic_id) %>" title="<%= reply.topic.title %>"><%= reply.topic_id %></a></td>
     <td><%= reply.user.name %></td>
-    <td><%= reply.state %></td>
-    <td><%= reply.source %></td>
+    <td><%= l reply.created_at, :format => :short %></td>
     <td><%= link_to 'Edit', edit_cpanel_reply_path(reply) %>
     <%= link_to 'Destroy', cpanel_reply_path(reply), :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
+<%= will_paginate @replies %>
 

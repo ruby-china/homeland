@@ -14,3 +14,4 @@ pre {
 .group { margin-bottom:20px; }
 .group h2 { font-size:12px; margin-bottom:8px; }
 .group ul { margin:0 20px;}
+.pagination { clear:both; margin-top:10px; text-align: left;}

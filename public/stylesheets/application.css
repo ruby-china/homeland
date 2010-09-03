@@ -87,8 +87,9 @@ div.field .hint { font-size:12px; color:#999;}
 #success_message { border:1px solid #d4e5a6; background:#effbd5; padding:6px 10px; margin-bottom:15px; }
 
 .pagination {text-align: center;clear:both; }
-.pagination a {padding: 2px 5px 2px 5px; margin-right:3px; border: 1px solid #666; background:#FFF; text-decoration: none;color: #333;}
-.pagination a:hover, .pagination a:active {border: 1px solid #000099; color:#000099; text-decoration: none;}
+.pagination a,.pagination em {padding: 2px 5px 2px 5px; margin-right:3px; border: 1px solid #666; background:#FFF; text-decoration: none;color: #333;}
+.pagination a:hover, .pagination a:active,
+.pagination em { font-style:normal; background:#308423; color:#FFF; border:1px solid #215020; }
 .pagination span.current {padding: 2px 5px 2px 5px; margin-right:3px; border: 1px solid #3080CB; font-style:normal;
   background-color:#3080CB;color: #FFF;}
 .pagination span.disabled { padding: 2px 5px 2px 5px; margin-right:3px; border: 1px solid #eee;color: #ddd;}

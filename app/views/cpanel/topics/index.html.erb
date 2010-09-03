@@ -5,31 +5,29 @@
 
 <table class="grid">
   <tr class="head">
-    <td class="first">Title</td>
+    <td class="first" style="width:400px">Title</td>
     <td>Node</td>
     <td>User</td>
-    <td>Replies count</td>
-    <td>Last reply user</td>
-    <td>Replied at</td>
-    <td>Source</td>
+    <td>Replies</td>
+    <td>Reply user</td>
+    <td>at</td>
     <td></td>
   </tr>
 
 <% @topics.each do |topic| %>
   <tr>
-    <td class="first"><%= topic.title %></td>
+    <td class="first"><%= truncate(topic.title,:length => 30) %></td>
     <td><%= topic.node.name if topic.node %></td>
     <td><%= topic.user.name if topic.user %></td>
     <td><%= topic.replies_count %></td>
     <td><%= topic.last_reply_user_id %></td>
-    <td><%= topic.replied_at %></td>
-    <td><%= topic.source %></td>
+    <td><%= l topic.created_at,:format => :short %></td>
     <td><%= link_to 'Edit', edit_cpanel_topic_path(topic) %>
     <%= link_to 'Destroy', cpanel_topic_path(topic), :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
-
+<%= will_paginate @topics %>
 <br />
 
 <%= link_to 'New Topic', new_cpanel_topic_path %>

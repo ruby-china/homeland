@@ -3,7 +3,7 @@ class Cpanel::TopicsController < Cpanel::ApplicationController
   # GET /topics
   # GET /topics.xml
   def index
-    @topics = Topic.all(:include => [:node,:user])
+    @topics = Topic.paginate :page => params[:page], :per_page => 30, :order => "id desc",:include => [:node,:user]
 
     respond_to do |format|
       format.html # index.html.erb

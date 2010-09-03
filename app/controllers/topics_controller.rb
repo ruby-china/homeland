@@ -77,7 +77,7 @@ class TopicsController < ApplicationController
     else
       flash[:notice] = @reply.errors.full_messages.join("<br />")
     end
-    redirect_to topic_path(params[:id])
+    redirect_to topic_path(params[:id],:anchor => 'reply')
   end
 
   # GET /topics/1/edit

@@ -5,6 +5,8 @@
 #hot_topics { float:right; width:450px; }
 .topics h2 { font-size:14px; margin-bottom:8px;}
 .topics ul li { line-height:160%;}
+.topics ul li a:link,
+.topics ul li a:visited { color:#2C64D7;}
 .topics ul li .node { color:#666; margin-right:5px;}
 .topics ul li .node a:link,
 .topics ul li .node a:visited { color:#666; }

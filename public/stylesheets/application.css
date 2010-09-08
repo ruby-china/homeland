@@ -6,7 +6,7 @@ html {
   width: 100%;
   height: 100%;
   display: table;
-  background:#e8fcff url(/images/bg.jpg) bottom left repeat-x;
+  background:#e4f8ff url(/images/bg.png) bottom left repeat-x;
 }
 a:link, a:visited { color:#34a900; }
 a:hover { color:#2c64d7; }

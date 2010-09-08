@@ -84,7 +84,7 @@
   <div id="reply" class="form box">
     <%= notice_message %>
     <h2>回复</h2>
-    <% form_for(Reply.new,:url => reply_topic_path(params[:id])) do |f| %>
+    <%= form_for(Reply.new,:url => reply_topic_path(params[:id])) do |f| %>
       <div class="field">
         <%= f.text_area :body,:class => "long", :style => "height:80px;" %>
       </div>

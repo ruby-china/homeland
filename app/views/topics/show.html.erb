@@ -1,9 +1,29 @@
 <%= render 'base' %>
-<% content_for :sitemap do %>
+<%= content_for :sitemap do %>
 	<a href="<%= node_topics_path(@topic.node_id) %>"><%= @topic.node.name %></a> &gt;
   <span class="current">查看贴子</span>
 <% end %>
-
+<%= content_for :scripts do %>
+	<script type="text/javascript">
+		function reply (floor) {
+			var reply_body = $("#reply_body");
+      var new_text = "@" + floor+"楼 ";
+      if(reply_body.val().trim().length == 0){
+        new_text += '';
+      }
+      else{
+        new_text = "\n" + new_text;
+      }
+      reply_body.focus().val(reply_body.val() + new_text);
+      return false;
+		}
+		
+		function hightlightReply (floor) {
+			$("#replies .reply").removeClass("light");
+			$("#reply"+floor).addClass("light");
+		}
+	</script>
+<% end %>
 <div class="leftbox">
 	<div class="topics box">
 		<table>
@@ -41,14 +61,14 @@
       截止 <%= l @topic.replied_at, :format => :long %>, 共收到 <%= @topic.replies_count %> 条回复
     </div>
     <% @replies.each_with_index do |reply,i| %>
-      <div class="reply">
+      <div class="reply" id="reply<%= i + 1 %>">
       <table>
        <tr>
           <td class="face"><%= user_avatar_tag(reply.user, :normal) %></td>
           <td>
             <div class="info clearfix">
               <span class="name"><%= user_name_tag(reply.user,:location => true) %></span>
-              <span class="time">回复于 <%= time_ago_in_words(reply.created_at) %>前, #<%= i + 1 %></span>
+              <span class="time"><%= i + 1 %>楼, 回复于 <%= time_ago_in_words(reply.created_at) %>前 <a href="#" onclick="return reply(<%= i + 1 %>);" title="回复此楼" class="reply_link"><%= image_tag("reply.png") %></a></span>
             </div>
             <div class="body">
               <%= format_topic_body(reply.body,"",false) %>

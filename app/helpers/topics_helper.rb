@@ -14,6 +14,7 @@ module TopicsHelper
       # end
     end
     text = auto_link(text,:all, :target => '_blank', :rel => "nofollow")
+    text = text.gsub(/@([\d]+)楼\s/,'@<a href="#reply\1" onclick="return hightlightReply(\1)">\1楼</a> ')
     return text
   end
 

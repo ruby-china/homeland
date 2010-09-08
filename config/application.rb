@@ -45,4 +45,4 @@ I18n.locale = 'zh-CN'
 
 # 配置文件载入
 APP_CONFIG = YAML.load_file("#{Rails.root}/config/config.yml")[Rails.env]
-APP_VERSION = '0.2.1'
+APP_VERSION = '0.2.2'

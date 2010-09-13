@@ -3,7 +3,7 @@ Homeland::Application.routes.draw do
 
   resources :notes
 
-  root :to => "home#index"
+  root :to => "topics#index"
   match "login", :to => 'home#login'
   match "login_create", :to => 'home#login_create'
   match 'logout', :to => 'home#logout'

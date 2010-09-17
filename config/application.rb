@@ -1,5 +1,6 @@
 # coding: utf-8  
 require File.expand_path('../boot', __FILE__)
+APP_VERSION = '0.2.5'
 
 require 'rails/all'
 
@@ -45,4 +46,3 @@ I18n.locale = 'zh-CN'
 
 # 配置文件载入
 APP_CONFIG = YAML.load_file("#{Rails.root}/config/config.yml")[Rails.env]
-APP_VERSION = '0.2.3'

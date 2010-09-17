@@ -2,6 +2,7 @@
 class TopicsController < ApplicationController
   before_filter :require_user, :only => [:new,:edit,:create,:update,:destroy,:reply]
   before_filter :init_list_sidebar, :only => [:index,:recent,:show,:cate,:search]
+  caches_page :feed, :expires_in => 1.hours
 
   private
   def init_list_sidebar 
@@ -19,7 +20,13 @@ class TopicsController < ApplicationController
   def index
     @topics = Topic.last_actived.all(:limit => 10)
     @sections = Section.all(:include => [:nodes])
-    set_seo_meta("社区论坛","#{APP_CONFIG['app_name']}社区,#{APP_CONFIG['app_name']}论坛,#{APP_CONFIG['app_name']}小区论坛,#{APP_CONFIG['app_name']}业主论坛")
+    set_seo_meta("论坛","#{APP_CONFIG['app_name']}论坛,#{APP_CONFIG['app_name']}小区论坛,#{APP_CONFIG['app_name']}业主论坛")
+  end
+  
+  def feed
+    @topics = Topic.recents.all(:limit => 20)
+    response.headers['Content-Type'] = 'application/rss+xml'
+    render :layout => false
   end
 
   def node

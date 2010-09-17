@@ -9,6 +9,7 @@
   <%= csrf_meta_tag %>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 	<%= javascript_include_tag "rails","jquery.jdialog","application", :cache => "cached_application" %>
+	<%= auto_discovery_link_tag(:rss,feed_topics_url,:title => '订阅最新贴') %>
 	<%= yield :scripts %>
 </head>
 <body>

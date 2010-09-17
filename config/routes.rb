@@ -19,6 +19,7 @@ Homeland::Application.routes.draw do
     end
     collection do
       get :search
+      get :feed
     end
   end
   resources :photos do

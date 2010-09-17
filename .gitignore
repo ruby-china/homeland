@@ -4,7 +4,8 @@ log/*.log
 tmp/**/*
 config/database.yml
 config/config.yml
-public/uploads/
+public/uploads/**/*
 public/javascripts/cached_*
 public/stylesheets/cached_*
-public/uploads/*/*/*/*/*/*
+public/topics
+public/topics/**/*

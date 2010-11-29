@@ -1,0 +1,25 @@
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcss", "libcss05.vcproj", "{40B08227-C518-4CA0-9A86-F17588554B27}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mmseg", "mmseg05.vcproj", "{2F5525DC-B04E-45E8-BFD6-37792E2F3508}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{40B08227-C518-4CA0-9A86-F17588554B27}.Debug|Win32.ActiveCfg = Debug|Win32
+		{40B08227-C518-4CA0-9A86-F17588554B27}.Debug|Win32.Build.0 = Debug|Win32
+		{40B08227-C518-4CA0-9A86-F17588554B27}.Release|Win32.ActiveCfg = Release|Win32
+		{40B08227-C518-4CA0-9A86-F17588554B27}.Release|Win32.Build.0 = Release|Win32
+		{2F5525DC-B04E-45E8-BFD6-37792E2F3508}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2F5525DC-B04E-45E8-BFD6-37792E2F3508}.Debug|Win32.Build.0 = Debug|Win32
+		{2F5525DC-B04E-45E8-BFD6-37792E2F3508}.Release|Win32.ActiveCfg = Release|Win32
+		{2F5525DC-B04E-45E8-BFD6-37792E2F3508}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

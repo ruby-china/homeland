@@ -30,4 +30,21 @@ class HomeController < ApplicationController
     current_user_session.destroy
     redirect_back_or_default root_path
   end
+
+	def auth_callback
+		auth = request.env["omniauth.auth"]  
+		@auth = Authorization.find_from_hash(auth)
+		if current_user
+      flash[:notice] = "Successfully added #{auth['provider']} authentication"
+      current_user.authorizations.create(:provider => auth['provider'], :uid => auth['uid']) #Add an auth to existing
+		elsif @auth
+			flash[:notice] = "Welcome back #{auth['provider']} user"
+      UserSession.create(@auth.user, true) #User is present. Login the user with his social account
+		else
+			@new_auth = Authorization.create_from_hash(auth, current_user) #Create a new user
+      flash[:notice] = "Welcome #{auth['provider']} user. Your account has been created."
+      UserSession.create(@new_auth.user, true) #Log the authorizing user in.
+		end
+		redirect_to root_url
+	end
 end

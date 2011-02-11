@@ -1,6 +1,7 @@
 # coding: utf-8  
 class User < ActiveRecord::Base
   attr_protected :email, :name, :state
+	attr_accessor :password_confirmation
   acts_as_authentic do |c|
     c.ignore_blank_passwords = true #ignoring passwords
     c.validate_password_field = false #ignoring validations for password fields

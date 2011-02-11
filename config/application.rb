@@ -1,6 +1,6 @@
 # coding: utf-8  
 require File.expand_path('../boot', __FILE__)
-APP_VERSION = '0.2.6'
+APP_VERSION = '0.2.7'
 
 require 'rails/all'
 

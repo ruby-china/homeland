@@ -10,7 +10,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100827081204) do
+ActiveRecord::Schema.define(:version => 20110211041644) do
+
+  create_table "authorizations", :force => true do |t|
+    t.string   "provider",                   :null => false
+    t.string   "uid",        :limit => 1000, :null => false
+    t.integer  "user_id",                    :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "authorizations", ["provider", "uid"], :name => "index_authorizations_on_provider_and_uid"
 
   create_table "counters", :force => true do |t|
     t.string "key",   :null => false
@@ -99,11 +109,11 @@ ActiveRecord::Schema.define(:version => 20100827081204) do
     t.string   "tagline"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "crypted_password",                       :null => false
-    t.string   "password_salt",                          :null => false
-    t.string   "persistence_token",                      :null => false
-    t.string   "single_access_token",                    :null => false
-    t.string   "perishable_token",                       :null => false
+    t.string   "crypted_password",    :default => "",    :null => false
+    t.string   "password_salt",       :default => "",    :null => false
+    t.string   "persistence_token",   :default => "",    :null => false
+    t.string   "single_access_token", :default => "",    :null => false
+    t.string   "perishable_token",    :default => "",    :null => false
     t.integer  "login_count",         :default => 0,     :null => false
     t.integer  "failed_login_count",  :default => 0,     :null => false
     t.datetime "last_login_at"

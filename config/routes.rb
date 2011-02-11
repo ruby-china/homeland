@@ -6,6 +6,7 @@ Homeland::Application.routes.draw do
   root :to => "topics#index"
   match "login", :to => 'home#login'
   match "login_create", :to => 'home#login_create'
+	match "auth/:provider/callback", :to => "home#auth_callback"
   match 'logout', :to => 'home#logout'
   match 'register', :to => 'users#new'
   match 'setting', :to => 'users#setting', :as => 'setting'

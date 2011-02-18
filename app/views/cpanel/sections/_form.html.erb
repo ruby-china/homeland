@@ -1,15 +1,5 @@
-<%= form_for(@section, :url => (@section.id.blank? ? cpanel_sections_path : cpanel_section_path(@section.id)) ) do |f| %>
-  <% if @section.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@section.errors.count, "error") %> prohibited this section from being saved:</h2>
-
-      <ul>
-      <% @section.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= form_for([:cpanel,@section]) do |f| %>
+  <%= render 'shared/error_messages', :target => @section %>
 
   <div class="field">
     <%= f.label :name %><br />
@@ -20,6 +10,6 @@
     <%= f.text_field :sort %>
   </div>
   <div class="actions">
-    <button class="submit">保存</button>
+    <button class="button submit">保存</button> <%= link_to 'Back', cpanel_sections_path %>
   </div>
 <% end %>

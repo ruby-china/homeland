@@ -4,14 +4,14 @@ class NotesController < ApplicationController
   # GET /notes
   # GET /notes.xml
   def index
-    @notes = @current_user.notes.paginate :page => params[:page], :per_page => 20
+    @notes = @current_user.notes
     set_seo_meta("记事本")
   end
 
   # GET /notes/1
   # GET /notes/1.xml
   def show
-    @note = Note.find(params[:id])
+    @note =  @current_user.notes.find(params[:id])
     set_seo_meta("查看 &raquo; 记事本")
   end
 
@@ -31,8 +31,7 @@ class NotesController < ApplicationController
   # POST /notes
   # POST /notes.xml
   def create
-    @note = Note.new(params[:note])
-    @note.user_id = @current_user.id
+    @note = current_user.notes.new(params[:note])  
 
     if @note.save
       redirect_to(@note, :notice => '创建成功。')

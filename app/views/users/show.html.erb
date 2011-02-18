@@ -28,7 +28,6 @@
 		<p><%= auto_link(simple_format(@user.bio)) %></p>
 	</div>
 	<% end %>
-  <%= cache("users/show/#{params[:id]}/last_topics",:expires_in => 1.hours) do %>
 	<div class="box">
 		<h2>最近发布的贴子</h2>
 		<table class="node_topics">
@@ -46,18 +45,16 @@
       <% end %>
     </table>
 	</div>
-	<% end %>
+
 	
 </div>
 <div class="sidebar">
-  <%= cache("users/show/#{params[:id]}/last_replies",:expires_in => 1.hours) do %>
 	<div class="last_replies box">
 		<h2>最近回复过的帖子</h2>
 		<ul>
-      <% @last_replies.each do |reply| %>
-      <li><a href="<%= topic_path(reply.topic) %>"><%= truncate(reply.topic.title, :length => 25) %></a></li>
+      <% @last_replies.each do |group| %>
+      <li><a href="<%= topic_path(group['group'][0].topic) %>"><%= truncate(group['group'][0].topic.title, :length => 25) %></a></li>
       <% end %>
     </ul>
-	</div>
-	<% end %>
+  </div>
 </div>

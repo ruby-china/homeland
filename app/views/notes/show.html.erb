@@ -6,7 +6,7 @@
   <div id="notes" class="box">
     <div class="note">
       <div class="body"><%= format_topic_body @note.body %></div>
-      <div class="info"><%= @note.word_count %> 个字符, 创建于 <%= time_ago_in_words(@note.created_at) %>, <%= @note.changes_cout %> 次编辑</div>
+      <div class="info"><%= @note.word_count %> 个字符, 创建于 <%= time_ago_in_words(@note.created_at) %>, <%= @note.changes_count %> 次编辑</div>
       <div class="buttons">
         <a href="<%= edit_note_path(@note) %>" class="button submit">编辑</a> &nbsp; &nbsp; &nbsp;
         <%= link_to "删除", note_path(@note),:confirm => "确定要删除吗？", :method => :delete, :class => "button"  %>

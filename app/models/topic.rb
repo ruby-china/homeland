@@ -1,16 +1,27 @@
 # coding: utf-8  
-class Topic < ActiveRecord::Base
+class Topic
+  include Mongoid::Document
+  include Mongoid::Timestamps
+  
+  field :title
+  field :body  
+  field :last_reply_user_id , :type => Integer, :default => 0
+  field :replied_at , :type => DateTime
+  field :source  
+  field :replies_count, :type => Integer, :default => 0
+  
+  belongs_to :user, :inverse_of => :topics
+  belongs_to :node
+  belongs_to :last_reply_user, :class_name => 'User'
+  has_many :replies
+  
   attr_protected :user_id
   validates_presence_of :user_id, :title, :body, :node_id
-  belongs_to :node, :counter_cache => true
-  belongs_to :user
-  belongs_to :last_reply_user, :class_name => "User"
-  has_many :replies, :dependent => :destroy, :include => [:user]
+  
 
   # scopes
-  scope :last_actived, :order => "replied_at desc", 
-    :include => [:user,:last_reply_user,:node]
-  scope :recents, :order => "id desc", :include => [:user,:last_reply_user,:node]
+  scope :last_actived, :order => "replied_at desc"
+  scope :recents, :order => "id desc"
   before_save :set_replied_at
   def set_replied_at
     self.replied_at = Time.now

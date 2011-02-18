@@ -3,7 +3,7 @@ class Cpanel::UsersController < Cpanel::ApplicationController
   # GET /users
   # GET /users.xml
   def index
-    @users = User.paginate :page => params[:page], :per_page => 30, :order => "id desc"
+    @users = User.order_by("id desc").paginate :page => params[:page], :per_page => 30
 
     respond_to do |format|
       format.html # index.html.erb
@@ -26,6 +26,7 @@ class Cpanel::UsersController < Cpanel::ApplicationController
   # GET /users/new.xml
   def new
     @user = User.new
+    @user._id = nil
 
     respond_to do |format|
       format.html # new.html.erb
@@ -42,6 +43,11 @@ class Cpanel::UsersController < Cpanel::ApplicationController
   # POST /users.xml
   def create
     @user = User.new(params[:user])
+    @user.email = params[:user][:email]
+    @user.name = params[:user][:name]
+    @user.username = params[:user][:username]
+    @user.state = params[:user][:state]
+    @user.verified = params[:user][:verified]
 
     respond_to do |format|
       if @user.save
@@ -58,7 +64,12 @@ class Cpanel::UsersController < Cpanel::ApplicationController
   # PUT /users/1.xml
   def update
     @user = User.find(params[:id])
-
+    @user.email = params[:user][:email]
+    @user.name = params[:user][:name]
+    @user.username = params[:user][:username]
+    @user.state = params[:user][:state]
+    @user.verified = params[:user][:verified]
+    
     respond_to do |format|
       if @user.update_attributes(params[:user])
         format.html { redirect_to(cpanel_users_path, :notice => 'User was successfully updated.') }

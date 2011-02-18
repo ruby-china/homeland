@@ -1,8 +1,16 @@
 # coding: utf-8  
 # 记事本
-class Note < ActiveRecord::Base
-  attr_protected :user_id, :changes_count, :word_count
-  belongs_to :user, :counter_cache => true
+class Note  
+  include Mongoid::Document
+  include Mongoid::Timestamps
+  
+  field :title
+  field :body
+  field :word_count, :type => Integer
+  field :changes_count, :type =>  Integer, :default => 0
+  belongs_to :user
+
+  attr_protected :user_id, :changes_count, :word_count  
 
   default_scope :order => "id desc"
 
@@ -15,8 +23,9 @@ class Note < ActiveRecord::Base
   end
 
   before_update :update_changes_count
-  def update_changes_count
-    self.changes_cout += 1
+  def update_changes_count    
+    self.changes_count = 0 if self.changes_count.blank?
+    self.inc(:changes_count,1)
   end
   
   def self.cached_count

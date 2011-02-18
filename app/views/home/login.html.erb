@@ -7,8 +7,8 @@
   <%= form_for :user_session, :url => login_create_path do |f| %>
     <%= render "shared/error_messages", :target => @user_session %>
     <div class="field">
-    <%= f.label :email, "Email:" %><br />
-    <%= f.text_field :email %>
+    <%= f.label :username, "用户名:" %><br />
+    <%= f.text_field :username %>
     </div>
     <div class="field">
     <%= f.label :password, "密码:" %><br />

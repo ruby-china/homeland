@@ -21,7 +21,7 @@
    }
 </script>
 <% end %>
-<%= form_for(@topic, :url => (@topic.id.blank? ? topics_path : topic_path(@topic.id))) do |f| %>
+<%= form_for(@topic) do |f| %>
   <%= render "shared/error_messages", :target => @topic %>  
 
   <%= f.hidden_field :node_id %>

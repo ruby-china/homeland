@@ -3,7 +3,7 @@ class Cpanel::NodesController < Cpanel::ApplicationController
   # GET /nodes
   # GET /nodes.xml
   def index
-    @nodes = Node.all(:include => :section)
+    @nodes = Node.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -25,7 +25,7 @@ class Cpanel::NodesController < Cpanel::ApplicationController
   # GET /nodes/new
   # GET /nodes/new.xml
   def new
-    @node = Node.new
+    @node = Node.new    
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,7 +41,7 @@ class Cpanel::NodesController < Cpanel::ApplicationController
   # POST /nodes
   # POST /nodes.xml
   def create
-    @node = Node.new(params[:node])
+    @node = Node.new(params[:node])    
 
     respond_to do |format|
       if @node.save

@@ -1,10 +1,20 @@
 # coding: utf-8  
-class Photo < ActiveRecord::Base
+class Photo  
+  include Mongoid::Document
+  include Mongoid::Timestamps
+  include Mongoid::Paperclip
+  
+  field :title
+  field :image_file_name
+  field :image_file_size, :type => Integer, :default => 0
+  
+  belongs_to :user
+  
   attr_protected :user_id
   validates_presence_of :title
-  belongs_to :user
+  
   # 封面图
-  has_attached_file :image,
+  has_mongoid_attached_file :image,
     :default_style => :normal,
     :styles => {
       :small => "100>",

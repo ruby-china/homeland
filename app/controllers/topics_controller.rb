@@ -7,7 +7,7 @@ class TopicsController < ApplicationController
   private
   def init_list_sidebar 
    if !fragment_exist? "topic/init_list_sidebar/hot_nodes"
-      @hot_nodes = Node.hots.all(:limit => 20)
+      @hot_nodes = Node.hots.limit(20)
     end
     if @current_user
       @user_last_nodes = Node.find_last_visited_by_user(@current_user.id)
@@ -18,8 +18,8 @@ class TopicsController < ApplicationController
   # GET /topics
   # GET /topics.xml
   def index
-    @topics = Topic.last_actived.all(:limit => 10)
-    @sections = Section.all(:include => [:nodes])
+    @topics = Topic.last_actived.limit(10)
+    @sections = Section.find(:all)
     set_seo_meta("论坛","#{APP_CONFIG['app_name']}论坛,#{APP_CONFIG['app_name']}小区论坛,#{APP_CONFIG['app_name']}业主论坛")
   end
   
@@ -40,13 +40,13 @@ class TopicsController < ApplicationController
   end
 
   def recent
-    @topics = Topic.recents.all(:limit => 50)
+    @topics = Topic.recents.limit(50)
     set_seo_meta("最近活跃的50个帖子 &raquo; 社区论坛")
     render :action => "index"
   end
 
   def search
-    @topics = Topic.search(params[:key], :page => params[:page], :per_page => 50, :include => [:user, :last_reply_user])
+    @topics = Topic.search(params[:key], :page => params[:page], :per_page => 50)
     set_seo_meta("搜索#{params[:s]} &raquo; 社区论坛")
     render :action => "index"
   end
@@ -76,8 +76,7 @@ class TopicsController < ApplicationController
 
   def reply
     @topic = Topic.find(params[:id])
-    @reply = @topic.replies.build(params[:reply])
-    @reply.topic_id = params[:id]
+    @reply = @topic.replies.build(params[:reply])        
     @reply.user_id = @current_user.id
     if @reply.save
       flash[:notice] = "回复成功。"

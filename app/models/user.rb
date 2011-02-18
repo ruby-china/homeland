@@ -1,10 +1,35 @@
 # coding: utf-8  
-class User < ActiveRecord::Base
-  attr_protected :email, :name, :state
-	attr_accessor :password_confirmation
-  acts_as_authentic do |c|
-    c.ignore_blank_passwords = true #ignoring passwords
-    c.validate_password_field = false #ignoring validations for password fields
+class User
+  include Mongoid::Document
+  include Mongoid::Timestamps
+  include Mongoid::Paperclip
+  include AuthlogicModel
+  
+  field :name
+  field :location
+  field :bio
+  field :website
+  field :avatar_file_name
+  field :verified, :type => Boolean, :default => false
+  field :state, :type => Integer, :default => 1
+  field :qq
+  field :tagline  
+  field :replies_count, :type => Integer, :default => 0  
+  
+  has_many :topics, :dependent => :destroy  
+  has_many :notes
+  has_many :replies
+	embeds_many :authorizations
+  
+  attr_protected :username, :email, :name, :state, :verified
+  attr_accessor :password_confirmation
+  
+  acts_as_authentic do |config|
+    # Change this to your preferred login field
+    config.login_field = 'username'
+    config.merge_validates_uniqueness_of_login_field_options :scope => '_id', :case_sensitive => true
+    config.ignore_blank_passwords = true #ignoring passwords
+    config.validate_password_field = false #ignoring validations for password fields
   end
 
 	#here we add required validations for a new record and pre-existing record
@@ -21,13 +46,8 @@ class User < ActiveRecord::Base
     end
   end  
   
-  validates_presence_of :name
-  validates_presence_of :password, :on => :create
+  validates_presence_of :name  
   validates_uniqueness_of :name
-  has_many :topics, :dependent => :destroy
-  has_many :replies, :dependent => :destroy
-  has_many :notes, :dependent => :destroy
-	has_many :authorizations, :dependent => :destroy
 
   before_create :default_value_for_create
   def default_value_for_create
@@ -44,7 +64,7 @@ class User < ActiveRecord::Base
   end
   
   # 封面图
-  has_attached_file :avatar,
+  has_mongoid_attached_file :avatar,
     :default_style => :normal,
     :styles => {
       :small => "16x16#",

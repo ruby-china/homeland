@@ -9,3 +9,5 @@ public/javascripts/cached_*
 public/stylesheets/cached_*
 public/topics
 public/topics/**/*
+.redcar
+Gemfile.lock

@@ -1,2 +1,0 @@
-folded > wrapped
-shortform > SomeWhatMoreLongFormThatWouldOverflowShortFormBuffer

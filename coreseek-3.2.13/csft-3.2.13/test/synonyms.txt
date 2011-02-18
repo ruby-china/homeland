@@ -1,3 +1,0 @@
-MS Windows => Windows
-Microsoft Windows => Windows
-Windows => Windows

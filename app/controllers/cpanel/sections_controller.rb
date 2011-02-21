@@ -25,7 +25,7 @@ class Cpanel::SectionsController < Cpanel::ApplicationController
   # GET /sections/new
   # GET /sections/new.xml
   def new
-    @section = Section.new
+    @section = Section.new    
 
     respond_to do |format|
       format.html # new.html.erb

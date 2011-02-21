@@ -106,7 +106,7 @@
     select:
       prompt: "请选择"
   
-  activerecord:
+  activemodel:
     errors:
       template: # ~ 2.3.5 backward compatible
         header:
@@ -137,9 +137,12 @@
         record_invalid: "校验失败: %{errors}"
     models:
       user: "用户"
+      topic: "话题"
     attributes:
       user:
         name: "大名"
+        username: "用户名"
+        email: "Email"
         location: "门牌号"
         bio: "个人介绍"
         password: "密码"
@@ -153,6 +156,7 @@
         verified: "已实名验证"
       topic:
         title: "标题"
+        user_id: "用户"
         body: "正文"
       reply:
         body: "回复内容"
@@ -186,7 +190,37 @@
           email: 'Email'
           password: '密码'
           remember_me: '记住登录状态'
+          
+  mongoid:
+    errors:
+      messages:
+        taken:
+          已占用
+        document_not_found:
+          没有发现类是 %{klass} ID 是 %{identifiers} 的文档
+        invalid_database:
+          数据库应该是Mongo::DB,而不是%{name}.
+        invalid_type:
+          在类%{klass}中定义了字段,实际值是%{value}的%{other}.
+        unsupported_version:
+          MongoDB %{version} 版本已过期，请升级到 %{mongo_version}.
+        validations:
+          校验失败 - %{errors}.
+        invalid_collection:
+          不允许直接访问嵌入式的集合%{klass} , 请从文档的根访问集合.
+        invalid_field:
+          字段的名字不允许为 %{name}. 你不应该定义跟Mongoid内部属性或者方法相同的名字，详细请看Use Document#instance_methods.
+        too_many_nested_attribute_records:
+          被关联的%{association} 嵌入式属性不能超过 %{limit}.
+        embedded_in_must_have_inverse_of:
+          embedded_in的关联属性必须包含inverse_of.
+        dependent_only_references_one_or_many:
+          dependent => destroy|delete 选项只有在references_one或者references_many时候有效.
+        association_cant_have_inverse_of:
+          在当前的关联中，不允许定义inverse_of去,其只有在embedded_in或者references_many是数组的情况下使用
+        unsaved_document:
+          You cannot call create or create! through a relational association
+          relation (%{document}) who's parent (%{base}) is not already saved.
 
-      
   
 

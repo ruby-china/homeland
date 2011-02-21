@@ -3,7 +3,7 @@ class Cpanel::PhotosController < Cpanel::ApplicationController
   # GET /photos
   # GET /photos.xml
   def index
-    @photos = Photo.paginate :page => params[:page], :per_page => 20, :order => "id desc", :include => [:user]
+    @photos = Photo.desc("id").paginate :page => params[:page], :per_page => 20
   end
 
   # GET /photos/1

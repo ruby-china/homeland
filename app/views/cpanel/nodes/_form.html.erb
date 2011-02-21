@@ -1,15 +1,5 @@
-<%= form_for(@node, :url => (@node.id.blank? ? cpanel_nodes_path : cpanel_node_path(@node.id)) ) do |f| %>
-  <% if @node.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@node.errors.count, "error") %> prohibited this node from being saved:</h2>
-
-      <ul>
-      <% @node.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= form_for([:cpanel,@node]) do |f| %>
+  <%= render 'shared/error_messages', :target => @node %>
 
   <div class="field">
     <%= f.label :name %><br />
@@ -28,6 +18,6 @@
     <%= f.text_area :summary, :class => "middle",:style => "height:80px;" %>
   </div>
   <div class="actions">
-    <button class="submit">保存</button>
+    <button class="button submit">保存</button> <%= link_to 'Back', cpanel_nodes_path %>
   </div>
 <% end %>

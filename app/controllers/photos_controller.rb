@@ -37,7 +37,7 @@ class PhotosController < ApplicationController
   # POST /photos
   # POST /photos.xml
   def create
-    # 浮动窗口上传
+    # 浮动窗口上传    
     if params[:tiny] == '1'
       photos = []
       if !params[:image1].blank?

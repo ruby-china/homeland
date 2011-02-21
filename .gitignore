@@ -3,6 +3,7 @@ db/*.sqlite3
 log/*.log
 tmp/**/*
 config/database.yml
+config/mongoid.yml
 config/config.yml
 config/mongoid.yml
 public/uploads/**/*

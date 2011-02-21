@@ -12,24 +12,6 @@ class HomeController < ApplicationController
       @actived_topics = Topic.last_actived.limit(10)
     end
   end
-  
-  def login
-    @user_session = UserSession.new
-  end
-  
-  def login_create
-    @user_session = UserSession.new(params[:user_session])
-    if @user_session.save
-      redirect_back_or_default root_path
-    else
-      render :action => :login
-    end
-  end
-  
-  def logout
-    current_user_session.destroy
-    redirect_back_or_default root_path
-  end
 
 	def auth_callback
 		auth = request.env["omniauth.auth"]  

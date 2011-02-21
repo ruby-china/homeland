@@ -1,0 +1,32 @@
+<% content_for :sitemap do %><span class="current">加入社区</span><% end %>
+<div class="leftbox">
+	<div class="box">
+    <h1>注册新用户</h1>
+    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+      <%= render "shared/error_messages", :target => resource %> 
+    <div class="field"><%= f.label :login %><br />
+      <%= f.text_field :login %></div>
+    <div class="field"><%= f.label :name %><br />
+      <%= f.text_field :name %></div>
+    
+    <div class="field"><%= f.label :email %><br />
+      <%= f.text_field :email %></div>
+    
+    <div class="field"><%= f.label :password %><br />
+      <%= f.password_field :password %></div>
+    
+    <div class="field"><%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation %></div>
+    
+    <div class="field"><button type="submit" class="button submit">提交注册信息</button></div>
+    <% end %>
+  </div>
+</div>
+<div class="sidebar">
+  <div class="box">
+    <h2>已经有帐号了？</h2>
+    <p style="line-height:20px;">
+    <%= render :partial => "devise/shared/links" %>
+    </p>
+  </div>
+</div>

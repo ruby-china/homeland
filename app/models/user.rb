@@ -3,8 +3,12 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::Paperclip
-  include AuthlogicModel
   
+  
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+  
+  field :login
   field :name
   field :location
   field :bio
@@ -20,35 +24,17 @@ class User
   has_many :notes
   has_many :replies
 	embeds_many :authorizations
-  
-  attr_protected :username, :email, :name, :state, :verified
+    
   attr_accessor :password_confirmation
+  attr_accessible :login, :name, :location, :website, :avatar , :bio, :qq, :tagline, :email, :password, :password_confirmation
   
-  acts_as_authentic do |config|
-    # Change this to your preferred login field
-    config.login_field = 'username'
-    config.merge_validates_uniqueness_of_login_field_options :scope => '_id', :case_sensitive => true
-    config.ignore_blank_passwords = true #ignoring passwords
-    config.validate_password_field = false #ignoring validations for password fields
+  validates_presence_of :login, :name  
+  validates_uniqueness_of :login, :name
+
+  def password_required?
+    (authorizations.empty? || !password.blank?) && super  
   end
-
-	#here we add required validations for a new record and pre-existing record
-  validate do |user|
-    if user.new_record? #adds validation if it is a new record
-      user.errors.add(:password, "is required") if user.password.blank? 
-      user.errors.add(:password_confirmation, "is required") if user.password_confirmation.blank?
-      user.errors.add(:password, "Password and confirmation must match") if user.password != user.password_confirmation
-    elsif !(!user.new_record? && user.password.blank? && user.password_confirmation.blank?) #adds validation only if password or password_confirmation are modified
-      user.errors.add(:password, "is required") if user.password.blank?
-      user.errors.add(:password_confirmation, "is required") if user.password_confirmation.blank?
-      user.errors.add(:password, " and confirmation must match.") if user.password != user.password_confirmation
-      user.errors.add(:password, " and confirmation should be atleast 4 characters long.") if user.password.length < 4 || user.password_confirmation.length < 4
-    end
-  end  
   
-  validates_presence_of :name  
-  validates_uniqueness_of :name
-
   before_create :default_value_for_create
   def default_value_for_create
     self.state = STATE[:normal]
@@ -60,7 +46,7 @@ class User
     m = UserMailer.create_welcome(self)
     Thread.new { m.deliver }
 	rescue => e
-		logger.error { e }
+		# logger.error { e }
   end
   
   # 封面图

@@ -1,6 +1,6 @@
 # coding: utf-8  
 require File.expand_path('../boot', __FILE__)
-APP_VERSION = '0.2.7'
+APP_VERSION = '0.3'
 
 require "action_controller/railtie"
 require "action_mailer/railtie"
@@ -42,6 +42,8 @@ module Homeland
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password,:password_confirm]
+    
+    config.mongoid.logger = Logger.new($stdout, :warn)
   end
 end
 I18n.locale = 'zh-CN'

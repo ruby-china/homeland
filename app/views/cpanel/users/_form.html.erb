@@ -1,8 +1,8 @@
 <%= form_for([:cpanel,@user], :html => { :enctype =>  "multipart/form-data" }) do |f| %>
    <%= render 'shared/error_messages', :target => @user %>
   <div class="field">
-    <%= f.label :username %><br />
-    <%= f.text_field :username, :class => "short" %>
+    <%= f.label :login %><br />
+    <%= f.text_field :login, :class => "short" %>
   </div>
   <div class="field">
     <%= f.label :email %><br />
@@ -44,7 +44,7 @@
     <%= f.label :avatar %><br />
     <%= f.file_field :avatar %>
   </div>
-  <% if !@user.avatar_file_name.blank? %>
+  <% if !@user.avatar.blank? %>
   <div class="field">
     <label>预览</label><br />
     <img src="<%= @user.avatar.normal.url %>" />
@@ -57,11 +57,7 @@
   <div class="field">
     <%= f.label :state %><br />
     <%= f.select :state, User::STATE.collect { |s| [s[0],s[1]] } %>
-  </div>
-  <div class="field">
-    <%= f.label :last_login_at %><br />
-    <%= f.text_field :last_login_at, :readonly => true %>
-  </div>
+  </div>  
   <div class="actions">
     <button class="button submit">保存</button> <%= link_to 'Back', cpanel_users_path %>
   </div>

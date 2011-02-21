@@ -42,10 +42,10 @@ class Cpanel::UsersController < Cpanel::ApplicationController
   # POST /users
   # POST /users.xml
   def create
-    @user = User.new(params[:user])
+    @user = User.new(params[:user])    
     @user.email = params[:user][:email]
     @user.name = params[:user][:name]
-    @user.username = params[:user][:username]
+    @user.login = params[:user][:login]
     @user.state = params[:user][:state]
     @user.verified = params[:user][:verified]
 
@@ -66,7 +66,7 @@ class Cpanel::UsersController < Cpanel::ApplicationController
     @user = User.find(params[:id])
     @user.email = params[:user][:email]
     @user.name = params[:user][:name]
-    @user.username = params[:user][:username]
+    @user.login = params[:user][:login]
     @user.state = params[:user][:state]
     @user.verified = params[:user][:verified]
     

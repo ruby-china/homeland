@@ -1,0 +1,68 @@
+<% content_for :sitemap do %><span class="current">设置</span><% end %>
+<div class="leftbox">
+<div class="box">
+	<h1>个人资料</h1>
+  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :enctype =>  "multipart/form-data" }) do |f| %>
+	<%= render "shared/error_messages", :target => resource %> 
+	<div class="field">
+		<h3><%= @user.name %></h3>
+	</div>
+  <div class="field">
+	  <%= f.label :email %><br />
+	  <%= f.text_field :email %>
+	</div>
+	<div class="field">
+	  <%= f.label :location %><br />
+	  <%= f.text_field :location %>
+	</div>
+  <div class="field">
+    <%= f.label :avatar %><br />
+    <%= f.file_field :avatar %>
+  </div>
+  <div class="field">
+    <label>预览</label><br />
+    <%= image_tag(@user.avatar.large.url) %>
+  </div>
+	<div class="field">
+		<%= f.label :qq %><br />
+		<%= f.text_field :qq %>
+	</div>
+	<div class="field">
+		<%= f.label :website %><br />
+		<%= f.text_field :website %>
+	</div>
+	<div class="field">
+		<%= f.label :tagline %><br />
+		<%= f.text_field :tagline %>
+	</div>
+	<div class="field">
+		<%= f.label :bio %><br />
+		<%= f.text_area :bio, :size => "20x8" %>
+	</div>
+  <div class="field"><%= f.label :password %> <i>(如果你不想修改，请留空)</i><br />
+  <%= f.password_field :password %></div>
+  <div class="field"><%= f.label :password_confirmation %><br />
+  <%= f.password_field :password_confirmation %></div>
+  <div class="field"><%= f.label :current_password %> <i>(修改资料需要输入旧密码)</i><br />
+  <%= f.password_field :current_password %></div>
+	<div class="actions">
+		<%= f.submit "保存", :class => "button submit" %>
+	</div>
+	<% end %>
+</div>
+</div>
+<div class="sidebar">
+  <div class="box">
+		<h2>绑定其他帐号用于登陆</h2>
+		<ul>
+			<li><a href="/auth/google">Google帐号</a></li>
+			<li><a href="/auth/github">Github帐号</a></li>
+		</ul>
+	</div>
+  <div class="box">
+    <h2>删除我的帐号</h2>
+    <p>不喜欢? <%= link_to "删除此帐号", registration_path(resource_name), :confirm => "删除后无法恢复，你确定吗?", :method => :delete %>.</p>
+  </div>
+  
+</div>
+

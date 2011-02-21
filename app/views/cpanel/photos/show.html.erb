@@ -12,13 +12,9 @@
   <%= @photo.user.name %>
 </p>
 <p>
-  <b>Image file size:</b>
-  <%= @photo.image_file_size %>
-</p>
-<p>
-	<%= image_tag(@photo.image(:normal)) %>
+	<%= image_tag(@photo.image.normal.url) %>
 </p>
 
 
-<%= link_to 'Edit', edit_photo_path(@photo) %> |
-<%= link_to 'Back', photos_path %>
+<%= link_to 'Edit', edit_cpanel_photo_path(@photo) %> |
+<%= link_to 'Back', cpanel_photos_path %>

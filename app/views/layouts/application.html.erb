@@ -22,17 +22,8 @@
             <a href="/"><%= APP_CONFIG['app_name'] %></a> <em>Beta</em>
           </td>
           <td id="userbar">
-						<% if @current_user %>
-	 	           你好 <strong><%= user_name_tag @current_user %></strong>, 
-              <a<%= " class='actived'" if params[:controller] == "cpanel/notes" %> href="<%= notes_path %>">记事本</a> | 
-							<%= link_to "设置", setting_path, :class => params[:controller] == "user/edit" ? 'actived' : "" %> | 
-							<% if admin? @current_user %>
-							<a href="/cpanel">后台</a> | 
-							<% end %>
-							<a href="<%= logout_path %>">登出</a>
-						<% else %>
-							<a href="<%= register_path %>">加入社区</a> | <a href="<%= login_path %>">登录</a>
-						<% end %>
+						<%= render 'devise/menu/registration_items' %>
+            <%= render 'devise/menu/login_items' %>
           </td>
         </tr>
       </table>

@@ -31,13 +31,16 @@ GEM
     addressable (2.2.4)
     arel (1.0.1)
       activesupport (~> 3.0.0)
-    authlogic (2.1.6)
-      activesupport
+    bcrypt-ruby (2.1.4)
     bson (1.2.2)
     bson_ext (1.2.2)
     builder (2.1.2)
     carrierwave (0.5.0)
       activesupport (~> 3.0.0)
+    devise (1.2.rc)
+      bcrypt-ruby (~> 2.1.2)
+      orm_adapter (~> 0.0.2)
+      warden (~> 1.0.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
     faraday (0.5.5)
@@ -106,6 +109,7 @@ GEM
       oa-more (= 0.2.0.beta3)
       oa-oauth (= 0.2.0.beta3)
       oa-openid (= 0.2.0.beta3)
+    orm_adapter (0.0.4)
     paperclip (2.3.8)
       activerecord
       activesupport
@@ -144,15 +148,17 @@ GEM
     treetop (1.4.8)
       polyglot (>= 0.3.1)
     tzinfo (0.3.23)
+    warden (1.0.3)
+      rack (>= 1.0.0)
     will_paginate (3.0.pre)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  authlogic
   bson_ext (~> 1.2.2)
   carrierwave
+  devise (= 1.2.rc)
   memcache-client
   mini_magick
   mongo-rails-instrumentation

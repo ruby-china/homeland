@@ -10,7 +10,6 @@
     <td>Location</td>
     <td>State</td>
     <td>QQ</td>
-    <td>Last logined at</td>
     <td></td>
   </tr>
 
@@ -21,7 +20,6 @@
     <td><%= user.location %></td>
     <td><%= user.state %></td>
     <td><%= user.qq %></td>
-    <td><%= user.last_login_at %></td>
     <td><%= link_to 'Edit', edit_cpanel_user_path(user) %>
     <%= link_to 'Destroy', cpanel_user_path(user), :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>

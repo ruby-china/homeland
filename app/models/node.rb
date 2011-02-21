@@ -30,6 +30,7 @@ class Node
   end
 
   # 取得用户最近访问的节点
+  # TODO: 这里有 Bug, 一个节点能取出，两个以上就不行了，自从 mongoid 加入后出现的问题
   def self.get_user_last_visites(user_id)
     last_visites = Rails.cache.read("Node:get_user_last_visites:#{user_id}")
     if last_visites.blank?

@@ -9,8 +9,8 @@ class TopicsController < ApplicationController
    if !fragment_exist? "topic/init_list_sidebar/hot_nodes"
       @hot_nodes = Node.hots.limit(20)
     end
-    if @current_user
-      @user_last_nodes = Node.find_last_visited_by_user(@current_user.id)
+    if current_user
+      @user_last_nodes = Node.find_last_visited_by_user(current_user.id)
     end 
   end
 
@@ -31,8 +31,8 @@ class TopicsController < ApplicationController
 
   def node
     @node = Node.find(params[:id])
-    if @current_user
-      Node.set_user_last_visited(@current_user.id, @node.id)
+    if current_user
+      Node.set_user_last_visited(current_user.id, @node.id)
     end
     @topics = @node.topics.last_actived.paginate(:page => params[:page],:per_page => 50)
     set_seo_meta("#{@node.name} &raquo; 社区论坛","#{APP_CONFIG['app_name']}社区#{@node.name}",@node.summary)
@@ -53,9 +53,9 @@ class TopicsController < ApplicationController
 
   def show
     @topic = Topic.find(params[:id])
-    if @current_user
-      Node.set_user_last_visited(@current_user.id, @topic.node_id)
-      @topic.user_readed(@current_user.id)
+    if current_user
+      Node.set_user_last_visited(current_user.id, @topic.node_id)
+      @topic.user_readed(current_user.id)
     end
     @node = @topic.node
     @replies = @topic.replies.all
@@ -77,7 +77,7 @@ class TopicsController < ApplicationController
   def reply
     @topic = Topic.find(params[:id])
     @reply = @topic.replies.build(params[:reply])        
-    @reply.user_id = @current_user.id
+    @reply.user_id = current_user.id
     if @reply.save
       flash[:notice] = "回复成功。"
     else
@@ -89,7 +89,7 @@ class TopicsController < ApplicationController
   # GET /topics/1/edit
   def edit
     @topic = Topic.find(params[:id])
-    if @topic.user_id != @current_user.id
+    if @topic.user_id != current_user.id
       return render_404
     end
     set_seo_meta("改帖子 &raquo; 社区论坛")
@@ -100,7 +100,7 @@ class TopicsController < ApplicationController
   def create
     pt = params[:topic]
     @topic = Topic.new(pt)
-    @topic.user_id = @current_user.id
+    @topic.user_id = current_user.id
     @topic.node_id = params[:node] || pt[:node_id]
 
     if @topic.save
@@ -114,7 +114,7 @@ class TopicsController < ApplicationController
   # PUT /topics/1.xml
   def update
     @topic = Topic.find(params[:id])
-    if @topic.user_id != @current_user.id
+    if @topic.user_id != current_user.id
       return render_404
     end
     pt = params[:topic]
@@ -133,7 +133,7 @@ class TopicsController < ApplicationController
   # DELETE /topics/1.xml
   def destroy
     @topic = Topic.find(params[:id])
-    if @topic.user_id != @current_user.id
+    if @topic.user_id != current_user.id
       return render_404
     end
     @topic.destroy

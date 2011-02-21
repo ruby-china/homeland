@@ -1,0 +1,39 @@
+"zh-CN":
+  errors:
+    messages:
+      not_found: "没有找到"
+      already_confirmed: "已经确认"
+      not_locked: "没有锁定"
+      not_saved: "有 %{count} 个错误发生导致「%{model}」无法被保存。"
+  devise:
+    failure:
+      unauthenticated: '继续操作前请注册或者登录.'
+      unconfirmed: '请先激活您的帐号'
+      locked: '您的帐号已被锁定.'
+      invalid: '邮箱或密码错误'
+      invalid_token: '认证码无效.'
+      timeout: '您已登录超时，请重新登录.'
+      inactive: '您还没有激活帐户.'
+    sessions:
+      signed_in: '登录成功.'
+      signed_out: '退出成功.'
+    passwords:
+      send_instructions: '几分后，您将收到重置密码的电子邮件.'
+      updated: '您的密码已修改成功，请重新登录.'
+    confirmations:
+      send_instructions: '几分后，您将收到帐号激活的电子邮件.'
+      confirmed: '您的帐号已经激活，请登录.'
+    registrations:
+      signed_up: '您的帐号已注册成功，如无意外，您将地收到一封确认邮件.'
+      updated: '帐号资料更新成功.'
+      destroyed: '再见！您的帐户已成功注销。我们希望很快可以再见到您.'
+    unlocks:
+      send_instructions: '几分后，您将收到一封帐号解锁的邮件.'
+      unlocked: '您的帐号已成功解锁，请登录.'
+    mailer:
+      confirmation_instructions:
+        subject: '确认信息'
+      reset_password_instructions:
+        subject: '重置密码信息'
+      unlock_instructions:
+        subject: '解锁信息'

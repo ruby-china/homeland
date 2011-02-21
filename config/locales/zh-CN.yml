@@ -168,32 +168,33 @@
           one: "有 1 个错误发生导致「%{model}」无法被保存。"
           other: "有 %{count} 个错误发生导致「%{model}」无法被保存。"
         body: "如下字段出现错误："
-
-  authlogic:
-      error_messages:
-        login_blank: '不能为空。'
-        login_not_found: '用户名或密码不正确。'
-        login_invalid: '格式不正确。'
-        consecutive_failed_logins_limit_exceeded: '登录失败次数过多，帐号已被锁定。'
-        email_invalid: '格式不正确。'
-        password_blank: '不能为空'
-        password_invalid: '不正确。'
-        not_active: '帐号还未激活。'
-        not_confirmed: '帐号还未确认信息。'
-        not_approved: '帐号已被限制。'
-        no_authentication_details: You did not provide any details for authentication.
-      models:
-        user_session: '登录信息'
-      attributes:
-        user_session:
-          login: '用户名'
-          email: 'Email'
-          password: '密码'
-          remember_me: '记住登录状态'
           
   mongoid:
     errors:
+      models:
+        user: 用户        
       messages:
+        inclusion: "不包含于列表中"
+        exclusion: "是保留关键字"
+        invalid: "是无效的"
+        confirmation: "与确认值不匹配"
+        accepted: "必须是可被接受的"
+        empty: "不能留空"
+        blank: "不能为空字符"
+        too_long: "过长（最长为 %{count} 个字符）"
+        too_short: "过短（最短为 %{count} 个字符）"
+        wrong_length: "长度非法（必须为 %{count} 个字符）"
+        taken: "已经被使用"
+        not_a_number: "不是数字"
+        not_an_integer: "必须是整数"
+        greater_than: "必须大于 %{count}"
+        greater_than_or_equal_to: "必须大于或等于 %{count}"
+        equal_to: "必须等于 %{count}"
+        less_than: "必须小于 %{count}"
+        less_than_or_equal_to: "必须小于或等于 %{count}"
+        odd: "必须为单数"
+        even: "必须为双数"
+        record_invalid: "校验失败: %{errors}"
         taken:
           已占用
         document_not_found:

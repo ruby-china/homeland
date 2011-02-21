@@ -1,0 +1,19 @@
+<% content_for :sitemap do %><span class="current">忘记了密码</span><% end %>
+<div class="leftbox">
+  <div class="box">
+    <h1>忘记了密码</h1>
+    <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
+    <%= render "shared/error_messages", :target => resource %> 
+      
+    <div class="field"><%= f.label :login %><br />
+      <%= f.text_field :login %></div>
+      <div class="field">此功能将会发送一个找回密码的特别链接到你的邮箱</div>
+    <div class="field"><button type="submit" class="button submit">找回密码</button></div>
+    <% end %>
+  </div>
+</div>
+<div class="sidebar">
+  <div class="box">
+    <%= render :partial => "devise/shared/links" %>
+  </div>
+</div>

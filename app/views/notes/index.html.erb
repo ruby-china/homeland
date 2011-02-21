@@ -4,7 +4,7 @@
 <div class="leftbox clearfix">
   <div id="notes" class="box">
     <h1>我的记事本</h1>
-    <div class="total">已有 <%= @current_user.notes.count %> 条记事</div>
+    <div class="total">已有 <%= current_user.notes.count %> 条记事</div>
     <% if @notes.blank? %>
       <div style="text-align:center; padding:60px 0;">你还没有创建过一个文件。</div>
     <% else %>

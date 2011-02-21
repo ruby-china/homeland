@@ -8,7 +8,7 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem "mongoid-paperclip", :require => "mongoid_paperclip"
 gem 'mongo-rails-instrumentation'
-gem 'authlogic'
+gem "devise", "1.2.rc"
 gem 'will_paginate', '3.0.pre'  
 gem 'memcache-client'
 gem 'omniauth', '0.2.0.beta3'

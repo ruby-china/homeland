@@ -1,0 +1,10 @@
+<% if user_signed_in? %>
+你好 <strong><a href="<%= user_path(current_user.login)%>"><%= current_user.name %></a></strong>,
+<% if not params[:controller].match(/cpanel/) %>
+  <a href="<%= notes_path %>">记事本</a> | 
+  <%= link_to('设置', edit_user_registration_path) %> |
+  <% if admin? current_user %><a href="/cpanel">后台</a> | <% end %>
+<% end %>
+<% else %>
+  <%= link_to('加入社区', new_user_registration_path)  %>  
+<% end %>

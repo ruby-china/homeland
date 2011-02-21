@@ -29,7 +29,7 @@ class PhotosController < ApplicationController
   # GET /photos/1/edit
   def edit
     @photo = Photo.find(params[:id])
-    if @photo.user_id != @current_user.id
+    if @photo.user_id != current_user.id
       render_404
     end
   end
@@ -58,7 +58,7 @@ class PhotosController < ApplicationController
     
       @photos = []
       photos.each  do |p|
-        p.user_id = @current_user.id
+        p.user_id = current_user.id
         p.title = "未命名"
         if not p.save
           redirect_to(tiny_new_photos_path, :notice => p.errors.full_messages.join("<br />"))
@@ -83,7 +83,7 @@ class PhotosController < ApplicationController
   # PUT /photos/1.xml
   def update
     @photo = Photo.find(params[:id])
-    if @photo.user_id != @current_user.id
+    if @photo.user_id != current_user.id
       render_404
     end
     if @photo.update_attributes(params[:photo])
@@ -97,7 +97,7 @@ class PhotosController < ApplicationController
   # DELETE /photos/1.xml
   def destroy
     @photo = Photo.find(params[:id])
-    if @photo.user_id != @current_user.id
+    if @photo.user_id != current_user.id
       render_404
     end
     @photo.destroy

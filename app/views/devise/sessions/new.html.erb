@@ -1,0 +1,25 @@
+<% content_for :sitemap do %><span class="current">加入社区</span><% end %>
+<div class="leftbox">
+	<div class="box">
+    <h1>登陆</h1>
+      <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+      <div class="field"><%= f.label :login %><br />
+        <%= f.text_field :login %>
+      </div>
+      <div class="field">
+        <%= f.label :password %><br />
+        <%= f.password_field :password %>
+      </div>          
+      <% if devise_mapping.rememberable? -%>
+      <div class="field"><%= f.check_box :remember_me, :style => "width:auto;" %> <%= f.label :remember_me %></div>
+      <% end -%>
+      <div class="field"><button type="submit" class="button submit">登陆</button></div>
+    <% end %>
+  </div>
+</div>
+<div class="sidebar">
+  <div class="box">
+    <h2>还没有帐号？</h2>
+    <%= render :partial => "devise/shared/links" %>
+  </div>
+</div>

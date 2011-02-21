@@ -27,7 +27,7 @@ class Cpanel::PhotosController < Cpanel::ApplicationController
   # POST /photos.xml
   def create
     @photo = Photo.new(params[:photo])
-    @photo.user_id = @current_user.id
+    @photo.user_id = current_user.id
     if @photo.save
       redirect_to(cpanel_photo_path(@photo), :notice => 'Photo was successfully created.')
     else

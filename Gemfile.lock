@@ -65,8 +65,7 @@ GEM
       mongo (~> 1.2)
       tzinfo (~> 0.3.22)
       will_paginate (~> 3.0.pre)
-    mongoid-paperclip (0.0.3)
-      paperclip (~> 2.3.6)
+    mongoid-eager-loading (0.3.1)
     multi_json (0.0.5)
     multipart-post (1.1.0)
     net-ldap (0.1.1)
@@ -163,7 +162,7 @@ DEPENDENCIES
   mini_magick
   mongo-rails-instrumentation
   mongoid (= 2.0.0.rc.7)
-  mongoid-paperclip
+  mongoid-eager-loading
   oa-openid (= 0.2.0.beta3)
   omniauth (= 0.2.0.beta3)
   paperclip

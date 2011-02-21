@@ -7,6 +7,7 @@ gem 'paperclip'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'mongo-rails-instrumentation'
+gem "mongoid-eager-loading"
 gem "devise", "1.2.rc"
 gem 'will_paginate', '3.0.pre'  
 gem 'memcache-client'

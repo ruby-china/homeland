@@ -36,6 +36,8 @@ GEM
     bson (1.2.2)
     bson_ext (1.2.2)
     builder (2.1.2)
+    carrierwave (0.5.0)
+      activesupport (~> 3.0.0)
     erubis (2.6.6)
       abstract (>= 1.0.0)
     faraday (0.5.5)
@@ -49,8 +51,12 @@ GEM
       treetop (>= 1.4.5)
     memcache-client (1.8.5)
     mime-types (1.16)
+    mini_magick (3.1)
+      subexec (~> 0.0.4)
     mongo (1.2.2)
       bson (>= 1.2.2)
+    mongo-rails-instrumentation (0.1.0)
+      rails (~> 3.0.0)
     mongoid (2.0.0.rc.7)
       activemodel (~> 3.0)
       mongo (~> 1.2)
@@ -133,6 +139,7 @@ GEM
     ruby-openid-apps-discovery (1.2.0)
       ruby-openid (>= 2.1.7)
     rubyntlm (0.1.1)
+    subexec (0.0.4)
     thor (0.14.0)
     treetop (1.4.8)
       polyglot (>= 0.3.1)
@@ -145,7 +152,10 @@ PLATFORMS
 DEPENDENCIES
   authlogic
   bson_ext (~> 1.2.2)
+  carrierwave
   memcache-client
+  mini_magick
+  mongo-rails-instrumentation
   mongoid (= 2.0.0.rc.7)
   mongoid-paperclip
   oa-openid (= 0.2.0.beta3)

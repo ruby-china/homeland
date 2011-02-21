@@ -4,7 +4,10 @@ gem 'rails', '3.0.0'
 gem "mongoid", "2.0.0.rc.7"
 gem "bson_ext", "~> 1.2.2"
 gem 'paperclip'
+gem 'carrierwave'
+gem 'mini_magick'
 gem "mongoid-paperclip", :require => "mongoid_paperclip"
+gem 'mongo-rails-instrumentation'
 gem 'authlogic'
 gem 'will_paginate', '3.0.pre'  
 gem 'memcache-client'

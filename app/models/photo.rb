@@ -5,8 +5,7 @@ class Photo
   include Mongoid::Paperclip
   
   field :title
-  field :image_file_name
-  field :image_file_size, :type => Integer, :default => 0
+  field :image  
   
   belongs_to :user
   
@@ -14,15 +13,17 @@ class Photo
   validates_presence_of :title
   
   # 封面图
-  has_mongoid_attached_file :image,
-    :default_style => :normal,
-    :styles => {
-      :small => "100>",
-      :normal => "680>",
-    },
-    :url => "#{APP_CONFIG['upload_url']}/:class/:attachment/:hashed_path/:id_:style.jpg",
-    :path => "#{APP_CONFIG['upload_root']}/:class/:attachment/:hashed_path/:id_:style.jpg",
-    :default_url => "photo/:style.jpg"
+  mount_uploader :image, PhotoUploader
+  
+  # has_mongoid_attached_file :image,
+  #   :default_style => :normal,
+  #   :styles => {
+  #     :small => "100>",
+  #     :normal => "680>",
+  #   },
+  #   :url => "#{APP_CONFIG['upload_url']}/:class/:attachment/:hashed_path/:id_:style.jpg",
+  #   :path => "#{APP_CONFIG['upload_root']}/:class/:attachment/:hashed_path/:id_:style.jpg",
+  #   :default_url => "photo/:style.jpg"
     
   before_save :default_for_title
   def default_for_title

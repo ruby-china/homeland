@@ -47,7 +47,7 @@
   <% if !@user.avatar_file_name.blank? %>
   <div class="field">
     <label>预览</label><br />
-    <img src="<%= @user.avatar(:normal) %>" />
+    <img src="<%= @user.avatar.normal.url %>" />
   </div>
   <% end %>
   <div class="field">

@@ -24,7 +24,7 @@ class TopicsController < ApplicationController
   end
   
   def feed
-    @topics = Topic.recents.all(:limit => 20)
+    @topics = Topic.recents.limit(20)
     response.headers['Content-Type'] = 'application/rss+xml'
     render :layout => false
   end

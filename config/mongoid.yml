@@ -1,0 +1,24 @@
+defaults: &defaults
+  host: '127.0.0.1'
+  # slaves:
+  #   - host: slave1.local
+  #     port: 27018
+  #   - host: slave2.local
+  #     port: 27019
+
+development:
+  <<: *defaults
+  database: homeland_development
+
+test:
+  <<: *defaults
+  database: homeland_test
+
+# set these environment variables on your prod server
+production:
+  database: homeland
+  host: '127.0.0.1'
+  # port: 
+  # username: ''
+  # password: ''
+  

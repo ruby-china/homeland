@@ -3,7 +3,7 @@ class Cpanel::RepliesController < Cpanel::ApplicationController
   # GET /replies
   # GET /replies.xml
   def index
-    @replies = Reply.paginate :page => params[:page], :per_page => 30, :order => "id desc",:include => [:topic,:user]
+    @replies = Reply.order_by('id desc').paginate :page => params[:page], :per_page => 30
 
     respond_to do |format|
       format.html # index.html.erb

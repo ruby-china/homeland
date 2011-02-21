@@ -4,6 +4,10 @@
 		<h1>加入<%= APP_CONFIG['app_name'] %>社区</h1>
 		<%= form_for(@user) do |f| %>
 		<%= render "shared/error_messages", :target => @user %> 
+    <div class="field">
+			<%= f.label :username %><br />
+			<%= f.text_field :username %>
+		</div>  
 		<div class="field">
 			<%= f.label :email %><br />
 			<%= f.text_field :email %>

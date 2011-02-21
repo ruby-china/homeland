@@ -1,6 +1,12 @@
-class Authorization < ActiveRecord::Base
-  belongs_to :user
-  validates_presence_of :user_id, :uid, :provider
+class Authorization
+  include Mongoid::Document
+  include Mongoid::Timestamps
+  
+  field :provider
+  field :uid
+  embedded_in :user, :inverse_of => :authorizations
+    
+  validates_presence_of :uid, :provider
   validates_uniqueness_of :uid, :scope => :provider
   
   def self.find_from_hash(hash)

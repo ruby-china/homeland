@@ -1,9 +1,19 @@
 # coding: utf-8  
-class Node < ActiveRecord::Base
+class Node
+  include Mongoid::Document
+  include Mongoid::Timestamps
+  
+  field :name
+  field :summary
+  field :sort, :type => Integer, :default => 0
+  field :topics_count, :type => Integer, :default => 0
+  
+  has_many :topics
+  belongs_to :section
+  
   validates_presence_of :name, :summary
   validates_uniqueness_of :name
-  belongs_to :section
-  has_many :topics
+  
 
   scope :hots, :order => "topics_count desc"
 
@@ -34,7 +44,7 @@ class Node < ActiveRecord::Base
     if ids.blank?
       return []
     else
-      find(:all, :limit => limit, :conditions => "id in (#{ids.join(',')})")
+      limit(limit).all_in(:_id => ids)
     end
   end
 end

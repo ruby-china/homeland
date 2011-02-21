@@ -1,15 +1,5 @@
-<%= form_for(@photo, :url => (@photo.id.blank? ? cpanel_photos_path : cpanel_photo_path(@photo.id)) , :html => { :enctype =>  "multipart/form-data" }) do |f| %>
-  <% if @photo.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@photo.errors.count, "error") %> prohibited this photo from being saved:</h2>
-
-      <ul>
-      <% @photo.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= form_for([:cpanel,@photo] , :html => { :enctype =>  "multipart/form-data" }) do |f| %>
+  <%= render 'shared/error_messages', :target => @photo %>
 
   <div class="field">
     <%= f.label :title %><br />

@@ -1,16 +1,9 @@
-<%= form_for(@user, :url => (@user.id.blank? ? cpanel_users_path : cpanel_user_path(@user.id)) , :html => { :enctype =>  "multipart/form-data" }) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+<%= form_for([:cpanel,@user], :html => { :enctype =>  "multipart/form-data" }) do |f| %>
+   <%= render 'shared/error_messages', :target => @user %>
+  <div class="field">
+    <%= f.label :username %><br />
+    <%= f.text_field :username, :class => "short" %>
+  </div>
   <div class="field">
     <%= f.label :email %><br />
     <%= f.text_field :email, :class => "middle" %>
@@ -54,7 +47,7 @@
   <% if !@user.avatar_file_name.blank? %>
   <div class="field">
     <label>预览</label><br />
-    <img src="<%= @user.avatar(:normal) %>" />
+    <img src="<%= @user.avatar.normal.url %>" />
   </div>
   <% end %>
   <div class="field">
@@ -70,6 +63,6 @@
     <%= f.text_field :last_login_at, :readonly => true %>
   </div>
   <div class="actions">
-    <button class="submit">保存</button>
+    <button class="button submit">保存</button> <%= link_to 'Back', cpanel_users_path %>
   </div>
 <% end %>

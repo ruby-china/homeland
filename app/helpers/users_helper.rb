@@ -13,6 +13,7 @@ module UsersHelper
   
 
   def user_avatar_tag(user,size = :normal)
-    raw("<a href=\"#{user_path(user.id)}\" title=\"#{user.name}\">#{image_tag(user.avatar(size))}</a>")
+    url = eval("user.avatar.#{size.to_s}.url")
+    raw("<a href=\"#{user_path(user.id)}\" title=\"#{user.name}\">#{image_tag(url)}</a>")
   end
 end

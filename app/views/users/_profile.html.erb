@@ -15,7 +15,7 @@
   </div>
   <div class="field">
     <label>预览</label><br />
-    <%= image_tag(@user.avatar(:large)) %>
+    <%= image_tag(@user.avatar.large.url) %>
   </div>
 	<div class="field">
 		<%= f.label :qq %><br />

@@ -2,8 +2,6 @@
 class User
   include Mongoid::Document
   include Mongoid::Timestamps
-  include Mongoid::Paperclip
-  
   
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable

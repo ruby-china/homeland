@@ -9,7 +9,7 @@ class User
   field :location
   field :bio
   field :website
-  field :avatar_file_name
+  field :avatar
   field :verified, :type => Boolean, :default => false
   field :state, :type => Integer, :default => 1
   field :qq
@@ -64,16 +64,7 @@ class User
   end
   
   # 封面图
-  has_mongoid_attached_file :avatar,
-    :default_style => :normal,
-    :styles => {
-      :small => "16x16#",
-      :normal => "48x48#",
-      :large => "80x80#",
-    },
-    :url => "#{APP_CONFIG['upload_url']}/:class/:attachment/:hashed_path/:id_:style.jpg",
-    :path => "#{APP_CONFIG['upload_root']}/:class/:attachment/:hashed_path/:id_:style.jpg",
-    :default_url => "avatar/:style.jpg"    
+  mount_uploader :avatar, AvatarUploader
 
   STATE = {
     :normal => 1,

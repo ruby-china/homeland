@@ -4,8 +4,7 @@ class Topic
   include Mongoid::Timestamps
   
   field :title
-  field :body  
-  field :last_reply_user_id , :type => Integer, :default => 0
+  field :body    
   field :replied_at , :type => DateTime
   field :source  
   field :replies_count, :type => Integer, :default => 0
@@ -20,8 +19,8 @@ class Topic
   
 
   # scopes
-  scope :last_actived, :order => "replied_at desc"
-  scope :recents, :order => "id desc"
+  scope :last_actived, desc("replied_at").desc("created_at")
+  scope :recents, desc("created_at")
   before_save :set_replied_at
   def set_replied_at
     self.replied_at = Time.now

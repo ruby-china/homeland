@@ -18,7 +18,7 @@
 						<li><label>QQ:</label><%= @user.qq %></li>
 					</ul>
 				</td>
-				<td valign="top" style="width:80px; padding-right:6px;"><%= image_tag(@user.avatar(:large)) %></td>
+				<td valign="top" style="width:80px; padding-right:6px;"><%= image_tag(@user.avatar.large.url) %></td>
 			</tr>
 		</table>
 	</div>

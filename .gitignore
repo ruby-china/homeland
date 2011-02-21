@@ -4,6 +4,7 @@ log/*.log
 tmp/**/*
 config/database.yml
 config/config.yml
+config/mongoid.yml
 public/uploads/**/*
 public/javascripts/cached_*
 public/stylesheets/cached_*

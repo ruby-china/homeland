@@ -7,7 +7,7 @@ class TopicsController < ApplicationController
   private
   def init_list_sidebar 
    if !fragment_exist? "topic/init_list_sidebar/hot_nodes"
-      @hot_nodes = Node.hots.limit(20)
+      @hot_nodes = Node.hots.includes(:node).limit(20)
     end
     if current_user
       @user_last_nodes = Node.find_last_visited_by_user(current_user.id)
@@ -18,8 +18,8 @@ class TopicsController < ApplicationController
   # GET /topics
   # GET /topics.xml
   def index
-    @topics = Topic.last_actived.limit(10)
-    @sections = Section.find(:all)
+    @topics = Topic.last_actived.includes(:user,:node).limit(10)
+    @sections = Section.all.includes(:nodes)
     set_seo_meta("论坛","#{APP_CONFIG['app_name']}论坛,#{APP_CONFIG['app_name']}小区论坛,#{APP_CONFIG['app_name']}业主论坛")
   end
   

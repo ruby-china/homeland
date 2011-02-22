@@ -6,8 +6,8 @@ gem "bson_ext", "~> 1.2.2"
 gem 'paperclip'
 gem 'carrierwave'
 gem 'mini_magick'
-gem "mongoid-paperclip", :require => "mongoid_paperclip"
 gem 'mongo-rails-instrumentation'
+gem "mongoid-eager-loading"
 gem "devise", "1.2.rc"
 gem 'will_paginate', '3.0.pre'  
 gem 'memcache-client'

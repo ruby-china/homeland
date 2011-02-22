@@ -1,9 +1,7 @@
 # coding: utf-8  
 class Photo  
   include Mongoid::Document
-  include Mongoid::Timestamps
-  include Mongoid::Paperclip
-  
+  include Mongoid::Timestamps  
   field :title
   field :image  
   

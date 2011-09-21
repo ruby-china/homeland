@@ -10,6 +10,6 @@ gem "mongoid-eager-loading",'0.3.1'
 gem 'mongoid_auto_increment_id', "0.2"
 gem "devise", "1.4.5"
 gem 'will_paginate', '3.0.pre2'  
-gem 'memcache-client'
 gem 'omniauth', '0.2.6'
 gem "oa-openid", '0.2.6'
+gem 'redis-store', '1.0.0.1'

@@ -5,7 +5,7 @@ Rails 3 + MongoDb
 h2. Install
 
   * You need install *Ruby 1.9.2*, *Rubygems* and *Rails 3* first.
-  * Install *Memcached*, *MongoDb* 
+  * Install *Redis*, *MongoDb* 
     
     $ cp config/config.yml.default config/config.yml  # Need change it.
     $ cp config/mongoid.yml.default config/mongoid.yml  # Need change it.

@@ -2,12 +2,12 @@
 class Reply
   include Mongoid::Document
   include Mongoid::Timestamps
-  
+
   field :body
   field :source  
   
-  belongs_to :user, :counter_cache => true, :inverse_of => :replies
-  belongs_to :topic, :counter_cache => true, :inverse_of => :replies
+  belongs_to :user, :inverse_of => :replies
+  belongs_to :topic, :inverse_of => :replies
   
   attr_protected :user_id, :topic_id
 

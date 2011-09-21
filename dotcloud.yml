@@ -1,0 +1,4 @@
+www:
+  type: rails
+db:
+  type: mongodb

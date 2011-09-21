@@ -20,7 +20,7 @@ class Topic
 
   # scopes
   scope :last_actived, desc("replied_at").desc("created_at")
-  scope :recents, desc("created_at")
+  scope :recents, desc("id")
   before_save :set_replied_at
   def set_replied_at
     self.replied_at = Time.now

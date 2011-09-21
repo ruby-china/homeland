@@ -1,7 +1,7 @@
 class Authorization
   include Mongoid::Document
   include Mongoid::Timestamps
-  
+  identity :type => String
   field :provider
   field :uid
   embedded_in :user, :inverse_of => :authorizations

@@ -3,11 +3,12 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
   
+  
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  
   field :login
   field :name
+  field :email
   field :location
   field :bio
   field :website
@@ -24,10 +25,14 @@ class User
 	embeds_many :authorizations
     
   attr_accessor :password_confirmation
-  attr_accessible :login, :name, :location, :website, :avatar , :bio, :qq, :tagline, :email, :password, :password_confirmation
+  attr_accessible :remember_me,:login, :name, :location, :website, :avatar , :bio, :qq, :tagline, :email, :password, :password_confirmation
   
   validates_presence_of :login, :name  
   validates_uniqueness_of :login, :name
+  
+  has_and_belongs_to_many :following_nodes, :class_name => 'Node', :inverse_of => :followers
+  has_and_belongs_to_many :following, :class_name => 'User', :inverse_of => :followers
+  has_and_belongs_to_many :followers, :class_name => 'User', :inverse_of => :following
 
   def password_required?
     (authorizations.empty? || !password.blank?) && super  

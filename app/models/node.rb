@@ -2,7 +2,7 @@
 class Node
   include Mongoid::Document
   include Mongoid::Timestamps
-  
+
   field :name
   field :summary
   field :sort, :type => Integer, :default => 0
@@ -14,8 +14,9 @@ class Node
   validates_presence_of :name, :summary
   validates_uniqueness_of :name
   
+  has_and_belongs_to_many :followers, :class_name => 'User', :inverse_of => :following_nodes
 
-  scope :hots, :order => "topics_count desc"
+  scope :hots, desc(:topics_count)
 
    # 存放用户最近访问节点
   def self.set_user_last_visited(user_id,node_id)

@@ -1,4 +1,4 @@
 www:
-  type: rails
+  type: ruby
 db:
   type: mongodb

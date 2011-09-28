@@ -46,7 +46,9 @@ class TopicsController < ApplicationController
   end
 
   def search
-    @topics = Topic.search(params[:key], :page => params[:page], :per_page => 50)
+    result = Redis::Search.query("Topic", params[:key], :limit => 500)
+    ids = result.collect { |r| r["id"] }
+    @topics = Topic.find(ids).paginate(:page => params[:page], :per_page => 20)
     set_seo_meta("搜索#{params[:s]} &raquo; 社区论坛")
     render :action => "index"
   end

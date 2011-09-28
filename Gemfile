@@ -13,3 +13,6 @@ gem 'will_paginate', '3.0.pre2'
 gem 'omniauth', '0.2.6'
 gem "oa-openid", '0.2.6'
 gem 'redis-store', '1.0.0.1'
+gem "rmmseg-cpp-huacnlee", "0.2.8"
+gem 'redis-search', '0.5.2'
+gem "rails-i18n","0.1.8"

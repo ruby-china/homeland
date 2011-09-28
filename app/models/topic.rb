@@ -3,6 +3,7 @@ class Topic
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::SoftDelete
+  include Redis::Search
   
   field :title
   field :body    
@@ -18,6 +19,9 @@ class Topic
   attr_protected :user_id
   validates_presence_of :user_id, :title, :body, :node_id
   
+  redis_search_index(:title_field => :title,
+                     :score_field => :replied_at,
+                     :ext_fields => [:node_name,:replies_count])
 
   # scopes
   scope :last_actived, desc("replied_at").desc("created_at")
@@ -25,6 +29,11 @@ class Topic
   before_save :set_replied_at
   def set_replied_at
     self.replied_at = Time.now
+  end
+  
+  def node_name
+    return "" if self.node.blank?
+    self.node.name
   end
   
   # 检查用户是否看过

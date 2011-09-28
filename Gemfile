@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.0.5'
-gem "bson_ext", "1.3.1"
+gem "bson_ext", "1.4.0"
 gem "mongoid", "2.2.0"
 gem 'carrierwave', '0.5.0'
 gem 'mini_magick','3.3'

@@ -15,18 +15,6 @@
 	  <%= f.label :location %><br />
 	  <%= f.text_field :location %>
 	</div>
-  <div class="field">
-    <%= f.label :avatar %><br />
-    <%= f.file_field :avatar %>
-  </div>
-  <div class="field">
-    <label>预览</label><br />
-    <%= image_tag(@user.avatar.large.url) %>
-  </div>
-	<div class="field">
-		<%= f.label :qq %><br />
-		<%= f.text_field :qq %>
-	</div>
 	<div class="field">
 		<%= f.label :website %><br />
 		<%= f.text_field :website %>
@@ -52,6 +40,9 @@
 </div>
 </div>
 <div class="sidebar">
+  <div class="box" style="text-align:center;">
+    <%= user_avatar_tag(@user, 120, :link => false) %> <br />如需修改头像，请进入 <a href="http://www.gravatar.com">gravatar.com</a>
+  </div>
   <div class="box">
 		<h2>绑定其他帐号用于登陆</h2>
 		<ul>

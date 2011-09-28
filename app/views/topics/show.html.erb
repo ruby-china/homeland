@@ -44,7 +44,7 @@
 					</p>
 				</td>
 				<td class="avatar">
-					<%= image_tag(@topic.user.avatar.large.url) %>
+					<%= user_avatar_tag(@topic.user, :large, :link => false) %>
 				</td>
 		  </tr>
 		</table>

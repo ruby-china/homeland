@@ -4,23 +4,16 @@
 <% end %>
 <div class="leftbox">
 	<div class="userinfo box">
-		<table>
-			<tr>
-				<td valign="top">
-					<ul>
-						<li><label>大名:</label><h1><%= @user.name %></h1></li>
-						<li><label>房号:</label> <%= @user.location %></li>
-						<li><label>加入时间:</label> <%= I18n.l(@user.created_at.to_date, :format => :long) %></li>
-						<li><label>签名:</label><%= @user.tagline %></li>
-						<% if !@user.website.blank? %>
-						<li><label>个人主页:</label><a href="<%= @user.website %>" target="_blank" rel="nofollow"><%= @user.website %></a></li>
-						<% end %>
-						<li><label>QQ:</label><%= @user.qq %></li>
-					</ul>
-				</td>
-				<td valign="top" style="width:80px; padding-right:6px;"><%= image_tag(@user.avatar.large.url) %></td>
-			</tr>
-		</table>
+		<ul>
+		  <li style="text-align:right;">第 <%= @user.id %> 位会员</li>
+			<li><label>大名:</label><h1><%= @user.name %></h1></li>
+			<li><label>房号:</label> <%= @user.location %></li>
+			<li><label>加入时间:</label> <%= I18n.l(@user.created_at.to_date, :format => :long) %></li>
+			<li><label>签名:</label><%= @user.tagline %></li>
+			<% if !@user.website.blank? %>
+			<li><label>个人主页:</label><a href="<%= @user.website %>" target="_blank" rel="nofollow"><%= @user.website %></a></li>
+			<% end %>
+		</ul>
 	</div>
 	<% if !@user.bio.blank? %>
 	<div class="bio box">
@@ -49,6 +42,9 @@
 	
 </div>
 <div class="sidebar">
+  <div class="box" style="text-align:center;">
+    <%= user_avatar_tag(@user,120, :link => false) %>
+  </div>
 	<div class="last_replies box">
 		<h2>最近回复过的帖子</h2>
 		<ul>

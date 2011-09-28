@@ -25,10 +25,6 @@
     <%= f.text_field :location %>
   </div>
   <div class="field">
-    <%= f.label :qq %><br />
-    <%= f.text_field :qq %>
-  </div>
-  <div class="field">
     <%= f.label :tagline %><br />
     <%= f.text_field :tagline, :class => "middle" %>
   </div>
@@ -41,15 +37,9 @@
     <%= f.text_field :website %>
   </div>
   <div class="field">
-    <%= f.label :avatar %><br />
-    <%= f.file_field :avatar %>
+    <label>头像</label><br />
+    <%= user_avatar_tag(@user, :large) %>
   </div>
-  <% if !@user.avatar.blank? %>
-  <div class="field">
-    <label>预览</label><br />
-    <img src="<%= @user.avatar.normal.url %>" />
-  </div>
-  <% end %>
   <div class="field">
     <%= f.label :verified %>
     <%= f.check_box :verified, :class => "checkbox" %>

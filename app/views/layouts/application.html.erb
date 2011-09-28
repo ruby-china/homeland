@@ -30,7 +30,7 @@
     </div>
   </div>
   <div id="sitemap" class="container">
-    导航: <a href="<%= topics_path %>"><%= APP_CONFIG['app_name'] %></a> <%= yield :base_sitemap %> &gt; <%= yield :sitemap %>
+    导航: <a href="<%= root_path %>"><%= APP_CONFIG['app_name'] %></a> <%= yield :base_sitemap %> &gt; <%= yield :sitemap %>
   </div>
   <div id="main" class="container">
     <%= yield %>

@@ -12,10 +12,8 @@ class User
   field :location
   field :bio
   field :website
-  field :avatar
   field :verified, :type => Boolean, :default => false
   field :state, :type => Integer, :default => 1
-  field :qq
   field :tagline  
   field :replies_count, :type => Integer, :default => 0  
   
@@ -25,7 +23,7 @@ class User
 	embeds_many :authorizations
     
   attr_accessor :password_confirmation
-  attr_accessible :remember_me,:login, :name, :location, :website, :avatar , :bio, :qq, :tagline, :email, :password, :password_confirmation
+  attr_accessible :remember_me,:login, :name, :location, :website, :bio, :tagline, :email, :password, :password_confirmation
   
   validates_presence_of :login, :name  
   validates_uniqueness_of :login, :name
@@ -51,9 +49,6 @@ class User
 	rescue => e
 		# logger.error { e }
   end
-  
-  # 封面图
-  mount_uploader :avatar, AvatarUploader
 
   STATE = {
     :normal => 1,

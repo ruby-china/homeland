@@ -38,8 +38,9 @@
 						<% if @topic.last_reply_user.blank? %>
 							发布于 <%= timeago(@topic.created_at) %>
 						<% else %>
-							最后由 <a href="<%= user_path(@topic.last_reply_user.login) %>"><%= @topic.last_reply_user.name %></a> 回复于 <%= timeago(@topic.replied_at) %> 
+							最后由 <a href="<%= user_path(@topic.last_reply_user.login) %>"><%= @topic.last_reply_user.name %></a> 回复于 <%= timeago(@topic.replied_at) %>
 						<% end %>
+						, <%= @topic.hits %>次阅读
 					</p>
 				</td>
 				<td class="avatar">

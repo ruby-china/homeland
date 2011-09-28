@@ -4,6 +4,7 @@ class Topic
   include Mongoid::Timestamps
   include Mongoid::SoftDelete
   include Redis::Search
+  include Redis::Objects
   
   field :title
   field :body    
@@ -18,6 +19,8 @@ class Topic
   
   attr_protected :user_id
   validates_presence_of :user_id, :title, :body, :node_id
+  
+  counter :hits, :default => 0
   
   redis_search_index(:title_field => :title,
                      :score_field => :replied_at,

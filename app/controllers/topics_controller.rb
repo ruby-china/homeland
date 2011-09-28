@@ -55,6 +55,7 @@ class TopicsController < ApplicationController
 
   def show
     @topic = Topic.find(params[:id])
+    @topic.hits.incr(1)
     if current_user
       Node.set_user_last_visited(current_user.id, @topic.node_id)
       @topic.user_readed(current_user.id)

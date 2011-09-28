@@ -32,19 +32,19 @@
       strings: {
         prefixAgo: null,
         prefixFromNow: null,
-        suffixAgo: "ago",
-        suffixFromNow: "from now",
-        seconds: "less than a minute",
-        minute: "about a minute",
-        minutes: "%d minutes",
-        hour: "about an hour",
-        hours: "about %d hours",
-        day: "a day",
-        days: "%d days",
-        month: "about a month",
-        months: "%d months",
-        year: "about a year",
-        years: "%d years",
+        suffixAgo: "前",
+        suffixFromNow: "刚刚",
+        seconds: "1分钟",
+        minute: "大约1分钟",
+        minutes: "%d分钟",
+        hour: "1小时",
+        hours: "%d小时",
+        day: "1天",
+        days: "%d天",
+        month: "1月",
+        months: "%d月",
+        year: "1年",
+        years: "%d年",
         numbers: []
       }
     },
@@ -84,7 +84,7 @@
         years < 2 && substitute($l.year, 1) ||
         substitute($l.years, Math.floor(years));
 
-      return $.trim([prefix, words, suffix].join(" "));
+      return $.trim([prefix, words, suffix].join(""));
     },
     parse: function(iso8601) {
       var s = $.trim(iso8601);

@@ -1,0 +1,15 @@
+---
+address: 0.0.0.0
+pid: tmp/pids/thin.pid
+timeout: 30
+port: 7000
+log: log/thin.log
+max_conns: 20480
+require: []
+
+max_persistent_conns: 2048
+environment: production
+servers: 4
+daemonize: true
+chdir: /home/jason/www/homeland
+

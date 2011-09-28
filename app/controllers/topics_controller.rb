@@ -20,7 +20,7 @@ class TopicsController < ApplicationController
   def index
     @topics = Topic.last_actived.limit(10)
     @sections = Section.all
-    set_seo_meta("论坛","#{APP_CONFIG['app_name']}论坛,#{APP_CONFIG['app_name']}小区论坛,#{APP_CONFIG['app_name']}业主论坛")
+    set_seo_meta("","#{APP_CONFIG['app_name']}论坛,#{APP_CONFIG['app_name']}小区论坛,#{APP_CONFIG['app_name']}业主论坛")
   end
   
   def feed

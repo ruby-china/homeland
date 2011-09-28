@@ -1,7 +1,8 @@
 # coding: utf-8  
 module TopicsHelper
   def format_topic_body(text,title = "",allow_image = true)
-    text = simple_format(h(text))
+    text = text.gsub("\s","&nbsp;")
+    text = simple_format(text)
     if allow_image
       text = text.gsub(/\[img\](http:\/\/.+?)\[\/img\]/,'<img src="\1" alt="'+ h(title) +'" />')
       # if mobile?

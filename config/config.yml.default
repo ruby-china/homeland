@@ -11,7 +11,7 @@ development:
   google_analytics_key: ""
   smtp_username: 'support@app.com'
   smtp_password: '123456'
-  upload_url: "/file"
+  upload_url: "http://127.0.0.1:3000/file"
 
 test:
   app_name: "Homeland"
@@ -22,7 +22,7 @@ test:
   google_analytics_key: ""
   smtp_username: 'support@app.com'
   smtp_password: '123456'
-  upload_url: "/file"
+  upload_url: "http://127.0.0.1:3000/file"
 
 production:
   app_name: "Homeland"

@@ -2,19 +2,12 @@
 require 'carrierwave/processing/mini_magick'
 class PhotoUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
-  # Include RMagick or ImageScience support:
-  # include CarrierWave::RMagick
-  # include CarrierWave::ImageScience
-
-  # Choose what kind of storage to use for this uploader:
-  # storage :file
-  # storage :s3
   storage :grid_fs
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    "#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    "#{model.class.to_s.underscore}"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
@@ -46,7 +39,7 @@ class PhotoUploader < CarrierWave::Uploader::Base
 
   # Override the filename of the uploaded files:
   def filename
-    "#{original_filename.length}.jpg" if original_filename
+    "#{model.id}.jpg" if original_filename
   end
 
 end

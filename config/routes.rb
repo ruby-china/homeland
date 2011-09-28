@@ -2,7 +2,7 @@ Homeland::Application.routes.draw do
   
 
   resources :notes
-  match "/uploads/*path" => "gridfs#serve"
+  match "/file/*path" => "gridfs#serve"
   root :to => "topics#index"  
   match "auth/:provider/callback", :to => "home#auth_callback"  
   

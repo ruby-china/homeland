@@ -6,10 +6,10 @@ html {
   width: 100%;
   height: 100%;
   display: table;
-  background:#e4f8ff url(/images/bg.png) bottom left repeat-x;
+  background:#eee url(/images/bg.png) bottom left repeat;
 }
-a:link, a:visited { color:#34a900; }
-a:hover { color:#2c64d7; }
+a:link, a:visited { color:#2c64d7; }
+a:hover { color:#c00; }
 
 .button,
 .button:link,
@@ -42,11 +42,11 @@ body { text-align:center;
 
 .box { background:#FFF; padding:10px;  
     margin-bottom:20px;
-    *border:1px solid #DDD;
+    border:1px solid #fff;
     -moz-border-radius: 8px;
     -webkit-border-radius: 8px;
     -moz-box-shadow:2px 2px 4px rgba(0, 0, 0, 0.1);
-    -webkit-box-shadow:2px 2px 4px rgba(0, 0, 0, 0.1); }
+    -webkit-box-shadow:0px 2px 2px rgba(0, 0, 0, 0.1); }
 .shadow {-moz-box-shadow:4px rgba(0, 0, 0, 0.1);-webkit-box-shadow:2px 2px 4px rgba(0, 0, 0, 0.1);}
 .container { width:960px; margin-left:auto; margin-right:auto; text-align:left; }
 .leftbox { width:700px; float:left; }
@@ -94,14 +94,14 @@ div.field .hint { font-size:12px; color:#999;}
   background-color:#3080CB;color: #FFF;}
 .pagination span.disabled { padding: 2px 5px 2px 5px; margin-right:3px; border: 1px solid #eee;color: #ddd;}
 
-#header { margin-bottom:20px; line-height:40px; height:40px; color:#EEE; 
-  background:#36aa01 url(/images/header_bg.jpg) left top repeat-x; }
+#header { margin-bottom:20px; line-height:40px; height:43px; color:#EEE; 
+  background:#333 left top repeat-x; }
 #header .container {  width:940px; }
 #header table { width:100%;  }
 #header table tr td { height:38px; line-height:38px; }
 #header a { color:#FFF; }
 #app_name { font-size:18px; font-weight:bold; }
-#app_name em { font-size:0.5em; font-weight:normal; color:#e7e5b2;}
+#app_name em { font-size:0.5em; font-weight:normal; color:#199025;}
 #app_name a { text-decoration: none;} 
 #app_name a.out { font-size:12px; font-weight:normal; text-decoration: underline; }
 #navbar a { font-size:14px; font-weight:bold; margin-right:8px; }

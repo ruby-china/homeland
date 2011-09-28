@@ -52,8 +52,10 @@
 	<div class="last_replies box">
 		<h2>最近回复过的帖子</h2>
 		<ul>
-      <% @last_replies.each do |group| %>
-      <li><a href="<%= topic_path(group['group'][0].topic) %>"><%= truncate(group['group'][0].topic.title, :length => 25) %></a></li>
+      <% @last_replies.each do |group| 
+        next if group['group'][0].topic.blank?
+        %>
+        <li><a href="<%= topic_path(group['group'][0].topic) %>"><%= truncate(group['group'][0].topic.title, :length => 25) %></a></li>
       <% end %>
     </ul>
   </div>

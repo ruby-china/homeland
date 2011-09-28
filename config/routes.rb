@@ -6,12 +6,12 @@ Homeland::Application.routes.draw do
   root :to => "topics#index"  
   match "auth/:provider/callback", :to => "home#auth_callback"  
   
-  devise_for :users
-  resources :users, :only => :show
+  devise_for :users, :path => "account"
+  resources :users, :path => "u", :only => :show
   
-  match "topics/node_:id" => "topics#node", :as => :node_topics
-  match "topics/recent" => "topics#recent", :as => :recent_topics
-  resources :topics do
+  match "n:id" => "topics#node", :as => :node_topics
+  match "t/last" => "topics#recent", :as => :recent_topics
+  resources :topics, :path => "t" do
     member do
       post :reply
     end
@@ -20,7 +20,7 @@ Homeland::Application.routes.draw do
       get :feed
     end
   end
-  resources :replies
+  resources :replies, :path => "r"
   resources :photos do
     collection do
       get :tiny_new

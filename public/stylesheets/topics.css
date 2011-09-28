@@ -19,6 +19,8 @@
 .topics .topic td p.info a:visited { color:#999; }
 .topics .body { line-height:160%; font-size:14px; margin-top:8px;}
 .topics .body p { margin-bottom:10px; }
+.topics .tools { text-align:right; }
+.topics .tools a {margin-left:6px;}
 #topics .topic td.replies { width:60px; text-align:right; vertical-align:middle; }
 .topics .topic .replies a.count,
 .topics .topic .replies a.count:visited { line-height: 12px; font-weight: bold; color: white; 

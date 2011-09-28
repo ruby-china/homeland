@@ -12,7 +12,7 @@
       <% @notes.each do |note| %>
         <li>
           <p><a class="title" href="<%= note_path(note.id) %>"><%= truncate(note.title, :length => 50) %></a></p>
-          <p class="info"><%= note.word_count %> 个字符, 创建于 <%= time_ago_in_words(note.created_at) %>前, <%= note.changes_count %> 次编辑</p>
+          <p class="info"><%= note.word_count %> 个字符, 创建于 <%= timeago(note.created_at) %>, <%= note.changes_count %> 次编辑</p>
         </li>
       <% end %>
       </ul>

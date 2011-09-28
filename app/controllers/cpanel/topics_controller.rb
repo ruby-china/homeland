@@ -3,7 +3,7 @@ class Cpanel::TopicsController < Cpanel::ApplicationController
   # GET /topics
   # GET /topics.xml
   def index
-    @topics = Topic.desc(:id).paginate :page => params[:page], :per_page => 30
+    @topics = Topic.unscoped.desc(:id).paginate :page => params[:page], :per_page => 30
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,7 +14,7 @@ class Cpanel::TopicsController < Cpanel::ApplicationController
   # GET /topics/1
   # GET /topics/1.xml
   def show
-    @topic = Topic.find(params[:id])
+    @topic = Topic.unscoped.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -35,7 +35,7 @@ class Cpanel::TopicsController < Cpanel::ApplicationController
 
   # GET /topics/1/edit
   def edit
-    @topic = Topic.find(params[:id])
+    @topic = Topic.unscoped.find(params[:id])
   end
 
   # POST /topics
@@ -57,7 +57,7 @@ class Cpanel::TopicsController < Cpanel::ApplicationController
   # PUT /topics/1
   # PUT /topics/1.xml
   def update
-    @topic = Topic.find(params[:id])
+    @topic = Topic.unscoped.find(params[:id])
 
     respond_to do |format|
       if @topic.update_attributes(params[:topic])
@@ -73,7 +73,7 @@ class Cpanel::TopicsController < Cpanel::ApplicationController
   # DELETE /topics/1
   # DELETE /topics/1.xml
   def destroy
-    @topic = Topic.find(params[:id])
+    @topic = Topic.unscoped.find(params[:id])
     @topic.destroy
 
     respond_to do |format|

@@ -16,12 +16,14 @@ module ApplicationHelper
     return false
   end
   
-  def cachable_time_ago_in_words(from)
-    if request.xhr?
-      raw time_ago_in_words from
-    else
-      js_call = javascript_tag "document.write(DateHelper.timeAgoInWords(#{(from.to_i * 1000).to_json}));"
-      raw "<noscript>on #{from.to_formatted_s(:long)}</noscript>#{js_call}"
-    end
+  def owner?(item)
+    return false if item.blank?
+    return if current_user.blank?
+    item.user_id == current_user.id
+  end
+  
+  def timeago(time, options = {})
+    options[:class] ||= "timeago"
+    content_tag(:abbr, time.to_s, options.merge(:title => time.getutc.iso8601)) if time
   end
 end

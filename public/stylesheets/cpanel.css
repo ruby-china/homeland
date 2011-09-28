@@ -15,3 +15,5 @@ pre {
 .group h2 { font-size:12px; margin-bottom:8px; }
 .group ul { margin:0 20px;}
 .pagination { clear:both; margin-top:10px; text-align: left;}
+
+table tr.deleted td { text-decoration: line-through; color:#999}

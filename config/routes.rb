@@ -20,6 +20,7 @@ Homeland::Application.routes.draw do
       get :feed
     end
   end
+  resources :replies
   resources :photos do
     collection do
       get :tiny_new

@@ -88,10 +88,7 @@ class TopicsController < ApplicationController
 
   # GET /topics/1/edit
   def edit
-    @topic = Topic.find(params[:id])
-    if @topic.user_id != current_user.id
-      return render_404
-    end
+    @topic = current_user.topics.find(params[:id])
     set_seo_meta("改帖子 &raquo; 社区论坛")
   end
 
@@ -113,17 +110,14 @@ class TopicsController < ApplicationController
   # PUT /topics/1
   # PUT /topics/1.xml
   def update
-    @topic = Topic.find(params[:id])
-    if @topic.user_id != current_user.id
-      return render_404
-    end
+    @topic = current_user.topics.find(params[:id])
     pt = params[:topic]
     @topic.node_id = pt[:node_id]
     @topic.title = pt[:title]
     @topic.body = pt[:body]
 
     if @topic.save
-      redirect_to(topics_path, :notice => '帖子修改成功.')
+      redirect_to(topic_path(@topic.id), :notice => '帖子修改成功.')
     else
       render :action => "edit"
     end
@@ -132,11 +126,8 @@ class TopicsController < ApplicationController
   # DELETE /topics/1
   # DELETE /topics/1.xml
   def destroy
-    @topic = Topic.find(params[:id])
-    if @topic.user_id != current_user.id
-      return render_404
-    end
+    @topic = current_user.topics.find(params[:id])
     @topic.destroy
-  redirect_to(topics_path, :notice => '帖子删除成功.')
+    redirect_to(topics_path, :notice => '帖子删除成功.')
   end
 end

@@ -59,9 +59,9 @@
           </p>
           <p class="info time">
             <% if topic.last_reply_user.blank? %>
-              发布于 <%= time_ago_in_words(topic.created_at) %>前
+              发布于 <%= timeago(topic.created_at) %>
             <% else %>
-              最后由 <%= user_name_tag(topic.last_reply_user) %> 回复于 <%= time_ago_in_words(topic.replied_at) %>前
+              最后由 <%= user_name_tag(topic.last_reply_user) %> 回复于 <%= timeago(topic.replied_at) %>
             <% end %>
           </p>
         </td>

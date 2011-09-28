@@ -2,6 +2,7 @@
 class Topic
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Mongoid::SoftDelete
   
   field :title
   field :body    

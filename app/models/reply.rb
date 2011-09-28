@@ -2,6 +2,7 @@
 class Reply
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Mongoid::SoftDelete
 
   field :body
   field :source  

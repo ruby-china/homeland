@@ -1,4 +1,5 @@
 # encoding: utf-8
+require "digest/md5"
 require 'carrierwave/processing/mini_magick'
 class PhotoUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
@@ -15,21 +16,7 @@ class PhotoUploader < CarrierWave::Uploader::Base
     "photo/#{version_name}.jpg"
   end
 
-  # Process files as they are uploaded:
-  # process :scale => [200, 300]
-  #
-  # def scale(width, height)
-  #   # do something
-  # end
-
-  # Create different versions of your uploaded files:
-  version :small do
-    process :resize_to_limit => [100, nil]
-  end
-  
-  version :normal do
-    process :resize_to_limit => [680, nil]
-  end
+  process :resize_to_limit => [680, nil]
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
@@ -39,7 +26,12 @@ class PhotoUploader < CarrierWave::Uploader::Base
 
   # Override the filename of the uploaded files:
   def filename
-    "#{model.id}.jpg" if original_filename
+    if super.present?
+      ext = File.extname(original_filename)
+      # NOTE: 这里的到的图片是裁减过后的图片 MD5，也就是说，只有当原图小于裁减范围的时候，md5 才会保持和原始图片 md5 一致，而达到覆盖的目的
+      fname = Digest::MD5.hexdigest(self.read)
+      @name ||= "#{fname}#{ext}" 
+    end
   end
 
 end

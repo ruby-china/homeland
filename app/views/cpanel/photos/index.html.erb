@@ -13,7 +13,7 @@
 <% @photos.each do |photo| %>
   <tr>
     <td><%= photo.title %></td>
-    <td><%= image_tag(photo.image.small.url) %></td>
+    <td><%= image_tag(photo.image.url) %></td>
     <td><%= photo.user.name %></td>
     <td><%= link_to 'Show', cpanel_photo_path(photo) %></td>
     <td><%= link_to 'Destroy', cpanel_photo_path(photo), :confirm => 'Are you sure?', :method => :delete %></td>

@@ -2,45 +2,70 @@
 <html>
 <head>
   <title><%= raw @page_title %><%= APP_CONFIG['app_name'] %></title>
-  <%= stylesheet_link_tag "application","front","jquery.jdialog", :cache => "cached_front" %>
+  <%= stylesheet_link_tag "bootstrap","jquery.jdialog","application","front", :cache => "cached_front" %>
 	<%= yield :styles %>
   <meta name="keywords" content="<%= @meta_keywords %>" />
   <meta name="description" content="<%= @meta_description %>" />
   <link rel="shortcut icon" href="/favicon.ico?v=001" /> 
   <%= csrf_meta_tag %>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-	<%= javascript_include_tag "rails","jquery.jdialog","jquery.timeago","application", :cache => "cached_application" %>
+	<%= javascript_include_tag "rails","jquery.jdialog","jquery.timeago","bootstrap-dropdown","bootstrap-alerts","application", :cache => "cached_application" %>
 	<%= auto_discovery_link_tag(:rss,feed_topics_url,:title => '订阅最新贴') %>
 	<%= yield :scripts %>
 </head>
 <body>
-  <div id="header">
-    <div class="container">
-      <table>
-        <tr>
-          <td id="app_name">
-            <a href="/"><%= APP_CONFIG['app_name'] %></a> <em>Beta</em>
-          </td>
-          <td id="userbar">
-						<%= render 'devise/menu/registration_items' %>
-            <%= render 'devise/menu/login_items' %>
-          </td>
-        </tr>
-      </table>
+  <div class="topbar" data-dropdown="dropdown">
+    <div class="topbar-inner">
+      <div class="container">
+        <h3>
+          <a href="/"><%= APP_CONFIG['app_name'] %></a>
+        </h3>
+        <ul class="nav">
+          <li<%= ' class=active' if ["home","topics","replies"].index(params[:controller]) %>><a href="<%= root_path %>">论坛</a></li>
+          <li<%= ' class=active' if ["notes"].index(params[:controller]) %>><a href="<%= notes_path %>">记事本</a></li>
+        </ul>
+        <form action="<%= search_topics_path %>" class="pull-left" method="get">
+      		<input type="text" name="key" placeholder="搜索" <% if params[:action] == "search" and params[:key] %>value="<%= params[:key] %>"<% end %> />
+      	</form>
+        <% if user_signed_in? %>
+        <ul class="nav secondary-nav" id="userbar">
+          <li>
+            <a href="<%= user_path(current_user.login)%>" class="dropdown-toggle"><%= current_user.name %></a>
+            <ul class="dropdown-menu">
+              <% if not params[:controller].match(/cpanel/) %>
+                <li><a href="<%= edit_user_registration_path %>">个人资料设置</a></li>
+                <% if admin? current_user %><li><a href="/cpanel">后台</a></li><% end %>
+              <% end %>
+              <li><a href="<%= destroy_user_session_path %>">退出</a></li>
+            </ul>
+          </li>
+        </ul>
+        <% else %>
+          <ul class="nav secondary-nav" id="userbar">
+            <li<%=' class=active' if params[:controller] == "devise/registrations" and params[:action] == "new" %>><a href="<%= new_user_registration_path %>">注册</a></li>
+            <li<%=' class=active' if params[:controller] == "devise/sessions" and params[:action] == "new" %>><a href="<%= new_user_session_path %>">登陆</a></li> 
+          </ul>
+        <% end %>
+      </div>
     </div>
   </div>
-  <div id="sitemap" class="container">
-    导航: <a href="<%= root_path %>"><%= APP_CONFIG['app_name'] %></a> <%= yield :base_sitemap %> &gt; <%= yield :sitemap %>
+  <div class="container">
+    <ul class="breadcrumb">
+      <li><a href="<%= root_path %>"><%= APP_CONFIG['app_name'] %></a> <span class="divider">/</span></li>
+      <%= yield :base_sitemap %> <%= yield :sitemap %>
+    </ul>
+    <div id="main" class="container-fluid">
+      <%= yield %>
+    </div>
   </div>
-  <div id="main" class="container">
-    <%= yield %>
-  </div>
-  <div id="footer" class="container">
-    <p class="copyright">
-    <%= raw APP_CONFIG['foot_html'] %> Powered by Homeland.
-    </p>
-    <p class="suggest">目前版本: <%= APP_VERSION %> &lt;MongoDB&gt;，使用 <a href="http://www.mozillaonline.com/" target="_blank" rel="nofollow">Firefox</a> 或 <a href="http://www.google.com/chrome" target="_blank" rel="nofollow">Chrome</a> 浏览访问本站将会获得更佳的视觉体验.</p>
-  </div>
+  <footer class="footer">
+    <div class="container">
+      <p class="copyright">
+      <%= raw APP_CONFIG['foot_html'] %> Powered by Homeland.
+      </p>
+      <p class="suggest">目前版本: <%= APP_VERSION %>> &lt;MongoDB&gt;，使用 <a href="http://www.mozillaonline.com/" target="_blank" rel="nofollow">Firefox</a> 或 <a href="http://www.google.com/chrome" target="_blank" rel="nofollow">Chrome</a> 浏览访问本站将会获得更佳的视觉体验.</p>
+    </div>
+  </footer>
   <script type="text/javascript">
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', '<%= APP_CONFIG['google_analytics_key'] %>']);

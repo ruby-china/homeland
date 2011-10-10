@@ -1,15 +1,22 @@
 <%= form_for([:cpanel,@section]) do |f| %>
+<fieldset>
+  <legend></legend>
   <%= render 'shared/error_messages', :target => @section %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+  <div class="clearfix">
+    <%= f.label :name %>
+    <div class="input">
+      <%= f.text_field :name %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :sort %><br />
-    <%= f.text_field :sort %>
+  <div class="clearfix">
+    <%= f.label :sort %>
+    <div class="input">
+      <%= f.text_field :sort %>
+    </div>
   </div>
   <div class="actions">
-    <button class="button submit">保存</button> <%= link_to 'Back', cpanel_sections_path %>
+    <button class="btn primary">保存</button> <%= link_to 'Back', cpanel_sections_path %>
   </div>
+  </fieldset>
 <% end %>

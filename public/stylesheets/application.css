@@ -1,129 +1,70 @@
-* { margin:0; padding:0; }
-ul, ol { list-style-position:inside; }
-img, iframe { border:0; }
-table {width:100%;border-collapse:collapse;border-spacing:0} 
 html {
   width: 100%;
   height: 100%;
   display: table;
   background:#eee url(/images/bg.png) bottom left repeat;
 }
-a:link, a:visited { color:#2c64d7; }
-a:hover { color:#c00; }
+body { background:none;}
 
-.button,
-.button:link,
-.button:visited { border:0; background:url(/images/buttons.png) left top no-repeat; text-decoration: none;
-  width:114px; height:27px; line-height:26px; display:inline-block; font-size:12px; outline: none;
-  text-align:center; color:#675120;-moz-text-shadow:1px 1px 1px rgba(0, 0, 0, 1);
-  -webkit-text-shadow:1px 1px 1x rgba(0, 0, 0, 1);}
-.button:hover { background-position: -27px left; color:#675120;}
-.submit,
-.submit:link,
-.submit:visited { background-position: left -54px;color:#214C25; font-size:12px;}
-.submit:hover  { background-position: left -81px;color:#214C25; }
-a.tiny,
-a.tiny:link,
-a.tiny:visited,
-button.tiny,
-button.tiny:link,
-button.tiny:visited  { width:54px; background:url(/images/tiny_buttons.png) left top no-repeat; }
-a.tiny:hover,
-button.tiny:hover { background-position: -27px left; color:#675120; }
+.breadcrumb { color:#999;}
 
-.clearboth { clear:both;}
-
-body { text-align:center; 
-  font-family: "Helvetica Neue","Yahei", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", STHeiti !important; 
-  color:#333;
-  font-size:12px;
-  padding-bottom:30px;
+.container-fluid { padding:0;}
+.container-fluid > .sidebar {
+  float: right;
+  width: 220px;
 }
 
-.box { background:#FFF; padding:10px;  
-    margin-bottom:20px;
-    border:1px solid #fff;
-    -moz-border-radius: 8px;
-    -webkit-border-radius: 8px;
-    -moz-box-shadow:2px 2px 4px rgba(0, 0, 0, 0.1);
-    -webkit-box-shadow:0px 2px 2px rgba(0, 0, 0, 0.1); }
-.shadow {-moz-box-shadow:4px rgba(0, 0, 0, 0.1);-webkit-box-shadow:2px 2px 4px rgba(0, 0, 0, 0.1);}
-.container { width:960px; margin-left:auto; margin-right:auto; text-align:left; }
-.leftbox { width:700px; float:left; }
-.sidebar { width:240px; float:right; }
+.container-fluid > .content {
+  margin-left:0;
+  margin-right: 240px;
+}
 
+fieldset { margin-bottom:0;}
+fieldset legend { font-size:16px; font-weight:bold;}
+.actions { margin-bottom:0;}
+.buttons { margin-top:10px; }
+form { margin-bottom:0;}
+
+.box { 
+  background-color: #fff;
+  padding:10px;  
+  margin: 0 0 20px 0; /* negative indent the amount of the padding to maintain the grid system */
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+  box-shadow: 0 1px 2px rgba(0,0,0,.15);
+}
+
+.footer {
+  border-top:0;
+  min-width: 940px;
+  text-shadow: 0 1px 0 #fff;
+}
+.footer p {
+  margin:3px 0;
+  color: #555;
+}
+#main h1 { font-size:16px; font-weight:bold; text-align:right; color:#ed5140; margin-bottom:10px; }
+
+.topbar { position: static; margin-bottom:20px;}
+
+textarea.long { width:670px;}
+.input-xxlarge, input.xxlarge, textarea.xxlarge, select.xxlarge { width:520px;}
 
 div.field, div.actions {
   margin-bottom: 10px;
 }
 div.field .hint { font-size:12px; color:#999;}
 
-
 .field_with_errors {
   display:inline;
   color:#b16125;
 }
 
-.error_explanation {
-  border: 1px solid #e6e6bd;
-  padding: 10px;
-  margin-bottom: 15px;
-  background-color: #ffffcc;
-}
+.alert-message { margin-bottom:8px;}
 
-.error_explanation h2 {
-  text-align: left;
-  font-weight: bold;
-  margin-bottom:8px;
-  font-size: 12px;
-  margin-bottom: 0px;
-}
 
-.error_explanation ul { margin:0px 16px; }
-.error_explanation ul li {
-  font-size: 12px;
-  list-style: square;
-}
-#success_message { border:1px solid #d4e5a6; background:#effbd5; padding:6px 10px; margin-bottom:15px; }
-
-.pagination {text-align: center;clear:both; }
-.pagination a,.pagination em {padding: 2px 5px 2px 5px; margin-right:3px; border: 1px solid #666; background:#FFF; text-decoration: none;color: #333;}
-.pagination a:hover, .pagination a:active,
-.pagination em { font-style:normal; background:#308423; color:#FFF; border:1px solid #215020; }
-.pagination span.current {padding: 2px 5px 2px 5px; margin-right:3px; border: 1px solid #3080CB; font-style:normal;
-  background-color:#3080CB;color: #FFF;}
-.pagination span.disabled { padding: 2px 5px 2px 5px; margin-right:3px; border: 1px solid #eee;color: #ddd;}
-
-#header { margin-bottom:20px; line-height:40px; height:43px; color:#EEE; 
-  background:#333 left top repeat-x; }
-#header .container {  width:940px; }
-#header table { width:100%;  }
-#header table tr td { height:38px; line-height:38px; }
-#header a { color:#FFF; }
-#app_name { font-size:18px; font-weight:bold; }
-#app_name em { font-size:0.5em; font-weight:normal; color:#199025;}
-#app_name a { text-decoration: none;} 
-#app_name a.out { font-size:12px; font-weight:normal; text-decoration: underline; }
-#navbar a { font-size:14px; font-weight:bold; margin-right:8px; }
-#navbar a.actived { color:#e7e5b2; text-decoration:none; cursor:default; }
-#userbar { text-align:right; }
-#userbar a { margin:0 4px; }
-#sitemap { margin-bottom:6px; font-family:sans-serif,arial; width:940px;}
-#main h1 { font-size:16px; font-weight:bold; text-align:right; color:#ed5140; margin-bottom:10px; }
-#footer { clear:both; padding-bottom:20px; }
-table.grid { border:1px solid #e7e5b2; }
-table.grid tr td {border-top: 1px solid #e7e5b2; border-left: 1px solid #e7e5b2; padding:3px;}
-table.grid tr td.first { border-left: 0px;}
-table.grid tr.head td { color:#706f50; background:#fbf5bf; border-top: 0px;}
-table.grid tr td.choice { width:16px;}
-table.grid tr td.slug { width:200px;}
-table.grid tr td.date { width:60px;}
-table.grid tr td.status { width:38px;}
-textarea,input { width:300px; border:1px solid #DDD; font-size:12px; 
-  border-left:1px solid #AAA; border-top:1px solid #AAA; padding:2px; }
-textarea:focus, input:focus { background:#fbf5bf; outline:0; }
-input.checkbox { width:auto; }
-textarea.middle,input.middle { width:500px; }
-textarea.long,input.long { width:800px; }
 
 

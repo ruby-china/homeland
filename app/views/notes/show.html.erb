@@ -1,18 +1,19 @@
+<%= render "base" %>
 <%= content_for :sitemap do %>
-  <a href="<%= notes_path %>">记事本</a> &gt;
-  <span class="current">查看</span>
+  <li class="active">查看</li>
 <% end %>
-<div class="leftbox">
+<%= render "sidebar" %>
+<div class="content">
   <div id="notes" class="box">
     <div class="note">
       <div class="body"><%= format_topic_body @note.body %></div>
       <div class="info"><%= @note.word_count %> 个字符, 创建于 <%= timeago(@note.created_at) %>, <%= @note.changes_count %> 次编辑</div>
       <div class="buttons">
-        <a href="<%= edit_note_path(@note) %>" class="button submit">编辑</a> &nbsp; &nbsp; &nbsp;
-        <%= link_to "删除", note_path(@note),:confirm => "确定要删除吗？", :method => :delete, :class => "button"  %>
+        <a href="<%= edit_note_path(@note) %>" class="btn">编辑</a>
+        <%= link_to "删除", note_path(@note),:confirm => "确定要删除吗？", :method => :delete, :class => "btn danger"  %>
       </div>
     </div>
   </div>
 </div>
-<%= render "sidebar" %>
+
 

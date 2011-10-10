@@ -2,27 +2,44 @@
 <% content_for :styles do %>
 	<%= stylesheet_link_tag "users", :cache => "cached_users" %>
 <% end %>
-<div class="leftbox">
+
+<div class="sidebar">
+  <div class="box" style="text-align:center;">
+    <%= user_avatar_tag(@user,120, :link => false) %>
+  </div>
+	<div class="last_replies box">
+		<h2>最近回复过的帖子</h2>
+		<ul>
+      <% @last_replies.each do |group| 
+        next if group['group'][0].topic.blank?
+        %>
+        <li><a href="<%= topic_path(group['group'][0].topic) %>"><%= truncate(group['group'][0].topic.title, :length => 25) %></a></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<div class="content">
 	<div class="userinfo box">
 		<ul>
 		  <li style="text-align:right;">第 <%= @user.id %> 位会员</li>
-			<li><label>大名:</label><h1><%= @user.name %></h1></li>
-			<li><label>房号:</label> <%= @user.location %></li>
-			<li><label>加入时间:</label> <%= I18n.l(@user.created_at.to_date, :format => :long) %></li>
-			<li><label>签名:</label><%= @user.tagline %></li>
+			<li><span>大名:</span><strong><%= @user.name %></strong></li>
+			<li><span>房号:</span> <%= @user.location %></li>
+			<li><span>加入时间:</span> <%= I18n.l(@user.created_at.to_date, :format => :long) %></li>
+			<li><span>签名:</span><%= @user.tagline %></li>
 			<% if !@user.website.blank? %>
-			<li><label>个人主页:</label><a href="<%= @user.website %>" target="_blank" rel="nofollow"><%= @user.website %></a></li>
+			<li><span>个人主页:</span><a href="<%= @user.website %>" target="_blank" rel="nofollow"><%= @user.website %></a></li>
 			<% end %>
 		</ul>
 	</div>
 	<% if !@user.bio.blank? %>
 	<div class="bio box">
-		<h2>个人介绍</h2>
+		<h5>个人介绍</h5>
 		<p><%= auto_link(simple_format(@user.bio)) %></p>
 	</div>
 	<% end %>
 	<div class="box">
-		<h2>最近发布的贴子</h2>
+		<h5>最近发布的贴子</h5>
 		<table class="node_topics">
       <tr class="head">
         <td class="replies">回复数</td>
@@ -40,19 +57,4 @@
 	</div>
 
 	
-</div>
-<div class="sidebar">
-  <div class="box" style="text-align:center;">
-    <%= user_avatar_tag(@user,120, :link => false) %>
-  </div>
-	<div class="last_replies box">
-		<h2>最近回复过的帖子</h2>
-		<ul>
-      <% @last_replies.each do |group| 
-        next if group['group'][0].topic.blank?
-        %>
-        <li><a href="<%= topic_path(group['group'][0].topic) %>"><%= truncate(group['group'][0].topic.title, :length => 25) %></a></li>
-      <% end %>
-    </ul>
-  </div>
 </div>

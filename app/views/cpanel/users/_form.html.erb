@@ -1,54 +1,66 @@
 <%= form_for([:cpanel,@user], :html => { :enctype =>  "multipart/form-data" }) do |f| %>
    <%= render 'shared/error_messages', :target => @user %>
-  <div class="field">
-    <%= f.label :login %><br />
-    <%= f.text_field :login, :class => "short" %>
+  <div class="clearfix">
+    <%= f.label :login %>
+    <div class="input">
+    <%= f.text_field :login, :class => "span5" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.text_field :email, :class => "middle" %>
+  <div class="clearfix">
+    <%= f.label :email %>
+    <div class="input">
+    <%= f.text_field :email, :class => "span8" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password %>
-  </div>
-	<div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation %>
-  </div>
-  <div class="field">
-    <%= f.label :name %><br />
+  <div class="clearfix">
+    <%= f.label :name %>
+    <div class="input">
     <%= f.text_field :name %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :location %><br />
+  <div class="clearfix">
+    <%= f.label :location %>
+    <div class="input">
     <%= f.text_field :location %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :tagline %><br />
-    <%= f.text_field :tagline, :class => "middle" %>
+  <div class="clearfix">
+    <%= f.label :tagline %>
+    <div class="input">
+    <%= f.text_field :tagline, :class => "span13" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :bio %><br />
-    <%= f.text_area :bio, :class => "middle", :style => "height:60px;" %>
+  <div class="clearfix">
+    <%= f.label :bio %>
+    <div class="input">
+    <%= f.text_area :bio, :class => "span13", :style => "height:60px;" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :website %><br />
-    <%= f.text_field :website %>
+  <div class="clearfix">
+    <%= f.label :website %>
+    <div class="input">
+    <%= f.text_field :website, :class => "xxlarge" %>
+    </div>
   </div>
-  <div class="field">
-    <label>头像</label><br />
+  <div class="clearfix">
+    <label>头像</label>
+    <div class="input">
     <%= user_avatar_tag(@user, :large) %>
+    </div>
   </div>
-  <div class="field">
+  <div class="clearfix">
     <%= f.label :verified %>
+    <div class="input">
     <%= f.check_box :verified, :class => "checkbox" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :state %><br />
+  <div class="clearfix">
+    <%= f.label :state %>
+    <div class="input">
     <%= f.select :state, User::STATE.collect { |s| [s[0],s[1]] } %>
+    </div>
   </div>  
   <div class="actions">
-    <button class="button submit">保存</button> <%= link_to 'Back', cpanel_users_path %>
+    <button class="btn primary">保存</button> <%= link_to 'Back', cpanel_users_path %>
   </div>
 <% end %>

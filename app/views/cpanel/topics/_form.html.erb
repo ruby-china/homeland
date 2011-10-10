@@ -1,31 +1,46 @@
 <%= form_for([:cpanel,@topic]) do |f| %>
+<fieldset>
+  <legend></legend>
   <%= render 'shared/error_messages', :target => @topic %>
 
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title, :class => "middle" %>
+  <div class="clearfix">
+    <%= f.label :title %>
+    <div class="input">
+    <%= f.text_field :title, :class => "span10" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :node_id %><br />
+  <div class="clearfix">
+    <%= f.label :node_id %>
+    <div class="input">
     <%= f.select :node_id, Node.all.collect { |n| [n.name,n.id] } %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :body %><br />
-    <%= f.text_area :body, :class => "long", :style => "height:400px" %>
+  <div class="clearfix">
+    <%= f.label :body %>
+    <div class="input">
+    <%= f.text_area :body, :class => "span13", :style => "height:400px" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :user_id %><br />
+  <div class="clearfix">
+    <%= f.label :user_id %>
+    <div class="input">
     <%= f.text_field :user_id %> <%= @topic.user.name if @topic.user %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :last_reply_user_id %><br />
+  <div class="clearfix">
+    <%= f.label :last_reply_user_id %>
+    <div class="input">
     <%= f.text_field :last_reply_user_id %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :source %><br />
+  <div class="clearfix">
+    <%= f.label :source %>
+    <div class="input">
     <%= f.text_field :source %>
+    </div>
   </div>
   <div class="actions">
-    <button class="submit">保存</button>
+    <button class="btn primary">保存</button> or 
+    <%= link_to 'Back', cpanel_topics_path %>
   </div>
 <% end %>

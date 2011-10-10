@@ -15,6 +15,9 @@ class Cpanel::RepliesController < Cpanel::ApplicationController
   # GET /replies/1.xml
   def show
     @reply = Reply.find(params[:id])
+    if @reply.topic.blank?
+      redirect_to cpanel_replies_path, :alert => "帖子已经不存在"
+    end
 
     respond_to do |format|
       format.html # show.html.erb

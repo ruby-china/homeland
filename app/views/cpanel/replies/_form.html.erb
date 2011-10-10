@@ -1,36 +1,26 @@
 <%= form_for(@reply, :url => (@reply.id.blank? ? cpanel_replies_path : cpanel_reply_path(@reply.id))) do |f| %>
-  <% if @reply.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@reply.errors.count, "error") %> prohibited this reply from being saved:</h2>
+<fieldset>
+   <legend></legend>
+   <%= render 'shared/error_messages', :target => @reply %>
 
-      <ul>
-      <% @reply.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+  <div class="clearfix">
+    <%= f.label :body %>
+    <div class="input">
+      <%= f.text_area :body, :class => "long", :style => "height:400px" %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= @topic.title %>
   </div>
-  <div class="field">
-    <%= f.label :body %><br />
-    <%= f.text_area :body, :class => "long", :style => "height:400px" %>
+  <div class="clearfix">
+    <%= f.label :user_id %>
+    <div class="input">
+    <%= f.text_field :user_id %> <%= @reply.user.name %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :user_id %><br />
-    <%= f.text_field :user_id %> <%= @topic.user.name %>
-  </div>
-  <div class="field">
-    <%= f.label :state %><br />
-    <%= f.text_field :state, Reply::STATE %>
-  </div>
-  <div class="field">
-    <%= f.label :source %><br />
-    <%= f.text_field :source %>
+  <div class="clearfix">
+    <%= f.label :source %><div class="input">
+    <%= f.text_field :source %></div>
   </div>
   <div class="actions">
-    <button class="submit">保存</button>
+    <button type="submit" class="btn primary">保存</button> or
+    <%= link_to 'Back', cpanel_replies_path %>
   </div>
 <% end %>

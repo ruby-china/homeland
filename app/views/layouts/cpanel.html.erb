@@ -2,45 +2,46 @@
 <html>
 <head>
   <title>Homeland - Control Panel</title>
-  <%= stylesheet_link_tag "application","cpanel", :cache => "cached_cpanel" %>
+  <%= stylesheet_link_tag "bootstrap","application","cpanel", :cache => "cached_cpanel" %>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-  <%= javascript_include_tag "rails", :cache => "cached_rails" %>
+  <%= javascript_include_tag "rails","bootstrap-dropdown","bootstrap-alerts", :cache => "cached_cpanel" %>
   <%= csrf_meta_tag %>
 </head>
 <body>
-  <div id="header" class="shadow">
-    <div class="container">
-      <table>
-        <tr>
-          <td id="app_name">
-            控制台 <a href="<%= root_path %>" class="out">回前台</a>
-          </td>
-          <td width="500" id="navbar">
-            <a<%= " class='actived'" if params[:controller] == "cpanel/home" %> href="<%= cpanel_root_path %>">首页</a>
-            <a<%= " class='actived'" if params[:controller] == "cpanel/users" %> href="<%= cpanel_users_path %>">用户</a>
-            <a<%= " class='actived'" if params[:controller] == "cpanel/sections" %> href="<%= cpanel_sections_path %>">分类</a>
-            <a<%= " class='actived'" if params[:controller] == "cpanel/nodes" %> href="<%= cpanel_nodes_path %>">节点</a>
-            <a<%= " class='actived'" if params[:controller] == "cpanel/topics" %> href="<%= cpanel_topics_path %>">帖子</a>
-            <a<%= " class='actived'" if params[:controller] == "cpanel/replies" %> href="<%= cpanel_replies_path %>">回复</a>
-						<a<%= " class='actived'" if params[:controller] == "cpanel/photos" %> href="<%= cpanel_photos_path %>">图片</a>
-          </td>
-          <td id="userbar">
-            <%= render 'devise/menu/registration_items' %>
-            <%= render 'devise/menu/login_items' %>
-          </td>
-        </tr>
-      </table>
+  <div class="topbar" data-dropdown="dropdown">
+    <div class="topbar-inner">
+      <div class="container">
+        <a href="<%= cpanel_root_path %>" class="brand">控制台</a>
+        <ul class="nav">
+          <li<%= " class=active" if params[:controller] == "cpanel/home" %>><a href="<%= cpanel_root_path %>">系统概况</a></li>
+          <li<%= " class=active" if params[:controller] == "cpanel/users" %>><a href="<%= cpanel_users_path %>">用户</a></li>
+          <li<%= " class='active'" if params[:controller] == "cpanel/sections" %>><a href="<%= cpanel_sections_path %>">分类</a></li>
+          <li<%= " class='active'" if params[:controller] == "cpanel/nodes" %>><a href="<%= cpanel_nodes_path %>">节点</a></li>
+          <li<%= " class='active'" if params[:controller] == "cpanel/topics" %>><a href="<%= cpanel_topics_path %>">帖子</a></li>
+          <li<%= " class='active'" if params[:controller] == "cpanel/replies" %>><a href="<%= cpanel_replies_path %>">回复</a></li>
+          <li<%= " class='active'" if params[:controller] == "cpanel/photos" %>><a href="<%= cpanel_photos_path %>">图片</a></li>
+        </ul>
+        <ul class="nav secondary-nav" id="userbar">
+          <li>
+            <a href="#" class="dropdown-toggle"><%= current_user.name %></a>
+            <ul class="dropdown-menu">
+              <li><a href="<%= root_path %>">回到前台</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
-  <div id="sitemap" class="container">
-    导航: <a href="<%= cpanel_root_path %>">控制台</a> &gt; <%= yield :sitemap %>
+  <div class="container">
+    <div id="main" class="box">
+      <%= notice_message %>
+      <%= yield %>
+    </div>
   </div>
-  <div id="main" class="box container">
-    <%= notice_message %>
-    <%= yield %>
-  </div>
-  <div id="footer" class="container">
-    <p class="suggest">使用 <a href="http://www.mozillaonline.com/" target="_blank" rel="nofollow">Firefox</a> 或 <a href="http://www.google.com/chrome" target="_blank" rel="nofollow">Chrome</a> 浏览访问本站将会获得更佳的视觉体验.</p>
-  </div>
+  <footer class="footer">
+    <div class="container">
+      <p class="suggest">使用 <a href="http://www.mozillaonline.com/" target="_blank" rel="nofollow">Firefox</a> 或 <a href="http://www.google.com/chrome" target="_blank" rel="nofollow">Chrome</a> 浏览访问本站将会获得更佳的视觉体验.</p>
+    </div>
+  </footer>
 </body>
 </html>

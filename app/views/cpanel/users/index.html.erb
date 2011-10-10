@@ -9,8 +9,7 @@
     <td>Name</td>
     <td>Location</td>
     <td>State</td>
-    <td>QQ</td>
-    <td></td>
+    <td>操作</td>
   </tr>
 
 <% @users.each do |user| %>
@@ -24,7 +23,7 @@
   </tr>
 <% end %>
 </table>
-<%= will_paginate @users %>
+<%= will_paginate1 @users %>
 <br />
 
 <%= link_to 'New User', new_cpanel_user_path %>

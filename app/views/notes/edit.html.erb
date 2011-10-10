@@ -1,11 +1,11 @@
+<%= render "base" %>
 <%= content_for :sitemap do %>
-  <a href="<%= notes_path %>">记事本</a> &gt;
-  <span class="current">修改</span>
+  <li class="active">修改</li>
 <% end %>
-<div class="leftbox">
+<%= render "sidebar" %>
+<div class="content">
   <div class="notes box">
-    <h1>修改记事本</h1>
     <%= render 'form' %>
   </div>
 </div>
-<%= render "sidebar" %>
+

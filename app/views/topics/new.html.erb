@@ -1,12 +1,11 @@
 <%= render 'base' %>
 <% content_for :sitemap do %>
-  <span class="current">新建贴子</span>
+  <li class="active">新建贴子</li>
 <% end %>
 
-<div class="leftbox">
+<%= render 'sidebar' %>
+<div class="content">
 	<div class="box">
-		<h1>新建贴子</h1>
 		<%= render 'form' %>
 	</div>
 </div>
-<%= render 'sidebar' %>

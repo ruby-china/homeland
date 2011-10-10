@@ -22,21 +22,27 @@
 </script>
 <% end %>
 <%= form_for(@topic) do |f| %>
-  <%= render "shared/error_messages", :target => @topic %>  
-
-  <%= f.hidden_field :node_id %>
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title, :class => "middle" %>
-  </div>
-  <div class="field">
-		<div class="edit_tools">
-			<a href="#" onclick="return addImageClick();" id="add_image">上传图片</a>
-		</div>
-    <%= f.label :body %><br />
-    <%= f.text_area :body, :class => "topic_body_text_area long", :style => "height:400px" %>
-  </div>
-  <div class="actions">
-    <button class="button submit">保存</button>
-  </div>
+  <fieldset>
+    <legend><%= @topic.id.blank? ? "新建帖子" : "修改帖子" %></legend>
+    <%= render "shared/error_messages", :target => @topic %>  
+    <%= f.hidden_field :node_id %>
+    <div class="clearfix">
+      <%= f.label :title %>
+      <div class="input">
+        <%= f.text_field :title, :class => "span7" %>
+      </div>
+    </div>
+     <div class="edit_tools">
+    		<a href="#" onclick="return addImageClick();" id="add_image">上传图片</a>
+    	</div>
+    <div class="clearfix">
+      <%= f.label :body %>
+      <div class="input">
+        <%= f.text_area :body, :class => "topic_body_text_area xxlarge", :style => "height:400px" %>
+      </div>
+    </div>
+    <div class="actions">
+      <input type="submit" value="保存" class="btn primary"> <a href="<%= root_path %>" class="btn">取消</a>
+    </div>
+  </fieldset>
 <% end %>

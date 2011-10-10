@@ -1,26 +1,31 @@
-<% content_for :sitemap do %><span class="current">修改密码</span><% end %>
-<div class="leftbox">
-  <div class="box">
-    <h1>修改密码</h1>
-    <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
-      <%= render "shared/error_messages", :target => resource %> 
-      <%= f.hidden_field :reset_password_token %>
-    
-      <div class="field">
-        <%= f.label :password %><br />
-        <%= f.password_field :password %>
-      </div>    
-      <div class="field">
-        <%= f.label :password_confirmation %><br />
-        <%= f.password_field :password_confirmation %>
-      </div>    
-      <div class="actions"><button type="submit" class="button submit">修改我的密码</button></div>
-    <% end %>
-  </div>
-</div>
-
+<% content_for :sitemap do %><li class="active">修改密码</li><% end %>
 <div class="sidebar">
   <div class="box">
     <%= render :partial => "devise/shared/links" %>
   </div>
 </div>
+<div class="content">
+  <div class="box">
+    <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
+      <fieldset>
+        <legend>修改密码</legend>
+        <%= render "shared/error_messages", :target => resource %> 
+        <%= f.hidden_field :reset_password_token %>
+    
+        <div class="clearfix">
+          <%= f.label :password %>
+          <div class="input">
+            <%= f.password_field :password %>
+          </div>
+        </div>    
+        <div class="clearfix">
+          <%= f.label :password_confirmation %>
+          <div class="input">
+            <%= f.password_field :password_confirmation %>
+          </div>
+        </div>    
+        <div class="actions"><button type="submit" class="btn success">修改我的密码</button></div>
+    <% end %>
+  </div>
+</div>
+

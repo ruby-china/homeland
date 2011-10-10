@@ -8,7 +8,7 @@
 		<h1>修改回帖</h1>
 		<%= form_for(@reply) do |f| %>
       <%= render "shared/error_messages", :target => @reply %>  
-      <div class="field">
+      <div class="clearfix">
         <%= f.label :body %><br />
         <%= f.text_area :body, :class => "topic_body_text_area long", :style => "height:400px" %>
       </div>

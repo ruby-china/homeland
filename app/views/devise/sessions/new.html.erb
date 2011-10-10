@@ -1,22 +1,4 @@
 <% content_for :sitemap do %><span class="current">加入社区</span><% end %>
-<div class="leftbox">
-	<div class="box">
-    <h1>登陆</h1>
-      <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-      <div class="field"><%= f.label :login %><br />
-        <%= f.text_field :login %>
-      </div>
-      <div class="field">
-        <%= f.label :password %><br />
-        <%= f.password_field :password %>
-      </div>          
-      <% if devise_mapping.rememberable? -%>
-      <div class="field"><%= f.check_box :remember_me, :style => "width:auto;" %> <%= f.label :remember_me %></div>
-      <% end -%>
-      <div class="field"><button type="submit" class="button submit">登陆</button></div>
-    <% end %>
-  </div>
-</div>
 <div class="sidebar">
   <div class="box">
     <h2>还没有帐号？</h2>
@@ -29,4 +11,32 @@
 			<li><a href="/auth/github">Github用户登陆</a></li>
 		</ul>
 	</div>
+</div>
+<div class="content">
+	<div class="box">
+    <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+      <fieldset>
+        <legend>登陆</legend>
+        <div class="clearfix">
+          <%= f.label :login %>
+          <div class="input"><%= f.text_field :login %></div>
+        </div>
+        <div class="clearfix">
+          <%= f.label :password %>
+          <div class="input"><%= f.password_field :password %></div>
+        </div>          
+        <% if devise_mapping.rememberable? -%>
+        <div class="clearfix">
+          <label></label>
+          <div class="input">
+            <div class="inputs-list"><label for="user_remember_me"><%= f.check_box :remember_me, :style => "width:auto;" %> 记住登陆状态</label></div> 
+          </div>
+        </div>
+        <% end -%>
+        <div class="actions">
+          <button type="submit" class="btn primary">登陆</button>     
+        </div>
+      </fieldset>
+    <% end %>
+  </div>
 </div>

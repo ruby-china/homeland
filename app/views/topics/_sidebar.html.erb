@@ -1,5 +1,5 @@
 <div class="sidebar">
-<% if ["show","new"].index(params[:action]) %>
+<% if ["show","new","node"].index(params[:action]) %>
   <div class="box">
     <h2><a href="<%= node_topics_path(@node) %>"><%= @node.name %></a></h2>
     <% if ["new"].index params[:action] %>
@@ -8,7 +8,7 @@
     </p>
     <% end %>
     <div class="content">
-      <a class="button super" href="<%= new_topic_path(:node => @node.id) %>">发布新帖</a>
+      <a class="btn success" href="<%= new_topic_path(:node => @node.id) %>">发布新帖</a>
     </div>
   </div>
 <% elsif params[:action] == "index" %>
@@ -23,11 +23,6 @@
 		</p>
   </div>
 <% end %>
-<div class="search box">
-	<form action="<%= search_topics_path %>" method="get">
-		<input type="text" name="key" style="width:140px; padding:4px; margin-right:4px;" /><button class="button tiny" type="submit">搜索</button>
-	</form>
-</div>
 <%= cache("topic/init_list_sidebar/hot_nodes",:expires_in => 30.minutes) do %>
   <% if not @hot_nodes.blank? %>
   <div class="hot_nodes nodes box">
@@ -55,8 +50,6 @@
     <h2>发贴说明</h2>
     <ol>
       <li>发布后正文排版会自动安你在文本框里面输入的样子排列.如果里面带有 URL地址，将会自动转变为超级链接。</li>
-      <li>当然，作为一个旅游社区，插图功能自然不会少，可以点击“上传图片”来发图。</li>
-      <li>强烈建议你在提交之前再次确认一下是否还有需要修改的地方，因为我们没有给你提供后期修改的功能。</li>
 			<li>可以插入优酷，土豆，酷6的视频，你只用在他们网站使用转载功能，然后复制哪段"Flash代码"然后粘贴到正文里面，系统将会自动转换成播放器。</li>
     </ol>
   </div>

@@ -4,7 +4,7 @@ class NotesController < ApplicationController
   # GET /notes
   # GET /notes.xml
   def index
-    @notes = current_user.notes
+    @notes = current_user.notes.paginate(:page => params[:page], :per_page => 20)
     set_seo_meta("记事本")
   end
 

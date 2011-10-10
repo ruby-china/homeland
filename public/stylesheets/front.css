@@ -1,28 +1,29 @@
+
 #login {   }
 
-.sidebar h2 { font-size:14px; margin-bottom:10px; color:#666;}
-textarea.middle,input.middle { width:500px; }
-textarea.long,input.long { width:673px; }
+.sidebar h2 { font-size:14px; line-height:100%; margin-bottom:10px; color:#666;}
 
 .sidebar p { margin-bottom:6px; }
 .sidebar li { margin-bottom:4px; }
 
 /* 论坛分类列表 */
-#sections h2 { font-size:12px; color:#999; line-height:200%;}
+#sections h2 { font-size:12px; color:#999; line-height:200%; margin-bottom:10px; text-align: center;}
 #sections ul { list-style: none; }
 #sections li { line-height:200%; font-size:14px; padding:8px 0; border-top:1px solid #DDD;}
 #sections li label { font-size:12px; color:#999; display:inline-block; width:120px; margin-right:8px; text-align: right;}
 #sections li a { margin-right:10px;}
 
 /* 记事本 */
+#notes { }
 #notes .total { text-align:right; color:#999; margin-top:-8px; padding-bottom:5px; border-bottom:1px solid #DDD; margin-bottom:10px;}
-#notes ul.list { list-style:none; }
+#notes ul.list { list-style:none; margin:0; padding:0;}
 #notes ul.list li { margin-bottom:10px; }
 #notes ul.list li a { font-size:14px; font-weight:bold; color:#333; }
 #notes ul.list li .info { color:#999; margin-top:5px; }
-#notes .note .body { font-size:14px; line-height:180%; }
+#notes .note .body { font-size:14px; line-height:180%; min-height:350px;}
 #notes .note .info { border-top:1px solid #DDD; padding:5px 0; color:#999; }
 #notes .note div { margin-bottom:8px; }
+
 .sidebar .nodes { line-height:180%; }
 .sidebar .nodes a { display:inline-block; margin-right:8px;}
 

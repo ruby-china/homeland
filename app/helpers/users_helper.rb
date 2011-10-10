@@ -14,7 +14,7 @@ module UsersHelper
   
 
   def user_avatar_tag(user,size = :normal, opts = {})
-    link = opts[:link] || false
+    link = opts[:link] || true
     hash = Digest::MD5.hexdigest(user.email)
     width = 48
     case size

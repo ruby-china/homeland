@@ -1,27 +1,22 @@
 <%= render 'base' %>
 <% content_for :sitemap do %>
-  <% if params[:action] == "node" %>
-    <span class="current"><%= h @node.name %></span>
-  <% elsif params[:action] == "recent" %>
-    <span class="current">最近活跃的50个主题</span>
+  <% if params[:action] == "recent" %>
+    <li class="active">最近活跃的50个主题</li>
   <% elsif params[:action] == "search" %>
-    <span class="current">搜索<%= h params[:s] %></span>
+    <li class="active">搜索<%= h params[:s] %></li>
   <% else %>
-    <span class="current">活跃帖子</span>
+    <li class="active">活跃帖子</li>
   <% end %>
 <% end %>
 
-<div class="leftbox">
+<%= render 'sidebar' %>
+<div class="content">
 	<div class="box">
     <% if !@node.blank? %>
     <div id="node_info">
       <p>
         <h1><%= h @node.name %></h1>
         <span class="total">共有 <%= @node.topics_count %> 个讨论主题</span>
-      </p>
-      <p class="summary"><%= h @node.summary %></p>
-      <p>
-      <a class="button super" href="<%= new_topic_path(:node => @node.id) %>">发布新帖</a>
       </p>
     </div>
     <% else %>
@@ -45,37 +40,39 @@
         <% end %>
       </table>
     <% else %>
-      <table class="topics">
-      <% @topics.each do |topic| %>
-      <tr class="topic">
-        <td class="avatar">
-					<%= user_avatar_tag(topic.user,:normal) %>
-        </td>
-        <td>
-          <p class="title"><a href="<%= topic_path(topic) %>" title="<%= topic.title %>"><%= truncate(topic.title, :length => 100) %></a></p>
-          <p class="info leader">
-            由 <%= user_name_tag(topic.user) %>
-            在 <a href="<%= node_topics_path(topic.node_id) %>"><%= topic.node.name %></a> 中发起
-          </p>
-          <p class="info time">
-            <% if topic.last_reply_user.blank? %>
-              发布于 <%= timeago(topic.created_at) %>
-            <% else %>
-              最后由 <%= user_name_tag(topic.last_reply_user) %> 回复于 <%= timeago(topic.replied_at) %>
-            <% end %>
-          </p>
-        </td>
-        <td class="replies">
-					<% if topic.replies.count > 0 %>
-          <% readed_state = topic.user_readed?(current_user.id) if current_user %>
-          <a href="<%= topic_path(topic.id) %>" title="<%= topic_use_readed_text(readed_state) if current_user %>" class="count state<%= readed_state if current_user %>">
-          <%= topic.replies_count %>
-          </a>
-					<% end %>
-        </td>
-      </tr>
-      <% end %>
-      </table>
+      <div class="topics">
+        <% @topics.each do |topic| %>
+          <div class="topic topic_line">
+            <div class="pull-left avatar">
+    					<%= user_avatar_tag(topic.user,:normal) %>
+            </div>
+            <div class="right_info">
+              <div class="pull-right replies">
+      					<% if topic.replies.count > 0 %>
+                <% readed_state = topic.user_readed?(current_user.id) if current_user %>
+                <a href="<%= topic_path(topic.id) %>" title="<%= topic_use_readed_text(readed_state) if current_user %>" class="count state<%= readed_state if current_user %>">
+                <%= topic.replies_count %>
+                </a>
+      					<% end %>
+              </div>
+              <div class="infos">
+                <div class="title"><a href="<%= topic_path(topic) %>" title="<%= topic.title %>"><%= truncate(topic.title, :length => 100) %></a></div>
+                <div class="info leader">
+                  由 <%= user_name_tag(topic.user) %>
+                  在 <a href="<%= node_topics_path(topic.node_id) %>"><%= topic.node.name %></a> 中发起
+                </div>
+                <div class="info time">
+                  <% if topic.last_reply_user.blank? %>
+                    发布于 <%= timeago(topic.created_at) %>
+                  <% else %>
+                    最后由 <%= user_name_tag(topic.last_reply_user) %> 回复于 <%= timeago(topic.replied_at) %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
     <% end %>
       
     <% if params[:action] == "index" %>
@@ -83,7 +80,7 @@
         <a href="<%= recent_topics_path %>">查看更多最近发布的帖子...</a>
       </div>
     <% elsif params[:action] == "node" or params[:action] == "search" %>
-      <%= will_paginate @topics %>
+      <%= will_paginate1 @topics %>
     <% end %>
 	</div>
 	<% if params[:action] == "index" %>
@@ -102,4 +99,4 @@
 	</div>
 	<% end %>
 </div>
-<%= render 'sidebar' %>
+

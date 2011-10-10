@@ -1,7 +1,10 @@
+<%= render "base" %>
 <%= content_for :sitemap do %>
-  <span class="current">记事本</span>
+  <li class="active">列表</li>
 <% end %>
-<div class="leftbox clearfix">
+
+<%= render "sidebar" %>
+<div class="content">
   <div id="notes" class="box">
     <h1>我的记事本</h1>
     <div class="total">已有 <%= current_user.notes.count %> 条记事</div>
@@ -11,13 +14,13 @@
       <ul class="list">
       <% @notes.each do |note| %>
         <li>
-          <p><a class="title" href="<%= note_path(note.id) %>"><%= truncate(note.title, :length => 50) %></a></p>
-          <p class="info"><%= note.word_count %> 个字符, 创建于 <%= timeago(note.created_at) %>, <%= note.changes_count %> 次编辑</p>
+          <div><a class="title" href="<%= note_path(note.id) %>"><%= truncate(note.title, :length => 50) %></a></div>
+          <div class="info"><%= note.word_count %> 个字符, 创建于 <%= timeago(note.created_at) %>, <%= note.changes_count %> 次编辑</div>
         </li>
       <% end %>
       </ul>
     <% end %>
-
+    <%= will_paginate1 @notes %>
   </div>
 </div>
-<%= render "sidebar" %>
+

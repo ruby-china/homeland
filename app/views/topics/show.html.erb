@@ -1,7 +1,6 @@
 <%= render 'base' %>
 <%= content_for :sitemap do %>
-	<a href="<%= node_topics_path(@topic.node_id) %>"><%= @topic.node.name %></a> &gt;
-  <span class="current">查看贴子</span>
+  <li class="active">查看贴子</li>
 <% end %>
 <%= content_for :scripts do %>
 	<script type="text/javascript">
@@ -24,30 +23,29 @@
 		}
 	</script>
 <% end %>
-<div class="leftbox">
+<%= render 'sidebar' %>
+<div class="content">
 	<div class="topics box">
-		<table>
-			<tr class="topic noborder">		    
-		    <td>
-					<h1><%= truncate(@topic.title, :length => 100) %></h1>
-					<p class="info leader">
-						由 <%= user_name_tag(@topic.user,:location => true) %>
-						在 <a href="<%= node_topics_path(@topic.node_id) %>"><%= @topic.node.name %></a> 节点中发起
-					</p>
-					<p class="info time">
-						<% if @topic.last_reply_user.blank? %>
-							发布于 <%= timeago(@topic.created_at) %>
-						<% else %>
-							最后由 <a href="<%= user_path(@topic.last_reply_user.login) %>"><%= @topic.last_reply_user.name %></a> 回复于 <%= timeago(@topic.replied_at) %>
-						<% end %>
-						, <%= @topic.hits %>次阅读
-					</p>
-				</td>
-				<td class="avatar">
-					<%= user_avatar_tag(@topic.user, :large, :link => false) %>
-				</td>
-		  </tr>
-		</table>
+		<div class="topic">  
+		  <div class="pull-right avatar_large">
+				<%= user_avatar_tag(@topic.user, :large, :link => false) %>
+			</div>  
+	    <div class="infos">
+				<h1><%= truncate(@topic.title, :length => 100) %></h1>
+				<div class="info leader">
+					由 <%= user_name_tag(@topic.user,:location => true) %>
+					在 <a href="<%= node_topics_path(@topic.node_id) %>"><%= @topic.node.name %></a> 节点中发起
+				</div>
+				<div class="info time">
+					<% if @topic.last_reply_user.blank? %>
+						发布于 <%= timeago(@topic.created_at) %>
+					<% else %>
+						最后由 <a href="<%= user_path(@topic.last_reply_user.login) %>"><%= @topic.last_reply_user.name %></a> 回复于 <%= timeago(@topic.replied_at) %>
+					<% end %>
+					, <%= @topic.hits %>次阅读
+				</div>
+			</div>			
+		</div>
 		<div class="body">
 			<%= format_topic_body(@topic.body) %>
 		</div>
@@ -69,27 +67,23 @@
     </div>
     <% @replies.each_with_index do |reply,i| %>
       <div class="reply" id="reply<%= i + 1 %>">
-      <table>
-       <tr>
-          <td class="face"><%= user_avatar_tag(reply.user, :normal) %></td>
-          <td>
-            <div class="info clearfix">
-              <span class="name"><%= user_name_tag(reply.user,:location => true) %></span>
-              <span class="time"><%= i + 1 %>楼, 回复于 <%= timeago(reply.created_at) %>
-                <% if owner?(reply) %>
-            			<a href="<%= edit_reply_path(reply.id) %>">修改</a>
-          			<% end %>
-                <a href="#" onclick="return reply(<%= i + 1 %>);" title="回复此楼" class="reply_link"><%= image_tag("reply.png") %></a></span>
-            </div>
-            <div class="body">
-              <%= format_topic_body(reply.body,"",false) %>
-            </div>
-            <div class="tools">
-        		  
-        		</div>
-          </td>
-        </tr>
-      </table>
+        <div class="pull-left face"><%= user_avatar_tag(reply.user, :normal) %></div>
+        <div class="infos">
+          <div class="info clearfix">
+            <span class="name"><%= user_name_tag(reply.user,:location => true) %></span>
+            <span class="time"><%= i + 1 %>楼, 回复于 <%= timeago(reply.created_at) %>
+              <% if owner?(reply) %>
+          			<a href="<%= edit_reply_path(reply.id) %>">修改</a>
+        			<% end %>
+              <a href="#" onclick="return reply(<%= i + 1 %>);" title="回复此楼" class="reply_link"><%= image_tag("reply.png") %></a></span>
+          </div>
+          <div class="body">
+            <%= format_topic_body(reply.body,"",false) %>
+          </div>
+          <div class="tools">
+      		  
+      		</div>
+        </div>
       </div>
     <% end %>
   </div>
@@ -97,22 +91,21 @@
 	<% if current_user %>
   <div id="reply" class="form box">
     <%= notice_message %>
-    <h2>回复</h2>
+    <h4>回复</h4>
     <%= form_for(Reply.new,:url => reply_topic_path(params[:id])) do |f| %>
-      <div class="field">
-        <%= f.text_area :body,:class => "long", :style => "height:80px;" %>
+      <div class="clearfix">
+        <%= f.text_area :body,:class => "long", :rows => "4" %>
       </div>
       <div class="buttons">
-        <button type="submit" class="button submit">提交回复</button>
+        <button type="submit" class="btn primary">提交回复</button>
       </div>
     <% end %>
   </div>
 	<% else %>
 	<div id="reply" class="form box">
-		<p style="padding:20px;">
-		需要 <a href='/account/sign_in'>登录</a> 后回复方可回复, 如果你还没有账号 <a href="/account/sign_up"> 点击这里注册</a>。
-		</p>
+		<div style="padding:20px;">
+		需要 <a href='/account/sign_in' class="btn primary">登录</a> 后回复方可回复, 如果你还没有账号 <a href="/account/sign_up" class="btn danger"> 点击这里注册</a>。
+		</div>
 	</div>
 	<% end %>
 </div>
-<%= render 'sidebar' %>

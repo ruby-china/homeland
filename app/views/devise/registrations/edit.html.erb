@@ -1,44 +1,4 @@
 <% content_for :sitemap do %><span class="current">设置</span><% end %>
-<div class="leftbox">
-<div class="box">
-	<h1>个人资料</h1>
-  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :enctype =>  "multipart/form-data" }) do |f| %>
-	<%= render "shared/error_messages", :target => resource %> 
-	<div class="field">
-		<h3><%= @user.name %></h3>
-	</div>
-  <div class="field">
-	  <%= f.label :email %><br />
-	  <%= f.text_field :email %>
-	</div>
-	<div class="field">
-	  <%= f.label :location %><br />
-	  <%= f.text_field :location %>
-	</div>
-	<div class="field">
-		<%= f.label :website %><br />
-		<%= f.text_field :website %>
-	</div>
-	<div class="field">
-		<%= f.label :tagline %><br />
-		<%= f.text_field :tagline %>
-	</div>
-	<div class="field">
-		<%= f.label :bio %><br />
-		<%= f.text_area :bio, :size => "20x8" %>
-	</div>
-  <div class="field"><%= f.label :password %> <i>(如果你不想修改，请留空)</i><br />
-  <%= f.password_field :password %></div>
-  <div class="field"><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
-  <div class="field"><%= f.label :current_password %> <i>(修改资料需要输入旧密码)</i><br />
-  <%= f.password_field :current_password %></div>
-	<div class="actions">
-		<%= f.submit "保存", :class => "button submit" %>
-	</div>
-	<% end %>
-</div>
-</div>
 <div class="sidebar">
   <div class="box" style="text-align:center;">
     <%= user_avatar_tag(@user, 120, :link => false) %> <br />如需修改头像，请进入 <a href="http://www.gravatar.com">gravatar.com</a>
@@ -52,8 +12,76 @@
 	</div>
   <div class="box">
     <h2>删除我的帐号</h2>
-    <p>不喜欢? <%= link_to "删除此帐号", registration_path(resource_name), :confirm => "删除后无法恢复，你确定吗?", :method => :delete %>.</p>
+    <p>不喜欢? <%= link_to "删除此帐号", registration_path(resource_name), :confirm => "删除后无法恢复，你确定吗?", :class => "btn danger", :method => :delete %></p>
   </div>
   
 </div>
+<div class="content">
+  <div class="box">
+    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :enctype =>  "multipart/form-data" }) do |f| %>
+      <fieldset>
+        <legend>个人资料</legend>
+      	<%= render "shared/error_messages", :target => resource %> 
+      	<div class="clearfix">
+    	    <%= f.label :name %>
+    	    <div class="input">
+    	      <%= f.text_field :name, :disabled => true, :class => "disabled span3" %>
+          </div>
+      	</div>
+        <div class="clearfix">
+      	  <%= f.label :email %>
+      	  <div class="input">
+        	  <%= f.text_field :email, :class => "span6" %>
+        	</div>
+      	</div>
+      	<div class="clearfix">
+      	  <%= f.label :location %>
+      	  <div class="input">
+        	  <%= f.text_field :location, :class => "span3" %>
+        	</div>
+      	</div>
+      	<div class="clearfix">
+      		<%= f.label :website %>
+      		<div class="input">
+        		<%= f.text_field :website, :class => "xxlarge" %>
+        	</div>
+      	</div>
+      	<div class="clearfix">
+      		<%= f.label :tagline %>
+      		<div class="input">
+        		<%= f.text_field :tagline, :class => "xxlarge" %>
+        	</div>
+      	</div>
+      	<div class="clearfix">
+      		<%= f.label :bio %>
+      		<div class="input">
+        		<%= f.text_area :bio, :class => "xxlarge", :rows => "6" %>
+        	</div>
+      	</div>
+        <div class="clearfix">
+          <%= f.label :password %>
+          <div class="input">
+            <%= f.password_field :password %>
+          </div>
+        </div>
+        <div class="clearfix">
+          <%= f.label :password_confirmation %>
+          <div class="input">
+            <%= f.password_field :password_confirmation %>
+          </div>
+        </div>
+        <div class="clearfix">
+          <%= f.label :current_password %>
+          <div class="input">
+            <%= f.password_field :current_password %>
+          </div>
+        </div>
+      	<div class="actions">
+      		<%= f.submit "更新资料", :class => "btn primary" %>
+      	</div>
+    	</fieldset>
+  	<% end %>
+  </div>
+</div>
+
 

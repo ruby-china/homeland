@@ -2,25 +2,28 @@
 <% content_for :sitemap do %>
   <span class="current">修改回帖</span>
 <% end %>
-
-<div class="leftbox">
-	<div class="box">
-		<h1>修改回帖</h1>
-		<%= form_for(@reply) do |f| %>
-      <%= render "shared/error_messages", :target => @reply %>  
-      <div class="clearfix">
-        <%= f.label :body %><br />
-        <%= f.text_area :body, :class => "topic_body_text_area long", :style => "height:400px" %>
-      </div>
-      <div class="actions">
-        <button class="button submit">保存</button>
-      </div>
-    <% end %>
-	</div>
-</div>
 <div class="sidebar">
   <div class="box">
     回帖所在文章:<br />
     <a href="<%= topic_path(@reply.topic_id) %>"><%= @reply.topic.title %></a>
   </div>
+</div>
+<div class="content">
+	<div class="box">
+		<%= form_for(@reply) do |f| %>
+		<fieldset>
+		  <legend>修改回帖</legend>
+      <%= render "shared/error_messages", :target => @reply %>  
+      <div class="clearfix">
+        <%= f.label :body %>
+        <div class="input">
+        <%= f.text_area :body, :class => "topic_body_text_area xxlarge", :rows => "20" %>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn primary">保存更新</button>
+        <a href="<%= topic_path(@reply.topic_id) %>" class="btn">取消</a>
+      </div>
+    <% end %>
+	</div>
 </div>

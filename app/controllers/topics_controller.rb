@@ -92,6 +92,7 @@ class TopicsController < ApplicationController
   # GET /topics/1/edit
   def edit
     @topic = current_user.topics.find(params[:id])
+    @node = @topic.node
     set_seo_meta("改帖子 &raquo; 社区论坛")
   end
 

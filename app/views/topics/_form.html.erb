@@ -42,7 +42,8 @@
       </div>
     </div>
     <div class="actions">
-      <input type="submit" value="保存" class="btn primary"> <a href="<%= root_path %>" class="btn">取消</a>
+      <input type="submit" value="保存" class="btn primary"> 
+      <a href="<%= @topic.id.blank? ? root_path : topic_path(@topic) %>" class="btn">取消</a>
     </div>
   </fieldset>
 <% end %>

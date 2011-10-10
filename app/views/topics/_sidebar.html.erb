@@ -1,5 +1,5 @@
 <div class="sidebar">
-<% if ["show","new","node"].index(params[:action]) %>
+<% if ["show","new","edit","node"].index(params[:action]) %>
   <div class="box">
     <h2><a href="<%= node_topics_path(@node) %>"><%= @node.name %></a></h2>
     <% if ["new"].index params[:action] %>

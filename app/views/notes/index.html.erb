@@ -14,8 +14,10 @@
       <ul class="list">
       <% @notes.each do |note| %>
         <li>
-          <div><a class="title" href="<%= note_path(note.id) %>"><%= truncate(note.title, :length => 50) %></a></div>
-          <div class="info"><%= note.word_count %> 个字符, 创建于 <%= timeago(note.created_at) %>, <%= note.changes_count %> 次编辑</div>
+          <div><a class="title" href="<%= note_path(note.id) %>"><%= truncate(note.title, :length => 50) %></a> <%= raw '<span class="label warning">公开</span>' if note.publish %></div>
+          <div class="info">
+            <%= note.word_count %> 个字符, 创建于 <%= timeago(note.created_at) %>, <%= note.changes_count %> 次编辑
+          </div>
         </li>
       <% end %>
       </ul>

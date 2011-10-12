@@ -21,9 +21,13 @@
 #notes ul.list li a { font-size:14px; font-weight:bold; color:#333; }
 #notes ul.list li .info { color:#999; margin-top:5px; }
 #notes .note .body { font-size:14px; line-height:180%; min-height:350px;}
-#notes .note .info { border-top:1px solid #DDD; padding:5px 0; color:#999; }
+#notes .note .info { border-bottom:1px solid #DDD; padding:5px 0; color:#999; }
 #notes .note div { margin-bottom:8px; }
+#notes .note .urls { text-align:right; }
+#notes .note .urls input { cursor: text;}
 
 .sidebar .nodes { line-height:180%; }
 .sidebar .nodes a { display:inline-block; margin-right:8px;}
 
+.markdown_content { }
+#main .markdown_content h1 { font-size:22px; text-align:left; }

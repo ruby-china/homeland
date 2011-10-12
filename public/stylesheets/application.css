@@ -6,6 +6,8 @@ html {
 }
 body { background:none;}
 
+code { background:none; }
+
 .breadcrumb { color:#999;}
 
 .container-fluid { padding:0;}
@@ -54,6 +56,7 @@ form { margin-bottom:0;}
 .topbar { position: static; margin-bottom:20px;}
 
 textarea.long { width:670px;}
+textarea.span16 { width:910px;}
 .input-xxlarge, input.xxlarge, textarea.xxlarge, select.xxlarge { width:520px;}
 
 div.field, div.actions {

@@ -17,3 +17,4 @@ gem "rmmseg-cpp-huacnlee", "0.2.8"
 gem 'redis-search', '0.5.2'
 gem "rails-i18n","0.1.8"
 gem "redis-objects", "0.5.2"
+gem "bluecloth","2.1.0"

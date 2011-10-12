@@ -1,6 +1,6 @@
 # coding: utf-8  
 class NotesController < ApplicationController
-  before_filter :require_user
+  before_filter :require_user, :except => [:show]
   # GET /notes
   # GET /notes.xml
   def index
@@ -11,7 +11,12 @@ class NotesController < ApplicationController
   # GET /notes/1
   # GET /notes/1.xml
   def show
-    @note =  current_user.notes.find(params[:id])
+    @note =  Note.find(params[:id])
+    if not @note.publish 
+      if current_user.blank? or @note.user_id != current_user.id
+        render_404 and return
+      end
+    end
     set_seo_meta("查看 &raquo; 记事本")
   end
 

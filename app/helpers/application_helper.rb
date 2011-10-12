@@ -1,4 +1,5 @@
 # coding: utf-8  
+require "bluecloth"
 module ApplicationHelper
   # return the formatted flash[:notice] html
   def notice_message()
@@ -9,6 +10,10 @@ module ApplicationHelper
     end
     
     return raw(result)
+  end
+  
+  def markdown(str)
+    raw "<div class=\"markdown_content\">#{BlueCloth.new(str).to_html}</div>"
   end
   
   def admin?(user)

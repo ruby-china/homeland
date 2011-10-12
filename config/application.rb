@@ -1,6 +1,6 @@
 # coding: utf-8  
 require File.expand_path('../boot', __FILE__)
-APP_VERSION = '0.5'
+APP_VERSION = '0.5.1'
 
 require "action_controller/railtie"
 require "action_mailer/railtie"

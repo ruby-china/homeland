@@ -1,18 +1,9 @@
 # coding: utf-8  
 module TopicsHelper
   def format_topic_body(text,title = "",allow_image = true)
-    text = text.gsub("\s","&nbsp;")
     text = simple_format(text)
     if allow_image
       text = text.gsub(/\[img\](http:\/\/.+?)\[\/img\]/,'<img src="\1" alt="'+ h(title) +'" />')
-      # if mobile?
-        # img_regexp = Regexp.new("<img\s+.*?src=[\"|']?(.*?[^\"'>]+)[\"|']?.*?>", Regexp::IGNORECASE)
-        # new_text = text
-        # new_text.scan(img_regexp) do |m|
-          # img_url = m[0]
-          # text = text.gsub(img_url, img_url.gsub("large","small"))
-        # end
-      # end
       # Youku
       text = text.gsub(/http:\/\/player\.youku\.com\/player\.php\/sid\/([\w]+)\/v\.swf/i,
         '<embed src="http://player.youku.com/player.php/sid/\1/v.swf" 
@@ -31,6 +22,7 @@ module TopicsHelper
     end
     text = auto_link(text,:all, :target => '_blank', :rel => "nofollow")
     text = text.gsub(/@([\d]+)楼\s/,'@<a href="#reply\1" onclick="return hightlightReply(\1)">\1楼</a> ')
+    text = text.gsub("\s","&nbsp;")
     return text
   end
 

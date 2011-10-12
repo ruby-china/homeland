@@ -9,7 +9,7 @@ config/mongoid.yml
 public/uploads/**/*
 public/javascripts/cached_*
 public/stylesheets/cached_*
-public/topics
-public/topics/**/*
+public/t
+public/t/**/*
 .redcar
 Gemfile.lock

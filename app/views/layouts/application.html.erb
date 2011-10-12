@@ -9,7 +9,7 @@
   <link rel="shortcut icon" href="/favicon.ico?v=001" /> 
   <%= csrf_meta_tag %>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-	<%= javascript_include_tag "rails","jquery.jdialog","jquery.timeago","bootstrap-dropdown","bootstrap-alerts","application", :cache => "cached_application" %>
+	<%= javascript_include_tag "rails","jquery.jdialog","jquery.timeago","bootstrap-dropdown","bootstrap-alerts","bootstrap-twipsy","application", :cache => "cached_application" %>
 	<%= auto_discovery_link_tag(:rss,feed_topics_url,:title => '订阅最新贴') %>
 	<%= yield :scripts %>
 </head>

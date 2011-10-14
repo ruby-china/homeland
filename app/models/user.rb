@@ -73,9 +73,9 @@ class User
 	def self.create_from_hash(auth)  
 	  Rails.logger.debug(auth)
 		user = User.new
-		user.login = auth["user_info"]["nickname"]
-		if User.where(:login => user.login).count > 0
-	    user.login = Time.now.to_i
+		user.login = auth["user_info"]["nickname"] || auth["user_info"]["username"]
+		if User.where(:login => user.login).count > 0 or user.login.blank?
+	    user.login = "u#{Time.now.to_i}"
 	  end
 		user.name = auth["user_info"]["name"]  
 		user.email = auth['user_info']['email']

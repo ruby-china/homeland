@@ -5,6 +5,7 @@ Homeland::Application.routes.draw do
   match "/file/*path" => "gridfs#serve"
   root :to => "topics#index"  
   match "auth/:provider/callback", :to => "home#auth_callback"  
+  match "auth/:provider/unbind", :to => "home#auth_unbind"  
   
   devise_for :users, :path => "account"
   resources :users, :path => "u", :only => :show

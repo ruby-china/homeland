@@ -61,13 +61,39 @@ class User
       self.count
     end
   end
+  
+  def bind?(provider)
+    self.authorizations.collect { |a| a.provider }.include?(provider)
+  end
+  
+  def self.find_from_hash(hash)
+    where("authorizations.provider" => hash['provider'], "authorizations.uid" => hash['uid']).first
+  end
 
 	def self.create_from_hash(auth)  
+	  Rails.logger.debug(auth)
 		user = User.new
+		user.login = auth["user_info"]["nickname"]
+		if User.where(:login => user.login).count > 0
+	    user.login = Time.now.to_i
+	  end
 		user.name = auth["user_info"]["name"]  
 		user.email = auth['user_info']['email']
-		user.save(false)
-		user.reset_persistence_token! #set persistence_token else sessions will not be created
-		user
+		if User.where(:email => user.email).count > 0
+	    return -2
+	  end
+		user.location = auth['user_info']['location']
+		user.tagline =  auth["user_info"]["description"]
+		if not auth["user_info"]["urls"].blank?
+		  url_hash = auth["user_info"]["urls"].first
+		  user.website = url_hash.last
+	  end
+		if user.save(:validate => false)
+  		user.authorizations << Authorization.new(:provider => auth['provider'], :uid => auth['uid'])
+  		return user
+  	else
+  	  Rails.logger.warn("User.create_from_hash 失败，#{user.errors.inspect}")
+  	  return nil
+		end
   end  
 end

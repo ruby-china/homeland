@@ -4,9 +4,9 @@
 <% end %>
 <%= content_for :scripts do %>
 	<script type="text/javascript">
-		function reply (floor) {
+		function reply (floor,login) {
 			var reply_body = $("#reply_body");
-      var new_text = "@" + floor+"楼 ";
+      var new_text = "#" + floor+"楼 @" + login;
       if(reply_body.val().trim().length == 0){
         new_text += '';
       }
@@ -75,7 +75,7 @@
               <% if owner?(reply) %>
           			<a href="<%= edit_reply_path(reply.id) %>">修改</a>
         			<% end %>
-              <a href="#" onclick="return reply(<%= i + 1 %>);" title="回复此楼" class="reply_link"><%= image_tag("reply.png") %></a></span>
+              <a href="#" onclick="return reply(<%= i + 1 %>,'<%= reply.user.login %>');" title="回复此楼" class="reply_link"><%= image_tag("reply.png") %></a></span>
           </div>
           <div class="body">
             <%= format_topic_body(reply.body,"",false) %>
@@ -90,7 +90,6 @@
   <% end %>
 	<% if current_user %>
   <div id="reply" class="form box">
-    <%= notice_message %>
     <h4>回复</h4>
     <%= form_for(Reply.new,:url => reply_topic_path(params[:id])) do |f| %>
       <div class="clearfix">

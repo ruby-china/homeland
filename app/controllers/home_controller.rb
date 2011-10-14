@@ -2,8 +2,7 @@
 class HomeController < ApplicationController
   before_filter :require_no_user, :only => [:login, :login_create]
   before_filter :require_user, :only => [:logout,:auth_unbind]
-  
-  
+
   def index
     if !fragment_exist? "home/last_topics"
       @last_topics = Topic.recents.limit(10)
@@ -19,7 +18,7 @@ class HomeController < ApplicationController
 
 		@user = User.find_from_hash(auth)
 	  
-		if current_user
+		if not current_user.blank?
       current_user.authorizations.create(:provider => auth['provider'], :uid => auth['uid']) #Add an auth to existing
 			redirect_to edit_user_registration_path, :notice => "成功绑定了 #{auth['provider'].titleize} 帐号。"
 		elsif @user

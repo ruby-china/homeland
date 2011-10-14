@@ -6,7 +6,7 @@
   <div class="box">
 		<h2>绑定其他帐号用于登陆</h2>
 		<ul>
-		  <% ["twitter","github","douban"].each do |provider| %>
+		  <% ["twitter","google","github","douban"].each do |provider| %>
 			<li>
 			  <% if @user.bind? provider %>
   			  <a href="/auth/<%= provider %>/unbind" rel="twitsy" title="点击解除绑定"><%= provider.titleize %></a>

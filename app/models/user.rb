@@ -79,9 +79,6 @@ class User
 	  end
 		user.name = auth["user_info"]["name"]  
 		user.email = auth['user_info']['email']
-		if User.where(:email => user.email).count > 0
-	    return -2
-	  end
 		user.location = auth['user_info']['location']
 		user.tagline =  auth["user_info"]["description"]
 		if not auth["user_info"]["urls"].blank?

@@ -3,6 +3,7 @@ require "digest/md5"
 module UsersHelper
   def user_name_tag(user,options = {})
     location = options[:location] || false
+    return "匿名" if user.blank?
     result = "<a href=\"#{user_path(user.login)}\" title=\"#{user.name}\">#{user.name}</a>"
     if location
       if !user.location.blank?
@@ -15,7 +16,6 @@ module UsersHelper
 
   def user_avatar_tag(user,size = :normal, opts = {})
     link = opts[:link] || true
-    hash = Digest::MD5.hexdigest(user.email || "")
     width = 48
     case size
     when :normal
@@ -27,6 +27,10 @@ module UsersHelper
     else
       width = size
     end
+    
+    hash = user.blank? ? Digest::MD5.hexdigest("") : Digest::MD5.hexdigest(user.email) 
+    return "<img src=\"http://www.gravatar.com/avatar/#{hash}?s=#{width}\" />" if user.blank?
+   
     img_src = "http://www.gravatar.com/avatar/#{hash}?s=#{width}"
     img = "<img src=\"#{img_src}\" />"
     if link

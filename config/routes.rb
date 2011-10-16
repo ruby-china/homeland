@@ -10,6 +10,10 @@ Homeland::Application.routes.draw do
   devise_for :users, :path => "account"
   resources :users, :path => "u", :only => :show
   
+  resources :nodes
+  resources :chats
+  resources :talk
+  
   match "n:id" => "topics#node", :as => :node_topics
   match "t/last" => "topics#recent", :as => :recent_topics
   resources :topics, :path => "t" do

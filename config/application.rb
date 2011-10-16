@@ -18,6 +18,7 @@ module Homeland
 
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
+    config.mongoid.observers = :juggernaut_observer
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
@@ -44,6 +45,14 @@ module Homeland
     config.filter_parameters += [:password,:password_confirm]
     
     config.mongoid.logger = Logger.new($stdout, :warn)
+    
+    require "rack/sprockets"
+    config.middleware.use "Rack::Sprockets", :load_path => ["app/javascripts/", "app/javascripts/lib/"]
+    
+    require "rack/less"
+    config.middleware.use "Rack::Less"
+    
+    config.mongoid.include_root_in_json = false
   end
 end
 I18n.locale = 'zh-CN'

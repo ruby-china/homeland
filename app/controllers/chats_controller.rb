@@ -5,7 +5,7 @@ class ChatsController < ApplicationController
   # GET /nodes
   # GET /nodes.xml
   def index
-    @chats = Chat.desc("_id")
+    @chats = Chat.asc("id")
     render :json => @chats, :methods => [:id], :only => [:author,:node_id, :content,:created_at]
   end
 

@@ -2,6 +2,7 @@
 class HomeController < ApplicationController
   before_filter :require_no_user, :only => [:login, :login_create]
   before_filter :require_user, :only => [:logout,:auth_unbind]
+  skip_before_filter :verify_authenticity_token, :only => [:auth_callback]
 
   def index
     if !fragment_exist? "home/last_topics"

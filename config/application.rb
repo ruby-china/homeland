@@ -47,7 +47,7 @@ module Homeland
     config.mongoid.logger = Logger.new($stdout, :warn)
     
     require "rack/sprockets"
-    config.middleware.use "Rack::Sprockets", :load_path => ["app/javascripts/", "app/javascripts/lib/"]
+    config.middleware.use "Rack::Sprockets", :load_path => ["app/javascripts/", "app/javascripts/lib/"], :hosted_at => '/assets'
     
     require "rack/less"
     config.middleware.use "Rack::Less"

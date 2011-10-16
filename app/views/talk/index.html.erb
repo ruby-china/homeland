@@ -8,7 +8,8 @@
   <% if current_user %>
   <%= meta_tag "handle", current_user.name %>
   <% end %>
-  <%= javascript_include_tag :juggernaut, "chats" %>
+	<%= javascript_include_tag :juggernaut %>
+	<script type="text/javascript" src="/assets/chats.js"></script>
 <% end %>
 
 <div id="sidebar" class="sidebar">

@@ -1,4 +1,4 @@
-var Node = exports = Spine.Model.setup("Node", ["name"]);
+var Node = exports = Spine.Model.setup("Node", ["id","name"]);
 
 Node.extend(Spine.Model.Ajax);
 

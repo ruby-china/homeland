@@ -119,7 +119,7 @@ window.Chats = Spine.Controller.create({
     // Chat for a different node
     if ( !item.forNode(this.node) )
       return;
-
+    console.log(item.content);
     var msgItem = ChatsItem.init({item: item});
     this.items.append(msgItem.render().el);
     

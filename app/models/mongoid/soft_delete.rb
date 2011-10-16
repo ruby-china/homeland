@@ -18,7 +18,7 @@ module Mongoid
     module InstanceMethods
       def destroy
         if persisted?
-          self.update_attributes(:deleted_at => Time.now.utc)
+          self.update_attribute(:deleted_at,Time.now.utc)
         end
 
         @destroyed = true

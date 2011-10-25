@@ -19,4 +19,4 @@ h2. Install Full-Text Search
 
 h2. Try it first.
 
-	"Demo app":http://homeland-huacnlee.dotcloud.com
+    "Demo app":http://homeland-huacnlee.dotcloud.com

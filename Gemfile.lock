@@ -211,6 +211,7 @@ DEPENDENCIES
   mongoid (= 2.2.0)
   mongoid-eager-loading (= 0.3.1)
   mongoid_auto_increment_id (= 0.2)
+  nokogiri
   oa-openid (= 0.3.0)
   omniauth (= 0.3.0)
   rack-less

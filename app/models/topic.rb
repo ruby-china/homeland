@@ -9,7 +9,8 @@ class Topic
   field :title
   field :body    
   field :replied_at , :type => DateTime
-  field :source  
+  field :source
+  field :message_id  
   field :replies_count, :type => Integer, :default => 0
   
   belongs_to :user, :inverse_of => :topics
@@ -92,5 +93,9 @@ class Topic
     return Rails.cache.fetch("topics/count",:expires_in => 1.hours) do
       self.count
     end
+  end
+  
+  def self.find_by_message_id(message_id)
+    where(:message_id => message_id).first
   end
 end

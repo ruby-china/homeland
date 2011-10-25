@@ -3,7 +3,7 @@ class Cpanel::TopicsController < Cpanel::ApplicationController
   # GET /topics
   # GET /topics.xml
   def index
-    @topics = Topic.unscoped.desc(:id).paginate :page => params[:page], :per_page => 30
+    @topics = Topic.unscoped.desc(:_id).includes(:user).paginate :page => params[:page], :per_page => 30
 
     respond_to do |format|
       format.html # index.html.erb

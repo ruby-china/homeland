@@ -55,6 +55,9 @@ module Homeland
     config.mongoid.include_root_in_json = false
   end
 end
+
+require "daemon"
+
 I18n.locale = 'zh-CN'
 
 # 配置文件载入

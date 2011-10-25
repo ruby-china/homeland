@@ -1,0 +1,101 @@
+= Fetcher
+
+Fetcher is a simple message fetcher perfect for using in a daemon or via cron.
+
+It implements the following common pattern:
+
+1. Connect to a server
+2. Download available messages
+3. Send each message to another object for further processing
+4. Remove downloaded messages from the remote server
+
+Install using:
+
+  script/plugin install git://github.com/look/fetcher.git
+
+== Dependencies
+
+If you are using a 1.8 series Ruby, this plugin depends on the SystemTimer gem to work reliably.
+Do not forget to add it to your Gemfile or environment.rb. As Ruby 1.9 onwards use native threads
+SystemTimer gem becomes redundant, and timeout.rb is used instead.
+
+== Usage
+
+Create a new fetcher object like the following:
+
+  @fetcher = Fetcher.create({:type => :pop,
+                             :receiver => IncomingMailHandler,
+                             :server => 'mail.example.com',
+                             :username => 'jim',
+                             :password => 'test'})
+
+The receiver object is expected to have a receive method that takes a message as its only argument 
+(e.g., the way <tt>ActionMailer::Base.recieve</tt> works; but you don't <em>have</em> to use ActionMailer.).
+
+Call <tt>fetch</tt> to download messages and process them.
+
+  @fetcher.fetch
+  
+== Configuration
+
+The following options can be passed to the <tt>Fetcher.create</tt> factory method:
+
+[<tt>type</tt>] POP or IMAP 
+[<tt>server</tt>] The IP address or domain name of the server 
+[<tt>port</tt>] The port to connect to (defaults to the standard port for the type of server) 
+[<tt>ssl</tt>] Set to any value to use SSL encryption 
+[<tt>username</tt>] The username used to connect to the server 
+[<tt>password</tt>] The password used to connect to the server
+[<tt>authentication</tt>] The authentication scheme to use (IMAP only). Supports LOGIN, CRAM-MD5, and PASSWORD (defaults to PLAIN) 
+[<tt>use_login</tt>] Set to any value to use the LOGIN command instead of AUTHENTICATE. Some servers, like GMail, do not support AUTHENTICATE (IMAP only).
+[<tt>sleep_time</tt>] The number of seconds to sleep between fetches (defaults to 60 seconds; valid only for the generated daemon) 
+[<tt>in_folder</tt>] The name of the folder from which to read incoming mail (IMAP only). Defaults to +INBOX+.
+[<tt>processed_folder</tt>] The name of a folder to move mail to after it has been processed (IMAP only). <b>NOTE:</b> If not specified, mail is deleted. 
+[<tt>error_folder</tt>] The name a folder to move mail that causes an error during processing (IMAP only). Defaults to +bogus+.
+
+== Daemon generator
+
+The Fetcher plugin comes with a generator to create a daemon:
+
+  script/generate fetcher_daemon MailerDaemon
+  
+You should monitor the daemon using monit or god to ensure it does not crash.
+
+== Running via cron
+
+You can also run the Fetcher periodically via cron. It is important to ensure that only one 
+instance is running at one time, and for that the {Lockfile gem}[http://codeforpeople.com/lib/ruby/lockfile/] is recommended.
+
+Here is an example script to be with <tt>script/runner</tt> via cron:
+
+  begin
+    Lockfile.new('cron_mail_fetcher.lock', :retries => 0) do
+      config = YAML.load_file("#{RAILS_ROOT}/config/mail.yml")
+      config = config[RAILS_ENV].to_options
+
+      fetcher = Fetcher.create({:receiver => MailReceiver}.merge(config))
+      fetcher.fetch
+    end
+  rescue Lockfile::MaxTriesLockError => e
+    puts "Another fetcher is already running. Exiting."
+  end
+
+== Extending
+
+You can subclass <tt>Fetcher::Base</tt> or one of the protocol-specific classed to override the standard behavior.
+
+== Further documentation
+
+<shameless-plug>
+
+You can read more about how to use the Fetcher in the PeepCode book {Receiving Email with Ruby}[https://peepcode.com/products/mms2r-pdf].
+
+</shameless-plug>
+
+== Credit & Copyright
+
+Created by Dan Weinand and Luke Francl. Development supported by {Slantwise Design}[http://slantwisedesign.com].
+
+Generators for Rails 3 compatibility added by Amol Hatwár, Exceed Consulting.
+
+Licensed under the terms of the MIT License. Be excellent to each other.

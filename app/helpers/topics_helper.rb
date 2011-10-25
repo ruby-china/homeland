@@ -21,9 +21,10 @@ module TopicsHelper
         type="application/x-shockwave-flash" allowscriptaccess="always" 
         allowfullscreen="true" wmode="opaque" width="480" height="400"></embed>'))
     end
-    text = auto_link(text,:all, :target => '_blank', :rel => "nofollow")
+    # text = auto_link(text,:all, :target => '_blank', :rel => "nofollow")
     text = text.gsub(/#([\d]+)楼&nbsp;/,raw('#<a href="#reply\1" class="at_floor" onclick="return hightlightReply(\1)">\1楼</a> '))
     text = text.gsub(/@(.+?)&nbsp;/,raw('@<a href="/u/\1" class="at_user" title="\1">\1</a> '))
+    text = auto_link(text,:all, :target => '_blank', :rel => "nofollow")
     return raw(text)
   end
 

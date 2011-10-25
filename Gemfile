@@ -20,6 +20,7 @@ gem "rails-i18n","0.1.8"
 gem 'redis-namespace','~> 1.0.2'
 gem "redis-objects", "0.5.2"
 gem "bluecloth","2.1.0"
+gem "nokogiri"
 
 gem "juggernaut"
 gem "rack-less"

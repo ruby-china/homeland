@@ -1,0 +1,23 @@
+defaults: &defaults
+  type: imap                # pop OR imap
+  server: imap.example.com  # server hostname
+  port:                     # 993 for IMAPs
+  ssl: true                 # Remove if not using SSL
+  username:                 # Username
+  password:                 # Password
+  receiver:                 # ActionMailer that will receive mail
+  use_login: true           # Required for GMAIL
+  sleep_time:               # Poll Frequency. 60 seconds by default
+  authentication:           # LOGIN, CRAM-MD5, PASSWORD (IMAP Only)
+
+development:
+  <<: *defaults
+  # Override other values here
+  
+test:
+  <<: *defaults
+  # Override other values here
+  
+production:
+  <<: *defaults
+  # Override other values here

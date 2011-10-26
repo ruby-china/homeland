@@ -2,27 +2,6 @@
 <%= content_for :sitemap do %>
   <li class="active">查看贴子</li>
 <% end %>
-<%= content_for :scripts do %>
-	<script type="text/javascript">
-		function reply (floor,login) {
-			var reply_body = $("#reply_body");
-      var new_text = "#" + floor+"楼 @" + login;
-      if(reply_body.val().trim().length == 0){
-        new_text += '';
-      }
-      else{
-        new_text = "\n" + new_text;
-      }
-      reply_body.focus().val(reply_body.val() + new_text);
-      return false;
-		}
-		
-		function hightlightReply (floor) {
-			$("#replies .reply").removeClass("light");
-			$("#reply"+floor).addClass("light");
-		}
-	</script>
-<% end %>
 <%= render 'sidebar' %>
 <div class="content">
 	<div class="topics box">
@@ -52,7 +31,7 @@
 		<div class="tools">
 		  <% if owner?(@topic) %>
   			<a href="<%= edit_topic_path(@topic.id) %>">修改</a>
-  			<%= link_to "删除", topic_path, :method => :delete, :confirm => "确定要删除么？" %>
+  			<%= link_to "删除", topic_path(@topic.id), :method => :delete, :confirm => "确定要删除么？" %>
 			<% end %>
 		</div>
 	</div>
@@ -75,7 +54,7 @@
               <% if owner?(reply) %>
           			<a href="<%= edit_reply_path(reply.id) %>">修改</a>
         			<% end %>
-              <a href="#" onclick="return reply(<%= i + 1 %>,'<%= reply.user.login %>');" title="回复此楼" class="reply_link"><%= image_tag("reply.png") %></a></span>
+              <a href="#" onclick="return Topics.reply(<%= i + 1 %>,'<%= reply.user.login %>');" title="回复此楼" class="reply_link"><%= image_tag("reply.png") %></a></span>
           </div>
           <div class="body">
             <%= format_topic_body(reply.body) %>

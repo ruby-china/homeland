@@ -1,3 +1,4 @@
+
 xml.instruct! :xml, :version=>"1.0" 
 xml.rss(:version=>"2.0"){
   xml.channel{
@@ -7,8 +8,8 @@ xml.rss(:version=>"2.0"){
     xml.language('en-us')
       for topic in @topics
         xml.item do
-          xml.title h(topic.title)
-          xml.description topic.body
+          xml.title topic.title
+          xml.description format_topic_body(topic.body)
           xml.author topic.user.name       
           xml.pubDate(topic.created_at.strftime("%a, %d %b %Y %H:%M:%S %z"))
           xml.link topic_url topic

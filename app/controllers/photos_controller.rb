@@ -17,7 +17,7 @@ class PhotosController < ApplicationController
   # GET /photos/new.xml
   def tiny_new
     @photo = Photo.new
-    render :action => "tiny_new", :layout => "window"
+    render :layout => "window"
   end
 
   # GET /photos/new
@@ -59,7 +59,6 @@ class PhotosController < ApplicationController
       @photos = []
       photos.each  do |p|
         p.user_id = current_user.id
-        p.title = "未命名"
         if not p.save
           redirect_to(tiny_new_photos_path, :notice => p.errors.full_messages.join("<br />"))
           return

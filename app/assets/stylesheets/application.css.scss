@@ -1,8 +1,13 @@
+/*
+ *= require bootstrap
+ *= require jquery.jdialog
+ *= require_self
+ */
 html {
   width: 100%;
   height: 100%;
   display: table;
-  background:#eee url(/images/bg.png) bottom left repeat;
+  background:#eee image-url('bg.png') bottom left repeat;
 }
 body { background:none;}
 

@@ -1,4 +1,7 @@
-
+/*
+ *= require application
+ *= require_self
+ */
 #login {   }
 
 .sidebar h2 { font-size:14px; line-height:100%; margin-bottom:10px; color:#666;}

@@ -1,4 +1,0 @@
-www:
-  type: ruby
-db:
-  type: mongodb

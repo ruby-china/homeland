@@ -1,3 +1,7 @@
+/*
+ * require application
+ * require_self
+ */
 body { color: #333; }
 
 body, p, ol, ul, td {

@@ -68,6 +68,7 @@
 #replies .reply .info .time { float:right; text-align:right; }
 #replies .reply .info a.reply_link img { vertical-align:middle;}
 #replies .reply .body { line-height:180%; font-size:14px; text-overflow: ellipsis;}
+#replies .reply .body img { max-width:622px;}
 
 .edit_tools { text-align:right; margin-bottom:3px;}
 

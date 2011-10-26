@@ -1,6 +1,4 @@
 Homeland::Application.routes.draw do
-  
-
   resources :notes
   match "/file/*path" => "gridfs#serve"
   root :to => "topics#index"  
@@ -11,8 +9,6 @@ Homeland::Application.routes.draw do
   resources :users, :path => "u", :only => :show
   
   resources :nodes
-  resources :chats
-  resources :talk
   
   match "n:id" => "topics#node", :as => :node_topics
   match "t/last" => "topics#recent", :as => :recent_topics

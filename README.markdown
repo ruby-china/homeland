@@ -3,7 +3,7 @@ Support for Twitter, Facebook, Google, Github account login.
 
 ## Install
 
-  * You need install *Ruby 1.9.2*, *Rubygems* and *Rails 3* first.
+  * You need install *Ruby 1.9.2*, *Rubygems* and *Rails 3.1* first.
   * Install *Redis*, *MongoDb* 
     
   ```
@@ -11,6 +11,7 @@ Support for Twitter, Facebook, Google, Github account login.
   cp config/mongoid.yml.default config/mongoid.yml
   cp config/redis.yml.default config/redis.yml
   bundle install
+  bundle update rails
   rails s
   ```
 

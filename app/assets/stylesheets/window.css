@@ -1,0 +1,8 @@
+/*
+ *= require bootstrap
+ *= require_self
+ */
+* { margin:0;}
+html { background:#FFF; }
+body { text-align: left; padding:0;}
+form .row { margin-bottom:6px; }

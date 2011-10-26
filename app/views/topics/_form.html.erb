@@ -1,26 +1,3 @@
-<% content_for :scripts do %>
-<script type="text/javascript">
-	function appendImageFromUpload(srcs){
-     txtBox = $(".topic_body_text_area");
-     for(var i=0;i<srcs.length;i++){
-       txtBox.val(txtBox.val() + '[img]'+srcs[i]+'[/img]\n');
-     }
-     txtBox.focus();
-     $("#add_image").jDialog.close();
-   }
-
-   function addImageClick(){
-     $("#add_image").jDialog({
-       title:"插入图片",
-       width:"350", 
-       height:"130", 
-       content: '<iframe src="<%= tiny_new_photos_path %>" frameborder="0" style="width:330px; height:130px;"></iframe>',
-       close_on_body_click : false
-     });
-     return false;
-   }
-</script>
-<% end %>
 <%= form_for(@topic) do |f| %>
   <fieldset>
     <legend><%= @topic.id.blank? ? "新建帖子" : "修改帖子" %></legend>
@@ -33,7 +10,7 @@
       </div>
     </div>
      <div class="edit_tools">
-    		<a href="#" onclick="return addImageClick();" id="add_image">上传图片</a>
+    		<a href="#" onclick="return Topics.addImageClick();" id="add_image">上传图片</a>
     	</div>
     <div class="clearfix">
       <%= f.label :body %>

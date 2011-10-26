@@ -28,7 +28,7 @@ module UsersHelper
       width = size
     end
     
-    hash = user.blank? ? Digest::MD5.hexdigest("") : Digest::MD5.hexdigest(user.email) 
+    hash = (user.blank? or user.email.blank?) ? Digest::MD5.hexdigest("") : Digest::MD5.hexdigest(user.email) 
     return "<img src=\"http://www.gravatar.com/avatar/#{hash}?s=#{width}\" />" if user.blank?
    
     img_src = "http://www.gravatar.com/avatar/#{hash}?s=#{width}"

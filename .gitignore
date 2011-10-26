@@ -3,6 +3,7 @@ db/*.sqlite3
 log/*.log
 tmp/**/*
 .sass-cache/
+public/assets/
 config/database.yml
 config/mongoid.yml
 config/config.yml

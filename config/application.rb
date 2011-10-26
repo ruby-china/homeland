@@ -8,7 +8,7 @@ require "active_resource/railtie"
 
 
 if defined?(Bundler)
-  Bundler.require *Rails.groups(:assets => %w(development test))
+  Bundler.require *Rails.groups(:assets => %w(production development test))
 end
 
 
@@ -39,6 +39,7 @@ module Homeland
     
     config.mongoid.include_root_in_json = false
     
+    config.assets.precompile += %w(application.css application.js topics.css topics.js window.css front.css cpanel.css users.css)
     config.assets.enabled = true
     config.assets.version = '1.0'
   end

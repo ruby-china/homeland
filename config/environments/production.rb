@@ -32,7 +32,7 @@ Homeland::Application.configure do
 
   # Disable Rails's static asset server
   # In production, Apache or nginx will already do this
-  config.serve_static_assets = false
+  config.serve_static_assets = true
 
   # Enable serving of images, stylesheets, and javascripts from an asset server
   # config.action_controller.asset_host = "http://assets.example.com"
@@ -54,7 +54,7 @@ Homeland::Application.configure do
   config.assets.compress = true
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
-  config.assets.compile = true
+  config.assets.compile = false
 
   # Generate digests for assets URLs
   config.assets.digest = true

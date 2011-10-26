@@ -18,8 +18,8 @@
       发贴请先进入一个节点以后点击“发布新帖”。
     </p>
 		<p style="text-align:center;">
-			<a href="<%= feed_topics_url %>" title="用RSS阅读器订阅<%= APP_CONFIG['app_name'] %>论坛新贴">
-				<%= image_tag('feed.png', :alt => "订阅#{APP_CONFIG['app_name']}论坛新贴") %></a>
+			<a href="<%= feed_topics_url %>" title="用RSS阅读器订阅<%= Setting.app_name %>论坛新贴">
+				<%= image_tag('feed.png', :alt => "订阅#{Setting.app_name}论坛新贴") %></a>
 		</p>
   </div>
 <% end %>

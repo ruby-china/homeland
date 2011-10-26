@@ -2,9 +2,9 @@
 xml.instruct! :xml, :version=>"1.0" 
 xml.rss(:version=>"2.0"){
   xml.channel{
-    xml.title "#{APP_CONFIG['app_name']}论坛"
+    xml.title "#{Setting.app_name}论坛"
     xml.link root_url
-    xml.description("#{APP_CONFIG['app_name']}论坛最新发贴.")
+    xml.description("#{Setting.app_name}论坛最新发贴.")
     xml.language('en-us')
       for topic in @topics
         xml.item do

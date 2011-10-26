@@ -48,8 +48,5 @@ require "daemon"
 
 I18n.locale = 'zh-CN'
 
-# 配置文件载入
-APP_CONFIG = YAML.load_file("#{Rails.root}/config/config.yml")[Rails.env]
-
 require 'yaml'
 YAML::ENGINE.yamler= 'syck'

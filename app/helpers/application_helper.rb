@@ -21,7 +21,7 @@ module ApplicationHelper
   end
   
   def admin?(user)
-    return true if APP_CONFIG['admin_emails'].index(user.email)
+    return true if Setting.admin_emails.index(user.email)
     return false
   end
   

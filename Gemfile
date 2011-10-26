@@ -24,6 +24,7 @@ gem "bluecloth","2.1.0"
 gem "nokogiri", "1.5.0"
 gem "jquery-rails", "1.0.16"
 gem "rails_autolink", ">= 1.0.4"
+gem "settingslogic", "~> 2.0.6"
 
 group :assets do
   gem 'sass-rails', "  ~> 3.1.4"

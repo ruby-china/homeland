@@ -43,7 +43,7 @@ module ReceivedMail
   end
   
   def create_topic
-    if self.sender != APP_CONFIG['google_group_email']
+    if self.sender != Setting.google_group_email
       puts "--- [#{self.cleaned_subject}] skiped sender: #{self.sender}"
       return false 
     end

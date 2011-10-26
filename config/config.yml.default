@@ -12,7 +12,6 @@ development:
   smtp_username: 'support@app.com'
   smtp_password: '123456'
   upload_url: "http://127.0.0.1:3000/file"
-  juggernaut_host: "http://127.0.0.1:8080"
   google_group_email: "homeland-test@googlegroups.com"
 
 test:
@@ -25,7 +24,6 @@ test:
   smtp_username: 'support@app.com'
   smtp_password: '123456'
   upload_url: "http://127.0.0.1:3000/file"
-  juggernaut_host: "http://127.0.0.1:8080"
   google_group_email: "homeland-test@googlegroups.com"
 
 production:
@@ -38,5 +36,4 @@ production:
   smtp_username: 'support@app.com'
   smtp_password: '123456'
   upload_url: "http://l.yourdomain.com"
-  juggernaut_host: "http://127.0.0.1:8080"
   google_group_email: "homeland-test@googlegroups.com"

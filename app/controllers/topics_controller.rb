@@ -20,7 +20,7 @@ class TopicsController < ApplicationController
   def index
     @topics = Topic.last_actived.limit(10)
     @sections = Section.all
-    set_seo_meta("","#{APP_CONFIG['app_name']}论坛,#{APP_CONFIG['app_name']}小区论坛,#{APP_CONFIG['app_name']}业主论坛")
+    set_seo_meta("","#{Setting.app_name}论坛,#{Setting.app_name}小区论坛,#{Setting.app_name}业主论坛")
   end
   
   def feed
@@ -35,7 +35,7 @@ class TopicsController < ApplicationController
       Node.set_user_last_visited(current_user.id, @node.id)
     end
     @topics = @node.topics.last_actived.paginate(:page => params[:page],:per_page => 50)
-    set_seo_meta("#{@node.name} &raquo; 社区论坛","#{APP_CONFIG['app_name']}社区#{@node.name}",@node.summary)
+    set_seo_meta("#{@node.name} &raquo; 社区论坛","#{Setting.app_name}社区#{@node.name}",@node.summary)
     render :action => "index"
   end
 

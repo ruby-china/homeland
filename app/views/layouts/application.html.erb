@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= raw @page_title %><%= APP_CONFIG['app_name'] %></title>
+  <title><%= raw @page_title %><%= Setting.app_name %></title>
   <%= stylesheet_link_tag "front" %>
 	<%= yield :styles %>
   <meta name="keywords" content="<%= @meta_keywords %>" />
@@ -17,7 +17,7 @@
     <div class="topbar-inner">
       <div class="container">
         <h3>
-          <a href="/"><%= APP_CONFIG['app_name'] %></a>
+          <a href="/"><%= Setting.app_name %></a>
         </h3>
         <ul class="nav">
           <li<%= ' class=active' if ["home","topics","replies"].index(params[:controller]) %>><a href="<%= root_path %>">论坛</a></li>
@@ -51,7 +51,7 @@
   </div>
   <div class="container">
     <ul class="breadcrumb">
-      <li><a href="<%= root_path %>"><%= APP_CONFIG['app_name'] %></a> <span class="divider">/</span></li>
+      <li><a href="<%= root_path %>"><%= Setting.app_name %></a> <span class="divider">/</span></li>
       <%= yield :base_sitemap %> <%= yield :sitemap %>
     </ul>
     <div id="main" class="container-fluid">
@@ -62,13 +62,13 @@
   <footer class="footer">
     <div class="container">
       <p class="copyright">
-      <%= raw APP_CONFIG['foot_html'] %> Powered by <a href="http://github.com/huacnlee/homeland" target="_blank">Homeland</a> <%= APP_VERSION %>.
+      <%= raw Setting.foot_html %> Powered by <a href="http://github.com/huacnlee/homeland" target="_blank">Homeland</a> <%= APP_VERSION %>.
       </p>
     </div>
   </footer>
   <script type="text/javascript">
   var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', '<%= APP_CONFIG['google_analytics_key'] %>']);
+  _gaq.push(['_setAccount', '<%= Setting.google_analytics_key %>']);
   _gaq.push(['_trackPageview']);
   (function() {
   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;

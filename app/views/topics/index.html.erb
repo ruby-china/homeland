@@ -20,7 +20,7 @@
       </p>
     </div>
     <% else %>
-      <h1><%= APP_CONFIG['app_name'] %>论坛</h1>
+      <h1><%= Setting.app_name %>论坛</h1>
     <% end %>
     <% if params[:action] == "node" %> 
       <table class="node_topics">

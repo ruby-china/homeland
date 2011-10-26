@@ -6,7 +6,7 @@ class HomeController < ApplicationController
 
   def index
     if !fragment_exist? "home/last_topics"
-      @last_topics = Topic.recents.limit(10)
+      @last_topics = Topic.recent.limit(10)
     end
     if !fragment_exist? "home/actived_topics"
       @actived_topics = Topic.last_actived.limit(10)

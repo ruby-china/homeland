@@ -3,7 +3,7 @@ class Cpanel::NodesController < Cpanel::ApplicationController
   # GET /nodes
   # GET /nodes.xml
   def index
-    @nodes = Node.all
+    @nodes = Node.sorted
 
     respond_to do |format|
       format.html # index.html.erb

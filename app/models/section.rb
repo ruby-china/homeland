@@ -11,5 +11,5 @@ class Section
   validates_uniqueness_of :name
   
   
-  default_scope :order => "sort desc"
+  default_scope desc(:sort)
 end

@@ -5,14 +5,17 @@
 
 <table class="grid">
   <tr class="head">
-    <td class="first">Name</td>
+    <td class="first">Id</td>
+    <td>Name</td>
     <td>Sort</td>
     <td></td>
   </tr>
 
 <% @sections.each do |section| %>
   <tr>
-    <td class="first"><%= section.name %></td>
+    
+    <td class="first"><%= section.id %></td>
+    <td><%= section.name %></td>
     <td><%= section.sort %></td>
     <td><%= link_to 'Edit', edit_cpanel_section_path(section) %>
     <%= link_to 'Destroy', cpanel_section_path(section), :confirm => 'Are you sure?', :method => :delete %></td>

@@ -5,7 +5,8 @@
 
 <table class="grid">
   <tr class="head">
-    <td class="first">Name</td>
+    <td class="first">ID</td>
+    <td>Name</td>
     <td>Section</td>
     <td>Sort</td>
     <td>Topics count</td>
@@ -14,7 +15,8 @@
 
 <% @nodes.each do |node| %>
   <tr>
-    <td class="first"><%= node.name %></td>
+    <td class="first"><%= node.id %></td>
+    <td><%= node.name %></td>
     <td><%= node.section.name %></td>
     <td><%= node.sort %></td>
     <td><%= node.topics_count %></td>

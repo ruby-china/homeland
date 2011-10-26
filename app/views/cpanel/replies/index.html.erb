@@ -5,7 +5,8 @@
 
 <table class="grid">
   <tr class="head">
-    <td class="first" style="width:600px">Body</td>
+    <td class="first">ID</td>
+    <td style="width:500px">Body</td>
 		<td>Topic</td>
     <td>User</td>
     <td>At</td>
@@ -15,7 +16,8 @@
 
 <% @replies.each do |reply| %>
   <tr>
-    <td class="first"><%= truncate(reply.body, :length => 50) %></td>
+    <td class="first"><%= reply.id %></td>
+    <td><%= truncate(reply.body, :length => 50) %></td>
     <% if reply.topic %>
 	  <td><a href="<%= topic_path(reply.topic_id) %>" title="<%= reply.topic.title %>"><%= reply.topic_id %></a></td>
 	  <% else %>
@@ -23,8 +25,8 @@
 	  <% end %>
     <td><%= reply.user.name if reply.user %></td>
     <td><%= l reply.created_at, :format => :short %></td>
-    <td><%= link_to 'Edit', edit_cpanel_reply_path(reply) %>
-    <%= link_to 'Destroy', cpanel_reply_path(reply), :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to '修改', edit_cpanel_reply_path(reply) %>
+    <%= link_to '删除', cpanel_reply_path(reply), :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

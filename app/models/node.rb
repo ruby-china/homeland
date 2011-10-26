@@ -17,6 +17,7 @@ class Node
   has_and_belongs_to_many :followers, :class_name => 'User', :inverse_of => :following_nodes
 
   scope :hots, desc(:topics_count)
+  scope :sorted, desc(:sort)
 
    # 存放用户最近访问节点
   def self.set_user_last_visited(user_id,node_id)

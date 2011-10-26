@@ -24,7 +24,7 @@ class TopicsController < ApplicationController
   end
   
   def feed
-    @topics = Topic.recents.limit(20)
+    @topics = Topic.recent.limit(20)
     response.headers['Content-Type'] = 'application/rss+xml'
     render :layout => false
   end
@@ -40,7 +40,7 @@ class TopicsController < ApplicationController
   end
 
   def recent
-    @topics = Topic.recents.limit(50)
+    @topics = Topic.recent.limit(50)
     set_seo_meta("最近活跃的50个帖子 &raquo; 社区论坛")
     render :action => "index"
   end

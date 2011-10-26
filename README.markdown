@@ -12,6 +12,7 @@ Support for Twitter, Facebook, Google, Github account login.
   cp config/redis.yml.default config/redis.yml
   bundle install
   bundle update rails
+  rake assets:precompile
   rails s
   ```
 

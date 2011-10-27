@@ -1,6 +1,7 @@
 # coding: utf-8
 class PagesController < ApplicationController
-
+  before_filter :check_lock, :only => [:edit, :update]
+  before_filter :require_user, :only => [:new, :edit, :create, :update]
   def index
     set_seo_meta("Wiki")
   end
@@ -53,5 +54,16 @@ class PagesController < ApplicationController
       render action: "edit"
     end
   end
+  
+  private
+    def check_lock
+      @page = Page.find(params[:id])
+      if @page.locked
+        if !current_user or !Setting.admin_emails.include?(current_user.email)
+          redirect_to page_path(@page.slug), alert: "抱歉，此页面已被锁定，只能管理员才能修改。"
+          return
+        end
+      end
+    end
 
 end

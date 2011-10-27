@@ -46,5 +46,6 @@ RubyChina::Application.routes.draw do
     resources :users
     resources :photos
     resources :posts
+    resources :pages
   end  
 end

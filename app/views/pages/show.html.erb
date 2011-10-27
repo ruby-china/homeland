@@ -2,10 +2,12 @@
 <%= content_for :sitemap do %><li class="active">查看</li><% end %>
 
 <div id="page_show" class="box">
-  <div class="info">
-    最后更新于 <%= timeago @page.updated_at %>
-    <a href="<%= edit_page_path(@page) %>">编辑</a>
-  </div>
+  <% if !@page.locked or admin? %>
+    <div class="info">
+      最后更新于 <%= timeago @page.updated_at %>
+      <a href="<%= edit_page_path(@page) %>">编辑</a>
+    </div>
+  <% end %>
   <div class="markdown_content">
     <%= raw @page.body_html %>
   </div>

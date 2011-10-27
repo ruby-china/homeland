@@ -7,6 +7,8 @@ module ApplicationHelper
       result = '<div class="alert-message success"><a href="#" class="close">x</a>'+flash[:notice]+'</div>'
     elsif flash[:warring]
         result = '<div class="alert-message warring"><a href="#" class="close">x</a>'+flash[:warring]+'</div>'
+    elsif flash[:alert]
+        result = '<div class="alert-message alert"><a href="#" class="close">x</a>'+flash[:alert]+'</div>'
     elsif flash[:error]
         result = '<div class="alert-message error"><a href="#" class="close">x</a>'+flash[:error]+'</div>'
     else
@@ -20,8 +22,9 @@ module ApplicationHelper
     raw "<div class=\"markdown_content\">#{BlueCloth.new(str).to_html}</div>"
   end
   
-  def admin?(user)
-    return true if Setting.admin_emails.index(user.email)
+  def admin?(user = nil)
+    return false if user.blank?
+    return true if Setting.admin_emails.include?(user.email)
     return false
   end
   

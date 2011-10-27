@@ -1,0 +1,35 @@
+<%= form_for([:cpanel,@page]) do |f| %>
+  <fieldset>
+    <legend>Wiki页面编辑</legend>
+    <%= render "shared/error_messages", :target => @page %>
+    <div class="clearfix">
+      <%= f.label :locked %>
+      <div class="input">
+        <%= f.check_box :locked %><br />
+        <span class="help-inline">锁定后，前台非管理员将无法修改。</span>
+      </div>
+    </div>
+    <div class="clearfix">
+      <%= f.label :slug %>
+      <div class="input">
+        <%= f.text_field :slug %><br />
+        <span class="help-inline">http://<%= Setting.domain %>/wiki/:slug</span>
+      </div>
+    </div>
+    <div class="clearfix">
+      <%= f.label :title %>
+      <div class="input">
+        <%= f.text_field :title, :class => "xxlarge" %>
+      </div>
+    </div>
+    <div class="clearfix">
+      <%= f.label :body %>
+      <div class="input">
+        <%= f.text_area :body, :class => "long", :rows => "30" %><br />
+        <span class="help-inline">请使用 Markdown 格式编写。</span>
+      </div>
+    </div>
+    <div class="actions">
+      <%= f.submit "保存", :class => "btn primary" %>
+    </div>
+<% end %>

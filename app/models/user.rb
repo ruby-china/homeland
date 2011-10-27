@@ -12,6 +12,7 @@ class User
   field :location
   field :bio
   field :website
+  field :github
   field :verified, :type => Boolean, :default => false
   field :state, :type => Integer, :default => 1
   field :guest, :type => Boolean, :default => false
@@ -73,6 +74,11 @@ class User
         Rails.logger.error("find_or_create_guest failed, #{u.errors.inspect}")
       end
     end
+  end
+  
+  def update_with_password(params={})
+    params.delete(:current_password)
+    self.update_without_password(params)
   end
 
   def self.cached_count

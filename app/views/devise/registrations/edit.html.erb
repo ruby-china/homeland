@@ -55,9 +55,16 @@
         	</div>
       	</div>
       	<div class="clearfix">
+      		<%= f.label :github %>
+      		<div class="input">
+        		<%= f.text_field :github, :class => "span3" %>
+        		<span class="help-block">http://github.com/<span class="label warning">:youname</span></span>
+        	</div>
+      	</div>
+      	<div class="clearfix">
       		<%= f.label :website %>
       		<div class="input">
-        		<%= f.text_field :website, :class => "xxlarge" %>
+        		<%= f.text_field :website, :class => "xxlarge", :placeholder => "http://" %>
         	</div>
       	</div>
       	<div class="clearfix">
@@ -72,6 +79,22 @@
         		<%= f.text_area :bio, :class => "xxlarge", :rows => "6" %>
         	</div>
       	</div>
+      	<div class="actions">
+      		<%= f.submit "更新资料", :class => "btn primary" %>
+      	</div>
+      </fieldset>
+    <% end %>
+  </div>
+  <div class="box">
+    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+      <fieldset>
+      	<legend>修改密码</legend>
+      	<div class="clearfix">
+          <%= f.label :current_password %>
+          <div class="input">
+            <%= f.password_field :current_password %>
+          </div>
+        </div>
         <div class="clearfix">
           <%= f.label :password %>
           <div class="input">
@@ -83,15 +106,9 @@
           <div class="input">
             <%= f.password_field :password_confirmation %>
           </div>
-        </div>
-        <div class="clearfix">
-          <%= f.label :current_password %>
-          <div class="input">
-            <%= f.password_field :current_password %>
-          </div>
-        </div>
+        </div>        
       	<div class="actions">
-      		<%= f.submit "更新资料", :class => "btn primary" %>
+      		<%= f.submit "修改密码", :class => "btn success" %>
       	</div>
     	</fieldset>
   	<% end %>

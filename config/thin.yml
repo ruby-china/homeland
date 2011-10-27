@@ -9,7 +9,7 @@ require: []
 
 max_persistent_conns: 2048
 environment: production
-servers: 4
+servers: 2
 daemonize: true
-chdir: /home/jason/www/homeland
+chdir: /home/ruby/www/ruby-china
 

@@ -4,7 +4,7 @@ gem "rails", "3.1.1"
 gem "bson_ext", "1.4.1"
 gem "mongoid", "2.2.0"
 gem 'carrierwave', '0.5.6'
-gem 'carrierwave-mongoid', '0.1.2'
+gem 'carrierwave-mongoid', '0.1.2', :require => 'carrierwave/mongoid'
 gem 'mini_magick','3.3'
 gem 'mongo-rails-instrumentation','0.2.4'
 gem "mongoid-eager-loading",'0.3.1'

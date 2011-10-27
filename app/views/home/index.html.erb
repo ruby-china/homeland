@@ -1,15 +1,5 @@
 <% content_for :sitemap do %>
   <li class="active">首页</li>
 <% end %>
-<div class="box" style="text-align:center;">
-  <p><%= image_tag("big_logo.png") %></p>
-  </p>
-  <p>Ruby China Group， 致力于构建完善的 Ruby 中文社区。</p>
-  <p>功能正在完善中，欢迎 <a href="http://github.com/huacnlee/ruby-china">贡献代码</a> 。</p>
-  <p>诚邀有激情的活跃 Ruby 爱好者参与维护社区，联系 <b style="color:#c00;">lgn21st@gmail.com</b>
-  <% if not current_user %>
-  <div style="margin:40px 0;">
-    <a href='/account/sign_in' class="btn primary">登录</a> <a href="/account/sign_up" class="btn success">加入 Ruby China</a>
-  </div>
-  <% end %>
-</div>
+
+<%= raw SiteConfig.index_html %>

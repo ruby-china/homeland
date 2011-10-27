@@ -4,6 +4,11 @@ This is source code of [Ruby China Group](http://ruby-china.org)
 
   * You need install *Ruby 1.9.2*, *Rubygems* and *Rails 3.1* first.
   * Install *Redis*, *MongoDb* 
+  
+  ```
+  gem install rails -v=3.1.1
+  bundle install
+  ```
 
 ## Contributors
 

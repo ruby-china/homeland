@@ -1,9 +1,12 @@
 RubyChina::Application.routes.draw do
   
+  resources :pages
+
   resources :posts do
     collection do
     end
   end
+  resources :pages, :path => "wiki"
   resources :comments
   resources :notes
   match "/uploads/*path" => "gridfs#serve"
@@ -36,6 +39,7 @@ RubyChina::Application.routes.draw do
 
   namespace :cpanel do 
     root :to => "home#index"
+    resources :site_configs
     resources :replies
     resources :topics
     resources :nodes

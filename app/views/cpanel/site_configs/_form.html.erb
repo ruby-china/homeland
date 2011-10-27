@@ -1,0 +1,24 @@
+<%= form_for([:cpanel,@site_config]) do |f| %>
+  <fieldset>
+    <legend></legend>
+    <%= render 'shared/error_messages', :target => @site_config %>
+    <div class="clearfix">
+      <%= f.label :key %>
+      <div class="input">
+        <%= f.text_field :key, :class => "disabled", :disabled => "disabled" %>
+        <span class="help-inline">请勿修改 key</span>
+      </div>
+    </div>
+    <div class="clearfix">
+      <%= f.label :value %>
+      <div class="input">
+        <%= f.text_area :value, :class => "long", :rows => "20" %>
+        <span class="help-inline"></span>
+      </div>
+    </div>
+    <div class="actions">
+      <%= f.submit "保存", :class => "btn primary" %>
+      <a href="<%= cpanel_site_configs_path %>" class="btn">取消</a>
+    </div>
+  </fieldset>
+<% end %>

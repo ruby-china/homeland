@@ -1,0 +1,15 @@
+<h1>设置项</h1>
+
+<table>
+  <tr>
+    <th>key</th>
+    <th></th>
+  </tr>
+
+<% @site_configs.each do |site_config| %>
+  <tr>
+    <td><%= site_config.key %></td>
+    <td><%= link_to 'Edit', edit_cpanel_site_config_path(site_config) %></td>
+  </tr>
+<% end %>
+</table>

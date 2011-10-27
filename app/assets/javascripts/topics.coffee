@@ -41,4 +41,5 @@ $(document).ready ->
   $("textarea").bind "keydown","ctrl+return",(el) ->
     if $(el.target).val().trim().length > 0
       $("#reply form").submit()
+    return false
   

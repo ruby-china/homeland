@@ -22,7 +22,7 @@
         <ul class="nav">
           <li<%= ' class=active' if ["posts"].index(params[:controller]) %>><a href="<%= posts_path %>">文章</a></li>
           <li<%= ' class=active' if ["topics","replies"].index(params[:controller]) %>><a href="<%= topics_path %>">论坛</a></li> 
-          <li<%= ' class=active' if ["events"].index(params[:controller]) %>><a href="/events">Event</a></li>      
+          <li<%= ' class=active' if ["events"].index(params[:controller]) %>><a href="/events">近期活动</a></li>      
           <li<%= ' class=active' if ["events"].index(params[:controller]) %>><a href="/sites">酷站</a></li>      
         </ul>
         <form action="<%= search_topics_path %>" class="pull-left" method="get">

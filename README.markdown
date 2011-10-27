@@ -6,8 +6,13 @@ This is source code of [Ruby China Group](http://ruby-china.org)
   * Install *Redis*, *MongoDb* 
   
   ```
-  gem install rails -v=3.1.1
+  cp config/config.yml.default config/config.yml
+  cp config/mongoid.yml.default config/mongoid.yml
+  cp config/redis.yml.default config/redis.yml
   bundle install
+  bundle update rails
+  rake assets:precompile
+  thin start -O -C config/thin.yml
   ```
 
 ## Contributors

@@ -3,7 +3,7 @@ class Cpanel::UsersController < Cpanel::ApplicationController
   # GET /users
   # GET /users.xml
   def index
-    @users = User.order_by("id desc").paginate :page => params[:page], :per_page => 30
+    @users = User.desc(:_id).paginate :page => params[:page], :per_page => 30
 
     respond_to do |format|
       format.html # index.html.erb

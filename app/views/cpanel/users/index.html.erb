@@ -5,7 +5,9 @@
 
 <table class="grid">
   <tr class="head">
-    <td class="first">Email</td>
+    <td class="first">Id</td>
+		<td>Login</td>
+		<td>Email</td>
     <td>Name</td>
     <td>Location</td>
     <td>State</td>
@@ -14,7 +16,9 @@
 
 <% @users.each do |user| %>
   <tr>
-    <td class="first"><%= user.email %></td>
+    <td class="first"><%= user.id %></td>
+    <td><%= user.login %></td>
+    <td><%= user.email %></td>
     <td><%= user.name %></td>
     <td><%= user.location %></td>
     <td><%= user.state %></td>

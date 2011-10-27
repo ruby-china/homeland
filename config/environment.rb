@@ -3,4 +3,4 @@
 require File.expand_path('../application', __FILE__)
 
 # Initialize the rails application
-Homeland::Application.initialize!
+RubyChina::Application.initialize!

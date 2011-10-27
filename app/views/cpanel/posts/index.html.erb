@@ -1,0 +1,28 @@
+<% content_for :sitemap do %>
+  <span class="current">文章</span>
+<% end %>
+<h1>文章列表</h1>
+
+<table class="grid">
+  <tr class="head">
+    <td class="first">ID</td>
+    <td style="width:400px">Title</td>
+    <td>User</td>
+    <td>at</td>
+    <td>State</td>
+    <td></td>
+  </tr>
+
+<% @posts.each do |post| %>
+  <tr class="<%= 'deleted' if !post.deleted_at.blank? %>">
+    <td class="first"><%= post.id %></td>
+    <td><%= truncate(post.title,:length => 30) %></td>
+    <td><%= post.user.name if post.user %></td>
+    <td><%= l post.created_at,:format => :short %></td>
+    <td><%= raw post.state_s %></td>
+    <td><%= link_to '修改', edit_cpanel_post_path(post) %>
+    <%= link_to '删除', cpanel_post_path(post), :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+<%= will_paginate1 @posts %>

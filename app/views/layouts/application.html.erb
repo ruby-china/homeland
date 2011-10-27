@@ -20,8 +20,10 @@
           <a href="/"><%= Setting.app_name %></a>
         </h3>
         <ul class="nav">
-          <li<%= ' class=active' if ["home","topics","replies"].index(params[:controller]) %>><a href="<%= root_path %>">论坛</a></li>
-          <li<%= ' class=active' if ["notes"].index(params[:controller]) %>><a href="<%= notes_path %>">记事本</a></li>
+          <li<%= ' class=active' if ["posts"].index(params[:controller]) %>><a href="<%= posts_path %>">文章</a></li>
+          <li<%= ' class=active' if ["topics","replies"].index(params[:controller]) %>><a href="<%= topics_path %>">论坛</a></li> 
+          <li<%= ' class=active' if ["events"].index(params[:controller]) %>><a href="/events">Event</a></li>      
+          <li<%= ' class=active' if ["events"].index(params[:controller]) %>><a href="/sites">酷站</a></li>      
         </ul>
         <form action="<%= search_topics_path %>" class="pull-left" method="get">
       		<input type="text" name="key" placeholder="搜索" <% if params[:action] == "search" and params[:key] %>value="<%= params[:key] %>"<% end %> />
@@ -34,6 +36,7 @@
               <li><a href="<%= user_path(current_user.login) %>">我的主页</a></li>
               <% if not params[:controller].match(/cpanel/) %>
                 <li><a href="<%= edit_user_registration_path %>">个人资料设置</a></li>
+                <li><a href="<%= notes_path %>">记事本</a></li>
                 <% if admin? current_user %><li><a href="/cpanel">后台</a></li><% end %>
               <% end %>
               <li><a href="<%= destroy_user_session_path %>">退出</a></li>
@@ -62,7 +65,7 @@
   <footer class="footer">
     <div class="container">
       <p class="copyright">
-      <%= raw Setting.foot_html %> Powered by <a href="http://github.com/huacnlee/homeland" target="_blank">Homeland</a> <%= APP_VERSION %>.
+       &copy; Ruby China Group. 
       </p>
     </div>
   </footer>

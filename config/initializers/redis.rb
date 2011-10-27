@@ -6,7 +6,7 @@ require "redis/objects"
 redis_config = YAML.load_file("#{Rails.root}/config/redis.yml")[Rails.env]
 
 redis_search = Redis.new(:host => redis_config['host'],:port => redis_config['port'])
-redis_search = Redis::Namespace.new("homeland:redis_search", :redis => redis_search)
+redis_search = Redis::Namespace.new(redis_config['redis_search_namespace'], :redis => redis_search)
 redis_search.select("3")
 Redis::Search.configure do |config|
   config.redis = redis_search

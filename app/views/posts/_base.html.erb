@@ -1,0 +1,9 @@
+<%= content_for :sitemap do %>
+  <a href="<%= posts_path %>">文章</a> <span class="divider">/</span>
+<% end %>
+<%= content_for :styles do %>
+  <%= stylesheet_link_tag "posts" %>
+<% end %>
+<%= content_for :scripts do %>
+  <%= javascript_include_tag "posts" %>
+<% end %>

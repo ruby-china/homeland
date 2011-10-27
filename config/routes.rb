@@ -1,18 +1,25 @@
-Homeland::Application.routes.draw do
+RubyChina::Application.routes.draw do
+  
+  resources :posts do
+    collection do
+      get :tag
+    end
+  end
+
   resources :notes
-  match "/file/*path" => "gridfs#serve"
-  root :to => "topics#index"  
+  match "/uploads/*path" => "gridfs#serve"
+  root :to => "home#index"  
   match "auth/:provider/callback", :to => "home#auth_callback"  
   match "auth/:provider/unbind", :to => "home#auth_unbind"  
   
   devise_for :users, :path => "account"
-  resources :users, :path => "u", :only => :show
+  resources :users, :only => :show
   
   resources :nodes
   
-  match "n:id" => "topics#node", :as => :node_topics
-  match "t/last" => "topics#recent", :as => :recent_topics
-  resources :topics, :path => "t" do
+  match "topics/node:id" => "topics#node", :as => :node_topics
+  match "topics/last" => "topics#recent", :as => :recent_topics
+  resources :topics do
     member do
       post :reply
     end
@@ -21,7 +28,7 @@ Homeland::Application.routes.draw do
       get :feed
     end
   end
-  resources :replies, :path => "r"
+  resources :replies
   resources :photos do
     collection do
       get :tiny_new
@@ -36,5 +43,6 @@ Homeland::Application.routes.draw do
     resources :sections
     resources :users
     resources :photos
+    resources :posts
   end  
 end

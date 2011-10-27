@@ -1,6 +1,6 @@
 # coding: utf-8  
 require "redis-store"
-Homeland::Application.configure do
+RubyChina::Application.configure do
   # Settings specified here will take precedence over those in config/environment.rb
 
   # In the development environment your application's code is reloaded on

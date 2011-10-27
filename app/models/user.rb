@@ -23,6 +23,7 @@ class User
   has_many :notes
   has_many :replies
 	embeds_many :authorizations
+  has_many :posts
     
   attr_accessor :password_confirmation
   attr_protected :verified, :replies_count

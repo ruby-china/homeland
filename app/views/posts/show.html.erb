@@ -1,0 +1,34 @@
+<%= render "base" %>
+<%= content_for :sitemap do %><span class="current">阅读</span><% end %>
+
+<div class="sidebar">
+  <div id="post_author" class="box">
+    <h2>提交者</h2>
+    <div class="inner">
+      <div class="avatar"><%= raw user_avatar_tag(@post.user, :large) %></div>
+      <div class="name"><%= user_name_tag(@post.user) %></div>
+    </div>
+  </div>
+  <div class="box">
+    <h2>你可能也喜欢</h2>
+    <div class="inner">
+    </div>
+  </div>
+</div>
+  
+<div class="content">
+  <div id="post_show" class="box">
+    <h1><%= @post.title %></h1>
+    <div class="info">
+      <%= user_name_tag(@post.user) %> 投稿于: <%= timeago(@post.created_at) %> , <%= @post.hits %> 次阅读
+    </div>
+    <div class="source">
+      文章来源：<a href="<%= @post.source_url %>?ref=<%= Setting.domain %>" target="_blank"><%= @post.source %></a>
+    </div>
+    <div class="body"><%= raw simple_format @post.body %></div>
+    <div class="votes">
+
+    </div>
+    <div class="tags">标签: <%= post_tags_tag(@post) %></div>
+  </div>
+</div>

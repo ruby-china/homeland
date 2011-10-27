@@ -4,4 +4,4 @@
 require File.expand_path('../config/application', __FILE__)
 require 'rake'
 
-Homeland::Application.load_tasks
+RubyChina::Application.load_tasks

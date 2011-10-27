@@ -3,6 +3,7 @@
     models:
       user: "用户"
       topic: "话题"
+      post: 文章
     attributes:
       user:
         name: "名字"
@@ -24,7 +25,13 @@
         user_id: "用户"
         body: "正文"
       reply:
-        body: "回复内容"          
+        body: "回复内容"  
+      post:
+        title: 标题
+        body: 正文
+        tag_list: 标签
+        source: 来源
+        source_url: 来源地址        
     errors:
       models:
         user: 用户        

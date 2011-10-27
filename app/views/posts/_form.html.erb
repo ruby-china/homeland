@@ -1,0 +1,41 @@
+<div class="box">
+<%= form_for(@post) do |f| %>
+  <fieldset>
+    <legend>投稿</legend>
+    <%= render "shared/error_messages", :target => @post %>
+    <div class="clearfix">
+      <%= f.label :title %>
+      <div class="input">
+        <%= f.text_field :title, :class => "xxlarge" %>
+      </div>
+    </div>
+    <div class="clearfix">
+      <%= f.label :body %>
+      <div class="input">
+        <%= f.text_area :body, :class => "long", :rows => "30" %>
+      </div>
+    </div>
+    <div class="clearfix">
+      <%= f.label :tag_list %>
+      <div class="input">
+        <%= f.text_field :tag_list, :class => "xxlarge", :placeholder => "Ruby, MongoDb" %>
+      </div>
+    </div>
+    <div class="clearfix">
+      <%= f.label :source %>
+      <div class="input">
+        <%= f.text_field :source, :class => "span3", :placeholder => "某某博客" %>
+      </div>
+    </div>
+    <div class="clearfix">
+      <%= f.label :source_url %>
+      <div class="input">
+        <%= f.text_field :source_url, :class => "xxlarge", :placeholder => "http://" %>
+      </div>
+    </div>
+    <div class="actions">
+      <%= f.submit "投稿", :class => "btn primary" %>
+    </div>
+  </fieldset>
+<% end %>
+</div>

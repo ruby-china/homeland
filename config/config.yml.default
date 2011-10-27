@@ -1,39 +1,20 @@
-development:
-  # 网站名称
-  app_name: "Homeland"
-  # 页脚版权
-  foot_html: "&copy; Homeland."
-  # 网站的域名
+defaults: &defaults
+  app_name: "Ruby China Group"
+  foot_html: "&copy; Ruby China Group."
   domain: "127.0.0.1:3000"    
-  # 设置管理员，在下面填写需要设置为管理员的用户 email
   admin_emails: 
     - "admin@admin.com"
   google_analytics_key: ""
-  smtp_username: 'support@app.com'
+  smtp_username: 'support@ruby-china.org'
   smtp_password: '123456'
   upload_url: "http://127.0.0.1:3000/file"
-  google_group_email: "homeland-test@googlegroups.com"
+  google_group_email: "shanghaionrails@googlegroups.com"
+
+development:
+  <<: *defaults
 
 test:
-  app_name: "Homeland"
-  foot_html: "&copy; Homeland."
-  domain: "127.0.0.1:3000"  
-  admin_emails: 
-    - "admin@admin.com"
-  google_analytics_key: ""
-  smtp_username: 'support@app.com'
-  smtp_password: '123456'
-  upload_url: "http://127.0.0.1:3000/file"
-  google_group_email: "homeland-test@googlegroups.com"
+  <<: *defaults
 
 production:
-  app_name: "Homeland"
-  foot_html: "&copy; Homeland."
-  domain: "127.0.0.1:3000"  
-  admin_emails: 
-    - "admin@admin.com"
-  google_analytics_key: ""
-  smtp_username: 'support@app.com'
-  smtp_password: '123456'
-  upload_url: "http://l.yourdomain.com"
-  google_group_email: "homeland-test@googlegroups.com"
+  <<: *defaults

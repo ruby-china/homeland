@@ -1,0 +1,27 @@
+<%= render "base" %>
+<% content_for :sitemap do %>
+  <span class="current">最新发布的文章</span>
+<% end %>
+<div class="sidebar">
+  <div class="box">
+    <%= link_to '投稿', new_post_path, :class => "btn success" %>
+  </div>
+</div>
+
+<div class="content">
+  <div id="posts" class="box">
+    <h1>最近发布的文章</h1>
+    <ul>
+    <% @posts.each do |item| %>
+    <li>
+      <div class="title"><%= post_title_tag(item) %></div>
+      <div class="info">
+        发布: <%= timeago(item.created_at) %>, <%= item.hits %> 次阅读
+      </div>
+    </li>
+    <% end %>
+    </ul>
+    <%= will_paginate1 @posts %>
+  </div>
+</div>
+

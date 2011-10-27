@@ -8,15 +8,15 @@ defaults: &defaults
 
 development:
   <<: *defaults
-  database: homeland_development
+  database: ruby_china_dev
 
 test:
   <<: *defaults
-  database: homeland_test
+  database: ruby_china_test
 
 # set these environment variables on your prod server
 production:
-  database: homeland
+  database: ruby_china
   host: '127.0.0.1'
   # port: 
   # username: ''

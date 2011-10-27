@@ -5,12 +5,7 @@ class HomeController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => [:auth_callback]
 
   def index
-    if !fragment_exist? "home/last_topics"
-      @last_topics = Topic.recent.limit(10)
-    end
-    if !fragment_exist? "home/actived_topics"
-      @actived_topics = Topic.last_actived.limit(10)
-    end
+    
   end
 
 	def auth_callback

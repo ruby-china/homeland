@@ -25,7 +25,7 @@ class User
 	embeds_many :authorizations
     
   attr_accessor :password_confirmation
-  attr_accessible :remember_me,:login, :name, :location, :website, :bio, :tagline, :email, :password, :password_confirmation
+  attr_protected :verified, :replies_count
   
   validates_presence_of :login, :name  
   validates_uniqueness_of :login, :name
@@ -37,6 +37,11 @@ class User
   def password_required?
     return false if self.guest
     (authorizations.empty? || !password.blank?) && super  
+  end
+  
+  def github_url
+    return "" if self.github.blank?
+    "http://github.com/#{self.github}"
   end
   
   before_create :default_value_for_create

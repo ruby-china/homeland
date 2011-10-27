@@ -27,6 +27,9 @@
 			<li><span>房号:</span> <%= @user.location %></li>
 			<li><span>加入时间:</span> <%= I18n.l(@user.created_at.to_date, :format => :long) %></li>
 			<li><span>签名:</span><%= @user.tagline %></li>
+			<% if !@user.github.blank? %>
+			<li><span>Github:</span><a href="<%= @user.github_url %>" target="_blank" rel="nofollow"><%= @user.github_url %></a></li>
+			<% end %>
 			<% if !@user.website.blank? %>
 			<li><span>个人主页:</span><a href="<%= @user.website %>" target="_blank" rel="nofollow"><%= @user.website %></a></li>
 			<% end %>

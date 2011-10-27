@@ -33,15 +33,17 @@
       	<div class="clearfix">
     	    <%= f.label :name %>
     	    <div class="input">
-    	      <%= f.text_field :name, :disabled => true, :class => "disabled span3" %>
+    	      <%= f.text_field :name, :class => "span3" %>
           </div>
       	</div>
+      	<% if @user.login.blank? %>
       	<div class="clearfix">
     	    <%= f.label :login %>
     	    <div class="input">
     	      <%= f.text_field :login, :class => "span3" %>
           </div>
       	</div>
+      	<% end %>
         <div class="clearfix">
       	  <%= f.label :email %>
       	  <div class="input">

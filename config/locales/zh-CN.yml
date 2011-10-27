@@ -5,7 +5,7 @@
       topic: "话题"
     attributes:
       user:
-        name: "大名"
+        name: "名字"
         login: "用户名"
         email: "Email"
         location: "城市"

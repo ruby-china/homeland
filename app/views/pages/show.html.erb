@@ -1,35 +1,20 @@
-<p id="notice"><%= notice %></p>
+<%= render "base" %>
+<%= content_for :sitemap do %><li class="active">查看</li><% end %>
 
-<p>
-  <b>Slug:</b>
-  <%= @page.slug %>
-</p>
-
-<p>
-  <b>Title:</b>
-  <%= @page.title %>
-</p>
-
-<p>
-  <b>Body:</b>
-  <%= @page.body %>
-</p>
-
-<p>
-  <b>Body html:</b>
-  <%= @page.body_html %>
-</p>
-
-<p>
-  <b>Editors:</b>
-  <%= @page.editors %>
-</p>
-
-<p>
-  <b>Locked:</b>
-  <%= @page.locked %>
-</p>
-
-
-<%= link_to 'Edit', edit_page_path(@page) %> |
-<%= link_to 'Back', pages_path %>
+<div id="page_show" class="box">
+  <div class="info">
+    最后更新于 <%= timeago @page.updated_at %>
+    <a href="<%= edit_page_path(@page) %>">编辑</a>
+  </div>
+  <div class="markdown_content">
+    <%= raw @page.body_html %>
+  </div>
+  <div class="editors">
+    <h3>贡献者:</h3>
+    <div>
+      <% @page.editors.each do |item| %>
+        <%= user_avatar_tag(item, :small) %>
+      <% end %>
+    </div>
+  </div>
+</div>

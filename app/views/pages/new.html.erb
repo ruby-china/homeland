@@ -1,5 +1,7 @@
-<h1>New page</h1>
+<%= render "base" %>
+<%= content_for :sitemap do %><li class="active">创建 Wiki 页面</li><% end %>
 
-<%= render 'form' %>
-
-<%= link_to 'Back', pages_path %>
+<div class="box">
+  <h1>创建 Wiki 页面</h1>
+  <%= render 'form' %>
+</div>

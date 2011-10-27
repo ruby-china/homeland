@@ -12,6 +12,7 @@ class TopicsController < ApplicationController
     if current_user
       @user_last_nodes = Node.find_last_visited_by_user(current_user.id)
     end 
+    set_seo_meta("论坛")
   end
 
   public
@@ -20,7 +21,7 @@ class TopicsController < ApplicationController
   def index
     @topics = Topic.last_actived.limit(10)
     @sections = Section.all
-    set_seo_meta("","#{Setting.app_name}论坛,#{Setting.app_name}小区论坛,#{Setting.app_name}业主论坛")
+    set_seo_meta("","#{Setting.app_name}论坛")
   end
   
   def feed
@@ -35,13 +36,13 @@ class TopicsController < ApplicationController
       Node.set_user_last_visited(current_user.id, @node.id)
     end
     @topics = @node.topics.last_actived.paginate(:page => params[:page],:per_page => 50)
-    set_seo_meta("#{@node.name} &raquo; 社区论坛","#{Setting.app_name}社区#{@node.name}",@node.summary)
+    set_seo_meta("#{@node.name} &raquo; 论坛","#{Setting.app_name}社区#{@node.name}",@node.summary)
     render :action => "index"
   end
 
   def recent
     @topics = Topic.recent.limit(50)
-    set_seo_meta("最近活跃的50个帖子 &raquo; 社区论坛")
+    set_seo_meta("最近活跃的50个帖子 &raquo; 论坛")
     render :action => "index"
   end
 
@@ -49,7 +50,7 @@ class TopicsController < ApplicationController
     result = Redis::Search.query("Topic", params[:key], :limit => 500)
     ids = result.collect { |r| r["id"] }
     @topics = Topic.find(ids).paginate(:page => params[:page], :per_page => 20)
-    set_seo_meta("搜索#{params[:s]} &raquo; 社区论坛")
+    set_seo_meta("搜索#{params[:s]} &raquo; 论坛")
     render :action => "index"
   end
 
@@ -62,7 +63,7 @@ class TopicsController < ApplicationController
     end
     @node = @topic.node
     @replies = @topic.replies.all
-    set_seo_meta("#{@topic.title} &raquo; 社区论坛")
+    set_seo_meta("#{@topic.title} &raquo; 论坛")
   end
 
   # GET /topics/new
@@ -74,7 +75,7 @@ class TopicsController < ApplicationController
     if @node.blank?
       render_404
     end
-    set_seo_meta("发帖子 &raquo; 社区论坛")
+    set_seo_meta("发帖子 &raquo; 论坛")
   end
 
   def reply
@@ -93,7 +94,7 @@ class TopicsController < ApplicationController
   def edit
     @topic = current_user.topics.find(params[:id])
     @node = @topic.node
-    set_seo_meta("改帖子 &raquo; 社区论坛")
+    set_seo_meta("改帖子 &raquo; 论坛")
   end
 
   # POST /topics

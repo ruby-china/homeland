@@ -1,41 +1,28 @@
 <%= form_for(@page) do |f| %>
-  <% if @page.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@page.errors.count, "error") %> prohibited this page from being saved:</h2>
-
-      <ul>
-      <% @page.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+  <fieldset>
+    <legend>Wiki页面编辑</legend>
+    <%= render "shared/error_messages", :target => @page %>
+    <div class="clearfix">
+      <%= f.label :slug %>
+      <div class="input">
+        <%= f.text_field :slug %><br />
+        <span class="help-inline">http://<%= Setting.domain %>/wiki/:slug</span>
+      </div>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :slug %><br />
-    <%= f.text_field :slug %>
-  </div>
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :body %><br />
-    <%= f.text_field :body %>
-  </div>
-  <div class="field">
-    <%= f.label :body_html %><br />
-    <%= f.text_field :body_html %>
-  </div>
-  <div class="field">
-    <%= f.label :editors %><br />
-    <%= f.text_field :editors %>
-  </div>
-  <div class="field">
-    <%= f.label :locked %><br />
-    <%= f.check_box :locked %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="clearfix">
+      <%= f.label :title %>
+      <div class="input">
+        <%= f.text_field :title, :class => "xxlarge" %>
+      </div>
+    </div>
+    <div class="clearfix">
+      <%= f.label :body %>
+      <div class="input">
+        <%= f.text_area :body, :class => "long", :rows => "30" %><br />
+        <span class="help-inline">请使用 Markdown 格式编写。</span>
+      </div>
+    </div>
+    <div class="actions">
+      <%= f.submit "保存", :class => "btn primary" %>
+    </div>
 <% end %>

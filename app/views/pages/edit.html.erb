@@ -1,6 +1,7 @@
-<h1>Editing page</h1>
+<%= render "base" %>
+<%= content_for :sitemap do %><li class="active">编辑页面</li><% end %>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @page %> |
-<%= link_to 'Back', pages_path %>
+<div class="box">
+  <h1>修改页面</h1>
+  <%= render 'form' %>
+</div>

@@ -14,8 +14,10 @@ class Page
   field :body
   # Markdown 格式化后的 html
   field :body_html
-  field :editors, :type => Array, :default => []
+  field :editor_ids, :type => Array, :default => []
   field :locked, :type => Boolean, :default => false
+  
+  scope :recent, desc(:_id)
   
   attr_accessor :user_id
   attr_protected :body_html, :locked, :editors
@@ -24,15 +26,23 @@ class Page
   
   before_save :markdown_for_body_html
   def markdown_for_body_html
-    self.body_html = BlueCloth.new(str).to_html
+    self.body_html = BlueCloth.new(self.body).to_html
   rescue => e
     Rails.logger.error("markdown_for_body_html failed: #{e}")
   end
   
   before_save :append_editor
   def append_editor
-    if not self.editors.include?(self.user_id.to_i)
-      self.editors << self.user_id.to_i
+    if not self.editor_ids.include?(self.user_id.to_i)
+      self.editor_ids << self.user_id.to_i
     end
+  end
+  
+  def editors
+    User.where(:_id.in => self.editor_ids)
+  end
+  
+  def self.find_by_slug(slug)
+    where(:slug => slug).first
   end
 end

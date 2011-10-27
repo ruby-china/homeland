@@ -1,0 +1,10 @@
+<%= render "base" %>
+<%= content_for :sitemap do %><li class="active">目录</li><% end %>
+
+<div class="box">
+  <ul>
+  <% @pages.each do |item| %>
+    <li><%= page_title_tag(item) %></li>
+  <% end %>
+  </ul>
+</div>

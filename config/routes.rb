@@ -1,12 +1,11 @@
 RubyChina::Application.routes.draw do
-  
-  resources :pages
 
-  resources :posts do
+  resources :posts
+  resources :pages, :path => "wiki" do
     collection do
+      get :recent
     end
   end
-  resources :pages, :path => "wiki"
   resources :comments
   resources :notes
   match "/uploads/*path" => "gridfs#serve"

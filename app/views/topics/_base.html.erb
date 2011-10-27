@@ -5,6 +5,7 @@
   <%= javascript_include_tag "topics" %>
 <% end %>
 <%= content_for :base_sitemap do %>
+  <li><a href="<%= topics_path %>">论坛</a> <span class="divider">/</span></li>
   <% if !@node.blank? %>
   <li><a href="<%= node_topics_path(:id => @node.id) %>"><%= @node.name %></a> <span class="divider">/</span></li>
   <% end %>

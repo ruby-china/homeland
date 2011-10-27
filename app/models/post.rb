@@ -19,7 +19,13 @@ class Post
   field :source
   # 来源地址
   field :source_url
+  field :comments_count, :type => Integer, :default => 0
   belongs_to :user
+  
+  index :tags
+  index :user_id
+  index :state
+  index [:tags, :state]
   
   counter :hits, :default => 0
   
@@ -29,6 +35,7 @@ class Post
   validates_presence_of :title, :body, :tag_list
   
   scope :normal, where(:state => STATE[:normal])
+  scope :by_tag, Proc.new { |t| where(:tags => t) }
   scope :recent, desc(:_id)
   
   before_save :split_tags

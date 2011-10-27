@@ -1,0 +1,37 @@
+# coding: utf-8
+class Comment
+  include Mongoid::Document
+  include Mongoid::Timestamps
+  include Mongoid::SoftDelete
+  
+  field :body
+  
+  belongs_to :commentable, :polymorphic => true
+  belongs_to :user
+
+  index :user_id
+  index :commentable_type
+  index :commentable_id
+
+  validates_presence_of :body
+  
+  scope :recent, desc(:_id)
+
+  before_create :fix_commentable_id
+  def fix_commentable_id
+    self.commentable_id = self.commentable_id.to_i
+  end
+
+  after_create :inc_counter_cache
+  def inc_counter_cache
+    return if self.commentable.blank?
+    self.commentable.inc(:comments_count,1)
+  end
+
+  before_destroy :dec_counter_cache
+  def dec_counter_cache
+    return if self.commentable.blank?
+    self.commentable.inc(:comments_count,-1)
+  end
+
+end

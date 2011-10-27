@@ -2,7 +2,11 @@
 class PostsController < ApplicationController
   before_filter :require_user, :only => [:new, :edit, :create, :update, :destroy]
   def index
-    @posts = Post.normal.recent.paginate :page => params[:page], :per_page => 2
+    scoped_posts = Post.normal
+    if !params[:tag].blank?
+      scoped_posts = scoped_posts.by_tag(params[:tag])
+    end
+    @posts = scoped_posts.recent.paginate :page => params[:page], :per_page => 20
   end
 
   def show

@@ -1,6 +1,10 @@
 <%= render "base" %>
 <% content_for :sitemap do %>
-  <span class="current">最新发布的文章</span>
+  <% if params[:tag] %>
+  <li class="active"><%= params[:tag] %></li>
+  <% else %>
+  <li class="active">最新发布的文章</li>
+  <% end %>
 <% end %>
 <div class="sidebar">
   <div class="box">
@@ -16,7 +20,7 @@
     <li>
       <div class="title"><%= post_title_tag(item) %></div>
       <div class="info">
-        发布: <%= timeago(item.created_at) %>, <%= item.hits %> 次阅读
+        发布: <%= timeago(item.created_at) %>, <%= item.hits %> 次阅读, <a href="<%= post_path(item.id) %>#comments"><%= item.comments_count %> 条评论</a>
       </div>
     </li>
     <% end %>

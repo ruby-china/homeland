@@ -25,6 +25,7 @@ gem "nokogiri", "1.5.0"
 gem "jquery-rails", "1.0.16"
 gem "rails_autolink", ">= 1.0.4"
 gem "settingslogic", "~> 2.0.6"
+gem "cells", "3.6.7"
 
 group :assets do
   gem 'sass-rails', "  ~> 3.1.4"

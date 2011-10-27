@@ -1,0 +1,24 @@
+<div id="<%= @commentable.class.name %>_<%= @commentable.id %>_cell_comments" class="cell_comments box">
+  <% if !@comments.blank? %>
+    <% @comments.each do |item| %>
+    <%= render "/comments/comment", :item => item %>
+    <% end %>
+  <% else %>
+    <div class="no_result">暂无<%= @title %>.</div>
+  <% end %>
+</div>
+<% if @current_user %>
+<div id="<%= @commentable.class.name %>_<%= @commentable.id %>_cell_new_comment" class="cell_comments_new box">
+  <%= form_for(@comment, :remote => true, :html => { :onsubmit => "App.loading(true);"}) do |f| %>
+    <%= f.hidden_field :commentable_type %>
+    <%= f.hidden_field :commentable_id %>
+    <div class="clearfix">
+      <%= f.text_area :body, :class => "long", :rows => "5" %>
+    </div>
+    <div class="buttons">
+      <%= f.submit "发表#{@title}", :class => "btn primary" %>
+      <span class="help-inline">Ctrl+Enter</span>
+    </div>
+  <% end %>
+</div>
+<% end %>

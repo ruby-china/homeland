@@ -34,3 +34,19 @@
 
 .markdown_content { }
 #main .markdown_content h1 { font-size:22px; text-align:left; }
+
+.cell_comments {
+  .comment { 
+    margin-bottom:10px;
+    .info {
+      color:#999;
+      font-size:12px;
+      border-bottom:1px solid #eee;
+      margin-bottom:5px;
+      padding:5px 0;
+    }
+    .body {
+      font-size:13px;
+    }
+  }
+}

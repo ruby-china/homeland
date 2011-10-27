@@ -1,0 +1,8 @@
+<div class="comment">
+  <div class="info">
+    <%= user_name_tag(item.user) %> 发表于与 <%= timeago(item.created_at) %>
+  </div>
+  <div class="body">
+    <%= simple_format item.body %>
+  </div>
+</div>

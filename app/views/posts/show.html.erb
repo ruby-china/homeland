@@ -20,15 +20,21 @@
   <div id="post_show" class="box">
     <h1><%= @post.title %></h1>
     <div class="info">
-      <%= user_name_tag(@post.user) %> 投稿于: <%= timeago(@post.created_at) %> , <%= @post.hits %> 次阅读
+      <%= user_name_tag(@post.user) %> 投稿于: <%= timeago(@post.created_at) %> , <%= @post.hits %> 次阅读, 
+      <a href="#comments"><%= @post.comments_count %> 条评论</a>
     </div>
+    <% if !@post.source.blank? %>
     <div class="source">
       文章来源：<a href="<%= @post.source_url %>?ref=<%= Setting.domain %>" target="_blank"><%= @post.source %></a>
     </div>
+    <% end %>
     <div class="body"><%= raw simple_format @post.body %></div>
     <div class="votes">
 
     </div>
     <div class="tags">标签: <%= post_tags_tag(@post) %></div>
+  </div>
+  <div id="comments">
+    <%= render_cell :comments, :index, :commentable => @post, :current_user => current_user, :title => "评论" %>
   </div>
 </div>

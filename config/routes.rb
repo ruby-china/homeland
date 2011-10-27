@@ -2,10 +2,9 @@ RubyChina::Application.routes.draw do
   
   resources :posts do
     collection do
-      get :tag
     end
   end
-
+  resources :comments
   resources :notes
   match "/uploads/*path" => "gridfs#serve"
   root :to => "home#index"  

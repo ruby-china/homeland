@@ -7,15 +7,16 @@ Support for Twitter, Facebook, Google, Github account login.
   * Install *Redis*, *MongoDb* 
 
 Install thought this commands:    
-```
-cp config/config.yml.default config/config.yml
-cp config/mongoid.yml.default config/mongoid.yml
-cp config/redis.yml.default config/redis.yml
-bundle install
-bundle update rails
-rake assets:precompile
-rails s
-```
+
+  ```
+  cp config/config.yml.default config/config.yml
+  cp config/mongoid.yml.default config/mongoid.yml
+  cp config/redis.yml.default config/redis.yml
+  bundle install
+  bundle update rails
+  rake assets:precompile
+  rails s
+  ```
 
 ## Try it first.
 

@@ -71,12 +71,14 @@
   <div id="reply" class="form box">
     <h4>回复</h4>
     <%= form_for(Reply.new,:url => reply_topic_path(params[:id])) do |f| %>
+      <div class="pull-right">
+        <button type="submit" class="btn primary">提交回复</button><br />
+        <span class="help-inline">Ctrl+Enter</span>
+      </div>
       <div class="clearfix">
-        <%= f.text_area :body,:class => "long", :rows => "4" %>
+        <%= f.text_area :body,:class => "span10", :rows => "4" %>
       </div>
-      <div class="buttons">
-        <button type="submit" class="btn primary">提交回复</button>
-      </div>
+
     <% end %>
   </div>
 	<% else %>

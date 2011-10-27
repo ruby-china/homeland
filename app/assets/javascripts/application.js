@@ -5,6 +5,7 @@
 //= require bootstrap-twipsy
 //= require jquery.jdialog
 //= require jquery.timeago
+//= require jquery.hotkeys
 //= require_self
 $(document).ready(function() {
   $("abbr.timeago").timeago();

@@ -28,7 +28,7 @@
       文章来源：<a href="<%= @post.source_url %>?ref=<%= Setting.domain %>" target="_blank"><%= @post.source %></a>
     </div>
     <% end %>
-    <div class="body"><%= raw simple_format @post.body %></div>
+    <div class="body"><%= raw @post.body %></div>
     <div class="votes">
 
     </div>

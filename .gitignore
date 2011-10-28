@@ -10,7 +10,7 @@ config/config.yml
 config/mongoid.yml
 config/mailer_daemon.yml
 public/uploads/**/*
-public/t
-public/t/**/*
+public/topics
+public/topics/**/*
 .redcar
 Gemfile.lock

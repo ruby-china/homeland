@@ -19,7 +19,7 @@
 .topics .topic .info { color:#999; margin-bottom:2px; }
 .topics .topic .info a:link,
 .topics .topic .info a:visited { color:#999; text-decoration: underline; }
-.topics .body { line-height:160%; font-size:14px; margin-top:8px;}
+.topics .body { line-height:160%; font-size:14px; margin-top:8px; word-wrap: break-word;}
 .topics .body p { margin-bottom:10px; }
 .topics .body img { max-width:690px;}
 .topics .tools { text-align:right; }
@@ -68,7 +68,7 @@
 #replies .reply .info .name { float:left; }
 #replies .reply .info .time { float:right; text-align:right; }
 #replies .reply .info a.reply_link img { vertical-align:middle;}
-#replies .reply .body { line-height:180%; font-size:14px; text-overflow: ellipsis;}
+#replies .reply .body { line-height:180%; font-size:14px; text-overflow: ellipsis; word-wrap: break-word; }
 #replies .reply .body img { max-width:622px;}
 
 #reply.form textarea { width:578px; }

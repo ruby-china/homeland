@@ -23,7 +23,7 @@ module ApplicationHelper
   end
   
   def admin?(user = nil)
-    return false if user.blank?
+    user = current_user if user.blank?
     return true if Setting.admin_emails.include?(user.email)
     return false
   end

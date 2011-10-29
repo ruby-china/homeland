@@ -12,7 +12,7 @@
     <%= raw @page.body_html %>
   </div>
   <div class="editors">
-    <h3>贡献者:</h3>
+    <h3>本页贡献者:</h3>
     <div>
       <% @page.editors.each do |item| %>
         <%= user_avatar_tag(item, :small) %>

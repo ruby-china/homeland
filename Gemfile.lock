@@ -34,7 +34,6 @@ GEM
     addressable (2.2.6)
     arel (2.2.1)
     bcrypt-ruby (3.0.1)
-    bluecloth (2.1.0)
     bson (1.4.1)
     bson_ext (1.4.1)
     builder (3.0.0)
@@ -172,6 +171,7 @@ GEM
     rake (0.9.2.2)
     rdoc (3.11)
       json (~> 1.4)
+    redcarpet (2.0.0b5)
     redis (2.2.2)
     redis-namespace (1.0.3)
       redis (< 3.0.0)
@@ -224,7 +224,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bluecloth (= 2.1.0)
   bson_ext (= 1.4.1)
   carrierwave (= 0.5.6)
   carrierwave-mongoid (= 0.1.2)
@@ -244,6 +243,7 @@ DEPENDENCIES
   rails (= 3.1.1)
   rails-i18n (= 0.1.8)
   rails_autolink (>= 1.0.4)
+  redcarpet (~> 2.0.0b5)
   redis-namespace (~> 1.0.2)
   redis-objects (= 0.5.2)
   redis-search (= 0.6.3)

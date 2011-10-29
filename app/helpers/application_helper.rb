@@ -1,5 +1,5 @@
 # coding: utf-8  
-require "bluecloth"
+require 'redcarpet'
 module ApplicationHelper
   # return the formatted flash[:notice] html
   def notice_message()
@@ -19,7 +19,8 @@ module ApplicationHelper
   end
   
   def markdown(str)
-    raw "<div class=\"markdown_content\">#{BlueCloth.new(str).to_html}</div>"
+    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+    raw "<div class=\"wikistyle\">#{markdown.render(str)}</div>"
   end
   
   def admin?(user = nil)

@@ -1,6 +1,7 @@
 # coding: utf-8
 # 单页的文档页面
 # 采用 Markdown 编写
+require 'redcarpet'
 class Page
   include Mongoid::Document
   include Mongoid::Timestamps  
@@ -26,7 +27,8 @@ class Page
   
   before_save :markdown_for_body_html
   def markdown_for_body_html
-    self.body_html = BlueCloth.new(self.body).to_html
+    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+    self.body_html = markdown.render(self.body)
   rescue => e
     Rails.logger.error("markdown_for_body_html failed: #{e}")
   end

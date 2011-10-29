@@ -1,0 +1,44 @@
+
+/* Wiki Style from Github */
+.wikistyle h1,.wikistyle h2,.wikistyle h3,.wikistyle h4,.wikistyle h5,.wikistyle h6{border:0!important;}
+.wikistyle h1{font-size:170%!important;border-top:4px solid #aaa!important;padding-top:.5em!important;margin-top:1.5em!important;}
+.wikistyle h1:first-child{margin-top:0!important;padding-top:.25em!important;border-top:none!important;}
+.wikistyle h2{font-size:150%!important;margin-top:1.5em!important;border-top:4px solid #e0e0e0!important;padding-top:.5em!important;}
+.wikistyle h3{margin-top:1em!important;}
+.wikistyle hr{border:1px solid #ddd;}
+.wikistyle p{margin:1em 0!important;line-height:1.5em!important;}
+.wikistyle a.absent{color:#a00;}
+.wikistyle del{color:#999;}
+.wikistyle ul,#wiki-form .content-body ul{margin:1em 0 1em 2em!important;}
+.wikistyle ol,#wiki-form .content-body ol{margin:1em 0 1em 2em!important;}
+.wikistyle ul li,#wiki-form .content-body ul li,.wikistyle ol li,#wiki-form .content-body ol li{margin-top:.5em;margin-bottom:.5em;}
+.wikistyle ul ul,.wikistyle ul ol,.wikistyle ol ol,.wikistyle ol ul,#wiki-form .content-body ul ul,#wiki-form .content-body ul ol,#wiki-form .content-body ol ol,#wiki-form .content-body ol ul{margin-top:0!important;margin-bottom:0!important;}
+.wikistyle blockquote{margin:1em 0!important;border-left:5px solid #ddd!important;padding-left:.6em!important;color:#555!important;}
+.wikistyle dt{font-weight:bold!important;margin-left:1em!important;}
+.wikistyle dd{margin-left:2em!important;margin-bottom:1em!important;}
+.wikistyle table{margin:1em 0!important;}
+.wikistyle table th{border-bottom:1px solid #bbb!important;padding:.2em 1em!important;}
+.wikistyle table td{border-bottom:1px solid #ddd!important;padding:.2em 1em!important;}
+.wikistyle a code,.wikistyle a:link code,.wikistyle a:visited code{color:#4183c4!important;}
+.wikistyle img{max-width:100%;}
+.wikistyle pre.console{margin:1em 0!important;font-size:12px!important;background-color:black!important;padding:.5em!important;line-height:1.5em!important;color:white!important;}
+.wikistyle pre.console code{padding:0!important;font-size:12px!important;background-color:black!important;border:none!important;color:white!important;}
+.wikistyle pre.console span{color:#888!important;}
+.wikistyle pre.console span.command{color:yellow!important;}
+.wikistyle .frame{margin:0;display:inline-block;}
+.wikistyle .frame img{display:block;}
+.wikistyle .frame>span{display:block;border:1px solid #aaa;padding:4px;}
+.wikistyle .frame span span{display:block;font-size:10pt;margin:0;padding:4px 0 2px 0;text-align:center;line-height:10pt;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;}
+.wikistyle .float-left{float:left;padding:.5em 1em .25em 0;}
+.wikistyle .float-right{float:right;padding:.5em 0 .25em 1em;}
+.wikistyle .align-left{display:block;text-align:left;}
+.wikistyle .align-center{display:block;text-align:center;}
+.wikistyle .align-right{display:block;text-align:right;}
+.wikistyle pre{margin:1em 0;font-size:12px;background-color:#eee;border:1px solid #ddd;padding:5px;color:#444;overflow:auto;-webkit-box-shadow:rgba(0,0,0,0.07) 0 1px 2px inset;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;}
+.wikistyle pre::-webkit-scrollbar{height:8px;width:8px;}
+.wikistyle pre::-webkit-scrollbar-track-piece{margin-bottom:10px;background-color:#e5e5e5;border-bottom-left-radius:4px 4px;border-bottom-right-radius:4px 4px;border-top-left-radius:4px 4px;border-top-right-radius:4px 4px;}
+.wikistyle pre::-webkit-scrollbar-thumb:vertical{height:25px;background-color:#ccc;-webkit-border-radius:4px;-webkit-box-shadow:0 1px 1px rgba(255,255,255,1);}
+.wikistyle pre::-webkit-scrollbar-thumb:horizontal{width:25px;background-color:#ccc;-webkit-border-radius:4px;}
+.wikistyle pre code{padding:0!important;font-size:12px!important;background-color:#eee!important;border:none!important;}
+.wikistyle code{font-size:12px!important;background-color:#f8f8ff!important;color:#444!important;padding:0 .2em!important;border:1px solid #dedede!important;}
+

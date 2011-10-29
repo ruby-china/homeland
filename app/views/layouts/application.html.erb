@@ -9,6 +9,7 @@
   <link rel="shortcut icon" href="<%= asset_path("icon.png") %>" /> 
   <%= csrf_meta_tag %>
 	<%= javascript_include_tag "application" %>
+	<script type="text/javascript" src="http://jashkenas.github.com/coffee-script/extras/coffee-script.js"></script>
 	<%= auto_discovery_link_tag(:rss,feed_topics_url,:title => '订阅最新贴') %>
 	<%= yield :scripts %>
 </head>

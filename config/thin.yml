@@ -1,7 +1,7 @@
 ---
 address: 0.0.0.0
 pid: tmp/pids/thin.pid
-timeout: 120
+timeout: 400
 port: 7000
 log: log/thin.log
 max_conns: 20480

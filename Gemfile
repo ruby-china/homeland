@@ -20,7 +20,7 @@ gem 'redis-search', '0.6.3'
 gem "rails-i18n","0.1.8"
 gem 'redis-namespace','~> 1.0.2'
 gem "redis-objects", "0.5.2"
-gem "redcarpet","~> 2.0.0b5"
+gem "rdiscount","1.6.8"
 gem "nokogiri", "1.5.0"
 gem "jquery-rails", "1.0.16"
 gem "rails_autolink", ">= 1.0.4"

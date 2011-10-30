@@ -1,7 +1,7 @@
 # coding: utf-8
 # 单页的文档页面
 # 采用 Markdown 编写
-require 'redcarpet'
+require 'rdiscount'
 class Page
   include Mongoid::Document
   include Mongoid::Timestamps  
@@ -25,10 +25,13 @@ class Page
   validates_presence_of :slug, :title, :body, :user_id
   validates_uniqueness_of :slug
   
-  before_save :markdown_for_body_html
+  after_save :markdown_for_body_html
   def markdown_for_body_html
-    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
-    self.body_html = markdown.render(self.body)
+    Thread.new do
+      md = RDiscount.new(self.body)
+      self.update_attribute(:body_html, md.to_html)
+      md = nil
+    end
   rescue => e
     Rails.logger.error("markdown_for_body_html failed: #{e}")
   end

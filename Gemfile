@@ -1,8 +1,8 @@
 source 'http://rubygems.org'
 
 gem "rails", "3.1.1"
-gem "bson_ext", "1.4.1"
-gem "mongoid", "2.2.0"
+gem "bson_ext", "1.4.0"
+gem "mongoid", "2.2.2"
 gem 'carrierwave', '0.5.6'
 gem 'carrierwave-mongoid', '0.1.2', :require => 'carrierwave/mongoid'
 gem 'mini_magick','3.3'

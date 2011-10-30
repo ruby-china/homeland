@@ -11,6 +11,9 @@ class Reply
   belongs_to :user, :inverse_of => :replies
   belongs_to :topic, :inverse_of => :replies
   
+  index :user_id
+  index :topic_id
+  
   attr_protected :user_id, :topic_id
 
   validates_presence_of :body

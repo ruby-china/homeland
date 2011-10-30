@@ -11,6 +11,8 @@ class Node
   has_many :topics
   belongs_to :section
   
+  index :section_id
+  
   validates_presence_of :name, :summary
   validates_uniqueness_of :name
   

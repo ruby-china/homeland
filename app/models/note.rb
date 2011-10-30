@@ -10,6 +10,8 @@ class Note
   field :changes_count, :type =>  Integer, :default => 0
   field :publish, :type => Boolean, :default => false
   belongs_to :user
+  
+  index :user_id
 
   attr_protected :user_id, :changes_count, :word_count  
 

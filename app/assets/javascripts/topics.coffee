@@ -36,7 +36,7 @@ window.Topics =
     $("#replies .reply").removeClass("light")
     $("#reply"+floor).addClass("light")
     
-# Page.ready
+# pages ready
 $(document).ready ->
   $("textarea").bind "keydown","ctrl+return",(el) ->
     if $(el.target).val().trim().length > 0

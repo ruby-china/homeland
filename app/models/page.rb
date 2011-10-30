@@ -6,7 +6,7 @@ class Page
   include Mongoid::Document
   include Mongoid::Timestamps  
   include Mongoid::SoftDelete
-  include Mongoid::Versioning
+  # include Mongoid::Versioning
   
   # 页面地址
   field :slug
@@ -20,18 +20,18 @@ class Page
   
   scope :recent, desc(:_id)
   
+  index :slug
+  
   attr_accessor :user_id
   attr_protected :body_html, :locked, :editors
   validates_presence_of :slug, :title, :body, :user_id
   validates_uniqueness_of :slug
   
-  after_save :markdown_for_body_html
+  before_save :markdown_for_body_html
   def markdown_for_body_html
-    Thread.new do
-      md = RDiscount.new(self.body)
-      self.update_attribute(:body_html, md.to_html)
-      md = nil
-    end
+    md = RDiscount.new(self.body)
+    self.body_html = md.to_html
+    md = nil
   rescue => e
     Rails.logger.error("markdown_for_body_html failed: #{e}")
   end

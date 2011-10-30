@@ -19,6 +19,9 @@ class User
   field :tagline  
   field :replies_count, :type => Integer, :default => 0  
   
+  index :login
+  index :email
+  
   has_many :topics, :dependent => :destroy  
   has_many :notes
   has_many :replies

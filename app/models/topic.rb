@@ -21,6 +21,10 @@ class Topic
   attr_protected :user_id
   validates_presence_of :user_id, :title, :body, :node_id
   
+  index :node_id
+  index :user_id
+  index :replied_at
+  
   counter :hits, :default => 0
   
   redis_search_index(:title_field => :title,

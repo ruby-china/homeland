@@ -6,7 +6,6 @@ class Page
   include Mongoid::Document
   include Mongoid::Timestamps  
   include Mongoid::SoftDelete
-  # include Mongoid::Versioning
   
   # 页面地址
   field :slug

@@ -64,7 +64,6 @@ class Cpanel::UsersController < Cpanel::ApplicationController
   def update
     @user = User.find(params[:id])
     @user.email = params[:user][:email]
-    @user.name = params[:user][:name]
     @user.login = params[:user][:login]
     @user.state = params[:user][:state]
     @user.verified = params[:user][:verified]

@@ -1,3 +1,11 @@
 <%= render "base" %>
 <%= content_for :sitemap do %><li class="active">索引</li><% end %>
-<%= raw SiteConfig.wiki_index_html %>
+<div id="pages">
+  <div class="tools">
+    <a href="<%= recent_pages_path %>">Wiki目录</a>
+    <% if wiki_editor? %>
+    <a href="<%= new_page_path %>" class="btn primary">创建新页面</a>
+    <% end %>
+  </div>
+  <%= raw SiteConfig.wiki_index_html %>
+</div>

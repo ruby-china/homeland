@@ -18,7 +18,7 @@
         last_logined_at: "上次登录时间"
         tagline: "签名"
         state: "状态"
-        verified: "已实名验证"
+        verified: "信任用户"
         remember_me: 记住登陆状态
         current_password: 旧密码
       topic:

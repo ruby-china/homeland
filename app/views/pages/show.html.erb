@@ -5,7 +5,9 @@
   <% if !@page.locked or admin? %>
     <div class="info">
       最后更新于 <%= timeago @page.updated_at %>
+      <% if wiki_editor? %>
       <a href="<%= edit_page_path(@page) %>">编辑</a>
+      <% end %>
     </div>
   <% end %>
   <div class="wikistyle">

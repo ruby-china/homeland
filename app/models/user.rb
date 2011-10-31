@@ -12,6 +12,7 @@ class User
   field :bio
   field :website
   field :github
+  # 是否信任用户
   field :verified, :type => Boolean, :default => false
   field :state, :type => Integer, :default => 1
   field :guest, :type => Boolean, :default => false
@@ -45,6 +46,18 @@ class User
   def github_url
     return "" if self.github.blank?
     "http://github.com/#{self.github}"
+  end
+  
+  # 是否是管理员
+  def admin?
+    return true if Setting.admin_emails.include?(self.email)
+    return false
+  end
+  
+  # 是否有 Wiki 维护权限
+  def wiki_editor?
+    return true if self.admin? or self.verified == true
+    return false
   end
   
   before_create :default_value_for_create

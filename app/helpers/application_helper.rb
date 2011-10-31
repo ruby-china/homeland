@@ -24,7 +24,15 @@ module ApplicationHelper
   
   def admin?(user = nil)
     user = current_user if user.blank?
-    return true if Setting.admin_emails.include?(user.email)
+    return false if user.blank?
+    return true if user.admin?
+    return false
+  end
+  
+  def wiki_editor?(user = nil)
+    user = current_user if user.blank?
+    return false if user.blank?
+    return true if user.wiki_editor?
     return false
   end
   
@@ -65,4 +73,5 @@ classname, ('disabled' unless page)].join(' ')
 :outer_window => 0, :renderer => BootstrapLinkRenderer, :previous_label =>
 '上一页'.html_safe, :next_label => '下一页'.html_safe)
   end
+  
 end

@@ -17,11 +17,8 @@ eos
 
 # Wiki 首页 HTML
 SiteConfig.save_default("wiki_index_html",<<-eos
-<div style="margin-bottom:10px;text-align:right;">
-  <a href="/wiki/recent">Wiki目录</a>
-</div>
 <div class="box">
-  Wiki Home page. <a href="/wiki/new" class="btn primary">创建新页面</a>
+  Wiki Home page.
 </div>
 eos
 )

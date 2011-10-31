@@ -10,6 +10,7 @@
 		<td>Email</td>
     <td>Location</td>
     <td>State</td>
+    <td>Verified</td>
     <td>操作</td>
   </tr>
 
@@ -20,6 +21,7 @@
     <td><%= user.email %></td>
     <td><%= user.location %></td>
     <td><%= user.state %></td>
+    <td><%= user.verified %></td>
     <td><%= link_to 'Edit', edit_cpanel_user_path(user) %>
     <%= link_to 'Destroy', cpanel_user_path(user), :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>

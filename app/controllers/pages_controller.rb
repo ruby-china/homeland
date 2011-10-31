@@ -2,6 +2,7 @@
 class PagesController < ApplicationController
   before_filter :check_lock, :only => [:edit, :update]
   before_filter :require_user, :only => [:new, :edit, :create, :update]
+  before_filter :check_permissions, :only => [:new, :edit, :create, :update]
   def index
     set_seo_meta("Wiki")
   end
@@ -65,5 +66,12 @@ class PagesController < ApplicationController
         end
       end
     end
-
+    
+    def check_permissions
+      if not current_user.wiki_editor?
+        render_403
+        return false
+      end
+      true
+    end
 end

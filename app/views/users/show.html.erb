@@ -21,9 +21,18 @@
 
 <div class="content">
 	<div class="userinfo box">
+	  <% if admin? %>
+    <span class="label warning">管理员</span>
+    <% elsif wiki_editor? %>
+    <span class="label success">Wiki 管理</span>
+    <% else %>
+    <span class="label">普通用户</span>
+    <% end %>
 		<ul>
 		  <li style="text-align:right;">第 <%= @user.id %> 位会员</li>
-			<li><span>ID:</span><strong><%= @user.login %></strong></li>
+			<li>
+			  <span>ID:</span><strong><%= @user.login %></strong>
+			</li>
 			<% if !@user.location.blank? %>
 			<li><span>城市:</span><%= @user.location %></li>
 			<% end %>

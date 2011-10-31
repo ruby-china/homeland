@@ -17,7 +17,7 @@ class Reply
   attr_protected :user_id, :topic_id
 
   validates_presence_of :body
-  scope :recent, :order => "id desc"
+  scope :recent, desc(:_id)
   after_create :update_parent_last_replied
   def update_parent_last_replied
     self.topic.replied_at = Time.now

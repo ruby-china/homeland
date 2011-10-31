@@ -62,7 +62,7 @@ class TopicsController < ApplicationController
       @topic.user_readed(current_user.id)
     end
     @node = @topic.node
-    @replies = @topic.replies.all
+    @replies = @topic.replies.recent.all
     set_seo_meta("#{@topic.title} &raquo; 论坛")
   end
 

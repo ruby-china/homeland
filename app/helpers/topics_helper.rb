@@ -1,15 +1,18 @@
 # coding: utf-8  
+require 'rdiscount'
 module TopicsHelper
   def format_topic_body(text,title = "",allow_image = true)
-    text.gsub!("\s","&nbsp;")
-    text = simple_format(text)
+    text = h(text)
+    text.gsub!( /\r\n?/, "\n" )
+    text.gsub!( /\n/, "<br>" )
+    text.gsub!(/```(<br>{0,}|\s{0,})(.+?)```/im,'<pre><code>\2</code></pre>')
     text.gsub!(/\[img\](http:\/\/.+?)\[\/img\]/i,'<img src="\1" alt="'+ h(title) +'" />')
     text = auto_link(text,:all, :target => '_blank', :rel => "nofollow")
-    text.gsub!(/#([\d]+)楼&nbsp;/,raw('#<a href="#reply\1" class="at_floor" data-floor="\1" onclick="return Topics.hightlightReply(\1)">\1楼</a> '))
-    text.gsub!(/@(.+?)&nbsp;/,raw('@<a href="http://twitter.com/\1" class="at_user" title="\1">\1</a> '))
+    text.gsub!(/#([\d]+)楼\s/,'#<a href="#reply\1" class="at_floor" data-floor="\1" onclick="return Topics.hightlightReply(\1)">\1楼</a> ')
+    text.gsub!(/@([\w\p{han}]+)\s/,'@<a href="http://twitter.com/\1" class="at_user" title="\1">\1</a> ')
     return raw(text)
   end
-
+  
   def topic_use_readed_text(state)
     case state
     when 0

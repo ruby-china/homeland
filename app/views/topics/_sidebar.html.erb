@@ -47,10 +47,7 @@
 <% if ["new"].index(params[:action]) %>
   <div id="topic_new_tip" class="box">
     <h2>发贴说明</h2>
-    <ol>
-      <li>发布后正文排版会自动安你在文本框里面输入的样子排列.如果里面带有 URL地址，将会自动转变为超级链接。</li>
-			<li>可以插入优酷，土豆，酷6的视频，你只用在他们网站使用转载功能，然后复制哪段"Flash代码"然后粘贴到正文里面，系统将会自动转换成播放器。</li>
-    </ol>
+    <%= render "body_help_block" %>
   </div>
 <% end %>
 <% if params[:action] == "index" %>

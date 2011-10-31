@@ -23,7 +23,7 @@ module UsersHelper
     when :small
       width = 16
     when :large
-      width = 80
+      width = 64
     else
       width = size
     end

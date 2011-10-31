@@ -11,9 +11,9 @@
 .topics .topic {  }
 .topics .topic_line {border-top:1px solid #DDD; padding:10px 0; margin:0 -10px; vertical-align:top; }
 #main .topics .topic h1 { font-size:22px; color:#333; margin-top:6px; text-align: left; line-height:100%;margin-bottom:8px;}
-.topics .topic .avatar_large { width:80px; }
+.topics .topic .avatar_large { width:64px; }
 .topics .topic .avatar { width:56px; margin-left:10px; }
-.topics .topic .infos { padding-right:90px;}
+.topics .topic .infos { padding-right:74px; }
 .topics .topic .right_info { padding-left:66px;}
 .topics .topic .title { font-size:14px; }
 .topics .topic .info { color:#999; margin-bottom:2px; }
@@ -81,3 +81,12 @@
 
 .body a.at_floor { color:#376B43; }
 .body a.at_user { }
+.body pre{margin:1em 0;font-size:12px;background-color:#eee;border:1px solid #ddd;padding:5px;color:#444;overflow:auto;-webkit-box-shadow:rgba(0,0,0,0.07) 0 1px 2px inset;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;}
+.body pre::-webkit-scrollbar{height:8px;width:8px;}
+.body pre::-webkit-scrollbar-track-piece{margin-bottom:10px;background-color:#e5e5e5;border-bottom-left-radius:4px 4px;border-bottom-right-radius:4px 4px;border-top-left-radius:4px 4px;border-top-right-radius:4px 4px;}
+.body pre::-webkit-scrollbar-thumb:vertical{height:25px;background-color:#ccc;-webkit-border-radius:4px;-webkit-box-shadow:0 1px 1px rgba(255,255,255,1);}
+.body pre::-webkit-scrollbar-thumb:horizontal{width:25px;background-color:#ccc;-webkit-border-radius:4px;}
+.body pre code{padding:0!important;font-size:12px!important;background-color:#eee!important;border:none!important;}
+.body code{font-size:12px!important;background-color:#f8f8ff!important;color:#444!important;padding:0 .2em!important;border:1px solid #dedede!important;}
+
+

@@ -1,4 +1,4 @@
-<% content_for :sitemap do %><span class="current"><%= @user.name %></span><% end %>
+<% content_for :sitemap do %><span class="current"><%= @user.login %></span><% end %>
 <% content_for :styles do %>
 	<%= stylesheet_link_tag "users" %>
 <% end %>
@@ -23,7 +23,7 @@
 	<div class="userinfo box">
 		<ul>
 		  <li style="text-align:right;">第 <%= @user.id %> 位会员</li>
-			<li><span>大名:</span><strong><%= @user.name %></strong></li>
+			<li><span>ID:</span><strong><%= @user.login %></strong></li>
 			<li><span>房号:</span> <%= @user.location %></li>
 			<li><span>加入时间:</span> <%= I18n.l(@user.created_at.to_date, :format => :long) %></li>
 			<li><span>签名:</span><%= @user.tagline %></li>

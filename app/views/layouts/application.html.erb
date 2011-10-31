@@ -31,7 +31,7 @@
         <% if user_signed_in? %>
         <ul class="nav secondary-nav" id="userbar">
           <li>
-            <a href="<%= user_path(current_user.login) %>" class="dropdown-toggle"><%= current_user.name %></a>
+            <a href="<%= user_path(current_user.login) %>" class="dropdown-toggle"><%= current_user.login %></a>
             <ul class="dropdown-menu">
               <li><a href="<%= user_path(current_user.login) %>">我的主页</a></li>
               <% if not params[:controller].match(/cpanel/) %>

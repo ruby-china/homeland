@@ -7,7 +7,6 @@ class User
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   field :login
-  field :name
   field :email
   field :location
   field :bio
@@ -31,8 +30,8 @@ class User
   attr_accessor :password_confirmation
   attr_protected :verified, :replies_count
   
-  validates_presence_of :login, :name  
-  validates_uniqueness_of :login, :name
+  validates_presence_of :login 
+  validates_uniqueness_of :login
   
   has_and_belongs_to_many :following_nodes, :class_name => 'Node', :inverse_of => :followers
   has_and_belongs_to_many :following, :class_name => 'User', :inverse_of => :followers
@@ -75,7 +74,6 @@ class User
     else
       u = new(:email => email)
       u.login = email.split("@").first
-      u.name = email.split("@").first
       u.guest = true
       if u.save
         return u
@@ -115,7 +113,6 @@ class User
 		if User.where(:login => user.login).count > 0 or user.login.blank?
 	    user.login = "u#{Time.now.to_i}"
 	  end
-		user.name = auth["user_info"]["name"]  
 		user.email = auth['user_info']['email']
 		user.location = auth['user_info']['location']
 		user.tagline =  auth["user_info"]["description"]

@@ -19,7 +19,7 @@
     <td class="first"><%= topic.id %></td>
     <td><%= truncate(topic.title,:length => 30) %></td>
     <td><%= topic.node.name if topic.node %></td>
-    <td><%= topic.user.name if topic.user %></td>
+    <td><%= topic.user.login if topic.user %></td>
     <td><%= topic.replies_count %></td>
     <td><%= l topic.created_at,:format => :short %></td>
     <td><%= link_to '修改', edit_cpanel_topic_path(topic) %>

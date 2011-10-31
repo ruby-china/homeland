@@ -16,18 +16,13 @@
         <div class="clearfix">
           <%= f.label :login %>
           <div class="input">
-            <%= f.text_field :login %>
-          </div>
-        </div>
-        <div class="clearfix">
-          <%= f.label :name %>
-          <div class="input">
-          <%= f.text_field :name %>
+            <%= f.text_field :login %><br />
+            <span class="help-inline">建议用 Twitter ID,以便 @回复 的时候能够关联到你的 Twitter。</span>
           </div>
         </div>
         <div class="clearfix">
           <%= f.label :email %>
-          <div class="input"><%= f.text_field :email %></div>
+          <div class="input"><%= f.text_field :email, :placeholder => "foo@bar.com" %></div>
         </div>
         <div class="clearfix"><%= f.label :password %>
           <div class="input"><%= f.password_field :password %></div>

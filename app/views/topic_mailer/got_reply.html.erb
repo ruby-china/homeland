@@ -1,9 +1,9 @@
 <h1>你的发贴收到了回复</h1>
 <p>
-	你好<%= @topic.user.name %>，<br />
+	你好<%= @topic.user.login %>，<br />
   你在<%= Setting.app_name %>发布的《<a href='<%= topic_url(@topic.id) %>'><%= @topic.title %></a>》收到了回复.<br />
 	<hr /><br />
-  <%= @reply.user.name %>说: <br />
+  <%= @reply.user.login %>说: <br />
 	<%= format_topic_body @reply.body,'',false %><br/>
 </p>
 <p>

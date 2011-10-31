@@ -17,7 +17,7 @@
   <tr class="<%= 'deleted' if !post.deleted_at.blank? %>">
     <td class="first"><%= post.id %></td>
     <td><%= truncate(post.title,:length => 30) %></td>
-    <td><%= post.user.name if post.user %></td>
+    <td><%= post.user.login if post.user %></td>
     <td><%= l post.created_at,:format => :short %></td>
     <td><%= raw post.state_s %></td>
     <td><%= link_to '修改', edit_cpanel_post_path(post) %>

@@ -24,7 +24,7 @@
   <div class="clearfix">
     <%= f.label :user_id %>
     <div class="input">
-    <%= f.text_field :user_id %> <%= @topic.user.name if @topic.user %>
+    <%= f.text_field :user_id %> <%= @topic.user.login if @topic.user %>
     </div>
   </div>
   <div class="clearfix">

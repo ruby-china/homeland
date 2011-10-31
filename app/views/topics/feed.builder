@@ -10,7 +10,7 @@ xml.rss(:version=>"2.0"){
         xml.item do
           xml.title topic.title
           xml.description format_topic_body(topic.body)
-          xml.author topic.user.name       
+          xml.author topic.user.login       
           xml.pubDate(topic.created_at.strftime("%a, %d %b %Y %H:%M:%S %z"))
           xml.link topic_url topic
           xml.guid topic_url topic

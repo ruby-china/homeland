@@ -23,7 +23,7 @@
 	  <% else %>
 	  <td><%= reply.topic_id %></td>
 	  <% end %>
-    <td><%= reply.user.name if reply.user %></td>
+    <td><%= reply.user.login if reply.user %></td>
     <td><%= l reply.created_at, :format => :short %></td>
     <td><%= link_to '修改', edit_cpanel_reply_path(reply) %>
     <%= link_to '删除', cpanel_reply_path(reply), :confirm => 'Are you sure?', :method => :delete %></td>

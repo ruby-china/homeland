@@ -14,7 +14,7 @@
   <tr>
     <td><%= photo.id %></td>
     <td><%= image_tag(photo.image.url) if !photo.image.blank? %></td>
-    <td><%= photo.user.name %></td>
+    <td><%= photo.user.login if !photo.user.blank? %></td>
     <td><%= link_to 'Destroy', cpanel_photo_path(photo), :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>

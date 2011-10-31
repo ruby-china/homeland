@@ -4,7 +4,7 @@ module UsersHelper
   def user_name_tag(user,options = {})
     location = options[:location] || false
     return "匿名" if user.blank?
-    result = "<a href=\"#{user_path(user.login)}\" title=\"#{user.name}\">#{user.name}</a>"
+    result = "<a href=\"#{user_path(user.login)}\" title=\"#{user.login}\">#{user.login}</a>"
     if location
       if !user.location.blank?
         result += " <span class=\"location\" title=\"门牌号\">[#{user.location}]</span>"
@@ -34,7 +34,7 @@ module UsersHelper
     img_src = "http://www.gravatar.com/avatar/#{hash}?s=#{width}"
     img = "<img src=\"#{img_src}\" />"
     if link
-      raw("<a href=\"#{user_path(user.login)}\" title=\"#{user.name}\">#{img}</a>")
+      raw("<a href=\"#{user_path(user.login)}\" title=\"#{user.login}\">#{img}</a>")
     else
       raw img
     end

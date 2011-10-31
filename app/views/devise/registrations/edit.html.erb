@@ -30,12 +30,6 @@
       <fieldset>
         <legend>个人资料</legend>
       	<%= render "shared/error_messages", :target => resource %> 
-      	<div class="clearfix">
-    	    <%= f.label :name %>
-    	    <div class="input">
-    	      <%= f.text_field :name, :class => "span3" %>
-          </div>
-      	</div>
       	<% if @user.login.blank? %>
       	<div class="clearfix">
     	    <%= f.label :login %>

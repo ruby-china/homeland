@@ -18,7 +18,7 @@
   <div class="clearfix">
     <%= f.label :user_id %>
     <div class="input">
-    <%= f.text_field :user_id %> <%= @post.user.name if @post.user %>
+    <%= f.text_field :user_id %> <%= @post.user.login if @post.user %>
     </div>
   </div>
   <div class="clearfix">

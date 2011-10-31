@@ -24,9 +24,13 @@
 		<ul>
 		  <li style="text-align:right;">第 <%= @user.id %> 位会员</li>
 			<li><span>ID:</span><strong><%= @user.login %></strong></li>
-			<li><span>房号:</span> <%= @user.location %></li>
-			<li><span>加入时间:</span> <%= I18n.l(@user.created_at.to_date, :format => :long) %></li>
+			<% if !@user.location.blank? %>
+			<li><span>城市:</span><%= @user.location %></li>
+			<% end %>
+			<li><span>加入时间:</span><%= I18n.l(@user.created_at.to_date, :format => :long) %></li>
+			<% if !@user.tagline.blank? %>
 			<li><span>签名:</span><%= @user.tagline %></li>
+			<% end %>
 			<% if !@user.github.blank? %>
 			<li><span>Github:</span><a href="<%= @user.github_url %>" target="_blank" rel="nofollow"><%= @user.github_url %></a></li>
 			<% end %>

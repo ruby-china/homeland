@@ -1,1 +1,0 @@
-thin restart -O -w 300 -C config/thin.yml

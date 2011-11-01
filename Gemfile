@@ -32,3 +32,7 @@ group :assets do
   gem 'coffee-rails', "~> 3.1.1"
   gem 'uglifier'
 end
+
+group :development do
+	gem 'capistrano', '2.9.0'
+end

@@ -14,6 +14,12 @@ This is source code of [Ruby China Group](http://ruby-china.org)
   rake assets:precompile
   thin start -O -C config/thin.yml
   ```
+  
+## Deploy 
+
+  ```
+  $ cap deploy
+  ```
 
 ## Contributors
 

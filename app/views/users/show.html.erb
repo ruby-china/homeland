@@ -21,9 +21,9 @@
 
 <div class="content">
 	<div class="userinfo box">
-	  <% if admin? %>
+	  <% if admin?(@user) %>
     <span class="label warning">管理员</span>
-    <% elsif wiki_editor? %>
+    <% elsif wiki_editor?(@user) %>
     <span class="label success">Wiki 管理</span>
     <% else %>
     <span class="label">普通用户</span>

@@ -46,7 +46,7 @@
         <% else %>
           <ul class="nav secondary-nav" id="userbar">
             <li<%=' class=active' if params[:controller] == "devise/registrations" and params[:action] == "new" %>><a href="<%= new_user_registration_path %>">注册</a></li>
-            <li<%=' class=active' if params[:controller] == "devise/sessions" and params[:action] == "new" %>><a href="<%= new_user_session_path %>">登陆</a></li> 
+            <li<%=' class=active' if params[:controller] == "devise/sessions" and params[:action] == "new" %>><a href="<%= new_user_session_path %>">登录</a></li> 
           </ul>
         <% end %>
       </div>

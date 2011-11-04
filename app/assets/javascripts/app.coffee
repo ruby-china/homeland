@@ -2,6 +2,13 @@ window.App =
   loading : () ->
     console.log "loading..."
     
+  # 警告信息显示, to 显示在那个dom前(可以用 css selector)
+  alert : (msg,to) ->
+    $(to).before("<div data-alert class='alert-message'><a class='close' href='#'>X</a>#{msg}</div>")
+
+  # 成功信息显示, to 显示在那个dom前(可以用 css selector)
+  notice : (msg,to) ->
+    $(to).before("<div data-alert class='alert-message success'><a class='close' href='#'>X</a>#{msg}</div>")
 
 $(document).ready ->  
   $("abbr.timeago").timeago()

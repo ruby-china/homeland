@@ -3,6 +3,7 @@
 //= require bootstrap-alerts
 //= require bootstrap-dropdown
 //= require bootstrap-twipsy
+//= require bootstrap-buttons
 //= require jquery.jdialog
 //= require jquery.timeago
 //= require jquery.hotkeys

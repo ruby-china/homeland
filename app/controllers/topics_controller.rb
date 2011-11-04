@@ -83,11 +83,10 @@ class TopicsController < ApplicationController
     @reply = @topic.replies.build(params[:reply])        
     @reply.user_id = current_user.id
     if @reply.save
-      flash[:notice] = "回复成功。"
+      @msg = "回复成功。"
     else
-      flash[:notice] = @reply.errors.full_messages.join("<br />")
+      @msg = @reply.errors.full_messages.join("<br />")
     end
-    redirect_to topic_path(params[:id],:anchor => 'reply')
   end
 
   # GET /topics/1/edit

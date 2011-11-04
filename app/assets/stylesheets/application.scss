@@ -18,7 +18,9 @@ code { background:none; }
 
 .container-fluid { padding:0;}
 .container-fluid > .sidebar {
-  float: right;
+  position:relative;
+  left:0;
+  float:right;
   width: 220px;
 }
 

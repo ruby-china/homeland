@@ -70,6 +70,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.1.2)
+    daemon-spawn (0.4.2)
     devise (1.4.5)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
@@ -275,6 +276,7 @@ DEPENDENCIES
   cells (= 3.6.7)
   chinese_pinyin (= 0.4.1)
   coffee-rails (~> 3.1.1)
+  daemon-spawn (~> 0.4.2)
   devise (= 1.4.5)
   jquery-rails (= 1.0.16)
   mail_view!

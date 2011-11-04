@@ -13,7 +13,7 @@ This is source code of [Ruby China Group](http://ruby-china.org)
   bundle update rails
   rake assets:precompile
   thin start -O -C config/thin.yml
-  ./run_resque
+  ./script/resque start
   ```
   
 ## Deploy 

@@ -31,6 +31,7 @@ gem "resque", "~> 1.19.0", :require => "resque/server"
 gem "resque_mailer", '2.0.2'
 gem "aws-ses", "~> 0.4.3"
 gem 'mail_view', :git => 'git://github.com/37signals/mail_view.git'
+gem "daemon-spawn", "~> 0.4.2"
 
 group :assets do
   gem 'sass-rails', "  ~> 3.1.4"

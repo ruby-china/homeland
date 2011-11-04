@@ -43,12 +43,16 @@ task :install_gems, :roles => :web do
   run "cd #{deploy_to}/current/; bundle install"
 end
 
+task :restart_resque, :roles => :web do
+  run "cd #{deploy_to}/current/; ./script/resque stop; ./script/resque start"
+end
+
 # 编译 assets
 task :compile_assets, :roles => :web do
   run "cd #{deploy_to}/current/; bundle exec rake assets:precompile"
 end
 
-after "deploy:symlink", :init_shared_path, :link_shared_config_yaml, :install_gems, :compile_assets
+after "deploy:symlink", :init_shared_path, :link_shared_config_yaml, :install_gems, :restart_resque, :compile_assets
 
 set :default_environment, { 
   'PATH' => "/home/ruby/.rvm/gems/ruby-1.9.2-p290-patch/bin:/home/ruby/.rvm/gems/ruby-1.9.2-p290-patch@global/bin:/home/ruby/.rvm/rubies/ruby-1.9.2-p290-patch/bin:/home/ruby/.rvm/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games",

@@ -1,0 +1,33 @@
+#!/usr/bin/env ruby
+
+ENV['RAILS_ENV'] ||= 'development'
+require File.expand_path('../../config/environment',  __FILE__)
+
+require 'daemon_spawn'
+
+class ResqueWorkerDaemon < DaemonSpawn::Base
+  def start(args)
+    @worker = Resque::Worker.new('*') # Specify which queues this worker will process
+    @worker.verbose = 1 # Logging - can also set vverbose for 'very verbose'
+    @worker.work
+  end
+
+  def stop
+    @worker.try(:shutdown)
+  end
+end
+
+
+logs = Rails.root.join("log", "resque_workers.log").to_s
+pids = Rails.root.join('tmp', 'pids', 'resque_workers.pid').to_s
+
+ResqueWorkerDaemon.spawn!({
+  :processes   => 2,
+  :log_file    => logs,
+  :pid_file    => pids,
+  :sync_log    => true,
+  :working_dir => Rails.root,
+  :singleton   => true
+})
+
+# RAILS_ENV=production VVERBOSE=1 QUEUE=* rake environment resque:work  2>&1 &

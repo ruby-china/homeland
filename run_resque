@@ -1,1 +1,0 @@
-RAILS_ENV=production VVERBOSE=1 QUEUE=* rake environment resque:work  2>&1 &

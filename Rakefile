@@ -6,3 +6,19 @@ require 'rake'
 require 'resque/tasks'
 
 RubyChina::Application.load_tasks
+
+namespace :resque do
+  task :restart_workers => :environment do
+    pids = Array.new
+    
+    Resque.workers.each do |worker|
+      pids << worker.to_s.split(/:/).second
+    end
+    
+    if pids.size > 0
+      system("kill -QUIT #{pids.join(' ')}")
+    end
+    
+    system("rm /var/run/god/resque-1.8.0*.pid")
+  end
+end

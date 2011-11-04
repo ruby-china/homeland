@@ -2,6 +2,7 @@
 class Comment
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Mongoid::BaseModel
   include Mongoid::SoftDelete
   
   field :body
@@ -14,8 +15,6 @@ class Comment
   index :commentable_id
 
   validates_presence_of :body
-  
-  scope :recent, desc(:_id)
 
   before_create :fix_commentable_id
   def fix_commentable_id

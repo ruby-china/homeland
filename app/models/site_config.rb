@@ -42,7 +42,7 @@ class SiteConfig
   end
   
   def self.save_default(key, value)
-    if not find_by_id(key)
+    if not find_by_key(key)
       create(:key => key, :value => value.to_s)
     end
   end

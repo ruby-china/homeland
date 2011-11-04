@@ -2,6 +2,7 @@
 class Section
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Mongoid::BaseModel
 
   field :name
   field :sort, :type => Integer, :default => 0

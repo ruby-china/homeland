@@ -30,22 +30,23 @@ window.Topics =
       new_text = "\n#{new_text}"
     reply_body.focus().val(reply_body.val() + new_text)
     return false
-    
-  # Ajax 回复后的事件
-  replyCallback : (success, msg) ->
-    $("#main .alert-message").remove()
-    if success
-      $("#new_reply textarea").val('')
-      App.notice(msg,'#reply')
-    else
-      App.alert(msg,'#reply')
-    $("#new_reply textarea").focus()
-    $('#btn_reply').button('reset')
 
   # 高亮楼层
   hightlightReply : (floor) ->
     $("#replies .reply").removeClass("light")
     $("#reply"+floor).addClass("light")
+
+  # Ajax 回复后的事件
+  replyCallback : (success, msg) ->
+    $("#main .alert-message").remove()
+    if success
+      $("abbr.timeago",$("#replies .reply").last()).timeago()
+      $("#new_reply textarea").val('')
+      App.notice(msg,'#reply')
+    else
+      App.alert(msg,'#reply')
+    $("#new_reply textarea").focus()
+    $('#btn_reply').button('reset')    
     
 # pages ready
 $(document).ready ->

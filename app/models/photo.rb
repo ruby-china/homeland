@@ -2,6 +2,7 @@
 class Photo  
   include Mongoid::Document
   include Mongoid::Timestamps  
+  include Mongoid::BaseModel
 
   field :image  
   

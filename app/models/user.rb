@@ -2,6 +2,7 @@
 class User
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Mongoid::BaseModel
   include Mongoid::SoftDelete
   
   devise :database_authenticatable, :registerable,

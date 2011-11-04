@@ -5,6 +5,7 @@ require 'rdiscount'
 class Page
   include Mongoid::Document
   include Mongoid::Timestamps  
+  include Mongoid::BaseModel
   include Mongoid::SoftDelete
   
   # 页面地址
@@ -16,8 +17,6 @@ class Page
   field :body_html
   field :editor_ids, :type => Array, :default => []
   field :locked, :type => Boolean, :default => false
-  
-  scope :recent, desc(:_id)
   
   index :slug
   

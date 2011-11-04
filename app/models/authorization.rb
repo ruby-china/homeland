@@ -2,6 +2,7 @@
 class Authorization
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Mongoid::BaseModel
 
   field :provider
   field :uid

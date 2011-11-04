@@ -1,5 +1,5 @@
 <% if @reply.errors.blank? %>
-  $("#replies").append('<%= escape_javascript(render("reply", :item => @reply, :i => 1)) %>');
+  $("#replies").append('<%= escape_javascript(render("reply", :item => @reply, :i => @topic.replies_count - 1)) %>');
   Topics.replyCallback(1,'<%= escape_javascript(@msg) %>');
 <% else %>
   Topics.replyCallback(0,'<%= escape_javascript(@msg) %>');

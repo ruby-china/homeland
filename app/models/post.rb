@@ -3,6 +3,7 @@ class Post
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::SoftDelete
+  include Mongoid::BaseModel
   include Redis::Search
   include Redis::Objects
   
@@ -36,7 +37,6 @@ class Post
   
   scope :normal, where(:state => STATE[:normal])
   scope :by_tag, Proc.new { |t| where(:tags => t) }
-  scope :recent, desc(:_id)
   
   before_save :split_tags
   def split_tags

@@ -22,7 +22,7 @@ logs = Rails.root.join("log", "resque_workers.log").to_s
 pids = Rails.root.join('tmp', 'pids', 'resque_workers.pid').to_s
 
 ResqueWorkerDaemon.spawn!({
-  :processes   => 2,
+  :processes   => 1,
   :log_file    => logs,
   :pid_file    => pids,
   :sync_log    => true,

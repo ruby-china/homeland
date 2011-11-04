@@ -29,9 +29,9 @@ module UsersHelper
     end
     
     hash = (user.blank? or user.email.blank?) ? Digest::MD5.hexdigest("") : Digest::MD5.hexdigest(user.email) 
-    return "<img src=\"http://www.gravatar.com/avatar/#{hash}?s=#{width}\" />" if user.blank?
+    return "<img src=\"http://www.gravatar.com/avatar/#{hash}?s=#{width}&d=identicon\" />" if user.blank?
    
-    img_src = "http://www.gravatar.com/avatar/#{hash}?s=#{width}"
+    img_src = "http://www.gravatar.com/avatar/#{hash}?s=#{width}&d=identicon"
     img = "<img src=\"#{img_src}\" />"
     if link
       raw("<a href=\"#{user_path(user.login)}\" title=\"#{user.login}\">#{img}</a>")

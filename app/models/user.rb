@@ -95,8 +95,12 @@ class User
   end
   
   def update_with_password(params={})
-    params.delete(:current_password)
-    self.update_without_password(params)
+    if !params[:current_password].blank? or !params[:password].blank? or !params[:password_confirmation].blank?
+      super
+    else
+      params.delete(:current_password)
+      self.update_without_password(params)
+    end
   end
 
   def self.cached_count

@@ -29,7 +29,9 @@
     <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :enctype =>  "multipart/form-data" }) do |f| %>
       <fieldset>
         <legend>个人资料</legend>
-      	<%= render "shared/error_messages", :target => resource %> 
+        <% if params[:by].blank? %>
+        	<%= render "shared/error_messages", :target => resource %> 
+        <% end %>
       	<div class="clearfix">
     	    <%= f.label :login %>
     	    <div class="input">
@@ -82,9 +84,13 @@
     <% end %>
   </div>
   <div class="box">
-    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name,:by => :pwd), :html => { :method => :put }) do |f| %>
       <fieldset>
       	<legend>修改密码</legend>
+      	<% if params[:by] == "pwd" %>
+      	  <%= render "shared/error_messages", :target => resource %>
+      	<% end %>
+      	<input type="hidden" name="user[:by]" value="pwd" />
       	<div class="clearfix">
           <%= f.label :current_password %>
           <div class="input">

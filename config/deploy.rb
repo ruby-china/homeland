@@ -44,7 +44,7 @@ task :install_gems, :roles => :web do
 end
 
 task :restart_resque, :roles => :web do
-  run "cd #{deploy_to}/current/; ./script/resque stop; ./script/resque start"
+  run "cd #{deploy_to}/current/; RAILS_ENV=production ./script/resque stop; RAILS_ENV=production ./script/resque start"
 end
 
 # 编译 assets

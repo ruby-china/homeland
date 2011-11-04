@@ -1,0 +1,10 @@
+<h1>你关注的帖子有了新回复</h1>
+<p> 
+   <%= user_name_tag(@user) %>  回复了 《<a href='<%= topic_url(@topic.id) %>'><%= @topic.title %></a>》:</label> <br />
+</p>
+<blockquote>
+  <p><%= format_topic_body @reply.body,'',false %><br/></p>
+</blockquote>
+<p>
+ <label> 贴子地址:</label> <a href='<%= topic_url(@topic.id) %>'><%= topic_url(@topic.id) %></a>.
+</p>

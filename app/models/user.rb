@@ -69,10 +69,7 @@ class User
   # 注册邮件提醒
   after_create :send_welcome_mail
   def send_welcome_mail
-    m = UserMailer.create_welcome(self)
-    Thread.new { m.deliver }
-	rescue => e
-		# logger.error { e }
+    UserMailer.welcome(self.id).deliver
   end
 
   STATE = {

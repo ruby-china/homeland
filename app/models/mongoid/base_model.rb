@@ -14,7 +14,11 @@ module Mongoid
     module ClassMethods
       # like ActiveRecord find_by_id
       def find_by_id(id)
-        where(:_id => id.to_i).first
+        if id.is_a?(Integer) or id.is_a?(String)
+          where(:_id => id.to_i).first
+        else
+          nil
+        end
       end
     end
   end

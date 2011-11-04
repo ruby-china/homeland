@@ -5,10 +5,11 @@ defaults: &defaults
   admin_emails: 
     - "admin@admin.com"
   google_analytics_key: ""
-  smtp_username: 'support@ruby-china.org'
-  smtp_password: '123456'
   upload_url: "http://127.0.0.1:3000/file"
   google_group_email: "shanghaionrails@googlegroups.com"
+  email_sender: 'no-reply@ruby-china.org'
+  aws_access_key_id: ''
+  aws_secret_access_key: ''
 
 development:
   <<: *defaults

@@ -22,14 +22,16 @@ class Reply
   def update_parent_topic
     self.topic.replied_at = Time.now
     self.topic.last_reply_user_id = self.user_id
-    self.topic.replies_count = self.topic.replies.count
-    # 关注邮件
-    if !self.user.blank?
-      self.topic.push_watcher_email(self.user.email)
-    end
+    self.topic.replies_count += 1
+    self.topic.push_follower(self.user_id)
     self.topic.save
     # 清除用户读过记录
     self.topic.clear_user_readed
+  end
+  
+  after_create :send_mail_notify
+  def send_mail_notify
+    TopicMailer.got_reply(self)
   end
   
   def self.cached_count

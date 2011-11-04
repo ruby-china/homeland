@@ -12,13 +12,20 @@ class TopicMailer < BaseMailer
     Thread.new {
       @reply = reply
       @topic = Topic.find_by_id(@reply.topic_id)
+      emails = []
       User.where(:_id.in => @topic.follower_ids).excludes(:_id => @reply.user_id).each do |u|
         # 跳过，如果用户不允许发邮件
-        #next if u.mail_new_answer == false
-        ::TopicMailer.new_reply(reply.id,u.email).deliver
+        #next if u.mail_new_reply == false
+        emails << u.email
       end
-      if @reply.user.email != @topic.user.email
-        ::TopicMailer.new_reply(reply.id,@topic.user.email).deliver
+      # 加上话题发起者
+      emails << @topic.user.email
+      # 去掉回复者
+      emails.delete(@reply.user.email)
+      # 唯一
+      emails.uniq!
+      emails.each do |email|
+        ::TopicMailer.new_reply(@reply.id,email).deliver
       end
     }
   end

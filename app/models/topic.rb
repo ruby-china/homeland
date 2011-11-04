@@ -13,6 +13,8 @@ class Topic
   field :source
   field :message_id  
   field :replies_count, :type => Integer, :default => 0
+  # 关注的邮件列表,自动将参与回复的人的邮件存入
+  field :watcher_emails, :type => Array, :default => []
   
   belongs_to :user, :inverse_of => :topics
   belongs_to :node
@@ -42,6 +44,14 @@ class Topic
   def node_name
     return "" if self.node.blank?
     self.node.name
+  end
+  
+  def push_watcher_email(email)
+    self.watcher_emails << email if !self.watcher_emails.include?(email)
+  end
+  
+  def pull_watcher_email(email)
+    self.watcher_emails.delete(email)
   end
   
   # 检查用户是否看过

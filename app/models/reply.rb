@@ -18,11 +18,15 @@ class Reply
   attr_protected :user_id, :topic_id
 
   validates_presence_of :body
-  after_create :update_parent_last_replied
-  def update_parent_last_replied
+  after_create :update_parent_topic
+  def update_parent_topic
     self.topic.replied_at = Time.now
     self.topic.last_reply_user_id = self.user_id
     self.topic.replies_count = self.topic.replies.count
+    # 关注邮件
+    if !self.user.blank?
+      self.topic.push_watcher_email(self.user.email)
+    end
     self.topic.save
     # 清除用户读过记录
     self.topic.clear_user_readed

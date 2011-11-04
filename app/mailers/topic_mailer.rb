@@ -5,6 +5,13 @@ class TopicMailer < BaseMailer
     @reply = reply
     # 排除不用发邮件的人
     return false if @topic.user.blank? or @reply.user.blank? or (@reply.user_id == @topic.user_id)
-    mail(:to => topic.user.email, :subject => "你发布的贴子[#{topic.title}]收到了回贴")
+    mail(:to => topic.user.email, :subject => "《#{topic.title}》有了新回帖")
+  end
+  
+  class Preview < MailView
+    # Pull data from existing fixtures
+    def got_reply
+      ::TopicMailer.got_reply(Topic.first, Topic.first.replies.last)
+    end
   end
 end

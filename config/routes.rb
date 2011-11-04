@@ -48,4 +48,9 @@ RubyChina::Application.routes.draw do
     resources :posts
     resources :pages
   end  
+  
+  if Rails.env.development?
+    mount TopicMailer::Preview => 'mails/topic'
+    mount UserMailer::Preview => 'mails/user'
+  end
 end

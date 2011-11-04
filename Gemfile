@@ -35,5 +35,6 @@ group :assets do
 end
 
 group :development do
+  gem 'mail_view', :git => 'git://github.com/37signals/mail_view.git'
 	gem 'capistrano', '2.9.0'
 end

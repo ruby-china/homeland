@@ -1,8 +1,8 @@
-<h1>欢迎加入<%= Setting.app_name %>, <%= @user.login %></h1>
-<p>
-  你已经成功在<%= Setting.domain %>注册了账号,
-  请使用你的邮件: <%= @user.email %> 用于登录.<br/>
-</p>
-<p>
-  登录页面地址: <a href='<%= login_url %>'><%= login_url %></a>.
-</p>
+<h1>欢迎加入<%= Setting.app_name %></h1>
+<div class="box">
+  <label>你好 <%= @user.login %>,</label><br />
+  你已经成功在 <a href="<%= root_url %>"><%= Setting.app_name %></a> 注册了账号。
+</div>
+<div class="box">
+  <label>登录页面地址: </label><a href='<%= new_user_session_url %>'><%= new_user_session_url %></a>.
+</div>

@@ -2,8 +2,33 @@
 <html>
   <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <style type="text/css">
+      body { padding:10px; font-size:13px; font-family: "Lucida Grande";}
+      a { color:#0069D6; }
+      .footer { 
+        margin-top:30px;
+        border-top:1px solid #ddd;
+        padding:5px;
+      }
+      .footer a { color:#666;}
+      .footer .info { padding-top:4px; line-height:160%; color:#999; }
+      .footer .logo { float:right; }
+      .main { line-height:160%;  }
+      .main h1 { font-size:18px; background:#140100; color:#FFF; padding:8px;}
+      .main .box { padding:8px; margin-bottom:10px;  }
+      .main label { color:#666; }
+    </style>
   </head>
   <body>
-	<%= yield %>
+    <div class="main">
+  	  <%= yield %>
+  	</div>
+  	<div class="footer">
+  	  <div class="logo"><%= image_tag("logo_48.png") %></div>
+  	  <div class="info">
+    	  <a href="<%= root_url %>"><%= Setting.app_name %></a> robot said that, so, do not reply this email.<br />
+    	  <%= root_url %>
+    	</div>
+  	</div>
 	</body>
 </html>

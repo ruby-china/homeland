@@ -1,11 +1,12 @@
 <h1>你的发贴收到了回复</h1>
-<p>
-	你好<%= @topic.user.login %>，<br />
-  你在<%= Setting.app_name %>发布的《<a href='<%= topic_url(@topic.id) %>'><%= @topic.title %></a>》收到了回复.<br />
-	<hr /><br />
-  <%= @reply.user.login %>说: <br />
+<div class="box">
+	<label>你好<%= @topic.user.login %>，</label><br />
+  你在<%= Setting.app_name %>发布的《<a href='<%= topic_url(@topic.id) %>'><%= @topic.title %></a>》收到了回复.
+</div>
+<div class="box">
+  <label><%= @reply.user.login %>说:</label> <br />
 	<%= format_topic_body @reply.body,'',false %><br/>
-</p>
-<p>
-  贴子地址: <a href='<%= topic_url(@topic.id) %>'><%= topic_url(@topic.id) %></a>.
-</p>
+</div>
+<div class="box">
+ <label> 贴子地址:</label> <a href='<%= topic_url(@topic.id) %>'><%= topic_url(@topic.id) %></a>.
+</div>

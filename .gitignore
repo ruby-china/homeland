@@ -16,3 +16,5 @@ public/topics/**/*
 .redcar
 Gemfile.lock
 .DS_Store
+*.swp
+*.swo

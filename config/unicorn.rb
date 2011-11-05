@@ -1,3 +1,4 @@
+rails_env = ENV["RAILS_ENV"] || "production"
 working_directory "/home/ruby/www/ruby-china/current"
 pid "/home/ruby/www/ruby-china/current/tmp/pids/unicorn.pid"
 stderr_path "/home/ruby/www/ruby-china/current/log/unicorn.log"

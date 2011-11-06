@@ -11,6 +11,9 @@
     在
     <%= link_to topic.title, topic_path(topic) %>
     提及你：
+    <% if !notification.read? %>
+      <span class="new label warning">新</span>
+    <% end %>
   </h3>
   <blockquote>
     <%= format_topic_body(topic.body) %>

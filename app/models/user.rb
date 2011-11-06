@@ -29,6 +29,17 @@ class User
 	embeds_many :authorizations
   has_many :posts
   has_many :notifications, :class_name => 'Notification::Base', :dependent => :delete
+
+  def read_notifications(notifications)
+    unread_ids = notifications.find_all{|notification| !notification.read?}.map(&:_id)
+    if unread_ids.any?
+      Notification::Base.where({
+        :user_id => id,
+        :_id.in  => unread_ids,
+        :read    => false
+      }).update_all(:read => true)
+    end
+  end
     
   attr_accessor :password_confirmation
   attr_protected :verified, :replies_count

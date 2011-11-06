@@ -30,6 +30,16 @@
       	</form>
         <% if user_signed_in? %>
         <ul class="nav secondary-nav" id="userbar">
+          <%
+            notification_class = ["notifications"]
+            notification_class << "unread" if current_user.notifications.unread.count > 0
+            notification_class << "active" if ["notifications"].index(params[:controller])
+          %>
+          <%= content_tag 'li', :class => notification_class do %>
+            <%= content_tag 'a', :href => notifications_path do %>
+              <span class="count"><%= current_user.notifications.unread.count %></span>
+            <% end %>
+          <% end %>
           <li>
             <a href="<%= user_path(current_user.login) %>" class="dropdown-toggle"><%= current_user.login %></a>
             <ul class="dropdown-menu">

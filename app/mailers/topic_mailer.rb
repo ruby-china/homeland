@@ -5,7 +5,7 @@ class TopicMailer < BaseMailer
     return false if reply.topic.blank?
     @topic = reply.topic
     @reply = reply
-    mail(:to => @topic.user.email, :subject => "《#{@topic.title}》有了新回帖")
+    mail(:to => @topic.user.email, :subject => "Re:#{@topic.title}")
   end
   
   def self.got_reply(reply)

@@ -78,6 +78,11 @@ GEM
     erubis (2.7.0)
     execjs (1.2.9)
       multi_json (~> 1.0)
+    factory_girl (2.2.0)
+      activesupport
+    factory_girl_rails (1.3.0)
+      factory_girl (~> 2.2.0)
+      railties (>= 3.0.0)
     faraday (0.7.5)
       addressable (~> 2.2.6)
       multipart-post (~> 1.1.3)
@@ -278,6 +283,7 @@ DEPENDENCIES
   coffee-rails (~> 3.1.1)
   daemon-spawn (~> 0.4.2)
   devise (= 1.4.5)
+  factory_girl_rails
   jquery-rails (= 1.0.16)
   mail_view!
   mini_magick (= 3.3)

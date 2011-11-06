@@ -28,12 +28,12 @@ class User
   has_many :replies
 	embeds_many :authorizations
   has_many :posts
+  has_many :notification, :class_name => 'Notification::Base', :dependent => :delete
     
   attr_accessor :password_confirmation
   attr_protected :verified, :replies_count
   
-  validates_presence_of :login 
-  validates_uniqueness_of :login
+  validates :login, :format => {:with => /\A\w+\z/, :message => 'only A-Z, a-z, _ allowed'}, :length => {:in => 3..20}, :presence => true, :uniqueness => {:case_sensitive => false}
   
   has_and_belongs_to_many :following_nodes, :class_name => 'Node', :inverse_of => :followers
   has_and_belongs_to_many :following, :class_name => 'User', :inverse_of => :followers

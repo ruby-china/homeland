@@ -8,6 +8,7 @@ class Reply
   field :body
   field :source  
   field :message_id
+  field :mentioned_user_ids, :type => Array, :default => []
   
   belongs_to :user, :inverse_of => :replies
   belongs_to :topic, :inverse_of => :replies
@@ -37,6 +38,25 @@ class Reply
   def self.cached_count
     return Rails.cache.fetch("replies/count",:expires_in => 1.hours) do
       self.count
+    end
+  end
+
+  before_save :extract_mentioned_users
+  def extract_mentioned_users
+    logins = body.scan(/@(\w{3,20})(?![.\w])/).flatten
+    if logins.any?
+      self.mentioned_user_ids = User.where(:login => /^(#{logins.join('|')})$/i, :_id.ne => user.id).limit(5).only(:_id).map(&:_id).to_a
+    end
+  end
+
+  def mentioned_users
+    User.where(:_id.in => mentioned_user_ids)
+  end
+
+  after_create :send_mention_notification
+  def send_mention_notification
+    mentioned_users.each do |user|
+      Notification::Mention.create :user => user, :reply => self
     end
   end
 end

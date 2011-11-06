@@ -42,3 +42,7 @@ end
 group :development do
 	gem 'capistrano', '2.9.0'
 end
+
+group :test do
+  gem 'factory_girl_rails'
+end

@@ -5,6 +5,7 @@ APP_VERSION = '0.6'
 require "action_controller/railtie"
 require "action_mailer/railtie"
 require "active_resource/railtie"
+require "rails/test_unit/railtie"
 
 
 if defined?(Bundler)
@@ -42,6 +43,10 @@ module RubyChina
     config.assets.precompile += %w(application.css application.js topics.css topics.js window.css front.css cpanel.css users.css posts.css posts.js pages.css pages.js)
     config.assets.enabled = true
     config.assets.version = '1.0'
+
+    config.generators do |g|  
+      g.test_framework :test_unit, :fixture_replacement => :factory_girl
+    end
   end
 end
 

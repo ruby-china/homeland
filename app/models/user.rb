@@ -28,7 +28,7 @@ class User
   has_many :replies
 	embeds_many :authorizations
   has_many :posts
-  has_many :notification, :class_name => 'Notification::Base', :dependent => :delete
+  has_many :notifications, :class_name => 'Notification::Base', :dependent => :delete
     
   attr_accessor :password_confirmation
   attr_protected :verified, :replies_count

@@ -1,0 +1,24 @@
+<% content_for :sitemap do %>
+  <li class="active">提醒</li>
+<% end %>
+<%= content_for :styles do %>
+  <%= stylesheet_link_tag "notifications" %>
+<% end %>
+<%= content_for :scripts do %>
+  <%= javascript_include_tag "notifications" %>
+<% end %>
+
+<div class="content">
+  <div id="notifications" class="box">
+    <h1>提醒</h1>
+    <table>
+      <tbody>
+        <% @notifications.each do |notification| -%>
+          <tr id="<%= notification.anchor %>">
+            <%= render :partial => "notifications/#{notification.class.name.underscore}", :locals => {:notification => notification} %>
+          </tr>
+        <% end -%>
+      </tbody>
+    </table>
+  </div>
+</div>

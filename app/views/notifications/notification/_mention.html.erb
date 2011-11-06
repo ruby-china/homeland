@@ -1,0 +1,18 @@
+<%
+  reply = notification.reply
+  topic = reply.topic
+%>
+<td class="face">
+  <%= user_avatar_tag(reply.user, :normal) %>
+</td>
+<td>
+  <h3>
+    <%= user_name_tag(reply.user) %>
+    在
+    <%= link_to topic.title, topic_path(topic) %>
+    提及你：
+  </h3>
+  <blockquote>
+    <%= format_topic_body(topic.body) %>
+  </blockquote>
+</td>

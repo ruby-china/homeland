@@ -15,6 +15,7 @@ RubyChina::Application.routes.draw do
   
   devise_for :users, :path => "account"
   resources :users, :only => :show
+  resources :notifications, :only => [:index, :destroy]
   
   resources :nodes
   

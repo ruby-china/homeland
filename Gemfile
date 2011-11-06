@@ -9,7 +9,7 @@ gem 'carrierwave-mongoid', '0.1.2', :require => 'carrierwave/mongoid'
 gem 'mini_magick','3.3'
 gem 'mongo-rails-instrumentation','0.2.4'
 gem "mongoid-eager-loading",'0.3.1'
-gem 'mongoid_auto_increment_id', "0.2"
+gem 'mongoid_auto_increment_id', "0.2.2"
 gem "devise", "1.4.5"
 gem 'will_paginate', '3.0.pre2'  
 gem 'omniauth', '0.3.0'

@@ -44,7 +44,7 @@ class User
   attr_accessor :password_confirmation
   attr_protected :verified, :replies_count
   
-  validates :login, :format => {:with => /\A\w+\z/, :message => 'only A-Z, a-z, _ allowed'}, :length => {:in => 3..20}, :presence => true, :uniqueness => {:case_sensitive => false}
+  validates :login, :format => {:with => /\A\w+\z/, :message => '只允许数字、大小写字母和下划线'}, :length => {:in => 3..20}, :presence => true, :uniqueness => {:case_sensitive => false}
   
   has_and_belongs_to_many :following_nodes, :class_name => 'Node', :inverse_of => :followers
   has_and_belongs_to_many :following, :class_name => 'User', :inverse_of => :followers
@@ -136,6 +136,8 @@ class User
 	  Rails.logger.debug(auth)
 		user = User.new
 		user.login = auth["user_info"]["nickname"] || auth["user_info"]["username"]
+		user.login.gsub!(/[^\w]/, '_')
+		user.login.slice!(0, 20)
 		if User.where(:login => user.login).count > 0 or user.login.blank?
 	    user.login = "u#{Time.now.to_i}"
 	  end

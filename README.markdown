@@ -24,8 +24,7 @@ This is source code of [Ruby China Group](http://ruby-china.org)
 
 ## Contributors
 
-* [Jason Lee](http://github.com/huacnlee)
-* [Qiu Yun](http://github.com/qiuyun8m)
+* [Contributors](https://github.com/huacnlee/ruby-china/contributors)
 
 Thanks [Twitter Bootstrap](http://twitter.github.com/bootstrap)
 

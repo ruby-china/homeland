@@ -47,6 +47,10 @@ class ApplicationController < ActionController::Base
     redirect_to(session[:return_to] || default)
     session[:return_to] = nil
   end
+
+  def redirect_referrer_or_default(default)
+    redirect_to(request.referrer || default)
+  end
   
   def require_user
     if current_user.blank?

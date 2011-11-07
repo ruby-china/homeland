@@ -15,4 +15,17 @@
     line-height: 18px;
     padding-bottom: 8px;
   }
+
+  td.last {
+    text-align: right;
+
+    a.delete {
+    }
+
+    a.delete:hover {
+      text-decoration: none;
+      color: white;
+      background-color: #C43C35;
+    }
+  }
 }

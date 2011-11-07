@@ -40,7 +40,7 @@ class User
       }).update_all(:read => true)
     end
   end
-    
+
   attr_accessor :password_confirmation
   attr_protected :verified, :replies_count
   

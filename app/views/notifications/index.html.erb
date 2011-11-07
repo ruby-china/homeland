@@ -8,6 +8,14 @@
   <%= javascript_include_tag "notifications" %>
 <% end %>
 
+<div class="sidebar">
+  <div class="box">
+    <div class="content">
+      <%= button_to '标记所有为已读', mark_all_as_read_notifications_path, :class => 'btn', :method => :put %>
+    </div>
+  </div>
+</div>
+
 <div class="content">
   <div id="notifications" class="box">
     <h1>提醒</h1>

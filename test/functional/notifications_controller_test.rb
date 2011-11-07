@@ -18,4 +18,13 @@ class NotificationsControllerTest < ActionController::TestCase
       delete :destroy, :id => notification
     end
   end
+
+  test "should mark all as read" do
+    user = Factory :user
+    sign_in user
+    3.times{ Factory :notification_mention, :user => user }
+
+    put :mark_all_as_read
+    assert_equal 0, user.notifications.unread.count
+  end
 end

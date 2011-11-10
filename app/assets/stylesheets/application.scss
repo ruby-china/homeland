@@ -33,7 +33,11 @@ fieldset { margin-bottom:0;}
 fieldset legend { font-size:16px; font-weight:bold;}
 .actions { margin-bottom:0;}
 .buttons { margin-top:10px; }
-form { margin-bottom:0;}
+form {
+  margin-bottom:0;
+
+  .input {margin-left: 146px;}
+}
 
 
 .box { 

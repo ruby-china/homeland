@@ -16,6 +16,6 @@
     <% end %>
   </h3>
   <blockquote>
-    <%= format_topic_body(reply.body) %>
+    <%= format_topic_body(reply.body, :mentioned_users => reply.mentioned_users) %>
   </blockquote>
 </td>

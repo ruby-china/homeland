@@ -3,7 +3,7 @@
    <%= user_name_tag(@reply.user) %>  回复了 《<a href='<%= topic_url(@topic.id) %>'><%= @topic.title %></a>》:</label> <br />
 </p>
 <blockquote>
-  <p><%= format_topic_body @reply.body,'',false %><br/></p>
+  <p><%= format_topic_body @reply.body, :allow_image => false %><br/></p>
 </blockquote>
 <p>
  <label> 贴子地址:</label> <a href='<%= topic_url(@topic.id) %>'><%= topic_url(@topic.id) %></a>.

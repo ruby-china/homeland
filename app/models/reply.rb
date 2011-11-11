@@ -50,11 +50,7 @@ class Reply
   end
 
   def mentioned_users
-    if mentioned_user_ids.any?
-      User.where(:_id.in => mentioned_user_ids)
-    else
-      []
-    end
+    User.where(:_id.in => mentioned_user_ids)
   end
 
   after_create :send_mention_notification

@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   def show
     @user = User.where(:login => params[:id]).first
     @last_topics = @user.topics.recent.limit(20)          
-    @last_replies = @user.replies.only(:topic_id).recent.limit(50).group
+    @last_replies = @user.replies.only(:topic_id, :body, :created_at).recent.limit(10)
     set_seo_meta("#{@user.login}")
   end
   

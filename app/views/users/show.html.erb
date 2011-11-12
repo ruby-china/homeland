@@ -66,24 +66,19 @@
       <h5>最近回复过的帖子</h5>
       <table>
         <tbody>
-          <% @last_replies.each do |group| 
-            next if group['group'][0].topic.blank?  %>
+          <% @last_replies.each do |reply|
+            next if reply.topic.blank? %>
             <tr><td>
-              <h3>
+              <h6>
+                <%= l reply.created_at, :format => :short %>
                 在
-                <a href="<%= topic_path(group['group'][0].topic) %>">
-                  <%= truncate(group['group'][0].topic.title, :length => 25) %>
+                <a href="<%= topic_path(reply.topic) %>">
+                  <%= reply.topic.title %>
                 </a>
                 回复：
-              </h3>
+              </h6>
               <blockquote>
-                <ul>
-                  <% group['group'].each do |reply|%>
-                    <li>
-                    <%= truncate(reply.body, :length => 45) %>
-                    </li>
-                  <% end%>
-                </ul>
+                <%= reply.body %>
               </blockquote>
             </td></tr>
           <% end%>

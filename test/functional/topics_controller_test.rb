@@ -8,4 +8,14 @@ class TopicsControllerTest < ActionController::TestCase
       get :show, :id => notification.reply.topic
     end
   end
+
+  test "should read topic after user reply topic" do
+    user = Factory :user
+    topic = Factory :topic
+    Factory :reply, :topic => topic
+    assert_equal 1, topic.user_readed?(user.id)
+    sign_in user
+    post :reply, :id => topic, :reply => {:body => 'content'}, :format => :js
+    assert_equal 0, topic.user_readed?(user.id)
+  end
 end

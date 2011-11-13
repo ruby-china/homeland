@@ -79,6 +79,7 @@ class TopicsController < ApplicationController
     @reply = @topic.replies.build(params[:reply])        
     @reply.user_id = current_user.id
     if @reply.save
+      @topic.user_readed(current_user.id)
       @msg = "回复成功。"
     else
       @msg = @reply.errors.full_messages.join("<br />")

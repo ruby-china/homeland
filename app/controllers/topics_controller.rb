@@ -35,7 +35,7 @@ class TopicsController < ApplicationController
   end
 
   def recent
-    @topics = Topic.recent.limit(50)
+    @topics = Topic.recent.paginate(:page => params[:page], :per_page => 50)
     set_seo_meta("最近活跃的50个帖子 &raquo; 论坛")
     render :action => "index"
   end

@@ -2,11 +2,15 @@
   <fieldset>
     <legend><%= @topic.id.blank? ? "新建帖子" : "修改帖子" %></legend>
     <%= render "shared/error_messages", :target => @topic %>  
-    <%= f.hidden_field :node_id %>
     <div class="clearfix">
       <%= f.label :title %>
       <div class="input">
-        <%= f.text_field :title, :class => "span7" %>
+        <% if @node.blank? %>
+          <span class="span3"><%= f.select :node_id, Node.recent.collect { |n| [n.name,n.id] },{}, :style => "width:140px;" %></span>
+        <% end %>
+        <span class="span7">
+          <%= f.text_field :title, :style => "width:300px" %>
+        </span>
       </div>
     </div>
      <div class="edit_tools">

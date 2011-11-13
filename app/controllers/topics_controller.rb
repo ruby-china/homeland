@@ -63,10 +63,12 @@ class TopicsController < ApplicationController
   # GET /topics/new.xml
   def new
     @topic = Topic.new
-    @topic.node_id = params[:node]
-    @node = Node.find(params[:node])
-    if @node.blank?
-      render_404
+    if !params[:node].blank?
+      @topic.node_id = params[:node]
+      @node = Node.find_by_id(params[:node])
+      if @node.blank?
+        render_404
+      end
     end
     set_seo_meta("发帖子 &raquo; 论坛")
   end

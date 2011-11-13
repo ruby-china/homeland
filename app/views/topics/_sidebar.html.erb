@@ -1,5 +1,5 @@
 <div class="sidebar">
-<% if ["show","new","edit","node"].index(params[:action]) %>
+<% if ["show","new","edit","node"].index(params[:action]) and !@node.blank? %>
   <div class="box">
     <h2><a href="<%= node_topics_path(@node) %>"><%= @node.name %></a></h2>
     <% if ["new"].index params[:action] %>
@@ -12,11 +12,12 @@
     </div>
   </div>
 <% elsif params[:action] == "index" %>
-  <div class="box">
+  <div class="box" style="text-align:center;">
     <p>
-      发贴请先进入一个节点以后点击“发布新帖”。
+      <a href="<%= new_topic_path %>" class="btn success">发布新帖</a>
     </p>
-		<p style="text-align:center;">
+    <hr>
+		<p>
 			<a href="<%= feed_topics_url %>" title="用RSS阅读器订阅<%= Setting.app_name %>论坛新贴">
 				<%= image_tag('feed.png', :alt => "订阅#{Setting.app_name}论坛新贴") %></a>
 		</p>

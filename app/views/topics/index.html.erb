@@ -22,64 +22,46 @@
     <% else %>
       <h1><%= Setting.app_name %></h1>
     <% end %>
-    <% if params[:action] == "node" %> 
-      <table class="node_topics">
-        <tr class="head">
-          <td class="replies">回复数</td>
-          <td class="title">标题</td>
-          <td class="author">作者</td>
-          <td class="replied_at">最后回复时间</td>
-        </tr>
-        <% @topics.each do |topic| %>
-        <tr class="topic">
-          <td class="replies"><%= topic.replies_count %></td>
-          <td class="title"><a href="<%= topic_path(topic) %>"><%= truncate(topic.title, :length => 25) %></a></td>
-          <td class="author"><%= user_name_tag(topic.user) %></td>
-          <td class="replied_at"><%= l (topic.replied_at || topic.created_at), :format => :short %></td>
-        </tr>
-        <% end %>
-      </table>
-    <% else %>
-      <div class="topics">
-        <% @topics.each do |topic| %>
-          <div class="topic topic_line">
-            <div class="pull-left avatar">
-    					<%= user_avatar_tag(topic.user,:normal) %>
+
+    <div class="topics">
+      <% @topics.each do |topic| %>
+        <div class="topic topic_line">
+          <div class="pull-left avatar">
+            <%= user_avatar_tag(topic.user,:normal) %>
+          </div>
+          <div class="right_info">
+            <div class="pull-right replies">
+              <% if topic.replies.count > 0 %>
+              <% readed_state = topic.user_readed?(current_user.id) if current_user %>
+              <a href="<%= topic_path(topic.id) %>" rel="twipsy" title="<%= topic_use_readed_text(readed_state) if current_user %>" class="count state<%= readed_state if current_user %>">
+              <%= topic.replies_count %>
+              </a>
+              <% end %>
             </div>
-            <div class="right_info">
-              <div class="pull-right replies">
-      					<% if topic.replies.count > 0 %>
-                <% readed_state = topic.user_readed?(current_user.id) if current_user %>
-                <a href="<%= topic_path(topic.id) %>" rel="twipsy" title="<%= topic_use_readed_text(readed_state) if current_user %>" class="count state<%= readed_state if current_user %>">
-                <%= topic.replies_count %>
-                </a>
-      					<% end %>
+            <div class="infos">
+              <div class="title"><a href="<%= topic_path(topic) %>" title="<%= topic.title %>"><%= truncate(topic.title, :length => 100) %></a></div>
+              <div class="info leader">
+                由 <%= user_name_tag(topic.user) %>
+                在 <a href="<%= node_topics_path(topic.node_id) %>"><%= topic.node.name %></a> 中发起
               </div>
-              <div class="infos">
-                <div class="title"><a href="<%= topic_path(topic) %>" title="<%= topic.title %>"><%= truncate(topic.title, :length => 100) %></a></div>
-                <div class="info leader">
-                  由 <%= user_name_tag(topic.user) %>
-                  在 <a href="<%= node_topics_path(topic.node_id) %>"><%= topic.node.name %></a> 中发起
-                </div>
-                <div class="info time">
-                  <% if topic.last_reply_user.blank? %>
-                    发布于 <%= timeago(topic.created_at) %>
-                  <% else %>
-                    最后由 <%= user_name_tag(topic.last_reply_user) %> 回复于 <%= timeago(topic.replied_at) %>
-                  <% end %>
-                </div>
+              <div class="info time">
+                <% if topic.last_reply_user.blank? %>
+                  发布于 <%= timeago(topic.created_at) %>
+                <% else %>
+                  最后由 <%= user_name_tag(topic.last_reply_user) %> 回复于 <%= timeago(topic.replied_at) %>
+                <% end %>
               </div>
             </div>
           </div>
-        <% end %>
-      </div>
-    <% end %>
+        </div>
+      <% end %>
+    </div>
       
     <% if params[:action] == "index" %>
       <div class="more">
         <a href="<%= recent_topics_path %>">查看更多最近发布的帖子...</a>
       </div>
-    <% elsif params[:action] == "node" or params[:action] == "search" %>
+    <% else %>
       <%= will_paginate1 @topics %>
     <% end %>
 	</div>

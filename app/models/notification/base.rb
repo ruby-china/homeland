@@ -11,6 +11,8 @@ class Notification::Base
 
   belongs_to :user
 
+  index [[:user_id, Mongo::ASCENDING], [:read, Mongo::ASCENDING]]
+
   def anchor
     "notification-#{id}"
   end

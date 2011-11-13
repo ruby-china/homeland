@@ -51,11 +51,12 @@ class TopicsController < ApplicationController
   def show
     @topic = Topic.find(params[:id])
     @topic.hits.incr(1)
+    @node = @topic.node
+    @replies = @topic.replies.asc(:_id).all.cache
     if current_user
       @topic.user_readed(current_user.id)
+      current_user.notifications.where(:reply_id.in => @replies.map(&:id), :read => false).update_all(:read => true)
     end
-    @node = @topic.node
-    @replies = @topic.replies.asc(:_id).all
     set_seo_meta("#{@topic.title} &raquo; 论坛")
   end
 

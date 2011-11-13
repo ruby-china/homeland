@@ -1,6 +1,8 @@
 class Notification::Base
   include Mongoid::Document
   include Mongoid::Timestamps::Created
+  include Mongoid::BaseModel
+
   store_in :notifications
 
   field :read, :default => false

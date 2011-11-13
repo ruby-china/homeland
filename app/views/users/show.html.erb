@@ -62,28 +62,28 @@
     </table>
 	</div>
 
+  <% if !@last_replies.blank? %>
     <div class="last_replies box">
       <h5>最近回复过的帖子</h5>
-      <table>
-        <tbody>
-          <% @last_replies.each do |reply|
-            next if reply.topic.blank? %>
-            <tr><td>
-              <h6>
-                <%= l reply.created_at, :format => :short %>
-                在
-                <a href="<%= topic_path(reply.topic) %>">
-                  <%= reply.topic.title %>
-                </a>
-                回复：
-              </h6>
-              <blockquote>
-                <%= reply.body %>
-              </blockquote>
-            </td></tr>
-          <% end%>
-        </tbody>
-      </table>
+      <ul>
+        <% @last_replies.each do |reply|
+          next if reply.topic.blank? %>
+          <li>
+            <h6>
+              <%= l reply.created_at, :format => :short %>
+              在
+              <a href="<%= topic_path(reply.topic) %>">
+                <%= reply.topic.title %>
+              </a>
+              回复：
+            </h6>
+            <blockquote>
+              <%= reply.body %>
+            </blockquote>
+          </li>
+        <% end %>
+      </ul>
     </ul>
   </div>
+  <% end %>
 </div>

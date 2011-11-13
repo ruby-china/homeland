@@ -12,6 +12,7 @@ class Reply
   
   belongs_to :user, :inverse_of => :replies
   belongs_to :topic, :inverse_of => :replies
+  has_many :notifications, :class_name => 'Notification::Base', :dependent => :delete
   
   index :user_id
   index :topic_id

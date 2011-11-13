@@ -26,7 +26,7 @@ class User
 
   has_many :topics, :dependent => :destroy  
   has_many :notes
-  has_many :replies
+  has_many :replies, :dependent => :destroy
 	embeds_many :authorizations
   has_many :posts
   has_many :notifications, :class_name => 'Notification::Base', :dependent => :delete

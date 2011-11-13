@@ -19,7 +19,7 @@ class Topic
   belongs_to :user, :inverse_of => :topics
   belongs_to :node
   belongs_to :last_reply_user, :class_name => 'User'
-  has_many :replies
+  has_many :replies, :dependent => :destroy
   
   attr_protected :user_id
   validates_presence_of :user_id, :title, :body, :node_id

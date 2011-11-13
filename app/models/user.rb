@@ -4,6 +4,7 @@ class User
   include Mongoid::Timestamps
   include Mongoid::BaseModel
   include Mongoid::SoftDelete
+  include Redis::Objects
   
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
@@ -22,7 +23,7 @@ class User
   
   index :login
   index :email
-  
+
   has_many :topics, :dependent => :destroy  
   has_many :notes
   has_many :replies

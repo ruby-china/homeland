@@ -22,28 +22,20 @@
 		</p>
   </div>
 <% end %>
+
 <%= cache("topic/init_list_sidebar/hot_nodes",:expires_in => 30.minutes) do %>
   <% if not @hot_nodes.blank? %>
   <div class="hot_nodes nodes box">
     <h2>热门节点</h2>
-    <p>
+    <ul>
       <% @hot_nodes.each do |node| %>
-        <a href="<%= node_topics_path(:id => node.id) %>"><%= node.name %></a>
+        <li><a href="<%= node_topics_path(:id => node.id) %>"><%= node.name %></a></li>
       <% end %>
-    </p>
+    </ul>
   </div>
   <% end %>
 <% end %>
-<% if current_user and (not @user_last_nodes.blank?) %>
-<div class="user_last_nodes nodes box">
-  <h2>最近访问节点</h2>
-  <p>
-    <% @user_last_nodes.each do |node| %>
-      <a href="<%= node_topics_path(:id => node.id) %>"><%= node.name %></a>
-    <% end %>
-  </p>
-</div>
-<% end %>
+
 <% if ["new"].index(params[:action]) %>
   <div id="topic_new_tip" class="box">
     <h2>发贴说明</h2>

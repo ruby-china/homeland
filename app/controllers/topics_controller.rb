@@ -7,11 +7,8 @@ class TopicsController < ApplicationController
   private
   def init_list_sidebar 
    if !fragment_exist? "topic/init_list_sidebar/hot_nodes"
-      @hot_nodes = Node.hots.limit(20)
+      @hot_nodes = Node.hots.limit(10)
     end
-    if current_user
-      @user_last_nodes = Node.find_last_visited_by_user(current_user.id)
-    end 
     set_seo_meta("论坛")
   end
 
@@ -32,9 +29,6 @@ class TopicsController < ApplicationController
 
   def node
     @node = Node.find(params[:id])
-    if current_user
-      Node.set_user_last_visited(current_user.id, @node.id)
-    end
     @topics = @node.topics.last_actived.paginate(:page => params[:page],:per_page => 50)
     set_seo_meta("#{@node.name} &raquo; 论坛","#{Setting.app_name}社区#{@node.name}",@node.summary)
     render :action => "index"
@@ -58,7 +52,6 @@ class TopicsController < ApplicationController
     @topic = Topic.find(params[:id])
     @topic.hits.incr(1)
     if current_user
-      Node.set_user_last_visited(current_user.id, @topic.node_id)
       @topic.user_readed(current_user.id)
     end
     @node = @topic.node

@@ -55,8 +55,8 @@ end
 after "deploy:symlink", :init_shared_path, :link_shared_config_yaml, :install_gems, :compile_assets
 
 set :default_environment, { 
-  'PATH' => "/home/ruby/.rvm/gems/ruby-1.9.2-p290-patch/bin:/home/ruby/.rvm/gems/ruby-1.9.2-p290-patch@global/bin:/home/ruby/.rvm/rubies/ruby-1.9.2-p290-patch/bin:/home/ruby/.rvm/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games",
-  'RUBY_VERSION' => 'ruby 1.9.2-patch',
-  'GEM_HOME' => '/home/ruby/.rvm/gems/ruby-1.9.2-p290-patch',
-  'GEM_PATH' => '/home/ruby/.rvm/gems/ruby-1.9.2-p290-patch:/home/ruby/.rvm/gems/ruby-1.9.2-p290-patch@global' 
+  'PATH' => "/home/ruby/.rvm/gems/ruby-1.9.3-p0/bin:/home/ruby/.rvm/gems/ruby-1.9.3-p0@global/bin:/home/ruby/.rvm/rubies/ruby-1.9.3-p0/bin:/home/ruby/.rvm/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games",
+  'RUBY_VERSION' => 'ruby-1.9.3-p0',
+  'GEM_HOME' => '/home/ruby/.rvm/gems/ruby-1.9.3-p0',
+  'GEM_PATH' => '/home/ruby/.rvm/gems/ruby-1.9.3-p0:/home/ruby/.rvm/gems/ruby-1.9.3-p0@global'
 }

@@ -1,7 +1,7 @@
 <%= render 'base' %>
 <% content_for :sitemap do %>
   <% if params[:action] == "recent" %>
-    <li class="active">最近活跃的50个主题</li>
+    <li class="active">主题列表</li>
   <% elsif params[:action] == "search" %>
     <li class="active">搜索<%= h params[:s] %></li>
   <% else %>

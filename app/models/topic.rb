@@ -4,6 +4,7 @@ class Topic
   include Mongoid::Timestamps
   include Mongoid::BaseModel
   include Mongoid::SoftDelete
+  include Mongoid::CounterCache
   include Redis::Search
   include Redis::Objects
   
@@ -17,7 +18,9 @@ class Topic
   field :follower_ids, :type => Array, :default => []
   
   belongs_to :user, :inverse_of => :topics
+  counter_cache :name => :user, :inverse_of => :topics
   belongs_to :node
+  counter_cache :name => :node, :inverse_of => :topics
   belongs_to :last_reply_user, :class_name => 'User'
   has_many :replies, :dependent => :destroy
   

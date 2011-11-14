@@ -3,6 +3,7 @@ class Reply
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::BaseModel
+  include Mongoid::CounterCache
   include Mongoid::SoftDelete
 
   field :body
@@ -11,7 +12,9 @@ class Reply
   field :mentioned_user_ids, :type => Array, :default => []
   
   belongs_to :user, :inverse_of => :replies
+  counter_cache :name => :user, :inverse_of => :replies
   belongs_to :topic, :inverse_of => :replies
+  counter_cache :name => :topic, :inverse_of => :replies
   has_many :notifications, :class_name => 'Notification::Base', :dependent => :delete
   
   index :user_id
@@ -24,7 +27,6 @@ class Reply
   def update_parent_topic
     self.topic.replied_at = Time.now
     self.topic.last_reply_user_id = self.user_id
-    self.topic.replies_count += 1
     self.topic.push_follower(self.user_id)
     self.topic.save
     # 清除用户读过记录

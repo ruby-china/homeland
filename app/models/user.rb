@@ -19,6 +19,7 @@ class User
   field :state, :type => Integer, :default => 1
   field :guest, :type => Boolean, :default => false
   field :tagline  
+  field :topics_count, :type => Integer, :default => 0
   field :replies_count, :type => Integer, :default => 0  
   
   index :login

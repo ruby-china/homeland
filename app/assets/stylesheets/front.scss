@@ -5,13 +5,14 @@
 #login {   }
 
 .sidebar h2 { font-size:14px; line-height:100%; margin-bottom:10px; color:#666;}
-
+.sidebar ul, 
+.sidebar ol { margin-bottom:0; }
 .sidebar p { margin-bottom:6px; }
 .sidebar li { margin-bottom:4px; }
 
 /* 论坛分类列表 */
 #sections h2 { font-size:12px; color:#999; line-height:200%; margin-bottom:10px; text-align: center;}
-#sections ul { list-style: none; }
+#sections ul { list-style: none; margin-bottom:0; }
 #sections li { line-height:200%; font-size:14px; padding:8px 0; border-top:1px solid #DDD;}
 #sections li label { font-size:12px; color:#999; display:inline-block; width:120px; margin-right:8px; text-align: right;}
 #sections li a { margin-right:10px;}

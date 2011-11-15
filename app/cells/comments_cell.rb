@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class CommentsCell < Cell::Rails
-  helper :application, :users
+  helper :application, :users, :topics
   def index(opts)
     @title = opts[:title] || "评论"
     @commentable = opts[:commentable]

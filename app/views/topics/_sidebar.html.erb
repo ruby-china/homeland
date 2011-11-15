@@ -40,7 +40,7 @@
 <% if ["new"].index(params[:action]) %>
   <div id="topic_new_tip" class="box">
     <h2>发贴说明</h2>
-    <%= render "body_help_block" %>
+    <%= render "/shared/reply_help_block" %>
   </div>
 <% end %>
 <% if params[:action] == "index" %>

@@ -57,7 +57,7 @@
         <span class="help-inline">Ctrl+Enter</span>
       </div>
       <%= f.text_area :body,:class => "span10", :rows => "4" %><br /><br />
-      <%= render "body_help_block"%>
+      <%= render "/shared/reply_help_block" %>
     <% end %>
     <script type="text/javascript">
       $("#new_reply").submit(function(){

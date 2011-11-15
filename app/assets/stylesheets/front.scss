@@ -4,6 +4,9 @@
  */
 #login {   }
 
+.box ul,
+.box ol { margin-bottom:0; }
+
 .sidebar h2 { font-size:14px; line-height:100%; margin-bottom:10px; color:#666;}
 .sidebar ul, 
 .sidebar ol { margin-bottom:0; }
@@ -36,10 +39,21 @@
 .markdown_content { }
 #main .markdown_content h1 { font-size:22px; text-align:left; }
 
+.body pre{margin:1em 0;font-size:12px;background-color:#eee;border:1px solid #ddd;padding:5px;color:#444;overflow:auto;-webkit-box-shadow:rgba(0,0,0,0.07) 0 1px 2px inset;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;}
+.body pre::-webkit-scrollbar{height:8px;width:8px;}
+.body pre::-webkit-scrollbar-track-piece{margin-bottom:10px;background-color:#e5e5e5;border-bottom-left-radius:4px 4px;border-bottom-right-radius:4px 4px;border-top-left-radius:4px 4px;border-top-right-radius:4px 4px;}
+.body pre::-webkit-scrollbar-thumb:vertical{height:25px;background-color:#ccc;-webkit-border-radius:4px;-webkit-box-shadow:0 1px 1px rgba(255,255,255,1);}
+.body pre::-webkit-scrollbar-thumb:horizontal{width:25px;background-color:#ccc;-webkit-border-radius:4px;}
+.body pre code{padding:0!important;font-size:12px!important;background-color:#eee!important;border:none!important;}
+.body code{font-size:12px!important;background-color:#f8f8ff!important;color:#444!important;padding:0 .2em!important;border:1px solid #dedede!important;}
+
 .cell_comments {
   .comment { 
     margin-bottom:10px;
     .info {
+      .user_avatar {
+        img { margin-bottom: -4px; }
+      }
       color:#999;
       font-size:12px;
       border-bottom:1px solid #eee;
@@ -51,3 +65,5 @@
     }
   }
 }
+
+.help-block ul { margin-bottom:0; }

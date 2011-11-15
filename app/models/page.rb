@@ -17,6 +17,7 @@ class Page
   field :body_html
   field :editor_ids, :type => Array, :default => []
   field :locked, :type => Boolean, :default => false
+  field :comments_count, :type => Integer, :default => 0
   
   index :slug
   

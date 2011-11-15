@@ -22,3 +22,6 @@
     </div>
   </div>
 </div>
+<div id="comments">
+  <%= render_cell :comments, :index, :commentable => @page, :current_user => current_user, :title => "评论" %>
+</div>

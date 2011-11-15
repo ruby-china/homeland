@@ -34,7 +34,7 @@ module UsersHelper
     img_src = "http://www.gravatar.com/avatar/#{hash}?s=#{width}&d=identicon"
     img = "<img src=\"#{img_src}\" />"
     if link
-      raw("<a href=\"#{user_path(user.login)}\" title=\"#{user.login}\">#{img}</a>")
+      raw("<a href=\"#{user_path(user.login)}\" class=\"user_avatar\" title=\"#{user.login}\">#{img}</a>")
     else
       raw img
     end

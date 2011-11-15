@@ -54,7 +54,7 @@ RubyChina::Application.routes.draw do
     resources :pages
   end  
   
-  mount Resque::Server.new, :at => "/resque"
+  #mount Resque::Server.new, :at => "/resque"
   if Rails.env.development?
     mount TopicMailer::Preview => 'mails/topic'
     mount UserMailer::Preview => 'mails/user'

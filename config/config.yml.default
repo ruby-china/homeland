@@ -10,12 +10,12 @@ defaults: &defaults
   email_sender: 'no-reply@ruby-china.org'
   aws_access_key_id: ''
   aws_secret_access_key: ''
-  twitter_token: ''
-  twitter_secret: ''
-  github_token: ''
-  github_secret: ''
-  douban_token: ''
-  douban_secret: ''
+  twitter_token: "KsCjutsbOgAjyhYPeV7w2A"
+  twitter_secret: "L3biMPeUjwfH8E7diJrhW78DaZ2QW3XOlJBQ8fGKc"
+  github_token: "31f5dbe1baec4e3ae9bc"
+  github_secret: "c017d57f03a99100bb381d6d8dac87913d331625"
+  douban_token: "0dbb51d22a69b10b2931f5767f3d1321"
+  douban_secret: "389060b10dfaaf79"
 
 development:
   <<: *defaults

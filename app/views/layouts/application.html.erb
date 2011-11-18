@@ -20,7 +20,7 @@
           <a href="/"><%= Setting.app_name %></a>
         </h3>
         <ul class="nav">
-          <li<%= ' class=active' if ["topics","replies"].index(params[:controller]) %>><a href="<%= topics_path %>">论坛</a></li> 
+          <li<%= ' class=active' if ["topics","replies"].index(params[:controller]) %>><a href="<%= topics_path %>">社区</a></li> 
           <li<%= ' class=active' if ["pages"].index(params[:controller]) %>><a href="/wiki">Wiki</a></li>
           <li<%= ' class=active' if ["posts"].index(params[:controller]) %>><a href="<%= posts_path %>">文章</a></li>
         </ul>

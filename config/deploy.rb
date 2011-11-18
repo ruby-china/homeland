@@ -7,9 +7,9 @@ set :user, "ruby"
 set :deploy_to, "/home/#{user}/www/#{application}"
 set :runner, "ruby"
 
-role :web, "ruby-china.org"                          # Your HTTP server, Apache/etc
-role :app, "ruby-china.org"                          # This may be the same as your `Web` server
-role :db,  "ruby-china.org", :primary => true # This is where Rails migrations will run
+role :web, "58.215.172.218"                          # Your HTTP server, Apache/etc
+role :app, "58.215.172.218"                          # This may be the same as your `Web` server
+role :db,  "58.215.172.218", :primary => true # This is where Rails migrations will run
 
 # thin.yml 路径
 set :thin_path, "#{deploy_to}/current/config/thin.yml"

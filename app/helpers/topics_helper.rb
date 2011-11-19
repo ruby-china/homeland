@@ -6,7 +6,7 @@ module TopicsHelper
     options[:allow_image] = true
     text = h(text)
     text.gsub!( /\r\n?/, "\n" )
-    text.gsub!( /[\n]+/, "<br>" )
+    text.gsub!( /\n/, "<br>" )
     text.gsub!(/```(<br>{0,}|\s{0,})(.+?)```(<br>{0,}|\s{0,})/im,'<pre><code>\2</code></pre>')
     text.gsub!(/\[img\](http:\/\/.+?)\[\/img\]/i,'<img src="\1" alt="'+ h(options[:title]) +'" />') if options[:allow_image]
     text = auto_link(text,:all, :target => '_blank', :rel => "nofollow")

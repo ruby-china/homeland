@@ -6,27 +6,28 @@ set :scm, :git
 set :user, "ruby"
 set :deploy_to, "/home/#{user}/www/#{application}"
 set :runner, "ruby"
+set :deploy_via, :remote_cache
+set :git_shallow_clone, 1
 
 role :web, "58.215.172.218"                          # Your HTTP server, Apache/etc
 role :app, "58.215.172.218"                          # This may be the same as your `Web` server
 role :db,  "58.215.172.218", :primary => true # This is where Rails migrations will run
 
-# thin.yml 路径
-set :thin_path, "#{deploy_to}/current/config/thin.yml"
+# unicorn.rb 路径
+set :unicorn_path, "#{deploy_to}/current/config/unicorn.rb"
 
 namespace :deploy do
   task :start, :roles => :app do
-    run "thin start -C #{thin_path}"
+    run "cd #{deploy_to}/current/; unicorn_rails -c #{unicorn_path} -D"
   end
 
   task :stop, :roles => :app do
-    run "thin stop -O -C #{thin_path}"
+    run "kill -QUIT `cat #{deploy_to}/current/tmp/pids/unicorn.pid`"
   end
 
-  # 要求服务器thin版本必须大于等于1.2.5，以支持-O参数进行one by one重启
   desc "Restart Application"
   task :restart, :roles => :app do
-    run "thin restart -O -w 300 -C #{thin_path}"
+    run "kill -USR2 `cat #{deploy_to}/current/tmp/pids/unicorn.pid`"
   end
 end
 
@@ -37,6 +38,7 @@ end
 
 task :link_shared_config_yaml, :roles => :web do
   run "ln -sf #{deploy_to}/shared/config/*.yml #{deploy_to}/current/config/"
+  run "ln -sf #{deploy_to}/shared/config/unicorn.rb #{deploy_to}/current/config/"
 end
 
 task :install_gems, :roles => :web do

@@ -60,6 +60,7 @@ class PhotosController < ApplicationController
       photos.each  do |p|
         p.user_id = current_user.id
         if not p.save
+          logger.error("/photos/create save faield: #{p.errors.full_messages.join('\n')}")
           redirect_to(tiny_new_photos_path, :notice => p.errors.full_messages.join("<br />"))
           return
         else

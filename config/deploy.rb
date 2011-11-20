@@ -18,7 +18,7 @@ set :unicorn_path, "#{deploy_to}/current/config/unicorn.rb"
 
 namespace :deploy do
   task :start, :roles => :app do
-    run "cd #{deploy_to}/current/; unicorn_rails -c #{unicorn_path} -D"
+    run "cd #{deploy_to}/current/; RAILS_ENV=production unicorn_rails -c #{unicorn_path} -D"
   end
 
   task :stop, :roles => :app do

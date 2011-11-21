@@ -1,7 +1,7 @@
 # coding: utf-8  
 class ApplicationController < ActionController::Base
   protect_from_forgery  
-  stream
+  # stream
 
   def render_404
     render_optional_error_file(404)

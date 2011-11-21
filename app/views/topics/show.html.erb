@@ -35,7 +35,7 @@
 			<% end %>
 		</div>
 	</div>
-	<% cache("topic:#{@topic.id}:#{@topic.updated_at.to_i}") %>
+	<% cache("topic:#{@topic.id}:#{@topic.updated_at.to_i}") do %>
     <% if @replies.blank? %>
       <div class="no_result">
         暂无回复。

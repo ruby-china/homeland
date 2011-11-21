@@ -28,6 +28,10 @@ RubyChina::Application.configure do
   
   config.assets.compress = false
   config.assets.debug = true
+  
+  config.after_initialize do |app|
+    app.assets.logger = Logger.new('/dev/null')
+  end
 end
 
 Rails::Rack::Logger.class_eval do

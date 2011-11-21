@@ -35,7 +35,8 @@ class Reply
   
   # 更新的时候，同时更新 Topic 的 replied_at
   after_update :update_topic_updated_at
-  def update_topic_replied_at
+  after_destroy :update_topic_updated_at
+  def update_topic_updated_at
     self.topic.update_attribute(:updated_at, Time.now)
   end
   

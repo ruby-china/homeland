@@ -39,7 +39,7 @@
               <% end %>
             </div>
             <div class="infos">
-              <div class="title"><a href="<%= topic_path(topic) %>" title="<%= topic.title %>"><%= truncate(topic.title, :length => 100) %></a></div>
+              <div class="title"><a href="<%= topic_path(topic) %><%= "#reply#{topic.replies_count + 1}" %>" title="<%= topic.title %>"><%= truncate(topic.title, :length => 100) %></a></div>
               <div class="info leader">
                 由 <%= user_name_tag(topic.user) %>
                 在 <a href="<%= node_topics_path(topic.node_id) %>"><%= topic.node.name %></a> 中发起

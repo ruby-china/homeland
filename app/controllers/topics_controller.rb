@@ -19,6 +19,7 @@ class TopicsController < ApplicationController
     @topics = Topic.last_actived.limit(10)
     @sections = Section.all
     set_seo_meta("","#{Setting.app_name}社区")
+    render :stream => true
   end
   
   def feed
@@ -31,13 +32,13 @@ class TopicsController < ApplicationController
     @node = Node.find(params[:id])
     @topics = @node.topics.last_actived.paginate(:page => params[:page],:per_page => 50)
     set_seo_meta("#{@node.name} &raquo; 社区","#{Setting.app_name}社区#{@node.name}",@node.summary)
-    render :action => "index"
+    render :action => "index", :stream => true
   end
 
   def recent
     @topics = Topic.recent.paginate(:page => params[:page], :per_page => 50)
     set_seo_meta("最近活跃的50个帖子 &raquo; 社区")
-    render :action => "index"
+    render :action => "index", :stream => true
   end
 
   def search
@@ -45,7 +46,7 @@ class TopicsController < ApplicationController
     ids = result.collect { |r| r["id"] }
     @topics = Topic.find(ids).paginate(:page => params[:page], :per_page => 20)
     set_seo_meta("搜索#{params[:s]} &raquo; 社区")
-    render :action => "index"
+    render :action => "index", :stream => true
   end
 
   def show
@@ -58,6 +59,7 @@ class TopicsController < ApplicationController
       current_user.notifications.where(:reply_id.in => @replies.map(&:id), :read => false).update_all(:read => true)
     end
     set_seo_meta("#{@topic.title} &raquo; 社区")
+    render :stream => true
   end
 
   # GET /topics/new

@@ -49,6 +49,8 @@ gem "aws-ses", "~> 0.4.3"
 gem 'mail_view', :git => 'git://github.com/37signals/mail_view.git'
 gem "daemon-spawn", "~> 0.4.2"
 gem "unicorn"
+# 用于组合小图片
+gem "sprite-factory", "1.4.1"
 
 group :assets do
   gem 'sass-rails', "  ~> 3.1.4"
@@ -58,6 +60,7 @@ end
 
 group :development do
 	gem 'capistrano', '2.9.0'
+	gem 'chunky_png', "1.2.5"
 end
 
 group :test do

@@ -47,6 +47,17 @@ module ApplicationHelper
     content_tag(:abbr, time.to_s, options.merge(:title => time.getutc.iso8601)) if time
   end
   
+  def share_tag(title)
+    html = <<-eos
+    <div class='share_buttons' data-title="#{title}">
+      <a href="#" rel="nofollow" rel="twipsy" data-site="twitter" class="icon share_icons_twitter" title="转发到Twitter"></a>
+      <a href="#" rel="nofollow" rel="twipsy" data-site="weibo" class="icon share_icons_weibo" title="转发到新浪微博"></a>
+      <a href="#" rel="nofollow" rel="twipsy" data-site="douban" class="icon share_icons_douban" title="转发到豆瓣"></a>
+    </div>
+    eos
+    raw html
+  end
+  
   class BootstrapLinkRenderer < ::WillPaginate::ViewHelpers::LinkRenderer
     protected
     def html_container(html)

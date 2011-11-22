@@ -6,10 +6,11 @@
     <div class="info">
       版本 <%= @page.version %>， 最后更新于 <%= timeago @page.updated_at %>
       <% if wiki_editor? %>
-      <a href="<%= edit_page_path(@page) %>">编辑</a>
+      <a href="<%= edit_page_path(@page) %>" class="label success">编辑</a>
       <% end %>
     </div>
   <% end %>
+  <div style="text-align:right;"><%= share_tag(@page.title) %></div>
   <div class="wikistyle">
     <%= raw @page.body_html %>
   </div>

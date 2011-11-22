@@ -45,7 +45,12 @@ RubyChina::Application.routes.draw do
     root :to => "home#index"
     resources :site_configs
     resources :replies
-    resources :topics
+    resources :topics do
+      member do
+        post :suggest
+        post :unsuggest
+      end
+    end
     resources :nodes
     resources :sections
     resources :users

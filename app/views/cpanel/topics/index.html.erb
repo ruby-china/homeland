@@ -6,12 +6,12 @@
 <table class="grid">
   <tr class="head">
     <td class="first">ID</td>
-    <td style="width:400px">Title</td>
+    <td style="width:300px">Title</td>
     <td>Node</td>
     <td>User</td>
     <td>Replies</td>
     <td>at</td>
-    <td></td>
+    <td style="width:140px"></td>
   </tr>
 
 <% @topics.each do |topic| %>
@@ -22,8 +22,14 @@
     <td><%= topic.user.login if topic.user %></td>
     <td><%= topic.replies_count %></td>
     <td><%= l topic.created_at,:format => :short %></td>
-    <td><%= link_to '修改', edit_cpanel_topic_path(topic) %>
-    <%= link_to '删除', cpanel_topic_path(topic), :confirm => 'Are you sure?', :method => :delete %></td>
+    <td>
+      <% if !topic.suggested_at.blank? %>
+        <%= link_to '去置顶', unsuggest_cpanel_topic_path(topic), :confirm => 'Are you sure?', :method => :post %>
+      <% else %>
+        <%= link_to '置顶', suggest_cpanel_topic_path(topic), :confirm => 'Are you sure?', :method => :post %>
+      <% end %>
+      <%= link_to '修改', edit_cpanel_topic_path(topic) %>
+      <%= link_to '删除', cpanel_topic_path(topic), :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

@@ -16,6 +16,7 @@ class Topic
   field :replies_count, :type => Integer, :default => 0
   # 回复过的人的 ids 列表
   field :follower_ids, :type => Array, :default => []
+  field :suggested_at, :type => DateTime
   
   belongs_to :user, :inverse_of => :topics
   counter_cache :name => :user, :inverse_of => :topics
@@ -30,6 +31,7 @@ class Topic
   index :node_id
   index :user_id
   index :replied_at
+  index :suggested_at
   
   counter :hits, :default => 0
   
@@ -39,6 +41,8 @@ class Topic
 
   # scopes
   scope :last_actived, desc("replied_at").desc("created_at")
+  # 推荐的话题
+  scope :suggest, where(:suggested_at.ne => nil).desc(:suggested_at)
   before_save :set_replied_at
   def set_replied_at
     self.replied_at = Time.now

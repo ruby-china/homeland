@@ -25,15 +25,17 @@
 				</div>
 			</div>			
 		</div>
+		<%= raw SiteConfig.before_topic_html %>
 		<div class="body">
 			<%= format_topic_body(@topic.body) %>
 		</div>
-		<div class="tools">
+		<div class="tools pull-right">
 		  <% if owner?(@topic) %>
   			<a href="<%= edit_topic_path(@topic.id) %>">修改</a>
   			<%= link_to "删除", topic_path(@topic.id), :method => :delete, :confirm => "确定要删除么？" %>
 			<% end %>
 		</div>
+		<%= raw SiteConfig.after_topic_html %>
 	</div>
 
   <% if @replies.blank? %>

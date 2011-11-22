@@ -30,3 +30,22 @@ SiteConfig.save_default("footer_html",<<-eos
 </p>
 eos
 )
+
+# 话题后面的HTML代码
+SiteConfig.save_default("after_topic_html",<<-eos
+<div class="share_links">
+ <a href="https://twitter.com/share" class="twitter-share-button" data-count="none"">Tweet</a>
+ <script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+</div>
+eos
+)
+
+# 话题正文前面的HTML
+SiteConfig.save_default("before_topic_html",<<-eos
+eos
+)
+
+# 话题列表首页边栏HTML
+SiteConfig.save_default("topic_index_sidebar_html",<<-eos
+eos
+)

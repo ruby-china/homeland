@@ -43,7 +43,9 @@
     <%= render "/shared/reply_help_block" %>
   </div>
 <% end %>
+
 <% if params[:action] == "index" %>
+<%= raw SiteConfig.topic_index_sidebar_html %>
 <div class="totals box">
 	<h2>统计信息</h2>
 	<ul>

@@ -51,7 +51,13 @@ RubyChina::Application.routes.draw do
     resources :users
     resources :photos
     resources :posts
-    resources :pages
+    resources :pages do
+      resources :versions, :controller => :page_versions do
+        member do
+          post :revert
+        end
+      end
+    end
   end  
   
   if Rails.env.development?

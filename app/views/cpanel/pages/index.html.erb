@@ -6,11 +6,11 @@
 <table class="grid">
   <tr class="head">
     <td class="first">ID</td>
-    <td style="width:400px">Slug</td>
+    <td style="width:200px">Slug</td>
     <td>Title</td>
     <td>at</td>
     <td>lock</td>
-    <td></td>
+    <td style="width:140px;"></td>
   </tr>
 
 <% @pages.each do |page| %>
@@ -20,7 +20,9 @@
     <td><%= truncate(page.title,:length => 30) %></td>
     <td><%= l page.created_at,:format => :short %></td>
     <td><%= page.locked %></td>
-    <td><%= link_to '修改', edit_cpanel_page_path(page) %>
+    <td>
+      <%= link_to '版本历史', cpanel_page_versions_path(page.id) %>
+    <%= link_to '修改', edit_cpanel_page_path(page) %>
     <%= link_to '删除', cpanel_page_path(page), :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>

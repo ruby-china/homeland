@@ -1,0 +1,20 @@
+<% content_for :sitemap do %>
+  <a href="<%= cpanel_pages_path %>">Wiki</a> &gt; 
+  <a href="<%= edit_cpanel_page_path(params[:page_id]) %>">Page:<%= params[:page_id] %></a> &gt; 
+  <a href="<%= cpanel_page_versions_path(params[:page_id]) %>">版本历史</a> &gt; 
+  <span class="current">明细</span>
+<% end %>
+<div class="pull-right">
+  <%= link_to 'Revert', revert_cpanel_page_version_path(@page_version.page_id, @page_version.id), :confirm => 'Are you sure?', :method => :post, :class => "btn danger" %>
+</div>
+<div class="field">
+  <%= user_name_tag @page_version.user %> 修改与 <%= l @page_version.created_at, :format => :long %>
+</div>
+<div class="field">
+  Slug: <%= @page_version.slug %>
+</div>
+<div class="field">
+  Title: <%= @page_version.title %>
+</div>
+
+<%= markdown @page_version.body %>

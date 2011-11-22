@@ -37,6 +37,7 @@ class PagesController < ApplicationController
   def create
     @page = Page.new(params[:page])
     @page.user_id = current_user.id
+    @page.version_enable = true
 
     if @page.save
       redirect_to page_path(@page.slug), notice: '页面创建成功。'
@@ -47,6 +48,7 @@ class PagesController < ApplicationController
 
   def update
     @page = Page.find(params[:id])
+    params[:page][:version_enable] = true
     params[:page][:user_id] = current_user.id
     
     if @page.update_attributes(params[:page])

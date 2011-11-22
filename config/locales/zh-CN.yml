@@ -38,6 +38,7 @@
         title: 页面标题
         body: 内容
         locked: 锁定开关
+        change_desc: 变更描述
     errors:
       models:
         user: 用户        

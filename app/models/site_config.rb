@@ -23,10 +23,10 @@ class SiteConfig
       var_name = method_name.gsub('=', '')
       value = args.first.to_s
       # save
-      if item = find_by_key(key)
-        update_attribute(var_name, value)
+      if item = find_by_key(var_name)
+        item.update_attribute(:value, value)
       else
-        SiteConfig.create(:key => key, :value => value)
+        SiteConfig.create(:key => var_name, :value => value)
       end
     else
       if item = where(:key => method).first
@@ -38,7 +38,7 @@ class SiteConfig
   end
   
   def self.find_by_key(key)
-    where(:key => key).first
+    where(:key => key.to_s).first
   end
   
   def self.save_default(key, value)

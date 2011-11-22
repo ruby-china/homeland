@@ -33,13 +33,13 @@
             <div class="pull-right replies">
               <% if topic.replies.count > 0 %>
               <% readed_state = topic.user_readed?(current_user.id) if current_user %>
-              <a href="<%= topic_path(topic.id) %>" rel="twipsy" title="<%= topic_use_readed_text(readed_state) if current_user %>" class="count state<%= readed_state if current_user %>">
+              <a href="<%= topic_path(topic.id) %><%= "#reply#{topic.replies_count}" %>" rel="twipsy" title="<%= topic_use_readed_text(readed_state) if current_user %>" class="count state<%= readed_state if current_user %>">
               <%= topic.replies_count %>
               </a>
               <% end %>
             </div>
             <div class="infos">
-              <div class="title"><a href="<%= topic_path(topic) %><%= "#reply#{topic.replies_count}" %>" title="<%= topic.title %>"><%= truncate(topic.title, :length => 100) %></a></div>
+              <div class="title"><a href="<%= topic_path(topic) %>" title="<%= topic.title %>"><%= truncate(topic.title, :length => 100) %></a></div>
               <div class="info leader">
                 由 <%= user_name_tag(topic.user) %>
                 在 <a href="<%= node_topics_path(topic.node_id) %>"><%= topic.node.name %></a> 中发起

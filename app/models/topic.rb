@@ -106,12 +106,6 @@ class Topic
     paginate :conditions => "title like '%#{key}%'",:page => 1
   end
   
-  def self.cached_count
-    return Rails.cache.fetch("topics/count",:expires_in => 1.hours) do
-      self.count
-    end
-  end
-  
   def self.find_by_message_id(message_id)
     where(:message_id => message_id).first
   end

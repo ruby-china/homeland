@@ -44,12 +44,6 @@ class Reply
   def send_mail_notify
     TopicMailer.got_reply(self)
   end
-  
-  def self.cached_count
-    return Rails.cache.fetch("replies/count",:expires_in => 1.hours) do
-      self.count
-    end
-  end
 
   before_save :extract_mentioned_users
   def extract_mentioned_users

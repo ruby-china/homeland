@@ -24,3 +24,11 @@
   li { line-height:180%; border-top:1px solid #ddd; list-style: none;}
   blockquote { line-height:160%; }
 }
+
+#users {
+  .info { margin-bottom:10px; text-align:right;}
+}
+.user_list { 
+  h2 { font-size:14px; margin:0; }
+  .span1 { width:70px; text-align:center; margin-top:20px;}
+}

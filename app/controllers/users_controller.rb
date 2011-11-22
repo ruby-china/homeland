@@ -1,5 +1,9 @@
 # coding: utf-8  
 class UsersController < ApplicationController
+  
+  def index
+  end
+  
   def show
     @user = User.where(:login => params[:id]).first
     @last_topics = @user.topics.recent.limit(20)          

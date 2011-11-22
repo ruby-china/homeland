@@ -14,7 +14,7 @@ RubyChina::Application.routes.draw do
   match "auth/:provider/unbind", :to => "home#auth_unbind"  
   
   devise_for :users, :path => "account"
-  resources :users, :only => :show
+  resources :users
   resources :notifications, :only => [:index, :destroy] do
     collection do
       put :mark_all_as_read

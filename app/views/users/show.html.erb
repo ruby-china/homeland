@@ -1,8 +1,5 @@
+<%= render "base" %>
 <% content_for :sitemap do %><span class="current"><%= @user.login %></span><% end %>
-<% content_for :styles do %>
-	<%= stylesheet_link_tag "users" %>
-<% end %>
-
 <div class="sidebar">
   <div class="box" style="text-align:center;">
     <%= user_avatar_tag(@user,120, :link => false) %>

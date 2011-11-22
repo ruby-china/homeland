@@ -52,6 +52,8 @@ class User
   has_and_belongs_to_many :following, :class_name => 'User', :inverse_of => :followers
   has_and_belongs_to_many :followers, :class_name => 'User', :inverse_of => :following
 
+  scope :hot, desc(:replies_count, :topics_count)
+
   def password_required?
     return false if self.guest
     (authorizations.empty? || !password.blank?) && super  
@@ -113,12 +115,6 @@ class User
     else
       params.delete(:current_password)
       self.update_without_password(params)
-    end
-  end
-
-  def self.cached_count
-    return Rails.cache.fetch("users/count",:expires_in => 1.hours) do
-      self.count
     end
   end
   

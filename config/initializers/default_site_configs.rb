@@ -47,5 +47,18 @@ eos
 
 # 话题列表首页边栏HTML
 SiteConfig.save_default("topic_index_sidebar_html",<<-eos
+<div class="box">
+  <h2>公告</h2>
+  <div class="content">
+    Hello world.
+  </div>
+</div>
+
+<div class="box">
+  <h2>置顶话题</h2>
+  <ul class="content">
+    <li><a href="/topics/1">Foo bar</a></li>
+  </ul>
+</div>
 eos
 )

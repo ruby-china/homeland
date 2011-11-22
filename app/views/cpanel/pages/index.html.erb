@@ -10,6 +10,7 @@
     <td>Title</td>
     <td>at</td>
     <td>lock</td>
+    <td>Version</td>
     <td style="width:140px;"></td>
   </tr>
 
@@ -20,6 +21,7 @@
     <td><%= truncate(page.title,:length => 30) %></td>
     <td><%= l page.created_at,:format => :short %></td>
     <td><%= page.locked %></td>
+    <td><%= page.version %></td>
     <td>
       <%= link_to '版本历史', cpanel_page_versions_path(page.id) %>
     <%= link_to '修改', edit_cpanel_page_path(page) %>

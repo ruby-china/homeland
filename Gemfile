@@ -22,7 +22,7 @@ gem 'will_paginate', '3.0.pre2'
 gem 'omniauth', '0.3.0'
 gem "oa-openid", '0.3.0'
 # Rails cache 存放到 Redis
-gem 'redis-store', '1.0.0.1'
+gem 'dalli', '1.1.1'
 # 搜索相关的组件
 gem 'chinese_pinyin', '0.4.1'
 gem "rmmseg-cpp-huacnlee", "0.2.8"

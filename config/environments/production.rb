@@ -1,5 +1,4 @@
 # coding: utf-8  
-require "redis-store"
 RubyChina::Application.configure do
   # Settings specified here will take precedence over those in config/environment.rb
 
@@ -28,7 +27,7 @@ RubyChina::Application.configure do
 
   # Use a different cache store in production
   # config.cache_store = :mem_cache_store
-	config.cache_store = [:redis_store,"127.0.0.1:6379"]
+	config.cache_store = [:dalli_store,"127.0.0.1", {:namespace => "rb-cn", :compression => true}]
 
   # Disable Rails's static asset server
   # In production, Apache or nginx will already do this

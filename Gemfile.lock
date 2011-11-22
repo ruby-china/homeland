@@ -71,6 +71,7 @@ GEM
       execjs
     coffee-script-source (1.1.2)
     daemon-spawn (0.4.2)
+    dalli (1.1.1)
     devise (1.4.5)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
@@ -217,8 +218,6 @@ GEM
       redis (>= 2.1.1)
       redis-namespace (~> 1.0.2)
       rmmseg-cpp-huacnlee (>= 0.2.8)
-    redis-store (1.0.0.1)
-      redis (~> 2.2.1)
     resque (1.19.0)
       multi_json (~> 1.0)
       redis-namespace (~> 1.0.2)
@@ -288,6 +287,7 @@ DEPENDENCIES
   chinese_pinyin (= 0.4.1)
   coffee-rails (~> 3.1.1)
   daemon-spawn (~> 0.4.2)
+  dalli (= 1.1.1)
   devise (= 1.4.5)
   factory_girl_rails
   jquery-rails (= 1.0.16)
@@ -307,7 +307,6 @@ DEPENDENCIES
   redis-namespace (~> 1.0.2)
   redis-objects (= 0.5.2)
   redis-search (= 0.6.3)
-  redis-store (= 1.0.0.1)
   resque (~> 1.19.0)
   resque_mailer (= 2.0.2)
   rmmseg-cpp-huacnlee (= 0.2.8)

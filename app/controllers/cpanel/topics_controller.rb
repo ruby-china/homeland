@@ -85,12 +85,14 @@ class Cpanel::TopicsController < Cpanel::ApplicationController
   def suggest
     @topic = Topic.unscoped.find(params[:id])
     @topic.update_attribute(:suggested_at, Time.now)
-     redirect_to(cpanel_topics_path, :notice => "Topic:#{params[:id]} suggested.")
+    CacheVersion.topic_last_suggested_at = Time.now
+    redirect_to(cpanel_topics_path, :notice => "Topic:#{params[:id]} suggested.")
   end
   
   def unsuggest
     @topic = Topic.unscoped.find(params[:id])
     @topic.update_attribute(:suggested_at, nil)
-     redirect_to(cpanel_topics_path, :notice => "Topic:#{params[:id]} unsuggested.")
+    CacheVersion.topic_last_suggested_at = Time.now
+    redirect_to(cpanel_topics_path, :notice => "Topic:#{params[:id]} unsuggested.")
   end
 end

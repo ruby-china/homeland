@@ -26,11 +26,11 @@
 
 
 <% if action_name == "index" %>
-  <% cache("topic/index/sidebar/suggest", :expires_in => 1.hours) do %>
+  <% cache("topic/sidebar/suggest:#{CacheVersion.topic_last_suggested_at}", :expires_in => 1.hours) do %>
   <div class="suggest_topics box">
     <h2>置顶话题</h2>
     <ul>
-      <% Topic.suggest.limit(10).each do |item| %>
+      <% Topic.suggest.limit(5).each do |item| %>
         <li><a href="<%= topic_path(:id => item.id) %>"><%= item.title %></a></li>
       <% end %>
     </ul>

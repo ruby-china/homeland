@@ -30,5 +30,10 @@
 }
 .user_list { 
   h2 { font-size:14px; margin:0; }
-  .span1 { width:70px; text-align:center; margin-top:20px;}
+  .span1 { 
+    width:70px; text-align:center; margin-top:20px;
+    .avatar {
+      img { width:48px; height:48px; }
+    }
+  }
 }

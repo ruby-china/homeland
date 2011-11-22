@@ -29,12 +29,19 @@ class SiteConfig
         SiteConfig.create(:key => var_name, :value => value)
       end
     else
-      if item = where(:key => method).first
-        item.value
-      else
-        nil
+      Rails.cache.fetch("site_config:#{method}") do
+        if item = where(:key => method).first
+          item.value
+        else
+          nil
+        end
       end
     end
+  end
+  
+  after_save :expire_cache
+  def expire_cache
+    Rails.cache.write("site_config:#{self.key}", self.value)
   end
   
   def self.find_by_key(key)

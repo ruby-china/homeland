@@ -51,8 +51,6 @@ class TopicsController < ApplicationController
     render :stream => true
   end
 
-  # GET /topics/new
-  # GET /topics/new.xml
   def new
     @topic = Topic.new
     if !params[:node].blank?
@@ -77,15 +75,14 @@ class TopicsController < ApplicationController
     end
   end
 
-  # GET /topics/1/edit
+
   def edit
     @topic = current_user.topics.find(params[:id])
     @node = @topic.node
     set_seo_meta("改帖子 &raquo; 社区")
   end
 
-  # POST /topics
-  # POST /topics.xml
+
   def create
     pt = params[:topic]
     @topic = Topic.new(pt)
@@ -99,8 +96,7 @@ class TopicsController < ApplicationController
     end
   end
 
-  # PUT /topics/1
-  # PUT /topics/1.xml
+
   def update
     @topic = current_user.topics.find(params[:id])
     pt = params[:topic]
@@ -115,8 +111,6 @@ class TopicsController < ApplicationController
     end
   end
 
-  # DELETE /topics/1
-  # DELETE /topics/1.xml
   def destroy
     @topic = current_user.topics.find(params[:id])
     @topic.destroy

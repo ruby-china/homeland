@@ -34,7 +34,10 @@ module UsersHelper
     img_src = "http://www.gravatar.com/avatar/#{hash}?s=#{width}&d=identicon"
     img = "<img src=\"#{img_src}\" />"
     if link
-      raw("<a href=\"#{user_path(user.login)}\" class=\"user_avatar\" title=\"#{user.login}\">#{img}</a>")
+      popover_title = user.location.blank? ? "#{user.login}" : "#{user.login} <small>#{user.location}</small>"
+      popover_content = truncate( user.tagline, :length => 20 )
+      raw("<a href=\"#{user_path(user.login)}\" class=\"user_avatar\" title=\"#{user.login}\" rel=\"popover\" data-placement=\"right\" data-popover-title=\"#{popover_title}\" data-popover-content=\"#{popover_content}\">#{img}</a>")
+
     else
       raw img
     end

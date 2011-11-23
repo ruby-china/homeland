@@ -2,7 +2,6 @@
   <div class="pull-left face"><%= user_avatar_tag(item.user, :normal) %></div>
   <div class="infos">
     <div class="info clearfix">
-      <span class="name"><%= user_name_tag(item.user,:location => true) %></span>
       <span class="time"><%= i + 1 %>楼, 回复于 <%= timeago(item.created_at) %>
         <% if owner?(item) %>
     			<a href="<%= edit_reply_path(item.id) %>">修改</a>

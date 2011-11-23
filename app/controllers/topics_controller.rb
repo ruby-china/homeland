@@ -17,21 +17,20 @@ class TopicsController < ApplicationController
 
   def node
     @node = Node.find(params[:id])
-    @topics = @node.topics.last_actived.paginate(:page => params[:page],:per_page => 50).includes(:node,:user, :last_reply_user)
+    @topics = @node.topics.last_actived.includes(:node,:user, :last_reply_user).paginate(:page => params[:page],:per_page => 50)
     set_seo_meta("#{@node.name} &raquo; 社区","#{Setting.app_name}社区#{@node.name}",@node.summary)
     render :action => "index", :stream => true
   end
 
   def recent
-    @topics = Topic.recent.paginate(:page => params[:page], :per_page => 50).includes(:node,:user, :last_reply_user)
-    set_seo_meta("最近活跃的50个帖子 &raquo; 社区")
+    @topics = Topic.recent.includes(:node,:user, :last_reply_user).paginate(:page => params[:page], :per_page => 50)
     render :action => "index", :stream => true
   end
 
   def search
     result = Redis::Search.query("Topic", params[:key], :limit => 500)
     ids = result.collect { |r| r["id"] }
-    @topics = Topic.find(ids).paginate(:page => params[:page], :per_page => 20).includes(:node,:user, :last_reply_user)
+    @topics = Topic.find(ids).includes(:node,:user, :last_reply_user).paginate(:page => params[:page], :per_page => 20)
     set_seo_meta("搜索#{params[:s]} &raquo; 社区")
     render :action => "index", :stream => true
   end

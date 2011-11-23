@@ -4,6 +4,7 @@
 //= require bootstrap-dropdown
 //= require bootstrap-twipsy
 //= require bootstrap-buttons
+//= require bootstrap-popover
 //= require jquery.jdialog
 //= require jquery.timeago
 //= require jquery.hotkeys

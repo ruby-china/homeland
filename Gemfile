@@ -4,6 +4,7 @@ gem "rails", "3.1.1"
 gem "bson", "1.3.1"
 gem "bson_ext", "1.3.1"
 gem "mongoid", "2.2.4"
+
 # 上传组件
 gem 'carrierwave', '0.5.6'
 gem 'carrierwave-mongoid', '0.1.2', :require => 'carrierwave/mongoid'

@@ -4,17 +4,6 @@ class TopicsController < ApplicationController
   before_filter :init_list_sidebar, :only => [:index,:recent,:show,:cate,:search]
   caches_page :feed, :expires_in => 1.hours
 
-  private
-  def init_list_sidebar 
-   if !fragment_exist? "topic/init_list_sidebar/hot_nodes"
-      @hot_nodes = Node.hots.limit(10)
-    end
-    set_seo_meta("社区")
-  end
-
-  public
-  # GET /topics
-  # GET /topics.xml
   def index
     @topics = Topic.last_actived.limit(10)
     @sections = Section.all
@@ -133,4 +122,14 @@ class TopicsController < ApplicationController
     @topic.destroy
     redirect_to(topics_path, :notice => '帖子删除成功.')
   end
+  
+  private
+  
+  def init_list_sidebar 
+   if !fragment_exist? "topic/init_list_sidebar/hot_nodes"
+      @hot_nodes = Node.hots.limit(10)
+    end
+    set_seo_meta("社区")
+  end
+  
 end

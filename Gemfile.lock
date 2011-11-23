@@ -4,6 +4,15 @@ GIT
   specs:
     mail_view (1.0.1)
 
+GIT
+  remote: git://github.com/seyhunak/twitter-bootstrap-rails.git
+  revision: 5e62b21c8f258010af7f5bc858b89a24f16936a9
+  branch: static
+  specs:
+    twitter-bootstrap-rails (1.4.0)
+      actionpack
+      railties
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -316,6 +325,7 @@ DEPENDENCIES
   sass-rails (~> 3.1.4)
   settingslogic (~> 2.0.6)
   sprite-factory (= 1.4.1)
+  twitter-bootstrap-rails!
   uglifier
   unicorn
   will_paginate (= 3.0.pre2)

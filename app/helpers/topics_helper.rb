@@ -18,7 +18,7 @@ module TopicsHelper
   def link_mention_user!(text, mentioned_users)
     logins = mentioned_users.only(:login).map(&:login)
     if logins.any?
-      text.gsub!(/@(#{logins.join('|')})/,'@<a href="/users/\1" class="at_user" title="\1">\1</a> ')
+      text.gsub!(/@(#{logins.join('|')})/,'@<a href="/users/\1" class="at_user" title="\1">\1</a>')
     end
   end
   

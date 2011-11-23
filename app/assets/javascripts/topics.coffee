@@ -54,10 +54,3 @@ $(document).ready ->
     if $(el.target).val().trim().length > 0
       $("#reply form").submit()
     return false
-  
-  $("a[rel=popover]").popover(
-	  live: true
-	  title: 'data-popover-title'
-	  content: 'data-popover-content'
-	  html: true
-  )

@@ -1,15 +1,16 @@
 <div class="reply" id="reply<%= i + 1 %>">
   <div class="pull-left face"><%= user_avatar_tag(item.user, :normal) %></div>
   <div class="infos">
-    <div class="body">
-      <%= format_topic_body(item.body, :mentioned_users => item.mentioned_users) %>
-    </div>
     <div class="info clearfix">
+      <span class="name"><%= user_name_tag(item.user) %></span>
       <span class="time"><%= i + 1 %>楼, 回复于 <%= timeago(item.created_at) %>
         <% if owner?(item) %>
     			<a href="<%= edit_reply_path(item.id) %>">修改</a>
   			<% end %>
         <a href="#" onclick="return Topics.reply(<%= i + 1 %>,'<%= item.user.login %>');" title="回复此楼" class="reply_link"><%= image_tag("reply.png") %></a></span>
+    </div>
+    <div class="body">
+      <%= format_topic_body(item.body, :mentioned_users => item.mentioned_users) %>
     </div>
   </div>
 </div>

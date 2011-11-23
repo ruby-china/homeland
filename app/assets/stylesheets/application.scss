@@ -42,6 +42,13 @@ form {
 
 a.label:hover { text-decoration: none; color:#FFF;}
 
+.popover { 
+  h3.title { 
+    font-size:14px; padding:5px 8px;
+    i { float:right; font-size:12px; color:#999; font-style: normal;}
+  }
+  .content { padding:8px; font-size:12px; color:#666; }
+}
 
 .box { 
   background-color: #fff;

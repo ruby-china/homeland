@@ -1,23 +1,13 @@
 # coding: utf-8  
 class TopicsController < ApplicationController
   before_filter :require_user, :only => [:new,:edit,:create,:update,:destroy,:reply]
-  before_filter :init_list_sidebar, :only => [:index,:recent,:show,:cate,:search]
   caches_page :feed, :expires_in => 1.hours
-
-  private
-  def init_list_sidebar 
-   if !fragment_exist? "topic/init_list_sidebar/hot_nodes"
-      @hot_nodes = Node.hots.limit(10)
-    end
-    set_seo_meta("社区")
-  end
 
   public
   # GET /topics
   # GET /topics.xml
   def index
-    @topics = Topic.last_actived.limit(10)
-    @sections = Section.all
+    @topics = Topic.last_actived.limit(15)
     set_seo_meta("","#{Setting.app_name}社区")
     render :stream => true
   end

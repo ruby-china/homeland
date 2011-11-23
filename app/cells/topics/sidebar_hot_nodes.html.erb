@@ -1,0 +1,10 @@
+<% if not @hot_nodes.blank? %>
+  <div class="hot_nodes nodes box">
+    <h2>热门节点</h2>
+    <ul>
+      <% @hot_nodes.each do |node| %>
+        <li><a href="<%= node_topics_path(:id => node.id) %>"><%= node.name %></a></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

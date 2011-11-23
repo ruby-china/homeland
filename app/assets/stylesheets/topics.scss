@@ -9,7 +9,7 @@
 
 .topics { }
 .topics .topic {  }
-.topics .topic_line {border-top:1px solid #DDD; padding:10px 0; margin:0 -10px; vertical-align:top; }
+.topics .topic_line {border-bottom:1px solid #DDD; padding:10px 0; margin:0 -10px; vertical-align:top; }
 #main .topics .topic h1 { font-size:22px; color:#333; margin-top:6px; text-align: left; line-height:100%;margin-bottom:8px;}
 .topics .topic .avatar_large { width:64px; }
 .topics .topic .avatar { width:56px; margin-left:10px; }
@@ -39,7 +39,9 @@
 .topics .topic .replies a.state2:visited { background:#22D419; }
 .topics .topic .replies a.state2:hover {background:#1dc115; }
 .topics tr.topic td.replies { text-align:right; width:50px; font-size:14px; color:green;font-weight:bold; }
-.more { padding:8px; border-top:1px solid #DDD; font-size:14px; text-align:right; }
+.more { padding:8px; padding-bottom:0; font-size:14px; text-align:right; }
+
+.pagination { margin:0; margin-top:10px; }
 
 /* topics list in node page */
 .node_topics { margin-bottom:16px;}
@@ -51,10 +53,12 @@
 
 .no_result { margin-bottom:20px; text-align:center; }
 
-#node_info { padding:8px;margin-bottom:8px;padding-top:0px; }
-#node_info h1 { font-size:18px; color:000; display:inline; margin-right:5px; }
-#node_info p { margin-bottom:8px; }
-#node_info p.summary { color:#999; }
+#node_info { 
+  margin:0 -10px; padding:0 10px; border-bottom:1px solid #ddd; 
+  h1 { text-align:right; font-size:15px; }
+  h2 { display:inline; font-size:16px; margin-right:10px;}
+  .desc { color:#999; }
+}
 
 #replies {}
 #replies .total { padding-bottom:6px; color:#999; }
@@ -82,9 +86,28 @@
 .body a.at_floor { color:#376B43; }
 .body a.at_user { }
 
-
-.hot_nodes { 
-  
+#topics_recent { 
+  h2 { 
+    margin:0 -10px; padding:0 10px;
+    font-size:14px; color:#999; line-height:100%;
+    border-bottom:1px solid #ddd; padding-bottom:8px;
+  }
+  .node {
+    margin-right:6px;
+    a { color:#333; background:#eee; -webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px; padding:3px;font-size:11px; }
+  }
+  .info { font-size:12px; color:#999; 
+    margin-left:6px;
+    a { color:#999; text-decoration: underline;}
+  }
+  ul {
+    margin:0; padding:0;
+    li {
+      margin:0 -10px; padding:6px 10px;
+      list-style:none; border-bottom:1px dashed #ddd;
+    }
+  }
+  .more { }
 }
 
 

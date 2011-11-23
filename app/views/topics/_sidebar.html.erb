@@ -24,50 +24,20 @@
   </div>
 <% end %>
 
-
 <% if action_name == "index" %>
-  <% cache("topic/sidebar/suggest:#{CacheVersion.topic_last_suggested_at}", :expires_in => 1.hours) do %>
-  <div class="suggest_topics box">
-    <h2>置顶话题</h2>
-    <ul>
-      <% Topic.suggest.limit(5).each do |item| %>
-        <li><a href="<%= topic_path(:id => item.id) %>"><%= item.title %></a></li>
-      <% end %>
-    </ul>
-  </div>
-  <% end %>
+  <%= render_cell :topics, :sidebar_suggest_topics %>
+  <%= raw SiteConfig.topic_index_sidebar_html %>
+  <%= render_cell :topics, :sidebar_hot_nodes %>
 <% end %>
 
-<%= cache("topic/init_list_sidebar/hot_nodes",:expires_in => 30.minutes) do %>
-  <% if not @hot_nodes.blank? %>
-  <div class="hot_nodes nodes box">
-    <h2>热门节点</h2>
-    <ul>
-      <% @hot_nodes.each do |node| %>
-        <li><a href="<%= node_topics_path(:id => node.id) %>"><%= node.name %></a></li>
-      <% end %>
-    </ul>
-  </div>
-  <% end %>
-<% end %>
-
-
-<% if ["new"].index(params[:action]) %>
+<% if ["new"].include?(action_name) %>
   <div id="topic_new_tip" class="box">
     <h2>发贴说明</h2>
     <%= render "/shared/reply_help_block" %>
   </div>
 <% end %>
 
-<% if params[:action] == "index" %>
-<%= raw SiteConfig.topic_index_sidebar_html %>
-<div class="totals box">
-	<h2>统计信息</h2>
-	<ul>
-		<li>社区会员: <%= User.count %> 人</li>
-		<li>贴子数: <%= Topic.count %> 个</li>
-		<li>回贴数: <%= Reply.count %> 条</li>
-	</ul>
-</div>
+<% if action_name == "index" %>
+  <%= render_cell :topics, :sidebar_statistics %>
 <% end %>
 </div>

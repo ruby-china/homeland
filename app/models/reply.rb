@@ -1,4 +1,5 @@
 # coding: utf-8  
+require "digest/md5"
 class Reply
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -53,14 +54,18 @@ class Reply
     end
   end
 
-  def mentioned_users
-    User.where(:_id.in => mentioned_user_ids)
+  def mentioned_user_logins
+    # 用于作为缓存 key
+    ids_md5 = Digest::MD5.hexdigest(self.mentioned_user_ids.to_s)
+    Rails.cache.fetch("reply:#{self.id}:mentioned_user_logins:#{ids_md5}") do
+      User.where(:_id.in => self.mentioned_user_ids).only(:login).map(&:login)
+    end
   end
 
   after_create :send_mention_notification
   def send_mention_notification
-    mentioned_users.each do |user|
-      Notification::Mention.create :user => user, :reply => self
+    self.mentioned_user_ids.each do |user_id|
+      Notification::Mention.create :user_id => user_id, :reply => self
     end
   end
 end

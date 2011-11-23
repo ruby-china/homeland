@@ -5,7 +5,7 @@ class ReplyTest < ActiveSupport::TestCase
     user = Factory :user
     reply = Factory :reply, :body => "@#{user.login}"
     assert_equal [user.id], reply.mentioned_user_ids
-    assert_equal [user], reply.mentioned_users
+    assert_equal [user], reply.mentioned_user_logins
 
     # 5 mentioned limit
     logins = ""
@@ -13,10 +13,10 @@ class ReplyTest < ActiveSupport::TestCase
       logins << " @#{Factory(:user).login}"
     end
     reply = Factory :reply, :body => logins
-    assert_equal 5, reply.mentioned_users.count
+    assert_equal 5, reply.mentioned_user_logins.count
 
     # except self
     reply = Factory :reply, :body => "@#{user.login}", :user => user
-    assert_equal [], reply.mentioned_users
+    assert_equal [], reply.mentioned_user_logins
   end
 end

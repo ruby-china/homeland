@@ -21,14 +21,14 @@ class Comment
     self.commentable_id = self.commentable_id.to_i
   end
 
-  after_create :inc_counter_cache
-  def inc_counter_cache
+  after_create :increase_counter_cache
+  def increase_counter_cache
     return if self.commentable.blank?
     self.commentable.inc(:comments_count,1)
   end
 
-  before_destroy :dec_counter_cache
-  def dec_counter_cache
+  before_destroy :decrease_counter_cache
+  def decrease_counter_cache
     return if self.commentable.blank?
     self.commentable.inc(:comments_count,-1)
   end

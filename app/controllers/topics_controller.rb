@@ -6,6 +6,8 @@ class TopicsController < ApplicationController
   def index
     @topics = Topic.last_actived.limit(15).includes(:node,:user, :last_reply_user)
     set_seo_meta("","#{Setting.app_name}社区")
+    drop_breadcrumb("社区")
+    drop_breadcrumb("活跃帖子")
     render :stream => true
   end
   
@@ -25,6 +27,9 @@ class TopicsController < ApplicationController
   def recent
     # TODO: 需要 includes :node,:user, :last_reply_user,但目前用了 paginate 似乎会使得 includes 没有效果
     @topics = Topic.recent.paginate(:page => params[:page], :per_page => 50)
+    
+    drop_breadcrumb("社区")
+    drop_breadcrumb("主题列表")
     render :action => "index", :stream => true
   end
 
@@ -33,6 +38,8 @@ class TopicsController < ApplicationController
     ids = result.collect { |r| r["id"] }
     @topics = Topic.where(:_id.in => ids).limit(50).includes(:node,:user, :last_reply_user)
     set_seo_meta("搜索#{params[:s]} &raquo; 社区")
+    drop_breadcrumb("社区")
+    drop_breadcrumb("搜索 #{params[:key]}")
     render :action => "index", :stream => true
   end
 

@@ -8,8 +8,9 @@ class HomeController < ApplicationController
   
     unless current_user.blank?
       redirect_to topics_path 
+      drop_breadcrumb("Hello")
       return
     end
   end
-  
+
 end

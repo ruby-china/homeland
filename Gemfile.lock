@@ -6,7 +6,7 @@ GIT
 
 GIT
   remote: git://github.com/xdite/bootstrap-rails.git
-  revision: 9b1cbe66fc16f2e9e9771355a48fa8e6ff1602dc
+  revision: ab6e6f382537013f363480165e88f3f242e67362
   specs:
     bootstrap-rails (0.1.4)
       railties (~> 3.0)

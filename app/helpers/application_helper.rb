@@ -1,6 +1,7 @@
 # coding: utf-8
 require 'rdiscount'
 module ApplicationHelper
+
   def notice_message
     flash_messages = []
 
@@ -15,7 +16,7 @@ module ApplicationHelper
   def markdown(str)
     raw "<div class=\"wikistyle\">#{RDiscount.new(str).to_html}</div>"
   end
-
+  
   def admin?(user = nil)
     user = current_user if user.blank?
     return false if user.blank?
@@ -79,4 +80,5 @@ classname, ('disabled' unless page)].join(' ')
 '上一页'.html_safe, :next_label => '下一页'.html_safe)
   end
 
+  
 end

@@ -58,7 +58,9 @@ gem "sprite-factory", "1.4.1"
 
 gem 'simple_form'
 gem 'bootstrap-rails', :require => 'bootstrap-rails',
-                              :git => 'git://github.com/xdite/bootstrap-rails.git'                   
+  :git => 'git://github.com/xdite/bootstrap-rails.git'                   
+
+#gem "bootstrap-rails", :path => "~/projects/bootstrap-rails"
 
 group :assets do
   gem 'sass-rails', "  ~> 3.1.4"

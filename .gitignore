@@ -1,4 +1,5 @@
 .bundle
+coverage/
 db/*.sqlite3
 log/*.log
 log/*.log*

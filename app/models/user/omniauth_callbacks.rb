@@ -1,4 +1,5 @@
-class User < ActiveRecord::Base
+# coding: utf-8  
+class User
   module OmniauthCallbacks
     def find_from_hash(hash)
       where("authorizations.provider" => hash['provider'], "authorizations.uid" => hash['uid']).first

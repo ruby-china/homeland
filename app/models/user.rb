@@ -1,15 +1,19 @@
 # coding: utf-8  
 class User
-  extend OmniauthCallbacks
+
   
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::BaseModel
   include Mongoid::SoftDelete
   include Redis::Objects
-  
+  extend OmniauthCallbacks   
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+         
+    
+
   field :login
   field :email
   field :location

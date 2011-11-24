@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   end
   
   def show
-    @user = User.where(:login => params[:id]).first
+    @user = User.where(:login => /^#{params[:id]}$/i).first
     @last_topics = @user.topics.recent.limit(20)          
     @last_replies = @user.replies.only(:topic_id, :body, :created_at).recent.includes(:topic).limit(10)
     set_seo_meta("#{@user.login}")
@@ -30,7 +30,7 @@ class UsersController < ApplicationController
   protected
   
   def set_menu_active
-    @current = @current = ['/posts']
+    @current = @current = ['/users']
   end
   
   def init_base_breadcrumb

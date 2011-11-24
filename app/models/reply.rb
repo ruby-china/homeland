@@ -30,23 +30,10 @@ class Reply
   after_create :update_parent_topic
   def update_parent_topic
     self.topic.replied_at = Time.now
+    self.topic.last_reply_id = self.id
     self.topic.last_reply_user_id = self.user_id
     self.topic.push_follower(self.user_id)
     self.topic.save
-    # 清除用户读过记录
-    self.topic.clear_user_readed
-  end
-  
-  # 更新的时候，同时更新 Topic 的 replied_at
-  after_update :update_topic_updated_at
-  after_destroy :update_topic_updated_at
-  def update_topic_updated_at
-    self.topic.update_attribute(:updated_at, Time.now)
-  end
-  
-  after_create :send_mail_notify
-  def send_mail_notify
-    TopicMailer.got_reply(self)
   end
 
   before_save :extract_mentioned_users

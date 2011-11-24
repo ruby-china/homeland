@@ -48,7 +48,7 @@ class TopicsController < ApplicationController
     @node = @topic.node
     @replies = @topic.replies.asc(:_id).all.includes(:user).cache
     if current_user
-      @topic.user_readed(current_user.id)
+      current_user.read_topic(@topic)
       current_user.notifications.where(:reply_id.in => @replies.map(&:id), :read => false).update_all(:read => true)
     end
     set_seo_meta("#{@topic.title} &raquo; 社区")
@@ -69,8 +69,6 @@ class TopicsController < ApplicationController
     end
     drop_breadcrumb("发帖")
     set_seo_meta("发帖子 &raquo; 社区")
-   drop_breadcrumb("社区")
-   drop_breadcrumb("新建贴子")
   end
 
   def reply
@@ -78,7 +76,7 @@ class TopicsController < ApplicationController
     @reply = @topic.replies.build(params[:reply])        
     @reply.user_id = current_user.id
     if @reply.save
-      @topic.user_readed(current_user.id)
+      current_user.read_topic(@topic)
       @msg = "回复成功。"
     else
       @msg = @reply.errors.full_messages.join("<br />")

@@ -60,6 +60,11 @@ class User
 
   scope :hot, desc(:replies_count, :topics_count)
 
+  def self.find_for_database_authentication(conditions)
+    login = conditions.delete(:login)
+    self.where(:login => /^#{login}$/i).first
+  end
+
   def password_required?
     return false if self.guest
     (authorizations.empty? || !password.blank?) && super  
@@ -133,9 +138,23 @@ class User
   end
   
   def bind_service(response)
-     provider = response["provider"]
-     uid = response["uid"]
-     authorizations.create(:provider => provider , :uid => uid ) 
-   end
+    provider = response["provider"]
+    uid = response["uid"]
+    authorizations.create(:provider => provider , :uid => uid ) 
+  end
+  
+  # 是否读过 topic 的最近更新
+  def topic_read?(topic)
+    # 用 last_reply_id 作为 cache key ，以便不热门的数据自动被 Memcached 挤掉
+    last_reply_id = topic.last_reply_id || -1
+    Rails.cache.read("user:#{self.id}:topic_read:#{topic.id}") == last_reply_id
+  end
+
+  # 将 topic 的最后回复设置为已读
+  def read_topic(topic)
+    # 处理 last_reply_id 是空的情况
+    last_reply_id = topic.last_reply_id || -1
+    Rails.cache.write("user:#{self.id}:topic_read:#{topic.id}", last_reply_id)
+  end
 
 end

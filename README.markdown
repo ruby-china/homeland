@@ -24,8 +24,8 @@ This is source code of [Ruby China Group](http://ruby-china.org)
 
 ## OAuth
 
-be sure to use: http://ruby-china.dev/
-callback url: http://ruby-china.dev/account/auth/github/callback
+* be sure to use: http://ruby-china.dev/
+* callback url: http://ruby-china.dev/account/auth/github/callback
 
 ## Contributors
 

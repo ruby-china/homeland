@@ -17,7 +17,7 @@ gem 'mongoid_auto_increment_id', "0.2.2"
 # 用户系统
 gem 'devise', :git => 'https://github.com/plataformatec/devise.git'
 # 分页
-gem 'will_paginate', '3.0.pre2'  
+gem 'will_paginate', '3.0.pre2'
 # 三方平台 OAuth 验证登陆
 gem "omniauth"
 gem 'omniauth-openid'
@@ -64,10 +64,19 @@ group :assets do
 end
 
 group :development do
-	gem 'capistrano', '2.9.0'
-	gem 'chunky_png', "1.2.5"
+  gem 'capistrano', '2.9.0'
+  gem 'chunky_png', "1.2.5"
+end
+
+group :development, :test do
+  gem 'rspec-rails', '~> 2.7.0'
+  gem 'delorean'
+  gem 'database_cleaner'
+  gem 'ffaker'
 end
 
 group :test do
   gem 'factory_girl_rails'
+  gem 'turn',      :require => false
+  gem 'simplecov', :require => false
 end

@@ -5,14 +5,11 @@ class HomeController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => [:auth_callback]
 
   def index
-    
+  
     unless current_user.blank?
       redirect_to topics_path 
       return
     end
-    
-    render :stream => true
   end
-
   
 end

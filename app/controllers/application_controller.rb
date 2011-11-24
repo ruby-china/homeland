@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
     flash[:notice] = msg
   end
 
-  def notice_warring(msg)
+  def notice_warning(msg)
     flash[:notice] = msg
   end
 

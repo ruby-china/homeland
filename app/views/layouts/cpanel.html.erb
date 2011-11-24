@@ -11,24 +11,45 @@
   <div class="topbar" data-dropdown="dropdown">
     <div class="topbar-inner">
       <div class="container">
-        <a href="<%= cpanel_root_path %>" class="brand">控制台</a>
+        <%= link_to("控制台", cpanel_root_path, :class => "brand")%>
         <ul class="nav">
-          <li<%= " class=active" if params[:controller] == "cpanel/home" %>><a href="<%= cpanel_root_path %>">系统概况</a></li>
-          <li<%= " class='active'" if params[:controller] == "cpanel/site_configs" %>><a href="<%= cpanel_site_configs_path %>">全局设置</a></li>
-          <li<%= " class=active" if params[:controller] == "cpanel/users" %>><a href="<%= cpanel_users_path %>">用户</a></li>
-          <li<%= " class='active'" if params[:controller] == "cpanel/sections" %>><a href="<%= cpanel_sections_path %>">分类</a></li>
-          <li<%= " class='active'" if params[:controller] == "cpanel/nodes" %>><a href="<%= cpanel_nodes_path %>">节点</a></li>
-          <li<%= " class='active'" if params[:controller] == "cpanel/posts" %>><a href="<%= cpanel_posts_path %>">文章</a></li>
-          <li<%= " class='active'" if ["pages", "page_versions"].include?(controller_name) %>><a href="<%= cpanel_pages_path %>">Wiki</a></li>
-          <li<%= " class='active'" if params[:controller] == "cpanel/topics" %>><a href="<%= cpanel_topics_path %>">帖子</a></li>
-          <li<%= " class='active'" if params[:controller] == "cpanel/replies" %>><a href="<%= cpanel_replies_path %>">回复</a></li>
-          <li<%= " class='active'" if params[:controller] == "cpanel/photos" %>><a href="<%= cpanel_photos_path %>">图片</a></li>
+          <li<%= " class=active" if params[:controller] == "cpanel/home" %>>
+            <%= link_to("系统概况", cpanel_root_path)%>
+          </li>
+          <li<%= " class='active'" if params[:controller] == "cpanel/site_configs" %>>
+            <%= link_to("全局设置", cpanel_site_configs_path )%>
+          </li>
+          <li<%= " class=active" if params[:controller] == "cpanel/users" %>>
+            <%= link_to("用户",cpanel_users_path )%>
+          </li>
+          <li<%= " class='active'" if params[:controller] == "cpanel/sections" %>>
+            <a href="<%= cpanel_sections_path %>">分类</a>
+          </li>
+          <li<%= " class='active'" if params[:controller] == "cpanel/nodes" %>>
+            <%= link_to("节点", cpanel_nodes_path )%>
+          </li>
+          <li<%= " class='active'" if params[:controller] == "cpanel/posts" %>>
+            <%= link_to("文章",cpanel_posts_path )%>
+          </li>
+          <li<%= " class='active'" if ["pages", "page_versions"].include?(controller_name) %>>
+            <%= link_to("Wiki",cpanel_pages_path )%>
+          </li>
+          <li<%= " class='active'" if params[:controller] == "cpanel/topics" %>>
+            <%= link_to("帖子", cpanel_topics_path)%>
+          </li>
+          <li<%= " class='active'" if params[:controller] == "cpanel/replies" %>>
+            <%= link_to("回复", cpanel_replies_path)%>
+            <a href="<%= cpanel_replies_path %>"></a>
+          </li>
+          <li<%= " class='active'" if params[:controller] == "cpanel/photos" %>>
+            <%= link_to("图片",cpanel_photos_path )%>
+          </li>
         </ul>
         <ul class="nav secondary-nav" id="userbar">
           <li>
             <a href="#" class="dropdown-toggle"><%= current_user.login %></a>
             <ul class="dropdown-menu">
-              <li><a href="<%= root_path %>">回到前台</a></li>
+              <li><%= link_to("回到前台", root_path)%></li>
             </ul>
           </li>
         </ul>

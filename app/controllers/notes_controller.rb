@@ -1,11 +1,15 @@
 # coding: utf-8  
 class NotesController < ApplicationController
   before_filter :require_user, :except => [:show]
+  before_filter :init_base_breadcrumb
+  
+  def init_base_breadcrumb
+    drop_breadcrumb("记事本", notes_path)
+  end
 
   def index
     @notes = current_user.notes.paginate(:page => params[:page], :per_page => 20)
     set_seo_meta("记事本")
-    drop_breadcrumb("记事本")
     drop_breadcrumb("列表")
   end
 
@@ -17,7 +21,6 @@ class NotesController < ApplicationController
       end
     end
     set_seo_meta("查看 &raquo; 记事本")
-    drop_breadcrumb("记事本")
     drop_breadcrumb("查看")
   end
 
@@ -25,7 +28,6 @@ class NotesController < ApplicationController
   def new
     @note = Note.new
     set_seo_meta("新建 &raquo; 记事本")
-    drop_breadcrumb("记事本")
     drop_breadcrumb("新建")
   end
 
@@ -33,7 +35,6 @@ class NotesController < ApplicationController
   def edit
     @note = Note.find(params[:id])
     set_seo_meta("修改 &raquo; 记事本")
-    drop_breadcrumb("记事本")
     drop_breadcrumb("修改")
   end
 

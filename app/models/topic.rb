@@ -69,9 +69,9 @@ class Topic
   def user_readed?(user_id)
     user_ids = Rails.cache.read("Topic:user_read:#{self.id}") || []
 
-    if user_ids.include?(user_id)
+    if user_id.in?(user_ids)
       0
-    elsif self.last_reply_user_id == user_id || self.user_id == user_id
+    elsif user_id.in?([self.last_reply_user_id, self.user_id])
       2
     else
       1

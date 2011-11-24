@@ -1,10 +1,10 @@
-<%= render 'base' %>
+<%= render "base" %>
 <div id="page_show" class="box">
   <% if !@page.locked or admin? %>
     <div class="info">
       版本 <%= @page.version %>， 最后更新于 <%= timeago @page.updated_at %>
       <% if wiki_editor? %>
-      <a href="<%= edit_page_path(@page) %>" class="label success">编辑</a>
+        <%= link_to("编辑", edit_page_path(@page), :class => "label success")%>
       <% end %>
     </div>
   <% end %>

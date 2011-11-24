@@ -1,4 +1,4 @@
-<%= render 'base' %>
+<%= render "base" %>
 <div class="sidebar">
   <div id="post_author" class="box">
     <h2>提交者</h2>
@@ -23,7 +23,7 @@
     </div>
     <% if !@post.source.blank? %>
     <div class="source">
-      文章来源：<a href="<%= @post.source_url %>?ref=<%= Setting.domain %>" target="_blank"><%= @post.source %></a>
+      文章来源：<%= link_to(@post.source, @post.source_url+"?ref=#{Setting.domain}", :target => "_blank")%>
     </div>
     <% end %>
     <div class="body"><%= raw @post.body %></div>

@@ -5,6 +5,15 @@ GIT
     mail_view (1.0.1)
 
 GIT
+  remote: git://github.com/plataformatec/devise.git
+  revision: dc3bfac87689299e30a6b4eb0f754d8f61d872af
+  specs:
+    devise (1.5.1)
+      bcrypt-ruby (~> 3.0)
+      orm_adapter (~> 0.0.3)
+      warden (~> 1.1)
+
+GIT
   remote: git://github.com/plataformatec/simple_form.git
   revision: fce17e353dac5320c6994279b2f35a912580681d
   specs:
@@ -28,15 +37,6 @@ GIT
       multi_json
       omniauth (~> 1.0.0.rc2)
       omniauth-oauth (~> 1.0.0.rc2)
-
-GIT
-  remote: https://github.com/plataformatec/devise.git
-  revision: 0c67cff2a02d5e6b998da2b5cc4c10e534f25c44
-  specs:
-    devise (1.5.1)
-      bcrypt-ruby (~> 3.0)
-      orm_adapter (~> 0.0.3)
-      warden (~> 1.1)
 
 GEM
   remote: http://rubygems.org/

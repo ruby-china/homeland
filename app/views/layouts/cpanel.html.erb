@@ -12,39 +12,18 @@
     <div class="topbar-inner">
       <div class="container">
         <%= link_to("控制台", cpanel_root_path, :class => "brand")%>
-        <ul class="nav">
-          <li<%= " class=active" if params[:controller] == "cpanel/home" %>>
-            <%= link_to("系统概况", cpanel_root_path)%>
-          </li>
-          <li<%= " class='active'" if params[:controller] == "cpanel/site_configs" %>>
-            <%= link_to("全局设置", cpanel_site_configs_path )%>
-          </li>
-          <li<%= " class=active" if params[:controller] == "cpanel/users" %>>
-            <%= link_to("用户",cpanel_users_path )%>
-          </li>
-          <li<%= " class='active'" if params[:controller] == "cpanel/sections" %>>
-            <a href="<%= cpanel_sections_path %>">分类</a>
-          </li>
-          <li<%= " class='active'" if params[:controller] == "cpanel/nodes" %>>
-            <%= link_to("节点", cpanel_nodes_path )%>
-          </li>
-          <li<%= " class='active'" if params[:controller] == "cpanel/posts" %>>
-            <%= link_to("文章",cpanel_posts_path )%>
-          </li>
-          <li<%= " class='active'" if ["pages", "page_versions"].include?(controller_name) %>>
-            <%= link_to("Wiki",cpanel_pages_path )%>
-          </li>
-          <li<%= " class='active'" if params[:controller] == "cpanel/topics" %>>
-            <%= link_to("帖子", cpanel_topics_path)%>
-          </li>
-          <li<%= " class='active'" if params[:controller] == "cpanel/replies" %>>
-            <%= link_to("回复", cpanel_replies_path)%>
-            <a href="<%= cpanel_replies_path %>"></a>
-          </li>
-          <li<%= " class='active'" if params[:controller] == "cpanel/photos" %>>
-            <%= link_to("图片",cpanel_photos_path )%>
-          </li>
-        </ul>
+        <%= render_list :class => "nav" do |li|
+          li << link_to("系统概况", cpanel_root_path)
+          li << link_to("全局设置", cpanel_site_configs_path )
+          li << link_to("用户",cpanel_users_path)
+          li << link_to("分类", cpanel_sections_path )
+          li << link_to("节点", cpanel_nodes_path )
+          li << link_to("文章",cpanel_posts_path )
+          li << link_to("Wiki",cpanel_pages_path )
+          li << link_to("帖子", cpanel_topics_path)
+          li << link_to("回复", cpanel_replies_path)
+          li << link_to("图片",cpanel_photos_path )
+        end  %>
         <ul class="nav secondary-nav" id="userbar">
           <li>
             <a href="#" class="dropdown-toggle"><%= current_user.login %></a>

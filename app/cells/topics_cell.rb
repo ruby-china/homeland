@@ -1,5 +1,8 @@
 # coding: utf-8
 class TopicsCell < BaseCell  
+  
+  helper :nodes
+  
   # 首页节点目录
   cache :index_sections do |cell|
     "index_sections:#{CacheVersion.section_node_updated_at}"

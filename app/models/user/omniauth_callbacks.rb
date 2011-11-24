@@ -29,5 +29,32 @@ class User
         return nil
       end
     end
+    
+    
+    def find_or_create_for_github(response)
+      provider = response['provider']
+      uid = response['uid']
+      data = response['info']
+      
+      if user = User.where("authorizations.provider" => provider , "authorizations.uid" => uid).first
+        user
+      else # Create a user with a stub password. 
+        user = User.new(:email => data["email"],
+          :password => Devise.friendly_token[0,20],
+          :location => data["location"],
+          :tagline => data["description"],
+          :login => data["nickname"]
+        )
+        if user.save(:validate => false)
+          user.authorizations << Authorization.new(:provider => provider, :uid => uid )
+          return user
+        else
+          Rails.logger.warn("User.create_from_hash 失败，#{user.errors.inspect}")
+          return nil
+        end
+      end
+    end
+    
+    
   end
 end

@@ -5,17 +5,17 @@
     <%= render :partial => "devise/shared/links" %>
   </div>
   <div class="box">
-		<h2>用其他平台的帐号登陆</h2>
-		<ul>
-		  <li><a href="/auth/twitter">Twitter</a></li>
-		  <li><a href="/auth/google">Google</a></li>
-		  <li><a href="/auth/github">Github</a></li>
-			<li><a href="/auth/douban">Douban</a></li>
-		</ul>
-	</div>
+        <h2>用其他平台的帐号登陆</h2>
+        <ul>
+          <li><%# link_to "Twitter", user_omniauth_authorize_path(:github) %> </li>    
+          <li><%# link_to "Google", user_omniauth_authorize_path(:twitter) %> </li>    
+          <li><%= link_to "Github", user_omniauth_authorize_path(:github) %> </li>    
+          <li><%# link_to "Douban", user_omniauth_authorize_path(:douban) %> </li>
+        </ul>
+    </div>
 </div>
 <div class="content">
-	<div class="box">
+    <div class="box">
     <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
       <fieldset>
         <legend>登陆</legend>

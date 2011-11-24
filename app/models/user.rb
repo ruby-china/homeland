@@ -10,7 +10,7 @@ class User
   extend OmniauthCallbacks   
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable
          
     
 

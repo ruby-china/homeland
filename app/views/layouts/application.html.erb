@@ -68,11 +68,7 @@
   <div class="container">
 
     <%= render_breadcrumb %>
-    <ul class="breadcrumb">
-      
-      <li><a href="<%= root_path %>">Root</a> <span class="divider">/</span></li>
-      <%= yield :base_sitemap %> <%= yield :sitemap %>
-    </ul>
+
     <div id="main" class="container-fluid">
       <%= notice_message %>
       <%= yield %>

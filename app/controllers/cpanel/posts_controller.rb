@@ -1,7 +1,5 @@
 # coding: utf-8  
 class Cpanel::PostsController < Cpanel::ApplicationController
-  # GET /posts
-  # GET /posts.xml
   def index
     @posts = Post.unscoped.desc(:_id).includes(:user).paginate :page => params[:page], :per_page => 30
 
@@ -11,11 +9,10 @@ class Cpanel::PostsController < Cpanel::ApplicationController
     end
   end
 
-  # GET /posts/1
-  # GET /posts/1.xml
   def show
     @post = Post.unscoped.find(params[:id])
-
+    drop_breadcrumb("文章")
+    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @post }
@@ -26,7 +23,8 @@ class Cpanel::PostsController < Cpanel::ApplicationController
   # GET /posts/new.xml
   def new
     @post = Post.new
-
+    drop_breadcrumb("文章")
+    drop_breadcrumb("创建")
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @post }
@@ -37,6 +35,7 @@ class Cpanel::PostsController < Cpanel::ApplicationController
   def edit
     @post = Post.unscoped.find(params[:id])
     @post.tag_list = @post.tags.join(", ")
+
   end
 
   # POST /posts

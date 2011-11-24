@@ -5,6 +5,8 @@ class NotesController < ApplicationController
   def index
     @notes = current_user.notes.paginate(:page => params[:page], :per_page => 20)
     set_seo_meta("记事本")
+    drop_breadcrumb("记事本")
+    drop_breadcrumb("列表")
   end
 
   def show
@@ -15,18 +17,24 @@ class NotesController < ApplicationController
       end
     end
     set_seo_meta("查看 &raquo; 记事本")
+    drop_breadcrumb("记事本")
+    drop_breadcrumb("查看")
   end
 
 
   def new
     @note = Note.new
     set_seo_meta("新建 &raquo; 记事本")
+    drop_breadcrumb("记事本")
+    drop_breadcrumb("新建")
   end
 
 
   def edit
     @note = Note.find(params[:id])
     set_seo_meta("修改 &raquo; 记事本")
+    drop_breadcrumb("记事本")
+    drop_breadcrumb("修改")
   end
 
 

@@ -5,11 +5,15 @@ class PagesController < ApplicationController
   before_filter :check_permissions, :only => [:new, :edit, :create, :update]
   def index
     set_seo_meta("Wiki")
+    drop_breadcrumb("Wiki")
+    drop_breadcrumb("索引")
   end
   
   def recent
     @pages = Page.recent.paginate(:page => params[:page], :per_page => 30)
     set_seo_meta("Wiki 目录")
+    drop_breadcrumb("Wiki")
+    drop_breadcrumb("目录")
   end
 
   def show
@@ -18,11 +22,15 @@ class PagesController < ApplicationController
       render_404
     end
     set_seo_meta("#{@page.title} - Wiki")
+    drop_breadcrumb("Wiki")
+    drop_breadcrumb("查看")
   end
 
   def new
     @page = Page.new
     set_seo_meta("创建 Wiki 页面")
+    drop_breadcrumb("Wiki")
+    drop_breadcrumb(" 创建 Wiki 页面")
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @page }
@@ -32,6 +40,8 @@ class PagesController < ApplicationController
   def edit
     @page = Page.find(params[:id])
     set_seo_meta("修改 Wiki 页面")
+    drop_breadcrumb("Wiki")
+    drop_breadcrumb("编辑")
   end
 
   def create

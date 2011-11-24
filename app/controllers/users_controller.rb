@@ -3,6 +3,8 @@ class UsersController < ApplicationController
   before_filter :require_user, :only => "auth_unbind"
   
   def index
+    drop_breadcrumb("会员")
+    drop_breadcrumb("目录")
   end
   
   def show
@@ -10,6 +12,8 @@ class UsersController < ApplicationController
     @last_topics = @user.topics.recent.limit(20)          
     @last_replies = @user.replies.only(:topic_id, :body, :created_at).recent.includes(:topic).limit(10)
     set_seo_meta("#{@user.login}")
+    drop_breadcrumb("会员")
+    drop_breadcrumb(@user.login)
   end
   
   def auth_unbind

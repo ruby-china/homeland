@@ -9,6 +9,7 @@ class Cpanel::NodesController < Cpanel::ApplicationController
       format.html # index.html.erb
       format.xml  { render :xml => @nodes }
     end
+    
   end
 
   # GET /nodes/1

@@ -1,11 +1,3 @@
-<%= render "base" %>
-<% content_for :sitemap do %>
-  <% if params[:tag] %>
-  <li class="active"><%= params[:tag] %></li>
-  <% else %>
-  <li class="active">最新发布的文章</li>
-  <% end %>
-<% end %>
 <div class="sidebar">
   <div class="box">
     <%= link_to '投稿', new_post_path, :class => "btn success" %>

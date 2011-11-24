@@ -8,12 +8,21 @@ class PostsController < ApplicationController
     end
     @posts = scoped_posts.recent.paginate :page => params[:page], :per_page => 20
     set_seo_meta("文章")
+    
+    drop_breadcrumb("文章")
+    if params[:tag]
+      drop_breadcrumb(params[:tag])
+    else
+      drop_breadcrumb("最新发布的文章")
+    end
   end
 
   def show
     @post = Post.find(params[:id])
     @post.hits.incr
     set_seo_meta("#{@post.title}")
+    drop_breadcrumb("文章")
+    drop_breadcrumb("阅读")
   end
 
   def new
@@ -23,6 +32,8 @@ class PostsController < ApplicationController
   def edit
     @post = Post.find(params[:id])
     @post.tag_list = @post.tags.join(", ")
+    drop_breadcrumb("文章")
+    drop_breadcrumb("编辑页面")
   end
 
   def create

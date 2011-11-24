@@ -3,11 +3,11 @@ class TopicsController < ApplicationController
   before_filter :require_user, :only => [:new,:edit,:create,:update,:destroy,:reply]
   before_filter :set_menu_active
   caches_page :feed, :expires_in => 1.hours
+  before_filter :init_base_breadcrumb
 
   def index
     @topics = Topic.last_actived.limit(15).includes(:node,:user, :last_reply_user)
     set_seo_meta("","#{Setting.app_name}社区")
-    drop_breadcrumb("社区")
     drop_breadcrumb("活跃帖子")
     render :stream => true
   end
@@ -22,14 +22,13 @@ class TopicsController < ApplicationController
     @node = Node.find(params[:id])
     @topics = @node.topics.last_actived.paginate(:page => params[:page],:per_page => 50)
     set_seo_meta("#{@node.name} &raquo; 社区","#{Setting.app_name}社区#{@node.name}",@node.summary)
+    drop_breadcrumb("#{@node.name}")
     render :action => "index", :stream => true
   end
 
   def recent
     # TODO: 需要 includes :node,:user, :last_reply_user,但目前用了 paginate 似乎会使得 includes 没有效果
     @topics = Topic.recent.paginate(:page => params[:page], :per_page => 50)
-    
-    drop_breadcrumb("社区")
     drop_breadcrumb("主题列表")
     render :action => "index", :stream => true
   end
@@ -39,7 +38,6 @@ class TopicsController < ApplicationController
     ids = result.collect { |r| r["id"] }
     @topics = Topic.where(:_id.in => ids).limit(50).includes(:node,:user, :last_reply_user)
     set_seo_meta("搜索#{params[:s]} &raquo; 社区")
-    drop_breadcrumb("社区")
     drop_breadcrumb("搜索 #{params[:key]}")
     render :action => "index", :stream => true
   end
@@ -54,6 +52,8 @@ class TopicsController < ApplicationController
       current_user.notifications.where(:reply_id.in => @replies.map(&:id), :read => false).update_all(:read => true)
     end
     set_seo_meta("#{@topic.title} &raquo; 社区")
+    drop_breadcrumb("#{@node.name}", node_topics_path(@node.id))
+    drop_breadcrumb("浏览帖子")
     render :stream => true
   end
 
@@ -65,7 +65,9 @@ class TopicsController < ApplicationController
       if @node.blank?
         render_404
       end
+      drop_breadcrumb("#{@node.name}", node_topics_path(@node.id))
     end
+    drop_breadcrumb("发帖")
     set_seo_meta("发帖子 &raquo; 社区")
    drop_breadcrumb("社区")
    drop_breadcrumb("新建贴子")
@@ -87,6 +89,8 @@ class TopicsController < ApplicationController
   def edit
     @topic = current_user.topics.find(params[:id])
     @node = @topic.node
+    drop_breadcrumb("#{@node.name}", node_topics_path(@node.id))
+    drop_breadcrumb("改帖子")
     set_seo_meta("改帖子 &raquo; 社区")
   end
 
@@ -122,11 +126,15 @@ class TopicsController < ApplicationController
     @topic.destroy
     redirect_to(topics_path, :notice => '帖子删除成功.')
   end
-  
+
   protected
   
   def set_menu_active
     @current = @current = ['/topics']
+  end
+  
+  def init_base_breadcrumb
+    drop_breadcrumb("社区", topics_path)
   end
   
   private

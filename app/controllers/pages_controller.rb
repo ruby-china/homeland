@@ -3,18 +3,17 @@ class PagesController < ApplicationController
   before_filter :check_lock, :only => [:edit, :update]
   before_filter :require_user, :only => [:new, :edit, :create, :update]
   before_filter :check_permissions, :only => [:new, :edit, :create, :update]
+  before_filter :init_base_breadcrumb
   before_filter :set_menu_active
   
   def index
     set_seo_meta("Wiki")
-    drop_breadcrumb("Wiki")
     drop_breadcrumb("索引")
   end
   
   def recent
     @pages = Page.recent.paginate(:page => params[:page], :per_page => 30)
     set_seo_meta("Wiki 目录")
-    drop_breadcrumb("Wiki")
     drop_breadcrumb("目录")
   end
 
@@ -24,14 +23,12 @@ class PagesController < ApplicationController
       render_404
     end
     set_seo_meta("#{@page.title} - Wiki")
-    drop_breadcrumb("Wiki")
     drop_breadcrumb("查看")
   end
 
   def new
     @page = Page.new
     set_seo_meta("创建 Wiki 页面")
-    drop_breadcrumb("Wiki")
     drop_breadcrumb(" 创建 Wiki 页面")
     respond_to do |format|
       format.html # new.html.erb
@@ -42,7 +39,6 @@ class PagesController < ApplicationController
   def edit
     @page = Page.find(params[:id])
     set_seo_meta("修改 Wiki 页面")
-    drop_breadcrumb("Wiki")
     drop_breadcrumb("编辑")
   end
 
@@ -75,7 +71,10 @@ class PagesController < ApplicationController
   def set_menu_active
     @current = @current = ['/wiki']
   end
-
+  
+  def init_base_breadcrumb
+    drop_breadcrumb("Wiki", pages_path)
+  end
 
   private
     def check_lock

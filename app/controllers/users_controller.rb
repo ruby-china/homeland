@@ -1,10 +1,10 @@
 # coding: utf-8  
 class UsersController < ApplicationController
   before_filter :require_user, :only => "auth_unbind"
+  before_filter :init_base_breadcrumb
   before_filter :set_menu_active
   
   def index
-    drop_breadcrumb("会员")
     drop_breadcrumb("目录")
   end
   
@@ -13,7 +13,6 @@ class UsersController < ApplicationController
     @last_topics = @user.topics.recent.limit(20)          
     @last_replies = @user.replies.only(:topic_id, :body, :created_at).recent.includes(:topic).limit(10)
     set_seo_meta("#{@user.login}")
-    drop_breadcrumb("会员")
     drop_breadcrumb(@user.login)
   end
   
@@ -32,6 +31,10 @@ class UsersController < ApplicationController
   
   def set_menu_active
     @current = @current = ['/posts']
+  end
+  
+  def init_base_breadcrumb
+    drop_breadcrumb("会员", users_path)
   end
   
 end

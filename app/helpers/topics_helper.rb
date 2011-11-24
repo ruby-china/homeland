@@ -23,7 +23,7 @@ module TopicsHelper
   
   def topic_use_readed_text(state)
     case state
-    when 0
+    when false
       "在你读过以后还没有新变化"
     else
       "有新内容"

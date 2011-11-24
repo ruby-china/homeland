@@ -10,6 +10,7 @@ class Topic
 
   field :title
   field :body
+  field :last_reply_id, :type => Integer
   field :replied_at , :type => DateTime
   field :source
   field :message_id
@@ -59,42 +60,6 @@ class Topic
 
   def pull_follower(user_id)
     self.follower_ids.delete(user_id)
-  end
-
-  # 检查用户是否看过
-  # result:
-  #   0 读过
-  #   1 未读
-  #   2 最后是用户的回复
-  def user_readed?(user_id)
-    user_ids = Rails.cache.read("Topic:user_read:#{self.id}") || []
-
-    if user_id.in?(user_ids)
-      0
-    elsif user_id.in?([self.last_reply_user_id, self.user_id])
-      2
-    else
-      1
-    end
-  end
-
-  # 记录用户读过
-  def user_readed(user_id)
-    uids = Rails.cache.read("Topic:user_read:#{self.id}")
-    if uids.blank?
-      uids = [user_id]
-    else
-      uids = uids.dup
-    end
-
-    uids << user_id
-    Rails.cache.write("Topic:user_read:#{self.id}",uids)
-  end
-
-  # 清除用户读过的记录
-  # 用户回复的时候清除状态
-  def clear_user_readed
-    Rails.cache.write("Topic:user_read:#{self.id}",nil)
   end
 
   def self.search(key,options = {})

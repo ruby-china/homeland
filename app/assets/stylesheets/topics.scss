@@ -32,12 +32,9 @@
   -moz-border-radius: 12px; -webkit-border-radius: 12px; 
   margin: 18px 12px 0px 0px; text-decoration: none; }
 .topics .topic .replies a.count:hover { color:write; background-color:#1F8AEE; }
-.topics .topic .replies a.state0:link,
-.topics .topic .replies a.state0:visited { background:#DDD; }
-.topics .topic .replies a.state0:hover { background:#1dc115;}
-.topics .topic .replies a.state2:link,
-.topics .topic .replies a.state2:visited { background:#22D419; }
-.topics .topic .replies a.state2:hover {background:#1dc115; }
+.topics .topic .replies a.state_true:link,
+.topics .topic .replies a.state_true:visited { background:#DDD; }
+.topics .topic .replies a.state_true:hover { background:#1dc115;}
 .topics tr.topic td.replies { text-align:right; width:50px; font-size:14px; color:green;font-weight:bold; }
 .more { padding:8px; padding-bottom:0; font-size:14px; text-align:right; }
 

@@ -35,6 +35,7 @@ module UsersHelper
     raw html
   end
   
+  private
   def user_popover_info(user)
     return "" if user.blank?
     return "" if user.location.blank?

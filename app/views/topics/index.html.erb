@@ -25,8 +25,8 @@
           <div class="right_info">
             <div class="pull-right replies">
               <% if topic.replies_count > 0 %>
-              <% readed_state = topic.user_readed?(current_user.id) if current_user %>
-              <a href="<%= topic_path(topic.id) %><%= "#reply#{topic.replies_count}" %>" rel="twipsy" title="<%= topic_use_readed_text(readed_state) if current_user %>" class="count state<%= readed_state if current_user %>">
+              <% read_state = current_user.topic_read?(topic) if current_user %>
+              <a href="<%= topic_path(topic.id) %><%= "#reply#{topic.replies_count}" %>" rel="twipsy" title="<%= topic_use_readed_text(read_state) if current_user %>" class="count state_<%= read_state || false %>">
               <%= topic.replies_count %>
               </a>
               <% end %>

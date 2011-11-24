@@ -27,7 +27,7 @@ class Cpanel::UsersController < Cpanel::ApplicationController
     @user.verified = params[:user][:verified]
 
     if @user.save
-      redirect_to(cpanel_users_path), :notice => 'User was successfully created.'
+      redirect_to(cpanel_users_path, :notice => 'User was successfully created.')
     else
       render :action => "new"
     end

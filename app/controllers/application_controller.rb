@@ -1,4 +1,5 @@
 # coding: utf-8  
+require "bootstrap-rails/helper"
 class ApplicationController < ActionController::Base
   protect_from_forgery  
 

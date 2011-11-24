@@ -44,23 +44,23 @@
             <% end %>
           <% end %>
           <li>
-            <a href="<%= user_path(current_user.login) %>" class="dropdown-toggle"><%= current_user.login %></a>
-            <ul class="dropdown-menu">
-              <li><a href="<%= user_path(current_user.login) %>">我的主页</a></li>
-              <% if not params[:controller].match(/cpanel/) %>
-                <li><a href="<%= edit_user_registration_path %>">个人资料设置</a></li>
-                <li><a href="<%= notes_path %>">记事本</a></li>
-                <% if admin? current_user %><li><a href="/cpanel">后台</a></li><% end %>
-              <% end %>
-              <li><a href="<%= destroy_user_session_path %>">退出</a></li>
-            </ul>
+            <%= link_to(current_user.login,user_path(current_user.login), :class => "dropdown-toggle")%>
+            <%= render_list :class => "dropdown-menu" do |li|
+              li << link_to("我的主页", user_path(current_user.login) )
+              unless params[:controller].match(/cpanel/)
+                li << link_to("个人资料设置",edit_user_registration_path)
+                li << link_to("记事本", notes_path )
+                li << link_to("后台", "/cpanel")
+              end
+              li << link_to("退出", destroy_user_session_path )
+            end %>
           </li>
         </ul>
         <% else %>
-          <ul class="nav secondary-nav" id="userbar">
-            <li<%=' class=active' if params[:controller] == "devise/registrations" and params[:action] == "new" %>><a href="<%= new_user_registration_path %>">注册</a></li>
-            <li<%=' class=active' if params[:controller] == "devise/sessions" and params[:action] == "new" %>><a href="<%= new_user_session_path %>">登录</a></li> 
-          </ul>
+          <%= render_list :class => "nav secondary-nav", :id => "userbar" do |li|
+            li << link_to("注册",new_user_registration_path)
+            li << link_to("登录", new_user_session_path )
+          end %>
         <% end %>
       </div>
     </div>
@@ -80,15 +80,8 @@
       <%= raw SiteConfig.footer_html %>
     </div>
   </footer>
-  <script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', '<%= Setting.google_analytics_key %>']);
-  _gaq.push(['_trackPageview']);
-  (function() {
-  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-  </script>
+  
+  <%= render :partial => "common/google_analytics"%>
+
 </body>
 </html>

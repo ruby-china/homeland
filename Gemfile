@@ -55,7 +55,10 @@ gem "daemon-spawn", "~> 0.4.2"
 gem "unicorn"
 # 用于组合小图片
 gem "sprite-factory", "1.4.1"
-gem 'twitter-bootstrap-rails', :git => "git://github.com/seyhunak/twitter-bootstrap-rails.git", :branch => "static"
+
+gem 'simple_form'
+gem 'bootstrap-rails', :require => 'bootstrap-rails',
+                              :git => 'git://github.com/xdite/bootstrap-rails.git'                   
 
 group :assets do
   gem 'sass-rails', "  ~> 3.1.4"

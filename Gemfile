@@ -23,7 +23,7 @@ gem "omniauth"
 gem 'omniauth-openid'
 gem "omniauth-github"
 gem "omniauth-twitter"
-gem "omniauth-douban"
+gem "omniauth-douban", :git => "git://github.com/xdite/omniauth-douban.git"
 
 # Rails cache 存放到 Redis
 gem 'dalli', '1.1.1'

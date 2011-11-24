@@ -14,6 +14,15 @@ GIT
       railties
 
 GIT
+  remote: git://github.com/xdite/omniauth-douban.git
+  revision: 18a2a3671f468e1211e9682786a9ff6601af0b8e
+  specs:
+    omniauth-douban (1.0.0.rc2)
+      multi_json
+      omniauth (~> 1.0.0.rc2)
+      omniauth-oauth (~> 1.0.0.rc2)
+
+GIT
   remote: https://github.com/plataformatec/devise.git
   revision: 0c67cff2a02d5e6b998da2b5cc4c10e534f25c44
   specs:
@@ -143,10 +152,6 @@ GEM
     omniauth (1.0.0)
       hashie (~> 1.2)
       rack
-    omniauth-douban (1.0.0.rc2)
-      multi_json
-      omniauth (~> 1.0.0.rc2)
-      omniauth-oauth (~> 1.0.0.rc2)
     omniauth-github (1.0.0)
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.0)
@@ -285,7 +290,7 @@ DEPENDENCIES
   mongoid_auto_increment_id (= 0.2.2)
   nokogiri (= 1.5.0)
   omniauth
-  omniauth-douban
+  omniauth-douban!
   omniauth-github
   omniauth-openid
   omniauth-twitter

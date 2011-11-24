@@ -30,4 +30,10 @@ class TopicsCell < BaseCell
     @suggest_topics = Topic.suggest.limit(5)
     render
   end
+  
+  def sidebar_for_new_topic_node(args)
+    @node = args[:node]
+    @action = args[:action]
+    render 
+  end
 end

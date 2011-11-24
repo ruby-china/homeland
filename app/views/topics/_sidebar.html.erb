@@ -1,22 +1,3 @@
 <div class="sidebar">
-<% if ["show","new","edit","node"].index(params[:action]) and !@node.blank? %>
-  <div class="box">
-    <h2><a href="<%= node_topics_path(@node) %>"><%= @node.name %></a></h2>
-    <% if ["new"].index params[:action] %>
-    <p class="sumamry">
-      <%= @node.summary %>
-    </p>
-    <% end %>
-    <div class="content">
-      <a class="btn success" href="<%= new_topic_path(:node => @node.id) %>">发布新帖</a>
-    </div>
-  </div>
-<% end %>
-
-
-
-<% if ["new"].include?(action_name) %>
-    <%= render :patial => "sidebar_for_topic_new_tip"%>
-<% end %>
-
+    <%= render_cell :topics, :sidebar_for_new_topic_node, { :action => params[:action], :node => @node } %>
 </div>

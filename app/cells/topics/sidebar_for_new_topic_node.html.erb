@@ -1,0 +1,13 @@
+<% if !@node.blank? %>
+  <div class="box">
+    <h2><a href="<%= node_topics_path(@node) %>"><%= @node.name %></a></h2>
+    <% if ["new"].index(params[:action]) %>
+    <p class="sumamry">
+      <%= @node.summary %>
+    </p>
+    <% end %>
+    <div class="content">
+      <a class="btn success" href="<%= new_topic_path(:node => @node.id) %>">发布新帖</a>
+    </div>
+  </div>
+<% end %>

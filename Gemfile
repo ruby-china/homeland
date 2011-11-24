@@ -20,8 +20,10 @@ gem 'devise', :git => 'https://github.com/plataformatec/devise.git'
 gem 'will_paginate', '3.0.pre2'  
 # 三方平台 OAuth 验证登陆
 gem "omniauth"
+gem 'omniauth-openid'
 gem "omniauth-github"
 gem "omniauth-twitter"
+gem "omniauth-douban"
 
 # Rails cache 存放到 Redis
 gem 'dalli', '1.1.1'

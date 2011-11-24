@@ -9,10 +9,10 @@
   </div>
 </div>
 <div class="content">
-	<div class="box">
-		<%= form_for(@reply) do |f| %>
-		<fieldset>
-		  <legend>修改回帖</legend>
+    <div class="box">
+        <%= form_for(@reply) do |f| %>
+        <fieldset>
+          <legend>修改回帖</legend>
       <%= render "shared/error_messages", :target => @reply %>  
       <div class="clearfix">
         <%= f.label :body %>
@@ -25,5 +25,5 @@
         <a href="<%= topic_path(@reply.topic_id) %>" class="btn">取消</a>
       </div>
     <% end %>
-	</div>
+    </div>
 </div>

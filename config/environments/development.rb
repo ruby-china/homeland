@@ -31,7 +31,11 @@ RubyChina::Application.configure do
   config.after_initialize do |app|
     app.assets.logger = Logger.new('/dev/null')
   end
+  
+
+  
 end
+
 
 Rails::Rack::Logger.class_eval do
   def before_dispatch_with_quiet_assets(env)

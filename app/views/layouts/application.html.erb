@@ -3,14 +3,14 @@
 <head>
   <title><%= raw @page_title %><%= Setting.app_name %></title>
   <%= stylesheet_link_tag "front" %>
-	<%= yield :styles %>
+    <%= yield :styles %>
   <meta name="keywords" content="<%= @meta_keywords %>" />
   <meta name="description" content="<%= @meta_description %>" />
   <link rel="shortcut icon" href="<%= asset_path("big_logo.png") %>" /> 
   <%= csrf_meta_tag %>
-	<%= javascript_include_tag "application" %>
-	<%= auto_discovery_link_tag(:rss,feed_topics_url,:title => '订阅最新贴') %>
-	<%= yield :scripts %>
+    <%= javascript_include_tag "application" %>
+    <%= auto_discovery_link_tag(:rss,feed_topics_url,:title => '订阅最新贴') %>
+    <%= yield :scripts %>
 </head>
 <body>
   <div class="topbar" data-dropdown="dropdown">
@@ -41,7 +41,7 @@
   </div>
   <footer class="footer">
     <div class="container">
-      <%= raw SiteConfig.footer_html %>
+      <%# raw SiteConfig.footer_html %>
     </div>
   </footer>
   

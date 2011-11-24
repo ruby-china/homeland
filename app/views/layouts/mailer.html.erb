@@ -26,14 +26,14 @@
       label { color:#666; }
     </style>
     <div style="line-height:160%;">
-  	  <%= yield %>
-  	</div>
-  	<div style="margin-top:30px;border-top:1px solid #ddd;padding:5px;">
-  	  <div style="float:right;"><img src="http://<%= Setting.domain %><%= asset_path("logo_48.png") %>" /></div>
-  	  <div style="padding-top:4px; line-height:160%; color:#999;">
-    	  这是一封提醒邮件，请勿直接通过邮件回复.<br />
-    	  <a href="<%= root_url %>"><%= Setting.app_name %></a> <%= Setting.domain %>
-    	</div>
-  	</div>
-	</body>
+        <%= yield %>
+      </div>
+      <div style="margin-top:30px;border-top:1px solid #ddd;padding:5px;">
+        <div style="float:right;"><img src="http://<%= Setting.domain %><%= asset_path("logo_48.png") %>" /></div>
+        <div style="padding-top:4px; line-height:160%; color:#999;">
+          这是一封提醒邮件，请勿直接通过邮件回复.<br />
+          <a href="<%= root_url %>"><%= Setting.app_name %></a> <%= Setting.domain %>
+        </div>
+      </div>
+    </body>
 </html>

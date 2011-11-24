@@ -7,7 +7,7 @@
   <tr class="head">
     <td class="first">ID</td>
     <td style="width:500px">Body</td>
-		<td>Topic</td>
+        <td>Topic</td>
     <td>User</td>
     <td>At</td>
 
@@ -19,10 +19,10 @@
     <td class="first"><%= reply.id %></td>
     <td><%= truncate(reply.body, :length => 50) %></td>
     <% if reply.topic %>
-	  <td><a href="<%= topic_path(reply.topic_id) %>" title="<%= reply.topic.title %>"><%= reply.topic_id %></a></td>
-	  <% else %>
-	  <td><%= reply.topic_id %></td>
-	  <% end %>
+      <td><a href="<%= topic_path(reply.topic_id) %>" title="<%= reply.topic.title %>"><%= reply.topic_id %></a></td>
+      <% else %>
+      <td><%= reply.topic_id %></td>
+      <% end %>
     <td><%= reply.user.login if reply.user %></td>
     <td><%= l reply.created_at, :format => :short %></td>
     <td><%= link_to '修改', edit_cpanel_reply_path(reply) %>

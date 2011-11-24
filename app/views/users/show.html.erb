@@ -6,43 +6,43 @@
 </div>
 
 <div class="content">
-	<div class="userinfo box">
-	  <% if admin?(@user) %>
+    <div class="userinfo box">
+      <% if admin?(@user) %>
     <span class="label warning">管理员</span>
     <% elsif wiki_editor?(@user) %>
     <span class="label success">Wiki 管理</span>
     <% else %>
     <span class="label">普通用户</span>
     <% end %>
-		<ul>
-		  <li style="text-align:right;">第 <%= @user.id %> 位会员</li>
-			<li>
-			  <span>ID:</span><strong><%= @user.login %></strong>
-			</li>
-			<% if !@user.location.blank? %>
-			<li><span>城市:</span><%= @user.location %></li>
-			<% end %>
-			<li><span>加入时间:</span><%= I18n.l(@user.created_at.to_date, :format => :long) %></li>
-			<% if !@user.tagline.blank? %>
-			<li><span>签名:</span><%= @user.tagline %></li>
-			<% end %>
-			<% if !@user.github.blank? %>
-			<li><span>Github:</span><a href="<%= @user.github_url %>" target="_blank" rel="nofollow"><%= @user.github_url %></a></li>
-			<% end %>
-			<% if !@user.website.blank? %>
-			<li><span>个人主页:</span><a href="<%= @user.website %>" target="_blank" rel="nofollow"><%= @user.website %></a></li>
-			<% end %>
-		</ul>
-	</div>
-	<% if !@user.bio.blank? %>
-	<div class="bio box">
-		<h5>个人介绍</h5>
-		<p><%= auto_link(simple_format(@user.bio)) %></p>
-	</div>
-	<% end %>
-	<div class="box">
-		<h5>最近发布的贴子</h5>
-		<table class="node_topics">
+        <ul>
+          <li style="text-align:right;">第 <%= @user.id %> 位会员</li>
+            <li>
+              <span>ID:</span><strong><%= @user.login %></strong>
+            </li>
+            <% if !@user.location.blank? %>
+            <li><span>城市:</span><%= @user.location %></li>
+            <% end %>
+            <li><span>加入时间:</span><%= I18n.l(@user.created_at.to_date, :format => :long) %></li>
+            <% if !@user.tagline.blank? %>
+            <li><span>签名:</span><%= @user.tagline %></li>
+            <% end %>
+            <% if !@user.github.blank? %>
+            <li><span>Github:</span><a href="<%= @user.github_url %>" target="_blank" rel="nofollow"><%= @user.github_url %></a></li>
+            <% end %>
+            <% if !@user.website.blank? %>
+            <li><span>个人主页:</span><a href="<%= @user.website %>" target="_blank" rel="nofollow"><%= @user.website %></a></li>
+            <% end %>
+        </ul>
+    </div>
+    <% if !@user.bio.blank? %>
+    <div class="bio box">
+        <h5>个人介绍</h5>
+        <p><%= auto_link(simple_format(@user.bio)) %></p>
+    </div>
+    <% end %>
+    <div class="box">
+        <h5>最近发布的贴子</h5>
+        <table class="node_topics">
       <tr class="head">
         <td class="replies">回复数</td>
         <td class="title">标题</td>
@@ -56,7 +56,7 @@
       </tr>
       <% end %>
     </table>
-	</div>
+    </div>
 
   <% if !@last_replies.blank? %>
     <div class="last_replies box">

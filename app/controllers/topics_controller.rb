@@ -2,9 +2,9 @@
 class TopicsController < ApplicationController
   before_filter :require_user, :only => [:new,:edit,:create,:update,:destroy,:reply]
   caches_page :feed, :expires_in => 1.hours
-  before_filter :base_breadcrumb
+  before_filter :init_base_breadcrumb
   
-  def base_breadcrumb
+  def init_base_breadcrumb
     drop_breadcrumb("社区", topics_path)
   end
 

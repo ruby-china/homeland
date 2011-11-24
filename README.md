@@ -10,6 +10,7 @@ This is source code of [Ruby China Group](http://ruby-china.org)
     cp config/mongoid.yml.default config/mongoid.yml
     cp config/redis.yml.default config/redis.yml
     bundle
+    rake db:setup
     ```
 
 * To run it in development mode, simply use the normal `rails s`, to run it in production mode:

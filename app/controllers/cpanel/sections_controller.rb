@@ -45,4 +45,6 @@ class Cpanel::SectionsController < Cpanel::ApplicationController
 
     redirect_to(cpanel_sections_url)
   end
+  
+  
 end

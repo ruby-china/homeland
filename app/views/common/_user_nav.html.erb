@@ -1,0 +1,31 @@
+<% if user_signed_in? %>
+<ul class="nav secondary-nav" id="userbar">
+  <%
+    notification_class = ["notifications"]
+    notification_class << "unread" if current_user.notifications.unread.count > 0
+    notification_class << "active" if ["notifications"].index(params[:controller])
+  %>
+  <%= content_tag 'li', :class => notification_class do %>
+    <%= content_tag 'a', :href => notifications_path do %>
+      <span class="count"><%= current_user.notifications.unread.count %></span>
+    <% end %>
+  <% end %>
+  <li>
+    <%= link_to(current_user.login,user_path(current_user.login), :class => "dropdown-toggle")%>
+    <%= render_list :class => "dropdown-menu" do |li|
+      li << link_to("我的主页", user_path(current_user.login) )
+      unless params[:controller].match(/cpanel/)
+        li << link_to("个人资料设置",edit_user_registration_path)
+        li << link_to("记事本", notes_path )
+        li << link_to("后台", "/cpanel")
+      end
+      li << link_to("退出", destroy_user_session_path )
+    end %>
+  </li>
+</ul>
+<% else %>
+  <%= render_list :class => "nav secondary-nav", :id => "userbar" do |li|
+    li << link_to("注册",new_user_registration_path)
+    li << link_to("登录", new_user_session_path )
+  end %>
+<% end %>

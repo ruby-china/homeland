@@ -1,6 +1,7 @@
 # coding: utf-8
 class PostsController < ApplicationController
   before_filter :require_user, :only => [:new, :edit, :create, :update, :destroy]
+  before_filter :set_menu_active
   def index
     scoped_posts = Post.normal
     if !params[:tag].blank?
@@ -55,5 +56,11 @@ class PostsController < ApplicationController
     else
       render action: "edit"
     end
+  end
+  
+  protected
+  
+  def set_menu_active
+    @current = @current = ['/posts']
   end
 end

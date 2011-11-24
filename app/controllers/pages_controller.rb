@@ -4,10 +4,7 @@ class PagesController < ApplicationController
   before_filter :require_user, :only => [:new, :edit, :create, :update]
   before_filter :check_permissions, :only => [:new, :edit, :create, :update]
   before_filter :init_base_breadcrumb
-  
-  def init_base_breadcrumb
-    drop_breadcrumb("Wiki", pages_path)
-  end
+  before_filter :set_menu_active
   
   def index
     set_seo_meta("Wiki")
@@ -69,6 +66,16 @@ class PagesController < ApplicationController
     end
   end
   
+  protected
+  
+  def set_menu_active
+    @current = @current = ['/wiki']
+  end
+  
+  def init_base_breadcrumb
+    drop_breadcrumb("Wiki", pages_path)
+  end
+
   private
     def check_lock
       @page = Page.find(params[:id])

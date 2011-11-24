@@ -2,10 +2,7 @@
 class UsersController < ApplicationController
   before_filter :require_user, :only => "auth_unbind"
   before_filter :init_base_breadcrumb
-  
-  def init_base_breadcrumb
-    drop_breadcrumb("会员", users_path)
-  end
+  before_filter :set_menu_active
   
   def index
     drop_breadcrumb("目录")
@@ -28,6 +25,16 @@ class UsersController < ApplicationController
     
     current_user.authorizations.destroy_all(:conditions => {:provider => provider})
     redirect_to edit_user_registration_path, :flash => {:warring => "#{provider.titleize} 帐号解绑成功。"}
+  end
+  
+  protected
+  
+  def set_menu_active
+    @current = @current = ['/posts']
+  end
+  
+  def init_base_breadcrumb
+    drop_breadcrumb("会员", users_path)
   end
   
 end

@@ -41,6 +41,10 @@ This is source code of [Ruby China Group](http://ruby-china.org)
       li << link_to("Home", "/")
     end
 
+## Bookstrap CSS version
+
+1.4.0 
+
 ## Contributors
 
 * [Contributors](https://github.com/huacnlee/ruby-china/contributors)

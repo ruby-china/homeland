@@ -1,12 +1,9 @@
 # coding: utf-8  
 class TopicsController < ApplicationController
   before_filter :require_user, :only => [:new,:edit,:create,:update,:destroy,:reply]
+  before_filter :set_menu_active
   caches_page :feed, :expires_in => 1.hours
   before_filter :init_base_breadcrumb
-  
-  def init_base_breadcrumb
-    drop_breadcrumb("社区", topics_path)
-  end
 
   def index
     @topics = Topic.last_actived.limit(15).includes(:node,:user, :last_reply_user)
@@ -72,6 +69,8 @@ class TopicsController < ApplicationController
     end
     drop_breadcrumb("发帖")
     set_seo_meta("发帖子 &raquo; 社区")
+   drop_breadcrumb("社区")
+   drop_breadcrumb("新建贴子")
   end
 
   def reply
@@ -126,6 +125,25 @@ class TopicsController < ApplicationController
     @topic = current_user.topics.find(params[:id])
     @topic.destroy
     redirect_to(topics_path, :notice => '帖子删除成功.')
+  end
+
+  protected
+  
+  def set_menu_active
+    @current = @current = ['/topics']
+  end
+  
+  def init_base_breadcrumb
+    drop_breadcrumb("社区", topics_path)
+  end
+  
+  private
+  
+  def init_list_sidebar 
+   if !fragment_exist? "topic/init_list_sidebar/hot_nodes"
+      @hot_nodes = Node.hots.limit(10)
+    end
+    set_seo_meta("社区")
   end
   
 end

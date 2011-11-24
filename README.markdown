@@ -3,7 +3,7 @@ This is source code of [Ruby China Group](http://ruby-china.org)
 ## Install
 
   * You need install *Ruby 1.9.2*, *Rubygems* and *Rails 3.1* first.
-  * Install *Redis*, *MongoDb* 
+  * Install and start *Redis*, *MongoDb*, *memcached*
   
   ```
   cp config/config.yml.default config/config.yml

@@ -65,9 +65,9 @@ end
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.7.0'
-  gem 'machinist',   '~> 2.0.0.beta2'
   gem 'delorean'
   gem 'database_cleaner'
+  gem 'ffaker'
 end
 
 group :test do

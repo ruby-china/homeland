@@ -7,6 +7,6 @@
 <%= content_for :base_sitemap do %>
   <li><a href="<%= topics_path %>">社区</a> <span class="divider">/</span></li>
   <% if !@node.blank? %>
-  <li><a href="<%= node_topics_path(:id => @node.id) %>"><%= @node.name %></a> <span class="divider">/</span></li>
+    <li><a href="<%= node_topics_path(:id => @node.id) %>"><%= @node.name %></a> <span class="divider">/</span></li>
   <% end %>
 <% end %>

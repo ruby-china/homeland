@@ -5,8 +5,8 @@ module ApplicationHelper
   def notice_message()
     if flash[:notice]
       result = '<div class="alert-message success"><a href="#" class="close">x</a>'+flash[:notice]+'</div>'
-    elsif flash[:warring]
-        result = '<div class="alert-message warring"><a href="#" class="close">x</a>'+flash[:warring]+'</div>'
+    elsif flash[:warning]
+        result = '<div class="alert-message warning"><a href="#" class="close">x</a>'+flash[:warning]+'</div>'
     elsif flash[:alert]
         result = '<div class="alert-message alert"><a href="#" class="close">x</a>'+flash[:alert]+'</div>'
     elsif flash[:error]

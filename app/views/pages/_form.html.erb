@@ -1,35 +1,21 @@
-<%= form_for(@page) do |f| %>
+<%= simple_form_for @page, :wrapper => :inline do |f| %>
   <fieldset>
     <legend>Wiki页面编辑</legend>
     <%= render "shared/error_messages", :target => @page %>
-    <div class="clearfix">
-      <%= f.label :slug %>
-      <div class="input">
-        <%= f.text_field :slug %><br />
-        <span class="help-block">http://<%= Setting.domain %>/wiki/:slug</span>
-      </div>
-    </div>
-    <div class="clearfix">
-      <%= f.label :title %>
-      <div class="input">
-        <%= f.text_field :title, :class => "xxlarge" %>
-      </div>
-    </div>
-    <div class="clearfix">
-      <%= f.label :body %>
-      <div class="input">
-        <%= f.text_area :body, :class => "long", :rows => "30" %><br />
-        <span class="help-block">请使用 Markdown 格式编写,可以试试用 <a href="http://mouapp.com" target="_blank">Mou</a> 这个 App 来编写。</span>
-      </div>
-    </div>
+
+    <%= f.input :slug, :hint => "http://#{Setting.domain}/wiki/:slug"%>
+    <%= f.input :title, :input_html => { :class => "xxlarge" } %>
+    <%= f.input :body, :as => :text,
+                :input_html => { :class => "long", :rows => "30" },
+                :hint => "请使用 Markdown 格式编写,可以试试用 <a href='http://mouapp.com' target='_blank'>Mou</a> 这个 App 来编写。".html_safe
+    %>
+
     <% if not @page.new_record? %>
-    <div class="clearfix">
-      <%= f.label :change_desc %>
-      <div class="input">
-        <%= f.text_area :change_desc, :class => "long", :rows => "2" %><br />
-        <span class="help-block">描述你本次修改的内容。</span>
-      </div>
-    </div>
+      <%= f.input :change_desc , :as => :text,
+                  :input_html => { :class => "long", :rows => "2" },
+                  :hint => "描述你本次修改的内容。"
+    %>
+
     <% end %>
     <div class="actions">
       <%= f.submit "保存", :class => "btn primary" %>

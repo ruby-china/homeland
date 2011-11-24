@@ -38,6 +38,9 @@ class User
       
       if user = User.where("authorizations.provider" => provider , "authorizations.uid" => uid).first
         user
+      elsif user = User.find_by_email(data["email"])
+        user.bind_service(response)
+        user
       else # Create a user with a stub password. 
         user = User.new(:email => data["email"],
           :password => Devise.friendly_token[0,20],
@@ -61,6 +64,9 @@ class User
       data = response["info"]
       
       if user = User.where("authorizations.provider" => provider , "authorizations.uid" => uid).first
+        user
+      elsif user = User.find_by_email(data["email"])
+        user.bind_service(response)
         user
       else # Create a user with a stub password. 
         user = User.new(:email => "twitter+#{uid}@example.com", 
@@ -86,6 +92,9 @@ class User
       
       if user = User.where("authorizations.provider" => provider , "authorizations.uid" => uid).first
         user
+      elsif user = User.find_by_email(data["email"])
+        user.bind_service(response)
+        user
       else # Create a user with a stub password. 
         user = User.new(:email => data["email"],
           :password => Devise.friendly_token[0,20],
@@ -109,6 +118,9 @@ class User
       data = response["info"]
       
       if user = User.where("authorizations.provider" => provider , "authorizations.uid" => uid).first
+        user
+      elsif user = User.find_by_email(data["email"])
+        user.bind_service(response)
         user
       else # Create a user with a stub password. 
         user = User.new(:email => data["email"],

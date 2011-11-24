@@ -45,6 +45,10 @@ This is source code of [Ruby China Group](http://ruby-china.org)
 
 1.4.0 
 
+## Bootstrap Form 
+
+<https://github.com/rafaelfranca/simple_form-bootstrap/blob/master/config/initializers/simple_form.rb>
+
 ## Contributors
 
 * [Contributors](https://github.com/huacnlee/ruby-china/contributors)

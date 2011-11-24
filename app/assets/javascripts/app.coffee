@@ -27,6 +27,9 @@ $(document).ready ->
   $("abbr.timeago").timeago()
   $(".alert-message").alert()
   $("a[rel=twipsy]").twipsy({ live: true })
+  $("a[rel=popover]").popover
+	  live: true
+	  html: true
   # 绑定评论框 Ctrl+Enter 提交事件
   $(".cell_comments_new textarea").bind "keydown","ctrl+return",(el) ->
     if $(el.target).val().trim().length > 0

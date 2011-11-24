@@ -4,6 +4,15 @@ GIT
   specs:
     mail_view (1.0.1)
 
+GIT
+  remote: git://github.com/seyhunak/twitter-bootstrap-rails.git
+  revision: 5e62b21c8f258010af7f5bc858b89a24f16936a9
+  branch: static
+  specs:
+    twitter-bootstrap-rails (1.4.0)
+      actionpack
+      railties
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -114,7 +123,6 @@ GEM
       activemodel (~> 3.0)
       mongo (~> 1.3)
       tzinfo (~> 0.3.22)
-    mongoid-eager-loading (0.3.1)
     mongoid_auto_increment_id (0.2.2)
       mongoid (~> 2.2.0)
     multi_json (1.0.3)
@@ -298,7 +306,6 @@ DEPENDENCIES
   mini_magick (= 3.3)
   mongo-rails-instrumentation (= 0.2.4)
   mongoid (= 2.2.4)
-  mongoid-eager-loading (= 0.3.1)
   mongoid_auto_increment_id (= 0.2.2)
   nokogiri (= 1.5.0)
   oa-openid (= 0.3.0)
@@ -316,6 +323,7 @@ DEPENDENCIES
   sass-rails (~> 3.1.4)
   settingslogic (~> 2.0.6)
   sprite-factory (= 1.4.1)
+  twitter-bootstrap-rails!
   uglifier
   unicorn
   will_paginate (= 3.0.pre2)

@@ -4,15 +4,9 @@ module UsersHelper
   def user_name_tag(user,options = {})
     location = options[:location] || false
     return "匿名" if user.blank?
-    result = "<a href=\"#{user_path(user.login)}\" title=\"#{user.login}\">#{user.login}</a>"
-    if location
-      if !user.location.blank?
-        result += " <span class=\"location\" title=\"门牌号\">[#{user.location}]</span>"
-      end
-    end
+    result = %(<a href="#{user_path(user.login)}">#{user.login}</a>)
     raw(result)
   end
-  
 
   def user_avatar_tag(user,size = :normal, opts = {})
     link = opts[:link] || true
@@ -30,13 +24,22 @@ module UsersHelper
     
     hash = (user.blank? or user.email.blank?) ? Digest::MD5.hexdigest("") : Digest::MD5.hexdigest(user.email) 
     return "<img src=\"http://www.gravatar.com/avatar/#{hash}?s=#{width}&d=identicon\" />" if user.blank?
-   
     img_src = "http://www.gravatar.com/avatar/#{hash}?s=#{width}&d=identicon"
     img = "<img src=\"#{img_src}\" />"
+    html = ""
     if link
-      raw("<a href=\"#{user_path(user.login)}\" class=\"user_avatar\" title=\"#{user.login}\">#{img}</a>")
+      html = %(<a href="#{user_path(user.login)}" #{user_popover_info(user)} class="user_avatar">#{img}</a>)
     else
-      raw img
+      html = img
     end
+    raw html
+  end
+  
+  def user_popover_info(user)
+    return "" if user.blank?
+    return "" if user.location.blank?
+    title = user.location.blank? ? "#{user.login}" : "<i>#{user.location}</i> #{user.login}"
+    tagline = user.tagline.blank? ? "这哥们儿没签名" : truncate(user.tagline, :length => 20)
+    raw %(rel="popover" data-placement="below" title="#{h(title)}" data-content="#{h(tagline)}")
   end
 end

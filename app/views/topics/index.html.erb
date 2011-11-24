@@ -12,16 +12,19 @@
 <%= render 'sidebar' %>
 <div class="content">
 	<div class="box">
-    <% if !@node.blank? %>
     <div id="node_info">
-      <p>
-        <h1><%= h @node.name %></h1>
-        <span class="total">共有 <%= @node.topics_count %> 个讨论主题</span>
-      </p>
+      <% if !@node.blank? %>
+        <div>
+          <h2><%= @node.name %></h2>
+          <span class="total">共有 <%= @node.topics_count %> 个讨论主题</span>
+        </div>
+        <div class="desc">
+          <%= simple_format @node.summary %>
+        </div>
+      <% else %>
+        <h1><%= Setting.app_name %></h1>
+      <% end %>
     </div>
-    <% else %>
-      <h1><%= Setting.app_name %></h1>
-    <% end %>
 
     <div class="topics">
       <% @topics.each do |topic| %>
@@ -31,7 +34,7 @@
           </div>
           <div class="right_info">
             <div class="pull-right replies">
-              <% if topic.replies.count > 0 %>
+              <% if topic.replies_count > 0 %>
               <% readed_state = topic.user_readed?(current_user.id) if current_user %>
               <a href="<%= topic_path(topic.id) %><%= "#reply#{topic.replies_count}" %>" rel="twipsy" title="<%= topic_use_readed_text(readed_state) if current_user %>" class="count state<%= readed_state if current_user %>">
               <%= topic.replies_count %>
@@ -57,7 +60,7 @@
       <% end %>
     </div>
       
-    <% if params[:action] == "index" %>
+    <% if ["index","search"].include?(action_name) %>
       <div class="more">
         <a href="<%= recent_topics_path %>">查看更多最近发布的帖子...</a>
       </div>
@@ -65,20 +68,9 @@
       <%= will_paginate1 @topics %>
     <% end %>
 	</div>
-	<% if params[:action] == "index" %>
-	<div id="sections" class="box">
-	<h2>讨论节点分类导航</h2>
-	<ul>
-		<% @sections.each do |section| %>
-		<li>
-			<label><%= section.name %></label>
-			<% section.nodes.each do |node| %>
-			<a href="<%= node_topics_path(node.id) %>" title="<%= node.name %>"><%= node.name %></a>
-			<% end %>
-		</li>
-		<% end %>
-	</ul>
-	</div>
+	
+	<% if action_name == "index" %>
+	  <%= render_cell :topics, :index_sections %>
 	<% end %>
 </div>
 

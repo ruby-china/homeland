@@ -1,18 +1,16 @@
 # coding: utf-8  
 class TopicsController < ApplicationController
   before_filter :require_user, :only => [:new,:edit,:create,:update,:destroy,:reply]
-  before_filter :init_list_sidebar, :only => [:index,:recent,:show,:cate,:search]
   caches_page :feed, :expires_in => 1.hours
 
   def index
-    @topics = Topic.last_actived.limit(10)
-    @sections = Section.all
+    @topics = Topic.last_actived.limit(15).includes(:node,:user, :last_reply_user)
     set_seo_meta("","#{Setting.app_name}社区")
     render :stream => true
   end
   
   def feed
-    @topics = Topic.recent.limit(20)
+    @topics = Topic.recent.limit(20).includes(:node,:user, :last_reply_user)
     response.headers['Content-Type'] = 'application/rss+xml'
     render :layout => false
   end
@@ -25,15 +23,15 @@ class TopicsController < ApplicationController
   end
 
   def recent
+    # TODO: 需要 includes :node,:user, :last_reply_user,但目前用了 paginate 似乎会使得 includes 没有效果
     @topics = Topic.recent.paginate(:page => params[:page], :per_page => 50)
-    set_seo_meta("最近活跃的50个帖子 &raquo; 社区")
     render :action => "index", :stream => true
   end
 
   def search
     result = Redis::Search.query("Topic", params[:key], :limit => 500)
     ids = result.collect { |r| r["id"] }
-    @topics = Topic.find(ids).paginate(:page => params[:page], :per_page => 20)
+    @topics = Topic.where(:_id.in => ids).limit(50).includes(:node,:user, :last_reply_user)
     set_seo_meta("搜索#{params[:s]} &raquo; 社区")
     render :action => "index", :stream => true
   end
@@ -42,7 +40,7 @@ class TopicsController < ApplicationController
     @topic = Topic.find(params[:id])
     @topic.hits.incr(1)
     @node = @topic.node
-    @replies = @topic.replies.asc(:_id).all.cache
+    @replies = @topic.replies.asc(:_id).all.includes(:user).cache
     if current_user
       @topic.user_readed(current_user.id)
       current_user.notifications.where(:reply_id.in => @replies.map(&:id), :read => false).update_all(:read => true)
@@ -82,7 +80,6 @@ class TopicsController < ApplicationController
     set_seo_meta("改帖子 &raquo; 社区")
   end
 
-
   def create
     pt = params[:topic]
     @topic = Topic.new(pt)
@@ -95,7 +92,6 @@ class TopicsController < ApplicationController
       render :action => "new"
     end
   end
-
 
   def update
     @topic = current_user.topics.find(params[:id])

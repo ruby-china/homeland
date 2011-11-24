@@ -12,7 +12,6 @@ gem 'carrierwave-mongoid', '0.1.2', :require => 'carrierwave/mongoid'
 gem 'mini_magick','3.3'
 # Mongoid 辅助插件
 gem 'mongo-rails-instrumentation','0.2.4'
-gem "mongoid-eager-loading",'0.3.1'
 # Mongoid 使用自增整形ID
 gem 'mongoid_auto_increment_id', "0.2.2"
 # 用户系统
@@ -52,6 +51,7 @@ gem "daemon-spawn", "~> 0.4.2"
 gem "unicorn"
 # 用于组合小图片
 gem "sprite-factory", "1.4.1"
+gem 'twitter-bootstrap-rails', :git => "git://github.com/seyhunak/twitter-bootstrap-rails.git", :branch => "static"
 
 group :assets do
   gem 'sass-rails', "  ~> 3.1.4"

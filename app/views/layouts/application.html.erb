@@ -54,10 +54,10 @@
           </li>
         </ul>
         <% else %>
-          <ul class="nav secondary-nav" id="userbar">
-            <li<%=' class=active' if params[:controller] == "devise/registrations" and params[:action] == "new" %>><a href="<%= new_user_registration_path %>">注册</a></li>
-            <li<%=' class=active' if params[:controller] == "devise/sessions" and params[:action] == "new" %>><a href="<%= new_user_session_path %>">登录</a></li> 
-          </ul>
+          <%= render_list :class => "nav secondary-nav", :id => "userbar" do |li|
+            li << link_to("注册",new_user_registration_path)
+            li << link_to("登录", new_user_session_path )
+          end %>
         <% end %>
       </div>
     </div>

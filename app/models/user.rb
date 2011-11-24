@@ -60,6 +60,11 @@ class User
 
   scope :hot, desc(:replies_count, :topics_count)
 
+  def self.find_for_database_authentication(conditions)
+    login = conditions.delete(:login)
+    self.where(:login => /^#{login}$/i).first
+  end
+
   def password_required?
     return false if self.guest
     (authorizations.empty? || !password.blank?) && super  

@@ -1,6 +1,7 @@
 <% if !@node.blank? %>
   <div class="box">
     <h2><%= link_to(@node.name,  node_topics_path(@node))%></h2>
+
     <%=  render_node_summary(@node) if ["new"].index(params[:action]) %>
 
     <div class="content">

@@ -30,7 +30,7 @@ class User
       end
     end
     
-    
+     
     def find_or_create_for_github(response)
       provider = response["provider"]
       uid = response["uid"]

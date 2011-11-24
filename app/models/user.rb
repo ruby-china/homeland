@@ -132,5 +132,10 @@ class User
     self.authorizations.collect { |a| a.provider }.include?(provider)
   end
   
+  def bind_service(response)
+     provider = response["provider"]
+     uid = response["uid"]
+     authorizations.create(:provider => provider , :uid => uid ) 
+   end
 
 end

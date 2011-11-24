@@ -13,9 +13,10 @@ RubyChina::Application.routes.draw do
  
 
   devise_for :users, :path => "account", :controllers => { 
-    :registrations => "registrations",
     :omniauth_callbacks => "users/omniauth_callbacks" 
   }
+  
+  match "account/auth/:provider/unbind", :to => "users#auth_unbind"
   
   resources :users
   resources :notifications, :only => [:index, :destroy] do

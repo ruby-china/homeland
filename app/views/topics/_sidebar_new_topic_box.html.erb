@@ -1,0 +1,10 @@
+<div class="box" style="text-align:center;">
+  <p>
+    <a href="<%= new_topic_path %>" class="btn success">发布新帖</a>
+  </p>
+  <hr>
+      <p>
+          <a href="<%= feed_topics_url %>" title="用RSS阅读器订阅<%= Setting.app_name %>社区新贴">
+              <%= image_tag('feed.png', :alt => "订阅#{Setting.app_name}社区新贴") %></a>
+      </p>
+</div>

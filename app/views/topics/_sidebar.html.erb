@@ -11,33 +11,12 @@
       <a class="btn success" href="<%= new_topic_path(:node => @node.id) %>">发布新帖</a>
     </div>
   </div>
-<% elsif ["index","recent"].include?(action_name) %>
-  <div class="box" style="text-align:center;">
-    <p>
-      <a href="<%= new_topic_path %>" class="btn success">发布新帖</a>
-    </p>
-    <hr>
-        <p>
-            <a href="<%= feed_topics_url %>" title="用RSS阅读器订阅<%= Setting.app_name %>社区新贴">
-                <%= image_tag('feed.png', :alt => "订阅#{Setting.app_name}社区新贴") %></a>
-        </p>
-  </div>
 <% end %>
 
-<% if action_name == "index" %>
-  <%= render_cell :topics, :sidebar_suggest_topics %>
-  <%= raw SiteConfig.topic_index_sidebar_html %>
-  <%= render_cell :topics, :sidebar_hot_nodes %>
-<% end %>
+
 
 <% if ["new"].include?(action_name) %>
-  <div id="topic_new_tip" class="box">
-    <h2>发贴说明</h2>
-    <%= render "/shared/reply_help_block" %>
-  </div>
+    <%= render :patial => "sidebar_for_topic_new_tip"%>
 <% end %>
 
-<% if action_name == "index" %>
-  <%= render_cell :topics, :sidebar_statistics %>
-<% end %>
 </div>

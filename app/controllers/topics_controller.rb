@@ -1,6 +1,7 @@
 # coding: utf-8  
 class TopicsController < ApplicationController
   before_filter :require_user, :only => [:new,:edit,:create,:update,:destroy,:reply]
+  before_filter :set_menu_active
   caches_page :feed, :expires_in => 1.hours
 
   def index
@@ -66,6 +67,8 @@ class TopicsController < ApplicationController
       end
     end
     set_seo_meta("发帖子 &raquo; 社区")
+   drop_breadcrumb("社区")
+   drop_breadcrumb("新建贴子")
   end
 
   def reply
@@ -118,6 +121,12 @@ class TopicsController < ApplicationController
     @topic = current_user.topics.find(params[:id])
     @topic.destroy
     redirect_to(topics_path, :notice => '帖子删除成功.')
+  end
+  
+  protected
+  
+  def set_menu_active
+    @current = @current = ['/topics']
   end
   
   private

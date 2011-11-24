@@ -3,6 +3,8 @@ class PagesController < ApplicationController
   before_filter :check_lock, :only => [:edit, :update]
   before_filter :require_user, :only => [:new, :edit, :create, :update]
   before_filter :check_permissions, :only => [:new, :edit, :create, :update]
+  before_filter :set_menu_active
+  
   def index
     set_seo_meta("Wiki")
     drop_breadcrumb("Wiki")
@@ -68,6 +70,13 @@ class PagesController < ApplicationController
     end
   end
   
+  protected
+  
+  def set_menu_active
+    @current = @current = ['/wiki']
+  end
+
+
   private
     def check_lock
       @page = Page.find(params[:id])

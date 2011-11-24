@@ -30,7 +30,7 @@ class UsersController < ApplicationController
   protected
   
   def set_menu_active
-    @current = @current = ['/posts']
+    @current = @current = ['/users']
   end
   
   def init_base_breadcrumb

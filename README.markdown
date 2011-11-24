@@ -22,6 +22,11 @@ This is source code of [Ruby China Group](http://ruby-china.org)
   $ cap deploy
   ```
 
+## OAuth
+
+be sure to use: http://ruby-china.dev/
+callback url: http://ruby-china.dev/account/auth/github/callback
+
 ## Contributors
 
 * [Contributors](https://github.com/huacnlee/ruby-china/contributors)

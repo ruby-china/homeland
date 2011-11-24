@@ -4,6 +4,7 @@ gem "rails", "3.1.1"
 gem "bson", "1.3.1"
 gem "bson_ext", "1.3.1"
 gem "mongoid", "2.2.4"
+
 # 上传组件
 gem 'carrierwave', '0.5.6'
 gem 'carrierwave-mongoid', '0.1.2', :require => 'carrierwave/mongoid'
@@ -14,12 +15,16 @@ gem 'mongo-rails-instrumentation','0.2.4'
 # Mongoid 使用自增整形ID
 gem 'mongoid_auto_increment_id', "0.2.2"
 # 用户系统
-gem "devise", "1.4.5"
+gem 'devise', :git => 'https://github.com/plataformatec/devise.git'
 # 分页
 gem 'will_paginate', '3.0.pre2'  
 # 三方平台 OAuth 验证登陆
-gem 'omniauth', '0.3.0'
-gem "oa-openid", '0.3.0'
+gem "omniauth"
+gem 'omniauth-openid'
+gem "omniauth-github"
+gem "omniauth-twitter"
+gem "omniauth-douban", :git => "git://github.com/xdite/omniauth-douban.git"
+
 # Rails cache 存放到 Redis
 gem 'dalli', '1.1.1'
 # 搜索相关的组件

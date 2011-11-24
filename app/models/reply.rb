@@ -13,10 +13,12 @@ class Reply
   field :mentioned_user_ids, :type => Array, :default => []
   
   belongs_to :user, :inverse_of => :replies
-  counter_cache :name => :user, :inverse_of => :replies
   belongs_to :topic, :inverse_of => :replies
-  counter_cache :name => :topic, :inverse_of => :replies
   has_many :notifications, :class_name => 'Notification::Base', :dependent => :delete
+ 
+  counter_cache :name => :user, :inverse_of => :replies
+  counter_cache :name => :topic, :inverse_of => :replies
+  
   
   index :user_id
   index :topic_id
@@ -24,6 +26,7 @@ class Reply
   attr_protected :user_id, :topic_id
 
   validates_presence_of :body
+  
   after_create :update_parent_topic
   def update_parent_topic
     self.topic.replied_at = Time.now

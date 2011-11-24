@@ -10,10 +10,14 @@ RubyChina::Application.routes.draw do
   resources :notes
   match "/uploads/*path" => "gridfs#serve"
   root :to => "home#index"  
-  match "auth/:provider/callback", :to => "home#auth_callback"  
-  match "auth/:provider/unbind", :to => "home#auth_unbind"  
+ 
+
+  devise_for :users, :path => "account", :controllers => { 
+    :omniauth_callbacks => "users/omniauth_callbacks" 
+  }
   
-  devise_for :users, :path => "account"
+  match "account/auth/:provider/unbind", :to => "users#auth_unbind"
+  
   resources :users
   resources :notifications, :only => [:index, :destroy] do
     collection do

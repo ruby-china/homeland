@@ -73,12 +73,13 @@ class TopicsController < ApplicationController
     end
   end
 
+
   def edit
     @topic = current_user.topics.find(params[:id])
     @node = @topic.node
     set_seo_meta("改帖子 &raquo; 社区")
   end
-  
+
   def create
     pt = params[:topic]
     @topic = Topic.new(pt)
@@ -111,4 +112,14 @@ class TopicsController < ApplicationController
     @topic.destroy
     redirect_to(topics_path, :notice => '帖子删除成功.')
   end
+  
+  private
+  
+  def init_list_sidebar 
+   if !fragment_exist? "topic/init_list_sidebar/hot_nodes"
+      @hot_nodes = Node.hots.limit(10)
+    end
+    set_seo_meta("社区")
+  end
+  
 end

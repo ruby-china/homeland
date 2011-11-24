@@ -1,3 +1,4 @@
+require 'openid/store/filesystem'
 # Use this hook to configure devise mailer, warden hooks and so forth. The first
 # four configuration values can also be set straight in your models.
 Devise.setup do |config|
@@ -126,7 +127,11 @@ Devise.setup do |config|
   # If you have any extra navigational formats, like :iphone or :mobile, you
   # should add them to the navigational formats lists. Default is [:html]
   # config.navigational_formats = [:html, :iphone]
-
+  config.omniauth :github, Setting.github_token, Setting.github_secret
+  config.omniauth :twitter, Setting.twitter_token, Setting.twitter_secret
+  config.omniauth :douban, Setting.douban_token, Setting.douban_secret
+  config.omniauth :open_id, :store => OpenID::Store::Filesystem.new('/tmp'), :name => 'google', :identifier => 'https://www.google.com/accounts/o8/id', :require => 'omniauth-openid'
+  
   # ==> Warden configuration
   # If you want to use other strategies, that are not (yet) supported by Devise,
   # you can configure them inside the config.warden block. The example below

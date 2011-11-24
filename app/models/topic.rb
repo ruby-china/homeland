@@ -96,7 +96,7 @@ class Topic
       uids = uids.dup
     end
 
-		uids << user_id
+    uids << user_id
     Rails.cache.write("Topic:user_read:#{self.id}",uids)
   end
 

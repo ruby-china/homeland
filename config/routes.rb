@@ -70,7 +70,6 @@ RubyChina::Application.routes.draw do
   end  
   
   if Rails.env.development?
-    mount TopicMailer::Preview => 'mails/topic'
     mount UserMailer::Preview => 'mails/user'
   end
 end

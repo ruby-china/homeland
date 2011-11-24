@@ -35,11 +35,6 @@ class Reply
     self.topic.push_follower(self.user_id)
     self.topic.save
   end
-  
-  after_create :send_mail_notify
-  def send_mail_notify
-    TopicMailer.got_reply(self)
-  end
 
   before_save :extract_mentioned_users
   def extract_mentioned_users

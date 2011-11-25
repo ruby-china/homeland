@@ -9,6 +9,6 @@ module PostsHelper
     limit = 5
     tags = post.tags
     tags = tags[0..limit-1] if tags.count > limit
-    raw tags.collect { |tag| "<a href='#{posts_path(:tag => tag)}' class='tag'>#{tag}</a>" }.join(", ")
+    raw tags.collect { |tag| link_to(tag,posts_path(:tag => tag)) }.join(", ")
   end
 end

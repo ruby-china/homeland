@@ -21,7 +21,7 @@
     <%= f.input :body, :as => :text, :input_html => { :class => "topic_body_text_area xxlarge", :style => "height:400px" }%>
 
     <div class="actions">
-      <input type="submit" value="保存" class="btn primary"> 
+      <input type="submit" value="<%= t("common.save") %>" class="btn primary"> 
       <%= link_to("取消", @topic.id.blank? ? root_path : topic_path(@topic), :class => "btn")%>
     </div>
   </fieldset>

@@ -7,7 +7,7 @@
     <%= f.text_area :body, :class => "span16", :style => "height:500px" %>
     <p class="help-block">请用 <a href="http://en.wikipedia.org/wiki/Markdown" target="_blank">Markdown</a> 文档格式编写.</p>
     <div class="buttons">
-      <button type="submit" class="btn primary">保存</button> <a href="<%= notes_path %>" class="btn">取消</a> 
+      <button type="submit" class="btn primary"><%= t("common.save") %></button> <a href="<%= notes_path %>" class="btn">取消</a> 
     </div>
   </fieldset>
 <% end %>

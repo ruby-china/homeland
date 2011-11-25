@@ -1,0 +1,6 @@
+<% if !@user.bio.blank? %>
+<div class="bio box">
+    <h5>个人介绍</h5>
+    <p><%= auto_link(simple_format(@user.bio)) %></p>
+</div>
+<% end %>

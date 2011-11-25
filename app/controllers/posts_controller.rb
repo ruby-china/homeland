@@ -38,8 +38,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(params[:post])
-    @post.user_id = current_user.id
+    @post = current_user.posts.build(params[:post])
     
     if @post.save
       redirect_to @post, notice: '投稿成功，需等待审核通过以后才能显示到文章列表。'

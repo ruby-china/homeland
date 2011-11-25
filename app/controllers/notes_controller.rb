@@ -28,7 +28,7 @@ class NotesController < ApplicationController
   def new
     @note = current_user.notes.build
     set_seo_meta("新建 &raquo; 记事本")
-    drop_breadcrumb("新建")
+    drop_breadcrumb(t("common.create"))
   end
 
 

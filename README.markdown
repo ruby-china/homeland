@@ -58,6 +58,12 @@ This is source code of [Ruby China Group](http://ruby-china.org)
 * common/share : for social share
 * common/user\_nav : user\_navigation_bar
 
+## Styling Guide
+
+* Don't put plain html in helper
+* NEVER LOGIC in View
+* 重複用到的方法請隨手用 Helper 包
+
 ## Contributors
 
 * [Contributors](https://github.com/huacnlee/ruby-china/contributors)

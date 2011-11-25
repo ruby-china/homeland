@@ -3,14 +3,7 @@
   <div class="info">目前已经有<%= User.count %>位会员加入了 <%= Setting.app_name %>。</div> 
   <div id="hot_users" class="user_list box row">
     <h2>活跃会员</h2>
-    <% cache("users/index:hot", :expires_in => 1.days) do %>
-      <% User.hot.limit(20).each do |item| %>
-        <div class="item span1">
-          <div class="avatar"><%= user_avatar_tag(item) %></div>
-          <div class="name"><%= user_name_tag(item) %></div>
-        </div>
-      <% end %>
-    <% end %>
+    <%= render_cell :users, :hot_users %>
   </div>
 
   <div id="recent_users" class="user_list box row">

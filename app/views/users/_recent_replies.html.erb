@@ -5,7 +5,7 @@
         next if reply.topic.blank? %>
         <li>
           <h6>
-            <%= l reply.created_at, :format => :short %>
+            <%= render_reply_at(reply) %>
             在
             <%= render_topic_title(reply.topic) %>
             回复：

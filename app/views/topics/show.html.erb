@@ -11,19 +11,19 @@
     <div class="topics box">
         <div class="topic">   
         <div class="pull-right avatar_large">
-                <%= user_avatar_tag(@topic.user, :large, :link => false) %>
+            <%= user_avatar_tag(@topic.user, :large, :link => false) %>
         </div>
         <div class="infos">
                 <h1><%= truncate(@topic.title, :length => 100) %></h1>
                 <div class="info leader">
                     由 <%= user_name_tag(@topic.user) %>
-                    在 <a href="<%= node_topics_path(@topic.node_id) %>"><%= @topic.node.name %></a> 节点中发起
+                    在 <%= link_to(@topic.node.name, node_topics_path(@topic.node_id))%> 节点中发起
                 </div>
                 <div class="info time">
                     <% if @topic.last_reply_user.blank? %>
-                        发布于 <%= timeago(@topic.created_at) %>
+                        发布于 <%= render_topic_created_at(topic) %>
                     <% else %>
-                        最后由 <%= user_name_tag(@topic.last_reply_user) %> 回复于 <%= timeago(@topic.replied_at) %>
+                        最后由 <%= user_name_tag(@topic.last_reply_user) %> 回复于 <%= render_topic_last_be_replied_time(@topic) %>
                     <% end %>
                     , <%= @topic.hits %>次阅读
                 </div>
@@ -36,26 +36,14 @@
         <%= raw SiteConfig.after_topic_html %>
         <div class="tools pull-right">
           <% if owner?(@topic) %>
-              <a href="<%= edit_topic_path(@topic.id) %>" class="label success">修改</a><%= link_to "删除", topic_path(@topic.id), :method => :delete, :confirm => "确定要删除么？", :class => "label important" %>
+              <%= link_to("修改", edit_topic_path(@topic), :class => "label success" )%>
+              <%= link_to "删除", topic_path(@topic.id), :method => :delete, :confirm => "确定要删除么？", :class => "label important" %>
             <% end %>
         </div>
         <%= render :partial => "common/share", :locals => {:title => @topic.title} %>
     </div>
 
-  <% if @replies.blank? %>
-    <div class="no_result">
-      暂无回复。
-    </div>
-  <% else %>
-  <div id="replies" class="box">
-    <div class="total">
-      截止 <%= l @topic.replied_at, :format => :long %>, 共收到 <%= @topic.replies_count %> 条回复
-    </div>
-    <% @replies.each_with_index do |reply,i| %>
-      <%= render "reply", :item => reply, :i => i %>
-    <% end %>
-  </div>
-  <% end %>
+    <%= render :partial => "topicc/replies", :locals => { :topic => @topic, :replies => @replies} %>
 
     <% if current_user %>
   <div id="reply" class="form box">

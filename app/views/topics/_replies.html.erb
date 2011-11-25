@@ -1,0 +1,14 @@
+<% if replies.blank? %>
+  <div class="no_result">
+    暂无回复。
+  </div>
+<% else %>
+<div id="replies" class="box">
+  <div class="total">
+    截止 <%= render_topic_last_be_replied_time(topic) %>, 共收到 <%= render_topic_count(topic) %> 条回复
+  </div>
+  <% replies.each_with_index do |reply,i| %>
+    <%= render "reply", :item => reply, :i => i %>
+  <% end %>
+</div>
+<% end %>

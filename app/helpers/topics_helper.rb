@@ -41,4 +41,12 @@ module TopicsHelper
   def render_topic_count(topic)
     topic.replies_count
   end
+  
+  def render_topic_created_at(topic)
+    timeago(topic.created_at)
+  end
+  
+  def render_topic_last_be_replied_time(topic)
+    timeago(topic.replied_at)
+  end
 end

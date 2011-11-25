@@ -4,6 +4,9 @@
     create: "新增"
     avatar: "頭像"
     save: "儲存"
+    delete: "删除"
+    place_top: "置頂"
+    un_top: "移除置頂"
   menu:
     topics: "社區"
     wiki: "Wiki"
@@ -31,3 +34,5 @@
       edit_setting: "修改設定"
     users:
       trust_user_can_modify_wiki: "受信任使用者將可以修改 Wiki"
+    topic_list: "討論串列表"
+      

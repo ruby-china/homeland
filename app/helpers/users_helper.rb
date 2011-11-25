@@ -55,6 +55,16 @@ module UsersHelper
     link_to(user.website, user.website, :target => "_blank", :rel => "nofollow")
   end
   
+  def render_user_level_tag(user)
+    if admin?(user)
+      content_tag(:span, "管理员", :class => "label warning")
+    elsif wiki_editor?(user)
+      content_tag(:span, "Wiki 管理", :class => "label success")
+    else
+      content_tag(:span, "普通用户", :class => "label")
+    end
+  end
+  
   private
   
   def user_popover_info(user)

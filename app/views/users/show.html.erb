@@ -7,6 +7,8 @@
 
 <div class="content">
     <div class="userinfo box">
+        
+        <% render_user_level_tag(@user) %>
       <% if admin?(@user) %>
         <span class="label warning">管理员</span>
       <% elsif wiki_editor?(@user) %>

@@ -29,7 +29,7 @@ module UsersHelper
     img = image_tag(img_src)
     html = ""
     if link
-      html = link_to(img, user_path(user.login), user_popover_info(user).merge(:class => "user_avatar"))
+      html = %(<a href="#{user_path(user.login)}" #{user_popover_info(user)} class="user_avatar">#{img}</a>)
     else
       html = img
     end
@@ -73,6 +73,6 @@ module UsersHelper
     return "" if user.location.blank?
     title = user.location.blank? ? "#{user.login}" : "<i>#{user.location}</i> #{user.login}"
     tagline = user.tagline.blank? ? "这哥们儿没签名" : truncate(user.tagline, :length => 20)
-    return { :rel => "popover", :title => title.html_safe , "data-content" => tagline }
+    raw %(rel="popover" data-placement="below" title="#{h(title)}" data-content="#{h(tagline)}")
   end
 end

@@ -40,7 +40,6 @@ module RubyChina
     
     config.mongoid.include_root_in_json = false
     
-    config.assets.precompile += %w(application.css application.js topics.css topics.js window.css front.css cpanel.css users.css posts.css posts.js pages.css pages.js notifications.js notifications.css)
     config.assets.enabled = true
     config.assets.version = '1.0'
 

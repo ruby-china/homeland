@@ -2,10 +2,8 @@
 <div id="page_show" class="box">
   <% if !@page.locked or admin? %>
     <div class="info">
-      版本 <%= @page.version %>， 最后更新于 <%= timeago @page.updated_at %>
-      <% if wiki_editor? %>
-        <%= link_to("编辑", edit_page_path(@page), :class => "label success")%>
-      <% end %>
+      版本 <%= render_page_version(@page) %>， 最后更新于 <%= render_page_updated_at(page) %>
+      <%= render_edit_page_button(@page) if wiki_editor? %>
     </div>
   <% end %>
   <div style="text-align:right;">

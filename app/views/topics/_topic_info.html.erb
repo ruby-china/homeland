@@ -2,7 +2,7 @@
         <h1><%= truncate(topic.title, :length => 100) %></h1>
         <div class="info leader">
             由 <%= user_name_tag(topic.user) %>
-            在 <%= link_to(topic.node.name, node_topics_path(topic.node_id))%> 节点中发起
+            在 <%= render_node_name(topic.node) %> 节点中发起
         </div>
         <div class="info time">
             <% if topic.last_reply_user.blank? %>

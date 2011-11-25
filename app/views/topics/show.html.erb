@@ -34,7 +34,7 @@
         <%= render :partial => "common/share", :locals => {:title => @topic.title} %>
     </div>
 
-    <%= render :partial => "topicc/replies", :locals => { :topic => @topic, :replies => @replies} %>
+    <%= render :partial => "topics/replies", :locals => { :topic => @topic, :replies => @replies} %>
 
     <% if current_user %>
   <div id="reply" class="form box">

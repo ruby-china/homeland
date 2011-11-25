@@ -1,3 +1,4 @@
+# coding: utf-8  
 module PagesHelper
   def page_title_tag(page)
     return "" if page.blank?

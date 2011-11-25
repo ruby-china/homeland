@@ -1,41 +1,28 @@
 # coding: utf-8  
 class PhotosController < ApplicationController
   before_filter :require_user, :only => [:tiny_new,:new,:edit,:create,:update,:destroy]
-  # GET /photos
-  # GET /photos.xml
+
   def index
     @photos = Photo.all
   end
 
-  # GET /photos/1
-  # GET /photos/1.xml
   def show
     @photo = Photo.find(params[:id])
   end
   
-  # GET /photos/new
-  # GET /photos/new.xml
   def tiny_new
     @photo = Photo.new
     render :layout => "window"
   end
 
-  # GET /photos/new
-  # GET /photos/new.xml
   def new
     @photo = Photo.new
   end
 
-  # GET /photos/1/edit
   def edit
-    @photo = Photo.find(params[:id])
-    if @photo.user_id != current_user.id
-      render_404
-    end
+    @photo = current_user.photos.find(params[:id])
   end
 
-  # POST /photos
-  # POST /photos.xml
   def create
     # 浮动窗口上传    
     if params[:tiny] == '1'
@@ -79,13 +66,9 @@ class PhotosController < ApplicationController
     end 
   end
 
-  # PUT /photos/1
-  # PUT /photos/1.xml
   def update
-    @photo = Photo.find(params[:id])
-    if @photo.user_id != current_user.id
-      render_404
-    end
+    @photo = current_user.photos.find(params[:id])
+    
     if @photo.update_attributes(params[:photo])
       redirect_to(@photo, :notice => 'Photo was successfully updated.')
     else
@@ -93,13 +76,9 @@ class PhotosController < ApplicationController
     end
   end
 
-  # DELETE /photos/1
-  # DELETE /photos/1.xml
+
   def destroy
-    @photo = Photo.find(params[:id])
-    if @photo.user_id != current_user.id
-      render_404
-    end
+    @photo = current_user.photos.find(params[:id])
     @photo.destroy
 
     redirect_to(photos_url)

@@ -8,7 +8,9 @@
       <% end %>
     </div>
   <% end %>
-  <div style="text-align:right;"><%= share_tag(@page.title) %></div>
+  <div style="text-align:right;">
+    <%= render :partial => "common/share", :title => @page.title %>
+  </div>
   <div class="wikistyle">
     <%= raw @page.body_html %>
   </div>

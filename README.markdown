@@ -53,6 +53,10 @@ This is source code of [Ruby China Group](http://ruby-china.org)
 ## Helpers
 
     render_topic_title(topic)
+## Common Partial
+
+* common/share : for social share
+* common/user\_nav : user\_navigation_bar
 
 ## Contributors
 

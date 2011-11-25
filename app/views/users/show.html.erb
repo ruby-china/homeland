@@ -27,7 +27,7 @@
             <li><span>加入时间:</span><%= render_user_join_time(@user) %></li>
             
             <% if !@user.tagline.blank? %>
-                <li><span>签名:</span><%= render_user_tag_line(@user) %></li>
+                <li><span>签名:</span><%= render_user_tagline(@user) %></li>
             <% end %>
             
             <% if !@user.github.blank? %>
@@ -40,7 +40,7 @@
         </ul>
     </div>
     
-    <%= render( :partial => "user/bio", :locals => { :bio => @user.bio }) if !@user.bio.blank? %>
+    <%= render( :partial => "users/bio", :locals => { :bio => @user.bio }) if !@user.bio.blank? %>
 
     <div class="box">
         <h5>最近发布的贴子</h5>

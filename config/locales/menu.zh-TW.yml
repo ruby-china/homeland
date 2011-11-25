@@ -1,0 +1,29 @@
+"zh-TW":
+  menu:
+    topics: "社區"
+    wiki: "Wiki"
+    posts: "文章"
+    users: "會員"
+  cpanel:
+    menu:
+      root_path: "系统概况"
+      site_configs: "全站設定"
+      users: "使用者"
+      sections: "分類"
+      nodes: "節點"
+      posts: "文章"
+      wiki: "Wiki"
+      topics: "討論"
+      replies: "回應"
+      photos: "圖片"    
+    overview: "概覽"
+    recent_topics: "最近討論"
+    statics: "統計資訊"
+    users: "使用者"
+    topics: "討論"
+    replies: "回覆"
+    notes: "記事本"
+    site_configs:
+      settings: "設定選項"
+      please_do_not_modify_key: "請勿修改 key"
+      edit_setting: "修改設定"

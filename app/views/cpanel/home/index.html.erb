@@ -1,10 +1,10 @@
 <% content_for :sitemap do %>
-  <span class="current">概览</span>
+  <span class="current"><%= t("cpanel.overview") %></span>
 <% end %>
 
 <% if !@recent_topics.blank? %>
 <div class="group">
-  <h2>最近帖子</h2>
+  <h2><%= t("cpanel.recent_topics") %></h2>
   <ul>
     <% @recent_topics.each do |item| %>
     <li><a href="<%= edit_cpanel_topic_path(item) %>"><%= truncate(item.title,:length => 50) %></a></li>
@@ -14,12 +14,12 @@
 <% end %>
 
 <div class="group">
-  <h2>统计信息</h2>
+  <h2><%= t("cpanel.statics") %></h2>
   <ul>
-        <li>用户: <%= User.count %> 人</li>
-        <li>贴子: <%= Topic.count %> 个</li>
-        <li>回复: <%= Reply.count %> 条</li>
-    <li>记事本: <%= Note.count %> 条</li>
+        <li><%= t("cpanel.users") %>: <%= User.count %> 人</li>
+        <li><%= t("cpanel.topics") %>: <%= Topic.count %> 个</li>
+        <li><%= t("cpanel.replies") %>: <%= Reply.count %> 条</li>
+        <li><%= t("cpanel.notes") %>: <%= Note.count %> 条</li>
   </ul>
 </div>
 

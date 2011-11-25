@@ -20,10 +20,10 @@
           <a href="/"><%= Setting.app_name %></a>
         </h3>
          <%= render_list :class => "nav" do |li|
-           li << link_to("社区", topics_path)
-           li << link_to("Wiki", pages_path )
-           li << link_to("文章", posts_path )
-           li << link_to("会员", users_path)
+           li << link_to(t("menu.topics"), topics_path)
+           li << link_to(t("menu.wiki"), pages_path )
+           li << link_to(t("menu.posts"), posts_path )
+           li << link_to(t("menu.users"), users_path)
          end %>
         <%= render :partial => "common/search_form" %>
         <%= render :partial => "common/user_nav" %>

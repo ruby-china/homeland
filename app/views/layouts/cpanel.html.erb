@@ -13,16 +13,16 @@
       <div class="container">
         <%= link_to("控制台", cpanel_root_path, :class => "brand")%>
         <%= render_list :class => "nav" do |li|
-          li << link_to("系统概况", cpanel_root_path)
-          li << link_to("全局设置", cpanel_site_configs_path )
-          li << link_to("用户",cpanel_users_path)
-          li << link_to("分类", cpanel_sections_path )
-          li << link_to("节点", cpanel_nodes_path )
-          li << link_to("文章",cpanel_posts_path )
-          li << link_to("Wiki",cpanel_pages_path )
-          li << link_to("帖子", cpanel_topics_path)
-          li << link_to("回复", cpanel_replies_path)
-          li << link_to("图片",cpanel_photos_path )
+          li << link_to(t("cpanel.menu.root_path"), cpanel_root_path)
+          li << link_to(t("cpanel.menu.site_configs"), cpanel_site_configs_path )
+          li << link_to(t("cpanel.menu.users"),cpanel_users_path)
+          li << link_to(t("cpanel.menu.sections"), cpanel_sections_path )
+          li << link_to(t("cpanel.menu.nodes"), cpanel_nodes_path )
+          li << link_to(t("cpanel.menu.posts"),cpanel_posts_path )
+          li << link_to(t("cpanel.menu.wiki"),cpanel_pages_path )
+          li << link_to(t("cpanel.menu.topics"), cpanel_topics_path)
+          li << link_to(t("cpanel.menu.replies"), cpanel_replies_path)
+          li << link_to(t("cpanel.menu.photos"),cpanel_photos_path )
         end  %>
 
         <ul class="nav secondary-nav" id="userbar">

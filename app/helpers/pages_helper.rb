@@ -2,7 +2,7 @@
 module PagesHelper
   def page_title_tag(page)
     return "" if page.blank?
-    raw "<a href='#{page_path(page.slug)}' class='page'>#{h(page.title)}</a>"
+    link_to(page.title, page_path(page.slug), :class => "page")
   end
   
   def render_page_version(page)

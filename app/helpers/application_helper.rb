@@ -1,5 +1,5 @@
 # coding: utf-8
-require 'rdiscount'
+require "rdiscount"
 module ApplicationHelper
 
   def notice_message
@@ -51,23 +51,23 @@ module ApplicationHelper
 
     def page_number(page)
       tag( :li, link(page, page, :rel => rel_value(page)), :class =>
-('active' if page == current_page))
+("active" if page == current_page))
     end
 
     def gap
-      tag(:li, link(super, '#'), :class => 'disabled')
+      tag(:li, link(super, "#"), :class => "disabled")
     end
 
     def previous_or_next_page(page, text, classname)
-      tag( :li, link(text, page || '#'), :class => [classname[0..3],
-classname, ('disabled' unless page)].join(' '))
+      tag( :li, link(text, page || "#"), :class => [classname[0..3],
+classname, ("disabled" unless page)].join(" "))
     end
   end
 
   def will_paginate1(pages)
-    will_paginate(pages, :class => 'pagination', :inner_window => 2,
+    will_paginate(pages, :class => "pagination", :inner_window => 2,
 :outer_window => 0, :renderer => BootstrapLinkRenderer, :previous_label =>
-'上一页'.html_safe, :next_label => '下一页'.html_safe)
+"上一页".html_safe, :next_label => "下一页".html_safe)
   end
 
   

@@ -1,23 +1,17 @@
 <div class="box">
     <h5>最近发布的贴子</h5>
     <table class="node_topics">
-  <tr class="head">
-    <td class="replies">回复数</td>
-    <td class="title">标题</td>
-    <td class="replied_at">最后回复时间</td>
-  </tr>
-  <% last_topics.each do |topic| %>
-  <tr class="topic">
-    <td class="replies">
-        <%= render_topic_count(topic)%>
-    </td>
-    <td class="title">
-        <%= link_to(truncate(topic.title, :length => 25), topic_path(topic))%>
-    </td>
-    <td class="replied_at">
-        <%= render_topic_last_reply_time(topic)%>
-    </td>
-  </tr>
-  <% end %>
-</table>
+        <tr class="head">
+          <td class="replies">回复数</td>
+          <td class="title">标题</td>
+          <td class="replied_at">最后回复时间</td>
+        </tr>
+        <% last_topics.each do |topic| %>
+        <tr class="topic">
+          <td class="replies"><%= render_topic_count(topic)%> </td>
+          <td class="title"><%= link_to(truncate(topic.title, :length => 25), topic_path(topic))%>      </td>
+          <td class="replied_at"> <%= render_topic_last_reply_time(topic)%></td>
+        </tr>
+        <% end %>
+    </table>
 </div>

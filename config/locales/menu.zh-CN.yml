@@ -38,3 +38,7 @@
       trust_user_can_modify_wiki: "信任用户将可以修改 Wiki"
     topic_list: "话题列表"
     check_photo: "瀏覽圖片"
+  share:
+    to_twitter: "转发到Twitter"
+    to_weibo: "转发到新浪微博"
+    to_douban: "转发到豆瓣"

@@ -1,4 +1,7 @@
 "zh-TW":
+  common:
+    edit: "修改"
+    create: "新增"
   menu:
     topics: "社區"
     wiki: "Wiki"
@@ -23,6 +26,7 @@
     topics: "討論"
     replies: "回覆"
     notes: "記事本"
+    sections: "分類"
     site_configs:
       settings: "設定選項"
       please_do_not_modify_key: "請勿修改 key"

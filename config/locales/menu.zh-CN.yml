@@ -1,4 +1,7 @@
 "zh-CN":
+  common:
+    edit: "修改"
+    create: "新建"
   menu:
     topics: "社区"
     wiki: "Wiki"
@@ -23,8 +26,10 @@
     topics: "贴子"
     replies: "回复"
     notes: "記事本"
+    sections: "分类"
     site_configs:
       settings: "设置项"
       please_do_not_modify_key: "请勿修改 key"
       edit_setting: "修改设置"
+    
   

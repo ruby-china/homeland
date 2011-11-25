@@ -12,7 +12,7 @@
       <% if !@node.blank? %>
         <div>
           <h2><%= @node.name %></h2>
-          <span class="total">共有 <%= @node.topics_count %> 个讨论主题</span>
+          <span class="total">共有 <%= render_node_topics_count(@node) %> 个讨论主题</span>
         </div>
         <div class="desc">
           <%= simple_format @node.summary %>

@@ -8,6 +8,6 @@
     <%= f.file_field :image %></div>
   </div>
   <div class="actions">
-    <button type="submit" class="btn primary">上传</button> or <%= link_to 'Back', photos_path %>
+    <button type="submit" class="btn primary"><%= t("common.upload")%></button> or <%= link_to 'Back', photos_path %>
   </div>
 <% end %>

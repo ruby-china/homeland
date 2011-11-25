@@ -12,6 +12,7 @@
     register: "註冊"
     login: "登錄"
     logout: "登出"
+    cancel: "取消"
   menu:
     topics: "社區"
     wiki: "Wiki"

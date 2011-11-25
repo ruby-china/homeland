@@ -22,7 +22,7 @@
 
     <div class="actions">
       <input type="submit" value="<%= t("common.save") %>" class="btn primary"> 
-      <%= link_to("取消", @topic.id.blank? ? root_path : topic_path(@topic), :class => "btn")%>
+      <%= link_to(t("common.cancel"), @topic.id.blank? ? root_path : topic_path(@topic), :class => "btn")%>
     </div>
   </fieldset>
 <% end %>

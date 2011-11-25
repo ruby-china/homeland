@@ -4,8 +4,8 @@ module UsersHelper
   def user_name_tag(user,options = {})
     location = options[:location] || false
     return "匿名" if user.blank?
-    result = %(<a href="#{user_path(user.login)}">#{user.login}</a>)
-    raw(result)
+    result = link_to(user.login, user_path(user.login))
+    return result
   end
 
   def user_avatar_tag(user,size = :normal, opts = {})

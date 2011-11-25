@@ -32,14 +32,12 @@
             <div class="pull-right replies">
               <% if topic.replies_count > 0 %>
               <% read_state = current_user.topic_read?(topic) if current_user %>
-              <%= link_to(topic.replies_count,
-                    topic_path(topic)+"#reply#{topic.replies_count}",
-                    :rel => "twipsy",
-                    :title =>"#{ topic_use_readed_text(read_state) if current_user}",
-                    :class => "count_state_#{read_state || false}" 
-                    )
-              %>
-              <% end %>
+             <%= link_to(topic.replies_count,topic_path(topic)+"#reply#{topic.replies_count}",
+                  :rel => "twipsy",
+                  :title => "#{topic_use_readed_text(read_state) if current_user}",
+                  :class => "count state_#{read_state || false}"
+              )%>
+            <% end %>
             </div>
             <div class="infos">
               <div class="title">

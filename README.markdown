@@ -63,6 +63,7 @@ This is source code of [Ruby China Group](http://ruby-china.org)
 * Don't put plain html in helper
 * NEVER LOGIC in View
 * 重複用到的方法請隨手用 Helper 包
+* 永遠使用括號 () 包覆複雜 Helper
 
 ## Contributors
 

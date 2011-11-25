@@ -10,30 +10,21 @@
 <div class="content">
     <div class="topics box">
         <div class="topic">   
+        
         <div class="pull-right avatar_large">
             <%= user_avatar_tag(@topic.user, :large, :link => false) %>
         </div>
-        <div class="infos">
-                <h1><%= truncate(@topic.title, :length => 100) %></h1>
-                <div class="info leader">
-                    由 <%= user_name_tag(@topic.user) %>
-                    在 <%= link_to(@topic.node.name, node_topics_path(@topic.node_id))%> 节点中发起
-                </div>
-                <div class="info time">
-                    <% if @topic.last_reply_user.blank? %>
-                        发布于 <%= render_topic_created_at(topic) %>
-                    <% else %>
-                        最后由 <%= user_name_tag(@topic.last_reply_user) %> 回复于 <%= render_topic_last_be_replied_time(@topic) %>
-                    <% end %>
-                    , <%= @topic.hits %>次阅读
-                </div>
-            </div>            
-        </div>
+        
+        <%= render :partial => "topics/topic_info", :locals => { :topic => @topic}%>
+        
         <%= raw SiteConfig.before_topic_html %>
+        
         <div class="body">
             <%= format_topic_body(@topic.body) %>
         </div>
+        
         <%= raw SiteConfig.after_topic_html %>
+        
         <div class="tools pull-right">
           <% if owner?(@topic) %>
               <%= link_to("修改", edit_topic_path(@topic), :class => "label success" )%>

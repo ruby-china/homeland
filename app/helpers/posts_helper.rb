@@ -1,7 +1,7 @@
 module PostsHelper
   def post_title_tag(post, opts = {})
     return "" if post.blank?
-    raw "<a href='#{post_path(post.id)}' title='#{post.title}'>#{post.title}</a>"
+    link_to(post.title, post_path(post), :title => post.title )
   end
   
   def post_tags_tag(post, opts = {})

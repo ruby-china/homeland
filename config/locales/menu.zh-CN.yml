@@ -2,6 +2,7 @@
   common:
     edit: "修改"
     create: "新建"
+    avatar: "头像"
   menu:
     topics: "社区"
     wiki: "Wiki"
@@ -19,17 +20,14 @@
       topics: "帖子"
       replies: "回复"
       photos: "图片"
+      notes: "記事本"
     overview: "概览"
     recent_topics: "最近帖子"
     statics: "统计信息"
-    users: "用户"
-    topics: "贴子"
-    replies: "回复"
-    notes: "記事本"
-    sections: "分类"
     site_configs:
       settings: "设置项"
       please_do_not_modify_key: "请勿修改 key"
       edit_setting: "修改设置"
-    
+    users:
+      trust_user_can_modify_wiki: "信任用户将可以修改 Wiki"
   

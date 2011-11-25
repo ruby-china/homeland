@@ -2,6 +2,7 @@
   common:
     edit: "修改"
     create: "新增"
+    avatar: "頭像"
   menu:
     topics: "社區"
     wiki: "Wiki"
@@ -18,16 +19,14 @@
       wiki: "Wiki"
       topics: "討論"
       replies: "回應"
-      photos: "圖片"    
+      photos: "圖片"   
+      notes: "記事本" 
     overview: "概覽"
     recent_topics: "最近討論"
     statics: "統計資訊"
-    users: "使用者"
-    topics: "討論"
-    replies: "回覆"
-    notes: "記事本"
-    sections: "分類"
     site_configs:
       settings: "設定選項"
       please_do_not_modify_key: "請勿修改 key"
       edit_setting: "修改設定"
+    users:
+      trust_user_can_modify_wiki: "受信任使用者將可以修改 Wiki"

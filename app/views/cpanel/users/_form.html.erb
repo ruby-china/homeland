@@ -37,7 +37,7 @@
     </div>
   </div>
   <div class="clearfix">
-    <label>头像</label>
+    <label><%= t("common.avatar")%></label>
     <div class="input">
     <%= user_avatar_tag(@user, :large) %>
     </div>
@@ -46,7 +46,7 @@
     <%= f.label :verified %>
     <div class="input">
     <%= f.check_box :verified, :class => "checkbox" %><br >
-    <span class="help-inline">信任用户将可以修改 Wiki</span>
+    <span class="help-inline"><%= t("cpanel.users.trust_user_can_modify_wiki")%></span>
     </div>
   </div>
   <div class="clearfix">

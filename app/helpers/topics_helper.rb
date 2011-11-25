@@ -29,4 +29,8 @@ module TopicsHelper
       "有新内容"
     end
   end
+
+  def render_topic_title(topic)
+    link_to(topic.title, topic_path(topic), :title => topic.title)
+  end
 end

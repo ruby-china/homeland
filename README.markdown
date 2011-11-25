@@ -49,6 +49,11 @@ This is source code of [Ruby China Group](http://ruby-china.org)
 
 <https://github.com/rafaelfranca/simple_form-bootstrap/blob/master/config/initializers/simple_form.rb>
 
+
+## Helpers
+
+    render_topic_title(topic)
+
 ## Contributors
 
 * [Contributors](https://github.com/huacnlee/ruby-china/contributors)

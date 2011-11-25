@@ -68,9 +68,7 @@
             <h6>
               <%= l reply.created_at, :format => :short %>
               在
-              <a href="<%= topic_path(reply.topic) %>">
-                <%= reply.topic.title %>
-              </a>
+              <%= render_topic_title(reply.topic) %>
               回复：
             </h6>
             <blockquote class="body">

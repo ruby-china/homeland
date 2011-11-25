@@ -19,7 +19,9 @@
     <td class="first"><%= reply.id %></td>
     <td><%= truncate(reply.body, :length => 50) %></td>
     <% if reply.topic %>
-      <td><a href="<%= topic_path(reply.topic_id) %>" title="<%= reply.topic.title %>"><%= reply.topic_id %></a></td>
+      <td>
+          <%= link_to(reply.topic_id, topic_path(reply.topic_id), :title => reply.topic.title)%>
+          </td>
       <% else %>
       <td><%= reply.topic_id %></td>
       <% end %>

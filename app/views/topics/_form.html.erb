@@ -12,7 +12,7 @@
       </div>
     </div>
      <div class="edit_tools">
-            <a href="#" onclick="return Topics.addImageClick();" id="add_image">上传图片</a>
+         <%= link_to("上传图片", "#", :onclick => "return Topics.addImageClick();", :id => "add_image")%>
         </div>
     <div class="clearfix">
       <%= f.label :body %>

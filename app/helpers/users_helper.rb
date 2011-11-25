@@ -22,13 +22,14 @@ module UsersHelper
       width = size
     end
     
-    hash = (user.blank? or user.email.blank?) ? Digest::MD5.hexdigest("") : Digest::MD5.hexdigest(user.email) 
-    return "<img src=\"http://www.gravatar.com/avatar/#{hash}?s=#{width}&d=identicon\" />" if user.blank?
+    hash = (user.blank? or user.email.blank?) ? Digest::MD5.hexdigest("") : Digest::MD5.hexdigest(user.email)
+    return image_tag("http://www.gravatar.com/avatar/#{hash}?s=#{width}&d=identicon")  if user.blank?
+    
     img_src = "http://www.gravatar.com/avatar/#{hash}?s=#{width}&d=identicon"
-    img = "<img src=\"#{img_src}\" />"
+    img = image_tag(img_src)
     html = ""
     if link
-      html = %(<a href="#{user_path(user.login)}" #{user_popover_info(user)} class="user_avatar">#{img}</a>)
+      html = link_to(img, user_path(user.login), user_popover_info(user).merge(:class => "user_avatar"))
     else
       html = img
     end
@@ -72,6 +73,6 @@ module UsersHelper
     return "" if user.location.blank?
     title = user.location.blank? ? "#{user.login}" : "<i>#{user.location}</i> #{user.login}"
     tagline = user.tagline.blank? ? "这哥们儿没签名" : truncate(user.tagline, :length => 20)
-    raw %(rel="popover" data-placement="below" title="#{h(title)}" data-content="#{h(tagline)}")
+    return { :rel => "popover", :title => title.html_safe , "data-content" => tagline }
   end
 end

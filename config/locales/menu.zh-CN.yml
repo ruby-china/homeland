@@ -8,6 +8,7 @@
     place_top: "置顶"
     un_top: "去置顶"
     upload: "上传"
+    published_at: "发表于"
   menu:
     topics: "社区"
     wiki: "Wiki"

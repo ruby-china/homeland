@@ -5,7 +5,7 @@
       <span class="name"><%= user_name_tag(item.user) %></span>
       <span class="time"><%= i + 1 %>楼, 回复于 <%= timeago(item.created_at) %>
         <% if owner?(item) %>
-            <%= link_to("修改", edit_reply_path(item))%>
+            <%= link_to(t("common.edit"), edit_reply_path(item))%>
         <% end %>
         <%= link_to(image_tag("reply.png"), "#", 
             :onclick => "return Topics.reply(#{i+1},'#{item.user.login}' );", 

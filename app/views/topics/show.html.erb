@@ -27,7 +27,7 @@
         
         <div class="tools pull-right">
           <% if owner?(@topic) %>
-              <%= link_to("修改", edit_topic_path(@topic), :class => "label success" )%>
+              <%= link_to(t("common.edit"), edit_topic_path(@topic), :class => "label success" )%>
               <%= link_to "删除", topic_path(@topic.id), :method => :delete, :confirm => "确定要删除么？", :class => "label important" %>
             <% end %>
         </div>

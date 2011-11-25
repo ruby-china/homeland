@@ -21,7 +21,7 @@
     <td><%= l post.created_at,:format => :short %></td>
     <td><%= render_post_state_s(post) %></td>
     <td><%= link_to t("common.edit"), edit_cpanel_post_path(post) %>
-    <%= link_to "删除", cpanel_post_path(post), :confirm => "Are you sure?", :method => :delete %></td>
+    <%= link_to t("common.delete"), cpanel_post_path(post), :confirm => "Are you sure?", :method => :delete %></td>
   </tr>
 <% end %>
 </table>

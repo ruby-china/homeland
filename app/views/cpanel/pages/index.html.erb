@@ -25,7 +25,7 @@
     <td>
       <%= link_to '版本历史', cpanel_page_versions_path(page.id) %>
     <%= link_to t("common.edit"), edit_cpanel_page_path(page) %>
-    <%= link_to '删除', cpanel_page_path(page), :confirm => 'Are you sure?', :method => :delete %></td>
+    <%= link_to t("common.delete"), cpanel_page_path(page), :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

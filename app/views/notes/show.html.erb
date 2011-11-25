@@ -14,8 +14,8 @@
     
     <% if owner? @note %>
       <div class="buttons">
-        <a href="<%= edit_note_path(@note) %>" class="btn">编辑</a>
-        <%= link_to "删除", note_path(@note),:confirm => "确定要删除吗？", :method => :delete, :class => "btn danger"  %>
+        <a href="<%= edit_note_path(@note) %>" class="btn"><%= t("common.edit")%></a>
+        <%= link_to t("common.delete"), note_path(@note),:confirm => "确定要删除吗？", :method => :delete, :class => "btn danger"  %>
       </div>
     <% end %>
   </div>

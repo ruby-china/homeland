@@ -28,7 +28,7 @@
     <td><%= reply.user.login if reply.user %></td>
     <td><%= l reply.created_at, :format => :short %></td>
     <td><%= link_to t("common.edit"), edit_cpanel_reply_path(reply) %>
-    <%= link_to '删除', cpanel_reply_path(reply), :confirm => 'Are you sure?', :method => :delete %></td>
+    <%= link_to t("common.delete"), cpanel_reply_path(reply), :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

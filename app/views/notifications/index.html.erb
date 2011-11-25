@@ -22,7 +22,7 @@
           <tr id="<%= notification.anchor %>">
             <%= render :partial => "notifications/#{notification.class.name.underscore}", :locals => {:notification => notification} %>
             <td class="last">
-              <%= link_to '删除', notification_path(notification), :method => :delete, :remote => true, :class => 'label delete' %>
+              <%= link_to t("common.delete"), notification_path(notification), :method => :delete, :remote => true, :class => 'label delete' %>
             </td>
           </tr>
         <% end -%>

@@ -9,7 +9,8 @@
     </div>
   <% end %>
   <div style="text-align:right;">
-    <%= render :partial => "common/share", :title => @page.title %>
+      
+    <%= render :partial => "common/share", :locals => {:title => @page.title} %>
   </div>
   <div class="wikistyle">
     <%= raw @page.body_html %>

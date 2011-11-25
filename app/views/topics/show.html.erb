@@ -2,7 +2,11 @@
 <%= content_for :sitemap do %>
   <li class="active">查看贴子</li>
 <% end %>
-<%= render 'sidebar' %>
+
+<div class="sidebar">
+    <%= render_cell :topics, :sidebar_for_new_topic_node, { :action => params[:action], :node => @node } %>
+</div>
+
 <div class="content">
     <div class="topics box">
         <div class="topic">   

@@ -2,8 +2,7 @@
 
 class ApplicationController < ActionController::Base
   protect_from_forgery  
-
-
+  
   def render_404
     render_optional_error_file(404)
   end

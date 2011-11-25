@@ -1,5 +1,11 @@
 <%= render 'base' %>
-<%= render 'sidebar' %>
+
+<div class="sidebar">
+    <%= render 'sidebar_for_topic_index' if params[:action] == "index" %>
+    <%= render 'sidebar_for_topic_recent' if params[:action] == "recent" %>
+    <%= render "sidebar_new_topic_box" if params[:action] == "node" %>
+</div>
+
 <div class="content">
     <div class="box">
     <div id="node_info">

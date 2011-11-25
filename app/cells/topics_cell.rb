@@ -1,5 +1,8 @@
 # coding: utf-8
 class TopicsCell < BaseCell  
+  
+  helper :nodes
+  
   # 首页节点目录
   cache :index_sections do |cell|
     "index_sections:#{CacheVersion.section_node_updated_at}"
@@ -29,5 +32,11 @@ class TopicsCell < BaseCell
   def sidebar_suggest_topics
     @suggest_topics = Topic.suggest.limit(5)
     render
+  end
+  
+  def sidebar_for_new_topic_node(args)
+    @node = args[:node]
+    @action = args[:action]
+    render 
   end
 end

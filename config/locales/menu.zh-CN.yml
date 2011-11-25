@@ -9,11 +9,18 @@
     un_top: "去置顶"
     upload: "上传"
     published_at: "发表于"
+    register: "注册"
+    login: "登录"
+    logout: "退出"
   menu:
     topics: "社区"
     wiki: "Wiki"
     posts: "文章"
     users: "会员"
+    cpanel: "后台"  
+    notes: "記事本"
+    my_home_page: "我的主页"
+    edit_account_path: "个人资料设置"
   cpanel:
     menu:
       root_path: "系统概况"

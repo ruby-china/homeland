@@ -13,19 +13,19 @@
   <li>
     <%= link_to(current_user.login,user_path(current_user.login), :class => "dropdown-toggle")%>
     <%= render_list :class => "dropdown-menu" do |li|
-      li << link_to("我的主页", user_path(current_user.login) )
+      li << link_to(t("menu.my_home_page"), user_path(current_user.login) )
       unless params[:controller].match(/cpanel/)
-        li << link_to("个人资料设置",edit_user_registration_path)
-        li << link_to("记事本", notes_path )
-        li << link_to("后台", "/cpanel")
+        li << link_to(t("menu.edit_account_path"),edit_user_registration_path)
+        li << link_to(t("menu.notes"), notes_path )
+        li << link_to(t("menu.cpanel"), "/cpanel")
       end
-      li << link_to("退出", destroy_user_session_path )
+      li << link_to(t("common.logout"), destroy_user_session_path )
     end %>
   </li>
 </ul>
 <% else %>
   <%= render_list :class => "nav secondary-nav", :id => "userbar" do |li|
-    li << link_to("注册",new_user_registration_path)
-    li << link_to("登录", new_user_session_path )
+    li << link_to( t("common.register"),new_user_registration_path)
+    li << link_to( t("common.login"), new_user_session_path )
   end %>
 <% end %>

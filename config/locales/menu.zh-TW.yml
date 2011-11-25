@@ -9,11 +9,18 @@
     un_top: "移除置頂"
     upload: "上傳"
     published_at: "發表於"
+    register: "註冊"
+    login: "登錄"
+    logout: "登出"
   menu:
     topics: "社區"
     wiki: "Wiki"
     posts: "文章"
     users: "會員"
+    cpanel: "後台"  
+    notes: "記事本" 
+    my_home_page: "我的首頁"
+    edit_account_path: "個人資料設定"
   cpanel:
     menu:
       root_path: "系统概况"

@@ -33,4 +33,12 @@ module TopicsHelper
   def render_topic_title(topic)
     link_to(topic.title, topic_path(topic), :title => topic.title)
   end
+  
+  def render_topic_last_reply_time(topic)
+    l((topic.replied_at || topic.created_at), :format => :short)
+  end
+  
+  def render_topic_count(topic)
+    topic.replies_count
+  end
 end

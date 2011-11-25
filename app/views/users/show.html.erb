@@ -6,80 +6,8 @@
 </div>
 
 <div class="content">
-    <div class="userinfo box">
-        
-        <% render_user_level_tag(@user) %>
-      <% if admin?(@user) %>
-        <span class="label warning">管理员</span>
-      <% elsif wiki_editor?(@user) %>
-        <span class="label success">Wiki 管理</span>
-      <% else %>
-        <span class="label">普通用户</span>
-      <% end %>
-      
-        <ul>
-            <li style="text-align:right;">第 <%= @user.id %> 位会员</li>
-            <li> <span>ID:</span><strong><%= @user.login %></strong></li>
-            <% if !@user.location.blank? %>
-                 <li><span>城市:</span><%= render_user_location(@user) %></li>
-            <% end %>
-            
-            <li><span>加入时间:</span><%= render_user_join_time(@user) %></li>
-            
-            <% if !@user.tagline.blank? %>
-                <li><span>签名:</span><%= render_user_tagline(@user) %></li>
-            <% end %>
-            
-            <% if !@user.github.blank? %>
-                <li><span>Github:</span><%= render_user_github_url(@user) %> </li>
-            <% end %>
-            
-            <% if !@user.website.blank? %>
-                <li><span>个人主页:</span><%= render_user_personal_website(@user)%></li>
-            <% end %>
-        </ul>
-    </div>
-    
-    <%= render( :partial => "users/bio", :locals => { :bio => @user.bio }) if !@user.bio.blank? %>
-
-    <div class="box">
-        <h5>最近发布的贴子</h5>
-        <table class="node_topics">
-      <tr class="head">
-        <td class="replies">回复数</td>
-        <td class="title">标题</td>
-        <td class="replied_at">最后回复时间</td>
-      </tr>
-      <% @last_topics.each do |topic| %>
-      <tr class="topic">
-        <td class="replies"><%= topic.replies_count %></td>
-        <td class="title"><a href="<%= topic_path(topic) %>"><%= truncate(topic.title, :length => 25) %></a></td>
-        <td class="replied_at"><%= l (topic.replied_at || topic.created_at), :format => :short %></td>
-      </tr>
-      <% end %>
-    </table>
-    </div>
-
-  <% if !@last_replies.blank? %>
-    <div class="last_replies box">
-      <h5>最近回复过的帖子</h5>
-      <ul>
-        <% @last_replies.each do |reply|
-          next if reply.topic.blank? %>
-          <li>
-            <h6>
-              <%= l reply.created_at, :format => :short %>
-              在
-              <%= render_topic_title(reply.topic) %>
-              回复：
-            </h6>
-            <blockquote class="body">
-              <%= format_topic_body reply.body %>
-            </blockquote>
-          </li>
-        <% end %>
-      </ul>
-    </ul>
-  </div>
-  <% end %>
+    <%= render :partial => "users/info", :locals => { :user => @user }%>
+    <%= render(:partial => "users/bio", :locals => { :bio => @user.bio }) if !@user.bio.blank? %>
+    <%= render :partial => "users/recent_publish_topics", :locals => { :last_topics => @last_topics  } %>
+    <%= render( :partial => "users/recent_replies", :locals => { :last_replies => @last_replies }) if !@last_replies.blank? %>
 </div>

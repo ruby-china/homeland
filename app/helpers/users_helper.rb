@@ -35,7 +35,38 @@ module UsersHelper
     raw html
   end
   
+  def render_user_location(user)
+    return user.location
+  end
+  
+  def render_user_join_time(user)
+    I18n.l(user.created_at.to_date, :format => :long)
+  end
+  
+  def render_user_tagline(user)
+    return user.tagline
+  end
+  
+  def render_user_github_url(user)
+    link_to(user.github_url, user.github_url, :target => "_blank", :rel => "nofollow")
+  end
+  
+  def render_user_personal_website(user)
+    link_to(user.website, user.website, :target => "_blank", :rel => "nofollow")
+  end
+  
+  def render_user_level_tag(user)
+    if admin?(user)
+      content_tag(:span, "管理员", :class => "label warning")
+    elsif wiki_editor?(user)
+      content_tag(:span, "Wiki 管理", :class => "label success")
+    else
+      content_tag(:span, "普通用户", :class => "label")
+    end
+  end
+  
   private
+  
   def user_popover_info(user)
     return "" if user.blank?
     return "" if user.location.blank?

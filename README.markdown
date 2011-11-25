@@ -49,6 +49,22 @@ This is source code of [Ruby China Group](http://ruby-china.org)
 
 <https://github.com/rafaelfranca/simple_form-bootstrap/blob/master/config/initializers/simple_form.rb>
 
+
+## Helpers
+
+    render_topic_title(topic)
+## Common Partial
+
+* common/share : for social share
+* common/user\_nav : user\_navigation_bar
+
+## Styling Guide
+
+* Don't put plain html in helper
+* NEVER LOGIC in View
+* 重複用到的方法請隨手用 Helper 包
+* 永遠使用括號 () 包覆複雜 Helper
+
 ## Contributors
 
 * [Contributors](https://github.com/huacnlee/ruby-china/contributors)

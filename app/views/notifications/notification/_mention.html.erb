@@ -9,7 +9,7 @@
   <h3>
     <%= user_name_tag(reply.user) %>
     在
-    <%= link_to topic.title, topic_path(topic) %>
+    <%= render_topic_title(topic) %>
     提及你：
     <% if !notification.read? %>
       <span class="new label warning">新</span>

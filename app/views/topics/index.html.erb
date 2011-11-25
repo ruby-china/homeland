@@ -1,8 +1,8 @@
-<%= render 'base' %>
+<%= render "base" %>
 
 <div class="sidebar">
-    <%= render 'sidebar_for_topic_index' if params[:action] == "index" %>
-    <%= render 'sidebar_for_topic_recent' if params[:action] == "recent" %>
+    <%= render "sidebar_for_topic_index" if params[:action] == "index" %>
+    <%= render "sidebar_for_topic_recent" if params[:action] == "recent" %>
     <%= render "sidebar_new_topic_box" if params[:action] == "node" %>
 </div>
 
@@ -12,10 +12,10 @@
       <% if !@node.blank? %>
         <div>
           <h2><%= @node.name %></h2>
-          <span class="total">共有 <%= @node.topics_count %> 个讨论主题</span>
+          <span class="total">共有 <%= render_node_topics_count(@node) %> 个讨论主题</span>
         </div>
         <div class="desc">
-          <%= simple_format @node.summary %>
+          <%= simple_format(@node.summary) %>
         </div>
       <% else %>
         <h1><%= Setting.app_name %></h1>
@@ -32,16 +32,20 @@
             <div class="pull-right replies">
               <% if topic.replies_count > 0 %>
               <% read_state = current_user.topic_read?(topic) if current_user %>
-              <a href="<%= topic_path(topic.id) %><%= "#reply#{topic.replies_count}" %>" rel="twipsy" title="<%= topic_use_readed_text(read_state) if current_user %>" class="count state_<%= read_state || false %>">
-              <%= topic.replies_count %>
-              </a>
-              <% end %>
+             <%= link_to(topic.replies_count,topic_path(topic)+"#reply#{topic.replies_count}",
+                  :rel => "twipsy",
+                  :title => "#{topic_use_readed_text(read_state) if current_user}",
+                  :class => "count state_#{read_state || false}"
+              )%>
+            <% end %>
             </div>
             <div class="infos">
-              <div class="title"><a href="<%= topic_path(topic) %>" title="<%= topic.title %>"><%= truncate(topic.title, :length => 100) %></a></div>
+              <div class="title">
+                  <%= link_to(truncate(topic.title, :length => 100), topic_path(topic), :title => topic.title) %>
+              </div>
               <div class="info leader">
                 由 <%= user_name_tag(topic.user) %>
-                在 <a href="<%= node_topics_path(topic.node_id) %>"><%= topic.node.name %></a> 中发起
+                在 <%= render_node_name(topic.node) %> 中发起
               </div>
               <div class="info time">
                 <% if topic.last_reply_user.blank? %>
@@ -55,10 +59,11 @@
         </div>
       <% end %>
     </div>
+     
       
     <% if ["index","search"].include?(action_name) %>
       <div class="more">
-        <a href="<%= recent_topics_path %>">查看更多最近发布的帖子...</a>
+        <%= link_to("查看更多最近发布的帖子...", recent_topics_path)%>
       </div>
     <% else %>
       <%= will_paginate1 @topics %>

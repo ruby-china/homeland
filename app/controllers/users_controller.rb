@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   before_filter :set_menu_active
   
   def index
+    @total_user_count = User.count
     drop_breadcrumb("目录")
   end
   

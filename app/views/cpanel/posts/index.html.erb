@@ -14,14 +14,14 @@
   </tr>
 
 <% @posts.each do |post| %>
-  <tr class="<%= 'deleted' if !post.deleted_at.blank? %>">
+  <tr class="<%= "deleted" if !post.deleted_at.blank? %>">
     <td class="first"><%= post.id %></td>
     <td><%= truncate(post.title,:length => 30) %></td>
     <td><%= post.user.login if post.user %></td>
     <td><%= l post.created_at,:format => :short %></td>
-    <td><%= raw post.state_s %></td>
-    <td><%= link_to '修改', edit_cpanel_post_path(post) %>
-    <%= link_to '删除', cpanel_post_path(post), :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= render_post_state_s(post) %></td>
+    <td><%= link_to "修改", edit_cpanel_post_path(post) %>
+    <%= link_to "删除", cpanel_post_path(post), :confirm => "Are you sure?", :method => :delete %></td>
   </tr>
 <% end %>
 </table>

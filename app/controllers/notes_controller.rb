@@ -26,14 +26,14 @@ class NotesController < ApplicationController
 
 
   def new
-    @note = Note.new
+    @note = current_user.notes.build
     set_seo_meta("新建 &raquo; 记事本")
     drop_breadcrumb("新建")
   end
 
 
   def edit
-    @note = Note.find(params[:id])
+    @note = currenr_user.notes.find(params[:id])
     set_seo_meta("修改 &raquo; 记事本")
     drop_breadcrumb("修改")
   end
@@ -51,10 +51,7 @@ class NotesController < ApplicationController
 
 
   def update
-    @note = Note.find(params[:id])
-    if @note.user_id != current_user.id
-      render_404
-    end
+    @note = currenr_user.notes.find(params[:id])
 
     if @note.update_attributes(params[:note])
       redirect_to(@note, :notice => '修改成功。')
@@ -64,10 +61,7 @@ class NotesController < ApplicationController
   end
 
   def destroy
-    @note = Note.find(params[:id])
-    if @note.user_id != current_user.id
-      render_404
-    end
+    @note = currenr_user.notes.find(params[:id])
     @note.destroy
 
     redirect_to(notes_url)

@@ -1,7 +1,8 @@
+# coding: utf-8  
 module PostsHelper
   def post_title_tag(post, opts = {})
     return "" if post.blank?
-    raw "<a href='#{post_path(post.id)}' title='#{post.title}'>#{post.title}</a>"
+    link_to(post.title, post_path(post), :title => post.title )
   end
   
   def post_tags_tag(post, opts = {})
@@ -9,6 +10,14 @@ module PostsHelper
     limit = 5
     tags = post.tags
     tags = tags[0..limit-1] if tags.count > limit
-    raw tags.collect { |tag| "<a href='#{posts_path(:tag => tag)}' class='tag'>#{tag}</a>" }.join(", ")
+    raw tags.collect { |tag| link_to(tag,posts_path(:tag => tag)) }.join(", ")
+  end
+  
+  def render_post_state_s(post)
+    case post.state
+    when 0 then content_tag(:span, "草稿", :class => "label important")
+    else
+      content_tag(:span, "已审核", :class => "label success" )
+    end
   end
 end

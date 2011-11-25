@@ -37,6 +37,7 @@ class User
   embeds_many :authorizations
   has_many :posts
   has_many :notifications, :class_name => 'Notification::Base', :dependent => :delete
+  has_many :photos
 
   def read_notifications(notifications)
     unread_ids = notifications.find_all{|notification| !notification.read?}.map(&:_id)

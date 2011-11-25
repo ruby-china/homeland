@@ -50,11 +50,4 @@ class Post
     STATE.collect { |s| [s[0], s[1]]}
   end
   
-  def state_s
-    case self.state
-    when 0 then "<span class='label important'>草稿</span>"
-    else
-      "<span class='label success'>已审核</span>"
-    end
-  end
 end

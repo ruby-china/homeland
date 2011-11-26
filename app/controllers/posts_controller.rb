@@ -14,7 +14,7 @@ class PostsController < ApplicationController
     if params[:tag]
       drop_breadcrumb(params[:tag])
     else
-      drop_breadcrumb("最新发布的文章")
+      drop_breadcrumb t("posts.recent_publish_post")
     end
   end
 
@@ -23,7 +23,7 @@ class PostsController < ApplicationController
     @post.hits.incr
     set_seo_meta("#{@post.title}")
     drop_breadcrumb("文章")
-    drop_breadcrumb("阅读")
+    drop_breadcrumb t("common.read")
   end
 
   def new
@@ -34,14 +34,14 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.tag_list = @post.tags.join(", ")
     drop_breadcrumb("文章")
-    drop_breadcrumb("编辑页面")
+    drop_breadcrumb t("common.edit")
   end
 
   def create
     @post = current_user.posts.build(params[:post])
     
     if @post.save
-      redirect_to @post, notice: '投稿成功，需等待审核通过以后才能显示到文章列表。'
+      redirect_to @post, notice: t("posts.submit_success")
     else
       render action: "new"
     end

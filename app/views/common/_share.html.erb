@@ -3,3 +3,5 @@
   <a href="#" rel="nofollow" rel="twipsy" data-site="weibo" class="icon share_icons_weibo" title="<%= t("share.to_weibo") %>"></a>
   <a href="#" rel="nofollow" rel="twipsy" data-site="douban" class="icon share_icons_douban" title="<%= t("share.to_douban") %>"></a>
 </div>
+
+<%= fb_share_link(url,type = "button_count", true ) if facebook_enable %>

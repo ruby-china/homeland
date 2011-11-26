@@ -7,13 +7,17 @@
 
 <div class="content">
   <div id="posts" class="box">
-    <h1>最近发布的文章</h1>
+    <h1><%= t("posts.recent_publish_post")%></h1>
     <ul>
     <% @posts.each do |item| %>
     <li>
       <div class="title"><%= post_title_tag(item) %></div>
       <div class="info">
-        发布: <%= timeago(item.created_at) %>, <%= item.hits %> 次阅读, <%= link_to("#{item.comments_count} 条评论", post_path(item.id)+"#comments") %>
+        <% if I18n.default_locale == "zh-CN" %>
+            发布: <%= timeago(item.created_at) %>, <%= item.hits %> 次阅读, <%= link_to("#{item.comments_count} 条评论", post_path(item.id)+"#comments") %>
+        <% else %>
+            發布: <%= timeago(item.created_at) %>, <%= item.hits %> 次閱讀, <%= link_to("#{item.comments_count} 條評論", post_path(item.id)+"#comments") %>
+        <% end %>
       </div>
     </li>
     <% end %>

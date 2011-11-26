@@ -1,5 +1,11 @@
 <%= render 'base' %>
 
+<%= content_for :open_graph do %>
+    <%= og_title(@topic.title)%>
+    <%= og_description(@topic.body)%>
+<% end %>
+
+
 <div class="sidebar">
     <%= render_cell :topics, :sidebar_for_new_topic_node, { :action => params[:action], :node => @node } %>
 </div>
@@ -29,7 +35,7 @@
               <%= link_to t("common.delete"), topic_path(@topic.id), :method => :delete, :confirm => t("common.confirm_delete"), :class => "label important" %>
           <% end %>
         </div>
-        <%= render :partial => "common/share", :locals => {:title => @topic.title} %>
+        <%= render :partial => "common/share", :locals => {:title => @topic.title, :url => Setting.domain + topic_path(@topic) } %>
     </div>
 
     <%= render :partial => "topics/replies", :locals => { :topic => @topic, :replies => @replies} %>

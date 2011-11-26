@@ -56,6 +56,7 @@ gem "unicorn"
 # 用于组合小图片
 gem "sprite-factory", "1.4.1"
 
+gem "open_graph_helper"
 gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'
 gem 'bootstrap-rails', :require => 'bootstrap-rails',
   :git => 'git://github.com/xdite/bootstrap-rails.git'                   

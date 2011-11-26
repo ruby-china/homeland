@@ -22,6 +22,8 @@ This is source code of [Ruby China Group](http://ruby-china.org)
   $ cap deploy
   ```
 
+cap production remote_rake:invoke task=db:setup
+
 ## OAuth
 
 * be sure to use: http://ruby-china.dev/
@@ -60,6 +62,10 @@ Dalli need memcached 1.4.x +
 
 * common/share : for social share
 * common/user\_nav : user\_navigation_bar
+
+## Facebook Share
+
+facekbook_enable: false by default
 
 ## Styling Guide
 

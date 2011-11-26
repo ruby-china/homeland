@@ -1,4 +1,9 @@
 <%= render "base" %>
+<%= content_for :open_graph do %>
+    <%= og_title(@page.title)%>
+    <%= og_description(s(@page.body_html))%>
+<% end %>
+
 <div id="page_show" class="box">
   <% if !@page.locked or admin? %>
     <div class="info">
@@ -7,7 +12,7 @@
     </div>
   <% end %>
   <div style="text-align:right;">
-    <%= render :partial => "common/share", :locals => {:title => @page.title} %>
+    <%= render :partial => "common/share", :locals => {:title => @page.title,  :url => Setting.domain + page_path(@page.slug) } %>
   </div>
   
   <div class="wikistyle">

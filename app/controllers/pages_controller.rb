@@ -19,8 +19,9 @@ class PagesController < ApplicationController
 
   def show
     @page = Page.find_by_slug(params[:id])
-    if not @page
+    if !@page
       render_404
+      return
     end
     set_seo_meta("#{@page.title} - Wiki")
     drop_breadcrumb("查看")

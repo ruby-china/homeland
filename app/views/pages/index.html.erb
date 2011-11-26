@@ -3,7 +3,7 @@
   <div class="tools">
     <%= link_to("Wiki目录", recent_pages_path )%>
     <% if wiki_editor? %>
-        <%= link_to("创建新页面", new_page_path)%>
+      <%= link_to("创建新页面", new_page_path, :class => "btn primary")%>
     <% end %>
   </div>
   <%= raw SiteConfig.wiki_index_html %>

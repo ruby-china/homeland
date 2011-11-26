@@ -29,6 +29,19 @@
     mark_all_as_read: "标记所有为已读"
     last_modified_at: "最后更新于"
     index: "目录"
+    you_may_like: "你可能也喜欢"
+    read: "阅读"
+  posts:
+    recent_publish_post: "最近发布的文章"
+    post_source: "文章來源"
+    published_at: "投稿于"
+    tag: "标签"
+    post_submitter: "提交者"
+    submit_success: "投稿成功，需等待审核通过以后才能显示到文章列表。"
+  reply:
+    edit_reply: "修改回帖"
+    delete_reply_success: '回帖删除成功.'
+    topic_location: '回帖所在文章'
   notes:
     create_note: "新建记事本"
     edit_note: "修改記事本"

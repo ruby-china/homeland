@@ -29,6 +29,18 @@
     mark_all_as_read: "標記所有為已讀"
     last_modified_at: "最後更新於"
     index: "目錄"
+    you_may_like: "你可能也喜歡"
+  posts:
+    recent_publish_post: "最近發布的文章"
+    post_source: "文章来源"
+    published_at: "投稿於"
+    tag: "標籤"
+    post_submitter: "投稿者"
+    submit_success: "投稿成功，需等待審核通過以後才能顯示到文章列表。"
+  reply:
+    edit_reply: "修改回應"
+    delete_reply_success: '回應刪除成功'
+    topic_location: '回應所在文章'
   notes:
     create_note: "新建记事本"
     edit_note: "修改記事本"

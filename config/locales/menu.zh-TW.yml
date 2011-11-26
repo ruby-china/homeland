@@ -30,6 +30,14 @@
     last_modified_at: "最後更新於"
     index: "目錄"
     you_may_like: "你可能也喜歡"
+    read: "閱讀"
+    admin_user: "管理員"
+    wiki_admin: "Wiki 管理"
+    normal_user: "普通使用者"
+    title: "標題"
+    reply_count: "回應數"
+    last_reply_time: "最後回應時間"
+    reply: "回應"
   posts:
     recent_publish_post: "最近發布的文章"
     post_source: "文章来源"
@@ -47,6 +55,16 @@
     page_link: "本頁地址"
   photos:
     upload_and_insert_code: "上傳並插入原始碼"
+  users:
+    bios: "個人介紹"
+    city: "城市"
+    join_time: "加入時間"
+    signature: "簽名檔"
+    personal_website: "個人網站"
+    recent_publish_topic: "最近發表的話題"
+    recent_reply_topic: "最近回應過的話題"
+    unbind_warning: "至少要保留一個關聯帳號，現在不能鬆綁。"
+    unbind_success: "%{provider} 帳號鬆綁成功。"
   menu:
     topics: "社區"
     wiki: "Wiki"

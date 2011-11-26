@@ -1,10 +1,10 @@
 <div class="box">
-    <h5>最近发布的贴子</h5>
+    <h5><%= t("users.recent_publish_topic")%></h5>
     <table class="node_topics">
         <tr class="head">
-          <td class="replies">回复数</td>
-          <td class="title">标题</td>
-          <td class="replied_at">最后回复时间</td>
+          <td class="replies"><%= t("common.reply_count")%></td>
+          <td class="title"><%= t("common.title")%></td>
+          <td class="replied_at"><%= t("common.last_reply_time")%></td>
         </tr>
         <% last_topics.each do |topic| %>
         <tr class="topic">

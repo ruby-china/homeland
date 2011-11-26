@@ -1,5 +1,5 @@
   <div class="last_replies box">
-    <h5>最近回复过的帖子</h5>
+    <h5><%= t("users.recent_reply_topic")%></h5>
     <ul>
       <% last_replies.each do |reply|
         next if reply.topic.blank? %>
@@ -8,7 +8,7 @@
             <%= render_reply_at(reply) %>
             在
             <%= render_topic_title(reply.topic) %>
-            回复：
+            <%= t("common.reply")%>：
           </h6>
           <blockquote class="body">
             <%= format_topic_body reply.body %>

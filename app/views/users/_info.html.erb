@@ -2,24 +2,24 @@
     
     <% render_user_level_tag(user) %>
   <% if admin?(user) %>
-    <span class="label warning">管理员</span>
+    <span class="label warning"><%= t("common.admin_user")%></span>
   <% elsif wiki_editor?(user) %>
-    <span class="label success">Wiki 管理</span>
+    <span class="label success"><%= t("common.widi_admin")%></span>
   <% else %>
-    <span class="label">普通用户</span>
+    <span class="label"><%= t("common.normal_user")%></span>
   <% end %>
   
     <ul>
-        <li style="text-align:right;">第 <%= user.id %> 位会员</li>
+        <li style="text-align:right;">第 <%= user.id %> 位<%= t("menu.users")%></li>
         <li> <span>ID:</span><strong><%= user.login %></strong></li>
         <% if !user.location.blank? %>
-             <li><span>城市:</span><%= render_user_location(user) %></li>
+             <li><span><%= t("users.city")%>:</span><%= render_user_location(user) %></li>
         <% end %>
         
-        <li><span>加入时间:</span><%= render_user_join_time(user) %></li>
+        <li><span><%= t("users.join_time")%>:</span><%= render_user_join_time(user) %></li>
         
         <% if !user.tagline.blank? %>
-            <li><span>签名:</span><%= render_user_tagline(user) %></li>
+            <li><span><%= t("users.signature")%>:</span><%= render_user_tagline(user) %></li>
         <% end %>
         
         <% if !user.github.blank? %>
@@ -27,7 +27,7 @@
         <% end %>
         
         <% if !user.website.blank? %>
-            <li><span>个人主页:</span><%= render_user_personal_website(user)%></li>
+            <li><span><%= t("users.personal_website")%>:</span><%= render_user_personal_website(user)%></li>
         <% end %>
     </ul>
 </div>

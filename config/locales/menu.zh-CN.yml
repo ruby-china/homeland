@@ -21,6 +21,7 @@
     create_item: "发起"
     read_times: "次阅读"
     confirm_delete: "确定要删除么？"
+    search: "搜索"
   topics:
     create_topic: "新建帖子"
     edit_topic: "修改帖子"
@@ -31,6 +32,14 @@
     start_a_new_topic_button: "发布新帖"
     subscribe_with_rss: "订阅%{name}社区新贴"
     submit_reply: "提交回复"
+    hot_topics: "活跃帖子"
+    topic_list: "主题列表"
+    read_topic: "浏览帖子"
+    create_topic_success: "帖子创建成功."
+    delete_topic_success: "帖子删除成功."
+    update_topic_success: "帖子修改成功."
+    post_topic: "发帖"
+    reply_success: "回复成功。"
   menu:
     topics: "社区"
     wiki: "Wiki"

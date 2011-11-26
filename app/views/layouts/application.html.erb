@@ -27,14 +27,14 @@
            li << link_to(t("menu.posts"), posts_path )
            li << link_to(t("menu.users"), users_path)
          end %>
-        <%= render :partial => "common/search_form" %>
-        <%= render :partial => "common/user_nav" %>
+        <%= render "common/search_form" %>
+        <%= render "common/user_nav" %>
       </div>
     </div>
   </div>
   <div class="container">
-
     <%= render_breadcrumb %>
+    <%= render "common/feeds" %>
 
     <div id="main" class="container-fluid">
       <%= notice_message %>
@@ -43,7 +43,7 @@
   </div>
   <footer class="footer">
     <div class="container">
-      <%# raw SiteConfig.footer_html %>
+      <%= raw SiteConfig.footer_html %>
     </div>
   </footer>
   

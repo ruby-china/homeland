@@ -13,7 +13,7 @@ module TopicsHelper
     text = auto_link(text,:all, :target => '_blank', :rel => "nofollow")
     text.gsub!(/#([\d]+)楼\s/,'#<a href="#reply\1" class="at_floor" data-floor="\1" onclick="return Topics.hightlightReply(\1)">\1楼</a> ')
     link_mention_user!(text, mentioned_user_logins)
-    return sanitize(text)
+    return raw(text)
   end
 
   def link_mention_user!(text, mentioned_user_logins)

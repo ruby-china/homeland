@@ -24,7 +24,7 @@ class PagesController < ApplicationController
       return
     end
     set_seo_meta("#{@page.title} - Wiki")
-    drop_breadcrumb("查看")
+    drop_breadcrumb("查看 #{@page.title}")
   end
 
   def new

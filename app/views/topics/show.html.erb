@@ -31,8 +31,8 @@
         <div class="tools pull-right">
           <%= likeable_tag(@topic) %>
           <% if owner?(@topic) %>
-              <%= link_to(t("common.edit"), edit_topic_path(@topic), :class => "label success" )%>
-              <%= link_to t("common.delete"), topic_path(@topic.id), :method => :delete, :confirm => t("common.confirm_delete"), :class => "label important" %>
+              <%= link_to "", edit_topic_path(@topic), :class => "icon small_edit"%>
+              <%= link_to "", topic_path(@topic.id), :method => :delete, :confirm => t("common.confirm_delete"), :class => "icon small_delete" %>
           <% end %>
         </div>
         <%= render :partial => "common/share", :locals => {:title => @topic.title, :url => Setting.domain + topic_path(@topic) } %>

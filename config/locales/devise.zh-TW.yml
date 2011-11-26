@@ -4,7 +4,7 @@
       not_found: "沒有找到"
       already_confirmed: "已經確認"
       not_locked: "沒有鎖定"
-      not_saved: "有%{count} 個錯誤發生導致「%{model}」無法被保存。 "
+      not_saved: "有 %{count} 個錯誤發生導致「%{model}」無法被保存。 "
   devise:
     failure:
       unauthenticated: '繼續操作前請註冊或者登錄.'

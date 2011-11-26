@@ -13,11 +13,7 @@
     <li>
       <div class="title"><%= post_title_tag(item) %></div>
       <div class="info">
-        <% if I18n.default_locale == "zh-CN" %>
-            发布: <%= timeago(item.created_at) %>, <%= item.hits %> 次阅读, <%= link_to("#{item.comments_count} 条评论", post_path(item.id)+"#comments") %>
-        <% else %>
-            發布: <%= timeago(item.created_at) %>, <%= item.hits %> 次閱讀, <%= link_to("#{item.comments_count} 條評論", post_path(item.id)+"#comments") %>
-        <% end %>
+        <%= t("common.created_at") %> <%= timeago(item.created_at) %>, <%= item.hits %> <%= t("common.read_times") %>, <%= link_to("#{item.comments_count} #{t("common.comments")}", post_path(item.id)+"#comments") %>
       </div>
     </li>
     <% end %>

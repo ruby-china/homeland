@@ -1,8 +1,7 @@
 <div class="box" style="text-align:center;">
-  <p> <%= link_to("发布新帖", new_topic_path, :class => "btn success" )%>  </p>
+  <p> <%= link_to(t("topics.start_a_new_topic_button"), new_topic_path, :class => "btn success" )%>  </p>
   <hr>
       <p>
-          <a href="<%= feed_topics_url %>" title="用RSS阅读器订阅<%= Setting.app_name %>社区新贴">
-              <%= image_tag('feed.png', :alt => "订阅#{Setting.app_name}社区新贴") %></a>
+          <%= link_to(image_tag("feed.png", :alt => t("topics.subscribe_with_rss", :name => Setting.app_name) ), feed_topics_url, :title => t("topics.subscribe_with_rss", :name => Setting.app_name) )%>
       </p>
 </div>

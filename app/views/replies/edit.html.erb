@@ -1,10 +1,8 @@
 <%= render "/topics/base" %>
-<% content_for :sitemap do %>
-  <span class="current">修改回帖</span>
-<% end %>
+
 <div class="sidebar">
   <div class="box">
-    回帖所在文章:<br />
+    <%= t("reply.topic_location")%>:<br />
     <%= render_topic_title(@reply.topic) %>
   </div>
 </div>
@@ -12,7 +10,7 @@
     <div class="box">
         <%= form_for(@reply) do |f| %>
         <fieldset>
-          <legend>修改回帖</legend>
+          <legend><%= t("reply.edit_reply")%></legend>
       <%= render "shared/error_messages", :target => @reply %>  
       <div class="clearfix">
         <%= f.label :body %>
@@ -21,8 +19,8 @@
         </div>
       </div>
       <div class="actions">
-        <button class="btn primary">保存更新</button>
-        <a href="<%= topic_path(@reply.topic_id) %>" class="btn">取消</a>
+        <button class="btn primary"><%= t("common.save")%></button>
+        <a href="<%= topic_path(@reply.topic_id) %>" class="btn"><%= t("common.cancel") %></a>
       </div>
     <% end %>
     </div>

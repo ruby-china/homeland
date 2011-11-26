@@ -1,0 +1,21 @@
+<div class="sidebar">
+  <div class="box">
+    <h2>記事本是什麼？</h2>
+    <p class="summary">這是一個基於雲端儲存的網路記事本，你可以放心的把你的一些文件資料存放在這裡。</p>
+    <p>
+      <a href="<%= new_note_path %>" class="btn success"><%= t("common.create") %></a>
+    </p>
+  </div>
+
+  <% if ["new","edit"].index(params[:action]) %>
+  <div class="box">
+    <ul>
+      <li>記事的第一行將自動成為標題</li>
+      <li>超連結會自動轉換為可點擊的狀態</li>
+      <li>目前只支援純文字格式</li>
+      <li>記事本的內容只有你自己才能看到</li>
+    </ul>
+  </div>
+  <% end %>
+</div>
+

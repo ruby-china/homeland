@@ -45,13 +45,14 @@
               </div>
               <div class="info leader">
                 由 <%= user_name_tag(topic.user) %>
-                在 <%= render_node_name(topic.node) %> 中发起
+                在 <%= render_node_name(topic.node) %> 中<%= t("common.create_item")%>
               </div>
               <div class="info time">
                 <% if topic.last_reply_user.blank? %>
                   发布于 <%= timeago(topic.created_at) %>
                 <% else %>
-                  最后由 <%= user_name_tag(topic.last_reply_user) %> 回复于 <%= timeago(topic.replied_at) %>
+                  <%= t("common.last_by")%> <%= user_name_tag(topic.last_reply_user) %> <%= t("common.reply_at")%> <%= timeago(topic.replied_at) %>
+
                 <% end %>
               </div>
             </div>
@@ -63,7 +64,7 @@
       
     <% if ["index","search"].include?(action_name) %>
       <div class="more">
-        <%= link_to("查看更多最近发布的帖子...", recent_topics_path)%>
+        <%= link_to(t("topics.check_recent_topics"), recent_topics_path)%>
       </div>
     <% else %>
       <%= will_paginate1 @topics %>

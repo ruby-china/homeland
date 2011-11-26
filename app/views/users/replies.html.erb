@@ -1,9 +1,14 @@
+<<<<<<< HEAD
 <%= render "base" %>
 <%= render "info" %>
 
 <div class="box">
   <%= render "menu" %>
   <div class="replies">
+=======
+  <div class="last_replies box">
+    <h5><%= t("users.recent_reply_topic")%></h5>
+>>>>>>> i18n
     <ul>
       <% @replies.each do |reply|
         next if reply.topic.blank? %>
@@ -12,7 +17,7 @@
             <%= render_reply_at(reply) %>
             在
             <%= render_topic_title(reply.topic) %>
-            回复：
+            <%= t("common.reply")%>：
           </h6>
           <blockquote class="body">
             <%= format_topic_body reply.body %>

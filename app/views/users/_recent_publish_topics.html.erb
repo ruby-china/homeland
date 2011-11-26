@@ -1,0 +1,17 @@
+<div class="box">
+    <h5><%= t("users.recent_publish_topic")%></h5>
+    <table class="node_topics">
+        <tr class="head">
+          <td class="replies"><%= t("common.reply_count")%></td>
+          <td class="title"><%= t("common.title")%></td>
+          <td class="replied_at"><%= t("common.last_reply_time")%></td>
+        </tr>
+        <% last_topics.each do |topic| %>
+        <tr class="topic">
+          <td class="replies"><%= render_topic_count(topic)%> </td>
+          <td class="title"><%= link_to(truncate(topic.title, :length => 25), topic_path(topic))%>      </td>
+          <td class="replied_at"> <%= render_topic_last_reply_time(topic)%></td>
+        </tr>
+        <% end %>
+    </table>
+</div>

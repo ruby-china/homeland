@@ -4,8 +4,8 @@ class RepliesController < ApplicationController
   
   def edit
     @reply = current_user.replies.find(params[:id])
-    drop_breadcrumb("社区", topics_path)
-    drop_breadcrumb("修改回帖")
+    drop_breadcrumb(t("menu.topics"), topics_path)
+    drop_breadcrumb t("reply.edit_reply")
   end
   
   def update

@@ -18,7 +18,7 @@
   <div id="post_show" class="box">
     <h1><%= @post.title %></h1>
     <div class="info">
-      <%= user_name_tag(@post.user) %> 投稿于: <%= timeago(@post.created_at) %> , <%= @post.hits %> 次阅读, 
+      <%= user_name_tag(@post.user) %> 投稿于: <%= timeago(@post.created_at) %> , <%= @post.hits %> <%= t("common.read_times")%>, 
       <a href="#comments"><%= @post.comments_count %> 条评论</a>
     </div>
     <% if !@post.source.blank? %>

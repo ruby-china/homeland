@@ -1,0 +1,93 @@
+"zh-TW":
+  mongoid:
+    models:
+      user: "用戶"
+      topic: "話題"
+      post: 文章
+      page: Wiki
+    attributes:
+      user:
+        name: "名字"
+        login: "使用者名稱"
+        email: "Email"
+        location: "城市"
+        bio: "個人介紹"
+        password: "密碼"
+        password_confirmation: "確認密碼"
+        website: "個人主頁"
+        last_logined_at: "上次登錄時間"
+        tagline: "簽名"
+        state: "狀態"
+        verified: "信任用戶"
+        remember_me: 記住登陸狀態
+        current_password: 舊密碼
+      topic:
+        title: "標題"
+        user_id: "用戶"
+        body: "正文"
+      reply:
+        body: "回复內容"
+      post:
+        title: 標題
+        body: 正文
+        tag_list: 標籤
+        source: 來源
+        source_url: 來源地址
+      page:
+        slug: Slug
+        title: 頁面標題
+        body: 內容
+        locked: 鎖定開關
+        change_desc: 變更描述
+    errors:
+      models:
+        user: 用戶
+      messages:
+        inclusion: "不包含於列表中"
+        exclusion: "是保留關鍵字"
+        invalid: "是無效的"
+        confirmation: "與確認值不匹配"
+        accepted: "必須是可被接受的"
+        empty: "不能留空"
+        blank: "不能為空字符"
+        too_long: "過長（最長為%{count} 個字符）"
+        too_short: "過短（最短為%{count} 個字符）"
+        wrong_length: "長度非法（必須為%{count} 個字符）"
+        taken: "已經被使用"
+        not_a_number: "不是數字"
+        not_an_integer: "必須是整數"
+        greater_than: "必須大於 %{count}"
+        greater_than_or_equal_to: "必須大於或等於%{count}"
+        equal_to: "必須等於 %{count}"
+        less_than: "必須小於 %{count}"
+        less_than_or_equal_to: "必須小於或等於%{count}"
+        odd: "必須為單數"
+        even: "必須為雙數"
+        record_invalid: "校驗失敗: %{errors}"
+        taken:
+          已佔用
+        document_not_found:
+          沒有發現類是%{klass} ID 是%{identifiers} 的文檔
+        invalid_database:
+          數據庫應該是Mongo::DB,而不是%{name}.
+        invalid_type:
+          在類%{klass}中定義了字段,實際值是%{value}的%{other}.
+        unsupported_version:
+          MongoDB %{version} 版本已過期，請升級到%{mongo_version}.
+        validations:
+          校驗失敗 - %{errors}.
+        invalid_collection:
+          不允許直接訪問嵌入式的集合%{klass} , 請從文檔的根訪問集合.
+        invalid_field:
+          字段的名字不允許為%{name}. 你不應該定義跟Mongoid內部屬性或者方法相同的名字，詳細請看Use Document#instance_methods.
+        too_many_nested_attribute_records:
+          被關聯的%{association} 嵌入式屬性不能超過%{limit}.
+        embedded_in_must_have_inverse_of:
+          embedded_in的關聯屬性必須包含inverse_of.
+        dependent_only_references_one_or_many:
+          dependent => destroy|delete 選項只有在references_one或者references_many時候有效.
+        association_cant_have_inverse_of:
+          在當前的關聯中，不允許定義inverse_of去,其只有在embedded_in或者references_many是數組的情況下使用
+        unsaved_document:
+          You cannot call create or create! through a relational association
+          relation (%{document}) who's parent (%{base}) is not already saved.

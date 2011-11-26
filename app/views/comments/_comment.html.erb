@@ -1,6 +1,6 @@
 <div class="comment">
   <div class="info">
-    <%= user_avatar_tag(item.user, :small) %> <%= user_name_tag(item.user) %> 发表于与 <%= timeago(item.created_at) %>
+    <%= user_avatar_tag(item.user, :small) %> <%= user_name_tag(item.user) %> <%= t("common.published_at") %> <%= timeago(item.created_at) %>
   </div>
   <div class="body">
     <%= format_topic_body item.body %>

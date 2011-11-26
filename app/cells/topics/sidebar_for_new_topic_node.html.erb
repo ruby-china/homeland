@@ -5,7 +5,7 @@
     <%=  render_node_summary(@node) if ["new"].index(params[:action]) %>
 
     <div class="content">
-      <%= link_to("发布新帖", new_topic_path(:node => @node.id), :class => "btn success") %>
+      <%= link_to(t("topics.start_a_new_topic_button"), new_topic_path(:node => @node.id), :class => "btn success") %>
     </div>
 
   </div>

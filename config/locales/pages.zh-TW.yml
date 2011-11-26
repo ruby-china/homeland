@@ -1,0 +1,12 @@
+"zh-TW":
+  pages:
+    describe_this_time_change: "請描述你本次修改的內容"
+    edit_page: "修改頁面"
+    create_page: "建立新頁面"
+    create_new_wiki_page: "建立 Wiki 新頁面"
+    new_wiki_page: "建立 Wiki 頁面"
+    edit_wiki_page: "Wiki頁面編輯"
+    modify_wiki_page: "修改 Wiki 頁面"
+    wiki_index: "Wiki目錄"
+    wiki_page_contributors: "本頁貢獻者:"
+    wiki_page_lock_warning: "抱歉，此頁面已被锁定，只有管理員才能修改。"

@@ -1,0 +1,25 @@
+"zh-CN":
+  cpanel:
+    menu:
+      root_path: "系统概况"
+      site_configs: "全局设置"
+      users: "用户"
+      sections: "分类"
+      nodes: "节点"
+      posts: "文章"
+      wiki: "Wiki"
+      topics: "帖子"
+      replies: "回复"
+      photos: "图片"
+      notes: "記事本"
+    overview: "概览"
+    recent_topics: "最近帖子"
+    statics: "统计信息"
+    site_configs:
+      settings: "设置项"
+      please_do_not_modify_key: "请勿修改 key"
+      edit_setting: "修改设置"
+    users:
+      trust_user_can_modify_wiki: "信任用户将可以修改 Wiki"
+    topic_list: "话题列表"
+    check_photo: "瀏覽圖片"

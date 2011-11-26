@@ -1,9 +1,9 @@
 <%= render "base" %>
 <div id="pages">
   <div class="tools">
-    <%= link_to("Wiki目录", recent_pages_path )%>
+    <%= link_to(t("pages.wiki_index"), recent_pages_path )%>
     <% if wiki_editor? %>
-        <%= link_to("创建新页面", new_page_path)%>
+        <%= link_to(t("pages.create_page"), new_page_path)%>
     <% end %>
   </div>
   <%= raw SiteConfig.wiki_index_html %>

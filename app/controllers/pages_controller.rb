@@ -13,8 +13,8 @@ class PagesController < ApplicationController
   
   def recent
     @pages = Page.recent.paginate(:page => params[:page], :per_page => 30)
-    set_seo_meta("Wiki 目录")
-    drop_breadcrumb("目录")
+    set_seo_meta t("pages.wiki_index")
+    drop_breadcrumb t("common.index")
   end
 
   def show
@@ -28,8 +28,8 @@ class PagesController < ApplicationController
 
   def new
     @page = Page.new
-    set_seo_meta("创建 Wiki 页面")
-    drop_breadcrumb(" 创建 Wiki 页面")
+    set_seo_meta t("pages.new_wiki_page")
+    drop_breadcrumb t("pages.new_wiki_page")
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @page }
@@ -38,8 +38,8 @@ class PagesController < ApplicationController
 
   def edit
     @page = Page.find(params[:id])
-    set_seo_meta("修改 Wiki 页面")
-    drop_breadcrumb("编辑")
+    set_seo_meta t("pages.edit_wiki_page")
+    drop_breadcrumb t("common.edit")
   end
 
   def create
@@ -48,7 +48,7 @@ class PagesController < ApplicationController
     @page.version_enable = true
 
     if @page.save
-      redirect_to page_path(@page.slug), notice: '页面创建成功。'
+      redirect_to page_path(@page.slug), notice: t("common.create_success")
     else
       render action: "new"
     end
@@ -60,7 +60,7 @@ class PagesController < ApplicationController
     params[:page][:user_id] = current_user.id
     
     if @page.update_attributes(params[:page])
-      redirect_to page_path(@page.slug), notice: '页面更新成功。'
+      redirect_to page_path(@page.slug), notice: t("common.update_success")
     else
       render action: "edit"
     end
@@ -81,7 +81,7 @@ class PagesController < ApplicationController
       @page = Page.find(params[:id])
       if @page.locked
         if !current_user or !Setting.admin_emails.include?(current_user.email)
-          redirect_to page_path(@page.slug), alert: "抱歉，此页面已被锁定，只能管理员才能修改。"
+          redirect_to page_path(@page.slug), alert: t("pages.wiki_page_lock_warning")
           return
         end
       end

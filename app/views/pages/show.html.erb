@@ -2,7 +2,7 @@
 <div id="page_show" class="box">
   <% if !@page.locked or admin? %>
     <div class="info">
-      版本 <%= render_page_version(@page) %>， 最后更新于 <%= render_page_updated_at(@page) %>
+      版本 <%= render_page_version(@page) %>， <%= t("common.last_modified_at")%> <%= render_page_updated_at(@page) %>
       <%= render_edit_page_button(@page) if wiki_editor? %>
     </div>
   <% end %>
@@ -13,7 +13,7 @@
     <%= raw @page.body_html %>
   </div>
   <div class="editors">
-    <h3>本页贡献者:</h3>
+    <h3><%= t("pages.wiki_page_contributors")%></h3>
     <div>
       <% @page.editors.each do |item| %>
         <%= user_avatar_tag(item, :small) %>

@@ -33,7 +33,7 @@ class NotesController < ApplicationController
 
 
   def edit
-    @note = currenr_user.notes.find(params[:id])
+    @note = current_user.notes.find(params[:id])
     set_seo_meta("修改 &raquo; #{t("menu.notes")}")
     drop_breadcrumb("修改")
   end
@@ -51,7 +51,7 @@ class NotesController < ApplicationController
 
 
   def update
-    @note = currenr_user.notes.find(params[:id])
+    @note = current_user.notes.find(params[:id])
 
     if @note.update_attributes(params[:note])
       redirect_to(@note, :notice => t("common.update_success"))

@@ -1,19 +1,27 @@
 <%= simple_form_for @page, :wrapper => :inline do |f| %>
   <fieldset>
-    <legend>Wiki页面编辑</legend>
+    <legend><%= t("pages.edit_wiki_page")%></legend>
     <%= render "shared/error_messages", :target => @page %>
 
     <%= f.input :slug, :hint => "http://#{Setting.domain}/wiki/:slug"%>
     <%= f.input :title, :input_html => { :class => "xxlarge" } %>
-    <%= f.input :body, :as => :text,
-                :input_html => { :class => "long", :rows => "30" },
-                :hint => "请使用 Markdown 格式编写,可以试试用 <a href='http://mouapp.com' target='_blank'>Mou</a> 这个 App 来编写。".html_safe
-    %>
+    
+    <% if I18n.default_locale == "zh-CN" %>
+        <%= f.input :body, :as => :text,
+                    :input_html => { :class => "long", :rows => "30" },
+                    :hint => "请使用 Markdown 格式编写,可以试试用 <a href='http://mouapp.com' target='_blank'>Mou</a> 这个 App 来编写。".html_safe
+        %>
+    <% else %>
+        <%= f.input :body, :as => :text,
+                    :input_html => { :class => "long", :rows => "30" },
+                    :hint => "請使用 Markdown 格式編寫,可以試試用 <a href='http://mouapp.com' target='_blank'>Mou</a> 這個 App 来編寫。".html_safe
+        %>
+    <% end %>
 
     <% if not @page.new_record? %>
       <%= f.input :change_desc , :as => :text,
                   :input_html => { :class => "long", :rows => "2" },
-                  :hint => "描述你本次修改的内容。"
+                  :hint => t("pages.describe_this_time_change")
     %>
 
     <% end %>

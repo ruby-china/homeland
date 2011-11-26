@@ -39,4 +39,8 @@ class TopicsCell < BaseCell
     @action = args[:action]
     render 
   end
+  
+  def reply_help_block
+    render
+  end
 end

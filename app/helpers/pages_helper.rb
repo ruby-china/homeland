@@ -14,6 +14,6 @@ module PagesHelper
   end
   
   def render_edit_page_button(page)
-    link_to("编辑", edit_page_path(page), :class => "label success")
+    link_to("", edit_page_path(page), :class => "icon small_edit")
   end
 end

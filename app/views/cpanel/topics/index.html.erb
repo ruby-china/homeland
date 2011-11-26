@@ -1,7 +1,7 @@
 <% content_for :sitemap do %>
-  <span class="current">帖子</span>
+  <span class="current"><%= t("cpanel.menu.topics")%></span>
 <% end %>
-<h1>话题列表</h1>
+<h1><%= t("cpanel.topic_list")%></h1>
 
 <table class="grid">
   <tr class="head">
@@ -24,12 +24,12 @@
     <td><%= l topic.created_at,:format => :short %></td>
     <td>
       <% if !topic.suggested_at.blank? %>
-        <%= link_to '去置顶', unsuggest_cpanel_topic_path(topic), :confirm => 'Are you sure?', :method => :post %>
+        <%= link_to t("common.un_top"), unsuggest_cpanel_topic_path(topic), :confirm => 'Are you sure?', :method => :post %>
       <% else %>
-        <%= link_to '置顶', suggest_cpanel_topic_path(topic), :confirm => 'Are you sure?', :method => :post %>
+        <%= link_to t("common.place_top"), suggest_cpanel_topic_path(topic), :confirm => 'Are you sure?', :method => :post %>
       <% end %>
-      <%= link_to '修改', edit_cpanel_topic_path(topic) %>
-      <%= link_to '删除', cpanel_topic_path(topic), :confirm => 'Are you sure?', :method => :delete %></td>
+      <%= link_to t("common.edit"), edit_cpanel_topic_path(topic) %>
+      <%= link_to t("common.delete"), cpanel_topic_path(topic), :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

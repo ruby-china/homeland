@@ -58,11 +58,11 @@ module UsersHelper
   
   def render_user_level_tag(user)
     if admin?(user)
-      content_tag(:span, "管理员", :class => "label warning")
+      content_tag(:span, t("common.admin_user"), :class => "label warning")
     elsif wiki_editor?(user)
-      content_tag(:span, "Wiki 管理", :class => "label success")
+      content_tag(:span, t("common.widi_admin"), :class => "label success")
     else
-      content_tag(:span, "普通用户", :class => "label")
+      content_tag(:span,  t("common.limit_user"), :class => "label")
     end
   end
   
@@ -71,7 +71,7 @@ module UsersHelper
   def user_popover_info(user)
     return "" if user.blank?
     return "" if user.location.blank?
-    title = user.location.blank? ? "#{user.login}" : "<i>#{user.location}</i> #{user.login}"
+    title = user.location.blank? ? "#{user.login}" : "<i><span class='icon small_pin'></span>#{user.location}</i> #{user.login}"
     tagline = user.tagline.blank? ? "这哥们儿没签名" : truncate(user.tagline, :length => 20)
     raw %(rel="popover" data-placement="below" title="#{h(title)}" data-content="#{h(tagline)}")
   end

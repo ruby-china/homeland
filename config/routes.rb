@@ -18,7 +18,12 @@ RubyChina::Application.routes.draw do
   
   match "account/auth/:provider/unbind", :to => "users#auth_unbind"
   
-  resources :users
+  resources :users do
+    member do 
+      get :replies
+      get :likes
+    end 
+  end
   resources :notifications, :only => [:index, :destroy] do
     collection do
       put :mark_all_as_read
@@ -44,6 +49,7 @@ RubyChina::Application.routes.draw do
       get :tiny_new
     end
   end
+  resources :likes
 
   namespace :cpanel do 
     root :to => "home#index"

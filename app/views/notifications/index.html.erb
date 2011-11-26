@@ -8,7 +8,7 @@
 <div class="sidebar">
   <div class="box">
     <div class="content">
-      <%= link_to '标记所有为已读', mark_all_as_read_notifications_path, :class => 'btn', :method => :put, :remote => true, :disable_with => '标记所有为已读...' %>
+      <%= link_to t("common.mark_all_as_read"), mark_all_as_read_notifications_path, :class => 'btn', :method => :put, :remote => true, :disable_with => '标记所有为已读...' %>
     </div>
   </div>
 </div>
@@ -22,7 +22,7 @@
           <tr id="<%= notification.anchor %>">
             <%= render :partial => "notifications/#{notification.class.name.underscore}", :locals => {:notification => notification} %>
             <td class="last">
-              <%= link_to '删除', notification_path(notification), :method => :delete, :remote => true, :class => 'label delete' %>
+              <%= link_to t("common.delete"), notification_path(notification), :method => :delete, :remote => true, :class => 'label delete' %>
             </td>
           </tr>
         <% end -%>

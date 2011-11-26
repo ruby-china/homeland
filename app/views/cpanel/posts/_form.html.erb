@@ -31,7 +31,7 @@
     <%= f.label :source %>
     <div class="input">
       <%= f.text_field :source, :class => "span3", :placeholder => "某某博客" %>
-    </div>
+    </div>t("common.save")
   </div>
   <div class="clearfix">
     <%= f.label :source_url %>
@@ -46,7 +46,7 @@
     </div>
   </div>
   <div class="actions">
-    <button class="btn primary">保存</button> or 
+    <button class="btn primary"><%= t("common.save") %></button> or 
     <%= link_to 'Back', cpanel_posts_path %>
   </div>
 <% end %>

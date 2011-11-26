@@ -49,6 +49,9 @@ This is source code of [Ruby China Group](http://ruby-china.org)
 
 <https://github.com/rafaelfranca/simple_form-bootstrap/blob/master/config/initializers/simple_form.rb>
 
+## Memcached
+
+Dalli need memcached 1.4.x +
 
 ## Helpers
 

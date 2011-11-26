@@ -1,0 +1,19 @@
+<%= render "base" %>
+<%= render "info" %>
+
+<div class="box">
+  <%= render "menu" %>
+  <table class="node_topics">
+    <tr class="head">
+      <td class="title">标题</td>
+      <td class="opts"></td>
+    </tr>
+    <% @likes.each do |item| %>
+    <tr class="topic <%= cycle('odd',"") %>">
+      <td class="title"><%= link_to(item.likeable.title, topic_path(item.likeable)) %></td>
+      <td></td>
+    </tr>
+    <% end %>
+  </table>
+  <%= will_paginate1 @likes %>
+</div>

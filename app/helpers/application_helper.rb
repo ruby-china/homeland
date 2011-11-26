@@ -69,6 +69,18 @@ classname, ("disabled" unless page)].join(" "))
 :outer_window => 0, :renderer => BootstrapLinkRenderer, :previous_label =>
 "上一页".html_safe, :next_label => "下一页".html_safe)
   end
+  
+  def render_page_title
+    title = @page_title ? "#{@page_title} | #{SITE_NAME}" : SITE_NAME rescue "SITE_NAME"
+    content_tag("title", title, nil, false)
+  end
 
+  # 去除区域里面的内容的换行标记  
+  def spaceless(&block)
+    data = with_output_buffer(&block)
+    data = data.gsub(/\n\s+/,"")
+    data = data.gsub(/>\s+</,"><")
+    raw data
+  end
   
 end

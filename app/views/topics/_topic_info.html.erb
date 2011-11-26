@@ -2,15 +2,15 @@
         <h1><%= truncate(topic.title, :length => 100) %></h1>
         <div class="info leader">
             由 <%= user_name_tag(topic.user) %>
-            在 <%= render_node_name(topic.node) %> 节点中发起
+            在 <%= render_node_name(topic.node) %> <%= t("menu.nodes")%> 中<%= t("common.create_item")%>
         </div>
         <div class="info time">
             <% if topic.last_reply_user.blank? %>
                 发布于 <%= render_topic_created_at(topic) %>
             <% else %>
-                最后由 <%= user_name_tag(topic.last_reply_user) %> 回复于 <%= render_topic_last_be_replied_time(topic) %>
+                <%= t("common.last_by")%> <%= user_name_tag(topic.last_reply_user) %> <%= t("common.reply_at")%> <%= render_topic_last_be_replied_time(topic) %>
             <% end %>
-            , <%= topic.hits %>次阅读
+            , <%= topic.hits %><%= t("common.read_times")%>
         </div>
     </div>            
 </div>

@@ -4,7 +4,7 @@
     <%= render "/comments/comment", :item => item %>
     <% end %>
   <% else %>
-    <div class="no_result">暂无<%= @title %>.</div>
+    <div class="no_result"><%= t("comments.no_comment") %>.</div>
   <% end %>
 </div>
 <% if @current_user %>
@@ -16,15 +16,10 @@
       <%= f.text_area :body, :class => "long", :rows => "5" %>
     </div>
     <div class="buttons">
-      <%= f.submit "发表#{@title}", :class => "btn primary" %> <span class="help-inline">Ctrl+Enter</span>
+      <%= f.submit t("comments.create_comment"), :class => "btn primary" %> <span class="help-inline">Ctrl+Enter</span>
     </div>
     <span class="help-block" style="margin-top:20px;">
-      <ul>
-        <li>URL将会自动加上链接</li>
-        <li>@name 将会链接到Twitter的用户</li>
-        <li>``` code ``` 将会显示代码</li>
-        <li>[img]http://foo.bar/a.jpg[/img] 显示图片</li>
-      </ul>
+      <%= render_cell :topics, :reply_help_block %>
     </span>
   <% end %>
 </div>

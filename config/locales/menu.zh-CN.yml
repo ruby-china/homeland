@@ -74,9 +74,10 @@
     create_comment: "发表评论"
     no_comment: "暂无評論"  
   share:
-    to_twitter: "转发到Twitter"
+    to_twitter: "转发到 Twitter"
     to_weibo: "转发到新浪微博"
     to_douban: "转发到豆瓣"
+    to_facebook: "转发到 Facebook"
   mail:
     this_is_a_notification_mail_please_do_not_reply: "这是一封提醒邮件，请勿直接通过邮件回复."
   rss:

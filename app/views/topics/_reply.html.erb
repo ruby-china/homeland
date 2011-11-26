@@ -3,14 +3,14 @@
   <div class="infos">
     <div class="info clearfix">
       <span class="name"><%= user_name_tag(item.user) %></span>
-      <span class="time"><%= i + 1 %><%= t("common.floor")%>, <%= t("common.reply_at")%> <%= timeago(item.created_at) %>
+      <span class="time">
+        <%= i + 1 %><%= t("common.floor")%>, <%= t("common.reply_at") %> <%= timeago(item.created_at) %>
         <% if owner?(item) %>
-            <%= link_to(t("common.edit"), edit_reply_path(item))%>
+          <%= link_to("", edit_reply_path(item), :class => "icon small_edit")%>
         <% end %>
         <%= link_to("", "#",
             :onclick => "return Topics.reply(#{i+1},'#{item.user.login}' );", 
             :title => t("topics.reply_this_floor"), :class => "icon small_reply" )
-
         %>
       </span>
     </div>

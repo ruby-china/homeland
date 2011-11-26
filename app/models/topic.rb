@@ -18,6 +18,7 @@ class Topic
   # 回复过的人的 ids 列表
   field :follower_ids, :type => Array, :default => []
   field :suggested_at, :type => DateTime
+  field :likes_count, :type => Integer, :default => 0
 
   belongs_to :user, :inverse_of => :topics
   counter_cache :name => :user, :inverse_of => :topics

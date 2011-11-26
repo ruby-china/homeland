@@ -75,5 +75,12 @@ classname, ("disabled" unless page)].join(" "))
     content_tag("title", title, nil, false)
   end
 
+  # 去除区域里面的内容的换行标记  
+  def spaceless(&block)
+    data = with_output_buffer(&block)
+    data = data.gsub(/\n\s+/,"")
+    data = data.gsub(/>\s+</,"><")
+    raw data
+  end
   
 end

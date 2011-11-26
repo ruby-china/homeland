@@ -22,6 +22,33 @@ window.App =
         App.openUrl('https://twitter.com/home?status=' + title + ' ' + url)
       when "douban"
         App.openUrl('http://www.douban.com/recommend/?url=' + url + '&title=' + title + '&v=1&r=1')
+  likeable : (el) ->
+    likeable_type = $(el).data("type")
+    likeable_id = $(el).data("id")
+    if $(el).data("state") != "liked"
+      $.ajax
+        url : "/likes"
+        type : "POST"
+        data : 
+          type : likeable_type
+          id : likeable_id
+        success : (re) ->
+          if re == "1"
+            $(el).data("state","liked").attr("class","icon small_liked").attr("title", "取消喜欢")
+          else
+            App.alert("抱歉，系统异常，提交失败。")
+    else
+      $.ajax
+        url : "/likes/#{likeable_id}"
+        type : "DELETE"
+        data : 
+          type : likeable_type
+        success : (re) ->
+          if re == "1"
+            $(el).data("state","").attr("class","icon small_like").attr("title", "取消喜欢")
+          else
+            App.alert("抱歉，系统异常，提交失败。")
+    false
 
 $(document).ready ->  
   $("abbr.timeago").timeago()

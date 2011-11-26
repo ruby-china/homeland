@@ -1,0 +1,5 @@
+<% if @success %>
+  $("#<%= @element_id %>").attr("class","icon small_like").data("method","post").attr("title", "取消喜欢");
+<% else %>
+  App.alert("提交失败.")
+<% end %>

@@ -21,12 +21,13 @@ class User
   field :website
   field :github
   # 是否信任用户
-  field :verified, :type => Boolean, :default => false
+  field :verified, :type => Boolean, :default => true
   field :state, :type => Integer, :default => 1
   field :guest, :type => Boolean, :default => false
   field :tagline  
   field :topics_count, :type => Integer, :default => 0
   field :replies_count, :type => Integer, :default => 0  
+  field :likes_count, :type => Integer, :default => 0
   
   index :login
   index :email
@@ -38,6 +39,7 @@ class User
   has_many :posts
   has_many :notifications, :class_name => 'Notification::Base', :dependent => :delete
   has_many :photos
+  has_many :likes
 
   def read_notifications(notifications)
     unread_ids = notifications.find_all{|notification| !notification.read?}.map(&:_id)
@@ -156,6 +158,20 @@ class User
     # 处理 last_reply_id 是空的情况
     last_reply_id = topic.last_reply_id || -1
     Rails.cache.write("user:#{self.id}:topic_read:#{topic.id}", last_reply_id)
+  end
+  
+  # 收藏东西
+  def like(likeable)
+    Like.find_or_create_by(:likeable_id => likeable.id, 
+                           :likeable_type => likeable.class,
+                           :user_id => self.id)
+  end
+  
+  # 取消收藏
+  def unlike(likeable)
+    Like.destroy_all(:conditions => {:likeable_id => likeable.id, 
+                                     :likeable_type => likeable.class,
+                                     :user_id => self.id})
   end
 
 end

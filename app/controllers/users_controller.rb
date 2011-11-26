@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_filter :require_user, :only => "auth_unbind"
   before_filter :init_base_breadcrumb
   before_filter :set_menu_active
+  before_filter :find_user, :only => [:show, :replies, :likes]
   
   def index
     @total_user_count = User.count
@@ -10,11 +11,21 @@ class UsersController < ApplicationController
   end
   
   def show
-    @user = User.where(:login => /^#{params[:id]}$/i).first
-    @last_topics = @user.topics.recent.limit(20)          
-    @last_replies = @user.replies.only(:topic_id, :body, :created_at).recent.includes(:topic).limit(10)
+    @topics = @user.topics.recent.paginate(:page => params[:page], :per_page => 20)          
     set_seo_meta("#{@user.login}")
     drop_breadcrumb(@user.login)
+  end
+  
+  def replies
+    @replies = @user.replies.only(:topic_id, :body, :created_at).recent.includes(:topic).limit(10)
+    drop_breadcrumb(@user.login, user_path(@user.login))
+    drop_breadcrumb("回帖")
+  end
+  
+  def likes
+    @likes = @user.likes.recent.topics.paginate(:page => params[:page], :per_page => 20)
+    drop_breadcrumb(@user.login, user_path(@user.login))
+    drop_breadcrumb("喜欢")
   end
   
   def auth_unbind
@@ -29,6 +40,9 @@ class UsersController < ApplicationController
   end
   
   protected
+  def find_user
+    @user = User.where(:login => /^#{params[:id]}$/i).first
+  end
   
   def set_menu_active
     @current = @current = ['/users']

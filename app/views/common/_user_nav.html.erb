@@ -17,7 +17,7 @@
       unless params[:controller].match(/cpanel/)
         li << link_to("个人资料设置",edit_user_registration_path)
         li << link_to("记事本", notes_path )
-        li << link_to("后台", "/cpanel")
+        li << link_to("后台", "/cpanel") if admin?
       end
       li << link_to("退出", destroy_user_session_path )
     end %>

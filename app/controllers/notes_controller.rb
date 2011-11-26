@@ -4,12 +4,12 @@ class NotesController < ApplicationController
   before_filter :init_base_breadcrumb
   
   def init_base_breadcrumb
-    drop_breadcrumb("记事本", notes_path)
+    drop_breadcrumb(t("menu.notes"), notes_path)
   end
 
   def index
     @notes = current_user.notes.paginate(:page => params[:page], :per_page => 20)
-    set_seo_meta("记事本")
+    set_seo_meta t("menu.notes")
     drop_breadcrumb("列表")
   end
 
@@ -20,21 +20,21 @@ class NotesController < ApplicationController
         render_404 and return
       end
     end
-    set_seo_meta("查看 &raquo; 记事本")
+    set_seo_meta("查看 &raquo; #{t("menu.notes")}")
     drop_breadcrumb("查看")
   end
 
 
   def new
     @note = current_user.notes.build
-    set_seo_meta("新建 &raquo; 记事本")
+    set_seo_meta("新建 &raquo; #{t("menu.notes")}")
     drop_breadcrumb(t("common.create"))
   end
 
 
   def edit
     @note = currenr_user.notes.find(params[:id])
-    set_seo_meta("修改 &raquo; 记事本")
+    set_seo_meta("修改 &raquo; #{t("menu.notes")}")
     drop_breadcrumb("修改")
   end
 
@@ -43,7 +43,7 @@ class NotesController < ApplicationController
     @note = current_user.notes.new(params[:note])  
 
     if @note.save
-      redirect_to(@note, :notice => '创建成功。')
+      redirect_to(@note, :notice => t("common.create_success"))
     else
       render :action => "new"
     end
@@ -54,7 +54,7 @@ class NotesController < ApplicationController
     @note = currenr_user.notes.find(params[:id])
 
     if @note.update_attributes(params[:note])
-      redirect_to(@note, :notice => '修改成功。')
+      redirect_to(@note, :notice => t("common.update_success"))
     else
       render :action => "edit"
     end

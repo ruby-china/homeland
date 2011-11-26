@@ -1,11 +1,17 @@
-<%= form_for(@note) do |f| %>
+<%= simple_form_for(@note) do |f| %>
   <fieldset>
     <%= render "shared/error_messages", :target => @note %>
     <div class="inputs-list pull-right">
-      <label for="note_publish"><%= f.check_box :publish %> 公开</label>
+      <label for="note_publish"><%= f.check_box :publish %> <%= t("common.public")%></label>
     </div>
     <%= f.text_area :body, :class => "span16", :style => "height:500px" %>
-    <p class="help-block">请用 <a href="http://en.wikipedia.org/wiki/Markdown" target="_blank">Markdown</a> 文档格式编写.</p>
+    <p class="help-block">
+        <% if I18n.default_locale == "zh-CN" %>
+            请用 <a href="http://en.wikipedia.org/wiki/Markdown" target="_blank">Markdown</a> 文档格式编写.
+        <% else %>
+            請用 <a href="http://en.wikipedia.org/wiki/Markdown" target="_blank">Markdown</a> 文件格式編寫.
+        <% end %>
+    </p>
     <div class="buttons">
       <button type="submit" class="btn primary"><%= t("common.save") %></button> <a href="<%= notes_path %>" class="btn"><%= t("common.cancel") %></a> 
     </div>

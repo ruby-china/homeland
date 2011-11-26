@@ -3,11 +3,19 @@
   <div class="note">
     <% if @note.publish %>
     <div class="pull-right urls">
-      <em>本页地址:</em> <input type="text" onclick="$(this).select();" value="<%= note_url(@note) %>" readonly="readonly" />
+      <em><%= t("notes.page_link")%></em> <input type="text" onclick="$(this).select();" value="<%= note_url(@note) %>" readonly="readonly" />
     </div>
     <% end %>
     <div class="info">
-      <p><%= raw '<span class="label warning">公开</span> ' if @note.publish %>共 <%= @note.word_count %> 个字符, 创建于 <%= timeago(@note.created_at) %>, <%= @note.changes_count %> 次编辑, by <%= user_name_tag(@note.user) %></p>
+      <p>
+          <% if I18n.default_locale == "zh-CN" %>
+            <%= raw '<span class="label warning">公开</span> ' if @note.publish %>
+            共 <%= @note.word_count %> 个字符, 创建于 <%= timeago(@note.created_at) %>, <%= @note.changes_count %> 次编辑, by <%= user_name_tag(@note.user) %>
+          <% else %>
+            <%= raw '<span class="label warning">公开</span> ' if @note.publish %>
+            共 <%= @note.word_count %> 個字元, 建立於 <%= timeago(@note.created_at) %>, <%= @note.changes_count %> 次編輯, by <%= user_name_tag(@note.user) %>
+          <% end %>
+      </p>
     </div>
 
     <div class="body"><%= markdown @note.body %></div>
@@ -15,7 +23,7 @@
     <% if owner? @note %>
       <div class="buttons">
         <a href="<%= edit_note_path(@note) %>" class="btn"><%= t("common.edit")%></a>
-        <%= link_to t("common.delete"), note_path(@note),:confirm => "确定要删除吗？", :method => :delete, :class => "btn danger"  %>
+        <%= link_to t("common.delete"), note_path(@note),:confirm => t("common.confirm_delete"), :method => :delete, :class => "btn danger"  %>
       </div>
     <% end %>
   </div>

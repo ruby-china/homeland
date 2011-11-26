@@ -22,6 +22,10 @@
     read_times: "次阅读"
     confirm_delete: "确定要删除么？"
     search: "搜索"
+    public: "公开"
+    create_success: "创建成功."
+    delete_success: "删除成功."
+    update_success: "修改成功."
   topics:
     create_topic: "新建帖子"
     edit_topic: "修改帖子"
@@ -40,6 +44,10 @@
     update_topic_success: "帖子修改成功."
     post_topic: "发帖"
     reply_success: "回复成功。"
+  notes:
+    create_note: "新建记事本"
+    edit_note: "修改記事本"
+    page_link: "本頁地址"
   menu:
     topics: "社区"
     wiki: "Wiki"

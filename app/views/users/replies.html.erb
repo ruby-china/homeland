@@ -1,14 +1,9 @@
-<<<<<<< HEAD
 <%= render "base" %>
 <%= render "info" %>
 
 <div class="box">
   <%= render "menu" %>
   <div class="replies">
-=======
-  <div class="last_replies box">
-    <h5><%= t("users.recent_reply_topic")%></h5>
->>>>>>> i18n
     <ul>
       <% @replies.each do |reply|
         next if reply.topic.blank? %>

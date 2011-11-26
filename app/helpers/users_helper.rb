@@ -60,9 +60,9 @@ module UsersHelper
     if admin?(user)
       content_tag(:span, "管理员", :class => "label warning")
     elsif wiki_editor?(user)
-      content_tag(:span, "Wiki 管理", :class => "label success")
+      content_tag(:span, "会员", :class => "label success")
     else
-      content_tag(:span, "普通用户", :class => "label")
+      content_tag(:span, "受限会员", :class => "label")
     end
   end
   

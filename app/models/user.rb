@@ -21,7 +21,7 @@ class User
   field :website
   field :github
   # 是否信任用户
-  field :verified, :type => Boolean, :default => false
+  field :verified, :type => Boolean, :default => true
   field :state, :type => Integer, :default => 1
   field :guest, :type => Boolean, :default => false
   field :tagline  

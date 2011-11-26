@@ -25,6 +25,7 @@ class Topic
   counter_cache :name => :node, :inverse_of => :topics
   belongs_to :last_reply_user, :class_name => 'User'
   has_many :replies, :dependent => :destroy
+  field :favorites_count, :type => Integer, :default => 0
 
   attr_protected :user_id
   validates_presence_of :user_id, :title, :body, :node_id

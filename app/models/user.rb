@@ -38,6 +38,7 @@ class User
   has_many :posts
   has_many :notifications, :class_name => 'Notification::Base', :dependent => :delete
   has_many :photos
+  has_many :favorites
 
   def read_notifications(notifications)
     unread_ids = notifications.find_all{|notification| !notification.read?}.map(&:_id)
@@ -156,6 +157,20 @@ class User
     # 处理 last_reply_id 是空的情况
     last_reply_id = topic.last_reply_id || -1
     Rails.cache.write("user:#{self.id}:topic_read:#{topic.id}", last_reply_id)
+  end
+  
+  # 收藏东西
+  def favorite(favoriteable)
+    Favorite.find_or_create_by(:favoriteable_id => favoriteable.id, 
+                               :favoriteable_type => favoriteable.class,
+                               :user_id => self.id)
+  end
+  
+  # 取消收藏
+  def unfavorite(favoriteable)
+    Favorite.destroy_all(:conditions => {:favoriteable_id => favoriteable.id, 
+                                         :favoriteable_type => favoriteable.class,
+                                         :user_id => self.id})
   end
 
 end

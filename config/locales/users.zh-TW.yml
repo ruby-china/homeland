@@ -24,3 +24,7 @@
     forget_password: "忘記了密碼?"
     not_recieve_confirm_mail: "未收到確認郵件?"
     not_recieve_unlock_mail: "未收到解鎖郵件?"
+    current_have: "目前已經有"
+    users_joined: "位會員加入了"
+    hot_users: "活躍會員"
+    recent_joined: "最新加入的會員"

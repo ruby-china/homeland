@@ -15,13 +15,16 @@ window.App =
       
   shareTo : (site, title) ->
     url = encodeURIComponent(location.href)
+    title = encodeURIComponent(title)
     switch site
       when "weibo"
-        App.openUrl('http://v.t.sina.com.cn/share/share.php?url=' + url + '&title=' + title + '&source=ruby-china&content=utf-8')
+        App.openUrl("http://v.t.sina.com.cn/share/share.php?url=#{url}&title=#{title}&source=ruby-china.org&content=utf-8")
       when "twitter"
-        App.openUrl('https://twitter.com/home?status=' + title + ' ' + url)
+        App.openUrl("https://twitter.com/home?status=#{title}: #{url} @ruby_china")
       when "douban"
-        App.openUrl('http://www.douban.com/recommend/?url=' + url + '&title=' + title + '&v=1&r=1')
+        App.openUrl("http://www.douban.com/recommend/?url=#{url}&title=#{title}&v=1&r=1")
+      when "facebook"
+        App.openUrl("http://www.facebook.com/sharer.php?t=#{title}&u=#{url}")
   likeable : (el) ->
     likeable_type = $(el).data("type")
     likeable_id = $(el).data("id")

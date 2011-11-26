@@ -7,6 +7,15 @@
 .box ul,
 .box ol { margin-bottom:0; }
 
+.feed_link {
+  float:right;
+  margin-top:-43px;
+  margin-right:10px;
+  .icon { margin-bottom:-3px; }
+  a { width:auto; padding-left:18px; color:#B94E22;}
+  a:hover { text-decoration: none; color:#333;}
+}
+
 .sidebar h2 { font-size:14px; line-height:100%; margin-bottom:10px; color:#666;}
 .sidebar ul, 
 .sidebar ol { margin-bottom:0; }

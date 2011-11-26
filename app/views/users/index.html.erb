@@ -1,13 +1,13 @@
 <%= render "base" %>
 <div id="users">
-  <div class="info">目前已經有<%= @total_user_count %>位會員加入了 <%= Setting.app_name %>。</div> 
+  <div class="info"><%= t("users.current_have") %> <%= @total_user_count %> <%= t("users.users_joined") %> <%= Setting.app_name %>。</div> 
   <div id="hot_users" class="user_list box row">
-    <h2>活躍會員</h2>
+    <h2><%= t("users.hot_users") %></h2>
     <%= render_cell :users, :active_users %>
   </div>
 
   <div id="recent_users" class="user_list box row">
-    <h2>最新加入的會員</h2>
+    <h2><%= t("users.recent_joined") %></h2>
     <%= render_cell :users, :recent_join_users %>
   </div>
 </div>

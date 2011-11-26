@@ -17,3 +17,4 @@
     update_topic_success: "帖子修改成功."
     post_topic: "发帖"
     reply_success: "回复成功。"
+    reply_this_floor: "回复此楼"

@@ -15,7 +15,7 @@ module ApplicationHelper
   end
 
   def markdown(str)
-    content_tag(:div,RDiscount.new(str).to_html, :class => "wikistyle" )
+    content_tag(:div,raw(RDiscount.new(str).to_html), :class => "wikistyle" )
   end
   
   def admin?(user = nil)

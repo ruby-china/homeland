@@ -1,14 +1,14 @@
 <%= render "base" %>
 <div class="sidebar">
   <div id="post_author" class="box">
-    <h2>提交者</h2>
+    <h2><%= t("posts.submitter")%></h2>
     <div class="inner">
       <div class="avatar"><%= raw user_avatar_tag(@post.user, :large) %></div>
       <div class="name"><%= user_name_tag(@post.user) %></div>
     </div>
   </div>
   <div class="box">
-    <h2>你可能也喜欢</h2>
+    <h2><%= t("common.you_may_like")%></h2>
     <div class="inner">
     </div>
   </div>
@@ -18,19 +18,19 @@
   <div id="post_show" class="box">
     <h1><%= @post.title %></h1>
     <div class="info">
-      <%= user_name_tag(@post.user) %> 投稿于: <%= timeago(@post.created_at) %> , <%= @post.hits %> <%= t("common.read_times")%>, 
+      <%= user_name_tag(@post.user) %> <%= t("posts.published_at")%>: <%= timeago(@post.created_at) %> , <%= @post.hits %> <%= t("common.read_times")%>, 
       <a href="#comments"><%= @post.comments_count %> 条评论</a>
     </div>
     <% if !@post.source.blank? %>
     <div class="source">
-      文章来源：<%= link_to(@post.source, @post.source_url+"?ref=#{Setting.domain}", :target => "_blank")%>
+      <%= t("posts.post_source")%>:<%= link_to(@post.source, @post.source_url+"?ref=#{Setting.domain}", :target => "_blank")%>
     </div>
     <% end %>
     <div class="body"><%= raw @post.body %></div>
     <div class="votes">
 
     </div>
-    <div class="tags">标签: <%= post_tags_tag(@post) %></div>
+    <div class="tags"><%= t("posts.tag")%>: <%= post_tags_tag(@post) %></div>
   </div>
   <div id="comments">
     <%= render_cell :comments, :index, :commentable => @post, :current_user => current_user, :title => "评论" %>

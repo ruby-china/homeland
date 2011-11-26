@@ -2,17 +2,15 @@
 <html>
 <head>
   <%= render_page_title %>
-  
-  <%= yield :open_graph if facebook_enable %>
   <%= stylesheet_link_tag "front" %>
-    <%= yield :styles %>
+  <%= yield :styles %>
   <meta name="keywords" content="<%= @meta_keywords %>" />
   <meta name="description" content="<%= @meta_description %>" />
   <link rel="shortcut icon" href="<%= asset_path("big_logo.png") %>" /> 
   <%= csrf_meta_tag %>
-    <%= javascript_include_tag "application" %>
-    <%= auto_discovery_link_tag(:rss,feed_topics_url,:title => '订阅最新贴') %>
-    <%= yield :scripts %>
+  <%= javascript_include_tag "application" %>
+  <%= auto_discovery_link_tag(:rss,feed_topics_url,:title => '订阅最新贴') %>
+  <%= yield :scripts %>
 </head>
 <%= render_body_tag %>
   <div class="topbar" data-dropdown="dropdown">

@@ -26,6 +26,7 @@
     create_success: "話題新增成功"
     delete_success: "話題刪除成功"
     update_success: "話題修改成功."
+    mark_all_as_read: "標記所有為已讀"
   topics:
     create_topic: "發表話題"
     edit_topic: "修改話題"

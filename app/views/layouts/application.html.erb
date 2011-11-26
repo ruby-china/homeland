@@ -3,6 +3,7 @@
 <head>
   <%= render_page_title %>
   
+  <%= yield :open_graph if facebook_enable %>
   <%= stylesheet_link_tag "front" %>
     <%= yield :styles %>
   <meta name="keywords" content="<%= @meta_keywords %>" />

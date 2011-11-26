@@ -83,4 +83,8 @@ classname, ("disabled" unless page)].join(" "))
     raw data
   end
   
+  def facebook_enable
+    Setting.facebook_enable
+  end
+  
 end

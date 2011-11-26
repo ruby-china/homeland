@@ -1,5 +1,11 @@
 <%= render 'base' %>
 
+<%= content_for :open_graph do %>
+    <%= og_title(@topic.title)%>
+    <%= og_description(@topic.body)%>
+<% end %>
+
+
 <div class="sidebar">
     <%= render_cell :topics, :sidebar_for_new_topic_node, { :action => params[:action], :node => @node } %>
 </div>

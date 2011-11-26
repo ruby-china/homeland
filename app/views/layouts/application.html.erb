@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= raw @page_title %><%= Setting.app_name %></title>
+  <%= render_page_title %>
+  
   <%= stylesheet_link_tag "front" %>
     <%= yield :styles %>
   <meta name="keywords" content="<%= @meta_keywords %>" />
@@ -12,7 +13,7 @@
     <%= auto_discovery_link_tag(:rss,feed_topics_url,:title => '订阅最新贴') %>
     <%= yield :scripts %>
 </head>
-<body>
+<%= render_body_tag %>
   <div class="topbar" data-dropdown="dropdown">
     <div class="topbar-inner">
       <div class="container">

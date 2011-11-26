@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
 
   def set_seo_meta(title = '',meta_keywords = '', meta_description = '')
     if title.length > 0
-      @page_title = "#{title} &raquo; "
+      @page_title = "#{title}"
     end
     @meta_keywords = meta_keywords
     @meta_description = meta_description

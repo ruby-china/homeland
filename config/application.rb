@@ -55,3 +55,5 @@ I18n.locale = 'zh-CN'
 
 require 'yaml'
 YAML::ENGINE.yamler= 'syck'
+
+

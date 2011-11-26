@@ -19,17 +19,25 @@ class PagesController < ApplicationController
 
   def show
     @page = Page.find_by_slug(params[:id])
-    if not @page
-      render_404
+    if !@page
+      if !current_user
+        render_404
+      else
+        redirect_to new_page_path(:title => params[:id]), :notice => "Page not Found, Please create a new page"
+        return
+      end
     end
     set_seo_meta("#{@page.title} - Wiki")
-    drop_breadcrumb("查看")
+    drop_breadcrumb("查看 #{@page.title}")
   end
 
   def new
     @page = Page.new
-    set_seo_meta("创建 Wiki 页面")
-    drop_breadcrumb(" 创建 Wiki 页面")
+
+    @page.slug = params[:title]
+    set_seo_meta t("pages.new_wiki_page")
+    drop_breadcrumb t("pages.new_wiki_page")
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @page }

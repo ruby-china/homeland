@@ -33,6 +33,8 @@
     create_note: "新建记事本"
     edit_note: "修改記事本"
     page_link: "本頁地址"
+  photos:
+    upload_and_insert_code: "上傳並插入原始碼"
   menu:
     topics: "社區"
     wiki: "Wiki"

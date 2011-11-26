@@ -1,7 +1,4 @@
 <%= render 'base' %>
-<%= content_for :sitemap do %>
-  <li class="active">查看贴子</li>
-<% end %>
 
 <div class="sidebar">
     <%= render_cell :topics, :sidebar_for_new_topic_node, { :action => params[:action], :node => @node } %>
@@ -58,5 +55,6 @@
         需要 <a href='/account/sign_in' class="btn primary">登录</a> 后回复方可回复, 如果你还没有账号 <a href="/account/sign_up" class="btn danger"> 点击这里注册</a>。
         </div>
     </div>
+        <%= render :partial => "need_login_to_reply" %>
     <% end %>
 </div>

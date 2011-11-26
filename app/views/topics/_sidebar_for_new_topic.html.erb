@@ -1,7 +1,7 @@
 <div class="sidebar">
     <%= render_cell :topics, :sidebar_for_new_topic_node, { :node => @node } %>
     <div id="topic_new_tip" class="box">
-      <h2>发贴说明</h2>
+      <h2><%= t("topics.tips_for_create_topic")%></h2>
       <%= render :partial => "/shared/reply_help_block" %>
     </div>
 </div>

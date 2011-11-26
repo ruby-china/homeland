@@ -25,7 +25,7 @@
         <div class="tools pull-right">
           <% if owner?(@topic) %>
               <%= link_to(t("common.edit"), edit_topic_path(@topic), :class => "label success" )%>
-              <%= link_to t("common.delete"), topic_path(@topic.id), :method => :delete, :confirm => "确定要删除么？", :class => "label important" %>
+              <%= link_to t("common.delete"), topic_path(@topic.id), :method => :delete, :confirm => t("common.confirm_delete"), :class => "label important" %>
             <% end %>
         </div>
         <%= render :partial => "common/share", :locals => {:title => @topic.title} %>
@@ -37,7 +37,7 @@
   <div id="reply" class="form box">
     <%= form_for(Reply.new, :remote => true,:url => reply_topic_path(params[:id])) do |f| %>
       <div class="pull-right">
-        <button type="submit" id="btn_reply" class="btn primary">提交回复</button><br />
+        <button type="submit" id="btn_reply" class="btn primary"><%= t("topics.submit_reply")%></button><br />
         <span class="help-inline">Ctrl+Enter</span>
       </div>
       <%= f.text_area :body,:class => "span10", :rows => "4" %><br /><br />
@@ -50,11 +50,7 @@
     </script>
   </div>
     <% else %>
-    <div id="reply" class="form box">
-        <div style="padding:20px;">
-        需要 <a href='/account/sign_in' class="btn primary">登录</a> 后回复方可回复, 如果你还没有账号 <a href="/account/sign_up" class="btn danger"> 点击这里注册</a>。
-        </div>
-    </div>
-        <%= render :partial => "need_login_to_reply" %>
+        <%= render :partial => "topics/translation/need_login_to_reply" %>
+
     <% end %>
 </div>

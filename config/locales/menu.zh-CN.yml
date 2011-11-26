@@ -13,6 +13,24 @@
     login: "登录"
     logout: "退出"
     cancel: "取消"
+    created_at: "发布于"
+    until: "截止"
+    last_by: "最后由"
+    floor: "楼"
+    reply_at: "回复于"
+    create_item: "发起"
+    read_times: "次阅读"
+    confirm_delete: "确定要删除么？"
+  topics:
+    create_topic: "新建帖子"
+    edit_topic: "修改帖子"
+    no_replies: "暂无回复。"
+    check_recent_topics: "查看更多最近发布的帖子..."
+    reply_this_fllor: "回复此楼"
+    tips_for_create_topic: "发贴说明"
+    start_a_new_topic_button: "发布新帖"
+    subscribe_with_rss: "订阅%{name}社区新贴"
+    submit_reply: "提交回复"
   menu:
     topics: "社区"
     wiki: "Wiki"
@@ -20,6 +38,7 @@
     users: "会员"
     cpanel: "后台"  
     notes: "記事本"
+    nodes: "节点"
     my_home_page: "我的主页"
     edit_account_path: "个人资料设置"
   cpanel:
@@ -52,3 +71,6 @@
     to_douban: "转发到豆瓣"
   mail:
     this_is_a_notification_mail_please_do_not_reply: "这是一封提醒邮件，请勿直接通过邮件回复."
+  rss:
+    recent_topics_description: "%{name}社区最新发贴."
+    recent_topics_title: "%{name}社区"

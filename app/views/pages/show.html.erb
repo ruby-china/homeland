@@ -1,4 +1,9 @@
 <%= render "base" %>
+<%= content_for :open_graph do %>
+    <%= og_title(@page.title)%>
+    <%= og_description(@topic.body)%>
+<% end %>
+
 <div id="page_show" class="box">
   <% if !@page.locked or admin? %>
     <div class="info">

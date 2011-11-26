@@ -67,3 +67,9 @@
 }
 
 .help-block ul { margin-bottom:0; }
+
+.simple_form {
+  label.required {
+    abbr { color:#c00;}
+  }
+}

@@ -41,6 +41,7 @@
     index_node_navigation: "讨论节点分类导航"
     highlight_topic: "置顶话题"
     statics: "统计信息"
+    not_yet_have: "暂无"
   posts:
     recent_publish_post: "最近发布的文章"
     post_source: "文章來源"
@@ -69,6 +70,9 @@
     nodes: "节点"
     my_home_page: "我的主页"
     edit_account_path: "个人资料设置"
+  comments:
+    create_comment: "发表评论"
+    no_comment: "暂无評論"  
   share:
     to_twitter: "转发到Twitter"
     to_weibo: "转发到新浪微博"

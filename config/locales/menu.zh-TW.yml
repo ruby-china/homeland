@@ -69,6 +69,9 @@
     nodes: "節點" 
     my_home_page: "我的首頁"
     edit_account_path: "個人資料設定"
+  comments:
+    create_comment: "發表評論"
+    no_comment: "暫無評論"
   share:
     to_twitter: "轉發到Twitter"
     to_weibo: "轉發到新浪微博"

@@ -27,6 +27,7 @@ class User
   field :tagline  
   field :topics_count, :type => Integer, :default => 0
   field :replies_count, :type => Integer, :default => 0  
+  field :likes_count, :type => Integer, :default => 0
   
   index :login
   index :email
@@ -38,7 +39,7 @@ class User
   has_many :posts
   has_many :notifications, :class_name => 'Notification::Base', :dependent => :delete
   has_many :photos
-  has_many :favorites
+  has_many :likes
 
   def read_notifications(notifications)
     unread_ids = notifications.find_all{|notification| !notification.read?}.map(&:_id)
@@ -160,17 +161,17 @@ class User
   end
   
   # 收藏东西
-  def favorite(favoriteable)
-    Favorite.find_or_create_by(:favoriteable_id => favoriteable.id, 
-                               :favoriteable_type => favoriteable.class,
-                               :user_id => self.id)
+  def like(likeable)
+    Like.find_or_create_by(:likeable_id => likeable.id, 
+                           :likeable_type => likeable.class,
+                           :user_id => self.id)
   end
   
   # 取消收藏
-  def unfavorite(favoriteable)
-    Favorite.destroy_all(:conditions => {:favoriteable_id => favoriteable.id, 
-                                         :favoriteable_type => favoriteable.class,
-                                         :user_id => self.id})
+  def unlike(likeable)
+    Like.destroy_all(:conditions => {:likeable_id => likeable.id, 
+                                     :likeable_type => likeable.class,
+                                     :user_id => self.id})
   end
 
 end

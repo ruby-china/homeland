@@ -1,33 +1,48 @@
-<div class="userinfo box">
-    
-    <% render_user_level_tag(user) %>
-  <% if admin?(user) %>
-    <span class="label warning">管理员</span>
-  <% elsif wiki_editor?(user) %>
-    <span class="label success">Wiki 管理</span>
-  <% else %>
-    <span class="label">普通用户</span>
-  <% end %>
-  
+<div class="row box">
+  <div class="pull-right">
+    <div style="text-align:center;">
+      <%= user_avatar_tag(@user,120, :link => false) %>
+    </div>
+  </div>
+
+  <div class="userinfo span13">
+    <% render_user_level_tag(@user) %>
+    <% if admin?(@user) %>
+      <span class="label warning">管理员</span>
+    <% elsif wiki_editor?(@user) %>
+      <span class="label success">Wiki 管理</span>
+    <% else %>
+      <span class="label">普通用户</span>
+    <% end %>  
     <ul>
-        <li style="text-align:right;">第 <%= user.id %> 位会员</li>
-        <li> <span>ID:</span><strong><%= user.login %></strong></li>
-        <% if !user.location.blank? %>
-             <li><span>城市:</span><%= render_user_location(user) %></li>
-        <% end %>
-        
-        <li><span>加入时间:</span><%= render_user_join_time(user) %></li>
-        
-        <% if !user.tagline.blank? %>
-            <li><span>签名:</span><%= render_user_tagline(user) %></li>
-        <% end %>
-        
-        <% if !user.github.blank? %>
-            <li><span>Github:</span><%= render_user_github_url(user) %> </li>
-        <% end %>
-        
-        <% if !user.website.blank? %>
-            <li><span>个人主页:</span><%= render_user_personal_website(user)%></li>
-        <% end %>
+      <li style="text-align:right;">第 <%= @user.id %> 位会员</li>
+      <li> <span>ID:</span><strong><%= @user.login %></strong></li>
+      <% if !@user.location.blank? %>
+         <li><span>城市:</span><%= render_user_location(@user) %></li>
+      <% end %>
+    
+      <li><span>加入时间:</span><%= render_user_join_time(@user) %></li>
+    
+      <% if !@user.tagline.blank? %>
+        <li><span>签名:</span><%= render_user_tagline(@user) %></li>
+      <% end %>
+    
+      <% if !@user.github.blank? %>
+        <li><span>Github:</span><%= render_user_github_url(@user) %> </li>
+      <% end %>
+    
+      <% if !@user.website.blank? %>
+        <li><span>个人主页:</span><%= render_user_personal_website(@user)%></li>
+      <% end %>
     </ul>
+  </div>
+
+  
 </div>
+
+<% if !@user.bio.blank? %>
+  <div class="bio box">
+    <h5>个人介绍</h5>
+    <p><%= auto_link(simple_format(@user.bio)) %></p>
+  </div>
+<% end %>

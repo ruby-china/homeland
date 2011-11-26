@@ -22,8 +22,7 @@
 .topics .body { margin-bottom:10px; line-height:160%; font-size:14px; margin-top:8px; word-wrap: break-word;}
 .topics .body p { margin-bottom:10px; }
 .topics .body img { max-width:690px;}
-.topics .tools { text-align:right; }
-.topics .tools a {margin-left:6px;}
+.topics .tools { text-align:right; height:16px; overflow:hidden;}
 .topics .topic .replies { width:70px; margin-right:10px; text-align:right; vertical-align:middle; }
 .topics .topic .replies a.count,
 .topics .topic .replies a.count:visited { line-height: 12px; font-weight: bold; color: white; 
@@ -37,7 +36,7 @@
 .topics .topic .replies a.state_true:hover { background:#1dc115;}
 .topics tr.topic td.replies { text-align:right; width:50px; font-size:14px; color:green;font-weight:bold; }
 .more { padding:8px; padding-bottom:0; font-size:14px; text-align:right; }
-
+.share_buttons { height:16px; }
 .pagination { margin:0; margin-top:10px; }
 
 /* topics list in node page */

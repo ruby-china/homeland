@@ -18,6 +18,7 @@ class Topic
   # 回复过的人的 ids 列表
   field :follower_ids, :type => Array, :default => []
   field :suggested_at, :type => DateTime
+  field :likes_count, :type => Integer, :default => 0
 
   belongs_to :user, :inverse_of => :topics
   counter_cache :name => :user, :inverse_of => :topics
@@ -25,7 +26,6 @@ class Topic
   counter_cache :name => :node, :inverse_of => :topics
   belongs_to :last_reply_user, :class_name => 'User'
   has_many :replies, :dependent => :destroy
-  field :favorites_count, :type => Integer, :default => 0
 
   attr_protected :user_id
   validates_presence_of :user_id, :title, :body, :node_id

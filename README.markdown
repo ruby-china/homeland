@@ -72,6 +72,6 @@ Dalli need memcached 1.4.x +
 
 * [Contributors](https://github.com/huacnlee/ruby-china/contributors)
 
-Thanks [Twitter Bootstrap](http://twitter.github.com/bootstrap)
+Thanks [Twitter Bootstrap](http://twitter.github.com/bootstrap), Icons from [Iconic](http://dictionary.reference.com/browse/iconic)
 
 Forked from [Homeland Project](http://github.com/huacnlee/homeland)

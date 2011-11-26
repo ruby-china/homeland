@@ -70,5 +70,12 @@ classname, ("disabled" unless page)].join(" "))
 "上一页".html_safe, :next_label => "下一页".html_safe)
   end
 
+  # 去除区域里面的内容的换行标记  
+  def spaceless(&block)
+    data = with_output_buffer(&block)
+    data = data.gsub(/\n\s+/,"")
+    data = data.gsub(/>\s+</,"><")
+    raw data
+  end
   
 end

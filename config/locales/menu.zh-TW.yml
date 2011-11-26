@@ -38,6 +38,9 @@
     reply_count: "回應數"
     last_reply_time: "最後回應時間"
     reply: "回應"
+    index_node_navigation: "討論節點分類導航"
+    highlight_topic: "置頂話題"
+    statics: "統計資訊"
   posts:
     recent_publish_post: "最近發布的文章"
     post_source: "文章来源"
@@ -53,6 +56,7 @@
     create_note: "新建记事本"
     edit_note: "修改記事本"
     page_link: "本頁地址"
+    hot_node: "熱門節點"
   photos:
     upload_and_insert_code: "上傳並插入原始碼"
   menu:

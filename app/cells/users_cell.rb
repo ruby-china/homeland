@@ -7,7 +7,7 @@ class UsersCell < BaseCell
     render 
   end
   
-  cache :active_users, :expires_in => 1.hour
+  cache :recent_join_users, :expires_in => 1.hour
   def recent_join_users
     @recent_join_users = User.recent.limit(20)
     render

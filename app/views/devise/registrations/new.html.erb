@@ -1,7 +1,7 @@
 <% content_for :sitemap do %><span class="current">加入社区</span><% end %>
 <div class="sidebar">
   <div class="box">
-    <h2>已经有帐号了？</h2>
+    <h2><%= t("users.already_have_account")%></h2>
     <p style="line-height:20px;">
       <%= render :partial => "devise/shared/links" %>
     </p>
@@ -11,13 +11,13 @@
     <div class="box">
     <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
       <fieldset>
-        <legend>注册新用户</legend>
+        <legend><%= t("users.register_user")%></legend>
         <%= render "shared/error_messages", :target => resource %> 
         <div class="clearfix">
           <%= f.label :login %>
           <div class="input">
             <%= f.text_field :login %><br />
-            <span class="help-block">建议用 Twitter ID,以便 @回复 的时候能够关联到你的 Twitter。</span>
+            <span class="help-block"><%= t("users.suggest_using_twitter_id")%></span>
           </div>
         </div>
         <div class="clearfix">

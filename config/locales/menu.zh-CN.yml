@@ -55,16 +55,6 @@
     page_link: "本頁地址"
   photos:
     upload_and_insert_code: "上传并插入代码"
-  user:
-    bios: "个人介绍"
-    city: "城市"
-    join_time: "加入时间"
-    signature: "签名"
-    personal_website: "个人主页"
-    recent_publish_topic: "最近发布的贴子"
-    recent_reply_topic: "最近回复过的帖子"
-    unbind_warning: "只少要保留一个关联帐号，现在不能解绑。"
-    unbind_success: "%{provider} 帐号解绑成功。"
   menu:
     topics: "社区"
     wiki: "Wiki"

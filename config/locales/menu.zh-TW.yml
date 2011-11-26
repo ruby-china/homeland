@@ -10,7 +10,7 @@
     upload: "上傳"
     published_at: "發表於"
     register: "註冊"
-    login: "登錄"
+    login: "登入"
     logout: "登出"
     cancel: "取消"
     created_at: "發布於"
@@ -55,16 +55,6 @@
     page_link: "本頁地址"
   photos:
     upload_and_insert_code: "上傳並插入原始碼"
-  users:
-    bios: "個人介紹"
-    city: "城市"
-    join_time: "加入時間"
-    signature: "簽名檔"
-    personal_website: "個人網站"
-    recent_publish_topic: "最近發表的話題"
-    recent_reply_topic: "最近回應過的話題"
-    unbind_warning: "至少要保留一個關聯帳號，現在不能鬆綁。"
-    unbind_success: "%{provider} 帳號鬆綁成功。"
   menu:
     topics: "社區"
     wiki: "Wiki"

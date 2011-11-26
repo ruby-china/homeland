@@ -1,26 +1,29 @@
-<% content_for :sitemap do %><span class="current">设置</span><% end %>
 <div class="sidebar">
   <div class="box" style="text-align:center;">
-    <%= user_avatar_tag(@user, 120, :link => false) %> <br />如需修改头像，请进入 <a href="http://www.gravatar.com">gravatar.com</a>
+     <% if I18n.default_locale == "zh-CN"%>
+         <%= user_avatar_tag(@user, 120, :link => false) %> <br />如需修改头像，请进入 <a href="http://www.gravatar.com">gravatar.com</a>
+     <% else %>
+         <%= user_avatar_tag(@user, 120, :link => false) %> <br />如需修改頭像，請進入<a href="http://www.gravatar.com">gravatar.com</a>
+     <% end %>
   </div>
   <div class="box">
-        <h2>绑定其他帐号用于登陆</h2>
+        <h2><%= t("users.bind_another_account")%></h2>
         <ul>
           <% ["github","douban"].each do |provider| %>
             <li>
               <% if @user.bind? provider %>
-                <a href="/account/auth/<%= provider %>/unbind" rel="twitsy" title="点击解除绑定"><%= provider.titleize %></a>
+                <%= link_to( provider.titleize, "/account/auth/#{provider}/unbind", :rel => "twitsy", :title => "点击解除绑定" )%>
                 <span class="label success">已绑定</span>
               <% else %>
-                <a href="/account/auth/<%= provider %>" rel="twitsy" title="点击绑定"><%= provider.titleize %></a>
+                <%= link_to(provider.titleize, "/account/auth/#{provider}",:rel => "twitsy", :title => "点击解除绑定" )%>
               <% end %>
             </li>
             <% end %>
         </ul>
     </div>
   <div class="box">
-    <h2>删除我的帐号</h2>
-    <p>不喜欢? <%= link_to "删除此帐号", registration_path(resource_name), :confirm => "删除后无法恢复，你确定吗?", :class => "btn danger", :method => :delete %></p>
+    <h2><%= t("users.delete_my_account")%></h2>
+    <p><%= t("users.dont_like_it")%> <%= link_to(t("users.delete_this_account"), registration_path(resource_name), :confirm => "删除后无法恢复，你确定吗?", :class => "btn danger", :method => :delete )%></p>
   </div>
   
 </div>
@@ -28,7 +31,7 @@
   <div class="box">
     <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :enctype =>  "multipart/form-data" }) do |f| %>
       <fieldset>
-        <legend>个人资料</legend>
+        <legend><%= t("users.personal_information")%></legend>
         <% if params[:by].blank? %>
             <%= render "shared/error_messages", :target => resource %> 
         <% end %>
@@ -36,7 +39,7 @@
             <%= f.label :login %>
             <div class="input">
               <%= f.text_field :login, :class => "span3" %><br >
-              <span class="help-block"><span class="label warning">谨慎修改</span> 此项将会影响回复信息关联,建议用 Twitter ID</span>
+                <span class="help-block"><span class="label warning"><%= t("users.please_be_careful")%></span> <%= t("users.be_sure_to_use_twitter_id")%></span>
           </div>
           </div>
         <div class="clearfix">
@@ -49,7 +52,7 @@
             <%= f.label :location %>
             <div class="input">
               <%= f.text_field :location, :class => "span3" %><br />
-              <span class="help-block">请用中文填写所在城市</span>
+              <span class="help-block"><%= t("users.please_use_chinese_city")%></span>
             </div>
           </div>
           <div class="clearfix">
@@ -86,7 +89,7 @@
   <div class="box">
     <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name,:by => :pwd), :html => { :method => :put }) do |f| %>
       <fieldset>
-          <legend>修改密码</legend>
+          <legend><%= t("users.edit_password")%></legend>
           <% if params[:by] == "pwd" %>
             <%= render "shared/error_messages", :target => resource %>
           <% end %>

@@ -35,7 +35,7 @@
               <%= link_to t("common.delete"), topic_path(@topic.id), :method => :delete, :confirm => t("common.confirm_delete"), :class => "label important" %>
           <% end %>
         </div>
-        <%= render :partial => "common/share", :locals => {:title => @topic.title} %>
+        <%= render :partial => "common/share", :locals => {:title => @topic.title, :url => Setting.domain + topic_path(@topic) } %>
     </div>
 
     <%= render :partial => "topics/replies", :locals => { :topic => @topic, :replies => @replies} %>

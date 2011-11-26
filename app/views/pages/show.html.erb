@@ -7,7 +7,7 @@
     </div>
   <% end %>
   <div style="text-align:right;">
-    <%= render :partial => "common/share", :locals => {:title => @page.title} %>
+    <%= render :partial => "common/share", :locals => {:title => @page.title,  :url => Setting.domain + page_path(@page) } %>
   </div>
   
   <div class="wikistyle">

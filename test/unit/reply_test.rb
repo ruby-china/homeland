@@ -5,7 +5,7 @@ class ReplyTest < ActiveSupport::TestCase
     user = Factory :user
     reply = Factory :reply, :body => "@#{user.login}"
     assert_equal [user.id], reply.mentioned_user_ids
-    assert_equal [user], reply.mentioned_user_logins
+    assert_equal [user.login], reply.mentioned_user_logins
 
     # 5 mentioned limit
     logins = ""

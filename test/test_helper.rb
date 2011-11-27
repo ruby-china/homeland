@@ -9,6 +9,7 @@ class ActiveSupport::TestCase
     Mongoid.database.collections.each do |coll|
       coll.remove if coll.name !~ /system/
     end
+    Rails.cache.clear
   end
 end
 

@@ -15,10 +15,13 @@ describe Like do
       user.likes.count.should == 1
       user.reload
       user.likes_count.should == 1
+      topic.reload
       topic.likes_count.should == 1
       user2.like(topic)
+      topic.reload
       topic.likes_count.should == 2
       user2.unlike(topic)
+      topic.reload
       user2.likes.count.should == 0
       user2.reload
       user2.likes_count.should == 0

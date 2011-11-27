@@ -13,9 +13,10 @@ class TopicsControllerTest < ActionController::TestCase
     user = Factory :user
     topic = Factory :topic
     Factory :reply, :topic => topic
-    assert_equal 1, topic.user_readed?(user.id)
+    assert !user.topic_read?(topic)
     sign_in user
     post :reply, :id => topic, :reply => {:body => 'content'}, :format => :js
-    assert_equal 0, topic.user_readed?(user.id)
+    topic.reload
+    assert user.topic_read?(topic), Rails.cache.read("user:#{user.id}:topic_read:#{topic.id}").to_s
   end
 end

@@ -44,7 +44,8 @@ module RubyChina
     config.assets.version = '1.0'
 
     config.generators do |g|  
-      g.test_framework :test_unit, :fixture_replacement => :factory_girl
+      g.test_framework :rspec
+      g.fixture_replacement :factory_girl, :dir => "spec/factories"
     end
   end
 end

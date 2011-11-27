@@ -80,6 +80,5 @@ end
 
 group :test do
   gem 'factory_girl_rails'
-  gem 'turn',      :require => false
   gem 'simplecov', :require => false
 end

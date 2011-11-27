@@ -35,8 +35,10 @@ RSpec.configure do |config|
   config.infer_base_class_for_anonymous_controllers = false
 
   config.include Delorean
+  config.include Devise::TestHelpers, :type => :controller
   DatabaseCleaner.strategy = :truncation
   config.before do
     DatabaseCleaner.clean
+    Rails.cache.clear
   end
 end

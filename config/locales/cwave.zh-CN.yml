@@ -1,0 +1,9 @@
+"zh-CN":
+  errors:
+    messages:
+      carrierwave_processing_error: 处理错误
+      carrierwave_integrity_error: 格式不是可上载的类型
+      extension_white_list_error: "不可上载 %{extension} 档案，可以上载的档案类型为：%{allowed_types}"
+      rmagick_processing_error: "用 rmagick 处理影像档时发生错误，也许上载的不是影像档？原错误讯息：%{e}"
+      mime_types_processing_error: "处理档案 MIME::Types 时发生错误，也许上载的档案不是正确的 content-type ？原错误：%{e}"
+      mini_magick_processing_error: "使用 MiniMagick 处理影像时发生错误，也许上载的不是影像档？原错误：%{e}"

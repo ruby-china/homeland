@@ -14,10 +14,22 @@ module TopicsHelper
     return raw(markdown(text))
   end
 
-  # XXX: must be mentioned by #12楼
-  # couldn't it be #12F ?
   def link_mention_floor!(text)
-    text.gsub!(/#([\d]+)楼\s/,' #<a href="#reply\1" class="at_floor" data-floor="\1" onclick="return Topics.hightlightReply(\1)">\1楼</a> ')
+
+    # matches #X樓, #X楼, #XF, #Xf, with or without :
+    # doesn't care if there is a space after the mention command
+    expression = /#([\d]+)([楼樓Ff]:?)/
+
+    text.gsub!(expression) do |floor_token|
+      floorish, postfix = $1, $2
+
+      html_options = {
+        :class => "at_floor", "data-floor" => floorish,
+        :onclick => "return Topics.hightlightReply(#{floorish})"
+      }
+
+      link_to("##{floorish}#{postfix}", "#reply#{floorish}", html_options) 
+    end
   end
 
   def link_mention_user!(text, mentioned_user_logins)

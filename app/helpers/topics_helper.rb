@@ -1,14 +1,16 @@
 # coding: utf-8  
 module TopicsHelper
   def format_topic_body(text, options = {})
-    options[:title] = ''
-    options[:allow_image] = true
-    mentioned_user_logins = options[:mentioned_user_logins] || []
     text.gsub!(/\[img\](http:\/\/.+?)\[\/img\]/i,'<img src="\1" alt="'+ h(options[:title]) +'" />') if options[:allow_image]
-    link_mention_user!(text, mentioned_user_logins)
+    options[:title] ||= ''
+    options[:allow_image] ||= true
+    options[:mentioned_user_logins] ||= []
 
     # mention floor by #
     link_mention_floor!(text)
+
+    # mention user by @
+    link_mention_user!(text, options[:mentioned_user_logins])
 
     return raw(markdown(text))
   end

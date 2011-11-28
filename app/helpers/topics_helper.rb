@@ -1,7 +1,6 @@
 # coding: utf-8  
 module TopicsHelper
   def format_topic_body(text, options = {})
-    text.gsub!(/\[img\](http:\/\/.+?)\[\/img\]/i,'<img src="\1" alt="'+ h(options[:title]) +'" />') if options[:allow_image]
     options[:title] ||= ''
     options[:allow_image] ||= true
     options[:mentioned_user_logins] ||= []

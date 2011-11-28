@@ -1,6 +1,7 @@
 # coding: utf-8
 # 单页的文档页面
 # 采用 Markdown 编写
+require "redcarpet"
 class Page
   include Mongoid::Document
   include Mongoid::Timestamps  

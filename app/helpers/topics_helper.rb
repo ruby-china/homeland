@@ -4,6 +4,7 @@ module TopicsHelper
     options[:title] ||= ''
     options[:allow_image] ||= true
     options[:mentioned_user_logins] ||= []
+    options[:class] ||= ''
 
     # mention floor by #
     link_mention_floor!(text)
@@ -11,7 +12,7 @@ module TopicsHelper
     # mention user by @
     link_mention_user!(text, options[:mentioned_user_logins])
 
-    return raw(markdown(text))
+    return raw(markdown(text, {:class => options[:class] , :hard_wrap => true}))
   end
 
   def link_mention_floor!(text)

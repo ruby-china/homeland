@@ -1,6 +1,5 @@
 html_renderer = Redcarpet::Render::HTML.new({
-  :filter_html => true,   # filter out html tags
-  :hard_wrap => true      # auto <br> in <p>
+  :filter_html => true   # filter out html tags
 })
 
 $markdown = Redcarpet::Markdown.new(html_renderer, {

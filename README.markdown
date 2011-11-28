@@ -43,7 +43,7 @@ cap production remote_rake:invoke task=db:setup
       li << link_to("Home", "/")
     end
 
-## Bookstrap CSS version
+## Bootstrap CSS version
 
 1.4.0 
 

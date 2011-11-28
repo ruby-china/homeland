@@ -5,10 +5,18 @@ module TopicsHelper
     options[:allow_image] = true
     mentioned_user_logins = options[:mentioned_user_logins] || []
     text.gsub!(/\[img\](http:\/\/.+?)\[\/img\]/i,'<img src="\1" alt="'+ h(options[:title]) +'" />') if options[:allow_image]
-    text.gsub!(/#([\d]+)楼\s/,'#<a href="#reply\1" class="at_floor" data-floor="\1" onclick="return Topics.hightlightReply(\1)">\1楼</a> ')
     link_mention_user!(text, mentioned_user_logins)
 
+    # mention floor by #
+    link_mention_floor!(text)
+
     return raw(markdown(text))
+  end
+
+  # XXX: must be mentioned by #12楼
+  # couldn't it be #12F ?
+  def link_mention_floor!(text)
+    text.gsub!(/#([\d]+)楼\s/,' #<a href="#reply\1" class="at_floor" data-floor="\1" onclick="return Topics.hightlightReply(\1)">\1楼</a> ')
   end
 
   def link_mention_user!(text, mentioned_user_logins)

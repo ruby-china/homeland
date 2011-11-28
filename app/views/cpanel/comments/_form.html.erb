@@ -1,0 +1,11 @@
+<%= simple_form_for([:cpanel,@comment], :wrapper => :inline) do |f| %>
+  <fieldset>
+    <legend>Edit Comment</legend>
+    <%= render "/shared/error_messages", :target => @comment %>
+    <%= f.input :body, :as => :text, :input_html => {:class => "xxlarge"} %>
+    <div class="actions">
+      <%= f.submit "Save", :class => "btn primary" %> or
+      <%= link_to 'Cancel', cpanel_comments_path, :class => "btn" %>
+    </div>
+  </fieldset>
+<% end %>

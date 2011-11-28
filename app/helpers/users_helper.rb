@@ -26,7 +26,7 @@ module UsersHelper
     return image_tag("http://www.gravatar.com/avatar/#{hash}?s=#{width}&d=identicon")  if user.blank?
     
     img_src = "http://www.gravatar.com/avatar/#{hash}?s=#{width}&d=identicon"
-    img = image_tag(img_src)
+    img = image_tag(img_src, :style => "width:#{width}px;height:#{width}px;")
     html = ""
     if link
       html = %(<a href="#{user_path(user.login)}" #{user_popover_info(user)} class="user_avatar">#{img}</a>)

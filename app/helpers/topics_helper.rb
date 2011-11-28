@@ -1,5 +1,4 @@
 # coding: utf-8  
-require 'rdiscount'
 module TopicsHelper
   def format_topic_body(text, options = {})
     options[:title] = ''

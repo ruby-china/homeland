@@ -1,5 +1,4 @@
 # coding: utf-8
-require "rdiscount"
 module ApplicationHelper
 
   def notice_message
@@ -15,7 +14,14 @@ module ApplicationHelper
   end
 
   def markdown(str)
-    content_tag(:div,raw(RDiscount.new(str).to_html), :class => "wikistyle" )
+    # XXX: the renderer instance should be a class variable
+    assembler = Redcarpet::Render::HTML.new(:hard_wrap => true) # auto <br> in <p>
+
+    renderer = Redcarpet::Markdown.new(assembler, {
+      :autolink => true,
+      :fenced_code_blocks => true
+    })
+    content_tag(:div, raw(renderer.render(str)), :class => "wikistyle")
   end
   
   def admin?(user = nil)

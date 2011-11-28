@@ -15,10 +15,9 @@
     </div>
     
     <div class="edit_tools">
-         <%= link_to("上传图片", "#", :onclick => "return Topics.addImageClick();", :id => "add_image")%>
-    </div>
-    
-    <%= f.input :body, :as => :text, :input_html => { :class => "topic_body_text_area xxlarge", :style => "height:400px" }%>
+      <%= render "editor_toolbar" %>
+    </div>    
+    <%= f.input :body, :as => :text, :input_html => { :class => "topic_editor xxlarge", :style => "height:400px" }%>
 
     <div class="actions">
       <input type="submit" value="<%= t("common.save") %>" class="btn primary"> 

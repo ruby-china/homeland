@@ -40,7 +40,8 @@
           <button type="submit" id="btn_reply" class="btn primary"><%= t("topics.submit_reply")%></button><br />
           <span class="help-inline">Ctrl+Enter</span>
         </div>
-        <%= f.text_area :body,:class => "span10", :rows => "4" %><br /><br />
+        <%= render "editor_toolbar" %>
+        <%= f.text_area :body,:class => "topic_editor span10", :rows => "4" %><br /><br />
         <span class="help-block">
           <%= render_cell :topics, :reply_help_block %>
         </span>

@@ -73,7 +73,7 @@
 
 #reply.form textarea { width:578px; }
 
-.edit_tools { text-align:right; margin-bottom:3px;}
+.edit_tools { text-align:left; margin-bottom:2px; margin-left:148px;}
 
 .totals ul li { line-height:150%;}
 
@@ -104,6 +104,14 @@
     }
   }
   .more { }
+}
+
+#reply {
+  form {
+    .pull-right {
+      padding-top:16px;
+    }
+  }
 }
 
 

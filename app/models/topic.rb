@@ -72,7 +72,7 @@ class Topic
   end
 
   def self.search(key,options = {})
-    paginate :conditions => "title like '%#{key}%'",:page => 1
+    paginate :conditions => "title like '%#{key}%'", :page => 1
   end
 
   def self.find_by_message_id(message_id)

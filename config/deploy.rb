@@ -1,4 +1,6 @@
 # coding: utf-8
+require "bundler/capistrano"
+
 set :application, "ruby-china"
 set :repository,  "git://github.com/huacnlee/ruby-china.git"
 set :branch, "master"
@@ -42,31 +44,22 @@ task :link_shared_config_yaml, :roles => :web do
   run "ln -sf #{deploy_to}/shared/config/unicorn.rb #{deploy_to}/current/config/"
 end
 
-task :install_gems, :roles => :web do
-  run "cd #{deploy_to}/current/; bundle install"
-end
-
 task :restart_resque, :roles => :web do
   run "cd #{deploy_to}/current/; RAILS_ENV=production ./script/resque stop; RAILS_ENV=production ./script/resque start"
 end
 
 task :restart_resque, :roles => :web do
   run "cd #{deploy_to}/current/; RAILS_ENV=production ./script/resque stop; RAILS_ENV=production ./script/resque start"
-end
-
-# 编译 assets
-task :compile_assets, :roles => :web do
-  run "cd #{deploy_to}/current/; bundle exec rake assets:precompile"
 end
 
 task :mongoid_create_indexes, :roles => :web do
   run "cd #{deploy_to}/current/; bundle exec rake db:mongoid:create_indexes"
 end
 
-after "deploy:symlink", :init_shared_path, :link_shared_config_yaml, :install_gems, :compile_assets, :mongoid_create_indexes
+after "deploy:symlink", :init_shared_path, :link_shared_config_yaml, :mongoid_create_indexes
 
 
-set :default_environment, { 
+set :default_environment, {
   'PATH' => "/home/ruby/.rvm/gems/ruby-1.9.3-p0/bin:/home/ruby/.rvm/gems/ruby-1.9.3-p0@global/bin:/home/ruby/.rvm/rubies/ruby-1.9.3-p0/bin:/home/ruby/.rvm/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games",
   'RUBY_VERSION' => 'ruby-1.9.3-p0',
   'GEM_HOME' => '/home/ruby/.rvm/gems/ruby-1.9.3-p0',

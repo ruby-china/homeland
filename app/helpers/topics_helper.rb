@@ -6,13 +6,18 @@ module TopicsHelper
     options[:mentioned_user_logins] ||= []
     options[:class] ||= ''
 
+    text = h(text)
+    text.gsub!(/```(<br>{0,}|\s{0,})(.+?)```(<br>{0,}|\s{0,})/im,'<pre><code>\2</code></pre>')
+    text.gsub!(/\[img\](http:\/\/.+?)\[\/img\]/i,'<img src="\1" alt="'+ h(options[:title]) +'" />') if options[:allow_image]
+    text = auto_link(text,:all, :target => '_blank', :rel => "nofollow")
+
     # mention floor by #
     link_mention_floor!(text)
 
     # mention user by @
     link_mention_user!(text, options[:mentioned_user_logins])
 
-    return raw(markdown(text, {:class => options[:class] , :hard_wrap => true}))
+    simple_format(text)
   end
 
   def link_mention_floor!(text)

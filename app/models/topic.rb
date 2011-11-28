@@ -62,6 +62,14 @@ class Topic
   def pull_follower(user_id)
     self.follower_ids.delete(user_id)
   end
+  
+  def update_last_reply(reply)
+    self.replied_at = Time.now
+    self.last_reply_id = reply.id
+    self.last_reply_user_id = reply.user_id
+    self.push_follower(reply.user_id)
+    self.save
+  end
 
   def self.search(key,options = {})
     paginate :conditions => "title like '%#{key}%'",:page => 1

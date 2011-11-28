@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: git://github.com/xdite/bootstrap-rails.git
-  revision: 9044d58e685457bf2a5bfd099bd14f44cd6631bc
+  revision: 7fe2d48ef0b01de7b16aa927465d83c768e3769e
   specs:
     bootstrap-rails (0.1.4)
       railties (~> 3.0)
@@ -130,7 +130,7 @@ GEM
     jquery-rails (1.0.16)
       railties (~> 3.0)
       thor (~> 0.14)
-    json (1.6.1)
+    json (1.6.2)
     kgio (2.6.0)
     mail (2.3.0)
       i18n (>= 0.4.0)
@@ -148,7 +148,7 @@ GEM
       tzinfo (~> 0.3.22)
     mongoid_auto_increment_id (0.2.2)
       mongoid (~> 2.2.0)
-    multi_json (1.0.3)
+    multi_json (1.0.4)
     multipart-post (1.1.4)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)

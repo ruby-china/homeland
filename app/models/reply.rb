@@ -29,11 +29,7 @@ class Reply
   
   after_create :update_parent_topic
   def update_parent_topic
-    self.topic.replied_at = Time.now
-    self.topic.last_reply_id = self.id
-    self.topic.last_reply_user_id = self.user_id
-    self.topic.push_follower(self.user_id)
-    self.topic.save
+    topic.update_last_reply(self)
   end
 
   before_save :extract_mentioned_users

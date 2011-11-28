@@ -4,15 +4,11 @@ module Mongoid
   module SoftDelete      
     extend ActiveSupport::Concern
   
-    def self.included(base)
-      base.instance_eval do
-        field :deleted_at, :type => DateTime
-      
-        default_scope where(:deleted_at => nil)
-        alias_method :destroy!, :destroy
+    included do
+      field :deleted_at, :type => DateTime
 
-        include InstanceMethods
-      end
+      default_scope where(:deleted_at => nil)
+      alias_method :destroy!, :destroy
     end
   
     module InstanceMethods

@@ -29,6 +29,8 @@ module TopicsHelper
     # mention user by @
     link_mention_user!(text, options[:mentioned_user_logins])
 
+    text = remove_br_in_pre(text)
+
     return raw(text)
 
   end
@@ -36,6 +38,22 @@ module TopicsHelper
   def parse_fenced_code_block!(text)
     text.gsub!(/```(<br>{0,}|\s{0,})(.+?)```(<br>{0,}|\s{0,})/im,
                 '<pre><code>\2</code></pre>')
+  end
+
+  def remove_br_in_pre(text)
+    # XXX: ActionView uses SafeBuffer, not String
+    # and it's gsub is different from String#gsub
+    # which makes gsub with block unusable.
+
+    source = String.new(text.to_s)
+
+    source.gsub!(/<pre>(.+?)<\/pre>/mi) do |matched|
+      code = $1
+
+      code.gsub!(/<br\s?\/?>/, "\n")
+      "<pre>#{code}</pre>"
+    end
+    source
   end
 
   def parse_bbcode_image!(text, title)

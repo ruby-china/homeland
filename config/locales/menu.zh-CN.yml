@@ -1,5 +1,8 @@
 "zh-CN":
   common:
+    justnow: '刚刚'
+    hour: '小时'
+    minute: '分钟'
     edit: "修改"
     create: "新建"
     avatar: "头像"

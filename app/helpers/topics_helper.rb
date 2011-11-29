@@ -28,7 +28,7 @@ module TopicsHelper
     text = simple_format(text)
 
     text = reformat_code_block(text) do |code|
-      code.gsub!(/<br\s?\/?>/, "\n")
+      code.gsub!(/<br\s?\/?>/, "")
     end
 
     return raw(text)

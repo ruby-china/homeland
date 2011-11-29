@@ -25,6 +25,9 @@ gem "omniauth-github"
 gem "omniauth-twitter"
 gem "omniauth-douban", :git => "git://github.com/xdite/omniauth-douban.git"
 
+# permission
+gem "cancan"
+
 # 搜索相关的组件
 gem 'chinese_pinyin', '0.4.1'
 gem "rmmseg-cpp-huacnlee", "0.2.8"

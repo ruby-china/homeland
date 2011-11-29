@@ -58,7 +58,6 @@ gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'
 gem 'bootstrap-rails', :require => 'bootstrap-rails',
   :git => 'git://github.com/xdite/bootstrap-rails.git'
 
-
 group :assets do
   gem 'sass-rails', "  ~> 3.1.4"
   gem 'coffee-rails', "~> 3.1.1"
@@ -73,14 +72,10 @@ end
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.7.0'
-  gem 'delorean'
-  gem 'database_cleaner'
-  gem 'ffaker'
 end
 
 group :test do
   gem 'factory_girl_rails'
-  gem 'simplecov', :require => false
 end
 
 group :production do

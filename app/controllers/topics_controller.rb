@@ -1,6 +1,7 @@
 # coding: utf-8  
 class TopicsController < ApplicationController
-  before_filter :require_user, :only => [:new,:edit,:create,:update,:destroy,:reply]
+  load_and_authorize_resource
+  
   before_filter :set_menu_active
   caches_page :feed, :expires_in => 1.hours
   before_filter :init_base_breadcrumb

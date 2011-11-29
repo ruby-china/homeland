@@ -1,42 +1,75 @@
 # coding: utf-8  
 module TopicsHelper
   def format_topic_body(text, options = {})
-    options[:title] = ''
-    options[:allow_image] = true
-    mentioned_user_logins = options[:mentioned_user_logins] || []
+
+    options[:title] ||= ''
+    options[:allow_image] ||= true
+    options[:mentioned_user_logins] ||= []
+    options[:class] ||= ''
+
     text = h(text)
+    
+    # XXX don't use simple_format, it doesn't compatible with code_block
     text.gsub!( /\r\n?/, "\n" )
     text.gsub!( /\n/, "<br>" )
-    text.gsub!(/```(<br>{0,}|\s{0,})(.+?)```(<br>{0,}|\s{0,})/im,'<pre><code>\2</code></pre>')
-    text.gsub!(/\[img\](http:\/\/.+?)\[\/img\]/i,'<img src="\1" alt="'+ h(options[:title]) +'" />') if options[:allow_image]
+    
+    ## fenced code block with ```
+    parse_fenced_code_block!(text)
+    
+    # parse bbcode-style image [img]url[/img]
+    parse_bbcode_image!(text, options[:title]) if options[:allow_image]
+    
+    # Auto Link
+    
     text = auto_link(text,:all, :target => '_blank', :rel => "nofollow")
-    text.gsub!(/#([\d]+)楼\s/,'#<a href="#reply\1" class="at_floor" data-floor="\1" onclick="return Topics.hightlightReply(\1)">\1楼</a> ')
-    link_mention_user!(text, mentioned_user_logins)
+    
+    # mention floor by #
+    link_mention_floor!(text)
+    
+    # mention user by @
+    link_mention_user!(text, options[:mentioned_user_logins])
+
     return raw(text)
+
   end
 
-  # def link_mention_floor!(text)
-  # 
-  #   # matches #X樓, #X楼, #XF, #Xf, with or without :
-  #   # doesn't care if there is a space after the mention command
-  #   expression = /#([\d]+)楼\s/
-  # 
-  #   text.gsub!(expression) do
-  #     floorish = $1
-  # 
-  #     html_options = {
-  #       :class => "at_floor", 
-  #       "data-floor" => floorish,
-  #       :onclick => "return Topics.hightlightReply(#{floorish})"
-  #     }
-  # 
-  #     link_to("##{floorish}樓 ", "#reply#{floorish}", html_options) 
-  #   end
-  # end
+  def parse_fenced_code_block!(text)
+    text.gsub!(/```(<br>{0,}|\s{0,})(.+?)```(<br>{0,}|\s{0,})/im,
+                '<pre><code>\2</code></pre>')
+  end
+
+  def parse_bbcode_image!(text, title)
+    text.gsub!(/\[img\](http:\/\/.+?)\[\/img\]/i) do
+      src = $1
+      image_tag(src, :alt => title)
+    end
+  end
+
+  def link_mention_floor!(text)
+
+    # matches #X樓, #X楼, #XF, #Xf, with or without :
+    # doesn't care if there is a space after the mention command
+    expression = /#([\d]+)([楼樓Ff]\s?)/
+
+    text.gsub!(expression) do |floor_token|
+      floorish, postfix = $1, $2
+
+      html_options = {
+        :class => "at_floor", "data-floor" => floorish,
+        :onclick => "return Topics.hightlightReply(#{floorish})"
+      }
+
+      link_to(floor_token, "#reply#{floorish}", html_options) 
+    end
+  end
 
   def link_mention_user!(text, mentioned_user_logins)
     return text if mentioned_user_logins.blank?
-    text.gsub!(/@(#{mentioned_user_logins.join('|')})/,'@<a href="/users/\1" class="at_user" title="\1">\1</a>')
+    text.gsub!(/@(#{mentioned_user_logins.join('|')})/) do |mention_token|
+      user_name = $1
+      link_to(mention_token, user_path(user_name), 
+              :class => "at_user", :title => mention_token)
+    end
   end
   
   def topic_use_readed_text(state)

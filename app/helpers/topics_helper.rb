@@ -9,10 +9,6 @@ module TopicsHelper
 
     text = h(text)
     
-    # XXX don't use simple_format, it doesn't compatible with code_block
-    text.gsub!( /\r\n?/, "\n" )
-    text.gsub!( /\n/, "<br>" )
-    
     ## fenced code block with ```
     parse_fenced_code_block!(text)
     
@@ -28,6 +24,8 @@ module TopicsHelper
     
     # mention user by @
     link_mention_user!(text, options[:mentioned_user_logins])
+
+    text = simple_format(text)
 
     text = reformat_code_block(text) do |code|
       code.gsub!(/<br\s?\/?>/, "\n")

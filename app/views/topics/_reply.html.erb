@@ -4,7 +4,7 @@
     <div class="info clearfix">
       <span class="name"><%= user_name_tag(item.user) %></span>
       <span class="time">
-        <%= i + 1 %><%= t("common.floor")%>, <%= t("common.reply_at") %> <%= timeago(item.created_at) %>
+        <%= i + 1 %><%= t("common.floor")%>, <%= raw t("common.reply_at", :time => timeago(item.created_at)) %>
         <% if owner?(item) %>
           <%= link_to("", edit_reply_path(item), :class => "icon small_edit", :title => "修改回帖")%>
         <% end %>

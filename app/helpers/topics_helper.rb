@@ -29,7 +29,9 @@ module TopicsHelper
     # mention user by @
     link_mention_user!(text, options[:mentioned_user_logins])
 
-    text = remove_br_in_pre(text)
+    text = reformat_code_block(text) do |code|
+      code.gsub!(/<br\s?\/?>/, "\n")
+    end
 
     return raw(text)
 
@@ -40,18 +42,19 @@ module TopicsHelper
                 '<pre><code>\2</code></pre>')
   end
 
-  def remove_br_in_pre(text)
+  def reformat_code_block(text, &block)
     # XXX: ActionView uses SafeBuffer, not String
     # and it's gsub is different from String#gsub
     # which makes gsub with block unusable.
 
     source = String.new(text.to_s)
 
-    source.gsub!(/<pre>(.+?)<\/pre>/mi) do |matched|
+    source.gsub!(/<pre><code>(.+?)<\/code><\/pre>/mi) do |matched|
       code = $1
 
-      code.gsub!(/<br\s?\/?>/, "\n")
-      "<pre>#{code}</pre>"
+      block.call(code)
+
+      "<pre><code>#{code}</code></pre>"
     end
     source
   end

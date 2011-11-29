@@ -14,14 +14,7 @@ module ApplicationHelper
   end
 
   def markdown(str)
-    # XXX: the renderer instance should be a class variable
-    assembler = Redcarpet::Render::HTML.new(:hard_wrap => true) # auto <br> in <p>
-
-    renderer = Redcarpet::Markdown.new(assembler, {
-      :autolink => true,
-      :fenced_code_blocks => true
-    })
-    content_tag(:div, raw(renderer.render(str)), :class => "wikistyle")
+    content_tag(:div, raw($markdown.render(str)), :class => "wikistyle")
   end
   
   def admin?(user = nil)

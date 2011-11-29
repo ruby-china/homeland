@@ -25,8 +25,6 @@ gem "omniauth-github"
 gem "omniauth-twitter"
 gem "omniauth-douban", :git => "git://github.com/xdite/omniauth-douban.git"
 
-# Rails cache 存放到 Redis
-gem 'dalli', '1.1.1'
 # 搜索相关的组件
 gem 'chinese_pinyin', '0.4.1'
 gem "rmmseg-cpp-huacnlee", "0.2.8"
@@ -58,7 +56,7 @@ gem "unicorn"
 gem "sprite-factory", "1.4.1"
 gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'
 gem 'bootstrap-rails', :require => 'bootstrap-rails',
-  :git => 'git://github.com/xdite/bootstrap-rails.git'                   
+  :git => 'git://github.com/xdite/bootstrap-rails.git'
 
 
 group :assets do
@@ -70,6 +68,7 @@ end
 group :development do
   gem 'capistrano', '2.9.0'
   gem 'chunky_png', "1.2.5"
+  gem "memcache-client", "1.8.5"
 end
 
 group :development, :test do
@@ -82,4 +81,8 @@ end
 group :test do
   gem 'factory_girl_rails'
   gem 'simplecov', :require => false
+end
+
+group :production do
+  gem 'dalli', '1.1.1'
 end

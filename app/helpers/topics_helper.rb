@@ -56,12 +56,14 @@ module TopicsHelper
 
     source = String.new(text.to_s)
 
-    source.gsub!(/<pre><code>(.+?)<\/code><\/pre>/mi) do |matched|
+    source.gsub!(/<pre>(.+?)<\/pre>/mi) do |matched|
       code = $1
 
       block.call(code)
 
-      "<pre><code>#{code}</code></pre>"
+      logger.debug("after: #{code}")
+
+      "<pre>#{code}</pre>"
     end
     source
   end

@@ -1,6 +1,6 @@
 <%= simple_form_for @topic, :wrapper => :inline do |f| %>
   <fieldset>
-    <legend><%= @topic.new_record? ? "新建帖子" : "修改帖子" %></legend>
+    <legend><%= @topic.new_record? ? t("topics.create_topic") : t("topics.edit_topic") %></legend>
     <%= render "shared/error_messages", :target => @topic %>  
     <div class="clearfix">
       <%= f.label :title %>

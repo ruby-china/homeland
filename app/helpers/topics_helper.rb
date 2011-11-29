@@ -7,9 +7,12 @@ module TopicsHelper
     options[:class] ||= ''
 
     text = h(text)
-    text.gsub!(/\[img\](http:\/\/.+?)\[\/img\]/i,'<img src="\1" alt="'+ h(options[:title]) +'" />') if options[:allow_image]
+
     # fenced code block with ```
     parse_fenced_code_block!(text)
+
+    # parse bbcode-style image [img]url[/img]
+    parse_bbcode_image!(text, options[:title]) if options[:allow_image]
 
     text = auto_link(text,:all, :target => '_blank', :rel => "nofollow")
 
@@ -25,6 +28,13 @@ module TopicsHelper
   def parse_fenced_code_block!(text)
     text.gsub!(/```(<br>{0,}|\s{0,})(.+?)```(<br>{0,}|\s{0,})/im,
                 '<pre><code>\2</code></pre>')
+  end
+
+  def parse_bbcode_image!(text, title)
+    text.gsub!(/\[img\](http:\/\/.+?)\[\/img\]/i) do
+      src = $1
+      image_tag(src, :alt => title)
+    end
   end
 
   def link_mention_floor!(text)

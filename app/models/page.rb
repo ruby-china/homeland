@@ -37,14 +37,7 @@ class Page
   def markdown_for_body_html
     return true if not self.body_changed?
 
-    # XXX: this should be a global variable
-    assembler = Redcarpet::Render::HTML.new(:hard_wrap => true) # auto <br> in <p>
-    renderer = Redcarpet::Markdown.new(assembler, {
-      :autolink => true,
-      :fenced_code_blocks => true
-    })
-
-    self.body_html = renderer.render(self.body)
+    self.body_html = $markdown.render(self.body)
   rescue => e
     Rails.logger.error("markdown_for_body_html failed: #{e}")
   end

@@ -39,6 +39,7 @@ gem 'redis-namespace','~> 1.0.2'
 gem "redis-objects", "0.5.2"
 # Markdown 格式
 gem "redcarpet", "~> 2.0.0b5"
+gem "pygments.rb"
 # HTML 处理
 gem "nokogiri", "1.5.0"
 gem "jquery-rails", "1.0.16"

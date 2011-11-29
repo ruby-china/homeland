@@ -8,7 +8,7 @@
 </div>
 <div class="content">
     <div class="box">
-        <%= form_for(@reply) do |f| %>
+        <%= form_for([@topic,@reply]) do |f| %>
         <fieldset>
           <legend><%= t("reply.edit_reply")%></legend>
       <%= render "shared/error_messages", :target => @reply %>  
@@ -23,7 +23,7 @@
       </div>
       <div class="actions">
         <button class="btn primary"><%= t("common.save")%></button>
-        <a href="<%= topic_path(@reply.topic_id) %>" class="btn"><%= t("common.cancel") %></a>
+        <a href="<%= topic_path(@topic) %>" class="btn"><%= t("common.cancel") %></a>
       </div>
     <% end %>
     </div>

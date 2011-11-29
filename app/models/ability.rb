@@ -18,6 +18,10 @@ class Ability
         (topic.user_id == user.id)
       end
       
+      can :destroy, Topic do |topic|
+         (topic.user_id == user.id)
+      end
+
       basic_read_only
     else
       # banned or unknown situation

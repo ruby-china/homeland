@@ -10,7 +10,7 @@ module TopicsHelper
     text = h(text)
     
     ## fenced code block with ```
-    parse_fenced_code_block!(text)
+    text = parse_fenced_code_block(text)
     
     # parse bbcode-style image [img]url[/img]
     parse_bbcode_image!(text, options[:title]) if options[:allow_image]
@@ -35,9 +35,18 @@ module TopicsHelper
 
   end
 
-  def parse_fenced_code_block!(text)
-    text.gsub!(/```(<br>{0,}|\s{0,})(.+?)```(<br>{0,}|\s{0,})/im,
-                '<pre><code>\2</code></pre>')
+  def parse_fenced_code_block(text)
+    source = String.new(text.to_s)
+
+    source.gsub!(/(```.+?```)/im) do
+      code = CGI::unescapeHTML($1)
+
+      # let the markdown compiler draw the <pre><code>
+      # (with syntax highlighting)
+      $markdown.render(code)
+    end
+
+    return source
   end
 
   def reformat_code_block(text, &block)

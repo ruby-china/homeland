@@ -1,0 +1,25 @@
+<h1>Listing Comments</h1>
+
+<table>
+  <tr>
+    <th>Able Type</th>
+    <th>Able ID</th>
+    <th>User</th>
+    <th>Body</th>
+    <td>At</td>
+    <td></td>
+  </tr>
+
+<% @comments.each do |item| %>
+  <tr id="comment<%= item.id %>">
+    <td><%= item.commentable_type %></td>
+    <td><%= item.commentable_id %></td>
+    <td><%= item.user.login if !item.user.blank? %></td>
+    <td><%= item.body %></td>
+    <td><%= l item.created_at, :format => :long %></td>
+    <td><%= link_to '', edit_cpanel_comment_path(item), :class => "icon small_edit" %> 
+    <%= link_to '', cpanel_comment_path(item), confirm: 'Are you sure?', method: :delete, remote: true, :class => "icon small_delete" %></td>
+  </tr>
+<% end %>
+</table>
+<%= will_paginate1 @comments %>

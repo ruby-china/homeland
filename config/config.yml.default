@@ -5,7 +5,7 @@ defaults: &defaults
   admin_emails: 
     - "admin@admin.com"
   google_analytics_key: ""
-  upload_url: "http://127.0.0.1:3000/file"
+  upload_url: "http://127.0.0.1:3000/uploads"
   google_group_email: "shanghaionrails@googlegroups.com"
   email_sender: 'no-reply@ruby-china.org'
   aws_access_key_id: ''

@@ -12,10 +12,13 @@
         <fieldset>
           <legend><%= t("reply.edit_reply")%></legend>
       <%= render "shared/error_messages", :target => @reply %>  
+      <div class="edit_tools">
+        <%= render "/topics/editor_toolbar" %>
+      </div>
       <div class="clearfix">
         <%= f.label :body %>
         <div class="input">
-        <%= f.text_area :body, :class => "topic_body_text_area xxlarge", :rows => "20" %>
+          <%= f.text_area :body, :class => "topic_editor xxlarge", :rows => "20" %>
         </div>
       </div>
       <div class="actions">

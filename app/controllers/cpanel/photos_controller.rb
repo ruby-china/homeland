@@ -2,7 +2,7 @@
 class Cpanel::PhotosController < Cpanel::ApplicationController
 
   def index
-    @photos = Photo.desc("id").paginate :page => params[:page], :per_page => 20
+    @photos = Photo.recent.paginate :page => params[:page], :per_page => 20
   end
 
   def show

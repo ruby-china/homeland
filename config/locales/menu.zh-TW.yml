@@ -63,7 +63,7 @@
     users: "會員"
     cpanel: "後台"  
     notes: "記事本"
-    nodes: "節點" 
+    nodes: "節點"
     my_home_page: "我的首頁"
     edit_account_path: "個人資料設定"
   comments:

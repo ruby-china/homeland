@@ -1,5 +1,4 @@
 # coding: utf-8  
-require 'rdiscount'
 module TopicsHelper
   def format_topic_body(text, options = {})
     options[:title] = ''
@@ -15,6 +14,25 @@ module TopicsHelper
     link_mention_user!(text, mentioned_user_logins)
     return raw(text)
   end
+
+  # def link_mention_floor!(text)
+  # 
+  #   # matches #X樓, #X楼, #XF, #Xf, with or without :
+  #   # doesn't care if there is a space after the mention command
+  #   expression = /#([\d]+)楼\s/
+  # 
+  #   text.gsub!(expression) do
+  #     floorish = $1
+  # 
+  #     html_options = {
+  #       :class => "at_floor", 
+  #       "data-floor" => floorish,
+  #       :onclick => "return Topics.hightlightReply(#{floorish})"
+  #     }
+  # 
+  #     link_to("##{floorish}樓 ", "#reply#{floorish}", html_options) 
+  #   end
+  # end
 
   def link_mention_user!(text, mentioned_user_logins)
     return text if mentioned_user_logins.blank?

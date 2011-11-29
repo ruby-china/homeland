@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: git://github.com/xdite/bootstrap-rails.git
-  revision: 9044d58e685457bf2a5bfd099bd14f44cd6631bc
+  revision: 7fe2d48ef0b01de7b16aa927465d83c768e3769e
   specs:
     bootstrap-rails (0.1.4)
       railties (~> 3.0)
@@ -130,7 +130,7 @@ GEM
     jquery-rails (1.0.16)
       railties (~> 3.0)
       thor (~> 0.14)
-    json (1.6.1)
+    json (1.6.2)
     kgio (2.6.0)
     mail (2.3.0)
       i18n (>= 0.4.0)
@@ -148,7 +148,7 @@ GEM
       tzinfo (~> 0.3.22)
     mongoid_auto_increment_id (0.2.2)
       mongoid (~> 2.2.0)
-    multi_json (1.0.3)
+    multi_json (1.0.4)
     multipart-post (1.1.4)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
@@ -216,9 +216,9 @@ GEM
       thor (~> 0.14.6)
     raindrops (0.8.0)
     rake (0.9.2.2)
-    rdiscount (1.6.8)
     rdoc (3.11)
       json (~> 1.4)
+    redcarpet (2.0.0b5)
     redis (2.2.2)
     redis-namespace (1.0.3)
       redis (< 3.0.0)
@@ -331,7 +331,7 @@ DEPENDENCIES
   rails (= 3.1.1)
   rails-i18n (= 0.1.8)
   rails_autolink (>= 1.0.4)
-  rdiscount (= 1.6.8)
+  redcarpet (~> 2.0.0b5)
   redis-namespace (~> 1.0.2)
   redis-objects (= 0.5.2)
   redis-search (= 0.6.3)

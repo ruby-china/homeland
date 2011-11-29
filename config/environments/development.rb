@@ -1,4 +1,4 @@
-# coding: utf-8  
+# coding: utf-8
 RubyChina::Application.configure do
   # Settings specified here will take precedence over those in config/environment.rb
 
@@ -20,20 +20,21 @@ RubyChina::Application.configure do
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
-  config.cache_store = [:dalli_store,"127.0.0.1", {:namespace => "rb-cn", :compression => true}]
+  # config.cache_store = [:dalli_store,"127.0.0.1", {:namespace => "rb-cn", :compression => true}]
+  config.cache_store = :mem_cache_store, "localhost"
 
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
-  
+
   config.assets.compress = false
   config.assets.debug = true
-  
+
   config.after_initialize do |app|
     app.assets.logger = Logger.new('/dev/null')
   end
-  
 
-  
+
+
 end
 
 

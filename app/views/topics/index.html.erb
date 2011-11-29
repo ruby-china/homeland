@@ -49,9 +49,9 @@
               </div>
               <div class="info time">
                 <% if topic.last_reply_user.blank? %>
-                  发布于 <%= timeago(topic.created_at) %>
+                  <%= raw t("common.created_at", :time => timeago(topic.created_at))%>
                 <% else %>
-                  <%= t("common.last_by")%> <%= user_name_tag(topic.last_reply_user) %> <%= t("common.reply_at")%> <%= timeago(topic.replied_at) %>
+                  <%= t("common.last_by")%> <%= user_name_tag(topic.last_reply_user) %> <%= raw t("common.reply_at", :time => timeago(topic.replied_at))%>
 
                 <% end %>
               </div>

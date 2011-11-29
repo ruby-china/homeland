@@ -24,7 +24,7 @@ module TopicsHelper
 
     # matches #X樓, #X楼, #XF, #Xf, with or without :
     # doesn't care if there is a space after the mention command
-    expression = /#([\d]+)([楼樓Ff]:?)/
+    expression = /#([\d]+)([楼樓Ff]\s?)/
 
     text.gsub!(expression) do |floor_token|
       floorish, postfix = $1, $2

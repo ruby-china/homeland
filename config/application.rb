@@ -1,4 +1,4 @@
-# coding: utf-8  
+# coding: utf-8
 require File.expand_path('../boot', __FILE__)
 APP_VERSION = '0.6'
 
@@ -6,6 +6,7 @@ require "action_controller/railtie"
 require "action_mailer/railtie"
 require "active_resource/railtie"
 require "rails/test_unit/railtie"
+require "sprockets/railtie"
 
 
 if defined?(Bundler)
@@ -35,15 +36,15 @@ module RubyChina
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password,:password_confirm]
-    
+
     config.mongoid.logger = Logger.new($stdout, :warn)
-    
+
     config.mongoid.include_root_in_json = false
-    
+
     config.assets.enabled = true
     config.assets.version = '1.0'
 
-    config.generators do |g|  
+    config.generators do |g|
       g.test_framework :rspec
       g.fixture_replacement :factory_girl, :dir => "spec/factories"
     end

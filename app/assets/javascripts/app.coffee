@@ -68,4 +68,5 @@ $(document).ready ->
   $(".share_buttons a").click () ->
     App.shareTo($(this).data("site"), $(this).parent().data('title'))
     return false
+  $("select").chosen()
     

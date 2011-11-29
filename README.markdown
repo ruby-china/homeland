@@ -2,9 +2,9 @@ This is source code of [Ruby China Group](http://ruby-china.org)
 
 ## Install
 
-  * You need install *Ruby 1.9.2*, *Rubygems* and *Rails 3.1* first.
-  * Install and start *Redis*, *MongoDb*, *memcached*
-  
+  * You need to install *Ruby 1.9.2*, *Rubygems* and *Rails 3.1* first.
+  * Install and start *Redis*, *MongoDB*, *memcached*
+
   ```
   cp config/config.yml.default config/config.yml
   cp config/mongoid.yml.default config/mongoid.yml
@@ -15,14 +15,11 @@ This is source code of [Ruby China Group](http://ruby-china.org)
   thin start -O -C config/thin.yml
   ./script/resque start
   ```
-  
-## Deploy 
 
-  ```
-  $ cap deploy
-  ```
+## Deploy
 
-cap production remote_rake:invoke task=db:setup
+    $ cap deploy
+    $ cap production remote_rake:invoke task=db:setup
 
 ## OAuth
 
@@ -37,7 +34,7 @@ cap production remote_rake:invoke task=db:setup
     drop_breadcrumb("A Level")
     drop_breadcrumb("B Level")
 
-## Menu    
+## Menu
 
     render_list :class => "menu" do |li|
       li << link_to("Home", "/")
@@ -45,19 +42,20 @@ cap production remote_rake:invoke task=db:setup
 
 ## Bootstrap CSS version
 
-1.4.0 
+1.4.0
 
-## Bootstrap Form 
+## Bootstrap Form
 
 <https://github.com/rafaelfranca/simple_form-bootstrap/blob/master/config/initializers/simple_form.rb>
 
 ## Memcached
 
-Dalli need memcached 1.4.x +
+Dalli requires memcached 1.4.x +
 
 ## Helpers
 
     render_topic_title(topic)
+
 ## Common Partial
 
 * common/share : for social share
@@ -78,6 +76,8 @@ facekbook_enable: false by default
 
 * [Contributors](https://github.com/huacnlee/ruby-china/contributors)
 
-Thanks [Twitter Bootstrap](http://twitter.github.com/bootstrap)
+## Thanks
 
-Forked from [Homeland Project](http://github.com/huacnlee/homeland)
+* [Twitter Bootstrap](https://twitter.github.com/bootstrap)
+
+Forked from [Homeland Project](https://github.com/huacnlee/homeland)

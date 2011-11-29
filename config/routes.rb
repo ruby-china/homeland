@@ -73,6 +73,7 @@ RubyChina::Application.routes.draw do
         end
       end
     end
+    resources :comments
   end  
   
   if Rails.env.development?

@@ -1,1 +1,3 @@
 <%= render_cell :topics, :sidebar_for_new_topic_node, { :node => @node } %>
+<%= raw SiteConfig.topic_index_sidebar_html %>
+<%= render_cell :topics, :sidebar_hot_nodes %>

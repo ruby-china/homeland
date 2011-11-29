@@ -1,6 +1,5 @@
 <%= render "base" %>
-<%= render "info" %>
-
+<%= render :partial => "info", :locals => {:user => @user } %>
 <div class="box">
   <%= render "menu" %>
   <div class="replies">

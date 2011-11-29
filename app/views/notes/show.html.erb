@@ -9,7 +9,7 @@
     <div class="info">
       <p>
         <%= raw '<span class="label warning">公开</span> ' if @note.publish %>
-        共 <%= @note.word_count %> <%= t("notes.chars") %>, <%= t("notes.created_at") %> <%= timeago(@note.created_at) %>, <%= @note.changes_count %> <%= t("notes.times_edit") %>, by <%= user_name_tag(@note.user) %>
+        共 <%= @note.word_count %> <%= t("notes.chars") %>, 由 <%= user_name_tag(@note.user) %> <%= raw t("notes.created_at", :time => timeago(@note.created_at)) %> , <%= @note.changes_count %> <%= t("notes.times_edit") %>
       </p>
     </div>
 

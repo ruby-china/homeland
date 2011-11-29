@@ -1,5 +1,8 @@
 "zh-TW":
   common:
+    justnow: '剛剛'
+    hour: '小時'
+    minute: '分鐘'
     edit: "修改"
     create: "新增"
     avatar: "頭像"
@@ -13,11 +16,11 @@
     login: "登入"
     logout: "登出"
     cancel: "取消"
-    created_at: "發布於"
+    created_at: "於%{time}發布"
     until: "截至"
     last_by: "最後由"
     floor: "樓"
-    reply_at: "回應於"
+    reply_at: "於%{time}回應"
     create_item: "發起"
     read_times: "次閱讀"
     confirm_delete: "確定要刪除嗎？"
@@ -63,7 +66,7 @@
     users: "會員"
     cpanel: "後台"  
     notes: "記事本"
-    nodes: "節點" 
+    nodes: "節點"
     my_home_page: "我的首頁"
     edit_account_path: "個人資料設定"
   comments:

@@ -1,5 +1,5 @@
 # coding: utf-8
-require "rdiscount"
+require "redcarpet"
 module ApplicationHelper
 
   def notice_message
@@ -14,8 +14,18 @@ module ApplicationHelper
     flash_messages.join("\n").html_safe
   end
 
-  def markdown(str)
-    content_tag(:div,raw(RDiscount.new(str).to_html), :class => "wikistyle" )
+  def markdown(str, options = {})
+    # XXX: the renderer instance should be a class variable
+    
+    options[:hard_wrap] ||= false
+    options[:class] ||= ''
+    assembler = Redcarpet::Render::HTML.new(:hard_wrap => options[:hard_wrap]) # auto <br> in <p>
+
+    renderer = Redcarpet::Markdown.new(assembler, {
+      :autolink => true,
+      :fenced_code_blocks => true
+    })
+    content_tag(:div, raw($markdown.render(str)), :class => options[:class])
   end
   
   def admin?(user = nil)

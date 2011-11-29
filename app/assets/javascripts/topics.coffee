@@ -2,7 +2,7 @@
 window.Topics =
   # 往话题编辑器里面插入图片代码
   appendImageFromUpload : (srcs) ->
-    txtBox = $(".topic_body_text_area")
+    txtBox = $(".topic_editor")
     for src in srcs
       txtBox.val("#{txtBox.val()}[img]#{src}[/img]\n")
     txtBox.focus()
@@ -19,7 +19,7 @@ window.Topics =
     
     $("#add_image").jDialog(opts)
     return false
-    
+
   # 回复
   reply : (floor,login) ->
     reply_body = $("#reply_body")

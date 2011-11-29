@@ -29,8 +29,8 @@ module TopicsHelper
     # mention user by @
     link_mention_user!(text, options[:mentioned_user_logins])
 
-
     return raw(text)
+
   end
 
   def parse_fenced_code_block!(text)

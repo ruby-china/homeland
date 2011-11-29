@@ -25,7 +25,7 @@ module ApplicationHelper
       :autolink => true,
       :fenced_code_blocks => true
     })
-    content_tag(:div, raw(renderer.render(str)), :class => options[:class])
+    content_tag(:div, raw($markdown.render(str)), :class => options[:class])
   end
   
   def admin?(user = nil)

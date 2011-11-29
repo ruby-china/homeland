@@ -7,8 +7,10 @@ module TopicsHelper
     options[:class] ||= ''
 
     text = h(text)
-    text.gsub!(/```(<br>{0,}|\s{0,})(.+?)```(<br>{0,}|\s{0,})/im,'<pre><code>\2</code></pre>')
     text.gsub!(/\[img\](http:\/\/.+?)\[\/img\]/i,'<img src="\1" alt="'+ h(options[:title]) +'" />') if options[:allow_image]
+    # fenced code block with ```
+    parse_fenced_code_block!(text)
+
     text = auto_link(text,:all, :target => '_blank', :rel => "nofollow")
 
     # mention floor by #
@@ -18,6 +20,11 @@ module TopicsHelper
     link_mention_user!(text, options[:mentioned_user_logins])
 
     simple_format(text)
+  end
+
+  def parse_fenced_code_block!(text)
+    text.gsub!(/```(<br>{0,}|\s{0,})(.+?)```(<br>{0,}|\s{0,})/im,
+                '<pre><code>\2</code></pre>')
   end
 
   def link_mention_floor!(text)

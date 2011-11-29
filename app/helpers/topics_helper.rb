@@ -9,12 +9,8 @@ module TopicsHelper
 
     text = h(text)
     
-    # XXX don't use simple_format, it doesn't compatible with code_block
-    text.gsub!( /\r\n?/, "\n" )
-    text.gsub!( /\n/, "<br>" )
-    
     ## fenced code block with ```
-    parse_fenced_code_block!(text)
+    text = parse_fenced_code_block(text)
     
     # parse bbcode-style image [img]url[/img]
     parse_bbcode_image!(text, options[:title]) if options[:allow_image]
@@ -29,13 +25,47 @@ module TopicsHelper
     # mention user by @
     link_mention_user!(text, options[:mentioned_user_logins])
 
+    text = simple_format(text)
+
+    text = reformat_code_block(text) do |code|
+      code.gsub!(/<br\s?\/?>/, "")
+    end
+
     return raw(text)
 
   end
 
-  def parse_fenced_code_block!(text)
-    text.gsub!(/```(<br>{0,}|\s{0,})(.+?)```(<br>{0,}|\s{0,})/im,
-                '<pre><code>\2</code></pre>')
+  def parse_fenced_code_block(text)
+    source = String.new(text.to_s)
+
+    source.gsub!(/(```.+?```)/im) do
+      code = CGI::unescapeHTML($1)
+
+      # let the markdown compiler draw the <pre><code>
+      # (with syntax highlighting)
+      $markdown.render(code)
+    end
+
+    return source
+  end
+
+  def reformat_code_block(text, &block)
+    # XXX: ActionView uses SafeBuffer, not String
+    # and it's gsub is different from String#gsub
+    # which makes gsub with block unusable.
+
+    source = String.new(text.to_s)
+
+    source.gsub!(/<pre>(.+?)<\/pre>/mi) do |matched|
+      code = $1
+
+      block.call(code)
+
+      logger.debug("after: #{code}")
+
+      "<pre>#{code}</pre>"
+    end
+    source
   end
 
   def parse_bbcode_image!(text, title)

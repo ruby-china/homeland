@@ -47,7 +47,11 @@ module TopicsHelper
 
   def link_mention_user!(text, mentioned_user_logins)
     return text if mentioned_user_logins.blank?
-    text.gsub!(/@(#{mentioned_user_logins.join('|')})/,'@<a href="/users/\1" class="at_user" title="\1">\1</a>')
+    text.gsub!(/@(#{mentioned_user_logins.join('|')})/) do |mention_token|
+      user_name = $1
+      link_to(mention_token, user_path(user_name), 
+              :class => "at_user", :title => mention_token)
+    end
   end
   
   def topic_use_readed_text(state)

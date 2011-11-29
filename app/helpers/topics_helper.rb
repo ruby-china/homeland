@@ -41,7 +41,7 @@ module TopicsHelper
         :onclick => "return Topics.hightlightReply(#{floorish})"
       }
 
-      link_to("##{floorish}#{postfix}樓", "#reply#{floorish}", html_options) 
+      link_to(floor_token, "#reply#{floorish}", html_options) 
     end
   end
 

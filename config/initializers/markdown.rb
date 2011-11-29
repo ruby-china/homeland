@@ -1,4 +1,11 @@
-html_renderer = Redcarpet::Render::HTML.new({
+# sample code in Redcarpet's repo
+class HTMLwithSyntaxHighlight < Redcarpet::Render::HTML
+  def block_code(code, language)
+    Pygments.highlight(code, :lexer => language)
+  end
+end
+
+html_renderer = HTMLwithSyntaxHighlight.new({
   :filter_html => true   # filter out html tags
 })
 

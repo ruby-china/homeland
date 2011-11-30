@@ -51,6 +51,10 @@ module TopicsHelper
 
       source = String.new(paragraph.inner_html) # avoid SafeBuffer
 
+      # **text** => <strong>test</strong>
+      # **te st** => <strong>te st</strong>
+      source.gsub!(/\*\*(.+?)\*\*/, '<strong>\1</strong>')
+
 
       paragraph.inner_html = source
     end

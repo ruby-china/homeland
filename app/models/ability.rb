@@ -29,6 +29,18 @@ class Ability
       can :update, Reply do |reply|
         reply.user_id == user.id
       end
+      
+      can :read, Note do |note|
+        note.user_id == note.id
+      end
+      
+      can :create, Note
+      can :update, Note do |note|
+        note.user_id == note.id
+      end
+      can :destroy, Note do |note|
+        note.user_id == note.id
+      end
 
       basic_read_only
     else
@@ -46,6 +58,10 @@ class Ability
     can :read,    Topic
     can :feed,    Topic
     can :node,    Topic
+    
+    can :read  , Note do |note|
+       note.publish == true
+    end
   end
 end
 

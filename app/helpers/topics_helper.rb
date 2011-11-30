@@ -31,8 +31,31 @@ module TopicsHelper
       code.gsub!(/<br\s?\/?>/, "")
     end
 
+    text = parse_inline_styles(text)
+
     return raw(text)
 
+  end
+
+  # parse_inline_styles assumes that:
+  # - all the texts to be applied are already wrapped with <p>
+  #   i.e. <p> is only one-level deep; and
+  # - <pre> is in the top level, not in a <p>
+  # the parse_inline_styles only applys on " > p" elements
+  def parse_inline_styles(text)
+    doc = Hpricot(text)
+
+    (doc.search('/p')).each do |paragraph|
+
+      next if paragraph.search('pre').size != 0
+
+      source = String.new(paragraph.inner_html) # avoid SafeBuffer
+
+
+      paragraph.inner_html = source
+    end
+
+    doc.to_html
   end
 
   def parse_fenced_code_block(text)

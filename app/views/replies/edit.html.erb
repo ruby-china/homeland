@@ -5,6 +5,9 @@
     <%= t("reply.topic_location")%>:<br />
     <%= render_topic_title(@reply.topic) %>
   </div>
+  <div class="box">
+    <%= render_cell :topics, :reply_help_block %>
+  </div>
 </div>
 <div class="content">
     <div class="box">

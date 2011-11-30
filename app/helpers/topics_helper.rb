@@ -12,27 +12,29 @@ module TopicsHelper
     ## fenced code block with ```
     text = parse_fenced_code_block(text)
     
+    # simple_format must be front of format_topic_body, because it will remove html attrs, etc .. onclick
+    text = simple_format(text)
+    
+    # fix code after simple_format
+    text = reformat_code_block(text) do |code|
+      code.gsub!(/<br\s?\/?>/, "")  # remove <br>
+      code.gsub!(/<\/?p>/, "")      # remove <p>
+    end
+    
     # parse bbcode-style image [img]url[/img]
-    parse_bbcode_image!(text, options[:title]) if options[:allow_image]
+    text = parse_bbcode_image(text, options[:title]) if options[:allow_image]
+    
+    text = parse_inline_styles(text)
     
     # Auto Link
-    
     text = auto_link(text,:all, :target => '_blank', :rel => "nofollow")
     
     # mention floor by #
-    link_mention_floor!(text)
+    text = link_mention_floor(text)
     
     # mention user by @
-    link_mention_user!(text, options[:mentioned_user_logins])
+    text = link_mention_user(text, options[:mentioned_user_logins])
 
-    text = simple_format(text)
-
-    text = reformat_code_block(text) do |code|
-      code.gsub!(/<br\s?\/?>/, "")  # remove <br> injected by simple_format
-      code.gsub!(/<\/?p>/, "")      # remove <p> injected by simple_format
-    end
-
-    text = parse_inline_styles(text)
 
     return raw(text)
 
@@ -54,16 +56,16 @@ module TopicsHelper
 
       # **text** => <strong>test</strong>
       # **te st** => <strong>te st</strong>
-      source.gsub!(/\*\*(.+?)\*\*/, '<strong>\1</strong>')
+      source.gsub!(/\s\*\*(.+?)\*\*\s/, '<strong>\1</strong>')
 
       # *text* => <em>
-      source.gsub!(/\*(.+?)\*/, '<em>\1</em>')
+      source.gsub!(/\s\*(.+?)\*\s/, '<em>\1</em>')
 
       # _text_ => <u>
-      source.gsub!(/_(.+?)_/, '<u>\1</u>')
+      source.gsub!(/\s_(.+?)_\s/, '<u>\1</u>')
 
       # `text` => <code>
-      source.gsub!(/`(.+?)`/) do |matched|
+      source.gsub!(/\s`(.+?^`)`\s/) do |matched|
         code = $1
         code.gsub!(/<\/?strong>/, "**")
         code.gsub!(/<\/?em>/, "*")
@@ -79,7 +81,7 @@ module TopicsHelper
 
   def parse_fenced_code_block(text)
     source = String.new(text.to_s)
-    source.gsub!(/(```.+?```)/im) do
+    source.gsub!(/(^```.+?```)/im) do
       code = CGI::unescapeHTML($1)
     
       #code = $1
@@ -110,20 +112,22 @@ module TopicsHelper
     source
   end
 
-  def parse_bbcode_image!(text, title)
-    text.gsub!(/\[img\](http:\/\/.+?)\[\/img\]/i) do
+  def parse_bbcode_image(text, title)
+    source = String.new(text.to_s)
+    source.gsub!(/\[img\](http:\/\/.+?)\[\/img\]/i) do
       src = $1
       image_tag(src, :alt => title)
     end
+    source
   end
 
-  def link_mention_floor!(text)
-
+  def link_mention_floor(text)
+    source = String.new(text.to_s)
     # matches #X樓, #X楼, #XF, #Xf, with or without :
     # doesn't care if there is a space after the mention command
     expression = /#([\d]+)([楼樓Ff]\s?)/
 
-    text.gsub!(expression) do |floor_token|
+    source.gsub!(expression) do |floor_token|
       floorish, postfix = $1, $2
 
       html_options = {
@@ -131,17 +135,20 @@ module TopicsHelper
         :onclick => "return Topics.hightlightReply(#{floorish})"
       }
 
-      link_to(floor_token, "#reply#{floorish}", html_options) 
+      link_to(floor_token, "#reply#{floorish}", html_options)
     end
+    source
   end
 
-  def link_mention_user!(text, mentioned_user_logins)
+  def link_mention_user(text, mentioned_user_logins)
     return text if mentioned_user_logins.blank?
-    text.gsub!(/@(#{mentioned_user_logins.join('|')})/) do |mention_token|
+    source = String.new(text.to_s)
+    source.gsub!(/@(#{mentioned_user_logins.join('|')})/i) do |mention_token|
       user_name = $1
       link_to(mention_token, user_path(user_name), 
               :class => "at_user", :title => mention_token)
     end
+    source
   end
   
   def topic_use_readed_text(state)

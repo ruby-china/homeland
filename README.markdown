@@ -3,7 +3,7 @@ This is source code of [Ruby China Group](http://ruby-china.org)
 ## Install
 
   * You need to install *Ruby 1.9.2*, *Rubygems* and *Rails 3.1* first.
-  * Install and start *Redis*, *MongoDB*, *memcached*
+  * Install and start *Redis*, *MongoDB*, *memcached*, *Python*, *Pygments*
 
   ```
   cp config/config.yml.default config/config.yml
@@ -14,6 +14,7 @@ This is source code of [Ruby China Group](http://ruby-china.org)
   rake assets:precompile
   thin start -O -C config/thin.yml
   ./script/resque start
+  easy_install pygments # 或者 pip install pygments
   ```
 
 ## Deploy

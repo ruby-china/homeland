@@ -21,6 +21,14 @@ class Ability
       can :destroy, Topic do |topic|
          (topic.user_id == user.id)
       end
+      
+      can :create, Reply do |reply|
+         user.can_post_under?(topic, reply)
+      end
+      
+      can :update, Reply do |reply|
+        reply.user_id == user.id
+      end
 
       basic_read_only
     else

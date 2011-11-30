@@ -1,7 +1,7 @@
   <ul>
-    <li>**粗體**、*斜體*、_底線_、`段內程式碼`</li>
-    <li>URL會自動變成超連結</li>
-    <li>@name 會變成使用者頁面的超連結</li>
+    <li><strong>**粗體**</strong>、<em>*斜體*、_底線_</em>、<code>`段內程式碼`</code></li>
+    <li><a href="http://example.org">http://example.org</a> 自動超連結</li>
+    <li><%= link_to("@name", "/users/name")%> 會變成使用者頁面的超連結</li>
     <li>[img]http://foo.bar/a.jpg[/img] 顯示圖片</li>
-    <li>```<br>code<br>```<br> 會變成程式碼區塊，可以用<br>``` ruby<br>code<br>```<br>強制指定語言</li>
+    <li>``` code ``` 會變成程式碼區塊，可以用 ``` ruby code ``` 强制指定語言</li>
   </ul>

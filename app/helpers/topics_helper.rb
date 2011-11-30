@@ -103,8 +103,6 @@ module TopicsHelper
 
       block.call(code)
 
-      logger.debug("after: #{code}")
-
       "<pre>#{code}</pre>"
     end
     source

@@ -79,9 +79,11 @@ module TopicsHelper
 
   def parse_fenced_code_block(text)
     source = String.new(text.to_s)
-
     source.gsub!(/(```.+?```)/im) do
       code = CGI::unescapeHTML($1)
+    
+      #code = $1
+      #code = code.sub!("\r\n", "")
 
       # let the markdown compiler draw the <pre><code>
       # (with syntax highlighting)

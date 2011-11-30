@@ -15,6 +15,12 @@ module TopicsHelper
     # simple_format must be front of format_topic_body, because it will remove html attrs, etc .. onclick
     text = simple_format(text)
     
+    # fix code after simple_format
+    text = reformat_code_block(text) do |code|
+      code.gsub!(/<br\s?\/?>/, "")  # remove <br>
+      code.gsub!(/<\/?p>/, "")      # remove <p>
+    end
+    
     # parse bbcode-style image [img]url[/img]
     text = parse_bbcode_image(text, options[:title]) if options[:allow_image]
     
@@ -29,10 +35,6 @@ module TopicsHelper
     # mention user by @
     text = link_mention_user(text, options[:mentioned_user_logins])
 
-    text = reformat_code_block(text) do |code|
-      code.gsub!(/<br\s?\/?>/, "")  # remove <br> injected by simple_format
-      code.gsub!(/<\/?p>/, "")      # remove <p> injected by simple_format
-    end
 
     return raw(text)
 

@@ -10,17 +10,4 @@ describe TopicsController do
       end.should change(notification.user.notifications.unread, :count)
     end
   end
-
-  describe "#reply" do
-    it "should read topic after user reply topic" do
-      user = Factory :user
-      topic = Factory :topic
-      Factory :reply, :topic => topic
-      user.topic_read?(topic).should_not be_true
-      sign_in user
-      post :reply, :id => topic, :reply => {:body => 'content'}, :format => :js
-      topic.reload
-      user.topic_read?(topic).should be_true
-    end
-  end
 end

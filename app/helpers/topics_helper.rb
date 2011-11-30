@@ -28,7 +28,8 @@ module TopicsHelper
     text = simple_format(text)
 
     text = reformat_code_block(text) do |code|
-      code.gsub!(/<br\s?\/?>/, "")
+      code.gsub!(/<br\s?\/?>/, "")  # remove <br> injected by simple_format
+      code.gsub!(/<\/?p>/, "")      # remove <p> injected by simple_format
     end
 
     text = parse_inline_styles(text)

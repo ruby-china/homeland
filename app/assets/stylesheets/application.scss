@@ -52,6 +52,10 @@ a.label:hover { text-decoration: none; color:#FFF;}
   .content { padding:8px; font-size:12px; color:#666; }
 }
 
+a[rel=userpopover] {
+  display: inline-block;
+}
+
 .box { 
   background-color: #fff;
   padding:10px;  

@@ -56,16 +56,16 @@ module TopicsHelper
 
       # **text** => <strong>test</strong>
       # **te st** => <strong>te st</strong>
-      source.gsub!(/\*\*(.+?)\*\*/, '<strong>\1</strong>')
+      source.gsub!(/\s\*\*(.+?)\*\*\s/, '<strong>\1</strong>')
 
       # *text* => <em>
-      source.gsub!(/\*(.+?)\*/, '<em>\1</em>')
+      source.gsub!(/\s\*(.+?)\*\s/, '<em>\1</em>')
 
       # _text_ => <u>
-      source.gsub!(/_(.+?)_/, '<u>\1</u>')
+      source.gsub!(/\s_(.+?)_\s/, '<u>\1</u>')
 
       # `text` => <code>
-      source.gsub!(/`(.+?)`/) do |matched|
+      source.gsub!(/\s`(.+?^`)`\s/) do |matched|
         code = $1
         code.gsub!(/<\/?strong>/, "**")
         code.gsub!(/<\/?em>/, "*")
@@ -81,7 +81,7 @@ module TopicsHelper
 
   def parse_fenced_code_block(text)
     source = String.new(text.to_s)
-    source.gsub!(/(```.+?```)/im) do
+    source.gsub!(/(^```.+?```)/im) do
       code = CGI::unescapeHTML($1)
     
       #code = $1

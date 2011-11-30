@@ -55,6 +55,9 @@ module TopicsHelper
       # **te st** => <strong>te st</strong>
       source.gsub!(/\*\*(.+?)\*\*/, '<strong>\1</strong>')
 
+      # *text* => <em>
+      source.gsub!(/\*(.+?)\*/, '<em>\1</em>')
+
 
       paragraph.inner_html = source
     end

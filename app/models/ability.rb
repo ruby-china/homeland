@@ -22,9 +22,8 @@ class Ability
          (topic.user_id == user.id)
       end
       
-      can :create, Reply do |reply|
-         user.can_post_under?(topic, reply)
-      end
+      can :create, Reply 
+
       
       can :update, Reply do |reply|
         reply.user_id == user.id

@@ -6,16 +6,16 @@ GIT
 
 GIT
   remote: git://github.com/plataformatec/devise.git
-  revision: dc3bfac87689299e30a6b4eb0f754d8f61d872af
+  revision: 4243791b478b564b3cf4f0a7a5750b633bbfe2b8
   specs:
-    devise (1.5.1)
+    devise (1.5.2)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
       warden (~> 1.1)
 
 GIT
   remote: git://github.com/plataformatec/simple_form.git
-  revision: fce17e353dac5320c6994279b2f35a912580681d
+  revision: 0dc1dff2566c57e306c665adef5ee82bc3698329
   specs:
     simple_form (2.0.0.dev)
       actionpack (~> 3.0)
@@ -71,7 +71,7 @@ GEM
       multi_json (~> 1.0)
     addressable (2.2.6)
     arel (2.2.1)
-    aws-ses (0.4.3)
+    aws-ses (0.4.4)
       builder
       mail (> 2.2.5)
       mime-types
@@ -103,17 +103,17 @@ GEM
     coffee-script (2.2.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.1.2)
+    coffee-script-source (1.1.3)
     daemon-spawn (0.4.2)
     dalli (1.1.1)
     diff-lcs (1.1.3)
     erubis (2.7.0)
     execjs (1.2.9)
       multi_json (~> 1.0)
-    factory_girl (2.2.0)
+    factory_girl (2.3.2)
       activesupport
-    factory_girl_rails (1.3.0)
-      factory_girl (~> 2.2.0)
+    factory_girl_rails (1.4.0)
+      factory_girl (~> 2.3.0)
       railties (>= 3.0.0)
     faraday (0.7.5)
       addressable (~> 2.2.6)
@@ -121,8 +121,9 @@ GEM
       rack (>= 1.1.0, < 2)
     ffi (1.0.11)
     hashie (1.2.0)
-    highline (1.6.2)
+    highline (1.6.8)
     hike (1.2.1)
+    hpricot (0.8.5)
     i18n (0.6.0)
     jquery-rails (1.0.16)
       railties (~> 3.0)
@@ -160,7 +161,7 @@ GEM
     oauth2 (0.5.1)
       faraday (~> 0.7.4)
       multi_json (~> 1.0.3)
-    omniauth (1.0.0)
+    omniauth (1.0.1)
       hashie (~> 1.2)
       rack
     omniauth-github (1.0.0)
@@ -175,7 +176,7 @@ GEM
     omniauth-openid (1.0.1)
       omniauth (~> 1.0)
       rack-openid (~> 1.3.1)
-    omniauth-twitter (0.0.6)
+    omniauth-twitter (0.0.7)
       omniauth-oauth (~> 1.0)
     orm_adapter (0.0.5)
     polyglot (0.3.3)
@@ -255,12 +256,11 @@ GEM
     rubypython (0.5.3)
       blankslate (>= 2.1.2.3)
       ffi (~> 1.0.7)
-    sass (3.1.10)
-    sass-rails (3.1.4)
+    sass (3.1.11)
+    sass-rails (3.1.5)
       actionpack (~> 3.1.0)
       railties (~> 3.1.0)
-      sass (>= 3.1.4)
-      sprockets (~> 2.0.0)
+      sass (~> 3.1.10)
       tilt (~> 1.3.2)
     settingslogic (2.0.6)
     sinatra (1.3.1)
@@ -279,7 +279,7 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.31)
-    uglifier (1.0.4)
+    uglifier (1.1.0)
       execjs (>= 0.3.0)
       multi_json (>= 1.0.2)
     unicorn (4.1.1)
@@ -291,7 +291,7 @@ GEM
     warden (1.1.0)
       rack (>= 1.0)
     will_paginate (3.0.pre2)
-    xml-simple (1.1.0)
+    xml-simple (1.1.1)
 
 PLATFORMS
   ruby
@@ -312,6 +312,7 @@ DEPENDENCIES
   dalli (= 1.1.1)
   devise!
   factory_girl_rails
+  hpricot
   jquery-rails (= 1.0.16)
   mail_view!
   memcache-client (= 1.8.5)

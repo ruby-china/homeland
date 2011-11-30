@@ -1,7 +1,8 @@
 # sample code in Redcarpet's repo
 class HTMLwithSyntaxHighlight < Redcarpet::Render::HTML
   def block_code(code, language)
-    Pygments.highlight(code, :lexer => language)
+    language = 'text' if language.blank?
+    Pygments.highlight(code, :lexer => language, :formatter => 'html', :options => {:encoding => 'utf-8'})
   end
 end
 

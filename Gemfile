@@ -40,6 +40,7 @@ gem "redcarpet", "~> 2.0.0b5"
 gem "pygments.rb"
 # HTML 处理
 gem "nokogiri", "1.5.0"
+gem "hpricot"
 gem "jquery-rails", "1.0.16"
 # Auto link
 gem "rails_autolink", ">= 1.0.4"

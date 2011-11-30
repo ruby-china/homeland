@@ -12,34 +12,78 @@ module TopicsHelper
     ## fenced code block with ```
     text = parse_fenced_code_block(text)
     
+    # simple_format must be front of format_topic_body, because it will remove html attrs, etc .. onclick
+    text = simple_format(text)
+    
     # parse bbcode-style image [img]url[/img]
-    parse_bbcode_image!(text, options[:title]) if options[:allow_image]
+    text = parse_bbcode_image(text, options[:title]) if options[:allow_image]
+    
+    text = parse_inline_styles(text)
     
     # Auto Link
-    
     text = auto_link(text,:all, :target => '_blank', :rel => "nofollow")
     
     # mention floor by #
-    link_mention_floor!(text)
+    text = link_mention_floor(text)
     
     # mention user by @
-    link_mention_user!(text, options[:mentioned_user_logins])
-
-    text = simple_format(text)
+    text = link_mention_user(text, options[:mentioned_user_logins])
 
     text = reformat_code_block(text) do |code|
-      code.gsub!(/<br\s?\/?>/, "")
+      code.gsub!(/<br\s?\/?>/, "")  # remove <br> injected by simple_format
+      code.gsub!(/<\/?p>/, "")      # remove <p> injected by simple_format
     end
 
     return raw(text)
 
   end
 
+  # parse_inline_styles assumes that:
+  # - all the texts to be applied are already wrapped with <p>
+  #   i.e. <p> is only one-level deep; and
+  # - <pre> is in the top level, not in a <p>
+  # the parse_inline_styles only applys on " > p" elements
+  def parse_inline_styles(text)
+    doc = Hpricot(text)
+
+    (doc.search('/p')).each do |paragraph|
+
+      next if paragraph.search('pre').size != 0
+
+      source = String.new(paragraph.inner_html) # avoid SafeBuffer
+
+      # **text** => <strong>test</strong>
+      # **te st** => <strong>te st</strong>
+      source.gsub!(/\*\*(.+?)\*\*/, '<strong>\1</strong>')
+
+      # *text* => <em>
+      source.gsub!(/\*(.+?)\*/, '<em>\1</em>')
+
+      # _text_ => <u>
+      source.gsub!(/_(.+?)_/, '<u>\1</u>')
+
+      # `text` => <code>
+      source.gsub!(/`(.+?)`/) do |matched|
+        code = $1
+        code.gsub!(/<\/?strong>/, "**")
+        code.gsub!(/<\/?em>/, "*")
+        code.gsub!(/<\/?u>/, "_")
+        "<code>#{code}</code>"
+      end
+
+      paragraph.inner_html = source
+    end
+
+    doc.to_html
+  end
+
   def parse_fenced_code_block(text)
     source = String.new(text.to_s)
-
     source.gsub!(/(```.+?```)/im) do
       code = CGI::unescapeHTML($1)
+    
+      #code = $1
+      #code = code.sub!("\r\n", "")
 
       # let the markdown compiler draw the <pre><code>
       # (with syntax highlighting)
@@ -61,27 +105,27 @@ module TopicsHelper
 
       block.call(code)
 
-      logger.debug("after: #{code}")
-
       "<pre>#{code}</pre>"
     end
     source
   end
 
-  def parse_bbcode_image!(text, title)
-    text.gsub!(/\[img\](http:\/\/.+?)\[\/img\]/i) do
+  def parse_bbcode_image(text, title)
+    source = String.new(text.to_s)
+    source.gsub!(/\[img\](http:\/\/.+?)\[\/img\]/i) do
       src = $1
       image_tag(src, :alt => title)
     end
+    source
   end
 
-  def link_mention_floor!(text)
-
+  def link_mention_floor(text)
+    source = String.new(text.to_s)
     # matches #X樓, #X楼, #XF, #Xf, with or without :
     # doesn't care if there is a space after the mention command
     expression = /#([\d]+)([楼樓Ff]\s?)/
 
-    text.gsub!(expression) do |floor_token|
+    source.gsub!(expression) do |floor_token|
       floorish, postfix = $1, $2
 
       html_options = {
@@ -89,17 +133,20 @@ module TopicsHelper
         :onclick => "return Topics.hightlightReply(#{floorish})"
       }
 
-      link_to(floor_token, "#reply#{floorish}", html_options) 
+      link_to(floor_token, "#reply#{floorish}", html_options)
     end
+    source
   end
 
-  def link_mention_user!(text, mentioned_user_logins)
+  def link_mention_user(text, mentioned_user_logins)
     return text if mentioned_user_logins.blank?
-    text.gsub!(/@(#{mentioned_user_logins.join('|')})/) do |mention_token|
+    source = String.new(text.to_s)
+    source.gsub!(/@(#{mentioned_user_logins.join('|')})/i) do |mention_token|
       user_name = $1
       link_to(mention_token, user_path(user_name), 
               :class => "at_user", :title => mention_token)
     end
+    source
   end
   
   def topic_use_readed_text(state)

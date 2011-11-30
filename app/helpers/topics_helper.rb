@@ -58,6 +58,13 @@ module TopicsHelper
       # *text* => <em>
       source.gsub!(/\*(.+?)\*/, '<em>\1</em>')
 
+      # `text` => <code>
+      source.gsub!(/`(.+?)`/) do |matched|
+        code = $1
+        code.gsub!(/<\/?strong>/, "**")
+        code.gsub!(/<\/?em>/, "*")
+        "<code>#{code}</code>"
+      end
 
       paragraph.inner_html = source
     end

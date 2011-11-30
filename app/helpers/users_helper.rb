@@ -73,6 +73,6 @@ module UsersHelper
     return "" if user.location.blank?
     title = user.location.blank? ? "#{user.login}" : "<i><span class='icon small_pin'></span>#{user.location}</i> #{user.login}"
     tagline = user.tagline.blank? ? "这哥们儿没签名" : truncate(user.tagline, :length => 20)
-    raw %(rel="popover" data-placement="below" title="#{h(title)}" data-content="#{h(tagline)}")
+    raw %(rel="userpopover" title="#{h(title)}" data-content="#{h(tagline)}")
   end
 end

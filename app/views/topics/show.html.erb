@@ -31,11 +31,11 @@
         <%= render :partial => "common/share", :locals => {:title => @topic.title, :url => Setting.domain + topic_path(@topic) } %>
     </div>
 
-    <%= render :partial => "topics/replies", :locals => { :topic => @topic, :replies => @replies} %>
+    <%= render :partial => "topics/replies", :locals => { :topic => @topic, :replies => @replies } %>
 
   <% if current_user %>
     <div id="reply" class="form box">
-      <%= form_for(Reply.new, :remote => true,:url => reply_topic_path(params[:id])) do |f| %>
+      <%= form_for(Reply.new, :remote => true,:url => topic_replies_path(@topic)) do |f| %>
         <div class="pull-right">
           <button type="submit" id="btn_reply" class="btn primary"><%= t("topics.submit_reply")%></button><br />
           <span class="help-inline">Ctrl+Enter</span>

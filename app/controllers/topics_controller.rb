@@ -71,17 +71,17 @@ class TopicsController < ApplicationController
     set_seo_meta("#{t("topics.post_topic")} &raquo; #{t("menu.topics")}")
   end
 
-  def reply
-    @topic = Topic.find(params[:id])
-    @reply = @topic.replies.build(params[:reply])        
-    @reply.user_id = current_user.id
-    if @reply.save
-      current_user.read_topic(@topic)
-      @msg = t("topics.reply_success")
-    else
-      @msg = @reply.errors.full_messages.join("<br />")
-    end
-  end
+  #def reply
+  #  @topic = Topic.find(params[:id])
+  #  @reply = @topic.replies.build(params[:reply])        
+  #  @reply.user_id = current_user.id
+  #  if @reply.save
+  #    current_user.read_topic(@topic)
+  #    @msg = t("topics.reply_success")
+  #  else
+  #    @msg = @reply.errors.full_messages.join("<br />")
+  #  end
+  #end
 
 
   def edit

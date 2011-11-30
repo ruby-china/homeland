@@ -42,8 +42,9 @@ RubyChina::Application.routes.draw do
       get :search
       get :feed
     end
+    resources :replies
   end
-  resources :replies
+
   resources :photos do
     collection do
       get :tiny_new

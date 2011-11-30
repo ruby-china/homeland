@@ -6,7 +6,7 @@
       <span class="time">
         <%= i + 1 %><%= t("common.floor")%>, <%= raw t("common.reply_at", :time => timeago(item.created_at)) %>
         <% if owner?(item) %>
-          <%= link_to("", edit_reply_path(item), :class => "icon small_edit", :title => "修改回帖")%>
+          <%= link_to("", edit_topic_reply_path(@topic,item), :class => "icon small_edit", :title => "修改回帖")%>
         <% end %>
         <%= link_to("", "#",
             :onclick => "return Topics.reply(#{i+1},'#{item.user.login}' );", 

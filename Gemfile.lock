@@ -128,6 +128,7 @@ GEM
     hashie (1.2.0)
     highline (1.6.2)
     hike (1.2.1)
+    hpricot (0.8.5)
     i18n (0.6.0)
     jquery-rails (1.0.16)
       railties (~> 3.0)
@@ -324,6 +325,7 @@ DEPENDENCIES
   devise!
   factory_girl_rails
   ffaker
+  hpricot
   jquery-rails (= 1.0.16)
   mail_view!
   memcache-client (= 1.8.5)

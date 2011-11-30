@@ -1,4 +1,5 @@
 # sample code in Redcarpet's repo
+require "pygments"
 PYGMENTS_ALLOW_LANGUAGES = %w(cucumber Gherkin gherkin abap ada ada95ada2005 ahk antlr-as antlr-actionscript antlr-cpp antlr-csharp antlr-c# 
 antlr-java antlr-objc antlr-perl antlr-python antlr-ruby antlr-rb antlr apacheconf aconf apache applescript as actionscript as3 
 actionscript3 aspx-cs aspx-vb asy asymptote basemake bash sh ksh bat bbcode befunge blitzmax bmax boo brainfuck bf c-objdump c 

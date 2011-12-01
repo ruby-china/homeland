@@ -82,4 +82,6 @@
   rss:
     recent_topics_description: "%{name}社區最新討論."
     recent_topics_title: "%{name}社區"
-      
+    recent_node_topics_description: "%{name} 社區 %{node_name} 節點最新討論。"
+    recent_node_topics_title: "%{name} 社區 %{node_name} 節點"
+

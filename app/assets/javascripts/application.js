@@ -10,5 +10,4 @@
 //= require jquery.timeago
 //= require jquery.hotkeys
 //= require jquery.chosen
-//= require jquery.highlight
 //= require app

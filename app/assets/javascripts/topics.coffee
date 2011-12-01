@@ -1,3 +1,4 @@
+//= require jquery.autogrow-textarea
 # TopicsController 下所有页面的 JS 功能
 window.Topics =
   # 往话题编辑器里面插入图片代码
@@ -54,3 +55,5 @@ $(document).ready ->
     if $(el.target).val().trim().length > 0
       $("#reply form").submit()
     return false
+
+  $("textarea").autogrow()

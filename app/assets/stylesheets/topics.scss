@@ -133,14 +133,14 @@
       margin: 0;
       list-style: none;
       li {
-        float: left;
+        display: inline;
         margin: 0;
         padding: 0;
-        line-height: 1em;
         a {
-          display: block;
-          margin: 3px;
-          padding: 4px 10px;
+          display: inline-block;
+          margin-right: 3px;
+          margin-bottom: 6px;
+          padding: 2px 10px;
           color: #778087;
           text-decoration: none;
           background-color: #f5f5f5;

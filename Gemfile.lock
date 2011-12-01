@@ -119,7 +119,6 @@ GEM
       addressable (~> 2.2.6)
       multipart-post (~> 1.1.3)
       rack (>= 1.1.0, < 2)
-    fast-stemmer (1.0.0)
     ffi (1.0.11)
     hashie (1.2.0)
     highline (1.6.8)
@@ -148,10 +147,6 @@ GEM
       tzinfo (~> 0.3.22)
     mongoid_auto_increment_id (0.2.2)
       mongoid (~> 2.2.0)
-    mongoid_search (0.2.7)
-      bson_ext (>= 1.2)
-      fast-stemmer (~> 1.0.0)
-      mongoid (>= 2.0.0)
     multi_json (1.0.4)
     multipart-post (1.1.4)
     net-scp (1.0.4)
@@ -325,7 +320,6 @@ DEPENDENCIES
   mongo-rails-instrumentation (= 0.2.4)
   mongoid (= 2.2.4)
   mongoid_auto_increment_id (= 0.2.2)
-  mongoid_search
   nokogiri (= 1.5.0)
   omniauth
   omniauth-douban!

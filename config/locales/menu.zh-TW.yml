@@ -46,6 +46,7 @@
     highlight_topic: "置頂話題"
     statics: "統計資訊"
     comments: "条评论"
+    no_search_result: "没有搜索到相关内容。"
   posts:
     recent_publish_post: "最近發布的文章"
     post_source: "文章来源"

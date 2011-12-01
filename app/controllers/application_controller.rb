@@ -19,6 +19,12 @@ class ApplicationController < ActionController::Base
         render :template => "/errors/unknown.html.erb", :status => status, :layout => "application"
       end
   end
+  
+  rescue_from CanCan::AccessDenied do |exception|  
+    flash[:error] = "你可能沒有權限 / 需要登入"  
+    redirect_to root_url
+  end
+  
 
   def notice_success(msg)
     flash[:notice] = msg

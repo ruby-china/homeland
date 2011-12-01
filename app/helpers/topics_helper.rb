@@ -161,6 +161,7 @@ module TopicsHelper
   end
 
   def render_topic_title(topic)
+    return '[该主题已被删除]' if topic.blank?
     link_to(topic.title, topic_path(topic), :title => topic.title)
   end
   

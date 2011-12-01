@@ -2,7 +2,7 @@
   <h2><%= t("common.highlight_topic")%></h2>
   <ul>
     <% @suggest_topics.each do |item| %>
-      <li><a href="<%= topic_path(:id => item.id) %>"><%= item.title %></a></li>
+        <li> <%= link_to(item.title, topic_path(item))%></li>
     <% end %>
   </ul>
 </div>

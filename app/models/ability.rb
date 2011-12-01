@@ -55,6 +55,17 @@ class Ability
       can :update, Page do |page|
         page.locked == false
       end 
+      
+      # Photo
+      
+      can :read, Photo
+      can :tiny_new, Photo
+      can :update, Photo do |photo|
+        photo.user_id == photo.id
+      end
+      can :destroy, Photo do |photo|
+        photo.user_id == photo.id
+      end
 
       basic_read_only
     else
@@ -79,6 +90,8 @@ class Ability
     
     can :read,  Page
     can :recent, Page
+    
+    can :read, Photo
   end
 end
 

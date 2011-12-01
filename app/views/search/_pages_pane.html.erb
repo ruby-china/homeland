@@ -1,5 +1,4 @@
 <div class="tab-pane active" id="pages">
-
   <% pages.each do |page| %>
     <div class="page">
       <div class="header">
@@ -19,4 +18,10 @@
       </div>
     </div>
   <% end %>
+ 
 </div>
+
+
+<script type="text/javascript">
+  $(".tab-content").highlight("<%= @q %>");
+</script>

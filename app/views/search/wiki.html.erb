@@ -3,10 +3,11 @@
 <div class="box">
   <%= render "menu" %>
   <div class="tab-content">
-    <%= render :partial => "pages_pane", :locals => { :pages => @pages} %>
+      <% unless @pages.blank? %>
+          <%= render :partial => "pages_pane", :locals => { :pages => @pages} %>
+      <% else %>
+          <%= render :partial => "no_result", :locals => { :title => "社區", :div_id => "wiki", :q => params[:q] , :search_type => "topic"}%>
+      <% end %>
   </div>
 </div>
 
-<script type="text/javascript">
-  $(".tab-content").highlight("<%= @q %>");
-</script>

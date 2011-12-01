@@ -11,7 +11,7 @@ class TopicsController < ApplicationController
     @topics = Topic.last_actived.limit(15).includes(:node,:user, :last_reply_user)
     set_seo_meta("","#{Setting.app_name}#{t("menu.topics")}")
     drop_breadcrumb(t("topics.hot_topic"))
-    render :stream => true
+    #render :stream => true
   end
   
   def feed
@@ -25,7 +25,7 @@ class TopicsController < ApplicationController
     @topics = @node.topics.last_actived.paginate(:page => params[:page],:per_page => 50)
     set_seo_meta("#{@node.name} &raquo; #{t("menu.topics")}","#{Setting.app_name}#{t("menu.topics")}#{@node.name}",@node.summary)
     drop_breadcrumb("#{@node.name}")
-    render :action => "index", :stream => true
+    render :action => "index" #, :stream => true
   end
 
   def node_feed
@@ -39,7 +39,7 @@ class TopicsController < ApplicationController
     # TODO: 需要 includes :node,:user, :last_reply_user,但目前用了 paginate 似乎会使得 includes 没有效果
     @topics = Topic.recent.paginate(:page => params[:page], :per_page => 50)
     drop_breadcrumb(t("topics.topic_list"))
-    render :action => "index", :stream => true
+    render :action => "index" #, :stream => true
   end
 
   def search
@@ -48,7 +48,7 @@ class TopicsController < ApplicationController
     @topics = Topic.where(:_id.in => ids).limit(50).includes(:node,:user, :last_reply_user)
     set_seo_meta("#{t("common.search")}#{params[:s]} &raquo; #{t("menu.topics")}")
     drop_breadcrumb("#{t("common.search")} #{params[:key]}")
-    render :action => "index", :stream => true
+    render :action => "index" #, :stream => true
   end
 
   def show
@@ -63,7 +63,7 @@ class TopicsController < ApplicationController
     set_seo_meta("#{@topic.title} &raquo; #{t("menu.topics")}")
     drop_breadcrumb("#{@node.name}", node_topics_path(@node.id))
     drop_breadcrumb t("topics.read_topic")
-    render :stream => true
+   # render :stream => true
   end
 
   def new

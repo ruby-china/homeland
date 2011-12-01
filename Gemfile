@@ -14,11 +14,16 @@ gem 'mini_magick','3.3'
 gem 'mongo-rails-instrumentation','0.2.4'
 # Mongoid 使用自增整形ID
 gem 'mongoid_auto_increment_id', "0.2.2"
+
 # 用户系统
 gem 'devise', :git => 'git://github.com/plataformatec/devise.git'
 # 分页
 gem 'will_paginate', '3.0.pre2'
 # 三方平台 OAuth 验证登陆
+
+# Mongoid Search
+gem 'mongoid_search'
+
 gem "omniauth"
 gem 'omniauth-openid'
 gem "omniauth-github"

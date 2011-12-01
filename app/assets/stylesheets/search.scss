@@ -1,0 +1,21 @@
+$border-color:#DDD;
+
+.tab-pane {
+  .topic, .page {
+    border-bottom: 1px solid $border-color;
+    .header {
+      h2 {
+        font-size: 120%;
+      }
+      .info {
+        font-size: 90%;
+      }
+    }
+    .nodes p, .editors p {
+      font-size: 90%;
+    }
+  }
+  span.highlight {
+    background-color: yellow;
+  }
+}

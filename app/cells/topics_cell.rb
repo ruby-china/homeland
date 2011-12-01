@@ -21,7 +21,7 @@ class TopicsCell < BaseCell
   # 热门节点
   cache :sidebar_hot_nodes, :expires_in => 30.minutes
   def sidebar_hot_nodes
-    @hot_nodes = Node.hots.limit(10)
+    @hot_nodes = Node.hots.limit(30)
     render
   end
   

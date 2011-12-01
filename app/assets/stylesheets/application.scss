@@ -131,3 +131,17 @@ div.field .hint { font-size:12px; color:#999;}
     abbr { color:#c00;}
   }
 }
+
+/* bootstrap puts .clearfix inside form, doesn't make much sense */
+.clearfix {
+  margin-bottom: 18px;
+  zoom: 1;
+  &:before, &:after {
+    display: table;
+    content: "";
+    zoom: 1;
+  }
+  &:after {
+    clear: both;
+  }
+}

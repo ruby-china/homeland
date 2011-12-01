@@ -54,6 +54,21 @@
   h1 { text-align:right; font-size:15px; }
   h2 { display:inline; font-size:16px; margin-right:10px;}
   .desc { color:#999; }
+  .node_feed_link {
+    float: right;
+    margin-top: 10px;
+    margin-right: 12px;
+    .icon { margin-bottom: -3px; }
+    a {
+      width: auto;
+      padding-left: 18px;
+      color: #B94E22;
+      &:hover {
+        text-decoration: none;
+        color: #333;
+      }
+    }
+  }
 }
 
 #replies {}

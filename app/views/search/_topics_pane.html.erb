@@ -1,20 +1,14 @@
 <div class="tab-pane active" id="topics">
   <% topics.each do |topic| %>
     <div class="topic">
-      <div class="header">
-        <h2><%= link_to(topic.title, topic_path(topic)) %></h2>
-        <p class="info">由 <%= user_name_tag(topic.user) %> <%= t("common.published_at")%> <%= timeago(topic.created_at) %></p>
-      </div>
+      <div class="title"><%= link_to(topic.title, topic_path(topic)) %></div>
+      <div class="info">由 <%= user_name_tag(topic.user) %> <%= t("common.published_at")%> <%= timeago(topic.created_at) %></div>
       <div class="summary">
-        <blockquote><%= truncate(topic.body, :length => 300) %></blockquote>
-      </div>
-      <div class="nodes">
-        <p><%= t("menu.nodes") %>：<%= render_node_name(topic.node) %></p>
+        <%= truncate(topic.body, :length => 300) %>
       </div>
     </div>
   <% end %>
 </div>
-
 
 <script type="text/javascript">
   $(".tab-content").highlight("<%= @q %>");

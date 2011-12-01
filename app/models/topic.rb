@@ -5,6 +5,7 @@ class Topic
   include Mongoid::BaseModel
   include Mongoid::SoftDelete
   include Mongoid::CounterCache
+  include Mongoid::Search
   include Redis::Search
   include Redis::Objects
 
@@ -30,6 +31,9 @@ class Topic
   attr_protected :user_id
   validates_presence_of :user_id, :title, :body, :node_id
 
+
+  search_in :title, :body
+  
   index :node_id
   index :user_id
   index :replied_at
@@ -69,10 +73,6 @@ class Topic
     self.last_reply_user_id = reply.user_id
     self.push_follower(reply.user_id)
     self.save
-  end
-
-  def self.search(key,options = {})
-    paginate :conditions => "title like '%#{key}%'", :page => 1
   end
 
   def self.find_by_message_id(message_id)

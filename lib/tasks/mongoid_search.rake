@@ -4,7 +4,8 @@ namespace :mongoid_search do
     if Mongoid::Search.classes.blank?
       Log.log "No model to index keywords.\n"
     else
-      Mongoid::Search.classes.each do |klass|
+      
+      [Topic,Page].each do |klass|
         Log.silent = ENV['SILENT']
         Log.log "\nIndexing documents for #{klass.name}:\n"
         klass.index_keywords!

@@ -1,4 +1,5 @@
-<div class="tab-pane" id="pages">
+<div class="tab-pane active" id="pages">
+
   <% pages.each do |page| %>
     <div class="page">
       <div class="header">
@@ -6,7 +7,7 @@
         <p class="info"><%= t("common.last_modified_at") %> <%= render_page_updated_at(page) %></p>
       </div>
       <div class="summary">
-        <p><%= truncate(page.body, :length => 300) %></p>
+         <blockquote><%= truncate(page.body, :length => 300) %><blockquote>
       </div>
       <div class="editors">
         <p>

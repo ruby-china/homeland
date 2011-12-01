@@ -1,0 +1,12 @@
+<%= render "base" %>
+
+<div class="box">
+  <%= render "menu" %>
+  <div class="tab-content">
+    <%= render :partial => "pages_pane", :locals => { :pages => @pages} %>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(".tab-content").highlight("<%= @q %>");
+</script>

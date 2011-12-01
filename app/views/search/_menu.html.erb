@@ -1,4 +1,4 @@
-<ul class="tabs" data-tabs="tabs">
-  <li class="active"><a href="#topics">社區</a></li>
-  <li><a href="#pages">Wiki</a></li>
-</ul>
+<%= render_list :class => "tabs" do |li|
+  li << link_to("社區", search_topics_path(:q => params[:q]))
+  li << link_to("Wiki", search_wiki_path(:q => params[:q]))
+end %>

@@ -1,3 +1,3 @@
-<form action="<%= search_path %>" class="pull-left" method="get">
+<form action="/search" class="pull-left" method="get">
     <input type="text" name="q" placeholder="<%= t("common.search")%>" <% if params[:action] == "search" and params[:key] %>value="<%= params[:key] %>"<% end %> />
 </form>

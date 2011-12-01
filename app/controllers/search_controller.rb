@@ -1,44 +1,11 @@
 # coding: utf-8
 class SearchController < ApplicationController
-
-  before_filter :validate_search_key
-
   def index
+    result = Redis::Search.query("Topic", params[:q], :limit => 500)
+    ids = result.collect { |r| r["id"] }
+    @topics = Topic.find(ids).paginate(:page => params[:page], :per_page => 20)
 
-    if @q.present?
-      @topics = Topic.search(@q).paginate(:page => params[:page], :per_page => 20)
-    end
-    
-    @current = ["/search/topics?q=#{params[:q]}"]
-    
-    render :action => "topics"
-
-    set_seo_meta("#{t("common.search")}: #{@q}")
-    drop_breadcrumb("#{t("common.search")}: #{@q}")
+    set_seo_meta("#{t("common.search")}: #{params[:q]}")
+    drop_breadcrumb("#{t("common.search")}: #{params[:q]}")
   end
-
-  def topics
-    
-    if @q.present?
-      @topics = Topic.search(@q).paginate(:page => params[:page], :per_page => 20)
-    end
-    
-    set_seo_meta("#{t("common.search")}: #{@q}")
-    drop_breadcrumb("#{t("common.search")}: #{@q}")
-  end
-
-  def wiki
-    if @q.present?
-      @pages = Page.search(@q).paginate(:page => params[:page], :per_page => 20)
-    end
-    
-    set_seo_meta("#{t("common.search")}: #{@q}")
-    drop_breadcrumb("#{t("common.search")}: #{@q}")
-  end
-
-  protected
-
-    def validate_search_key
-      @q = params[:q].gsub(/\\|\'|-|\/|\.|\?/, "") if params[:q].present?
-    end
 end

@@ -6,7 +6,11 @@
     <% unless @topics.blank? %>
       <%= render :partial => "topics_pane", :locals => { :topics => @topics} %>
     <% else %>
-      <%= render :partial => "no_result", :locals => { :title => "Wiki", :div_id => "topics", :q => params[:q], :search_type => "wiki" }%>
+      <div class="tab-pane active" id="topics">
+        <div class="topic">
+          <%= t("common.no_search_result") %>
+        </div>
+      </div>
     <% end %>
   </div>
 </div>

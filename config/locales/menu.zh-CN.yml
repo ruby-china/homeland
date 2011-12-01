@@ -83,3 +83,5 @@
   rss:
     recent_topics_description: "%{name}社区最新发贴."
     recent_topics_title: "%{name}社区"
+    recent_node_topics_description: "%{name} 社区 %{node_name} 节点最新发贴."
+    recent_node_topics_title: "%{name} 社区 %{node_name} 节点"

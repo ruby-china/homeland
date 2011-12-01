@@ -10,6 +10,7 @@
   <%= csrf_meta_tag %>
   <%= javascript_include_tag "application" %>
   <%= auto_discovery_link_tag(:rss,feed_topics_url,:title => '订阅最新贴') %>
+  <%= yield :node_feed_link %>
   <%= yield :scripts %>
 </head>
 <%= render_body_tag %>

@@ -1,2 +1,4 @@
-module Cpanel::CommentsHelper
+module Cpanel
+  module CommentsHelper
+  end
 end

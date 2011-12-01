@@ -1,4 +1,3 @@
-//= require jquery.autogrow-textarea
 # TopicsController 下所有页面的 JS 功能
 window.Topics =
   # 往话题编辑器里面插入图片代码

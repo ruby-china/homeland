@@ -80,7 +80,7 @@ class Page
   def editors
     User.where(:_id.in => self.editor_ids)
   end
-  
+
   def self.find_by_slug(slug)
     where(:slug => slug).first
   end

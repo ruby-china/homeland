@@ -1,0 +1,27 @@
+<div class="tab-pane active" id="pages">
+  <% pages.each do |page| %>
+    <div class="page">
+      <div class="header">
+        <h2><%= link_to(page.title, page_path(page.title)) %></h2>
+        <p class="info"><%= t("common.last_modified_at") %> <%= render_page_updated_at(page) %></p>
+      </div>
+      <div class="summary">
+         <blockquote><%= truncate(page.body, :length => 300) %><blockquote>
+      </div>
+      <div class="editors">
+        <p>
+          <%= t("pages.wiki_page_contributors") %>
+          <% page.editors.each do |editor| %>
+            <%= user_avatar_tag(editor, :small) %>
+          <% end %>
+        </p>
+      </div>
+    </div>
+  <% end %>
+ 
+</div>
+
+
+<script type="text/javascript">
+  $(".tab-content").highlight("<%= @q %>");
+</script>

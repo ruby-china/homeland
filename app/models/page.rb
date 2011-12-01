@@ -21,7 +21,7 @@ class Page
   # 目前版本号
   field :version, :type => Integer, :default => 0
   
-  search_in :slig, :title, :body
+  search_in :slug, :title, :body
   index :slug
   
   has_many :versions, :class_name => "PageVersion"

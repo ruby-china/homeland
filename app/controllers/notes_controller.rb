@@ -1,6 +1,8 @@
 # coding: utf-8  
 class NotesController < ApplicationController
-  before_filter :require_user, :except => [:show]
+  
+  load_and_authorize_resource
+
   before_filter :init_base_breadcrumb
   
   def init_base_breadcrumb
@@ -15,11 +17,6 @@ class NotesController < ApplicationController
 
   def show
     @note =  Note.find(params[:id])
-    if not @note.publish 
-      if current_user.blank? or @note.user_id != current_user.id
-        render_404 and return
-      end
-    end
     set_seo_meta("查看 &raquo; #{t("menu.notes")}")
     drop_breadcrumb("查看")
   end

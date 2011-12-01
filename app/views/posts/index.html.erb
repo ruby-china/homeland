@@ -13,7 +13,7 @@
     <li>
       <div class="title"><%= post_title_tag(item) %></div>
       <div class="info">
-        <%= t("common.created_at") %>, <%= item.hits %> <%= t("common.read_times") %>, <%= link_to("#{item.comments_count} #{t("common.comments")}", post_path(item.id)+"#comments") %>
+        <%= t("posts.published_at") %>: <%= timeago(item.created_at) %>, <%= item.hits %> <%= t("common.read_times") %>, <%= link_to("#{item.comments_count} #{t("common.comments")}", post_path(item.id)+"#comments") %>
       </div>
     </li>
     <% end %>

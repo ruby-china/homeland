@@ -7,7 +7,7 @@ class Page
   include Mongoid::Timestamps  
   include Mongoid::BaseModel
   include Mongoid::SoftDelete
-  
+  include Mongoid::Search
   # 页面地址
   field :slug
   field :title
@@ -21,6 +21,7 @@ class Page
   # 目前版本号
   field :version, :type => Integer, :default => 0
   
+  search_in :slug, :title, :body
   index :slug
   
   has_many :versions, :class_name => "PageVersion"

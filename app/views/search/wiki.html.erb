@@ -1,0 +1,13 @@
+<%= render "base" %>
+
+<div class="box">
+  <%= render "menu" %>
+  <div class="tab-content">
+      <% unless @pages.blank? %>
+          <%= render :partial => "pages_pane", :locals => { :pages => @pages} %>
+      <% else %>
+          <%= render :partial => "no_result", :locals => { :title => "社區", :div_id => "wiki", :q => params[:q] , :search_type => "topics"}%>
+      <% end %>
+  </div>
+</div>
+

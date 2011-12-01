@@ -4,35 +4,35 @@
 </div>
 
 <div class="content">
-    <div class="topics box">
-        <div class="topic">   
+  <div class="topics box">
+    <div class="topic">         
+      <div class="pull-right avatar_large">
+        <%= user_avatar_tag(@topic.user, :large, :link => false) %>
+      </div>
         
-        <div class="pull-right avatar_large">
-            <%= user_avatar_tag(@topic.user, :large, :link => false) %>
-        </div>
+      <%= render :partial => "topics/topic_info", :locals => { :topic => @topic} %>
         
-        <%= render :partial => "topics/topic_info", :locals => { :topic => @topic}%>
+      <%= raw SiteConfig.before_topic_html %>
         
-        <%= raw SiteConfig.before_topic_html %>
+      <div class="body">
+        <%= format_topic_body(@topic.body) %>
+      </div>
         
-        <div class="body">
-            <%= format_topic_body(@topic.body) %>
-        </div>
+      <%= raw SiteConfig.after_topic_html %>
         
-        <%= raw SiteConfig.after_topic_html %>
-        
-        <div class="tools pull-right">
-          <%= likeable_tag(@topic) %>
-          <% if owner?(@topic) %>
-              <%= link_to "", edit_topic_path(@topic), :class => "icon small_edit", :title => "修改本帖" %>
-              <%= link_to "", topic_path(@topic.id), :method => :delete, :confirm => t("common.confirm_delete"), :class => "icon small_delete", :title => "删除本帖" %>
-          <% end %>
-        </div>
-        <%= render :partial => "common/share", :locals => {:title => @topic.title, :url => Setting.domain + topic_path(@topic) } %>
+      <div class="tools pull-right">
+        <%= likeable_tag(@topic) %>
+        <% if owner?(@topic) %>
+          <%= link_to "", edit_topic_path(@topic), :class => "icon small_edit", :title => "修改本帖" %>
+          <%= link_to "", topic_path(@topic.id), :method => :delete, :confirm => t("common.confirm_delete"), :class => "icon small_delete", :title => "删除本帖" %>
+        <% end %>
+      </div>
+      <%= render :partial => "common/share", :locals => {:title => @topic.title, :url => Setting.domain + topic_path(@topic) } %>
     </div>
+  </div>
 
-    <%= render :partial => "topics/replies", :locals => { :topic => @topic, :replies => @replies } %>
-
+  <%= render :partial => "topics/replies", :locals => { :topic => @topic, :replies => @replies } %>
+  
   <% if current_user %>
     <div id="reply" class="form box">
       <%= form_for(Reply.new, :remote => true,:url => topic_replies_path(@topic)) do |f| %>

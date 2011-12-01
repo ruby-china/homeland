@@ -129,4 +129,32 @@
   }
 }
 
-
+.sidebar {
+  .hot_nodes {
+    ul {
+      margin: 0;
+      list-style: none;
+      li {
+        float: left;
+        margin: 0;
+        padding: 0;
+        line-height: 1em;
+        a {
+          display: block;
+          margin: 3px;
+          padding: 4px 10px;
+          color: #778087;
+          text-decoration: none;
+          background-color: #f5f5f5;
+          -moz-border-radius: 3px;
+          -webkit-border-radius: 3px;
+          border-radius: 3px;
+          &:hover {
+            color: white;
+            background-color: #99a;
+          }
+        }
+      }
+    }
+  }
+}

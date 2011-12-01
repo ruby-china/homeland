@@ -19,6 +19,9 @@ class ApplicationController < ActionController::Base
         render :template => "/errors/unknown.html.erb", :status => status, :layout => "application"
       end
   end
+  
+  rescue_errors unless Rails.env.development?
+  # 在 Development 不要 render_optional_error_file, 很煩 -_-
 
   def notice_success(msg)
     flash[:notice] = msg

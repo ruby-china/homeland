@@ -1,7 +1,7 @@
 # coding: utf-8  
 class TopicsController < ApplicationController
   
-  load_and_authorize_resource
+  load_and_authorize_resource :only => [:new,:edit,:create,:update,:destroy]
   
   before_filter :set_menu_active
   caches_page :feed, :node_feed, :expires_in => 1.hours

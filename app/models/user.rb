@@ -78,6 +78,8 @@ class User
     "http://github.com/#{self.github}"
   end
   
+  
+  
   # 是否是管理员
   def admin?
     return true if Setting.admin_emails.include?(self.email)
@@ -88,6 +90,21 @@ class User
   def wiki_editor?
     return true if self.admin? or self.verified == true
     return false
+  end
+  
+  def has_role?(role)
+    case role
+    when :admin
+      return true if Setting.admin_emails.include?(self.email)
+      return false 
+    when :wiki_editor
+      return true if self.admin? or self.verified == true
+      return false
+    when :member
+      return true
+    else
+      false
+    end
   end
   
   before_create :default_value_for_create

@@ -47,6 +47,7 @@
     statics: "统计信息"
     comments: "条评论"
     no_search_result: "没有搜索到相关内容。"
+    access_denied: "访问被拒绝，你可能没有权限或未登陆。"
   posts:
     recent_publish_post: "最近发布的文章"
     post_source: "文章來源"

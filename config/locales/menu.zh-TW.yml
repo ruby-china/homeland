@@ -46,7 +46,8 @@
     highlight_topic: "置頂話題"
     statics: "統計資訊"
     comments: "条评论"
-    no_search_result: "没有搜索到相关内容。"
+    no_search_result: "沒有查詢到相關內容。"
+    access_denied: "訪問被拒絕，你可能沒有權限或未登陸。"
   posts:
     recent_publish_post: "最近發布的文章"
     post_source: "文章来源"

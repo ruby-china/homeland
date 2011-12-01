@@ -21,8 +21,7 @@ class ApplicationController < ActionController::Base
   end
   
   rescue_from CanCan::AccessDenied do |exception|  
-    flash[:error] = "你可能沒有權限 / 需要登入"  
-    redirect_to root_url
+    redirect_to topics_path, :alert => t("common.access_denied")
   end
   
 

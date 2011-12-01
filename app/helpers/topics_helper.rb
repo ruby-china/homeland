@@ -154,14 +154,14 @@ module TopicsHelper
   def topic_use_readed_text(state)
     case state
     when true
-      "在你读过以后还没有新变化"
+      t("topics.have_no_new_reply")
     else
-      "有新内容"
+      t("topics.has_new_replies")
     end
   end
 
   def render_topic_title(topic)
-    return '[该主题已被删除]' if topic.blank?
+    return t("topics.topic_was_deleted") if topic.blank?
     link_to(topic.title, topic_path(topic), :title => topic.title)
   end
   

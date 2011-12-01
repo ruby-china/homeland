@@ -3,11 +3,11 @@
   topic = reply.topic
 %>
 <td class="face">
-  <%= user_avatar_tag(reply.try(:user), :normal) %>
+  <%= user_avatar_tag(reply.user, :normal) %>
 </td>
 <td>
   <h3>
-    <%= user_name_tag(reply.try(user)) %>
+    <%= user_name_tag(reply.user) %>
     在
     <%= render_topic_title(topic) %>
     提及你：

@@ -9,17 +9,7 @@
 <div class="content">
     <div class="box">
     <div id="node_info">
-      <% if !@node.blank? %>
-        <div>
-          <h2><%= @node.name %></h2>
-          <span class="total">共有 <%= render_node_topics_count(@node) %> 个讨论主题</span>
-        </div>
-        <div class="desc">
-          <%= simple_format(@node.summary) %>
-        </div>
-      <% else %>
-        <h1><%= Setting.app_name %></h1>
-      <% end %>
+      <%= render "node_info", :node => @node %>
     </div>
 
     <div class="topics">
@@ -74,5 +64,12 @@
     <% if action_name == "index" %>
       <%= render_cell :topics, :index_sections %>
     <% end %>
+
+    <% if !@node.blank? %>
+      <% content_for :node_feed_link do %>
+        <%= auto_discovery_link_tag(:rss, feed_node_topics_url, :title => "#{@node.name}節點最新話題") %>
+      <% end %>
+    <% end %>
+
 </div>
 

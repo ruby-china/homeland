@@ -2,7 +2,7 @@
 class TopicsController < ApplicationController
   before_filter :require_user, :only => [:new,:edit,:create,:update,:destroy,:reply]
   before_filter :set_menu_active
-  caches_page :feed, :expires_in => 1.hours
+  caches_page :feed, :node_feed, :expires_in => 1.hours
   before_filter :init_base_breadcrumb
 
   def index
@@ -24,6 +24,13 @@ class TopicsController < ApplicationController
     set_seo_meta("#{@node.name} &raquo; #{t("menu.topics")}","#{Setting.app_name}#{t("menu.topics")}#{@node.name}",@node.summary)
     drop_breadcrumb("#{@node.name}")
     render :action => "index", :stream => true
+  end
+
+  def node_feed
+    @node = Node.find(params[:id])
+    @topics = @node.topics.recent.limit(20)
+    response.headers["Content-Type"] = "application/rss+xml"
+    render :layout => false
   end
 
   def recent

@@ -27,6 +27,9 @@ This is source code of [Ruby China Group](http://ruby-china.org)
 * be sure to use: http://ruby-china.dev/
 * callback url: http://ruby-china.dev/account/auth/github/callback
 
+# Search Reindex
+
+* rake mongoid_search:index 
 
 ## 麵包屑
 

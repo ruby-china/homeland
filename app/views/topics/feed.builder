@@ -1,7 +1,7 @@
 xml.instruct! :xml, :version=>"1.0" 
 xml.rss(:version=>"2.0"){
   xml.channel{
-    xml.titl t("rss.recent_topics_title", :name => Setting.app_name)
+    xml.title t("rss.recent_topics_title", :name => Setting.app_name)
     xml.link root_url
     xml.description(t("rss.recent_topics_description", :name => Setting.app_name ))
     xml.language('en-us')

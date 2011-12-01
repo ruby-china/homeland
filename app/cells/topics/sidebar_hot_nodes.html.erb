@@ -3,7 +3,7 @@
     <h2><%= t("nodes.hot_node")%></h2>
     <ul>
       <% @hot_nodes.each do |node| %>
-        <li><a href="<%= node_topics_path(:id => node.id) %>"><%= node.name %></a></li>
+        <li> <%= link_to(node.name, node_topics_path(node), :title => node.name )%></li>
       <% end %>
     </ul>
   </div>

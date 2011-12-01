@@ -52,12 +52,10 @@
 #node_info { 
   margin:0 -10px; padding:0 10px; border-bottom:1px solid #ddd; 
   h1 { text-align:right; font-size:15px; }
-  h2 { display:inline; font-size:16px; margin-right:10px;}
+  h2 { line-height:100%; display:inline; font-size:16px; margin-right:10px;}
   .desc { color:#999; }
-  .node_feed_link {
+  .feed {
     float: right;
-    margin-top: 10px;
-    margin-right: 12px;
     .icon { margin-bottom: -3px; }
     a {
       width: auto;

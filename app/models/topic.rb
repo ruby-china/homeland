@@ -5,7 +5,6 @@ class Topic
   include Mongoid::BaseModel
   include Mongoid::SoftDelete
   include Mongoid::CounterCache
-  include Mongoid::Search
   include Redis::Search
   include Redis::Objects
 
@@ -30,9 +29,6 @@ class Topic
 
   attr_protected :user_id
   validates_presence_of :user_id, :title, :body, :node_id
-
-
-  search_in :title, :body
   
   index :node_id
   index :user_id

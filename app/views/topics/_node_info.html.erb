@@ -2,8 +2,8 @@
   <div>
     <h2><%= node.name %></h2>
     <span class="total">共有 <%= render_node_topics_count(node) %> 个讨论主题</span>
-    <div class="node_feed_link">
-      <%= link_to("#{content_tag(:span, "", :class => "icon share_icons_rss" )} Feed".html_safe, feed_node_topics_url, :title => "訂閱#{node.name}節點最新話題") %>
+    <div class="feed">
+      <%= link_to("#{content_tag(:span, "", :class => "icon share_icons_rss" )}".html_safe, feed_node_topics_url, :title => "#{node.name} Feed") %>
     </div>
   </div>
   <div class="desc">

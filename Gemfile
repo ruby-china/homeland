@@ -21,14 +21,14 @@ gem 'devise', :git => 'git://github.com/plataformatec/devise.git'
 gem 'will_paginate', '3.0.pre2'
 # 三方平台 OAuth 验证登陆
 
-# Mongoid Search
-gem 'mongoid_search'
-
 gem "omniauth"
 gem 'omniauth-openid'
 gem "omniauth-github"
 gem "omniauth-twitter"
 gem "omniauth-douban", :git => "git://github.com/xdite/omniauth-douban.git"
+
+# permission
+gem "cancan"
 
 # 搜索相关的组件
 gem 'chinese_pinyin', '0.4.1'

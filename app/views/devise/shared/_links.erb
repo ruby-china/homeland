@@ -3,7 +3,7 @@
 <% end -%>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <%= link_to t("common.reigster"), new_registration_path(resource_name) %><br />
+  <%= link_to t("common.register"), new_registration_path(resource_name) %><br />
 <% end -%>
 
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>

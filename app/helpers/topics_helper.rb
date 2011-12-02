@@ -65,7 +65,7 @@ module TopicsHelper
       # source.gsub!(/[^|\s]_(.+?)_[$|\s]/, '<u>\1</u>')
 
       # `text` => <code>
-      source.gsub!(/`(.+?)`/) do |matched|
+      source.gsub!(/`(.+?^)`/) do |matched|
         code = $1
         code.gsub!(/<\/?strong>/, "**")
         code.gsub!(/<\/?em>/, "*")
@@ -88,9 +88,12 @@ module TopicsHelper
       #code = code.sub!("\r\n", "")
 
       # let the markdown compiler draw the <pre><code>
-      # (with syntax highlighting)
+      # (with syntax highlighting) 
       $markdown.render(code)
     end
+    
+    # remove last break line, if not, simple_format will add a <br>
+    source.gsub!(/<\/pre>[\s]+/im,"</pre>")
 
     return source
   end
@@ -154,13 +157,14 @@ module TopicsHelper
   def topic_use_readed_text(state)
     case state
     when true
-      "在你读过以后还没有新变化"
+      t("topics.have_no_new_reply")
     else
-      "有新内容"
+      t("topics.has_new_replies")
     end
   end
 
   def render_topic_title(topic)
+    return t("topics.topic_was_deleted") if topic.blank?
     link_to(topic.title, topic_path(topic), :title => topic.title)
   end
   

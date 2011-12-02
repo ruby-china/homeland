@@ -1,5 +1,5 @@
 <% if user_signed_in? %>
-  <%= link_to(t("common.logout"), destroy_user_session_path) %>          
+  <%= link_to(t("common.logout"), destroy_user_session_path) %>
 <% else %>
-  <%= link_to(t("common.login"), new_user_session_path)  %>    
+  <%= link_to(t("common.login"), new_user_session_path)  %>
 <% end %>

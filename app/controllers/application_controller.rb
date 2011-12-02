@@ -10,14 +10,18 @@ class ApplicationController < ActionController::Base
   def render_403
     render_optional_error_file(403)
   end
-  
+
   def render_optional_error_file(status_code)
-      status = status_code.to_s
-      if ["404","403", "422", "500"].include?(status)
-        render :template => "/errors/#{status}.html.erb", :status => status, :layout => "application"
-      else
-        render :template => "/errors/unknown.html.erb", :status => status, :layout => "application"
-      end
+    status = status_code.to_s
+    if ["404","403", "422", "500"].include?(status)
+      render :template => "/errors/#{status}.html.erb", :status => status, :layout => "application"
+    else
+      render :template => "/errors/unknown.html.erb", :status => status, :layout => "application"
+    end
+  end
+  
+  rescue_from CanCan::AccessDenied do |exception|  
+    redirect_to topics_path, :alert => t("common.access_denied")
   end
 
 

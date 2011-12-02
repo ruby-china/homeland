@@ -19,3 +19,6 @@
     reply_success: "回應成功。"
     reply_this_floor: "回复此楼"
     add_image: "上傳圖片"
+    topic_was_deleted: "[該主題已被刪除]"
+    have_no_new_reply: "在你讀過以後還沒有新變化"
+    has_new_replies: "有新內容"

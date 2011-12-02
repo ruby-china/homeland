@@ -1,8 +1,8 @@
 # coding: utf-8
 class PagesController < ApplicationController
-  before_filter :check_lock, :only => [:edit, :update]
-  before_filter :require_user, :only => [:new, :edit, :create, :update]
-  before_filter :check_permissions, :only => [:new, :edit, :create, :update]
+
+  authorize_resource :page
+  
   before_filter :init_base_breadcrumb
   before_filter :set_menu_active
   
@@ -22,6 +22,7 @@ class PagesController < ApplicationController
     if !@page
       if !current_user
         render_404
+        return
       else
         redirect_to new_page_path(:title => params[:id]), :notice => "Page not Found, Please create a new page"
         return
@@ -44,6 +45,8 @@ class PagesController < ApplicationController
 
   def edit
     @page = Page.find(params[:id])
+    
+    authorize! :edit, @page
     set_seo_meta t("pages.edit_wiki_page")
     drop_breadcrumb t("common.edit")
   end
@@ -65,6 +68,8 @@ class PagesController < ApplicationController
     params[:page][:version_enable] = true
     params[:page][:user_id] = current_user.id
     
+    authorize! :update, @page
+    
     if @page.update_attributes(params[:page])
       redirect_to page_path(@page.slug), notice: t("common.update_success")
     else
@@ -81,23 +86,4 @@ class PagesController < ApplicationController
   def init_base_breadcrumb
     drop_breadcrumb("Wiki", pages_path)
   end
-
-  private
-    def check_lock
-      @page = Page.find(params[:id])
-      if @page.locked
-        if !current_user or !Setting.admin_emails.include?(current_user.email)
-          redirect_to page_path(@page.slug), alert: t("pages.wiki_page_lock_warning")
-          return
-        end
-      end
-    end
-    
-    def check_permissions
-      if not current_user.wiki_editor?
-        render_403
-        return false
-      end
-      true
-    end
 end

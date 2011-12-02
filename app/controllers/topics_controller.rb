@@ -1,6 +1,8 @@
 # coding: utf-8  
 class TopicsController < ApplicationController
-  before_filter :require_user, :only => [:new,:edit,:create,:update,:destroy,:reply]
+  
+  load_and_authorize_resource :only => [:new,:edit,:create,:update,:destroy]
+  
   before_filter :set_menu_active
   caches_page :feed, :node_feed, :expires_in => 1.hours
   before_filter :init_base_breadcrumb
@@ -77,19 +79,6 @@ class TopicsController < ApplicationController
     drop_breadcrumb t("topics.post_topic")
     set_seo_meta("#{t("topics.post_topic")} &raquo; #{t("menu.topics")}")
   end
-
-  #def reply
-  #  @topic = Topic.find(params[:id])
-  #  @reply = @topic.replies.build(params[:reply])        
-  #  @reply.user_id = current_user.id
-  #  if @reply.save
-  #    current_user.read_topic(@topic)
-  #    @msg = t("topics.reply_success")
-  #  else
-  #    @msg = @reply.errors.full_messages.join("<br />")
-  #  end
-  #end
-
 
   def edit
     @topic = current_user.topics.find(params[:id])

@@ -23,11 +23,7 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::AccessDenied do |exception|  
     redirect_to topics_path, :alert => t("common.access_denied")
   end
-  
 
-  # FIXME: this cracks production and test!
-  # rescue_errors unless Rails.env.development?
-  # 在 Development 不要 render_optional_error_file, 很煩 -_-
 
   def notice_success(msg)
     flash[:notice] = msg

@@ -9,6 +9,8 @@ module TopicsHelper
 
     text = h(text)
     
+    text = preformat_fenced_code_block(text)
+
     ## fenced code block with ```
     text = parse_fenced_code_block(text)
     
@@ -77,6 +79,12 @@ module TopicsHelper
     end
 
     doc.to_html
+  end
+
+  # add new lines before and after the fenced code block
+  # to avoid <br> in front of and ends 
+  def preformat_fenced_code_block(text)
+    text.gsub(/(```.+?```)/im, "\n\\1\n")
   end
 
   def parse_fenced_code_block(text)

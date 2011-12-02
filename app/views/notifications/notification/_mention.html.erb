@@ -15,7 +15,7 @@
       <span class="new label warning">新</span>
     <% end %>
   </h3>
-  <%- if relpy.present? -%>
+  <%- if reply.present? -%>
     <blockquote>
       <%= format_topic_body(reply.body, :mentioned_user_logins => reply.mentioned_user_logins) %>
     </blockquote>

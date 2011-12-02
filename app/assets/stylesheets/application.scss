@@ -39,7 +39,24 @@ fieldset legend { font-size:16px; font-weight:bold;}
 form {
   margin-bottom:0;
 
-  .input {margin-left: 146px;}
+  .input {
+    > [class*="span"] {
+      float: left;
+      display: inline;
+      margin-right: 10px;
+
+      input, textarea, select, .uneditable-input {
+        width: 100%;
+      }
+      input[type=checkbox],
+      input[type=radio],
+      input[type=button],
+      input[type=reset],
+      input[type=submit] {
+        width: auto;
+      }
+    }
+  }
 }
 
 a.label:hover { text-decoration: none; color:#FFF;}

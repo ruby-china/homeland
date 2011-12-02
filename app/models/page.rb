@@ -36,7 +36,7 @@ class Page
   def markdown_for_body_html
     return true if not self.body_changed?
 
-    self.body_html = $markdown.render(self.body)
+    self.body_html = MarkdownConverter.convert(self.body)
   rescue => e
     Rails.logger.error("markdown_for_body_html failed: #{e}")
   end

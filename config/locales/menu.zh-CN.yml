@@ -15,6 +15,7 @@
     register: "注册"
     login: "登录"
     logout: "退出"
+    remember_me: "记住登录状态"
     cancel: "取消"
     created_at: "于%{time}发布"
     until: "截止"

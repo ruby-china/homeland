@@ -67,7 +67,7 @@ module TopicsHelper
       # source.gsub!(/[^|\s]_(.+?)_[$|\s]/, '<u>\1</u>')
 
       # `text` => <code>
-      source.gsub!(/`(.+?^)`/) do |matched|
+      source.gsub!(/`(.+?)`/) do |matched|
         code = $1
         code.gsub!(/<\/?strong>/, "**")
         code.gsub!(/<\/?em>/, "*")

@@ -5,21 +5,21 @@
 
 <div class="content">
   <div class="topics box">
-    <div class="topic">         
+    <div class="topic">
       <div class="pull-right avatar_large">
         <%= user_avatar_tag(@topic.user, :large, :link => false) %>
       </div>
-        
+
       <%= render :partial => "topics/topic_info", :locals => { :topic => @topic} %>
-        
+
       <%= raw SiteConfig.before_topic_html %>
-        
+
       <div class="body">
         <%= format_topic_body(@topic.body) %>
       </div>
-        
+
       <%= raw SiteConfig.after_topic_html %>
-        
+
       <div class="tools pull-right">
         <%= likeable_tag(@topic) %>
         <% if owner?(@topic) %>
@@ -32,7 +32,7 @@
   </div>
 
   <%= render :partial => "topics/replies", :locals => { :topic => @topic, :replies => @replies } %>
-  
+
   <% if current_user %>
     <div id="reply" class="form box">
       <%= form_for(Reply.new, :remote => true,:url => topic_replies_path(@topic)) do |f| %>

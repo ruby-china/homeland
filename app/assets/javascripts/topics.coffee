@@ -42,12 +42,13 @@ window.Topics =
     $("#main .alert-message").remove()
     if success
       $("abbr.timeago",$("#replies .reply").last()).timeago()
+      $("abbr.timeago",$("#replies .total")).timeago()
       $("#new_reply textarea").val('')
       App.notice(msg,'#reply')
     else
       App.alert(msg,'#reply')
     $("#new_reply textarea").focus()
-    $('#btn_reply').button('reset')    
+    $('#btn_reply').button('reset')
     
 # pages ready
 $(document).ready ->

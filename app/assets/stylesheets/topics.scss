@@ -7,45 +7,65 @@
 
 .sidebar p { margin-bottom:8px;}
 
-.topics { }
-.topics .topic {  }
-.topics .topic_line {border-bottom:1px solid #DDD; padding:10px 0; margin:0 -10px; vertical-align:top; }
+.topics {
+   .topic {  
+      .avatar_large { width:64px; }
+      .avatar { width:56px; margin-left:10px; }
+      .infos { padding-right:74px; }
+      .right_info { padding-left:66px;}
+      .title { font-size:14px; }
+      .info { color:#999; margin-bottom:2px; }
+      a:link, a:visited { color:#999; text-decoration: underline; }
+      .replies { 
+         width:70px; margin-right:10px; text-align:right; vertical-align:middle; 
+         a.count,a.count:visited { line-height: 12px; font-weight: bold; color: white; 
+           background-color: #1c7fdb; display: inline-block; 
+           padding: 2px 10px 2px 10px; 
+           -moz-border-radius: 12px; -webkit-border-radius: 12px; 
+           margin: 18px 12px 0px 0px; text-decoration: none; 
+         }
+         a.count:hover { color:write; background-color:#1F8AEE; }
+         a.state_true:link,a.state_true:visited { background:#DDD; }
+         a.state_true:hover { background:#1dc115;}
+      }
+   }
+   .body {
+       margin-bottom:10px; line-height:160%; font-size:14px; margin-top:8px; word-wrap: break-word;
+       p { margin-bottom:10px; }
+       img { max-width:690px;}
+   }
+   .tools { text-align:right; height:16px; overflow:hidden;}
+   .topic_line {border-bottom:1px solid #DDD; padding:10px 0; margin:0 -10px; vertical-align:top; }
+   tr.topic td.replies { text-align:right; width:50px; font-size:14px; color:green;font-weight:bold; }
+}
+
+
 #main .topics .topic h1 { font-size:22px; color:#333; margin-top:6px; text-align: left; line-height:100%;margin-bottom:8px;}
-.topics .topic .avatar_large { width:64px; }
-.topics .topic .avatar { width:56px; margin-left:10px; }
-.topics .topic .infos { padding-right:74px; }
-.topics .topic .right_info { padding-left:66px;}
-.topics .topic .title { font-size:14px; }
-.topics .topic .info { color:#999; margin-bottom:2px; }
-.topics .topic .info a:link,
-.topics .topic .info a:visited { color:#999; text-decoration: underline; }
-.topics .body { margin-bottom:10px; line-height:160%; font-size:14px; margin-top:8px; word-wrap: break-word;}
-.topics .body p { margin-bottom:10px; }
-.topics .body img { max-width:690px;}
-.topics .tools { text-align:right; height:16px; overflow:hidden;}
-.topics .topic .replies { width:70px; margin-right:10px; text-align:right; vertical-align:middle; }
-.topics .topic .replies a.count,
-.topics .topic .replies a.count:visited { line-height: 12px; font-weight: bold; color: white; 
-  background-color: #1c7fdb; display: inline-block; 
-  padding: 2px 10px 2px 10px; 
-  -moz-border-radius: 12px; -webkit-border-radius: 12px; 
-  margin: 18px 12px 0px 0px; text-decoration: none; }
-.topics .topic .replies a.count:hover { color:write; background-color:#1F8AEE; }
-.topics .topic .replies a.state_true:link,
-.topics .topic .replies a.state_true:visited { background:#DDD; }
-.topics .topic .replies a.state_true:hover { background:#1dc115;}
-.topics tr.topic td.replies { text-align:right; width:50px; font-size:14px; color:green;font-weight:bold; }
+
 .more { padding:8px; padding-bottom:0; font-size:14px; text-align:right; }
 .share_buttons { height:16px; }
 .pagination { margin:0; margin-top:10px; }
 
 /* topics list in node page */
-.node_topics { margin-bottom:16px;}
-.node_topics tr td { padding:8px; }
-.node_topics tr.head td { padding-top:14px; color:#CCC; font-weight:bold; font-size:12px; }
-.node_topics tr.topic td.title { font-size:14px; font-weight:bold; }
-.node_topics tr.topic td.author { width:80px;}
-.node_topics tr.topic td.author a { color:#666; font-weight:bold; }
+
+.node_topics {
+  margin-bottom: 16px; 
+  tr td {
+    padding: 8px; }
+  tr.head td {
+    padding-top: 14px;
+    color: #CCC;
+    font-weight: bold;
+    font-size: 12px; }
+  tr.topic td.title {
+    font-size: 14px;
+    font-weight: bold; }
+  tr.topic td.author {
+      width: 80px; }
+  tr.topic td.author a {
+    color: #666;
+    font-weight: bold; }
+}
 
 .no_result { margin-bottom:20px; text-align:center; }
 

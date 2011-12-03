@@ -55,7 +55,7 @@ class TopicsController < ApplicationController
     @topic = Topic.find(params[:id])
     @topic.hits.incr(1)
     @node = @topic.node
-    @replies = @topic.replies.asc(:_id).all.includes(:user).cache
+    @replies = @topic.replies.asc(:_id).all.includes(:user).cache.reject { |r| r.user.nil? }
     if current_user
       current_user.read_topic(@topic)
       current_user.notifications.where(:reply_id.in => @replies.map(&:id), :read => false).update_all(:read => true)

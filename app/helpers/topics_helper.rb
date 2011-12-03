@@ -89,7 +89,7 @@ module TopicsHelper
 
       # let the markdown compiler draw the <pre><code>
       # (with syntax highlighting) 
-      $markdown.render(code)
+      MarkdownConverter.convert(code)
     end
     
     # remove last break line, if not, simple_format will add a <br>

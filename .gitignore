@@ -22,3 +22,4 @@ public/topics/**/*
 *.swo
 .rvmrc
 vendor/ruby
+doc/wiki_repo

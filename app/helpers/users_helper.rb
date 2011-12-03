@@ -60,7 +60,7 @@ module UsersHelper
     if admin?(user)
       content_tag(:span, t("common.admin_user"), :class => "label warning")
     elsif wiki_editor?(user)
-      content_tag(:span, t("common.widi_admin"), :class => "label success")
+      content_tag(:span, t("common.wiki_admin"), :class => "label success")
     else
       content_tag(:span,  t("common.limit_user"), :class => "label")
     end

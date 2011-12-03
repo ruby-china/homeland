@@ -1,5 +1,68 @@
 # Sample localization file for English. Add more files in this directory for other locales.
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
-en:
-  hello: "Hello world"
+"en":
+  mongoid:
+    models:
+      user: "User"
+      topic: "Topic"
+      post: "Post"
+      page: "Wiki"
+    attributes:
+      user:
+        name: "Name"
+        login: "Login name"
+        email: "Email"
+        location: "City"
+        bio: "Bio"
+        password: "Password"
+        password_confirmation: "Password Confirmation"
+        website: "Personal Website"
+        last_logined_at: "Last signed in at"
+        tagline: "Tagline"
+        state: "Status"
+        verified: "Verified"
+        remember_me: "Remember me"
+        current_password: "Current Password"
+      topic:
+        title: "Title"
+        user_id: "User"
+        body: "Content"
+      reply:
+        body: "Reply Content"  
+      post:
+        title: "Title"
+        body: "Content"
+        tag_list: "Tags"
+        source: "Source"
+        source_url: "Source Url"        
+      page:
+        slug: Slug
+        title: "Title"
+        body: "Content"
+        locked: "Lock"
+        change_desc: "Change Description"
+    errors:
+      models:
+        user: "User"        
+      messages:
+        inclusion: "Inclusion"
+        exclusion: "Exclusion"
+        invalid: "Invalid"
+        confirmation: "Confirmation did not match"
+        accepted: "acceptance required."
+        empty: "Cannot be empty."
+        blank: "Cannot be blank."
+        too_long: "Too long (limited to %{count} characters)."
+        too_short: "Too short (at least %{count} characters are required)."
+        wrong_length: "Invvalid length (valid length: %{count} characters)."
+        taken: "already taken"
+        not_a_number: "Not a number"
+        not_an_integer: "Not an integer"
+        greater_than: "should be greater than %{count}"
+        greater_than_or_equal_to: "should be greater than or equal to %{count}"
+        equal_to: "should be equal to %{count}"
+        less_than: "should be less than %{count}"
+        less_than_or_equal_to: "should be less than or equal to %{count}"
+        odd: "should be odd number."
+        even: "should be even number."

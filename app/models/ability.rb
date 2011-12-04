@@ -66,6 +66,8 @@ class Ability
       can :destroy, Photo do |photo|
         photo.user_id == photo.id
       end
+      
+      can :create, Site
 
       basic_read_only
     else
@@ -92,6 +94,7 @@ class Ability
     can :recent, Page
     
     can :read, Photo
+    can :read, Site
   end
 end
 

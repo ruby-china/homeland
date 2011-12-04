@@ -39,6 +39,11 @@
         body: 內容
         locked: 鎖定開關
         change_desc: 變更描述
+      site:
+        name: 网站名称
+        url: 地址
+        desc: 简单介绍
+        site_node_id: 分类
     errors:
       models:
         user: 用戶

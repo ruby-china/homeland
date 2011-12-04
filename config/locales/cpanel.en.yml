@@ -13,6 +13,8 @@
       photos: "Photos"
       notes: "Notes"
       comments: "Comments"
+      site_nodes: "Site Nodes"
+      sites: "Sites"
     overview: "Overview"
     recent_topics: "Recent Topics"
     statics: "Statistics"

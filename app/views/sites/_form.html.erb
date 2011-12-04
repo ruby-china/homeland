@@ -1,0 +1,16 @@
+<div id="site" class="box form">
+<%= simple_form_for(@site, :wrapper => :inline ) do |f| %>
+  <%= render "/shared/error_messages", :target => @site  %>
+  <fieldset>
+    <legend><%= t("sites.create") %></legend>
+      <%= f.input :name %>
+      <%= f.input :url, :input_html => { :class => "xxlarge" }, :placeholder => "http://"  %>
+      <%= f.input :favicon, :input_html => { :class => "xxlarge" }, :placeholder => "http://" %>
+      <%= f.input :desc, :as => :text, :input_html => { :class => "xxlarge", :rows => "3" } %>
+      <%= f.input :site_node_id, :collection => SiteNode.all.collect { |t| [t.name, t.id] }, :include_blank => false %>
+      <div class="actions">
+      <%= f.submit t("common.save"), :class => "btn primary" %> or <%= link_to t("common.cancel"), sites_path %>
+    </div>
+  </fieldset>
+<% end %>
+</div>

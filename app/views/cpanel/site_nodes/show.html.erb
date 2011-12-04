@@ -1,0 +1,15 @@
+<%= render 'base' %>
+<div class="tools">
+  <%= link_to '修改', edit_cpanel_site_node_path(@site_node), :class => "btn small success" %>
+  <%= link_to '返回', cpanel_site_nodes_path, :class => "btn small" %>
+</div>
+<div id="cpanel_site_node">
+    <p>
+    <b>Name:</b>
+    <%= @site_node.name %>
+  </p>
+    <p>
+    <b>Sites count:</b>
+    <%= @site_node.sites_count %>
+  </p>
+  </div>

@@ -1,0 +1,2 @@
+module Cpanel::SiteNodesHelper
+end

@@ -1,4 +1,5 @@
 RubyChina::Application.routes.draw do
+  resources :sites
 
   resources :posts
   resources :pages, :path => "wiki" do
@@ -82,6 +83,8 @@ RubyChina::Application.routes.draw do
       end
     end
     resources :comments
+    resources :site_nodes
+    resources :sites
   end  
   
   if Rails.env.development?

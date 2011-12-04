@@ -63,6 +63,8 @@
     topic_location: '回應所在文章'
   photos:
     upload_and_insert_code: "上傳並插入原始碼"
+  sites:
+    create: 提交网站
   menu:
     topics: "社區"
     wiki: "Wiki"
@@ -71,6 +73,7 @@
     cpanel: "後台"  
     notes: "記事本"
     nodes: "節點"
+    sites: "酷站"
     my_home_page: "我的首頁"
     edit_account_path: "個人資料設定"
   comments:

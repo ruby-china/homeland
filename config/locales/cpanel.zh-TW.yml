@@ -13,6 +13,8 @@
       photos: "圖片"   
       notes: "記事本" 
       comments: "評論"
+      site_nodes: "Site Nodes"
+      sites: "Sites"
     overview: "概覽"
     recent_topics: "最近討論"
     statics: "統計資訊"

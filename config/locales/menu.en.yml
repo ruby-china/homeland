@@ -63,6 +63,8 @@
     topic_location: 'Replied to'
   photos:
     upload_and_insert_code: "Upload and insert code"
+  sites:
+    create: Submit a site
   menu:
     topics: "Discussion"
     wiki: "Wiki"
@@ -71,6 +73,7 @@
     cpanel: "Control Panel"  
     notes: "Notes"
     nodes: "Nodes"
+    sites: "Sites"
     my_home_page: "My home page"
     edit_account_path: "Account Profile"
   comments:

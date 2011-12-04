@@ -5,6 +5,8 @@ describe User do
   let(:user)  { Factory :user }
   let(:user2)  { Factory :user }
   let(:reply) { Factory :reply }
+  let(:user_for_delete1) { Factory :user }
+  let(:user_for_delete2) { Factory :user }
 
   describe '#read_topic?' do
     before do
@@ -23,6 +25,17 @@ describe User do
       user.topic_read?(topic).should == false
       user.read_topic(topic)
       user.topic_read?(topic).should == true
+    end
+    
+    it "user can soft_delete" do
+      user_for_delete1.soft_delete
+      user_for_delete1.reload
+      user_for_delete1.login.should == "Guest"
+      user_for_delete1.state.should == -1
+      user_for_delete2.soft_delete
+      user_for_delete1.reload
+      user_for_delete1.login.should == "Guest"
+      user_for_delete1.state.should == -1
     end
   end
 end

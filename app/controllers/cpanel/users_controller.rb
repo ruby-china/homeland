@@ -49,7 +49,7 @@ class Cpanel::UsersController < Cpanel::ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
+    @user.soft_delete
 
     redirect_to(cpanel_users_url) 
   end

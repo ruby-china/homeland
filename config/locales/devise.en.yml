@@ -1,0 +1,5 @@
+"zh-CN":
+  account:
+    signed_up: 'Sign up successed.'
+    updated: 'Profile update successed.'
+    destroyed: 'Goodbye! You account was deleted.'

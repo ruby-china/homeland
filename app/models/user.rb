@@ -1,11 +1,8 @@
 # coding: utf-8  
 class User
-
-  
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::BaseModel
-  include Mongoid::SoftDelete
   include Redis::Objects
   extend OmniauthCallbacks   
 
@@ -119,9 +116,13 @@ class User
   end
 
   STATE = {
+    # 软删除
+    :deleted => -1,
+    # 正常
     :normal => 1,
     # 屏蔽
-    :blocked => 2
+    :blocked => 2,
+    
   }
   
   # 用邮件地址创建一个用户
@@ -189,6 +190,21 @@ class User
     Like.destroy_all(:conditions => {:likeable_id => likeable.id, 
                                      :likeable_type => likeable.class,
                                      :user_id => self.id})
+  end
+  
+  # 软删除
+  # 只是把用户信息修改了
+  def soft_delete
+    # assuming you have deleted_at column added already
+    self.email = "#{self.login}_#{self.id}@ruby-china.org"
+    self.login = "Guest"
+    self.bio = ""
+    self.website = ""
+    self.github = ""
+    self.tagline = ""
+    self.location = ""
+    self.state = STATE[:deleted]
+    self.save(:validate => false)
   end
 
 end

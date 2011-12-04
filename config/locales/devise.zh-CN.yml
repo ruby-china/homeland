@@ -23,7 +23,7 @@
     confirmations:
       send_instructions: '几分后，您将收到帐号激活的电子邮件.'
       confirmed: '您的帐号已经激活，请登录.'
-    registrations:
+    account:
       signed_up: '您的帐号已注册成功，如无意外，您将地收到一封确认邮件.'
       updated: '帐号资料更新成功.'
       destroyed: '再见！您的帐户已成功注销。我们希望很快可以再见到您.'

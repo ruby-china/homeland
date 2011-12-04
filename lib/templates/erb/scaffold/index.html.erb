@@ -1,0 +1,30 @@
+<%%= render 'base' %>
+<h1><%%= t("mongoid.models.<%= file_name %>") %></h1>
+<div id="<%= plural_table_name %>">
+  <table class="grid">
+    <tr class="head">
+      <td>编号</td>
+<% attributes.each do |attr| -%>
+      <td><%%= t("mongoid.attributes.<%= file_name %>.<%= attr.name %>") %></td>
+<% end -%>
+      <td>创建时间</td>
+      <td class="opts"></td>
+    </tr>
+    <%% @<%= plural_file_name %>.each do |item| %>
+    <tr class="<%%= cycle("","even") %>">
+      <td><%%= item.id %></td>
+<% attributes.each do |attr| -%>
+      <td><%%= item.<%= attr.name %> %></td>
+<% end -%>
+      <td><%%= l(item.created_at, :format => :long) %></td>
+      <td>
+        <%%= link_to "", edit_<%= singular_table_name %>_path(item.id), :class => "icon small_edit" %>
+        <%%= link_to "", <%= singular_table_name %>_path(item.id), :method => :delete, :confirm => '确定要删除吗?', :class => "icon small_delete" %>
+      </td>
+    </tr>
+    <%% end %>
+  </table>
+</div>
+<div class="tools">
+  <a href="<%%= new_<%= singular_table_name %>_path %>" class="btn small success">新建</a>
+</div>

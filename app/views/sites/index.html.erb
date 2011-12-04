@@ -1,9 +1,9 @@
-<%= render 'base' %>
+<%= render "base" %>
 <div id="site_nodes">
   <div class="box">
     <%= raw SiteConfig.site_index_html %>
     <% if can? :create, Site %>
-      <a href="<%= new_site_path %>" class="btn small success">提交网站</a>
+      <%= link_to(t("sites.create"), new_site_path, :class => "btn small success")%>
     <% end %>
   </div>
   <% @site_nodes.each do |node| %>
@@ -12,9 +12,9 @@
     <div class="row">
       <% node.sites.each do |item| %>
         <div class="span3 site">
-          <img class="favicon" src="<%= item.favicon %>" />
+          <%= image_tag(item.favicon, :class => "favicon")%>
           <%= link_to item.name, item.url, :target => "_blank", :rel => "userpopover", 
-          :title => item.name, 'data-content' => item.desc %>
+          :title => item.name, "data-content" => item.desc %>
         </div>
       <% end %>
     </div>

@@ -1,10 +1,19 @@
 require 'spec_helper'
 
+USING_PARANOIA = false
+
 class WalkingDead
   include Mongoid::Document
   include Mongoid::BaseModel
-  include Mongoid::SoftDelete
-
+  
+  if USING_PARANOIA
+    puts "using paranoia"
+    include Mongoid::Paranoia
+  else
+    puts "using soft delete"
+    include Mongoid::SoftDelete
+  end
+  
   field :name
 end
 
@@ -21,6 +30,12 @@ describe "Soft Delete" do
     expect {
       rick.destroy
     }.to_not change(WalkingDead.unscoped, :count)
+  end
+  
+  it "should update the deleted_at field" do
+    expect {
+      rick.destroy
+    }.to change {rick.deleted_at}.from(nil)
   end
 
   it "should mark as destroyed and get proper query result" do

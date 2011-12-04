@@ -51,8 +51,7 @@ class Topic
   end
 
   def node_name
-    return "" if self.node.blank?
-    self.node.name
+    node.try(:name) || ""
   end
 
   def push_follower(user_id)

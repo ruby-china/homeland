@@ -3,7 +3,7 @@ class SitesController < ApplicationController
   load_and_authorize_resource
   
   def index
-    @site_nodes = SiteNode.recent.includes(:sites)
+    @site_nodes = SiteNode.desc('sort').includes(:sites)
     drop_breadcrumb(t("menu.sites"))
     set_seo_meta("Ruby #{t("menu.sites")}")
   end

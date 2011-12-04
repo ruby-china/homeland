@@ -1,15 +1,11 @@
 <div class="infos">
   <h1><%= truncate(topic.title, :length => 100) %></h1>
   <div class="info leader">
-      由 <%= user_name_tag(topic.user) %>
-      在 <%= render_node_name(topic.node) %> <%= t("menu.nodes")%> 中<%= t("common.create_item")%>
+    <%= render_topic_created_at(topic) %> 由 <%= user_name_tag(topic.user) %>
+    <%= render_node_name(topic.node) %> <%= t("menu.nodes")%> 中<%= t("common.create_item")%>
   </div>
   <div class="info time">
-    <% if topic.last_reply_user.blank? %>
-      <%= raw t("common.created_at", :time => render_topic_created_at(topic)) %>
-    <% else %>
-      <%= t("common.last_by")%> <%= user_name_tag(topic.last_reply_user) %> <%= raw t("common.reply_at", :time => render_topic_last_be_replied_time(topic)) %>
-    <% end %>
+    <%= t("common.last_by")%> <%= user_name_tag(topic.last_reply_user) %> <%= raw t("common.reply_at", :time => render_topic_last_be_replied_time(topic)) %>
     , <%= topic.hits %><%= t("common.read_times")%>
   </div>
 </div>

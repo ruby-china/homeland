@@ -17,7 +17,6 @@
     logout: "退出"
     remember_me: "记住登录状态"
     cancel: "取消"
-    created_at: "于%{time}发布"
     until: "截止"
     last_by: "最后由"
     floor: "楼"

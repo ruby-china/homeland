@@ -49,6 +49,8 @@
     comments: "条评论"
     no_search_result: "没有搜索到相关内容。"
     access_denied: "访问被拒绝，你可能没有权限或未登录。"
+    editor_toolbar_edit: "编辑"
+    editor_toolbar_preview: "预览"
   posts:
     recent_publish_post: "最近发布的文章"
     post_source: "文章來源"

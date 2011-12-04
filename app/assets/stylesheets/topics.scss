@@ -141,10 +141,10 @@
 
 #reply {
   form {
-    .pull-right {
-      padding-top:16px;
-    }
   }
+  .editor_toolbar {
+    width:588px;
+  } 
 }
 
 .sidebar {
@@ -174,5 +174,20 @@
         }
       }
     }
+  }
+}
+
+#preview {
+  /* copied from twitter bootstrap */
+  margin-top:0px;
+  border: 1px solid #ccc;
+  padding:10px;
+  min-height:400px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  #reply & {
+    width: 568px;
+    min-height:72px;
   }
 }

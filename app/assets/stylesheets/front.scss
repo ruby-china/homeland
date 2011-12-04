@@ -181,3 +181,37 @@
 }
 
 .help-block ul { margin-bottom:0; }
+
+.editor_toolbar {
+  .icons { float:right;  margin-top:12px; }
+  .pills {
+    margin: 0;
+    a {
+      -moz-border-radius: 8px;
+      -webkit-border-radius: 8px;
+      border-radius: 8px;
+      padding:0 5px;
+      line-height:18px;
+      font-size:12px;
+      margin-right:6px;
+      text-shadow:0;
+      color:#444;
+      border:1px solid #fff;
+    }
+    a:hover {
+      background:#fff;
+      color:#00438A;
+      text-decoration: underline;
+      text-shadow:0;
+    }
+    .active {
+      a {
+        background:#fff;
+        border:1px solid #ddd;
+        color:#666;
+        text-shadow:0;
+      }
+      a:hover { text-decoration: none;}
+    }
+  }
+}

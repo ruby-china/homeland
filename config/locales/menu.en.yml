@@ -49,6 +49,8 @@
     comments: "Comments"
     no_search_result: "No search result"
     access_denied: "Access denied, Please sign in and make sure you have proper permission."
+    editor_toolbar_edit: "Edit"
+    editor_toolbar_preview: "Preview"
   posts:
     recent_publish_post: "Recent Published Post"
     post_source: "Post source"

@@ -17,6 +17,7 @@
     logout: "Sign Out"
     remember_me: "Remember Me"
     cancel: "Cancel"
+    created_at: "Created at %{time}"
     until: "until"
     last_by: "Last By"
     floor: "Floor"

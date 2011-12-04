@@ -4,4 +4,4 @@
       site:
         desc: '100字左右的介紹'
         url: "別忘了要寫 http:// 哦!"
-        favicon: '此網站的 Favicon，不填將會用 Google 來分析此網站的圖標.'
+        favicon: '此網站的 Favicon，不填將會用 Google 來自動分析此網站.'

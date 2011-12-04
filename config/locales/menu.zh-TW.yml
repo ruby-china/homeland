@@ -64,7 +64,7 @@
   photos:
     upload_and_insert_code: "上傳並插入原始碼"
   sites:
-    create: 提交网站
+    create: 提交網站
   menu:
     topics: "社區"
     wiki: "Wiki"

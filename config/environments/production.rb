@@ -1,4 +1,12 @@
-# coding: utf-8  
+# coding: utf-8 
+def compile_asset?(path)
+  if File.basename(path) =~ /^[^_].*\.\w+$/
+    true
+  else
+    false
+  end
+end
+ 
 RubyChina::Application.configure do
   # Settings specified here will take precedence over those in config/environment.rb
 
@@ -62,8 +70,6 @@ RubyChina::Application.configure do
   
   config.assets.js_compressor  = :uglifier
   config.assets.css_compressor = :scss
-  config.assets.precompile += %w(application.css application.js topics.css topics.js window.css front.css cpanel.css users.css posts.css posts.js pages.css pages.js notifications.js notifications.css)
-  
-  
+  config.assets.precompile = [ method(:compile_asset?).to_proc ]
 end
 

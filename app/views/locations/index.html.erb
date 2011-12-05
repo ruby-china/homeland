@@ -1,0 +1,8 @@
+<%= render "base" %>
+<div id="users">
+  <div class="info"><%= t("locations.current_have") %> <%= @locations.count %> <%= t("locations.locations_joined") %> <%= Setting.app_name %>。</div>
+  <div id="hot_users" class="user_list box row">
+    <h2><%= t("locations.hot_cities") %></h2>
+    <%= render_cell :locations, :active_locations, :locations => @locations %>
+  </div>
+</div>

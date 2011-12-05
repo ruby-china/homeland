@@ -42,6 +42,7 @@ class UsersController < ApplicationController
   protected
   def find_user
     @user = User.where(:login => /^#{params[:id]}$/i).first
+    render_404 if @user.nil?
   end
   
   def set_menu_active

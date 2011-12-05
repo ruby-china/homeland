@@ -24,5 +24,15 @@ describe User do
       user.read_topic(topic)
       user.topic_read?(topic).should == true
     end
+
+    it "should not get results when user location not set" do
+      User.cities.count == 0
+    end
+
+    it "should get results when user location is set" do
+      user.location = "hangzhou"
+      user2.location = "Hongkong"
+      User.cities.count == 2
+    end
   end
 end

@@ -63,6 +63,29 @@ class User
 
   scope :hot, desc(:replies_count, :topics_count)
 
+  def self.cities
+    cities_map = <<MAP
+        function() {
+          if (typeof this.location !== 'undefined' && this.location !== null)
+            emit(this.location, { logins: [this.login], count: 1 });
+        }
+MAP
+
+    cities_reduce = <<REDUCE
+        function(key, values) {
+          var count = 0;
+          var logins = [];
+          values.forEach(function(value) {
+              count += value.count;
+              logins.push(value.logins.pop());
+            });
+            return { logins: logins, count: count };
+          };
+REDUCE
+
+    self.collection.map_reduce(cities_map, cities_reduce, :out => "mr_results")
+  end
+
   def self.find_for_database_authentication(conditions)
     login = conditions.delete(:login)
     self.where(:login => /^#{login}$/i).first

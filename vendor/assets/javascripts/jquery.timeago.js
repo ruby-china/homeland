@@ -32,20 +32,21 @@
       strings: {
         prefixAgo: null,
         prefixFromNow: null,
-        suffixAgo: "前",
-        suffixFromNow: '<%= I18n.t("common.justnow")%>',
-        seconds: "1秒",
-        minute: '1<%= I18n.t("common.minute")%>',
-        minutes: '%d<%= I18n.t("common.minute")%>',
-        hour: '1<%= I18n.t("common.hour")%>',
-        hours: '%d<%= I18n.t("common.hour")%>',
-        day: "1天",
-        days: "%d天",
-        month: "1月",
-        months: "%d月",
-        year: "1年",
-        years: "%d年",
-        numbers: []
+        suffixAgo: "ago",
+        suffixFromNow: "from now",
+        seconds: "less than a minute",
+        minute: "about a minute",
+        minutes: "%d minutes",
+        hour: "about an hour",
+        hours: "about %d hours",
+        day: "a day",
+        days: "%d days",
+        month: "about a month",
+        months: "%d months",
+        year: "about a year",
+        years: "%d years",
+        numbers: [],
+        formatter: null
       }
     },
     inWords: function(distanceMillis) {
@@ -68,7 +69,7 @@
 
       function substitute(stringOrFunction, number) {
         var string = $.isFunction(stringOrFunction) ? stringOrFunction(number, distanceMillis) : stringOrFunction;
-        var value = ($l.numbers && $l.numbers[number]) || number;
+        var value = $.isFunction($l.numbers) ? $l.numbers(number) : (($l.numbers && $l.numbers[number]) || number);
         return string.replace(/%d/i, value);
       }
 
@@ -84,7 +85,7 @@
         years < 2 && substitute($l.year, 1) ||
         substitute($l.years, Math.floor(years));
 
-      return $.trim([prefix, words, suffix].join(""));
+      return $.isFunction($l.formatter) ? $l.formatter(prefix, words, suffix) : $.trim([prefix, words, suffix].join(" "));
     },
     parse: function(iso8601) {
       var s = $.trim(iso8601);

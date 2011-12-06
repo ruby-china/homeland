@@ -20,6 +20,7 @@ RubyChina::Application.routes.draw do
   
   match "account/auth/:provider/unbind", :to => "users#auth_unbind"
   
+  match "users/location/:id", :to => "users#location", :as => :location_users
   resources :users do
     member do 
       get :replies
@@ -33,7 +34,6 @@ RubyChina::Application.routes.draw do
   end
   
   resources :nodes
-  resources :locations
   
   match "topics/node:id" => "topics#node", :as => :node_topics
   match "topics/node:id/feed" => "topics#node_feed", :as => :feed_node_topics

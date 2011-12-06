@@ -63,6 +63,7 @@
     
     <% if action_name == "index" %>
       <%= render_cell :topics, :index_sections %>
+      <%= render_cell :topics, :index_locations %>
     <% end %>
 
     <% if !@node.blank? %>

@@ -39,6 +39,15 @@ class UsersController < ApplicationController
     redirect_to edit_user_registration_path, :flash => {:warring => t("users.unbind_success", :provider => provider.titleize )}
   end
   
+  def location
+    @location = params[:id]
+    @users = User.where(:location => @location).desc('replies_count').paginate(:page => params[:page], :per_page => 30)
+    if @users.count == 0
+      render_404
+    end
+    drop_breadcrumb(@location)
+  end
+  
   protected
   def find_user
     @user = User.where(:login => /^#{params[:id]}$/i).first

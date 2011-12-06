@@ -36,6 +36,7 @@ describe User do
       user_for_delete1.reload
       user_for_delete1.login.should == "Guest"
       user_for_delete1.state.should == -1
+    end
 
     it "should not get results when user location not set" do
       User.locations.count == 0

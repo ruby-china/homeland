@@ -1,6 +1,8 @@
 # coding: utf-8  
 module LocationsHelper
   def location_name_tag(location,options = {})
-    result = link_to(location['_id'], location_path(location['_id']))
+    return "" if location.blank?
+    name = location.is_a?(String) == true ? location : location['_id']
+    result = link_to(name, location_users_path(name))
   end
 end

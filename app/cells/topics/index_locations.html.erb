@@ -1,0 +1,8 @@
+<div id="hot_locations" class="box">
+  <h2>热门城市</h2>
+  <ul>
+  <% @hot_locations.each do |item| %>
+    <li class="name"><%= location_name_tag(item) %></li>
+  <% end %>
+  </ul>
+</div>

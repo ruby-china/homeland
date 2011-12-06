@@ -28,6 +28,7 @@ class User
   
   index :login
   index :email
+  index :location
 
   has_many :topics, :dependent => :destroy  
   has_many :notes

@@ -29,35 +29,6 @@
    
 } 
 
-/* 社区分类列表 */
-#sections{
-   h2 {
-     font-size: 12px;
-     color: #999;
-     line-height: 200%;
-     margin-bottom: 10px;
-     text-align: center; }
-     
-   ul {
-       list-style: none;
-       margin-bottom: 0; }
-   li {
-     line-height: 200%;
-     font-size: 14px;
-     padding: 8px 0;
-     border-top: 1px solid #DDD; 
-     label {
-       font-size: 12px;
-       color: #999;
-       display: inline-block;
-       width: 120px;
-       margin-right: 8px;
-       text-align: right; }
-     
-      }
-      a { margin-right: 10px; }
-}
-
 /* 记事本 */
 #notes{
    .total {
@@ -212,6 +183,60 @@
         text-shadow:0;
       }
       a:hover { text-decoration: none;}
+    }
+  }
+}
+
+
+/* 社区分类列表 */
+#sections{
+   h2 {
+     font-size: 12px;
+     color: #999;
+     line-height: 100%;
+     margin-bottom: 10px;
+     text-align: center; 
+   }
+     
+   ul {
+       list-style: none;
+       margin-bottom: 0; margin:0; }
+   li {
+     line-height: 200%;
+     font-size: 14px;
+     padding: 8px 0;
+     border-top: 1px solid #DDD; 
+     label {
+       font-size: 12px;
+       color: #999;
+       display: inline-block;
+       width: 120px;
+       margin-right: 8px;
+       text-align: right; }
+     
+      }
+      a { margin-right: 10px; }
+}
+
+
+#hot_locations {
+  h2 {
+    font-size: 12px;
+    color: #999;
+    line-height: 100%;
+    text-align: center; 
+    padding-bottom:10px;
+    border-bottom: 1px solid #DDD; 
+  }
+  ul { list-style: none; margin:0; padding:0; text-align:center; }
+  li { 
+    margin:0; padding:0;
+    display:inline; 
+    a {
+      margin-right:10px; margin-top:10px;
+      display:inline-block;
+      color:#555;
+      text-shadow: 0 1px 0 #fff;
     }
   }
 }

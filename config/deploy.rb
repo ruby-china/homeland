@@ -35,11 +35,13 @@ end
 task :init_shared_path, :roles => :web do
   run "mkdir -p #{deploy_to}/shared/log"
   run "mkdir -p #{deploy_to}/shared/pids"
+  run "mkdir -p #{deploy_to}/shared/assets"
 end
 
-task :link_shared_config_yaml, :roles => :web do
+task :link_shared_files, :roles => :web do
   run "ln -sf #{deploy_to}/shared/config/*.yml #{deploy_to}/current/config/"
   run "ln -sf #{deploy_to}/shared/config/unicorn.rb #{deploy_to}/current/config/"
+  run "ln -s #{deploy_to}/shared/assets #{deploy_to}/current/public/assets"
 end
 
 task :restart_resque, :roles => :web do
@@ -62,7 +64,7 @@ task :mongoid_create_indexes, :roles => :web do
   run "cd #{deploy_to}/current/; bundle exec rake db:mongoid:create_indexes"
 end
 
-after "deploy:symlink", :init_shared_path, :link_shared_config_yaml, :install_gems, :compile_assets, :mongoid_create_indexes
+after "deploy:finalize_update","deploy:symlink", :init_shared_path, :link_shared_files, :install_gems, :compile_assets, :mongoid_create_indexes
 
 
 set :default_environment, {

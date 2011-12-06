@@ -28,3 +28,8 @@
     users_joined: "位會員加入了"
     hot_users: "活躍會員"
     recent_joined: "最新加入的會員"
+    menu:
+      topics: "文章" 
+      recent_reply_topics: "最近回應"
+      like: "喜歡"
+

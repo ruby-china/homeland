@@ -45,7 +45,8 @@
         months: "%d months",
         year: "about a year",
         years: "%d years",
-        numbers: []
+        numbers: [],
+        formatter: null
       }
     },
     inWords: function(distanceMillis) {
@@ -68,7 +69,7 @@
 
       function substitute(stringOrFunction, number) {
         var string = $.isFunction(stringOrFunction) ? stringOrFunction(number, distanceMillis) : stringOrFunction;
-        var value = ($l.numbers && $l.numbers[number]) || number;
+        var value = $.isFunction($l.numbers) ? $l.numbers(number) : (($l.numbers && $l.numbers[number]) || number);
         return string.replace(/%d/i, value);
       }
 
@@ -84,7 +85,7 @@
         years < 2 && substitute($l.year, 1) ||
         substitute($l.years, Math.floor(years));
 
-      return $.trim([prefix, words, suffix].join(" "));
+      return $.isFunction($l.formatter) ? $l.formatter(prefix, words, suffix) : $.trim([prefix, words, suffix].join(" "));
     },
     parse: function(iso8601) {
       var s = $.trim(iso8601);

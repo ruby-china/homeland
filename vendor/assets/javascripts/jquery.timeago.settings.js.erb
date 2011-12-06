@@ -16,7 +16,8 @@
       months: "%d月",
       year: "1年",
       years: "%d年",
-      numbers: []
+      numbers: [],
+      formatter: function(prefix, words, suffix) { return [prefix, words, suffix].join(""); }
     },
     "zh-TW": {
       prefixAgo: null,
@@ -34,7 +35,8 @@
       months: "%d月",
       year: "1年",
       years: "%d年",
-      numbers: []
+      numbers: [],
+      formatter: function(prefix, words, suffix) { return [prefix, words, suffix].join(""); }
     }
   };
 
@@ -42,4 +44,5 @@
   if (localized) {
     jQuery.timeago.settings.strings = localized;
   }
+
 })();

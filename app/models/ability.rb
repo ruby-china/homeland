@@ -60,6 +60,7 @@ class Ability
       
       can :read, Photo
       can :tiny_new, Photo
+      can :create, Photo
       can :update, Photo do |photo|
         photo.user_id == photo.id
       end

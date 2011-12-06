@@ -1,0 +1,48 @@
+(function() {
+  var strings = {
+    "zh-CN": {
+      prefixAgo: null,
+      prefixFromNow: null,
+      suffixAgo: "前",
+      suffixFromNow: "刚刚",
+      seconds: "不到1分钟",
+      minute: "约1分钟",
+      minutes: "%d分钟",
+      hour: "1小时",
+      hours: "%d小时",
+      day: "1天",
+      days: "%d天",
+      month: "1月",
+      months: "%d月",
+      year: "1年",
+      years: "%d年",
+      numbers: [],
+      formatter: function(prefix, words, suffix) { return [prefix, words, suffix].join(""); }
+    },
+    "zh-TW": {
+      prefixAgo: null,
+      prefixFromNow: null,
+      suffixAgo: "前",
+      suffixFromNow: "剛剛",
+      seconds: "不到1分鐘",
+      minute: "約1分鐘",
+      minutes: "%d分鐘",
+      hour: "1小時",
+      hours: "%d小時",
+      day: "1天",
+      days: "%d天",
+      month: "1月",
+      months: "%d月",
+      year: "1年",
+      years: "%d年",
+      numbers: [],
+      formatter: function(prefix, words, suffix) { return [prefix, words, suffix].join(""); }
+    }
+  };
+
+  var localized = strings["<%= I18n.locale %>"];
+  if (localized) {
+    jQuery.timeago.settings.strings = localized;
+  }
+
+})();

@@ -8,6 +8,7 @@
 //= require bootstrap-popover
 //= require jquery.jdialog
 //= require jquery.timeago
+//= require jquery.timeago.settings
 //= require jquery.hotkeys
 //= require jquery.chosen
 //= require jquery.autogrow-textarea

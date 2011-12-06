@@ -33,15 +33,15 @@ class Ability
       # Note 
       
       can :read, Note do |note|
-        note.user_id == note.id
+        note.user_id == user.id
       end
       
       can :create, Note
       can :update, Note do |note|
-        note.user_id == note.id
+        note.user_id == user.id
       end
       can :destroy, Note do |note|
-        note.user_id == note.id
+        note.user_id == user.id
       end
       
       # Wiki

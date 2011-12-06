@@ -37,7 +37,7 @@ module UsersHelper
   end
   
   def render_user_location(user)
-    return user.location
+    return location_name_tag(user.location)
   end
   
   def render_user_join_time(user)

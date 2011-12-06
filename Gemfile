@@ -41,7 +41,7 @@ gem 'redis-namespace','~> 1.0.2'
 # 将一些数据存放入 Redis
 gem "redis-objects", "0.5.2"
 # Markdown 格式
-gem "redcarpet", "~> 2.0.0b5"
+gem "redcarpet", "~> 2.0.0"
 gem "pygments.rb"
 # HTML 处理
 gem "nokogiri", "1.5.0"

@@ -1,3 +1,5 @@
+//= require gfdynamicfeedcontrol
+//= require gadget
 .topics .topic .title a:link,
 .topics .topic .title a:visited,
 .node_topics .title a:link,
@@ -44,7 +46,6 @@
 
 .more { padding:8px; padding-bottom:0; font-size:14px; text-align:right; }
 .share_buttons { height:16px; }
-.pagination { margin:0; margin-top:10px; }
 
 /* topics list in node page */
 
@@ -191,3 +192,5 @@
     min-height:72px;
   }
 }
+
+

@@ -22,7 +22,7 @@
     last_by: "最後由"
     floor: "樓"
     reply_at: "於%{time}回應"
-    create_item: "發起"
+    create_item: "中發起"
     read_times: "次閱讀"
     confirm_delete: "確定要刪除嗎？"
     search: "搜尋"
@@ -51,6 +51,9 @@
     access_denied: "訪問被拒絕，你可能沒有權限或未登錄。"
     editor_toolbar_edit: "編輯"
     editor_toolbar_preview: "預覽"
+    by: "由"
+    at: "在"
+    hot_topics: "熱門討論"
   posts:
     recent_publish_post: "最近發布的文章"
     post_source: "文章来源"

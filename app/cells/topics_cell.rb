@@ -43,4 +43,13 @@ class TopicsCell < BaseCell
   def reply_help_block
     render
   end
+  
+  cache :index_locations, :expires_in => 1.days
+  def index_locations
+    locations = User.locations.find().to_a.reject { |l| l['_id'].blank? }.sort! do |x, y| 
+      y['value']['count'] <=> x['value']['count']
+    end
+    @hot_locations = locations[0..12]
+    render 
+  end
 end

@@ -1,0 +1,13 @@
+<%= render "base" %>
+<div id="users">
+  <div class="info"><%= t("locations.current_have") %> <%= @users.count %> <%= t("locations.users_joined") %> <%= @location %></div> 
+  <div id="hot_users" class="user_list box row">
+    <h2><%= t("users.hot_users") %></h2>
+    <%= render_cell :locations, :active_users, :location => @location %>
+  </div>
+
+  <div id="recent_users" class="user_list box row">
+    <h2><%= t("users.recent_joined") %></h2>
+    <%= render_cell :locations, :recent_join_users, :location => @location %>
+  </div>
+</div>

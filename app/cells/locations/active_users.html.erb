@@ -1,0 +1,6 @@
+<% @active_users.each do |item| %>
+  <div class="item span1">
+    <div class="avatar"><%= user_avatar_tag(item) %></div>
+    <div class="name"><%= user_name_tag(item) %></div>
+  </div>
+<% end %>

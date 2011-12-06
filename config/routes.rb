@@ -33,6 +33,7 @@ RubyChina::Application.routes.draw do
   end
   
   resources :nodes
+  resources :locations
   
   match "topics/node:id" => "topics#node", :as => :node_topics
   match "topics/node:id/feed" => "topics#node_feed", :as => :feed_node_topics

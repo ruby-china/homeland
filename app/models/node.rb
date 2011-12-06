@@ -14,7 +14,7 @@ class Node
   
   index :section_id
   
-  validates_presence_of :name, :summary
+  validates_presence_of :name, :summary, :section
   validates_uniqueness_of :name
   
   has_and_belongs_to_many :followers, :class_name => 'User', :inverse_of => :following_nodes

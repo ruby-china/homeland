@@ -1,0 +1,2 @@
+module SitesHelper
+end

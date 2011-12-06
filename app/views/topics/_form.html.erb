@@ -2,19 +2,16 @@
   <fieldset>
     <legend><%= @topic.new_record? ? t("topics.create_topic") : t("topics.edit_topic") %></legend>
     <%= render "shared/error_messages", :target => @topic %>  
-    <div class="clearfix">
-      <%= f.label :title %>
-      <div class="input">
-        <span class="span3"<%= " style=display:none;" if !@node.blank? %>>
-          <%= f.select :node_id, Node.hot_node_collection, {}, :style => "width:140px;" %>
-        </span>
-        <span class="span7">
-          <%= f.text_field :title, :style => "width:300px" %>
-        </span>
-      </div>
-    </div>
+    <%= f.input :title do %>
+      <span class="span3"<%= " style=display:none;" if !@node.blank? %>>
+        <%= f.select :node_id, Node.hot_node_collection %>
+      </span>
+      <span class="span6">
+        <%= f.text_field :title %>
+      </span>
+    <% end %>
     
-    <div class="edit_tools">
+    <div class="edit_tools input">
       <%= render "editor_toolbar" %>
     </div>    
     <%= f.input :body, :as => :text, :input_html => { :class => "topic_editor xxlarge", :style => "height:400px" }%>

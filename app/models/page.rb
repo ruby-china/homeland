@@ -7,7 +7,6 @@ class Page
   include Mongoid::Timestamps  
   include Mongoid::BaseModel
   include Mongoid::SoftDelete
-  
   # 页面地址
   field :slug
   field :title
@@ -37,7 +36,7 @@ class Page
   def markdown_for_body_html
     return true if not self.body_changed?
 
-    self.body_html = $markdown.render(self.body)
+    self.body_html = MarkdownConverter.convert(self.body)
   rescue => e
     Rails.logger.error("markdown_for_body_html failed: #{e}")
   end
@@ -80,7 +79,7 @@ class Page
   def editors
     User.where(:_id.in => self.editor_ids)
   end
-  
+
   def self.find_by_slug(slug)
     where(:slug => slug).first
   end

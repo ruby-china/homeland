@@ -1,0 +1,7 @@
+en:
+  simple_form:
+    hints:
+      site:
+        desc: '200 chars'
+        url: "Don't forget http://"
+        favicon: 'Favicon for this site, default will use Google to get favicon.'

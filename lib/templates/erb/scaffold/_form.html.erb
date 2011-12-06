@@ -1,0 +1,21 @@
+<div id="<%= singular_table_name %>" class="form">
+<%
+  form_model_name = "@#{file_name}"
+  if controller_class_name.include?('::')
+    namespace = controller_class_name.split('::').first.downcase
+    form_model_name = "[:#{namespace},@#{file_name}]"
+  end
+%>
+<%%= simple_form_for(<%= form_model_name %>, :wrapper => :inline ) do |f| %>
+  <%%= render "/shared/error_messages", :target => @<%= file_name %>  %>
+  <fieldset>
+    <legend><%%= t("common.edit") %></legend>
+  <% for attribute in attributes -%>
+    <%%= f.<%= attribute.reference? ? :association : :input %> :<%= attribute.name %> %>
+  <% end -%>
+    <div class="actions">
+      <%%= f.submit t("common.save"), :class => "btn primary" %> or <%%= link_to t("common.cancel"), <%= index_helper %>_path %>
+    </div>
+  </fieldset>
+<%% end %>
+</div>

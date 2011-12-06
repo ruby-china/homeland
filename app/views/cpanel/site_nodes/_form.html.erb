@@ -1,0 +1,15 @@
+<div id="cpanel_site_node" class="form">
+
+<%= simple_form_for([:cpanel,@site_node], :wrapper => :inline ) do |f| %>
+  <%= render "/shared/error_messages", :target => @site_node  %>
+  <fieldset>
+    <legend><%= t("common.edit") %></legend>
+      <%= f.input :name %>
+      <%= f.input :sites_count %>
+      <%= f.input :sort %>
+      <div class="actions">
+      <%= f.submit t("common.save"), :class => "btn primary" %> or <%= link_to t("common.cancel"), cpanel_site_nodes_path %>
+    </div>
+  </fieldset>
+<% end %>
+</div>

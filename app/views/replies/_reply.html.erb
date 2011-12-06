@@ -1,7 +1,7 @@
 <div class="reply" id="reply<%= i + 1 %>">
   <div class="pull-left face"><%= user_avatar_tag(item.user, :normal) %></div>
   <div class="infos">
-    <div class="info clearfix">
+    <div class="info">
       <span class="name"><%= user_name_tag(item.user) %></span>
       <span class="time">
         <%= i + 1 %><%= t("common.floor")%>, <%= raw t("common.reply_at", :time => timeago(item.created_at)) %>

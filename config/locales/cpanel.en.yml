@@ -1,0 +1,28 @@
+"en":
+  cpanel:
+    menu:
+      root_path: "Dashboard"
+      site_configs: "Site Settings"
+      users: "Users"
+      sections: "Sections"
+      nodes: "Nodes"
+      posts: "Posts"
+      wiki: "Wiki"
+      topics: "Topics"
+      replies: "Replies"
+      photos: "Photos"
+      notes: "Notes"
+      comments: "Comments"
+      site_nodes: "Site Nodes"
+      sites: "Sites"
+    overview: "Overview"
+    recent_topics: "Recent Topics"
+    statics: "Statistics"
+    site_configs:
+      settings: "Settings"
+      please_do_not_modify_key: "Please do not modify key"
+      edit_setting: "Edit Settings"
+    users:
+      trust_user_can_modify_wiki: "Allow user to modify Wiki"
+    topic_list: "Topic List"
+    check_photo: "View Photo"

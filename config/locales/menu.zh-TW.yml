@@ -15,6 +15,7 @@
     register: "註冊"
     login: "登入"
     logout: "登出"
+    remember_me: "记住登录状态"
     cancel: "取消"
     created_at: "於%{time}發布"
     until: "截至"
@@ -46,6 +47,10 @@
     highlight_topic: "置頂話題"
     statics: "統計資訊"
     comments: "条评论"
+    no_search_result: "沒有查詢到相關內容。"
+    access_denied: "訪問被拒絕，你可能沒有權限或未登錄。"
+    editor_toolbar_edit: "編輯"
+    editor_toolbar_preview: "預覽"
   posts:
     recent_publish_post: "最近發布的文章"
     post_source: "文章来源"
@@ -59,6 +64,8 @@
     topic_location: '回應所在文章'
   photos:
     upload_and_insert_code: "上傳並插入原始碼"
+  sites:
+    create: 提交網站
   menu:
     topics: "社區"
     wiki: "Wiki"
@@ -67,6 +74,7 @@
     cpanel: "後台"  
     notes: "記事本"
     nodes: "節點"
+    sites: "酷站"
     my_home_page: "我的首頁"
     edit_account_path: "個人資料設定"
   comments:
@@ -82,4 +90,6 @@
   rss:
     recent_topics_description: "%{name}社區最新討論."
     recent_topics_title: "%{name}社區"
-      
+    recent_node_topics_description: "%{name} 社區 %{node_name} 節點最新討論。"
+    recent_node_topics_title: "%{name} 社區 %{node_name} 節點"
+

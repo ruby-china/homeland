@@ -1,0 +1,32 @@
+<%= render 'base' %>
+<h1><%= t("mongoid.models.site") %></h1>
+<div id="cpanel_sites">
+  <table class="grid">
+    <tr class="head">
+      <td>编号</td>
+      <td><%= t("mongoid.attributes.site.name") %></td>
+      <td><%= t("mongoid.attributes.site.url") %></td>
+      <td><%= t("mongoid.attributes.site.desc") %></td>
+      <td><%= t("mongoid.attributes.site.site_node") %></td>
+      <td>创建时间</td>
+      <td class="opts"></td>
+    </tr>
+    <% @sites.each do |item| %>
+    <tr class="<%= cycle("","even") %>">
+      <td><%= item.id %></td>
+      <td><%= item.name %></td>
+      <td><%= item.url %></td>
+      <td><%= item.desc %></td>
+      <td><%= item.site_node.name if !item.site_node.blank? %></td>
+      <td><%= l(item.created_at, :format => :long) %></td>
+      <td>
+        <%= link_to "", edit_cpanel_site_path(item.id), :class => "icon small_edit" %>
+        <%= link_to "", cpanel_site_path(item.id), :method => :delete, :confirm => '确定要删除吗?', :class => "icon small_delete" %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+</div>
+<div class="tools">
+  <a href="<%= new_cpanel_site_path %>" class="btn small success">新建</a>
+</div>

@@ -1,15 +1,17 @@
 # coding: utf-8  
 class TopicsController < ApplicationController
-  before_filter :require_user, :only => [:new,:edit,:create,:update,:destroy,:reply]
+  
+  load_and_authorize_resource :only => [:new,:edit,:create,:update,:destroy]
+  
   before_filter :set_menu_active
-  caches_page :feed, :expires_in => 1.hours
+  caches_page :feed, :node_feed, :expires_in => 1.hours
   before_filter :init_base_breadcrumb
 
   def index
     @topics = Topic.last_actived.limit(15).includes(:node,:user, :last_reply_user)
     set_seo_meta("","#{Setting.app_name}#{t("menu.topics")}")
     drop_breadcrumb(t("topics.hot_topic"))
-    render :stream => true
+    #render :stream => true
   end
   
   def feed
@@ -23,14 +25,21 @@ class TopicsController < ApplicationController
     @topics = @node.topics.last_actived.paginate(:page => params[:page],:per_page => 50)
     set_seo_meta("#{@node.name} &raquo; #{t("menu.topics")}","#{Setting.app_name}#{t("menu.topics")}#{@node.name}",@node.summary)
     drop_breadcrumb("#{@node.name}")
-    render :action => "index", :stream => true
+    render :action => "index" #, :stream => true
+  end
+
+  def node_feed
+    @node = Node.find(params[:id])
+    @topics = @node.topics.recent.limit(20)
+    response.headers["Content-Type"] = "application/rss+xml"
+    render :layout => false
   end
 
   def recent
     # TODO: 需要 includes :node,:user, :last_reply_user,但目前用了 paginate 似乎会使得 includes 没有效果
     @topics = Topic.recent.paginate(:page => params[:page], :per_page => 50)
     drop_breadcrumb(t("topics.topic_list"))
-    render :action => "index", :stream => true
+    render :action => "index" #, :stream => true
   end
 
   def search
@@ -39,14 +48,14 @@ class TopicsController < ApplicationController
     @topics = Topic.where(:_id.in => ids).limit(50).includes(:node,:user, :last_reply_user)
     set_seo_meta("#{t("common.search")}#{params[:s]} &raquo; #{t("menu.topics")}")
     drop_breadcrumb("#{t("common.search")} #{params[:key]}")
-    render :action => "index", :stream => true
+    render :action => "index" #, :stream => true
   end
 
   def show
     @topic = Topic.find(params[:id])
     @topic.hits.incr(1)
     @node = @topic.node
-    @replies = @topic.replies.asc(:_id).all.includes(:user).cache
+    @replies = @topic.replies.asc(:_id).all.includes(:user).cache.reject { |r| r.user.blank? }
     if current_user
       current_user.read_topic(@topic)
       current_user.notifications.where(:reply_id.in => @replies.map(&:id), :read => false).update_all(:read => true)
@@ -54,7 +63,7 @@ class TopicsController < ApplicationController
     set_seo_meta("#{@topic.title} &raquo; #{t("menu.topics")}")
     drop_breadcrumb("#{@node.name}", node_topics_path(@node.id))
     drop_breadcrumb t("topics.read_topic")
-    render :stream => true
+   # render :stream => true
   end
 
   def new
@@ -70,19 +79,6 @@ class TopicsController < ApplicationController
     drop_breadcrumb t("topics.post_topic")
     set_seo_meta("#{t("topics.post_topic")} &raquo; #{t("menu.topics")}")
   end
-
-  #def reply
-  #  @topic = Topic.find(params[:id])
-  #  @reply = @topic.replies.build(params[:reply])        
-  #  @reply.user_id = current_user.id
-  #  if @reply.save
-  #    current_user.read_topic(@topic)
-  #    @msg = t("topics.reply_success")
-  #  else
-  #    @msg = @reply.errors.full_messages.join("<br />")
-  #  end
-  #end
-
 
   def edit
     @topic = current_user.topics.find(params[:id])
@@ -102,6 +98,14 @@ class TopicsController < ApplicationController
       redirect_to(topic_path(@topic.id), :notice => t("topics.create_topic_success"))
     else
       render :action => "new"
+    end
+  end
+
+  def preview
+    @body = params[:body]
+
+    respond_to do |format|
+      format.json
     end
   end
 

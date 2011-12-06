@@ -1,0 +1,20 @@
+$border-color:#DDD;
+
+.tab-pane {
+  .topic, .page {
+    border-bottom: 1px solid $border-color;
+    padding:8px;
+    margin-bottom: 10px;
+    .title {
+      font-size: 14px;
+    }
+    .info {
+      color:#999;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+  }
+  span.highlight {
+    color: #BD121D;
+  }
+}

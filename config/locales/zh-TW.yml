@@ -39,6 +39,11 @@
         body: 內容
         locked: 鎖定開關
         change_desc: 變更描述
+      site:
+        name: 網站名稱
+        url: 網址
+        desc: 簡單介紹
+        site_node_id: 分類
     errors:
       models:
         user: 用戶

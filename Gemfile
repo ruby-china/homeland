@@ -14,16 +14,21 @@ gem 'mini_magick','3.3'
 gem 'mongo-rails-instrumentation','0.2.4'
 # Mongoid 使用自增整形ID
 gem 'mongoid_auto_increment_id', "0.2.2"
+
 # 用户系统
-gem 'devise', :git => 'git://github.com/plataformatec/devise.git'
+gem 'devise', '1.5.2'
 # 分页
 gem 'will_paginate', '3.0.pre2'
 # 三方平台 OAuth 验证登陆
+
 gem "omniauth"
 gem 'omniauth-openid'
 gem "omniauth-github"
 gem "omniauth-twitter"
-gem "omniauth-douban", :git => "git://github.com/xdite/omniauth-douban.git"
+gem "omniauth-douban", :git => "git://github.com/ballantyne/omniauth-douban.git"
+
+# permission
+gem "cancan"
 
 # 搜索相关的组件
 gem 'chinese_pinyin', '0.4.1'
@@ -55,9 +60,9 @@ gem "daemon-spawn", "~> 0.4.2"
 gem "unicorn"
 # 用于组合小图片
 gem "sprite-factory", "1.4.1"
-gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'
-gem 'bootstrap-rails', :require => 'bootstrap-rails',
-  :git => 'git://github.com/xdite/bootstrap-rails.git'
+# Simple form last commit: 2011-12-03 
+gem 'simple_form', :git => "git://github.com/plataformatec/simple_form.git"
+gem 'bootstrap-rails', :require => 'bootstrap-rails', :git => 'git://github.com/xdite/bootstrap-rails.git'
 
 group :assets do
   gem 'sass-rails', "  ~> 3.1.4"

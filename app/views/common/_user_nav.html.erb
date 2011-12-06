@@ -17,7 +17,7 @@
       unless params[:controller].match(/cpanel/)
         li << link_to(t("menu.edit_account_path"),edit_user_registration_path)
         li << link_to(t("menu.notes"), notes_path )
-        li << link_to(t("menu.cpanel"), "/cpanel")
+        li << link_to(t("menu.cpanel"), "/cpanel") if admin?
       end
       li << link_to(t("common.logout"), destroy_user_session_path )
     end %>

@@ -1,0 +1,23 @@
+<%= render "base" %>
+<div class="tools">
+  <%= link_to "修改", edit_site_path(@site), :class => "btn small success" %>
+  <%= link_to "返回", sites_path, :class => "btn small" %>
+</div>
+<div id="site">
+    <p>
+    <b>Name:</b>
+    <%= @site.name %>
+  </p>
+    <p>
+    <b>Url:</b>
+    <%= @site.url %>
+  </p>
+    <p>
+    <b>Desc:</b>
+    <%= @site.desc %>
+  </p>
+    <p>
+    <b>Site node:</b>
+    <%= @site.site_node %>
+  </p>
+  </div>

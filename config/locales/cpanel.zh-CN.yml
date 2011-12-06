@@ -13,6 +13,8 @@
       photos: "图片"
       notes: "记事本"
       comments: "评论"
+      site_nodes: "Site类别"
+      sites: "Sites"
     overview: "概览"
     recent_topics: "最近帖子"
     statics: "统计信息"

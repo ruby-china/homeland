@@ -4,8 +4,9 @@
  */
 #login {   }
 
-.box ul,
-.box ol { margin-bottom:0; }
+.box {
+  ul, ol { margin-bottom:0; }
+}
 
 .feed_link {
   float:right;
@@ -16,45 +17,149 @@
   a:hover { text-decoration: none; color:#333;}
 }
 
-.sidebar h2 { font-size:14px; line-height:100%; margin-bottom:10px; color:#666;}
-.sidebar ul, 
-.sidebar ol { margin-bottom:0; }
-.sidebar p { margin-bottom:6px; }
-.sidebar li { margin-bottom:4px; }
+.sidebar {
+   h2 {
+     font-size: 14px;
+     line-height: 100%;
+     margin-bottom: 10px;
+     color: #666; }
+   ul, ol { margin-bottom: 0; }
+   p { margin-bottom: 6px; }
+   li { margin-bottom: 4px; }
+   
+} 
 
 /* 社区分类列表 */
-#sections h2 { font-size:12px; color:#999; line-height:200%; margin-bottom:10px; text-align: center;}
-#sections ul { list-style: none; margin-bottom:0; }
-#sections li { line-height:200%; font-size:14px; padding:8px 0; border-top:1px solid #DDD;}
-#sections li label { font-size:12px; color:#999; display:inline-block; width:120px; margin-right:8px; text-align: right;}
-#sections li a { margin-right:10px;}
+#sections{
+   h2 {
+     font-size: 12px;
+     color: #999;
+     line-height: 200%;
+     margin-bottom: 10px;
+     text-align: center; }
+     
+   ul {
+       list-style: none;
+       margin-bottom: 0; }
+   li {
+     line-height: 200%;
+     font-size: 14px;
+     padding: 8px 0;
+     border-top: 1px solid #DDD; 
+     label {
+       font-size: 12px;
+       color: #999;
+       display: inline-block;
+       width: 120px;
+       margin-right: 8px;
+       text-align: right; }
+     
+      }
+      a { margin-right: 10px; }
+}
 
 /* 记事本 */
-#notes { }
-#notes .total { text-align:right; color:#999; margin-top:-8px; padding-bottom:5px; border-bottom:1px solid #DDD; margin-bottom:10px;}
-#notes ul.list { list-style:none; margin:0; padding:0;}
-#notes ul.list li { margin-bottom:10px; }
-#notes ul.list li a { font-size:14px; font-weight:bold; color:#333; }
-#notes ul.list li .info { color:#999; margin-top:5px; }
-#notes .note .body { font-size:14px; line-height:180%; min-height:350px;}
-#notes .note .info { border-bottom:1px solid #DDD; padding:5px 0; color:#999; }
-#notes .note div { margin-bottom:8px; }
-#notes .note .urls { text-align:right; }
-#notes .note .urls input { cursor: text;}
-
-.sidebar .nodes { line-height:180%; }
-.sidebar .nodes a { display:inline-block; margin-right:8px;}
+#notes{
+   .total {
+     text-align: right;
+     color: #999;
+     margin-top: -8px;
+     padding-bottom: 5px;
+     border-bottom: 1px solid #DDD;
+     margin-bottom: 10px; }
+   
+   ul.list {
+     list-style: none;
+     margin: 0;
+     padding: 0; 
+     li {
+       margin-bottom: 10px; 
+       a {
+         font-size: 14px;
+         font-weight: bold;
+         color: #333; }
+       .info {
+         color: #999;
+         margin-top: 5px; }
+     }
+     
+     .note{
+         .body {
+            font-size: 14px;
+            line-height: 180%;
+            min-height: 350px; }
+         .info {
+           border-bottom: 1px solid #DDD;
+           padding: 5px 0;
+           color: #999; }
+          div { margin-bottom: 8px; }
+          .urls { text-align: right; 
+             input { cursor: text; }
+          }
+          
+          
+     }
+   }   
+} 
+  
+.sidebar {
+   .nodes { line-height:180%; 
+      a { display:inline-block; margin-right:8px;}
+   }
+}
 
 .markdown_content { }
 #main .markdown_content h1 { font-size:22px; text-align:left; }
 
-.body pre{margin:3px 0;font-size:12px;background-color:#eee;border:1px solid #ddd;padding:5px;color:#444;overflow:auto;-webkit-box-shadow:rgba(0,0,0,0.07) 0 1px 2px inset;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;}
-.body pre::-webkit-scrollbar{height:8px;width:8px;}
-.body pre::-webkit-scrollbar-track-piece{margin-bottom:10px;background-color:#e5e5e5;border-bottom-left-radius:4px 4px;border-bottom-right-radius:4px 4px;border-top-left-radius:4px 4px;border-top-right-radius:4px 4px;}
-.body pre::-webkit-scrollbar-thumb:vertical{height:25px;background-color:#ccc;-webkit-border-radius:4px;-webkit-box-shadow:0 1px 1px rgba(255,255,255,1);}
-.body pre::-webkit-scrollbar-thumb:horizontal{width:25px;background-color:#ccc;-webkit-border-radius:4px;}
-.body pre code{padding:0!important;font-size:12px!important;background-color:#eee!important;border:none!important;}
-.body code{font-size:12px!important;background-color:#f8f8ff!important;color:#444!important;padding:0 .2em!important;border:1px solid #dedede!important;}
+.body{
+   pre {
+     margin: 3px 0;
+     font-size: 12px;
+     background-color: #eee;
+     border: 1px solid #ddd;
+     padding: 5px;
+     color: #444;
+     overflow: auto;
+     -webkit-box-shadow: rgba(0, 0, 0, 0.07) 0 1px 2px inset;
+     -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+     border-radius: 3px; 
+     code {
+       padding: 0!important;
+       font-size: 12px!important;
+       background-color: #eee!important;
+       border: none!important; }
+   }
+   pre::-webkit-scrollbar {
+     height: 8px;
+     width: 8px; }
+   
+   pre::-webkit-scrollbar-thumb:horizontal {
+     width: 25px;
+     background-color: #ccc;
+     -webkit-border-radius: 4px; }
+     
+   pre::-webkit-scrollbar-track-piece {
+     margin-bottom: 10px;
+     background-color: #e5e5e5;
+     border-bottom-left-radius: 4px 4px;
+     border-bottom-right-radius: 4px 4px;
+     border-top-left-radius: 4px 4px;
+     border-top-right-radius: 4px 4px; }
+   
+   pre::-webkit-scrollbar-thumb:vertical {
+     height: 25px;
+     background-color: #ccc;
+     -webkit-border-radius: 4px;
+     -webkit-box-shadow: 0 1px 1px white; }
+
+   code {
+     font-size: 12px!important;
+     background-color: #f8f8ff!important;
+     color: #444!important;
+     padding: 0 .2em!important;
+     border: 1px solid #dedede!important; }
+}
 
 .cell_comments {
   .comment { 
@@ -76,3 +181,37 @@
 }
 
 .help-block ul { margin-bottom:0; }
+
+.editor_toolbar {
+  .icons { float:right;  margin-top:12px; }
+  .pills {
+    margin: 0;
+    a {
+      -moz-border-radius: 8px;
+      -webkit-border-radius: 8px;
+      border-radius: 8px;
+      padding:0 5px;
+      line-height:18px;
+      font-size:12px;
+      margin-right:6px;
+      text-shadow:0;
+      color:#444;
+      border:1px solid #fff;
+    }
+    a:hover {
+      background:#fff;
+      color:#00438A;
+      text-decoration: underline;
+      text-shadow:0;
+    }
+    .active {
+      a {
+        background:#fff;
+        border:1px solid #ddd;
+        color:#666;
+        text-shadow:0;
+      }
+      a:hover { text-decoration: none;}
+    }
+  }
+}

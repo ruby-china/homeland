@@ -1,0 +1,3 @@
+<%= render_list :class => "tabs" do |li|
+  li << link_to(t("menu.topics"), search_path(:q => params[:q]))
+end %>

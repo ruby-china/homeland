@@ -29,7 +29,7 @@ class Topic
 
   attr_protected :user_id
   validates_presence_of :user_id, :title, :body, :node_id
-
+  
   index :node_id
   index :user_id
   index :replied_at
@@ -51,8 +51,7 @@ class Topic
   end
 
   def node_name
-    return "" if self.node.blank?
-    self.node.name
+    node.try(:name) || ""
   end
 
   def push_follower(user_id)
@@ -69,10 +68,6 @@ class Topic
     self.last_reply_user_id = reply.user_id
     self.push_follower(reply.user_id)
     self.save
-  end
-
-  def self.search(key,options = {})
-    paginate :conditions => "title like '%#{key}%'", :page => 1
   end
 
   def self.find_by_message_id(message_id)

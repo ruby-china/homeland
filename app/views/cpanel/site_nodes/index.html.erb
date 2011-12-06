@@ -1,0 +1,28 @@
+<%= render 'base' %>
+<h1>Listing</h1>
+<div id="cpanel_site_nodes">
+  <table class="grid">
+    <tr class="head">
+      <td>Id</td>
+      <td>name</td>
+      <td>sites_count</td>
+      <td>Sort</td>
+      <td class="opts"></td>
+    </tr>
+    <% @site_nodes.each do |item| %>
+    <tr class="<%= cycle("","even") %>">
+      <td><%= item.id %></td>
+      <td><%= item.name %></td>
+      <td><%= item.sites_count %></td>
+      <td><%= item.sort %></td>
+      <td>
+        <%= link_to "", edit_cpanel_site_node_path(item.id), :class => "icon small_edit" %>
+        <%= link_to "", cpanel_site_node_path(item.id), :method => :delete, :confirm => '确定要删除吗?', :class => "icon small_delete" %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+</div>
+<div class="tools">
+  <a href="<%= new_cpanel_site_node_path %>" class="btn small success">新建</a>
+</div>

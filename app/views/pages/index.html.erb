@@ -2,7 +2,7 @@
 <div id="pages">
   <div class="tools">
     <%= link_to(t("pages.wiki_index"), recent_pages_path )%>
-    <% if wiki_editor? %>
+    <% if can? :create, Page %>
       <%= link_to(t("pages.create_page"), new_page_path, :class => "btn primary")%>
     <% end %>
   </div>

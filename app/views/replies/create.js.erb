@@ -3,7 +3,8 @@
     location.href = location.href;
   }
   else {
-    $("#replies").append('<%= escape_javascript(render("reply", :item => @reply, :i => @topic.replies_count - 1)) %>');
+    $("#replies").append('<%= escape_javascript(render("reply", :item => @reply, :i => @topic.replies_count - 1)) %>')
+    .find(".total").replaceWith('<%= escape_javascript(render :partial => "topics/translation/topic_reply_statics", :locals => { :topic => @topic }) %>');
     Topics.replyCallback(1,'<%= escape_javascript(@msg) %>');
   }
 <% else %>

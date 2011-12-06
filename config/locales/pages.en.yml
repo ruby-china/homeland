@@ -1,0 +1,12 @@
+"en":
+  pages:
+    describe_this_time_change: "Please describe the purpose of this modification."
+    edit_page: "Edit Page"
+    create_page: "Create Page"
+    create_new_wiki_page: "Create Wiki Page"
+    new_wiki_page: "New Wiki Page"
+    edit_wiki_page: "Edit Wiki Page"
+    modify_wiki_page: "Modify Wiki Page"
+    wiki_index: "Wiki Index"
+    wiki_page_contributors: "Contributors:"
+    wiki_page_lock_warning: "This page is locked and only Adminstrators are authorised to modify."

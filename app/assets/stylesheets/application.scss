@@ -39,7 +39,24 @@ fieldset legend { font-size:16px; font-weight:bold;}
 form {
   margin-bottom:0;
 
-  .input {margin-left: 146px;}
+  .input {
+    > [class*="span"] {
+      float: left;
+      display: inline;
+      margin-right: 10px;
+
+      input, textarea, select, .uneditable-input {
+        width: 100%;
+      }
+      input[type=checkbox],
+      input[type=radio],
+      input[type=button],
+      input[type=reset],
+      input[type=submit] {
+        width: auto;
+      }
+    }
+  }
 }
 
 a.label:hover { text-decoration: none; color:#FFF;}
@@ -129,5 +146,19 @@ div.field .hint { font-size:12px; color:#999;}
 .simple_form {
   label.required {
     abbr { color:#c00;}
+  }
+}
+
+/* bootstrap puts .clearfix inside form, doesn't make much sense */
+.clearfix {
+  margin-bottom: 18px;
+  zoom: 1;
+  &:before, &:after {
+    display: table;
+    content: "";
+    zoom: 1;
+  }
+  &:after {
+    clear: both;
   }
 }

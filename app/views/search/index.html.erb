@@ -1,0 +1,17 @@
+<%= render "base" %>
+
+<div class="box">
+  <%= render "menu" %>
+  <div class="tab-content">
+    <% unless @topics.blank? %>
+      <%= render :partial => "topics_pane", :locals => { :topics => @topics} %>
+    <% else %>
+      <div class="tab-pane active" id="topics">
+        <div class="topic">
+          <%= t("common.no_search_result") %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+

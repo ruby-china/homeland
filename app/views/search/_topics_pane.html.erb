@@ -1,0 +1,11 @@
+<div class="tab-pane active" id="topics">
+  <% topics.each do |topic| %>
+    <div class="topic">
+      <div class="title"><%= link_to(topic.title, topic_path(topic)) %></div>
+      <div class="info">由 <%= user_name_tag(topic.user) %> <%= t("common.published_at")%> <%= timeago(topic.created_at) %></div>
+      <div class="summary">
+        <%= truncate(topic.body, :length => 300) %>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -23,9 +23,9 @@ module UsersHelper
     end
     
     hash = (user.blank? or user.email.blank?) ? Digest::MD5.hexdigest("") : Digest::MD5.hexdigest(user.email)
-    return image_tag("http://www.gravatar.com/avatar/#{hash}?s=#{width}&d=identicon")  if user.blank?
+    return image_tag("http://www.gravatar.com/avatar/#{hash}.png?s=#{width}&d=identicon")  if user.blank?
     
-    img_src = "http://www.gravatar.com/avatar/#{hash}?s=#{width}&d=identicon"
+    img_src = "http://www.gravatar.com/avatar/#{hash}.png?s=#{width}&d=identicon"
     img = image_tag(img_src, :style => "width:#{width}px;height:#{width}px;")
     html = ""
     if link
@@ -60,7 +60,7 @@ module UsersHelper
     if admin?(user)
       content_tag(:span, t("common.admin_user"), :class => "label warning")
     elsif wiki_editor?(user)
-      content_tag(:span, t("common.widi_admin"), :class => "label success")
+      content_tag(:span, t("common.wiki_admin"), :class => "label success")
     else
       content_tag(:span,  t("common.limit_user"), :class => "label")
     end

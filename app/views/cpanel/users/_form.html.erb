@@ -56,6 +56,13 @@
     </div>
   </div>  
   <div class="actions">
-    <button class="btn primary"><%= t("common.save") %></button> <%= link_to 'Back', cpanel_users_path %>
+    <% if @user.state != User::STATE[:deleted] %>
+      <div class="pull-right">
+        <%= link_to '删除此用户', cpanel_user_path(@user), :confirm => '警告！此动作无法撤销，确定要删除么?', :method => :delete, :class => "btn danger"  %>
+      </div>
+    <% end %>
+    <button class="btn primary"><%= t("common.save") %></button>
+    或者
+    <%= link_to 'Back', cpanel_users_path %>
   </div>
 <% end %>

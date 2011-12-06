@@ -5,11 +5,11 @@
     <%= render :partial => "devise/shared/links" %>
   </div>
   <div class="box">
-        <h2>用其他平台的帐号登陆</h2>
+        <h2>用其他平台的帐号登录</h2>
         <ul>
-          <li style="display:none;"><%= link_to "Twitter", user_omniauth_authorize_path(:twitter) %> </li>    
-          <li style="display:none;"><%= link_to "Google", user_omniauth_authorize_path(:google) %> </li>    
-          <li><%= link_to "Github", user_omniauth_authorize_path(:github) %> </li>    
+          <li style="display:none;"><%= link_to "Twitter", user_omniauth_authorize_path(:twitter) %> </li>
+          <li style="display:none;"><%= link_to "Google", user_omniauth_authorize_path(:google) %> </li>
+          <li><%= link_to "Github", user_omniauth_authorize_path(:github) %> </li>
           <li><%= link_to "Douban", user_omniauth_authorize_path(:douban) %> </li>
         </ul>
     </div>
@@ -18,7 +18,7 @@
     <div class="box">
     <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
       <fieldset>
-        <legend>登陆</legend>
+        <legend><%= t("common.login") %></legend>
         <div class="clearfix">
           <%= f.label :login %>
           <div class="input"><%= f.text_field :login %></div>
@@ -26,17 +26,17 @@
         <div class="clearfix">
           <%= f.label :password %>
           <div class="input"><%= f.password_field :password %></div>
-        </div>          
+        </div>
         <% if devise_mapping.rememberable? -%>
         <div class="clearfix">
           <label></label>
           <div class="input">
-            <div class="inputs-list"><label for="user_remember_me"><%= f.check_box :remember_me, :style => "width:auto;" %> 记住登陆状态</label></div> 
+            <div class="inputs-list"><label for="user_remember_me"><%= f.check_box :remember_me, :style => "width:auto;" %> <%= t("common.remember_me") %></label></div>
           </div>
         </div>
         <% end -%>
         <div class="actions">
-          <button type="submit" class="btn primary">登陆</button>     
+          <button type="submit" class="btn primary"><%= t("common.login") %></button>
         </div>
       </fieldset>
     <% end %>

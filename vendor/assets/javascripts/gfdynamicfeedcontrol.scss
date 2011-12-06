@@ -1,0 +1,191 @@
+.gfg-root {
+  width: 100%;
+  height: auto;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  font-family: "Arial", sans-serif;
+  font-size: 12px;
+  border: 1px solid #bccdf0; }
+
+.gfg-title {
+  font-size: 14px;
+  font-weight: bold;
+  color: #3366cc;
+  background-color: #e5ecf9;
+  line-height: 1.4em;
+  overflow: hidden;
+  white-space: nowrap;
+  a {
+    color: #3366cc; } }
+
+.gfg-subtitle {
+  font-size: 12px;
+  font-weight: bold;
+  color: #3366cc;
+  background-color: #e5ecf9;
+  line-height: 1.4em;
+  overflow: hidden;
+  white-space: nowrap;
+  margin-bottom: 5px;
+  a {
+    color: #3366cc; } }
+
+.gfg-entry {
+  background-color: white;
+  width: 100%;
+  height: 6.9em;
+  position: relative;
+  overflow: hidden;
+  text-align: left;
+  margin-top: 3px; }
+
+/* To allow correct behavior for overlay */
+
+.gfg-root .gfg-entry .gf-result {
+  position: relative;
+  background-color: white;
+  width: auto;
+  height: 100%;
+  padding-left: 20px;
+  padding-right: 5px; }
+
+.gfg-list {
+  position: relative;
+  overflow: hidden;
+  text-align: left;
+  margin-bottom: 5px; }
+
+.gfg-listentry {
+  line-height: 1.5em;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  padding-left: 15px;
+  padding-right: 5px;
+  margin-left: 5px;
+  margin-right: 5px; }
+
+.gfg-listentry-odd {
+  background-color: #f6f6f6; }
+
+.gfg-listentry-even {}
+
+.gfg-listentry-highlight {
+  background-image: url("garrow.gif");
+  background-repeat: no-repeat;
+  background-position: center left; }
+
+/* FeedControl customizations. */
+
+.gfg-root .gfg-entry .gf-result {
+  .gf-title {
+    font-size: 14px;
+    line-height: 1.2em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    margin-bottom: 2px; }
+  .gf-snippet {
+    height: 3.8em;
+    color: black;
+    margin-top: 3px; } }
+
+/* Easy way to get horizontal mode, applicable via js options to gadget. */
+
+.gfg-horizontal-container {
+  position: relative; }
+
+.gfg-horizontal-root {
+  height: 1.5em;
+  _height: 100%;
+  position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: center;
+  font-family: "Arial", sans-serif;
+  font-size: 13px;
+  border: 1px solid #aaaaaa;
+  padding: 5px;
+  margin-right: 80px;
+  .gfg-title {
+    font-weight: bold;
+    background-color: white;
+    line-height: 1.5em;
+    overflow: hidden;
+    white-space: nowrap;
+    float: left;
+    padding-left: 10px;
+    padding-right: 12px;
+    border-right: 1px solid #aaaaaa;
+    a {
+      color: #444444;
+      text-decoration: none; } }
+  .gfg-entry {
+    width: auto;
+    height: 1.5em;
+    position: relative;
+    overflow: hidden;
+    text-align: left;
+    margin-top: 0px;
+    margin-left: 0px;
+    padding-left: 10px;
+    .gf-result {
+      position: relative;
+      background-color: white;
+      width: 100%;
+      height: 100%;
+      line-height: 1.5em;
+      overflow: hidden;
+      white-space: nowrap; } }
+  .gfg-list {
+    display: none; }
+  .gfg-entry {
+    .gf-result {
+      .gf-snippet, .gf-author {
+        display: none; } }
+    &.gf-result .gf-title {
+      color: #0000cc;
+      margin-right: 3px;
+      float: left; }
+    .gf-result {
+      .gf-spacer {
+        float: left;
+        display: block;
+        color: #aaaaaa; }
+      .gf-relativePublishedDate {
+        display: block;
+        color: #aaaaaa; } } } }
+
+/* FeedControl customizations. */
+
+.gfg-branding {
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: left;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  width: 80px; }
+
+.gfg-collapse-open, .gfg-collapse-closed {
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  float: right;
+  width: 17px;
+  height: 20px; }
+
+.gfg-collapse-open {
+  background-image: url("arrow_open.gif"); }
+
+.gfg-collapse-closed {
+  background-image: url("arrow_close.gif"); }
+
+.gfg-collapse-href {
+  float: left; }
+
+.clearFloat {
+  clear: both; }

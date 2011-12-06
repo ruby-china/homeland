@@ -52,7 +52,8 @@
     editor_toolbar_edit: "Edit"
     editor_toolbar_preview: "Preview"
     by: "by"
-    at: "at"
+    at: "on"
+    hot_topics: "Hot topics"
   posts:
     recent_publish_post: "Recent Published Post"
     post_source: "Post source"

@@ -34,8 +34,8 @@
                   <%= link_to(truncate(topic.title, :length => 100), topic_path(topic), :title => topic.title) %>
               </div>
               <div class="info leader">
-                由 <%= user_name_tag(topic.user) %>
-                在 <%= render_node_name(topic.node) %> 中<%= t("common.create_item")%>
+                <%= t("common.by") %> <%= user_name_tag(topic.user) %>
+                <%= t("common.at") %> <%= render_node_name(topic.node) %> <%= t("common.create_item")%>
               </div>
               <div class="info time">
                 <% if topic.last_reply_user.blank? %>

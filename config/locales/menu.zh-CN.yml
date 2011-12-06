@@ -22,7 +22,7 @@
     last_by: "最后由"
     floor: "楼"
     reply_at: "于%{time}回复"
-    create_item: "发起"
+    create_item: "中发起"
     read_times: "次阅读"
     confirm_delete: "确定要删除么？"
     search: "搜索"
@@ -52,7 +52,7 @@
     editor_toolbar_edit: "编辑"
     editor_toolbar_preview: "预览"
     by: "由"
-    on: "在"
+    at: "在"
   posts:
     recent_publish_post: "最近发布的文章"
     post_source: "文章來源"

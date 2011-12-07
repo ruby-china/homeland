@@ -10,7 +10,8 @@
     </tr>
     <% @likes.each do |item| %>
     <tr class="topic <%= cycle('odd',"") %>">
-      <td class="title"><%= link_to(item.likeable.title, topic_path(item.likeable)) %></td>
+      <%# XXX: should be render_likeable_title() and detect instance type there %>
+      <td class="title"><%= render_topic_title(item.likeable) %></td>
       <td></td>
     </tr>
     <% end %>

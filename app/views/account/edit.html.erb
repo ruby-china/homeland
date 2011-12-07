@@ -81,7 +81,7 @@
             </div>
           </div>
           <div class="actions">
-              <%= f.submit "更新资料", :class => "btn primary" %>
+              <%= f.submit "更新资料", :class => "btn primary", :disable_with => t("common.saving") %>
           </div>
       </fieldset>
     <% end %>
@@ -113,7 +113,7 @@
           </div>
         </div>        
           <div class="actions">
-              <%= f.submit "修改密码", :class => "btn success" %>
+              <%= f.submit "修改密码", :class => "btn success", :disable_with => t("common.saving") %>
           </div>
         </fieldset>
       <% end %>

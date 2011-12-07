@@ -8,6 +8,8 @@
     <%= f.file_field :image %></div>
   </div>
   <div class="actions">
-    <button type="submit" class="btn primary"><%= t("common.upload")%></button> or <%= link_to 'Back', photos_path %>
+    <%= f.submit t("common.upload"), :class => "btn primary", :disable_with => t("common.uploading") %>
+    or
+    <%= link_to 'Back', photos_path %>
   </div>
 <% end %>

@@ -15,7 +15,7 @@
     <%= f.input :source_url, :input_html => {:class => "xxlarge"} , :placeholder => "http://" %>
 
     <div class="actions">
-      <%= f.submit "投稿", :class => "btn primary" %>
+      <%= f.submit "投稿", :class => "btn primary", :disable_with => t("common.saving") %>
     </div>
   </fieldset>
 <% end %>

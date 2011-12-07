@@ -31,7 +31,7 @@
           <div class="input"><%= f.password_field :password_confirmation %></div>
         </div>
         <div class="actions">
-          <button type="submit" class="btn primary">提交注册信息</button>
+          <%= f.submit "提交注册信息", :class => "btn primary", :disable_with => t("common.submitting") %>
         </div>
       </fieldset>
     <% end %>

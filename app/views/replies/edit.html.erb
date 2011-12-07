@@ -25,7 +25,7 @@
         </div>
       </div>
       <div class="actions">
-        <button class="btn primary"><%= t("common.save")%></button>
+        <%= f.submit t("common.save"), :class => "btn primary", :disable_with => t("common.saving") %>
         <a href="<%= topic_path(@topic) %>" class="btn"><%= t("common.cancel") %></a>
       </div>
     <% end %>

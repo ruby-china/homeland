@@ -36,7 +36,7 @@
         </div>
         <% end -%>
         <div class="actions">
-          <button type="submit" class="btn primary"><%= t("common.login") %></button>
+          <%= f.submit t("common.login"), :class => "btn primary", :disable_with => t("common.logining") %>
         </div>
       </fieldset>
     <% end %>

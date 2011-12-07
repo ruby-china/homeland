@@ -7,13 +7,17 @@
     create: "新建"
     avatar: "头像"
     save: "保存"
+    saving: "正在保存"
+    submitting: "正在提交"
     delete: "删除"
     place_top: "置顶"
     un_top: "去置顶"
     upload: "上传"
+    uploading: "正在上传"
     published_at: "发表于"
     register: "注册"
     login: "登录"
+    logining: "正在登录"
     logout: "退出"
     remember_me: "记住登录状态"
     cancel: "取消"
@@ -67,6 +71,7 @@
     topic_location: '回帖所在文章'
   photos:
     upload_and_insert_code: "上传并插入代码"
+    uploading: "正在上传"
   sites:
     create: 提交网站
   menu:

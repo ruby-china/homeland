@@ -89,7 +89,12 @@
     to_douban: "转发到豆瓣"
     to_facebook: "转发到 Facebook"
   mail:
+    community: "社区"
+    login_from: "登录页面地址"
     this_is_a_notification_mail_please_do_not_reply: "这是一封提醒邮件，请勿直接通过邮件回复."
+    welcome_to: "欢迎加入"
+    you_have_successfully: "你已经成功在"
+    registered_an_account: "注册了账号。"
   rss:
     recent_topics_description: "%{name}社区最新发贴."
     recent_topics_title: "%{name}社区"

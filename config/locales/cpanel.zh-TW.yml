@@ -1,7 +1,7 @@
 "zh-TW":
   cpanel:
     menu:
-      root_path: "系统概况"
+      root_path: "系統概況"
       site_configs: "全站設定"
       users: "使用者"
       sections: "分類"

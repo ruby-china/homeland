@@ -17,7 +17,9 @@
             <span class="help-block">此功能将会发送一个找回密码的特别链接到你的邮箱，通过改链接可以进入重置密码的页面。</span>
           </div>
         </div>
-        <div class="actions"><button type="submit" class="btn success">找回密码</button></div>
+        <div class="actions">
+          <%= f.submit "找回密码", :class => "btn primary", :disable_with => t("common.submitting") %>
+        </div>
       </fieldset>
     <% end %>
   </div>

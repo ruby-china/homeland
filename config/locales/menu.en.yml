@@ -7,13 +7,17 @@
     create: "Create"
     avatar: "Avatar"
     save: "Save"
+    saving: "Saving"
+    submitting: "Submitting"
     delete: "Delete"
     place_top: "Stick Top"
     un_top: "Un-Stick Top"
     upload: "Upload"
+    uploading: "Uploading"
     published_at: "Published At"
     register: "Register"
     login: "Sign In"
+    logining: "Sign In..."
     logout: "Sign Out"
     remember_me: "Remember Me"
     cancel: "Cancel"
@@ -67,6 +71,7 @@
     topic_location: 'Replied to'
   photos:
     upload_and_insert_code: "Upload and insert code"
+    uploading: "Uploading"
   sites:
     create: Submit a site
   menu:

@@ -10,7 +10,9 @@
       <%= f.input :desc, :as => :text, :input_html => { :class => "xxlarge", :rows => "3" } %>
       <%= f.input :site_node_id, :collection => SiteNode.all.collect { |t| [t.name, t.id] }, :include_blank => false %>
       <div class="actions">
-      <%= f.submit t("common.save"), :class => "btn primary" %> or <%= link_to t("common.cancel"), cpanel_sites_path %>
+      <%= f.submit t("common.save"), :class => "btn primary", :disable_with => t("common.saving") %>
+      or
+      <%= link_to t("common.cancel"), cpanel_sites_path %>
     </div>
   </fieldset>
 <% end %>

@@ -6,7 +6,7 @@
     <input type="file" name="image3">
   </div>
   <div class="buttons">
-    <button type="submit" class="btn primary"><%= t("photos.upload_and_insert_code")%></div>
+    <%= f.submit t("photos.upload_and_insert_code"), :class => "btn primary", :disable_with => t("common.uploading") %>
   </div>
  </form>
 <% end -%>

@@ -17,7 +17,7 @@
     <%= f.input :body, :as => :text, :input_html => { :class => "topic_editor xxlarge", :style => "height:400px" }%>
 
     <div class="actions">
-      <input type="submit" value="<%= t("common.save") %>" class="btn primary"> 
+      <%= f.submit t("common.save"), :class => "btn primary", :disable_with => t("common.saving") %>
       <%= link_to(t("common.cancel"), @topic.id.blank? ? root_path : topic_path(@topic), :class => "btn")%>
     </div>
   </fieldset>

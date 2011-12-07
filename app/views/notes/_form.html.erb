@@ -9,7 +9,8 @@
       <%= t("notes.please_use") %> <a href="http://en.wikipedia.org/wiki/Markdown" target="_blank">Markdown</a> <%= t("notes.document_format_to_write") %>
     </p>
     <div class="buttons">
-      <button type="submit" class="btn primary"><%= t("common.save") %></button> <a href="<%= notes_path %>" class="btn"><%= t("common.cancel") %></a> 
+      <%= f.submit t("common.save"), :class => "btn primary", :disable_with => t("common.saving") %>
+      <a href="<%= notes_path %>" class="btn"><%= t("common.cancel") %></a> 
     </div>
   </fieldset>
 <% end %>

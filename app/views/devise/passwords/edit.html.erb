@@ -24,7 +24,9 @@
             <%= f.password_field :password_confirmation %>
           </div>
         </div>    
-        <div class="actions"><button type="submit" class="btn success">修改我的密码</button></div>
+        <div class="actions">
+          <%= f.submit "修改我的密码", :class => "btn success", :disable_with => t("common.submitting") %>
+        </div>
     <% end %>
   </div>
 </div>

@@ -40,7 +40,8 @@
     </div>
   </div>
   <div class="actions">
-    <button class="btn primary"><%= t("common.save") %></button> or 
+    <%= f.submit t("common.save"), :class => "btn primary", :disable_with => t("common.saving") %>
+    or
     <%= link_to 'Back', cpanel_topics_path %>
   </div>
 <% end %>

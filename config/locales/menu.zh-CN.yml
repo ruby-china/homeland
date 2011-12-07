@@ -58,6 +58,7 @@
     by: "由"
     at: "在"
     hot_topics: "热门讨论"
+    hot_locations: "热门城市"
   posts:
     recent_publish_post: "最近发布的文章"
     post_source: "文章來源"

@@ -1,5 +1,5 @@
 <%= render_list :class => "tabs" do |li|
-  li << link_to("帖子", user_path(@user.login))
-  li << link_to("最近回帖", replies_user_path(@user.login))
-  li << link_to("喜欢", likes_user_path(@user.login))
+  li << link_to(t("users.menu.topics"), user_path(@user.login))
+  li << link_to(t("users.menu.recent_reply_topics"), replies_user_path(@user.login))
+  li << link_to(t("users.menu.like"), likes_user_path(@user.login))
 end %>

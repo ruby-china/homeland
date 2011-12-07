@@ -1,7 +1,7 @@
 "zh-TW":
   mongoid:
     models:
-      user: "用戶"
+      user: "使用者"
       topic: "話題"
       post: 文章
       page: Wiki
@@ -15,18 +15,18 @@
         password: "密碼"
         password_confirmation: "確認密碼"
         website: "個人主頁"
-        last_logined_at: "上次登錄時間"
+        last_logined_at: "上次登入時間"
         tagline: "簽名"
         state: "狀態"
         verified: "信任用戶"
-        remember_me: 記住登陸狀態
+        remember_me: 記住登入狀態
         current_password: 舊密碼
       topic:
         title: "標題"
         user_id: "用戶"
         body: "正文"
       reply:
-        body: "回复內容"
+        body: "回覆內容"
       post:
         title: 標題
         body: 正文
@@ -72,7 +72,7 @@
         taken:
           已佔用
         document_not_found:
-          沒有發現類是%{klass} ID 是%{identifiers} 的文檔
+          沒有發現類似%{klass} ID 是%{identifiers} 的文檔
         invalid_database:
           數據庫應該是Mongo::DB,而不是%{name}.
         invalid_type:

@@ -5,9 +5,9 @@
   <%= render "menu" %>
   <table class="node_topics">
       <tr class="head">
-        <td class="replies">回复数</td>
-        <td class="title">标题</td>
-        <td class="replied_at">创建时间</td>
+        <td class="replies"><%=t("common.reply_count")%></td>
+        <td class="title"><%=t("common.title")%></td>
+        <td class="replied_at"><%=t("common.published_at")%></td>
       </tr>
       <% @topics.each do |topic| %>
       <tr class="topic <%= cycle("odd","") %>">

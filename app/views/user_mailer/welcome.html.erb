@@ -1,8 +1,8 @@
-<h1>欢迎加入<%= Setting.app_name %></h1>
+<h1><%= t("mail.welcome_title", :app_name => Setting.app_name) %></h1>
 <p>
   <label>你好 <%= @user.login %>,</label><br />
-  你已经成功在 <a href="<%= root_url %>"><%= Setting.app_name %></a> 注册了账号。
+  <%= t("mail.you_have_successfully") %> <a href="<%= root_url %>"><%= Setting.app_name %></a> <%= t("mail.registered_an_account") %>
 </p>
 <p>
-  <label>登录页面地址: </label><a href='<%= new_user_session_url %>'><%= new_user_session_url %></a>.
+  <label><%= t("mail.login_from") %>: </label><a href='<%= new_user_session_url %>'><%= new_user_session_url %></a>.
 </p>

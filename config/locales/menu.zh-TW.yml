@@ -89,10 +89,10 @@
     to_douban: "轉發到豆瓣"
     to_facebook: "轉發到 Facebook"
   mail:
-    community: "社群"
     login_from: "登入頁面位址"
     this_is_a_notification_mail_please_do_not_reply: "这是一封提醒邮件，请勿直接通过邮件回复."
-    welcome_to: "歡迎加入"
+    welcome_subject: "歡迎加入 %{app_name} 社群"
+    welcome_title: "歡迎加入 %{app_name}"
     you_have_successfully: "你已經成功在"
     registered_an_account: "註冊了帳號。"
   rss:

@@ -7,13 +7,7 @@
     create: "新增"
     avatar: "頭像"
     save: "儲存"
-<<<<<<< HEAD
-    saving: "正在儲存"
-    submitting: "正在提交"
-    delete: "删除"
-=======
     delete: "刪除"
->>>>>>> bfaa9d7ef71ebbcd24e3361eb9f4c4f0f340e586
     place_top: "置頂"
     un_top: "移除置頂"
     upload: "上傳"
@@ -100,13 +94,13 @@
     to_facebook: "轉發到 Facebook"
   mail:
     login_from: "登入頁面位址"
-    this_is_a_notification_mail_please_do_not_reply: "这是一封提醒邮件，请勿直接通过邮件回复."
+    this_is_a_notification_mail_please_do_not_reply: "這是一封提醒郵件，請勿直接回覆此郵件。"
     welcome_subject: "歡迎加入 %{app_name} 社群"
     welcome_title: "歡迎加入 %{app_name}"
     you_have_successfully: "你已經成功在"
     registered_an_account: "註冊了帳號。"
   rss:
-    recent_topics_description: "%{name}社區最新討論."
+    recent_topics_description: "%{name}社區最新討論。"
     recent_topics_title: "%{name}社區"
     recent_node_topics_description: "%{name} 社區 %{node_name} 節點最新討論。"
     recent_node_topics_title: "%{name} 社區 %{node_name} 節點"

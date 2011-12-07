@@ -9,7 +9,7 @@
       user:
         name: "名字"
         login: "使用者名稱"
-        email: "Email"
+        email: "E-mail"
         location: "城市"
         bio: "個人介紹"
         password: "密碼"
@@ -54,10 +54,10 @@
         confirmation: "與確認值不匹配"
         accepted: "必須是可被接受的"
         empty: "不能留空"
-        blank: "不能為空字符"
-        too_long: "過長（最長為%{count} 個字符）"
-        too_short: "過短（最短為%{count} 個字符）"
-        wrong_length: "長度非法（必須為%{count} 個字符）"
+        blank: "不能為空字串"
+        too_long: "過長（最長為%{count} 個字）"
+        too_short: "過短（最短為%{count} 個字）"
+        wrong_length: "長度不對（必須為%{count} 個字）"
         taken: "已經被使用"
         not_a_number: "不是數字"
         not_an_integer: "必須是整數"
@@ -66,8 +66,8 @@
         equal_to: "必須等於 %{count}"
         less_than: "必須小於 %{count}"
         less_than_or_equal_to: "必須小於或等於%{count}"
-        odd: "必須為單數"
-        even: "必須為雙數"
+        odd: "必須為奇數"
+        even: "必須為偶數"
         record_invalid: "校驗失敗: %{errors}"
         taken:
           已佔用
@@ -76,7 +76,7 @@
         invalid_database:
           數據庫應該是Mongo::DB,而不是%{name}.
         invalid_type:
-          在類%{klass}中定義了字段,實際值是%{value}的%{other}.
+          在%{klass}類別中定義了字段,實際值是%{value}的%{other}.
         unsupported_version:
           MongoDB %{version} 版本已過期，請升級到%{mongo_version}.
         validations:
@@ -92,7 +92,7 @@
         dependent_only_references_one_or_many:
           dependent => destroy|delete 選項只有在references_one或者references_many時候有效.
         association_cant_have_inverse_of:
-          在當前的關聯中，不允許定義inverse_of去,其只有在embedded_in或者references_many是數組的情況下使用
+          在當前的關聯中，不允許定義inverse_of去,其只有在embedded_in或者references_many是陣列的情況下使用
         unsaved_document:
           You cannot call create or create! through a relational association
           relation (%{document}) who's parent (%{base}) is not already saved.

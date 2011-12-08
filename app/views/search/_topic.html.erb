@@ -1,0 +1,8 @@
+<div class="topic">
+  <div class="title"><%= link_to(highlight(topic.title, @keywords), topic_path(topic)) %></div>
+  <div class="url"><%= link_to(topic_url(topic), topic_path(topic)) %></div>
+  <div class="info"><%= t("common.by") %> <%= user_name_tag(topic.user) %> <%= t("common.published_at")%> <%= timeago(topic.created_at) %> <%= t("common.reply_count")%>: <%= topic.replies_count %></div>
+  <div class="summary">
+    <%= highlight(truncate(topic.body, :length => 300),@keywords) %>
+  </div>
+</div>

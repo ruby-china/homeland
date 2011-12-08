@@ -7,6 +7,8 @@ class Page
   include Mongoid::Timestamps  
   include Mongoid::BaseModel
   include Mongoid::SoftDelete
+  include Sunspot::Mongoid
+  
   # 页面地址
   field :slug
   field :title
@@ -31,6 +33,12 @@ class Page
   validates_presence_of :user_id, :if => Proc.new { |p| p.version_enable == true }
   validates_presence_of :change_desc, :if => Proc.new { |p| p.version_enable == true and !p.new_record? }
   validates_uniqueness_of :slug
+  
+  searchable do
+    text :title, :body, :slug
+    integer :user_id
+    boolean :deleted_at
+  end
   
   before_save :markdown_for_body_html
   def markdown_for_body_html

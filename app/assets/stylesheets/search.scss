@@ -8,13 +8,18 @@ $border-color:#DDD;
     .title {
       font-size: 14px;
     }
+    .url { 
+      font-size:12px;
+      margin:2px 0;
+      a { color:green; }
+    }
     .info {
       color:#999;
       font-size: 12px;
       margin-bottom: 8px;
     }
   }
-  span.highlight {
+  .highlight {
     color: #BD121D;
   }
 }

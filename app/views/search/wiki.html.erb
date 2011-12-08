@@ -3,13 +3,13 @@
 <div class="box">
   <%= render "menu" %>
   <div class="tab-content">
-    <div class="tab-pane active" id="topics">
+    <div class="tab-pane active" id="pages">
     <% unless @search.results.blank? %>
       <% @search.each_hit_with_result do |hit, result| %>
-        <%= render "topic", :topic => result, :hit => hit %>
+        <%= render "page", :page => result, :hit => hit %>
       <% end %>
     <% else %>
-      <div class="topic">
+      <div class="page">
         <%= t("common.no_search_result") %>
       </div>
     <% end %>

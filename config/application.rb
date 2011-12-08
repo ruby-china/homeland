@@ -52,6 +52,7 @@ module RubyChina
 end
 
 require "daemon"
+require "segment"
 
 I18n.locale = 'zh-CN'
 

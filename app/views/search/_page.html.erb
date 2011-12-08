@@ -1,0 +1,8 @@
+<div class="page">
+  <div class="title"><%= link_to(highlight(page.title, @keywords), page_path(page.slug)) %></div>
+  <div class="url"><%= link_to(page_url(page.slug), page_path(page.slug)) %></div>
+  <div class="info"><%= t("common.published_at")%> <%= timeago(page.updated_at) %></div>
+  <div class="summary">
+    <%= highlight(truncate(page.body, :length => 300),@keywords) %>
+  </div>
+</div>

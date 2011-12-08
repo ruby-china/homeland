@@ -7,6 +7,7 @@ class Topic
   include Mongoid::CounterCache
   include Redis::Search
   include Redis::Objects
+  include Sunspot::Mongoid
 
   field :title
   field :body
@@ -41,6 +42,17 @@ class Topic
                      :score_field => :replied_at,
                      :ext_fields => [:node_name,:replies_count])
 
+  searchable do
+    text :title, :stored => true
+    text :body, :stored => true
+    text :replies, :stored => true do
+      replies.map { |reply| reply.body }
+    end
+    integer :node_id, :user_id
+    boolean :deleted_at
+    time :replied_at
+  end
+  
   # scopes
   scope :last_actived, desc("replied_at").desc("created_at")
   # 推荐的话题

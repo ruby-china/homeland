@@ -63,6 +63,8 @@ gem "sprite-factory", "1.4.1"
 # Simple form last commit: 2011-12-03 
 gem 'simple_form', :git => "git://github.com/plataformatec/simple_form.git"
 gem 'bootstrap-rails', :require => 'bootstrap-rails', :git => 'git://github.com/xdite/bootstrap-rails.git'
+gem 'sunspot_rails',  "~> 1.3.0"
+gem 'sunspot_solr'
 
 group :assets do
   gem 'sass-rails', "  ~> 3.1.4"

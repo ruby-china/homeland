@@ -18,6 +18,20 @@ module Mongoid
           nil
         end
       end
+      
+      def find_in_batches(opts = {})
+        batch_size = opts[:batch_size] || 1000
+        start = opts.delete(:start).to_i || 0
+        objects = self.limit(batch_size).skip(start)
+        t = Time.new
+        while objects.any?
+          yield objects
+          start += batch_size
+          # Rails.logger.debug("processed #{start} records in #{Time.new - t} seconds") if Rails.logger.debug?
+          break if objects.size < batch_size
+          objects = self.limit(batch_size).skip(start)
+        end
+      end
     end
   end
 end

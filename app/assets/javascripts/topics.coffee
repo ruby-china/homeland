@@ -88,6 +88,9 @@ $(document).ready ->
 
   $("textarea").autogrow()
 
+  $("#new_reply").submit () ->
+    $('#btn_reply').button('loading')
+  
   Topics.hookPreview($(".editor_toolbar"), $(".topic_editor"))
 
   return

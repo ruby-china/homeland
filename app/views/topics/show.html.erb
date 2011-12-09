@@ -46,11 +46,6 @@
           <%= render_cell :topics, :reply_help_block %>
         </span>
       <% end %>
-      <script type="text/javascript">
-        $("#new_reply").submit(function(){
-          $('#btn_reply').button('loading');
-        })
-      </script>
     </div>
   <% else %>
       <%= render :partial => "topics/translation/need_login_to_reply" %>

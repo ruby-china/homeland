@@ -1,4 +1,4 @@
-source 'http://rubygems.org'
+source 'http://ruby.taobao.org'
 
 gem "rails", "3.1.1"
 gem "bson", "1.3.1"

@@ -1,3 +1,7 @@
 <div class="feed_link">
-  <%= link_to(raw("<span class='icon share_icons_rss'></span> Feed"), feed_topics_url, :title => t("topics.subscribe_with_rss", :name => Setting.app_name)) %>
+  <% if mobile? %>
+    <%= link_to "我要发贴", new_topic_path, :class => "btn success" %>
+  <% else %>
+    <%= link_to(raw("<span class='icon share_icons_rss'></span> Feed"), feed_topics_url, :title => t("topics.subscribe_with_rss", :name => Setting.app_name)) %>
+  <% end %>
 </div>

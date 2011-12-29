@@ -4,6 +4,12 @@
   <%= render_page_title %>
   <%= stylesheet_link_tag "front" %>
   <%= yield :styles %>
+  <% if mobile? %>
+    <%= stylesheet_link_tag "mobile" %>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta content='True' name='HandheldFriendly' />
+    <meta content='width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;' name='viewport' />
+  <% end %>
   <meta name="keywords" content="<%= @meta_keywords %>" />
   <meta name="description" content="<%= @meta_description %>" />
   <link rel="shortcut icon" href="<%= asset_path("big_logo.png") %>" /> 

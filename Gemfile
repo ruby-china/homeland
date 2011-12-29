@@ -1,9 +1,8 @@
 source 'http://ruby.taobao.org'
 
 gem "rails", "3.1.1"
-gem "bson", "1.3.1"
-gem "bson_ext", "1.3.1"
-gem "mongoid", "2.2.4"
+gem "bson_ext", "1.5.2"
+gem "mongoid", "2.3.4"
 
 # 上传组件
 gem 'carrierwave', '0.5.6'
@@ -13,12 +12,13 @@ gem 'mini_magick','3.3'
 # Mongoid 辅助插件
 gem 'mongo-rails-instrumentation','0.2.4'
 # Mongoid 使用自增整形ID
-gem 'mongoid_auto_increment_id', "0.2.2"
+gem 'mongoid_auto_increment_id', "0.3.1"
 
 # 用户系统
 gem 'devise', '1.5.2'
 # 分页
-gem 'will_paginate', '3.0.pre2'
+gem 'will_paginate', '3.0.2'
+gem 'bootstrap-will_paginate', '0.0.3'
 # 三方平台 OAuth 验证登陆
 
 gem "omniauth"

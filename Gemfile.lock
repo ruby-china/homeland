@@ -69,8 +69,11 @@ GEM
       xml-simple
     bcrypt-ruby (3.0.1)
     blankslate (2.1.2.4)
-    bson (1.3.1)
-    bson_ext (1.3.1)
+    bootstrap-will_paginate (0.0.3)
+      will_paginate
+    bson (1.5.2)
+    bson_ext (1.5.2)
+      bson (= 1.5.2)
     builder (3.0.0)
     cancan (1.6.7)
     capistrano (2.9.0)
@@ -135,15 +138,15 @@ GEM
     mime-types (1.17.2)
     mini_magick (3.3)
       subexec (~> 0.1.0)
-    mongo (1.3.1)
-      bson (>= 1.3.1)
+    mongo (1.5.2)
+      bson (= 1.5.2)
     mongo-rails-instrumentation (0.2.4)
-    mongoid (2.2.4)
-      activemodel (~> 3.0)
+    mongoid (2.3.4)
+      activemodel (~> 3.1)
       mongo (~> 1.3)
       tzinfo (~> 0.3.22)
-    mongoid_auto_increment_id (0.2.2)
-      mongoid (~> 2.2.0)
+    mongoid_auto_increment_id (0.3.1)
+      mongoid (~> 2.3.0)
     multi_json (1.0.4)
     multipart-post (1.1.4)
     net-scp (1.0.4)
@@ -299,7 +302,7 @@ GEM
       rack (>= 1.0.0)
     warden (1.1.0)
       rack (>= 1.0)
-    will_paginate (3.0.pre2)
+    will_paginate (3.0.2)
     xml-simple (1.1.1)
 
 PLATFORMS
@@ -308,8 +311,8 @@ PLATFORMS
 DEPENDENCIES
   aws-ses (~> 0.4.3)
   bootstrap-rails!
-  bson (= 1.3.1)
-  bson_ext (= 1.3.1)
+  bootstrap-will_paginate (= 0.0.3)
+  bson_ext (= 1.5.2)
   cancan
   capistrano (= 2.9.0)
   carrierwave (= 0.5.6)
@@ -328,8 +331,8 @@ DEPENDENCIES
   memcache-client (= 1.8.5)
   mini_magick (= 3.3)
   mongo-rails-instrumentation (= 0.2.4)
-  mongoid (= 2.2.4)
-  mongoid_auto_increment_id (= 0.2.2)
+  mongoid (= 2.3.4)
+  mongoid_auto_increment_id (= 0.3.1)
   nokogiri (= 1.5.0)
   omniauth
   omniauth-douban!
@@ -356,4 +359,4 @@ DEPENDENCIES
   sunspot_solr
   uglifier
   unicorn
-  will_paginate (= 3.0.pre2)
+  will_paginate (= 3.0.2)

@@ -37,7 +37,7 @@ class TopicsController < ApplicationController
 
   def recent
     # TODO: 需要 includes :node,:user, :last_reply_user,但目前用了 paginate 似乎会使得 includes 没有效果
-    @topics = Topic.recent.paginate(:page => params[:page], :per_page => 50)
+    @topics = Topic.recent.includes(:node,:user, :last_reply_user).paginate(:page => params[:page], :per_page => 50)
     drop_breadcrumb(t("topics.topic_list"))
     render :action => "index" #, :stream => true
   end
@@ -52,7 +52,7 @@ class TopicsController < ApplicationController
   end
 
   def show
-    @topic = Topic.find(params[:id])
+    @topic = Topic.includes(:user, :node).find(params[:id])
     @topic.hits.incr(1)
     @node = @topic.node
     @replies = @topic.replies.asc(:_id).all.includes(:user).cache.reject { |r| r.user.blank? }

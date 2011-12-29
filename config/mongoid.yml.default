@@ -1,5 +1,6 @@
 defaults: &defaults
   host: '127.0.0.1'
+  identity_map_enabled: true
   # slaves:
   #   - host: slave1.local
   #     port: 27018

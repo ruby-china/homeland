@@ -11,6 +11,12 @@ body {
 .container-fluid > .content {
   margin:0;
 }
+.topbar div > ul, .nav {
+  margin:0;
+  li {
+    a { padding: 10px 6px 11px; }
+  }
+}
 .breadcrumb { margin-right:95px;}
 .feed_link {
   margin-top:-49px;
@@ -81,3 +87,12 @@ form {
   }
   td.last { display:none;}
 }
+.topics .topic .infos { padding-right:40px; }
+.topics .topic .replies { display:inline; width:auto; margin-right:10px; }
+.topics .topic .replies a.count, .topics .topic .replies a.count:visited {
+  margin:0; padding:0px 5px; font-size:10px; font-weight:normal;
+}
+#main .topics .topic h1 { font-size:16px; }
+.topics .body img  { max-width:98%; }
+#replies .reply .body img { max-width:98%; }
+.secondary-nav .notifications a .count { padding:4px; }

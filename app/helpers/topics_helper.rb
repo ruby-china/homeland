@@ -181,7 +181,7 @@ module TopicsHelper
   end
   
   def render_topic_count(topic)
-    topic.replies.count
+    topic.replies_count
   end
   
   def render_topic_created_at(topic)

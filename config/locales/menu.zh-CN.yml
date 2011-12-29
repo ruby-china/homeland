@@ -86,6 +86,7 @@
     sites: "酷站"
     my_home_page: "我的主页"
     edit_account_path: "个人资料设置"
+    likes: "我的收藏"
   comments:
     create_comment: "发表评论"
     no_comment: "暂无评论"  

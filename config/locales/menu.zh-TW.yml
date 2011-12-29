@@ -84,6 +84,7 @@
     sites: "酷站"
     my_home_page: "我的首頁"
     edit_account_path: "個人資料設定"
+    likes: "我的收藏"
   comments:
     create_comment: "發表評論"
     no_comment: "暫無評論"

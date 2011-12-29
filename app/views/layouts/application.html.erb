@@ -44,11 +44,13 @@
       <%= yield %>
     </div>
   </div>
+  <% if not mobile? %>
   <footer class="footer">
     <div class="container">
       <%= raw SiteConfig.footer_html %>
     </div>
   </footer>
+  <% end %>
   
   <%= javascript_include_tag "application" %>
   <%= yield :scripts %>

@@ -1,0 +1,40 @@
+/*
+
+        Creating a sprite from following images:
+        
+        app/assets/images/sprites/small/calenda.png (12x12)
+        app/assets/images/sprites/small/delete.png (12x12)
+        app/assets/images/sprites/small/edit.png (12x12)
+        app/assets/images/sprites/small/image.png (12x12)
+        app/assets/images/sprites/small/like.png (12x12)
+        app/assets/images/sprites/small/liked.png (12x12)
+        app/assets/images/sprites/small/lock.png (12x12)
+        app/assets/images/sprites/small/mail.png (12x12)
+        app/assets/images/sprites/small/mail_full.png (12x12)
+        app/assets/images/sprites/small/pin.png (12x12)
+        app/assets/images/sprites/small/reply.png (12x12)
+        app/assets/images/sprites/small/vote_down.png (12x12)
+        app/assets/images/sprites/small/vote_up.png (12x12)
+
+        Output files:
+          app/assets/images/sprites/small.png
+          app/assets/stylesheets/sprites/small.scss
+
+        Output size:
+          156x12
+
+
+*/
+.small_calenda { width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px 0px no-repeat; }
+.small_delete { width: 12px; height: 12px; background: url(image-path('sprites/small.png')) -12px 0px no-repeat; }
+.small_edit { width: 12px; height: 12px; background: url(image-path('sprites/small.png')) -24px 0px no-repeat; }
+.small_image { width: 12px; height: 12px; background: url(image-path('sprites/small.png')) -36px 0px no-repeat; }
+.small_like { width: 12px; height: 12px; background: url(image-path('sprites/small.png')) -48px 0px no-repeat; }
+.small_liked { width: 12px; height: 12px; background: url(image-path('sprites/small.png')) -60px 0px no-repeat; }
+.small_lock { width: 12px; height: 12px; background: url(image-path('sprites/small.png')) -72px 0px no-repeat; }
+.small_mail { width: 12px; height: 12px; background: url(image-path('sprites/small.png')) -84px 0px no-repeat; }
+.small_mail_full { width: 12px; height: 12px; background: url(image-path('sprites/small.png')) -96px 0px no-repeat; }
+.small_pin { width: 12px; height: 12px; background: url(image-path('sprites/small.png')) -108px 0px no-repeat; }
+.small_reply { width: 12px; height: 12px; background: url(image-path('sprites/small.png')) -120px 0px no-repeat; }
+.small_vote_down { width: 12px; height: 12px; background: url(image-path('sprites/small.png')) -132px 0px no-repeat; }
+.small_vote_up { width: 12px; height: 12px; background: url(image-path('sprites/small.png')) -144px 0px no-repeat; }

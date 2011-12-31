@@ -3,7 +3,7 @@
     <legend><%= @topic.new_record? ? t("topics.create_topic") : t("topics.edit_topic") %></legend>
     <%= render "shared/error_messages", :target => @topic %>  
     <%= f.input :title do %>
-      <span class="span3"<%= " style=display:none;" if !@node.blank? %>>
+      <span class="span3">
         <%= f.select :node_id, Node.hot_node_collection %>
       </span>
       <span class="span6">

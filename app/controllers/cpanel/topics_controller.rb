@@ -47,6 +47,12 @@ class Cpanel::TopicsController < Cpanel::ApplicationController
     redirect_to(cpanel_topics_path)
   end
   
+  def undestroy
+    @topic = Topic.unscoped.find(params[:id])
+    @topic.update_attribute(:deleted_at, nil)
+    redirect_to(cpanel_topics_path)
+  end
+  
   def suggest
     @topic = Topic.unscoped.find(params[:id])
     @topic.update_attribute(:suggested_at, Time.now)

@@ -10,6 +10,7 @@
     saving: "Saving"
     submitting: "Submitting"
     delete: "Delete"
+    undelete: "Revert"
     place_top: "Stick Top"
     un_top: "Un-Stick Top"
     upload: "Upload"

@@ -29,7 +29,13 @@
         <%= link_to t("common.place_top"), suggest_cpanel_topic_path(topic), :confirm => 'Are you sure?', :method => :post %>
       <% end %>
       <%= link_to t("common.edit"), edit_cpanel_topic_path(topic) %>
-      <%= link_to t("common.delete"), cpanel_topic_path(topic), :confirm => 'Are you sure?', :method => :delete %></td>
+      <% if topic.deleted_at.blank? %>
+        <%= link_to t("common.delete"), cpanel_topic_path(topic), :confirm => 'Are you sure?', :method => :delete %>
+      <% else %>
+        <%= link_to t("common.undelete"), undestroy_cpanel_topic_path(topic), :confirm => 'Are you sure?', :method => :post %>
+      <% end %>
+    </td>
+      
   </tr>
 <% end %>
 </table>

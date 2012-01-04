@@ -8,6 +8,7 @@
     avatar: "頭像"
     save: "儲存"
     delete: "刪除"
+    undelete: "恢復"
     place_top: "置頂"
     un_top: "移除置頂"
     upload: "上傳"

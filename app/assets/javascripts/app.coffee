@@ -12,19 +12,7 @@ window.App =
       
   openUrl : (url) ->
     window.open(url)
-      
-  shareTo : (site, title) ->
-    url = encodeURIComponent(location.href)
-    title = encodeURIComponent(title)
-    switch site
-      when "weibo"
-        App.openUrl("http://v.t.sina.com.cn/share/share.php?url=#{url}&title=#{title}&source=ruby-china.org&content=utf-8")
-      when "twitter"
-        App.openUrl("https://twitter.com/home?status=#{title}: #{url} @ruby_china")
-      when "douban"
-        App.openUrl("http://www.douban.com/recommend/?url=#{url}&title=#{title}&v=1&r=1")
-      when "facebook"
-        App.openUrl("http://www.facebook.com/sharer.php?t=#{title}&u=#{url}")
+
   likeable : (el) ->
     likeable_type = $(el).data("type")
     likeable_id = $(el).data("id")
@@ -98,9 +86,6 @@ $(document).ready ->
   $(".cell_comments_new textarea").bind "keydown","ctrl+return",(el) ->
     if $(el.target).val().trim().length > 0
       $(el.target).parent().parent().submit()
-    return false
-  $(".share_buttons a").click () ->
-    App.shareTo($(this).data("site"), $(this).parent().data('title'))
     return false
   $("select").chosen()
 

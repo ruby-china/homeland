@@ -88,11 +88,6 @@
   comments:
     create_comment: "發表評論"
     no_comment: "暫無評論"
-  share:
-    to_twitter: "轉發到 Twitter"
-    to_weibo: "轉發到新浪微博"
-    to_douban: "轉發到豆瓣"
-    to_facebook: "轉發到 Facebook"
   mail:
     login_from: "登入頁面位址"
     this_is_a_notification_mail_please_do_not_reply: "這是一封提醒郵件，請勿直接回覆此郵件。"

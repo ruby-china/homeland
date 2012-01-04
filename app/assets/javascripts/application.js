@@ -12,4 +12,5 @@
 //= require jquery.hotkeys
 //= require jquery.chosen
 //= require jquery.autogrow-textarea
+//= require social-share-button
 //= require app

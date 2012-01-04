@@ -27,7 +27,7 @@
           <%= link_to "", topic_path(@topic.id), :method => :delete, :confirm => t("common.confirm_delete"), :class => "icon small_delete", :title => "删除本帖" %>
         <% end %>
       </div>
-      <%= render :partial => "common/share", :locals => {:title => @topic.title, :url => Setting.domain + topic_path(@topic) } %>
+      <%= social_share_button_tag(@topic.title) %>
     </div>
   </div>
 

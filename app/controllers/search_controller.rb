@@ -16,7 +16,7 @@ class SearchController < ApplicationController
   def wiki
     @keywords = Segment.split(params[:q])
     search_text = @keywords.join(" ")
-    @search = Page.search do
+    @search = Sunspot.search(Page) do
       keywords search_text, :highlight => true
       paginate :page => params[:page], :per_page => 20
     end

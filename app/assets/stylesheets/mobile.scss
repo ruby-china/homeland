@@ -100,6 +100,27 @@ form {
   margin:0; padding:0px 5px; font-size:10px; font-weight:normal;
 }
 #main .topics .topic h1 { font-size:16px; }
-.topics .body img  { max-width:98%; }
+.topics {
+  .body {
+    img  { max-width:98%; }
+  }
+  .topic {
+    .avatar {
+      width:33px;
+      img { max-width:32px; max-height:32px; }
+    }
+    .right_info { padding-left:48px; }
+  }
+  .topic_line {
+    .time { display:none; }
+  }
+}
 #replies .reply .body img { max-width:98%; }
 .secondary-nav .notifications a .count { padding:4px; }
+.new_topic {
+  .input {
+    .span3 { display:block; float:none; margin-bottom:8px; }
+  }
+  .chzn-container { display:block;  }
+  #topic_title { display:block; width:98%; }
+}

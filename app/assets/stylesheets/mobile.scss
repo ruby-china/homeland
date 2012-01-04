@@ -17,7 +17,14 @@ body {
     a { padding: 10px 6px 11px; }
   }
 }
-.breadcrumb { margin-right:95px;}
+.tabs::before, .pills::before, .tabs::after, .pills::after{
+  display:inline;
+}
+.breadcrumb { 
+  padding: 7px;
+  margin-right:95px;
+  .first { display:none; }
+}
 .feed_link {
   margin-top:-49px;
   margin-right:0;

@@ -175,6 +175,17 @@
       }
     }
   }
+  .suggest_topics {
+    ul {
+      li {
+        line-height:130%;
+        a {
+          color:#AA2D19;
+          font-size:12px;
+        }
+      }
+    }
+  }
 }
 
 #preview {

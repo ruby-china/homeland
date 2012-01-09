@@ -19,11 +19,18 @@
 
 .sidebar {
    h2 {
-     font-size: 14px;
+     font-size: 12px;
      line-height: 100%;
-     margin-bottom: 10px;
-     color: #666; }
-   ul, ol { margin-bottom: 0; }
+     color: #999; 
+     text-align: center;
+     border-bottom:1px solid #ddd;
+     margin:0 -10px 10px -10px;
+     padding-bottom:8px;
+   }
+   ul, ol { 
+     margin:0;
+     list-style-position: inside;
+   }
    p { margin-bottom: 6px; }
    li { margin-bottom: 4px; }
    

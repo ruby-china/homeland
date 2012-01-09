@@ -37,8 +37,6 @@ module RubyChina
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password,:password_confirm]
 
-    config.mongoid.logger = Logger.new($stdout, :warn)
-
     config.mongoid.include_root_in_json = false
 
     config.assets.enabled = true

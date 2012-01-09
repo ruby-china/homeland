@@ -33,8 +33,7 @@ RubyChina::Application.configure do
     app.assets.logger = Logger.new('/dev/null')
   end
 
-
-
+  config.mongoid.logger = Logger.new($stdout, :warn)
 end
 
 

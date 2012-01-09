@@ -20,8 +20,7 @@ This is source code of [Ruby China Group](http://ruby-china.org)
 
 ## Test
 
-* before running RSpec, start sunspot:solr
-    RAILS_ENV=test bundle exec rake sunspot:solr:run
+* before running RSpec, start sunspot:solr : ```RAILS_ENV=test bundle exec rake sunspot:solr:run```
 
 ## Deploy
 

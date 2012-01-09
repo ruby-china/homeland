@@ -92,5 +92,11 @@ $(document).ready ->
     $('#btn_reply').button('loading')
   
   Topics.hookPreview($(".editor_toolbar"), $(".topic_editor"))
+  
+  $("body").bind "keydown", "m", (el) ->
+    $('#markdown_help_tip_modal').modal
+      keyboard : true
+      backdrop : true
+      show : true
 
   return

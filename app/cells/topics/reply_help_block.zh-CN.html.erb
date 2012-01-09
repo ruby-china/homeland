@@ -1,7 +1,28 @@
 <ul>
-    <li><strong>**粗体**</strong>、<em>*斜体*</em>、<code>`段内程式码`</code></li>
-    <li>http://example.org 自动加链接</li>
-    <li>@name  会链接到用户</li>
-    <li>[img]http://foo.bar/a.jpg[/img] 显示图片</li>
-    <li>``` code ``` 会变成代码区块，可以用 ```ruby​​ code ``` 指定语言, 支持的<a href="http://pygments.org/docs/lexers/" target="_blank">语言列表</a></li>
-  </ul>
+  <li><strong>**粗体**</strong>、<em>*斜体*</em>、<code>`单行代码`</code></li>
+  <li>http://example.org 自动加链接</li>
+  <li>@name  会链接到用户页面，并会通知他</li>
+  <li>[img]http://foo.bar/a.jpg[/img] 显示图片</li>
+  <li><a href="#" data-controls-modal="markdown_help_tip_modal" data-keyboard="true" data-backdrop="true">点击这里</a>，或者按“M”键查看更多帮助。</li>
+</ul>
+
+<div id="markdown_help_tip_modal" class="modal hide fade">
+  <div class="modal-header">
+    <a href="#" class="close">&times;</a>
+    <h4>格式说明</h4>
+  </div>
+  <div class="modal-body">
+    <ul>
+      <li><strong>**粗体**</strong>、<em>*斜体*</em>、<code>`单行代码`</code></li>
+      <li>http://example.org 自动加链接</li>
+      <li>@name  会链接到用户页面，并会通知他</li>
+      <li>[img]http://foo.bar/a.jpg[/img] 显示图片</li>
+      <li>多行代码格式，使用3个`包起来，注意要换行，第一个```后面接语言名称(ruby,bash,html,css,python,erb,java... <a href="http://pygments.org/docs/lexers/" target="_blank">更多</a>)<br />如：
+          <pre style="border:0;background:#FFF;margin:0;">```ruby
+class Hello
+end
+```</pre>
+      </li>
+    </ul>
+  </div>
+</div>

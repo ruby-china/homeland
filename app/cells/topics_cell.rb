@@ -40,7 +40,8 @@ class TopicsCell < BaseCell
     render 
   end
   
-  def reply_help_block
+  def reply_help_block(opts = {})
+    @full = opts[:full] || false
     render
   end
   

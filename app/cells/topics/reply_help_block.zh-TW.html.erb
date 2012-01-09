@@ -1,7 +1,28 @@
-  <ul>
-    <li><strong>**粗體**</strong>、<em>*斜體*</em>、<code>`段內程式碼`</code></li>
-    <li><a href="http://example.org">http://example.org</a> 自動超連結</li>
-    <li><%= link_to("@name", "/users/name")%> 會變成使用者頁面的超連結</li>
-    <li>[img]http://foo.bar/a.jpg[/img] 顯示圖片</li>
-    <li>``` code ``` 會變成程式碼區塊，可以用 ``` ruby code ``` 强制指定語言</li>
-  </ul>
+<ul>
+  <li><strong>**粗體**</strong>、<em>*斜體*</em>、<code>`段內程式碼`</code></li>
+  <li><a href="http://example.org">http://example.org</a> 自動超連結</li>
+  <li><%= link_to("@name", "/users/name")%> 會變成使用者頁面的超連結</li>
+  <li>[img]http://foo.bar/a.jpg[/img] 顯示圖片</li>
+  <li><a href="#" data-controls-modal="markdown_help_tip_modal" data-keyboard="true" data-backdrop="true">點擊這裡</a>，或者按“M”鍵查看更多幫助。</li>
+</ul>
+
+<div id="markdown_help_tip_modal" class="modal hide fade">
+  <div class="modal-header">
+    <a href="#" class="close">&times;</a>
+    <h4>格式說明</h4>
+  </div>
+  <div class="modal-body">
+    <ul>
+      <li><strong>**粗體**</strong>、<em>*斜體*</em>、<code>`段內程式碼`</code></li>
+      <li><a href="http://example.org">http://example.org</a> 自動超連結</li>
+      <li><%= link_to("@name", "/users/name")%> 會變成使用者頁面的超連結</li>
+      <li>[img]http://foo.bar/a.jpg[/img] 顯示圖片</li>
+      <li>多行代碼格式，使用3個`包起來，注意要換行，第一個```後面接語言名稱(ruby,bash,html,css,python,erb,java... <a href="http://pygments.org/docs/lexers/" target="_blank">更多</a>)<br />如：
+          <pre style="border:0;background:#FFF;margin:0;">```ruby
+class Hello
+end
+```</pre>
+      </li>
+    </ul>
+  </div>
+</div>

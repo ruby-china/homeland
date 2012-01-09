@@ -6,6 +6,7 @@
 //= require bootstrap-twipsy
 //= require bootstrap-buttons
 //= require bootstrap-popover
+//= require bootstrap-modal
 //= require jquery.jdialog
 //= require jquery.timeago
 //= require jquery.timeago.settings

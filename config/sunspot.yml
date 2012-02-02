@@ -7,7 +7,7 @@ production:
 development:
   solr:
     hostname: localhost
-    port: 8982
+    port: 8983
     log_level: INFO
 
 test:

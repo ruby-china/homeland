@@ -4,7 +4,6 @@ class Post
   include Mongoid::Timestamps
   include Mongoid::SoftDelete
   include Mongoid::BaseModel
-  include Redis::Search
   include Redis::Objects
   
   STATE = {

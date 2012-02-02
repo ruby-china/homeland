@@ -30,10 +30,6 @@ gem "omniauth-douban", :git => "git://github.com/ballantyne/omniauth-douban.git"
 # permission
 gem "cancan"
 
-# 搜索相关的组件
-gem 'chinese_pinyin', '0.4.1'
-gem "rmmseg-cpp-huacnlee", "0.2.8"
-gem 'redis-search', '0.6.3'
 # Rails I18n
 gem "rails-i18n","0.1.8"
 # Redis 命名空间
@@ -82,6 +78,7 @@ end
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.8.1'
+  gem 'progress_bar'
 end
 
 group :test do

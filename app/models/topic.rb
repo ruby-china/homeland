@@ -38,9 +38,9 @@ class Topic
   counter :hits, :default => 0
 
   searchable do
-    text :title, :stored => true
-    text :body, :stored => true
-    text :replies, :stored => true do
+    text :title, :stored => true, :more_like_this => true
+    text :body, :stored => true, :more_like_this => true
+    text :replies, :stored => true, :more_like_this => true do
       replies.map { |reply| reply.body }
     end
     integer :node_id, :user_id

@@ -610,6 +610,7 @@
     </lst>
     -->
   </searchComponent>
+  <searchComponent name="mlt" class="org.apache.solr.handler.component.MoreLikeThisComponent" /> 
   <!-- A request handler utilizing the spellcheck component.  
   #############################################################################
   NOTE: This is purely as an example.  The whole purpose of the

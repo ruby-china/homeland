@@ -99,4 +99,16 @@ $(document).ready ->
       backdrop : true
       show : true
 
+  names = []
+  record = []
+  $('#replies span.name a').each (index) ->
+    $el = $(this)
+    if ($.inArray($el.text(),record) >= 0)
+      return
+    record.push($el.text())
+    names.push({'index':index,'login':$el.text()})
+  $("textarea").atWho
+    debug : false
+    data : names
+    tpl : "<li id='${index}' data-insert='${login}'>${login}</li>"
   return

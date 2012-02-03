@@ -46,8 +46,8 @@ class TopicsCell < BaseCell
   end
   def sidebar_for_more_like_this(args)
     @topics = args[:topic].more_like_this do
-      minimum_term_frequency 3
-      paginate :page => 1, :per_page => 3
+      minimum_term_frequency 5
+      paginate :page => 1, :per_page => 10
     end.results
     render
   end

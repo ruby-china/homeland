@@ -11,14 +11,16 @@
     min-width: 120px;
 }
 #at-view span#title {
+    display: none;
     font-size:13px;
-    color: gray;
+    color: #999;
+    border-bottom:1px solid #ddd;
     padding: 3px 5px;
     cursor: default;
 }
 
 #at-view .cur {
-    background: #3366FF;
+    background: #0064CD;
     color: white;
 }
 #at-view .cur small {

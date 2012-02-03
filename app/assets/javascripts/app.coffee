@@ -41,6 +41,12 @@ window.App =
             App.alert("抱歉，系统异常，提交失败。")
     false
 
+  # 绑定 @ 回复功能
+  at_replyable : (el, logins) ->
+    $(el).atWho
+      debug : false
+      data : logins
+
 $(document).ready ->
   $("abbr.timeago").timeago()
   $(".alert-message").alert()
@@ -48,6 +54,8 @@ $(document).ready ->
   $("a[rel=popover]").popover
     live: true
     html: true
+
+  # 用户头像 Popover
   $("a[rel=userpopover]").popover
     live: true
     html: true
@@ -82,10 +90,20 @@ $(document).ready ->
       return 'left' if isWithinBounds(elementLeft)
       return 'above' if isWithinBounds(elementAbove)
       return 'below'
+
   # 绑定评论框 Ctrl+Enter 提交事件
   $(".cell_comments_new textarea").bind "keydown","ctrl+return",(el) ->
     if $(el.target).val().trim().length > 0
       $(el.target).parent().parent().submit()
     return false
+  
+  # Choose 样式
   $("select").chosen()
 
+  # CommentAble @ 回复功能
+  commenter_logins = []
+  $(".cell_comments .comment .info .name a").each (idx) ->
+    name = $(this).text()
+    if $.inArray(name,commenter_logins) < 0
+      commenter_logins.push(name)
+  App.at_replyable(".cell_comments_new textarea", commenter_logins)

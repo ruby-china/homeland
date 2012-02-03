@@ -1,6 +1,4 @@
 # TopicsController 下所有页面的 JS 功能
-#= require jquery.at.js
-#= require jquery.caret.js
 window.Topics =
   # 往话题编辑器里面插入图片代码
   appendImageFromUpload : (srcs) ->
@@ -101,18 +99,10 @@ $(document).ready ->
       backdrop : true
       show : true
 
-  # @ 回复
-  names = []
-  record = []
-  $('#replies span.name a').each (index) ->
-    $el = $(this)
-    return if $.inArray($el.text(),record) >= 0
-    record.push($el.text())
-    names.push
-      'index' : index
-      'login' : $el.text()
-  $("textarea").atWho
-    debug : false
-    data : names
-    tpl : "<li id='${index}' data-insert='${login}'>${login}</li>"
-  return
+  logins = []
+  logins.push($("#topic_show .leader .name a").text())
+  $('#replies span.name a').each (idx) ->
+    name = $(this).text()
+    if $.inArray(name,logins) < 0
+      logins.push(name)
+  App.at_replyable("textarea", logins)

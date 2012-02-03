@@ -1,10 +1,17 @@
 <%= render 'base' %>
+<% content_for :scripts do %>
+<script type="text/javascript">
+  $(document).ready(function(){
+  })
+
+</script>
+<% end %>
 <div class="sidebar">
     <%= render_cell :topics, :sidebar_for_new_topic_node, { :action => params[:action], :node => @node } %>
 </div>
 
 <div class="content">
-  <div class="topics box">
+  <div id="topic_show" class="topics box">
     <div class="topic">
       <div class="pull-right avatar_large">
         <%= user_avatar_tag(@topic.user, :large, :link => false) %>

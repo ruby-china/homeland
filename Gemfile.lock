@@ -1,18 +1,18 @@
 GIT
-  remote: https://github.com/37signals/mail_view.git
+  remote: git://github.com/37signals/mail_view.git
   revision: a99c2fc242fbb271a739a0934c59d4d66d3cf9c7
   specs:
     mail_view (1.0.1)
       tilt
 
 GIT
-  remote: https://github.com/AgilionApps/quiet_assets.git
+  remote: git://github.com/AgilionApps/quiet_assets.git
   revision: b699ee6c8aac59dc2e1405e98aef82802e8b8098
   specs:
     quiet_assets (0.0.1)
 
 GIT
-  remote: https://github.com/ballantyne/omniauth-douban.git
+  remote: git://github.com/ballantyne/omniauth-douban.git
   revision: 7affc4a09216f1c82a271a691ade3ba990e20a24
   specs:
     omniauth-douban (1.0.0.rc2)
@@ -21,7 +21,7 @@ GIT
       omniauth-oauth (~> 1.0.0.rc2)
 
 GIT
-  remote: https://github.com/plataformatec/simple_form.git
+  remote: git://github.com/plataformatec/simple_form.git
   revision: da92c45953e907aed0fbb1e38477d845a7c3bc11
   specs:
     simple_form (2.0.0.rc)
@@ -29,7 +29,7 @@ GIT
       activemodel (~> 3.0)
 
 GIT
-  remote: https://github.com/xdite/bootstrap-rails.git
+  remote: git://github.com/xdite/bootstrap-rails.git
   revision: 7fe2d48ef0b01de7b16aa927465d83c768e3769e
   specs:
     bootstrap-rails (0.1.4)

@@ -34,7 +34,7 @@ gem "omniauth", "~> 1.0.1"
 gem 'omniauth-openid', "~> 1.0.1"
 gem "omniauth-github", "~> 1.0.0"
 gem "omniauth-twitter", "~> 0.0.7"
-gem "omniauth-douban", :git => "https://github.com/ballantyne/omniauth-douban.git"
+gem "omniauth-douban", :git => "git://github.com/ballantyne/omniauth-douban.git"
 
 # permission
 gem "cancan", "~> 1.6.7"
@@ -61,7 +61,7 @@ gem "resque_mailer", '2.0.2'
 
 # AWS Simple Email Server
 gem "aws-ses", "~> 0.4.3"
-gem 'mail_view', :git => 'https://github.com/37signals/mail_view.git'
+gem 'mail_view', :git => 'git://github.com/37signals/mail_view.git'
 
 # 用于组合小图片
 gem "sprite-factory", "1.4.1"
@@ -70,15 +70,15 @@ gem "sprite-factory", "1.4.1"
 gem "social-share-button", "~> 0.0.3"
 
 # 表单 last commit: 2011-12-03 
-gem 'simple_form', :git => "https://github.com/plataformatec/simple_form.git"
-gem 'bootstrap-rails', :require => 'bootstrap-rails', :git => 'https://github.com/xdite/bootstrap-rails.git'
+gem 'simple_form', :git => "git://github.com/plataformatec/simple_form.git"
+gem 'bootstrap-rails', :require => 'bootstrap-rails', :git => 'git://github.com/xdite/bootstrap-rails.git'
 
 # 全文搜索
 gem 'sunspot_rails',  "~> 1.3.0"
 gem 'sunspot_solr'
 
 # 禁用 assets 日志
-gem 'quiet_assets', :git => 'https://github.com/AgilionApps/quiet_assets.git'
+gem 'quiet_assets', :git => 'git://github.com/AgilionApps/quiet_assets.git'
 
 group :development, :test do
   gem 'capistrano', '2.9.0'

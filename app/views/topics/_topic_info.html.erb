@@ -1,11 +1,14 @@
 <div class="infos">
   <h1><%= truncate(topic.title, :length => 100) %></h1>
   <div class="info leader">
-    <%= render_topic_created_at(topic) %> <%= t("common.by") %> <%= user_name_tag(topic.user) %>
+    <%= render_topic_created_at(topic) %> <%= t("common.by") %> 
+    <span class="name"><%= user_name_tag(topic.user) %></span>
     <%= t("common.at") %> <%= render_node_name(topic.node) %> <%= t("menu.nodes")%> <%= t("common.create_item")%>
   </div>
   <div class="info time">
-    <%= t("common.last_by")%> <%= user_name_tag(topic.last_reply_user) %> <%= raw t("common.reply_at", :time => render_topic_last_be_replied_time(topic)) %>
-    , <%= topic.hits %><%= t("common.read_times")%>
+    <% if not topic.last_reply_user_id.blank? %>
+      <%= t("common.last_by")%> <%= user_name_tag(topic.last_reply_user) %> <%= raw t("common.reply_at", :time => render_topic_last_be_replied_time(topic)) %> ,
+    <% end %>
+    <%= topic.hits %><%= t("common.read_times")%>
   </div>
 </div>

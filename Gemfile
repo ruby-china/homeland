@@ -21,6 +21,7 @@ gem "mongoid", "2.3.4"
 gem "bson_ext", "1.5.2"
 gem 'mongo-rails-instrumentation','0.2.4'
 gem 'mongoid_auto_increment_id', "0.3.1"
+gem 'mongoid_rails_migrations', '~> 0.0.14'
 
 # 用户系统
 gem 'devise', '1.5.2'

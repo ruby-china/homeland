@@ -1,4 +1,4 @@
-<% cache("topic:#{topic.id}:replies:#{topic.updated_at}") do %>
+<% cache("topic/#{topic.id}:#{topic.updated_at.to_i}/replies", :expires_in => 2.weeks) do %>
   <% if replies.blank? %>
     <div class="no_result">
       <%= t("topics.no_replies") %>

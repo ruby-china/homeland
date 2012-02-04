@@ -40,6 +40,7 @@ describe Reply do
       topic = Factory :topic, :updated_at => 1.days.ago
       old_updated_at = topic.updated_at
       reply = Factory :reply, :topic => topic
+      topic.updated_at.should_not == old_updated_at
       reply.body = "foobar"
       reply.save
       topic.updated_at.should_not == old_updated_at

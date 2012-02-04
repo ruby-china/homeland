@@ -3,6 +3,7 @@ class Node
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::BaseModel
+  cache
 
   field :name
   field :summary

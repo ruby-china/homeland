@@ -3,6 +3,7 @@ class Section
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::BaseModel
+  cache
 
   field :name
   field :sort, :type => Integer, :default => 0

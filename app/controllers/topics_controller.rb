@@ -8,7 +8,7 @@ class TopicsController < ApplicationController
   before_filter :init_base_breadcrumb
 
   def index
-    @topics = Topic.last_actived.limit(15).includes(:node,:user, :last_reply_user)
+    @topics = Topic.last_actived.limit(15).includes(:user)
     set_seo_meta("","#{Setting.app_name}#{t("menu.topics")}")
     drop_breadcrumb(t("topics.hot_topic"))
     #render :stream => true
@@ -22,7 +22,7 @@ class TopicsController < ApplicationController
 
   def node
     @node = Node.find(params[:id])
-    @topics = @node.topics.last_actived.paginate(:page => params[:page],:per_page => 50)
+    @topics = @node.topics.last_actived.includes(:user).paginate(:page => params[:page],:per_page => 50)
     set_seo_meta("#{@node.name} &raquo; #{t("menu.topics")}","#{Setting.app_name}#{t("menu.topics")}#{@node.name}",@node.summary)
     drop_breadcrumb("#{@node.name}")
     render :action => "index" #, :stream => true
@@ -37,7 +37,7 @@ class TopicsController < ApplicationController
 
   def recent
     # TODO: 需要 includes :node,:user, :last_reply_user,但目前用了 paginate 似乎会使得 includes 没有效果
-    @topics = Topic.recent.includes(:node,:user, :last_reply_user).paginate(:page => params[:page], :per_page => 50)
+    @topics = Topic.recent.includes(:user).paginate(:page => params[:page], :per_page => 50)
     drop_breadcrumb(t("topics.topic_list"))
     render :action => "index" #, :stream => true
   end
@@ -55,7 +55,7 @@ class TopicsController < ApplicationController
     @topic = Topic.includes(:user, :node).find(params[:id])
     @topic.hits.incr(1)
     @node = @topic.node
-    @replies = @topic.replies.asc(:_id).all.includes(:user).cache.reject { |r| r.user.blank? }
+    @replies = @topic.replies.asc(:_id).all.includes(:user).reject { |r| r.user.blank? }
     if current_user
       current_user.read_topic(@topic)
       current_user.notifications.where(:reply_id.in => @replies.map(&:id), :read => false).update_all(:read => true)

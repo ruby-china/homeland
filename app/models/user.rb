@@ -4,8 +4,9 @@ class User
   include Mongoid::Timestamps
   include Mongoid::BaseModel
   include Redis::Objects
-  extend OmniauthCallbacks   
-
+  extend OmniauthCallbacks
+  cache
+  
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
          

@@ -1,10 +1,12 @@
 # coding: utf-8  
 require "digest/md5"
 module UsersHelper
+  # 生成用户 login 的链接，user 参数可接受 user 对象或者 字符串的 login 
   def user_name_tag(user,options = {})
     location = options[:location] || false
     return "匿名" if user.blank?
-    result = link_to(user.login, user_path(user.login))
+    login = (user.class == "".class) ? user : user.login
+    result = link_to(login, user_path(login))
     return result
   end
 

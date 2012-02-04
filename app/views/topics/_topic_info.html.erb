@@ -3,7 +3,7 @@
   <div class="info leader">
     <%= render_topic_created_at(topic) %> <%= t("common.by") %> 
     <span class="name"><%= user_name_tag(topic.user) %></span>
-    <%= t("common.at") %> <%= render_node_name(topic.node) %> <%= t("menu.nodes")%> <%= t("common.create_item")%>
+    <%= t("common.at") %> <%= render_node_name(topic.node_name, topic.node_id) %> <%= t("menu.nodes")%> <%= t("common.create_item")%>
   </div>
   <div class="info time">
     <% if not topic.last_reply_user_id.blank? %>

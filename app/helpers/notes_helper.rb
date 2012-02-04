@@ -3,7 +3,7 @@ module NotesHelper
     node.topics_count
   end
   
-  def render_node_name(node)
-    link_to(node.name, node_topics_path(node))
+  def render_node_name(name, id)
+    link_to(name, node_topics_path(id))
   end
 end

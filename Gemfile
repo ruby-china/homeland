@@ -17,10 +17,10 @@ gem 'carrierwave-mongoid', '0.1.2', :require => 'carrierwave/mongoid'
 gem 'mini_magick','3.3'
 
 # Mongoid 辅助插件
-gem "mongoid", "2.3.4"
+gem "mongoid", "2.4.3"
 gem "bson_ext", "1.5.2"
 gem 'mongo-rails-instrumentation','0.2.4'
-gem 'mongoid_auto_increment_id', "0.3.1"
+gem 'mongoid_auto_increment_id', "0.4.0"
 gem 'mongoid_rails_migrations', '~> 0.0.14'
 
 # 用户系统

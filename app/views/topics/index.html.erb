@@ -35,13 +35,13 @@
               </div>
               <div class="info leader">
                 <%= t("common.by") %> <%= user_name_tag(topic.user) %>
-                <%= t("common.at") %> <%= render_node_name(topic.node) %> <%= t("common.create_item")%>
+                <%= t("common.at") %> <%= render_node_name(topic.node_name,topic.node_id) %> <%= t("common.create_item")%>
               </div>
               <div class="info time">
-                <% if topic.last_reply_user.blank? %>
+                <% if topic.last_reply_user_login.blank? %>
                   <%= raw t("common.created_at", :time => timeago(topic.created_at))%>
                 <% else %>
-                  <%= t("common.last_by")%> <%= user_name_tag(topic.last_reply_user) %> <%= raw t("common.reply_at", :time => timeago(topic.replied_at))%>
+                  <%= t("common.last_by")%> <%= user_name_tag(topic.last_reply_user_login) %> <%= raw t("common.reply_at", :time => timeago(topic.replied_at))%>
 
                 <% end %>
               </div>

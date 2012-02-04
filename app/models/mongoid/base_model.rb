@@ -3,7 +3,7 @@
 module Mongoid
   module BaseModel
     extend ActiveSupport::Concern
-
+    
     included do
       scope :recent, desc(:_id)
       scope :exclude_ids, Proc.new { |ids| where(:_id.nin => ids.map(&:to_i)) }

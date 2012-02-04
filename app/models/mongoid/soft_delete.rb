@@ -11,15 +11,13 @@ module Mongoid
       alias_method :destroy!, :destroy
     end
   
-    module InstanceMethods
-      def destroy
-        if persisted?
-          self.update_attribute(:deleted_at,Time.now.utc)
-        end
-
-        @destroyed = true
-        freeze
+    def destroy
+      if persisted?
+        self.update_attribute(:deleted_at,Time.now.utc)
       end
+
+      @destroyed = true
+      freeze
     end
   end
 end

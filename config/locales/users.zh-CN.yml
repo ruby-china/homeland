@@ -19,7 +19,7 @@
     dont_like_it: "不喜欢?"
     bind_another_account: "绑定其他帐号用于登陆"
     register_user: "注册新用户"
-    suggest_using_twitter_id: "建议用 Twitter ID,以便 @回复 的时候能够关联到你的 Twitter。"
+    suggest_using_twitter_id: "谨慎填写，以后不可修改，建议用 Twitter ID。"
     already_have_account: "已经有帐号了？"
     forget_password: "忘记了密码?"
     not_recieve_confirm_mail: "未收到确认邮件?"

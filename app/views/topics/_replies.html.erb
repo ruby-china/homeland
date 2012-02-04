@@ -4,9 +4,7 @@
   </div>
 <% else %>
 <div id="replies" class="box">
-  <%= render :partial => "topics/translation/topic_reply_statics", :locals => { :topic => topic }%>
-  <% replies.each_with_index do |reply,i| %>
-    <%= render :partial => "replies/reply", :locals => {:topic => topic, :item => reply, :i => i} %>
-  <% end %>
+  <%= render "topics/translation/topic_reply_statics", :topic => topic %>
+  <%= render :partial => "replies/reply", :collection => replies %>
 </div>
 <% end %>

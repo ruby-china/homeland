@@ -1,21 +1,21 @@
-<div class="reply" id="reply<%= i + 1 %>">
-  <div class="pull-left face"><%= user_avatar_tag(item.user, :normal) %></div>
+<div class="reply" id="reply<%= reply_counter + 1 %>">
+  <div class="pull-left face"><%= user_avatar_tag(reply.user, :normal) %></div>
   <div class="infos">
     <div class="info">
-      <span class="name"><%= user_name_tag(item.user) %></span>
+      <span class="name"><%= user_name_tag(reply.user) %></span>
       <span class="time">
-        <%= i + 1 %><%= t("common.floor")%>, <%= raw t("common.reply_at", :time => timeago(item.created_at)) %>
-        <% if owner?(item) %>
-          <%= link_to("", edit_topic_reply_path(@topic,item), :class => "icon small_edit", :title => "修改回帖")%>
+        <%= reply_counter + 1 %><%= t("common.floor")%>, <%= raw t("common.reply_at", :time => timeago(reply.created_at)) %>
+        <% if owner?(reply) %>
+          <%= link_to("", edit_topic_reply_path(@topic,reply), :class => "icon small_edit", :title => "修改回帖")%>
         <% end %>
         <%= link_to("", "#",
-            :onclick => "return Topics.reply(#{i+1},'#{item.user.login}' );", 
+            :onclick => "return Topics.reply(#{reply_counter+1},'#{reply.user.login}' );", 
             :title => t("topics.reply_this_floor"), :class => "icon small_reply" )
         %>
       </span>
     </div>
     <div class="body">
-      <%= format_topic_body(item.body, :mentioned_user_logins => item.mentioned_user_logins) %>
+      <%= format_topic_body(reply.body, :mentioned_user_logins => reply.mentioned_user_logins) %>
     </div>
   </div>
 </div>

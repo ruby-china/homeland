@@ -1,0 +1,34 @@
+<div class="topic topic_line">
+  <div class="pull-left avatar">
+    <%= user_avatar_tag(topic.user,:normal) %>
+  </div>
+  <div class="right_info">
+    <div class="pull-right replies">
+      <% if topic.replies_count > 0 %>
+        <% read_state = current_user.try(:topic_read?,topic) %>
+        <%= link_to(topic.replies_count,topic_path(topic)+"#reply#{topic.replies_count}",
+          :rel => "twipsy",
+          :title => "#{topic_use_readed_text(read_state) if current_user}",
+          :class => "count state_#{read_state || false}"
+        )%>
+      <% end %>
+    </div>
+    <div class="infos">
+      <div class="title">
+          <%= link_to(truncate(topic.title, :length => 100), topic_path(topic), :title => topic.title) %>
+      </div>
+      <div class="info leader">
+        <%= t("common.by") %> <%= user_name_tag(topic.user) %>
+        <%= t("common.at") %> <%= render_node_name(topic.node_name,topic.node_id) %> <%= t("common.create_item")%>
+      </div>
+      <div class="info time">
+        <% if topic.last_reply_user_login.blank? %>
+          <%= raw t("common.created_at", :time => timeago(topic.created_at))%>
+        <% else %>
+          <%= t("common.last_by")%> <%= user_name_tag(topic.last_reply_user_login) %> <%= raw t("common.reply_at", :time => timeago(topic.replied_at))%>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -25,7 +25,6 @@ class Post
   index :tags
   index :user_id
   index :state
-  index [:tags, :state]
   
   counter :hits, :default => 0
   

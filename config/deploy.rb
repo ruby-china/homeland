@@ -64,7 +64,11 @@ task :mongoid_create_indexes, :roles => :web do
   run "cd #{deploy_to}/current/; bundle exec rake db:mongoid:create_indexes"
 end
 
-after "deploy:finalize_update","deploy:symlink", :init_shared_path, :link_shared_files, :install_gems, :compile_assets #, :mongoid_create_indexes
+task :mongoid_migrate_database, :roles => :web do
+  run "cd #{deploy_to}/current/; bundle exec rake db:migrate"
+end
+
+after "deploy:finalize_update","deploy:symlink", :init_shared_path, :link_shared_files, :install_gems, :compile_assets, :mongoid_create_indexes, :mongoid_migrate_database
 
 
 set :default_environment, {

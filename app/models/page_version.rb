@@ -11,5 +11,5 @@ class PageVersion
   field :title
   
   index :page_id
-  index [:page_id, :version]
+  index [[:page_id, Mongo::ASCENDING], [:version,Mongo::ASCENDING]]
 end

@@ -16,6 +16,7 @@ This is source code of [Ruby China Group](http://ruby-china.org)
   ./script/resque start
   bundle exec rake sunspot:solr:start
   easy_install pygments # 或者 pip install pygments
+  rake db:migrate
   ```
 
 ## Test

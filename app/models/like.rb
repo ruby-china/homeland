@@ -10,7 +10,7 @@ class Like
   belongs_to :user
   
   index :user_id
-  index [:user_id,:likeable_type, :likeable_id]
+  index [[:user_id, Mongo::ASCENDING],[:likeable_type, Mongo::ASCENDING], [:likeable_id, Mongo::ASCENDING]]
   
   scope :topics, where(:likeable_type => 'Topic')
   

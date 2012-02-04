@@ -30,6 +30,12 @@ class Reply
   def update_parent_topic
     topic.update_last_reply(self)
   end
+  
+  # 更新的时候也更新话题的 updated_at 以便于清理缓存之类的东西
+  after_update :update_parent_topic_updated_at
+  def update_parent_topic_updated_at
+    topic.update_attribute(:updated_at, Time.now)
+  end
 
   before_save :extract_mentioned_users
   def extract_mentioned_users

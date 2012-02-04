@@ -15,6 +15,7 @@
       </span>
     </div>
     <div class="body">
+      <%#= reply.body %>
       <%= format_topic_body(reply.body, :mentioned_user_logins => reply.mentioned_user_logins) %>
     </div>
   </div>

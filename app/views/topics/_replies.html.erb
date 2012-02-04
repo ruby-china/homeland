@@ -5,6 +5,8 @@
 <% else %>
 <div id="replies" class="box">
   <%= render "topics/translation/topic_reply_statics", :topic => topic %>
-  <%= render :partial => "replies/reply", :collection => replies %>
+  <% cache("topic:#{topic.id}:replies:#{topic.updated_at}") do %>
+    <%= render :partial => "replies/reply", :collection => replies %>
+  <% end %>
 </div>
 <% end %>

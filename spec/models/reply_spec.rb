@@ -35,5 +35,14 @@ describe Reply do
         Factory :reply, :mentioned_user_ids => [user.id]
       end.should change(user.notifications.unread, :count)
     end
+    
+    it "should update Topic updated_at on Reply updated" do
+      topic = Factory :topic, :updated_at => 1.days.ago
+      old_updated_at = topic.updated_at
+      reply = Factory :reply, :topic => topic
+      reply.body = "foobar"
+      reply.save
+      topic.updated_at.should_not == old_updated_at
+    end
   end
 end

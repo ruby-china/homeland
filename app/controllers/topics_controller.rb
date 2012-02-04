@@ -58,6 +58,7 @@ class TopicsController < ApplicationController
     @replies = @topic.replies.asc(:_id).all.includes(:user).reject { |r| r.user.blank? }
     if current_user
       current_user.read_topic(@topic)
+      # TODO: 此处导致每次查看帖子都会执行 update 需要改进
       current_user.notifications.where(:reply_id.in => @replies.map(&:id), :read => false).update_all(:read => true)
     end
     set_seo_meta("#{@topic.title} &raquo; #{t("menu.topics")}")

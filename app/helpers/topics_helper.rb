@@ -62,6 +62,9 @@ module TopicsHelper
 
       # *text* => <em>
       source.gsub!(/\*(.+?)\*/, '<em>\1</em>')
+      
+      # ~text~ => <em>
+      source.gsub!(/~~(.+?)~~/, '<del>\1</del>')
 
       # _text_ => <u>
       # source.gsub!(/[^|\s]_(.+?)_[$|\s]/, '<u>\1</u>')
@@ -71,6 +74,7 @@ module TopicsHelper
         code = $1
         code.gsub!(/<\/?strong>/, "**")
         code.gsub!(/<\/?em>/, "*")
+        code.gsub!(/<\/?del>/, "~~")
         # code.gsub!(/<\/?u>/, "_")
         "<code>#{code}</code>"
       end

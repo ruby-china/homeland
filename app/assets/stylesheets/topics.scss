@@ -42,7 +42,13 @@
 }
 
 
-#main .topics .topic h1 { font-size:22px; color:#333; margin-top:6px; text-align: left; line-height:100%;margin-bottom:8px;}
+#topic_show {
+  h1 { font-size:20px; color:#333; margin-top:6px; text-align: left; line-height:100%;margin-bottom:8px;}
+  .infos { 
+    border-bottom:1px solid #ddd;
+    padding-bottom:6px; margin-bottom:8px;
+   }
+}
 
 .more { padding:8px; padding-bottom:0; font-size:14px; text-align:right; }
 
@@ -94,7 +100,7 @@
 #replies .reply { border-top:1px solid #DDD; padding:8px 10px; margin:0 -10px;}
 #replies .reply.light { background:#F7F2FC;}
 #replies .reply .face { padding-right:8px; width:48px; margin-left:0; }
-#replies .reply .infos { padding-left:58px;}
+#replies .reply .infos { padding-left:58px; }
 #replies .reply .info { margin-top:4px; color:#999;height:20px;}
 #replies .reply .info a:link,
 #replies .reply .info a:visited { color:#999; text-decoration: underline;}

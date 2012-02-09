@@ -1,4 +1,4 @@
-# coding: utf-8  
+# coding: utf-8
 module TopicsHelper
   def format_topic_body(text, options = {})
 
@@ -8,32 +8,32 @@ module TopicsHelper
     options[:class] ||= ''
 
     text = h(text)
-    
+
     text = preformat_fenced_code_block(text)
 
     ## fenced code block with ```
     text = parse_fenced_code_block(text)
-    
+
     # simple_format must be front of format_topic_body, because it will remove html attrs, etc .. onclick
     text = simple_format(text)
-    
+
     # fix code after simple_format
     text = reformat_code_block(text) do |code|
       code.gsub!(/<br\s?\/?>/, "")  # remove <br>
       code.gsub!(/<\/?p>/, "")      # remove <p>
     end
-    
+
     # parse bbcode-style image [img]url[/img]
     text = parse_bbcode_image(text, options[:title]) if options[:allow_image]
-    
+
     text = parse_inline_styles(text)
-    
+
     # Auto Link
     text = auto_link(text,:all, :target => '_blank', :rel => "nofollow")
-    
+
     # mention floor by #
     text = link_mention_floor(text)
-    
+
     # mention user by @
     text = link_mention_user(text, options[:mentioned_user_logins])
 
@@ -62,7 +62,7 @@ module TopicsHelper
 
       # *text* => <em>
       source.gsub!(/\*(.+?)\*/, '<em>\1</em>')
-      
+
       # ~text~ => <em>
       source.gsub!(/~~(.+?)~~/, '<del>\1</del>')
 
@@ -86,7 +86,7 @@ module TopicsHelper
   end
 
   # add new lines before and after the fenced code block
-  # to avoid <br> in front of and ends 
+  # to avoid <br> in front of and ends
   def preformat_fenced_code_block(text)
     text.gsub(/(```.+?```)/im, "\n\\1\n")
   end
@@ -95,15 +95,15 @@ module TopicsHelper
     source = String.new(text.to_s)
     source.gsub!(/(^```.+?```)/im) do
       code = CGI::unescapeHTML($1)
-    
+
       #code = $1
       #code = code.sub!("\r\n", "")
 
       # let the markdown compiler draw the <pre><code>
-      # (with syntax highlighting) 
+      # (with syntax highlighting)
       MarkdownConverter.convert(code)
     end
-    
+
     # remove last break line, if not, simple_format will add a <br>
     source.gsub!(/<\/pre>[\s]+/im,"</pre>")
 
@@ -160,12 +160,12 @@ module TopicsHelper
     source = String.new(text.to_s)
     source.gsub!(/@(#{mentioned_user_logins.join('|')})/i) do |mention_token|
       user_name = $1
-      link_to(mention_token, user_path(user_name), 
+      link_to(mention_token, user_path(user_name),
               :class => "at_user", :title => mention_token)
     end
     source
   end
-  
+
   def topic_use_readed_text(state)
     case state
     when true
@@ -179,19 +179,19 @@ module TopicsHelper
     return t("topics.topic_was_deleted") if topic.blank?
     link_to(topic.title, topic_path(topic), :title => topic.title)
   end
-  
+
   def render_topic_last_reply_time(topic)
     l((topic.replied_at || topic.created_at), :format => :short)
   end
-  
+
   def render_topic_count(topic)
     topic.replies_count
   end
-  
+
   def render_topic_created_at(topic)
     timeago(topic.created_at)
   end
-  
+
   def render_topic_last_be_replied_time(topic)
     timeago(topic.replied_at)
   end

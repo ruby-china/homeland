@@ -91,6 +91,8 @@ group :development, :test do
   gem 'factory_girl_rails'
 	gem 'thin'
   gem "simplecov", :require => false
+  gem "rspec-cells"
+  gem "capybara"
 end
 
 group :production do

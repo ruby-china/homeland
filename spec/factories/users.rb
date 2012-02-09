@@ -9,4 +9,10 @@ FactoryGirl.define do
   factory :admin, :parent => :user do
     email Setting.admin_emails.first
   end
+
+  factory :wiki_editor, :parent => :user
+
+  factory :non_wiki_editor, :parent => :user do
+    verified false
+  end
 end

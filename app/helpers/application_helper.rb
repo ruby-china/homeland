@@ -30,12 +30,12 @@ module ApplicationHelper
 
   def admin?(user = nil)
     user ||= current_user
-    !user.nil? && user.admin?
+    user.try(:admin?)
   end
 
   def wiki_editor?(user = nil)
     user ||= current_user
-    !user.nil? && user.wiki_editor?
+    user.try(:wiki_editor?)
   end
 
   def owner?(item)

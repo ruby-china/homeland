@@ -47,33 +47,33 @@ describe User do
       user2.location = "Hongkong"
       User.locations.count == 2
     end
+  end
 
-    describe "admin?" do
-      let (:admin) { Factory :admin }
-      it "should know you are an admin" do
-        admin.should be_admin
-      end
-
-      it "should know normal user is not admin" do
-        user.should_not be_admin
-      end
+  describe "admin?" do
+    let (:admin) { Factory :admin }
+    it "should know you are an admin" do
+      admin.should be_admin
     end
 
-    describe "wiki_editor?" do
-      let (:admin) { Factory :admin }
-      it "should know admin is wiki editor" do
-        admin.should be_wiki_editor
-      end
+    it "should know normal user is not admin" do
+      user.should_not be_admin
+    end
+  end
 
-      it "should know verified user is wiki editor" do
-        user.verified = true
-        user.should be_wiki_editor
-      end
+  describe "wiki_editor?" do
+    let (:admin) { Factory :admin }
+    it "should know admin is wiki editor" do
+      admin.should be_wiki_editor
+    end
 
-      it "should know not verified user is not a wiki editor" do
-        user.verified = false
-        user.should_not be_wiki_editor
-      end
+    it "should know verified user is wiki editor" do
+      user.verified = true
+      user.should be_wiki_editor
+    end
+
+    it "should know not verified user is not a wiki editor" do
+      user.verified = false
+      user.should_not be_wiki_editor
     end
   end
 end

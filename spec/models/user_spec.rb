@@ -1,4 +1,5 @@
 require 'spec_helper'
+require "cancan/matchers"
 
 describe User do
   let(:topic) { Factory :topic }
@@ -74,6 +75,53 @@ describe User do
     it "should know not verified user is not a wiki editor" do
       user.verified = false
       user.should_not be_wiki_editor
+    end
+  end
+
+  describe "roles" do
+    subject { user }
+
+    context "when is a new user" do
+      let(:user) { Factory :user }
+      it { should have_role(:member) }
+    end
+
+    context "when is admin" do
+      let(:user) { Factory :admin }
+      it { should have_role(:admin) }
+    end
+
+    context "when is wiki editor" do
+      let(:user) { Factory :wiki_editor }
+      it { should have_role(:wiki_editor) }
+    end
+
+    context "when ask for some random role" do
+      let(:user) { Factory :user }
+      it { should_not have_role(:savior_of_the_broken) }
+    end
+  end
+
+  describe "abilities" do
+    subject { ability }
+    let(:ability) { Ability.new(user) }
+
+    context "when is a new user" do
+      let(:user) { Factory :user }
+      it { should be_able_to(:create, Topic) }
+      it { should be_able_to(:create, Reply) }
+      it { should be_able_to(:create, Note) }
+      it { should be_able_to(:create, Page) }
+      it { should be_able_to(:create, Photo) }
+      it { should_not be_able_to(:destroy, Page) }
+      it { should_not be_able_to(:destroy, User) }
+      it { should_not be_able_to(:create, Node) }
+    end
+
+    context "when is an admin" do
+      let(:user) { Factory :admin }
+      it { should be_able_to(:destroy, User) }
+      it { should be_able_to(:create, Node) }
     end
   end
 end

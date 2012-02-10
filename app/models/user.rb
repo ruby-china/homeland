@@ -118,16 +118,10 @@ REDUCE
 
   def has_role?(role)
     case role
-    when :admin
-      return true if Setting.admin_emails.include?(self.email)
-      return false
-    when :wiki_editor
-      return true if self.admin? or self.verified == true
-      return false
-    when :member
-      return true
-    else
-      false
+      when :admin then admin?
+      when :wiki_editor then wiki_editor?
+      when :member then true
+      else false
     end
   end
 

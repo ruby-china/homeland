@@ -8,7 +8,7 @@ class CommentsCell < BaseCell
                               :commentable_id => @commentable.id)
     @comment = Comment.new(:commentable_type => @commentable.class.name,
                            :commentable_id => @commentable.id)
+
     render
   end
-
 end

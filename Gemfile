@@ -71,7 +71,7 @@ gem "sprite-factory", "1.4.1"
 # 分享功能
 gem "social-share-button", "~> 0.0.3"
 
-# 表单 last commit: 2011-12-03 
+# 表单 last commit: 2011-12-03
 gem 'simple_form', :git => "git://github.com/plataformatec/simple_form.git"
 gem 'bootstrap-rails', :require => 'bootstrap-rails', :git => 'git://github.com/xdite/bootstrap-rails.git'
 
@@ -90,6 +90,9 @@ group :development, :test do
   gem 'rspec-rails', '~> 2.8.1'
   gem 'factory_girl_rails'
 	gem 'thin'
+  gem "simplecov", :require => false
+  gem "rspec-cells"
+  gem "capybara"
 end
 
 group :production do

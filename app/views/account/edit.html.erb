@@ -32,10 +32,16 @@
     <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :enctype =>  "multipart/form-data" }) do |f| %>
       <fieldset>
         <legend><%= t("users.personal_information")%></legend>
-        <% if params[:by].blank? %>
-            <%= render "shared/error_messages", :target => resource %> 
-        <% end %>
-        <div class="clearfix">
+          <% if params[:by].blank? %>
+              <%= render "shared/error_messages", :target => resource %> 
+          <% end %>
+          <div class="clearfix">
+            <%= f.label :name %>
+            <div class="input">
+              <%= f.text_field :name %>
+            </div>
+          </div>
+          <div class="clearfix">
             <%= f.label :email %>
             <div class="input">
               <%= f.text_field :email, :class => "span6" %>

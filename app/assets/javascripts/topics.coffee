@@ -99,10 +99,19 @@ $(document).ready ->
       backdrop : true
       show : true
 
+  # @ Reply
   logins = []
-  logins.push($("#topic_show .leader .name a").text())
+  login_exists = []
+  author_val =
+    login : $("#topic_show .leader .name a").text(), 
+    name : $("#topic_show .leader .name a").data('name')
+  logins.push(author_val)
+  login_exists.push(author_val.login)
   $('#replies span.name a').each (idx) ->
-    name = $(this).text()
-    if $.inArray(name,logins) < 0
-      logins.push(name)
+    val = 
+      login : $(this).text()
+      name : $(this).data('name')
+    if $.inArray(val.login,login_exists) < 0
+      login_exists.push(val.login)
+      logins.push(val)
   App.at_replyable("textarea", logins)

@@ -3,11 +3,19 @@ require "digest/md5"
 module UsersHelper
   # 生成用户 login 的链接，user 参数可接受 user 对象或者 字符串的 login
   def user_name_tag(user,options = {})
-    location = options[:location] || false
     return "匿名" if user.blank?
-    login = (user.class == "".class) ? user : user.login
+    
+    if (user.class == "".class)
+      login = user
+      name = login
+    else
+      login = user.login
+      name = user.name
+    end
+    
+    name ||= login
 
-    link_to(login, user_path(login))
+    link_to(login, user_path(login), 'data-name' => name)
   end
 
   def user_avatar_width_for_size(size)

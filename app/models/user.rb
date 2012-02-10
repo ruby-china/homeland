@@ -11,6 +11,7 @@ class User
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   field :login
+  field :name
   field :email
   field :location
   field :bio

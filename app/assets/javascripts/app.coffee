@@ -47,9 +47,11 @@ window.App =
 
   # 绑定 @ 回复功能
   at_replyable : (el, logins) ->
+    console.log logins
     $(el).atWho
       debug : false
       data : logins
+      tpl : "<li data-insert='${login}'>${login} <small>${name}</small></li>"
 
 $(document).ready ->
   $("abbr.timeago").timeago()
@@ -105,9 +107,13 @@ $(document).ready ->
   $("select").chosen()
 
   # CommentAble @ 回复功能
-  commenter_logins = []
+  commenters = []
+  commenter_exists = []
   $(".cell_comments .comment .info .name a").each (idx) ->
-    name = $(this).text()
-    if $.inArray(name,commenter_logins) < 0
-      commenter_logins.push(name)
-  App.at_replyable(".cell_comments_new textarea", commenter_logins)
+    val = 
+      login : $(this).text()
+      name : $(this).data('name')
+    if $.inArray(val.login,commenter_exists) < 0
+       commenters.push(val) 
+       commenter_exists.push(val.login)
+  App.at_replyable(".cell_comments_new textarea", commenters)

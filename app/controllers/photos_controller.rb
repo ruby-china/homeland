@@ -3,25 +3,9 @@ class PhotosController < ApplicationController
 
   load_and_authorize_resource
 
-  def index
-    @photos = Photo.all
-  end
-
-  def show
-    @photo = Photo.find(params[:id])
-  end
-
   def tiny_new
     @photo = Photo.new
     render :layout => "window"
-  end
-
-  def new
-    @photo = Photo.new
-  end
-
-  def edit
-    @photo = current_user.photos.find(params[:id])
   end
 
   def create
@@ -65,22 +49,5 @@ class PhotosController < ApplicationController
         return render :action => "new"
       end
     end
-  end
-
-  def update
-    @photo = current_user.photos.find(params[:id])
-
-    if @photo.update_attributes(params[:photo])
-      redirect_to(@photo, :notice => 'Photo was successfully updated.')
-    else
-      render :action => "edit"
-    end
-  end
-
-  def destroy
-    @photo = current_user.photos.find(params[:id])
-    @photo.destroy
-
-    redirect_to(photos_url)
   end
 end

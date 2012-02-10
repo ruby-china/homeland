@@ -5,7 +5,7 @@
       <span class="name"><%= user_name_tag(reply.user) %></span>
       <span class="time">
         <%= reply_counter + 1 %><%= t("common.floor")%>, <%= raw t("common.reply_at", :time => timeago(reply.created_at)) %>
-        <% if owner?(reply) %>
+        <% if owner?(reply) or admin? %>
           <%= link_to("", edit_topic_reply_path(@topic,reply), :class => "icon small_edit", :title => "修改回帖")%>
         <% end %>
         <%= link_to("", "#",

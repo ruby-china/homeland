@@ -2,6 +2,8 @@
 module LikesHelper
   # 收藏功能
   def likeable_tag(likeable)
+    return "" if likeable.blank?
+    
     if current_user && likeable.liked_by_user?(current_user)
       title = "取消喜欢"
       state = "liked"

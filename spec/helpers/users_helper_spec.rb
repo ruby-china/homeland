@@ -1,4 +1,4 @@
-require "users_helper"
+require "spec_helper"
 
 describe UsersHelper do
   describe "user_avatar_width_for_size" do

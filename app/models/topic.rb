@@ -9,8 +9,6 @@ class Topic
   include Redis::Objects
   include Sunspot::Mongoid
   
-  
-
   field :title
   field :body
   field :last_reply_id, :type => Integer

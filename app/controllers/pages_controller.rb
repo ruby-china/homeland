@@ -2,15 +2,15 @@
 class PagesController < ApplicationController
 
   authorize_resource :page
-  
+
   before_filter :init_base_breadcrumb
   before_filter :set_menu_active
-  
+
   def index
     set_seo_meta("Wiki")
     drop_breadcrumb("索引")
   end
-  
+
   def recent
     @pages = Page.recent.paginate(:page => params[:page], :per_page => 30)
     set_seo_meta t("pages.wiki_index")
@@ -45,7 +45,7 @@ class PagesController < ApplicationController
 
   def edit
     @page = Page.find(params[:id])
-    
+
     authorize! :edit, @page
     set_seo_meta t("pages.edit_wiki_page")
     drop_breadcrumb t("common.edit")
@@ -67,22 +67,22 @@ class PagesController < ApplicationController
     @page = Page.find(params[:id])
     params[:page][:version_enable] = true
     params[:page][:user_id] = current_user.id
-    
+
     authorize! :update, @page
-    
+
     if @page.update_attributes(params[:page])
       redirect_to page_path(@page.slug), notice: t("common.update_success")
     else
       render action: "edit"
     end
   end
-  
+
   protected
-  
+
   def set_menu_active
     @current = @current = ['/wiki']
   end
-  
+
   def init_base_breadcrumb
     drop_breadcrumb("Wiki", pages_path)
   end

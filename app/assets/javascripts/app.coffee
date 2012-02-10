@@ -24,8 +24,10 @@ window.App =
           type : likeable_type
           id : likeable_id
         success : (re) ->
-          if re == "1"
-            $(el).data("state","liked").attr("class","icon small_liked").attr("title", "取消喜欢")
+          if parseInt(re) >= 0
+            $(el).data("state","liked").attr("title", "取消喜欢")
+            $('span',el).text("#{re}人喜欢")
+            $("i.icon",el).attr("class","icon small_liked")
           else
             App.alert("抱歉，系统异常，提交失败。")
     else
@@ -35,8 +37,10 @@ window.App =
         data : 
           type : likeable_type
         success : (re) ->
-          if re == "1"
-            $(el).data("state","").attr("class","icon small_like").attr("title", "取消喜欢")
+          if parseInt(re)  >= 0
+            $(el).data("state","").attr("title", "取消喜欢")
+            $('span',el).text("#{re}人喜欢")
+            $("i.icon",el).attr("class","icon small_like")
           else
             App.alert("抱歉，系统异常，提交失败。")
     false

@@ -36,7 +36,13 @@
        p { margin-bottom:10px; }
        img { max-width:690px;}
    }
-   .tools { text-align:right; height:16px; overflow:hidden;}
+   .tools { 
+     text-align:right; height:16px; overflow:hidden;
+     a.likeable { 
+       i { position:relative; margin-bottom:-1px; }
+       text-decoration: none;
+     }
+   }
    .topic_line {border-bottom:1px solid #DDD; padding:10px 0; margin:0 -10px; vertical-align:top; }
    tr.topic td.replies { text-align:right; width:50px; font-size:14px; color:green;font-weight:bold; }
 }

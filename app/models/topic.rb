@@ -5,10 +5,11 @@ class Topic
   include Mongoid::BaseModel
   include Mongoid::SoftDelete
   include Mongoid::CounterCache
+  include Mongoid::Likeable
   include Redis::Objects
   include Sunspot::Mongoid
   
-  include Likeable
+  
 
   field :title
   field :body

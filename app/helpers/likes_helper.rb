@@ -3,13 +3,17 @@ module LikesHelper
   # 收藏功能
   def likeable_tag(likeable)
     if current_user && likeable.liked_by_user?(current_user)
-      link_to("","#",:title => "取消喜欢", :rel => "twipsy",
-              'data-state' => 'liked','data-type' => likeable.class,'data-id' => likeable.id,
-              :class => "icon small_liked", :onclick => "return App.likeable(this);")
+      title = "取消喜欢"
+      state = "liked"
+      icon = content_tag("i", "", :class => "icon small_liked")
     else
-      link_to("","#",:title => "喜欢(可用于收藏此贴)", :rel => "twipsy",
-              'data-state' => '', 'data-type' => likeable.class, 'data-id' => likeable.id,
-              :class => "icon small_like", :onclick => "return App.likeable(this);")
+      title = "喜欢(可用于收藏此贴)"
+      state = ""
+      icon = content_tag("i", "", :class => "icon small_like")
     end
+    like_label = raw "#{icon} <span>#{likeable.likes_count}人喜欢</span>"
+    link_to(like_label,"#",:title => title, :rel => "twipsy",
+            'data-state' => state,'data-type' => likeable.class,'data-id' => likeable.id,
+            :class => 'likeable', :onclick => "return App.likeable(this);")
   end
 end

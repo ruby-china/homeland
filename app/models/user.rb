@@ -10,8 +10,6 @@ class User
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
-
-
   field :login
   field :email
   field :location
@@ -107,18 +105,14 @@ REDUCE
     "http://github.com/#{self.github}"
   end
 
-
-
   # 是否是管理员
   def admin?
-    return true if Setting.admin_emails.include?(self.email)
-    return false
+    Setting.admin_emails.include?(self.email)
   end
 
   # 是否有 Wiki 维护权限
   def wiki_editor?
-    return true if self.admin? or self.verified == true
-    return false
+    self.admin? or self.verified == true
   end
 
   def has_role?(role)
@@ -154,7 +148,6 @@ REDUCE
     :normal => 1,
     # 屏蔽
     :blocked => 2,
-
   }
 
   # 用邮件地址创建一个用户

@@ -7,6 +7,8 @@ class Topic
   include Mongoid::CounterCache
   include Redis::Objects
   include Sunspot::Mongoid
+  
+  include Likeable
 
   field :title
   field :body
@@ -33,7 +35,7 @@ class Topic
 
   attr_protected :user_id
   validates_presence_of :user_id, :title, :body, :node_id
-  
+
   index :node_id
   index :user_id
   index :replied_at
@@ -51,12 +53,12 @@ class Topic
     boolean :deleted_at
     time :replied_at
   end
-  
+
   # scopes
   scope :last_actived, desc("replied_at").desc("created_at")
   # 推荐的话题
   scope :suggest, where(:suggested_at.ne => nil).desc(:suggested_at)
-  
+
   before_save :store_cache_fields
   def store_cache_fields
     self.replied_at = Time.now
@@ -70,7 +72,7 @@ class Topic
   def pull_follower(user_id)
     self.follower_ids.delete(user_id)
   end
-  
+
   def update_last_reply(reply)
     self.replied_at = Time.now
     self.last_reply_id = reply.id

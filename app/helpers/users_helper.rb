@@ -1,63 +1,62 @@
-# coding: utf-8  
+# coding: utf-8
 require "digest/md5"
 module UsersHelper
-  # 生成用户 login 的链接，user 参数可接受 user 对象或者 字符串的 login 
+  # 生成用户 login 的链接，user 参数可接受 user 对象或者 字符串的 login
   def user_name_tag(user,options = {})
     location = options[:location] || false
     return "匿名" if user.blank?
     login = (user.class == "".class) ? user : user.login
-    result = link_to(login, user_path(login))
-    return result
+
+    link_to(login, user_path(login))
   end
 
-  def user_avatar_tag(user,size = :normal, opts = {})
-    link = opts[:link] || true
-    width = 48
+  def user_avatar_width_for_size(size)
     case size
-    when :normal
-      width = 48
-    when :small
-      width = 16
-    when :large
-      width = 64
-    else
-      width = size
+      when :normal then 48
+      when :small then 16
+      when :large then 64
+      else size
     end
-    
+  end
+
+  def user_avatar_tag(user, size = :normal, opts = {})
+    link = opts[:link] || true
+
+    width = user_avatar_width_for_size(size)
+
     hash = (user.blank? or user.email.blank?) ? Digest::MD5.hexdigest("") : Digest::MD5.hexdigest(user.email)
     return image_tag("http://www.gravatar.com/avatar/#{hash}.png?s=#{width}&d=identicon")  if user.blank?
-    
+
     img_src = "http://www.gravatar.com/avatar/#{hash}.png?s=#{width}&d=identicon"
     img = image_tag(img_src, :style => "width:#{width}px;height:#{width}px;")
-    html = ""
+
     if link
-      html = %(<a href="#{user_path(user.login)}" #{user_popover_info(user)} class="user_avatar">#{img}</a>)
+      raw %(<a href="#{user_path(user.login)}" #{user_popover_info(user)} class="user_avatar">#{img}</a>)
     else
-      html = img
+      raw img
     end
-    raw html
   end
-  
+
   def render_user_location(user)
-    return location_name_tag(user.location)
+    location_name_tag(user.location)
   end
-  
+
   def render_user_join_time(user)
     I18n.l(user.created_at.to_date, :format => :long)
   end
-  
+
   def render_user_tagline(user)
-    return user.tagline
+    user.tagline
   end
-  
+
   def render_user_github_url(user)
     link_to(user.github_url, user.github_url, :target => "_blank", :rel => "nofollow")
   end
-  
+
   def render_user_personal_website(user)
     link_to(user.website, user.website, :target => "_blank", :rel => "nofollow")
   end
-  
+
   def render_user_level_tag(user)
     if admin?(user)
       content_tag(:span, t("common.admin_user"), :class => "label warning")
@@ -67,9 +66,9 @@ module UsersHelper
       content_tag(:span,  t("common.limit_user"), :class => "label")
     end
   end
-  
+
   private
-  
+
   def user_popover_info(user)
     return "" if user.blank?
     return "" if user.location.blank?

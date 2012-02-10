@@ -12,21 +12,21 @@ describe User do
     before do
       Rails.cache.write("user:#{user.id}:topic_read:#{topic.id}", nil)
     end
-    
+
     it 'marks the topic as unread' do
       user.topic_read?(topic).should == false
       user.read_topic(topic)
       user.topic_read?(topic).should == true
       user2.topic_read?(topic).should == false
     end
-    
+
     it "marks the topic as unread when got new reply" do
       topic.replies << reply
       user.topic_read?(topic).should == false
       user.read_topic(topic)
       user.topic_read?(topic).should == true
     end
-    
+
     it "user can soft_delete" do
       user_for_delete1.soft_delete
       user_for_delete1.reload
@@ -46,6 +46,34 @@ describe User do
       user.location = "hangzhou"
       user2.location = "Hongkong"
       User.locations.count == 2
+    end
+
+    describe "admin?" do
+      let (:admin) { Factory :admin }
+      it "should know you are an admin" do
+        admin.should be_admin
+      end
+
+      it "should know normal user is not admin" do
+        user.should_not be_admin
+      end
+    end
+
+    describe "wiki_editor?" do
+      let (:admin) { Factory :admin }
+      it "should know admin is wiki editor" do
+        admin.should be_wiki_editor
+      end
+
+      it "should know verified user is wiki editor" do
+        user.verified = true
+        user.should be_wiki_editor
+      end
+
+      it "should know not verified user is not a wiki editor" do
+        user.verified = false
+        user.should_not be_wiki_editor
+      end
     end
   end
 end

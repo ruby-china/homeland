@@ -108,6 +108,9 @@ describe User do
 
     context "when is a new user" do
       let(:user) { Factory :user }
+      it { should be_able_to(:read, Topic) }
+      it { should be_able_to(:read, Page) }
+      it { should be_able_to(:read, Site) }
       it { should be_able_to(:create, Topic) }
       it { should be_able_to(:create, Reply) }
       it { should be_able_to(:create, Note) }

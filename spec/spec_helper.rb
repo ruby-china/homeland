@@ -1,5 +1,6 @@
 require 'simplecov'
 SimpleCov.start 'rails' do
+  add_filter "/cpanel/"
   add_group "cells", "app/cells"
   add_group "uploaders", "app/uploaders"
 end

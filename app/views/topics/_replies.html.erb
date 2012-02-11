@@ -12,12 +12,14 @@
 <% end %>
 <% content_for :scripts do %>
   <script type="text/javascript">
-    $(document).ready(function(){
-      <% if admin? %>
-        $("#replies .reply a.edit").css('display','inline-block');
-      <% else %>
-        $("#replies .reply a.edit[data-uid='<%= current_user.id %>']").css('display','inline-block');
-      <% end %>
-    })
+    <% if current_user %>
+      $(document).ready(function(){
+        <% if admin? %>
+          $("#replies .reply a.edit").css('display','inline-block');
+        <% else %>
+          $("#replies .reply a.edit[data-uid='<%= current_user.id %>']").css('display','inline-block');
+        <% end %>
+      })
+    <% end %>
   </script>
 <% end %>

@@ -101,20 +101,28 @@
   }
 }
 
-#replies {}
-#replies .total { padding-bottom:6px; color:#999; }
-#replies .reply { border-top:1px solid #DDD; padding:8px 10px; margin:0 -10px;}
-#replies .reply.light { background:#F7F2FC;}
-#replies .reply .face { padding-right:8px; width:48px; margin-left:0; }
-#replies .reply .infos { padding-left:58px; }
-#replies .reply .info { margin-top:4px; color:#999;height:20px;}
-#replies .reply .info a:link,
-#replies .reply .info a:visited { color:#999; text-decoration: underline;}
-#replies .reply .info .name { float:left; }
-#replies .reply .info .time { float:right; text-align:right; }
-#replies .reply .info a.reply_link img { vertical-align:middle;}
-#replies .reply .body { line-height:180%; font-size:14px; text-overflow: ellipsis; word-wrap: break-word; }
-#replies .reply .body img { max-width:622px;}
+#replies {
+  .total { padding-bottom:6px; color:#999; }
+  .reply { 
+    border-top:1px solid #DDD; padding:8px 10px; margin:0 -10px;
+    .face { padding-right:8px; width:48px; margin-left:0; }
+    .infos { padding-left:58px; }
+    .info { 
+      margin-top:4px; color:#999;height:20px;
+      a:link,
+      a:visited { color:#999; text-decoration: underline;}
+      .name { float:left; }
+      a.edit { display:none; }
+      .time { float:right; text-align:right; }
+      a.reply_link img { vertical-align:middle;}
+    }
+    .body { 
+      line-height:180%; font-size:14px; text-overflow: ellipsis; word-wrap: break-word; 
+      img { max-width:622px;}
+    }
+  }
+  .reply.light { background:#F7F2FC;}
+}
 
 #reply.form textarea { width:578px; }
 

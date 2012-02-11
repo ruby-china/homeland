@@ -47,7 +47,6 @@ window.App =
 
   # 绑定 @ 回复功能
   at_replyable : (el, logins) ->
-    console.log logins
     $(el).atWho
       debug : false
       data : logins

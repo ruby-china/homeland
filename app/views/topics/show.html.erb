@@ -45,11 +45,12 @@
     <div id="reply" class="form box">
       <%= render "editor_toolbar" %>
       <%= form_for(Reply.new, :remote => true,:url => topic_replies_path(@topic)) do |f| %>
-        <%= f.text_area :body,:class => "topic_editor span10", :rows => "4", :tabindex => "1" %>
         <div class="submit_buttons pull-right">
           <button type="submit" id="btn_reply" class="btn primary" tabindex="2"><%= t("topics.submit_reply")%></button><br />
           <span class="help-inline">Ctrl+Enter</span>
         </div>
+        <%= f.text_area :body,:class => "topic_editor span10", :rows => "4", :tabindex => "1" %>
+        
         <span class="body helpblock">
           <%= render_cell :topics, :reply_help_block %>
         </span>

@@ -124,7 +124,10 @@
   .reply.light { background:#F7F2FC;}
 }
 
-#reply.form textarea { width:578px; }
+#reply.form {
+  .pills::after { clear:left;}
+  textarea { width:578px; margin-bottom:10px;}
+}
 
 .edit_tools { text-align:left; margin-bottom:2px }
 
@@ -212,13 +215,14 @@
   /* copied from twitter bootstrap */
   margin-top:0px;
   border: 1px solid #ccc;
-  padding:10px;
+  padding:4px;
   min-height:400px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
   #reply & {
-    width: 568px;
+    width:578px;
+    margin-bottom:10px;
     min-height:72px;
   }
 }

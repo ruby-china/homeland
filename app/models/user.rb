@@ -207,9 +207,9 @@ REDUCE
 
   # 取消收藏
   def unlike(likeable)
-    Like.destroy_all(:conditions => {:likeable_id => likeable.id,
-                                     :likeable_type => likeable.class,
-                                     :user_id => self.id})
+    Like.where(:likeable_id => likeable.id,
+               :likeable_type => likeable.class,
+               :user_id => self.id).destroy
   end
 
   # 软删除

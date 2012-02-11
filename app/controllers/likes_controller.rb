@@ -5,12 +5,12 @@ class LikesController < ApplicationController
   
   def create
     current_user.like(@item)
-    render :text => @item.likes_count + 1
+    render :text => @item.reload.likes_count
   end
   
   def destroy
     current_user.unlike(@item)
-    render :text => @item.likes_count - 1
+    render :text => @item.reload.likes_count
   end
   
   private

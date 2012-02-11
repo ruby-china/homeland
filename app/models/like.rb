@@ -21,7 +21,7 @@ class Like
     self.user.inc(:likes_count, 1)
   end
 
-  before_destroy :decrease_counter_cache
+  after_destroy :decrease_counter_cache
   def decrease_counter_cache
     return if self.likeable.blank? or self.user.blank?
     self.likeable.inc(:likes_count,-1)

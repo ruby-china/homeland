@@ -2,122 +2,91 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    user ||= User.new
 
-    if user.blank?
-      # not logged in
-      cannot :manage, :all
-      basic_read_only
-
-    elsif user.has_role?(:admin)
-      # admin
+    if user.has_role?(:admin)
       can :manage, :all
     elsif user.has_role?(:member)
-      
-      can :create, Topic
-      can :update, Topic do |topic|
-        (topic.user_id == user.id)
-      end
-      
-      can :destroy, Topic do |topic|
-         (topic.user_id == user.id)
-      end
-      
-      can :create, Reply 
-
-      
-      can :update, Reply do |reply|
-        reply.user_id == user.id
-      end
-      
-      
-      # Note 
-      
-      can :read, Note do |note|
-        note.user_id == user.id
-      end
-      
-      can :create, Note
-      can :update, Note do |note|
-        note.user_id == user.id
-      end
-      can :destroy, Note do |note|
-        note.user_id == user.id
-      end
-      
-      # Wiki
-      can :read, Page
-      can :create, Page
-      
-      # XXX: Lock page 鎖 update 的話 edit 不知道為什麼不會成功，只好以此法實作
-      can :edit, Page do |page|
-        page.locked == false
-      end
-      can :update, Page do |page|
-        page.locked == false
-      end 
-      
-      # Photo
-      
-      can :read, Photo
-      can :tiny_new, Photo
-      can :create, Photo
-      can :update, Photo do |photo|
-        photo.user_id == photo.id
-      end
-      can :destroy, Photo do |photo|
-        photo.user_id == photo.id
-      end
-      
-      can :create, Site
-
-      basic_read_only
+      apply_member_abilities
     else
       # banned or unknown situation
+      # TODO: try write specs for this case
       cannot :manage, :all
-      basic_read_only
+      apply_basic_read_only_abilities
     end
-
-
   end
-  
-  protected
 
-  def basic_read_only
-    can :read,    Topic
-    can :feed,    Topic
-    can :node,    Topic
-    
-    can :read  , Note do |note|
-       note.publish == true
-    end
-    
-    can :read,  Page
-    can :recent, Page
-    
+protected
+
+  def apply_member_abilities_for_topics
+    can :create, Topic
+    # TODO: topic could be nil isn't it?
+    can_update_topic { |topic| topic.user_id == user.id }
+    can_destroy_topic { |topic| topic.user_id == user.id }
+  end
+
+  def apply_member_abilities_for_replies
+    can :create, Reply
+    can_update_reply { |reply| reply.user_id == user.id }
+  end
+
+  def apply_member_abilities_for_notes
+    can_read_note { |note| note.user_id == user.id }
+    can :create, Note
+    can_update_note { |note| note.user_id == user.id }
+    can_destroy_note { |note| note.user_id == user.id }
+  end
+
+  def apply_member_abilities_for_pages
+    can :read, Page
+    can :create, Page
+
+    # XXX: Lock page 鎖 update 的話 edit 不知道為什麼不會成功，只好以此法實作
+    can_edit_page { |page| page.locked == false }
+    can_update_page { |page| page.locked == false }
+  end
+
+  def apply_member_abilities_for_photos
     can :read, Photo
+    can :tiny_new, Photo
+    can :create, Photo
+    can_update_photo { |photo| photo.user_id == photo.id }
+    can_destroy_photo { |photo| photo.user_id == photo.id }
+  end
+
+  def apply_member_abilities
+    apply_member_abilities_for_topics
+    apply_member_abilities_for_replies
+    apply_member_abilities_for_notes
+    apply_member_abilities_for_pages
+    apply_member_abilities_for_photos
+
+    can :create, Site
+
+    apply_basic_read_only_abilities
+  end
+
+  def apply_basic_read_only_abilities
+    can :read, Topic
+    can :feed, Topic
+    can :node, Topic
+
+    can_read_note { |note| note.publish == true }
+
+    can :read, Page
+    can :recent, Page
+
+    can :read, Photo
+
     can :read, Site
   end
-end
 
-  # Define abilities for the passed in user here. For example:
-  #
-  #   user ||= User.new # guest user (not logged in)
-  #   if user.admin?
-  #     can :manage, :all
-  #   else
-  #     can :read, :all
-  #   end
-  #
-  # The first argument to `can` is the action you are giving the user permission to do.
-  # If you pass :manage it will apply to every action. Other common actions here are
-  # :read, :create, :update and :destroy.
-  #
-  # The second argument is the resource the user can perform the action on. If you pass
-  # :all it will apply to every resource. Otherwise pass a Ruby class of the resource.
-  #
-  # The third argument is an optional hash of conditions to further filter the objects.
-  # For example, here the user can only update published articles.
-  #
-  #   can :update, Article, :published => true
-  #
-  # See the wiki for details: https://github.com/ryanb/cancan/wiki/Defining-Abilities
+  def method_missing(method_id, *args, &block)
+    if method_id.to_s =~ /can_(\w+)_(\w+)/
+      args.unshift $1.to_sym, $2.capitalize
+      send(:can, *args, &block)
+    else
+      super(method_id, *args, &block)
+    end
+  end
+end

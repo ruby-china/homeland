@@ -1,4 +1,5 @@
 require 'spec_helper'
+require "cancan/matchers"
 
 describe User do
   let(:topic) { Factory :topic }
@@ -47,33 +48,91 @@ describe User do
       user2.location = "Hongkong"
       User.locations.count == 2
     end
+  end
 
-    describe "admin?" do
-      let (:admin) { Factory :admin }
-      it "should know you are an admin" do
-        admin.should be_admin
-      end
-
-      it "should know normal user is not admin" do
-        user.should_not be_admin
-      end
+  describe "admin?" do
+    let (:admin) { Factory :admin }
+    it "should know you are an admin" do
+      admin.should be_admin
     end
 
-    describe "wiki_editor?" do
-      let (:admin) { Factory :admin }
-      it "should know admin is wiki editor" do
-        admin.should be_wiki_editor
-      end
+    it "should know normal user is not admin" do
+      user.should_not be_admin
+    end
+  end
 
-      it "should know verified user is wiki editor" do
-        user.verified = true
-        user.should be_wiki_editor
-      end
+  describe "wiki_editor?" do
+    let (:admin) { Factory :admin }
+    it "should know admin is wiki editor" do
+      admin.should be_wiki_editor
+    end
 
-      it "should know not verified user is not a wiki editor" do
-        user.verified = false
-        user.should_not be_wiki_editor
-      end
+    it "should know verified user is wiki editor" do
+      user.verified = true
+      user.should be_wiki_editor
+    end
+
+    it "should know not verified user is not a wiki editor" do
+      user.verified = false
+      user.should_not be_wiki_editor
+    end
+  end
+
+  describe "roles" do
+    subject { user }
+
+    context "when is a new user" do
+      let(:user) { Factory :user }
+      it { should have_role(:member) }
+    end
+
+    context "when is admin" do
+      let(:user) { Factory :admin }
+      it { should have_role(:admin) }
+    end
+
+    context "when is wiki editor" do
+      let(:user) { Factory :wiki_editor }
+      it { should have_role(:wiki_editor) }
+    end
+
+    context "when ask for some random role" do
+      let(:user) { Factory :user }
+      it { should_not have_role(:savior_of_the_broken) }
+    end
+  end
+
+  describe "abilities" do
+    shared_examples_for "normal user" do
+      it { should be_able_to(:read, Topic) }
+      it { should be_able_to(:read, Page) }
+      it { should be_able_to(:read, Site) }
+      it { should be_able_to(:create, Topic) }
+      it { should be_able_to(:create, Reply) }
+      it { should be_able_to(:create, Note) }
+      it { should be_able_to(:create, Page) }
+      it { should be_able_to(:create, Photo) }
+    end
+
+    subject { ability }
+    let(:ability) { Ability.new(user) }
+
+    context "when is a new user" do
+      let(:user) { Factory :user }
+      it_should_behave_like "normal user"
+      # additionally
+      it { should_not be_able_to(:destroy, Page) }
+      it { should_not be_able_to(:destroy, User) }
+      it { should_not be_able_to(:create, Node) }
+    end
+
+    context "when is an admin" do
+      let(:user) { Factory :admin }
+      it_should_behave_like "normal user"
+      # additionally
+      it { should be_able_to(:destroy, Page) }
+      it { should be_able_to(:destroy, User) }
+      it { should be_able_to(:create, Node) }
     end
   end
 end

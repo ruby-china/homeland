@@ -1,12 +1,11 @@
-# coding: utf-8  
-
+# coding: utf-8
 class ApplicationController < ActionController::Base
-  protect_from_forgery  
-  
+  protect_from_forgery
+
   def render_404
     render_optional_error_file(404)
   end
-  
+
   def render_403
     render_optional_error_file(403)
   end
@@ -19,11 +18,10 @@ class ApplicationController < ActionController::Base
       render :template => "/errors/unknown.html.erb", :status => status, :layout => "application"
     end
   end
-  
-  rescue_from CanCan::AccessDenied do |exception|  
+
+  rescue_from CanCan::AccessDenied do |exception|
     redirect_to topics_path, :alert => t("common.access_denied")
   end
-
 
   def notice_success(msg)
     flash[:notice] = msg
@@ -44,11 +42,11 @@ class ApplicationController < ActionController::Base
     @meta_keywords = meta_keywords
     @meta_description = meta_description
   end
-  
+
   def store_location
     session[:return_to] = request.request_uri
   end
-  
+
   def redirect_back_or_default(default)
     redirect_to(session[:return_to] || default)
     session[:return_to] = nil
@@ -57,19 +55,17 @@ class ApplicationController < ActionController::Base
   def redirect_referrer_or_default(default)
     redirect_to(request.referrer || default)
   end
-  
+
   def require_user
     if current_user.blank?
       respond_to do |format|
         format.html  {
           authenticate_user!
         }
-        format.all { 
+        format.all {
           head(:unauthorized)
         }
       end
     end
   end
-
-
 end

@@ -1,31 +1,15 @@
-# coding: utf-8  
+# coding: utf-8
 class PhotosController < ApplicationController
-  
-  load_and_authorize_resource
-   
-  def index
-    @photos = Photo.all
-  end
 
-  def show
-    @photo = Photo.find(params[:id])
-  end
-  
+  load_and_authorize_resource
+
   def tiny_new
     @photo = Photo.new
     render :layout => "window"
   end
 
-  def new
-    @photo = Photo.new
-  end
-
-  def edit
-    @photo = current_user.photos.find(params[:id])
-  end
-
   def create
-    # 浮动窗口上传    
+    # 浮动窗口上传
     if params[:tiny] == '1'
       photos = []
       if !params[:image1].blank?
@@ -43,7 +27,7 @@ class PhotosController < ApplicationController
         photo3.image = params[:image3]
         photos << photo3
       end
-    
+
       @photos = []
       photos.each  do |p|
         p.user_id = current_user.id
@@ -64,24 +48,6 @@ class PhotosController < ApplicationController
       else
         return render :action => "new"
       end
-    end 
-  end
-
-  def update
-    @photo = current_user.photos.find(params[:id])
-    
-    if @photo.update_attributes(params[:photo])
-      redirect_to(@photo, :notice => 'Photo was successfully updated.')
-    else
-      render :action => "edit"
     end
-  end
-
-
-  def destroy
-    @photo = current_user.photos.find(params[:id])
-    @photo.destroy
-
-    redirect_to(photos_url)
   end
 end

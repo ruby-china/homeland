@@ -7,10 +7,8 @@ class WalkingDead
   include Mongoid::BaseModel
   
   if USING_PARANOIA
-    puts "using paranoia"
     include Mongoid::Paranoia
   else
-    puts "using soft delete"
     include Mongoid::SoftDelete
   end
   

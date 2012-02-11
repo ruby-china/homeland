@@ -1,5 +1,4 @@
 require 'spec_helper'
-require "cancan/matchers"
 
 describe User do
   let(:topic) { Factory :topic }
@@ -99,40 +98,6 @@ describe User do
     context "when ask for some random role" do
       let(:user) { Factory :user }
       it { should_not have_role(:savior_of_the_broken) }
-    end
-  end
-
-  describe "abilities" do
-    shared_examples_for "normal user" do
-      it { should be_able_to(:read, Topic) }
-      it { should be_able_to(:read, Page) }
-      it { should be_able_to(:read, Site) }
-      it { should be_able_to(:create, Topic) }
-      it { should be_able_to(:create, Reply) }
-      it { should be_able_to(:create, Note) }
-      it { should be_able_to(:create, Page) }
-      it { should be_able_to(:create, Photo) }
-    end
-
-    subject { ability }
-    let(:ability) { Ability.new(user) }
-
-    context "when is a new user" do
-      let(:user) { Factory :user }
-      it_should_behave_like "normal user"
-      # additionally
-      it { should_not be_able_to(:destroy, Page) }
-      it { should_not be_able_to(:destroy, User) }
-      it { should_not be_able_to(:create, Node) }
-    end
-
-    context "when is an admin" do
-      let(:user) { Factory :admin }
-      it_should_behave_like "normal user"
-      # additionally
-      it { should be_able_to(:destroy, Page) }
-      it { should be_able_to(:destroy, User) }
-      it { should be_able_to(:create, Node) }
     end
   end
 end

@@ -1,4 +1,4 @@
-# coding: utf-8  
+# coding: utf-8
 class Cpanel::PagesController < Cpanel::ApplicationController
 
   def index
@@ -26,7 +26,7 @@ class Cpanel::PagesController < Cpanel::ApplicationController
     if @page.save
       redirect_to(cpanel_pages_path, :notice => 'Page was successfully created.')
     else
-      render :action => "new" 
+      render :action => "new"
     end
   end
 

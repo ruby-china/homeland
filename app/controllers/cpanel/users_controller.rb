@@ -1,4 +1,4 @@
-# coding: utf-8  
+# coding: utf-8
 class Cpanel::UsersController < Cpanel::ApplicationController
 
   def index
@@ -20,7 +20,7 @@ class Cpanel::UsersController < Cpanel::ApplicationController
   end
 
   def create
-    @user = User.new(params[:user])    
+    @user = User.new(params[:user])
     @user.email = params[:user][:email]
     @user.login = params[:user][:login]
     @user.state = params[:user][:state]
@@ -39,7 +39,7 @@ class Cpanel::UsersController < Cpanel::ApplicationController
     @user.login = params[:user][:login]
     @user.state = params[:user][:state]
     @user.verified = params[:user][:verified]
-    
+
     if @user.update_attributes(params[:user])
       redirect_to(cpanel_users_path, :notice => 'User was successfully updated.')
     else
@@ -51,6 +51,6 @@ class Cpanel::UsersController < Cpanel::ApplicationController
     @user = User.find(params[:id])
     @user.soft_delete
 
-    redirect_to(cpanel_users_url) 
+    redirect_to(cpanel_users_url)
   end
 end

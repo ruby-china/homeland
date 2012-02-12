@@ -1,10 +1,10 @@
-# coding: utf-8  
+# coding: utf-8
 class NotesController < ApplicationController
-  
+
   load_and_authorize_resource
 
   before_filter :init_base_breadcrumb
-  
+
   def init_base_breadcrumb
     drop_breadcrumb(t("menu.notes"), notes_path)
   end
@@ -37,7 +37,7 @@ class NotesController < ApplicationController
 
 
   def create
-    @note = current_user.notes.new(params[:note])  
+    @note = current_user.notes.new(params[:note])
 
     if @note.save
       redirect_to(@note, :notice => t("common.create_success"))

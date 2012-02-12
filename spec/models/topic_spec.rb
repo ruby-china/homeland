@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Topic do
   it "should set replied_at" do
-    # because the Topic index is sort by replied_at, 
+    # because the Topic index is sort by replied_at,
     # so the new Topic need to set a Time, that it will display in index page
     Factory(:topic).replied_at.should_not be_nil
   end

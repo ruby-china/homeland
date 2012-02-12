@@ -1,4 +1,4 @@
-# coding: utf-8  
+# coding: utf-8
 class Cpanel::RepliesController < Cpanel::ApplicationController
 
   def index
@@ -38,7 +38,7 @@ class Cpanel::RepliesController < Cpanel::ApplicationController
     if @reply.update_attributes(params[:reply])
        redirect_to(cpanel_replies_path, :notice => 'Reply was successfully updated.')
     else
-      render :action => "edit" 
+      render :action => "edit"
     end
   end
 

@@ -5,13 +5,13 @@ USING_PARANOIA = false
 class WalkingDead
   include Mongoid::Document
   include Mongoid::BaseModel
-  
+
   if USING_PARANOIA
     include Mongoid::Paranoia
   else
     include Mongoid::SoftDelete
   end
-  
+
   field :name
 end
 
@@ -29,7 +29,7 @@ describe "Soft Delete" do
       rick.destroy
     }.to_not change(WalkingDead.unscoped, :count)
   end
-  
+
   it "should update the deleted_at field" do
     expect {
       rick.destroy

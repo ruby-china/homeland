@@ -4,9 +4,9 @@ class UsersCell < BaseCell
   cache :active_users, :expires_in => 1.days
   def active_users
     @active_users = User.hot.limit(20)
-    render 
+    render
   end
-  
+
   cache :recent_join_users, :expires_in => 1.hour
   def recent_join_users
     @recent_join_users = User.recent.limit(20)

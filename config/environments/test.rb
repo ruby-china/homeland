@@ -1,4 +1,4 @@
-# coding: utf-8  
+# coding: utf-8
 RubyChina::Application.configure do
   # Settings specified here will take precedence over those in config/environment.rb
 
@@ -33,7 +33,7 @@ RubyChina::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
-  
+
   config.serve_static_assets = true
   config.static_cache_control = "public, max-age=3600"
 end

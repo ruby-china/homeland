@@ -1,4 +1,4 @@
-# coding: utf-8  
+# coding: utf-8
 class Cpanel::TopicsController < Cpanel::ApplicationController
 
   def index
@@ -26,7 +26,7 @@ class Cpanel::TopicsController < Cpanel::ApplicationController
     if @topic.save
       redirect_to(cpanel_topics_path, :notice => 'Topic was successfully created.')
     else
-      render :action => "new" 
+      render :action => "new"
     end
   end
 
@@ -36,7 +36,7 @@ class Cpanel::TopicsController < Cpanel::ApplicationController
     if @topic.update_attributes(params[:topic])
       redirect_to(cpanel_topics_path, :notice => 'Topic was successfully updated.')
     else
-      render :action => "edit" 
+      render :action => "edit"
     end
   end
 
@@ -46,20 +46,20 @@ class Cpanel::TopicsController < Cpanel::ApplicationController
 
     redirect_to(cpanel_topics_path)
   end
-  
+
   def undestroy
     @topic = Topic.unscoped.find(params[:id])
     @topic.update_attribute(:deleted_at, nil)
     redirect_to(cpanel_topics_path)
   end
-  
+
   def suggest
     @topic = Topic.unscoped.find(params[:id])
     @topic.update_attribute(:suggested_at, Time.now)
     CacheVersion.topic_last_suggested_at = Time.now
     redirect_to(cpanel_topics_path, :notice => "Topic:#{params[:id]} suggested.")
   end
-  
+
   def unsuggest
     @topic = Topic.unscoped.find(params[:id])
     @topic.update_attribute(:suggested_at, nil)

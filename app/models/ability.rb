@@ -20,17 +20,17 @@ class Ability
       can :destroy, Topic do |topic|
          (topic.user_id == user.id)
       end
-      
+
       # Reply
-      can :create, Reply 
+      can :create, Reply
       can :update, Reply do |reply|
         reply.user_id == user.id
       end
       can :destroy, Reply do |reply|
         reply.user_id == user.id
       end
-      
-      # Note 
+
+      # Note
       can :create, Note
       can :update, Note do |note|
         note.user_id == user.id
@@ -44,7 +44,7 @@ class Ability
       can :read  , Note do |note|
         note.publish == true
       end
-      
+
       # Wiki
       if user.has_role?(:wiki_editor)
         can :create, Page
@@ -53,10 +53,10 @@ class Ability
         end
         can :update, Page do |page|
           page.locked == false
-        end 
+        end
       end
-      
-      
+
+
       # Photo
       can :tiny_new, Photo
       can :create, Photo
@@ -66,7 +66,7 @@ class Ability
       can :destroy, Photo do |photo|
         photo.user_id == photo.id
       end
-      
+
       # Comment
       can :create, Comment
       can :update, Comment do |comment|
@@ -75,7 +75,7 @@ class Ability
       can :destroy, Comment do |comment|
         comment.user_id == comment.id
       end
-      
+
       # Site
       can :create, Site
 
@@ -88,18 +88,18 @@ class Ability
 
 
   end
-  
+
   protected
     def basic_read_only
       can :read,Topic
       can :feed,Topic
       can :node,Topic
-    
+
       can :read, Reply
-    
+
       can :read,  Page
       can :recent, Page
-    
+
       can :read, Photo
       can :read, Site
       can :read, Section

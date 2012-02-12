@@ -3,7 +3,7 @@ require "cancan/matchers"
 
 describe Ability do
   subject { ability }
-  
+
   context "Admin manage all" do
     let(:admin) { Factory :admin }
     let(:ability){ Ability.new(admin) }
@@ -18,7 +18,7 @@ describe Ability do
     it { should be_able_to(:manage, Photo) }
     it { should be_able_to(:manage, Comment) }
   end
-  
+
   context "Wiki Editor manage wiki" do
     let(:wiki_editor) { Factory :wiki_editor }
     let(:ability){ Ability.new(wiki_editor) }
@@ -28,7 +28,7 @@ describe Ability do
     it { should be_able_to(:update, Page) }
     it { should_not be_able_to(:update, page_locked)}
   end
-  
+
   context "Normal users" do
     let(:user) { Factory :user }
     let(:topic) { Factory :topic, :user => user }
@@ -36,9 +36,9 @@ describe Ability do
     let(:note) { Factory :note, :user => user }
     let(:comment) { Factory :comment, :user => user }
     let(:note_publish) { Factory :note, :publish => true }
-    
+
     let(:ability){ Ability.new(user) }
-    
+
     context "Topic" do
       it { should be_able_to(:read, Topic) }
       it { should be_able_to(:create, Topic) }

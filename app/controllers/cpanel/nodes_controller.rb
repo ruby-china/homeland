@@ -1,4 +1,4 @@
-# coding: utf-8  
+# coding: utf-8
 class Cpanel::NodesController < Cpanel::ApplicationController
 
   def index
@@ -10,7 +10,7 @@ class Cpanel::NodesController < Cpanel::ApplicationController
   end
 
   def new
-    @node = Node.new    
+    @node = Node.new
   end
 
   def edit
@@ -18,7 +18,7 @@ class Cpanel::NodesController < Cpanel::ApplicationController
   end
 
   def create
-    @node = Node.new(params[:node])    
+    @node = Node.new(params[:node])
 
     if @node.save
       redirect_to(cpanel_nodes_path, :notice => 'Node was successfully created.')
@@ -29,7 +29,7 @@ class Cpanel::NodesController < Cpanel::ApplicationController
 
   def update
     @node = Node.find(params[:id])
-    
+
     if @node.update_attributes(params[:node])
       redirect_to(cpanel_nodes_path, :notice => 'Node was successfully updated.')
     else

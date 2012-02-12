@@ -1,20 +1,20 @@
-# coding: utf-8  
+# coding: utf-8
 # 记事本
-class Note  
+class Note
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::BaseModel
-  
+
   field :title
   field :body
   field :word_count, :type => Integer
   field :changes_count, :type =>  Integer, :default => 0
   field :publish, :type => Boolean, :default => false
   belongs_to :user
-  
+
   index :user_id
 
-  attr_protected :user_id, :changes_count, :word_count  
+  attr_protected :user_id, :changes_count, :word_count
 
   default_scope :order => "id desc"
 
@@ -27,7 +27,7 @@ class Note
   end
 
   before_update :update_changes_count
-  def update_changes_count    
+  def update_changes_count
     self.changes_count = 0 if self.changes_count.blank?
     self.inc(:changes_count,1)
   end

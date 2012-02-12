@@ -1,6 +1,6 @@
 # coding: UTF-8
 class <%= controller_class_name %>Controller < <%= controller_class_name.include?('::') == true ? "#{controller_class_name.split('::').first}::" : ''  %>ApplicationController
-  
+
   def index
     @<%= plural_file_name %> = <%= file_name.camelize %>.desc('_id').paginate(:page => params[:page], :per_page => 20)
 
@@ -18,7 +18,7 @@ class <%= controller_class_name %>Controller < <%= controller_class_name.include
       format.json
     end
   end
-  
+
   def new
     @<%= file_name %> = <%= orm_class.build(file_name.camelize) %>
 
@@ -27,11 +27,11 @@ class <%= controller_class_name %>Controller < <%= controller_class_name.include
       format.json
     end
   end
-  
+
   def edit
     @<%= file_name %> = <%= orm_class.find(file_name.camelize, "params[:id]") %>
   end
-  
+
   def create
     @<%= file_name %> = <%= orm_class.build(file_name.camelize, "params[:#{file_name}]") %>
 
@@ -45,7 +45,7 @@ class <%= controller_class_name %>Controller < <%= controller_class_name.include
       end
     end
   end
-  
+
   def update
     @<%= file_name %> = <%= orm_class.find(file_name.camelize, "params[:id]") %>
 
@@ -59,7 +59,7 @@ class <%= controller_class_name %>Controller < <%= controller_class_name.include
       end
     end
   end
-  
+
   def destroy
     @<%= file_name %> = <%= orm_class.find(file_name.camelize, "params[:id]") %>
     @<%= file_name %>.destroy

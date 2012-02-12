@@ -1,8 +1,8 @@
-# coding: utf-8  
+# coding: utf-8
 class TopicsController < ApplicationController
-  
+
   load_and_authorize_resource :only => [:new,:edit,:create,:update,:destroy]
-  
+
   before_filter :set_menu_active
   caches_page :feed, :node_feed, :expires_in => 1.hours
   before_filter :init_base_breadcrumb
@@ -13,7 +13,7 @@ class TopicsController < ApplicationController
     drop_breadcrumb(t("topics.hot_topic"))
     #render :stream => true
   end
-  
+
   def feed
     @topics = Topic.recent.limit(20).includes(:node,:user, :last_reply_user)
     response.headers['Content-Type'] = 'application/rss+xml'
@@ -131,22 +131,22 @@ class TopicsController < ApplicationController
   end
 
   protected
-  
+
   def set_menu_active
     @current = @current = ['/topics']
   end
-  
+
   def init_base_breadcrumb
     drop_breadcrumb(t("menu.topics"), topics_path)
   end
-  
+
   private
-  
-  def init_list_sidebar 
+
+  def init_list_sidebar
    if !fragment_exist? "topic/init_list_sidebar/hot_nodes"
       @hot_nodes = Node.hots.limit(10)
     end
     set_seo_meta(t("menu.topics"))
   end
-  
+
 end

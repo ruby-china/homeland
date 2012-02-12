@@ -10,31 +10,31 @@ RubyChina::Application.routes.draw do
   resources :comments
   resources :notes
   match "/uploads/*path" => "gridfs#serve"
-  root :to => "home#index"  
- 
+  root :to => "home#index"
 
-  devise_for :users, :path => "account", :controllers => { 
+
+  devise_for :users, :path => "account", :controllers => {
       :registrations => :account,
-      :omniauth_callbacks => "users/omniauth_callbacks" 
+      :omniauth_callbacks => "users/omniauth_callbacks"
     }
-  
+
   match "account/auth/:provider/unbind", :to => "users#auth_unbind"
-  
+
   match "users/location/:id", :to => "users#location", :as => :location_users
   resources :users do
-    member do 
+    member do
       get :replies
       get :likes
-    end 
+    end
   end
   resources :notifications, :only => [:index, :destroy] do
     collection do
       put :mark_all_as_read
     end
   end
-  
+
   resources :nodes
-  
+
   match "topics/node:id" => "topics#node", :as => :node_topics
   match "topics/node:id/feed" => "topics#node_feed", :as => :feed_node_topics
   match "topics/last" => "topics#recent", :as => :recent_topics
@@ -61,7 +61,7 @@ RubyChina::Application.routes.draw do
   match "/search/topics" => "search#topics", :as => :search_topics
   match "/search/wiki" => "search#wiki", :as => :search_wiki
 
-  namespace :cpanel do 
+  namespace :cpanel do
     root :to => "home#index"
     resources :site_configs
     resources :replies
@@ -87,8 +87,8 @@ RubyChina::Application.routes.draw do
     resources :comments
     resources :site_nodes
     resources :sites
-  end  
-  
+  end
+
   if Rails.env.development?
     mount UserMailer::Preview => 'mails/user'
   end

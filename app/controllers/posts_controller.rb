@@ -9,7 +9,7 @@ class PostsController < ApplicationController
     end
     @posts = scoped_posts.recent.paginate :page => params[:page], :per_page => 20
     set_seo_meta("文章")
-    
+
     drop_breadcrumb("文章")
     if params[:tag]
       drop_breadcrumb(params[:tag])
@@ -39,7 +39,7 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build(params[:post])
-    
+
     if @post.save
       redirect_to @post, notice: t("posts.submit_success")
     else
@@ -49,16 +49,16 @@ class PostsController < ApplicationController
 
   def update
     @post = current_user.posts.find(params[:id])
-    
+
     if @post.update_attributes(params[:post])
       redirect_to @post, notice: '文章更新成功。'
     else
       render action: "edit"
     end
   end
-  
+
   protected
-  
+
   def set_menu_active
     @current = @current = ['/posts']
   end

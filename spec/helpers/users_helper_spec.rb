@@ -10,18 +10,18 @@ describe UsersHelper do
       helper.user_avatar_width_for_size(233).should == 233
     end
   end
-  
+
   describe "user_name_tag" do
     it "should result right html in normal" do
       user = Factory(:user)
       helper.user_name_tag(user).should == link_to(user.login, user_path(user.login), 'data-name' => user.name)
     end
-    
+
     it "should result right html with string param" do
       login = "Monster"
       helper.user_name_tag(login).should == link_to(login, user_path(login), 'data-name' => login)
     end
-    
+
     it "should result empty with nil param" do
       helper.user_name_tag(nil).should == "匿名"
     end

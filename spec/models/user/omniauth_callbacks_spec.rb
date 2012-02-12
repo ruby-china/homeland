@@ -57,7 +57,7 @@ describe User::OmniauthCallbacks do
 
     it "should set user tagline" do
       description = data["description"] = "A newbie Ruby developer"
-      callback.new_from_provider_data(nil, nil, data).tagline.should == description 
+      callback.new_from_provider_data(nil, nil, data).tagline.should == description
     end
   end
 end

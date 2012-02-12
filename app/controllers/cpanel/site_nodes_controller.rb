@@ -1,6 +1,6 @@
 # coding: UTF-8
 class Cpanel::SiteNodesController < Cpanel::ApplicationController
-  
+
   def index
     @site_nodes = SiteNode.desc('_id').paginate(:page => params[:page], :per_page => 20)
 
@@ -18,7 +18,7 @@ class Cpanel::SiteNodesController < Cpanel::ApplicationController
       format.json
     end
   end
-  
+
   def new
     @site_node = SiteNode.new
 
@@ -27,11 +27,11 @@ class Cpanel::SiteNodesController < Cpanel::ApplicationController
       format.json
     end
   end
-  
+
   def edit
     @site_node = SiteNode.find(params[:id])
   end
-  
+
   def create
     @site_node = SiteNode.new(params[:site_node])
 
@@ -45,7 +45,7 @@ class Cpanel::SiteNodesController < Cpanel::ApplicationController
       end
     end
   end
-  
+
   def update
     @site_node = SiteNode.find(params[:id])
 
@@ -59,7 +59,7 @@ class Cpanel::SiteNodesController < Cpanel::ApplicationController
       end
     end
   end
-  
+
   def destroy
     @site_node = SiteNode.find(params[:id])
     @site_node.destroy

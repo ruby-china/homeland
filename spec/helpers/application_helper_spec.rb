@@ -38,7 +38,7 @@ describe ApplicationHelper do
       helper.stub(:current_user).and_return(admin)
       helper.admin?(nil).should be_true
     end
-    
+
     it "use current_user if user not given a user" do
       helper.stub(:current_user).and_return(user)
       helper.admin?(nil).should be_false

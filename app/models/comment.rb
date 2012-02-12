@@ -4,9 +4,9 @@ class Comment
   include Mongoid::Timestamps
   include Mongoid::BaseModel
   include Mongoid::SoftDelete
-  
+
   field :body
-  
+
   belongs_to :commentable, :polymorphic => true
   belongs_to :user
 

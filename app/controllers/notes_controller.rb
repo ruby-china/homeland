@@ -21,20 +21,17 @@ class NotesController < ApplicationController
     drop_breadcrumb("查看")
   end
 
-
   def new
     @note = current_user.notes.build
     set_seo_meta("新建 &raquo; #{t("menu.notes")}")
     drop_breadcrumb(t("common.create"))
   end
 
-
   def edit
     @note = current_user.notes.find(params[:id])
     set_seo_meta("修改 &raquo; #{t("menu.notes")}")
     drop_breadcrumb("修改")
   end
-
 
   def create
     @note = current_user.notes.new(params[:note])
@@ -45,7 +42,6 @@ class NotesController < ApplicationController
       render :action => "new"
     end
   end
-
 
   def update
     @note = current_user.notes.find(params[:id])

@@ -2,7 +2,6 @@
 
 FactoryGirl.define do
   factory :site_node do
-    name "MyString"
-    sites_count 1
+    name "random site node"
   end
 end

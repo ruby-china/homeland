@@ -12,7 +12,6 @@ RubyChina::Application.routes.draw do
   match "/uploads/*path" => "gridfs#serve"
   root :to => "home#index"
 
-
   devise_for :users, :path => "account", :controllers => {
       :registrations => :account,
       :omniauth_callbacks => "users/omniauth_callbacks"

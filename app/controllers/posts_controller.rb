@@ -2,6 +2,7 @@
 class PostsController < ApplicationController
   before_filter :require_user, :only => [:new, :edit, :create, :update, :destroy]
   before_filter :set_menu_active
+
   def index
     scoped_posts = Post.normal
     if !params[:tag].blank?

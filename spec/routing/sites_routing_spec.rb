@@ -10,7 +10,7 @@ describe SitesController do
     it "routes to #new" do
       get("/sites/new").should route_to("sites#new")
     end
-    
+
     it "routes to #edit" do
       get("/sites/1/edit").should route_to("sites#edit", :id => "1")
     end

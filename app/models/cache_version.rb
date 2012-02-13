@@ -1,6 +1,6 @@
 # coding: utf-8
 # 用于记录特定的 cache version
-# 比如: 
+# 比如:
 #    记录最后更新 置顶话题的时间,以用于作为自动变换置顶那个 cache 的 key，以达到自动过期的目的
 # 用法例子:
 #   以上面个场景为例
@@ -23,7 +23,7 @@ class CacheVersion
       Rails.cache.read(key)
     end
   end
-  
+
   def self.mk_key(key)
     "cache_version:#{key}"
   end

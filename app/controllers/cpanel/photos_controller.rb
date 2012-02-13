@@ -1,4 +1,4 @@
-# coding: utf-8  
+# coding: utf-8
 class Cpanel::PhotosController < Cpanel::ApplicationController
 
   def index

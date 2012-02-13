@@ -10,7 +10,7 @@ require 'sunspot/rails'
 # class Post
 #   include Mongoid::Document
 #   field :title
-# 
+#
 #   include Sunspot::Mongoid
 #   searchable do
 #     text :title

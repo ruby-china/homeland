@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe Node do
-  
-  describe 'Validates' do   
+
+  describe 'Validates' do
     it 'should fail saving without specifing a section' do
       node = Node.new
       node.name = "Cersei"
@@ -10,5 +10,5 @@ describe Node do
       node.save == false
     end
   end
-  
+
 end

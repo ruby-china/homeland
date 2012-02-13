@@ -11,7 +11,7 @@ class SearchController < ApplicationController
     set_seo_meta("#{t("common.search")}: #{params[:q]}")
     drop_breadcrumb("#{t("common.search")}: #{params[:q]}")
   end
-  
+
   def wiki
     search_text = params[:q]
     @search = Sunspot.search(Page) do

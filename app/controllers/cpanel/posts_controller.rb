@@ -1,4 +1,4 @@
-# coding: utf-8  
+# coding: utf-8
 class Cpanel::PostsController < Cpanel::ApplicationController
 
   def index
@@ -40,7 +40,7 @@ class Cpanel::PostsController < Cpanel::ApplicationController
     @post.tag_list = params[:post][:tag_list]
     @post.user_id = params[:post][:user_id]
     @post.state = params[:post][:state]
-    
+
     if @post.update_attributes(params[:post])
       redirect_to(cpanel_posts_path, :notice => 'Post was successfully updated.')
     else

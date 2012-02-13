@@ -1,4 +1,4 @@
-# coding: utf-8  
+# coding: utf-8
 RubyChina::Application.configure do
   # Settings specified here will take precedence over those in config/environment.rb
 
@@ -43,14 +43,14 @@ RubyChina::Application.configure do
   # Enable threaded mode
   # config.threadsafe!
 
- 
+
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found)
   config.i18n.fallbacks = true
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
-  
+
   # Compress JavaScripts and CSS
   config.assets.compress = true
 
@@ -59,13 +59,13 @@ RubyChina::Application.configure do
 
   # Generate digests for assets URLs
   config.assets.digest = true
-  
+
   config.assets.js_compressor  = :uglifier
   config.assets.css_compressor = :scss
   config.assets.precompile += %w(application.css application.js topics.css topics.js window.css front.css cpanel.css search.css
-  users.css posts.css posts.js pages.css pages.js notifications.js notifications.css sites.css sites.js 
+  users.css posts.css posts.js pages.css pages.js notifications.js notifications.css sites.css sites.js
   gfdynamicfeedcontrol.css gfdynamicfeedcontrol.js mobile.css)
-  
-  
+
+
 end
 

@@ -9,7 +9,7 @@ describe Like do
     after do
       Like.delete_all
     end
-    
+
     it "can like/unlike topic" do
       user.like(topic)
       user.likes.count.should == 1
@@ -27,7 +27,7 @@ describe Like do
       user2.likes_count.should == 0
       topic.likes_count.should == 1
     end
-    
+
     it "can tell whether or not liked by a user" do
       topic.liked_by_user?(user).should be_false
       user.like(topic)

@@ -1,19 +1,19 @@
 # coding: UTF-8
 class SitesController < ApplicationController
   load_and_authorize_resource
-  
+
   def index
     @site_nodes = SiteNode.all.includes(:sites).desc('sort')
     drop_breadcrumb(t("menu.sites"))
     set_seo_meta("Ruby #{t("menu.sites")}")
   end
-  
+
   def new
     @site = Site.new
     drop_breadcrumb(t("menu.sites"), sites_path)
     drop_breadcrumb(t("common.create"))
   end
-  
+
   def create
     @site = Site.new(params[:site])
     @site.user_id = current_user.id
@@ -25,5 +25,5 @@ class SitesController < ApplicationController
       render :action => "new"
     end
   end
-  
+
 end

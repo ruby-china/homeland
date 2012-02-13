@@ -1,6 +1,6 @@
 # coding: UTF-8
 class Cpanel::SitesController < Cpanel::ApplicationController
-  
+
   def index
     @sites = Site.desc('_id').paginate(:page => params[:page], :per_page => 20)
 
@@ -18,7 +18,7 @@ class Cpanel::SitesController < Cpanel::ApplicationController
       format.json
     end
   end
-  
+
   def new
     @site = Site.new
 
@@ -27,11 +27,11 @@ class Cpanel::SitesController < Cpanel::ApplicationController
       format.json
     end
   end
-  
+
   def edit
     @site = Site.find(params[:id])
   end
-  
+
   def create
     @site = Site.new(params[:site])
 
@@ -45,7 +45,7 @@ class Cpanel::SitesController < Cpanel::ApplicationController
       end
     end
   end
-  
+
   def update
     @site = Site.find(params[:id])
 
@@ -59,7 +59,7 @@ class Cpanel::SitesController < Cpanel::ApplicationController
       end
     end
   end
-  
+
   def destroy
     @site = Site.find(params[:id])
     @site.destroy

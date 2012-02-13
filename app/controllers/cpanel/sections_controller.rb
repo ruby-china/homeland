@@ -1,4 +1,4 @@
-# coding: utf-8  
+# coding: utf-8
 class Cpanel::SectionsController < Cpanel::ApplicationController
 
   def index
@@ -12,7 +12,7 @@ class Cpanel::SectionsController < Cpanel::ApplicationController
   end
 
   def new
-    @section = Section.new    
+    @section = Section.new
   end
 
   def edit
@@ -45,6 +45,6 @@ class Cpanel::SectionsController < Cpanel::ApplicationController
 
     redirect_to(cpanel_sections_url)
   end
-  
-  
+
+
 end

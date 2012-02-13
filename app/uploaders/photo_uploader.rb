@@ -30,7 +30,7 @@ class PhotoUploader < CarrierWave::Uploader::Base
       ext = File.extname(original_filename)
       # NOTE: 这里的到的图片是裁减过后的图片 MD5，也就是说，只有当原图小于裁减范围的时候，md5 才会保持和原始图片 md5 一致，而达到覆盖的目的
       fname = Digest::MD5.hexdigest(self.read)
-      @name ||= "#{fname}#{ext}" 
+      @name ||= "#{fname}#{ext}"
     end
   end
 

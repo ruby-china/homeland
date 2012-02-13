@@ -1,4 +1,4 @@
-# coding: utf-8  
+# coding: utf-8
 module LocationsHelper
   def location_name_tag(location,options = {})
     return "" if location.blank?

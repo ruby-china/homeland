@@ -4,7 +4,7 @@ module UsersHelper
   # 生成用户 login 的链接，user 参数可接受 user 对象或者 字符串的 login
   def user_name_tag(user,options = {})
     return "匿名" if user.blank?
-    
+
     if (user.class == "".class)
       login = user
       name = login
@@ -12,7 +12,7 @@ module UsersHelper
       login = user.login
       name = user.name
     end
-    
+
     name ||= login
 
     link_to(login, user_path(login), 'data-name' => name)

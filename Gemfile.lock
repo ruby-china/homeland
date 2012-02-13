@@ -313,6 +313,8 @@ GEM
       escape (~> 0.0.4)
       pr_geohash (~> 1.0)
       rsolr (~> 1.0.6)
+    sunspot-rails-tester (0.0.4)
+      sunspot_rails (~> 1.2)
     sunspot_rails (1.3.0)
       nokogiri
       sunspot (= 1.3.0)
@@ -400,6 +402,7 @@ DEPENDENCIES
   simplecov
   social-share-button (~> 0.0.3)
   sprite-factory (= 1.4.1)
+  sunspot-rails-tester
   sunspot_rails (~> 1.3.0)
   sunspot_solr
   thin

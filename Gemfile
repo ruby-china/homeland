@@ -93,6 +93,7 @@ group :development, :test do
   gem "simplecov", :require => false
   gem "rspec-cells"
   gem "capybara"
+  gem "sunspot-rails-tester"
 end
 
 group :production do

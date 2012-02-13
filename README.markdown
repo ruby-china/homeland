@@ -18,11 +18,6 @@ This is source code of [Ruby China Group](http://ruby-china.org)
   easy_install pygments # 或者 pip install pygments
   rake db:migrate
   ```
-
-## Test
-
-* before running RSpec, start sunspot:solr : ```RAILS_ENV=test bundle exec rake sunspot:solr:run```
-
 ## Deploy
 
     $ cap deploy

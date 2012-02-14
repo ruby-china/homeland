@@ -1,5 +1,5 @@
-<p>Welcome <%= @resource.email %>!</p>
-
-<p>You can confirm your account through the link below:</p>
-
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>
+<p>欢迎 <%= @resource.login %>!</p>
+<p>你已经成功注册<span style="color:red;"><b><%= Setting.app_name %></b></span>的账号，接下来你需要点击下面的连接激活你的账号:</p>
+<p><%= link_to '激活账号', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>
+<p>如果看不到连接，请复制下面的连接然后在浏览器里面打开：</p>
+<p><%= confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>

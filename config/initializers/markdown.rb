@@ -1,8 +1,10 @@
+# coding: utf-8
+require 'rails_autolink'
 module Redcarpet
   module Render
     class HTMLwithSyntaxHighlight < HTML
       def initialize(extensions={})
-        super(extensions.merge(:xhtml => true, :hard_wrap => true, :filter_html => true))
+        super(extensions.merge(:xhtml => true, :no_styles => true, :filter_html => true))
       end
 
       def block_code(code, language)
@@ -13,11 +15,22 @@ module Redcarpet
           Pygments.highlight(code, :lexer => 'text', :formatter => 'html', :options => {:encoding => 'utf-8'})
         end
       end
-    end
-
-    class NofollowAutoLink < HTMLwithSyntaxHighlight
+      
       def autolink(link, link_type)
-        "<a href=\"#{link}\" rel=\"nofollow\" target=\"_blank\">#{link}</a>"
+        # return link
+        if link_type.to_s == "email"
+          link          
+        else
+          "<a href=\"#{link}\" rel=\"nofollow\" target=\"_blank\">#{link}</a>"
+        end
+        
+      end
+    end
+    
+    class HTMLwithTopic < HTMLwithSyntaxHighlight
+      # Topic 里面，所有的 head 改为 h4 显示
+      def header(text, header_level)
+        "<h4>#{text}</h4>"
       end
     end
   end
@@ -46,7 +59,7 @@ end
 class MarkdownTopicConverter < MarkdownConverter
   private
   def initialize
-    @converter = Redcarpet::Markdown.new(Redcarpet::Render::NofollowAutoLink.new, {
+    @converter = Redcarpet::Markdown.new(Redcarpet::Render::HTMLwithTopic.new, {
         :autolink => true,
         :fenced_code_blocks => true,
         :strikethrough => true,

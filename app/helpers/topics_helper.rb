@@ -4,9 +4,12 @@ module TopicsHelper
     return '' if text.blank?
 
     convert_bbcode_img(text) unless options[:allow_image] == false
-
+    
+    # 如果 ``` 在刚刚换行的时候 Redcapter 无法生成正确，需要两个换行
+    text.gsub!("\n```","\n\n```")
+    
     result = MarkdownTopicConverter.convert(text)
-
+    
     link_mention_floor(result)
     link_mention_user(result, options[:mentioned_user_logins]) unless options[:mentioned_user_logins].blank?
         

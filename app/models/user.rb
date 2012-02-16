@@ -93,7 +93,7 @@ REDUCE
 
   def self.find_for_database_authentication(conditions)
     login = conditions.delete(:login)
-    self.where(:login => /^#{login}$/i).first
+    self.where(:login => /^#{login}$/i).first || self.where(:email => /^#{login}$/i).first
   end
 
   def password_required?

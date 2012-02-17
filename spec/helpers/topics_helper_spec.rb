@@ -32,7 +32,7 @@ describe TopicsHelper do
     it "should link mentioned user" do
       user = Factory(:user)
       helper.format_topic_body("hello @#{user.name}", :mentioned_user_logins => [user.name]).should == 
-      "<p>hello <a href=\"/users/#{user.name}\" class=\"at_user\" title=\"@#{user.name}\">@#{user.name}</a></p>"
+      "<p>hello <a href=\"/users/#{user.name}\" class=\"at_user\" title=\"@#{user.name}\"><i>@</i>#{user.name}</a></p>"
     end
    
     it "should not allow H1-H6 to h4" do

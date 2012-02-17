@@ -135,7 +135,10 @@
   a:link, a:visited { color:#0069D6; text-decoration: none; }
   a:hover { text-decoration: underline; color:#00438A; }
   a.at_floor { color:#376B43; }
-  a.at_user { color:#333; text-decoration: underline; font-weight:bold; }
+  a.at_user { 
+    color:#333; font-weight:bold; 
+    i { color:#777; }
+  }
   h4 { font-weight:bold; font-size:13px; line-height:180%; margin:0; color:#aaa; margin-top:10px; }
   p { margin-bottom:10px; }
   ul,

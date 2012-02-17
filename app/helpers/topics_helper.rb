@@ -28,7 +28,7 @@ module TopicsHelper
 
   # convert '@user' to link
   def link_mention_user(text, mentioned_user_logins)
-    text.gsub!(/@(#{mentioned_user_logins.join('|')})/i) { link_to("@#{$1}", user_path($1), :class => "at_user", :title => "@#{$1}") }
+    text.gsub!(/@(#{mentioned_user_logins.join('|')})/i) { link_to(raw("<i>@</i>#{$1}"), user_path($1), :class => "at_user", :title => "@#{$1}") }
   end
 
   def topic_use_readed_text(state)

@@ -23,7 +23,7 @@ module TopicsHelper
 
   # convert '#N楼' to link
   def link_mention_floor(text)
-    text.gsub!(/#(\d+)([楼樓Ff])/) { link_to("##{$1}#{$2}", "#reply#{$1}", :class => "at_floor", "data-floor" => $1, :onclick => "return Topics.hightlightReply(#{$1})")}
+    text.gsub!(/#(\d+)([楼樓Ff])/) { link_to "##{$1}#{$2}", "#reply#{$1}", :class => "at_floor", "data-floor" => $1 }
   end
 
   # convert '@user' to link

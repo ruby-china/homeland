@@ -3,8 +3,14 @@ window.Topics =
   # 往话题编辑器里面插入图片代码
   appendImageFromUpload : (srcs) ->
     txtBox = $(".topic_editor")
+    caret_pos = txtBox.caretPos()
+    src_merged = ""
     for src in srcs
-      txtBox.val("#{txtBox.val()}[img]#{src}[/img]\n")
+      src_merged = "![](#{src})\n"
+    source = txtBox.val()
+    before_text = source.slice(0, caret_pos)
+    txtBox.val(before_text + src_merged + source.slice(caret_pos+1, source.count))
+    txtBox.caretPos(caret_pos+src_merged.length)
     txtBox.focus()
     $("#add_image").jDialog.close()
 

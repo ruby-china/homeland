@@ -53,7 +53,7 @@ describe TopicsHelper do
 
     it "should link mentioned floor" do
       helper.format_topic_body('#3楼很强大').should ==
-        '<p><a href="#reply3" class="at_floor" data-floor="3" onclick="return Topics.hightlightReply(3)">#3楼</a>很强大</p>'
+        '<p><a href="#reply3" class="at_floor" data-floor="3">#3楼</a>很强大</p>'
     end
     
     it "should support inline code" do

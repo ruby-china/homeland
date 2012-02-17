@@ -90,6 +90,12 @@ $(document).ready ->
 
   $("#new_reply").submit () ->
     $('#btn_reply').button('loading')
+
+  $("a.at_floor").live 'click', () ->
+    Topics.hightlightReply($(this).data("floor"))
+
+  $("a.small_reply").live 'click', () ->
+    Topics.reply($(this).data("floor"), $(this).data("login"))
   
   Topics.hookPreview($(".editor_toolbar"), $(".topic_editor"))
   

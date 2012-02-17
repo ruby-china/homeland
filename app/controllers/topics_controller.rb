@@ -82,7 +82,7 @@ class TopicsController < ApplicationController
   end
 
   def edit
-    @topic = current_user.topics.find(params[:id])
+    @topic = Topic.find(params[:id])
     @node = @topic.node
     drop_breadcrumb("#{@node.name}", node_topics_path(@node.id))
     drop_breadcrumb t("topics.edit_topic")
@@ -111,7 +111,7 @@ class TopicsController < ApplicationController
   end
 
   def update
-    @topic = current_user.topics.find(params[:id])
+    @topic = Topic.find(params[:id])
     pt = params[:topic]
     @topic.node_id = pt[:node_id]
     @topic.title = pt[:title]
@@ -125,7 +125,7 @@ class TopicsController < ApplicationController
   end
 
   def destroy
-    @topic = current_user.topics.find(params[:id])
+    @topic = Topic.find(params[:id])
     @topic.destroy
     redirect_to(topics_path, :notice => t("topics.delete_topic_success"))
   end

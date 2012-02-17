@@ -30,7 +30,7 @@
 
       <div class="tools pull-right">
         <%= likeable_tag(@topic) %>
-        <% if owner?(@topic) %>
+        <% if owner?(@topic) or admin? %>
           <%= link_to "", edit_topic_path(@topic), :class => "icon small_edit", :title => "修改本帖" %>
           <%= link_to "", topic_path(@topic.id), :method => :delete, :confirm => t("common.confirm_delete"), :class => "icon small_delete", :title => "删除本帖" %>
         <% end %>

@@ -1,8 +1,9 @@
 <ul>
+  <li>支持 Markdown 格式</li>
   <li><strong>**粗体**</strong>、<em>*斜体*</em>、~~删除线~~、<code>`单行代码`</code></li>
   <li>http://example.org 自动加链接</li>
   <li>@name  会链接到用户页面，并会通知他</li>
-  <li>[img]http://foo.bar/a.jpg[/img] 显示图片</li>
+  <li>![Alt text here](http://foo.com/bar.jpg) 显示图片</li>
   <li><a href="#" data-controls-modal="markdown_help_tip_modal" data-keyboard="true" data-backdrop="true">点击这里</a>，或者按“M”键查看更多帮助。</li>
 </ul>
 
@@ -13,11 +14,13 @@
   </div>
   <div class="modal-body">
     <ul>
+      <li>支持 Markdown 格式</li>
       <li><strong>**粗体**</strong>、<em>*斜体*</em>、~~删除线~~、<code>`单行代码`</code></li>
       <li>http://example.org 自动加链接</li>
       <li>@name  会链接到用户页面，并会通知他</li>
-      <li>[img]http://foo.bar/a.jpg[/img] 显示图片</li>
-      <li>多行代码格式，使用3个`包起来，注意要换行，第一个```后面接语言名称(ruby,bash,html,css,python,erb,java... <a href="http://pygments.org/docs/lexers/" target="_blank">更多</a>)<br />如：
+      <li>![Alt text here](http://foo.com/bar.jpg) 显示图片</li>
+      <li>多行代码格式，使用3个`包起来，注意要换行，第一个```后面接语言名称(ruby,bash,html,css,python,erb,java... <a href="http://pygments.org/docs/lexers/" target="_blank">更多</a>)<br />
+        比如这样：
           <pre style="border:0;background:#FFF;margin:0;">```ruby
 class Hello
 end

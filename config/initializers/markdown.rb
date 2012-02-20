@@ -4,7 +4,7 @@ module Redcarpet
   module Render
     class HTMLwithSyntaxHighlight < HTML
       def initialize(extensions={})
-        super(extensions.merge(:xhtml => true, :no_styles => true, :filter_html => true))
+        super(extensions.merge(:xhtml => true, :no_styles => true, :filter_html => true, :hard_wrap => true))
       end
 
       def block_code(code, language)

@@ -58,7 +58,7 @@ gem "settingslogic", "~> 2.0.6"
 gem "cells", "3.7.1"
 
 # 队列
-gem "resque", "~> 1.19.0", :require => "resque/server"
+gem "resque", "~> 1.20.0", :require => "resque/server"
 gem "resque_mailer", '2.0.2'
 
 # AWS Simple Email Server

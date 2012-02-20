@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :site_node do
-    name "random site node"
+    sequence(:name) { |n| "site node #{n}" }
   end
 end

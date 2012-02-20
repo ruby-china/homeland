@@ -2,9 +2,8 @@
 
 FactoryGirl.define do
   factory :site do
-    sequence(:name) { |n| "name #{n}" }
+    sequence(:name) { |n| "site #{n}" }
     sequence(:url) { |n| "http://awesome-site-no-#{n}.com" }
-    sequence(:title) { |n| "title #{n}" }
     sequence(:desc) { |n| "desc #{n}" }
     association :site_node
     user nil

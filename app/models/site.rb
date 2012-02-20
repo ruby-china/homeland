@@ -16,9 +16,10 @@ class Site
   belongs_to :user
 
   validates_presence_of :url, :name, :site_node_id
-  validates_uniqueness_of :url
+  
+  index :url
 
-  before_save :fix_urls
+  before_validation :fix_urls, :check_uniq
   def fix_urls
     if self.favicon.blank?
       self.favicon = self.favicon_url
@@ -29,9 +30,15 @@ class Site
     end
 
     if !self.url.blank?
-      if self.url.match(/:\/\//).blank?
-        self.url = "http://#{self.url}"
-      end
+      url = self.url.gsub(/http[s]{0,1}:\/\//,'').split('/').first
+      self.url = "http://#{url}"
+    end
+  end
+  
+  def check_uniq
+    if Site.unscoped.or(:url => url).count > 0
+      self.errors.add(:url,"已经提交过了。")
+      return false
     end
   end
 

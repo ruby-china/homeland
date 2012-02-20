@@ -12,7 +12,7 @@
       <td class="opts"></td>
     </tr>
     <% @sites.each do |item| %>
-    <tr class="<%= cycle("","even") %>">
+    <tr class="<%= cycle("","even") %><%= ' deleted' if !item.deleted_at.blank? %>">
       <td><%= item.id %></td>
       <td><%= item.name %></td>
       <td><%= item.url %></td>

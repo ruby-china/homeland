@@ -89,9 +89,5 @@ describe TopicsHelper do
     it "should highlight code block without language" do
       helper.format_topic_body("```\ngem install ruby\n```").gsub("\n",'').should == '<div class="highlight"><pre>gem install ruby</pre></div>'
     end
-    
-    it "should break by \\n" do
-      helper.format_topic_body("foo\nbar").should == "<p>foo</p><p>bar</p>"
-    end
   end
 end

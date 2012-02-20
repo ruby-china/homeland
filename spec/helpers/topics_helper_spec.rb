@@ -59,6 +59,11 @@ describe TopicsHelper do
       helper.format_topic_body('#3楼很强大').should ==
         '<p><a href="#reply3" class="at_floor" data-floor="3">#3楼</a>很强大</p>'
     end
+
+    it "should wrap break line" do
+      helper.format_topic_body("line 1\nline 2").should ==
+        "<p>line 1<br/>\nline 2</p>"
+    end
     
     it "should support inline code" do
       helper.format_topic_body("This is `Ruby`").should == "<p>This is <code>Ruby</code></p>"

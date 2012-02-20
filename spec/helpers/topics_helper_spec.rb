@@ -70,8 +70,7 @@ describe TopicsHelper do
         '<div class="highlight"><pre><span class="k">class</span> <span class="nc">Hello</span>
 <span class="k">end</span>
 </pre>
-</div>'
-        
+</div>' 
     end
     
     it "should highlight code block after the content" do
@@ -84,6 +83,10 @@ describe TopicsHelper do
    
     it "should highlight code block without language" do
       helper.format_topic_body("```\ngem install ruby\n```").gsub("\n",'').should == '<div class="highlight"><pre>gem install ruby</pre></div>'
+    end
+    
+    it "should break by \\n" do
+      helper.format_topic_body("foo\nbar").should == "<p>foo</p><p>bar</p>"
     end
   end
 end

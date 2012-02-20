@@ -12,7 +12,7 @@ module TopicsHelper
     
     link_mention_floor(result)
     link_mention_user(result)
-        
+
     return result.strip.html_safe
   end
 

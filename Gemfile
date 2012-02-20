@@ -79,6 +79,8 @@ gem 'bootstrap-rails', :require => 'bootstrap-rails', :git => 'git://github.com/
 gem 'sunspot_rails',  "~> 1.3.0"
 gem 'sunspot_solr'
 
+gem 'daemon-spawn'
+
 # 禁用 assets 日志
 gem 'quiet_assets', :git => 'git://github.com/AgilionApps/quiet_assets.git'
 

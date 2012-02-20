@@ -113,6 +113,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.2.0)
+    daemon-spawn (0.4.2)
     daemons (1.1.6)
     dalli (1.1.1)
     devise (1.5.2)
@@ -366,6 +367,7 @@ DEPENDENCIES
   cells (= 3.7.1)
   chunky_png (= 1.2.5)
   coffee-rails (~> 3.2.1)
+  daemon-spawn
   dalli (= 1.1.1)
   devise (= 1.5.2)
   factory_girl_rails

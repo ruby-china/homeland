@@ -2,7 +2,7 @@
 class Cpanel::SitesController < Cpanel::ApplicationController
 
   def index
-    @sites = Site.desc('_id').paginate(:page => params[:page], :per_page => 20)
+    @sites = Site.unscoped.recent.paginate(:page => params[:page], :per_page => 20)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -11,7 +11,7 @@ class Cpanel::SitesController < Cpanel::ApplicationController
   end
 
   def show
-    @site = Site.find(params[:id])
+    @site = Site.unscoped.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -29,7 +29,7 @@ class Cpanel::SitesController < Cpanel::ApplicationController
   end
 
   def edit
-    @site = Site.find(params[:id])
+    @site = Site.unscoped.find(params[:id])
   end
 
   def create
@@ -47,7 +47,7 @@ class Cpanel::SitesController < Cpanel::ApplicationController
   end
 
   def update
-    @site = Site.find(params[:id])
+    @site = Site.unscoped.find(params[:id])
 
     respond_to do |format|
       if @site.update_attributes(params[:site])
@@ -61,7 +61,7 @@ class Cpanel::SitesController < Cpanel::ApplicationController
   end
 
   def destroy
-    @site = Site.find(params[:id])
+    @site = Site.unscoped.find(params[:id])
     @site.destroy
 
     respond_to do |format|

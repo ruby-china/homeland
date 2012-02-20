@@ -17,7 +17,7 @@
   </h3>
   <%- if reply.present? -%>
     <blockquote>
-      <%= format_topic_body(reply.body, :mentioned_user_logins => reply.mentioned_user_logins) %>
+      <%= format_topic_body(reply.body) %>
     </blockquote>
   <%- end -%>
 </td>

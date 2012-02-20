@@ -9,7 +9,7 @@
   <div class="box">
         <h2><%= t("users.bind_another_account")%></h2>
         <ul>
-          <% ["github","douban"].each do |provider| %>
+          <% ["github"].each do |provider| %>
             <li>
               <% if @user.bind? provider %>
                 <%= link_to( provider.titleize, "/account/auth/#{provider}/unbind", :rel => "twitsy", :title => "点击解除绑定" )%>

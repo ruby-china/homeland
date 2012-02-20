@@ -29,7 +29,9 @@ module TopicsHelper
   # convert '@user' to link
   # match any user even not exist.
   def link_mention_user(text)
-    text.gsub!(/@(\w+)/i) { link_to(raw("<i>@</i>#{$1}"), user_path($1), :class => "at_user", :title => "@#{$1}") }
+    text.gsub!(/(^|[^a-zA-Z0-9_!#\$%&*@＠])@([a-zA-Z0-9_]{1,20})/io) { 
+      "#{$1}" + link_to(raw("<i>@</i>#{$2}"), user_path($2), :class => "at_user", :title => "@#{$2}") 
+    }
   end
 
   def topic_use_readed_text(state)

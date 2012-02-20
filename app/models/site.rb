@@ -30,7 +30,7 @@ class Site
     end
 
     if !self.url.blank?
-      url = self.url.gsub(/http[s]{0,1}:\/\//,'').split('/').first
+      url = self.url.gsub(/http[s]{0,1}:\/\//,'').split('/').join("/")
       self.url = "http://#{url}"
     end
   end

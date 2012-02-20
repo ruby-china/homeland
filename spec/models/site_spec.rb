@@ -31,7 +31,7 @@ describe Site do
     site = Factory(:site, :url => "bar5.com/")
     site.reload.url.should == "http://bar5.com"
     site = Factory(:site, :url => "http://bar6.com/bar")
-    site.reload.url.should == "http://bar6.com"
+    site.reload.url.should == "http://bar6.com/bar"
   end
   
   it "should not add again when url was deleted" do

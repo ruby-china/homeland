@@ -12,6 +12,7 @@
         email: "E-mail"
         location: "城市"
         bio: "個人介紹"
+        avatar: "头像"
         password: "密碼"
         password_confirmation: "確認密碼"
         website: "個人主頁"

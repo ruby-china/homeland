@@ -38,6 +38,8 @@ class User
   has_many :notifications, :class_name => 'Notification::Base', :dependent => :delete
   has_many :photos
   has_many :likes
+  
+  mount_uploader :avatar, AvatarUploader
 
   def read_notifications(notifications)
     unread_ids = notifications.find_all{|notification| !notification.read?}.map(&:_id)

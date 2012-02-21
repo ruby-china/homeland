@@ -28,6 +28,7 @@
     users_joined: "位会员加入了"
     hot_users: "活跃会员"
     recent_joined: "最新加入的会员"
+    edit_on_gravatar: "如需修改头像，请进入"
     menu:
       topics: "帖子" 
       recent_reply_topics: "最近回帖"

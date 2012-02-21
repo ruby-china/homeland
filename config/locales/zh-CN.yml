@@ -10,6 +10,7 @@
         name: "名字"
         login: "用户名"
         email: "Email"
+        avatar: "头像"
         location: "城市"
         bio: "个人介绍"
         password: "密码"

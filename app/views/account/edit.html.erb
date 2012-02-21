@@ -1,10 +1,6 @@
 <div class="sidebar">
   <div class="box" style="text-align:center;">
-     <% if I18n.default_locale == "zh-CN"%>
-         <%= user_avatar_tag(@user, 120, :link => false) %> <br />如需修改头像，请进入 <a href="http://www.gravatar.com">gravatar.com</a>
-     <% else %>
-         <%= user_avatar_tag(@user, 120, :link => false) %> <br />如需修改頭像，請進入<a href="http://www.gravatar.com">gravatar.com</a>
-     <% end %>
+     <%= user_avatar_tag(@user, :big, :link => false) %> <br /><%= t("users.edit_on_gravatar") %> <a href="http://www.gravatar.com">gravatar.com</a>
   </div>
   <div class="box">
         <h2><%= t("users.bind_another_account")%></h2>
@@ -39,6 +35,12 @@
             <%= f.label :name %>
             <div class="input">
               <%= f.text_field :name %>
+            </div>
+          </div>
+          <div class="clearfix">
+            <%= f.label :avatar %>
+            <div class="input">
+              <%= f.file_field :avatar %>
             </div>
           </div>
           <div class="clearfix">

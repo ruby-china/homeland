@@ -29,14 +29,18 @@ module UsersHelper
 
   def user_avatar_tag(user, size = :normal, opts = {})
     link = opts[:link] || true
+    
+    if user.avatar.blank?
+      width = user_avatar_width_for_size(size)
 
-    width = user_avatar_width_for_size(size)
+      hash = (user.blank? or user.email.blank?) ? Digest::MD5.hexdigest("") : Digest::MD5.hexdigest(user.email)
+      return image_tag("http://www.gravatar.com/avatar/#{hash}.png?s=#{width}&d=identicon")  if user.blank?
 
-    hash = (user.blank? or user.email.blank?) ? Digest::MD5.hexdigest("") : Digest::MD5.hexdigest(user.email)
-    return image_tag("http://www.gravatar.com/avatar/#{hash}.png?s=#{width}&d=identicon")  if user.blank?
-
-    img_src = "http://www.gravatar.com/avatar/#{hash}.png?s=#{width}&d=identicon"
-    img = image_tag(img_src, :style => "width:#{width}px;height:#{width}px;")
+      img_src = "http://www.gravatar.com/avatar/#{hash}.png?s=#{width}&d=identicon"
+      img = image_tag(img_src, :style => "width:#{width}px;height:#{width}px;")
+    else
+      img = image_tag(user.avatar.url(size), :style => "width:#{width}px;height:#{width}px;")
+    end
 
     if link
       raw %(<a href="#{user_path(user.login)}" #{user_popover_info(user)} class="user_avatar">#{img}</a>)

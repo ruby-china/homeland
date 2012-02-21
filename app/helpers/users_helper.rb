@@ -23,6 +23,7 @@ module UsersHelper
       when :normal then 48
       when :small then 16
       when :large then 64
+      when :big then 120
       else size
     end
   end
@@ -30,12 +31,15 @@ module UsersHelper
   def user_avatar_tag(user, size = :normal, opts = {})
     link = opts[:link] || true
     
+    width = user_avatar_width_for_size(size)
+    
+    if user.blank?
+      hash = Digest::MD5.hexdigest("")
+      return image_tag("http://www.gravatar.com/avatar/#{hash}.png?s=#{width}&d=identicon")
+    end
+
     if user.avatar.blank?
-      width = user_avatar_width_for_size(size)
-
-      hash = (user.blank? or user.email.blank?) ? Digest::MD5.hexdigest("") : Digest::MD5.hexdigest(user.email)
-      return image_tag("http://www.gravatar.com/avatar/#{hash}.png?s=#{width}&d=identicon")  if user.blank?
-
+      hash = Digest::MD5.hexdigest(user.email || "")
       img_src = "http://www.gravatar.com/avatar/#{hash}.png?s=#{width}&d=identicon"
       img = image_tag(img_src, :style => "width:#{width}px;height:#{width}px;")
     else

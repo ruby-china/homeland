@@ -38,14 +38,10 @@ module UsersHelper
       return image_tag("http://www.gravatar.com/avatar/#{hash}.png?s=#{width}&d=identicon")
     end
 
-    if user.avatar.blank?
-      hash = Digest::MD5.hexdigest(user.email || "")
-      img_src = "http://www.gravatar.com/avatar/#{hash}.png?s=#{width}&d=identicon"
-      img = image_tag(img_src, :style => "width:#{width}px;height:#{width}px;")
-    else
-      img = image_tag(user.avatar.url(size), :style => "width:#{width}px;height:#{width}px;")
-    end
-
+    hash = Digest::MD5.hexdigest(user.email || "")
+    img_src = "http://www.gravatar.com/avatar/#{hash}.png?s=#{width}&d=identicon"
+    img = image_tag(img_src, :style => "width:#{width}px;height:#{width}px;")
+    
     if link
       raw %(<a href="#{user_path(user.login)}" #{user_popover_info(user)} class="user_avatar">#{img}</a>)
     else

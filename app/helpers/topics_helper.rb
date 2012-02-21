@@ -1,4 +1,5 @@
 # coding: utf-8
+require 'digest/md5'
 module TopicsHelper
   def format_topic_body(text, options = {})
     return '' if text.blank?
@@ -9,7 +10,7 @@ module TopicsHelper
     text.gsub!("\n```","\n\n```")
     
     result = MarkdownTopicConverter.convert(text)
-    
+
     link_mention_floor(result)
     link_mention_user(result)
 

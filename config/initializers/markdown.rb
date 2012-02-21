@@ -4,7 +4,10 @@ module Redcarpet
   module Render
     class HTMLwithSyntaxHighlight < HTML
       def initialize(extensions={})
-        super(extensions.merge(:xhtml => true, :no_styles => true, :filter_html => true, :hard_wrap => true))
+        super(extensions.merge(:xhtml => true, 
+                               :no_styles => true, 
+                               :filter_html => true, 
+                               :hard_wrap => true))
       end
 
       def block_code(code, language)
@@ -22,8 +25,7 @@ module Redcarpet
           link          
         else
           "<a href=\"#{link}\" rel=\"nofollow\" target=\"_blank\">#{link}</a>"
-        end
-        
+        end        
       end
     end
     
@@ -51,7 +53,8 @@ class MarkdownConverter
   def initialize
     @converter = Redcarpet::Markdown.new(Redcarpet::Render::HTMLwithSyntaxHighlight.new, {
         :autolink => true,
-        :fenced_code_blocks => true
+        :fenced_code_blocks => true,
+        :no_intra_emphasis => true
       })
   end
 end
@@ -63,7 +66,8 @@ class MarkdownTopicConverter < MarkdownConverter
         :autolink => true,
         :fenced_code_blocks => true,
         :strikethrough => true,
-        :space_after_headers => true
+        :space_after_headers => true,
+        :no_intra_emphasis => true
       })
   end
 end

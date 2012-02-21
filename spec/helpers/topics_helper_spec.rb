@@ -89,5 +89,13 @@ describe TopicsHelper do
     it "should highlight code block without language" do
       helper.format_topic_body("```\ngem install ruby\n```").gsub("\n",'').should == '<div class="highlight"><pre>gem install ruby</pre></div>'
     end
+    
+    it "should not filter underscore" do
+      helper.format_topic_body("ruby_china_image `ruby_china_image`").should == "<p>ruby_china_image <code>ruby_china_image</code></p>"
+      helper.format_topic_body("```\nruby_china_image\n```").should == 
+        '<div class="highlight"><pre>ruby_china_image
+</pre>
+</div>'
+    end
   end
 end

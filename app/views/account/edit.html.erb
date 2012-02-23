@@ -51,10 +51,12 @@
             </div>
           </div>
           <div class="clearfix">
-              <%= f.label :github %>
-              <div class="input">
-                <%= f.text_field :github, :class => "span3" %>
-                <span class="help-block">http://github.com/<span class="label success">:youname</span></span>
+            <%= f.label :github %>
+            <div class="input">
+              <div class="input-prepend">
+                <span class="add-on">https://github.com/</span>
+                <%= f.text_field :github, :class => "small", :placeholder => "yourname" %>
+              </div>
             </div>
           </div>
           <div class="clearfix">

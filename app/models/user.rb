@@ -103,7 +103,7 @@ REDUCE
 
   def github_url
     return "" if self.github.blank?
-    "http://github.com/#{self.github}"
+    "https://github.com/#{self.github.split('/').last}"
   end
 
   # 是否是管理员

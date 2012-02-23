@@ -100,4 +100,18 @@ describe User do
       it { should_not have_role(:savior_of_the_broken) }
     end
   end
+
+  describe "github url" do
+    subject { Factory(:user, :github => 'monkey') }
+    let(:expected) { "https://github.com/monkey" }
+
+    context "user name provided correct" do
+      its(:github_url) { should == expected }
+    end
+
+    context "user name provided as full url" do
+      before { subject.stub!(:github).and_return("http://github.com/monkey") }
+      its(:github_url) { should == expected }
+    end
+  end
 end

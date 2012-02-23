@@ -66,7 +66,8 @@ module UsersHelper
   end
 
   def render_user_personal_website(user)
-    link_to(user.website, user.website, :target => "_blank", :rel => "nofollow")
+    website = user.website[/^https?:\/\//] ? user.website : "http://" + user.website
+    link_to(website, website, :target => "_blank", :rel => "nofollow")
   end
 
   def render_user_level_tag(user)

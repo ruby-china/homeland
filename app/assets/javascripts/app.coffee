@@ -38,7 +38,7 @@ window.App =
           type : likeable_type
         success : (re) ->
           if parseInt(re)  >= 0
-            $(el).data("state","").attr("title", "取消喜欢")
+            $(el).data("state","").attr("title", "喜欢(可用于收藏此贴)")
             $('span',el).text("#{re}人喜欢")
             $("i.icon",el).attr("class","icon small_like")
           else

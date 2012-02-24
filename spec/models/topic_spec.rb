@@ -7,6 +7,13 @@ describe Topic do
     Factory(:topic).replied_at.should_not be_nil
   end
 
+  it "should not update replied_at on save" do
+    topic = Factory(:topic)
+    replied_at_was = topic.replied_at
+    topic.save
+    topic.replied_at.should == replied_at_was
+  end
+
   it "should get node name" do
     node = Factory :node
     Factory(:topic, :node => node).node_name.should == node.name

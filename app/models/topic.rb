@@ -60,8 +60,12 @@ class Topic
 
   before_save :store_cache_fields
   def store_cache_fields
-    self.replied_at = Time.now
     self.node_name = self.node.try(:name) || ""
+  end
+
+  before_create :init_replied_at_on_create
+  def init_replied_at_on_create
+    self.replied_at = Time.now if self.replied_at.blank?
   end
 
   def push_follower(user_id)

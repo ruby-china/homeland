@@ -1,8 +1,8 @@
-This is source code of [Ruby China Group](http://ruby-china.org)
+This is the source code of [Ruby China Group](http://ruby-china.org)
 
 ## Install
 
-  * You need to install *Ruby 1.9.2*, *Rubygems* and *Rails 3.1* first.
+  * You need *Ruby 1.9.2+*, *Rubygems* and *Rails 3.2+* first.
   * Install and start *Redis*, *MongoDB*, *memcached*, *Python*, *Pygments*
 
   ```
@@ -10,7 +10,6 @@ This is source code of [Ruby China Group](http://ruby-china.org)
   cp config/mongoid.yml.default config/mongoid.yml
   cp config/redis.yml.default config/redis.yml
   bundle install
-  bundle update rails
   rake assets:precompile
   thin start -O -C config/thin.yml
   ./script/resque start

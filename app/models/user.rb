@@ -242,7 +242,7 @@ REDUCE
       rescue => e
         Rails.logger.error("Github Repositiory fetch Error: #{e}")
         items = []
-        Rails.cache.write(cache_key, items, :expires_in => 1.minutes)
+        Rails.cache.write(cache_key, items, :expires_in => 1.days)
       end
     end
     items

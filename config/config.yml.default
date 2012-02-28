@@ -19,6 +19,7 @@ defaults: &defaults
   google_js_api_key: "ABQIAAAAC-ble-vmy_g7-Qvem5P86xTX2XchcwgyHzp4Xo0DHRAzt2aLjhQnflwIyCJBOWYCE_rFuUkE0qEmhw"
   external_feed_url: "http://ruby-taiwan.org/topics/feed"
   external_feed_name: "Ruby Taiwan Group"
+  twitter_id: "ruby_china"
 
 development:
   <<: *defaults

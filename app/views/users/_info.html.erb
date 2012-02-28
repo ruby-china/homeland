@@ -20,10 +20,6 @@
             <li><span><%= t("users.signature")%>:</span><%= render_user_tagline(@user) %></li>
         <% end %>
         
-        <% if !@user.github.blank? %>
-            <li><span>Github:</span><%= render_user_github_url(@user) %> </li>
-        <% end %>
-        
         <% if !@user.website.blank? %>
             <li><span><%= t("users.personal_website")%>:</span><%= render_user_personal_website(@user)%></li>
         <% end %>

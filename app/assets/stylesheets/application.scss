@@ -20,11 +20,13 @@ code { background:none; }
 
 .breadcrumb { color:#999;}
 
-.container-fluid { padding:0;}
+
+.container-fluid { padding:0; }
 .container-fluid > .sidebar {
-  position:relative;
-  left:0;
-  float:right;
+  position:absolute;
+  left:auto;
+  right:0;
+  top:0;
   width: 220px;
 }
 

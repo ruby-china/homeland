@@ -1,16 +1,4 @@
 <% content_for :sitemap do %><span class="current">加入社区</span><% end %>
-<div class="sidebar">
-  <div class="box">
-    <h2>还没有帐号？</h2>
-    <%= render :partial => "devise/shared/links" %>
-  </div>
-  <div class="box">
-        <h2>用其他平台的帐号登录</h2>
-        <ul>
-          <li><%= link_to "Github", user_omniauth_authorize_path(:github) %> </li>
-        </ul>
-    </div>
-</div>
 <div class="content">
     <div class="box">
     <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
@@ -38,4 +26,16 @@
       </fieldset>
     <% end %>
   </div>
+</div>
+<div class="sidebar">
+  <div class="box">
+    <h2>还没有帐号？</h2>
+    <%= render :partial => "devise/shared/links" %>
+  </div>
+  <div class="box">
+        <h2>用其他平台的帐号登录</h2>
+        <ul>
+          <li><%= link_to "Github", user_omniauth_authorize_path(:github) %> </li>
+        </ul>
+    </div>
 </div>

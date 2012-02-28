@@ -1,12 +1,4 @@
 <% content_for :sitemap do %><span class="current">加入社区</span><% end %>
-<div class="sidebar">
-  <div class="box">
-    <h2><%= t("users.already_have_account")%></h2>
-    <p style="line-height:20px;">
-      <%= render :partial => "devise/shared/links" %>
-    </p>
-  </div>
-</div>
 <div class="content">
     <div class="box">
     <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
@@ -42,3 +34,11 @@
   </div>
 </div>
 
+<div class="sidebar">
+  <div class="box">
+    <h2><%= t("users.already_have_account")%></h2>
+    <p style="line-height:20px;">
+      <%= render :partial => "devise/shared/links" %>
+    </p>
+  </div>
+</div>

@@ -3,12 +3,12 @@
 <li class="active"><%= t("common.edit") %></li>
 <% end %>
 
-<div class="sidebar">
-    <%= render_cell :topics, :sidebar_for_new_topic_node, { :node => @node } %>
+<div class="content">
+  <div class="box">
+      <%= render "form" %>
+  </div>
 </div>
 
-<div class="content">
-    <div class="box">
-        <%= render "form" %>
-    </div>
+<div class="sidebar">
+  <%= render_cell :topics, :sidebar_for_new_topic_node, { :node => @node } %>
 </div>

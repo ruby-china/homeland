@@ -6,10 +6,6 @@
 
 </script>
 <% end %>
-<div class="sidebar">
-    <%= render_cell :topics, :sidebar_for_new_topic_node, { :action => params[:action], :node => @node } %>
-    <%= render_cell :topics, :sidebar_for_more_like_this, { :topic => @topic} %>
-</div>
 
 <div class="content">
   <div id="topic_show" class="topics box">
@@ -59,4 +55,9 @@
   <% else %>
       <%= render :partial => "topics/translation/need_login_to_reply" %>
   <% end %>
+</div>
+
+<div class="sidebar">
+    <%= render_cell :topics, :sidebar_for_new_topic_node, { :action => params[:action], :node => @node } %>
+    <%= render_cell :topics, :sidebar_for_more_like_this, { :topic => @topic} %>
 </div>

@@ -1,11 +1,5 @@
 <%= render "base" %>
 
-<div class="sidebar">
-    <%= render "sidebar_for_topic_index" if action_name == "index" %>
-    <%= render "sidebar_for_topic_recent" if action_name == "recent" %>
-    <%= render "sidebar_for_topic_node" if action_name == "node" %>
-</div>
-
 <div class="content">
   <div class="box">
     <div id="node_info">
@@ -39,3 +33,8 @@
 
 </div>
 
+<div class="sidebar">
+    <%= render "sidebar_for_topic_index" if action_name == "index" %>
+    <%= render "sidebar_for_topic_recent" if action_name == "recent" %>
+    <%= render "sidebar_for_topic_node" if action_name == "node" %>
+</div>

@@ -5,14 +5,6 @@
   <%= javascript_include_tag "notifications" %>
 <% end %>
 
-<div class="sidebar">
-  <div class="box">
-    <div class="content">
-      <%= link_to t("common.mark_all_as_read"), mark_all_as_read_notifications_path, :class => 'btn', :method => :put, :remote => true, :disable_with => '标记所有为已读...' %>
-    </div>
-  </div>
-</div>
-
 <div class="content">
   <div id="notifications" class="box">
     <h1>提醒</h1>
@@ -29,5 +21,13 @@
       </tbody>
     </table>
     <%= will_paginate @notifications %>
+  </div>
+</div>
+
+<div class="sidebar">
+  <div class="box">
+    <div class="content">
+      <%= link_to t("common.mark_all_as_read"), mark_all_as_read_notifications_path, :class => 'btn', :method => :put, :remote => true, :disable_with => '标记所有为已读...' %>
+    </div>
   </div>
 </div>

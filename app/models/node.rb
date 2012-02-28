@@ -23,7 +23,10 @@ class Node
   scope :hots, desc(:topics_count)
   scope :sorted, desc(:sort)
 
-  after_save do
+  after_save :update_cache_version
+  after_destroy :update_cache_version
+
+  def update_cache_version
     # 记录节点变更时间，用于清除缓存
     CacheVersion.section_node_updated_at = Time.now
   end

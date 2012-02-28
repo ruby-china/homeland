@@ -1,4 +1,5 @@
 # coding: utf-8
+require "ruby-github"
 class User
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -231,7 +232,7 @@ REDUCE
   def github_repositories
     return [] if self.github.blank?
     count = 14
-    cache_key = "github_repositories:#{self.github}+#{count}" 
+    cache_key = "github_repositories:#{self.github}+#{count}+v1" 
     items = Rails.cache.read(cache_key)
     if items == nil
       begin

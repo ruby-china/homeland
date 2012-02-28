@@ -41,3 +41,20 @@
     }
   }
 }
+
+#user_github_repos {
+  .more { text-align:right; }
+  li { 
+    list-style:none;
+    margin:0 -10px;
+    padding:0 10px;
+    margin-bottom:10px; 
+    border-bottom:1px solid #eee;
+    .title { 
+      position:relative;
+      a { color:#333; font-weight:bold; }
+      .watchers { position:absolute; top:2px; right:0; }
+    }
+    .desc { font-size:12px; color:#888; }
+  }
+}

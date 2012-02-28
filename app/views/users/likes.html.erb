@@ -1,20 +1,25 @@
 <%= render "base" %>
-<%= render :partial => "info", :locals => {:user => @user } %>
 
-<div class="box">
-  <%= render "menu" %>
-  <table class="node_topics">
-    <tr class="head">
-      <td class="title"><%=t("users.menu.topic_title")%></td>
-      <td class="opts"></td>
-    </tr>
-    <% @likes.each do |item| %>
-    <tr class="topic <%= cycle('odd',"") %>">
-      <%# XXX: should be render_likeable_title() and detect instance type there %>
-      <td class="title"><%= render_topic_title(item.likeable) %></td>
-      <td></td>
-    </tr>
-    <% end %>
-  </table>
-  <%= will_paginate @likes %>
+<div class="content">
+  <%= render "info", :user => @user %>
+
+  <div class="box">
+    <%= render "menu" %>
+    <table class="node_topics">
+      <tr class="head">
+        <td class="title"><%=t("users.menu.topic_title")%></td>
+        <td class="opts"></td>
+      </tr>
+      <% @likes.each do |item| %>
+      <tr class="topic <%= cycle('odd',"") %>">
+        <%# XXX: should be render_likeable_title() and detect instance type there %>
+        <td class="title"><%= render_topic_title(item.likeable) %></td>
+        <td></td>
+      </tr>
+      <% end %>
+    </table>
+    <%= will_paginate @likes %>
+  </div>
 </div>
+
+<%= render "sidebar", :user => @user %>

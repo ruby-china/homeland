@@ -227,4 +227,24 @@ REDUCE
     self.save(:validate => false)
   end
 
+  # Github 项目
+  def github_repositories
+    return [] if self.github.blank?
+    count = 14
+    cache_key = "github_repositories:#{self.github}+#{count}" 
+    items = Rails.cache.read(cache_key)
+    if items == nil
+      begin
+        github = GitHub::API.user(self.github)
+        items = github.repositories.sort { |a1,a2| a2.watchers <=> a1.watchers }.take(count)
+        Rails.cache.write(cache_key, items, :expires_in => 7.days)
+      rescue => e
+        Rails.logger.error("Github Repositiory fetch Error: #{e}")
+        items = []
+        Rails.cache.write(cache_key, items, :expires_in => 1.minutes)
+      end
+    end
+    items
+  end
+
 end

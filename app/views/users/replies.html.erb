@@ -1,23 +1,29 @@
 <%= render "base" %>
-<%= render :partial => "info", :locals => {:user => @user } %>
-<div class="box">
-  <%= render "menu" %>
-  <div class="replies">
-    <ul>
-      <% @replies.each do |reply|
-        next if reply.topic.blank? %>
-        <li>
-          <h6>
-            <%= render_reply_at(reply) %>
-            在
-            <%= render_topic_title(reply.topic) %>
-            <%= t("common.reply")%>：
-          </h6>
-          <blockquote class="body">
-            <%= format_topic_body reply.body %>
-          </blockquote>
-        </li>
-      <% end %>
-    </ul>
+
+<div class="content">
+  <%= render "info", :user => @user %>
+
+  <div class="box">
+    <%= render "menu" %>
+    <div class="replies">
+      <ul>
+        <% @replies.each do |reply|
+          next if reply.topic.blank? %>
+          <li>
+            <h6>
+              <%= render_reply_at(reply) %>
+              在
+              <%= render_topic_title(reply.topic) %>
+              <%= t("common.reply")%>：
+            </h6>
+            <blockquote class="body">
+              <%= format_topic_body reply.body %>
+            </blockquote>
+          </li>
+        <% end %>
+      </ul>
+    </div>
   </div>
 </div>
+
+<%= render "sidebar", :user => @user %>

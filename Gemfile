@@ -84,6 +84,9 @@ gem 'daemon-spawn'
 # 禁用 assets 日志
 gem 'quiet_assets', :git => 'git://github.com/AgilionApps/quiet_assets.git'
 
+# Github API
+gem 'ruby-github'
+
 group :development, :test do
   gem 'capistrano', '2.9.0'
   gem 'chunky_png', "1.2.5"

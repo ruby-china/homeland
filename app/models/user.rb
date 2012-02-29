@@ -146,22 +146,6 @@ REDUCE
     :blocked => 2,
   }
 
-  # 用邮件地址创建一个用户
-  def self.find_or_create_guest(email)
-    if u = find_by_email(email)
-      return u
-    else
-      u = new(:email => email)
-      u.login = email.split("@").first
-      u.guest = true
-      if u.save
-        return u
-      else
-        Rails.logger.error("find_or_create_guest failed, #{u.errors.inspect}")
-      end
-    end
-  end
-
   def update_with_password(params={})
     if !params[:current_password].blank? or !params[:password].blank? or !params[:password_confirmation].blank?
       super
@@ -232,7 +216,7 @@ REDUCE
   def github_repositories
     return [] if self.github.blank?
     count = 14
-    cache_key = "github_repositories:#{self.github}+#{count}+v1" 
+    cache_key = "github_repositories:#{self.github}+#{count}+v1"
     items = Rails.cache.read(cache_key)
     if items == nil
       begin

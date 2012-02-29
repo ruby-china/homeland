@@ -30,7 +30,7 @@ class SiteConfig
       end
     else
       Rails.cache.fetch("site_config:#{method}") do
-        if item = where(:key => method).first
+        if item = find_by_key(method)
           item.value
         else
           nil
@@ -39,8 +39,8 @@ class SiteConfig
     end
   end
 
-  after_save :expire_cache
-  def expire_cache
+  after_save :update_cache
+  def update_cache
     Rails.cache.write("site_config:#{self.key}", self.value)
   end
 
@@ -49,8 +49,6 @@ class SiteConfig
   end
 
   def self.save_default(key, value)
-    if not find_by_key(key)
-      create(:key => key, :value => value.to_s)
-    end
+    create(:key => key, :value => value.to_s) unless find_by_key(key)
   end
 end

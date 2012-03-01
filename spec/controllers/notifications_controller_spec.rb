@@ -5,7 +5,8 @@ describe NotificationsController do
   describe "#index" do
     it "should show notifications" do
       sign_in user
-      3.times { Factory :notification_mention, :user => user }
+      Factory :notification_mention, :user => user
+      Factory :notification_topic_reply, :user => user
       get :index
       response.should render_template(:index)
     end

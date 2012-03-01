@@ -36,6 +36,18 @@ describe Reply do
       end.should change(user.notifications.unread, :count)
     end
 
+    it "should send topic reply notification to topic author" do
+      user = Factory :user
+      topic = Factory :topic, :user => user
+      lambda do
+        Factory :reply, :topic => topic
+      end.should change(user.notifications.unread, :count)
+
+      lambda do
+        Factory :reply, :topic => topic, :user => user
+      end.should_not change(user.notifications.unread, :count)
+    end
+
     it "should update Topic updated_at on Reply updated" do
       topic = Factory :topic, :updated_at => 1.days.ago
       old_updated_at = topic.updated_at

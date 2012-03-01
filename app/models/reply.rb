@@ -53,10 +53,16 @@ class Reply
     end
   end
 
-  after_create :send_mention_notification
+  after_create :send_mention_notification, :send_topic_reply_notification
   def send_mention_notification
     self.mentioned_user_ids.each do |user_id|
       Notification::Mention.create :user_id => user_id, :reply => self
+    end
+  end
+
+  def send_topic_reply_notification
+    if self.user != topic.user
+      Notification::TopicReply.create :user => topic.user, :reply => self
     end
   end
 end

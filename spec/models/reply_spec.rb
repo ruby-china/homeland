@@ -46,6 +46,11 @@ describe Reply do
       lambda do
         Factory :reply, :topic => topic, :user => user
       end.should_not change(user.notifications.unread, :count)
+
+      # Don't duplicate notifiation with mention
+      lambda do
+        Factory :reply, :topic => topic, :mentioned_user_ids => [user.id]
+      end.should_not change(user.notifications.unread.where(:_type => 'Notification::TopicReply'), :count)
     end
 
     it "should update Topic updated_at on Reply updated" do

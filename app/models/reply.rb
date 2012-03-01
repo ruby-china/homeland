@@ -61,7 +61,7 @@ class Reply
   end
 
   def send_topic_reply_notification
-    if self.user != topic.user
+    if self.user != topic.user && !mentioned_user_ids.include?(topic.user_id)
       Notification::TopicReply.create :user => topic.user, :reply => self
     end
   end

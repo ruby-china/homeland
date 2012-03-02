@@ -51,50 +51,67 @@ window.App =
       debug : false
       data : logins
       tpl : "<li data-insert='${login}'>${login} <small>${name}</small></li>"
+      
+  initForDesktopView : () ->
+    return if not $("meta[name=apple-mobile-web-app-capable]").attr("content") == undefined
+    $("a[rel=twipsy]").twipsy({ live: true })
+    $("a[rel=popover]").popover
+      live: true
+      html: true
 
+    # 用户头像 Popover
+    $("a[rel=userpopover]").popover
+      live: true
+      html: true
+      placement: (tip, ele) ->
+        $element = $(ele)
+        pos = $.extend({}, $element.offset(),
+          width: ele.offsetWidth
+          height: ele.offsetHeight
+        )
+        actualWidth = tip.offsetWidth
+        actualHeight = tip.offsetHeight
+        boundTop = $(document).scrollTop()
+        boundLeft = $(document).scrollLeft()
+        boundRight = boundLeft + $(window).width()
+        boundBottom = boundTop + $(window).height()
+        elementAbove =
+          top: pos.top - actualHeight - this.options.offset
+          left: pos.left + pos.width / 2 - actualWidth / 2
+        elementBelow =
+          top: pos.top + pos.height + this.options.offset
+          left: pos.left + pos.width / 2 - actualWidth / 2
+        elementLeft =
+          top: pos.top + pos.height / 2 - actualHeight / 2
+          left: pos.left - actualWidth - this.options.offset
+        elementRight =
+          top: pos.top + pos.height / 2 - actualHeight / 2
+          left: pos.left + pos.width + this.options.offset
+        isWithinBounds = (elementPosition) ->
+          return boundTop < elementPosition.top && boundLeft < elementPosition.left && boundRight > (elementPosition.left + actualWidth) && boundBottom > (elementPosition.top + actualHeight)
+        return 'below' if isWithinBounds(elementBelow)
+        return 'right' if isWithinBounds(elementRight)
+        return 'left' if isWithinBounds(elementLeft)
+        return 'above' if isWithinBounds(elementAbove)
+        return 'below'
+
+    # CommentAble @ 回复功能
+    commenters = []
+    commenter_exists = []
+    $(".cell_comments .comment .info .name a").each (idx) ->
+      val = 
+        login : $(this).text()
+        name : $(this).data('name')
+      if $.inArray(val.login,commenter_exists) < 0
+         commenters.push(val) 
+         commenter_exists.push(val.login)
+    App.at_replyable(".cell_comments_new textarea", commenters)
+      
 $(document).ready ->
+  App.initForDesktopView()
+  
   $("abbr.timeago").timeago()
-  $(".alert-message").alert()
-  $("a[rel=twipsy]").twipsy({ live: true })
-  $("a[rel=popover]").popover
-    live: true
-    html: true
-
-  # 用户头像 Popover
-  $("a[rel=userpopover]").popover
-    live: true
-    html: true
-    placement: (tip, ele) ->
-      $element = $(ele)
-      pos = $.extend({}, $element.offset(),
-        width: ele.offsetWidth
-        height: ele.offsetHeight
-      )
-      actualWidth = tip.offsetWidth
-      actualHeight = tip.offsetHeight
-      boundTop = $(document).scrollTop()
-      boundLeft = $(document).scrollLeft()
-      boundRight = boundLeft + $(window).width()
-      boundBottom = boundTop + $(window).height()
-      elementAbove =
-        top: pos.top - actualHeight - this.options.offset
-        left: pos.left + pos.width / 2 - actualWidth / 2
-      elementBelow =
-        top: pos.top + pos.height + this.options.offset
-        left: pos.left + pos.width / 2 - actualWidth / 2
-      elementLeft =
-        top: pos.top + pos.height / 2 - actualHeight / 2
-        left: pos.left - actualWidth - this.options.offset
-      elementRight =
-        top: pos.top + pos.height / 2 - actualHeight / 2
-        left: pos.left + pos.width + this.options.offset
-      isWithinBounds = (elementPosition) ->
-        return boundTop < elementPosition.top && boundLeft < elementPosition.left && boundRight > (elementPosition.left + actualWidth) && boundBottom > (elementPosition.top + actualHeight)
-      return 'below' if isWithinBounds(elementBelow)
-      return 'right' if isWithinBounds(elementRight)
-      return 'left' if isWithinBounds(elementLeft)
-      return 'above' if isWithinBounds(elementAbove)
-      return 'below'
+  $(".alert-message").alert()  
 
   # 绑定评论框 Ctrl+Enter 提交事件
   $(".cell_comments_new textarea").bind "keydown","ctrl+return",(el) ->
@@ -104,15 +121,4 @@ $(document).ready ->
   
   # Choose 样式
   $("select").chosen()
-
-  # CommentAble @ 回复功能
-  commenters = []
-  commenter_exists = []
-  $(".cell_comments .comment .info .name a").each (idx) ->
-    val = 
-      login : $(this).text()
-      name : $(this).data('name')
-    if $.inArray(val.login,commenter_exists) < 0
-       commenters.push(val) 
-       commenter_exists.push(val.login)
-  App.at_replyable(".cell_comments_new textarea", commenters)
+  

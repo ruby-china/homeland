@@ -7,7 +7,9 @@
 </td>
 <td>
   <h3>
-    <%= user_name_tag(reply.user) %>
+    <span class="user">
+      <%= user_name_tag(reply.user) %>
+    </span>
     回复了你的主题：
     <%= render_topic_title(topic) %>
     <% if !notification.read? %>
@@ -15,8 +17,8 @@
     <% end %>
   </h3>
   <%- if reply.present? -%>
-    <blockquote>
+    <div class="body md_body">
       <%= format_topic_body(reply.body) %>
-    </blockquote>
+    </div>
   <%- end -%>
 </td>

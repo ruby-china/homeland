@@ -10,11 +10,19 @@
     }
   }
 
-  td h3 {
-    font-size: 14px;
-    line-height: 18px;
-    padding-bottom: 8px;
+  td {
+    h3 {
+      font-size: 13px;
+      color:#999;
+      line-height: 18px;
+      font-weight:normal;
+      padding-bottom: 8px;
+      .user {
+        a { color:#666; font-weight:bold; text-decoration:underline; }
+      }
+    }
   }
+
 
   td.last {
     text-align: right;
@@ -33,9 +41,27 @@
       width:560px;
     }
   }
-  blockquote {
+  .body {
+    line-height:180%; font-size:14px; text-overflow: ellipsis; word-wrap: break-word; 
+    a:link, a:visited { color:#0069D6; text-decoration: none; }
+    a:hover { text-decoration: underline; color:#00438A; }
+    a.at_floor { color:#376B43; }
+    a.at_user { 
+      color:#333; font-weight:bold; 
+      i { color:#777; }
+    }
+    h4 { font-weight:bold; font-size:13px; line-height:180%; margin:0; color:#aaa; margin-top:10px; }
+    p { margin-bottom:10px; }
+    ul,
+    ol {
+      list-style-position: inside;
+      margin:0;
+      padding:5px 14px;
+      p { margin:0; }
+      li { line-height:160%; }
+    }
     img {
-      max-width:530px;
+      max-width:700px;
     }
   }
 }

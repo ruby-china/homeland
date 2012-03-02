@@ -126,9 +126,30 @@ form {
 }
 
 #notifications {
+  table {
+    tr {
+      td { padding:10px 0; word-break:break-all;}
+    }
+  }
   .highlight {
     .pre {
       width:80%;
+    }
+  }
+  .body {
+    img { display:none;}
+  }
+}
+
+.pagination {
+  li { display:none; }
+  li.active,
+  li.prev,
+  li.next { display:inline; }
+  li.active { border:none; 
+    a {
+      background:#F0F0F0;
+      color:#666;
     }
   }
 }

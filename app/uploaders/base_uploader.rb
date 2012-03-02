@@ -2,7 +2,6 @@
 require 'carrierwave/processing/mini_magick'
 class BaseUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
-  storage :grid_fs
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
@@ -26,7 +25,7 @@ class BaseUploader < CarrierWave::Uploader::Base
     if super.present?
       # current_path 是 Carrierwave 上传过程临时创建的一个文件，有时间标记，所以它将是唯一的
       @name ||= Digest::MD5.hexdigest(File.dirname(current_path))
-      "#{@name}.#{file.extension}"
+      "#{@name}.#{file.extension.downcase}"
     end
   end
 

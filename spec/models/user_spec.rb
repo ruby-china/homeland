@@ -39,13 +39,13 @@ describe User do
     end
 
     it "should not get results when user location not set" do
-      User.locations.count == 0
+      Location.count == 0
     end
 
     it "should get results when user location is set" do
       user.location = "hangzhou"
       user2.location = "Hongkong"
-      User.locations.count == 2
+      Location.count == 2
     end
   end
 

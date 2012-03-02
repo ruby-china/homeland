@@ -15,6 +15,7 @@ class User
   field :name
   field :email
   field :location
+  field :location_id, :type => Integer
   field :bio
   field :website
   field :github
@@ -62,36 +63,6 @@ class User
 
   scope :hot, desc(:replies_count, :topics_count)
 
-  def self.locations
-    locations_map = <<MAP
-        function() {
-          if (typeof this.location !== 'undefined' && this.location !== null)
-            emit(this.location, { logins: [this.login], count: 1 });
-        }
-MAP
-
-    locations_reduce = <<REDUCE
-        function(key, values) {
-          var count = 0;
-          var logins = [];
-          values.forEach(function(value) {
-              count += value.count;
-              logins.push(value.logins.pop());
-            });
-            return { logins: logins, count: count };
-          };
-REDUCE
-
-    self.collection.map_reduce(locations_map, locations_reduce, :out => "user_locations")
-  end
-
-  def self.hot_locations
-    locations = self.locations.find().to_a.reject { |l| l['_id'].blank? }.sort! do |x, y|
-      y['value']['count'] <=> x['value']['count']
-    end
-    locations[0..12]
-  end
-
   def self.find_for_database_authentication(conditions)
     login = conditions.delete(:login)
     self.where(:login => /^#{login}$/i).first || self.where(:email => /^#{login}$/i).first
@@ -135,6 +106,19 @@ REDUCE
   after_create :send_welcome_mail
   def send_welcome_mail
     UserMailer.welcome(self.id).deliver
+  end
+  
+  # 保存用户所在城市
+  before_save :store_location
+  def store_location
+    if self.location_changed?
+      if not self.location.blank?
+        location = Location.find_or_create_by_name(self.location)
+        self.location_id = (location.blank? ? nil : location.id)
+      else
+        self.location_id = nil
+      end
+    end
   end
 
   STATE = {
@@ -231,5 +215,4 @@ REDUCE
     end
     items
   end
-
 end

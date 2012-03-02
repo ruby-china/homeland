@@ -58,7 +58,7 @@ describe UsersController do
 
     it "should show user associated with that location" do
       get :location, :id => user.location
-      response.should be_success
+      response.status.should == 200
       assigns[:users].should include(user)
     end
   end

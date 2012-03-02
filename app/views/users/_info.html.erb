@@ -11,7 +11,7 @@
         <li><span>Name:</span><strong><%= @user.name %></strong></li>
         <% end %>
         <% if !@user.location.blank? %>
-             <li><span><%= t("users.city")%>:</span><%= render_user_location(@user) %></li>
+             <li><span><%= t("users.city")%>:</span><%= location_name_tag(@user.location) %></li>
         <% end %>
         
         <li><span><%= t("users.join_time")%>:</span><%= render_user_join_time(@user) %></li>

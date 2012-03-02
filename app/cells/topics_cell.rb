@@ -59,7 +59,7 @@ class TopicsCell < BaseCell
 
   cache :index_locations, :expires_in => 1.days
   def index_locations
-    @hot_locations = User.hot_locations
+    @hot_locations = Location.hot.limit(12)
     render
   end
 end

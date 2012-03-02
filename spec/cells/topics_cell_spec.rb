@@ -58,8 +58,12 @@ describe TopicsCell do
 
   describe "index_locations" do
     it "should render hot locations" do
-      User.stub(:hot_locations).and_return(["Shanghai", "Osaka", "Tokyo"])
-      render_cell(:topics, :index_locations).should have_css('div#hot_locations li.name', :count => 3)
+      l1 = Factory(:location)
+      l2 = Factory(:location)
+      l3 = Factory(:location)
+      count = Location.count 
+      count = 12 if count > 12
+      render_cell(:topics, :index_locations).should have_css('div#hot_locations li.name', :count => count)
     end
   end
 end

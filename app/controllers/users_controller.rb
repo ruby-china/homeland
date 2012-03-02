@@ -40,12 +40,20 @@ class UsersController < ApplicationController
   end
 
   def location
-    @location = params[:id]
-    @users = User.where(:location => @location).desc('replies_count').paginate(:page => params[:page], :per_page => 30)
+    @location = Location.find_by_name(params[:id])
+    if @location.blank?
+      render_404
+      return 
+    end
+    
+    @users = User.where(:location_id => @location.id).desc('replies_count').paginate(:page => params[:page], :per_page => 30)
 
-    render_404 if @users.count == 0
+    if @users.count == 0
+      render_404
+      return
+    end
 
-    drop_breadcrumb(@location)
+    drop_breadcrumb(@location.name)
   end
 
   protected

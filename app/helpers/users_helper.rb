@@ -48,11 +48,7 @@ module UsersHelper
       raw img
     end
   end
-
-  def render_user_location(user)
-    location_name_tag(user.location)
-  end
-
+  
   def render_user_join_time(user)
     I18n.l(user.created_at.to_date, :format => :long)
   end

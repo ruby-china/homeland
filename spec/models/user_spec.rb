@@ -37,7 +37,9 @@ describe User do
       user_for_delete1.login.should == "Guest"
       user_for_delete1.state.should == -1
     end
-
+  end
+  
+  describe "location" do
     it "should not get results when user location not set" do
       Location.count == 0
     end
@@ -46,6 +48,20 @@ describe User do
       user.location = "hangzhou"
       user2.location = "Hongkong"
       Location.count == 2
+    end
+    
+    it "should update users_count when user location changed" do
+      old_name = user.location
+      new_name = "HongKong"
+      old_location = Location.find_by_name(old_name)
+      hk_location = Factory(:location, :name => new_name, :users_count => 20)
+      user.location = new_name
+      user.save
+      user.reload
+      user.location.should == new_name
+      user.location_id.should == hk_location.id
+      Location.find_by_name(old_name).users_count.should == (old_location.users_count - 1)
+      Location.find_by_name(new_name).users_count.should == (hk_location.users_count + 1)
     end
   end
 

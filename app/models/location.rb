@@ -12,6 +12,7 @@ class Location
   index :name
   
   def self.find_by_name(name)
+    return nil if name.blank?
     name = name.downcase.strip
     self.where(:name => /^#{name}$/i).first
   end

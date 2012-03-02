@@ -112,9 +112,11 @@ class User
   before_save :store_location
   def store_location
     if self.location_changed?
-      # TODO: 更改了以后需要重新统计 Location 的 users_count
       if not self.location.blank?
+        old_location = Location.find_by_name(self.location_was)
+        old_location.inc(:users_count, -1) if not old_location.blank?
         location = Location.find_or_create_by_name(self.location)
+        location.inc(:users_count, 1)
         self.location_id = (location.blank? ? nil : location.id)
       else
         self.location_id = nil

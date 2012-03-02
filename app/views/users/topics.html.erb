@@ -1,17 +1,13 @@
 <%= render "base" %>
 
-
 <div class="content">
   <%= render "menu" %>
-  <%= render "info" %>
-
+  
   <div class="box">
     <h2 class="title">发布的帖子</h2>
     <%= render "topics", :topics => @topics %>
-  </div>
-  <div class="box">
-    <h2 class="title">最近回复的帖子</h2>
-    <%= render "replies", :replies => @replies %>
+    <%= will_paginate @topics %>
   </div>
 </div>
+
 <%= render "sidebar", :user => @user %>

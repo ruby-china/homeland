@@ -58,6 +58,7 @@
     at: "在"
     hot_topics: "熱門討論"
     hot_locations: "熱門城市"
+    replied_at: 回應于
   posts:
     recent_publish_post: "最近發布的文章"
     post_source: "文章來源"

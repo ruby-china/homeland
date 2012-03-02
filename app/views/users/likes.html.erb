@@ -1,20 +1,18 @@
 <%= render "base" %>
 
 <div class="content">
-  <%= render "info", :user => @user %>
-
+  <%= render "menu" %>
   <div class="box">
-    <%= render "menu" %>
+    
     <table class="node_topics">
       <tr class="head">
-        <td class="title"><%=t("users.menu.topic_title")%></td>
+        <td class="title"><%=t("common.title")%></td>
         <td class="opts"></td>
       </tr>
       <% @likes.each do |item| %>
       <tr class="topic <%= cycle('odd',"") %>">
-        <%# XXX: should be render_likeable_title() and detect instance type there %>
         <td class="title"><%= render_topic_title(item.likeable) %></td>
-        <td></td>
+        <td><%= render_node_name(item.likeable.node_name,item.likeable.node_id) %></td>
       </tr>
       <% end %>
     </table>

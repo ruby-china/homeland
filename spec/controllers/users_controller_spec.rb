@@ -23,14 +23,14 @@ describe UsersController do
     end
   end
 
-  describe ":replies" do
-    it "should show user replies" do
-      get :replies, :id => user.login
+  describe ":topics" do
+    it "should show user topics" do
+      get :topics, :id => user.login
       response.should be_success
     end
 
     it "should render 404 if user not found" do
-      get :replies, :id => "chunk_norris"
+      get :topics, :id => "chunk_norris"
       response.should_not be_success
       response.status.should == 404
     end

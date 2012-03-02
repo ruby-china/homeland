@@ -22,7 +22,7 @@ RubyChina::Application.routes.draw do
   match "users/location/:id", :to => "users#location", :as => :location_users
   resources :users do
     member do
-      get :replies
+      get :topics
       get :likes
     end
   end

@@ -28,6 +28,18 @@
   blockquote { line-height:160%; }
 }
 
+.content > .tabs { 
+  border-bottom:2px solid #ccc; 
+  .active { margin-bottom:0;}
+}
+
+table {
+  td {
+    a { color:#333; }
+  }
+  td.replied_at { width:80px; }
+}
+
 #users {
   .info { margin-bottom:10px; text-align:right;}
 }

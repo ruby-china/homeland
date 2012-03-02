@@ -5,7 +5,10 @@ defaults: &defaults
   admin_emails: 
     - "admin@admin.com"
   google_analytics_key: ""
-  upload_url: "http://127.0.0.1:3000/uploads"
+  upload_url: "http://ruby-china-files-dev.b0.upaiyun.com"
+  upyun_username: "test"
+  upyun_password: "123123"
+  upyun_bucket: "ruby-china-files-dev"
   google_group_email: "shanghaionrails@googlegroups.com"
   email_sender: 'no-reply@ruby-china.org'
   aws_access_key_id: ''

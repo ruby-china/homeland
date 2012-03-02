@@ -1,10 +1,7 @@
-mongoid_config = YAML.load_file("#{Rails.root}/config/mongoid.yml")[Rails.env]
 CarrierWave.configure do |config|
-  config.grid_fs_database = mongoid_config['database']
-  config.grid_fs_host = mongoid_config['host']
-  config.grid_fs_port = mongoid_config['port']
-  config.grid_fs_username = mongoid_config['username']
-  config.grid_fs_password = mongoid_config['password']
-  config.storage = :grid_fs
-  config.grid_fs_access_url = Setting.upload_url
+  config.storage = :upyun
+  config.upyun_username = Setting.upyun_username
+  config.upyun_password = Setting.upyun_password
+  config.upyun_bucket = Setting.upyun_bucket
+  config.upyun_bucket_domain = Setting.upload_url.gsub("http://","")
 end

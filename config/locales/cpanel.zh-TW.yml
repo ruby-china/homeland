@@ -1,8 +1,8 @@
 "zh-TW":
   cpanel:
     menu:
-      root_path: "系統概況"
-      site_configs: "全站設定"
+      root_path: "概況"
+      site_configs: "設定"
       users: "使用者"
       sections: "分類"
       nodes: "節點"
@@ -13,8 +13,9 @@
       photos: "圖片"   
       notes: "記事本" 
       comments: "評論"
-      site_nodes: "Site Nodes"
-      sites: "Sites"
+      site_nodes: "酷站类别"
+      sites: "酷站"
+      locations: "城市"
     overview: "概覽"
     recent_topics: "最近討論"
     statics: "統計資訊"

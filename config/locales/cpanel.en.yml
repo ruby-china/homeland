@@ -2,7 +2,7 @@
   cpanel:
     menu:
       root_path: "Dashboard"
-      site_configs: "Site Settings"
+      site_configs: "Settings"
       users: "Users"
       sections: "Sections"
       nodes: "Nodes"
@@ -15,6 +15,7 @@
       comments: "Comments"
       site_nodes: "Site Nodes"
       sites: "Sites"
+      locations: "Locations"
     overview: "Overview"
     recent_topics: "Recent Topics"
     statics: "Statistics"

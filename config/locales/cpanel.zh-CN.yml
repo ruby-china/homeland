@@ -1,8 +1,8 @@
 "zh-CN":
   cpanel:
     menu:
-      root_path: "系统概况"
-      site_configs: "全局设置"
+      root_path: "概况"
+      site_configs: "设置"
       users: "用户"
       sections: "分类"
       nodes: "节点"
@@ -13,8 +13,9 @@
       photos: "图片"
       notes: "记事本"
       comments: "评论"
-      site_nodes: "Site类别"
-      sites: "Sites"
+      site_nodes: "酷站类别"
+      sites: "酷站"
+      locations: "城市"
     overview: "概览"
     recent_topics: "最近帖子"
     statics: "统计信息"

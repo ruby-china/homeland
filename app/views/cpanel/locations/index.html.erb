@@ -1,0 +1,24 @@
+<%= render 'base' %>
+<h1><%= t("mongoid.models.location") %></h1>
+<div id="cpanel_locations">
+  <table class="grid">
+    <tr class="head">
+      <td>编号</td>
+      <td><%= t("mongoid.attributes.location.name") %></td>
+      <td><%= t("mongoid.attributes.location.users_count") %></td>
+      <td class="opts"></td>
+    </tr>
+    <% @locations.each do |item| %>
+    <tr class="<%= cycle("","even") %>">
+      <td><%= item.id %></td>
+      <td><%= item.name %></td>
+      <td><%= item.users_count %></td>
+      <td>
+        <%= link_to "", edit_cpanel_location_path(item.id), :class => "icon small_edit" %>
+        <%= link_to "", cpanel_location_path(item.id), :method => :delete, :confirm => '确定要删除吗?', :class => "icon small_delete" %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+  <%= will_paginate @locations %>
+</div>

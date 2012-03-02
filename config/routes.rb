@@ -86,6 +86,7 @@ RubyChina::Application.routes.draw do
     resources :comments
     resources :site_nodes
     resources :sites
+    resources :locations
   end
 
   if Rails.env.development?

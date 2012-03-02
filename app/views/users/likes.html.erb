@@ -10,10 +10,11 @@
         <td class="opts"></td>
       </tr>
       <% @likes.each do |item| %>
-      <tr class="topic <%= cycle('odd',"") %>">
-        <td class="title"><%= render_topic_title(item.likeable) %></td>
-        <td><%= render_node_name(item.likeable.node_name,item.likeable.node_id) %></td>
-      </tr>
+        <% next if item.likeable.blank? %>
+        <tr class="topic <%= cycle('odd',"") %>">
+          <td class="title"><%= render_topic_title(item.likeable) %></td>
+          <td><%= render_node_name(item.likeable.node_name,item.likeable.node_id) %></td>
+        </tr>
       <% end %>
     </table>
     <%= will_paginate @likes %>

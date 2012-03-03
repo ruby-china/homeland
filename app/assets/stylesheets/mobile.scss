@@ -33,7 +33,8 @@ body {
 #reply.form {
   textarea { width: 98%; height: 80px; }
   .submit_buttons { 
-    float:none; margin-top:8px; 
+    position:static;
+    float:none; 
     .help-inline { display:none; }
   }
   .helpblock { display:none; }

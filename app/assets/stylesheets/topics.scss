@@ -125,6 +125,10 @@
 #reply.form {
   .pills::after { clear:left;}
   textarea { width:578px; margin-bottom:10px;}
+  position:relative;
+  .submit_buttons {
+    position:absolute; right:10px; top:42px;
+  }
 }
 
 

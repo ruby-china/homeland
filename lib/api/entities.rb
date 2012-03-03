@@ -8,7 +8,8 @@ module RubyChina
     end
 
     class Topic < Grape::Entity
-      expose :_id, :body, :created_at, :updated_at
+      expose :_id, :title, :body, :created_at, :updated_at, :replied_at, :replies_count, :node_name
+      #FIXME: eager loading doesn't seem to be working here
       expose :user, :using => APIEntities::User
     end
   end

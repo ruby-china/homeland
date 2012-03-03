@@ -1,4 +1,6 @@
 RubyChina::Application.routes.draw do
+  require 'api'
+
   resources :sites
 
   resources :posts
@@ -88,6 +90,8 @@ RubyChina::Application.routes.draw do
     resources :sites
     resources :locations
   end
+
+  mount RubyChina::API => "/"
 
   if Rails.env.development?
     mount UserMailer::Preview => 'mails/user'

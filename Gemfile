@@ -89,7 +89,7 @@ gem 'quiet_assets', :git => 'git://github.com/AgilionApps/quiet_assets.git'
 gem 'ruby-github'
 
 # API
-gem 'grape', :git => 'git://github.com/intridea/grape.git', :ref => '47f6dd0'
+gem 'grape', :git => 'git://github.com/intridea/grape.git', :branch => 'frontier'
 
 group :development, :test do
   gem 'capistrano', '2.9.0'

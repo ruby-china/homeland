@@ -22,8 +22,8 @@ GIT
 
 GIT
   remote: git://github.com/intridea/grape.git
-  revision: 47f6dd093c86096e2adf1c0baa5713c30edd7e51
-  ref: 47f6dd0
+  revision: d24bd2f758544244ac65f19c69b94f0ffc34e71b
+  branch: frontier
   specs:
     grape (0.1.5)
       hashie (~> 1.2)

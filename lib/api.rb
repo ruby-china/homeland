@@ -10,7 +10,7 @@ module RubyChina
 
     resource :topics do
       get do
-        @topics = Topic.last_actived.limit(15).includes(:user).to_a
+        @topics = Topic.last_actived.limit(15).includes(:user)
         present @topics, :with => APIEntities::Topic
       end
     end

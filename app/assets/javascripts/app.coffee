@@ -53,7 +53,7 @@ window.App =
       tpl : "<li data-insert='${login}'>${login} <small>${name}</small></li>"
       
   initForDesktopView : () ->
-    return if not $("meta[name=apple-mobile-web-app-capable]").attr("content") == undefined
+    return if typeof(app_mobile) != undefined
     $("a[rel=twipsy]").twipsy({ live: true })
     $("a[rel=popover]").popover
       live: true

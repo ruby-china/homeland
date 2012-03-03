@@ -54,6 +54,9 @@
   <% end %>
   
   <%= javascript_include_tag "application" %>
+  <% if mobile? %>
+    <script type="text/javascript">app_mobile = true;</script>
+  <% end %>
   <%= yield :scripts %>
   <%= render :partial => "common/google_analytics"%>
   

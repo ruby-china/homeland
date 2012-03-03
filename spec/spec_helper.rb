@@ -63,4 +63,8 @@ RSpec.configure do |config|
     end
     Rails.cache.clear
   end
+
+  config.include RSpec::Rails::RequestExampleGroup, :type => :request, :example_group => {
+    :file_path => /spec\/api/
+  }
 end

@@ -64,4 +64,11 @@ module TopicsHelper
   def render_topic_last_be_replied_time(topic)
     timeago(topic.replied_at)
   end
+
+  def render_topic_node_select_tag(topic)
+    return if topic.blank?
+    grouped_collection_select :topic, :node_id, Section.all, 
+                    :sorted_nodes, :name, :id, :name, :value => topic.node_id,
+                    :include_blank => true, :prompt => "选择节点"
+  end
 end

@@ -25,6 +25,7 @@
       topic:
         title: "标题"
         user_id: "用户"
+        node_id: "节点"
         body: "正文"
       reply:
         body: "回复内容"  

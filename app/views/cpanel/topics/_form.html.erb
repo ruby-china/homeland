@@ -12,7 +12,7 @@
   <div class="clearfix">
     <%= f.label :node_id %>
     <div class="input">
-    <%= f.select :node_id, Node.all.collect { |n| [n.name,n.id] } %>
+      <%= render_topic_node_select_tag(@topic) %>
     </div>
   </div>
   <div class="clearfix">

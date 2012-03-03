@@ -32,9 +32,9 @@ class Node
   end
 
   # 热门节电给 select 用的
-  def self.hot_node_collection
-    Rails.cache.fetch("node:hot_node_collection:#{CacheVersion.section_node_updated_at}") do
-      Node.hots.collect { |n| [n.name,n.id] }
+  def self.node_collection
+    Rails.cache.fetch("node:node_collection:#{CacheVersion.section_node_updated_at}") do
+      Node.all.collect { |n| [n.name,n.id] }
     end
   end
 end

@@ -1,4 +1,5 @@
-Dir[Rails.root.join("lib/api/**/*.rb")].each {|f| require f}
+require "api/entities"
+Dir[Rails.root.join("lib/api/helpers/*.rb")].each {|f| require f}
 
 module RubyChina
   class API < Grape::API

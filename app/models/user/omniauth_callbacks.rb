@@ -30,10 +30,13 @@ class User
         user.email = data["email"]
         user.email = "twitter+#{uid}@example.com" if provider == "twitter"
         user.email = "douban+#{uid}@example.com" if provider == "douban"
+        user.name = data['name']
 
         user.login = data["nickname"]
         user.login = data["name"] if provider == "google"
         user.login.gsub!(/[^\w]/, "_")
+
+        user.github = data['nickname'] if provider == "github"
 
         if User.where(:login => user.login).count > 0 || user.login.blank?
           user.login = "u#{Time.now.to_i}" # TODO: possibly duplicated user login here. What should we do?

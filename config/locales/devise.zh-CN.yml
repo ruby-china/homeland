@@ -6,6 +6,9 @@
       not_locked: "没有锁定"
       not_saved: "有 %{count} 个错误发生导致「%{model}」无法被保存。"
   devise:
+    omniauth_callbacks:
+      user:
+        failure: '三方登陆过程异常，请重试。'
     failure:
       unauthenticated: '继续操作前请注册或者登录.'
       unconfirmed: '请先激活您的帐号'

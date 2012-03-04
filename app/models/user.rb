@@ -195,6 +195,7 @@ class User
     self.github = ""
     self.tagline = ""
     self.location = ""
+    self.authorizations = []
     self.state = STATE[:deleted]
     self.save(:validate => false)
   end

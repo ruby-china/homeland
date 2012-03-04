@@ -36,6 +36,7 @@ describe User do
       user_for_delete1.reload
       user_for_delete1.login.should == "Guest"
       user_for_delete1.state.should == -1
+      user_for_delete1.authorizations.should == []
     end
   end
   

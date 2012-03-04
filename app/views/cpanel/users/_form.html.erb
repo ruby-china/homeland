@@ -1,60 +1,40 @@
-<%= form_for([:cpanel,@user], :html => { :enctype =>  "multipart/form-data" }) do |f| %>
-   <%= render 'shared/error_messages', :target => @user %>
-  <div class="clearfix">
-    <%= f.label :login %>
-    <div class="input">
-    <%= f.text_field :login, :class => "span5" %>
-    </div>
-  </div>
-  <div class="clearfix">
-    <%= f.label :email %>
-    <div class="input">
-    <%= f.text_field :email, :class => "span8" %>
-    </div>
-  </div>
-  <div class="clearfix">
-    <%= f.label :location %>
-    <div class="input">
-    <%= f.text_field :location %>
-    </div>
-  </div>
-  <div class="clearfix">
-    <%= f.label :tagline %>
-    <div class="input">
-    <%= f.text_field :tagline, :class => "span13" %>
-    </div>
-  </div>
-  <div class="clearfix">
-    <%= f.label :bio %>
-    <div class="input">
-    <%= f.text_area :bio, :class => "span13", :style => "height:60px;" %>
-    </div>
-  </div>
-  <div class="clearfix">
-    <%= f.label :website %>
-    <div class="input">
-    <%= f.text_field :website, :class => "xxlarge" %>
-    </div>
-  </div>
+<%= simple_form_for([:cpanel,@user], :html => { :enctype =>  "multipart/form-data" }, :wrapper => :inline) do |f| %>
+  <%= render 'shared/error_messages', :target => @user %>
+  <%= f.input :login %>
+  <%= f.input :name %>
+  <%= f.input :email, :as => :email, :input_html => { :class => "xxlarge" } %>
+  <%= f.input :location %>
+  <%= f.input :github %>
+  <%= f.input :tagline, :input_html => { :class => "span13" } %>
+  <%= f.input :bio, :as => :text, :input_html => { :class => "span13", :style => "height:60px;" } %>
+  <%= f.input :website, :as => :url, :input_html => { :class => "xxlarge" } %>
   <div class="clearfix">
     <label><%= t("common.avatar")%></label>
     <div class="input">
     <%= user_avatar_tag(@user, :large) %>
     </div>
   </div>
+  <%= f.input :verified, :as => :boolean, :hint => t("cpanel.users.trust_user_can_modify_wiki") %>
+  <%= f.input :state, :as => :select, :collection => User::STATE.collect { |s| [s[0],s[1]] } %>
+  <%= f.input :guest, :as => :boolean, :readonly => true %>
+  <%= f.input :sign_in_count, :readonly => true %>
+  <%= f.input :last_sign_in_at, :readonly => true %>
+  <%= f.input :current_sign_in_at, :readonly => true %>
+  <%= f.input :last_sign_in_ip, :readonly => true %>
+  <%= f.input :current_sign_in_ip, :readonly => true %>
+  <% if not @user.authorizations.blank? %>
   <div class="clearfix">
-    <%= f.label :verified %>
-    <div class="input">
-    <%= f.check_box :verified, :class => "checkbox" %><br >
-    <span class="help-inline"><%= t("cpanel.users.trust_user_can_modify_wiki")%></span>
-    </div>
+    <%= f.label :authorizations %>
+    <table class="input" style="display:block;">
+      <% @user.authorizations.each do |auth| %>
+        <tr>
+          <td style="width:100px;"><%= auth.provider %></td>
+          <td><%= auth.uid %></td>
+        </tr>
+      <% end %>
+    </table>
+    <% end %>
   </div>
-  <div class="clearfix">
-    <%= f.label :state %>
-    <div class="input">
-    <%= f.select :state, User::STATE.collect { |s| [s[0],s[1]] } %>
-    </div>
-  </div>  
   <div class="actions">
     <% if @user.state != User::STATE[:deleted] %>
       <div class="pull-right">

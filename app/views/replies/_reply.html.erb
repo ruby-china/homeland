@@ -5,7 +5,9 @@
       <span class="name"><%= user_name_tag(reply.user) %></span>
       <span class="time">
         <%= reply_counter + 1 %><%= t("common.floor")%>, <%= raw t("common.reply_at", :time => timeago(reply.created_at)) %>
-        <%= link_to("", edit_topic_reply_path(@topic,reply), :class => "edit icon small_edit", 'data-uid' => reply.user_id, :title => "修改回帖")%>
+        <% if can?(:update,reply) %>
+          <%= link_to("", edit_topic_reply_path(@topic,reply), :class => "edit icon small_edit", 'data-uid' => reply.user_id, :title => "修改回帖")%>
+        <% end %>
         <%= link_to("", "#",
             'data-floor' => reply_counter + 1, 'data-login' => reply.user.login,
             :title => t("topics.reply_this_floor"), :class => "icon small_reply" )

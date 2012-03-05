@@ -1,4 +1,6 @@
 # coding: utf-8
+require "bundler/capistrano"
+
 set :application, "ruby-china"
 set :repository,  "git://github.com/huacnlee/ruby-china.git"
 set :branch, "master"
@@ -52,14 +54,6 @@ task :restart_resque, :roles => :web do
   run "cd #{deploy_to}/current/; RAILS_ENV=production ./script/resque stop; RAILS_ENV=production ./script/resque start"
 end
 
-task :install_gems, :roles => :web do  	
-  run "cd #{deploy_to}/current/; bundle install"	  	
-end
-
-task :compile_assets, :roles => :web do	  	
-  run "cd #{deploy_to}/current/; bundle exec rake assets:precompile"  	
-end
-
 task :mongoid_create_indexes, :roles => :web do
   run "cd #{deploy_to}/current/; RAILS_ENV=production bundle exec rake db:mongoid:create_indexes"
 end
@@ -68,7 +62,7 @@ task :mongoid_migrate_database, :roles => :web do
   run "cd #{deploy_to}/current/; RAILS_ENV=production bundle exec rake db:migrate"
 end
 
-after "deploy:finalize_update","deploy:symlink", :init_shared_path, :link_shared_files, :install_gems, :compile_assets, :mongoid_create_indexes, :mongoid_migrate_database
+after "deploy:finalize_update","deploy:symlink", :init_shared_path, :link_shared_files, :mongoid_create_indexes, :mongoid_migrate_database
 
 
 set :default_environment, {

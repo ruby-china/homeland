@@ -27,7 +27,8 @@ class Page
   has_many :versions, :class_name => "PageVersion"
 
   attr_accessor :user_id, :change_desc, :version_enable
-  attr_protected :body_html, :locked, :editors
+  attr_accessible :title, :body, :slug, :change_desc
+
   validates_presence_of :slug, :title, :body
   # 当需要记录版本时，如果是更新，那么要求填写 :change_desc
   validates_presence_of :user_id, :if => Proc.new { |p| p.version_enable == true }

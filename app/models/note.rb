@@ -14,7 +14,7 @@ class Note
 
   index :user_id
 
-  attr_protected :user_id, :changes_count, :word_count
+  attr_accessible :title, :body, :publish
 
   default_scope :order => "id desc"
 

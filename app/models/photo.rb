@@ -8,7 +8,7 @@ class Photo
 
   belongs_to :user
 
-  attr_protected :user_id
+  attr_accessible :image
 
   # 封面图
   mount_uploader :image, PhotoUploader

@@ -62,8 +62,8 @@ class PagesController < ApplicationController
 
   def update
     @page = Page.find(params[:id])
-    params[:page][:version_enable] = true
-    params[:page][:user_id] = current_user.id
+    @page.version_enable = true
+    @page.user_id = current_user.id
 
     if @page.update_attributes(params[:page])
       redirect_to page_path(@page.slug), notice: t("common.update_success")

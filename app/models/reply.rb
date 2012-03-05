@@ -22,7 +22,7 @@ class Reply
   index :user_id
   index :topic_id
 
-  attr_protected :user_id, :topic_id
+  attr_accessible :body
 
   validates_presence_of :body
 

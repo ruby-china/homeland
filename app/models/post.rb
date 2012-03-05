@@ -28,7 +28,7 @@ class Post
 
   counter :hits, :default => 0
 
-  attr_protected :state, :user_id
+  attr_accessible :title, :body, :tag_list, :source, :source_url
   attr_accessor :tag_list
 
   validates_presence_of :title, :body, :tag_list

@@ -32,7 +32,7 @@ class Topic
   belongs_to :last_reply_user, :class_name => 'User'
   has_many :replies, :dependent => :destroy
 
-  attr_protected :user_id
+  attr_accessible :title, :body
   validates_presence_of :user_id, :title, :body, :node_id
 
   index :node_id

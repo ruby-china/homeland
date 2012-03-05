@@ -12,7 +12,7 @@
       <%= raw SiteConfig.before_topic_html %>
 
       <div class="body">
-        <%= format_topic_body(@topic.body) %>
+        <%= @topic.body_html %>
       </div>
 
       <%= raw SiteConfig.after_topic_html %>

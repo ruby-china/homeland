@@ -38,4 +38,26 @@ describe Topic do
     topic.last_reply_user_login.should == reply.user.login
     topic.follower_ids.include?(reply.user_id).should be_true
   end
+
+  it "should covert body with Markdown on create" do
+    t = Factory(:topic, :body => "*foo*")
+    t.body_html.should == "<p><em>foo</em></p>"
+  end
+
+  it "should covert body on save" do
+    t = Factory(:topic, :body => "*foo*")
+    old_html = t.body_html
+    t.body = "*bar*"
+    t.save
+    t.body_html.should_not == old_html
+  end
+
+  it "should not store body_html when it not changed" do
+    t = Factory(:topic, :body => "*foo*")
+    t.body = "*fooaa*"
+    t.stub!(:body_changed?).and_return(false)
+    old_html = t.body_html
+    t.save
+    t.body_html.should == old_html
+  end
 end

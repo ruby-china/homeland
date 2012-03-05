@@ -63,4 +63,28 @@ describe Reply do
       topic.updated_at.should_not == old_updated_at
     end
   end
+
+  describe "format body" do
+    it "should covert body with Markdown on create" do
+      r = Factory(:reply, :body => "*foo*")
+      r.body_html.should == "<p><em>foo</em></p>"
+    end
+
+    it "should covert body on save" do
+      r = Factory(:reply, :body => "*foo*")
+      old_html = r.body_html
+      r.body = "*bar*"
+      r.save
+      r.body_html.should_not == old_html
+    end
+
+    it "should not store body_html when it not changed" do
+      r = Factory(:reply, :body => "*foo*")
+      r.body = "*fooaa*"
+      r.stub!(:body_changed?).and_return(false)
+      old_html = r.body_html
+      r.save
+      r.body_html.should == old_html
+    end
+  end
 end

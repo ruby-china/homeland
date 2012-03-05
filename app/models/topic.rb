@@ -6,11 +6,13 @@ class Topic
   include Mongoid::SoftDelete
   include Mongoid::CounterCache
   include Mongoid::Likeable
+  include Mongoid::MarkdownBody
   include Redis::Objects
   include Sunspot::Mongoid
 
   field :title
   field :body
+  field :body_html
   field :last_reply_id, :type => Integer
   field :replied_at , :type => DateTime
   field :source

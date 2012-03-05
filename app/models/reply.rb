@@ -6,8 +6,10 @@ class Reply
   include Mongoid::BaseModel
   include Mongoid::CounterCache
   include Mongoid::SoftDelete
+  include Mongoid::MarkdownBody
 
   field :body
+  field :body_html
   field :source
   field :message_id
   field :mentioned_user_ids, :type => Array, :default => []

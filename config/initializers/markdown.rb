@@ -37,7 +37,7 @@ module Redcarpet
           bad_text = link.to_s.match(/[^\w\d:\/\-\_\.=\?&#+\|]+/im).to_s
           link = link.to_s.gsub(bad_text, '')
           "<a href=\"#{link}\" rel=\"nofollow\" target=\"_blank\">#{link}</a>#{bad_text}"
-        end        
+        end
       end
     end
     
@@ -86,6 +86,9 @@ class MarkdownTopicConverter < MarkdownConverter
     self.link_mention_user(result)
 
     return result.strip
+  rescue => e
+    puts "MarkdownTopicConverter.format ERROR: #{e}"
+    return text
   end
 
   private
@@ -103,8 +106,6 @@ class MarkdownTopicConverter < MarkdownConverter
     text.gsub!(/#(\d+)([楼樓Ff])/) { 
       %(<a href="#reply#{$1}" class="at_floor" data-floor="#{$1}">##{$1}#{$2}</a>)
     }
-  rescue => e
-    puts text 
   end
 
   # convert '@user' to link

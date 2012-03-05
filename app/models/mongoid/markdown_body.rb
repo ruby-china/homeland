@@ -5,6 +5,7 @@ module Mongoid
 
     included do
       before_save :markdown_body
+      scope :without_body, without(:body)
     end
 
     private

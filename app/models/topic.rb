@@ -59,6 +59,7 @@ class Topic
   scope :last_actived, desc("replied_at").desc("created_at")
   # 推荐的话题
   scope :suggest, where(:suggested_at.ne => nil).desc(:suggested_at)
+  scope :fields_for_list, without(:body,:body_html)
 
   before_save :store_cache_fields
   def store_cache_fields

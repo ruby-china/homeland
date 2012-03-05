@@ -1,5 +1,6 @@
 # coding: utf-8
 require 'rails_autolink'
+require 'iconv'
 module Redcarpet
   module Render
     class HTMLwithSyntaxHighlight < HTML
@@ -24,6 +25,14 @@ module Redcarpet
         if link_type.to_s == "email"
           link          
         else
+          begin
+            # 防止 C 的 autolink 出来的内容有编码错误，万一有就直接跳过转换
+            # 比如这句:
+            # 此版本并非线上的http://yavaeye.com的源码.
+            link.match(/.+?/)
+          rescue
+            return link
+          end
           # Fix Chinese neer the URL
           bad_text = link.to_s.match(/[^\w\d:\/\-\_\.=\?&#+\|]+/im).to_s
           link = link.to_s.gsub(bad_text, '')

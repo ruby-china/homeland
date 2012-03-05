@@ -28,6 +28,8 @@ class User
   field :replies_count, :type => Integer, :default => 0
   field :likes_count, :type => Integer, :default => 0
 
+  mount_uploader :avatar, AvatarUploader
+
   index :login
   index :email
   index :location
@@ -53,7 +55,7 @@ class User
   end
 
   attr_accessor :password_confirmation
-  attr_accessible :name, :email, :location, :bio, :website, :github, :tagline
+  attr_accessible :name, :email, :location, :bio, :website, :github, :tagline, :avatar
 
   validates :login, :format => {:with => /\A\w+\z/, :message => '只允许数字、大小写字母和下划线'}, :length => {:in => 3..20}, :presence => true, :uniqueness => {:case_sensitive => false}
 

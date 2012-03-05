@@ -1,8 +1,8 @@
 # coding: utf-8
 require 'digest/md5'
 module TopicsHelper
-  def format_topic_body(text, options = {})
-    MarkdownTopicConverter.format(text, options)
+  def format_topic_body(text)
+    MarkdownTopicConverter.format(text)
   end
 
   def topic_use_readed_text(state)

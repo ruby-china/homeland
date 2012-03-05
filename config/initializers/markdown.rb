@@ -60,10 +60,10 @@ class MarkdownConverter
 end
 
 class MarkdownTopicConverter < MarkdownConverter
-  def self.format(text, options = {})
+  def self.format(text)
     return '' if text.blank?
 
-    self.convert_bbcode_img(text) unless options[:allow_image] == false
+    self.convert_bbcode_img(text)
     
     # 如果 ``` 在刚刚换行的时候 Redcapter 无法生成正确，需要两个换行
     text.gsub!("\n```","\n\n```")

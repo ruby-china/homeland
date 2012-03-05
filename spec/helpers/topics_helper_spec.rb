@@ -3,6 +3,19 @@ require "spec_helper"
 
 describe TopicsHelper do
   describe "format_topic_body" do
+    it "should right with Chinese neer URL" do
+      helper.format_topic_body("http://foo.com的???").should == 
+        '<p><a href="http://foo.com" rel="nofollow" target="_blank">http://foo.com</a>的???</p>'
+      helper.format_topic_body("http://foo.com,的???").should == 
+        '<p><a href="http://foo.com" rel="nofollow" target="_blank">http://foo.com</a>,的???</p>'
+      helper.format_topic_body("http://foo.com，的???").should == 
+        '<p><a href="http://foo.com" rel="nofollow" target="_blank">http://foo.com</a>，的???</p>'
+      helper.format_topic_body("http://foo.com。的???").should == 
+        '<p><a href="http://foo.com" rel="nofollow" target="_blank">http://foo.com</a>。的???</p>'
+      helper.format_topic_body("http://foo.com；的???").should == 
+        '<p><a href="http://foo.com" rel="nofollow" target="_blank">http://foo.com</a>；的???</p>'
+    end
+
     it "should bold text " do
       helper.format_topic_body("**bold**").should == '<p><strong>bold</strong></p>'
     end
@@ -21,7 +34,8 @@ describe TopicsHelper do
     end
     
     it "should auto link with Chinese" do
-      helper.format_topic_body("靠着中文http://foo.com，").should  == "<p>靠着中文<a href=\"http://foo.com，\" rel=\"nofollow\" target=\"_blank\">http://foo.com，</a></p>"
+      helper.format_topic_body("靠着中文http://foo.com，").should  == 
+        "<p>靠着中文<a href=\"http://foo.com\" rel=\"nofollow\" target=\"_blank\">http://foo.com</a>，</p>"
     end
 
     it "should render bbcode style image tag" do

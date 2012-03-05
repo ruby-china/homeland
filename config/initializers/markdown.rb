@@ -60,7 +60,47 @@ class MarkdownConverter
 end
 
 class MarkdownTopicConverter < MarkdownConverter
+  def self.format(text, options = {})
+    return '' if text.blank?
+
+    self.convert_bbcode_img(text) unless options[:allow_image] == false
+    
+    # 如果 ``` 在刚刚换行的时候 Redcapter 无法生成正确，需要两个换行
+    text.gsub!("\n```","\n\n```")
+    
+    result = self.convert(text)
+
+    self.link_mention_floor(result)
+    self.link_mention_user(result)
+
+    return result.strip
+  end
+
   private
+  # convert bbcode-style image tag [img]url[/img] to markdown syntax ![alt](url)
+  def self.convert_bbcode_img(text)
+    text.gsub!(/\[img\](.+?)\[\/img\]/i) {"![#{self.image_alt $1}](#{$1})"}
+  end
+
+  def self.image_alt(src)
+    File.basename(src, '.*').capitalize
+  end
+
+  # convert '#N楼' to link
+  def self.link_mention_floor(text)
+    text.gsub!(/#(\d+)([楼樓Ff])/) { 
+      %(<a href="#reply#{$1}" class="at_floor" data-floor="#{$1}">##{$1}#{$2}</a>)
+    }
+  end
+
+  # convert '@user' to link
+  # match any user even not exist.
+  def self.link_mention_user(text)
+    text.gsub!(/(^|[^a-zA-Z0-9_!#\$%&*@＠])@([a-zA-Z0-9_]{1,20})/io) { 
+      %(#{$1}<a href="/users/#{$2}" class="at_user" title="@#{$2}"><i>@</i>#{$2}</a>)
+    }
+  end
+
   def initialize
     @converter = Redcarpet::Markdown.new(Redcarpet::Render::HTMLwithTopic.new, {
         :autolink => true,

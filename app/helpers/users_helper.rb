@@ -85,7 +85,8 @@ module UsersHelper
   def user_popover_info(user)
     return "" if user.blank?
     return "" if user.location.blank?
-    title = user.location.blank? ? "#{user.login}" : "<i><span class='icon small_pin'></span>#{user.location}</i> #{user.login}"
+    name = user.name || user.login
+    title = user.location.blank? ? "#{name}" : "<i><span class='icon small_pin'></span>#{user.location}</i> #{name}"
     tagline = user.tagline.blank? ? "这哥们儿没签名" : truncate(user.tagline, :length => 20)
     raw %(rel="userpopover" title="#{h(title)}" data-content="#{h(tagline)}")
   end

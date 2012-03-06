@@ -7,13 +7,22 @@ describe TopicsHelper do
       helper.format_topic_body("此版本并非线上的http://yavaeye.com的源码.").should == 
         '<p>此版本并非线上的http://yavaeye.com的源码.</p>'
       helper.format_topic_body("http://foo.com,的???").should == 
-        '<p><a href="http://foo.com" rel="nofollow" target="_blank">http://foo.com</a>,的???</p>'
+        '<p><a href="http://foo.com," rel="nofollow" target="_blank">http://foo.com,</a>的???</p>'
       helper.format_topic_body("http://foo.com，的???").should == 
         '<p><a href="http://foo.com" rel="nofollow" target="_blank">http://foo.com</a>，的???</p>'
       helper.format_topic_body("http://foo.com。的???").should == 
         '<p><a href="http://foo.com" rel="nofollow" target="_blank">http://foo.com</a>。的???</p>'
       helper.format_topic_body("http://foo.com；的???").should == 
         '<p><a href="http://foo.com" rel="nofollow" target="_blank">http://foo.com</a>；的???</p>'
+    end
+
+    it "should match complex urls" do
+      helper.format_topic_body("http://movie.douban.com/tag/%E7%BE%8E%E5%9B%BD").should == 
+        '<p><a href="http://movie.douban.com/tag/%E7%BE%8E%E5%9B%BD" rel="nofollow" target="_blank">http://movie.douban.com/tag/%E7%BE%8E%E5%9B%BD</a></p>'
+      helper.format_topic_body("http://ruby-china.org/self_posts/11?datas=20,33|100&format=.jpg").should == 
+        '<p><a href="http://ruby-china.org/self_posts/11?datas=20,33|100&format=.jpg" rel="nofollow" target="_blank">http://ruby-china.org/self_posts/11?datas=20,33|100&format=.jpg</a></p>'
+      helper.format_topic_body("https://g.l/b/?fromgroups#!searchin/gitlabhq/self$20regist/gitlabhq/5ha_FyX-Pr4/VNZTPnSN0S4J").should == 
+        '<p><a href="https://g.l/b/?fromgroups#!searchin/gitlabhq/self$20regist/gitlabhq/5ha_FyX-Pr4/VNZTPnSN0S4J" rel="nofollow" target="_blank">https://g.l/b/?fromgroups#!searchin/gitlabhq/self$20regist/gitlabhq/5ha_FyX-Pr4/VNZTPnSN0S4J</a></p>'
     end
 
     it "should bold text " do

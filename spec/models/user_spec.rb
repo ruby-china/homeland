@@ -131,4 +131,14 @@ describe User do
       its(:github_url) { should == expected }
     end
   end
+
+  describe "private token generate" do
+    it "should generate new token" do
+      old_token = user.private_token
+      user.update_private_token
+      user.private_token.should_not == old_token
+      user.update_private_token
+      user.private_token.should_not == old_token
+    end
+  end
 end

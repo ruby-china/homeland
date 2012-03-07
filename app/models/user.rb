@@ -1,5 +1,6 @@
 # coding: utf-8
 require "ruby-github"
+require "digest"
 class User
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -27,6 +28,8 @@ class User
   field :topics_count, :type => Integer, :default => 0
   field :replies_count, :type => Integer, :default => 0
   field :likes_count, :type => Integer, :default => 0
+  # 用户密钥，用于客户端验证
+  field :private_token
 
   mount_uploader :avatar, AvatarUploader
 
@@ -220,5 +223,11 @@ class User
       end
     end
     items
+  end
+
+  # 重新生成 Private Token
+  def update_private_token
+    random_key = "#{rand(10000000) + 100000000}-#{self.id}"
+    self.update_attribute(:private_token, Digest::MD5.hexdigest(random_key))
   end
 end

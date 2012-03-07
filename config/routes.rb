@@ -17,7 +17,9 @@ RubyChina::Application.routes.draw do
   devise_for :users, :path => "account", :controllers => {
       :registrations => :account,
       :omniauth_callbacks => "users/omniauth_callbacks"
-    }
+    } do
+    get "account/update_private_token" => "account#update_private_token"
+  end
 
   match "account/auth/:provider/unbind", :to => "users#auth_unbind"
 

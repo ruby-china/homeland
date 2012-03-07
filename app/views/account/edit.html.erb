@@ -118,7 +118,30 @@
     </ul>
   </div>
   <div class="box">
+    <h2>密钥</h2>
+    <div class="content">
+      <div><textarea id="private_token" style="width:190px;cursor:default;" readonly="readonly"><%= @user.private_token %></textarea></div>
+      <div class="buttons">
+        <a href="#" class="btn" id="update_private_token">更换一个</a> <span class="help-inline">用于三方应用验证</span>
+      </div>
+      
+    </div>
+  </div>
+  <div class="box">
     <h2><%= t("users.delete_my_account")%></h2>
     <p><%= t("users.dont_like_it")%> <%= link_to(t("users.delete_this_account"), registration_path(resource_name), :confirm => "删除后无法恢复，你确定吗?", :class => "btn danger", :method => :delete )%></p>
   </div>
 </div>
+
+<% content_for :scripts do %>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $("#update_private_token").click(function(){
+        $.get("<%= update_private_token_account_path %>",function(re){
+          $("#private_token").val(re);
+        });
+        return false;
+      })
+    });
+  </script>
+<% end %>

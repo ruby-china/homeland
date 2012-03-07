@@ -25,4 +25,19 @@ describe "sign up and login" do
     click_button '登录'
     page.should have_content('活跃帖子')
   end
+
+  it "fail to sign up new user if password field is protected" do
+    User.class_eval do
+      attr_protected :password
+    end
+
+    visit '/'
+    click_link '注册'
+    fill_in '用户名', :with => 'rubyist'
+    fill_in 'Email', :with => 'rubyist@ruby-china.org'
+    fill_in '密码', :with => 'coolguy'
+    fill_in '确认密码', :with => 'coolguy'
+    click_button '提交注册信息'
+    page.should have_content('密码 不能为空字符')
+  end
 end

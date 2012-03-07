@@ -22,3 +22,19 @@
     </div>
   </fieldset>
 <% end %>
+<script type="text/javascript">
+  // not loaded jquery yet.
+  window.onload = function() {
+    // have loaed all js now.
+    Topics.onCloseWarning();
+    $('.actions>input[type=submit]').click(function(e){
+        Topics.offCloseWarning();
+    });
+    // onbeforeunload conflict with <a> element in IE!!!
+    // except a.href is not empty(such as #) or a.onclick return false
+    // "###" let <a> not be a anchor point
+    if ($.browser.msie) {
+      $('a[href^="javascript"]').attr('href','###');
+    }
+  }
+</script>

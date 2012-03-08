@@ -85,17 +85,20 @@ window.Topics =
       Topics.preview($(textarea).val())
       false
 
-  onCloseWarning: (msg) ->
+  initCloseWarning: (el, msg) ->
+    return false if el.length == 0
     msg = "离开本页面将丢失未保存页面!" if !msg
-    $(window).bind("beforeunload", (e) ->
-      if $.browser.msie
-        e.returnValue = msg
+    $("input[type=submit]").click ->
+      $(window).unbind("beforeunload")
+    el.change ->
+      if el.val().length > 0
+        $(window).bind "beforeunload", (e) ->
+          if $.browser.msie
+            e.returnValue = msg
+          else
+            return msg
       else
-        return msg
-    )
-
-  offCloseWarning: () ->
-    $(window).unbind("beforeunload")
+        $(window).unbind("beforeunload")
 
 # pages ready
 $(document).ready ->
@@ -103,6 +106,8 @@ $(document).ready ->
     if $(el.target).val().trim().length > 0
       $("#reply form").submit()
     return false
+
+  Topics.initCloseWarning($("textarea.closewarning"))
 
   $("textarea").autogrow()
 

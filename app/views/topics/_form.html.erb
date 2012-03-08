@@ -14,7 +14,7 @@
     <div class="edit_tools input">
       <%= render "editor_toolbar" %>
     </div>    
-    <%= f.input :body, :as => :text, :input_html => { :class => "topic_editor xxlarge", :style => "height:400px" }%>
+    <%= f.input :body, :as => :text, :input_html => { :class => "topic_editor closewarning xxlarge", :style => "height:400px" }%>
 
     <div class="actions">
       <%= f.submit t("common.save"), :class => "btn primary", :disable_with => t("common.saving") %>
@@ -22,19 +22,3 @@
     </div>
   </fieldset>
 <% end %>
-<script type="text/javascript">
-  // not loaded jquery yet.
-  window.onload = function() {
-    // have loaed all js now.
-    Topics.onCloseWarning();
-    $('.actions>input[type=submit]').click(function(e){
-        Topics.offCloseWarning();
-    });
-    // onbeforeunload conflict with <a> element in IE!!!
-    // except a.href is not empty(such as #) or a.onclick return false
-    // "###" let <a> not be a anchor point
-    if ($.browser.msie) {
-      $('a[href^="javascript"]').attr('href','###');
-    }
-  }
-</script>

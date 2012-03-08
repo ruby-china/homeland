@@ -18,7 +18,7 @@ RubyChina::Application.routes.draw do
       :registrations => :account,
       :omniauth_callbacks => "users/omniauth_callbacks"
     } do
-    get "account/update_private_token" => "account#update_private_token"
+    get "account/update_private_token" => "account#update_private_token", :as => :update_private_token_account
   end
 
   match "account/auth/:provider/unbind", :to => "users#auth_unbind"

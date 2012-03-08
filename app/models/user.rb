@@ -1,6 +1,6 @@
 # coding: utf-8
 require "ruby-github"
-require "digest"
+require "securerandom"
 class User
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -36,6 +36,7 @@ class User
   index :login
   index :email
   index :location
+  index :private_token, :sparse => true
 
   has_many :topics, :dependent => :destroy
   has_many :notes
@@ -227,7 +228,7 @@ class User
 
   # 重新生成 Private Token
   def update_private_token
-    random_key = "#{rand(10000000) + 100000000}-#{self.id}"
-    self.update_attribute(:private_token, Digest::MD5.hexdigest(random_key))
+    random_key = "#{SecureRandom.hex(10)}:#{self.id}"
+    self.update_attribute(:private_token, random_key)
   end
 end

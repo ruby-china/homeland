@@ -85,6 +85,18 @@ window.Topics =
       Topics.preview($(textarea).val())
       false
 
+  onCloseWarning: (msg) ->
+    msg = "离开本页面将丢失未保存页面!" if !msg
+    $(window).bind("beforeunload", (e) ->
+      if $.browser.msie
+        e.returnValue = msg
+      else
+        return msg
+    )
+
+  offCloseWarning: () ->
+    $(window).unbind("beforeunload")
+
 # pages ready
 $(document).ready ->
   $("textarea").bind "keydown","ctrl+return",(el) ->

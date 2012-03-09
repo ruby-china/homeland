@@ -1,13 +1,12 @@
 require "api/entities"
-Dir[Rails.root.join("lib/api/helpers/*.rb")].each {|f| require f}
+require "api/helpers"
 
 module RubyChina
   class API < Grape::API
     prefix "api"
     error_format :json
 
-    helpers APIHelper::Topic
-    helpers APIHelper::User
+    helpers APIHelpers
 
     resource :topics do
       # Get active topics list

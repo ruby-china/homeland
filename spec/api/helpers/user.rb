@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe RubyChina::APIHelper::User do
-  before { extend RubyChina::APIHelper::User }
+describe RubyChina::APIHelpers do
+  before { extend RubyChina::APIHelpers }
 
   it "should get current_user by private token" do
     u = Factory(:user)

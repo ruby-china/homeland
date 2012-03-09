@@ -7,6 +7,7 @@ module RubyChina
     error_format :json
 
     helpers APIHelper::Topic
+    helpers APIHelper::User
 
     resource :topics do
       # Get active topics list

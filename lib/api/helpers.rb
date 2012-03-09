@@ -16,7 +16,7 @@ module RubyChina
 
     # user helpers
     def current_user
-      @current_user ||= ::User.where(:private_token => params[:token]).first
+      @current_user ||= User.where(:private_token => params[:token] || '').first
     end
 
     def authenticate!

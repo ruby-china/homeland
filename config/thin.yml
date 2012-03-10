@@ -9,7 +9,7 @@ require: []
 
 max_persistent_conns: 4048
 environment: production
-servers: 1
+servers: 2
 daemonize: true
 chdir: /home/ruby/www/ruby-china/current
 

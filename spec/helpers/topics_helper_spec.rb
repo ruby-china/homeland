@@ -5,7 +5,7 @@ describe TopicsHelper do
   describe "format_topic_body" do
     it "should right with Chinese neer URL" do
       helper.format_topic_body("此版本并非线上的http://yavaeye.com的源码.").should == 
-        '<p>此版本并非线上的http://yavaeye.com的源码.</p>'
+        '<p>此版本并非线上的<a href="http://yavaeye.com" rel="nofollow" target="_blank">http://yavaeye.com</a>的源码.</p>'
       helper.format_topic_body("http://foo.com,的???").should == 
         '<p><a href="http://foo.com," rel="nofollow" target="_blank">http://foo.com,</a>的???</p>'
       helper.format_topic_body("http://foo.com，的???").should == 

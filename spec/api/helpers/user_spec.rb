@@ -5,6 +5,7 @@ describe RubyChina::APIHelpers do
 
   it "should get current_user by private token" do
     u = Factory(:user)
+    u.update_private_token
     stub_params(:token => u.private_token)
     current_user.should == u
   end

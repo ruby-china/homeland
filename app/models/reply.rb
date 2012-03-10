@@ -69,4 +69,9 @@ class Reply
       Notification::TopicReply.create :user => topic.user, :reply => self
     end
   end
+
+  def destroy
+    super
+    notifications.delete_all
+  end
 end

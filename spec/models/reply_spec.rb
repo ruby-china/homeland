@@ -34,6 +34,10 @@ describe Reply do
       lambda do
         Factory :reply, :mentioned_user_ids => [user.id]
       end.should change(user.notifications.unread, :count)
+
+      lambda do
+        Factory(:reply, :mentioned_user_ids => [user.id]).destroy
+      end.should_not change(user.notifications.unread, :count)
     end
 
     it "should send topic reply notification to topic author" do
@@ -42,6 +46,10 @@ describe Reply do
       lambda do
         Factory :reply, :topic => topic
       end.should change(user.notifications.unread, :count)
+
+      lambda do
+        Factory(:reply, :topic => topic).destroy
+      end.should_not change(user.notifications.unread, :count)
 
       lambda do
         Factory :reply, :topic => topic, :user => user

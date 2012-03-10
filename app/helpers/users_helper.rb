@@ -72,11 +72,11 @@ module UsersHelper
 
   def render_user_level_tag(user)
     if admin?(user)
-      content_tag(:span, t("common.admin_user"), :class => "label warning")
+      content_tag(:span, t("common.admin_user"), :class => "label warning role")
     elsif wiki_editor?(user)
-      content_tag(:span, t("common.wiki_admin"), :class => "label success")
+      content_tag(:span, t("common.wiki_admin"), :class => "label success role")
     else
-      content_tag(:span,  t("common.limit_user"), :class => "label")
+      content_tag(:span,  t("common.limit_user"), :class => "label role")
     end
   end
 

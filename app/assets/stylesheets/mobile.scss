@@ -17,8 +17,26 @@ body {
     a { padding: 10px 6px 11px; }
   }
 }
-.tabs::before, .pills::before, .tabs::after, .pills::after{
-  display:inline;
+.userinfo {
+  .role {
+    float: right;
+    margin-right: 10px;
+  }
+  ul li {
+    span {      
+      width: auto;
+      text-indent: 5px;
+    }
+  }
+  .with_nbsp {
+    text-indent: 3px;
+    span {
+      display:none;
+    }
+  } 
+}
+table.node_topics .replies {
+  width: 40px;
 }
 .breadcrumb { 
   padding: 7px;
@@ -48,7 +66,9 @@ textarea.long {  width: 98%; height: 80px; }
 }
 form {
   margin-bottom: 0px;
-  
+  input[type="text"] {
+    width: 80%;
+  }  
   fieldset {
     margin-bottom: 18px;
     padding-top: 18px;
@@ -76,6 +96,9 @@ form {
   .clearfix { margin-bottom:8px; }
   .actions { 
     padding:0; padding-top:10px; background:#FFF; margin-bottom:0;
+  }	
+  #user_github {
+    width: 130px;
   }
 }
 .input-xxlarge, input.xxlarge, textarea.xxlarge, select.xxlarge {

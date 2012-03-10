@@ -8,8 +8,8 @@ max_conns: 20480
 require: []
 
 max_persistent_conns: 4048
-environment: production
-servers: 2
+environment: development
+servers: 1
 daemonize: true
-chdir: /home/ruby/www/ruby-china/current
+chdir: /Users/wh/rails_projects/ruby-china
 

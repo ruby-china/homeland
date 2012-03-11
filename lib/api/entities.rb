@@ -12,5 +12,9 @@ module RubyChina
       expose :_id, :title, :body, :body_html, :created_at, :updated_at, :replied_at, :replies_count, :node_name, :node_id, :last_reply_user_login
       expose :user, :using => APIEntities::User
     end
+
+    class Node < Grape::Entity
+      expose :_id, :name
+    end
   end
 end

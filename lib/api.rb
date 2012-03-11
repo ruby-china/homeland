@@ -19,5 +19,12 @@ module RubyChina
         present @topics, :with => APIEntities::Topic
       end
     end
+
+    resource :nodes do
+      # Get a list of all nodes
+      get do
+        present Node.all, :with => APIEntities::Node
+      end
+    end
   end
 end

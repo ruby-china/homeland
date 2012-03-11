@@ -8,6 +8,10 @@ module RubyChina
 
     helpers APIHelpers
 
+    # Authentication:
+    # APIs marked as 'require authentication' should be provided the user's private token,
+    # either in post body or query string, named "token"
+
     resource :topics do
       # Get active topics list
       # params[:size] could be specified to limit the results
@@ -17,6 +21,20 @@ module RubyChina
           .limit(page_size)
           .includes(:user)
         present @topics, :with => APIEntities::Topic
+      end
+
+      # Post a new topic
+      # require authentication
+      # params:
+      #   title
+      #   body
+      #   node_id
+      post do
+        authenticate!
+        @topic = current_user.topics.new(:title => params[:title], :body => params[:body])
+        @topic.node_id = params[:node_id]
+        @topic.save!
+        #TODO error handling
       end
     end
 

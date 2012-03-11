@@ -36,6 +36,11 @@ module RubyChina
         @topic.save!
         #TODO error handling
       end
+
+      get ":id" do
+        @topic = Topic.includes(:replies => [:user]).where(:_id => params[:id]).first
+        present @topic, :with => APIEntities::Topic
+      end
     end
 
     resource :nodes do

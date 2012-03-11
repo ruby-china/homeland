@@ -18,4 +18,16 @@ describe RubyChina::API, "topics" do
       user.reload.topics.first.title.should == "api create topic"
     end
   end
+
+  describe "GET /api/topics/:id.json" do
+    it "should get topic detail with list of replies" do
+      t = Factory(:topic, :title => "i want to know")
+      r = Factory(:reply, :topic_id => t._id, :body => "let me tell")
+      get "/api/topics/#{t._id}.json"
+      response.status.should == 200
+      json = JSON.parse(response.body)
+      json["title"].should == "i want to know"
+      json["replies"].first["body"].should == "let me tell"
+    end
+  end
 end

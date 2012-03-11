@@ -8,9 +8,15 @@ module RubyChina
       expose(:avatar_url) { |model, opts| model.avatar? ? model.avatar.url(:normal) : "" }
     end
 
+    class Reply < Grape::Entity
+      expose :_id, :body, :body_html, :message_id, :created_at, :updated_at
+      expose :user, :using => APIEntities::User
+    end
+
     class Topic < Grape::Entity
       expose :_id, :title, :body, :body_html, :created_at, :updated_at, :replied_at, :replies_count, :node_name, :node_id, :last_reply_user_login
       expose :user, :using => APIEntities::User
+      expose :replies, :using => APIEntities::Reply
     end
 
     class Node < Grape::Entity

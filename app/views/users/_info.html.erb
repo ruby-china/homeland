@@ -5,7 +5,7 @@
     </div>
     <%= render_user_level_tag(@user) %>
     <ul>
-        <li><span>&nbsp;</span>第 <%= @user.id %> 位<%= t("menu.users")%></li>
+        <li class="with_nbsp"><span>&nbsp;</span>第 <%= @user.id %> 位<%= t("menu.users")%></li>
         <li><span>ID:</span><strong><%= @user.login %></strong></li>
         <% if !@user.name.blank? %>
         <li><span>Name:</span><strong><%= @user.name %></strong></li>

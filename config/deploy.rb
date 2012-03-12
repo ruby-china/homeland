@@ -58,11 +58,15 @@ task :mongoid_create_indexes, :roles => :web do
   run "cd #{deploy_to}/current/; RAILS_ENV=production bundle exec rake db:mongoid:create_indexes"
 end
 
+task :compile_assets, :roles => :web do     
+  run "cd #{deploy_to}/current/; bundle exec rake assets:precompile"    
+end
+
 task :mongoid_migrate_database, :roles => :web do
   run "cd #{deploy_to}/current/; RAILS_ENV=production bundle exec rake db:migrate"
 end
 
-after "deploy:finalize_update","deploy:symlink", :init_shared_path, :link_shared_files, :mongoid_create_indexes, :mongoid_migrate_database
+after "deploy:finalize_update","deploy:symlink", :init_shared_path, :link_shared_files, :compile_assets, :mongoid_create_indexes, :mongoid_migrate_database
 
 
 set :default_environment, {

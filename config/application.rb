@@ -36,7 +36,7 @@ module RubyChina
     config.encoding = "utf-8"
 
     # Configure sensitive parameters which will be filtered from the log file.
-    config.filter_parameters += [:password,:password_confirm]
+    config.filter_parameters += [:password, :password_confirm, :token, :private_token]
 
     config.mongoid.include_root_in_json = false
 

@@ -9,7 +9,7 @@
 <% @site_configs.each do |site_config| %>
   <tr>
     <td><%= site_config.key %></td>
-    <td><%= link_to 'Edit', edit_cpanel_site_config_path(site_config) %></td>
+    <td><%= link_to '', edit_cpanel_site_config_path(site_config), :class => "icon small_edit" %></td>
   </tr>
 <% end %>
 </table>

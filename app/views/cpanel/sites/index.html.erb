@@ -7,9 +7,9 @@
       <td><%= t("mongoid.attributes.site.name") %></td>
       <td><%= t("mongoid.attributes.site.url") %></td>
       <td><%= t("mongoid.attributes.site.desc") %></td>
-      <td><%= t("mongoid.attributes.site.site_node") %></td>
-      <td>创建时间</td>
-      <td class="opts"></td>
+      <td style="width:100px"><%= t("mongoid.attributes.site.site_node") %></td>
+      <td style="width:100px">At</td>
+      <td style="width:40px" class="opts"></td>
     </tr>
     <% @sites.each do |item| %>
     <tr class="<%= cycle("","even") %><%= ' deleted' if !item.deleted_at.blank? %>">
@@ -18,7 +18,7 @@
       <td><%= item.url %></td>
       <td><%= item.desc %></td>
       <td><%= item.site_node.name if !item.site_node.blank? %></td>
-      <td><%= l(item.created_at, :format => :long) %></td>
+      <td><%= l(item.created_at, :format => :short) %></td>
       <td>
         <%= link_to "", edit_cpanel_site_path(item.id), :class => "icon small_edit" %>
         <%= link_to "", cpanel_site_path(item.id), :method => :delete, :confirm => '确定要删除吗?', :class => "icon small_delete" %>

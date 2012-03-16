@@ -60,4 +60,14 @@ describe Topic do
     t.save
     t.body_html.should == old_html
   end
+  
+  it "should log deleted user name when use destroy_by" do
+    user  = Factory :user
+    t = Factory(:topic)
+    t.destroy_by(user)
+    t.who_deleted.should == user.login
+    t.deleted_at.should_not == nil
+    t1 = Factory(:topic)
+    t1.destroy_by(nil).should == false
+  end
 end

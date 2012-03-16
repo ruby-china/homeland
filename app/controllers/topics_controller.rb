@@ -126,7 +126,7 @@ class TopicsController < ApplicationController
 
   def destroy
     @topic = Topic.find(params[:id])
-    @topic.destroy
+    @topic.destroy_by(current_user)
     redirect_to(topics_path, :notice => t("topics.delete_topic_success"))
   end
 

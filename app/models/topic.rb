@@ -26,6 +26,8 @@ class Topic
   field :last_reply_user_login
   # 节点名称 - cache 字段用于减少列表也的查询
   field :node_name
+  # 删除人
+  field :who_deleted
 
   belongs_to :user, :inverse_of => :topics
   counter_cache :name => :user, :inverse_of => :topics
@@ -90,5 +92,12 @@ class Topic
 
   def self.find_by_message_id(message_id)
     where(:message_id => message_id).first
+  end
+  
+  # 删除并记录删除人
+  def destroy_by(user)
+    return false if user.blank?
+    self.update_attribute(:who_deleted,user.login)
+    self.destroy
   end
 end

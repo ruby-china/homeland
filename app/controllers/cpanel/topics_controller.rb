@@ -42,7 +42,7 @@ class Cpanel::TopicsController < Cpanel::ApplicationController
 
   def destroy
     @topic = Topic.unscoped.find(params[:id])
-    @topic.destroy
+    @topic.destroy_by(current_user)
 
     redirect_to(cpanel_topics_path)
   end

@@ -58,9 +58,12 @@ table.node_topics .replies {
   .helpblock { display:none; }
   #preview  { width: 98%; padding:0; }
 }
+#new_topic {
+  #preview  { width: 98%; padding:0; }
+}
 textarea.long {  width: 98%; height: 80px; }
 .help-block { display:none; }
-.editor_toolbar { 
+#reply .editor_toolbar { 
   width:100%; 
   .pull-right { display:none; }
 }

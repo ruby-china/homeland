@@ -4,7 +4,7 @@
   <%= render "menu" %>
   
   <div class="box">
-    <h2 class="title">发布的帖子</h2>
+    <h2 class="title"><%= t("topics.recent_topics") %></h2>
     <%= render "topics", :topics => @topics %>
     <%= will_paginate @topics %>
   </div>

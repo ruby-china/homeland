@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   def topics
     @topics = @user.topics.recent.paginate(:page => params[:page], :per_page => 30)
     drop_breadcrumb(@user.login, user_path(@user.login))
-    drop_breadcrumb("发布的帖子")
+    drop_breadcrumb(t("topics.title"))
   end
 
   def likes

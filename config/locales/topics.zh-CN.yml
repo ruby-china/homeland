@@ -1,8 +1,11 @@
 "zh-CN":
   topics:
+    title: "发布的帖子"
     create_topic: "新建帖子"
     edit_topic: "修改帖子"
     no_replies: "暂无回复。"
+    recent_topics: "最近发布的帖子"
+    recent_replies: "最近回复的帖子"
     check_recent_topics: "查看更多最近发布的帖子..."
     reply_this_fllor: "回复此楼"
     tips_for_create_topic: "发贴说明"

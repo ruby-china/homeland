@@ -15,8 +15,7 @@
 #= require jquery.chosen
 #= require jquery.autogrow-textarea
 #= require social-share-button
-#= require jquery.at.js
-#= require jquery.caret.js
+#= require jquery.atwho
 #= require_self
 window.App =
   loading : () ->
@@ -67,10 +66,10 @@ window.App =
 
   # 绑定 @ 回复功能
   at_replyable : (el, logins) ->
-    $(el).atWho
-      debug : false
+    $(el).atWho "@"
+      debug : true
       data : logins
-      tpl : "<li data-insert='${login}'>${login} <small>${name}</small></li>"
+      tpl : "<li data-keyname='${login}'>${login} <small>${name}</small></li>"
       
   initForDesktopView : () ->
     return if typeof(app_mobile) != "undefined"

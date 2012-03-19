@@ -8,6 +8,20 @@ describe RubyChina::API, "topics" do
     end
   end
 
+  describe "GET /api/topics/node/:id.json" do
+    it "should return a list of topics that belong to the specified node" do
+      node = Factory(:node)
+      other_topics = [Factory(:topic), Factory(:topic)]
+      topics = Array.new(2).map { Factory(:topic, :node_id => node.id) }
+
+      get "/api/topics/node/#{node.id}.json"
+      json = JSON.parse(response.body)
+      json_titles = json.map { |t| t["_id"] }
+      topics.each { |t| json_titles.should include(t._id) }
+      other_topics.each { |t| json_titles.should_not include(t._id) }
+    end
+  end
+
   describe "POST /api/topics.json" do
     it "should post a new topic" do
       node_id = Factory(:node)._id

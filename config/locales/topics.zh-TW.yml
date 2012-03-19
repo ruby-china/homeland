@@ -1,8 +1,11 @@
 "zh-TW":
   topics:
+    title: "文章"
     create_topic: "發表話題"
     edit_topic: "修改話題"
     no_replies: "暫無回應。"
+    recent_topics: "最近文章"
+    recent_replies: "最近回應"
     check_recent_topics: "查看更多最近發表的話題..."
     reply_this_floor: "回應此樓"
     tips_for_create_topic: "發表提示"

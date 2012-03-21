@@ -67,7 +67,7 @@ window.App =
   # 绑定 @ 回复功能
   at_replyable : (el, logins) ->
     $(el).atWho "@"
-      debug : true
+      debug : false
       data : logins
       tpl : "<li data-keyname='${login}'>${login} <small>${name}</small></li>"
       

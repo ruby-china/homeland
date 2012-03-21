@@ -4,7 +4,7 @@ gem "rails", "3.2.2"
 gem "rails-i18n","0.1.8"
 gem "jquery-rails", "1.0.16"
 gem "rails_autolink", ">= 1.0.4"
-gem "jquery-atwho-rails", "0.0.1"
+gem "jquery-atwho-rails", "0.1.2"
 
 group :assets do
   gem 'sass-rails', "  ~> 3.2.3"

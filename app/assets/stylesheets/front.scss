@@ -213,16 +213,22 @@
      font-size: 14px;
      padding: 8px 0;
      border-top: 1px solid #DDD; 
+     position: relative;
+     overflow: auto;
      label {
        font-size: 12px;
        color: #999;
        display: inline-block;
        width: 120px;
        margin-right: 8px;
+       float: left;
        text-align: right; }
-     
-      }
-      a { margin-right: 10px; }
+     span.nodes {
+       float: left;
+       width: 550px;
+     }
+     a { margin-right: 10px; }
+  }
 }
 
 

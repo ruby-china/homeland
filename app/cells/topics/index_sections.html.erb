@@ -4,9 +4,11 @@
         <% @sections.each do |section| %>
         <li>
             <label><%= section.name %></label>
-            <% section.nodes.each do |node| %>
-                <%= link_to(node.name, node_topics_path(node), :title => node.name )%>
-            <% end %>
+            <span class="nodes">
+                <% section.nodes.each do |node| %>
+                    <%= link_to(node.name, node_topics_path(node), :title => node.name )%>
+                <% end %>
+            </span>
         </li>
         <% end %>
     </ul>

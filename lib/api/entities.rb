@@ -21,7 +21,8 @@ module RubyChina
     end
 
     class Node < Grape::Entity
-      expose :_id, :name
+      expose :_id, :name, :topics_count, :summary, :section_id, :sort
+      expose(:section_name) {|model, opts| model.section.name.to_s rescue "" }
     end
   end
 end

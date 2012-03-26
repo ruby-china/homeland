@@ -15,6 +15,7 @@ module TopicsHelper
   end
   
   def topic_favorite_tag(topic)
+    return "" if current_user.blank?
     class_name = "flag"
     link_title = "收藏"
     if current_user and current_user.favorite_topic_ids.include?(topic.id)
@@ -22,7 +23,7 @@ module TopicsHelper
       link_title = "取消收藏"
     end
     
-    link_to "", "#", :onclick => "return Topics.favorite(this)", 'data-id' => topic.id, :class => "icon small_#{class_name}", :title => link_title, :rel => "twipsy"
+    link_to "", "#", :onclick => "return Topics.favorite(this);", 'data-id' => topic.id, :class => "icon small_#{class_name}", :title => link_title, :rel => "twipsy"
   end
 
   def render_topic_title(topic)

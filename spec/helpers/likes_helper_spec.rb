@@ -19,7 +19,7 @@ describe LikesHelper do
 
     it "should result when unlogin user" do
       helper.stub(:current_user).and_return(nil)
-      helper.likeable_tag(topic).should == %(<a href="#" class="likeable" data-id="#{topic.id}" data-state="" data-type="#{topic.class}" onclick="return App.likeable(this);" rel="twipsy" title="喜欢(可用于收藏此贴)"><i class="icon small_like"></i> <span>#{topic.likes_count}人喜欢</span></a>)
+      helper.likeable_tag(topic).should == %(<a href="#" class="likeable" data-id="#{topic.id}" data-state="" data-type="#{topic.class}" onclick="return App.likeable(this);" rel="twipsy" title="喜欢"><i class="icon small_like"></i> <span>#{topic.likes_count}人喜欢</span></a>)
     end
   end
 end

@@ -36,14 +36,14 @@ describe UsersController do
     end
   end
 
-  describe ":likes" do
+  describe ":favorites" do
     it "should show user liked stuffs" do
-      get :likes, :id => user.login
+      get :favorites, :id => user.login
       response.should be_success
     end
 
     it "should render 404 if user not found" do
-      get :likes, :id => "chunk_norris"
+      get :favorites, :id => "chunk_norris"
       response.should_not be_success
       response.status.should == 404
     end

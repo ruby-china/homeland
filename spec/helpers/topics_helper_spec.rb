@@ -122,4 +122,31 @@ describe TopicsHelper do
 </div>'
     end
   end
+  
+  describe "topic_favorite_tag" do
+    let(:user) { Factory :user }
+    let(:topic) { Factory :topic }
+
+    it "should run with nil param" do
+      helper.stub(:current_user).and_return(nil)
+      helper.topic_favorite_tag(nil).should == ""
+    end
+    
+    it "should result when logined user did not favorite topic" do
+      user.stub(:favorite_topic_ids).and_return([])
+      helper.stub(:current_user).and_return(user)
+      helper.topic_favorite_tag(topic).should == %(<a href="#" class="icon small_flag" data-id="#{topic.id}" onclick="return Topics.favorite(this);" rel="twipsy" title="收藏"></a>)
+    end
+
+    it "should result when logined user favorited topic" do
+      user.stub(:favorite_topic_ids).and_return([topic.id])
+      helper.stub(:current_user).and_return(user)
+      helper.topic_favorite_tag(topic).should == %(<a href="#" class="icon small_flaged" data-id="#{topic.id}" onclick="return Topics.favorite(this);" rel="twipsy" title="取消收藏"></a>)
+    end
+
+    it "should result blank when unlogin user" do
+      helper.stub(:current_user).and_return(nil)
+      helper.topic_favorite_tag(topic).should == ""
+    end
+  end
 end

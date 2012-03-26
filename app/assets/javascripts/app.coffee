@@ -65,7 +65,8 @@ window.App =
     false
 
   # 绑定 @ 回复功能
-  at_replyable : (el, logins) ->
+  atReplyable : (el, logins) ->
+    return if logins.length == 0
     $(el).atWho "@"
       debug : false
       data : logins
@@ -124,7 +125,7 @@ window.App =
       if $.inArray(val.login,commenter_exists) < 0
          commenters.push(val) 
          commenter_exists.push(val.login)
-    App.at_replyable(".cell_comments_new textarea", commenters)
+    App.atReplyable(".cell_comments_new textarea", commenters)
       
 $(document).ready ->
   App.initForDesktopView()

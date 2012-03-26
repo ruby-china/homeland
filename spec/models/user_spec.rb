@@ -141,4 +141,22 @@ describe User do
       user.private_token.should_not == old_token
     end
   end
+  
+  describe "favorite topic" do
+    it "should favorite a topic" do
+      user.favorite_topic(topic.id)
+      user.favorite_topic_ids.include?(topic.id).should == true
+      
+      user.favorite_topic(nil).should == false
+      user.favorite_topic(topic.id.to_s).should == false
+      user.favorite_topic_ids.include?(topic.id).should == true
+    end
+    
+    it "should unfavorite a topic" do
+      user.unfavorite_topic(topic.id)
+      user.favorite_topic_ids.include?(topic.id).should == false
+      user.unfavorite_topic(nil).should == false
+      user.unfavorite_topic(topic.id.to_s).should == true
+    end
+  end
 end

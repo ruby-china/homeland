@@ -30,6 +30,7 @@ class User
   field :likes_count, :type => Integer, :default => 0
   # 用户密钥，用于客户端验证
   field :private_token
+  field :favorite_topic_ids, :type => Array, :default => []
 
   mount_uploader :avatar, AvatarUploader
 
@@ -188,6 +189,23 @@ class User
     Like.where(:likeable_id => likeable.id,
                :likeable_type => likeable.class,
                :user_id => self.id).destroy
+  end
+  
+  # 收藏话题
+  def favorite_topic(topic_id)
+    return false if topic_id.blank?
+    topic_id = topic_id.to_i
+    return false if self.favorite_topic_ids.include?(topic_id)
+    self.push(:favorite_topic_ids, topic_id)
+    true
+  end
+  
+  # 取消对话题的收藏
+  def unfavorite_topic(topic_id)
+    return false if topic_id.blank?
+    topic_id = topic_id.to_i
+    self.pull(:favorite_topic_ids, topic_id)
+    true
   end
 
   # 软删除

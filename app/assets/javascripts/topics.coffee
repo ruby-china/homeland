@@ -99,7 +99,28 @@ window.Topics =
             return msg
       else
         $(window).unbind("beforeunload")
-
+        
+  favorite : (el) ->
+    topic_id = $(el).data("id")
+    if $(el).hasClass("small_flaged")
+      hash = 
+        type : "unfavorite"
+      $.ajax
+       url : "/topics/#{topic_id}/favorite"
+       data : hash
+       type : "POST"
+       success : ->
+         $(el).attr("title","收藏")
+         $(el).attr("class","icon small_flag")
+    else
+      $.ajax
+       url : "/topics/#{topic_id}/favorite"
+       type : "POST"
+       success : ->
+         $(el).attr("title","取消收藏")
+         $(el).attr("class","icon small_flaged")
+    false
+    
 # pages ready
 $(document).ready ->
   $("textarea").bind "keydown","ctrl+return",(el) ->

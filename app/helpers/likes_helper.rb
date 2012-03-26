@@ -9,7 +9,7 @@ module LikesHelper
       state = "liked"
       icon = content_tag("i", "", :class => "icon small_liked")
     else
-      title = "喜欢(可用于收藏此贴)"
+      title = "喜欢"
       state = ""
       icon = content_tag("i", "", :class => "icon small_like")
     end

@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_filter :require_user, :only => "auth_unbind"
   before_filter :init_base_breadcrumb
   before_filter :set_menu_active
-  before_filter :find_user, :only => [:show, :topics, :likes]
+  before_filter :find_user, :only => [:show, :topics, :favorites]
 
   def index
     @total_user_count = User.count
@@ -23,8 +23,8 @@ class UsersController < ApplicationController
     drop_breadcrumb(t("topics.title"))
   end
 
-  def likes
-    @likes = @user.likes.recent.topics.paginate(:page => params[:page], :per_page => 30)
+  def favorites
+    @topics = Topic.find(@user.favorite_topic_ids).paginate(:page => params[:page], :per_page => 30)
     drop_breadcrumb(@user.login, user_path(@user.login))
     drop_breadcrumb(t("users.menu.like"))
   end

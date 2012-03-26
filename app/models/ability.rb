@@ -14,6 +14,7 @@ class Ability
     elsif user.has_role?(:member)
       # Topic
       can :create, Topic
+      can :favorite, Topic
       can :update, Topic do |topic|
         (topic.user_id == user.id)
       end

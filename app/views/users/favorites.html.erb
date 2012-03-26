@@ -9,15 +9,15 @@
         <td class="title"><%=t("common.title")%></td>
         <td class="opts"></td>
       </tr>
-      <% @likes.each do |item| %>
-        <% next if item.likeable.blank? %>
+      <% @topics.each do |item| %>
+        <% next if item.blank? %>
         <tr class="topic <%= cycle('odd',"") %>">
-          <td class="title"><%= render_topic_title(item.likeable) %></td>
-          <td><%= render_node_name(item.likeable.node_name,item.likeable.node_id) %></td>
+          <td class="title"><%= render_topic_title(item) %></td>
+          <td><%= render_node_name(item.node_name,item.node_id) %></td>
         </tr>
       <% end %>
     </table>
-    <%= will_paginate @likes %>
+    <%= will_paginate @topics %>
   </div>
 </div>
 

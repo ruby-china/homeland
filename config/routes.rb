@@ -27,7 +27,7 @@ RubyChina::Application.routes.draw do
   resources :users do
     member do
       get :topics
-      get :likes
+      get :favorites
     end
   end
   resources :notifications, :only => [:index, :destroy] do
@@ -44,6 +44,7 @@ RubyChina::Application.routes.draw do
   resources :topics do
     member do
       post :reply
+      post :favorite
     end
     collection do
       get :search

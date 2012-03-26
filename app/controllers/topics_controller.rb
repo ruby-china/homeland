@@ -1,7 +1,7 @@
 # coding: utf-8
 class TopicsController < ApplicationController
 
-  load_and_authorize_resource :only => [:new,:edit,:create,:update,:destroy]
+  load_and_authorize_resource :only => [:new,:edit,:create,:update,:destroy,:favorite]
 
   before_filter :set_menu_active
   caches_page :feed, :node_feed, :expires_in => 1.hours
@@ -128,6 +128,15 @@ class TopicsController < ApplicationController
     @topic = Topic.find(params[:id])
     @topic.destroy_by(current_user)
     redirect_to(topics_path, :notice => t("topics.delete_topic_success"))
+  end
+  
+  def favorite
+    if params[:type] == "unfavorite"
+      current_user.unfavorite_topic(params[:id])
+    else
+      current_user.favorite_topic(params[:id])
+    end
+    render :text => "1"
   end
 
   protected

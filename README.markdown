@@ -89,6 +89,7 @@ facekbook_enable: false by default
 ## Thanks
 
 * [Twitter Bootstrap](https://twitter.github.com/bootstrap)
+* [GentleFace Icons](http://www.gentleface.com/free_icon_set.html)
 
 Forked from [Homeland Project](https://github.com/huacnlee/homeland)
 

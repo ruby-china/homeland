@@ -142,3 +142,8 @@ $(document).ready ->
   # Choose 样式
   $("select").chosen()
   
+  # Go Top
+  $("a.go_top").click () ->
+    $('html, body').animate({ scrollTop: 0 },300);
+    return false
+  

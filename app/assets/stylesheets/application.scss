@@ -179,3 +179,17 @@ div.field .hint { font-size:12px; color:#999;}
   h1 { font-size:600%; color:#aaa; margin-bottom:100px;}
   p { font-size:16px; }
 }
+
+
+.go_top {
+  background:#FFF;
+  text-align: center;
+  border:1px solid #eee;
+  display:block;
+  height:20px; width:24px; 
+  padding-top:4px; overflow:hidden;
+  border-radius:6px;
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+}

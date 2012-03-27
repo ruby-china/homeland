@@ -2,6 +2,7 @@
 
         Creating a sprite from following images:
         
+        app/assets/images/sprites/icons/go_top.png (16x16)
         app/assets/images/sprites/icons/rss.png (16x16)
 
         Output files:
@@ -9,8 +10,9 @@
           app/assets/stylesheets/sprites/icons.scss
 
         Output size:
-          16x16
+          32x16
 
 
 */
-.icons_rss { width: 16px; height: 16px; background: url(image-path('sprites/icons.png')) 0px 0px no-repeat; }
+.icons_go_top { width: 16px; height: 16px; background: url(image-path('sprites/icons.png')) 0px 0px no-repeat; }
+.icons_rss { width: 16px; height: 16px; background: url(image-path('sprites/icons.png')) -16px 0px no-repeat; }

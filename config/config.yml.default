@@ -1,6 +1,6 @@
 defaults: &defaults
-  app_name: "Ruby China Group"
-  foot_html: "&copy; Ruby China Group."
+  app_name: "Ruby China"
+  foot_html: "&copy; Ruby China."
   domain: "127.0.0.1:3000"    
   admin_emails: 
     - "admin@admin.com"

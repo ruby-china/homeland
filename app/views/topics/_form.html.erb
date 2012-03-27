@@ -1,23 +1,24 @@
-<%= simple_form_for @topic, :wrapper => :inline do |f| %>
+<%= simple_form_for @topic do |f| %>
+  <%= render "shared/error_messages", :target => @topic %>  
   <fieldset>
     <legend><%= @topic.new_record? ? t("topics.create_topic") : t("topics.edit_topic") %></legend>
-    <%= render "shared/error_messages", :target => @topic %>  
     <%= f.input :title do %>
-      <span class="span3">
+      <span class="node_select">
         <%= render_topic_node_select_tag(@topic) %>
       </span>
-      <span class="span6">
-        <%= f.text_field :title %>
-      </span>
+      <%= f.text_field :title, :class => "span4" %>
     <% end %>
     
-    <div class="edit_tools input">
-      <%= render "editor_toolbar" %>
-    </div>    
+    <div class="control-group edit_tools">
+      <label class="control-label"></label>
+      <div class="controls">
+        <%= render "editor_toolbar" %>
+      </div>
+    </div>
     <%= f.input :body, :as => :text, :input_html => { :class => "topic_editor closewarning xxlarge", :style => "height:400px" }%>
 
-    <div class="actions">
-      <%= f.submit t("common.save"), :class => "btn primary", :disable_with => t("common.saving") %>
+    <div class="form-actions">
+      <%= f.submit t("common.save"), :class => "btn btn-primary", :disable_with => t("common.saving") %>
       <%= link_to(t("common.cancel"), @topic.id.blank? ? root_path : topic_path(@topic), :class => "btn")%>
     </div>
   </fieldset>

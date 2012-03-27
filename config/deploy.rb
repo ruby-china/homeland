@@ -13,7 +13,7 @@ set :git_shallow_clone, 1
 
 role :web, "58.215.172.218"                          # Your HTTP server, Apache/etc
 role :app, "58.215.172.218"                          # This may be the same as your `Web` server
-role :db,  "58.215.172.218", :primary => true # This is where Rails migrations will run
+role :db,  "58.215.172.218", :btn btn-primary => true # This is where Rails migrations will run
 
 # unicorn.rb 路径
 set :unicorn_path, "#{deploy_to}/current/config/unicorn.rb"

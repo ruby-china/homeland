@@ -10,7 +10,7 @@
     <%= link_to t("common.mark_all_as_read"), mark_all_as_read_notifications_path, :class => 'btn', :method => :put, :remote => true, :disable_with => '标记所有为已读...' %>
     <h1 class="pull-right">提醒</h1>
   </div>
-  <table>
+  <table class="table">
     <tbody>
       <% @notifications.each do |notification| -%>
         <tr id="<%= notification.anchor %>">

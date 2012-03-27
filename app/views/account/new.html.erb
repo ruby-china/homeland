@@ -1,33 +1,17 @@
 <% content_for :sitemap do %><span class="current">加入社区</span><% end %>
 <div class="content">
     <div class="box">
-    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+    <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+      <%= render "shared/error_messages", :target => resource %> 
       <fieldset>
         <legend><%= t("users.register_user")%></legend>
-        <%= render "shared/error_messages", :target => resource %> 
-        <div class="clearfix">
-          <%= f.label :login %>
-          <div class="input">
-            <%= f.text_field :login %><br />
-            <span class="help-block"><%= t("users.suggest_using_twitter_id")%></span>
-          </div>
-        </div>
-        <div class="clearfix">
-          <%= f.label :name %>
-          <div class="input"><%= f.text_field :name %></div>
-        </div>
-        <div class="clearfix">
-          <%= f.label :email %>
-          <div class="input"><%= f.text_field :email, :placeholder => "foo@bar.com" %></div>
-        </div>
-        <div class="clearfix"><%= f.label :password %>
-          <div class="input"><%= f.password_field :password %></div>
-        </div>
-        <div class="clearfix"><%= f.label :password_confirmation %>
-          <div class="input"><%= f.password_field :password_confirmation %></div>
-        </div>
-        <div class="actions">
-          <%= f.submit "提交注册信息", :class => "btn primary", :disable_with => t("common.submitting") %>
+        <%= f.input :login, :hint => t("users.suggest_using_twitter_id") %>
+        <%= f.input :name %>
+        <%= f.input :email, :input_html => { :class => "span5", :placeholder => "foo@bar.com" } %>
+        <%= f.input :password %>
+        <%= f.input :password_confirmation %>
+        <div class="form-actions">
+          <%= f.submit "提交注册信息", :class => "btn btn-primary", :disable_with => t("common.submitting") %>
         </div>
       </fieldset>
     <% end %>

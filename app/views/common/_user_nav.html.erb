@@ -1,18 +1,15 @@
 <% if current_user %>
-<ul class="nav secondary-nav" id="userbar">
+<ul class="nav pull-right" id="userbar">
   <%
     unread_count = current_user.notifications.unread.count
-    notification_class = ["notifications"]
-    notification_class << "unread" if unread_count > 0
-    notification_class << "active" if ["notifications"].index(params[:controller])
+    badge_class = "badge-inverse"
+    badge_class = "badge-error" if unread_count > 0
   %>
-  <%= content_tag 'li', :class => notification_class do %>
-    <%= content_tag 'a', :href => notifications_path do %>
-      <span class="count"><%= unread_count %></span>
-    <% end %>
-  <% end %>
-  <li>
-    <%= link_to(current_user.login,user_path(current_user.login), :class => "dropdown-toggle")%>
+  <li<%= " class=active" if ["notifications"].index(params[:controller]) %>>
+    <a href="<%= notifications_path %>"><spanc class="badge <%= badge_class %>"><%= unread_count %></span></a>
+  </li>
+  <li class="dropdown" id="user_menu">
+    <%= link_to(raw("#{current_user.login} <b class='caret'></b>"), "#user_menu", :class => "dropdown-toggle", "data-toggle" => "dropdown") %>
     <%= render_list :class => "dropdown-menu" do |li|
       li << link_to(t("menu.my_home_page"), user_path(current_user.login) )
       unless params[:controller].match(/cpanel/)
@@ -26,7 +23,7 @@
   </li>
 </ul>
 <% else %>
-  <%= render_list :class => "nav secondary-nav", :id => "userbar" do |li|
+  <%= render_list :class => "nav", :id => "userbar" do |li|
     li << link_to( t("common.register"),new_user_registration_path)
     li << link_to( t("common.login"), new_user_session_path )
   end %>

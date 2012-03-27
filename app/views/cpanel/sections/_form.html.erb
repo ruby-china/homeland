@@ -1,23 +1,12 @@
-<%= form_for([:cpanel,@section]) do |f| %>
-<fieldset>
-  <legend></legend>
+<%= simple_form_for([:cpanel,@section]) do |f| %>
   <%= render 'shared/error_messages', :target => @section %>
-
-  <div class="clearfix">
-    <%= f.label :name %>
-    <div class="input">
-      <%= f.text_field :name %>
+  <fieldset>
+    <legend></legend>
+    <%= f.input :name %>
+    <%= f.input :sort %>
+    <div class="form-actions">
+      <%= f.submit t("common.save"), :class => "btn btn-primary", :disable_with => t("common.saving") %>
+      <%= link_to 'Back', cpanel_sections_path %>
     </div>
-  </div>
-  <div class="clearfix">
-    <%= f.label :sort %>
-    <div class="input">
-      <%= f.text_field :sort %>
-    </div>
-  </div>
-  <div class="actions">
-    <%= f.submit t("common.save"), :class => "btn primary", :disable_with => t("common.saving") %>
-    <%= link_to 'Back', cpanel_sections_path %>
-  </div>
   </fieldset>
 <% end %>

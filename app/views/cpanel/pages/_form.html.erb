@@ -1,35 +1,12 @@
-<%= form_for([:cpanel,@page]) do |f| %>
+<%= simple_form_for([:cpanel,@page]) do |f| %>
+  <%= render "shared/error_messages", :target => @page %>
   <fieldset>
     <legend>Wiki页面编辑</legend>
-    <%= render "shared/error_messages", :target => @page %>
-    <div class="clearfix">
-      <%= f.label :locked %>
-      <div class="input">
-        <%= f.check_box :locked %><br />
-        <span class="help-inline">锁定后，前台非管理员将无法修改。</span>
-      </div>
-    </div>
-    <div class="clearfix">
-      <%= f.label :slug %>
-      <div class="input">
-        <%= f.text_field :slug %><br />
-        <span class="help-inline">http://<%= Setting.domain %>/wiki/:slug</span>
-      </div>
-    </div>
-    <div class="clearfix">
-      <%= f.label :title %>
-      <div class="input">
-        <%= f.text_field :title, :class => "xxlarge" %>
-      </div>
-    </div>
-    <div class="clearfix">
-      <%= f.label :body %>
-      <div class="input">
-        <%= f.text_area :body, :class => "long", :rows => "30" %><br />
-        <span class="help-inline">请使用 Markdown 格式编写。</span>
-      </div>
-    </div>
-    <div class="actions">
-      <%= f.submit t("common.save"), :class => "btn primary", :disable_with => t("common.saving") %>
+    <%= f.input :locked, :as => :boolean, :hint => "锁定后，前台非管理员将无法修改。" %>
+    <%= f.input :slug %>
+    <%= f.input :title, :input_html => { :class => "xxlarge" } %>
+    <%= f.input :body, :as => :text, :input_html => { :class => "span8", :rows => "30"} %>
+    <div class="form-actions">
+      <%= f.submit t("common.save"), :class => "btn btn-primary", :disable_with => t("common.saving") %>
     </div>
 <% end %>

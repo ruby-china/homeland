@@ -1,27 +1,14 @@
-<%= form_for(@reply, :url => (@reply.id.blank? ? cpanel_replies_path : cpanel_reply_path(@reply.id))) do |f| %>
-<fieldset>
-   <legend></legend>
-   <%= render 'shared/error_messages', :target => @reply %>
-
-  <div class="clearfix">
-    <%= f.label :body %>
-    <div class="input">
-      <%= f.text_area :body, :class => "long", :style => "height:400px" %>
+<%= simple_form_for([:cpanel,@reply]) do |f| %>
+  <%= render 'shared/error_messages', :target => @reply %>
+  <fieldset>
+    <legend></legend>
+    <%= f.input :body, :as => :text, :input_html => { :class => "span8", :rows => "10"} %>
+    <%= f.input :user_id %>
+    <%= f.input :source %>
+    <div class="form-actions">
+      <%= f.submit t("common.save"), :class => "btn btn-primary", :disable_with => t("common.saving") %>
+      or
+      <%= link_to 'Back', cpanel_replies_path %>
     </div>
-  </div>
-  <div class="clearfix">
-    <%= f.label :user_id %>
-    <div class="input">
-    <%= f.text_field :user_id %> <%= @reply.user.login %>
-    </div>
-  </div>
-  <div class="clearfix">
-    <%= f.label :source %><div class="input">
-    <%= f.text_field :source %></div>
-  </div>
-  <div class="actions">
-    <%= f.submit t("common.save"), :class => "btn primary", :disable_with => t("common.saving") %>
-    or
-    <%= link_to 'Back', cpanel_replies_path %>
-  </div>
+  </fieldset>
 <% end %>

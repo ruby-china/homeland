@@ -1,8 +1,7 @@
-<%= simple_form_for @page, :wrapper => :inline do |f| %>
+<%= simple_form_for @page do |f| %>
+  <%= render "shared/error_messages", :target => @page %>
   <fieldset>
     <legend><%= t("pages.edit_wiki_page")%></legend>
-    <%= render "shared/error_messages", :target => @page %>
-
     <%= f.input :slug, :hint => "http://#{Setting.domain}/wiki/:slug"%>
     <%= f.input :title, :input_html => { :class => "xxlarge" } %>
     
@@ -25,7 +24,7 @@
     %>
 
     <% end %>
-    <div class="actions">
-      <%= f.submit t("common.save"), :class => "btn primary", :disable_with => t("common.saving") %>
+    <div class="form-actions">
+      <%= f.submit t("common.save"), :class => "btn btn-primary", :disable_with => t("common.saving") %>
     </div>
 <% end %>

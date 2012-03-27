@@ -8,35 +8,42 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
-  <div class="topbar" data-dropdown="dropdown">
-    <div class="topbar-inner">
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
       <div class="container">
-        <%= link_to("控制台", cpanel_root_path, :class => "brand")%>
-        <%= render_list :class => "nav" do |li|
-          li << link_to(t("cpanel.menu.root_path"), cpanel_root_path)
-          li << link_to(t("cpanel.menu.site_configs"), cpanel_site_configs_path )
-          li << link_to(t("cpanel.menu.users"),cpanel_users_path)
-          li << link_to(t("cpanel.menu.sections"), cpanel_sections_path )
-          li << link_to(t("cpanel.menu.nodes"), cpanel_nodes_path )
-          li << link_to(t("cpanel.menu.posts"),cpanel_posts_path )
-          li << link_to(t("cpanel.menu.wiki"),cpanel_pages_path )
-          li << link_to(t("cpanel.menu.topics"), cpanel_topics_path)
-          li << link_to(t("cpanel.menu.replies"), cpanel_replies_path)
-          li << link_to(t("cpanel.menu.comments"),cpanel_comments_path )
-          li << link_to(t("cpanel.menu.photos"),cpanel_photos_path )
-          li << link_to(t("cpanel.menu.site_nodes"),cpanel_site_nodes_path )
-          li << link_to(t("cpanel.menu.sites"),cpanel_sites_path )
-          li << link_to(t("cpanel.menu.locations"),cpanel_locations_path )
-        end  %>
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <%= link_to("控制台", cpanel_root_path, :class => "brand span2")%>
+        <div class="nav-collapse">
+          <%= render_list :class => "nav" do |li|
+            li << link_to(t("cpanel.menu.root_path"), cpanel_root_path)
+            li << link_to(t("cpanel.menu.site_configs"), cpanel_site_configs_path )
+            li << link_to(t("cpanel.menu.users"),cpanel_users_path)
+            li << link_to(t("cpanel.menu.sections"), cpanel_sections_path )
+            li << link_to(t("cpanel.menu.nodes"), cpanel_nodes_path )
+            li << link_to(t("cpanel.menu.posts"),cpanel_posts_path )
+            li << link_to(t("cpanel.menu.wiki"),cpanel_pages_path )
+            li << link_to(t("cpanel.menu.topics"), cpanel_topics_path)
+            li << link_to(t("cpanel.menu.replies"), cpanel_replies_path)
+            li << link_to(t("cpanel.menu.comments"),cpanel_comments_path )
+            li << link_to(t("cpanel.menu.photos"),cpanel_photos_path )
+            li << link_to(t("cpanel.menu.site_nodes"),cpanel_site_nodes_path )
+            li << link_to(t("cpanel.menu.sites"),cpanel_sites_path )
+            li << link_to(t("cpanel.menu.locations"),cpanel_locations_path )
+          end  %>
 
-        <ul class="nav secondary-nav" id="userbar">
-          <li>
-            <a href="#" class="dropdown-toggle"><%= current_user.login %></a>
-            <ul class="dropdown-menu">
-              <li><%= link_to("回到前台", root_path)%></li>
-            </ul>
-          </li>
-        </ul>
+          <ul class="nav  pull-right">
+            <li class="dropdown" id="user_menu">
+              <a href="#user_menu" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.login %> <b class='caret'></b></a>
+              <ul class="dropdown-menu">
+                <li><%= link_to("回到前台", root_path)%></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>

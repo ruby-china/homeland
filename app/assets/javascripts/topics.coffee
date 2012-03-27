@@ -19,8 +19,8 @@ window.Topics =
     opts =
       title:"插入图片"
       width: 350
-      height: 145
-      content: '<iframe src="/photos/tiny_new" frameborder="0" style="width:330px; height:145px;"></iframe>',
+      height: 140
+      content: '<iframe src="/photos/tiny_new" frameborder="0" style="width:330px; height:160px;"></iframe>',
       close_on_body_click : false
     
     $("#add_image").jDialog(opts)

@@ -1,47 +1,18 @@
-<%= form_for([:cpanel,@topic]) do |f| %>
-<fieldset>
-  <legend></legend>
+<%= simple_form_for([:cpanel,@topic]) do |f| %>
   <%= render 'shared/error_messages', :target => @topic %>
-
-  <div class="clearfix">
-    <%= f.label :title %>
-    <div class="input">
-    <%= f.text_field :title, :class => "span10" %>
+  <fieldset>
+    <legend></legend>
+  
+    <%= f.input :title, :input_html => { :class => "span10 "} %>
+    <%= f.input :node_id %>
+    <%= f.input :user_id %>
+    <%= f.input :last_reply_user_id %>
+    <%= f.input :source %>
+    <%= f.input :body, :as => :text, :input_html => { :class => "span8", :rows => "10"} %>
+    <div class="form-actions">
+      <%= f.submit t("common.save"), :class => "btn btn-primary", :disable_with => t("common.saving") %>
+      or
+      <%= link_to 'Back', cpanel_topics_path %>
     </div>
-  </div>
-  <div class="clearfix">
-    <%= f.label :node_id %>
-    <div class="input">
-      <%= render_topic_node_select_tag(@topic) %>
-    </div>
-  </div>
-  <div class="clearfix">
-    <%= f.label :body %>
-    <div class="input">
-    <%= f.text_area :body, :class => "span13", :style => "height:400px" %>
-    </div>
-  </div>
-  <div class="clearfix">
-    <%= f.label :user_id %>
-    <div class="input">
-    <%= f.text_field :user_id %> <%= @topic.user.login if @topic.user %>
-    </div>
-  </div>
-  <div class="clearfix">
-    <%= f.label :last_reply_user_id %>
-    <div class="input">
-    <%= f.text_field :last_reply_user_id %>
-    </div>
-  </div>
-  <div class="clearfix">
-    <%= f.label :source %>
-    <div class="input">
-    <%= f.text_field :source %>
-    </div>
-  </div>
-  <div class="actions">
-    <%= f.submit t("common.save"), :class => "btn primary", :disable_with => t("common.saving") %>
-    or
-    <%= link_to 'Back', cpanel_topics_path %>
-  </div>
+  </fieldset>
 <% end %>

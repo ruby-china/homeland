@@ -18,21 +18,26 @@
   <%= auto_discovery_link_tag(:rss,feed_topics_url,:title => '订阅最新贴') %>
   <%= yield :node_feed_link %>
 </head>
-<%= render_body_tag %>
-  <div class="topbar" data-dropdown="dropdown">
-    <div class="topbar-inner">
+<body data-offset="50">
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
       <div class="container">
-        <h3>
-          <a href="/"><%= Setting.app_name %></a>
-        </h3>
-         <%= render_list :class => "nav" do |li|
-           li << link_to(t("menu.topics"), topics_path)
-           li << link_to(t("menu.wiki"), pages_path )
-           li << link_to(t("menu.sites"), sites_path )
-           li << link_to(t("menu.users"), users_path)
-         end %>
-        <%= render "common/search_form" %>
-        <%= render "common/user_nav" %>
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <%= link_to Setting.app_name, root_path, :class => "brand span2" %>
+        <div class="nav-collapse">
+          <%= render_list :class => "nav" do |li|
+             li << link_to(t("menu.topics"), topics_path)
+             li << link_to(t("menu.wiki"), pages_path )
+             li << link_to(t("menu.sites"), sites_path )
+             li << link_to(t("menu.users"), users_path)
+          end %>
+          <%= render "common/search_form" %>
+          <%= render "common/user_nav" %>
+        </div>
       </div>
     </div>
   </div>

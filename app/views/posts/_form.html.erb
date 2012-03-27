@@ -1,8 +1,8 @@
 <div class="box">
-<%= simple_form_for @post, :wrapper => :inline do |f| %>
+<%= simple_form_for @post do |f| %>
+  <%= render "shared/error_messages", :target => @post %>
   <fieldset>
     <legend>投稿</legend>
-    <%= render "shared/error_messages", :target => @post %>
     <%= f.input :title, :input_html => { :class => "xxlarge" } %>
     
     <%= f.input :body, :as => :text,
@@ -14,8 +14,8 @@
     
     <%= f.input :source_url, :input_html => {:class => "xxlarge"} , :placeholder => "http://" %>
 
-    <div class="actions">
-      <%= f.submit "投稿", :class => "btn primary", :disable_with => t("common.saving") %>
+    <div class="form-actions">
+      <%= f.submit "投稿", :class => "btn btn-primary", :disable_with => t("common.saving") %>
     </div>
   </fieldset>
 <% end %>

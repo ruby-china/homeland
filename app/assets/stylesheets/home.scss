@@ -20,9 +20,9 @@
       list-style-position: inside;
       
       li { height:22px; line-height:22px; overflow: hidden; white-space: nowrap; text-overflow:ellipsis;}
-      a { margin-right:10px; color:green; }
+      a { color:green; margi-right:5px; }
     }
-    .count { font-size:12px; }
+    .count { font-size:12px; color:#999; }
   }
   .high_likes_topics {
     top:0; right:1px;

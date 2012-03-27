@@ -23,7 +23,7 @@ code { background:none; }
 .navbar-fixed-top {
   position:static;right:0;left:0;margin-bottom:20px;
   .brand {
-    padding-right:0;padding-left:0;margin-left:0px;float:left;font-weight:bold;color:#000;
+    padding-right:0;padding-left:20px;margin-left:0px;float:left;font-weight:bold;color:#000;
     text-shadow: 0 1px 0 rgba(255,255,255,.1), 0 0 30px rgba(255,255,255,.125);
     -webkit-transition:all .2s linear;-moz-transition:all .2s linear;transition:all .2s linear;
     &:hover { text-decoration: none; background:none; }

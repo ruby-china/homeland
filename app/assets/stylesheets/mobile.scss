@@ -1,11 +1,6 @@
 body {
-  
+  padding:0 10px;
 }
-.topbar h3 a, .topbar .brand{
-  display:none;
-}
-.topbar input { display:none; }
-.container { width:auto; margin:0 10px; }
 .container-fluid { width:auto; min-width:0; }
 .sidebar { display:none; }
 .container-fluid > .content {
@@ -46,7 +41,7 @@ table.node_topics .replies {
 .feed_link {
   margin-top:-49px;
   margin-right:0;
-  a {color:#B70000;}
+  a.feed {color:#B70000;}
 }
 #reply.form {
   textarea { width: 98%; height: 80px; }

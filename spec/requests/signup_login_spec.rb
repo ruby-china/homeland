@@ -11,7 +11,7 @@ describe "sign up and login" do
     fill_in '密码', :with => 'coolguy'
     fill_in '确认密码', :with => 'coolguy'
     click_button '提交注册信息'
-    page.should have_content('活跃帖子')
+    page.should have_content('您的帐号已注册成功')
     within("#userbar") do
       click_on 'rubyist'
     end
@@ -23,7 +23,7 @@ describe "sign up and login" do
     fill_in '用户名', :with => 'rubyist'
     fill_in '密码', :with => 'coolguy'
     click_button '登录'
-    page.should have_content('活跃帖子')
+    page.should have_content('登录成功')
   end
 
   it "fail to sign up new user if password field is protected" do

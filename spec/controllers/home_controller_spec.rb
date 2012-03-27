@@ -11,7 +11,7 @@ describe HomeController do
     it "should redirect to topics_path if user is signed in" do
       sign_in user
       get :index
-      response.should redirect_to(topics_path)
+      response.should be_success
     end
   end
 end

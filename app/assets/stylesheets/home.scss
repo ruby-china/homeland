@@ -10,3 +10,25 @@
 .topics ul li .node { color:#666; margin-right:5px;}
 .topics ul li .node a:link,
 .topics ul li .node a:visited { color:#666; }
+
+.home_suggest_topics {
+  position:relative;
+  .box { 
+    width:440px; 
+    ol {
+      margin:0;
+      list-style-position: inside;
+      
+      li { height:22px; line-height:22px; overflow: hidden; white-space: nowrap; text-overflow:ellipsis;}
+      a { margin-right:10px; color:green; }
+    }
+    .count { font-size:12px; }
+  }
+  .high_likes_topics {
+    top:0; right:1px;
+    position:absolute;
+    ol {
+      a { color:#A84137;}
+    }
+  }
+}

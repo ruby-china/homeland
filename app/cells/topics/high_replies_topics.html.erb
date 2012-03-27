@@ -1,0 +1,11 @@
+<div class="high_replies_topics box">
+  <h2 class="title">本周热门帖子</h2>
+  <ol>
+    <% @topics.each do |item| %>
+      <li> 
+        <%= link_to(item.title, topic_path(item))%>
+        <span class="count"><%= item.replies_count %> 回复</span>
+      </li>
+    <% end %>
+  </ol>
+</div>

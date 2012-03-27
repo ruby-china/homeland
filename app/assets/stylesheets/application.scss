@@ -89,8 +89,9 @@ a[rel=userpopover] {
   -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
   box-shadow: 0 1px 2px rgba(0,0,0,.15);
   h2.title {
-    margin:0 -10px; padding:0 10px;
-    font-size:14px; color:#999; line-height:100%;
+    font-size: 12px;
+    margin:0 -10px; padding:0 10px; margin-bottom:8px;
+    color:#999; line-height:100%;
     border-bottom:1px solid #ddd; padding-bottom:8px;
   }
 }

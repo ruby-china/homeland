@@ -42,6 +42,8 @@ class Topic
   index :node_id
   index :user_id
   index :replied_at
+  index :created_at
+  index :links_count
   index :suggested_at
 
   counter :hits, :default => 0
@@ -62,6 +64,8 @@ class Topic
   # 推荐的话题
   scope :suggest, where(:suggested_at.ne => nil).desc(:suggested_at)
   scope :fields_for_list, without(:body,:body_html)
+  scope :high_likes, desc(:likes_count, :_id)
+  scope :high_replies, desc(:replies_count, :_id)
 
   before_save :store_cache_fields
   def store_cache_fields

@@ -1,3 +1,10 @@
 <%= raw SiteConfig.index_html %>
+<% content_for :styles do %>
+  <%= stylesheet_link_tag "home" %>
+<% end %>
+<div class="home_suggest_topics">
+  <%= render_cell :topics, :high_likes_topics %>
+  <%= render_cell :topics, :high_replies_topics %>
+</div>
 <%= render_cell :topics, :index_sections %>
 <%= render_cell :topics, :index_locations %>

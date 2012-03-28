@@ -8,7 +8,7 @@ set :scm, :git
 set :user, "ruby"
 set :deploy_to, "/home/#{user}/www/#{application}"
 set :runner, "ruby"
-set :deploy_via, :remote_cache
+# set :deploy_via, :remote_cache
 set :git_shallow_clone, 1
 
 role :web, "58.215.172.218"                          # Your HTTP server, Apache/etc

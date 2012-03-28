@@ -16,10 +16,10 @@ module TopicsHelper
   
   def topic_favorite_tag(topic)
     return "" if current_user.blank?
-    class_name = "flag"
+    class_name = "bookmark"
     link_title = "收藏"
     if current_user and current_user.favorite_topic_ids.include?(topic.id)
-      class_name = "flaged"
+      class_name = "bookmarked"
       link_title = "取消收藏"
     end
     

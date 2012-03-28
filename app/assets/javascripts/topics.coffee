@@ -102,7 +102,7 @@ window.Topics =
         
   favorite : (el) ->
     topic_id = $(el).data("id")
-    if $(el).hasClass("small_flaged")
+    if $(el).hasClass("small_bookmarked")
       hash = 
         type : "unfavorite"
       $.ajax
@@ -111,14 +111,14 @@ window.Topics =
        type : "POST"
        success : ->
          $(el).attr("title","收藏")
-         $(el).attr("class","icon small_flag")
+         $(el).attr("class","icon small_bookmark")
     else
       $.ajax
        url : "/topics/#{topic_id}/favorite"
        type : "POST"
        success : ->
          $(el).attr("title","取消收藏")
-         $(el).attr("class","icon small_flaged")
+         $(el).attr("class","icon small_bookmarked")
     false
     
 # pages ready

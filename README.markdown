@@ -84,7 +84,7 @@ facekbook_enable: false by default
 
 ## Contributors
 
-* [Contributors](https://github.com/huacnlee/ruby-china/contributors)
+* [Contributors](https://github.com/ruby-china/ruby-china/contributors)
 
 ## Thanks
 

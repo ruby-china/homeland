@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'active_support/core_ext'
 
 describe RubyChina::API, "nodes" do
   describe "GET /api/nodes.json" do
@@ -9,7 +10,11 @@ describe RubyChina::API, "nodes" do
     it "should return the list of nodes" do
       get "/api/nodes.json"
       response.status.should == 200
-      json = JSON.parse(response.body)
+      keyset = ["_id","name"]
+      json = JSON.parse(response.body).each {
+        |h| h.slice!(*keyset)
+      }
+
       json.should == [
         {"_id" => 1, "name" => "fun"},
         {"_id" => 2, "name" => "ruby"},

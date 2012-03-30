@@ -82,7 +82,7 @@
     wiki: "Wiki"
     posts: "文章"
     users: "会员"
-    cpanel: "后台"  
+    cpanel: "后台"
     notes: "记事本"
     nodes: "节点"
     sites: "酷站"
@@ -91,7 +91,7 @@
     likes: "我的收藏"
   comments:
     create_comment: "发表评论"
-    no_comment: "暂无评论"  
+    no_comment: "暂无评论"
   mail:
     login_from: "登录页面地址"
     this_is_a_notification_mail_please_do_not_reply: "这是一封提醒邮件，请勿直接通过邮件回复."
@@ -100,7 +100,7 @@
     you_have_successfully: "你已经成功在"
     registered_an_account: "注册了账号。"
   rss:
-    recent_topics_description: "%{name}社区最新发贴."
+    recent_topics_description: "%{name}社区最新发帖."
     recent_topics_title: "%{name}社区"
-    recent_node_topics_description: "%{name} 社区 %{node_name} 节点最新发贴."
+    recent_node_topics_description: "%{name} 社区 %{node_name} 节点最新发帖."
     recent_node_topics_title: "%{name} 社区 %{node_name} 节点"

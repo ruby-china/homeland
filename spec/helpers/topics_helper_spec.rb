@@ -5,6 +5,7 @@ describe TopicsHelper do
   describe "format_topic_body" do
     it "should right with Chinese neer URL" do
       # TODO: 这行是由于 Redcarpet 的 auto_link 方法转换连起来的会有编码错误
+      #  在某些环境，比如我家里面跑测试，下面是对的。@huacnlee 知道具体情况
       helper.format_topic_body("此版本并非线上的http://yavaeye.com的源码.").should == 
         '<p>此版本并非线上的<a href="http://yavaeye.com" rel="nofollow" target="_blank">http://yavaeye.com</a>的源码.</p>'
       helper.format_topic_body("http://foo.com,的???").should == 

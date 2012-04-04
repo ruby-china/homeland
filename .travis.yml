@@ -1,0 +1,9 @@
+rvm:
+  - 1.9.2
+  - 1.9.3
+  - rbx-19mode
+before_script:
+  - mongo ruby_china_test --eval 'db.addUser("travis", "test");'
+  - cp config/config.yml.default config/config.yml
+  - cp config/mongoid.yml.default config/mongoid.yml
+  - cp config/redis.yml.default config/redis.yml

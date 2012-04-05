@@ -7,7 +7,7 @@ describe TopicsHelper do
       # TODO: 这行是由于 Redcarpet 的 auto_link 方法转换连起来的会有编码错误
       #  @huacnlee提醒说在某些环境下面，下面测试会Pass。所以有可能在你的测试环境会失败。
       helper.format_topic_body("此版本并非线上的http://yavaeye.com的源码.").should ==
-        '<p>此版本并非线上的http://yavaeye.com的源码.</p>'
+        '<p>此版本并非线上的<a href="http://yavaeye.com" rel="nofollow" target="_blank">http://yavaeye.com</a>的源码.</p>'
       helper.format_topic_body("http://foo.com,的???").should == 
         '<p><a href="http://foo.com," rel="nofollow" target="_blank">http://foo.com,</a>的???</p>'
       helper.format_topic_body("http://foo.com，的???").should == 

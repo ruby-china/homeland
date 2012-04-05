@@ -1,4 +1,7 @@
+Ruby-China 
 This is the source code of [Ruby China Group](http://ruby-china.org)
+[![Build
+Status](https://secure.travis-ci.org/xiaods/ruby-china.png?branch=master&.png)](http://travis-ci.org/xiaods/ruby-china)
 
 ## Install
 

@@ -12,7 +12,7 @@ RubyChina::Application.routes.draw do
   resources :comments
   resources :notes
   match "/uploads/*path" => "gridfs#serve"
-  root :to => "home#index"
+  root :to => "topics#index"
 
   devise_for :users, :path => "account", :controllers => {
       :registrations => :account,

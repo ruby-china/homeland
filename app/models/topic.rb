@@ -41,8 +41,7 @@ class Topic
 
   index :node_id
   index :user_id
-  index :replied_at
-  index :created_at
+  index [[:replied_at,Mongo::DESCENDING],[:_id, Mongo::DESCENDING]]
   index :likes_count
   index :suggested_at
 
@@ -60,7 +59,7 @@ class Topic
   end
 
   # scopes
-  scope :last_actived, desc("replied_at").desc("created_at")
+  scope :last_actived, desc("replied_at").desc(:_id)
   # 推荐的话题
   scope :suggest, where(:suggested_at.ne => nil).desc(:suggested_at)
   scope :fields_for_list, without(:body,:body_html)

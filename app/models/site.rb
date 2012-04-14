@@ -18,6 +18,7 @@ class Site
   validates_presence_of :url, :name, :site_node_id
   
   index :url
+  index :site_node_id
 
   before_validation :fix_urls, :check_uniq
   def fix_urls

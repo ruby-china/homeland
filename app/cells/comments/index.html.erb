@@ -1,8 +1,7 @@
 <div id="<%= @commentable.class.name %>_<%= @commentable.id %>_cell_comments" class="cell_comments box">
+  
   <% if !@comments.blank? %>
-    <% @comments.each do |item| %>
-    <%= render "/comments/comment", :item => item %>
-    <% end %>
+    <%= render :partial => "comment", :collection => @comments %>
   <% else %>
     <div class="no_result"><%= t("comments.no_comment") %>.</div>
   <% end %>

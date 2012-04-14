@@ -8,7 +8,7 @@ class TopicsController < ApplicationController
   before_filter :init_base_breadcrumb
 
   def index
-    @topics = Topic.last_actived.fields_for_list.limit(15).includes(:user)
+    @topics = Topic.last_actived.fields_for_list.limit(15).includes(:user).to_a
     set_seo_meta("","#{Setting.app_name}#{t("menu.topics")}")
     drop_breadcrumb(t("topics.hot_topic"))
     #render :stream => true

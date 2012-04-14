@@ -89,9 +89,9 @@ GEM
     blankslate (2.1.2.4)
     bootstrap-will_paginate (0.0.3)
       will_paginate
-    bson (1.5.2)
-    bson_ext (1.5.2)
-      bson (= 1.5.2)
+    bson (1.6.2)
+    bson_ext (1.6.2)
+      bson (~> 1.6.2)
     builder (3.0.0)
     cancan (1.6.7)
     capistrano (2.9.0)
@@ -175,8 +175,8 @@ GEM
     mime-types (1.17.2)
     mini_magick (3.3)
       subexec (~> 0.1.0)
-    mongo (1.5.2)
-      bson (= 1.5.2)
+    mongo (1.6.2)
+      bson (~> 1.6.2)
     mongo-rails-instrumentation (0.2.4)
     mongoid (2.4.8)
       activemodel (~> 3.1)
@@ -387,7 +387,7 @@ DEPENDENCIES
   aws-ses (~> 0.4.3)
   bootstrap-rails!
   bootstrap-will_paginate (= 0.0.3)
-  bson_ext (= 1.5.2)
+  bson_ext (= 1.6.2)
   cancan (~> 1.6.7)
   capistrano (= 2.9.0)
   capybara

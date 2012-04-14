@@ -43,7 +43,7 @@ class Topic
   index :user_id
   index :replied_at
   index :created_at
-  index :links_count
+  index :likes_count
   index :suggested_at
 
   counter :hits, :default => 0

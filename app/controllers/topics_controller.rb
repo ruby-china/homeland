@@ -22,7 +22,7 @@ class TopicsController < ApplicationController
 
   def node
     @node = Node.find(params[:id])
-    @topics = @node.topics.last_actived.fields_for_list.includes(:user).paginate(:page => params[:page],:per_page => 50)
+    @topics = @node.topics.last_actived.fields_for_list.includes(:user).paginate(:page => params[:page],:per_page => 30)
     set_seo_meta("#{@node.name} &raquo; #{t("menu.topics")}","#{Setting.app_name}#{t("menu.topics")}#{@node.name}",@node.summary)
     drop_breadcrumb("#{@node.name}")
     render :action => "index" #, :stream => true
@@ -37,7 +37,7 @@ class TopicsController < ApplicationController
 
   def recent
     # TODO: 需要 includes :node,:user, :last_reply_user,但目前用了 paginate 似乎会使得 includes 没有效果
-    @topics = Topic.recent.fields_for_list.includes(:user).paginate(:page => params[:page], :per_page => 50)
+    @topics = Topic.recent.fields_for_list.includes(:user).paginate(:page => params[:page], :per_page => 30)
     drop_breadcrumb(t("topics.topic_list"))
     render :action => "index" #, :stream => true
   end

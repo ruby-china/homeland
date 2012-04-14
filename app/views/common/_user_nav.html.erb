@@ -1,14 +1,13 @@
 <% if current_user %>
 <ul class="nav secondary-nav" id="userbar">
   <%
-    unread_count = current_user.notifications.unread.count
     notification_class = ["notifications"]
-    notification_class << "unread" if unread_count > 0
+    notification_class << "unread" if @unread_notify_count > 0
     notification_class << "active" if ["notifications"].index(params[:controller])
   %>
   <%= content_tag 'li', :class => notification_class do %>
     <%= content_tag 'a', :href => notifications_path do %>
-      <span class="count"><%= unread_count %></span>
+      <span class="count"><%= @unread_notify_count %></span>
     <% end %>
   <% end %>
   <li>

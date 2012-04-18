@@ -147,6 +147,3 @@ $(document).ready ->
     $('html, body').animate({ scrollTop: 0 },300);
     return false
 
-  # Focus title field in new-topic page
-  $("#topic_title").focus()
-

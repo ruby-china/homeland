@@ -15,6 +15,7 @@ and run:
     cp config/config.yml.default config/config.yml
     cp config/mongoid.yml.default config/mongoid.yml
     cp config/redis.yml.default config/redis.yml
+    cp config/thin.yml.default config/thin.yml
     bundle install
     rake assets:precompile
     rake db:seed

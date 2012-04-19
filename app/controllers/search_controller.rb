@@ -2,10 +2,9 @@
 class SearchController < ApplicationController
   def index
     search_text = params[:q]
-    @search = Sunspot.search(Topic) do
+    @search = Topic.solr_search do
       keywords search_text, :highlight => true
-      paginate :page => params[:page], :per_page => 20
-      order_by :replied_at, :desc
+      paginate :page => params[:page], :per_page => 10
     end
 
     set_seo_meta("#{t("common.search")}: #{params[:q]}")
@@ -16,7 +15,7 @@ class SearchController < ApplicationController
     search_text = params[:q]
     @search = Sunspot.search(Page) do
       keywords search_text, :highlight => true
-      paginate :page => params[:page], :per_page => 20
+      paginate :page => params[:page], :per_page => 10
     end
 
     set_seo_meta("WIKI#{t("common.search")}: #{params[:q]}")

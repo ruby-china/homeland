@@ -150,7 +150,6 @@ GEM
       addressable (~> 2.2.6)
       multipart-post (~> 1.1.3)
       rack (>= 1.1.0, < 2)
-    fattr (2.2.1)
     ffi (1.0.11)
     hashie (1.2.0)
     highline (1.6.8)
@@ -222,14 +221,9 @@ GEM
       rack-openid (~> 1.3.1)
     omniauth-twitter (0.0.7)
       omniauth-oauth (~> 1.0)
-    options (2.3.0)
-      fattr
     orm_adapter (0.0.5)
     polyglot (0.3.3)
     pr_geohash (1.0.0)
-    progress_bar (0.4.0)
-      highline (~> 1.6.1)
-      options (~> 2.3.0)
     pygments.rb (0.2.4)
       rubypython (~> 0.5.3)
     rack (1.4.1)
@@ -418,7 +412,6 @@ DEPENDENCIES
   omniauth-github (~> 1.0.0)
   omniauth-openid (~> 1.0.1)
   omniauth-twitter (~> 0.0.7)
-  progress_bar
   pygments.rb (~> 0.2.4)
   quiet_assets!
   rails (= 3.2.2)

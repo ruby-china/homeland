@@ -5,16 +5,17 @@
   <div class="tab-content">
     <div class="tab-pane active" id="topics">
     <% unless @search.results.blank? %>
+      <%= will_paginate @search.hits, :page_links=>false %>
       <% @search.each_hit_with_result do |hit, result| %>
         <%= render "topic", :topic => result, :hit => hit %>
       <% end %>
+      <%= will_paginate @search.hits %>
     <% else %>
-      <div class="topic">
-        <%= t("common.no_search_result") %>
+      <div class="no_result">
+        “<%= params[:q] %>” <%= t("common.no_search_result") %>
       </div>
     <% end %>
     </div>
-    <%= will_paginate @search.results %>
   </div>
 </div>
 

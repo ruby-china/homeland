@@ -20,7 +20,7 @@
 window.App =
   loading : () ->
     console.log "loading..."
-    
+
   # 警告信息显示, to 显示在那个dom前(可以用 css selector)
   alert : (msg,to) ->
     $(to).before("<div data-alert class='alert-message'><a class='close' href='#'>X</a>#{msg}</div>")
@@ -28,7 +28,7 @@ window.App =
   # 成功信息显示, to 显示在那个dom前(可以用 css selector)
   notice : (msg,to) ->
     $(to).before("<div data-alert class='alert-message success'><a class='close' href='#'>X</a>#{msg}</div>")
-      
+
   openUrl : (url) ->
     window.open(url)
 
@@ -39,7 +39,7 @@ window.App =
       $.ajax
         url : "/likes"
         type : "POST"
-        data : 
+        data :
           type : likeable_type
           id : likeable_id
         success : (re) ->
@@ -53,7 +53,7 @@ window.App =
       $.ajax
         url : "/likes/#{likeable_id}"
         type : "DELETE"
-        data : 
+        data :
           type : likeable_type
         success : (re) ->
           if parseInt(re)  >= 0
@@ -71,7 +71,7 @@ window.App =
       debug : false
       data : logins
       tpl : "<li data-keyname='${login}'>${login} <small>${name}</small></li>"
-      
+
   initForDesktopView : () ->
     return if typeof(app_mobile) != "undefined"
     $("a[rel=twipsy]").twipsy({ live: true })
@@ -119,31 +119,31 @@ window.App =
     commenters = []
     commenter_exists = []
     $(".cell_comments .comment .info .name a").each (idx) ->
-      val = 
+      val =
         login : $(this).text()
         name : $(this).data('name')
       if $.inArray(val.login,commenter_exists) < 0
-         commenters.push(val) 
+         commenters.push(val)
          commenter_exists.push(val.login)
     App.atReplyable(".cell_comments_new textarea", commenters)
-      
+
 $(document).ready ->
   App.initForDesktopView()
-  
+
   $("abbr.timeago").timeago()
-  $(".alert-message").alert()  
+  $(".alert-message").alert()
 
   # 绑定评论框 Ctrl+Enter 提交事件
   $(".cell_comments_new textarea").bind "keydown","ctrl+return",(el) ->
     if $(el.target).val().trim().length > 0
       $(el.target).parent().parent().submit()
     return false
-  
+
   # Choose 样式
   $("select").chosen()
-  
+
   # Go Top
   $("a.go_top").click () ->
     $('html, body').animate({ scrollTop: 0 },300);
     return false
-  
+

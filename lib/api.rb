@@ -69,5 +69,28 @@ module RubyChina
         present Node.all, :with => APIEntities::Node
       end
     end
+
+    resource :users do
+      # Get hot users, a recent topic embed with a user
+      # Example
+      # /api/users.json
+      get do
+        @users = User.hot.limit(page_size)
+        present @users, :with => APIEntities::DetailUser
+      end
+
+      # Get topic detail
+      # Example
+      #   /api/topics/1.json
+      get ":id" do
+        @user = User.where(:login => /^#{params[:id]}$/i).first
+        present @user, :topics_limit => 10, :with => APIEntities::DetailUser
+      end
+
+      get ":id/topics" do
+
+      end
+    end
+
   end
 end

@@ -70,25 +70,46 @@ module RubyChina
       end
     end
 
+    # Mark a topic as favorite for current authenticated user
+    # Example
+    # /api/user/favorite/qichunren/8.json?token=232332233223:1
+    resource :user do
+      put "favorite/:user/:topic" do
+        authenticate!
+        current_user.favorite_topic(params[:topic])
+      end
+    end
+
     resource :users do
-      # Get hot users, a recent topic embed with a user
+      # Get top 20 hot users
       # Example
       # /api/users.json
       get do
-        @users = User.hot.limit(page_size)
+        @users = User.hot.limit(20)
         present @users, :with => APIEntities::DetailUser
       end
 
-      # Get topic detail
+      # Get a single user
       # Example
-      #   /api/topics/1.json
-      get ":id" do
-        @user = User.where(:login => /^#{params[:id]}$/i).first
-        present @user, :topics_limit => 10, :with => APIEntities::DetailUser
+      #   /api/users/qichunren.json
+      get ":user" do
+        @user = User.where(:login => /^#{params[:user]}$/i).first
+        present @user, :topics_limit => 5, :with => APIEntities::DetailUser
       end
 
-      get ":id/topics" do
 
+      # List topics for a user
+      get ":user/topics" do
+        @user = User.where(:login => /^#{params[:user]}$/i).first
+        @topics = @user.topics.recent.limit(page_size)
+        present @topics, :with => APIEntities::UserTopic
+      end
+
+      # List favorite topics for a user
+      get ":user/topics/favorite" do
+        @user = User.where(:login => /^#{params[:user]}$/i).first
+        @topics = Topic.find(@user.favorite_topic_ids)
+        present @topics, :with => APIEntities::Topic
       end
     end
 

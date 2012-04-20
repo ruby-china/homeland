@@ -49,6 +49,7 @@ window.Topics =
       $("abbr.timeago",$("#replies .reply").last()).timeago()
       $("abbr.timeago",$("#replies .total")).timeago()
       $("#new_reply textarea").val('')
+      $("#preview").text('')
       App.notice(msg,'#reply')
     else
       App.alert(msg,'#reply')

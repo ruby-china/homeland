@@ -8,6 +8,15 @@ module RubyChina
       expose(:avatar_url) { |model, opts| model.avatar? ? model.avatar.url(:normal) : "" }
     end
 
+    class DetailUser < Grape::Entity
+      expose :_id, :name, :login, :location, :website, :bio, :tagline, :github_url
+      expose(:gravatar_hash) { |model, opts| Digest::MD5.hexdigest(model.email || "") }
+      expose(:avatar_url) { |model, opts| model.avatar? ? model.avatar.url(:normal) : "" }
+      expose(:topics) do |model, opts|
+        model.topics.recent.limit(opts[:topics_limit] ||= 1).as_json(:only => [:title, :created_at, :node_name, :replies_count])
+      end
+    end
+
     class Reply < Grape::Entity
       expose :_id, :body, :body_html, :message_id, :created_at, :updated_at
       expose :user, :using => APIEntities::User

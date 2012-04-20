@@ -70,6 +70,16 @@ module RubyChina
       end
     end
 
+    # Mark a topic as favorite for current authenticated user
+    # Example
+    # /api/user/favorite/qichunren/8.json?token=232332233223:1
+    resource :user do
+      put "favorite/:user/:topic" do
+        authenticate!
+        current_user.favorite_topic(params[:topic])
+      end
+    end
+
     resource :users do
       # Get top 20 hot users
       # Example

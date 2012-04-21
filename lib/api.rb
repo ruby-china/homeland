@@ -124,5 +124,19 @@ module RubyChina
       end
     end
 
+    # List all cool sites
+    # Example
+    # GET /api/sites.json
+    resource :sites do
+      get do
+        @site_nodes = SiteNode.all.includes(:sites).desc('sort')
+        @site_nodes.as_json(:except => :sort, :include => {
+          :sites => {
+            :only => [:name, :url, :desc, :favicon, :created_at]
+          }
+        })
+      end
+    end
+
   end
 end

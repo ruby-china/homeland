@@ -13,6 +13,17 @@ module RubyChina
     # either in post body or query string, named "token"
 
     resource :topics do
+
+      # Get the latest actived topic
+      # Use it to check whether client should to be updated
+      # Example
+      # /api/topic/last_actived_one.json
+      # 返回 {"_id":11,"last_reply_user_login":'qichunren',"replied_at":"2012-04-20T01:58:26+08:00","replies_count":0}
+      get "last_actived_one" do
+        json_fields = [:_id, :replies_count, :replied_at, :last_reply_user_login]
+        @topics = Topic.last_actived.first.as_json(:only => json_fields)
+      end
+
       # Get active topics list
       # params[:size] could be specified to limit the results
       # params[:size]: default is 15, max is 100

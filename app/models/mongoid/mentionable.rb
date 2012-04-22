@@ -5,7 +5,13 @@ module Mongoid
       field :mentioned_user_ids, :type => Array, :default => []
       before_save :extract_mentioned_users
       after_create :send_mention_notification
+      after_destroy :delete_notifiaction_mentions
       has_many :notification_mentions, :as => :mentionable, :class_name => 'Notification::Mention'
+    end
+
+    # Wait for https://github.com/mongoid/mongoid/commit/2f94b5fab018b22a9e84ac2e988d4a3cf97e7f2e
+    def delete_notifiaction_mentions
+      Notification::Mention.where(:mentionable_id => self.id, :mentionable_type => self.class.name).delete_all
     end
 
     def mentioned_users

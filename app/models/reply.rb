@@ -51,6 +51,6 @@ class Reply
   def destroy
     super
     notifications.delete_all
-    notification_mentions.delete_all
+    delete_notifiaction_mentions
   end
 end

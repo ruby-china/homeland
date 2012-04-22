@@ -58,7 +58,8 @@ class TopicsController < ApplicationController
     @replies = @topic.replies.without_body.asc(:_id).all.includes(:user).reject { |r| r.user.blank? }
     if current_user
       unless current_user.topic_read?(@topic)
-        current_user.notifications.unread.any_of({:mentionable_type => 'Reply', :mentionable_id.in => @replies.map(&:id)},
+        current_user.notifications.unread.any_of({:mentionable_type => 'Topic', :mentionable_id => @topic.id},
+                                                 {:mentionable_type => 'Reply', :mentionable_id.in => @replies.map(&:id)},
                                                  {:reply_id.in => @replies.map(&:id)}).update_all(:read => true)
         current_user.read_topic(@topic)
       end

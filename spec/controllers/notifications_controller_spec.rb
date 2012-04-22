@@ -5,7 +5,7 @@ describe NotificationsController do
   describe "#index" do
     it "should show notifications" do
       sign_in user
-      Factory :notification_mention, :user => user
+      Factory :notification_mention, :user => user, :mentionable => Factory(:reply)
       Factory :notification_topic_reply, :user => user
       get :index
       response.should render_template(:index)
@@ -15,7 +15,7 @@ describe NotificationsController do
   describe "#destroy" do
     it "should destroy notification" do
       sign_in user
-      notification = Factory :notification_mention, :user => user
+      notification = Factory :notification_mention, :user => user, :mentionable => Factory(:reply)
 
       lambda do
         delete :destroy, :id => notification
@@ -26,7 +26,7 @@ describe NotificationsController do
   describe "#mark_all_as_read" do
     it "should mark all as read" do
       sign_in user
-      3.times{ Factory :notification_mention, :user => user }
+      3.times{ Factory :notification_mention, :user => user, :mentionable => Factory(:reply) }
 
       put :mark_all_as_read
       user.notifications.unread.count.should == 0

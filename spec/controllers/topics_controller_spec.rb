@@ -89,10 +89,10 @@ describe TopicsController do
 
   describe "#show" do
     it "should clear user mention notification when show topic" do
-      notification = Factory :notification_mention
+      notification = Factory :notification_mention, :mentionable => Factory(:reply)
       sign_in notification.user
       lambda do
-        get :show, :id => notification.reply.topic
+        get :show, :id => notification.mentionable.topic
       end.should change(notification.user.notifications.unread, :count)
     end
 

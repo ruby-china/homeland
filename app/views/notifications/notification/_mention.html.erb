@@ -1,25 +1,55 @@
 <%
-  reply = notification.reply
-  topic = reply.topic
+  case notification.mentionable
+  when Reply
 %>
-<td class="face">
-  <%= user_avatar_tag(reply.user, :normal) %>
-</td>
-<td>
-  <h3>
-    <span class="user">
-      <%= user_name_tag(reply.user) %>
-    </span>
-    在
-    <%= render_topic_title(topic) %>
-    提及你：
-    <% if !notification.read? %>
-      <span class="new label warning">新</span>
-    <% end %>
-  </h3>
-  <%- if reply.present? -%>
-    <div class="body md_body">
-      <%= raw reply.body_html %>
-    </div>
-  <%- end -%>
-</td>
+  <%
+    reply = notification.mentionable
+    topic = reply.topic
+  %>
+  <td class="face">
+    <%= user_avatar_tag(reply.user, :normal) %>
+  </td>
+  <td>
+    <h3>
+      <span class="user">
+        <%= user_name_tag(reply.user) %>
+      </span>
+      在
+      <%= render_topic_title(topic) %>
+      提及你：
+      <% if !notification.read? %>
+        <span class="new label warning">新</span>
+      <% end %>
+    </h3>
+    <%- if reply.present? -%>
+      <div class="body md_body">
+        <%= raw reply.body_html %>
+      </div>
+    <%- end -%>
+  </td>
+<% when Topic %>
+  <%
+    topic = notification.mentionable
+  %>
+  <td class="face">
+    <%= user_avatar_tag(topic.user, :normal) %>
+  </td>
+  <td>
+    <h3>
+      <span class="user">
+        <%= user_name_tag(topic.user) %>
+      </span>
+      在
+      <%= render_topic_title(topic) %>
+      提及你：
+      <% if !notification.read? %>
+        <span class="new label warning">新</span>
+      <% end %>
+    </h3>
+    <%- if topic.present? -%>
+      <div class="body md_body">
+        <%= raw topic.body_html %>
+      </div>
+    <%- end -%>
+  </td>
+<% end %>

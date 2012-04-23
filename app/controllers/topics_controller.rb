@@ -57,9 +57,12 @@ class TopicsController < ApplicationController
     @node = @topic.node
     @replies = @topic.replies.without_body.asc(:_id).all.includes(:user).reject { |r| r.user.blank? }
     if current_user
-      current_user.read_topic(@topic)
-      # TODO: 此处导致每次查看帖子都会执行 update 需要改进
-      current_user.notifications.where(:reply_id.in => @replies.map(&:id), :read => false).update_all(:read => true)
+      unless current_user.topic_read?(@topic)
+        current_user.notifications.unread.any_of({:mentionable_type => 'Topic', :mentionable_id => @topic.id},
+                                                 {:mentionable_type => 'Reply', :mentionable_id.in => @replies.map(&:id)},
+                                                 {:reply_id.in => @replies.map(&:id)}).update_all(:read => true)
+        current_user.read_topic(@topic)
+      end
     end
     set_seo_meta("#{@topic.title} &raquo; #{t("menu.topics")}")
     drop_breadcrumb("#{@node.name}", node_topics_path(@node.id))
@@ -129,7 +132,7 @@ class TopicsController < ApplicationController
     @topic.destroy_by(current_user)
     redirect_to(topics_path, :notice => t("topics.delete_topic_success"))
   end
-  
+
   def favorite
     if params[:type] == "unfavorite"
       current_user.unfavorite_topic(params[:id])

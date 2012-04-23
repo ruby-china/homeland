@@ -7,12 +7,12 @@ class Reply
   include Mongoid::CounterCache
   include Mongoid::SoftDelete
   include Mongoid::MarkdownBody
+  include Mongoid::Mentionable
 
   field :body
   field :body_html
   field :source
   field :message_id
-  field :mentioned_user_ids, :type => Array, :default => []
 
   belongs_to :user, :inverse_of => :replies
   belongs_to :topic, :inverse_of => :replies
@@ -41,29 +41,7 @@ class Reply
     end
   end
 
-  before_save :extract_mentioned_users
-  def extract_mentioned_users
-    logins = body.scan(/@(\w{3,20})/).flatten
-    if logins.any?
-      self.mentioned_user_ids = User.where(:login => /^(#{logins.join('|')})$/i, :_id.ne => user.id).limit(5).only(:_id).map(&:_id).to_a
-    end
-  end
-
-  def mentioned_user_logins
-    # 用于作为缓存 key
-    ids_md5 = Digest::MD5.hexdigest(self.mentioned_user_ids.to_s)
-    Rails.cache.fetch("reply:#{self.id}:mentioned_user_logins:#{ids_md5}") do
-      User.where(:_id.in => self.mentioned_user_ids).only(:login).map(&:login)
-    end
-  end
-
-  after_create :send_mention_notification, :send_topic_reply_notification
-  def send_mention_notification
-    self.mentioned_user_ids.each do |user_id|
-      Notification::Mention.create :user_id => user_id, :reply => self
-    end
-  end
-
+  after_create :send_topic_reply_notification
   def send_topic_reply_notification
     if self.user != topic.user && !mentioned_user_ids.include?(topic.user_id)
       Notification::TopicReply.create :user => topic.user, :reply => self
@@ -73,5 +51,6 @@ class Reply
   def destroy
     super
     notifications.delete_all
+    delete_notifiaction_mentions
   end
 end

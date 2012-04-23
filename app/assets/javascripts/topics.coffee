@@ -22,7 +22,7 @@ window.Topics =
       height: 145
       content: '<iframe src="/photos/tiny_new" frameborder="0" style="width:330px; height:145px;"></iframe>',
       close_on_body_click : false
-    
+
     $("#add_image").jDialog(opts)
     return false
 
@@ -49,6 +49,7 @@ window.Topics =
       $("abbr.timeago",$("#replies .reply").last()).timeago()
       $("abbr.timeago",$("#replies .total")).timeago()
       $("#new_reply textarea").val('')
+      $("#preview").text('')
       App.notice(msg,'#reply')
     else
       App.alert(msg,'#reply')
@@ -99,11 +100,11 @@ window.Topics =
             return msg
       else
         $(window).unbind("beforeunload")
-        
+
   favorite : (el) ->
     topic_id = $(el).data("id")
     if $(el).hasClass("small_bookmarked")
-      hash = 
+      hash =
         type : "unfavorite"
       $.ajax
        url : "/topics/#{topic_id}/favorite"
@@ -120,7 +121,7 @@ window.Topics =
          $(el).attr("title","取消收藏")
          $(el).attr("class","icon small_bookmarked")
     false
-    
+
 # pages ready
 $(document).ready ->
   $("textarea").bind "keydown","ctrl+return",(el) ->
@@ -140,9 +141,9 @@ $(document).ready ->
 
   $("a.small_reply").live 'click', () ->
     Topics.reply($(this).data("floor"), $(this).data("login"))
-  
+
   Topics.hookPreview($(".editor_toolbar"), $(".topic_editor"))
-  
+
   $("body").bind "keydown", "m", (el) ->
     $('#markdown_help_tip_modal').modal
       keyboard : true
@@ -154,15 +155,18 @@ $(document).ready ->
   login_exists = []
   if $("#topic_show .leader .name a").length > 0
     author_val =
-      login : $("#topic_show .leader .name a").text(), 
+      login : $("#topic_show .leader .name a").text(),
       name : $("#topic_show .leader .name a").data('name')
     logins.push(author_val)
     login_exists.push(author_val.login)
   $('#replies span.name a').each (idx) ->
-    val = 
+    val =
       login : $(this).text()
       name : $(this).data('name')
     if $.inArray(val.login,login_exists) < 0
       login_exists.push(val.login)
       logins.push(val)
   App.atReplyable("textarea", logins)
+
+  # Focus title field in new-topic page
+  $("body.topics-controller.new-action #topic_title").focus()

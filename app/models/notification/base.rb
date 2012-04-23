@@ -7,6 +7,8 @@ class Notification::Base
 
   field :read, :default => false
 
+  index :read
+
   scope :unread, where(:read => false)
 
   belongs_to :user

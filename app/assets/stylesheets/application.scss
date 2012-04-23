@@ -21,18 +21,19 @@ code { background:none; }
 .breadcrumb { color:#999;}
 
 
+.container { width:960px; }
 .container-fluid { padding:0; }
 .container-fluid > .sidebar {
   position:absolute;
   left:auto;
   right:0;
   top:0;
-  width: 220px;
+  width: 240px;
 }
 
 .container-fluid > .content {
   margin-left:0;
-  margin-right: 240px;
+  margin-right: 260px;
 }
 
 fieldset { margin-bottom:0;}

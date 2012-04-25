@@ -43,6 +43,7 @@ end
 task :link_shared_files, :roles => :web do
   run "ln -sf #{deploy_to}/shared/config/*.yml #{deploy_to}/current/config/"
   run "ln -sf #{deploy_to}/shared/config/unicorn.rb #{deploy_to}/current/config/"
+  run "ln -sf #{deploy_to}/shared/config/initializers/secret_token.rb #{deploy_to}/current/config/initializers"
   run "ln -s #{deploy_to}/shared/assets #{deploy_to}/current/public/assets"
 end
 

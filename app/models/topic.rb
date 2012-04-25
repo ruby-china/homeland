@@ -9,6 +9,7 @@ class Topic
   include Mongoid::MarkdownBody
   include Redis::Objects
   include Sunspot::Mongoid
+  include Mongoid::Mentionable
 
   field :title
   field :body
@@ -96,11 +97,16 @@ class Topic
   def self.find_by_message_id(message_id)
     where(:message_id => message_id).first
   end
-  
+
   # 删除并记录删除人
   def destroy_by(user)
     return false if user.blank?
     self.update_attribute(:who_deleted,user.login)
     self.destroy
+  end
+
+  def destroy
+    super
+    delete_notifiaction_mentions
   end
 end

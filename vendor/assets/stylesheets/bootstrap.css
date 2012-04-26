@@ -1799,7 +1799,7 @@ input[type="submit"].btn.btn-mini {
   height: 14px;
   line-height: 14px;
   vertical-align: text-top;
-  background-image: url("../img/glyphicons-halflings.png");
+  background-image: image_url("glyphicons-halflings.png");
   background-position: 14px 14px;
   background-repeat: no-repeat;
   *margin-right: .3em;
@@ -1809,7 +1809,7 @@ input[type="submit"].btn.btn-mini {
   *margin-left: 0;
 }
 .icon-white {
-  background-image: url("../img/glyphicons-halflings-white.png");
+  background-image: image_url("glyphicons-halflings-white.png");
 }
 .icon-glass {
   background-position: 0      0;

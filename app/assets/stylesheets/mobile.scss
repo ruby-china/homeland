@@ -1,11 +1,12 @@
 body {
   padding:0 10px;
 }
-.container-fluid { width:auto; min-width:0; }
+.container { width:auto; padding: 0; min-width:0; }
 .sidebar { display:none; }
 .container-fluid > .content {
   margin:0;
 }
+
 .topbar div > ul, .nav {
   margin:0;
   li {

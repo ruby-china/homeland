@@ -15,7 +15,7 @@
   <meta charset='utf-8'>
   <link rel="shortcut icon" href="<%= asset_path("big_logo.png") %>" /> 
   <%= csrf_meta_tag %>
-  <%= auto_discovery_link_tag(:rss,feed_topics_url,:title => '订阅最新贴') %>
+  <%= auto_discovery_link_tag(:rss,feed_topics_url,:title => '订阅最新帖') %>
   <%= yield :node_feed_link %>
 </head>
 <body data-offset="50">

@@ -38,9 +38,9 @@ describe Mongoid::BaseModel do
   end
   
   it "should have by_week method" do
-    Monkey.create(:name => "Caesar", :created_at => 2.weeks.ago.to_s)
-    Monkey.create(:name => "Caesar1", :created_at => 3.days.ago.to_s)
-    Monkey.create(:name => "Caesar1", :created_at => Time.now.to_s)
+    Monkey.create(:name => "Caesar", :created_at => 2.weeks.ago.utc)
+    Monkey.create(:name => "Caesar1", :created_at => 3.days.ago.utc)
+    Monkey.create(:name => "Caesar1", :created_at => Time.now.utc)
     Monkey.by_week.count.should eq(2)
   end
 end

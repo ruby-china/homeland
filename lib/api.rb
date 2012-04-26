@@ -69,5 +69,49 @@ module RubyChina
         present Node.all, :with => APIEntities::Node
       end
     end
+
+    # Mark a topic as favorite for current authenticated user
+    # Example
+    # /api/user/favorite/qichunren/8.json?token=232332233223:1
+    resource :user do
+      put "favorite/:user/:topic" do
+        authenticate!
+        current_user.favorite_topic(params[:topic])
+      end
+    end
+
+    resource :users do
+      # Get top 20 hot users
+      # Example
+      # /api/users.json
+      get do
+        @users = User.hot.limit(20)
+        present @users, :with => APIEntities::DetailUser
+      end
+
+      # Get a single user
+      # Example
+      #   /api/users/qichunren.json
+      get ":user" do
+        @user = User.where(:login => /^#{params[:user]}$/i).first
+        present @user, :topics_limit => 5, :with => APIEntities::DetailUser
+      end
+
+
+      # List topics for a user
+      get ":user/topics" do
+        @user = User.where(:login => /^#{params[:user]}$/i).first
+        @topics = @user.topics.recent.limit(page_size)
+        present @topics, :with => APIEntities::UserTopic
+      end
+
+      # List favorite topics for a user
+      get ":user/topics/favorite" do
+        @user = User.where(:login => /^#{params[:user]}$/i).first
+        @topics = Topic.find(@user.favorite_topic_ids)
+        present @topics, :with => APIEntities::Topic
+      end
+    end
+
   end
 end

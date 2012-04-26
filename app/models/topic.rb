@@ -9,6 +9,7 @@ class Topic
   include Mongoid::MarkdownBody
   include Redis::Objects
   include Sunspot::Mongoid
+  include Mongoid::Mentionable
 
   field :title
   field :body
@@ -41,9 +42,8 @@ class Topic
 
   index :node_id
   index :user_id
-  index :replied_at
-  index :created_at
-  index :links_count
+  index [[:replied_at,Mongo::DESCENDING],[:_id, Mongo::DESCENDING]]
+  index :likes_count
   index :suggested_at
 
   counter :hits, :default => 0
@@ -60,7 +60,7 @@ class Topic
   end
 
   # scopes
-  scope :last_actived, desc("replied_at").desc("created_at")
+  scope :last_actived, desc("replied_at").desc(:_id)
   # 推荐的话题
   scope :suggest, where(:suggested_at.ne => nil).desc(:suggested_at)
   scope :fields_for_list, without(:body,:body_html)
@@ -97,11 +97,16 @@ class Topic
   def self.find_by_message_id(message_id)
     where(:message_id => message_id).first
   end
-  
+
   # 删除并记录删除人
   def destroy_by(user)
     return false if user.blank?
     self.update_attribute(:who_deleted,user.login)
     self.destroy
+  end
+
+  def destroy
+    super
+    delete_notifiaction_mentions
   end
 end

@@ -8,13 +8,16 @@ class TopicsCell < BaseCell
     "index_sections:#{CacheVersion.section_node_updated_at}"
   end
   def index_sections
-    @sections = Section.all
+    @sections = Section.all.includes(:nodes)
     render
   end
 
   # 边栏的统计信息
   cache :sidebar_statistics, :expires_in => 30.minutes
   def sidebar_statistics
+    @users_count = User.unscoped.count
+    @topics_count = Topic.unscoped.count
+    @replies_count = Reply.unscoped.count
     render
   end
 

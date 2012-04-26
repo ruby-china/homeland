@@ -8,7 +8,7 @@ set :scm, :git
 set :user, "ruby"
 set :deploy_to, "/home/#{user}/www/#{application}"
 set :runner, "ruby"
-set :deploy_via, :remote_cache
+# set :deploy_via, :remote_cache
 set :git_shallow_clone, 1
 
 role :web, "58.215.172.218"                          # Your HTTP server, Apache/etc
@@ -43,11 +43,8 @@ end
 task :link_shared_files, :roles => :web do
   run "ln -sf #{deploy_to}/shared/config/*.yml #{deploy_to}/current/config/"
   run "ln -sf #{deploy_to}/shared/config/unicorn.rb #{deploy_to}/current/config/"
+  run "ln -sf #{deploy_to}/shared/config/initializers/secret_token.rb #{deploy_to}/current/config/initializers"
   run "ln -s #{deploy_to}/shared/assets #{deploy_to}/current/public/assets"
-end
-
-task :restart_resque, :roles => :web do
-  run "cd #{deploy_to}/current/; RAILS_ENV=production ./script/resque stop; RAILS_ENV=production ./script/resque start"
 end
 
 task :restart_resque, :roles => :web do

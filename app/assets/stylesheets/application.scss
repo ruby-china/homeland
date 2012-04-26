@@ -1,6 +1,5 @@
 /*
  *= require bootstrap
- *= require responsive
  *= require jquery.jdialog
  *= require wikistyle
  *= require jquery.chosen
@@ -61,18 +60,19 @@ code { background:none; }
 .breadcrumb { color:#999;}
 
 
+.container { width:960px; }
 .container-fluid { padding:0; }
 .container-fluid > .sidebar {
   position:absolute;
   left:auto;
   right:0;
   top:0;
-  width: 220px;
+  width: 240px;
 }
 
 .container-fluid > .content {
   margin-left:0;
-  margin-right: 240px;
+  margin-right: 260px;
 }
 
 fieldset { margin-bottom:0;}
@@ -200,6 +200,8 @@ div.field .hint { font-size:12px; color:#999;}
   h1 { font-size:600%; color:#aaa; margin-bottom:100px;}
   p { font-size:16px; }
 }
+
+.no_result { text-align:center; color:#999; }
 
 
 .go_top {

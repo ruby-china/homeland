@@ -1,6 +1,6 @@
 # coding: utf-8
 # this is from : https://github.com/jugyo/sunspot_mongoid
-# this file is specal for mongoid_auto_increment_id
+# this file is special for mongoid_auto_increment_id
 require 'sunspot'
 require 'mongoid'
 require 'sunspot/rails'

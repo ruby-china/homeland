@@ -22,4 +22,9 @@ $border-color:#DDD;
   .highlight {
     color: #BD121D;
   }
+  .pagination { 
+    margin:10px 0;
+    ul { float:right; }
+  }
+  .no_result { padding:70px 0; }
 }

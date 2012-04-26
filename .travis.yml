@@ -1,0 +1,20 @@
+bundler_args: --without development
+
+rvm:
+  - 1.9.2
+  - 1.9.3
+  - jruby
+  - rbx
+  - ree
+
+matrix:
+  allow_failures:
+    - rvm: jruby
+    - rvm: rbx
+    - rvm: ree
+
+before_script:
+  - mongo ruby_china_test --eval 'db.addUser("travis", "test");'
+  - cp config/config.yml.default config/config.yml
+  - cp config/mongoid.yml.default config/mongoid.yml
+  - cp config/redis.yml.default config/redis.yml

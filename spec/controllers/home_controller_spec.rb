@@ -1,17 +1,23 @@
+#encoding: utf-8
 require "spec_helper"
 
 describe HomeController do
   describe ":index" do
     let(:user) { Factory :user }
-    it "should show index page if user not signed in" do
+    it "should show register link if user not signed in" do
       get :index
       response.should be_success
+      visit '/'
+      get :index
+      page.should have_content('注册')
     end
 
-    it "should redirect to topics_path if user is signed in" do
+    it "should have hot topic lists if user is signed in" do
+      visit '/'
       sign_in user
+
       get :index
-      response.should be_success
+      page.should have_content('热门帖子')
     end
   end
 end

@@ -5,8 +5,9 @@ describe TopicsHelper do
   describe "format_topic_body" do
     it "should right with Chinese neer URL" do
       # TODO: 这行是由于 Redcarpet 的 auto_link 方法转换连起来的会有编码错误
-      helper.format_topic_body("此版本并非线上的http://yavaeye.com的源码.").should == 
-        '<p>此版本并非线上的http://yavaeye.com的源码.</p>'
+      #  @huacnlee提醒说在某些环境下面，下面测试会Pass。所以有可能在你的测试环境会失败。
+      helper.format_topic_body("此版本并非线上的http://yavaeye.com的源码.").should ==
+        '<p>此版本并非线上的<a href="http://yavaeye.com" rel="nofollow" target="_blank">http://yavaeye.com</a>的源码.</p>'
       helper.format_topic_body("http://foo.com,的???").should == 
         '<p><a href="http://foo.com," rel="nofollow" target="_blank">http://foo.com,</a>的???</p>'
       helper.format_topic_body("http://foo.com，的???").should == 
@@ -135,13 +136,13 @@ describe TopicsHelper do
     it "should result when logined user did not favorite topic" do
       user.stub(:favorite_topic_ids).and_return([])
       helper.stub(:current_user).and_return(user)
-      helper.topic_favorite_tag(topic).should == %(<a href="#" class="icon small_flag" data-id="#{topic.id}" onclick="return Topics.favorite(this);" rel="twipsy" title="收藏"></a>)
+      helper.topic_favorite_tag(topic).should == %(<a href="#" class="icon small_bookmark" data-id="#{topic.id}" onclick="return Topics.favorite(this);" rel="twipsy" title="收藏"></a>)
     end
 
     it "should result when logined user favorited topic" do
       user.stub(:favorite_topic_ids).and_return([topic.id])
       helper.stub(:current_user).and_return(user)
-      helper.topic_favorite_tag(topic).should == %(<a href="#" class="icon small_flaged" data-id="#{topic.id}" onclick="return Topics.favorite(this);" rel="twipsy" title="取消收藏"></a>)
+      helper.topic_favorite_tag(topic).should == %(<a href="#" class="icon small_bookmarked" data-id="#{topic.id}" onclick="return Topics.favorite(this);" rel="twipsy" title="取消收藏"></a>)
     end
 
     it "should result blank when unlogin user" do

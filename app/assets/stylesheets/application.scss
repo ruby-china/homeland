@@ -36,6 +36,22 @@ code { background:none; }
   margin-right: 260px;
 }
 
+.topbar h3 a, .topbar .brand {
+  padding-right: 0;
+    padding-left: 0;
+    margin-left: 10px;
+    margin-right:20px;
+    font-weight: bold;
+    color: #000;
+    text-shadow: 0 1px 0 rgba(255,255,255,.1), 0 0 30px rgba(255,255,255,.125);
+    -webkit-transition: all .2s linear;
+       -moz-transition: all .2s linear;
+            transition: all .2s linear;
+
+  &:hover { color:#000; background:none;}
+}
+
+
 fieldset { margin-bottom:0;}
 fieldset legend { font-size:16px; font-weight:bold;}
 .actions { margin-bottom:0;}

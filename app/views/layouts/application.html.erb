@@ -23,7 +23,7 @@
     <div class="topbar-inner">
       <div class="container">
         <h3>
-          <a href="/"><%= Setting.app_name %></a>
+          <a href="/"><%= image_tag("text_logo.png") %></a>
         </h3>
          <%= render_list :class => "nav" do |li|
            li << link_to(t("menu.topics"), topics_path)

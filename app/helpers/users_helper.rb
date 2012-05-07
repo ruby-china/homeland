@@ -27,12 +27,12 @@ module UsersHelper
       else size
     end
   end
-  
+
   def user_avatar_tag(user, size = :normal, opts = {})
     link = opts[:link] || true
-    
+
     width = user_avatar_width_for_size(size)
-    
+
     if user.blank?
       hash = Digest::MD5.hexdigest("")
       return image_tag("#{Setting.gravatar_proxy}/avatar/#{hash}.png?s=#{width}")
@@ -52,7 +52,7 @@ module UsersHelper
       raw img
     end
   end
-  
+
   def render_user_join_time(user)
     I18n.l(user.created_at.to_date, :format => :long)
   end

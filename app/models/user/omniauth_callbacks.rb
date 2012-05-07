@@ -8,9 +8,6 @@ class User
 
         if user = User.where("authorizations.provider" => provider , "authorizations.uid" => uid).first
           user
-        elsif user = User.find_by_email(data["email"])
-          user.bind_service(response)
-          user
         else
           user = User.new_from_provider_data(provider, uid, data)
 
@@ -27,7 +24,7 @@ class User
 
     def new_from_provider_data(provider, uid, data)
       User.new do |user|
-        user.email = data["email"]
+        user.email = data["email"] # TODO maybe duplicated
         user.email = "twitter+#{uid}@example.com" if provider == "twitter"
         user.email = "douban+#{uid}@example.com" if provider == "douban"
         user.name = data['name']

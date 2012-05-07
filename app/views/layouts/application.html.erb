@@ -13,7 +13,7 @@
   <meta name="keywords" content="<%= @meta_keywords %>" />
   <meta name="description" content="<%= @meta_description %>" />
   <meta charset='utf-8'>
-  <link rel="shortcut icon" href="<%= asset_path("big_logo.png") %>" /> 
+  <link rel="shortcut icon" href="<%= asset_path("big_logo.png") %>" />
   <%= csrf_meta_tag %>
   <%= auto_discovery_link_tag(:rss,feed_topics_url,:title => '订阅最新帖') %>
   <%= yield :node_feed_link %>
@@ -36,7 +36,7 @@
       </div>
     </div>
   </div>
-  
+
   <div class="container">
     <%= render_breadcrumb %>
     <%= render "common/feeds" %>
@@ -44,9 +44,9 @@
     <%= notice_message %>
     <div id="main" class="container-fluid">
       <%= yield %>
-    </div>    
+    </div>
   </div>
-  
+
   <% if not mobile? %>
   <a class="go_top" href="#"><i class="icon icons_go_top"></i></a>
   <footer class="footer">
@@ -55,13 +55,13 @@
     </div>
   </footer>
   <% end %>
-  
+
   <%= javascript_include_tag "app" %>
   <% if mobile? %>
     <script type="text/javascript">app_mobile = true;</script>
   <% end %>
   <%= yield :scripts %>
   <%= render :partial => "common/google_analytics"%>
-  
+
 </body>
 </html>

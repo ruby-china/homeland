@@ -13,7 +13,7 @@
       <% node.sites.each do |item| %>
         <div class="span3 site">
           <%= image_tag(item.favicon, :class => "favicon")%>
-          <%= link_to item.name, item.url, :target => "_blank", :rel => "userpopover", 
+          <%= link_to item.name, item.url, :target => "_blank", :rel => "userpopover",
           :title => item.name, "data-content" => item.desc %>
         </div>
       <% end %>

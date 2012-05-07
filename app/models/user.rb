@@ -114,7 +114,7 @@ class User
   def send_welcome_mail
     UserMailer.welcome(self.id).deliver
   end
-  
+
   # 保存用户所在城市
   before_save :store_location
   def store_location
@@ -190,7 +190,7 @@ class User
                :likeable_type => likeable.class,
                :user_id => self.id).destroy
   end
-  
+
   # 收藏话题
   def favorite_topic(topic_id)
     return false if topic_id.blank?
@@ -199,7 +199,7 @@ class User
     self.push(:favorite_topic_ids, topic_id)
     true
   end
-  
+
   # 取消对话题的收藏
   def unfavorite_topic(topic_id)
     return false if topic_id.blank?

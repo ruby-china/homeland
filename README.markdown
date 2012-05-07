@@ -1,4 +1,4 @@
-## Ruby-China 
+## Ruby-China
 
 This is the source code of [Ruby China](http://ruby-china.org) website.
 
@@ -25,7 +25,7 @@ and run:
     easy_install pygments # 或者 pip install pygments
     rake db:migrate
 
-or you can just this issue 
+or you can just this issue
 
 
     rake test:init

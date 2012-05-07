@@ -13,12 +13,12 @@
 
 .home_suggest_topics {
   position:relative;
-  .box { 
-    width:450px; 
+  .box {
+    width:450px;
     ol {
       margin:0;
       list-style-position: inside;
-      
+
       li { height:22px; line-height:22px; overflow: hidden; white-space: nowrap; text-overflow:ellipsis;}
       a { margin-right:10px; color:green; }
     }

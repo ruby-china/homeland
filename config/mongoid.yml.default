@@ -19,6 +19,6 @@ test:
 production:
   database: ruby_china
   host: '127.0.0.1'
-  # port: 
+  # port:
   # username: ''
   # password: ''

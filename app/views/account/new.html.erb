@@ -4,7 +4,7 @@
     <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
       <fieldset>
         <legend><%= t("users.register_user")%></legend>
-        <%= render "shared/error_messages", :target => resource %> 
+        <%= render "shared/error_messages", :target => resource %>
         <div class="clearfix">
           <%= f.label :login %>
           <div class="input">

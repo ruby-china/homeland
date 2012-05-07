@@ -9,7 +9,7 @@
     <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
       <fieldset>
         <legend>忘记了密码</legend>
-        <%= render "shared/error_messages", :target => resource %> 
+        <%= render "shared/error_messages", :target => resource %>
         <div class="clearfix">
           <%= f.label :email %>
           <div class="input">

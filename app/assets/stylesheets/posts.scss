@@ -1,9 +1,9 @@
 #posts {
- ul { 
+ ul {
   list-style: none;
   margin:0;
   padding:0;
-  
+
   li {
     margin:0 -10px;
     border-top:1px solid #ddd;
@@ -11,24 +11,24 @@
     .info {
       font-size:12px;
       color:#999;
-      a { 
-          color:#999; 
+      a {
+          color:#999;
           text-decoration: underline;
         }
     }
   }
  }
  .pagination { margin:0; border-top:1px solid #ddd; padding:10px 10px 0 10px; margin:0 -10px;}
-} 
+}
 
 #post_show {
   h1 { font-size:18px; line-height:150%; text-align: left; }
-  .info { 
+  .info {
     margin-bottom:5px;
     color:#999;
     font-size:12px;
-    a { 
-        color:#999; 
+    a {
+        color:#999;
         text-decoration: underline;
       }
   }

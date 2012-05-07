@@ -14,7 +14,7 @@
     </div>
 
     <div class="body"><%= markdown(@note.body) %></div>
-    
+
     <% if owner? @note %>
       <div class="buttons">
         <a href="<%= edit_note_path(@note) %>" class="btn"><%= t("common.edit")%></a>

@@ -1,5 +1,3 @@
-source 'http://ruby.taobao.org'
-
 gem "rails", "3.2.2"
 gem "rails-i18n","0.1.8"
 gem "jquery-rails", "1.0.16"

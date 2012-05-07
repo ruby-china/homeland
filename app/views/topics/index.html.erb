@@ -9,8 +9,8 @@
     <div class="topics">
       <%= render :partial => "topics/topic", :collection => @topics %>
     </div>
-     
-      
+
+
     <% if ["index","search"].include?(action_name) %>
       <div class="more">
         <%= link_to(t("topics.check_recent_topics"), recent_topics_path)%>
@@ -19,7 +19,7 @@
       <%= will_paginate @topics %>
     <% end %>
     </div>
-    
+
     <% if action_name == "index" %>
       <%= render_cell :topics, :index_sections %>
       <%= render_cell :topics, :index_locations %>

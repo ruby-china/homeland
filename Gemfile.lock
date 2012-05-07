@@ -49,7 +49,6 @@ GIT
       thor (~> 0.14)
 
 GEM
-  remote: http://ruby.taobao.org/
   specs:
     actionmailer (3.2.2)
       actionpack (= 3.2.2)

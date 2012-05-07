@@ -7,7 +7,7 @@ describe Mongoid::BaseModel do
 
     field :name
   end
-  
+
   after(:each) do
     Monkey.delete_all
   end
@@ -36,7 +36,7 @@ describe Mongoid::BaseModel do
     Monkey.find_by_id("1").should eq(monkey)
     Monkey.find_by_id(2).should be_nil
   end
-  
+
   it "should have by_week method" do
     Monkey.create(:name => "Caesar", :created_at => 2.weeks.ago.utc)
     Monkey.create(:name => "Caesar1", :created_at => 3.days.ago.utc)

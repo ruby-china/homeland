@@ -16,7 +16,7 @@ describe Node do
       old = CacheVersion.section_node_updated_at
       sleep(1)
       node = Factory(:node)
-      CacheVersion.section_node_updated_at.should_not == old      
+      CacheVersion.section_node_updated_at.should_not == old
     end
 
     it "should update on destroy" do
@@ -24,7 +24,7 @@ describe Node do
       old = CacheVersion.section_node_updated_at
       sleep(1)
       node.destroy
-      CacheVersion.section_node_updated_at.should_not == old      
+      CacheVersion.section_node_updated_at.should_not == old
     end
   end
 

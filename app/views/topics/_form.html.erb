@@ -1,7 +1,7 @@
 <%= simple_form_for @topic, :wrapper => :inline do |f| %>
   <fieldset>
     <legend><%= @topic.new_record? ? t("topics.create_topic") : t("topics.edit_topic") %></legend>
-    <%= render "shared/error_messages", :target => @topic %>  
+    <%= render "shared/error_messages", :target => @topic %>
     <%= f.input :title do %>
       <span class="span3">
         <%= render_topic_node_select_tag(@topic) %>
@@ -10,10 +10,10 @@
         <%= f.text_field :title %>
       </span>
     <% end %>
-    
+
     <div class="edit_tools input">
       <%= render "editor_toolbar" %>
-    </div>    
+    </div>
     <%= f.input :body, :as => :text, :input_html => { :class => "topic_editor closewarning xxlarge", :style => "height:400px" }%>
 
     <div class="actions">

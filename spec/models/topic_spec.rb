@@ -60,7 +60,7 @@ describe Topic do
     t.save
     t.body_html.should == old_html
   end
-  
+
   it "should log deleted user name when use destroy_by" do
     user  = Factory :user
     t = Factory(:topic)

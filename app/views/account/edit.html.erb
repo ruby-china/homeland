@@ -4,7 +4,7 @@
       <fieldset>
         <legend><%= t("users.personal_information")%></legend>
           <% if params[:by].blank? %>
-              <%= render "shared/error_messages", :target => resource %> 
+              <%= render "shared/error_messages", :target => resource %>
           <% end %>
           <div class="clearfix">
             <%= f.label :name %>
@@ -89,7 +89,7 @@
           <div class="input">
             <%= f.password_field :password_confirmation %>
           </div>
-        </div>        
+        </div>
           <div class="actions">
               <%= f.submit "修改密码", :class => "btn success", :disable_with => t("common.saving") %>
           </div>

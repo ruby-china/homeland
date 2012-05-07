@@ -5,7 +5,7 @@
 
     <%= f.input :slug, :hint => "http://#{Setting.domain}/wiki/:slug"%>
     <%= f.input :title, :input_html => { :class => "xxlarge" } %>
-    
+
     <% if I18n.default_locale == "zh-CN" %>
         <%= f.input :body, :as => :text,
                     :input_html => { :class => "long", :rows => "30" },

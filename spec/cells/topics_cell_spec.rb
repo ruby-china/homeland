@@ -61,25 +61,25 @@ describe TopicsCell do
       l1 = Factory(:location)
       l2 = Factory(:location)
       l3 = Factory(:location)
-      count = Location.count 
+      count = Location.count
       count = 12 if count > 12
       render_cell(:topics, :index_locations).should have_css('div#hot_locations li.name', :count => count)
     end
   end
-  
+
   describe "high topics" do
     before(:each) do
       t1 = Factory(:topic)
       t2 = Factory(:topic)
       t3 = Factory(:topic)
     end
-    
+
     it "should render high_likes_topics" do
       count = Topic.by_week.count
       count = 10 if count > 10
       render_cell(:topics, :high_likes_topics).should have_css('div.high_likes_topics li', :count => count)
     end
- 
+
     it "should render high_replies_topics" do
       count = Topic.by_week.count
       count = 10 if count > 10

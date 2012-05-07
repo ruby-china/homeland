@@ -1,5 +1,5 @@
 <div id="<%= @commentable.class.name %>_<%= @commentable.id %>_cell_comments" class="cell_comments box">
-  
+
   <% if !@comments.blank? %>
     <%= render :partial => "comment", :collection => @comments %>
   <% else %>

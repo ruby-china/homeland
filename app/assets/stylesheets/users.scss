@@ -2,7 +2,7 @@
 .node_topics td.title a:visited {color:#2c64d7; text-decoration: none;}
 .node_topics td.title a:hover { text-decoration: underline; }
 /* topics list in node page */
-.node_topics tr.head td {  border-top:none; 
+.node_topics tr.head td {  border-top:none;
    padding-top:14px; color:#CCC; font-weight:bold; font-size:12px; }
 .node_topics tr td { border-bottom:1px solid #ddd;}
 .node_topics tr.odd td { background:#F9F9F9; }
@@ -21,15 +21,15 @@
 #main .bio h2 { text-align:right; margin-bottom:10px; }
 .bio { font-size:12px; line-height:180%; }
 
-.replies ul { 
+.replies ul {
   margin:0;
   h6 { color:#999; font-weight:normal; }
   li { line-height:180%; border-bottom:1px solid #ddd; list-style: none;}
   blockquote { line-height:160%; }
 }
 
-.content > .tabs { 
-  border-bottom:2px solid #ccc; 
+.content > .tabs {
+  border-bottom:2px solid #ccc;
   .active { margin-bottom:0;}
 }
 
@@ -43,10 +43,10 @@ table {
 #users {
   .info { margin-bottom:10px; text-align:right;}
 }
-.user_list { 
+.user_list {
   padding-bottom:20px; margin-left:0;
   h2 { font-size:14px; margin:0; }
-  .span1 { 
+  .span1 {
     width:70px; text-align:center; margin-top:20px;
     .avatar {
       img { width:48px; height:48px; }
@@ -56,13 +56,13 @@ table {
 
 #user_github_repos {
   .more { text-align:right; }
-  li { 
+  li {
     list-style:none;
     margin:0 -10px;
     padding:0 10px;
-    margin-bottom:10px; 
+    margin-bottom:10px;
     border-bottom:1px solid #eee;
-    .title { 
+    .title {
       position:relative;
       a { color:#333; font-weight:bold; }
       .watchers { position:absolute; top:2px; right:0; }

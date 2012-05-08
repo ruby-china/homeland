@@ -107,10 +107,16 @@ form {
 .input-xxlarge, input.xxlarge, textarea.xxlarge, select.xxlarge {
   width:98%; 
 }
-#sections li label {
-  display:block;
-  text-align:left;
-  float:none;
+#sections li {
+  label {
+    display:block;
+    text-align:left;
+    float:none;
+  }
+  span.nodes {
+    float: none;
+    margin: 0;
+  }
 }
 
 #notifications {

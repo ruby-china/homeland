@@ -220,12 +220,13 @@
        color: #999;
        display: inline-block;
        width: 120px;
-       margin-right: 8px;
+       margin-right: -130px;
+       padding-right: 10px;
        float: left;
        text-align: right; }
      span.nodes {
        float: left;
-       width: 550px;
+       margin-left: 130px;
      }
      a { margin-right: 10px; }
   }

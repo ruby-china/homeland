@@ -31,7 +31,6 @@ gem 'devise', '1.5.2'
 
 # 分页
 gem 'will_paginate', '3.0.2'
-gem 'will_paginate_mongoid', '~> 1.0.2'
 gem 'bootstrap-will_paginate', '0.0.3'
 
 # 三方平台 OAuth 验证登陆

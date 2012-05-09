@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   def init_page
     load_unread_notifications_count
   end
-  
+
   def render_404
     render_optional_error_file(404)
   end
@@ -73,9 +73,9 @@ class ApplicationController < ActionController::Base
       end
     end
   end
-  
+
   def load_unread_notifications_count
-    @unread_notify_count = 0 
+    @unread_notify_count = 0
     return false if current_user.blank?
     @unread_notify_count = current_user.notifications.unread.count
   end

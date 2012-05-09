@@ -13,7 +13,7 @@ module TopicsHelper
       t("topics.has_new_replies")
     end
   end
-  
+
   def topic_favorite_tag(topic)
     return "" if current_user.blank?
     class_name = "bookmark"
@@ -22,7 +22,7 @@ module TopicsHelper
       class_name = "bookmarked"
       link_title = "取消收藏"
     end
-    
+
     link_to "", "#", :onclick => "return Topics.favorite(this);", 'data-id' => topic.id, :class => "icon small_#{class_name}", :title => link_title, :rel => "twipsy"
   end
 
@@ -49,7 +49,7 @@ module TopicsHelper
 
   def render_topic_node_select_tag(topic)
     return if topic.blank?
-    grouped_collection_select :topic, :node_id, Section.all, 
+    grouped_collection_select :topic, :node_id, Section.all,
                     :sorted_nodes, :name, :id, :name, :value => topic.node_id,
                     :include_blank => true, :prompt => "选择节点"
   end

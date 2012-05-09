@@ -13,6 +13,7 @@ module RubyChina
     # either in post body or query string, named "token"
 
     resource :topics do
+
       # Get active topics list
       # params[:size] could be specified to limit the results
       # params[:size]: default is 15, max is 100
@@ -110,6 +111,20 @@ module RubyChina
         @user = User.where(:login => /^#{params[:user]}$/i).first
         @topics = Topic.find(@user.favorite_topic_ids)
         present @topics, :with => APIEntities::Topic
+      end
+    end
+
+    # List all cool sites
+    # Example
+    # GET /api/sites.json
+    resource :sites do
+      get do
+        @site_nodes = SiteNode.all.includes(:sites).desc('sort')
+        @site_nodes.as_json(:except => :sort, :include => {
+          :sites => {
+            :only => [:name, :url, :desc, :favicon, :created_at]
+          }
+        })
       end
     end
 

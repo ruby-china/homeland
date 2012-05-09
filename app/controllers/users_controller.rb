@@ -44,9 +44,9 @@ class UsersController < ApplicationController
     @location = Location.find_by_name(params[:id])
     if @location.blank?
       render_404
-      return 
+      return
     end
-    
+
     @users = User.where(:location_id => @location.id).desc('replies_count').paginate(:page => params[:page], :per_page => 30)
 
     if @users.count == 0

@@ -48,7 +48,7 @@ RubyChina::Application.routes.draw do
       post :favorite
     end
     collection do
-      get :search
+      get :no_reply
       get :feed
       post :preview
     end

@@ -66,6 +66,7 @@ class Topic
   scope :fields_for_list, without(:body,:body_html)
   scope :high_likes, desc(:likes_count, :_id)
   scope :high_replies, desc(:replies_count, :_id)
+  scope :no_reply, where(:replies_count => 0)
 
   before_save :store_cache_fields
   def store_cache_fields

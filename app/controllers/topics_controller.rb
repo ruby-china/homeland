@@ -8,7 +8,7 @@ class TopicsController < ApplicationController
   before_filter :init_base_breadcrumb
 
   def index
-    @topics = Topic.last_actived.fields_for_list.limit(15).includes(:user).to_a
+    @topics = Topic.last_actived.fields_for_list.includes(:user).paginate(:page => params[:page], :per_page => 15, :total_entries => 1500)
     set_seo_meta("","#{Setting.app_name}#{t("menu.topics")}")
     drop_breadcrumb(t("topics.hot_topic"))
     #render :stream => true
@@ -22,7 +22,7 @@ class TopicsController < ApplicationController
 
   def node
     @node = Node.find(params[:id])
-    @topics = @node.topics.last_actived.fields_for_list.includes(:user).paginate(:page => params[:page],:per_page => 30)
+    @topics = @node.topics.last_actived.fields_for_list.includes(:user).paginate(:page => params[:page],:per_page => 15)
     set_seo_meta("#{@node.name} &raquo; #{t("menu.topics")}","#{Setting.app_name}#{t("menu.topics")}#{@node.name}",@node.summary)
     drop_breadcrumb("#{@node.name}")
     render :action => "index" #, :stream => true
@@ -37,17 +37,13 @@ class TopicsController < ApplicationController
 
   def recent
     # TODO: 需要 includes :node,:user, :last_reply_user,但目前用了 paginate 似乎会使得 includes 没有效果
-    @topics = Topic.recent.fields_for_list.includes(:user).paginate(:page => params[:page], :per_page => 30)
+    @topics = Topic.recent.fields_for_list.includes(:user).paginate(:page => params[:page], :per_page => 15, :total_entries => 1500)
     drop_breadcrumb(t("topics.topic_list"))
     render :action => "index" #, :stream => true
   end
 
-  def search
-    result = Redis::Search.query("Topic", params[:key], :limit => 500)
-    ids = result.collect { |r| r["id"] }
-    @topics = Topic.where(:_id.in => ids).limit(50).includes(:node,:user, :last_reply_user)
-    set_seo_meta("#{t("common.search")}#{params[:s]} &raquo; #{t("menu.topics")}")
-    drop_breadcrumb("#{t("common.search")} #{params[:key]}")
+  def no_reply
+    @topics = Topic.no_reply.recent.fields_for_list.includes(:user).paginate(:page => params[:page], :per_page => 15)
     render :action => "index" #, :stream => true
   end
 

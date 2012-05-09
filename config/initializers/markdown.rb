@@ -72,7 +72,8 @@ class MarkdownConverter
 end
 
 class MarkdownTopicConverter < MarkdownConverter
-  def self.format(text)
+  def self.format(raw)
+    text = raw.clone
     return '' if text.blank?
 
     self.convert_bbcode_img(text)
@@ -111,34 +112,9 @@ class MarkdownTopicConverter < MarkdownConverter
   # convert '@user' to link
   # match any user even not exist.
   def self.link_mention_user(text)
-    # temperary remove the code wrapper incase of '@variable' become a link
-    code_wrapper = text.match(/<pre>.*<\/pre>/m)
-    text.gsub!(/<pre>.*<\/pre>/m, '<PRE></PRE>') if code_wrapper
-
-    # explain the complex regex
-    # copy from:
-    # http://rick.measham.id.au/paste/explain.pl?regex=%28%5E%7C%5B%5Ea-zA-Z0-9_%21%23%5C%24%25%26*%40＠%5D%29%40%28%5Ba-zA-Z0-9_%5D%7B1%2C20%7D%29
-    user_regex = %r{
-      (                         # group and capture to \1:
-      ^                         #  the beginning of the string
-      |                         # OR
-      [^a-zA-Z0-9_!#\$%&*@＠]   #  any character except: 'a' to 'z', 'A' to
-                                # 'Z', '0' to '9', '_', '!', '#', '\$',
-                                #  '%', '&', '*', '@', '＠'
-      )                         # end of \1
-      @                         # '@'
-      (                         # group and capture to \2:
-        [a-zA-Z0-9_]{1,20}      # any character of: 'a' to 'z', 'A' to
-                                # 'Z', '0' to '9', '_' (between 1 and 20
-                                # times (matching the most amount
-                                # possible))
-      )                         # end of \2
-    }xio
-
-    text.gsub!(user_regex) {
+    text.gsub!(/(^|[^a-zA-Z0-9_!#\$%&*@＠])@([a-zA-Z0-9_]{1,20})/io) {
       %(#{$1}<a href="/users/#{$2}" class="at_user" title="@#{$2}"><i>@</i>#{$2}</a>)
     }
-    text.gsub!(/<PRE><\/PRE>/, code_wrapper.to_s)
   end
 
   def initialize

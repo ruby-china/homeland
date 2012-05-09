@@ -63,5 +63,35 @@ describe Reply do
       r.save
       r.body_html.should == old_html
     end
+
+    context '#link_mention_user' do
+      it 'should add link to mention users' do
+        body = '@foo'
+        reply = Factory(:reply, :body => body)
+        reply.body_html.should == '<p><a href="/users/foo" class="at_user" title="@foo"><i>@</i>foo</a></p>'
+      end
+
+      it 'should not add link to `@` symbol in <pre></pre> node' do
+        body = <<-eos
+@foo
+
+```ruby
+def ruby_china
+  @hello = 'hi'
+end
+```
+eos
+        reply = Factory(:reply, :body => body)
+        expected = <<-eos
+<p><a href="/users/foo" class="at_user" title="@foo"><i>@</i>foo</a></p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">ruby_china</span>
+  <span class="vi">@hello</span> <span class="o">=</span> <span class="s1">&#39;hi&#39;</span>
+<span class="k">end</span>
+</pre>
+</div>
+eos
+        reply.body_html.should == expected.chop
+      end
+    end
   end
 end

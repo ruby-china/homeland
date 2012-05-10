@@ -32,12 +32,12 @@ describe UsersHelper do
     let(:user) { Factory(:user, :website => 'http://example.com') }
     subject { helper.render_user_personal_website(user) }
 
-    it { should == link_to(user.website, user.website, :target => "_blank", :rel => "nofollow") }
+    it { should == link_to(user.website, user.website, :target => "_blank", :class => "url", :rel => "nofollow") }
 
     context "url without protocal" do
       before { user.update_attribute(:website, 'example.com') }
 
-      it { should == link_to("http://" + user.website, "http://" + user.website, :target => "_blank", :rel => "nofollow") }
+      it { should == link_to("http://" + user.website, "http://" + user.website, :class => "url", :target => "_blank", :rel => "nofollow") }
     end
   end
 end

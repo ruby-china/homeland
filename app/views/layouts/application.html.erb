@@ -38,7 +38,9 @@
   </div>
   
   <div class="container">
-    <%= render_breadcrumb %>
+    <div itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+      <%= render_breadcrumb %>
+    </div>
     <%= render "common/feeds" %>
 
     <%= notice_message %>

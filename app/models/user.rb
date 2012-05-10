@@ -19,7 +19,9 @@ class User
   field :location_id, :type => Integer
   field :bio
   field :website
+  field :company
   field :github
+  field :twitter
   # 是否信任用户
   field :verified, :type => Boolean, :default => true
   field :state, :type => Integer, :default => 1
@@ -60,7 +62,7 @@ class User
   end
 
   attr_accessor :password_confirmation
-  attr_accessible :name, :email, :location, :bio, :website, :github, :tagline, :avatar, :password, :password_confirmation
+  attr_accessible :name, :email, :location, :company, :bio, :website, :github, :twitter, :tagline, :avatar, :password, :password_confirmation
 
   validates :login, :format => {:with => /\A\w+\z/, :message => '只允许数字、大小写字母和下划线'}, :length => {:in => 3..20}, :presence => true, :uniqueness => {:case_sensitive => false}
 
@@ -83,6 +85,16 @@ class User
   def github_url
     return "" if self.github.blank?
     "https://github.com/#{self.github.split('/').last}"
+  end
+
+  def twitter_url
+    return "" if self.twitter.blank?
+    "https://twitter.com/#{self.twitter}"
+  end
+
+  def google_profile_url
+    return "" if self.email.blank? or !self.email.match(/gmail\.com/)
+    return "http://www.google.com/profiles/#{self.email.split("@").first}"
   end
 
   # 是否是管理员

@@ -14,8 +14,9 @@ module UsersHelper
     end
 
     name ||= login
+    options['data-name'] = name
 
-    link_to(login, user_path(login), 'data-name' => name)
+    link_to(login, user_path(login), options)
   end
 
   def user_avatar_width_for_size(size)
@@ -67,7 +68,7 @@ module UsersHelper
 
   def render_user_personal_website(user)
     website = user.website[/^https?:\/\//] ? user.website : "http://" + user.website
-    link_to(website, website, :target => "_blank", :rel => "nofollow")
+    link_to(website, website, :target => "_blank", :class => "url", :rel => "nofollow")
   end
 
   def render_user_level_tag(user)

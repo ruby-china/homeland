@@ -40,7 +40,7 @@ module TopicsHelper
   end
 
   def render_topic_created_at(topic)
-    timeago(topic.created_at)
+    timeago(topic.created_at, :class => "published")
   end
 
   def render_topic_last_be_replied_time(topic)

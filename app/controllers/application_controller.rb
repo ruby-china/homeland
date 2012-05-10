@@ -24,6 +24,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def drop_breadcrumb(title=nil, url=nil)
+    title ||= @page_title
+    url ||= url_for
+    if title
+      @breadcrumbs.push(%(<a href="#{url}" itemprop="url"><span itemprop="title">#{title}</span></a>).html_safe)
+    end
+  end
+
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to topics_path, :alert => t("common.access_denied")
   end

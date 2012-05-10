@@ -1,7 +1,7 @@
 module Rails
   class <<self
     def root
-      File.expand_path(__FILE__).split('/')[0..-3].join('/')
+      "/home/ruby/www/ruby-china/current"
     end
   end
 end
@@ -21,6 +21,10 @@ timeout 120
 
 if GC.respond_to?(:copy_on_write_friendly=)
   GC.copy_on_write_friendly = true
+end
+
+before_exec do |server|
+  ENV["BUNDLE_GEMFILE"] = "#{Rails.root}/Gemfile"
 end
 
 before_fork do |server, worker|

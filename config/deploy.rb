@@ -56,7 +56,7 @@ task :mongoid_create_indexes, :roles => :web do
 end
 
 task :compile_assets, :roles => :web do
-  run "cd #{deploy_to}/current/; bundle exec rake assets:precompile"
+  run "cd #{deploy_to}/current/; bundle exec rake assets:precompile && bundle exec rake assets:cdn"
 end
 
 task :mongoid_migrate_database, :roles => :web do

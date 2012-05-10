@@ -44,7 +44,6 @@ task :link_shared_files, :roles => :web do
   run "ln -sf #{deploy_to}/shared/config/*.yml #{deploy_to}/current/config/"
   run "ln -sf #{deploy_to}/shared/config/unicorn.rb #{deploy_to}/current/config/"
   run "ln -sf #{deploy_to}/shared/config/initializers/secret_token.rb #{deploy_to}/current/config/initializers"
-  run "ln -s #{deploy_to}/shared/assets #{deploy_to}/current/public/assets"
 end
 
 task :restart_resque, :roles => :web do
@@ -57,6 +56,9 @@ end
 
 task :compile_assets, :roles => :web do
   run "cd #{deploy_to}/current/; RAILS_ENV=production bundle exec rake assets:precompile"
+end
+
+task :sync_assets_to_cdn, :roles => :web do
   run "cd #{deploy_to}/current/; RAILS_ENV=production bundle exec rake assets:cdn"
 end
 
@@ -64,7 +66,7 @@ task :mongoid_migrate_database, :roles => :web do
   run "cd #{deploy_to}/current/; RAILS_ENV=production bundle exec rake db:migrate"
 end
 
-after "deploy:finalize_update","deploy:symlink", :init_shared_path, :link_shared_files, :compile_assets, :mongoid_create_indexes, :mongoid_migrate_database
+after "deploy:finalize_update","deploy:symlink", :init_shared_path, :link_shared_files, :compile_assets, :sync_assets_to_cdn, :mongoid_create_indexes, :mongoid_migrate_database
 
 
 set :default_environment, {

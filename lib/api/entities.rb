@@ -13,7 +13,7 @@ module RubyChina
       expose(:gravatar_hash) { |model, opts| Digest::MD5.hexdigest(model.email || "") }
       expose(:avatar_url) { |model, opts| model.avatar? ? model.avatar.url(:normal) : "" }
       expose(:topics, :unless => { :collection => true }) do |model, opts|
-        model.topics.recent.limit(opts[:topics_limit] ||= 1).as_json(:only => [:title, :created_at, :node_name, :replies_count])
+        model.topics.recent.limit(opts[:topics_limit] ||= 1).as_json(:only => [:_id, :title, :created_at, :node_name, :replies_count])
       end
     end
 

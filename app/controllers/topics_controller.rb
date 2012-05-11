@@ -61,7 +61,7 @@ class TopicsController < ApplicationController
       end
     end
     set_seo_meta("#{@topic.title} &raquo; #{t("menu.topics")}")
-    drop_breadcrumb("#{@node.name}", node_topics_path(@node.id))
+    drop_breadcrumb("#{@node.try(:name)}", node_topics_path(@node.try(:id)))
     drop_breadcrumb t("topics.read_topic")
    # render :stream => true
   end

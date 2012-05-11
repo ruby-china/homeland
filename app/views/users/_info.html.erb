@@ -1,28 +1,61 @@
 <div class="box">
-  <div class="userinfo">
+  <div class="userinfo vcard">
     <div class="pull-right" style="text-align:center;">
       <%= user_avatar_tag(@user,:big, :link => false) %>
     </div>
     <%= render_user_level_tag(@user) %>
     <ul>
-        <li class="with_nbsp"><span>&nbsp;</span>第 <%= @user.id %> 位<%= t("menu.users")%></li>
-        <li><span>ID:</span><strong><%= @user.login %></strong></li>
-        <% if !@user.name.blank? %>
-        <li><span>Name:</span><strong><%= @user.name %></strong></li>
-        <% end %>
-        <% if !@user.location.blank? %>
-             <li><span><%= t("users.city")%>:</span><%= location_name_tag(@user.location) %></li>
-        <% end %>
-        
-        <li><span><%= t("users.join_time")%>:</span><%= render_user_join_time(@user) %></li>
-        
-        <% if !@user.tagline.blank? %>
-            <li><span><%= t("users.signature")%>:</span><%= render_user_tagline(@user) %></li>
-        <% end %>
-        
-        <% if !@user.website.blank? %>
-            <li><span><%= t("users.personal_website")%>:</span><%= render_user_personal_website(@user)%></li>
-        <% end %>
+      <li class="with_nbsp">
+        <label>&nbsp;</label>
+        <span class="title">第 <%= @user.id %> 位<%= t("menu.users")%></span>
+      </li>
+      <li>
+        <label>ID:</label>
+        <strong class="fn"><%= @user.login %></strong>
+      </li>
+      <% if !@user.name.blank? %>
+        <li>
+          <label>Name:</label>
+          <strong><%= @user.name %></strong>
+        </li>
+      <% end %>
+
+      <% if !@user.location.blank? %>
+        <li class="adr">
+          <label><%= t("users.city")%>:</label>
+          <span class="region"><%= location_name_tag(@user.location) %></span>
+        </li>
+      <% end %>
+
+      <% if !@user.company.blank? %>
+        <li class="adr">
+          <label><%= t("users.company")%>:</label>
+          <span class="org"><%= @user.company %></span>
+        </li>
+      <% end %>
+
+      <% if !@user.twitter.blank? %>
+        <li>
+          <label><%= t("users.twitter")%>:</label>
+          <span><%= link_to "@#{@user.twitter}", @user.twitter_url, :class => "twitter", :rel => "nofollow" %></span>
+        </li>
+      <% end %>
+      
+      <li><label><%= t("users.join_time")%>:</label><%= render_user_join_time(@user) %></li>
+      
+      <% if !@user.tagline.blank? %>
+        <li>
+          <label><%= t("users.signature")%>:</label>
+          <span><%= render_user_tagline(@user) %></span>
+        </li>
+      <% end %>
+      
+      <% if !@user.website.blank? %>
+        <li>
+          <label><%= t("users.personal_website")%>:</label>
+          <span><%= render_user_personal_website(@user)%></span>
+        </li>
+      <% end %>
     </ul>
   </div>
 

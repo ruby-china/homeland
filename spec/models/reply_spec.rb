@@ -63,5 +63,13 @@ describe Reply do
       r.save
       r.body_html.should == old_html
     end
+
+    context '#link_mention_user' do
+      it 'should add link to mention users' do
+        body = '@foo'
+        reply = Factory(:reply, :body => body)
+        reply.body_html.should == '<p><a href="/users/foo" class="at_user" title="@foo"><i>@</i>foo</a></p>'
+      end
+    end
   end
 end

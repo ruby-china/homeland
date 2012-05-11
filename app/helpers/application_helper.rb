@@ -44,7 +44,8 @@ module ApplicationHelper
   end
 
   def timeago(time, options = {})
-    options[:class] ||= "timeago"
+    options[:class] 
+    options[:class] = options[:class].blank? ? "timeago" : [options[:class],"timeago"].join(" ")
     content_tag(:abbr, "", options.merge(:title => time.iso8601)) if time
   end
 

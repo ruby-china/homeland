@@ -1,8 +1,13 @@
 <%= render 'base' %>
+<%= content_for :styles do %>
+  <% if !@topic.user.blank? and !@topic.user.google_profile_url.blank? %>
+    <link rel="author" content="<%= @topic.user.google_profile_url %>" />
+  <% end %>
+<% end %>
 
 <div class="content">
-  <div id="topic_show" class="topics box">
-    <div class="topic">
+  <div id="topic_show" class="topics box hfeed">
+    <div class="topic hentry">
       <div class="pull-right avatar_large">
         <%= user_avatar_tag(@topic.user, :large, :link => false) %>
       </div>
@@ -11,7 +16,7 @@
 
       <%= raw SiteConfig.before_topic_html %>
 
-      <div class="body">
+      <div class="body entry-content">
         <%= raw @topic.body_html %>
       </div>
 

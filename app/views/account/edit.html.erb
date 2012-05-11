@@ -32,11 +32,26 @@
             </div>
           </div>
           <div class="clearfix">
+            <%= f.label :company %>
+            <div class="input">
+              <%= f.text_field :company, :class => "span3" %>
+            </div>
+          </div>
+          <div class="clearfix">
             <%= f.label :github %>
             <div class="input">
               <div class="input-prepend">
                 <span class="add-on">https://github.com/</span>
                 <%= f.text_field :github, :class => "small", :placeholder => "yourname" %>
+              </div>
+            </div>
+          </div>
+          <div class="clearfix">
+            <%= f.label :twitter %>
+            <div class="input">
+              <div class="input-prepend">
+                <span class="add-on">http://twitter.com/</span>
+                <%= f.text_field :twitter, :class => "small", :placeholder => "yourname" %>
               </div>
             </div>
           </div>

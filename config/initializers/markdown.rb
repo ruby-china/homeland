@@ -5,9 +5,9 @@ module Redcarpet
   module Render
     class HTMLwithSyntaxHighlight < HTML
       def initialize(extensions={})
-        super(extensions.merge(:xhtml => true, 
-                               :no_styles => true, 
-                               :filter_html => true, 
+        super(extensions.merge(:xhtml => true,
+                               :no_styles => true,
+                               :filter_html => true,
                                :hard_wrap => true))
       end
 
@@ -19,11 +19,11 @@ module Redcarpet
           Pygments.highlight(code, :lexer => 'text', :formatter => 'html', :options => {:encoding => 'utf-8'})
         end
       end
-      
+
       def autolink(link, link_type)
         # return link
         if link_type.to_s == "email"
-          link          
+          link
         else
           begin
             # 防止 C 的 autolink 出来的内容有编码错误，万一有就直接跳过转换
@@ -40,7 +40,7 @@ module Redcarpet
         end
       end
     end
-    
+
     class HTMLwithTopic < HTMLwithSyntaxHighlight
       # Topic 里面，所有的 head 改为 h4 显示
       def header(text, header_level)
@@ -72,14 +72,15 @@ class MarkdownConverter
 end
 
 class MarkdownTopicConverter < MarkdownConverter
-  def self.format(text)
+  def self.format(raw)
+    text = raw.clone
     return '' if text.blank?
 
     self.convert_bbcode_img(text)
-    
+
     # 如果 ``` 在刚刚换行的时候 Redcapter 无法生成正确，需要两个换行
     text.gsub!("\n```","\n\n```")
-    
+
     result = self.convert(text)
 
     self.link_mention_floor(result)
@@ -103,7 +104,7 @@ class MarkdownTopicConverter < MarkdownConverter
 
   # convert '#N楼' to link
   def self.link_mention_floor(text)
-    text.gsub!(/#(\d+)([楼樓Ff])/) { 
+    text.gsub!(/#(\d+)([楼樓Ff])/) {
       %(<a href="#reply#{$1}" class="at_floor" data-floor="#{$1}">##{$1}#{$2}</a>)
     }
   end
@@ -111,7 +112,7 @@ class MarkdownTopicConverter < MarkdownConverter
   # convert '@user' to link
   # match any user even not exist.
   def self.link_mention_user(text)
-    text.gsub!(/(^|[^a-zA-Z0-9_!#\$%&*@＠])@([a-zA-Z0-9_]{1,20})/io) { 
+    text.gsub!(/(^|[^a-zA-Z0-9_!#\$%&*@＠])@([a-zA-Z0-9_]{1,20})/io) {
       %(#{$1}<a href="/users/#{$2}" class="at_user" title="@#{$2}"><i>@</i>#{$2}</a>)
     }
   end

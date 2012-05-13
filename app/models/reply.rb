@@ -53,6 +53,8 @@ class Reply
     self.topic.follower_ids.each do |uid|
       # 排除同一个回复过程中已经提醒过的人
       next if self.notified_user_ids.include?(uid)
+      # 排除回帖人
+      next if uid == self.user_id
       Notification::TopicReply.create :user_id => uid, :reply => self
     end
   end

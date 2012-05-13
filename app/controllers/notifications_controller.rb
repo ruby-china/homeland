@@ -18,8 +18,8 @@ class NotificationsController < ApplicationController
     end
   end
 
-  def mark_all_as_read
-    current_user.notifications.unread.update_all(:read => true)
+  def clear
+    current_user.notifications.delete_all
     respond_with do |format|
       format.html { redirect_referrer_or_default notifications_path }
       format.js { render :layout => false }

@@ -23,12 +23,12 @@ describe NotificationsController do
     end
   end
 
-  describe "#mark_all_as_read" do
-    it "should mark all as read" do
+  describe "#clear" do
+    it "should clear all" do
       sign_in user
       3.times{ Factory :notification_mention, :user => user, :mentionable => Factory(:reply) }
 
-      put :mark_all_as_read
+      post :clear
       user.notifications.unread.count.should == 0
     end
   end

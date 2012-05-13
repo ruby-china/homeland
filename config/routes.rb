@@ -33,7 +33,7 @@ RubyChina::Application.routes.draw do
   end
   resources :notifications, :only => [:index, :destroy] do
     collection do
-      put :mark_all_as_read
+      post :clear
     end
   end
 

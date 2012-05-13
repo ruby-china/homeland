@@ -43,8 +43,17 @@ class Reply
 
   after_create :send_topic_reply_notification
   def send_topic_reply_notification
+    # 给发帖人发回帖通知
     if self.user != topic.user && !mentioned_user_ids.include?(topic.user_id)
       Notification::TopicReply.create :user => topic.user, :reply => self
+      self.notified_user_ids << topic.user_id
+    end
+
+    # 给关注者发通知
+    self.topic.follower_ids.each do |uid|
+      # 排除同一个回复过程中已经提醒过的人
+      next if self.notified_user_ids.include?(uid)
+      Notification::TopicReply.create :user_id => uid, :reply => self
     end
   end
 

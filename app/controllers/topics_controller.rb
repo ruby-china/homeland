@@ -1,7 +1,7 @@
 # coding: utf-8
 class TopicsController < ApplicationController
 
-  load_and_authorize_resource :only => [:new,:edit,:create,:update,:destroy,:favorite]
+  load_and_authorize_resource :only => [:new,:edit,:create,:update,:destroy,:favorite, :follow, :unfollow]
 
   before_filter :set_menu_active
   caches_page :feed, :node_feed, :expires_in => 1.hours
@@ -135,6 +135,18 @@ class TopicsController < ApplicationController
     else
       current_user.favorite_topic(params[:id])
     end
+    render :text => "1"
+  end
+
+  def follow
+    @topic = Topic.find(params[:id])
+    @topic.push_follower(current_user.id)
+    render :text => "1"
+  end
+
+  def unfollow
+    @topic = Topic.find(params[:id])
+    @topic.pull_follower(current_user.id)
     render :text => "1"
   end
 

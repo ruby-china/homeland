@@ -15,6 +15,8 @@ class Ability
       # Topic
       can :create, Topic
       can :favorite, Topic
+      can :follow, Topic
+      can :unfollow,Topic
       can :update, Topic do |topic|
         (topic.user_id == user.id)
       end

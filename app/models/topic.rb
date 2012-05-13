@@ -78,12 +78,15 @@ class Topic
     self.replied_at = Time.now if self.replied_at.blank?
   end
 
-  def push_follower(user_id)
-    self.follower_ids << user_id if !self.follower_ids.include?(user_id)
+  def push_follower(uid)
+    return false if uid == self.user_id
+    return false if self.follower_ids.include?(uid)
+    self.push(:follower_ids,uid) 
   end
 
-  def pull_follower(user_id)
-    self.follower_ids.delete(user_id)
+  def pull_follower(uid)
+    return false if uid == self.user_id
+    self.pull(:follower_ids,uid)
   end
 
   def update_last_reply(reply)
@@ -91,7 +94,6 @@ class Topic
     self.last_reply_id = reply.id
     self.last_reply_user_id = reply.user_id
     self.last_reply_user_login = reply.user.try(:login) || nil
-    self.push_follower(reply.user_id)
     self.save
   end
 

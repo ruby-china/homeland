@@ -37,7 +37,8 @@
   }
   .tools { 
     text-align:right; height:16px; overflow:hidden;
-    a.likeable { 
+    a:link,
+    a:visited { 
       i { position:relative; margin-bottom:-1px; }
       text-decoration: none;
     }

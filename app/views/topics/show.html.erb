@@ -23,6 +23,7 @@
       <%= raw SiteConfig.after_topic_html %>
 
       <div class="tools pull-right">
+        <%= topic_follow_tag(@topic) %>
         <%= likeable_tag(@topic) %>
         <%= topic_favorite_tag(@topic) %>
         <% if owner?(@topic) or admin? %>

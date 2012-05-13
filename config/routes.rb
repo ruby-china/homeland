@@ -46,6 +46,8 @@ RubyChina::Application.routes.draw do
     member do
       post :reply
       post :favorite
+      post :follow
+      post :unfollow
     end
     collection do
       get :no_reply

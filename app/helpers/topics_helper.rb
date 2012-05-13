@@ -26,6 +26,21 @@ module TopicsHelper
     link_to "", "#", :onclick => "return Topics.favorite(this);", 'data-id' => topic.id, :class => "icon small_#{class_name}", :title => link_title, :rel => "twipsy"
   end
 
+  def topic_follow_tag(topic)
+    return "" if current_user.blank?
+    return "" if topic.blank?
+    return "" if owner?(topic)
+    class_name = "follow"
+    if topic.follower_ids.include?(current_user.id)
+      class_name = "followed"
+    end
+    icon = content_tag("i", "", :class => "icon small_#{class_name}")
+    link_to raw([icon,"关注"].join(" ")), "#", :onclick => "return Topics.follow(this);", 
+                        'data-id' => topic.id, 
+                        'data-followed' => (class_name == "followed"),
+                        :rel => "twipsy"
+  end
+
   def render_topic_title(topic)
     return t("topics.topic_was_deleted") if topic.blank?
     link_to(topic.title, topic_path(topic), :title => topic.title)

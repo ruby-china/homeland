@@ -1,6 +1,10 @@
 <%
   reply = notification.reply
   topic = reply.topic
+  action_label = ""
+  if !owner?(topic)
+    action_label = "关注"
+  end
 %>
 <td class="face">
   <%= user_avatar_tag(reply.user, :normal) %>
@@ -10,7 +14,7 @@
     <span class="user">
       <%= user_name_tag(reply.user) %>
     </span>
-    回复了你的主题：
+    回复了你<%= action_label %>的主题：
     <%= render_topic_title(topic) %>
     <% if !notification.read? %>
       <span class="new label warning">新</span>

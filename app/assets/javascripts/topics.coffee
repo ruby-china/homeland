@@ -122,6 +122,26 @@ window.Topics =
          $(el).attr("class","icon small_bookmarked")
     false
 
+  follow : (el) ->
+    topic_id = $(el).data("id")
+    followed = $(el).data("followed")
+    if followed 
+      $.ajax
+        url : "/topics/#{topic_id}/unfollow"
+        type : "POST"
+        success : (res) ->
+          $(el).data("followed", false)
+          $("i",el).attr("class", "icon small_follow")
+    else
+      $.ajax
+        url : "/topics/#{topic_id}/follow"
+        type : "POST"
+        success : (res) ->
+          $(el).data("followed", true)
+          $("i",el).attr("class", "icon small_followed")
+    false
+
+
 # pages ready
 $(document).ready ->
   $("textarea").bind "keydown","ctrl+return",(el) ->

@@ -13,8 +13,8 @@ group :assets do
 end
 
 # 上传组件
-gem 'carrierwave', '0.5.7'
-gem 'carrierwave-mongoid', '0.1.2', :require => 'carrierwave/mongoid'
+gem 'carrierwave', '0.6.2'
+gem 'carrierwave-mongoid', '0.2.0', :require => 'carrierwave/mongoid'
 gem 'carrierwave-upyun', '0.1.3'
 gem 'mini_magick','3.3'
 
@@ -78,7 +78,7 @@ gem 'simple_form', :git => "git://github.com/plataformatec/simple_form.git"
 gem 'bootstrap-rails', :require => 'bootstrap-rails', :git => 'git://github.com/xdite/bootstrap-rails.git'
 
 # 全文搜索
-gem 'sunspot_rails',  "~> 1.3.0"
+gem 'sunspot_rails',  "~> 1.3.2"
 gem 'sunspot_solr'
 
 gem 'daemon-spawn'

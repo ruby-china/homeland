@@ -12,7 +12,6 @@ window.Topics =
     txtBox.val(before_text + src_merged + source.slice(caret_pos+1, source.count))
     txtBox.caretPos(caret_pos+src_merged.length)
     txtBox.focus()
-    $("#add_image").jDialog.close()
 
   # 上传图片
   initUploader : () ->
@@ -24,11 +23,8 @@ window.Topics =
       url : "/photos"
       type : "POST"
       beforeSend : () ->
-        console.log "........"
         $("#topic_add_image").hide()
         $("#topic_add_image").before("<span class='loading'>上传中...</span>")
-      complete : () ->
-        console.log "complete."
       success : (result, status, xhr) ->
         $("#topic_add_image").parent().find("span").remove()
         $("#topic_add_image").show()
@@ -157,7 +153,7 @@ window.Topics =
 $(document).ready ->
   $("textarea").bind "keydown","ctrl+return",(el) ->
     if $(el.target).val().trim().length > 0
-      $("#reply form").submit()
+      $("#reply > form").submit()
     return false
 
   Topics.initCloseWarning($("textarea.closewarning"))

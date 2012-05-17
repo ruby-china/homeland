@@ -8,7 +8,6 @@
 #= require bootstrap-popover
 #= require bootstrap-modal
 #= require will_paginate
-#= require jquery.jdialog
 #= require jquery.timeago
 #= require jquery.timeago.settings
 #= require jquery.hotkeys

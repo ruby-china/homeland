@@ -57,11 +57,7 @@ RubyChina::Application.routes.draw do
     resources :replies
   end
 
-  resources :photos do
-    collection do
-      get :tiny_new
-    end
-  end
+  resources :photos
   resources :likes
 
   match "/search" => "search#index", :as => :search

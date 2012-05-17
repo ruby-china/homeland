@@ -1,6 +1,9 @@
 <div class="editor_toolbar">
   <div class="icons pull-right">
-    <%= link_to("", "#", :onclick => "return Topics.addImageClick();", :id => "add_image", :rel => "twipsy", :title => t("topics.add_image"), :class => "icon small_image")%>
+    <%= link_to("", "#", :id => "topic_add_image", :rel => "twipsy", :title => t("topics.add_image"), :class => "icon small_image")%>
+    <form>
+      <input type="file" id="topic_upload_images"/>
+    </form>
   </div>
   <ul class="pills" style="clear:none;">
     <li class="edit active"><%= link_to(t("common.editor_toolbar_edit"), "#") %></li>

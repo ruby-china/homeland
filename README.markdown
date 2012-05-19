@@ -12,30 +12,35 @@ Status](https://secure.travis-ci.org/ruby-china/ruby-china.png?branch=master&.pn
 
 and run:
 
-    cp config/config.yml.default config/config.yml
-    cp config/mongoid.yml.default config/mongoid.yml
-    cp config/redis.yml.default config/redis.yml
-    cp config/thin.yml.default config/thin.yml
-    bundle install
-    rake assets:precompile
-    rake db:seed
-    thin start -O -C config/thin.yml
-    ./script/resque start
-    bundle exec rake sunspot:solr:start
-    easy_install pygments # 或者 pip install pygments
-    rake db:migrate
+```bash
+cp config/config.yml.default config/config.yml
+cp config/mongoid.yml.default config/mongoid.yml
+cp config/redis.yml.default config/redis.yml
+cp config/thin.yml.default config/thin.yml
+bundle install
+rake assets:precompile
+rake db:seed
+thin start -O -C config/thin.yml
+./script/resque start
+bundle exec rake sunspot:solr:start
+easy_install pygments # 或者 pip install pygments
+rake db:migrate
+```
 
 or you can just this issue 
 
-
-    rake test:init
+```bash
+rake test:init
+```
 
 to prepare all the config files and start essential services.
 
 ## Deploy
 
-    $ cap deploy
-    $ cap production remote_rake:invoke task=db:setup
+```bash
+$ cap deploy
+$ cap production remote_rake:invoke task=db:setup
+```
 
 # Apply Google JSAPI
 

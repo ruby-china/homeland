@@ -22,7 +22,7 @@
   </li>
 </ul>
 <% else %>
-  <%= render_list :class => "nav", :id => "userbar" do |li|
+  <%= render_list :class => "nav pull-right", :id => "userbar" do |li|
     li << link_to( t("common.register"),new_user_registration_path)
     li << link_to( t("common.login"), new_user_session_path )
   end %>

@@ -34,7 +34,7 @@ gem 'will_paginate', '3.0.2'
 gem 'will_paginate_mongoid', '~> 1.0.2'
 
 # Bootstrap
-gem 'anjlab-bootstrap-rails', '>= 2.0', :require => 'bootstrap-rails'
+gem 'twitter-bootstrap-rails', '2.0.3'
 gem 'bootstrap-will_paginate', '0.0.3'
 gem 'bootstrap_helper'
 

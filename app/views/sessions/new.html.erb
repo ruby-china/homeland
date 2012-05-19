@@ -4,8 +4,8 @@
     <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
       <fieldset>
         <legend><%= t("common.login") %></legend>
-        <%= f.input :login %>
-        <%= f.input :password %>
+        <%= f.input :login, :input_html => { :style => "width:180px;" } %>
+        <%= f.input :password, :input_html => { :style => "width:180px;" } %>
         <% if devise_mapping.rememberable? -%>
         <div class="control-group checkbox optional">
           <label class="checkbox optional control-label"></label>

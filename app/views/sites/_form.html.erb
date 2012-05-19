@@ -1,5 +1,5 @@
 <div id="site" class="box form">
-<%= simple_form_for(@site, :wrapper => :inline ) do |f| %>
+<%= simple_form_for(@site) do |f| %>
   <%= render "/shared/error_messages", :target => @site  %>
   <fieldset>
     <legend><%= t("sites.create") %></legend>

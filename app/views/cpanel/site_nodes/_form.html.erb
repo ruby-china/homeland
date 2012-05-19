@@ -1,6 +1,6 @@
 <div id="cpanel_site_node" class="form">
 
-<%= simple_form_for([:cpanel,@site_node], :wrapper => :inline ) do |f| %>
+<%= simple_form_for([:cpanel,@site_node]) do |f| %>
   <%= render "/shared/error_messages", :target => @site_node  %>
   <fieldset>
     <legend><%= t("common.edit") %></legend>

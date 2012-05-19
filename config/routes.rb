@@ -93,8 +93,4 @@ RubyChina::Application.routes.draw do
   end
 
   mount RubyChina::API => "/"
-
-  if Rails.env.development?
-    mount UserMailer::Preview => 'mails/user'
-  end
 end

@@ -1,4 +1,3 @@
-require 'openid/store/filesystem'
 require 'openssl'
 module OpenSSL
   module SSL

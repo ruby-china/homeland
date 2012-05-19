@@ -16,7 +16,7 @@ end
 gem 'carrierwave', '0.6.2'
 gem 'carrierwave-mongoid', '0.2.0', :require => 'carrierwave/mongoid'
 gem 'carrierwave-upyun', '0.1.3'
-gem 'mini_magick','3.3'
+gem 'mini_magick','3.3', :require => false
 
 # Mongoid 辅助插件
 gem "mongoid", "2.4.8"
@@ -35,10 +35,7 @@ gem 'bootstrap-will_paginate', '0.0.3'
 
 # 三方平台 OAuth 验证登陆
 gem "omniauth", "~> 1.0.1"
-gem 'omniauth-openid', "~> 1.0.1"
 gem "omniauth-github", "~> 1.0.0"
-gem "omniauth-twitter", "~> 0.0.7"
-gem "omniauth-douban", :git => "git://github.com/ballantyne/omniauth-douban.git"
 
 # permission
 gem "cancan", "~> 1.6.7"
@@ -51,7 +48,6 @@ gem "redis-objects", "0.5.2"
 
 # Markdown 格式
 gem "redcarpet", "~> 2.0.0"
-gem 'hpricot', '~> 0.8.5'
 gem "pygments.rb", '~> 0.2.4'
 
 # YAML 配置信息
@@ -65,26 +61,20 @@ gem "resque_mailer", '2.0.2'
 
 # AWS Simple Email Server
 gem "aws-ses", "~> 0.4.3"
-gem 'mail_view', :git => 'git://github.com/37signals/mail_view.git'
-
-# 用于组合小图片
-gem "sprite-factory", "1.4.1"
 
 # 分享功能
 gem "social-share-button", "~> 0.0.3"
 
 # 表单 last commit: 2011-12-03
-gem 'simple_form', :git => "git://github.com/plataformatec/simple_form.git"
+gem 'simple_form', "2.0.2"
 gem 'bootstrap-rails', :require => 'bootstrap-rails', :git => 'git://github.com/xdite/bootstrap-rails.git'
 
 # 全文搜索
 gem 'sunspot_rails',  "~> 1.3.2"
 gem 'sunspot_solr'
 
-gem 'daemon-spawn'
-
 # 禁用 assets 日志
-gem 'quiet_assets', :git => 'git://github.com/AgilionApps/quiet_assets.git'
+gem 'quiet_assets', "1.0.1"
 
 # Github API
 gem 'ruby-github'
@@ -93,13 +83,14 @@ gem 'ruby-github'
 gem 'grape', :git => 'git://github.com/intridea/grape.git', :branch => 'frontier'
 
 group :development, :test do
-  gem 'capistrano', '2.9.0'
-  gem 'chunky_png', "1.2.5"
+  gem 'capistrano', '2.9.0', :require => false
+  # 用于组合小图片
+  gem "sprite-factory", "1.4.1", :require => false
+  gem 'chunky_png', "1.2.5", :require => false
   gem "memcache-client", "1.8.5"
-  gem 'rspec-rails', '~> 2.8.1'
+  gem 'rspec-rails', '~> 2.10.0'
   gem 'factory_girl_rails'
   gem 'thin'
-  gem "simplecov", :require => false
   gem "rspec-cells"
   gem "capybara"
   gem "sunspot-rails-tester"

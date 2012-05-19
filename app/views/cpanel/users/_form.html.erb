@@ -1,4 +1,4 @@
-<%= simple_form_for([:cpanel,@user], :html => { :enctype =>  "multipart/form-data" }, :wrapper => :inline) do |f| %>
+<%= simple_form_for([:cpanel,@user]) do |f| %>
   <%= render 'shared/error_messages', :target => @user %>
   <%= f.input :login %>
   <%= f.input :name %>

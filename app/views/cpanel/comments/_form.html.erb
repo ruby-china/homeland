@@ -1,4 +1,4 @@
-<%= simple_form_for([:cpanel,@comment], :wrapper => :inline) do |f| %>
+<%= simple_form_for([:cpanel,@comment]) do |f| %>
   <fieldset>
     <legend>Edit Comment</legend>
     <%= render "/shared/error_messages", :target => @comment %>

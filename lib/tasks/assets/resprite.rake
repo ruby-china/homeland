@@ -1,4 +1,5 @@
 require 'sprite_factory'
+require 'chunky_png'
 namespace :assets do
   desc 'recreate sprite images and css'
   task :resprite => :environment do

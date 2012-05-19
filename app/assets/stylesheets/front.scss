@@ -13,8 +13,8 @@
   margin-top:-43px;
   margin-right:10px;
   .icon { margin-bottom:-3px; }
-  a { width:auto; padding-left:18px; color:#B94E22;}
-  a:hover { text-decoration: none; color:#333;}
+  a.feed { width:auto; padding-left:18px; color:#B94E22;}
+  a.feed:hover { text-decoration: none; color:#333;}
 }
 
 .sidebar {
@@ -143,14 +143,12 @@
   .comment { 
     margin-bottom:10px;
     .info {
-      .user_avatar {
-        img { margin-bottom: -4px; }
-      }
       color:#999;
       font-size:12px;
       border-bottom:1px solid #eee;
       margin-bottom:5px;
-      padding:5px 0;
+      line-height:18px;
+      padding-bottom:3px;
     }
     .body {
       font-size:13px;
@@ -161,9 +159,13 @@
 .help-block ul { margin-bottom:0; }
 
 .editor_toolbar {
-  .icons { float:right;  margin-top:12px; }
+  position:relative;
+  margin-bottom:5px;
+  .icons { position:absolute; top:3px; right:0; }
   .pills {
     margin: 0;
+    list-style: none;
+    li { display:inline;}
     a {
       -moz-border-radius: 8px;
       -webkit-border-radius: 8px;
@@ -208,6 +210,7 @@
    ul {
        list-style: none;
        margin-bottom: 0; margin:0; }
+  label { line-height: 100%; padding-top: 8px; }
    li {
      line-height: 200%;
      font-size: 14px;

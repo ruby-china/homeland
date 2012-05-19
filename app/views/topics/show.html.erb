@@ -43,7 +43,7 @@
       <%= form_for(Reply.new, :remote => true,:url => topic_replies_path(@topic)) do |f| %>
         <%= f.text_area :body,:class => "topic_editor span10", :rows => "4", :tabindex => "1" %>
         <div class="submit_buttons">
-          <button type="submit" id="btn_reply" class="btn primary" tabindex="2"><%= t("topics.submit_reply")%></button><br />
+          <button type="submit" id="btn_reply" class="btn btn-primary" tabindex="2"><%= t("topics.submit_reply")%></button><br />
           <span class="help-inline">Ctrl+Enter</span>
         </div>
         

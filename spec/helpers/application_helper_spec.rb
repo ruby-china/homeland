@@ -6,19 +6,19 @@ describe ApplicationHelper do
     helper.notice_message.html_safe?.should == true
 
     controller.flash[:notice] = 'hello'
-    helper.notice_message.should == '<div class="alert-message success"><a href="#" class="close">x</a>hello</div>'
+    helper.notice_message.should == '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert">x</a>hello</div>'
     controller.flash[:notice] = nil
 
     controller.flash[:warning] = 'hello'
-    helper.notice_message.should == '<div class="alert-message warning"><a href="#" class="close">x</a>hello</div>'
+    helper.notice_message.should == '<div class="alert alert-warning"><a href="#" class="close" data-dismiss="alert">x</a>hello</div>'
     controller.flash[:warning] = nil
 
     controller.flash[:alert] = 'hello'
-    helper.notice_message.should == '<div class="alert-message alert"><a href="#" class="close">x</a>hello</div>'
+    helper.notice_message.should == '<div class="alert alert-alert"><a href="#" class="close" data-dismiss="alert">x</a>hello</div>'
     controller.flash[:alert] = nil
 
     controller.flash[:error] = 'hello'
-    helper.notice_message.should == '<div class="alert-message error"><a href="#" class="close">x</a>hello</div>'
+    helper.notice_message.should == '<div class="alert alert-error"><a href="#" class="close" data-dismiss="alert">x</a>hello</div>'
     controller.flash[:error] = nil
   end
 

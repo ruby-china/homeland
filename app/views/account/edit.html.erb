@@ -1,115 +1,55 @@
 <div class="content">
   <div class="box">
-    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :enctype =>  "multipart/form-data" }) do |f| %>
+    <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :enctype =>  "multipart/form-data" }) do |f| %>
+      <%= render "shared/error_messages", :target => resource if params[:by].blank? %> 
       <fieldset>
         <legend><%= t("users.personal_information")%></legend>
-          <% if params[:by].blank? %>
-              <%= render "shared/error_messages", :target => resource %> 
-          <% end %>
-          <div class="clearfix">
-            <%= f.label :name %>
-            <div class="input">
-              <%= f.text_field :name %>
+        <%= f.input :name %>
+        <%= f.input :avatar %>
+        <%= f.input :email, :input_html => { :class => "span6" } %>
+        <%= f.input :location, :input_html => { :class => "span3" } %>
+        <%= f.input :company, :input_html => { :class => "span3" } %>
+        <div class="control-group">
+          <%= f.label :github %>
+          <div class="controls">
+            <div class="input-prepend">
+              <span class="add-on">https://github.com/</span>
+              <%= f.text_field :github, :class => "small", :placeholder => "yourname" %>
             </div>
           </div>
-          <div class="clearfix">
-            <%= f.label :avatar %>
-            <div class="input">
-              <%= f.file_field :avatar %>
+        </div>
+        <div class="control-group">
+          <%= f.label :twitter %>
+          <div class="controls">
+            <div class="input-prepend">
+              <span class="add-on">http://twitter.com/</span>
+              <%= f.text_field :twitter, :class => "small", :placeholder => "yourname" %>
             </div>
           </div>
-          <div class="clearfix">
-            <%= f.label :email %>
-            <div class="input">
-              <%= f.text_field :email, :class => "span6" %>
-            </div>
-          </div>
-          <div class="clearfix">
-            <%= f.label :location %>
-            <div class="input">
-              <%= f.text_field :location, :class => "span3" %><br />
-              <span class="help-block"><%= t("users.please_use_chinese_city")%></span>
-            </div>
-          </div>
-          <div class="clearfix">
-            <%= f.label :company %>
-            <div class="input">
-              <%= f.text_field :company, :class => "span3" %>
-            </div>
-          </div>
-          <div class="clearfix">
-            <%= f.label :github %>
-            <div class="input">
-              <div class="input-prepend">
-                <span class="add-on">https://github.com/</span>
-                <%= f.text_field :github, :class => "small", :placeholder => "yourname" %>
-              </div>
-            </div>
-          </div>
-          <div class="clearfix">
-            <%= f.label :twitter %>
-            <div class="input">
-              <div class="input-prepend">
-                <span class="add-on">http://twitter.com/</span>
-                <%= f.text_field :twitter, :class => "small", :placeholder => "yourname" %>
-              </div>
-            </div>
-          </div>
-          <div class="clearfix">
-              <%= f.label :website %>
-              <div class="input">
-                <%= f.text_field :website, :class => "xxlarge", :placeholder => "http://" %>
-            </div>
-          </div>
-          <div class="clearfix">
-              <%= f.label :tagline %>
-              <div class="input">
-                <%= f.text_field :tagline, :class => "xxlarge" %>
-            </div>
-          </div>
-          <div class="clearfix">
-              <%= f.label :bio %>
-              <div class="input">
-                <%= f.text_area :bio, :class => "xxlarge", :rows => "6" %>
-            </div>
-          </div>
-          <div class="actions">
-              <%= f.submit "更新资料", :class => "btn primary", :disable_with => t("common.saving") %>
-          </div>
+        </div>
+        <%= f.input :website, :input_html => { :class => "xxlarge", :placeholder => "http://" } %>
+        <%= f.input :tagline, :input_html => { :class => "xxlarge" } %>
+        <%= f.input :bio, :as => :text, :input_html => { :class => "xxlarge", :rows => "6" } %>
+        <div class="form-actions">
+            <%= f.submit "更新资料", :class => "btn btn-primary", :disable_with => t("common.saving") %>
+        </div>
       </fieldset>
     <% end %>
   </div>
   <div class="box">
-    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name,:by => :pwd), :html => { :method => :put }) do |f| %>
+    <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name,:by => :pwd), :html => { :method => :put }) do |f| %>
+      <%= render "shared/error_messages", :target => resource if params[:by] == "pwd" %>
       <fieldset>
-          <legend><%= t("users.edit_password")%></legend>
-          <% if params[:by] == "pwd" %>
-            <%= render "shared/error_messages", :target => resource %>
-          <% end %>
-          <input type="hidden" name="user[:by]" value="pwd" />
-          <div class="clearfix">
-          <%= f.label :current_password %>
-          <div class="input">
-            <%= f.password_field :current_password %>
-          </div>
+        <legend><%= t("users.edit_password")%></legend>
+        <input type="hidden" name="user[:by]" value="pwd" />
+        <%= f.input :current_password %>
+        <%= f.input :password %>
+        <%= f.input :password_confirmation %>   
+        <div class="form-actions">
+          <%= f.submit "修改密码", :class => "btn btn-success", :disable_with => t("common.saving") %>
         </div>
-        <div class="clearfix">
-          <%= f.label :password %>
-          <div class="input">
-            <%= f.password_field :password %>
-          </div>
-        </div>
-        <div class="clearfix">
-          <%= f.label :password_confirmation %>
-          <div class="input">
-            <%= f.password_field :password_confirmation %>
-          </div>
-        </div>        
-          <div class="actions">
-              <%= f.submit "修改密码", :class => "btn success", :disable_with => t("common.saving") %>
-          </div>
-        </fieldset>
-      <% end %>
+      </fieldset>
+    <% end %>
   </div>
 </div>
 
@@ -143,7 +83,7 @@
   </div>
   <div class="box">
     <h2><%= t("users.delete_my_account")%></h2>
-    <p><%= t("users.dont_like_it")%> <%= link_to(t("users.delete_this_account"), registration_path(resource_name), :confirm => "删除后无法恢复，你确定吗?", :class => "btn danger", :method => :delete )%></p>
+    <p><%= t("users.dont_like_it")%> <%= link_to(t("users.delete_this_account"), registration_path(resource_name), :confirm => "删除后无法恢复，你确定吗?", :class => "btn btn-danger", :method => :delete )%></p>
   </div>
 </div>
 

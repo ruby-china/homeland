@@ -8,7 +8,7 @@
     <%= stylesheet_link_tag "mobile" %>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta content='True' name='HandheldFriendly' />
-    <meta content='width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;' name='viewport' />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <% end %>
   <meta name="keywords" content="<%= @meta_keywords %>" />
   <meta name="description" content="<%= @meta_description %>" />
@@ -18,19 +18,19 @@
   <%= auto_discovery_link_tag(:rss,feed_topics_url,:title => '订阅最新帖') %>
   <%= yield :node_feed_link %>
 </head>
-<%= render_body_tag %>
-  <div class="topbar" data-dropdown="dropdown">
-    <div class="topbar-inner">
+<body data-offset="50">
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
       <div class="container">
         <h3>
           <a href="/"><%= image_tag("text_logo.png") %></a>
         </h3>
-         <%= render_list :class => "nav" do |li|
+        <%= render_list :class => "nav" do |li|
            li << link_to(t("menu.topics"), topics_path)
            li << link_to(t("menu.wiki"), pages_path )
            li << link_to(t("menu.sites"), sites_path )
            li << link_to(t("menu.users"), users_path)
-         end %>
+        end %>
         <%= render "common/search_form" %>
         <%= render "common/user_nav" %>
       </div>

@@ -1,12 +1,6 @@
 #= require jquery
 #= require jquery_ujs
-#= require bootstrap-alerts
-#= require bootstrap-dropdown
-#= require bootstrap-tabs
-#= require bootstrap-twipsy
-#= require bootstrap-buttons
-#= require bootstrap-popover
-#= require bootstrap-modal
+#= require bootstrap
 #= require will_paginate
 #= require jquery.timeago
 #= require jquery.timeago.settings
@@ -23,11 +17,11 @@ window.App =
 
   # 警告信息显示, to 显示在那个dom前(可以用 css selector)
   alert : (msg,to) ->
-    $(to).before("<div data-alert class='alert-message'><a class='close' href='#'>X</a>#{msg}</div>")
+    $(to).before("<div class='alert'><a class='close' href='#' data-dismiss='alert'>X</a>#{msg}</div>")
 
   # 成功信息显示, to 显示在那个dom前(可以用 css selector)
   notice : (msg,to) ->
-    $(to).before("<div data-alert class='alert-message success'><a class='close' href='#'>X</a>#{msg}</div>")
+    $(to).before("<div class='alert alert-success'><a class='close' data-dismiss='alert' href='#'>X</a>#{msg}</div>")
 
   openUrl : (url) ->
     window.open(url)
@@ -74,46 +68,11 @@ window.App =
 
   initForDesktopView : () ->
     return if typeof(app_mobile) != "undefined"
-    $("a[rel=twipsy]").twipsy({ live: true })
-    $("a[rel=popover]").popover
-      live: true
-      html: true
+    $("a[rel=twipsy]").tooltip()
+    $("a[rel=popover]").popover()
 
     # 用户头像 Popover
-    $("a[rel=userpopover]").popover
-      live: true
-      html: true
-      placement: (tip, ele) ->
-        $element = $(ele)
-        pos = $.extend({}, $element.offset(),
-          width: ele.offsetWidth
-          height: ele.offsetHeight
-        )
-        actualWidth = tip.offsetWidth
-        actualHeight = tip.offsetHeight
-        boundTop = $(document).scrollTop()
-        boundLeft = $(document).scrollLeft()
-        boundRight = boundLeft + $(window).width()
-        boundBottom = boundTop + $(window).height()
-        elementAbove =
-          top: pos.top - actualHeight - this.options.offset
-          left: pos.left + pos.width / 2 - actualWidth / 2
-        elementBelow =
-          top: pos.top + pos.height + this.options.offset
-          left: pos.left + pos.width / 2 - actualWidth / 2
-        elementLeft =
-          top: pos.top + pos.height / 2 - actualHeight / 2
-          left: pos.left - actualWidth - this.options.offset
-        elementRight =
-          top: pos.top + pos.height / 2 - actualHeight / 2
-          left: pos.left + pos.width + this.options.offset
-        isWithinBounds = (elementPosition) ->
-          return boundTop < elementPosition.top && boundLeft < elementPosition.left && boundRight > (elementPosition.left + actualWidth) && boundBottom > (elementPosition.top + actualHeight)
-        return 'below' if isWithinBounds(elementBelow)
-        return 'right' if isWithinBounds(elementRight)
-        return 'left' if isWithinBounds(elementLeft)
-        return 'above' if isWithinBounds(elementAbove)
-        return 'below'
+    $("a[rel=userpopover]").popover()
 
     # CommentAble @ 回复功能
     commenters = []
@@ -131,7 +90,9 @@ $(document).ready ->
   App.initForDesktopView()
 
   $("abbr.timeago").timeago()
-  $(".alert-message").alert()
+  $(".alert").alert()  
+  $('.dropdown-toggle').dropdown()
+
 
   # 绑定评论框 Ctrl+Enter 提交事件
   $(".cell_comments_new textarea").bind "keydown","ctrl+return",(el) ->

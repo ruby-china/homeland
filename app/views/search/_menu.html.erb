@@ -1,4 +1,4 @@
-<%= render_list :class => "tabs" do |li|
+<%= render_list :class => "nav nav-tabs" do |li|
   li << link_to(t("menu.topics"), search_path(:q => params[:q]))
   li << link_to(t("menu.wiki"), search_wiki_path(:q => params[:q]))
 end %>

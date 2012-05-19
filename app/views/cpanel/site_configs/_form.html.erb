@@ -1,23 +1,11 @@
-<%= form_for([:cpanel,@site_config]) do |f| %>
+<%= simple_form_for([:cpanel,@site_config]) do |f| %>
+  <%= render 'shared/error_messages', :target => @site_config %>
   <fieldset>
-    <legend></legend>
-    <%= render 'shared/error_messages', :target => @site_config %>
-    <div class="clearfix">
-      <%= f.label :key %>
-      <div class="input">
-        <%= f.text_field :key, :class => "disabled", :disabled => "disabled" %>
-        <span class="help-inline"><%= t("cpanel.site_configs.please_do_not_modify_key")%></span>
-      </div>
-    </div>
-    <div class="clearfix">
-      <%= f.label :value %>
-      <div class="input">
-        <%= f.text_area :value, :class => "long", :rows => "20" %>
-        <span class="help-inline"></span>
-      </div>
-    </div>
-    <div class="actions">
-      <%= f.submit t("common.save"), :class => "btn primary", :disable_with => t("common.saving") %>
+    <legend><%= t("cpanel.site_configs.edit_setting")%></legend>
+    <%= f.input :key, :input_html => { :readonly => true } %>
+    <%= f.input :value, :as => :text, :input_html => { :class => "span8", :rows => "20" } %>
+    <div class="form-actions">
+      <%= f.submit t("common.save"), :class => "btn btn-primary", :disable_with => t("common.saving") %>
       <a href="<%= cpanel_site_configs_path %>" class="btn"><%= t("common.cancel") %></a>
     </div>
   </fieldset>

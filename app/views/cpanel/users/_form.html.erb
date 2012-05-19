@@ -5,13 +5,13 @@
   <%= f.input :email, :as => :email, :input_html => { :class => "xxlarge" } %>
   <%= f.input :location %>
   <%= f.input :github %>
-  <%= f.input :tagline, :input_html => { :class => "span13" } %>
-  <%= f.input :bio, :as => :text, :input_html => { :class => "span13", :style => "height:60px;" } %>
+  <%= f.input :tagline, :input_html => { :class => "span8" } %>
+  <%= f.input :bio, :as => :text, :input_html => { :class => "span8", :style => "height:60px;" } %>
   <%= f.input :website, :as => :url, :input_html => { :class => "xxlarge" } %>
-  <div class="clearfix">
-    <label><%= t("common.avatar")%></label>
-    <div class="input">
-    <%= user_avatar_tag(@user, :large) %>
+  <div class="control-group">
+    <label class="control-label"><%= t("common.avatar")%></label>
+    <div class="controls">
+      <%= user_avatar_tag(@user, :large) %>
     </div>
   </div>
   <%= f.input :verified, :as => :boolean, :hint => t("cpanel.users.trust_user_can_modify_wiki") %>
@@ -23,9 +23,9 @@
   <%= f.input :last_sign_in_ip, :readonly => true %>
   <%= f.input :current_sign_in_ip, :readonly => true %>
   <% if not @user.authorizations.blank? %>
-  <div class="clearfix">
-    <%= f.label :authorizations %>
-    <table class="input" style="display:block;">
+  <div class="control-group">
+    <%= f.label :authorizations, :class => "control-label" %>
+    <table class="controls" style="display:block;">
       <% @user.authorizations.each do |auth| %>
         <tr>
           <td style="width:100px;"><%= auth.provider %></td>
@@ -33,15 +33,15 @@
         </tr>
       <% end %>
     </table>
-    <% end %>
   </div>
-  <div class="actions">
+  <% end %>
+  <div class="form-actions">
     <% if @user.state != User::STATE[:deleted] %>
       <div class="pull-right">
-        <%= link_to '删除此用户', cpanel_user_path(@user), :confirm => '警告！此动作无法撤销，确定要删除么?', :method => :delete, :class => "btn danger"  %>
+        <%= link_to '删除此用户', cpanel_user_path(@user), :confirm => '警告！此动作无法撤销，确定要删除么?', :method => :delete, :class => "btn btn-danger"  %>
       </div>
     <% end %>
-    <%= f.submit t("common.save"), :class => "btn primary", :disable_with => t("common.saving") %>
+    <%= f.submit t("common.save"), :class => "btn btn-primary", :disable_with => t("common.saving") %>
     或者
     <%= link_to 'Back', cpanel_users_path %>
   </div>

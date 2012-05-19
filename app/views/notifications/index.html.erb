@@ -13,7 +13,7 @@
   <% if @notifications.blank? %>
     <div class="no_result" style="padding:80px 0;">暂无通知</div>
   <% else %>
-    <table>
+    <table class="table">
       <tbody>
         <% @notifications.each do |notification| -%>
           <tr id="<%= notification.anchor %>">

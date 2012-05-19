@@ -18,7 +18,7 @@
     <% if owner? @note %>
       <div class="buttons">
         <a href="<%= edit_note_path(@note) %>" class="btn"><%= t("common.edit")%></a>
-        <%= link_to t("common.delete"), note_path(@note),:confirm => t("common.confirm_delete"), :method => :delete, :class => "btn danger"  %>
+        <%= link_to t("common.delete"), note_path(@note),:confirm => t("common.confirm_delete"), :method => :delete, :class => "btn btn-danger"  %>
       </div>
     <% end %>
   </div>

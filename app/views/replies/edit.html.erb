@@ -11,23 +11,21 @@
 </div>
 <div class="content">
     <div class="box">
-        <%= form_for([@topic,@reply]) do |f| %>
+      <%= simple_form_for([@topic,@reply]) do |f| %>
+        <%= render "shared/error_messages", :target => @reply %>
         <fieldset>
           <legend><%= t("reply.edit_reply")%></legend>
-      <%= render "shared/error_messages", :target => @reply %>  
-      <div class="edit_tools input">
-        <%= render "/topics/editor_toolbar" %>
-      </div>
-      <div class="clearfix">
-        <%= f.label :body %>
-        <div class="input">
-          <%= f.text_area :body, :class => "topic_editor xxlarge", :rows => "20" %>
-        </div>
-      </div>
-      <div class="actions">
-        <%= f.submit t("common.save"), :class => "btn primary", :disable_with => t("common.saving") %>
-        <a href="<%= topic_path(@topic) %>" class="btn"><%= t("common.cancel") %></a>
-      </div>
-    <% end %>
+          <div class="control-group edit_tools">
+            <label class="control-label"></label>
+            <div class="controls">
+              <%= render "/topics/editor_toolbar" %>
+            </div>
+          </div>
+          <%= f.input :body, :as => :text, :input_html => { :class => "topic_editor xxlarge", :rows => "20" } %>
+          <div class="form-actions">
+            <%= f.submit t("common.save"), :class => "btn btn-primary", :disable_with => t("common.saving") %>
+            <a href="<%= topic_path(@topic) %>" class="btn"><%= t("common.cancel") %></a>
+          </div>
+        <% end %>
     </div>
 </div>

@@ -1,23 +1,27 @@
 body {
-  
+  padding:0 10px;
 }
-.topbar h3 a, .topbar .brand{
-  display:none;
-}
-.topbar input { display:none; }
-.container { width:auto; margin:0 10px; }
-.container-fluid { width:auto; min-width:0; }
+.container,
+.navbar-fixed-top .container  { width:auto; padding: 0; min-width:0; }
 .sidebar { display:none; }
 .container-fluid > .content {
   margin:0;
 }
-.topbar div > ul, .nav {
-  margin:0;
-  li {
-    a { padding: 10px 6px 11px; }
+
+.navbar {
+  margin-left:-10px; margin-right:-10px;
+  .navbar-inner { padding:0 10px;}
+  .navbar-search,
+  h3 { display:none; }
+  .nav {
+    margin:0;
+    li {
+      a { padding: 10px 6px 11px; }
+    }
   }
 }
-.userinfo {
+#userbar {
+  float:right;
   .role {
     float: right;
     margin-right: 10px;
@@ -46,7 +50,7 @@ table.node_topics .replies {
 .feed_link {
   margin-top:-49px;
   margin-right:0;
-  a {color:#B70000;}
+  a.feed {color:#B70000;}
 }
 #reply.form {
   textarea { width: 98%; height: 80px; }

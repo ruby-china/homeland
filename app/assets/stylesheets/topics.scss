@@ -52,6 +52,11 @@
   ul { margin:0 auto; float:right; }
 }
 
+form .node_select {
+  margin-left:0; 
+  select { width:180px;}
+}
+
 
 #topic_show {
   h1 { font-size:20px; color:#333; margin-top:6px; text-align: left; line-height:100%;margin-bottom:8px;}
@@ -176,7 +181,7 @@
   }
 }
 
-.edit_tools { text-align:left; margin-bottom:2px }
+.form-horizontal .edit_tools { text-align:left; margin-bottom:0px }
 
 .totals ul li { line-height:150%;}
 

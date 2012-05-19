@@ -1,11 +1,11 @@
 <%= simple_form_for @page do |f| %>
+<%= render "shared/error_messages", :target => @page %>
 <fieldset>
   <legend><%= t("pages.edit_wiki_page")%></legend>
   <%= render "shared/error_messages", :target => @page %>
 
   <%= f.input :slug, :hint => "http://#{Setting.domain}/wiki/:slug"%>
   <%= f.input :title, :input_html => { :class => "xxlarge" } %>
-
   <% if I18n.default_locale == "zh-CN" %>
   <%= f.input :body, :as => :text,
               :input_html => { :class => "long", :rows => "30" },
@@ -17,7 +17,6 @@
               :hint => "請使用 Markdown 格式編寫,可以試試用 <a href='http://mouapp.com' target='_blank'>Mou</a> 這個 App 来編寫。".html_safe
   %>
   <% end %>
-
   <% if not @page.new_record? %>
   <%= f.input :change_desc , :as => :text,
               :input_html => { :class => "long", :rows => "2" },
@@ -25,7 +24,7 @@
   %>
 
   <% end %>
-  <div class="actions">
+  <div class="form-actions">
     <%= f.submit t("common.save"), :class => "btn primary", :disable_with => t("common.saving") %>
   </div>
 </fieldset>

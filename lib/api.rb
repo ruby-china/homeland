@@ -15,14 +15,12 @@ module RubyChina
     resource :topics do
 
       # Get active topics list
-      # params[:size] could be specified to limit the results
-      # params[:size]: default is 15, max is 100
+      # params[:page]
+      # params[:per_page]: default is 30
       # Example
-      #   /api/topics/index.json?size=30
+      #   /api/topics/index.json?page=1&per_page=15
       get do
-        @topics = Topic.last_actived
-          .limit(page_size)
-          .includes(:user)
+        @topics = Topic.last_actived.includes(:user).paginate(:page => params[:page], :per_page => params[:per_page]||30)
         present @topics, :with => APIEntities::Topic
       end
 

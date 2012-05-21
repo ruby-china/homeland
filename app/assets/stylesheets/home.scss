@@ -17,8 +17,7 @@
     width:450px; 
     ul {
       margin:0;
-      list-style-position: inside;
-      
+      list-style:none;
       li { height:22px; line-height:22px; overflow: hidden; white-space: nowrap; text-overflow:ellipsis;}
       a { margin-right:5px; }
     }

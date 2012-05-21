@@ -7,7 +7,7 @@ gem "rails_autolink", ">= 1.0.4"
 gem "jquery-atwho-rails", "0.1.3"
 
 group :assets do
-  gem 'sass-rails', "  ~> 3.2.3"
+  gem 'sass-rails', "~> 3.2.3"
   gem 'coffee-rails', "~> 3.2.1"
   gem 'uglifier', '>= 1.0.3'
 end
@@ -34,9 +34,9 @@ gem 'will_paginate', '3.0.2'
 gem 'will_paginate_mongoid', '~> 1.0.2'
 
 # Bootstrap
-gem 'twitter-bootstrap-rails', '2.0.3'
+gem 'anjlab-bootstrap-rails', '2.0.3.2', :require => 'bootstrap-rails'
 gem 'bootstrap-will_paginate', '0.0.3'
-gem 'bootstrap_helper'
+gem 'bootstrap_helper', "1.4.1"
 
 # 三方平台 OAuth 验证登陆
 gem "omniauth", "~> 1.0.1"
@@ -72,11 +72,14 @@ gem "social-share-button", "~> 0.0.3"
 
 # 表单
 gem 'simple_form', "2.0.2"
-gem 'bootstrap-rails', :require => 'bootstrap-rails', :git => 'git://github.com/xdite/bootstrap-rails.git'
 
 # 全文搜索
 gem 'sunspot_rails',  "~> 1.3.2"
 gem 'sunspot_solr'
+
+# 用于组合小图片
+gem "sprite-factory", "1.4.1", :require => false
+gem 'chunky_png', "1.2.5", :require => false
 
 # 禁用 assets 日志
 gem 'quiet_assets', "1.0.1"
@@ -89,9 +92,6 @@ gem 'grape', :git => 'git://github.com/intridea/grape.git', :branch => 'frontier
 
 group :development, :test do
   gem 'capistrano', '2.9.0', :require => false
-  # 用于组合小图片
-  gem "sprite-factory", "1.4.1", :require => false
-  gem 'chunky_png', "1.2.5", :require => false
   gem "memcache-client", "1.8.5"
   gem 'rspec-rails', '~> 2.10.0'
   gem 'factory_girl_rails'

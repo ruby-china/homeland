@@ -1,6 +1,5 @@
 /*
  *= require bootstrap
- *= require jquery.jdialog
  *= require wikistyle
  *= require jquery.chosen
  *= require highlight
@@ -70,30 +69,6 @@ code { background:none; }
 
 fieldset { margin-bottom:0;}
 fieldset legend { font-size:16px; font-weight:bold;}
-.actions { margin-bottom:0;}
-.buttons { margin-top:10px; }
-form {
-  margin-bottom:0;
-
-  .input {
-    > [class*="span"] {
-      float: left;
-      display: inline;
-      margin-right: 10px;
-
-      input, textarea, select, .uneditable-input {
-        width: 100%;
-      }
-      input[type=checkbox],
-      input[type=radio],
-      input[type=button],
-      input[type=reset],
-      input[type=submit] {
-        width: auto;
-      }
-    }
-  }
-}
 
 .pagination { margin:0; margin-top:10px; }
 

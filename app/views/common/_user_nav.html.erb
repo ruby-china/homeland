@@ -1,7 +1,7 @@
 <% if current_user %>
 <ul class="nav pull-right" id="userbar">
   <%
-    badge_class = "badge-inverse"
+    badge_class = ""
     badge_class = "badge-error" if @unread_notify_count > 0
   %>
   <li<%= " class=active" if ["notifications"].index(params[:controller]) %>>

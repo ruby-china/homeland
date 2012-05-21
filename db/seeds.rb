@@ -69,6 +69,11 @@ SiteConfig.save_default("site_index_html",<<-eos
 eos
 )
 
+# 自定有 HTML head 区域的内容
+SiteConfig.save_default("custom_head_html",<<-eos
+<link rel="dns-prefetch" href="//assets.youhost.com">
+eos
+)
 
 # ========================= init Section, Node =========================
 

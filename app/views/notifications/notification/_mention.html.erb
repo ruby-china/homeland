@@ -18,7 +18,7 @@
       <%= render_topic_title(topic) %>
       提及你：
       <% if !notification.read? %>
-        <span class="new label warning">新</span>
+        <span class="new label label-warning">新</span>
       <% end %>
     </h3>
     <%- if reply.present? -%>

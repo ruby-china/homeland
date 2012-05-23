@@ -32,8 +32,8 @@
     }
   }
   .body {
-   margin-bottom:10px; margin-top:8px;
-   img { max-width:690px;}
+    margin-bottom:10px; margin-top:8px;
+    img { max-width:690px;}
   }
   .tools { 
     text-align:right; height:16px; overflow:hidden;
@@ -160,8 +160,14 @@ form .node_select {
 /* Topic & Reply body format */
 .topics .topic .body, 
 #replies .reply .body {
-  line-height:180%; font-size:14px; text-overflow: ellipsis; word-wrap: break-word; 
-  a:link, a:visited { color:#0069D6; text-decoration: none; }
+  line-height:160%; font-size:14px; text-overflow: ellipsis; word-wrap: break-word; 
+  p { font-size:14px; line-height:160%; }
+  blockquote {
+    p { font-size:13px; color:#666; font-weight:normal; line-height:150%; }
+  }
+  code { margin:0 2px; font-family:Monaco,Menlo, "Courier New", monospace;}
+  pre { font-family:Monaco,Menlo,"Courier New", monospace; }
+  a:link, a:visited { font-size:13px; color:#0069D6; text-decoration: none; }
   a:hover { text-decoration: underline; color:#00438A; }
   a.at_floor { color:#376B43; }
   a.at_user { 

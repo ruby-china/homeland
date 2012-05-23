@@ -17,7 +17,7 @@
     回复了你<%= action_label %>的主题：
     <%= render_topic_title(topic) %>
     <% if !notification.read? %>
-      <span class="new label warning">新</span>
+      <span class="new label label-warning">新</span>
     <% end %>
   </h3>
   <%- if reply.present? -%>

@@ -10,6 +10,7 @@ group :assets do
   gem 'sass-rails', "~> 3.2.3"
   gem 'coffee-rails', "~> 3.2.1"
   gem 'uglifier', '>= 1.0.3'
+  gem 'therubyracer', :platforms => :ruby
 end
 
 # 上传组件
@@ -88,8 +89,8 @@ gem 'quiet_assets', "1.0.1"
 gem 'ruby-github'
 
 # API
-gem 'grape', :git => 'git://github.com/intridea/grape.git', :branch => 'frontier'
-
+gem 'grape' #, :git => 'git://github.com/intridea/grape.git', :branch => 'frontier'
+ 
 group :development, :test do
   gem 'capistrano', '2.9.0', :require => false
   gem "memcache-client", "1.8.5"

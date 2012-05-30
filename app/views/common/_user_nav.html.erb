@@ -5,16 +5,16 @@
     badge_class = "badge-error" if @unread_notify_count > 0
   %>
   <li<%= " class=active" if ["notifications"].index(params[:controller]) %>>
-    <a href="<%= notifications_path %>"><spanc class="badge <%= badge_class %>"><%= @unread_notify_count %></span></a>
+    <a href="<%= notifications_path %>"><span class="badge <%= badge_class %>"><%= @unread_notify_count %></span></a>
   </li>
   <li class="dropdown" id="user_menu">
     <%= link_to(raw("#{current_user.login} <b class='caret'></b>"), "#user_menu", :class => "dropdown-toggle", "data-toggle" => "dropdown") %>
     <%= render_list :class => "dropdown-menu" do |li|
       li << link_to(t("menu.my_home_page"), user_path(current_user.login) )
       unless params[:controller].match(/cpanel/)
-        li << link_to(t("menu.edit_account_path"),edit_user_registration_path)
+        li << link_to(t("menu.edit_account_path"), edit_user_registration_path)
         li << link_to(t("menu.notes"), notes_path )
-        li << link_to(t("menu.likes"),favorites_user_path(current_user.login))
+        li << link_to(t("menu.likes"), favorites_user_path(current_user.login))
         li << link_to(t("menu.cpanel"), "/cpanel") if admin?
       end
       li << link_to(t("common.logout"), destroy_user_session_path )
@@ -23,7 +23,7 @@
 </ul>
 <% else %>
   <%= render_list :class => "nav pull-right", :id => "userbar" do |li|
-    li << link_to( t("common.register"),new_user_registration_path)
+    li << link_to( t("common.register"), new_user_registration_path)
     li << link_to( t("common.login"), new_user_session_path )
   end %>
 <% end %>

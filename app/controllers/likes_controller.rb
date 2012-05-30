@@ -22,7 +22,7 @@ class LikesController < ApplicationController
       return false
     end
 
-    klass = eval(params[:type])
+    klass = params[:type].constantize
     @item = klass.find_by_id(params[:id])
     if @item.blank?
       render :text => "-2"

@@ -1,14 +1,14 @@
 <%= simple_form_for @topic do |f| %>
-  <%= render "shared/error_messages", :target => @topic %>  
+  <%= render "shared/error_messages", :target => @topic %>
   <fieldset>
     <legend><%= @topic.new_record? ? t("topics.create_topic") : t("topics.edit_topic") %></legend>
     <%= f.input :title do %>
-      <span class="node_select">
+      <span class="node_select span2">
         <%= render_topic_node_select_tag(@topic) %>
       </span>
-      <%= f.text_field :title, :class => "span4", :style => "width:325px;" %>
+      <%= f.text_field :title, :class => "span4" %>
     <% end %>
-    
+
     <div class="control-group edit_tools">
       <label class="control-label"></label>
       <div class="controls">

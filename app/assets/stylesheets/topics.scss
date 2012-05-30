@@ -10,7 +10,7 @@
 .sidebar p { margin-bottom:8px;}
 
 .topics {
-  .topic {  
+  .topic {
     .avatar_large { width:64px; }
     .avatar { width:56px; margin-left:10px; }
     .infos { padding-right:74px; }
@@ -18,13 +18,13 @@
     .title { font-size:14px; }
     .info { color:#999; margin-bottom:2px; }
     a:link, a:visited { color:#999; text-decoration: underline; }
-    .replies { 
-       width:70px; margin-right:10px; text-align:right; vertical-align:middle; 
-       a.count,a.count:visited { line-height: 12px; font-weight: bold; color: white; 
-         background-color: #1c7fdb; display: inline-block; 
-         padding: 2px 10px 2px 10px; 
+    .replies {
+       width:70px; margin-right:10px; text-align:right; vertical-align:middle;
+       a.count,a.count:visited { line-height: 12px; font-weight: bold; color: white;
+         background-color: #1c7fdb; display: inline-block;
+         padding: 2px 10px 2px 10px;
          -moz-border-radius: 12px; -webkit-border-radius: 12px; border-radius: 12px;
-         margin: 18px 12px 0px 0px; text-decoration: none; 
+         margin: 18px 12px 0px 0px; text-decoration: none;
        }
        a.count:hover { color:write; background-color:#1F8AEE; }
        a.state_true:link,a.state_true:visited { background:#DDD; }
@@ -32,13 +32,13 @@
     }
   }
   .body {
-   margin-bottom:10px; margin-top:8px;
-   img { max-width:690px;}
+    margin-bottom:10px; margin-top:8px;
+    img { max-width:690px;}
   }
-  .tools { 
+  .tools {
     text-align:right; height:16px; overflow:hidden;
     a:link,
-    a:visited { 
+    a:visited {
       i { position:relative; margin-bottom:-1px; }
       text-decoration: none;
     }
@@ -47,20 +47,21 @@
   tr.topic td.replies { text-align:right; width:50px; font-size:14px; color:green;font-weight:bold; }
 }
 
-.pagination { 
-  text-align:center; 
+.pagination {
+  text-align:center;
   ul { margin:0 auto; float:right; }
 }
 
 form .node_select {
-  margin-left:0; 
+  margin-left:0;
+  margin-right:6px;
+  width:143px;
   select { width:180px;}
 }
 
-
 #topic_show {
   h1 { font-size:20px; color:#333; margin-top:6px; text-align: left; line-height:100%;margin-bottom:8px;}
-  .infos { 
+  .infos {
     border-bottom:1px solid #ddd;
     padding-bottom:6px; margin-bottom:8px;
    }
@@ -71,7 +72,7 @@ form .node_select {
 /* topics list in node page */
 
 .node_topics {
-  margin-bottom: 16px; 
+  margin-bottom: 16px;
   tr td {
     padding: 8px; }
   tr.head td {
@@ -91,8 +92,8 @@ form .node_select {
 
 .no_result { margin-bottom:20px; text-align:center; }
 
-#node_info { 
-  margin:0 -10px; padding:0 10px; border-bottom:1px solid #ddd; 
+#node_info {
+  margin:0 -10px; padding:0 10px; border-bottom:1px solid #ddd;
   h1 { text-align:right; font-size:15px; }
   h2 { line-height:100%; display:inline; font-size:16px; margin-right:10px;}
   .desc { color:#999; }
@@ -110,14 +111,14 @@ form .node_select {
     }
   }
   .sorts {
-    text-align:right; color:#999; 
+    text-align:right; color:#999;
     padding:3px 0 10px 0;
     ul { display:inline; margin:0; padding:0; }
-    li { 
+    li {
       display:inline; margin:0 5px;
     }
     li.active {
-      a { 
+      a {
         color:#333;
         border-bottom:1px dotted #ddd;
         &:hover { text-decoration:none; }
@@ -128,11 +129,11 @@ form .node_select {
 
 #replies {
   .total { padding-bottom:6px; color:#999; }
-  .reply { 
+  .reply {
     border-top:1px solid #DDD; padding:8px 10px; margin:0 -10px;
     .face { padding-right:8px; width:48px; margin-left:0; }
     .infos { padding-left:58px; }
-    .info { 
+    .info {
       margin-top:4px; color:#999;height:20px;
       a:link,
       a:visited { color:#999; text-decoration: underline;}
@@ -140,7 +141,7 @@ form .node_select {
       .time { float:right; text-align:right; }
       a.reply_link img { vertical-align:middle;}
     }
-    .body { 
+    .body {
       img { max-width:622px;}
     }
   }
@@ -158,14 +159,20 @@ form .node_select {
 
 
 /* Topic & Reply body format */
-.topics .topic .body, 
+.topics .topic .body,
 #replies .reply .body {
-  line-height:180%; font-size:14px; text-overflow: ellipsis; word-wrap: break-word; 
-  a:link, a:visited { color:#0069D6; text-decoration: none; }
+  line-height:160%; font-size:14px; text-overflow: ellipsis; word-wrap: break-word;
+  p { font-size:14px; line-height:160%; }
+  blockquote {
+    p { font-size:13px; color:#666; font-weight:normal; line-height:150%; }
+  }
+  code { margin:0 2px; font-family:Monaco,Menlo, "Courier New", monospace;}
+  pre { font-family:Monaco,Menlo,"Courier New", monospace; }
+  a:link, a:visited { font-size:13px; color:#0069D6; text-decoration: none; }
   a:hover { text-decoration: underline; color:#00438A; }
   a.at_floor { color:#376B43; }
-  a.at_user { 
-    color:#333; font-weight:bold; 
+  a.at_user {
+    color:#333; font-weight:bold;
     i { color:#777; }
   }
   h4 { font-weight:bold; font-size:15px; line-height:100%; margin:0; color:#222; margin-top:20px; border-left:15px solid #eee; padding-left:5px; margin-bottom:8px;  }
@@ -187,8 +194,8 @@ form .node_select {
 
 #topic_new_tip li { margin-bottom:6px;}
 
-#topics_recent { 
-  h2 { 
+#topics_recent {
+  h2 {
     margin:0 -10px; padding:0 10px;
     font-size:14px; color:#999; line-height:100%;
     border-bottom:1px solid #ddd; padding-bottom:8px;
@@ -197,7 +204,7 @@ form .node_select {
     margin-right:6px;
     a { color:#333; background:#eee; -webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px; padding:3px;font-size:11px; }
   }
-  .info { font-size:12px; color:#999; 
+  .info { font-size:12px; color:#999;
     margin-left:6px;
     a { color:#999; text-decoration: underline;}
   }
@@ -216,7 +223,7 @@ form .node_select {
   }
   .editor_toolbar {
     width:588px;
-  } 
+  }
 }
 
 .sidebar {

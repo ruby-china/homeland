@@ -2,7 +2,7 @@ body {
   padding:0 10px;
 }
 .container,
-.navbar-fixed-top .container  { width:auto; padding: 0; min-width:0; }
+.navbar-fixed-top .container  { width:auto; padding: 0; min-width:0; max-width:940px;}
 .sidebar { display:none; }
 .container-fluid > .content {
   margin:0;

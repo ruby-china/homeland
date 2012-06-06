@@ -63,7 +63,7 @@ class Reply
 
   # 是否热门
   def popular?
-    self.likes_count >= 5
+    self.likes_count >= 10
   end
 
   def destroy

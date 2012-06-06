@@ -8,11 +8,13 @@ class Reply
   include Mongoid::SoftDelete
   include Mongoid::MarkdownBody
   include Mongoid::Mentionable
+  include Mongoid::Likeable
 
   field :body
   field :body_html
   field :source
   field :message_id
+  field :likes_count, :type => Integer, :default => 0
 
   belongs_to :user, :inverse_of => :replies
   belongs_to :topic, :inverse_of => :replies
@@ -57,6 +59,11 @@ class Reply
       next if uid == self.user_id
       Notification::TopicReply.create :user_id => uid, :reply => self
     end
+  end
+
+  # 是否热门
+  def popular?
+    self.likes_count >= 5
   end
 
   def destroy

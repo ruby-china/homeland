@@ -22,7 +22,6 @@ class Topic
   # 回复过的人的 ids 列表
   field :follower_ids, :type => Array, :default => []
   field :suggested_at, :type => DateTime
-  field :likes_count, :type => Integer, :default => 0
   # 最后回复人的用户名 - cache 字段用于减少列表也的查询
   field :last_reply_user_login
   # 节点名称 - cache 字段用于减少列表也的查询

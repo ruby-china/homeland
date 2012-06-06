@@ -29,7 +29,6 @@ class User
   field :tagline
   field :topics_count, :type => Integer, :default => 0
   field :replies_count, :type => Integer, :default => 0
-  field :likes_count, :type => Integer, :default => 0
   # 用户密钥，用于客户端验证
   field :private_token
   field :favorite_topic_ids, :type => Array, :default => []
@@ -48,7 +47,6 @@ class User
   has_many :posts
   has_many :notifications, :class_name => 'Notification::Base', :dependent => :delete
   has_many :photos
-  has_many :likes
 
   def read_notifications(notifications)
     unread_ids = notifications.find_all{|notification| !notification.read?}.map(&:_id)
@@ -191,16 +189,18 @@ class User
 
   # 收藏东西
   def like(likeable)
-    Like.find_or_create_by(:likeable_id => likeable.id,
-                           :likeable_type => likeable.class,
-                           :user_id => self.id)
+    return false if likeable.blank?
+    return false if likeable.liked_by_user?(self)
+    likeable.push(:liked_user_ids, self.id)
+    likeable.inc(:likes_count, 1)
   end
 
   # 取消收藏
   def unlike(likeable)
-    Like.where(:likeable_id => likeable.id,
-               :likeable_type => likeable.class,
-               :user_id => self.id).destroy
+    return false if likeable.blank?
+    return false if not likeable.liked_by_user?(self)
+    likeable.pull(:liked_user_ids, self.id)
+    likeable.inc(:likes_count, -1)
   end
 
   # 收藏话题

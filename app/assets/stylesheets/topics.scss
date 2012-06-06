@@ -258,8 +258,10 @@ form .node_select {
     ul {
       li {
         line-height:130%;
+        list-style:none;
+        margin-bottom:8px;
+        img { margin-top:-3px; }
         a {
-          color:#AA2D19;
           font-size:12px;
         }
       }

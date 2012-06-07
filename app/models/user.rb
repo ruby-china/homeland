@@ -122,7 +122,7 @@ class User
   # 注册邮件提醒
   after_create :send_welcome_mail
   def send_welcome_mail
-    UserMailer.welcome(self.id).deliver
+    UserMailer.delay.welcome(self.id)
   end
 
   # 保存用户所在城市

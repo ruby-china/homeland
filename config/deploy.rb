@@ -1,5 +1,6 @@
 # coding: utf-8
 require "bundler/capistrano"
+require "sidekiq/capistrano"
 
 set :application, "ruby-china"
 set :repository,  "git://github.com/ruby-china/ruby-china.git"
@@ -44,10 +45,6 @@ task :link_shared_files, :roles => :web do
   run "ln -sf #{deploy_to}/shared/config/*.yml #{deploy_to}/current/config/"
   run "ln -sf #{deploy_to}/shared/config/unicorn.rb #{deploy_to}/current/config/"
   run "ln -sf #{deploy_to}/shared/config/initializers/secret_token.rb #{deploy_to}/current/config/initializers"
-end
-
-task :restart_resque, :roles => :web do
-  run "cd #{deploy_to}/current/; RAILS_ENV=production ./script/resque stop; RAILS_ENV=production ./script/resque start"
 end
 
 task :mongoid_create_indexes, :roles => :web do

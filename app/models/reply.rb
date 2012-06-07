@@ -43,10 +43,10 @@ class Reply
   end
 
   after_create do
-    Reply.delay.async_send_topic_reply_notification(self.id)
+    Reply.delay.send_topic_reply_notification(self.id)
   end
 
-  def self.async_send_topic_reply_notification(reply_id)
+  def self.send_topic_reply_notification(reply_id)
     reply = Reply.find_by_id(reply_id)
     topic = reply.topic
     # 给发帖人发回帖通知

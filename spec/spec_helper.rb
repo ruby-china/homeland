@@ -12,6 +12,7 @@ require 'rspec/rails'
 require 'rspec/autorun'
 
 require 'capybara/rspec'
+require 'sidekiq/testing'
 
 Devise.stretches = 1
 Rails.logger.level = 4

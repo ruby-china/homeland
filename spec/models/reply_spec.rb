@@ -13,7 +13,7 @@ describe Reply do
       topic = Factory :topic, :user => user
       lambda do
         Factory :reply, :topic => topic
-      end.should change(user.notifications.unread, :count)
+      end.should change(Mongoid::DelayedDocument.jobs, :size).by(1)
 
       lambda do
         Factory(:reply, :topic => topic).destroy
@@ -37,10 +37,8 @@ describe Reply do
       # 正常状况
       it "should work" do
         lambda do
-          lambda do
-            Factory :reply, :topic => t, :user => user
-          end.should change(u1.notifications.unread.where(:_type => 'Notification::TopicReply'), :count).by(1)
-        end.should change(u2.notifications.unread.where(:_type => 'Notification::TopicReply'), :count).by(1)
+          Factory :reply, :topic => t, :user => user
+        end.should change(Mongoid::DelayedDocument.jobs, :size).by(1)
       end
 
       # TODO: 需要更多的测试，测试 @ 并且有关注的时候不会重复通知，回复时候不会通知自己
@@ -54,6 +52,14 @@ describe Reply do
       reply.body = "foobar"
       reply.save
       topic.updated_at.should_not == old_updated_at
+    end
+
+    it "should send_topic_reply_notification work" do
+      topic = Factory :topic, :user => user
+      reply = Factory :reply, :topic => topic
+      lambda do
+        Reply.send_topic_reply_notification(reply.id)
+      end.should change(user.notifications.unread.where(:_type => 'Notification::TopicReply'), :count).by(1)
     end
   end
 

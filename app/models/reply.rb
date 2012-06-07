@@ -39,25 +39,30 @@ class Reply
   after_update :update_parent_topic_updated_at
   def update_parent_topic_updated_at
     if not self.topic.blank?
-      self.topic.update_attribute(:updated_at, Time.now)
+      self.topic.delay.set(:updated_at, Time.now)
     end
   end
 
-  after_create :send_topic_reply_notification
-  def send_topic_reply_notification
+  after_create do
+    Reply.delay.async_send_topic_reply_notification(self.id)
+  end
+
+  def self.async_send_topic_reply_notification(reply_id)
+    reply = Reply.find_by_id(reply_id)
+    topic = reply.topic
     # 给发帖人发回帖通知
-    if self.user != topic.user && !mentioned_user_ids.include?(topic.user_id)
-      Notification::TopicReply.create :user => topic.user, :reply => self
-      self.notified_user_ids << topic.user_id
+    if reply.user != topic.user && !reply.mentioned_user_ids.include?(topic.user_id)
+      Notification::TopicReply.create :user_id => topic.user_id, :reply_id => reply.id
+      reply.notified_user_ids << topic.user_id
     end
 
     # 给关注者发通知
-    self.topic.follower_ids.each do |uid|
+    topic.follower_ids.each do |uid|
       # 排除同一个回复过程中已经提醒过的人
-      next if self.notified_user_ids.include?(uid)
+      next if reply.notified_user_ids.include?(uid)
       # 排除回帖人
-      next if uid == self.user_id
-      Notification::TopicReply.create :user_id => uid, :reply => self
+      next if uid == reply.user_id
+      Notification::TopicReply.create :user_id => uid, :reply_id => reply.id
     end
   end
 

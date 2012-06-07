@@ -14,7 +14,6 @@ class Reply
   field :body_html
   field :source
   field :message_id
-  field :likes_count, :type => Integer, :default => 0
 
   belongs_to :user, :inverse_of => :replies
   belongs_to :topic, :inverse_of => :replies

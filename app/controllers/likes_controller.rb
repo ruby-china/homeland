@@ -17,7 +17,7 @@ class LikesController < ApplicationController
   def find_likeable
     @success = false
     @element_id = "likeable_#{params[:type]}_#{params[:id]}"
-    if not params[:type].in?(['Topic'])
+    if not params[:type].in?(['Topic','Reply'])
       render :text => "-1"
       return false
     end

@@ -39,7 +39,7 @@ describe User do
       user_for_delete1.authorizations.should == []
     end
   end
-  
+
   describe "location" do
     it "should not get results when user location not set" do
       Location.count == 0
@@ -50,7 +50,7 @@ describe User do
       user2.location = "Hongkong"
       Location.count == 2
     end
-    
+
     it "should update users_count when user location changed" do
       old_name = user.location
       new_name = "HongKong"
@@ -141,22 +141,53 @@ describe User do
       user.private_token.should_not == old_token
     end
   end
-  
+
   describe "favorite topic" do
     it "should favorite a topic" do
       user.favorite_topic(topic.id)
       user.favorite_topic_ids.include?(topic.id).should == true
-      
+
       user.favorite_topic(nil).should == false
       user.favorite_topic(topic.id.to_s).should == false
       user.favorite_topic_ids.include?(topic.id).should == true
     end
-    
+
     it "should unfavorite a topic" do
       user.unfavorite_topic(topic.id)
       user.favorite_topic_ids.include?(topic.id).should == false
       user.unfavorite_topic(nil).should == false
       user.unfavorite_topic(topic.id.to_s).should == true
+    end
+  end
+
+  describe "Like" do
+    let(:topic) { Factory :topic }
+    let(:user)  { Factory :user }
+    let(:user2)  { Factory :user }
+
+    describe "like topic" do
+      it "can like/unlike topic" do
+        user.like(topic)
+        topic.reload
+        topic.likes_count.should == 1
+        topic.liked_user_ids.should include(user.id)
+
+        user2.like(topic)
+        topic.reload
+        topic.likes_count.should == 2
+        topic.liked_user_ids.should include(user2.id)
+
+        user2.unlike(topic)
+        topic.reload
+        topic.likes_count.should == 1
+        topic.liked_user_ids.should_not include(user2.id)
+      end
+
+      it "can tell whether or not liked by a user" do
+        topic.liked_by_user?(user).should be_false
+        user.like(topic)
+        topic.liked_by_user?(user).should be_true
+      end
     end
   end
 end

@@ -39,6 +39,7 @@
     text-align:right; height:16px; overflow:hidden;
     a:link,
     a:visited {
+      margin-left:5px;
       i { position:relative; margin-bottom:-1px; }
       text-decoration: none;
     }
@@ -130,22 +131,31 @@ form .node_select {
 #replies {
   .total { padding-bottom:6px; color:#999; }
   .reply {
+    &.light { background:#F7F2FC; }
+    &.popular { background:#fffce9; }
     border-top:1px solid #DDD; padding:8px 10px; margin:0 -10px;
     .face { padding-right:8px; width:48px; margin-left:0; }
     .infos { padding-left:58px; }
     .info {
       margin-top:4px; color:#999;height:20px;
       a:link,
-      a:visited { color:#999; text-decoration: underline;}
-      .name { float:left; }
-      .time { float:right; text-align:right; }
+      a:visited { color:#999; }
+      .name {
+        float:left;
+        a { text-decoration:underline; margin-right:8px; }
+      }
+      .opts {
+        float:right; text-align:right;
+        a { margin-left:5px; }
+        a:hover { text-decoration:none; }
+        i.icon { margin-bottom:-1px; }
+      }
       a.reply_link img { vertical-align:middle;}
     }
     .body {
       img { max-width:622px;}
     }
   }
-  .reply.light { background:#F7F2FC;}
 }
 
 #reply.form {
@@ -258,8 +268,10 @@ form .node_select {
     ul {
       li {
         line-height:130%;
+        list-style:none;
+        margin-bottom:8px;
+        img { margin-top:-3px; }
         a {
-          color:#AA2D19;
           font-size:12px;
         }
       }

@@ -24,7 +24,7 @@ class TopicsCell < BaseCell
   # 热门节点
   cache :sidebar_hot_nodes, :expires_in => 30.minutes
   def sidebar_hot_nodes
-    @hot_nodes = Node.hots.limit(30)
+    @hot_nodes = Node.hots.limit(10)
     render
   end
 
@@ -52,6 +52,18 @@ class TopicsCell < BaseCell
       minimum_term_frequency 5
       paginate :page => 1, :per_page => 10
     end.results
+    render
+  end
+
+  # 节点下面的最新话题
+  cache :sidebar_for_node_recent_topics, :expires_in => 20.minutes do |cell, args|
+    args[:topic].id
+  end
+  def sidebar_for_node_recent_topics(args = {})
+    topic = args[:topic]
+    limit = topic.replies_count > 20 ? 20 : topic.replies_count
+    limit = 1 if limit == 0
+    @topics = topic.node.topics.recent.limit(limit)
     render
   end
 

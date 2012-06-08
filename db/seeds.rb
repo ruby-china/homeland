@@ -75,6 +75,9 @@ SiteConfig.save_default("custom_head_html",<<-eos
 eos
 )
 
+# 要在论坛首页列表隐藏的节点,以逗号隔开
+SiteConfig.save_default("node_ids_hide_in_topics_index","")
+
 # ========================= init Section, Node =========================
 
 # s1 = Section.create(:name => "Ruby")

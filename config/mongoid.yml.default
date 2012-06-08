@@ -1,6 +1,7 @@
 defaults: &defaults
   host: '127.0.0.1'
   identity_map_enabled: true
+  pool_size: 5
   # slaves:
   #   - host: slave1.local
   #     port: 27018
@@ -19,6 +20,6 @@ test:
 production:
   database: ruby_china
   host: '127.0.0.1'
-  # port: 
+  # port:
   # username: ''
   # password: ''

@@ -1,8 +1,16 @@
 # coding: utf-8
 module Mongoid
   module Likeable
+    extend ActiveSupport::Concern
+
+    included do
+      field :liked_user_ids, :type => Array, :default => []
+      field :likes_count, :type => Integer, :default => 0
+    end
+
     def liked_by_user?(user)
-      Like.where(:likeable_type => self.class, :likeable_id => self.id, :user_id => user.id).count > 0
+      return false if user.blank?
+      self.liked_user_ids.include?(user.id)
     end
   end
 end

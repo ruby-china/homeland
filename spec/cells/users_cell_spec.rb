@@ -12,7 +12,7 @@ describe UsersCell do
 
     it "should limit the number of users rendered" do
       30.times { Factory :user }
-      render_cell(:users, :active_users).should have_css("div.name", :count => 20)
+      render_cell(:users, :active_users).should have_css("div.name", :count => 30)
     end
   end
 
@@ -23,7 +23,7 @@ describe UsersCell do
 
     it "should limit the number of users rendered" do
       30.times { Factory :user }
-      render_cell(:users, :recent_join_users).should have_css("div.name", :count => 20)
+      render_cell(:users, :recent_join_users).should have_css("div.name", :count => 30)
     end
   end
 end

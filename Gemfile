@@ -61,8 +61,8 @@ gem "settingslogic", "~> 2.0.6"
 gem "cells", "3.7.1"
 
 # 队列
-gem "resque", "~> 1.20.0", :require => "resque/server"
-gem "resque_mailer", '2.0.2'
+gem "sidekiq", "1.1.0"
+gem "devise-async"
 
 # AWS Simple Email Server
 gem "aws-ses", "~> 0.4.3"

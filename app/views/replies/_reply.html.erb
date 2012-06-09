@@ -1,10 +1,13 @@
-<div class="reply" id="reply<%= reply_counter + 1 %>">
+<div class="reply<%= ' popular' if reply.popular? %>" id="reply<%= reply_counter + 1 %>">
   <div class="pull-left face"><%= user_avatar_tag(reply.user, :normal) %></div>
   <div class="infos">
     <div class="info">
-      <span class="name"><%= user_name_tag(reply.user) %></span>
-      <span class="time">
+      <span class="name">
+        <%= user_name_tag(reply.user) %>
         <%= reply_counter + 1 %><%= t("common.floor")%>, <%= raw t("common.reply_at", :time => timeago(reply.created_at)) %>
+      </span>
+      <span class="opts">
+        <%= likeable_tag(reply) %>
         <% if can?(:update,reply) %>
           <%= link_to("", edit_topic_reply_path(@topic,reply), :class => "edit icon small_edit", 'data-uid' => reply.user_id, :title => "修改回帖")%>
         <% end %>
@@ -17,5 +20,7 @@
     <div class="body">
       <%= raw reply.body_html %>
     </div>
+    <span class="opts">
+    </span>
   </div>
 </div>

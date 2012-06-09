@@ -14,7 +14,7 @@
       url:'<%= Setting.external_feed_url%>'}];
 
     new GFdynamicFeedControl(feeds, 'feedGadget',
-                             {numResults : 10, stacked : true,
+                             {numResults : 5, stacked : true,
                               title: "<%= Setting.external_feed_name %>"});
   }
   google.load("feeds", "1");

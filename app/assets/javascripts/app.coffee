@@ -82,7 +82,8 @@ window.App =
     $("a[rel=popover]").popover()
 
     # 用户头像 Popover
-    $("a[rel=userpopover]").popover()
+    $("a[rel=userpopover]").live "mouseover", () ->
+      $(this).popover("show")
 
     # CommentAble @ 回复功能
     commenters = []

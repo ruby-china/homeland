@@ -1,6 +1,6 @@
 <% content_for :sitemap do %>
-  <a href="<%= cpanel_pages_path %>">Wiki</a> &gt; 
-  <a href="<%= cpanel_page_path(params[:page_id]) %>">Page:<%= params[:page_id] %></a> &gt; 
+  <a href="<%= cpanel_pages_path %>">Wiki</a> &gt;
+  <a href="<%= cpanel_page_path(params[:page_id]) %>">Page:<%= params[:page_id] %></a> &gt;
   <span class="current">版本历史</span>
 <% end %>
 <h1>Wiki 列表</h1>
@@ -25,7 +25,7 @@
     <td><%= user_name_tag(item.user) %></td>
     <td><%= l item.created_at, :format => :long %></td>
     <td><%= link_to 'View', cpanel_page_version_path(item.page_id, item.id) %>
-    <%= link_to 'Revert', revert_cpanel_page_version_path(item.page_id, item.id), :confirm => 'Are you sure?', :method => :post %></td>
+    <%= link_to 'Revert', revert_cpanel_page_version_path(item.page_id, item.id), 'data-confirm' => 'Are you sure?', :method => :post %></td>
   </tr>
 <% end %>
 </table>

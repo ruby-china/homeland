@@ -5,7 +5,7 @@
     <%= f.input :key, :input_html => { :readonly => true } %>
     <%= f.input :value, :as => :text, :input_html => { :class => "span8", :rows => "20" } %>
     <div class="form-actions">
-      <%= f.submit t("common.save"), :class => "btn btn-primary", :disable_with => t("common.saving") %>
+      <%= f.submit t("common.save"), :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %>
       <a href="<%= cpanel_site_configs_path %>" class="btn"><%= t("common.cancel") %></a>
     </div>
   </fieldset>

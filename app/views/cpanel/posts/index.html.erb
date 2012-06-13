@@ -21,7 +21,7 @@
     <td><%= l post.created_at,:format => :short %></td>
     <td><%= render_post_state_s(post) %></td>
     <td><%= link_to '', edit_cpanel_post_path(post), :class => "icon small_edit" %>
-    <%= link_to '', cpanel_post_path(post), :confirm => "Are you sure?", :method => :delete , :class => "icon small_delete"%></td>
+    <%= link_to '', cpanel_post_path(post), 'data-confirm' => "Are you sure?", :method => :delete , :class => "icon small_delete"%></td>
   </tr>
 <% end %>
 </table>

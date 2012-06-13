@@ -9,7 +9,7 @@
     <%= f.input :source, :input_html => { :class => "span3" }, :placeholder => "Blog" %>
     <%= f.input :source_url, :input_html => {:class => "xxlarge"} , :placeholder => "http://" %>
     <div class="form-actions">
-      <%= f.submit "投稿", :class => "btn btn-primary", :disable_with => t("common.saving") %>
+      <%= f.submit "投稿", :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %>
     </div>
   </fieldset>
 <% end %>

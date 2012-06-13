@@ -7,7 +7,7 @@
 
 <div id="notifications" class="box">
   <div class="tools">
-    <%= link_to t("common.clear"), clear_notifications_path, :class => 'btn btn-danger', :method => :post, :disable_with => '清空中...' %>
+    <%= link_to t("common.clear"), clear_notifications_path, :class => 'btn btn-danger', :method => :post, 'data-disable-with' => '清空中...' %>
     <h1 class="pull-right">提醒</h1>
   </div>
   <% if @notifications.blank? %>

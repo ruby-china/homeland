@@ -4,14 +4,30 @@ module RubyChina
   module APIEntities
     class User < Grape::Entity
       expose :_id, :name, :login, :location, :website, :bio, :tagline, :github_url
+      # deprecated: gravatar_hash, use avatar_url for user avatar
       expose(:gravatar_hash) { |model, opts| Digest::MD5.hexdigest(model.email || "") }
-      expose(:avatar_url) { |model, opts| model.avatar? ? model.avatar.url(:normal) : "" }
+      expose(:avatar_url) do |model, opts|
+        if model.avatar?
+          model.avatar.url(:normal)
+        else
+          hash = Digest::MD5.hexdigest(model.email || "")
+          "#{Setting.gravatar_proxy}/avatar/#{hash}.png?s=48"
+        end
+      end
     end
 
     class DetailUser < Grape::Entity
       expose :_id, :name, :login, :email, :location, :company, :twitter, :website, :bio, :tagline, :github_url
+      # deprecated: gravatar_hash, use avatar_url for user avatar
       expose(:gravatar_hash) { |model, opts| Digest::MD5.hexdigest(model.email || "") }
-      expose(:avatar_url) { |model, opts| model.avatar? ? model.avatar.url(:normal) : "" }
+      expose(:avatar_url) do |model, opts|
+        if model.avatar?
+          model.avatar.url(:normal)
+        else
+          hash = Digest::MD5.hexdigest(model.email || "")
+          "#{Setting.gravatar_proxy}/avatar/#{hash}.png?s=48"
+        end
+      end
       expose(:topics, :unless => { :collection => true }) do |model, opts|
         model.topics.recent.limit(opts[:topics_limit] ||= 1).as_json(:only => [:_id, :title, :created_at, :node_name, :replies_count])
       end

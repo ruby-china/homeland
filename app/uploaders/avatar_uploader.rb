@@ -15,4 +15,8 @@ class AvatarUploader < BaseUploader
   version :big do
     process :resize_to_fill => [120, 120]
   end
+
+  def extension_white_list
+    %w(jpg jpeg png)
+  end
 end

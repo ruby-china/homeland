@@ -59,9 +59,10 @@ RSpec.configure do |config|
 
   config.include Devise::TestHelpers, :type => :controller
   config.after do
-    Mongoid.database.collections.each do |coll|
-      coll.remove if coll.name !~ /system/
-    end
+    Topic.collection.database.cleanup
+    # Mongoid.database.collections.each do |coll|
+    #   coll.remove if coll.name !~ /system/
+    # end
     Rails.cache.clear
   end
 

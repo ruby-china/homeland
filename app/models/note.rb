@@ -12,11 +12,11 @@ class Note
   field :publish, :type => Boolean, :default => false
   belongs_to :user
 
-  index :user_id
+  index :user_id => 1
 
   attr_accessible :title, :body, :publish
 
-  default_scope :order => "id desc"
+  default_scope desc(:id)
 
   before_save :auto_set_value
   def auto_set_value

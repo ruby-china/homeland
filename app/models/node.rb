@@ -3,7 +3,6 @@ class Node
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::BaseModel
-  cache
 
   field :name
   field :summary
@@ -13,7 +12,7 @@ class Node
   has_many :topics
   belongs_to :section
 
-  index :section_id
+  index :section_id => 1
 
   validates_presence_of :name, :summary, :section
   validates_uniqueness_of :name

@@ -1,25 +1,28 @@
 defaults: &defaults
-  host: '127.0.0.1'
-  identity_map_enabled: true
-  pool_size: 5
-  # slaves:
-  #   - host: slave1.local
-  #     port: 27018
-  #   - host: slave2.local
-  #     port: 27019
+  options:
+    identity_map_enabled: true
 
 development:
   <<: *defaults
-  database: ruby_china_dev
+  sessions:
+    default:
+      hosts:
+        - 127.0.0.1:27017
+      database: ruby_china_dev
 
 test:
   <<: *defaults
-  database: ruby_china_test
+  sessions:
+    default:
+      hosts:
+        - 127.0.0.1:27017
+      database: ruby_china_test
 
 # set these environment variables on your prod server
 production:
-  database: ruby_china
-  host: '127.0.0.1'
-  # port:
-  # username: ''
-  # password: ''
+  <<: *defaults
+  sessions:
+    default:
+      hosts:
+        - 127.0.0.1:27017
+      database: ruby_china

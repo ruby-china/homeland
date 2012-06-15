@@ -22,8 +22,8 @@ class Reply
   counter_cache :name => :user, :inverse_of => :replies
   counter_cache :name => :topic, :inverse_of => :replies
 
-  index :user_id
-  index :topic_id
+  index :user_id => 1
+  index :topic_id => 1
 
   attr_accessible :body
 

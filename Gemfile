@@ -93,6 +93,7 @@ group :development, :test do
   gem "memcache-client", "1.8.5"
   gem 'rspec-rails', '~> 2.10.0'
   gem 'factory_girl_rails'
+  gem 'database_cleaner'
   gem 'thin'
   gem "rspec-cells"
   gem "capybara"

@@ -8,7 +8,7 @@ class TopicsCell < BaseCell
     "index_sections:#{CacheVersion.section_node_updated_at}"
   end
   def index_sections
-    @sections = Section.all
+    @sections = Section.all #.includes(:nodes)
     render
   end
 

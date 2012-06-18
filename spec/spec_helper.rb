@@ -13,6 +13,8 @@ require 'rspec/autorun'
 
 require 'capybara/rspec'
 require 'sidekiq/testing'
+require 'database_cleaner'
+
 
 Devise.stretches = 1
 Rails.logger.level = 4
@@ -58,12 +60,11 @@ RSpec.configure do |config|
   end
 
   config.include Devise::TestHelpers, :type => :controller
-  config.after do
-    Topic.collection.database.cleanup
-    # Mongoid.database.collections.each do |coll|
-    #   coll.remove if coll.name !~ /system/
-    # end
-    Rails.cache.clear
+
+  config.before(:each) do
+    DatabaseCleaner.orm = :mongoid
+    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.clean
   end
 
   config.include RSpec::Rails::RequestExampleGroup, :type => :request, :example_group => {

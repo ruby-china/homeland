@@ -18,7 +18,8 @@ RubyChina::Application.routes.draw do
       :registrations => :account,
       :sessions => :sessions,
       :omniauth_callbacks => "users/omniauth_callbacks"
-    } do
+    }
+  devise_scope :users do
     get "account/update_private_token" => "account#update_private_token", :as => :update_private_token_account
   end
 

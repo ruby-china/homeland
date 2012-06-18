@@ -21,69 +21,76 @@
    h2 {
      font-size: 12px;
      line-height: 100%;
-     color: #999; 
+     color: #999;
      text-align: center;
      border-bottom:1px solid #ddd;
      margin:0 -10px 10px -10px;
      padding-bottom:8px;
    }
-   ul, ol { 
+   ul, ol {
      margin:0;
      list-style-position: inside;
    }
    p { margin-bottom: 6px; }
    li { margin-bottom: 4px; }
-   
-} 
+
+}
 
 /* 记事本 */
 #notes{
-   .total {
-     text-align: right;
-     color: #999;
-     margin-top: -8px;
-     padding-bottom: 5px;
-     border-bottom: 1px solid #DDD;
-     margin-bottom: 10px; }
-   
-   ul.list {
-     list-style: none;
-     margin: 0;
-     padding: 0; 
-     li {
-       margin-bottom: 10px; 
-       a {
-         font-size: 14px;
-         font-weight: bold;
-         color: #333; }
-       .info {
-         color: #999;
-         margin-top: 5px; }
-     }
-     
-     .note{
-         .body {
-            font-size: 14px;
-            line-height: 180%;
-            min-height: 350px; }
-         .info {
-           border-bottom: 1px solid #DDD;
-           padding: 5px 0;
-           color: #999; }
-          div { margin-bottom: 8px; }
-          .urls { text-align: right; 
-             input { cursor: text; }
-          }
-          
-          
-     }
-   }   
-} 
-  
+  h1 { text-align:left; }
+  .total {
+    color: #999;
+    margin-top: -8px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #DDD;
+    margin-bottom: 10px;
+    position:relative;
+    .btn { float:right; margin-top:-20px; }
+  }
+
+  ul.list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    li {
+      margin-bottom: 10px;
+      a {
+        font-size: 14px;
+        font-weight: bold;
+        color: #333;
+      }
+      .info {
+        color: #999;
+        margin-top: 5px;
+      }
+    }
+  }
+
+ .note {
+    .body {
+      font-size: 14px;
+      line-height: 180%;
+      min-height: 350px;
+    }
+    .info {
+      border-bottom: 1px solid #DDD;
+      padding: 5px 0;
+      color: #999;
+    }
+    div { margin-bottom: 8px; }
+    .urls {
+      text-align: right;
+      input { cursor: text; }
+    }
+    .buttons { margin-top:30px; text-align:right;}
+  }
+}
+
 .sidebar {
-   .nodes { line-height:180%; 
-      a { display:inline-block; margin-right:8px;}
-   }
+  .nodes { line-height:180%;
+    a { display:inline-block; margin-right:8px;}
+  }
 }
 
 .markdown_content { }
@@ -101,7 +108,7 @@
      -webkit-box-shadow: rgba(0, 0, 0, 0.07) 0 1px 2px inset;
      -webkit-border-radius: 3px;
      -moz-border-radius: 3px;
-     border-radius: 3px; 
+     border-radius: 3px;
      code {
        padding: 0!important;
        font-size: 12px!important;
@@ -111,12 +118,12 @@
    pre::-webkit-scrollbar {
      height: 8px;
      width: 8px; }
-   
+
    pre::-webkit-scrollbar-thumb:horizontal {
      width: 25px;
      background-color: #ccc;
      -webkit-border-radius: 4px; }
-     
+
    pre::-webkit-scrollbar-track-piece {
      margin-bottom: 10px;
      background-color: #e5e5e5;
@@ -124,7 +131,7 @@
      border-bottom-right-radius: 4px 4px;
      border-top-left-radius: 4px 4px;
      border-top-right-radius: 4px 4px; }
-   
+
    pre::-webkit-scrollbar-thumb:vertical {
      height: 25px;
      background-color: #ccc;
@@ -140,7 +147,7 @@
 }
 
 .cell_comments {
-  .comment { 
+  .comment {
     margin-bottom:10px;
     .info {
       color:#999;
@@ -204,9 +211,9 @@
      color: #999;
      line-height: 100%;
      margin-bottom: 10px;
-     text-align: center; 
+     text-align: center;
    }
-     
+
    ul {
        list-style: none;
        margin-bottom: 0; margin:0; }
@@ -215,7 +222,7 @@
      line-height: 200%;
      font-size: 14px;
      padding: 8px 0;
-     border-top: 1px solid #DDD; 
+     border-top: 1px solid #DDD;
      position: relative;
      overflow: auto;
      label {
@@ -241,14 +248,14 @@
     font-size: 12px;
     color: #999;
     line-height: 100%;
-    text-align: center; 
+    text-align: center;
     padding-bottom:10px;
-    border-bottom: 1px solid #DDD; 
+    border-bottom: 1px solid #DDD;
   }
   ul { list-style: none; margin:0; padding:0; text-align:center; }
-  li { 
+  li {
     margin:0; padding:0;
-    display:inline; 
+    display:inline;
     a {
       margin-right:10px; margin-top:10px;
       display:inline-block;

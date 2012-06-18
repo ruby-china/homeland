@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/huacnlee/mongoid_colored_logger.git
+  revision: b6bf70abc264d9c093a78816334a969cab585946
+  specs:
+    mongoid_colored_logger (0.1.1)
+
+GIT
   remote: git://github.com/intridea/grape.git
   revision: d24bd2f758544244ac65f19c69b94f0ffc34e71b
   branch: frontier
@@ -344,6 +350,7 @@ DEPENDENCIES
   mini_magick (= 3.3)
   mongoid (= 3.0.0.rc)
   mongoid_auto_increment_id (= 0.5.0)
+  mongoid_colored_logger!
   mongoid_rails_migrations (~> 0.0.14)
   omniauth (~> 1.0.1)
   omniauth-github (~> 1.0.0)

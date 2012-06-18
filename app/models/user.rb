@@ -7,7 +7,6 @@ class User
   include Mongoid::BaseModel
   include Redis::Objects
   extend OmniauthCallbacks
-  cache
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
@@ -35,10 +34,10 @@ class User
 
   mount_uploader :avatar, AvatarUploader
 
-  index :login
-  index :email
-  index :location
-  index :private_token, :sparse => true
+  index :login => 1
+  index :email => 1
+  index :location => 1
+  index({private_token: 1},{ sparse: true })
 
   has_many :topics, :dependent => :destroy
   has_many :notes

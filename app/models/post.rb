@@ -22,9 +22,9 @@ class Post
   field :comments_count, :type => Integer, :default => 0
   belongs_to :user
 
-  index :tags
-  index :user_id
-  index :state
+  index :tags => 1
+  index :user_id => 1
+  index :state => 1
 
   counter :hits, :default => 0
 

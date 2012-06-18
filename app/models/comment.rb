@@ -14,9 +14,9 @@ class Comment
 
   attr_accessible :commentable_type, :commentable_id, :body
 
-  index :user_id
-  index :commentable_type
-  index :commentable_id
+  index :user_id => 1
+  index :commentable_type => 1
+  index :commentable_id => 1
 
   validates_presence_of :body
 

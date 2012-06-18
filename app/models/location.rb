@@ -9,12 +9,12 @@ class Location
 
   validates_uniqueness_of :name, :case_sensitive => false
 
-  index :name
+  index :name => 1
 
   def self.find_by_name(name)
     return nil if name.blank?
     name = name.downcase.strip
-    self.where(:name => /^#{name}$/i).first
+    self.where(:name => name).first
   end
 
   def self.find_or_create_by_name(name)

@@ -10,7 +10,7 @@ class SiteConfig
   field :key
   field :value
 
-  index :key
+  index :key => 1
 
   validates_presence_of :key
   validates_uniqueness_of :key

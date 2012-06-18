@@ -3,17 +3,16 @@ class Notification::Base
   include Mongoid::Timestamps::Created
   include Mongoid::BaseModel
 
-  store_in :notifications
+  store_in :collection => 'notifications'
 
   field :read, :default => false
+  belongs_to :user
 
-  index :read
+  index :read => 1
+  index :user_id => 1, :read => 1
 
   scope :unread, where(:read => false)
 
-  belongs_to :user
-
-  index [[:user_id, Mongo::ASCENDING], [:read, Mongo::ASCENDING]]
 
   def anchor
     "notification-#{id}"

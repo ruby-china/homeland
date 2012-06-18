@@ -1,7 +1,7 @@
 # coding: utf-8
 class SearchController < ApplicationController
   def index
-    search_text = params[:q]
+    search_text = params[:q].gsub("-","")
     @search = Topic.solr_search do
       keywords search_text, :highlight => true
       paginate :page => params[:page], :per_page => 10
@@ -12,7 +12,7 @@ class SearchController < ApplicationController
   end
 
   def wiki
-    search_text = params[:q]
+    search_text = params[:q].gsub("-","")
     @search = Sunspot.search(Page) do
       keywords search_text, :highlight => true
       paginate :page => params[:page], :per_page => 10

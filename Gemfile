@@ -96,7 +96,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'thin'
   gem "rspec-cells"
-  gem "capybara"
+  gem "capybara", :require => false
   gem "sunspot-rails-tester"
 end
 

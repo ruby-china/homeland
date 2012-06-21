@@ -50,6 +50,11 @@ GEM
     anjlab-bootstrap-rails (2.0.3.2)
       railties (>= 3.0)
       sass
+    api_taster (0.2.0)
+      bootstrap-sass (~> 2.0.3)
+      jquery-rails
+      rails (>= 3.1.0)
+      sass-rails
     arel (3.0.2)
     aws-ses (0.4.4)
       builder
@@ -58,6 +63,7 @@ GEM
       xml-simple
     bcrypt-ruby (3.0.1)
     blankslate (2.1.2.4)
+    bootstrap-sass (2.0.3.1)
     bootstrap-will_paginate (0.0.3)
       will_paginate
     bootstrap_helper (1.4.1)
@@ -115,6 +121,8 @@ GEM
     erubis (2.7.0)
     escape (0.0.4)
     eventmachine (0.12.10)
+    exception_notification (2.6.1)
+      actionmailer (>= 3.0.4)
     execjs (1.2.9)
       multi_json (~> 1.0)
     factory_girl (2.3.2)
@@ -326,6 +334,7 @@ PLATFORMS
 
 DEPENDENCIES
   anjlab-bootstrap-rails (= 2.0.3.2)
+  api_taster
   aws-ses (~> 0.4.3)
   bootstrap-will_paginate (= 0.0.3)
   bootstrap_helper (= 1.4.1)
@@ -342,6 +351,7 @@ DEPENDENCIES
   devise (= 2.1.0)
   devise-async
   devise-encryptable
+  exception_notification
   factory_girl_rails
   grape!
   jquery-atwho-rails (= 0.1.3)

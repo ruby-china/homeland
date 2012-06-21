@@ -5,6 +5,7 @@ gem "rails-i18n","0.1.8"
 gem "jquery-rails", "2.0.1"
 gem "rails_autolink", ">= 1.0.4"
 gem "jquery-atwho-rails", "0.1.3"
+gem 'exception_notification'
 
 group :assets do
   gem 'sass-rails', "~> 3.2.3"
@@ -98,6 +99,7 @@ group :development, :test do
   gem "rspec-cells"
   gem "capybara", :require => false
   gem "sunspot-rails-tester"
+  gem 'api_taster'
 end
 
 group :production do

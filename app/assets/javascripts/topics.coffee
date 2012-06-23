@@ -64,12 +64,20 @@ window.Topics =
     $('#btn_reply').button('reset')
 
   preview: (body) ->
-    $("#preview").text "Loading..."
+   p = $("#preview")   
+   if body == ''
+      p.html "no data"
+      return false
+    
+    if p.hasClass('previewed')
+      return false
 
+    p.text "Loading..."
     $.post "/topics/preview",
       "body": body,
       (data) ->
-        $("#preview").html data.body
+        p.addClass('previewed')
+        p.html data.body
       "json"
 
   hookPreview: (switcher, textarea) ->
@@ -155,6 +163,9 @@ $(document).ready ->
     if $(el.target).val().trim().length > 0
       $("#reply > form").submit()
     return false
+
+  $("#topic_body").bind "change",(el) ->
+    $('#preview').removeClass('previewed')
 
   Topics.initCloseWarning($("textarea.closewarning"))
 

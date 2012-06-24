@@ -24,9 +24,11 @@ class User
 
     def new_from_provider_data(provider, uid, data)
       User.new do |user|
-        user.email = data["email"] # TODO maybe duplicated
-        user.email = "twitter+#{uid}@example.com" if provider == "twitter"
-        user.email = "douban+#{uid}@example.com" if provider == "douban"
+        if data["email"].present? && !User.where(:email => data["email"]).exists?
+          user.email = data["email"]
+        else
+          user.email = "#{provider}+#{uid}@example.com"
+        end
         user.name = data['name']
 
         user.login = data["nickname"]
@@ -35,7 +37,7 @@ class User
 
         user.github = data['nickname'] if provider == "github"
 
-        if User.where(:login => user.login).count > 0 || user.login.blank?
+        if User.where(:login => user.login).exists? || user.login.blank?
           user.login = "u#{Time.now.to_i}" # TODO: possibly duplicated user login here. What should we do?
         end
 

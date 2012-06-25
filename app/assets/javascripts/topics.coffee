@@ -66,7 +66,7 @@ window.Topics =
   preview: (body) ->
     p = $("#preview")   
     if body == ''
-      p.html "no data"
+      p.html "Noting Preview"
       return false
     
     if p.hasClass('previewed')
@@ -164,7 +164,7 @@ $(document).ready ->
       $("#reply > form").submit()
     return false
 
-  $("#topic_body").bind "change",(el) ->
+  $("#topic_body, #reply_body").bind "change",(el) ->
     $('#preview').removeClass('previewed')
 
   Topics.initCloseWarning($("textarea.closewarning"))

@@ -64,8 +64,8 @@ window.Topics =
     $('#btn_reply').button('reset')
 
   preview: (body) ->
-   p = $("#preview")   
-   if body == ''
+    p = $("#preview")   
+    if body == ''
       p.html "no data"
       return false
     

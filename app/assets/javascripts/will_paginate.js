@@ -31,3 +31,12 @@
         }
     }
 })(jQuery);
+
+jQuery(document).ready(function($) {
+	if (!$('body').hasClass("logged_in")) {
+		$('.likeable').attr('title', '请登陆');
+		$('.small_reply').bind('click', function(event) {
+		  return false;
+		});
+	};
+});

@@ -29,6 +29,8 @@ window.App =
     window.open(url)
 
   likeable : (el) ->
+    if !$('body').hasClass("logged_in")
+      return false;
     likeable_type = $(el).data("type")
     likeable_id = $(el).data("id")
     if $(el).data("state") != "liked"

@@ -19,7 +19,7 @@
   <%= auto_discovery_link_tag(:rss,feed_topics_url,:title => '订阅最新帖') %>
   <%= yield :node_feed_link %>
 </head>
-<body data-offset="50">
+<body data-offset="50" class="<%= "logged_in" if current_user %>">
   <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container">

@@ -255,6 +255,7 @@ class User
 
   # Github 项目
   def github_repositories
+    return [] # TODO: 这里临时关闭，原因见 #55 ，需要修正
     return [] if self.github.blank?
     count = 14
     cache_key = "github_repositories:#{self.github}+#{count}+v1"

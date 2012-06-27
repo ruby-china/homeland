@@ -22,3 +22,13 @@
     h3 { font-size:14px; color:#999;}
   }
 }
+
+#preview {
+  width: 670px;
+  height: 400px;
+  border: 1px solid #CCCCCC;
+  border-radius: 3px 3px 3px 3px;
+  -moz-border-radius: 3px 3px 3px 3px;
+  display: none;
+  overflow: scroll;
+}

@@ -91,6 +91,7 @@ gem 'grape', :git => 'git://github.com/intridea/grape.git', :branch => 'frontier
 
 group :development, :test do
   gem 'capistrano', '2.9.0', :require => false
+  gem 'rvm-capistrano', :require => false
   gem "memcache-client", "1.8.5"
   gem 'rspec-rails', '~> 2.10.0'
   gem 'factory_girl_rails'

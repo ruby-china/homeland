@@ -63,9 +63,6 @@ gem "cells", "3.7.1"
 gem "sidekiq", "1.1.0"
 gem "devise-async"
 
-# AWS Simple Email Server
-gem "aws-ses", "~> 0.4.3"
-
 # 分享功能
 gem "social-share-button", "~> 0.0.3"
 

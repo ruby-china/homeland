@@ -7,6 +7,7 @@ RubyChina::Application.routes.draw do
   resources :pages, :path => "wiki" do
     collection do
       get :recent
+      post :preview
     end
   end
   resources :comments

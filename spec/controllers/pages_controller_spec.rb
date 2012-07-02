@@ -113,4 +113,12 @@ describe PagesController do
       response.should be_success
     end
   end
+
+  describe ":preview" do
+    it "should give a text from markdown" do
+        sign_in user
+        post :preview, {body: '123'}
+        response.body.should == "<p>123</p>\n"
+    end
+  end
 end

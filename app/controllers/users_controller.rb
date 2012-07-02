@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   end
 
   def favorites
-    @topics = Topic.find(@user.favorite_topic_ids).paginate(:page => params[:page], :per_page => 30)
+    @topics = Topic.where(:_id.in => @user.favorite_topic_ids).paginate(:page => params[:page], :per_page => 30)
     drop_breadcrumb(@user.login, user_path(@user.login))
     drop_breadcrumb(t("users.menu.like"))
   end

@@ -20,8 +20,8 @@ RubyChina::Application.configure do
   # just comment this out and Rails will serve the files
 
   # Use a different logger for distributed setups
-  config.logger = Logger.new("#{Rails.root}/log/#{Rails.env}.log", 'weekly')
-  config.logger.level = Logger::INFO
+  # config.logger = Logger.new("#{Rails.root}/log/#{Rails.env}.log", 'weekly')
+  # config.logger.level = Logger::INFO
 
   # Use a different cache store in production
   # config.cache_store = :mem_cache_store

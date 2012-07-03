@@ -10,6 +10,7 @@
 #= require jquery.html5-fileupload
 #= require social-share-button
 #= require jquery.atwho
+#= require emoji_list
 #= require_self
 window.App =
   loading : () ->

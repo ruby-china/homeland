@@ -5,6 +5,7 @@ gem "rails-i18n","0.1.8"
 gem "jquery-rails", "2.0.1"
 gem "rails_autolink", ">= 1.0.4"
 gem "jquery-atwho-rails", "0.1.6"
+gem "md_emoji"
 gem 'exception_notification'
 
 group :assets do
@@ -98,6 +99,8 @@ group :development, :test do
   gem "capybara", :require => false
   gem "sunspot-rails-tester"
   gem 'api_taster'
+  gem "pry-rails"
+  gem "pry-nav"
 end
 
 group :production do

@@ -1,8 +1,10 @@
 # coding: utf-8
 require 'rails_autolink'
+
 module Redcarpet
   module Render
     class HTMLwithSyntaxHighlight < HTML
+
       def initialize(extensions={})
         super(extensions.merge(:xhtml => true,
                                :no_styles => true,
@@ -71,6 +73,7 @@ class MarkdownConverter
 end
 
 class MarkdownTopicConverter < MarkdownConverter
+
   def self.format(raw)
     text = raw.clone
     return '' if text.blank?
@@ -81,14 +84,19 @@ class MarkdownTopicConverter < MarkdownConverter
     text.gsub!("\n```","\n\n```")
 
     result = self.convert(text)
-
     self.link_mention_floor(result)
     self.link_mention_user(result)
+
+    result = self.instance.to_emoji(result)
 
     return result.strip
   rescue => e
     puts "MarkdownTopicConverter.format ERROR: #{e}"
     return text
+  end
+
+  def to_emoji(text)
+    @emoji.replace_emoji(text)
   end
 
   private
@@ -124,5 +132,7 @@ class MarkdownTopicConverter < MarkdownConverter
         :space_after_headers => true,
         :no_intra_emphasis => true
       })
+    # @emoji = Redcarpet::Markdown.new(MdEmoji::Render)
+    @emoji = MdEmoji::Render.new
   end
 end

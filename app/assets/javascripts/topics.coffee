@@ -132,7 +132,7 @@ window.Topics =
   follow : (el) ->
     topic_id = $(el).data("id")
     followed = $(el).data("followed")
-    if followed 
+    if followed
       $.ajax
         url : "/topics/#{topic_id}/unfollow"
         type : "POST"
@@ -147,6 +147,15 @@ window.Topics =
           $(el).data("followed", true)
           $("i",el).attr("class", "icon small_followed")
     false
+
+  showEmoji : (el) ->
+    emojis = $.map EMOJI_LIST, (value,i) ->
+      key = if value is "plus1" then "+1:" else value + ":"
+      {'id':i, 'key':key, 'name':value}
+
+    $(el).atWho ":"
+      data : emojis
+      tpl : "<li data-value='${key}'>${name} <img src='/assets/emojis/${name}.png'  height='20' width='20' /></li>"
 
 
 # pages ready
@@ -196,6 +205,7 @@ $(document).ready ->
       login_exists.push(val.login)
       logins.push(val)
   App.atReplyable("textarea", logins)
+  Topics.showEmoji("textarea")
 
   # Focus title field in new-topic page
   $("body.topics-controller.new-action #topic_title").focus()

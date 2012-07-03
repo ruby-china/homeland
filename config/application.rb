@@ -52,13 +52,13 @@ module RubyChina
     }
 
     # 其他项目用的时候注意修改这里
-    if Rails.env == "production"
-      config.middleware.use ExceptionNotifier,
-      :email_prefix         => "[Ruby China] ",
-      :sender_address       => %{"notifier" <notifier@ruby-china.org>},
-      :exception_recipients => %w{huacnlee@gmail.com},
-      :ignore_exceptions    => ['Mongoid::Errors::DocumentNotFound'] + ExceptionNotifier.default_ignore_exceptions
-    end
+    # if Rails.env == "production"
+    #   config.middleware.use ExceptionNotifier,
+    #   :email_prefix         => "[Ruby China] ",
+    #   :sender_address       => %{"notifier" <notifier@ruby-china.org>},
+    #   :exception_recipients => %w{huacnlee@gmail.com},
+    #   :ignore_exceptions    => ['Mongoid::Errors::DocumentNotFound'] + ExceptionNotifier.default_ignore_exceptions
+    # end
   end
 end
 

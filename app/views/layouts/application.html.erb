@@ -1,3 +1,13 @@
+<!--
+      ____        __             ________    _
+     / __ \__  __/ /_  __  __   / ____/ /_  (_)___  ____ _
+    / /_/ / / / / __ \/ / / /  / /   / __ \/ / __ \/ __ `/
+   / _, _/ /_/ / /_/ / /_/ /  / /___/ / / / / / / / /_/ /
+  /_/ |_|\__,_/_.___/\__, /   \____/_/ /_/_/_/ /_/\__,_/
+                    /____/
+  ========================================================
+                                          ruby-china.org
+-->
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +23,7 @@
   <meta name="keywords" content="<%= @meta_keywords %>" />
   <meta name="description" content="<%= @meta_description %>" />
   <meta charset='utf-8' />
-  <link rel="shortcut icon" href="<%= asset_path("big_logo.png") %>" /> 
+  <link rel="shortcut icon" href="<%= asset_path("big_logo.png") %>" />
   <%= raw SiteConfig.custom_head_html %>
   <%= csrf_meta_tag %>
   <%= auto_discovery_link_tag(:rss,feed_topics_url,:title => '订阅最新帖') %>
@@ -37,7 +47,7 @@
       </div>
     </div>
   </div>
-  
+
   <div class="container">
     <div itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
       <%= render_breadcrumb %>
@@ -47,9 +57,9 @@
     <%= notice_message %>
     <div id="main" class="container-fluid">
       <%= yield %>
-    </div>    
+    </div>
   </div>
-  
+
   <% if not mobile? %>
   <a class="go_top" href="#"><i class="icon icons_go_top"></i></a>
   <footer class="footer">
@@ -58,13 +68,13 @@
     </div>
   </footer>
   <% end %>
-  
+
   <%= javascript_include_tag "app" %>
   <% if mobile? %>
     <script type="text/javascript">app_mobile = true;</script>
   <% end %>
   <%= yield :scripts %>
   <%= render :partial => "common/google_analytics"%>
-  
+
 </body>
 </html>

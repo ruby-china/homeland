@@ -87,7 +87,7 @@ class MarkdownTopicConverter < MarkdownConverter
     self.link_mention_floor(result)
     self.link_mention_user(result)
 
-    result = self.instance.to_emoji(result)
+    result = self.instance.replace_emoji(result)
 
     return result.strip
   rescue => e
@@ -95,8 +95,21 @@ class MarkdownTopicConverter < MarkdownConverter
     return text
   end
 
-  def to_emoji(text)
-    @emoji.replace_emoji(text)
+  def replace_emoji(text)
+    text.gsub(/:(\S+):/) do |emoji|
+
+      emoji_code = emoji #.gsub("|", "_")
+      emoji      = emoji_code.gsub(":", "")
+
+      if MdEmoji::EMOJI.include?(emoji)
+        file_name    = "#{emoji.gsub('+', 'plus')}.png"
+
+        %{<img src="#{Setting.upload_url}/assets/emojis/#{file_name}" class="emoji" } +
+        %{title="#{emoji_code}" alt="" />}
+      else
+        emoji_code
+      end
+    end
   end
 
   private

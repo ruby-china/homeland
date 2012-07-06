@@ -35,13 +35,12 @@ module UsersHelper
     width = user_avatar_width_for_size(size)
 
     if user.blank?
-      hash = Digest::MD5.hexdigest("")
-      return image_tag("#{Setting.gravatar_proxy}/avatar/#{hash}.png?s=#{width}")
+      # hash = Digest::MD5.hexdigest("") => d41d8cd98f00b204e9800998ecf8427e
+      return image_tag("#{Setting.gravatar_proxy}/avatar/d41d8cd98f00b204e9800998ecf8427e.png?s=#{width}")
     end
 
     if user.avatar.blank?
-      hash = Digest::MD5.hexdigest(user.email || "")
-      img_src = "#{Setting.gravatar_proxy}/avatar/#{hash}.png?s=#{width}"
+      img_src = "#{Setting.gravatar_proxy}/avatar/#{user.email_md5}.png?s=#{width}"
       img = image_tag(img_src, :style => "width:#{width}px;height:#{width}px;")
     else
       img = image_tag(user.avatar.url(size), :style => "width:#{width}px;height:#{width}px;")

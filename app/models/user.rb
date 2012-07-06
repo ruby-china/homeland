@@ -1,6 +1,7 @@
 # coding: utf-8
 require "ruby-github"
 require "securerandom"
+require "digest/md5"
 class User
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -12,6 +13,7 @@ class User
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   field :email,              :type => String, :default => ""
+  field :email_md5
   field :encrypted_password, :type => String, :default => ""
 
   validates_presence_of :email
@@ -85,6 +87,10 @@ class User
   has_and_belongs_to_many :followers, :class_name => 'User', :inverse_of => :following
 
   scope :hot, desc(:replies_count, :topics_count)
+
+  def email=(val)
+    self.email_md5 = Digest::MD5.hexdigest(val || "")
+  end
 
   def self.find_for_database_authentication(conditions)
     login = conditions.delete(:login)

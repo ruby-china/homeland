@@ -1,4 +1,3 @@
-<%= render 'base' %>
 <%= content_for :styles do %>
   <% if !@topic.user.blank? and !@topic.user.google_profile_url.blank? %>
     <link rel="author" content="<%= @topic.user.google_profile_url %>" />

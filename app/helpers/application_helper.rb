@@ -14,6 +14,24 @@ module ApplicationHelper
     flash_messages.join("\n").html_safe
   end
 
+  def controller_stylesheet_link_tag
+    case controller_name
+    when "users","home", "topics", "pages", "search", "sites", "notifications"
+      stylesheet_link_tag controller_name
+    when "replies"
+      stylesheet_link_tag "topics"
+    end
+  end
+
+  def controller_javascript_include_tag
+    case controller_name
+    when "pages","topics","posts","search","search","sites", "notifications"
+      javascript_include_tag controller_name
+    when "replies"
+      javascript_include_tag "topics"
+    end
+  end
+
   def markdown(str, options = {})
     # XXX: the renderer instance should be a class variable
 
@@ -44,7 +62,7 @@ module ApplicationHelper
   end
 
   def timeago(time, options = {})
-    options[:class] 
+    options[:class]
     options[:class] = options[:class].blank? ? "timeago" : [options[:class],"timeago"].join(" ")
     content_tag(:abbr, "", options.merge(:title => time.iso8601)) if time
   end

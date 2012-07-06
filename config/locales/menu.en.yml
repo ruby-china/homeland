@@ -59,13 +59,6 @@
     by: "by"
     at: "on"
     hot_topics: "Hot topics"
-  posts:
-    recent_publish_post: "Recent Published Post"
-    post_source: "Post source"
-    published_at: "Published at"
-    tag: "tag"
-    post_submitter: "Post Submitter"
-    submit_success: "successfully submitted，will be added to list after approval."
   reply:
     edit_reply: "Edit Reply"
     delete_reply_success: 'Delete successfully.'
@@ -78,9 +71,8 @@
   menu:
     topics: "Discussion"
     wiki: "Wiki"
-    posts: "Posts"
     users: "Users"
-    cpanel: "Control Panel"  
+    cpanel: "Control Panel"
     notes: "Notes"
     nodes: "Nodes"
     sites: "Sites"
@@ -89,7 +81,7 @@
     likes: "Favorites"
   comments:
     create_comment: "Comment"
-    no_comment: "No Comment at the moment"  
+    no_comment: "No Comment at the moment"
   mail:
     login_from: "Sign in from"
     this_is_a_notification_mail_please_do_not_reply: "This is an email notification. Please do not reply."

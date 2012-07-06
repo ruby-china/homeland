@@ -61,7 +61,6 @@ class User
   has_many :notes
   has_many :replies, :dependent => :destroy
   embeds_many :authorizations
-  has_many :posts
   has_many :notifications, :class_name => 'Notification::Base', :dependent => :delete
   has_many :photos
 

@@ -61,13 +61,6 @@
     hot_topics: "熱門討論"
     hot_locations: "熱門城市"
     replied_at: 回應于
-  posts:
-    recent_publish_post: "最近發布的文章"
-    post_source: "文章來源"
-    published_at: "投稿於"
-    tag: "標籤"
-    post_submitter: "投稿者"
-    submit_success: "投稿成功，需等待審核通過以後才能顯示到文章列表。"
   reply:
     edit_reply: "修改回應"
     delete_reply_success: '回應刪除成功'
@@ -80,9 +73,8 @@
   menu:
     topics: "社區"
     wiki: "Wiki"
-    posts: "文章"
     users: "會員"
-    cpanel: "後台"  
+    cpanel: "後台"
     notes: "記事本"
     nodes: "節點"
     sites: "酷站"

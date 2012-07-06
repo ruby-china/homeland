@@ -16,7 +16,7 @@ end
 
 # 上传组件
 gem 'carrierwave', '0.6.2'
-gem 'carrierwave-upyun', '0.1.3'
+gem 'carrierwave-upyun', '0.1.5'
 gem 'mini_magick','3.3', :require => false
 
 # Mongoid 辅助插件
@@ -99,8 +99,6 @@ group :development, :test do
   gem "capybara", :require => false
   gem "sunspot-rails-tester"
   gem 'api_taster'
-  gem "pry-rails"
-  gem "pry-nav"
 end
 
 group :production do

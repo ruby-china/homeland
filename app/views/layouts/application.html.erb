@@ -43,7 +43,9 @@
            li << link_to(t("menu.sites"), sites_path )
            li << link_to(t("menu.users"), users_path)
         end %>
-        <%= render "common/search_form" %>
+        <form action="/search" class="navbar-search pull-left" method="get">
+          <input type="text" name="q" class="search-query span3" value="<%= params[:q] %>" placeholder="<%= t("common.search") %>" />
+        </form>
         <%= render "common/user_nav" %>
       </div>
     </div>
@@ -53,7 +55,13 @@
     <div itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
       <%= render_breadcrumb %>
     </div>
-    <%= render "common/feeds" %>
+    <div class="feed_link">
+      <% if mobile? %>
+        <%= link_to "我要发贴", new_topic_path, :class => "btn btn-success" %>
+      <% else %>
+        <%= link_to(raw("<span class='icon icons_rss'></span> Feed"), feed_topics_url, :title => t("topics.subscribe_with_rss", :name => Setting.app_name), :class => "feed") %>
+      <% end %>
+    </div>
 
     <%= notice_message %>
     <div id="main" class="container-fluid">
@@ -76,7 +84,17 @@
     <script type="text/javascript">app_mobile = true;</script>
   <% end %>
   <%= yield :scripts %>
-  <%= render :partial => "common/google_analytics"%>
+
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', '<%= Setting.google_analytics_key %>']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
 
 </body>
 </html>

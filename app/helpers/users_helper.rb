@@ -39,7 +39,7 @@ module UsersHelper
       return image_tag("#{Setting.gravatar_proxy}/avatar/d41d8cd98f00b204e9800998ecf8427e.png?s=#{width}")
     end
 
-    if user.avatar.blank?
+    if user[:avatar].blank?
       img_src = "#{Setting.gravatar_proxy}/avatar/#{user.email_md5}.png?s=#{width}"
       img = image_tag(img_src, :style => "width:#{width}px;height:#{width}px;")
     else

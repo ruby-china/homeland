@@ -90,6 +90,7 @@ class User
 
   def email=(val)
     self.email_md5 = Digest::MD5.hexdigest(val || "")
+    self[:email] = val
   end
 
   def self.find_for_database_authentication(conditions)

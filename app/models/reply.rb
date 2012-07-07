@@ -38,7 +38,7 @@ class Reply
   after_update :update_parent_topic_updated_at
   def update_parent_topic_updated_at
     if not self.topic.blank?
-      self.topic.delay.set(:updated_at, Time.now)
+      self.topic.set(:updated_at, Time.now)
     end
   end
 
@@ -67,7 +67,7 @@ class Reply
 
   # 是否热门
   def popular?
-    self.likes_count >= 10
+    self.likes_count >= 5
   end
 
   def destroy

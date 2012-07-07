@@ -42,7 +42,7 @@ describe Topic do
 
   it "should update after reply" do
     reply = Factory :reply, :topic => topic, :user => user
-    topic.replied_at.should == reply.created_at
+    topic.replied_at.to_i.should == reply.created_at.to_i
     topic.last_reply_id.should == reply.id
     topic.last_reply_user_id.should == reply.user_id
     topic.last_reply_user_login.should == reply.user.login
@@ -70,7 +70,7 @@ describe Topic do
     t.save
     t.body_html.should == old_html
   end
-  
+
   it "should log deleted user name when use destroy_by" do
     t = Factory(:topic)
     t.destroy_by(user)

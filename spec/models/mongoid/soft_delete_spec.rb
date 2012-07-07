@@ -40,7 +40,7 @@ describe "Soft Delete" do
     rick.destroy
     rick.should be_destroyed
 
-    WalkingDead.exists?(:conditions => { :name => rick.name }).should be_false
+    WalkingDead.where(:name => rick.name).count.should == 0
     WalkingDead.unscoped.where(:name => rick.name).first.should eq(rick)
   end
 end

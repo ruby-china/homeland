@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>RubyChina - Control Panel</title>
-  <link rel="shortcut icon" href="<%= asset_path("big_logo.png") %>" /> 
+  <link rel="shortcut icon" href="<%= asset_path("big_logo.png") %>" />
   <%= stylesheet_link_tag "cpanel" %>
   <%= javascript_include_tag "app" %>
   <%= csrf_meta_tag %>
@@ -24,7 +24,6 @@
             li << link_to(t("cpanel.menu.users"),cpanel_users_path)
             li << link_to(t("cpanel.menu.sections"), cpanel_sections_path )
             li << link_to(t("cpanel.menu.nodes"), cpanel_nodes_path )
-            li << link_to(t("cpanel.menu.posts"),cpanel_posts_path )
             li << link_to(t("cpanel.menu.wiki"),cpanel_pages_path )
             li << link_to(t("cpanel.menu.topics"), cpanel_topics_path)
             li << link_to(t("cpanel.menu.replies"), cpanel_replies_path)
@@ -49,7 +48,7 @@
   </div>
   <div class="container">
     <div class="breadcrumb">
-      <a href="<%= cpanel_root_path %>">Root</a> &gt; 
+      <a href="<%= cpanel_root_path %>">Root</a> &gt;
       <%= yield :sitemap %>
     </div>
     <div id="main" class="box">

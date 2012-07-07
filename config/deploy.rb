@@ -2,19 +2,23 @@
 require "bundler/capistrano"
 require "sidekiq/capistrano"
 
+require "rvm/capistrano"
+set :rvm_ruby_string, 'ruby-1.9.3-p194-patch'
+set :rvm_type, :user
+
 set :application, "ruby-china"
 set :repository,  "git://github.com/ruby-china/ruby-china.git"
 set :branch, "master"
 set :scm, :git
 set :user, "ruby"
-set :deploy_to, "/home/#{user}/www/#{application}"
+set :deploy_to, "/data/www/#{application}"
 set :runner, "ruby"
 # set :deploy_via, :remote_cache
 set :git_shallow_clone, 1
 
-role :web, "58.215.172.218"                          # Your HTTP server, Apache/etc
-role :app, "58.215.172.218"                          # This may be the same as your `Web` server
-role :db,  "58.215.172.218", :primary => true # This is where Rails migrations will run
+role :web, "58.215.172.185"                          # Your HTTP server, Apache/etc
+role :app, "58.215.172.185"                          # This may be the same as your `Web` server
+role :db,  "58.215.172.185", :primary => true # This is where Rails migrations will run
 
 # unicorn.rb 路径
 set :unicorn_path, "#{deploy_to}/current/config/unicorn.rb"
@@ -63,12 +67,4 @@ task :mongoid_migrate_database, :roles => :web do
   run "cd #{deploy_to}/current/; RAILS_ENV=production bundle exec rake db:migrate"
 end
 
-after "deploy:finalize_update","deploy:symlink", :init_shared_path, :link_shared_files, :compile_assets, :sync_assets_to_cdn, :mongoid_migrate_database, 'sidekiq:restart'
-
-
-set :default_environment, {
-  'PATH' => "/home/ruby/.rvm/gems/ruby-1.9.3-p0/bin:/home/ruby/.rvm/gems/ruby-1.9.3-p0@global/bin:/home/ruby/.rvm/rubies/ruby-1.9.3-p0/bin:/home/ruby/.rvm/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games",
-  'RUBY_VERSION' => 'ruby-1.9.3-p0',
-  'GEM_HOME' => '/home/ruby/.rvm/gems/ruby-1.9.3-p0',
-  'GEM_PATH' => '/home/ruby/.rvm/gems/ruby-1.9.3-p0:/home/ruby/.rvm/gems/ruby-1.9.3-p0@global'
-}
+after "deploy:finalize_update","deploy:symlink", :init_shared_path, :link_shared_files, :compile_assets, :sync_assets_to_cdn, :mongoid_migrate_database,'sidekiq:restart'

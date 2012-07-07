@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe UsersController do
-  let(:user) { Factory :user }
+  let(:user) { Factory :user, :location => "Shanghai" }
 
   describe ":index" do
     it "should have an index action" do

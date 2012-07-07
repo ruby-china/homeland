@@ -1,6 +1,7 @@
 # coding: utf-8
 class SearchController < ApplicationController
   def index
+    params[:q] ||= ""
     search_text = params[:q].gsub("-","")
     @search = Topic.solr_search do
       keywords search_text, :highlight => true

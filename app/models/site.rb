@@ -20,6 +20,13 @@ class Site
   index :url => 1
   index :site_node_id => 1
 
+  after_save :update_cache_version
+  after_destroy :update_cache_version
+  def update_cache_version
+    # 记录节点变更时间，用于清除缓存
+    CacheVersion.sites_updated_at = Time.now.to_i
+  end
+
   before_validation :fix_urls, :check_uniq
   def fix_urls
     if self.favicon.blank?

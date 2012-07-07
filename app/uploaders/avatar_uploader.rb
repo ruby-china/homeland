@@ -15,4 +15,10 @@ class AvatarUploader < BaseUploader
   version :big do
     process :resize_to_fill => [120, 120]
   end
+
+  def filename
+    if super.present?
+      "avatar/#{model.id}.jpg"
+    end
+  end
 end

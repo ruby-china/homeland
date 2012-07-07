@@ -20,8 +20,8 @@ RubyChina::Application.configure do
   # just comment this out and Rails will serve the files
 
   # Use a different logger for distributed setups
-  config.logger = Logger.new("#{Rails.root}/log/#{Rails.env}.log", 'weekly')
-  config.logger.level = Logger::INFO
+  # config.logger = Logger.new("#{Rails.root}/log/#{Rails.env}.log", 'weekly')
+  # config.logger.level = Logger::INFO
 
   # Use a different cache store in production
   # config.cache_store = :mem_cache_store
@@ -36,7 +36,7 @@ RubyChina::Application.configure do
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.delivery_method = :ses
+  config.action_mailer.delivery_method = :sendmail
 
   # Enable threaded mode
   # config.threadsafe!
@@ -61,7 +61,7 @@ RubyChina::Application.configure do
   config.assets.js_compressor  = :uglifier
   config.assets.css_compressor = :scss
   config.assets.precompile += %w(application.css app.js topics.css topics.js window.css front.css cpanel.css search.css
-  users.css posts.css posts.js pages.css pages.js notifications.js notifications.css sites.css sites.js
+  users.css pages.css pages.js notifications.js notifications.css sites.css sites.js
   gfdynamicfeedcontrol.css gfdynamicfeedcontrol.js mobile.css home.css)
 
 

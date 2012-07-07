@@ -15,11 +15,11 @@ describe User::OmniauthCallbacks do
     end
 
     it "should handle provider twitter properly" do
-      user = callback.new_from_provider_data("twitter", uid, data).email.should == "twitter+42@example.com"
+      user = callback.new_from_provider_data("twitter", uid, data).email.should == "email@example.com"
     end
 
     it "should handle provider douban properly" do
-      callback.new_from_provider_data("douban", uid, data).email.should == "douban+42@example.com"
+      callback.new_from_provider_data("douban", uid, data).email.should == "email@example.com"
     end
 
     it "should handle provider google properly" do

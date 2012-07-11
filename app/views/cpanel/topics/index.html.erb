@@ -33,18 +33,18 @@
     </td>
     <td>
       <% if !topic.suggested_at.blank? %>
-        <%= link_to t("common.un_top"), unsuggest_cpanel_topic_path(topic), :confirm => 'Are you sure?', :method => :post %>
+        <%= link_to t("common.un_top"), unsuggest_cpanel_topic_path(topic), 'data-confirm' => 'Are you sure?', :method => :post %>
       <% else %>
-        <%= link_to t("common.place_top"), suggest_cpanel_topic_path(topic), :confirm => 'Are you sure?', :method => :post %>
+        <%= link_to t("common.place_top"), suggest_cpanel_topic_path(topic), 'data-confirm' => 'Are you sure?', :method => :post %>
       <% end %>
       <%= link_to "", edit_cpanel_topic_path(topic), :class => "icon small_edit" %>
       <% if topic.deleted_at.blank? %>
-        <%= link_to "", cpanel_topic_path(topic), :confirm => 'Are you sure?', :method => :delete, :class => "icon small_delete" %>
+        <%= link_to "", cpanel_topic_path(topic), 'data-confirm' => 'Are you sure?', :method => :delete, :class => "icon small_delete" %>
       <% else %>
-        <%= link_to t("common.undelete"), undestroy_cpanel_topic_path(topic), :confirm => 'Are you sure?', :method => :post %>
+        <%= link_to t("common.undelete"), undestroy_cpanel_topic_path(topic), 'data-confirm' => 'Are you sure?', :method => :post %>
       <% end %>
     </td>
-      
+
   </tr>
 <% end %>
 </table>

@@ -4,9 +4,12 @@ class UsersController < ApplicationController
   before_filter :init_base_breadcrumb
   before_filter :set_menu_active
   before_filter :find_user, :only => [:show, :topics, :favorites]
+  caches_action :index, :expires_in => 2.hours, :layout => false
 
   def index
     @total_user_count = User.count
+    @active_users = User.hot.limit(30)
+    @recent_join_users = User.recent.limit(30)
     drop_breadcrumb t("common.index")
   end
 
@@ -24,7 +27,7 @@ class UsersController < ApplicationController
   end
 
   def favorites
-    @topics = Topic.find(@user.favorite_topic_ids).paginate(:page => params[:page], :per_page => 30)
+    @topics = Topic.where(:_id.in => @user.favorite_topic_ids).paginate(:page => params[:page], :per_page => 30)
     drop_breadcrumb(@user.login, user_path(@user.login))
     drop_breadcrumb(t("users.menu.like"))
   end

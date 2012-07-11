@@ -1,4 +1,3 @@
-<%= render 'base' %>
 <div id="notes" class="box">
   <div class="note">
     <% if @note.publish %>
@@ -10,17 +9,14 @@
       <p>
         <%= raw '<span class="label warning">公开</span> ' if @note.publish %>
         共 <%= @note.word_count %> <%= t("notes.chars") %>, 由 <%= user_name_tag(@note.user) %> <%= raw t("notes.created_at", :time => timeago(@note.created_at)) %> , <%= @note.changes_count %> <%= t("notes.times_edit") %>
+        <% if owner? @note %>
+          <%= link_to "", edit_note_path(@note), :class => "icon small_edit", :title => t("common.edit") %>
+          <%= link_to "", note_path(@note), :class => "icon small_delete",'data-confirm' => t("common.confirm_delete"), :method => :delete, :title => t("common.confirm_delete") %>
+        <% end %>
       </p>
     </div>
 
-    <div class="body"><%= markdown(@note.body) %></div>
-    
-    <% if owner? @note %>
-      <div class="buttons">
-        <a href="<%= edit_note_path(@note) %>" class="btn"><%= t("common.edit")%></a>
-        <%= link_to t("common.delete"), note_path(@note),:confirm => t("common.confirm_delete"), :method => :delete, :class => "btn btn-danger"  %>
-      </div>
-    <% end %>
+    <div class="body wikistyle"><%= markdown(@note.body) %></div>
   </div>
 </div>
 

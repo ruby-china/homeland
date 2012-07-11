@@ -1,7 +1,7 @@
 <div class="content">
   <div class="box">
     <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :enctype =>  "multipart/form-data" }) do |f| %>
-      <%= render "shared/error_messages", :target => resource if params[:by].blank? %> 
+      <%= render "shared/error_messages", :target => resource if params[:by].blank? %>
       <fieldset>
         <legend><%= t("users.personal_information")%></legend>
         <%= f.input :name %>
@@ -31,7 +31,7 @@
         <%= f.input :tagline, :input_html => { :class => "xxlarge" } %>
         <%= f.input :bio, :as => :text, :input_html => { :class => "xxlarge", :rows => "6" } %>
         <div class="form-actions">
-            <%= f.submit "更新资料", :class => "btn btn-primary", :disable_with => t("common.saving") %>
+            <%= f.submit "更新资料", :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %>
         </div>
       </fieldset>
     <% end %>
@@ -44,9 +44,9 @@
         <input type="hidden" name="user[:by]" value="pwd" />
         <%= f.input :current_password %>
         <%= f.input :password %>
-        <%= f.input :password_confirmation %>   
+        <%= f.input :password_confirmation %>
         <div class="form-actions">
-          <%= f.submit "修改密码", :class => "btn btn-success", :disable_with => t("common.saving") %>
+          <%= f.submit "修改密码", :class => "btn btn-success", 'data-disable-with' => t("common.saving") %>
         </div>
       </fieldset>
     <% end %>
@@ -83,7 +83,7 @@
   </div>
   <div class="box">
     <h2><%= t("users.delete_my_account")%></h2>
-    <p><%= t("users.dont_like_it")%> <%= link_to(t("users.delete_this_account"), registration_path(resource_name), :confirm => "删除后无法恢复，你确定吗?", :class => "btn btn-danger", :method => :delete )%></p>
+    <p><%= t("users.dont_like_it")%> <%= link_to(t("users.delete_this_account"), registration_path(resource_name), 'data-confirm' => "删除后无法恢复，你确定吗?", :class => "btn btn-danger", :method => :delete )%></p>
   </div>
 </div>
 

@@ -1,16 +1,16 @@
 <%= simple_form_for(@note) do |f| %>
   <fieldset>
     <%= render "shared/error_messages", :target => @note %>
-    <div class="inputs-list pull-right">
+    <div class="inputs-list">
       <label for="note_publish"><%= f.check_box :publish %> <%= t("common.public")%></label>
     </div>
     <%= f.text_area :body, :class => "span16", :style => "height:500px" %>
     <p class="help-block">
       <%= t("notes.please_use") %> <a href="http://en.wikipedia.org/wiki/Markdown" target="_blank">Markdown</a> <%= t("notes.document_format_to_write") %>
     </p>
-    <div class="buttons">
-      <%= f.submit t("common.save"), :class => "btn btn-primary", :disable_with => t("common.saving") %>
-      <a href="<%= notes_path %>" class="btn"><%= t("common.cancel") %></a> 
+    <div style="margin-top:10px;">
+      <%= f.submit t("common.save"), :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %>
+      <a href="<%= notes_path %>" class="btn"><%= t("common.cancel") %></a>
     </div>
   </fieldset>
 <% end %>

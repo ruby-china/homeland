@@ -72,6 +72,10 @@ class PagesController < ApplicationController
     end
   end
 
+  def preview
+    render :text => MarkdownConverter.convert( params[:body] )
+  end
+
 protected
 
   def set_menu_active

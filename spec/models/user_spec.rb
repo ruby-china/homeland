@@ -1,4 +1,5 @@
 require 'spec_helper'
+require "digest/md5"
 
 describe User do
   let(:topic) { Factory :topic }
@@ -188,6 +189,22 @@ describe User do
         user.like(topic)
         topic.liked_by_user?(user).should be_true
       end
+    end
+  end
+
+  describe "email and email_md5" do
+    it "should generate email_md5 when give value to email attribute" do
+      old_email = user.email
+      user.email = "fooaaaa@gmail.com"
+      user.save
+      user.email_md5.should == Digest::MD5.hexdigest("fooaaaa@gmail.com")
+      user.email.should == "fooaaaa@gmail.com"
+    end
+
+    it "should genrate email_md5 with params" do
+      u = User.new(:email => "a@gmail.com")
+      u.email.should == "a@gmail.com"
+      u.email_md5.should == Digest::MD5.hexdigest("a@gmail.com")
     end
   end
 end

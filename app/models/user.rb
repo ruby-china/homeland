@@ -1,20 +1,39 @@
 # coding: utf-8
 require "ruby-github"
 require "securerandom"
+require "digest/md5"
 class User
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::BaseModel
   include Redis::Objects
   extend OmniauthCallbacks
-  cache
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
+  field :email,              :type => String, :default => ""
+  field :email_md5
+  field :encrypted_password, :type => String, :default => ""
+
+  validates_presence_of :email
+
+  ## Recoverable
+  field :reset_password_token,   :type => String
+  field :reset_password_sent_at, :type => Time
+
+  ## Rememberable
+  field :remember_created_at, :type => Time
+
+  ## Trackable
+  field :sign_in_count,      :type => Integer, :default => 0
+  field :current_sign_in_at, :type => Time
+  field :last_sign_in_at,    :type => Time
+  field :current_sign_in_ip, :type => String
+  field :last_sign_in_ip,    :type => String
+
   field :login
   field :name
-  field :email
   field :location
   field :location_id, :type => Integer
   field :bio
@@ -35,16 +54,15 @@ class User
 
   mount_uploader :avatar, AvatarUploader
 
-  index :login
-  index :email
-  index :location
-  index :private_token, :sparse => true
+  index :login => 1
+  index :email => 1
+  index :location => 1
+  index({private_token: 1},{ sparse: true })
 
   has_many :topics, :dependent => :destroy
   has_many :notes
   has_many :replies, :dependent => :destroy
   embeds_many :authorizations
-  has_many :posts
   has_many :notifications, :class_name => 'Notification::Base', :dependent => :delete
   has_many :photos
 
@@ -69,6 +87,11 @@ class User
   has_and_belongs_to_many :followers, :class_name => 'User', :inverse_of => :following
 
   scope :hot, desc(:replies_count, :topics_count)
+
+  def email=(val)
+    self.email_md5 = Digest::MD5.hexdigest(val || "")
+    self[:email] = val
+  end
 
   def self.find_for_database_authentication(conditions)
     login = conditions.delete(:login)
@@ -238,6 +261,7 @@ class User
 
   # Github 项目
   def github_repositories
+    return [] # TODO: 这里临时关闭，原因见 #55 ，需要修正
     return [] if self.github.blank?
     count = 14
     cache_key = "github_repositories:#{self.github}+#{count}+v1"

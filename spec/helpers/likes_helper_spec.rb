@@ -14,14 +14,14 @@ describe LikesHelper do
     it "should result when logined user liked" do
       helper.stub(:current_user).and_return(user)
       topic.stub(:liked_by_user?).and_return(true)
-      helper.likeable_tag(topic).should == %(<a href="#" class="likeable" data-id="#{topic.id}" data-state="liked" data-type="#{topic.class}" onclick="return App.likeable(this);" rel="twipsy" title="取消喜欢"><i class="icon small_liked"></i> <span>喜欢</span></a>)
+      helper.likeable_tag(topic).should == %(<a href=\"#\" class=\"likeable\" data-count=\"0\" data-id=\"1\" data-state=\"liked\" data-type=\"Topic\" onclick=\"return App.likeable(this);\" rel=\"twipsy\" title=\"取消喜欢\"><i class=\"icon small_liked\"></i> <span>喜欢</span></a>)
       topic.stub!(:likes_count).and_return(3)
-      helper.likeable_tag(topic).should == %(<a href="#" class="likeable" data-id="#{topic.id}" data-state="liked" data-type="#{topic.class}" onclick="return App.likeable(this);" rel="twipsy" title="取消喜欢"><i class="icon small_liked"></i> <span>#{topic.likes_count}人喜欢</span></a>)
+      helper.likeable_tag(topic).should == %(<a href=\"#\" class=\"likeable\" data-count=\"3\" data-id=\"1\" data-state=\"liked\" data-type=\"Topic\" onclick=\"return App.likeable(this);\" rel=\"twipsy\" title=\"取消喜欢\"><i class=\"icon small_liked\"></i> <span>3人喜欢</span></a>)
     end
 
     it "should result when unlogin user" do
       helper.stub(:current_user).and_return(nil)
-      helper.likeable_tag(topic).should == %(<a href="#" class="likeable" data-id="#{topic.id}" data-state="" data-type="#{topic.class}" onclick="return App.likeable(this);" rel="twipsy" title="喜欢"><i class="icon small_like"></i> <span>喜欢</span></a>)
+      helper.likeable_tag(topic).should == %(<a href=\"#\" class=\"likeable\" data-count=\"0\" data-id=\"1\" data-state=\"\" data-type=\"Topic\" onclick=\"return App.likeable(this);\" rel=\"twipsy\" title=\"喜欢\"><i class=\"icon small_like\"></i> <span>喜欢</span></a>)
     end
   end
 end

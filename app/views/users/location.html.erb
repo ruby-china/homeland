@@ -1,4 +1,3 @@
-<%= render "base" %>
 <div id="users" class="box">
   <div id="hot_users" class="row user_list">
     <h1><%= @location.name %>的<%= t("users.hot_users") %></h1>
@@ -9,7 +8,7 @@
           <div class="name"><%= user_name_tag(item) %></div>
         </div>
       <% end %>
-    <% end %>    
+    <% end %>
   </div>
   <%= will_paginate @users %>
 </div>

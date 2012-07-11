@@ -1,10 +1,12 @@
 source 'http://ruby.taobao.org'
 
-gem "rails", "3.2.2"
+gem "rails", "3.2.6"
 gem "rails-i18n","0.1.8"
 gem "jquery-rails", "2.0.1"
 gem "rails_autolink", ">= 1.0.4"
-gem "jquery-atwho-rails", "0.1.3"
+gem "jquery-atwho-rails", "0.1.6"
+gem "md_emoji"
+gem 'exception_notification'
 
 group :assets do
   gem 'sass-rails', "~> 3.2.3"
@@ -15,24 +17,22 @@ end
 
 # 上传组件
 gem 'carrierwave', '0.6.2'
-gem 'carrierwave-mongoid', '0.2.0', :require => 'carrierwave/mongoid'
-gem 'carrierwave-upyun', '0.1.3'
+gem 'carrierwave-upyun', '0.1.5'
 gem 'mini_magick','3.3', :require => false
 
 # Mongoid 辅助插件
-gem "mongoid", "2.4.8"
-gem "bson_ext", "1.6.2"
-gem 'mongo-rails-instrumentation','0.2.4'
-gem 'mongoid_auto_increment_id', "0.4.0"
+gem "mongoid", "3.0.0.rc"
+# gem 'mongo-rails-instrumentation','0.2.4'
+gem 'mongoid_auto_increment_id', "0.5.0"
 gem 'mongoid_rails_migrations', '~> 0.0.14'
-gem "mongoid_colored_logger", "0.1.1"
+gem "mongoid_colored_logger", :git => "git://github.com/huacnlee/mongoid_colored_logger.git"
 
 # 用户系统
-gem 'devise', '1.5.2'
+gem 'devise', '2.1.0'
+gem 'devise-encryptable'
 
 # 分页
 gem 'will_paginate', '3.0.2'
-gem 'will_paginate_mongoid', '~> 1.0.2'
 
 # Bootstrap
 gem 'anjlab-bootstrap-rails', '2.0.3.2', :require => 'bootstrap-rails'
@@ -65,9 +65,6 @@ gem "cells", "3.7.1"
 gem "sidekiq", "1.1.0"
 gem "devise-async"
 
-# AWS Simple Email Server
-gem "aws-ses", "~> 0.4.3"
-
 # 分享功能
 gem "social-share-button", "~> 0.0.3"
 
@@ -93,13 +90,16 @@ gem 'grape' #, :git => 'git://github.com/intridea/grape.git', :branch => 'fronti
  
 group :development, :test do
   gem 'capistrano', '2.9.0', :require => false
+  gem 'rvm-capistrano', :require => false
   gem "memcache-client", "1.8.5"
   gem 'rspec-rails', '~> 2.10.0'
   gem 'factory_girl_rails'
+  gem 'database_cleaner'
   gem 'thin'
   gem "rspec-cells"
-  gem "capybara"
+  gem "capybara", :require => false
   gem "sunspot-rails-tester"
+  gem 'api_taster'
 end
 
 group :production do

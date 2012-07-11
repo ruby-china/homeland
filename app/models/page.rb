@@ -22,7 +22,7 @@ class Page
   # 目前版本号
   field :version, :type => Integer, :default => 0
 
-  index :slug
+  index :slug => 1
 
   has_many :versions, :class_name => "PageVersion"
 

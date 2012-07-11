@@ -25,7 +25,7 @@
     <td>
       <%= link_to '历史', cpanel_page_versions_path(page.id) %>
     <%= link_to '', edit_cpanel_page_path(page), :class => "icon small_edit" %>
-    <%= link_to '', cpanel_page_path(page), :confirm => 'Are you sure?', :method => :delete, :class => "icon small_delete" %></td>
+    <%= link_to '', cpanel_page_path(page), 'data-confirm' => 'Are you sure?', :method => :delete, :class => "icon small_delete" %></td>
   </tr>
 <% end %>
 </table>

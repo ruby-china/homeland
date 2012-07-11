@@ -10,9 +10,9 @@
           app/assets/stylesheets/sprites/icons.scss
 
         Output size:
-          32x16
+          16x32
 
 
 */
 .icons_go_top { width: 16px; height: 16px; background: url(image-path('sprites/icons.png')) 0px 0px no-repeat; }
-.icons_rss { width: 16px; height: 16px; background: url(image-path('sprites/icons.png')) -16px 0px no-repeat; }
+.icons_rss { width: 16px; height: 16px; background: url(image-path('sprites/icons.png')) 0px -16px no-repeat; }

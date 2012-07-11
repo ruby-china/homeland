@@ -114,40 +114,33 @@ window.Topics =
       hash =
         type : "unfavorite"
       $.ajax
-       url : "/topics/#{topic_id}/favorite"
-       data : hash
-       type : "POST"
-       success : ->
-         $(el).attr("title","收藏")
-         $(el).attr("class","icon small_bookmark")
+        url : "/topics/#{topic_id}/favorite"
+        data : hash
+        type : "POST"
+      $(el).attr("title","收藏")
+      $(el).attr("class","icon small_bookmark")
     else
-      $.ajax
-       url : "/topics/#{topic_id}/favorite"
-       type : "POST"
-       success : ->
-         $(el).attr("title","取消收藏")
-         $(el).attr("class","icon small_bookmarked")
+      $.post "/topics/#{topic_id}/favorite"
+      $(el).attr("title","取消收藏")
+      $(el).attr("class","icon small_bookmarked")
     false
 
   follow : (el) ->
     topic_id = $(el).data("id")
     followed = $(el).data("followed")
-    if followed 
+    if followed
       $.ajax
         url : "/topics/#{topic_id}/unfollow"
         type : "POST"
-        success : (res) ->
-          $(el).data("followed", false)
-          $("i",el).attr("class", "icon small_follow")
+      $(el).data("followed", false)
+      $("i",el).attr("class", "icon small_follow")
     else
       $.ajax
         url : "/topics/#{topic_id}/follow"
         type : "POST"
-        success : (res) ->
-          $(el).data("followed", true)
-          $("i",el).attr("class", "icon small_followed")
+      $(el).data("followed", true)
+      $("i",el).attr("class", "icon small_followed")
     false
-
 
 # pages ready
 $(document).ready ->

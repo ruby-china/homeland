@@ -10,6 +10,6 @@ class PageVersion
   field :slug
   field :title
 
-  index :page_id
-  index [[:page_id, Mongo::ASCENDING], [:version,Mongo::ASCENDING]]
+  index :page_id => 1
+  index :page_id => 1, :version => 1
 end

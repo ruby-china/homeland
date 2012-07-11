@@ -39,11 +39,11 @@ class Topic
   attr_accessible :title, :body
   validates_presence_of :user_id, :title, :body, :node_id
 
-  index :node_id
-  index :user_id
-  index [[:replied_at,Mongo::DESCENDING],[:_id, Mongo::DESCENDING]]
-  index :likes_count
-  index :suggested_at
+  index :node_id => 1
+  index :user_id => 1
+  index :replied_at => -1,:_id => -1
+  index :likes_count => 1
+  index :suggested_at => 1
 
   counter :hits, :default => 0
 

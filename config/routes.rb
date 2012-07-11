@@ -2,11 +2,10 @@ RubyChina::Application.routes.draw do
   require 'api'
 
   resources :sites
-
-  resources :posts
   resources :pages, :path => "wiki" do
     collection do
       get :recent
+      post :preview
     end
   end
   resources :comments
@@ -18,7 +17,8 @@ RubyChina::Application.routes.draw do
       :registrations => :account,
       :sessions => :sessions,
       :omniauth_callbacks => "users/omniauth_callbacks"
-    } do
+    }
+  devise_scope :users do
     get "account/update_private_token" => "account#update_private_token", :as => :update_private_token_account
   end
 
@@ -78,7 +78,6 @@ RubyChina::Application.routes.draw do
     resources :sections
     resources :users
     resources :photos
-    resources :posts
     resources :pages do
       resources :versions, :controller => :page_versions do
         member do

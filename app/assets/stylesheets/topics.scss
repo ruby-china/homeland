@@ -21,12 +21,12 @@
     .replies {
        width:70px; margin-right:10px; text-align:right; vertical-align:middle;
        a.count,a.count:visited { line-height: 12px; font-weight: bold; color: white;
-         background-color: #84b0e7; display: inline-block;
+         background-color: #1c7fdb; display: inline-block;
          padding: 2px 10px 2px 10px;
          -moz-border-radius: 80px; -webkit-border-radius: 80px; border-radius: 80px;
          margin: 18px 12px 0px 0px; text-decoration: none;
        }
-       a.count:hover { color:write; background:#64b260; }
+       a.count:hover { color:write; background:#1dc115; }
        a.state_true:link,a.state_true:visited { background:#DDD; }
        a.state_true:hover { background:#aaa;}
     }

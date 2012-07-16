@@ -17,6 +17,12 @@
   a.feed:hover { text-decoration: none; color:#333;}
 }
 
+img.uface {
+  -webkit-border-radius: 80px;
+  -moz-border-radius: 80px;
+  border-radius: 80px;
+}
+
 .sidebar {
    h2 {
      font-size: 12px;

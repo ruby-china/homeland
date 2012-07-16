@@ -36,14 +36,15 @@ module UsersHelper
 
     if user.blank?
       # hash = Digest::MD5.hexdigest("") => d41d8cd98f00b204e9800998ecf8427e
-      return image_tag("#{Setting.gravatar_proxy}/avatar/d41d8cd98f00b204e9800998ecf8427e.png?s=#{width}")
+      return image_tag("avatar/#{size}.png", :class => "uface")
     end
 
     if user[:avatar].blank?
-      img_src = "#{Setting.gravatar_proxy}/avatar/#{user.email_md5}.png?s=#{width}"
-      img = image_tag(img_src, :style => "width:#{width}px;height:#{width}px;")
+      default_url = asset_path("avatar/#{size}.png")
+      img_src = "#{Setting.gravatar_proxy}/avatar/#{user.email_md5}.png?s=#{width}&d=404"
+      img = image_tag(img_src, :class => "uface", :style => "width:#{width}px;height:#{width}px;")
     else
-      img = image_tag(user.avatar.url(size), :style => "width:#{width}px;height:#{width}px;")
+      img = image_tag(user.avatar.url(size), :class => "uface", :style => "width:#{width}px;height:#{width}px;")
     end
 
     if link

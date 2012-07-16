@@ -23,8 +23,6 @@ code { background:none; }
   .badge-inverse { background:#666;}
 
   .search-query {
-    padding-left: 14px;
-    padding-right: 14px;
     margin-bottom: 0;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
@@ -49,7 +47,16 @@ code { background:none; }
   }
 }
 
-.breadcrumb { color:#999;}
+.breadcrumb {
+  color:#999; border:0px;
+  background:#FFF;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 0px 2px rgba(0,0,0,.05);
+  -moz-box-shadow: 0 0px 2px rgba(0,0,0,.1);
+  box-shadow: 0 0px 2px rgba(0,0,0,.05);
+}
 
 
 .container { width:960px; }
@@ -88,6 +95,15 @@ a[rel=userpopover] {
   display: inline-block;
 }
 
+form {
+  margin-bottom:0px;
+}
+.form-actions {
+  background-color: #f9f9f9;
+  border-top: 1px solid #eee;
+  margin-bottom:0px;
+}
+
 .box {
   background-color: #fff;
   padding:10px;
@@ -95,9 +111,9 @@ a[rel=userpopover] {
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
-  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-  box-shadow: 0 1px 2px rgba(0,0,0,.15);
+  -webkit-box-shadow: 0 0px 2px rgba(0,0,0,.05);
+  -moz-box-shadow: 0 0px 2px rgba(0,0,0,.1);
+  box-shadow: 0 0px 2px rgba(0,0,0,.05);
   h2.title {
     font-size: 12px;
     margin:0 -10px; padding:0 10px; margin-bottom:8px;

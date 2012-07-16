@@ -16,16 +16,19 @@
           <%= link_to(truncate(topic.title, :length => 100), topic_path(topic), :title => topic.title) %>
       </div>
       <div class="info leader">
-        <%= t("common.by") %> <%= user_name_tag(topic.user) %>
-        <%= t("common.at") %> <%= render_node_name(topic.node_name,topic.node_id) %> <%= t("common.create_item")%>
-      </div>
-      <div class="info time">
-        <% if topic.last_reply_user_login.blank? %>
-          <%= raw t("common.created_at", :time => timeago(topic.created_at))%>
-        <% else %>
-          <%= t("common.last_by")%> <%= user_name_tag(topic.last_reply_user_login) %> <%= raw t("common.reply_at", :time => timeago(topic.replied_at))%>
-
+        <% if action_name != "node" %>
+        <%= render_node_name(topic.node_name,topic.node_id) %>
+        •
         <% end %>
+        <%= user_name_tag(topic.user) %>
+        •
+        <em>
+          <% if topic.last_reply_user_login.blank? %>
+            <%= raw t("common.created_at", :time => timeago(topic.created_at))%>
+          <% else %>
+            <%= t("common.last_by")%> <%= user_name_tag(topic.last_reply_user_login) %> <%= raw t("common.reply_at", :time => timeago(topic.replied_at))%>
+          <% end %>
+        </em>
       </div>
     </div>
   </div>

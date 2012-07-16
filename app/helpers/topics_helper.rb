@@ -35,8 +35,8 @@ module TopicsHelper
       class_name = "followed"
     end
     icon = content_tag("i", "", :class => "icon small_#{class_name}")
-    link_to raw([icon,"关注"].join(" ")), "#", :onclick => "return Topics.follow(this);", 
-                        'data-id' => topic.id, 
+    link_to raw([icon,"关注"].join(" ")), "#", :onclick => "return Topics.follow(this);",
+                        'data-id' => topic.id,
                         'data-followed' => (class_name == "followed"),
                         :rel => "twipsy"
   end
@@ -48,10 +48,6 @@ module TopicsHelper
 
   def render_topic_last_reply_time(topic)
     l((topic.replied_at || topic.created_at), :format => :short)
-  end
-
-  def render_topic_count(topic)
-    topic.replies_count
   end
 
   def render_topic_created_at(topic)

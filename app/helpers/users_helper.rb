@@ -48,7 +48,7 @@ module UsersHelper
     end
 
     if link
-      raw %(<a href="#{user_path(user.login)}" #{user_popover_info(user)} class="user_avatar">#{img}</a>)
+      raw %(<a href="#{user_path(user.login)}" #{user_popover_info(user)}>#{img}</a>)
     else
       raw img
     end

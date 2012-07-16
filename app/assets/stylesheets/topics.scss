@@ -11,7 +11,6 @@
 
 .topics {
   .topic {
-    .avatar_large { width:48px; }
     .avatar { width:56px; margin-left:10px; }
     .infos { padding-right:74px; }
     .right_info { padding-left:66px;}
@@ -73,9 +72,14 @@ form .node_select {
 #topic_show {
   h1 { font-size:22px; color:#333;text-align: left; line-height:100%; margin-bottom:8px; }
   .infos {
-    padding-bottom:5px; margin-bottom:10px;
+    position:relative;
+    margin-bottom:10px;
+    margin-right:56px;
     border-bottom:1px solid #ddd;
-   }
+    margin:0 -10px;
+    padding:0 10px 5px 10px;
+  }
+  .avatar_large { width:48px; }
 }
 
 .more { padding:8px; padding-bottom:0; font-size:14px; text-align:right; }

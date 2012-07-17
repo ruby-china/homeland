@@ -143,6 +143,7 @@ form .node_select {
 }
 
 #replies {
+  padding-bottom:0px;
   .total { padding-bottom:6px; color:#999; }
   .reply {
     &.light { background:#F7F2FC; }
@@ -151,7 +152,8 @@ form .node_select {
     .face { padding-right:8px; width:48px; margin-left:0; }
     .infos { padding-left:58px; }
     .info {
-      color:#999;height:18px;
+      font-size:12px;
+      color:#bbb; height:20px;
       a:link,
       a:visited { color:#999; }
       .name {

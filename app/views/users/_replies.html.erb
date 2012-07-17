@@ -1,15 +1,14 @@
-<table class="node_topics table">
-  <tr class="head">
-    <td class="replies"><%=t("common.reply_count")%></td>
-    <td class="title"><%=t("common.title")%></td>
-    <td class="replied_at"><%=t("common.replied_at")%></td>
-  </tr>
+<ul class="recent_replies">
   <% replies.each do |reply| %>
     <% next if reply.topic.blank? %>
-    <tr class="topic <%= cycle("odd","") %>">
-      <td class="replies"><%= reply.topic.replies_count %> </td>
-      <td class="title"><%= link_to(reply.topic.title, topic_path(reply.topic_id)) %></td>
-      <td class="replied_at"><%= timeago(reply.created_at) %></td>
-    </tr>
+    <li>
+      <div class="title">
+        <%= link_to(reply.topic.title, topic_path(reply.topic_id)) %>
+        <span class="info">at <%= timeago(reply.created_at) %></span>
+      </div>
+      <div class="body">
+        <%= raw reply.body_html %>
+      </div>
+    </li>
   <% end %>
-</table>
+</ul>

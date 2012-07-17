@@ -7,6 +7,9 @@ module RubyChina
     error_format :json
 
     helpers APIHelpers
+    
+    format :json
+    default_format :json
 
     # Authentication:
     # APIs marked as 'require authentication' should be provided the user's private token,
@@ -60,6 +63,58 @@ module RubyChina
         # @topic = Topic.includes(:replies => [:user]).find_by_id(params[:id])
         present @topic, :with => APIEntities::Topic
       end
+      
+      # Post a new reply
+      # require authentication
+      # params:  
+      #   body
+      # Example
+      #   /api/topics/1/replies.json
+      post ":id/replies" do
+        authenticate!
+        @topic = Topic.find(params[:id])
+        @reply = @topic.replies.build(:reply => {:body => params[:body]})
+        @reply.user_id = current_user.id
+        @reply.save
+      end
+      
+      # Follow a topic
+      # require authentication
+      # params:
+      #   NO
+      # Example
+      #   /api/topics/1/follow.json
+      post ":id/follow" do
+        authenticate!
+        @topic = Topic.find(params[:id])
+        @topic.push_follower(current_user.id)
+      end
+      
+      # Unfollow a topic
+      # require authentication
+      # params:
+      #   NO
+      # Example
+      #   /api/topics/1/unfollow.json
+      post ":id/unfollow" do
+        authenticate!
+        @topic = Topic.find(params[:id])
+        @topic.pull_follower(current_user.id)
+      end
+      
+      # Add/Remove a topic to/from favorite
+      # require authentication
+      # params: 
+      #   type(optional) default is empty, set it unfavoritate to remove favorite
+      # Example
+      #   /api/topics/1/favorite.json     
+      post ":id/favorite" do
+        if params[:type] == "unfavorite"
+          current_user.unfavorite_topic(params[:id])
+        else
+          current_user.favorite_topic(params[:id])
+        end
+      end      
     end
 
     resource :nodes do

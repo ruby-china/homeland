@@ -43,7 +43,7 @@ class Reply
   end
 
   after_create do
-    Reply.delay.send_topic_reply_notification(self.id)
+    Reply.new.delay.send_topic_reply_notification(self.id)
   end
 
   def self.send_topic_reply_notification(reply_id)

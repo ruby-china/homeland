@@ -66,9 +66,10 @@ module RubyChina
       
       # Post a new reply
       # require authentication
-      # params:
-      #   id
+      # params:  
       #   body
+      # Example
+      #   /api/topics/1/replies.json
       post ":id/replies" do
         authenticate!
         @topic = Topic.find(params[:id])
@@ -81,6 +82,8 @@ module RubyChina
       # require authentication
       # params:
       #   NO
+      # Example
+      #   /api/topics/1/follow.json
       post ":id/follow" do
         authenticate!
         @topic = Topic.find(params[:id])
@@ -91,6 +94,8 @@ module RubyChina
       # require authentication
       # params:
       #   NO
+      # Example
+      #   /api/topics/1/unfollow.json
       post ":id/unfollow" do
         authenticate!
         @topic = Topic.find(params[:id])
@@ -100,7 +105,9 @@ module RubyChina
       # Add/Remove a topic to/from favorite
       # require authentication
       # params: 
-      #   NO
+      #   type(optional) default is empty, set it unfavoritate to remove favorite
+      # Example
+      #   /api/topics/1/favorite.json     
       post ":id/favorite" do
         if params[:type] == "unfavorite"
           current_user.unfavorite_topic(params[:id])

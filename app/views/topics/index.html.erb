@@ -11,7 +11,7 @@
 
   </div>
 
-  <% if action_name == "index" %>
+  <% if action_name == "index" && !mobile? %>
     <%= render_cell :topics, :index_sections %>
     <%= render_cell :topics, :index_locations %>
   <% end %>
@@ -24,8 +24,10 @@
 
 </div>
 
-<div class="sidebar">
+<% if !mobile? %>
+  <div class="sidebar">
     <%= render "sidebar_for_topic_index" if action_name.in?(%w(index)) %>
     <%= render "sidebar_for_topic_recent" if action_name.in?(%w(recent no_reply)) %>
     <%= render "sidebar_for_topic_node" if action_name == "node" %>
-</div>
+  </div>
+<% end %>

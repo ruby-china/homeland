@@ -37,7 +37,7 @@
     <% else %>
     <div id="replies" class="box">
       <div class="total">
-        共收到 <%= @topic.replies_count %> 条回复
+        共收到 <b><%= @topic.replies_count %></b> 条回复
       </div>
       <%= render :partial => "replies/reply", :collection => @replies %>
     </div>
@@ -63,8 +63,10 @@
   <% end %>
 </div>
 
-<div class="sidebar">
+<% if !mobile? %>
+  <div class="sidebar">
     <%= render_cell :topics, :sidebar_for_new_topic_node, { :action => params[:action], :node => @node } %>
     <%= render_cell :topics, :sidebar_for_more_like_this, { :topic => @topic} %>
     <%= render_cell :topics, :sidebar_for_node_recent_topics, { :topic => @topic} %>
-</div>
+  </div>
+<% end %>

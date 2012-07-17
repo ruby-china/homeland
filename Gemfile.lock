@@ -133,8 +133,6 @@ GEM
     hashie (1.2.0)
     highline (1.6.8)
     hike (1.2.1)
-    hoe (2.14.0)
-      rake (~> 0.8)
     i18n (0.6.0)
     journey (1.0.3)
     jquery-atwho-rails (0.1.6)
@@ -147,7 +145,6 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    mash (0.1.1)
     md_emoji (0.0.6)
       rails (>= 3.1.0)
       redcarpet (>= 2.0)
@@ -258,10 +255,6 @@ GEM
       activesupport (>= 3.0)
       railties (>= 3.0)
       rspec (~> 2.10.0)
-    ruby-github (0.0.3)
-      hoe (>= 1.5.1)
-      json
-      mash (>= 0.0.3)
     rubypython (0.5.3)
       blankslate (>= 2.1.2.3)
       ffi (~> 1.0.7)
@@ -373,7 +366,6 @@ DEPENDENCIES
   redis-objects (= 0.5.2)
   rspec-cells
   rspec-rails (~> 2.10.0)
-  ruby-github
   rvm-capistrano
   sass-rails (~> 3.2.3)
   settingslogic (~> 2.0.6)

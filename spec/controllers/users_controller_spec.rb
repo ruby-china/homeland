@@ -49,15 +49,15 @@ describe UsersController do
     end
   end
 
-  describe ":location" do
-    it "should render 404 if there is no user in that location" do
-      get :location, :id => "Mars"
+  describe ":city" do
+    it "should render 404 if there is no user in that city" do
+      get :city, :id => "Mars"
       response.should_not be_success
       response.status.should == 404
     end
 
-    it "should show user associated with that location" do
-      get :location, :id => user.location
+    it "should show user associated with that city" do
+      get :city, :id => user.location
       response.status.should == 200
       assigns[:users].should include(user)
     end

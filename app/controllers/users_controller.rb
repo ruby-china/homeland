@@ -15,7 +15,7 @@ class UsersController < ApplicationController
 
   def show
     @topics = @user.topics.recent.limit(10)
-    @replies = @user.replies.only(:topic_id,:created_at).recent.includes(:topic).limit(10)
+    @replies = @user.replies.only(:topic_id,:body_html,:created_at).recent.includes(:topic).limit(10)
     set_seo_meta("#{@user.login}")
     drop_breadcrumb(@user.login)
   end
@@ -39,11 +39,11 @@ class UsersController < ApplicationController
       return
     end
 
-    current_user.authorizations.destroy_all(:conditions => {:provider => provider})
+    current_user.authorizations.destroy_all({ :provider => provider })
     redirect_to edit_user_registration_path, :flash => {:warring => t("users.unbind_success", :provider => provider.titleize )}
   end
 
-  def location
+  def city
     @location = Location.find_by_name(params[:id])
     if @location.blank?
       render_404

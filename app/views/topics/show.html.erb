@@ -37,7 +37,7 @@
     <% else %>
     <div id="replies" class="box">
       <div class="total">
-        共收到 <%= @topic.replies_count %> 条回复
+        共收到 <b><%= @topic.replies_count %></b> 条回复
       </div>
       <%= render :partial => "replies/reply", :collection => @replies %>
     </div>

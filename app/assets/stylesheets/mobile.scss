@@ -27,7 +27,7 @@ body {
     margin-right: 10px;
   }
   ul li {
-    span {      
+    span {
       width: auto;
       text-indent: 5px;
     }
@@ -37,12 +37,12 @@ body {
     span {
       display:none;
     }
-  } 
+  }
 }
 table.node_topics .replies {
   width: 40px;
 }
-.breadcrumb { 
+.breadcrumb {
   padding: 7px;
   margin-right:95px;
   .first { display:none; }
@@ -54,9 +54,9 @@ table.node_topics .replies {
 }
 #reply.form {
   textarea { width: 98%; height: 80px; }
-  .submit_buttons { 
+  .submit_buttons {
     position:static;
-    float:none; 
+    float:none;
     .help-inline { display:none; }
   }
   .helpblock { display:none; }
@@ -67,15 +67,15 @@ table.node_topics .replies {
 }
 textarea.long {  width: 98%; height: 80px; }
 .help-block { display:none; }
-#reply .editor_toolbar { 
-  width:100%; 
+#reply .editor_toolbar {
+  width:100%;
   .pull-right { display:none; }
 }
 form {
   margin-bottom: 0px;
   input[type="text"] {
     width: 80%;
-  }  
+  }
   fieldset {
     margin-bottom: 18px;
     padding-top: 18px;
@@ -101,15 +101,15 @@ form {
     margin-left: 0px;
   }
   .clearfix { margin-bottom:8px; }
-  .actions { 
+  .actions {
     padding:0; padding-top:10px; background:#FFF; margin-bottom:0;
-  }	
+  }
   #user_github {
     width: 130px;
   }
 }
 .input-xxlarge, input.xxlarge, textarea.xxlarge, select.xxlarge {
-  width:98%; 
+  width:98%;
 }
 #sections li {
   label {
@@ -146,10 +146,13 @@ form {
       width:33px;
       img { max-width:32px; max-height:32px; }
     }
+    .title { font-size:13px; margin:0; }
     .right_info { padding-left:48px; }
-  }
-  .topic_line {
-    .time { display:none; }
+    .info {
+      font-size:12px; margin:0;
+      .node { padding:0;}
+      em { display:none; }
+    }
   }
 }
 #replies .reply .body img { max-width:98%; }
@@ -183,7 +186,7 @@ form {
   li.active,
   li.prev,
   li.next { display:inline; }
-  li.active { border:none; 
+  li.active { border:none;
     a {
       background:#F0F0F0;
       color:#666;

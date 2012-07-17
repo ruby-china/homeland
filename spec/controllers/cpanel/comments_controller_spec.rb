@@ -39,20 +39,6 @@ describe Cpanel::CommentsController do
         response.should redirect_to(cpanel_comments_url)
       end
     end
-
-    describe "with invalid params" do
-      it "assigns the comment as @comment" do
-        Comment.any_instance.stub(:save).and_return(false)
-        put :update, :id => comment.id, :comment => {}
-        assigns(:comment).should eq(comment)
-      end
-
-      it "re-renders the 'edit' template" do
-        Comment.any_instance.stub(:save).and_return(false)
-        put :update, :id => comment.id, :comment => {}
-        response.should render_template("edit")
-      end
-    end
   end
 
   describe "DELETE destroy" do

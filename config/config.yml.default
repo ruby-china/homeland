@@ -1,8 +1,8 @@
 defaults: &defaults
   app_name: "Ruby China"
   foot_html: "&copy; Ruby China."
-  domain: "127.0.0.1:3000"    
-  admin_emails: 
+  domain: "127.0.0.1:3000"
+  admin_emails:
     - "admin@admin.com"
   google_analytics_key: ""
   upload_url: "http://ruby-china-files-dev.b0.upaiyun.com"
@@ -23,7 +23,7 @@ defaults: &defaults
   external_feed_url: "http://ruby-taiwan.org/topics/feed"
   external_feed_name: "Ruby Taiwan Group"
   twitter_id: "ruby_china"
-  gravatar_proxy: "http://gravatar.com"
+  gravatar_proxy: "http://ruby-china.org"
 
 development:
   <<: *defaults

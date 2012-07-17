@@ -7,10 +7,6 @@
 <div class="content">
   <div id="topic_show" class="topics box hfeed">
     <div class="topic hentry">
-      <div class="pull-right avatar_large">
-        <%= user_avatar_tag(@topic.user, :large, :link => false) %>
-      </div>
-
       <%= render :partial => "topics/topic_info", :locals => { :topic => @topic} %>
 
       <%= raw SiteConfig.before_topic_html %>
@@ -40,7 +36,9 @@
     </div>
     <% else %>
     <div id="replies" class="box">
-      <%= render "topics/translation/topic_reply_statics", :topic => @topic %>
+      <div class="total">
+        共收到 <%= @topic.replies_count %> 条回复
+      </div>
       <%= render :partial => "replies/reply", :collection => @replies %>
     </div>
   <% end %>

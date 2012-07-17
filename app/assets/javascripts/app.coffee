@@ -1,6 +1,13 @@
 #= require jquery
 #= require jquery_ujs
-#= require bootstrap
+#= require bootstrap-transition
+#= require bootstrap-alert
+#= require bootstrap-modal
+#= require bootstrap-dropdown
+#= require bootstrap-tab
+#= require bootstrap-tooltip
+#= require bootstrap-popover
+#= require bootstrap-button
 #= require will_paginate
 #= require jquery.timeago
 #= require jquery.timeago.settings

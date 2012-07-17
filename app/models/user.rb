@@ -1,7 +1,7 @@
 # coding: utf-8
-require "ruby-github"
 require "securerandom"
 require "digest/md5"
+require "open-uri"
 class User
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -261,21 +261,31 @@ class User
 
   # Github 项目
   def github_repositories
-    return [] # TODO: 这里临时关闭，原因见 #55 ，需要修正
     return [] if self.github.blank?
     count = 14
-    cache_key = "github_repositories:#{self.github}+#{count}+v1"
+    cache_key = "github_repositories:#{self.github}+#{count}+v2"
     items = Rails.cache.read(cache_key)
     if items == nil
       begin
-        github = GitHub::API.user(self.github)
-        items = github.repositories.sort { |a1,a2| a2.watchers <=> a1.watchers }.take(count)
-        Rails.cache.write(cache_key, items, :expires_in => 7.days)
+        json = open("https://api.github.com/users/#{self.github}/repos?type=owner&sort=pushed").read
       rescue => e
         Rails.logger.error("Github Repositiory fetch Error: #{e}")
         items = []
         Rails.cache.write(cache_key, items, :expires_in => 1.days)
+        return items
       end
+
+      items = JSON.parse(json)
+      items = items.collect do |a1|
+        {
+          :name => a1["name"],
+          :url => a1["url"],
+          :watchers => a1["watchers"],
+          :description => a1["description"]
+        }
+      end
+      items = items.sort { |a1,a2| a2[:watchers] <=> a1[:watchers] }.take(count)
+      Rails.cache.write(cache_key, items, :expires_in => 7.days)
     end
     items
   end

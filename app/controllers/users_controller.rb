@@ -43,7 +43,7 @@ class UsersController < ApplicationController
     redirect_to edit_user_registration_path, :flash => {:warring => t("users.unbind_success", :provider => provider.titleize )}
   end
 
-  def location
+  def city
     @location = Location.find_by_name(params[:id])
     if @location.blank?
       render_404

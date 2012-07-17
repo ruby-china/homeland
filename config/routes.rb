@@ -10,7 +10,6 @@ RubyChina::Application.routes.draw do
   end
   resources :comments
   resources :notes
-  match "/uploads/*path" => "gridfs#serve"
   root :to => "home#index"
 
   devise_for :users, :path => "account", :controllers => {
@@ -24,7 +23,7 @@ RubyChina::Application.routes.draw do
 
   match "account/auth/:provider/unbind", :to => "users#auth_unbind"
 
-  match "users/location/:id", :to => "users#location", :as => :location_users
+  match "users/city/:id", :to => "users#city", :as => :location_users
   resources :users do
     member do
       get :topics

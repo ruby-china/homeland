@@ -25,7 +25,7 @@ gem "mongoid", "3.0.0.rc"
 # gem 'mongo-rails-instrumentation','0.2.4'
 gem 'mongoid_auto_increment_id', "0.5.0"
 gem 'mongoid_rails_migrations', '~> 0.0.14'
-gem "mongoid_colored_logger", :git => "git://github.com/huacnlee/mongoid_colored_logger.git"
+gem "mongoid_colored_logger" #, :git => "git://github.com/huacnlee/mongoid_colored_logger.git"
 
 # 用户系统
 gem 'devise', '2.1.0'

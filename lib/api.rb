@@ -7,6 +7,9 @@ module RubyChina
     error_format :json
 
     helpers APIHelpers
+    
+    format :json
+    default_format :json
 
     # Authentication:
     # APIs marked as 'require authentication' should be provided the user's private token,
@@ -58,6 +61,51 @@ module RubyChina
         @topic = Topic.includes(:replies => [:user]).where(:_id => params[:id]).first
         present @topic, :with => APIEntities::Topic
       end
+      
+      # Post a new reply
+      # require authentication
+      # params:
+      #   id
+      #   body
+      post ":id/replies" do
+        authenticate!
+        @topic = Topic.find(params[:id])
+        @reply = @topic.replies.build(:reply => {:body => params[:body]})
+        @reply.user_id = current_user.id
+        @reply.save
+      end
+      
+      # Follow a topic
+      # require authentication
+      # params:
+      #   NO
+      post ":id/follow" do
+        authenticate!
+        @topic = Topic.find(params[:id])
+        @topic.push_follower(current_user.id)
+      end
+      
+      # Unfollow a topic
+      # require authentication
+      # params:
+      #   NO
+      post ":id/unfollow" do
+        authenticate!
+        @topic = Topic.find(params[:id])
+        @topic.pull_follower(current_user.id)
+      end
+      
+      # Add/Remove a topic to/from favorite
+      # require authentication
+      # params: 
+      #   NO
+      post ":id/favorite" do
+        if params[:type] == "unfavorite"
+          current_user.unfavorite_topic(params[:id])
+        else
+          current_user.favorite_topic(params[:id])
+        end
+      end      
     end
 
     resource :nodes do

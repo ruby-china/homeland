@@ -202,7 +202,8 @@ describe User do
     end
 
     it "should genrate email_md5 with params" do
-      u = User.new(:email => "a@gmail.com")
+      u = User.new
+      u.email = "a@gmail.com"
       u.email.should == "a@gmail.com"
       u.email_md5.should == Digest::MD5.hexdigest("a@gmail.com")
     end

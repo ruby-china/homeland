@@ -3,7 +3,7 @@
   <fieldset>
     <legend></legend>
     <%= f.input :name %>
-    <%= f.input :section, :collection => Section.all.collect { |s| [s.name,s.id] } %>
+    <%= f.input :section_id, :collection => Section.all.collect { |s| [s.name,s.id] } %>
     <%= f.input :sort %>
     <%= f.input :summary, :input_html => {:class => "xxlarge"} %>
     <div class="form-actions">

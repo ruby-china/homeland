@@ -48,7 +48,7 @@ module UsersHelper
     end
 
     if link
-      raw %(<a href="#{user_path(user.login)}" #{user_popover_info(user)}>#{img}</a>)
+      raw %(<a href="#{user_path(user.login)}">#{img}</a>)
     else
       raw img
     end
@@ -81,15 +81,4 @@ module UsersHelper
     end
   end
 
-  private
-
-  def user_popover_info(user)
-    return "" if user.blank?
-    return "" if user.location.blank?
-    name = user.name
-    name = user.login if name.blank?
-    title = user.location.blank? ? "#{name}" : "<i><span class='icon small_pin'></span>#{user.location}</i> #{name}"
-    tagline = user.tagline.blank? ? "这哥们儿没签名" : truncate(user.tagline, :length => 20)
-    raw %(rel="userpopover" title="#{h(title)}" data-content="#{h(tagline)}")
-  end
 end

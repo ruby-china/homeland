@@ -6,7 +6,6 @@
 #= require bootstrap-dropdown
 #= require bootstrap-tab
 #= require bootstrap-tooltip
-#= require bootstrap-popover
 #= require bootstrap-button
 #= require will_paginate
 #= require jquery.timeago
@@ -84,11 +83,6 @@ window.App =
   initForDesktopView : () ->
     return if typeof(app_mobile) != "undefined"
     $("a[rel=twipsy]").tooltip()
-    $("a[rel=popover]").popover()
-
-    # 用户头像 Popover
-    $("a[rel=userpopover]").live "mouseover", () ->
-      $(this).popover("show")
 
     # CommentAble @ 回复功能
     commenters = []

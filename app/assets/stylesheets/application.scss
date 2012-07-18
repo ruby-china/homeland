@@ -81,19 +81,7 @@ fieldset legend { font-size:16px; font-weight:bold;}
 
 a.label:hover { text-decoration: none; color:#FFF;}
 
-.popover {
-  h3 {
-    font-size:14px; padding:5px 8px;
-    i { float:right; font-size:12px; color:#999; font-style: normal;}
-  }
-  .popover-content { padding:8px; font-size:12px; color:#666; }
-}
-
 abbr[title] { border:0; cursor:default; }
-
-a[rel=userpopover] {
-  display: inline-block;
-}
 
 form {
   margin-bottom:0px;

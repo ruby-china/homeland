@@ -3,6 +3,20 @@
     <link rel="author" content="<%= @topic.user.google_profile_url %>" />
   <% end %>
 <% end %>
+<% content_for :scripts do %>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      <% if admin? %>
+        $("#replies .reply a.edit").css('display','inline-block');
+      <% elsif current_user %>
+        $("#replies .reply a.edit[data-uid='<%= current_user.id %>']").css('display','inline-block');
+      <% end %>
+      <% if current_user && !@user_liked_reply_ids.blank? %>
+        Topics.checkRepliesLikeStatus([<%= @user_liked_reply_ids.join(",") %>]);
+      <% end %>
+    })
+  </script>
+<% end %>
 
 <div class="content">
   <div id="topic_show" class="topics box hfeed">

@@ -50,9 +50,8 @@ window.App =
           id : likeable_id
 
       likes_count += 1
-      $el.data("state","liked").data('count', likes_count).attr("title", "取消喜欢")
-      $('span',el).text("#{likes_count}人喜欢")
-      $("i.icon",el).attr("class","icon small_liked")
+      $el.data('count', likes_count)
+      App.likeableAsLiked(el)
     else
       $.ajax
         url : "/likes/#{likeable_id}"
@@ -68,6 +67,12 @@ window.App =
         $('span',el).text("#{likes_count}人喜欢")
       $("i.icon",el).attr("class","icon small_like")
     false
+
+  likeableAsLiked : (el) ->
+    likes_count = $(el).data("count")
+    $(el).data("state","liked").attr("title", "取消喜欢")
+    $('span',el).text("#{likes_count}人喜欢")
+    $("i.icon",el).attr("class","icon small_liked")
 
   # 绑定 @ 回复功能
   atReplyable : (el, logins) ->

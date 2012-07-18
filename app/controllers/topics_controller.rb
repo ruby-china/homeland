@@ -53,6 +53,10 @@ class TopicsController < ApplicationController
     @node = @topic.node
     @replies = @topic.replies.without_body.asc(:_id).all.includes(:user).reject { |r| r.user.blank? }
     if current_user
+      # 找出用户 like 过的 Reply，给 JS 处理 like 功能的状态
+      @user_liked_reply_ids = []
+      @replies.each { |r| @user_liked_reply_ids << r.id if r.liked_user_ids.include?(current_user.id) }
+      # 通知处理
       unless current_user.topic_read?(@topic)
         current_user.notifications.unread.any_of({:mentionable_type => 'Topic', :mentionable_id => @topic.id},
                                                  {:mentionable_type => 'Reply', :mentionable_id.in => @replies.map(&:id)},

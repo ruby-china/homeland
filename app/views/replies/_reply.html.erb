@@ -1,3 +1,4 @@
+<% cache(["topic/#{@topic.id}",reply]) do %>
 <div class="reply<%= ' popular' if reply.popular? %>" id="reply<%= reply_counter + 1 %>">
   <div class="pull-left face"><%= user_avatar_tag(reply.user, :normal) %></div>
   <div class="infos">
@@ -7,12 +8,9 @@
         <%= reply_counter + 1 %><%= t("common.floor")%>, <%= raw t("common.reply_at", :time => timeago(reply.created_at)) %>
       </span>
       <span class="opts">
-        <%= likeable_tag(reply) %>
-        <% if can?(:update,reply) %>
-          <%= link_to("", edit_topic_reply_path(@topic,reply), :class => "edit icon small_edit", 'data-uid' => reply.user_id, :title => "修改回帖")%>
-        <% end %>
-        <%= link_to("", "#",
-            'data-floor' => reply_counter + 1, 'data-login' => reply.user.login,
+        <%= likeable_tag(reply, :cache => true) %>
+        <%= link_to("", edit_topic_reply_path(@topic,reply), :class => "edit icon small_edit", 'data-uid' => reply.user_id, :title => "修改回帖")%>
+        <%= link_to("", "#", 'data-floor' => reply_counter + 1, 'data-login' => reply.user.login,
             :title => t("topics.reply_this_floor"), :class => "icon small_reply" )
         %>
       </span>
@@ -24,3 +22,4 @@
     </span>
   </div>
 </div>
+<% end %>

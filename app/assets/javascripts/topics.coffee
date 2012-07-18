@@ -49,6 +49,12 @@ window.Topics =
     $("#replies .reply").removeClass("light")
     $("#reply"+floor).addClass("light")
 
+  # 异步更改用户 like 过的回复的 like 按钮的状态
+  checkRepliesLikeStatus : (user_liked_reply_ids) ->
+    for id in user_liked_reply_ids
+      el = $("#replies a.likeable[data-id=#{id}]")
+      App.likeableAsLiked(el)
+
   # Ajax 回复后的事件
   replyCallback : (success, msg) ->
     $("#main .alert-message").remove()

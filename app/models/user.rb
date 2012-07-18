@@ -216,6 +216,7 @@ class User
     return false if likeable.liked_by_user?(self)
     likeable.push(:liked_user_ids, self.id)
     likeable.inc(:likes_count, 1)
+    likeable.touch
   end
 
   # 取消收藏
@@ -224,6 +225,7 @@ class User
     return false if not likeable.liked_by_user?(self)
     likeable.pull(:liked_user_ids, self.id)
     likeable.inc(:likes_count, -1)
+    likeable.touch
   end
 
   # 收藏话题

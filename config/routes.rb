@@ -23,13 +23,6 @@ RubyChina::Application.routes.draw do
 
   match "account/auth/:provider/unbind", :to => "users#auth_unbind"
 
-  match "users/city/:id", :to => "users#city", :as => :location_users
-  resources :users do
-    member do
-      get :topics
-      get :favorites
-    end
-  end
   resources :notifications, :only => [:index, :destroy] do
     collection do
       post :clear
@@ -90,5 +83,18 @@ RubyChina::Application.routes.draw do
     resources :locations
   end
 
+  match "api", :to => "home#api"
   mount RubyChina::API => "/"
+
+  # WARRING! 请保持 User 的 routes 在所有路由的最后，以便于可以让用户名在根目录下面使用，而又不影响到其他的 routes
+  # 比如 http://ruby-china.org/huacnlee
+  match "users/city/:id", :to => "users#city", :as => :location_users
+  match "users", :to => "users#index", :as => :users
+  resources :users, :path => "" do
+    member do
+      get :topics
+      get :favorites
+    end
+  end
+
 end

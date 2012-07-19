@@ -1,0 +1,20 @@
+<div class="box">
+  <h1>Ruby China API 目录</h1>
+  <p>下面是简单的 API 路由列表, 具体请参加源代码 <a href="https://github.com/ruby-china/ruby-china/blob/master/lib/api.rb" target="_blank">api.rb</a></p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Method</th>
+        <th>URL</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% RubyChina::API.routes.each do |route| %>
+      <tr>
+        <td><%= route.route_method %></td>
+        <% route_path = route.route_path.gsub("(.:format)",".json") %>
+        <td>http://<%= Setting.domain %><%= route.route_path.gsub("(.:format)",".json") %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

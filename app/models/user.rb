@@ -281,7 +281,7 @@ class User
       items = items.collect do |a1|
         {
           :name => a1["name"],
-          :url => a1["url"],
+          :url => a1["html_url"],
           :watchers => a1["watchers"],
           :description => a1["description"]
         }

@@ -34,32 +34,43 @@
         </li>
       <% end %>
 
+      <% if !@user.email.blank? %>
+      <li>
+        <label>Email:</label>
+        <span><%= auto_link @user.email %></span>
+      </li>
+      <% end %>
+
       <% if !@user.twitter.blank? %>
         <li>
           <label><%= t("users.twitter")%>:</label>
           <span><%= link_to "@#{@user.twitter}", @user.twitter_url, :class => "twitter", :rel => "nofollow" %></span>
         </li>
       <% end %>
-      
-      <li><label><%= t("users.join_time")%>:</label><%= render_user_join_time(@user) %></li>
-      
-      <% if !@user.tagline.blank? %>
-        <li>
-          <label><%= t("users.signature")%>:</label>
-          <span><%= render_user_tagline(@user) %></span>
-        </li>
-      <% end %>
-      
+
       <% if !@user.website.blank? %>
         <li>
           <label><%= t("users.personal_website")%>:</label>
           <span><%= render_user_personal_website(@user)%></span>
         </li>
       <% end %>
+
+      <% if !@user.tagline.blank? %>
+        <li>
+          <label><%= t("users.signature")%>:</label>
+          <span><%= render_user_tagline(@user) %></span>
+        </li>
+      <% end %>
+
+      <li>
+        <label><%= t("users.join_time")%>:</label>
+        <span><%= render_user_join_time(@user) %></span>
+      </li>
+
     </ul>
   </div>
 
-  
+
 </div>
 
 <% if !@user.bio.blank? %>

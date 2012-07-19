@@ -1,20 +1,63 @@
-.node_topics td.title a:link,
-.node_topics td.title a:visited {color:#2c64d7; text-decoration: none;}
-.node_topics td.title a:hover { text-decoration: underline; }
-/* topics list in node page */
-.node_topics tr.head td {  border-top:none;
-   padding-top:14px; color:#CCC; font-weight:bold; font-size:12px; }
-.node_topics tr td { border-bottom:1px solid #ddd;}
-.node_topics tr.odd td { background:#F9F9F9; }
-.node_topics tr.topic td.title { }
-.node_topics tr.topic td.author { width:80px;}
-.node_topics tr.topic td.author a { color:#666; font-weight:bold; }
+.subnav {
+  margin-bottom:-18px;
+  .nav-tabs {
+    border-bottom:0px;
+    padding-left:20px;
+  }
+  .nav-tabs > li > a:hover {
+    border-color:transparent;
+    background:none;
+    text-decoration:underline;
+  }
+  .nav-tabs > .active > a, .nav-tabs > .active > a:hover {
+    color: #555555;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+    cursor: default;
+  }
+}
+.node_topics {
+  td.title {
+    a:link,
+    a:visited {color:#2c64d7; text-decoration: none;}
+    a:hover { text-decoration: underline; }
+    em { font-style:normal; font-size:12px; color:#bbb; }
+  }
+  tr.head {
+    td {  border-top:none; padding-top:14px; color:#CCC; font-weight:bold; font-size:12px; }
+  }
+  tr.odd {
+    td { background:#F9F9F9; }
+  }
+  tr.topic {
+    td.author {
+      width:80px;
+      a { color:#666; font-weight:bold; }
+    }
+  }
+}
+
+.recent_topics {
+  ul {
+    list-style:none; margin:0;
+    li {
+      border-bottom:1px dashed #ddd;
+      padding:3px;
+      .info { font-size:12px; color:#bbb; }
+      .node {
+        margin-right:5px;
+        a { color:#444; }
+      }
+    }
+  }
+}
 
 .recent_replies {
   list-style:none; margin:0;
   li {
     margin-top:8px;
-    border-bottom:1px solid #ddd;
+    border-bottom:1px dashed #ddd;
     .title {
       font-size:14px;
       .info { font-size:12px; color:#bbb; }
@@ -30,10 +73,15 @@
 
 .row > .span13 { margin-left:0;}
 #main .userinfo h1 { text-align: left; display:inline; }
-.userinfo .tagline { text-align:left; margin-top:-8px; margin-bottom:20px;}
-.userinfo ul { list-style:none; }
-.userinfo ul li { font-size:14px; line-height:180%; border-bottom:1px dashed #eee;}
-.userinfo ul li label { color:#999; font-size:12px; margin-right:8px; display:inline-block; width:100px; text-align: right;}
+.userinfo {
+  .tagline { text-align:left; margin-top:-8px; margin-bottom:20px;}
+  ul { list-style:none; }
+  li {
+    font-size:14px; line-height:180%; border-bottom:1px dashed #eee;
+    label { color:#999; font-size:12px; margin-right:8px; display:inline-block; width:100px; text-align: right;}
+  }
+
+}
 
 #main .bio h2 { text-align:right; margin-bottom:10px; }
 .bio { font-size:12px; line-height:180%; }
@@ -72,7 +120,9 @@ table {
 }
 
 #user_github_repos {
+  margin-top:36px;
   .more { text-align:right; }
+  ul { margin:0; }
   li {
     list-style:none;
     margin:0 -10px;

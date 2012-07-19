@@ -1,14 +1,26 @@
+<%= render "menu" %>
+
 <div class="content">
-  <%= render "menu" %>
   <%= render "info" %>
 
-  <div class="box">
+  <div class="recent_topics box">
     <h2 class="title"><%= t("topics.recent_topics")%></h2>
-    <%= render "topics", :topics => @topics %>
+    <ul>
+      <% @topics.each do |item| %>
+        <li>
+          <span class="node"><%= render_node_name(item.node_name,item.node_id) %></span>
+          <%= render_topic_title(item) %>
+          <span class="info">at <%= timeago(item.created_at) %></span>
+        </li>
+      <% end %>
+    </ul>
   </div>
   <div class="box">
     <h2 class="title"><%= t("topics.recent_replies")%></h2>
     <%= render "replies", :replies => @replies %>
   </div>
+
+
+
 </div>
 <%= render "sidebar", :user => @user %>

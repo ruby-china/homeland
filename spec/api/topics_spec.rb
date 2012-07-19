@@ -44,4 +44,54 @@ describe RubyChina::API, "topics" do
       json["replies"].first["body"].should == "let me tell"
     end
   end
+  
+  describe "POST /api/topics/:id/replies.json" do
+    it "should post a new reply" do
+      user = Factory(:user).tap { |u| u.update_private_token }
+      t = Factory(:topic, :title => "new topic 1")
+      post "/api/topics/#{t.id}/replies.json", :token => user.private_token, :body => "new reply body"
+      response.status.should == 201      
+      t.reload.replies.first.body.should == "new reply body"
+    end
+  end
+  
+  describe "POST /api/topics/:id/follow.json" do
+    it "should follow a topic" do
+      user = Factory(:user).tap { |u| u.update_private_token }
+      t = Factory(:topic, :title => "new topic 2")
+      post "/api/topics/#{t.id}/follow.json", :token => user.private_token
+      response.status.should == 201      
+      t.reload.follower_ids.should include(user.id)
+    end
+  end
+  
+  describe "POST /api/topics/:id/unfollow.json" do
+    it "should unfollow a topic" do
+      user = Factory(:user).tap { |u| u.update_private_token }
+      t = Factory(:topic, :title => "new topic 2")
+      post "/api/topics/#{t.id}/unfollow.json", :token => user.private_token
+      response.status.should == 201      
+      t.reload.follower_ids.should_not include(user.id)
+    end
+  end
+ 
+  describe "POST /api/topics/:id/favorite.json" do
+    it "should favorite a topic" do
+      user = Factory(:user).tap { |u| u.update_private_token }
+      t = Factory(:topic, :title => "new topic 3")
+      post "/api/topics/#{t.id}/favorite.json", :token => user.private_token
+      response.status.should == 201      
+      user.reload.favorite_topic_ids.should include(t.id)
+    end
+  end
+
+  describe "POST /api/topics/:id/favorite.json" do
+    it "should unfavorite a topic" do
+      user = Factory(:user).tap { |u| u.update_private_token }
+      t = Factory(:topic, :title => "new topic 3")
+      post "/api/topics/#{t.id}/favorite.json", :token => user.private_token, :type => 'unfavorite'
+      response.status.should == 201      
+      user.reload.favorite_topic_ids.should_not include(t.id)
+    end
+  end  
 end

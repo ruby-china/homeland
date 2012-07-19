@@ -55,7 +55,7 @@ module RubyChina
       # Example
       #   /api/topics/1.json
       get ":id" do
-        @topic = Topic.includes(:replies).find_by_id(params[:id])
+        @topic = Topic.includes(:reply).find_by_id(params[:id])
         # TODO: this code can not run in Mongoid 3.0.1 issue https://github.com/mongoid/mongoid/issues/2204
         # @topic = Topic.includes(:replies => [:user]).find_by_id(params[:id])
         present @topic, :with => APIEntities::Topic
@@ -70,7 +70,7 @@ module RubyChina
       post ":id/replies" do
         authenticate!
         @topic = Topic.find(params[:id])
-        @reply = @topic.replies.build(:reply => {:body => params[:body]})
+        @reply = @topic.replies.build(:body => params[:body])
         @reply.user_id = current_user.id
         @reply.save
       end

@@ -78,6 +78,9 @@ eos
 # 要在论坛首页列表隐藏的节点,以逗号隔开
 SiteConfig.save_default("node_ids_hide_in_topics_index","")
 
+# Sidebar 新建话题按钮，下拉显示的节点列表
+SiteConfig.save_default("new_topic_dropdown_node_ids","")
+
 # ========================= init Section, Node =========================
 
 # s1 = Section.create(:name => "Ruby")

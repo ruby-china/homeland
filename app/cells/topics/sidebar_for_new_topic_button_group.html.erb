@@ -1,0 +1,13 @@
+<div class="box">
+  <div class="btn-group">
+    <%= link_to(t("topics.start_a_new_topic_button"), new_topic_path, :class => "btn btn-success" )%>
+    <button class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <% @hot_nodes.each do |node| %>
+        <li><%= link_to(node.name, new_topic_path(:node => node.id)) %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>

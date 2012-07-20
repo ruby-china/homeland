@@ -35,13 +35,20 @@ class TopicsController < ApplicationController
     render :layout => false
   end
 
-  %w(recent no_reply popular).each do |name|
+  %w(no_reply popular).each do |name|
     define_method(name) do
-      @topics = Topic.send(name.to_sym).fields_for_list.includes(:user).paginate(:page => params[:page], :per_page => 15, :total_entries => 1500)
+      @topics = Topic.send(name.to_sym).last_actived.fields_for_list.includes(:user).paginate(:page => params[:page], :per_page => 15, :total_entries => 1500)
       drop_breadcrumb(t("topics.topic_list.#{name}"))
       set_seo_meta([t("topics.topic_list.#{name}"),t("menu.topics")].join(" &raquo; "))
       render :action => "index" #, :stream => true
     end
+  end
+
+  def recent
+    @topics = Topic.recent.fields_for_list.includes(:user).paginate(:page => params[:page], :per_page => 15, :total_entries => 1500)
+    drop_breadcrumb(t("topics.topic_list.recent"))
+    set_seo_meta([t("topics.topic_list.recent"),t("menu.topics")].join(" &raquo; "))
+    render :action => "index" #, :stream => true
   end
 
   def show

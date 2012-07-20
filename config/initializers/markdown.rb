@@ -133,7 +133,7 @@ class MarkdownTopicConverter < MarkdownConverter
   # match any user even not exist.
   def self.link_mention_user(text)
     text.gsub!(/(^|[^a-zA-Z0-9_!#\$%&*@＠])@([a-zA-Z0-9_]{1,20})/io) {
-      %(#{$1}<a href="/users/#{$2}" class="at_user" title="@#{$2}"><i>@</i>#{$2}</a>)
+      %(#{$1}<a href="/#{$2}" class="at_user" title="@#{$2}"><i>@</i>#{$2}</a>)
     }
   end
 

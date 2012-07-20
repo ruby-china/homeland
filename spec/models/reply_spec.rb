@@ -90,7 +90,7 @@ describe Reply do
       it 'should add link to mention users' do
         body = '@foo'
         reply = Factory(:reply, :body => body)
-        reply.body_html.should == '<p><a href="/users/foo" class="at_user" title="@foo"><i>@</i>foo</a></p>'
+        reply.body_html.should == '<p><a href="/foo" class="at_user" title="@foo"><i>@</i>foo</a></p>'
       end
     end
   end

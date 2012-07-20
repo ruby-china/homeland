@@ -53,7 +53,7 @@
       text-decoration: none;
     }
   }
-  .topic_line {border-bottom:1px solid #ddd; padding:10px 0; margin:0 -10px; vertical-align:top; }
+  .topic_line {background:#fff; border-bottom:1px solid #ddd; padding:10px 0; margin:0 -10px; vertical-align:top; }
   tr.topic td.replies { text-align:right; width:50px; font-size:14px; color:green;font-weight:bold; }
 }
 
@@ -128,9 +128,11 @@ form .node_select {
   .sorts {
     text-align:right; color:#999;
     padding:3px 0 10px 0;
+    i.icon { margin-bottom:-1px; }
     ul { display:inline; margin:0; padding:0; }
     li {
       display:inline; margin:0 5px;
+      a.popular { color:#9d5051; }
     }
     li.active {
       a {

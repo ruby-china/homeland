@@ -13,7 +13,10 @@
   <div class="sorts">
     查看:
     <ul>
-      <li<%= " class=active" if action_name == "index"  %>><%= link_to "默认", topics_path %></li> / 
+      <li<%= " class=active" if action_name == "index"  %>><%= link_to "默认", topics_path %></li> /
+      <li<%= " class=active" if action_name == "popular"  %>>
+        <%= link_to raw("<i class='icon small_liked'></i> 优质帖子"), popular_topics_path, :class => "popular" %>
+      </li> /
       <li<%= " class=active" if action_name == "no_reply"  %>><%= link_to "无人问津", no_reply_topics_path, :rel => 'nofollow' %></li> /
       <li<%= " class=active" if action_name == "recent"  %>><%= link_to "最新创建", recent_topics_path, :rel => 'nofollow' %></li>
     </ul>

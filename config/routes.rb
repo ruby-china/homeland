@@ -43,6 +43,7 @@ RubyChina::Application.routes.draw do
     end
     collection do
       get :no_reply
+      get :popular
       get :feed
       post :preview
     end

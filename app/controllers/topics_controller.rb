@@ -10,7 +10,7 @@ class TopicsController < ApplicationController
   def index
     @topics = Topic.last_actived.without_hide_nodes.fields_for_list.includes(:user).paginate(:page => params[:page], :per_page => 15, :total_entries => 1500)
     set_seo_meta("","#{Setting.app_name}#{t("menu.topics")}")
-    drop_breadcrumb(t("topics.hot_topic"))
+    drop_breadcrumb(t("topics.topic_list.hot_topic"))
     #render :stream => true
   end
 
@@ -35,16 +35,13 @@ class TopicsController < ApplicationController
     render :layout => false
   end
 
-  def recent
-    # TODO: 需要 includes :node,:user, :last_reply_user,但目前用了 paginate 似乎会使得 includes 没有效果
-    @topics = Topic.recent.fields_for_list.includes(:user).paginate(:page => params[:page], :per_page => 15, :total_entries => 1500)
-    drop_breadcrumb(t("topics.topic_list"))
-    render :action => "index" #, :stream => true
-  end
-
-  def no_reply
-    @topics = Topic.no_reply.recent.fields_for_list.includes(:user).paginate(:page => params[:page], :per_page => 15)
-    render :action => "index" #, :stream => true
+  %w(recent no_reply popular).each do |name|
+    define_method(name) do
+      @topics = Topic.send(name.to_sym).fields_for_list.includes(:user).paginate(:page => params[:page], :per_page => 15, :total_entries => 1500)
+      drop_breadcrumb(t("topics.topic_list.#{name}"))
+      set_seo_meta([t("topics.topic_list.#{name}"),t("menu.topics")].join(" &raquo; "))
+      render :action => "index" #, :stream => true
+    end
   end
 
   def show

@@ -34,7 +34,7 @@
         </li>
       <% end %>
 
-      <% if !@user.email.blank? %>
+      <% if !@user.email.blank? && @user.email_public %>
       <li>
         <label>Email:</label>
         <span><%= auto_link @user.email %></span>

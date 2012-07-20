@@ -10,6 +10,7 @@
         name: "名字"
         login: "用户名"
         email: "Email"
+        email_public: "公开 Email"
         avatar: "头像"
         location: "城市"
         bio: "个人介绍"
@@ -29,13 +30,13 @@
         node_id: "节点"
         body: "正文"
       reply:
-        body: "回复内容"  
+        body: "回复内容"
       post:
         title: 标题
         body: 正文
         tag_list: 标签
         source: 来源
-        source_url: 来源地址        
+        source_url: 来源地址
       page:
         slug: Slug
         title: 页面标题
@@ -49,7 +50,7 @@
         site_node_id: 分类
     errors:
       models:
-        user: 用户        
+        user: 用户
       messages:
         inclusion: "不包含于列表中"
         exclusion: "是保留关键字"
@@ -100,5 +101,5 @@
           You cannot call create or create! through a relational association
           relation (%{document}) who's parent (%{base}) is not already saved.
 
-  
+
 

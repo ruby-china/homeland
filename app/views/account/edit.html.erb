@@ -7,6 +7,11 @@
         <%= f.input :name %>
         <%= f.input :avatar %>
         <%= f.input :email, :input_html => { :class => "span4", :disabled => (!resource.email.blank?) } %>
+        <div class="control-group">
+          <div class="controls">
+            <label for="user_email_public" class="checkbox"><%= f.check_box :email_public %> 公开 Email</label>
+          </div>
+        </div>
         <%= f.input :location, :input_html => { :class => "span3" } %>
         <%= f.input :company, :input_html => { :class => "span3" } %>
         <div class="control-group">

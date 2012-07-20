@@ -13,7 +13,10 @@ class User
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   field :email,              :type => String, :default => ""
+  # Email 的 md5 值，用于 Gravatar 头像
   field :email_md5
+  # Email 是否公开
+  field :email_public, :type => Boolean
   field :encrypted_password, :type => String, :default => ""
 
   validates_presence_of :email
@@ -78,7 +81,7 @@ class User
   end
 
   attr_accessor :password_confirmation
-  attr_accessible :name, :location, :company, :bio, :website, :github, :twitter, :tagline, :avatar, :password, :password_confirmation
+  attr_accessible :name, :email_public, :location, :company, :bio, :website, :github, :twitter, :tagline, :avatar, :password, :password_confirmation
 
   validates :login, :format => {:with => /\A\w+\z/, :message => '只允许数字、大小写字母和下划线'}, :length => {:in => 3..20}, :presence => true, :uniqueness => {:case_sensitive => false}
 

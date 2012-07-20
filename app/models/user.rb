@@ -273,7 +273,7 @@ class User
       rescue => e
         Rails.logger.error("Github Repositiory fetch Error: #{e}")
         items = []
-        Rails.cache.write(cache_key, items, :expires_in => 1.days)
+        Rails.cache.write(cache_key, items, :expires_in => 15.days)
         return items
       end
 
@@ -281,7 +281,7 @@ class User
       items = items.collect do |a1|
         {
           :name => a1["name"],
-          :url => a1["url"],
+          :url => a1["html_url"],
           :watchers => a1["watchers"],
           :description => a1["description"]
         }

@@ -1,7 +1,6 @@
 # coding: utf-8
 class UsersController < ApplicationController
   before_filter :require_user, :only => "auth_unbind"
-  before_filter :init_base_breadcrumb
   before_filter :set_menu_active
   before_filter :find_user, :only => [:show, :topics, :favorites]
   caches_action :index, :expires_in => 2.hours, :layout => false
@@ -29,7 +28,7 @@ class UsersController < ApplicationController
   def favorites
     @topics = Topic.where(:_id.in => @user.favorite_topic_ids).paginate(:page => params[:page], :per_page => 30)
     drop_breadcrumb(@user.login, user_path(@user.login))
-    drop_breadcrumb(t("users.menu.like"))
+    drop_breadcrumb(t("users.menu.favorites"))
   end
 
   def auth_unbind
@@ -62,16 +61,18 @@ class UsersController < ApplicationController
 
   protected
   def find_user
+    # 处理 login 有大写字母的情况
+    if params[:id] != params[:id].downcase
+      redirect_to request.path.downcase, :status => 301
+      return
+    end
+
     @user = User.where(:login => /^#{params[:id]}$/i).first
     render_404 if @user.nil?
   end
 
   def set_menu_active
     @current = @current = ['/users']
-  end
-
-  def init_base_breadcrumb
-    drop_breadcrumb( t("menu.users"), users_path)
   end
 
 end

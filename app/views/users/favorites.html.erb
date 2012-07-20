@@ -1,17 +1,17 @@
+<%= render "menu" %>
 <div class="content">
-  <%= render "menu" %>
   <div class="box">
 
     <table class="node_topics table">
       <tr class="head">
+        <td class="opts"><%= t("common.node") %></td>
         <td class="title"><%=t("common.title")%></td>
-        <td class="opts"></td>
       </tr>
       <% @topics.each do |item| %>
         <% next if item.blank? %>
         <tr class="topic <%= cycle('odd',"") %>">
-          <td class="title"><%= render_topic_title(item) %></td>
           <td><%= render_node_name(item.node_name,item.node_id) %></td>
+          <td class="title"><%= render_topic_title(item) %></td>
         </tr>
       <% end %>
     </table>

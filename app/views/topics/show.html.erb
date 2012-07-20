@@ -12,7 +12,7 @@
         $("#replies .reply a.edit[data-uid='<%= current_user.id %>']").css('display','inline-block');
       <% end %>
       <% if current_user && !@user_liked_reply_ids.blank? %>
-        Topics.checkRepliesLikeStatus([<%= @user_liked_reply_ids.join(",") %>]);
+        // Topics.checkRepliesLikeStatus([<%= @user_liked_reply_ids.join(",") %>]);
       <% end %>
     })
   </script>

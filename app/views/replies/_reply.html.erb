@@ -1,11 +1,11 @@
-<% cache(["topic/#{@topic.id}",reply]) do %>
+<% cache(["topic/#{@topic.id}-v1",reply]) do %>
 <div class="reply<%= ' popular' if reply.popular? %>" id="reply<%= reply_counter + 1 %>">
   <div class="pull-left face"><%= user_avatar_tag(reply.user, :normal) %></div>
   <div class="infos">
     <div class="info">
       <span class="name">
         <%= user_name_tag(reply.user) %>
-        <%= reply_counter + 1 %><%= t("common.floor")%>, <%= raw t("common.reply_at", :time => timeago(reply.created_at)) %>
+        <%= reply_counter + 1 %><%= t("common.floor")%>, <%= timeago(reply.created_at) %>
       </span>
       <span class="opts">
         <%= likeable_tag(reply, :cache => true) %>

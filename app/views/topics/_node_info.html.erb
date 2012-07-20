@@ -11,7 +11,7 @@
   </div>
 <% else %>
   <div class="sorts">
-    查看:
+    <span class="lb">查看:</span>
     <ul>
       <li<%= " class=active" if action_name == "index"  %>><%= link_to "默认", topics_path %></li> /
       <li<%= " class=active" if action_name == "popular"  %>>

@@ -137,6 +137,11 @@ form {
   margin:0; padding:0px 5px; font-size:10px; font-weight:normal;
 }
 #main .topics .topic h1 { font-size:16px; }
+#node_info {
+  .sorts {
+    .lb { display:none; }
+  }
+}
 .topics {
   .body {
     img  { max-width:98%; }

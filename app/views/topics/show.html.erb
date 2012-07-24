@@ -81,6 +81,7 @@
   <div class="sidebar">
     <%= render_cell :topics, :sidebar_for_new_topic_node, { :action => params[:action], :node => @node } %>
     <%= render_cell :topics, :sidebar_for_more_like_this, { :topic => @topic} %>
+    <%= render_cell :topics, :tips %>
     <%= render_cell :topics, :sidebar_for_node_recent_topics, { :topic => @topic} %>
   </div>
 <% end %>

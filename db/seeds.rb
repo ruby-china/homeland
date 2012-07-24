@@ -81,6 +81,12 @@ SiteConfig.save_default("node_ids_hide_in_topics_index","")
 # Sidebar 新建话题按钮，下拉显示的节点列表
 SiteConfig.save_default("new_topic_dropdown_node_ids","")
 
+# 禁止回复的某些词语
+SiteConfig.save_default("ban_words_on_reply","mark\n收藏\n顶\n赞\nup\n")
+
+# 随机显示的 tip 信息
+SiteConfig.save_default("tips","提示1\n提示2")
+
 # ========================= init Section, Node =========================
 
 # s1 = Section.create(:name => "Ruby")

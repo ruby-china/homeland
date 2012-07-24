@@ -2,7 +2,18 @@
   <%= render 'shared/error_messages', :target => @site_config %>
   <fieldset>
     <legend><%= t("cpanel.site_configs.edit_setting")%></legend>
-    <%= f.input :key, :input_html => { :readonly => true } %>
+    <div class="control-group">
+      <label class="control-label">Key</label>
+      <div class="controls">
+        <%= @site_config.key  %>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label">说明</label>
+      <div class="controls">
+        <%= t("site_config.#{@site_config.key}")  %>
+      </div>
+    </div>
     <%= f.input :value, :as => :text, :input_html => { :class => "span8", :rows => "20" } %>
     <div class="form-actions">
       <%= f.submit t("common.save"), :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %>

@@ -104,4 +104,13 @@ class TopicsCell < BaseCell
     @topics = Topic.by_week.high_replies.limit(10)
     render
   end
+
+  def tips
+    @tip = ""
+    if !SiteConfig.tips.blank?
+      tips = SiteConfig.tips.split("\n")
+      @tip = tips[rand(tips.count)]
+    end
+    render
+  end
 end

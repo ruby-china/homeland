@@ -44,9 +44,8 @@ class Site
   end
 
   def check_uniq
-    if Site.unscoped.or(:url => url).count > 0
+    if Site.unscoped.where(:url => url, :_id.ne => self.id).count > 0
       self.errors.add(:url,"已经提交过了。")
-      return false
     end
   end
 

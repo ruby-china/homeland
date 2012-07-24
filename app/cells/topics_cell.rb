@@ -33,7 +33,11 @@ class TopicsCell < BaseCell
     SiteConfig.new_topic_dropdown_node_ids
   end
   def sidebar_for_new_topic_button_group
-    ids = SiteConfig.new_topic_dropdown_node_ids.split(",").collect { |id| id.to_i }
+    if !SiteConfig.new_topic_dropdown_node_ids.blank?
+      ids = SiteConfig.new_topic_dropdown_node_ids.split(",").collect { |id| id.to_i }
+    else
+      ids = []
+    end
     @hot_nodes = Node.where(:_id.in => ids).limit(5)
     render
   end

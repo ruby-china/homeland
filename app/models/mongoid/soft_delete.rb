@@ -13,7 +13,8 @@ module Mongoid
 
     def destroy
       if persisted?
-        self.update_attribute(:deleted_at,Time.now.utc)
+        self.set(:deleted_at,Time.now.utc)
+        self.set(:updated_at,Time.now.utc)
       end
 
       @destroyed = true

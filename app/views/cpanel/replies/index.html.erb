@@ -15,7 +15,7 @@
   </tr>
 
 <% @replies.each do |reply| %>
-  <tr>
+  <tr class="<%= 'deleted' if !reply.deleted_at.blank? %>">
     <td class="first"><%= reply.id %></td>
     <td><%= truncate(reply.body, :length => 50) %></td>
     <% if reply.topic %>

@@ -55,7 +55,7 @@ class TopicsController < ApplicationController
     @topic = Topic.without_body.includes(:user, :node).find(params[:id])
     @topic.hits.incr(1)
     @node = @topic.node
-    @replies = @topic.replies.without_body.asc(:_id).all.includes(:user).reject { |r| r.user.blank? }
+    @replies = @topic.replies.unscoped.without_body.asc(:_id).all.includes(:user).reject { |r| r.user.blank? }
     if current_user
       # 找出用户 like 过的 Reply，给 JS 处理 like 功能的状态
       @user_liked_reply_ids = []

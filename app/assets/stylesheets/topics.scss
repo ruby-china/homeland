@@ -148,6 +148,11 @@ form .node_select {
   padding-bottom:0px;
   .total { padding-bottom:6px; color:#999; }
   .reply {
+    .deleted {
+      color:#aaa;
+      text-decoration: line-through;
+      font-size:12px; text-align:center;
+    }
     &.light { background:#F7F2FC; }
     &.popular { background:#fffce9; }
     border-top:1px solid #DDD; padding:8px 10px; margin:0 -10px;

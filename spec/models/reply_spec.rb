@@ -1,3 +1,4 @@
+# coding: utf-8
 require 'spec_helper'
 
 describe Reply do
@@ -92,6 +93,23 @@ describe Reply do
         reply = Factory(:reply, :body => body)
         reply.body_html.should == '<p><a href="/foo" class="at_user" title="@foo"><i>@</i>foo</a></p>'
       end
+    end
+  end
+
+  describe "ban words for Reply body" do
+    let(:topic) { Factory(:topic) }
+    it "should work" do
+      SiteConfig.stub!(:ban_words_on_reply).and_return("mark\n顶")
+      topic.replies.create(:body => "顶", :user => user).should have(1).errors_on(:body)
+      topic.replies.create(:body => "mark", :user => user).should have(1).errors_on(:body)
+      topic.replies.create(:body => " mark ", :user => user).should have(1).errors_on(:body)
+      topic.replies.create(:body => "MARK", :user => user).should have(1).errors_on(:body)
+      topic.replies.create(:body => "mark1", :user => user).should have(:no).errors_on(:body)
+    end
+
+    it "should work when site_config value is nil" do
+      SiteConfig.stub!(:ban_words_on_reply).and_return(nil)
+      topic.replies.create(:body => "mark", :user => user).should have(:no).errors_on(:body)
     end
   end
 end

@@ -28,6 +28,12 @@ class Reply
   attr_accessible :body
 
   validates_presence_of :body
+  validate do
+    ban_words = (SiteConfig.ban_words_on_reply || "").split("\n")
+    if self.body.strip.downcase.in?(ban_words)
+      self.errors.add(:body,"请勿回复无意义的内容，如你想收藏或赞这篇帖子，请用帖子后面的功能。")
+    end
+  end
 
   after_create :update_parent_topic
   def update_parent_topic

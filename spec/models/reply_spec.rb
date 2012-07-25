@@ -105,6 +105,8 @@ describe Reply do
       topic.replies.create(:body => " mark ", :user => user).should have(1).errors_on(:body)
       topic.replies.create(:body => "MARK", :user => user).should have(1).errors_on(:body)
       topic.replies.create(:body => "mark1", :user => user).should have(:no).errors_on(:body)
+      SiteConfig.stub!(:ban_words_on_reply).and_return("mark\r\n顶")
+      topic.replies.create(:body => "mark", :user => user).should have(1).errors_on(:body)
     end
 
     it "should work when site_config value is nil" do

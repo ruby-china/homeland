@@ -47,7 +47,7 @@ describe PagesController do
 
   describe ":edit" do
     it "should not allow anonymous access" do
-      get :edit
+      get :edit, :id => page.id
       response.should_not be_success
     end
 
@@ -82,7 +82,7 @@ describe PagesController do
 
   describe ":update" do
     it "should not allow anonymous access" do
-      put :update
+      put :update, :id => 1
       response.should_not be_success
     end
 

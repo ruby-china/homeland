@@ -40,7 +40,7 @@ describe LikesController do
     post :create
     response.status.should == 302
 
-    delete :destroy
+    delete :destroy, :id => 1, :type => "a"
     response.status.should == 302
   end
 

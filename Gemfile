@@ -65,7 +65,7 @@ gem "sidekiq", "1.1.0"
 gem "devise-async"
 
 # 分享功能
-gem "social-share-button", "~> 0.0.3"
+gem "social-share-button", "~> 0.0.5"
 
 # 表单
 gem 'simple_form', "2.0.2"

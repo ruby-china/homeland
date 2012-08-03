@@ -1,8 +1,14 @@
 en:
   social_share_button:
-    share_to: Share to
+    share_to: Share to %{name}
     weibo: Sina Weibo
     twitter: Twitter
     facebook: Facebook
     douban: Douban
-    
+    qq: Qzone
+    tqq: Tqq
+    delicious: Delicious
+    baidu: Baidu.com
+    kaixin001: Kaixin001.com
+    renren: Renren.com
+    google_plus: Google+

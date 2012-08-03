@@ -24,7 +24,7 @@ ruby setup.rb
 rails s
 ```
 
-## Start Sidekiq and Solr service
+## Start Sidekiq service
 
 ```bash
 # Sidekiq

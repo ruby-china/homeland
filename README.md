@@ -12,6 +12,8 @@ Status](https://secure.travis-ci.org/ruby-china/ruby-china.png?branch=master&.pn
 * Redis 2.2+
 * Python 2.4+ and [Pygments](http://pygments.org)
 * MongoDb 2.0+
+* ImageMagick 6.5+
+* libpng
 
 ## Install
 

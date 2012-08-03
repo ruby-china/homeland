@@ -1,7 +1,6 @@
 defaults: &defaults
-  host: '127.0.0.1'
-  port: 6379
-  redis_search_namespace: 'rc:rs'
+  host: SETUP_REDIS_HOST
+  port: SETUP_REDIS_PORT
 development:
   <<: *defaults
 test:

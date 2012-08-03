@@ -1,5 +1,5 @@
 # Options here can still be overridden by cmd line args.
 #   sidekiq -C sidekiq.yml
 ---
-:verbose: true
+:verbose: false
 :concurrency: 5

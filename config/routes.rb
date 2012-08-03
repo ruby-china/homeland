@@ -54,7 +54,6 @@ RubyChina::Application.routes.draw do
   resources :likes
 
   match "/search" => "search#index", :as => :search
-  match "/search/wiki" => "search#wiki", :as => :search_wiki
 
   namespace :cpanel do
     root :to => "home#index"

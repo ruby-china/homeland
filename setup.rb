@@ -61,7 +61,7 @@ puts ""
 
 puts_section "Checking Packages Depending..." do
   pkg_exist = true
-  [["bundle","Bundler"],["java","Java 1.6+"],["python","Python 2.5+"],["pygmentize","Pygments 1.5+"],["mongod","MongoDB 2.0+"],["redis-server","Redis 2.0+"],["memcached","Memcached 1.4+"],["convert","ImageMagick 6.5+"]].each do |item|
+  [["bundle","Bundler"],["python","Python 2.5+"],["pygmentize","Pygments 1.5+"],["mongod","MongoDB 2.0+"],["redis-server","Redis 2.0+"],["memcached","Memcached 1.4+"],["convert","ImageMagick 6.5+"]].each do |item|
     puts_line_with_yn item[1] do
       if `which #{item[0]}` == ""
         pkg_exist = false
@@ -94,20 +94,12 @@ puts_section "Configure" do
 end
 
 puts_line "Install gems..." do
-  # `bundle install`
+  `bundle install`
 end
 
 puts_line "Seed default datas..." do
-  # `bundle exec rake db:seed`
+  `bundle exec rake db:seed`
 end
 
-print "Do you want start Solr? (Y/N):"
-if gets.strip.downcase == "y"
-  puts "Starting Solr..."
-  `bundle exec rake sunspot:solr:start`
-  puts ""
-  puts "Now you can run: " + "rails s".colorize(:blue) + " to start application."
-else
-  puts ""
-  puts "Ruby China Install successed."
-end
+puts ""
+puts "Ruby China Install successed."

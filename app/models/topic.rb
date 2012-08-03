@@ -8,7 +8,6 @@ class Topic
   include Mongoid::Likeable
   include Mongoid::MarkdownBody
   include Redis::Objects
-  include Sunspot::Mongoid
   include Mongoid::Mentionable
 
   field :title
@@ -46,17 +45,6 @@ class Topic
   index :suggested_at => 1
 
   counter :hits, :default => 0
-
-  searchable do
-    text :title, :stored => true, :more_like_this => true
-    text :body, :stored => true, :more_like_this => true
-    text :replies, :stored => true, :more_like_this => true do
-      replies.map { |reply| reply.body }
-    end
-    integer :node_id, :user_id
-    boolean :deleted_at
-    time :replied_at
-  end
 
   # scopes
   scope :last_actived, desc("replied_at").desc(:_id)

@@ -70,10 +70,6 @@ gem "social-share-button", "~> 0.0.5"
 # 表单
 gem 'simple_form', "2.0.2"
 
-# 全文搜索
-gem 'sunspot_rails',  "~> 1.3.2"
-gem 'sunspot_solr'
-
 # 用于组合小图片
 gem "sprite-factory", "1.4.1", :require => false
 gem 'chunky_png', "1.2.5", :require => false
@@ -94,7 +90,6 @@ group :development, :test do
   gem 'thin'
   gem "rspec-cells"
   gem "capybara", :require => false
-  gem "sunspot-rails-tester"
   gem 'api_taster'
 end
 

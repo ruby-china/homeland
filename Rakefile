@@ -13,9 +13,4 @@ namespace :test do
       system("cp config/#{cfgfile}.yml.default config/#{cfgfile}.yml") unless File.exist?("config/#{cfgfile}.yml")
     end
   end
-
-  desc "start essential services.."
-  task :init do
-    system("bundle exec rake sunspot:solr:start")
-  end
 end

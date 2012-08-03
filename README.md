@@ -29,8 +29,6 @@ rails s
 ```bash
 # Sidekiq
 bundle exec sidekiq -c config/sidekiq.yml
-# Solr
-bundle exec rake sunspot:solr:start
 ```
 
 ## Testing

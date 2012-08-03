@@ -25,7 +25,7 @@ module ApplicationHelper
 
   def controller_javascript_include_tag
     case controller_name
-    when "pages","topics","search","search","sites", "notifications"
+    when "pages","topics","sites", "notifications"
       javascript_include_tag controller_name
     when "replies"
       javascript_include_tag "topics"

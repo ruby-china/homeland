@@ -58,18 +58,6 @@ class TopicsCell < BaseCell
     render
   end
 
-  # 相关类似话题, 取相关词出现最少3次，相关度最高的3篇
-  cache :sidebar_for_more_like_this, :expires_in => 1.day do |cell, args|
-    args[:topic].id
-  end
-  def sidebar_for_more_like_this(args = {})
-    @topics = args[:topic].more_like_this do
-      minimum_term_frequency 5
-      paginate :page => 1, :per_page => 10
-    end.results
-    render
-  end
-
   # 节点下面的最新话题
   cache :sidebar_for_node_recent_topics, :expires_in => 20.minutes do |cell, args|
     args[:topic].id

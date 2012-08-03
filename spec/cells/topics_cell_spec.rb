@@ -43,13 +43,6 @@ describe TopicsCell do
     end
   end
 
-  describe "sidebar_for_more_like_this" do
-    it "should render sidebar_for_more_like_this" do
-      @topic.stub_chain(:more_like_this, :results).and_return([@topic2, @topic3])
-      render_cell(:topics, :sidebar_for_more_like_this, :topic => @topic).should have_css("div li", :count => 2)
-    end
-  end
-
   describe "reply_help_block" do
     it "should render reply_help_block" do
       render_cell(:topics, :reply_help_block).should have_css('div#markdown_help_tip_modal')

@@ -88,7 +88,7 @@ puts_section "Configure" do
 
   print "You Redis host (default: 127.0.0.1:6379):"
   host = gets.strip
-  host = "127.0.0.1:27017" if host == ""
+  host = "127.0.0.1:6379" if host == ""
   replace_file('config/redis.yml','SETUP_REDIS_HOST',host.split(":")[0])
   replace_file('config/redis.yml','SETUP_REDIS_PORT',host.split(":")[1])
 end

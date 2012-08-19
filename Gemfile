@@ -81,6 +81,7 @@ gem 'quiet_assets', "1.0.1"
 gem 'grape', :github => 'intridea/grape', :branch => 'frontier'
 
 group :development, :test do
+  gem 'pry'
   gem 'capistrano', '2.9.0', :require => false
   gem 'rvm-capistrano', :require => false
   gem "memcache-client", "1.8.5"

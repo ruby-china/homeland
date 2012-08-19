@@ -80,5 +80,4 @@ module UsersHelper
       content_tag(:span,  t("common.limit_user"), :class => "label role")
     end
   end
-
 end

@@ -1,6 +1,14 @@
 RubyChina::Application.routes.draw do
   require 'api'
 
+  #处理特殊用户名的路由,放在最前面避免冲突,特殊用户名列表在SpecialUsersHelper::SPECIAL_USER_NAMES中
+  constraints :id => /#{SpecialUsersHelper::SPECIAL_USER_NAMES.join "|"}/ do
+    get 'u/:id',:to => "users#show"
+  get 'u/:id/topics',:to => "users#topics"
+  get 'u/:id/favorites',:to => "users#favorites"
+  end
+
+
   resources :sites
   resources :pages, :path => "wiki" do
     collection do
@@ -13,10 +21,10 @@ RubyChina::Application.routes.draw do
   root :to => "home#index"
 
   devise_for :users, :path => "account", :controllers => {
-      :registrations => :account,
-      :sessions => :sessions,
-      :omniauth_callbacks => "users/omniauth_callbacks"
-    }
+    :registrations => :account,
+    :sessions => :sessions,
+    :omniauth_callbacks => "users/omniauth_callbacks"
+  }
   devise_scope :users do
     get "account/update_private_token" => "account#update_private_token", :as => :update_private_token_account
   end
@@ -90,11 +98,11 @@ RubyChina::Application.routes.draw do
   # 比如 http://ruby-china.org/huacnlee
   match "users/city/:id", :to => "users#city", :as => :location_users
   match "users", :to => "users#index", :as => :users
+
   resources :users, :path => "" do
     member do
       get :topics
       get :favorites
     end
   end
-
 end

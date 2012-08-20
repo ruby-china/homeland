@@ -3,7 +3,7 @@ require "bundler/capistrano"
 require "sidekiq/capistrano"
 
 require "rvm/capistrano"
-set :rvm_ruby_string, 'ruby-1.9.3-p194-patch'
+set :rvm_ruby_string, 'ruby-1.9.3-p194'
 set :rvm_type, :user
 
 set :application, "ruby-china"
@@ -16,9 +16,9 @@ set :runner, "ruby"
 # set :deploy_via, :remote_cache
 set :git_shallow_clone, 1
 
-role :web, "58.215.172.185"                          # Your HTTP server, Apache/etc
-role :app, "58.215.172.185"                          # This may be the same as your `Web` server
-role :db,  "58.215.172.185", :primary => true # This is where Rails migrations will run
+role :web, "s2.ruby-china.org"                          # Your HTTP server, Apache/etc
+role :app, "s2.ruby-china.org"                          # This may be the same as your `Web` server
+role :db,  "s2.ruby-china.org", :primary => true # This is where Rails migrations will run
 
 # unicorn.rb 路径
 set :unicorn_path, "#{deploy_to}/current/config/unicorn.rb"

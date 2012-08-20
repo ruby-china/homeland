@@ -91,6 +91,7 @@ group :development, :test do
   gem "rspec-cells"
   gem "capybara", :require => false
   gem 'api_taster'
+  gem "letter_opener"
 end
 
 group :production do

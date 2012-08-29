@@ -100,6 +100,7 @@ GEM
       execjs
     coffee-script-source (1.2.0)
     connection_pool (0.9.1)
+    cookiejar (0.3.0)
     daemons (1.1.6)
     dalli (1.1.1)
     database_cleaner (0.8.0)
@@ -113,7 +114,12 @@ GEM
     devise-encryptable (0.1.1)
       devise (>= 2.1.0.rc)
     diff-lcs (1.1.3)
+    em-http-request (0.3.0)
+      addressable (>= 2.0.0)
+      escape_utils
+      eventmachine (>= 0.12.9)
     erubis (2.7.0)
+    escape_utils (0.2.4)
     eventmachine (0.12.10)
     exception_notification (2.6.1)
       actionmailer (>= 3.0.4)
@@ -128,6 +134,17 @@ GEM
       addressable (~> 2.2.6)
       multipart-post (~> 1.1.3)
       rack (>= 1.1.0, < 2)
+    faye (0.8.3)
+      cookiejar (>= 0.3.0)
+      em-http-request (>= 0.3.0)
+      eventmachine (>= 0.12.0)
+      faye-websocket (>= 0.4.0)
+      rack (>= 1.0.0)
+      yajl-ruby (>= 1.0.0)
+    faye-rails (1.0.0)
+      faye (~> 0.8.2)
+    faye-websocket (0.4.6)
+      eventmachine (>= 0.12.0)
     ffi (1.0.11)
     hashie (1.2.0)
     highline (1.6.8)
@@ -310,6 +327,7 @@ GEM
     will_paginate (3.0.2)
     xpath (0.1.4)
       nokogiri (~> 1.3)
+    yajl-ruby (1.1.0)
 
 PLATFORMS
   ruby
@@ -330,10 +348,12 @@ DEPENDENCIES
   dalli (= 1.1.1)
   database_cleaner
   devise (= 2.1.0)
-  devise-async
+  devise-async (= 0.1.1)
   devise-encryptable
   exception_notification
   factory_girl_rails
+  faye (= 0.8.3)
+  faye-rails (= 1.0.0)
   grape!
   jquery-atwho-rails (= 0.1.6)
   jquery-rails (= 2.0.1)

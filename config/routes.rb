@@ -1,6 +1,25 @@
 RubyChina::Application.routes.draw do
   require 'api'
-
+  
+  faye_server '/faye', :timeout => 25 do
+    class FayeAuth
+      def incoming(message, callback)
+        if message['channel'] !~ %r{^/meta/}
+          if message["data"]
+            if message["data"]['token'] != Setting.faye_token
+              # Setting any 'error' against the message causes Faye to not accept it.
+              message['error'] = "Faye authorize faild."
+            else
+              message.delete('token')
+            end
+          end
+        end
+        callback.call(message)
+      end
+    end
+    add_extension(FayeAuth.new)
+  end
+  
   resources :sites
   resources :pages, :path => "wiki" do
     collection do

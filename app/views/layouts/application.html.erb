@@ -85,6 +85,12 @@
   <% if mobile? %>
     <script type="text/javascript">app_mobile = true;</script>
   <% end %>
+  <script type="text/javascript" charset="utf-8">
+    FAYE_SERVER_URL = "<%= faye_url %>";
+    <% if current_user %>
+      CURRENT_USER_ID = "<%= current_user.id %>";
+    <% end %>
+  </script>
   <%= yield :scripts %>
 
   <script>

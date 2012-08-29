@@ -38,7 +38,6 @@ namespace :deploy do
   end
 end
 
-
 task :init_shared_path, :roles => :web do
   run "mkdir -p #{deploy_to}/shared/log"
   run "mkdir -p #{deploy_to}/shared/pids"

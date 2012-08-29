@@ -12,6 +12,15 @@ class Notification::Base
   index :user_id => 1, :read => 1
 
   scope :unread, where(:read => false)
+  
+  after_create :realtime_push_to_client
+  after_destroy :realtime_push_to_client
+  
+  def realtime_push_to_client
+    if self.user
+      FayeClient.send("/notifications_count/#{self.user_id}", :count => self.user.notifications.unread.count)
+    end
+  end
 
 
   def anchor

@@ -17,6 +17,7 @@
 #= require social-share-button
 #= require jquery.atwho
 #= require emoji_list
+#= require faye
 #= require_self
 window.App =
   loading : () ->
@@ -95,6 +96,20 @@ window.App =
          commenters.push(val)
          commenter_exists.push(val.login)
     App.atReplyable(".cell_comments_new textarea", commenters)
+    
+  initNotificationSubscribe : (user_id) ->
+    faye = new Faye.Client(FAYE_SERVER_URL)
+    notification_subscription = faye.subscribe "/notifications_count/#{user_id}",(json) ->
+      span = $("#user_notifications_count span")
+      new_title = $(document).attr("title").replace(/\(\d+\) /,'')
+      if json.count > 0
+        span.addClass("badge-error")
+        new_title = "(#{json.count}) #{new_title}"
+      else
+        span.removeClass("badge-error")
+      span.text(json.count)
+      $(document).attr("title", new_title)
+    true  
 
 $(document).ready ->
   App.initForDesktopView()
@@ -103,7 +118,8 @@ $(document).ready ->
   $(".alert").alert()
   $('.dropdown-toggle').dropdown()
 
-
+  App.initNotificationSubscribe(CURRENT_USER_ID)
+  
   # 绑定评论框 Ctrl+Enter 提交事件
   $(".cell_comments_new textarea").bind "keydown","ctrl+return",(el) ->
     if $(el.target).val().trim().length > 0

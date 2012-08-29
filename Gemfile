@@ -62,7 +62,10 @@ gem "cells", "3.7.1"
 
 # 队列
 gem "sidekiq", "1.1.0"
-gem "devise-async"
+gem "devise-async", "0.1.1"
+
+gem 'faye', "0.8.3"
+gem 'faye-rails', "1.0.0"
 
 # 分享功能
 gem "social-share-button", "~> 0.0.5"

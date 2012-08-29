@@ -118,7 +118,7 @@ $(document).ready ->
   $(".alert").alert()
   $('.dropdown-toggle').dropdown()
 
-  App.initNotificationSubscribe(CURRENT_USER_ID)
+  # App.initNotificationSubscribe(CURRENT_USER_ID)
   
   # 绑定评论框 Ctrl+Enter 提交事件
   $(".cell_comments_new textarea").bind "keydown","ctrl+return",(el) ->

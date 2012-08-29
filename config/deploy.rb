@@ -21,20 +21,24 @@ role :app, "s2.ruby-china.org"                          # This may be the same a
 role :db,  "s2.ruby-china.org", :primary => true # This is where Rails migrations will run
 
 # unicorn.rb 路径
-set :unicorn_path, "#{deploy_to}/current/config/unicorn.rb"
+# set :unicorn_path, "#{deploy_to}/current/config/unicorn.rb"
+set :thin_path, "#{deploy_to}/current/config/thin.yml"
 
 namespace :deploy do
   task :start, :roles => :app do
-    run "cd #{deploy_to}/current/; RAILS_ENV=production unicorn_rails -c #{unicorn_path} -D"
+    # run "cd #{deploy_to}/current/; RAILS_ENV=production unicorn_rails -c #{unicorn_path} -D"
+    run "cd #{deploy_to}/current/; bundle exec thin start -C #{thin_path}"
   end
 
   task :stop, :roles => :app do
-    run "kill -QUIT `cat #{deploy_to}/current/tmp/pids/unicorn.pid`"
+    # run "kill -QUIT `cat #{deploy_to}/current/tmp/pids/unicorn.pid`"
+    run "cd #{deploy_to}/current/; bundle exec thin stop -C #{thin_path}"
   end
 
   desc "Restart Application"
   task :restart, :roles => :app do
-    run "kill -USR2 `cat #{deploy_to}/current/tmp/pids/unicorn.pid`"
+    # run "kill -USR2 `cat #{deploy_to}/current/tmp/pids/unicorn.pid`"
+    run "cd #{deploy_to}/current/; bundle exec thin restart -O -C #{thin_path}"
   end
 end
 
@@ -66,4 +70,4 @@ task :mongoid_migrate_database, :roles => :web do
   run "cd #{deploy_to}/current/; RAILS_ENV=production bundle exec rake db:migrate"
 end
 
-after "deploy:finalize_update","deploy:symlink", :init_shared_path, :link_shared_files, :compile_assets, :sync_assets_to_cdn, :mongoid_migrate_database
+after "deploy:finalize_update","deploy:symlink", :init_shared_path, :link_shared_files #, :compile_assets, :sync_assets_to_cdn, :mongoid_migrate_database

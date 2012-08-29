@@ -14,7 +14,6 @@ class Notification::Base
   scope :unread, where(:read => false)
   
   after_create :realtime_push_to_client
-  after_destroy :realtime_push_to_client
   
   def realtime_push_to_client
     if self.user

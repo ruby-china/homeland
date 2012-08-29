@@ -83,6 +83,8 @@ gem 'quiet_assets', "1.0.1"
 # API
 gem 'grape', :github => 'intridea/grape', :branch => 'frontier'
 
+gem 'thin'
+
 group :development, :test do
   gem 'capistrano', '2.9.0', :require => false
   gem 'rvm-capistrano', :require => false
@@ -90,7 +92,6 @@ group :development, :test do
   gem 'rspec-rails', '~> 2.10.0'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
-  gem 'thin'
   gem "rspec-cells"
   gem "capybara", :require => false
   gem 'api_taster'
@@ -98,6 +99,5 @@ group :development, :test do
 end
 
 group :production do
-  gem "unicorn"
   gem 'dalli', '1.1.1'
 end

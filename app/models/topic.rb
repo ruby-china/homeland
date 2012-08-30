@@ -45,6 +45,8 @@ class Topic
   index :suggested_at => 1
 
   counter :hits, :default => 0
+  
+  delegate :login, :to => :user, :prefix => true, :allow_nil => true
 
   # scopes
   scope :last_actived, desc("replied_at").desc(:_id)

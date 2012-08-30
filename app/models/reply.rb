@@ -26,6 +26,9 @@ class Reply
   index :topic_id => 1
 
   attr_accessible :body
+  
+  delegate :title, :to => :topic, :prefix => true, :allow_nil => true
+  delegate :login, :to => :user, :prefix => true, :allow_nil => true
 
   validates_presence_of :body
   validate do
@@ -54,9 +57,11 @@ class Reply
 
   def self.send_topic_reply_notification(reply_id)
     reply = Reply.find_by_id(reply_id)
+    return if reply.blank?
     topic = reply.topic
+    return if topic.blank?
     # 给发帖人发回帖通知
-    if reply.user != topic.user && !reply.mentioned_user_ids.include?(topic.user_id)
+    if reply.user_id != topic.user_id && !reply.mentioned_user_ids.include?(topic.user_id)
       Notification::TopicReply.create :user_id => topic.user_id, :reply_id => reply.id
       reply.notified_user_ids << topic.user_id
     end
@@ -69,6 +74,7 @@ class Reply
       next if uid == reply.user_id
       Notification::TopicReply.create :user_id => uid, :reply_id => reply.id
     end
+    true
   end
 
   # 是否热门

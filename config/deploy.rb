@@ -3,6 +3,7 @@ require "bundler/capistrano"
 require "sidekiq/capistrano"
 
 require "rvm/capistrano"
+default_run_options[:pty] = true
 set :rvm_ruby_string, 'ruby-1.9.3-p194'
 set :rvm_type, :user
 
@@ -35,6 +36,23 @@ namespace :deploy do
   desc "Restart Application"
   task :restart, :roles => :app do
     run "kill -USR2 `cat #{deploy_to}/current/tmp/pids/unicorn.pid`"
+  end
+end
+
+namespace :faye do
+  desc "Start Faye"
+  task :start, :roles => :app do
+    run "cd #{deploy_to}/current/faye_server; thin start -C thin.yml"
+  end
+
+  desc "Stop Faye"
+  task :stop, :roles => :app do
+    run "cd #{deploy_to}/current/faye_server; thin stop -C thin.yml"
+  end
+
+  desc "Restart Faye"
+  task :restart, :roles => :app do
+    run "cd #{deploy_to}/current/faye_server; kill -9 `cat tmp/pids/thin.8080.pid`; thin start -C thin.yml"
   end
 end
 

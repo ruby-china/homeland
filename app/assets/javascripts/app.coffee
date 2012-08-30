@@ -18,8 +18,11 @@
 #= require jquery.atwho
 #= require emoji_list
 #= require faye
+#= require notifier
 #= require_self
 window.App =
+  notifier : null,
+  
   loading : () ->
     console.log "loading..."
 
@@ -105,6 +108,7 @@ window.App =
       if json.count > 0
         span.addClass("badge-error")
         new_title = "(#{json.count}) #{new_title}"
+        App.notifier.notify("",json.title,json.content,"#{ROOT_URL}notifications")
       else
         span.removeClass("badge-error")
       span.text(json.count)
@@ -119,6 +123,9 @@ $(document).ready ->
   $('.dropdown-toggle').dropdown()
 
   App.initNotificationSubscribe()
+  
+  App.notifier =  new Notifier
+  # App.notifier.showTooltip()
   
   # 绑定评论框 Ctrl+Enter 提交事件
   $(".cell_comments_new textarea").bind "keydown","ctrl+return",(el) ->

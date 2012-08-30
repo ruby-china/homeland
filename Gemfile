@@ -98,4 +98,5 @@ end
 
 group :production do
   gem 'dalli', '1.1.1'
+  gem 'unicorn'
 end

@@ -64,9 +64,6 @@ gem "cells", "3.7.1"
 gem "sidekiq", "1.1.0"
 gem "devise-async", "0.1.1"
 
-gem 'faye', "0.8.3"
-gem 'faye-rails', "1.0.0"
-
 # 分享功能
 gem "social-share-button", "~> 0.0.5"
 
@@ -83,8 +80,6 @@ gem 'quiet_assets', "1.0.1"
 # API
 gem 'grape', :github => 'intridea/grape', :branch => 'frontier'
 
-gem 'thin'
-
 group :development, :test do
   gem 'capistrano', '2.9.0', :require => false
   gem 'rvm-capistrano', :require => false
@@ -96,6 +91,7 @@ group :development, :test do
   gem "capybara", :require => false
   gem 'api_taster'
   gem "letter_opener"
+  gem 'thin'
 end
 
 group :production do

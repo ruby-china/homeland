@@ -86,9 +86,9 @@
     <script type="text/javascript">app_mobile = true;</script>
   <% end %>
   <script type="text/javascript" charset="utf-8">
-    FAYE_SERVER_URL = "<%= faye_url %>";
+    FAYE_SERVER_URL = "<%= Setting.faye_server %>";
     <% if current_user %>
-      CURRENT_USER_ID = "<%= current_user.id %>";
+      CURRENT_USER_ACCESS_TOKEN = "<%= current_user.temp_access_token %>";
     <% end %>
   </script>
   <%= yield :scripts %>

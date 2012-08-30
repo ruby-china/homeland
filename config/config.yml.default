@@ -13,6 +13,7 @@ defaults: &defaults
   email_sender: 'no-reply@ruby-china.org'
   aws_access_key_id: ''
   aws_secret_access_key: ''
+  faye_server: "http://127.0.0.1:8080/faye"
   faye_token: "123456"
   twitter_token: "uJ9fBa53SmqrHBqs1qq5cg"
   twitter_secret: "b9e9hbsa9sYYCqmW0kTyfALshclmkQX4kzTm8BBBTw"

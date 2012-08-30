@@ -17,7 +17,7 @@ class Notification::Base
   
   def realtime_push_to_client
     if self.user
-      FayeClient.send("/notifications_count/#{self.user_id}", :count => self.user.notifications.unread.count)
+      FayeClient.send("/notifications_count/#{self.user.temp_access_token}", :count => self.user.notifications.unread.count)
     end
   end
 

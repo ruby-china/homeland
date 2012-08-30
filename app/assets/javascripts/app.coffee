@@ -97,9 +97,9 @@ window.App =
          commenter_exists.push(val.login)
     App.atReplyable(".cell_comments_new textarea", commenters)
     
-  initNotificationSubscribe : (user_id) ->
+  initNotificationSubscribe : () ->
     faye = new Faye.Client(FAYE_SERVER_URL)
-    notification_subscription = faye.subscribe "/notifications_count/#{user_id}",(json) ->
+    notification_subscription = faye.subscribe "/notifications_count/#{CURRENT_USER_ACCESS_TOKEN}",(json) ->
       span = $("#user_notifications_count span")
       new_title = $(document).attr("title").replace(/\(\d+\) /,'')
       if json.count > 0
@@ -118,7 +118,7 @@ $(document).ready ->
   $(".alert").alert()
   $('.dropdown-toggle').dropdown()
 
-  # App.initNotificationSubscribe(CURRENT_USER_ID)
+  App.initNotificationSubscribe()
   
   # 绑定评论框 Ctrl+Enter 提交事件
   $(".cell_comments_new textarea").bind "keydown","ctrl+return",(el) ->

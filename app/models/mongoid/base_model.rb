@@ -8,6 +8,8 @@ module Mongoid
       scope :recent, desc(:_id)
       scope :exclude_ids, Proc.new { |ids| where(:_id.nin => ids.map(&:to_i)) }
       scope :by_week, where(:created_at.gte => 7.days.ago.utc)
+      
+      delegate :url_helpers, to: 'Rails.application.routes' 
     end
 
     module ClassMethods

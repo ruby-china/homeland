@@ -22,6 +22,10 @@ class Notification::Base
       FayeClient.send("/notifications_count/#{self.user.temp_access_token}", hash)
     end
   end
+  
+  def content_path
+    ""
+  end
 
 
   def anchor

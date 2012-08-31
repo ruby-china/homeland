@@ -25,6 +25,9 @@ window.App =
   
   loading : () ->
     console.log "loading..."
+    
+  fixUrlDash : (url) ->
+    url.replace(/\/\//g,"/")
 
   # 警告信息显示, to 显示在那个dom前(可以用 css selector)
   alert : (msg,to) ->
@@ -108,7 +111,7 @@ window.App =
       if json.count > 0
         span.addClass("badge-error")
         new_title = "(#{json.count}) #{new_title}"
-        App.notifier.notify("",json.title,json.content,"#{ROOT_URL}notifications")
+        $.notifier.notify("",json.title,json.content,App.fixUrlDash("#{ROOT_URL}#{json.content_path}"))
       else
         span.removeClass("badge-error")
       span.text(json.count)
@@ -123,9 +126,6 @@ $(document).ready ->
   $('.dropdown-toggle').dropdown()
 
   App.initNotificationSubscribe()
-  
-  App.notifier =  new Notifier
-  # App.notifier.showTooltip()
   
   # 绑定评论框 Ctrl+Enter 提交事件
   $(".cell_comments_new textarea").bind "keydown","ctrl+return",(el) ->

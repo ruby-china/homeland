@@ -16,7 +16,7 @@ module ApplicationHelper
 
   def controller_stylesheet_link_tag
     case controller_name
-    when "users","home", "topics", "pages", "search", "sites", "notifications"
+    when "users","home", "topics", "pages", "search", "sites", "notifications", "notes"
       stylesheet_link_tag controller_name
     when "replies"
       stylesheet_link_tag "topics"
@@ -25,7 +25,7 @@ module ApplicationHelper
 
   def controller_javascript_include_tag
     case controller_name
-    when "pages","topics","sites", "notifications"
+    when "pages","topics","sites", "notifications", "notes"
       javascript_include_tag controller_name
     when "replies"
       javascript_include_tag "topics"

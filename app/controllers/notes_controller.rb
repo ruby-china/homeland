@@ -53,6 +53,10 @@ class NotesController < ApplicationController
     end
   end
 
+  def preview
+    render :text => MarkdownConverter.convert( params[:body] )
+  end
+
   def destroy
     @note = current_user.notes.find(params[:id])
     @note.destroy

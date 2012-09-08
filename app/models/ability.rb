@@ -104,6 +104,8 @@ class Ability
       can :recent, Page
       can :preview, Page
 
+      can :preview, Note
+
       can :read, Photo
       can :read, Site
       can :read, Section

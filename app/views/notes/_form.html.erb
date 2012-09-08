@@ -4,6 +4,14 @@
     <div class="inputs-list">
       <label for="note_publish"><%= f.check_box :publish %> <%= t("common.public")%></label>
     </div>
+
+    <div class="editor_toolbar">
+        <ul class="pills" style="clear:none;">
+          <li class="edit active"><%= link_to(t("common.editor_toolbar_edit"), "#") %></li>
+          <li class="preview"><%= link_to(t("common.editor_toolbar_preview"), "#") %></li>
+        </ul>
+    </div>
+
     <%= f.text_area :body, :class => "span16", :style => "height:500px" %>
     <p class="help-block">
       <%= t("notes.please_use") %> <a href="http://en.wikipedia.org/wiki/Markdown" target="_blank">Markdown</a> <%= t("notes.document_format_to_write") %>

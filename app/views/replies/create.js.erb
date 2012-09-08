@@ -1,4 +1,4 @@
-<% if @reply.errors.blank? %>
+<% if @reply.errors.blank? and ! @reply.new_record? %>
   if($("#replies").length == 0){
     location.href = location.href;
   }

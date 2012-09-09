@@ -54,6 +54,8 @@ class Reply
   after_create do
     Reply.delay.send_topic_reply_notification(self.id)
   end
+  
+  
 
   def self.send_topic_reply_notification(reply_id)
     reply = Reply.find_by_id(reply_id)

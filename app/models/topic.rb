@@ -33,6 +33,7 @@ class Topic
   belongs_to :node
   counter_cache :name => :node, :inverse_of => :topics
   belongs_to :last_reply_user, :class_name => 'User'
+  belongs_to :last_reply, :class_name => 'Reply'
   has_many :replies, :dependent => :destroy
 
   attr_accessible :title, :body
@@ -47,6 +48,7 @@ class Topic
   counter :hits, :default => 0
   
   delegate :login, :to => :user, :prefix => true, :allow_nil => true
+  delegate :body, :to => :last_reply, :prefix => true, :allow_nil => true
 
   # scopes
   scope :last_actived, desc("replied_at").desc(:_id)
@@ -101,11 +103,6 @@ class Topic
     self.last_reply_user_id = reply.user_id
     self.last_reply_user_login = reply.user.try(:login) || nil
     self.save
-  end
-  
-  def last_reply
-    return nil if self.last_reply_id.nil?
-    Reply.find(self.last_reply_id)
   end
 
   # 删除并记录删除人

@@ -5,6 +5,7 @@ class TestDocument
   include Mongoid::Mentionable
 
   belongs_to :user
+  delegate :login, :to => :user, :prefix => true, :allow_nil => true
   field :body
 end
 

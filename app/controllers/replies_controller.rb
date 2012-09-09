@@ -9,11 +9,6 @@ class RepliesController < ApplicationController
     @reply = @topic.replies.build(params[:reply])
 
     @reply.user_id = current_user.id
-    
-    if @reply.body == @topic.last_reply.try(:body)
-      @msg = t("topics.reply_repeat")
-      return
-    end
 
     if @reply.save
       current_user.read_topic(@topic)

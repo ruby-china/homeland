@@ -62,7 +62,7 @@ RubyChina::Application.configure do
   config.assets.js_compressor  = :uglifier
   config.assets.css_compressor = :scss
   config.assets.precompile += %w(application.css app.js topics.css topics.js window.css front.css cpanel.css search.css
-  users.css pages.css pages.js notifications.js notifications.css sites.css sites.js
+  users.css pages.css pages.js notifications.js notifications.css sites.css sites.js notes.css notes.js 
   gfdynamicfeedcontrol.css gfdynamicfeedcontrol.js mobile.css home.css)
 
 

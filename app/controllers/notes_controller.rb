@@ -10,7 +10,7 @@ class NotesController < ApplicationController
   end
 
   def index
-    @notes = current_user.notes.paginate(:page => params[:page], :per_page => 20)
+    @notes = current_user.notes.recent_updated.paginate(:page => params[:page], :per_page => 20)
     set_seo_meta t("menu.notes")
     drop_breadcrumb("列表")
   end

@@ -13,10 +13,11 @@ class Note
   belongs_to :user
 
   index :user_id => 1
+  index :updated_at => -1
 
   attr_accessible :title, :body, :publish
 
-  default_scope desc(:id)
+  scope :recent_updated, desc(:updated_at)
 
   before_save :auto_set_value
   def auto_set_value

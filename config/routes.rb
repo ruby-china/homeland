@@ -9,7 +9,11 @@ RubyChina::Application.routes.draw do
     end
   end
   resources :comments
-  resources :notes
+  resources :notes do
+    collection do
+      post :preview
+    end
+  end
   root :to => "home#index"
 
   devise_for :users, :path => "account", :controllers => {

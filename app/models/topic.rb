@@ -102,6 +102,11 @@ class Topic
     self.last_reply_user_login = reply.user.try(:login) || nil
     self.save
   end
+  
+  def last_reply
+    return nil if self.last_reply_id.nil?
+    Reply.find(self.last_reply_id)
+  end
 
   # 删除并记录删除人
   def destroy_by(user)

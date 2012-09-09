@@ -48,6 +48,14 @@ describe Topic do
     topic.last_reply_user_login.should == reply.user.login
   end
 
+  it "should get last reply" do
+    topic.last_reply.should == nil
+    reply = Factory :reply, :topic => topic, :user => user
+    topic.last_reply.should == reply
+    reply.destroy
+    topic.last_reply.should == nil
+  end
+
   it "should covert body with Markdown on create" do
     t = Factory(:topic, :body => "*foo*")
     t.body_html.should == "<p><em>foo</em></p>"

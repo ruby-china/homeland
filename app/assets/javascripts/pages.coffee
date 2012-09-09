@@ -12,6 +12,7 @@ $(document).ready ->
     $('.preview a').parent().removeClass('active')
     $('#preview').hide()
     $('#page_body').show()
+    false
     
   $('.preview a').click ->
     $(this).parent().addClass('active')
@@ -21,3 +22,5 @@ $(document).ready ->
     $('#preview').show()
     $.post '/wiki/preview', {body: $('#page_body').val()}, (data)->
       $('#preview').html(data)
+      false
+    false

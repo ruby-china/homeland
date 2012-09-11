@@ -1,11 +1,8 @@
 # coding: utf-8
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :init_page
+  helper_method :unread_notify_count
 
-  def init_page
-    load_unread_notifications_count
-  end
 
   def render_404
     render_optional_error_file(404)
@@ -81,10 +78,9 @@ class ApplicationController < ActionController::Base
       end
     end
   end
-
-  def load_unread_notifications_count
-    @unread_notify_count = 0
-    return false if current_user.blank?
-    @unread_notify_count = current_user.notifications.unread.count
+  
+  def unread_notify_count
+    return 0 if current_user.blank?
+    @unread_notify_count ||= current_user.notifications.unread.count
   end
 end

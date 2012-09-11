@@ -2,10 +2,10 @@
 <ul class="nav pull-right" id="userbar">
   <%
     badge_class = ""
-    badge_class = "badge-error" if @unread_notify_count > 0
+    badge_class = "badge-error" if unread_notify_count > 0
   %>
   <li<%= " class=active" if ["notifications"].index(params[:controller]) %>>
-    <a href="<%= notifications_path %>" id="user_notifications_count"><span class="badge <%= badge_class %>"><%= @unread_notify_count %></span></a>
+    <a href="<%= notifications_path %>" id="user_notifications_count"><span class="badge <%= badge_class %>"><%= unread_notify_count %></span></a>
   </li>
   <li class="dropdown" id="user_menu">
     <%= link_to(raw("#{current_user.login} <b class='caret'></b>"), "#user_menu", :class => "dropdown-toggle", "data-toggle" => "dropdown") %>

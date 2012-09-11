@@ -142,6 +142,14 @@ module RubyChina
         @users = User.hot.limit(20)
         present @users, :with => APIEntities::DetailUser
       end
+      
+      # Get temp_access_token, this key is use for Faye client channel
+      # Example
+      # /api/users/temp_access_token?token=232332233223:1
+      get "temp_access_token" do
+        authenticate!
+        present ({ :temp_access_token => current_user.temp_access_token }).to_json
+      end
 
       # Get a single user
       # Example

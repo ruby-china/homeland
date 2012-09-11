@@ -27,7 +27,7 @@ window.App =
     console.log "loading..."
     
   fixUrlDash : (url) ->
-    url.replace(/\/\//g,"/")
+    url.replace(/\/\//g,"/").replace(/:\//,"://")
 
   # 警告信息显示, to 显示在那个dom前(可以用 css selector)
   alert : (msg,to) ->
@@ -111,7 +111,9 @@ window.App =
       if json.count > 0
         span.addClass("badge-error")
         new_title = "(#{json.count}) #{new_title}"
-        $.notifier.notify("",json.title,json.content,App.fixUrlDash("#{ROOT_URL}#{json.content_path}"))
+        url = App.fixUrlDash("#{ROOT_URL}#{json.content_path}")
+        console.log url
+        $.notifier.notify("",json.title,json.content,url)
       else
         span.removeClass("badge-error")
       span.text(json.count)

@@ -35,7 +35,7 @@ module Redcarpet
             return link
           end
           # Fix Chinese neer the URL
-          bad_text = link.to_s.match(/[^\w\d:\/\-\,\$\!\_\.=\?&#+\|\%]+/im).to_s
+          bad_text = link.to_s.match(/[^\w:\/\-\,\$\!\.=\?&#+\|\%]+/im).to_s
           link = link.to_s.gsub(bad_text, '')
           "<a href=\"#{link}\" rel=\"nofollow\" target=\"_blank\">#{link}</a>#{bad_text}"
         end

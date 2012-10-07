@@ -96,6 +96,10 @@ group :development, :test do
   gem 'thin'
 end
 
+group :test do
+  gem 'mock_redis'
+end
+
 group :production do
   gem 'dalli', '1.1.1'
   gem 'unicorn'

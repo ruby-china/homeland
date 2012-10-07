@@ -18,3 +18,7 @@ before_script:
   - cp config/config.yml.default config/config.yml
   - cp config/mongoid.yml.default config/mongoid.yml
   - cp config/redis.yml.default config/redis.yml
+
+services:
+  - mongodb
+  - redis-server

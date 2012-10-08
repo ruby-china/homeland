@@ -1,21 +1,25 @@
+language: ruby
 bundler_args: --without development
-
-rvm:
-  - 1.9.2
-  - 1.9.3
-  - jruby
-  - rbx
-  - ree
 
 services:
   - mongodb
   - redis-server
 
 matrix:
+  include:
+    - rvm: 1.9.3
+    - rvm: ruby-head
+    - rvm: jruby-19mode
+      jdk: openjdk7
+      env: JRUBY_OPTS="-Xmx512m -Xcompile.invokedynamic=false"
+    - rvm: jruby-head
+      jdk: openjdk7
+      env: JRUBY_OPTS="-Xcompile.invokedynamic=false"
   allow_failures:
-    - rvm: jruby
-    - rvm: rbx
-    - rvm: ree
+    - rvm: ruby-head
+    - rvm: jruby-head
+      jdk: openjdk7
+      env: JRUBY_OPTS="-Xcompile.invokedynamic=false"
 
 before_script:
   - mongo ruby_china_test --eval 'db.addUser("travis", "test");'

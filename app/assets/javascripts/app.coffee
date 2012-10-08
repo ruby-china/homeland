@@ -19,6 +19,7 @@
 #= require emoji_list
 #= require faye
 #= require notifier
+#= require sisyphus
 #= require_self
 window.App =
   notifier : null,
@@ -128,6 +129,12 @@ $(document).ready ->
   $('.dropdown-toggle').dropdown()
 
   App.initNotificationSubscribe()
+  
+  $('form.new_topic,form.new_reply,form.new_note,form.new_page').sisyphus
+    timeout : 2
+  $('form a.reset').click ->
+    $.sisyphus().manuallyReleaseData()
+      
   
   # 绑定评论框 Ctrl+Enter 提交事件
   $(".cell_comments_new textarea").bind "keydown","ctrl+return",(el) ->

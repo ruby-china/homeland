@@ -1,3 +1,4 @@
+#= require_self
 $(document).ready ->
   $("<div id='preview' class='wikistyle'></div>").insertAfter( $('#note_body') ) 
 

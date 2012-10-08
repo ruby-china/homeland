@@ -19,7 +19,7 @@
 
     <div class="form-actions">
       <%= f.submit t("common.save"), :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %>
-      <%= link_to(t("common.cancel"), @topic.id.blank? ? root_path : topic_path(@topic), :class => "btn")%>
+      <%= link_to(t("common.cancel"), @topic.id.blank? ? topics_path : topic_path(@topic), :class => "btn reset")%>
     </div>
   </fieldset>
 <% end %>

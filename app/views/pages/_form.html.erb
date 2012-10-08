@@ -36,6 +36,7 @@
   <% end %>
   <div class="form-actions">
     <%= f.submit t("common.save"), :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %>
+    <%= link_to t("common.cancel"), pages_path, :class => "btn reset" %>
   </div>
 </fieldset>
 <% end %>

@@ -82,6 +82,9 @@ gem 'quiet_assets', "1.0.1"
 # API
 gem 'grape', :github => 'intridea/grape', :branch => 'frontier'
 
+# Google Analytics performance 
+gem 'garelic', '0.0.2'
+
 group :development, :test do
   gem 'capistrano', '2.9.0', :require => false
   gem 'rvm-capistrano', :require => false

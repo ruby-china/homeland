@@ -146,6 +146,7 @@ GEM
     faye-websocket (0.4.6)
       eventmachine (>= 0.12.0)
     ffi (1.0.11)
+    garelic (0.0.2)
     hashie (1.2.0)
     highline (1.6.8)
     hike (1.2.1)
@@ -353,6 +354,7 @@ DEPENDENCIES
   exception_notification
   factory_girl_rails
   faye-rails
+  garelic (= 0.0.2)
   grape!
   jquery-atwho-rails (= 0.1.6)
   jquery-rails (= 2.0.1)

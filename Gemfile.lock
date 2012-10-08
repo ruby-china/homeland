@@ -172,7 +172,6 @@ GEM
     mime-types (1.19)
     mini_magick (3.3)
       subexec (~> 0.1.0)
-    mock_redis (0.5.2)
     mongoid (3.0.1)
       activemodel (~> 3.1)
       moped (~> 1.1.1)
@@ -361,7 +360,6 @@ DEPENDENCIES
   md_emoji
   memcache-client (= 1.8.5)
   mini_magick (= 3.3)
-  mock_redis
   mongoid (= 3.0.1)
   mongoid_auto_increment_id (= 0.5.0)
   mongoid_colored_logger!

@@ -1,6 +1,3 @@
-
-Howto remove test dependencies from rspec cases
-
 ## Ruby China
 
 This is the source code of [Ruby China](http://ruby-china.org) website.

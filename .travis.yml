@@ -1,20 +1,17 @@
 bundler_args: --without development
 
 rvm:
-  - 1.9.2
   - 1.9.3
-  - jruby
-  - rbx
-  - ree
 
-matrix:
-  allow_failures:
-    - rvm: jruby
-    - rvm: rbx
-    - rvm: ree
+services:
+  - mongodb
+  - redis-server
 
 before_script:
   - mongo ruby_china_test --eval 'db.addUser("travis", "test");'
   - cp config/config.yml.default config/config.yml
   - cp config/mongoid.yml.default config/mongoid.yml
   - cp config/redis.yml.default config/redis.yml
+  - sed -i -e "s/SETUP_DEVELOPMENT_HOST/127.0.1:27017/g" config/mongoid.yml
+  - sed -i -e "s/SETUP_REDIS_HOST/127.0.1/g" config/redis.yml
+  - sed -i -e "s/SETUP_REDIS_PORT/6379/g" config/redis.yml

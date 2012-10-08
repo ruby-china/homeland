@@ -3,6 +3,10 @@ bundler_args: --without development
 rvm:
   - 1.9.3
 
+services:
+  - mongodb
+  - redis-server
+
 before_script:
   - mongo ruby_china_test --eval 'db.addUser("travis", "test");'
   - cp config/config.yml.default config/config.yml

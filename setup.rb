@@ -102,4 +102,4 @@ puts_line "Seed default data..." do
 end
 
 puts ""
-puts "Ruby China Install successed."
+puts "Ruby China Successfully Installed."

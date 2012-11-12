@@ -28,6 +28,16 @@ describe Ability do
     it { should be_able_to(:update, Page) }
     it { should_not be_able_to(:update, page_locked)}
   end
+  
+  context "Site editor users" do
+    let(:user) { Factory :user, :replies_count => 100 }
+    let(:ability){ Ability.new(user) }
+    
+    context "Site" do
+      it { should be_able_to(:read, Site) }
+      it { should be_able_to(:create, Site) }
+    end
+  end
 
   context "Normal users" do
     let(:user) { Factory :user }
@@ -67,7 +77,7 @@ describe Ability do
 
     context "Site" do
       it { should be_able_to(:read, Site) }
-      it { should be_able_to(:create, Site) }
+      it { should_not be_able_to(:create, Site) }
     end
 
     context "Note" do

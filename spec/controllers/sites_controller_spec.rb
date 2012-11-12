@@ -1,7 +1,8 @@
 require "spec_helper"
 
 describe SitesController do
-  let(:user) { Factory :user }
+  let(:user) { Factory :user, :replies_count => 100 }
+  let(:user1) { Factory :user }
   describe ":index" do
     it "should have an index action" do
       get :index
@@ -19,6 +20,12 @@ describe SitesController do
       sign_in user
       get :new
       response.should be_success
+    end
+    
+    it "should not allow access without use has replies_count less than 100" do
+      sign_in user1
+      get :new
+      response.should_not be_success
     end
   end
 

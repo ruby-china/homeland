@@ -122,7 +122,7 @@ window.App =
       $(document).attr("title", new_title)
     true  
 
-$(document).ready ->
+appReady = ->
   App.initForDesktopView()
 
   $("abbr.timeago").timeago()
@@ -157,3 +157,6 @@ $(document).ready ->
       $("a.go_top").show()
     else
       $("a.go_top").hide()
+      
+$(document).ready(appReady)
+$(document).on('page:load', appReady)

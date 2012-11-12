@@ -136,12 +136,18 @@ class User
   def wiki_editor?
     self.admin? or self.verified == true
   end
+  
+  # 回帖大于 150 的才有酷站的发布权限
+  def site_editor?
+    self.admin? or self.replies_count > 100
+  end
 
   def has_role?(role)
     case role
       when :admin then admin?
       when :wiki_editor then wiki_editor?
       when :member then true
+      when :site_editor then site_editor?
       else false
     end
   end

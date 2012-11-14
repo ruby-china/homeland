@@ -1,20 +1,34 @@
+language: ruby
 bundler_args: --without development
 
-rvm:
-  - 1.9.2
-  - 1.9.3
-  - jruby
-  - rbx
-  - ree
+services:
+  - mongodb
+  - redis-server
 
 matrix:
+  include:
+    - rvm: 1.9.3
+    - rvm: ruby-head
+    - rvm: jruby-19mode
+      jdk: openjdk7
+      env: JRUBY_OPTS="-Xmx512m -Xcompile.invokedynamic=false"
+    - rvm: jruby-head
+      jdk: openjdk7
+      env: JRUBY_OPTS="-Xcompile.invokedynamic=false"
   allow_failures:
-    - rvm: jruby
-    - rvm: rbx
-    - rvm: ree
+    - rvm: ruby-head
+    - rvm: jruby-19mode
+      jdk: openjdk7
+      env: JRUBY_OPTS="-Xmx512m -Xcompile.invokedynamic=false"
+    - rvm: jruby-head
+      jdk: openjdk7
+      env: JRUBY_OPTS="-Xcompile.invokedynamic=false"
 
 before_script:
   - mongo ruby_china_test --eval 'db.addUser("travis", "test");'
   - cp config/config.yml.default config/config.yml
   - cp config/mongoid.yml.default config/mongoid.yml
   - cp config/redis.yml.default config/redis.yml
+  - sed -i "s/SETUP_DEVELOPMENT_HOST/127.0.0.1:27017/g" config/mongoid.yml
+  - sed -i "s/SETUP_REDIS_HOST/127.0.0.1/g" config/redis.yml
+  - sed -i "s/SETUP_REDIS_PORT/6379/g" config/redis.yml

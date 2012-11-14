@@ -33,6 +33,15 @@ class RepliesController < ApplicationController
       render :action => "edit"
     end
   end
+  
+  def destroy
+    @reply = Reply.find(params[:id])
+    if @reply.destroy
+      redirect_to(topic_path(@reply.topic_id), :notice => '回帖删除成功.')
+    else
+      redirect_to(topic_path(@reply.topic_id), :alert => '程序异常，删除失败.')
+    end
+  end
 
   protected
 

@@ -171,7 +171,7 @@ class TopicsController < ApplicationController
   private
 
   def init_list_sidebar
-   if !fragment_exist? "topic/init_list_sidebar/hot_nodes"
+    if !fragment_exist? "topic/init_list_sidebar/hot_nodes"
       @hot_nodes = Node.hots.limit(10)
     end
     set_seo_meta(t("menu.topics"))

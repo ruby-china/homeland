@@ -7,6 +7,11 @@
                     /____/
   ========================================================
                                           ruby-china.org
+        
+  App Environments:
+  --------------------------------------------------------
+  Ruby:  <%= RUBY_VERSION %><%= "-p#{RUBY_PATCHLEVEL}" if defined? RUBY_PATCHLEVEL %>
+  Rails: <%= Rails.version %>
 -->
 <!DOCTYPE html>
 <html>
@@ -76,7 +81,7 @@
   <a class="go_top" href="#"><i class="icon icons_go_top"></i></a>
   <footer class="footer">
     <div class="container">
-      <%= raw SiteConfig.footer_html %>
+      <%= raw SiteConfig.footer_html %> 
     </div>
   </footer>
   <% end %>

@@ -315,7 +315,6 @@ GEM
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
-    turbolinks (0.5.1)
     tzinfo (0.3.33)
     uglifier (1.1.0)
       execjs (>= 0.3.0)
@@ -387,7 +386,6 @@ DEPENDENCIES
   social-share-button (~> 0.0.5)
   sprite-factory (= 1.4.1)
   thin
-  turbolinks
   uglifier (>= 1.0.3)
   unicorn
   will_paginate (= 3.0.2)

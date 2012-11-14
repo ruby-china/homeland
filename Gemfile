@@ -78,7 +78,6 @@ gem 'chunky_png', "1.2.5", :require => false
 
 # 禁用 assets 日志
 gem 'quiet_assets', "1.0.1"
-gem 'turbolinks'
 
 # API
 gem 'grape', :github => 'intridea/grape', :branch => 'frontier'

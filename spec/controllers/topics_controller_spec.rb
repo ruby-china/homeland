@@ -97,23 +97,6 @@ describe TopicsController do
         get :show, :id => topic
       end.should change(user.notifications.unread, :count).by(-2)
     end
-
-    context "user deletes her own account" do
-      let(:reply) { Factory(:reply, :body => "i said something not good") }
-      subject { response }
-      before do
-        reply.user.destroy
-        get :show, :id => reply.topic
-      end
-
-      it { should be_success }
-
-      it { should_not include("i said something not good") }
-
-      it "should not hold the reply in results" do
-        assigns(:replies).should_not include(reply)
-      end
-    end
   end
 
 end

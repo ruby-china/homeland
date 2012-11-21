@@ -49,11 +49,14 @@
       <%= t("topics.no_replies") %>
     </div>
     <% else %>
-    <div id="replies" class="box">
+    <div id="replies" class="box box_gray">
       <div class="total">
         共收到 <b><%= @topic.replies_count %></b> 条回复
       </div>
-      <%= render :partial => "replies/reply", :collection => @replies %>
+      <div class="items">
+        <%= render :partial => "replies/reply", :collection => @replies %>
+      </div>
+      <%= will_paginate @replies, :inner_window => 2 %>
     </div>
   <% end %>
 

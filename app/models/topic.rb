@@ -116,4 +116,16 @@ class Topic
     super
     delete_notifiaction_mentions
   end
+  
+  def last_page_with_per_page(per_page)
+    page = (self.replies_count.to_f / per_page).ceil
+    page > 1 ? page : nil
+  end
+  
+  # 所有的回复编号
+  def reply_ids
+    Rails.cache.fetch([self,"reply_ids"]) do
+      self.replies.only(:_id).map(&:_id)
+    end
+  end
 end

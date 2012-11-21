@@ -55,6 +55,9 @@ class Reply
     Reply.delay.send_topic_reply_notification(self.id)
   end
   
+  def self.per_page
+    50
+  end
   
 
   def self.send_topic_reply_notification(reply_id)

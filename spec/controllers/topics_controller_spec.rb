@@ -97,6 +97,19 @@ describe TopicsController do
         get :show, :id => topic
       end.should change(user.notifications.unread, :count).by(-2)
     end
+
+    context "when the topic has 11 replies, and 10 are shown per page" do
+      let!(:user) { FactoryGirl.build_stubbed(:user) }
+      let!(:topic) { FactoryGirl.create(:topic) }
+      let!(:reply) { FactoryGirl.create_list(:reply, 11, :topic => topic) }
+
+      before { sign_in user }
+
+      it "should show the last page by default" do
+        get :show, :id => topic
+        assigns[:page].should eq(2)
+      end
+    end
   end
 
 end

@@ -19,14 +19,14 @@
 
     function prevPage() {
         var href = $('.pagination .previous_page a').attr('href');
-        if (href && href != document.location) {
+        if (href && href != document.location && href != "#") {
             document.location = href;
         }
     }
 
     function nextPage() {
         var href = $('.pagination .next_page a').attr('href');
-        if (href && href != document.location) {
+        if (href && href != document.location && href != "#") {
             document.location = href;
         }
     }

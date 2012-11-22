@@ -106,6 +106,7 @@ describe TopicsController do
       before { sign_in user }
 
       it "should show the last page by default" do
+        Reply.stub!(:per_page).and_return(10)
         get :show, :id => topic
         assigns[:page].should eq(2)
       end

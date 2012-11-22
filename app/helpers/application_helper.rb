@@ -94,10 +94,4 @@ module ApplicationHelper
     return false if agent_str =~ /ipad/
     agent_str =~ Regexp.new(MOBILE_USER_AGENTS)
   end
-
-  def render_js_config
-    {
-      :replies_per_page => Reply.per_page
-    }.to_json.html_safe
-  end
 end

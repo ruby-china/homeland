@@ -1,5 +1,6 @@
 # TopicsController 下所有页面的 JS 功能
 window.Topics =
+  replies_per_page : 50
   # 往话题编辑器里面插入图片代码
   appendImageFromUpload : (srcs) ->
     txtBox = $(".topic_editor")
@@ -44,6 +45,23 @@ window.Topics =
     reply_body.focus().val(reply_body.val() + new_text)
     return false
 
+  # 检查处理其他页的高亮连接跳转
+  checkHightlightReplyRedirect : (el,e) ->
+    floor = $(el).data('floor')
+    floorEl = $("#reply#{floor}")
+
+    # if the floor is in current page, just follow the link
+    return if floorEl.length > 0
+
+    # else disable the default behaviour
+    e.preventDefault()
+
+    page = Math.floor((floor - 1) / Topics.replies_per_page) + 1
+
+    # TODO: merge existing query string
+    url = window.location.pathname + "?page=#{page}" + "#reply#{floor}"
+    window.location = url
+    
   # 高亮楼层
   hightlightReply : (floor) ->
     $("#replies .reply").removeClass("light")
@@ -166,13 +184,14 @@ $(document).ready ->
 
   Topics.initUploader()
 
-  $("a.at_floor").live 'click', () ->
-    Topics.hightlightReply($(this).data("floor"))
-
+  $("a.at_floor").live 'click', (e) ->
+    Topics.checkHightlightReplyRedirect(this,e)
+    Topics.hightlightReply($(this).data("floor"))   
+    
   # also highlight if hash is reply#
   matchResult = window.location.hash.match(/^#reply(\d+)$/)
   if matchResult?
-    Topics.hightlightReply(matchResult[1])
+    Topics.hightlightReply(matchResult[1]) 
 
   $("a.small_reply").live 'click', () ->
     Topics.reply($(this).data("floor"), $(this).data("login"))
@@ -206,19 +225,4 @@ $(document).ready ->
   # Focus title field in new-topic page
   $("body.topics-controller.new-action #topic_title").focus()
 
-  # If floor is not in current page, redirect to correct page
-  bodyEl.on 'click', '.at_floor', (e) ->
-    floor = $(this).data('floor')
-    floorEl = $("#reply#{floor}")
-
-    # if the floor is in current page, just follow the link
-    return if floorEl.length > 0
-
-    # else disable the default behaviour
-    e.preventDefault()
-
-    page = Math.floor((floor - 1) / AppConfig.replies_per_page) + 1
-
-    # TODO: merge existing query string
-    url = window.location.pathname + "?page=#{page}" + "#reply#{floor}"
-    window.location = url
+  

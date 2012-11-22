@@ -5,6 +5,7 @@
 <% end %>
 <% content_for :scripts do %>
   <script type="text/javascript">
+    Topics.replies_per_page = <%= @per_page %>;
     $(document).ready(function(){
       <% if admin? %>
         $("#replies .reply a.edit").css('display','inline-block');

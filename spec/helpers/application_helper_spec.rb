@@ -92,4 +92,9 @@ describe ApplicationHelper do
       helper.owner?(item).should be_false
     end
   end
+
+  describe 'render_js_config' do
+    subject { JSON.parse render_js_config }
+    its(['replies_per_page']) { should eq(Reply.per_page) }
+  end
 end

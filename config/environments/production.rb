@@ -37,7 +37,12 @@ RubyChina::Application.configure do
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default_url_options = { :host => Setting.domain }
-  config.action_mailer.delivery_method = :sendmail
+  config.action_mailer.delivery_method = :smtp
+	config.action_mailer.smtp_settings = {
+		:address              => Setting.email_server,
+		:user_name            => Setting.email_sender,
+		:password             => Setting.email_password
+	}
 
   # Enable threaded mode
   # config.threadsafe!

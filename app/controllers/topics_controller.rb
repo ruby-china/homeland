@@ -56,7 +56,7 @@ class TopicsController < ApplicationController
     @topic.hits.incr(1)
     @node = @topic.node
     
-    @per_page = 50
+    @per_page = Reply.per_page
     # 默认最后一页
     params[:page] = @topic.last_page_with_per_page(@per_page) if params[:page].blank? 
     @page = params[:page].to_i > 0 ? params[:page].to_i : 1

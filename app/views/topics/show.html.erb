@@ -56,7 +56,7 @@
       <div class="items">
         <%= render :partial => "replies/reply", :collection => @replies %>
       </div>
-      <%= will_paginate @replies, :inner_window => 2 %>
+      <%= will_paginate @replies, :inner_window => 2, :params => { :anchor => 'replies' } %>
     </div>
   <% end %>
 

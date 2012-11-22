@@ -209,7 +209,7 @@ $(document).ready ->
   # If floor is not in current page, redirect to correct page
   bodyEl.on 'click', '.at_floor', (e) ->
     floor = $(this).data('floor')
-    floorEl = $("reply#{floor}")
+    floorEl = $("#reply#{floor}")
 
     # if the floor is in current page, just follow the link
     return if floorEl.length > 0
@@ -217,13 +217,8 @@ $(document).ready ->
     # else disable the default behaviour
     e.preventDefault()
 
-    page = (floor - 1) / AppConfig.replies_per_page + 1
+    page = Math.floor((floor - 1) / AppConfig.replies_per_page) + 1
 
-    search = window.location.search
-    if search.length > 0
-      search += '&'
-    else
-      search = '?'
-
-    url = window.location.pathname + search + "page=#{page}" + "#reply#{floor}"
+    # TODO: merge existing query string
+    url = window.location.pathname + "?page=#{page}" + "#reply#{floor}"
     window.location = url

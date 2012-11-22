@@ -150,6 +150,8 @@ window.Topics =
 
 # pages ready
 $(document).ready ->
+  bodyEl = $("body")
+
   $("textarea").bind "keydown","ctrl+return",(el) ->
     if $(el.target).val().trim().length > 0
       $("#reply > form").submit()
@@ -167,12 +169,17 @@ $(document).ready ->
   $("a.at_floor").live 'click', () ->
     Topics.hightlightReply($(this).data("floor"))
 
+  # also highlight if hash is reply#
+  matchResult = window.location.hash.match(/^#reply(\d+)$/)
+  if matchResult?
+    Topics.hightlightReply(matchResult[1])
+
   $("a.small_reply").live 'click', () ->
     Topics.reply($(this).data("floor"), $(this).data("login"))
 
   Topics.hookPreview($(".editor_toolbar"), $(".topic_editor"))
 
-  $("body").bind "keydown", "m", (el) ->
+  bodyEl.bind "keydown", "m", (el) ->
     $('#markdown_help_tip_modal').modal
       keyboard : true
       backdrop : true
@@ -198,3 +205,25 @@ $(document).ready ->
 
   # Focus title field in new-topic page
   $("body.topics-controller.new-action #topic_title").focus()
+
+  # If floor is not in current page, redirect to correct page
+  bodyEl.on 'click', '.at_floor', (e) ->
+    floor = $(this).data('floor')
+    floorEl = $("reply#{floor}")
+
+    # if the floor is in current page, just follow the link
+    return if floorEl.length > 0
+
+    # else disable the default behaviour
+    e.preventDefault()
+
+    page = (floor - 1) / AppConfig.replies_per_page + 1
+
+    search = window.location.search
+    if search.length > 0
+      search += '&'
+    else
+      search = '?'
+
+    url = window.location.pathname + search + "page=#{page}" + "#reply#{floor}"
+    window.location = url

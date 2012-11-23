@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 source 'http://ruby.taobao.org'
 
 gem "rails", "3.2.9"
@@ -97,6 +98,8 @@ group :development, :test do
   gem 'api_taster'
   gem "letter_opener"
   gem 'thin'
+
+  gem 'jasmine', '1.2.1'
 end
 
 group :production do

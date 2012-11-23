@@ -1,6 +1,7 @@
 # TopicsController 下所有页面的 JS 功能
 window.Topics =
-  replies_per_page : 50
+  replies_per_page: 50
+
   # 往话题编辑器里面插入图片代码
   appendImageFromUpload : (srcs) ->
     txtBox = $(".topic_editor")
@@ -45,6 +46,10 @@ window.Topics =
     reply_body.focus().val(reply_body.val() + new_text)
     return false
 
+  # Given floor, calculate which page this floor is in
+  pageOfFloor: (floor) ->
+    Math.floor((floor - 1) / Topics.replies_per_page) + 1
+
   # 检查处理其他页的高亮连接跳转
   checkHightlightReplyRedirect : (el,e) ->
     floor = $(el).data('floor')
@@ -56,7 +61,7 @@ window.Topics =
     # else disable the default behaviour
     e.preventDefault()
 
-    page = Math.floor((floor - 1) / Topics.replies_per_page) + 1
+    page = App.pageOfFloor(floor)
 
     # TODO: merge existing query string
     url = window.location.pathname + "?page=#{page}" + "#reply#{floor}"

@@ -62,7 +62,6 @@ gem "cells", "3.7.1"
 
 # 队列
 gem "sidekiq", "1.1.0"
-gem "devise-async", "0.1.1"
 
 gem 'faye-rails','1.0.0'
 
@@ -81,6 +80,9 @@ gem 'quiet_assets', "1.0.1"
 
 # API
 gem 'grape', :github => 'intridea/grape', :branch => 'frontier'
+
+# Mailer
+gem 'postmark-rails', '0.4.1'
 
 # Google Analytics performance 
 gem 'garelic', '0.0.2'

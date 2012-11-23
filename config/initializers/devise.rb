@@ -5,7 +5,7 @@ module OpenSSL
   end
 end
 
-Devise::Async.backend = :sidekiq
+# Devise::Async.backend = :sidekiq
 
 OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 # Use this hook to configure devise mailer, warden hooks and so forth. The first
@@ -16,8 +16,8 @@ Devise.setup do |config|
   config.mailer_sender = Setting.email_sender
 
   # Configure the class responsible to send e-mails.
-  # config.mailer = "Devise::Mailer"
-  config.mailer = "Devise::Async::Proxy"
+  config.mailer = "Devise::Mailer"
+  # config.mailer = "Devise::Async::Proxy"
 
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and

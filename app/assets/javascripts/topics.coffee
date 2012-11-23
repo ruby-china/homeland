@@ -50,27 +50,29 @@ window.Topics =
   pageOfFloor: (floor) ->
     Math.floor((floor - 1) / Topics.replies_per_page) + 1
 
-  # 检查处理其他页的高亮连接跳转
-  checkHightlightReplyRedirect : (el,e) ->
-    floor = $(el).data('floor')
-    floorEl = $("#reply#{floor}")
+  # 跳到指定楼。如果楼层在当前页，高亮该层，否则跳转到楼层所在页面并添
+  # 加楼层的 anchor。返回楼层 DOM Element 的 jQuery 对象
+  #
+  # -   floor: 回复的楼层数，从1开始
+  gotoFloor: (floor) ->
+    replyEl = $("#reply#{floor}")
 
-    # if the floor is in current page, just follow the link
-    return if floorEl.length > 0
+    if replyEl.length > 0
+      Topics.highlightReply(replyEl)
+    else
+      page = Topics.pageOfFloor(floor)
+      # TODO: merge existing query string
+      url = window.location.pathname + "?page=#{page}" + "#reply#{floor}"
+      App.gotoUrl url
 
-    # else disable the default behaviour
-    e.preventDefault()
+    replyEl
 
-    page = App.pageOfFloor(floor)
-
-    # TODO: merge existing query string
-    url = window.location.pathname + "?page=#{page}" + "#reply#{floor}"
-    window.location = url
-    
-  # 高亮楼层
-  hightlightReply : (floor) ->
+  # 高亮指定楼。取消其它楼的高亮
+  #
+  # -   replyEl: 需要高亮的 DOM Element，须要 jQuery 对象
+  highlightReply: (replyEl) ->
     $("#replies .reply").removeClass("light")
-    $("#reply"+floor).addClass("light")
+    replyEl.addClass("light")
 
   # 异步更改用户 like 过的回复的 like 按钮的状态
   checkRepliesLikeStatus : (user_liked_reply_ids) ->
@@ -190,13 +192,13 @@ $(document).ready ->
   Topics.initUploader()
 
   $("a.at_floor").live 'click', (e) ->
-    Topics.checkHightlightReplyRedirect(this,e)
-    Topics.hightlightReply($(this).data("floor"))   
-    
+    floor = $(this).data('floor')
+    Topics.gotoFloor(floor)
+
   # also highlight if hash is reply#
   matchResult = window.location.hash.match(/^#reply(\d+)$/)
   if matchResult?
-    Topics.hightlightReply(matchResult[1]) 
+    Topics.highlightReply($("#reply#{matchResult[1]}"))
 
   $("a.small_reply").live 'click', () ->
     Topics.reply($(this).data("floor"), $(this).data("login"))

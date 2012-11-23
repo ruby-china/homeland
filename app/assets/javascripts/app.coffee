@@ -43,6 +43,10 @@ window.App =
   openUrl : (url) ->
     window.open(url)
 
+  # Use this method to redirect so that it can be stubbed in test
+  gotoUrl: (url) ->
+    window.location = url
+
   likeable : (el) ->
     $el = $(el)
     likeable_type = $el.data("type")

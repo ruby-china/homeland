@@ -28,3 +28,4 @@ solr/data/
 solr/pids/
 bin/
 tags
+chromedriver.log

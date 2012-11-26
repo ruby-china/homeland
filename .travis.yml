@@ -1,6 +1,11 @@
 language: ruby
 bundler_args: --without development
 
+before_install:
+  - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1280x1024x16"
+  - "export DISPLAY=:99.0"
+  - "export JASMINE_BROWSER=firefox"
+
 services:
   - mongodb
   - redis-server
@@ -32,3 +37,5 @@ before_script:
   - sed -i "s/SETUP_DEVELOPMENT_HOST/127.0.0.1:27017/g" config/mongoid.yml
   - sed -i "s/SETUP_REDIS_HOST/127.0.0.1/g" config/redis.yml
   - sed -i "s/SETUP_REDIS_PORT/6379/g" config/redis.yml
+
+script: bundle exec rake spec jasmine:ci

@@ -1,8 +1,8 @@
-require 'sprite_factory'
-require 'chunky_png'
 namespace :assets do
   desc 'recreate sprite images and css'
   task :resprite => :environment do
+    require 'sprite_factory'
+    require 'chunky_png'
     SpriteFactory.library = :chunkypng
     SpriteFactory.csspath = "image-path('sprites/$IMAGE')"
     SpriteFactory.layout = "vertical"

@@ -21,11 +21,11 @@ gem 'carrierwave-upyun', '0.1.5'
 gem 'mini_magick','3.3', :require => false
 
 # Mongoid 辅助插件
-gem "mongoid", "3.0.1"
+gem "mongoid", "3.0.14"
 # gem 'mongo-rails-instrumentation','0.2.4'
 gem 'mongoid_auto_increment_id', "0.5.0"
 gem 'mongoid_rails_migrations', '~> 0.0.14'
-gem "mongoid_colored_logger", :github => "huacnlee/mongoid_colored_logger"
+gem "mongoid_colored_logger", "0.2.2"
 
 # 用户系统
 gem 'devise', '2.1.0'

@@ -17,7 +17,7 @@ GIT
       rack-mount
 
 GEM
-  remote: https://rubygems.org/
+  remote: http://ruby.taobao.org/
   specs:
     actionmailer (3.2.9)
       actionpack (= 3.2.9)
@@ -88,7 +88,9 @@ GEM
     cells (3.7.1)
       actionpack (~> 3.0)
       railties (~> 3.0)
-    celluloid (0.10.0)
+    celluloid (0.12.3)
+      facter (>= 1.6.12)
+      timers (>= 1.0.0)
     childprocess (0.3.6)
       ffi (~> 1.0, >= 1.0.6)
     chunky_png (1.2.5)

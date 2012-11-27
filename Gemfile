@@ -9,12 +9,6 @@ gem "jquery-atwho-rails", "0.1.6"
 gem "md_emoji"
 gem 'exception_notification'
 
-group :assets do
-  gem 'sass-rails', "~> 3.2.3"
-  gem 'coffee-rails', "~> 3.2.1"
-  gem 'uglifier', '>= 1.0.3'
-end
-
 # 上传组件
 gem 'carrierwave', '0.6.2'
 gem 'carrierwave-upyun', '0.1.5'
@@ -25,7 +19,6 @@ gem "mongoid", "3.0.14"
 # gem 'mongo-rails-instrumentation','0.2.4'
 gem 'mongoid_auto_increment_id', "0.5.0"
 gem 'mongoid_rails_migrations', '~> 0.0.14'
-gem "mongoid_colored_logger", "0.2.2"
 
 # 用户系统
 gem 'devise', '2.1.0'
@@ -74,13 +67,6 @@ gem "social-share-button", "~> 0.0.5"
 # 表单
 gem 'simple_form', "2.0.2"
 
-# 用于组合小图片
-gem "sprite-factory", "1.4.1", :require => false
-gem 'chunky_png', "1.2.5", :require => false
-
-# 禁用 assets 日志
-gem 'quiet_assets', "1.0.1"
-
 # API
 gem 'grape', :github => 'intridea/grape', :branch => 'frontier'
 
@@ -102,8 +88,24 @@ group :development, :test do
   gem 'api_taster'
   gem "letter_opener"
   gem 'thin'
+  
+  # 禁用 assets 日志
+  gem 'quiet_assets', "1.0.1"
+  
+  # 用于组合小图片
+  gem "sprite-factory", "1.4.1", :require => false
+  gem 'chunky_png', "1.2.5", :require => false
 
   gem 'jasmine', '1.2.1'
+  
+  gem "mongoid_colored_logger", "0.2.2"
+end
+
+group :assets do
+  gem 'sass-rails', "~> 3.2.3"
+  gem 'coffee-rails', "~> 3.2.1"
+  gem 'uglifier', '>= 1.0.3'
+  gem 'turbo-sprockets-rails3', '0.1.5'
 end
 
 group :production do

@@ -80,7 +80,9 @@ class Ability
       end
 
       # Site
-      can :create, Site
+      if user.has_role?(:site_editor)
+        can :create, Site
+      end
 
       basic_read_only
     else

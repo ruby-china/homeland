@@ -6,6 +6,7 @@ FactoryGirl.define do
     password 'password'
     password_confirmation 'password'
     location "China"
+    verified true
   end
 
   factory :admin, :parent => :user do

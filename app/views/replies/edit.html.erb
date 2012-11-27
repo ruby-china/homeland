@@ -23,6 +23,10 @@
           <div class="form-actions">
             <%= f.submit t("common.save"), :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %>
             <a href="<%= topic_path(@topic) %>" class="btn"><%= t("common.cancel") %></a>
+            
+            <% if can? :destroy, @reply %>
+              <%= link_to "删除",[@topic,@reply], :class => "pull-right btn btn-danger", :method => :delete, :data => { :confirm => "确定要删除此回复么？" } %>
+            <% end %>
           </div>
         <% end %>
     </div>

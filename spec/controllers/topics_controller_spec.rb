@@ -98,20 +98,17 @@ describe TopicsController do
       end.should change(user.notifications.unread, :count).by(-2)
     end
 
-    context "user deletes her own account" do
-      let(:reply) { Factory(:reply, :body => "i said something not good") }
-      subject { response }
-      before do
-        reply.user.destroy
-        get :show, :id => reply.topic
-      end
+    context "when the topic has 11 replies, and 10 are shown per page" do
+      let!(:user) { FactoryGirl.build_stubbed(:user) }
+      let!(:topic) { FactoryGirl.create(:topic) }
+      let!(:reply) { FactoryGirl.create_list(:reply, 11, :topic => topic) }
 
-      it { should be_success }
+      before { sign_in user }
 
-      it { should_not include("i said something not good") }
-
-      it "should not hold the reply in results" do
-        assigns(:replies).should_not include(reply)
+      it "should show the last page by default" do
+        Reply.stub!(:per_page).and_return(10)
+        get :show, :id => topic
+        assigns[:page].should eq(2)
       end
     end
   end

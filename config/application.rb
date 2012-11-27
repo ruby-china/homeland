@@ -62,6 +62,8 @@ module RubyChina
   end
 end
 
+require "markdown"
+
 I18n.locale = 'zh-CN'
 
 

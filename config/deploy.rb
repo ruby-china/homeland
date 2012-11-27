@@ -4,7 +4,7 @@ require "sidekiq/capistrano"
 
 require "rvm/capistrano"
 default_run_options[:pty] = true
-set :rvm_ruby_string, 'ruby-1.9.3-p194'
+set :rvm_ruby_string, 'ruby-1.9.3-p327'
 set :rvm_type, :user
 
 set :application, "ruby-china"
@@ -52,7 +52,7 @@ namespace :faye do
 
   desc "Restart Faye"
   task :restart, :roles => :app do
-    run "cd #{deploy_to}/current/faye_server; kill -9 `cat tmp/pids/thin.8080.pid`; thin start -C thin.yml"
+    run "cd #{deploy_to}/current/faye_server; thin restart -C  thin.yml"
   end
 end
 
@@ -67,6 +67,7 @@ task :link_shared_files, :roles => :web do
   run "ln -sf #{deploy_to}/shared/config/*.yml #{deploy_to}/current/config/"
   run "ln -sf #{deploy_to}/shared/config/unicorn.rb #{deploy_to}/current/config/"
   run "ln -sf #{deploy_to}/shared/config/initializers/secret_token.rb #{deploy_to}/current/config/initializers"
+  run "ln -sf #{deploy_to}/shared/config/faye_thin.yml #{deploy_to}/current/faye_server/thin.yml"
 end
 
 task :mongoid_create_indexes, :roles => :web do
@@ -85,4 +86,4 @@ task :mongoid_migrate_database, :roles => :web do
   run "cd #{deploy_to}/current/; RAILS_ENV=production bundle exec rake db:migrate"
 end
 
-after "deploy:finalize_update","deploy:symlink", :init_shared_path, :link_shared_files, :compile_assets, :sync_assets_to_cdn, :mongoid_migrate_database
+after "deploy:finalize_update","deploy:symlink", :init_shared_path, :link_shared_files #, :compile_assets, :sync_assets_to_cdn, :mongoid_migrate_database

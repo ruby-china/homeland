@@ -52,26 +52,26 @@ class TopicsController < ApplicationController
   end
 
   def show
-    @topic = Topic.without_body.includes(:user, :node).find(params[:id])
+    @topic = Topic.without_body.find(params[:id])
     @topic.hits.incr(1)
     @node = @topic.node
-    @replies = @topic.replies.unscoped.without_body.asc(:_id).all.includes(:user).reject { |r| r.user.blank? }
+    
+    @per_page = Reply.per_page
+    # 默认最后一页
+    params[:page] = @topic.last_page_with_per_page(@per_page) if params[:page].blank? 
+    @page = params[:page].to_i > 0 ? params[:page].to_i : 1
+    
+    @replies = @topic.replies.unscoped.without_body.asc(:_id).paginate(:page => params[:page], :per_page => @per_page)
     if current_user
       # 找出用户 like 过的 Reply，给 JS 处理 like 功能的状态
       @user_liked_reply_ids = []
       @replies.each { |r| @user_liked_reply_ids << r.id if r.liked_user_ids.include?(current_user.id) }
       # 通知处理
-      unless current_user.topic_read?(@topic)
-        current_user.notifications.unread.any_of({:mentionable_type => 'Topic', :mentionable_id => @topic.id},
-                                                 {:mentionable_type => 'Reply', :mentionable_id.in => @replies.map(&:id)},
-                                                 {:reply_id.in => @replies.map(&:id)}).update_all(:read => true)
-        current_user.read_topic(@topic)
-      end
+      current_user.read_topic(@topic)
     end
     set_seo_meta("#{@topic.title} &raquo; #{t("menu.topics")}")
     drop_breadcrumb("#{@node.try(:name)}", node_topics_path(@node.try(:id)))
     drop_breadcrumb t("topics.read_topic")
-   # render :stream => true
   end
 
   def new
@@ -171,7 +171,7 @@ class TopicsController < ApplicationController
   private
 
   def init_list_sidebar
-   if !fragment_exist? "topic/init_list_sidebar/hot_nodes"
+    if !fragment_exist? "topic/init_list_sidebar/hot_nodes"
       @hot_nodes = Node.hots.limit(10)
     end
     set_seo_meta(t("menu.topics"))

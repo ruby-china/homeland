@@ -1,6 +1,7 @@
-source 'http://ruby.taobao.org'
+# coding: utf-8
+source 'https://rubygems.org'
 
-gem "rails", "3.2.7"
+gem "rails", "3.2.9"
 gem "rails-i18n","0.1.8"
 gem "jquery-rails", "2.0.1"
 gem "rails_autolink", ">= 1.0.4"
@@ -46,7 +47,7 @@ gem "omniauth-github", "~> 1.0.0"
 gem "cancan", "~> 1.6.7"
 
 # Redis 命名空间
-gem 'redis-namespace','~> 1.0.2'
+gem 'redis-namespace','~> 1.2.1'
 
 # 将一些数据存放入 Redis
 gem "redis-objects", "0.5.2"
@@ -61,10 +62,11 @@ gem "settingslogic", "~> 2.0.6"
 gem "cells", "3.7.1"
 
 # 队列
-gem "sidekiq", "1.1.0"
-gem "devise-async", "0.1.1"
+gem "sidekiq", "2.5.3"
 
-gem 'faye-rails'
+gem 'faye-rails','1.0.0'
+
+gem 'newrelic_rpm'
 
 # 分享功能
 gem "social-share-button", "~> 0.0.5"
@@ -82,6 +84,9 @@ gem 'quiet_assets', "1.0.1"
 # API
 gem 'grape', :github => 'intridea/grape', :branch => 'frontier'
 
+# Mailer
+gem 'postmark-rails', '0.4.1'
+
 # Google Analytics performance 
 gem 'garelic', '0.0.2'
 
@@ -97,6 +102,8 @@ group :development, :test do
   gem 'api_taster'
   gem "letter_opener"
   gem 'thin'
+
+  gem 'jasmine', '1.2.1'
 end
 
 group :production do

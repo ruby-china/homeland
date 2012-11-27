@@ -43,12 +43,13 @@ table.node_topics .replies {
   width: 40px;
 }
 .breadcrumb {
-  padding: 7px;
+  padding: 5px 7px;
+  height:19px;
   margin-right:95px;
   .first { display:none; }
 }
 .feed_link {
-  margin-top:-49px;
+  margin-top:-47px;
   margin-right:0;
   a.feed {color:#B70000;}
 }

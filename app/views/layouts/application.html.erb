@@ -7,6 +7,11 @@
                     /____/
   ========================================================
                                           ruby-china.org
+        
+  App Environments:
+  --------------------------------------------------------
+  Ruby:  <%= RUBY_VERSION %><%= "-p#{RUBY_PATCHLEVEL}" if defined? RUBY_PATCHLEVEL %>
+  Rails: <%= Rails.version %>
 -->
 <!DOCTYPE html>
 <html>
@@ -19,7 +24,8 @@
     <%= stylesheet_link_tag "mobile" %>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta content='True' name='HandheldFriendly' />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <link rel="apple-touch-icon" href="<%= asset_path("big_logo.png") %>" />
   <% end %>
   <meta name="keywords" content="<%= @meta_keywords %>" />
   <meta name="description" content="<%= @meta_description %>" />
@@ -28,6 +34,7 @@
   <%= raw SiteConfig.custom_head_html %>
   <%= csrf_meta_tag %>
   <%= auto_discovery_link_tag(:rss,feed_topics_url,:title => '订阅最新帖') %>
+
   <%= yield :node_feed_link %>
 </head>
 <body data-offset="50">
@@ -75,7 +82,7 @@
   <a class="go_top" href="#"><i class="icon icons_go_top"></i></a>
   <footer class="footer">
     <div class="container">
-      <%= raw SiteConfig.footer_html %>
+      <%= raw SiteConfig.footer_html %> 
     </div>
   </footer>
   <% end %>

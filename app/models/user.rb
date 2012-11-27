@@ -45,7 +45,7 @@ class User
   field :github
   field :twitter
   # 是否信任用户
-  field :verified, :type => Boolean, :default => true
+  field :verified, :type => Boolean, :default => false
   field :state, :type => Integer, :default => 1
   field :guest, :type => Boolean, :default => false
   field :tagline
@@ -136,12 +136,18 @@ class User
   def wiki_editor?
     self.admin? or self.verified == true
   end
+  
+  # 回帖大于 150 的才有酷站的发布权限
+  def site_editor?
+    self.admin? or self.replies_count >= 100
+  end
 
   def has_role?(role)
     case role
       when :admin then admin?
       when :wiki_editor then wiki_editor?
       when :member then true
+      when :site_editor then site_editor?
       else false
     end
   end
@@ -214,6 +220,13 @@ class User
 
   # 将 topic 的最后回复设置为已读
   def read_topic(topic)
+    return if topic.blank?
+    return if self.topic_read?(topic)
+    
+    self.notifications.unread.any_of({:mentionable_type => 'Topic', :mentionable_id => topic.id},
+                                     {:mentionable_type => 'Reply', :mentionable_id.in => topic.reply_ids},
+                                     {:reply_id.in => topic.reply_ids}).update_all(:read => true)
+    
     # 处理 last_reply_id 是空的情况
     last_reply_id = topic.last_reply_id || -1
     Rails.cache.write("user:#{self.id}:topic_read:#{topic.id}", last_reply_id)

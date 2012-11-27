@@ -145,9 +145,11 @@ form .node_select {
 }
 
 #replies {
-  padding-bottom:0px;
-  .total { padding-bottom:6px; color:#999; }
+  .total { padding:0 10px 6px 10px; border-bottom:1px solid #DDD; color:#999; margin:0 -10px; }
+  .pagination { padding:8px 10px 0 10px; margin:0 -10px; }
   .reply {
+    border-bottom:1px solid #DDD; padding:8px 10px; margin:0 -10px;
+    background:#FFF;
     .deleted {
       color:#aaa;
       text-decoration: line-through;
@@ -155,7 +157,6 @@ form .node_select {
     }
     &.light { background:#F7F2FC; }
     &.popular { background:#fffce9; }
-    border-top:1px solid #DDD; padding:8px 10px; margin:0 -10px;
     .face { padding-right:8px; width:48px; margin-left:0; }
     .infos { padding-left:58px; }
     .info {

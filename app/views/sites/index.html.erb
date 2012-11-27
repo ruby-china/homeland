@@ -1,10 +1,10 @@
 <div id="site_nodes">
+  <% if can? :create, Site %>
   <div class="box">
     <%= raw SiteConfig.site_index_html %>
-    <% if can? :create, Site %>
     <%= link_to(t("sites.create"), new_site_path, :class => "btn btn-success")%>
-    <% end %>
   </div>
+  <% end %>
   <% cache(["sites/list", :t => CacheVersion.sites_updated_at], :expires_in => 1.days) do %>
     <% @site_nodes.each do |node| %>
     <div class="box">

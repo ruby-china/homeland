@@ -55,11 +55,11 @@ def replace_file(file_name, from, to)
   end
 end
 
-puts "Now will installing Ruby China..."
+puts "Now Installing Ruby China..."
 puts "="*ROW_SIZE
 puts ""
 
-puts_section "Checking Packages Depending..." do
+puts_section "Checking Package Dependencies..." do
   pkg_exist = true
   [["bundle","Bundler"],["python","Python 2.5+"],["pygmentize","Pygments 1.5+"],["mongod","MongoDB 2.0+"],["redis-server","Redis 2.0+"],["memcached","Memcached 1.4+"],["convert","ImageMagick 6.5+"]].each do |item|
     puts_line_with_yn item[1] do
@@ -97,9 +97,9 @@ puts_line "Install gems..." do
   `bundle install`
 end
 
-puts_line "Seed default datas..." do
+puts_line "Seed default data..." do
   `bundle exec rake db:seed`
 end
 
 puts ""
-puts "Ruby China Install successed."
+puts "Ruby China Successfully Installed."

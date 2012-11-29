@@ -7,6 +7,9 @@ RubyChina::Application.routes.draw do
       get :recent
       post :preview
     end
+    member do
+      get :comments
+    end
   end
   resources :comments
   resources :notes do

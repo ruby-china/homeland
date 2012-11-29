@@ -30,6 +30,10 @@ class PagesController < ApplicationController
       drop_breadcrumb("查看 #{@page.title}")
     end
   end
+  
+  def comments
+    @page = Page.find_by_slug(params[:id])
+  end
 
   def new
     @page = Page.new

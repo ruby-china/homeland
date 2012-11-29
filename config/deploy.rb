@@ -4,7 +4,7 @@ require "sidekiq/capistrano"
 
 require "rvm/capistrano"
 default_run_options[:pty] = true
-set :rvm_ruby_string, 'ruby-1.9.3-p327'
+set :rvm_ruby_string, 'ruby-1.9.3-p327-falcon'
 set :rvm_type, :user
 
 set :application, "ruby-china"

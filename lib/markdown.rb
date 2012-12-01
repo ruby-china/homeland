@@ -1,5 +1,6 @@
 # coding: utf-8
 require 'rails_autolink'
+require 'html/pipeline'
 
 module Redcarpet
   module Render
@@ -72,70 +73,99 @@ class MarkdownConverter
   end
 end
 
-class MarkdownTopicConverter < MarkdownConverter
+module PipelineFilters
+  class MarkdownFilter < HTML::Pipeline::TextFilter
+    def initialize(text, context = nil, result = nil)
+      super text, context, result
+      # 如果 ``` 在刚刚换行的时候 Redcapter 无法生成正确，需要两个换行
+      @text.gsub!("\n```","\n\n```")
+      @text.gsub! "\r", ''
+      convert_bbcode_img
+    end
+
+    def call
+      html = MarkdownConverter.convert @text
+      html.rstrip!
+      html
+    end
+
+    def convert_bbcode_img
+      @text.gsub!(/\[img\](.+?)\[\/img\]/i) {"![#{image_alt $1}](#{$1})"}
+    end
+
+    def image_alt(src)
+      File.basename(src, '.*').capitalize
+    end
+  end
+
+  class LinkMentionFloorFilter < HTML::Pipeline::Filter
+    # convert '#N楼' to link
+    def call
+      doc.search("text()").each do |node|
+        content = node.to_html
+        next if has_ancestor?(node, %w(pre code))
+        next if not content.include?("#")
+        html = link_mention_floor_filter(content)
+        next if html.nil?
+        node.replace(html)
+      end
+      doc
+    end
+
+    def link_mention_floor_filter(html)
+      html.gsub!(/#(\d+)([楼樓Ff])/) {
+        %(<a href="#reply#{$1}" class="at_floor" data-floor="#{$1}">##{$1}#{$2}</a>)
+      }
+    end
+  end
+
+  class EmojiFilter < HTML::Pipeline::EmojiFilter
+    def emoji_image_filter(text)
+      return text unless text.include?(':')
+      text.gsub(/:(\S+):/) do |emoji|
+        emoji_code = emoji #.gsub("|", "_")
+        emoji      = emoji_code.gsub(":", "")
+
+        if MdEmoji::EMOJI.include?(emoji)
+          file_name    = "#{emoji.gsub('+', 'plus')}.png"
+
+          %{<img src="#{Setting.upload_url}/assets/emojis/#{file_name}" class="emoji" } +
+          %{title="#{emoji_code}" alt="" />}
+        else
+          emoji_code
+        end
+      end
+    end
+  end
+
+end
+
+class MarkdownTopicConverter
 
   def self.format(raw)
     text = raw.clone
     return '' if text.blank?
 
-    self.convert_bbcode_img(text)
+    context = {
+      :asset_root => "#{Setting.upload_url}/assets"
+    }
 
-    # 如果 ``` 在刚刚换行的时候 Redcapter 无法生成正确，需要两个换行
-    text.gsub!("\n```","\n\n```")
+    pipeline = HTML::Pipeline.new [
+      PipelineFilters::MarkdownFilter,
+      HTML::Pipeline::MentionFilter,
+      PipelineFilters::EmojiFilter,
+      PipelineFilters::LinkMentionFloorFilter
+    ], context
 
-    result = self.convert(text)
-    self.link_mention_floor(result)
-    self.link_mention_user(result)
+    result = pipeline.call text
+    return result[:output].to_s
 
-    result = self.instance.replace_emoji(result)
-
-    return result.strip
   rescue => e
-    puts "MarkdownTopicConverter.format ERROR: #{e}"
+    puts "\n ERROR: MarkdownTopicConverter.format: #{e}"
     return text
   end
 
-  def replace_emoji(text)
-    text.gsub(/:(\S+):/) do |emoji|
-
-      emoji_code = emoji #.gsub("|", "_")
-      emoji      = emoji_code.gsub(":", "")
-
-      if MdEmoji::EMOJI.include?(emoji)
-        file_name    = "#{emoji.gsub('+', 'plus')}.png"
-
-        %{<img src="#{Setting.upload_url}/assets/emojis/#{file_name}" class="emoji" } +
-        %{title="#{emoji_code}" alt="" />}
-      else
-        emoji_code
-      end
-    end
-  end
-
   private
-  # convert bbcode-style image tag [img]url[/img] to markdown syntax ![alt](url)
-  def self.convert_bbcode_img(text)
-    text.gsub!(/\[img\](.+?)\[\/img\]/i) {"![#{self.image_alt $1}](#{$1})"}
-  end
-
-  def self.image_alt(src)
-    File.basename(src, '.*').capitalize
-  end
-
-  # convert '#N楼' to link
-  def self.link_mention_floor(text)
-    text.gsub!(/#(\d+)([楼樓Ff])/) {
-      %(<a href="#reply#{$1}" class="at_floor" data-floor="#{$1}">##{$1}#{$2}</a>)
-    }
-  end
-
-  # convert '@user' to link
-  # match any user even not exist.
-  def self.link_mention_user(text)
-    text.gsub!(/(^|[^a-zA-Z0-9_!#\$%&*@＠])@([a-zA-Z0-9_]{1,20})/io) {
-      %(#{$1}<a href="/#{$2}" class="at_user" title="@#{$2}"><i>@</i>#{$2}</a>)
-    }
-  end
 
   def initialize
     @converter = Redcarpet::Markdown.new(Redcarpet::Render::HTMLwithTopic.new, {
@@ -145,7 +175,5 @@ class MarkdownTopicConverter < MarkdownConverter
         :space_after_headers => true,
         :no_intra_emphasis => true
       })
-    # @emoji = Redcarpet::Markdown.new(MdEmoji::Render)
-    @emoji = MdEmoji::Render.new
   end
 end

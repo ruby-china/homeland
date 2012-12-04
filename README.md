@@ -28,7 +28,7 @@ rails s
 
 ```bash
 # Sidekiq
-bundle exec sidekiq -c config/sidekiq.yml
+bundle exec sidekiq -C config/sidekiq.yml
 ```
 
 ## Testing

@@ -21,6 +21,7 @@ Status](https://secure.travis-ci.org/ruby-china/ruby-china.png?branch=master&.pn
 git clone git://github.com/ruby-china/ruby-china.git
 cd ruby-china
 ruby setup.rb
+# ensure that memcached has started up
 rails s
 ```
 
@@ -28,7 +29,8 @@ rails s
 
 ```bash
 # Sidekiq
-bundle exec sidekiq -c config/sidekiq.yml
+# ensure that redis has started up
+bundle exec sidekiq -C config/sidekiq.yml
 ```
 
 ## Testing

@@ -58,7 +58,7 @@ module RubyChina
         @topic = Topic.includes(:replies).find_by_id(params[:id])
         # TODO: this code can not run in Mongoid 3.0.1 issue https://github.com/mongoid/mongoid/issues/2204
         # @topic = Topic.includes(:replies => [:user]).find_by_id(params[:id])
-        present @topic, :with => APIEntities::Topic
+        present @topic, :with => APIEntities::DetailTopic
       end
 
       # Post a new reply

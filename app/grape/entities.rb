@@ -6,10 +6,10 @@ module RubyChina
       expose :id, :login
       expose(:avatar_url) do |model, opts|
         if model.avatar?
-          model.avatar.url(:normal)
+          model.avatar.url(:large)
         else
           hash = Digest::MD5.hexdigest(model.email || "")
-          "#{Setting.gravatar_proxy}/avatar/#{hash}.png?s=48"
+          "#{Setting.gravatar_proxy}/avatar/#{hash}.png?s=120"
         end
       end
     end
@@ -20,10 +20,10 @@ module RubyChina
       expose(:gravatar_hash) { |model, opts| Digest::MD5.hexdigest(model.email || "") }
       expose(:avatar_url) do |model, opts|
         if model.avatar?
-          model.avatar.url(:normal)
+          model.avatar.url(:large)
         else
           hash = Digest::MD5.hexdigest(model.email || "")
-          "#{Setting.gravatar_proxy}/avatar/#{hash}.png?s=48"
+          "#{Setting.gravatar_proxy}/avatar/#{hash}.png?s=120"
         end
       end
       expose(:topics, :unless => { :collection => true }) do |model, opts|

@@ -27,7 +27,7 @@ module RubyChina
         end
       end
       expose(:topics, :unless => { :collection => true }) do |model, opts|
-        model.topics.recent.limit(opts[:topics_limit] ||= 1).as_json(:only => [:_id, :title, :created_at, :node_name, :replies_count])
+        model.topics.recent.limit(opts[:topics_limit] ||= 1).as_json(:only => [:id, :title, :created_at, :node_name, :replies_count])
       end
     end
 

@@ -47,6 +47,7 @@ module RubyChina
 
     class DetailTopic < Topic
       expose :id, :title, :created_at, :updated_at, :replied_at, :replies_count, :node_name, :node_id, :last_reply_user_id, :last_reply_user_login, :body, :body_html
+      expose(:hits) { |topic| topic.hits.to_i }
       expose :user, :using => APIEntities::User
       # replies only exposed when a single topic is fetched
       expose :replies, :using => APIEntities::Reply, :unless => { :collection => true }
@@ -54,7 +55,7 @@ module RubyChina
 
     class Node < Grape::Entity
       expose :id, :name, :topics_count, :summary, :section_id, :sort
-      expose(:section_name) {|model, opts| model.section.name.to_s rescue "" }
+      expose(:section_name) {|model, opts| model.section.try(:name) }
     end
   end
 end

@@ -1,5 +1,5 @@
-require "api/entities"
-require "api/helpers"
+require "entities"
+require "helpers"
 
 module RubyChina
   class API < Grape::API
@@ -56,8 +56,7 @@ module RubyChina
       #   /api/topics/1.json
       get ":id" do
         @topic = Topic.includes(:replies).find_by_id(params[:id])
-        # TODO: this code can not run in Mongoid 3.0.1 issue https://github.com/mongoid/mongoid/issues/2204
-        # @topic = Topic.includes(:replies => [:user]).find_by_id(params[:id])
+        @topic.hits.incr(1)
         present @topic, :with => APIEntities::DetailTopic
       end
 

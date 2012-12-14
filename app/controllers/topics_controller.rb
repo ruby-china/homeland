@@ -11,7 +11,7 @@ class TopicsController < ApplicationController
     @topics = Topic.last_actived.without_hide_nodes.fields_for_list.includes(:user).paginate(:page => params[:page], :per_page => 15, :total_entries => 1500)
     set_seo_meta("","#{Setting.app_name}#{t("menu.topics")}")
     drop_breadcrumb(t("topics.topic_list.hot_topic"))
-    #render :stream => true
+    
   end
 
   def feed
@@ -25,7 +25,7 @@ class TopicsController < ApplicationController
     @topics = @node.topics.last_actived.fields_for_list.includes(:user).paginate(:page => params[:page],:per_page => 15)
     set_seo_meta("#{@node.name} &raquo; #{t("menu.topics")}","#{Setting.app_name}#{t("menu.topics")}#{@node.name}",@node.summary)
     drop_breadcrumb("#{@node.name}")
-    render :action => "index" #, :stream => true
+    render :action => "index"
   end
 
   def node_feed
@@ -40,7 +40,7 @@ class TopicsController < ApplicationController
       @topics = Topic.send(name.to_sym).last_actived.fields_for_list.includes(:user).paginate(:page => params[:page], :per_page => 15, :total_entries => 1500)
       drop_breadcrumb(t("topics.topic_list.#{name}"))
       set_seo_meta([t("topics.topic_list.#{name}"),t("menu.topics")].join(" &raquo; "))
-      render :action => "index" #, :stream => true
+      render :action => "index"
     end
   end
 
@@ -48,13 +48,14 @@ class TopicsController < ApplicationController
     @topics = Topic.recent.fields_for_list.includes(:user).paginate(:page => params[:page], :per_page => 15, :total_entries => 1500)
     drop_breadcrumb(t("topics.topic_list.recent"))
     set_seo_meta([t("topics.topic_list.recent"),t("menu.topics")].join(" &raquo; "))
-    render :action => "index" #, :stream => true
+    render :action => "index"
   end
 
   def show
     @topic = Topic.without_body.find(params[:id])
     @topic.hits.incr(1)
     @node = @topic.node
+    
     
     @per_page = Reply.per_page
     # 默认最后一页
@@ -68,10 +69,16 @@ class TopicsController < ApplicationController
       @replies.each { |r| @user_liked_reply_ids << r.id if r.liked_user_ids.include?(current_user.id) }
       # 通知处理
       current_user.read_topic(@topic)
+      # 是否关注过
+      @has_followed = @topic.follower_ids.include?(current_user.id)
+      # 是否收藏
+      @has_favorited = current_user.favorite_topic_ids.include?(@topic.id)
     end
     set_seo_meta("#{@topic.title} &raquo; #{t("menu.topics")}")
     drop_breadcrumb("#{@node.try(:name)}", node_topics_path(@node.try(:id)))
     drop_breadcrumb t("topics.read_topic")
+    
+    fresh_when(:etag => [@topic,@has_followed,@has_favorited,@replies,@node])    
   end
 
   def new

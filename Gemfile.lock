@@ -316,7 +316,7 @@ GEM
     simple_form (2.0.2)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
-    social-share-button (0.0.5)
+    social-share-button (0.0.8)
     sprite-factory (1.4.1)
     sprockets (2.2.1)
       hike (~> 1.2)
@@ -408,7 +408,7 @@ DEPENDENCIES
   settingslogic (~> 2.0.6)
   sidekiq (= 2.5.3)
   simple_form (= 2.0.2)
-  social-share-button (~> 0.0.5)
+  social-share-button (~> 0.0.7)
   sprite-factory (= 1.4.1)
   thin
   turbo-sprockets-rails3 (= 0.3.2)

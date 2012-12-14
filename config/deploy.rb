@@ -4,7 +4,7 @@ require "sidekiq/capistrano"
 
 require "rvm/capistrano"
 default_run_options[:pty] = true
-set :rvm_ruby_string, 'ruby-1.9.3-p327'
+set :rvm_ruby_string, 'ruby-1.9.3-p327-falcon'
 set :rvm_type, :user
 
 set :application, "ruby-china"
@@ -86,4 +86,4 @@ task :mongoid_migrate_database, :roles => :web do
   run "cd #{deploy_to}/current/; RAILS_ENV=production bundle exec rake db:migrate"
 end
 
-after "deploy:finalize_update","deploy:symlink", :init_shared_path, :link_shared_files, :compile_assets, :sync_assets_to_cdn, :mongoid_migrate_database
+after "deploy:finalize_update","deploy:symlink", :init_shared_path, :link_shared_files , :compile_assets, :sync_assets_to_cdn, :mongoid_migrate_database

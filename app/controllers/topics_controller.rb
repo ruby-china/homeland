@@ -56,6 +56,7 @@ class TopicsController < ApplicationController
     @topic.hits.incr(1)
     @node = @topic.node
     
+    
     @per_page = Reply.per_page
     # 默认最后一页
     params[:page] = @topic.last_page_with_per_page(@per_page) if params[:page].blank? 
@@ -68,12 +69,16 @@ class TopicsController < ApplicationController
       @replies.each { |r| @user_liked_reply_ids << r.id if r.liked_user_ids.include?(current_user.id) }
       # 通知处理
       current_user.read_topic(@topic)
+      # 是否关注过
+      @has_followed = @topic.follower_ids.include?(current_user.id)
+      # 是否收藏
+      @has_favorited = current_user.favorite_topic_ids.include?(@topic.id)
     end
     set_seo_meta("#{@topic.title} &raquo; #{t("menu.topics")}")
     drop_breadcrumb("#{@node.try(:name)}", node_topics_path(@node.try(:id)))
     drop_breadcrumb t("topics.read_topic")
     
-    fresh_when(:etag => [@topic,@replies,@node])    
+    fresh_when(:etag => [@topic,@has_followed,@has_favorited,@replies,@node])    
   end
 
   def new

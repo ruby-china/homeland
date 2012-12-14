@@ -83,4 +83,19 @@ class ApplicationController < ActionController::Base
     return 0 if current_user.blank?
     @unread_notify_count ||= current_user.notifications.unread.count
   end
+  
+  def fresh_when(opts = {})
+    opts[:etag] ||= []
+    # 保证 etag 参数是 Array 类型
+    opts[:etag] = [opts[:etag]] if !opts[:etag].is_a?(Array)
+    # 加入页面上直接调用的信息用于组合 etag
+    opts[:etag] << current_user
+    opts[:etag] << Setting.app_name
+    opts[:etag] << SiteConfig.custom_head_html
+    opts[:etag] << SiteConfig.footer_html
+    opts[:etag] << SiteConfig.faye_server
+    opts[:etag] << Setting.google_analytics_key
+    opts[:etag] << unread_notify_count
+    super(opts)
+  end
 end

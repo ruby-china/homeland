@@ -319,4 +319,8 @@ class User
     random_key = "#{SecureRandom.hex(10)}:#{self.id}"
     self.update_attribute(:private_token, random_key)
   end
+  
+  def ensure_private_token!
+    self.update_private_token if self.private_token.blank?
+  end
 end

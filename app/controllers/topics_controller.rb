@@ -73,8 +73,7 @@ class TopicsController < ApplicationController
     drop_breadcrumb("#{@node.try(:name)}", node_topics_path(@node.try(:id)))
     drop_breadcrumb t("topics.read_topic")
     
-    fresh_when(:etag => [@topic,@replies,@node])
-    expires_in 1.days
+    fresh_when(:etag => [@topic,@replies,@node])    
   end
 
   def new

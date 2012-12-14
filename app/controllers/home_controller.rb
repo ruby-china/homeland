@@ -4,7 +4,6 @@ class HomeController < ApplicationController
 
   def index
     drop_breadcrumb("首页", root_path)
-    FayeClient.send("/notifications_count/35", :count => 20)
   end
 
   def api

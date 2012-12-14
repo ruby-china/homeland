@@ -105,6 +105,7 @@ class Ability
       can :read,  Page
       can :recent, Page
       can :preview, Page
+      can :comments, Page
 
       can :preview, Note
 

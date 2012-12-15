@@ -32,9 +32,8 @@ class PagesController < ApplicationController
     else
       set_seo_meta("#{@page.title} - Wiki")
       drop_breadcrumb("查看 #{@page.title}")
+      fresh_when(:etag => [@page,@page.comments_count])
     end
-    
-    fresh_when(:etag => [@page,@page.comments_count])
   end
   
   def comments

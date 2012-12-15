@@ -11,23 +11,18 @@ services:
   - redis-server
 
 matrix:
-  include:
-    - rvm: 1.9.3
-    - rvm: ruby-head
-    - rvm: jruby-19mode
-      jdk: openjdk7
-      env: JRUBY_OPTS="-Xmx512m -Xcompile.invokedynamic=false"
-    - rvm: jruby-head
-      jdk: openjdk7
-      env: JRUBY_OPTS="-Xcompile.invokedynamic=false"
   allow_failures:
     - rvm: ruby-head
-    - rvm: jruby-19mode
-      jdk: openjdk7
-      env: JRUBY_OPTS="-Xmx512m -Xcompile.invokedynamic=false"
-    - rvm: jruby-head
-      jdk: openjdk7
-      env: JRUBY_OPTS="-Xcompile.invokedynamic=false"
+    - rvm: ree
+
+rvm:
+  - 1.9.3
+  - 1.9.2
+  - ree
+  - ruby-head
+  - jruby-head
+
+env: JRUBY_OPTS="-Xcext.enabled=true -Xmx512m -Xcompile.invokedynamic=false"
 
 before_script:
   - mongo ruby_china_test --eval 'db.addUser("travis", "test");'

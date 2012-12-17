@@ -4,16 +4,16 @@ describe Topic do
   let(:topic) { FactoryGirl.create(:topic) }
   let(:user) { FactoryGirl.create(:user) }
 
-  it "should set replied_at" do
+  it "should set last_active_mark on created" do
     # because the Topic index is sort by replied_at,
     # so the new Topic need to set a Time, that it will display in index page
-    Factory(:topic).replied_at.should_not be_nil
+    Factory(:topic).last_active_mark.should_not be_nil
   end
 
-  it "should not update replied_at on save" do
-    replied_at_was = topic.replied_at
+  it "should not update last_active_mark on save" do
+    last_active_mark_was = topic.last_active_mark
     topic.save
-    topic.replied_at.should == replied_at_was
+    topic.last_active_mark.should == last_active_mark_was
   end
 
   it "should get node name" do
@@ -42,8 +42,18 @@ describe Topic do
 
   it "should update after reply" do
     reply = Factory :reply, :topic => topic, :user => user
+    topic.last_active_mark.should == reply.created_at.to_i
     topic.replied_at.to_i.should == reply.created_at.to_i
     topic.last_reply_id.should == reply.id
+    topic.last_reply_user_id.should == reply.user_id
+    topic.last_reply_user_login.should == reply.user.login
+  end
+  
+  it "should update after reply without last_active_mark when the topic is created at month ago" do
+    topic.stub!(:created_at).and_return(1.month.ago)
+    topic.stub!(:last_active_mark).and_return(1)
+    reply = Factory :reply, :topic => topic, :user => user
+    topic.last_active_mark.should_not == reply.created_at.to_i
     topic.last_reply_user_id.should == reply.user_id
     topic.last_reply_user_login.should == reply.user.login
   end

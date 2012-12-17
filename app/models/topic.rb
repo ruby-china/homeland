@@ -27,6 +27,8 @@ class Topic
   field :node_name
   # 删除人
   field :who_deleted
+  # 用于排序的标记
+  field :last_active_mark, :type => Integer
 
   belongs_to :user, :inverse_of => :topics
   counter_cache :name => :user, :inverse_of => :topics
@@ -41,7 +43,7 @@ class Topic
 
   index :node_id => 1
   index :user_id => 1
-  index :replied_at => -1,:_id => -1
+  index :last_active_mark => -1
   index :likes_count => 1
   index :suggested_at => 1
 
@@ -51,7 +53,7 @@ class Topic
   delegate :body, :to => :last_reply, :prefix => true, :allow_nil => true
 
   # scopes
-  scope :last_actived, desc("replied_at").desc(:_id)
+  scope :last_actived, desc(:last_active_mark)
   # 推荐的话题
   scope :suggest, where(:suggested_at.ne => nil).desc(:suggested_at)
   scope :fields_for_list, without(:body,:body_html)
@@ -81,9 +83,9 @@ class Topic
     self.node_name = self.node.try(:name) || ""
   end
 
-  before_create :init_replied_at_on_create
-  def init_replied_at_on_create
-    self.replied_at = Time.now if self.replied_at.blank?
+  before_create :init_last_active_mark_on_create
+  def init_last_active_mark_on_create
+    self.last_active_mark = Time.now.to_i
   end
 
   def push_follower(uid)
@@ -98,8 +100,10 @@ class Topic
   end
 
   def update_last_reply(reply)
+    # replied_at 用于最新回复的排序，如果贴着创建时间在一个月以前，就不再往前面顶了
+    self.last_active_mark = Time.now.to_i if self.created_at > 1.month.ago
     self.replied_at = Time.now
-    self.last_reply_id = reply.id
+    self.last_reply_id = reply.id 
     self.last_reply_user_id = reply.user_id
     self.last_reply_user_login = reply.user.try(:login) || nil
     self.save

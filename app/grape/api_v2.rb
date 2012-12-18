@@ -46,9 +46,8 @@ module RubyChina
       #   node_id
       post do
         authenticate!
-        topic_params = params[:topic]
-        @topic = current_user.topics.new(:title => topic_params[:title], :body => topic_params[:body])
-        @topic.node_id = topic_params[:node_id]
+        @topic = current_user.topics.new(:title => params[:title], :body => params[:body])
+        @topic.node_id = params[:node_id]
         if @topic.save
           present @topic, :with => APIEntities::DetailTopic
         else
@@ -76,7 +75,11 @@ module RubyChina
         @topic = Topic.find(params[:id])
         @reply = @topic.replies.build(:body => params[:body])
         @reply.user_id = current_user.id
-        @reply.save
+        if @reply.save
+          present @reply, :with => APIEntities::DetailReply
+        else
+          error!({"error" => @reply.errors.full_messages }, 400)
+        end
       end
 
       # Follow a topic

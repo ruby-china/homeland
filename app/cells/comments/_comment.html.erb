@@ -1,6 +1,6 @@
 <div class="comment">
   <div class="info">
-    <%= user_avatar_tag(comment.user, :small) %> <span class="name"><%= user_name_tag(comment.user) %></span> 发表于与 <%= timeago(comment.created_at) %>
+    <%= user_avatar_tag(comment.user, :small) %> <span class="name"><%= user_name_tag(comment.user) %></span> 发表于 <%= timeago(comment.created_at) %>
   </div>
   <div class="body">
     <%= raw comment.body_html %>

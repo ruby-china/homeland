@@ -4,49 +4,35 @@
         
         app/assets/images/sprites/small/bookmark.png (12x12)
         app/assets/images/sprites/small/bookmarked.png (12x12)
-        app/assets/images/sprites/small/calenda.png (12x12)
         app/assets/images/sprites/small/delete.png (12x12)
         app/assets/images/sprites/small/edit.png (12x12)
-        app/assets/images/sprites/small/flag.png (12x12)
-        app/assets/images/sprites/small/flaged.png (12x12)
         app/assets/images/sprites/small/follow.png (12x12)
         app/assets/images/sprites/small/followed.png (12x12)
         app/assets/images/sprites/small/image.png (12x12)
         app/assets/images/sprites/small/like.png (12x12)
         app/assets/images/sprites/small/liked.png (12x12)
         app/assets/images/sprites/small/lock.png (12x12)
-        app/assets/images/sprites/small/mail.png (12x12)
-        app/assets/images/sprites/small/mail_full.png (12x12)
         app/assets/images/sprites/small/pin.png (12x12)
         app/assets/images/sprites/small/reply.png (12x12)
-        app/assets/images/sprites/small/vote_down.png (12x12)
-        app/assets/images/sprites/small/vote_up.png (12x12)
 
         Output files:
           app/assets/images/sprites/small.png
           app/assets/stylesheets/sprites/small.scss
 
         Output size:
-          12x228
+          12x144
 
 
 */
-.small_bookmark { width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px 0px no-repeat; }
-.small_bookmarked { width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -12px no-repeat; }
-.small_calenda { width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -24px no-repeat; }
-.small_delete { width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -36px no-repeat; }
-.small_edit { width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -48px no-repeat; }
-.small_flag { width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -60px no-repeat; }
-.small_flaged { width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -72px no-repeat; }
-.small_follow { width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -84px no-repeat; }
-.small_followed { width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -96px no-repeat; }
-.small_image { width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -108px no-repeat; }
-.small_like { width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -120px no-repeat; }
-.small_liked { width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -132px no-repeat; }
-.small_lock { width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -144px no-repeat; }
-.small_mail { width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -156px no-repeat; }
-.small_mail_full { width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -168px no-repeat; }
-.small_pin { width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -180px no-repeat; }
-.small_reply { width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -192px no-repeat; }
-.small_vote_down { width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -204px no-repeat; }
-.small_vote_up { width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -216px no-repeat; }
+.small_bookmark { display:inline-block; width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px 0px no-repeat;  }
+.small_bookmarked { display:inline-block; width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -12px no-repeat;  }
+.small_delete { display:inline-block; width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -24px no-repeat;  }
+.small_edit { display:inline-block; width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -36px no-repeat;  }
+.small_follow { display:inline-block; width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -48px no-repeat;  }
+.small_followed { display:inline-block; width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -60px no-repeat;  }
+.small_image { display:inline-block; width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -72px no-repeat;  }
+.small_like { display:inline-block; width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -84px no-repeat;  }
+.small_liked { display:inline-block; width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -96px no-repeat;  }
+.small_lock { display:inline-block; width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -108px no-repeat;  }
+.small_pin { display:inline-block; width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -120px no-repeat;  }
+.small_reply { display:inline-block; width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -132px no-repeat;  }

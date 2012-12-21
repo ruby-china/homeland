@@ -62,7 +62,7 @@ gem 'faye-rails','1.0.0'
 gem 'newrelic_rpm'
 
 # 分享功能
-gem "social-share-button", "~> 0.0.7"
+gem "social-share-button", "~> 0.1.0"
 
 # 表单
 gem 'simple_form', "2.0.2"

@@ -28,6 +28,16 @@ module UsersHelper
       else size
     end
   end
+  
+  def user_avatar_size_name_for_2x(size)
+    case size
+    when :normal then :large
+    when :small then :normal
+    when :large then :big
+    when :big then :big
+    else size
+    end
+  end
 
   def user_avatar_tag(user, size = :normal, opts = {})
     link = opts[:link] || true
@@ -41,10 +51,10 @@ module UsersHelper
 
     if user[:avatar].blank?
       default_url = asset_path("avatar/#{size}.png")
-      img_src = "#{Setting.gravatar_proxy}/avatar/#{user.email_md5}.png?s=#{width}&d=404"
+      img_src = "#{Setting.gravatar_proxy}/avatar/#{user.email_md5}.png?s=#{width * 2}&d=404"
       img = image_tag(img_src, :class => "uface", :style => "width:#{width}px;height:#{width}px;")
     else
-      img = image_tag(user.avatar.url(size), :class => "uface", :style => "width:#{width}px;height:#{width}px;")
+      img = image_tag(user.avatar.url(user_avatar_size_name_for_2x(size)), :class => "uface", :style => "width:#{width}px;height:#{width}px;")
     end
 
     if link

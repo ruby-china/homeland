@@ -1,5 +1,5 @@
 # coding: utf-8
-source 'http://ruby.taobao.org'
+source 'https://rubygems.org'
 
 gem "rails", "3.2.9"
 gem "rails-i18n","0.1.8"

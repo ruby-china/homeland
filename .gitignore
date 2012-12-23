@@ -14,6 +14,7 @@ config/config.yml
 config/thin.yml
 config/redis.yml
 config/mailer_daemon.yml
+config/newrelic.yml
 public/uploads/**/*
 public/topics
 public/topics/**/*

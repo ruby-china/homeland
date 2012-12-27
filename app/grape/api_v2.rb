@@ -76,7 +76,7 @@ module RubyChina
         @reply = @topic.replies.build(:body => params[:body])
         @reply.user_id = current_user.id
         if @reply.save
-          present @reply, :with => APIEntities::DetailReply
+          present @reply, :with => APIEntities::Reply
         else
           error!({"error" => @reply.errors.full_messages }, 400)
         end
@@ -187,5 +187,20 @@ module RubyChina
       end
     end
 
+    resource :photos do
+      post do
+        authenticate!
+        @photo = Photo.new
+        puts "------ #{params.inspect}"
+        @photo.image = params[:Filedata]
+        @photo.user_id = current_user.id
+        if @photo.save
+          puts "------ #{@photo.inspect}"
+          @photo.image.url
+        else
+          error!({"error" => @photo.errors.full_messages }, 400)
+        end
+      end
+    end
   end
 end

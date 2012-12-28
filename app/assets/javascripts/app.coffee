@@ -132,8 +132,8 @@ $(document).ready ->
   $(".alert").alert()
   $('.dropdown-toggle').dropdown()
 
-  App.initNotificationSubscribe()
-  
+  App.initNotificationSubscribe() if FAYE_SERVER_URL?
+
   $('form.new_topic,form.new_reply,form.new_note,form.new_page').sisyphus
     timeout : 2
   $('form a.reset').click ->

@@ -173,25 +173,6 @@ window.Topics =
       $("i",el).attr("class", "icon small_followed")
     false
 
-  scanLogins: (el) ->
-    logins = []
-    login_exists = []
-    if ($author = el.find("#topic_show .leader a[data-author]")).length > 0
-      author_val =
-        login : $author.text()
-        name  : $author.attr('data-name')
-      logins.push(author_val)
-      login_exists.push(author_val.login)
-    el.find('#replies span.name a').each (idx) ->
-      val =
-        login : $(this).text()
-        name  : $(this).attr('data-name')
-      if $.inArray(val.login, login_exists) < 0
-        login_exists.push(val.login)
-        logins.push(val)
-
-    logins
-
 # pages ready
 $(document).ready ->
   bodyEl = $("body")
@@ -231,7 +212,11 @@ $(document).ready ->
       show : true
 
   # @ Reply
-  App.atReplyable("textarea", Topics.scanLogins(bodyEl))
+  logins = App.scanLogins($("#topic_show .leader a[data-author]"))
+  $.extend logins, App.scanLogins($('#replies span.name a'))
+  logins = ({login: k, name: v} for k, v of logins)
+  console.log logins
+  App.atReplyable("textarea", logins)
 
   # Focus title field in new-topic page
   $("body.topics-controller.new-action #topic_title").focus()

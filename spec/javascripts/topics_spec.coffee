@@ -93,3 +93,17 @@ describe "Topics", ->
 
           it 'redirects to URL with hash reply51', ->
             expect(App.lastGotoUrl).toMatch(/\#reply51$/)
+
+  describe 'a.small_reply', ->
+    describe 'when floor is 1, and login is 012345', ->
+      beforeEach ->
+        @htmlContainer.append """
+          <div id="reply_body"></div>
+          <a class="small_reply" data-floor="1" data-login="012345"></a>'
+        """
+
+      it 'replies to floor 1 and login 012345', ->
+        spy = @spy(Topics, 'reply')
+        @htmlContainer.find('a').click()
+        console.log spy.args
+        expect(spy.calledWith(1, '012345')).toBeTruthy()

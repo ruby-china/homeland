@@ -97,17 +97,20 @@ window.App =
     $("a[rel=twipsy]").tooltip()
 
     # CommentAble @ 回复功能
-    commenters = []
-    commenter_exists = []
-    $(".cell_comments .comment .info .name a").each (idx) ->
-      val =
-        login : $(this).text()
-        name : $(this).data('name')
-      if $.inArray(val.login,commenter_exists) < 0
-         commenters.push(val)
-         commenter_exists.push(val.login)
+    commenters = App.scanLogins($(".cell_comments .comment .info .name a"))
+    commenters = ({login: k, name: v} for k, v of commenters)
     App.atReplyable(".cell_comments_new textarea", commenters)
-    
+
+  # scan logins in jQuery collection and returns as a object,
+  # which key is login, and value is the name.
+  scanLogins: (query) ->
+    result = {}
+    for e in query
+      $e = $(e)
+      result[$e.text()] = $e.attr('data-name')
+
+    result
+
   initNotificationSubscribe : () ->
     faye = new Faye.Client(FAYE_SERVER_URL)
     notification_subscription = faye.subscribe "/notifications_count/#{CURRENT_USER_ACCESS_TOKEN}",(json) ->
@@ -132,8 +135,8 @@ $(document).ready ->
   $(".alert").alert()
   $('.dropdown-toggle').dropdown()
 
-  App.initNotificationSubscribe()
-  
+  App.initNotificationSubscribe() if FAYE_SERVER_URL?
+
   $('form.new_topic,form.new_reply,form.new_note,form.new_page').sisyphus
     timeout : 2
   $('form a.reset').click ->

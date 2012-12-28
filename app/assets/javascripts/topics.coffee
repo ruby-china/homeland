@@ -173,6 +173,25 @@ window.Topics =
       $("i",el).attr("class", "icon small_followed")
     false
 
+  scanLogins: (el) ->
+    logins = []
+    login_exists = []
+    if ($author = el.find("#topic_show .leader a[data-author]")).length > 0
+      author_val =
+        login : $author.text()
+        name  : $author.attr('data-name')
+      logins.push(author_val)
+      login_exists.push(author_val.login)
+    el.find('#replies span.name a').each (idx) ->
+      val =
+        login : $(this).text()
+        name  : $(this).attr('data-name')
+      if $.inArray(val.login, login_exists) < 0
+        login_exists.push(val.login)
+        logins.push(val)
+
+    logins
+
 # pages ready
 $(document).ready ->
   bodyEl = $("body")
@@ -212,22 +231,7 @@ $(document).ready ->
       show : true
 
   # @ Reply
-  logins = []
-  login_exists = []
-  if ($author = $("#topic_show .leader a[data-author]")).length > 0
-    author_val =
-      login : $author.text()
-      name  : $author.data('name')
-    logins.push(author_val)
-    login_exists.push(author_val.login)
-  $('#replies span.name a').each (idx) ->
-    val =
-      login : $(this).text()
-      name  : $(this).data('name')
-    if $.inArray(val.login, login_exists) < 0
-      login_exists.push(val.login)
-      logins.push(val)
-  App.atReplyable("textarea", logins)
+  App.atReplyable("textarea", Topics.scanLogins(bodyEl))
 
   # Focus title field in new-topic page
   $("body.topics-controller.new-action #topic_title").focus()

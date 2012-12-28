@@ -201,7 +201,7 @@ $(document).ready ->
     Topics.highlightReply($("#reply#{matchResult[1]}"))
 
   $("a.small_reply").live 'click', () ->
-    Topics.reply($(this).data("floor"), $(this).data("login"))
+    Topics.reply($(this).data("floor"), $(this).attr("data-login"))
 
   Topics.hookPreview($(".editor_toolbar"), $(".topic_editor"))
 

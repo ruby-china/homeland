@@ -14,7 +14,7 @@ class FayeAuth
           # Setting any 'error' against the message causes Faye to not accept it.
           message['error'] = "Faye authorize faild."
         else
-          message.delete('token')
+          message["data"].delete('token')
         end
       end
     end

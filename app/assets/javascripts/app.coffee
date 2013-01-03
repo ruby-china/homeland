@@ -132,8 +132,9 @@ $(document).ready ->
   $(".alert").alert()
   $('.dropdown-toggle').dropdown()
 
-  App.initNotificationSubscribe()
-  
+  if FAYE_SERVER_URL? && CURRENT_USER_ACCESS_TOKEN?
+    App.initNotificationSubscribe()
+
   $('form.new_topic,form.new_reply,form.new_note,form.new_page').sisyphus
     timeout : 2
   $('form a.reset').click ->

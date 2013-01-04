@@ -1,5 +1,10 @@
 # coding: utf-8
+require 'rails'
 require 'rails_autolink'
+require 'redcarpet'
+require 'singleton'
+require 'md_emoji'
+require 'pygments'
 
 module Redcarpet
   module Render
@@ -73,68 +78,138 @@ class MarkdownConverter
 end
 
 class MarkdownTopicConverter < MarkdownConverter
-
   def self.format(raw)
+    self.instance.format(raw)
+  end
+
+  def format(raw)
     text = raw.clone
     return '' if text.blank?
 
-    self.convert_bbcode_img(text)
+    convert_bbcode_img(text)
+    users = nomalize_user_mentions(text)
 
     # 如果 ``` 在刚刚换行的时候 Redcapter 无法生成正确，需要两个换行
     text.gsub!("\n```","\n\n```")
 
-    result = self.convert(text)
-    self.link_mention_floor(result)
-    self.link_mention_user(result)
+    result = convert(text)
 
-    result = self.instance.replace_emoji(result)
+    doc = Nokogiri::HTML.fragment(result, 'UTF-8')
+    link_mention_floor(doc)
+    link_mention_user(doc, users)
+    replace_emoji(doc)
 
-    return result.strip
+    return doc.to_html(:encoding => 'UTF-8').strip
   rescue => e
     puts "MarkdownTopicConverter.format ERROR: #{e}"
     return text
   end
 
-  def replace_emoji(text)
-    text.gsub(/:(\S+):/) do |emoji|
+  private
+  # convert bbcode-style image tag [img]url[/img] to markdown syntax ![alt](url)
+  def convert_bbcode_img(text)
+    text.gsub!(/\[img\](.+?)\[\/img\]/i) {"![#{image_alt $1}](#{$1})"}
+  end
 
-      emoji_code = emoji #.gsub("|", "_")
-      emoji      = emoji_code.gsub(":", "")
+  def image_alt(src)
+    File.basename(src, '.*').capitalize
+  end
 
-      if MdEmoji::EMOJI.include?(emoji)
-        file_name    = "#{emoji.gsub('+', 'plus')}.png"
-
-        %{<img src="#{Setting.upload_url}/assets/emojis/#{file_name}" class="emoji" } +
-        %{title="#{emoji_code}" alt="" />}
-      else
-        emoji_code
+  # borrow from html-pipeline
+  def has_ancestors?(node, tags)
+    while node = node.parent
+      if tags.include?(node.name.downcase)
+        break true
       end
     end
   end
 
-  private
-  # convert bbcode-style image tag [img]url[/img] to markdown syntax ![alt](url)
-  def self.convert_bbcode_img(text)
-    text.gsub!(/\[img\](.+?)\[\/img\]/i) {"![#{self.image_alt $1}](#{$1})"}
-  end
-
-  def self.image_alt(src)
-    File.basename(src, '.*').capitalize
-  end
-
   # convert '#N楼' to link
-  def self.link_mention_floor(text)
-    text.gsub!(/#(\d+)([楼樓Ff])/) {
-      %(<a href="#reply#{$1}" class="at_floor" data-floor="#{$1}">##{$1}#{$2}</a>)
-    }
+  # Refer to emoji_filter in html-pipeline
+  def link_mention_floor(doc)
+    doc.search('text()').each do |node|
+      content = node.to_html(:encoding => 'UTF-8')
+      next if !content.include?('#')
+      next if has_ancestors?(node, %w(pre code))
+
+      html = content.gsub(/#(\d+)([楼樓Ff])/) {
+        %(<a href="#reply#{$1}" class="at_floor" data-floor="#{$1}">##{$1}#{$2}</a>)
+      }
+
+      next if html == content
+      node.replace(html)
+    end
+  end
+
+  NOMALIZE_USER_REGEXP = /(^|[^a-zA-Z0-9_!#\$%&*@＠])@([a-zA-Z0-9_]{1,20})/io
+  LINK_USER_REGEXP = /(^|[^a-zA-Z0-9_!#\$%&*@＠])@(user[0-9]{1,6})/io
+
+  # rename user name using incremental id
+  def nomalize_user_mentions(text)
+    users = []
+
+    text.gsub!(NOMALIZE_USER_REGEXP) do
+      prefix = $1
+      user = $2
+      users.push(user)
+      "#{prefix}@user#{users.size}"
+    end
+
+    users
   end
 
   # convert '@user' to link
   # match any user even not exist.
-  def self.link_mention_user(text)
-    text.gsub!(/(^|[^a-zA-Z0-9_!#\$%&*@＠])@([a-zA-Z0-9_]{1,20})/io) {
-      %(#{$1}<a href="/#{$2}" class="at_user" title="@#{$2}"><i>@</i>#{$2}</a>)
-    }
+  def link_mention_user(doc, users)
+    doc.search('text()').each do |node|
+      content = node.to_html(:encoding => 'UTF-8')
+      next if !content.include?('@')
+      in_code = has_ancestors?(node, %w(pre code))
+      html = content.gsub(LINK_USER_REGEXP) {
+        prefix = $1
+        user_placeholder = $2
+        user_id = user_placeholder.sub(/^user/, '').to_i
+        user = users[user_id - 1] || user_placeholder
+
+        if in_code
+          "#{prefix}@#{user}"
+        else
+          %(#{prefix}<a href="/#{user}" class="at_user" title="@#{user}"><i>@</i>#{user}</a>)
+        end
+      }
+
+      node.replace(html)
+    end
+  end
+
+  def replace_emoji(doc)
+    doc.search('text()').each do |node|
+      content = node.to_html(:encoding => 'UTF-8')
+      next if !content.include?(':')
+      next if has_ancestors?(node, %w(pre code))
+
+      html = content.gsub(/:(\S+):/) do |emoji|
+
+        emoji_code = emoji #.gsub("|", "_")
+        emoji      = emoji_code.gsub(":", "")
+
+        if MdEmoji::EMOJI.include?(emoji)
+          file_name    = "#{emoji.gsub('+', 'plus')}.png"
+
+          %{<img src="#{upload_url}/assets/emojis/#{file_name}" class="emoji" } +
+            %{title="#{emoji_code}" alt="" />}
+        else
+          emoji_code
+        end
+      end
+
+      next if html == content
+      node.replace(html)
+    end
+  end
+
+  def upload_url
+    Setting.upload_url
   end
 
   def initialize

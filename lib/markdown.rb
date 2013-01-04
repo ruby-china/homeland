@@ -108,7 +108,7 @@ class MarkdownTopicConverter < MarkdownConverter
   private
   # convert bbcode-style image tag [img]url[/img] to markdown syntax ![alt](url)
   def convert_bbcode_img(text)
-    text.gsub!(/\[img\](.+?)\[\/img\]/i) {"![#{self.image_alt $1}](#{$1})"}
+    text.gsub!(/\[img\](.+?)\[\/img\]/i) {"![#{image_alt $1}](#{$1})"}
   end
 
   def image_alt(src)

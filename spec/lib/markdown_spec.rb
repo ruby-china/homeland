@@ -49,6 +49,23 @@ describe 'markdown' do
         end
       end
 
+      context '@__underscore__ in text' do
+        let(:raw) { '@__underscore__' }
+
+        it 'has a link' do
+          doc.css('a').should have(1).item
+        end
+
+        describe 'the link' do
+          subject { doc.css('a').first }
+
+          its([:href]) { should == '/__underscore__' }
+          its([:class]) { should == 'at_user' }
+          its([:title]) { should == '@__underscore__' }
+          its(:text) { should == '@__underscore__' }
+        end
+      end
+
       context '@user in code' do
         let(:raw) { '`@user`' }
 

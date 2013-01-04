@@ -140,9 +140,29 @@ class MarkdownTopicConverter < MarkdownConverter
     end
   end
 
+  TAG_UNDERSCORE_MAP = {
+    'em' => '_',
+    'strong' => '__'
+  }
+
   # convert '@user' to link
   # match any user even not exist.
   def link_mention_user(doc)
+    doc.css('em, strong').each do |node|
+      pre = node.previous_sibling
+ 
+      if pre && pre.text?
+        pre_content = pre.to_html(:encoding => 'UTF-8')
+        node_content = node.inner_html(:encoding => 'UTF-8')
+
+        if pre_content[-1] == '@' && node_content =~ /^[a-zA-Z0-9_]{1,20}$/
+          underscore = TAG_UNDERSCORE_MAP[node.name.downcase]
+          pre.replace(pre_content + underscore + node_content + underscore)
+          node.remove
+        end
+      end
+    end
+
     doc.search('text()').each do |node|
       content = node.to_html(:encoding => 'UTF-8')
       next if !content.include?('@')

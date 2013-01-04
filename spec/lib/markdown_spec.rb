@@ -28,7 +28,7 @@ describe 'markdown' do
           its([:href]) { should == '/user' }
           its([:class]) { should == 'at_user' }
           its([:title]) { should == '@user' }
-          its(:text) { should == '@user' }
+          its(:inner_html) { should == '<i>@</i>user' }
         end
       end
 
@@ -45,7 +45,7 @@ describe 'markdown' do
           its([:href]) { should == '/_underscore_' }
           its([:class]) { should == 'at_user' }
           its([:title]) { should == '@_underscore_' }
-          its(:text) { should == '@_underscore_' }
+          its(:inner_html) { should == '<i>@</i>_underscore_' }
         end
       end
 
@@ -62,15 +62,25 @@ describe 'markdown' do
           its([:href]) { should == '/__underscore__' }
           its([:class]) { should == 'at_user' }
           its([:title]) { should == '@__underscore__' }
-          its(:text) { should == '@__underscore__' }
+          its(:inner_html) { should == '<i>@</i>__underscore__' }
         end
+      end
+
+      context '@small_fish__ in text' do
+        let(:raw) { '@small_fish__' }
+        specify { doc.css('a').first.inner_html.should == '<i>@</i>small_fish__' }
+      end
+
+      context '@small_fish__ in code block' do
+        let(:raw) { '`@small_fish__`' }
+        specify { doc.css('code').first.inner_html.should == '@small_fish__' }
       end
 
       context '@user in code' do
         let(:raw) { '`@user`' }
 
         specify { doc.css('a').should be_empty }
-        specify { doc.css('code').text.should == '@user' }
+        specify { doc.css('code').inner_html.should == '@user' }
       end
 
       context '@user in block code' do
@@ -83,7 +93,7 @@ describe 'markdown' do
         }
 
         specify { doc.css('a').should be_empty }
-        specify { doc.css('pre').text.should == "@user\n" }
+        specify { doc.css('pre').inner_html.should == "@user\n" }
       end
     end
 
@@ -105,7 +115,7 @@ describe 'markdown' do
           its([:href]) { should == '#reply12' }
           its([:class]) { should == 'at_floor' }
           its(['data-floor']) { should == '12' }
-          its(:text) { should == '#12f' }
+          its(:inner_html) { should == '#12f' }
         end
       end
 
@@ -113,7 +123,7 @@ describe 'markdown' do
         let(:raw) { '`#12f`' }
 
         specify { doc.css('a').should be_empty }
-        specify { doc.css('code').text.should == '#12f' }
+        specify { doc.css('code').inner_html.should == '#12f' }
       end
 
       context ' #12f in block code' do
@@ -126,7 +136,7 @@ describe 'markdown' do
         }
 
         specify { doc.css('a').should be_empty }
-        specify { doc.css('pre').text.should == "#12f\n" }
+        specify { doc.css('pre').inner_html.should == "#12f\n" }
       end
     end
 
@@ -164,7 +174,7 @@ describe 'markdown' do
         let(:raw) { '`:apple:`' }
 
         specify { doc.css('a').should be_empty }
-        specify { doc.css('code').text.should == ':apple:' }
+        specify { doc.css('code').inner_html.should == ':apple:' }
       end
 
       context ':apple: in block code' do
@@ -177,7 +187,7 @@ describe 'markdown' do
         }
 
         specify { doc.css('a').should be_empty }
-        specify { doc.css('pre').text.should == ":apple:\n" }
+        specify { doc.css('pre').inner_html.should == ":apple:\n" }
       end
     end
 

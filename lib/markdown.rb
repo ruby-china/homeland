@@ -87,6 +87,7 @@ class MarkdownTopicConverter < MarkdownConverter
     return '' if text.blank?
 
     convert_bbcode_img(text)
+    users = nomalize_user_mentions(text)
 
     # 如果 ``` 在刚刚换行的时候 Redcapter 无法生成正确，需要两个换行
     text.gsub!("\n```","\n\n```")
@@ -95,7 +96,7 @@ class MarkdownTopicConverter < MarkdownConverter
 
     doc = Nokogiri::HTML.fragment(result, 'UTF-8')
     link_mention_floor(doc)
-    link_mention_user(doc)
+    link_mention_user(doc, users)
     replace_emoji(doc)
 
     return doc.to_html(:encoding => 'UTF-8').strip
@@ -140,39 +141,43 @@ class MarkdownTopicConverter < MarkdownConverter
     end
   end
 
-  TAG_UNDERSCORE_MAP = {
-    'em' => '_',
-    'strong' => '__'
-  }
+  NOMALIZE_USER_REGEXP = /(^|[^a-zA-Z0-9_!#\$%&*@＠])@([a-zA-Z0-9_]{1,20})/io
+  LINK_USER_REGEXP = /(^|[^a-zA-Z0-9_!#\$%&*@＠])@(user[0-9]{1,6})/io
+
+  # rename user name using incremental id
+  def nomalize_user_mentions(text)
+    users = []
+
+    text.gsub!(NOMALIZE_USER_REGEXP) do
+      prefix = $1
+      user = $2
+      users.push(user)
+      "#{prefix}@user#{users.size}"
+    end
+
+    users
+  end
 
   # convert '@user' to link
   # match any user even not exist.
-  def link_mention_user(doc)
-    doc.css('em, strong').each do |node|
-      pre = node.previous_sibling
- 
-      if pre && pre.text?
-        pre_content = pre.to_html(:encoding => 'UTF-8')
-        node_content = node.inner_html(:encoding => 'UTF-8')
-
-        if pre_content[-1] == '@' && node_content =~ /^[a-zA-Z0-9_]{1,20}$/
-          underscore = TAG_UNDERSCORE_MAP[node.name.downcase]
-          pre.replace(pre_content + underscore + node_content + underscore)
-          node.remove
-        end
-      end
-    end
-
+  def link_mention_user(doc, users)
     doc.search('text()').each do |node|
       content = node.to_html(:encoding => 'UTF-8')
       next if !content.include?('@')
-      next if has_ancestors?(node, %w(pre code))
+      in_code = has_ancestors?(node, %w(pre code))
+      html = content.gsub(LINK_USER_REGEXP) {
+        prefix = $1
+        user_placeholder = $2
+        user_id = user_placeholder.sub(/^user/, '').to_i
+        user = users[user_id - 1] || user_placeholder
 
-      html = content.gsub(/(^|[^a-zA-Z0-9_!#\$%&*@＠])@([a-zA-Z0-9_]{1,20})/io) {
-        %(#{$1}<a href="/#{$2}" class="at_user" title="@#{$2}"><i>@</i>#{$2}</a>)
+        if in_code
+          "#{prefix}@#{user}"
+        else
+          %(#{prefix}<a href="/#{user}" class="at_user" title="@#{user}"><i>@</i>#{user}</a>)
+        end
       }
 
-      next if html == content
       node.replace(html)
     end
   end

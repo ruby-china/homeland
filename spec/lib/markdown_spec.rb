@@ -76,6 +76,18 @@ describe 'markdown' do
         specify { doc.css('code').first.inner_html.should == '@small_fish__' }
       end
 
+      context '@small_fish__ in ruby code block' do
+        let(:raw) {
+          <<-MD.gsub(/^ {12}/, '')
+            ```ruby
+            @small_fish__ = 100
+            ```
+          MD
+        }
+
+        specify { doc.search('pre').children[0].inner_html.should == '@small_fish__' }
+      end
+
       context '@user in code' do
         let(:raw) { '`@user`' }
 

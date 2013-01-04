@@ -22,9 +22,9 @@ describe TopicsHelper do
       helper.format_topic_body("http://movie.douban.com/tag/%E7%BE%8E%E5%9B%BD").should ==
         '<p><a href="http://movie.douban.com/tag/%E7%BE%8E%E5%9B%BD" rel="nofollow" target="_blank">http://movie.douban.com/tag/%E7%BE%8E%E5%9B%BD</a></p>'
       helper.format_topic_body("http://ruby-china.org/self_posts/11?datas=20,33|100&format=.jpg").should ==
-        '<p><a href="http://ruby-china.org/self_posts/11?datas=20,33|100&format=.jpg" rel="nofollow" target="_blank">http://ruby-china.org/self_posts/11?datas=20,33|100&format=.jpg</a></p>'
+        '<p><a href="http://ruby-china.org/self_posts/11?datas=20,33%7C100&amp;format=.jpg" rel="nofollow" target="_blank">http://ruby-china.org/self_posts/11?datas=20,33|100&amp;format=.jpg</a></p>'
       helper.format_topic_body("https://g.l/b/?fromgroups#!searchin/gitlabhq/self$20regist/gitlabhq/5ha_FyX-Pr4/VNZTPnSN0S4J").should ==
-        '<p><a href="https://g.l/b/?fromgroups#!searchin/gitlabhq/self$20regist/gitlabhq/5ha_FyX-Pr4/VNZTPnSN0S4J" rel="nofollow" target="_blank">https://g.l/b/?fromgroups#!searchin/gitlabhq/self$20regist/gitlabhq/5ha_FyX-Pr4/VNZTPnSN0S4J</a></p>'
+        '<p><a href="https://g.l/b/?fromgroups#!searchin/gitlabhq/self%2420regist/gitlabhq/5ha_FyX-Pr4/VNZTPnSN0S4J" rel="nofollow" target="_blank">https://g.l/b/?fromgroups#!searchin/gitlabhq/self$20regist/gitlabhq/5ha_FyX-Pr4/VNZTPnSN0S4J</a></p>'
     end
 
     it "should bold text " do
@@ -51,7 +51,7 @@ describe TopicsHelper do
 
     it "should render bbcode style image tag" do
       helper.format_topic_body("[img]http://ruby-china.org/logo.png[/img]").should ==
-        '<p><img src="http://ruby-china.org/logo.png" alt="Logo"/></p>'
+        '<p><img src="http://ruby-china.org/logo.png" alt="Logo"></p>'
     end
 
     it "should link mentioned user" do
@@ -87,7 +87,7 @@ describe TopicsHelper do
 
     it "should wrap break line" do
       helper.format_topic_body("line 1\nline 2").should ==
-        "<p>line 1<br/>\nline 2</p>"
+        "<p>line 1<br>\nline 2</p>"
     end
 
     it "should support inline code" do
@@ -97,7 +97,8 @@ describe TopicsHelper do
 
     it "should highlight code block" do
       helper.format_topic_body("```ruby\nclass Hello\nend\n```").should ==
-        '<div class="highlight"><pre><span class="k">class</span> <span class="nc">Hello</span>
+        '<div class="highlight">
+<pre><span class="k">class</span> <span class="nc">Hello</span>
 <span class="k">end</span>
 </pre>
 </div>'
@@ -106,7 +107,8 @@ describe TopicsHelper do
     it "should highlight code block after the content" do
       helper.format_topic_body("this code:\n```\ngem install rails\n```\n").should ==
         '<p>this code:</p>
-<div class="highlight"><pre>gem install rails
+<div class="highlight">
+<pre>gem install rails
 </pre>
 </div>'
     end
@@ -118,7 +120,8 @@ describe TopicsHelper do
     it "should not filter underscore" do
       helper.format_topic_body("ruby_china_image `ruby_china_image`").should == "<p>ruby_china_image <code>ruby_china_image</code></p>"
       helper.format_topic_body("```\nruby_china_image\n```").should ==
-        '<div class="highlight"><pre>ruby_china_image
+        '<div class="highlight">
+<pre>ruby_china_image
 </pre>
 </div>'
     end

@@ -1,5 +1,10 @@
 # coding: utf-8
+require 'rails'
 require 'rails_autolink'
+require 'redcarpet'
+require 'singleton'
+require 'md_emoji'
+require 'pygments'
 
 module Redcarpet
   module Render
@@ -95,6 +100,10 @@ class MarkdownTopicConverter < MarkdownConverter
     return text
   end
 
+  def self.upload_url
+    Setting.upload_url
+  end
+
   def replace_emoji(text)
     text.gsub(/:(\S+):/) do |emoji|
 
@@ -104,7 +113,7 @@ class MarkdownTopicConverter < MarkdownConverter
       if MdEmoji::EMOJI.include?(emoji)
         file_name    = "#{emoji.gsub('+', 'plus')}.png"
 
-        %{<img src="#{Setting.upload_url}/assets/emojis/#{file_name}" class="emoji" } +
+        %{<img src="#{self.class.upload_url}/assets/emojis/#{file_name}" class="emoji" } +
         %{title="#{emoji_code}" alt="" />}
       else
         emoji_code

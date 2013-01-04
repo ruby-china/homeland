@@ -4,7 +4,7 @@ require File.expand_path('../../../lib/markdown', __FILE__)
 describe 'markdown' do
   let(:upload_url) { '' }
   before do
-    MarkdownTopicConverter.stub(:upload_url).and_return(upload_url)
+    MarkdownTopicConverter.instance.stub(:upload_url).and_return(upload_url)
   end
 
   describe MarkdownTopicConverter do
@@ -12,9 +12,9 @@ describe 'markdown' do
     let!(:doc) { Nokogiri::HTML.fragment(MarkdownTopicConverter.format(raw)) }
     subject { doc }
 
-    # {{{ describe '@user'
+    # {{{ describe 'mention user'
 
-    describe '@user' do
+    describe 'at user' do
       context '@user in text' do
         let(:raw) { '@user' }
 
@@ -66,15 +66,15 @@ describe 'markdown' do
         }
 
         specify { doc.css('a').should be_empty }
-        specify { doc.css('pre').text.should == '@user' }
+        specify { doc.css('pre').text.should == "@user\n" }
       end
     end
 
     # }}}
 
-    # {{{ describe '#12f'
+    # {{{ describe mention floor
 
-    describe ' #12f' do
+    describe 'mention floor' do
       context ' #12f in text' do
         let(:raw) { '#12f' }
 
@@ -109,15 +109,15 @@ describe 'markdown' do
         }
 
         specify { doc.css('a').should be_empty }
-        specify { doc.css('pre').text.should == '#12f' }
+        specify { doc.css('pre').text.should == "#12f\n" }
       end
     end
 
     # }}}
 
-    # {{{ describe ':apple'
+    # {{{ describe 'emoji'
 
-    describe ':apple:' do
+    describe 'emoji' do
       context ':apple: in text' do
         let(:raw) { ':apple:' }
 
@@ -160,7 +160,7 @@ describe 'markdown' do
         }
 
         specify { doc.css('a').should be_empty }
-        specify { doc.css('pre').text.should == ':apple:' }
+        specify { doc.css('pre').text.should == ":apple:\n" }
       end
     end
 

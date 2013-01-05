@@ -12,7 +12,11 @@ set :repository,  "git://github.com/ruby-china/ruby-china.git"
 set :branch, "master"
 set :scm, :git
 set :user, "ruby"
-set :deploy_to, "/data/www/#{application}"
+if ENV["DEPLOY"] == "pre"
+  set :deploy_to, "/data/www/#{application}-pre"
+else
+  set :deploy_to, "/data/www/#{application}"
+end
 set :runner, "ruby"
 # set :deploy_via, :remote_cache
 set :git_shallow_clone, 1

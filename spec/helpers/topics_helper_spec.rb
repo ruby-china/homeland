@@ -84,6 +84,11 @@ describe TopicsHelper do
       helper.format_topic_body('#3楼很强大').should ==
         '<p><a href="#reply3" class="at_floor" data-floor="3">#3楼</a>很强大</p>'
     end
+    
+    it "should right encoding with #1楼 @ichord 刚刚发布，有点问题" do
+      helper.format_topic_body("#1楼 @ichord 刚刚发布，有点问题").should == 
+      %w(<p><a href=\"#reply1\" class=\"at_floor\" data-floor=\"1\">#1楼</a> <a href=\"/ichord\" class=\"at_user\" title=\"@ichord\"><i>@</i>ichord</a> 刚刚发布，有点问题</p>)
+    end
 
     it "should wrap break line" do
       helper.format_topic_body("line 1\nline 2").should ==

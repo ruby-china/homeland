@@ -17,7 +17,7 @@ describe 'markdown' do
     describe "encoding with Chinese chars" do
       context "a simple" do
         let(:raw) { '#1楼 @ichord 刚刚发布，有点问题' }
-        its(:inner_html) { should == %(<p><a href=\"#reply1\" class=\"at_floor\" data-floor=\"1\">#1楼</a> <a href=\"/ichord\" class=\"at_user\" title=\"@ichord\"><i>@</i>ichord</a> 刚刚发布，有点问题</p>) }
+        its(:inner_html) { should == %(<p><a href="#reply1" class="at_floor" data-floor="1">#1楼</a> <a href="/ichord" class="at_user" title="@ichord"><i>@</i>ichord</a> 刚刚发布，有点问题</p>) }
       end
     end
 

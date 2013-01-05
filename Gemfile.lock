@@ -51,7 +51,6 @@ GEM
       sass-rails
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
-    blankslate (2.1.2.4)
     bootstrap-sass (2.0.3.1)
     bootstrap-will_paginate (0.0.3)
       will_paginate
@@ -222,6 +221,7 @@ GEM
     origin (1.0.11)
     orm_adapter (0.0.7)
     polyglot (0.3.3)
+    posix-spawn (0.3.6)
     postmark (0.9.15)
       json
       rake
@@ -229,8 +229,9 @@ GEM
       actionmailer
       postmark (>= 0.9.0)
       rake
-    pygments.rb (0.2.4)
-      rubypython (~> 0.5.3)
+    pygments.rb (0.3.7)
+      posix-spawn (~> 0.3.6)
+      yajl-ruby (~> 1.1.0)
     quiet_assets (1.0.1)
       railties (~> 3.1)
     rack (1.4.1)
@@ -290,9 +291,6 @@ GEM
       activesupport (>= 3.0)
       railties (>= 3.0)
       rspec (~> 2.10.0)
-    rubypython (0.5.3)
-      blankslate (>= 2.1.2.3)
-      ffi (~> 1.0.7)
     rubyzip (0.9.9)
     rvm-capistrano (1.2.2)
       capistrano (>= 2.0.0)
@@ -393,7 +391,7 @@ DEPENDENCIES
   omniauth (~> 1.0.1)
   omniauth-github (~> 1.0.0)
   postmark-rails (= 0.4.1)
-  pygments.rb (~> 0.2.4)
+  pygments.rb (~> 0.3.7)
   quiet_assets (= 1.0.1)
   rails (= 3.2.9)
   rails-i18n (= 0.1.8)

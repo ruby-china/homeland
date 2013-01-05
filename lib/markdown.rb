@@ -196,7 +196,7 @@ class MarkdownTopicConverter < MarkdownConverter
         if MdEmoji::EMOJI.include?(emoji)
           file_name    = "#{emoji.gsub('+', 'plus')}.png"
 
-          %{<img src="#{upload_url}/assets/emojis/#{file_name}" class="emoji" } +
+          %{<img src="#{Setting.upload_url}/assets/emojis/#{file_name}" class="emoji" } +
             %{title="#{emoji_code}" alt="" />}
         else
           emoji_code
@@ -207,11 +207,7 @@ class MarkdownTopicConverter < MarkdownConverter
       node.replace(html)
     end
   end
-
-  def upload_url
-    Setting.upload_url
-  end
-
+  
   def initialize
     @converter = Redcarpet::Markdown.new(Redcarpet::Render::HTMLwithTopic.new, {
         :autolink => true,
@@ -220,7 +216,6 @@ class MarkdownTopicConverter < MarkdownConverter
         :space_after_headers => true,
         :no_intra_emphasis => true
       })
-    # @emoji = Redcarpet::Markdown.new(MdEmoji::Render)
     @emoji = MdEmoji::Render.new
   end
 end

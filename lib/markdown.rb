@@ -95,12 +95,12 @@ class MarkdownTopicConverter < MarkdownConverter
 
     result = convert(text)
 
-    doc = Nokogiri::HTML.fragment(result, 'UTF-8')
+    doc = Nokogiri::HTML.fragment(result)
     link_mention_floor(doc)
     link_mention_user(doc, users)
     replace_emoji(doc)
 
-    return doc.to_html(:encoding => 'UTF-8').strip
+    return doc.to_html.strip
   rescue => e
     puts "MarkdownTopicConverter.format ERROR: #{e}"
     return text
@@ -129,7 +129,7 @@ class MarkdownTopicConverter < MarkdownConverter
   # Refer to emoji_filter in html-pipeline
   def link_mention_floor(doc)
     doc.search('text()').each do |node|
-      content = node.to_html(:encoding => 'UTF-8')
+      content = node.to_html
       next if !content.include?('#')
       next if has_ancestors?(node, %w(pre code))
 
@@ -163,7 +163,7 @@ class MarkdownTopicConverter < MarkdownConverter
   # match any user even not exist.
   def link_mention_user(doc, users)
     doc.search('text()').each do |node|
-      content = node.to_html(:encoding => 'UTF-8')
+      content = node.to_html
       next if !content.include?('@')
       in_code = has_ancestors?(node, %w(pre code))
       html = content.gsub(LINK_USER_REGEXP) {
@@ -185,7 +185,7 @@ class MarkdownTopicConverter < MarkdownConverter
 
   def replace_emoji(doc)
     doc.search('text()').each do |node|
-      content = node.to_html(:encoding => 'UTF-8')
+      content = node.to_html
       next if !content.include?(':')
       next if has_ancestors?(node, %w(pre code))
 

@@ -48,6 +48,7 @@ gem "redis-objects", "0.5.2"
 # Markdown 格式
 gem "redcarpet", "~> 2.0.0"
 gem "pygments.rb", '~> 0.3.7'
+gem "nokogiri", "1.5.2"
 
 # YAML 配置信息
 gem "settingslogic", "~> 2.0.6"

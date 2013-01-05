@@ -5,6 +5,7 @@ require 'redcarpet'
 require 'singleton'
 require 'md_emoji'
 require 'pygments'
+require "nokogiri"
 
 module Redcarpet
   module Render

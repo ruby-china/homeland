@@ -97,20 +97,16 @@ describe TopicsHelper do
 
     it "should highlight code block" do
       helper.format_topic_body("```ruby\nclass Hello\nend\n```").should ==
-        '<div class="highlight">
-<pre><span class="k">class</span> <span class="nc">Hello</span>
+        '<div class="highlight"><pre><span class="k">class</span> <span class="nc">Hello</span>
 <span class="k">end</span>
-</pre>
-</div>'
+</pre></div>'
     end
 
     it "should highlight code block after the content" do
       helper.format_topic_body("this code:\n```\ngem install rails\n```\n").should ==
         '<p>this code:</p>
-<div class="highlight">
-<pre>gem install rails
-</pre>
-</div>'
+<div class="highlight"><pre>gem install rails
+</pre></div>'
     end
 
     it "should highlight code block without language" do
@@ -120,10 +116,8 @@ describe TopicsHelper do
     it "should not filter underscore" do
       helper.format_topic_body("ruby_china_image `ruby_china_image`").should == "<p>ruby_china_image <code>ruby_china_image</code></p>"
       helper.format_topic_body("```\nruby_china_image\n```").should ==
-        '<div class="highlight">
-<pre>ruby_china_image
-</pre>
-</div>'
+        '<div class="highlight"><pre>ruby_china_image
+</pre></div>'
     end
   end
 

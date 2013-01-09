@@ -13,14 +13,10 @@ services:
 matrix:
   allow_failures:
     - rvm: ruby-head
-    - rvm: ree
-    - rvm: 1.9.2
     - rvm: jruby-head
 
 rvm:
   - 1.9.3
-  - 1.9.2
-  - ree
   - ruby-head
   - jruby-head
 

@@ -88,7 +88,7 @@ group :development, :test do
   gem "capybara", :require => false
   gem 'api_taster'
   gem "letter_opener"
-  gem 'thin'
+  gem 'thin', "1.5.0"
   
   # 禁用 assets 日志
   gem 'quiet_assets', "1.0.1"

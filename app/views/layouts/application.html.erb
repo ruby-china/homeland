@@ -22,10 +22,10 @@
   <%= yield :styles %>
   <% if mobile? %>
     <%= stylesheet_link_tag "mobile" %>
-    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="no">
     <meta content='True' name='HandheldFriendly' />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-    <link rel="apple-touch-icon" href="<%= asset_path("big_logo.png") %>" />
+    <link rel="apple-touch-icon-precomposed" href="<%= asset_path("ios-icon.png") %>" />
   <% end %>
   <meta name="keywords" content="<%= @meta_keywords %>" />
   <meta name="description" content="<%= @meta_description %>" />
@@ -47,8 +47,8 @@
         <%= render_list :class => "nav" do |li|
            li << link_to(t("menu.topics"), topics_path)
            li << link_to(t("menu.wiki"), pages_path )
-           li << link_to(t("menu.sites"), sites_path )
-           li << link_to(t("menu.users"), users_path)
+           li << link_to(t("menu.sites"), sites_path ) if !mobile?
+           li << link_to(t("menu.users"), users_path) if !mobile?
         end %>
         <form action="/search" class="navbar-search pull-left" method="get">
           <input type="text" name="q" class="search-query span3" value="<%= params[:q] %>" placeholder="<%= t("common.search") %>" />
@@ -60,13 +60,11 @@
 
   <div class="container">
     <% if !controller_name.in?(["users"]) %>
-      <div itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+      <div class="hidden-phone" itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
         <%= render_breadcrumb %>
       </div>
-      <div class="feed_link">
-        <% if mobile? %>
-          <%= link_to "我要发贴", new_topic_path, :class => "btn btn-success" %>
-        <% else %>
+      <div class="feed_link hidden-phone">
+        <% if not mobile? %>
           <%= link_to(raw("<span class='icon icons_rss'></span> Feed"), feed_topics_url, :title => t("topics.subscribe_with_rss", :name => Setting.app_name), :class => "feed") %>
         <% end %>
       </div>

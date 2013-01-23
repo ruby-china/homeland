@@ -1,5 +1,6 @@
 <% if current_user %>
 <ul class="nav pull-right" id="userbar">
+  
   <%
     badge_class = ""
     badge_class = "badge-error" if unread_notify_count > 0
@@ -21,6 +22,9 @@
     end %>
   </li>
 </ul>
+<% if mobile? %>
+<span class="pull-right"><%= link_to("发帖", new_topic_path, :class => "btn btn-small btn-primary") %></span>
+<% end %>
 <% else %>
   <%= render_list :class => "nav pull-right", :id => "userbar" do |li|
     li << link_to( t("common.register"), new_user_registration_path)

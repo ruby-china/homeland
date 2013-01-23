@@ -88,7 +88,10 @@
   <%= javascript_include_tag "app" %>
   <%= controller_javascript_include_tag %>
   <% if mobile? %>
-    <script type="text/javascript">app_mobile = true;</script>
+    <script type="text/javascript">
+    app_mobile = true;
+    $('body').animate({ scrollTop: -1 },0);
+    </script>
   <% end %>
   <script type="text/javascript" charset="utf-8">
     ROOT_URL = "<%= root_url %>";

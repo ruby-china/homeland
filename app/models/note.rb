@@ -4,6 +4,7 @@ class Note
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::BaseModel
+  include Redis::Objects
 
   field :title
   field :body
@@ -11,6 +12,8 @@ class Note
   field :changes_count, :type =>  Integer, :default => 0
   field :publish, :type => Boolean, :default => false
   belongs_to :user
+  
+  counter :hits,:default => 0
 
   index :user_id => 1
   index :updated_at => -1
@@ -18,6 +21,7 @@ class Note
   attr_accessible :title, :body, :publish
 
   scope :recent_updated, desc(:updated_at)
+  scope :published, where(publish: true)
 
   before_save :auto_set_value
   def auto_set_value

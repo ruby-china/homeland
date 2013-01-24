@@ -48,6 +48,26 @@ describe UsersController do
       response.status.should == 404
     end
   end
+  
+  describe ":notes" do
+    it "should show user notes" do
+      get :notes, :id => user.login
+      response.should be_success
+    end
+
+    it "should render 404 if user not found" do
+      get :notes, :id => "chunk_norris"
+      response.should_not be_success
+      response.status.should == 404
+    end
+    
+    it "assigns @notes" do
+      note_1 = Factory(:note, :publish => true,:user => user)
+      note_2 = Factory(:note, :publish => false,:user => user)
+      get :notes,:id => user.login
+      assigns(:notes).should == [note_1]
+    end
+  end
 
   describe ":city" do
     it "should render 404 if there is no user in that city" do

@@ -103,6 +103,7 @@ RubyChina::Application.routes.draw do
     member do
       get :topics
       get :favorites
+      get :notes
     end
   end
 

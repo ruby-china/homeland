@@ -1,0 +1,22 @@
+<%= render "menu" %>
+<div class="content">
+  <div class="box">
+
+    <table class="node_topics table">
+      <tr class="head">
+        <td class="opts"><%= t("common.title") %></td>
+        <td class="title"><%=t("common.statics")%></td>
+      </tr>
+      <% @notes.each do |note| %>
+        <tr class="note <%= cycle('odd',"") %>">
+          <th><a class="title" href="<%= note_path(note.id) %>"><i class="icon-stop"></i> <%= truncate(note.title.gsub('#',''), :length => 50) %></a> <%= raw '<span class="label warning">公开</span>' if note.publish %></th>
+          <th><%= note.word_count %> <%= t("notes.chars") %>,<%= note.hits %><%= t("common.read_times")%>, <%= raw t("notes.created_at", :time => timeago(note.created_at)) %> , <%= note.changes_count %> <%= t("notes.times_edit") %></th>
+        </tr>
+      <% end %>
+
+    </table>
+    <%= will_paginate @notes %>
+  </div>
+</div>
+
+<%= render "sidebar", :user => @user %>

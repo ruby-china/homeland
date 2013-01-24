@@ -62,8 +62,8 @@ describe UsersController do
     end
     
     it "assigns @notes" do
-      note_1 = Factory(:note, :publish => true)
-      note_2 = Factory(:note, :publish => false)
+      note_1 = Factory(:note, :publish => true,:user => user)
+      note_2 = Factory(:note, :publish => false,:user => user)
       get :notes,:id => user.login
       assigns(:notes).should == [note_1]
     end

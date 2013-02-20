@@ -41,7 +41,7 @@
     you_may_like: "You may also like"
     read: "read"
     admin_user: "Admin"
-    wiki_admin: "Wiki Admin"
+    vip_user: "VIP"
     normal_user: "Normal User"
     limit_user: "Restricted User"
     title: "Title"

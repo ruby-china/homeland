@@ -20,7 +20,7 @@ gem 'mongoid_auto_increment_id', "0.5.1"
 gem 'mongoid_rails_migrations', '1.0.0'
 
 # 用户系统
-gem 'devise', '2.1.3'
+gem 'devise', '2.2.3'
 gem 'devise-encryptable'
 
 # 分页
@@ -45,7 +45,7 @@ gem 'redis-namespace','~> 1.2.1'
 gem "redis-objects", "0.5.2"
 
 # Markdown 格式
-gem "redcarpet", "~> 2.0.0"
+gem "redcarpet", "~> 2.2.2"
 gem "pygments.rb", '~> 0.3.7'
 gem "nokogiri", "1.5.2"
 

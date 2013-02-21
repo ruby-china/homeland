@@ -1,10 +1,10 @@
 # coding: utf-8
-source 'https://rubygems.org'
+source 'http://ruby.taobao.org'
 
 gem "rails", "3.2.12"
 gem "rails-i18n","0.1.8"
 gem "jquery-rails", "2.0.1"
-gem "rails_autolink", ">= 1.0.4"
+gem "rails_autolink", ">= 1.0.9"
 gem "jquery-atwho-rails", "0.1.6"
 gem "md_emoji"
 gem 'exception_notification'
@@ -15,9 +15,8 @@ gem 'carrierwave-upyun', '0.1.5'
 gem 'mini_magick','3.3', :require => false
 
 # Mongoid 辅助插件
-gem "mongoid", "3.0.14"
-# gem 'mongo-rails-instrumentation','0.2.4'
-gem 'mongoid_auto_increment_id', "0.5.0"
+gem "mongoid", "3.1.1"
+gem 'mongoid_auto_increment_id', "0.5.1"
 gem 'mongoid_rails_migrations', '1.0.0'
 
 # 用户系统
@@ -53,7 +52,7 @@ gem "nokogiri", "1.5.2"
 # YAML 配置信息
 gem "settingslogic", "~> 2.0.6"
 
-gem "cells", "3.7.1"
+gem "cells", "3.8.8"
 
 # 队列
 gem "sidekiq", "2.5.3"

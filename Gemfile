@@ -59,8 +59,6 @@ gem "sidekiq", "2.5.3"
 
 gem 'faye-rails','1.0.0'
 
-gem 'newrelic_rpm'
-
 # 分享功能
 gem "social-share-button", "~> 0.1.0"
 

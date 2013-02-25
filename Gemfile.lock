@@ -204,7 +204,6 @@ GEM
     net-ssh (2.2.1)
     net-ssh-gateway (1.1.0)
       net-ssh (>= 1.99.1)
-    newrelic_rpm (3.3.5)
     nokogiri (1.5.2)
     oauth2 (0.5.1)
       faraday (~> 0.7.4)
@@ -387,7 +386,6 @@ DEPENDENCIES
   mongoid_auto_increment_id (= 0.5.1)
   mongoid_colored_logger (= 0.2.2)
   mongoid_rails_migrations (= 1.0.0)
-  newrelic_rpm
   nokogiri (= 1.5.2)
   omniauth (~> 1.0.1)
   omniauth-github (~> 1.0.0)

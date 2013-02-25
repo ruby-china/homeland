@@ -17,7 +17,7 @@ matrix:
 
 rvm:
   - 1.9.3
-  - ruby-head
+  - 2.0.0
   - jruby-head
 
 env: JRUBY_OPTS="-Xcext.enabled=true -Xmx512m -Xcompile.invokedynamic=false"

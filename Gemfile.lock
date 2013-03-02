@@ -220,7 +220,6 @@ GEM
     origin (1.0.11)
     orm_adapter (0.4.0)
     polyglot (0.3.3)
-    posix-spawn (0.3.6)
     postmark (0.9.15)
       json
       rake
@@ -228,9 +227,6 @@ GEM
       actionmailer
       postmark (>= 0.9.0)
       rake
-    pygments.rb (0.3.7)
-      posix-spawn (~> 0.3.6)
-      yajl-ruby (~> 1.1.0)
     quiet_assets (1.0.1)
       railties (~> 3.1)
     rack (1.4.5)
@@ -273,6 +269,8 @@ GEM
       redis (>= 2.1.1)
     rest-client (1.6.7)
       mime-types (>= 1.16)
+    rouge (0.2.14)
+      thor
     rspec (2.10.0)
       rspec-core (~> 2.10.0)
       rspec-expectations (~> 2.10.0)
@@ -386,11 +384,9 @@ DEPENDENCIES
   mongoid_auto_increment_id (= 0.5.1)
   mongoid_colored_logger (= 0.2.2)
   mongoid_rails_migrations (= 1.0.0)
-  nokogiri (= 1.5.2)
   omniauth (~> 1.0.1)
   omniauth-github (~> 1.0.0)
   postmark-rails (= 0.4.1)
-  pygments.rb (~> 0.3.7)
   quiet_assets (= 1.0.1)
   rails (= 3.2.12)
   rails-i18n (= 0.1.8)
@@ -398,6 +394,7 @@ DEPENDENCIES
   redcarpet (~> 2.2.2)
   redis-namespace (~> 1.2.1)
   redis-objects (= 0.5.2)
+  rouge (~> 0.2.14)
   rspec-cells
   rspec-rails (~> 2.10.0)
   rvm-capistrano

@@ -84,9 +84,9 @@ describe TopicsHelper do
       helper.format_topic_body('#3楼很强大').should ==
         '<p><a href="#reply3" class="at_floor" data-floor="3">#3楼</a>很强大</p>'
     end
-    
+
     it "should right encoding with #1楼 @ichord 刚刚发布，有点问题" do
-      helper.format_topic_body("#1楼 @ichord 刚刚发布，有点问题").should == 
+      helper.format_topic_body("#1楼 @ichord 刚刚发布，有点问题").should ==
       %(<p><a href="#reply1" class="at_floor" data-floor="1">#1楼</a> <a href="/ichord" class="at_user" title="@ichord"><i>@</i>ichord</a> 刚刚发布，有点问题</p>)
     end
 
@@ -102,27 +102,23 @@ describe TopicsHelper do
 
     it "should highlight code block" do
       helper.format_topic_body("```ruby\nclass Hello\nend\n```").should ==
-        '<div class="highlight"><pre><span class="k">class</span> <span class="nc">Hello</span>
-<span class="k">end</span>
-</pre></div>'
+        %(<pre class=\"highlight ruby\"><span class=\"k\">class</span> <span class=\"nc\">Hello</span>\n<span class=\"k\">end</span>\n</pre>)
     end
 
     it "should highlight code block after the content" do
       helper.format_topic_body("this code:\n```\ngem install rails\n```\n").should ==
-        '<p>this code:</p>
-<div class="highlight"><pre>gem install rails
-</pre></div>'
+        %(<p>this code:</p>\n<pre class=\"highlight text\">gem install rails\n</pre>)
     end
 
     it "should highlight code block without language" do
-      helper.format_topic_body("```\ngem install ruby\n```").gsub("\n",'').should == '<div class="highlight"><pre>gem install ruby</pre></div>'
+      helper.format_topic_body("```\ngem install ruby\n```").gsub("\n",'').should ==
+        %(<pre class=\"highlight text\">gem install ruby</pre>)
     end
 
     it "should not filter underscore" do
       helper.format_topic_body("ruby_china_image `ruby_china_image`").should == "<p>ruby_china_image <code>ruby_china_image</code></p>"
       helper.format_topic_body("```\nruby_china_image\n```").should ==
-        '<div class="highlight"><pre>ruby_china_image
-</pre></div>'
+        %(<pre class=\"highlight text\">ruby_china_image\n</pre>)
     end
   end
 

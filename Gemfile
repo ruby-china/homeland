@@ -46,8 +46,7 @@ gem "redis-objects", "0.5.2"
 
 # Markdown 格式
 gem "redcarpet", "~> 2.2.2"
-gem "pygments.rb", '~> 0.3.7'
-gem "nokogiri", "1.5.2"
+gem "rouge", "~> 0.2.14"
 
 # YAML 配置信息
 gem "settingslogic", "~> 2.0.6"
@@ -71,7 +70,7 @@ gem 'grape', :github => 'intridea/grape', :branch => 'frontier'
 # Mailer
 gem 'postmark-rails', '0.4.1'
 
-# Google Analytics performance 
+# Google Analytics performance
 gem 'garelic', '0.0.2'
 
 group :development, :test do
@@ -86,16 +85,16 @@ group :development, :test do
   gem 'api_taster'
   gem "letter_opener"
   gem 'thin', "1.5.0"
-  
+
   # 禁用 assets 日志
   gem 'quiet_assets', "1.0.1"
-  
+
   # 用于组合小图片
   gem "sprite-factory", "1.4.1", :require => false
   gem 'chunky_png', "1.2.5", :require => false
 
   gem 'jasmine', '1.2.1'
-  
+
   gem "mongoid_colored_logger", "0.2.2"
 end
 

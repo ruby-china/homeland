@@ -4,12 +4,12 @@ require 'rails_autolink'
 require 'redcarpet'
 require 'singleton'
 require 'md_emoji'
-require 'pygments'
-require "nokogiri"
+require 'rouge/plugins/redcarpet'
 
 module Redcarpet
   module Render
     class HTMLwithSyntaxHighlight < HTML
+      include Rouge::Plugins::Redcarpet
 
       def initialize(extensions={})
         super(extensions.merge(:xhtml => true,
@@ -18,13 +18,11 @@ module Redcarpet
                                :hard_wrap => true))
       end
 
+      # TODO: 当前版本的 route (0.2.14) 会把 code block 中的 "\n" 替换成 "\n\n"
+      # 这里强制将所有 "\n\n" 替换成回 "\n"
       def block_code(code, language)
-        language = 'text' if language.blank?
-        begin
-          Pygments.highlight(code, :lexer => language, :formatter => 'html', :options => {:encoding => 'utf-8'})
-        rescue
-          Pygments.highlight(code, :lexer => 'text', :formatter => 'html', :options => {:encoding => 'utf-8'})
-        end
+        html = super(code, language)
+        html.gsub("\n\n", "\n")
       end
 
       def autolink(link, link_type)

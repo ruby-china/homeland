@@ -10,7 +10,6 @@ Status](https://secure.travis-ci.org/ruby-china/ruby-china.png?branch=master&.pn
 * Ruby 1.9.3
 * Memcached 1.4+
 * Redis 2.2+
-* Python 2.4+ and [Pygments](http://pygments.org)  - You can run `easy_install pygments` to install it.
 * MongoDb 2.0+
 * ImageMagick 6.5+
 * libpng

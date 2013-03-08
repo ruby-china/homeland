@@ -100,6 +100,7 @@ class ApplicationController < ActionController::Base
     opts[:etag] << unread_notify_count
     # 所有 etag 保持一天
     opts[:etag] << Date.current
+    opts[:etag] << Time.now if not Rails.env.production?
     super(opts)
   end
 end

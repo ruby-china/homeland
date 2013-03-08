@@ -16,7 +16,7 @@ class Reply
   field :message_id
 
   belongs_to :user, :inverse_of => :replies
-  belongs_to :topic, :inverse_of => :replies
+  belongs_to :topic, :inverse_of => :replies, touch: true
   has_many :notifications, :class_name => 'Notification::Base', :dependent => :delete
 
   counter_cache :name => :user, :inverse_of => :replies

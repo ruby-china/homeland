@@ -55,7 +55,9 @@
         共收到 <b><%= @topic.replies_count %></b> 条回复
       </div>
       <div class="items">
-        <%= render :partial => "replies/reply", :collection => @replies %>
+        <%= cache([@topic,params[:page]]) do %>
+          <%= render :partial => "replies/reply", :collection => @replies %>
+        <% end %>
       </div>
       <%= will_paginate @replies, :inner_window => 2, :params => { :anchor => 'replies' } %>
     </div>

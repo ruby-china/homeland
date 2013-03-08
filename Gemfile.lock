@@ -59,6 +59,8 @@ GEM
       thor (~> 0.14)
     bson (1.7.1)
     builder (3.0.4)
+    cache_digests (0.2.0)
+      actionpack (>= 3.2)
     cancan (1.6.7)
     capistrano (2.9.0)
       highline
@@ -356,6 +358,7 @@ DEPENDENCIES
   api_taster
   bootstrap-will_paginate (= 0.0.3)
   bootstrap_helper (= 1.4.1)
+  cache_digests
   cancan (~> 1.6.7)
   capistrano (= 2.9.0)
   capybara

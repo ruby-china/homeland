@@ -6,6 +6,7 @@ gem "rails-i18n","0.1.8"
 gem "jquery-rails", "2.0.1"
 gem "rails_autolink", ">= 1.0.9"
 gem "jquery-atwho-rails", "0.1.6"
+gem "cache_digests"
 gem "md_emoji"
 gem 'exception_notification'
 

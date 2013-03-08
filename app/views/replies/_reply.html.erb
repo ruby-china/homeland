@@ -1,4 +1,4 @@
-<% cache(["topic/#{@topic.id}-v2",reply]) do %>
+<% cache([reply]) do %>
 <%
   floor = reply_counter + 1 + ((@page - 1) * Reply.per_page)
 %>

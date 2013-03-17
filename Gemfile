@@ -75,6 +75,8 @@ gem 'postmark-rails', '0.4.1'
 # Google Analytics performance
 gem 'garelic', '0.0.2'
 
+gem "god"
+
 group :development, :test do
   gem 'capistrano', '2.9.0', :require => false
   gem 'rvm-capistrano', :require => false

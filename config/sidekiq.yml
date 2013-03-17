@@ -3,3 +3,8 @@
 ---
 :verbose: false
 :concurrency: 5
+:queues:
+  - [a, 5]
+  - [b, 3]
+  - [c, 2]
+  - [default, 3]

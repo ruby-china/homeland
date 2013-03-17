@@ -144,6 +144,7 @@ GEM
       eventmachine (>= 0.12.0)
     ffi (1.0.11)
     garelic (0.0.2)
+    god (0.13.2)
     hashie (1.2.0)
     highline (1.6.8)
     hike (1.2.1)
@@ -375,6 +376,7 @@ DEPENDENCIES
   factory_girl_rails
   faye-rails (= 1.0.0)
   garelic (= 0.0.2)
+  god
   grape!
   jasmine (= 1.2.1)
   jquery-atwho-rails (= 0.1.6)

@@ -21,6 +21,7 @@ module Redcarpet
       # TODO: 当前版本的 route (0.2.14) 会把 code block 中的 "\n" 替换成 "\n\n"
       # 这里强制将所有 "\n\n" 替换成回 "\n"
       def block_code(code, language)
+        language.downcase! if language.is_a?(String)
         html = super(code, language)
         html.gsub("\n\n", "\n")
       end

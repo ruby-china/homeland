@@ -105,6 +105,13 @@ describe TopicsHelper do
         %(<pre class=\"highlight ruby\"><span class=\"k\">class</span> <span class=\"nc\">Hello</span>\n<span class=\"k\">end</span>\n</pre>)
     end
 
+    it "should be able to identigy Ruby or RUBY as ruby language" do
+      ['Ruby', 'RUBY'].each do |lang|
+        helper.format_topic_body("```#{lang}\nclass Hello\nend\n```").should ==
+          %(<pre class=\"highlight ruby\"><span class=\"k\">class</span> <span class=\"nc\">Hello</span>\n<span class=\"k\">end</span>\n</pre>)
+      end
+    end
+
     it "should highlight code block after the content" do
       helper.format_topic_body("this code:\n```\ngem install rails\n```\n").should ==
         %(<p>this code:</p>\n<pre class=\"highlight text\">gem install rails\n</pre>)

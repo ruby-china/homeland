@@ -141,13 +141,19 @@ class User
   def site_editor?
     self.admin? or self.replies_count >= 100
   end
+  
+  # 是否能发帖
+  def newbie?
+    return false if self.verified == true
+    self.created_at > 1.month.ago || self.replies_count < 10
+  end
 
   def has_role?(role)
     case role
       when :admin then admin?
       when :wiki_editor then wiki_editor?
-      when :member then true
       when :site_editor then site_editor?
+      when :member then true
       else false
     end
   end

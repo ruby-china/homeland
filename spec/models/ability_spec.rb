@@ -30,8 +30,8 @@ describe Ability do
   end
   
   context "Site editor users" do
-    let(:user) { Factory :user, :replies_count => 100 }
-    let(:ability){ Ability.new(user) }
+    let(:site_editor) { Factory :user, :replies_count => 100 }
+    let(:ability){ Ability.new(site_editor) }
     
     context "Site" do
       it { should be_able_to(:read, Site) }
@@ -39,7 +39,7 @@ describe Ability do
     end
   end
 
-  context "Normal users" do
+  context "Old users" do
     let(:user) { Factory :user }
     let(:topic) { Factory :topic, :user => user }
     let(:reply) { Factory :reply, :user => user }
@@ -47,6 +47,7 @@ describe Ability do
     let(:comment) { Factory :comment, :user => user }
     let(:note_publish) { Factory :note, :publish => true }
 
+    
     let(:ability){ Ability.new(user) }
 
     context "Topic" do
@@ -98,6 +99,14 @@ describe Ability do
       it { should be_able_to(:read, Comment) }
       it { should be_able_to(:update, comment) }
       it { should be_able_to(:destroy, comment) }
+    end
+  end
+  
+  context "Newbie users" do
+    let(:newbie) { Factory :newbie }
+    let(:ability){ Ability.new(newbie) }
+    context "Topic" do
+      it { should_not be_able_to(:create, Topic) }
     end
   end
 end

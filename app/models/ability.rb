@@ -13,7 +13,9 @@ class Ability
       can :manage, :all
     elsif user.has_role?(:member)
       # Topic
-      can :create, Topic
+      if !user.newbie?
+        can :create, Topic
+      end
       can :favorite, Topic
       can :follow, Topic
       can :unfollow,Topic

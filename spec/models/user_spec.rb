@@ -94,6 +94,33 @@ describe User do
       user.should_not be_wiki_editor
     end
   end
+  
+  describe "newbie?" do
+    it "should true when user created_at less than a month" do
+      user.verified = false
+      user.created_at = 1.days.ago
+      user.newbie?.should be_true
+    end
+    
+    it "should true when more than a month but not have 10+ replies" do
+      user.verified = false
+      user.created_at = 40.days.ago
+      user.replies_count = 0
+      user.newbie?.should be_true
+    end
+    
+    it "should false when more than a month and have 10+ replies" do
+      user.verified = false
+      user.created_at = 40.days.ago
+      user.replies_count = 10
+      user.newbie?.should be_false
+    end
+    
+    it "should false when user is verified" do
+      user.verified = true
+      user.newbie?.should be_false
+    end
+  end
 
   describe "roles" do
     subject { user }

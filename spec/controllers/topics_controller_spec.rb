@@ -4,6 +4,7 @@ describe TopicsController do
   render_views
   let(:topic) { Factory :topic, :user => user }
   let(:user) { Factory :user }
+  let(:newbie) { Factory :newbie }
 
   describe ":index" do
     it "should have an index action" do
@@ -54,6 +55,12 @@ describe TopicsController do
         sign_in user
         get :new
         response.should be_success
+      end
+      
+      it "should not allow access from newbie user" do
+        sign_in newbie
+        get :new
+        response.should_not be_success
       end
     end
   end

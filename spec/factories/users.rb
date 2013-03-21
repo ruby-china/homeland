@@ -18,4 +18,9 @@ FactoryGirl.define do
   factory :non_wiki_editor, :parent => :user do
     verified false
   end
+  
+  factory :newbie, :parent => :user do
+    created_at 1.days.ago
+    verified false
+  end
 end

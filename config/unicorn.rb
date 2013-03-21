@@ -1,10 +1,11 @@
 module Rails
   class <<self
     def root
-      "/home/ruby/www/ruby-china/current"
+      File.expand_path("../..", __FILE__)
     end
   end
 end
+puts Rails.root
 rails_env = ENV["RAILS_ENV"] || "production"
 
 preload_app true

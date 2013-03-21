@@ -22,7 +22,7 @@ gem 'mongoid_rails_migrations', '1.0.0'
 
 # 用户系统
 gem 'devise', '2.2.3'
-gem 'devise-encryptable'
+gem 'devise-encryptable', '0.1.1'
 
 # 分页
 gem 'will_paginate', '3.0.2'

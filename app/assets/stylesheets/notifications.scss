@@ -51,7 +51,7 @@
       i { color:#777; }
     }
     h4 { font-weight:bold; font-size:15px; line-height:100%; margin:0; color:#222; margin-top:20px; border-left:15px solid #eee; padding-left:5px; margin-bottom:8px;  }
-    p { margin-bottom:10px; }
+    p { margin-bottom:10px; word-break: break-all; }
     strong { color:#000; }
     ul,
     ol {

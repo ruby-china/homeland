@@ -371,7 +371,7 @@ DEPENDENCIES
   dalli (= 1.1.1)
   database_cleaner
   devise (= 2.2.3)
-  devise-encryptable
+  devise-encryptable (= 0.1.1)
   exception_notification
   factory_girl_rails
   faye-rails (= 1.0.0)

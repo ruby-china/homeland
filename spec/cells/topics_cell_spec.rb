@@ -33,16 +33,6 @@ describe TopicsCell do
     end
   end
 
-  describe "sidebar_for_new_topic_node" do
-    it "should render when node presents" do
-      render_cell(:topics, :sidebar_for_new_topic_node, :node => @node).should have_css("div.content", :count => 1)
-    end
-
-    it "should not render when node not presents" do
-      render_cell(:topics, :sidebar_for_new_topic_node).should_not have_css("div.content")
-    end
-  end
-
   describe "reply_help_block" do
     it "should render reply_help_block" do
       render_cell(:topics, :reply_help_block).should have_css('div#markdown_help_tip_modal')
@@ -93,20 +83,6 @@ describe TopicsCell do
       reply2 = Factory(:reply, :topic => topic0)
       topic1 = Factory(:topic, :node => node)
       render_cell(:topics, :sidebar_for_node_recent_topics, :topic => topic0).should have_css("div.box ul li", :count => 2)
-    end
-  end
-
-  describe "sidebar_for_new_topic_button_group" do
-    let(:node0) { Factory(:node) }
-    let(:node1) { Factory(:node) }
-    it "should render" do
-      SiteConfig.stub!(:new_topic_dropdown_node_ids).and_return([node0.id,node1.id].join(","))
-      render_cell(:topics, :sidebar_for_new_topic_button_group).should have_css('ul.dropdown-menu li', :count => 2)
-    end
-
-    it "should work on site_config value is nil" do
-      SiteConfig.stub!(:new_topic_dropdown_node_ids).and_return(nil)
-      render_cell(:topics, :sidebar_for_new_topic_button_group).should have_css('.btn-group')
     end
   end
 

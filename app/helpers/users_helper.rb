@@ -86,6 +86,8 @@ module UsersHelper
       content_tag(:span, t("common.admin_user"), :class => "label warning role")
     elsif wiki_editor?(user)
       content_tag(:span, t("common.vip_user"), :class => "label success role")
+    elsif user.newbie?
+      content_tag(:span, t("common.newbie_user"), :class => "label role")
     else
       content_tag(:span,  t("common.normal_user"), :class => "label role")
     end

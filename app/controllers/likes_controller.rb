@@ -22,7 +22,15 @@ class LikesController < ApplicationController
       return false
     end
 
-    klass = params[:type].constantize
+    case params[:type].downcase
+    when "topic"
+      klass = Topic
+    when "reply"
+      klass = Reply
+    else
+      return false
+    end
+    
     @item = klass.find_by_id(params[:id])
     if @item.blank?
       render :text => "-2"

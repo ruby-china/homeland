@@ -28,33 +28,12 @@ class TopicsCell < BaseCell
     render
   end
 
-  # Sidebar 发帖按钮
-  cache :sidebar_for_new_topic_button_group do
-    SiteConfig.new_topic_dropdown_node_ids
-  end
-  def sidebar_for_new_topic_button_group
-    if !SiteConfig.new_topic_dropdown_node_ids.blank?
-      ids = SiteConfig.new_topic_dropdown_node_ids.split(",").collect { |id| id.to_i }
-    else
-      ids = []
-    end
-    @hot_nodes = Node.where(:_id.in => ids).limit(5)
-    render
-  end
-
-
   # 置顶话题
   cache :sidebar_suggest_topics do |cell|
     CacheVersion.topic_last_suggested_at
   end
   def sidebar_suggest_topics
     @suggest_topics = Topic.suggest.limit(5)
-    render
-  end
-
-  def sidebar_for_new_topic_node(args = {})
-    @node = args[:node]
-    @action = args[:action]
     render
   end
 

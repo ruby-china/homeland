@@ -1,9 +1,10 @@
 <div class="content">
   <div class="box">
-      <%= render "form" %>
+     <%= render "form" %>
   </div>
 </div>
 
 <div class="sidebar">
-  <%= render_cell :topics, :sidebar_for_new_topic_node, { :node => @node } %>
+  <%= render "sidebar_box_node_new_topic" %>
+  <%= render "sidebar_box_new_topic_tip" %>
 </div>

@@ -134,6 +134,9 @@ form {
     padding:0;
   }
   td.last { display:none;}
+  .body {
+    p { max-width: 100%; word-break:break-all; }
+  }
 }
 .topics .topic .infos { padding-right:40px; }
 .topics .topic .replies { display:inline; width:auto; margin-right:10px; }

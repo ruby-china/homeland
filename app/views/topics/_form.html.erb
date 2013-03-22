@@ -3,9 +3,11 @@
   <fieldset>
     <legend><%= @topic.new_record? ? t("topics.create_topic") : t("topics.edit_topic") %></legend>
     <%= f.input :title do %>
-      <span class="node_select span2">
-        <%= render_topic_node_select_tag(@topic) %>
-      </span>
+      <% if @topic.lock_node == false || admin? %>
+        <span class="node_select span2">
+          <%= render_topic_node_select_tag(@topic) %>
+        </span>
+      <% end %>
       <%= f.text_field :title, :class => "span4" %>
     <% end %>
 

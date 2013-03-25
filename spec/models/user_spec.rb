@@ -96,22 +96,22 @@ describe User do
   end
   
   describe "newbie?" do
-    it "should true when user created_at less than a month" do
+    it "should true when user created_at less than a week" do
       user.verified = false
-      user.created_at = 1.days.ago
+      user.created_at = 6.days.ago
       user.newbie?.should be_true
     end
     
-    it "should true when more than a month but not have 10+ replies" do
+    it "should true when more than a week but not have 10+ replies" do
       user.verified = false
-      user.created_at = 40.days.ago
-      user.replies_count = 0
+      user.created_at = 8.days.ago
+      user.replies_count = 9
       user.newbie?.should be_true
     end
     
-    it "should false when more than a month and have 10+ replies" do
+    it "should false when more than a week and have 10+ replies" do
       user.verified = false
-      user.created_at = 40.days.ago
+      user.created_at = 10.days.ago
       user.replies_count = 10
       user.newbie?.should be_false
     end

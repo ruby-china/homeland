@@ -45,6 +45,12 @@ code { background:none; }
       &:hover { background:none;}
     }
   }
+  .dropdown-menu {
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    a { padding: 3px 15px 4px 30px; }
+  }
 }
 
 .breadcrumb {

@@ -6,11 +6,6 @@ class AccountController < Devise::RegistrationsController
     @user.update_private_token if @user.private_token.blank?
   end
 
-  def update_private_token
-    current_user.update_private_token
-    render :text => current_user.private_token
-  end
-
   def update
     self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
 

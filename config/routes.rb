@@ -25,11 +25,9 @@ RubyChina::Application.routes.draw do
       :sessions => :sessions,
       :omniauth_callbacks => "users/omniauth_callbacks"
     }
-  devise_scope :users do
-    get "account/update_private_token" => "account#update_private_token", :as => :update_private_token_account
-  end
 
-  match "account/auth/:provider/unbind", :to => "users#auth_unbind"
+  match "account/auth/:provider/unbind", to: "users#auth_unbind", via: 'delete', as: 'unbind_account'
+  match "account/update_private_token", to: "users#update_private_token", via: 'post', as: 'update_private_token_account'
 
   resources :notifications, :only => [:index, :destroy] do
     collection do

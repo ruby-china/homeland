@@ -68,10 +68,10 @@
       <% ["github"].each do |provider| %>
       <li>
         <% if @user.bind? provider %>
-          <%= link_to( provider.titleize, "/account/auth/#{provider}/unbind", :rel => "twitsy", :title => "点击解除绑定" )%>
+          <%= link_to( provider.titleize, "/account/auth/#{provider}/unbind", rel: "twitsy", title: "点击解除绑定", method: 'delete' )%>
           <span class="label success">已绑定</span>
         <% else %>
-          <%= link_to(provider.titleize, "/account/auth/#{provider}",:rel => "twitsy", :title => "点击解除绑定" )%>
+          <%= link_to(provider.titleize, "/account/auth/#{provider}", rel: "twitsy", title: "点击绑定" )%>
         <% end %>
       </li>
       <% end %>
@@ -96,7 +96,7 @@
   <script type="text/javascript">
     $(document).ready(function(){
       $("#update_private_token").click(function(){
-        $.get("<%= update_private_token_account_path %>",function(re){
+        $.post("<%= update_private_token_account_path %>",function(re){
           $("#private_token").val(re);
         });
         return false;

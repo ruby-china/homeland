@@ -47,6 +47,11 @@ class UsersController < ApplicationController
     current_user.authorizations.destroy_all({ :provider => provider })
     redirect_to edit_user_registration_path, :flash => {:warring => t("users.unbind_success", :provider => provider.titleize )}
   end
+  
+  def update_private_token
+    current_user.update_private_token
+    render :text => current_user.private_token
+  end
 
   def city
     @location = Location.find_by_name(params[:id])

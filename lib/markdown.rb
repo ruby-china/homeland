@@ -18,12 +18,12 @@ module Redcarpet
                                :hard_wrap => true))
       end
 
-      # TODO: 当前版本的 route (0.2.14) 会把 code block 中的 "\n" 替换成 "\n\n"
-      # 这里强制将所有 "\n\n" 替换成回 "\n"
+      
       def block_code(code, language)
         language.downcase! if language.is_a?(String)
         html = super(code, language)
-        html.gsub("\n\n", "\n")
+        # 将最后行的 "\n\n" 替换成回 "\n", rouge 0.3.2 的 Bug 导致
+        html.gsub("\n\n</pre>", "\n</pre>")
       end
 
       def autolink(link, link_type)
@@ -40,8 +40,8 @@ module Redcarpet
             return link
           end
           # Fix Chinese neer the URL
-          bad_text = link.to_s.match(/[^\w:\/\-\,\$\!\.=\?&#+\|\%]+/im).to_s
-          link = link.to_s.gsub(bad_text, '')
+          bad_text = link.match(/[^\w:\/\-\~\,\$\!\.=\?&#+\|\%]+/im).to_s
+          link.gsub!(bad_text, '')
           "<a href=\"#{link}\" rel=\"nofollow\" target=\"_blank\">#{link}</a>#{bad_text}"
         end
       end

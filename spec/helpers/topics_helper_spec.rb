@@ -43,6 +43,11 @@ describe TopicsHelper do
       helper.format_topic_body("this is a link: http://ruby-china.org test").should  ==
         '<p>this is a link: <a href="http://ruby-china.org" rel="nofollow" target="_blank">http://ruby-china.org</a> test</p>'
     end
+    
+    it "should auto link" do
+      helper.format_topic_body("http://ruby-china.org/~users").should  ==
+        '<p><a href="http://ruby-china.org/~users" rel="nofollow" target="_blank">http://ruby-china.org/~users</a></p>'
+    end
 
     it "should auto link with Chinese" do
       helper.format_topic_body("靠着中文http://foo.com，").should  ==
@@ -101,8 +106,8 @@ describe TopicsHelper do
     end
 
     it "should highlight code block" do
-      helper.format_topic_body("```ruby\nclass Hello\nend\n```").should ==
-        %(<pre class=\"highlight ruby\"><span class=\"k\">class</span> <span class=\"nc\">Hello</span>\n<span class=\"k\">end</span>\n</pre>)
+      helper.format_topic_body("```ruby\nclass Hello\n\nend\n```").should ==
+        %(<pre class=\"highlight ruby\"><span class=\"k\">class</span> <span class=\"nc\">Hello</span>\n\n<span class=\"k\">end</span>\n</pre>)
     end
 
     it "should be able to identigy Ruby or RUBY as ruby language" do

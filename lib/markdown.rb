@@ -23,7 +23,8 @@ module Redcarpet
         language.downcase! if language.is_a?(String)
         html = super(code, language)
         # 将最后行的 "\n\n" 替换成回 "\n", rouge 0.3.2 的 Bug 导致
-        html.gsub("\n\n</pre>", "\n</pre>")
+        html.gsub!("\n\n</pre>", "\n</pre>")
+        html
       end
 
       def autolink(link, link_type)
@@ -165,7 +166,7 @@ class MarkdownTopicConverter < MarkdownConverter
       content = node.to_html
       next if !content.include?('@')
       in_code = has_ancestors?(node, %w(pre code))
-      html = content.gsub(LINK_USER_REGEXP) {
+      content.gsub!(LINK_USER_REGEXP) {
         prefix = $1
         user_placeholder = $2
         user_id = user_placeholder.sub(/^user/, '').to_i
@@ -178,7 +179,7 @@ class MarkdownTopicConverter < MarkdownConverter
         end
       }
 
-      node.replace(html)
+      node.replace(content)
     end
   end
 

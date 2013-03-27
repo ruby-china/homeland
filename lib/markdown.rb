@@ -23,7 +23,7 @@ module Redcarpet
         language.downcase! if language.is_a?(String)
         html = super(code, language)
         # 将最后行的 "\n\n" 替换成回 "\n", rouge 0.3.2 的 Bug 导致
-        html.gsub!("\n\n</pre>", "\n</pre>")
+        html.gsub!("\n</pre>", "</pre>")
         html
       end
 

@@ -81,12 +81,12 @@ puts_section "Configure" do
     `cp config/#{fname}.yml.default config/#{fname}.yml`
   end
 
-  print "You MongoDB host (default: 127.0.0.1:27017):"
+  print "Your MongoDB host (default: 127.0.0.1:27017):"
   host = gets.strip
   host = "127.0.0.1:27017" if host == ""
   replace_file('config/mongoid.yml','SETUP_DEVELOPMENT_HOST',host)
 
-  print "You Redis host (default: 127.0.0.1:6379):"
+  print "Your Redis host (default: 127.0.0.1:6379):"
   host = gets.strip
   host = "127.0.0.1:6379" if host == ""
   replace_file('config/redis.yml','SETUP_REDIS_HOST',host.split(":")[0])

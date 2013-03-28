@@ -139,6 +139,7 @@ $(document).ready ->
 
   $('form.new_topic,form.new_reply,form.new_note,form.new_page').sisyphus
     timeout : 2
+    excludeFields : $('input[name=utf8], input[name=_method], input[name=authenticity_token]')
   $('form a.reset').click ->
     $.sisyphus().manuallyReleaseData()
       

@@ -22,7 +22,7 @@ module RubyChina
       #   /api/topics/index.json?page=1&per_page=15
       get do
         @topics = Topic.last_actived.includes(:user).paginate(:page => params[:page], :per_page => params[:per_page] || 30)
-        present @topics, :with => APIEntities::Topic
+        present @topics, :with => APIEntities::Topic, :current_user => current_user
       end
 
       # Get active topics of the specified node
@@ -35,7 +35,7 @@ module RubyChina
         @topics = @node.topics.last_actived
           .limit(page_size)
           .includes(:user)
-        present @topics, :with => APIEntities::Topic
+        present @topics, :with => APIEntities::Topic, :current_user => current_user
       end
 
       # Post a new topic

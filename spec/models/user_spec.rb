@@ -102,13 +102,6 @@ describe User do
       user.newbie?.should be_true
     end
     
-    it "should true when more than a week but not have 10+ replies" do
-      user.verified = false
-      user.created_at = 8.days.ago
-      user.replies_count = 9
-      user.newbie?.should be_true
-    end
-    
     it "should false when more than a week and have 10+ replies" do
       user.verified = false
       user.created_at = 10.days.ago

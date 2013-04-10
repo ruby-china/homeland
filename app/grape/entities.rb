@@ -42,6 +42,12 @@ module RubyChina
     
     class Topic < Grape::Entity
       expose :id, :title, :created_at, :updated_at, :replied_at, :replies_count, :node_name, :node_id, :last_reply_user_id, :last_reply_user_login
+      expose (:favorited){ |topic,options|
+        !!options[:current_user] &&  options[:current_user].favorite_topic_ids.include?(topic.id) 
+      }
+      expose (:liked){ |topic,options|
+        !!options[:current_user] &&  topic.liked_by_user?(options[:current_user])
+      }      
       expose :user, :using => APIEntities::User
     end
 

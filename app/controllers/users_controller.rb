@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @topics = @user.topics.recent.limit(10)
+    @topics = @user.topics.high_likes.limit(20)
     @replies = @user.replies.only(:topic_id,:body_html,:created_at).recent.includes(:topic).limit(10)
     set_seo_meta("#{@user.login}")
     drop_breadcrumb(@user.login)

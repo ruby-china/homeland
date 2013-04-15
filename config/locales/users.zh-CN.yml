@@ -25,7 +25,7 @@
     not_recieve_unlock_mail: "未收到解锁邮件?"
     current_have: "目前已经有"
     users_joined: "位会员加入了"
-    hot_users: "活跃会员"
+    hot_users: "TOP 100 活跃会员"
     recent_joined: "最新加入的会员"
     edit_on_gravatar: "如需修改头像，请进入"
     menu:

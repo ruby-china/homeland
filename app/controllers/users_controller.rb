@@ -7,8 +7,7 @@ class UsersController < ApplicationController
 
   def index
     @total_user_count = User.count
-    @active_users = User.hot.limit(30)
-    @recent_join_users = User.recent.limit(30)
+    @active_users = User.hot.limit(100)
     drop_breadcrumb t("common.index")
   end
 

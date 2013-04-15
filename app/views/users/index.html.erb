@@ -9,14 +9,4 @@
       </div>
     <% end %>
   </div>
-
-  <div id="recent_users" class="user_list box clearfix">
-    <h2><%= t("users.recent_joined") %></h2>
-    <% @recent_join_users.each do |item| %>
-      <div class="item span1">
-        <div class="avatar"><%= user_avatar_tag(item) %></div>
-        <div class="name"><%= user_name_tag(item) %></div>
-      </div>
-    <% end %>
-  </div>
 </div>

@@ -12,7 +12,9 @@ class UsersController < ApplicationController
   end
 
   def show
-    @topics = @user.topics.high_likes.limit(20)
+    # 排除掉几个非技术的节点
+    without_node_ids = [21,22,23,31,49,51,57,25]
+    @topics = @user.topics.without_node_ids(without_node_ids).high_likes.limit(20)
     @replies = @user.replies.only(:topic_id,:body_html,:created_at).recent.includes(:topic).limit(10)
     set_seo_meta("#{@user.login}")
     drop_breadcrumb(@user.login)

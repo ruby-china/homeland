@@ -1,5 +1,5 @@
 # coding: utf-8
-require File.expand_path('../../../lib/markdown', __FILE__)
+require 'spec_helper'
 
 describe 'markdown' do
   let(:upload_url) { '' }
@@ -113,6 +113,20 @@ describe 'markdown' do
 
         specify { doc.css('a').should be_empty }
         specify { doc.css('pre').inner_html.should == "@user\n" }
+      end
+
+      context '@var in coffeescript' do
+        let(:raw) {
+          <<-MD.gsub(/^ {12}/, '')
+            ```coffeescript
+            @var
+            ```
+          MD
+        }
+
+        it 'should not leave it as placeholder' do
+          doc.to_html.should include('var')
+        end
       end
     end
 

@@ -88,7 +88,7 @@ class MarkdownTopicConverter < MarkdownConverter
     return '' if text.blank?
 
     convert_bbcode_img(text)
-    users = nomalize_user_mentions(text)
+    users = normalize_user_mentions(text)
 
     # 如果 ``` 在刚刚换行的时候 Redcapter 无法生成正确，需要两个换行
     text.gsub!("\n```","\n\n```")
@@ -142,14 +142,14 @@ class MarkdownTopicConverter < MarkdownConverter
     end
   end
 
-  NOMALIZE_USER_REGEXP = /(^|[^a-zA-Z0-9_!#\$%&*@＠])@([a-zA-Z0-9_]{1,20})/io
+  NORMALIZE_USER_REGEXP = /(^|[^a-zA-Z0-9_!#\$%&*@＠])@([a-zA-Z0-9_]{1,20})/io
   LINK_USER_REGEXP = /(^|[^a-zA-Z0-9_!#\$%&*@＠])@(user[0-9]{1,6})/io
 
   # rename user name using incremental id
-  def nomalize_user_mentions(text)
+  def normalize_user_mentions(text)
     users = []
 
-    text.gsub!(NOMALIZE_USER_REGEXP) do
+    text.gsub!(NORMALIZE_USER_REGEXP) do
       prefix = $1
       user = $2
       users.push(user)
@@ -159,9 +159,14 @@ class MarkdownTopicConverter < MarkdownConverter
     users
   end
 
+  def link_mention_user(doc, users)
+    link_mention_user_in_text(doc, users)
+    link_mention_user_in_code(doc, users)
+  end
+
   # convert '@user' to link
   # match any user even not exist.
-  def link_mention_user(doc, users)
+  def link_mention_user_in_text(doc, users)
     doc.search('text()').each do |node|
       content = node.to_html
       next if !content.include?('@')
@@ -180,6 +185,20 @@ class MarkdownTopicConverter < MarkdownConverter
       }
 
       node.replace(content)
+    end
+  end
+
+  # Some code highlighter mark `@` and following characters as different
+  # syntax class.
+  def link_mention_user_in_code(doc, users)
+    doc.css('pre.highlight span').each do |node|
+      if node.previous && node.previous.inner_html == '@' && node.inner_html =~ /\Auser(\d+)\z/
+        user_id = $1
+        user = users[user_id.to_i - 1]
+        if user
+          node.inner_html = user
+        end
+      end
     end
   end
 

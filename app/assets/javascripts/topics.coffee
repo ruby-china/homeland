@@ -39,9 +39,7 @@ window.Topics =
   reply : (floor,login) ->
     reply_body = $("#reply_body")
     new_text = "##{floor}楼 @#{login} "
-    if reply_body.val().trim().length == 0
-      new_text += ''
-    else
+    unless reply_body.val().trim().length == 0
       new_text = "\n#{new_text}"
     reply_body.focus().val(reply_body.val() + new_text)
     return false

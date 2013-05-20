@@ -172,15 +172,21 @@ window.Topics =
       $(el).data("followed", true)
       $("i",el).attr("class", "icon small_followed")
     false
+    
+  submitTextArea : (el) ->
+    if $(el.target).val().trim().length > 0
+      $("#reply > form").submit()
+    return false
 
 # pages ready
 $(document).ready ->
   bodyEl = $("body")
 
   $("textarea").bind "keydown","ctrl+return",(el) ->
-    if $(el.target).val().trim().length > 0
-      $("#reply > form").submit()
-    return false
+    return Topics.submitTextArea(el)
+    
+  $("textarea").bind "keydown","Meta+return",(el) ->
+    return Topics.submitTextArea(el)
 
   Topics.initCloseWarning($("textarea.closewarning"))
 

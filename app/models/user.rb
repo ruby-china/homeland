@@ -176,7 +176,7 @@ class User
       if not self.location.blank?
         old_location = Location.find_by_name(self.location_was)
         old_location.inc(:users_count, -1) if not old_location.blank?
-        location = Location.find_or_create_by_name(self.location)
+        location = Location.find_or_create_by(name: self.location.strip)
         location.inc(:users_count, 1)
         self.location_id = (location.blank? ? nil : location.id)
       else

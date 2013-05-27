@@ -25,7 +25,7 @@ defaults: &defaults
   external_feed_url: "http://ruby-taiwan.org/topics/feed"
   external_feed_name: "Ruby Taiwan Group"
   twitter_id: "ruby_china"
-  gravatar_proxy: "http://ruby-china.org"
+  gravatar_proxy: "http://gravatar.com"
 
 development:
   <<: *defaults

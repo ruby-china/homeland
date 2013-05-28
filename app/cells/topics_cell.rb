@@ -45,7 +45,7 @@ class TopicsCell < BaseCell
     topic = args[:topic]
     limit = topic.replies_count > 20 ? 20 : topic.replies_count
     limit = 1 if limit == 0
-    @topics = topic.node.topics.recent.limit(limit)
+    @topics = topic.node.topics.recent.not_in(id: [topic.id]).limit(limit)
     render
   end
 

@@ -73,7 +73,13 @@ describe TopicsCell do
   describe "sidebar_for_node_recent_topics" do
     let(:node) { Factory(:node) }
     let(:topic0) { Factory(:topic, :node => node) }
+
+    it "should not render if node only has one topic" do
+      render_cell(:topics, :sidebar_for_node_recent_topics, :topic => topic0).should_not have_css("div.box ul li")
+    end
+
     it "should render" do
+      topic1 = Factory(:topic, :node => node)
       render_cell(:topics, :sidebar_for_node_recent_topics, :topic => topic0).should have_css("div.box ul li", :count => 1)
     end
 
@@ -82,6 +88,7 @@ describe TopicsCell do
       reply1 = Factory(:reply, :topic => topic0)
       reply2 = Factory(:reply, :topic => topic0)
       topic1 = Factory(:topic, :node => node)
+      topic2 = Factory(:topic, :node => node)
       render_cell(:topics, :sidebar_for_node_recent_topics, :topic => topic0).should have_css("div.box ul li", :count => 2)
     end
   end

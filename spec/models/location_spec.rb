@@ -18,12 +18,12 @@ describe Location do
   end
 
   it "should find_by_name will result exist item" do
-    item = Location.find_or_create_by_name(@location.name)
+    item = Location.find_or_create_by(name: @location.name)
     item.id.should == @location.id
   end
 
   it "should find_by_name will create new item when it not exist" do
-    item = Location.find_or_create_by_name("Beijing")
+    item = Location.find_or_create_by(name: "Beijing")
     item.id.should_not == nil
     item.name.should == "Beijing"
   end

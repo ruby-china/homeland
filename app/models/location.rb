@@ -19,10 +19,4 @@ class Location
     self.where(:name => query).first
   end
 
-  def self.find_or_create_by_name(name)
-    if not location = self.find_by_name(name)
-      location = self.create(:name => name.strip)
-    end
-    location
-  end
 end

@@ -33,7 +33,7 @@ class <%= controller_class_name %>Controller < <%= controller_class_name.include
   end
 
   def create
-    @<%= file_name %> = <%= orm_class.build(file_name.camelize, "params[:#{file_name}]") %>
+    @<%= file_name %> = <%= orm_class.build(file_name.camelize, "params[:#{file_name}].permit!") %>
 
     respond_to do |format|
       if @<%= file_name %>.save
@@ -50,7 +50,7 @@ class <%= controller_class_name %>Controller < <%= controller_class_name.include
     @<%= file_name %> = <%= orm_class.find(file_name.camelize, "params[:id]") %>
 
     respond_to do |format|
-      if @<%= file_name %>.update_attributes(params[:<%= file_name %>])
+      if @<%= file_name %>.update_attributes(params[:<%= file_name %>].permit!)
         format.html { redirect_to(<%= index_helper %>_path, :notice => '<%= human_name %> 更新成功。') }
         format.json
       else

@@ -76,7 +76,7 @@ class User
         :user_id => id,
         :_id.in  => unread_ids,
         :read    => false
-      }).update_all(:read => true, :updated_at => Time.now)
+      }).update_all(read: true, updated_at: Time.now)
     end
   end
 

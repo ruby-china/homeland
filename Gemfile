@@ -6,7 +6,6 @@ gem 'actionpack-action_caching', '1.0.0'
 gem 'sass-rails', "~> 4.0.0.rc1"
 gem 'coffee-rails', "~> 4.0.0"
 gem 'uglifier', '>= 1.3.0'
-gem 'turbo-sprockets-rails3', '0.3.2'
 
 gem "rails-i18n","0.1.8"
 gem "jquery-rails", "2.0.1"
@@ -56,7 +55,7 @@ gem "rouge", "~> 0.3.2"
 gem 'nokogiri', "~> 1.5.6"
 
 # YAML 配置信息
-gem "settingslogic", "~> 2.0.6"
+gem "settingslogic", "~> 2.0.9"
 
 gem "cells", github: 'apotonick/cells', ref: '0dcdc190e949af1a821f31f33f76f407a6da47b4'
 

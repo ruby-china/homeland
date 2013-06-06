@@ -4,7 +4,7 @@ require File.expand_path('../boot', __FILE__)
 require "action_controller/railtie"
 require "action_mailer/railtie"
 require "rails/test_unit/railtie"
-require "sprockets/railtie"
+require 'sprockets/railtie'
 
 
 if defined?(Bundler)
@@ -43,6 +43,10 @@ module RubyChina
     config.to_prepare {
       Devise::Mailer.layout "mailer"
     }
+    
+    config.assets.precompile += %w(application.css app.js topics.css topics.js window.css front.css cpanel.css search.css
+        users.css pages.css pages.js notifications.js notifications.css sites.css sites.js notes.css notes.js 
+        gfdynamicfeedcontrol.css gfdynamicfeedcontrol.js mobile.css home.css)
   end
 end
 

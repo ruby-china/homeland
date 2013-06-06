@@ -231,7 +231,7 @@ class User
     
     self.notifications.unread.any_of({:mentionable_type => 'Topic', :mentionable_id => topic.id},
                                      {:mentionable_type => 'Reply', :mentionable_id.in => topic.reply_ids},
-                                     {:reply_id.in => topic.reply_ids}).update_all(:read => true)
+                                     {:reply_id.in => topic.reply_ids}).update_all(read: true)
     
     # 处理 last_reply_id 是空的情况
     last_reply_id = topic.last_reply_id || -1

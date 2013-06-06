@@ -65,7 +65,7 @@ gem "sidekiq", "2.5.3"
 gem 'faye-rails','1.0.0'
 
 # 分享功能
-gem "social-share-button", "~> 0.1.0"
+gem "social-share-button", '0.1.4'
 
 # 表单
 gem 'simple_form', "3.0.0.rc"

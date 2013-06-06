@@ -33,7 +33,7 @@ class Cpanel::LocationsController < Cpanel::ApplicationController
   end
 
   def create
-    @location = Location.new(params[:location])
+    @location = Location.new(params[:location].permit!)
 
     respond_to do |format|
       if @location.save
@@ -50,7 +50,7 @@ class Cpanel::LocationsController < Cpanel::ApplicationController
     @location = Location.find(params[:id])
 
     respond_to do |format|
-      if @location.update_attributes(params[:location])
+      if @location.update_attributes(params[:location].permit!)
         format.html { redirect_to(cpanel_locations_path, :notice => 'Location 更新成功。') }
         format.json
       else

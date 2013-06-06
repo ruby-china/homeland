@@ -1,16 +1,10 @@
 require 'spec_helper'
 
-USING_PARANOIA = false
-
 class WalkingDead
   include Mongoid::Document
   include Mongoid::BaseModel
 
-  if USING_PARANOIA
-    include Mongoid::Paranoia
-  else
-    include Mongoid::SoftDelete
-  end
+  include Mongoid::SoftDelete
 
   field :name
 end

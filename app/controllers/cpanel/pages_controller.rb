@@ -21,7 +21,7 @@ class Cpanel::PagesController < Cpanel::ApplicationController
   end
 
   def create
-    @page = Page.new(params[:page])
+    @page = Page.new(params[:page].permit!)
 
     if @page.save
       redirect_to(cpanel_pages_path, :notice => 'Page was successfully created.')

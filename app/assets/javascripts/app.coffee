@@ -85,10 +85,9 @@ window.App =
     $('span',el).text("#{likes_count}人喜欢")
     $("i.icon",el).attr("class","icon small_liked")
 
-  # 绑定 @ 回复功能
   atReplyable : (el, logins) ->
     return if logins.length == 0
-    $(el).atWho "@"
+    $(el).atWho "@",
       data : logins
       tpl : "<li data-value='${login}'>${login} <small>${name}</small></li>"
 

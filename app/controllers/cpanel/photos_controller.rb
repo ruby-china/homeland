@@ -18,7 +18,7 @@ class Cpanel::PhotosController < Cpanel::ApplicationController
   end
 
   def create
-    @photo = Photo.new(params[:photo])
+    @photo = Photo.new(params[:photo].permit!)
     @photo.user_id = current_user.id
     if @photo.save
       redirect_to(cpanel_photo_path(@photo), :notice => 'Photo was successfully created.')
@@ -29,7 +29,7 @@ class Cpanel::PhotosController < Cpanel::ApplicationController
 
   def update
     @photo = Photo.find(params[:id])
-    if @photo.update_attributes(params[:photo])
+    if @photo.update_attributes(params[:photo].permit!)
       redirect_to(cpanel_photo_path(@photo), :notice => 'Photo was successfully updated.')
     else
       render :action => "edit"

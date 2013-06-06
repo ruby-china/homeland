@@ -58,7 +58,7 @@ class PagesController < ApplicationController
   end
 
   def create
-    @page = Page.new(params[:page])
+    @page = Page.new(page_params)
     @page.user_id = current_user.id
     @page.version_enable = true
 
@@ -74,7 +74,7 @@ class PagesController < ApplicationController
     @page.version_enable = true
     @page.user_id = current_user.id
 
-    if @page.update_attributes(params[:page])
+    if @page.update_attributes(page_params)
       redirect_to page_path(@page.slug), notice: t("common.update_success")
     else
       render action: "edit"
@@ -93,5 +93,9 @@ protected
 
   def init_base_breadcrumb
     drop_breadcrumb("Wiki", pages_path)
+  end
+
+  def page_params
+    params.require(:page).permit(:title, :body, :slug, :change_desc)
   end
 end

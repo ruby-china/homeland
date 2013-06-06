@@ -33,7 +33,7 @@ class Cpanel::SiteNodesController < Cpanel::ApplicationController
   end
 
   def create
-    @site_node = SiteNode.new(params[:site_node])
+    @site_node = SiteNode.new(params[:site_node].permit!)
 
     respond_to do |format|
       if @site_node.save
@@ -50,7 +50,7 @@ class Cpanel::SiteNodesController < Cpanel::ApplicationController
     @site_node = SiteNode.find(params[:id])
 
     respond_to do |format|
-      if @site_node.update_attributes(params[:site_node])
+      if @site_node.update_attributes(params[:site_node].permit!)
         format.html { redirect_to(cpanel_site_nodes_path, :notice => 'Site node 更新成功。') }
         format.json
       else

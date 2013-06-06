@@ -20,7 +20,7 @@ class Cpanel::SectionsController < Cpanel::ApplicationController
   end
 
   def create
-    @section = Section.new(params[:section])
+    @section = Section.new(params[:section].permit!)
 
     if @section.save
       redirect_to(cpanel_sections_path, :notice => 'Section was successfully created.')
@@ -32,7 +32,7 @@ class Cpanel::SectionsController < Cpanel::ApplicationController
   def update
     @section = Section.find(params[:id])
 
-    if @section.update_attributes(params[:section])
+    if @section.update_attributes(params[:section].permit!)
       redirect_to(cpanel_sections_path, :notice => 'Section was successfully updated.')
     else
       render :action => "edit"

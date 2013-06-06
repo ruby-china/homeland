@@ -81,7 +81,7 @@ class User
   end
 
   attr_accessor :password_confirmation
-  attr_accessible :name, :email_public, :location, :company, :bio, :website, :github, :twitter, :tagline, :avatar, :password, :password_confirmation
+  ACCESSABLE_ATTRS = [:name, :email_public, :location, :company, :bio, :website, :github, :twitter, :tagline, :avatar, :password, :password_confirmation]
 
   validates :login, :format => {:with => /\A\w+\z/, :message => '只允许数字、大小写字母和下划线'}, :length => {:in => 3..20}, :presence => true, :uniqueness => {:case_sensitive => false}
 
@@ -175,9 +175,9 @@ class User
     if self.location_changed?
       if not self.location.blank?
         old_location = Location.find_by_name(self.location_was)
-        old_location.inc(:users_count, -1) if not old_location.blank?
+        old_location.inc(users_count: -1) if not old_location.blank?
         location = Location.find_or_create_by_name(self.location)
-        location.inc(:users_count, 1)
+        location.inc(users_count: 1)
         self.location_id = (location.blank? ? nil : location.id)
       else
         self.location_id = nil
@@ -242,8 +242,8 @@ class User
   def like(likeable)
     return false if likeable.blank?
     return false if likeable.liked_by_user?(self)
-    likeable.push(:liked_user_ids, self.id)
-    likeable.inc(:likes_count, 1)
+    likeable.push(liked_user_ids: self.id)
+    likeable.inc(likes_count: 1)
     likeable.touch
   end
 
@@ -251,8 +251,8 @@ class User
   def unlike(likeable)
     return false if likeable.blank?
     return false if not likeable.liked_by_user?(self)
-    likeable.pull(:liked_user_ids, self.id)
-    likeable.inc(:likes_count, -1)
+    likeable.pull(liked_user_ids: self.id)
+    likeable.inc(likes_count: -1)
     likeable.touch
   end
 
@@ -261,7 +261,7 @@ class User
     return false if topic_id.blank?
     topic_id = topic_id.to_i
     return false if self.favorite_topic_ids.include?(topic_id)
-    self.push(:favorite_topic_ids, topic_id)
+    self.push(favorite_topic_ids: topic_id)
     true
   end
 
@@ -269,7 +269,7 @@ class User
   def unfavorite_topic(topic_id)
     return false if topic_id.blank?
     topic_id = topic_id.to_i
-    self.pull(:favorite_topic_ids, topic_id)
+    self.pull(favorite_topic_ids: topic_id)
     true
   end
 

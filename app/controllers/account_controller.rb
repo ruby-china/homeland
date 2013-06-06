@@ -13,7 +13,7 @@ class AccountController < Devise::RegistrationsController
     resource.email = resource_params[:email] if self.resource.email.blank?
 
     # code from Devise
-    if resource.update_with_password(resource_params)
+    if resource.update_with_password(account_update_params)
       if is_navigational_format?
         if resource.respond_to?(:pending_reconfirmation?) && resource.pending_reconfirmation?
           flash_key = :update_needs_confirmation
@@ -30,7 +30,7 @@ class AccountController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    build_resource
+    build_resource(sign_up_params)
     resource.login = params[resource_name][:login]
     resource.email = params[resource_name][:email]
     if resource.save
@@ -54,4 +54,5 @@ class AccountController < Devise::RegistrationsController
     sign_out_and_redirect("/login")
     set_flash_message :notice, :destroyed
   end
+
 end

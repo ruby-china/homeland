@@ -26,13 +26,12 @@ class Page
   has_many :versions, :class_name => "PageVersion"
 
   attr_accessor :user_id, :change_desc, :version_enable
-  attr_accessible :title, :body, :slug, :change_desc
 
   validates_presence_of :slug, :title, :body
   # 当需要记录版本时，如果是更新，那么要求填写 :change_desc
   validates_presence_of :user_id, :if => Proc.new { |p| p.version_enable == true }
   validates_presence_of :change_desc, :if => Proc.new { |p| p.version_enable == true and !p.new_record? }
-  validates_format_of :slug, :with => /^[a-z0-9\-_]+$/
+  validates_format_of :slug, :with => /\A[a-z0-9\-_]+\z/
   validates_uniqueness_of :slug
 
   before_save :markdown_for_body_html
@@ -59,7 +58,7 @@ class Page
     return true if not self.version_enable
     # 只有 body, title, slug 更改了才更新版本
     if self.body_changed? or self.title_changed? or self.slug_changed?
-      self.inc(:version, 1)
+      self.inc(version: 1)
       PageVersion.create(:user_id => self.user_id,
                          :page_id => self.id,
                          :desc => self.change_desc,

@@ -8,7 +8,7 @@ class Photo
 
   belongs_to :user
 
-  attr_accessible :image
+  ACCESSABLE_ATTRS = [:image]
 
   # 封面图
   mount_uploader :image, PhotoUploader

@@ -2,7 +2,7 @@ App.loading(false);
 comments_box = $("#<%= @comment.commentable_type %>_<%= @comment.commentable_id %>_cell_comments");
 comments_form = $("#<%= @comment.commentable_type %>_<%= @comment.commentable_id %>_cell_new_comment");
 <% if @success %>
-comment_line = '<%= escape_javascript(render("comment",:item => @comment)) %>';
+comment_line = '<%= j(render("comment",:item => @comment)) %>';
 comments_box.append(comment_line);
 $(comment_line).fadeOut("fast");
 $("abbr.timeago").timeago();

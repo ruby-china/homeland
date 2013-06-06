@@ -4,11 +4,11 @@
     location.href = location.href;
   }
   else {
-    $("#replies .items").append('<%= escape_javascript(render("reply", :reply => @reply, :reply_counter => @topic.replies_count - 1, :display_edit => true)) %>')
+    $("#replies .items").append('<%= j(render("reply", :reply => @reply, :reply_counter => @topic.replies_count - 1, :display_edit => true)) %>')
     .find(".total b").text('<%= @topic.replies_count %>');
     $("#replies .reply a.edit:last").css("display","inline-block");
-    Topics.replyCallback(1,'<%= escape_javascript(@msg) %>');
+    Topics.replyCallback(1,'<%= j(@msg) %>');
   }
 <% else %>
-  Topics.replyCallback(0,'<%= escape_javascript(@msg) %>');
+  Topics.replyCallback(0,'<%= j(@msg) %>');
 <% end %>

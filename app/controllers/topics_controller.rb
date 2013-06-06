@@ -4,7 +4,7 @@ class TopicsController < ApplicationController
   load_and_authorize_resource :only => [:new,:edit,:create,:update,:destroy,:favorite, :follow, :unfollow]
 
   before_filter :set_menu_active
-  caches_page :feed, :node_feed, :expires_in => 1.hours
+  caches_action :feed, :node_feed, :expires_in => 1.hours
   before_filter :init_base_breadcrumb
 
   def index
@@ -104,10 +104,9 @@ class TopicsController < ApplicationController
   end
 
   def create
-    pt = params[:topic]
-    @topic = Topic.new(pt)
+    @topic = Topic.new(topic_params)
     @topic.user_id = current_user.id
-    @topic.node_id = params[:node] || pt[:node_id]
+    @topic.node_id = params[:node] || topic_params[:node_id]
 
     if @topic.save
       redirect_to(topic_path(@topic.id), :notice => t("topics.create_topic_success"))
@@ -126,18 +125,17 @@ class TopicsController < ApplicationController
 
   def update
     @topic = Topic.find(params[:id])
-    pt = params[:topic]
     if @topic.lock_node == false || current_user.admin?
       # 锁定接点的时候，只有管理员可以修改节点
-      @topic.node_id = pt[:node_id]
+      @topic.node_id = topic_params[:node_id]
       
       if current_user.admin? && @topic.node_id_changed?
         # 当管理员修改节点的时候，锁定节点
         @topic.lock_node = true
       end
     end
-    @topic.title = pt[:title]
-    @topic.body = pt[:body]
+    @topic.title = topic_params[:title]
+    @topic.body = topic_params[:body]
 
     if @topic.save
       redirect_to(topic_path(@topic.id), :notice =>  t("topics.update_topic_success"))
@@ -190,6 +188,10 @@ class TopicsController < ApplicationController
       @hot_nodes = Node.hots.limit(10)
     end
     set_seo_meta(t("menu.topics"))
+  end
+  
+  def topic_params
+    params.require(:topic).permit(:title, :body, :node_id)
   end
 
 end

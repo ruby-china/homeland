@@ -6,8 +6,8 @@ class RepliesController < ApplicationController
   before_filter :find_topic
   def create
 
-    @reply = @topic.replies.build(params[:reply])
-
+    @reply = Reply.new(reply_params)
+    @reply.topic_id = @topic.id
     @reply.user_id = current_user.id
 
     if @reply.save
@@ -27,7 +27,7 @@ class RepliesController < ApplicationController
   def update
     @reply = Reply.find(params[:id])
 
-    if @reply.update_attributes(params[:reply])
+    if @reply.update_attributes(reply_params)
       redirect_to(topic_path(@reply.topic_id), :notice => '回帖更新成功.')
     else
       render :action => "edit"
@@ -47,6 +47,10 @@ class RepliesController < ApplicationController
 
   def find_topic
     @topic = Topic.find(params[:topic_id])
+  end
+  
+  def reply_params
+    params.require(:reply).permit(:body)
   end
 
 end

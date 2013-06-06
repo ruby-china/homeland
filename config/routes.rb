@@ -26,8 +26,8 @@ RubyChina::Application.routes.draw do
       :omniauth_callbacks => "users/omniauth_callbacks"
     }
 
-  match "account/auth/:provider/unbind", to: "users#auth_unbind", via: 'delete', as: 'unbind_account'
-  match "account/update_private_token", to: "users#update_private_token", via: 'post', as: 'update_private_token_account'
+  delete "account/auth/:provider/unbind" => "users#auth_unbind", as: 'unbind_account'
+  post "account/update_private_token" => "users#update_private_token", as: 'update_private_token_account'
 
   resources :notifications, :only => [:index, :destroy] do
     collection do
@@ -37,9 +37,9 @@ RubyChina::Application.routes.draw do
 
   resources :nodes
 
-  match "topics/node:id" => "topics#node", :as => :node_topics
-  match "topics/node:id/feed" => "topics#node_feed", :as => :feed_node_topics
-  match "topics/last" => "topics#recent", :as => :recent_topics
+  get "topics/node:id" => "topics#node", as: 'node_topics'
+  get "topics/node:id/feed" => "topics#node_feed", as: 'feed_node_topics'
+  get "topics/last" => "topics#recent", as: 'recent_topics'
   resources :topics do
     member do
       post :reply
@@ -59,7 +59,7 @@ RubyChina::Application.routes.draw do
   resources :photos
   resources :likes
 
-  match "/search" => "search#index", :as => :search
+  get "/search" => "search#index", as: 'search'
 
   namespace :cpanel do
     root :to => "home#index"
@@ -89,14 +89,14 @@ RubyChina::Application.routes.draw do
     resources :locations
   end
 
-  match "api", :to => "home#api"
+  get "api" => "home#api", as: 'api'
   mount RubyChina::API => "/"
   mount RubyChina::APIV2 => "/"
 
   # WARRING! 请保持 User 的 routes 在所有路由的最后，以便于可以让用户名在根目录下面使用，而又不影响到其他的 routes
   # 比如 http://ruby-china.org/huacnlee
-  match "users/city/:id", :to => "users#city", :as => :location_users
-  match "users", :to => "users#index", :as => :users
+  get "users/city/:id" => "users#city", as: 'location_users'
+  get "users" => "users#index", as: 'users'
   resources :users, :path => "" do
     member do
       get :topics

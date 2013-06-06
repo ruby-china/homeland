@@ -3,7 +3,6 @@ require File.expand_path('../boot', __FILE__)
 
 require "action_controller/railtie"
 require "action_mailer/railtie"
-require "active_resource/railtie"
 require "rails/test_unit/railtie"
 require "sprockets/railtie"
 
@@ -20,12 +19,6 @@ module RubyChina
     config.autoload_paths += %W(#{config.root}/lib)
     config.autoload_paths += %W(#{config.root}/app/grape)
 
-    # Only load the plugins named here, in the order given (default is alphabetical).
-    # :all can be used as a placeholder for all plugins not explicitly named.
-    # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
-
-    # Activate observers that should always be running.
-    # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
     config.time_zone = 'Beijing'
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
@@ -51,15 +44,6 @@ module RubyChina
     config.to_prepare {
       Devise::Mailer.layout "mailer"
     }
-
-    # 其他项目用的时候注意修改这里
-    # if Rails.env == "production"
-    #   config.middleware.use ExceptionNotifier,
-    #   :email_prefix         => "[Ruby China] ",
-    #   :sender_address       => %{"notifier" <notifier@ruby-china.org>},
-    #   :exception_recipients => %w{huacnlee@gmail.com},
-    #   :ignore_exceptions    => ['Mongoid::Errors::DocumentNotFound'] + ExceptionNotifier.default_ignore_exceptions
-    # end
   end
 end
 

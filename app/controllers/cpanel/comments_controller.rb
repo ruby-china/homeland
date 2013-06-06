@@ -12,7 +12,7 @@ class Cpanel::CommentsController < Cpanel::ApplicationController
   def update
     @comment = Comment.find(params[:id])
 
-    if @comment.update_attributes(params[:comment])
+    if @comment.update_attributes(params[:comment].permit!)
       redirect_to cpanel_comments_path(@cpanel_comment), notice: 'Comment was successfully updated.'
     else
       render action: "edit"

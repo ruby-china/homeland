@@ -21,7 +21,7 @@ class Cpanel::TopicsController < Cpanel::ApplicationController
   end
 
   def create
-    @topic = Topic.new(params[:topic])
+    @topic = Topic.new(params[:topic].permit!)
 
     if @topic.save
       redirect_to(cpanel_topics_path, :notice => 'Topic was successfully created.')
@@ -33,7 +33,7 @@ class Cpanel::TopicsController < Cpanel::ApplicationController
   def update
     @topic = Topic.unscoped.find(params[:id])
 
-    if @topic.update_attributes(params[:topic])
+    if @topic.update_attributes(params[:topic].permit!)
       redirect_to(cpanel_topics_path, :notice => 'Topic was successfully updated.')
     else
       render :action => "edit"

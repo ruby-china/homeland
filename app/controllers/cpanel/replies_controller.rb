@@ -23,7 +23,7 @@ class Cpanel::RepliesController < Cpanel::ApplicationController
 
 
   def create
-    @reply = Reply.new(params[:reply])
+    @reply = Reply.new(params[:reply].permit!)
 
     if @reply.save
       redirect_to(cpanel_replies_path, :notice => 'Reply was successfully created.')
@@ -35,7 +35,7 @@ class Cpanel::RepliesController < Cpanel::ApplicationController
   def update
     @reply = Reply.find(params[:id])
 
-    if @reply.update_attributes(params[:reply])
+    if @reply.update_attributes(params[:reply].permit!)
        redirect_to(cpanel_replies_path, :notice => 'Reply was successfully updated.')
     else
       render :action => "edit"

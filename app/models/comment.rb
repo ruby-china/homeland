@@ -12,8 +12,6 @@ class Comment
   belongs_to :commentable, :polymorphic => true
   belongs_to :user
 
-  attr_accessible :commentable_type, :commentable_id, :body
-
   index :user_id => 1
   index :commentable_type => 1
   index :commentable_id => 1
@@ -28,13 +26,13 @@ class Comment
   after_create :increase_counter_cache
   def increase_counter_cache
     return if self.commentable.blank?
-    self.commentable.inc(:comments_count,1)
+    self.commentable.inc(comments_count: 1)
   end
 
   before_destroy :decrease_counter_cache
   def decrease_counter_cache
     return if self.commentable.blank?
-    self.commentable.inc(:comments_count,-1)
+    self.commentable.inc(comments_count: -1)
   end
 
 end

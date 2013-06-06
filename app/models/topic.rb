@@ -40,7 +40,6 @@ class Topic
   belongs_to :last_reply, :class_name => 'Reply'
   has_many :replies, :dependent => :destroy
 
-  attr_accessible :title, :body
   validates_presence_of :user_id, :title, :body, :node_id
 
   index :node_id => 1
@@ -57,12 +56,12 @@ class Topic
   # scopes
   scope :last_actived, desc(:last_active_mark)
   # 推荐的话题
-  scope :suggest, where(:suggested_at.ne => nil).desc(:suggested_at)
-  scope :fields_for_list, without(:body,:body_html)
-  scope :high_likes, desc(:likes_count, :_id)
-  scope :high_replies, desc(:replies_count, :_id)
-  scope :no_reply, where(:replies_count => 0)
-  scope :popular, where(:likes_count.gt => 5)
+  scope :suggest, -> { where(:suggested_at.ne => nil).desc(:suggested_at) }
+  scope :fields_for_list, -> { without(:body,:body_html) }
+  scope :high_likes, -> { desc(:likes_count, :_id) }
+  scope :high_replies, -> { desc(:replies_count, :_id) }
+  scope :no_reply, -> { where(:replies_count => 0) }
+  scope :popular, -> { where(:likes_count.gt => 5) }
   scope :without_node_ids, Proc.new { |ids| where(:node_id.nin => ids) }
 
   def self.find_by_message_id(message_id)
@@ -93,12 +92,12 @@ class Topic
   def push_follower(uid)
     return false if uid == self.user_id
     return false if self.follower_ids.include?(uid)
-    self.push(:follower_ids,uid)
+    self.push(follower_ids: uid)
   end
 
   def pull_follower(uid)
     return false if uid == self.user_id
-    self.pull(:follower_ids,uid)
+    self.pull(follower_ids: uid)
   end
 
   def update_last_reply(reply)

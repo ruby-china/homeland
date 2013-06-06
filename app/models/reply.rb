@@ -24,8 +24,6 @@ class Reply
 
   index :user_id => 1
   index :topic_id => 1
-
-  attr_accessible :body
   
   delegate :title, :to => :topic, :prefix => true, :allow_nil => true
   delegate :login, :to => :user, :prefix => true, :allow_nil => true

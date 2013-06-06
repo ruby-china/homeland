@@ -33,7 +33,7 @@ class Cpanel::SitesController < Cpanel::ApplicationController
   end
 
   def create
-    @site = Site.new(params[:site])
+    @site = Site.new(params[:site].permit!)
 
     respond_to do |format|
       if @site.save
@@ -50,7 +50,7 @@ class Cpanel::SitesController < Cpanel::ApplicationController
     @site = Site.unscoped.find(params[:id])
 
     respond_to do |format|
-      if @site.update_attributes(params[:site])
+      if @site.update_attributes(params[:site].permit!)
         format.html { redirect_to(cpanel_sites_path, :notice => 'Site 更新成功。') }
         format.json
       else

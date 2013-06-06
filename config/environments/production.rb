@@ -24,7 +24,6 @@ RubyChina::Application.configure do
   # config.logger.level = Logger::INFO
 
   # Use a different cache store in production
-  # config.cache_store = :mem_cache_store
   config.cache_store = [:dalli_store,"127.0.0.1", {:namespace => "rb-cn", :compression => true}]
 
   # Disable Rails's static asset server

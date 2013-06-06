@@ -42,7 +42,7 @@ describe SitesController do
       end
 
       it "should create new site if all is well" do
-        params = Factory.attributes_for(:site, :site_node => site_node.id)
+        params = Factory.attributes_for(:site, :site_node_id => site_node.id)
         post :create, :site => params
         response.should redirect_to(sites_path)
       end

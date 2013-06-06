@@ -5,16 +5,16 @@ module Mongoid
     extend ActiveSupport::Concern
 
     included do
-      field :deleted_at, :type => DateTime
+      field :deleted_at, type: DateTime
 
-      default_scope where(:deleted_at => nil)
+      default_scope where(deleted_at: nil)
       alias_method :destroy!, :destroy
     end
 
     def destroy
       if persisted?
-        self.set(:deleted_at,Time.now.utc)
-        self.set(:updated_at,Time.now.utc)
+        self.set(deleted_at: Time.now.utc)
+        self.set(updated_at: Time.now.utc)
       end
 
       @destroyed = true

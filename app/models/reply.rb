@@ -46,7 +46,7 @@ class Reply
   after_update :update_parent_topic_updated_at
   def update_parent_topic_updated_at
     if not self.topic.blank?
-      self.topic.set(:updated_at, Time.now)
+      self.topic.set(updated_at: Time.now)
     end
   end
 

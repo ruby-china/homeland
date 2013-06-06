@@ -3,7 +3,8 @@ require 'spec_helper'
 class WalkingDead
   include Mongoid::Document
   include Mongoid::BaseModel
-
+  include Mongoid::Attributes::Dynamic
+  include Mongoid::Timestamps
   include Mongoid::SoftDelete
 
   field :name

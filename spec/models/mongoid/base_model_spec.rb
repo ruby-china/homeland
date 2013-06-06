@@ -4,6 +4,7 @@ describe Mongoid::BaseModel do
   class Monkey
     include Mongoid::Document
     include Mongoid::BaseModel
+    include Mongoid::Attributes::Dynamic
 
     field :name
   end

@@ -140,10 +140,10 @@ class Topic
   
   def self.auto_space_with_en_zh(str)
     # https://gist.github.com/luikore/5775559
-    str.gsub! /(\p{Han})([a-zA-Z0-9@#])/u do
+    str.gsub! /((?![年月日])\p{Han})([a-zA-Z0-9@#])/u do
       "#$1 #$2"
     end
-    str.gsub! /([a-zA-Z0-9@#!\/])(\p{Han})/u do
+    str.gsub! /([a-zA-Z0-9@#!\/])((?![年月日])\p{Han})/u do
       "#$1 #$2"
     end
     str

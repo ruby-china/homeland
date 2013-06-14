@@ -47,8 +47,6 @@ class NotesController < ApplicationController
   def update
     @note = current_user.notes.find(params[:id])
     if @note.update_attributes(note_params)
-      # TODO: 不知哪里有个 Bug, checkbox 的 Boolean 值无法更新到数据库里面，临时单独 set 一下
-      @note.set(publish: (note_params[:publish] == "1"))
       redirect_to(@note, :notice => t("common.update_success"))
     else
       render :action => "edit"

@@ -16,7 +16,7 @@ class User
   # Email 的 md5 值，用于 Gravatar 头像
   field :email_md5
   # Email 是否公开
-  field :email_public, :type => Boolean
+  field :email_public, :type => Mongoid::Boolean
   field :encrypted_password, :type => String, :default => ""
 
   validates_presence_of :email
@@ -45,9 +45,9 @@ class User
   field :github
   field :twitter
   # 是否信任用户
-  field :verified, :type => Boolean, :default => false
+  field :verified, :type => Mongoid::Boolean, :default => false
   field :state, :type => Integer, :default => 1
-  field :guest, :type => Boolean, :default => false
+  field :guest, :type => Mongoid::Boolean, :default => false
   field :tagline
   field :topics_count, :type => Integer, :default => 0
   field :replies_count, :type => Integer, :default => 0

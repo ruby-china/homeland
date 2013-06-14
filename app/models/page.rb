@@ -16,7 +16,7 @@ class Page
   # Markdown 格式化后的 html
   field :body_html
   field :editor_ids, :type => Array, :default => []
-  field :locked, :type => Boolean, :default => false
+  field :locked, :type => Mongoid::Boolean, :default => false
   field :comments_count, :type => Integer, :default => 0
   # 目前版本号
   field :version, :type => Integer, :default => 0

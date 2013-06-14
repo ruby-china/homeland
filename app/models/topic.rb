@@ -30,7 +30,7 @@ class Topic
   # 用于排序的标记
   field :last_active_mark, :type => Integer
   # 是否锁定节点
-  field :lock_node, :type => Boolean, :default => false
+  field :lock_node, :type => Mongoid::Boolean, :default => false
 
   belongs_to :user, :inverse_of => :topics
   counter_cache :name => :user, :inverse_of => :topics

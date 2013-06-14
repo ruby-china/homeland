@@ -10,7 +10,7 @@ class Note
   field :body
   field :word_count, :type => Integer
   field :changes_count, :type =>  Integer, :default => 0
-  field :publish, :type => Boolean, :default => false
+  field :publish, :type => Mongoid::Boolean, :default => false
   belongs_to :user
   
   counter :hits,:default => 0

@@ -82,6 +82,7 @@ gem 'garelic', '0.0.2'
 gem "god"
 
 gem 'dalli', '1.1.1'
+gem 'thin', "1.5.0"
 
 group :development, :test do
   gem 'capistrano', '2.9.0', require: false
@@ -93,7 +94,6 @@ group :development, :test do
   gem "capybara", "~> 0.4.1"
   gem 'api_taster', '0.6.0'
   gem "letter_opener"
-  gem 'thin', "1.5.0"
 
   # 用于组合小图片
   gem "sprite-factory", "1.4.1", require: false

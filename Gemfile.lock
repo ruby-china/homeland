@@ -146,7 +146,7 @@ GEM
       eventmachine (>= 0.12.9)
     erubis (2.7.0)
     escape_utils (0.2.4)
-    eventmachine (0.12.10)
+    eventmachine (1.0.3)
     exception_notification (2.6.1)
       actionmailer (>= 3.0.4)
     execjs (1.4.0)
@@ -399,6 +399,7 @@ DEPENDENCIES
   database_cleaner
   devise (= 3.0.0.rc)
   devise-encryptable (= 0.1.2)
+  eventmachine (= 1.0.3)
   exception_notification
   factory_girl_rails
   faye-rails (= 1.0.0)

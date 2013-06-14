@@ -1,11 +1,6 @@
 language: ruby
 bundler_args: --without development
 
-before_install:
-  - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1280x1024x16"
-  - "export DISPLAY=:99.0"
-  - "export JASMINE_BROWSER=firefox"
-
 services:
   - mongodb
   - redis-server
@@ -13,14 +8,10 @@ services:
 matrix:
   allow_failures:
     - rvm: ruby-head
-    - rvm: jruby-head
 
 rvm:
   - 1.9.3
   - 2.0.0
-  - jruby-head
-
-env: JRUBY_OPTS="-Xcext.enabled=true -Xmx512m -Xcompile.invokedynamic=false"
 
 before_script:
   - mongo ruby_china_test --eval 'db.addUser("travis", "test");'

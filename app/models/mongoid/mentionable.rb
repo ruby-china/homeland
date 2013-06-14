@@ -4,7 +4,6 @@ module Mongoid
     included do
       field :mentioned_user_ids, :type => Array, :default => []
       before_save :extract_mentioned_users
-      after_create :send_mention_notification
       after_destroy :delete_notifiaction_mentions
       has_many :notification_mentions, :as => :mentionable, :class_name => 'Notification::Mention'
 
@@ -42,7 +41,7 @@ module Mongoid
       [user]
     end
 
-    def send_mention_notification
+    def send_mention_notification!
       (mentioned_users - no_mention_users).each do |user|
         self.notified_user_ids << user.id
         Notification::Mention.create :user => user, :mentionable => self

@@ -82,6 +82,7 @@ GEM
       sass-rails
     arel (4.0.0)
     atomic (1.1.9)
+    auto-space (0.0.1)
     bcrypt-ruby (3.0.1)
     bootstrap-sass (2.3.1.3)
       sass (~> 3.2)
@@ -383,6 +384,7 @@ DEPENDENCIES
   actionpack-action_caching (= 1.0.0)
   anjlab-bootstrap-rails (= 2.0.3.2)
   api_taster (= 0.6.0)
+  auto-space (= 0.0.1)
   bootstrap-will_paginate (= 0.0.3)
   bootstrap_helper!
   cancan (~> 1.6.10)

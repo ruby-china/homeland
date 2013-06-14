@@ -49,10 +49,11 @@ gem 'redis-namespace','~> 1.2.1'
 # 将一些数据存放入 Redis
 gem "redis-objects", "0.5.2"
 
-# Markdown 格式
+# Markdown 格式 & 文本处理
 gem "redcarpet", "~> 2.2.2"
 gem "rouge", "~> 0.3.2"
 gem 'nokogiri', "~> 1.5.6"
+gem 'auto-space', '0.0.1'
 
 # YAML 配置信息
 gem "settingslogic", "~> 2.0.9"

@@ -65,21 +65,20 @@ class Reply
     topic = Topic.find_by_id(reply.topic_id)
     return if topic.blank?
     
-    # @ 通知
-    reply.send_mention_notification!
+    notified_user_ids = reply.mentioned_user_ids
     
     # 给发帖人发回帖通知
-    if reply.user_id != topic.user_id && !reply.mentioned_user_ids.include?(topic.user_id)
+    if reply.user_id != topic.user_id && !notified_user_ids.include?(topic.user_id)
       Notification::TopicReply.create :user_id => topic.user_id, :reply_id => reply.id
-      reply.notified_user_ids << topic.user_id
+      notified_user_ids << topic.user_id
     end
     
-    puts "reply.notified_user_ids: #{reply.notified_user_ids}"
+    puts "reply.notified_user_ids: #{notified_user_ids}"
 
     # 给关注者发通知
     topic.follower_ids.each do |uid|
       # 排除同一个回复过程中已经提醒过的人
-      next if reply.notified_user_ids.include?(uid)
+      next if notified_user_ids.include?(uid)
       # 排除回帖人
       next if uid == reply.user_id
       puts "Post Notification to: #{uid}"

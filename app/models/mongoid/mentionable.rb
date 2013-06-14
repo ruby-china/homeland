@@ -4,13 +4,9 @@ module Mongoid
     included do
       field :mentioned_user_ids, :type => Array, :default => []
       before_save :extract_mentioned_users
+      after_create :send_mention_notification
       after_destroy :delete_notifiaction_mentions
       has_many :notification_mentions, :as => :mentionable, :class_name => 'Notification::Mention'
-
-      attr_accessor :notified_user_ids
-      after_initialize do 
-        self.notified_user_ids = []
-      end
     end
 
     # Wait for https://github.com/mongoid/mongoid/commit/2f94b5fab018b22a9e84ac2e988d4a3cf97e7f2e
@@ -41,9 +37,8 @@ module Mongoid
       [user]
     end
 
-    def send_mention_notification!
+    def send_mention_notification
       (mentioned_users - no_mention_users).each do |user|
-        self.notified_user_ids << user.id
         Notification::Mention.create :user => user, :mentionable => self
       end
     end

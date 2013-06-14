@@ -142,8 +142,10 @@ describe Topic do
     it "should with 年月日" do
       Topic.auto_space_with_en_zh("5天的活动").should == "5 天的活动"
       Topic.auto_space_with_en_zh("我10岁的时候").should == "我 10 岁的时候"
-      Topic.auto_space_with_en_zh("于3月10日开始").should == "于 3月10日开始"
-      Topic.auto_space_with_en_zh("于2009年开始").should == "于 2009 年开始"
+      Topic.auto_space_with_en_zh("再过3天我们就去").should == "再过 3 天我们就去"
+      Topic.auto_space_with_en_zh("于3月10日开始").should == "于 3月10日 开始"
+      Topic.auto_space_with_en_zh("于3月开始").should == "于 3月 开始"
+      Topic.auto_space_with_en_zh("于2009年开始").should == "于 2009年 开始"
       Topic.auto_space_with_en_zh("2013年3月10日-Ruby Saturday活动召集").should == "2013年3月10日-Ruby Saturday 活动召集"
     end
     

@@ -143,7 +143,7 @@ class Topic
     str.gsub! /((?![年月日])\p{Han})([a-zA-Z0-9@#])/u do
       "#$1 #$2"
     end
-    str.gsub! /([a-zA-Z0-9@#!\/])((?![年月日])\p{Han})/u do
+    str.gsub! /([a-zA-Z0-9@#!\/]|[\d[年月日]])((?![年月日])\p{Han})/u do
       "#$1 #$2"
     end
     str

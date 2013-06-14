@@ -83,6 +83,10 @@ class Topic
   def store_cache_fields
     self.node_name = self.node.try(:name) || ""
   end
+  before_save :auto_space_with_title
+  def auto_space_with_title
+    self.title = self.class.auto_space_with_en_zh(self.title)
+  end
 
   before_create :init_last_active_mark_on_create
   def init_last_active_mark_on_create
@@ -132,5 +136,16 @@ class Topic
     Rails.cache.fetch([self,"reply_ids"]) do
       self.replies.only(:_id).map(&:_id)
     end
+  end
+  
+  def self.auto_space_with_en_zh(str)
+    # https://gist.github.com/luikore/5775559
+    str.gsub! /(\p{Han})([a-zA-Z0-9@#])/u do
+      "#$1 #$2"
+    end
+    str.gsub! /([a-zA-Z0-9@#!\/])(\p{Han})/u do
+      "#$1 #$2"
+    end
+    str
   end
 end

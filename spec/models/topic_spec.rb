@@ -89,4 +89,60 @@ describe Topic do
     t1 = Factory(:topic)
     t1.destroy_by(nil).should == false
   end
+  
+  describe "#auto_space_with_en_zh" do
+    it "should work with simple" do
+      Topic.auto_space_with_en_zh("部署到heroku有问题网页不能显示").should == "部署到 heroku 有问题网页不能显示"
+    end
+    
+    it "should with () or []" do
+      Topic.auto_space_with_en_zh("[北京]美企聘site/web大型应用开发高手-Ruby（Java/PHP/Python也可）").should == "[北京]美企聘 site/web 大型应用开发高手-Ruby（Java/PHP/Python 也可）"      
+      Topic.auto_space_with_en_zh("[成都](团800)招聘Rails工程师").should == "[成都](团 800)招聘 Rails 工程师"
+    end
+    
+    it "should with . !" do
+      Topic.auto_space_with_en_zh("Teahour.fm第18期发布").should == "Teahour.fm 第 18 期发布"
+      Topic.auto_space_with_en_zh("Yes!升级到了Rails 4").should == "Yes! 升级到了 Rails 4"
+      Topic.auto_space_with_en_zh("delete!方法是做什么的").should == "delete! 方法是做什么的"
+      Topic.auto_space_with_en_zh("到了!升级到了Rails 4").should == "到了! 升级到了 Rails 4"
+    end
+    
+    it "should with URL" do
+      Topic.auto_space_with_en_zh("http://sourceforge.net/解禁了") == "http://sourceforge.net/ 解禁了"
+    end
+    
+    it "should with #" do
+      Topic.auto_space_with_en_zh("个人信息显示公开记事本,记事本显示阅读次数#149").should == "个人信息显示公开记事本,记事本显示阅读次数 #149"      
+    end
+    
+    it "should with @" do
+      Topic.auto_space_with_en_zh("里面用@foo符号的话后面的变量名会被替换成userN").should == "里面用 @foo 符号的话后面的变量名会被替换成 userN"
+    end
+    
+    it 'should with \ /' do
+      Topic.auto_space_with_en_zh("我/解禁了") == "我 / 解禁了"
+      Topic.auto_space_with_en_zh("WWDC上讲到的Objective C/LLVM改进").should == "WWDC 上讲到的 Objective C/LLVM 改进"
+    end
+
+    it "should with number" do
+      Topic.auto_space_with_en_zh("在Ubuntu11.10 64位系统安装newrelic出错").should == "在 Ubuntu11.10 64 位系统安装 newrelic 出错"
+      Topic.auto_space_with_en_zh("升级了10.9 附遇到的bug").should == "升级了 10.9 附遇到的 bug"
+      Topic.auto_space_with_en_zh("喜欢暗黑2却对D3不满意的可以看看这个。。").should == "喜欢暗黑 2 却对 D3 不满意的可以看看这个。。"
+      Topic.auto_space_with_en_zh("在做ROR 3.2 Tutorial第Chapter 9.4.2遇到一个问题求助！").should == "在做 ROR 3.2 Tutorial 第 Chapter 9.4.2 遇到一个问题求助！"
+    end
+    
+    it "should with other cases" do
+      Topic.auto_space_with_en_zh("创建一篇article，但是却爆了ActionDispatch::Cookies::CookieOverflow的异常").should == "创建一篇 article，但是却爆了 ActionDispatch::Cookies::CookieOverflow 的异常"
+      Topic.auto_space_with_en_zh("Mac安装软件新方法：Homebrew-cask").should == "Mac 安装软件新方法：Homebrew-cask"
+      Topic.auto_space_with_en_zh("Mac安装软件新方法: Homebrew-cask").should == "Mac 安装软件新方法: Homebrew-cask"
+      Topic.auto_space_with_en_zh("Gitlab怎么集成GitlabCI.").should == "Gitlab 怎么集成 GitlabCI."
+    end
+    
+    it "should auto fix on save" do
+      topic.title = "Gitlab怎么集成GitlabCI"
+      topic.save
+      topic.reload
+      topic.title.should == "Gitlab 怎么集成 GitlabCI"
+    end
+  end
 end

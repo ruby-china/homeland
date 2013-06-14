@@ -1,9 +1,9 @@
 # coding: utf-8
 source 'http://ruby.taobao.org'
 
-gem "rails", "4.0.0.rc1"
+gem "rails", "4.0.0.rc2"
 gem 'actionpack-action_caching', '1.0.0'
-gem 'sass-rails', "~> 4.0.0.rc1"
+gem 'sass-rails', "~> 4.0.0.rc2"
 gem 'coffee-rails', "~> 4.0.0"
 gem 'uglifier', '>= 1.3.0'
 
@@ -34,7 +34,7 @@ gem 'will_paginate', '3.0.4'
 # Bootstrap
 gem 'anjlab-bootstrap-rails', '2.0.3.2', require: 'bootstrap-rails'
 gem 'bootstrap-will_paginate', '0.0.3'
-gem 'bootstrap_helper', "4.2.2.2"
+gem 'bootstrap_helper', github: 'huacnlee/bootstrap-helper'
 
 # 三方平台 OAuth 验证登陆
 gem "omniauth", "~> 1.0.1"

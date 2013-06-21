@@ -312,9 +312,11 @@ form .node_select {
   border: 1px solid #ccc;
   padding:4px;
   min-height:400px;
+  overflow:hidden;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
+  img { max-width:510px; }
   #reply & {
     width:578px;
     margin-bottom:10px;

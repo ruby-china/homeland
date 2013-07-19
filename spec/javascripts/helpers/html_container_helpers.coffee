@@ -4,7 +4,7 @@ setupHtmlContainerHelper = (spec) ->
     @htmlContainer = $("<div></div>").appendTo($("body"))
 
   afterEach ->
-    @htmlContainer.remove()
+    @htmlContainer?.remove()
     @htmlContainer = null
 
 setupHtmlContainerHelper(jasmine.Spec)

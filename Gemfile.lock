@@ -40,6 +40,15 @@ GIT
       origin (~> 1.0)
       tzinfo (~> 0.3.22)
 
+GIT
+  remote: git://github.com/searls/jasmine-rails.git
+  revision: d1140c3a6ba6947af0df3c865198b3555640b5c6
+  specs:
+    jasmine-rails (0.4.5)
+      jasmine-core (~> 1.3)
+      rails (>= 3.1.0)
+      sprockets-rails
+
 GEM
   remote: http://ruby.taobao.org/
   specs:
@@ -178,12 +187,7 @@ GEM
     hike (1.2.3)
     httpauth (0.2.0)
     i18n (0.6.4)
-    jasmine (1.2.1)
-      jasmine-core (>= 1.2.0)
-      rack (~> 1.0)
-      rspec (>= 1.3.1)
-      selenium-webdriver (>= 0.1.3)
-    jasmine-core (1.2.0)
+    jasmine-core (1.3.1)
     jquery-atwho-rails (0.1.6)
     jquery-rails (2.0.1)
       railties (>= 3.2.0, < 5.0)
@@ -295,10 +299,6 @@ GEM
       mime-types (>= 1.16)
     rouge (0.3.2)
       thor
-    rspec (2.13.0)
-      rspec-core (~> 2.13.0)
-      rspec-expectations (~> 2.13.0)
-      rspec-mocks (~> 2.13.0)
     rspec-cells (0.1.7)
       cells (~> 3.4)
       railties (>= 3.0, < 4.1)
@@ -406,7 +406,7 @@ DEPENDENCIES
   garelic (= 0.0.2)
   god
   grape!
-  jasmine (= 1.2.1)
+  jasmine-rails!
   jquery-atwho-rails (= 0.1.6)
   jquery-rails (= 2.0.1)
   letter_opener

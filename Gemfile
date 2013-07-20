@@ -101,7 +101,7 @@ group :development, :test do
   gem "sprite-factory", "1.4.1", require: false
   gem 'chunky_png', "1.2.5", require: false
 
-  gem 'jasmine', '1.2.1'
+  gem 'jasmine-rails', github: 'searls/jasmine-rails'
   gem "mongoid_colored_logger", "0.2.2"
   
   gem "quiet_assets", "~> 1.0.2"

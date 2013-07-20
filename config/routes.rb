@@ -93,6 +93,8 @@ RubyChina::Application.routes.draw do
   mount RubyChina::API => "/"
   mount RubyChina::APIV2 => "/"
 
+  mount JasmineRails::Engine => "/specs" if defined?(JasmineRails)
+
   # WARRING! 请保持 User 的 routes 在所有路由的最后，以便于可以让用户名在根目录下面使用，而又不影响到其他的 routes
   # 比如 http://ruby-china.org/huacnlee
   get "users/city/:id" => "users#city", as: 'location_users'

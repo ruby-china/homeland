@@ -22,4 +22,4 @@ before_script:
   - sed -i "s/SETUP_REDIS_HOST/127.0.0.1/g" config/redis.yml
   - sed -i "s/SETUP_REDIS_PORT/6379/g" config/redis.yml
 
-script: bundle exec rake spec jasmine:ci
+script: RAILS_ENV=test bundle exec rake spec spec:javascript

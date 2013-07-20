@@ -41,7 +41,7 @@
           <%= link_to "", topic_path(@topic.id), :method => :delete, 'data-confirm' => t("common.confirm_delete"), :class => "icon small_delete", :title => "删除本帖" %>
         <% end %>
       </div>
-      <%= social_share_button_tag("#{@topic.title} via: @#{Setting.twitter_id} ") %>
+      <%= social_share_button_tag h("#{@topic.title} via: @#{Setting.twitter_id} ") %>
     </div>
   </div>
 

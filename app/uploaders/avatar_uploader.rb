@@ -21,4 +21,8 @@ class AvatarUploader < BaseUploader
       "avatar/#{model.id}.#{file.extension.downcase}"
     end
   end
+
+  def extension_white_list
+    %w(jpg jpeg png)
+  end
 end

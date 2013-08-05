@@ -10,7 +10,15 @@
     <h4><%=t("topics.select_code_language")%></h4>
     </div>
     <div class="modal-body"><%=markdown_language_lists%></div>
-    <div class="model-footer alert alert-info"><%=t("topics.limited_language_lists")%></div>
+    <div class="model-footer ">
+      <div class="alert alert-info">
+        <%=t("topics.limited_language_lists")%>  
+      </div>       
+      <div class="pull-right footer_buttons">
+        <button type="button" class="btn btn-primary" id="confirm_code"><%=t("topics.confirm")%></button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><%=t("topics.close")%></button>  
+      </div>      
+    </div>
   </div>
   <ul class="pills" style="clear:none;">
     <li class="edit active"><%= link_to(t("common.editor_toolbar_edit"), "#") %></li>

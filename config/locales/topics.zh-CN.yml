@@ -29,6 +29,8 @@
     add_block_codes: "多行代码"
     select_code_language: "请选择代码语言"
     limited_language_lists: "以上仅列出社区常见的几种语言，如有需要增加可去社区贡献代码"
+    confirm: " 确 认 "
+    close: " 关 闭 "
     topic_was_deleted: "[该主题已被删除]"
     have_no_new_reply: "在你读过以后还没有新变化"
     has_new_replies: "有新内容"

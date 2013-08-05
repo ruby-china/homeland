@@ -103,10 +103,17 @@ module ApplicationHelper
                       "Shell"=>"shell", "SQL"=>"sql", "Yaml"=>"yml" }
 
   def markdown_language_lists
+    lang_list = []
     lang_list_html = ""
     LANGUAGES_LISTS.each do |k, l|
-      lang_list_html << content_tag(:button, k, :type => "button", :id => l, :class => "btn btn-default lang")
+      lang_list << content_tag(:button, k, :type => "button", :id => l, "data-content" => l, :class => "btn btn-default lang")
+      if lang_list.length % 4 == 0
+        lang_list_html << content_tag(:div, lang_list.join('').html_safe, :class => "btn-group")
+        lang_list_html << "<br>"
+        lang_list = []
+      end
     end
-    content_tag(:div, lang_list_html.html_safe, :class => "btn-group btn-group-justified")
+    lang_list_html << content_tag(:div, lang_list.join('').html_safe, :class => "btn-group") if lang_list.length > 0
+    content_tag(:div, lang_list_html.html_safe, :class => "btn-toolbar-vertical langs")
   end
 end

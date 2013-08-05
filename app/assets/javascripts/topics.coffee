@@ -193,7 +193,6 @@ window.Topics =
       txtBox.caretPos(caret_pos+"\n```#{language}\n".length)
     else
       txtBox.caretPos(caret_pos+1)
-    txtBox.focus()
 
 # pages ready
 $(document).ready ->
@@ -228,6 +227,7 @@ $(document).ready ->
 
   Topics.hookPreview($(".editor_toolbar"), $(".topic_editor"))
 
+
   # pick up one lang and insert it into the textarea
   $("button.lang").on "click", ->
     # not sure IE supports data or not
@@ -241,7 +241,7 @@ $(document).ready ->
   # insert inline code
   $('#topic_add_single_code').on "click", ->
     Topics.appendCodesFromHint('inline')  
-    
+
   bodyEl.bind "keydown", "m", (el) ->
     $('#markdown_help_tip_modal').modal
       keyboard : true

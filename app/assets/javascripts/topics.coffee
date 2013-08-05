@@ -1,6 +1,6 @@
 # TopicsController 下所有页面的 JS 功能
 window.Topics =
-  replies_per_page: 50
+  replies_per_page: 50  
 
   # 往话题编辑器里面插入图片代码
   appendImageFromUpload : (srcs) ->
@@ -178,6 +178,17 @@ window.Topics =
       $("#reply > form").submit()
     return false
 
+  # 往话题编辑器里面插入代码块模版
+  appendCodesFromHint : (language) ->
+    txtBox = $(".topic_editor")
+    caret_pos = txtBox.caretPos()    
+    src_merged = "\n```#{language}\n\n```"
+    source = txtBox.val()
+    before_text = source.slice(0, caret_pos)
+    txtBox.val(before_text + src_merged + source.slice(caret_pos+1, source.count))
+    txtBox.caretPos(caret_pos+"\n```#{language}\n".length)
+    txtBox.focus()
+
 # pages ready
 $(document).ready ->
   bodyEl = $("body")
@@ -210,6 +221,9 @@ $(document).ready ->
     Topics.reply($(this).data("floor"), $(this).attr("data-login"))
 
   Topics.hookPreview($(".editor_toolbar"), $(".topic_editor"))
+
+  $("button.lang").on "click", ->
+    Topics.appendCodesFromHint $(this).attr('id')
 
   bodyEl.bind "keydown", "m", (el) ->
     $('#markdown_help_tip_modal').modal

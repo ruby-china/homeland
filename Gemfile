@@ -25,7 +25,7 @@ gem 'mongoid_auto_increment_id', "0.6.1"
 gem 'mongoid_rails_migrations', '1.0.0'
 
 # 用户系统
-gem 'devise', '3.0.0.rc'
+gem 'devise', '3.0.1'
 gem 'devise-encryptable', '0.1.2'
 
 # 分页

@@ -178,15 +178,21 @@ window.Topics =
       $("#reply > form").submit()
     return false
 
-  # 往话题编辑器里面插入代码块模版
-  appendCodesFromHint : (language='') ->
+  # 往话题编辑器里面插入代码模版
+  appendCodesFromHint : (mode, language='') ->
     txtBox = $(".topic_editor")
     caret_pos = txtBox.caretPos()    
-    src_merged = "\n```#{language}\n\n```\n"
+    if mode == "block"
+      src_merged = "\n```#{language}\n\n```\n"      
+    else
+      src_merged = "``"      
     source = txtBox.val()
     before_text = source.slice(0, caret_pos)
     txtBox.val(before_text + src_merged + source.slice(caret_pos+1, source.count))
-    txtBox.caretPos(caret_pos+"\n```#{language}\n".length)
+    if mode == "block"
+      txtBox.caretPos(caret_pos+"\n```#{language}\n".length)
+    else
+      txtBox.caretPos(caret_pos+1)
     txtBox.focus()
 
 # pages ready
@@ -225,12 +231,16 @@ $(document).ready ->
   # pick up one lang and insert it into the textarea
   $("button.lang").on "click", ->
     # not sure IE supports data or not
-    Topics.appendCodesFromHint( $(this).data('content') || $(this).attr('id') )
+    Topics.appendCodesFromHint("block", $(this).data('content') || $(this).attr('id') )
     $('button.close').click()
 
   $('button#confirm_code').on "click", ->
-    Topics.appendCodesFromHint()
+    Topics.appendCodesFromHint("block")
     $('button.close').click()
+
+  # insert inline code
+  $('#topic_add_single_code').on "click", ->
+    Topics.appendCodesFromHint('inline')  
     
   bodyEl.bind "keydown", "m", (el) ->
     $('#markdown_help_tip_modal').modal

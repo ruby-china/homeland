@@ -8,10 +8,29 @@
 
   <div class="controls">
     <div class="editor_toolbar">
-        <ul class="pills" style="clear:none;">
-          <li class="edit active"><%= link_to(t("common.editor_toolbar_edit"), "#") %></li>
-          <li class="preview"><%= link_to(t("common.editor_toolbar_preview"), "#") %></li>
-        </ul>
+      <div class="icons pull-right">
+        <!-- <%= link_to("", "#", :id => "topic_add_single_code", :rel => "twipsy", :title => t("topics.add_inline_code"), :class => "icon small_image", "data-mode" => "inline")%> -->
+        <%= link_to("", "#", :id => "topic_add_multiple_codes", :rel => "twipsy", :title => t("topics.add_block_codes"), :class => "icon small_bug", "data-toggle" => "modal", "data-target" => "#codehints")%>
+      </div>
+      <div class="modal hide fade" id="codehints" tabindex="-1" role="dialog">
+        <div class="modal-header"><button class="close" type="button" data-dismiss="modal">×</button>
+        <h4><%=t("topics.select_code_language")%></h4>
+        </div>
+        <div class="modal-body"><%=markdown_language_lists%></div>
+        <div class="model-footer ">
+          <div class="alert alert-info">
+            <%=t("topics.limited_language_lists")%>  
+          </div>       
+          <div class="pull-right footer_buttons">
+            <button type="button" class="btn btn-primary" id="confirm_code" ><%=t("topics.confirm")%></button>
+            <button type="button" class="btn btn-default" data-dismiss="modal"><%=t("topics.close")%></button>  
+          </div>      
+        </div>
+      </div>
+      <ul class="pills" style="clear:none;">
+        <li class="edit active"><%= link_to(t("common.editor_toolbar_edit"), "#") %></li>
+        <li class="preview"><%= link_to(t("common.editor_toolbar_preview"), "#") %></li>
+      </ul>
     </div>
   </div>
 

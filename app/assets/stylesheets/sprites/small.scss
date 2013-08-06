@@ -14,6 +14,7 @@
         app/assets/images/sprites/small/lock.png (12x12)
         app/assets/images/sprites/small/pin.png (12x12)
         app/assets/images/sprites/small/reply.png (12x12)
+        app/assets/images/sprites/small/bug.png (12x12)
 
         Output files:
           app/assets/images/sprites/small.png
@@ -36,3 +37,4 @@
 .small_lock { display:inline-block; width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -108px no-repeat;  }
 .small_pin { display:inline-block; width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -120px no-repeat;  }
 .small_reply { display:inline-block; width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -132px no-repeat;  }
+.small_bug { display:inline-block; width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -144px no-repeat;  }

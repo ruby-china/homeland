@@ -1,7 +1,7 @@
 <div class="editor_toolbar">
   <div class="icons pull-right">
-    <%= link_to("", "#", :id => "topic_add_single_code", :rel => "twipsy", :title => t("topics.add_inline_code"), :class => "icon small_image", "data-toggle" => "modal", "data-target" => "#codehints")%>
-    <%= link_to("", "#", :id => "topic_add_multiple_codes", :rel => "twipsy", :title => t("topics.add_block_codes"), :class => "icon small_image", "data-toggle" => "modal", "data-target" => "#codehints")%>
+    <!-- <%= link_to("", "#", :id => "topic_add_single_code", :rel => "twipsy", :title => t("topics.add_inline_code"), :class => "icon small_image", "data-mode" => "inline")%> -->
+    <%= link_to("", "#", :id => "topic_add_multiple_codes", :rel => "twipsy", :title => t("topics.add_block_codes"), :class => "icon small_bug", "data-toggle" => "modal", "data-target" => "#codehints")%>
     <%= link_to("", "#", :id => "topic_add_image", :rel => "twipsy", :title => t("topics.add_image"), :class => "icon small_image")%>
     <input type="file" id="topic_upload_images"/>
   </div>
@@ -15,7 +15,7 @@
         <%=t("topics.limited_language_lists")%>  
       </div>       
       <div class="pull-right footer_buttons">
-        <button type="button" class="btn btn-primary" id="confirm_code"><%=t("topics.confirm")%></button>
+        <button type="button" class="btn btn-primary" id="confirm_code" ><%=t("topics.confirm")%></button>
         <button type="button" class="btn btn-default" data-dismiss="modal"><%=t("topics.close")%></button>  
       </div>      
     </div>

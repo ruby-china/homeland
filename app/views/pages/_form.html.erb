@@ -9,8 +9,9 @@
   <div class="controls">
     <div class="editor_toolbar">
       <div class="icons pull-right">
-        <!-- <%= link_to("", "#", :id => "topic_add_single_code", :rel => "twipsy", :title => t("topics.add_inline_code"), :class => "icon small_image", "data-mode" => "inline")%> -->
-        <%= link_to("", "#", :id => "topic_add_multiple_codes", :rel => "twipsy", :title => t("topics.add_block_codes"), :class => "icon small_bug", "data-toggle" => "modal", "data-target" => "#codehints")%>
+        <!-- 隐藏单行代码，因为目前没有合适的图标 -->
+        <!-- <%= link_to("", "#", :id => "add_inline_code", :rel => "twipsy", :title => t("topics.add_inline_code"), :class => "icon small_image", "data-mode" => "inline")%> -->
+        <%= link_to("", "#", :id => "add_block_codes", :rel => "twipsy", :title => t("topics.add_block_codes"), :class => "icon small_bug", "data-toggle" => "modal", "data-target" => "#codehints")%>
       </div>
       <div class="modal hide fade" id="codehints" tabindex="-1" role="dialog">
         <div class="modal-header"><button class="close" type="button" data-dismiss="modal">×</button>

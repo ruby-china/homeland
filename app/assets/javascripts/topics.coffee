@@ -228,7 +228,6 @@ $(document).ready ->
 
   Topics.hookPreview($(".editor_toolbar"), $(".topic_editor"))
 
-
   # pick up one lang and insert it into the textarea
   $("button.lang").on "click", ->
     # not sure IE supports data or not
@@ -240,7 +239,7 @@ $(document).ready ->
     $('button.close').click()
 
   # insert inline code
-  $('#topic_add_single_code').on "click", ->
+  $('#add_inline_code').on "click", ->
     Topics.appendCodesFromHint('inline')  
 
   bodyEl.bind "keydown", "m", (el) ->

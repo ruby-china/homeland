@@ -52,5 +52,5 @@ $(document).ready ->
     $('button.close').click()
 
   # insert inline code
-  $('#topic_add_single_code').on "click", ->
+  $('#add_inline_code').on "click", ->
     Pages.appendCodesFromHint('inline')    

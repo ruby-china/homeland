@@ -193,6 +193,7 @@ window.Topics =
       txtBox.caretPos(caret_pos+"\n```#{language}\n".length)
     else
       txtBox.caretPos(caret_pos+1)
+    txtBox.focus()  
 
 # pages ready
 $(document).ready ->

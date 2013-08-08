@@ -202,6 +202,7 @@ form .node_select {
   line-height: 1.8em; font-size:14px; text-overflow: ellipsis; word-wrap: break-word;
   p { font-size:14px; margin-bottom: 20px; line-height: 1.6em; }
   p:last-of-type { margin-bottom:0; }
+  hr { border:1px solid #e0e0e0; border-bottom:0px; margin: 18px auto; width:50%; }
   blockquote {
     margin-left:20px;
     p { font-size:13px; color:#666; font-weight:normal; line-height:150%; }
@@ -257,6 +258,10 @@ form .node_select {
     }
   }
   .more { }
+}
+
+.editor_toolbar {
+  a.icon { margin-left:4px; }
 }
 
 #reply {

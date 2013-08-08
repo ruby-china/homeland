@@ -4,6 +4,7 @@
         
         app/assets/images/sprites/small/bookmark.png (12x12)
         app/assets/images/sprites/small/bookmarked.png (12x12)
+        app/assets/images/sprites/small/code.png (12x12)
         app/assets/images/sprites/small/delete.png (12x12)
         app/assets/images/sprites/small/edit.png (12x12)
         app/assets/images/sprites/small/follow.png (12x12)
@@ -14,27 +15,26 @@
         app/assets/images/sprites/small/lock.png (12x12)
         app/assets/images/sprites/small/pin.png (12x12)
         app/assets/images/sprites/small/reply.png (12x12)
-        app/assets/images/sprites/small/bug.png (12x12)
 
         Output files:
           app/assets/images/sprites/small.png
           app/assets/stylesheets/sprites/small.scss
 
         Output size:
-          12x144
+          12x156
 
 
 */
 .small_bookmark { display:inline-block; width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px 0px no-repeat;  }
 .small_bookmarked { display:inline-block; width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -12px no-repeat;  }
-.small_delete { display:inline-block; width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -24px no-repeat;  }
-.small_edit { display:inline-block; width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -36px no-repeat;  }
-.small_follow { display:inline-block; width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -48px no-repeat;  }
-.small_followed { display:inline-block; width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -60px no-repeat;  }
-.small_image { display:inline-block; width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -72px no-repeat;  }
-.small_like { display:inline-block; width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -84px no-repeat;  }
-.small_liked { display:inline-block; width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -96px no-repeat;  }
-.small_lock { display:inline-block; width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -108px no-repeat;  }
-.small_pin { display:inline-block; width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -120px no-repeat;  }
-.small_reply { display:inline-block; width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -132px no-repeat;  }
-.small_bug { display:inline-block; width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -144px no-repeat;  }
+.small_code { display:inline-block; width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -24px no-repeat;  }
+.small_delete { display:inline-block; width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -36px no-repeat;  }
+.small_edit { display:inline-block; width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -48px no-repeat;  }
+.small_follow { display:inline-block; width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -60px no-repeat;  }
+.small_followed { display:inline-block; width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -72px no-repeat;  }
+.small_image { display:inline-block; width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -84px no-repeat;  }
+.small_like { display:inline-block; width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -96px no-repeat;  }
+.small_liked { display:inline-block; width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -108px no-repeat;  }
+.small_lock { display:inline-block; width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -120px no-repeat;  }
+.small_pin { display:inline-block; width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -132px no-repeat;  }
+.small_reply { display:inline-block; width: 12px; height: 12px; background: url(image-path('sprites/small.png')) 0px -144px no-repeat;  }

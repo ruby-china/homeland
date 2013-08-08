@@ -127,7 +127,7 @@ GEM
       timers (>= 1.0.0)
     childprocess (0.3.6)
       ffi (~> 1.0, >= 1.0.6)
-    chunky_png (1.2.5)
+    chunky_png (1.2.8)
     coffee-rails (4.0.0)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0.beta, < 5.0)
@@ -393,7 +393,7 @@ DEPENDENCIES
   carrierwave (= 0.6.2)
   carrierwave-upyun (= 0.1.5)
   cells!
-  chunky_png (= 1.2.5)
+  chunky_png (= 1.2.8)
   coffee-rails (~> 4.0.0)
   dalli (= 1.1.1)
   database_cleaner

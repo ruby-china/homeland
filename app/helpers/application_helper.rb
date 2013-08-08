@@ -97,23 +97,18 @@ module ApplicationHelper
   end
 
   # 可按需修改
-  LANGUAGES_LISTS = { "Ruby"=>"rb", "Css"=>"css", "CoffeeScript"=>"coffee", 
-                      "HAML"=>"haml", "HTML"=>"html", "JavaScript"=>"js", 
-                      "Python"=>"py", "Sass"=>"sass", "Scss"=>"scss", 
-                      "Shell"=>"shell", "SQL"=>"sql", "Yaml"=>"yml" }
+  LANGUAGES_LISTS = { "Ruby" => "ruby", "HTML / Erb" => "erb", "CSS / SCSS" => "scss", "JavaScript" => "js", 
+                      "YAML <i>(.yml)</i>" => "yml", "CoffeeScript" => "coffee", "SASS" => "sass",
+                      "Python" => "python", "HAML" => "haml", "Slim" => "slim", 
+                      "Shell / Bash" => "shell", "SQL"=>"sql" }
 
-  def markdown_language_lists
+  def insert_code_menu_items_tag
     lang_list = []
-    lang_list_html = ""
     LANGUAGES_LISTS.each do |k, l|
-      lang_list << content_tag(:button, k, :type => "button", :id => l, "data-content" => l, :class => "btn btn-default lang")
-      # 4 langs per group
-      if lang_list.length % 4 == 0
-        lang_list_html << content_tag(:div, lang_list.join('').html_safe, :class => "btn-group v-btn-group")        
-        lang_list = []
+      lang_list << content_tag(:li) do
+        content_tag(:a, raw(k), id: l, class: 'insert_code', data: { content: l })
       end
     end
-    lang_list_html << content_tag(:div, lang_list.join('').html_safe, :class => "btn-group v-btn-group") if lang_list.length > 0
-    content_tag(:div, lang_list_html.html_safe, :class => "btn-toolbar langs")
+    raw lang_list.join("")
   end
 end

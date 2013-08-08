@@ -100,7 +100,7 @@ form {
   -moz-border-radius: 6px;
   border-radius: 6px;
   -webkit-box-shadow: 0 0px 2px rgba(0,0,0,.05);
-  -moz-box-shadow: 0 0px 2px rgba(0,0,0,.1);
+  -moz-box-shadow: 0 0px 2px rgba(0,0,0,.05);
   box-shadow: 0 0px 2px rgba(0,0,0,.05);
   h2.title {
     font-size: 12px;
@@ -112,6 +112,30 @@ form {
 
 .box_gray {
   background:#F5F5F5;
+}
+
+.dropdown-small {
+  .dropdown-menu {
+    border-color:#ccc;
+    min-width:100px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    -webkit-box-shadow: 0 0px 2px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0 0px 2px rgba(0,0,0,.2);
+    box-shadow: 0 0px 2px rgba(0,0,0,.2);
+  }
+  li {
+    &.title {
+      padding:2px 8px;
+      color:#bbb;
+    }
+    a {
+      padding:1px 8px;
+      font-size:12px;
+      i { color:#bbb; }
+    }
+  }  
 }
 
 

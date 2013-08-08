@@ -229,18 +229,9 @@ $(document).ready ->
   Topics.hookPreview($(".editor_toolbar"), $(".topic_editor"))
 
   # pick up one lang and insert it into the textarea
-  $("button.lang").on "click", ->
+  $("a.insert_code").on "click", ->
     # not sure IE supports data or not
     Topics.appendCodesFromHint("block", $(this).data('content') || $(this).attr('id') )
-    $('button.close').click()
-
-  $('button#confirm_code').on "click", ->
-    Topics.appendCodesFromHint("block")
-    $('button.close').click()
-
-  # insert inline code
-  $('#add_inline_code').on "click", ->
-    Topics.appendCodesFromHint('inline')  
 
   bodyEl.bind "keydown", "m", (el) ->
     $('#markdown_help_tip_modal').modal

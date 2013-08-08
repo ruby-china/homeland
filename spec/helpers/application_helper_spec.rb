@@ -20,6 +20,8 @@ describe ApplicationHelper do
     controller.flash[:error] = 'hello'
     helper.notice_message.should == '<div class="alert alert-error"><a class="close" data-dismiss="alert" href="#">x</a>hello</div>'
     controller.flash[:error] = nil
+    
+    helper.insert_code_menu_items_tag.should include('class="insert_code"')
   end
 
   describe "admin?" do

@@ -179,20 +179,17 @@ window.Topics =
     return false
 
   # 往话题编辑器里面插入代码模版
-  appendCodesFromHint : (mode, language='') ->
+  appendCodesFromHint : (language='') ->
     txtBox = $(".topic_editor")
-    caret_pos = txtBox.caretPos()    
-    if mode == "block"
-      src_merged = "\n```#{language}\n\n```\n"      
-    else
-      src_merged = "``"      
+    caret_pos = txtBox.caretPos() 
+    prefix_break = ""  
+    if txtBox.val().length > 0
+      prefix_break = "\n"
+    src_merged = "#{prefix_break }```#{language}\n\n```\n"    
     source = txtBox.val()
     before_text = source.slice(0, caret_pos)
     txtBox.val(before_text + src_merged + source.slice(caret_pos+1, source.count))
-    if mode == "block"
-      txtBox.caretPos(caret_pos+"\n```#{language}\n".length)
-    else
-      txtBox.caretPos(caret_pos+1)
+    txtBox.caretPos(caret_pos + src_merged.length - 5)
     txtBox.focus()  
 
 # pages ready
@@ -231,7 +228,7 @@ $(document).ready ->
   # pick up one lang and insert it into the textarea
   $("a.insert_code").on "click", ->
     # not sure IE supports data or not
-    Topics.appendCodesFromHint("block", $(this).data('content') || $(this).attr('id') )
+    Topics.appendCodesFromHint($(this).data('content') || $(this).attr('id') )
 
   bodyEl.bind "keydown", "m", (el) ->
     $('#markdown_help_tip_modal').modal

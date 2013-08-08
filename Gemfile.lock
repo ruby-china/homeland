@@ -297,7 +297,7 @@ GEM
     remotipart (1.0.5)
     rest-client (1.6.7)
       mime-types (>= 1.16)
-    rouge (0.3.2)
+    rouge (0.3.10)
       thor
     rspec-cells (0.1.7)
       cells (~> 3.4)
@@ -428,7 +428,7 @@ DEPENDENCIES
   redcarpet (~> 2.2.2)
   redis-namespace (~> 1.2.1)
   redis-objects (= 0.5.2)
-  rouge (~> 0.3.2)
+  rouge (~> 0.3.10)
   rspec-cells (= 0.1.7)
   rspec-rails (~> 2.13.2)
   rvm-capistrano

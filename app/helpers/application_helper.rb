@@ -99,7 +99,7 @@ module ApplicationHelper
   # 可按需修改
   LANGUAGES_LISTS = { "Ruby" => "ruby", "HTML / ERB" => "erb", "CSS / SCSS" => "scss", "JavaScript" => "js", 
                       "YAML <i>(.yml)</i>" => "yml", "CoffeeScript" => "coffee", "Nginx / Redis <i>(.conf)</i>" => "conf",
-                      "Python" => "python", "Erlang" => "erlang", "Shell / Bash" => "shell" }
+                      "Python" => "python", "PHP" => "php", "Java" => "java", "Erlang" => "erlang", "Shell / Bash" => "shell" }
 
   def insert_code_menu_items_tag
     lang_list = []

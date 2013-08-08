@@ -95,4 +95,25 @@ module ApplicationHelper
     return false if agent_str =~ /ipad/
     agent_str =~ Regexp.new(MOBILE_USER_AGENTS)
   end
+
+  # 可按需修改
+  LANGUAGES_LISTS = { "Ruby"=>"rb", "Css"=>"css", "CoffeeScript"=>"coffee", 
+                      "HAML"=>"haml", "HTML"=>"html", "JavaScript"=>"js", 
+                      "Python"=>"py", "Sass"=>"sass", "Scss"=>"scss", 
+                      "Shell"=>"shell", "SQL"=>"sql", "Yaml"=>"yml" }
+
+  def markdown_language_lists
+    lang_list = []
+    lang_list_html = ""
+    LANGUAGES_LISTS.each do |k, l|
+      lang_list << content_tag(:button, k, :type => "button", :id => l, "data-content" => l, :class => "btn btn-default lang")
+      # 4 langs per group
+      if lang_list.length % 4 == 0
+        lang_list_html << content_tag(:div, lang_list.join('').html_safe, :class => "btn-group v-btn-group")        
+        lang_list = []
+      end
+    end
+    lang_list_html << content_tag(:div, lang_list.join('').html_safe, :class => "btn-group v-btn-group") if lang_list.length > 0
+    content_tag(:div, lang_list_html.html_safe, :class => "btn-toolbar langs")
+  end
 end

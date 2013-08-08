@@ -57,23 +57,23 @@ table.node_topics .replies {
   a.feed {color:#B70000;}
 }
 #reply.form {
-  textarea { width: 98%; height: 80px; }
+  textarea { width: 100%; height: 80px; }
   .submit_buttons {
     position:static;
     float:none;
     .help-inline { display:none; }
   }
   .helpblock { display:none; }
-  #preview  { width: 98%; padding:0; }
+  #preview  { width: 100%; padding:0; }
 }
 #new_topic {
-  #preview  { width: 98%; padding:0; }
+  #preview  { width: 100%; padding:0; }
+  .control-label { display:none; }
 }
-textarea.long {  width: 98%; height: 80px; }
+textarea.long {  width: 100%; height: 80px; }
 .help-block { display:none; }
 #reply .editor_toolbar {
   width:100%;
-  .pull-right { display:none; }
 }
 form {
   margin-bottom: 0px;

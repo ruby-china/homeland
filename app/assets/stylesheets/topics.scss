@@ -167,6 +167,7 @@ form .node_select {
       .name {
         float:left;
         a { text-decoration:underline; margin-right:8px; }
+        a.reply-floor { margin-right: 0; }
       }
       .opts {
         float:right; text-align:right;

@@ -226,6 +226,11 @@ form .node_select {
     padding:5px 24px;
     p { margin:0; }
     li { line-height:1.8em; color:#333; font-size:13px; }
+    ul { list-style-type: circle; }
+  }
+  ol { 
+    list-style-type: decimal; 
+    ol { list-style-type: lower-alpha; }
   }
   img { vertical-align: top; }
 }

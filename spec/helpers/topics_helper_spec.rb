@@ -107,13 +107,13 @@ describe TopicsHelper do
 
     it "should highlight code block" do
       helper.format_topic_body("```ruby\nclass Hello\n\nend\n```").should ==
-        %(<pre class=\"highlight ruby\"><span class=\"k\">class</span> <span class=\"nc\">Hello</span>\n\n<span class=\"k\">end</span>\n</pre>)
+        %(<pre class=\"highlight ruby\"><span class=\"k\">class </span><span class=\"nc\">Hello</span>\n\n<span class=\"k\">end</span>\n</pre>)
     end
 
     it "should be able to identigy Ruby or RUBY as ruby language" do
       ['Ruby', 'RUBY'].each do |lang|
         helper.format_topic_body("```#{lang}\nclass Hello\nend\n```").should ==
-          %(<pre class=\"highlight ruby\"><span class=\"k\">class</span> <span class=\"nc\">Hello</span>\n<span class=\"k\">end</span>\n</pre>)
+          %(<pre class=\"highlight ruby\"><span class=\"k\">class </span><span class=\"nc\">Hello</span>\n<span class=\"k\">end</span>\n</pre>)
       end
     end
 

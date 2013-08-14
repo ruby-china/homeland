@@ -165,9 +165,17 @@ form .node_select {
       a:link,
       a:visited { color:#999; }
       .name {
-        float:left;
-        a { text-decoration:underline; margin-right:8px; }
-        a.reply-floor { margin-right: 0; }
+        a { 
+          color:#888;
+          text-decoration:none; font-weight:bold; margin-right:8px; 
+          &:hover { color:#555; }
+        }
+      }
+      .time {
+        a.reply-floor { 
+          margin-right: 0; color:#bbb; text-decoration: none; 
+          &:hover {color:#999;}
+        }
       }
       .opts {
         float:right; text-align:right;

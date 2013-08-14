@@ -3,7 +3,7 @@ require "bundler/capistrano"
 require "sidekiq/capistrano"
 require "rvm/capistrano"
 
-default_run_options[:pty] = true
+# default_run_options[:pty] = true
 
 set :rvm_ruby_string, 'ruby-2.0.0-p247'
 set :rvm_type, :user
@@ -14,6 +14,8 @@ set :scm, :git
 set :user, "ruby"
 set :deploy_to, "/data/www/#{application}"
 set :runner, "ruby"
+# set :deploy_via, :remote_cache
+set :git_shallow_clone, 1
 
 role :web, "ruby-china.org"                          # Your HTTP server, Apache/etc
 role :app, "ruby-china.org"                          # This may be the same as your `Web` server
@@ -84,4 +86,4 @@ task :mongoid_migrate_database, :roles => :web do
   run "cd #{deploy_to}/current/; RAILS_ENV=production bundle exec rake db:migrate"
 end
 
-after "deploy:finalize_update","deploy:symlink", :init_shared_path, :link_shared_files#, :compile_assets, :sync_assets_to_cdn, :mongoid_migrate_database
+after "deploy:finalize_update","deploy:symlink", :init_shared_path, :link_shared_files, :compile_assets, :sync_assets_to_cdn, :mongoid_migrate_database

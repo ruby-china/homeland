@@ -3,7 +3,7 @@ class User
   module OmniauthCallbacks
     ["github","google","twitter","douban"].each do |provider|
       define_method "find_or_create_for_#{provider}" do |response|
-        uid = response["uid"]
+        uid = response["uid"].to_s
         data = response["info"]
 
         if user = User.where("authorizations.provider" => provider , "authorizations.uid" => uid).first

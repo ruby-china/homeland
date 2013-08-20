@@ -213,7 +213,7 @@ class User
 
   def bind_service(response)
     provider = response["provider"]
-    uid = response["uid"]
+    uid = response["uid"].to_s
     authorizations.create(:provider => provider , :uid => uid )
   end
 

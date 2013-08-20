@@ -5,7 +5,7 @@ class Authorization
   include Mongoid::BaseModel
 
   field :provider
-  field :uid
+  field :uid, type: String
   embedded_in :user, :inverse_of => :authorizations
 
   validates_presence_of :uid, :provider

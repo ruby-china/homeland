@@ -22,6 +22,7 @@ module ApplicationHelper
     when "replies"
       fname = "topics.css"
     end
+    return "" if fname.blank?
     raw %(<link href="#{asset_path(fname)}" rel="stylesheet" data-turbolinks-track />)
   end
 
@@ -33,6 +34,7 @@ module ApplicationHelper
     when "replies"
       fname = "topics.js"
     end
+    return "" if fname.blank?
     raw %(<script src="#{asset_path(fname)}" data-turbolinks-track></script>)
   end
 

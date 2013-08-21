@@ -1,5 +1,6 @@
 #= require jquery
 #= require jquery_ujs
+#= require turbolinks
 #= require bootstrap-transition
 #= require bootstrap-alert
 #= require bootstrap-modal
@@ -16,6 +17,7 @@
 #= require jquery.html5-fileupload
 #= require social-share-button
 #= require jquery.atwho
+#= require nprogress
 #= require emoji_list
 #= require faye
 #= require notifier
@@ -23,10 +25,10 @@
 #= require_self
 window.App =
   notifier : null,
-  
+
   loading : () ->
     console.log "loading..."
-    
+
   fixUrlDash : (url) ->
     url.replace(/\/\//g,"/").replace(/:\//,"://")
 
@@ -125,23 +127,26 @@ window.App =
         span.removeClass("badge-error")
       span.text(json.count)
       $(document).attr("title", new_title)
-    true  
+    true
 
-$(document).ready ->
+# NProgress
+$(document).on 'page:fetch', ->
+  NProgress.start()
+$(document).on 'page:load', ->
   App.initForDesktopView()
-
-  $("abbr.timeago").timeago()
-  $(".alert").alert()
-  $('.dropdown-toggle').dropdown()
-
-  App.initNotificationSubscribe() if FAYE_SERVER_URL?
-
+  
   $('form.new_topic,form.new_reply,form.new_note,form.new_page').sisyphus
     timeout : 2
     excludeFields : $('input[name=utf8], input[name=_method], input[name=authenticity_token]')
   $('form a.reset').click ->
     $.sisyphus().manuallyReleaseData()
-      
+    
+  NProgress.done()
+    
+$(document).ready ->
+  $("abbr.timeago").timeago()
+  $(".alert").alert()
+  $('.dropdown-toggle').dropdown()
   
   # 绑定评论框 Ctrl+Enter 提交事件
   $(".cell_comments_new textarea").bind "keydown","ctrl+return",(el) ->
@@ -157,6 +162,7 @@ $(document).ready ->
     $('html, body').animate({ scrollTop: 0 },300);
     return false
 
+  # Go top
   $(window).bind 'scroll resize', ->
     scroll_from_top = $(window).scrollTop()
     if scroll_from_top >= 1

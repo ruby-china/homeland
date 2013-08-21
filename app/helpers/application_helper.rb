@@ -15,21 +15,25 @@ module ApplicationHelper
   end
 
   def controller_stylesheet_link_tag
+    fname = ""
     case controller_name
-    when "users","home", "topics", "pages", "search", "sites", "notifications", "notes"
-      stylesheet_link_tag controller_name
+    when "users", "home", "topics", "pages", "notes"
+      fname = "#{controller_name}.css"
     when "replies"
-      stylesheet_link_tag "topics"
+      fname = "topics.css"
     end
+    raw %(<link href="#{asset_path(fname)}" rel="stylesheet" data-turbolinks-track />)
   end
 
   def controller_javascript_include_tag
+    fname = 
     case controller_name
-    when "pages","topics","sites", "notifications", "notes"
-      javascript_include_tag controller_name
+    when "pages","topics","notes"
+      fname = "#{controller_name}.js"
     when "replies"
-      javascript_include_tag "topics"
+      fname = "topics.js"
     end
+    raw %(<script src="#{asset_path(fname)}" data-turbolinks-track></script>)
   end
 
   def markdown(str, options = {})

@@ -93,12 +93,15 @@
     $('body').animate({ scrollTop: -1 },0);
     </script>
   <% end %>
-  <script type="text/javascript" charset="utf-8">
+  <script type="text/javascript" data-turbolinks-eval=false>
     ROOT_URL = "<%= root_url %>";
     FAYE_SERVER_URL = "<%= Setting.faye_server %>";
     <% if current_user %>
       CURRENT_USER_ACCESS_TOKEN = "<%= current_user.temp_access_token %>";
     <% end %>
+    if (FAYE_SERVER_URL) {
+      App.initNotificationSubscribe();
+    }
   </script>
   <%= yield :scripts %>
   <script type="text/javascript">

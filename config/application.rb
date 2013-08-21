@@ -44,8 +44,8 @@ module RubyChina
       Devise::Mailer.layout "mailer"
     }
     
-    config.assets.precompile += %w(application.css app.js topics.css topics.js window.css front.css cpanel.css search.css
-        users.css pages.css pages.js notifications.js notifications.css sites.css sites.js notes.css notes.js 
+    config.assets.precompile += %w(application.css app.js topics.css topics.js window.css front.css cpanel.css
+        users.css pages.css pages.js notes.css notes.js 
         gfdynamicfeedcontrol.css gfdynamicfeedcontrol.js mobile.css home.css social-share-button.png social-share-button@2x.png)
   end
 end

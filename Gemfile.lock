@@ -214,8 +214,8 @@ GEM
     minitest (4.7.5)
     mongo (1.7.1)
       bson (~> 1.7.1)
-    mongoid_auto_increment_id (0.6.1)
-      mongoid (>= 3.0.0, < 4.1.0)
+    mongoid_auto_increment_id (0.6.2)
+      mongoid (>= 3.1.0, < 4.1.0)
     mongoid_colored_logger (0.2.2)
       mongo (~> 1.6)
       mongoid
@@ -413,7 +413,7 @@ DEPENDENCIES
   md_emoji
   mini_magick (= 3.3)
   mongoid!
-  mongoid_auto_increment_id (= 0.6.1)
+  mongoid_auto_increment_id (= 0.6.2)
   mongoid_colored_logger (= 0.2.2)
   mongoid_rails_migrations (= 1.0.0)
   newrelic_rpm

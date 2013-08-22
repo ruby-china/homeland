@@ -34,7 +34,8 @@
   <%= raw SiteConfig.custom_head_html %>
   <%= csrf_meta_tag %>
   <%= auto_discovery_link_tag(:rss,feed_topics_url,:title => '订阅最新帖') %>
-
+  <%= javascript_include_tag "app" %>
+  <%= controller_javascript_include_tag %>
   <%= yield :node_feed_link %>
 </head>
 <body data-offset="50">
@@ -84,9 +85,6 @@
     </div>
   </footer>
   <% end %>
-
-  <%= javascript_include_tag "app" %>
-  <%= controller_javascript_include_tag %>
   <% if mobile? %>
     <script type="text/javascript">
     app_mobile = true;

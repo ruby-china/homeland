@@ -9,7 +9,7 @@ gem 'coffee-rails', "~> 4.0.0"
 gem 'uglifier', '>= 1.3.0'
 
 gem "rails-i18n","0.1.8"
-gem "jquery-rails", "2.0.1"
+gem "jquery-rails", "3.0.4"
 gem "rails_autolink", ">= 1.1.0"
 gem "jquery-atwho-rails", "0.1.6"
 gem "md_emoji"

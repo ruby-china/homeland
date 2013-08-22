@@ -1,5 +1,4 @@
 <div id="<%= @commentable.class.name %>_<%= @commentable.id %>_cell_comments" class="cell_comments box">
-  
   <% if !@comments.blank? %>
     <%= render :partial => "comment", :collection => @comments %>
   <% else %>
@@ -8,14 +7,12 @@
 </div>
 <% if @current_user %>
 <div id="<%= @commentable.class.name %>_<%= @commentable.id %>_cell_new_comment" class="cell_comments_new box">
-  <%= form_for(@comment, :remote => true, :html => { :onsubmit => "App.loading(true);"}) do |f| %>
+  <%= form_for(@comment, :remote => true) do |f| %>
     <%= f.hidden_field :commentable_type %>
     <%= f.hidden_field :commentable_id %>
-    <div class="clearfix">
-      <%= f.text_area :body, :class => "long", :rows => "5" %>
-    </div>
+    <%= f.text_area :body, :class => "long", :rows => "3" %>
     <div class="buttons">
-      <%= f.submit t("comments.create_comment"), :class => "btn btn-primary" %> <span class="help-inline">Ctrl+Enter</span>
+      <%= f.submit t("comments.create_comment"), :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %> <span class="help-inline">Ctrl+Enter</span>
     </div>
     <span class="help-block" style="margin-top:20px;">
       <%= render_cell :topics, :reply_help_block %>

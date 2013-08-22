@@ -129,43 +129,46 @@ window.App =
       $(document).attr("title", new_title)
     true
 
+  init : () ->
+    App.initForDesktopView()
+
+    $('form.new_topic,form.new_reply,form.new_note,form.new_page').sisyphus
+      timeout : 2
+      excludeFields : $('input[name=utf8], input[name=_method], input[name=authenticity_token]')
+    $('form a.reset').click ->
+      $.sisyphus().manuallyReleaseData()
+
+    $("abbr.timeago").timeago()
+    $(".alert").alert()
+    $('.dropdown-toggle').dropdown()
+
+    # 绑定评论框 Ctrl+Enter 提交事件
+    $(".cell_comments_new textarea").bind "keydown","ctrl+return",(el) ->
+      if $(el.target).val().trim().length > 0
+        $(el.target).parent().parent().submit()
+      return false
+
+    # Choose 样式
+    $("select").chosen()
+
+    # Go Top
+    $("a.go_top").click () ->
+      $('html, body').animate({ scrollTop: 0 },300);
+      return false
+
+    # Go top
+    $(window).bind 'scroll resize', ->
+      scroll_from_top = $(window).scrollTop()
+      if scroll_from_top >= 1
+        $("a.go_top").show()
+      else
+        $("a.go_top").hide()
+
 # NProgress
 $(document).on 'page:fetch', ->
   NProgress.start()
 $(document).on 'page:load', ->
-  App.initForDesktopView()
-  
-  $('form.new_topic,form.new_reply,form.new_note,form.new_page').sisyphus
-    timeout : 2
-    excludeFields : $('input[name=utf8], input[name=_method], input[name=authenticity_token]')
-  $('form a.reset').click ->
-    $.sisyphus().manuallyReleaseData()
-    
+  App.init()
   NProgress.done()
-    
 $(document).ready ->
-  $("abbr.timeago").timeago()
-  $(".alert").alert()
-  $('.dropdown-toggle').dropdown()
-  
-  # 绑定评论框 Ctrl+Enter 提交事件
-  $(".cell_comments_new textarea").bind "keydown","ctrl+return",(el) ->
-    if $(el.target).val().trim().length > 0
-      $(el.target).parent().parent().submit()
-    return false
-
-  # Choose 样式
-  $("select").chosen()
-
-  # Go Top
-  $("a.go_top").click () ->
-    $('html, body').animate({ scrollTop: 0 },300);
-    return false
-
-  # Go top
-  $(window).bind 'scroll resize', ->
-    scroll_from_top = $(window).scrollTop()
-    if scroll_from_top >= 1
-      $("a.go_top").show()
-    else
-      $("a.go_top").hide()
+  App.init()

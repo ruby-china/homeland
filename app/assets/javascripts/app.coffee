@@ -47,7 +47,7 @@ window.App =
 
   # Use this method to redirect so that it can be stubbed in test
   gotoUrl: (url) ->
-    window.location = url
+    Turbolinks.visit(url)
 
   likeable : (el) ->
     $el = $(el)

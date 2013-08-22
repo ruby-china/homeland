@@ -3,7 +3,7 @@ require "bundler/capistrano"
 require "sidekiq/capistrano"
 require "rvm/capistrano"
 
-# default_run_options[:pty] = true
+default_run_options[:pty] = true
 
 set :rvm_ruby_string, 'ruby-2.0.0-p247'
 set :rvm_type, :user

@@ -21,8 +21,5 @@ window.Notes =
         false
       false
 
-
-$(document).on 'page:load', ->
-  Notes.init()
 $(document).ready ->
   Notes.init()

@@ -1,6 +1,6 @@
 #= require jquery
 #= require jquery_ujs
-#= require turbolinks
+#= require jquery.turbolinks
 #= require bootstrap-transition
 #= require bootstrap-alert
 #= require bootstrap-modal
@@ -22,6 +22,7 @@
 #= require faye
 #= require notifier
 #= require sisyphus
+#= require turbolinks
 #= require_self
 window.App =
   notifier : null,
@@ -89,9 +90,11 @@ window.App =
 
   atReplyable : (el, logins) ->
     return if logins.length == 0
-    $(el).atWho "@",
+    $(el).atwho 
+      at : "@"
       data : logins
       tpl : "<li data-value='${login}'>${login} <small>${name}</small></li>"
+    true
 
   initForDesktopView : () ->
     return if typeof(app_mobile) != "undefined"
@@ -167,8 +170,6 @@ window.App =
 # NProgress
 $(document).on 'page:fetch', ->
   NProgress.start()
-$(document).on 'page:load', ->
-  App.init()
-  NProgress.done()
 $(document).ready ->
   App.init()
+  NProgress.done()

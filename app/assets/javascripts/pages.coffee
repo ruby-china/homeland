@@ -27,9 +27,7 @@ window.Pages =
         $('#preview').html(data)
         false
       false
-      
-$(document).on 'page:load', ->
-  Pages.init()
+
 $(document).ready ->
   Pages.init()
   

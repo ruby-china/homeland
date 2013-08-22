@@ -170,6 +170,8 @@ window.App =
 # NProgress
 $(document).on 'page:fetch', ->
   NProgress.start()
+$(document).on 'page:restore', ->
+  NProgress.remove()
 $(document).ready ->
   App.init()
   NProgress.done()

@@ -22,7 +22,7 @@ gem 'mini_magick','3.3', require: false
 
 # Mongoid 辅助插件
 gem "mongoid", github: 'mongoid/mongoid', ref: '11e45e5a30a45458b83db99ab6c9d9ccc337e66f'
-gem 'mongoid_auto_increment_id', "0.6.1"
+gem 'mongoid_auto_increment_id', "0.6.2"
 gem 'mongoid_rails_migrations', '1.0.0'
 
 # 用户系统

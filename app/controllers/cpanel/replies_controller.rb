@@ -45,7 +45,5 @@ class Cpanel::RepliesController < Cpanel::ApplicationController
   def destroy
     @reply = Reply.find(params[:id])
     @reply.destroy
-
-    redirect_to(cpanel_replies_path)
   end
 end

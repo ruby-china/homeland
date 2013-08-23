@@ -93,6 +93,7 @@ window.App =
     $(el).atwho 
       at : "@"
       data : logins
+      search_key : "search"
       tpl : "<li data-value='${login}'>${login} <small>${name}</small></li>"
     true
 
@@ -102,7 +103,7 @@ window.App =
 
     # CommentAble @ 回复功能
     commenters = App.scanLogins($(".cell_comments .comment .info .name a"))
-    commenters = ({login: k, name: v} for k, v of commenters)
+    commenters = ({login: k, name: v, search: "#{k} #{v}"} for k, v of commenters)
     App.atReplyable(".cell_comments_new textarea", commenters)
 
   # scan logins in jQuery collection and returns as a object,

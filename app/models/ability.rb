@@ -61,7 +61,6 @@ class Ability
         end
       end
 
-
       # Photo
       can :tiny_new, Photo
       can :create, Photo
@@ -92,7 +91,6 @@ class Ability
       cannot :manage, :all
       basic_read_only
     end
-
 
   end
 

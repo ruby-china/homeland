@@ -9,7 +9,7 @@ class PagesController < ApplicationController
   def index
     set_seo_meta("Wiki")
     drop_breadcrumb("索引")
-    
+
     fresh_when(:etag => [SiteConfig.wiki_index_html])
   end
 
@@ -17,7 +17,7 @@ class PagesController < ApplicationController
     @pages = Page.recent.paginate(:page => params[:page], :per_page => 30)
     set_seo_meta t("pages.wiki_index")
     drop_breadcrumb t("common.index")
-    
+
     fresh_when(:etag => [@pages])
   end
 
@@ -35,7 +35,7 @@ class PagesController < ApplicationController
       fresh_when(:etag => [@page,@page.comments_count])
     end
   end
-  
+
   def comments
     @page = Page.find_by_slug(params[:id])
   end

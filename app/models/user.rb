@@ -95,7 +95,7 @@ class User
     self.email_md5 = Digest::MD5.hexdigest(val || "")
     self[:email] = val
   end
-  
+
   def temp_access_token
     Rails.cache.fetch("user-#{self.id}-temp_access_token-#{Time.now.strftime("%Y%m%d")}") do
       SecureRandom.hex
@@ -136,16 +136,24 @@ class User
   def wiki_editor?
     self.admin? or self.verified == true
   end
-  
+
   # 回帖大于 150 的才有酷站的发布权限
   def site_editor?
     self.admin? or self.replies_count >= 100
   end
-  
+
   # 是否能发帖
   def newbie?
     return false if self.verified == true
     self.created_at > 1.week.ago
+  end
+
+  def blocked?
+    return self.state == STATE[:blocked]
+  end
+
+  def deleted?
+    return self.state == STATE[:deleted]
   end
 
   def has_role?(role)
@@ -153,15 +161,15 @@ class User
       when :admin then admin?
       when :wiki_editor then wiki_editor?
       when :site_editor then site_editor?
-      when :member then true
+      when :member then self.state == STATE[:normal]
       else false
     end
   end
 
-  before_create :default_value_for_create
-  def default_value_for_create
-    self.state = STATE[:normal]
-  end
+  # before_create :default_value_for_create
+  # def default_value_for_create
+  #   self.state = STATE[:normal]
+  # end
 
   # 注册邮件提醒
   after_create :send_welcome_mail
@@ -228,11 +236,11 @@ class User
   def read_topic(topic)
     return if topic.blank?
     return if self.topic_read?(topic)
-    
+
     self.notifications.unread.any_of({:mentionable_type => 'Topic', :mentionable_id => topic.id},
                                      {:mentionable_type => 'Reply', :mentionable_id.in => topic.reply_ids},
                                      {:reply_id.in => topic.reply_ids}).update_all(read: true)
-    
+
     # 处理 last_reply_id 是空的情况
     last_reply_id = topic.last_reply_id || -1
     Rails.cache.write("user:#{self.id}:topic_read:#{topic.id}", last_reply_id)
@@ -325,7 +333,7 @@ class User
     random_key = "#{SecureRandom.hex(10)}:#{self.id}"
     self.update_attribute(:private_token, random_key)
   end
-  
+
   def ensure_private_token!
     self.update_private_token if self.private_token.blank?
   end

@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe PagesController do
   let(:page) { Factory :page }
-  let(:user) { Factory :user }
+  let(:user) { Factory :wiki_editor }
 
   describe ":index" do
     it "should have an index action" do

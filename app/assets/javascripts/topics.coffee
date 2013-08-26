@@ -237,7 +237,6 @@ window.Topics =
     logins = App.scanLogins($("#topic_show .leader a[data-author]"))
     $.extend logins, App.scanLogins($('#replies span.name a'))
     logins = ({login: k, name: v, search: "#{k} #{v}"} for k, v of logins)
-    console.log logins
     App.atReplyable("textarea", logins)
 
     # Focus title field in new-topic page

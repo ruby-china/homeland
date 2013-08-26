@@ -5,12 +5,8 @@
 }
 
 /* Make the entire page show a busy cursor */
-.nprogress-busy body {
-  cursor: wait;
-}
-
 #nprogress .bar {
-  background: #fff;
+  background: #FFF;
 
   position: fixed;
   z-index: 100;

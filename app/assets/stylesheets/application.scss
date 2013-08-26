@@ -41,12 +41,24 @@ code { background:none; }
     margin:0; padding:0; margin-top:2px; margin-right:10px;
     width:123px; float:left;
     a {
-      padding:0; margin:0; margin-top:5px;
-      width:130px;
-      &:hover { background:none;}
+      padding:0; margin:0; margin-top:3px;
+      background:image_url('text_logo.png') left top no-repeat;
+      width:123px;
+      height:29px;
+      display:block;
+      border:0px;
+      background-size:123px 29px;
+      &:hover {
+        opacity:0.9;
+      }
+      &:active {
+        opacity:0.5;
+      }
     }
   }
 }
+
+
 
 .breadcrumb {
   color:#999; border:0px;

@@ -41,7 +41,7 @@ class Cpanel::UsersController < Cpanel::ApplicationController
     @user.verified = params[:user][:verified]
 
     if @user.update_attributes(params[:user].permit!)
-      redirect_to(cpanel_users_path, :notice => 'User was successfully updated.')
+      redirect_to(edit_cpanel_user_path(@user.id), :notice => 'User was successfully updated.')
     else
       render :action => "edit"
     end

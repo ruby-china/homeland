@@ -8,7 +8,6 @@ class TopicsController < ApplicationController
   before_filter :init_base_breadcrumb
 
   def index
-    sleep 1
     @topics = Topic.last_actived.without_hide_nodes.fields_for_list.includes(:user).paginate(:page => params[:page], :per_page => 15, :total_entries => 1500)
     set_seo_meta("","#{Setting.app_name}#{t("menu.topics")}")
     drop_breadcrumb(t("topics.topic_list.hot_topic"))

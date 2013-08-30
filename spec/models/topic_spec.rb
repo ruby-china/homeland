@@ -103,7 +103,6 @@ describe Topic do
   describe "#excellent" do
     it "should suggest a topic as excellent" do
       topic.excellent = 1
-      topic.excellent_desc = "foo bar"
       topic.save
       Topic.excellent.should include(topic)
     end

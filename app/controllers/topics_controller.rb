@@ -171,9 +171,8 @@ class TopicsController < ApplicationController
   end
 
   def suggest
-    suggest_params = params.require(:topic).permit(:excellent_desc)
     @topic = Topic.find(params[:id])
-    @topic.update_attributes(excellent: 1, excellent_desc: suggest_params[:excellent_desc])
+    @topic.update_attributes(excellent: 1)
     redirect_to @topic, success: "加精成功。"
   end
   

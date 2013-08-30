@@ -34,8 +34,6 @@ class Topic
   field :lock_node, :type => Mongoid::Boolean, :default => false
   # 精华贴 0 否， 1 是
   field :excellent, type: Integer, default: 0
-  # 精华贴的推荐语
-  field :excellent_desc
 
   belongs_to :user, :inverse_of => :topics
   counter_cache :name => :user, :inverse_of => :topics

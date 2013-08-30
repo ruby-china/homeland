@@ -1,5 +1,12 @@
 #home_index { line-height:160%; }
-#home_index h2 { margin-top:10px; font-size:14px; line-height:200%;}
+
+h2 {
+  font-size: 12px;
+  color: #999;
+  line-height: 100%;
+  margin-bottom: 10px;
+  text-align: center;
+}
 
 #last_topics { float:left; width:450px; }
 #hot_topics { float:right; width:450px; }
@@ -27,4 +34,9 @@
     top:0; right:1px;
     position:absolute;
   }
+}
+
+.node_topics {
+  margin-bottom:0px;
+  .head { display:none; }
 }

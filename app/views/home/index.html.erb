@@ -1,7 +1,9 @@
 <%= raw SiteConfig.index_html %>
-<div class="home_suggest_topics">
-  <%= render_cell :topics, :high_likes_topics %>
-  <%= render_cell :topics, :high_replies_topics %>
+<div class="home_suggest_topics box">
+  <h2>社区精华贴</h2>
+  <div class="topics">
+    <%= render "/users/topics", :topics => @excellent_topics %>
+  </div>
 </div>
 <%= render_cell :topics, :index_sections %>
 <%= render_cell :topics, :index_locations %>

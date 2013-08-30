@@ -35,8 +35,7 @@
         <i class="icon small_cert_on"></i> 本帖已被设为精华贴！
         <% if admin? %>
         <div class="opts pull-right">
-          <%= link_to raw("修改"), "#suggest_excellent", data: { toggle: 'modal' }%>
-          <%= link_to raw("取消精华"), unsuggest_topic_path(@topic.id), method: "delete" %>
+          <%= link_to raw("取消"), unsuggest_topic_path(@topic.id), method: "delete" %>
         </div>
         <% end %>
       </div>
@@ -46,7 +45,7 @@
 
       <div class="tools pull-right">
         <% if admin? and !@topic.excellent? %>
-          <%= link_to raw("<i class='icon small_cert'></i> 加精"), "#suggest_excellent", title: "设为精华贴" ,data: { toggle: 'modal' }%>
+          <%= link_to raw("<i class='icon small_cert'></i> 加精"), suggest_topic_path(@topic.id), title: "设为精华贴" , method: "patch", confirm: "确定要设置成精华贴么？" %>
         <% end %>
         <%= topic_follow_tag(@topic) %>
         <%= likeable_tag(@topic) %>
@@ -59,8 +58,6 @@
       <%= social_share_button_tag h("#{@topic.title} via: @#{Setting.twitter_id} ") %>
     </div>
   </div>
-
-  <%= render partial: "suggest_excellent" %>
 
   <% if @replies.blank? %>
     <div class="no_result">

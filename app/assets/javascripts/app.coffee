@@ -170,7 +170,7 @@ window.App =
 
 # NProgress
 NProgress.configure
-  speed: 80
+  speed: 0
 
 $(document).on 'page:fetch', ->
   NProgress.start()

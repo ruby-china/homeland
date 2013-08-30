@@ -41,13 +41,6 @@ GIT
       tzinfo (~> 0.3.22)
 
 GIT
-  remote: git://github.com/rails/turbolinks.git
-  revision: 0c2942a9ef5caedd03da4630b6a131b42662982b
-  specs:
-    turbolinks (2.0.0)
-      coffee-rails
-
-GIT
   remote: git://github.com/searls/jasmine-rails.git
   revision: d1140c3a6ba6947af0df3c865198b3555640b5c6
   specs:
@@ -370,6 +363,8 @@ GEM
     treetop (1.4.14)
       polyglot
       polyglot (>= 0.3.1)
+    turbolinks (1.2.0)
+      coffee-rails
     tzinfo (0.3.37)
     uglifier (2.1.1)
       execjs (>= 0.3.0)
@@ -448,7 +443,7 @@ DEPENDENCIES
   social-share-button (= 0.1.4)
   sprite-factory (= 1.4.1)
   thin (= 1.5.0)
-  turbolinks!
+  turbolinks (~> 1.2.0)
   uglifier (>= 1.3.0)
   unicorn
   will_paginate (= 3.0.4)

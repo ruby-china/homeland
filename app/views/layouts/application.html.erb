@@ -7,7 +7,7 @@
                     /____/
   ========================================================
                                           ruby-china.org
-        
+
   App Environments:
   --------------------------------------------------------
   Ruby:  <%= RUBY_VERSION %><%= "-p#{RUBY_PATCHLEVEL}" if defined? RUBY_PATCHLEVEL %>
@@ -39,7 +39,7 @@
   <%= yield :node_feed_link %>
 </head>
 <body data-offset="50">
-  <div class="navbar navbar-fixed-top">
+  <div class="navbar navbar-fixed-top" data-no-turbolink>
     <div class="navbar-inner">
       <div class="container">
         <h3>
@@ -81,7 +81,7 @@
   <a class="go_top" href="#"><i class="icon icons_go_top"></i></a>
   <footer class="footer">
     <div class="container">
-      <%= raw SiteConfig.footer_html %> 
+      <%= raw SiteConfig.footer_html %>
     </div>
   </footer>
   <% end %>

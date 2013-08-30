@@ -2,7 +2,7 @@
 source 'http://ruby.taobao.org'
 
 gem "rails", "4.0.0"
-gem 'turbolinks', :github => 'rails/turbolinks'
+gem 'turbolinks', '~> 1.2.0'
 gem 'jquery-turbolinks', '2.0.0'
 gem 'actionpack-action_caching', '1.0.0'
 gem 'sass-rails', "~> 4.0.0"

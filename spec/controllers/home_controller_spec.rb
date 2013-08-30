@@ -17,7 +17,7 @@ describe HomeController do
       sign_in user
 
       get :index
-      page.should have_content('热门帖子')
+      page.should have_content('社区精华贴')
     end
   end
 end

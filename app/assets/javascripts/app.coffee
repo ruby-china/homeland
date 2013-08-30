@@ -90,7 +90,7 @@ window.App =
 
   atReplyable : (el, logins) ->
     return if logins.length == 0
-    $(el).atwho 
+    $(el).atwho
       at : "@"
       data : logins
       search_key : "search"
@@ -157,7 +157,7 @@ window.App =
 
     # Go Top
     $("a.go_top").click () ->
-      $('html, body').animate({ scrollTop: 0 },300);
+      $('html, body').animate({ scrollTop: 0 },300)
       return false
 
     # Go top
@@ -169,6 +169,9 @@ window.App =
         $("a.go_top").hide()
 
 # NProgress
+NProgress.configure
+  speed: 80
+
 $(document).on 'page:fetch', ->
   NProgress.start()
 $(document).on 'page:restore', ->

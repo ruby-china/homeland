@@ -1,0 +1,16 @@
+<% if admin? %>
+<div id="suggest_excellent" class="modal hide" role="dialog" aria-hidden="true">
+  <div class="modal-header">
+    <h3>加为精华贴</h3>
+  </div>
+  <%= form_for @topic, url: suggest_topic_path(@topic.id) do |f| %>
+  <div class="modal-body">
+    <%= f.text_area :excellent_desc, :class => "text xxlarge", :style => "height:100px" , placeholder: "请用一段简短的文字概括此帖的精华点！" %>
+  </div>
+  <div class="modal-footer">
+    <%= f.submit t("common.save"), :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %>
+    <button class="btn" data-dismiss="modal" aria-hidden="true"><%= t("common.cancel") %></button>
+  </div>
+  <% end %>
+</div>
+<% end %>

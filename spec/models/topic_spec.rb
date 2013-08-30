@@ -99,4 +99,13 @@ describe Topic do
       topic.title.should == "Gitlab 怎么集成 GitlabCI"
     end
   end
+  
+  describe "#excellent" do
+    it "should suggest a topic as excellent" do
+      topic.excellent = 1
+      topic.excellent_desc = "foo bar"
+      topic.save
+      Topic.excellent.should include(topic)
+    end
+  end
 end

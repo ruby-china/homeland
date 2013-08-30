@@ -45,6 +45,11 @@ module TopicsHelper
     return t("topics.topic_was_deleted") if topic.blank?
     link_to(topic.title, topic_path(topic), :title => topic.title)
   end
+  
+  def topic_excellent_tag(topic)
+    return "" if !topic.excellent?
+    raw %(<i class="icon small_cert_on" title="精华贴"></i>)
+  end
 
   def render_topic_last_reply_time(topic)
     l((topic.replied_at || topic.created_at), :format => :short)

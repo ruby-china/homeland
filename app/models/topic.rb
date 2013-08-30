@@ -32,6 +32,10 @@ class Topic
   field :last_active_mark, :type => Integer
   # 是否锁定节点
   field :lock_node, :type => Mongoid::Boolean, :default => false
+  # 精华贴 0 否， 1 是
+  field :excellent, type: Integer, default: 0
+  # 精华贴的推荐语
+  field :excellent_desc
 
   belongs_to :user, :inverse_of => :topics
   counter_cache :name => :user, :inverse_of => :topics
@@ -48,6 +52,7 @@ class Topic
   index :last_active_mark => -1
   index :likes_count => 1
   index :suggested_at => 1
+  index :excellent => -1
 
   counter :hits, :default => 0
   
@@ -64,6 +69,7 @@ class Topic
   scope :no_reply, -> { where(:replies_count => 0) }
   scope :popular, -> { where(:likes_count.gt => 5) }
   scope :without_node_ids, Proc.new { |ids| where(:node_id.nin => ids) }
+  scope :excellent, -> { where(:excellent.gte => 1) }
 
   def self.find_by_message_id(message_id)
     where(:message_id => message_id).first
@@ -137,5 +143,9 @@ class Topic
     Rails.cache.fetch([self,"reply_ids"]) do
       self.replies.only(:_id).map(&:_id)
     end
+  end
+  
+  def excellent?
+    self.excellent >= 1
   end
 end

@@ -24,6 +24,8 @@ describe Ability do
     let(:ability){ Ability.new(wiki_editor) }
     let(:page_locked) { Factory :page, :locked => true }
     it { should_not be_able_to(:destroy, Page) }
+    it { should_not be_able_to(:suggest, Topic) }
+    it { should_not be_able_to(:unsuggest, Topic) }
     it { should be_able_to(:create, Page) }
     it { should be_able_to(:update, Page) }
     it { should_not be_able_to(:update, page_locked)}
@@ -54,6 +56,8 @@ describe Ability do
       it { should be_able_to(:create, Topic) }
       it { should be_able_to(:update, topic) }
       it { should be_able_to(:destroy, topic) }
+      it { should_not be_able_to(:suggest, Topic) }
+      it { should_not be_able_to(:unsuggest, Topic) }
     end
 
     context "Reply" do
@@ -106,6 +110,8 @@ describe Ability do
     let(:ability){ Ability.new(newbie) }
     context "Topic" do
       it { should_not be_able_to(:create, Topic) }
+      it { should_not be_able_to(:suggest, Topic) }
+      it { should_not be_able_to(:unsuggest, Topic) }
     end
   end
 

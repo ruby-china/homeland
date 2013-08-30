@@ -46,6 +46,8 @@ RubyChina::Application.routes.draw do
       post :favorite
       post :follow
       post :unfollow
+      patch :suggest
+      delete :unsuggest
     end
     collection do
       get :no_reply

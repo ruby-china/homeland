@@ -23,6 +23,7 @@
     a:visited {color:#2c64d7; text-decoration: none;}
     a:hover { text-decoration: underline; }
     em { font-style:normal; font-size:12px; color:#bbb; }
+    i.icon { margin-bottom: -1px; }
   }
   tr.head {
     td {  border-top:none; padding-top:14px; color:#CCC; font-weight:bold; font-size:12px; }
@@ -44,6 +45,7 @@
     li {
       border-bottom:1px dashed #ddd;
       padding:3px;
+      i.icon { margin-bottom: -1px; }
       .info { font-size:12px; color:#bbb; }
       .node {
         margin-right:5px;

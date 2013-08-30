@@ -14,6 +14,7 @@
     <div class="infos">
       <div class="title">
         <%= link_to(truncate(topic.title, :length => 100), topic_path(topic), :title => topic.title) %>
+        <%= topic_excellent_tag(topic) %>
       </div>
       <div class="info">
         <% if action_name != "node" %>

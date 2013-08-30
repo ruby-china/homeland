@@ -7,7 +7,7 @@
   <% topics.each do |topic| %>
   <tr class="topic <%= cycle("odd","") %>">
     <td class="node"><%= render_node_name(topic.node_name,topic.node_id) %></td>
-    <td class="title"><%= link_to(topic.title, topic_path(topic)) %> <em><%= timeago(topic.created_at) %></td>
+    <td class="title"><%= link_to(topic.title, topic_path(topic)) %> <%= topic_excellent_tag(topic) %> <em><%= timeago(topic.created_at) %></td>
     <td class="replies"><%= topic.replies_count %>/<%= topic.likes_count %> </td>
   </tr>
   <% end %>

@@ -12,7 +12,10 @@
     .avatar { width:56px; margin-left:10px; }
     .infos { padding-right:74px; }
     .right_info { padding-left:66px;}
-    .title { font-size:14px; margin-top:2px; margin-bottom:6px; }
+    .title { 
+      font-size:14px; margin-top:2px; margin-bottom:6px; 
+      i { margin-bottom:-1px; }
+    }
     .info {
       color:#bbb; margin-bottom:2px;
       font-size:12px;
@@ -41,6 +44,19 @@
   .body {
     margin-bottom:10px; margin-top:8px;
     img { max-width:690px;}
+  }
+  .excellent {
+    background:#fffce9; 
+    border-top:1px solid #fff3e6;
+    border-bottom:1px solid #fff3e6;
+    margin: 0px -10px 10px -10px;
+    padding:4px 10px;
+    color:#da974d; font-size:12px;
+    .icon { margin-bottom:-1px; }
+    .opts { 
+      text-align:right; font-size:10px; 
+      a { margin-left:10px; color:#aaa; }
+    }
   }
   .tools {
     text-align:right; height:16px; overflow:hidden;

@@ -21,7 +21,7 @@
 #= require emoji_list
 #= require faye
 #= require notifier
-#= require sisyphus
+#= require form_storage
 #= require turbolinks
 #= require_self
 window.App =
@@ -133,14 +133,10 @@ window.App =
       $(document).attr("title", new_title)
     true
 
+
   init : () ->
     App.initForDesktopView()
-
-    $('form.new_topic,form.new_reply,form.new_note,form.new_page').sisyphus
-      timeout : 2
-      excludeFields : $('input[name=utf8], input[name=_method], input[name=authenticity_token]')
-    $('form a.reset').click ->
-      $.sisyphus().manuallyReleaseData()
+    FormStorage.restore()
 
     $("abbr.timeago").timeago()
     $(".alert").alert()
@@ -179,3 +175,5 @@ $(document).on 'page:restore', ->
 $(document).ready ->
   App.init()
   NProgress.done()
+
+FormStorage.init()

@@ -1,7 +1,7 @@
 #= require_self
 window.Notes =
   init : () ->
-    $("<div id='preview' class='wikistyle'></div>").insertAfter( $('#note_body') ) 
+    $("<div id='preview' class='wikistyle'></div>").insertAfter( $('#note_body') )
 
     $('.edit a').click ->
       $(this).parent().addClass('active')
@@ -9,7 +9,7 @@ window.Notes =
       $('#preview').hide()
       $('#note_body').show()
       false
-    
+
     $('.preview a').click ->
       $(this).parent().addClass('active')
       $('.edit a').parent().removeClass('active')
@@ -22,4 +22,5 @@ window.Notes =
       false
 
 $(document).ready ->
-  Notes.init()
+  if $('body').data('controller-name') in ['notes']
+    Notes.init()

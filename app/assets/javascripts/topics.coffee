@@ -243,4 +243,5 @@ window.Topics =
     $("body.topics-controller.new-action #topic_title").focus()
 
 $(document).ready ->
-  Topics.init()
+  if $('body').data('controller-name') in ['topics', 'replies']
+    Topics.init()

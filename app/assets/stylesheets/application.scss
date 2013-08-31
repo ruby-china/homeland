@@ -148,7 +148,7 @@ form {
       font-size:12px;
       i { color:#bbb; }
     }
-  }  
+  }
 }
 
 
@@ -197,7 +197,7 @@ div.field .hint { font-size:12px; color:#999;}
 .icons_go_top { width: 16px; height: 16px; background: url(image-path('go_top.png'));}
 .icons_rss { width: 16px; height: 16px; background: url(image-path('rss.png')); }
 
-@media only screen and (-webkit-device-pixel-ratio: 2){ 
+@media only screen and (-webkit-device-pixel-ratio: 2){
 	.icons_rss { background: url(image-path('rss@2x.png')); background-size:16px 16px; }
 	.icons_go_top { background: url(image-path('go_top@2x.png')); background-size:16px 16px; }
 }

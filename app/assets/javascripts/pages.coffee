@@ -2,13 +2,13 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 #
-window.Pages = 
+window.Pages =
 # 往话题编辑器里面插入代码模版
   test : () ->
     alert('test');
 
   init : () ->
-    $("<div id='preview' class='wikistyle'></div>").insertAfter( $('#page_body') ) 
+    $("<div id='preview' class='wikistyle'></div>").insertAfter( $('#page_body') )
 
     $('.edit a').click ->
       $(this).parent().addClass('active')
@@ -16,7 +16,7 @@ window.Pages =
       $('#preview').hide()
       $('#page_body').show()
       false
-    
+
     $('.preview a').click ->
       $(this).parent().addClass('active')
       $('.edit a').parent().removeClass('active')
@@ -29,5 +29,5 @@ window.Pages =
       false
 
 $(document).ready ->
-  Pages.init()
-  
+  if $('body').data('controller-name') in ['pages']
+    Pages.init()

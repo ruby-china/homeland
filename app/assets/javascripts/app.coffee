@@ -23,7 +23,11 @@
 #= require notifier
 #= require form_storage
 #= require turbolinks
+#= require topics
+#= require pages
+#= require notes
 #= require_self
+
 window.App =
   notifier : null,
 

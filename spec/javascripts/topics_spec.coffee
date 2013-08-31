@@ -104,6 +104,7 @@ describe "Topics", ->
 
       it 'replies to floor 1 and login 012345', ->
         spy = @spy(Topics, 'reply')
+        Topics.init()
         @htmlContainer.find('a').click()
         console.log spy.args
         expect(spy.calledWith(1, '012345')).toBeTruthy()

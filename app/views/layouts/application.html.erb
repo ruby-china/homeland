@@ -17,7 +17,7 @@
 <html>
 <head>
   <%= render_page_title %>
-  <%= stylesheet_link_tag "front" %>
+  <%= stylesheet_link_tag "front", "data-turbolinks-track" => true %>
   <%= yield :styles %>
   <% if mobile? %>
     <%= stylesheet_link_tag "mobile" %>
@@ -33,7 +33,7 @@
   <%= raw SiteConfig.custom_head_html %>
   <%= csrf_meta_tag %>
   <%= auto_discovery_link_tag(:rss,feed_topics_url,:title => '订阅最新帖') %>
-  <%= javascript_include_tag "app" %>
+  <%= javascript_include_tag "app", "data-turbolinks-track" => true %>
   <%= yield :node_feed_link %>
 </head>
 <body data-offset="50" data-controller-name="<%= controller_name %>">

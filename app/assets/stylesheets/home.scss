@@ -25,6 +25,18 @@ h2 {
     padding: 0 10px 10px 10px;
     border-bottom:1px solid #ddd;
   }
+  .topics {
+    .topic { 
+      height:50px;
+      .title {
+        white-space:nowrap;
+        overflow:hidden;
+        text-overflow:ellipsis;
+      }
+    }
+    .topic:nth-child(odd) { width:50%; float:left;  clear:left; }
+    .topic:nth-child(even) { width:50%; padding-left:50%; margin-left:10px; }
+  }
 }
 
 .node_topics {

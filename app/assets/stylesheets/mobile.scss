@@ -224,4 +224,15 @@ form {
 
 .home_suggest_topics {
   .box { width:auto; position: static;}
+  .topics {
+    .topic { 
+      height:auto;
+      .title {
+        white-space:break-all;
+        overflow:auto;
+      }
+    }
+    .topic:nth-child(odd) { width:auto; float:none;  clear:left; }
+    .topic:nth-child(even) { width:auto; padding-left:0; margin-left:-10px; }
+  }
 }

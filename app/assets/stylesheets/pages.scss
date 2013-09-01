@@ -1,6 +1,6 @@
 #pages {
-  .tools { 
-    text-align:right; margin-bottom:10px; 
+  .tools {
+    text-align:right; margin-bottom:10px;
     a {
       margin-left:10px;
     }
@@ -34,5 +34,8 @@
   overflow: scroll;
 }
 
-.editor_toolbar{width:680px;} 
-
+.page_form {
+  .editor_toolbar{
+    width: 680px;
+  }
+}

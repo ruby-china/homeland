@@ -29,3 +29,5 @@ solr/pids/
 bin/
 tags
 chromedriver.log
+.ruby-version
+.ruby-gemset

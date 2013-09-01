@@ -27,7 +27,7 @@
 <% if !mobile? %>
   <div class="sidebar">
     <%= render "sidebar_for_topic_index" if action_name.in?(%w(index)) %>
-    <%= render "sidebar_for_topic_recent" if action_name.in?(%w(recent no_reply popular)) %>
+    <%= render "sidebar_for_topic_recent" if action_name.in?(%w(recent no_reply popular excellent)) %>
     <%= render "sidebar_for_topic_node" if action_name == "node" %>
   </div>
 <% end %>

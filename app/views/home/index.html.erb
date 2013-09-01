@@ -1,9 +1,15 @@
 <%= raw SiteConfig.index_html %>
-<div class="home_suggest_topics box">
+
+<div class="home_suggest_topics box box_gray">
   <h2>社区精华贴</h2>
   <div class="topics">
-    <%= render "/users/topics", :topics => @excellent_topics %>
+    <%= render partial: "topics/topic", collection: @excellent_topics %>
+  </div>
+  <div class="more">
+    <%= link_to "查看更多精华贴...", excellent_topics_path %>
   </div>
 </div>
-<%= render_cell :topics, :index_sections %>
-<%= render_cell :topics, :index_locations %>
+<% if !mobile? %>
+  <%= render_cell :topics, :index_sections %>
+  <%= render_cell :topics, :index_locations %>
+<% end %>

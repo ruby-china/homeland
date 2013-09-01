@@ -1,27 +1,23 @@
 <%= simple_form_for @topic do |f| %>
   <%= render "shared/error_messages", :target => @topic %>
-  <fieldset>
-    <legend><%= @topic.new_record? ? t("topics.create_topic") : t("topics.edit_topic") %></legend>
-    <%= f.input :title do %>
-      <% if @topic.lock_node == false || admin? %>
-        <span class="node_select span2">
-          <%= render_topic_node_select_tag(@topic) %>
-        </span>
-      <% end %>
-      <%= f.text_field :title, :class => "span4" %>
+  <div class="control-group">
+    <% if @topic.lock_node == false || admin? %>
+      <span class="node_select span2">
+        <%= render_topic_node_select_tag(@topic) %>
+      </span>
     <% end %>
+    <%= f.text_field :title, :class => "span5", placeholder: "在这里填写标题" %>
+  </div>
+  
+  <div class="control-group edit_tools">
+    <%= render "editor_toolbar" %>
+  </div>
+  
+  <div class="control-group">
+    <%= f.text_area :body, :class => "topic_editor closewarning" %>
+  </div>
 
-    <div class="control-group edit_tools">
-      <label class="control-label"></label>
-      <div class="controls">
-        <%= render "editor_toolbar" %>
-      </div>
-    </div>
-    <%= f.input :body, :as => :text, :input_html => { :class => "topic_editor closewarning xxlarge", :style => "height:400px" }%>
-
-    <div class="form-actions">
-      <%= f.submit t("common.save"), :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %>
-      <%= link_to(t("common.cancel"), @topic.id.blank? ? topics_path : topic_path(@topic), :class => "btn reset")%>
-    </div>
-  </fieldset>
+  <div class="control-group">
+    <%= f.submit t("common.save"), :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %>
+  </div>
 <% end %>

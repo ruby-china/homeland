@@ -41,7 +41,7 @@ module TopicsHelper
                         :rel => "twipsy"
   end
 
-  def render_topic_title(topic)
+  def topic_title_tag(topic)
     return t("topics.topic_was_deleted") if topic.blank?
     link_to(topic.title, topic_path(topic), :title => topic.title)
   end

@@ -1,7 +1,7 @@
 # coding: utf-8
 class HomeController < ApplicationController
   def index
-    @excellent_topics = Topic.excellent.recent.limit(20)
+    @excellent_topics = Topic.excellent.recent.fields_for_list.includes(:user).limit(15)
     drop_breadcrumb("首页", root_path)
   end
 

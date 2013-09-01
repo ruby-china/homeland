@@ -15,7 +15,7 @@
       <%= user_name_tag(reply.user) %>
     </span>
     回复了你<%= action_label %>的主题：
-    <%= render_topic_title(topic) %>
+    <%= topic_title_tag(topic) %>
     <% if !notification.read? %>
       <span class="new label label-warning">新</span>
     <% end %>

@@ -363,3 +363,13 @@ form .node_select {
 }
 
 #topic_upload_images { position:absolute;bottom:0;right:0;width:0;height:0;overflow:hidden; }
+
+
+.new_topic,
+.edit_topic,
+.edit_reply {
+  .control-group:last-of-type { margin-bottom:0px; }
+  .topic_editor { width:99%; height: 400px; }
+  #preview { width:99%; }
+  .btn-primary { width:100px; }
+}

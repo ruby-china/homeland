@@ -11,7 +11,6 @@ class TopicsController < ApplicationController
     @topics = Topic.last_actived.without_hide_nodes.fields_for_list.includes(:user).paginate(:page => params[:page], :per_page => 15, :total_entries => 1500)
     set_seo_meta("","#{Setting.app_name}#{t("menu.topics")}")
     drop_breadcrumb(t("topics.topic_list.hot_topic"))
-
   end
 
   def feed
@@ -48,6 +47,13 @@ class TopicsController < ApplicationController
     @topics = Topic.recent.fields_for_list.includes(:user).paginate(:page => params[:page], :per_page => 15, :total_entries => 1500)
     drop_breadcrumb(t("topics.topic_list.recent"))
     set_seo_meta([t("topics.topic_list.recent"),t("menu.topics")].join(" &raquo; "))
+    render :action => "index"
+  end
+  
+  def excellent
+    @topics = Topic.excellent.recent.fields_for_list.includes(:user).paginate(page: params[:page], per_page: 15, total_entries: 500)
+    drop_breadcrumb(t("topics.topic_list.excellent"))
+    set_seo_meta([t("topics.topic_list.excellent"),t("menu.topics")].join(" &raquo; "))
     render :action => "index"
   end
 

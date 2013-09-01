@@ -52,6 +52,7 @@ RubyChina::Application.routes.draw do
     collection do
       get :no_reply
       get :popular
+      get :excellent
       get :feed
       post :preview
     end

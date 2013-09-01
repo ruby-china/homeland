@@ -15,7 +15,7 @@
         <%= user_name_tag(reply.user) %>
       </span>
       在
-      <%= render_topic_title(topic) %>
+      <%= topic_title_tag(topic) %>
       提及你：
       <% if !notification.read? %>
         <span class="new label label-warning">新</span>
@@ -40,7 +40,7 @@
         <%= user_name_tag(topic.user) %>
       </span>
       在
-      <%= render_topic_title(topic) %>
+      <%= topic_title_tag(topic) %>
       提及你：
       <% if !notification.read? %>
         <span class="new label warning">新</span>

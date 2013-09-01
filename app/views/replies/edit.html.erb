@@ -1,7 +1,7 @@
 <div class="sidebar">
   <div class="box">
     <%= t("reply.topic_location")%>:<br />
-    <%= render_topic_title(@reply.topic) %>
+    <%= topic_title_tag(@reply.topic) %>
   </div>
   <div class="box">
     <%= render_cell :topics, :reply_help_block %>
@@ -11,24 +11,19 @@
   <div class="box">
     <%= simple_form_for([@topic, @reply]) do |f| %>
       <%= render "shared/error_messages", :target => @reply %>
-      <fieldset>
-        <legend><%= t("reply.edit_reply")%></legend>
-        <div class="control-group edit_tools">
-          <label class="control-label"></label>
-          <div class="controls">
-            <%= render "/topics/editor_toolbar" %>
-          </div>
-        </div>
-        <%= f.input :body, :as => :text, :input_html => { :class => "topic_editor xxlarge", :rows => "20" } %>
-        <div class="form-actions">
-          <%= f.submit t("common.save"), :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %>
-          <a href="<%= topic_path(@topic) %>" class="btn reset"><%= t("common.cancel") %></a>
+      <div class="control-group edit_tools">
+        <%= render "/topics/editor_toolbar" %>
+      </div>
+      <div class="control-group">
+        <%= f.text_area :body, :class => "topic_editor" %>
+      </div>
+      <div class="control-group">
+        <%= f.submit t("common.save"), :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %>
 
-          <% if can? :destroy, @reply %>
-            <%= link_to "删除",[@topic,@reply], :class => "pull-right btn btn-danger", :method => :delete, :data => { :confirm => "确定要删除此回复么？" } %>
-          <% end %>
-        </div>
-      </fieldset>
+        <% if can? :destroy, @reply %>
+          <%= link_to "删除",[@topic,@reply], :class => "pull-right btn btn-danger", :method => :delete, :data => { :confirm => "确定要删除此回复么？" } %>
+        <% end %>
+      </div>
     <% end %>
   </div>
 </div>

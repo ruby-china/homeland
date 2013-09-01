@@ -9,7 +9,7 @@
       <% @topics.each do |item| %>
         <li>
           <span class="node"><%= render_node_name(item.node_name,item.node_id) %></span>
-          <%= render_topic_title(item) %> <%= topic_excellent_tag(item) %>
+          <%= topic_title_tag(item) %> <%= topic_excellent_tag(item) %>
           <span class="info pull-right"><%= item.likes_count %> 人喜欢, <%= item.replies_count %> 条回复</span>
         </li>
       <% end %>

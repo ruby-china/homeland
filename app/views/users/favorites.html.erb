@@ -11,7 +11,7 @@
         <% next if item.blank? %>
         <tr class="topic <%= cycle('odd',"") %>">
           <td><%= render_node_name(item.node_name,item.node_id) %></td>
-          <td class="title"><%= render_topic_title(item) %></td>
+          <td class="title"><%= topic_title_tag(item) %></td>
         </tr>
       <% end %>
     </table>

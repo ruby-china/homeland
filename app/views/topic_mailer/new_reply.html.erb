@@ -1,10 +1,10 @@
 <h1>你关注的帖子有了新回复</h1>
 <p> 
-   <%= user_name_tag(@reply.user) %>  回复了 《<%= render_topic_title(@topic)%>》:</label> <br />
+   <%= user_name_tag(@reply.user) %>  回复了 《<%= topic_title_tag(@topic)%>》:</label> <br />
 </p>
 <blockquote>
   <p><%= raw @reply.body_html %><br/></p>
 </blockquote>
 <p>
- <label> 帖子地址:</label> <%= render_topic_title(@topic) %>.
+ <label> 帖子地址:</label> <%= topic_title_tag(@topic) %>.
 </p>

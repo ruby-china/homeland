@@ -101,9 +101,9 @@
   .active { margin-bottom:0;}
 }
 
-table {
+table.node_topics {
   td {
-    a { color:#333; }
+    a { color:#333; font-weight:normal; }
   }
   td.replied_at { width:80px; }
 }

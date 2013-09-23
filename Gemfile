@@ -94,6 +94,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem "rspec-cells", '0.1.7'
+	gem 'fuubar'
   gem "capybara", "~> 0.4.1"
   gem 'api_taster', '0.6.0'
   gem "letter_opener"

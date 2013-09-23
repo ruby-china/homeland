@@ -24,7 +24,7 @@ class Reply
 
   index :user_id => 1
   index :topic_id => 1
-  
+
   delegate :title, :to => :topic, :prefix => true, :allow_nil => true
   delegate :login, :to => :user, :prefix => true, :allow_nil => true
 
@@ -36,7 +36,7 @@ class Reply
       self.errors.add(:body,"请勿回复无意义的内容，如你想收藏或赞这篇帖子，请用帖子后面的功能。")
     end
   end
-  
+
   after_create :update_parent_topic
   def update_parent_topic
     topic.update_last_reply(self)
@@ -53,27 +53,24 @@ class Reply
   after_create do
     Reply.delay.send_topic_reply_notification(self.id)
   end
-  
+
   def self.per_page
     50
   end
-  
 
   def self.send_topic_reply_notification(reply_id)
     reply = Reply.find_by_id(reply_id)
     return if reply.blank?
     topic = Topic.find_by_id(reply.topic_id)
     return if topic.blank?
-    
+
     notified_user_ids = reply.mentioned_user_ids
-    
+
     # 给发帖人发回帖通知
     if reply.user_id != topic.user_id && !notified_user_ids.include?(topic.user_id)
       Notification::TopicReply.create :user_id => topic.user_id, :reply_id => reply.id
       notified_user_ids << topic.user_id
     end
-    
-    puts "reply.notified_user_ids: #{notified_user_ids}"
 
     # 给关注者发通知
     topic.follower_ids.each do |uid|

@@ -59,7 +59,7 @@ gem 'auto-space', '0.0.2'
 # YAML 配置信息
 gem "settingslogic", "~> 2.0.9"
 
-gem "cells", github: 'apotonick/cells', ref: '0dcdc190e949af1a821f31f33f76f407a6da47b4'
+gem "cells", '~> 3.8.8'
 
 # 队列
 gem "sidekiq", "2.5.3"

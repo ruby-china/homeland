@@ -1,7 +1,7 @@
 <% if target.errors.any? %>  
  <div class="alert alert-block alert-error">
    <a class="close" data-dismiss='alert' href="#">×</a>
-   <p><strong>有 <%= target.errors.count %> 处问题导至无法提交:</strong></p>
+   <p><strong>有 <%= target.errors.count %> 处问题导致无法提交:</strong></p>
    <ul>
    <% target.errors.full_messages.each do |msg| %>
      <li><%= msg %></li>

@@ -38,8 +38,8 @@ class TopicsCell < BaseCell
   end
 
   # 节点下面的最新话题
-  cache :sidebar_for_node_recent_topics, :expires_in => 20.minutes do |cell, args|
-    args[:topic].id
+  cache :sidebar_for_node_recent_topics, :expires_in => 30.minutes do |cell, args|
+    ['node',args[:topic].node_id].join("-")
   end
   def sidebar_for_node_recent_topics(args = {})
     topic = args[:topic]
@@ -57,18 +57,6 @@ class TopicsCell < BaseCell
   cache :index_locations, :expires_in => 1.days
   def index_locations
     @hot_locations = Location.hot.limit(12)
-    render
-  end
-
-  cache :high_likes_topics, :expires_in => 3.hours
-  def high_likes_topics
-    @topics = Topic.by_week.high_likes.limit(10)
-    render
-  end
-
-  cache :high_replies_topics, :expires_in => 3.hours
-  def high_replies_topics
-    @topics = Topic.by_week.high_replies.limit(10)
     render
   end
 

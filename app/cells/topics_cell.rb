@@ -21,13 +21,6 @@ class TopicsCell < BaseCell
     render
   end
 
-  # 热门节点
-  cache :sidebar_hot_nodes, :expires_in => 1.days
-  def sidebar_hot_nodes
-    @hot_nodes = Node.hots.limit(10)
-    render
-  end
-
   # 置顶话题
   cache :sidebar_suggest_topics do |cell|
     CacheVersion.topic_last_suggested_at

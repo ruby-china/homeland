@@ -21,12 +21,6 @@ describe TopicsCell do
     end
   end
 
-  describe "sidebar_hot_nodes" do
-    it "should render sidebar hot nodes" do
-      render_cell(:topics, :sidebar_hot_nodes).should have_css("div.hot_nodes li", :count => 1)
-    end
-  end
-
   describe "sidebar_suggest_topics" do
     it "should render sidebar_suggest_topics" do
       render_cell(:topics, :sidebar_suggest_topics).should have_css("div.suggest_topics", :count => 1)

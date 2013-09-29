@@ -45,15 +45,25 @@ describe Reply do
       # TODO: 需要更多的测试，测试 @ 并且有关注的时候不会重复通知，回复时候不会通知自己
     end
 
-    it "should update Topic updated_at on Reply updated" do
-      topic = Factory :topic, :updated_at => 1.days.ago
-      old_updated_at = topic.updated_at
-      reply = Factory :reply, :topic => topic
-      topic.updated_at.should_not == old_updated_at
-      reply.body = "foobar"
-      reply.save
-      topic.updated_at.should_not == old_updated_at
+    describe 'Touch Topic in callback' do
+      let(:topic) { Factory :topic, :updated_at => 1.days.ago }
+      let(:reply) { Factory :reply, :topic => topic }
+      
+      it "should update Topic updated_at on Reply updated" do
+        old_updated_at = topic.updated_at
+        reply.body = "foobar"
+        reply.save
+        topic.updated_at.should_not == old_updated_at
+      end
+    
+      it 'should update Topic updated_at on Reply deleted' do
+        old_updated_at = topic.updated_at
+        reply.body = "foobar"
+        reply.destroy
+        topic.updated_at.should_not == old_updated_at
+      end
     end
+    
 
     it "should send_topic_reply_notification work" do
       topic = Factory :topic, :user => user

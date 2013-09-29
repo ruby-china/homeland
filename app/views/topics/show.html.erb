@@ -45,7 +45,7 @@
 
       <div class="tools pull-right">
         <% if admin? and !@topic.excellent? %>
-          <%= link_to raw("<i class='icon small_cert'></i> 加精"), suggest_topic_path(@topic.id), title: "设为精华贴" , method: "patch", confirm: "确定要设置成精华贴么？" %>
+          <%= link_to raw("<i class='icon small_cert'></i> 加精"), suggest_topic_path(@topic.id), title: "设为精华贴" , method: "patch", data: { confirm: "确定要设置成精华贴么？" } %>
         <% end %>
         <%= topic_follow_tag(@topic) %>
         <%= likeable_tag(@topic) %>

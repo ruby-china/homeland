@@ -44,11 +44,15 @@ class Reply
 
   # 更新的时候也更新话题的 updated_at 以便于清理缓存之类的东西
   after_update :update_parent_topic_updated_at
+  # 删除的时候也要更新 Topic 的 updated_at 以便清理缓存
+  after_destroy :update_parent_topic_updated_at
   def update_parent_topic_updated_at
     if not self.topic.blank?
-      self.topic.set(updated_at: Time.now)
+      self.topic.touch
     end
   end
+  
+  
 
   after_create do
     Reply.delay.send_topic_reply_notification(self.id)

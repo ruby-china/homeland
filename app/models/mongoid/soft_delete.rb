@@ -12,12 +12,14 @@ module Mongoid
     end
 
     def destroy
-      if persisted?
-        self.set(deleted_at: Time.now.utc)
-        self.set(updated_at: Time.now.utc)
-      end
+      run_callbacks(:destroy) do
+        if persisted?
+          self.set(deleted_at: Time.now.utc)
+          self.set(updated_at: Time.now.utc)
+        end
 
-      @destroyed = true
+        @destroyed = true
+      end
       freeze
     end
   end

@@ -8,6 +8,11 @@ class WalkingDead
   include Mongoid::SoftDelete
 
   field :name
+  field :tag
+  
+  after_destroy do
+    self.tag = "after_destroy #{self.name}"
+  end
 end
 
 describe "Soft Delete" do
@@ -37,5 +42,11 @@ describe "Soft Delete" do
 
     WalkingDead.where(:name => rick.name).count.should == 0
     WalkingDead.unscoped.where(:name => rick.name).first.should eq(rick)
+  end
+  
+  it 'is run callback after destroy' do
+    rick.name = "foo"
+    rick.destroy
+    rick.tag.should == "after_destroy foo"
   end
 end

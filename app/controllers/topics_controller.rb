@@ -1,7 +1,7 @@
 # coding: utf-8
 class TopicsController < ApplicationController
 
-  load_and_authorize_resource :only => [:new,:edit,:create,:update,:destroy,:favorite, :follow, :unfollow, :sugges, :unsuggest]
+  load_and_authorize_resource :only => [:new,:edit,:create,:update,:destroy,:favorite, :follow, :unfollow, :suggest, :unsuggest]
 
   before_filter :set_menu_active
   caches_action :feed, :node_feed, :expires_in => 1.hours
@@ -49,7 +49,7 @@ class TopicsController < ApplicationController
     set_seo_meta([t("topics.topic_list.recent"),t("menu.topics")].join(" &raquo; "))
     render :action => "index"
   end
-  
+
   def excellent
     @topics = Topic.excellent.recent.fields_for_list.includes(:user).paginate(page: params[:page], per_page: 15, total_entries: 500)
     drop_breadcrumb(t("topics.topic_list.excellent"))

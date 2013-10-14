@@ -3,20 +3,20 @@
 <div id="cpanel_sites">
   <table class="table table-bordered table-striped table-condensed">
     <tr class="head">
-      <td>编号</td>
-      <td><%= t("mongoid.attributes.site.name") %></td>
-      <td><%= t("mongoid.attributes.site.url") %></td>
-      <td><%= t("mongoid.attributes.site.desc") %></td>
-      <td style="width:100px"><%= t("mongoid.attributes.site.site_node") %></td>
-      <td style="width:100px">At</td>
-      <td style="width:40px" class="opts"></td>
+      <td style="width:40px;">编号</td>
+      <td style="width:140px;">网站</td>
+      <td>信息</td>
+      <td>提交人</td>
+      <td style="width:100px">节点</td>
+      <td style="width:105px">时间</td>
+      <td style="width:30px" class="opts"></td>
     </tr>
     <% @sites.each do |item| %>
     <tr class="<%= cycle("","even") %><%= ' deleted' if !item.deleted_at.blank? %>">
       <td><%= item.id %></td>
       <td><%= item.name %></td>
-      <td><%= item.url %></td>
-      <td><%= item.desc %></td>
+      <td><%= link_to item.url,item.url, target: "_blank" %><br /><small class="muted"><%= item.desc %></small></td>
+      <td><%= user_name_tag(item.user) %></td>
       <td><%= item.site_node.name if !item.site_node.blank? %></td>
       <td><%= l(item.created_at, :format => :short) %></td>
       <td>

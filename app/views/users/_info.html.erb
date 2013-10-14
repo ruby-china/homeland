@@ -8,6 +8,9 @@
       <li class="with_nbsp">
         <label>&nbsp;</label>
         <span class="title">第 <%= @user.id %> 位<%= t("menu.users")%></span>
+        <% if admin? %>
+          <%= link_to "后台修改", edit_cpanel_user_path(@user), class: 'btn btn-mini' %>
+        <% end %>
       </li>
       <li>
         <label>ID:</label>

@@ -17,6 +17,7 @@ describe TopicsController do
   describe ":feed" do
     it "should have a feed action" do
       get :feed
+      response.headers['Content-Type'].should == 'application/xml; charset=utf-8'
       response.should be_success
     end
   end

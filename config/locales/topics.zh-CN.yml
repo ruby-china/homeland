@@ -10,7 +10,7 @@
     reply_this_fllor: "回复此楼"
     tips_for_create_topic: "发帖说明"
     start_a_new_topic_button: "发布新帖"
-    subscribe_with_rss: "订阅%{name}社区新帖"
+    subscribe_with_rss: "订阅 %{name} 社区新帖"
     submit_reply: "提交回复"
     topic_list:
       hot_topic: "活跃帖子"

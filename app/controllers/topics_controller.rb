@@ -15,7 +15,6 @@ class TopicsController < ApplicationController
 
   def feed
     @topics = Topic.recent.without_body.limit(20).includes(:node,:user, :last_reply_user)
-    response.headers['Content-Type'] = 'application/rss+xml; charset=utf-8'
     render :layout => false
   end
 
@@ -30,7 +29,6 @@ class TopicsController < ApplicationController
   def node_feed
     @node = Node.find(params[:id])
     @topics = @node.topics.recent.without_body.limit(20)
-    response.headers["Content-Type"] = "application/rss+xml"
     render :layout => false
   end
 

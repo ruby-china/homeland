@@ -38,7 +38,7 @@ RubyChina::Application.routes.draw do
   resources :nodes
 
   get "topics/node:id" => "topics#node", as: 'node_topics'
-  get "topics/node:id/feed" => "topics#node_feed", as: 'feed_node_topics'
+  get "topics/node:id/feed" => "topics#node_feed", as: 'feed_node_topics', defaults: { format: 'xml' }
   get "topics/last" => "topics#recent", as: 'recent_topics'
   resources :topics do
     member do
@@ -53,7 +53,7 @@ RubyChina::Application.routes.draw do
       get :no_reply
       get :popular
       get :excellent
-      get :feed
+      get :feed, defaults: { format: 'xml' }
       post :preview
     end
     resources :replies

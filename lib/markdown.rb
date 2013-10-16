@@ -239,6 +239,7 @@ class MarkdownTopicConverter < MarkdownConverter
         :fenced_code_blocks => true,
         :strikethrough => true,
         :space_after_headers => true,
+        :disable_indented_code_blocks => true,
         :no_intra_emphasis => true
       })
     @emoji = MdEmoji::Render.new

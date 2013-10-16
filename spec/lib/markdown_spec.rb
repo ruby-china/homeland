@@ -225,5 +225,39 @@ describe 'markdown' do
     end
 
     # }}}
+    
+    describe 'The code' do
+      context '``` use with code' do
+        let(:raw) {
+          %(```
+          class Foo; end
+          ```)
+        }
+        
+        specify { doc.css('pre').attr("class").value.should == "highlight plaintext" }
+      end
+      
+      context '```ruby use with code' do
+        let(:raw) {
+          %(```ruby
+          class Foo; end
+          ```)
+        }
+        
+        specify { doc.css('pre').attr("class").value.should == "highlight ruby" }
+      end
+      
+      context 'indent in raw with \t' do
+        let(:raw) { "\t\tclass Foo; end" }
+        
+        specify { doc.css('pre').should be_empty }
+      end
+      
+      context 'indent in raw with space' do
+        let(:raw) { "    class Foo; end" }
+        
+        specify { doc.css('pre').should be_empty }
+      end
+    end
   end
 end

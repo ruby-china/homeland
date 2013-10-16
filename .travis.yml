@@ -10,8 +10,8 @@ matrix:
     - rvm: ruby-head
 
 rvm:
-  - 1.9.3
   - 2.0.0
+  - 2.1.0
 
 before_script:
   - mongo ruby_china_test --eval 'db.addUser("travis", "test");'

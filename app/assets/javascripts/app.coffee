@@ -121,7 +121,7 @@ window.App =
     result
 
   initNotificationSubscribe : () ->
-    return unless ('CURRENT_USER_ACCESS_TOKEN' in window)
+    return if not CURRENT_USER_ACCESS_TOKEN?
     faye = new Faye.Client(FAYE_SERVER_URL)
     notification_subscription = faye.subscribe "/notifications_count/#{CURRENT_USER_ACCESS_TOKEN}",(json) ->
       span = $("#user_notifications_count span")

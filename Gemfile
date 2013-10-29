@@ -110,6 +110,6 @@ group :development, :test do
 end
 
 group :production do
-  gem 'unicorn'
+  gem "puma", "2.6.0"
   gem 'newrelic_rpm'
 end

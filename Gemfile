@@ -111,5 +111,5 @@ end
 
 group :production do
   gem "puma", "2.6.0"
-  gem 'newrelic_rpm'
+  gem 'newrelic_rpm', "~> 3.6.8.168"
 end

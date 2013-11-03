@@ -15,7 +15,7 @@ module RubyChina
   class Application < Rails::Application
     # Custom directories with classes and modules you want to be autoloadable.
     config.autoload_paths += %W(#{config.root}/uploaders)
-    config.autoload_paths += %W(#{config.root}/lib)
+    config.autoload_paths += Dir["#{config.root}/lib/**/"]
     config.autoload_paths += %W(#{config.root}/app/grape)
 
     config.time_zone = 'Beijing'
@@ -43,14 +43,12 @@ module RubyChina
     config.to_prepare {
       Devise::Mailer.layout "mailer"
     }
-    
+
     config.assets.precompile += %w(application.css app.js topics.css topics.js window.css front.css cpanel.css
-        users.css pages.css pages.js notes.css notes.js 
+        users.css pages.css pages.js notes.css notes.js
         mobile.css home.css)
   end
 end
-
-require "markdown"
 
 I18n.locale = 'zh-CN'
 

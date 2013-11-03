@@ -192,7 +192,7 @@ GEM
     jquery-turbolinks (2.0.0)
       railties (>= 3.1.0)
       turbolinks
-    json (1.8.0)
+    json (1.8.1)
     jwt (0.1.8)
       multi_json (>= 1.5)
     launchy (2.1.0)

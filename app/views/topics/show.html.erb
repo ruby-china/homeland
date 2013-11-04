@@ -79,17 +79,23 @@
 
   <% if current_user %>
     <div id="reply" class="form box">
-      <%= render "editor_toolbar" %>
-      <%= form_for(Reply.new, :remote => true,:url => topic_replies_path(@topic)) do |f| %>
-        <%= f.text_area :body,:class => "topic_editor span10", :rows => "4", :tabindex => "1" %>
-        <div class="submit_buttons">
-          <button type="submit" id="btn_reply" class="btn btn-primary" tabindex="2"><%= t("topics.submit_reply")%></button><br />
-          <span class="help-inline" title="或者 Command + Enter">Ctrl+Enter</span>
-        </div>
+      <% if can? :create, Reply %>
+        <%= render "editor_toolbar" %>
+        <%= form_for(Reply.new, :remote => true,:url => topic_replies_path(@topic)) do |f| %>
+          <%= f.text_area :body,:class => "topic_editor span10", :rows => "4", :tabindex => "1" %>
+          <div class="submit_buttons">
+            <button type="submit" id="btn_reply" class="btn btn-primary" tabindex="2"><%= t("topics.submit_reply")%></button><br />
+            <span class="help-inline" title="或者 Command + Enter">Ctrl+Enter</span>
+          </div>
 
-        <span class="body helpblock">
-          <%= render_cell :topics, :reply_help_block %>
-        </span>
+          <span class="body helpblock">
+            <%= render_cell :topics, :reply_help_block %>
+          </span>
+        <% end %>
+      <% else %>
+        <div class="alert alert-info">
+          当前设置新手用户不能在 22:00 ~ 9:00 发帖。
+        </div>
       <% end %>
     </div>
   <% else %>

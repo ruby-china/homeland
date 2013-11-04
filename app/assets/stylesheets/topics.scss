@@ -159,7 +159,10 @@ form .node_select {
 }
 
 #replies {
-  .total { padding:0 10px 6px 10px; border-bottom:1px solid #DDD; color:#999; margin:0 -10px; }
+  .total { 
+    padding:0 10px 6px 10px; border-bottom:1px solid #DDD; color:#999; margin:0 -10px; 
+    a { color:#666; text-decoration: underline; }
+  }
   .pagination { padding:8px 10px 0 10px; margin:0 -10px; }
   .reply {
     border-bottom:1px solid #DDD; padding:8px 10px; margin:0 -10px;
@@ -201,6 +204,7 @@ form .node_select {
       a.reply_link img { vertical-align:middle;}
     }
     .body {
+      text-align:left;
       margin-top:5px;
       img { max-width:622px;}
     }

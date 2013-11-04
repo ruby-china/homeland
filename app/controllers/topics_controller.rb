@@ -59,6 +59,7 @@ class TopicsController < ApplicationController
     @topic = Topic.without_body.find(params[:id])
     @topic.hits.incr(1)
     @node = @topic.node
+    @show_raw = params[:raw] == "1"
 
     @per_page = Reply.per_page
     # 默认最后一页

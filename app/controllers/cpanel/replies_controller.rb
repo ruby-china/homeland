@@ -6,7 +6,7 @@ class Cpanel::RepliesController < Cpanel::ApplicationController
   end
 
   def show
-    @reply = Reply.find(params[:id])
+    @reply = Reply.unscoped.find(params[:id])
 
     if @reply.topic.blank?
       redirect_to cpanel_replies_path, :alert => "帖子已经不存在"
@@ -18,7 +18,7 @@ class Cpanel::RepliesController < Cpanel::ApplicationController
   end
 
   def edit
-    @reply = Reply.find(params[:id])
+    @reply = Reply.unscoped.find(params[:id])
   end
 
 
@@ -33,7 +33,7 @@ class Cpanel::RepliesController < Cpanel::ApplicationController
   end
 
   def update
-    @reply = Reply.find(params[:id])
+    @reply = Reply.unscoped.find(params[:id])
 
     if @reply.update_attributes(params[:reply].permit!)
        redirect_to(cpanel_replies_path, :notice => 'Reply was successfully updated.')
@@ -43,7 +43,7 @@ class Cpanel::RepliesController < Cpanel::ApplicationController
   end
 
   def destroy
-    @reply = Reply.find(params[:id])
+    @reply = Reply.unscoped.find(params[:id])
     @reply.destroy
   end
 end

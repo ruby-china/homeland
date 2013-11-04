@@ -1,10 +1,10 @@
-<% cache([reply]) do %>
+<% cache([reply,"raw:#{@show_raw}"]) do %>
 <%
   floor = reply_counter + 1 + ((@page - 1) * Reply.per_page)
 %>
 <div class="reply<%= ' popular' if reply.popular? %>" id="reply<%= floor %>">
-  <% if !reply.deleted_at.blank? %>
-  <div class="deleted"><%= floor %><%= t("common.floor")%> 已删除.</div>
+  <% if reply.deleted? and !@show_raw %>
+    <div class="deleted"><%= floor %><%= t("common.floor")%> 已删除.</div>
   <% else %>
     <div class="pull-left face"><%= user_avatar_tag(reply.user, :normal) %></div>
     <div class="infos">
@@ -18,14 +18,16 @@
           <%= timeago(reply.created_at) %>
         </span>
         <span class="opts">
-          <%= likeable_tag(reply, :cache => true) %>
-          <%= link_to("", edit_topic_reply_path(@topic,reply), :class => "edit icon small_edit", 'data-uid' => reply.user_id, :title => "修改回帖")%>
-          <%= link_to("", "#", 'data-floor' => floor, 'data-login' => reply.user_login,
-              :title => t("topics.reply_this_floor"), :class => "icon small_reply" )
-          %>
+          <% if !reply.deleted? %>
+            <%= likeable_tag(reply, :cache => true) %>
+            <%= link_to("", edit_topic_reply_path(@topic,reply), :class => "edit icon small_edit", 'data-uid' => reply.user_id, :title => "修改回帖")%>
+            <%= link_to("", "#", 'data-floor' => floor, 'data-login' => reply.user_login,
+                :title => t("topics.reply_this_floor"), :class => "icon small_reply" )
+            %>
+          <% end %>
         </span>
       </div>
-      <div class="body">
+      <div class="body<%= ' deleted' if reply.deleted? %>">
         <%= raw reply.body_html %>
       </div>
       <span class="opts">

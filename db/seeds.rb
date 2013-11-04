@@ -94,6 +94,8 @@ SiteConfig.save_default("newbie_notices",%(<p>为提高社区质量，防止新�
     </ol>
     <p>请在新人阶段多浏览，看看其他老用户是如何在社区里面分享与解决问题的。</p>))
 
+SiteConfig.save_default("reject_newbie_reply_in_the_evening", "false")
+
 # ========================= init Section, Node =========================
 
 # s1 = Section.create(:name => "Ruby")

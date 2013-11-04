@@ -69,7 +69,7 @@
         共收到 <b><%= @topic.replies_count %></b> 条回复
       </div>
       <div class="items">
-        <%= cache([@topic,params[:page]]) do %>
+        <%= cache([@topic,params[:page],"raw:#{@show_raw}"]) do %>
           <%= render :partial => "replies/reply", :collection => @replies %>
         <% end %>
       </div>

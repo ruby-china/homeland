@@ -82,7 +82,7 @@ class TopicsController < ApplicationController
     drop_breadcrumb("#{@node.try(:name)}", node_topics_path(@node.try(:id)))
     drop_breadcrumb t("topics.read_topic")
 
-    fresh_when(:etag => [@topic,@has_followed,@has_favorited,@replies,@node])
+    fresh_when(:etag => [@topic,@has_followed,@has_favorited,@replies,@node,@show_raw])
   end
 
   def new

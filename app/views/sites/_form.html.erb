@@ -5,7 +5,6 @@
     <legend><%= t("sites.create") %></legend>
     <%= f.input :name %>
     <%= f.input :url, :input_html => { :class => "xxlarge" }, :placeholder => "http://"  %>
-    <%= f.input :favicon, :input_html => { :class => "xxlarge" }, :placeholder => "http://" %>
     <%= f.input :desc, :as => :text, :input_html => { :class => "xxlarge", :rows => "3" } %>
     <%= f.input :site_node_id, :collection => SiteNode.all.collect { |t| [t.name, t.id] }, :include_blank => false %>
     <div class="form-actions">

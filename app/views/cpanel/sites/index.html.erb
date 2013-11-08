@@ -1,5 +1,10 @@
 <%= render 'base' %>
-<h1><%= t("mongoid.models.site") %></h1>
+<div class="toolbar">
+  <form class="form-search" action="<%= cpanel_sites_path %>">
+    <input type="text" name="q" class="span2" value="<%= params[:q] %>" placeholder="网站名称" /> <button class="btn btn-small">搜索</button>
+  </form>
+</div>
+<h1>酷站列表</h1>
 <div id="cpanel_sites">
   <table class="table table-bordered table-striped table-condensed">
     <tr class="head">
@@ -14,8 +19,11 @@
     <% @sites.each do |item| %>
     <tr class="<%= cycle("","even") %><%= ' deleted' if !item.deleted_at.blank? %>">
       <td><%= item.id %></td>
-      <td><%= item.name %></td>
-      <td><%= link_to item.url,item.url, target: "_blank" %><br /><small class="muted"><%= item.desc %></small></td>
+      <td><%= image_tag(item.favicon_url, style: "width:16px;height:16px;")%> <%= item.name %></td>
+      <td>
+        <%= link_to item.url,item.url, target: "_blank" %><br />
+        <small class="muted"><%= item.desc %></small>
+      </td>
       <td><%= user_name_tag(item.user) %></td>
       <td><%= item.site_node.name if !item.site_node.blank? %></td>
       <td><%= l(item.created_at, :format => :short) %></td>

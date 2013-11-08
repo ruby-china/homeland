@@ -20,4 +20,9 @@ pre {
 .group ul { margin:0 20px;}
 .pagination { clear:both; margin-top:10px; text-align: left;}
 
+.toolbar {
+  float:left;
+  margin-bottom:10px;
+}
+
 table tr.deleted td { text-decoration: line-through; color:#999}

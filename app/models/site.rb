@@ -9,7 +9,6 @@ class Site
   field :name
   field :url
   field :desc
-  field :favicon
 
   belongs_to :site_node
   counter_cache :name => :site_node, :inverse_of => :sites
@@ -29,14 +28,6 @@ class Site
 
   before_validation :fix_urls, :check_uniq
   def fix_urls
-    if self.favicon.blank?
-      self.favicon = self.favicon_url
-    else
-      if self.favicon.match(/:\/\//).blank?
-        self.favicon = "http://#{self.favicon}"
-      end
-    end
-
     if !self.url.blank?
       url = self.url.gsub(/http[s]{0,1}:\/\//,'').split('/').join("/")
       self.url = "http://#{url}"

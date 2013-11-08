@@ -2,7 +2,11 @@
 class Cpanel::SitesController < Cpanel::ApplicationController
 
   def index
-    @sites = Site.unscoped.recent.paginate(:page => params[:page], :per_page => 20)
+    @sites = Site.unscoped.recent
+    if params[:q]
+      @sites = @sites.where(:name => /#{params[:q]}/)
+    end
+    @sites = @sites.paginate(:page => params[:page], :per_page => 20)
 
     respond_to do |format|
       format.html # index.html.erb

@@ -5,13 +5,7 @@ describe Site do
 
   it "can add favicon default when it not provide" do
     site = Site.create(:name => "Foo bar", :url => "http://foobar.com", :site_node => site_node)
-    site.favicon.should == "http://www.google.com/profiles/c/favicons?domain=foobar.com"
-
-    site = Site.create(:name => "Foo bar 1", :url => "http://foobar1.com", :favicon => "http://aaa.com", :site_node => site_node)
-    site.favicon.should == "http://aaa.com"
-
-    site = Site.create(:name => "Foo bar 2", :url => "http://foobar2.com", :favicon => "aaa.com", :site_node => site_node)
-    site.favicon.should == "http://aaa.com"
+    site.favicon_url.should == "http://www.google.com/profiles/c/favicons?domain=foobar.com"
   end
 
   it "can add http:// to url field when it not profide" do

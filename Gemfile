@@ -86,6 +86,8 @@ gem "god"
 gem 'dalli', '1.1.1'
 gem 'eventmachine', '1.0.3'
 gem "puma", "2.6.0"
+# Faye Server 需要
+gem 'thin', "1.5.0"
 
 group :development, :test do
   gem 'capistrano', '2.9.0', require: false

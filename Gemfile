@@ -85,7 +85,7 @@ gem "god"
 
 gem 'dalli', '1.1.1'
 gem 'eventmachine', '1.0.3'
-gem 'thin', "1.5.0"
+gem "puma", "2.6.0"
 
 group :development, :test do
   gem 'capistrano', '2.9.0', require: false
@@ -110,6 +110,5 @@ group :development, :test do
 end
 
 group :production do
-  gem "puma", "2.6.0"
   gem 'newrelic_rpm', "~> 3.6.8.168"
 end

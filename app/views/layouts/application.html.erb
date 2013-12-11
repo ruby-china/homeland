@@ -64,7 +64,7 @@
       </div>
       <div class="feed_link hidden-phone">
         <% if not mobile? %>
-          <%= link_to(raw("<span class='icon icons_rss'></span> Feed"), feed_topics_url, :title => t("topics.subscribe_with_rss", :name => Setting.app_name), :class => "feed") %>
+          <%= link_to(raw("<span class='icon icons_rss'></span> Feed"), feed_topics_url, :title => t("topics.subscribe_with_rss", :name => Setting.app_name), :class => "feed", :target => "_blank") %>
         <% end %>
       </div>
     <% end %>

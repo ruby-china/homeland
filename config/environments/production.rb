@@ -13,7 +13,6 @@ RubyChina::Application.configure do
   config.action_controller.perform_caching = true
 
   # Specifies the header that your server uses for sending files
-  config.action_dispatch.x_sendfile_header = "X-Sendfile"
 
   # For nginx:
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect'
@@ -30,7 +29,7 @@ RubyChina::Application.configure do
 
   # Disable Rails's static asset server
   # In production, Apache or nginx will already do this
-  config.serve_static_assets = true
+  config.serve_static_assets = false
 
   # Enable serving of images, stylesheets, and javascripts from an asset server
   config.action_controller.asset_host = Setting.upload_url
@@ -40,9 +39,6 @@ RubyChina::Application.configure do
   config.action_mailer.default_url_options = { :host => Setting.domain }
   config.action_mailer.delivery_method   = :postmark
   config.action_mailer.postmark_settings = { :api_key => Setting.email_password }
-
-  # Enable threaded mode
-  # config.threadsafe!
   
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found)
@@ -51,11 +47,8 @@ RubyChina::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-  # Compress JavaScripts and CSS
-  config.assets.compress = true
-
   # Don't fallback to assets pipeline if a precompiled asset is missed
-  config.assets.compile = true
+  config.assets.compile = false
 
   # Generate digests for assets URLs
   config.assets.digest = true
@@ -63,5 +56,10 @@ RubyChina::Application.configure do
   config.assets.js_compressor  = :uglifier
   config.assets.css_compressor = :scss
 
+  # Disable automatic flushing of the log to improve performance.
+  # config.autoflush_log = false
+
+  # Use default logging formatter so that PID and timestamp are not suppressed.
+  config.log_formatter = ::Logger::Formatter.new
 end
 

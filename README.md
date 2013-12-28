@@ -43,7 +43,7 @@ to prepare all the config files and start essential services.
 ## JavaScript Testing
 
 Open `/specs` in the browser to see the test result. For example, if your
-rails starts at `localhost:300`, visit http://localhost:3000/specs
+rails starts at `localhost:3000`, visit http://localhost:3000/specs
 
 ### Headless Testing
 

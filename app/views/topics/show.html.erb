@@ -27,7 +27,7 @@
       <%= raw SiteConfig.before_topic_html %>
 
       <div class="body entry-content">
-        <%= sanitize @topic.body_html %>
+        <%= sanitize_topic @topic.body_html %>
       </div>
 
       <% if @topic.excellent? %>

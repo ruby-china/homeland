@@ -1,6 +1,13 @@
 # coding: utf-8
 require "redcarpet"
 module ApplicationHelper
+  def sanitize_topic(body)
+    sanitize body, :tags => %w(p br img h1 h2 h3 h4 blockquote pre code b i strike u a ul ol li), :attributes => %w(href src class title alt)
+  end
+
+  def sanitize_reply(body)
+    sanitize body, :tags => %w(p br img h1 h2 h3 h4 blockquote pre code b i strike u a ul ol li), :attributes => %w(href src class title alt data-floor)
+  end
 
   def notice_message
     flash_messages = []

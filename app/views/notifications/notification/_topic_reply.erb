@@ -22,7 +22,7 @@
   </h3>
   <%- if reply.present? -%>
     <div class="body md_body">
-      <%= sanitize reply.body_html %>
+      <%= sanitize_reply reply.body_html %>
     </div>
   <%- end -%>
 </td>

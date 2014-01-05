@@ -5,5 +5,5 @@
       <%= link_to(t("pages.create_page"), new_page_path, :class => "btn btn-success")%>
     <% end %>
   </div>
-  <%= raw SiteConfig.wiki_index_html %>
+  <%= sanitize SiteConfig.wiki_index_html %>
 </div>

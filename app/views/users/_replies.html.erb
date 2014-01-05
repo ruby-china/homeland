@@ -7,7 +7,7 @@
         <span class="info">at <%= timeago(reply.created_at) %></span>
       </div>
       <div class="body">
-        <%= raw reply.body_html %>
+        <%= sanitize reply.body_html %>
       </div>
     </li>
   <% end %>

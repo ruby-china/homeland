@@ -27,7 +27,7 @@
       <%= raw SiteConfig.before_topic_html %>
 
       <div class="body entry-content">
-        <%= raw @topic.body_html %>
+        <%= sanitize @topic.body_html %>
       </div>
 
       <% if @topic.excellent? %>
@@ -35,7 +35,7 @@
         <i class="icon small_cert_on"></i> 本帖已被设为精华贴！
         <% if admin? %>
         <div class="opts pull-right">
-          <%= link_to raw("取消"), unsuggest_topic_path(@topic.id), method: "delete" %>
+          <%= link_to "取消", unsuggest_topic_path(@topic.id), method: "delete" %>
         </div>
         <% end %>
       </div>

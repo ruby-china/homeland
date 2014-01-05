@@ -14,6 +14,7 @@ gem "jquery-rails", "3.0.4"
 gem "rails_autolink", ">= 1.1.0"
 gem "md_emoji"
 gem 'exception_notification'
+gem "jbuilder", "~> 2.0.2"
 
 # 上传组件
 gem 'carrierwave', '0.6.2'

@@ -43,7 +43,7 @@ class Topic
   belongs_to :last_reply, :class_name => 'Reply'
   has_many :replies, :dependent => :destroy
 
-  validates_presence_of :user_id, :title, :body, :node_id
+  validates_presence_of :user_id, :title, :body, :node
 
   index :node_id => 1
   index :user_id => 1
@@ -53,7 +53,7 @@ class Topic
   index :excellent => -1
 
   counter :hits, :default => 0
-  
+
   delegate :login, :to => :user, :prefix => true, :allow_nil => true
   delegate :body, :to => :last_reply, :prefix => true, :allow_nil => true
 
@@ -113,7 +113,7 @@ class Topic
     # replied_at 用于最新回复的排序，如果贴着创建时间在一个月以前，就不再往前面顶了
     self.last_active_mark = Time.now.to_i if self.created_at > 1.month.ago
     self.replied_at = Time.now
-    self.last_reply_id = reply.id 
+    self.last_reply_id = reply.id
     self.last_reply_user_id = reply.user_id
     self.last_reply_user_login = reply.user.try(:login) || nil
     self.save
@@ -130,19 +130,19 @@ class Topic
     super
     delete_notifiaction_mentions
   end
-  
+
   def last_page_with_per_page(per_page)
     page = (self.replies_count.to_f / per_page).ceil
     page > 1 ? page : nil
   end
-  
+
   # 所有的回复编号
   def reply_ids
     Rails.cache.fetch([self,"reply_ids"]) do
       self.replies.only(:_id).map(&:_id)
     end
   end
-  
+
   def excellent?
     self.excellent >= 1
   end

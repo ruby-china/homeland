@@ -5,6 +5,10 @@ describe Topic do
   let(:topic) { FactoryGirl.create(:topic) }
   let(:user) { FactoryGirl.create(:user) }
 
+  it "should no save invalid node_id" do
+    FactoryGirl.build(:topic, :node_id => 0).valid?.should_not be_true
+  end
+
   it "should set last_active_mark on created" do
     # because the Topic index is sort by replied_at,
     # so the new Topic need to set a Time, that it will display in index page
@@ -49,7 +53,7 @@ describe Topic do
     topic.last_reply_user_id.should == reply.user_id
     topic.last_reply_user_login.should == reply.user.login
   end
-  
+
   it "should update after reply without last_active_mark when the topic is created at month ago" do
     topic.stub!(:created_at).and_return(1.month.ago)
     topic.stub!(:last_active_mark).and_return(1)
@@ -90,7 +94,7 @@ describe Topic do
     t1 = Factory(:topic)
     t1.destroy_by(nil).should == false
   end
-  
+
   describe "#auto_space_with_en_zh" do
     it "should auto fix on save" do
       topic.title = "Gitlab怎么集成GitlabCI"
@@ -99,7 +103,7 @@ describe Topic do
       topic.title.should == "Gitlab 怎么集成 GitlabCI"
     end
   end
-  
+
   describe "#excellent" do
     it "should suggest a topic as excellent" do
       topic.excellent = 1

@@ -99,6 +99,10 @@ window.App =
       data : logins
       search_key : "search"
       tpl : "<li data-value='${login}'>${login} <small>${name}</small></li>"
+    .atwho
+      at : ":"
+      data : window.EMOJI_LIST
+      tpl : "<li data-value='${name}:'><img src='http://l.ruby-china.org/assets/emojis/${name}.png' height='20' width='20'/> ${name} </li>"
     true
 
   initForDesktopView : () ->

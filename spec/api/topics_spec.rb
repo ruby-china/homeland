@@ -37,13 +37,25 @@ describe RubyChina::API, "topics" do
     it "should get topic detail with list of replies" do
       t = Factory(:topic, :title => "i want to know")
       old_hits = t.hits.to_i
-      r = Factory(:reply, :topic_id => t.id, :body => "let me tell")
+      Factory(:reply, :topic_id => t.id, :body => "let me tell")
+      Factory(:reply, :topic_id => t.id, :body => "let me tell again", :deleted_at => Time.now)
       get "/api/topics/#{t.id}.json"
       response.status.should == 200
       json = JSON.parse(response.body)
       json["title"].should == "i want to know"
       json["replies"].first["body"].should == "let me tell"
+      json["replies"].first["deleted_at"].should be_nil
       json["hits"].should == old_hits + 1
+
+      get "/api/v2/topics/#{t.id}.json", :include_deleted => true
+      response.status.should == 200
+      json = JSON.parse(response.body)
+      json["title"].should == "i want to know"
+      json["replies"][0]["body"].should == "let me tell"
+      json["replies"][0]["deleted_at"].should be_nil
+      json["replies"][1]["body"].should == "let me tell again"
+      json["replies"][1]["deleted_at"].should_not be_nil
+      json["hits"].should == old_hits + 2
     end
   end
   

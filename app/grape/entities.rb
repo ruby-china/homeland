@@ -40,7 +40,7 @@ module RubyChina
     end
 
     class Reply < Grape::Entity
-      expose :id, :body, :body_html, :created_at, :updated_at
+      expose :id, :body, :body_html, :created_at, :updated_at, :deleted_at
       expose :user, :using => APIEntities::User
     end
     
@@ -54,7 +54,11 @@ module RubyChina
       expose(:hits) { |topic| topic.hits.to_i }
       expose :user, :using => APIEntities::User
       # replies only exposed when a single topic is fetched
-      expose :replies, :using => APIEntities::Reply, :unless => { :collection => true }
+      expose(:replies, :unless => { :collection => true }) do |model, opts|
+        replies = model.replies
+        replies = replies.unscoped if opts[:include_deleted]
+        APIEntities::Reply.represent(replies.asc(:_id))
+      end
     end
 
     class Node < Grape::Entity

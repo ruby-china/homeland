@@ -102,11 +102,13 @@ class Topic
     return false if uid == self.user_id
     return false if self.follower_ids.include?(uid)
     self.push(follower_ids: uid)
+    true
   end
 
   def pull_follower(uid)
     return false if uid == self.user_id
     self.pull(follower_ids: uid)
+    true
   end
 
   def update_last_reply(reply)

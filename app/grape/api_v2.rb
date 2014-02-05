@@ -59,12 +59,14 @@ module RubyChina
       end
 
       # Get topic detail
+      # params:
+      #   include_deleted(optional)
       # Example
       #   /api/topics/1.json
       get ":id" do
-        @topic = Topic.includes(:replies).find_by_id(params[:id])
+        @topic = Topic.find_by_id(params[:id])
         @topic.hits.incr(1)
-        present @topic, :with => APIEntities::DetailTopic
+        present @topic, :with => APIEntities::DetailTopic, :include_deleted => params[:include_deleted]
       end
 
       # Post a new reply

@@ -107,6 +107,7 @@ describe RubyChina::API, "topics" do
       t = Factory(:topic, :title => "new topic 2")
       post "/api/topics/#{t.id}/follow.json", :token => user.private_token
       response.status.should == 201      
+      response.body.should == 'true'
       t.reload.follower_ids.should include(user.id)
     end
   end
@@ -117,6 +118,7 @@ describe RubyChina::API, "topics" do
       t = Factory(:topic, :title => "new topic 2")
       post "/api/topics/#{t.id}/unfollow.json", :token => user.private_token
       response.status.should == 201      
+      response.body.should == 'true'
       t.reload.follower_ids.should_not include(user.id)
     end
   end
@@ -127,6 +129,7 @@ describe RubyChina::API, "topics" do
       t = Factory(:topic, :title => "new topic 3")
       post "/api/topics/#{t.id}/favorite.json", :token => user.private_token
       response.status.should == 201      
+      response.body.should == 'true'
       user.reload.favorite_topic_ids.should include(t.id)
     end
   end
@@ -137,6 +140,7 @@ describe RubyChina::API, "topics" do
       t = Factory(:topic, :title => "new topic 3")
       post "/api/topics/#{t.id}/favorite.json", :token => user.private_token, :type => 'unfavorite'
       response.status.should == 201      
+      response.body.should == 'true'
       user.reload.favorite_topic_ids.should_not include(t.id)
     end
   end  

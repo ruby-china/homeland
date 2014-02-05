@@ -6,6 +6,50 @@ describe RubyChina::API, "topics" do
       get "/api/topics.json"
       response.status.should == 200
     end
+
+    it "should be ok for all types" do
+      Factory(:topic, :title => "This is a normal topic", :replies_count => 1)
+      Factory(:topic, :title => "This is an excellent topic", :excellent => 1, :replies_count => 1)
+      Factory(:topic, :title => "This is a no_reply topic", :replies_count => 0)
+      Factory(:topic, :title => "This is a popular topic", :replies_count => 1, :likes_count => 10)
+
+      get "/api/v2/topics.json"
+      response.status.should == 200
+      json = JSON.parse(response.body)
+      json.size.should == 4
+      titles = json.map {|topic| topic["title"] }
+      titles.should be_include("This is a normal topic")
+      titles.should be_include("This is an excellent topic")
+      titles.should be_include("This is a no_reply topic")
+      titles.should be_include("This is a popular topic")
+
+      get "/api/v2/topics.json", :type => 'excellent'
+      response.status.should == 200
+      json = JSON.parse(response.body)
+      json.size.should == 1
+      json[0]["title"].should == "This is an excellent topic"
+
+      get "/api/v2/topics.json", :type => 'no_reply'
+      response.status.should == 200
+      json = JSON.parse(response.body)
+      json.size.should == 1
+      json[0]["title"].should == "This is a no_reply topic"
+
+      get "/api/v2/topics.json", :type => 'popular'
+      response.status.should == 200
+      json = JSON.parse(response.body)
+      json.size.should == 1
+      json[0]["title"].should == "This is a popular topic"
+
+      get "/api/v2/topics.json", :type => 'recent'
+      response.status.should == 200
+      json = JSON.parse(response.body)
+      json.size.should == 4
+      json[0]["title"].should == "This is a popular topic"
+      json[1]["title"].should == "This is a no_reply topic"
+      json[2]["title"].should == "This is an excellent topic"
+      json[3]["title"].should == "This is a normal topic"
+    end
   end
 
   describe "GET /api/topics/node/:id.json" do

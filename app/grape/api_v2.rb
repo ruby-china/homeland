@@ -30,14 +30,17 @@ module RubyChina
 
       # Get active topics of the specified node
       # params[:id]: node id
+      # params[:page]
+      # params[:size] or params[:per_page]: default is 15, maximum is 100
+      # params[:type]: default(or empty) excellent no_reply popular last
       # other params are same to those of topics#index
       # Example
       #   /api/topics/node/1.json?size=30
       get "node/:id" do
         @node = Node.find(params[:id])
         @topics = @node.topics.last_actived
-          .limit(page_size)
-          .includes(:user)
+        @topics = @topics.send(params[:type]) if ['excellent', 'no_reply', 'popular', 'recent'].include?(params[:type])
+        @topics = @topics.includes(:user).paginate(:page => params[:page], :per_page => params[:per_page] || page_size)
         present @topics, :with => APIEntities::Topic
       end
 

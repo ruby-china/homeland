@@ -65,5 +65,16 @@ module RubyChina
       expose :id, :name, :topics_count, :summary, :section_id, :sort
       expose(:section_name) {|model, opts| model.section.try(:name) }
     end
+
+    class Notification < Grape::Entity
+      expose :id, :created_at, :updated_at, :read
+      expose(:mention, :if => lambda {|model, opts| model.is_a? ::Notification::Mention }) do |model, opts|
+        # mode.mentionable_type could be "Reply" or "Topic"
+        APIEntities.const_get(model.mentionable_type).represent model.mentionable
+      end
+      expose(:reply, :if => lambda {|model, opts| model.is_a? ::Notification::TopicReply }) do |model, opts|
+        APIEntities::Reply.represent model.reply
+      end
+    end
   end
 end

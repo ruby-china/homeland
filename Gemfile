@@ -89,6 +89,8 @@ gem 'eventmachine', '1.0.3'
 gem "puma", "2.6.0"
 # Faye Server 需要
 gem 'thin', "1.5.0"
+# for api 跨域
+gem 'rack-cors', require: 'rack/cors'
 
 group :development, :test do
   gem 'capistrano', '2.9.0', require: false

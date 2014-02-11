@@ -136,9 +136,9 @@ form {
   .dropdown-menu {
     border-color:#ccc;
     min-width:100px;
-    -webkit-border-radius: 0px;
-    -moz-border-radius: 0px;
-    border-radius: 0px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
     -webkit-box-shadow: 0 0px 2px rgba(0,0,0,0.2);
     -moz-box-shadow: 0 0px 2px rgba(0,0,0,.2);
     box-shadow: 0 0px 2px rgba(0,0,0,.2);
@@ -151,6 +151,7 @@ form {
     a {
       padding:1px 8px;
       font-size:12px;
+      cursor: pointer;
       i { color:#bbb; }
     }
   }

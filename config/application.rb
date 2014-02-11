@@ -44,13 +44,15 @@ module RubyChina
       Devise::Mailer.layout "mailer"
     }
     
-    config.assets.precompile += %w(application.css app.js topics.css topics.js window.css front.css cpanel.css
+    config.assets.precompile += %w(application.css app.js topics.css topics.js 
+      window.css front.css cpanel.css
       users.css pages.css pages.js notes.css notes.js 
       mobile.css home.css)
+      
     config.middleware.use Rack::Cors do
       allow do
         origins '*'
-        resource '/*', headers: :any, methods: [:get, :post, :put, :delete, :destroy]
+        resource '/api/*', headers: :any, methods: [:get, :post, :put, :delete, :destroy]
       end
     end
   end

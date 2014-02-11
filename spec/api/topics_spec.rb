@@ -56,13 +56,67 @@ describe RubyChina::API, "topics" do
     it "should return a list of topics that belong to the specified node" do
       node = Factory(:node)
       other_topics = [Factory(:topic), Factory(:topic)]
-      topics = Array.new(2).map { Factory(:topic, :node_id => node.id) }
+
+      topics = []
+      topics << Factory(:topic, :node_id => node.id, :title => "This is a normal topic", :replies_count => 1)
+      topics << Factory(:topic, :node_id => node.id, :title => "This is an excellent topic", :excellent => 1, :replies_count => 1)
+      topics << Factory(:topic, :node_id => node.id, :title => "This is a no_reply topic", :replies_count => 0)
+      topics << Factory(:topic, :node_id => node.id, :title => "This is a popular topic", :replies_count => 1, :likes_count => 10)
 
       get "/api/topics/node/#{node.id}.json"
+      response.status.should == 200
       json = JSON.parse(response.body)
       json_titles = json.map { |t| t["id"] }
       topics.each { |t| json_titles.should include(t._id) }
       other_topics.each { |t| json_titles.should_not include(t._id) }
+
+      get "/api/v2/topics/node/#{node.id}.json", :size => 2
+      response.status.should == 200
+      json = JSON.parse(response.body)
+      json.should have(2).items
+      json[0]["title"].should == "This is a normal topic"
+      json[1]["title"].should == "This is an excellent topic"
+
+      get "/api/v2/topics/node/#{node.id}.json", :per_page => 2, :page => 1
+      response.status.should == 200
+      json = JSON.parse(response.body)
+      json.should have(2).items
+      json[0]["title"].should == "This is a normal topic"
+      json[1]["title"].should == "This is an excellent topic"
+
+      get "/api/v2/topics/node/#{node.id}.json", :per_page => 2, :page => 2
+      response.status.should == 200
+      json = JSON.parse(response.body)
+      json.should have(2).items
+      json[0]["title"].should == "This is a no_reply topic"
+      json[1]["title"].should == "This is a popular topic"
+
+      get "/api/v2/topics/node/#{node.id}.json", :type => 'excellent'
+      response.status.should == 200
+      json = JSON.parse(response.body)
+      json.should have(1).item
+      json[0]["title"].should == "This is an excellent topic"
+
+      get "/api/v2/topics/node/#{node.id}.json", :type => 'no_reply'
+      response.status.should == 200
+      json = JSON.parse(response.body)
+      json.should have(1).item
+      json[0]["title"].should == "This is a no_reply topic"
+
+      get "/api/v2/topics/node/#{node.id}.json", :type => 'popular'
+      response.status.should == 200
+      json = JSON.parse(response.body)
+      json.should have(1).item
+      json[0]["title"].should == "This is a popular topic"
+
+      get "/api/v2/topics/node/#{node.id}.json", :type => 'recent'
+      response.status.should == 200
+      json = JSON.parse(response.body)
+      json.should have(4).items
+      json[0]["title"].should == "This is a popular topic"
+      json[1]["title"].should == "This is a no_reply topic"
+      json[2]["title"].should == "This is an excellent topic"
+      json[3]["title"].should == "This is a normal topic"
     end
   end
 

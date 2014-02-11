@@ -178,6 +178,45 @@ module RubyChina
       end
     end
 
+    resources :notifications do
+      # Get notifications of current user, this API won't mark notifications as read
+      # require authentication
+      # params[:page]
+      # params[:per_page]: default is 20
+      # Example
+      #   /api/notifications.json?page=1&per_page=20
+      get do
+        authenticate!
+        @notifications = current_user.notifications.recent.paginate :page => params[:page], :per_page => params[:per_page] || 20
+        present @notifications, :with => APIEntities::Notification
+      end
+
+      # Delete all notifications of current user
+      # require authentication
+      # params:
+      #   NO
+      # Example
+      #   DELETE /api/notifications.json
+      delete do
+        authenticate!
+        current_user.notifications.delete_all
+        true
+      end
+
+      # Delete all notifications of current user
+      # require authentication
+      # params:
+      #   id
+      # Example
+      #   DELETE /api/notifications/1.json
+      delete ":id" do
+        authenticate!
+        @notification = current_user.notifications.find params[:id]
+        @notification.destroy
+        true
+      end
+    end
+
     # List all cool sites
     # Example
     # GET /api/sites.json

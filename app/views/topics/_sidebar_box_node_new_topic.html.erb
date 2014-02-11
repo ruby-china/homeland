@@ -1,7 +1,7 @@
 <% if can? :create, Topic %>
   <% if !@node.blank? %>
     <div class="box" style="text-align:center;">
-      <h2><%= link_to(@node.name,  node_topics_path(@node))%></h2>
+      <h2 class="title"><%= link_to(@node.name,  node_topics_path(@node))%></h2>
 
       <%=  render_node_summary(@node) if ["new"].index(params[:action]) %>
 

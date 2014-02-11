@@ -1,6 +1,6 @@
 #pages {
   .tools {
-    text-align:right; margin-bottom:10px;
+    text-align:right;
     a {
       margin-left:10px;
     }
@@ -9,9 +9,11 @@
 #page_show {
   .info {
     text-align:right;
-    padding:0 10px 10px 10px;
+    padding:10px;
     border-bottom:1px solid #ddd;
-    margin:0 -10px;
+    margin:-10px -10px 0;
+    background: #f5f5f5;
+    border-radius: 3px 3px 0 0;
     margin-bottom:20px;
   }
   .editors {

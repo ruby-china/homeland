@@ -8,7 +8,7 @@
       end
       @hot_nodes = Node.where(:_id.in => ids).limit(5)
     %>
-    <div class="box">
+    <div class="box box_gray">
       <div class="btn-group">
         <%= link_to(t("topics.start_a_new_topic_button"), new_topic_path, :class => "btn btn-success" )%>
         <button class="btn btn-success dropdown-toggle" data-toggle="dropdown">

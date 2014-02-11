@@ -18,6 +18,7 @@
         li << link_to(t("menu.likes"), favorites_user_path(current_user.login))
         li << link_to(t("menu.cpanel"), "/cpanel") if admin?
       end
+      li << "<div class='divider'></div>"
       li << link_to(t("common.logout"), destroy_user_session_path, method: "delete" )
     end %>
   </li>

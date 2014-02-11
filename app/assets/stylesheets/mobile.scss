@@ -12,8 +12,7 @@ body {
 .navbar {
   margin-left:-7px; margin-right:-7px;
   .navbar-inner { padding:0 7px;}
-  .navbar-search,
-  h3 { display:none; }
+  .navbar-search { display:none; }
   .nav {
     margin:0;
     li {
@@ -21,6 +20,22 @@ body {
     }
   }
 }
+.navbar-fixed-top {
+    h3 { 
+      display:block; float:none; clear:both; text-align:center;
+      margin:0px;
+      width:auto;
+      border-bottom:1px solid #eee;
+      padding-bottom:5px;
+      width:82px; margin:0 auto;
+      a {
+        width: 82px;
+        height: 20px;
+        float:none;
+        background-size: 82px 20px;
+      }
+    }
+  }
 #userbar {
   float:right;
   .role {
@@ -43,17 +58,6 @@ body {
 }
 table.node_topics .replies {
   width: 40px;
-}
-.breadcrumb {
-  padding: 5px 7px;
-  height:19px;
-  margin-right:95px;
-  .first { display:none; }
-}
-.feed_link {
-  margin-top:-47px;
-  margin-right:0;
-  a.feed {color:#B70000;}
 }
 #reply.form {
   textarea { width: 100%; height: 80px; }
@@ -164,6 +168,8 @@ form {
       .node { padding:0;}
       em { display:none; }
     }
+    .social-share-button { display:none; }
+    .tools { float: none; }
   }
 }
 #replies {
@@ -236,3 +242,5 @@ form {
     .topic:nth-child(even) { width:auto; padding-left:0; margin-left:-10px; }
   }
 }
+
+.breadcrumb { display:none; }

@@ -1,7 +1,7 @@
 <div id="users">
-  <div class="info"><%= t("users.current_have") %> <%= @total_user_count %> <%= t("users.users_joined") %> <%= Setting.app_name %>。</div>
   <div id="hot_users" class="user_list box clearfix">
-    <h2><%= t("users.hot_users") %></h2>
+    <h2 class="title"><%= t("users.hot_users") %></h2>
+     <div class="info"><%= t("users.current_have") %> <%= @total_user_count %> <%= t("users.users_joined") %> <%= Setting.app_name %>。</div>
     <% @active_users.each do |item| %>
       <div class="item span1">
         <div class="avatar"><%= user_avatar_tag(item) %></div>

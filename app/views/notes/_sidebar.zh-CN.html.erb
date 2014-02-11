@@ -1,11 +1,12 @@
 <div class="sidebar">
   <div class="box">
-    <h2>记事本是什么？</h2>
+    <h2 class="title">记事本是什么？</h2>
     <p class="summary">这是一个基于云存储的网络记事本，你可以放心的把你的一些文本资料存放在此处。</p>
   </div>
 
   <% if ["new","edit"].index(params[:action]) %>
   <div class="box">
+    <h2 class="title">提示</h2>
     <ul>
       <li>记事的第一行将自动成为标题</li>
       <li>超级链接会自动转换为可点击的状态</li>

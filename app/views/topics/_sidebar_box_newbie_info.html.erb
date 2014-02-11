@@ -1,6 +1,6 @@
 <% if current_user && current_user.newbie? %>
 <div class="box">
-  <h2>新手必读</h2>
+  <h2 class="title">新手必读</h2>
   <div class="inner">
     <%= raw SiteConfig.newbie_notices %>
   </div>

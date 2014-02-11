@@ -1,5 +1,5 @@
 <div class="suggest_topics box">
-  <h2><%= t("common.highlight_topic")%></h2>
+  <h2 class="title"><%= t("common.highlight_topic")%></h2>
   <ul>
     <% @suggest_topics.each do |item| %>
       <li><%= user_avatar_tag(item.user, :small) %> <%= link_to(item.title, topic_path(item))%></li>

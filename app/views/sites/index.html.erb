@@ -1,6 +1,6 @@
 <div id="site_nodes">
   <% if can? :create, Site %>
-  <div class="box">
+  <div class="box box_gray">
     <%= raw SiteConfig.site_index_html %>
     <%= link_to(t("sites.create"), new_site_path, :class => "btn btn-success")%>
   </div>
@@ -8,7 +8,7 @@
   <% cache(["sites/list", :t => CacheVersion.sites_updated_at], :expires_in => 1.days) do %>
     <% @site_nodes.each do |node| %>
     <div class="box">
-      <h2><%= node.name %></h2>
+      <h2 class="title"><%= node.name %></h2>
       <div class="row">
         <% node.sites.each do |item| %>
         <div class="span3 site">

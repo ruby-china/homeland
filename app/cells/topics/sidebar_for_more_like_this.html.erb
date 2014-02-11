@@ -1,6 +1,6 @@
 <% if @topics.present? %>
 <div class="box clearfix">
-  <h2><%= t("topics.more_like_this") %></h2>
+  <h2 class="title"><%= t("topics.more_like_this") %></h2>
   <ul>
   <% for topic in @topics do %>
     <li><%= link_to(truncate(topic.title, :length => 30), topic_path(topic), :title => topic.title) %></li>

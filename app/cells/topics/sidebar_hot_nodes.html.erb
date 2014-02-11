@@ -1,6 +1,6 @@
 <% if not @hot_nodes.blank? %>
   <div class="hot_nodes nodes box clearfix">
-    <h2><%= t("nodes.hot_node")%></h2>
+    <h2 class="title"><%= t("nodes.hot_node")%></h2>
     <ul>
       <% @hot_nodes.each do |node| %>
         <li> <%= link_to(node.name, node_topics_path(node), :title => node.name )%></li>

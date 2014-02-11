@@ -1,15 +1,15 @@
 <div id="sections" class="box">
-    <h2><%= t("common.index_node_navigation")%></h2>
-    <ul>
-        <% @sections.each do |section| %>
-        <li>
-            <label><%= section.name %></label>
-            <span class="nodes">
-                <% section.nodes.each do |node| %>
-                    <%= link_to(node.name, node_topics_path(node), :title => node.name )%>
-                <% end %>
-            </span>
-        </li>
+  <h2 class="title"><%= t("common.index_node_navigation")%></h2>
+  <ul>
+    <% @sections.each do |section| %>
+    <li>
+      <label><%= section.name %></label>
+      <span class="nodes">
+        <% section.nodes.each do |node| %>
+            <%= link_to(node.name, node_topics_path(node), :title => node.name )%>
         <% end %>
-    </ul>
+      </span>
+    </li>
+    <% end %>
+  </ul>
 </div>

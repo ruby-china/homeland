@@ -50,7 +50,7 @@
            li << link_to(t("menu.users"), users_path) if !mobile?
         end %>
         <form action="/search" class="navbar-search pull-left" method="get">
-          <input type="text" name="q" class="search-query span3" value="<%= params[:q] %>" placeholder="<%= t("common.search") %>" />
+          <input type="text" name="q" class="search-query" value="<%= params[:q] %>" placeholder="<%= t("common.search") %>" />
         </form>
         <%= render "common/user_nav" %>
       </div>
@@ -115,5 +115,6 @@
           var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
   </script>
+  <div class="zoom-overlay"></div>
 </body>
 </html>

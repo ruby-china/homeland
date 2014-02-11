@@ -76,6 +76,9 @@ gem 'simple_form', "3.0.0.rc"
 # API
 gem 'grape', github: 'intridea/grape', branch: 'frontier'
 
+# Allow CORS
+gem 'rack-cors', :require => 'rack/cors'
+
 # Mailer
 gem 'postmark-rails', '0.4.1'
 

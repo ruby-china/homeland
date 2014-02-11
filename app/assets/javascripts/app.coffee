@@ -102,7 +102,7 @@ window.App =
     .atwho
       at : ":"
       data : window.EMOJI_LIST
-      tpl : "<li data-value='${name}:'><img src='http://l.ruby-china.org/assets/emojis/${name}.png' height='20' width='20'/> ${name} </li>"
+      tpl : "<li data-value='${name}:'><img src='#{ASSET_URL}/assets/emojis/${name}.png' height='20' width='20'/> ${name} </li>"
     true
 
   initForDesktopView : () ->

@@ -91,7 +91,7 @@
   <% end %>
   <script type="text/javascript" data-turbolinks-eval=false>
     ROOT_URL = "<%= root_url %>";
-    ASSET_URL = "<%= asset_url('') %>";
+    ASSET_URL = "<%= asset_url('/') %>";
     FAYE_SERVER_URL = "<%= Setting.faye_server %>";
     <% if current_user %>
       CURRENT_USER_ACCESS_TOKEN = "<%= current_user.temp_access_token %>";

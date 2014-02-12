@@ -73,6 +73,7 @@
   sites:
     create: 提交网站
   menu:
+    home: "首页"
     topics: "社区"
     wiki: "Wiki"
     users: "会员"

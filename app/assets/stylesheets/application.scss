@@ -28,8 +28,8 @@ code { background:none; }
 /*  .badge-inverse { background:#666;}*/
 
   .search-query {
-    margin-bottom: 0;
-    width: 180px;
+    margin-top: 1px;
+    width: 130px;
   }
   .brand {width:60px;}
   .badge {
@@ -52,8 +52,10 @@ code { background:none; }
     border-color:#af2525; 
   }
   h3 {
-    margin:0; padding:0; margin-top:2px; margin-right:10px;
-    width:123px; float:left;
+    padding:0;
+    display:block; text-align:center;
+    width:123px; margin:0 auto;
+    margin-bottom: -35px;
     a {
       padding:0; margin:0; margin-top:3px;
       background:image_url('text_logo.png') left top no-repeat;
@@ -71,6 +73,8 @@ code { background:none; }
     }
   }
 }
+
+.breadcrumb { display:none; }
 
 .container { width:960px; }
 .container-fluid { padding:0; }

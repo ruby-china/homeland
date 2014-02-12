@@ -44,31 +44,23 @@
           <a href="/" class="site-logo"></a>
         </h3>
         <%= render_list :class => "nav" do |li|
+           li << link_to(t("menu.home"), root_path)
            li << link_to(t("menu.topics"), topics_path)
            li << link_to(t("menu.wiki"), pages_path )
            li << link_to(t("menu.sites"), sites_path ) if !mobile?
            li << link_to(t("menu.users"), users_path) if !mobile?
         end %>
-        <form action="/search" class="navbar-search pull-left" method="get">
-          <input type="text" name="q" class="search-query" value="<%= params[:q] %>" placeholder="<%= t("common.search") %>" />
-        </form>
-        <%= render "common/user_nav" %>
+        <span class="pull-right">
+          <form action="/search" class="navbar-search" method="get">
+            <input type="text" name="q" class="search-query" value="<%= params[:q] %>" placeholder="<%= t("common.search") %>" />
+          </form>
+          <%= render "common/user_nav" %>
+        </span>
       </div>
     </div>
   </div>
 
   <div class="container">
-    <% if !controller_name.in?(["users"]) %>
-      <div class="hidden-phone" itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-        <%= render_breadcrumb %>
-      </div>
-      <div class="feed_link hidden-phone">
-        <% if not mobile? %>
-          <%= link_to(sanitize("<span class='icon icons_rss'></span> Feed"), feed_topics_url, :title => t("topics.subscribe_with_rss", :name => Setting.app_name), :class => "feed", :target => "_blank") %>
-        <% end %>
-      </div>
-    <% end %>
-
     <%= notice_message %>
     <div id="main" class="container-fluid">
       <%= yield %>

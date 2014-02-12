@@ -71,6 +71,7 @@
   sites:
     create: "登記網站"
   menu:
+    home: "首页"
     topics: "社區"
     wiki: "Wiki"
     users: "會員"

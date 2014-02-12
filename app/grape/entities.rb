@@ -40,7 +40,7 @@ module RubyChina
     end
 
     class Reply < Grape::Entity
-      expose :id, :body, :body_html, :created_at, :updated_at, :deleted_at
+      expose :id, :body, :body_html, :created_at, :updated_at, :deleted_at, :topic_id
       expose :user, :using => APIEntities::User
     end
     

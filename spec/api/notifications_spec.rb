@@ -27,6 +27,7 @@ describe RubyChina::API, "notifications" do
       json = JSON.parse(response.body)
       json[0]["read"].should be_false
       json[0]["mention"]["body"].should == "Test to mention user"
+      json[0]["mention"]["topic_id"].should == topic.id
       json[0]["mention"]["user"]["login"].should == user.login
     end
 
@@ -39,6 +40,7 @@ describe RubyChina::API, "notifications" do
       json = JSON.parse(response.body)
       json[0]["read"].should be_false
       json[0]["reply"]["body"].should == "Test to reply user"
+      json[0]["reply"]["topic_id"].should == topic.id
       json[0]["reply"]["user"]["login"].should == user.login
     end
 

@@ -12,10 +12,11 @@ module Redcarpet
       include Rouge::Plugins::Redcarpet
 
       def initialize(extensions={})
-        super(extensions.merge(:xhtml => true,
-                               :no_styles => true,
-                               :escape_html => true,
-                               :hard_wrap => true))
+        super(extensions.merge(xhtml: true,
+                               no_styles: true,
+                               escape_html: true,
+                               hard_wrap: true,
+                               link_attributes: {target: '_blank'}))
       end
 
       
@@ -71,9 +72,9 @@ class MarkdownConverter
   private
   def initialize
     @converter = Redcarpet::Markdown.new(Redcarpet::Render::HTMLwithSyntaxHighlight.new, {
-        :autolink => true,
-        :fenced_code_blocks => true,
-        :no_intra_emphasis => true
+        autolink: true,
+        fenced_code_blocks: true,
+        no_intra_emphasis: true
       })
   end
 end
@@ -235,12 +236,12 @@ class MarkdownTopicConverter < MarkdownConverter
 
   def initialize
     @converter = Redcarpet::Markdown.new(Redcarpet::Render::HTMLwithTopic.new, {
-        :autolink => true,
-        :fenced_code_blocks => true,
-        :strikethrough => true,
-        :space_after_headers => true,
-        :disable_indented_code_blocks => true,
-        :no_intra_emphasis => true
+        autolink: true,
+        fenced_code_blocks: true,
+        strikethrough: true,
+        space_after_headers: true,
+        disable_indented_code_blocks: true,
+        no_intra_emphasis: true
       })
     @emoji = MdEmoji::Render.new
   end

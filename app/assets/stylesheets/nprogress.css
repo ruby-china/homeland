@@ -39,7 +39,7 @@
   display: block;
   position: fixed;
   z-index: 100;
-  top: 10px;
+  top: 8px;
   right: 15px;
 }
 
@@ -48,9 +48,9 @@
   height: 14px;
 
   border:  solid 4px transparent;
-  border-top-color:  #ccc;
-  border-left-color: #ccc;
-  border-radius: 10px;
+  border-top-color:  #aaa;
+  border-left-color: #aaa;
+  border-radius: 13px;
 
   -webkit-animation: nprogress-spinner 400ms linear infinite;
   -moz-animation:    nprogress-spinner 400ms linear infinite;

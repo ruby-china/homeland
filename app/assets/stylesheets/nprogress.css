@@ -48,8 +48,8 @@
   height: 14px;
 
   border:  solid 4px transparent;
-  border-top-color:  #fff;
-  border-left-color: #fff;
+  border-top-color:  #ccc;
+  border-left-color: #ccc;
   border-radius: 10px;
 
   -webkit-animation: nprogress-spinner 400ms linear infinite;

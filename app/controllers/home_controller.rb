@@ -8,4 +8,8 @@ class HomeController < ApplicationController
   def api
     drop_breadcrumb("API", root_path)
   end
+  
+  def twitter
+    drop_breadcrumb("Twitter", root_path)
+  end
 end

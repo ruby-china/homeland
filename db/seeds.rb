@@ -96,6 +96,13 @@ SiteConfig.save_default("newbie_notices",%(<p>为提高社区质量，防止新�
 
 SiteConfig.save_default("reject_newbie_reply_in_the_evening", "false")
 
+SiteConfig.save_default("twitter_page_html",%(
+<div class="box">
+<a class="twitter-timeline" href="https://twitter.com/ruby_china/ruby-developers" data-widget-id="435676008880959489" data-tweet-limit="20" data-chrome="noscrollbar transparent" width="940" height="800">Ruby Developers 的 Twitter Timeline</a>
+<script type="text/javasscript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</div>
+))
+
 # ========================= init Section, Node =========================
 
 # s1 = Section.create(:name => "Ruby")

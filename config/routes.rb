@@ -1,7 +1,7 @@
 RubyChina::Application.routes.draw do
   require 'api'
   require "api_v2"
-  
+
   resources :sites
   resources :pages, :path => "wiki" do
     collection do
@@ -18,6 +18,7 @@ RubyChina::Application.routes.draw do
       post :preview
     end
   end
+
   root :to => "home#index"
 
   devise_for :users, :path => "account", :controllers => {
@@ -93,6 +94,8 @@ RubyChina::Application.routes.draw do
   end
 
   get "api" => "home#api", as: 'api'
+  get "twitter" => "home#twitter", as: "twitter"
+
   mount RubyChina::API => "/"
   mount RubyChina::APIV2 => "/"
 

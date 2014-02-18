@@ -47,6 +47,7 @@
            li << link_to(t("menu.home"), root_path)
            li << link_to(t("menu.topics"), topics_path)
            li << link_to(t("menu.wiki"), pages_path )
+           li << link_to(t("menu.tweets"), twitter_path ) if !mobile?
            li << link_to(t("menu.sites"), sites_path ) if !mobile?
            li << link_to(t("menu.users"), users_path) if !mobile?
         end %>

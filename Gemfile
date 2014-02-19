@@ -1,7 +1,7 @@
 # coding: utf-8
 source 'http://ruby.taobao.org'
 
-gem "rails", "4.0.2"
+gem "rails", "4.0.3"
 gem 'turbolinks', '~> 1.2.0'
 gem 'jquery-turbolinks', '2.0.0'
 gem 'actionpack-action_caching', '1.0.0'
@@ -71,7 +71,7 @@ gem 'faye-rails','1.0.0'
 gem "social-share-button", '0.1.4'
 
 # 表单
-gem 'simple_form', "3.0.0.rc"
+gem 'simple_form', "3.0.1"
 
 # API
 gem 'grape', github: 'intridea/grape', branch: 'frontier'

@@ -13,6 +13,10 @@ describe RubyChina::API, "topics" do
       Factory(:topic, :title => "This is a no_reply topic", :replies_count => 0)
       Factory(:topic, :title => "This is a popular topic", :replies_count => 1, :likes_count => 10)
 
+      node = Factory(:node, :name => 'No Point')
+      Factory(:topic, :title => 'This is a No Point topic', :node => node)
+      SiteConfig.node_ids_hide_in_topics_index = node.id.to_s
+
       get "/api/v2/topics.json"
       response.status.should == 200
       json = JSON.parse(response.body)

@@ -22,7 +22,7 @@ module RubyChina
       # Example
       #   /api/topics/index.json?page=1&per_page=15
       get do
-        @topics = Topic.last_actived
+        @topics = Topic.last_actived.without_hide_nodes
         @topics = @topics.send(params[:type]) if ['excellent', 'no_reply', 'popular', 'recent'].include?(params[:type])
         @topics = @topics.includes(:user).paginate(:page => params[:page], :per_page => params[:per_page] || 30)
         present @topics, :with => APIEntities::Topic

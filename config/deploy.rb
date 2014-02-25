@@ -6,7 +6,7 @@ require 'puma/capistrano'
 
 default_run_options[:pty] = true
 
-set :rvm_ruby_string, 'ruby-2.1.0'
+set :rvm_ruby_string, 'ruby-2.1.1'
 set :rvm_type, :user
 set :application, "ruby-china"
 set :repository,  "git://github.com/ruby-china/ruby-china.git"

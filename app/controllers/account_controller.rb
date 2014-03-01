@@ -1,5 +1,7 @@
 # coding: utf-8
-class AccountController < Devise::RegistrationsController  
+class AccountController < Devise::RegistrationsController 
+  protect_from_forgery
+   
   def edit
     @user = current_user
     # 首次生成用户 Token

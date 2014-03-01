@@ -7,6 +7,17 @@ module RubyChina
     version "v2"
     error_format :json
 
+    rescue_from :all do |e|
+      case e
+      when Mongoid::Errors::DocumentNotFound
+        Rack::Response.new(['not found'], 404, {}).finish
+      else
+        # ExceptionNotifier.notify_exception(e) # Uncommit it when ExceptionNotification is available
+        Rails.logger.error "APIv2 Error: #{e}\n#{e.backtrace.join("\n")}"
+        Rack::Response.new(['error'], 500, {}).finish
+      end
+    end
+
     helpers APIHelpers
 
     # Authentication:
@@ -22,7 +33,7 @@ module RubyChina
       # Example
       #   /api/topics/index.json?page=1&per_page=15
       get do
-        @topics = Topic.last_actived
+        @topics = Topic.last_actived.without_hide_nodes
         @topics = @topics.send(params[:type]) if ['excellent', 'no_reply', 'popular', 'recent'].include?(params[:type])
         @topics = @topics.includes(:user).paginate(:page => params[:page], :per_page => params[:per_page] || 30)
         present @topics, :with => APIEntities::Topic
@@ -67,7 +78,7 @@ module RubyChina
       # Example
       #   /api/topics/1.json
       get ":id" do
-        @topic = Topic.find_by_id(params[:id])
+        @topic = Topic.find(params[:id])
         @topic.hits.incr(1)
         present @topic, :with => APIEntities::DetailTopic, :include_deleted => params[:include_deleted]
       end

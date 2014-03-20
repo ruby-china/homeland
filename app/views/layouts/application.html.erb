@@ -21,10 +21,9 @@
   <%= yield :styles %>
   <% if mobile? %>
     <%= stylesheet_link_tag "mobile" %>
-    <meta name="viewport" content="minimal-ui">
     <meta name="apple-mobile-web-app-capable" content="no">
     <meta content='True' name='HandheldFriendly' />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui" />
     <link rel="apple-touch-icon-precomposed" href="<%= asset_path("ios-icon.png") %>" />
   <% end %>
   <meta name="keywords" content="<%= @meta_keywords %>" />

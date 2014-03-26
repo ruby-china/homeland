@@ -1,6 +1,9 @@
 language: ruby
 bundler_args: --without development
 
+env:
+  - USE_OFFICIAL_GEM_SOURCE=1
+
 services:
   - mongodb
   - redis-server
@@ -12,8 +15,6 @@ matrix:
 rvm:
   - 2.0.0
 
-install: touch ~/do_not_run_bundle
-
 before_script:
   - mongo ruby_china_test --eval 'db.addUser("travis", "test");'
   - cp config/config.yml.default config/config.yml
@@ -22,6 +23,5 @@ before_script:
   - sed -i "s/SETUP_DEVELOPMENT_HOST/127.0.0.1:27017/g" config/mongoid.yml
   - sed -i "s/SETUP_REDIS_HOST/127.0.0.1/g" config/redis.yml
   - sed -i "s/SETUP_REDIS_PORT/6379/g" config/redis.yml
-  - USE_OFFICIAL_GEM_SOURCE=1 bundle install
 
 script: RAILS_ENV=test bundle exec rake spec spec:javascript

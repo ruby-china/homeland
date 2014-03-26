@@ -1,5 +1,10 @@
 # coding: utf-8
-source 'http://ruby.taobao.org'
+
+if ENV['USE_OFFICIAL_GEM_SOURCE']
+  source 'https://rubygems.org'
+else
+  source 'http://ruby.taobao.org'
+end
 
 gem "rails", "4.0.3"
 gem 'turbolinks', '~> 1.2.0'

@@ -70,7 +70,7 @@ Forked from [Homeland Project](https://github.com/huacnlee/homeland)
 
 ## License
 
-Copyright (c) 2011-2012 Ruby China
+Copyright (c) 2011-2014 Ruby China
 
 Released under the MIT license:
 

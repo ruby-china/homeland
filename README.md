@@ -24,6 +24,14 @@ ruby setup.rb
 rails s
 ```
 
+## Gemfile Source
+
+By default bundler installs gems using the ruby.taobao.org source, if you'd rather use the official one, set environment variable `USE_OFFICIAL_GEM_SOURCE`:
+
+```
+USE_OFFICIAL_GEM_SOURCE=1
+```
+
 ## Start Sidekiq service
 
 ```bash

@@ -1,6 +1,9 @@
 language: ruby
 bundler_args: --without development
 
+env:
+  - USE_OFFICIAL_GEM_SOURCE=1
+
 services:
   - mongodb
   - redis-server

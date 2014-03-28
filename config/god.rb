@@ -1,12 +1,11 @@
-RAILS_ROOT = File.expand_path('../', __dir__)
+RAILS_ROOT = "/home/ruby/www/ruby-china/current"
 
 God.watch do |w|
   w.name     = "sidekiq"
   w.interval = 30.seconds
-  w.log      = "#{RAILS_ROOT}/log/#{w.name}.god.log"
   w.dir      = RAILS_ROOT
   w.pid_file = "#{RAILS_ROOT}/tmp/pids/#{w.name}.pid"
-  w.start    = "nohup bundle exec sidekiq -e production -C #{RAILS_ROOT}/config/sidekiq.yml -P #{RAILS_ROOT}/tmp/pids/sidekiq.pid >> #{RAILS_ROOT}/log/sidekiq.log 2>&1 &"
+  w.start    = "nohup bundle exec sidekiq -e production -C config/sidekiq.yml -P tmp/pids/sidekiq.pid >> #{RAILS_ROOT}/log/sidekiq.log 2>&1 &"
   w.stop     = "kill -9 `cat #{RAILS_ROOT}/tmp/pids/sidekiq.pid`"
   
   # determine the state on startup

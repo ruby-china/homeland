@@ -24,6 +24,14 @@ ruby setup.rb
 rails s
 ```
 
+## Gemfile Source
+
+By default bundler installs gems using the ruby.taobao.org source, if you'd rather use the official one, set environment variable `USE_OFFICIAL_GEM_SOURCE`:
+
+```
+USE_OFFICIAL_GEM_SOURCE=1
+```
+
 ## Start Sidekiq service
 
 ```bash
@@ -70,7 +78,7 @@ Forked from [Homeland Project](https://github.com/huacnlee/homeland)
 
 ## License
 
-Copyright (c) 2011-2012 Ruby China
+Copyright (c) 2011-2014 Ruby China
 
 Released under the MIT license:
 

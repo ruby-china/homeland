@@ -73,7 +73,7 @@ gem "sidekiq", "2.5.3"
 gem 'faye-rails','1.0.0'
 
 # 分享功能
-gem "social-share-button", '0.1.4'
+gem "social-share-button", '0.1.5'
 
 # 表单
 gem 'simple_form', "3.0.1"
@@ -113,7 +113,7 @@ group :development, :test do
   gem "sprite-factory", "1.4.1", require: false
   gem 'chunky_png', "1.2.8", require: false
 
-  gem 'jasmine-rails', github: 'searls/jasmine-rails'
+  gem 'jasmine-rails', '~> 0.6.0'
   gem "mongoid_colored_logger", "0.2.2"
 
   gem "quiet_assets", "~> 1.0.2"

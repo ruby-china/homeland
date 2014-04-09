@@ -35,4 +35,11 @@ RubyChina::Application.configure do
 
   config.serve_static_assets = true
   config.static_cache_control = "public, max-age=3600"
+
+  # Raises error for missing translations
+  # config.action_view.raise_on_missing_translations = true
+
+  # config/application.rb
+  # TODO Remove this soon
+  config.secret_key_base = YAML.load(File.open("#{Rails.root}/config/secrets.yml"))[Rails.env]['secret_key_base']
 end

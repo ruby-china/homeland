@@ -1,4 +1,4 @@
-RubyChina::Application.routes.draw do
+Rails.application.routes.draw do
   require 'api'
   require "api_v2"
 

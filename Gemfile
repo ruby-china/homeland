@@ -6,11 +6,11 @@ else
   source 'http://ruby.taobao.org'
 end
 
-gem "rails", "4.0.3"
+gem "rails", "4.0.4"
 gem 'turbolinks', '~> 1.2.0'
 gem 'jquery-turbolinks', '2.0.0'
 gem 'actionpack-action_caching', '1.0.0'
-gem 'sass-rails', "~> 4.0.0"
+gem 'sass-rails', '~> 4.0.2'
 gem 'coffee-rails', "~> 4.0.0"
 gem 'uglifier', '>= 1.3.0'
 
@@ -79,9 +79,10 @@ gem "social-share-button", '0.1.5'
 gem 'simple_form', "3.0.1"
 
 # API
-gem 'grape', github: 'intridea/grape', branch: 'frontier'
+gem 'grape', github: 'intridea/grape', ref: 'd24bd2f758544244ac65f19c69b94f0ffc34e71b'
 
 # Mailer
+gem 'postmark', '0.9.15'
 gem 'postmark-rails', '0.4.1'
 
 # Google Analytics performance
@@ -101,7 +102,7 @@ group :development, :test do
   gem 'capistrano', '2.9.0', require: false
   gem 'rvm-capistrano', require: false
   gem 'rspec-rails', '~> 2.13.2'
-  gem 'factory_girl_rails'
+  gem 'factory_girl_rails', '1.4.0'
   gem 'database_cleaner'
   gem "rspec-cells", '0.1.7'
 	gem 'fuubar'

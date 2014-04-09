@@ -1,5 +1,5 @@
 # coding: utf-8
-RubyChina::Application.configure do
+Rails.application.configure do
   # Settings specified here will take precedence over those in config/environment.rb
 
   # In the development environment your application's code is reloaded on
@@ -25,6 +25,14 @@ RubyChina::Application.configure do
   config.cache_store = [:dalli_store,"127.0.0.1", {:namespace => "rb-cn", :compression => true}]
 
   config.assets.debug = true
+
+  # Adds additional error checking when serving assets at runtime.
+  # Checks for improperly declared sprockets dependencies.
+  # Raises helpful error messages.
+  config.assets.raise_runtime_errors = true
+  
+  # Raises error for missing translations
+  # config.action_view.raise_on_missing_translations = true
 end
 
 @last_api_change = Time.now

@@ -1,5 +1,5 @@
 # coding: utf-8
-RubyChina::Application.configure do
+Rails.application.configure do
   # Settings specified here will take precedence over those in config/environment.rb
 
   # The production environment is meant for finished, "live" apps.
@@ -63,4 +63,6 @@ RubyChina::Application.configure do
   config.assets.js_compressor  = :uglifier
   config.assets.css_compressor = :scss
 
+  # Do not dump schema after migrations.
+  config.active_record.dump_schema_after_migration = false
 end

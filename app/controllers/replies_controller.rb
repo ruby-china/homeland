@@ -28,18 +28,18 @@ class RepliesController < ApplicationController
     @reply = Reply.find(params[:id])
 
     if @reply.update_attributes(reply_params)
-      redirect_to(topic_path(@reply.topic_id), :notice => '回帖更新成功.')
+      redirect_to(topic_path(@reply.topic_id), :notice => '回帖更新成功。')
     else
       render :action => "edit"
     end
   end
-  
+
   def destroy
     @reply = Reply.find(params[:id])
     if @reply.destroy
-      redirect_to(topic_path(@reply.topic_id), :notice => '回帖删除成功.')
+      redirect_to(topic_path(@reply.topic_id), :notice => '回帖删除成功。')
     else
-      redirect_to(topic_path(@reply.topic_id), :alert => '程序异常，删除失败.')
+      redirect_to(topic_path(@reply.topic_id), :alert => '程序异常，删除失败。')
     end
   end
 
@@ -48,7 +48,7 @@ class RepliesController < ApplicationController
   def find_topic
     @topic = Topic.find(params[:topic_id])
   end
-  
+
   def reply_params
     params.require(:reply).permit(:body)
   end

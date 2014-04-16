@@ -58,7 +58,7 @@ class Topic
   delegate :body, :to => :last_reply, :prefix => true, :allow_nil => true
 
   # scopes
-  scope :last_actived, desc(:last_active_mark)
+  scope :last_actived, -> {  desc(:last_active_mark) }
   # 推荐的话题
   scope :suggest, -> { where(:suggested_at.ne => nil).desc(:suggested_at) }
   scope :fields_for_list, -> { without(:body,:body_html) }

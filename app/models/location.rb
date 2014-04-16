@@ -6,7 +6,7 @@ class Location
   field :users_count, :type => Integer, :default => 0
   has_many :users
 
-  scope :hot, desc(:users_count)
+  scope :hot, -> { desc(:users_count) }
 
   validates_uniqueness_of :name, :case_sensitive => false
 

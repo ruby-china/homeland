@@ -102,9 +102,9 @@ describe TopicsController do
       topic = Factory :topic, :body => "@#{user.login}"
       Factory :reply, :body => "@#{user.login}", :topic => topic
       sign_in user
-      lambda do
-        get :show, :id => topic
-      end.should change(user.notifications.unread, :count).by(-2)
+      expect {
+        get :show, :id => topic.id
+      }.to change(user.notifications.unread, :count).by(-2)
     end
 
     context "when the topic has 11 replies, and 10 are shown per page" do

@@ -11,7 +11,7 @@ class Notification::Base
   index :read => 1
   index :user_id => 1, :read => 1
 
-  scope :unread, where(:read => false)
+  scope :unread, -> { where(:read => false) }
   
   after_create :realtime_push_to_client
   

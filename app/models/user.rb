@@ -89,7 +89,7 @@ class User
   has_and_belongs_to_many :following, :class_name => 'User', :inverse_of => :followers
   has_and_belongs_to_many :followers, :class_name => 'User', :inverse_of => :following
 
-  scope :hot, desc(:replies_count, :topics_count)
+  scope :hot, -> { desc(:replies_count, :topics_count) }
 
   def email=(val)
     self.email_md5 = Digest::MD5.hexdigest(val || "")
@@ -236,7 +236,7 @@ class User
   def read_topic(topic)
     return if topic.blank?
     return if self.topic_read?(topic)
-
+    
     self.notifications.unread.any_of({:mentionable_type => 'Topic', :mentionable_id => topic.id},
                                      {:mentionable_type => 'Reply', :mentionable_id.in => topic.reply_ids},
                                      {:reply_id.in => topic.reply_ids}).update_all(read: true)

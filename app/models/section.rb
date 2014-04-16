@@ -12,7 +12,7 @@ class Section
   validates_uniqueness_of :name
 
 
-  default_scope desc(:sort)
+  default_scope -> { desc(:sort) }
 
   after_save :update_cache_version
   after_destroy :update_cache_version

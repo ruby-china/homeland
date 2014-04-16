@@ -18,8 +18,8 @@ class Note
   index :user_id => 1
   index :updated_at => -1
 
-  scope :recent_updated, desc(:updated_at)
-  scope :published, where(publish: true)
+  scope :recent_updated, -> {  desc(:updated_at) }
+  scope :published, -> {  where(publish: true) }
 
   before_save :auto_set_value
   def auto_set_value

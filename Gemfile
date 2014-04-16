@@ -6,10 +6,10 @@ else
   source 'http://ruby.taobao.org'
 end
 
-gem "rails", "4.0.4"
+gem "rails", "4.1.0"
 gem 'turbolinks', '~> 1.2.0'
 gem 'jquery-turbolinks', '2.0.0'
-gem 'actionpack-action_caching', '1.0.0'
+gem 'actionpack-action_caching', '1.1.1'
 gem 'sass-rails', '~> 4.0.2'
 gem 'coffee-rails', "~> 4.0.0"
 gem 'uglifier', '>= 1.3.0'
@@ -27,8 +27,8 @@ gem 'carrierwave-upyun', '0.1.5'
 gem 'mini_magick','3.3', require: false
 
 # Mongoid 辅助插件
-gem "mongoid", github: 'mongoid/mongoid', ref: '11e45e5a30a45458b83db99ab6c9d9ccc337e66f'
-gem 'mongoid_auto_increment_id', "0.6.2"
+gem "mongoid", github: 'mongoid/mongoid', ref: 'da35e0cd0fc17651c263e0f74d90b0adf5fbb409'
+gem 'mongoid_auto_increment_id', "0.6.4"
 gem 'mongoid_rails_migrations', '1.0.0'
 
 # 用户系统
@@ -41,7 +41,7 @@ gem 'will_paginate', '3.0.4'
 # Bootstrap
 gem 'anjlab-bootstrap-rails', '2.0.3.2', require: 'bootstrap-rails'
 gem 'bootstrap-will_paginate', '0.0.3'
-gem 'bootstrap_helper', github: 'huacnlee/bootstrap-helper'
+gem 'bootstrap_helper', '4.2.3'
 
 # 三方平台 OAuth 验证登陆
 gem "omniauth", "~> 1.0.1"
@@ -51,7 +51,7 @@ gem "omniauth-github", "~> 1.1.0"
 gem "cancan", "~> 1.6.10"
 
 # Redis 命名空间
-gem 'redis-namespace','~> 1.2.1'
+gem 'redis-namespace','~> 1.3.1'
 
 # 将一些数据存放入 Redis
 gem "redis-objects", "0.5.2"
@@ -65,10 +65,10 @@ gem 'auto-space', '0.0.2'
 # YAML 配置信息
 gem "settingslogic", "~> 2.0.9"
 
-gem "cells", '~> 3.8.8'
+gem "cells", '~> 3.9.1'
 
 # 队列
-gem "sidekiq", "2.5.3"
+gem "sidekiq", "2.17.7"
 
 gem 'faye-rails','1.0.0'
 
@@ -76,7 +76,7 @@ gem 'faye-rails','1.0.0'
 gem "social-share-button", '0.1.5'
 
 # 表单
-gem 'simple_form', "3.0.1"
+gem 'simple_form', "3.0.2"
 
 # API
 gem 'grape', github: 'intridea/grape', ref: 'd24bd2f758544244ac65f19c69b94f0ffc34e71b'
@@ -101,11 +101,10 @@ gem 'rack-cors', require: 'rack/cors'
 group :development, :test do
   gem 'capistrano', '2.9.0', require: false
   gem 'rvm-capistrano', require: false
-  gem 'rspec-rails', '~> 2.13.2'
+  gem 'rspec-rails', '~> 2.14.2'
   gem 'factory_girl_rails', '1.4.0'
   gem 'database_cleaner'
-  gem "rspec-cells", '0.1.7'
-	gem 'fuubar'
+  gem "rspec-cells", '0.1.10'
   gem "capybara", "~> 0.4.1"
   gem 'api_taster', '0.6.0'
   gem "letter_opener"
@@ -115,7 +114,7 @@ group :development, :test do
   gem 'chunky_png', "1.2.8", require: false
 
   gem 'jasmine-rails', '~> 0.6.0'
-  gem "mongoid_colored_logger", "0.2.2"
+  # gem "mongoid_colored_logger", "0.2.3"
 
   gem "quiet_assets", "~> 1.0.2"
 end

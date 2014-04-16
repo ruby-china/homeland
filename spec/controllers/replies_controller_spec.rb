@@ -10,8 +10,8 @@ describe RepliesController do
       Factory :reply, :topic => topic
       sign_in user
       post :create, :topic_id => topic.id, :reply => {:body => 'content'}, :format => :js
-      topic.reload
-      user.topic_read?(topic).should be_true
+      response.should be_success
+      expect(user.topic_read?(topic)).to be_true
     end
   end
   

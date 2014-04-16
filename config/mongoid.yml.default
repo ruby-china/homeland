@@ -1,6 +1,4 @@
 defaults: &defaults
-  options:
-    identity_map_enabled: true
 
 development:
   <<: *defaults

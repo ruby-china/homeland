@@ -23,6 +23,7 @@ set :puma_config_file, "config/puma.rb"
 role :web, "ruby-china.org"                          # Your HTTP server, Apache/etc
 role :app, "ruby-china.org"                          # This may be the same as your `Web` server
 role :db,  "ruby-china.org", :primary => true # This is where Rails migrations will run
+role :queue, "ruby-china.org"
 
 namespace :sidekiq do
   task :quiet, :roles => :queue do

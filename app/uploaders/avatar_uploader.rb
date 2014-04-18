@@ -16,6 +16,18 @@ class AvatarUploader < BaseUploader
     process :resize_to_fill => [120, 120]
   end
 
+  # Remove the animation when upload gif image
+  process :remove_animation
+
+  def remove_animation
+    manipulate! do |img|
+      if img.mime_type.match /gif/
+        img.collapse!
+      end
+      img
+    end
+  end
+
   def filename
     if super.present?
       "avatar/#{model.id}.#{file.extension.downcase}"

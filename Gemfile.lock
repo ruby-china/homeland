@@ -334,6 +334,8 @@ GEM
     simple_form (3.0.2)
       actionpack (~> 4.0)
       activemodel (~> 4.0)
+    skylight (0.3.12)
+      activesupport (>= 3.0.0)
     social-share-button (0.1.5)
     sprite-factory (1.4.1)
     sprockets (2.11.0)
@@ -435,6 +437,7 @@ DEPENDENCIES
   settingslogic (~> 2.0.9)
   sidekiq (= 2.17.7)
   simple_form (= 3.0.2)
+  skylight
   social-share-button (= 0.1.5)
   sprite-factory (= 1.4.1)
   thin (= 1.5.0)

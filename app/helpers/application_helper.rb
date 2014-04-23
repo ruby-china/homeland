@@ -34,7 +34,7 @@ module ApplicationHelper
   end
 
   def controller_javascript_include_tag
-    fname =
+    fname = ""
     case controller_name
     when "pages","topics","notes"
       fname = "#{controller_name}.js"

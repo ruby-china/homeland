@@ -15,7 +15,7 @@ describe LikesHelper do
       helper.stub(:current_user).and_return(user)
       topic.stub(:liked_by_user?).and_return(true)
       helper.likeable_tag(topic).should == %(<a class=\"likeable\" data-count=\"0\" data-id=\"1\" data-state=\"liked\" data-type=\"Topic\" href=\"#\" onclick=\"return App.likeable(this);\" rel=\"twipsy\" title=\"取消喜欢\"><i class=\"icon small_liked\"></i> <span>喜欢</span></a>)
-      topic.stub!(:likes_count).and_return(3)
+      topic.stub(:likes_count).and_return(3)
       helper.likeable_tag(topic).should == %(<a class=\"likeable\" data-count=\"3\" data-id=\"1\" data-state=\"liked\" data-type=\"Topic\" href=\"#\" onclick=\"return App.likeable(this);\" rel=\"twipsy\" title=\"取消喜欢\"><i class=\"icon small_liked\"></i> <span>3人喜欢</span></a>)
     end
 

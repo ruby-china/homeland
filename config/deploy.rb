@@ -27,11 +27,11 @@ role :queue, "ruby-china.org"
 
 namespace :sidekiq do
   task :quiet, :roles => :queue do
-#    run "cd #{deploy_to}/current/; bundle exec sidekiqctl quiet tmp/pids/sidekiq.pid"
+#   run "cd #{deploy_to}/current/; bundle exec sidekiqctl quiet tmp/pids/sidekiq.pid"
   end
 
   task :stop, :roles => :queue do
-#    run "cd #{deploy_to}/current/; bundle exec sidekiqctl stop tmp/pids/sidekiq.pid 60"
+#   run "cd #{deploy_to}/current/; bundle exec sidekiqctl stop tmp/pids/sidekiq.pid 60"
   end
 end
 
@@ -76,9 +76,9 @@ task :compile_assets, :roles => :web do
 end
 
 task :mongoid_migrate_database, :roles => :web do
-  # run "cd #{deploy_to}/current/; RAILS_ENV=production bundle exec rake db:migrate"
+  run "cd #{deploy_to}/current/; RAILS_ENV=production bundle exec rake db:migrate"
 end
 
-after "deploy:finalize_update","deploy:symlink", :init_shared_path, :link_shared_files, :mongoid_migrate_database , :compile_assets
+after "deploy:finalize_update","deploy:symlink", :init_shared_path, :link_shared_files #, :mongoid_migrate_database , :compile_assets
 before "deploy:update_code", "sidekiq:quiet"
 after "deploy:update", "sidekiq:stop"

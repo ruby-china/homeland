@@ -21,12 +21,11 @@ describe LikesHelper do
 
     it "should result when unlogin user" do
       helper.stub(:current_user).and_return(nil)
-      helper.likeable_tag(topic).should == %(<a class=\"likeable\" data-count=\"0\" data-id=\"1\" data-state=\"\" data-type=\"Topic\" href=\"#\" onclick=\"return App.likeable(this);\" rel=\"twipsy\" title=\"喜欢\"><i class=\"icon small_like\"></i> <span>喜欢</span></a>)
+      helper.likeable_tag(topic).should == %(<a class=\"likeable\" href=\"/account/sign_in\"><i class=\"icon small_like\"></i> <span>喜欢</span></a>)
     end
 
     it "should result with no_cache params" do
       str = %(<a class=\"likeable\" data-count=\"0\" data-id=\"1\" data-state=\"\" data-type=\"Topic\" href=\"#\" onclick=\"return App.likeable(this);\" rel=\"twipsy\" title=\"喜欢\"><i class=\"icon small_like\"></i> <span>喜欢</span></a>)
-      helper.likeable_tag(topic, :cache => true).should == str
       helper.stub(:current_user).and_return(user)
       helper.likeable_tag(topic, :cache => true).should == str
     end

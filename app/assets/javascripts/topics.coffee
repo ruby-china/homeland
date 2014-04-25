@@ -29,13 +29,20 @@ window.Topics =
         $("#topic_add_image").hide()
         $("#topic_add_image").before("<span class='loading'>上传中...</span>")
       success : (result, status, xhr) ->
-        $("#topic_add_image").parent().find("span.loading").remove()
-        $("#topic_add_image").show()
+        Topics.restoreUploaderStatus()
         Topics.appendImageFromUpload([result])
+      error : (result, status, errorThrown) ->
+        Topics.restoreUploaderStatus()
+        alert(errorThrown)
+      
 
     $("#topic_upload_images").fileUpload opts
     return false
 
+  restoreUploaderStatus : () ->
+    $("#topic_add_image").parent().find("span.loading").remove()
+    $("#topic_add_image").show()
+    
   # 回复
   reply : (floor,login) ->
     reply_body = $("#reply_body")

@@ -22,7 +22,7 @@ GIT
       tzinfo (>= 0.3.37)
 
 GEM
-  remote: http://ruby.taobao.org/
+  remote: https://ruby.taobao.org/
   specs:
     actionmailer (4.1.0)
       actionpack (= 4.1.0)

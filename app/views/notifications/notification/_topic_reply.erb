@@ -1,28 +1,33 @@
-<%
-  reply = notification.reply
-  topic = reply.topic
-  action_label = ""
-  if !owner?(topic)
-    action_label = "关注"
-  end
-%>
-<td class="face">
-  <%= user_avatar_tag(reply.user, :normal) %>
-</td>
-<td>
-  <h3>
-    <span class="user">
-      <%= user_name_tag(reply.user) %>
-    </span>
-    回复了你<%= action_label %>的主题：
-    <%= topic_title_tag(topic) %>
-    <% if !notification.read? %>
-      <span class="new label label-warning">新</span>
-    <% end %>
-  </h3>
-  <%- if reply.present? -%>
-    <div class="body md_body">
-      <%= sanitize_reply reply.body_html %>
-    </div>
-  <%- end -%>
-</td>
+<% reply = notification.reply %>
+<% if reply.blank? %>
+  <td></td>
+  <td>相关信息已删除</td>
+<% else %>
+  <%
+    topic = reply.topic
+    action_label = ""
+    if !owner?(topic)
+      action_label = "关注"
+    end
+  %>
+  <td class="face">
+    <%= user_avatar_tag(reply.user, :normal) %>
+  </td>
+  <td>
+    <h3>
+      <span class="user">
+        <%= user_name_tag(reply.user) %>
+      </span>
+      回复了你<%= action_label %>的主题：
+      <%= topic_title_tag(topic) %>
+      <% if !notification.read? %>
+        <span class="new label label-warning">新</span>
+      <% end %>
+    </h3>
+    <%- if reply.present? -%>
+      <div class="body md_body">
+        <%= sanitize_reply reply.body_html %>
+      </div>
+    <%- end -%>
+  </td>
+<% end %>

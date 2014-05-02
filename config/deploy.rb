@@ -27,11 +27,11 @@ role :queue, "ruby-china.org"
 
 namespace :sidekiq do
   task :quiet, :roles => :queue do
-#   run "cd #{deploy_to}/current/; bundle exec sidekiqctl quiet tmp/pids/sidekiq.pid"
+   run "cd #{deploy_to}/current/; bundle exec sidekiqctl quiet tmp/pids/sidekiq.pid"
   end
 
   task :stop, :roles => :queue do
-#   run "cd #{deploy_to}/current/; bundle exec sidekiqctl stop tmp/pids/sidekiq.pid 60"
+   run "cd #{deploy_to}/current/; bundle exec sidekiqctl stop tmp/pids/sidekiq.pid 60"
   end
 end
 

@@ -1,9 +1,8 @@
 <%= render 'base' %>
 <div class="tools">
-  <%= link_to '修改', edit_cpanel_exception_log_path(@exception_log), :class => "btn btn-small btn-success" %>
   <%= link_to '返回', cpanel_exception_logs_path, :class => "btn btn-small" %>
 </div>
 
-<div id="cpanel_exception_log">
+<div id="cpanel_exception_log" style="margin-top:10px;">
   <pre><%= @exception_log.body %></pre>
 </div>

@@ -97,7 +97,7 @@ gem 'thin', "1.5.0"
 # for api 跨域
 gem 'rack-cors', require: 'rack/cors'
 
-gem 'skylight'
+gem 'exception_notification'
 
 group :development, :test do
   gem 'capistrano', '2.9.0', require: false

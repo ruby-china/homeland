@@ -91,6 +91,11 @@ Rails.application.routes.draw do
     resources :site_nodes
     resources :sites
     resources :locations
+    resources :exception_logs do
+      collection do
+        post :clean
+      end
+    end
   end
 
   get "api" => "home#api", as: 'api'

@@ -1,2 +1,0 @@
-module Cpanel::SitesHelper
-end

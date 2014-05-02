@@ -15,6 +15,7 @@
       site_nodes: "Site Nodes"
       sites: "Sites"
       locations: "Locations"
+      exception_logs: "Errors"
     overview: "Overview"
     recent_topics: "Recent Topics"
     statics: "Statistics"

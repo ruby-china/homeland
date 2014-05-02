@@ -6,7 +6,6 @@ require "action_mailer/railtie"
 require "rails/test_unit/railtie"
 require 'sprockets/railtie'
 
-
 if defined?(Bundler)
   Bundler.require *Rails.groups(:assets => %w(production development test))
 end
@@ -45,12 +44,12 @@ module RubyChina
     config.to_prepare {
       Devise::Mailer.layout "mailer"
     }
-    
-    config.assets.precompile += %w(application.css app.js topics.css topics.js 
+
+    config.assets.precompile += %w(application.css app.js topics.css topics.js
       window.css front.css cpanel.css
-      users.css pages.css pages.js notes.css notes.js 
+      users.css pages.css pages.js notes.css notes.js
       mobile.css home.css)
-      
+
     config.middleware.use Rack::Cors do
       allow do
         origins '*'
@@ -64,6 +63,3 @@ require "markdown"
 
 I18n.config.enforce_available_locales = false
 I18n.locale = 'zh-CN'
-
-
-

@@ -1,2 +1,0 @@
-module Cpanel::LocationsHelper
-end

@@ -159,6 +159,11 @@ describe RubyChina::API, "topics" do
       json["replies"][1]["deleted_at"].should_not be_nil
       json["hits"].should == old_hits + 2
     end
+    
+    it "should work when id record found" do
+      get "/api/topics/-1.json"
+      response.status.should == 404
+    end
   end
   
   describe "POST /api/topics/:id/replies.json" do

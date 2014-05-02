@@ -56,6 +56,8 @@ module RubyChina
       #   /api/topics/1.json
       get ":id" do
         @topic = Topic.includes(:replies).find_by_id(params[:id])
+        error!("Topic not found", 404) if @topic.blank?
+        
         @topic.hits.incr(1)
         present @topic, :with => APIEntities::DetailTopic
       end

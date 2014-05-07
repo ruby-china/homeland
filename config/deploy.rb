@@ -38,17 +38,17 @@ end
 namespace :faye do
   desc "Start Faye"
   task :start, :roles => :app do
-    run "cd #{deploy_to}/current/faye_server; thin start -C thin.yml"
+    run "cd #{deploy_to}/current/faye_server; bundle exec thin start -C thin.yml"
   end
 
   desc "Stop Faye"
   task :stop, :roles => :app do
-    run "cd #{deploy_to}/current/faye_server; thin stop -C thin.yml"
+    run "cd #{deploy_to}/current/faye_server; bundle exec thin stop -C thin.yml"
   end
 
   desc "Restart Faye"
   task :restart, :roles => :app do
-    run "cd #{deploy_to}/current/faye_server; thin restart -C  thin.yml"
+    run "cd #{deploy_to}/current/faye_server; bundle exec thin restart -C  thin.yml"
   end
 end
 

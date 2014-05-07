@@ -53,6 +53,7 @@ RSpec.configure do |config|
     DatabaseCleaner.orm = :mongoid
     DatabaseCleaner.strategy = :truncation
     DatabaseCleaner.clean
+    Rails.cache.clear
   end
 
   config.include RSpec::Rails::RequestExampleGroup, :type => :request, :example_group => {

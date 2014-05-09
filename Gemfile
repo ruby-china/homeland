@@ -58,7 +58,7 @@ gem "redis-objects", "0.9.1"
 
 # Markdown 格式 & 文本处理
 gem "redcarpet", "~> 3.0.0"
-gem "rouge", "~> 1.0.0"
+gem "rouge", "~> 1.3.4"
 gem 'nokogiri', "~> 1.5.6"
 gem 'auto-space', '0.0.2'
 

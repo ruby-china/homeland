@@ -17,24 +17,27 @@
 <html>
 <head>
   <%= render_page_title %>
-  <%= stylesheet_link_tag "front", "data-turbolinks-track" => true %>
-  <%= yield :styles %>
-  <% if mobile? %>
-    <%= stylesheet_link_tag "mobile" %>
-    <meta name="apple-mobile-web-app-capable" content="no">
-    <meta content='True' name='HandheldFriendly' />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-    <link rel="apple-touch-icon-precomposed" href="<%= asset_path("ios-icon.png") %>" />
-  <% end %>
+  <meta charset='utf-8' />
   <meta name="keywords" content="<%= @meta_keywords %>" />
   <meta name="description" content="<%= @meta_description %>" />
-  <meta charset='utf-8' />
-  <link rel="shortcut icon" href="<%= asset_path("big_logo.png") %>" />
-  <%= raw SiteConfig.custom_head_html %>
+  
+  <% cache("app-head-html") do %>
+    <%= stylesheet_link_tag "front", "data-turbolinks-track" => true %>
+    <% if mobile? %>
+      <%= stylesheet_link_tag "mobile" %>
+      <meta name="apple-mobile-web-app-capable" content="no">
+      <meta content='True' name='HandheldFriendly' />
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+      <link rel="apple-touch-icon-precomposed" href="<%= asset_path("ios-icon.png") %>" />
+    <% end %>
+    <link rel="shortcut icon" href="<%= asset_path("big_logo.png") %>" />
+    <%= auto_discovery_link_tag(:rss,feed_topics_url,:title => '订阅最新帖') %>
+    <%= javascript_include_tag "app", "data-turbolinks-track" => true %>
+  <% end %>
+  
   <%= csrf_meta_tag %>
-  <%= auto_discovery_link_tag(:rss,feed_topics_url,:title => '订阅最新帖') %>
-  <%= javascript_include_tag "app", "data-turbolinks-track" => true %>
   <%= yield :node_feed_link %>
+  <%= raw SiteConfig.custom_head_html %>
 </head>
 <body data-offset="50" data-controller-name="<%= controller_name %>">
   <div class="navbar navbar-fixed-top">
@@ -100,8 +103,6 @@
       _gaq.push(['_setAccount', '<%= Setting.google_analytics_key %>']);
       _gaq.push(['_setSiteSpeedSampleRate', 100]);
       _gaq.push(['_trackPageview']);
-
-      <%= Garelic::Timing %>
 
       (function() {
           var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;

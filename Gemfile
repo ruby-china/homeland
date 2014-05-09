@@ -84,9 +84,6 @@ gem 'grape', github: 'intridea/grape', ref: 'd24bd2f758544244ac65f19c69b94f0ffc3
 gem 'postmark', '0.9.15'
 gem 'postmark-rails', '0.4.1'
 
-# Google Analytics performance
-gem 'garelic', '0.0.2'
-
 gem "god"
 
 gem 'dalli', '1.1.1'

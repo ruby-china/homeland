@@ -1,8 +1,3 @@
-<%= content_for :styles do %>
-  <% if !@topic.user.blank? and !@topic.user.google_profile_url.blank? %>
-    <link rel="author" content="<%= @topic.user.google_profile_url %>" />
-  <% end %>
-<% end %>
 <% content_for :scripts do %>
   <script type="text/javascript">
     Topics.replies_per_page = <%= @per_page %>;

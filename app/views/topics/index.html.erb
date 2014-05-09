@@ -5,7 +5,10 @@
     </div>
 
     <div class="topics">
-      <%= render :partial => "topics/topic", :collection => @topics %>
+      <% if @topics.current_page == 1 %>
+        <%= render partial: "topics/topic", collection: @suggest_topics, locals: { suggest: true } %>
+      <% end %>
+      <%= render partial: "topics/topic", collection: @topics, locals: { suggest: false } %>
     </div>
     <%= will_paginate @topics, :inner_window => 2 %>
 

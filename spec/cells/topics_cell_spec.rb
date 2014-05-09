@@ -20,13 +20,7 @@ describe TopicsCell do
       render_cell(:topics, :sidebar_statistics).should have_css("div.totals", :count => 1)
     end
   end
-
-  describe "sidebar_suggest_topics" do
-    it "should render sidebar_suggest_topics" do
-      render_cell(:topics, :sidebar_suggest_topics).should have_css("div.suggest_topics", :count => 1)
-    end
-  end
-
+  
   describe "reply_help_block" do
     it "should render reply_help_block" do
       render_cell(:topics, :reply_help_block).should have_css('div#markdown_help_tip_modal')

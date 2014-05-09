@@ -14,6 +14,9 @@
     <div class="infos">
       <div class="title">
         <%= link_to(truncate(topic.title, :length => 100), topic_path(topic), :title => topic.title) %>
+        <% if suggest %>
+          <i class="icon small_lock" title="置顶"></i>
+        <% end %>
         <%= topic_excellent_tag(topic) %>
       </div>
       <div class="info">

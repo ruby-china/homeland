@@ -21,15 +21,6 @@ class TopicsCell < BaseCell
     render
   end
 
-  # 置顶话题
-  cache :sidebar_suggest_topics do |cell|
-    CacheVersion.topic_last_suggested_at
-  end
-  def sidebar_suggest_topics
-    @suggest_topics = Topic.suggest.limit(5)
-    render
-  end
-
   # 节点下面的最新话题
   cache :sidebar_for_node_recent_topics, :expires_in => 30.minutes do |cell, args|
     ['node',args[:topic].node_id].join("-")

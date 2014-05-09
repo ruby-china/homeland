@@ -111,4 +111,13 @@ describe Topic do
       Topic.excellent.should include(topic)
     end
   end
+  
+  describe '#suggest_topics' do
+    it 'should work' do
+      topics = FactoryGirl.create_list(:topic, 6)
+      Topic.should_receive(:suggest).and_return { Topic.all }
+      expect(Topic.suggest_topics).to eq topics[0,5]
+    end
+    
+  end
 end

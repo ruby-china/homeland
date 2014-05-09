@@ -6,7 +6,9 @@
 
     <div class="topics">
       <% if @topics.current_page == 1 %>
-        <%= render partial: "topics/topic", collection: @suggest_topics, locals: { suggest: true } %>
+        <% cache(@suggest_topics) do %>
+          <%= render partial: "topics/topic", collection: @suggest_topics, locals: { suggest: true } %>
+        <% end %>
       <% end %>
       <%= render partial: "topics/topic", collection: @topics, locals: { suggest: false } %>
     </div>

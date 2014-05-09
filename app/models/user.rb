@@ -233,18 +233,22 @@ class User
   end
   
   def filter_readed_topics(topics)
+    t1 = Time.now
     key_hashs = {}
     return [] if topics.blank?
-    topics.map do |topic|
-      key_hashs["user:#{self.id}:topic_read:#{topic.id}"] = topic
+    cache_keys = topics.map { |t| "user:#{self.id}:topic_read:#{t.id}" }
+    results = Rails.cache.read_multi(*cache_keys)
+    
+    ids = []
+    topics.each do |topic|
+      val = results["user:#{self.id}:topic_read:#{topic.id}"]
+      if (val == (topic.last_reply_id || -1))
+        ids << topic.id
+      end
     end
-    results = Rails.cache.read_multi(*key_hashs.keys)
-    key_hashs.keys.each do |key|
-      topic = key_hashs[key]
-      last_reply_id = topic.last_reply_id || -1
-      topic.read_state = last_reply_id == results[key]
-    end
-    topics.select { |t| t.read_state == true }.collect(&:id)
+    t2 = Time.now
+    logger.error "filter_readed_topics (#{(t2 - t1) * 1000}ms)"
+    ids 
   end
 
   # 将 topic 的最后回复设置为已读

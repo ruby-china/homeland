@@ -40,6 +40,16 @@ describe User do
       user_for_delete1.authorizations.should == []
     end
   end
+  
+  describe '#filter_readed_topics' do
+    let(:topics) { FactoryGirl.create_list(:topic, 3) }
+    
+    it "should work" do
+      user.read_topic(topics[1])
+      user.read_topic(topics[2])
+      user.filter_readed_topics(topics).should == [topics[1].id,topics[2].id]
+    end
+  end
 
   describe "location" do
     it "should not get results when user location not set" do

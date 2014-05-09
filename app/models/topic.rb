@@ -35,6 +35,9 @@ class Topic
   # 精华贴 0 否， 1 是
   field :excellent, type: Integer, default: 0
 
+  # 临时存储检测用户是否读过的结果
+  attr_accessor :read_state
+  
   belongs_to :user, :inverse_of => :topics
   counter_cache :name => :user, :inverse_of => :topics
   belongs_to :node

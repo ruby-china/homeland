@@ -21,11 +21,22 @@
 
   <% if !@node.blank? %>
     <% content_for :node_feed_link do %>
-      <%= auto_discovery_link_tag(:rss, feed_node_topics_url, :title => "#{@node.name}節點最新話題") %>
+      <%= auto_discovery_link_tag(:rss, feed_node_topics_url, :title => "#{@node.name} 节点最新话题") %>
     <% end %>
   <% end %>
 
 </div>
+
+<% if current_user %>
+<script type="text/javascript">
+  var readed_topic_ids = <%= current_user.filter_readed_topics(@topics) %>;
+  readed_topic_ids = readed_topic_ids.concat(<%= current_user.filter_readed_topics(@suggest_topics) %>);
+  for (var i = 0; i < readed_topic_ids.length; i++) {
+    topic_id = readed_topic_ids[i];
+    $(".topic_"+ topic_id + " .right_info .count").addClass("state_true");
+  }
+</script>
+<% end %>
 
 <% if !mobile? %>
   <div class="sidebar">

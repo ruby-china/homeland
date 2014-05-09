@@ -1,4 +1,5 @@
 # coding: utf-8
+require 'will_paginate/array'
 class UsersController < ApplicationController
   before_filter :require_user, :only => "auth_unbind"
   before_filter :set_menu_active
@@ -27,7 +28,11 @@ class UsersController < ApplicationController
   end
 
   def favorites
-    @topics = Topic.where(:_id.in => @user.favorite_topic_ids).paginate(:page => params[:page], :per_page => 30)
+    @topic_ids = @user.favorite_topic_ids.reverse.paginate(:page => params[:page], :per_page => 30)
+    @topics = Topic.where(:_id.in => @topic_ids)
+    @topics = @topics.to_a.sort do |a, b|
+      @topic_ids.index(a.id) <=> @topic_ids.index(b.id)
+    end
     drop_breadcrumb(@user.login, user_path(@user.login))
     drop_breadcrumb(t("users.menu.favorites"))
   end

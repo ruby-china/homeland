@@ -234,6 +234,7 @@ class User
   
   def filter_readed_topics(topics)
     key_hashs = {}
+    return [] if topics.blank?
     topics.map do |topic|
       key_hashs["user:#{self.id}:topic_read:#{topic.id}"] = topic
     end

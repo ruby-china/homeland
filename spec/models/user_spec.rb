@@ -49,6 +49,11 @@ describe User do
       user.read_topic(topics[2])
       user.filter_readed_topics(topics).should == [topics[1].id,topics[2].id]
     end
+    
+    it "should work when params is nil or empty" do
+      user.filter_readed_topics(nil).should == []
+      user.filter_readed_topics([]).should == []
+    end
   end
 
   describe "location" do

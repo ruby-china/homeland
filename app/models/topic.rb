@@ -142,10 +142,10 @@ class Topic
   end
   
   def self.suggest_topics
-    key = "topic:suggest_topics:#{CacheVersion.topic_last_suggested_at}"
+    key = "topic:suggest_topics:#{CacheVersion.topic_last_suggested_at}:3"
     topics = Rails.cache.read(key)
     if !topics
-      topics = Topic.suggest.limit(5).to_a
+      topics = Topic.suggest.limit(3).to_a
       Rails.cache.write(key, topics)
     end
     topics

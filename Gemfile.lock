@@ -120,7 +120,7 @@ GEM
     cookiejar (0.3.2)
     culerity (0.2.15)
     daemons (1.1.9)
-    dalli (1.1.1)
+    dalli (2.7.1)
     database_cleaner (1.2.0)
     devise (3.0.1)
       bcrypt-ruby (~> 3.0)
@@ -390,7 +390,7 @@ DEPENDENCIES
   cells (~> 3.9.1)
   chunky_png (= 1.2.8)
   coffee-rails (~> 4.0.0)
-  dalli (= 1.1.1)
+  dalli (= 2.7.1)
   database_cleaner
   devise (= 3.0.1)
   devise-encryptable (= 0.1.2)

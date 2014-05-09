@@ -86,7 +86,7 @@ gem 'postmark-rails', '0.4.1'
 
 gem "god"
 
-gem 'dalli', '1.1.1'
+gem 'dalli', '2.7.1'
 gem 'eventmachine', '1.0.3'
 gem "puma", "2.6.0"
 # Faye Server 需要

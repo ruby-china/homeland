@@ -29,7 +29,15 @@
 #= require_self
 
 window.App =
-  notifier : null,
+  notifier : null
+  current_user_id: null
+  access_token : ''
+  faye_server_url : ''
+  asset_url : ''
+  root_url : ''
+  
+  isLogined : ->
+    App.current_user_id != null
 
   loading : () ->
     console.log "loading..."
@@ -55,6 +63,10 @@ window.App =
     Turbolinks.visit(url)
 
   likeable : (el) ->
+    if !App.isLogined()
+      location.href = "/account/sign_in"
+      return false
+      
     $el = $(el)
     likeable_type = $el.data("type")
     likeable_id = $el.data("id")
@@ -82,14 +94,14 @@ window.App =
       if likes_count == 0
         $('span',el).text("喜欢")
       else
-        $('span',el).text("#{likes_count}人喜欢")
+        $('span',el).text("#{likes_count} 人喜欢")
       $("i.icon",el).attr("class","icon small_like")
     false
 
   likeableAsLiked : (el) ->
     likes_count = $(el).data("count")
     $(el).data("state","liked").attr("title", "取消喜欢")
-    $('span',el).text("#{likes_count}人喜欢")
+    $('span',el).text("#{likes_count} 人喜欢")
     $("i.icon",el).attr("class","icon small_liked")
 
   atReplyable : (el, logins) ->
@@ -102,7 +114,7 @@ window.App =
     .atwho
       at : ":"
       data : window.EMOJI_LIST
-      tpl : "<li data-value='${name}:'><img src='#{ASSET_URL}/assets/emojis/${name}.png' height='20' width='20'/> ${name} </li>"
+      tpl : "<li data-value='${name}:'><img src='#{App.asset_url}/assets/emojis/${name}.png' height='20' width='20'/> ${name} </li>"
     true
 
   initForDesktopView : () ->
@@ -125,15 +137,15 @@ window.App =
     result
 
   initNotificationSubscribe : () ->
-    return if not CURRENT_USER_ACCESS_TOKEN?
-    faye = new Faye.Client(FAYE_SERVER_URL)
-    notification_subscription = faye.subscribe "/notifications_count/#{CURRENT_USER_ACCESS_TOKEN}",(json) ->
+    return if not App.access_token?
+    faye = new Faye.Client(App.faye_server_url)
+    notification_subscription = faye.subscribe "/notifications_count/#{App.access_token}",(json) ->
       span = $("#user_notifications_count span")
       new_title = $(document).attr("title").replace(/\(\d+\) /,'')
       if json.count > 0
         span.addClass("badge-error")
         new_title = "(#{json.count}) #{new_title}"
-        url = App.fixUrlDash("#{ROOT_URL}#{json.content_path}")
+        url = App.fixUrlDash("#{App.root_url}#{json.content_path}")
         console.log url
         $.notifier.notify("",json.title,json.content,url)
       else

@@ -83,13 +83,14 @@
     </script>
   <% end %>
   <script type="text/javascript" data-turbolinks-eval=false>
-    ROOT_URL = "<%= root_url %>";
-    ASSET_URL = "<%= Setting.upload_url %>";
-    FAYE_SERVER_URL = "<%= Setting.faye_server %>";
+    App.root_url = "<%= root_url %>";
+    App.asset_url = "<%= Setting.upload_url %>";
+    App.faye_server_url = "<%= Setting.faye_server %>";
     <% if current_user %>
-      CURRENT_USER_ACCESS_TOKEN = "<%= current_user.temp_access_token %>";
+      App.current_user_id = <%= current_user.id %>;
+      App.access_token = "<%= current_user.temp_access_token %>";
     <% end %>
-    if (FAYE_SERVER_URL) {
+    if (App.faye_server_url) {
       App.initNotificationSubscribe();
     }
   </script>

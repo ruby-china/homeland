@@ -35,7 +35,7 @@ window.App =
   faye_server_url : ''
   asset_url : ''
   root_url : ''
-  
+
   isLogined : ->
     App.current_user_id != null
 
@@ -66,7 +66,7 @@ window.App =
     if !App.isLogined()
       location.href = "/account/sign_in"
       return false
-      
+
     $el = $(el)
     likeable_type = $el.data("type")
     likeable_id = $el.data("id")
@@ -141,7 +141,7 @@ window.App =
     faye = new Faye.Client(App.faye_server_url)
     notification_subscription = faye.subscribe "/notifications_count/#{App.access_token}",(json) ->
       span = $("#user_notifications_count span")
-      new_title = $(document).attr("title").replace(/\(\d+\) /,'')
+      new_title = $(document).attr("title").replace(/^\(\d+\) /,'')
       if json.count > 0
         span.addClass("badge-error")
         new_title = "(#{json.count}) #{new_title}"

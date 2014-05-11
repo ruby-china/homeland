@@ -1,7 +1,7 @@
 <div class="content">
   <div class="box box_gray">
     <div id="node_info">
-      <%= render "node_info", :node => @node %>
+      <%= render "topics/node_info", :node => @node %>
     </div>
 
     <div class="topics">
@@ -16,7 +16,7 @@
 
   </div>
 
-  <% if action_name == "index" && !mobile? %>
+  <% if controller_name == "topics" && action_name == "index" && !mobile? %>
     <%= render_cell :topics, :index_sections %>
     <%= render_cell :topics, :index_locations %>
   <% end %>
@@ -42,8 +42,8 @@
 
 <% if !mobile? %>
   <div class="sidebar">
-    <%= render "sidebar_for_topic_index" if action_name.in?(%w(index)) %>
-    <%= render "sidebar_for_topic_recent" if action_name.in?(%w(recent no_reply popular excellent)) %>
-    <%= render "sidebar_for_topic_node" if action_name == "node" %>
+    <%= render "topics/sidebar_for_topic_index" if action_name.in?(%w(index)) %>
+    <%= render "topics/sidebar_for_topic_recent" if action_name.in?(%w(recent no_reply popular excellent)) %>
+    <%= render "topics/sidebar_for_topic_node" if action_name == "node" %>
   </div>
 <% end %>

@@ -81,11 +81,11 @@
     notes: "记事本"
     nodes: "节点"
     sites: "酷站"
+    jobs: "招聘"
     my_home_page: "我的主页"
     edit_account_path: "个人资料设置"
     likes: "我的收藏"
     tweets: "推文"
-    exception_logs: "异常"
   comments:
     create_comment: "发表评论"
     no_comment: "暂无评论"

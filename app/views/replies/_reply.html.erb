@@ -13,9 +13,7 @@
           <%= user_name_tag(reply.user) %>
         </span>
         <span class="time">
-          <a class="reply-floor" href="#reply<%= floor %>"><%= floor %><%= t("common.floor")%></a>
-          ,
-          <%= timeago(reply.created_at) %>
+          <a class="reply-floor" href="#reply<%= floor %>"><%= floor %><%= t("common.floor")%></a> · <%= timeago(reply.created_at) %>
         </span>
         <span class="opts">
           <% if !reply.deleted? %>

@@ -1,7 +1,7 @@
 <div class="tools pull-right">
   <% if admin? %>
     <% if !@topic.suggested_at.blank? %>
-      <%= link_to raw("<i class='icon small_pin'></i> 去置顶"), unsuggest_cpanel_topic_path(@topic), 'data-confirm' => '确定要取消置顶么?', :method => :post %>
+      <%= link_to raw("<i class='icon small_pin'></i> 取消"), unsuggest_cpanel_topic_path(@topic), 'data-confirm' => '确定要取消置顶么?', :method => :post %>
     <% else %>
       <%= link_to raw("<i class='icon small_pin'></i> 置顶"), suggest_cpanel_topic_path(@topic), 'data-confirm' => '确定要置顶么?', :method => :post %>
     <% end %>

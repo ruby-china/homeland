@@ -140,16 +140,6 @@ class Topic
     page = (self.replies_count.to_f / per_page).ceil
     page > 1 ? page : nil
   end
-  
-  def self.suggest_topics
-    key = "topic:suggest_topics:#{CacheVersion.topic_last_suggested_at}:3"
-    topics = Rails.cache.read(key)
-    if !topics
-      topics = Topic.suggest.limit(3).to_a
-      Rails.cache.write(key, topics)
-    end
-    topics
-  end
 
   # 所有的回复编号
   def reply_ids

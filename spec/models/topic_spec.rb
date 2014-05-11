@@ -112,12 +112,4 @@ describe Topic do
     end
   end
   
-  describe '#suggest_topics' do
-    it 'should work' do
-      topics = FactoryGirl.create_list(:topic, 6)
-      Topic.should_receive(:suggest).and_return { Topic.all }
-      expect(Topic.suggest_topics).to eq topics[0,3]
-    end
-    
-  end
 end

@@ -141,7 +141,7 @@ window.App =
     faye = new Faye.Client(App.faye_server_url)
     notification_subscription = faye.subscribe "/notifications_count/#{App.access_token}",(json) ->
       span = $("#user_notifications_count span")
-      new_title = $(document).attr("title").replace(/\(\d+\) /,'')
+      new_title = $(document).attr("title").replace(/^\(\d+\) /,'')
       if json.count > 0
         span.addClass("badge-error")
         new_title = "(#{json.count}) #{new_title}"

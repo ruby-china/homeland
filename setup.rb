@@ -77,7 +77,7 @@ end
 
 # Config files
 puts_section "Configure" do
-  %w(config mongoid redis thin).each do |fname|
+  %w(config mongoid redis thin secrets).each do |fname|
     `cp config/#{fname}.yml.default config/#{fname}.yml`
   end
 

@@ -35,7 +35,7 @@ window.App =
   faye_server_url : ''
   asset_url : ''
   root_url : ''
-  
+
   isLogined : ->
     App.current_user_id != null
 
@@ -66,7 +66,7 @@ window.App =
     if !App.isLogined()
       location.href = "/account/sign_in"
       return false
-      
+
     $el = $(el)
     likeable_type = $el.data("type")
     likeable_id = $el.data("id")
@@ -153,7 +153,6 @@ window.App =
       span.text(json.count)
       $(document).attr("title", new_title)
     true
-
 
   init : () ->
     App.initForDesktopView()

@@ -11,7 +11,6 @@ class Site
   field :desc
 
   belongs_to :site_node
-  counter_cache :name => :site_node, :inverse_of => :sites
   belongs_to :user
 
   validates_presence_of :url, :name, :site_node_id

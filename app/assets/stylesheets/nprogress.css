@@ -4,9 +4,8 @@
   -webkit-pointer-events: none;
 }
 
-/* Make the entire page show a busy cursor */
 #nprogress .bar {
-  background: #FFF;
+  background: #dc3424;
 
   position: fixed;
   z-index: 100;
@@ -14,7 +13,7 @@
   left: 0;
 
   width: 100%;
-  height: 0px;
+  height: 1px;
 }
 
 /* Fancy blur effect */
@@ -24,7 +23,7 @@
   right: 0px;
   width: 100px;
   height: 100%;
-  box-shadow: 0 0 10px #29d, 0 0 5px #29d;
+/*  box-shadow: 0 0 5px #b81917, 0 0 3px #b81917;*/
   opacity: 1.0;
 
   -webkit-transform: rotate(3deg) translate(0px, -4px);
@@ -39,7 +38,8 @@
   display: block;
   position: fixed;
   z-index: 100;
-  top: 8px;
+  top: 15px;
+  display:none;
   right: 15px;
 }
 
@@ -47,10 +47,10 @@
   width: 14px;
   height: 14px;
 
-  border:  solid 4px transparent;
-  border-top-color:  #aaa;
-  border-left-color: #aaa;
-  border-radius: 13px;
+  border:  solid 2px transparent;
+  border-top-color:  #29d;
+  border-left-color: #29d;
+  border-radius: 10px;
 
   -webkit-animation: nprogress-spinner 400ms linear infinite;
   -moz-animation:    nprogress-spinner 400ms linear infinite;

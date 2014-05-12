@@ -6,8 +6,8 @@ else
 end
 
 gem "rails", "4.1.1"
-gem 'turbolinks', '~> 1.2.0'
-gem 'jquery-turbolinks', '2.0.0'
+gem 'turbolinks', '~> 2.2.2'
+gem 'jquery-turbolinks', '~> 2.0.2'
 gem 'actionpack-action_caching', '1.1.1'
 gem 'sass-rails', '~> 4.0.2'
 gem 'coffee-rails', "~> 4.0.0"

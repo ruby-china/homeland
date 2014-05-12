@@ -186,14 +186,17 @@ window.App =
 
 # NProgress
 NProgress.configure
-  speed: 0
+  speed: 300
+  minimum: 0.03
+  ease: 'ease'
 
 $(document).on 'page:fetch', ->
   NProgress.start()
 $(document).on 'page:restore', ->
   NProgress.remove()
+$(document).on 'page:change',  ->
+  NProgress.done()
 $(document).ready ->
   App.init()
-  NProgress.done()
 
 FormStorage.init()

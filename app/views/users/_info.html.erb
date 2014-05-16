@@ -76,8 +76,10 @@
 
 </div>
 
-<% if !@user.bio.blank? %>
-  <div class="box">
-    <p><%= simple_format(@user.bio) %></p>
-  </div>
+<% cache([@user, "bio"]) do %>
+  <% if !@user.bio.blank? %>
+    <div class="box box_gray bio">
+      <%= markdown(@user.bio) %>
+    </div>
+  <% end %>
 <% end %>

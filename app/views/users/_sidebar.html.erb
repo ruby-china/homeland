@@ -1,7 +1,7 @@
 <div class="sidebar">
   <div class="box" id="user_github_repos">
     <% if not user.github.blank? %>
-      <h2>Github Public Repos</h2>
+      <h2 class="title">Github Public Repos</h2>
       <ul>
         <% user.github_repositories.each do |item| %>
         <li>

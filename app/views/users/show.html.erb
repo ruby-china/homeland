@@ -2,24 +2,40 @@
 
 <div class="content">
   <%= render "info" %>
-
-  <div class="recent_topics box">
-    <h2 class="title">倍受大家喜欢的帖子</h2>
-    <ul>
-      <% @topics.each do |item| %>
-        <li>
-          <span class="node"><%= render_node_name(item.node_name,item.node_id) %></span>
-          <%= topic_title_tag(item) %> <%= topic_excellent_tag(item) %>
-          <span class="info pull-right"><%= item.likes_count %> 人喜欢, <%= item.replies_count %> 条回复</span>
-        </li>
-      <% end %>
-    </ul>
+  
+  <div class="tabbable">
+    <div class="subnav">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#topics" data-toggle="tab">热门话题</a></li>
+        <li><a href="#replies" data-toggle="tab">最近回帖</a></li>
+      </ul>
+    </div>
+    <div class="tab-content">
+      <div class="tab-pane active recent_topics" id="topics">
+        <div class="box">
+          <ul>
+            <% @topics.each do |item| %>
+              <li>
+                <div class="title">
+                  <%= topic_title_tag(item) %> <%= topic_excellent_tag(item) %>
+                </div>
+                <div class="info">
+                  <span class="node"><%= render_node_name(item.node_name,item.node_id) %></span>
+                  <span class="counter"><%= item.likes_count %> 人喜欢 • <%= item.replies_count %> 条回复</span>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+      <div class="tab-pane" id="replies">
+        <div class="box">
+          <%= render "replies", :replies => @replies %>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="box">
-    <h2 class="title"><%= t("topics.recent_replies")%></h2>
-    <%= render "replies", :replies => @replies %>
-  </div>
-
+  
 
 
 </div>

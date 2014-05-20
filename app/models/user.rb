@@ -319,32 +319,43 @@ class User
   # Github 项目
   def github_repositories
     return [] if self.github.blank?
-    count = 14
-    cache_key = "github_repositories:#{self.github}+#{count}+v2"
+    cache_key = self.github_repositories_cache_key
     items = Rails.cache.read(cache_key)
     if items == nil
-      begin
-        json = open("https://api.github.com/users/#{self.github}/repos?type=owner&sort=pushed").read
-      rescue => e
-        Rails.logger.error("Github Repositiory fetch Error: #{e}")
-        items = []
-        Rails.cache.write(cache_key, items, :expires_in => 15.days)
-        return items
-      end
-
-      items = JSON.parse(json)
-      items = items.collect do |a1|
-        {
-          :name => a1["name"],
-          :url => a1["html_url"],
-          :watchers => a1["watchers"],
-          :description => a1["description"]
-        }
-      end
-      items = items.sort { |a1,a2| a2[:watchers] <=> a1[:watchers] }.take(count)
-      Rails.cache.write(cache_key, items, :expires_in => 7.days)
+      User.delay.fetch_github_repositories(self.id)
+      items = []
     end
     items
+  end
+  
+  def github_repositories_cache_key
+    "github_repositories:#{self.github}+14+v2"
+  end
+  
+  def self.fetch_github_repositories(user_id)
+    user = User.find_by_id(user_id)
+    return false if user.blank?
+    
+    begin
+      json = open("https://api.github.com/users/#{user.github}/repos?type=owner&sort=pushed").read
+    rescue => e
+      Rails.logger.error("Github Repositiory fetch Error: #{e}")
+      items = []
+      Rails.cache.write(user.github_repositories_cache_key, items, :expires_in => 15.days)
+      return false
+    end
+
+    items = JSON.parse(json)
+    items = items.collect do |a1|
+      {
+        :name => a1["name"],
+        :url => a1["html_url"],
+        :watchers => a1["watchers"],
+        :description => a1["description"]
+      }
+    end
+    items = items.sort { |a1,a2| a2[:watchers] <=> a1[:watchers] }.take(14)
+    Rails.cache.write(user.github_repositories_cache_key, items, :expires_in => 15.days)
   end
 
   # 重新生成 Private Token

@@ -5,7 +5,6 @@
     <tr class="head">
       <td>Id</td>
       <td>name</td>
-      <td>sites_count</td>
       <td>Sort</td>
       <td class="opts"></td>
     </tr>
@@ -13,7 +12,6 @@
     <tr class="<%= cycle("","even") %>">
       <td><%= item.id %></td>
       <td><%= item.name %></td>
-      <td><%= item.sites_count %></td>
       <td><%= item.sort %></td>
       <td>
         <%= link_to "", edit_cpanel_site_node_path(item.id), :class => "icon small_edit" %>

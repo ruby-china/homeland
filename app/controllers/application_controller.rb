@@ -102,16 +102,12 @@ class ApplicationController < ActionController::Base
     # 加入页面上直接调用的信息用于组合 etag
     opts[:etag] << current_user
     # Config 的某些信息
-    opts[:etag] << Setting.app_name
     opts[:etag] << SiteConfig.custom_head_html
     opts[:etag] << SiteConfig.footer_html
-    opts[:etag] << SiteConfig.faye_server
-    opts[:etag] << Setting.google_analytics_key
     # 加入通知数量
     opts[:etag] << unread_notify_count
     # 所有 etag 保持一天
     opts[:etag] << Date.current
-    opts[:etag] << Time.now if not Rails.env.production?
     super(opts)
   end
 end

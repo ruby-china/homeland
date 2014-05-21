@@ -6,7 +6,6 @@ ExceptionNotification.configure do |config|
   config.ignored_exceptions += %w{ActionView::TemplateError Mongoid::Errors::DocumentNotFound 
     ActionController::BadRequest ActionView::MissingTemplate ActionController::UrlGenerationError 
     ActionController::UnknownFormat}
-  config.ignore_crawlers = %w{Googlebot bingbot}
   # config.ignore_if do |exception, options|
   #   not Rails.env.production?
   # end

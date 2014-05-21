@@ -236,8 +236,8 @@ form .node_select {
     margin-left:20px;
     p { font-size:13px; color:#666; font-weight:normal; line-height:150%; }
   }
-  code { margin:0 2px; font-family:Monaco,Menlo, "Courier New", monospace;}
-  pre { font-family:Monaco,Menlo,"Courier New", monospace; }
+  code { margin:0 2px; font-family:Monaco,Menlo, "Courier New", monospace; display:inline-block;}
+  pre { font-family:Monaco,Menlo,"Courier New", monospace; margin-bottom:20px; }
   a:link, a:visited { font-size:13px; color:#0069D6; text-decoration: none; }
   a:hover { text-decoration: underline; color:#00438A; }
   a.at_floor { color:#376B43; }
@@ -245,16 +245,20 @@ form .node_select {
     color:#000; font-weight:bold;
     i { color:#777; }
   }
-  h4 { font-weight:bold; font-size:16px; line-height:100%; margin:0; color:#222; margin-top:20px; border-left:15px solid #eee; padding-left:5px; margin-bottom:8px;  }
+  h4 { 
+    font-weight:bold; font-size:16px; line-height:100%; 
+    margin:0; color:#222; margin-top:20px; 
+    border-left:15px solid #eee; padding-left:5px; margin-bottom:20px;  }
   strong { color:#000; }
   ul,
   ol {
     list-style-position: inside;
     list-style-type: square;
     margin:0;
+    margin-bottom: 20px;
     padding:5px 24px;
     p { margin:0; }
-    li { line-height:1.8em; color:#333; font-size:13px; }
+    li { line-height:1.8em; padding:2px 0; color:#333; font-size:13px; }
     ul { list-style-type: circle; }
   }
   ol { 

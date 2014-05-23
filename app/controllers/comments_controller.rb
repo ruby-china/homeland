@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     @success = @comment.save
   end
-  
+
   def comment_params
     params.require(:comment).permit(:commentable_type, :commentable_id, :body)
   end

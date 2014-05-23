@@ -1,22 +1,22 @@
 # coding: utf-8
 require 'will_paginate/array'
 class UsersController < ApplicationController
-  before_filter :require_user, :only => "auth_unbind"
+  before_filter :require_user, only: 'auth_unbind'
   before_filter :set_menu_active
-  before_filter :find_user, :only => [:show, :topics, :favorites,:notes]
-  caches_action :index, :expires_in => 2.hours, :layout => false
+  before_filter :find_user, only: [:show, :topics, :favorites, :notes]
+  caches_action :index, expires_in: 2.hours, layout: false
 
   def index
     @total_user_count = User.count
     @active_users = User.hot.limit(100)
-    drop_breadcrumb t("common.index")
+    drop_breadcrumb t('common.index')
   end
 
   def show
     # 排除掉几个非技术的节点
-    without_node_ids = [21,22,23,31,49,51,57,25]
+    without_node_ids = [21, 22, 23, 31, 49, 51, 57, 25]
     @topics = @user.topics.without_node_ids(without_node_ids).high_likes.limit(20)
-    @replies = @user.replies.only(:topic_id,:body_html,:created_at).recent.includes(:topic).limit(10)
+    @replies = @user.replies.only(:topic_id, :body_html, :created_at).recent.includes(:topic).limit(10)
     set_seo_meta("#{@user.login}")
     drop_breadcrumb(@user.login)
   end
@@ -36,7 +36,7 @@ class UsersController < ApplicationController
     drop_breadcrumb(@user.login, user_path(@user.login))
     drop_breadcrumb(t("users.menu.favorites"))
   end
-  
+
   def notes
     @notes = @user.notes.published.recent.paginate(:page => params[:page], :per_page => 30)
     drop_breadcrumb(@user.login, user_path(@user.login))
@@ -53,7 +53,7 @@ class UsersController < ApplicationController
     current_user.authorizations.destroy_all({ :provider => provider })
     redirect_to edit_user_registration_path, :flash => {:warring => t("users.unbind_success", :provider => provider.titleize )}
   end
-  
+
   def update_private_token
     current_user.update_private_token
     render :text => current_user.private_token

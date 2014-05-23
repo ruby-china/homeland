@@ -5,7 +5,7 @@ defaults: &defaults
   admin_emails:
     - "admin@admin.com"
   google_analytics_key: ""
-  upload_url: "//ruby-china-files-dev.b0.upaiyun.com"
+  upload_url: "http://ruby-china-files-dev.b0.upaiyun.com"
   upyun_username: "test"
   upyun_password: "123123"
   upyun_bucket: "ruby-china-files-dev"

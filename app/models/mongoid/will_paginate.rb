@@ -1,11 +1,11 @@
 # coding: utf-8
-require "will_paginate"
-require "will_paginate/collection"
+require 'will_paginate'
+require 'will_paginate/collection'
 
 module Mongoid
   module WillPaginate
     extend ActiveSupport::Concern
-    
+
     def paginate(options = {})
       options = base_options options
 

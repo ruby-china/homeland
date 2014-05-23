@@ -1,17 +1,18 @@
+# coding: utf-8
 class Notification::Base
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::BaseModel
 
-  store_in :collection => 'notifications'
+  store_in collection: 'notifications'
 
-  field :read, :default => false
+  field :read, default: false
   belongs_to :user
 
-  index :read => 1
-  index :user_id => 1, :read => 1
+  index read: 1
+  index user_id: 1, read: 1
 
-  scope :unread, -> { where(:read => false) }
+  scope :unread, -> { where(read: false) }
 
   after_create :realtime_push_to_client
   after_update :realtime_push_to_client
@@ -25,9 +26,8 @@ class Notification::Base
   end
 
   def content_path
-    ""
+    ''
   end
-
 
   def anchor
     "notification-#{id}"

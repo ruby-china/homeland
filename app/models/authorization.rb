@@ -6,9 +6,8 @@ class Authorization
 
   field :provider
   field :uid, type: String
-  embedded_in :user, :inverse_of => :authorizations
+  embedded_in :user, inverse_of: :authorizations
 
   validates_presence_of :uid, :provider
-  validates_uniqueness_of :uid, :scope => :provider
+  validates_uniqueness_of :uid, scope: :provider
 end
-

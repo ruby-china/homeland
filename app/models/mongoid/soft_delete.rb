@@ -22,7 +22,7 @@ module Mongoid
       end
       freeze
     end
-    
+
     def deleted?
       !self.deleted_at.blank?
     end

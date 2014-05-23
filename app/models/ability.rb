@@ -1,8 +1,8 @@
+# coding: utf-8
 class Ability
   include CanCan::Ability
 
   def initialize(user)
-
     if user.blank?
       # not logged in
       cannot :manage, :all
@@ -18,7 +18,7 @@ class Ability
       end
       can :favorite, Topic
       can :follow, Topic
-      can :unfollow,Topic
+      can :unfollow, Topic
       can :update, Topic do |topic|
         (topic.user_id == user.id)
       end
@@ -51,7 +51,7 @@ class Ability
       can :read, Note do |note|
         note.user_id == user.id
       end
-      can :read  , Note do |note|
+      can :read, Note do |note|
         note.publish == true
       end
 
@@ -107,7 +107,7 @@ class Ability
 
       can :read, Reply
 
-      can :read,  Page
+      can :read, Page
       can :recent, Page
       can :preview, Page
       can :comments, Page

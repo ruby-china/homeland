@@ -2,16 +2,16 @@ module Mongoid
   module Mentionable
     extend ActiveSupport::Concern
     included do
-      field :mentioned_user_ids, :type => Array, :default => []
+      field :mentioned_user_ids, type: Array, default: []
       before_save :extract_mentioned_users
       after_create :send_mention_notification
       after_destroy :delete_notifiaction_mentions
-      has_many :notification_mentions, :as => :mentionable, :class_name => 'Notification::Mention'
+      has_many :notification_mentions, as: :mentionable, class_name: 'Notification::Mention'
     end
 
     # Wait for https://github.com/mongoid/mongoid/commit/2f94b5fab018b22a9e84ac2e988d4a3cf97e7f2e
     def delete_notifiaction_mentions
-      Notification::Mention.where(:mentionable_id => self.id, :mentionable_type => self.class.name).delete_all
+      Notification::Mention.where(mentionable_id: self.id, mentionable_type: self.class.name).delete_all
     end
 
     def mentioned_users
@@ -29,7 +29,7 @@ module Mongoid
     def extract_mentioned_users
       logins = body.scan(/@(\w{3,20})/).flatten
       if logins.any?
-        self.mentioned_user_ids = User.where(:login => /^(#{logins.join('|')})$/i, :_id.ne => user.id).limit(5).only(:_id).map(&:_id).to_a
+        self.mentioned_user_ids = User.where(login: /^(#{logins.join('|')})$/i, :_id.ne => user.id).limit(5).only(:_id).map(&:_id).to_a
       end
     end
 
@@ -39,7 +39,7 @@ module Mongoid
 
     def send_mention_notification
       (mentioned_users - no_mention_users).each do |user|
-        Notification::Mention.create :user => user, :mentionable => self
+        Notification::Mention.create user: user, mentionable: self
       end
     end
   end

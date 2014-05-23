@@ -1,20 +1,18 @@
 # coding: utf-8
-#
-# https://gist.github.com/1033906
-#
-# class Forum
-#   references_many :topics
-#   references_many :posts
-# end
-#
-#
-# class Topic
-#   referenced_in :forum
-#   include Mongoid::CounterCache
-#   counter_cache name: :forum, inverse_of: :posts
-# end
-# ===================================
 module Mongoid
+  # https://gist.github.com/1033906
+  #
+  # class Forum
+  #   references_many :topics
+  #   references_many :posts
+  # end
+  #
+  #
+  # class Topic
+  #   referenced_in :forum
+  #   include Mongoid::CounterCache
+  #   counter_cache name: :forum, inverse_of: :posts
+  # end
   module CounterCache
     extend ActiveSupport::Concern
 
@@ -35,10 +33,7 @@ module Mongoid
             relation.inc(counter_name.to_sym => -1)
           end
         end
-
       end
-
-    end #ClassMethods
-
-  end #CounterCache
-end #Mongoid
+    end
+  end
+end

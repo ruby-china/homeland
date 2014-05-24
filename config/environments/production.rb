@@ -5,7 +5,7 @@ Rails.application.configure do
   # The production environment is meant for finished, "live" apps.
   # Code is not reloaded between requests
   config.cache_classes = true
-  
+
   config.eager_load = true
 
   # Full error reports are disabled and caching is turned on
@@ -43,7 +43,7 @@ Rails.application.configure do
 
   # Enable threaded mode
   # config.threadsafe!
-  
+
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found)
   config.i18n.fallbacks = true
@@ -65,4 +65,6 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   # config.active_record.dump_schema_after_migration = false
+
+  config.force_ssl = true
 end

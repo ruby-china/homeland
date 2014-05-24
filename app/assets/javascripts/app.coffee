@@ -32,7 +32,7 @@ window.App =
   notifier : null
   current_user_id: null
   access_token : ''
-  faye_server_url : ''
+  faye_client_url : ''
   asset_url : ''
   root_url : ''
 
@@ -138,10 +138,10 @@ window.App =
 
   initNotificationSubscribe : () ->
     return if not App.access_token?
-    faye = new Faye.Client(App.faye_server_url)
-    notification_subscription = faye.subscribe "/notifications_count/#{App.access_token}",(json) ->
+    faye = new Faye.Client(App.faye_client_url)
+    faye.subscribe "/notifications_count/#{App.access_token}", (json) ->
       span = $("#user_notifications_count span")
-      new_title = $(document).attr("title").replace(/^\(\d+\) /,'')
+      new_title = document.title.replace(/^\(\d+\) /,'')
       if json.count > 0
         span.addClass("badge-error")
         new_title = "(#{json.count}) #{new_title}"
@@ -151,7 +151,7 @@ window.App =
       else
         span.removeClass("badge-error")
       span.text(json.count)
-      $(document).attr("title", new_title)
+      document.title = new_title
     true
 
   init : () ->

@@ -19,7 +19,7 @@
   <%= render_page_title %>
   <meta charset='utf-8' />
   <meta name="keywords" content="<%= @meta_keywords %>" />
-  <meta name="description" content="<%= @meta_description %>" />  
+  <meta name="description" content="<%= @meta_description %>" />
   <%= stylesheet_link_tag "front", "data-turbolinks-track" => true %>
   <% if mobile? %>
     <%= stylesheet_link_tag "mobile" %>
@@ -84,12 +84,12 @@
   <script type="text/javascript" data-turbolinks-eval=false>
     App.root_url = "<%= root_url %>";
     App.asset_url = "<%= Setting.upload_url %>";
-    App.faye_server_url = "<%= Setting.faye_server %>";
+    App.faye_client_url = "<%= Setting.faye_client_url %>";
     <% if current_user %>
       App.current_user_id = <%= current_user.id %>;
       App.access_token = "<%= current_user.temp_access_token %>";
     <% end %>
-    if (App.faye_server_url) {
+    if (App.faye_client_url) {
       App.initNotificationSubscribe();
     }
   </script>

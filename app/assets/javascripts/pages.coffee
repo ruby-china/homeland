@@ -5,7 +5,7 @@
 window.Pages =
 # 往话题编辑器里面插入代码模版
   test : () ->
-    alert('test');
+    alert('test')
 
   init : () ->
     $("<div id='preview' class='wikistyle'></div>").insertAfter( $('#page_body') )

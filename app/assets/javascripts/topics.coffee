@@ -34,7 +34,7 @@ window.Topics =
       error : (result, status, errorThrown) ->
         Topics.restoreUploaderStatus()
         alert(errorThrown)
-      
+
 
     $("#topic_upload_images").fileUpload opts
     return false
@@ -42,7 +42,7 @@ window.Topics =
   restoreUploaderStatus : () ->
     $("#topic_add_image").parent().find("span.loading").remove()
     $("#topic_add_image").show()
-    
+
   # 回复
   reply : (floor,login) ->
     reply_body = $("#reply_body")

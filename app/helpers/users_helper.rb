@@ -21,9 +21,9 @@ module UsersHelper
 
   def user_avatar_width_for_size(size)
     case size
-      when :normal then 48
+      when :normal then 64
       when :small then 16
-      when :large then 64
+      when :large then 81
       when :big then 120
       else size
     end

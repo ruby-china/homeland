@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   require 'api'
   require "api_v2"
+  require 'sidekiq/web'
 
   resources :sites
   resources :pages, :path => "wiki" do
@@ -104,6 +105,10 @@ Rails.application.routes.draw do
 
   mount RubyChina::API => "/"
   mount RubyChina::APIV2 => "/"
+
+  authenticate :user, lambda { |u| u.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
   mount JasmineRails::Engine => "/specs" if defined?(JasmineRails)
 

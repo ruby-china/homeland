@@ -69,6 +69,8 @@ gem "cells", '~> 3.9.1'
 
 # 队列
 gem "sidekiq", "2.17.7"
+# Sidekiq Web
+gem 'sinatra', '>= 1.3.0', :require => nil
 
 gem 'faye-rails','1.0.0'
 

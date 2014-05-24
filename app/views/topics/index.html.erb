@@ -12,7 +12,7 @@
       <% end %>
       <%= render partial: "topics/topic", collection: @topics, locals: { suggest: false } %>
     </div>
-    <%= will_paginate @topics, :inner_window => 2 %>
+    <%= will_paginate @topics, :inner_window => 2, :version => :bootstrap3 %>
 
   </div>
 

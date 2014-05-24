@@ -8,15 +8,16 @@
         <%= f.input :login, :hint => t("users.suggest_using_twitter_id") %>
         <%= f.input :name %>
         <%= f.input :email, :input_html => { :class => "span5", :placeholder => "foo@bar.com" } %>
-        <div class="control-group">
-          <div class="controls">
-            <label for="user_email_public" class="checkbox"><%= f.check_box :email_public, :checked => true %> 公开 Email</label>
+        <div class="form-group">
+          <div class="col-md-offset-2 col-md-10">
+            <label for="user_email_public" class="label-control"><%= f.check_box :email_public, :checked => true %> 公开 Email</label>
           </div>
         </div>
         <%= f.input :password %>
         <%= f.input :password_confirmation %>
-        <div class="form-actions">
-          <%= f.submit "提交注册信息", :class => "btn btn-primary", 'data-disable-with' => t("common.submitting") %>
+        <div class="form-group">
+          <div class="col-md-offset-2 col-md-10">
+          <%= f.submit "提交注册信息", :class => "btn btn-primary", 'data-disable-with' => t("common.submitting") %></div>
         </div>
       </fieldset>
     <% end %>

@@ -6,9 +6,11 @@
     <%= f.input :section_id, :collection => Section.all.collect { |s| [s.name,s.id] } %>
     <%= f.input :sort %>
     <%= f.input :summary, as: :text, :input_html => { style: "width:500px; height:200px;"} %>
-    <div class="form-actions">
-      <%= f.submit t("common.save"), :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %>
-      <%= link_to 'Back', cpanel_nodes_path %>
+    <div class="form-group">
+      <div class="col-md-offset-2 col-md-10">
+        <%= f.submit t("common.save"), :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %>
+        <%= link_to 'Back', cpanel_nodes_path %>
+      </div>
     </div>
   </fieldset>
 <% end %>

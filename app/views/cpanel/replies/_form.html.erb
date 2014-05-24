@@ -5,10 +5,11 @@
     <%= f.input :body, :as => :text, :input_html => { :class => "span8", :rows => "10"} %>
     <%= f.input :user_id %>
     <%= f.input :source %>
-    <div class="form-actions">
+    <div class="form-group">
+      <div class="col-md-offset-2 col-md-10">
       <%= f.submit t("common.save"), :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %>
       or
-      <%= link_to 'Back', cpanel_replies_path %>
+      <%= link_to 'Back', cpanel_replies_path %></div>
     </div>
   </fieldset>
 <% end %>

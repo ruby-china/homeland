@@ -4,18 +4,19 @@
     <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
       <fieldset>
         <legend><%= t("common.login") %></legend>
-        <%= f.input :login, :input_html => { :style => "width:180px;" } %>
-        <%= f.input :password, :input_html => { :style => "width:180px;" } %>
+        <%= f.input :login %>
+        <%= f.input :password %>
         <% if devise_mapping.rememberable? -%>
-        <div class="control-group checkbox optional">
-          <label class="checkbox optional control-label"></label>
-          <div class="controls">
-            <div class="inputs-list"><label for="user_remember_me"><%= f.check_box :remember_me, :style => "width:auto;" %> <%= t("common.remember_me") %></label></div>
+          <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+            <label class="control-label"></label>
+              <div class="inputs-list"><label for="user_remember_me"><%= f.check_box :remember_me, :style => "width:auto;" %> <%= t("common.remember_me") %></label></div>
+            </div>
           </div>
-        </div>
         <% end -%>
-        <div class="form-actions">
-          <%= f.submit t("common.login"), :class => "btn btn-primary", 'data-disable-with' => t("common.logining") %>
+        <div class="form-group">
+          <div class="col-md-offset-2 col-md-10">
+          <%= f.submit t("common.login"), :class => "btn btn-primary", 'data-disable-with' => t("common.logining") %></div>
         </div>
       </fieldset>
     <% end %>

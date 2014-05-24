@@ -4,39 +4,41 @@
       <%= render "shared/error_messages", :target => resource if params[:by].blank? %>
       <fieldset>
         <legend><%= t("users.personal_information")%></legend>
-        <%= f.input :name %>
+        <%= f.input :name, :input_html => { :class=> "form-control" } %>
         <%= f.input :avatar %>
-        <%= f.input :email, :input_html => { :class => "span4", :disabled => (!resource.email.blank?) } %>
-        <div class="control-group">
-          <div class="controls">
-            <label for="user_email_public" class="checkbox"><%= f.check_box :email_public %> 公开 Email</label>
-          </div>
+        <%= f.input :email, :input_html => { :class => "form-control", :disabled => (!resource.email.blank?) } %>
+        <div class="form-group">
+          <div class="col-md-offset-2 col-md-10">
+          <div class="checkbox">
+          <label for="user_email_public"><%= f.check_box :email_public %> 公开 Email</label></div></div>
         </div>
-        <%= f.input :location, :input_html => { :class => "span3" } %>
-        <%= f.input :company, :input_html => { :class => "span3" } %>
-        <div class="control-group">
+        <%= f.input :location, :input_html => { :class => "form-control" } %>
+        <%= f.input :company, :input_html => { :class => "form-control" } %>
+        <div class="form-group">
           <%= f.label :github %>
-          <div class="controls">
-            <div class="input-prepend">
-              <span class="add-on">https://github.com/</span>
-              <%= f.text_field :github, :class => "small", :placeholder => "yourname" %>
+          <div class="col-md-6">
+            <div class="input-group">
+              <span class="input-group-addon">https://github.com/</span>
+              <%= f.text_field :github, :class => "form-control", :placeholder => "yourname" %>
             </div>
           </div>
         </div>
-        <div class="control-group">
+        <div class="form-group">
           <%= f.label :twitter %>
-          <div class="controls">
-            <div class="input-prepend">
-              <span class="add-on">http://twitter.com/</span>
-              <%= f.text_field :twitter, :class => "small", :placeholder => "yourname" %>
+          <div class="col-md-6">
+            <div class="input-group">
+              <span class="input-group-addon">http://twitter.com/</span>
+              <%= f.text_field :twitter, :class => "form-control", :placeholder => "yourname" %>
             </div>
           </div>
         </div>
-        <%= f.input :website, :input_html => { :class => "xxlarge", :placeholder => "http://" } %>
-        <%= f.input :tagline, :input_html => { :class => "xxlarge" } %>
-        <%= f.input :bio, :as => :text, :input_html => { :class => "xxlarge", :rows => "6" } %>
-        <div class="form-actions">
+        <%= f.input :website, :input_html => { :class => "form-control", :placeholder => "http://" } %>
+        <%= f.input :tagline, :input_html => { :class => "form-control" } %>
+        <%= f.input :bio, :as => :text, :input_html => { :class => "form-control"} %>
+        <div class="form-group">
+          <div class="col-md-offset-2 col-md-10">
             <%= f.submit "更新资料", :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %>
+          </div>
         </div>
       </fieldset>
     <% end %>
@@ -47,11 +49,13 @@
       <fieldset>
         <legend><%= t("users.edit_password")%></legend>
         <input type="hidden" name="user[:by]" value="pwd" />
-        <%= f.input :current_password %>
-        <%= f.input :password %>
-        <%= f.input :password_confirmation %>
-        <div class="form-actions">
-          <%= f.submit "修改密码", :class => "btn btn-success", 'data-disable-with' => t("common.saving") %>
+        <%= f.input :current_password, input_html: { class: 'form-control' } %>
+        <%= f.input :password, input_html: { class: 'form-control' } %>
+        <%= f.input :password_confirmation, input_html: { class: 'form-control' } %>
+        <div class="form-group">
+          <div class="col-md-offset-2 col-md-10">
+            <%= f.submit "修改密码", :class => "btn btn-success", 'data-disable-with' => t("common.saving") %>
+          </div>
         </div>
       </fieldset>
     <% end %>
@@ -63,7 +67,7 @@
      <%= user_avatar_tag(@user, :big, :link => false) %> <br /><%= t("users.edit_on_gravatar") %> <a href="http://www.gravatar.com">gravatar.com</a>
   </div>
   <div class="box">
-    <h2><%= t("users.bind_another_account")%></h2>
+    <h2 class='title'><%= t("users.bind_another_account")%></h2>
     <ul>
       <% ["github"].each do |provider| %>
       <li>
@@ -77,17 +81,19 @@
       <% end %>
     </ul>
   </div>
-  <div class="box">
-    <h2>密钥</h2>
+  <div class="box private_token">
+    <h2 class='title'>密钥</h2>
     <div class="content">
-      <div><textarea id="private_token" style="width:190px;height:20px;cursor:default;" readonly="readonly"><%= @user.private_token %></textarea></div>
-      <div class="buttons">
-        <a href="#" class="btn" id="update_private_token">更换一个</a> <span class="help-inline">用于三方应用验证</span>
+      <div>
+        <input type='text' id="private_token" readonly="readonly" value='<%= @user.private_token %>'></>
       </div>
+      <p>
+        <a href="#" class="btn btn-default" id="update_private_token">更换一个</a> <span class="help-inline">用于三方应用验证</span>
+      </p>
     </div>
   </div>
   <div class="box">
-    <h2><%= t("users.delete_my_account")%></h2>
+    <h2 class='title'><%= t("users.delete_my_account")%></h2>
     <p><%= t("users.dont_like_it")%> <%= link_to(t("users.delete_this_account"), registration_path(resource_name), 'data-confirm' => "删除后无法恢复，你确定吗?", :class => "btn btn-danger", :method => :delete )%></p>
   </div>
 </div>

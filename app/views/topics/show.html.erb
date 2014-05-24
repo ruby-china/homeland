@@ -63,13 +63,24 @@
   <% if current_user %>
     <div id="reply" class="form box">
       <% if can? :create, Reply %>
-        <%= render "editor_toolbar" %>
-        <%= form_for(Reply.new, :remote => true,:url => topic_replies_path(@topic)) do |f| %>
-          <%= f.text_area :body,:class => "topic_editor span10", :rows => "4", :tabindex => "1" %>
-          <div class="submit_buttons">
-            <button type="submit" id="btn_reply" class="btn btn-primary" tabindex="2"><%= t("topics.submit_reply")%></button><br />
-            <span class="help-inline" title="或者 Command + Enter">Ctrl+Enter</span>
+        <div class='row'>
+          <div class="col-md-10">
+            <%= render "editor_toolbar" %>
           </div>
+        </div>
+        <%= form_for(Reply.new, :remote => true,:url => topic_replies_path(@topic)) do |f| %>
+          <div class='row'>
+            <div class="col-md-10">
+              <%= f.text_area :body,:class => "topic_editor form-control", :rows => "4", :tabindex => "1" %>
+            </div>
+            <div class="col-md-2">
+              <div class="submit_buttons">
+                <button type="submit" id="btn_reply" class="btn btn-primary" tabindex="2"><%= t("topics.submit_reply")%></button><br />
+                <span class="help-inline" title="或者 Command + Enter">Ctrl+Enter</span>
+              </div>
+            </div>
+          </div>
+
 
           <span class="body helpblock">
             <%= render_cell :topics, :reply_help_block %>

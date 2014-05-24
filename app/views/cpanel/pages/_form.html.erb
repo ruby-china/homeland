@@ -6,7 +6,8 @@
     <%= f.input :slug %>
     <%= f.input :title, :input_html => { :class => "xxlarge" } %>
     <%= f.input :body, :as => :text, :input_html => { :class => "span8", :rows => "30"} %>
-    <div class="form-actions">
-      <%= f.submit t("common.save"), :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %>
+    <div class="form-group">
+      <div class="col-md-offset-2 col-md-10">
+      <%= f.submit t("common.save"), :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %></div>
     </div>
 <% end %>

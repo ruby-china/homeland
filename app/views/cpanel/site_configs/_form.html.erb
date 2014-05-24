@@ -2,22 +2,27 @@
   <%= render 'shared/error_messages', :target => @site_config %>
   <fieldset>
     <legend><%= t("cpanel.site_configs.edit_setting")%></legend>
-    <div class="control-group">
-      <label class="control-label">Key</label>
-      <div class="controls">
-        <%= @site_config.key  %>
+    <div class="form-group">
+      <label class="col-md-2 control-label">Key</label>
+      <div class="col-md-6">
+        <div class="form-control">
+        <%= @site_config.key  %></div>
       </div>
     </div>
-    <div class="control-group">
-      <label class="control-label">说明</label>
-      <div class="controls">
-        <%= t("site_config.#{@site_config.key}")  %>
+    <div class="form-group">
+      <label class="col-md-2 control-label">说明</label>
+      <div class="col-md-6">
+        <div class="form-control">
+          <%= t("site_config.#{@site_config.key}")  %>
+        </div>
       </div>
     </div>
     <%= f.input :value, :as => :text, :input_html => { :class => "span8", :rows => "20" } %>
-    <div class="form-actions">
-      <%= f.submit t("common.save"), :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %>
-      <a href="<%= cpanel_site_configs_path %>" class="btn"><%= t("common.cancel") %></a>
+    <div class="form-group">
+      <div class="col-md-offset-2 col-md-10">
+        <%= f.submit t("common.save"), :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %>
+        <a href="<%= cpanel_site_configs_path %>" class="btn"><%= t("common.cancel") %></a>
+      </div>
     </div>
   </fieldset>
 <% end %>

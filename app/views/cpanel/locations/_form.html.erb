@@ -6,8 +6,9 @@
     <legend><%= t("common.edit") %></legend>
       <%= f.input :name %>
       <%= f.input :users_count %>
-      <div class="form-actions">
-      <%= f.submit t("common.save"), :class => "btn btn-primary" %> or <%= link_to t("common.cancel"), cpanel_locations_path %>
+      <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+      <%= f.submit t("common.save"), :class => "btn btn-primary" %> or <%= link_to t("common.cancel"), cpanel_locations_path %></div>
     </div>
   </fieldset>
 <% end %>

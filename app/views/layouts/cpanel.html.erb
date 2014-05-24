@@ -3,22 +3,25 @@
 <head>
   <title>RubyChina - Control Panel</title>
   <link rel="shortcut icon" href="<%= asset_path("big_logo.png") %>" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <%= stylesheet_link_tag "cpanel" %>
   <%= javascript_include_tag "app" %>
   <%= csrf_meta_tag %>
 </head>
 <body>
-  <div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-      <div class="container">
-        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+  <div class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type='button' class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
+          <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
-        </a>
-        <%= link_to("控制台", cpanel_root_path, :class => "brand span2")%>
-        <div class="nav-collapse">
-          <%= render_list :class => "nav" do |li|
+        </button>
+        <%= link_to("控制台", cpanel_root_path, :class => "navbar-brand")%>
+      </div>
+        <div class="collapse navbar-collapse" id="navbar-menu">
+          <%= render_list :class => "nav navbar-nav" do |li|
             li << link_to(t("cpanel.menu.root_path"), cpanel_root_path)
             li << link_to(t("cpanel.menu.site_configs"), cpanel_site_configs_path )
             li << link_to(t("cpanel.menu.users"),cpanel_users_path)
@@ -35,7 +38,7 @@
             li << link_to(t("cpanel.menu.exception_logs"),cpanel_exception_logs_path )
           end  %>
 
-          <ul class="nav  pull-right">
+          <ul class="nav navbar-nav navbar-right">
             <li class="dropdown" id="user_menu">
               <a href="#user_menu" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.login %> <b class='caret'></b></a>
               <ul class="dropdown-menu">
@@ -43,7 +46,6 @@
               </ul>
             </li>
           </ul>
-        </div>
       </div>
     </div>
   </div>
@@ -57,10 +59,5 @@
       <%= yield %>
     </div>
   </div>
-  <footer class="footer">
-    <div class="container">
-      <p class="suggest">使用 <a href="http://www.mozillaonline.com/" target="_blank" rel="nofollow">Firefox</a> 或 <a href="http://www.google.com/chrome" target="_blank" rel="nofollow">Chrome</a> 浏览访问本站将会获得更佳的视觉体验.</p>
-    </div>
-  </footer>
 </body>
 </html>

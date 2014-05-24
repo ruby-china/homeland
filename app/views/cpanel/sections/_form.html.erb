@@ -4,9 +4,10 @@
     <legend></legend>
     <%= f.input :name %>
     <%= f.input :sort %>
-    <div class="form-actions">
+    <div class="form-group">
+      <div class="col-md-offset-2 col-md-10">
       <%= f.submit t("common.save"), :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %>
-      <%= link_to 'Back', cpanel_sections_path %>
+      <%= link_to 'Back', cpanel_sections_path %></div>
     </div>
   </fieldset>
 <% end %>

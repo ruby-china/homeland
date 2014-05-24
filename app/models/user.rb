@@ -231,14 +231,14 @@ class User
     last_reply_id = topic.last_reply_id || -1
     Rails.cache.read("user:#{self.id}:topic_read:#{topic.id}") == last_reply_id
   end
-  
+
   def filter_readed_topics(topics)
     t1 = Time.now
     key_hashs = {}
     return [] if topics.blank?
     cache_keys = topics.map { |t| "user:#{self.id}:topic_read:#{t.id}" }
     results = Rails.cache.read_multi(*cache_keys)
-    
+
     ids = []
     topics.each do |topic|
       val = results["user:#{self.id}:topic_read:#{topic.id}"]
@@ -248,14 +248,14 @@ class User
     end
     t2 = Time.now
     logger.error "filter_readed_topics (#{(t2 - t1) * 1000}ms)"
-    ids 
+    ids
   end
 
   # 将 topic 的最后回复设置为已读
   def read_topic(topic)
     return if topic.blank?
     return if self.topic_read?(topic)
-    
+
     self.notifications.unread.any_of({:mentionable_type => 'Topic', :mentionable_id => topic.id},
                                      {:mentionable_type => 'Reply', :mentionable_id.in => topic.reply_ids},
                                      {:reply_id.in => topic.reply_ids}).update_all(read: true)
@@ -327,17 +327,17 @@ class User
     end
     items
   end
-  
+
   def github_repositories_cache_key
     "github_repositories:#{self.github}+14+v2"
   end
-  
+
   def self.fetch_github_repositories(user_id)
     user = User.find_by_id(user_id)
     return false if user.blank?
-    
+
     begin
-      json = open("https://api.github.com/users/#{user.github}/repos?type=owner&sort=pushed").read
+      json = open("https://api.github.com/users/#{user.github}/repos?type=owner&sort=pushed&client_id=#{Setting.github_token}&client_secret=#{Setting.github_secret}").read
     rescue => e
       Rails.logger.error("Github Repositiory fetch Error: #{e}")
       items = []

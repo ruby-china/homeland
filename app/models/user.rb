@@ -337,7 +337,9 @@ class User
     return false if user.blank?
 
     begin
-      json = open("https://api.github.com/users/#{user.github}/repos?type=owner&sort=pushed&client_id=#{Setting.github_token}&client_secret=#{Setting.github_secret}").read
+      json = Timeout::timeout(5) do
+        open("https://api.github.com/users/#{user.github}/repos?type=owner&sort=pushed&client_id=#{Setting.github_token}&client_secret=#{Setting.github_secret}").read
+      end
     rescue => e
       Rails.logger.error("Github Repositiory fetch Error: #{e}")
       items = []

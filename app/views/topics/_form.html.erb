@@ -1,23 +1,21 @@
-<%= simple_form_for @topic do |f| %>
+<%= simple_form_for @topic, html: { role: 'form' } do |f| %>
   <%= render "shared/error_messages", :target => @topic %>
-  <div class="control-group">
+  <div class="form-group">
     <% if @topic.lock_node == false || admin? %>
-      <span class="node_select span2">
+      <div class="node_select col-md-3">
         <%= render_topic_node_select_tag(@topic) %>
-      </span>
+      </div>
     <% end %>
-    <%= f.text_field :title, :class => "span5", placeholder: "在这里填写标题" %>
+    <div class="col-md-9">
+      <%= f.text_field :title, placeholder: "在这里填写标题", class: 'form-control' %>
+    </div>
   </div>
   
   <div class="control-group edit_tools">
     <%= render "editor_toolbar" %>
   </div>
   
-  <div class="control-group">
-    <%= f.text_area :body, :class => "topic_editor closewarning" %>
-  </div>
+  <%= f.text_area :body, :class => "topic_editor closewarning" %>
 
-  <div class="control-group">
-    <%= f.submit t("common.save"), :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %>
-  </div>
+  <%= f.submit t("common.save"), :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %>
 <% end %>

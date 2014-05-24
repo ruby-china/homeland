@@ -1,0 +1,15 @@
+@import 'bootstrap_variables';
+@import 'bootstrap';
+
+@media (max-width: $screen-md) {
+  .container {
+    width: 900px;
+  }
+}
+
+@media (max-width: 900px) {
+  .container {
+    width: auto;
+  }
+}
+

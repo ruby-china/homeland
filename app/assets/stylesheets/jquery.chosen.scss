@@ -1,9 +1,11 @@
 /* @group Base */
+@import 'bootstrap_variables';
+
 .chosen-container {
   position: relative;
   display: inline-block;
   vertical-align: middle;
-  font-size: 13px;
+  font-size: 16px;
   zoom: 1;
   *display: inline;
   -webkit-user-select: none;
@@ -41,6 +43,7 @@
   height: 26px;
   border: 1px solid #ccc;
   border-radius: 3px;
+  height: 36px;
   background-color: #fff;
   color: #444;
   text-decoration: none;
@@ -53,6 +56,7 @@
 }
 .chosen-container-single .chosen-single span {
   display: block;
+  line-height: 36px;
   overflow: hidden;
   margin-right: 26px;
   text-overflow: ellipsis;
@@ -86,6 +90,7 @@
   height: 100%;
 }
 .chosen-container-single .chosen-single div b {
+  margin-top: 5px;
   display: block;
   width: 100%;
   height: 100%;
@@ -145,7 +150,7 @@
   margin: 0;
   padding: 5px 6px;
   list-style: none;
-  line-height: 15px;
+  line-height: 2rem;
 }
 .chosen-container .chosen-results li.active-result {
   display: list-item;
@@ -172,6 +177,7 @@
 .chosen-container .chosen-results li.group-result {
   display: list-item;
   font-weight: bold;
+  color: #999;
   cursor: default;
 }
 .chosen-container .chosen-results li.group-option {

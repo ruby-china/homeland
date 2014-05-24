@@ -14,7 +14,7 @@
   Rails: <%= Rails.version %>
 -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <%= render_page_title %>
   <meta charset='utf-8' />
@@ -36,13 +36,13 @@
   <%= raw SiteConfig.custom_head_html %>
 </head>
 <body data-offset="50" data-controller-name="<%= controller_name %>">
-  <div class="navbar navbar-fixed-top">
+  <div class="navbar navbar-default ruby-china-top">
     <div class="navbar-inner">
       <div class="container">
         <h3>
           <a href="/" class="site-logo"></a>
         </h3>
-        <%= render_list :class => "nav" do |li|
+        <%= render_list :class => "nav top-nav pull-left" do |li|
            li << link_to(t("menu.home"), root_path)
            li << link_to(t("menu.topics"), topics_path)
            li << link_to(t("menu.wiki"), pages_path) if !mobile?
@@ -61,7 +61,9 @@
   </div>
 
   <div class="container">
-    <%= notice_message %>
+    <div class="container-fluid">
+      <%= notice_message %>
+    </div>
     <div id="main" class="container-fluid">
       <%= yield %>
     </div>

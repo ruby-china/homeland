@@ -11,7 +11,7 @@
       <h2 class="title"><%= node.name %></h2>
       <div class="row">
         <% node.sites.each do |item| %>
-        <div class="span3 site">
+        <div class="col-sm-6 col-md-3 site">
           <%= image_tag(item.favicon_url, :class => "favicon")%>
           <%= link_to item.name, item.url, :target => "_blank", :rel => "nofollow", :title => item.desc %>
         </div>

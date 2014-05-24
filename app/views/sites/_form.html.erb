@@ -3,14 +3,16 @@
   <%= render "/shared/error_messages", :target => @site  %>
   <fieldset>
     <legend><%= t("sites.create") %></legend>
-    <%= f.input :name %>
-    <%= f.input :url, :input_html => { :class => "xxlarge" }, :placeholder => "http://"  %>
-    <%= f.input :desc, :as => :text, :input_html => { :class => "xxlarge", :rows => "3" } %>
+    <%= f.input :name, input_html: { class: 'form-control' } %>
+    <%= f.input :url, :input_html => { :class => "form-control" }, :placeholder => "http://"  %>
+    <%= f.input :desc, :as => :text, :input_html => { :class => "form-control", :rows => "3" } %>
     <%= f.input :site_node_id, :collection => SiteNode.all.collect { |t| [t.name, t.id] }, :include_blank => false %>
-    <div class="form-actions">
-      <%= f.submit t("common.save"), :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %>
-      or
-      <%= link_to t("common.cancel"), sites_path %>
+    <div class="form-group">
+      <div class="col-md-offset-2 col-md-6">
+        <%= f.submit t("common.save"), :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %>
+        or
+        <%= link_to t("common.cancel"), sites_path %>
+      </div>
     </div>
   </fieldset>
 <% end %>

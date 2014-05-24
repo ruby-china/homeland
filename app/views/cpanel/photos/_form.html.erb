@@ -7,8 +7,9 @@
     <%= f.label :image %><div class="input">
     <%= f.file_field :image %></div>
   </div>
-  <div class="form-actions">
-    <%= f.submit t("common.upload"), :class => "btn btn-primary", 'data-disable-with' => t("common.uploading") %>
+  <div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+    <%= f.submit t("common.upload"), :class => "btn btn-primary", 'data-disable-with' => t("common.uploading") %></div>
     or
     <%= link_to 'Back', photos_path %>
   </div>

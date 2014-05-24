@@ -1,6 +1,3 @@
-body {
-  padding:0 7px;
-}
 .navbar-fixed-top {  margin-bottom:8px; }
 .container,
 .navbar-fixed-top .container  { width:auto; padding: 0; min-width:0; max-width:940px;}
@@ -10,8 +7,7 @@ body {
 }
 .box { margin-bottom:8px; }
 .navbar {
-  margin-left:-7px; margin-right:-7px;
-  .navbar-inner { padding:0 7px;}
+  padding-left:5px; padding-right:5px;
   .navbar-search { display:none; }
   .nav {
     margin:0;
@@ -20,13 +16,11 @@ body {
     }
   }
 }
-.navbar-fixed-top {
+.ruby-china-top {
     h3 { 
       display:block; float:none; clear:both; text-align:center;
       margin:0px;
       width:auto;
-      border-bottom:1px solid #eee;
-      padding-bottom:5px;
       width:82px; margin:0 auto;
       a {
         width: 82px;
@@ -111,13 +105,8 @@ form {
   .actions {
     padding:0; padding-top:10px; background:#FFF; margin-bottom:0;
   }
-  #user_github {
-    width: 130px;
-  }
 }
-.input-xxlarge, input.xxlarge, textarea.xxlarge, select.xxlarge {
-  width:98%;
-}
+
 #sections li {
   label {
     display:block;
@@ -142,11 +131,15 @@ form {
   }
 }
 .topics .topic .infos { padding-right:40px; }
-.topics .topic .replies { display:inline; width:auto; margin-right:10px; }
+//.topics .topic .replies { display:inline; width:auto; margin-right:10px; }
 .topics .topic .replies a.count, .topics .topic .replies a.count:visited {
-  margin:0; padding:0px 5px; font-size:10px; font-weight:normal;
+  margin:0; padding:0px 5px 2px 5px; font-size:90%; font-weight:normal;
 }
-#main .topics .topic h1 { font-size:16px; }
+#main .topics .topic h1 {
+  font-size:18px;
+  line-height: 24px;
+  font-weight: normal;
+}
 #node_info {
   .sorts {
     .lb { display:none; }
@@ -161,15 +154,16 @@ form {
       width:33px;
       img { max-width:32px; max-height:32px; }
     }
-    .title { font-size:13px; margin:0; }
+    .title { margin:0; }
     .right_info { padding-left:48px; }
     .info {
-      font-size:12px; margin:0;
+      font-size:90%;
+      margin:0;
       .node { padding:0;}
       em { display:none; }
     }
     .social-share-button { display:none; }
-    .tools { float: none; }
+    .tools { float: none !important; }
   }
 }
 #replies {
@@ -178,6 +172,7 @@ form {
       img { max-width:98%; }
     }
     .info {
+      font-size: 12px;
       .name {
         a { margin-right:2px; }
       }
@@ -222,6 +217,7 @@ form {
     a {
       background:#F0F0F0;
       color:#666;
+      border-color: #ddd;
     }
   }
 }

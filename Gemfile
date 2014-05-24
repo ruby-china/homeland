@@ -38,8 +38,7 @@ gem 'devise-encryptable', '0.1.2'
 gem 'will_paginate', '3.0.4'
 
 # Bootstrap
-gem 'anjlab-bootstrap-rails', '2.0.3.2', require: 'bootstrap-rails'
-gem 'bootstrap-will_paginate', '0.0.3'
+gem 'bootstrap-sass', '~> 3.1.1'
 gem 'bootstrap_helper', '4.2.3'
 
 # 三方平台 OAuth 验证登陆
@@ -97,6 +96,11 @@ gem 'thin', "1.5.0"
 # for api 跨域
 gem 'rack-cors', require: 'rack/cors'
 
+group :development do
+  gem 'guard-livereload', require: false
+  gem 'rack-livereload'
+end
+
 group :development, :test do
   gem 'capistrano', '2.9.0', require: false
   gem 'rvm-capistrano', require: false
@@ -105,7 +109,8 @@ group :development, :test do
   gem 'database_cleaner'
   gem "rspec-cells", '0.1.10'
   gem "capybara", "~> 0.4.1"
-  gem 'api_taster', '0.6.0'
+  # 包不兼容, 暂时去掉
+  #gem 'api_taster', '0.7.0'
   gem "letter_opener"
 
   # 用于组合小图片

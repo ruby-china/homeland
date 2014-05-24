@@ -45,18 +45,18 @@ SimpleForm.setup do |config|
     b.use :error, :wrap_with => { :tag => :span, :class => :error }
   end
 
-  config.wrappers :bootstrap, :tag => 'div', :class => 'control-group', :error_class => 'error' do |b|
+  config.wrappers :bootstrap, :tag => 'div', :class => 'form-group', :error_class => 'has-error' do |b|
     b.use :html5
     b.use :placeholder
-    b.use :label
-    b.wrapper :tag => 'div', :class => 'controls' do |ba|
-      ba.use :input
-      ba.use :error, :wrap_with => { :tag => 'span', :class => 'help-inline' }
+    b.use :label, :class => ''
+    b.wrapper :tag => 'div', :class => 'col-md-6' do |ba|
+      ba.use :input, class: ['form-control']
+      ba.use :error, :wrap_with => { :tag => 'span', :class => 'help-block' }
       ba.use :hint,  :wrap_with => { :tag => 'p', :class => 'help-block' }
     end
   end
 
-  config.wrappers :prepend, :tag => 'div', :class => "control-group", :error_class => 'error' do |b|
+  config.wrappers :prepend, :tag => 'div', :class => "form-group", :error_class => 'error' do |b|
     b.use :html5
     b.use :placeholder
     b.use :label
@@ -65,11 +65,11 @@ SimpleForm.setup do |config|
         prepend.use :input
       end
       input.use :hint,  :wrap_with => { :tag => 'span', :class => 'help-block' }
-      input.use :error, :wrap_with => { :tag => 'span', :class => 'help-inline' }
+      input.use :error, :wrap_with => { :tag => 'span', :class => 'help-block' }
     end
   end
 
-  config.wrappers :append, :tag => 'div', :class => "control-group", :error_class => 'error' do |b|
+  config.wrappers :append, :tag => 'div', :class => "form-group", :error_class => 'error' do |b|
     b.use :html5
     b.use :placeholder
     b.use :label
@@ -78,7 +78,7 @@ SimpleForm.setup do |config|
         append.use :input
       end
       input.use :hint,  :wrap_with => { :tag => 'span', :class => 'help-block' }
-      input.use :error, :wrap_with => { :tag => 'span', :class => 'help-inline' }
+      input.use :error, :wrap_with => { :tag => 'span', :class => 'help-block' }
     end
   end
 
@@ -104,7 +104,7 @@ SimpleForm.setup do |config|
   config.error_notification_tag = :div
 
   # CSS class to add for error notification helper.
-  config.error_notification_class = 'alert alert-error'
+  config.error_notification_class = 'alert alert-danger'
 
   # ID to add for error notification helper.
   # config.error_notification_id = nil
@@ -133,10 +133,11 @@ SimpleForm.setup do |config|
   # config.label_text = lambda { |label, required| "#{required} #{label}" }
 
   # You can define the class to use on all labels. Default is nil.
-  config.label_class = 'control-label'
+  config.label_class = 'control-label col-md-2'
 
   # You can define the class to use on all forms. Default is simple_form.
   config.form_class = "simple_form form-horizontal"
+  config.input_class = 'form-control'
 
   # You can define which elements should obtain additional classes
   # config.generate_additional_classes_for = [:wrapper, :label, :input]

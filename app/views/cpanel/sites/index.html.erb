@@ -1,7 +1,7 @@
 <%= render 'base' %>
 <div class="toolbar">
-  <form class="form-search" action="<%= cpanel_sites_path %>">
-    <input type="text" name="q" class="span2" value="<%= params[:q] %>" placeholder="网站名称" /> <button class="btn btn-small">搜索</button>
+  <form class="form-inline" action="<%= cpanel_sites_path %>">
+    <input type="text" name="q" class="form-control" value="<%= params[:q] %>" placeholder="网站名称" /> <button class="btn btn-default ">搜索</button>
   </form>
 </div>
 <h1>酷站列表</h1>

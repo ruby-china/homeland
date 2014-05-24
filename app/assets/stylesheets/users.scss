@@ -1,8 +1,13 @@
+@import 'bootstrap_variables'; 
+
 .subnav {
-  margin-bottom:-18px;
   .nav-tabs {
     border-bottom:0px;
     padding-left:20px;
+    @media (max-width: $screen-xs) {
+      padding-left: 5px;
+      font-size: 12px;
+    }
   }
   .nav-tabs > li > a:hover {
     border-color:transparent;
@@ -48,11 +53,12 @@
         border-bottom: 0px;
       }
       padding:10px 0px;
-      .title { 
-        font-size:14px;
-      }
       i.icon { margin-bottom: -1px; }
-      .info { margin-top:3px; font-size:12px; color:#bbb; }
+      .info {
+        margin-top:3px;
+        color:#bbb; 
+        font-size: 90%;
+      }
       .node {
         margin-right:5px;
         a { color:#444; }
@@ -70,13 +76,11 @@
       border-bottom: 0px;
     }
     .title {
-      font-size:14px;
-      .info { font-size:12px; color:#bbb; }
+      .info { font-size:90%; color:#bbb; }
     }
     .body {
       a { color:#333; }
       margin-top:6px; color:#333;
-      p { font-size:13px; }
       img { max-width:680px; }
     }
   }
@@ -89,14 +93,23 @@
   .tagline { text-align:left; margin-top:-8px; margin-bottom:20px;}
   ul { list-style:none; }
   li {
-    font-size:14px; line-height:180%; border-bottom:1px dashed #eee;
-    label { color:#999; font-size:12px; margin-right:8px; display:inline-block; width:100px; text-align: right;}
+    line-height:180%; border-bottom:1px dashed #eee;
+    label { 
+      color:#999;
+      margin-right:8px;
+      display:inline-block;
+      width:100px; 
+      @media (max-width: $screen-xs) {
+        width:50px; 
+      }
+      text-align: right;
+    }
   }
 
 }
 
 .bio { 
-  font-size:12px; line-height:180%; 
+  line-height:180%; 
   p:last-child { margin-bottom:0; }
 }
 
@@ -149,5 +162,24 @@ table.node_topics {
       .watchers { position:absolute; top:2px; right:0; }
     }
     .desc { font-size:12px; color:#888; }
+  }
+}
+
+.box.private_token {
+  #private_token {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  span {
+    color: #999;
+    font-size: 90%;
+  }
+}
+
+#hot_users {
+  text-align: center;
+  .name {
+    text-align: center;
   }
 }

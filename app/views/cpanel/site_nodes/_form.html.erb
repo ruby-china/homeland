@@ -5,12 +5,13 @@
   <fieldset>
     <legend><%= t("common.edit") %></legend>
       <%= f.input :name %>
-      <%= f.input :sites_count %>
+      <%#= f.input :sites_count %>
       <%= f.input :sort %>
-      <div class="form-actions">
+      <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
       <%= f.submit t("common.save"), :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %>
       or
-      <%= link_to t("common.cancel"), cpanel_site_nodes_path %>
+      <%= link_to t("common.cancel"), cpanel_site_nodes_path %></div>
     </div>
   </fieldset>
 <% end %>

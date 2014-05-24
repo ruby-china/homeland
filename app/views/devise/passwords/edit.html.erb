@@ -13,8 +13,9 @@
         <%= f.hidden_field :reset_password_token %>
         <%= f.input :password %>
         <%= f.input :password_confirmation %>
-        <div class="form-actions">
-          <%= f.submit "修改我的密码", :class => "btn btn-success", 'data-disable-with' => t("common.submitting") %>
+        <div class="form-group">
+          <div class="col-md-offset-2 col-md-10">
+          <%= f.submit "修改我的密码", :class => "btn btn-success", 'data-disable-with' => t("common.submitting") %></div>
         </div>
     <% end %>
   </div>

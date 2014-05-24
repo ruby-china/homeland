@@ -7,36 +7,12 @@
  *= require notes
  *= require_self
  */
-#login {   }
-
-.box {
-  ul, ol { margin-bottom:0; }
-}
 
 .feed_link {
   padding-top:6px;
   .icon { margin-bottom:-3px; }
   a.feed { width:auto; padding-left:18px; color:#B94E22;}
   a.feed:hover { text-decoration: none; color:#333;}
-}
-
-.sidebar {
-   h2 {
-     font-size: 12px;
-     line-height: 100%;
-     color: #999;
-     text-align: center;
-     border-bottom:1px solid #ddd;
-     margin:0 -10px 10px -10px;
-     padding-bottom:8px;
-   }
-   ul, ol {
-     margin:0;
-     list-style-position: inside;
-   }
-   p { margin-bottom: 6px; }
-   li { margin-bottom: 4px; }
-
 }
 
 /* 记事本 */
@@ -59,11 +35,11 @@
     li {
       margin-bottom: 10px;
       a {
-        font-size: 14px;
         font-weight: bold;
         color: #333;
       }
       .info {
+        font-size: 90%;
         color: #999;
         margin-top: 5px;
       }
@@ -72,7 +48,6 @@
 
  .note {
     .body {
-      font-size: 14px;
       line-height: 180%;
       min-height: 350px;
     }
@@ -105,7 +80,6 @@
 .body{
    pre {
      margin: 3px 0;
-     font-size: 12px;
      background-color: #F5F5F5;
      border: 0px;
      padding: 5px;
@@ -114,7 +88,6 @@
      border-radius: 0px;
      code {
        padding: 0!important;
-       font-size: 12px!important;
        background-color: #eee!important;
        border: none!important; }
    }
@@ -142,7 +115,6 @@
      -webkit-box-shadow: 0 1px 1px white; }
 
    code {
-     font-size: 12px!important;
      background-color: #f8f8ff!important;
      color: #444!important;
      padding: 0 .2em!important;
@@ -164,14 +136,13 @@
     
     .info {
       color:#aaa;
-      font-size:12px;
+      font-size: 90%;
       margin-bottom:5px;
       line-height:22px;
       padding-bottom:3px;
       
     }
     .body {
-      font-size:14px;
       margin:5px 0;
     }
   }
@@ -180,10 +151,18 @@
 .help-block ul { margin-bottom:0; }
 
 .editor_toolbar {
-  position:relative;
-  margin-bottom:5px;
+  position: relative;
+  margin-bottom: 5px;
+
   .icons { position:absolute; top:3px; right:0; }
+
+  .tooltip {
+    width: 100px;
+    left: -40px;
+  }
+
   .pills {
+    padding-left: 0;
     margin: 0;
     list-style: none;
     li { display:inline;}
@@ -193,7 +172,7 @@
       border-radius: 8px;
       padding:0 5px;
       line-height:18px;
-      font-size:12px;
+      font-size:90%;
       margin-right:6px;
       text-shadow:0;
       color:#444;
@@ -221,11 +200,10 @@
 /* 社区分类列表 */
 #sections{
 
-  ul {list-style: none; margin-bottom: 0; margin:0; }
+  ul {padding-left: 0; list-style: none; margin-bottom: 0; margin:0; }
   label { line-height: 100%; padding-top: 8px; }
   li {
     line-height: 200%;
-    font-size: 14px;
     padding: 8px 10px;
     margin:0 -10px;
     border-bottom: 1px solid #DDD;
@@ -235,7 +213,6 @@
     position: relative;
     overflow: auto;
     label {
-      font-size: 12px;
       color: #999;
       display: inline-block;
       width: 120px;
@@ -270,17 +247,22 @@
 
 /* sites_controller */
 #site_nodes {
-  .row { margin-left:10px;}
   .site {
-    margin-bottom:10px;
+    margin-bottom: 1rem;
     margin-left:0px;
-    width:185px;
-    .favicon { margin-top:-2px; width:16px; height:16px;}
+    .favicon { 
+      vertical-align: text-bottom;
+      width:16px;
+      height:16px;
+    }
   }
 }
 
 /* notifications_controller */
 #notifications {
+  h1 {
+    margin-top: 5px;
+  }
   td.face {
     padding-right: 8px;
     width: 48px;
@@ -294,11 +276,12 @@
 
   td {
     h3 {
-      font-size: 13px;
       color:#999;
-      line-height: 18px;
+      line-height: 24px;
+      font-size: 16px;
       font-weight:normal;
       padding-bottom: 8px;
+      margin: 0;
       .user {
         a { color:#666; font-weight:bold; text-decoration:underline; }
       }
@@ -324,7 +307,7 @@
     }
   }
   .body {
-    line-height:180%; font-size:14px; text-overflow: ellipsis; word-wrap: break-word;
+    line-height:180%; text-overflow: ellipsis; word-wrap: break-word;
     a:link, a:visited { color:#0069D6; text-decoration: none; }
     a:hover { text-decoration: underline; color:#00438A; }
     a.at_floor { color:#376B43; }
@@ -332,7 +315,7 @@
       color:#333; font-weight:bold;
       i { color:#777; }
     }
-    h4 { font-weight:bold; font-size:15px; line-height:100%; margin:0; color:#222; margin-top:20px; border-left:15px solid #eee; padding-left:5px; margin-bottom:8px;  }
+    h4 { font-weight:bold; font-size: 120%; line-height:100%; margin:0; color:#222; margin-top:20px; border-left:15px solid #eee; padding-left:5px; margin-bottom:8px;  }
     p { margin-bottom:10px; max-width: 814px; }
     strong { color:#000; }
     ul,
@@ -341,7 +324,7 @@
       margin:0;
       padding:5px 14px;
       p { margin:0; }
-      li { line-height:160%; color:#333; font-size:13px; }
+      li { line-height:160%; color:#333; }
     }
     img {
       max-width:700px;

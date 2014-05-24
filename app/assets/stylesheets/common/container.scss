@@ -1,0 +1,29 @@
+@import 'bootstrap_variables';
+
+.container-fluid {
+  padding:0;
+  @media (min-width: $screen-md){
+    > .sidebar {
+      position:absolute;
+      left:auto;
+      right:0;
+      top:0;
+      width: 250px;
+      @media (min-width: $screen-lg) {
+        width: 300px;
+      }
+
+      ul {
+        padding-left: 20px;
+      }
+    }
+
+    > .content {
+      margin-left:0;
+      margin-right: 260px;
+      @media (min-width: $screen-lg) {
+        margin-right: 310px;
+      }
+    }
+  }
+}

@@ -4,19 +4,12 @@
  */
 body { color: #333; }
 
-body, p, ol, ul, td {
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size:   13px;
-  line-height: 18px;
-}
-
 pre {
   background-color: #eee;
   padding: 10px;
-  font-size: 11px;
 }
 .group { margin-bottom:20px; }
-.group h2 { font-size:12px; margin-bottom:8px; }
+.group h2 { font-size: 18px; margin-bottom:8px; }
 .group ul { margin:0 20px;}
 .pagination { clear:both; margin-top:10px; text-align: left;}
 

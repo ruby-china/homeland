@@ -1,10 +1,23 @@
 #preview {
-  width: 920px;
-  height: 510px;
+  width: 100%;
   border: 1px solid #CCCCCC;
   border-radius: 3px 3px 3px 3px;
   -moz-border-radius: 3px 3px 3px 3px;
   padding: 5px;
   display: none;
-  overflow: scroll;
+  overflow: auto;
+}
+
+.note {
+  .urls em {
+    font-style: normal;
+    color: #999;
+    font-size: 90%;
+    margin-right: 0.5rem;
+  }
+
+  .urls input {
+    width: 300px;
+    color: #666;
+  }
 }

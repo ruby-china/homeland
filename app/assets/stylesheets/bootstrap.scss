@@ -3530,21 +3530,12 @@ a.thumbnail:hover {
   background-color: #fff;
 }
 .modal-backdrop.fade {
-  display:none;
+  opacity: 0;
 }
 .modal-backdrop,
 .modal-backdrop.fade.in {
-  display:block;
-  -webkit-transform-origin: bottom center;
-  -moz-transform-origin: bottom center;
-  -o-transform-origin: bottom center;
-  transform-origin: bottom center;
-  -webkit-animation: scale-fade 300ms forwards cubic-bezier(.8, .02, .45, .91);
-  -moz-animation: scale-fade 300ms forwards cubic-bezier(.8, .02, .45, .91);
-  -ms-animation: scale-fade 300ms forwards cubic-bezier(.8, .02, .45, .91);
-  -o-animation: scale-fade 300ms forwards cubic-bezier(.8, .02, .45, .91);
-  animation: scale-fade 300ms forwards cubic-bezier(.8, .02, .45, .91);
-  padding: 40px
+  opacity: 1;
+  filter: alpha(opacity=100);
 }
 .modal {
   position: fixed;

@@ -7,7 +7,7 @@
       not_saved: "有 %{count} 個錯誤發生導致「%{model}」無法被儲存。 "
   devise:
     failure:
-      unauthenticated: '繼續操作前請註冊或者登錄.'
+      unauthenticated: '繼續操作前請註冊或者登錄。'
       unconfirmed: '請先啟動您的帳號'
       locked: '您的帳號已被鎖定。'
       invalid: '帳號或密碼錯誤'
@@ -19,7 +19,7 @@
       signed_out: '登出成功。'
     passwords:
       send_instructions: '幾分後，您將收到重置密碼的電子郵件。'
-      updated: '您的密碼已修改成功，請重新登錄.'
+      updated: '您的密碼已修改成功，請重新登錄。'
     confirmations:
       send_instructions: '幾分後，您將收到帳號啟動的電子郵件。'
       confirmed: '您的帳號已經啟動，請登入。'

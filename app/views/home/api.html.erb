@@ -13,7 +13,7 @@
       <tr>
         <td><%= route.route_method %></td>
         <% route_path = route.route_path.gsub("(.:format)",".json") %>
-        <td>http://<%= Setting.domain %><%= route.route_path.gsub("(.:format)",".json") %></td>
+        <td><%= request.protocol %><%= Setting.domain %><%= route.route_path.gsub("(.:format)",".json") %></td>
       </tr>
     <% end %>
   </table>

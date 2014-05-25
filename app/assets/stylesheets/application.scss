@@ -75,8 +75,9 @@ code { background:none; }
 }
 
 .breadcrumb { display:none; }
-
-.container { width:960px; }
+.container { 
+  width:960px; 
+}
 .container-fluid { padding:0; }
 .container-fluid > .sidebar {
   position:absolute;
@@ -163,7 +164,6 @@ form {
 
 .footer {
   border-top:0;
-  min-width: 940px;
   margin-bottom:30px;
   margin-top:0px;
   padding:0;

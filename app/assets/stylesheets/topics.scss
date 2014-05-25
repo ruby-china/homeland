@@ -218,7 +218,13 @@ form .node_select {
   textarea { width:578px; margin-bottom:10px;}
   position:relative;
   .submit_buttons {
-    position:absolute; right:10px; top:42px;
+    position:absolute; right:10px; top:33px;
+    .help-inline {
+      margin-top:5px;
+      display:block;
+      padding:0;
+      text-align:center;
+    }
   }
 }
 

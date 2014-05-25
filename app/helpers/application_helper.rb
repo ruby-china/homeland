@@ -123,4 +123,20 @@ module ApplicationHelper
     end
     raw lang_list.join("")
   end
+  
+  def birthday_tag
+    if Time.now.month == 10 && Time.now.day == 28
+      age = Time.now.year - 2011
+      title = "Ruby China 创立 #{age} 周年纪念日"
+      html = []
+      html << "<div style='text-align:center;margin-bottom:20px; line-height:200%;'>"
+      %W(dancers beers cake birthday crown gift crown birthday cake beers dancers).each do |name|
+        html << image_tag(asset_path("assets/emojis/#{name}.png"), class: "emoji", title: title)
+      end
+      html << "<br />"
+      html << title
+      html << "</div>"
+      raw html.join(" ")
+    end
+  end
 end

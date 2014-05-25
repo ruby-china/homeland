@@ -20,7 +20,17 @@ describe 'markdown' do
         its(:inner_html) { should == %(<p><a href="#reply1" class="at_floor" data-floor="1">#1楼</a> <a href="/ichord" class="at_user" title="@ichord"><i>@</i>ichord</a> 刚刚发布，有点问题</p>) }
       end
     end
+    
+    describe 'strikethrough' do
+      let(:raw) { "some ~~strikethrough~~ text" }
+      its(:inner_html) { should == %(<p>some <del>strikethrough</del> text</p>) }
+    end
 
+    describe 'strong' do
+      let(:raw) { "some **strong** text" }
+      its(:inner_html) { should == %(<p>some <strong>strong</strong> text</p>) }
+    end
+    
     describe 'at user' do
       context '@user in text' do
         let(:raw) { '@user' }

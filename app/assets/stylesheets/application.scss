@@ -5,6 +5,7 @@
  *= require highlight
  *= require social-share-button
  *= require jquery.atwho
+ *= require jquery.fluidbox
  *= require nprogress
  *= require_tree ./sprites/
  *= require_self
@@ -23,6 +24,11 @@ body {
 
 code { background:none; }
 
+[data-action="zoom"] {
+  cursor: pointer;
+  cursor: -webkit-zoom-in;
+  cursor: -moz-zoom-in;
+}
 .navbar-fixed-top {
   position:static;right:0;left:0;margin-bottom:20px;
 /*  .badge-inverse { background:#666;}*/

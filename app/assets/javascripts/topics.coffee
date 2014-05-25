@@ -1,6 +1,7 @@
 # TopicsController 下所有页面的 JS 功能
 window.Topics =
   replies_per_page: 50
+  currentPageImageURLs : []
 
   # 往话题编辑器里面插入图片代码
   appendImageFromUpload : (srcs) ->
@@ -101,6 +102,22 @@ window.Topics =
       App.alert(msg,'#reply')
     $("#new_reply textarea").focus()
     $('#btn_reply').button('reset')
+    
+  # 图片点击增加全屏预览功能
+  initContentImageZoom : () ->    
+    exceptClasses = ["emoji"]
+    imgEls = $(".topic .body img")
+    for el in imgEls
+      if exceptClasses.indexOf($(el).attr("class")) == -1
+        $(el).wrap("<a href='#{$(el).attr("src")}' class='zoom-image' data-action='zoom'></a>")
+      
+    # Bind click event
+    if App.mobile == true
+      $('a.zoom-image').attr("target","_blank")
+    else
+      $('a.zoom-image').fluidbox
+        overlayColor: "#FFF"
+    true
 
   preview: (body) ->
     $("#preview").text "Loading..."
@@ -202,6 +219,8 @@ window.Topics =
 
   init : ->
     bodyEl = $("body")
+    
+    Topics.initContentImageZoom()
 
     Topics.initCloseWarning($("textarea.closewarning"))
 

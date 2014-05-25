@@ -15,6 +15,7 @@
 #= require jquery.chosen
 #= require jquery.autogrow-textarea
 #= require jquery.html5-fileupload
+#= require jquery.fluidbox.min
 #= require social-share-button
 #= require jquery.atwho
 #= require nprogress

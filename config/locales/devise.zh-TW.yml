@@ -1,16 +1,16 @@
 "zh-TW":
   errors:
     messages:
-      not_found: "沒有找到"
-      already_confirmed: "已經確認"
-      not_locked: "沒有鎖定"
+      not_found: "沒有找到。"
+      already_confirmed: "已經確認。"
+      not_locked: "沒有鎖定。"
       not_saved: "有 %{count} 個錯誤發生導致「%{model}」無法被儲存。 "
   devise:
     failure:
       unauthenticated: '繼續操作前請註冊或者登錄。'
-      unconfirmed: '請先啟動您的帳號'
+      unconfirmed: '請先啟動您的帳號。'
       locked: '您的帳號已被鎖定。'
-      invalid: '帳號或密碼錯誤'
+      invalid: '帳號或密碼錯誤。'
       invalid_token: '認證碼無效。'
       timeout: '您已登入超時，請重新登入。'
       inactive: '您還沒有啟動帳戶。'

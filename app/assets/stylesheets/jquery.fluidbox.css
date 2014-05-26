@@ -33,3 +33,8 @@
   transition-property: top, left, opacity, transform;
   transition-delay: 0, 0, .25s, 0;
 }
+.fluidbox-opened {
+  cursor: pointer;
+  cursor: -webkit-zoom-out !important;
+  cursor: -moz-zoom-out !important;
+}

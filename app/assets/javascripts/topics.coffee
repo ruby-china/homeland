@@ -106,7 +106,7 @@ window.Topics =
   # 图片点击增加全屏预览功能
   initContentImageZoom : () ->    
     exceptClasses = ["emoji"]
-    imgEls = $(".topic .body img")
+    imgEls = $(".body img")
     for el in imgEls
       if exceptClasses.indexOf($(el).attr("class")) == -1
         $(el).wrap("<a href='#{$(el).attr("src")}' class='zoom-image' data-action='zoom'></a>")

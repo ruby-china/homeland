@@ -60,9 +60,9 @@
     width: 180px;
   }
 }
-@media (min-width: 992px) {
+@media (min-width: 980px) {
   .container {
-    width: 970px;
+    width: 960px;
   }
   .navbar-fixed-top .container, .navbar-fixed-bottom .container {
     width: 940px;
@@ -73,13 +73,13 @@
     display:block;
     .content {
       input,
-      textarea { max-width:210px; }
-      img { max-width:220px; }
+      textarea { max-width:200px; }
+      img { max-width:210px; }
     }
   }
   .container-fluid > .content {
     margin-left:0;
-    margin-right: 260px;
+    margin-right: 250px;
   }
   .btn {
     padding: 6px 18px 6px;
@@ -95,7 +95,7 @@
       margin-left: 160px;
     }
     .input-xxlarge, input.xxlarge, textarea.xxlarge, select.xxlarge {
-      width: 510px;
+      width: 500px;
     }
   }
 
@@ -118,7 +118,7 @@
     }
   }
   textarea.span16 {
-    width: 940px;
+    width: 930px;
   }
   #site_nodes .site {
     width: 185px;

@@ -27,7 +27,7 @@
 
       <% if @topic.excellent? %>
       <div class="excellent">
-        <i class="icon small_cert_on"></i> 本帖已被设为精华贴！
+        <i class="icon small_cert_on"></i> 本帖已被设为精华帖！
         <% if admin? %>
         <div class="opts pull-right">
           <%= link_to "取消", unsuggest_topic_path(@topic.id), method: "delete" %>

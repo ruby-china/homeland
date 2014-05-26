@@ -17,7 +17,7 @@ describe "sign up and login" do
     end
 
     click_link '退出'
-    page.should have_content('退出成功.')
+    page.should have_content('退出成功。')
 
     click_link '登录'
     fill_in '用户名', :with => 'rubyist'
@@ -27,7 +27,7 @@ describe "sign up and login" do
   end
 
   it "fail to sign up new user if password field is empty" do
-    
+
     visit '/'
     click_link '注册'
     fill_in '用户名', :with => 'rubyist'

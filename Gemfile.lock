@@ -1,12 +1,4 @@
 GIT
-  remote: git://github.com/huacnlee/carrierwave-upyun.git
-  revision: 7c53a55d9815c641fe02fbd81950d7868be22333
-  specs:
-    carrierwave-upyun (0.1.7)
-      carrierwave (>= 0.5.7)
-      rest-client (>= 1.6.7)
-
-GIT
   remote: git://github.com/intridea/grape.git
   revision: d24bd2f758544244ac65f19c69b94f0ffc34e71b
   ref: d24bd2f758544244ac65f19c69b94f0ffc34e71b
@@ -105,6 +97,9 @@ GEM
     carrierwave (0.6.2)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
+    carrierwave-upyun (0.1.7)
+      carrierwave (>= 0.5.7)
+      rest-client (>= 1.6.7)
     celerity (0.9.2)
     cells (3.9.1)
       actionpack (>= 3.0)
@@ -362,7 +357,7 @@ GEM
       eventmachine (>= 0.12.6)
       rack (>= 1.0.0)
     thor (0.19.1)
-    thread_safe (0.3.3)
+    thread_safe (0.3.4)
     tilt (1.4.1)
     timers (1.1.0)
     treetop (1.4.15)
@@ -370,7 +365,7 @@ GEM
       polyglot (>= 0.3.1)
     turbolinks (2.2.2)
       coffee-rails
-    tzinfo (1.1.0)
+    tzinfo (1.2.0)
       thread_safe (~> 0.1)
     uglifier (2.5.0)
       execjs (>= 0.3.0)
@@ -398,7 +393,7 @@ DEPENDENCIES
   capistrano (= 2.9.0)
   capybara (~> 0.4.1)
   carrierwave (= 0.6.2)
-  carrierwave-upyun!
+  carrierwave-upyun (= 0.1.7)
   cells (~> 3.9.1)
   chunky_png (= 1.2.8)
   coffee-rails (~> 4.0.0)

@@ -134,7 +134,7 @@ class User
 
   # 是否有 Wiki 维护权限
   def wiki_editor?
-    self.admin? or self.verified == true
+    self.admin? or self.verified
   end
 
   # 回帖大于 150 的才有酷站的发布权限
@@ -144,7 +144,7 @@ class User
 
   # 是否能发帖
   def newbie?
-    return false if self.verified == true
+    return false if self.verified
     self.created_at > 1.week.ago
   end
 

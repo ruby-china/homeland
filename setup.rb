@@ -3,13 +3,13 @@ ROW_SIZE = 80
 
 class String
   COLORS = {
-    :red => "\033[31m",
-    :green => "\033[32m",
-    :yellow => "\033[33m",
-    :blue => "\033[34m"
+    :red    => 31,
+    :green  => 32,
+    :yellow => 33,
+    :blue   => 34
   }
   def colorize(color)
-    "#{COLORS[color]}#{self}\033[0m"
+    "\033[#{COLORS[color]}m#{self}\033[0m"
   end
 end
 

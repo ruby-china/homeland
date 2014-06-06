@@ -135,4 +135,21 @@ module ApplicationHelper
       raw html.join(" ")
     end
   end
+  
+  # Issue #299
+  # 导航高亮是用的bootstrap-helperrender_list这个方法，
+  # 而这个方法是根据匹配当前controller和action来自动高亮的。
+  # 招聘的节点ID是写死的，需要做特殊处理
+  def hacked_render_list(list=[], options={}, &block)
+    rendered_list = render_list(list, options, &block)
+    if @topic && @topic.jobs? || @node && @node.jobs?
+      rendered_html = Nokogiri::HTML(rendered_list)
+      active_li = rendered_html.css("li.active")[0]
+      active_li.try(:[]=, 'class', '')
+      jobs_a = rendered_html.css("a[href='#{jobs_path}']")[0]
+      jobs_a.try(:parent).try(:[]=, 'class', 'active')
+      rendered_list = rendered_html.to_s.html_safe
+    end
+    rendered_list
+  end
 end

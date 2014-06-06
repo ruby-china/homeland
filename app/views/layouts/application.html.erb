@@ -44,7 +44,7 @@
         <h3>
           <a href="/" class="site-logo"></a>
         </h3>
-        <%= render_list :class => "nav" do |li|
+        <%= hacked_render_list :class => "nav" do |li|
            li << link_to(t("menu.home"), root_path)
            li << link_to(t("menu.topics"), topics_path)
            li << link_to(t("menu.wiki"), pages_path) if !mobile?

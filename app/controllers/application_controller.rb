@@ -6,7 +6,6 @@ class ApplicationController < ActionController::Base
 
   before_filter do
     resource = controller_name.singularize.to_sym
-    puts "---------------- #{controller_name}"
     method = "#{resource}_params"
     params[resource] &&= send(method) if respond_to?(method, true)
 

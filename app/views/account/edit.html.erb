@@ -46,7 +46,7 @@
       <%= render "shared/error_messages", target: resource if params[:by] == "pwd" %>
       <fieldset>
         <legend><%= t("users.edit_password")%></legend>
-        <input type="hidden" name="user[:by]" value="pwd" />
+        <input type="hidden" name="by" value="pwd" />
         <%= f.input :current_password %>
         <%= f.input :password %>
         <%= f.input :password_confirmation %>
@@ -87,8 +87,13 @@
     </div>
   </div>
   <div class="box">
-    <h2><%= t("users.delete_my_account")%></h2>
-    <p><%= t("users.dont_like_it")%> <%= link_to(t("users.delete_this_account"), registration_path(resource_name), 'data-confirm' => "删除后无法恢复，你确定吗?", class: "btn btn-danger", method: :delete )%></p>
+    <h2>删除账号</h2>
+    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :method => :delete) do |f| %>
+      <%= render "shared/error_messages", :target => resource if params[:by] == "destroy" %>
+      <input type="hidden" name="by" value="destroy" />
+      <%= f.password_field :current_password, placeholder: "要删除账号，请输入你的密码" %>
+      <%= f.submit "确定删除我的账号", :class => "btn btn-danger", 'data-disable-with' => t("common.submitting") %>
+    <% end %>
   </div>
 </div>
 

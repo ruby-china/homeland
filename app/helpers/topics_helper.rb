@@ -48,7 +48,7 @@ module TopicsHelper
   
   def topic_excellent_tag(topic)
     return "" if !topic.excellent?
-    raw %(<i class="icon small_cert_on" title="精华贴"></i>)
+    raw %(<i class="icon small_cert_on" title="精华帖"></i>)
   end
 
   def render_topic_last_reply_time(topic)

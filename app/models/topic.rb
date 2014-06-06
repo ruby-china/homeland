@@ -32,7 +32,7 @@ class Topic
   field :last_active_mark, :type => Integer
   # 是否锁定节点
   field :lock_node, :type => Mongoid::Boolean, :default => false
-  # 精华贴 0 否， 1 是
+  # 精华帖 0 否， 1 是
   field :excellent, type: Integer, default: 0
 
   # 临时存储检测用户是否读过的结果
@@ -115,7 +115,7 @@ class Topic
   end
 
   def update_last_reply(reply)
-    # replied_at 用于最新回复的排序，如果贴着创建时间在一个月以前，就不再往前面顶了
+    # replied_at 用于最新回复的排序，如果帖着创建时间在一个月以前，就不再往前面顶了
     self.last_active_mark = Time.now.to_i if self.created_at > 1.month.ago
     self.replied_at = Time.now
     self.last_reply_id = reply.id

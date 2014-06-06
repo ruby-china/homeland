@@ -17,7 +17,7 @@
       recent: "最新创建"
       popular: "优质帖子"
       no_reply: "无人问津"
-      excellent: "精华贴"
+      excellent: "精华帖"
     read_topic: "浏览帖子"
     create_topic_success: "帖子创建成功。"
     delete_topic_success: "帖子删除成功。"

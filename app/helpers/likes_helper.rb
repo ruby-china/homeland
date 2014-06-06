@@ -18,16 +18,16 @@ module LikesHelper
     if opts[:cache].blank? && likeable.liked_by_user?(current_user)
       title = "取消喜欢"
       state = "liked"
-      icon = content_tag("i", "", :class => "icon small_liked")
+      icon = content_tag("i", "", class: "icon small_liked")
     else
       title = "喜欢"
       state = ""
-      icon = content_tag("i", "", :class => "icon small_like")
+      icon = content_tag("i", "", class: "icon small_like")
     end
     like_label = raw "#{icon} <span>#{label}</span>"
 
-    link_to(like_label,"#",:title => title, :rel => "twipsy", 'data-count' => likeable.likes_count,
-          'data-state' => state,'data-type' => likeable.class,'data-id' => likeable.id,
-          :class => 'likeable', :onclick => "return App.likeable(this);")
+    link_to(like_label, "#", title: title, rel: "twipsy", 'data-count' => likeable.likes_count,
+          'data-state' => state, 'data-type' => likeable.class,'data-id' => likeable.id,
+          class: 'likeable', onclick: "return App.likeable(this);")
   end
 end

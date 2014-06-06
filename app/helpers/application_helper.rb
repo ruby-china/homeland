@@ -70,7 +70,7 @@ module ApplicationHelper
   end
 
   def owner?(item)
-    return false if item.blank? or current_user.blank?
+    return false if item.blank? || current_user.blank?
     item.user_id == current_user.id
   end
 
@@ -92,10 +92,6 @@ module ApplicationHelper
     data = data.gsub(/\n\s+/,"")
     data = data.gsub(/>\s+</,"><")
     sanitize data
-  end
-
-  def facebook_enable
-    Setting.facebook_enable
   end
 
   MOBILE_USER_AGENTS =  'palm|blackberry|nokia|phone|midp|mobi|symbian|chtml|ericsson|minimo|' +
@@ -123,7 +119,7 @@ module ApplicationHelper
     end
     raw lang_list.join("")
   end
-  
+
   def birthday_tag
     if Time.now.month == 10 && Time.now.day == 28
       age = Time.now.year - 2011 + 1

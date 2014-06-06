@@ -1,3 +1,4 @@
+# coding: utf-8
 module SearchHelper
   # 高亮搜索结果
   def search_result_highlight(hit, field)

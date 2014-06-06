@@ -28,7 +28,7 @@ module UsersHelper
       else size
     end
   end
-  
+
   def user_avatar_size_name_for_2x(size)
     case size
     when :normal then :large
@@ -46,26 +46,26 @@ module UsersHelper
 
     if user.blank?
       # hash = Digest::MD5.hexdigest("") => d41d8cd98f00b204e9800998ecf8427e
-      return image_tag("avatar/#{size}.png", :class => "uface")
+      return image_tag("avatar/#{size}.png", class: "uface")
     end
 
     if user[:avatar].blank?
       default_url = asset_path("avatar/#{size}.png")
       img_src = "#{Setting.gravatar_proxy}/avatar/#{user.email_md5}.png?s=#{width * 2}&d=404"
-      img = image_tag(img_src, :class => "uface", :style => "width:#{width}px;height:#{width}px;")
+      img = image_tag(img_src, class: "uface", style: "width:#{width}px;height:#{width}px;")
     else
-      img = image_tag(user.avatar.url(user_avatar_size_name_for_2x(size)), :class => "uface", :style => "width:#{width}px;height:#{width}px;")
+      img = image_tag(user.avatar.url(user_avatar_size_name_for_2x(size)), class: "uface", style: "width:#{width}px;height:#{width}px;")
     end
 
     if link
-      raw %(<a href="#{user_path(user.login)}">#{img}</a>)
+      link_tag(raw(img), user_path(user.login))
     else
       raw img
     end
   end
 
   def render_user_join_time(user)
-    I18n.l(user.created_at.to_date, :format => :long)
+    I18n.l(user.created_at.to_date, format: :long)
   end
 
   def render_user_tagline(user)
@@ -73,23 +73,23 @@ module UsersHelper
   end
 
   def render_user_github_url(user)
-    link_to(user.github_url, user.github_url, :target => "_blank", :rel => "nofollow")
+    link_to(user.github_url, user.github_url, target: "_blank", rel: "nofollow")
   end
 
   def render_user_personal_website(user)
     website = user.website[/^https?:\/\//] ? user.website : "http://" + user.website
-    link_to(website, website, :target => "_blank", :class => "url", :rel => "nofollow")
+    link_to(website, website, target: "_blank", class: "url", rel: "nofollow")
   end
 
   def render_user_level_tag(user)
     if admin?(user)
-      content_tag(:span, t("common.admin_user"), :class => "label warning role")
+      content_tag(:span, t("common.admin_user"), class: "label warning role")
     elsif wiki_editor?(user)
-      content_tag(:span, t("common.vip_user"), :class => "label success role")
+      content_tag(:span, t("common.vip_user"), class: "label success role")
     elsif user.newbie?
-      content_tag(:span, t("common.newbie_user"), :class => "label role")
+      content_tag(:span, t("common.newbie_user"), class: "label role")
     else
-      content_tag(:span,  t("common.normal_user"), :class => "label role")
+      content_tag(:span, t("common.normal_user"), class: "label role")
     end
   end
 

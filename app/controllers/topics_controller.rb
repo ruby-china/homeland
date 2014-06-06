@@ -13,7 +13,7 @@ class TopicsController < ApplicationController
 
     @topics = Topic.last_actived.without_hide_nodes.where(:_id.nin => suggest_topic_ids)
     @topics = @topics.fields_for_list.includes(:user)
-    @topics = @topics.paginate(page: params[:page], per_page: 15, total_entries: 1500)
+    @topics = @topics.paginate(page: params[:page], per_page: 15)
 
     set_seo_meta '', "#{Setting.app_name}#{t("menu.topics")}"
     drop_breadcrumb t('topics.topic_list.hot_topic')
@@ -42,7 +42,7 @@ class TopicsController < ApplicationController
   %W(no_reply popular).each do |name|
     define_method(name) do
       @topics = Topic.send(name.to_sym).last_actived.fields_for_list.includes(:user)
-      @topics = @topics.paginate(page: params[:page], per_page: 15, total_entries: 1500)
+      @topics = @topics.paginate(page: params[:page], per_page: 15)
 
       drop_breadcrumb t("topics.topic_list.#{name}")
       set_seo_meta [t("topics.topic_list.#{name}"), t('menu.topics')].join(' &raquo; ')
@@ -52,7 +52,7 @@ class TopicsController < ApplicationController
 
   def recent
     @topics = Topic.recent.fields_for_list.includes(:user)
-    @topics = @topics.paginate(page: params[:page], per_page: 15, total_entries: 1500)
+    @topics = @topics.paginate(page: params[:page], per_page: 15)
     drop_breadcrumb t('topics.topic_list.recent')
     set_seo_meta [t('topics.topic_list.recent'), t('menu.topics')].join(' &raquo; ')
     render action: 'index'
@@ -60,7 +60,7 @@ class TopicsController < ApplicationController
 
   def excellent
     @topics = Topic.excellent.recent.fields_for_list.includes(:user)
-    @topics = @topics.paginate(page: params[:page], per_page: 15, total_entries: 1500)
+    @topics = @topics.paginate(page: params[:page], per_page: 15)
 
     drop_breadcrumb t('topics.topic_list.excellent')
     set_seo_meta [t('topics.topic_list.excellent'), t('menu.topics')].join(' &raquo; ')

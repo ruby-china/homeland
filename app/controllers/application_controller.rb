@@ -4,6 +4,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :unread_notify_count
 
+  # We put force_ssl here instead of in the config files
+  # because this would not influence the grape APIs.
+  # cf. issue #306
+  force_ssl if Rails.env.production?
+
   before_filter do
     resource = controller_name.singularize.to_sym
     method = "#{resource}_params"

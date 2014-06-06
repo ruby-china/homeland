@@ -263,7 +263,7 @@ window.Topics =
     App.atReplyable("textarea", logins)
 
     # Focus title field in new-topic page
-    $("body.topics-controller.new-action #topic_title").focus()
+    $("body[data-controller-name='topics'] #topic_title").focus()
 
 $(document).ready ->
   if $('body').data('controller-name') in ['topics', 'replies']

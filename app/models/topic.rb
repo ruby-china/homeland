@@ -160,4 +160,9 @@ class Topic
   def excellent?
     self.excellent >= 1
   end
+  
+  # 是否属于 jobs 节点
+  def jobs?
+    self.node_id == Node.jobs_id
+  end
 end

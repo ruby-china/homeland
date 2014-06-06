@@ -70,21 +70,28 @@ class TopicsController < ApplicationController
     params[:page] = @topic.last_page_with_per_page(@per_page) if params[:page].blank?
     @page = params[:page].to_i > 0 ? params[:page].to_i : 1
 
-    @replies = @topic.replies.unscoped.without_body.asc(:_id).paginate(:page => params[:page], :per_page => @per_page)
-    if current_user
-      # 找出用户 like 过的 Reply，给 JS 处理 like 功能的状态
-      @user_liked_reply_ids = []
-      @replies.each { |r| @user_liked_reply_ids << r.id if r.liked_user_ids.include?(current_user.id) }
-      # 通知处理
-      current_user.read_topic(@topic)
-      # 是否关注过
-      @has_followed = @topic.follower_ids.include?(current_user.id)
-      # 是否收藏
-      @has_favorited = current_user.favorite_topic_ids.include?(@topic.id)
-    end
+    @replies = @topic.replies.unscoped.without_body.asc(:_id)
+    @replies = @replies.paginate(:page => params[:page], :per_page => @per_page)
+    
+    check_current_user_status_for_topic
+    
     set_seo_meta "#{@topic.title} &raquo; #{t("menu.topics")}"
 
     fresh_when(etag: [@topic, @has_followed, @has_favorited, @replies, @node, @show_raw])
+  end
+  
+  def check_current_user_status_for_topic
+    return false if not current_user
+    
+    # 找出用户 like 过的 Reply，给 JS 处理 like 功能的状态
+    @user_liked_reply_ids = []
+    @replies.each { |r| @user_liked_reply_ids << r.id if r.liked_user_ids.index(current_user.id) != nil }
+    # 通知处理
+    current_user.read_topic(@topic)
+    # 是否关注过
+    @has_followed = @topic.follower_ids.index(current_user.id) == nil
+    # 是否收藏
+    @has_favorited = current_user.favorite_topic_ids.index(@topic.id) == nil
   end
 
   def new

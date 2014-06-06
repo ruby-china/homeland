@@ -2,14 +2,12 @@
 require 'will_paginate/array'
 class UsersController < ApplicationController
   before_filter :require_user, only: 'auth_unbind'
-  before_filter :set_menu_active
   before_filter :find_user, only: [:show, :topics, :favorites, :notes]
   caches_action :index, expires_in: 2.hours, layout: false
 
   def index
     @total_user_count = User.count
     @active_users = User.hot.limit(100)
-    drop_breadcrumb t('common.index')
   end
 
   def show
@@ -18,13 +16,10 @@ class UsersController < ApplicationController
     @topics = @user.topics.without_node_ids(without_node_ids).high_likes.limit(20)
     @replies = @user.replies.only(:topic_id, :body_html, :created_at).recent.includes(:topic).limit(10)
     set_seo_meta("#{@user.login}")
-    drop_breadcrumb(@user.login)
   end
 
   def topics
     @topics = @user.topics.recent.paginate(:page => params[:page], :per_page => 30)
-    drop_breadcrumb(@user.login, user_path(@user.login))
-    drop_breadcrumb(t("topics.title"))
   end
 
   def favorites
@@ -33,14 +28,10 @@ class UsersController < ApplicationController
     @topics = @topics.to_a.sort do |a, b|
       @topic_ids.index(a.id) <=> @topic_ids.index(b.id)
     end
-    drop_breadcrumb(@user.login, user_path(@user.login))
-    drop_breadcrumb(t("users.menu.favorites"))
   end
 
   def notes
     @notes = @user.notes.published.recent.paginate(:page => params[:page], :per_page => 30)
-    drop_breadcrumb(@user.login, user_path(@user.login))
-    drop_breadcrumb(t("users.menu.notes"))
   end
 
   def auth_unbind
@@ -72,8 +63,6 @@ class UsersController < ApplicationController
       render_404
       return
     end
-
-    drop_breadcrumb(@location.name)
   end
 
   protected
@@ -86,10 +75,6 @@ class UsersController < ApplicationController
 
     @user = User.where(:login => /^#{params[:id]}$/i).first
     render_404 if @user.nil?
-  end
-
-  def set_menu_active
-    @current = @current = ['/users']
   end
 
 end

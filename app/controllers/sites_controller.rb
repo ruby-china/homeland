@@ -4,14 +4,11 @@ class SitesController < ApplicationController
 
   def index
     @site_nodes = SiteNode.all.desc('sort')
-    drop_breadcrumb(t('menu.sites'))
     set_seo_meta("Ruby #{t("menu.sites")}")
   end
 
   def new
     @site = Site.new
-    drop_breadcrumb(t('menu.sites'), sites_path)
-    drop_breadcrumb(t('common.create'))
   end
 
   def create
@@ -20,8 +17,6 @@ class SitesController < ApplicationController
     if @site.save
       redirect_to(sites_path, notice: '提交成功。谢谢。')
     else
-      drop_breadcrumb(t('menu.sites'), sites_path)
-      drop_breadcrumb(t('common.create'))
       render action: 'new'
     end
   end

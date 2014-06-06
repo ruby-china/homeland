@@ -19,8 +19,6 @@ class RepliesController < ApplicationController
 
   def edit
     @reply = Reply.find(params[:id])
-    drop_breadcrumb(t('menu.topics'), topics_path)
-    drop_breadcrumb t('reply.edit_reply')
   end
 
   def update

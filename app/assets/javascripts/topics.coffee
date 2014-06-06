@@ -167,12 +167,9 @@ window.Topics =
   favorite : (el) ->
     topic_id = $(el).data("id")
     if $(el).hasClass("small_bookmarked")
-      hash =
-        type : "unfavorite"
       $.ajax
-        url : "/topics/#{topic_id}/favorite"
-        data : hash
-        type : "POST"
+        url : "/topics/#{topic_id}/unfavorite"
+        type : "DELETE"
       $(el).attr("title","收藏")
       $(el).attr("class","icon small_bookmark")
     else
@@ -187,7 +184,7 @@ window.Topics =
     if followed
       $.ajax
         url : "/topics/#{topic_id}/unfollow"
-        type : "POST"
+        type : "DELETE"
       $(el).data("followed", false)
       $("i",el).attr("class", "icon small_follow")
     else

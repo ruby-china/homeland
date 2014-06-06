@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
 
   before_filter do
     resource = controller_name.singularize.to_sym
+    puts "---------------- #{controller_name}"
     method = "#{resource}_params"
     params[resource] &&= send(method) if respond_to?(method, true)
 
@@ -13,6 +14,16 @@ class ApplicationController < ActionController::Base
       devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(*User::ACCESSABLE_ATTRS) }
       devise_parameter_sanitizer.for(:account_update) { |u| u.permit(*User::ACCESSABLE_ATTRS) }
       devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(*User::ACCESSABLE_ATTRS) }
+    end
+  end
+  
+  before_filter :set_active_menu
+  def set_active_menu
+    @current = case controller_name
+    when "pages"
+      ["/wiki"]
+    else
+      ["/#{controller_name}"]
     end
   end
 
@@ -30,15 +41,7 @@ class ApplicationController < ActionController::Base
     render template: "/errors/#{fname}", format: [:html],
            handler: [:erb], status: status, layout: 'application'
   end
-
-  def drop_breadcrumb(title = nil, url = nil)
-    title ||= @page_title
-    url ||= url_for
-    if title
-      @breadcrumbs.push(%(<a href="#{url}" itemprop="url"><span itemprop="title">#{title}</span></a>).html_safe)
-    end
-  end
-
+  
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to topics_path, alert: t('common.access_denied')
   end

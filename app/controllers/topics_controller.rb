@@ -1,11 +1,8 @@
 # coding: utf-8
 class TopicsController < ApplicationController
   load_and_authorize_resource only: [:new, :edit, :create, :update, :destroy,
-                                     :favorite, :follow, :unfollow, :suggest, :unsuggest]
-
-  before_filter :set_menu_active
+                                     :favorite, :unfavorite, :follow, :unfollow, :suggest, :unsuggest]
   caches_action :feed, :node_feed, expires_in: 1.hours
-  before_filter :init_base_breadcrumb
 
   def index
     @suggest_topics = Topic.without_hide_nodes.suggest.limit(3)
@@ -16,7 +13,6 @@ class TopicsController < ApplicationController
     @topics = @topics.paginate(page: params[:page], per_page: 15, total_entries: 1500)
 
     set_seo_meta '', "#{Setting.app_name}#{t("menu.topics")}"
-    drop_breadcrumb t('topics.topic_list.hot_topic')
   end
 
   def feed
@@ -29,7 +25,6 @@ class TopicsController < ApplicationController
     @topics = @node.topics.last_actived.fields_for_list
     @topics = @topics.includes(:user).paginate(page: params[:page], per_page: 15)
     set_seo_meta "#{@node.name} &raquo; #{t("menu.topics")}", "#{Setting.app_name}#{t("menu.topics")}#{@node.name}", @node.summary
-    drop_breadcrumb "#{@node.name}"
     render action: 'index'
   end
 
@@ -44,7 +39,6 @@ class TopicsController < ApplicationController
       @topics = Topic.send(name.to_sym).last_actived.fields_for_list.includes(:user)
       @topics = @topics.paginate(page: params[:page], per_page: 15, total_entries: 1500)
 
-      drop_breadcrumb t("topics.topic_list.#{name}")
       set_seo_meta [t("topics.topic_list.#{name}"), t('menu.topics')].join(' &raquo; ')
       render action: 'index'
     end
@@ -53,7 +47,6 @@ class TopicsController < ApplicationController
   def recent
     @topics = Topic.recent.fields_for_list.includes(:user)
     @topics = @topics.paginate(page: params[:page], per_page: 15, total_entries: 1500)
-    drop_breadcrumb t('topics.topic_list.recent')
     set_seo_meta [t('topics.topic_list.recent'), t('menu.topics')].join(' &raquo; ')
     render action: 'index'
   end
@@ -62,7 +55,6 @@ class TopicsController < ApplicationController
     @topics = Topic.excellent.recent.fields_for_list.includes(:user)
     @topics = @topics.paginate(page: params[:page], per_page: 15, total_entries: 1500)
 
-    drop_breadcrumb t('topics.topic_list.excellent')
     set_seo_meta [t('topics.topic_list.excellent'), t('menu.topics')].join(' &raquo; ')
     render action: 'index'
   end
@@ -91,8 +83,6 @@ class TopicsController < ApplicationController
       @has_favorited = current_user.favorite_topic_ids.include?(@topic.id)
     end
     set_seo_meta "#{@topic.title} &raquo; #{t("menu.topics")}"
-    drop_breadcrumb "#{@node.try(:name)}", node_topics_path(@node.try(:id))
-    drop_breadcrumb t('topics.read_topic')
 
     fresh_when(etag: [@topic, @has_followed, @has_favorited, @replies, @node, @show_raw])
   end
@@ -103,19 +93,15 @@ class TopicsController < ApplicationController
       @topic.node_id = params[:node]
       @node = Node.find_by_id(params[:node])
       render_404 if @node.blank?
-
-      drop_breadcrumb("#{@node.name}", node_topics_path(@node.id))
     end
 
-    drop_breadcrumb t('topics.post_topic')
     set_seo_meta "#{t('topics.post_topic')} &raquo; #{t('menu.topics')}"
   end
 
   def edit
     @topic = Topic.find(params[:id])
     @node = @topic.node
-    drop_breadcrumb "#{@node.name}", node_topics_path(@node.id)
-    drop_breadcrumb t('topics.edit_topic')
+
     set_seo_meta "#{t('topics.edit_topic')} &raquo; #{t('menu.topics')}"
   end
 
@@ -167,11 +153,12 @@ class TopicsController < ApplicationController
   end
 
   def favorite
-    if params[:type] == 'unfavorite'
-      current_user.unfavorite_topic(params[:id])
-    else
-      current_user.favorite_topic(params[:id])
-    end
+    current_user.favorite_topic(params[:id])
+    render text: '1'
+  end
+  
+  def unfavorite
+    current_user.unfavorite_topic(params[:id])
     render text: '1'
   end
 
@@ -199,24 +186,7 @@ class TopicsController < ApplicationController
     redirect_to @topic, success: '加精已经取消。'
   end
 
-  protected
-
-  def set_menu_active
-    @current = @current = ['/topics']
-  end
-
-  def init_base_breadcrumb
-    drop_breadcrumb t('menu.topics'), topics_path
-  end
-
   private
-
-  def init_list_sidebar
-    if !fragment_exist? 'topic/init_list_sidebar/hot_nodes'
-      @hot_nodes = Node.hots.limit(10)
-    end
-    set_seo_meta t('menu.topics')
-  end
 
   def topic_params
     params.require(:topic).permit(:title, :body, :node_id)

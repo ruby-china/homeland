@@ -17,6 +17,7 @@ class Ability
         can :create, Topic
       end
       can :favorite, Topic
+      can :unfavorite, Topic
       can :follow, Topic
       can :unfollow, Topic
       can :update, Topic do |topic|

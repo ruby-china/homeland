@@ -46,8 +46,9 @@ Rails.application.routes.draw do
     member do
       post :reply
       post :favorite
+      delete :unfavorite
       post :follow
-      post :unfollow
+      delete :unfollow
       patch :suggest
       delete :unsuggest
     end

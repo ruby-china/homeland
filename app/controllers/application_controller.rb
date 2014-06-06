@@ -44,19 +44,7 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to topics_path, alert: t('common.access_denied')
   end
-
-  def notice_success(msg)
-    flash[:notice] = msg
-  end
-
-  def notice_error(msg)
-    flash[:notice] = msg
-  end
-
-  def notice_warning(msg)
-    flash[:notice] = msg
-  end
-
+  
   def set_seo_meta(title = '', meta_keywords = '', meta_description = '')
     @page_title = "#{title}" if title.length > 0
     @meta_keywords = meta_keywords

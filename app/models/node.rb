@@ -36,4 +36,13 @@ class Node
       Node.all.collect { |n| [n.name,n.id] }
     end
   end
+  
+  def self.jobs_id
+    25
+  end
+  
+  # 是否为 jobs 节点
+  def jobs?
+    self.id == self.class.jobs_id
+  end
 end

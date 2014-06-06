@@ -74,6 +74,7 @@ class TopicsController < ApplicationController
     @replies = @replies.paginate(:page => params[:page], :per_page => @per_page)
     
     check_current_user_status_for_topic
+    set_special_node_active_menu
     
     set_seo_meta "#{@topic.title} &raquo; #{t("menu.topics")}"
 
@@ -92,6 +93,13 @@ class TopicsController < ApplicationController
     @has_followed = @topic.follower_ids.index(current_user.id) == nil
     # 是否收藏
     @has_favorited = current_user.favorite_topic_ids.index(@topic.id) == nil
+  end
+  
+  def set_special_node_active_menu
+    case @node.id
+    when Node.jobs_id
+      @current = ["/jobs"]
+    end
   end
 
   def new

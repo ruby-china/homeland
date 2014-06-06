@@ -1,6 +1,6 @@
 # coding: utf-8
 class PhotoUploader < BaseUploader
-  process :resize_to_limit => [1280, nil]
+  process resize_to_limit: [1280, nil]
 
   # Override the filename of the uploaded files:
   def filename

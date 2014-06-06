@@ -112,4 +112,67 @@ describe Topic do
     end
   end
   
+  describe ".update_last_reply" do
+    it "should work" do
+      t = Factory(:topic)
+      old_updated_at = t.updated_at
+      r = Factory(:reply, topic: t)
+      expect(t.update_last_reply(r)).to be_true
+      expect(t.replied_at).to eq r.created_at
+      expect(t.last_reply_id).to eq r.id
+      expect(t.last_reply_user_id).to eq r.user_id
+      expect(t.last_reply_user_login).to eq r.user.login
+      expect(t.last_active_mark).not_to be_nil
+      expect(t.updated_at).not_to eq old_updated_at
+    end
+    
+    it "should update with nil when have :force" do
+      t = Factory(:topic)
+      r = Factory(:reply, topic: t)
+      t.update_last_reply(nil, force: true)
+      expect(t.replied_at).to be_nil
+      expect(t.last_reply_id).to be_nil
+      expect(t.last_reply_user_id).to be_nil
+      expect(t.last_reply_user_login).to be_nil
+      expect(t.last_active_mark).not_to be_nil
+    end
+  end
+  
+  describe ".update_deleted_last_reply" do
+    let(:t) { Factory(:topic) }
+    context "when have last Reply and param it that Reply" do
+      it "last reply should going to previous Reply" do
+        r0 = Factory(:reply, topic: t)
+        r1 = Factory(:reply, topic: t)
+        expect(t.last_reply_id).to eq r1.id
+        t.should_receive(:update_last_reply).with(r0, force: true)
+        t.update_deleted_last_reply(r1)
+      end
+      
+      it "last reply will be nil" do
+        r = Factory(:reply, topic: t)
+        expect(t.update_deleted_last_reply(r)).to be_true
+        t.reload
+        expect(t.last_reply_id).to be_nil
+        expect(t.last_reply_user_login).to be_nil
+        expect(t.last_reply_user_id).to be_nil
+      end
+    end
+    
+    context "when param is nil" do
+      it "should work" do
+        expect(t.update_deleted_last_reply(nil)).to be_false
+      end
+    end
+    
+    context "when last reply is not equal param" do
+      it "should do nothing" do
+        r0 = Factory(:reply, topic: t)
+        r1 = Factory(:reply, topic: t)
+        expect(t.update_deleted_last_reply(r0)).to be_false
+        expect(t.last_reply_id).to eq r1.id
+      end
+    end
+  end
+  
 end

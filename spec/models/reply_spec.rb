@@ -124,4 +124,12 @@ describe Reply do
       topic.replies.create(:body => "mark", :user => user).should have(:no).errors_on(:body)
     end
   end
+  
+  describe "after_destroy" do
+    it "should call topic.update_deleted_last_reply" do
+      r = Factory(:reply)
+      r.topic.should_receive(:update_deleted_last_reply).with(r).once
+      r.destroy
+    end
+  end
 end

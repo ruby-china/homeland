@@ -37,7 +37,7 @@ class Topic
 
   # 临时存储检测用户是否读过的结果
   attr_accessor :read_state
-  
+
   belongs_to :user, :inverse_of => :topics
   counter_cache :name => :user, :inverse_of => :topics
   belongs_to :node
@@ -85,8 +85,6 @@ class Topic
     SiteConfig.node_ids_hide_in_topics_index.to_s.split(",").collect { |id| id.to_i }
   end
 
-
-
   before_save :store_cache_fields
   def store_cache_fields
     self.node_name = self.node.try(:name) || ""
@@ -114,14 +112,25 @@ class Topic
     true
   end
 
-  def update_last_reply(reply)
+  def update_last_reply(reply, opts = {})
     # replied_at 用于最新回复的排序，如果帖着创建时间在一个月以前，就不再往前面顶了
+    return false if reply.blank? && !opts[:force]
+    
     self.last_active_mark = Time.now.to_i if self.created_at > 1.month.ago
-    self.replied_at = Time.now
-    self.last_reply_id = reply.id
-    self.last_reply_user_id = reply.user_id
-    self.last_reply_user_login = reply.user.try(:login) || nil
+    self.replied_at = reply.try(:created_at)
+    self.last_reply_id = reply.try(:id)
+    self.last_reply_user_id = reply.try(:user_id)
+    self.last_reply_user_login = reply.try(:user_login)
     self.save
+  end
+  
+  # 更新最后更新人，当最后个回帖删除的时候
+  def update_deleted_last_reply(deleted_reply)
+    return false if deleted_reply.blank?
+    return false if self.last_reply_user_id != deleted_reply.user_id
+    
+    previous_reply = self.replies.where(:_id.nin => [deleted_reply.id]).recent.first
+    self.update_last_reply(previous_reply, force: true)
   end
 
   # 删除并记录删除人

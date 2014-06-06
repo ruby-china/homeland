@@ -48,7 +48,8 @@ class Reply
   after_destroy :update_parent_topic_updated_at
   def update_parent_topic_updated_at
     if not self.topic.blank?
-      self.topic.touch
+      self.topic.update_deleted_last_reply(self)
+      true
     end
   end
   

@@ -7,7 +7,7 @@ class Notification::Mention < Notification::Base
   def notify_hash
     return if self.mentionable.blank?
     {
-      title: ["#{self.mentionable.user_login} ", '提及你: '].join(''),
+      title: [self.mentionable.user_login, '提及你：'].join(' '),
       content: self.mentionable_body[0, 30],
       content_path: self.content_path
     }

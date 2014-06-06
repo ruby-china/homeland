@@ -18,7 +18,7 @@ describe Notification::Mention do
   describe ".notify_hash" do
     it "should work" do
       n_topic.notify_hash.keys.should == [:title,:content,:content_path]
-      n_topic.notify_hash[:title].should == ["#{n_topic.mentionable.user_login} ","提及你: "].join("")
+      n_topic.notify_hash[:title].should == "#{n_topic.mentionable.user_login} 提及你："
       n_topic.notify_hash[:content].should == n_topic.mentionable_body[0,30]
       n_topic.notify_hash[:content_path].should == n_topic.content_path
     end

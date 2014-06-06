@@ -14,14 +14,14 @@ class Topic
   field :title
   field :body
   field :body_html
-  field :last_reply_id, :type => Integer
-  field :replied_at , :type => DateTime
+  field :last_reply_id, type: Integer
+  field :replied_at , type: DateTime
   field :source
   field :message_id
-  field :replies_count, :type => Integer, :default => 0
+  field :replies_count, type: Integer, default: 0
   # 回复过的人的 ids 列表
-  field :follower_ids, :type => Array, :default => []
-  field :suggested_at, :type => DateTime
+  field :follower_ids, type: Array, default: []
+  field :suggested_at, type: DateTime
   # 最后回复人的用户名 - cache 字段用于减少列表也的查询
   field :last_reply_user_login
   # 节点名称 - cache 字段用于减少列表也的查询
@@ -29,36 +29,36 @@ class Topic
   # 删除人
   field :who_deleted
   # 用于排序的标记
-  field :last_active_mark, :type => Integer
+  field :last_active_mark, type: Integer
   # 是否锁定节点
-  field :lock_node, :type => Mongoid::Boolean, :default => false
+  field :lock_node, type: Mongoid::Boolean, default: false
   # 精华帖 0 否， 1 是
   field :excellent, type: Integer, default: 0
 
   # 临时存储检测用户是否读过的结果
   attr_accessor :read_state
 
-  belongs_to :user, :inverse_of => :topics
-  counter_cache :name => :user, :inverse_of => :topics
+  belongs_to :user, inverse_of: :topics
+  counter_cache name: :user, inverse_of: :topics
   belongs_to :node
-  counter_cache :name => :node, :inverse_of => :topics
-  belongs_to :last_reply_user, :class_name => 'User'
-  belongs_to :last_reply, :class_name => 'Reply'
-  has_many :replies, :dependent => :destroy
+  counter_cache name: :node, inverse_of: :topics
+  belongs_to :last_reply_user, class_name: 'User'
+  belongs_to :last_reply, class_name: 'Reply'
+  has_many :replies, dependent: :destroy
 
   validates_presence_of :user_id, :title, :body, :node
 
-  index :node_id => 1
-  index :user_id => 1
-  index :last_active_mark => -1
-  index :likes_count => 1
-  index :suggested_at => 1
-  index :excellent => -1
+  index node_id: 1
+  index user_id: 1
+  index last_active_mark: -1
+  index likes_count: 1
+  index suggested_at: 1
+  index excellent: -1
 
-  counter :hits, :default => 0
+  counter :hits, default: 0
 
-  delegate :login, :to => :user, :prefix => true, :allow_nil => true
-  delegate :body, :to => :last_reply, :prefix => true, :allow_nil => true
+  delegate :login, to: :user, prefix: true, allow_nil: true
+  delegate :body, to: :last_reply, prefix: true, allow_nil: true
 
   # scopes
   scope :last_actived, -> {  desc(:last_active_mark) }
@@ -67,13 +67,13 @@ class Topic
   scope :fields_for_list, -> { without(:body,:body_html) }
   scope :high_likes, -> { desc(:likes_count, :_id) }
   scope :high_replies, -> { desc(:replies_count, :_id) }
-  scope :no_reply, -> { where(:replies_count => 0) }
+  scope :no_reply, -> { where(replies_count: 0) }
   scope :popular, -> { where(:likes_count.gt => 5) }
   scope :without_node_ids, Proc.new { |ids| where(:node_id.nin => ids) }
   scope :excellent, -> { where(:excellent.gte => 1) }
 
   def self.find_by_message_id(message_id)
-    where(:message_id => message_id).first
+    where(message_id: message_id).first
   end
 
   # 排除隐藏的节点

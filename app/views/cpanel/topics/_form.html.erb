@@ -1,16 +1,16 @@
 <%= simple_form_for([:cpanel,@topic]) do |f| %>
-  <%= render 'shared/error_messages', :target => @topic %>
+  <%= render 'shared/error_messages', target: @topic %>
   <fieldset>
     <legend></legend>
 
-    <%= f.input :title, :input_html => { :class => "span10 "} %>
+    <%= f.input :title, input_html: { class: "span10" } %>
     <%= f.input :node_id %>
     <%= f.input :user_id %>
     <%= f.input :last_reply_user_id %>
     <%= f.input :source %>
-    <%= f.input :body, :as => :text, :input_html => { :class => "span8", :rows => "10"} %>
+    <%= f.input :body, as: :text, input_html: { class: "span8", rows: "10"} %>
     <div class="form-actions">
-      <%= f.submit t("common.save"), :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %>
+      <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving") %>
       or
       <%= link_to 'Back', cpanel_topics_path %>
     </div>

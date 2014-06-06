@@ -11,7 +11,7 @@
   <tr>
     <td><%= site_config.key %></td>
     <td><%= t("site_config.#{site_config.key}") %></td>
-    <td><%= link_to '', edit_cpanel_site_config_path(site_config), :class => "icon small_edit" %></td>
+    <td><%= link_to '', edit_cpanel_site_config_path(site_config), class: "icon small_edit" %></td>
   </tr>
 <% end %>
 </table>

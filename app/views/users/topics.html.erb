@@ -1,9 +1,9 @@
 <%= render "menu" %>
 <div class="content">
   <div class="box">
-    <%= render "topics", :topics => @topics %>
+    <%= render "topics", topics: @topics %>
     <%= will_paginate @topics %>
   </div>
 </div>
 
-<%= render "sidebar", :user => @user %>
+<%= render "sidebar", user: @user %>

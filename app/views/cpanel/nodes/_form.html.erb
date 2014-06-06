@@ -1,13 +1,13 @@
 <%= simple_form_for([:cpanel,@node]) do |f| %>
-  <%= render 'shared/error_messages', :target => @node %>
+  <%= render 'shared/error_messages', target: @node %>
   <fieldset>
     <legend></legend>
     <%= f.input :name %>
-    <%= f.input :section_id, :collection => Section.all.collect { |s| [s.name,s.id] } %>
+    <%= f.input :section_id, collection: Section.all.collect { |s| [s.name,s.id] } %>
     <%= f.input :sort %>
-    <%= f.input :summary, as: :text, :input_html => { style: "width:500px; height:200px;"} %>
+    <%= f.input :summary, as: :text, input_html: { style: "width:500px; height:200px;"} %>
     <div class="form-actions">
-      <%= f.submit t("common.save"), :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %>
+      <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving") %>
       <%= link_to 'Back', cpanel_nodes_path %>
     </div>
   </fieldset>

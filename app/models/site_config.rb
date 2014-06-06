@@ -10,7 +10,7 @@ class SiteConfig
   field :key
   field :value
 
-  index :key => 1
+  index key: 1
 
   validates_presence_of :key
   validates_uniqueness_of :key
@@ -26,7 +26,7 @@ class SiteConfig
       if item = find_by_key(var_name)
         item.update_attribute(:value, value)
       else
-        SiteConfig.create(:key => var_name, :value => value)
+        SiteConfig.create(key: var_name, value: value)
       end
     else
       Rails.cache.fetch("site_config:#{method}") do
@@ -45,10 +45,10 @@ class SiteConfig
   end
 
   def self.find_by_key(key)
-    where(:key => key.to_s).first
+    where(key: key.to_s).first
   end
 
   def self.save_default(key, value)
-    create(:key => key, :value => value.to_s) unless find_by_key(key)
+    create(key: key, value: value.to_s) unless find_by_key(key)
   end
 end

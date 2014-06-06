@@ -1,13 +1,13 @@
 <%= simple_form_for([:cpanel,@user]) do |f| %>
-  <%= render 'shared/error_messages', :target => @user %>
+  <%= render 'shared/error_messages', target: @user %>
   <%= f.input :login %>
   <%= f.input :name %>
-  <%= f.input :email, :as => :email, :input_html => { :class => "xxlarge" } %>
+  <%= f.input :email, as: :email, input_html: { class: "xxlarge" } %>
   <%= f.input :location %>
   <%= f.input :github %>
-  <%= f.input :tagline, :input_html => { :class => "span8" } %>
-  <%= f.input :bio, :as => :text, :input_html => { :class => "span8", :style => "height:60px;" } %>
-  <%= f.input :website, :as => :url, :input_html => { :class => "xxlarge" } %>
+  <%= f.input :tagline, input_html: { class: "span8" } %>
+  <%= f.input :bio, as: :text, input_html: { class: "span8", style: "height:60px;" } %>
+  <%= f.input :website, as: :url, input_html: { class: "xxlarge" } %>
   <%= f.input :avatar %>
   <div class="control-group">
     <label class="control-label"><%= t("common.avatar")%></label>
@@ -15,17 +15,17 @@
       <%= user_avatar_tag(@user, :large) %>
     </div>
   </div>
-  <%= f.input :verified, :as => :boolean, :hint => t("cpanel.users.trust_user_can_modify_wiki") %>
-  <%= f.input :state, :as => :select, :collection => User::STATE.collect { |s| [s[0],s[1]] } %>
-  <%= f.input :guest, :as => :boolean, :readonly => true %>
-  <%= f.input :sign_in_count, :readonly => true %>
-  <%= f.input :last_sign_in_at, :readonly => true %>
-  <%= f.input :current_sign_in_at, :readonly => true %>
-  <%= f.input :last_sign_in_ip, :readonly => true %>
-  <%= f.input :current_sign_in_ip, :readonly => true %>
+  <%= f.input :verified, as: :boolean, hint: t("cpanel.users.trust_user_can_modify_wiki") %>
+  <%= f.input :state, as: :select, collection: User::STATE.collect { |s| [s[0],s[1]] } %>
+  <%= f.input :guest, as: :boolean, readonly: true %>
+  <%= f.input :sign_in_count, readonly: true %>
+  <%= f.input :last_sign_in_at, readonly: true %>
+  <%= f.input :current_sign_in_at, readonly: true %>
+  <%= f.input :last_sign_in_ip, readonly: true %>
+  <%= f.input :current_sign_in_ip, readonly: true %>
   <% if not @user.authorizations.blank? %>
   <div class="control-group">
-    <%= f.label :authorizations, :class => "control-label" %>
+    <%= f.label :authorizations, class: "control-label" %>
     <table class="controls" style="display:block;">
       <% @user.authorizations.each do |auth| %>
         <tr>
@@ -39,10 +39,10 @@
   <div class="form-actions">
     <% if @user.state != User::STATE[:deleted] %>
       <div class="pull-right">
-        <%= link_to '删除此用户', cpanel_user_path(@user), 'data-confirm' => '警告！此动作无法撤销，确定要删除么?', :method => :delete, :class => "btn btn-danger"  %>
+        <%= link_to '删除此用户', cpanel_user_path(@user), 'data-confirm' => '警告！此动作无法撤销，确定要删除么?', method: :delete, class: "btn btn-danger"  %>
       </div>
     <% end %>
-    <%= f.submit t("common.save"), :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %>
+    <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving") %>
     或者
     <%= link_to 'Back', cpanel_users_path %>
   </div>

@@ -11,9 +11,9 @@
       <ul class="list">
       <% @notes.each do |note| %>
         <li>
-          <div><a class="title" href="<%= note_path(note.id) %>"><i class="icon-stop"></i> <%= truncate(note.title.gsub('#',''), :length => 50) %></a> <%= raw '<span class="label warning">公开</span>' if note.publish %></div>
+          <div><a class="title" href="<%= note_path(note.id) %>"><i class="icon-stop"></i> <%= truncate(note.title.gsub('#',''), length: 50) %></a> <%= raw '<span class="label warning">公开</span>' if note.publish %></div>
           <div class="info">
-            <%= note.word_count %> <%= t("notes.chars") %>, <%= sanitize t("notes.created_at", :time => timeago(note.created_at)) %> , <%= note.changes_count %> <%= t("notes.times_edit") %>
+            <%= note.word_count %> <%= t("notes.chars") %>, <%= sanitize t("notes.created_at", time: timeago(note.created_at)) %> , <%= note.changes_count %> <%= t("notes.times_edit") %>
           </div>
         </li>
       <% end %>

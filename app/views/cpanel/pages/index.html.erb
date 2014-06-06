@@ -18,14 +18,14 @@
   <tr class="<%= 'deleted' if !page.deleted_at.blank? %>">
     <td class="first"><%= page.id %></td>
     <td><%= page.slug %></td>
-    <td><%= truncate(page.title,:length => 30) %></td>
-    <td><%= l page.created_at,:format => :short %></td>
+    <td><%= truncate(page.title, length: 30) %></td>
+    <td><%= l page.created_at, format: :short %></td>
     <td><%= page.locked %></td>
     <td><%= page.version %></td>
     <td>
       <%= link_to '历史', cpanel_page_versions_path(page.id) %>
-    <%= link_to '', edit_cpanel_page_path(page), :class => "icon small_edit" %>
-    <%= link_to '', cpanel_page_path(page), 'data-confirm' => 'Are you sure?', :method => :delete, :class => "icon small_delete" %></td>
+    <%= link_to '', edit_cpanel_page_path(page), class: "icon small_edit" %>
+    <%= link_to '', cpanel_page_path(page), 'data-confirm' => 'Are you sure?', method: :delete, class: "icon small_delete" %></td>
   </tr>
 <% end %>
 </table>

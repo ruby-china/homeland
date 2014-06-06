@@ -2,16 +2,16 @@
   <div class="pull-right avatar_large">
     <%= user_avatar_tag(@topic.user, :normal) %>
   </div>
-  <h1 class="entry-title"><%= truncate(topic.title, :length => 100) %></h1>
+  <h1 class="entry-title"><%= truncate(topic.title, length: 100) %></h1>
   <div class="info leader">
     <%= render_node_name(topic.node_name,topic.node_id) %>
      · 
-    <%= user_name_tag(topic.user, :data => {:author => true}) %>
+    <%= user_name_tag(topic.user, data: { author: true }) %>
      · 
-    <%= sanitize t("common.created_at", :time => timeago(topic.created_at))%>
+    <%= sanitize t("common.created_at", time: timeago(topic.created_at))%>
     <% if !topic.last_reply_user_login.blank? %>
        · 
-      <%= t("common.last_by")%> <%= user_name_tag(topic.last_reply_user_login) %> <%= sanitize t("common.reply_at", :time => timeago(topic.replied_at))%>
+      <%= t("common.last_by")%> <%= user_name_tag(topic.last_reply_user_login) %> <%= sanitize t("common.reply_at", time: timeago(topic.replied_at))%>
     <% end %>
      · 
     <%= topic.hits %><%= t("common.read_times")%>

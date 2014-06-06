@@ -1,8 +1,8 @@
 class Cpanel::CommentsController < Cpanel::ApplicationController
-  respond_to :js, :html, :only => [:destroy]
+  respond_to :js, :html, only: [:destroy]
 
   def index
-    @comments = Comment.recent.paginate(:page => params[:page], :per_page => 20)
+    @comments = Comment.recent.paginate(page: params[:page], per_page: 20)
   end
 
   def edit
@@ -24,7 +24,7 @@ class Cpanel::CommentsController < Cpanel::ApplicationController
     @comment.destroy
     respond_with do |format|
       format.html { redirect_to cpanel_comments_path }
-      format.js { render :layout => false }
+      format.js { render layout: false }
     end
   end
 end

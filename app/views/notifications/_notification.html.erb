@@ -1,8 +1,8 @@
 <%= cache(["notifications",notification]) do %>
 <tr id="<%= notification.anchor %>">
-  <%= render :partial => "notifications/#{notification.class.name.underscore}", :locals => {:notification => notification} %>
+  <%= render partial: "notifications/#{notification.class.name.underscore}", locals: { notification: notification } %>
   <td class="last">
-    <%= link_to t("common.delete"), notification_path(notification), :method => :delete, :remote => true, :class => 'label delete' %>
+    <%= link_to t("common.delete"), notification_path(notification), method: :delete, remote: true, class: 'label delete' %>
   </td>
 </tr>
 <% end %>

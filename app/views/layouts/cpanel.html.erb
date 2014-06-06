@@ -16,9 +16,9 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </a>
-        <%= link_to("控制台", cpanel_root_path, :class => "brand span2")%>
+        <%= link_to("控制台", cpanel_root_path, class: "brand span2") %>
         <div class="nav-collapse">
-          <%= render_list :class => "nav" do |li|
+          <%= render_list class: "nav" do |li|
             li << link_to(t("cpanel.menu.root_path"), cpanel_root_path)
             li << link_to(t("cpanel.menu.site_configs"), cpanel_site_configs_path )
             li << link_to(t("cpanel.menu.users"),cpanel_users_path)

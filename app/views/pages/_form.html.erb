@@ -1,10 +1,10 @@
-<%= simple_form_for @page, :html => { :class => 'page_form' } do |f| %>
+<%= simple_form_for @page, html: { class: 'page_form' } do |f| %>
   <fieldset>
     <legend><%= t("pages.edit_wiki_page")%></legend>
-    <%= render "shared/error_messages", :target => @page %>
+    <%= render "shared/error_messages", target: @page %>
 
-    <%= f.input :slug, :hint => "http://#{Setting.domain}/wiki/:slug"%>
-    <%= f.input :title, :input_html => { :class => "xxlarge" } %>
+    <%= f.input :slug, hint: "http://#{Setting.domain}/wiki/:slug"%>
+    <%= f.input :title, input_html: { class: "xxlarge" } %>
 
     <div class="controls">
       <div class="editor_toolbar">
@@ -16,26 +16,22 @@
     </div>
 
     <% if I18n.default_locale == :"zh-CN" %>
-      <%= f.input :body, :as => :text,
-        :input_html => { :class => "long", :rows => "30" },
-        :hint => "请使用 Markdown 格式编写,可以试试用 <a href='http://mouapp.com' target='_blank'>Mou</a> 这个 App 来编写。".html_safe
+      <%= f.input :body, as: :text,
+          input_html: { class: "long", rows: "30" },
+          hint: "请使用 Markdown 格式编写,可以试试用 <a href='http://mouapp.com' target='_blank'>Mou</a> 这个 App 来编写。".html_safe
       %>
     <% else %>
-      <%= f.input :body, :as => :text,
-        :input_html => { :class => "long", :rows => "30" },
-        :hint => "請使用 Markdown 格式編寫,可以試試用 <a href='http://mouapp.com' target='_blank'>Mou</a> 這個 App 来編寫。".html_safe
+      <%= f.input :body, as: :text,
+          input_html: { class: "long", rows: "30" },
+          hint: "請使用 Markdown 格式編寫,可以試試用 <a href='http://mouapp.com' target='_blank'>Mou</a> 這個 App 来編寫。".html_safe
       %>
     <% end %>
     <% if not @page.new_record? %>
-      <%= f.input :change_desc , :as => :text,
-        :input_html => { :class => "long", :rows => "2" },
-        :hint => t("pages.describe_this_time_change")
-      %>
-
+      <%= f.input :change_desc, as: :text, input_html: { class: "long", rows: "2" }, hint: t("pages.describe_this_time_change") %>
     <% end %>
     <div class="form-actions">
-      <%= f.submit t("common.save"), :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %>
-      <%= link_to t("common.cancel"), pages_path, :class => "btn reset" %>
+      <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving") %>
+      <%= link_to t("common.cancel"), pages_path, class: "btn reset" %>
     </div>
   </fieldset>
 <% end %>

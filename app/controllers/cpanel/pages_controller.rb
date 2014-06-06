@@ -2,7 +2,7 @@
 class Cpanel::PagesController < Cpanel::ApplicationController
 
   def index
-    @pages = Page.unscoped.desc(:_id).paginate :page => params[:page], :per_page => 30
+    @pages = Page.unscoped.desc(:_id).paginate page: params[:page], per_page: 30
 
   end
 
@@ -24,9 +24,9 @@ class Cpanel::PagesController < Cpanel::ApplicationController
     @page = Page.new(params[:page].permit!)
 
     if @page.save
-      redirect_to(cpanel_pages_path, :notice => 'Page was successfully created.')
+      redirect_to(cpanel_pages_path, notice: 'Page was successfully created.')
     else
-      render :action => "new"
+      render action: "new"
     end
   end
 
@@ -39,9 +39,9 @@ class Cpanel::PagesController < Cpanel::ApplicationController
     @page.user_id = current_user.id
 
     if @page.save
-      redirect_to(cpanel_pages_path, :notice => 'Page was successfully updated.')
+      redirect_to(cpanel_pages_path, notice: 'Page was successfully updated.')
     else
-      render :action => "edit"
+      render action: "edit"
     end
   end
 

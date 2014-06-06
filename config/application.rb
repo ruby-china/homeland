@@ -7,7 +7,7 @@ require "rails/test_unit/railtie"
 require 'sprockets/railtie'
 
 if defined?(Bundler)
-  Bundler.require *Rails.groups(:assets => %w(production development test))
+  Bundler.require *Rails.groups(assets: %w(production development test))
 end
 
 module RubyChina
@@ -36,7 +36,7 @@ module RubyChina
 
     config.generators do |g|
       g.test_framework :rspec
-      g.fixture_replacement :factory_girl, :dir => "spec/factories"
+      g.fixture_replacement :factory_girl, dir: "spec/factories"
     end
 
     config.action_view.sanitized_allowed_attributes = %w{target}

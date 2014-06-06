@@ -21,9 +21,9 @@ class Cpanel::NodesController < Cpanel::ApplicationController
     @node = Node.new(params[:node].permit!)
 
     if @node.save
-      redirect_to(cpanel_nodes_path, :notice => 'Node was successfully created.')
+      redirect_to(cpanel_nodes_path, notice: 'Node was successfully created.')
     else
-      render :action => "new"
+      render action: "new"
     end
   end
 
@@ -31,9 +31,9 @@ class Cpanel::NodesController < Cpanel::ApplicationController
     @node = Node.find(params[:id])
 
     if @node.update_attributes(params[:node].permit!)
-      redirect_to(cpanel_nodes_path, :notice => 'Node was successfully updated.')
+      redirect_to(cpanel_nodes_path, notice: 'Node was successfully updated.')
     else
-      render :action => "edit"
+      render action: "edit"
     end
   end
 

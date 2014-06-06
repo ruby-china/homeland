@@ -6,7 +6,7 @@
       <label><%= section.name %></label>
       <span class="nodes">
         <% section.nodes.each do |node| %>
-            <%= link_to(node.name, node_topics_path(node), :title => node.name )%>
+            <%= link_to(node.name, node_topics_path(node), title: node.name )%>
         <% end %>
       </span>
     </li>

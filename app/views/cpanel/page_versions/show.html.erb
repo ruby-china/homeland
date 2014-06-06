@@ -5,10 +5,10 @@
   <span class="current">明细</span>
 <% end %>
 <div class="pull-right">
-  <%= link_to 'Revert', revert_cpanel_page_version_path(@page_version.page_id, @page_version.id), 'data-confirm' => 'Are you sure?', :method => :post, :class => "btn btn-danger" %>
+  <%= link_to 'Revert', revert_cpanel_page_version_path(@page_version.page_id, @page_version.id), 'data-confirm' => 'Are you sure?', method: :post, class: "btn btn-danger" %>
 </div>
 <div class="field">
-  <%= user_name_tag @page_version.user %> 修改与 <%= l @page_version.created_at, :format => :long %>
+  <%= user_name_tag @page_version.user %> 修改与 <%= l @page_version.created_at, format: :long %>
 </div>
 <div class="field">
   Slug: <%= @page_version.slug %>

@@ -2,7 +2,7 @@
 class Cpanel::UsersController < Cpanel::ApplicationController
 
   def index
-    @users = User.desc(:_id).paginate :page => params[:page], :per_page => 30
+    @users = User.desc(:_id).paginate page: params[:page], per_page: 30
 
   end
 
@@ -27,9 +27,9 @@ class Cpanel::UsersController < Cpanel::ApplicationController
     @user.verified = params[:user][:verified]
 
     if @user.save
-      redirect_to(cpanel_users_path, :notice => 'User was successfully created.')
+      redirect_to(cpanel_users_path, notice: 'User was successfully created.')
     else
-      render :action => "new"
+      render action: "new"
     end
   end
 
@@ -41,9 +41,9 @@ class Cpanel::UsersController < Cpanel::ApplicationController
     @user.verified = params[:user][:verified]
 
     if @user.update_attributes(params[:user].permit!)
-      redirect_to(edit_cpanel_user_path(@user.id), :notice => 'User was successfully updated.')
+      redirect_to(edit_cpanel_user_path(@user.id), notice: 'User was successfully updated.')
     else
-      render :action => "edit"
+      render action: "edit"
     end
   end
 

@@ -71,7 +71,7 @@ class TopicsController < ApplicationController
     @page = params[:page].to_i > 0 ? params[:page].to_i : 1
 
     @replies = @topic.replies.unscoped.without_body.asc(:_id)
-    @replies = @replies.paginate(:page => params[:page], :per_page => @per_page)
+    @replies = @replies.paginate(page: params[:page], per_page: @per_page)
     
     check_current_user_status_for_topic
     set_special_node_active_menu

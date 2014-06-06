@@ -1,5 +1,5 @@
 <%= simple_form_for([:cpanel,@site_config]) do |f| %>
-  <%= render 'shared/error_messages', :target => @site_config %>
+  <%= render 'shared/error_messages', target: @site_config %>
   <fieldset>
     <legend><%= t("cpanel.site_configs.edit_setting")%></legend>
     <div class="control-group">
@@ -14,9 +14,9 @@
         <%= t("site_config.#{@site_config.key}")  %>
       </div>
     </div>
-    <%= f.input :value, :as => :text, :input_html => { :class => "span8", :rows => "20" } %>
+    <%= f.input :value, as: :text, input_html: { class: "span8", rows: "20" } %>
     <div class="form-actions">
-      <%= f.submit t("common.save"), :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %>
+      <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving") %>
       <a href="<%= cpanel_site_configs_path %>" class="btn"><%= t("common.cancel") %></a>
     </div>
   </fieldset>

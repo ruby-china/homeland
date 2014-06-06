@@ -1,6 +1,6 @@
 namespace :assets do
   desc 'recreate sprite images and css'
-  task :resprite => :environment do
+  task resprite: :environment do
     require 'sprite_factory'
     require 'chunky_png'
     SpriteFactory.library = :chunkypng
@@ -11,8 +11,8 @@ namespace :assets do
       dir_name = path.split("/").last
       is_2x = dir_name.include?("@2x")
       SpriteFactory.run!("app/assets/images/sprites/#{dir_name}",
-                          :output_style => "app/assets/stylesheets/sprites/#{dir_name}.scss",
-                          :selector => ".#{dir_name}_") do |images|
+                          output_style: "app/assets/stylesheets/sprites/#{dir_name}.scss",
+                          selector: ".#{dir_name}_") do |images|
         result = []
         result << "@media only screen and (-webkit-device-pixel-ratio: 2){" if is_2x
         

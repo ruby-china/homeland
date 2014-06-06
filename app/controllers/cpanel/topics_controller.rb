@@ -2,7 +2,7 @@
 class Cpanel::TopicsController < Cpanel::ApplicationController
 
   def index
-    @topics = Topic.unscoped.desc(:_id).includes(:user).paginate :page => params[:page], :per_page => 30
+    @topics = Topic.unscoped.desc(:_id).includes(:user).paginate page: params[:page], per_page: 30
 
   end
 
@@ -24,9 +24,9 @@ class Cpanel::TopicsController < Cpanel::ApplicationController
     @topic = Topic.new(params[:topic].permit!)
 
     if @topic.save
-      redirect_to(cpanel_topics_path, :notice => 'Topic was successfully created.')
+      redirect_to(cpanel_topics_path, notice: 'Topic was successfully created.')
     else
-      render :action => "new"
+      render action: "new"
     end
   end
 
@@ -34,9 +34,9 @@ class Cpanel::TopicsController < Cpanel::ApplicationController
     @topic = Topic.unscoped.find(params[:id])
 
     if @topic.update_attributes(params[:topic].permit!)
-      redirect_to(cpanel_topics_path, :notice => 'Topic was successfully updated.')
+      redirect_to(cpanel_topics_path, notice: 'Topic was successfully updated.')
     else
-      render :action => "edit"
+      render action: "edit"
     end
   end
 
@@ -57,13 +57,13 @@ class Cpanel::TopicsController < Cpanel::ApplicationController
     @topic = Topic.unscoped.find(params[:id])
     @topic.update_attribute(:suggested_at, Time.now)
     CacheVersion.topic_last_suggested_at = Time.now
-    redirect_to(cpanel_topics_path, :notice => "Topic:#{params[:id]} suggested.")
+    redirect_to(cpanel_topics_path, notice: "Topic:#{params[:id]} suggested.")
   end
 
   def unsuggest
     @topic = Topic.unscoped.find(params[:id])
     @topic.update_attribute(:suggested_at, nil)
     CacheVersion.topic_last_suggested_at = Time.now
-    redirect_to(cpanel_topics_path, :notice => "Topic:#{params[:id]} unsuggested.")
+    redirect_to(cpanel_topics_path, notice: "Topic:#{params[:id]} unsuggested.")
   end
 end

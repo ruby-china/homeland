@@ -1,6 +1,6 @@
 namespace :like do
   desc "remove all likes that doesn't actually like anything"
-  task :cleanup => [:environment] do
+  task cleanup: [:environment] do
     Like.all.each do |like|
       if like.likeable == nil
         # outputs "Broken: User@name <- Like#X -> Type#Y"

@@ -15,21 +15,21 @@ class Reply
   field :source
   field :message_id
 
-  belongs_to :user, :inverse_of => :replies
-  belongs_to :topic, :inverse_of => :replies, touch: true
-  has_many :notifications, :class_name => 'Notification::Base', :dependent => :delete
+  belongs_to :user, inverse_of: :replies
+  belongs_to :topic, inverse_of: :replies, touch: true
+  has_many :notifications, class_name: 'Notification::Base', dependent: :delete
 
-  counter_cache :name => :user, :inverse_of => :replies
-  counter_cache :name => :topic, :inverse_of => :replies
+  counter_cache name: :user, inverse_of: :replies
+  counter_cache name: :topic, inverse_of: :replies
 
-  index :user_id => 1
-  index :topic_id => 1
+  index user_id: 1
+  index topic_id: 1
 
-  delegate :title, :to => :topic, :prefix => true, :allow_nil => true
-  delegate :login, :to => :user, :prefix => true, :allow_nil => true
+  delegate :title, to: :topic, prefix: true, allow_nil: true
+  delegate :login, to: :user, prefix: true, allow_nil: true
 
   validates_presence_of :body
-  validates_uniqueness_of :body, :scope => [:topic_id, :user_id], :message => "不能重复提交。"
+  validates_uniqueness_of :body, scope: [:topic_id, :user_id], message: "不能重复提交。"
   validate do
     ban_words = (SiteConfig.ban_words_on_reply || "").split("\n").collect { |word| word.strip }
     if self.body.strip.downcase.in?(ban_words)
@@ -73,7 +73,7 @@ class Reply
 
     # 给发帖人发回帖通知
     if reply.user_id != topic.user_id && !notified_user_ids.include?(topic.user_id)
-      Notification::TopicReply.create :user_id => topic.user_id, :reply_id => reply.id
+      Notification::TopicReply.create user_id: topic.user_id, reply_id: reply.id
       notified_user_ids << topic.user_id
     end
 
@@ -84,7 +84,7 @@ class Reply
       # 排除回帖人
       next if uid == reply.user_id
       puts "Post Notification to: #{uid}"
-      Notification::TopicReply.create :user_id => uid, :reply_id => reply.id
+      Notification::TopicReply.create user_id: uid, reply_id: reply.id
     end
     true
   end

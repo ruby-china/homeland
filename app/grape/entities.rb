@@ -34,27 +34,27 @@ module RubyChina
           "#{Setting.gravatar_proxy}/avatar/#{hash}.png?s=120"
         end
       end
-      expose(:topics, :unless => { :collection => true }) do |model, opts|
+      expose(:topics, unless: { collection: true }) do |model, opts|
         APIEntities::UserTopic.represent model.topics.recent.limit(opts[:topics_limit] ||= 1)
       end
     end
 
     class Reply < Grape::Entity
       expose :id, :body, :body_html, :created_at, :updated_at, :deleted_at, :topic_id
-      expose :user, :using => APIEntities::User
+      expose :user, using: APIEntities::User
     end
     
     class Topic < Grape::Entity
       expose :id, :title, :created_at, :updated_at, :replied_at, :replies_count, :node_name, :node_id, :last_reply_user_id, :last_reply_user_login
-      expose :user, :using => APIEntities::User
+      expose :user, using: APIEntities::User
     end
 
     class DetailTopic < Topic
       expose :id, :title, :created_at, :updated_at, :replied_at, :replies_count, :node_name, :node_id, :last_reply_user_id, :last_reply_user_login, :body, :body_html
       expose(:hits) { |topic| topic.hits.to_i }
-      expose :user, :using => APIEntities::User
+      expose :user, using: APIEntities::User
       # replies only exposed when a single topic is fetched
-      expose(:replies, :unless => { :collection => true }) do |model, opts|
+      expose(:replies, unless: { collection: true }) do |model, opts|
         replies = model.replies
         replies = replies.unscoped if opts[:include_deleted]
         APIEntities::Reply.represent(replies.asc(:_id))
@@ -68,11 +68,11 @@ module RubyChina
 
     class Notification < Grape::Entity
       expose :id, :created_at, :updated_at, :read
-      expose(:mention, :if => lambda {|model, opts| model.is_a? ::Notification::Mention }) do |model, opts|
+      expose(:mention, if: lambda {|model, opts| model.is_a? ::Notification::Mention }) do |model, opts|
         # mode.mentionable_type could be "Reply" or "Topic"
         APIEntities.const_get(model.mentionable_type).represent model.mentionable
       end
-      expose(:reply, :if => lambda {|model, opts| model.is_a? ::Notification::TopicReply }) do |model, opts|
+      expose(:reply, if: lambda {|model, opts| model.is_a? ::Notification::TopicReply }) do |model, opts|
         APIEntities::Reply.represent model.reply
       end
     end

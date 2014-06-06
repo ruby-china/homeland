@@ -1,5 +1,5 @@
 namespace :markdown_body do
-  task :refresh => [:environment] do
+  task refresh: [:environment] do
     [Comment, Reply, Topic].each do |klass|
       klass.find_in_batches do |group|
         group.each do |record|

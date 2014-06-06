@@ -6,13 +6,12 @@
   <div class="right_info">
     <div class="pull-right replies">
       <% if topic.replies_count > 0 %>
-        <%= link_to(topic.replies_count,"#{topic_path(topic)}#reply#{topic.replies_count}",
-          :class => "count state_false") %>
+        <%= link_to(topic.replies_count,"#{topic_path(topic)}#reply#{topic.replies_count}", class: "count state_false") %>
       <% end %>
     </div>
     <div class="infos">
       <div class="title">
-        <%= link_to(truncate(topic.title, :length => 100), topic_path(topic), :title => topic.title) %>
+        <%= link_to(truncate(topic.title, length: 100), topic_path(topic), title: topic.title) %>
         <% if suggest %>
           <i class="icon small_pin" title="置顶"></i>
         <% end %>
@@ -27,9 +26,9 @@
         <em>
           •
           <% if topic.last_reply_user_login.blank? %>
-            <%= sanitize t("common.created_at", :time => timeago(topic.created_at))%>
+            <%= sanitize t("common.created_at", time: timeago(topic.created_at))%>
           <% else %>
-            <%= t("common.last_by")%> <%= user_name_tag(topic.last_reply_user_login) %> <%= sanitize t("common.reply_at", :time => timeago(topic.replied_at))%>
+            <%= t("common.last_by")%> <%= user_name_tag(topic.last_reply_user_login) %> <%= sanitize t("common.reply_at", time: timeago(topic.replied_at))%>
           <% end %>
         </em>
       </div>

@@ -9,7 +9,7 @@
         <% last_topics.each do |topic| %>
         <tr class="topic">
           <td class="replies"><%= topic.replies_count %> </td>
-          <td class="title"><%= link_to(truncate(topic.title, :length => 25), topic_path(topic))%>      </td>
+          <td class="title"><%= link_to(truncate(topic.title, length: 25), topic_path(topic))%>      </td>
           <td class="replied_at"> <%= render_topic_last_reply_time(topic)%></td>
         </tr>
         <% end %>

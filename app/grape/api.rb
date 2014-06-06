@@ -20,8 +20,8 @@ module RubyChina
       # Example
       #   /api/topics/index.json?page=1&per_page=15
       get do
-        @topics = Topic.last_actived.includes(:user).paginate(:page => params[:page], :per_page => params[:per_page]||30)
-        present @topics, :with => APIEntities::Topic
+        @topics = Topic.last_actived.includes(:user).paginate(page: params[:page], per_page: params[:per_page]||30)
+        present @topics, with: APIEntities::Topic
       end
 
       # Get active topics of the specified node
@@ -34,7 +34,7 @@ module RubyChina
         @topics = @node.topics.last_actived
           .limit(page_size)
           .includes(:user)
-        present @topics, :with => APIEntities::Topic
+        present @topics, with: APIEntities::Topic
       end
 
       # Post a new topic
@@ -45,7 +45,7 @@ module RubyChina
       #   node_id
       post do
         authenticate!
-        @topic = current_user.topics.new(:title => params[:title], :body => params[:body])
+        @topic = current_user.topics.new(title: params[:title], body: params[:body])
         @topic.node_id = params[:node_id]
         @topic.save!
         #TODO error handling
@@ -59,7 +59,7 @@ module RubyChina
         error!("Topic not found", 404) if @topic.blank?
         
         @topic.hits.incr(1)
-        present @topic, :with => APIEntities::DetailTopic
+        present @topic, with: APIEntities::DetailTopic
       end
 
       # Post a new reply
@@ -71,7 +71,7 @@ module RubyChina
       post ":id/replies" do
         authenticate!
         @topic = Topic.find(params[:id])
-        @reply = @topic.replies.build(:body => params[:body])
+        @reply = @topic.replies.build(body: params[:body])
         @reply.user_id = current_user.id
         @reply.save
       end
@@ -121,7 +121,7 @@ module RubyChina
       # Example
       #   /api/nodes.json
       get do
-        present Node.all, :with => APIEntities::Node
+        present Node.all, with: APIEntities::Node
       end
     end
 
@@ -141,7 +141,7 @@ module RubyChina
       # /api/users.json
       get do
         @users = User.hot.limit(20)
-        present @users, :with => APIEntities::DetailUser
+        present @users, with: APIEntities::DetailUser
       end
       
       # Get temp_access_token, this key is use for Faye client channel
@@ -149,30 +149,30 @@ module RubyChina
       # /api/users/temp_access_token?token=232332233223:1
       get "temp_access_token" do
         authenticate!
-        present ({ :temp_access_token => current_user.temp_access_token }).to_json
+        present ({ temp_access_token: current_user.temp_access_token }).to_json
       end
 
       # Get a single user
       # Example
       #   /api/users/qichunren.json
       get ":user" do
-        @user = User.where(:login => /^#{params[:user]}$/i).first
-        present @user, :topics_limit => 5, :with => APIEntities::DetailUser
+        @user = User.where(login: /^#{params[:user]}$/i).first
+        present @user, topics_limit: 5, with: APIEntities::DetailUser
       end
 
 
       # List topics for a user
       get ":user/topics" do
-        @user = User.where(:login => /^#{params[:user]}$/i).first
+        @user = User.where(login: /^#{params[:user]}$/i).first
         @topics = @user.topics.recent.limit(page_size)
-        present @topics, :with => APIEntities::UserTopic
+        present @topics, with: APIEntities::UserTopic
       end
 
       # List favorite topics for a user
       get ":user/topics/favorite" do
-        @user = User.where(:login => /^#{params[:user]}$/i).first
+        @user = User.where(login: /^#{params[:user]}$/i).first
         @topics = Topic.find(@user.favorite_topic_ids)
-        present @topics, :with => APIEntities::Topic
+        present @topics, with: APIEntities::Topic
       end
     end
 
@@ -182,10 +182,8 @@ module RubyChina
     resource :sites do
       get do
         @site_nodes = SiteNode.all.includes(:sites).desc('sort')
-        @site_nodes.as_json(:except => :sort, :include => {
-          :sites => {
-            :only => [:name, :url, :desc, :favicon, :created_at]
-          }
+        @site_nodes.as_json(except: :sort, include: {
+          sites: { only: [:name, :url, :desc, :favicon, :created_at] }
         })
       end
     end

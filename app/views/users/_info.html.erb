@@ -1,7 +1,7 @@
 <div class="box">
   <div class="userinfo vcard clearfix">
     <div class="pull-right" style="text-align:center;">
-      <%= user_avatar_tag(@user,:big, :link => false) %>
+      <%= user_avatar_tag(@user,:big, link: false) %>
     </div>
     <%= render_user_level_tag(@user) %>
     <ul>
@@ -47,7 +47,7 @@
       <% if !@user.twitter.blank? %>
         <li>
           <label><%= t("users.twitter")%>:</label>
-          <span><%= link_to "@#{@user.twitter}", @user.twitter_url, :class => "twitter", :rel => "nofollow" %></span>
+          <span><%= link_to "@#{@user.twitter}", @user.twitter_url, class: "twitter", rel: "nofollow" %></span>
         </li>
       <% end %>
 

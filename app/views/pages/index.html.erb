@@ -2,7 +2,7 @@
   <div class="tools box box_gray">
     <%= link_to(t("pages.wiki_index"), recent_pages_path )%>
     <% if can? :create, Page %>
-      <%= link_to(t("pages.create_page"), new_page_path, :class => "btn btn-success")%>
+      <%= link_to(t("pages.create_page"), new_page_path, class: "btn btn-success")%>
     <% end %>
   </div>
   <%= sanitize SiteConfig.wiki_index_html %>

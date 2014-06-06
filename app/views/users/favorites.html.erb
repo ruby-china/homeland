@@ -5,7 +5,7 @@
     <table class="node_topics table">
       <tr class="head">
         <td class="opts"><%= t("common.node") %></td>
-        <td class="title"><%=t("common.title")%></td>
+        <td class="title"><%= t("common.title") %></td>
       </tr>
       <% @topics.each do |item| %>
         <% next if item.blank? %>
@@ -19,4 +19,4 @@
   </div>
 </div>
 
-<%= render "sidebar", :user => @user %>
+<%= render "sidebar", user: @user %>

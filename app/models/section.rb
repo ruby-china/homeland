@@ -5,8 +5,8 @@ class Section
   include Mongoid::BaseModel
 
   field :name
-  field :sort, :type => Integer, :default => 0
-  has_many :nodes, :dependent => :destroy
+  field :sort, type: Integer, default: 0
+  has_many :nodes, dependent: :destroy
 
   validates_presence_of :name
   validates_uniqueness_of :name

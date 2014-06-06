@@ -16,9 +16,9 @@
     <tr id="exception_log_<%= item.id %>" class="<%= cycle("","even") %>">
       <td><%= item.id %></td>
       <td><%= link_to item.title, cpanel_exception_log_path(item.id) %></td>
-      <td><%= l(item.created_at, :format => :long) %></td>
+      <td><%= l(item.created_at, format: :long) %></td>
       <td>
-        <%= link_to "", cpanel_exception_log_path(item.id), :method => :delete, data: { remote: true, confirm: "是否确定要删除？" }, :class => "icon small_delete" %>
+        <%= link_to "", cpanel_exception_log_path(item.id), method: :delete, data: { remote: true, confirm: "是否确定要删除？" }, class: "icon small_delete" %>
       </td>
     </tr>
     <% end %>

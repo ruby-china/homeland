@@ -47,7 +47,7 @@ RSpec.configure do |config|
   config.infer_base_class_for_anonymous_controllers = false
   config.render_views
 
-  config.include Devise::TestHelpers, :type => :controller
+  config.include Devise::TestHelpers, type: :controller
 
   config.before(:each) do
     DatabaseCleaner.orm = :mongoid
@@ -56,7 +56,7 @@ RSpec.configure do |config|
     Rails.cache.clear
   end
 
-  config.include RSpec::Rails::RequestExampleGroup, :type => :request, :example_group => {
-    :file_path => /spec\/api/
+  config.include RSpec::Rails::RequestExampleGroup, type: :request, example_group: {
+    file_path: /spec\/api/
   }
 end

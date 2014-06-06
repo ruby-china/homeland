@@ -7,7 +7,7 @@
   <h2><%= t("cpanel.recent_topics") %></h2>
   <ul>
     <% @recent_topics.each do |item| %>
-    <li><a href="<%= edit_cpanel_topic_path(item) %>"><%= truncate(item.title,:length => 50) %></a></li>
+    <li><a href="<%= edit_cpanel_topic_path(item) %>"><%= truncate(item.title, length: 50) %></a></li>
     <% end %>
   </ul>
 </div>

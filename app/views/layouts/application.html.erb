@@ -31,7 +31,7 @@
     <%= stylesheet_link_tag "mobile", media: "screen and (max-width: 798px)" %>
   <% end %>
   <link rel="shortcut icon" href="<%= asset_path("big_logo.png") %>" />
-  <%= auto_discovery_link_tag(:rss,feed_topics_url,:title => '订阅最新帖') %>
+  <%= auto_discovery_link_tag(:rss, feed_topics_url, title: '订阅最新帖') %>
   <%= javascript_include_tag "app", "data-turbolinks-track" => true %>
   <%= csrf_meta_tag %>
   <%= yield :node_feed_link %>
@@ -44,7 +44,7 @@
         <h3>
           <a href="/" class="site-logo"></a>
         </h3>
-        <%= render_list :class => "nav" do |li|
+        <%= render_list class: "nav" do |li|
            li << link_to(t("menu.home"), root_path)
            li << link_to(t("menu.topics"), topics_path)
            li << link_to(t("menu.wiki"), pages_path) if !mobile?

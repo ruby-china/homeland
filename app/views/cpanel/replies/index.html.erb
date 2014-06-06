@@ -17,17 +17,17 @@
 <% @replies.each do |reply| %>
   <tr id="reply-<%= reply.id %>" class="<%= 'deleted' if !reply.deleted_at.blank? %>">
     <td class="first"><%= reply.id %></td>
-    <td><%= truncate(reply.body, :length => 50) %></td>
+    <td><%= truncate(reply.body, length: 50) %></td>
     <% if reply.topic %>
       <td>
-          <%= link_to(reply.topic_id, topic_path(reply.topic_id), :title => reply.topic.title)%>
+          <%= link_to(reply.topic_id, topic_path(reply.topic_id), title: reply.topic.title)%>
       </td>
       <% else %>
       <td><%= reply.topic_id %></td>
       <% end %>
     <td><%= link_to(reply.user.login, edit_cpanel_user_path(reply.user_id), target: "_blank") if reply.user %></td>
-    <td><%= l reply.created_at, :format => :short %></td>
-    <td><%= link_to '', edit_cpanel_reply_path(reply), :class => "icon small_edit" %>
+    <td><%= l reply.created_at, format: :short %></td>
+    <td><%= link_to '', edit_cpanel_reply_path(reply), class: "icon small_edit" %>
     <%= link_to '', cpanel_reply_path(reply), 'data-confirm' => 'Are you sure?', method: :delete, remote: true, class: "icon small_delete" %></td>
   </tr>
 <% end %>

@@ -17,10 +17,10 @@
         </span>
         <span class="opts">
           <% if !reply.deleted? %>
-            <%= likeable_tag(reply, :cache => true) %>
-            <%= link_to("", edit_topic_reply_path(@topic,reply), :class => "edit icon small_edit", 'data-uid' => reply.user_id, :title => "修改回帖")%>
+            <%= likeable_tag(reply, cache: true) %>
+            <%= link_to("", edit_topic_reply_path(@topic,reply), class: "edit icon small_edit", 'data-uid' => reply.user_id, title: "修改回帖")%>
             <%= link_to("", "#", 'data-floor' => floor, 'data-login' => reply.user_login,
-                :title => t("topics.reply_this_floor"), :class => "icon small_reply" )
+                title: t("topics.reply_this_floor"), class: "icon small_reply" )
             %>
           <% end %>
         </span>

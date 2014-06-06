@@ -35,8 +35,8 @@ module RubyChina
       get do
         @topics = Topic.last_actived.without_hide_nodes
         @topics = @topics.send(params[:type]) if ['excellent', 'no_reply', 'popular', 'recent'].include?(params[:type])
-        @topics = @topics.includes(:user).paginate(:page => params[:page], :per_page => params[:per_page] || 30)
-        present @topics, :with => APIEntities::Topic
+        @topics = @topics.includes(:user).paginate(page: params[:page], per_page: params[:per_page] || 30)
+        present @topics, with: APIEntities::Topic
       end
 
       # Get active topics of the specified node
@@ -51,8 +51,8 @@ module RubyChina
         @node = Node.find(params[:id])
         @topics = @node.topics.last_actived
         @topics = @topics.send(params[:type]) if ['excellent', 'no_reply', 'popular', 'recent'].include?(params[:type])
-        @topics = @topics.includes(:user).paginate(:page => params[:page], :per_page => params[:per_page] || page_size)
-        present @topics, :with => APIEntities::Topic
+        @topics = @topics.includes(:user).paginate(page: params[:page], per_page: params[:per_page] || page_size)
+        present @topics, with: APIEntities::Topic
       end
 
       # Post a new topic
@@ -63,12 +63,12 @@ module RubyChina
       #   node_id
       post do
         authenticate!
-        @topic = current_user.topics.new(:title => params[:title], :body => params[:body])
+        @topic = current_user.topics.new(title: params[:title], body: params[:body])
         @topic.node_id = params[:node_id]
         if @topic.save
-          present @topic, :with => APIEntities::DetailTopic
+          present @topic, with: APIEntities::DetailTopic
         else
-          error!({ "error" => @topic.errors.full_messages }, 400)
+          error!({ error: @topic.errors.full_messages }, 400)
         end
       end
 
@@ -80,7 +80,7 @@ module RubyChina
       get ":id" do
         @topic = Topic.find(params[:id])
         @topic.hits.incr(1)
-        present @topic, :with => APIEntities::DetailTopic, :include_deleted => params[:include_deleted]
+        present @topic, with: APIEntities::DetailTopic, include_deleted: params[:include_deleted]
       end
 
       # Post a new reply
@@ -92,10 +92,10 @@ module RubyChina
       post ":id/replies" do
         authenticate!
         @topic = Topic.find(params[:id])
-        @reply = @topic.replies.build(:body => params[:body])
+        @reply = @topic.replies.build(body: params[:body])
         @reply.user_id = current_user.id
         if @reply.save
-          present @reply, :with => APIEntities::Reply
+          present @reply, with: APIEntities::Reply
         else
           error!({"error" => @reply.errors.full_messages }, 400)
         end
@@ -146,7 +146,7 @@ module RubyChina
       # Example
       #   /api/nodes.json
       get do
-        present Node.all, :with => APIEntities::Node
+        present Node.all, with: APIEntities::Node
       end
     end
 
@@ -166,29 +166,29 @@ module RubyChina
       # /api/users.json
       get do
         @users = User.hot.limit(20)
-        present @users, :with => APIEntities::DetailUser
+        present @users, with: APIEntities::DetailUser
       end
 
       # Get a single user
       # Example
       #   /api/users/qichunren.json
       get ":user" do
-        @user = User.where(:login => /^#{params[:user]}$/i).first
-        present @user, :topics_limit => 5, :with => APIEntities::DetailUser
+        @user = User.where(login: /^#{params[:user]}$/i).first
+        present @user, topics_limit: 5, with: APIEntities::DetailUser
       end
 
       # List topics for a user
       get ":user/topics" do
-        @user = User.where(:login => /^#{params[:user]}$/i).first
+        @user = User.where(login: /^#{params[:user]}$/i).first
         @topics = @user.topics.recent.limit(page_size)
-        present @topics, :with => APIEntities::UserTopic
+        present @topics, with: APIEntities::UserTopic
       end
 
       # List favorite topics for a user
       get ":user/topics/favorite" do
-        @user = User.where(:login => /^#{params[:user]}$/i).first
+        @user = User.where(login: /^#{params[:user]}$/i).first
         @topics = Topic.find(@user.favorite_topic_ids)
-        present @topics, :with => APIEntities::Topic
+        present @topics, with: APIEntities::Topic
       end
     end
 
@@ -201,8 +201,8 @@ module RubyChina
       #   /api/notifications.json?page=1&per_page=20
       get do
         authenticate!
-        @notifications = current_user.notifications.recent.paginate :page => params[:page], :per_page => params[:per_page] || 20
-        present @notifications, :with => APIEntities::Notification
+        @notifications = current_user.notifications.recent.paginate page: params[:page], per_page: params[:per_page] || 20
+        present @notifications, with: APIEntities::Notification
       end
 
       # Delete all notifications of current user
@@ -237,9 +237,9 @@ module RubyChina
     resource :sites do
       get do
         @site_nodes = SiteNode.all.includes(:sites).desc('sort')
-        @site_nodes.as_json(:except => :sort, :include => {
-          :sites => {
-            :only => [:name, :url, :desc, :favicon, :created_at]
+        @site_nodes.as_json(except: :sort, include: {
+          sites: {
+            only: [:name, :url, :desc, :favicon, :created_at]
           }
         })
       end

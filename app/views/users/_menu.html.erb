@@ -1,5 +1,5 @@
 <div class="subnav">
-<%= render_list :class => "nav nav-tabs" do |li|
+<%= render_list class: "nav nav-tabs" do |li|
   li << link_to(t("users.menu.profile"), user_path(@user.login.downcase))
   li << link_to(t("users.menu.topics"), topics_user_path(@user.login.downcase))
   li << link_to(t("users.menu.favorites"), favorites_user_path(@user.login.downcase))

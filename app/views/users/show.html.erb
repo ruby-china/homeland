@@ -30,7 +30,7 @@
       </div>
       <div class="tab-pane" id="replies">
         <div class="box">
-          <%= render "replies", :replies => @replies %>
+          <%= render "replies", replies: @replies %>
         </div>
       </div>
     </div>
@@ -39,4 +39,4 @@
 
 
 </div>
-<%= render "sidebar", :user => @user %>
+<%= render "sidebar", user: @user %>

@@ -2,7 +2,7 @@
 class Cpanel::PhotosController < Cpanel::ApplicationController
 
   def index
-    @photos = Photo.recent.paginate :page => params[:page], :per_page => 20
+    @photos = Photo.recent.paginate page: params[:page], per_page: 20
   end
 
   def show
@@ -21,18 +21,18 @@ class Cpanel::PhotosController < Cpanel::ApplicationController
     @photo = Photo.new(params[:photo].permit!)
     @photo.user_id = current_user.id
     if @photo.save
-      redirect_to(cpanel_photo_path(@photo), :notice => 'Photo was successfully created.')
+      redirect_to(cpanel_photo_path(@photo), notice: 'Photo was successfully created.')
     else
-      render :action => "new"
+      render action: "new"
     end
   end
 
   def update
     @photo = Photo.find(params[:id])
     if @photo.update_attributes(params[:photo].permit!)
-      redirect_to(cpanel_photo_path(@photo), :notice => 'Photo was successfully updated.')
+      redirect_to(cpanel_photo_path(@photo), notice: 'Photo was successfully updated.')
     else
-      render :action => "edit"
+      render action: "edit"
     end
   end
 

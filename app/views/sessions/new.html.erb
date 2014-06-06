@@ -1,21 +1,21 @@
 <% content_for :sitemap do %><span class="current">加入社区</span><% end %>
 <div class="content">
     <div class="box">
-    <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+    <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <fieldset>
         <legend><%= t("common.login") %></legend>
-        <%= f.input :login, :input_html => { :style => "width:180px;" } %>
-        <%= f.input :password, :input_html => { :style => "width:180px;" } %>
+        <%= f.input :login, input_html: { style: "width:180px;" } %>
+        <%= f.input :password, input_html: { style: "width:180px;" } %>
         <% if devise_mapping.rememberable? -%>
         <div class="control-group checkbox optional">
           <label class="checkbox optional control-label"></label>
           <div class="controls">
-            <div class="inputs-list"><label for="user_remember_me"><%= f.check_box :remember_me, :style => "width:auto;" %> <%= t("common.remember_me") %></label></div>
+            <div class="inputs-list"><label for="user_remember_me"><%= f.check_box :remember_me, style: "width:auto;" %> <%= t("common.remember_me") %></label></div>
           </div>
         </div>
         <% end -%>
         <div class="form-actions">
-          <%= f.submit t("common.login"), :class => "btn btn-primary", 'data-disable-with' => t("common.logining") %>
+          <%= f.submit t("common.login"), class: "btn btn-primary", 'data-disable-with' => t("common.logining") %>
         </div>
       </fieldset>
     <% end %>
@@ -24,7 +24,7 @@
 <div class="sidebar">
   <div class="box">
     <h2>还没有帐号？</h2>
-    <%= render :partial => "devise/shared/links" %>
+    <%= render partial: "devise/shared/links" %>
   </div>
   <div class="box">
         <h2>用其他平台的帐号登录</h2>

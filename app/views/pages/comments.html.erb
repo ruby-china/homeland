@@ -2,5 +2,5 @@
   <h1><%= link_to @page.title, page_path(@page.slug) %> 的评论</h1>
 </div>
 <div id="comments">
-  <%= render_cell :comments, :index, :commentable => @page, :current_user => current_user %>
+  <%= render_cell :comments, :index, commentable: @page, current_user: current_user %>
 </div>

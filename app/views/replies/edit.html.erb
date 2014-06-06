@@ -10,18 +10,18 @@
 <div class="content">
   <div class="box">
     <%= simple_form_for([@topic, @reply]) do |f| %>
-      <%= render "shared/error_messages", :target => @reply %>
+      <%= render "shared/error_messages", target: @reply %>
       <div class="control-group edit_tools">
         <%= render "/topics/editor_toolbar" %>
       </div>
       <div class="control-group">
-        <%= f.text_area :body, :class => "topic_editor" %>
+        <%= f.text_area :body, class: "topic_editor" %>
       </div>
       <div class="control-group">
-        <%= f.submit t("common.save"), :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %>
+        <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving") %>
 
         <% if can? :destroy, @reply %>
-          <%= link_to "删除",[@topic,@reply], :class => "pull-right btn btn-danger", :method => :delete, :data => { :confirm => "确定要删除此回复么？" } %>
+          <%= link_to "删除",[@topic,@reply], class: "pull-right btn btn-danger", method: :delete, data: { confirm: "确定要删除此回复么？" } %>
         <% end %>
       </div>
     <% end %>

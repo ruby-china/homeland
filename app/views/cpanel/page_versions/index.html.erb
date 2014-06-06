@@ -23,9 +23,9 @@
     <td><%= item.title %></td>
     <td><%= item.desc %></td>
     <td><%= user_name_tag(item.user) %></td>
-    <td><%= l item.created_at, :format => :long %></td>
+    <td><%= l item.created_at, format: :long %></td>
     <td><%= link_to 'View', cpanel_page_version_path(item.page_id, item.id) %>
-    <%= link_to 'Revert', revert_cpanel_page_version_path(item.page_id, item.id), 'data-confirm' => 'Are you sure?', :method => :post %></td>
+    <%= link_to 'Revert', revert_cpanel_page_version_path(item.page_id, item.id), 'data-confirm' => 'Are you sure?', method: :post %></td>
   </tr>
 <% end %>
 </table>

@@ -13,7 +13,7 @@
     <td><%= photo.id %></td>
     <td><%= image_tag(photo.image.url) if !photo.image.blank? %></td>
     <td><%= photo.user.login if !photo.user.blank? %></td>
-    <td><%= link_to '', cpanel_photo_path(photo), 'data-confirm' => 'Are you sure?', :method => :delete, :class => "icon small_delete" %></td>
+    <td><%= link_to '', cpanel_photo_path(photo), 'data-confirm' => 'Are you sure?', method: :delete, class: "icon small_delete" %></td>
   </tr>
 <% end %>
 </table>

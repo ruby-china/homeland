@@ -2,18 +2,18 @@
   <% if can? :create, Site %>
   <div class="box box_gray">
     <%= raw SiteConfig.site_index_html %>
-    <%= link_to(t("sites.create"), new_site_path, :class => "btn btn-success")%>
+    <%= link_to(t("sites.create"), new_site_path, class: "btn btn-success")%>
   </div>
   <% end %>
-  <% cache(["sites/list", :t => CacheVersion.sites_updated_at], :expires_in => 1.days) do %>
+  <% cache(["sites/list", t: CacheVersion.sites_updated_at], expires_in: 1.days) do %>
     <% @site_nodes.each do |node| %>
     <div class="box">
       <h2 class="title"><%= node.name %></h2>
       <div class="row">
         <% node.sites.each do |item| %>
         <div class="span3 site">
-          <%= image_tag(item.favicon_url, :class => "favicon")%>
-          <%= link_to item.name, item.url, :target => "_blank", :rel => "nofollow", :title => item.desc %>
+          <%= image_tag(item.favicon_url, class: "favicon")%>
+          <%= link_to item.name, item.url, target: "_blank", rel: "nofollow", title: item.desc %>
         </div>
         <% end %>
       </div>

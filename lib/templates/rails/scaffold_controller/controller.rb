@@ -2,7 +2,7 @@
 class <%= controller_class_name %>Controller < <%= controller_class_name.include?('::') == true ? "#{controller_class_name.split('::').first}::" : ''  %>ApplicationController
 
   def index
-    @<%= plural_file_name %> = <%= file_name.camelize %>.desc('_id').paginate(:page => params[:page], :per_page => 20)
+    @<%= plural_file_name %> = <%= file_name.camelize %>.desc('_id').paginate(page: params[:page], per_page: 20)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -37,10 +37,10 @@ class <%= controller_class_name %>Controller < <%= controller_class_name.include
 
     respond_to do |format|
       if @<%= file_name %>.save
-        format.html { redirect_to(<%= index_helper %>_path, :notice => '<%= human_name %> 创建成功。') }
+        format.html { redirect_to(<%= index_helper %>_path, notice: '<%= human_name %> 创建成功。') }
         format.json
       else
-        format.html { render :action => "new" }
+        format.html { render action: "new" }
         format.json
       end
     end
@@ -51,10 +51,10 @@ class <%= controller_class_name %>Controller < <%= controller_class_name.include
 
     respond_to do |format|
       if @<%= file_name %>.update_attributes(params[:<%= file_name %>].permit!)
-        format.html { redirect_to(<%= index_helper %>_path, :notice => '<%= human_name %> 更新成功。') }
+        format.html { redirect_to(<%= index_helper %>_path, notice: '<%= human_name %> 更新成功。') }
         format.json
       else
-        format.html { render :action => "edit" }
+        format.html { render action: "edit" }
         format.json
       end
     end
@@ -65,7 +65,7 @@ class <%= controller_class_name %>Controller < <%= controller_class_name.include
     @<%= file_name %>.destroy
 
     respond_to do |format|
-      format.html { redirect_to(<%= index_helper %>_path,:notice => "删除成功。") }
+      format.html { redirect_to(<%= index_helper %>_path, notice: "删除成功。") }
       format.json
     end
   end

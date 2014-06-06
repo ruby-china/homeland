@@ -10,19 +10,19 @@
     %>
     <div class="box box_gray clearfix">      
       <div class="btn-group pull-left">
-        <%= link_to(t("topics.start_a_new_topic_button"), new_topic_path, :class => "btn btn-success" )%>
+        <%= link_to(t("topics.start_a_new_topic_button"), new_topic_path, class: "btn btn-success" )%>
         <button class="btn btn-success dropdown-toggle" data-toggle="dropdown">
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
           <% @hot_nodes.each do |node| %>
-            <li><%= link_to(node.name, new_topic_path(:node => node.id)) %></li>
+            <li><%= link_to(node.name, new_topic_path(node: node.id)) %></li>
           <% end %>
         </ul>
       </div>
       
       <div class="feed_link pull-right">
-        <%= link_to(sanitize("<span class='icon icons_rss'></span> Feed 订阅"), feed_topics_url, :title => t("topics.subscribe_with_rss", :name => Setting.app_name), :class => "feed", :target => "_blank") %>
+        <%= link_to(sanitize("<span class='icon icons_rss'></span> Feed 订阅"), feed_topics_url, title: t("topics.subscribe_with_rss", name: Setting.app_name), class: "feed", target: "_blank") %>
       </div>
     </div>
   <% end %>  

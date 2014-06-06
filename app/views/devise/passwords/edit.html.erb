@@ -1,20 +1,20 @@
 <% content_for :sitemap do %><li class="active">修改密码</li><% end %>
 <div class="sidebar">
   <div class="box">
-    <%= render :partial => "devise/shared/links" %>
+    <%= render partial: "devise/shared/links" %>
   </div>
 </div>
 <div class="content">
   <div class="box">
-    <%= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
-      <%= render "shared/error_messages", :target => resource %>
+    <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+      <%= render "shared/error_messages", target: resource %>
       <fieldset>
         <legend>修改密码</legend>
         <%= f.hidden_field :reset_password_token %>
         <%= f.input :password %>
         <%= f.input :password_confirmation %>
         <div class="form-actions">
-          <%= f.submit "修改我的密码", :class => "btn btn-success", 'data-disable-with' => t("common.submitting") %>
+          <%= f.submit "修改我的密码", class: "btn btn-success", 'data-disable-with' => t("common.submitting") %>
         </div>
     <% end %>
   </div>

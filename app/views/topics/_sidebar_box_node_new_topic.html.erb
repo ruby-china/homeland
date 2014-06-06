@@ -2,11 +2,9 @@
   <% if !@node.blank? %>
     <div class="box" style="text-align:center;">
       <h2 class="title"><%= link_to(@node.name,  node_topics_path(@node))%></h2>
-
       <%=  render_node_summary(@node) if ["new"].index(params[:action]) %>
-
       <div class="content">
-        <%= link_to(t("topics.start_a_new_topic_button"), new_topic_path(:node => @node.id), :class => "btn btn-success") %>
+        <%= link_to(t("topics.start_a_new_topic_button"), new_topic_path(node: @node.id), class: "btn btn-success") %>
       </div>
 
     </div>

@@ -16,10 +16,10 @@
 <% attributes.each do |attr| -%>
       <td><%%= item.<%= attr.name %> %></td>
 <% end -%>
-      <td><%%= l(item.created_at, :format => :long) %></td>
+      <td><%%= l(item.created_at, format: :long) %></td>
       <td>
-        <%%= link_to "", edit_<%= singular_table_name %>_path(item.id), :class => "icon small_edit" %>
-        <%%= link_to "", <%= singular_table_name %>_path(item.id), :method => :delete, 'data-confirm' => '确定要删除吗?', :class => "icon small_delete" %>
+        <%%= link_to "", edit_<%= singular_table_name %>_path(item.id), class: "icon small_edit" %>
+        <%%= link_to "", <%= singular_table_name %>_path(item.id), method: :delete, 'data-confirm' => '确定要删除吗?', class: "icon small_delete" %>
       </td>
     </tr>
     <%% end %>

@@ -12,70 +12,70 @@ class User
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
-  field :email,              :type => String, :default => ""
+  field :email, type: String, default: ""
   # Email 的 md5 值，用于 Gravatar 头像
   field :email_md5
   # Email 是否公开
-  field :email_public, :type => Mongoid::Boolean
-  field :encrypted_password, :type => String, :default => ""
+  field :email_public, type: Mongoid::Boolean
+  field :encrypted_password, type: String, default: ""
 
   validates_presence_of :email
 
   ## Recoverable
-  field :reset_password_token,   :type => String
-  field :reset_password_sent_at, :type => Time
+  field :reset_password_token,   type: String
+  field :reset_password_sent_at, type: Time
 
   ## Rememberable
-  field :remember_created_at, :type => Time
+  field :remember_created_at, type: Time
 
   ## Trackable
-  field :sign_in_count,      :type => Integer, :default => 0
-  field :current_sign_in_at, :type => Time
-  field :last_sign_in_at,    :type => Time
-  field :current_sign_in_ip, :type => String
-  field :last_sign_in_ip,    :type => String
+  field :sign_in_count,      type: Integer, default: 0
+  field :current_sign_in_at, type: Time
+  field :last_sign_in_at,    type: Time
+  field :current_sign_in_ip, type: String
+  field :last_sign_in_ip,    type: String
 
   field :login
   field :name
   field :location
-  field :location_id, :type => Integer
+  field :location_id, type: Integer
   field :bio
   field :website
   field :company
   field :github
   field :twitter
   # 是否信任用户
-  field :verified, :type => Mongoid::Boolean, :default => false
-  field :state, :type => Integer, :default => 1
-  field :guest, :type => Mongoid::Boolean, :default => false
+  field :verified, type: Mongoid::Boolean, :default => false
+  field :state, type: Integer, default: 1
+  field :guest, type: Mongoid::Boolean, default: false
   field :tagline
-  field :topics_count, :type => Integer, :default => 0
-  field :replies_count, :type => Integer, :default => 0
+  field :topics_count, type: Integer, default: 0
+  field :replies_count, type: Integer, default: 0
   # 用户密钥，用于客户端验证
   field :private_token
-  field :favorite_topic_ids, :type => Array, :default => []
+  field :favorite_topic_ids, type: Array, default: []
 
   mount_uploader :avatar, AvatarUploader
 
-  index :login => 1
-  index :email => 1
-  index :location => 1
+  index login: 1
+  index email: 1
+  index location: 1
   index({private_token: 1},{ sparse: true })
 
-  has_many :topics, :dependent => :destroy
+  has_many :topics, dependent: :destroy
   has_many :notes
-  has_many :replies, :dependent => :destroy
+  has_many :replies, dependent: :destroy
   embeds_many :authorizations
-  has_many :notifications, :class_name => 'Notification::Base', :dependent => :delete
+  has_many :notifications, class_name: 'Notification::Base', dependent: :delete
   has_many :photos
 
   def read_notifications(notifications)
     unread_ids = notifications.find_all{|notification| !notification.read?}.map(&:_id)
     if unread_ids.any?
       Notification::Base.where({
-        :user_id => id,
-        :_id.in  => unread_ids,
-        :read    => false
+        user_id: id,
+        :_id.in => unread_ids,
+        read: false
       }).update_all(read: true, updated_at: Time.now)
     end
   end
@@ -83,11 +83,13 @@ class User
   attr_accessor :password_confirmation
   ACCESSABLE_ATTRS = [:name, :email_public, :location, :company, :bio, :website, :github, :twitter, :tagline, :avatar, :by, :current_password, :password, :password_confirmation]
 
-  validates :login, :format => {:with => /\A\w+\z/, :message => '只允许数字、大小写字母和下划线'}, :length => {:in => 3..20}, :presence => true, :uniqueness => {:case_sensitive => false}
+  validates :login, format: { with: /\A\w+\z/, message: '只允许数字、大小写字母和下划线'}, 
+                              length: {:in => 3..20}, presence: true, 
+                              uniqueness: {case_sensitive: false}
 
-  has_and_belongs_to_many :following_nodes, :class_name => 'Node', :inverse_of => :followers
-  has_and_belongs_to_many :following, :class_name => 'User', :inverse_of => :followers
-  has_and_belongs_to_many :followers, :class_name => 'User', :inverse_of => :following
+  has_and_belongs_to_many :following_nodes, class_name: 'Node', inverse_of: :followers
+  has_and_belongs_to_many :following, class_name: 'User', inverse_of: :followers
+  has_and_belongs_to_many :followers, class_name: 'User', inverse_of: :following
 
   scope :hot, -> { desc(:replies_count, :topics_count) }
 
@@ -104,7 +106,7 @@ class User
 
   def self.find_for_database_authentication(conditions)
     login = conditions.delete(:login)
-    self.where(:login => /^#{login}$/i).first || self.where(:email => /^#{login}$/i).first
+    self.where(login: /^#{login}$/i).first || self.where(email: /^#{login}$/i).first
   end
 
   def password_required?
@@ -195,11 +197,11 @@ class User
 
   STATE = {
     # 软删除
-    :deleted => -1,
+    deleted: -1,
     # 正常
-    :normal => 1,
+    normal: 1,
     # 屏蔽
-    :blocked => 2,
+    blocked: 2,
   }
 
   def update_with_password(params={})
@@ -212,7 +214,7 @@ class User
   end
 
   def self.find_by_email(email)
-    where(:email => email).first
+    where(email: email).first
   end
 
   def bind?(provider)
@@ -222,7 +224,7 @@ class User
   def bind_service(response)
     provider = response["provider"]
     uid = response["uid"].to_s
-    authorizations.create(:provider => provider , :uid => uid )
+    authorizations.create(provider: provider, uid: uid )
   end
 
   # 是否读过 topic 的最近更新
@@ -256,8 +258,8 @@ class User
     return if topic.blank?
     return if self.topic_read?(topic)
 
-    self.notifications.unread.any_of({:mentionable_type => 'Topic', :mentionable_id => topic.id},
-                                     {:mentionable_type => 'Reply', :mentionable_id.in => topic.reply_ids},
+    self.notifications.unread.any_of({mentionable_type: 'Topic', mentionable_id: topic.id},
+                                     {mentionable_type: 'Reply', :mentionable_id.in => topic.reply_ids},
                                      {:reply_id.in => topic.reply_ids}).update_all(read: true)
 
     # 处理 last_reply_id 是空的情况
@@ -313,7 +315,7 @@ class User
     self.location = ""
     self.authorizations = []
     self.state = STATE[:deleted]
-    self.save(:validate => false)
+    self.save(validate: false)
   end
 
   # Github 项目
@@ -343,21 +345,21 @@ class User
     rescue => e
       Rails.logger.error("Github Repositiory fetch Error: #{e}")
       items = []
-      Rails.cache.write(user.github_repositories_cache_key, items, :expires_in => 15.days)
+      Rails.cache.write(user.github_repositories_cache_key, items, expires_in: 15.days)
       return false
     end
 
     items = JSON.parse(json)
     items = items.collect do |a1|
       {
-        :name => a1["name"],
-        :url => a1["html_url"],
-        :watchers => a1["watchers"],
-        :description => a1["description"]
+        name: a1["name"],
+        url: a1["html_url"],
+        watchers: a1["watchers"],
+        description: a1["description"]
       }
     end
     items = items.sort { |a1,a2| a2[:watchers] <=> a1[:watchers] }.take(14)
-    Rails.cache.write(user.github_repositories_cache_key, items, :expires_in => 15.days)
+    Rails.cache.write(user.github_repositories_cache_key, items, expires_in: 15.days)
   end
 
   # 重新生成 Private Token

@@ -17,10 +17,8 @@
 <div class="content">
   <div id="topic_show" class="topics box hfeed">
     <div class="topic hentry">
-      <%= render :partial => "topics/topic_info", :locals => { :topic => @topic} %>
-
+      <%= render partial: "topics/topic_info", locals: { topic: @topic } %>
       <%= raw SiteConfig.before_topic_html %>
-
       <div class="body entry-content">
         <%= sanitize_topic @topic.body_html %>
       </div>
@@ -53,10 +51,10 @@
       </div>
       <div class="items">
         <%= cache([@topic,params[:page],"raw:#{@show_raw}"]) do %>
-          <%= render :partial => "replies/reply", :collection => @replies %>
+          <%= render partial: "replies/reply", collection: @replies %>
         <% end %>
       </div>
-      <%= will_paginate @replies, :inner_window => 2, :params => { :anchor => 'replies' } %>
+      <%= will_paginate @replies, inner_window: 2, params: { anchor: 'replies' } %>
     </div>
   <% end %>
 
@@ -64,8 +62,8 @@
     <div id="reply" class="form box">
       <% if can? :create, Reply %>
         <%= render "editor_toolbar" %>
-        <%= form_for(Reply.new, :remote => true,:url => topic_replies_path(@topic)) do |f| %>
-          <%= f.text_area :body,:class => "topic_editor span10", :rows => "4", :tabindex => "1" %>
+        <%= form_for(Reply.new, remote: true, url: topic_replies_path(@topic)) do |f| %>
+          <%= f.text_area :body, class: "topic_editor span10", rows: "4", tabindex: "1" %>
           <div class="submit_buttons">
             <button type="submit" id="btn_reply" class="btn btn-primary" tabindex="2"><%= t("topics.submit_reply")%></button><br />
             <span class="help-inline" title="或者 Command + Enter">Ctrl+Enter</span>
@@ -82,7 +80,7 @@
       <% end %>
     </div>
   <% else %>
-      <%= render :partial => "topics/translation/need_login_to_reply" %>
+      <%= render partial: "topics/translation/need_login_to_reply" %>
   <% end %>
 </div>
 
@@ -90,6 +88,6 @@
   <div class="sidebar">
     <%= render "sidebar_box_node_new_topic" %>
     <%= render_cell :topics, :tips %>
-    <%= render_cell :topics, :sidebar_for_node_recent_topics, { :topic => @topic} %>
+    <%= render_cell :topics, :sidebar_for_node_recent_topics, { topic: @topic } %>
   </div>
 <% end %>

@@ -1,4 +1,4 @@
-<h1><%= t("mail.welcome_title", :app_name => Setting.app_name) %></h1>
+<h1><%= t("mail.welcome_title", app_name: Setting.app_name) %></h1>
 <p>
   <label>你好 <%= @user.login %>,</label><br />
   <%= t("mail.you_have_successfully") %> <a href="<%= root_url %>"><%= Setting.app_name %></a> <%= t("mail.registered_an_account") %>

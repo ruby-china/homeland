@@ -20,8 +20,8 @@
     <td><%= node.section.name %></td>
     <td><%= node.sort %></td>
     <td><%= node.topics_count %></td>
-    <td><%= link_to '', edit_cpanel_node_path(node), :class => "icon small_edit" %>
-    <%= link_to '', cpanel_node_path(node), 'data-confirm' => 'Are you sure?' , :method => :delete, :class => "icon small_delete" %></td>
+    <td><%= link_to '', edit_cpanel_node_path(node), class: "icon small_edit" %>
+    <%= link_to '', cpanel_node_path(node), 'data-confirm' => 'Are you sure?' , method: :delete, class: "icon small_delete" %></td>
   </tr>
 <% end %>
 </table>

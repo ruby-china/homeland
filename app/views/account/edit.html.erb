@@ -1,25 +1,25 @@
 <div class="content">
   <div class="box">
-    <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :enctype =>  "multipart/form-data" }) do |f| %>
-      <%= render "shared/error_messages", :target => resource if params[:by].blank? %>
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, enctype:  "multipart/form-data" }) do |f| %>
+      <%= render "shared/error_messages", target: resource if params[:by].blank? %>
       <fieldset>
         <legend><%= t("users.personal_information")%></legend>
         <%= f.input :name %>
         <%= f.input :avatar %>
-        <%= f.input :email, :input_html => { :class => "span4", :disabled => (!resource.email.blank?) } %>
+        <%= f.input :email, input_html: { class: "span4", disabled: (!resource.email.blank?) } %>
         <div class="control-group">
           <div class="controls">
             <label for="user_email_public" class="checkbox"><%= f.check_box :email_public %> 公开 Email</label>
           </div>
         </div>
-        <%= f.input :location, :input_html => { :class => "span3" } %>
-        <%= f.input :company, :input_html => { :class => "span3" } %>
+        <%= f.input :location, input_html: { class: "span3" } %>
+        <%= f.input :company, input_html: { class: "span3" } %>
         <div class="control-group">
           <%= f.label :github %>
           <div class="controls">
             <div class="input-prepend">
               <span class="add-on">https://github.com/</span>
-              <%= f.text_field :github, :class => "small", :placeholder => "yourname" %>
+              <%= f.text_field :github, class: "small", placeholder: "yourname" %>
             </div>
           </div>
         </div>
@@ -28,22 +28,22 @@
           <div class="controls">
             <div class="input-prepend">
               <span class="add-on">http://twitter.com/</span>
-              <%= f.text_field :twitter, :class => "small", :placeholder => "yourname" %>
+              <%= f.text_field :twitter, class: "small", placeholder: "yourname" %>
             </div>
           </div>
         </div>
-        <%= f.input :website, :input_html => { :class => "xxlarge", :placeholder => "http://" } %>
-        <%= f.input :tagline, :input_html => { :class => "xxlarge" } %>
-        <%= f.input :bio, :as => :text, :input_html => { :class => "xxlarge", :rows => "6" } %>
+        <%= f.input :website, input_html: { class: "xxlarge", placeholder: "http://" } %>
+        <%= f.input :tagline, input_html: { class: "xxlarge" } %>
+        <%= f.input :bio, as: :text, input_html: { class: "xxlarge", rows: "6" } %>
         <div class="form-actions">
-            <%= f.submit "更新资料", :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %>
+            <%= f.submit "更新资料", class: "btn btn-primary", 'data-disable-with' => t("common.saving") %>
         </div>
       </fieldset>
     <% end %>
   </div>
   <div class="box">
-    <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name,:by => :pwd), :html => { :method => :put }) do |f| %>
-      <%= render "shared/error_messages", :target => resource if params[:by] == "pwd" %>
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name, by: :pwd), html: { method: :put }) do |f| %>
+      <%= render "shared/error_messages", target: resource if params[:by] == "pwd" %>
       <fieldset>
         <legend><%= t("users.edit_password")%></legend>
         <input type="hidden" name="user[:by]" value="pwd" />
@@ -51,7 +51,7 @@
         <%= f.input :password %>
         <%= f.input :password_confirmation %>
         <div class="form-actions">
-          <%= f.submit "修改密码", :class => "btn btn-success", 'data-disable-with' => t("common.saving") %>
+          <%= f.submit "修改密码", class: "btn btn-success", 'data-disable-with' => t("common.saving") %>
         </div>
       </fieldset>
     <% end %>
@@ -60,7 +60,7 @@
 
 <div class="sidebar">
   <div class="box" style="text-align:center;">
-     <%= user_avatar_tag(@user, :big, :link => false) %> <br /><%= t("users.edit_on_gravatar") %> <a href="http://www.gravatar.com">gravatar.com</a>
+     <%= user_avatar_tag(@user, :big, link: false) %> <br /><%= t("users.edit_on_gravatar") %> <a href="http://www.gravatar.com">gravatar.com</a>
   </div>
   <div class="box">
     <h2><%= t("users.bind_another_account")%></h2>
@@ -88,7 +88,7 @@
   </div>
   <div class="box">
     <h2><%= t("users.delete_my_account")%></h2>
-    <p><%= t("users.dont_like_it")%> <%= link_to(t("users.delete_this_account"), registration_path(resource_name), 'data-confirm' => "删除后无法恢复，你确定吗?", :class => "btn btn-danger", :method => :delete )%></p>
+    <p><%= t("users.dont_like_it")%> <%= link_to(t("users.delete_this_account"), registration_path(resource_name), 'data-confirm' => "删除后无法恢复，你确定吗?", class: "btn btn-danger", method: :delete )%></p>
   </div>
 </div>
 

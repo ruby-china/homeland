@@ -1,22 +1,22 @@
 <% content_for :sitemap do %><span class="current">加入社区</span><% end %>
 <div class="content">
     <div class="box">
-    <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-      <%= render "shared/error_messages", :target => resource %>
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "shared/error_messages", target: resource %>
       <fieldset>
         <legend><%= t("users.register_user")%></legend>
-        <%= f.input :login, :hint => t("users.suggest_using_twitter_id") %>
+        <%= f.input :login, hint: t("users.suggest_using_twitter_id") %>
         <%= f.input :name %>
-        <%= f.input :email, :input_html => { :class => "span5", :placeholder => "foo@bar.com" } %>
+        <%= f.input :email, input_html: { class: "span5", placeholder: "foo@bar.com" } %>
         <div class="control-group">
           <div class="controls">
-            <label for="user_email_public" class="checkbox"><%= f.check_box :email_public, :checked => true %> 公开 Email</label>
+            <label for="user_email_public" class="checkbox"><%= f.check_box :email_public, checked: true %> 公开 Email</label>
           </div>
         </div>
         <%= f.input :password %>
         <%= f.input :password_confirmation %>
         <div class="form-actions">
-          <%= f.submit "提交注册信息", :class => "btn btn-primary", 'data-disable-with' => t("common.submitting") %>
+          <%= f.submit "提交注册信息", class: "btn btn-primary", 'data-disable-with' => t("common.submitting") %>
         </div>
       </fieldset>
     <% end %>
@@ -25,9 +25,9 @@
 
 <div class="sidebar">
   <div class="box">
-    <h2><%= t("users.already_have_account")%></h2>
+    <h2><%= t("users.already_have_account") %></h2>
     <p style="line-height:20px;">
-      <%= render :partial => "devise/shared/links" %>
+      <%= render partial: "devise/shared/links" %>
     </p>
   </div>
 </div>

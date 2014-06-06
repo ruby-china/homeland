@@ -1,9 +1,9 @@
-xml.instruct! :xml, :version => "1.0"
-xml.rss :version => "2.0" do
+xml.instruct! :xml, version: "1.0"
+xml.rss version: "2.0" do
   xml.channel do
-    xml.title t("rss.recent_node_topics_title", :name => Setting.app_name, :node_name => @node.name)
+    xml.title t("rss.recent_node_topics_title", name: Setting.app_name, node_name: @node.name)
     xml.link root_url
-    xml.description t("rss.recent_node_topics_description", :name => Setting.app_name, :node_name => @node.name)
+    xml.description t("rss.recent_node_topics_description", name: Setting.app_name, node_name: @node.name)
     for topic in @topics
       xml.item do
         xml.title topic.title

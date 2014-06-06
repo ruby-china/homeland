@@ -9,8 +9,8 @@
       </tr>
       <% @notes.each do |note| %>
         <tr class="note <%= cycle('odd',"") %>">
-          <th><a class="title" href="<%= note_path(note.id) %>"><i class="icon-stop"></i> <%= truncate(note.title.gsub('#',''), :length => 50) %></a> <%= raw '<span class="label warning">公开</span>' if note.publish %></th>
-          <th><%= note.word_count %> <%= t("notes.chars") %>, <%= sanitize t("notes.created_at", :time => timeago(note.created_at)) %></th>
+          <th><a class="title" href="<%= note_path(note.id) %>"><i class="icon-stop"></i> <%= truncate(note.title.gsub('#',''), length: 50) %></a> <%= raw '<span class="label warning">公开</span>' if note.publish %></th>
+          <th><%= note.word_count %> <%= t("notes.chars") %>, <%= sanitize t("notes.created_at", time: timeago(note.created_at)) %></th>
         </tr>
       <% end %>
 
@@ -19,4 +19,4 @@
   </div>
 </div>
 
-<%= render "sidebar", :user => @user %>
+<%= render "sidebar", user: @user %>

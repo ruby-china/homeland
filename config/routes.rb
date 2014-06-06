@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   require 'sidekiq/web'
 
   resources :sites
-  resources :pages, :path => "wiki" do
+  resources :pages, path: "wiki" do
     collection do
       get :recent
       post :preview
@@ -20,18 +20,18 @@ Rails.application.routes.draw do
     end
   end
 
-  root :to => "home#index"
+  root to: "home#index"
 
-  devise_for :users, :path => "account", :controllers => {
-      :registrations => :account,
-      :sessions => :sessions,
-      :omniauth_callbacks => "users/omniauth_callbacks"
+  devise_for :users, path: "account", controllers: {
+      registrations: :account,
+      sessions: :sessions,
+      omniauth_callbacks: "users/omniauth_callbacks"
     }
 
   delete "account/auth/:provider/unbind" => "users#auth_unbind", as: 'unbind_account'
   post "account/update_private_token" => "users#update_private_token", as: 'update_private_token_account'
 
-  resources :notifications, :only => [:index, :destroy] do
+  resources :notifications, only: [:index, :destroy] do
     collection do
       post :clear
     end
@@ -69,7 +69,7 @@ Rails.application.routes.draw do
   get "/search" => "search#index", as: 'search'
 
   namespace :cpanel do
-    root :to => "home#index"
+    root to: "home#index"
     resources :site_configs
     resources :replies
     resources :topics do
@@ -84,7 +84,7 @@ Rails.application.routes.draw do
     resources :users
     resources :photos
     resources :pages do
-      resources :versions, :controller => :page_versions do
+      resources :versions, controller: :page_versions do
         member do
           post :revert
         end
@@ -117,7 +117,7 @@ Rails.application.routes.draw do
   # 比如 http://ruby-china.org/huacnlee
   get "users/city/:id" => "users#city", as: 'location_users'
   get "users" => "users#index", as: 'users'
-  resources :users, :path => "" do
+  resources :users, path: "" do
     member do
       get :topics
       get :favorites

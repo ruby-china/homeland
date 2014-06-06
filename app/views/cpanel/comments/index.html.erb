@@ -16,9 +16,9 @@
     <td><%= item.commentable_id %></td>
     <td><%= item.user.login if !item.user.blank? %></td>
     <td><%= item.body %></td>
-    <td><%= l item.created_at, :format => :short %></td>
-    <td><%= link_to '', edit_cpanel_comment_path(item), :class => "icon small_edit" %>
-    <%= link_to '', cpanel_comment_path(item), 'data-confirm' => 'Are you sure?', method: :delete, remote: true, :class => "icon small_delete" %></td>
+    <td><%= l item.created_at, format: :short %></td>
+    <td><%= link_to '', edit_cpanel_comment_path(item), class: "icon small_edit" %>
+    <%= link_to '', cpanel_comment_path(item), 'data-confirm' => 'Are you sure?', method: :delete, remote: true, class: "icon small_delete" %></td>
   </tr>
 <% end %>
 </table>

@@ -6,16 +6,16 @@
         <% user.github_repositories.each do |item| %>
         <li>
           <div class="title">
-            <%= link_to truncate(item[:name], :length => 25), item[:url], :target => "_blank", :rel => "nofollow" %>
+            <%= link_to truncate(item[:name], length: 25), item[:url], target: "_blank", rel: "nofollow" %>
             <span class="watchers" title="<%= item[:watchers] %> Watchers"><%= item[:watchers] %></span>
           </div>
           <p class="desc">
-            <%= truncate(item[:description], :length => 100)  %>
+            <%= truncate(item[:description], length: 100)  %>
         </li>
         <% end %>
       </ul>
       <div class="more">
-        <%= link_to "More on Github", user.github_url, :target => "_blank", :rel => "nofollow" %>
+        <%= link_to "More on Github", user.github_url, target: "_blank", rel: "nofollow" %>
       </div>
     <% else %>
       未设置 Github 信息.

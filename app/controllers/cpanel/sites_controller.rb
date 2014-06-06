@@ -4,9 +4,9 @@ class Cpanel::SitesController < Cpanel::ApplicationController
   def index
     @sites = Site.unscoped.recent
     if params[:q]
-      @sites = @sites.where(:name => /#{params[:q]}/)
+      @sites = @sites.where(name: /#{params[:q]}/)
     end
-    @sites = @sites.paginate(:page => params[:page], :per_page => 20)
+    @sites = @sites.paginate(page: params[:page], per_page: 20)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -41,10 +41,10 @@ class Cpanel::SitesController < Cpanel::ApplicationController
 
     respond_to do |format|
       if @site.save
-        format.html { redirect_to(cpanel_sites_path, :notice => 'Site 创建成功。') }
+        format.html { redirect_to(cpanel_sites_path, notice: 'Site 创建成功。') }
         format.json
       else
-        format.html { render :action => "new" }
+        format.html { render action: "new" }
         format.json
       end
     end
@@ -55,10 +55,10 @@ class Cpanel::SitesController < Cpanel::ApplicationController
 
     respond_to do |format|
       if @site.update_attributes(params[:site].permit!)
-        format.html { redirect_to(cpanel_sites_path, :notice => 'Site 更新成功。') }
+        format.html { redirect_to(cpanel_sites_path, notice: 'Site 更新成功。') }
         format.json
       else
-        format.html { render :action => "edit" }
+        format.html { render action: "edit" }
         format.json
       end
     end
@@ -69,7 +69,7 @@ class Cpanel::SitesController < Cpanel::ApplicationController
     @site.destroy
 
     respond_to do |format|
-      format.html { redirect_to(cpanel_sites_path,:notice => "删除成功。") }
+      format.html { redirect_to(cpanel_sites_path, notice: "删除成功。") }
       format.json
     end
   end

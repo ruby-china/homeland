@@ -23,9 +23,9 @@ class Cpanel::SectionsController < Cpanel::ApplicationController
     @section = Section.new(params[:section].permit!)
 
     if @section.save
-      redirect_to(cpanel_sections_path, :notice => 'Section was successfully created.')
+      redirect_to(cpanel_sections_path, notice: 'Section was successfully created.')
     else
-      render :action => "new"
+      render action: "new"
     end
   end
 
@@ -33,9 +33,9 @@ class Cpanel::SectionsController < Cpanel::ApplicationController
     @section = Section.find(params[:id])
 
     if @section.update_attributes(params[:section].permit!)
-      redirect_to(cpanel_sections_path, :notice => 'Section was successfully updated.')
+      redirect_to(cpanel_sections_path, notice: 'Section was successfully updated.')
     else
-      render :action => "edit"
+      render action: "edit"
     end
   end
 

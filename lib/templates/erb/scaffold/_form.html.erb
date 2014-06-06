@@ -7,14 +7,14 @@
   end
 %>
 <%%= simple_form_for(<%= form_model_name %>) do |f| %>
-  <%%= render "/shared/error_messages", :target => @<%= file_name %>  %>
+  <%%= render "/shared/error_messages", target: @<%= file_name %>  %>
   <fieldset>
     <legend><%%= t("common.edit") %></legend>
   <% for attribute in attributes -%>
     <%%= f.<%= attribute.reference? ? :association : :input %> :<%= attribute.name %> %>
   <% end -%>
     <div class="form-actions">
-      <%%= f.submit t("common.save"), :class => "btn btn-primary" %> or <%%= link_to t("common.cancel"), <%= index_helper %>_path %>
+      <%%= f.submit t("common.save"), class: "btn btn-primary" %> or <%%= link_to t("common.cancel"), <%= index_helper %>_path %>
     </div>
   </fieldset>
 <%% end %>

@@ -17,8 +17,8 @@
     <td class="first"><%= section.id %></td>
     <td><%= section.name %></td>
     <td><%= section.sort %></td>
-    <td><%= link_to '', edit_cpanel_section_path(section) , :class => "icon small_edit" %>
-    <%= link_to '', cpanel_section_path(section), 'data-confirm' => 'Are you sure?', :method => :delete, :class => "icon small_delete" %></td>
+    <td><%= link_to '', edit_cpanel_section_path(section), class: "icon small_edit" %>
+    <%= link_to '', cpanel_section_path(section), 'data-confirm' => 'Are you sure?', method: :delete, class: "icon small_delete" %></td>
   </tr>
 <% end %>
 </table>

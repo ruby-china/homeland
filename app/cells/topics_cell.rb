@@ -1,6 +1,5 @@
 # coding: utf-8
 class TopicsCell < BaseCell
-
   helper :nodes
 
   # 首页节点目录
@@ -13,7 +12,7 @@ class TopicsCell < BaseCell
   end
 
   # 边栏的统计信息
-  cache :sidebar_statistics, :expires_in => 30.minutes
+  cache :sidebar_statistics, expires_in: 30.minutes
   def sidebar_statistics
     @users_count = User.unscoped.count
     @topics_count = Topic.unscoped.count
@@ -22,8 +21,8 @@ class TopicsCell < BaseCell
   end
 
   # 节点下面的最新话题
-  cache :sidebar_for_node_recent_topics, :expires_in => 30.minutes do |cell, args|
-    ['node',args[:topic].node_id].join("-")
+  cache :sidebar_for_node_recent_topics, expires_in: 30.minutes do |cell, args|
+    ['node', args[:topic].node_id].join("-")
   end
   def sidebar_for_node_recent_topics(args = {})
     topic = args[:topic]
@@ -38,7 +37,7 @@ class TopicsCell < BaseCell
     render
   end
 
-  cache :index_locations, :expires_in => 1.days
+  cache :index_locations, expires_in: 1.days
   def index_locations
     @hot_locations = Location.hot.limit(12)
     render

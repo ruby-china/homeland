@@ -201,8 +201,8 @@ GEM
       railties (>= 3.1.0)
       redcarpet (>= 2.0)
     mime-types (1.25.1)
-    mini_magick (3.3)
-      subexec (~> 0.1.0)
+    mini_magick (3.7.0)
+      subexec (~> 0.2.1)
     minitest (5.3.4)
     mongoid_auto_increment_id (0.6.4)
       mongoid (>= 3.1.0, < 4.1.0)
@@ -351,7 +351,7 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
-    subexec (0.1.0)
+    subexec (0.2.3)
     thin (1.5.0)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
@@ -414,7 +414,7 @@ DEPENDENCIES
   jquery-turbolinks (~> 2.0.2)
   letter_opener
   md_emoji (= 1.0.2)
-  mini_magick (= 3.3)
+  mini_magick (= 3.7.0)
   mongoid!
   mongoid_auto_increment_id (= 0.6.4)
   mongoid_rails_migrations (= 1.0.0)

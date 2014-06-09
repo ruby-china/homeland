@@ -23,7 +23,7 @@ gem "jbuilder", "~> 2.0.2"
 # 上传组件
 gem 'carrierwave', '0.6.2'
 gem 'carrierwave-upyun', '0.1.7'
-gem 'mini_magick','3.3', require: false
+gem 'mini_magick','3.7.0', require: false
 
 # Mongoid 辅助插件
 gem "mongoid", github: 'mongoid/mongoid', ref: 'da35e0cd0fc17651c263e0f74d90b0adf5fbb409'

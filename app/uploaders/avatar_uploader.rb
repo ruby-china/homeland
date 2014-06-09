@@ -18,7 +18,7 @@ class AvatarUploader < BaseUploader
 
   def filename
     if super.present?
-      "avatar/#{model.id}.#{file.extension.downcase}"
+      "avatar/#{model.id}.jpg"
     end
   end
 

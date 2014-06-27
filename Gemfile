@@ -5,7 +5,7 @@ else
   source 'https://ruby.taobao.org'
 end
 
-gem "rails", "4.1.1"
+gem "rails", "4.1.2"
 gem 'turbolinks', '~> 2.2.2'
 gem 'jquery-turbolinks', '~> 2.0.2'
 gem 'actionpack-action_caching', '1.1.1'
@@ -26,7 +26,7 @@ gem 'carrierwave-upyun', '0.1.7'
 gem 'mini_magick','3.7.0', require: false
 
 # Mongoid 辅助插件
-gem "mongoid", github: 'mongoid/mongoid', ref: 'da35e0cd0fc17651c263e0f74d90b0adf5fbb409'
+gem "mongoid", "4.0.0"
 gem 'mongoid_auto_increment_id', "0.6.4"
 gem 'mongoid_rails_migrations', '1.0.0'
 

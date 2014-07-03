@@ -19,8 +19,6 @@ class User
   field :email_public, type: Mongoid::Boolean
   field :encrypted_password, type: String, default: ""
 
-  validates_presence_of :email
-
   ## Recoverable
   field :reset_password_token,   type: String
   field :reset_password_sent_at, type: Time

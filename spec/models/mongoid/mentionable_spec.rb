@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 class TestDocument
   include Mongoid::Document
@@ -9,46 +9,46 @@ class TestDocument
   field :body
 end
 
-describe Mongoid::Mentionable do
+describe Mongoid::Mentionable, :type => :model do
   it "should extract mentioned user ids" do
     user = Factory :user
     doc = TestDocument.create :body => "@#{user.login}", :user => Factory(:user)
-    doc.mentioned_user_ids.should == [user.id]
-    doc.mentioned_user_logins.should == [user.login]
+    expect(doc.mentioned_user_ids).to eq([user.id])
+    expect(doc.mentioned_user_logins).to eq([user.login])
   end
 
   it "limit 5 mentioned user" do
     logins = ""
     6.times { logins << " @#{Factory(:user).login}" }
     doc = TestDocument.create :body => logins, :user => Factory(:user)
-    doc.mentioned_user_ids.count.should == 5
+    expect(doc.mentioned_user_ids.count).to eq(5)
   end
 
   it "except self user" do
     user = Factory :user
     doc = TestDocument.create :body => "@#{user.login}", :user => user
-    doc.mentioned_user_ids.count.should == 0
+    expect(doc.mentioned_user_ids.count).to eq(0)
   end
 
   it "should get mentioned user logins" do
     user1 = Factory :user
     user2 = Factory :user
     doc = TestDocument.create :body => "@#{user1.login} @#{user2.login}", :user => Factory(:user)
-    doc.mentioned_user_logins.should =~ [user1.login, user2.login]
+    expect(doc.mentioned_user_logins).to match_array([user1.login, user2.login])
   end
 
   it "should send mention notification" do
     user = Factory :user
-    lambda do
+    expect do
       TestDocument.create :body => "@#{user.login}", :user => Factory(:user)
-    end.should change(user.notifications.unread, :count)
+    end.to change(user.notifications.unread, :count)
 
-    lambda do
+    expect do
       TestDocument.create(:body => "@#{user.login}", :user => user)
-    end.should_not change(user.notifications.unread, :count)
+    end.not_to change(user.notifications.unread, :count)
 
-    lambda do
+    expect do
       TestDocument.create(:body => "@#{user.login}", :user => Factory(:user)).destroy
-    end.should_not change(user.notifications.unread, :count)
+    end.not_to change(user.notifications.unread, :count)
   end
 end

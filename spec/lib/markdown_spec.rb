@@ -1,10 +1,10 @@
 # coding: utf-8
-require 'spec_helper'
+require 'rails_helper'
 
 describe 'markdown' do
   let(:upload_url) { '' }
   before do
-    MarkdownTopicConverter.instance.stub(:upload_url).and_return(upload_url)
+    allow(MarkdownTopicConverter.instance).to receive(:upload_url).and_return(upload_url)
   end
 
   describe MarkdownTopicConverter do
@@ -17,18 +17,30 @@ describe 'markdown' do
     describe "encoding with Chinese chars" do
       context "a simple" do
         let(:raw) { '#1楼 @ichord 刚刚发布，有点问题' }
-        its(:inner_html) { should == %(<p><a href="#reply1" class="at_floor" data-floor="1">#1楼</a> <a href="/ichord" class="at_user" title="@ichord"><i>@</i>ichord</a> 刚刚发布，有点问题</p>) }
+
+        describe '#inner_html' do
+          subject { super().inner_html }
+          it { is_expected.to eq(%(<p><a href="#reply1" class="at_floor" data-floor="1">#1楼</a> <a href="/ichord" class="at_user" title="@ichord"><i>@</i>ichord</a> 刚刚发布，有点问题</p>)) }
+        end
       end
     end
     
     describe 'strikethrough' do
       let(:raw) { "some ~~strikethrough~~ text" }
-      its(:inner_html) { should == %(<p>some <del>strikethrough</del> text</p>) }
+
+      describe '#inner_html' do
+        subject { super().inner_html }
+        it { is_expected.to eq(%(<p>some <del>strikethrough</del> text</p>)) }
+      end
     end
 
     describe 'strong' do
       let(:raw) { "some **strong** text" }
-      its(:inner_html) { should == %(<p>some <strong>strong</strong> text</p>) }
+
+      describe '#inner_html' do
+        subject { super().inner_html }
+        it { is_expected.to eq(%(<p>some <strong>strong</strong> text</p>)) }
+      end
     end
     
     describe 'at user' do
@@ -36,16 +48,31 @@ describe 'markdown' do
         let(:raw) { '@user' }
 
         it 'has a link' do
-          doc.css('a').should have(1).item
+          expect(doc.css('a').size).to eq(1)
         end
 
         describe 'the link' do
           subject { doc.css('a').first }
 
-          its([:href]) { should == '/user' }
-          its([:class]) { should == 'at_user' }
-          its([:title]) { should == '@user' }
-          its(:inner_html) { should == '<i>@</i>user' }
+          describe '[:href]' do
+            subject { super()[:href] }
+            it { is_expected.to eq('/user') }
+          end
+
+          describe '[:class]' do
+            subject { super()[:class] }
+            it { is_expected.to eq('at_user') }
+          end
+
+          describe '[:title]' do
+            subject { super()[:title] }
+            it { is_expected.to eq('@user') }
+          end
+
+          describe '#inner_html' do
+            subject { super().inner_html }
+            it { is_expected.to eq('<i>@</i>user') }
+          end
         end
       end
 
@@ -53,16 +80,31 @@ describe 'markdown' do
         let(:raw) { '@_underscore_' }
 
         it 'has a link' do
-          doc.css('a').should have(1).item
+          expect(doc.css('a').size).to eq(1)
         end
 
         describe 'the link' do
           subject { doc.css('a').first }
 
-          its([:href]) { should == '/_underscore_' }
-          its([:class]) { should == 'at_user' }
-          its([:title]) { should == '@_underscore_' }
-          its(:inner_html) { should == '<i>@</i>_underscore_' }
+          describe '[:href]' do
+            subject { super()[:href] }
+            it { is_expected.to eq('/_underscore_') }
+          end
+
+          describe '[:class]' do
+            subject { super()[:class] }
+            it { is_expected.to eq('at_user') }
+          end
+
+          describe '[:title]' do
+            subject { super()[:title] }
+            it { is_expected.to eq('@_underscore_') }
+          end
+
+          describe '#inner_html' do
+            subject { super().inner_html }
+            it { is_expected.to eq('<i>@</i>_underscore_') }
+          end
         end
       end
 
@@ -70,27 +112,42 @@ describe 'markdown' do
         let(:raw) { '@__underscore__' }
 
         it 'has a link' do
-          doc.css('a').should have(1).item
+          expect(doc.css('a').size).to eq(1)
         end
 
         describe 'the link' do
           subject { doc.css('a').first }
 
-          its([:href]) { should == '/__underscore__' }
-          its([:class]) { should == 'at_user' }
-          its([:title]) { should == '@__underscore__' }
-          its(:inner_html) { should == '<i>@</i>__underscore__' }
+          describe '[:href]' do
+            subject { super()[:href] }
+            it { is_expected.to eq('/__underscore__') }
+          end
+
+          describe '[:class]' do
+            subject { super()[:class] }
+            it { is_expected.to eq('at_user') }
+          end
+
+          describe '[:title]' do
+            subject { super()[:title] }
+            it { is_expected.to eq('@__underscore__') }
+          end
+
+          describe '#inner_html' do
+            subject { super().inner_html }
+            it { is_expected.to eq('<i>@</i>__underscore__') }
+          end
         end
       end
 
       context '@small_fish__ in text' do
         let(:raw) { '@small_fish__' }
-        specify { doc.css('a').first.inner_html.should == '<i>@</i>small_fish__' }
+        specify { expect(doc.css('a').first.inner_html).to eq('<i>@</i>small_fish__') }
       end
 
       context '@small_fish__ in code block' do
         let(:raw) { '`@small_fish__`' }
-        specify { doc.css('code').first.inner_html.should == '@small_fish__' }
+        specify { expect(doc.css('code').first.inner_html).to eq('@small_fish__') }
       end
 
       context '@small_fish__ in ruby code block' do
@@ -102,14 +159,14 @@ describe 'markdown' do
           MD
         }
 
-        specify { doc.search('pre').children[0].inner_html.should == '@small_fish__' }
+        specify { expect(doc.search('pre').children[0].inner_html).to eq('@small_fish__') }
       end
 
       context '@user in code' do
         let(:raw) { '`@user`' }
 
-        specify { doc.css('a').should be_empty }
-        specify { doc.css('code').inner_html.should == '@user' }
+        specify { expect(doc.css('a')).to be_empty }
+        specify { expect(doc.css('code').inner_html).to eq('@user') }
       end
 
       context '@user in block code' do
@@ -121,8 +178,8 @@ describe 'markdown' do
           MD
         }
 
-        specify { doc.css('a').should be_empty }
-        specify { doc.css('pre').inner_html.should == "@user\n" }
+        specify { expect(doc.css('a')).to be_empty }
+        specify { expect(doc.css('pre').inner_html).to eq("@user\n") }
       end
 
       context '@var in coffeescript' do
@@ -135,7 +192,7 @@ describe 'markdown' do
         }
 
         it 'should not leave it as placeholder' do
-          doc.to_html.should include('var')
+          expect(doc.to_html).to include('var')
         end
       end
     end
@@ -149,24 +206,39 @@ describe 'markdown' do
         let(:raw) { '#12f' }
 
         it 'has a link' do
-          doc.css('a').should have(1).item
+          expect(doc.css('a').size).to eq(1)
         end
 
         describe 'the link' do
           subject { doc.css('a').first }
 
-          its([:href]) { should == '#reply12' }
-          its([:class]) { should == 'at_floor' }
-          its(['data-floor']) { should == '12' }
-          its(:inner_html) { should == '#12f' }
+          describe '[:href]' do
+            subject { super()[:href] }
+            it { is_expected.to eq('#reply12') }
+          end
+
+          describe '[:class]' do
+            subject { super()[:class] }
+            it { is_expected.to eq('at_floor') }
+          end
+
+          describe "['data-floor']" do
+            subject { super()['data-floor'] }
+            it { is_expected.to eq('12') }
+          end
+
+          describe '#inner_html' do
+            subject { super().inner_html }
+            it { is_expected.to eq('#12f') }
+          end
         end
       end
 
       context ' #12f in code' do
         let(:raw) { '`#12f`' }
 
-        specify { doc.css('a').should be_empty }
-        specify { doc.css('code').inner_html.should == '#12f' }
+        specify { expect(doc.css('a')).to be_empty }
+        specify { expect(doc.css('code').inner_html).to eq('#12f') }
       end
 
       context ' #12f in block code' do
@@ -178,8 +250,8 @@ describe 'markdown' do
           MD
         }
 
-        specify { doc.css('a').should be_empty }
-        specify { doc.css('pre').inner_html.should == "#12f\n" }
+        specify { expect(doc.css('a')).to be_empty }
+        specify { expect(doc.css('pre').inner_html).to eq("#12f\n") }
       end
     end
 
@@ -192,32 +264,43 @@ describe 'markdown' do
         let(:raw) { ':apple:' }
 
         it 'has a image' do
-          doc.css('img').should have(1).item
+          expect(doc.css('img').size).to eq(1)
         end
 
         describe 'the image' do
           subject { doc.css('img').first }
 
-          its([:src]) { should == "#{upload_url}/assets/emojis/apple.png" }
-          its([:class]) { should == 'emoji' }
-          its([:title]) { should == ':apple:' }
+          describe '[:src]' do
+            subject { super()[:src] }
+            it { is_expected.to eq("#{upload_url}/assets/emojis/apple.png") }
+          end
+
+          describe '[:class]' do
+            subject { super()[:class] }
+            it { is_expected.to eq('emoji') }
+          end
+
+          describe '[:title]' do
+            subject { super()[:title] }
+            it { is_expected.to eq(':apple:') }
+          end
         end
       end
 
       context ':-1:' do
         let(:raw) { ':-1:' }
-        specify { doc.css('img').first[:title].should == ':-1:' }
+        specify { expect(doc.css('img').first[:title]).to eq(':-1:') }
       end
       context ':arrow_lower_left:' do
         let(:raw) { ':arrow_lower_left:' }
-        specify { doc.css('img').first[:title].should == ':arrow_lower_left:' }
+        specify { expect(doc.css('img').first[:title]).to eq(':arrow_lower_left:') }
       end
 
       context ':apple: in code' do
         let(:raw) { '`:apple:`' }
 
-        specify { doc.css('a').should be_empty }
-        specify { doc.css('code').inner_html.should == ':apple:' }
+        specify { expect(doc.css('a')).to be_empty }
+        specify { expect(doc.css('code').inner_html).to eq(':apple:') }
       end
 
       context ':apple: in block code' do
@@ -229,8 +312,8 @@ describe 'markdown' do
           MD
         }
 
-        specify { doc.css('a').should be_empty }
-        specify { doc.css('pre').inner_html.should == ":apple:\n" }
+        specify { expect(doc.css('a')).to be_empty }
+        specify { expect(doc.css('pre').inner_html).to eq(":apple:\n") }
       end
     end
 
@@ -244,7 +327,7 @@ describe 'markdown' do
           ```)
         }
         
-        specify { doc.css('pre').attr("class").value.should == "highlight plaintext" }
+        specify { expect(doc.css('pre').attr("class").value).to eq("highlight plaintext") }
       end
       
       context '```ruby use with code' do
@@ -254,36 +337,48 @@ describe 'markdown' do
           ```)
         }
         
-        specify { doc.css('pre').attr("class").value.should == "highlight ruby" }
+        specify { expect(doc.css('pre').attr("class").value).to eq("highlight ruby") }
       end
       
       context 'indent in raw with \t' do
         let(:raw) { "\t\tclass Foo; end" }
         
-        specify { doc.css('pre').should be_empty }
+        specify { expect(doc.css('pre')).to be_empty }
       end
       
       context 'indent in raw with space' do
         let(:raw) { "    class Foo; end" }
         
-        specify { doc.css('pre').should be_empty }
+        specify { expect(doc.css('pre')).to be_empty }
       end
     end
     
     describe 'Escape HTML tags' do
       context '<xxx> or a book names' do
         let(:raw) { "<Enterprise Integration Patterns> book" }
-        its(:inner_html) { should == "<p>&lt;Enterprise Integration Patterns&gt; book</p>" }
+
+        describe '#inner_html' do
+          subject { super().inner_html }
+          it { is_expected.to eq("<p>&lt;Enterprise Integration Patterns&gt; book</p>") }
+        end
       end
       
       context '<img> tag' do
         let(:raw) { "<img src='aaa.jpg' /> aaa" }
-        its(:inner_html) { should == "<p>&lt;img src='aaa.jpg' /&gt; aaa</p>" }
+
+        describe '#inner_html' do
+          subject { super().inner_html }
+          it { is_expected.to eq("<p>&lt;img src='aaa.jpg' /&gt; aaa</p>") }
+        end
       end
       
       context '<b> tag' do
         let(:raw) { "<b>aaa</b>" }
-        its(:inner_html) { should == "<p>&lt;b&gt;aaa&lt;/b&gt;</p>" }
+
+        describe '#inner_html' do
+          subject { super().inner_html }
+          it { is_expected.to eq("<p>&lt;b&gt;aaa&lt;/b&gt;</p>") }
+        end
       end
     end
   end

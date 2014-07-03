@@ -1,8 +1,8 @@
-require "spec_helper"
+require "rails_helper"
 
-describe NodesHelper do
+describe NodesHelper, :type => :helper do
   it "should render_node_summary" do
     @node = Factory :node
-    helper.render_node_summary(@node).should == %{<p class="summary">#{@node.summary}</p>}
+    expect(helper.render_node_summary(@node)).to eq(%{<p class="summary">#{@node.summary}</p>})
   end
 end

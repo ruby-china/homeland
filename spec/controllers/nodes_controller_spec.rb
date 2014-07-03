@@ -1,8 +1,8 @@
-require "spec_helper"
+require "rails_helper"
 
-describe NodesController do
+describe NodesController, :type => :controller do
   it "should have an index action" do
     get :index
-    response.should be_success
+    expect(response).to be_success
   end
 end

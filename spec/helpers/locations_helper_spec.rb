@@ -1,13 +1,13 @@
 # coding: utf-8
-require "spec_helper"
+require "rails_helper"
 
-describe LocationsHelper do
+describe LocationsHelper, :type => :helper do
   it "should location_name_tag work with string" do
-    helper.location_name_tag("chengdu").should == link_to("chengdu", location_users_path("chengdu"))
+    expect(helper.location_name_tag("chengdu")).to eq(link_to("chengdu", location_users_path("chengdu")))
   end
   
   it "should location_name_tag work with Location instance" do
     location = Factory(:location)
-    helper.location_name_tag(location).should == link_to(location.name, location_users_path(location.name))
+    expect(helper.location_name_tag(location)).to eq(link_to(location.name, location_users_path(location.name)))
   end
 end

@@ -1,10 +1,10 @@
-require "spec_helper"
+require "rails_helper"
 
-describe NotesController do
+describe NotesController, :type => :controller do
   describe "unauthenticated" do
     it "should not allow anonymous access" do
       get :index
-      response.should_not be_success
+      expect(response).not_to be_success
     end
   end
 
@@ -17,29 +17,29 @@ describe NotesController do
     describe ":index" do
       it "should have an index action" do
         get :index
-        response.should be_success
+        expect(response).to be_success
       end
     end
 
     describe ":new" do
       it "should have a new action" do
         get :new
-        response.should be_success
+        expect(response).to be_success
       end
     end
 
     describe ":edit" do
       it "should have an edit action" do
         get :edit, :id => note.id
-        assigns[:note].should_not be_blank
-        response.should be_success
+        expect(assigns[:note]).not_to be_blank
+        expect(response).to be_success
       end
     end
 
     describe ":show" do
       it "should have a show action" do
         get :show, :id => note.id
-        response.should be_success
+        expect(response).to be_success
       end
     end
   end

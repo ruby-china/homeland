@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe NotificationsController do
+describe NotificationsController, :type => :controller do
   let(:user) { Factory :user }
   describe "#index" do
     it "should show notifications" do
@@ -8,7 +8,7 @@ describe NotificationsController do
       Factory :notification_mention, :user => user, :mentionable => Factory(:reply)
       Factory :notification_topic_reply, :user => user
       get :index
-      response.should render_template(:index)
+      expect(response).to render_template(:index)
     end
   end
 
@@ -17,9 +17,9 @@ describe NotificationsController do
       sign_in user
       notification = Factory :notification_mention, :user => user, :mentionable => Factory(:reply)
 
-      lambda do
+      expect do
         delete :destroy, :id => notification
-      end.should change(user.notifications, :count)
+      end.to change(user.notifications, :count)
     end
   end
 
@@ -29,7 +29,7 @@ describe NotificationsController do
       3.times{ Factory :notification_mention, :user => user, :mentionable => Factory(:reply) }
 
       post :clear
-      user.notifications.unread.count.should == 0
+      expect(user.notifications.unread.count).to eq(0)
     end
   end
 end

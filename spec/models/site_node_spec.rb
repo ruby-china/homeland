@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe SiteNode do
+describe SiteNode, :type => :model do
 end

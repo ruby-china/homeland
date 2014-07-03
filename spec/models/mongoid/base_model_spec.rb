@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Mongoid::BaseModel do
+describe Mongoid::BaseModel, :type => :model do
   class Monkey
     include Mongoid::Document
     include Mongoid::BaseModel
@@ -17,7 +17,7 @@ describe Mongoid::BaseModel do
     monkey = Monkey.create(:name => "Caesar", :_id => 1)
     ghost = Monkey.create(:name => "Wukong", :_id => 2)
 
-    Monkey.recent.to_a.should == [ghost, monkey]
+    expect(Monkey.recent.to_a).to eq([ghost, monkey])
   end
 
   it "should have exclude_ids scope method" do
@@ -27,21 +27,21 @@ describe Mongoid::BaseModel do
     result1 = Monkey.exclude_ids(ids.to(4).map(&:to_s)).map(&:name)
     result2 = Monkey.exclude_ids(ids.from(5)).map(&:name)
 
-    result1.should == ids.from(5).map { |i| "entry##{i}" }
-    result2.should == ids.to(4).map { |i| "entry##{i}" }
+    expect(result1).to eq(ids.from(5).map { |i| "entry##{i}" })
+    expect(result2).to eq(ids.to(4).map { |i| "entry##{i}" })
   end
 
   it "should have find_by_id class methods" do
     monkey = Monkey.create(:name => "monkey", :_id => 1)
-    Monkey.find_by_id(1).should eq(monkey)
-    Monkey.find_by_id("1").should eq(monkey)
-    Monkey.find_by_id(2).should be_nil
+    expect(Monkey.find_by_id(1)).to eq(monkey)
+    expect(Monkey.find_by_id("1")).to eq(monkey)
+    expect(Monkey.find_by_id(2)).to be_nil
   end
   
   it "should have by_week method" do
     Monkey.create(:name => "Caesar", :created_at => 2.weeks.ago.utc)
     Monkey.create(:name => "Caesar1", :created_at => 3.days.ago.utc)
     Monkey.create(:name => "Caesar1", :created_at => Time.now.utc)
-    Monkey.by_week.count.should eq(2)
+    expect(Monkey.by_week.count).to eq(2)
   end
 end

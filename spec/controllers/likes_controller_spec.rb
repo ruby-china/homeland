@@ -1,60 +1,60 @@
 # coding: utf-8
-require 'spec_helper'
+require 'rails_helper'
 
-describe LikesController do
+describe LikesController, :type => :controller do
   let(:user) { Factory(:user) }
   let(:user2) { Factory(:user) }
   let(:topic) { Factory(:topic) }
 
   before(:each) do
-    controller.stub(:current_user).and_return(user)
+    allow(controller).to receive(:current_user).and_return(user)
   end
 
   it "POST /likes" do
     post :create, :type => "Topic", :id => topic.id
-    response.body.should == "1"
-    topic.reload.likes_count.should == 1
+    expect(response.body).to eq("1")
+    expect(topic.reload.likes_count).to eq(1)
 
     post :create, :type => "Topic", :id => topic.id
-    response.body.should == "1"
-    topic.reload.likes_count.should == 1
+    expect(response.body).to eq("1")
+    expect(topic.reload.likes_count).to eq(1)
 
-    controller.stub(:current_user).and_return(user2)
+    allow(controller).to receive(:current_user).and_return(user2)
     post :create, :type => "Topic", :id => topic.id
-    response.body.should == "2"
-    topic.reload.likes_count.should == 2
+    expect(response.body).to eq("2")
+    expect(topic.reload.likes_count).to eq(2)
 
-    controller.stub(:current_user).and_return(user)
+    allow(controller).to receive(:current_user).and_return(user)
     delete :destroy, :type => "Topic", :id => topic.id
-    response.body.should == "1"
-    topic.reload.likes_count.should == 1
+    expect(response.body).to eq("1")
+    expect(topic.reload.likes_count).to eq(1)
 
-    controller.stub(:current_user).and_return(user2)
+    allow(controller).to receive(:current_user).and_return(user2)
     delete :destroy, :type => "Topic", :id => topic.id
-    response.body.should == "0"
-    topic.reload.likes_count.should == 0
+    expect(response.body).to eq("0")
+    expect(topic.reload.likes_count).to eq(0)
   end
 
   it "require login" do
-    controller.stub(:current_user).and_return(nil)
+    allow(controller).to receive(:current_user).and_return(nil)
     post :create
-    response.status.should == 302
+    expect(response.status).to eq(302)
 
     delete :destroy, :id => 1, :type => "a"
-    response.status.should == 302
+    expect(response.status).to eq(302)
   end
 
   it "result -1, -2 when params is wrong" do
     post :create, :type => "Ask", :id => 1
-    response.body.should == "-1"
+    expect(response.body).to eq("-1")
 
     delete :destroy, :type => "Ask", :id => 1
-    response.body.should == "-1"
+    expect(response.body).to eq("-1")
 
     post :create, :type => "Topic", :id => -1
-    response.body.should == "-2"
+    expect(response.body).to eq("-2")
 
     delete :destroy, :type => "Topic", :id => -1
-    response.body.should == "-2"
+    expect(response.body).to eq("-2")
   end
 end

@@ -1,9 +1,9 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe "topics/show.html.erb" do
+describe "topics/show.html.erb", :type => :view do
   let(:user) { FactoryGirl.create(:user) }
   let(:topic) { FactoryGirl.create(:topic) }
-  before { controller.stub(:current_user => user) }
+  before { allow(controller).to receive(:current_user) { user } }
 
   it 'escapes title in social share button' do
     topic.title = 'f\'></div><button id="danger" onclick="javascript:alert(\'ooh\')">share</button><div style="display:none"'

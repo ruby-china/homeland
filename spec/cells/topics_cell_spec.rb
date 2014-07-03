@@ -1,4 +1,4 @@
-require "spec_helper"
+require "rails_helper"
 
 describe TopicsCell do
   before(:each) do
@@ -11,19 +11,19 @@ describe TopicsCell do
 
   describe "index_sections" do
     it "should render sections" do
-      render_cell(:topics, :index_sections).should have_css('div#sections li', :count => 1)
+      expect(render_cell(:topics, :index_sections)).to have_css('div#sections li', :count => 1)
     end
   end
 
   describe "sidebar_statistics" do
     it "should render sidebar stats" do
-      render_cell(:topics, :sidebar_statistics).should have_css("div.totals", :count => 1)
+      expect(render_cell(:topics, :sidebar_statistics)).to have_css("div.totals", :count => 1)
     end
   end
   
   describe "reply_help_block" do
     it "should render reply_help_block" do
-      render_cell(:topics, :reply_help_block).should have_css('div#markdown_help_tip_modal')
+      expect(render_cell(:topics, :reply_help_block)).to have_css('div#markdown_help_tip_modal')
     end
   end
 
@@ -34,7 +34,7 @@ describe TopicsCell do
       l3 = Factory(:location)
       count = Location.count
       count = 12 if count > 12
-      render_cell(:topics, :index_locations).should have_css('div#hot_locations li.name', :count => count)
+      expect(render_cell(:topics, :index_locations)).to have_css('div#hot_locations li.name', :count => count)
     end
   end
 
@@ -43,12 +43,12 @@ describe TopicsCell do
     let(:topic0) { Factory(:topic, :node => node) }
 
     it "should not render if node only has one topic" do
-      render_cell(:topics, :sidebar_for_node_recent_topics, :topic => topic0).should_not have_css("div.box ul li")
+      expect(render_cell(:topics, :sidebar_for_node_recent_topics, :topic => topic0)).not_to have_css("div.box ul li")
     end
 
     it "should render" do
       topic1 = Factory(:topic, :node => node)
-      render_cell(:topics, :sidebar_for_node_recent_topics, :topic => topic0).should have_css("div.box ul li", :count => 1)
+      expect(render_cell(:topics, :sidebar_for_node_recent_topics, :topic => topic0)).to have_css("div.box ul li", :count => 1)
     end
 
     it "shoudl render more when Topic have more replies" do
@@ -57,13 +57,13 @@ describe TopicsCell do
       reply2 = Factory(:reply, :topic => topic0)
       topic1 = Factory(:topic, :node => node)
       topic2 = Factory(:topic, :node => node)
-      render_cell(:topics, :sidebar_for_node_recent_topics, :topic => topic0).should have_css("div.box ul li", :count => 2)
+      expect(render_cell(:topics, :sidebar_for_node_recent_topics, :topic => topic0)).to have_css("div.box ul li", :count => 2)
     end
   end
 
   describe "tips" do
     it "should render tips" do
-      render_cell(:topics, :tips).should have_css("div.box", :count => 1)
+      expect(render_cell(:topics, :tips)).to have_css("div.box", :count => 1)
     end
   end
 end

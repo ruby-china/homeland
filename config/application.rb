@@ -32,7 +32,6 @@ module RubyChina
     config.mongoid.include_root_in_json = false
 
     config.assets.enabled = true
-    config.assets.version = '1.0'
 
     config.generators do |g|
       g.test_framework :rspec
@@ -44,11 +43,6 @@ module RubyChina
     config.to_prepare {
       Devise::Mailer.layout "mailer"
     }
-
-    config.assets.precompile += %w(application.css app.js topics.css topics.js
-      window.css front.css cpanel.css
-      users.css pages.css pages.js notes.css notes.js
-      mobile.css home.css)
 
     config.middleware.use Rack::Cors do
       allow do

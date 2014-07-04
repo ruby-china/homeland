@@ -5,7 +5,7 @@ else
   source 'https://ruby.taobao.org'
 end
 
-gem "rails", "4.1.2"
+gem "rails", "4.1.4"
 gem 'turbolinks', '~> 2.2.2'
 gem 'jquery-turbolinks', '~> 2.0.2'
 gem 'actionpack-action_caching', '1.1.1'

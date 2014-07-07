@@ -8,7 +8,7 @@
     personal_website: "博客"
     recent_publish_topic: "最近发布的帖子"
     recent_reply_topic: "最近回复过的帖子"
-    unbind_warning: "只少要保留一个关联帐号，现在不能解绑。"
+    unbind_warning: "至少要保留一个关联帐号，现在不能解绑。"
     unbind_success: "%{provider} 帐号解绑成功。"
     please_be_careful: "谨慎修改"
     be_sure_to_use_twitter_id: "此项将会影响回复信息关联,建议用 Twitter ID"

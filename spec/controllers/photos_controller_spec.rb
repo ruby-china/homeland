@@ -1,5 +1,5 @@
-require "spec_helper"
+require "rails_helper"
 
-describe PhotosController do
+describe PhotosController, :type => :controller do
   let(:user) { Factory :user }
 end

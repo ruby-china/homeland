@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe TopicsController do
+describe TopicsController, :type => :controller do
   render_views
   let(:topic) { Factory :topic, :user => user }
   let(:user) { Factory :user }
@@ -10,22 +10,22 @@ describe TopicsController do
   describe ":index" do
     it "should have an index action" do
       get :index
-      response.should be_success
+      expect(response).to be_success
     end
   end
 
   describe ":feed" do
     it "should have a feed action" do
       get :feed
-      response.headers['Content-Type'].should == 'application/xml; charset=utf-8'
-      response.should be_success
+      expect(response.headers['Content-Type']).to eq('application/xml; charset=utf-8')
+      expect(response).to be_success
     end
   end
 
   describe ":recent" do
     it "should have a recent action" do
       get :recent
-      response.should be_success
+      expect(response).to be_success
     end
   end
 
@@ -33,14 +33,14 @@ describe TopicsController do
 
     it "should have a node action" do
       get :node, :id => topic.id
-      response.should be_success
+      expect(response).to be_success
     end
   end
 
   describe ":node_feed" do
     it "should have a node_feed action" do
       get :node_feed, :id => topic.id
-      response.should be_success
+      expect(response).to be_success
     end
   end
 
@@ -48,7 +48,7 @@ describe TopicsController do
     describe "unauthenticated" do
       it "should not allow anonymous access" do
         get :new
-        response.should_not be_success
+        expect(response).not_to be_success
       end
     end
 
@@ -56,13 +56,13 @@ describe TopicsController do
       it "should allow access from authenticated user" do
         sign_in user
         get :new
-        response.should be_success
+        expect(response).to be_success
       end
 
       it "should not allow access from newbie user" do
         sign_in newbie
         get :new
-        response.should_not be_success
+        expect(response).not_to be_success
       end
     end
   end
@@ -71,7 +71,7 @@ describe TopicsController do
     context "unauthenticated" do
       it "should not allow anonymous access" do
         get :edit, :id => topic.id
-        response.should_not be_success
+        expect(response).not_to be_success
       end
     end
 
@@ -80,7 +80,7 @@ describe TopicsController do
         it "should allow access from authenticated user" do
           sign_in user
           get :edit, :id => topic.id
-          response.should be_success
+          expect(response).to be_success
         end
       end
 
@@ -90,7 +90,7 @@ describe TopicsController do
           topic_of_other_user = Factory(:topic, :user => other_user)
           sign_in user
           get :edit, :id => topic_of_other_user.id
-          response.should_not be_success
+          expect(response).not_to be_success
         end
       end
     end
@@ -115,9 +115,9 @@ describe TopicsController do
       before { sign_in user }
 
       it "should show the last page by default" do
-        Reply.stub!(:per_page).and_return(10)
+        allow(Reply).to receive(:per_page).and_return(10)
         get :show, :id => topic
-        assigns[:page].should eq(2)
+        expect(assigns[:page]).to eq(2)
       end
     end
   end
@@ -126,13 +126,13 @@ describe TopicsController do
     it "should not allow user suggest" do
       sign_in user
       put :suggest, :id => topic
-      topic.reload.excellent.should == 0
+      expect(topic.reload.excellent).to eq(0)
     end
 
     it "should not allow user suggest by admin" do
       sign_in admin
       put :suggest, :id => topic
-      topic.reload.excellent.should == 1
+      expect(topic.reload.excellent).to eq(1)
     end
   end
 
@@ -143,13 +143,13 @@ describe TopicsController do
       it "should not allow user suggest" do
         sign_in user
         put :unsuggest, :id => topic
-        topic.reload.excellent.should == 1
+        expect(topic.reload.excellent).to eq(1)
       end
 
       it "should not allow user suggest by admin" do
         sign_in admin
         put :unsuggest, :id => topic
-        topic.reload.excellent.should == 0
+        expect(topic.reload.excellent).to eq(0)
       end
     end
   end

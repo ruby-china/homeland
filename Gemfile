@@ -5,7 +5,7 @@ else
   source 'https://ruby.taobao.org'
 end
 
-gem "rails", "4.1.2"
+gem "rails", "4.1.4"
 gem 'turbolinks', '~> 2.2.2'
 gem 'jquery-turbolinks', '~> 2.0.2'
 gem 'actionpack-action_caching', '1.1.1'
@@ -47,7 +47,7 @@ gem "omniauth", "~> 1.0.1"
 gem "omniauth-github", "~> 1.1.0"
 
 # permission
-gem "cancan", "~> 1.6.10"
+gem 'cancancan', '~> 1.8.4'
 
 gem "hiredis", "~> 0.4.5"
 # Redis 命名空间
@@ -100,11 +100,11 @@ gem 'rack-cors', require: 'rack/cors'
 group :development, :test do
   gem 'capistrano', '2.9.0', require: false
   gem 'rvm-capistrano', require: false
-  gem 'rspec-rails', '~> 2.14.2'
+  gem 'rspec-rails', '~> 3.0.1'
   gem 'factory_girl_rails', '1.4.0'
   gem 'database_cleaner'
-  gem "rspec-cells", '0.1.10'
-  gem "capybara", "~> 0.4.1"
+  gem 'rspec-cells', '~> 0.2.1'
+  gem 'capybara', '~> 2.3.0'
   gem 'api_taster', '0.6.0'
   gem "letter_opener"
 

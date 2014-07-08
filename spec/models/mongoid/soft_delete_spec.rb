@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 class WalkingDead
   include Mongoid::Document
@@ -15,7 +15,7 @@ class WalkingDead
   end
 end
 
-describe "Soft Delete" do
+describe "Soft Delete", :type => :model do
   let!(:rick) { WalkingDead.create! :name => "Rick Grimes" }
 
   it "should affect default count" do
@@ -44,15 +44,15 @@ describe "Soft Delete" do
 
   it "should mark as destroyed and get proper query result" do
     rick.destroy
-    rick.should be_destroyed
+    expect(rick).to be_destroyed
 
-    WalkingDead.where(:name => rick.name).count.should == 0
-    WalkingDead.unscoped.where(:name => rick.name).first.should eq(rick)
+    expect(WalkingDead.where(:name => rick.name).count).to eq(0)
+    expect(WalkingDead.unscoped.where(:name => rick.name).first).to eq(rick)
   end
   
   it 'is run callback after destroy' do
     rick.name = "foo"
     rick.destroy
-    rick.tag.should == "after_destroy foo"
+    expect(rick.tag).to eq("after_destroy foo")
   end
 end

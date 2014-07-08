@@ -1,22 +1,22 @@
-require "spec_helper"
+require "rails_helper"
 
-describe SitesController do
+describe SitesController, :type => :routing do
   describe "routing" do
 
     it "routes to #index" do
-      get("/sites").should route_to("sites#index")
+      expect(get("/sites")).to route_to("sites#index")
     end
 
     it "routes to #new" do
-      get("/sites/new").should route_to("sites#new")
+      expect(get("/sites/new")).to route_to("sites#new")
     end
 
     it "routes to #edit" do
-      get("/sites/1/edit").should route_to("sites#edit", :id => "1")
+      expect(get("/sites/1/edit")).to route_to("sites#edit", :id => "1")
     end
 
     it "routes to #create" do
-      post("/sites").should route_to("sites#create")
+      expect(post("/sites")).to route_to("sites#create")
     end
 
   end

@@ -53,7 +53,8 @@ GEM
       remotipart (~> 1.0)
       sass-rails
     arel (5.0.1.20140414130214)
-    auto-space (0.0.2)
+    auto-space (0.0.3)
+      activesupport (> 3.0.0)
     bcrypt (3.1.7)
     bcrypt-ruby (3.1.5)
       bcrypt (>= 3.1.3)
@@ -380,7 +381,7 @@ DEPENDENCIES
   actionpack-action_caching (= 1.1.1)
   anjlab-bootstrap-rails (= 2.0.3.2)
   api_taster (= 0.6.0)
-  auto-space (= 0.0.2)
+  auto-space (= 0.0.3)
   bootstrap-will_paginate (= 0.0.3)
   bootstrap_helper (= 4.2.3)
   cancan (~> 1.6.10)

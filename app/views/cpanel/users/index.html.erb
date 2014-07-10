@@ -1,7 +1,11 @@
 <% content_for :sitemap do %>
   <span class="current">用户</span>
 <% end %>
-<h1>Listing users</h1>
+<div class="toolbar">
+  <form class="form-search" action="<%= cpanel_users_path %>">
+    <input type="text" name="q" class="span2" value="<%= params[:q] %>" placeholder="用户名" /> <button class="btn btn-small">搜索</button>
+  </form>
+</div>
 
 <table class="table table-bordered table-striped table-condensed">
   <tr class="head">

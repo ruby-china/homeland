@@ -316,7 +316,7 @@ class User
     self.save(validate: false)
   end
 
-  # Github 项目
+  # GitHub 项目
   def github_repositories
     return [] if self.github.blank?
     cache_key = self.github_repositories_cache_key
@@ -341,7 +341,7 @@ class User
         open("https://api.github.com/users/#{user.github}/repos?type=owner&sort=pushed&client_id=#{Setting.github_token}&client_secret=#{Setting.github_secret}").read
       end
     rescue => e
-      Rails.logger.error("Github Repositiory fetch Error: #{e}")
+      Rails.logger.error("GitHub Repositiory fetch Error: #{e}")
       items = []
       Rails.cache.write(user.github_repositories_cache_key, items, expires_in: 15.days)
       return false

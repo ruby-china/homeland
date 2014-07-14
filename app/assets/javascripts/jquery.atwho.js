@@ -1,6 +1,6 @@
 //@ sourceMappingURL=jquery.caret.map
 /*
-  Implement Github like autocomplete mentions
+  Implement GitHub like autocomplete mentions
   http://ichord.github.com/At.js
 
   Copyright (c) 2013 chord.luo@gmail.com
@@ -290,7 +290,7 @@
 
 
 /*
-  Implement Github like autocomplete mentions
+  Implement GitHub like autocomplete mentions
   http://ichord.github.com/At.js
 
   Copyright (c) 2013 chord.luo@gmail.com

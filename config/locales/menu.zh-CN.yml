@@ -22,11 +22,11 @@
     logout: "退出"
     remember_me: "记住登录状态"
     cancel: "取消"
-    created_at: "于%{time}发布"
+    created_at: "于 %{time}发布"
     until: "截止"
     last_by: "最后由"
     floor: "楼"
-    reply_at: "于%{time}回复"
+    reply_at: "于 %{time}回复"
     create_item: "中发起"
     read_times: "次阅读"
     confirm_delete: "确定要删除么？"
@@ -60,7 +60,6 @@
     at: "在"
     hot_topics: "热门讨论"
     hot_locations: "热门城市"
-    replied_at: 回复于
     replies_count: "回复"
     likes_count: 喜欢
   reply:
@@ -102,7 +101,7 @@
     recent_node_topics_description: "%{name} 社区 %{node_name} 节点最新发帖."
     recent_node_topics_title: "%{name} 社区 %{node_name} 节点"
   site_config:
-    new_topic_dropdown_node_ids: "Sidebar 新建话题按钮，下拉显示的节点(node_id)，逗号隔开如 (1,3,4)"
+    new_topic_dropdown_node_ids: "Sidebar 新建话题按钮，下拉显示的节点 (node_id)，逗号隔开如 (1,3,4)"
     node_ids_hide_in_topics_index: "要在论坛首页列表隐藏的节点,以逗号隔开"
     custom_head_html: "自定 HTML head 区域的内容"
     site_index_html: "酷站列表首页头的 HTML"

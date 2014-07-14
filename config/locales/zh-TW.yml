@@ -1,4 +1,7 @@
 "zh-TW":
+  omniauth:
+    github: GitHub
+    twitter: Twitter
   mongoid:
     models:
       user: "使用者"

@@ -22,11 +22,11 @@
     logout: "登出"
     remember_me: "記住登錄狀態"
     cancel: "取消"
-    created_at: "於%{time}發布"
+    created_at: "於 %{time}發布"
     until: "截至"
     last_by: "最後由"
     floor: "樓"
-    reply_at: "於%{time}回應"
+    reply_at: "於 %{time}回應"
     create_item: "中發起"
     read_times: "次閱讀"
     confirm_delete: "確定要刪除嗎？"
@@ -60,7 +60,6 @@
     at: "在"
     hot_topics: "熱門討論"
     hot_locations: "熱門城市"
-    replied_at: 回應于
   reply:
     edit_reply: "修改回應"
     delete_reply_success: '回應刪除成功'

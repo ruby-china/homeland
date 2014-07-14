@@ -1,12 +1,15 @@
 
 /* Wiki Style from GitHub */
-.wikistyle h1,.wikistyle h2,.wikistyle h3,.wikistyle h4,.wikistyle h5,.wikistyle h6{border:0!important;}
-.wikistyle h1{font-size:170%!important;border-top:4px solid #aaa!important;padding-top:.5em!important;margin-top:1.5em!important;}
+.wikistyle { padding: 20px; }
+.wikistyle h1,.wikistyle h2,.wikistyle h3,.wikistyle h4,.wikistyle h5,.wikistyle h6{border:0!important; text-align: left;}
+.wikistyle h1{
+  text-align:center;
+  font-size:200%!important;border-top:4px solid #aaa!important;padding-top:.5em!important;margin-top:1.5em!important;}
 .wikistyle h1:first-child{margin-top:0!important;padding-top:.25em!important;border-top:none!important;}
 .wikistyle h2{font-size:150%!important;margin-top:1.5em!important;border-top:4px solid #e0e0e0!important;padding-top:.5em!important;}
 .wikistyle h3{margin-top:1em!important;}
 .wikistyle hr{border:1px solid #ddd;}
-.wikistyle p{margin:1em 0!important;line-height:1.5em!important;}
+.wikistyle p{ font-size: 14px; margin:1em 0!important;line-height:1.5em!important;}
 .wikistyle a.absent{color:#a00;}
 .wikistyle del{color:#999;}
 .wikistyle ul,#wiki-form .content-body ul{margin:1em 0 1em 2em!important;}

@@ -14,6 +14,6 @@
       <%= t("common.last_by")%> <%= user_name_tag(topic.last_reply_user_login) %> <%= sanitize t("common.reply_at", time: timeago(topic.replied_at))%>
     <% end %>
      · 
-    <%= topic.hits %><%= t("common.read_times")%>
+    <%= topic.hits %> <%= t("common.read_times")%>
   </div>
 </div>

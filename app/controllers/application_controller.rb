@@ -89,6 +89,8 @@ class ApplicationController < ActionController::Base
     opts[:etag] << SiteConfig.footer_html
     # 加入通知数量
     opts[:etag] << unread_notify_count
+    # 加入flash，确保当页面刷新后flash不会再出现
+    opts[:etag] << flash
     # 所有 etag 保持一天
     opts[:etag] << Date.current
     super(opts)

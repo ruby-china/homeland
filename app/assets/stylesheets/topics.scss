@@ -9,7 +9,9 @@
 
 .topics {
   .topic {
-    .avatar { width:56px; margin-left:10px; }
+    .avatar { 
+      width:56px; margin-left:10px; 
+    }
     .infos { padding-right:74px;}
     .right_info { padding-left:66px;}
     .title { 
@@ -67,7 +69,7 @@
       text-decoration: none;
     }
   }
-  .topic_line {background:#fff; border-bottom:1px solid #ddd; padding:10px 0; margin:0 -10px; vertical-align:top; }
+  .topic_line {background:#fff; border-bottom:1px solid #f0f0f0; padding:10px 0; margin:0 -10px; vertical-align:top; }
   tr.topic td.replies { text-align:right; width:50px; font-size:14px; color:green;font-weight:bold; }
 }
 
@@ -142,7 +144,9 @@ form .node_select {
     }
   }
   .sorts {
-    text-align:right; color:#999;
+    .lb { color: #999; }
+    text-align:right; 
+    color: #d0d0d0;
     padding:3px 0 10px 0;
     i.icon { margin-bottom:-1px; }
     ul { display:inline; margin:0; padding:0; }
@@ -162,12 +166,12 @@ form .node_select {
 
 #replies {
   .total { 
-    padding:0 10px 6px 10px; border-bottom:1px solid #DDD; color:#999; margin:0 -10px; 
+    padding:0 10px 6px 10px; border-bottom:1px solid #ddd; color:#999; margin:0 -10px; 
     a { color:#666; text-decoration: underline; }
   }
   .pagination { padding:8px 10px 0 10px; margin:0 -10px; }
   .reply {
-    border-bottom:1px solid #DDD; padding:8px 10px; margin:0 -10px;
+    border-bottom:1px solid #f0f0f0; padding:8px 10px; margin:0 -10px;
     background:#FFF;
     .deleted {
       color:#aaa;

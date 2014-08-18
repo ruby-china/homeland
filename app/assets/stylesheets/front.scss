@@ -360,13 +360,14 @@
   }
   a:link, 
   a:visited { 
-    color:#0069D6 !important; text-decoration: none; 
+    color:#0069D6 !important; text-decoration: none !important; 
   }
-  a:hover { text-decoration: underline; color:#00438A !important; }
+  a:hover { text-decoration: underline !important; color:#00438A !important; }
   
-  a.at_floor { color:#376B43 !important; }
+  a.at_floor { color:#60b566 !important;  }
   a.at_user {
-    color:#000 !important; font-weight:bold !important;
+    color:#777 !important; font-weight: bold;
+    margin-right: 2px;
     i { color:#777 !important; }
   }
   h1,

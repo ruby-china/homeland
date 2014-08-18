@@ -87,9 +87,6 @@ form .node_select {
 
 #topic_show {
   h1 { font-size:22px; color:#333;text-align: left; line-height:100%; margin-bottom:8px; }
-  .info {
-    .node { padding: 1px 0; }
-  }
   .infos {
     position:relative;
     margin-bottom:10px;
@@ -98,7 +95,11 @@ form .node_select {
     margin:-10px -10px 0;
     background: #f5f5f5;
     border-radius: 3px 3px 0 0;
-    padding:10px 10px 5px 10px;
+    padding:10px;
+    .info {
+      margin-bottom: 0px;
+      .node { padding: 1px 0; }
+    }
   }
   .avatar_large { width:48px; }
 }

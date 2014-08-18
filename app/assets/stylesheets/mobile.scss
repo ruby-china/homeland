@@ -56,12 +56,12 @@ body {
   }
   #nav_new_topic { margin-right:10px; }
 }
-table.node_topics .replies {
+table.node-topics .replies {
   width: 40px;
 }
 #reply.form {
   textarea { width: 100%; height: 80px; }
-  .submit_buttons {
+  .submit-buttons {
     position:static;
     float:none;
     .help-inline { display:none; }
@@ -75,7 +75,7 @@ table.node_topics .replies {
 }
 textarea.long {  width: 100%; height: 80px; }
 .help-block { display:none; }
-#reply .editor_toolbar {
+#reply .editor-toolbar {
   width:100%;
 }
 form {
@@ -147,7 +147,7 @@ form {
   margin:0; padding:0px 5px; font-size:10px; font-weight:normal;
 }
 #main .topics .topic h1 { font-size:16px; }
-#node_info {
+#node-info {
   .sorts {
     .lb { display:none; }
   }
@@ -162,7 +162,7 @@ form {
       img { max-width:32px; max-height:32px; }
     }
     .title { font-size:13px; margin:0; }
-    .right_info { padding-left:48px; }
+    .right-info { padding-left:48px; }
     .info {
       font-size:12px; margin:0;
       .node { padding:0;}
@@ -226,7 +226,7 @@ form {
   }
 }
 
-.go_top { display:none; }
+.go-top { display:none; }
 
 .home_suggest_topics {
   .box { width:auto; position: static;}

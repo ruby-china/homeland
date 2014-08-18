@@ -173,7 +173,7 @@ window.App =
     $("select").chosen()
 
     # Go Top
-    $("a.go_top").click () ->
+    $("a.go-top").click () ->
       $('html, body').animate({ scrollTop: 0 },300)
       return false
 
@@ -181,9 +181,9 @@ window.App =
     $(window).bind 'scroll resize', ->
       scroll_from_top = $(window).scrollTop()
       if scroll_from_top >= 1
-        $("a.go_top").show()
+        $("a.go-top").show()
       else
-        $("a.go_top").hide()
+        $("a.go-top").hide()
 
 # NProgress
 NProgress.configure

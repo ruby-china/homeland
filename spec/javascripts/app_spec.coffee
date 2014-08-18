@@ -3,7 +3,7 @@ describe 'App', ->
     describe 'when there is an author bob(012345), and replier jack(054321)', ->
       beforeEach ->
         @htmlContainer.append """
-          <div id="topic_show">
+          <div id="topic-show">
             <div class="leader">
               <a data-author="true" data-name="012345">bob</a>
             </div>

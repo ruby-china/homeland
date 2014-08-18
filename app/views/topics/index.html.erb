@@ -1,6 +1,6 @@
 <div class="content">
-  <div class="box box_gray">
-    <div id="node_info">
+  <div class="box box-gray">
+    <div id="node-info">
       <%= render "topics/node_info", node: @node %>
     </div>
 
@@ -35,7 +35,7 @@
   readed_topic_ids = readed_topic_ids.concat(<%= current_user.filter_readed_topics(@suggest_topics) %>);
   for (var i = 0; i < readed_topic_ids.length; i++) {
     topic_id = readed_topic_ids[i];
-    $(".topic_"+ topic_id + " .right_info .count").addClass("state_true");
+    $(".topic-"+ topic_id + " .right-info .count").addClass("state-true");
   }
 </script>
 <% end %>

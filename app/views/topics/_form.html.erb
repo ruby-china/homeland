@@ -2,19 +2,19 @@
   <%= render "shared/error_messages", target: @topic %>
   <div class="control-group">
     <% if @topic.lock_node == false || admin? %>
-      <span class="node_select span2">
+      <span class="node-select span2">
         <%= render_topic_node_select_tag(@topic) %>
       </span>
     <% end %>
     <%= f.text_field :title, class: "span5", placeholder: "在这里填写标题" %>
   </div>
   
-  <div class="control-group edit_tools">
+  <div class="control-group edit-tools">
     <%= render "editor_toolbar" %>
   </div>
   
   <div class="control-group">
-    <%= f.text_area :body, class: "topic_editor closewarning" %>
+    <%= f.text_area :body, class: "topic-editor closewarning" %>
   </div>
 
   <div class="control-group">

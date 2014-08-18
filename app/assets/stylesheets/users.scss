@@ -17,7 +17,7 @@
     cursor: default;
   }
 }
-.node_topics {
+.node-topics {
   td.title {
     a:link,
     a:visited {color:#2c64d7; text-decoration: none;}
@@ -39,7 +39,7 @@
   }
 }
 
-.recent_topics {
+.recent-topics {
   ul {
     list-style:none; margin:0;
     li {
@@ -61,7 +61,7 @@
   }
 }
 
-.recent_replies {
+.recent-replies {
   list-style:none; margin:0;
   li {
     padding:10px 0px;
@@ -112,17 +112,17 @@
   .active { margin-bottom:0;}
 }
 
-table.node_topics {
+table.node-topics {
   td {
     a { color:#333; font-weight:normal; }
   }
-  td.replied_at { width:80px; }
+  td.replied-at { width:80px; }
 }
 
 #users {
   .info { margin-bottom:10px; text-align:right;}
 }
-.user_list {
+.user-list {
   padding-bottom:20px; margin-left:0;
   h2 { font-size:14px; margin:0; }
   .span1 {

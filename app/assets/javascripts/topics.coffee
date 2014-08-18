@@ -5,7 +5,7 @@ window.Topics =
 
   # 往话题编辑器里面插入图片代码
   appendImageFromUpload : (srcs) ->
-    txtBox = $(".topic_editor")
+    txtBox = $(".topic-editor")
     caret_pos = txtBox.caret('pos')
     src_merged = ""
     for src in srcs
@@ -19,8 +19,8 @@ window.Topics =
   # 上传图片
   initUploader : () ->
     $("#topic_add_image").bind "click", () ->
-      $(".topic_editor").focus()
-      $("#topic_upload_images").click()
+      $(".topic-editor").focus()
+      $("#topic-upload-images").click()
       return false
 
     opts =
@@ -37,7 +37,7 @@ window.Topics =
         alert(errorThrown)
 
 
-    $("#topic_upload_images").fileUpload opts
+    $("#topic-upload-images").fileUpload opts
     return false
 
   restoreUploaderStatus : () ->
@@ -202,7 +202,7 @@ window.Topics =
 
   # 往话题编辑器里面插入代码模版
   appendCodesFromHint : (language='') ->
-    txtBox = $(".topic_editor")
+    txtBox = $(".topic-editor")
     caret_pos = txtBox.caret('pos')
     prefix_break = ""
     if txtBox.val().length > 0
@@ -243,7 +243,7 @@ window.Topics =
     $("a.small_reply").on 'click', () ->
       Topics.reply($(this).data("floor"), $(this).attr("data-login"))
 
-    Topics.hookPreview($(".editor_toolbar"), $(".topic_editor"))
+    Topics.hookPreview($(".editor-toolbar"), $(".topic-editor"))
 
     # pick up one lang and insert it into the textarea
     $("a.insert_code").on "click", ->
@@ -257,7 +257,7 @@ window.Topics =
         show : true
 
     # @ Reply
-    logins = App.scanLogins($("#topic_show .leader a[data-author]"))
+    logins = App.scanLogins($("#topic-show .leader a[data-author]"))
     $.extend logins, App.scanLogins($('#replies span.name a'))
     logins = ({login: k, name: v, search: "#{k} #{v}"} for k, v of logins)
     App.atReplyable("textarea", logins)

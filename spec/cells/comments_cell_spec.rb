@@ -7,7 +7,7 @@ describe CommentsCell do
   end
 
   it "should handle no comment correctly" do
-    expect(render_cell(:comments, :index, :commentable => @page)).to have_css("div.no_result")
+    expect(render_cell(:comments, :index, :commentable => @page)).to have_css("div.no-result")
   end
 
   it "should render comments" do

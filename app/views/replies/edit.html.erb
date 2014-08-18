@@ -11,11 +11,11 @@
   <div class="box">
     <%= simple_form_for([@topic, @reply]) do |f| %>
       <%= render "shared/error_messages", target: @reply %>
-      <div class="control-group edit_tools">
+      <div class="control-group edit-tools">
         <%= render "/topics/editor_toolbar" %>
       </div>
       <div class="control-group">
-        <%= f.text_area :body, class: "topic_editor" %>
+        <%= f.text_area :body, class: "topic-editor" %>
       </div>
       <div class="control-group">
         <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving") %>

@@ -1,9 +1,9 @@
 .topics .topic .title a:link,
 .topics .topic .title a:visited,
-.node_topics .title a:link,
-.node_topics .title a:visited {color: #0069D6; text-decoration: none;}
+.node-topics .title a:link,
+.node-topics .title a:visited {color: #0069D6; text-decoration: none;}
 .topics .topic  .title a:hover,
-.node_topics .title a:hover { text-decoration: underline; }
+.node-topics .title a:hover { text-decoration: underline; }
 
 .sidebar p { margin-bottom:8px;}
 
@@ -13,7 +13,7 @@
       width:56px; margin-left:10px; 
     }
     .infos { padding-right:74px;}
-    .right_info { padding-left:66px;}
+    .right-info { padding-left:66px;}
     .title { 
       font-size:14px; margin-top:2px; margin-bottom:6px; 
       i { margin-bottom:-1px; }
@@ -39,8 +39,8 @@
          margin: 18px 12px 0px 0px; text-decoration: none;
        }
        a.count:hover { color:write; background: #3952a6; }
-       a.state_true:link,a.state_true:visited { background:#DDD; }
-       a.state_true:hover { background:#aaa;}
+       a.state-true:link,a.state-true:visited { background:#DDD; }
+       a.state-true:hover { background:#aaa;}
     }
   }
   .body {
@@ -69,7 +69,7 @@
       text-decoration: none;
     }
   }
-  .topic_line {background:#fff; border-bottom:1px solid #f0f0f0; padding:10px 0; margin:0 -10px; vertical-align:top; }
+  .topic-line {background:#fff; border-bottom:1px solid #f0f0f0; padding:10px 0; margin:0 -10px; vertical-align:top; }
   tr.topic td.replies { text-align:right; width:50px; font-size:14px; color:green;font-weight:bold; }
 }
 
@@ -78,14 +78,14 @@
   ul { margin:0 auto; float:right; }
 }
 
-form .node_select {
+form .node-select {
   margin-left:0;
   margin-right:6px;
   width:143px;
   select { width:180px;}
 }
 
-#topic_show {
+#topic-show {
   h1 { font-size:22px; color:#333;text-align: left; line-height:100%; margin-bottom:8px; }
   .infos {
     position:relative;
@@ -101,14 +101,14 @@ form .node_select {
       .node { padding: 1px 0; }
     }
   }
-  .avatar_large { width:48px; }
+  .avatar-large { width:48px; }
 }
 
 .more { padding:8px; padding-bottom:0; font-size:14px; text-align:right; }
 
 /* topics list in node page */
 
-.node_topics {
+.node-topics {
   margin-bottom: 16px;
   tr td {
     padding: 8px; }
@@ -127,9 +127,9 @@ form .node_select {
     font-weight: bold; }
 }
 
-.no_result { margin-bottom:20px; text-align:center; }
+.no-result { margin-bottom:20px; text-align:center; }
 
-#node_info {
+#node-info {
   margin:0 -10px; padding:0 10px; border-bottom:1px solid #eaeaea;
   h1 { text-align:right; font-size:15px; }
   h2 { line-height:100%; display:inline; font-size:16px; margin-right:10px;}
@@ -216,7 +216,7 @@ form .node_select {
         i.icon { margin-bottom:-1px; }
       }
       a.edit { display:none; }
-      a.reply_link img { vertical-align:middle;}
+      a.reply-link img { vertical-align:middle;}
     }
     .body {
       text-align:left;
@@ -230,7 +230,7 @@ form .node_select {
   .pills::after { clear:left;}
   textarea { width:578px; margin-bottom:10px;}
   position:relative;
-  .submit_buttons {
+  .submit-buttons {
     position:absolute; right:10px; top:33px;
     .help-inline {
       margin-top:5px;
@@ -245,37 +245,13 @@ form .node_select {
 /* Topic & Reply body format */
 
 
-.form-horizontal .edit_tools { text-align:left; margin-bottom:0px }
+.form-horizontal .edit-tools { text-align:left; margin-bottom:0px }
 
 .totals ul li { line-height:150%;}
 
-#topic_new_tip li { margin-bottom:6px;}
+#topic-new-tip li { margin-bottom:6px;}
 
-#topics_recent {
-  h2 {
-    margin:0 -10px; padding:0 10px;
-    font-size:14px; color:#999; line-height:100%;
-    border-bottom:1px solid #ddd; padding-bottom:8px;
-  }
-  .node {
-    margin-right:6px;
-    a { color:#333; background:#eee; -webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px; padding:3px;font-size:11px; }
-  }
-  .info { font-size:12px; color:#999;
-    margin-left:6px;
-    a { color:#999; text-decoration: underline;}
-  }
-  ul {
-    margin:0; padding:0;
-    li {
-      margin:0 -10px; padding:6px 10px;
-      list-style:none; border-bottom:1px dashed #ddd;
-    }
-  }
-  .more { }
-}
-
-.editor_toolbar {
+.editor-toolbar {
   a.icon { margin-left:4px; }
 }
 
@@ -283,7 +259,7 @@ form .node_select {
   form {
     margin-bottom:0px;
   }
-  .editor_toolbar {
+  .editor-toolbar {
     width:588px;
   }
 }
@@ -316,7 +292,7 @@ form .node_select {
       }
     }
   }
-  .suggest_topics {
+  .suggest-topics {
     ul {
       li {
         line-height:130%;
@@ -349,14 +325,14 @@ form .node_select {
   }
 }
 
-#topic_upload_images { position:absolute;bottom:0;right:0;width:0;height:0;overflow:hidden; }
+#topic-upload-images { position:absolute;bottom:0;right:0;width:0;height:0;overflow:hidden; }
 
 
 .new_topic,
 .edit_topic,
 .edit_reply {
   .control-group:last-of-type { margin-bottom:0px; }
-  .topic_editor { width:99%; height: 400px; }
+  .topic-editor { width:99%; height: 400px; }
   #preview { width:99%; }
   .btn-primary { width:100px; }
 }

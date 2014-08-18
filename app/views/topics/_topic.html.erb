@@ -1,12 +1,12 @@
 <% cache([topic, suggest]) do %>
-<div class="topic topic_line topic_<%= topic.id %>">
+<div class="topic topic-line topic-<%= topic.id %>">
   <div class="pull-left avatar">
     <%= user_avatar_tag(topic.user,:normal) %>
   </div>
-  <div class="right_info">
+  <div class="right-info">
     <div class="pull-right replies">
       <% if topic.replies_count > 0 %>
-        <%= link_to(topic.replies_count,"#{topic_path(topic)}#reply#{topic.replies_count}", class: "count state_false") %>
+        <%= link_to(topic.replies_count,"#{topic_path(topic)}#reply#{topic.replies_count}", class: "count state-false") %>
       <% end %>
     </div>
     <div class="infos">

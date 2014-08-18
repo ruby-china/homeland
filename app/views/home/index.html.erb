@@ -1,6 +1,6 @@
 <%= raw SiteConfig.index_html %>
 
-<div class="home_suggest_topics box box_gray">
+<div class="home_suggest_topics box box-gray">
   <h2>社区精华帖</h2>
   <div class="topics">
     <%= render partial: "topics/topic", collection: @excellent_topics, locals: { suggest: false } %>

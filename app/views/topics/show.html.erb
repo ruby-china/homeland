@@ -15,7 +15,7 @@
 <% end %>
 
 <div class="content">
-  <div id="topic_show" class="topics box hfeed">
+  <div id="topic-show" class="topics box hfeed">
     <div class="topic hentry">
       <%= render partial: "topics/topic_info", locals: { topic: @topic } %>
       <%= raw SiteConfig.before_topic_html %>
@@ -41,11 +41,11 @@
   </div>
 
   <% if @replies.blank? %>
-    <div class="no_result">
+    <div class="no-result">
       <%= t("topics.no_replies") %>
     </div>
     <% else %>
-    <div id="replies" class="box box_gray">
+    <div id="replies" class="box box-gray">
       <div class="total">
         共收到 <b><%= @topic.replies_count %></b> 条回复
       </div>
@@ -63,8 +63,8 @@
       <% if can? :create, Reply %>
         <%= render "editor_toolbar" %>
         <%= form_for(Reply.new, remote: true, url: topic_replies_path(@topic)) do |f| %>
-          <%= f.text_area :body, class: "topic_editor span10", rows: "4", tabindex: "1" %>
-          <div class="submit_buttons">
+          <%= f.text_area :body, class: "topic-editor span10", rows: "4", tabindex: "1" %>
+          <div class="submit-buttons">
             <button type="submit" id="btn_reply" class="btn btn-primary" tabindex="2"><%= t("topics.submit_reply")%></button><br />
             <span class="help-inline" title="或者 Command + Enter">Ctrl+Enter</span>
           </div>

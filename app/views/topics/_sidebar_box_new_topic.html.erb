@@ -8,7 +8,7 @@
       end
       @hot_nodes = Node.where(:_id.in => ids).limit(5)
     %>
-    <div class="box box_gray clearfix">      
+    <div class="box box-gray clearfix">      
       <div class="btn-group pull-left">
         <%= link_to(t("topics.start_a_new_topic_button"), new_topic_path, class: "btn btn-success" )%>
         <button class="btn btn-success dropdown-toggle" data-toggle="dropdown">
@@ -22,7 +22,7 @@
       </div>
       
       <div class="feed_link pull-right">
-        <%= link_to(sanitize("<span class='icon icons_rss'></span> Feed 订阅"), feed_topics_url, title: t("topics.subscribe_with_rss", name: Setting.app_name), class: "feed", target: "_blank") %>
+        <%= link_to(sanitize("<span class='icon icons-rss'></span> Feed 订阅"), feed_topics_url, title: t("topics.subscribe_with_rss", name: Setting.app_name), class: "feed", target: "_blank") %>
       </div>
     </div>
   <% end %>  

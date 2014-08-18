@@ -2,7 +2,7 @@
   <% if !@comments.blank? %>
     <%= render :partial => "comment", :collection => @comments %>
   <% else %>
-    <div class="no_result"><%= t("comments.no_comment") %>.</div>
+    <div class="no-result"><%= t("comments.no_comment") %>.</div>
   <% end %>
 </div>
 <% if @current_user %>

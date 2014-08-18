@@ -72,6 +72,31 @@ module RubyChina
         end
       end
 
+      # Edit a topic
+      # require authentication
+      # params:
+      #   title
+      #   body
+      post ":id" do
+        authenticate!
+        #copy from the topicsController#update
+        @topic = Topic.find(params[:id])
+        if @topic.lock_node == false || current_user.admin?
+          # 锁定接点的时候，只有管理员可以修改节点
+          @topic.node_id = params[:node_id]
+
+          if current_user.admin? && @topic.node_id_changed?
+            # 当管理员修改节点的时候，锁定节点
+            @topic.lock_node = true
+          end
+        end
+        @topic.title = params[:title]
+        @topic.body = params[:body]
+        @topic.save
+
+        present @topic, with: APIEntities::DetailTopic, include_deleted: params[:include_deleted]
+      end
+      
       # Get topic detail
       # params:
       #   include_deleted(optional)

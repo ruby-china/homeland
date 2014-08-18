@@ -78,7 +78,7 @@
 
 <% cache([@user, "bio"]) do %>
   <% if !@user.bio.blank? %>
-    <div class="box bio wikistyle">
+    <div class="box bio markdown-body">
       <%= markdown(@user.bio) %>
     </div>
   <% end %>

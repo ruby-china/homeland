@@ -87,11 +87,14 @@ form .node_select {
 
 #topic_show {
   h1 { font-size:22px; color:#333;text-align: left; line-height:100%; margin-bottom:8px; }
+  .info {
+    .node { padding: 1px 0; }
+  }
   .infos {
     position:relative;
     margin-bottom:10px;
     margin-right:56px;
-    border-bottom:1px solid #ddd;
+    border-bottom:1px solid #eaeaea;
     margin:-10px -10px 0;
     background: #f5f5f5;
     border-radius: 3px 3px 0 0;
@@ -126,7 +129,7 @@ form .node_select {
 .no_result { margin-bottom:20px; text-align:center; }
 
 #node_info {
-  margin:0 -10px; padding:0 10px; border-bottom:1px solid #ddd;
+  margin:0 -10px; padding:0 10px; border-bottom:1px solid #eaeaea;
   h1 { text-align:right; font-size:15px; }
   h2 { line-height:100%; display:inline; font-size:16px; margin-right:10px;}
   .desc { color:#999; }
@@ -169,9 +172,14 @@ form .node_select {
     padding:0 10px 6px 10px; border-bottom:1px solid #ddd; color:#999; margin:0 -10px; 
     a { color:#666; text-decoration: underline; }
   }
-  .pagination { padding:8px 10px 0 10px; margin:0 -10px; }
+  .pagination { 
+    padding:8px 10px 0 10px; margin:0 -10px; 
+  }
   .reply {
     border-bottom:1px solid #f0f0f0; padding:8px 10px; margin:0 -10px;
+    &:last-child {
+      border-bottom: 1px solid #EEE;
+    }
     background:#FFF;
     .deleted {
       color:#aaa;
@@ -234,49 +242,7 @@ form .node_select {
 
 
 /* Topic & Reply body format */
-.topics .topic .body,
-#replies .reply .body,
-.markdown_body {
-  position:relative;
-  line-height: 1.8em; font-size:14px; text-overflow: ellipsis; word-wrap: break-word;
-  p { font-size:14px; margin-bottom: 20px; line-height: 1.6em; }
-  p:last-of-type { margin-bottom:0; }
-  hr { border:1px solid #e0e0e0; border-bottom:0px; margin: 18px auto; width:50%; }
-  blockquote {
-    margin-left:20px;
-    p { font-size:13px; color:#666; font-weight:normal; line-height:150%; }
-  }
-  code { margin:0 2px; font-family:Monaco,Menlo, "Courier New", monospace; display:inline-block;}
-  pre { font-family:Monaco,Menlo,"Courier New", monospace; margin-bottom:20px; }
-  a:link, a:visited { font-size:13px; color:#0069D6; text-decoration: none; }
-  a:hover { text-decoration: underline; color:#00438A; }
-  a.at_floor { color:#376B43; }
-  a.at_user {
-    color:#000; font-weight:bold;
-    i { color:#777; }
-  }
-  h4 { 
-    font-weight:bold; font-size:16px; line-height:100%; 
-    margin:0; color:#222; margin-top:20px; 
-    border-left:15px solid #eee; padding-left:5px; margin-bottom:20px;  }
-  strong { color:#000; }
-  ul,
-  ol {
-    list-style-position: inside;
-    list-style-type: square;
-    margin:0;
-    margin-bottom: 20px;
-    padding:5px 24px;
-    p { margin:0; }
-    li { line-height:1.8em; padding:2px 0; color:#333; font-size:13px; }
-    ul { list-style-type: circle; }
-  }
-  ol { 
-    list-style-type: decimal; 
-    ol { list-style-type: lower-alpha; }
-  }
-  img { vertical-align: top; }
-}
+
 
 .form-horizontal .edit_tools { text-align:left; margin-bottom:0px }
 

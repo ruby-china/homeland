@@ -8,7 +8,7 @@ window.Pages =
     alert('test')
 
   init : () ->
-    $("<div id='preview' class='wikistyle'></div>").insertAfter( $('#page_body') )
+    $("<div id='preview' class='markdown-body'></div>").insertAfter( $('#page_body') )
 
     $('.edit a').click ->
       $(this).parent().addClass('active')

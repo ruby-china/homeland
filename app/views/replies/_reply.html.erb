@@ -25,7 +25,7 @@
           <% end %>
         </span>
       </div>
-      <div class="body<%= ' deleted' if reply.deleted? %>">
+      <div class="body markdown-body<%= ' deleted' if reply.deleted? %>">
         <%= sanitize_reply reply.body_html %>
       </div>
       <span class="opts">

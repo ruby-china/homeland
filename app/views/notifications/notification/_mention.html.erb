@@ -22,7 +22,7 @@
       <% end %>
     </h3>
     <%- if reply.present? -%>
-      <div class="body md_body">
+      <div class="body markdown-body">
         <%= sanitize_reply reply.body_html %>
       </div>
     <%- end -%>
@@ -47,7 +47,7 @@
       <% end %>
     </h3>
     <%- if topic.present? -%>
-      <div class="body md_body">
+      <div class="body markdown-body">
         <%= sanitize_topic topic.body_html %>
       </div>
     <%- end -%>

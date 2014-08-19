@@ -1,3 +1,5 @@
+@import "mixins";
+
 .topics .topic .title a:link,
 .topics .topic .title a:visited,
 .node-topics .title a:link,
@@ -170,7 +172,7 @@ form .node-select {
 
 #replies {
   .total { 
-    padding:0 10px 6px 10px; border-bottom:1px solid #ddd; color:#999; margin:0 -10px; 
+    padding:0 10px 6px 10px; border-bottom:1px solid #eaeaea; color:#999; margin:0 -10px; 
     a { color:#666; text-decoration: underline; }
   }
   .pagination { 
@@ -178,6 +180,7 @@ form .node-select {
   }
   .reply {
     border-bottom:1px solid #f0f0f0; padding:8px 10px; margin:0 -10px;
+    @include clearfix;
     &:last-child {
       border-bottom: 1px solid #EEE;
     }
@@ -327,6 +330,14 @@ form .node-select {
 
 #topic-upload-images { position:absolute;bottom:0;right:0;width:0;height:0;overflow:hidden; }
 
+.helpblock {
+  color: #888;
+  a { color: #555; text-decoration: underline;   }
+  ul {
+    margin-left: 15px;
+    li { list-style-type: square; }
+  }
+}
 
 .new_topic,
 .edit_topic,

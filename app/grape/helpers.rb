@@ -34,5 +34,19 @@ module RubyChina
     def authenticate!
       error!({ "error" => "401 Unauthorized" }, 401) unless current_user
     end
+
+    def check_current_user_status_for_topic
+    return false if not current_user
+    
+    # 找出用户 like 过的 Reply，给 JS 处理 like 功能的状态
+    @user_liked_reply_ids = []
+    # @replies.each { |r| @user_liked_reply_ids << r.id if r.liked_user_ids.index(current_user.id) != nil }
+    # 通知处理
+    current_user.read_topic(@topic)
+    # 是否关注过
+    @has_followed = @topic.follower_ids.index(current_user.id) == nil
+    # 是否收藏
+    @has_favorited = current_user.favorite_topic_ids.index(@topic.id) == nil
+  end
   end
 end

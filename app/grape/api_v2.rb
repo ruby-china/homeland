@@ -105,7 +105,8 @@ module RubyChina
       get ":id" do
         @topic = Topic.find(params[:id])
         @topic.hits.incr(1)
-        present @topic, with: APIEntities::DetailTopic, include_deleted: params[:include_deleted]
+        check_current_user_status_for_topic
+        present @topic, with: APIEntities::DetailTopic, include_deleted: params[:include_deleted], has_favorited: !@has_favorited, has_followed: !@has_followed
       end
 
       # Post a new reply

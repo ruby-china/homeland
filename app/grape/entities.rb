@@ -53,6 +53,8 @@ module RubyChina
       expose :id, :title, :created_at, :updated_at, :replied_at, :replies_count, :node_name, :node_id, :last_reply_user_id, :last_reply_user_login, :body, :body_html
       expose(:hits) { |topic| topic.hits.to_i }
       expose :user, using: APIEntities::User
+      expose (:has_followed)  {|model, opts| opts[:has_followed] }
+      expose (:has_favorited) {|model, opts| opts[:has_favorited] }
       # replies only exposed when a single topic is fetched
       expose(:replies, unless: { collection: true }) do |model, opts|
         replies = model.replies

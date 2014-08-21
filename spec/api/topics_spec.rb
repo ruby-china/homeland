@@ -160,6 +160,43 @@ describe RubyChina::API, "topics", :type => :request do
       expect(json["hits"]).to eq(old_hits + 2)
     end
     
+    it "should get favorite/follow status with current_user" do
+      t = Factory(:topic, :title => "Have I favorited this topic?")
+      get "/api/v2/topics/#{t.id}.json"
+      expect(response.status).to eq(200)
+      json = JSON.parse(response.body)
+      puts json["has_followed"]
+      expect(json["has_followed"]).to eq(false)
+      expect(json["has_favorited"]).to eq(false)
+      u = Factory(:user).tap { |u| u.update_private_token }
+      #like it
+      post "/api/v2/topics/#{t.id}/favorite.json", :token => u.private_token
+
+      get "/api/v2/topics/#{t.id}.json", :token => u.private_token
+      expect(response.status).to eq(200)
+      json = JSON.parse(response.body)
+      expect(json["has_favorited"]).to eq(true)
+      expect(json["has_followed"]).to  eq(false)
+
+      #unlike it
+      post "/api/v2/topics/#{t.id}/favorite.json", :token => u.private_token, :type => 'unfavorite'
+
+      #follow it
+      post "/api/v2/topics/#{t.id}/follow.json", :token => u.private_token
+
+      get "/api/v2/topics/#{t.id}.json", :token => u.private_token
+      expect(response.status).to eq(200)
+      json = JSON.parse(response.body)
+      expect(json["has_favorited"]).to eq(false)
+      expect(json['has_followed']).to  eq(true)
+
+      get "/api/v2/topics/#{t.id}.json"
+      expect(response.status).to eq(200)
+      json = JSON.parse(response.body)
+      expect(json["has_favorited"]).to eq(false)
+      expect(json['has_followed']).to  eq(false)
+    end
+
     it "should work when id record found" do
       get "/api/topics/-1.json"
       expect(response.status).to eq(404)
@@ -181,7 +218,7 @@ describe RubyChina::API, "topics", :type => :request do
       user = Factory(:user).tap { |u| u.update_private_token }
       t = Factory(:topic, :title => "new topic 2")
       post "/api/topics/#{t.id}/follow.json", :token => user.private_token
-      expect(response.status).to eq(201)      
+      expect(response.status).to eq(201)
       expect(response.body).to eq('true')
       expect(t.reload.follower_ids).to include(user.id)
     end

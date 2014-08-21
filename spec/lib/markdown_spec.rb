@@ -380,6 +380,15 @@ describe 'markdown' do
           it { is_expected.to eq("<p>&lt;b&gt;aaa&lt;/b&gt;</p>") }
         end
       end
+
+      context "<a> tag" do
+        let(:raw) { "https://www.flickr.com/photos/123590011@N08/sets/72157644587013882/" }
+
+        subject { super().inner_html }
+        it "auto link with @ issue #322" do
+          expect(subject).to eq "<p><a href=\"https://www.flickr.com/photos/123590011@N08/sets/72157644587013882/\" rel=\"nofollow\" target=\"_blank\">https://www.flickr.com/photos/123590011@N08/sets/72157644587013882/</a></p>"
+        end
+      end
     end
   end
 end

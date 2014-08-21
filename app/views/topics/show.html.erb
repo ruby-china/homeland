@@ -45,7 +45,7 @@
       <%= t("topics.no_replies") %>
     </div>
     <% else %>
-    <div id="replies" class="box box-gray">
+    <div id="replies" class="box box-gray" data-last-floor="<%= @replies.count %>">
       <div class="total">
         共收到 <b><%= @topic.replies_count %></b> 条回复
       </div>

@@ -11,4 +11,8 @@ class HomeController < ApplicationController
 
   def twitter
   end
+  
+  def error_404
+    render_404
+  end
 end

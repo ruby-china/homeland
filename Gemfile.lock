@@ -253,6 +253,8 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
+    rack-utf8_sanitizer (1.2.2)
+      rack (~> 1.0)
     rails (4.1.5)
       actionmailer (= 4.1.5)
       actionpack (= 4.1.5)
@@ -411,6 +413,7 @@ DEPENDENCIES
   puma (= 2.6.0)
   quiet_assets (~> 1.0.2)
   rack-cors
+  rack-utf8_sanitizer
   rails (= 4.1.5)
   rails-i18n (= 0.1.8)
   rails_autolink (>= 1.1.0)

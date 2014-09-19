@@ -81,7 +81,8 @@ gem 'social-share-button', '0.1.5'
 gem 'simple_form', '3.0.2'
 
 # API
-gem 'grape', github: 'intridea/grape', ref: 'd24bd2f758544244ac65f19c69b94f0ffc34e71b'
+gem 'grape', '0.7.0'
+gem 'grape-entity', '0.4.4'
 
 # Mailer
 gem 'postmark', '0.9.15'

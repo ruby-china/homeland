@@ -4,7 +4,7 @@ require "helpers"
 module RubyChina
   class API < Grape::API
     prefix "api"
-    error_format :json
+    format :json
 
     helpers APIHelpers
 

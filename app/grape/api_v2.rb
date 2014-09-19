@@ -5,7 +5,7 @@ module RubyChina
   class APIV2 < Grape::API
     prefix "api"
     version "v2"
-    error_format :json
+    format :json
 
     rescue_from :all do |e|
       case e

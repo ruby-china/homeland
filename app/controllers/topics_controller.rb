@@ -96,7 +96,7 @@ class TopicsController < ApplicationController
   end
   
   def set_special_node_active_menu
-    case @node.id
+    case @node.try(:id)
     when Node.jobs_id
       @current = ["/jobs"]
     end

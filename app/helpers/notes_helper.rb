@@ -11,6 +11,6 @@ module NotesHelper
     opts[:limit] ||= 50
     return "" if note.blank?
     return "" if note.title.blank?
-    truncate(note.title.gsub('#',''), length: limit)
+    truncate(note.title.gsub('#',''), length: opts[:limit])
   end
 end

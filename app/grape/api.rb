@@ -156,21 +156,21 @@ module RubyChina
       # Example
       #   /api/users/qichunren.json
       get ":user" do
-        @user = User.where(login: /^#{params[:user]}$/i).first
+        @user = User.find_login(params[:user])
         present @user, topics_limit: 5, with: APIEntities::DetailUser
       end
 
 
       # List topics for a user
       get ":user/topics" do
-        @user = User.where(login: /^#{params[:user]}$/i).first
+        @user = User.find_login(params[:user])
         @topics = @user.topics.recent.limit(page_size)
         present @topics, with: APIEntities::UserTopic
       end
 
       # List favorite topics for a user
       get ":user/topics/favorite" do
-        @user = User.where(login: /^#{params[:user]}$/i).first
+        @user = User.find_login(params[:user])
         @topics = Topic.find(@user.favorite_topic_ids)
         present @topics, with: APIEntities::Topic
       end

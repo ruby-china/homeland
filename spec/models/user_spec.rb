@@ -260,4 +260,24 @@ describe User, :type => :model do
       expect(u.email_md5).to eq(Digest::MD5.hexdigest("a@gmail.com"))
     end
   end
+  
+  describe '#find_login' do
+    let(:user) { Factory :user }
+    
+    it 'should work' do
+      u = User.find_login(user.login)
+      expect(u.id).to eq user.id
+    end
+    
+    it 'should ignore case' do
+      u = User.find_login(user.login.upcase)
+      expect(u.id).to eq user.id
+    end
+    
+    it 'should raise DocumentNotFound error' do
+      expect {
+        User.find_login(user.login + "1")
+      }.to raise_error(Mongoid::Errors::DocumentNotFound)
+    end
+  end
 end

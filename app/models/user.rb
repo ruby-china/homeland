@@ -214,6 +214,11 @@ class User
   def self.find_by_email(email)
     where(email: email).first
   end
+  
+  def self.find_login(slug)
+    # FIXME: Regexp search in MongoDB is slow!!!
+    where(login: /^#{slug}$/i).first or raise Mongoid::Errors::DocumentNotFound.new(self, slug: slug)
+  end
 
   def bind?(provider)
     self.authorizations.collect { |a| a.provider }.include?(provider)

@@ -15,24 +15,12 @@ describe UsersController, :type => :controller do
       get :show, :id => user.login
       expect(response).to be_success
     end
-
-    it "should render 404 if user not found" do
-      get :show, :id => "chunk_norris"
-      expect(response).not_to be_success
-      expect(response.status).to eq(404)
-    end
   end
 
   describe ":topics" do
     it "should show user topics" do
       get :topics, :id => user.login
       expect(response).to be_success
-    end
-
-    it "should render 404 if user not found" do
-      get :topics, :id => "chunk_norris"
-      expect(response).not_to be_success
-      expect(response.status).to eq(404)
     end
   end
 
@@ -41,24 +29,12 @@ describe UsersController, :type => :controller do
       get :favorites, :id => user.login
       expect(response).to be_success
     end
-
-    it "should render 404 if user not found" do
-      get :favorites, :id => "chunk_norris"
-      expect(response).not_to be_success
-      expect(response.status).to eq(404)
-    end
   end
   
   describe ":notes" do
     it "should show user notes" do
       get :notes, :id => user.login
       expect(response).to be_success
-    end
-
-    it "should render 404 if user not found" do
-      get :notes, :id => "chunk_norris"
-      expect(response).not_to be_success
-      expect(response.status).to eq(404)
     end
     
     it "assigns @notes" do

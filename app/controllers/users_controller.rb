@@ -73,8 +73,7 @@ class UsersController < ApplicationController
       return
     end
 
-    @user = User.where(login: /^#{params[:id]}$/i).first
-    render_404 if @user.nil?
+    @user = User.find_login(params[:id])
   end
 
 end

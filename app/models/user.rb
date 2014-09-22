@@ -8,6 +8,8 @@ class User
   include Mongoid::BaseModel
   include Redis::Objects
   extend OmniauthCallbacks
+  
+  ALLOW_LOGIN_CHARS_REGEXP = /\A\w+\z/
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
@@ -81,7 +83,7 @@ class User
   attr_accessor :password_confirmation
   ACCESSABLE_ATTRS = [:name, :email_public, :location, :company, :bio, :website, :github, :twitter, :tagline, :avatar, :by, :current_password, :password, :password_confirmation]
 
-  validates :login, format: { with: /\A\w+\z/, message: '只允许数字、大小写字母和下划线'}, 
+  validates :login, format: { with: ALLOW_LOGIN_CHARS_REGEXP, message: '只允许数字、大小写字母和下划线'}, 
                               length: {:in => 3..20}, presence: true, 
                               uniqueness: {case_sensitive: false}
 
@@ -217,6 +219,7 @@ class User
   
   def self.find_login(slug)
     # FIXME: Regexp search in MongoDB is slow!!!
+    raise Mongoid::Errors::DocumentNotFound.new(self, slug: slug) if not slug =~ ALLOW_LOGIN_CHARS_REGEXP
     where(login: /^#{slug}$/i).first or raise Mongoid::Errors::DocumentNotFound.new(self, slug: slug)
   end
 

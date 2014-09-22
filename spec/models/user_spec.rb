@@ -279,5 +279,11 @@ describe User, :type => :model do
         User.find_login(user.login + "1")
       }.to raise_error(Mongoid::Errors::DocumentNotFound)
     end
+    
+    it 'should railse DocumentNotFound if have bad login' do
+      expect {
+        User.find_login(user.login + ")")
+      }.to raise_error(Mongoid::Errors::DocumentNotFound)
+    end
   end
 end

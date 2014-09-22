@@ -17,12 +17,13 @@ class PagesController < ApplicationController
 
   def show
     @page = Page.find_by_slug(params[:id])
-    if @page.nil?
-      if current_user
-        redirect_to new_page_path(title: params[:id]), notice: 'Page not Found, Please create a new page'
-      else
+    if @page.blank?
+      if current_user.blank?
         render_404
+        return
       end
+      
+      redirect_to new_page_path(title: params[:id]), notice: 'Page not Found, Please create a new page'
       return
     end
 
@@ -32,6 +33,9 @@ class PagesController < ApplicationController
 
   def comments
     @page = Page.find_by_slug(params[:id])
+    if @page.blank?
+      render_404
+    end
   end
 
   def new

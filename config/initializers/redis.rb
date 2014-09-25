@@ -5,7 +5,8 @@ require "redis/objects"
 
 redis_config = YAML.load_file("#{Rails.root}/config/redis.yml")[Rails.env]
 
-Redis::Objects.redis = Redis.new(host: redis_config['host'], port: redis_config['port'])
+$redis = Redis.new(host: redis_config['host'], port: redis_config['port'])
+Redis::Objects.redis = $redis
 
 sidekiq_url = "redis://#{redis_config['host']}:#{redis_config['port']}/0"
 Sidekiq.configure_server do |config|

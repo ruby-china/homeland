@@ -5,7 +5,3 @@ daemonize true
 workers 4
 threads 8,64
 preload_app!
-
-on_worker_boot do
-  defined?($redis) and $redis.client.quit!
-end

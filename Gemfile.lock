@@ -84,6 +84,7 @@ GEM
       railties (>= 3.0)
     celluloid (0.15.2)
       timers (~> 1.1.0)
+    chronic (0.10.2)
     chunky_png (1.2.8)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
@@ -99,6 +100,8 @@ GEM
     daemons (1.1.9)
     dalli (2.7.1)
     database_cleaner (1.2.0)
+    delorean (2.1.0)
+      chronic
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     devise (3.0.1)
@@ -403,6 +406,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   dalli (= 2.7.1)
   database_cleaner
+  delorean
   devise (= 3.0.1)
   devise-encryptable (= 0.1.2)
   eventmachine (= 1.0.3)

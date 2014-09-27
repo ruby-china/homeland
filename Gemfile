@@ -118,6 +118,7 @@ group :development, :test do
   # gem 'mongoid_colored_logger', '0.2.3'
 
   gem 'quiet_assets', '~> 1.0.2'
+  gem 'delorean'
 end
 
 group :production do

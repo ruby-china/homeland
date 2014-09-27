@@ -59,6 +59,8 @@
     by: "by"
     at: "on"
     hot_topics: "Hot topics"
+    daily_hot: "Daily hot topics"
+    weekly_hot: "Weekly hot topics"
   reply:
     edit_reply: "Edit Reply"
     delete_reply_success: 'Delete successfully.'

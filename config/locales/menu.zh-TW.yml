@@ -59,6 +59,8 @@
     by: "由"
     at: "在"
     hot_topics: "熱門討論"
+    daily_hot: "每日熱門"
+    weekly_hot: "每周熱門"
     hot_locations: "熱門城市"
   reply:
     edit_reply: "修改回應"
@@ -98,4 +100,3 @@
     recent_topics_title: "%{name}社區"
     recent_node_topics_description: "%{name} 社區 %{node_name} 節點最新討論。"
     recent_node_topics_title: "%{name} 社區 %{node_name} 節點"
-

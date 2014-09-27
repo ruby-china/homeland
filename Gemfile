@@ -99,6 +99,8 @@ gem 'thin', '1.5.0'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rack-utf8_sanitizer'
 
+gem 'whenever', :require => false
+
 group :development, :test do
   gem 'capistrano', '2.9.0', require: false
   gem 'rvm-capistrano', require: false
@@ -109,6 +111,7 @@ group :development, :test do
   gem 'capybara', '~> 2.3.0'
   gem 'api_taster', '0.6.0'
   gem 'letter_opener'
+  gem 'pry'
 
   # 用于组合小图片
   gem 'sprite-factory', '1.4.1', require: false

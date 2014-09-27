@@ -3,6 +3,7 @@ require "bundler/capistrano"
 require "sidekiq/capistrano"
 require "rvm/capistrano"
 require 'puma/capistrano'
+require 'whenever/capistrano'
 
 default_run_options[:pty] = true
 

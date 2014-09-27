@@ -20,6 +20,20 @@ class TopicsCell < BaseCell
     render
   end
 
+  # 每日热门
+  cache :sidebar_daily_hot, expires_in: 10.minutes
+  def sidebar_daily_hot
+    @topics = Topic.daily_hot_topics
+    render
+  end
+
+  # 每周热门
+  cache :sidebar_weekly_hot, expires_in: 1.hour
+  def sidebar_weekly_hot
+    @topics = Topic.weekly_hot_topics
+    render
+  end
+
   # 节点下面的最新话题
   cache :sidebar_for_node_recent_topics, expires_in: 30.minutes do |cell, args|
     ['node', args[:topic].node_id].join("-")

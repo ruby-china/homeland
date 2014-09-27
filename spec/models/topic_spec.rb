@@ -111,7 +111,7 @@ describe Topic, :type => :model do
       expect(Topic.excellent).to include(topic)
     end
   end
-  
+
   describe ".update_last_reply" do
     it "should work" do
       t = Factory(:topic)
@@ -125,7 +125,7 @@ describe Topic, :type => :model do
       expect(t.last_active_mark).not_to be_nil
       expect(t.updated_at).not_to eq old_updated_at
     end
-    
+
     it "should update with nil when have :force" do
       t = Factory(:topic)
       r = Factory(:reply, topic: t)
@@ -137,7 +137,7 @@ describe Topic, :type => :model do
       expect(t.last_active_mark).not_to be_nil
     end
   end
-  
+
   describe ".update_deleted_last_reply" do
     let(:t) { Factory(:topic) }
     context "when have last Reply and param it that Reply" do
@@ -148,7 +148,7 @@ describe Topic, :type => :model do
         expect(t).to receive(:update_last_reply).with(r0, force: true)
         t.update_deleted_last_reply(r1)
       end
-      
+
       it "last reply will be nil" do
         r = Factory(:reply, topic: t)
         expect(t.update_deleted_last_reply(r)).to be_truthy
@@ -158,13 +158,13 @@ describe Topic, :type => :model do
         expect(t.last_reply_user_id).to be_nil
       end
     end
-    
+
     context "when param is nil" do
       it "should work" do
         expect(t.update_deleted_last_reply(nil)).to be_falsey
       end
     end
-    
+
     context "when last reply is not equal param" do
       it "should do nothing" do
         r0 = Factory(:reply, topic: t)
@@ -174,5 +174,84 @@ describe Topic, :type => :model do
       end
     end
   end
-  
+
+  describe "#update_daily_hot_topics" do
+    let(:t) { Factory(:topic) }
+    before do
+      t.hits.reset
+
+      t.count_in_hour.reset
+      t.daily_hits_hour_ago.delete
+      t.daily_score_hour_ago.delete
+      t.daily_hits.clear
+      t.daily_replies_hour_ago.delete
+      t.daily_replies.clear
+    end
+    it "should updates right daily score" do
+      t.hits.incr(1)
+      Factory(:reply, topic: t)
+      t.update_daily_hot_topics
+      expect(t.daily_score).to eq ((1+1*3)*24)
+
+      t.hits.incr(2)
+      t.update_daily_hot_topics
+      expect(t.daily_score).to eq ((3+1*3)*24)
+
+      4.times { t.update_daily_hot_topics }
+      expect(t.daily_score).to eq ((3+1*3)*24)
+
+      t.hits.incr(3)
+      2.times { Factory(:reply, topic: t) }
+      t.update_daily_hot_topics
+      expect(t.daily_score).to eq ((3+2*3)*24 + (3+1*3)*23)
+
+      (6*22).times { t.update_daily_hot_topics }
+      expect(t.daily_score).to eq ((3+2*3)*2 + (3+1*3)*1)
+
+      t.hits.incr(5)
+      6.times { t.update_daily_hot_topics }
+      expect(t.daily_score).to eq ((5+0*3)*23 + (3+2*3)*1)
+    end
+  end
+
+  describe "#update_weekly_hot_topics" do
+    let(:t) { Factory(:topic) }
+    before do
+      t.hits.reset
+
+      t.count_in_day.reset
+      t.weekly_hits_day_ago.delete
+      t.weekly_score_day_ago.delete
+      t.weekly_hits.clear
+      t.weekly_replies_day_ago.delete
+      t.weekly_replies.clear
+    end
+    it "should updates right weekly score" do
+      t.hits.incr(1)
+      Factory(:reply, topic: t)
+      t.update_weekly_hot_topics
+      expect(t.weekly_score).to eq ((1+1*3)*7)
+
+      t.hits.incr(2)
+      t.update_weekly_hot_topics
+      expect(t.weekly_score).to eq ((3+1*3)*7)
+
+      22.times { t.update_weekly_hot_topics }
+      expect(t.weekly_score).to eq ((3+1*3)*7)
+
+      t.hits.incr(3)
+      2.times { Factory(:reply, topic: t) }
+      t.update_weekly_hot_topics
+      expect(t.weekly_score).to eq ((3+2*3)*7 + (3+1*3)*6)
+
+      (5*24).times { t.update_weekly_hot_topics }
+      expect(t.weekly_score).to eq ((3+2*3)*2 + (3+1*3)*1)
+
+      t.hits.incr(5)
+      24.times { t.update_weekly_hot_topics }
+      expect(t.weekly_score).to eq ((5+0*3)*6 + (3+2*3)*1)
+    end
+  end
+
+
 end

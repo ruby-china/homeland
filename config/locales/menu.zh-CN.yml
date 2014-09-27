@@ -59,6 +59,8 @@
     by: "由"
     at: "在"
     hot_topics: "热门讨论"
+    daily_hot: "每日热门"
+    weekly_hot: "每周热门"
     hot_locations: "热门城市"
     replies_count: "回复"
     likes_count: 喜欢

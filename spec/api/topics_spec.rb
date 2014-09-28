@@ -57,19 +57,18 @@ describe RubyChina::API, "topics", :type => :request do
   end
 
   describe "GET /api/topics/node/:id.json" do
-    require 'delorean'
-    it "should return a list of topics that belong to the specified node" do
-      node = Factory(:node)
-      other_topics = [Factory(:topic), Factory(:topic)]
 
-      topics = []
-      topics << Factory(:topic, :node_id => node.id, :title => "This is a normal topic", :replies_count => 1)
-      Delorean.time_travel_to("1 minute ago")
-      topics << Factory(:topic, :node_id => node.id, :title => "This is an excellent topic", :excellent => 1, :replies_count => 1)
-      Delorean.time_travel_to("1 minute ago")
-      topics << Factory(:topic, :node_id => node.id, :title => "This is a no_reply topic", :replies_count => 0)
-      Delorean.time_travel_to("1 minute ago")
-      topics << Factory(:topic, :node_id => node.id, :title => "This is a popular topic", :replies_count => 1, :likes_count => 10)
+    let(:node) {Factory(:node)}
+
+    let(:t1) {Factory(:topic, :node_id => node.id, :title => "This is a normal topic", :replies_count => 1)}
+    let(:t2) {Factory(:topic, :node_id => node.id, :title => "This is an excellent topic", :excellent => 1, :replies_count => 1)}
+    let(:t3) {Factory(:topic, :node_id => node.id, :title => "This is a no_reply topic", :replies_count => 0)}
+    let(:t4) {Factory(:topic, :node_id => node.id, :title => "This is a popular topic", :replies_count => 1, :likes_count => 10)}
+
+    it "should return a list of topics that belong to the specified node" do
+      
+      other_topics = [Factory(:topic), Factory(:topic)]
+      topics = [t1, t2, t3, t4]
 
       get "/api/topics/node/#{node.id}.json"
       expect(response.status).to eq(200)
@@ -77,6 +76,38 @@ describe RubyChina::API, "topics", :type => :request do
       json_titles = json.map { |t| t["id"] }
       topics.each { |t| expect(json_titles).to include(t._id) }
       other_topics.each { |t| expect(json_titles).not_to include(t._id) }
+
+      get "/api/v2/topics/node/#{node.id}.json", :type => 'excellent'
+      expect(response.status).to eq(200)
+      json = JSON.parse(response.body)
+      expect(json.size).to eq(1)
+      expect(json[0]["title"]).to eq("This is an excellent topic")
+
+      get "/api/v2/topics/node/#{node.id}.json", :type => 'no_reply'
+      expect(response.status).to eq(200)
+      json = JSON.parse(response.body)
+      expect(json.size).to eq(1)
+      expect(json[0]["title"]).to eq("This is a no_reply topic")
+
+      get "/api/v2/topics/node/#{node.id}.json", :type => 'popular'
+      expect(response.status).to eq(200)
+      json = JSON.parse(response.body)
+      expect(json.size).to eq(1)
+      expect(json[0]["title"]).to eq("This is a popular topic")
+
+      get "/api/v2/topics/node/#{node.id}.json", :type => 'recent'
+      expect(response.status).to eq(200)
+      json = JSON.parse(response.body)
+      expect(json.size).to eq(4)
+      expect(json[0]["title"]).to eq("This is a popular topic")
+      expect(json[1]["title"]).to eq("This is a no_reply topic")
+      expect(json[2]["title"]).to eq("This is an excellent topic")
+      expect(json[3]["title"]).to eq("This is a normal topic")
+
+      t1.update(last_active_mark: 4)
+      t2.update(last_active_mark: 3)
+      t3.update(last_active_mark: 2)
+      t4.update(last_active_mark: 1)
 
       get "/api/v2/topics/node/#{node.id}.json", :size => 2
       expect(response.status).to eq(200)
@@ -99,42 +130,8 @@ describe RubyChina::API, "topics", :type => :request do
       expect(json[0]["title"]).to eq("This is a no_reply topic")
       expect(json[1]["title"]).to eq("This is a popular topic")
 
-      get "/api/v2/topics/node/#{node.id}.json", :type => 'excellent'
-      expect(response.status).to eq(200)
-      json = JSON.parse(response.body)
-      expect(json.size).to eq(1)
-      expect(json[0]["title"]).to eq("This is an excellent topic")
-
-      get "/api/v2/topics/node/#{node.id}.json", :type => 'no_reply'
-      expect(response.status).to eq(200)
-      json = JSON.parse(response.body)
-      expect(json.size).to eq(1)
-      expect(json[0]["title"]).to eq("This is a no_reply topic")
-
-      get "/api/v2/topics/node/#{node.id}.json", :type => 'popular'
-      expect(response.status).to eq(200)
-      json = JSON.parse(response.body)
-      expect(json.size).to eq(1)
-      expect(json[0]["title"]).to eq("This is a popular topic")
-
     end
 
-    it "should return a list of topics that belong to the specified node order by id" do
-      node = Factory(:node)
-      Factory(:topic, :node_id => node.id, :title => "This is a normal topic", :replies_count => 1)
-      Factory(:topic, :node_id => node.id, :title => "This is an excellent topic", :excellent => 1, :replies_count => 1)
-      Factory(:topic, :node_id => node.id, :title => "This is a no_reply topic", :replies_count => 0)
-      Factory(:topic, :node_id => node.id, :title => "This is a popular topic", :replies_count => 1, :likes_count => 10)
-
-      get "/api/v2/topics/node/#{node.id}.json", :type => 'recent'
-      expect(response.status).to eq(200)
-      json = JSON.parse(response.body)
-      expect(json.size).to eq(4)
-      expect(json[0]["title"]).to eq("This is a popular topic")
-      expect(json[1]["title"]).to eq("This is a no_reply topic")
-      expect(json[2]["title"]).to eq("This is an excellent topic")
-      expect(json[3]["title"]).to eq("This is a normal topic")
-    end
   end
 
   describe "POST /api/topics.json" do

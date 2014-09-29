@@ -12,7 +12,7 @@ class TopicsController < ApplicationController
     @topics = @topics.fields_for_list.includes(:user)
     @topics = @topics.paginate(page: params[:page], per_page: 15, total_entries: 1500)
 
-    set_seo_meta '', "#{Setting.app_name}#{t("menu.topics")}"
+    set_seo_meta t("menu.topics"), "#{Setting.app_name}#{t("menu.topics")}"
   end
 
   def feed
@@ -24,7 +24,8 @@ class TopicsController < ApplicationController
     @node = Node.find(params[:id])
     @topics = @node.topics.last_actived.fields_for_list
     @topics = @topics.includes(:user).paginate(page: params[:page], per_page: 15)
-    set_seo_meta "#{@node.name} &raquo; #{t("menu.topics")}", "#{Setting.app_name}#{t("menu.topics")}#{@node.name}", @node.summary
+    title = @node.jobs? ? @node.name : "#{@node.name} &raquo; #{t("menu.topics")}"
+    set_seo_meta title, "#{Setting.app_name}#{t("menu.topics")}#{@node.name}", @node.summary
     render action: 'index'
   end
 

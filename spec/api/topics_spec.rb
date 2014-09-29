@@ -57,15 +57,18 @@ describe RubyChina::API, "topics", :type => :request do
   end
 
   describe "GET /api/topics/node/:id.json" do
-    it "should return a list of topics that belong to the specified node" do
-      node = Factory(:node)
-      other_topics = [Factory(:topic), Factory(:topic)]
 
-      topics = []
-      topics << Factory(:topic, :node_id => node.id, :title => "This is a normal topic", :replies_count => 1)
-      topics << Factory(:topic, :node_id => node.id, :title => "This is an excellent topic", :excellent => 1, :replies_count => 1)
-      topics << Factory(:topic, :node_id => node.id, :title => "This is a no_reply topic", :replies_count => 0)
-      topics << Factory(:topic, :node_id => node.id, :title => "This is a popular topic", :replies_count => 1, :likes_count => 10)
+    let(:node) {Factory(:node)}
+
+    let(:t1) {Factory(:topic, :node_id => node.id, :title => "This is a normal topic", :replies_count => 1)}
+    let(:t2) {Factory(:topic, :node_id => node.id, :title => "This is an excellent topic", :excellent => 1, :replies_count => 1)}
+    let(:t3) {Factory(:topic, :node_id => node.id, :title => "This is a no_reply topic", :replies_count => 0)}
+    let(:t4) {Factory(:topic, :node_id => node.id, :title => "This is a popular topic", :replies_count => 1, :likes_count => 10)}
+
+    it "should return a list of topics that belong to the specified node" do
+      
+      other_topics = [Factory(:topic), Factory(:topic)]
+      topics = [t1, t2, t3, t4]
 
       get "/api/topics/node/#{node.id}.json"
       expect(response.status).to eq(200)
@@ -73,27 +76,6 @@ describe RubyChina::API, "topics", :type => :request do
       json_titles = json.map { |t| t["id"] }
       topics.each { |t| expect(json_titles).to include(t._id) }
       other_topics.each { |t| expect(json_titles).not_to include(t._id) }
-
-      get "/api/v2/topics/node/#{node.id}.json", :size => 2
-      expect(response.status).to eq(200)
-      json = JSON.parse(response.body)
-      expect(json.size).to eq(2)
-      expect(json[0]["title"]).to eq("This is a normal topic")
-      expect(json[1]["title"]).to eq("This is an excellent topic")
-
-      get "/api/v2/topics/node/#{node.id}.json", :per_page => 2, :page => 1
-      expect(response.status).to eq(200)
-      json = JSON.parse(response.body)
-      expect(json.size).to eq(2)
-      expect(json[0]["title"]).to eq("This is a normal topic")
-      expect(json[1]["title"]).to eq("This is an excellent topic")
-
-      get "/api/v2/topics/node/#{node.id}.json", :per_page => 2, :page => 2
-      expect(response.status).to eq(200)
-      json = JSON.parse(response.body)
-      expect(json.size).to eq(2)
-      expect(json[0]["title"]).to eq("This is a no_reply topic")
-      expect(json[1]["title"]).to eq("This is a popular topic")
 
       get "/api/v2/topics/node/#{node.id}.json", :type => 'excellent'
       expect(response.status).to eq(200)
@@ -121,7 +103,35 @@ describe RubyChina::API, "topics", :type => :request do
       expect(json[1]["title"]).to eq("This is a no_reply topic")
       expect(json[2]["title"]).to eq("This is an excellent topic")
       expect(json[3]["title"]).to eq("This is a normal topic")
+
+      t1.update(last_active_mark: 4)
+      t2.update(last_active_mark: 3)
+      t3.update(last_active_mark: 2)
+      t4.update(last_active_mark: 1)
+
+      get "/api/v2/topics/node/#{node.id}.json", :size => 2
+      expect(response.status).to eq(200)
+      json = JSON.parse(response.body)
+      expect(json.size).to eq(2)
+      expect(json[0]["title"]).to eq("This is a normal topic")
+      expect(json[1]["title"]).to eq("This is an excellent topic")
+
+      get "/api/v2/topics/node/#{node.id}.json", :per_page => 2, :page => 1
+      expect(response.status).to eq(200)
+      json = JSON.parse(response.body)
+      expect(json.size).to eq(2)
+      expect(json[0]["title"]).to eq("This is a normal topic")
+      expect(json[1]["title"]).to eq("This is an excellent topic")
+
+      get "/api/v2/topics/node/#{node.id}.json", :per_page => 2, :page => 2
+      expect(response.status).to eq(200)
+      json = JSON.parse(response.body)
+      expect(json.size).to eq(2)
+      expect(json[0]["title"]).to eq("This is a no_reply topic")
+      expect(json[1]["title"]).to eq("This is a popular topic")
+
     end
+
   end
 
   describe "POST /api/topics.json" do
@@ -159,51 +169,51 @@ describe RubyChina::API, "topics", :type => :request do
       expect(json["replies"][1]["deleted_at"]).not_to be_nil
       expect(json["hits"]).to eq(old_hits + 2)
     end
-    
+
     it "should work when id record found" do
       get "/api/topics/-1.json"
       expect(response.status).to eq(404)
     end
   end
-  
+
   describe "POST /api/topics/:id/replies.json" do
     it "should post a new reply" do
       user = Factory(:user).tap { |u| u.update_private_token }
       t = Factory(:topic, :title => "new topic 1")
       post "/api/topics/#{t.id}/replies.json", :token => user.private_token, :body => "new reply body"
-      expect(response.status).to eq(201)      
+      expect(response.status).to eq(201)
       expect(t.reload.replies.first.body).to eq("new reply body")
     end
   end
-  
+
   describe "POST /api/topics/:id/follow.json" do
     it "should follow a topic" do
       user = Factory(:user).tap { |u| u.update_private_token }
       t = Factory(:topic, :title => "new topic 2")
       post "/api/topics/#{t.id}/follow.json", :token => user.private_token
-      expect(response.status).to eq(201)      
+      expect(response.status).to eq(201)
       expect(response.body).to eq('true')
       expect(t.reload.follower_ids).to include(user.id)
     end
   end
-  
+
   describe "POST /api/topics/:id/unfollow.json" do
     it "should unfollow a topic" do
       user = Factory(:user).tap { |u| u.update_private_token }
       t = Factory(:topic, :title => "new topic 2")
       post "/api/topics/#{t.id}/unfollow.json", :token => user.private_token
-      expect(response.status).to eq(201)      
+      expect(response.status).to eq(201)
       expect(response.body).to eq('true')
       expect(t.reload.follower_ids).not_to include(user.id)
     end
   end
- 
+
   describe "POST /api/topics/:id/favorite.json" do
     it "should favorite a topic" do
       user = Factory(:user).tap { |u| u.update_private_token }
       t = Factory(:topic, :title => "new topic 3")
       post "/api/topics/#{t.id}/favorite.json", :token => user.private_token
-      expect(response.status).to eq(201)      
+      expect(response.status).to eq(201)
       expect(response.body).to eq('true')
       expect(user.reload.favorite_topic_ids).to include(t.id)
     end
@@ -214,9 +224,9 @@ describe RubyChina::API, "topics", :type => :request do
       user = Factory(:user).tap { |u| u.update_private_token }
       t = Factory(:topic, :title => "new topic 3")
       post "/api/topics/#{t.id}/favorite.json", :token => user.private_token, :type => 'unfavorite'
-      expect(response.status).to eq(201)      
+      expect(response.status).to eq(201)
       expect(response.body).to eq('true')
       expect(user.reload.favorite_topic_ids).not_to include(t.id)
     end
-  end  
+  end
 end

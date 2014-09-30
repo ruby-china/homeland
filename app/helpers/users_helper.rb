@@ -5,7 +5,7 @@ module UsersHelper
   def user_name_tag(user,options = {})
     return "匿名" if user.blank?
 
-    if (user.class == "".class)
+    if user.is_a? String
       login = user
       name = login
     else

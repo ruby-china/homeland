@@ -12,7 +12,7 @@ GIT
       warden (~> 1.2.3)
 
 GEM
-  remote: https://rubygems.org/
+  remote: https://ruby.taobao.org/
   specs:
     actionmailer (4.2.0.beta2)
       actionpack (= 4.2.0.beta2)

@@ -1,24 +1,22 @@
 # coding: utf-8
-if ENV['USE_OFFICIAL_GEM_SOURCE']
-  source 'https://rubygems.org'
-else
-  source 'https://ruby.taobao.org'
-end
+source 'https://rubygems.org'
 
-gem 'rails', '4.1.5'
-gem 'turbolinks', '~> 2.2.2'
-gem 'jquery-turbolinks', '~> 2.0.2'
-gem 'actionpack-action_caching', '1.1.1'
-gem 'sass-rails', '~> 4.0.2'
+gem 'rails', '4.2.0.beta2'
+gem 'sass-rails', '~> 5.0.0.beta1'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
+gem 'jquery-rails', '~> 4.0.0.beta2'
+gem 'jbuilder', '~> 2.0'
+gem 'turbolinks', '~> 2.3.0'
+gem 'jquery-turbolinks', '~> 2.0.2'
 
-gem 'rails-i18n','0.1.8'
-gem 'jquery-rails', '3.0.4'
+
+gem 'actionpack-action_caching', '1.1.1'
+gem 'rails-i18n','4.0.3'
 gem 'rails_autolink', '>= 1.1.0'
 gem 'md_emoji', '1.0.2'
 gem 'exception_notification'
-gem 'jbuilder', '~> 2.0.2'
+
 
 # 上传组件
 gem 'carrierwave', '0.6.2'
@@ -35,7 +33,7 @@ gem 'devise', '3.0.1'
 gem 'devise-encryptable', '0.1.2'
 
 # 分页
-gem 'will_paginate', '3.0.4'
+gem 'will_paginate', '3.0.7'
 
 # Bootstrap
 gem 'anjlab-bootstrap-rails', '2.0.3.2', require: 'bootstrap-rails'
@@ -59,13 +57,12 @@ gem 'redis-objects', '0.9.1'
 # Markdown 格式 & 文本处理
 gem 'redcarpet', '~> 3.0.0'
 gem 'rouge', '~> 1.3.4'
-gem 'nokogiri', '~> 1.5.6'
 gem 'auto-space', '0.0.4'
 
 # YAML 配置信息
 gem 'settingslogic', '~> 2.0.9'
 
-gem 'cells', '~> 3.9.1'
+gem 'cells', '~> 3.11.2'
 
 # 队列
 gem 'sidekiq', '2.17.7'

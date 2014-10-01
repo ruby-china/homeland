@@ -26,12 +26,7 @@ module RubyChina
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
 
-    # Configure sensitive parameters which will be filtered from the log file.
-    config.filter_parameters += [:password, :password_confirm, :token, :private_token]
-
     config.mongoid.include_root_in_json = false
-
-    config.assets.enabled = true
 
     config.generators do |g|
       g.test_framework :rspec

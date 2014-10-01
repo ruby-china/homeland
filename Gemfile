@@ -62,8 +62,6 @@ gem 'auto-space', '0.0.4'
 # YAML 配置信息
 gem 'settingslogic', '~> 2.0.9'
 
-gem 'cells', '~> 3.11.2'
-
 # 队列
 gem 'sidekiq', '2.17.7'
 # Sidekiq Web
@@ -102,7 +100,6 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0.1'
   gem 'factory_girl_rails', '1.4.0'
   gem 'database_cleaner'
-  gem 'rspec-cells', '~> 0.2.1'
   gem 'capybara', '~> 2.3.0'
   gem 'api_taster', '0.6.0'
   gem 'letter_opener'

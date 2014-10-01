@@ -1,0 +1,17 @@
+<% cache("sidebar_for_node_recent_topics", topic.node_id, Time.now.strftime("%Y-%m-%d %H")) do %>
+  <%
+  limit = [[topic.replies_count, 1].max, 20].min
+  topics = Topic.where(node_id: topic.node_id).recent.not_in(id: [topic.id]).limit(limit)
+  %>
+
+  <% if topics.present? %>
+  <div class="box clearfix">
+    <h2 class="title"><%= t("topics.node_recent_topics") %></h2>
+    <ul>
+    <% topics.each do |item| %>
+      <li><%= link_to(truncate(item.title, length: 30), topic_path(item), title: item.title) %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+<% end %>

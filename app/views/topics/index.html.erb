@@ -17,8 +17,8 @@
   </div>
 
   <% if controller_name == "topics" && action_name == "index" && !mobile? %>
-    <%= render_cell :topics, :index_sections %>
-    <%= render_cell :topics, :index_locations %>
+    <%= render "/shared/index_sections" %>
+    <%= render "/shared/hot_locations" %>
   <% end %>
 
   <% if !@node.blank? %>

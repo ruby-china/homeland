@@ -1,0 +1,28 @@
+<%
+comments = Comment.where(commentable_type: commentable.class.name, commentable_id: commentable.id).includes(:user)
+new_comment = Comment.new(commentable_type: commentable.class.name, commentable_id: commentable.id)
+%>
+
+<div id="<%= commentable.class.name %>_<%= commentable.id %>_cell_comments" class="cell_comments box">
+  <% if !comments.blank? %>
+    <%= render :partial => "/shared/comment", :collection => comments %>
+  <% else %>
+    <div class="no-result"><%= t("comments.no_comment") %>.</div>
+  <% end %>
+</div>
+
+<% if @current_user %>
+<div id="<%= commentable.class.name %>_<%= commentable.id %>_cell_new_comment" class="cell_comments_new box">
+  <%= form_for(new_comment, :remote => true) do |f| %>
+    <%= f.hidden_field :commentable_type %>
+    <%= f.hidden_field :commentable_id %>
+    <%= f.text_area :body, :class => "long", :rows => "3" %>
+    <div class="buttons">
+      <%= f.submit t("comments.create_comment"), :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %> <span class="help-inline">Ctrl+Enter</span>
+    </div>
+    <span class="help-block" style="margin-top:20px;">
+      <%= render "/shared/editor_help_block" %>
+    </span>
+  <% end %>
+</div>
+<% end %>

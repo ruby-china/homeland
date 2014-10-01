@@ -70,7 +70,7 @@
           </div>
 
           <span class="body helpblock">
-            <%= render_cell :topics, :reply_help_block %>
+            <%= render "/shared/editor_help_block" %>
           </span>
         <% end %>
       <% else %>
@@ -87,7 +87,7 @@
 <% if !mobile? %>
   <div class="sidebar">
     <%= render "sidebar_box_node_new_topic" %>
-    <%= render_cell :topics, :tips %>
-    <%= render_cell :topics, :sidebar_for_node_recent_topics, { topic: @topic } %>
+    <%= render "sidebar_box_tips" %>
+    <%= render "sidebar_box_node_recent_topics", topic: @topic %>
   </div>
 <% end %>

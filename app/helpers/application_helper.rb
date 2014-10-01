@@ -135,4 +135,9 @@ module ApplicationHelper
       raw html.join(" ")
     end
   end
+  
+  def random_tips
+    return "" if SiteConfig.tips.blank?
+    SiteConfig.tips.split("\n").sample
+  end
 end

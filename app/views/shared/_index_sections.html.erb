@@ -1,7 +1,8 @@
+<% cache(CacheVersion.section_node_updated_at) do %>
 <div id="sections" class="box">
   <h2 class="title"><%= t("common.index_node_navigation")%></h2>
   <ul>
-    <% @sections.each do |section| %>
+    <% Section.all.each do |section| %>
     <li>
       <label><%= section.name %></label>
       <span class="nodes">
@@ -13,3 +14,4 @@
     <% end %>
   </ul>
 </div>
+<% end %>

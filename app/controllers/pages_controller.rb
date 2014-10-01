@@ -36,6 +36,8 @@ class PagesController < ApplicationController
     if @page.blank?
       render_404
     end
+    
+    
   end
 
   def new

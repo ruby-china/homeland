@@ -1,4 +1,4 @@
-<% cache("index_locations/#{Date.current}") do %>
+<% cache(["index_locations",Time.now.strftime("%Y-%m-%D")]) do %>
 <div id="hot_locations" class="box">
   <h2 class="title"><%=t("common.hot_locations")%></h2>
   <ul>

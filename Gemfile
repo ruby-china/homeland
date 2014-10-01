@@ -28,8 +28,8 @@ gem 'mongoid', '4.0.0'
 gem 'mongoid_auto_increment_id', '0.6.4'
 gem 'mongoid_rails_migrations', '1.0.0'
 
-# 用户系统
-gem 'devise', '3.0.1'
+# 用户系统 
+gem 'devise', github: "plataformatec/devise", branch: "lm-rails-4-2"
 gem 'devise-encryptable', '0.1.2'
 
 # 分页
@@ -108,7 +108,7 @@ group :development, :test do
   gem 'sprite-factory', '1.4.1', require: false
   gem 'chunky_png', '1.2.8', require: false
 
-  gem 'jasmine-rails', '~> 0.6.0'
+  gem 'jasmine-rails', '~> 0.10.2'
   # gem 'mongoid_colored_logger', '0.2.3'
 
   gem 'quiet_assets', '~> 1.0.2'

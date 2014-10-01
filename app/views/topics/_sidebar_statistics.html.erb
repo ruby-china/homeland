@@ -1,4 +1,4 @@
-<% cache(Time.now.strftime("%Y-%m-%d %H")) do %>
+<% cache(["sidebar_statistics",Time.now.strftime("%Y-%m-%d %H")]) do %>
 <div class="totals box">
   <h2 class="title"><%= t("common.statics")%></h2>
   <ul>

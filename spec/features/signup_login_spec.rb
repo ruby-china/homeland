@@ -35,6 +35,6 @@ describe "sign up and login", :type => :feature do
     fill_in '密码', :with => ''
     fill_in '确认密码', :with => 'coolguy'
     click_button '提交注册信息'
-    expect(page).to have_content('密码 不能为空字符')
+    expect(page).to have_content('密码不能为空字符')
   end
 end

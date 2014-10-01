@@ -7,9 +7,9 @@ Status](https://secure.travis-ci.org/ruby-china/ruby-china.png?branch=master&.pn
 
 ## Requirements
 
-* Ruby 1.9.3 +
+* Ruby 2.1.3 +
 * Memcached 1.4 +
-* Redis 2.2+
+* Redis 2.2 +
 * MongoDb 2.4.4 +
 * ImageMagick 6.5+
 * libpng
@@ -19,17 +19,9 @@ Status](https://secure.travis-ci.org/ruby-china/ruby-china.png?branch=master&.pn
 ```bash
 git clone git://github.com/ruby-china/ruby-china.git
 cd ruby-china
-ruby setup.rb
+./bin/setup
 # ensure that memcached has started up
 rails s
-```
-
-## Gemfile Source
-
-By default bundler installs gems using the ruby.taobao.org source, if you'd rather use the official one, set environment variable `USE_OFFICIAL_GEM_SOURCE`:
-
-```
-USE_OFFICIAL_GEM_SOURCE=1
 ```
 
 ## Start Sidekiq service
@@ -60,10 +52,6 @@ First install [PhantomJS](http://phantomjs.org/), then run following command:
 ```bash
 RAILS_ENV=test bundle exec rake spec:javascript
 ```
-
-## Apply Google JSAPI
-
-* http://code.google.com/intl/zh-CN/apis/loader/signup.html
 
 ## Contributors
 

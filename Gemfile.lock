@@ -273,8 +273,6 @@ GEM
       rake
     puma (2.6.0)
       rack (>= 1.1, < 2.0)
-    quiet_assets (1.0.3)
-      railties (>= 3.1, < 5.0)
     rack (1.6.0.beta)
     rack-accept (0.4.5)
       rack (>= 0.4)
@@ -454,7 +452,6 @@ DEPENDENCIES
   postmark (= 0.9.15)
   postmark-rails (= 0.4.1)
   puma (= 2.6.0)
-  quiet_assets (~> 1.0.2)
   rack-cors
   rack-utf8_sanitizer
   rails (= 4.2.0.beta2)

@@ -109,9 +109,6 @@ group :development, :test do
   gem 'chunky_png', '1.2.8', require: false
 
   gem 'jasmine-rails', '~> 0.10.2'
-  # gem 'mongoid_colored_logger', '0.2.3'
-
-  gem 'quiet_assets', '~> 1.0.2'
 end
 
 group :production do

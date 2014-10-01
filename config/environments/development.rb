@@ -24,7 +24,7 @@ Rails.application.configure do
   config.active_support.deprecation = :log
   config.cache_store = [:dalli_store,"127.0.0.1", { namespace: "rb-cn", compress: true }]
 
-  config.assets.debug = true
+  config.assets.debug = false
   
   # Asset digests allow you to set far-future HTTP expiration dates on all assets,
   # yet still be able to expire them through the digest params.

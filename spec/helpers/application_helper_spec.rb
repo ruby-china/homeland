@@ -94,4 +94,11 @@ describe ApplicationHelper, :type => :helper do
       expect(helper.owner?(item)).to be_falsey
     end
   end
+  
+  describe 'timeago' do
+    it 'should work' do
+      t = Time.now
+      expect(helper.timeago(t, class: "foo")).to eq "<abbr class=\"foo timeago\" title=\"#{t.iso8601}\"></abbr>"
+    end
+  end
 end

@@ -1,4 +1,6 @@
 # coding: utf-8
+require 'sidekiq/testing/inline'
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/environment.rb
 
@@ -6,7 +8,7 @@ Rails.application.configure do
   # every request.  This slows down response time but is perfect for development
   # since you don't have to restart the webserver when you make code changes.
   config.cache_classes = false
-  
+
   config.eager_load = false
 
   # Show full error reports and disable caching
@@ -25,7 +27,7 @@ Rails.application.configure do
   config.cache_store = [:dalli_store,"127.0.0.1", { namespace: "rb-cn", compress: true }]
 
   config.assets.debug = false
-  
+
   # Asset digests allow you to set far-future HTTP expiration dates on all assets,
   # yet still be able to expire them through the digest params.
   config.assets.digest = false
@@ -34,7 +36,7 @@ Rails.application.configure do
   # Checks for improperly declared sprockets dependencies.
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
-  
+
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end
@@ -48,7 +50,7 @@ api_reloader = ActiveSupport::FileUpdateChecker.new(Dir["#{Rails.root}/app/grape
   files.each_with_index do |s,i|
     if times[i] > @last_api_change
       Rails.logger.debug " - #{s}"
-      load s 
+      load s
     end
   end
 

@@ -8,6 +8,10 @@ module ApplicationHelper
   def sanitize_reply(body)
     sanitize body, :tags => %w(p br img h1 h2 h3 h4 blockquote pre code b i strong em strike del u a ul ol li span), :attributes => %w(href src class title alt target rel data-floor)
   end
+  
+  def sanitize_page(body)
+    sanitize body, :attributes => %w(href src class title alt target rel)
+  end
 
   def notice_message
     flash_messages = []

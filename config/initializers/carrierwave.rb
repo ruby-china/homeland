@@ -77,6 +77,8 @@ Mongoid::Document::ClassMethods.send(:include, CarrierWave::Mongoid)
 
 CarrierWave.configure do |config|
   config.storage = :upyun
+  # Do not remove previously file after new file uploaded
+  config.remove_previously_stored_files_after_update = false
   config.upyun_username = Setting.upyun_username
   config.upyun_password = Setting.upyun_password
   config.upyun_bucket = Setting.upyun_bucket

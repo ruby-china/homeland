@@ -244,6 +244,9 @@ GEM
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
     netrc (0.7.7)
+    newrelic_moped (0.0.11)
+      moped
+      newrelic_rpm (~> 3.0, >= 3.7)
     newrelic_rpm (3.9.5.251)
     nokogiri (1.6.3.1)
       mini_portile (= 0.6.0)
@@ -448,6 +451,7 @@ DEPENDENCIES
   mongoid (= 4.0.0)
   mongoid_auto_increment_id (= 0.6.4)
   mongoid_rails_migrations (= 1.0.0)
+  newrelic_moped
   newrelic_rpm
   omniauth (~> 1.0.1)
   omniauth-github (~> 1.1.0)

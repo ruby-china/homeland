@@ -6,7 +6,7 @@ describe UsersHelper, :type => :helper do
     it "should calculate avatar width correctly" do
       expect(helper.user_avatar_width_for_size(:normal)).to eq(48)
       expect(helper.user_avatar_width_for_size(:small)).to eq(16)
-      expect(helper.user_avatar_width_for_size(:large)).to eq(64)
+      expect(helper.user_avatar_width_for_size(:large)).to eq(96)
       expect(helper.user_avatar_width_for_size(:big)).to eq(120)
       expect(helper.user_avatar_width_for_size(233)).to eq(233)
     end

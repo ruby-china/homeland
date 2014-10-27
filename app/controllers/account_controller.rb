@@ -39,7 +39,8 @@ class AccountController < Devise::RegistrationsController
     
     if current_user.valid_password?(current_password)
       resource.soft_delete
-      sign_out_and_redirect(root_path)
+      sign_out
+      redirect_to root_path
       set_flash_message :notice, :destroyed
     else
       current_user.errors.add(:current_password, :invalid)

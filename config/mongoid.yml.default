@@ -24,3 +24,5 @@ production:
       hosts:
         - 127.0.0.1:27017
       database: ruby_china
+      options:
+        pool_size: 64

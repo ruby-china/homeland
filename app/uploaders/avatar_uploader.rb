@@ -9,7 +9,7 @@ class AvatarUploader < BaseUploader
   end
 
   version :large do
-    process resize_to_fill: [64, 64]
+    process resize_to_fill: [96, 96]
   end
 
   version :big do

@@ -101,7 +101,7 @@ gem 'rack-utf8_sanitizer'
 group :development, :test do
   gem 'capistrano', '2.9.0', require: false
   gem 'rvm-capistrano', require: false
-  gem 'rspec-rails', '~> 3.0.1'
+  gem 'rspec-rails', '~> 3.1'
   gem 'factory_girl_rails', '1.4.0'
   gem 'database_cleaner'
   gem 'capybara', '~> 2.3.0'

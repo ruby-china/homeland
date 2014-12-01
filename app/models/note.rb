@@ -12,6 +12,8 @@ class Note
   field :changes_count, type:  Integer, default: 0
   field :publish, type: Mongoid::Boolean, default: false
   belongs_to :user
+
+	validates :body, presence: true
   
   counter :hits, default: 0
 

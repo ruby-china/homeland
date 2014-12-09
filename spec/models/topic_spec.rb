@@ -47,7 +47,7 @@ describe Topic, :type => :model do
 
   it "should update after reply" do
     reply = Factory :reply, :topic => topic, :user => user
-    expect(topic.last_active_mark).to eq(reply.created_at.to_i)
+    expect(topic.last_active_mark).not_to be_nil
     expect(topic.replied_at.to_i).to eq(reply.created_at.to_i)
     expect(topic.last_reply_id).to eq(reply.id)
     expect(topic.last_reply_user_id).to eq(reply.user_id)
@@ -111,7 +111,7 @@ describe Topic, :type => :model do
       expect(Topic.excellent).to include(topic)
     end
   end
-  
+
   describe ".update_last_reply" do
     it "should work" do
       t = Factory(:topic)
@@ -125,7 +125,7 @@ describe Topic, :type => :model do
       expect(t.last_active_mark).not_to be_nil
       expect(t.updated_at).not_to eq old_updated_at
     end
-    
+
     it "should update with nil when have :force" do
       t = Factory(:topic)
       r = Factory(:reply, topic: t)
@@ -137,7 +137,7 @@ describe Topic, :type => :model do
       expect(t.last_active_mark).not_to be_nil
     end
   end
-  
+
   describe ".update_deleted_last_reply" do
     let(:t) { Factory(:topic) }
     context "when have last Reply and param it that Reply" do
@@ -148,7 +148,7 @@ describe Topic, :type => :model do
         expect(t).to receive(:update_last_reply).with(r0, force: true)
         t.update_deleted_last_reply(r1)
       end
-      
+
       it "last reply will be nil" do
         r = Factory(:reply, topic: t)
         expect(t.update_deleted_last_reply(r)).to be_truthy
@@ -158,13 +158,13 @@ describe Topic, :type => :model do
         expect(t.last_reply_user_id).to be_nil
       end
     end
-    
+
     context "when param is nil" do
       it "should work" do
         expect(t.update_deleted_last_reply(nil)).to be_falsey
       end
     end
-    
+
     context "when last reply is not equal param" do
       it "should do nothing" do
         r0 = Factory(:reply, topic: t)
@@ -174,5 +174,5 @@ describe Topic, :type => :model do
       end
     end
   end
-  
+
 end

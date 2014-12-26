@@ -91,10 +91,10 @@ gem 'postmark-rails', '0.4.1'
 gem 'god'
 
 gem 'dalli', '2.7.1'
-gem 'eventmachine', '1.0.3'
+gem 'eventmachine'
 gem 'puma', '2.6.0'
 # Faye Server 需要
-gem 'thin', '1.5.0'
+gem 'thin'
 # for api 跨域
 gem 'rack-cors', require: 'rack/cors'
 gem 'rack-utf8_sanitizer'

@@ -6,17 +6,17 @@ else
 end
 
 gem 'rails', '4.2.0'
-gem 'sass-rails', '~> 5.0.0'
-gem 'coffee-rails', '~> 4.0.0'
-gem 'uglifier', '>= 1.3.0'
-gem 'jquery-rails', '~> 4.0.0'
-gem 'jbuilder', '~> 2.0'
-gem 'turbolinks', '~> 2.3.0'
-gem 'jquery-turbolinks', '~> 2.0.2'
+gem 'sass-rails'
+gem 'coffee-rails'
+gem 'uglifier'
+gem 'jquery-rails'
+gem 'jbuilder'
+gem 'turbolinks'
+gem 'jquery-turbolinks'
 
 
 gem 'actionpack-action_caching', '1.1.1'
-gem 'rails-i18n','4.0.3'
+gem 'rails-i18n'
 gem 'rails_autolink', '>= 1.1.0'
 gem 'md_emoji', '1.0.2'
 gem 'exception_notification'

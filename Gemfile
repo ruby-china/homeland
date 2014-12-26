@@ -5,11 +5,11 @@ else
   source 'https://ruby.taobao.org'
 end
 
-gem 'rails', '4.2.0.beta2'
-gem 'sass-rails', '~> 5.0.0.beta1'
+gem 'rails', '4.2.0'
+gem 'sass-rails', '~> 5.0.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
-gem 'jquery-rails', '~> 4.0.0.beta2'
+gem 'jquery-rails', '~> 4.0.0'
 gem 'jbuilder', '~> 2.0'
 gem 'turbolinks', '~> 2.3.0'
 gem 'jquery-turbolinks', '~> 2.0.2'
@@ -29,6 +29,7 @@ gem 'mini_magick','3.7.0', require: false
 
 # Mongoid 辅助插件
 gem 'mongoid', '4.0.0'
+gem 'mongoid-rails'
 gem 'mongoid_auto_increment_id', '0.6.4'
 gem 'mongoid_rails_migrations', '1.0.0'
 

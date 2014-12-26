@@ -37,7 +37,7 @@ describe UsersHelper, :type => :helper do
     context "url without protocal" do
       before { user.update_attribute(:website, 'example.com') }
 
-      it { is_expected.to eq(link_to("http://" + user.website, "http://" + user.website, :class => "url", :target => "_blank", :rel => "nofollow")) }
+      it { is_expected.to eq(link_to("http://" + user.website, "http://" + user.website, :target => "_blank", :class => "url", :rel => "nofollow")) }
     end
   end
 end

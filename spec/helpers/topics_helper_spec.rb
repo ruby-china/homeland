@@ -167,13 +167,14 @@ describe TopicsHelper, :type => :helper do
     it "should result when logined user did not favorite topic" do
       allow(user).to receive(:favorite_topic_ids).and_return([])
       allow(helper).to receive(:current_user).and_return(user)
-      expect(helper.topic_favorite_tag(topic)).to eq(%(<a class="icon small_bookmark" data-id="#{topic.id}" href="#" onclick="return Topics.favorite(this);" rel="twipsy" title="收藏"></a>))
+      res = helper.topic_favorite_tag(topic)
+      expect(res).to eq(%(<a class="icon small_bookmark" title="收藏" rel="twipsy" onclick="return Topics.favorite(this);" data-id="#{topic.id}" href="#"></a>))
     end
 
     it "should result when logined user favorited topic" do
       allow(user).to receive(:favorite_topic_ids).and_return([topic.id])
       allow(helper).to receive(:current_user).and_return(user)
-      expect(helper.topic_favorite_tag(topic)).to eq(%(<a class="icon small_bookmarked" data-id="#{topic.id}" href="#" onclick="return Topics.favorite(this);" rel="twipsy" title="取消收藏"></a>))
+      expect(helper.topic_favorite_tag(topic)).to eq(%(<a class="icon small_bookmarked" title="取消收藏" rel="twipsy" onclick="return Topics.favorite(this);" data-id="#{topic.id}" href="#"></a>))
     end
 
     it "should result blank when unlogin user" do

@@ -2,10 +2,12 @@
 require "redcarpet"
 module ApplicationHelper
   def sanitize_topic(body)
+    # TODO: This method slow, 3.5ms per call in topic body
     sanitize body, :tags => %w(p br img h1 h2 h3 h4 blockquote pre code b i strong em strike del u a ul ol li span), :attributes => %w(href src class title alt target rel)
   end
 
   def sanitize_reply(body)
+    # TODO: This method slow, 0.5ms per call, and it use in render topic/replies
     sanitize body, :tags => %w(p br img h1 h2 h3 h4 blockquote pre code b i strong em strike del u a ul ol li span), :attributes => %w(href src class title alt target rel data-floor)
   end
   

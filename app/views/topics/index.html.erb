@@ -10,7 +10,10 @@
           <%= render partial: "topics/topic", collection: @suggest_topics, locals: { suggest: true } %>
         <% end %>
       <% end %>
-      <%= render partial: "topics/topic", collection: @topics, locals: { suggest: false } %>
+      
+      <% cache(@topics) do %>
+        <%= render partial: "topics/topic", collection: @topics, locals: { suggest: false } %>
+      <% end %>
     </div>
     <%= will_paginate @topics, inner_window: 2 %>
 

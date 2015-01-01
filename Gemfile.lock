@@ -272,7 +272,7 @@ GEM
       actionmailer
       postmark (>= 0.9.0)
       rake
-    puma (2.6.0)
+    puma (2.10.2)
       rack (>= 1.1, < 2.0)
     rack (1.6.0)
     rack-accept (0.4.5)
@@ -457,7 +457,7 @@ DEPENDENCIES
   omniauth-github (~> 1.1.0)
   postmark (= 0.9.15)
   postmark-rails (= 0.4.1)
-  puma (= 2.6.0)
+  puma
   rack-cors
   rack-utf8_sanitizer
   rails (= 4.2.0)

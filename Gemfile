@@ -94,7 +94,7 @@ gem 'god'
 
 gem 'dalli', '2.7.1'
 gem 'eventmachine'
-gem 'puma', '2.6.0'
+gem 'puma'
 # Faye Server 需要
 gem 'thin'
 # for api 跨域

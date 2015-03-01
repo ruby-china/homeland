@@ -41,6 +41,13 @@ class Node
     25
   end
   
+  # Markdown 转换过后的 HTML
+  def summary_html
+    Rails.cache.fetch("#{self.cache_key}/summary_html") do
+      MarkdownConverter.convert(self.summary)
+    end
+  end
+  
   # 是否为 jobs 节点
   def jobs?
     self.id == self.class.jobs_id

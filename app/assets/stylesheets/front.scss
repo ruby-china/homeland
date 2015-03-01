@@ -407,7 +407,7 @@
     list-style-type: decimal; 
     ol { list-style-type: lower-alpha; margin-bottom: 0px; }
   }
-  img { vertical-align: top; }
+  img { vertical-align: top; max-width: 100%; }
 }
 
 .topic .markdown-body,

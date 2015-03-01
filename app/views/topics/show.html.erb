@@ -20,7 +20,7 @@
       <%= render partial: "topics/topic_info", locals: { topic: @topic } %>
       <%= raw SiteConfig.before_topic_html %>
       <div class="body markdown-body entry-content">
-        <%= sanitize_topic @topic.body_html %>
+        <%= sanitize_markdown @topic.body_html %>
       </div>
 
       <% if @topic.excellent? %>

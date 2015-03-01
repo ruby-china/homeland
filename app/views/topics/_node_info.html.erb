@@ -7,7 +7,7 @@
     </div>
   </div>
   <div class="desc">
-    <%= simple_format(node.summary) %>
+    <%= sanitize_markdown node.summary_html %>
   </div>
 <% else %>
   <div class="sorts">

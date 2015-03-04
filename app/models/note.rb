@@ -13,6 +13,8 @@ class Note
   field :publish, type: Mongoid::Boolean, default: false
   belongs_to :user
   
+ validates :body,  presence: true
+  
   counter :hits, default: 0
 
   index user_id: 1

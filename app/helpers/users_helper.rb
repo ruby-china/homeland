@@ -50,7 +50,6 @@ module UsersHelper
     end
 
     if user[:avatar].blank?
-      default_url = asset_path("avatar/#{size}.png")
       img_src = "#{Setting.gravatar_proxy}/avatar/#{user.email_md5}.png?s=#{width * 2}&d=404"
       img = image_tag(img_src, class: "uface", style: "width:#{width}px;height:#{width}px;")
     else

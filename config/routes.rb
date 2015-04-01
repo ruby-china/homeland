@@ -104,8 +104,8 @@ Rails.application.routes.draw do
   get "api" => "home#api", as: 'api'
   get "twitter" => "home#twitter", as: "twitter"
 
-  mount RubyChina::API => "/"
-  mount RubyChina::APIV2 => "/"
+  # mount RubyChina::API => "/"
+  # mount RubyChina::APIV2 => "/"
 
   authenticate :user, lambda { |u| u.admin? } do
     mount Sidekiq::Web => '/sidekiq'

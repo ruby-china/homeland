@@ -312,10 +312,11 @@ a.followed {
     .media-left { min-width: 100px; }
     label { font-weight: normal; color: #aaa; text-align: right; }
     .name {
-      width: 60px;
+      margin-bottom: 10px;
+      width: 120px;
       display: block;
       float: left;
-      text-align: center;
+      text-align: left;
       a:link, a:visited { color: #333; }
     }
   }

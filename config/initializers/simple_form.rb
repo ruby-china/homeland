@@ -55,7 +55,7 @@ SimpleForm.setup do |config|
     b.use :hint, wrap_with: { tag: 'p', class: 'help-block' }
   end
 
-  config.wrappers :prepend, tag: 'div', class: "control-group", error_class: 'error' do |b|
+  config.wrappers :prepend, tag: 'div', class: "form-group", error_class: 'error' do |b|
     b.use :html5
     b.use :placeholder
     b.use :label
@@ -68,7 +68,7 @@ SimpleForm.setup do |config|
     end
   end
 
-  config.wrappers :append, tag: 'div', class: "control-group", error_class: 'error' do |b|
+  config.wrappers :append, tag: 'div', class: "form-group", error_class: 'error' do |b|
     b.use :html5
     b.use :placeholder
     b.use :label
@@ -132,10 +132,10 @@ SimpleForm.setup do |config|
   # config.label_text = lambda { |label, required| "#{required} #{label}" }
 
   # You can define the class to use on all labels. Default is nil.
-  config.label_class = 'control-label'
+  config.label_class = 'form-label'
 
   # You can define the class to use on all forms. Default is simple_form.
-  config.default_form_class = "simple_form form-horizontal"
+  config.default_form_class = ""
 
   # You can define which elements should obtain additional classes
   # config.generate_additional_classes_for = [:wrapper, :label, :input]

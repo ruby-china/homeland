@@ -1,9 +1,9 @@
 <% if can? :create, Topic %>
   <% if !@node.blank? %>
-    <div class="box" style="text-align:center;">
-      <h2 class="title"><%= link_to(@node.name,  node_topics_path(@node))%></h2>
+    <div class="panel panel-body" style="text-align:center;">
+      <div class="panel-heading"><%= link_to(@node.name,  node_topics_path(@node))%></div>
       <%=  render_node_summary(@node) if ["new"].index(params[:action]) %>
-      <div class="content">
+      <div class="panel-body">
         <%= link_to(t("topics.start_a_new_topic_button"), new_topic_path(node: @node.id), class: "btn btn-success") %>
       </div>
 

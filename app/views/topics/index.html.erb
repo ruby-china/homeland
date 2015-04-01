@@ -1,52 +1,57 @@
-<div class="content">
-  <div class="box box-gray">
-    <div id="node-info">
-      <%= render "topics/node_info", node: @node %>
-    </div>
+<div class="row">
+  <div class="col-md-9">
+    <div class="topics panel panel-default">
+      <div class="panel-heading clearfix">
+        <%= render "topics/node_info", node: @node %>
+      </div>
 
-    <div class="topics">
-      <% if @topics.current_page == 1 %>
-        <% cache(@suggest_topics) do %>
-          <%= render partial: "topics/topic", collection: @suggest_topics, locals: { suggest: true } %>
+      <div class="panel-body">
+        <% if @topics.current_page == 1 %>
+          <% cache(@suggest_topics) do %>
+            <%= render partial: "topics/topic", collection: @suggest_topics, locals: { suggest: true } %>
+          <% end %>
         <% end %>
-      <% end %>
-      
-      <% cache(@topics) do %>
-        <%= render partial: "topics/topic", collection: @topics, locals: { suggest: false } %>
-      <% end %>
-    </div>
-    <%= will_paginate @topics, inner_window: 2 %>
 
+        <% cache(@topics) do %>
+          <%= render partial: "topics/topic", collection: @topics, locals: { suggest: false } %>
+        <% end %>
+      </div>
+
+      <div class="panel-footer">
+        <%= will_paginate @topics, inner_window: 2 %>
+      </div>
+
+    </div>
+
+    <% if controller_name == "topics" && action_name == "index" && !mobile? %>
+      <%= render "/shared/index_sections" %>
+      <%= render "/shared/hot_locations" %>
+    <% end %>
+
+    <% if !@node.blank? %>
+      <% content_for :node_feed_link do %>
+        <%= auto_discovery_link_tag(:rss, feed_node_topics_url, title: "#{@node.name} 节点最新话题") %>
+      <% end %>
+    <% end %>
+
+
+    <% if current_user %>
+    <script type="text/javascript">
+      var readed_topic_ids = <%= current_user.filter_readed_topics(@topics) %>;
+      readed_topic_ids = readed_topic_ids.concat(<%= current_user.filter_readed_topics(@suggest_topics) %>);
+      for (var i = 0; i < readed_topic_ids.length; i++) {
+        topic_id = readed_topic_ids[i];
+        $(".topic-"+ topic_id + " .right-info .count").addClass("state-true");
+      }
+    </script>
+    <% end %>
   </div>
 
-  <% if controller_name == "topics" && action_name == "index" && !mobile? %>
-    <%= render "/shared/index_sections" %>
-    <%= render "/shared/hot_locations" %>
-  <% end %>
 
-  <% if !@node.blank? %>
-    <% content_for :node_feed_link do %>
-      <%= auto_discovery_link_tag(:rss, feed_node_topics_url, title: "#{@node.name} 节点最新话题") %>
-    <% end %>
-  <% end %>
-
-</div>
-
-<% if current_user %>
-<script type="text/javascript">
-  var readed_topic_ids = <%= current_user.filter_readed_topics(@topics) %>;
-  readed_topic_ids = readed_topic_ids.concat(<%= current_user.filter_readed_topics(@suggest_topics) %>);
-  for (var i = 0; i < readed_topic_ids.length; i++) {
-    topic_id = readed_topic_ids[i];
-    $(".topic-"+ topic_id + " .right-info .count").addClass("state-true");
-  }
-</script>
-<% end %>
-
-<% if !mobile? %>
-  <div class="sidebar">
+  <div class="sidebar col-md-3">
     <%= render "topics/sidebar_for_topic_index" if action_name.in?(%w(index)) %>
     <%= render "topics/sidebar_for_topic_recent" if action_name.in?(%w(recent no_reply popular excellent)) %>
     <%= render "topics/sidebar_for_topic_node" if action_name == "node" %>
   </div>
-<% end %>
+
+</div>

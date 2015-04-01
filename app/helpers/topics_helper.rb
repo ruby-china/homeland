@@ -31,14 +31,14 @@ module TopicsHelper
     return "" if current_user.blank?
     return "" if topic.blank?
     return "" if owner?(topic)
-    class_name = "follow"
+    class_name = "watch"
     if topic.follower_ids.include?(current_user.id)
-      class_name = "followed"
+      class_name = "watch followed"
     end
-    icon = content_tag("i", "", class: "icon small_#{class_name}")
+    icon = content_tag("i", "", class: "fa fa-eye")
     followed = class_name == "followed"
     link_to(raw("#{icon} 关注"), "#", onclick: "return Topics.follow(this);", rel: "twipsy",
-            'data-id' => topic.id, 'data-followed' => followed)
+            'data-id' => topic.id, 'data-followed' => followed, class: class_name)
   end
 
   def topic_title_tag(topic)

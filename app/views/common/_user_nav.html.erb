@@ -1,19 +1,15 @@
 <% if current_user %>
-<ul class="nav pull-right" id="userbar">
-
   <%
     badge_class = ""
-    badge_class = "badge-error" if unread_notify_count > 0
+    badge_class = "new" if unread_notify_count > 0
   %>
-  <li<%= " class=active" if ["notifications"].index(params[:controller]) %>>
-    <a href="<%= notifications_path %>" id="user_notifications_count"><span class="badge <%= badge_class %>"><%= unread_notify_count %></span></a>
+  <li class="notification-count">
+    <a href="<%= notifications_path %>" class="<%= badge_class %>" title="通知"><i class="fa fa-bell"></i><span class="count"><%= unread_notify_count %></span></a>
   </li>
-  <li class="dropdown" id="user_menu">
-    <a href="#user_menu" class="dropdown-toggle" data-toggle="dropdown">
-      <%= current_user.login %>
-      <b class='caret'></b>
-    </a>
-    <%= render_list class: "dropdown-menu" do |li|
+
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%= current_user.login %> <span class="caret"></span></a>
+    <%= render_list class: "dropdown-menu", role: "menu" do |li|
       li << link_to(t("menu.my_home_page"), user_path(current_user.login) )
       unless params[:controller].match(/cpanel/)
         li << link_to(t("menu.edit_account_path"), edit_user_registration_path)
@@ -25,13 +21,4 @@
       li << link_to(t("common.logout"), destroy_user_session_path, method: "delete" )
     end %>
   </li>
-</ul>
-<% if mobile? %>
-<span class="pull-right"><%= link_to("发帖", new_topic_path, class: "btn btn-small btn-primary") %></span>
-<% end %>
-<% else %>
-  <%= render_list class: "nav pull-right", id: "userbar" do |li|
-    li << link_to( t("common.register"), new_user_registration_path)
-    li << link_to( t("common.login"), new_user_session_path )
-  end %>
 <% end %>

@@ -1,38 +1,34 @@
 <% cache([topic, suggest]) do %>
-<div class="topic topic-line topic-<%= topic.id %>">
-  <div class="pull-left avatar">
+<div class="topic media topic-<%= topic.id %>">
+  <div class="avatar media-left">
     <%= user_avatar_tag(topic.user,:normal) %>
   </div>
-  <div class="right-info">
-    <div class="pull-right replies">
-      <% if topic.replies_count > 0 %>
-        <%= link_to(topic.replies_count,"#{topic_path(topic)}#reply#{topic.replies_count}", class: "count state-false") %>
+  <div class="infos media-body">
+    <div class="title media-heading">
+      <%= link_to(truncate(topic.title, length: 100), topic_path(topic), title: topic.title) %>
+      <% if suggest %>
+        <i class="icon small_pin" title="置顶"></i>
+      <% end %>
+      <%= topic_excellent_tag(topic) %>
+    </div>
+    <div class="info">
+      <% if action_name != "node" %>
+      <%= render_node_name(topic.node_name,topic.node_id) %>
+      •
+      <% end %>
+      <%= user_name_tag(topic.user) %>
+      •
+      <% if topic.last_reply_user_login.blank? %>
+        <%= raw t("common.created_at", time: timeago(topic.created_at))%>
+      <% else %>
+        <%= t("common.last_by")%> <%= user_name_tag(topic.last_reply_user_login) %> <%= raw t("common.reply_at", time: timeago(topic.replied_at))%>
       <% end %>
     </div>
-    <div class="infos">
-      <div class="title">
-        <%= link_to(truncate(topic.title, length: 100), topic_path(topic), title: topic.title) %>
-        <% if suggest %>
-          <i class="icon small_pin" title="置顶"></i>
-        <% end %>
-        <%= topic_excellent_tag(topic) %>
-      </div>
-      <div class="info">
-        <% if action_name != "node" %>
-        <%= render_node_name(topic.node_name,topic.node_id) %>
-        •
-        <% end %>
-        <%= user_name_tag(topic.user) %>
-        <em>
-          •
-          <% if topic.last_reply_user_login.blank? %>
-            <%= raw t("common.created_at", time: timeago(topic.created_at))%>
-          <% else %>
-            <%= t("common.last_by")%> <%= user_name_tag(topic.last_reply_user_login) %> <%= raw t("common.reply_at", time: timeago(topic.replied_at))%>
-          <% end %>
-        </em>
-      </div>
-    </div>
+  </div>
+  <div class="count media-right">
+    <% if topic.replies_count > 0 %>
+      <%= link_to(topic.replies_count,"#{topic_path(topic)}#reply#{topic.replies_count}", class: "state-false") %>
+    <% end %>
   </div>
 </div>
 <% end %>

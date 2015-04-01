@@ -1,24 +1,17 @@
 <% if !node.blank? %>
-  <div>
-    <h2><%= node.name %></h2>
-    <span class="total">共有 <%= render_node_topics_count(node) %> 个讨论主题</span>
-    <div class="feed">
-      <%= link_to("#{content_tag(:span, "", class: "icon share_icons_rss" )}".html_safe, feed_node_topics_url, title: "#{node.name} Feed") %>
+  <div class="node-info">
+    <div class="name"><%= node.name %> <span class="total">共有 <%= render_node_topics_count(node) %> 个讨论主题</span></div>
+    <div class="summary">
+      <%= sanitize_markdown node.summary_html %>
     </div>
   </div>
-  <div class="desc">
-    <%= sanitize_markdown node.summary_html %>
-  </div>
+
 <% else %>
-  <div class="sorts">
-    <span class="lb">查看:</span>
-    <ul>
-      <li<%= " class=active" if action_name == "index"  %>><%= link_to "默认", topics_path %></li> /
-      <li<%= " class=active" if action_name == "popular"  %>>
-        <%= link_to raw("<i class='icon small_liked'></i> 优质帖子"), popular_topics_path, class: "popular" %>
-      </li> /
-      <li<%= " class=active" if action_name == "no_reply"  %>><%= link_to "无人问津", no_reply_topics_path, rel: 'nofollow' %></li> /
-      <li<%= " class=active" if action_name == "recent"  %>><%= link_to "最新创建", recent_topics_path, rel: 'nofollow' %></li>
-    </ul>
+  <div class="filter pull-right">
+    <span class="l">查看:</span>
+    <a href="<%= topics_path %>"<%= " class=active" if action_name == "index" %>>默认</a> /
+    <a href="<%= popular_topics_path %>" class="popular<%= " active" if action_name == "popular"  %>"><i class="fa fa-diamond"></i> 优质帖子</a> /
+    <a href="<%= no_reply_topics_path %>" <%= " class=active" if action_name == "no_reply"  %>>无人问津</a> /
+    <a href="<%= recent_topics_path %>" <%= " class=active" if action_name == "recent"  %>>最新创建</a>
   </div>
 <% end %>

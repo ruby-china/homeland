@@ -1,7 +1,7 @@
 <% if current_user && current_user.newbie? %>
-<div class="box">
-  <h2 class="title">新手必读</h2>
-  <div class="inner">
+<div class="panel panel-default">
+  <div class="panel-heading">新手必读</div>
+  <div class="panel-body">
     <%= raw SiteConfig.newbie_notices %>
   </div>
 </div>

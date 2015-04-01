@@ -14,56 +14,64 @@
   </script>
 <% end %>
 
-<div class="content">
-  <div id="topic-show" class="topics box hfeed">
-    <div class="topic hentry">
+<div class="row">
+  <div class="col-md-9">
+    <div class="topic-detail panel panel-default">
       <%= render partial: "topics/topic_info", locals: { topic: @topic } %>
-      <%= raw SiteConfig.before_topic_html %>
-      <div class="body markdown-body entry-content">
-        <%= sanitize_markdown @topic.body_html %>
-      </div>
 
-      <% if @topic.excellent? %>
-      <div class="excellent">
-        <i class="icon small_cert_on"></i> 本帖已被设为精华帖！
-        <% if admin? %>
-        <div class="opts pull-right">
-          <%= link_to "取消", unsuggest_topic_path(@topic.id), method: "delete" %>
+      <div class="panel-body markdown">
+        <%= raw SiteConfig.before_topic_html %>
+        <%= sanitize_markdown @topic.body_html %>
+
+        <% if @topic.excellent? %>
+        <div class="label-awesome">
+          <i class="fa fa-diamond awesome"></i> 本帖已被设为精华帖！
+          <% if admin? %>
+          <div class="pull-right">
+            <%= link_to "取消", unsuggest_topic_path(@topic.id), method: "delete" %>
+          </div>
+          <% end %>
         </div>
         <% end %>
+
+        <%= raw SiteConfig.after_topic_html %>
+        <%= social_share_button_tag h("#{@topic.title} via: @#{Setting.twitter_id} ") %>
       </div>
-      <% end %>
 
-      <%= raw SiteConfig.after_topic_html %>
-
-      <%= render "buttons" %>
+      <div class="panel-footer clearfix">
+        <%= render "buttons" %>
+      </div>
     </div>
-  </div>
 
   <% if @replies.blank? %>
     <div class="no-result">
       <%= t("topics.no_replies") %>
     </div>
     <% else %>
-    <div id="replies" class="box box-gray" data-last-floor="<%= @replies.count %>">
-      <div class="total">
+    <div id="replies" class="panel panel-default" data-last-floor="<%= @replies.count %>">
+      <div class="total panel-heading">
         共收到 <b><%= @topic.replies_count %></b> 条回复
       </div>
-      <div class="items">
+      <div class="items panel-body">
         <%= cache([@topic,params[:page],"raw:#{@show_raw}"]) do %>
           <%= render partial: "replies/reply", collection: @replies %>
         <% end %>
       </div>
-      <%= will_paginate @replies, inner_window: 2, params: { anchor: 'replies' } %>
+      <div class="panel-footer">
+        <%= will_paginate @replies, inner_window: 2, params: { anchor: 'replies' } %>
+      </div>
     </div>
   <% end %>
 
   <% if current_user %>
-    <div id="reply" class="form box">
+    <div id="reply" class="panel panel-default">
+      <div class="panel-body">
       <% if can? :create, Reply %>
         <%= render "editor_toolbar" %>
         <%= form_for(Reply.new, remote: true, url: topic_replies_path(@topic)) do |f| %>
-          <%= f.text_area :body, class: "topic-editor span10", rows: "4", tabindex: "1" %>
+          <div class="form-group">
+            <%= f.text_area :body, class: "topic-editor form-control", rows: "4", tabindex: "1" %>
+          </div>
           <div class="submit-buttons">
             <button type="submit" id="btn_reply" class="btn btn-primary" tabindex="2"><%= t("topics.submit_reply")%></button><br />
             <span class="help-inline" title="或者 Command + Enter">Ctrl+Enter</span>
@@ -78,16 +86,18 @@
           当前设置新手用户不能在 22:00 ~ 9:00 发帖。
         </div>
       <% end %>
+      </div>
     </div>
   <% else %>
       <%= render partial: "topics/translation/need_login_to_reply" %>
   <% end %>
-</div>
+  </div>
 
 <% if !mobile? %>
-  <div class="sidebar">
+  <div class="sidebar col-md-3">
     <%= render "sidebar_box_node_new_topic" %>
     <%= render "sidebar_box_tips" %>
     <%= render "sidebar_box_node_recent_topics", topic: @topic %>
   </div>
 <% end %>
+</div>

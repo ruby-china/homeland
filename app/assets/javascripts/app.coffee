@@ -91,19 +91,19 @@ window.App =
           type : likeable_type
       if likes_count > 0
         likes_count -= 1
-      $el.data("state","").data('count', likes_count).attr("title", "喜欢")
+      $el.data("state","").data('count', likes_count).attr("title", "喜欢").removeClass("followed")
       if likes_count == 0
         $('span',el).text("喜欢")
       else
         $('span',el).text("#{likes_count} 人喜欢")
-      $("i.icon",el).attr("class","icon small_like")
+      $("i.fa",el).attr("class","fa fa-star-o")
     false
 
   likeableAsLiked : (el) ->
     likes_count = $(el).data("count")
-    $(el).data("state","liked").attr("title", "取消喜欢")
+    $(el).data("state","liked").attr("title", "取消喜欢").addClass("followed")
     $('span',el).text("#{likes_count} 人喜欢")
-    $("i.icon",el).attr("class","icon small_liked")
+    $("i.fa",el).attr("class","fa fa-star")
 
   atReplyable : (el, logins) ->
     return if logins.length == 0

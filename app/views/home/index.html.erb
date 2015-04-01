@@ -1,16 +1,21 @@
-<%= raw SiteConfig.index_html %>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <%= raw SiteConfig.index_html %>
+  </div>
+</div>
 
-<div class="home_suggest_topics box box-gray">
-  <h2>社区精华帖</h2>
-  <div class="topics">
+<div class="panel panel-default">
+  <div class="panel-heading">社区精华帖</div>
+  <div class="panel-body">
     <% cache(@excellent_topics) do %>
       <%= render partial: "topics/topic", collection: @excellent_topics, locals: { suggest: false } %>
     <% end %>
   </div>
-  <div class="more">
+  <div class="panel-footer">
     <%= link_to "查看更多精华帖...", excellent_topics_path %>
   </div>
 </div>
+
 <% if !mobile? %>
   <%= render "/shared/index_sections" %>
   <%= render "/shared/hot_locations" %>

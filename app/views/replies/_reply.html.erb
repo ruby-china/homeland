@@ -2,12 +2,12 @@
 <%
   floor = reply_counter + 1 + ((@page - 1) * Reply.per_page)
 %>
-<div class="reply<%= ' popular' if reply.popular? %>" id="reply<%= floor %>">
+<div class="reply<%= ' popular' if reply.popular? %> media" id="reply<%= floor %>">
   <% if reply.deleted? and !@show_raw %>
-    <div class="deleted"><%= floor %><%= t("common.floor")%> 已删除.</div>
+    <div class="media-body deleted"><%= floor %><%= t("common.floor")%> 已删除.</div>
   <% else %>
-    <div class="pull-left face"><%= user_avatar_tag(reply.user, :normal) %></div>
-    <div class="infos">
+    <div class="avatar media-left"><%= user_avatar_tag(reply.user, :normal) %></div>
+    <div class="infos media-body">
       <div class="info">
         <span class="name">
           <%= user_name_tag(reply.user) %>
@@ -15,17 +15,17 @@
         <span class="time">
           <a class="reply-floor" href="#reply<%= floor %>"><%= floor %><%= t("common.floor")%></a> · <%= timeago(reply.created_at) %>
         </span>
-        <span class="opts">
+        <span class="opts pull-right">
           <% if !reply.deleted? %>
             <%= likeable_tag(reply, cache: true) %>
-            <%= link_to("", edit_topic_reply_path(@topic,reply), class: "edit icon small_edit", 'data-uid' => reply.user_id, title: "修改回帖")%>
-            <%= link_to("", "#", 'data-floor' => floor, 'data-login' => reply.user_login,
-                title: t("topics.reply_this_floor"), class: "icon small_reply" )
+            <%= link_to("", edit_topic_reply_path(@topic,reply), class: "edit fa fa-pencil", 'data-uid' => reply.user_id, title: "修改回帖")%>
+            <%= link_to('', "#", 'data-floor' => floor, 'data-login' => reply.user_login,
+                title: t("topics.reply_this_floor"), class: "btn-reply fa fa-mail-reply" )
             %>
           <% end %>
         </span>
       </div>
-      <div class="body markdown-body<%= ' deleted' if reply.deleted? %>">
+      <div class="markdown<%= ' deleted' if reply.deleted? %>">
         <%= sanitize_markdown reply.body_html %>
       </div>
       <span class="opts">

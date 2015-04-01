@@ -1,7 +1,6 @@
 <% reply = notification.reply %>
 <% if reply.blank? %>
-  <td></td>
-  <td>相关信息已删除</td>
+  <div class="media-body">相关信息已删除</div>
 <% else %>
   <%
     topic = reply.topic
@@ -10,11 +9,11 @@
       action_label = "关注"
     end
   %>
-  <td class="face">
+  <div class="media-left avatar">
     <%= user_avatar_tag(reply.user, :normal) %>
-  </td>
-  <td>
-    <h3>
+  </div>
+  <div class="media-body">
+    <div class="media-heading">
       <span class="user">
         <%= user_name_tag(reply.user) %>
       </span>
@@ -23,11 +22,11 @@
       <% if !notification.read? %>
         <span class="new label label-warning">新</span>
       <% end %>
-    </h3>
+    </div>
     <%- if reply.present? -%>
-      <div class="body markdown-body">
+      <div class="summary markdown">
         <%= sanitize_markdown reply.body_html %>
       </div>
     <%- end -%>
-  </td>
+  </div>
 <% end %>

@@ -45,7 +45,9 @@ module RubyChina
         resource '/api/*', headers: :any, methods: [:get, :post, :put, :delete, :destroy]
       end
     end
-    
+
+    config.assets.paths << Rails.root.join("app", "assets", "fonts")
+
     config.middleware.insert 0, Rack::UTF8Sanitizer
   end
 end

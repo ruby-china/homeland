@@ -102,15 +102,15 @@ window.Topics =
       App.alert(msg,'#reply')
     $("#new_reply textarea").focus()
     $('#btn_reply').button('reset')
-    
+
   # 图片点击增加全屏预览功能
-  initContentImageZoom : () ->    
+  initContentImageZoom : () ->
     exceptClasses = ["emoji"]
     imgEls = $(".body img")
     for el in imgEls
       if exceptClasses.indexOf($(el).attr("class")) == -1
         $(el).wrap("<a href='#{$(el).attr("src")}' class='zoom-image' data-action='zoom'></a>")
-      
+
     # Bind click event
     if App.mobile == true
       $('a.zoom-image').attr("target","_blank")
@@ -185,14 +185,12 @@ window.Topics =
       $.ajax
         url : "/topics/#{topic_id}/unfollow"
         type : "DELETE"
-      $(el).data("followed", false)
-      $("i",el).attr("class", "icon small_follow")
+      $(el).data("followed", false).removeClass("followed")
     else
       $.ajax
         url : "/topics/#{topic_id}/follow"
         type : "POST"
-      $(el).data("followed", true)
-      $("i",el).attr("class", "icon small_followed")
+      $(el).data("followed", true).addClass("followed")
     false
 
   submitTextArea : (el) ->
@@ -216,7 +214,7 @@ window.Topics =
 
   init : ->
     bodyEl = $("body")
-    
+
     Topics.initContentImageZoom()
 
     Topics.initCloseWarning($("textarea.closewarning"))

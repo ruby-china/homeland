@@ -5,11 +5,11 @@
   %>
 
   <% if topics.present? %>
-  <div class="box clearfix">
-    <h2 class="title"><%= t("topics.node_recent_topics") %></h2>
-    <ul>
+  <div class="panel panel-default">
+    <div class="panel-heading"><%= t("topics.node_recent_topics") %></div>
+    <ul class="list-group">
     <% topics.each do |item| %>
-      <li><%= link_to(truncate(item.title, length: 30), topic_path(item), title: item.title) %></li>
+      <li class="list-group-item"><%= link_to(truncate(item.title, length: 30), topic_path(item), title: item.title) %></li>
     <% end %>
     </ul>
   </div>

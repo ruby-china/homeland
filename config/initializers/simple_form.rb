@@ -5,8 +5,8 @@ SimpleForm.setup do |config|
   # wrapper, change the order or even add your own to the
   # stack. The options given below are used to wrap the
   # whole input.
-  config.wrappers :default, class: :input, 
-                            hint_class: :field_with_hint, 
+  config.wrappers :default, class: :input,
+                            hint_class: :field_with_hint,
                             error_class: :field_with_errors do |b|
     ## Extensions enabled by default
     # Any of these extensions can be disabled for a
@@ -46,15 +46,13 @@ SimpleForm.setup do |config|
     b.use :error, wrap_with: { tag: :span, class: :error }
   end
 
-  config.wrappers :bootstrap, tag: 'div', class: 'control-group', error_class: 'error' do |b|
+  config.wrappers :bootstrap, tag: 'div', class: 'form-group', error_class: 'error' do |b|
     b.use :html5
     b.use :placeholder
     b.use :label
-    b.wrapper tag: 'div', class: 'controls' do |ba|
-      ba.use :input
-      ba.use :error, wrap_with: { tag: 'span', class: 'help-inline' }
-      ba.use :hint, wrap_with: { tag: 'p', class: 'help-block' }
-    end
+    b.use :input, class: "form-control"
+    b.use :error, wrap_with: { tag: 'span', class: 'help-inline' }
+    b.use :hint, wrap_with: { tag: 'p', class: 'help-block' }
   end
 
   config.wrappers :prepend, tag: 'div', class: "control-group", error_class: 'error' do |b|

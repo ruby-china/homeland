@@ -1,6 +1,6 @@
-<div id="page-show" class="box">
+<div id="page-show" class="panel panel-default">
   <% if !@page.locked or admin? %>
-    <div class="info">
+    <div class="panel-heading">
       <%= link_to comments_page_path(@page.slug) do %>
         <%= @page.comments_count %> 条评论
       <% end %>,
@@ -9,22 +9,21 @@
     </div>
   <% end %>
 
-  <div class="markdown-body">
+  <div class="panel-body markdown">
     <%= sanitize_markdown @page.body_html %>
+
+    <%= social_share_button_tag h("#{@page.title} via: @#{Setting.twitter_id} ") %>
   </div>
-  
-  <div class="editors clearfix">
-    <div class="pull-leff">
-      <%= social_share_button_tag h("#{@page.title} via: @#{Setting.twitter_id} ") %>
-    </div>
-    <div class="pull-right">
-      <%= link_to "发表评论", comments_page_path(@page.slug, anchor: "new_comment"), class: "btn btn-success" %>
-    </div>
+
+  <div class="editors panel-footer ">
     <h3><%= t("pages.wiki_page_contributors")%></h3>
-    <div>
+    <div class="avatars">
       <% @page.editors.each do |item| %>
         <%= user_avatar_tag(item, :small) %>
       <% end %>
+    </div>
+    <div class="buttons">
+      <%= link_to "发表评论", comments_page_path(@page.slug, anchor: "new_comment"), class: "btn btn-success" %>
     </div>
   </div>
 </div>

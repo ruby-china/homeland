@@ -152,6 +152,23 @@ a { color: $blue; }
   transition:none;
   &:focus { box-shadow: inset 0 0px 0px #fff; padding: 6px 0px 5px 0; border-bottom: 2px solid $blueLight; }
 }
+textarea.form-control { border: 1px solid #D5DCE1;  }
+textarea.form-control,
+textarea.form-control:focus { padding: 6px; }
+form {
+  .nav-pills { }
+  .nav-pills>li>a {
+    border-radius: 0px;
+    padding: 3px 13px;
+    background-color: $gray;
+    border-bottom: 1px solid $grayDark;
+  }
+  .nav-pills>li.active>a:link,
+  .nav-pills>li.active>a:visited,
+  .nav-pills>li.active>a:hover { background-color: $blueLight; border-color: $blueDark; }
+}
+
+
 .input-group-addon {
   padding: 6px 0;
   background: #fff;
@@ -223,6 +240,24 @@ a { color: $blue; }
     color: #ddd;
     background: transparent;
     &:hover { color: #ddd; background: transparent; }
+  }
+}
+
+.chosen-container {
+  .chosen-single {
+    border-radius: 0px;
+    border:0px;
+    padding: 6px 0px 6px 4px;
+    height: 34px;
+    line-height: 24px;
+    border-bottom: 1px solid #D5DCE1;
+    div { top: 6px; }
+  }
+  .chosen-drop { box-shadow: 0 0 0 0;}
+  .chosen-results {
+    li.group-option {
+      &:hover { background-color: $blueLight; }
+    }
   }
 }
 

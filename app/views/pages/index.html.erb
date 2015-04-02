@@ -1,9 +1,12 @@
 <div id="pages">
-  <div class="tools box box-gray">
-    <%= link_to(t("pages.wiki_index"), recent_pages_path )%>
-    <% if can? :create, Page %>
-      <%= link_to(t("pages.create_page"), new_page_path, class: "btn btn-success")%>
-    <% end %>
+  <div class="tools panel panel-default">
+    <div class="panel-body">
+        <%= link_to(t("pages.wiki_index"), recent_pages_path )%>
+        <% if can? :create, Page %>
+          <%= link_to(t("pages.create_page"), new_page_path, class: "btn btn-success")%>
+        <% end %>
+    </div>
   </div>
+
   <%= raw SiteConfig.wiki_index_html %>
 </div>

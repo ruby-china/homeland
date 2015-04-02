@@ -50,9 +50,11 @@ SimpleForm.setup do |config|
     b.use :html5
     b.use :placeholder
     b.use :label
-    b.use :input, class: "form-control"
-    b.use :error, wrap_with: { tag: 'span', class: 'help-inline' }
-    b.use :hint, wrap_with: { tag: 'p', class: 'help-block' }
+    b.wrapper tag: 'div', class: 'col-sm-10' do |bw|
+      bw.use :input, class: "form-control"
+      bw.use :error, wrap_with: { tag: 'span', class: 'help-inline' }
+      bw.use :hint, wrap_with: { tag: 'p', class: 'help-block' }
+    end
   end
 
   config.wrappers :prepend, tag: 'div', class: "form-group", error_class: 'error' do |b|
@@ -132,7 +134,7 @@ SimpleForm.setup do |config|
   # config.label_text = lambda { |label, required| "#{required} #{label}" }
 
   # You can define the class to use on all labels. Default is nil.
-  config.label_class = 'form-label'
+  config.label_class = 'control-label col-sm-2'
 
   # You can define the class to use on all forms. Default is simple_form.
   config.default_form_class = ""

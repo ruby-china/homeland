@@ -1,7 +1,10 @@
-<div class="box">
-  <ul>
-  <% @pages.each do |item| %>
-    <li><%= page_title_tag(item) %></li>
-  <% end %>
-  </ul>
+<div class="panel panel-default">
+    <div class="panel-heading">Wiki 目录</div>
+    <div class="panel-body">
+      <ul>
+      <% @pages.each do |item| %>
+        <li><%= page_title_tag(item) %></li>
+      <% end %>
+      </ul>
+    </div>
 </div>

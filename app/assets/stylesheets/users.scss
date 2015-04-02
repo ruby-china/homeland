@@ -41,14 +41,8 @@
 
 .recent-topics {
   ul {
-    list-style:none; margin:0;
     li {
-      border-bottom:1px dashed #ddd;
-      &:last-child {
-        border-bottom: 0px;
-      }
-      padding:10px 0px;
-      .title { 
+      .title {
         font-size:14px;
       }
       i.icon { margin-bottom: -1px; }
@@ -62,13 +56,7 @@
 }
 
 .recent-replies {
-  list-style:none; margin:0;
   li {
-    padding:10px 0px;
-    border-bottom:1px dashed #ddd;
-    &:last-child {
-      border-bottom: 0px;
-    }
     .title {
       font-size:14px;
       .info { font-size:12px; color:#bbb; }
@@ -95,8 +83,8 @@
 
 }
 
-.bio { 
-  font-size:12px; line-height:180%; 
+.bio {
+  font-size:12px; line-height:180%;
   p:last-child { margin-bottom:0; }
 }
 
@@ -135,15 +123,9 @@ table.node-topics {
 }
 
 #user_github_repos {
-  margin-top:36px;
   .more { text-align:right; }
   ul { margin:0; }
   li {
-    list-style:none;
-    margin:0 -10px;
-    padding:0 10px;
-    margin-bottom:10px;
-    border-bottom:1px solid #eee;
     .title {
       position:relative;
       a { color:#333; font-weight:bold; }

@@ -1,10 +1,10 @@
-<div class="sidebar">
-  <div class="box" id="user_github_repos">
+<div class="sidebar col-md-3">
+  <div class="panel panel-default" id="user_github_repos">
     <% if not user.github.blank? %>
-      <h2 class="title">GitHub Public Repos</h2>
-      <ul>
+      <div class="panel-heading">GitHub Public Repos</div>
+      <ul class="list-group">
         <% user.github_repositories.each do |item| %>
-        <li>
+        <li class="list-group-item">
           <div class="title">
             <%= link_to truncate(item[:name], length: 25), item[:url], target: "_blank", rel: "nofollow" %>
             <span class="watchers" title="<%= item[:watchers] %> Watchers"><%= item[:watchers] %></span>
@@ -14,7 +14,7 @@
         </li>
         <% end %>
       </ul>
-      <div class="more">
+      <div class="panel-footer more">
         <%= link_to "More on GitHub", user.github_url, target: "_blank", rel: "nofollow" %>
       </div>
     <% else %>

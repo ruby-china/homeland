@@ -1,21 +1,18 @@
-<%= render "menu" %>
-
-<div class="content">
-  <%= render "info" %>
-  
-  <div class="tabbable">
-    <div class="subnav">
+<div class="row">
+  <div class="col-md-9">
+    <%= render "menu" %>
+    <%= render "info" %>
+    <div class="tabbable">
       <ul class="nav nav-tabs">
         <li class="active"><a href="#topics" data-toggle="tab">热门话题</a></li>
         <li><a href="#replies" data-toggle="tab">最近回帖</a></li>
       </ul>
-    </div>
-    <div class="tab-content">
-      <div class="tab-pane active recent-topics" id="topics">
-        <div class="box">
-          <ul>
-            <% @topics.each do |item| %>
-              <li>
+      <div class="tab-content">
+        <div class="tab-pane active recent-topics" id="topics">
+          <div class="panel panel-default">
+            <ul class="list-group">
+              <% @topics.each do |item| %>
+              <li class="list-group-item">
                 <div class="title">
                   <%= topic_title_tag(item) %> <%= topic_excellent_tag(item) %>
                 </div>
@@ -24,19 +21,17 @@
                   <span class="counter"><%= item.likes_count %> 人喜欢 • <%= item.replies_count %> 条回复</span>
                 </div>
               </li>
-            <% end %>
-          </ul>
+              <% end %>
+            </ul>
+          </div>
         </div>
-      </div>
-      <div class="tab-pane" id="replies">
-        <div class="box">
-          <%= render "replies", replies: @replies %>
+        <div class="tab-pane" id="replies">
+          <div class="panel panel-default">
+            <%= render "replies", replies: @replies %>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  
-
-
+  <%= render "sidebar", user: @user %>
 </div>
-<%= render "sidebar", user: @user %>

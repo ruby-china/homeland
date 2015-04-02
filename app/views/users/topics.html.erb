@@ -1,9 +1,14 @@
-<%= render "menu" %>
-<div class="content">
-  <div class="box">
-    <%= render "topics", topics: @topics %>
-    <%= will_paginate @topics %>
-  </div>
+<div class="row">
+    <div class="col-md-9">
+        <%= render "menu" %>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <%= render "topics", topics: @topics %>
+            </div>
+            <div class="panel-footer">
+                <%= will_paginate @topics %>
+            </div>
+        </div>
+    </div>
+    <%= render "sidebar", user: @user %>
 </div>
-
-<%= render "sidebar", user: @user %>

@@ -1,10 +1,10 @@
-<div class="box">
-  <div class="userinfo vcard clearfix">
+<div class="panel panel-default">
+  <div class="userinfo panel-body vcard clearfix">
     <div class="pull-right" style="text-align:center;">
       <%= user_avatar_tag(@user,:big, link: false) %>
     </div>
     <%= render_user_level_tag(@user) %>
-    <ul>
+    <ul class="list-group">
       <li class="with_nbsp">
         <label>&nbsp;</label>
         <span class="title">第 <%= @user.id %> 位<%= t("menu.users")%></span>
@@ -78,8 +78,11 @@
 
 <% cache([@user, "bio"]) do %>
   <% if !@user.bio.blank? %>
-    <div class="box bio markdown-body">
-      <%= markdown(@user.bio) %>
+    <div class="panel panel-default bio">
+      <div class="panel-heading">个人介绍</div>
+      <div class="panel-body markdown">
+        <%= markdown(@user.bio) %>
+      </div>
     </div>
   <% end %>
 <% end %>

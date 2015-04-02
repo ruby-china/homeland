@@ -1,7 +1,7 @@
-<ul class="recent-replies">
+<ul class="list-group">
   <% replies.each do |reply| %>
     <% next if reply.topic.blank? %>
-    <li>
+    <li class="list-group-item">
       <div class="title">
         <%= link_to(reply.topic.title, topic_path(reply.topic_id)) %>
         <span class="info">at <%= timeago(reply.created_at) %></span>

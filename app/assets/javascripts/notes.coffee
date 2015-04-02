@@ -1,7 +1,7 @@
 #= require_self
 window.Notes =
   init : () ->
-    $("<div id='preview' class='markdown'></div>").insertAfter( $('#note_body') )
+    $("<div id='preview' class='markdown' style='display:none;'></div>").insertAfter( $('#note_body') )
 
     $('.edit a').click ->
       $(this).parent().addClass('active')

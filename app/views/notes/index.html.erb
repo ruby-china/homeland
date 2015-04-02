@@ -1,26 +1,43 @@
-<div class="content">
-  <div id="notes" class="box">
-    <h2 class="title">我的记事本</h2>
-    <div class="total">
+<div class="row">
+<div class="col-md-9">
+  <div id="notes" class="panel panel-default">
+    <div class="panel-heading">
+      我的记事本
+      <span class="total pull-right">
       已有 <%= current_user.notes.count %> 条记事
-      <a href="<%= new_note_path %>" class="btn btn-success">新建记事</a>
+      </span>
     </div>
+
+    <div class="panel-body">
     <% if @notes.blank? %>
       <div style="text-align:center; padding:60px 0;">你还没有创建过一个文件。</div>
     <% else %>
-      <ul class="list">
+
+      <div>
       <% @notes.each do |note| %>
-        <li>
-          <div><a class="title" href="<%= note_path(note.id) %>"><i class="icon-stop"></i> <%= truncate(note.title.gsub('#',''), length: 50) %></a> <%= raw '<span class="label warning">公开</span>' if note.publish %></div>
-          <div class="info">
-            <%= note.word_count %> <%= t("notes.chars") %>, <%= sanitize t("notes.created_at", time: timeago(note.created_at)) %>, <%= note.changes_count %> <%= t("notes.times_edit") %>
+        <div class="media">
+          <div class="media-body">
+            <div class="media-heading">
+              <i class="fa fa-file-text-o"></i> <a class="title" href="<%= note_path(note.id) %>"><%= truncate(note.title.gsub('#',''), length: 50) %></a> <%= raw '<span class="label warning"><i class="fa fa-share-alt"></i> 公开</span>' if note.publish %>
+              <span class="opts pull-right">
+                <a href="<%= edit_note_path(note.id) %>"><i class="fa fa-pencil"></i></a>
+              </span>
+            </div>
+            <div class="info">
+              <%= note.word_count %> <%= t("notes.chars") %>, <%= sanitize t("notes.created_at", time: timeago(note.created_at)) %>, <%= note.changes_count %> <%= t("notes.times_edit") %>
+            </div>
           </div>
-        </li>
+        </div>
       <% end %>
-      </ul>
+      </div>
     <% end %>
-    <%= will_paginate @notes %>
+    </div>
+
+    <div class="panel-footer">
+      <%= will_paginate @notes %>
+    </div>
   </div>
 </div>
 
 <%= render "sidebar" %>
+</div>

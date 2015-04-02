@@ -1,23 +1,26 @@
-<div id="notes" class="box">
-  <div class="note">
-    <% if @note.publish %>
-    <div class="pull-right urls">
-      <em><%= t("notes.page_link")%></em> <input type="text" onclick="$(this).select();" value="<%= note_url(@note) %>" readonly="readonly" />
-    </div>
-    <% end %>
-    <div class="info">
-      <p>
-        <%= raw '<span class="label warning">公开</span> ' if @note.publish %>
+<div id="notes" class="panel panel-default">
+  <div class="panel-heading">
+    <%= raw '<span><i class="fa fa-share-alt"></i> 公开</span> ' if @note.publish %>
+     •
         共 <%= @note.word_count %> <%= t("notes.chars") %> • 由 <%= user_name_tag(@note.user) %> <%= sanitize t("notes.created_at", time: timeago(@note.created_at)) %> • <%= @note.hits %> <%= t("common.read_times")%> • <%= @note.changes_count %> <%= t("notes.times_edit") %>
         <% if owner? @note %>
-          <%= link_to "", edit_note_path(@note), class: "icon small_edit", title: t("common.edit") %>
-          <%= link_to "", note_path(@note), class: "icon small_delete",'data-confirm' => t("common.confirm_delete"), method: :delete, title: t("common.confirm_delete") %>
+        <span class="opts pull-right">
+          <%= link_to icon_tag("fa fa-pencil"), edit_note_path(@note),  title: t("common.edit") %>
+          <%= link_to icon_tag("fa fa-trash"), note_path(@note), 'data-confirm' => t("common.confirm_delete"), method: :delete, title: t("common.confirm_delete") %>
+        </span>
         <% end %>
-      </p>
-    </div>
-
-    <div class="body markdown-body"><%= markdown(@note.body) %></div>
   </div>
+
+  <div class="panel-body markdown">
+    <%= markdown(@note.body) %>
+  </div>
+
+  <% if @note.publish %>
+  <div class="panel-footer clearfix">
+  <label><%= t("notes.page_link")%></label>
+  <%= note_url(@note) %>
+  </div>
+  <% end %>
 </div>
 
 

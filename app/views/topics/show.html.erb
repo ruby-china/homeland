@@ -23,20 +23,21 @@
         <%= raw SiteConfig.before_topic_html %>
         <%= sanitize_markdown @topic.body_html %>
 
-        <% if @topic.excellent? %>
-        <div class="label-awesome">
-          <i class="fa fa-diamond awesome"></i> 本帖已被设为精华帖！
-          <% if admin? %>
-          <div class="pull-right">
-            <%= link_to "取消", unsuggest_topic_path(@topic.id), method: "delete" %>
-          </div>
-          <% end %>
-        </div>
-        <% end %>
 
         <%= raw SiteConfig.after_topic_html %>
         <%= social_share_button_tag h("#{@topic.title} via: @#{Setting.twitter_id} ") %>
       </div>
+
+      <% if @topic.excellent? %>
+        <div class="label-awesome">
+          <i class="fa fa-diamond awesome"></i> 本帖已被设为精华帖！
+          <% if admin? %>
+          <div class="pull-right">
+            <%= link_to icon_tag("close"), unsuggest_topic_path(@topic.id), data: { confirm: "确定要取消么？", method: "delete" } %>
+          </div>
+          <% end %>
+        </div>
+      <% end %>
 
       <div class="panel-footer clearfix">
         <%= render "buttons" %>

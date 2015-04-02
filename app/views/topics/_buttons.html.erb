@@ -1,12 +1,12 @@
 <div class="opts">
   <% if admin? %>
     <% if !@topic.suggested_at.blank? %>
-      <%= link_to raw("<i class='icon small_pin'></i> 取消"), unsuggest_cpanel_topic_path(@topic), 'data-confirm' => '确定要取消置顶么?', method: :post %>
+      <%= link_to raw("<i class='fa fa-thumb-tack'></i> 取消"), unsuggest_cpanel_topic_path(@topic), 'data-confirm' => '确定要取消置顶么?', method: :post %>
     <% else %>
-      <%= link_to raw("<i class='icon small_pin'></i> 置顶"), suggest_cpanel_topic_path(@topic), 'data-confirm' => '确定要置顶么?', method: :post %>
+      <%= link_to raw("<i class='fa fa-thumb-tack'></i> 置顶"), suggest_cpanel_topic_path(@topic), 'data-confirm' => '确定要置顶么?', method: :post %>
     <% end %>
     <% if !@topic.excellent? %>
-      <%= link_to raw("<i class='icon small_cert'></i> 加精"), suggest_topic_path(@topic.id), title: "设为精华帖" , method: "patch", data: { confirm: "确定要设置成精华帖么？" } %>
+      <%= link_to raw("<i class='fa fa-diamond'></i> 加精"), suggest_topic_path(@topic.id), title: "设为精华帖" , method: "patch", data: { confirm: "确定要设置成精华帖么？" } %>
     <% end %>
   <% end %>
   <%= topic_follow_tag(@topic) %>

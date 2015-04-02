@@ -158,21 +158,21 @@ a { color: $blue; }
   color:#999;
   border-radius: 0px; border: 0px; border-bottom: 1px solid #D5DCE1;
 }
-.btn.dropdown-toggle {
-  background: #FFF;
-  border-radius: 0px;
-  border: 0px;
-  border-bottom: 1px solid #D5DCE1;
-  padding: 6px 0 7px 0;
-  margin-right: 10px;
-}
-.open {
-  .btn.dropdown-toggle { background: #FFF; padding-bottom: 6px; border-bottom: 2px solid $blueLight; }
-}
-.input-group {
-  .btn.dropdown-toggle { padding-right: 6px; }
-  .form-control { padding-left: 6px; }
-}
+// .btn.dropdown-toggle {
+//   background: #FFF;
+//   border-radius: 0px;
+//   border: 0px;
+//   border-bottom: 1px solid #D5DCE1;
+//   padding: 6px 0 7px 0;
+//   margin-right: 10px;
+// }
+// .open {
+//   .btn.dropdown-toggle { background: #FFF; padding-bottom: 6px; border-bottom: 2px solid $blueLight; }
+// }
+// .input-group {
+//   .btn.dropdown-toggle { padding-right: 6px; }
+//   .form-control { padding-left: 6px; }
+// }
 
 .popover {
   border-radius: 3px; border-color: #eee; box-shadow: 0 1px 1px 0px rgba(0, 0, 0, 0.05);
@@ -197,7 +197,12 @@ a { color: $blue; }
 .alert-info { background: #ADD0FF; color: #4A5E9E; }
 .alert-warning { background: #FFF280; color: #CD8546; }
 .alert-danger { background: #FF6969; color: #8B2523; }
-
+.pagination {
+  margin: 0;
+  li>a { color: $black; }
+  li.active>a,
+  li.active>a:hover { background-color: $blueLight; border-color: $blueLight; color: $blueText; }
+}
 .pager {
   margin: 0px;
   .info {

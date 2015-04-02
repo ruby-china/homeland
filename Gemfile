@@ -35,7 +35,7 @@ gem 'mongoid-rails'
 gem 'mongoid_auto_increment_id', '0.6.4'
 gem 'mongoid_rails_migrations', '1.0.0'
 
-# 用户系统 
+# 用户系统
 gem 'devise', '~> 3.4.0'
 gem 'devise-encryptable', '0.1.2'
 
@@ -43,8 +43,6 @@ gem 'devise-encryptable', '0.1.2'
 gem 'will_paginate', '3.0.7'
 
 # Bootstrap
-gem 'anjlab-bootstrap-rails', '2.0.3.2', require: 'bootstrap-rails'
-gem 'bootstrap-will_paginate', '0.0.3'
 gem 'bootstrap_helper', '4.2.3'
 
 # 三方平台 OAuth 验证登陆

@@ -152,8 +152,10 @@ a { color: $blue; }
   transition:none;
   &:focus { box-shadow: inset 0 0px 0px #fff; padding: 6px 0px 5px 0; border-bottom: 2px solid $blueLight; }
 }
-textarea.form-control { border: 1px solid #D5DCE1;  }
 textarea.form-control,
+#preview.form-control { border: 1px solid #D5DCE1;  }
+textarea.form-control,
+#preview.form-control,
 textarea.form-control:focus { padding: 6px; }
 form {
   .nav-pills { }
@@ -166,6 +168,7 @@ form {
   .nav-pills>li.active>a:link,
   .nav-pills>li.active>a:visited,
   .nav-pills>li.active>a:hover { background-color: $blueLight; border-color: $blueDark; }
+  #preview { min-height: 500px; overflow-y: scroll; }
 }
 
 

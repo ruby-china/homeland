@@ -131,7 +131,7 @@ window.Topics =
   hookPreview: (switcher, textarea) ->
     # put div#preview after textarea
     preview_box = $(document.createElement("div")).attr "id", "preview"
-    preview_box.addClass("markdown-body")
+    preview_box.addClass("markdown form-control")
     $(textarea).after preview_box
     preview_box.hide()
 

@@ -68,19 +68,15 @@
     <div id="reply" class="panel panel-default">
       <div class="panel-body">
       <% if can? :create, Reply %>
-        <%= render "editor_toolbar" %>
+
         <%= form_for(Reply.new, remote: true, url: topic_replies_path(@topic)) do |f| %>
+          <%= render "editor_toolbar" %>
           <div class="form-group">
             <%= f.text_area :body, class: "topic-editor form-control", rows: "4", tabindex: "1" %>
           </div>
           <div class="submit-buttons">
-            <button type="submit" id="btn_reply" class="btn btn-primary" tabindex="2"><%= t("topics.submit_reply")%></button><br />
-            <span class="help-inline" title="或者 Command + Enter">Ctrl+Enter</span>
+            <button type="submit" id="btn_reply" class="btn btn-primary" tabindex="2"><%= t("topics.submit_reply")%></button> <span class="help-inline" title="或者 Command + Enter">Ctrl+Enter</span>
           </div>
-
-          <span class="body helpblock">
-            <%= render "/shared/editor_help_block" %>
-          </span>
         <% end %>
       <% else %>
         <div class="alert alert-info">
@@ -96,7 +92,6 @@
 
 <% if !mobile? %>
   <div class="sidebar col-md-3">
-    <%= render "sidebar_box_node_new_topic" %>
     <%= render "sidebar_box_tips" %>
     <%= render "sidebar_box_node_recent_topics", topic: @topic %>
   </div>

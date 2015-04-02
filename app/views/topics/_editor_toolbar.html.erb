@@ -1,13 +1,13 @@
 <div class="editor-toolbar">
-  <div class="icons pull-right">
+  <div class="opts pull-right">
     <span class="dropdown dropdown-small" id="editor-toolbar-insert-code">
-      <a href="#editor-toolbar-insert-code" data-toggle="dropdown" class="icon small_code" rel="twipsy" title="<%= t("topics.insert_codes") %>" href="#editor-toolbar-insert-code"></a>
+      <a href="#editor-toolbar-insert-code" data-toggle="dropdown" title="<%= t("topics.insert_codes") %>" href="#editor-toolbar-insert-code"><i class="fa fa-code"></i></a>
       <ul class="dropdown-menu" role="menu">
         <%= insert_code_menu_items_tag %>
       </ul>
     </span>
-    <%= link_to("", "#", id: "topic_add_image", rel: "twipsy", title: t("topics.add_image"), class: "icon small_image")%>
-    <input type="file" id="topic-upload-images"/>
+    <%= link_to(icon_tag("fa fa-image"), "#", id: "topic_add_image", rel: "twipsy", title: t("topics.add_image") )%>
+    <input type="file" id="topic-upload-images" style="display:none" />
   </div>
   <ul class="nav nav-pills" style="clear:none;">
     <li class="edit active"><%= link_to(t("common.editor_toolbar_edit"), "#") %></li>

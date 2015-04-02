@@ -14,6 +14,6 @@ module PagesHelper
   end
 
   def render_edit_page_button(page)
-    link_to("", edit_page_path(page), class: "icon small_edit")
+    link_to(icon_tag("pencil"), edit_page_path(page))
   end
 end

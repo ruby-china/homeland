@@ -43,7 +43,7 @@ SimpleForm.setup do |config|
     ## Inputs
     b.use :label_input
     b.use :hint, wrap_with: { tag: :span, class: :hint }
-    b.use :error, wrap_with: { tag: :span, class: :error }
+    b.use :error, wrap_with: { tag: :span, class: "has-warning" }
   end
 
   config.wrappers :bootstrap, tag: 'div', class: 'form-group', error_class: 'error' do |b|

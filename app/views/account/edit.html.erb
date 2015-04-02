@@ -1,111 +1,128 @@
-<div class="content">
-  <div class="box">
-    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, enctype:  "multipart/form-data" }) do |f| %>
-      <%= render "shared/error_messages", target: resource if params[:by].blank? %>
-      <fieldset>
-        <legend><%= t("users.personal_information")%></legend>
+<div class="row">
+  <div class="col-md-9">
+    <div class="panel panel-default">
+      <div class="panel-heading"><%= t("users.personal_information")%></div>
+      <div class="panel-body">
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, enctype:  "multipart/form-data", class: "form-horizontal" }) do |f| %>
+        <%= render "shared/error_messages", target: resource if params[:by].blank? %>
         <%= f.input :name %>
         <%= f.input :avatar %>
         <%= f.input :email, input_html: { class: "span4", disabled: (!resource.email.blank?) } %>
-        <div class="control-group">
-          <div class="controls">
-            <label for="user_email_public" class="checkbox"><%= f.check_box :email_public %> 公开 Email</label>
+        <div class="form-group">
+          <div class="col-sm-10 col-sm-offset-2">
+            <div class="checkbox">
+              <label for="user_email_public" class="checkbox"><%= f.check_box :email_public %> 公开 Email</label>
+            </div>
           </div>
         </div>
-        <%= f.input :location, input_html: { class: "span3" } %>
-        <%= f.input :company, input_html: { class: "span3" } %>
-        <div class="control-group">
+        <%= f.input :location  %>
+        <%= f.input :company %>
+        <div class="form-group">
           <%= f.label :github %>
-          <div class="controls">
-            <div class="input-prepend">
-              <span class="add-on">https://github.com/</span>
-              <%= f.text_field :github, class: "small", placeholder: "yourname" %>
+          <div class="col-sm-10">
+            <div class="input-group">
+              <span class="input-group-addon">https://github.com/</span>
+              <%= f.text_field :github, class: "form-control", placeholder: "yourname" %>
             </div>
           </div>
         </div>
-        <div class="control-group">
+        <div class="form-group">
           <%= f.label :twitter %>
-          <div class="controls">
-            <div class="input-prepend">
-              <span class="add-on">http://twitter.com/</span>
-              <%= f.text_field :twitter, class: "small", placeholder: "yourname" %>
+          <div class="col-sm-10">
+            <div class="input-group">
+              <span class="input-group-addon">http://twitter.com/</span>
+              <%= f.text_field :twitter, class: "form-control", placeholder: "yourname" %>
             </div>
           </div>
         </div>
-        <%= f.input :website, input_html: { class: "xxlarge", placeholder: "http://" } %>
-        <%= f.input :tagline, input_html: { class: "xxlarge" } %>
+        <%= f.input :website, input_html: { placeholder: "http://" } %>
+        <%= f.input :tagline %>
         <%= f.input :bio, as: :text, input_html: { class: "xxlarge", rows: "6" } %>
-        <div class="form-actions">
-            <%= f.submit "更新资料", class: "btn btn-primary", 'data-disable-with' => t("common.saving") %>
+        <div class="form-group">
+          <div class="col-sm-10 col-sm-offset-2">
+            <button type="submit" class="btn btn-primary" data-disable-with="<%= t("common.saving") %>">更新资料</button>
+          </div>
         </div>
-      </fieldset>
-    <% end %>
-  </div>
-  <div class="box">
-    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name, by: :pwd), html: { method: :put }) do |f| %>
-      <%= render "shared/error_messages", target: resource if params[:by] == "pwd" %>
-      <fieldset>
-        <legend><%= t("users.edit_password")%></legend>
+        <% end %>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading"><%= t("users.edit_password")%></div>
+      <div class="panel-body">
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name, by: :pwd), html: { method: :put, class: "form-horizontal" }) do |f| %>
+        <%= render "shared/error_messages", target: resource if params[:by] == "pwd" %>
         <input type="hidden" name="by" value="pwd" />
         <%= f.input :current_password %>
         <%= f.input :password %>
         <%= f.input :password_confirmation %>
-        <div class="form-actions">
-          <%= f.submit "修改密码", class: "btn btn-success", 'data-disable-with' => t("common.saving") %>
+        <div class="form-group">
+          <div class="col-sm-10 col-sm-offset-2">
+            <%= f.submit "修改密码", class: "btn btn-success", 'data-disable-with' => t("common.saving") %>
+          </div>
         </div>
-      </fieldset>
-    <% end %>
-  </div>
-</div>
-
-<div class="sidebar">
-  <div class="box" style="text-align:center;">
-     <%= user_avatar_tag(@user, :big, link: false) %> <br /><%= t("users.edit_on_gravatar") %> <a href="http://www.gravatar.com">gravatar.com</a>
-  </div>
-  <div class="box">
-    <h2><%= t("users.bind_another_account")%></h2>
-    <ul>
-      <% ["github"].each do |provider| %>
-      <li>
-        <% if @user.bind? provider %>
-          <%= link_to(t("omniauth.#{provider}"), "/account/auth/#{provider}/unbind", rel: "twitsy", title: "点击解除绑定", method: 'delete' )%>
-          <span class="label success">已绑定</span>
-        <% else %>
-          <%= link_to(t("omniauth.#{provider}"), "/account/auth/#{provider}", rel: "twitsy", title: "点击绑定" )%>
         <% end %>
-      </li>
-      <% end %>
-    </ul>
-  </div>
-  <div class="box">
-    <h2>密钥</h2>
-    <div class="content">
-      <div><textarea id="private_token" style="width:190px;height:20px;cursor:default;" readonly="readonly"><%= @user.private_token %></textarea></div>
-      <div class="buttons">
-        <a href="#" class="btn" id="update_private_token">更换一个</a> <span class="help-inline">用于三方应用验证</span>
       </div>
     </div>
   </div>
-  <div class="box">
-    <h2>删除账号</h2>
-    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :method => :delete) do |f| %>
-      <%= render "shared/error_messages", :target => resource if params[:by] == "destroy" %>
-      <input type="hidden" name="by" value="destroy" />
-      <%= f.password_field :current_password, placeholder: "要删除账号，请输入你的密码" %>
-      <%= f.submit "确定删除我的账号", :class => "btn btn-danger", 'data-disable-with' => t("common.submitting") %>
-    <% end %>
+  <div class="sidebar col-md-3">
+    <div class="panel panel-default" style="text-align:center;">
+      <div class="panel-body">
+        <%= user_avatar_tag(@user, :big, link: false) %>
+      </div>
+      <div class="panel-footer">
+        <%= t("users.edit_on_gravatar") %> <a href="http://www.gravatar.com">gravatar.com</a>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading"><%= t("users.bind_another_account")%></div>
+      <ul class="list-group">
+        <% ["github"].each do |provider| %>
+        <li class="list-group-item">
+          <% if @user.bind? provider %>
+          <%= link_to(t("omniauth.#{provider}"), "/account/auth/#{provider}/unbind", rel: "twitsy", title: "点击解除绑定", method: 'delete' )%>
+          <span class="label success">已绑定</span>
+          <% else %>
+          <%= link_to(t("omniauth.#{provider}"), "/account/auth/#{provider}", rel: "twitsy", title: "点击绑定" )%>
+          <% end %>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">密钥</div>
+      <div class="panel-body">
+        <div class="form-group">
+          <input id="private_token" class="form-control" value="<%= @user.private_token %>" readonly="readonly">
+        </div>
+        <div class="buttons">
+          <a href="#" class="btn btn-warning" id="update_private_token">更换一个</a> <span class="help-inline">用于三方应用验证</span>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">删除账号</div>
+      <div class="panel-body">
+        <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :method => :delete) do |f| %>
+        <%= render "shared/error_messages", :target => resource if params[:by] == "destroy" %>
+        <input type="hidden" name="by" value="destroy" />
+        <div class="form-group">
+          <%= f.password_field :current_password, class: "form-control", placeholder: "要删除账号，请输入你的密码" %>
+        </div>
+        <%= f.submit "确定删除我的账号", :class => "btn btn-danger", 'data-disable-with' => t("common.submitting") %>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
-
 <% content_for :scripts do %>
-  <script type="text/javascript">
-    $(document).ready(function(){
-      $("#update_private_token").click(function(){
-        $.post("<%= update_private_token_account_path %>",function(re){
-          $("#private_token").val(re);
-        });
-        return false;
-      })
-    });
-  </script>
+<script type="text/javascript">
+$(document).ready(function(){
+$("#update_private_token").click(function(){
+$.post("<%= update_private_token_account_path %>",function(re){
+$("#private_token").val(re);
+});
+return false;
+})
+});
+</script>
 <% end %>

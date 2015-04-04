@@ -17,5 +17,7 @@
     <%= f.text_area :body, class: "topic-editor form-control closewarning", rows: 20 %>
   </div>
 
-  <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving") %>
+  <div class="form-group">
+    <%= f.submit t("common.save"), class: "btn btn-primary col-xs-2", 'data-disable-with' => t("common.saving") %>
+  </div>
 <% end %>

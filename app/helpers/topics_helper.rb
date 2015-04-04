@@ -16,15 +16,17 @@ module TopicsHelper
 
   def topic_favorite_tag(topic)
     return "" if current_user.blank?
-    class_name = "bookmark"
+    class_name = ""
     link_title = "收藏"
     if current_user && current_user.favorite_topic_ids.include?(topic.id)
-      class_name = "bookmarked"
+      class_name = "followed"
       link_title = "取消收藏"
     end
 
-    link_to("", "#", class: "icon small_#{class_name}", title: link_title, rel: "twipsy",
-            onclick: "return Topics.favorite(this);", 'data-id' => topic.id)
+    icon = raw(content_tag("i", "", class: "fa fa-bookmark"))
+
+    link_to(icon, "#", title: link_title,
+            onclick: "return Topics.favorite(this);", class: "bookmark #{class_name}", 'data-id' => topic.id)
   end
 
   def topic_follow_tag(topic)

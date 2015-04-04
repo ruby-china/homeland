@@ -342,6 +342,7 @@ img.emoji { width:20px; height:20px; }
     .count { display: inline; }
   }
 }
+.deleted { text-decoration: line-through; color: $grayDark; }
 
 a.followed {
   .fa {

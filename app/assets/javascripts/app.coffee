@@ -49,7 +49,7 @@ window.App =
   # 警告信息显示, to 显示在那个dom前(可以用 css selector)
   alert : (msg,to) ->
     $(".alert").remove()
-    $(to).before("<div class='alert'><a class='close' href='#' data-dismiss='alert'>X</a>#{msg}</div>")
+    $(to).before("<div class='alert alert-warning'><a class='close' href='#' data-dismiss='alert'>X</a>#{msg}</div>")
 
   # 成功信息显示, to 显示在那个dom前(可以用 css selector)
   notice : (msg,to) ->

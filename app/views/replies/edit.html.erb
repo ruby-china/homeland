@@ -1,29 +1,27 @@
-<div class="sidebar">
-  <div class="box">
-    <%= t("reply.topic_location")%>:<br />
-    <%= topic_title_tag(@reply.topic) %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    修改回帖 <span class="pull-right"><%= topic_title_tag(@topic) %></span>
   </div>
-  <div class="box">
-    <%= render "/shared/editor_help_block" %>
+  <div class="panel-body">
+    <%= simple_form_for([@topic, @reply]) do |f| %>
+    <%= render "shared/error_messages", target: @reply %>
+    <div class="edit-tools">
+      <%= render "/topics/editor_toolbar" %>
+    </div>
+    <div class="form-group">
+      <%= f.text_area :body, class: "topic-editor form-control", rows: 10 %>
+    </div>
+    <div class="control-group">
+      <%= f.submit t("common.save"), class: "btn btn-primary col-xs-2", 'data-disable-with' => t("common.saving") %>
+      <% if can? :destroy, @reply %>
+      <%= link_to "删除",[@topic,@reply], class: "pull-right btn btn-danger", method: :delete, data: { confirm: "确定要删除此回复么？" } %>
+      <% end %>
+    </div>
+    <% end %>
   </div>
 </div>
-<div class="content">
-  <div class="box">
-    <%= simple_form_for([@topic, @reply]) do |f| %>
-      <%= render "shared/error_messages", target: @reply %>
-      <div class="control-group edit-tools">
-        <%= render "/topics/editor_toolbar" %>
-      </div>
-      <div class="control-group">
-        <%= f.text_area :body, class: "topic-editor" %>
-      </div>
-      <div class="control-group">
-        <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving") %>
-
-        <% if can? :destroy, @reply %>
-          <%= link_to "删除",[@topic,@reply], class: "pull-right btn btn-danger", method: :delete, data: { confirm: "确定要删除此回复么？" } %>
-        <% end %>
-      </div>
-    <% end %>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <%= render "/shared/editor_help_block" %>
   </div>
 </div>

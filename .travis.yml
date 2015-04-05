@@ -1,16 +1,10 @@
 language: ruby
-bundler_args: --without development
-
 env:
   - USE_OFFICIAL_GEM_SOURCE=1
 
 services:
   - mongodb
   - redis-server
-
-matrix:
-  allow_failures:
-    - rvm: ruby-head
 
 rvm:
   - 2.2.0

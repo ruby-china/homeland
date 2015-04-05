@@ -30,7 +30,7 @@ gem 'carrierwave-upyun', '0.1.8'
 gem 'mini_magick','3.7.0', require: false
 
 # Mongoid 辅助插件
-gem 'mongoid', '4.0.0'
+gem 'mongoid', '4.0.2'
 gem 'mongoid-rails'
 gem 'mongoid_auto_increment_id', '0.6.4'
 gem 'mongoid_rails_migrations', '1.0.0'

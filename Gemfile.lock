@@ -100,7 +100,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.8.0)
-    connection_pool (2.0.0)
+    connection_pool (2.1.1)
     cookiejar (0.3.2)
     daemons (1.1.9)
     dalli (2.7.1)
@@ -192,7 +192,7 @@ GEM
     jquery-turbolinks (2.1.0)
       railties (>= 3.1.0)
       turbolinks
-    json (1.8.1)
+    json (1.8.2)
     jwt (0.1.13)
       multi_json (>= 1.5)
     launchy (2.4.2)
@@ -210,8 +210,8 @@ GEM
     mini_magick (3.7.0)
       subexec (~> 0.2.1)
     mini_portile (0.6.1)
-    minitest (5.5.0)
-    mongoid (4.0.0)
+    minitest (5.5.1)
+    mongoid (4.0.2)
       activemodel (~> 4.0)
       moped (~> 2.0.0)
       origin (~> 2.1)
@@ -225,7 +225,7 @@ GEM
       bundler (>= 1.0.0)
       rails (>= 3.2.0)
       railties (>= 3.2.0)
-    moped (2.0.0)
+    moped (2.0.4)
       bson (~> 2.2)
       connection_pool (~> 2.0)
       optionable (~> 0.2.0)
@@ -447,7 +447,7 @@ DEPENDENCIES
   letter_opener
   md_emoji (= 1.0.2)
   mini_magick (= 3.7.0)
-  mongoid (= 4.0.0)
+  mongoid (= 4.0.2)
   mongoid-rails
   mongoid_auto_increment_id (= 0.6.4)
   mongoid_rails_migrations (= 1.0.0)

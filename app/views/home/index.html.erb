@@ -4,12 +4,23 @@
   </div>
 </div>
 
-<div class="panel panel-default">
+<div class="home_suggest_topics panel panel-default">
   <div class="panel-heading">社区精华帖</div>
-  <div class="panel-body">
-    <% cache(@excellent_topics) do %>
-      <%= render partial: "topics/topic", collection: @excellent_topics, locals: { suggest: false } %>
-    <% end %>
+  <div class="panel-body topics row">
+    <%
+      odd_topics, even_topics = @excellent_topics.partition.each_with_index { |t, i| i.odd?  }
+    %>
+    <div class="col-md-6">
+      <% cache(@excellent_topics, "odd") do %>
+        <%= render partial: "topics/topic", collection: odd_topics, locals: { suggest: false } %>
+      <% end %>
+    </div>
+
+    <div class="col-md-6">
+      <% cache(@excellent_topics, "even") do %>
+        <%= render partial: "topics/topic", collection: even_topics, locals: { suggest: false } %>
+      <% end %>
+    </div>
   </div>
   <div class="panel-footer">
     <%= link_to "查看更多精华帖...", excellent_topics_path %>

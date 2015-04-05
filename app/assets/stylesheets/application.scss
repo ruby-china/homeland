@@ -50,6 +50,11 @@ body {
     border:0px;
     color: $blueText;
   }
+
+  .navbar-brand {
+    padding: 5px 15px;
+    img { width: 40px; }
+  }
   .navbar-default .navbar-brand,
   .navbar-default .navbar-nav>li>a  { color: $blueText; }
   .navbar-inverse .navbar-nav .open .dropdown-menu .divider { color: $blueText !important; }

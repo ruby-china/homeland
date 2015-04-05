@@ -74,6 +74,7 @@ body {
   .navbar-nav {
     a { }
     li.active a,
+    li.active a:focus,
     li.active a:hover { border-bottom:5px solid $blueDark; color: $blueText; background: transparent; padding-bottom: 10px;}
   }
 

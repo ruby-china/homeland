@@ -1,22 +1,21 @@
 <div class="opts">
-  <% if admin? %>
-    <% if !@topic.suggested_at.blank? %>
-      <%= link_to raw("<i class='fa fa-thumb-tack'></i> 取消"), unsuggest_cpanel_topic_path(@topic), 'data-confirm' => '确定要取消置顶么?', method: :post %>
-    <% else %>
-      <%= link_to raw("<i class='fa fa-thumb-tack'></i> 置顶"), suggest_cpanel_topic_path(@topic), 'data-confirm' => '确定要置顶么?', method: :post %>
-    <% end %>
-    <% if !@topic.excellent? %>
-      <%= link_to raw("<i class='fa fa-diamond'></i> 加精"), suggest_topic_path(@topic.id), title: "设为精华帖" , method: "patch", data: { confirm: "确定要设置成精华帖么？" } %>
-    <% end %>
-  <% end %>
-  <%= topic_follow_tag(@topic) %>
   <%= likeable_tag(@topic) %>
+  <%= topic_follow_tag(@topic) %>
   <%= topic_favorite_tag(@topic) %>
+  <% if admin? %>
+  <% if !@topic.suggested_at.blank? %>
+  <%= link_to raw("<i class='fa fa-thumb-tack'></i> 取消"), unsuggest_cpanel_topic_path(@topic), 'data-confirm' => '确定要取消置顶么?', method: :post %>
+  <% else %>
+  <%= link_to raw("<i class='fa fa-thumb-tack'></i> 置顶"), suggest_cpanel_topic_path(@topic), 'data-confirm' => '确定要置顶么?', method: :post %>
+  <% end %>
+  <% if !@topic.excellent? %>
+  <%= link_to raw("<i class='fa fa-diamond'></i> 加精"), suggest_topic_path(@topic.id), title: "设为精华帖" , method: "patch", data: { confirm: "确定要设置成精华帖么？" } %>
+  <% end %>
+  <% end %>
   <span class="pull-right opts">
-  <% if owner?(@topic) or admin? %>
+    <% if owner?(@topic) or admin? %>
     <%= link_to "", edit_topic_path(@topic), class: "fa fa-pencil", title: "修改本帖" %>
     <%= link_to "", topic_path(@topic.id), method: :delete, 'data-confirm' => t("common.confirm_delete"), class: "fa fa-trash", title: "删除本帖" %>
-  <% end %>
+    <% end %>
   </span>
 </div>
-

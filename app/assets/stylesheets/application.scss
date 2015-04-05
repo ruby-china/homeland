@@ -356,6 +356,7 @@ img.emoji { width:20px; height:20px; }
   }
 }
 .deleted { text-decoration: line-through; color: $grayDark; }
+.no-result { color: #aaa; padding-bottom: 20px; text-align: center;}
 
 a.followed {
   .fa {

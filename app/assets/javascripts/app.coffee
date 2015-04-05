@@ -72,7 +72,7 @@ window.App =
     likeable_type = $el.data("type")
     likeable_id = $el.data("id")
     likes_count = parseInt($el.data("count"))
-    if $el.data("state") != "liked"
+    if $el.data("state") != "followed"
       $.ajax
         url : "/likes"
         type : "POST"
@@ -96,14 +96,14 @@ window.App =
         $('span',el).text("喜欢")
       else
         $('span',el).text("#{likes_count} 人喜欢")
-      $("i.fa",el).attr("class","fa fa-star-o")
+      $("i.fa",el).attr("class","fa fa-heart-o")
     false
 
   likeableAsLiked : (el) ->
     likes_count = $(el).data("count")
-    $(el).data("state","liked").attr("title", "取消喜欢").addClass("followed")
+    $(el).data("state","followed").attr("title", "取消喜欢").addClass("followed")
     $('span',el).text("#{likes_count} 人喜欢")
-    $("i.fa",el).attr("class","fa fa-star")
+    $("i.fa",el).attr("class","fa fa-heart")
 
   atReplyable : (el, logins) ->
     return if logins.length == 0

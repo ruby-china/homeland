@@ -1,12 +1,16 @@
 <div id="users">
-  <div id="hot_users" class="user-list box clearfix">
-    <h2 class="title"><%= t("users.hot_users") %></h2>
-     <div class="info"><%= t("users.current_have") %> <%= @total_user_count %> <%= t("users.users_joined") %> <%= Setting.app_name %>。</div>
-    <% @active_users.each do |item| %>
-      <div class="item span1">
+  <div id="hot_users" class="user-list panel panel-default">
+    <div class="panel-heading">
+      <strong><%= t("users.hot_users") %></strong>
+      <div class="pull-right"><%= t("users.current_have") %> <%= @total_user_count %> <%= t("users.users_joined") %> <%= Setting.app_name %></div>
+    </div>
+    <div class="panel-body row">
+      <% @active_users.each do |item| %>
+      <div class="user col-sm-1">
         <div class="avatar"><%= user_avatar_tag(item) %></div>
         <div class="name"><%= user_name_tag(item) %></div>
       </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
 </div>

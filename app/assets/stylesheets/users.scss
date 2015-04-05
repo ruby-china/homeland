@@ -107,17 +107,17 @@ table.node-topics {
   td.replied-at { width:80px; }
 }
 
-#users {
-  .info { margin-bottom:10px; text-align:right;}
-}
 .user-list {
-  padding-bottom:20px; margin-left:0;
   h2 { font-size:14px; margin:0; }
-  .span1 {
-    width:70px; text-align:center; margin-top:20px; margin-left:20px;
+  .user {
+    text-align:center; margin-bottom:20px;
+    overflow: hidden;;
     .avatar {
-      img { width:48px; height:48px; }
+      img { width:48px; height:48px; margin: 0 auto;}
       margin-bottom: 5px;
+    }
+    .name {
+      a { color: #333; }
     }
   }
 }

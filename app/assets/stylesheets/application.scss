@@ -430,7 +430,16 @@ a.followed {
       i.fa { color: #999; margin-left: 3px; }
       i.fa-diamond { color: $red; }
     }
-    .info { color: #aaa; font-size: 12px; margin-top: 10px; }
+    .info {
+      color: #aaa; font-size: 12px; margin-top: 10px;
+      .node {
+        padding: 1px 5px;
+        color: #778087;
+        text-decoration: none;
+        background-color: #f5f5f5;
+      }
+      a { color: #666; }
+    }
     .count {
       width: 100px; text-align: right; padding-top: 15px;
       a:link,
@@ -481,8 +490,9 @@ a.followed {
   .info {
       color:#c0c0c0;
       font-size:12px;
+      a { color: #444; }
       .node {
-        padding: 1px 5px;
+        padding: 1px 0px;
         color: #778087;
         text-decoration: none;
         background-color: #f5f5f5;

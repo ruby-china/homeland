@@ -12,7 +12,7 @@ describe "sign up and login", :type => :feature do
     fill_in '确认密码', :with => 'coolguy'
     click_button '提交注册信息'
     expect(page).to have_content('社区精华帖')
-    within("#userbar") do
+    within(".dropdown") do
       click_on 'rubyist'
     end
 

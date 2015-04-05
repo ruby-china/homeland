@@ -78,13 +78,13 @@
   </div>
 
   <% if not mobile? %>
-  <a class="go-top" href="#"><i class="icon icons-go-top"></i></a>
   <footer class="footer">
     <div class="container">
       <%= raw SiteConfig.footer_html %>
     </div>
   </footer>
   <% end %>
+
   <% if mobile? %>
     <script type="text/javascript">
     app_mobile = true;

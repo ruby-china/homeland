@@ -260,6 +260,7 @@ form {
     &:hover { color: #ddd; background: transparent; }
   }
 }
+abbr[title] { border-bottom: 0px; cursor: text; }
 
 .chosen-container {
   .chosen-single {

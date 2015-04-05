@@ -427,6 +427,8 @@ a.followed {
     .avatar { text-align:center; }
     .title {
       font-size: 15px;
+      i.fa { color: #999; margin-left: 3px; }
+      i.fa-diamond { color: $red; }
     }
     .info { color: #aaa; font-size: 12px; margin-top: 10px; }
     .count {

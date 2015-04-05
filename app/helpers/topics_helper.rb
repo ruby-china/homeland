@@ -48,7 +48,7 @@ module TopicsHelper
 
   def topic_excellent_tag(topic)
     return "" if !topic.excellent?
-    content_tag(:i,"", title: "精华帖", class: "icon small_cert_on")
+    content_tag(:i,"", title: "精华帖", class: "fa fa-diamond")
   end
 
   def render_topic_last_reply_time(topic)

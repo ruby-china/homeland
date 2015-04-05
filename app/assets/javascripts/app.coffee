@@ -30,6 +30,8 @@ AppView = Backbone.View.extend
 
   events:
     "click a.likeable": "likeable"
+    "click .header .form-search .btn-search": "openHeaderSearchBox"
+    "click .header .form-search .btn-close": "closeHeaderSearchBox"
 
   initialize: ->
     FormStorage.restore()
@@ -130,6 +132,15 @@ AppView = Backbone.View.extend
       document.title = new_title
     true
 
+  openHeaderSearchBox: (e) ->
+    $(".header .form-search").addClass("active")
+    $(".header .form-search input").focus()
+    return false
+
+  closeHeaderSearchBox: (e) ->
+    $(".header .form-search input").val("")
+    $(".header .form-search").removeClass("active")
+    return false
 
 
 window.App =

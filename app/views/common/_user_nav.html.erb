@@ -1,28 +1,30 @@
 <% if current_user %>
-  <%
-    badge_class = ""
-    badge_class = "new" if unread_notify_count > 0
-  %>
-  <li class="notification-count">
-    <a href="<%= notifications_path %>" class="<%= badge_class %>" title="通知"><i class="fa fa-bell"></i><span class="count"><%= unread_notify_count %></span></a>
-  </li>
-
-  <li class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%= current_user.login %> <span class="caret"></span></a>
-    <%= render_list class: "dropdown-menu", role: "menu" do |li|
-      li << link_to(t("menu.my_home_page"), user_path(current_user.login) )
-      li << "<div class='divider'></div>"
-      unless params[:controller].match(/cpanel/)
-        li << link_to(t("menu.edit_account_path"), edit_user_registration_path)
-        li << link_to(t("menu.notes"), notes_path )
-        li << link_to(t("menu.likes"), favorites_user_path(current_user.login))
-        if admin?
-          li << "<div class='divider'></div>"
-          li << link_to(t("menu.cpanel"), "/cpanel")
-        end
-      end
-      li << "<div class='divider'></div>"
-      li << link_to(t("common.logout"), destroy_user_session_path, method: "delete" )
-    end %>
-  </li>
+<%
+badge_class = ""
+badge_class = "new" if unread_notify_count > 0
+%>
+<li class="notification-count">
+  <a href="<%= notifications_path %>" class="<%= badge_class %>" title="通知"><i class="fa fa-bell"></i><span class="count"><%= unread_notify_count %></span></a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%= current_user.login %> <span class="caret"></span></a>
+  <%= render_list class: "dropdown-menu", role: "menu" do |li|
+  li << link_to(t("menu.my_home_page"), user_path(current_user.login) )
+  li << "<div class='divider'></div>"
+  unless params[:controller].match(/cpanel/)
+  li << link_to(t("menu.edit_account_path"), edit_user_registration_path)
+  li << link_to(t("menu.notes"), notes_path )
+  li << link_to(t("menu.likes"), favorites_user_path(current_user.login))
+  if admin?
+  li << "<div class='divider'></div>"
+  li << link_to(t("menu.cpanel"), "/cpanel")
+  end
+  end
+  li << "<div class='divider'></div>"
+  li << link_to(t("common.logout"), destroy_user_session_path, method: "delete" )
+  end %>
+</li>
+<% else %>
+<li><%= link_to( t("common.register"), new_user_registration_path) %></li>
+<li><%= link_to( t("common.login"), new_user_session_path ) %></li>
 <% end %>

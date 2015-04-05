@@ -14,13 +14,13 @@ describe ApplicationHelper, :type => :helper do
     controller.flash[:warning] = nil
 
     controller.flash[:alert] = 'hello'
-    expect(helper.notice_message).to eq('<div class="alert alert-alert"><a class="close" data-dismiss="alert" href="#">x</a>hello</div>')
+    expect(helper.notice_message).to eq('<div class="alert alert-danger"><a class="close" data-dismiss="alert" href="#">x</a>hello</div>')
     controller.flash[:alert] = nil
 
     controller.flash[:error] = 'hello'
     expect(helper.notice_message).to eq('<div class="alert alert-error"><a class="close" data-dismiss="alert" href="#">x</a>hello</div>')
     controller.flash[:error] = nil
-    
+
     expect(helper.insert_code_menu_items_tag).to include('class="insert_code"')
   end
 
@@ -94,7 +94,7 @@ describe ApplicationHelper, :type => :helper do
       expect(helper.owner?(item)).to be_falsey
     end
   end
-  
+
   describe 'timeago' do
     it 'should work' do
       t = Time.now

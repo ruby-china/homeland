@@ -1,33 +1,36 @@
-<% content_for :sitemap do %><span class="current">加入社区</span><% end %>
-<div class="content">
-    <div class="box">
-    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      <%= render "shared/error_messages", target: resource %>
-      <fieldset>
-        <legend><%= t("users.register_user")%></legend>
-        <%= f.input :login, hint: t("users.suggest_using_twitter_id") %>
-        <%= f.input :name %>
-        <%= f.input :email, input_html: { class: "span5", placeholder: "foo@bar.com" } %>
-        <div class="control-group">
-          <div class="controls">
+<div class="row">
+  <div class="col-md-6 col-sm-offset-3">
+    <div class="panel panel-default">
+      <div class="panel-heading"><%= t("users.register_user")%></div>
+      <div class="panel-body">
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: ""}) do |f| %>
+        <%= render "shared/error_messages", target: resource %>
+        <div class="form-group">
+          <%= f.text_field :login, class: "form-control", placeholder: "用户名", hint: t("users.suggest_using_twitter_id") %>
+        </div>
+        <div class="form-group">
+          <%= f.text_field :name, class: "form-control", placeholder: "名字" %>
+        </div>
+        <div class="form-group">
+          <%= f.text_field :email, class: "form-control", placeholder: "Email" %>
+        </div>
+        <div class="form-group">
+          <div class="checkbox">
             <label for="user_email_public" class="checkbox"><%= f.check_box :email_public, checked: true %> 公开 Email</label>
           </div>
         </div>
-        <%= f.input :password %>
-        <%= f.input :password_confirmation %>
-        <div class="form-actions">
-          <%= f.submit "提交注册信息", class: "btn btn-primary", 'data-disable-with' => t("common.submitting") %>
+        <div class="form-group">
+        <%= f.password_field :password, class: "form-control", placeholder: "密码" %>
         </div>
-      </fieldset>
-    <% end %>
-  </div>
-</div>
-
-<div class="sidebar">
-  <div class="box">
-    <h2><%= t("users.already_have_account") %></h2>
-    <p style="line-height:20px;">
-      <%= render partial: "devise/shared/links" %>
-    </p>
+        <div class="form-group">
+        <%= f.password_field :password_confirmation, class: "form-control", placeholder: "确认密码" %>
+        </div>
+        <div class="form-group">
+          <%= f.submit "提交注册信息", class: "btn btn-primary", 'data-disable-with' => t("common.submitting") %>
+          或 <%= link_to t("common.login"), new_session_path(resource_name), class: "btn btn-default" %>
+        </div>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>

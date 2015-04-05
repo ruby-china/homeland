@@ -1,35 +1,40 @@
 <% content_for :sitemap do %><span class="current">加入社区</span><% end %>
-<div class="content">
-    <div class="box">
-    <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <fieldset>
-        <legend><%= t("common.login") %></legend>
-        <%= f.input :login, input_html: { style: "width:180px;" } %>
-        <%= f.input :password, input_html: { style: "width:180px;" } %>
+<div class="row">
+  <div class="col-md-4 col-sm-offset-3">
+    <div class="panel panel-default">
+      <div class="panel-heading"><%= t("common.login") %></div>
+      <div class="panel-body">
+        <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "" }) do |f| %>
+        <div class="form-group">
+          <%= f.text_field :login, class: "form-control", placeholder: "用户名" %>
+        </div>
+        <div class="form-group">
+          <%= f.text_field :password, type: :password, class: "form-control", placeholder: "密码" %>
+        </div>
         <% if devise_mapping.rememberable? -%>
-        <div class="control-group checkbox optional">
-          <label class="checkbox optional control-label"></label>
-          <div class="controls">
-            <div class="inputs-list"><label for="user_remember_me"><%= f.check_box :remember_me, style: "width:auto;" %> <%= t("common.remember_me") %></label></div>
-          </div>
+        <div class="from-group checkbox">
+            <label for="user_remember_me">
+              <%= f.check_box :remember_me %> <%= t("common.remember_me") %>
+            </label>
         </div>
         <% end -%>
-        <div class="form-actions">
-          <%= f.submit t("common.login"), class: "btn btn-primary", 'data-disable-with' => t("common.logining") %>
+        <div class="form-group">
+            <%= f.submit t("common.login"), class: "btn btn-primary btn-block", 'data-disable-with' => t("common.logining") %>
         </div>
-      </fieldset>
-    <% end %>
-  </div>
-</div>
-<div class="sidebar">
-  <div class="box">
-    <h2>还没有帐号？</h2>
-    <%= render partial: "devise/shared/links" %>
-  </div>
-  <div class="box">
-        <h2>用其他平台的帐号登录</h2>
-        <ul>
-          <li><%= link_to "GitHub", user_omniauth_authorize_path(:github) %> </li>
-        </ul>
+        <% end %>
+      </div>
+      <div class="panel-footer">
+        <%= render partial: "devise/shared/links" %>
+      </div>
     </div>
+
+  </div>
+  <div class="col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">用其他平台的帐号登录</div>
+      <ul class="list-group">
+        <li class="list-group-item"><%= link_to "GitHub", user_omniauth_authorize_path(:github) %> </li>
+      </ul>
+    </div>
+  </div>
 </div>

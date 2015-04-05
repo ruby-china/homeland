@@ -512,6 +512,7 @@ a.followed {
         margin-left: 5px; color: #999;
         &:hover { color: #333; }
       }
+      a.edit { display: none; }
     }
   }
   .reply {

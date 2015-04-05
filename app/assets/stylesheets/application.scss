@@ -319,6 +319,10 @@ html.turbolinks-progress-bar::before {
 .pull-right.opts {
   a { margin-left: 5px; margin-right: 0px; }
 }
+.avatar {
+  .uface,
+  .media-object { border-radius: 3px; }
+}
 .avatar-96x96 { width: 48px; height: 48px; border-radius: 2px; }
 .avatar-256x256 { width: 128px; height: 128px; border-radius: 2px; }
 @media (max-width: 480px) {
@@ -544,7 +548,7 @@ a.followed {
 
 /* Social Share Button */
 .social-share-button {
-  display: none;
+  height: 16px;
   a {
     i.fa { font-size: 24px; margin: 0 4px; }
     &:link, &:visited { color: #777; }
@@ -556,7 +560,6 @@ a.followed {
 .popover-content {
   .social-share-button { display: block; }
 }
-
 
 /* Markdown Styles */
 .markdown {
@@ -570,7 +573,7 @@ a.followed {
   blockquote { margin-bottom: 16px; }
 
   p { font-size: 14px; line-height: 1.5em; }
-  hr { border:3px solid #e0e0e0; border-bottom:0px; margin: 18px auto; width:50%; }
+  hr { border:2px dashed $gray; border-bottom:0px; margin: 18px auto; width:50%; }
   blockquote {
     margin-left:20px;
     p { font-size:12px; color:#777; font-weight:normal; line-height:160%; }

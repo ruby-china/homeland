@@ -118,16 +118,16 @@ AppView = Backbone.View.extend
     return if not App.access_token?
     faye = new Faye.Client(App.faye_client_url)
     faye.subscribe "/notifications_count/#{App.access_token}", (json) ->
-      span = $("#user_notifications_count span")
+      span = $(".notification-count span")
       new_title = document.title.replace(/^\(\d+\) /,'')
       if json.count > 0
-        span.addClass("badge-error")
+        span.show()
         new_title = "(#{json.count}) #{new_title}"
         url = App.fixUrlDash("#{App.root_url}#{json.content_path}")
         console.log url
         $.notifier.notify("",json.title,json.content,url)
       else
-        span.removeClass("badge-error")
+        span.hide()
       span.text(json.count)
       document.title = new_title
     true

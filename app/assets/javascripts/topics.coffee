@@ -12,6 +12,8 @@ window.TopicView = Backbone.View.extend
     "click #topic_add_image": "browseUpload"
     "click a.insert_code": "appendCodesFromHint"
     "click a.at_floor": "clickAtFloor"
+    "click .topic-detail a.follow": "follow"
+    "click .topic-detail a.bookmark": "bookmark"
 
   initialize: (opts) ->
     @parentView = opts.parentView
@@ -191,33 +193,33 @@ window.TopicView = Backbone.View.extend
       else
         $(window).unbind("beforeunload")
 
-  favorite : (el) ->
-    topic_id = $(el).data("id")
-    if $(el).hasClass("followed")
+  bookmark : (e) ->
+    link = $(e.currentTarget)
+    topic_id = link.data("id")
+    if link.hasClass("followed")
       $.ajax
         url : "/topics/#{topic_id}/unfavorite"
         type : "DELETE"
-      $(el).attr("title","收藏")
-      $(el).removeClass("followed")
+      link.attr("title","收藏").removeClass("followed")
     else
       $.post "/topics/#{topic_id}/favorite"
-      $(el).attr("title","取消收藏")
-      $(el).addClass("followed")
+      link.attr("title","取消收藏").addClass("followed")
     false
 
-  follow : (el) ->
-    topic_id = $(el).data("id")
-    followed = $(el).data("followed")
+  follow : (e) ->
+    link = $(e.currentTarget)
+    topic_id = link.data("id")
+    followed = link.data("followed")
     if followed
       $.ajax
         url : "/topics/#{topic_id}/unfollow"
         type : "DELETE"
-      $(el).data("followed", false).removeClass("followed")
+      link.data("followed", false).removeClass("followed")
     else
       $.ajax
         url : "/topics/#{topic_id}/follow"
         type : "POST"
-      $(el).data("followed", true).addClass("followed")
+      link.data("followed", true).addClass("followed")
     false
 
   submitTextArea : (e) ->

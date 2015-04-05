@@ -52,7 +52,7 @@ describe TopicsHelper, :type => :helper do
         '<p>this is a link: <a href="http://ruby-china.org" rel="nofollow" target="_blank">http://ruby-china.org</a> test</p>'
       )
     end
-    
+
     it "should auto link" do
       expect(helper.format_topic_body("http://ruby-china.org/~users")).to  eq(
         '<p><a href="http://ruby-china.org/~users" rel="nofollow" target="_blank">http://ruby-china.org/~users</a></p>'
@@ -168,13 +168,13 @@ describe TopicsHelper, :type => :helper do
       allow(user).to receive(:favorite_topic_ids).and_return([])
       allow(helper).to receive(:current_user).and_return(user)
       res = helper.topic_favorite_tag(topic)
-      expect(res).to eq(%(<a class="icon small_bookmark" title="收藏" rel="twipsy" onclick="return Topics.favorite(this);" data-id="#{topic.id}" href="#"></a>))
+      expect(res).to eq("<a title=\"收藏\" class=\"bookmark \" data-id=\"1\" href=\"#\"><i class=\"fa fa-bookmark\"></i></a>")
     end
 
     it "should result when logined user favorited topic" do
       allow(user).to receive(:favorite_topic_ids).and_return([topic.id])
       allow(helper).to receive(:current_user).and_return(user)
-      expect(helper.topic_favorite_tag(topic)).to eq(%(<a class="icon small_bookmarked" title="取消收藏" rel="twipsy" onclick="return Topics.favorite(this);" data-id="#{topic.id}" href="#"></a>))
+      expect(helper.topic_favorite_tag(topic)).to eq("<a title=\"取消收藏\" class=\"bookmark followed\" data-id=\"1\" href=\"#\"><i class=\"fa fa-bookmark\"></i></a>")
     end
 
     it "should result blank when unlogin user" do

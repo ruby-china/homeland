@@ -25,22 +25,20 @@ module TopicsHelper
 
     icon = raw(content_tag("i", "", class: "fa fa-bookmark"))
 
-    link_to(icon, "#", title: link_title,
-            onclick: "return Topics.favorite(this);", class: "bookmark #{class_name}", 'data-id' => topic.id)
+    link_to(icon, "#", title: link_title, class: "bookmark #{class_name}", 'data-id' => topic.id)
   end
 
   def topic_follow_tag(topic)
     return "" if current_user.blank?
     return "" if topic.blank?
     return "" if owner?(topic)
-    class_name = "watch"
+    class_name = "follow"
     if topic.follower_ids.include?(current_user.id)
-      class_name = "watch followed"
+      class_name = "follow followed"
     end
     icon = content_tag("i", "", class: "fa fa-eye")
     followed = class_name == "followed"
-    link_to(raw("#{icon} 关注"), "#", onclick: "return Topics.follow(this);", rel: "twipsy",
-            'data-id' => topic.id, 'data-followed' => followed, class: class_name)
+    link_to(raw("#{icon} 关注"), "#", 'data-id' => topic.id, 'data-followed' => followed, class: class_name)
   end
 
   def topic_title_tag(topic)

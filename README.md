@@ -7,12 +7,11 @@ Status](https://secure.travis-ci.org/ruby-china/ruby-china.png?branch=master&.pn
 
 ## Requirements
 
-* Ruby 2.1.3 +
+* Ruby 2.2.0 +
 * Memcached 1.4 +
 * Redis 2.2 +
 * MongoDb 2.4.4 +
 * ImageMagick 6.5+
-* libpng
 
 ## Install
 
@@ -60,13 +59,14 @@ RAILS_ENV=test bundle exec rake spec:javascript
 ## Thanks
 
 * [Twitter Bootstrap](https://twitter.github.com/bootstrap)
-* [GentleFace Icons](http://www.gentleface.com/free_icon_set.html)
+* [Font Awesome](http://fortawesome.github.io/Font-Awesome/icons/)
 
 Forked from [Homeland Project](https://github.com/huacnlee/homeland)
+Theme from [Mediom](https://github.com/huacnlee/mediom)
 
 ## License
 
-Copyright (c) 2011-2014 Ruby China
+Copyright (c) 2011-2015 Ruby China
 
 Released under the MIT license:
 

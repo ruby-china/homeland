@@ -99,9 +99,6 @@
       App.current_user_id = <%= current_user.id %>;
       App.access_token = "<%= current_user.temp_access_token %>";
     <% end %>
-    if (App.faye_client_url) {
-      App.initNotificationSubscribe();
-    }
   </script>
   <%= yield :scripts %>
   <script>

@@ -2,32 +2,30 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 #
-window.Pages =
-# 往话题编辑器里面插入代码模版
-  test : () ->
-    alert('test')
+PageView = Backbone.View.extend
+  el: "body"
+  events:
+    "click .editor-toolbar .edit a": "toggleEditView"
+    "click .editor-toolbar .preview a": "togglePreviewView"
 
-  init : () ->
+  initialize: (opts) ->
+    @parentView = opts.parentView
     $("<div id='preview' class='markdown form-control'></div>").insertAfter( $('#page_body') )
 
-    $('.edit a').click ->
-      $(this).parent().addClass('active')
-      $('.preview a').parent().removeClass('active')
-      $('#preview').hide()
-      $('#page_body').show()
-      false
+  toggleEditView: (e) ->
+    $(e.target).parent().addClass('active')
+    $('.preview a').parent().removeClass('active')
+    $('#preview').hide()
+    $('#page_body').show()
+    false
 
-    $('.preview a').click ->
-      $(this).parent().addClass('active')
-      $('.edit a').parent().removeClass('active')
-      $('#preview').html('Loading...')
-      $('#page_body').hide()
-      $('#preview').show()
-      $.post '/wiki/preview', {body: $('#page_body').val()}, (data)->
-        $('#preview').html(data)
-        false
+  togglePreviewView: (e) ->
+    $(e.target).parent().addClass('active')
+    $('.edit a').parent().removeClass('active')
+    $('#preview').html('Loading...')
+    $('#page_body').hide()
+    $('#preview').show()
+    $.post '/wiki/preview', {body: $('#page_body').val()}, (data)->
+      $('#preview').html(data)
       false
-
-$(document).ready ->
-  if $('body').data('controller-name') in ['pages']
-    Pages.init()
+    false

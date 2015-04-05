@@ -1,14 +1,14 @@
 <% content_for :scripts do %>
   <script type="text/javascript">
     Topics.replies_per_page = <%= @per_page %>;
+    <% if current_user && !@user_liked_reply_ids.blank? %>
+    Topics.user_liked_reply_ids = [<%= @user_liked_reply_ids.join(",") %>];
+    <% end %>
     $(document).ready(function(){
       <% if admin? %>
         $("#replies .reply a.edit").css('display','inline-block');
       <% elsif current_user %>
         $("#replies .reply a.edit[data-uid='<%= current_user.id %>']").css('display','inline-block');
-      <% end %>
-      <% if current_user && !@user_liked_reply_ids.blank? %>
-        Topics.checkRepliesLikeStatus([<%= @user_liked_reply_ids.join(",") %>]);
       <% end %>
     })
   </script>

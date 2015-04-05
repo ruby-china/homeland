@@ -10,8 +10,8 @@
     $("#replies .items .reply:last .reply-floor").text(current_floor + " 楼");
     $("#replies").data("last-floor", current_floor);
     $("#replies .reply a.edit:last").css("display","inline-block");
-    Topics.replyCallback(1,'<%= j(@msg) %>');
+    _topicView.replyCallback(1,'<%= j(@msg) %>');
   }
 <% else %>
-  Topics.replyCallback(0,'<%= j(@msg) %>');
+  _topicView.replyCallback(0,'<%= j(@msg) %>');
 <% end %>

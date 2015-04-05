@@ -1,6 +1,7 @@
 // Keyboard shortcuts for browsing pages of lists
 (function($) {
-    $(document).keydown(handleKey);
+    $(document).off("keydown.will_paginate");
+    $(document).on("keydown.will_paginate", handleKey);
     function handleKey(e) {
         var left_arrow = 37;
         var right_arrow = 39;

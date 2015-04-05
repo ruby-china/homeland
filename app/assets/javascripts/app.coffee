@@ -1,13 +1,9 @@
 #= require jquery
 #= require jquery_ujs
 #= require jquery.turbolinks
-#= require bootstrap-transition
-#= require bootstrap-alert
-#= require bootstrap-modal
-#= require bootstrap-dropdown
-#= require bootstrap-tab
-#= require bootstrap-tooltip
-#= require bootstrap-button
+#= require bootstrap.min
+#= require underscore
+#= require backbone
 #= require will_paginate
 #= require jquery.timeago
 #= require jquery.timeago.settings
@@ -18,7 +14,6 @@
 #= require jquery.fluidbox.min
 #= require social-share-button
 #= require jquery.atwho
-#= require nprogress
 #= require emoji_list
 #= require faye
 #= require notifier
@@ -28,6 +23,114 @@
 #= require pages
 #= require notes
 #= require_self
+
+AppView = Backbone.View.extend
+  el: "body"
+  repliesPerPage: 50
+
+  events:
+    "click a.likeable": "likeable"
+
+  initialize: ->
+    FormStorage.restore()
+    @initForDesktopView()
+    @initComponents()
+    @initNotificationSubscribe()
+
+    if $('body').data('controller-name') in ['topics', 'replies']
+      window._topicView = new TopicView({parentView: @})
+
+    if $('body').data('controller-name') in ['pages']
+      window._pageView = new PageView({parentView: @})
+
+    if $('body').data('controller-name') in ['notes']
+      window._noteView = new NoteView({parentView: @})
+
+  initComponents: () ->
+    $("abbr.timeago").timeago()
+    $(".alert").alert()
+    $('.dropdown-toggle').dropdown()
+    $("select").chosen()
+
+    # 绑定评论框 Ctrl+Enter 提交事件
+    $(".cell_comments_new textarea").unbind "keydown"
+    $(".cell_comments_new textarea").bind "keydown","ctrl+return",(el) ->
+      if $(el.target).val().trim().length > 0
+        $(el.target).parent().parent().submit()
+      return false
+
+  initForDesktopView : () ->
+    return if typeof(app_mobile) != "undefined"
+    $("a[rel=twipsy]").tooltip()
+
+    # CommentAble @ 回复功能
+    commenters = App.scanLogins($(".cell_comments .comment .info .name a"))
+    commenters = ({login: k, name: v, search: "#{k} #{v}"} for k, v of commenters)
+    App.atReplyable(".cell_comments_new textarea", commenters)
+
+  likeable : (e) ->
+    if !App.isLogined()
+      location.href = "/account/sign_in"
+      return false
+
+    $el = $(e.currentTarget)
+    likeable_type = $el.data("type")
+    likeable_id = $el.data("id")
+    likes_count = parseInt($el.data("count"))
+    if $el.data("state") != "followed"
+      $.ajax
+        url : "/likes"
+        type : "POST"
+        data :
+          type : likeable_type
+          id : likeable_id
+
+      likes_count += 1
+      $el.data('count', likes_count)
+      @likeableAsLiked($el)
+    else
+      $.ajax
+        url : "/likes/#{likeable_id}"
+        type : "DELETE"
+        data :
+          type : likeable_type
+      if likes_count > 0
+        likes_count -= 1
+      $el.data("state","").data('count', likes_count).attr("title", "喜欢").removeClass("followed")
+      if likes_count == 0
+        $('span',$el).text("喜欢")
+      else
+        $('span',$el).text("#{likes_count} 人喜欢")
+      $("i.fa",$el).attr("class","fa fa-heart-o")
+    false
+
+  likeableAsLiked : (el) ->
+    likes_count = el.data("count")
+    el.data("state","followed").attr("title", "取消喜欢").addClass("followed")
+    $('span',el).text("#{likes_count} 人喜欢")
+    $("i.fa",el).attr("class","fa fa-heart")
+
+
+  initNotificationSubscribe : () ->
+    return if not App.faye_client_url
+    return if not App.access_token?
+    faye = new Faye.Client(App.faye_client_url)
+    faye.subscribe "/notifications_count/#{App.access_token}", (json) ->
+      span = $("#user_notifications_count span")
+      new_title = document.title.replace(/^\(\d+\) /,'')
+      if json.count > 0
+        span.addClass("badge-error")
+        new_title = "(#{json.count}) #{new_title}"
+        url = App.fixUrlDash("#{App.root_url}#{json.content_path}")
+        console.log url
+        $.notifier.notify("",json.title,json.content,url)
+      else
+        span.removeClass("badge-error")
+      span.text(json.count)
+      document.title = new_title
+    true
+
+
 
 window.App =
   notifier : null
@@ -63,47 +166,14 @@ window.App =
   gotoUrl: (url) ->
     Turbolinks.visit(url)
 
-  likeable : (el) ->
-    if !App.isLogined()
-      location.href = "/account/sign_in"
-      return false
-
-    $el = $(el)
-    likeable_type = $el.data("type")
-    likeable_id = $el.data("id")
-    likes_count = parseInt($el.data("count"))
-    if $el.data("state") != "followed"
-      $.ajax
-        url : "/likes"
-        type : "POST"
-        data :
-          type : likeable_type
-          id : likeable_id
-
-      likes_count += 1
-      $el.data('count', likes_count)
-      App.likeableAsLiked(el)
-    else
-      $.ajax
-        url : "/likes/#{likeable_id}"
-        type : "DELETE"
-        data :
-          type : likeable_type
-      if likes_count > 0
-        likes_count -= 1
-      $el.data("state","").data('count', likes_count).attr("title", "喜欢").removeClass("followed")
-      if likes_count == 0
-        $('span',el).text("喜欢")
-      else
-        $('span',el).text("#{likes_count} 人喜欢")
-      $("i.fa",el).attr("class","fa fa-heart-o")
-    false
-
-  likeableAsLiked : (el) ->
-    likes_count = $(el).data("count")
-    $(el).data("state","followed").attr("title", "取消喜欢").addClass("followed")
-    $('span',el).text("#{likes_count} 人喜欢")
-    $("i.fa",el).attr("class","fa fa-heart")
+  # scan logins in jQuery collection and returns as a object,
+  # which key is login, and value is the name.
+  scanLogins: (query) ->
+    result = {}
+    for e in query
+      $e = $(e)
+      result[$e.text()] = $e.attr('data-name')
+    result
 
   atReplyable : (el, logins) ->
     return if logins.length == 0
@@ -118,86 +188,7 @@ window.App =
       tpl : "<li data-value='${name}:'><img src='#{App.asset_url}/assets/emojis/${name}.png' height='20' width='20'/> ${name} </li>"
     true
 
-  initForDesktopView : () ->
-    return if typeof(app_mobile) != "undefined"
-    $("a[rel=twipsy]").tooltip()
-
-    # CommentAble @ 回复功能
-    commenters = App.scanLogins($(".cell_comments .comment .info .name a"))
-    commenters = ({login: k, name: v, search: "#{k} #{v}"} for k, v of commenters)
-    App.atReplyable(".cell_comments_new textarea", commenters)
-
-  # scan logins in jQuery collection and returns as a object,
-  # which key is login, and value is the name.
-  scanLogins: (query) ->
-    result = {}
-    for e in query
-      $e = $(e)
-      result[$e.text()] = $e.attr('data-name')
-
-    result
-
-  initNotificationSubscribe : () ->
-    return if not App.access_token?
-    faye = new Faye.Client(App.faye_client_url)
-    faye.subscribe "/notifications_count/#{App.access_token}", (json) ->
-      span = $("#user_notifications_count span")
-      new_title = document.title.replace(/^\(\d+\) /,'')
-      if json.count > 0
-        span.addClass("badge-error")
-        new_title = "(#{json.count}) #{new_title}"
-        url = App.fixUrlDash("#{App.root_url}#{json.content_path}")
-        console.log url
-        $.notifier.notify("",json.title,json.content,url)
-      else
-        span.removeClass("badge-error")
-      span.text(json.count)
-      document.title = new_title
-    true
-
-  init : () ->
-    App.initForDesktopView()
-    FormStorage.restore()
-
-    $("abbr.timeago").timeago()
-    $(".alert").alert()
-    $('.dropdown-toggle').dropdown()
-
-    # 绑定评论框 Ctrl+Enter 提交事件
-    $(".cell_comments_new textarea").bind "keydown","ctrl+return",(el) ->
-      if $(el.target).val().trim().length > 0
-        $(el.target).parent().parent().submit()
-      return false
-
-    # Choose 样式
-    $("select").chosen()
-
-    # Go Top
-    $("a.go-top").click () ->
-      $('html, body').animate({ scrollTop: 0 },300)
-      return false
-
-    # Go top
-    $(window).bind 'scroll resize', ->
-      scroll_from_top = $(window).scrollTop()
-      if scroll_from_top >= 1
-        $("a.go-top").show()
-      else
-        $("a.go-top").hide()
-
-# NProgress
-NProgress.configure
-  speed: 300
-  minimum: 0.03
-  ease: 'ease'
-
-$(document).on 'page:fetch', ->
-  NProgress.start()
-$(document).on 'page:restore', ->
-  NProgress.remove()
 $(document).on 'page:change',  ->
-  NProgress.done()
-$(document).ready ->
-  App.init()
+  window._appView = new AppView()
 
 FormStorage.init()

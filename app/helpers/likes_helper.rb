@@ -9,7 +9,7 @@ module LikesHelper
 
     # 没登录，并且也没用用 cache 的时候，直接返回会跳转倒登录的
     if opts[:cache].blank? && current_user.blank?
-      return link_to(raw("<i class=\"fa fa-star-o\"></i> <span>喜欢</span>"), new_user_session_path, class: "")
+      return link_to(raw("<i class=\"fa fa-heart-o\"></i> <span>喜欢</span>"), new_user_session_path, class: "")
     end
 
     label = "#{likeable.likes_count} 人喜欢"

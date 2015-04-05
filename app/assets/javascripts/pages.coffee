@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 #
-PageView = Backbone.View.extend
+window.PageView = Backbone.View.extend
   el: "body"
   events:
     "click .editor-toolbar .edit a": "toggleEditView"

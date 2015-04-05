@@ -58,6 +58,7 @@ body {
   .navbar-default .navbar-brand,
   .navbar-default .navbar-nav>li>a  { color: $blueText; }
   .navbar-inverse .navbar-nav .open .dropdown-menu .divider { color: $blueText !important; }
+  .navbar-inverse .navbar-nav .open .dropdown-menu li.active a { border-bottom: 0px; color: $red; }
   .navbar-inverse .navbar-toggle { padding: 3px 9px; font-size: 18px; border:1px solid rgba(255,255,255,0.1); background-color: rgba(255,255,255,0.05); }
   .navbar-inverse .navbar-toggle:focus { background-color: rgba(255,255,255,0.05);}
   .navbar-inverse .navbar-toggle:hover { background-color: rgba(255,255,255,0.1); }
@@ -698,6 +699,7 @@ a.followed {
     ol { list-style-type: lower-alpha; margin-bottom: 0px; }
   }
   img { vertical-align: top; max-width: 100%; }
+  a.zoom-image { cursor: zoom-in; }
 }
 
 

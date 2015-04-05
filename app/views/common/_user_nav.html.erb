@@ -11,11 +11,15 @@
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%= current_user.login %> <span class="caret"></span></a>
     <%= render_list class: "dropdown-menu", role: "menu" do |li|
       li << link_to(t("menu.my_home_page"), user_path(current_user.login) )
+      li << "<div class='divider'></div>"
       unless params[:controller].match(/cpanel/)
         li << link_to(t("menu.edit_account_path"), edit_user_registration_path)
         li << link_to(t("menu.notes"), notes_path )
         li << link_to(t("menu.likes"), favorites_user_path(current_user.login))
-        li << link_to(t("menu.cpanel"), "/cpanel") if admin?
+        if admin?
+          li << "<div class='divider'></div>"
+          li << link_to(t("menu.cpanel"), "/cpanel")
+        end
       end
       li << "<div class='divider'></div>"
       li << link_to(t("common.logout"), destroy_user_session_path, method: "delete" )

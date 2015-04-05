@@ -11,6 +11,9 @@ body, p, ol, ul, td {
   line-height: 18px;
 }
 
+.panel-body h1,
+fieldset legend  { border:0px; font-size: 18px; margin-top:0px; margin-bottom: 20px; padding: 0;line-height: 100%; }
+
 pre {
   background-color: #eee;
   padding: 10px;
@@ -27,3 +30,9 @@ pre {
 }
 
 table tr.deleted td { text-decoration: line-through; color:#999}
+table tr td a.fa {
+    text-decoration: normal;
+    color: #666;
+    margin-right: 4px;
+    &:hover { color: #333; text-decoration: none; }
+}

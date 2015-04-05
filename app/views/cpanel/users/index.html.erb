@@ -2,8 +2,11 @@
   <span class="current">用户</span>
 <% end %>
 <div class="toolbar">
-  <form class="form-search" action="<%= cpanel_users_path %>">
-    <input type="text" name="q" class="span2" value="<%= params[:q] %>" placeholder="用户名" /> <button class="btn btn-small">搜索</button>
+  <form class="form-inline" action="<%= cpanel_users_path %>">
+    <div class="form-group">
+      <input type="text" name="q" class="form-control" value="<%= params[:q] %>" placeholder="用户名" />
+    </div>
+    <button class="btn btn-default">搜索</button>
   </form>
 </div>
 
@@ -27,7 +30,7 @@
     <td><%= user.state %></td>
     <td><%= user.verified %></td>
     <td>
-      <%= link_to '', edit_cpanel_user_path(user), class: "icon small_edit" %>
+      <%= link_to '', edit_cpanel_user_path(user), class: "fa fa-pencil" %>
     </td>
   </tr>
 <% end %>

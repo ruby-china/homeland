@@ -23,9 +23,9 @@
     <td><%= page.locked %></td>
     <td><%= page.version %></td>
     <td>
-      <%= link_to '历史', cpanel_page_versions_path(page.id) %>
-    <%= link_to '', edit_cpanel_page_path(page), class: "icon small_edit" %>
-    <%= link_to '', cpanel_page_path(page), 'data-confirm' => 'Are you sure?', method: :delete, class: "icon small_delete" %></td>
+      <%= link_to '', cpanel_page_versions_path(page.id), class: "fa fa-clock-o", title: "修改记录" %>
+    <%= link_to '', edit_cpanel_page_path(page), class: "fa fa-pencil" %>
+    <%= link_to '', cpanel_page_path(page), 'data-confirm' => 'Are you sure?', method: :delete, class: "fa fa-trash" %></td>
   </tr>
 <% end %>
 </table>

@@ -1,4 +1,4 @@
-<%= simple_form_for @topic do |f| %>
+<%= simple_form_for @topic, html: { class: "form" } do |f| %>
   <%= render "shared/error_messages", target: @topic %>
   <div class="form-group">
     <div class="input-group">

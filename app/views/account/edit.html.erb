@@ -3,7 +3,7 @@
     <div class="panel panel-default">
       <div class="panel-heading"><%= t("users.personal_information")%></div>
       <div class="panel-body">
-        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, enctype:  "multipart/form-data", class: "form-horizontal" }) do |f| %>
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, enctype:  "multipart/form-data" }) do |f| %>
         <%= render "shared/error_messages", target: resource if params[:by].blank? %>
         <%= f.input :name %>
         <%= f.input :avatar %>
@@ -49,7 +49,7 @@
     <div class="panel panel-default">
       <div class="panel-heading"><%= t("users.edit_password")%></div>
       <div class="panel-body">
-        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name, by: :pwd), html: { method: :put, class: "form-horizontal" }) do |f| %>
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name, by: :pwd), html: { method: :put }) do |f| %>
         <%= render "shared/error_messages", target: resource if params[:by] == "pwd" %>
         <input type="hidden" name="by" value="pwd" />
         <%= f.input :current_password %>

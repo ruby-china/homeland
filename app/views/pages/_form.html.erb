@@ -1,4 +1,4 @@
-<%= simple_form_for @page, html: { class: 'form-horizontal' } do |f| %>
+<%= simple_form_for @page do |f| %>
   <%= render "shared/error_messages", target: @page %>
 
   <%= f.input :slug, hint: "http://#{Setting.domain}/wiki/:slug"%>

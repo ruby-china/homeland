@@ -1,7 +1,7 @@
 <div id="site" class="panel panel-default">
   <div class="panel-heading">提交酷站</div>
   <div class="panel-body">
-    <%= simple_form_for(@site, html: { class: 'form-horizontal' }) do |f| %>
+    <%= simple_form_for(@site) do |f| %>
       <%= render "/shared/error_messages", target: @site  %>
         <%= f.input :site_node_id, collection: SiteNode.all.collect { |t| [t.name, t.id] }, include_blank: false %>
 

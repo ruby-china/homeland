@@ -21,15 +21,10 @@
   <meta name="keywords" content="<%= @meta_keywords %>" />
   <meta name="description" content="<%= @meta_description %>" />
   <%= stylesheet_link_tag "front", "data-turbolinks-track" => true %>
-  <% if mobile? %>
-    <%= stylesheet_link_tag "mobile" %>
-    <meta name="apple-mobile-web-app-capable" content="no">
-    <meta content='True' name='HandheldFriendly' />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-    <link rel="apple-touch-icon-precomposed" href="<%= asset_path("ios-icon.png") %>" />
-  <% else %>
-    <%= stylesheet_link_tag "mobile", media: "screen and (max-width: 798px)" %>
-  <% end %>
+  <meta name="apple-mobile-web-app-capable" content="no">
+  <meta content='True' name='HandheldFriendly' />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <link rel="apple-touch-icon-precomposed" href="<%= asset_path("ios-icon.png") %>" />
   <link rel="shortcut icon" href="<%= asset_path("big_logo.png") %>" />
   <%= auto_discovery_link_tag(:rss, feed_topics_url, title: '订阅最新帖') %>
   <%= javascript_include_tag "app", "data-turbolinks-track" => true %>

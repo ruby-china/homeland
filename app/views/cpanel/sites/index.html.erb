@@ -1,10 +1,13 @@
 <%= render 'base' %>
+<h1>酷站列表</h1>
 <div class="toolbar">
-  <form class="form-search" action="<%= cpanel_sites_path %>">
-    <input type="text" name="q" class="span2" value="<%= params[:q] %>" placeholder="网站名称" /> <button class="btn btn-small">搜索</button>
+  <form class="form-inline" action="<%= cpanel_sites_path %>">
+    <div class="form-group">
+      <input type="text" name="q" class="form-control" value="<%= params[:q] %>" placeholder="网站名称" />
+    </div>
+    <button class="btn btn-default">搜索</button>
   </form>
 </div>
-<h1>酷站列表</h1>
 <div id="cpanel_sites">
   <table class="table table-bordered table-striped table-condensed">
     <tr class="head">
@@ -28,8 +31,8 @@
       <td><%= item.site_node.name if !item.site_node.blank? %></td>
       <td><%= l(item.created_at, format: :short) %></td>
       <td>
-        <%= link_to "", edit_cpanel_site_path(item.id), class: "icon small_edit" %>
-        <%= link_to "", cpanel_site_path(item.id), method: :delete, 'data-confirm' => '确定要删除吗?', class: "icon small_delete" %>
+        <%= link_to "", edit_cpanel_site_path(item.id), class: "fa fa-pencil" %>
+        <%= link_to "", cpanel_site_path(item.id), method: :delete, 'data-confirm' => '确定要删除吗?', class: "fa fa-trash" %>
       </td>
     </tr>
     <% end %>

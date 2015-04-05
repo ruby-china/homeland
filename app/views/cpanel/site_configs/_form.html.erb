@@ -1,4 +1,4 @@
-<%= simple_form_for([:cpanel,@site_config], html: { class: 'form-horizontal' }) do |f| %>
+<%= simple_form_for([:cpanel,@site_config]) do |f| %>
   <%= render 'shared/error_messages', target: @site_config %>
     <div class="form-group">
       <label class="col-sm-2 control-label">Key</label>

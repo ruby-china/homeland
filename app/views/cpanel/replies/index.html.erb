@@ -27,8 +27,8 @@
       <% end %>
     <td><%= link_to(reply.user.login, edit_cpanel_user_path(reply.user_id), target: "_blank") if reply.user %></td>
     <td><%= l reply.created_at, format: :short %></td>
-    <td><%= link_to '', edit_cpanel_reply_path(reply), class: "icon small_edit" %>
-    <%= link_to '', cpanel_reply_path(reply), 'data-confirm' => 'Are you sure?', method: :delete, remote: true, class: "icon small_delete" %></td>
+    <td><%= link_to '', edit_cpanel_reply_path(reply), class: "fa fa-pencil" %>
+    <%= link_to '', cpanel_reply_path(reply), 'data-confirm' => 'Are you sure?', method: :delete, remote: true, class: "fa fa-trash" %></td>
   </tr>
 <% end %>
 </table>

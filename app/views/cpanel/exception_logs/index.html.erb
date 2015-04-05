@@ -1,5 +1,5 @@
 <%= render 'base' %>
-<div class="tools">
+<div class="pull-right">
   <%= link_to "删除本页所有记录", clean_cpanel_exception_logs_path(ids: @exception_logs.collect(&:id).join(",")), class: "btn btn-small btn-danger", data: { confirm: "确定要删除本页的所有异常记录么？" }, method: "post" %>
 </div>
 <h1><%= t("mongoid.models.exception_log") %></h1>
@@ -18,7 +18,7 @@
       <td><%= link_to item.title, cpanel_exception_log_path(item.id) %></td>
       <td><%= l(item.created_at, format: :long) %></td>
       <td>
-        <%= link_to "", cpanel_exception_log_path(item.id), method: :delete, data: { remote: true, confirm: "是否确定要删除？" }, class: "icon small_delete" %>
+        <%= link_to "", cpanel_exception_log_path(item.id), method: :delete, data: { remote: true, confirm: "是否确定要删除？" }, class: "fa fa-trash" %>
       </td>
     </tr>
     <% end %>

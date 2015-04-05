@@ -41,8 +41,9 @@
             <span class="sr-only">Toggle</span>
             <i class="fa fa-reorder"></i>
           </button>
-          <a href="/" class="navbar-brand"><%= image_tag("big_logo.png") %></a>
+          <a href="<%= mobile? ? "/topics" : "/" %>" class="navbar-brand"><%= image_tag("big_logo.png") %></a>
         </div>
+
         <nav class="navbar-collapse bs-navbar-collapse collapse">
           <%= render_list class: "nav navbar-nav" do |li|
              li << link_to(t("menu.home"), root_path)

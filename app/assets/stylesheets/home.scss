@@ -29,9 +29,13 @@ h2 {
     .topic { 
       height:50px;
       .title {
-        white-space:nowrap;
-        overflow:hidden;
-        text-overflow:ellipsis;
+        a {
+          display:inline-block;
+          max-width:92%;
+          white-space:nowrap;
+          overflow:hidden;
+          text-overflow:ellipsis;
+        }
       }
     }
     .topic:nth-child(odd) { width:50%; float:left;  clear:left; }

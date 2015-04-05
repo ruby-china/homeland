@@ -11,9 +11,6 @@ gem 'coffee-rails'
 gem 'uglifier'
 gem 'jquery-rails'
 gem 'jbuilder'
-gem 'turbolinks'
-gem 'jquery-turbolinks'
-
 
 gem 'actionpack-action_caching', '1.1.1'
 gem 'rails-i18n'

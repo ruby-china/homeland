@@ -184,9 +184,6 @@ GEM
       rails-dom-testing (~> 1.0)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
-    jquery-turbolinks (2.1.0)
-      railties (>= 3.1.0)
-      turbolinks
     json (1.8.2)
     jwt (0.1.13)
       multi_json (>= 1.5)
@@ -386,8 +383,6 @@ GEM
     tilt (1.4.1)
     timers (4.0.1)
       hitimes
-    turbolinks (2.5.3)
-      coffee-rails
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.6.0)
@@ -436,7 +431,6 @@ DEPENDENCIES
   jasmine-rails (~> 0.10.2)
   jbuilder
   jquery-rails
-  jquery-turbolinks
   letter_opener
   md_emoji (= 1.0.2)
   mini_magick (= 3.7.0)
@@ -473,6 +467,5 @@ DEPENDENCIES
   social-share-button (= 0.1.5)
   sprite-factory (= 1.4.1)
   thin
-  turbolinks
   uglifier
   will_paginate (= 3.0.7)

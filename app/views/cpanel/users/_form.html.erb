@@ -1,4 +1,4 @@
-<%= simple_form_for([:cpanel,@user]) do |f| %>
+<%= simple_form_for([:cpanel,@user], html: { class: 'form-horizontal' }) do |f| %>
   <%= render 'shared/error_messages', target: @user %>
   <%= f.input :login %>
   <%= f.input :name %>
@@ -9,9 +9,8 @@
   <%= f.input :bio, as: :text, input_html: { class: "span8", style: "height:60px;" } %>
   <%= f.input :website, as: :url, input_html: { class: "xxlarge" } %>
   <%= f.input :avatar %>
-  <div class="control-group">
-    <label class="control-label"><%= t("common.avatar")%></label>
-    <div class="controls">
+  <div class="form-group">
+    <div class="col-md-10 col-sm-offset-2">
       <%= user_avatar_tag(@user, :large) %>
     </div>
   </div>
@@ -24,9 +23,8 @@
   <%= f.input :last_sign_in_ip, readonly: true %>
   <%= f.input :current_sign_in_ip, readonly: true %>
   <% if not @user.authorizations.blank? %>
-  <div class="control-group">
-    <%= f.label :authorizations, class: "control-label" %>
-    <table class="controls" style="display:block;">
+  <div class="form-group">
+    <table class="table col-md-10 col-sm-offset-2" style="display:block;">
       <% @user.authorizations.each do |auth| %>
         <tr>
           <td style="width:100px;"><%= auth.provider %></td>
@@ -36,14 +34,16 @@
     </table>
   </div>
   <% end %>
-  <div class="form-actions">
-    <% if @user.state != User::STATE[:deleted] %>
-      <div class="pull-right">
-        <%= link_to '删除此用户', cpanel_user_path(@user), 'data-confirm' => '警告！此动作无法撤销，确定要删除么?', method: :delete, class: "btn btn-danger"  %>
-      </div>
-    <% end %>
-    <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving") %>
-    或者
-    <%= link_to 'Back', cpanel_users_path %>
+  <div class="form-group">
+    <div class="col-md-10 col-sm-offset-2">
+      <% if @user.state != User::STATE[:deleted] %>
+        <div class="pull-right">
+          <%= link_to '删除此用户', cpanel_user_path(@user), 'data-confirm' => '警告！此动作无法撤销，确定要删除么?', method: :delete, class: "btn btn-danger"  %>
+        </div>
+      <% end %>
+      <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving") %>
+      或者
+      <%= link_to 'Back', cpanel_users_path %>
+    </div>
   </div>
 <% end %>

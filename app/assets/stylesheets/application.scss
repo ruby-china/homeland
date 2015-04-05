@@ -151,6 +151,11 @@ a { color: $blue; }
   padding: 6px 0px 6px 0;
   transition:none;
   &:focus { box-shadow: inset 0 0px 0px #fff; padding: 6px 0px 5px 0; border-bottom: 2px solid $blueLight; }
+  &[disabled], &[readonly] {
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    background: #f9f9f9;
+  }
 }
 textarea.form-control,
 #preview.form-control { border: 1px solid #D5DCE1;  }

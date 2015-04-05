@@ -11,7 +11,7 @@
   <tr>
     <td><%= site_config.key %></td>
     <td><%= t("site_config.#{site_config.key}") %></td>
-    <td><%= link_to '', edit_cpanel_site_config_path(site_config), class: "fa fa-pencil" %></td>
+    <td class="opts"><%= link_to icon_tag("fa fa-pencil"), edit_cpanel_site_config_path(site_config) %></td>
   </tr>
 <% end %>
 </table>

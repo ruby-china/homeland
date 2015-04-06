@@ -199,21 +199,6 @@ form {
   color:#999;
   border-radius: 0px; border: 0px; border-bottom: 1px solid #D5DCE1;
 }
-// .btn.dropdown-toggle {
-//   background: #FFF;
-//   border-radius: 0px;
-//   border: 0px;
-//   border-bottom: 1px solid #D5DCE1;
-//   padding: 6px 0 7px 0;
-//   margin-right: 10px;
-// }
-// .open {
-//   .btn.dropdown-toggle { background: #FFF; padding-bottom: 6px; border-bottom: 2px solid $blueLight; }
-// }
-// .input-group {
-//   .btn.dropdown-toggle { padding-right: 6px; }
-//   .form-control { padding-left: 6px; }
-// }
 
 .popover {
   border-radius: 3px; border-color: #eee; box-shadow: 0 1px 1px 0px rgba(0, 0, 0, 0.05);
@@ -563,9 +548,6 @@ a.followed {
         &.popular { background:#fffce9; }
 
     .media-body {
-      width: 100%;
-      margin-left: 58px;
-      pre { display: table-cell; }
     }
     .avatar { text-align:center; }
     .info {
@@ -586,7 +568,18 @@ a.followed {
   @media (min-width: 1200px) {
     pre { width: 759px; }
   }
-
+  /* iPhone 6 Plus */
+  @media (max-width: 414px) {
+    pre { max-width: 312px; }
+  }
+  /* iPhone 6 */
+  @media (max-width: 375px) {
+    pre { max-width: 273px; }
+  }
+  /* iPhone 5,4 */
+  @media (max-width: 320px) {
+    pre { max-width: 218px; }
+  }
 }
 
 #notifications {

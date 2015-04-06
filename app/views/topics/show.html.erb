@@ -66,6 +66,7 @@
 
   <% if current_user %>
     <div id="reply" class="panel panel-default">
+      <div class="panel-heading">回帖</div>
       <div class="panel-body">
       <% if can? :create, Reply %>
 
@@ -86,7 +87,11 @@
       </div>
     </div>
   <% else %>
-      <%= render partial: "topics/translation/need_login_to_reply" %>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <%= render partial: "topics/translation/need_login_to_reply" %>
+      </div>
+    </div>
   <% end %>
   </div>
 

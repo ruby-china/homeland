@@ -45,21 +45,22 @@ body {
 
 .header {
   .navbar {
-    background-color: $blue;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.28);
+    background-color: #FFF;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
     border:0px;
     color: $blueText;
   }
 
   .navbar-brand {
-    padding: 5px 15px;
-    img { width: 40px; }
+    color: #666 !important;
+    font-weight: bold;
+    b { color: $red; }
   }
   .navbar-default .navbar-brand,
-  .navbar-default .navbar-nav>li>a  { color: $blueText; }
-  .navbar-inverse .navbar-nav .open .dropdown-menu .divider { color: $blueText !important; }
+  .navbar-default .navbar-nav>li>a  { color: #333; }
+  .navbar-inverse .navbar-nav .open .dropdown-menu .divider { color: #999 !important; }
   .navbar-inverse .navbar-nav .open .dropdown-menu li.active a { border-bottom: 0px; color: $red; }
-  .navbar-inverse .navbar-toggle { padding: 3px 9px; font-size: 18px; border:1px solid rgba(255,255,255,0.1); background-color: rgba(255,255,255,0.05); }
+  .navbar-inverse .navbar-toggle { color: #333; padding: 3px 9px; font-size: 18px; border:1px solid rgba(255,255,255,0.1); background-color: rgba(255,255,255,0.05); }
   .navbar-inverse .navbar-toggle:focus { background-color: rgba(255,255,255,0.05);}
   .navbar-inverse .navbar-toggle:hover { background-color: rgba(255,255,255,0.1); }
   .navbar-inverse .navbar-collapse,
@@ -67,15 +68,15 @@ body {
   nav.navbar-collapse.bs-navbar-collapse { border-color: rgba(255,255,255,0.3); }
   .navbar-inverse .navbar-nav>.open>a,
   .navbar-inverse .navbar-nav>.open>a:focus,
-  .navbar-inverse .bs-navbar-collapse.in .navbar-nav>.open>a:hover { background: $blueDark}
-  .navbar-inverse .bs-navbar-collapse.in .navbar-nav .open .dropdown-menu>li>a { color: $blueText; }
+  .navbar-inverse .bs-navbar-collapse.in .navbar-nav>.open>a:hover { background: $grayDark; color: #333; }
+  .navbar-inverse .bs-navbar-collapse.in .navbar-nav .open .dropdown-menu>li>a { color: #333; }
   .navbar-inverse .bs-navbar-collapse.in .navbar-nav .open .dropdown-menu>li>a:hover { background-color: rgba(255,255,255,0.05); }
   .navbar-inverse .bs-navbar-collapse.in .navbar-nav .open .dropdown-menu .divider { background-color: rgba(255,255,255,0.1); }
   .navbar-nav {
-    a { }
+    a { color: #333; }
     li.active a,
     li.active a:focus,
-    li.active a:hover { border-bottom:5px solid $blueDark; color: $blueText; background: transparent; padding-bottom: 10px;}
+    li.active a:hover { border-bottom:3px solid $red; color: $red; background: transparent; padding-bottom: 12px;}
   }
 
   .form-search {
@@ -83,6 +84,11 @@ body {
     position: relative;
     margin-top: 13px;
     margin-right: 10px;
+
+    .fa {
+      color: #333;
+      &:hover { color: #666; }
+    }
 
     .fa-search{
       cursor: pointer;
@@ -114,9 +120,9 @@ body {
       background: transparent;
       transition: all .3s;
       box-sizing: border-box;
-      color: $blueText;
+      color: #333;
       &::-webkit-input-placeholder {
-        color: $blueLight;
+        color: #ddd;
       }
     }
     &.active {
@@ -340,11 +346,14 @@ html.turbolinks-progress-bar::before {
   .uface,
   .media-object { border-radius: 3px; }
 }
-.avatar-96x96 { width: 48px; height: 48px; border-radius: 2px; }
+.avatar-48 { width: 48px; height: 48px; border-radius: 2px; }
 .avatar-256x256 { width: 128px; height: 128px; border-radius: 2px; }
 @media (max-width: 480px) {
-  .avatar-96x96 { width: 32px; height: 32px; }
+  .avatar-48 { width: 32px; height: 32px; }
   .avatar-256x256 { width: 64px; height: 64px; }
+}
+@media (max-width: 480px) {
+  .avatar-48 { width: 32px; height: 32px; }
 }
 .uname { color:#666; }
 img.emoji { width:20px; height:20px; }
@@ -554,7 +563,9 @@ a.followed {
         &.popular { background:#fffce9; }
 
     .media-body {
+      width: 100%;
       margin-left: 58px;
+      pre { display: table-cell; }
     }
     .avatar { text-align:center; }
     .info {
@@ -565,6 +576,17 @@ a.followed {
       .reply-floor { color: #7AA87A; }
     }
   }
+
+  @media (min-width:768px) {
+    pre { width: 632px; }
+  }
+  @media (min-width: 992px) {
+    pre { width: 609px; }
+  }
+  @media (min-width: 1200px) {
+    pre { width: 759px; }
+  }
+
 }
 
 #notifications {

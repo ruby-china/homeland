@@ -58,7 +58,7 @@
           <%= render partial: "replies/reply", collection: @replies %>
         <% end %>
       </div>
-      <div class="panel-footer">
+      <div class="panel-footer clearfix">
         <%= will_paginate @replies, inner_window: 2, params: { anchor: 'replies' } %>
       </div>
     </div>

@@ -17,12 +17,14 @@
       •
       <% end %>
       <%= user_name_tag(topic.user) %>
+      <span class="hidden-mobile">
       •
       <% if topic.last_reply_user_login.blank? %>
         <%= raw t("common.created_at", time: timeago(topic.created_at))%>
       <% else %>
         <%= t("common.last_by")%> <%= user_name_tag(topic.last_reply_user_login) %> <%= raw t("common.reply_at", time: timeago(topic.replied_at))%>
       <% end %>
+      </span>
     </div>
   </div>
   <div class="count media-right">

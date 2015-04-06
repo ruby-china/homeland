@@ -366,6 +366,22 @@ a.followed {
   }
 }
 
+@media (max-width: 480px) {
+  .hidden-mobile { display: none !important; }
+  .pagination {
+    display: block;
+    li { display: none; }
+    li.prev,
+    li.next {
+      float: left; display: block;
+      a {
+        border-radius: 20px !important;
+      }
+    }
+    li.next { float: right; }
+  }
+}
+
 .node-list {
   .node {
     margin-bottom: 10px;

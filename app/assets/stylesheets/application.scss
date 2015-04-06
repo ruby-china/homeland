@@ -388,12 +388,13 @@ a.followed {
 .node-list {
   .node {
     margin-bottom: 10px;
+    margin-top: 0px;
     &:last-child { margin-bottom: 0px; }
-    .media-left { min-width: 100px; }
+    .media-left { min-width: 130px; }
     label { font-weight: normal; color: #aaa; text-align: right; }
     .name {
       margin-bottom: 10px;
-      width: 120px;
+      width: 100px;
       display: block;
       float: left;
       text-align: left;

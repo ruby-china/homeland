@@ -13,7 +13,7 @@ describe 'markdown' do
     subject { doc }
 
     # {{{ describe 'mention user'
-    
+
     describe "encoding with Chinese chars" do
       context "a simple" do
         let(:raw) { '#1楼 @ichord 刚刚发布，有点问题' }
@@ -24,7 +24,7 @@ describe 'markdown' do
         end
       end
     end
-    
+
     describe 'strikethrough' do
       let(:raw) { "some ~~strikethrough~~ text" }
 
@@ -42,7 +42,7 @@ describe 'markdown' do
         it { is_expected.to eq(%(<p>some <strong>strong</strong> text</p>)) }
       end
     end
-    
+
     describe 'at user' do
       context '@user in text' do
         let(:raw) { '@user' }
@@ -318,7 +318,7 @@ describe 'markdown' do
     end
 
     # }}}
-    
+
     describe 'The code' do
       context '``` use with code' do
         let(:raw) {
@@ -326,33 +326,43 @@ describe 'markdown' do
           class Foo; end
           ```)
         }
-        
+
         specify { expect(doc.css('pre').attr("class").value).to eq("highlight plaintext") }
       end
-      
+
       context '```ruby use with code' do
         let(:raw) {
           %(```ruby
           class Foo; end
           ```)
         }
-        
+
         specify { expect(doc.css('pre').attr("class").value).to eq("highlight ruby") }
       end
-      
+
       context 'indent in raw with \t' do
         let(:raw) { "\t\tclass Foo; end" }
-        
+
         specify { expect(doc.css('pre')).to be_empty }
       end
-      
+
       context 'indent in raw with space' do
         let(:raw) { "    class Foo; end" }
-        
+
         specify { expect(doc.css('pre')).to be_empty }
       end
     end
-    
+
+    describe 'tables' do
+      let(:raw) { %(
+| header 1 | header 3 |
+| -------- | -------- |
+| cell 1   | cell 2   |
+| cell 3   | cell 4   |) }
+
+      it { expect(doc.inner_html).to eq "<table class=\"table table-striped\">\n<tr>\n<th>header 1</th>\n<th>header 3</th>\n</tr>\n<tr>\n<td>cell 1</td>\n<td>cell 2</td>\n</tr>\n<tr>\n<td>cell 3</td>\n<td>cell 4</td>\n</tr>\n</table>" }
+    end
+
     describe 'Escape HTML tags' do
       context '<xxx> or a book names' do
         let(:raw) { "<Enterprise Integration Patterns> book" }
@@ -362,7 +372,7 @@ describe 'markdown' do
           it { is_expected.to eq("<p>&lt;Enterprise Integration Patterns&gt; book</p>") }
         end
       end
-      
+
       context '<img> tag' do
         let(:raw) { "<img src='aaa.jpg' /> aaa" }
 
@@ -371,7 +381,7 @@ describe 'markdown' do
           it { is_expected.to eq("<p>&lt;img src='aaa.jpg' /&gt; aaa</p>") }
         end
       end
-      
+
       context '<b> tag' do
         let(:raw) { "<b>aaa</b>" }
 

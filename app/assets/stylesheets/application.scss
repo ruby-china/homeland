@@ -334,11 +334,11 @@ html.turbolinks-progress-bar::before {
   .uface,
   .media-object { border-radius: 3px; }
 }
+.avatar-16 { width: 16px; height: 16px; border-radius: 1px; }
 .avatar-48 { width: 48px; height: 48px; border-radius: 2px; }
-.avatar-256x256 { width: 128px; height: 128px; border-radius: 2px; }
+.avatar-120 { width: 80px; height: 80px; border-radius: 2px; }
 @media (max-width: 480px) {
   .avatar-48 { width: 32px; height: 32px; }
-  .avatar-256x256 { width: 64px; height: 64px; }
 }
 
 .uname { color:#666; }

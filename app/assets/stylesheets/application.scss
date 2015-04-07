@@ -637,7 +637,7 @@ a.followed {
 /* Markdown Styles */
 .markdown {
   position:relative;
-  line-height: 1.8em; font-size:14px; text-overflow: ellipsis; word-wrap: break-word;
+  line-height: 1.8em; font-size:14px; text-overflow: ellipsis; word-wrap: break-word; word-break: break-word;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
   p,
   pre,

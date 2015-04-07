@@ -340,9 +340,7 @@ html.turbolinks-progress-bar::before {
   .avatar-48 { width: 32px; height: 32px; }
   .avatar-256x256 { width: 64px; height: 64px; }
 }
-@media (max-width: 480px) {
-  .avatar-48 { width: 32px; height: 32px; }
-}
+
 .uname { color:#666; }
 img.emoji { width:20px; height:20px; }
 .node-name {
@@ -545,6 +543,9 @@ a.followed {
     padding: 10px 15px;
     position: relative;
     border-bottom: 1px solid #eee;
+    padding-left: 74px;
+    .infos { min-height: 48px; }
+    .avatar { position: absolute; top: 10px; left: 15px; }
     &:last-child {
       border-bottom: 0px;
     }
@@ -555,7 +556,7 @@ a.followed {
     }
     &.deleted {
       margin-bottom: 0px;
-      min-height: 24px;
+      min-height: 24px !important;
       padding-top: 5px;
       padding-bottom: 0px;
       background: #f9f9f9;
@@ -579,26 +580,10 @@ a.followed {
     }
   }
 
-  @media (min-width:768px) {
-    pre { width: 632px; }
-  }
-  @media (min-width: 992px) {
-    pre { width: 609px; }
-  }
-  @media (min-width: 1200px) {
-    pre { width: 759px; }
-  }
-  /* iPhone 6 Plus */
-  @media (max-width: 414px) {
-    pre { max-width: 312px; }
-  }
-  /* iPhone 6 */
-  @media (max-width: 375px) {
-    pre { max-width: 273px; }
-  }
-  /* iPhone 5,4 */
-  @media (max-width: 320px) {
-    pre { max-width: 218px; }
+  @media (max-width: 480px) {
+    .reply {
+      padding-left: 57px;
+    }
   }
 }
 

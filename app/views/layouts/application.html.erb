@@ -37,37 +37,39 @@
     <nav class="navbar navbar-inverse navbar-static-top navbar-default">
       <div class="container">
         <div class="navbar-header">
-          <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
-            <span class="sr-only">Toggle</span>
-            <i class="fa fa-reorder"></i>
-          </button>
-          <a href="<%= mobile? ? "/topics" : "/" %>" class="navbar-brand"><b>Ruby</b> China</a>
+          <a href="/" class="navbar-brand"><b>Ruby</b> China</a>
         </div>
 
-        <nav class="navbar-collapse bs-navbar-collapse collapse">
-          <%= render_list class: "nav navbar-nav" do |li|
-             li << link_to(t("menu.home"), root_path)
-             li << link_to(t("menu.topics"), topics_path)
-             li << link_to(t("menu.wiki"), pages_path) if !mobile?
-             li << link_to(t("menu.jobs"), jobs_path)
-             li << link_to(t("menu.tweets"), twitter_path) if !mobile?
-             li << link_to(t("menu.sites"), sites_path) if !mobile?
-          end %>
+        <%= render_list class: "nav navbar-nav" do |li|
+           li << link_to(t("menu.topics"), topics_path)
+           li << link_to(t("menu.wiki"), pages_path) if !mobile?
+           li << link_to(t("menu.jobs"), jobs_path)
+           li << link_to(t("menu.tweets"), twitter_path) if !mobile?
+           li << link_to(t("menu.sites"), sites_path) if !mobile?
+        end %>
 
-          <ul class="nav navbar-nav navbar-right">
-            <li class="nav-search hidden-xs">
-              <form class="navbar-form form-search" action="/search" method="GET">
-                <div class="form-group">
-                  <input class="form-control" name="q" type="text" value="<%= params[:q] %>" placeholder="搜索本站内容" />
-                </div>
-                <i class="fa btn-search fa-search"></i>
-                <i class="fa btn-close fa-times-circle"></i>
-              </form>
-            </li>
+        <%= render "common/user_nav" %>
 
-            <%= render "common/user_nav" %>
-          </ul>
-        </nav>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="nav-search hidden-xs">
+            <form class="navbar-form form-search" action="/search" method="GET">
+              <div class="form-group">
+                <input class="form-control" name="q" type="text" value="<%= params[:q] %>" placeholder="搜索本站内容" />
+              </div>
+              <i class="fa btn-search fa-search"></i>
+              <i class="fa btn-close fa-times-circle"></i>
+            </form>
+          </li>
+          <% if current_user %>
+          <%
+          badge_class = ""
+          badge_class = "new" if unread_notify_count > 0
+          %>
+          <li class="notification-count">
+            <a href="<%= notifications_path %>" class="<%= badge_class %>" title="通知"><i class="fa fa-bell"></i><span class="count"><%= unread_notify_count %></span></a>
+          </li>
+          <% end %>
+        </ul>
       </div>
     </nav>
   </div>

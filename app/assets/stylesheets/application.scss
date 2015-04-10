@@ -350,7 +350,7 @@ abbr[title] { border-bottom: 0px; cursor: text; }
 }
 
 html.turbolinks-progress-bar::before {
-  background-color: #CEE4FF !important;
+  background-color: $red !important;
   height: 2px !important;
 }
 

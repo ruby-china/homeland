@@ -380,8 +380,9 @@ img.emoji { width:20px; height:20px; }
 }
 .notification-count {
   position: relative;
-  .count { margin-left: 4px; display: none; font-size: 10px;}
+  .count { margin-left: 4px; display: none; font-size: 12px;}
   .new {
+    color: $redLight !important;
     .count { display: inline; }
   }
 }

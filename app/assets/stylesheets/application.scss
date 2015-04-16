@@ -337,6 +337,10 @@ abbr[title] { border-bottom: 0px; cursor: text; }
   border-color: $redLight;
 }
 
+.fa-spin {
+  -webkit-animation: fa-spin 0.8s infinite linear;
+  animation: fa-spin 0.8s infinite linear;
+}
 
 /* App Style */
 .opts {
@@ -347,6 +351,8 @@ abbr[title] { border-bottom: 0px; cursor: text; }
     text-decoration: none;
   }
   a:hover { color: #666; text-decoration: none; }
+  .loading {
+  }
 }
 
 html.turbolinks-progress-bar::before {

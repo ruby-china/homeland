@@ -9,7 +9,7 @@ window.TopicView = Backbone.View.extend
 
   events:
     "click #replies .reply .btn-reply": "reply"
-    "click #topic_add_image": "browseUpload"
+    "click #topic-upload-image": "browseUpload"
     "click a.insert_code": "appendCodesFromHint"
     "click a.at_floor": "clickAtFloor"
     "click .topic-detail a.follow": "follow"
@@ -30,8 +30,8 @@ window.TopicView = Backbone.View.extend
       url : "/photos"
       type : "POST"
       beforeSend : () ->
-        $("#topic_add_image").hide()
-        $("#topic_add_image").before("<span class='loading'>上传中...</span>")
+        $("#topic-upload-image").hide()
+        $("#topic-upload-image").before("<span class='loading'><i class='fa fa-circle-o-notch fa-spin'></i></span>")
       success : (result, status, xhr) ->
         self.restoreUploaderStatus()
         self.appendImageFromUpload([result])
@@ -47,8 +47,8 @@ window.TopicView = Backbone.View.extend
     return false
 
   restoreUploaderStatus: ->
-    $("#topic_add_image").parent().find("span.loading").remove()
-    $("#topic_add_image").show()
+    $("#topic-upload-image").parent().find("span.loading").remove()
+    $("#topic-upload-image").show()
 
   appendImageFromUpload : (srcs) ->
     txtBox = $(".topic-editor")
@@ -61,6 +61,7 @@ window.TopicView = Backbone.View.extend
     txtBox.val(before_text + src_merged + source.slice(caret_pos+1, source.count))
     txtBox.caret('pos',caret_pos + src_merged.length)
     txtBox.focus()
+    return false
 
   # 回复
   reply: (e) ->

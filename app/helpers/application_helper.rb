@@ -137,8 +137,9 @@ module ApplicationHelper
   end
 
   def random_tips
-    return "" if SiteConfig.tips.blank?
-    SiteConfig.tips.split("\n").sample
+    tips = SiteConfig.tips
+    return "" if tips.blank?
+    tips.split("\n").sample
   end
 
   def icon_tag(name, opts = {})

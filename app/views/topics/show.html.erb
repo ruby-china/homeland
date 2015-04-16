@@ -70,8 +70,9 @@
       <div class="panel-body">
       <% if can? :create, Reply %>
 
+        <%= render "editor_toolbar" %>
         <%= form_for(Reply.new, remote: true, url: topic_replies_path(@topic)) do |f| %>
-          <%= render "editor_toolbar" %>
+
           <div class="form-group">
             <%= f.text_area :body, class: "topic-editor form-control", rows: "4", tabindex: "1" %>
           </div>

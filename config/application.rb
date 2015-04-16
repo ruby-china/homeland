@@ -48,6 +48,8 @@ module RubyChina
 
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
 
+    config.cache_store = [:dalli_store,"127.0.0.1", { namespace: "rb-cn", compress: true }]
+
     config.middleware.insert 0, Rack::UTF8Sanitizer
   end
 end
@@ -57,4 +59,4 @@ require "markdown"
 I18n.config.enforce_available_locales = false
 I18n.locale = 'zh-CN'
 
-GC::Profiler.enable
+# GC::Profiler.enable

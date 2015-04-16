@@ -46,13 +46,10 @@ Rails.application.configure do
   config.force_ssl = true
 
   # Decrease the log volume.
-  config.log_level = :debug
+  config.log_level = :info
 
   # Use a different logger for distributed setups.
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
-
-  # Use a different cache store in production
-  config.cache_store = [:dalli_store,"127.0.0.1", { namespace: "rb-cn", compress: true }]
 
   # Enable serving of images, stylesheets, and javascripts from an asset server
   config.action_controller.asset_host = Setting.upload_url

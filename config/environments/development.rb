@@ -23,7 +23,6 @@ Rails.application.configure do
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
-  config.cache_store = [:dalli_store,"127.0.0.1", { namespace: "rb-cn", compress: true }]
 
   config.assets.debug = false
 

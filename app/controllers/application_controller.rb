@@ -14,8 +14,11 @@ class ApplicationController < ActionController::Base
       devise_parameter_sanitizer.for(:account_update) { |u| u.permit(*User::ACCESSABLE_ATTRS) }
       devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(*User::ACCESSABLE_ATTRS) }
     end
+
+    # hit unread_notify_count
+    unread_notify_count
   end
-  
+
   before_filter :set_active_menu
   def set_active_menu
     @current = case controller_name
@@ -40,11 +43,11 @@ class ApplicationController < ActionController::Base
     render template: "/errors/#{fname}", format: [:html],
            handler: [:erb], status: status, layout: 'application'
   end
-  
+
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to topics_path, alert: t('common.access_denied')
   end
-  
+
   def set_seo_meta(title = '', meta_keywords = '', meta_description = '')
     @page_title = "#{title}" if title.length > 0
     @meta_keywords = meta_keywords

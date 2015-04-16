@@ -5,7 +5,7 @@ else
   source 'https://ruby.taobao.org'
 end
 
-gem 'rails', '4.2.0'
+gem 'rails', '4.2.1'
 gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
@@ -109,6 +109,7 @@ group :development, :test do
   gem 'letter_opener'
 
   gem 'mongoid_colored_logger'
+  gem 'colorize'
 
   gem 'jasmine-rails', '~> 0.10.2'
 end

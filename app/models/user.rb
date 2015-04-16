@@ -8,7 +8,7 @@ class User
   include Mongoid::BaseModel
   include Redis::Objects
   extend OmniauthCallbacks
-  
+
   ALLOW_LOGIN_CHARS_REGEXP = /\A\w+\z/
 
   devise :database_authenticatable, :registerable,
@@ -83,8 +83,8 @@ class User
   attr_accessor :password_confirmation
   ACCESSABLE_ATTRS = [:name, :email_public, :location, :company, :bio, :website, :github, :twitter, :tagline, :avatar, :by, :current_password, :password, :password_confirmation]
 
-  validates :login, format: { with: ALLOW_LOGIN_CHARS_REGEXP, message: '只允许数字、大小写字母和下划线'}, 
-                              length: {:in => 3..20}, presence: true, 
+  validates :login, format: { with: ALLOW_LOGIN_CHARS_REGEXP, message: '只允许数字、大小写字母和下划线'},
+                              length: {:in => 3..20}, presence: true,
                               uniqueness: {case_sensitive: false}
 
   has_and_belongs_to_many :following_nodes, class_name: 'Node', inverse_of: :followers
@@ -216,7 +216,7 @@ class User
   def self.find_by_email(email)
     where(email: email).first
   end
-  
+
   def self.find_login(slug)
     # FIXME: Regexp search in MongoDB is slow!!!
     raise Mongoid::Errors::DocumentNotFound.new(self, slug: slug) if not slug =~ ALLOW_LOGIN_CHARS_REGEXP
@@ -246,7 +246,6 @@ class User
     return [] if topics.blank?
     cache_keys = topics.map { |t| "user:#{self.id}:topic_read:#{t.id}" }
     results = Rails.cache.read_multi(*cache_keys)
-
     ids = []
     topics.each do |topic|
       val = results["user:#{self.id}:topic_read:#{topic.id}"]
@@ -255,7 +254,7 @@ class User
       end
     end
     t2 = Time.now
-    logger.error "filter_readed_topics (#{(t2 - t1) * 1000}ms)"
+    logger.info "  User filter_readed_topics (#{(t2 - t1) * 1000}ms)"
     ids
   end
 

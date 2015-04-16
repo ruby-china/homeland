@@ -107,9 +107,7 @@ group :development, :test do
   gem 'api_taster', '0.6.0'
   gem 'letter_opener'
 
-  # 用于组合小图片
-  gem 'sprite-factory', '1.4.1', require: false
-  gem 'chunky_png', '1.2.8', require: false
+  gem 'mongoid_colored_logger'
 
   gem 'jasmine-rails', '~> 0.10.2'
 end

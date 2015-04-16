@@ -127,7 +127,7 @@ window.TopicView = Backbone.View.extend
     else
       App.alert(msg,'#reply')
     $("#new_reply textarea").focus()
-    $('#btn_reply').button('reset')
+    $('#reply-button').button('reset')
 
   # 图片点击增加全屏预览功能
   initContentImageZoom : () ->

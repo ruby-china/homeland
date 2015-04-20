@@ -81,8 +81,12 @@ class Topic
     where(:node_id.nin => self.topic_index_hide_node_ids)
   end
 
-  def self.reject_nodes(node_ids)
+  def self.without_nodes(node_ids)
     where(:node_id.nin => node_ids)
+  end
+
+  def self.without_users(user_ids)
+    where(:user_id.nin => user_ids)
   end
 
   def self.topic_index_hide_node_ids

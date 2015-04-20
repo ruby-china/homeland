@@ -301,4 +301,19 @@ describe User, :type => :model do
       expect(user.blocked_node_ids).to eq [1]
     end
   end
+
+  describe ".block_user" do
+    let(:user) { Factory :user }
+
+    it "should work" do
+      user.block_user(1)
+      expect(user.blocked_user_ids).to eq [1]
+      user.block_user(1)
+      expect(user.blocked_user_ids).to eq [1]
+      user.block_user(2)
+      expect(user.blocked_user_ids).to eq [1,2]
+      user.unblock_user(2)
+      expect(user.blocked_user_ids).to eq [1]
+    end
+  end
 end

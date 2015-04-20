@@ -56,6 +56,8 @@ class User
   field :favorite_topic_ids, type: Array, default: []
   # 屏蔽的节点
   field :blocked_node_ids, type: Array, default: []
+  # 屏蔽的用户
+  field :blocked_user_ids, type: Array, default: []
 
   mount_uploader :avatar, AvatarUploader
 
@@ -388,5 +390,16 @@ class User
   def unblock_node(node_id)
     new_node_id = node_id.to_i
     self.pull(blocked_node_ids: new_node_id)
+  end
+
+  def block_user(user_id)
+    user_id = user_id.to_i
+    return false if self.blocked_user_ids.include?(user_id)
+    self.push(blocked_user_ids: user_id)
+  end
+
+  def unblock_user(user_id)
+    user_id = user_id.to_i
+    self.pull(blocked_user_ids: user_id)
   end
 end

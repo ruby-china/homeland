@@ -83,13 +83,13 @@ module UsersHelper
 
   def render_user_level_tag(user)
     if admin?(user)
-      content_tag(:span, t("common.admin_user"), class: "label warning role")
+      content_tag(:span, t("common.admin_user"), class: "label label-warning role")
     elsif wiki_editor?(user)
-      content_tag(:span, t("common.vip_user"), class: "label success role")
+      content_tag(:span, t("common.vip_user"), class: "label label-success role")
     elsif user.newbie?
-      content_tag(:span, t("common.newbie_user"), class: "label role")
+      content_tag(:span, t("common.newbie_user"), class: "label label-default role")
     else
-      content_tag(:span, t("common.normal_user"), class: "label role")
+      content_tag(:span, t("common.normal_user"), class: "label label-default role")
     end
   end
 
@@ -100,10 +100,23 @@ module UsersHelper
     class_names = "btn btn-default btn-sm button-block-node"
     icon = '<i class="fa fa-eye-slash"></i>'
     if blocked
-
       link_to raw("#{icon} <span>取消屏蔽</span>"), '#', title: "忽略后，社区首页列表将不会显示这里的内容。", 'data-id' => node.id, class: "#{class_names} active"
     else
       link_to raw("#{icon} <span>忽略节点</span>"), '#', title: "", 'data-id' => node.id, class: class_names
+    end
+  end
+
+  def block_user_tag(user)
+    return "" if current_user.blank?
+    return "" if user.blank?
+    return "" if current_user.id == user.id
+    blocked = current_user.blocked_user_ids.include?(user.id)
+    class_names = "button-block-user"
+    icon = '<i class="fa fa-eye-slash"></i>'
+    if blocked
+      link_to raw("#{icon} <span>取消屏蔽</span>"), '#', title: "忽略后，社区首页列表将不会显示此用户发布的内容。", 'data-id' => user.login, class: "#{class_names} active"
+    else
+      link_to raw("#{icon} <span>屏蔽用户</span>"), '#', title: "", 'data-id' => user.login, class: class_names
     end
   end
 

@@ -10,7 +10,8 @@ class TopicsController < ApplicationController
 
     @topics = Topic.last_actived.without_hide_nodes.where(:_id.nin => suggest_topic_ids)
     if current_user
-      @topics = @topics.reject_nodes(current_user.blocked_node_ids)
+      @topics = @topics.without_nodes(current_user.blocked_node_ids)
+      @topics = @topics.without_users(current_user.blocked_user_ids)
     end
     @topics = @topics.fields_for_list.includes(:user)
     @topics = @topics.paginate(page: params[:page], per_page: 15, total_entries: 1500)

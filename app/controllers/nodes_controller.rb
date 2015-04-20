@@ -1,5 +1,7 @@
 # coding: utf-8
 class NodesController < ApplicationController
+  before_action :require_user, only: [:block, :unblock]
+
   def index
     @nodes = Node.all
     render json: @nodes, only: [:name], methods: [:id]

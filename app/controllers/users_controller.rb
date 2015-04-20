@@ -1,8 +1,8 @@
 # coding: utf-8
 require 'will_paginate/array'
 class UsersController < ApplicationController
-  before_filter :require_user, only: 'auth_unbind'
-  before_filter :find_user, only: [:show, :topics, :favorites, :notes]
+  before_action :require_user, only: [:block, :unblock, :auth_unbind]
+  before_filter :find_user, only: [:show, :topics, :favorites, :notes, :block, :unblock]
   caches_action :index, expires_in: 2.hours, layout: false
 
   def index
@@ -63,6 +63,16 @@ class UsersController < ApplicationController
       render_404
       return
     end
+  end
+
+  def block
+    current_user.block_user(@user.id)
+    render json: { code: 1 }
+  end
+
+  def unblock
+    current_user.unblock_user(@user.id)
+    render json: { code: 1 }
   end
 
   protected

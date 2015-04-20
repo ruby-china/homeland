@@ -143,6 +143,10 @@ module ApplicationHelper
   end
 
   def icon_tag(name, opts = {})
-    raw "<i class='fa fa-#{name}'></i>"
+    label = ""
+    if opts[:label]
+      label = %(<span>#{opts[:label]}</span>)
+    end
+    raw "<i class='fa fa-#{name}'></i> #{label}"
   end
 end

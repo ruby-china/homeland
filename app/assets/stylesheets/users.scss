@@ -75,12 +75,22 @@
 #main .userinfo h1 { text-align: left; display:inline; }
 .userinfo {
   .tagline { text-align:left; margin-top:-8px; margin-bottom:20px;}
-  ul { list-style:none; }
+  .media-right {
+    padding-left: 15px;
+    text-align: center;
+    .avatar {
+      margin-bottom: 10px;
+    }
+  }
+  .list-group { margin-bottom: 0px; }
   li {
-    font-size:14px; line-height:180%; border-bottom:1px dashed #eee;
-    label { color:#999; font-size:12px; margin-right:8px; display:inline-block; width:100px; text-align: right;}
+    border-color: #f0f0f0;
+    font-size:13px;
+    label { color:#999; margin-right:8px; display:inline-block; width:80px; text-align: right;}
   }
 
+  .panel-footer {
+  }
 }
 
 .bio {

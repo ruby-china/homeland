@@ -445,9 +445,10 @@ a.followed {
   .node-info {
     .name {
       font-weight: bold; color: #666;
-      text-align: center;
+      text-align: left;
       font-size: 16px; padding-bottom: 10px;
-      border-bottom: 1px dashed #e0e0e0; margin-bottom: 10px;
+      .total { font-size: 12px; font-weight: normal; margin-left: 8px; }
+
     }
     .summary {
     color: #888;

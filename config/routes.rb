@@ -127,6 +127,7 @@ Rails.application.routes.draw do
       get :topics
       get :favorites
       get :notes
+      get :blocked
       post :block
       post :unblock
     end

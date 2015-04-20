@@ -132,6 +132,13 @@ table.node-topics {
   }
 }
 
+.bloced-users {
+  .item {
+    text-align: left; margin-bottom: 10px;
+    .media-object { display: inline; }
+  }
+}
+
 #user_github_repos {
   .more { text-align:right; }
   ul { margin:0; }

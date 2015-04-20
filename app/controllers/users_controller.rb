@@ -2,7 +2,7 @@
 require 'will_paginate/array'
 class UsersController < ApplicationController
   before_action :require_user, only: [:block, :unblock, :auth_unbind]
-  before_filter :find_user, only: [:show, :topics, :favorites, :notes, :block, :unblock]
+  before_filter :find_user, only: [:show, :topics, :favorites, :notes, :block, :unblock, :blocked]
   caches_action :index, expires_in: 2.hours, layout: false
 
   def index
@@ -73,6 +73,14 @@ class UsersController < ApplicationController
   def unblock
     current_user.unblock_user(@user.id)
     render json: { code: 1 }
+  end
+
+  def blocked
+    if current_user.id != @user.id
+      render_404
+    end
+
+    @blocked_users = User.where(:_id.in => current_user.blocked_user_ids).paginate(page: params[:page], per_page: 20)
   end
 
   protected

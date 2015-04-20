@@ -33,6 +33,7 @@ AppView = Backbone.View.extend
     "click .header .form-search .btn-search": "openHeaderSearchBox"
     "click .header .form-search .btn-close": "closeHeaderSearchBox"
     "click a.button-block-user": "blockUser"
+    "click a.button-block-node": "blockNode"
 
   initialize: ->
     FormStorage.restore()
@@ -153,6 +154,20 @@ AppView = Backbone.View.extend
       span.text("屏蔽用户")
     else
       $.post("/#{userId}/block")
+      btn.addClass('active').attr("title", "")
+      span.text("取消屏蔽")
+    return false
+
+  blockNode: (e) ->
+    btn = $(e.currentTarget)
+    nodeId = btn.data("id")
+    span = btn.find("span")
+    if btn.hasClass("active")
+      $.post("/nodes/#{nodeId}/unblock")
+      btn.removeClass('active').attr("title", "忽略后，社区首页列表将不会显示这里的内容。")
+      span.text("忽略节点")
+    else
+      $.post("/nodes/#{nodeId}/block")
       btn.addClass('active').attr("title", "")
       span.text("取消屏蔽")
     return false

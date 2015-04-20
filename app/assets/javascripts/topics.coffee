@@ -14,7 +14,6 @@ window.TopicView = Backbone.View.extend
     "click a.at_floor": "clickAtFloor"
     "click .topic-detail a.follow": "follow"
     "click .topic-detail a.bookmark": "bookmark"
-    "click .button-block-node": "blockNode"
 
   initialize: (opts) ->
     @parentView = opts.parentView
@@ -243,20 +242,6 @@ window.TopicView = Backbone.View.extend
     txtBox.val(before_text + src_merged + source.slice(caret_pos+1, source.count))
     txtBox.caret('pos',caret_pos + src_merged.length - 5)
     txtBox.focus()
-
-  blockNode: (e) ->
-    btn = $(e.currentTarget)
-    nodeId = btn.data("id")
-    span = btn.find("span")
-    if btn.hasClass("active")
-      $.post("/nodes/#{nodeId}/unblock")
-      btn.removeClass('active').attr("title", "忽略后，社区首页列表将不会显示这里的内容。")
-      span.text("忽略节点")
-    else
-      $.post("/nodes/#{nodeId}/block")
-      btn.addClass('active').attr("title", "")
-      span.text("取消屏蔽")
-    return false
 
   initComponents : ->
     $("textarea").unbind "keydown.cr"

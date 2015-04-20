@@ -1,6 +1,11 @@
 <% if !node.blank? %>
   <div class="node-info">
-    <div class="name"><%= node.name %> <span class="total">共有 <%= render_node_topics_count(node) %> 个讨论主题</span></div>
+    <div class="name">
+      <strong><%= node.name %></strong> <span class="total">共有 <%= render_node_topics_count(node) %> 个讨论主题</span>
+      <div class="pull-right">
+        <%= block_node_tag(node) %>
+      </div>
+    </div>
     <div class="summary">
       <%= sanitize_markdown node.summary_html %>
     </div>

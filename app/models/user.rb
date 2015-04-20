@@ -54,6 +54,8 @@ class User
   # 用户密钥，用于客户端验证
   field :private_token
   field :favorite_topic_ids, type: Array, default: []
+  # 屏蔽的节点
+  field :blocked_node_ids, type: Array, default: []
 
   mount_uploader :avatar, AvatarUploader
 
@@ -375,5 +377,16 @@ class User
 
   def ensure_private_token!
     self.update_private_token if self.private_token.blank?
+  end
+
+  def block_node(node_id)
+    new_node_id = node_id.to_i
+    return false if self.blocked_node_ids.include?(new_node_id)
+    self.push(blocked_node_ids: new_node_id)
+  end
+
+  def unblock_node(node_id)
+    new_node_id = node_id.to_i
+    self.pull(blocked_node_ids: new_node_id)
   end
 end

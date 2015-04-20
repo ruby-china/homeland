@@ -444,14 +444,17 @@ a.followed {
   }
   .node-info {
     .name {
-      font-weight: bold; color: #666;
-      text-align: left;
-      font-size: 16px; padding-bottom: 10px;
+      strong {
+        font-weight: bold; color: #666;
+        text-align: left;
+        font-size: 16px; padding-bottom: 10px;
+      }
       .total { font-size: 12px; font-weight: normal; margin-left: 8px; }
-
+      .button-block-node { font-size: 13px; border:1px solid #e0e0e0; }
+      .button-block-node.active { background-color: #e0e0e0; border-radius: #d0d0d0; }
     }
     .summary {
-    color: #888;
+      color: #888;
       h1, h2, h3, h4, h5 { font-size: 14px; }
       font-size: 13px;
     }

@@ -40,16 +40,16 @@ describe User, :type => :model do
       expect(user_for_delete1.authorizations).to eq([])
     end
   end
-  
+
   describe '#filter_readed_topics' do
     let(:topics) { FactoryGirl.create_list(:topic, 3) }
-    
+
     it "should work" do
       user.read_topic(topics[1])
       user.read_topic(topics[2])
       expect(user.filter_readed_topics(topics)).to eq([topics[1].id,topics[2].id])
     end
-    
+
     it "should work when params is nil or empty" do
       expect(user.filter_readed_topics(nil)).to eq([])
       expect(user.filter_readed_topics([])).to eq([])
@@ -260,30 +260,45 @@ describe User, :type => :model do
       expect(u.email_md5).to eq(Digest::MD5.hexdigest("a@gmail.com"))
     end
   end
-  
+
   describe '#find_login' do
     let(:user) { Factory :user }
-    
+
     it 'should work' do
       u = User.find_login(user.login)
       expect(u.id).to eq user.id
     end
-    
+
     it 'should ignore case' do
       u = User.find_login(user.login.upcase)
       expect(u.id).to eq user.id
     end
-    
+
     it 'should raise DocumentNotFound error' do
       expect {
         User.find_login(user.login + "1")
       }.to raise_error(Mongoid::Errors::DocumentNotFound)
     end
-    
+
     it 'should railse DocumentNotFound if have bad login' do
       expect {
         User.find_login(user.login + ")")
       }.to raise_error(Mongoid::Errors::DocumentNotFound)
+    end
+  end
+
+  describe ".block_node" do
+    let(:user) { Factory :user }
+
+    it "should work" do
+      user.block_node(1)
+      expect(user.blocked_node_ids).to eq [1]
+      user.block_node(1)
+      expect(user.blocked_node_ids).to eq [1]
+      user.block_node(2)
+      expect(user.blocked_node_ids).to eq [1,2]
+      user.unblock_node(2)
+      expect(user.blocked_node_ids).to eq [1]
     end
   end
 end

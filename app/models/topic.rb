@@ -81,6 +81,10 @@ class Topic
     where(:node_id.nin => self.topic_index_hide_node_ids)
   end
 
+  def self.reject_nodes(node_ids)
+    where(:node_id.nin => node_ids)
+  end
+
   def self.topic_index_hide_node_ids
     SiteConfig.node_ids_hide_in_topics_index.to_s.split(",").collect { |id| id.to_i }
   end

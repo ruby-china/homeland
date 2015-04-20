@@ -93,4 +93,18 @@ module UsersHelper
     end
   end
 
+  def block_node_tag(node)
+    return "" if current_user.blank?
+    return "" if node.blank?
+    blocked = current_user.blocked_node_ids.include?(node.id)
+    class_names = "btn btn-default btn-sm button-block-node"
+    icon = '<i class="fa fa-eye-slash"></i>'
+    if blocked
+
+      link_to raw("#{icon} <span>取消屏蔽</span>"), '#', title: "忽略后，社区首页列表将不会显示这里的内容。", 'data-id' => node.id, class: "#{class_names} active"
+    else
+      link_to raw("#{icon} <span>忽略节点</span>"), '#', title: "", 'data-id' => node.id, class: class_names
+    end
+  end
+
 end

@@ -37,7 +37,12 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :nodes
+  resources :nodes do
+    member do
+      post :block
+      post :unblock
+    end
+  end
 
   get "topics/node:id" => "topics#node", as: 'node_topics'
   get "topics/node:id/feed" => "topics#node_feed", as: 'feed_node_topics', defaults: { format: 'xml' }

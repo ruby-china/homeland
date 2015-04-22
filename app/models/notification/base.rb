@@ -21,7 +21,7 @@ class Notification::Base
     if self.user
       hash = self.notify_hash
       hash[:count] = self.user.notifications.unread.count
-      MessageBus.publish "/notifications_count/#{self.user.temp_access_token}", hash
+      FayeClient.send("/notifications_count/#{self.user.temp_access_token}", hash)
     end
   end
 

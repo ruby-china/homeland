@@ -70,7 +70,7 @@ gem 'sidekiq', '2.17.7'
 # Sidekiq Web
 gem 'sinatra', '>= 1.3.0', :require => nil
 
-gem 'message_bus'
+gem 'faye-rails','1.0.0'
 
 # 分享功能
 gem 'social-share-button', '0.1.5'
@@ -88,12 +88,12 @@ gem 'postmark-rails', '0.4.1'
 
 gem 'god'
 
-# Dalli, kgio is for Dalli
-gem 'kgio'
 gem 'dalli', '2.7.1'
-
+gem 'kgio'
+gem 'eventmachine'
 gem 'puma'
-
+# Faye Server 需要
+gem 'thin'
 # for api 跨域
 gem 'rack-cors', require: 'rack/cors'
 gem 'rack-utf8_sanitizer'

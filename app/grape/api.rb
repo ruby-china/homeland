@@ -144,7 +144,7 @@ module RubyChina
         present @users, with: APIEntities::DetailUser
       end
       
-      # Get temp_access_token, this key is use for Push client channel
+      # Get temp_access_token, this key is use for Faye client channel
       # Example
       # /api/users/temp_access_token?token=232332233223:1
       get "temp_access_token" do

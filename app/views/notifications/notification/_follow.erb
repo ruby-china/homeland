@@ -1,0 +1,22 @@
+<% user = notification.follower %>
+<% if user.blank? %>
+  <div class="media-body">相关信息已删除</div>
+<% else %>
+  <div class="media-left avatar">
+    <%= user_avatar_tag(user, :normal) %>
+  </div>
+  <div class="media-body">
+    <div class="media-heading">
+      <span class="user">
+        <%= user_name_tag(user) %> 
+      </span>
+      <span class="date pull-right"><i class="fa fa-clock-o"></i> <%= timeago(notification.created_at) %></span>
+    </div>
+    <div class="summary">
+      开始关注你了。
+      <% if !notification.read? %>
+        <span class="new label label-warning">新</span>
+      <% end %>
+    </div>
+  </div>
+<% end %>

@@ -22,6 +22,7 @@
       <% if !notification.read? %>
         <span class="new label label-warning">新</span>
       <% end %>
+      <span class="date pull-right"><i class="fa fa-clock-o"></i> <%= timeago(notification.created_at) %></span>
     </div>
     <%- if reply.present? -%>
       <div class="summary markdown">

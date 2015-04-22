@@ -1,4 +1,4 @@
-<%= cache(["notifications",notification]) do %>
+<%= cache(["notifications2",notification]) do %>
 <div class="media notification" id="<%= notification.anchor %>">
   <%= render partial: "notifications/#{notification.class.name.underscore}", locals: { notification: notification } %>
   <div class="media-right opts">

@@ -423,6 +423,7 @@ class User
   def follow_user(user)
     return false if user.blank?
     self.following.push(user)
+    Notification::Follow.notify(user: self, follower: user)
   end
   
   def followers_count

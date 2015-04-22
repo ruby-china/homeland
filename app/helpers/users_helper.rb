@@ -111,7 +111,7 @@ module UsersHelper
     return "" if user.blank?
     return "" if current_user.id == user.id
     blocked = current_user.blocked_user_ids.include?(user.id)
-    class_names = "button-block-user btn-sm btn btn-default btn-block"
+    class_names = "button-block-user btn btn-default btn-block"
     icon = '<i class="fa fa-eye-slash"></i>'
     if blocked
       link_to raw("#{icon} <span>取消屏蔽</span>"), '#', title: "忽略后，社区首页列表将不会显示此用户发布的内容。", 'data-id' => user.login, class: "#{class_names} active"
@@ -125,7 +125,7 @@ module UsersHelper
     return "" if user.blank?
     return "" if current_user.id == user.id
     followed = current_user.followed?(user)
-    opts[:class] ||= "btn btn-primary btn-sm btn-block"
+    opts[:class] ||= "btn btn-primary btn-block"
     class_names = "button-follow-user #{opts[:class]}"
     icon = '<i class="fa fa-user"></i>'
     if followed

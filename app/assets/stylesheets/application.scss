@@ -803,4 +803,7 @@ a.followed {
 
 footer {
   margin-top: 10px; margin-bottom: 20px;
+  color: $blackLight;
+  a { color: #666; }
+  .links { color: #ddd; }
 }

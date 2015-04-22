@@ -118,6 +118,7 @@ AppView = Backbone.View.extend
 
   initNotificationSubscribe : () ->
     return if not App.access_token?
+    return if App.access_token.length < 5
     MessageBus.start()
     MessageBus.callbackInterval = 1000
     MessageBus.subscribe "/notifications_count/#{App.access_token}", (json) ->

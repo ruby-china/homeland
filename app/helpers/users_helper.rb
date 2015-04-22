@@ -89,7 +89,7 @@ module UsersHelper
     elsif user.newbie?
       content_tag(:span, t("common.newbie_user"), class: "label label-default role")
     else
-      content_tag(:span, t("common.normal_user"), class: "label label-default role")
+      content_tag(:span, t("common.normal_user"), class: "label label-info role")
     end
   end
 

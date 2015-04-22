@@ -122,15 +122,17 @@ AppView = Backbone.View.extend
     MessageBus.callbackInterval = 1000
     MessageBus.subscribe "/notifications_count/#{App.access_token}", (json) ->
       span = $(".notification-count span")
+      link = $(".notification-count a")
       new_title = document.title.replace(/^\(\d+\) /,'')
       if json.count > 0
         span.show()
         new_title = "(#{json.count}) #{new_title}"
         url = App.fixUrlDash("#{App.root_url}#{json.content_path}")
-        console.log url
         $.notifier.notify("",json.title,json.content,url)
+        link.addClass("new")
       else
         span.hide()
+        link.removeClass("new")
       span.text(json.count)
       document.title = new_title
     true

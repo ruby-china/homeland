@@ -15,8 +15,8 @@
 #= require social-share-button
 #= require jquery.atwho
 #= require emoji_list
-#= require faye
 #= require notifier
+#= require message-bus
 #= require form_storage
 #= require turbolinks
 #= require topics
@@ -116,10 +116,10 @@ AppView = Backbone.View.extend
 
 
   initNotificationSubscribe : () ->
-    return if not App.faye_client_url
     return if not App.access_token?
-    faye = new Faye.Client(App.faye_client_url)
-    faye.subscribe "/notifications_count/#{App.access_token}", (json) ->
+    MessageBus.start()
+    MessageBus.callbackInterval = 1000
+    MessageBus.subscribe "/notifications_count/#{App.access_token}", (json) ->
       span = $(".notification-count span")
       new_title = document.title.replace(/^\(\d+\) /,'')
       if json.count > 0
@@ -177,7 +177,6 @@ window.App =
   notifier : null
   current_user_id: null
   access_token : ''
-  faye_client_url : ''
   asset_url : ''
   root_url : ''
 

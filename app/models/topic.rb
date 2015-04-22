@@ -106,6 +106,10 @@ class Topic
   def init_last_active_mark_on_create
     self.last_active_mark = Time.now.to_i
   end
+  
+  after_create do
+    Topic.notify_topic_created(self.id)
+  end
 
   def push_follower(uid)
     return false if uid == self.user_id
@@ -167,5 +171,26 @@ class Topic
 
   def excellent?
     self.excellent >= 1
+  end
+  
+  def self.notify_topic_created(topic_id)
+    topic = Topic.find_by_id(topic_id)
+    return if topic.blank?
+
+    notified_user_ids = topic.mentioned_user_ids
+    
+    follower_ids = (topic.user.try(:follower_ids) || [])
+    follower_ids.uniq!
+
+    # 给关注者发通知
+    follower_ids.each do |uid|
+      # 排除同一个回复过程中已经提醒过的人
+      next if notified_user_ids.include?(uid)
+      # 排除回帖人
+      next if uid == topic.user_id
+      puts "Post Notification to: #{uid}"
+      Notification::Topic.create user_id: uid, topic_id: topic.id
+    end
+    true
   end
 end

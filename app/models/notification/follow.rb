@@ -14,7 +14,7 @@ class Notification::Follow < Notification::Base
   end
   
   def notify_hash
-    return if self.follower.blank?
+    return {} if self.follower.blank?
     {
       title: [self.follower.login, '关注了你'].join(' '),
       content: '',

@@ -174,5 +174,21 @@ describe Topic, :type => :model do
       end
     end
   end
+  
+  describe '#notify_topic_created' do
+    let(:followers) { Factory.create_list(:user, 3) }
+    let(:topic) { Factory(:topic, user: user) }
+    
+    it 'should work' do
+      followers.each do |f|
+        f.follow_user(user)
+      end
+      
+      Topic.notify_topic_created(topic.id)
+      followers.each do |f|
+        expect(f.notifications.unread.where(:_type => 'Notification::Topic').count).to eq 1 
+      end
+    end
+  end
 
 end

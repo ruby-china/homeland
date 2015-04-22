@@ -1,0 +1,25 @@
+<% topic = notification.topic %>
+<% if topic.blank? %>
+  <div class="media-body">相关信息已删除</div>
+<% else %>
+  <div class="media-left avatar">
+    <%= user_avatar_tag(topic.user, :normal) %>
+  </div>
+  <div class="media-body">
+    <div class="media-heading">
+      <span class="user">
+        <%= user_name_tag(topic.user) %>
+      </span>
+      <span class="info">创建了帖子 <%= topic_title_tag(topic) %></span>
+      <% if !notification.read? %>
+        <span class="new label label-warning">新</span>
+      <% end %>
+      <span class="date pull-right"><i class="fa fa-clock-o"></i> <%= timeago(notification.created_at) %></span>
+    </div>
+    <%- if topic.present? -%>
+      <div class="summary markdown">
+        <%= sanitize_markdown topic.body_html %>
+      </div>
+    <%- end -%>
+  </div>
+<% end %>

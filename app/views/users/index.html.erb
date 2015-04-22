@@ -4,13 +4,8 @@
       <strong><%= t("users.hot_users") %></strong>
       <div class="pull-right"><%= t("users.current_have") %> <%= @total_user_count %> <%= t("users.users_joined") %> <%= Setting.app_name %></div>
     </div>
-    <div class="panel-body row">
-      <% @active_users.each do |item| %>
-      <div class="user col-sm-1">
-        <div class="avatar"><%= user_avatar_tag(item) %></div>
-        <div class="name"><%= user_name_tag(item) %></div>
-      </div>
-      <% end %>
+    <div class="panel-body">
+      <%= render "user_list", users: @active_users, columns: 4 %>
     </div>
   </div>
 </div>

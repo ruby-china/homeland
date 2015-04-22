@@ -347,7 +347,7 @@ class User
   end
 
   def github_repositories_cache_key
-    "github_repositories:#{self.github}+14+v2"
+    "github_repositories:#{self.github}+10+v3"
   end
 
   def self.fetch_github_repositories(user_id)
@@ -356,9 +356,10 @@ class User
     
     github_login = user.github || user.login
 
+    url = "https://api.github.com/users/#{github_login}/repos?type=owner&sort=pushed&client_id=#{Setting.github_token}&client_secret=#{Setting.github_secret}"
     begin
       json = Timeout::timeout(5) do
-        open("https://api.github.com/users/#{github_login}/repos?type=owner&sort=pushed&client_id=#{Setting.github_token}&client_secret=#{Setting.github_secret}").read
+        open(url).read
       end
     rescue => e
       Rails.logger.error("GitHub Repositiory fetch Error: #{e}")
@@ -373,10 +374,11 @@ class User
         name: a1["name"],
         url: a1["html_url"],
         watchers: a1["watchers"],
+        language: a1["language"],
         description: a1["description"]
       }
     end
-    items = items.sort { |a1,a2| a2[:watchers] <=> a1[:watchers] }.take(14)
+    items = items.sort { |a1,a2| a2[:watchers] <=> a1[:watchers] }.take(10)
     Rails.cache.write(user.github_repositories_cache_key, items, expires_in: 15.days)
     items
   end

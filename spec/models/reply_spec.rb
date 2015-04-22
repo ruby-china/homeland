@@ -65,13 +65,25 @@ describe Reply, :type => :model do
     end
     
 
-    it "should send_topic_reply_notification work" do
-      topic = Factory :topic, :user => user
-      reply = Factory :reply, :topic => topic
-      expect do
-        Reply.send_topic_reply_notification(reply.id)
-      end.to change(user.notifications.unread.where(:_type => 'Notification::TopicReply'), :count).by(1)
+    describe 'Send reply notification' do
+      let(:followers) { Factory.create_list(:user, 3) }
+      let(:replyer) { Factory :user }
+      
+      it "should send_topic_reply_notification work" do
+        followers.each do |f|
+          f.follow_user(replyer)
+        end
+        topic = Factory :topic, :user => user
+        reply = Factory :reply, :topic => topic, user: replyer
+        expect do
+          Reply.send_topic_reply_notification(reply.id)
+        end.to change(user.notifications.unread.where(:_type => 'Notification::TopicReply'), :count).by(1)
+        followers.each do |f|
+          expect(f.notifications.unread.where(:_type => 'Notification::TopicReply').count).to eq 1 
+        end
+      end
     end
+    
   end
 
   describe "format body" do

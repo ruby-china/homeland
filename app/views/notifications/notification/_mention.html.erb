@@ -14,9 +14,7 @@
       <span class="user">
         <%= user_name_tag(reply.user) %>
       </span>
-      在
-      <%= topic_title_tag(topic) %>
-      提及你：
+      <span class="info">在 <%= topic_title_tag(topic) %> 提及你：</span>
       <span class="date pull-right"><i class="fa fa-clock-o"></i> <%= timeago(notification.created_at) %></span>
       
       <% if !notification.read? %>

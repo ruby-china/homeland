@@ -4,10 +4,6 @@
 <% else %>
   <%
     topic = reply.topic
-    action_label = ""
-    if !owner?(topic)
-      action_label = "关注"
-    end
   %>
   <div class="media-left avatar">
     <%= user_avatar_tag(reply.user, :normal) %>
@@ -17,8 +13,8 @@
       <span class="user">
         <%= user_name_tag(reply.user) %>
       </span>
-      回复了你<%= action_label %>的主题：
-      <%= topic_title_tag(topic) %>
+      <span class="info">在帖子
+      <%= topic_title_tag(topic) %> 回复了：</span>
       <% if !notification.read? %>
         <span class="new label label-warning">新</span>
       <% end %>

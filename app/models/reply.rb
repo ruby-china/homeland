@@ -74,9 +74,12 @@ class Reply
       Notification::TopicReply.create user_id: topic.user_id, reply_id: reply.id
       notified_user_ids << topic.user_id
     end
+    
+    follower_ids = topic.follower_ids + (reply.user.try(:follower_ids) || [])
+    follower_ids.uniq!
 
     # 给关注者发通知
-    topic.follower_ids.each do |uid|
+    follower_ids.each do |uid|
       # 排除同一个回复过程中已经提醒过的人
       next if notified_user_ids.include?(uid)
       # 排除回帖人

@@ -128,10 +128,11 @@ module UsersHelper
     opts[:class] ||= "btn btn-primary btn-block"
     class_names = "button-follow-user #{opts[:class]}"
     icon = '<i class="fa fa-user"></i>'
+    login = user.login.downcase
     if followed
-      link_to raw("#{icon} <span>取消关注</span>"), '#', 'data-id' => user.login, class: "#{class_names} active"
+      link_to raw("#{icon} <span>取消关注</span>"), '#', 'data-id' => login, class: "#{class_names} active"
     else
-      link_to raw("#{icon} <span>关注</span>"), '#', title: "", 'data-id' => user.login, class: class_names
+      link_to raw("#{icon} <span>关注</span>"), '#', title: "", 'data-id' => login, class: class_names
     end
   end
 

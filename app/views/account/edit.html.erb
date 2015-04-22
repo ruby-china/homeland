@@ -95,7 +95,7 @@
           <input id="private_token" class="form-control" value="<%= @user.private_token %>" readonly="readonly">
         </div>
         <div class="buttons">
-          <a href="#" class="btn btn-warning" id="update_private_token">更换一个</a> <span class="help-inline">用于三方应用验证</span>
+          <a href="#" class="btn btn-default btn-sm" id="update_private_token">更换一个</a> <span class="help-inline">用于三方应用验证</span>
         </div>
       </div>
     </div>
@@ -108,7 +108,7 @@
         <div class="form-group">
           <%= f.password_field :current_password, class: "form-control", placeholder: "要删除账号，请输入你的密码" %>
         </div>
-        <%= f.submit "确定删除我的账号", :class => "btn btn-danger", 'data-disable-with' => t("common.submitting") %>
+        <%= f.submit "确定删除我的账号", :class => "btn btn-danger btn-sm btn-block", 'data-disable-with' => t("common.submitting") %>
         <% end %>
       </div>
     </div>

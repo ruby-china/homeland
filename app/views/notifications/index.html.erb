@@ -1,6 +1,6 @@
 <div id="notifications" class="panel panel-default">
   <div class="tools panel-heading">
-    <%= link_to t("common.clear"), clear_notifications_path, class: 'btn btn-danger', method: :post, 'data-disable-with' => '清空中...' %>
+    <%= link_to icon_tag("fa fa-trash", label: "清空"), clear_notifications_path, class: 'btn btn-danger', method: :post, 'data-disable-with' => '清空中...' %>
     <div class="pull-right"><h4>通知提醒</h4></div>
   </div>
   <% if @notifications.blank? %>

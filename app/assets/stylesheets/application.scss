@@ -188,7 +188,7 @@ a { color: $blue; }
 .navbar-btn:hover { background: rgba(255,255,255, 0.15); color: $blueText;}
 
 .label { font-weight: normal; border-radius: 2px; padding: 2px 4px;}
-.label-default { background: $grayLabel; }
+.label-default { background: $grayLabel; color: $grayLabelText;}
 .label-primary { background: $blue; }
 .label-warning { background: $yellowLabel; color: $yellowLabelText; }
 .label-info { background: $blueLabel; color: $blueLabelText; }

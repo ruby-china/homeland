@@ -33,7 +33,7 @@ describe Reply, :type => :model do
     describe "should send topic reply notification to followers" do
       let(:u1) { FactoryGirl.create(:user) }
       let(:u2) { FactoryGirl.create(:user) }
-      let(:t) { FactoryGirl.create(:topic, :follower_ids => [u1.id,u2.id]) }
+      let!(:t) { FactoryGirl.create(:topic, :follower_ids => [u1.id,u2.id]) }
 
       # 正常状况
       it "should work" do
@@ -66,17 +66,17 @@ describe Reply, :type => :model do
     
 
     describe 'Send reply notification' do
-      let(:followers) { Factory.create_list(:user, 3) }
+      let(:followers) { FactoryGirl.create_list(:user, 3) }
       let(:replyer) { Factory :user }
       
-      it "should send_topic_reply_notification work" do
+      it "should notify_reply_created work" do
         followers.each do |f|
           f.follow_user(replyer)
         end
         topic = Factory :topic, :user => user
         reply = Factory :reply, :topic => topic, user: replyer
         expect do
-          Reply.send_topic_reply_notification(reply.id)
+          Reply.notify_reply_created(reply.id)
         end.to change(user.notifications.unread.where(:_type => 'Notification::TopicReply'), :count).by(1)
         followers.each do |f|
           expect(f.notifications.unread.where(:_type => 'Notification::TopicReply').count).to eq 1 

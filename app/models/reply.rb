@@ -54,14 +54,14 @@ class Reply
 
 
   after_create do
-    Reply.delay.send_topic_reply_notification(self.id)
+    Reply.delay.notify_reply_created(self.id)
   end
 
   def self.per_page
     50
   end
 
-  def self.send_topic_reply_notification(reply_id)
+  def self.notify_reply_created(reply_id)
     reply = Reply.find_by_id(reply_id)
     return if reply.blank?
     topic = Topic.find_by_id(reply.topic_id)

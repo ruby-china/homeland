@@ -176,7 +176,7 @@ describe Topic, :type => :model do
   end
   
   describe '#notify_topic_created' do
-    let(:followers) { Factory.create_list(:user, 3) }
+    let(:followers) { FactoryGirl.create_list(:user, 3) }
     let(:topic) { Factory(:topic, user: user) }
     
     it 'should work' do

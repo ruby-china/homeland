@@ -1,6 +1,6 @@
 <% cache(["sidebar_for_node_recent_topics", topic.node_id, Time.now.strftime("%Y-%m-%d %H")]) do %>
   <%
-  limit = [[topic.replies_count, 1].max, 20].min
+  limit = [[topic.replies_count, 1].max, 10].min
   topics = Topic.where(node_id: topic.node_id).recent.not_in(id: [topic.id]).limit(limit)
   %>
 

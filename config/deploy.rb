@@ -35,23 +35,6 @@ namespace :sidekiq do
   end
 end
 
-namespace :faye do
-  desc "Start Faye"
-  task :start, roles: :app do
-    run "cd #{deploy_to}/current/faye_server; bundle exec thin start -C thin.yml"
-  end
-
-  desc "Stop Faye"
-  task :stop, roles: :app do
-    run "cd #{deploy_to}/current/faye_server; bundle exec thin stop -C thin.yml"
-  end
-
-  desc "Restart Faye"
-  task :restart, roles: :app do
-    run "cd #{deploy_to}/current/faye_server; bundle exec thin restart -C  thin.yml"
-  end
-end
-
 task :init_shared_path, roles: :web do
   run "mkdir -p #{deploy_to}/shared/log"
   run "mkdir -p #{deploy_to}/shared/pids"
@@ -62,7 +45,6 @@ task :link_shared_files, roles: :web do
   run "ln -sf #{shared_path}/assets #{deploy_to}/current/public/assets"
   run "ln -sf #{deploy_to}/shared/config/*.yml #{deploy_to}/current/config/"
   run "ln -sf #{deploy_to}/shared/config/initializers/secret_token.rb #{deploy_to}/current/config/initializers"
-  run "ln -sf #{deploy_to}/shared/config/faye_thin.yml #{deploy_to}/current/faye_server/thin.yml"
   run "ln -sf #{shared_path}/pids #{deploy_to}/current/tmp/"
 end
 

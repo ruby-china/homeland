@@ -96,9 +96,12 @@ class UsersController < ApplicationController
   end
   
   def followers
+    @users = @user.followers.paginate(page: params[:page], per_page: 60)
   end
   
   def following
+    @users = @user.following.paginate(page: params[:page], per_page: 60)
+    render "followers"
   end
 
   protected

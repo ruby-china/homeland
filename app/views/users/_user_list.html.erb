@@ -1,0 +1,17 @@
+<% users.each_slice(3) do |sub_users| %>
+  <div class="row">
+    <% sub_users.each do |user| %>
+    <div class="col-sm-4">
+      <div class="media user-card">
+        <div class="media-left"><%= user_avatar_tag(user, :normal) %></div>
+        <div class="media-body">
+          <div class="media-heading"><%= user_name_tag(user) %></div>
+          <div class="infos">
+            <div class="item opts"><%= follow_user_tag(user, class: "") %></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+<% end %>

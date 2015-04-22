@@ -1,0 +1,15 @@
+<div class="row">
+    <div class="col-md-8">
+        <%= render "menu" %>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <%= render "user_list", users: @users %>
+            </div>
+            <div class="panel-footer">
+                <%= will_paginate @users %>
+            </div>
+        </div>
+    </div>
+    
+    <%= render "sidebar", user: @user %>
+</div>

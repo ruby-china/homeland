@@ -4,14 +4,7 @@
     <div class="panel bloced-users panel-default">
       <div class="panel-heading">已屏蔽的用户</div>
       <div class="panel-body">
-        <div class="row">
-          <% @blocked_users.each do |u| %>
-          <div class="col-sm-2 item">
-            <%= user_avatar_tag(u, :small) %>
-            <%= user_name_tag(u) %>
-          </div>
-          <% end %>
-        </div>
+        <%= render "user_list", users: @blocked_users %>
       </div>
       <div class="panel-footer">
         <%= will_paginate @blocked_users %>

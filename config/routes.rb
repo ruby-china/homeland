@@ -130,6 +130,10 @@ Rails.application.routes.draw do
       get :blocked
       post :block
       post :unblock
+      post :follow
+      post :unfollow
+      get :followers
+      get :following
     end
   end
 

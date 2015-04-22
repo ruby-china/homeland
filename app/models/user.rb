@@ -131,6 +131,11 @@ class User
     return "" if self.email.blank? or !self.email.match(/gmail\.com/)
     return "http://www.google.com/profiles/#{self.email.split("@").first}"
   end
+  
+  def fullname
+    return self.login if self.name.blank?
+    return "#{self.login} (#{self.name})"
+  end
 
   # 是否是管理员
   def admin?
@@ -309,6 +314,10 @@ class User
     self.pull(favorite_topic_ids: topic_id)
     true
   end
+  
+  def favorite_topics_count
+    self.favorite_topic_ids.size
+  end
 
   # 软删除
   # 只是把用户信息修改了
@@ -406,9 +415,22 @@ class User
     self.pull(blocked_user_ids: user_id)
   end
   
+  def followed?(user)
+    uid = user.is_a?(User) ? user.id : user
+    return self.following_ids.include?(uid)
+  end
+  
   def follow_user(user)
     return false if user.blank?
     self.following.push(user)
+  end
+  
+  def followers_count
+    self.follower_ids.count
+  end
+  
+  def following_count
+    self.following_ids.count
   end
   
   def unfollow_user(user)

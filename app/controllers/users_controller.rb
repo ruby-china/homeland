@@ -2,7 +2,9 @@
 require 'will_paginate/array'
 class UsersController < ApplicationController
   before_action :require_user, only: [:block, :unblock, :auth_unbind]
-  before_filter :find_user, only: [:show, :topics, :favorites, :notes, :block, :unblock, :blocked]
+  before_filter :find_user, only: [:show, :topics, :favorites, :notes, 
+                                   :block, :unblock, :blocked,
+                                   :follow, :unfollow, :followers, :following]
   caches_action :index, expires_in: 2.hours, layout: false
 
   def index
@@ -67,12 +69,12 @@ class UsersController < ApplicationController
 
   def block
     current_user.block_user(@user.id)
-    render json: { code: 1 }
+    render json: { code: 0 }
   end
 
   def unblock
     current_user.unblock_user(@user.id)
-    render json: { code: 1 }
+    render json: { code: 0 }
   end
 
   def blocked
@@ -81,6 +83,22 @@ class UsersController < ApplicationController
     end
 
     @blocked_users = User.where(:_id.in => current_user.blocked_user_ids).paginate(page: params[:page], per_page: 20)
+  end
+  
+  def follow
+    current_user.follow_user(@user)
+    render json: { code: 0, data: { followers_count: @user.followers_count } }
+  end
+  
+  def unfollow
+    current_user.unfollow_user(@user)
+    render json: { code: 0, data: { followers_count: @user.followers_count } }
+  end
+  
+  def followers
+  end
+  
+  def following
   end
 
   protected

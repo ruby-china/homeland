@@ -1,3 +1,5 @@
+@import "vars";
+
 .subnav {
   margin-bottom:-18px;
   .nav-tabs {
@@ -136,6 +138,28 @@ table.node-topics {
   .item {
     text-align: left; margin-bottom: 10px;
     .media-object { display: inline; }
+  }
+}
+
+.sidebar {
+  .profile {
+    .item { margin-bottom: 5px; }
+    .follow-info { 
+      border-top: 1px solid #f0f0f0;
+      text-align: center; margin-top: 15px; padding-top: 15px;
+      a { display:block; text-decoration: none; }
+      a.counter { 
+        font-size: 32px; color: $blue; 
+        &:hover { color: $blueLight; }
+      }
+      a.text {
+        color: #999;
+      }
+    }
+    .buttons { 
+      border-top: 1px solid #f0f0f0;
+      margin-top: 15px; padding-top: 15px; 
+    }
   }
 }
 

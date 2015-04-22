@@ -9,18 +9,7 @@
  *= require_self
  */
 
-$black: #222527;
-$blackLight: #9CA4A9;
-$gray: #F0F4F6;
-$grayDark: #EEF3F5;
-$red: #EB5424;
-$redLight: #F86334;
-$redDark: #CD3A14;
-$redText: #8B2523;
-$blueText: #A1C3EE;
-$blue: #356DD0;
-$blueLight: #317DDA;
-$blueDark: #0D54AB;
+@import "vars";
 
 @mixin clearfix() {
   &:before,
@@ -174,11 +163,17 @@ body {
 a { color: $blue; }
 
 .btn { border-radius: 3px; }
-.btn-default { background: #EBEDEE; border-color: #EBEDEE; }
+.btn-default:link,
+.btn-default:visited { background: #EBEDEE; border-color: #EBEDEE; }
 .btn-default:hover { background: $gray; border-color: $gray; }
-.btn-primary { background: $blue; border-color: $blue; color: #FFF; }
+.btn-default.active { background: $grayDark; border-color: $grayDark;}
+.btn-primary:link,
+.btn-primary:visited { background: $blue; border-color: $blue; color: #FFF; }
 .btn-primary:hover { background: $blueLight; border-color: $blueLight; }
-.btn-danger { background: $red; border-color: $red; }
+.btn-primary.active { background: $blueDark; border-color: $blueDark; }
+.btn-danger:link,
+.btn-danger:visited { background: $red; border-color: $red; }
+.btn-danger.active { background: $redDark; border-color: $redDark; }
 .btn-danger { background: $red; border-color: $red; }
 .navbar-btn { background: rgba(255,255,255, 0.1); color: $blueText; border:0px;}
 .navbar-btn:hover { background: rgba(255,255,255, 0.15); color: $blueText;}

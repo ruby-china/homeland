@@ -1,4 +1,48 @@
-<div class="sidebar col-md-3">
+<div class="sidebar col-md-4">
+  <div class="panel profile panel-default">
+    <div class="panel-body">
+      <div class="media">
+        <div class="avatar media-left">
+          <%= user_avatar_tag(@user,:big, link: false) %>
+        </div>
+        <div class="media-body">
+          <div class="item">
+            <%= @user.fullname %>
+            <span class="opts pull-right">
+              <% if admin? %>
+                <%= link_to icon_tag("pencil", label: "修改"), edit_cpanel_user_path(@user) %>
+              <% end %>
+            </span>
+          </div>
+          <div class="item">第 <%= @user.id %> 位<%= t("menu.users")%></div>
+          <div class="item badges"> <%= render_user_level_tag(@user) %> </div>
+        </div>
+      </div>
+      <div class="follow-info row">
+        <div class="col-sm-4 followers">
+          <%= link_to @user.followers_count, followers_user_path(@user.login), class: "counter" %>
+          <%= link_to "关注者", followers_user_path(@user.login), class: "text" %>
+        </div>
+        <div class="col-sm-4 following">
+          <%= link_to @user.following_count, following_user_path(@user.login), class: "counter" %>
+          <%= link_to "正在关注", following_user_path(@user.login), class: "text" %>
+        </div>
+        <div class="col-sm-4 stars">
+          <%= link_to @user.favorite_topics_count, favorites_user_path(@user.login), class: "counter" %>
+          <%= link_to "收藏", favorites_user_path(@user.login), class: "text" %>
+        </div>
+      </div>
+      <div class="buttons row">
+        <div class="col-sm-6">
+          <%= follow_user_tag(@user) %>
+        </div>
+        
+        <div class="col-sm-6">
+          <%= block_user_tag(@user) %>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="panel panel-default" id="user_github_repos">
     <% if not user.github.blank? %>
       <div class="panel-heading">GitHub Public Repos</div>

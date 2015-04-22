@@ -328,6 +328,10 @@ describe User, :type => :model do
       expect(u1.following_ids).to eq [u2.id,u3.id]
       expect(u2.follower_ids).to eq [u1.id]
       expect(u3.follower_ids).to eq [u1.id]
+      # followed?
+      expect(u1.followed?(u2)).to eq true
+      expect(u1.followed?(u2.id)).to eq true
+      expect(u2.followed?(u1)).to eq false
       # Follow again will not duplicate
       u1.follow_user(u2)
       expect(u1.following_ids).to eq [u2.id,u3.id]

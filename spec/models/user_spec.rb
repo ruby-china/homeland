@@ -316,4 +316,27 @@ describe User, :type => :model do
       expect(user.blocked_user_ids).to eq [1]
     end
   end
+  
+  describe '.follow_user' do
+    let(:u1) { Factory :user }
+    let(:u2) { Factory :user }
+    let(:u3) { Factory :user }
+    
+    it 'should work' do
+      u1.follow_user(u2)
+      u1.follow_user(u3)
+      expect(u1.following_ids).to eq [u2.id,u3.id]
+      expect(u2.follower_ids).to eq [u1.id]
+      expect(u3.follower_ids).to eq [u1.id]
+      # Follow again will not duplicate
+      u1.follow_user(u2)
+      expect(u1.following_ids).to eq [u2.id,u3.id]
+      expect(u2.follower_ids).to eq [u1.id]
+      
+      # Unfollow
+      u1.unfollow_user(u3)
+      expect(u1.following_ids).to eq [u2.id]
+      expect(u3.follower_ids).to eq []
+    end
+  end
 end

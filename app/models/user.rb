@@ -91,7 +91,6 @@ class User
                               length: {:in => 3..20}, presence: true,
                               uniqueness: {case_sensitive: false}
 
-  has_and_belongs_to_many :following_nodes, class_name: 'Node', inverse_of: :followers
   has_and_belongs_to_many :following, class_name: 'User', inverse_of: :followers
   has_and_belongs_to_many :followers, class_name: 'User', inverse_of: :following
 
@@ -405,5 +404,15 @@ class User
   def unblock_user(user_id)
     user_id = user_id.to_i
     self.pull(blocked_user_ids: user_id)
+  end
+  
+  def follow_user(user)
+    return false if user.blank?
+    self.following.push(user)
+  end
+  
+  def unfollow_user(user)
+    return false if user.blank?
+    self.following.delete(user)
   end
 end

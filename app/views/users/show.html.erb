@@ -1,4 +1,6 @@
 <div class="row">
+  <%= render "sidebar", user: @user %>
+  
   <div class="col-md-8">
     <%= render "menu" %>
     <%= render "info" %>
@@ -33,5 +35,5 @@
       </div>
     </div>
   </div>
-  <%= render "sidebar", user: @user %>
+  
 </div>

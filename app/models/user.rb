@@ -337,7 +337,6 @@ class User
 
   # GitHub 项目
   def github_repositories
-    return [] if self.github.blank?
     cache_key = self.github_repositories_cache_key
     items = Rails.cache.read(cache_key)
     if items == nil
@@ -354,10 +353,12 @@ class User
   def self.fetch_github_repositories(user_id)
     user = User.find_by_id(user_id)
     return false if user.blank?
+    
+    github_login = user.github || user.login
 
     begin
       json = Timeout::timeout(5) do
-        open("https://api.github.com/users/#{user.github}/repos?type=owner&sort=pushed&client_id=#{Setting.github_token}&client_secret=#{Setting.github_secret}").read
+        open("https://api.github.com/users/#{github_login}/repos?type=owner&sort=pushed&client_id=#{Setting.github_token}&client_secret=#{Setting.github_secret}").read
       end
     rescue => e
       Rails.logger.error("GitHub Repositiory fetch Error: #{e}")
@@ -377,6 +378,7 @@ class User
     end
     items = items.sort { |a1,a2| a2[:watchers] <=> a1[:watchers] }.take(14)
     Rails.cache.write(user.github_repositories_cache_key, items, expires_in: 15.days)
+    items
   end
 
   # 重新生成 Private Token

@@ -1,6 +1,6 @@
 # coding: utf-8
 require "bundler/capistrano"
-require "sidekiq/capistrano"
+require 'capistrano/sidekiq'
 require "rvm/capistrano"
 require 'puma/capistrano'
 
@@ -62,5 +62,3 @@ task :mongoid_migrate_database, roles: :web do
 end
 
 after "deploy:finalize_update","deploy:symlink", :init_shared_path, :link_shared_files, :mongoid_migrate_database , :compile_assets
-before "deploy:update_code", "sidekiq:quiet"
-after "deploy:update", "sidekiq:stop"

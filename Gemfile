@@ -100,6 +100,7 @@ gem 'rack-mini-profiler', require: false
 group :development, :test do
   gem 'capistrano', '2.9.0', require: false
   gem 'rvm-capistrano', require: false
+  gem 'capistrano-sidekiq'
   gem 'rspec-rails', '~> 3.1'
   gem 'factory_girl_rails', '1.4.0'
   gem 'database_cleaner'

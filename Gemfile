@@ -46,12 +46,12 @@ gem 'omniauth-github', '~> 1.1.0'
 # permission
 gem 'cancancan', '~> 1.8.4'
 
-gem 'hiredis', '~> 0.4.5'
+gem 'redis', '~> 3.2.1'
+gem "hiredis", "~> 0.6.0"
 # Redis 命名空间
-gem 'redis-namespace','~> 1.3.1'
-
+gem 'redis-namespace','~> 1.5.1'
 # 将一些数据存放入 Redis
-gem 'redis-objects', '0.9.1'
+gem 'redis-objects', '1.1.0'
 
 # Markdown 格式 & 文本处理
 gem 'redcarpet', '~> 3.2.3'

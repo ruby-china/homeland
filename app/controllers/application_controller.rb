@@ -14,6 +14,10 @@ class ApplicationController < ActionController::Base
       devise_parameter_sanitizer.for(:account_update) { |u| u.permit(*User::ACCESSABLE_ATTRS) }
       devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(*User::ACCESSABLE_ATTRS) }
     end
+    
+    if current_user && current_user.admin?
+      Rack::MiniProfiler.authorize_request
+    end
 
     # hit unread_notify_count
     unread_notify_count

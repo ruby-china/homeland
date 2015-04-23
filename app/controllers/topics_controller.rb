@@ -11,7 +11,7 @@ class TopicsController < ApplicationController
     end
 
     Rack::MiniProfiler.step("find_topics") do
-      @topics = Topic.last_actived.without_hide_nodes.where(:_id.nin => @suggest_topic_ids)
+      @topics = Topic.last_actived.where(:_id.nin => @suggest_topic_ids)
       if current_user
         @topics = @topics.without_nodes(current_user.blocked_node_ids)
         @topics = @topics.without_users(current_user.blocked_user_ids)

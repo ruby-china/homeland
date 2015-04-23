@@ -82,7 +82,9 @@ class Topic
   end
 
   def self.without_nodes(node_ids)
-    where(:node_id.nin => node_ids)
+    ids = node_ids + self.topic_index_hide_node_ids
+    ids.uniq!
+    where(:node_id.nin => ids)
   end
 
   def self.without_users(user_ids)

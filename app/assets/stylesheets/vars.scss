@@ -31,3 +31,57 @@ $greenLight: #3BD54E;
 $greenDark: #39B618;
 $greenLabel: #81D573;
 $greenLabelText: #1B8909;
+
+
+/* Animations */
+.animated { 
+    -webkit-animation-duration: 0.5s; 
+    animation-duration: 0.5s; 
+    -webkit-animation-fill-mode: both; 
+    animation-fill-mode: both; 
+} 
+
+@-webkit-keyframes bounceIn { 
+    0% { 
+        opacity: 0; 
+        -webkit-transform: scale(.5); 
+    } 
+
+    50% { 
+        opacity: 1; 
+        -webkit-transform: scale(1.5); 
+    } 
+
+    70% { 
+        -webkit-transform: scale(.9); 
+    } 
+
+    100% { 
+         -webkit-transform: scale(1); 
+    } 
+} 
+
+@keyframes bounceIn { 
+    0% { 
+        opacity: 0; 
+        transform: scale(.5); 
+    } 
+
+    50% { 
+        opacity: 1; 
+        transform: scale(1.5); 
+    } 
+
+    70% { 
+        transform: scale(.9); 
+    } 
+
+    100% { 
+        transform: scale(1); 
+    } 
+} 
+
+.bounceIn { 
+    -webkit-animation-name: bounceIn; 
+    animation-name: bounceIn; 
+}

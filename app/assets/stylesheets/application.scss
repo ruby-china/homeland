@@ -402,7 +402,6 @@ img.emoji { width:20px; height:20px; }
   color: $red;
 }
 .notification-count {
-  position: relative;
   .count { margin-left: 4px; display: none; font-size: 12px;}
   .new {
     color: $redLight !important;
@@ -412,8 +411,10 @@ img.emoji { width:20px; height:20px; }
 .deleted { text-decoration: line-through; color: $grayDark; }
 .no-result { color: #aaa; padding-bottom: 20px; text-align: center;}
 
-a.followed {
+a.followed {  
   .fa {
+    @extend .animated;
+    @extend .bounceIn;
     color: $red;
   }
 }

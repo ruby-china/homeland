@@ -85,8 +85,9 @@ class User
   end
 
   attr_accessor :password_confirmation
+  
   ACCESSABLE_ATTRS = [:name, :email_public, :location, :company, :bio, :website, :github, :twitter, :tagline, :avatar, :by, :current_password, :password, :password_confirmation]
-
+  
   validates :login, format: { with: ALLOW_LOGIN_CHARS_REGEXP, message: '只允许数字、大小写字母和下划线'},
                               length: {:in => 3..20}, presence: true,
                               uniqueness: {case_sensitive: false}
@@ -95,6 +96,10 @@ class User
   has_and_belongs_to_many :followers, class_name: 'User', inverse_of: :following
 
   scope :hot, -> { desc(:replies_count, :topics_count) }
+  scope :fields_for_list, -> { 
+    only(:_id, :name, :login, :email, :email_md5, :email_public, :avatar, :verified, :state, :guest, 
+            :tagline, :github, :website, :location, :location_id, :twitter, :co) 
+  }
 
   def email=(val)
     self.email_md5 = Digest::MD5.hexdigest(val || "")

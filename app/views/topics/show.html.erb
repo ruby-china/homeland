@@ -21,7 +21,7 @@
 
       <div class="panel-body markdown">
         <%= raw SiteConfig.before_topic_html %>
-        <%= sanitize_markdown @topic.body_html %>
+        <%= raw @topic.body_html %>
 
 
         <%= raw SiteConfig.after_topic_html %>

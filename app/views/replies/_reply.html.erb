@@ -26,7 +26,7 @@
         </span>
       </div>
       <div class="markdown<%= ' deleted' if reply.deleted? %>">
-        <%= sanitize_markdown reply.body_html %>
+        <%= raw reply.body_html %>
       </div>
     </div>
   <% end %>

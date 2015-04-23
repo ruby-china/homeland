@@ -22,7 +22,7 @@
     </div>
     <%- if reply.present? -%>
       <div class="summary markdown">
-        <%= sanitize_markdown reply.body_html %>
+        <%= raw reply.body_html %>
       </div>
     <%- end -%>
   </div>

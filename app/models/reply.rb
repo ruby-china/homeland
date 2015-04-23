@@ -39,7 +39,7 @@ class Reply
 
   after_save :update_parent_topic
   def update_parent_topic
-    topic.update_last_reply(self)
+    topic.update_last_reply(self) if self.topic.present?
   end
 
   # 删除的时候也要更新 Topic 的 updated_at 以便清理缓存

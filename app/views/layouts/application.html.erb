@@ -20,14 +20,14 @@
   <meta charset='utf-8' />
   <meta name="keywords" content="<%= @meta_keywords %>" />
   <meta name="description" content="<%= @meta_description %>" />
-  <%= stylesheet_link_tag "front", "data-turbolinks-track" => true %>
   <meta name="apple-mobile-web-app-capable" content="no">
   <meta content='True' name='HandheldFriendly' />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-  <link rel="apple-touch-icon-precomposed" href="<%= asset_path("ios-icon.png") %>" />
-  <link rel="shortcut icon" href="<%= asset_path("big_logo.png") %>" />
-  <%= auto_discovery_link_tag(:rss, feed_topics_url, title: '订阅最新帖') %>
-  <%= javascript_include_tag "app", "data-turbolinks-track" => true %>
+  <link rel="apple-touch-icon-precomposed" href="<%= cached_asset_path("ios-icon.png") %>" />
+  <link rel="shortcut icon" href="<%= cached_asset_path("big_logo.png") %>" />
+  <link rel="alternate" type="application/rss+xml" title="订阅最新帖" href="<%= feed_topics_url %>" />
+  <%= stylesheet_link_tag_with_cached "front" %>
+  <%= javascript_include_tag_with_cached "app" %>
   <%= csrf_meta_tag %>
   <%= yield :node_feed_link %>
   <%= raw SiteConfig.custom_head_html %>

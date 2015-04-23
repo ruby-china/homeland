@@ -1,8 +1,13 @@
 # coding: utf-8
 require "redcarpet"
+
+
+
 module ApplicationHelper
   ALLOW_TAGS = %w(p br img h1 h2 h3 h4 h5 h6 blockquote pre code b i strong em table tr td tbody th strike del u a ul ol li span hr)
   ALLOW_ATTRIBUTES = %w(href src class title alt target rel data-floor)
+  $html_cache = {}
+  
   def sanitize_markdown(body)
     # TODO: This method slow, 3.5ms per call in topic body
     sanitize body, tags: ALLOW_TAGS, attributes: ALLOW_ATTRIBUTES
@@ -152,5 +157,35 @@ module ApplicationHelper
       label = %(<span>#{opts[:label]}</span>)
     end
     raw "<i class='fa fa-#{name}'></i> #{label}"
+  end
+  
+  def fetch_cache_html(*keys)
+    cache_key = keys.join("/")
+    if controller.perform_caching && (html = $html_cache[cache_key])
+      return html
+    else
+      html = yield
+      # logger.info "HTML CACHE Missed: #{cache_key}"
+      $html_cache[cache_key] = html
+    end
+    html
+  end
+
+  def stylesheet_link_tag_with_cached(name)
+    fetch_cache_html("stylesheets_link_tag",name) do
+      stylesheet_link_tag(name, 'data-turbolinks-track' => true)
+    end
+  end
+  
+  def javascript_include_tag_with_cached(name)
+    fetch_cache_html("javascript_include_tag", name) do
+      javascript_include_tag(name, 'data-turbolinks-track' => true)
+    end
+  end
+  
+  def cached_asset_path(name)
+    fetch_cache_html("asset_path", name) do
+      asset_path(name)
+    end
   end
 end

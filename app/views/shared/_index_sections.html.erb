@@ -3,7 +3,7 @@
   <div class="panel-heading"><%= t("common.index_node_navigation")%></div>
   <div class="panel-body">
     <div class="row node-list">
-      <% Section.all.each do |section| %>
+      <% Section.includes(:nodes).all.each do |section| %>
       <div class="node media">
         <label class="media-left"><%= section.name %></label>
         <span class="nodes media-body">

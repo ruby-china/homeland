@@ -57,7 +57,6 @@ gem 'redis-objects', '0.9.1'
 gem 'redcarpet', '~> 3.2.3'
 gem 'rouge', '~> 1.8.0'
 gem 'auto-space', '0.0.4'
-gem 'nokogiri', '1.6.5'
 
 # YAML 配置信息
 gem 'settingslogic', '~> 2.0.9'

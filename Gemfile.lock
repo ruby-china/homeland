@@ -411,7 +411,6 @@ DEPENDENCIES
   mongoid_rails_migrations (= 1.0.0)
   newrelic_moped
   newrelic_rpm
-  nokogiri (= 1.6.5)
   omniauth (~> 1.0.1)
   omniauth-github (~> 1.1.0)
   postmark (= 0.9.15)

@@ -159,7 +159,7 @@ describe 'markdown' do
           MD
         }
 
-        specify { expect(doc.search('pre').children[0].inner_html).to eq('@small_fish__') }
+        specify { expect(doc.search('pre code').children[0].inner_html).to eq('@small_fish__') }
       end
 
       context '@user in code' do
@@ -179,7 +179,7 @@ describe 'markdown' do
         }
 
         specify { expect(doc.css('a')).to be_empty }
-        specify { expect(doc.css('pre').inner_html).to eq("@user\n") }
+        specify { expect(doc.css('pre code').inner_html).to eq("@user") }
       end
 
       context '@var in coffeescript' do
@@ -251,7 +251,7 @@ describe 'markdown' do
         }
 
         specify { expect(doc.css('a')).to be_empty }
-        specify { expect(doc.css('pre').inner_html).to eq("#12f\n") }
+        specify { expect(doc.css('pre code').inner_html).to eq("#12f") }
       end
     end
 
@@ -313,7 +313,7 @@ describe 'markdown' do
         }
 
         specify { expect(doc.css('a')).to be_empty }
-        specify { expect(doc.css('pre').inner_html).to eq(":apple:\n") }
+        specify { expect(doc.css('pre code').inner_html).to eq(":apple:") }
       end
     end
 

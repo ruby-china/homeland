@@ -123,34 +123,34 @@ describe TopicsHelper, :type => :helper do
 
     it "should highlight code block" do
       expect(helper.format_topic_body("```ruby\nclass Hello\n\nend\n```")).to eq(
-        %(<pre class=\"highlight ruby\"><span class=\"k\">class</span> <span class=\"nc\">Hello</span>\n\n<span class=\"k\">end</span>\n</pre>)
+        %(<pre class=\"highlight ruby\"><code><span class=\"k\">class</span> <span class=\"nc\">Hello</span>\n\n<span class=\"k\">end</span></code></pre>)
       )
     end
 
     it "should be able to identigy Ruby or RUBY as ruby language" do
       ['Ruby', 'RUBY'].each do |lang|
         expect(helper.format_topic_body("```#{lang}\nclass Hello\nend\n```")).to eq(
-          %(<pre class=\"highlight ruby\"><span class=\"k\">class</span> <span class=\"nc\">Hello</span>\n<span class=\"k\">end</span>\n</pre>)
+          %(<pre class=\"highlight ruby\"><code><span class=\"k\">class</span> <span class=\"nc\">Hello</span>\n<span class=\"k\">end</span></code></pre>)
         )
       end
     end
 
     it "should highlight code block after the content" do
       expect(helper.format_topic_body("this code:\n```\ngem install rails\n```\n")).to eq(
-        %(<p>this code:</p>\n<pre class=\"highlight plaintext\">gem install rails\n</pre>)
+        %(<p>this code:</p>\n<pre class=\"highlight plaintext\"><code>gem install rails</code></pre>)
       )
     end
 
     it "should highlight code block without language" do
       expect(helper.format_topic_body("```\ngem install ruby\n```").gsub("\n",'')).to eq(
-        %(<pre class=\"highlight plaintext\">gem install ruby</pre>)
+        %(<pre class=\"highlight plaintext\"><code>gem install ruby</code></pre>)
       )
     end
 
     it "should not filter underscore" do
       expect(helper.format_topic_body("ruby_china_image `ruby_china_image`")).to eq("<p>ruby_china_image <code>ruby_china_image</code></p>")
       expect(helper.format_topic_body("```\nruby_china_image\n```")).to eq(
-        %(<pre class=\"highlight plaintext\">ruby_china_image\n</pre>)
+        %(<pre class=\"highlight plaintext\"><code>ruby_china_image</code></pre>)
       )
     end
   end

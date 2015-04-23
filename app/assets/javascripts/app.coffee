@@ -152,7 +152,7 @@ AppView = Backbone.View.extend
     btn = $(e.currentTarget)
     userId = btn.data("id")
     span = btn.find("span")
-    followerCounter = $(".follow-info .followers .counter")
+    followerCounter = $(".follow-info .followers[data-login=#{userId}] .counter")
     if btn.hasClass("active")
       $.ajax 
         url: "/#{userId}/unfollow"

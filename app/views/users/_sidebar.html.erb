@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="follow-info row">
-        <div class="col-sm-4 followers">
+        <div class="col-sm-4 followers" data-login="<%= @user.login %>">
           <%= link_to @user.followers_count, followers_user_path(@user.login), class: "counter" %>
           <%= link_to "关注者", followers_user_path(@user.login), class: "text" %>
         </div>

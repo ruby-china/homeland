@@ -25,6 +25,11 @@ module ApplicationHelper
 
     flash_messages.join("\n").html_safe
   end
+  
+  def render_page_title
+    title = @page_title ? "#{SITE_NAME} | #{@page_title}" : SITE_NAME rescue "SITE_NAME"
+    content_tag("title", title, nil, false)
+  end
 
   def controller_stylesheet_link_tag
     fname = ""
@@ -130,8 +135,9 @@ module ApplicationHelper
   end
 
   def birthday_tag
-    if Time.now.month == 10 && Time.now.day == 28
-      age = Time.now.year - 2011
+    t = Time.now
+    if t.month == 10 && t.day == 28
+      age = t.year - 2011
       title = "Ruby China 创立 #{age} 周年纪念日"
       html = []
       html << "<div style='text-align:center;margin-bottom:20px; line-height:200%;'>"
@@ -187,5 +193,20 @@ module ApplicationHelper
     fetch_cache_html("asset_path", name) do
       asset_path(name)
     end
+  end
+  
+  def render_list(opts = {})
+    list = []
+    yield(list)
+    items = []
+    list.each do |link|
+      item_class = ""
+      url = link.match(/href=(["'])(.*?)(\1)/)[2] rescue nil
+      if url && current_page?(url) || ( @current && @current.include?(url) )
+        item_class = "active"
+      end
+      items << content_tag("li", raw(link), class: item_class)
+    end
+    content_tag("ul", raw(items.join("")), opts)
   end
 end

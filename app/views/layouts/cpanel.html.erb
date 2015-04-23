@@ -36,15 +36,8 @@
             li << link_to(t("cpanel.menu.locations"),cpanel_locations_path )
             li << link_to(t("cpanel.menu.exception_logs"),cpanel_exception_logs_path )
           end  %>
-
-          <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown" id="user_menu">
-              <a href="#user_menu" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.login %> <b class='caret'></b></a>
-              <ul class="dropdown-menu">
-                <li><%= link_to("回到前台", root_path)%></li>
-              </ul>
-            </li>
-          </ul>
+          
+          <%= render "common/user_nav" %>
         </div>
       </div>
     </div>

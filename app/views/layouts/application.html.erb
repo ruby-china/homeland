@@ -29,7 +29,6 @@
   <%= stylesheet_link_tag_with_cached "front" %>
   <%= javascript_include_tag_with_cached "app" %>
   <%= csrf_meta_tag %>
-  <%= yield :node_feed_link %>
   <%= raw SiteConfig.custom_head_html %>
 </head>
 <body data-controller-name="<%= controller_name %>">

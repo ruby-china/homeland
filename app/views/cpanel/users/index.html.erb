@@ -12,12 +12,10 @@
 
 <table class="table table-bordered table-striped table-condensed">
   <tr class="head">
-    <td class="first">Id</td>
-        <td>Login</td>
-        <td>Email</td>
-    <td>Location</td>
-    <td>State</td>
-    <td>Verified</td>
+    <td class="first">#</td>
+    <td>Login</td>
+    <td>Email</td>
+    <td>JoinedAt</td>
     <td>操作</td>
   </tr>
 
@@ -26,9 +24,7 @@
     <td class="first"><%= user.id %></td>
     <td><%= user.login %></td>
     <td><%= user.email %></td>
-    <td><%= user.location %></td>
-    <td><%= user.state %></td>
-    <td><%= user.verified %></td>
+    <td><%= user.created_at.to_date %></td>
     <td>
       <%= link_to '', edit_cpanel_user_path(user), class: "fa fa-pencil" %>
     </td>

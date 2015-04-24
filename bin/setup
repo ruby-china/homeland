@@ -87,7 +87,7 @@ Dir.chdir APP_ROOT do
 
   # Config files
   puts_section "Configure" do
-    %w(config mongoid redis thin secrets).each do |fname|
+    %w(config mongoid redis secrets).each do |fname|
       system "cp config/#{fname}.yml.default config/#{fname}.yml"
     end
 

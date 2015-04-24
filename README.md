@@ -19,25 +19,50 @@ Status](https://secure.travis-ci.org/ruby-china/ruby-china.png?branch=master&.pn
 **Mac OS X, use Homebrew**
 
 ```bash
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-brew install memcached
-brew install redis
-brew install mongodb
-brew install imagemagick
+$ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+$ brew install memcached
+$ brew install redis
+$ brew install mongodb
+$ brew install imagemagick
 ```
 
 **Ubuntu***
 
 ```bash
-sudo apt-get install memcached mongodb redis-server imagemagick
+$ sudo apt-get install memcached mongodb redis-server imagemagick
 ```
 
 ```bash
-git clone https://github.com/ruby-china/ruby-china.git
-cd ruby-china
-./bin/setup
-# Ensure that memcached has started up
-rails s
+$ git clone https://github.com/ruby-china/ruby-china.git
+$ cd ruby-china
+$ ./bin/setup
+Checking Package Dependencies...
+--------------------------------------------------------------------------------
+MongoDB 2.0+                                                               [Yes]
+Redis 2.0+                                                                 [Yes]
+Memcached 1.4+                                                             [Yes]
+ImageMagick 6.5+                                                           [Yes]
+--------------------------------------------------------------------------------
+
+Installing dependencies
+--------------------------------------------------------------------------------
+The Gemfile's dependencies are satisfied
+--------------------------------------------------------------------------------
+
+Configure
+--------------------------------------------------------------------------------
+cp: config/thin.yml.default: No such file or directory
+Your MongoDB host (default: 127.0.0.1:27017): 
+Your Redis host (default: 127.0.0.1:6379):
+--------------------------------------------------------------------------------
+
+Seed default data...                                                      [Done]
+
+== Removing old logs and tempfiles ==
+
+Ruby China Successfully Installed.
+
+$ rails s
 ```
 
 ## Testing

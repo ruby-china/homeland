@@ -3,13 +3,15 @@
 
 require File.expand_path('../config/application', __FILE__)
 require 'rake'
+require 'rubocop/rake_task'
 
 Rails.application.load_tasks
+RuboCop::RakeTask.new
 
 namespace :test do
-  desc "preparing config files..."
+  desc 'preparing config files...'
   task :prepare do
-    ["config","mongoid","redis"].each do |cfgfile|
+    %w(config mongoid redis).each do |cfgfile|
       system("cp config/#{cfgfile}.yml.default config/#{cfgfile}.yml") unless File.exist?("config/#{cfgfile}.yml")
     end
   end

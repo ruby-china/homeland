@@ -112,6 +112,7 @@ group :development, :test do
   gem 'colorize'
 
   gem 'jasmine-rails', '~> 0.10.2'
+  gem 'rubocop'
 end
 
 group :production do

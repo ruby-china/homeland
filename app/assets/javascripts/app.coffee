@@ -2,13 +2,13 @@
 #= require jquery_ujs
 #= require jquery.turbolinks.min
 #= require bootstrap.min
+#= require bootstrap-select.min
 #= require underscore
 #= require backbone
 #= require will_paginate
 #= require jquery.timeago
 #= require jquery.timeago.settings
 #= require jquery.hotkeys
-#= require jquery.chosen
 #= require jquery.autogrow-textarea
 #= require jquery.html5-fileupload
 #= require jquery.fluidbox.min
@@ -55,7 +55,7 @@ AppView = Backbone.View.extend
     $("abbr.timeago").timeago()
     $(".alert").alert()
     $('.dropdown-toggle').dropdown()
-    $("select").chosen()
+    $("select").selectpicker()
 
     # 绑定评论框 Ctrl+Enter 提交事件
     $(".cell_comments_new textarea").unbind "keydown"

@@ -13,9 +13,7 @@ end
 module RubyChina
   class Application < Rails::Application
     # Custom directories with classes and modules you want to be autoloadable.
-    config.autoload_paths += %W(#{config.root}/uploaders)
-    config.autoload_paths += %W(#{config.root}/lib)
-    config.autoload_paths += %W(#{config.root}/app/grape)
+    config.eager_load_paths += %W(#{config.root}/uploaders)
 
     config.time_zone = 'Beijing'
 

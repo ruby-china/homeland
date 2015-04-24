@@ -101,4 +101,16 @@ describe ApplicationHelper, :type => :helper do
       expect(helper.timeago(t, class: "foo")).to eq "<abbr class=\"foo timeago\" title=\"#{t.iso8601}\"></abbr>"
     end
   end
+  
+  describe 'memory_cache' do
+    it 'should work' do
+      allow($memory_store).to receive(:fetch).with(["foo","bar"]).and_return("bbb")
+      allow($memory_store).to receive(:fetch).with(["foo","dar"]).and_return("111")
+      allow(Rails.application.config).to receive(:cache_classes).and_return(false)
+      expect(helper.memory_cache("foo","bar") { "aaa" }).to eq "aaa"
+      allow(Rails.application.config).to receive(:cache_classes).and_return(true)
+      expect(helper.memory_cache("foo","bar") { "aaa" }).to eq "bbb"
+      expect(helper.memory_cache("foo","dar") { "ccc" }).to eq "111"
+    end
+  end
 end

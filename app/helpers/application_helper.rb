@@ -164,26 +164,26 @@ module ApplicationHelper
     raw "<i class='fa fa-#{name}'></i> #{label}"
   end
   
-  def fetch_cache_html(*keys)
+  def memory_cache(*keys)
     return yield if !Rails.application.config.cache_classes
     
     $memory_store.fetch(keys) { yield }
   end
 
   def stylesheet_link_tag_with_cached(name)
-    fetch_cache_html("stylesheets_link_tag",name) do
+    memory_cache("stylesheets_link_tag",name) do
       stylesheet_link_tag(name, 'data-turbolinks-track' => true)
     end
   end
   
   def javascript_include_tag_with_cached(name)
-    fetch_cache_html("javascript_include_tag", name) do
+    memory_cache("javascript_include_tag", name) do
       javascript_include_tag(name, 'data-turbolinks-track' => true)
     end
   end
   
   def cached_asset_path(name)
-    fetch_cache_html("asset_path", name) do
+    memory_cache("asset_path", name) do
       asset_path(name)
     end
   end

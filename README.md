@@ -13,43 +13,37 @@ Status](https://secure.travis-ci.org/ruby-china/ruby-china.png?branch=master&.pn
 * MongoDb 2.4.4 +
 * ImageMagick 6.5+
 
-## Install
+## Install in development
+
+
+**Mac OS X, use Homebrew**
 
 ```bash
-git clone git://github.com/ruby-china/ruby-china.git
-cd ruby-china
-./bin/setup
-# ensure that memcached has started up
-rails s
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew install memcached
+brew install redis
+brew install mongodb
+brew install imagemagick
 ```
 
-## Start Sidekiq service
+**Ubuntu***
 
 ```bash
-# Sidekiq
-# ensure that redis has started up
-bundle exec sidekiq -C config/sidekiq.yml
+sudo apt-get install memcached mongodb redis-server imagemagick
+```
+
+```bash
+git clone https://github.com/ruby-china/ruby-china.git
+cd ruby-china
+./bin/setup
+# Ensure that memcached has started up
+rails s
 ```
 
 ## Testing
 
 ```bash
 bundle exec rspec spec
-```
-
-to prepare all the config files and start essential services.
-
-## JavaScript Testing
-
-Open `/specs` in the browser to see the test result. For example, if your
-rails starts at `localhost:3000`, visit http://localhost:3000/specs
-
-### Headless Testing
-
-First install [PhantomJS](http://phantomjs.org/), then run following command:
-
-```bash
-RAILS_ENV=test bundle exec rake spec:javascript
 ```
 
 ## Contributors

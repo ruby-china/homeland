@@ -13,10 +13,6 @@ end
 module RubyChina
   class Application < Rails::Application
     # Custom directories with classes and modules you want to be autoloadable.
-    config.autoload_paths += %W(#{config.root}/uploaders)
-    config.autoload_paths += %W(#{config.root}/lib)
-    config.autoload_paths += %W(#{config.root}/app/grape)
-
     config.time_zone = 'Beijing'
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
@@ -46,19 +42,16 @@ module RubyChina
       end
     end
 
-    config.assets.paths << Rails.root.join("app", "assets", "fonts")
-
     config.cache_store = [:dalli_store,"127.0.0.1", { namespace: "rb-cn", compress: true }]
 
     config.middleware.insert 0, Rack::UTF8Sanitizer
   end
 end
 
-require "markdown"
-
 $memory_store = ActiveSupport::Cache::MemoryStore.new
 
 I18n.config.enforce_available_locales = false
 I18n.locale = 'zh-CN'
 
+require "markdown"
 # GC::Profiler.enable

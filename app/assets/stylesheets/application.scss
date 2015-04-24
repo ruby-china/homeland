@@ -312,23 +312,6 @@ form {
 }
 abbr[title] { border-bottom: 0px; cursor: text; }
 
-.chosen-container {
-  .chosen-single {
-    border-radius: 0px;
-    border:0px;
-    padding: 6px 0px 6px 4px;
-    height: 34px;
-    line-height: 24px;
-    border-bottom: 1px solid #D5DCE1;
-    div { top: 6px; }
-  }
-  .chosen-drop { box-shadow: 0 0 0 0;}
-  .chosen-results {
-    li.group-option {
-      &:hover { background-color: $blueLight; }
-    }
-  }
-}
 
 .panel {
   border: 0px;

@@ -1,4 +1,4 @@
-window.NodeView = Backbone.View.extend
+window.NoteView = Backbone.View.extend
   el: "body"
   events:
     "click .editor-toolbar .edit a": "toggleEditView"

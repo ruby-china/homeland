@@ -32,8 +32,6 @@ body {
   color: $black;
 }
 
-img { max-width: 100%; }
-
 .header {
   .navbar {
     background-color: #FFF;
@@ -677,6 +675,7 @@ a.followed {
   position:relative;
   line-height: 1.8em; font-size:14px; text-overflow: ellipsis; word-wrap: break-word;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  img { max-width: 100%; }
   p,
   pre,
   ul,

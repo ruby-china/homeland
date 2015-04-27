@@ -68,6 +68,6 @@ module TopicsHelper
     grouped_collection_select :topic, :node_id, Section.all, :sorted_nodes, :name, :id, :name,
                     { value: topic.node_id, prompt: "选择节点" }, 
                     { "data-width" => "140px", "data-live-search" => "true",
-                    class: "show-menu-arrow" }
+                    class: "show-menu-arrow form-control" }
   end
 end

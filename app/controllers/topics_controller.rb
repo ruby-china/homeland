@@ -120,6 +120,7 @@ class TopicsController < ApplicationController
     end
 
     set_seo_meta "#{t('topics.post_topic')} &raquo; #{t('menu.topics')}"
+    fresh_when last_modified: @topic.updated_at, etag: @topic
   end
 
   def edit

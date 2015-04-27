@@ -6,7 +6,7 @@
         <%= link_to(reply.topic.title, topic_path(reply.topic_id)) %>
         <span class="info">at <%= timeago(reply.created_at) %></span>
       </div>
-      <div class="body">
+      <div class="body markdown">
         <%= raw reply.body_html %>
       </div>
     </li>

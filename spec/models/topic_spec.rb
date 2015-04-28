@@ -190,5 +190,41 @@ describe Topic, :type => :model do
       end
     end
   end
+  
+  describe '#notify_topic_node_changed' do
+    let(:topic) { Factory(:topic, user: user) }
+    let(:new_node) { Factory(:node) }
+    
+    describe 'Call method' do
+      it 'should work' do
+        Topic.notify_topic_node_changed(topic.id, new_node.id)
+        last_notification = user.notifications.unread.where(_type: "Notification::NodeChanged").first
+        expect(last_notification.topic_id).to eq topic.id
+        expect(last_notification.node_id).to eq new_node.id
+      end
+    end
+    
+    describe 'on save callback' do
+      it 'with admin_editing no node_id changed' do
+        topic.admin_editing = true
+        expect(Topic).not_to receive(:notify_topic_node_changed)
+        topic.save
+      end
+      
+      it 'with admin_editing and node_id_changed' do
+        topic.admin_editing = true
+        topic.node_id = new_node.id
+        expect(Topic).to receive(:notify_topic_node_changed).once
+        topic.save
+      end
+      
+      it 'without admin_editing' do
+        topic.admin_editing = false
+        topic.node_id = new_node.id
+        topic.save
+        expect(Topic).not_to receive(:notify_topic_node_changed)
+      end
+    end
+  end
 
 end

@@ -151,6 +151,10 @@ class TopicsController < ApplicationController
 
   def update
     @topic = Topic.find(params[:id])
+    if current_user.admin?
+      @topic.admin_editing = true
+    end
+    
     if @topic.lock_node == false || current_user.admin?
       # 锁定接点的时候，只有管理员可以修改节点
       @topic.node_id = topic_params[:node_id]

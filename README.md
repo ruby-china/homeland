@@ -51,7 +51,6 @@ The Gemfile's dependencies are satisfied
 
 Configure
 --------------------------------------------------------------------------------
-cp: config/thin.yml.default: No such file or directory
 Your MongoDB host (default: 127.0.0.1:27017): 
 Your Redis host (default: 127.0.0.1:6379):
 --------------------------------------------------------------------------------

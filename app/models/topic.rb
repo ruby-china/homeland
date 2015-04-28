@@ -36,7 +36,7 @@ class Topic
   field :excellent, type: Integer, default: 0
 
   # 临时存储检测用户是否读过的结果
-  attr_accessor :read_state
+  attr_accessor :read_state, :admin_editing
 
   belongs_to :user, inverse_of: :topics
   counter_cache name: :user, inverse_of: :topics
@@ -102,6 +102,11 @@ class Topic
   before_save :auto_space_with_title
   def auto_space_with_title
     self.title.auto_space!
+  end
+  before_save do
+    if self.admin_editing == true && self.node_id_changed?
+      self.class.notify_topic_node_changed(self.id, self.node_id)
+    end
   end
 
   before_create :init_last_active_mark_on_create
@@ -194,5 +199,15 @@ class Topic
       Notification::Topic.create user_id: uid, topic_id: topic.id
     end
     true
+  end
+  
+  def self.notify_topic_node_changed(topic_id, node_id)
+    topic = Topic.find_by_id(topic_id)
+    return if topic.blank?
+    node = Node.find_by_id(node_id)
+    return if node.blank?
+    
+    Notification::NodeChanged.create user_id: topic.user_id, topic_id: topic_id, node_id: node_id
+    return true
   end
 end

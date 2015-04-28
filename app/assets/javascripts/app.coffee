@@ -55,6 +55,7 @@ AppView = Backbone.View.extend
     $("abbr.timeago").timeago()
     $(".alert").alert()
     $('.dropdown-toggle').dropdown()
+    $('.bootstrap-select').remove()
     $("select").selectpicker()
 
     # 绑定评论框 Ctrl+Enter 提交事件

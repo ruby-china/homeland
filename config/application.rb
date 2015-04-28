@@ -14,6 +14,15 @@ module RubyChina
   class Application < Rails::Application
     # Custom directories with classes and modules you want to be autoloadable.
     config.time_zone = 'Beijing'
+    
+    # Ensure App config files exist.
+    if Rails.env.development?
+      %W(config redis mongoid secrets).each do |fname|
+        filename = "config/#{fname}.yml"
+        next if File.exist?(Rails.root.join(filename))
+        FileUtils.cp(Rails.root.join("#{filename}.default"), Rails.root.join(filename))
+      end
+    end
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]

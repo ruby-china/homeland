@@ -1,6 +1,6 @@
 defaults: &defaults
-  host: SETUP_REDIS_HOST
-  port: SETUP_REDIS_PORT
+  host: 127.0.0.1
+  port: 6379
 development:
   <<: *defaults
 test:

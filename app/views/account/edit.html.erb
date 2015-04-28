@@ -79,8 +79,8 @@
         <% ["github"].each do |provider| %>
         <li class="list-group-item">
           <% if @user.bind? provider %>
-          <%= link_to(t("omniauth.#{provider}"), "/account/auth/#{provider}/unbind", rel: "twitsy", title: "点击解除绑定", method: 'delete' )%>
-          <span class="label success">已绑定</span>
+          <%= t("omniauth.#{provider}") %>
+          <%= link_to(raw('<i class="fa fa-remove"></i>'),"/account/auth/#{provider}/unbind", rel: "twitsy", title: "点击解除绑定", method: 'delete' )%>
           <% else %>
           <%= link_to(t("omniauth.#{provider}"), "/account/auth/#{provider}", rel: "twitsy", title: "点击绑定" )%>
           <% end %>

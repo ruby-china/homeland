@@ -40,7 +40,7 @@ gem 'devise-encryptable', '0.1.2'
 gem 'will_paginate', '3.0.7'
 
 # 三方平台 OAuth 验证登陆
-gem 'omniauth', '~> 1.0.1'
+gem 'omniauth', '~> 1.2.2'
 gem 'omniauth-github', '~> 1.1.0'
 
 # permission
@@ -112,6 +112,7 @@ group :development, :test do
   gem 'colorize'
 
   gem 'jasmine-rails', '~> 0.10.2'
+  gem 'derailed_benchmarks', github: "schneems/derailed_benchmarks"
 end
 
 group :production do

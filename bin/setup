@@ -94,13 +94,13 @@ Dir.chdir APP_ROOT do
     print "Your MongoDB host (default: 127.0.0.1:27017):"
     host = gets.strip
     host = "127.0.0.1:27017" if host == ""
-    replace_file('config/mongoid.yml','SETUP_DEVELOPMENT_HOST',host)
+    replace_file('config/mongoid.yml','127.0.0.1:27017',host)
 
     print "Your Redis host (default: 127.0.0.1:6379):"
     host = gets.strip
     host = "127.0.0.1:6379" if host == ""
-    replace_file('config/redis.yml','SETUP_REDIS_HOST',host.split(":")[0])
-    replace_file('config/redis.yml','SETUP_REDIS_PORT',host.split(":")[1])
+    replace_file('config/redis.yml','127.0.0.1',host.split(":")[0])
+    replace_file('config/redis.yml','6379',host.split(":")[1])
   end
 
   puts_line "Seed default data..." do

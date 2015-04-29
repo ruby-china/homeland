@@ -2,7 +2,7 @@
 class Cpanel::RepliesController < Cpanel::ApplicationController
 
   def index
-    @replies = Reply.unscoped.desc(:_id).paginate page: params[:page], per_page: 30
+    @replies = Reply.unscoped.desc(:_id).includes(:topic, :user).paginate page: params[:page], per_page: 30
   end
 
   def show

@@ -5,12 +5,12 @@
 
 <table class="table table-bordered table-striped table-condensed">
   <tr class="head">
-    <td class="first">ID</td>
-    <td style="width:300px">Title</td>
-    <td>Node</td>
-    <td>User</td>
-    <td>Replies</td>
-    <td>at</td>
+    <td class="first">#</td>
+    <td style="width:300px">标题</td>
+    <td>节点</td>
+    <td>发帖人</td>
+    <td>回帖</td>
+    <td>时间</td>
     <td style="width:100px"></td>
   </tr>
 
@@ -18,10 +18,10 @@
   <tr class="<%= 'deleted' if !topic.deleted_at.blank? %>">
     <td class="first"><%= topic.id %></td>
     <td>
-      <%= truncate(topic.title, length: 30) %>
+      <%= link_to truncate(topic.title, length: 30), topic, target: "_blank" %>
     </td>
-    <td><%= topic.node.name if topic.node %></td>
-    <td><%= topic.user.login if topic.user %></td>
+    <td><%= topic.node_name %></td>
+    <td><%= user_name_tag(topic.user) %></td>
     <td><%= topic.replies_count %></td>
     <td>
       <% if topic.deleted_at.blank? %>

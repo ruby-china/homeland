@@ -2,7 +2,7 @@
 class Cpanel::NodesController < Cpanel::ApplicationController
 
   def index
-    @nodes = Node.sorted
+    @nodes = Node.sorted.includes(:section)
   end
 
   def show

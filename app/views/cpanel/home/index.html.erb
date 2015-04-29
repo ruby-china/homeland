@@ -19,12 +19,12 @@
   <div class="col-sm-6">
     <h4><%= t("cpanel.statics") %></h4>
     <table class="table table-striped table-condensed">
-      <tr><td style="width:60px;"><%= t("cpanel.menu.users") %></td><td><%= User.count %> 人</td></tr>
-      <tr><td><%= t("cpanel.menu.topics") %></td><td><%= Topic.count %> 个</td></tr>
-      <tr><td><%= t("cpanel.menu.replies") %></td><td><%= Reply.count %> 条</td></tr>
-      <tr><td><%= t("cpanel.menu.notes") %></td><td><%= Note.count %> 条</td></tr>
-      <tr><td>通知</td><td><%= Notification::Base.count %> 条</td></tr>
-      <tr><td>图片</td><td><%= Photo.count %> 张</td></tr>
+      <tr><td style="width:60px;"><%= t("cpanel.menu.users") %></td><td><%= User.unscoped.count %> 人</td></tr>
+      <tr><td><%= t("cpanel.menu.topics") %></td><td><%= Topic.unscoped.count %> 个</td></tr>
+      <tr><td><%= t("cpanel.menu.replies") %></td><td><%= Reply.unscoped.count %> 条</td></tr>
+      <tr><td><%= t("cpanel.menu.notes") %></td><td><%= Note.unscoped.count %> 条</td></tr>
+      <tr><td>通知</td><td><%= Notification::Base.unscoped.count %> 条</td></tr>
+      <tr><td>图片</td><td><%= Photo.unscoped.count %> 张</td></tr>
     </table>
   </div>
 </div>

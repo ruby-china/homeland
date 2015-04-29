@@ -2,8 +2,8 @@
 require "digest/md5"
 module UsersHelper
   # 生成用户 login 的链接，user 参数可接受 user 对象或者 字符串的 login
-  def user_name_tag(user,options = {})
-    return "匿名" if user.blank?
+  def user_name_tag(user, options = {})
+    return "匿名".freeze if user.blank?
 
     if user.is_a? String
       login = user
@@ -14,7 +14,7 @@ module UsersHelper
     end
 
     name ||= login
-    options['data-name'] = name
+    options['data-name'.freeze] = name
 
     link_to(login, user_path(login.downcase), options)
   end
@@ -38,23 +38,24 @@ module UsersHelper
     else size
     end
   end
-  
+
   def user_avatar_tag(user, size = :normal, opts = {})
     link = opts[:link] || true
 
     width = user_avatar_width_for_size(size)
+    img_class = "media-object avatar-#{width}"
 
     if user.blank?
       # hash = Digest::MD5.hexdigest("") => d41d8cd98f00b204e9800998ecf8427e
-      return image_tag("avatar/#{size}.png", class: "uface")
+      return image_tag("avatar/#{size}.png", class: img_class)
     end
 
     if user[:avatar].blank?
       default_url = asset_path("avatar/#{size}.png")
       img_src = "#{Setting.gravatar_proxy}/avatar/#{user.email_md5}.png?s=#{width * 2}&d=404"
-      img = image_tag(img_src, class: "media-object avatar-#{width}")
+      img = image_tag(img_src, class: img_class)
     else
-      img = image_tag(user.avatar.url(user_avatar_size_name_for_2x(size)), class: "media-object avatar-#{width}")
+      img = image_tag(user.avatar.url(user_avatar_size_name_for_2x(size)), class: img_class)
     end
 
     if link
@@ -119,7 +120,7 @@ module UsersHelper
       link_to raw("#{icon} <span>屏蔽</span>"), '#', title: "", 'data-id' => user.login, class: class_names
     end
   end
-  
+
   def follow_user_tag(user, opts = {})
     return "" if current_user.blank?
     return "" if user.blank?

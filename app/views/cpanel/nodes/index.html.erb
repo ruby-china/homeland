@@ -1,22 +1,25 @@
 <% content_for :sitemap do %>
   <span class="current"><%= t("cpane.menu.nodes")%></span>
 <% end %>
-<h1>Listing nodes</h1>
+
+<div class="toolbar">
+  <%= link_to '创建新节点', new_cpanel_node_path, class: "btn btn-default" %>
+</div>
 
 <table class="table table-bordered table-striped table-condensed">
   <tr class="head">
-    <td class="first">ID</td>
+    <td class="first">#</td>
     <td>Name</td>
     <td>Section</td>
-    <td>Sort</td>
-    <td>Topics count</td>
+    <td>排序</td>
+    <td>帖子数量</td>
     <td></td>
   </tr>
 
 <% @nodes.each do |node| %>
   <tr>
     <td class="first"><%= node.id %></td>
-    <td><%= node.name %></td>
+    <td><%= link_to node.name, node_topics_path(node.id) %></td>
     <td><%= node.section.name %></td>
     <td><%= node.sort %></td>
     <td><%= node.topics_count %></td>
@@ -25,7 +28,3 @@
   </tr>
 <% end %>
 </table>
-
-<br />
-
-<%= link_to 'New Node', new_cpanel_node_path %>

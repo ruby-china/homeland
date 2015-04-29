@@ -13,16 +13,18 @@
 <table class="table table-bordered table-striped table-condensed">
   <tr class="head">
     <td class="first">#</td>
-    <td>Login</td>
+    <td>帐号</td>
+    <td>姓名</td>
     <td>Email</td>
-    <td>JoinedAt</td>
+    <td>注册时间</td>
     <td>操作</td>
   </tr>
 
 <% @users.each do |user| %>
   <tr>
     <td class="first"><%= user.id %></td>
-    <td><%= user.login %></td>
+    <td><%= user_name_tag(user) %></td>
+    <td><%= user.name %></td>
     <td><%= user.email %></td>
     <td><%= user.created_at.to_date %></td>
     <td>

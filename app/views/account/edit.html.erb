@@ -22,7 +22,7 @@
           <div class="col-sm-10">
             <div class="input-group">
               <span class="input-group-addon">https://github.com/</span>
-              <%= f.text_field :github, class: "form-control", placeholder: "yourname" %>
+              <%= f.text_field :github, type: :email, class: "form-control", placeholder: "yourname" %>
             </div>
           </div>
         </div>
@@ -31,11 +31,11 @@
           <div class="col-sm-10">
             <div class="input-group">
               <span class="input-group-addon">http://twitter.com/</span>
-              <%= f.text_field :twitter, class: "form-control", placeholder: "yourname" %>
+              <%= f.text_field :twitter, type: :email, class: "form-control", placeholder: "yourname" %>
             </div>
           </div>
         </div>
-        <%= f.input :website, input_html: { placeholder: "http://" } %>
+        <%= f.input :website, type: :url, input_html: { placeholder: "http://" } %>
         <%= f.input :tagline %>
         <%= f.input :bio, as: :text, input_html: { class: "xxlarge", rows: "6" } %>
         <div class="form-group">

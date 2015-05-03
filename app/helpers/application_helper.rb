@@ -128,7 +128,7 @@ module ApplicationHelper
     lang_list = []
     LANGUAGES_LISTS.each do |k, l|
       lang_list << content_tag(:li) do
-        content_tag(:a, raw(k), id: l, class: 'insert_code', data: { content: l })
+        link_to raw(k), '#', data: { lang: l }
       end
     end
     raw lang_list.join(EMPTY_STRING)

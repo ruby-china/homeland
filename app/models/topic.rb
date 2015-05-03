@@ -16,8 +16,6 @@ class Topic
   field :body_html
   field :last_reply_id, type: Integer
   field :replied_at , type: DateTime
-  field :source
-  field :message_id
   field :replies_count, type: Integer, default: 0
   # 回复过的人的 ids 列表
   field :follower_ids, type: Array, default: []
@@ -71,10 +69,6 @@ class Topic
   scope :popular, -> { where(:likes_count.gt => 5) }
   scope :without_node_ids, Proc.new { |ids| where(:node_id.nin => ids) }
   scope :excellent, -> { where(:excellent.gte => 1) }
-
-  def self.find_by_message_id(message_id)
-    where(message_id: message_id).first
-  end
 
   # 排除隐藏的节点
   def self.without_hide_nodes

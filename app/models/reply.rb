@@ -12,8 +12,6 @@ class Reply
 
   field :body
   field :body_html
-  field :source
-  field :message_id
 
   belongs_to :user, inverse_of: :replies
   belongs_to :topic, inverse_of: :replies, touch: true

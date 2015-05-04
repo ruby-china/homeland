@@ -1,12 +1,12 @@
 <% content_for :sitemap do %><span class="current">加入社区</span><% end %>
 <div class="row">
-  <div class="col-md-4 col-sm-offset-3">
+  <div class="col-md-5 col-md-offset-2">
     <div class="panel panel-default">
       <div class="panel-heading"><%= t("common.login") %></div>
       <div class="panel-body">
         <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "" }) do |f| %>
         <div class="form-group">
-          <%= f.text_field :login, class: "form-control", placeholder: "用户名" %>
+          <%= f.text_field :login, type: :email, class: "form-control", placeholder: "用户名" %>
         </div>
         <div class="form-group">
           <%= f.text_field :password, type: :password, class: "form-control", placeholder: "密码" %>
@@ -27,13 +27,12 @@
         <%= render partial: "devise/shared/links" %>
       </div>
     </div>
-
   </div>
   <div class="col-md-3">
     <div class="panel panel-default">
       <div class="panel-heading">用其他平台的帐号登录</div>
       <ul class="list-group">
-        <li class="list-group-item"><%= link_to "GitHub", user_omniauth_authorize_path(:github) %> </li>
+        <li class="list-group-item"><%= link_to raw("<i class='fa fa-github'></i> GitHub"), user_omniauth_authorize_path(:github), class: "btn btn-default" %> </li>
       </ul>
     </div>
   </div>

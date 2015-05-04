@@ -20,8 +20,6 @@ describe ApplicationHelper, :type => :helper do
     controller.flash[:error] = 'hello'
     expect(helper.notice_message).to eq('<div class="alert alert-error"><a class="close" data-dismiss="alert" href="#">x</a>hello</div>')
     controller.flash[:error] = nil
-
-    expect(helper.insert_code_menu_items_tag).to include('class="insert_code"')
   end
 
   describe "admin?" do
@@ -99,6 +97,12 @@ describe ApplicationHelper, :type => :helper do
     it 'should work' do
       t = Time.now
       expect(helper.timeago(t, class: "foo")).to eq "<abbr class=\"foo timeago\" title=\"#{t.iso8601}\"></abbr>"
+    end
+  end
+  
+  describe 'insert_code_menu_items_tag' do
+    it 'should work' do
+      expect(helper.insert_code_menu_items_tag).to include('data-lang="ruby"')
     end
   end
   

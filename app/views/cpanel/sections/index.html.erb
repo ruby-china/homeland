@@ -1,13 +1,16 @@
 <% content_for :sitemap do %>
   <span class="current"><%= t("cpanel.sections") %></span>
 <% end %>
-<h1>Listing sections</h1>
+
+<div class="toolbar">
+  <%= link_to 'New Section', new_cpanel_section_path, class: "btn btn-default" %>
+</div>
 
 <table class="table table-bordered table-striped table-condensed">
   <tr class="head">
-    <td class="first">Id</td>
+    <td class="first">#</td>
     <td>Name</td>
-    <td>Sort</td>
+    <td>排序</td>
     <td></td>
   </tr>
 
@@ -23,6 +26,3 @@
 <% end %>
 </table>
 
-<br />
-
-<%= link_to 'New Section', new_cpanel_section_path %>

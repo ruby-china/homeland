@@ -2,7 +2,7 @@
 class Cpanel::SitesController < Cpanel::ApplicationController
 
   def index
-    @sites = Site.unscoped.recent
+    @sites = Site.unscoped.recent.includes(:user, :site_node)
     if params[:q]
       @sites = @sites.where(name: /#{params[:q]}/)
     end

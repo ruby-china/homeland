@@ -10,7 +10,7 @@ window.TopicView = Backbone.View.extend
   events:
     "click #replies .reply .btn-reply": "reply"
     "click #topic-upload-image": "browseUpload"
-    "click a.insert_code": "appendCodesFromHint"
+    "click .insert-codes a": "appendCodesFromHint"
     "click a.at_floor": "clickAtFloor"
     "click .topic-detail a.follow": "follow"
     "click .topic-detail a.bookmark": "bookmark"
@@ -230,7 +230,8 @@ window.TopicView = Backbone.View.extend
 
   # 往话题编辑器里面插入代码模版
   appendCodesFromHint : (e) ->
-    language = $(e.target).data("content") || $(e.target).attr("id")
+    link = $(e.currentTarget)
+    language = link.data("lang")
     txtBox = $(".topic-editor")
     caret_pos = txtBox.caret('pos')
     prefix_break = ""
@@ -242,6 +243,8 @@ window.TopicView = Backbone.View.extend
     txtBox.val(before_text + src_merged + source.slice(caret_pos+1, source.count))
     txtBox.caret('pos',caret_pos + src_merged.length - 5)
     txtBox.focus()
+    txtBox.trigger('click')
+    return false
 
   initComponents : ->
     $("textarea").unbind "keydown.cr"

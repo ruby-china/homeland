@@ -1,11 +1,15 @@
 <%= render 'base' %>
-<h1>Listing</h1>
+
+<div class="toolbar">
+  <a href="<%= new_cpanel_site_node_path %>" class="btn btn-small btn-success">新建</a>
+</div>
+
 <div id="cpanel_site_nodes">
   <table class="table table-bordered table-striped table-condensed">
     <tr class="head">
-      <td>Id</td>
-      <td>name</td>
-      <td>Sort</td>
+      <td>#</td>
+      <td>名称</td>
+      <td>排序</td>
       <td class="opts"></td>
     </tr>
     <% @site_nodes.each do |item| %>
@@ -20,7 +24,4 @@
     </tr>
     <% end %>
   </table>
-</div>
-<div class="tools">
-  <a href="<%= new_cpanel_site_node_path %>" class="btn btn-small btn-success">新建</a>
 </div>

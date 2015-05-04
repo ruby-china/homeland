@@ -2,12 +2,11 @@
 <div class="pull-right">
   <%= link_to "删除本页所有记录", clean_cpanel_exception_logs_path(ids: @exception_logs.collect(&:id).join(",")), class: "btn btn-small btn-danger", data: { confirm: "确定要删除本页的所有异常记录么？" }, method: "post" %>
 </div>
-<h1><%= t("mongoid.models.exception_log") %></h1>
 
 <div id="cpanel_exception_logs">
   <table class="table table-bordered table-striped table-condensed">
     <tr class="head">
-      <td style="min-width:40px;">编号</td>
+      <td style="min-width:40px;">#</td>
       <td><%= t("mongoid.attributes.exception_log.title") %></td>
       <td style="min-width:145px;">时间</td>
       <td class="opts"></td>

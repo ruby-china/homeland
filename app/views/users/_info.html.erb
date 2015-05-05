@@ -54,7 +54,7 @@
 
 </div>
 
-<% cache([@user, "bio"]) do %>
+<% cache([@user, "bio-markdown"]) do %>
   <% if !@user.bio.blank? %>
     <div class="panel panel-default bio">
       <div class="panel-heading">个人介绍</div>

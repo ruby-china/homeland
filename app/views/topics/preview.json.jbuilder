@@ -1,1 +1,1 @@
-json.body sanitize_markdown(format_topic_body(@body))
+json.body markdown(@body)

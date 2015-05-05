@@ -11,8 +11,8 @@ class User
 
   ALLOW_LOGIN_CHARS_REGEXP = /\A\w+\z/
 
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :omniauthable
+  devise :database_authenticatable, :registerable, :recoverable,
+         :rememberable, :trackable, :validatable, :omniauthable
 
   field :email, type: String, default: ""
   # Email 的 md5 值，用于 Gravatar 头像
@@ -45,7 +45,7 @@ class User
   field :github
   field :twitter
   # 是否信任用户
-  field :verified, type: Mongoid::Boolean, :default => false
+  field :verified, type: Mongoid::Boolean, default: false
   field :state, type: Integer, default: 1
   field :guest, type: Mongoid::Boolean, default: false
   field :tagline
@@ -85,9 +85,9 @@ class User
   end
 
   attr_accessor :password_confirmation
-  
+
   ACCESSABLE_ATTRS = [:name, :email_public, :location, :company, :bio, :website, :github, :twitter, :tagline, :avatar, :by, :current_password, :password, :password_confirmation]
-  
+
   validates :login, format: { with: ALLOW_LOGIN_CHARS_REGEXP, message: '只允许数字、大小写字母和下划线'},
                               length: {:in => 3..20}, presence: true,
                               uniqueness: {case_sensitive: false}
@@ -96,9 +96,9 @@ class User
   has_and_belongs_to_many :followers, class_name: 'User', inverse_of: :following
 
   scope :hot, -> { desc(:replies_count, :topics_count) }
-  scope :fields_for_list, -> { 
-    only(:_id, :name, :login, :email, :email_md5, :email_public, :avatar, :verified, :state, :guest, 
-            :tagline, :github, :website, :location, :location_id, :twitter, :co) 
+  scope :fields_for_list, -> {
+    only(:_id, :name, :login, :email, :email_md5, :email_public, :avatar, :verified, :state, :guest,
+            :tagline, :github, :website, :location, :location_id, :twitter, :co)
   }
 
   def email=(val)
@@ -136,7 +136,7 @@ class User
     return "" if self.email.blank? or !self.email.match(/gmail\.com/)
     return "http://www.google.com/profiles/#{self.email.split("@").first}"
   end
-  
+
   def fullname
     return self.login if self.name.blank?
     return "#{self.login} (#{self.name})"
@@ -319,7 +319,7 @@ class User
     self.pull(favorite_topic_ids: topic_id)
     true
   end
-  
+
   def favorite_topics_count
     self.favorite_topic_ids.size
   end
@@ -358,7 +358,7 @@ class User
   def self.fetch_github_repositories(user_id)
     user = User.find_by_id(user_id)
     return false if user.blank?
-    
+
     github_login = user.github || user.login
 
     url = "https://api.github.com/users/#{github_login}/repos?type=owner&sort=pushed&client_id=#{Setting.github_token}&client_secret=#{Setting.github_secret}"
@@ -423,26 +423,26 @@ class User
     user_id = user_id.to_i
     self.pull(blocked_user_ids: user_id)
   end
-  
+
   def followed?(user)
     uid = user.is_a?(User) ? user.id : user
     return self.following_ids.include?(uid)
   end
-  
+
   def follow_user(user)
     return false if user.blank?
     self.following.push(user)
     Notification::Follow.notify(user: user, follower: self)
   end
-  
+
   def followers_count
     self.follower_ids.count
   end
-  
+
   def following_count
     self.following_ids.count
   end
-  
+
   def unfollow_user(user)
     return false if user.blank?
     self.following.delete(user)

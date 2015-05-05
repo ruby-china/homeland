@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   def index
     @total_user_count = User.count
     @active_users = User.fields_for_list.hot.limit(100)
+    set_seo_meta("活跃会员")
   end
 
   def show
@@ -22,6 +23,7 @@ class UsersController < ApplicationController
 
   def topics
     @topics = @user.topics.fields_for_list.recent.paginate(page: params[:page], per_page: 30)
+    set_seo_meta("#{@user.login} 的帖子")
   end
 
   def favorites
@@ -30,10 +32,12 @@ class UsersController < ApplicationController
     @topics = @topics.to_a.sort do |a, b|
       @topic_ids.index(a.id) <=> @topic_ids.index(b.id)
     end
+    set_seo_meta("#{@user.login} 的收藏")
   end
 
   def notes
     @notes = @user.notes.published.recent.paginate(page: params[:page], per_page: 30)
+    set_seo_meta("#{@user.login} 的记事本")
   end
 
   def auth_unbind
@@ -97,10 +101,12 @@ class UsersController < ApplicationController
   
   def followers
     @users = @user.followers.fields_for_list.paginate(page: params[:page], per_page: 60)
+    set_seo_meta("#{@user.login} 的关注者")
   end
   
   def following
     @users = @user.following.fields_for_list.paginate(page: params[:page], per_page: 60)
+    set_seo_meta("#{@user.login} 正在关注")
     render "followers"
   end
 

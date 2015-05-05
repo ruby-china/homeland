@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  use_doorkeeper
+  
   require 'api'
   require "api_v2"
   require 'sidekiq/web'

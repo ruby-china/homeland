@@ -18,6 +18,8 @@ gem 'rails_autolink', '>= 1.1.0'
 gem 'md_emoji', '1.0.2'
 gem 'exception_notification'
 
+gem 'doorkeeper'
+
 gem 'rails-perftest'
 gem 'ruby-prof'
 

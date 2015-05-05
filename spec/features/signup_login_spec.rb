@@ -20,7 +20,7 @@ describe "sign up and login", :type => :feature do
     expect(page).to have_content('退出成功。')
 
     click_link '登录'
-    fill_in '用户名', :with => 'rubyist'
+    fill_in '用户名 / Email', :with => 'rubyist'
     fill_in '密码', :with => 'coolguy'
     click_button '登录'
     expect(page).to have_content('社区精华帖')

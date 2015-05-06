@@ -2,11 +2,12 @@
   <span class="current"><%= t("cpanel.overview") %></span>
 <% end %>
 
-<div class="panel-heading">
-  <a href="/sidekiq" class="btn btn-primary" target="_blank">异步任务</a>
+<div class="toolbar">
+  <a href="/sidekiq" class="btn btn-default" target="_blank">异步任务</a>
+  <a href="/cpanel/applications" class="btn btn-default" target="_blank">OAuth 应用</a>
 </div>
 
-<div class="row">
+<div class="row clearfix">
   <div class="col-sm-6">
     <h4><%= t("cpanel.recent_topics") %></h4>
     <ul>

@@ -109,6 +109,7 @@ Rails.application.routes.draw do
         post :clean
       end
     end
+    resources :applications
   end
 
   get "api" => "home#api", as: 'api'

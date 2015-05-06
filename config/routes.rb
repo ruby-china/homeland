@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   require "api_v2"
   require 'sidekiq/web'
 
+  resources :apps
   resources :sites
   resources :pages, path: "wiki" do
     collection do

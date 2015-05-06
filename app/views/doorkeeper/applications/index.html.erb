@@ -1,0 +1,32 @@
+<%= render "menu" %>
+
+<div class="panel panel-default">
+  <div class="panel-heading clearfix">
+    管理的应用列表
+    <%= link_to "注册新应用", new_oauth_application_path, class: 'btn btn-success pull-right' %>
+  </div>
+
+  <div class="panel-body">
+    <table class="table table-bordered table-striped">
+      <thead>
+      <tr>
+        <th><%= t('.name') %></th>
+        <th><%= t('.callback_url') %></th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @applications.each do |application| %>
+        <tr id="application_<%= application.id %>">
+          <td><%= link_to application.name, oauth_application_path(application) %></td>
+          <td><%= application.redirect_uri %></td>
+          <td class="opts">
+            <%= link_to icon_tag('pencil'), edit_oauth_application_path(application)%>
+            <%= link_to icon_tag('trash'), oauth_application_path(application), data: { method: :delete, confirm: "确定要删除么？" }%>
+        </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/huacnlee/doorkeeper-i18n.git
+  revision: 7d6b484879ce3659c864b89ed636f1b7a892743f
+  specs:
+    doorkeeper-i18n (2.0.0)
+
+GIT
   remote: git://github.com/schneems/derailed_benchmarks.git
   revision: 36fd32239808ec31f1a08dc1ad28a9c6ee573647
   specs:
@@ -412,6 +418,7 @@ DEPENDENCIES
   devise (~> 3.4.0)
   devise-encryptable (= 0.1.2)
   doorkeeper
+  doorkeeper-i18n!
   exception_notification
   factory_girl_rails (= 1.4.0)
   god

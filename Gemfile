@@ -19,6 +19,7 @@ gem 'md_emoji', '1.0.2'
 gem 'exception_notification'
 
 gem 'doorkeeper'
+gem 'doorkeeper-i18n', github: 'huacnlee/doorkeeper-i18n'
 
 gem 'rails-perftest'
 gem 'ruby-prof'

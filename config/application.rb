@@ -44,6 +44,12 @@ module RubyChina
 
     config.to_prepare {
       Devise::Mailer.layout "mailer"
+      # Only Applications list
+      Doorkeeper::ApplicationsController.layout "simple"
+      # Only Authorization endpoint
+      Doorkeeper::AuthorizationsController.layout "simple"
+      # Only Authorized Applications
+      Doorkeeper::AuthorizedApplicationsController.layout "simple"
     }
 
     config.middleware.use Rack::Cors do

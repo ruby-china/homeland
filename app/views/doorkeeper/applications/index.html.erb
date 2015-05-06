@@ -11,19 +11,51 @@
       <thead>
       <tr>
         <th><%= t('.name') %></th>
+        <th>Client Id</th>
         <th><%= t('.callback_url') %></th>
         <th></th>
       </tr>
       </thead>
       <tbody>
-      <% @applications.each do |application| %>
-        <tr id="application_<%= application.id %>">
-          <td><%= link_to application.name, oauth_application_path(application) %></td>
-          <td><%= application.redirect_uri %></td>
+      <% @applications.each do |app| %>
+        <tr>
+          <td><%= link_to app.name, oauth_application_path(app) %></td>
+          <td><%= app.uid %></td>
+          <td><%= app.redirect_uri %></td>
           <td class="opts">
-            <%= link_to icon_tag('pencil'), edit_oauth_application_path(application)%>
-            <%= link_to icon_tag('trash'), oauth_application_path(application), data: { method: :delete, confirm: "确定要删除么？" }%>
+            <%= link_to icon_tag('pencil'), edit_oauth_application_path(app)%>
+            <%= link_to icon_tag('trash'), oauth_application_path(app), data: { method: :delete, confirm: "确定要删除么？" }%>
         </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading clearfix">
+    已授权的应用
+  </div>
+
+  <div class="panel-body">
+    <p>下面列表是已经认证的应用，它们可以访问你的帐号。</p>
+    <table class="table table-bordered table-striped">
+      <thead>
+      <tr>
+        <th><%= t('doorkeeper.authorized_applications.index.application') %></th>
+        <th><%= t('doorkeeper.authorized_applications.index.created_at') %></th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @authorized_applications.each do |app| %>
+        <tr>
+          <td><%= app.name %></td>
+          <td><%= app.created_at.strftime(t('doorkeeper.authorized_applications.index.date_format')) %></td>
+          <td>
+            <%= link_to "注销", oauth_authorized_application_path(app), class: "btn btn-warning btn-xs", data: { confirm: "确定要注销么？", method: :delete } %>
+          </td>
         </tr>
       <% end %>
       </tbody>

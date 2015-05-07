@@ -1,20 +1,42 @@
-<div class="box">
-  <h1>Ruby China API 目录</h1>
-  <p>下面是简单的 API 路由列表, 具体请参考源代码 <a href="https://github.com/ruby-china/ruby-china/blob/master/app/grape/api.rb" target="_blank">api.rb</a></p>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Method</th>
-        <th>URL</th>
-      </tr>
-    </thead>
-    <tbody>
-    <% RubyChina::API.routes.each do |route| %>
-      <tr>
-        <td><%= route.route_method %></td>
-        <% route_path = route.route_path.gsub("(.:format)",".json") %>
-        <td><%= request.protocol %><%= Setting.domain %><%= route.route_path.gsub("(.:format)",".json") %></td>
-      </tr>
-    <% end %>
-  </table>
+<div class="panel panel-default">
+  <div class="panel-heading">Ruby China API 目录</div>
+  <div class="panel-body markdown">
+    <h4>OAuth 2 / API 认证</h4>
+    <p>
+      在使用 API 之前，你需要 <%= link_to "注册应用", new_oauth_application_path, target: "_blank" %> 并获得可以 OAuth App 信息。并使用标准的 OAuth 2 实现登录，获得 <code>access_token</code> 信息。
+    </p>
+    <h4>API 路由</h4>
+    <p>下面是简单的 API 路由列表, 具体请参考源代码 <a href="https://github.com/ruby-china/ruby-china/blob/master/app/api" target="_blank">app/api</a></p>
+    <p>请参考源代码，确定那些路径是需要用户认证的，需要用户认证的路径，你需要带上 <code>access_token=?</code> 参数。</p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Method</th>
+          <th>URL</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% Api::Dispatch.routes.each do |route| %>
+        <tr>
+          <td><%= route.route_method %></td>
+          <% route_path = route.route_path.sub("(.:format)",".json").sub(":version","v3") %>
+          <td><%= request.protocol %><%= Setting.domain %>/api<%= route_path %></td>
+        </tr>
+      <% end %>
+    </table>
+    <h4>Example</h4>
+    <div style="margin-bottom:10px;">
+      <p>我们用 Ruby 演示一下访问 /api/v3/hello.json 这个路径，其中包含 OAuth 2 的流程。</p>
+      <p>这里用到 RubyGem <a href="https://github.com/intridea/oauth2" target="_blank">oauth2</a>
+    </div>
+    <%= markdown(%(
+```ruby
+=> require "oauth2"
+=> client = OAuth2::Client.new('client id', 'secret', site: 'https://ruby-china.org')
+=> access_token = client.password.get_token('username', 'password')
+=> Faraday.get("https://ruby-china.org/api/v3/hello.json?access_token=\#{access_token.token}").body
+{ 'current_user' : 'username' }
+```
+)) %>
+  </div>
 </div>

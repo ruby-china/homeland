@@ -28,6 +28,7 @@ module RubyChina
     config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.i18n.default_locale = "zh-CN"
     
+    config.autoload_paths << Rails.root.join("app/api")
     config.eager_load_paths += %W( #{config.root}/lib/exception_notifier )
 
     # Configure the default encoding used in templates for Ruby 1.9.

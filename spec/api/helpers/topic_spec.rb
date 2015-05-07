@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe RubyChina::APIHelpers, :type => :request do
-  before { extend RubyChina::APIHelpers }
+describe V3::Helpers, :type => :request do
+  before { extend V3::Helpers }
 
   it "should use size that is valid" do
     stub_params(:size => 10)

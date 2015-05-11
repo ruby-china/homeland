@@ -21,14 +21,39 @@ describe "API", type: :request do
       end
     end
     
-    context 'with oauth2' do
+    context 'Simple test with oauth2' do
       it 'should work' do
         login_user!
         get "/api/v3/hello.json"
         expect(response.status).to eq 200
-        expect(json['current_user']).to eq current_user.login
+        expect(json["user"]).to include(*%W(id name login avatar_url))
+        expect(json["meta"]).to include(*%W(time))
+        expect(json["user"]["login"]).to eq current_user.login
+        expect(json["user"]["name"]).to eq current_user.name
+        expect(json["user"]["avatar_url"]).to eq "#{Setting.gravatar_proxy}/avatar/#{current_user.email_md5}.png?s=120"
       end
     end
-
+  end
+  
+  describe 'POST /api/v3/photos.json' do
+    context 'without login' do
+      it 'should response 401' do
+        post "/api/v3/photos.json"
+        expect(response.status).to eq 401
+      end
+    end
+    
+    context 'with login' do
+      it 'should work' do
+        login_user!
+        f = File.open(Rails.root.join("spec/factories/foo.png"))
+        post "/api/v3/photos.json", file: f
+        @photo = Photo.last
+        expect(@photo.user_id).to eq current_user.id
+        expect(response.status).to eq 201
+        expect(json["image_url"]).not_to eq nil
+        expect(json["image_url"]).not_to eq ""
+      end
+    end
   end
 end

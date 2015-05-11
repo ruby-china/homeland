@@ -6,38 +6,39 @@ module V3
         doorkeeper_authorize!
       end
       
-      # Get notifications of current user, this Api won't mark notifications as read
-      # require authentication
-      # params[:page]
-      # params[:per_page]: default is 20
-      # Example
-      #   /Api/notifications.json?page=1&per_page=20
-      get do
-        @notifications = current_user.notifications.recent.paginate page: params[:page], per_page: params[:per_page] || 20
-        present @notifications, with: V3::Entities::Notification
+      desc "Get notifications of current user, this API won't mark notifications as read"
+      params do
+        optional :offset, type: Integer, default: 0
+        optional :limit, type: Integer, default: 20
+      end
+      get "", each_serializer: NotificationSerializer, root: "notifications" do
+        @notifications = current_user.notifications.recent.offset(params[:offset]).limit(params[:limit])
+        render @notifications
+      end
+      
+      desc "Mark notifications as read"
+      params do
+        requires :ids, type: Array
+      end
+      post "read" do
+        if params[:ids].length > 0
+          @notifications = current_user.notifications.where(:_id.in => params[:ids])
+          current_user.read_notifications(@notifications)
+        end
+        { ok: 1 }
       end
 
-      # Delete all notifications of current user
-      # require authentication
-      # params:
-      #   NO
-      # Example
-      #   DELETE /Api/notifications.json
-      delete do
+      desc "Delete all notifications of current user"
+      delete "all" do
         current_user.notifications.delete_all
-        true
+        { ok: 1 }
       end
 
-      # Delete all notifications of current user
-      # require authentication
-      # params:
-      #   id
-      # Example
-      #   DELETE /Api/notifications/1.json
+      desc "Delete a notification of current user"
       delete ":id" do
         @notification = current_user.notifications.find params[:id]
         @notification.destroy
-        true
+        { ok: 1 }
       end
     end
   end

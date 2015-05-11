@@ -4,6 +4,7 @@ module APIV3Support
   included do
     let!(:current_user) { Factory :user }
     let!(:access_token) { Factory(:access_token, resource_owner_id: current_user.id) }
+    let(:json) { JSON.parse(response.body) }
     
     def login_user!
       default_parameters[:access_token] = access_token.token

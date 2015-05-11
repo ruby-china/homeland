@@ -414,9 +414,14 @@ class User
     return self.blocked_user_ids.count > 0
   end
 
+  def blocked_user?(user)
+    uid = user.is_a?(User) ? user.id : user
+    return self.blocked_user_ids.include?(uid)
+  end
+
   def block_user(user_id)
     user_id = user_id.to_i
-    return false if self.blocked_user_ids.include?(user_id)
+    return false if self.blocked_user?(user_id)
     self.push(blocked_user_ids: user_id)
   end
 
@@ -447,5 +452,13 @@ class User
   def unfollow_user(user)
     return false if user.blank?
     self.following.delete(user)
+  end
+  
+  def avatar_url
+    if self.avatar?
+      self.avatar.url(:large)
+    else
+      "#{Setting.gravatar_proxy}/avatar/#{self.email_md5}.png?s=120"
+    end
   end
 end

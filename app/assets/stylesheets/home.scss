@@ -1,4 +1,59 @@
+@import "vars";
+
 #home_index { line-height:160%; }
+
+.home-icons {
+  .item { 
+    text-align: center; 
+    margin-bottom: 15px;
+    border-radius: 3px;
+    background: #FFF;
+    box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.05);
+    opacity: 0.75;
+    
+    .icon {
+      display: block;
+      a { display: block; padding: 20px 15px; }
+      .fa { font-size: 60px; }
+    }
+    .text {
+      display: block;
+      text-align: left;
+      background: #F5F5F5;
+      border-top: 1px solid #E9E9E9;
+      font-size: 14px; font-weight:bold;
+      
+      a { display:block; color: #666; padding: 6px 15px;  }
+      a:hover { text-decoration: none; }
+      .fa { margin-top: 3px; }
+      border-radius: 0 0 3px 3px;
+    }
+    &:hover {
+      opacity: 1;
+    }
+  }
+  .item1 { 
+    .icon { 
+      .fa { color: $redLight; }
+    }
+  }
+  .item3 { 
+    .icon { 
+      .fa { color: $blueLight; }
+    }
+  }
+  .item2 { 
+    .icon { 
+      .fa { color: $yellowLight; }
+    }
+  }
+  .item4 { 
+    .icon { 
+      .fa { color: $greenLight; }
+    }
+  }
+  
+}
 
 h2 {
   font-size: 12px;

@@ -82,6 +82,12 @@ bundle exec rspec spec
 Forked from [Homeland Project](https://github.com/huacnlee/homeland)
 Theme from [Mediom](https://github.com/huacnlee/mediom)
 
+## Sites
+
+* [Ruby China](https://ruby-china.org)
+* [36kr](http://36kr.com/)
+* [Testhome](http://testerhome.com/)
+
 ## License
 
 Copyright (c) 2011-2015 Ruby China

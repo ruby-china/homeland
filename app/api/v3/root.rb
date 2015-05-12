@@ -32,8 +32,10 @@ module V3
     
 
     mount V3::Topics
+    mount V3::Replies
     mount V3::Users
     mount V3::Notifications
+    mount V3::Likes
 
     get "hello" do
       doorkeeper_authorize!

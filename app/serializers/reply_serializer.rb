@@ -1,5 +1,5 @@
 class ReplySerializer < BaseSerializer
-  attributes :id, :body, :body_html, :created_at, :updated_at, :deleted, :topic_id,
+  attributes :id, :body_html, :created_at, :updated_at, :deleted, :topic_id,
              :user
 
   def user

@@ -11,6 +11,12 @@ class BaseSerializer < ActiveModel::Serializer
       return obj.user_id == current_user.id
     end
   end
+  
+  def cache(keys = [])
+    Rails.cache.fetch(["serializer", *keys]) do
+      yield
+    end
+  end
 
   def current_ability
     @current_ability ||= Ability.new(current_user)

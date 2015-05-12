@@ -9,6 +9,11 @@ module APIV3Support
     def login_user!
       default_parameters[:access_token] = access_token.token
     end
+    
+    def login_admin!
+      login_user!
+      allow_any_instance_of(User).to receive(:admin?).and_return(true)
+    end
 
     def default_headers
       @default_headers ||= {}

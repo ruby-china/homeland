@@ -36,6 +36,7 @@ module V3
       end
       post '', serializer: TopicDetailSerializer, root: "topic" do
         doorkeeper_authorize!
+        error!("当前登录的用户没有发帖权限，具体请参考官网的相关说明。", 403) if !can?(:create, Topic)
         @topic = current_user.topics.new(title: params[:title], body: params[:body])
         @topic.node_id = params[:node_id]
         if @topic.save
@@ -56,7 +57,7 @@ module V3
           doorkeeper_authorize!
           #copy from the topicsController#update
           @topic = Topic.find(params[:id])
-          error!("没有权限修改", 403) if !owner?(@topic)
+          error!("没有权限修改话题", 403) if !can?(:update, @topic)
 
           if @topic.lock_node == false || admin?
             # 锁定接点的时候，只有管理员可以修改节点
@@ -100,6 +101,7 @@ module V3
         end
         post "replies", serializer: ReplySerializer, root: "reply" do
           doorkeeper_authorize!
+          error!("当前用户没有回帖权限，具体请参考官网的说明。", 403) if !can?(:create, Reply)
           @topic = Topic.find(params[:id])
           @reply = @topic.replies.build(body: params[:body])
           @reply.user_id = current_user.id
@@ -137,7 +139,7 @@ module V3
         desc "Unfavorite Topic"
         post "unfavorite" do
           doorkeeper_authorize!
-           @topic = Topic.find(params[:id])
+          @topic = Topic.find(params[:id])
           current_user.unfavorite_topic(@topic.id)
           { ok: 1 }
         end

@@ -80,8 +80,8 @@ gem 'simple_form', '3.1.0'
 
 # API
 gem 'grape', '0.7.0'
-gem 'grape-active_model_serializers'
 gem 'active_model_serializers'
+gem 'grape-active_model_serializers'
 
 # Mailer
 gem 'postmark', '0.9.15'

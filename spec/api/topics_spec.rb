@@ -165,7 +165,7 @@ describe "API V3", "topics", :type => :request do
       expect(response.status).to eq 401
     end
     
-    it "should post a new topic" do
+    it "should work" do
       login_user!
       node_id = Factory(:node)._id
       post "/api/v3/topics.json", :title => "api create topic", :body => "here we go", :node_id => node_id
@@ -194,9 +194,8 @@ describe "API V3", "topics", :type => :request do
     end
     
     it 'should update with admin user' do
-      allow_any_instance_of(User).to receive(:admin?).and_return(true)
       new_node = Factory(:node)
-      login_user!
+      login_admin!
       post "/api/v3/topics/#{topic.id}.json", :title => "api create topic", :body => "here we go", :node_id => new_node.id
       expect(response.status).to eq 201
       topic.reload
@@ -206,7 +205,7 @@ describe "API V3", "topics", :type => :request do
     context 'with user' do
       let!(:topic) { Factory(:topic, user: current_user) }
       
-      it "should post a new topic" do
+      it "should work" do
         login_user!
         node_id = Factory(:node)._id
         post "/api/v3/topics/#{topic.id}.json", :title => "api create topic", :body => "here we go", :node_id => node_id
@@ -242,6 +241,27 @@ describe "API V3", "topics", :type => :request do
       expect(json["topic"]["title"]).to eq("i want to know")
       expect(json["topic"]["hits"]).to eq(old_hits + 1)
       expect(json["topic"]["user"]).to include(*%W(id name login avatar_url))
+      expect(json["topic"]["abilities"]).to include(*%W(update destroy))
+      expect(json["topic"]["abilities"]["update"]).to eq false
+      expect(json["topic"]["abilities"]["destroy"]).to eq false
+    end
+    
+    it 'should return right abilities when owner visit' do
+      t = Factory(:topic, user: current_user)
+      login_user!
+      get "/api/v3/topics/#{t.id}.json"
+      expect(response.status).to eq(200)
+      expect(json["topic"]["abilities"]["update"]).to eq true
+      expect(json["topic"]["abilities"]["destroy"]).to eq true
+    end
+    
+    it 'should return right abilities when admin visit' do
+      t = Factory(:topic)
+      login_admin!
+      get "/api/v3/topics/#{t.id}.json"
+      expect(response.status).to eq(200)
+      expect(json["topic"]["abilities"]["update"]).to eq true
+      expect(json["topic"]["abilities"]["destroy"]).to eq true
     end
 
     it "should work when id record found" do
@@ -254,15 +274,34 @@ describe "API V3", "topics", :type => :request do
     it 'should work' do
       login_user!
       t = Factory(:topic, :title => "i want to know")
-      r1 = Factory(:reply, :topic_id => t.id, :body => "let me tell")
+      r1 = Factory(:reply, :topic_id => t.id, :body => "let me tell", user: current_user)
       r2 = Factory(:reply, :topic_id => t.id, :body => "let me tell again", :deleted_at => Time.now)
       get "/api/v3/topics/#{t.id}/replies.json"
       expect(response.status).to eq(200)
       expect(json["replies"].size).to eq 2
-      expect(json["replies"][0]).to include(*%W(id user body body_html created_at updated_at deleted))
+      expect(json["replies"][0]).to include(*%W(id user body_html created_at updated_at deleted))
       expect(json["replies"][0]["user"]).to include(*%W(id name login avatar_url))
       expect(json["replies"][0]["id"]).to eq r1.id
+      expect(json["replies"][0]["abilities"]).to include(*%W(update destroy))
+      expect(json["replies"][0]["abilities"]["update"]).to eq true
+      expect(json["replies"][0]["abilities"]["destroy"]).to eq true
       expect(json["replies"][1]["id"]).to eq r2.id
+      expect(json["replies"][1]["deleted"]).to eq true
+      expect(json["replies"][1]["abilities"]["update"]).to eq false
+      expect(json["replies"][1]["abilities"]["destroy"]).to eq false
+    end
+    
+    it 'should return right abilities when admin visit' do
+      login_admin!
+      t = Factory(:topic, :title => "i want to know")
+      r1 = Factory(:reply, :topic_id => t.id, :body => "let me tell")
+      r2 = Factory(:reply, :topic_id => t.id, :body => "let me tell again", :deleted_at => Time.now)
+      get "/api/v3/topics/#{t.id}/replies.json"
+      expect(response.status).to eq(200)
+      expect(json["replies"][0]["abilities"]["update"]).to eq true
+      expect(json["replies"][0]["abilities"]["destroy"]).to eq true
+      expect(json["replies"][1]["abilities"]["update"]).to eq true
+      expect(json["replies"][1]["abilities"]["destroy"]).to eq true
     end
   end
 

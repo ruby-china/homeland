@@ -22,7 +22,7 @@ describe "API V3", "notifications", :type => :request do
       expect(response.status).to eq(200)
       expect(json["notifications"][0]["read"]).to eq false
       expect(json["notifications"][0]["mention_type"]).to eq "Reply"
-      expect(json["notifications"][0]["mention"]["body"]).to eq("Test to mention user")
+      expect(json["notifications"][0]["mention"]["body_html"]).to eq("<p>Test to mention user</p>")
       expect(json["notifications"][0]["mention"]["topic_id"]).to eq(topic.id)
       expect(json["notifications"][0]["mention"]["user"]["login"]).to eq(current_user.login)
     end
@@ -36,7 +36,7 @@ describe "API V3", "notifications", :type => :request do
       expect(response.status).to eq(200)
       json = JSON.parse(response.body)
       expect(json["notifications"][0]["read"]).to eq false
-      expect(json["notifications"][0]["reply"]["body"]).to eq("Test to reply user")
+      expect(json["notifications"][0]["reply"]["body_html"]).to eq("<p>Test to reply user</p>")
       expect(json["notifications"][0]["reply"]["topic_id"]).to eq(topic.id)
       expect(json["notifications"][0]["reply"]["user"]["login"]).to eq(current_user.login)
     end

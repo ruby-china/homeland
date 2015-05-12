@@ -17,7 +17,7 @@ module V3
         end
         post "" do
           doorkeeper_authorize!
-          error!("没有权限修改", 403) if !owner?(@reply)
+          error!("没有权限修改", 403) if !can?(:update, @reply)
           @reply.body = params[:body]
           if @reply.save
             { ok: 1 }
@@ -29,7 +29,7 @@ module V3
         desc "Delete a Reply"
         delete "" do
           doorkeeper_authorize!
-          error!("没有权限修改", 403) if !owner?(@reply)
+          error!("没有权限修改", 403) if !can?(:destroy, @reply)
           if @reply.destroy
             { ok: 1 }
           else

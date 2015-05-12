@@ -10,6 +10,26 @@ describe "API V3", "replies", :type => :request do
       expect(json["reply"]).to include(*%W(id topic_id user body body_html))
       expect(json["reply"]["id"]).to eq reply.id
       expect(json["reply"]["body"]).to eq reply.body
+      expect(json["reply"]["abilities"]).to include(*%W(update destroy))
+      expect(json["reply"]["abilities"]["update"]).to eq false
+      expect(json["reply"]["abilities"]["destroy"]).to eq false
+    end
+    
+    it 'should return right abilities when owner visit' do
+      r = Factory(:reply, user: current_user)
+      login_user!
+      get "/api/v3/replies/#{r.id}.json"
+      expect(response.status).to eq(200)
+      expect(json["reply"]["abilities"]["update"]).to eq true
+      expect(json["reply"]["abilities"]["destroy"]).to eq true
+    end
+    
+    it 'should return right abilities when admin visit' do
+      login_admin!
+      get "/api/v3/replies/#{reply.id}.json"
+      expect(response.status).to eq(200)
+      expect(json["reply"]["abilities"]["update"]).to eq true
+      expect(json["reply"]["abilities"]["destroy"]).to eq true
     end
   end
   
@@ -36,8 +56,7 @@ describe "API V3", "replies", :type => :request do
     end
     
     it 'should work by admin' do
-      login_user!
-      allow_any_instance_of(User).to receive(:admin?).and_return(true)
+      login_admin!
       r = Factory(:reply)
       post "/api/v3/replies/#{r.id}.json", body: "bar dar"
       expect(response.status).to eq(201)
@@ -66,8 +85,7 @@ describe "API V3", "replies", :type => :request do
     end
     
     it 'should work by admin' do
-      login_user!
-      allow_any_instance_of(User).to receive(:admin?).and_return(true)
+      login_admin!
       r = Factory(:reply)
       delete "/api/v3/replies/#{r.id}.json"
       expect(response.status).to eq(200)

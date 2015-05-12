@@ -90,7 +90,7 @@ module V3
         end
         get "replies", each_serializer: ReplySerializer, root: "replies" do
           @topic = Topic.find(params[:id])
-          @replies = @topic.replies.unscoped.asc(:_id).offset(params[:offset]).limit(params[:limit])
+          @replies = @topic.replies.unscoped.asc(:_id).includes(:user).offset(params[:offset]).limit(params[:limit])
           render @replies
         end
         

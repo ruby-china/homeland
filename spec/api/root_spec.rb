@@ -33,6 +33,17 @@ describe "API", type: :request do
         expect(json["user"]["avatar_url"]).to eq "#{Setting.gravatar_proxy}/avatar/#{current_user.email_md5}.png?s=120"
       end
     end
+    
+    describe 'Grape validation' do
+      it 'should status 400 and give Grape validation errors' do
+        login_user!
+        get "/api/v3/hello.json", limit: 2000
+        expect(response.status).to eq 400
+        expect(json["validation_errors"].size).to eq 1
+        expect(json["validation_errors"]).to include(*%W(limit))
+        expect(json["validation_errors"]["limit"][0]).to include("valid value")
+      end
+    end
   end
   
   describe 'POST /api/v3/photos.json' do

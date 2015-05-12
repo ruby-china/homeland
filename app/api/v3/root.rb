@@ -14,7 +14,10 @@ module V3
       when Mongoid::Errors::DocumentNotFound
         Rack::Response.new([{ error: "数据不存在" }.to_json], 404, {}).finish
       when Grape::Exceptions::ValidationErrors
-        Rack::Response.new([{ error: "参数不符合要求，请检查参数是否按照 API 要求传输。" }.to_json], 400, {}).finish
+        Rack::Response.new([{ 
+          error: "参数不符合要求，请检查参数是否按照 API 要求传输。", 
+          validation_errors: e.errors 
+        }.to_json], 400, {}).finish
       else
         # ExceptionNotifier.notify_exception(e) # Uncommit it when ExceptionNotification is available
         if Rails.env.test?
@@ -37,6 +40,9 @@ module V3
     mount V3::Notifications
     mount V3::Likes
 
+    params do
+      optional :limit, type: Integer, values: 0..100
+    end
     get "hello" do
       doorkeeper_authorize!
       render current_user, meta: { time: Time.now }

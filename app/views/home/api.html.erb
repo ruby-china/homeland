@@ -5,6 +5,12 @@
     <p>
       在使用 API 之前，你需要 <%= link_to "注册应用", new_oauth_application_path, target: "_blank" %> 并获得可以 OAuth App 信息。并使用标准的 OAuth 2 实现登录，获得 <code>access_token</code> 信息。
     </p>
+    <h5>OAuth 路径</h5>
+    <ul>
+      <li>https://<%= Setting.domain %>/oauth/authorize</li>
+      <li>https://<%= Setting.domain %>/oauth/token</li>
+      <li>https://<%= Setting.domain %>/oauth/revoke</li>
+    </ul>
     <h4>Response 说明</h4>
     <p>所有 Response 采用 JSON 格式返回，请求状态通过 HTTP Status 返回</p>
     <h5>HTTP Status</h5>

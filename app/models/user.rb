@@ -64,6 +64,7 @@ class User
   index login: 1
   index email: 1
   index location: 1
+  index replies_count: -1, topics_count: -1
   index({private_token: 1},{ sparse: true })
 
   has_many :topics, dependent: :destroy

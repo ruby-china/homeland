@@ -8,7 +8,7 @@ module V3
       end
       get do
         params[:limit] = 100 if params[:limit] > 100 
-        @users = User.hot.limit(params[:limit])
+        @users = User.fields_for_list.hot.limit(params[:limit])
         render @users
       end
       

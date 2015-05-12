@@ -1,5 +1,14 @@
 module V3
   module Helpers
+    # Monkey patch grape-active_model_serializers to avoid duplicate db query
+    def render(result, options = {})
+      if result.is_a?(Mongoid::Criteria)
+        super(result.to_a, options)
+      else
+        super(result, options)
+      end
+    end
+    
     # topic helpers
     def max_page_size
       100

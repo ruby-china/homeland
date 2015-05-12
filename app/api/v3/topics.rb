@@ -25,7 +25,7 @@ module V3
         @topics = @topics.fields_for_list.includes(:user)
                          .send(params[:type])
                          .offset(params[:offset]).limit(params[:limit])
-        render @topics.to_a
+        render @topics
       end
 
       desc "Create a Topic"

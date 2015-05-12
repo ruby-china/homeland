@@ -82,7 +82,6 @@ gem 'simple_form', '3.1.0'
 gem 'grape', '0.7.0'
 gem 'grape-active_model_serializers'
 gem 'active_model_serializers'
-gem 'grape-entity', '0.4.4'
 
 # Mailer
 gem 'postmark', '0.9.15'

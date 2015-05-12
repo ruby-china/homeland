@@ -27,6 +27,13 @@ describe "API V3", "topics", :type => :request do
       expect(titles).to be_include("This is an excellent topic")
       expect(titles).to be_include("This is a no_reply topic")
       expect(titles).to be_include("This is a popular topic")
+      
+      get "/api/v3/topics.json", type: 'recent'
+      expect(response.status).to eq(200)
+      json = JSON.parse(response.body)
+      expect(json["topics"].size).to eq(4)
+      expect(json["topics"][0]["title"]).to eq("This is a popular topic")
+      expect(json["topics"][1]["title"]).to eq("This is a no_reply topic")
 
       get "/api/v3/topics.json", type: 'excellent'
       expect(response.status).to eq(200)

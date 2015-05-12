@@ -3,7 +3,7 @@ module V3
     resource :topics do
       desc "Get topics list"
       params do
-        optional :type, type: String, default: "recent", values: %W(recent no_reply popular excellent)
+        optional :type, type: String, default: "last_actived", values: %W(last_actived recent no_reply popular excellent)
         optional :node_id, type: Integer
         optional :offset, type: Integer, default: 0
         optional :limit, type: Integer, default: 20, values: 1..150
@@ -23,9 +23,9 @@ module V3
         end
 
         @topics = @topics.fields_for_list.includes(:user)
-                         .last_actived.send(params[:type])
+                         .send(params[:type])
                          .offset(params[:offset]).limit(params[:limit])
-        render @topics
+        render @topics.to_a
       end
 
       desc "Create a Topic"

@@ -4,7 +4,7 @@ module V3
       # Get top 20 hot users
       desc "会员列表"
       params do
-        optional :limit, type: Integer, default: 20, desc: "Number of result, max: 100"
+        optional :limit, type: Integer, default: 20, values: 1..150
       end
       get do
         params[:limit] = 100 if params[:limit] > 100 
@@ -24,7 +24,7 @@ module V3
         params do
           optional :order, type: String, default: "recent", values: %W(recent likes replies)
           optional :offset, type: Integer, default: 0
-          optional :limit, type: Integer, default: 20
+          optional :limit, type: Integer, default: 20, values: 1..150
         end
         get 'topics', each_serializer: TopicSerializer, root: "topics" do
           @topics = @user.topics.fields_for_list
@@ -42,7 +42,7 @@ module V3
         desc "收藏的话题列表"
         params do
           optional :offset, type: Integer, default: 0
-          optional :limit, type: Integer, default: 20
+          optional :limit, type: Integer, default: 20, values: 1..150
         end
         get "favorites", each_serializer: TopicSerializer, root: "topics" do
           @topic_ids = @user.favorite_topic_ids[params[:offset], params[:limit]]
@@ -56,7 +56,7 @@ module V3
         desc "关注者列表"
         params do
           optional :offset, type: Integer, default: 0
-          optional :limit, type: Integer, default: 20
+          optional :limit, type: Integer, default: 20, values: 1..150
         end
         get "followers", each_serializer: UserSerializer, root: "followers" do
           @users = @user.followers.fields_for_list.offset(params[:offset]).limit(params[:limit])
@@ -66,7 +66,7 @@ module V3
         desc "正在关注的人"
         params do
           optional :offset, type: Integer, default: 0
-          optional :limit, type: Integer, default: 20
+          optional :limit, type: Integer, default: 20, values: 1..150
         end
         get "following", each_serializer: UserSerializer, root: "following" do
           @users = @user.following.fields_for_list.offset(params[:offset]).limit(params[:limit])
@@ -76,7 +76,7 @@ module V3
         desc "屏蔽的用户"
         params do
           optional :offset, type: Integer, default: 0
-          optional :limit, type: Integer, default: 20
+          optional :limit, type: Integer, default: 20, values: 1..150
         end
         get "blocked", each_serializer: UserSerializer, root: "blocked" do
           doorkeeper_authorize!

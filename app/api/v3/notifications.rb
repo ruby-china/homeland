@@ -9,7 +9,7 @@ module V3
       desc "Get notifications of current user, this API won't mark notifications as read"
       params do
         optional :offset, type: Integer, default: 0
-        optional :limit, type: Integer, default: 20
+        optional :limit, type: Integer, default: 20, values: 1..150
       end
       get "", each_serializer: NotificationSerializer, root: "notifications" do
         @notifications = current_user.notifications.recent.offset(params[:offset]).limit(params[:limit])

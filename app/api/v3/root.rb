@@ -12,7 +12,9 @@ module V3
     rescue_from :all do |e|
       case e
       when Mongoid::Errors::DocumentNotFound
-        Rack::Response.new(['{ "error" : "Record not found." }'], 404, {}).finish
+        Rack::Response.new([{ error: "数据不存在" }.to_json], 404, {}).finish
+      when Grape::Exceptions::ValidationErrors
+        Rack::Response.new([{ error: "参数不符合要求，请检查参数是否按照 API 要求传输。" }.to_json], 400, {}).finish
       else
         # ExceptionNotifier.notify_exception(e) # Uncommit it when ExceptionNotification is available
         if Rails.env.test?
@@ -20,7 +22,7 @@ module V3
         else
           Rails.logger.error "Api V3 Error: #{e}\n#{e.backtrace.join("\n")}"
         end
-        Rack::Response.new(['{ "error" : "API Error" }'], 500, {}).finish
+        Rack::Response.new([{ error: "API 接口异常" }.to_json], 500, {}).finish
       end
     end
 

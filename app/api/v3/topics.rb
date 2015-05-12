@@ -6,7 +6,7 @@ module V3
         optional :type, type: String, default: "recent", values: %W(recent no_reply popular excellent)
         optional :node_id, type: Integer
         optional :offset, type: Integer, default: 0
-        optional :limit, type: Integer, default: 20
+        optional :limit, type: Integer, default: 20, values: 1..150
       end
       get '', each_serializer: TopicSerializer, root: "topics" do
         if params[:node_id].blank?
@@ -22,8 +22,9 @@ module V3
           @topics = @node.topics
         end
 
-        @topics = @topics.last_actived.send(params[:type])
-        @topics = @topics.fields_for_list.includes(:user).offset(params[:offset]).limit(params[:limit])
+        @topics = @topics.fields_for_list.includes(:user)
+                         .last_actived.send(params[:type])
+                         .offset(params[:offset]).limit(params[:limit])
         render @topics
       end
 
@@ -85,7 +86,7 @@ module V3
         desc "Topic replies"
         params do
           optional :offset, type: Integer, default: 0
-          optional :limit, type: Integer, default: 20
+          optional :limit, type: Integer, default: 20, values: 1..150
         end
         get "replies", each_serializer: ReplySerializer, root: "replies" do
           @topic = Topic.find(params[:id])

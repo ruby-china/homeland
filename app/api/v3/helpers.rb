@@ -13,7 +13,7 @@ module V3
       size = params[:size].to_i
       [size.zero? ? default_page_size : size, max_page_size].min
     end
-
+    
     # user helpers
     def current_user
       @current_user ||= User.find_by_id(doorkeeper_token.resource_owner_id) if doorkeeper_token

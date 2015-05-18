@@ -28,6 +28,10 @@ class Notification::Base
   def content_path
     ''
   end
+  
+  def actor
+    nil
+  end
 
   def anchor
     "notification-#{id}"

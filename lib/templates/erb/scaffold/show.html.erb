@@ -1,8 +1,10 @@
 <%%= render 'base' %>
-<div class="tools">
-  <%%= link_to '修改', edit_<%= singular_table_name %>_path(@<%= file_name %>), class: "btn btn-small btn-success" %>
-  <%%= link_to '返回', <%= index_helper %>_path, class: "btn btn-small" %>
+
+<div class="toolbar">
+  <%%= link_to '修改', edit_<%= singular_table_name %>_path(@<%= file_name %>), class: "btn btn-sm btn-success" %>
+  <%%= link_to '返回', <%= index_helper %>_path, class: "btn btn-sm btn-default" %>
 </div>
+
 <div id="<%= singular_table_name %>">
   <% for attribute in attributes -%>
   <p>

@@ -1,0 +1,33 @@
+<% content_for :sitemap do %>
+  <span class="current">OAuth 应用</span>
+<% end %>
+
+<%= render 'base' %>
+<div class="toolbar">
+  <a href="<%= new_cpanel_application_path %>" class="btn btn-sm btn-success">新建</a>
+</div>
+
+<div id="cpanel_applications">
+  <table class="table table-bordered table-striped table-condensed">
+    <tr class="head">
+      <td>编号</td>
+      <td>名称</td>
+      <td>Client Id</td>
+      <td>Owner</td>
+      <td>创建时间</td>
+      <td class="opts"></td>
+    </tr>
+    <% @applications.each do |item| %>
+    <tr class="<%= cycle("","even") %>">
+      <td><%= item.id %></td>
+      <td><%= link_to item.name, cpanel_application_path(item.id) %></td>
+      <td><%= item.uid %></td>
+      <td><%= user_name_tag(item.owner) %></td>
+      <td><%= l(item.created_at, format: :long) %></td>
+      <td>
+        <%= link_to "", cpanel_application_path(item.id), method: :delete, 'data-confirm' => '确定要删除吗?', class: "fa fa-trash" %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+</div>

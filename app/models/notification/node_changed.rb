@@ -13,7 +13,7 @@ class Notification::NodeChanged < Notification::Base
       content_path: self.content_path
     }
   end
-
+  
   def content_path
     return '' if self.topic.blank?
     url_helpers.topic_path(self.topic_id)

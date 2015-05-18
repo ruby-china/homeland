@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
-  require 'api'
-  require "api_v2"
+  use_doorkeeper do
+    controllers applications: 'oauth/applications', authorized_applications: 'oauth/authorized_applications'
+  end
+  
   require 'sidekiq/web'
 
+  resources :apps
   resources :sites
   resources :pages, path: "wiki" do
     collection do
@@ -104,13 +107,14 @@ Rails.application.routes.draw do
         post :clean
       end
     end
+    resources :applications
   end
 
   get "api" => "home#api", as: 'api'
   get "twitter" => "home#twitter", as: "twitter"
 
-  # mount RubyChina::API => "/"
-  # mount RubyChina::APIV2 => "/"
+  require "dispatch"
+  mount Api::Dispatch => "/api"
 
   authenticate :user, lambda { |u| u.admin? } do
     mount Sidekiq::Web => '/sidekiq'

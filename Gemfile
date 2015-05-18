@@ -18,6 +18,9 @@ gem 'rails_autolink', '>= 1.1.0'
 gem 'md_emoji', '1.0.2'
 gem 'exception_notification'
 
+gem 'doorkeeper'
+gem 'doorkeeper-i18n', github: 'huacnlee/doorkeeper-i18n'
+
 gem 'rails-perftest'
 gem 'ruby-prof'
 
@@ -57,6 +60,7 @@ gem 'redis-objects', '1.1.0'
 gem 'redcarpet', '~> 3.2.3'
 gem 'rouge', '~> 1.8.0'
 gem 'auto-space', '0.0.4'
+gem 'nokogiri', '1.6.5'
 
 # YAML 配置信息
 gem 'settingslogic', '~> 2.0.9'
@@ -76,7 +80,8 @@ gem 'simple_form', '3.1.0'
 
 # API
 gem 'grape', '0.7.0'
-gem 'grape-entity', '0.4.4'
+gem 'active_model_serializers'
+gem 'grape-active_model_serializers'
 
 # Mailer
 gem 'postmark', '0.9.15'
@@ -97,6 +102,10 @@ gem 'rack-utf8_sanitizer'
 # Mini profiler
 gem 'rack-mini-profiler', require: false
 
+gem 'newrelic_rpm'
+gem 'newrelic_moped'
+gem 'newrelic-grape'
+
 group :development, :test do
   gem 'capistrano', '2.9.0', require: false
   gem 'rvm-capistrano', require: false
@@ -115,7 +124,3 @@ group :development, :test do
   gem 'derailed_benchmarks', github: "schneems/derailed_benchmarks"
 end
 
-group :production do
-  gem 'newrelic_rpm'
-  gem 'newrelic_moped'
-end

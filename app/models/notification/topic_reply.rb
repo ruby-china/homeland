@@ -12,6 +12,10 @@ class Notification::TopicReply < Notification::Base
       content_path: self.content_path
     }
   end
+  
+  def actor
+    self.reply.try(:user)
+  end
 
   def content_path
     return '' if self.reply.blank?

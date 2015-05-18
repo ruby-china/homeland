@@ -69,21 +69,13 @@ class Topic
   scope :popular, -> { where(:likes_count.gt => 5) }
   scope :without_node_ids, Proc.new { |ids| where(:node_id.nin => ids) }
   scope :excellent, -> { where(:excellent.gte => 1) }
-
-  # 排除隐藏的节点
-  def self.without_hide_nodes
-    where(:node_id.nin => self.topic_index_hide_node_ids)
-  end
-
-  def self.without_nodes(node_ids)
+  scope :without_hide_nodes, -> { where(:node_id.nin => Topic.topic_index_hide_node_ids) }
+  scope :without_nodes, Proc.new { |node_ids| 
     ids = node_ids + self.topic_index_hide_node_ids
     ids.uniq!
     where(:node_id.nin => ids)
-  end
-
-  def self.without_users(user_ids)
-    where(:user_id.nin => user_ids)
-  end
+  }
+  scope :without_users, Proc.new { |user_ids| where(:user_id.nin => user_ids) }
 
   def self.topic_index_hide_node_ids
     SiteConfig.node_ids_hide_in_topics_index.to_s.split(",").collect(&:to_i)

@@ -88,6 +88,14 @@
         <% end %>
       </ul>
     </div>
+    
+    <div class="panel panel-default">
+      <ul class="list-group">
+        <li class="list-group-item"><%= link_to "管理我的应用", oauth_applications_path %></li>
+      </ul>
+    </div>
+    
+    
     <div class="panel panel-default">
       <div class="panel-heading">密钥</div>
       <div class="panel-body">
@@ -95,7 +103,7 @@
           <input id="private_token" class="form-control" value="<%= @user.private_token %>" readonly="readonly">
         </div>
         <div class="buttons">
-          <a href="#" class="btn btn-default btn-sm" id="update_private_token">更换一个</a> <span class="help-inline">用于三方应用验证</span>
+          <a href="#" class="btn btn-default btn-sm" id="update_private_token">更换一个</a> <span class="help-inline">用于浏览器 Push 通知</span>
         </div>
       </div>
     </div>

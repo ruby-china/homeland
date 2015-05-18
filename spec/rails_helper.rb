@@ -60,4 +60,5 @@ RSpec.configure do |config|
 
   config.include Devise::TestHelpers, type: :controller
   config.include RSpec::Rails::RequestExampleGroup, type: :request, file_path: /spec\/api/
+  config.include APIV3Support, type: :request, file_path: /spec\/api\/v3/
 end

@@ -1,0 +1,46 @@
+<div class="row" style="padding: 50px 0;">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="panel panel-default">
+      <div class="panel-heading"><%= t('.title') %></div>
+  
+      <div class="panel-body">
+        <p>
+          应用 <strong class="text-danger"><%= @pre_auth.client.name %></strong> 希望你授权使用你的帐号
+        </p>
+    
+        <% if @pre_auth.scopes %>
+          <div id="oauth-permissions">
+            <p><%= t('.able_to') %>:</p>
+
+            <ul class="list-group">
+              <% @pre_auth.scopes.each do |scope| %>
+                <li class="list-group-item"><%= t scope, scope: [:doorkeeper, :scopes] %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+      </div>
+      <div class="panel-footer">
+        <div class="row">
+          <%= form_tag oauth_authorization_path, class: "col-md-6", method: :post do %>
+            <%= hidden_field_tag :client_id, @pre_auth.client.uid %>
+            <%= hidden_field_tag :redirect_uri, @pre_auth.redirect_uri %>
+            <%= hidden_field_tag :state, @pre_auth.state %>
+            <%= hidden_field_tag :response_type, @pre_auth.response_type %>
+            <%= hidden_field_tag :scope, @pre_auth.scope %>
+            <%= submit_tag t('doorkeeper.authorizations.buttons.authorize'), class: "btn btn-success btn-lg btn-block" %>
+          <% end %>
+          <%= form_tag oauth_authorization_path, class: "col-md-6", method: :delete do %>
+            <%= hidden_field_tag :client_id, @pre_auth.client.uid %>
+            <%= hidden_field_tag :redirect_uri, @pre_auth.redirect_uri %>
+            <%= hidden_field_tag :state, @pre_auth.state %>
+            <%= hidden_field_tag :response_type, @pre_auth.response_type %>
+            <%= hidden_field_tag :scope, @pre_auth.scope %>
+            <%= submit_tag t('doorkeeper.authorizations.buttons.deny'), class: "btn btn-danger btn-lg btn-block" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>

@@ -64,6 +64,7 @@ class User
   index login: 1
   index email: 1
   index location: 1
+  index replies_count: -1, topics_count: -1
   index({private_token: 1},{ sparse: true })
 
   has_many :topics, dependent: :destroy
@@ -72,6 +73,7 @@ class User
   embeds_many :authorizations
   has_many :notifications, class_name: 'Notification::Base', dependent: :delete
   has_many :photos
+  has_many :oauth_applications, class_name: 'Doorkeeper::Application', as: :owner
 
   def read_notifications(notifications)
     unread_ids = notifications.find_all{|notification| !notification.read?}.map(&:_id)
@@ -413,9 +415,14 @@ class User
     return self.blocked_user_ids.count > 0
   end
 
+  def blocked_user?(user)
+    uid = user.is_a?(User) ? user.id : user
+    return self.blocked_user_ids.include?(uid)
+  end
+
   def block_user(user_id)
     user_id = user_id.to_i
-    return false if self.blocked_user_ids.include?(user_id)
+    return false if self.blocked_user?(user_id)
     self.push(blocked_user_ids: user_id)
   end
 
@@ -446,5 +453,13 @@ class User
   def unfollow_user(user)
     return false if user.blank?
     self.following.delete(user)
+  end
+  
+  def avatar_url
+    if self.avatar?
+      self.avatar.url(:large)
+    else
+      "#{Setting.gravatar_proxy}/avatar/#{self.email_md5}.png?s=120"
+    end
   end
 end

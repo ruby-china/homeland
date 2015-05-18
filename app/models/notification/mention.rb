@@ -12,6 +12,10 @@ class Notification::Mention < Notification::Base
       content_path: self.content_path
     }
   end
+  
+  def actor
+    self.mentionable.try(:user)
+  end
 
   def content_path
     case self.mentionable_type.downcase

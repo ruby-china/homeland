@@ -1,0 +1,94 @@
+<!--
+      ____        __             ________    _
+     / __ \__  __/ /_  __  __   / ____/ /_  (_)___  ____ _
+    / /_/ / / / / __ \/ / / /  / /   / __ \/ / __ \/ __ `/
+   / _, _/ /_/ / /_/ / /_/ /  / /___/ / / / / / / / /_/ /
+  /_/ |_|\__,_/_.___/\__, /   \____/_/ /_/_/_/ /_/\__,_/
+                    /____/
+  ========================================================
+                                          ruby-china.org
+
+  App Environments:
+  --------------------------------------------------------
+  Ruby:  <%= RUBY_VERSION %><%= "-p#{RUBY_PATCHLEVEL}" if defined? RUBY_PATCHLEVEL %>
+  Rails: <%= Rails.version %>
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <%= render_page_title %>
+  <meta charset='utf-8' />
+  <meta name="keywords" content="<%= @meta_keywords %>" />
+  <meta name="description" content="<%= @meta_description %>" />
+  <meta name="apple-mobile-web-app-capable" content="no">
+  <meta content='True' name='HandheldFriendly' />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <link rel="apple-touch-icon-precomposed" href="<%= cached_asset_path("ios-icon.png") %>" />
+  <link rel="shortcut icon" href="<%= cached_asset_path("big_logo.png") %>" />
+  <%= stylesheet_link_tag_with_cached "front" %>
+  <%= javascript_include_tag_with_cached "app" %>
+  <%= csrf_meta_tag %>
+  <%= raw SiteConfig.custom_head_html %>
+</head>
+<body data-controller-name="<%= controller_name %>">
+  <div class="header">
+    <nav class="navbar navbar-inverse navbar-static-top navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="/" class="navbar-brand"><b>Ruby</b> China</a>
+        </div>
+
+        <%= render_list class: "nav navbar-nav" do |li|
+           li << link_to(t("menu.topics"), topics_path)
+           li << link_to(t("menu.wiki"), pages_path) if !mobile?
+           li << link_to(t("menu.jobs"), jobs_path)
+           li << link_to(t("menu.tweets"), twitter_path) if !mobile?
+           li << link_to(t("menu.sites"), sites_path) if !mobile?
+        end %>
+
+        <%= render "common/user_nav" %>
+      </div>
+    </nav>
+  </div>
+
+  <div id="main" class="main-container container">
+    <%= notice_message %>
+    <%= yield %>
+  </div>
+
+  <% if not mobile? %>
+  <footer class="footer">
+    <div class="container">
+      <%= raw SiteConfig.footer_html %>
+    </div>
+  </footer>
+  <% end %>
+
+  <% if mobile? %>
+    <script type="text/javascript">
+    app_mobile = true;
+    $('body').animate({ scrollTop: -1 },0);
+    </script>
+  <% end %>
+  <script type="text/javascript" data-turbolinks-eval=false>
+    App.root_url = "<%= root_url %>";
+    App.asset_url = "<%= Setting.upload_url %>";
+    <% if current_user %>
+      App.current_user_id = <%= current_user.id %>;
+      App.access_token = "<%= current_user.temp_access_token %>";
+    <% end %>
+  </script>
+  <%= yield :scripts %>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', '<%= Setting.google_analytics_key %>', 'auto');
+    ga('require', 'displayfeatures');
+    ga('send', 'pageview');
+  </script>
+  <div class="zoom-overlay"></div>
+</body>
+</html>

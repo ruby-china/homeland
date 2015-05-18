@@ -7,10 +7,14 @@ class Notification::Topic < Notification::Base
   def notify_hash
     return {} if self.topic.blank?
     {
-      title: '关注的话题有了新回复:',
+      title: '发表了新话题',
       content: self.topic_body[0, 30],
       content_path: self.content_path
     }
+  end
+  
+  def actor
+    self.topic.try(:user)
   end
 
   def content_path

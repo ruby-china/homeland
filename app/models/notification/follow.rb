@@ -13,6 +13,10 @@ class Notification::Follow < Notification::Base
     end
   end
   
+  def actor
+    self.follower
+  end
+  
   def notify_hash
     return {} if self.follower.blank?
     {

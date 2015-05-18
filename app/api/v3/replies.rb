@@ -6,12 +6,12 @@ module V3
           @reply = Reply.find(params[:id])
         end
         
-        desc "Get detail of a Reply"
+        desc "获取回帖的详细内容（一般用于编辑回帖的时候）"
         get "", serializer: ReplyDetailSerializer, root: "reply" do
           render @reply
         end
         
-        desc "Update a Reply"
+        desc "更新回帖"
         params do
           requires :body, type: String
         end
@@ -26,7 +26,7 @@ module V3
           end
         end
         
-        desc "Delete a Reply"
+        desc "删除回帖"
         delete "" do
           doorkeeper_authorize!
           error!("没有权限修改", 403) if !can?(:destroy, @reply)

@@ -40,6 +40,7 @@ module V3
     mount V3::Notifications
     mount V3::Likes
 
+    desc "简单的 API 测试接口，需要验证，便于快速测试 OAuth 以及其他 API 的基本格式是否正确"
     params do
       optional :limit, type: Integer, values: 0..100
     end
@@ -50,6 +51,7 @@ module V3
 
     resource :nodes do
       # Get a list of all nodes
+      desc "获取所有节点列表"
       get do
         nodes = Node.all
         render nodes, meta: { total: Node.count }
@@ -61,7 +63,7 @@ module V3
         doorkeeper_authorize!
       end
 
-      desc "Upload Image"
+      desc "上传图片"
       params do
         requires :file, desc: "Image file."
       end

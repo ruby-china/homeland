@@ -1,7 +1,16 @@
 module V3
   class Likes < Grape::API
     resource :likes do      
-      desc "Like"
+      desc %(创建喜欢
+这是一个多态的接口，支持喜欢 `topic` 和 `reply`，你可以讲喜欢的函数设计成和 API 一样
+
+例如：
+
+```ruby
+# 喜欢编号为 1234 的话题
+Faraday.post("/api/v3/likes.json", { obj_type: "topic", obj_id: 1234 })
+```
+      )
       params do
         requires :obj_type, type: String, values: %W(topic reply)
         requires :obj_id, type: Integer
@@ -18,7 +27,11 @@ module V3
         { obj_type: params[:obj_type], obj_id: obj.id, count: obj.likes_count }
       end
       
-      desc "Unlike"
+      desc "取消之前的喜欢"
+      params do
+        requires :obj_type, type: String, values: %W(topic reply)
+        requires :obj_id, type: Integer
+      end
       delete "" do
         doorkeeper_authorize!
         if params[:obj_type] == "topic"

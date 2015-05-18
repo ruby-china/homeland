@@ -2,7 +2,7 @@ module V3
   class Users < Grape::API
     resource :users do
       # Get top 20 hot users
-      desc "会员列表"
+      desc "获取活跃会员列表"
       params do
         optional :limit, type: Integer, default: 20, values: 1..150
       end
@@ -17,10 +17,12 @@ module V3
           @user = User.find_login(params[:login])
         end
         
+        desc "获取用户详细资料"
         get '', serializer: UserDetailSerializer, root: "user" do
           render @user
         end
         
+        desc "获取用户创建的话题列表"
         params do
           optional :order, type: String, default: "recent", values: %W(recent likes replies)
           optional :offset, type: Integer, default: 0
@@ -39,7 +41,7 @@ module V3
           render @topics
         end
         
-        desc "收藏的话题列表"
+        desc "用户收藏的话题列表"
         params do
           optional :offset, type: Integer, default: 0
           optional :limit, type: Integer, default: 20, values: 1..150
@@ -53,7 +55,7 @@ module V3
           render @topics
         end
         
-        desc "关注者列表"
+        desc "用户的关注者列表"
         params do
           optional :offset, type: Integer, default: 0
           optional :limit, type: Integer, default: 20, values: 1..150
@@ -63,7 +65,7 @@ module V3
           render @users
         end
         
-        desc "正在关注的人"
+        desc "用户正在关注的人"
         params do
           optional :offset, type: Integer, default: 0
           optional :limit, type: Integer, default: 20, values: 1..150
@@ -73,7 +75,7 @@ module V3
           render @users
         end
         
-        desc "屏蔽的用户"
+        desc "用户屏蔽的用户"
         params do
           optional :offset, type: Integer, default: 0
           optional :limit, type: Integer, default: 20, values: 1..150
@@ -89,28 +91,28 @@ module V3
           render @blocked_users
         end
         
-        desc "关注"
+        desc "关注用户"
         post "follow" do
           doorkeeper_authorize!
           current_user.follow_user(@user)
           { ok: 1 }
         end
         
-        desc "取消关注"
+        desc "取消关注用户"
         post "unfollow" do
           doorkeeper_authorize!
           current_user.unfollow_user(@user)
           { ok: 1 }
         end
         
-        desc "屏蔽"
+        desc "屏蔽用户"
         post "block" do
           doorkeeper_authorize!
           current_user.block_user(@user.id)
           { ok: 1 }
         end
         
-        desc "取消屏蔽"
+        desc "取消屏蔽用户"
         post "unblock" do
           doorkeeper_authorize!
           current_user.unblock_user(@user.id)

@@ -7,6 +7,8 @@
  *= require_self
  */
 
+@import "vars";
+
 #site_nodes .site {
   margin-bottom: 10px;
   a { color: #777; }
@@ -15,5 +17,42 @@
 .sidebar {
   .panel-body {
     word-break: break-all;
+  }
+}
+
+
+.api-doc {
+  .route-list {
+    padding: 20px 0;
+    border-right: 2px dashed #ddd;
+    li { 
+      line-height: 200%;  color:#999;
+      a:link,
+      a:visited { color: #404040 !important; text-decoration: underline !important; }
+    }
+    
+  }
+  .route {
+    margin-top: 15px;
+    h5 { 
+      color: #333; 
+      border-bottom: 1px solid $gray;
+      margin: 0; margin-bottom: 10px;
+      padding: 5px 0 0 0;
+      label { 
+        font-size: 12px;
+        font-weight: normal; display: inline-block; width: 50px; color: $blackLight; 
+      }
+    }
+    .content { margin: 0 15px; }
+    h6 { color: #999; }
+    table.params {
+      td.field { width: 80px; }
+      td.type { width: 70px; }
+      td.required { width: 50px; }
+      td.values { width: 180px; }
+      td.default { width: 100px; }
+      
+    }
   }
 }

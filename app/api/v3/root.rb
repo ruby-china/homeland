@@ -40,7 +40,22 @@ module V3
     mount V3::Notifications
     mount V3::Likes
 
-    desc "简单的 API 测试接口，需要验证，便于快速测试 OAuth 以及其他 API 的基本格式是否正确"
+    desc %(简单的 API 测试接口，需要验证，便于快速测试 OAuth 以及其他 API 的基本格式是否正确
+### Returns:
+
+```json
+{
+    "user": {
+        "id": 2,
+        "login": "huacnlee",
+        "name": "李华顺",
+        "avatar_url": "http://ruby-china-files-dev.b0.upaiyun.com/user/large_avatar/2.jpg"
+    },
+    "meta": {
+        "time": "2015-05-18T23:06:49.874+08:00"
+    }
+}
+```)
     params do
       optional :limit, type: Integer, values: 0..100
     end
@@ -51,9 +66,40 @@ module V3
 
     resource :nodes do
       # Get a list of all nodes
-      desc "获取所有节点列表"
+      desc %(获取所有节点列表
+
+### Returns:
+
+```json
+{
+    "nodes": [
+        {
+            "id": 1,
+            "name": "Ruby",
+            "topics_count": 1692,
+            "summary": "Ruby 是一门优美的语言",
+            "section_id": 1,
+            "sort": 0,
+            "section_name": "Ruby",
+            "updated_at": "2015-03-01T22:35:21.627+08:00"
+        },
+        {
+            "id": 2,
+            "name": "Rails",
+            "topics_count": 3160,
+            "summary": "Ruby on Rails, 也称 Rails, 是一个使用 Ruby 语言写的开源 Web 开发框架。",
+            "section_id": 1,
+            "sort": 98,
+            "section_name": "Ruby",
+            "updated_at": "2015-03-01T22:35:21.657+08:00"
+        },
+        ...
+    ]
+}
+```
+)
       get do
-        nodes = Node.all
+        nodes = Node.includes(:section).all
         render nodes, meta: { total: Node.count }
       end
     end
@@ -63,7 +109,7 @@ module V3
         doorkeeper_authorize!
       end
 
-      desc "上传图片"
+      desc "上传图片,请使用 Multipart 的方式提交图片文件"
       params do
         requires :file, desc: "Image file."
       end

@@ -1,7 +1,59 @@
 module V3
   class Topics < Grape::API
     resource :topics do
-      desc "获取话题列表"
+      desc %(获取话题列表
+      
+### Returns:
+
+```json
+{
+    "topics": [
+        {
+            "id": 25262,
+            "title": "Rails 中自动布署工具 mina 的经验谈",
+            "created_at": "2015-05-12T22:08:53.509+08:00",
+            "updated_at": "2015-05-12T22:09:10.772+08:00",
+            "replied_at": "2015-05-12T22:09:10.005+08:00",
+            "replies_count": 1,
+            "node_name": "Sinatra",
+            "node_id": 43,
+            "last_reply_user_id": 2,
+            "last_reply_user_login": "huacnlee",
+            "user": {
+                "id": 35,
+                "login": "monster",
+                "name": null,
+                "avatar_url": "http://gravatar.com/avatar/dba7c3f68c94ec5f7ac96d0a5e7db205.png?s=120"
+            },
+            "deleted": false,
+            "abilities": {
+                "update": true,
+                "destroy": true
+            }
+        },
+        {
+            "id": 25253,
+            "title": "旧爱 Bootstrap，新欢 Materialize",
+            "created_at": "2015-04-22T18:12:53.160+08:00",
+            "updated_at": "2015-05-18T20:50:44.486+08:00",
+            "replied_at": "2015-05-12T21:59:13.520+08:00",
+            "replies_count": 10,
+            "node_name": "分享",
+            "node_id": 26,
+            "last_reply_user_id": 2,
+            "last_reply_user_login": "huacnlee",
+            "user": { ... },
+            "deleted": false,
+            "abilities": {
+                "update": true,
+                "destroy": true
+            }
+        },
+        ...
+    ]
+}
+```
+)
       params do
         optional :type, type: String, default: "last_actived", 
                  values: %W(last_actived recent no_reply popular excellent),
@@ -84,14 +136,90 @@ module V3
           end
         end
 
-        desc "获取完整的话题内容"
+        desc %(获取完整的话题内容
+
+### Returns:
+
+```json
+{
+    "topic": {
+        "id": 25209,
+        "title": "Rails 4.2 中 ActiveJob 的使用",
+        "created_at": "2015-04-20T13:01:24.262+08:00",
+        "updated_at": "2015-04-23T20:00:09.008+08:00",
+        "replied_at": "2015-04-23T19:47:28.173+08:00",
+        "replies_count": 10,
+        "node_name": "Rails",
+        "node_id": 2,
+        "last_reply_user_id": 2,
+        "last_reply_user_login": "huacnlee",
+        "user": {
+            "id": 10547,
+            "login": "jicheng1014",
+            "name": "哥有石头",
+            "avatar_url": "http://gravatar.com/avatar/ac312b6f8e75f1e2db5026b7a67078ba.png?s=120"
+        },
+        "deleted": false,
+        "abilities": {
+            "update": false,
+            "destroy": false
+        },
+        "body": "## 初探ActiveJob",
+        "body_html": "<h4>初探ActiveJob</h4>",
+        "hits": 19
+    }
+}
+```
+)
         get "", serializer: TopicDetailSerializer, root: "topic" do
           @topic = Topic.find(params[:id])
           @topic.hits.incr(1)
           render @topic
         end
         
-        desc "获取某个话题的回帖列表"
+        desc %(获取某个话题的回帖列表
+
+### Returns:
+
+```json
+{
+    "replies": [
+        {
+            "id": 248607,
+            "body_html": "<p>在我刚毕业的时候读过这一篇, 收获颇丰.</p>",
+            "created_at": "2015-02-23T14:14:52.043+08:00",
+            "updated_at": "2015-02-23T14:14:52.043+08:00",
+            "deleted": false,
+            "topic_id": 24325,
+            "user": {
+                "id": 121,
+                "login": "lyfi2003",
+                "name": "windy",
+                "avatar_url": "http://ruby-china-files-dev.b0.upaiyun.com/user/large_avatar/121.jpg"
+            },
+            "abilities": {
+                "update": false,
+                "destroy": false
+            }
+        },
+        {
+            "id": 248608,
+            "body_html": "<p>投精华和置顶！</p>",
+            "created_at": "2015-02-23T14:41:32.977+08:00",
+            "updated_at": "2015-02-23T14:41:32.977+08:00",
+            "deleted": false,
+            "topic_id": 24325,
+            "user": { ... },
+            "abilities": {
+                "update": false,
+                "destroy": false
+            }
+        },
+        ...
+    ]
+}
+```
+)
         params do
           optional :offset, type: Integer, default: 0
           optional :limit, type: Integer, default: 20, values: 1..150

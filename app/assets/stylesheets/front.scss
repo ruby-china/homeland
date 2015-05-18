@@ -45,6 +45,9 @@
       }
     }
     .content { margin: 0 15px; }
+    .desc {
+      h4 { border: 0px; font-size: 13px !important; margin:0; color: #999; }
+    }
     h6 { color: #999; }
     table.params {
       td.field { width: 80px; }

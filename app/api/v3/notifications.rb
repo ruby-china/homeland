@@ -7,7 +7,56 @@ module V3
       end
       
       desc %(获取当前用户的通知列表。
-**NOTE**:（此接口不会讲取到的通知设成已读，你需要调用一下 /notifications/read）)
+**NOTE**:（此接口不会讲取到的通知设成已读，你需要调用一下 /notifications/read）
+
+### Returns:
+
+```json
+{
+    "notifications": [
+        {
+            "id": 394354,
+            "type": "Topic",
+            "read": true,
+            "actor": {
+                "id": 35,
+                "login": "monster",
+                "name": null,
+                "avatar_url": "http://gravatar.com/avatar/dba7c3f68c94ec5f7ac96d0a5e7db205.png?s=120"
+            },
+            "mention_type": null,
+            "mention": null,
+            "reply": null,
+            "created_at": "2015-05-12T22:08:53.542+08:00",
+            "updated_at": "2015-05-18T20:50:26.393+08:00"
+        },
+        {
+            "id": 394251,
+            "type": "TopicReply",
+            "read": true,
+            "actor": {
+                "id": 35,
+                "login": "monster",
+                "name": null,
+                "avatar_url": "http://gravatar.com/avatar/dba7c3f68c94ec5f7ac96d0a5e7db205.png?s=120"
+            },
+            "mention_type": null,
+            "mention": null,
+            "reply": {
+                "id": 256170,
+                "body_html": "<p>asdgasdgasdgasdgasdg</p>",
+                "created_at": "2015-05-12T16:24:07.284+08:00",
+                "updated_at": "2015-05-12T16:24:07.284+08:00",
+                "deleted": false,
+                "topic_id": 25261
+            },
+            "created_at": "2015-05-12T16:24:07.319+08:00",
+            "updated_at": "2015-05-18T20:50:26.393+08:00"
+        },
+    ]
+}
+```
+)
       params do
         optional :offset, type: Integer, default: 0
         optional :limit, type: Integer, default: 20, values: 1..150

@@ -22,6 +22,7 @@
 #= require topics
 #= require pages
 #= require notes
+#= require polls
 #= require_self
 
 AppView = Backbone.View.extend
@@ -64,6 +65,11 @@ AppView = Backbone.View.extend
       if $(el.target).val().trim().length > 0
         $(el.target).parent().parent().submit()
       return false
+    # hide popover
+    $('body').on 'click', (e) ->
+      $('[data-bs="popover"], [data-toggle="popover"]').each ->
+        if !$(this).is(e.target) && $(this).has(e.target).length is 0 && $('.popover').has(e.target).length is 0
+          $(this).popover('hide')
 
   initForDesktopView : () ->
     return if typeof(app_mobile) != "undefined"
@@ -148,27 +154,27 @@ AppView = Backbone.View.extend
     $(".header .form-search input").val("")
     $(".header .form-search").removeClass("active")
     return false
-    
+
   followUser: (e) ->
     btn = $(e.currentTarget)
     userId = btn.data("id")
     span = btn.find("span")
     followerCounter = $(".follow-info .followers[data-login=#{userId}] .counter")
     if btn.hasClass("active")
-      $.ajax 
+      $.ajax
         url: "/#{userId}/unfollow"
-        type: "POST" 
+        type: "POST"
         success: (res) ->
           if res.code == 0
             btn.removeClass('active')
             span.text("关注")
             followerCounter.text(res.data.followers_count)
     else
-      $.ajax 
+      $.ajax
         url: "/#{userId}/follow"
         type: 'POST'
-        success: (res) ->       
-          if res.code == 0 
+        success: (res) ->
+          if res.code == 0
             btn.addClass('active').attr("title", "")
             span.text("取消关注")
             followerCounter.text(res.data.followers_count)

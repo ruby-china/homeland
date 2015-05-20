@@ -278,3 +278,7 @@ window.TopicView = Backbone.View.extend
 
     # Focus title field in new-topic page
     $("body[data-controller-name='topics'] #topic_title").focus()
+
+    # polls
+    if $('body').data('controller-name') is 'topics'
+      Poll.setup()

@@ -1,3 +1,4 @@
+# coding: utf-8
 Rails.application.routes.draw do
   use_doorkeeper do
     controllers applications: 'oauth/applications', authorized_applications: 'oauth/authorized_applications'
@@ -138,6 +139,12 @@ Rails.application.routes.draw do
       post :unfollow
       get :followers
       get :following
+    end
+  end
+
+  resources :polls, only: [:create, :update] do
+    member do
+      get :voters
     end
   end
 

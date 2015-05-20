@@ -6,6 +6,7 @@
  *= require social-share-button
  *= require jquery.atwho
  *= require jquery.fluidbox
+ *= require polls
  *= require_self
  */
 
@@ -265,9 +266,9 @@ form {
 
 .bootstrap-select {
   .btn-default,
-  .btn-default.active { 
+  .btn-default.active {
     border: 0px;
-    background: #FFF; 
+    background: #FFF;
     border-bottom:1px solid #D5DCDB;
     transition: none;
     padding-bottom: 7px;
@@ -429,7 +430,7 @@ img.emoji { width:20px; height:20px; }
 .deleted { text-decoration: line-through; color: $grayDark; }
 .no-result { color: #aaa; padding-bottom: 20px; text-align: center;}
 
-a.followed {  
+a.followed {
   .fa {
     @extend .animated;
     @extend .bounceIn;
@@ -846,6 +847,6 @@ footer {
   .profiler-result .profiler-number { color: #aaa !important;}
   .profiler-result .profiler-unit { color: #ccc !important;}
   .profiler-results .profiler-popup {
-  
+
   }
 }

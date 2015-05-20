@@ -1,0 +1,59 @@
+<div class="modal fade" id="poll-form-modal" role="dialog" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">在这个话题发起投票</h4>
+      </div>
+      <div class="modal-body">
+        <div class="poll-options" data-max-options="<%= Poll::MAXIMUM_OPTIONS %>">
+          <div class="input-group">
+            <input type="text" name="poll[options][]" placeholder="选项描述" maxlength="140" class="form-control input-sm"/>
+            <span class="input-group-btn">
+              <button class="btn btn-default btn-sm" name="remove-option" tabindex="-1" type="button"><i class="fa fa-times"></i></button>
+            </span>
+          </div>
+          <div class="input-group">
+            <input type="text" name="poll[options][]" placeholder="选项描述" maxlength="140" class="form-control input-sm"/>
+            <span class="input-group-btn">
+              <button class="btn btn-default btn-sm" name="remove-option" tabindex="-1" type="button"><i class="fa fa-times"></i></button>
+            </span>
+          </div>
+        </div>
+        <div class="clearfix">
+          <button type="button" name="add-option" class="btn btn-default btn-sm pull-right" title="增加选项"><i class="fa fa-plus"></i></button>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="poll[multiple_mode]"> 多选 (默认单选)
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="poll[public_mode]"> 公开 (默认匿名)
+          </label>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="input-group input-group-sm">
+              <span class="input-group-addon">投票有效期:</span>
+              <input type="text" value="<%= Poll::DEFAULT_EXPIRES_IN %>" size="4" maxlength="4" name="poll[expires_in]" class="form-control input-sm">
+              <span class="input-group-addon">天 (0表示长期有效)</span>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <p class="help-block">
+              <i class="fa fa-warning"></i>注意: 最多可以添加 <%= Poll::MAXIMUM_OPTIONS %> 个选项. 投票表单发布后不能更改!
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <input type="hidden" name="poll[save]" value="false">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" name="btn-poll-cancel" class="btn btn-danger">取消</button>
+        <button type="button" name="btn-poll-complete" class="btn btn-primary" >完成</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<div class="voters-list">
+  <ul>
+    <% @users.each do |user| %>
+      <li><%= user_avatar_tag(user, :small) %> <%= user_name_tag(user) %></li>
+    <% end %>
+  </ul>
+  <%= will_paginate @users %> <!-- hide pagination -->
+  <a href="javascript:void(0);" class="voters-next-page pull-right">更多 &#187;</a>
+</div>

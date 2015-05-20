@@ -1,0 +1,39 @@
+<table cellpadding="0" cellspacing="0" border="0" width="100%" class="poll-table">
+  <% poll.options.each do |opt| %>
+    <tr>
+      <td colspan="6">
+        <div <% if poll.multiple_mode %> class="checkbox" <% else %> class="radio"<% end %>>
+          <label>
+            <% if poll.multiple_mode %>
+              <input name="vote-choices" class="hide" value="<%= opt.oid %>" type="checkbox">
+            <% else %>
+              <input name="vote-choice" class="hide" value="<%= opt.oid %>" type="radio">
+            <% end %>
+            <b><%= opt.oid %>: </b><%= opt.description %>
+          </label>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4">
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" data-percent="<%= opt.percent %>"
+               aria-valuenow="<%= opt.percent %>" aria-valuemin="0" aria-valuemin="100"
+               style="width: <%= opt.percent %>%">
+          </div>
+        </div>
+      </td>
+      <td colspan="1" valign="middle" align="center">
+        <span class="info"><%= opt.percent %>%</span>
+      </td>
+      <td colspan="1" valign="middle" align="center">
+        <span class="info"><%= opt.voters_count %></span>
+        <% if poll.public_mode %>
+          <% if opt.voters_count > 0 %>
+            <a href="javascript:void(0);" title="投票用户" data-placement="left" data-bs="popover" class="voters-popover" data-poll-id="<%= poll.id %>" data-oid="<%= opt.oid %>"><i class="fa fa-user"></i></a>
+          <% end %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>

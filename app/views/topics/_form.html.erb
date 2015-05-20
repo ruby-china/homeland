@@ -20,4 +20,9 @@
   <div class="form-group">
     <%= f.submit t("common.save"), class: "btn btn-primary col-xs-2", 'data-disable-with' => t("common.saving") %>
   </div>
+
+  <% if @topic.new_record? %>
+    <%= render partial: "polls/form" %>
+  <% end %>
+
 <% end %>

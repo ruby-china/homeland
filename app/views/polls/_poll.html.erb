@@ -1,0 +1,25 @@
+<div id="poll-view">
+  <% cache [@poll] do  %>
+    <h4>
+      <% if @poll.multiple_mode %> 多选 <% else %> 单选 <% end %>
+      <% if @poll.public_mode %> 公开 <% else %> 匿名 <% end %> 投票
+    </h4>
+    <%=  render partial: "polls/info", locals: {poll: @poll} %>
+    <%=  render partial: "polls/options", locals: {poll: @poll} %>
+  <% end %>
+
+  <% if current_user %>
+    <% if @poll.is_voted_by? current_user %>
+      <label class="label label-default"> 你已经投票.</label>
+    <% else %>
+      <% if poll.is_votable? %>
+        <button type="button" name="btn_voting" class="btn btn-default btn-sm">投票</button>
+        <button type="button" name="btn_vote_submit" class="btn btn-primary btn-sm hide" data-poll-id="<%= @poll.id %>" data-disable-with="正在提交">提交</button>
+      <% end %>
+    <% end %>
+  <% else %>
+    <% if poll.is_votable? %>
+      <a href="/account/sign_in"> 登录后进行投票 </a>
+    <% end %>
+  <% end %>
+</div>

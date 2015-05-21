@@ -6,17 +6,16 @@ class PollsController < ApplicationController
 
   def voters
     oid = params[:oid].to_i
-    if @poll
-      user_ids = @poll.options.match(oid).try(:voters)
-      if !user_ids.blank?
-        @users = Rails.cache.read(cache_key_for_voters)
-        unless @users
-          @users = User.only(:_id, :name, :avatar, :email_md5, :login).where(_id: {"$in" => user_ids}).paginate(page: params[:page], page_links: false, per_page: 50)
-          Rails.cache.write(cache_key_for_voters, @users, expires_in: 6.hours)
-        end
-        render layout: false
-        return
+    user_ids = @poll.options.match(oid).try(:voters)
+    if !user_ids.blank?
+      @users = Rails.cache.read(cache_key_for_voters) if Rails.env.production?
+      if @users.nil?
+        query = User.only(:_id, :name, :avatar, :email_md5, :login).where(_id: {"$in" => user_ids})
+        @users = query.paginate(page: params[:page], per_page: 2)
+        Rails.cache.write(cache_key_for_voters, @users, expires_in: 6.hours) if Rails.env.production?
       end
+      render layout: false
+      return
     end
     render text: "none"
   end
@@ -24,15 +23,11 @@ class PollsController < ApplicationController
   # vote
   def update
     status = {}
-    if @poll
-      voted = @poll.vote(current_user, *options_params)
-      if voted
-        status[:voted] = true
-      else
-        status[:msg] = "Poll was voted or not votable."
-      end
+    voted = @poll.vote(current_user, *options_params)
+    if voted
+      status[:voted] = true
     else
-      status[:msg] = "Poll not found."
+      status[:msg] = "Poll was voted or not votable."
     end
     render json: status
   end
@@ -53,7 +48,8 @@ class PollsController < ApplicationController
 
   def cache_key_for_voters
     # refresh by total_voters_count
-    "/polls/#{@poll.id}/voters/#{params[:oid]}/#{params[:page]}/#{@poll.total_voters_count}"
+    "/polls/#{@poll.id}/voters/#{params[:oid]}/#{params[:page]}/" +
+      "#{@poll.total_voters_count}"
   end
 
 end

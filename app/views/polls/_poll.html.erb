@@ -9,16 +9,16 @@
   <% end %>
 
   <% if current_user %>
-    <% if @poll.is_voted_by? current_user %>
+    <% if @poll.voted_by? current_user %>
       <label class="label label-default"> 你已经投票.</label>
     <% else %>
-      <% if poll.is_votable? %>
+      <% if poll.votable? %>
         <button type="button" name="btn_voting" class="btn btn-default btn-sm">投票</button>
         <button type="button" name="btn_vote_submit" class="btn btn-primary btn-sm hide" data-poll-id="<%= @poll.id %>" data-disable-with="正在提交">提交</button>
       <% end %>
     <% end %>
   <% else %>
-    <% if poll.is_votable? %>
+    <% if poll.votable? %>
       <a href="/account/sign_in"> 登录后进行投票 </a>
     <% end %>
   <% end %>

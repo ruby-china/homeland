@@ -16,28 +16,28 @@ class PollTest < ActiveSupport::TestCase
     assert_equal Poll::DEFAULT_EXPIRES_IN, @poll.expires_in
     assert_equal 0, @poll.total_voters_count
     assert_equal 2, @poll.options.count
-    assert @poll.is_votable?
+    assert @poll.votable?
   end
 
   test 'should be expired' do
     @poll.update_attribute :expires_in, -1
-    assert !@poll.is_votable?
+    assert !@poll.votable?
   end
 
   test 'should be available' do
     @poll.update_attribute :expires_in, 0
-    assert @poll.is_votable?
+    assert @poll.votable?
   end
 
   test 'should be voted by' do
     @poll.vote @user2, @option1.oid
-    assert @poll.is_voted_by?(@user2)
-    assert !@poll.is_voted_by?(@user1)
+    assert @poll.voted_by?(@user2)
+    assert !@poll.voted_by?(@user1)
   end
 
   test 'single vote option' do
     @poll.vote @user1, @option1.oid
-    assert @poll.is_voted_by?(@user1)
+    assert @poll.voted_by?(@user1)
     assert_equal 100.0, @poll.options.match(@option1.oid).percent
     assert_equal 1, @poll.options.match(@option1.oid).voters_count
     assert_equal 1, @poll.total_voters_count

@@ -25,7 +25,7 @@ class PollsController < ApplicationController
   def update
     status = {}
     if @poll
-      voted = @poll.vote(current_user, options_params)
+      voted = @poll.vote(current_user, *options_params)
       if voted
         status[:voted] = true
       else

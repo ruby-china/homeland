@@ -2,6 +2,7 @@ class VoteOption
 
   include Mongoid::Document
 
+  # oid: option identity
   field :oid, type: Integer
   field :description, type: String
   field :percent, type: Float, default: 0.0

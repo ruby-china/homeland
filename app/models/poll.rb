@@ -38,23 +38,23 @@ class Poll
   index topic_id: 1
 
   # expired polls be not available / votable
-  def is_votable?
+  def votable?
     if self.expires_in == 0 || (self.created_at + self.expires_in.days) > Time.now
       return true
     end
     return false
   end
 
-  def is_voted_by?(user)
+  def voted_by?(user)
     user_id = user.is_a?(User) ? user.id : user
     # !!self.options.detect{ |o| o.voters.include?(user_id) }
     !!Poll.where(_id: self.id).elem_match(options: {voters: user_id}).first
   end
 
   # vote for option(s) by user
-  def vote(user, oids)
+  def vote(user, *oids)
     user_id = user.is_a?(User) ? user.id : user
-    if is_votable? && !is_voted_by?(user_id)
+    if votable? && !voted_by?(user_id)
       if self.multiple_mode
         vote_multi(user_id, oids)
       else

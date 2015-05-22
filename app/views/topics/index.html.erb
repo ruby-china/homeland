@@ -7,14 +7,9 @@
 
       <div class="panel-body">
         <% if @topics.current_page == 1 %>
-          <% cache(@suggest_topics) do %>
-            <%= render partial: "topics/topic", collection: @suggest_topics, locals: { suggest: true } %>
-          <% end %>
+          <%= render partial: "topics/topic", collection: @suggest_topics, locals: { suggest: true }, cache: Proc.new { |t| [t, true] } %>
         <% end %>
-
-        <% cache(@topics) do %>
-          <%= render partial: "topics/topic", collection: @topics, locals: { suggest: false } %>
-        <% end %>
+        <%= render partial: "topics/topic", collection: @topics, locals: { suggest: false }, cache: Proc.new { |t| [t, false] } %>
       </div>
 
       <div class="panel-footer clearfix">

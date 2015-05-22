@@ -7,7 +7,7 @@
     <div class="no-result panel-body" style="padding:80px 0;">暂无通知</div>
   <% else %>
     <div class="panel-body">
-      <%= render partial: "notification", collection: @notifications %>
+      <%= render partial: "notification", collection: @notifications, cache: true %>
     </div>
     <div class="panel-footer">
       <%= will_paginate @notifications %>

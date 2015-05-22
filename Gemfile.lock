@@ -227,6 +227,7 @@ GEM
       bson (~> 2.2)
       connection_pool (~> 2.0)
       optionable (~> 0.2.0)
+    multi_fetch_fragments (0.0.17)
     multi_json (1.11.0)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
@@ -444,6 +445,7 @@ DEPENDENCIES
   mongoid_auto_increment_id (= 0.6.4)
   mongoid_colored_logger
   mongoid_rails_migrations (= 1.0.0)
+  multi_fetch_fragments
   newrelic-grape
   newrelic_moped
   newrelic_rpm

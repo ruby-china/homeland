@@ -50,15 +50,11 @@
       odd_topics, even_topics = @excellent_topics.partition.each_with_index { |t, i| i.odd?  }
     %>
     <div class="col-md-6">
-      <% cache([odd_topics, "odd"]) do %>
-        <%= render partial: "topics/topic", collection: odd_topics, locals: { suggest: false } %>
-      <% end %>
+      <%= render partial: "topics/topic", collection: odd_topics, locals: { suggest: false }, cache: Proc.new { |t| [t, false] } %>
     </div>
 
     <div class="col-md-6">
-      <% cache([even_topics, "even"]) do %>
-        <%= render partial: "topics/topic", collection: even_topics, locals: { suggest: false } %>
-      <% end %>
+      <%= render partial: "topics/topic", collection: even_topics, locals: { suggest: false }, cache: Proc.new { |t| [t, false] } %>
     </div>
   </div>
   <div class="panel-footer">

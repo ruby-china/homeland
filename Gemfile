@@ -11,6 +11,7 @@ gem 'coffee-rails'
 gem 'uglifier'
 gem 'jquery-rails'
 gem 'jbuilder'
+gem 'multi_fetch_fragments'
 
 gem 'actionpack-action_caching', '1.1.1'
 gem 'rails-i18n'

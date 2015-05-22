@@ -1,5 +1,4 @@
 class Poll
-
   # default expires in about 3 months
   DEFAULT_EXPIRES_IN = 90
   # maximum options in a poll
@@ -23,7 +22,7 @@ class Poll
   # total votes count for multiple mode
   field :total_voters_count, type: Integer, default: 0
 
-  embeds_many :options, class_name: "VoteOption" do
+  embeds_many :options, class_name: 'VoteOption' do
     def match(oid)
       where(oid: oid).first
     end
@@ -31,7 +30,7 @@ class Poll
 
   validate :limit_options_count, on: :create
 
-  scope :for_topic, ->(topic_id) {without("options.voters").where(topic_id: topic_id)}
+  scope :for_topic, ->(tid) { without('options.voters').where(topic_id: tid) }
 
   belongs_to :topic, inverse_of: :poll
 
@@ -39,29 +38,28 @@ class Poll
 
   # expired polls be not available / votable
   def votable?
-    if self.expires_in == 0 || (self.created_at + self.expires_in.days) > Time.now
+    if expires_in == 0 || (created_at + expires_in.days) > Time.now
       return true
     end
-    return false
+    false
   end
 
   def voted_by?(user)
     user_id = user.is_a?(User) ? user.id : user
-    # !!self.options.detect{ |o| o.voters.include?(user_id) }
-    !!Poll.where(_id: self.id).elem_match(options: {voters: user_id}).first
+    Poll.where(_id: id).elem_match(options: { voters: user_id }).first && true
   end
 
   # vote for option(s) by user
   def vote(user, *oids)
     user_id = user.is_a?(User) ? user.id : user
     if votable? && !voted_by?(user_id)
-      if self.multiple_mode
+      if multiple_mode
         vote_multi(user_id, oids)
       else
         vote_single(user_id, oids[0])
       end
       update_percentage
-      return self.save
+      return save
     else
       return false
     end
@@ -70,7 +68,7 @@ class Poll
   private
 
   def vote_single(user_id, oid)
-    option = self.options.match(oid.to_i)
+    option = options.match(oid.to_i)
     if option
       option.voters << user_id
       option.voters_count += 1
@@ -85,16 +83,15 @@ class Poll
   end
 
   def update_percentage
-    self.options.each do |o|
-      new_percent = o.voters_count.to_f/self.total_voters_count.to_f
+    options.each do |o|
+      new_percent = o.voters_count.to_f / total_voters_count.to_f
       o.percent = (new_percent * 100.0).round(2)
     end
   end
 
   # before save
   def limit_options_count
-    errors.add(:poll, "Not enough options") if self.options.size < 2
-    errors.add(:poll, "Too many options") if self.options.size >= MAXIMUM_OPTIONS
+    errors.add(:poll, 'Not enough options') if options.size < 2
+    errors.add(:poll, 'Too many options') if options.size >= MAXIMUM_OPTIONS
   end
-
 end

@@ -1,0 +1,2 @@
+module PollsHelper
+end

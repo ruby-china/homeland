@@ -1,0 +1,52 @@
+#poll-form-modal, #poll-view {
+  margin: 15px auto;
+  /* checkbox/radio label fixes */
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+
+  table.poll-table {
+    padding: 5px;
+    table-layout: fixed;
+    word-wrap: break-word;
+    .progress {
+      margin: 5px;
+      height: 12px;
+    }
+  }
+
+  .voters-list {
+    ul {
+      margin: 2px;
+      padding: 5px;
+      li {
+        list-style: none;
+      }
+    }
+    a img {
+      display: inline-block;
+      -moz-force-broken-image-icon: 1;
+    }
+    .pagination {
+      display: none;
+    }
+  }
+  /* bootstrap fixes */
+  h4 {
+    margin: 0;
+    border: none;
+  }
+
+  .input-group {
+    margin: 10px auto;
+  }
+
+  h3.popover-title {
+    margin: 0 !important;
+  }
+
+  .popover {
+    padding: 0;
+  }
+
+}

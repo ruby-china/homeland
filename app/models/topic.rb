@@ -44,6 +44,8 @@ class Topic
   belongs_to :last_reply, class_name: 'Reply'
   has_many :replies, dependent: :destroy
 
+  has_one :poll, dependent: :destroy
+
   validates_presence_of :user_id, :title, :body, :node
 
   index node_id: 1
@@ -99,7 +101,7 @@ class Topic
   def init_last_active_mark_on_create
     self.last_active_mark = Time.now.to_i
   end
-  
+
   after_create do
     Topic.delay.notify_topic_created(self.id)
   end
@@ -165,13 +167,13 @@ class Topic
   def excellent?
     self.excellent >= 1
   end
-  
+
   def self.notify_topic_created(topic_id)
     topic = Topic.find_by_id(topic_id)
     return if topic.blank?
 
     notified_user_ids = topic.mentioned_user_ids
-    
+
     follower_ids = (topic.user.try(:follower_ids) || [])
     follower_ids.uniq!
 
@@ -186,13 +188,13 @@ class Topic
     end
     true
   end
-  
+
   def self.notify_topic_node_changed(topic_id, node_id)
     topic = Topic.find_by_id(topic_id)
     return if topic.blank?
     node = Node.find_by_id(node_id)
     return if node.blank?
-    
+
     Notification::NodeChanged.create user_id: topic.user_id, topic_id: topic_id, node_id: node_id
     return true
   end

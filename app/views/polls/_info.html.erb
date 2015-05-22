@@ -1,0 +1,20 @@
+<table cellpadding="0" cellspacing="0" border="0" width="100%" class="pull-table">
+  <tr>
+    <td width="25%">开始时间:</td>
+    <td><%= timeago(poll.created_at) %></td>
+  </tr>
+  <% if poll.votable? %>
+    <tr>
+      <td width="25%">有效时间:</td>
+      <td><% if poll.expires_in == 0 %>长期<% else %> <%= poll.expires_in %>天<% end %></td>
+    </tr>
+  <% end %>
+  <tr>
+    <td width="25%">状态:</td>
+    <td>
+      <% if poll.votable? %>进行中<% else %>已结束<% end %> -
+      总共 <%= poll.total_voters_count %>
+      <% if poll.multiple_mode %> 次投票 <% else %> 人投票 <% end %>
+    </td>
+  </tr>
+</table>

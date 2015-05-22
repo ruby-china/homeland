@@ -87,6 +87,8 @@ class TopicsController < ApplicationController
     check_current_user_status_for_topic
     set_special_node_active_menu
 
+    @poll = Poll.for_topic(@topic.id).first
+
     set_seo_meta "#{@topic.title} &raquo; #{t("menu.topics")}"
 
     fresh_when(etag: [@topic, @has_followed, @has_favorited, @replies, @node, @show_raw])
@@ -120,7 +122,6 @@ class TopicsController < ApplicationController
       @node = Node.find_by_id(params[:node])
       render_404 if @node.blank?
     end
-
     set_seo_meta "#{t('topics.post_topic')} &raquo; #{t('menu.topics')}"
   end
 
@@ -137,6 +138,14 @@ class TopicsController < ApplicationController
     @topic.node_id = params[:node] || topic_params[:node_id]
 
     if @topic.save
+      if poll_params[:save] == "true"
+        @poll = @topic.build_poll(poll_attrs)
+        poll_params[:options].each_with_index do |o, i|
+          @poll.options.build({oid: i+1, description: o})
+        end
+        @poll.save
+      end
+
       redirect_to(topic_path(@topic.id), notice: t('topics.create_topic_success'))
     else
       render action: 'new'
@@ -156,7 +165,7 @@ class TopicsController < ApplicationController
     if current_user.admin?
       @topic.admin_editing = true
     end
-    
+
     if @topic.lock_node == false || current_user.admin?
       # 锁定接点的时候，只有管理员可以修改节点
       @topic.node_id = topic_params[:node_id]
@@ -221,4 +230,20 @@ class TopicsController < ApplicationController
   def topic_params
     params.require(:topic).permit(:title, :body, :node_id)
   end
+
+  def poll_params
+    params.require(:poll).permit(:multiple_mode, :public_mode, :expires_in, :save, options: [])
+  end
+
+  def poll_attrs
+    h = {}
+    h[:multiple_mode] = true if poll_params[:multiple_mode]
+    h[:public_mode] = true if poll_params[:public_mode]
+    h[:expires_in] = poll_params[:expires_in].to_i
+    if h[:expires_in] < 0 || h[:expires_in] > 3650
+      h[:expires_in] = 0
+    end
+    return h
+  end
+
 end

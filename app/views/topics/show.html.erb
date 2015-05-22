@@ -23,6 +23,9 @@
         <%= raw SiteConfig.before_topic_html %>
         <%= raw @topic.body_html %>
 
+        <% if @poll %>
+          <%=  render partial: "polls/poll", object: @poll %>
+        <% end %>
 
         <%= raw SiteConfig.after_topic_html %>
         <%= social_share_button_tag h("#{@topic.title} via: @#{Setting.twitter_id} ") %>

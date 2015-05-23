@@ -6,8 +6,8 @@ class TopicsController < ApplicationController
 
   def index
     Rack::MiniProfiler.step("@suggest_topics") do
-      @suggest_topics = Topic.without_hide_nodes.suggest.fields_for_list.includes(:user).limit(3)
-      @suggest_topic_ids = @suggest_topics.pluck(:id)
+      @suggest_topics = Topic.without_hide_nodes.suggest.fields_for_list.limit(3).to_a
+      @suggest_topic_ids = @suggest_topics.collect(&:id)
     end
 
     Rack::MiniProfiler.step("find_topics") do
@@ -18,7 +18,7 @@ class TopicsController < ApplicationController
       else
         @topics = @topics.without_hide_nodes
       end
-      @topics = @topics.fields_for_list.includes(:user)
+      @topics = @topics.fields_for_list
       @topics = @topics.paginate(page: params[:page], per_page: 15, total_entries: 1500)
     end
 
@@ -71,9 +71,16 @@ class TopicsController < ApplicationController
   end
 
   def show
+    threads = []
     @topic = Topic.without_body.includes(:user).find(params[:id])
-    @topic.hits.incr(1)
-    @node = @topic.node
+
+    threads << Thread.new do
+      @topic.hits.incr(1)
+    end
+    threads << Thread.new do
+      @node = @topic.node
+    end
+
     @show_raw = params[:raw] == '1'
 
     @per_page = Reply.per_page
@@ -81,8 +88,11 @@ class TopicsController < ApplicationController
     params[:page] = @topic.last_page_with_per_page(@per_page) if params[:page].blank?
     @page = params[:page].to_i > 0 ? params[:page].to_i : 1
 
-    @replies = @topic.replies.unscoped.without_body.asc(:_id)
-    @replies = @replies.paginate(page: @page, per_page: @per_page)
+    threads << Thread.new do
+      @replies = @topic.replies.unscoped.without_body.asc(:_id)
+      @replies = @replies.paginate(page: @page, per_page: @per_page)
+    end
+    threads.each(&:join)
 
     check_current_user_status_for_topic
     set_special_node_active_menu
@@ -156,7 +166,7 @@ class TopicsController < ApplicationController
     if current_user.admin?
       @topic.admin_editing = true
     end
-    
+
     if @topic.lock_node == false || current_user.admin?
       # 锁定接点的时候，只有管理员可以修改节点
       @topic.node_id = topic_params[:node_id]

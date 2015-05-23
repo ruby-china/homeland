@@ -7,7 +7,7 @@ module V3
       end
       
       desc %(获取当前用户的通知列表。
-**NOTE**:（此接口不会讲取到的通知设成已读，你需要调用一下 /notifications/read）
+**NOTE**:（此接口不会将取到的通知设成已读，你需要调用一下 /notifications/read）
 
 ### Returns:
 

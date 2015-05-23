@@ -2,7 +2,7 @@ module V3
   class Likes < Grape::API
     resource :likes do      
       desc %(创建喜欢
-这是一个多态的接口，支持喜欢 `topic` 和 `reply`，你可以讲喜欢的函数设计成和 API 一样
+这是一个多态的接口，支持喜欢 `topic` 和 `reply`，你可以将喜欢的函数设计成和 API 一样
 
 例如：
 

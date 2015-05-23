@@ -762,7 +762,7 @@ a.followed {
     border: 0px;
     margin: 2px;
     border-radius: 0px;
-    display:inline-block;
+    word-break: break-all;
     line-height: 20px;
     font-family:Monaco,Menlo, "Courier New", monospace;
   }

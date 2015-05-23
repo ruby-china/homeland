@@ -71,13 +71,13 @@ class TopicsController < ApplicationController
   end
 
   def show
-    threads = []
+    @threads = []
     @topic = Topic.without_body.includes(:user).find(params[:id])
 
-    threads << Thread.new do
+    @threads << Thread.new do
       @topic.hits.incr(1)
     end
-    threads << Thread.new do
+    @threads << Thread.new do
       @node = @topic.node
     end
 
@@ -88,11 +88,13 @@ class TopicsController < ApplicationController
     params[:page] = @topic.last_page_with_per_page(@per_page) if params[:page].blank?
     @page = params[:page].to_i > 0 ? params[:page].to_i : 1
 
-    threads << Thread.new do
+    @threads << Thread.new do
       @replies = @topic.replies.unscoped.without_body.asc(:_id)
       @replies = @replies.paginate(page: @page, per_page: @per_page)
+      
+      check_current_user_liked_replies
     end
-    threads.each(&:join)
+    @threads.each(&:join)
 
     check_current_user_status_for_topic
     set_special_node_active_menu
@@ -101,15 +103,27 @@ class TopicsController < ApplicationController
 
     fresh_when(etag: [@topic, @has_followed, @has_favorited, @replies, @node, @show_raw])
   end
+  
+  def check_current_user_liked_replies
+    return false if not current_user
+    
+    # 找出用户 like 过的 Reply，给 JS 处理 like 功能的状态
+    @user_liked_reply_ids = []
+    @replies.each do |r| 
+      if r.liked_user_ids.index(current_user.id) != nil
+        @user_liked_reply_ids << r.id 
+      end
+    end
+  end
 
   def check_current_user_status_for_topic
     return false if not current_user
-
-    # 找出用户 like 过的 Reply，给 JS 处理 like 功能的状态
-    @user_liked_reply_ids = []
-    @replies.each { |r| @user_liked_reply_ids << r.id if r.liked_user_ids.index(current_user.id) != nil }
-    # 通知处理
-    current_user.read_topic(@topic)
+    
+    @threads << Thread.new do
+      # 通知处理
+      current_user.read_topic(@topic)
+    end
+    
     # 是否关注过
     @has_followed = @topic.follower_ids.index(current_user.id) == nil
     # 是否收藏

@@ -18,21 +18,26 @@ class FtpSync
     @passive = passive
   end
   
+  def ftp
+    @ftp ||= Net::FTP.new(@host)
+  end
+  
   # sync a local directory to a remote directory
   def sync(local_dir, remote_dir)
-    ftp = Net::FTP.new(@host)
     begin
       ftp.login(@user, @password)
       ftp.passive = @passive
-      puts "logged in, start syncing..."
+      puts "FTP => Logged in, start syncing..."
       
       sync_folder(local_dir, remote_dir, ftp)
       
-      puts "sync finished"
+      puts "FTP => Sync finished."
       
     rescue Net::FTPPermError => e
       puts "Failed: #{e.message}"
-      return false
+    ensure
+      ftp.close
+      puts "FTP => Closed."
     end
   end
   
@@ -44,7 +49,7 @@ class FtpSync
     begin
       ftp.login(@user, @password)
       ftp.passive = @passive
-      puts "logged in, start copying #{dir_source} to #{dir_dest}..."
+      puts "FTP => logged in, start copying #{dir_source} to #{dir_dest}..."
       
       #create a tmp folder locally
       tmp_folder = "tmp/ftp_sync"
@@ -66,7 +71,7 @@ class FtpSync
       Dir.chdir ".."
       FileUtils.rm_rf tmp_folder
 
-      puts "copy finished"
+      puts "FTP => Copy finished."
     end    
   end
   
@@ -100,12 +105,12 @@ class FtpSync
   end
   
   def upload_file(file, ftp)
-    put_title "upload file: #{full_file_path(file)}"
     ftp.put(file)
+    put_title "FTP => -> #{file}"
   end
   
   def upload_folder(dir, ftp)
-    put_title "upload folder: #{full_file_path(dir)}"
+    put_title "FTP => #{dir}"
     Dir.chdir dir
     ftp.mkdir dir
     ftp.chdir dir
@@ -116,7 +121,7 @@ class FtpSync
       upload_folder(subdir, ftp)
     end
     
-    local_files.each do |file|
+    Parallel.each(local_files, in_threads: 20) do |file|
       upload_file(file, ftp)
     end
     
@@ -135,7 +140,7 @@ class FtpSync
       ftp.chdir remote_dir
     end
     
-    put_title "process folder: #{Dir.pwd}"
+    put_title "FTP => Sync #{Dir.pwd}"
     
     local_dirs, local_files = get_local_dir_and_file_names
     remote_dirs, remote_files = get_remote_dir_and_file_names(ftp)
@@ -153,17 +158,13 @@ class FtpSync
     # puts existing_dirs
     # put_title "existing files"
     # puts existing_files
-    
-    new_files.each do |file|
-      upload_file(file, ftp)
-    end
-    
-    existing_files.each do |file|
+    Parallel.each(new_files + existing_files, in_threads: 20) do |file|
       upload_file(file, ftp)
     end
     
     new_dirs.each do |dir|
       upload_folder(dir, ftp)
+      raise Parallel::Break
     end
     
     existing_dirs.each do |dir|

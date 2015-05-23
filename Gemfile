@@ -96,6 +96,8 @@ gem 'dalli', '2.7.1'
 
 gem 'puma'
 
+gem 'parallel'
+
 # for api 跨域
 gem 'rack-cors', require: 'rack/cors'
 gem 'rack-utf8_sanitizer'

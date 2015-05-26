@@ -6,7 +6,7 @@ new_comment = Comment.new(commentable_type: commentable.class.name, commentable_
   <div class="panel-heading">评论列表</div>
   <div class="panel-body">
     <% if !comments.blank? %>
-      <%= render :partial => "/shared/comment", collection: comments, cache: true %>
+    <%= render :partial => "/shared/comment", :collection => comments %>
     <% else %>
     <div class="no-result"><%= t("comments.no_comment") %>.</div>
     <% end %>

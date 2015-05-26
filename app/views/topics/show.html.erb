@@ -54,7 +54,9 @@
         共收到 <b><%= @topic.replies_count %></b> 条回复
       </div>
       <div class="items panel-body">
-        <%= render partial: "replies/reply", collection: @replies, cache: Proc.new { |r| [r, @show_raw] } %>
+        <%= cache([@topic,params[:page],"raw:#{@show_raw}"]) do %>
+          <%= render partial: "replies/reply", collection: @replies %>
+        <% end %>
       </div>
       <div class="panel-footer clearfix">
         <%= will_paginate @replies, inner_window: 2, params: { anchor: 'replies' } %>

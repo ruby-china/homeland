@@ -1,6 +1,8 @@
+<%= cache(["notifications2",notification]) do %>
 <div class="media notification" id="<%= notification.anchor %>">
   <%= render partial: "notifications/#{notification.class.name.underscore}", locals: { notification: notification } %>
   <div class="media-right opts">
     <%= link_to icon_tag("trash"), notification_path(notification), method: :delete, remote: true %>
   </div>
 </div>
+<% end %>

@@ -82,12 +82,6 @@ describe TopicsHelper, :type => :helper do
       expect(helper.markdown("@huacnlee hello @ruby_box")).to eq("<p><a href=\"/huacnlee\" class=\"at_user\" title=\"@huacnlee\"><i>@</i>huacnlee</a> hello <a href=\"/ruby_box\" class=\"at_user\" title=\"@ruby_box\"><i>@</i>ruby_box</a></p>")
     end
 
-    it "should not allow H1-H6 to h4" do
-      ['# ruby','## ruby','### ruby','#### ruby',"ruby\n----","ruby\n===="].each do |str|
-        expect(helper.markdown(str)).to eq("<h4>ruby</h4>")
-      end
-    end
-
     it "should support ul,ol" do
        expect(helper.markdown("* Ruby on Rails\n* Sinatra").gsub("\n","")).to eq("<ul><li>Ruby on Rails</li><li>Sinatra</li></ul>")
        expect(helper.markdown("1. Ruby on Rails\n2. Sinatra").gsub("\n","")).to eq("<ol><li>Ruby on Rails</li><li>Sinatra</li></ol>")

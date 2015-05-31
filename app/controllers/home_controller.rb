@@ -33,4 +33,8 @@ class HomeController < ApplicationController
   def error_404
     render_404
   end
+  
+  def markdown
+    set_seo_meta("Markdown Guide")
+  end
 end

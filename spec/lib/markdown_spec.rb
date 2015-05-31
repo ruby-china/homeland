@@ -12,7 +12,39 @@ describe 'markdown' do
     let!(:doc) { Nokogiri::HTML.fragment(MarkdownTopicConverter.format(raw)) }
     subject { doc }
 
-    # {{{ describe 'mention user'
+    describe 'heading' do
+      subject { super().inner_html }
+
+      context 'h1' do
+        let(:raw) { "# foo Bar 的" }
+        it { is_expected.to eq(%(<h2 id="foo Bar 的">foo Bar 的</h2>))}
+      end
+
+      context 'h2' do
+        let(:raw) { "## 这是什么" }
+        it { is_expected.to eq(%(<h2 id="这是什么">这是什么</h2>))}
+      end
+
+      context 'h3' do
+        let(:raw) { "### 这是什么" }
+        it { is_expected.to eq(%(<h3 id="这是什么">这是什么</h3>))}
+      end
+
+      context 'h4' do
+        let(:raw) { "#### 这是什么" }
+        it { is_expected.to eq(%(<h4 id="这是什么">这是什么</h4>))}
+      end
+
+      context 'h5' do
+        let(:raw) { "##### 这是什么" }
+        it { is_expected.to eq(%(<h5 id="这是什么">这是什么</h5>))}
+      end
+
+      context 'h6' do
+        let(:raw) { "###### 这是什么" }
+        it { is_expected.to eq(%(<h6 id="这是什么">这是什么</h6>))}
+      end
+    end
 
     describe "encoding with Chinese chars" do
       context "a simple" do
@@ -45,10 +77,11 @@ describe 'markdown' do
 
     describe 'at user' do
       context '@user in text' do
-        let(:raw) { '@user' }
+        let(:raw) { '@foo' }
 
         it 'has a link' do
           expect(doc.css('a').size).to eq(1)
+          expect(doc.inner_html).to eq(%(<p><a href="/foo" class="at_user" title="@foo"><i>@</i>foo</a></p>))
         end
 
         describe 'the link' do
@@ -400,5 +433,165 @@ describe 'markdown' do
         end
       end
     end
+    
+    describe 'Full example' do
+      let(:raw) {
+        %(# Markdown
+
+Markdown is a text formatting syntax inspired on plain text email. In the words of its creator, [John Gruber][]:
+
+> The idea is that a Markdown-formatted document should be publishable as-is, as plain text, without looking like it’s been marked up with tags or formatting instructions.
+
+[John Gruber]: http://daringfireball.net/
+
+
+## Syntax Guide - Heading 2
+
+### Strong and Emphasize - Heading 3
+
+#### Heading 4
+
+##### Heading 5
+
+###### Heading 6
+
+```
+*emphasize*    **strong**
+_emphasize_    __strong__
+```
+
+----
+
+**Shortcuts**
+
+- Add/remove bold:
+
+  ⌘-B for Mac / Ctrl-B for Windows and Linux
+
+- Add/remove italic:
+
+  ⌘-I for Mac / Ctrl-I for windows and Linux
+
+### List
+
+- Ruby
+  - Rails
+    - ActiveRecord
+- Go
+  - Gofmt
+  - Revel
+- Node.js
+  - Koa
+  - Express
+
+### Number List
+
+1. Node.js
+2. Ruby
+3. Go
+
+### Tables
+
+| header 1 | header 3 |
+| -------- | -------- |
+| cell 1   | cell 2   |
+| cell 3   | cell 4   |
+
+### Links
+
+Inline links:
+
+[link text](http://url.com/ "title")
+[link text](http://url.com/)
+
+
+```rb
+class Foo
+end
+```)
+      }
+      let(:out) {
+        %(<h2 id="Markdown">Markdown</h2>
+<p>Markdown is a text formatting syntax inspired on plain text email. In the words of its creator, <a href="http://daringfireball.net/" target="_blank">John Gruber</a>:</p>
+
+<blockquote>
+<p>The idea is that a Markdown-formatted document should be publishable as-is, as plain text, without looking like it’s been marked up with tags or formatting instructions.</p>
+</blockquote>
+<h2 id="Syntax Guide - Heading 2">Syntax Guide - Heading 2</h2><h3 id="Strong and Emphasize - Heading 3">Strong and Emphasize - Heading 3</h3><h4 id="Heading 4">Heading 4</h4><h5 id="Heading 5">Heading 5</h5><h6 id="Heading 6">Heading 6</h6><pre class="highlight plaintext"><code>*emphasize*    **strong**
+_emphasize_    __strong__</code></pre>
+
+<hr>
+
+<p><strong>Shortcuts</strong></p>
+
+<ul>
+<li>Add/remove bold:</li>
+</ul>
+
+<p>⌘-B for Mac / Ctrl-B for Windows and Linux</p>
+
+<ul>
+<li>Add/remove italic:</li>
+</ul>
+
+<p>⌘-I for Mac / Ctrl-I for windows and Linux</p>
+<h3 id="List">List</h3>
+<ul>
+<li>Ruby
+
+<ul>
+<li>Rails</li>
+<li>ActiveRecord</li>
+</ul>
+</li>
+<li>Go
+
+<ul>
+<li>Gofmt</li>
+<li>Revel</li>
+</ul>
+</li>
+<li>Node.js
+
+<ul>
+<li>Koa</li>
+<li>Express</li>
+</ul>
+</li>
+</ul>
+<h3 id="Number List">Number List</h3>
+<ol>
+<li>Node.js</li>
+<li>Ruby</li>
+<li>Go</li>
+</ol>
+<h3 id="Tables">Tables</h3><table class="table table-striped">
+<tr>
+<th>header 1</th>
+<th>header 3</th>
+</tr>
+<tr>
+<td>cell 1</td>
+<td>cell 2</td>
+</tr>
+<tr>
+<td>cell 3</td>
+<td>cell 4</td>
+</tr>
+</table><h3 id="Links">Links</h3>
+<p>Inline links:</p>
+
+<p><a href="http://url.com/" title="title" target="_blank">link text</a><br>
+<a href="http://url.com/" target="_blank">link text</a></p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">Foo</span>
+<span class="k">end</span></code></pre>)
+      }
+    
+      it 'should work' do
+        expect(doc.inner_html).to eq(out)
+      end
+    end
   end
+  
+  
 end

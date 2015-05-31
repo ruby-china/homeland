@@ -1,0 +1,15 @@
+<% cache(['markdown-guide', Digest::MD5.hexdigest(MARKDOWN_DOC)]) do %>
+<div class="panel markdown panel-default">
+  <div class="panel-body">
+    <h1>Markdown 教程</h1>
+    <div class="row">
+      <div class="col-md-6">
+        <pre><code><%= MARKDOWN_DOC %></code></pre>
+      </div>
+      <div class="col-md-6">
+        <%= markdown(MARKDOWN_DOC)%>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

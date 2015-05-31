@@ -282,7 +282,11 @@ Ruby China 支持表情符号，你可以用系统默认的 Emoji 符号（无�
 
 #### 一些表情例子
 
-:plus1: :thumbsdown: :100: :bell: :smile: :clap: :cry: :gift: :question: :bomb: :heart: :point_up: :point_down: :coffee:
+:smile: :laughing: :dizzy_face: :sob: :cold_sweat: :sweat_smile:  :cry: :triumph: :heart_eyes:  :satisfied: :relaxed: :sunglasses: :weary: 
+
+:plus1: :thumbsdown: :100: :clap: :bell: :gift: :question: :bomb: :heart: :coffee: :cyclone: :bow: :kiss: :pray: :shit: :sweat_drops: :exclamation: :anger: 
+
+更多表情请访问：[http://www.emoji-cheat-sheet.com](http://www.emoji-cheat-sheet.com)
 
 ### 大标题 - Heading 3
 

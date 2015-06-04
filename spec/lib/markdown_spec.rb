@@ -89,7 +89,7 @@ describe 'markdown' do
 
           describe '[:href]' do
             subject { super()[:href] }
-            it { is_expected.to eq('/user') }
+            it { is_expected.to eq('/foo') }
           end
 
           describe '[:class]' do
@@ -99,12 +99,12 @@ describe 'markdown' do
 
           describe '[:title]' do
             subject { super()[:title] }
-            it { is_expected.to eq('@user') }
+            it { is_expected.to eq('@foo') }
           end
 
           describe '#inner_html' do
             subject { super().inner_html }
-            it { is_expected.to eq('<i>@</i>user') }
+            it { is_expected.to eq('<i>@</i>foo') }
           end
         end
       end
@@ -393,7 +393,7 @@ describe 'markdown' do
 | cell 1   | cell 2   |
 | cell 3   | cell 4   |) }
 
-      it { expect(doc.inner_html).to eq "<table class=\"table table-striped\">\n<tr>\n<th>header 1</th>\n<th>header 3</th>\n</tr>\n<tr>\n<td>cell 1</td>\n<td>cell 2</td>\n</tr>\n<tr>\n<td>cell 3</td>\n<td>cell 4</td>\n</tr>\n</table>" }
+      it { expect(doc.inner_html).to eq "<table class=\"table table-bordered table-striped\">\n<tr>\n<th>header 1</th>\n<th>header 3</th>\n</tr>\n<tr>\n<td>cell 1</td>\n<td>cell 2</td>\n</tr>\n<tr>\n<td>cell 3</td>\n<td>cell 4</td>\n</tr>\n</table>" }
     end
 
     describe 'Escape HTML tags' do
@@ -565,7 +565,7 @@ _emphasize_    __strong__</code></pre>
 <li>Ruby</li>
 <li>Go</li>
 </ol>
-<h3 id="Tables">Tables</h3><table class="table table-striped">
+<h3 id="Tables">Tables</h3><table class="table table-bordered table-striped">
 <tr>
 <th>header 1</th>
 <th>header 3</th>

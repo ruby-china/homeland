@@ -1,13 +1,5 @@
 <% if can? :create, Topic %>
   <% cache(["sidebar_new_topic_box",SiteConfig.new_topic_dropdown_node_ids]) do %>
-    <%
-      if !SiteConfig.new_topic_dropdown_node_ids.blank?
-        ids = SiteConfig.new_topic_dropdown_node_ids.split(",").collect { |id| id.to_i }
-      else
-        ids = []
-      end
-      @hot_nodes = Node.where(:_id.in => ids).limit(5)
-    %>
     <div class="panel panel-default clearfix">
       <div class="panel-body">
         <div class="btn-group pull-left">
@@ -16,8 +8,10 @@
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu">
-            <% @hot_nodes.each do |node| %>
-              <li><%= link_to(node.name, new_topic_path(node: node.id)) %></li>
+            <% Node.new_topic_dropdowns.each do |node| %>
+              <li>
+                <%= link_to(node.name, new_topic_path(node: node.id)) %>
+              </li>
             <% end %>
           </ul>
         </div>

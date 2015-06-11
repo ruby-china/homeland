@@ -8,7 +8,7 @@ class Node
   field :summary
   field :sort, type: Integer, default: 0
   field :topics_count, type: Integer, default: 0
-  
+
   delegate :name, to: :section, prefix: true, allow_nil: true
 
   has_many :topics
@@ -38,20 +38,29 @@ class Node
       Node.all.collect { |n| [n.name,n.id] }
     end
   end
-  
+
   def self.jobs_id
     25
   end
-  
+
   # Markdown 转换过后的 HTML
   def summary_html
     Rails.cache.fetch("#{self.cache_key}/summary_html") do
       MarkdownConverter.convert(self.summary)
     end
   end
-  
+
   # 是否为 jobs 节点
   def jobs?
     self.id == self.class.jobs_id
+  end
+
+  def self.new_topic_dropdowns
+    if SiteConfig.new_topic_dropdown_node_ids.present?
+      node_ids = SiteConfig.new_topic_dropdown_node_ids.split(',').uniq.take(5)
+      where(:_id.in => node_ids)
+    else
+      []
+    end
   end
 end

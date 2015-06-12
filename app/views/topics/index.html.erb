@@ -28,13 +28,6 @@
       <%= render "/shared/hot_locations" %>
     <% end %>
 
-    <% if !@node.blank? %>
-      <% content_for :node_feed_link do %>
-        <%= auto_discovery_link_tag(:rss, feed_node_topics_url, title: "#{@node.name} 节点最新话题") %>
-      <% end %>
-    <% end %>
-
-
     <% if current_user %>
     <script type="text/javascript">
       var readed_topic_ids = <%= current_user.filter_readed_topics(@topics + (@suggest_topics || [])) %>;

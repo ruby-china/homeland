@@ -506,6 +506,11 @@ a.followed {
     a.active { color: #333; border-bottom: 1px dotted #ccc; text-decoration: none; }
     a.popular.active { color: $red; border-bottom-color: $red;}
   }
+  .topics-group:first-child {
+    @media (max-width: 991px) {
+      .topic:last-child { border-bottom: 1px solid #F0F0F0; }
+    }
+  }
   .topic {
     min-height: 68px;
     border-bottom: 1px solid #F0F0F0;

@@ -49,13 +49,13 @@
     <%
       odd_topics, even_topics = @excellent_topics.partition.each_with_index { |t, i| i.odd?  }
     %>
-    <div class="col-md-6">
+    <div class="col-md-6 topics-group">
       <% cache([odd_topics, "odd"]) do %>
         <%= render partial: "topics/topic", collection: odd_topics, locals: { suggest: false } %>
       <% end %>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-6 topics-group">
       <% cache([even_topics, "even"]) do %>
         <%= render partial: "topics/topic", collection: even_topics, locals: { suggest: false } %>
       <% end %>

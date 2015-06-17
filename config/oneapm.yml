@@ -1,0 +1,135 @@
+#
+# OneApm RubyAgent Configuration
+#
+
+# Here are the settings that are common to all environments
+common: &default_settings
+  # ============================== LICENSE KEY ===============================
+
+  #
+  # Get your license key from oneapm.com
+  #
+  license_key: 'VwIDBU4MRe231VoOHlhBVVbb06RIB1UDBhxb264SVB0HVR4E98d5BQgNSQVQHwEF'
+
+  # Agent Enabled (Ruby/Rails Only)
+  # Valid values are true, false and auto.
+  #
+  # agent_enabled: auto
+
+  # This app_name will be the application name in oneapm.com in your account.
+  #
+  # Caution: If you change this name, a new application will appear in the OneApm
+  # user interface with the new name, and data will stop reporting to the
+  # app with the old name.
+  #
+  app_name: Ruby China
+
+  # When "true", the agent collects performance data about your
+  # application and reports this data to the OneApm service at
+  # oneapm.com. This global switch is normally overridden for each
+  # environment below. (formerly called 'enabled')
+  monitor_mode: true
+
+  # Specify its log level here.
+  log_level: info
+
+  # log_file_path: 'log'
+  # log_file_name: 'oneapm_agent.log'
+
+  # The oneapm agent communicates with the service via https by default.
+  # ssl: true
+
+  # ======================== Browser Monitoring =============================
+  browser_monitoring:
+    # By default the agent automatically injects the monitoring JavaScript
+    # into web pages. Set this attribute to false to turn off this behavior.
+    auto_instrument: true
+
+  # Proxy settings for connecting to the OneApm server.
+  #
+  # proxy_host: hostname
+  # proxy_port: 8080
+  # proxy_user:
+  # proxy_pass:
+
+  # Tells transaction tracer and error collector (when enabled)
+  # whether or not to capture HTTP params.  When true, frameworks can
+  # exclude HTTP parameters from being captured.
+  # Rails: the RoR filter_parameter_logging excludes parameters
+  capture_params: false
+
+  # Transaction tracer captures deep information about slow
+  # transactions and sends this to the OneApm service once a
+  # minute. Included in the transaction is the exact call sequence of
+  # the transactions including any SQL statements issued.
+  transaction_tracer:
+
+    # Transaction tracer is enabled by default.
+    enabled: true
+
+    # Threshold in seconds for when to collect a transaction
+    # trace. When the response time of a controller action exceeds
+    # this threshold, a transaction trace will be recorded and sent to
+    # OneApm. Valid values are any float value, or (default) "apdex_f",
+    # which will use the threshold for an dissatisfying Apdex
+    # controller action - four times the Apdex T value.
+    transaction_threshold: apdex_f
+
+    # When transaction tracer is on, SQL statements can optionally be
+    # recorded. The recorder has three modes, "off" which sends no
+    # SQL, "raw" which sends the SQL statement in its original form,
+    # and "obfuscated", which strips out numeric and string literals.
+    record_sql: obfuscated
+
+    # Threshold in seconds for when to collect stack trace for a SQL
+    # call. In other words, when SQL statements exceed this threshold,
+    # then capture and send to OneApm the current stack trace. This is
+    # helpful for pinpointing where long SQL calls originate from.
+    stack_trace_threshold: 0.200
+
+    # Determines whether the agent will capture query plans for slow
+    # SQL queries.  Only supported in mysql and postgres.  Should be
+    # set to false when using other adapters.
+    # explain_enabled: true
+
+    # Threshold for query execution time below which query plans will
+    # not be captured.  Relevant only when `explain_enabled` is true.
+    # explain_threshold: 0.5
+
+  # Error collector captures information about uncaught exceptions and
+  # sends them to OneApm for viewing
+  error_collector:
+
+    # Error collector is enabled by default.
+    enabled: true
+
+    # Ignore the following errors, add your own.
+    ignore_errors: "ActionController::RoutingError,Sinatra::NotFound,Mongoid::Errors::DocumentNotFound,ActionController::BadRequest,ActionView::MissingTemplate,ActionController::UnknownFormat"
+
+# ===================== Application Environments ========================
+# Environment-specific settings are in this section.
+# For Rails applications, RAILS_ENV is used to determine the environment.
+
+# NOTE if your application has other named environments, you should
+# provide oneapm configuration settings for these environments here.
+
+development:
+  <<: *default_settings
+  # Turn on communication to OneApm service in development mode
+  monitor_mode: true
+  app_name: Ruby China (Development)
+
+test:
+  <<: *default_settings
+  monitor_mode: false
+
+# Turn on the agent in production for 24x7 monitoring.
+production:
+  <<: *default_settings
+  monitor_mode: true
+
+# Staging environment which behaves identically to production.
+staging:
+  <<: *default_settings
+  monitor_mode: true
+  app_name: Ruby China (Staging)

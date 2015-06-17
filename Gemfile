@@ -107,6 +107,7 @@ gem 'rack-mini-profiler', require: false
 gem 'newrelic_rpm'
 gem 'newrelic_moped'
 gem 'newrelic-grape'
+gem 'oneapm_rpm'
 
 group :development, :test do
   gem 'capistrano', '2.9.0', require: false

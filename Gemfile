@@ -5,11 +5,11 @@ else
   source 'https://ruby.taobao.org'
 end
 
-gem 'rails', '4.2.1'
+gem 'rails', '~> 4.2.2'
 gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 4.0.4'
 gem 'jbuilder'
 
 gem 'actionpack-action_caching', '1.1.1'

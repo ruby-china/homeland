@@ -104,9 +104,10 @@ gem 'rack-utf8_sanitizer'
 # Mini profiler
 gem 'rack-mini-profiler', require: false
 
-gem 'newrelic_rpm'
-gem 'newrelic_moped'
-gem 'newrelic-grape'
+# gem 'newrelic_rpm'
+# gem 'newrelic_moped'
+# gem 'newrelic-grape'
+
 gem 'oneapm_rpm'
 
 group :development, :test do

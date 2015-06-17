@@ -14,7 +14,7 @@ common: &default_settings
   # Agent Enabled (Ruby/Rails Only)
   # Valid values are true, false and auto.
   #
-  # agent_enabled: auto
+  agent_enabled: true
 
   # This app_name will be the application name in oneapm.com in your account.
   #
@@ -85,7 +85,7 @@ common: &default_settings
     # call. In other words, when SQL statements exceed this threshold,
     # then capture and send to OneApm the current stack trace. This is
     # helpful for pinpointing where long SQL calls originate from.
-    stack_trace_threshold: 0.200
+    stack_trace_threshold: 0.500
 
     # Determines whether the agent will capture query plans for slow
     # SQL queries.  Only supported in mysql and postgres.  Should be

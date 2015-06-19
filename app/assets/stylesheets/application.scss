@@ -187,6 +187,8 @@ a { color: $blue; }
 .btn-success:visited { background:$green; border-color: $green; }
 .btn-success:hover { background:$greenLight; border-color: $greenLight; }
 .btn-success.active { background:$greenDark; border-color: $greenDark; }
+.open>.dropdown-toggle.btn-primary { background: #0059C7; }
+
 .navbar-btn { background: rgba(255,255,255, 0.1); color: $blueText; border:0px;}
 .navbar-btn:hover { background: rgba(255,255,255, 0.15); color: $blueText;}
 

@@ -2,6 +2,7 @@
  *= require bootstrap.min
  *= require bootstrap-select.min
  *= require font-awesome.min
+ *= require roboto
  *= require highlight
  *= require social-share-button
  *= require jquery.atwho
@@ -30,6 +31,7 @@
 body {
   background: #E7EAEC;
   color: $black;
+  font-family: "RobotoDraft", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .header {
@@ -42,6 +44,7 @@ body {
 
   .navbar-brand {
     color: #666 !important;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: bold;
     b { color: $red; }
   }
@@ -203,6 +206,7 @@ a { color: $blue; }
 .form-group {
   label { font-weight: normal; color: rgba(0, 0, 0, 0.40); font-size: 13px; margin-bottom: 0px;}
 }
+.control-label { font-weight: 500 !important; }
 .form-control {
   border-radius: 0px;
   border-color: #D5DCE1;
@@ -241,11 +245,11 @@ form {
   .form-actions { padding-left:190px; }
 }
 
-.table-bordered>thead>tr>td, .table-bordered>thead>tr>th, .table>tr>th { 
+.table-bordered>thead>tr>td, .table-bordered>thead>tr>th, .table>tr>th {
   border-bottom-width: 1px;
   background: #F0F0F0;
-  color: #888; 
-  font-weight: normal; 
+  color: #888;
+  font-weight: normal;
   font-size: 14px;
 }
 .table-striped>tr:nth-of-type(odd) {
@@ -264,9 +268,9 @@ form {
 
 .bootstrap-select {
   .btn-default,
-  .btn-default.active { 
+  .btn-default.active {
     border: 0px;
-    background: #FFF; 
+    background: #FFF;
     border-bottom:1px solid #D5DCDB;
     transition: none;
     padding-bottom: 7px;
@@ -325,16 +329,16 @@ form {
 }
 abbr[title] { border-bottom: 0px; cursor: text; }
 
-kbd { 
+kbd {
   background-color: #f5f5f5; color: #999; border-radius: 2px; border-color: #fafafa;
   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.05);
 }
 
-.table>tbody>tr>td, 
-.table>tbody>tr>th, 
-.table>tfoot>tr>td, 
-.table>tfoot>tr>th, 
-.table>thead>tr>td, 
+.table>tbody>tr>td,
+.table>tbody>tr>th,
+.table>tfoot>tr>td,
+.table>tfoot>tr>th,
+.table>thead>tr>td,
 .table>thead>tr>th {
   padding: 4px 5px;
 }
@@ -432,7 +436,7 @@ img.emoji { width:20px; height:20px; }
 .deleted { text-decoration: line-through; color: $grayDark; }
 .no-result { color: #aaa; padding-bottom: 20px; text-align: center;}
 
-a.followed {  
+a.followed {
   .fa {
     @extend .animated;
     @extend .bounceIn;
@@ -583,16 +587,16 @@ a.followed {
   }
 
   .info {
-      color:#c0c0c0;
-      font-size:12px;
-      a { color: #444; }
-      .node {
-        padding: 1px 0px;
-        color: #778087;
-        text-decoration: none;
-        background-color: #f5f5f5;
-      }
-      em { font-style:normal; }
+    color:#c0c0c0;
+    font-size:12px;
+    a { color: #444; }
+    .node {
+      padding: 1px 0px;
+      color: #778087;
+      text-decoration: none;
+      background-color: #f5f5f5;
+    }
+    em { font-style:normal; }
 
     .opts {
       a {
@@ -600,7 +604,7 @@ a.followed {
         &:hover { color: #333; }
       }
     }
-    }
+  }
 }
 
 #replies {
@@ -610,7 +614,6 @@ a.followed {
     padding-bottom: 0px;
   }
   .info {
-    color:#aaa; margin-bottom:2px;
     .uname { color: #777; font-weight: bold; }
     .opts {
       a {
@@ -706,7 +709,7 @@ a.followed {
 .markdown {
   position:relative;
   line-height: 1.8em; font-size:14px; text-overflow: ellipsis; word-wrap: break-word;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-family: "RobotoDraft", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
   img { max-width: 100%; }
   p,
   pre,
@@ -714,14 +717,31 @@ a.followed {
   ol,
   blockquote { margin-bottom: 16px; }
 
-  p { font-size: 14px; line-height: 1.5em; }
+  p { font-size: 14px; line-height: 1.5em; text-align: justify; }
   hr { border:2px dashed $gray; border-bottom:0px; margin: 18px auto; width:50%; }
   blockquote {
-    margin-left:20px;
-    p { font-size:12px; color:#777; font-weight:normal; line-height:160%; }
+    margin: 0 18px 15px 18px;
+    padding: 0;
+    padding-left: 32px;
+    border: 0px;
+    quotes: "\201C""\201D""\2018""\2019";
+    position: relative;
+    line-height: 1.45;
+    p { display:inline; font-size:12px; color: #999; }
+    &:before,
+    &:after {
+      display: block;
+      content: "\201C";
+      font-size: 35px;
+      position: absolute;
+      font-family: serif;
+      left: 0px;
+      top: 0px;
+      color: #aaa;
+    }
   }
   pre {
-    font-family:Monaco,Menlo,"Courier New", monospace;
+    font-family: Menlo, Monaco, "Courier New", monospace;
     font-size: 12px;
     background-color: #F5F5F5;
     border: 0px;
@@ -799,13 +819,13 @@ a.followed {
   h3,
   h4 {
     text-align: left;
-    font-weight: bold; 
-    font-size: 16px !important; 
+    font-weight: bold;
+    font-size: 16px !important;
     line-height: 100%;
-    margin: 0; color: #555; 
+    margin: 0; color: #555;
     margin-top: 16px; margin-bottom:16px;
     border-bottom:1px solid #eee;
-    padding-bottom: 5px; 
+    padding-bottom: 5px;
   }
   h2 { font-size: 20px !important; border-bottom-width: 2px; padding-bottom: 15px; margin-top: 20px; margin-bottom:20px; color: #111; }
   h3 { font-size: 18px !important; padding-bottom: 10px; margin-top: 20px; margin-bottom: 20px; color: #333; }
@@ -862,6 +882,6 @@ footer {
   .profiler-result .profiler-number { color: #aaa !important;}
   .profiler-result .profiler-unit { color: #ccc !important;}
   .profiler-results .profiler-popup {
-  
+
   }
 }

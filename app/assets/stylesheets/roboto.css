@@ -1,0 +1,25 @@
+@font-face {
+  font-family: 'RobotoDraft';
+  font-style: normal;
+  font-weight: 400;
+  src: local('RobotoDraft'), local('RobotoDraft-Regular'), local('Roboto-Regular'), font-url(RobotoDraftRegular.woff2) format('woff2'), font-url(RobotoDraftRegular.woff) format('woff');
+}
+@font-face {
+  font-family: 'RobotoDraft';
+  font-style: normal;
+  font-weight: 500;
+  src: local('RobotoDraft Medium'), local('RobotoDraft-Medium'), local('Roboto-Medium'), font-url(RobotoDraftMedium.woff2) format('woff2'), font-url(RobotoDraftMedium.woff) format('woff');
+}
+@font-face {
+  font-family: 'RobotoDraft';
+  font-style: normal;
+  font-weight: 700;
+  src: local('RobotoDraft Bold'), local('RobotoDraft-Bold'), local('Roboto-Bold'), font-url(RobotoDraftBold.woff2) format('woff2'), font-url(RobotoDraftBold.woff) format('woff');
+}
+@font-face {
+  font-family: 'RobotoDraft';
+  font-style: italic;
+  font-weight: 400;
+  src: local('RobotoDraft Italic'), local('RobotoDraft-Italic'), local('Roboto-Italic'), font-url(RobotoDraftItalic.woff2) format('woff2'), font-url(RobotoDraftItalic.woff) format('woff');
+}
+/*# sourceMappingURL=roboto.css.map */

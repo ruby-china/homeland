@@ -51,7 +51,7 @@ The Gemfile's dependencies are satisfied
 
 Configure
 --------------------------------------------------------------------------------
-Your MongoDB host (default: 127.0.0.1:27017): 
+Your MongoDB host (default: 127.0.0.1:27017):
 Your Redis host (default: 127.0.0.1:6379):
 --------------------------------------------------------------------------------
 
@@ -78,6 +78,7 @@ bundle exec rspec spec
 
 * [Twitter Bootstrap](https://twitter.github.com/bootstrap)
 * [Font Awesome](http://fortawesome.github.io/Font-Awesome/icons/)
+* [Google Roboto Font](https://github.com/google/roboto)
 
 Forked from [Homeland Project](https://github.com/huacnlee/homeland)
 Theme from [Mediom](https://github.com/huacnlee/mediom)

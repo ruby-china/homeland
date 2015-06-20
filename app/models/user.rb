@@ -12,7 +12,7 @@ class User
   ALLOW_LOGIN_CHARS_REGEXP = /\A\w+\z/
 
   devise :database_authenticatable, :registerable, :recoverable,
-         :rememberable, :trackable, :validatable, :omniauthable
+         :rememberable, :trackable, :validatable, :omniauthable, :async
 
   field :email, type: String, default: ""
   # Email 的 md5 值，用于 Gravatar 头像
@@ -454,7 +454,7 @@ class User
     return false if user.blank?
     self.following.delete(user)
   end
-  
+
   def avatar_url
     if self.avatar?
       self.avatar.url(:large)

@@ -126,6 +126,8 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    devise-async (0.10.1)
+      devise (~> 3.2)
     devise-encryptable (0.1.2)
       devise (>= 2.1.0)
     diff-lcs (1.2.5)
@@ -417,6 +419,7 @@ DEPENDENCIES
   database_cleaner
   derailed_benchmarks!
   devise (~> 3.4.0)
+  devise-async
   devise-encryptable (= 0.1.2)
   doorkeeper
   doorkeeper-i18n!

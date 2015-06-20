@@ -303,9 +303,21 @@ form {
 
 .pagination {
   margin: 0;
-  li>a { color: $black; }
+  &>li:first-child>a,
+  &>li:first-child>span { border-top-left-radius: 3px; border-bottom-left-radius: 3px; }
+
+  &>li:last-child>a,
+  &>li:last-child>span { border-top-right-radius: 3px; border-bottom-right-radius: 3px; }
+  li>a { color: #777; }
+
+  li>a,
+  .disabled>a,
+  li>span { border-color: #E0E0E0 !important; }
+
+  li>a:hover { color: #555; background: $gray; }
+
   li.active>a,
-  li.active>a:hover { background-color: $blueLight; border-color: $blueLight; color: $blueText; }
+  li.active>a:hover { background-color: #CFDFFC; border-color: #BDCFEF !important; color: $blue; }
 }
 .pager {
   margin: 0px;

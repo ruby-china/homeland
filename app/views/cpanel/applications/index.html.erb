@@ -13,7 +13,8 @@
       <td>编号</td>
       <td>名称</td>
       <td>Client Id</td>
-      <td>Owner</td>
+      <td>所有者</td>
+      <td>用户量</td>
       <td>创建时间</td>
       <td class="opts"></td>
     </tr>
@@ -23,6 +24,7 @@
       <td><%= link_to item.name, cpanel_application_path(item.id) %></td>
       <td><%= item.uid %></td>
       <td><%= user_name_tag(item.owner) %></td>
+      <td><%= item.access_tokens.count %></td>
       <td><%= l(item.created_at, format: :long) %></td>
       <td>
         <%= link_to "", cpanel_application_path(item.id), method: :delete, 'data-confirm' => '确定要删除吗?', class: "fa fa-trash" %>

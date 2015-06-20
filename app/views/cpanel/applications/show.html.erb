@@ -11,6 +11,8 @@
     <label class="col-sm-1">Secret:</label> <%= @application.secret %></li>
   <li class="list-group-item">
     <label class="col-sm-1">创建人:</label> <%= user_name_tag(@application.owner) %></li>
+  <li class="list-group-item">
+    <label class="col-sm-1">用户量:</label> <%= @application.access_tokens.count %></li>
 </ul>
 
 <div class="toolbar">

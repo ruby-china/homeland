@@ -13,6 +13,7 @@
         <th><%= t('.name') %></th>
         <th>Client Id</th>
         <th><%= t('.callback_url') %></th>
+        <th>用户量</th>
         <th></th>
       </tr>
       </thead>
@@ -22,6 +23,7 @@
           <td><%= link_to app.name, oauth_application_path(app) %></td>
           <td><%= app.uid %></td>
           <td><%= app.redirect_uri %></td>
+          <td><%= app.access_tokens.count %></td>
           <td class="opts">
             <%= link_to icon_tag('pencil'), edit_oauth_application_path(app)%>
             <%= link_to icon_tag('trash'), oauth_application_path(app), data: { method: :delete, confirm: "确定要删除么？" }%>

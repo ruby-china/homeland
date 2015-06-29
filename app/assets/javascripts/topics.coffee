@@ -232,6 +232,16 @@ window.TopicView = Backbone.View.extend
       $("form#new_reply").submit()
     return false
 
+  # 往话题编辑器里面的光标前插入两个空白字符
+  insertSpaces : (e) ->
+    target = e.target
+    start = target.selectionStart
+    end = target.selectionEnd
+    $target = $(target)
+    $target.val($target.val().substring(0, start) + "  " + $target.val().substring(end));
+    target.selectionStart = target.selectionEnd = start + 2
+    return false
+
   # 往话题编辑器里面插入代码模版
   appendCodesFromHint : (e) ->
     link = $(e.currentTarget)
@@ -258,6 +268,11 @@ window.TopicView = Backbone.View.extend
     $("textarea").unbind "keydown.mr"
     $("textarea").bind "keydown.mr","Meta+return",(el) =>
       return @submitTextArea(el)
+
+    # 绑定文本框 tab 按键事件
+    $("textarea").unbind "keydown"
+    $("textarea").bind "keydown","tab",(el) =>
+      return @insertSpaces(el)
 
     $("textarea").autogrow()
 

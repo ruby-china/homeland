@@ -2,7 +2,7 @@ module V3
   class Topics < Grape::API
     resource :topics do
       desc %(获取话题列表
-      
+
 ### Returns:
 
 ```json
@@ -55,7 +55,7 @@ module V3
 ```
 )
       params do
-        optional :type, type: String, default: "last_actived", 
+        optional :type, type: String, default: "last_actived",
                  values: %W(last_actived recent no_reply popular excellent),
                  desc: %(- last_actived - 最近更新的（社区默认排序）
 - recent - 最新创建（会包含 NoPoint 的）
@@ -68,6 +68,8 @@ module V3
         optional :limit, type: Integer, default: 20, values: 1..150
       end
       get '', each_serializer: TopicSerializer, root: "topics" do
+        params[:type].downcase!
+
         if params[:node_id].blank?
           @topics = Topic
           if current_user
@@ -81,9 +83,14 @@ module V3
           @topics = @node.topics
         end
 
-        @topics = @topics.fields_for_list.includes(:user)
-                         .send(params[:type])
-                         .offset(params[:offset]).limit(params[:limit])
+        @topics = @topics.fields_for_list.includes(:user).send(params[:type])
+        if %W(no_reply popular).index(params[:type])
+          @topics = @topics.last_actived
+        elsif params[:type] == "excellent"
+          @topics = @topics.recent
+        end
+
+        @topics = @topics.offset(params[:offset]).limit(params[:limit])
         render @topics
       end
 
@@ -176,7 +183,7 @@ module V3
           @topic.hits.incr(1)
           render @topic
         end
-        
+
         desc %(获取某个话题的回帖列表
 
 ### Returns:
@@ -229,7 +236,7 @@ module V3
           @replies = @topic.replies.unscoped.asc(:_id).includes(:user).offset(params[:offset]).limit(params[:limit])
           render @replies
         end
-        
+
         desc "创建回帖"
         params do
           requires :body, type: String, desc: "回帖内容, Markdown 格式"
@@ -246,7 +253,7 @@ module V3
             error!({ error: @reply.errors.full_messages }, 400)
           end
         end
-        
+
         desc "关注话题"
         post "follow" do
           doorkeeper_authorize!
@@ -254,7 +261,7 @@ module V3
           @topic.push_follower(current_user.id)
           { ok: 1 }
         end
-        
+
         desc "取消关注话题"
         post "unfollow" do
           doorkeeper_authorize!
@@ -262,7 +269,7 @@ module V3
           @topic.pull_follower(current_user.id)
           { ok: 1 }
         end
-        
+
         desc "收藏话题"
         post "favorite" do
           doorkeeper_authorize!
@@ -270,7 +277,7 @@ module V3
           current_user.favorite_topic(@topic.id)
           { ok: 1 }
         end
-        
+
         desc "取消收藏话题"
         post "unfavorite" do
           doorkeeper_authorize!
@@ -279,7 +286,7 @@ module V3
           { ok: 1 }
         end
       end
-      
+
     end
 
   end

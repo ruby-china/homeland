@@ -11,6 +11,9 @@ class RepliesController < ApplicationController
 
     if @reply.save
       current_user.read_topic(@topic)
+      @last_floor = @topic.replies.unscoped.without_body.count
+      @last_page_number = ((@topic.replies.count).to_f / Reply.per_page).ceil
+      @last_page_url_with_floor = topic_path(@topic) + "?page=#{@last_page_number}#reply#{@last_floor.to_s}"
       @msg = t('topics.reply_success')
     else
       @msg = @reply.errors.full_messages.join('<br />')

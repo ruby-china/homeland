@@ -101,7 +101,9 @@ class TopicsController < ApplicationController
 
     set_seo_meta "#{@topic.title} &raquo; #{t("menu.topics")}"
 
-    fresh_when(etag: [@topic, @has_followed, @has_favorited, @replies, @node, @show_raw])
+    @last_floor = ((@page -1) * Reply.per_page) + @replies.count
+
+    fresh_when(etag: [@topic, @has_followed, @has_favorited, @replies, @node, @show_raw, @last_floor])
   end
   
   def check_current_user_liked_replies

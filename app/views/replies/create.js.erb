@@ -4,13 +4,24 @@
     Turbolinks.visit(location.href);
   }
   else {
-    var current_floor = parseInt($("#replies").data("last-floor")) + 1;
-    $("#replies .items").append('<%= j(render("reply", reply: @reply, reply_counter: @topic.replies_count - 1, display_edit: true)) %>')
-      .find(".total b").text('<%= @topic.replies_count %>');
-    $("#replies .items .reply:last .reply-floor").text(current_floor + " 楼");
-    $("#replies").data("last-floor", current_floor);
-    $("#replies .reply a.edit:last").css("display","inline-block");
-    _topicView.replyCallback(1,'<%= j(@msg) %>');
+    var client_last_floor = parseInt($("#replies").data("last-floor"));
+    var current_floor = client_last_floor + 1;
+    var remote_last_floor = <%= @last_floor %>;
+    var client_current_page_number = parseInt($("#replies").data("current-page"));
+    var remote_last_page_number = <%= @last_page_number %>;
+
+    if(remote_last_floor > current_floor || remote_last_page_number > client_current_page_number){
+      var url = '<%= @last_page_url_with_floor %>';
+      Turbolinks.visit(url);
+    }
+    else{
+      $("#replies .items").append('<%= j(render("reply", reply: @reply, reply_counter: @topic.replies_count - 1, display_edit: true)) %>')
+        .find(".total b").text('<%= @topic.replies_count %>');
+      $("#replies .items .reply:last .reply-floor").text(current_floor + " 楼");
+      $("#replies").data("last-floor", current_floor);
+      $("#replies .reply a.edit:last").css("display","inline-block");
+      _topicView.replyCallback(1,'<%= j(@msg) %>');
+    }
   }
 <% else %>
   _topicView.replyCallback(0,'<%= j(@msg) %>');

@@ -1,5 +1,13 @@
 # coding: utf-8
 require "auto-space"
+
+CORRECT_CHARS = [
+  ['【', '['],
+  ['】', ']'],
+  ['（', '('],
+  ['）', ')']
+]
+
 class Topic
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -70,7 +78,7 @@ class Topic
   scope :without_node_ids, Proc.new { |ids| where(:node_id.nin => ids) }
   scope :excellent, -> { where(:excellent.gte => 1) }
   scope :without_hide_nodes, -> { where(:node_id.nin => Topic.topic_index_hide_node_ids) }
-  scope :without_nodes, Proc.new { |node_ids| 
+  scope :without_nodes, Proc.new { |node_ids|
     ids = node_ids + self.topic_index_hide_node_ids
     ids.uniq!
     where(:node_id.nin => ids)
@@ -85,8 +93,12 @@ class Topic
   def store_cache_fields
     self.node_name = self.node.try(:name) || ""
   end
-  before_save :auto_space_with_title
-  def auto_space_with_title
+
+  before_save :auto_correct_title
+  def auto_correct_title
+    CORRECT_CHARS.each do |chars|
+      self.title.sub!(chars[0], chars[1])
+    end
     self.title.auto_space!
   end
   before_save do
@@ -99,7 +111,7 @@ class Topic
   def init_last_active_mark_on_create
     self.last_active_mark = Time.now.to_i
   end
-  
+
   after_create do
     Topic.delay.notify_topic_created(self.id)
   end
@@ -165,13 +177,13 @@ class Topic
   def excellent?
     self.excellent >= 1
   end
-  
+
   def self.notify_topic_created(topic_id)
     topic = Topic.find_by_id(topic_id)
     return if topic.blank?
 
     notified_user_ids = topic.mentioned_user_ids
-    
+
     follower_ids = (topic.user.try(:follower_ids) || [])
     follower_ids.uniq!
 
@@ -186,13 +198,13 @@ class Topic
     end
     true
   end
-  
+
   def self.notify_topic_node_changed(topic_id, node_id)
     topic = Topic.find_by_id(topic_id)
     return if topic.blank?
     node = Node.find_by_id(node_id)
     return if node.blank?
-    
+
     Notification::NodeChanged.create user_id: topic.user_id, topic_id: topic_id, node_id: node_id
     return true
   end

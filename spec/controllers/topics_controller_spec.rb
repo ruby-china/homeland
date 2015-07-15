@@ -153,4 +153,19 @@ describe TopicsController, :type => :controller do
       end
     end
   end
+
+  describe "#ban" do
+    it "should not allow user ban" do
+      sign_in user
+      post :ban, :id => topic
+      expect(topic.reload.node_id).not_to eq(Node.no_point_id)
+    end
+
+    it "should not allow user suggest by admin" do
+      sign_in admin
+      post :ban, :id => topic
+      expect(response.status).to eq (302)
+      expect(topic.reload.node_id).to eq(Node.no_point_id)
+    end
+  end
 end

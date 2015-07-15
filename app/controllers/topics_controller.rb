@@ -1,7 +1,7 @@
 # coding: utf-8
 class TopicsController < ApplicationController
   load_and_authorize_resource only: [:new, :edit, :create, :update, :destroy,
-                                     :favorite, :unfavorite, :follow, :unfollow, :suggest, :unsuggest]
+                                     :favorite, :unfavorite, :follow, :unfollow, :suggest, :unsuggest, :ban]
   caches_action :feed, :node_feed, expires_in: 1.hours
 
   def index
@@ -238,6 +238,12 @@ class TopicsController < ApplicationController
     @topic = Topic.find(params[:id])
     @topic.update_attribute(:excellent, 0)
     redirect_to @topic, success: '加精已经取消。'
+  end
+
+  def ban
+    @topic = Topic.find(params[:id])
+    @topic.update_attribute(:node_id, Node.no_point_id)
+    redirect_to @topic, success: '已转移到 NoPoint 节点。'
   end
 
   private

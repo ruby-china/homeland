@@ -32,15 +32,14 @@ class Node
     CacheVersion.section_node_updated_at = Time.now
   end
 
-  # 热门节点给 select 用的
-  def self.node_collection
-    Rails.cache.fetch("node:node_collection:#{CacheVersion.section_node_updated_at}") do
-      Node.all.collect { |n| [n.name,n.id] }
-    end
-  end
-
+  # 招聘节点编号
   def self.jobs_id
     25
+  end
+
+  # NoPoint 节点编号
+  def self.no_point_id
+    61
   end
 
   # Markdown 转换过后的 HTML

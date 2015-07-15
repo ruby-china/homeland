@@ -23,6 +23,6 @@ class Section
   end
 
   def sorted_nodes
-    self.nodes.sorted
+    self.nodes.where(:_id.nin => [Node.no_point_id]).sorted
   end
 end

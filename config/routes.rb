@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   use_doorkeeper do
     controllers applications: 'oauth/applications', authorized_applications: 'oauth/authorized_applications'
   end
-  
+
   require 'sidekiq/web'
 
   resources :apps
@@ -59,6 +59,7 @@ Rails.application.routes.draw do
       delete :unfollow
       patch :suggest
       delete :unsuggest
+      post :ban
     end
     collection do
       get :no_reply

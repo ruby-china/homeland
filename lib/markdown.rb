@@ -256,7 +256,7 @@ MARKDOWN_DOC = %(# Guide
 
 这是一篇讲解如何正确使用 Ruby China 的 **Markdown** 的排版示例，学会这个很有必要，能让你的文章有更佳清晰的排版。
 
-> 引用文本：Markdown is a text formatting syntax inspired 
+> 引用文本：Markdown is a text formatting syntax inspired
 
 ## 语法指导
 
@@ -282,9 +282,9 @@ Ruby China 支持表情符号，你可以用系统默认的 Emoji 符号（无�
 
 #### 一些表情例子
 
-:smile: :laughing: :dizzy_face: :sob: :cold_sweat: :sweat_smile:  :cry: :triumph: :heart_eyes:  :satisfied: :relaxed: :sunglasses: :weary: 
+:smile: :laughing: :dizzy_face: :sob: :cold_sweat: :sweat_smile:  :cry: :triumph: :heart_eyes:  :satisfied: :relaxed: :sunglasses: :weary:
 
-:plus1: :thumbsdown: :100: :clap: :bell: :gift: :question: :bomb: :heart: :coffee: :cyclone: :bow: :kiss: :pray: :shit: :sweat_drops: :exclamation: :anger: 
+:+1: :-1: :100: :clap: :bell: :gift: :question: :bomb: :heart: :coffee: :cyclone: :bow: :kiss: :pray: :shit: :sweat_drops: :exclamation: :anger:
 
 更多表情请访问：[http://www.emoji-cheat-sheet.com](http://www.emoji-cheat-sheet.com)
 

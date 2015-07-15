@@ -97,7 +97,7 @@ class Topic
   before_save :auto_correct_title
   def auto_correct_title
     CORRECT_CHARS.each do |chars|
-      self.title.sub!(chars[0], chars[1])
+      self.title.gsub!(chars[0], chars[1])
     end
     self.title.auto_space!
   end

@@ -1,0 +1,8 @@
+<% if @topic.node_id == Node.no_point_id %>
+<div class="alert alert-warning alert-block">
+  <h5 class="title">此贴已暂时被屏蔽!</h5>
+  <div class="markdown">
+    <%= markdown @topic.node.summary %>
+  </div>
+</div>
+<% end %>

@@ -202,7 +202,10 @@ a { color: $blue; }
 
 .alert-success { background: $greenLabel; color: $greenLabelText; }
 .alert-info { background: $blueLabel; color: $blueLabelText; }
-.alert-warning { background: $yellowLabel; color: $yellowLabelText; }
+.alert-warning {
+  background: $yellowLabel; color: $yellowLabelText;
+  hr { border-color: #DAC264 !important; }
+}
 .alert-danger { background: $redLabel; color: $redLabelText; }
 
 .form-group {

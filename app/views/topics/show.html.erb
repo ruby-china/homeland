@@ -44,6 +44,8 @@
       </div>
     </div>
 
+    <%= render partial: "ban_reason" %>
+
   <% if @replies.blank? %>
     <div class="no-result">
       <%= t("topics.no_replies") %>
@@ -78,7 +80,7 @@
           </div>
           <div class="submit-buttons">
             <button type="submit" id="reply-button" class="btn btn-primary" tabindex="2"><%= t("topics.submit_reply")%></button> <span class="help-inline" title="或者 Ctrl + Enter"><kbd>Command</kbd> + <kbd>Enter</kbd></span>
-            
+
             <div class="pull-right"><a href="/markdown" target="_blank">排版说明</a></div>
           </div>
         <% end %>

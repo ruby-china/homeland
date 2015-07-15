@@ -270,9 +270,8 @@ GEM
       actionmailer
       postmark (>= 0.9.0)
       rake
-    puma (2.11.2)
-      rack (>= 1.1, < 2.0)
-    rack (1.6.2)
+    puma (2.12.0)
+    rack (1.6.4)
     rack-accept (0.4.5)
       rack (>= 0.4)
     rack-cors (0.2.9)

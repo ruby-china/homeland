@@ -56,7 +56,8 @@ module Redcarpet
     class HTMLwithTopic < HTMLwithSyntaxHighlight
       def header(text, header_level)
         l = header_level <= 2 ? 2 : header_level
-        %(<h#{l} id="#{text}">#{text}</h#{l}>)
+        raw_text = Nokogiri::HTML(text).xpath('//text()')
+        %(<h#{l} id="#{raw_text}">#{text}</h#{l}>)
       end
     end
   end

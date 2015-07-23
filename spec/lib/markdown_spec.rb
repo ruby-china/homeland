@@ -12,6 +12,15 @@ describe 'markdown' do
     let!(:doc) { Nokogiri::HTML.fragment(MarkdownTopicConverter.format(raw)) }
     subject { doc }
 
+    describe 'inline link in heading' do
+      subject { super().inner_html }
+
+      context 'h3 with inline link' do
+        let(:raw) { "### [rails_panel](https://github.com/dejan/rails_panel)" }
+        it { is_expected.to eq(%(<h3 id="rails_panel"><a href="https://github.com/dejan/rails_panel" target="_blank">rails_panel</a></h3>))}
+      end
+    end
+
     describe 'heading' do
       subject { super().inner_html }
 

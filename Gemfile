@@ -94,7 +94,7 @@ gem 'god'
 gem 'kgio'
 gem 'dalli', '2.7.1'
 
-gem 'puma'
+gem 'puma', '~> 2.12.2'
 
 gem 'parallel'
 
@@ -128,4 +128,3 @@ group :development, :test do
   gem 'jasmine-rails', '~> 0.10.2'
   gem 'derailed_benchmarks', github: "schneems/derailed_benchmarks"
 end
-

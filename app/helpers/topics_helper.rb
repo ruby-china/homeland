@@ -68,7 +68,6 @@ module TopicsHelper
     opts = {
       "data-width" => "140px",
       "data-live-search" => "true",
-      "data-mobile": true,
       class: "show-menu-arrow"
     }
     grouped_collection_select :topic, :node_id, Section.all, :sorted_nodes, :name, :id, :name,

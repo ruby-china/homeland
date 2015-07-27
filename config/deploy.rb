@@ -1,7 +1,8 @@
 # coding: utf-8
-require "bundler/capistrano"
+require 'bundler/capistrano'
 require 'capistrano/sidekiq'
-require "rvm/capistrano"
+require 'rvm/capistrano'
+require 'puma'
 require 'puma/capistrano'
 
 default_run_options[:pty] = true

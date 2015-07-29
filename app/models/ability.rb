@@ -119,6 +119,9 @@ class Ability
       can :read, Site
       can :read, Section
       can :read, Node
+      can :read, Note do |note|
+        note.publish == true
+      end
       can :read, Comment
     end
 end

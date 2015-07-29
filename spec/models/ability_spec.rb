@@ -75,6 +75,11 @@ describe Ability, :type => :model do
       it { is_expected.to be_able_to(:read, Node) }
     end
 
+    context "Note" do
+      it { is_expected.to be_able_to(:read, Note.new(publish: true)) }
+      it { is_expected.not_to be_able_to(:read, Note.new(publish: false)) }
+    end
+
     context "Page (WIKI)" do
       it { is_expected.to be_able_to(:read, Page) }
     end

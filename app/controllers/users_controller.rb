@@ -2,7 +2,7 @@
 require 'will_paginate/array'
 class UsersController < ApplicationController
   before_action :require_user, only: [:block, :unblock, :auth_unbind, :follow, :unfollow]
-  before_filter :find_user, only: [:show, :topics, :favorites, :notes, 
+  before_filter :find_user, only: [:show, :topics, :favorites, :notes,
                                    :block, :unblock, :blocked,
                                    :follow, :unfollow, :followers, :following]
   caches_action :index, expires_in: 2.hours, layout: false
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   end
 
   def topics
-    @topics = @user.topics.fields_for_list.recent.paginate(page: params[:page], per_page: 30)
+    @topics = @user.topics.unscoped.fields_for_list.recent.paginate(page: params[:page], per_page: 30)
     set_seo_meta("#{@user.login} 的帖子")
   end
 
@@ -88,22 +88,22 @@ class UsersController < ApplicationController
 
     @blocked_users = User.where(:_id.in => current_user.blocked_user_ids).paginate(page: params[:page], per_page: 20)
   end
-  
+
   def follow
     current_user.follow_user(@user)
     render json: { code: 0, data: { followers_count: @user.followers_count } }
   end
-  
+
   def unfollow
     current_user.unfollow_user(@user)
     render json: { code: 0, data: { followers_count: @user.followers_count } }
   end
-  
+
   def followers
     @users = @user.followers.fields_for_list.paginate(page: params[:page], per_page: 60)
     set_seo_meta("#{@user.login} 的关注者")
   end
-  
+
   def following
     @users = @user.following.fields_for_list.paginate(page: params[:page], per_page: 60)
     set_seo_meta("#{@user.login} 正在关注")

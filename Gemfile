@@ -67,7 +67,7 @@ gem 'nokogiri', '1.6.5'
 gem 'settingslogic', '~> 2.0.9'
 
 # 队列
-gem 'sidekiq', '3.3.4'
+gem 'sidekiq', '3.4.2'
 # Sidekiq Web
 gem 'sinatra', '>= 1.3.0', :require => nil
 

@@ -94,7 +94,7 @@ gem 'god'
 gem 'kgio'
 gem 'dalli', '2.7.1'
 
-gem 'puma'
+gem 'unicorn', '4.9.0'
 
 gem 'parallel'
 
@@ -113,6 +113,7 @@ gem 'oneapm_rpm'
 
 group :development, :test do
   gem 'capistrano', '2.9.0', require: false
+  gem 'capistrano-unicorn'
   gem 'rvm-capistrano', require: false
   gem 'capistrano-sidekiq'
   gem 'rspec-rails', '~> 3.1'

@@ -2,8 +2,7 @@
 require 'bundler/capistrano'
 require 'capistrano/sidekiq'
 require 'rvm/capistrano'
-require 'puma'
-require 'puma/capistrano'
+require 'capistrano-unicorn'
 
 default_run_options[:pty] = true
 
@@ -18,8 +17,6 @@ set :deploy_to, "/data/www/#{application}"
 set :runner, "ruby"
 # set :deploy_via, :remote_cache
 set :git_shallow_clone, 1
-set :puma_role, :app
-set :puma_config_file, "config/puma.rb"
 
 role :web, "ruby-china.org"                          # Your HTTP server, Apache/etc
 role :app, "ruby-china.org"                          # This may be the same as your `Web` server
@@ -63,3 +60,4 @@ task :mongoid_migrate_database, roles: :web do
 end
 
 after "deploy:finalize_update","deploy:symlink", :init_shared_path, :link_shared_files, :mongoid_migrate_database , :compile_assets
+after 'deploy:restart', 'unicorn:restart'

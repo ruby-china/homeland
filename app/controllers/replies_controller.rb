@@ -2,7 +2,7 @@
 class RepliesController < ApplicationController
   load_and_authorize_resource :reply
 
-  before_filter :find_topic
+  before_action :find_topic
 
   def create
     @reply = Reply.new(reply_params)

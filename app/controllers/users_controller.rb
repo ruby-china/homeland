@@ -2,7 +2,7 @@
 require 'will_paginate/array'
 class UsersController < ApplicationController
   before_action :require_user, only: [:block, :unblock, :auth_unbind, :follow, :unfollow]
-  before_filter :find_user, only: [:show, :topics, :favorites, :notes,
+  before_action :find_user, only: [:show, :topics, :favorites, :notes,
                                    :block, :unblock, :blocked,
                                    :follow, :unfollow, :followers, :following]
   caches_action :index, expires_in: 2.hours, layout: false

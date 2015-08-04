@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :unread_notify_count
 
-  before_filter do
+  before_action do
     resource = controller_name.singularize.to_sym
     method = "#{resource}_params"
     params[resource] &&= send(method) if respond_to?(method, true)
@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
     unread_notify_count
   end
 
-  before_filter :set_active_menu
+  before_action :set_active_menu
   def set_active_menu
     @current = case controller_name
     when "pages"

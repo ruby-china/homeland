@@ -1,6 +1,6 @@
 # coding: utf-8
 class NotificationsController < ApplicationController
-  before_filter :require_user
+  before_action :require_user
   respond_to :html, :js, only: [:destroy, :mark_all_as_read]
 
   def index

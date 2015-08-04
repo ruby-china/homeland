@@ -1,7 +1,7 @@
 # coding: utf-8
 class LikesController < ApplicationController
-  before_filter :require_user
-  before_filter :find_likeable
+  before_action :require_user
+  before_action :find_likeable
 
   def create
     current_user.like(@item)

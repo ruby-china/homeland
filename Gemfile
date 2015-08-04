@@ -36,7 +36,7 @@ gem 'mongoid_auto_increment_id', '0.6.4'
 gem 'mongoid_rails_migrations', '1.0.0'
 
 # 用户系统
-gem 'devise', '~> 3.4.0'
+gem 'devise', '~> 3.5.1'
 gem "devise-async"
 gem 'devise-encryptable', '0.1.2'
 

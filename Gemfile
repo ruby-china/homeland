@@ -5,7 +5,7 @@ else
   source 'https://ruby.taobao.org'
 end
 
-gem 'rails', '~> 4.2.2'
+gem 'rails', '~> 4.2.3'
 gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
@@ -92,7 +92,7 @@ gem 'god'
 
 # Dalli, kgio is for Dalli
 gem 'kgio'
-gem 'dalli', '2.7.1'
+gem 'dalli', '2.7.4'
 
 gem 'unicorn', '4.9.0'
 

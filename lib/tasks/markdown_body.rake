@@ -1,5 +1,5 @@
 namespace :markdown_body do
-  task refresh: [:environment] do
+  task refresh: :environment do
     include ActionView::Helpers::SanitizeHelper
     include ApplicationHelper
     

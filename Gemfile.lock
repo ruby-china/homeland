@@ -85,7 +85,7 @@ GEM
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
-    capistrano-sidekiq (0.4.0)
+    capistrano-sidekiq (0.5.3)
       capistrano
       sidekiq
     capistrano-unicorn (0.2.0)
@@ -167,7 +167,7 @@ GEM
       active_model_serializers (>= 0.9.0)
       grape
     hashie (3.4.1)
-    highline (1.6.21)
+    highline (1.7.3)
     hiredis (0.6.0)
     hitimes (1.2.2)
     httpauth (0.2.1)
@@ -238,7 +238,7 @@ GEM
       net-ssh (>= 2.6.5)
     net-sftp (2.1.2)
       net-ssh (>= 2.6.5)
-    net-ssh (2.9.1)
+    net-ssh (2.9.2)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
     netrc (0.7.7)

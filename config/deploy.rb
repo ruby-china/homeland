@@ -23,6 +23,8 @@ role :app, "ruby-china.org"                          # This may be the same as y
 role :db,  "ruby-china.org", primary: true # This is where Rails migrations will run
 role :queue, "ruby-china.org"
 
+set :sidekiq_queue, ['default', 'mailer']
+
 namespace :sidekiq do
   task :quiet, roles: :queue do
    run "cd #{deploy_to}/current/; bundle exec sidekiqctl quiet tmp/pids/sidekiq.pid"

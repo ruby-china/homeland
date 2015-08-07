@@ -202,9 +202,7 @@ class TopicsController < ApplicationController
 
   def destroy
     @topic = Topic.find(params[:id])
-    if @topic.replies_count == 0
-      @topic.destroy_by(current_user)
-    end
+    @topic.destroy_by(current_user)
     redirect_to(topics_path, notice: t('topics.delete_topic_success'))
   end
 

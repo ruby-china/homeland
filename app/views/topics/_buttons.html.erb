@@ -18,7 +18,7 @@
   <span class="pull-right opts">
     <% if owner?(@topic) or admin? %>
     <%= link_to "", edit_topic_path(@topic), class: "fa fa-pencil", title: "修改本帖" %>
-      <% if @topic.replies_count == 0 %>
+      <% if (@topic.replies_count == 0) or admin? %>
       <%= link_to "", topic_path(@topic.id), method: :delete, 'data-confirm' => t("common.confirm_delete"), class: "fa fa-trash", title: "删除本帖" %>
       <% end %>
     <% end %>

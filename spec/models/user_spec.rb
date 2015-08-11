@@ -126,6 +126,7 @@ describe User, :type => :model do
 
     it "should false when have 10+ replies" do
       user.verified = false
+      user.created_at = Time.now
       user.replies_count = 10
       expect(user.newbie?).to be_falsey
     end

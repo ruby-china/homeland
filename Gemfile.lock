@@ -479,6 +479,3 @@ DEPENDENCIES
   uglifier
   unicorn (= 4.9.0)
   will_paginate (= 3.0.7)
-
-BUNDLED WITH
-   1.10.6

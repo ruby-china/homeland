@@ -2,7 +2,6 @@
 tmp/
 coverage/
 db/*.sqlite3
-tmp/
 log/*.log
 log/*.log*
 tmp/**/*
@@ -30,3 +29,5 @@ solr/pids/
 tags
 chromedriver.log
 .idea/
+
+.rake_tasks

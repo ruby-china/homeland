@@ -104,6 +104,8 @@ SiteConfig.save_default("twitter_page_html",%(
 ))
 
 # ========================= init Section, Node =========================
+# admin = User.create(:email => 'admin@admin.com', :name => 'Admin', :password => '123456', :password_confirmation => '123456', :login => 'admin', :created_at => (Time.now - 60.days))
+# user = User.create(:email => 'user@user.com', :name => 'User', :password => '123456', :password_confirmation => '123456', :login => 'user', :created_at => (Time.now - 60.days))
 
 # s1 = Section.create(:name => "Ruby")
 # Node.create(:name => "Ruby",:summary => "...", :section_id => s1.id)

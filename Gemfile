@@ -88,8 +88,6 @@ gem 'grape-active_model_serializers'
 gem 'postmark', '0.9.15'
 gem 'postmark-rails', '0.4.1'
 
-gem 'foreman'
-
 # Dalli, kgio is for Dalli
 gem 'kgio'
 gem 'dalli', '2.7.4'

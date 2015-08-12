@@ -89,7 +89,7 @@ SiteConfig.save_default("tips","提示1\n提示2")
 
 SiteConfig.save_default("newbie_notices",%(<p>为提高社区质量，防止新人一来就发帖提问接触 Ruby 遇到的问题，新用户需要达到下面条件才可发帖：</p>
     <ol style="color:#ad2b2d;">
-      <li>注册时间超过一个月；</li>
+      <li>注册时间超过一个星期；</li>
       <li>回帖数量必须达到 10 帖以上；</li>
     </ol>
     <p>请在新人阶段多浏览，看看其他老用户是如何在社区里面分享与解决问题的。</p>))
@@ -104,6 +104,8 @@ SiteConfig.save_default("twitter_page_html",%(
 ))
 
 # ========================= init Section, Node =========================
+# admin = User.create(:email => 'admin@admin.com', :name => 'Admin', :password => '123456', :password_confirmation => '123456', :login => 'admin', :created_at => (Time.now - 60.days))
+# user = User.create(:email => 'user@user.com', :name => 'User', :password => '123456', :password_confirmation => '123456', :login => 'user', :created_at => (Time.now - 60.days))
 
 # s1 = Section.create(:name => "Ruby")
 # Node.create(:name => "Ruby",:summary => "...", :section_id => s1.id)

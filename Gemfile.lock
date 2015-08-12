@@ -135,6 +135,7 @@ GEM
     diff-lcs (1.2.5)
     doorkeeper (2.2.1)
       railties (>= 3.2)
+    dotenv (0.9.0)
     equalizer (0.0.11)
     erubis (2.7.0)
     eventmachine (1.0.4)
@@ -149,10 +150,12 @@ GEM
       railties (>= 3.0.0)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
+    foreman (0.63.0)
+      dotenv (>= 0.7)
+      thor (>= 0.13.6)
     get_process_mem (0.2.0)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
-    god (0.13.4)
     grape (0.7.0)
       activesupport
       builder
@@ -431,7 +434,7 @@ DEPENDENCIES
   doorkeeper-i18n!
   exception_notification
   factory_girl_rails (= 1.4.0)
-  god
+  foreman
   grape (= 0.7.0)
   grape-active_model_serializers
   hiredis (~> 0.6.0)
@@ -479,3 +482,6 @@ DEPENDENCIES
   uglifier
   unicorn (= 4.9.0)
   will_paginate (= 3.0.7)
+
+BUNDLED WITH
+   1.10.6

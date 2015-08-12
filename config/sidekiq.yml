@@ -1,10 +1,9 @@
 # Options here can still be overridden by cmd line args.
 #   sidekiq -C sidekiq.yml
 ---
-:verbose: false
-:concurrency: 5
+:concurrency: 20
+:pidfile: tmp/pids/sidekiq.pid
+:logfile: log/sidekiq.log
 :queues:
-  - [a, 5]
-  - [b, 3]
-  - [c, 2]
+  - [mailer, 5]
   - [default, 3]

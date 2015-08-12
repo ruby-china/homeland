@@ -1,6 +1,6 @@
 require 'etc'
 
-root = "/data/www/ruby-china/current"
+root = File.expand_path('../../', __FILE__)
 
 working_directory root
 rails_env = ENV["RAILS_ENV"] || "production"
@@ -35,5 +35,16 @@ before_fork do |server, worker|
     rescue Errno::ENOENT, Errno::ESRCH
       puts "Send 'QUIT' signal to unicorn error!"
     end
+  end
+
+  Signal.trap 'TERM' do
+    puts 'Unicorn master intercepting TERM and sending myself QUIT instead'
+    Process.kill 'QUIT', Process.pid
+  end
+end
+
+after_fork do |server, worker|
+  Signal.trap 'TERM' do
+    puts 'Unicorn worker intercepting TERM and doing nothing. Wait for master to send QUIT'
   end
 end

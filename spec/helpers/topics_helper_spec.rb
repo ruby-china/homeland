@@ -176,4 +176,39 @@ describe TopicsHelper, type: :helper do
       expect(helper.topic_favorite_tag(topic)).to eq('')
     end
   end
+
+  describe 'topic_follow_tag' do
+    let(:topic) { Factory :topic }
+    let(:user) { Factory :user }
+
+    it 'should return empty when current_user is nil' do
+      allow(helper).to receive(:current_user).and_return(nil)
+      expect(helper.topic_follow_tag(topic)).to eq('')
+    end
+
+    it 'should return empty when is owner' do
+      allow(helper).to receive(:current_user).and_return(topic.user)
+      expect(helper.topic_follow_tag(topic)).to eq('')
+    end
+
+    it 'should return empty when topic is nil' do
+      allow(helper).to receive(:current_user).and_return(user)
+      expect(helper.topic_follow_tag(nil)).to eq('')
+    end
+
+    context 'was unfollow' do
+      it 'should work' do
+        allow(helper).to receive(:current_user).and_return(user)
+        expect(helper.topic_follow_tag(topic)).to eq "<a data-id=\"#{topic.id}\" data-followed=\"false\" class=\"follow\" href=\"#\"><i class=\"fa fa-eye\"></i> 关注</a>"
+      end
+    end
+
+    context 'was followed' do
+      it 'should work' do
+        allow(helper).to receive(:current_user).and_return(user)
+        allow(topic).to receive(:follower_ids).and_return([user.id])
+        expect(helper.topic_follow_tag(topic)).to eq "<a data-id=\"#{topic.id}\" data-followed=\"true\" class=\"follow followed\" href=\"#\"><i class=\"fa fa-eye\"></i> 关注</a>"
+      end
+    end
+  end
 end

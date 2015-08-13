@@ -126,5 +126,9 @@ group :development, :test do
 
   gem 'jasmine-rails', '~> 0.10.2'
   gem 'derailed_benchmarks', github: "schneems/derailed_benchmarks"
+
+  # Better Errors
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 

@@ -56,7 +56,7 @@ Rails.application.configure do
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default_url_options = { host: Setting.domain, protocol: "https" }
+  config.action_mailer.default_url_options = { host: Setting.domain, protocol: 'https' }
   config.action_mailer.delivery_method   = :postmark
   config.action_mailer.postmark_settings = { api_key: Setting.email_password }
 

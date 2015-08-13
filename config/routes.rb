@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   resources :apps
   resources :sites
-  resources :pages, path: "wiki" do
+  resources :pages, path: 'wiki' do
     collection do
       get :recent
       post :preview
@@ -23,16 +23,16 @@ Rails.application.routes.draw do
     end
   end
 
-  root to: "home#index"
+  root to: 'home#index'
 
-  devise_for :users, path: "account", controllers: {
-      registrations: :account,
-      sessions: :sessions,
-      omniauth_callbacks: "users/omniauth_callbacks"
-    }
+  devise_for :users, path: 'account', controllers: {
+    registrations: :account,
+    sessions: :sessions,
+    omniauth_callbacks: 'users/omniauth_callbacks'
+  }
 
-  delete "account/auth/:provider/unbind" => "users#auth_unbind", as: 'unbind_account'
-  post "account/update_private_token" => "users#update_private_token", as: 'update_private_token_account'
+  delete 'account/auth/:provider/unbind' => 'users#auth_unbind', as: 'unbind_account'
+  post 'account/update_private_token' => 'users#update_private_token', as: 'update_private_token_account'
 
   resources :notifications, only: [:index, :destroy] do
     collection do
@@ -47,9 +47,9 @@ Rails.application.routes.draw do
     end
   end
 
-  get "topics/node:id" => "topics#node", as: 'node_topics'
-  get "topics/node:id/feed" => "topics#node_feed", as: 'feed_node_topics', defaults: { format: 'xml' }
-  get "topics/last" => "topics#recent", as: 'recent_topics'
+  get 'topics/node:id' => 'topics#node', as: 'node_topics'
+  get 'topics/node:id/feed' => 'topics#node_feed', as: 'feed_node_topics', defaults: { format: 'xml' }
+  get 'topics/last' => 'topics#recent', as: 'recent_topics'
   resources :topics do
     member do
       post :reply
@@ -75,10 +75,10 @@ Rails.application.routes.draw do
   resources :likes
   resources :jobs
 
-  get "/search" => "search#index", as: 'search'
+  get '/search' => 'search#index', as: 'search'
 
   namespace :cpanel do
-    root to: "home#index"
+    root to: 'home#index'
     resources :site_configs
     resources :replies
     resources :topics do
@@ -111,24 +111,24 @@ Rails.application.routes.draw do
     resources :applications
   end
 
-  get "api" => "home#api", as: 'api'
-  get "twitter" => "home#twitter", as: "twitter"
-  get "markdown" => "home#markdown", as: "markdown"
+  get 'api' => 'home#api', as: 'api'
+  get 'twitter' => 'home#twitter', as: 'twitter'
+  get 'markdown' => 'home#markdown', as: 'markdown'
 
-  require "dispatch"
-  mount Api::Dispatch => "/api"
+  require 'dispatch'
+  mount Api::Dispatch => '/api'
 
-  authenticate :user, lambda { |u| u.admin? } do
+  authenticate :user, ->(u) { u.admin? } do
     mount Sidekiq::Web => '/sidekiq'
   end
 
-  mount JasmineRails::Engine => "/specs" if defined?(JasmineRails)
+  mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
 
   # WARRING! 请保持 User 的 routes 在所有路由的最后，以便于可以让用户名在根目录下面使用，而又不影响到其他的 routes
   # 比如 http://ruby-china.org/huacnlee
-  get "users/city/:id" => "users#city", as: 'location_users'
-  get "users" => "users#index", as: 'users'
-  resources :users, path: "" do
+  get 'users/city/:id' => 'users#city', as: 'location_users'
+  get 'users' => 'users#index', as: 'users'
+  resources :users, path: '' do
     member do
       get :topics
       get :favorites

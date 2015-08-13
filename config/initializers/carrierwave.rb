@@ -11,7 +11,7 @@ module CarrierWave
     ##
     # See +CarrierWave::Mount#mount_uploader+ for documentation
     #
-    def mount_uploader(column, uploader=nil, options={}, &block)
+    def mount_uploader(column, uploader = nil, options = {}, &block)
       field options[:mount_on] || column
 
       super
@@ -23,7 +23,7 @@ module CarrierWave
 
       include CarrierWave::Validations::ActiveModel
 
-      validates_integrity_of  column if uploader_option(column.to_sym, :validate_integrity)
+      validates_integrity_of column if uploader_option(column.to_sym, :validate_integrity)
       validates_processing_of column if uploader_option(column.to_sym, :validate_processing)
 
       after_save :"store_#{column}!"
@@ -32,7 +32,7 @@ module CarrierWave
       before_update :"store_previous_model_for_#{column}"
       after_save :"remove_previously_stored_#{column}"
 
-      class_eval <<-RUBY, __FILE__, __LINE__+1
+      class_eval <<-RUBY, __FILE__, __LINE__ + 1
         def #{column}=(new_file)
           column = _mounter(:#{column}).serialization_column
           send(:"\#{column}_will_change!")

@@ -10,7 +10,7 @@ Devise.setup do |config|
   config.mailer_sender = Setting.email_sender
 
   # Configure the class responsible to send e-mails.
-  config.mailer = "Devise::Mailer"
+  config.mailer = 'Devise::Mailer'
   # config.mailer = "Devise::Async::Proxy"
 
   # ==> ORM configuration
@@ -26,17 +26,17 @@ Devise.setup do |config|
   # parameters are used only when authenticating and not when retrieving from
   # session. If you need permissions, you should implement that in a before filter.
   # config.authentication_keys = [ :email ]
-  config.authentication_keys = [ :login ]
+  config.authentication_keys = [:login]
 
   # Configure which authentication keys should be case-insensitive.
   # These keys will be downcased upon creating or modifying a user and when used
   # to authenticate or find a user. Default is :email.
-  config.case_insensitive_keys = [ :email, :login ]
+  config.case_insensitive_keys = [:email, :login]
 
   # Configure which authentication keys should have whitespace stripped.
   # These keys will have whitespace before and after removed upon creating or
   # modifying a user and when used to authenticate or find a user. Default is :email.
-  config.strip_whitespace_keys = [ :email, :login ]
+  config.strip_whitespace_keys = [:email, :login]
 
   # Tell if authentication through request.params is enabled. True by default.
   # config.params_authenticatable = true
@@ -78,7 +78,7 @@ Devise.setup do |config|
   # config.encryptor = :bcrypt
 
   # Setup a pepper to generate the encrypted password.
-  config.pepper = "c7d4ed7d1ea1a7fee16e8a7ef80ca1d391fc3bb8e79a2da9ca23a68dc5c82e6cf3715a6f3d8369335372ab8be36a526bc2e778f17075ed241a1c14c5b93eea60"
+  config.pepper = 'c7d4ed7d1ea1a7fee16e8a7ef80ca1d391fc3bb8e79a2da9ca23a68dc5c82e6cf3715a6f3d8369335372ab8be36a526bc2e778f17075ed241a1c14c5b93eea60'
 
   # ==> Configuration for :confirmable
   # The time you want to give your user to confirm his account. During this time

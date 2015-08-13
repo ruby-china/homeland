@@ -8,20 +8,20 @@ default_run_options[:pty] = true
 
 set :rvm_ruby_string, 'ruby-2.2.2'
 set :rvm_type, :user
-set :application, "ruby-china"
-set :repository,  "git://github.com/ruby-china/ruby-china.git"
-set :branch, "master"
+set :application, 'ruby-china'
+set :repository,  'git://github.com/ruby-china/ruby-china.git'
+set :branch, 'master'
 set :scm, :git
-set :user, "ruby"
+set :user, 'ruby'
 set :deploy_to, "/data/www/#{application}"
-set :runner, "ruby"
+set :runner, 'ruby'
 # set :deploy_via, :remote_cache
 set :git_shallow_clone, 1
 
-role :web, "ruby-china.org"
-role :app, "ruby-china.org"
-role :db,  "ruby-china.org", primary: true
-role :queue, "ruby-china.org"
+role :web, 'ruby-china.org'
+role :app, 'ruby-china.org'
+role :db,  'ruby-china.org', primary: true
+role :queue, 'ruby-china.org'
 
 task :link_shared, roles: :web do
   run "mkdir -p #{shared_path}/log"
@@ -43,5 +43,5 @@ task :migrate_db, roles: :web do
   run "cd #{current_path}; RAILS_ENV=production bundle exec rake db:mongoid:create_indexes"
 end
 
-after "deploy:finalize_update","deploy:symlink", :link_shared, :migrate_db , :compile_assets
+after 'deploy:finalize_update', 'deploy:symlink', :link_shared, :migrate_db, :compile_assets
 after 'deploy:restart', 'unicorn:restart'

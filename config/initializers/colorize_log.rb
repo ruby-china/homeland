@@ -1,7 +1,7 @@
 if Rails.env.development?
-  CACHE_PREFIX = "  CACHE:".colorize(:yellow)
-  MOPED_PREFIX = "  MONGO:".colorize(:magenta)
-  
+  CACHE_PREFIX = '  CACHE:'.colorize(:yellow)
+  MOPED_PREFIX = '  MONGO:'.colorize(:magenta)
+
   module ActionView
     class LogSubscriber < ActiveSupport::LogSubscriber
       def render_template(event)
@@ -11,16 +11,15 @@ if Rails.env.development?
           message << " (#{event.duration.round(1)}ms)".colorize(:green)
         end
       end
-      alias :render_partial :render_template
-      alias :render_collection :render_template
+      alias_method :render_partial, :render_template
+      alias_method :render_collection, :render_template
     end
   end
-
 
   module ActionController
     class LogSubscriber < ActiveSupport::LogSubscriber
       %w(write_fragment read_fragment exist_fragment?
-       expire_fragment expire_page write_page).each do |method|
+         expire_fragment expire_page write_page).each do |method|
         class_eval <<-METHOD, __FILE__, __LINE__ + 1
           def #{method}(event)
             return unless logger.info?
@@ -34,14 +33,13 @@ if Rails.env.development?
     end
   end
 
-
   module ActiveSupport
     module Cache
       class DalliStore
-        def log(operation, key, options=nil)
+        def log(operation, key, options = nil)
           return unless logger && logger.debug? && !silence?
-          return if operation.to_s == "fetch_hit"
-          logger.debug("#{CACHE_PREFIX} #{operation} #{key}#{options.blank? ? "" : " (#{options.inspect})"}")
+          return if operation.to_s == 'fetch_hit'
+          logger.debug("#{CACHE_PREFIX} #{operation} #{key}#{options.blank? ? '' : " (#{options.inspect})"}")
         end
       end
     end
@@ -49,14 +47,14 @@ if Rails.env.development?
 
   module Moped
     module Loggable
-      def self.log_operations(prefix, ops, runtime)
-        indent  = " "
+      def self.log_operations(_prefix, ops, runtime)
+        indent = ' '
         if ops.length == 1
           Moped.logger.debug([MOPED_PREFIX, ops.first.log_inspect, runtime].join(' '))
         else
           first, *middle, last = ops
-          Moped.logger.debug([ MOPED_PREFIX, first.log_inspect ].join(' '))
-          middle.each { |m| Moped.logger.debug([ indent, m.log_inspect ].join(' ')) }
+          Moped.logger.debug([MOPED_PREFIX, first.log_inspect].join(' '))
+          middle.each { |m| Moped.logger.debug([indent, m.log_inspect].join(' ')) }
           Moped.logger.debug([indent, last.log_inspect, runtime].join(' '))
         end
       end

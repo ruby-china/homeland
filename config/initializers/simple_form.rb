@@ -43,7 +43,7 @@ SimpleForm.setup do |config|
     ## Inputs
     b.use :label_input
     b.use :hint, wrap_with: { tag: :span, class: :hint }
-    b.use :error, wrap_with: { tag: :span, class: "has-warning" }
+    b.use :error, wrap_with: { tag: :span, class: 'has-warning' }
   end
 
   config.wrappers :bootstrap, tag: 'div', class: 'form-group', error_class: '' do |b|
@@ -51,13 +51,13 @@ SimpleForm.setup do |config|
     b.use :placeholder
     b.use :label
     b.wrapper tag: 'div', class: 'col-sm-10' do |bw|
-      bw.use :input, class: "form-control"
+      bw.use :input, class: 'form-control'
       bw.use :error, wrap_with: { tag: 'span', class: 'hidden' }
       bw.use :hint, wrap_with: { tag: 'p', class: 'help-block' }
     end
   end
 
-  config.wrappers :prepend, tag: 'div', class: "form-group", error_class: 'error' do |b|
+  config.wrappers :prepend, tag: 'div', class: 'form-group', error_class: 'error' do |b|
     b.use :html5
     b.use :placeholder
     b.use :label
@@ -70,7 +70,7 @@ SimpleForm.setup do |config|
     end
   end
 
-  config.wrappers :append, tag: 'div', class: "form-group", error_class: 'error' do |b|
+  config.wrappers :append, tag: 'div', class: 'form-group', error_class: 'error' do |b|
     b.use :html5
     b.use :placeholder
     b.use :label
@@ -137,7 +137,7 @@ SimpleForm.setup do |config|
   config.label_class = 'control-label col-sm-2'
 
   # You can define the class to use on all forms. Default is simple_form.
-  config.default_form_class = "form-horizontal"
+  config.default_form_class = 'form-horizontal'
 
   # You can define which elements should obtain additional classes
   # config.generate_additional_classes_for = [:wrapper, :label, :input]

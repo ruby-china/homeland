@@ -9,7 +9,7 @@ Doorkeeper.configure do
     current_user || warden.authenticate!(scope: :user)
   end
 
-  resource_owner_from_credentials do |routes|
+  resource_owner_from_credentials do |_routes|
     u = User.find_for_database_authentication(login: params[:username])
     u if u && u.valid_password?(params[:password])
   end
@@ -107,7 +107,7 @@ Doorkeeper.configure do
   # end
 
   # WWW-Authenticate Realm (default "Doorkeeper").
-  realm "Ruby China"
+  realm 'Ruby China'
 end
 
-Doorkeeper.configuration.token_grant_types << "password"
+Doorkeeper.configuration.token_grant_types << 'password'

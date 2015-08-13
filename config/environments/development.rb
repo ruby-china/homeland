@@ -18,8 +18,8 @@ Rails.application.configure do
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false
   # config.action_mailer.delivery_method = :letter_opener
-  config.action_mailer.default_url_options = { :host => Setting.domain }
-  config.action_mailer.delivery_method   = :letter_opener
+  config.action_mailer.default_url_options = { host: Setting.domain }
+  config.action_mailer.delivery_method = :letter_opener
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
@@ -40,12 +40,12 @@ Rails.application.configure do
 end
 
 @last_api_change = Time.now
-api_reloader = ActiveSupport::FileUpdateChecker.new(Dir["#{Rails.root}/app/grape/**/*.rb"]) do |reloader|
-  times = Dir["#{Rails.root}/app/grape/**/*.rb"].map{|f| File.mtime(f) }
-  files = Dir["#{Rails.root}/app/grape/**/*.rb"].map{|f| f }
+api_reloader = ActiveSupport::FileUpdateChecker.new(Dir["#{Rails.root}/app/grape/**/*.rb"]) do |_reloader|
+  times = Dir["#{Rails.root}/app/grape/**/*.rb"].map { |f| File.mtime(f) }
+  files = Dir["#{Rails.root}/app/grape/**/*.rb"].map { |f| f }
 
-  Rails.logger.debug "! Change detected: reloading following files:"
-  files.each_with_index do |s,i|
+  Rails.logger.debug '! Change detected: reloading following files:'
+  files.each_with_index do |s, i|
     if times[i] > @last_api_change
       Rails.logger.debug " - #{s}"
       load s

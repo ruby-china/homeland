@@ -13,7 +13,7 @@ class Ability
       can :manage, :all
     elsif user.has_role?(:member)
       # Topic
-      if !user.newbie?
+      unless user.newbie?
         can :create, Topic
       end
       can :favorite, Topic
@@ -24,14 +24,14 @@ class Ability
         (topic.user_id == user.id)
       end
       can :destroy, Topic do |topic|
-         (topic.user_id == user.id) && (topic.replies_count == 0)
+        (topic.user_id == user.id) && (topic.replies_count == 0)
       end
 
       # Reply
       # 新手用户晚上禁止回帖，防 spam，可在面板设置是否打开
-      if !(user.newbie? &&
-           (SiteConfig.reject_newbie_reply_in_the_evening == 'true') &&
-           (Time.zone.now.hour < 9 || Time.zone.now.hour > 22))
+      unless user.newbie? &&
+             (SiteConfig.reject_newbie_reply_in_the_evening == 'true') &&
+             (Time.zone.now.hour < 9 || Time.zone.now.hour > 22)
         can :create, Reply
       end
       can :update, Reply do |reply|
@@ -97,31 +97,31 @@ class Ability
       cannot :manage, :all
       basic_read_only
     end
-
   end
 
   protected
-    def basic_read_only
-      can :read,Topic
-      can :feed,Topic
-      can :node,Topic
 
-      can :read, Reply
+  def basic_read_only
+    can :read, Topic
+    can :feed, Topic
+    can :node, Topic
 
-      can :read, Page
-      can :recent, Page
-      can :preview, Page
-      can :comments, Page
+    can :read, Reply
 
-      can :preview, Note
+    can :read, Page
+    can :recent, Page
+    can :preview, Page
+    can :comments, Page
 
-      can :read, Photo
-      can :read, Site
-      can :read, Section
-      can :read, Node
-      can :read, Note do |note|
-        note.publish == true
-      end
-      can :read, Comment
+    can :preview, Note
+
+    can :read, Photo
+    can :read, Site
+    can :read, Section
+    can :read, Node
+    can :read, Note do |note|
+      note.publish == true
     end
+    can :read, Comment
+  end
 end

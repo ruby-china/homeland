@@ -8,9 +8,7 @@ class Section
   field :sort, type: Integer, default: 0
   has_many :nodes, dependent: :destroy
 
-  validates_presence_of :name
-  validates_uniqueness_of :name
-
+  validates :name, presence: true, uniqueness: true
 
   default_scope -> { desc(:sort) }
 
@@ -23,6 +21,6 @@ class Section
   end
 
   def sorted_nodes
-    self.nodes.where(:_id.nin => [Node.no_point_id]).sorted
+    nodes.where(:_id.nin => [Node.no_point_id]).sorted
   end
 end

@@ -1,24 +1,26 @@
 # coding: utf-8
-class Notification::TopicReply < Notification::Base
-  belongs_to :reply
+module Notification
+  class TopicReply < Base
+    belongs_to :reply
 
-  delegate :body, to: :reply, prefix: true, allow_nil: true
+    delegate :body, to: :reply, prefix: true, allow_nil: true
 
-  def notify_hash
-    return {} if self.reply.blank?
-    {
-      title: '关注的话题有了新回复:',
-      content: self.reply_body[0, 30],
-      content_path: self.content_path
-    }
-  end
-  
-  def actor
-    self.reply.try(:user)
-  end
+    def notify_hash
+      return {} if reply.blank?
+      {
+        title: '关注的话题有了新回复:',
+        content: reply_body[0, 30],
+        content_path: content_path
+      }
+    end
 
-  def content_path
-    return '' if self.reply.blank?
-    url_helpers.topic_path(self.reply.topic_id)
+    def actor
+      reply.try(:user)
+    end
+
+    def content_path
+      return '' if reply.blank?
+      url_helpers.topic_path(reply.topic_id)
+    end
   end
 end

@@ -11,7 +11,7 @@ module Mongoid
 
     # Wait for https://github.com/mongoid/mongoid/commit/2f94b5fab018b22a9e84ac2e988d4a3cf97e7f2e
     def delete_notifiaction_mentions
-      Notification::Mention.where(mentionable_id: self.id, mentionable_type: self.class.name).delete_all
+      Notification::Mention.where(mentionable_id: id, mentionable_type: self.class.name).delete_all
     end
 
     def mentioned_users
@@ -20,9 +20,9 @@ module Mongoid
 
     def mentioned_user_logins
       # 用于作为缓存 key
-      ids_md5 = Digest::MD5.hexdigest(self.mentioned_user_ids.to_s)
-      Rails.cache.fetch("#{self.class.name.downcase}:#{self.id}:mentioned_user_logins:#{ids_md5}") do
-        User.where(:_id.in => self.mentioned_user_ids).only(:login).map(&:login)
+      ids_md5 = Digest::MD5.hexdigest(mentioned_user_ids.to_s)
+      Rails.cache.fetch("#{self.class.name.downcase}:#{id}:mentioned_user_logins:#{ids_md5}") do
+        User.where(:_id.in => mentioned_user_ids).only(:login).map(&:login)
       end
     end
 

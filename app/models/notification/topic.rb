@@ -1,24 +1,26 @@
 # coding: utf-8
-class Notification::Topic < Notification::Base
-  belongs_to :topic, class_name: "Topic"
+module Notification
+  class Topic < Base
+    belongs_to :topic, class_name: 'Topic'
 
-  delegate :body, to: :topic, prefix: true, allow_nil: true
+    delegate :body, to: :topic, prefix: true, allow_nil: true
 
-  def notify_hash
-    return {} if self.topic.blank?
-    {
-      title: '发表了新话题',
-      content: self.topic_body[0, 30],
-      content_path: self.content_path
-    }
-  end
-  
-  def actor
-    self.topic.try(:user)
-  end
+    def notify_hash
+      return {} if topic.blank?
+      {
+        title: '发表了新话题',
+        content: topic_body[0, 30],
+        content_path: content_path
+      }
+    end
 
-  def content_path
-    return '' if self.topic.blank?
-    url_helpers.topic_path(self.topic.id)
+    def actor
+      topic.try(:user)
+    end
+
+    def content_path
+      return '' if topic.blank?
+      url_helpers.topic_path(topic.id)
+    end
   end
 end

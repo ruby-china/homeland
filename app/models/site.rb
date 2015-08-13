@@ -13,7 +13,7 @@ class Site
   belongs_to :site_node
   belongs_to :user
 
-  validates_presence_of :url, :name, :site_node_id
+  validates :url, :name, :site_node_id, presence: true
 
   index url: 1
   index site_node_id: 1
@@ -27,21 +27,21 @@ class Site
 
   before_validation :fix_urls, :check_uniq
   def fix_urls
-    if !self.url.blank?
-      url = self.url.gsub(/http[s]{0,1}:\/\//,'').split('/').join("/")
+    unless url.blank?
+      url = self.url.gsub(%r{http[s]{0,1}://}, '').split('/').join('/')
       self.url = "http://#{url}"
     end
   end
 
   def check_uniq
-    if Site.unscoped.where(:url => url, :_id.ne => self.id).count > 0
-      self.errors.add(:url,"已经提交过了。")
+    if Site.unscoped.where(:url => url, :_id.ne => id).count > 0
+      errors.add(:url, '已经提交过了。')
     end
   end
 
   def favicon_url
-    return "" if self.url.blank?
-    domain = self.url.gsub("http://","")
+    return '' if url.blank?
+    domain = url.gsub('http://', '')
     "http://www.google.com/profiles/c/favicons?domain=#{domain}"
   end
 end

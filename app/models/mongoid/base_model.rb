@@ -8,7 +8,7 @@ module Mongoid
     included do
       scope :recent, -> { desc(:_id) }
       scope :exclude_ids, ->(ids) { where(:_id.nin => ids.map(&:to_i)) }
-      scope :by_week, -> {  where(:created_at.gte => 7.days.ago.utc) }
+      scope :by_week, -> { where(:created_at.gte => 7.days.ago.utc) }
 
       delegate :url_helpers, to: 'Rails.application.routes'
     end
@@ -18,8 +18,6 @@ module Mongoid
       def find_by_id(id)
         if id.is_a?(Integer) || id.is_a?(String)
           where(_id: id.to_i).first
-        else
-          nil
         end
       end
 

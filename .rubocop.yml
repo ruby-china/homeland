@@ -25,7 +25,13 @@ Metrics/MethodLength:
 Metrics/ModuleLength:
   Max: 1200
 
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
 Metrics/AbcSize:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
   Enabled: false
 
 Rails/TimeZone:
@@ -41,4 +47,7 @@ Rails/FindBy:
   Enabled: false
 
 Rails/HasAndBelongsToMany:
+  Enabled: false
+
+Rails/DefaultScope:
   Enabled: false

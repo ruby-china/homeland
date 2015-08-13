@@ -12,5 +12,4 @@ class Photo
 
   # 封面图
   mount_uploader :image, PhotoUploader
-
 end

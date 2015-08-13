@@ -12,28 +12,25 @@ class SiteConfig
 
   index key: 1
 
-  validates_presence_of :key
-  validates_uniqueness_of :key
+  validates :key, presence: true, uniqueness: true
 
   def self.method_missing(method, *args)
     method_name = method.to_s
     super(method, *args)
   rescue NoMethodError
     if method_name =~ /=$/
-      var_name = method_name.gsub('=', '')
+      var_name = method_name.delete('=')
       value = args.first.to_s
       # save
-      if item = find_by_key(var_name)
+      if (item = find_by_key(var_name))
         item.update_attribute(:value, value)
       else
         SiteConfig.create(key: var_name, value: value)
       end
     else
       Rails.cache.fetch("site_config:#{method}") do
-        if item = find_by_key(method)
+        if (item = find_by_key(method))
           item.value
-        else
-          nil
         end
       end
     end
@@ -41,7 +38,7 @@ class SiteConfig
 
   after_save :update_cache
   def update_cache
-    Rails.cache.write("site_config:#{self.key}", self.value)
+    Rails.cache.write("site_config:#{key}", value)
   end
 
   def self.find_by_key(key)

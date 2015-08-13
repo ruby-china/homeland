@@ -5,5 +5,5 @@
   li << link_to(t("users.menu.notes"), notes_user_path(@user.login.downcase))
   li << link_to("关注者", followers_user_path(@user.login.downcase))
   li << link_to("正在关注", following_user_path(@user.login.downcase))
-  li << link_to("已屏蔽", blocked_user_path(@user.login.downcase)) if owner?(@user) and current_user.has_blocked_users?
+  li << link_to("已屏蔽", blocked_user_path(@user.login.downcase)) if owner?(@user) and current_user.blocked_users?
 end %>

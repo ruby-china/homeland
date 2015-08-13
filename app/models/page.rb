@@ -1,7 +1,7 @@
 # coding: utf-8
 # 单页的文档页面
 # 采用 Markdown 编写
-require "redcarpet"
+require 'redcarpet'
 class Page
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -24,21 +24,21 @@ class Page
 
   index slug: 1
 
-  has_many :versions, class_name: "PageVersion"
+  has_many :versions, class_name: 'PageVersion'
 
   attr_accessor :user_id, :change_desc, :version_enable
 
-  validates_presence_of :slug, :title, :body
+  validates :slug, :title, :body, presence: true
   # 当需要记录版本时，如果是更新，那么要求填写 :change_desc
-  validates_presence_of :user_id, if: Proc.new { |p| p.version_enable == true }
-  validates_presence_of :change_desc, if: Proc.new { |p| p.version_enable == true and !p.new_record? }
-  validates_format_of :slug, with: /\A[a-z0-9\-_]+\z/
-  validates_uniqueness_of :slug
+  validates :user_id, if: proc { |p| p.version_enable == true }, presence: true
+  validates :change_desc, if: proc { |p| p.version_enable == true && !p.new_record? }, presence: true
+  validates :slug, format: /\A[a-z0-9\-_]+\z/
+  validates :slug, uniqueness: true
 
   before_save :append_editor
   def append_editor
-    if not self.editor_ids.include?(self.user_id.to_i)
-      self.editor_ids << self.user_id.to_i
+    unless editor_ids.include?(user_id.to_i)
+      editor_ids << user_id.to_i
     end
   end
 
@@ -47,31 +47,31 @@ class Page
   def create_version
     # 只有当 version_enable 为 true 的时候才记录版本
     # 以免后台，以及其他的一些 update 时被误调用
-    return true if not self.version_enable
+    return true unless version_enable
     # 只有 body, title, slug 更改了才更新版本
-    if self.body_changed? or self.title_changed? or self.slug_changed?
-      self.inc(version: 1)
-      PageVersion.create(user_id: self.user_id,
-                         page_id: self.id,
-                         desc: self.change_desc,
-                         version: self.version,
-                         body: self.body,
-                         title: self.title,
-                         slug: self.slug)
+    if self.body_changed? || self.title_changed? || self.slug_changed?
+      inc(version: 1)
+      PageVersion.create(user_id: user_id,
+                         page_id: id,
+                         desc: change_desc,
+                         version: version,
+                         body: body,
+                         title: title,
+                         slug: slug)
     end
   end
 
   # 撤掉到指定版本
   def revert_version(version)
-    page_version = PageVersion.where(page_id: self.id, version: version).first
+    page_version = PageVersion.where(page_id: id, version: version).first
     return false if page_version.blank?
-    self.update_attributes(body: page_version.body,
-                           title: page_version.title,
-                           slug: page_version.slug)
+    update_attributes(body: page_version.body,
+                      title: page_version.title,
+                      slug: page_version.slug)
   end
 
   def editors
-    User.where(:_id.in => self.editor_ids)
+    User.where(:_id.in => editor_ids)
   end
 
   def self.find_by_slug(slug)

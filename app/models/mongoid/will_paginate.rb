@@ -13,8 +13,8 @@ module Mongoid
       options = base_options options
 
       ::WillPaginate::Collection.create(options[:page], options[:per_page]) do |pager|
-        items_count = options[:total_entries] || self.count
-        fill_pager_with self.skip(options[:offset]).limit(options[:per_page]), items_count, pager
+        items_count = options[:total_entries] || count
+        fill_pager_with skip(options[:offset]).limit(options[:per_page]), items_count, pager
       end
     end
 

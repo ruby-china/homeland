@@ -14,7 +14,7 @@ module Mongoid
 
     def markdown_body
       if self.body_changed?
-        self.body_html = sanitize_markdown(MarkdownTopicConverter.format(self.body))
+        self.body_html = sanitize_markdown(MarkdownTopicConverter.format(body))
       end
     end
   end

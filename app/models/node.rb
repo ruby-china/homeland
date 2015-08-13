@@ -16,8 +16,8 @@ class Node
 
   index section_id: 1
 
-  validates_presence_of :name, :summary, :section
-  validates_uniqueness_of :name
+  validates :name, :summary, :section, presence: true
+  validates :name, uniqueness: true
 
   has_and_belongs_to_many :followers, class_name: 'User', inverse_of: :following_nodes
 
@@ -44,22 +44,19 @@ class Node
 
   # Markdown 转换过后的 HTML
   def summary_html
-    Rails.cache.fetch("#{self.cache_key}/summary_html") do
-      MarkdownConverter.convert(self.summary)
+    Rails.cache.fetch("#{cache_key}/summary_html") do
+      MarkdownConverter.convert(summary)
     end
   end
 
   # 是否为 jobs 节点
   def jobs?
-    self.id == self.class.jobs_id
+    id == self.class.jobs_id
   end
 
   def self.new_topic_dropdowns
-    if SiteConfig.new_topic_dropdown_node_ids.present?
-      node_ids = SiteConfig.new_topic_dropdown_node_ids.split(',').uniq.take(5)
-      where(:_id.in => node_ids)
-    else
-      []
-    end
+    return [] if SiteConfig.new_topic_dropdown_node_ids.blank?
+    node_ids = SiteConfig.new_topic_dropdown_node_ids.split(',').uniq.take(5)
+    where(:_id.in => node_ids)
   end
 end

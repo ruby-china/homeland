@@ -1,5 +1,5 @@
 # coding: utf-8
-require "digest/md5"
+require 'digest/md5'
 class Reply
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -26,33 +26,31 @@ class Reply
   delegate :title, to: :topic, prefix: true, allow_nil: true
   delegate :login, to: :user, prefix: true, allow_nil: true
 
-  validates_presence_of :body
-  validates_uniqueness_of :body, scope: [:topic_id, :user_id], message: "不能重复提交。"
+  validates :body, presence: true
+  validates :body, uniqueness: { scope: [:topic_id, :user_id], message: '不能重复提交。' }
   validate do
-    ban_words = (SiteConfig.ban_words_on_reply || "").split("\n").collect { |word| word.strip }
-    if self.body.strip.downcase.in?(ban_words)
-      self.errors.add(:body,"请勿回复无意义的内容，如你想收藏或赞这篇帖子，请用帖子后面的功能。")
+    ban_words = (SiteConfig.ban_words_on_reply || '').split("\n").collect(&:strip)
+    if body.strip.downcase.in?(ban_words)
+      errors.add(:body, '请勿回复无意义的内容，如你想收藏或赞这篇帖子，请用帖子后面的功能。')
     end
   end
 
   after_save :update_parent_topic
   def update_parent_topic
-    topic.update_last_reply(self) if self.topic.present?
+    topic.update_last_reply(self) if topic.present?
   end
 
   # 删除的时候也要更新 Topic 的 updated_at 以便清理缓存
   after_destroy :update_parent_topic_updated_at
   def update_parent_topic_updated_at
-    if not self.topic.blank?
-      self.topic.update_deleted_last_reply(self)
+    unless topic.blank?
+      topic.update_deleted_last_reply(self)
       true
     end
   end
 
-
-
   after_create do
-    Reply.delay.notify_reply_created(self.id)
+    Reply.delay.notify_reply_created(id)
   end
 
   def self.per_page
@@ -90,7 +88,7 @@ class Reply
 
   # 是否热门
   def popular?
-    self.likes_count >= 5
+    likes_count >= 5
   end
 
   def destroy

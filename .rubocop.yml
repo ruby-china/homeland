@@ -1,5 +1,7 @@
 AllCops:
   RunRailsCops: true
+  Exclude:
+    - 'lib/templates/**/*'
 
 Style/Documentation:
   Enabled: false
@@ -8,6 +10,12 @@ Style/AsciiComments:
   Enabled: false
 
 Metrics/LineLength:
+  Max: 1200
+
+Metrics/ClassLength:
+  Max: 1200
+
+Metrics/MethodLength:
   Max: 1200
 
 Rails/TimeZone:

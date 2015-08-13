@@ -11,20 +11,19 @@ module Redcarpet
     class HTMLwithSyntaxHighlight < HTML
       include Rouge::Plugins::Redcarpet
 
-      def initialize(extensions={})
+      def initialize(extensions = {})
         super(extensions.merge(xhtml: true,
                                no_styles: true,
                                escape_html: true,
                                hard_wrap: true,
-                               link_attributes: {target: '_blank'}))
+                               link_attributes: { target: '_blank' }))
       end
-
 
       def block_code(code, language)
         language.downcase! if language.is_a?(String)
         html = super(code, language)
         # 将最后行的 "\n\n" 替换成回 "\n", rouge 0.3.2 的 Bug 导致
-        html.gsub!(/([\n]+)<\/code>/, "</code>")
+        html.gsub!(%r{([\n]+)</code>}, '</code>')
         html
       end
 
@@ -34,7 +33,7 @@ module Redcarpet
 
       def autolink(link, link_type)
         # return link
-        if link_type.to_s == "email"
+        if link_type.to_s == 'email'
           link
         else
           begin
@@ -46,9 +45,9 @@ module Redcarpet
             return link
           end
           # Fix Chinese neer the URL
-          bad_text = link.match(/[^\w:@\/\-\~\,\$\!\.=\?&#+\|\%]+/im).to_s
+          bad_text = link.match(%r{[^\w:@/-~,$!.=?&#+|%]+}im).to_s
           link.gsub!(bad_text, '')
-          "<a href=\"#{link}\" rel=\"nofollow\" target=\"_blank\">#{link}</a>#{bad_text}"
+          %(<a href="#{link}" rel="nofollow" target="_blank">#{link}</a>#{bad_text})
         end
       end
     end
@@ -67,7 +66,7 @@ class MarkdownConverter
   include Singleton
 
   def self.convert(text)
-    self.instance.convert(text)
+    instance.convert(text)
   end
 
   def convert(text)
@@ -75,18 +74,18 @@ class MarkdownConverter
   end
 
   private
+
   def initialize
-    @converter = Redcarpet::Markdown.new(Redcarpet::Render::HTMLwithSyntaxHighlight.new, {
-        autolink: true,
-        fenced_code_blocks: true,
-        no_intra_emphasis: true
-      })
+    highlight = Redcarpet::Render::HTMLwithSyntaxHighlight.new
+    @converter = Redcarpet::Markdown.new(highlight, autolink: true,
+                                                    fenced_code_blocks: true,
+                                                    no_intra_emphasis: true)
   end
 end
 
 class MarkdownTopicConverter < MarkdownConverter
   def self.format(raw)
-    self.instance.format(raw)
+    instance.format(raw)
   end
 
   def format(raw)
@@ -97,7 +96,7 @@ class MarkdownTopicConverter < MarkdownConverter
     users = normalize_user_mentions(text)
 
     # 如果 ``` 在刚刚换行的时候 Redcapter 无法生成正确，需要两个换行
-    text.gsub!("\n```","\n\n```")
+    text.gsub!("\n```", "\n\n```")
 
     result = convert(text)
 
@@ -108,14 +107,15 @@ class MarkdownTopicConverter < MarkdownConverter
 
     return doc.to_html.strip
   rescue => e
-    puts "MarkdownTopicConverter.format ERROR: #{e}"
+    Rails.logger.error "MarkdownTopicConverter.format ERROR: #{e}"
     return text
   end
 
   private
+
   # convert bbcode-style image tag [img]url[/img] to markdown syntax ![alt](url)
   def convert_bbcode_img(text)
-    text.gsub!(/\[img\](.+?)\[\/img\]/i) {"![#{image_alt $1}](#{$1})"}
+    text.gsub!(%r{\[img\](.+?)\[/img\]}i) { "![#{image_alt Regexp.last_match(1)}](#{Regexp.last_match(1)})" }
   end
 
   def image_alt(src)
@@ -123,11 +123,9 @@ class MarkdownTopicConverter < MarkdownConverter
   end
 
   # borrow from html-pipeline
-  def has_ancestors?(node, tags)
-    while node = node.parent
-      if tags.include?(node.name.downcase)
-        break true
-      end
+  def ancestors?(node, tags)
+    while (node = node.parent)
+      break true if tags.include?(node.name.downcase)
     end
   end
 
@@ -136,12 +134,12 @@ class MarkdownTopicConverter < MarkdownConverter
   def link_mention_floor(doc)
     doc.search('text()').each do |node|
       content = node.to_html
-      next if !content.include?('#')
-      next if has_ancestors?(node, %w(pre code))
+      next unless content.include?('#')
+      next if ancestors?(node, %w(pre code))
 
-      html = content.gsub(/#(\d+)([楼樓Ff])/) {
-        %(<a href="#reply#{$1}" class="at_floor" data-floor="#{$1}">##{$1}#{$2}</a>)
-      }
+      html = content.gsub(/#(\d+)([楼樓Ff])/) do
+        %(<a href="#reply#{Regexp.last_match(1)}" class="at_floor" data-floor="#{Regexp.last_match(1)}">##{Regexp.last_match(1)}#{Regexp.last_match(2)}</a>)
+      end
 
       next if html == content
       node.replace(html)
@@ -156,8 +154,8 @@ class MarkdownTopicConverter < MarkdownConverter
     users = []
 
     text.gsub!(NORMALIZE_USER_REGEXP) do
-      prefix = $1
-      user = $2
+      prefix = Regexp.last_match(1)
+      user = Regexp.last_match(2)
       users.push(user)
       "#{prefix}@user#{users.size}"
     end
@@ -175,11 +173,11 @@ class MarkdownTopicConverter < MarkdownConverter
   def link_mention_user_in_text(doc, users)
     doc.search('text()').each do |node|
       content = node.to_html
-      next if !content.include?('@')
-      in_code = has_ancestors?(node, %w(pre code))
-      content.gsub!(LINK_USER_REGEXP) {
-        prefix = $1
-        user_placeholder = $2
+      next unless content.include?('@')
+      in_code = ancestors?(node, %w(pre code))
+      content.gsub!(LINK_USER_REGEXP) do
+        prefix = Regexp.last_match(1)
+        user_placeholder = Regexp.last_match(2)
         user_id = user_placeholder.sub(/^user/, '').to_i
         user = users[user_id - 1] || user_placeholder
 
@@ -188,7 +186,7 @@ class MarkdownTopicConverter < MarkdownConverter
         else
           %(#{prefix}<a href="/#{user}" class="at_user" title="@#{user}"><i>@</i>#{user}</a>)
         end
-      }
+      end
 
       node.replace(content)
     end
@@ -198,32 +196,28 @@ class MarkdownTopicConverter < MarkdownConverter
   # syntax class.
   def link_mention_user_in_code(doc, users)
     doc.css('pre.highlight span').each do |node|
-      if node.previous && node.previous.inner_html == '@' && node.inner_html =~ /\Auser(\d+)\z/
-        user_id = $1
-        user = users[user_id.to_i - 1]
-        if user
-          node.inner_html = user
-        end
-      end
+      next unless node.previous && node.previous.inner_html == '@' && node.inner_html =~ /\Auser(\d+)\z/
+      user_id = Regexp.last_match(1)
+      user = users[user_id.to_i - 1]
+      node.inner_html = user if user
     end
   end
 
   def replace_emoji(doc)
     doc.search('text()').each do |node|
       content = node.to_html
-      next if !content.include?(':')
-      next if has_ancestors?(node, %w(pre code))
+      next unless content.include?(':')
+      next if ancestors?(node, %w(pre code))
 
       html = content.gsub(/:(\S+):/) do |emoji|
-
-        emoji_code = emoji #.gsub("|", "_")
-        emoji      = emoji_code.gsub(":", "")
+        emoji_code = emoji # .gsub("|", "_")
+        emoji      = emoji_code.delete(':')
 
         if MdEmoji::EMOJI.include?(emoji)
-          file_name    = "#{emoji.gsub('+', 'plus')}.png"
+          file_name = "#{emoji.gsub('+', 'plus')}.png"
 
-          %{<img src="#{upload_url}/assets/emojis/#{file_name}" class="emoji" } +
-            %{title="#{emoji_code}" alt="" />}
+          %(<img src="#{upload_url}/assets/emojis/#{file_name}" class="emoji" ) +
+          %(title="#{emoji_code}" alt="" />)
         else
           emoji_code
         end
@@ -240,15 +234,13 @@ class MarkdownTopicConverter < MarkdownConverter
   end
 
   def initialize
-    @converter = Redcarpet::Markdown.new(Redcarpet::Render::HTMLwithTopic.new, {
-        autolink: true,
-        fenced_code_blocks: true,
-        strikethrough: true,
-        tables: true,
-        space_after_headers: true,
-        disable_indented_code_blocks: true,
-        no_intra_emphasis: true
-      })
+    @converter = Redcarpet::Markdown.new(Redcarpet::Render::HTMLwithTopic.new,         autolink: true,
+                                                                                       fenced_code_blocks: true,
+                                                                                       strikethrough: true,
+                                                                                       tables: true,
+                                                                                       space_after_headers: true,
+                                                                                       disable_indented_code_blocks: true,
+                                                                                       no_intra_emphasis: true)
     @emoji = MdEmoji::Render.new
   end
 end

@@ -2,6 +2,7 @@ AllCops:
   RunRailsCops: true
   Exclude:
     - 'lib/templates/**/*'
+    - 'lib/ftp_sync.rb'
 
 Style/Documentation:
   Enabled: false

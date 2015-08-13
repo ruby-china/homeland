@@ -129,6 +129,8 @@ group :development, :test do
   gem 'colorize'
   gem 'letter_opener'
 
+  gem 'puma'
+
   # Better Errors
   gem 'better_errors'
   gem 'binding_of_caller'

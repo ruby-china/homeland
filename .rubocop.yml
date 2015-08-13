@@ -9,6 +9,9 @@ Style/Documentation:
 Style/AsciiComments:
   Enabled: false
 
+Style/IfUnlessModifier:
+  Enabled: false
+
 Metrics/LineLength:
   Max: 1200
 
@@ -22,4 +25,10 @@ Rails/TimeZone:
   Enabled: false
 
 Style/GlobalVars:
+  Enabled: false
+
+Rails/FindBy:
+  Enabled: false
+
+Rails/HasAndBelongsToMany:
   Enabled: false

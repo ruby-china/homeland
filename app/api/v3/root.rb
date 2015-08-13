@@ -2,7 +2,7 @@ require 'doorkeeper/grape/helpers'
 
 module V3
   class Root < Grape::API
-    version "v3"
+    version 'v3'
 
     default_error_formatter :json
     content_type :json, 'application/json'
@@ -12,27 +12,25 @@ module V3
     rescue_from :all do |e|
       case e
       when Mongoid::Errors::DocumentNotFound
-        Rack::Response.new([{ error: "数据不存在" }.to_json], 404, {}).finish
+        Rack::Response.new([{ error: '数据不存在' }.to_json], 404, {}).finish
       when Grape::Exceptions::ValidationErrors
-        Rack::Response.new([{ 
-          error: "参数不符合要求，请检查参数是否按照 API 要求传输。", 
-          validation_errors: e.errors 
+        Rack::Response.new([{
+          error: '参数不符合要求，请检查参数是否按照 API 要求传输。',
+          validation_errors: e.errors
         }.to_json], 400, {}).finish
       else
         # ExceptionNotifier.notify_exception(e) # Uncommit it when ExceptionNotification is available
         if Rails.env.test?
-          puts "Error: #{e}\n#{e.backtrace[0,3].join("\n")}"
+          Rails.logger.error "Error: #{e}\n#{e.backtrace[0, 3].join("\n")}"
         else
           Rails.logger.error "Api V3 Error: #{e}\n#{e.backtrace.join("\n")}"
         end
-        Rack::Response.new([{ error: "API 接口异常" }.to_json], 500, {}).finish
+        Rack::Response.new([{ error: 'API 接口异常' }.to_json], 500, {}).finish
       end
     end
 
     helpers Doorkeeper::Grape::Helpers
     helpers V3::Helpers
-    
-    
 
     mount V3::Topics
     mount V3::Replies
@@ -59,7 +57,7 @@ module V3
     params do
       optional :limit, type: Integer, values: 0..100
     end
-    get "hello" do
+    get 'hello' do
       doorkeeper_authorize!
       render current_user, meta: { time: Time.now }
     end
@@ -109,9 +107,9 @@ module V3
         doorkeeper_authorize!
       end
 
-      desc "上传图片,请使用 Multipart 的方式提交图片文件"
+      desc '上传图片,请使用 Multipart 的方式提交图片文件'
       params do
-        requires :file, desc: "Image file."
+        requires :file, desc: 'Image file.'
       end
       post do
         @photo = Photo.new

@@ -193,7 +193,7 @@ class Topic
       next if notified_user_ids.include?(uid)
       # 排除回帖人
       next if uid == topic.user_id
-      puts "Post Notification to: #{uid}"
+      logger.debug "Post Notification to: #{uid}"
       Notification::Topic.create user_id: uid, topic_id: topic.id
     end
     true

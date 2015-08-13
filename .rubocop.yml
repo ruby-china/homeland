@@ -1,0 +1,17 @@
+AllCops:
+  RunRailsCops: true
+
+Style/Documentation:
+  Enabled: false
+
+Style/AsciiComments:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 1200
+
+Rails/TimeZone:
+  Enabled: false
+
+Style/GlobalVars:
+  Enabled: false

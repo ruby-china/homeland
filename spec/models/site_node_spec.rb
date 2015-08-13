@@ -1,4 +1,4 @@
 require 'rails_helper'
 
-describe SiteNode, :type => :model do
+describe SiteNode, type: :model do
 end

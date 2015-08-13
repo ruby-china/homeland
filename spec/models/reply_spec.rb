@@ -1,44 +1,44 @@
 # coding: utf-8
 require 'rails_helper'
 
-describe Reply, :type => :model do
+describe Reply, type: :model do
   let(:user) { FactoryGirl.create(:user) }
-  describe "notifications" do
-    it "should delete mention notification after destroy" do
+  describe 'notifications' do
+    it 'should delete mention notification after destroy' do
       expect do
-        Factory(:reply, :body => "@#{user.login}").destroy
+        Factory(:reply, body: "@#{user.login}").destroy
       end.not_to change(user.notifications.unread, :count)
     end
 
-    it "should send topic reply notification to topic author" do
-      topic = Factory :topic, :user => user
+    it 'should send topic reply notification to topic author' do
+      topic = Factory :topic, user: user
       expect do
-        Factory :reply, :topic => topic
+        Factory :reply, topic: topic
       end.to change(Mongoid::DelayedDocument.jobs, :size).by(1)
 
       expect do
-        Factory(:reply, :topic => topic).destroy
+        Factory(:reply, topic: topic).destroy
       end.not_to change(user.notifications.unread, :count)
 
       expect do
-        Factory :reply, :topic => topic, :user => user
+        Factory :reply, topic: topic, user: user
       end.not_to change(user.notifications.unread, :count)
 
       # Don't duplicate notifiation with mention
       expect do
-        Factory :reply, :topic => topic, :mentioned_user_ids => [user.id]
-      end.not_to change(user.notifications.unread.where(:_type => 'Notification::TopicReply'), :count)
+        Factory :reply, topic: topic, mentioned_user_ids: [user.id]
+      end.not_to change(user.notifications.unread.where(_type: 'Notification::TopicReply'), :count)
     end
 
-    describe "should send topic reply notification to followers" do
+    describe 'should send topic reply notification to followers' do
       let(:u1) { FactoryGirl.create(:user) }
       let(:u2) { FactoryGirl.create(:user) }
-      let!(:t) { FactoryGirl.create(:topic, :follower_ids => [u1.id,u2.id]) }
+      let!(:t) { FactoryGirl.create(:topic, follower_ids: [u1.id, u2.id]) }
 
       # 正常状况
-      it "should work" do
+      it 'should work' do
         expect do
-          Factory :reply, :topic => t, :user => user
+          Factory :reply, topic: t, user: user
         end.to change(Mongoid::DelayedDocument.jobs, :size).by(1)
       end
 
@@ -46,63 +46,61 @@ describe Reply, :type => :model do
     end
 
     describe 'Touch Topic in callback' do
-      let(:topic) { Factory :topic, :updated_at => 1.days.ago }
-      let(:reply) { Factory :reply, :topic => topic }
-      
-      it "should update Topic updated_at on Reply updated" do
+      let(:topic) { Factory :topic, updated_at: 1.days.ago }
+      let(:reply) { Factory :reply, topic: topic }
+
+      it 'should update Topic updated_at on Reply updated' do
         old_updated_at = topic.updated_at
-        reply.body = "foobar"
+        reply.body = 'foobar'
         reply.save
         expect(topic.updated_at).not_to eq(old_updated_at)
       end
-    
+
       it 'should update Topic updated_at on Reply deleted' do
         old_updated_at = topic.updated_at
-        reply.body = "foobar"
+        reply.body = 'foobar'
         reply.destroy
         expect(topic.updated_at).not_to eq(old_updated_at)
       end
     end
-    
 
     describe 'Send reply notification' do
       let(:followers) { FactoryGirl.create_list(:user, 3) }
       let(:replyer) { Factory :user }
-      
-      it "should notify_reply_created work" do
+
+      it 'should notify_reply_created work' do
         followers.each do |f|
           f.follow_user(replyer)
         end
-        topic = Factory :topic, :user => user
-        reply = Factory :reply, :topic => topic, user: replyer
+        topic = Factory :topic, user: user
+        reply = Factory :reply, topic: topic, user: replyer
         expect do
           Reply.notify_reply_created(reply.id)
-        end.to change(user.notifications.unread.where(:_type => 'Notification::TopicReply'), :count).by(1)
+        end.to change(user.notifications.unread.where(_type: 'Notification::TopicReply'), :count).by(1)
         followers.each do |f|
-          expect(f.notifications.unread.where(:_type => 'Notification::TopicReply').count).to eq 1 
+          expect(f.notifications.unread.where(_type: 'Notification::TopicReply').count).to eq 1
         end
       end
     end
-    
   end
 
-  describe "format body" do
-    it "should covert body with Markdown on create" do
-      r = Factory(:reply, :body => "*foo*")
-      expect(r.body_html).to eq("<p><em>foo</em></p>")
+  describe 'format body' do
+    it 'should covert body with Markdown on create' do
+      r = Factory(:reply, body: '*foo*')
+      expect(r.body_html).to eq('<p><em>foo</em></p>')
     end
 
-    it "should covert body on save" do
-      r = Factory(:reply, :body => "*foo*")
+    it 'should covert body on save' do
+      r = Factory(:reply, body: '*foo*')
       old_html = r.body_html
-      r.body = "*bar*"
+      r.body = '*bar*'
       r.save
       expect(r.body_html).not_to eq(old_html)
     end
 
-    it "should not store body_html when it not changed" do
-      r = Factory(:reply, :body => "*foo*")
-      r.body = "*fooaa*"
+    it 'should not store body_html when it not changed' do
+      r = Factory(:reply, body: '*foo*')
+      r.body = '*fooaa*'
       allow(r).to receive(:body_changed?).and_return(false)
       old_html = r.body_html
       r.save
@@ -112,33 +110,34 @@ describe Reply, :type => :model do
     context '#link_mention_user' do
       it 'should add link to mention users' do
         body = '@foo'
-        reply = Factory(:reply, :body => body)
+        reply = Factory(:reply, body: body)
         expect(reply.body_html).to eq('<p><a href="/foo" class="at_user" title="@foo"><i>@</i>foo</a></p>')
       end
     end
   end
 
-  describe "ban words for Reply body" do
+  describe 'ban words for Reply body' do
     let(:topic) { Factory(:topic) }
-    it "should work" do
+    it 'should work' do
       allow(SiteConfig).to receive(:ban_words_on_reply).and_return("mark\n顶")
-      expect(topic.replies.create(:body => "顶", :user => user).errors[:body].size).to eq(1)
-      expect(topic.replies.create(:body => "mark", :user => user).errors[:body].size).to eq(1)
-      expect(topic.replies.create(:body => " mark ", :user => user).errors[:body].size).to eq(1)
-      expect(topic.replies.create(:body => "MARK", :user => user).errors[:body].size).to eq(1)
-      expect(topic.replies.create(:body => "mark1", :user => user).errors[:body].size).to eq(0)
+      expect(topic.replies.create(body: '顶', user: user).errors[:body].size).to eq(1)
+      expect(topic.replies.create(body: 'mark', user: user).errors[:body].size).to eq(1)
+      expect(topic.replies.create(body: ' mark ', user: user).errors[:body].size).to eq(1)
+      expect(topic.replies.create(body: 'MARK', user: user).errors[:body].size).to eq(1)
+      expect(topic.replies.create(body: 'mark1', user: user).errors[:body].size).to eq(0)
       allow(SiteConfig).to receive(:ban_words_on_reply).and_return("mark\r\n顶")
-      expect(topic.replies.create(:body => "mark", :user => user).errors[:body].size).to eq(1)
+      expect(topic.replies.create(body: 'mark', user: user).errors[:body].size).to eq(1)
     end
 
-    it "should work when site_config value is nil" do
+    it 'should work when site_config value is nil' do
       allow(SiteConfig).to receive(:ban_words_on_reply).and_return(nil)
-      expect(topic.replies.create(:body => "mark", :user => user).errors[:body].size).to eq(0)
+      t = topic.replies.create(body: 'mark', user: user)
+      expect(t.errors[:body].size).to eq(0)
     end
   end
-  
-  describe "after_destroy" do
-    it "should call topic.update_deleted_last_reply" do
+
+  describe 'after_destroy' do
+    it 'should call topic.update_deleted_last_reply' do
       r = Factory(:reply)
       expect(r.topic).to receive(:update_deleted_last_reply).with(r).once
       r.destroy

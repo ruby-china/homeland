@@ -5,11 +5,11 @@ module APIV3Support
     let!(:current_user) { Factory :user }
     let!(:access_token) { Factory(:access_token, resource_owner_id: current_user.id) }
     let(:json) { JSON.parse(response.body) }
-    
+
     def login_user!
       default_parameters[:access_token] = access_token.token
     end
-    
+
     def login_admin!
       login_user!
       allow_any_instance_of(User).to receive(:admin?).and_return(true)
@@ -20,7 +20,7 @@ module APIV3Support
     end
 
     def default_parameters
-      @default_parameters ||= { }
+      @default_parameters ||= {}
     end
 
     # 覆盖 get, post .. 方法，让他们自己带上登录信息
@@ -35,16 +35,16 @@ module APIV3Support
       EOV
     end
 
-
     private
-      def combine_parameters argument, default
-        # if both of them are hashes combine them
-        if argument.is_a?(Hash) && default.is_a?(Hash)
-          default.merge(argument)
-        else
-          # otherwise return not nil arg or eventually nil if both of them are nil
-          argument || default
-        end
+
+    def combine_parameters(argument, default)
+      # if both of them are hashes combine them
+      if argument.is_a?(Hash) && default.is_a?(Hash)
+        default.merge(argument)
+      else
+        # otherwise return not nil arg or eventually nil if both of them are nil
+        argument || default
       end
+    end
   end
 end

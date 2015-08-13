@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "topics/show.html.erb", :type => :view do
+describe 'topics/show.html.erb', type: :view do
   let(:user) { FactoryGirl.create(:user) }
   let(:topic) { FactoryGirl.create(:topic) }
   before { allow(controller).to receive(:current_user) { user } }

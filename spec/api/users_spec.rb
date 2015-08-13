@@ -1,49 +1,52 @@
 require 'rails_helper'
 
-describe "API V3", "users", :type => :request do
+describe 'API V3', 'users', type: :request do
   describe 'GET /api/v3/users.json' do
     before do
       FactoryGirl.create_list(:user, 10)
     end
 
     it 'should work' do
-      get "/api/v3/users.json"
+      get '/api/v3/users.json'
       expect(response.status).to eq 200
-      expect(json["users"].size).to eq User.count
-      expect(json["users"][0]).to include(*%W(id name login avatar_url))
+      expect(json['users'].size).to eq User.count
+      expect(json['users'][0]).to include(*%w(id name login avatar_url))
     end
 
     it 'should work :limit' do
-      get "/api/v3/users.json", limit: 2
+      get '/api/v3/users.json', limit: 2
       expect(response.status).to eq 200
-      expect(json["users"].size).to eq 2
+      expect(json['users'].size).to eq 2
     end
   end
 
-  describe "GET /api/v3/users/:login.json" do
-    it "should get user details with list of topics" do
-      user = Factory(:user, name: "test user", login: "test_user", email: "foobar@gmail.com", email_public: true)
-      get "/api/v3/users/test_user.json"
+  describe 'GET /api/v3/users/:login.json' do
+    it 'should get user details with list of topics' do
+      user = Factory(:user, name: 'test user', login: 'test_user', email: 'foobar@gmail.com', email_public: true)
+      get '/api/v3/users/test_user.json'
       expect(response.status).to eq 200
-      fields = %W(id name login email avatar_url location company twitter github website bio tagline)
-      expect(json["user"]).to include(*fields)
-      fields.reject { |f| f == "avatar_url" }.each do |field|
-        expect(json["user"][field]).to eq user.send(field)
+      fields = %w(id name login email avatar_url location company twitter github website bio tagline)
+      expect(json['user']).to include(*fields)
+      fields.reject { |f| f == 'avatar_url' }.each do |field|
+        expect(json['user'][field]).to eq user.send(field)
       end
     end
 
     it 'should hidden email when email_public is false' do
-      user = Factory(:user, name: "test user", login: "test_user", email: "foobar@gmail.com", email_public: false)
-      get "/api/v3/users/test_user.json"
+      Factory(:user, name: 'test user',
+                     login: 'test_user',
+                     email: 'foobar@gmail.com',
+                     email_public: false)
+      get '/api/v3/users/test_user.json'
       expect(response.status).to eq 200
-      expect(json["user"]["email"]).to eq ""
+      expect(json['user']['email']).to eq ''
     end
 
     it 'should not hidden email when current_user itself' do
       login_user!
       get "/api/v3/users/#{current_user.login}.json"
       expect(response.status).to eq 200
-      expect(json["user"]["email"]).to eq current_user.email
+      expect(json['user']['email']).to eq current_user.email
     end
   end
 
@@ -55,10 +58,12 @@ describe "API V3", "users", :type => :request do
         @topics = FactoryGirl.create_list(:topic, 3, user: user)
         get "/api/v3/users/#{user.login}/topics.json", offset: 0, limit: 2
         expect(response.status).to eq 200
-        expect(json["topics"].size).to eq 2
-        expect(json["topics"][0]).to include(*%W(id title node_name node_id last_reply_user_id last_reply_user_login user created_at updated_at replies_count))
-        expect(json["topics"][0]["id"]).to eq @topics[2].id
-        expect(json["topics"][1]["id"]).to eq @topics[1].id
+        expect(json['topics'].size).to eq 2
+        fields = %w(id title user node_name node_id last_reply_user_id
+                    last_reply_user_login created_at updated_at replies_count)
+        expect(json['topics'][0]).to include(*fields)
+        expect(json['topics'][0]['id']).to eq @topics[2].id
+        expect(json['topics'][1]['id']).to eq @topics[1].id
       end
     end
 
@@ -69,8 +74,8 @@ describe "API V3", "users", :type => :request do
 
         get "/api/v3/users/#{user.login}/topics.json", order: 'likes', offset: 0, limit: 3
         expect(response.status).to eq 200
-        expect(json["topics"].size).to eq 3
-        expect(json["topics"][0]["id"]).to eq @hot_topic.id
+        expect(json['topics'].size).to eq 3
+        expect(json['topics'][0]['id']).to eq @hot_topic.id
       end
     end
 
@@ -81,8 +86,8 @@ describe "API V3", "users", :type => :request do
 
         get "/api/v3/users/#{user.login}/topics.json", order: 'replies', offset: 0, limit: 3
         expect(response.status).to eq 200
-        expect(json["topics"].size).to eq 3
-        expect(json["topics"][0]["id"]).to eq @hot_topic.id
+        expect(json['topics'].size).to eq 3
+        expect(json['topics'][0]['id']).to eq @hot_topic.id
       end
     end
   end
@@ -97,10 +102,12 @@ describe "API V3", "users", :type => :request do
       user.favorite_topic(@topics[3].id)
       get "/api/v3/users/#{user.login}/favorites.json", offset: 1, limit: 2
       expect(response.status).to eq 200
-      expect(json["topics"].size).to eq 2
-      expect(json["topics"][0]).to include(*%W(id title node_name node_id last_reply_user_id last_reply_user_login user created_at updated_at replies_count))
-      expect(json["topics"][0]["id"]).to eq @topics[1].id
-      expect(json["topics"][1]["id"]).to eq @topics[3].id
+      expect(json['topics'].size).to eq 2
+      fields = %w(id title user node_name node_id last_reply_user_id
+                  last_reply_user_login created_at updated_at replies_count)
+      expect(json['topics'][0]).to include(*fields)
+      expect(json['topics'][0]['id']).to eq @topics[1].id
+      expect(json['topics'][1]['id']).to eq @topics[3].id
     end
   end
 
@@ -115,9 +122,9 @@ describe "API V3", "users", :type => :request do
 
       get "/api/v3/users/#{user.login}/followers.json", offset: 0, limit: 2
       expect(response.status).to eq 200
-      expect(json["followers"].size).to eq 2
-      expect(json["followers"][0]).to include(*%W(id name login avatar_url))
-      expect(json["followers"][0]["login"]).to eq @users[0].login
+      expect(json['followers'].size).to eq 2
+      expect(json['followers'][0]).to include(*%w(id name login avatar_url))
+      expect(json['followers'][0]['login']).to eq @users[0].login
     end
   end
 
@@ -145,9 +152,9 @@ describe "API V3", "users", :type => :request do
 
       get "/api/v3/users/#{current_user.login}/blocked.json", offset: 0, limit: 2
       expect(response.status).to eq 200
-      expect(json["blocked"].size).to eq 2
-      expect(json["blocked"][0]).to include(*%W(id name login avatar_url))
-      expect(json["blocked"][0]["login"]).to eq @users[0].login
+      expect(json['blocked'].size).to eq 2
+      expect(json['blocked'][0]).to include(*%w(id name login avatar_url))
+      expect(json['blocked'][0]['login']).to eq @users[0].login
     end
   end
 
@@ -162,9 +169,9 @@ describe "API V3", "users", :type => :request do
 
       get "/api/v3/users/#{user.login}/following.json", offset: 0, limit: 2
       expect(response.status).to eq 200
-      expect(json["following"].size).to eq 2
-      expect(json["following"][0]).to include(*%W(id name login avatar_url))
-      expect(json["following"][0]["login"]).to eq @users[0].login
+      expect(json['following'].size).to eq 2
+      expect(json['following'][0]).to include(*%w(id name login avatar_url))
+      expect(json['following'][0]['login']).to eq @users[0].login
     end
   end
 
@@ -183,7 +190,7 @@ describe "API V3", "users", :type => :request do
       login_user!
       post "/api/v3/users/#{user.login}/follow.json"
       expect(response.status).to eq 201
-      expect(json["ok"]).to eq 1
+      expect(json['ok']).to eq 1
       current_user.reload
       expect(current_user.followed?(user)).to eq true
     end
@@ -193,7 +200,7 @@ describe "API V3", "users", :type => :request do
       current_user.follow_user(user)
       post "/api/v3/users/#{user.login}/unfollow.json"
       expect(response.status).to eq 201
-      expect(json["ok"]).to eq 1
+      expect(json['ok']).to eq 1
       current_user.reload
       expect(current_user.followed?(user)).to eq false
     end
@@ -214,7 +221,7 @@ describe "API V3", "users", :type => :request do
       login_user!
       post "/api/v3/users/#{user.login}/block.json"
       expect(response.status).to eq 201
-      expect(json["ok"]).to eq 1
+      expect(json['ok']).to eq 1
       current_user.reload
       expect(current_user.blocked_user?(user)).to eq true
     end
@@ -224,7 +231,7 @@ describe "API V3", "users", :type => :request do
       current_user.block_user(user.id)
       post "/api/v3/users/#{user.login}/unblock.json"
       expect(response.status).to eq 201
-      expect(json["ok"]).to eq 1
+      expect(json['ok']).to eq 1
       current_user.reload
       expect(current_user.blocked_user?(user)).to eq false
     end

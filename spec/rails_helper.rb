@@ -1,7 +1,7 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
-ENV["RAILS_ENV"] ||= 'test'
+ENV['RAILS_ENV'] ||= 'test'
 require 'spec_helper'
-require File.expand_path("../../config/environment", __FILE__)
+require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
 
 require 'capybara/rspec'
@@ -18,7 +18,7 @@ Rails.logger.level = 4
 # run twice. It is recommended that you do not name files matching this glob to
 # end with _spec.rb. You can configure this pattern with with the --pattern
 # option on the command line or in ~/.rspec, .rspec or `.rspec-local`.
-Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
@@ -47,7 +47,7 @@ RSpec.configure do |config|
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
   # config.infer_spec_type_from_file_location!
-  
+
   config.infer_base_class_for_anonymous_controllers = false
   config.render_views
 
@@ -59,6 +59,6 @@ RSpec.configure do |config|
   end
 
   config.include Devise::TestHelpers, type: :controller
-  config.include RSpec::Rails::RequestExampleGroup, type: :request, file_path: /spec\/api/
-  config.include APIV3Support, type: :request, file_path: /spec\/api\/v3/
+  config.include RSpec::Rails::RequestExampleGroup, type: :request, file_path: %r{spec/api}
+  config.include APIV3Support, type: :request, file_path: %r{spec/api/v3}
 end

@@ -19,7 +19,7 @@ gem 'md_emoji', '1.0.2'
 gem 'exception_notification'
 
 gem 'doorkeeper'
-gem 'doorkeeper-i18n', github: 'huacnlee/doorkeeper-i18n'
+gem 'doorkeeper-i18n', github: 'doorkeeper-gem/doorkeeper-i18n'
 
 gem 'rails-perftest'
 gem 'ruby-prof'
@@ -114,18 +114,20 @@ group :development, :test do
   gem 'capistrano-unicorn'
   gem 'rvm-capistrano', require: false
   gem 'capistrano-sidekiq'
+
+  gem 'rubocop'
   gem 'rspec-rails', '~> 3.1'
   gem 'factory_girl_rails', '1.4.0'
   gem 'database_cleaner'
   gem 'capybara', '~> 2.3.0'
   gem 'api_taster', '0.6.0'
-  gem 'letter_opener'
-
-  gem 'mongoid_colored_logger'
-  gem 'colorize'
 
   gem 'jasmine-rails', '~> 0.10.2'
   gem 'derailed_benchmarks', github: "schneems/derailed_benchmarks"
+
+  gem 'mongoid_colored_logger'
+  gem 'colorize'
+  gem 'letter_opener'
 
   # Better Errors
   gem 'better_errors'

@@ -72,7 +72,7 @@ class Reply
       Notification::TopicReply.create user_id: topic.user_id, reply_id: reply.id
       notified_user_ids << topic.user_id
     end
-    
+
     follower_ids = topic.follower_ids + (reply.user.try(:follower_ids) || [])
     follower_ids.uniq!
 
@@ -82,7 +82,7 @@ class Reply
       next if notified_user_ids.include?(uid)
       # 排除回帖人
       next if uid == reply.user_id
-      puts "Post Notification to: #{uid}"
+      logger.debug "Post Notification to: #{uid}"
       Notification::TopicReply.create user_id: uid, reply_id: reply.id
     end
     true

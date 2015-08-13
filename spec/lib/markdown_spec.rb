@@ -16,8 +16,9 @@ describe 'markdown' do
       subject { super().inner_html }
 
       context 'h3 with inline link' do
-        let(:raw) { "### [rails_panel](https://github.com/dejan/rails_panel)" }
-        it { is_expected.to eq(%(<h3 id="rails_panel"><a href="https://github.com/dejan/rails_panel" target="_blank">rails_panel</a></h3>))}
+        let(:raw) { '### [rails_panel](https://github.com/dejan/rails_panel)' }
+        let(:html) { %(<h3 id="rails_panel"><a href="https://github.com/dejan/rails_panel" target="_blank">rails_panel</a></h3>) }
+        it { is_expected.to eq(html) }
       end
     end
 
@@ -25,38 +26,38 @@ describe 'markdown' do
       subject { super().inner_html }
 
       context 'h1' do
-        let(:raw) { "# foo Bar 的" }
-        it { is_expected.to eq(%(<h2 id="foo Bar 的">foo Bar 的</h2>))}
+        let(:raw) { '# foo Bar 的' }
+        it { is_expected.to eq(%(<h2 id="foo Bar 的">foo Bar 的</h2>)) }
       end
 
       context 'h2' do
-        let(:raw) { "## 这是什么" }
-        it { is_expected.to eq(%(<h2 id="这是什么">这是什么</h2>))}
+        let(:raw) { '## 这是什么' }
+        it { is_expected.to eq(%(<h2 id="这是什么">这是什么</h2>)) }
       end
 
       context 'h3' do
-        let(:raw) { "### 这是什么" }
-        it { is_expected.to eq(%(<h3 id="这是什么">这是什么</h3>))}
+        let(:raw) { '### 这是什么' }
+        it { is_expected.to eq(%(<h3 id="这是什么">这是什么</h3>)) }
       end
 
       context 'h4' do
-        let(:raw) { "#### 这是什么" }
-        it { is_expected.to eq(%(<h4 id="这是什么">这是什么</h4>))}
+        let(:raw) { '#### 这是什么' }
+        it { is_expected.to eq(%(<h4 id="这是什么">这是什么</h4>)) }
       end
 
       context 'h5' do
-        let(:raw) { "##### 这是什么" }
-        it { is_expected.to eq(%(<h5 id="这是什么">这是什么</h5>))}
+        let(:raw) { '##### 这是什么' }
+        it { is_expected.to eq(%(<h5 id="这是什么">这是什么</h5>)) }
       end
 
       context 'h6' do
-        let(:raw) { "###### 这是什么" }
-        it { is_expected.to eq(%(<h6 id="这是什么">这是什么</h6>))}
+        let(:raw) { '###### 这是什么' }
+        it { is_expected.to eq(%(<h6 id="这是什么">这是什么</h6>)) }
       end
     end
 
-    describe "encoding with Chinese chars" do
-      context "a simple" do
+    describe 'encoding with Chinese chars' do
+      context 'a simple' do
         let(:raw) { '#1楼 @ichord 刚刚发布，有点问题' }
 
         describe '#inner_html' do
@@ -67,7 +68,7 @@ describe 'markdown' do
     end
 
     describe 'strikethrough' do
-      let(:raw) { "some ~~strikethrough~~ text" }
+      let(:raw) { 'some ~~strikethrough~~ text' }
 
       describe '#inner_html' do
         subject { super().inner_html }
@@ -76,7 +77,7 @@ describe 'markdown' do
     end
 
     describe 'strong' do
-      let(:raw) { "some **strong** text" }
+      let(:raw) { 'some **strong** text' }
 
       describe '#inner_html' do
         subject { super().inner_html }
@@ -193,13 +194,13 @@ describe 'markdown' do
       end
 
       context '@small_fish__ in ruby code block' do
-        let(:raw) {
+        let(:raw) do
           <<-MD.gsub(/^ {12}/, '')
             ```ruby
             @small_fish__ = 100
             ```
           MD
-        }
+        end
 
         specify { expect(doc.search('pre code').children[0].inner_html).to eq('@small_fish__') }
       end
@@ -212,26 +213,26 @@ describe 'markdown' do
       end
 
       context '@user in block code' do
-        let(:raw) {
+        let(:raw) do
           <<-MD.gsub(/^ {12}/, '')
             ```
             @user
             ```
           MD
-        }
+        end
 
         specify { expect(doc.css('a')).to be_empty }
-        specify { expect(doc.css('pre code').inner_html).to eq("@user") }
+        specify { expect(doc.css('pre code').inner_html).to eq('@user') }
       end
 
       context '@var in coffeescript' do
-        let(:raw) {
+        let(:raw) do
           <<-MD.gsub(/^ {12}/, '')
             ```coffeescript
             @var
             ```
           MD
-        }
+        end
 
         it 'should not leave it as placeholder' do
           expect(doc.to_html).to include('var')
@@ -284,16 +285,16 @@ describe 'markdown' do
       end
 
       context ' #12f in block code' do
-        let(:raw) {
+        let(:raw) do
           <<-MD.gsub(/^ {12}/, '')
             ```
             #12f
             ```
           MD
-        }
+        end
 
         specify { expect(doc.css('a')).to be_empty }
-        specify { expect(doc.css('pre code').inner_html).to eq("#12f") }
+        specify { expect(doc.css('pre code').inner_html).to eq('#12f') }
       end
     end
 
@@ -346,16 +347,16 @@ describe 'markdown' do
       end
 
       context ':apple: in block code' do
-        let(:raw) {
+        let(:raw) do
           <<-MD.gsub(/^ {12}/, '')
             ```
             :apple:
             ```
           MD
-        }
+        end
 
         specify { expect(doc.css('a')).to be_empty }
-        specify { expect(doc.css('pre code').inner_html).to eq(":apple:") }
+        specify { expect(doc.css('pre code').inner_html).to eq(':apple:') }
       end
     end
 
@@ -363,23 +364,23 @@ describe 'markdown' do
 
     describe 'The code' do
       context '``` use with code' do
-        let(:raw) {
+        let(:raw) do
           %(```
           class Foo; end
           ```)
-        }
+        end
 
-        specify { expect(doc.css('pre').attr("class").value).to eq("highlight plaintext") }
+        specify { expect(doc.css('pre').attr('class').value).to eq('highlight plaintext') }
       end
 
       context '```ruby use with code' do
-        let(:raw) {
+        let(:raw) do
           %(```ruby
           class Foo; end
           ```)
-        }
+        end
 
-        specify { expect(doc.css('pre').attr("class").value).to eq("highlight ruby") }
+        specify { expect(doc.css('pre').attr('class').value).to eq('highlight ruby') }
       end
 
       context 'indent in raw with \t' do
@@ -389,29 +390,31 @@ describe 'markdown' do
       end
 
       context 'indent in raw with space' do
-        let(:raw) { "    class Foo; end" }
+        let(:raw) { '    class Foo; end' }
 
         specify { expect(doc.css('pre')).to be_empty }
       end
     end
 
     describe 'tables' do
-      let(:raw) { %(
+      let(:raw) do
+        %(
 | header 1 | header 3 |
 | -------- | -------- |
 | cell 1   | cell 2   |
-| cell 3   | cell 4   |) }
+| cell 3   | cell 4   |)
+      end
 
       it { expect(doc.inner_html).to eq "<table class=\"table table-bordered table-striped\">\n<tr>\n<th>header 1</th>\n<th>header 3</th>\n</tr>\n<tr>\n<td>cell 1</td>\n<td>cell 2</td>\n</tr>\n<tr>\n<td>cell 3</td>\n<td>cell 4</td>\n</tr>\n</table>" }
     end
 
     describe 'Escape HTML tags' do
       context '<xxx> or a book names' do
-        let(:raw) { "<Enterprise Integration Patterns> book" }
+        let(:raw) { '<Enterprise Integration Patterns> book' }
 
         describe '#inner_html' do
           subject { super().inner_html }
-          it { is_expected.to eq("<p>&lt;Enterprise Integration Patterns&gt; book</p>") }
+          it { is_expected.to eq('<p>&lt;Enterprise Integration Patterns&gt; book</p>') }
         end
       end
 
@@ -425,26 +428,26 @@ describe 'markdown' do
       end
 
       context '<b> tag' do
-        let(:raw) { "<b>aaa</b>" }
+        let(:raw) { '<b>aaa</b>' }
 
         describe '#inner_html' do
           subject { super().inner_html }
-          it { is_expected.to eq("<p>&lt;b&gt;aaa&lt;/b&gt;</p>") }
+          it { is_expected.to eq('<p>&lt;b&gt;aaa&lt;/b&gt;</p>') }
         end
       end
 
-      context "<a> tag" do
-        let(:raw) { "https://www.flickr.com/photos/123590011@N08/sets/72157644587013882/" }
+      context '<a> tag' do
+        let(:raw) { 'https://www.flickr.com/photos/123590011@N08/sets/72157644587013882/' }
 
         subject { super().inner_html }
-        it "auto link with @ issue #322" do
+        it 'auto link with @ issue #322' do
           expect(subject).to eq "<p><a href=\"https://www.flickr.com/photos/123590011@N08/sets/72157644587013882/\" rel=\"nofollow\" target=\"_blank\">https://www.flickr.com/photos/123590011@N08/sets/72157644587013882/</a></p>"
         end
       end
     end
-    
+
     describe 'Full example' do
-      let(:raw) {
+      let(:raw) do
         %(# Markdown
 
 Markdown is a text formatting syntax inspired on plain text email. In the words of its creator, [John Gruber][]:
@@ -518,8 +521,8 @@ Inline links:
 class Foo
 end
 ```)
-      }
-      let(:out) {
+      end
+      let(:out) do
         %(<h2 id="Markdown">Markdown</h2>
 <p>Markdown is a text formatting syntax inspired on plain text email. In the words of its creator, <a href="http://daringfireball.net/" target="_blank">John Gruber</a>:</p>
 
@@ -594,13 +597,11 @@ _emphasize_    __strong__</code></pre>
 <a href="http://url.com/" target="_blank">link text</a></p>
 <pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">Foo</span>
 <span class="k">end</span></code></pre>)
-      }
-    
+      end
+
       it 'should work' do
         expect(doc.inner_html).to eq(out)
       end
     end
   end
-  
-  
 end

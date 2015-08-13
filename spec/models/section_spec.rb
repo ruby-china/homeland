@@ -1,22 +1,19 @@
 require 'rails_helper'
 
-describe Section, :type => :model do
-
-  describe "CacheVersion update" do
-    it "should update on save" do
-      old = CacheVersion.section_node_updated_at
-      sleep(1)
-      section = Factory(:section)
-      expect(CacheVersion.section_node_updated_at).not_to eq(old)      
+describe Section, type: :model do
+  describe 'CacheVersion update' do
+    let(:old) { 1.minutes.ago }
+    it 'should update on save' do
+      CacheVersion.section_node_updated_at = old
+      Factory(:section)
+      expect(CacheVersion.section_node_updated_at).not_to eq(old)
     end
 
-    it "should update on destroy" do
+    it 'should update on destroy' do
       section = Factory(:section)
-      old = CacheVersion.section_node_updated_at
-      sleep(1)
+      CacheVersion.section_node_updated_at = old
       section.destroy
-      expect(CacheVersion.section_node_updated_at).not_to eq(old)      
+      expect(CacheVersion.section_node_updated_at).not_to eq(old)
     end
   end
-
 end

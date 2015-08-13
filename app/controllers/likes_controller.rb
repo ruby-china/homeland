@@ -18,7 +18,7 @@ class LikesController < ApplicationController
   def find_likeable
     @success = false
     @element_id = "likeable_#{params[:type]}_#{params[:id]}"
-    if !params[:type].in?(%W(Topic Reply))
+    unless params[:type].in?(%w(Topic Reply))
       render text: '-1'
       return false
     end
@@ -33,9 +33,6 @@ class LikesController < ApplicationController
     end
 
     @item = klass.find_by_id(params[:id])
-    if @item.blank?
-      render text: '-2'
-      return false
-    end
+    render text: '-2' if @item.blank?
   end
 end

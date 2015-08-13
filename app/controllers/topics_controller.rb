@@ -5,12 +5,12 @@ class TopicsController < ApplicationController
   caches_action :feed, :node_feed, expires_in: 1.hours
 
   def index
-    Rack::MiniProfiler.step("@suggest_topics") do
+    Rack::MiniProfiler.step('@suggest_topics') do
       @suggest_topics = Topic.without_hide_nodes.suggest.fields_for_list.limit(3).to_a
       @suggest_topic_ids = @suggest_topics.collect(&:id)
     end
 
-    Rack::MiniProfiler.step("find_topics") do
+    Rack::MiniProfiler.step('find_topics') do
       @topics = Topic.last_actived.where(:_id.nin => @suggest_topic_ids)
       if current_user
         @topics = @topics.without_nodes(current_user.blocked_node_ids)
@@ -22,7 +22,7 @@ class TopicsController < ApplicationController
       @topics = @topics.paginate(page: params[:page], per_page: 15, total_entries: 1500)
     end
 
-    set_seo_meta t("menu.topics"), "#{Setting.app_name}#{t("menu.topics")}"
+    set_seo_meta t('menu.topics'), "#{Setting.app_name}#{t('menu.topics')}"
   end
 
   def feed
@@ -34,8 +34,8 @@ class TopicsController < ApplicationController
     @node = Node.find(params[:id])
     @topics = @node.topics.last_actived.fields_for_list
     @topics = @topics.includes(:user).paginate(page: params[:page], per_page: 15)
-    title = @node.jobs? ? @node.name : "#{@node.name} &raquo; #{t("menu.topics")}"
-    set_seo_meta title, "#{Setting.app_name}#{t("menu.topics")}#{@node.name}", @node.summary
+    title = @node.jobs? ? @node.name : "#{@node.name} &raquo; #{t('menu.topics')}"
+    set_seo_meta title, "#{Setting.app_name}#{t('menu.topics')}#{@node.name}", @node.summary
     render action: 'index'
   end
 
@@ -45,7 +45,7 @@ class TopicsController < ApplicationController
     render layout: false
   end
 
-  %W(no_reply popular).each do |name|
+  %w(no_reply popular).each do |name|
     define_method(name) do
       @topics = Topic.without_hide_nodes.send(name.to_sym).last_actived.fields_for_list.includes(:user)
       @topics = @topics.paginate(page: params[:page], per_page: 15, total_entries: 1500)
@@ -99,25 +99,25 @@ class TopicsController < ApplicationController
     check_current_user_status_for_topic
     set_special_node_active_menu
 
-    set_seo_meta "#{@topic.title} &raquo; #{t("menu.topics")}"
+    set_seo_meta "#{@topic.title} &raquo; #{t('menu.topics')}"
 
     fresh_when(etag: [@topic, @has_followed, @has_favorited, @replies, @node, @show_raw])
   end
 
   def check_current_user_liked_replies
-    return false if not current_user
+    return false unless current_user
 
     # 找出用户 like 过的 Reply，给 JS 处理 like 功能的状态
     @user_liked_reply_ids = []
     @replies.each do |r|
-      if r.liked_user_ids.index(current_user.id) != nil
+      unless r.liked_user_ids.index(current_user.id).nil?
         @user_liked_reply_ids << r.id
       end
     end
   end
 
   def check_current_user_status_for_topic
-    return false if not current_user
+    return false unless current_user
 
     @threads << Thread.new do
       # 通知处理
@@ -125,21 +125,21 @@ class TopicsController < ApplicationController
     end
 
     # 是否关注过
-    @has_followed = @topic.follower_ids.index(current_user.id) == nil
+    @has_followed = @topic.follower_ids.index(current_user.id).nil?
     # 是否收藏
-    @has_favorited = current_user.favorite_topic_ids.index(@topic.id) == nil
+    @has_favorited = current_user.favorite_topic_ids.index(@topic.id).nil?
   end
 
   def set_special_node_active_menu
     case @node.try(:id)
     when Node.jobs_id
-      @current = ["/jobs"]
+      @current = ['/jobs']
     end
   end
 
   def new
     @topic = Topic.new
-    if !params[:node].blank?
+    unless params[:node].blank?
       @topic.node_id = params[:node]
       @node = Node.find_by_id(params[:node])
       render_404 if @node.blank?

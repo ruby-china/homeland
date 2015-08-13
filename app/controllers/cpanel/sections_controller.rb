@@ -1,50 +1,47 @@
 # coding: utf-8
-class Cpanel::SectionsController < Cpanel::ApplicationController
+module Cpanel
+  class SectionsController < ApplicationController
+    def index
+      @sections = Section.all
+    end
 
-  def index
-    @sections = Section.all
+    def show
+      @section = Section.find(params[:id])
+    end
 
-  end
+    def new
+      @section = Section.new
+    end
 
-  def show
-    @section = Section.find(params[:id])
+    def edit
+      @section = Section.find(params[:id])
+    end
 
-  end
+    def create
+      @section = Section.new(params[:section].permit!)
 
-  def new
-    @section = Section.new
-  end
+      if @section.save
+        redirect_to(cpanel_sections_path, notice: 'Section was successfully created.')
+      else
+        render action: 'new'
+      end
+    end
 
-  def edit
-    @section = Section.find(params[:id])
-  end
+    def update
+      @section = Section.find(params[:id])
 
-  def create
-    @section = Section.new(params[:section].permit!)
+      if @section.update_attributes(params[:section].permit!)
+        redirect_to(cpanel_sections_path, notice: 'Section was successfully updated.')
+      else
+        render action: 'edit'
+      end
+    end
 
-    if @section.save
-      redirect_to(cpanel_sections_path, notice: 'Section was successfully created.')
-    else
-      render action: "new"
+    def destroy
+      @section = Section.find(params[:id])
+      @section.destroy
+
+      redirect_to(cpanel_sections_url)
     end
   end
-
-  def update
-    @section = Section.find(params[:id])
-
-    if @section.update_attributes(params[:section].permit!)
-      redirect_to(cpanel_sections_path, notice: 'Section was successfully updated.')
-    else
-      render action: "edit"
-    end
-  end
-
-  def destroy
-    @section = Section.find(params[:id])
-    @section.destroy
-
-    redirect_to(cpanel_sections_url)
-  end
-
-
 end

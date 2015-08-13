@@ -21,6 +21,9 @@ Metrics/ClassLength:
 Metrics/MethodLength:
   Max: 1200
 
+Metrics/AbcSize:
+  Enabled: false
+
 Rails/TimeZone:
   Enabled: false
 

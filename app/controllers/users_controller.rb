@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   def index
     @total_user_count = User.count
     @active_users = User.fields_for_list.hot.limit(100)
-    set_seo_meta("活跃会员")
+    set_seo_meta('活跃会员')
   end
 
   def show
@@ -43,12 +43,12 @@ class UsersController < ApplicationController
   def auth_unbind
     provider = params[:provider]
     if current_user.authorizations.count <= 1
-      redirect_to edit_user_registration_path, flash: { error: t("users.unbind_warning") }
+      redirect_to edit_user_registration_path, flash: { error: t('users.unbind_warning') }
       return
     end
 
-    current_user.authorizations.destroy_all({ provider: provider })
-    redirect_to edit_user_registration_path, flash: { warring: t("users.unbind_success", provider: provider.titleize) }
+    current_user.authorizations.destroy_all(provider: provider)
+    redirect_to edit_user_registration_path, flash: { warring: t('users.unbind_success', provider: provider.titleize) }
   end
 
   def update_private_token
@@ -65,10 +65,7 @@ class UsersController < ApplicationController
 
     @users = User.where(location_id: @location.id).fields_for_list.desc('replies_count').paginate(page: params[:page], per_page: 60)
 
-    if @users.count == 0
-      render_404
-      return
-    end
+    render_404 if @users.count == 0
   end
 
   def block
@@ -107,10 +104,11 @@ class UsersController < ApplicationController
   def following
     @users = @user.following.fields_for_list.paginate(page: params[:page], per_page: 60)
     set_seo_meta("#{@user.login} 正在关注")
-    render "followers"
+    render 'followers'
   end
 
   protected
+
   def find_user
     # 处理 login 有大写字母的情况
     if params[:id] != params[:id].downcase
@@ -120,5 +118,4 @@ class UsersController < ApplicationController
 
     @user = User.find_login(params[:id])
   end
-
 end

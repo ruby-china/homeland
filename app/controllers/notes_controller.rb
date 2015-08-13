@@ -9,9 +9,9 @@ class NotesController < ApplicationController
   end
 
   def show
-    @note =  Note.find(params[:id])
+    @note = Note.find(params[:id])
     @note.hits.incr(1)
-    set_seo_meta("查看 &raquo; #{t("menu.notes")}")
+    set_seo_meta("查看 &raquo; #{t('menu.notes')}")
   end
 
   def new

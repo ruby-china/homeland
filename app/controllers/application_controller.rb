@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
       devise_parameter_sanitizer.for(:account_update) { |u| u.permit(*User::ACCESSABLE_ATTRS) }
       devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(*User::ACCESSABLE_ATTRS) }
     end
-    
+
     if current_user && current_user.admin?
       Rack::MiniProfiler.authorize_request
     end
@@ -26,10 +26,10 @@ class ApplicationController < ActionController::Base
   before_action :set_active_menu
   def set_active_menu
     @current = case controller_name
-    when "pages"
-      ["/wiki"]
-    else
-      ["/#{controller_name}"]
+               when 'pages'
+                 ['/wiki']
+               else
+                 ["/#{controller_name}"]
     end
   end
 
@@ -43,12 +43,12 @@ class ApplicationController < ActionController::Base
 
   def render_optional_error_file(status_code)
     status = status_code.to_s
-    fname = %W(404 403 422 500).include?(status) ? status : 'unknown'
+    fname = %w(404 403 422 500).include?(status) ? status : 'unknown'
     render template: "/errors/#{fname}", format: [:html],
            handler: [:erb], status: status, layout: 'application'
   end
 
-  rescue_from CanCan::AccessDenied do |exception|
+  rescue_from CanCan::AccessDenied do |_exception|
     redirect_to topics_path, alert: t('common.access_denied')
   end
 

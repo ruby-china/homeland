@@ -22,7 +22,7 @@ class PagesController < ApplicationController
         render_404
         return
       end
-      
+
       redirect_to new_page_path(title: params[:id]), notice: 'Page not Found, Please create a new page'
       return
     end
@@ -33,11 +33,7 @@ class PagesController < ApplicationController
 
   def comments
     @page = Page.find_by_slug(params[:id])
-    if @page.blank?
-      render_404
-    end
-    
-    
+    render_404 if @page.blank?
   end
 
   def new

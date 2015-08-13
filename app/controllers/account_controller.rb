@@ -36,7 +36,7 @@ class AccountController < Devise::RegistrationsController
 
   def destroy
     current_password = params[:user][:current_password]
-    
+
     if current_user.valid_password?(current_password)
       resource.soft_delete
       sign_out
@@ -44,7 +44,7 @@ class AccountController < Devise::RegistrationsController
       set_flash_message :notice, :destroyed
     else
       current_user.errors.add(:current_password, :invalid)
-      render "edit"
+      render 'edit'
     end
   end
 end

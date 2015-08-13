@@ -1,4 +1,4 @@
-# coding: UTF-8
+# coding: utf-8
 class <%= controller_class_name %>Controller < <%= controller_class_name.include?('::') == true ? "#{controller_class_name.split('::').first}::" : ''  %>ApplicationController
 
   def index

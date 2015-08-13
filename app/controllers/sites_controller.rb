@@ -1,4 +1,4 @@
-# coding: UTF-8
+# coding: utf-8
 class SitesController < ApplicationController
   load_and_authorize_resource
 

@@ -34,6 +34,9 @@ Rails/TimeZone:
 Style/GlobalVars:
   Enabled: false
 
+Style/GuardClause:
+  Enabled: false
+
 Rails/FindBy:
   Enabled: false
 

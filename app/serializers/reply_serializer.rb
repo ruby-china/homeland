@@ -7,6 +7,6 @@ class ReplySerializer < BaseSerializer
   end
 
   def deleted
-    object.deleted_at != nil
+    !object.deleted_at.nil?
   end
 end

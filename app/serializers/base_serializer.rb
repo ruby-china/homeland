@@ -11,9 +11,9 @@ class BaseSerializer < ActiveModel::Serializer
       return obj.user_id == current_user.id
     end
   end
-  
+
   def cache(keys = [])
-    Rails.cache.fetch(["serializer", *keys]) do
+    Rails.cache.fetch(['serializer', *keys]) do
       yield
     end
   end
@@ -23,7 +23,7 @@ class BaseSerializer < ActiveModel::Serializer
   end
 
   def can?(*args)
-    current_ability.can? *args
+    current_ability.can?(*args)
   end
 
   def abilities

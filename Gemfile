@@ -27,7 +27,7 @@ gem 'ruby-prof'
 # 上传组件
 gem 'carrierwave', '~> 0.10.0'
 gem 'carrierwave-upyun', '0.1.8'
-gem 'mini_magick','3.7.0', require: false
+gem 'mini_magick', '3.7.0', require: false
 
 # Mongoid 辅助插件
 gem 'mongoid', '4.0.2'
@@ -37,7 +37,7 @@ gem 'mongoid_rails_migrations', '1.0.0'
 
 # 用户系统
 gem 'devise', '~> 3.5.1'
-gem "devise-async"
+gem 'devise-async'
 gem 'devise-encryptable', '0.1.2'
 
 # 分页
@@ -51,9 +51,9 @@ gem 'omniauth-github', '~> 1.1.0'
 gem 'cancancan', '~> 1.8.4'
 
 gem 'redis', '~> 3.2.1'
-gem "hiredis", "~> 0.6.0"
+gem 'hiredis', '~> 0.6.0'
 # Redis 命名空间
-gem 'redis-namespace','~> 1.5.1'
+gem 'redis-namespace', '~> 1.5.1'
 # 将一些数据存放入 Redis
 gem 'redis-objects', '1.1.0'
 
@@ -69,7 +69,7 @@ gem 'settingslogic', '~> 2.0.9'
 # 队列
 gem 'sidekiq', '3.4.2'
 # Sidekiq Web
-gem 'sinatra', '>= 1.3.0', :require => nil
+gem 'sinatra', '>= 1.3.0', require: nil
 
 gem 'message_bus'
 
@@ -123,7 +123,7 @@ group :development, :test do
   gem 'api_taster', '0.6.0'
 
   gem 'jasmine-rails', '~> 0.10.2'
-  gem 'derailed_benchmarks', github: "schneems/derailed_benchmarks"
+  gem 'derailed_benchmarks', github: 'schneems/derailed_benchmarks'
 
   gem 'mongoid_colored_logger'
   gem 'colorize'
@@ -135,4 +135,3 @@ group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
 end
-

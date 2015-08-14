@@ -1,4 +1,3 @@
-# coding: utf-8
 require 'rails_helper'
 
 describe UsersHelper, type: :helper do

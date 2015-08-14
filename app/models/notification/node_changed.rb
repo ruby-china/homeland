@@ -1,4 +1,3 @@
-# coding: utf-8
 module Notification
   class NodeChanged < Base
     belongs_to :topic

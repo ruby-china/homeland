@@ -1,4 +1,3 @@
-# coding: utf-8
 module Mongoid
   module MarkdownBody
     extend ActiveSupport::Concern

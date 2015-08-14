@@ -1,4 +1,3 @@
-# coding: utf-8
 require 'digest/md5'
 module UsersHelper
   # 生成用户 login 的链接，user 参数可接受 user 对象或者 字符串的 login

@@ -1,4 +1,3 @@
-# encoding: utf-8
 
 # from: https://raw.github.com/jnicklas/carrierwave-mongoid/master/lib/carrierwave/mongoid.rb
 require 'mongoid'

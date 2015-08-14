@@ -1,4 +1,3 @@
-# coding: utf-8
 class LikesController < ApplicationController
   before_action :require_user
   before_action :find_likeable

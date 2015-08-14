@@ -1,4 +1,3 @@
-# coding: utf-8
 module Cpanel
   class SiteNodesController < ApplicationController
     def index

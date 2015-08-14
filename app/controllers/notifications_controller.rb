@@ -1,4 +1,3 @@
-# coding: utf-8
 class NotificationsController < ApplicationController
   before_action :require_user
   respond_to :html, :js, only: [:destroy, :mark_all_as_read]

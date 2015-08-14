@@ -1,4 +1,3 @@
-# coding: utf-8
 # 软删除
 module Mongoid
   module SoftDelete

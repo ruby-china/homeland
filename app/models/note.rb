@@ -1,4 +1,3 @@
-# coding: utf-8
 # 记事本
 class Note
   include Mongoid::Document

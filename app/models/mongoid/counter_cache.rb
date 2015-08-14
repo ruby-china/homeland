@@ -1,4 +1,3 @@
-# coding: utf-8
 module Mongoid
   # https://gist.github.com/1033906
   #

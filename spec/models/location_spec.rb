@@ -1,4 +1,3 @@
-# coding: utf-8
 require 'rails_helper'
 
 describe Location, type: :model do

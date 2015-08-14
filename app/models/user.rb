@@ -1,4 +1,3 @@
-# coding: utf-8
 require 'securerandom'
 require 'digest/md5'
 require 'open-uri'

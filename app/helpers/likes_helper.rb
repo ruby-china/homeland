@@ -1,4 +1,3 @@
-# coding: utf-8
 module LikesHelper
   # 喜欢功能
   # 参数

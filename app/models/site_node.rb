@@ -1,4 +1,3 @@
-# coding: utf-8
 class SiteNode
   include Mongoid::Document
   include Mongoid::BaseModel

@@ -1,4 +1,3 @@
-# coding: utf-8
 require 'will_paginate/array'
 class UsersController < ApplicationController
   before_action :require_user, only: [:block, :unblock, :auth_unbind, :follow, :unfollow]

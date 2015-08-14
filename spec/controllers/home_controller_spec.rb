@@ -1,4 +1,3 @@
-# encoding: utf-8
 require 'rails_helper'
 
 describe HomeController, type: :controller do

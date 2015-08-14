@@ -1,4 +1,3 @@
-# coding: utf-8
 class Node
   include Mongoid::Document
   include Mongoid::Timestamps

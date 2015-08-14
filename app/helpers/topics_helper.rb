@@ -1,4 +1,3 @@
-# coding: utf-8
 require 'digest/md5'
 module TopicsHelper
   def markdown(text)

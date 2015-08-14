@@ -1,4 +1,3 @@
-# coding: utf-8
 class BaseMailer < ActionMailer::Base
   default from: Setting.email_sender
   default charset: 'utf-8'

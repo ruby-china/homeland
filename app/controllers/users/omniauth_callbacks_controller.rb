@@ -1,4 +1,3 @@
-# coding: utf-8
 module Users
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     def self.provides_callback_for(*providers)

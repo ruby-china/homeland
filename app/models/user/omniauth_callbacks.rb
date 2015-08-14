@@ -1,4 +1,3 @@
-# coding: utf-8
 class User
   module OmniauthCallbacks
     %w(github google twitter douban).each do |provider|

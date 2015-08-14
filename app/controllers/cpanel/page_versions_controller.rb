@@ -1,4 +1,3 @@
-# coding: utf-8
 module Cpanel
   class PageVersionsController < ApplicationController
     def index

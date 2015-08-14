@@ -1,4 +1,3 @@
-# coding: utf-8
 class CommentsController < ApplicationController
   before_action :require_user
 

@@ -1,4 +1,3 @@
-# coding: utf-8
 # 基本 Model，加入一些通用功能
 module Mongoid
   # BaseModel

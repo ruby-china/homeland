@@ -1,4 +1,3 @@
-# coding: utf-8
 # Devise User Controller
 class AccountController < Devise::RegistrationsController
   protect_from_forgery

@@ -1,4 +1,3 @@
-# coding: utf-8
 module Notification
   class Follow < Base
     belongs_to :follower, class_name: 'User'

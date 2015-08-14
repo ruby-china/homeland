@@ -1,4 +1,3 @@
-# coding: utf-8
 module Cpanel
   class LocationsController < ApplicationController
     def index

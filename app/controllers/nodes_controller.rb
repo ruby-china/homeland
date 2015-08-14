@@ -1,4 +1,3 @@
-# coding: utf-8
 class NodesController < ApplicationController
   before_action :require_user, only: [:block, :unblock]
 

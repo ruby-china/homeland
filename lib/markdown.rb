@@ -1,4 +1,3 @@
-# coding: utf-8
 require 'rails'
 require 'rails_autolink'
 require 'redcarpet'

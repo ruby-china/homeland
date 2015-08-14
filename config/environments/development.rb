@@ -1,4 +1,3 @@
-# coding: utf-8
 require 'sidekiq/testing/inline'
 
 Rails.application.configure do

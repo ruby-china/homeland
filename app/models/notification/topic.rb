@@ -1,4 +1,3 @@
-# coding: utf-8
 module Notification
   class Topic < Base
     belongs_to :topic, class_name: 'Topic'

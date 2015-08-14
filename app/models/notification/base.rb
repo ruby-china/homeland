@@ -1,4 +1,3 @@
-# coding: utf-8
 module Notification
   class Base
     include Mongoid::Document

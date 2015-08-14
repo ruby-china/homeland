@@ -1,4 +1,3 @@
-# coding: utf-8
 require 'bundler/capistrano'
 require 'capistrano/sidekiq'
 require 'rvm/capistrano'

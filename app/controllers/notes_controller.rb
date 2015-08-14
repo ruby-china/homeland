@@ -1,4 +1,3 @@
-# coding: utf-8
 class NotesController < ApplicationController
   before_action :require_user, except: [:show]
   load_and_authorize_resource

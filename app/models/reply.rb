@@ -1,4 +1,3 @@
-# coding: utf-8
 require 'digest/md5'
 class Reply
   include Mongoid::Document

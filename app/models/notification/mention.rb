@@ -1,4 +1,3 @@
-# coding: utf-8
 module Notification
   class Mention < Base
     belongs_to :mentionable, polymorphic: true

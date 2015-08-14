@@ -1,4 +1,3 @@
-# coding: utf-8
 # 异常通知
 module ExceptionNotifier
   class DatabaseNotifier

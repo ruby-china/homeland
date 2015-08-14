@@ -1,4 +1,3 @@
-# coding: utf-8
 module Notification
   class TopicReply < Base
     belongs_to :reply

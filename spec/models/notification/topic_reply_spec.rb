@@ -1,4 +1,3 @@
-# coding: utf-8
 require 'rails_helper'
 
 describe Notification::TopicReply, type: :model do

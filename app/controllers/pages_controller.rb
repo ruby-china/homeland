@@ -1,4 +1,3 @@
-# coding: utf-8
 class PagesController < ApplicationController
   authorize_resource :page
 

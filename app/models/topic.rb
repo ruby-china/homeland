@@ -1,4 +1,3 @@
-# coding: utf-8
 require 'auto-space'
 
 CORRECT_CHARS = [

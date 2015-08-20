@@ -31,11 +31,9 @@ describe User, type: :model do
     it 'user can soft_delete' do
       user_for_delete1.soft_delete
       user_for_delete1.reload
-      expect(user_for_delete1.login).to eq('Guest')
       expect(user_for_delete1.state).to eq(-1)
       user_for_delete2.soft_delete
       user_for_delete1.reload
-      expect(user_for_delete1.login).to eq('Guest')
       expect(user_for_delete1.state).to eq(-1)
       expect(user_for_delete1.authorizations).to eq([])
     end

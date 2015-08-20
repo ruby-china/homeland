@@ -2,6 +2,18 @@ require 'rails_helper'
 
 describe UsersController, type: :controller do
   let(:user) { Factory :user, location: 'Shanghai' }
+  let(:deleted_user) { Factory :user, state: User::STATE[:deleted] }
+
+  describe 'Visit deleted user' do
+    it 'should 404 with deleted user' do
+      get :show, id: deleted_user.login
+      expect(response.status).to eq(404)
+      get :topics, id: deleted_user.login
+      expect(response.status).to eq(404)
+      get :notes, id: deleted_user.login
+      expect(response.status).to eq(404)
+    end
+  end
 
   describe ':index' do
     it 'should have an index action' do

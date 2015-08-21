@@ -8,6 +8,7 @@ module Mongoid
     def paginate(options = {})
       options[:page] = options[:page].to_i
       options[:page] = 1 if options[:page] == 0
+      fail ActionController::RoutingError.new('Bad page number.') if options[:page] <= 0
 
       options = base_options options
 

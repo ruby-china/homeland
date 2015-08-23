@@ -7,7 +7,7 @@
       user: "用户"
       topic: "话题"
       post: 文章
-      page: Wiki
+      page: 文档 
     attributes:
       user:
         name: "名字"

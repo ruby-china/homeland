@@ -6,6 +6,7 @@ else
 end
 
 gem 'rails', '~> 4.2.3'
+gem 'sprockets', '~> 3.3.3'
 gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'

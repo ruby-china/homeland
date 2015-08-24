@@ -16,6 +16,7 @@ set :deploy_to, "/data/www/#{application}"
 set :runner, 'ruby'
 # set :deploy_via, :remote_cache
 set :git_shallow_clone, 1
+set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
 
 role :web, 'ruby-china.org'
 role :app, 'ruby-china.org'

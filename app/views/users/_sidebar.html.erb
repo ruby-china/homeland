@@ -3,7 +3,8 @@
     <div class="panel-body">
       <div class="media">
         <div class="avatar media-left">
-          <%= user_avatar_tag(@user,:big, link: false) %>
+          <div class='image'><%= user_avatar_tag(@user,:big, link: false) %></div>
+          <div class="level"><%= render_user_level_tag(@user) %></div>
         </div>
         <div class="media-body">
           <div class="item">
@@ -14,8 +15,16 @@
               <% end %>
             </span>
           </div>
-          <div class="item number">第 <%= @user.id %> 位<%= t("menu.users")%></div>
-          <div class="item badges"> <%= render_user_level_tag(@user) %> </div>
+          <div class="item number">
+            第 <%= @user.id %> 位<%= t("menu.users")%>
+          </div>
+          <div class="item number">
+            <span title="注册日期"><%= @user.created_at.to_date %></span>
+            <% if @user.location.present? %> • <span title="所在地"><%= location_name_tag(@user.location) %></span><% end %>
+          </div>
+          <div class="item counts">
+            <span><%= @user.topics_count %></span> 篇帖子 • <span><%= @user.replies_count %></span> 条回帖
+          </div>
         </div>
       </div>
       <div class="follow-info row">
@@ -37,7 +46,7 @@
         <div class="col-sm-6">
           <%= follow_user_tag(@user) %>
         </div>
-        
+
         <div class="col-sm-6">
           <%= block_user_tag(@user) %>
         </div>

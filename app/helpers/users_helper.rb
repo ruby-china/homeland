@@ -82,9 +82,11 @@ module UsersHelper
 
   def render_user_level_tag(user)
     if admin?(user)
-      content_tag(:span, t('common.admin_user'), class: 'label label-warning role')
+      content_tag(:span, t('common.admin_user'), class: 'label label-danger role')
     elsif wiki_editor?(user)
       content_tag(:span, t('common.vip_user'), class: 'label label-success role')
+    elsif user.blocked?
+      content_tag(:span, t('common.blocked_user'), class: 'label label-warning role')
     elsif user.newbie?
       content_tag(:span, t('common.newbie_user'), class: 'label label-default role')
     else

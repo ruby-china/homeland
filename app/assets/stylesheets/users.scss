@@ -143,34 +143,42 @@ table.node-topics {
 
 .sidebar {
   .profile {
+    .avatar {
+      .level { margin-top: 6px; text-align: center; }
+    }
     .item { margin-bottom: 5px; }
+    .item a { color: #666; }
     .number { color: #999; }
-    .follow-info { 
+    .counts {
+      color: #999;
+      span { color: #666; }
+    }
+    .follow-info {
       border-top: 1px solid #f0f0f0;
       text-align: center; margin-top: 15px; padding-top: 15px;
       a { display:block; text-decoration: none; }
-      a.counter { 
-        font-size: 32px; color: $blue; 
+      a.counter {
+        font-size: 32px; color: $blue;
         &:hover { color: $blueLight; }
       }
       a.text {
         color: #999;
       }
     }
-    .buttons { 
+    .buttons {
       border-top: 1px solid #f0f0f0;
-      margin-top: 15px; padding-top: 15px; 
+      margin-top: 15px; padding-top: 15px;
     }
   }
 }
 
-.user-card { 
+.user-card {
   margin-bottom: 15px;
-  .media-heading { 
-    font-weight:bold; 
+  .media-heading {
+    font-weight:bold;
     a { color: #333; }
   }
-  .infos { 
+  .infos {
     color:#999; font-size: 12px;
     .item { margin-top: 5px; }
   }

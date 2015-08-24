@@ -44,6 +44,7 @@
     vip_user: "高级会员"
     normal_user: "会员"
     newbie_user: "新手"
+    blocked_user: "禁言用户"
     title: "标题"
     last_reply_time: "最后回复时间"
     reply: "回复"

@@ -1,13 +1,6 @@
 <div class="panel panel-default userinfo">
   <div class="panel-body vcard clearfix">
     <ul class="list-group">
-      <% if !@user.location.blank? %>
-        <li class="adr list-group-item">
-          <label><%= t("users.city")%>:</label>
-          <span class="region"><%= location_name_tag(@user.location) %></span>
-        </li>
-      <% end %>
-
       <% if !@user.company.blank? %>
         <li class="adr list-group-item">
           <label><%= t("users.company")%>:</label>
@@ -42,11 +35,6 @@
           <span><%= render_user_tagline(@user) %></span>
         </li>
       <% end %>
-
-      <li class="list-group-item">
-        <label><%= t("users.join_time")%>:</label>
-        <span><%= render_user_join_time(@user) %></span>
-      </li>
 
     </ul>
   </div>

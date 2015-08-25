@@ -19,7 +19,7 @@ describe UsersHelper, type: :helper do
 
     it 'should result right html with string param and downcase url' do
       login = 'Monster'
-      expect(helper.user_name_tag(login)).to eq(link_to(login, user_path(login.downcase), 'data-name' => login))
+      expect(helper.user_name_tag(login)).to eq(link_to(login, user_path(login), 'data-name' => login))
     end
 
     it 'should result empty with nil param' do

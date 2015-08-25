@@ -11,7 +11,7 @@
             <%= @user.fullname %>
             <span class="opts pull-right">
               <% if admin? %>
-                <%= link_to icon_tag("pencil", label: "修改"), edit_cpanel_user_path(@user) %>
+                <%= link_to icon_tag("pencil", label: "修改"), edit_cpanel_user_path(@user.id) %>
               <% end %>
             </span>
           </div>
@@ -29,16 +29,16 @@
       </div>
       <div class="follow-info row">
         <div class="col-sm-4 followers" data-login="<%= @user.login %>">
-          <%= link_to @user.followers_count, followers_user_path(@user.login), class: "counter" %>
-          <%= link_to "关注者", followers_user_path(@user.login), class: "text" %>
+          <%= link_to @user.followers_count, followers_user_path(@user), class: "counter" %>
+          <%= link_to "关注者", followers_user_path(@user), class: "text" %>
         </div>
         <div class="col-sm-4 following">
-          <%= link_to @user.following_count, following_user_path(@user.login), class: "counter" %>
-          <%= link_to "正在关注", following_user_path(@user.login), class: "text" %>
+          <%= link_to @user.following_count, following_user_path(@user), class: "counter" %>
+          <%= link_to "正在关注", following_user_path(@user), class: "text" %>
         </div>
         <div class="col-sm-4 stars">
-          <%= link_to @user.favorite_topics_count, favorites_user_path(@user.login), class: "counter" %>
-          <%= link_to "收藏", favorites_user_path(@user.login), class: "text" %>
+          <%= link_to @user.favorite_topics_count, favorites_user_path(@user), class: "counter" %>
+          <%= link_to "收藏", favorites_user_path(@user), class: "text" %>
         </div>
       </div>
       <% if !owner? @user %>

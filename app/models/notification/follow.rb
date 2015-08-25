@@ -27,7 +27,7 @@ module Notification
     end
 
     def content_path
-      url_helpers.user_path(follower.login.downcase)
+      url_helpers.user_path(follower)
     end
   end
 end

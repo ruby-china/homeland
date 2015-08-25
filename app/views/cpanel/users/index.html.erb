@@ -28,7 +28,7 @@
     <td><%= user.email %></td>
     <td><%= user.created_at.to_date %></td>
     <td>
-      <%= link_to '', edit_cpanel_user_path(user), class: "fa fa-pencil" %>
+      <%= link_to '', edit_cpanel_user_path(user.id), class: "fa fa-pencil" %>
     </td>
   </tr>
 <% end %>

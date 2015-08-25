@@ -7,11 +7,11 @@
       <i class="fa fa-reorder"></i>
     </button>
     <%= render_list class: "dropdown-menu", role: "menu" do |li|
-      li << link_to(t("menu.my_home_page"), user_path(current_user.login) )
+      li << link_to(t("menu.my_home_page"), user_path(current_user) )
       li << "<div class='divider'></div>"
       li << link_to(t("menu.edit_account_path"), edit_user_registration_path)
       li << link_to(t("menu.notes"), notes_path )
-      li << link_to(t("menu.likes"), favorites_user_path(current_user.login))
+      li << link_to(t("menu.likes"), favorites_user_path(current_user))
       if admin?
         li << "<div class='divider'></div>"
         if params[:controller].start_with?("cpanel")

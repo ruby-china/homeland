@@ -1,6 +1,7 @@
 module Cpanel
   class ApplicationController < ::ApplicationController
     layout 'cpanel'
+
     before_action :require_user
     before_action :require_admin
     before_action :set_active_menu

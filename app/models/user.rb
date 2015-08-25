@@ -101,6 +101,10 @@ class User
          :tagline, :github, :website, :location, :location_id, :twitter, :co)
   }
 
+  def to_param
+    login
+  end
+
   def email=(val)
     self.email_md5 = Digest::MD5.hexdigest(val || '')
     self[:email] = val

@@ -15,7 +15,7 @@ module UsersHelper
     name ||= login
     options['data-name'.freeze] = name
 
-    link_to(login, user_path(login.downcase), options)
+    link_to(login, user_path(login), options)
   end
 
   def user_avatar_width_for_size(size)
@@ -57,7 +57,7 @@ module UsersHelper
     end
 
     if link
-      link_to(raw(img), user_path(user.login))
+      link_to(raw(img), user_path(user))
     else
       raw img
     end

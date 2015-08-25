@@ -41,7 +41,7 @@
     <div class="col-md-10 col-sm-offset-2">
       <% if @user.state != User::STATE[:deleted] %>
         <div class="pull-right">
-          <%= link_to '删除此用户', cpanel_user_path(@user), 'data-confirm' => '警告！此动作无法撤销，确定要删除么?', method: :delete, class: "btn btn-danger"  %>
+          <%= link_to '删除此用户', cpanel_user_path(@user.id), 'data-confirm' => '警告！此动作无法撤销，确定要删除么?', method: :delete, class: "btn btn-danger"  %>
         </div>
       <% end %>
       <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving") %>

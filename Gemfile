@@ -5,7 +5,7 @@ else
   source 'https://ruby.taobao.org'
 end
 
-gem 'rails', '~> 4.2.3'
+gem 'rails', '~> 4.2.4'
 gem 'sprockets', '~> 3.3.3'
 gem 'sass-rails'
 gem 'coffee-rails'

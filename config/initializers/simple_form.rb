@@ -83,6 +83,55 @@ SimpleForm.setup do |config|
     end
   end
 
+  config.wrappers :vertical_boolean, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
+    b.use :html5
+    b.optional :readonly
+
+    b.wrapper tag: 'div', class: 'checkbox' do |ba|
+      ba.use :label_input
+    end
+
+    b.use :error, wrap_with: { tag: 'span', class: 'help-block' }
+    b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
+  end
+
+
+  config.wrappers :vertical_radio_and_checkboxes, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
+    b.use :html5
+    b.optional :readonly
+    b.use :label, class: 'control-label'
+    b.use :input
+    b.use :error, wrap_with: { tag: 'span', class: 'help-block' }
+    b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
+  end
+
+  config.wrappers :horizontal_boolean, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
+      b.use :html5
+      b.optional :readonly
+
+      b.wrapper tag: 'div', class: 'col-sm-offset-2 col-sm-10' do |wr|
+        wr.wrapper tag: 'div', class: 'checkbox clearfix' do |ba|
+          ba.use :label_input, class: 'col-sm-10'
+        end
+
+        wr.use :error, wrap_with: { tag: 'span', class: 'help-block' }
+        wr.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
+      end
+    end
+
+    config.wrappers :horizontal_radio_and_checkboxes, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
+      b.use :html5
+      b.optional :readonly
+
+      b.use :label, class: 'col-sm-2'
+
+      b.wrapper tag: 'div', class: 'col-sm-10' do |ba|
+        ba.use :input
+        ba.use :error, wrap_with: { tag: 'span', class: 'help-block' }
+        ba.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
+      end
+    end
+
   # Wrappers for forms and inputs using the Twitter Bootstrap toolkit.
   # Check the Bootstrap docs (http://twitter.github.com/bootstrap)
   # to learn about the different styles for forms and inputs,
@@ -174,4 +223,9 @@ SimpleForm.setup do |config|
 
   # Cache SimpleForm inputs discovery
   # config.cache_discovery = !Rails.env.development?
+  config.wrapper_mappings = {
+    check_boxes: :horizontal_radio_and_checkboxes,
+    radio_buttons: :horizontal_radio_and_checkboxes,
+    boolean: :horizontal_boolean,
+  }
 end

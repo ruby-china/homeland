@@ -212,6 +212,7 @@ a { color: $blue; }
   label { font-weight: normal; color: rgba(0, 0, 0, 0.40); font-size: 13px; margin-bottom: 0px;}
 }
 .control-label { font-weight: 500 !important; }
+.control-label.checkbox { text-align: left; }
 .form-control {
   border-radius: 0px;
   border-color: #D5DCE1;

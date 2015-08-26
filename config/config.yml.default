@@ -1,9 +1,9 @@
 defaults: &defaults
-  app_name: "Ruby China"
-  foot_html: "&copy; Ruby China."
+  app_name: "JavaStack - 做最专业的 Java 开发者交流社区。"
+  foot_html: "&copy; Java Stack."
   domain: "127.0.0.1:3000"
   admin_emails:
-    - "admin@admin.com"
+    - "denger.it@gmail.com"
   google_analytics_key: ""
   upload_url: "http://ruby-china-files-dev.b0.upaiyun.com"
   upyun_username: "test"

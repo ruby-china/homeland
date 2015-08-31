@@ -100,8 +100,9 @@ module ApplicationHelper
 
   # 可按需修改
   LANGUAGES_LISTS = { 'Java' => 'java', 'HTML' => 'html', 'XML' => 'xml', 'CSS / SCSS' => 'scss', 'JavaScript' => 'js',
-                      'Groovy' => 'grooy', 'Scala' => 'scala', 'Nginx / Redis <i>(.conf)</i>' => 'conf',
-                      'Python' => 'python', 'PHP' => 'php', 'Erlang' => 'erlang', 'Shell / Bash' => 'shell' }
+                      'Groovy' => 'groovy', 'Scala' => 'scala',
+                      'Python' => 'python', 'PHP' => 'php', 'Erlang' => 'erlang', 'Shell / Bash' => 'shell',
+                      'Nginx / Redis <i>(.conf)</i>' => 'conf',}
 
   def insert_code_menu_items_tag
     lang_list = []

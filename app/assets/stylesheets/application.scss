@@ -44,8 +44,9 @@ body {
 
   .navbar-brand {
     color: #666 !important;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', sans-serif;;
     font-weight: bold;
+    line-height: 18px;
     b { color: $red; }
   }
   .navbar-default .navbar-brand,

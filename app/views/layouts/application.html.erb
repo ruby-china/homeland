@@ -8,9 +8,12 @@
   <meta name="apple-mobile-web-app-capable" content="no">
   <meta content='True' name='HandheldFriendly' />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <!--
   <link rel="apple-touch-icon-precomposed" href="<%= cached_asset_path("ios-icon.png") %>" />
   <link rel="shortcut icon" href="<%= cached_asset_path("big_logo.png") %>" />
+  -->
   <link rel="alternate" type="application/rss+xml" title="订阅最新帖" href="<%= feed_topics_url %>" />
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag_with_cached "front" %>
   <%= javascript_include_tag_with_cached "app" %>
   <%= csrf_meta_tag %>

@@ -99,9 +99,9 @@ module ApplicationHelper
   end
 
   # 可按需修改
-  LANGUAGES_LISTS = { 'Ruby' => 'ruby', 'HTML / ERB' => 'erb', 'CSS / SCSS' => 'scss', 'JavaScript' => 'js',
-                      'YAML <i>(.yml)</i>' => 'yml', 'CoffeeScript' => 'coffee', 'Nginx / Redis <i>(.conf)</i>' => 'conf',
-                      'Python' => 'python', 'PHP' => 'php', 'Java' => 'java', 'Erlang' => 'erlang', 'Shell / Bash' => 'shell' }
+  LANGUAGES_LISTS = { 'Java' => 'java', 'HTML' => 'html', 'XML' => 'xml', 'CSS / SCSS' => 'scss', 'JavaScript' => 'js',
+                      'Groovy' => 'grooy', 'Scala' => 'scala', 'Nginx / Redis <i>(.conf)</i>' => 'conf',
+                      'Python' => 'python', 'PHP' => 'php', 'Erlang' => 'erlang', 'Shell / Bash' => 'shell' }
 
   def insert_code_menu_items_tag
     lang_list = []

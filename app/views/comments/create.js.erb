@@ -5,6 +5,7 @@ comments_form = $("#<%= @comment.commentable_type %>_<%= @comment.commentable_id
 comment_line = '<%= j(render("comment", item: @comment)) %>';
 comments_box.append(comment_line);
 $(comment_line).fadeOut("fast");
+comments_box.find('.no-result').remove();
 $("abbr.timeago").timeago();
 $("textarea",comments_form).val("").focus();
 <% else %>

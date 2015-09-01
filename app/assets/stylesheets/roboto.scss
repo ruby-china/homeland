@@ -27,13 +27,13 @@
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 400;
-  src: local('Open Sans'), local('OpenSans'), url('OpenSans-Regular.woff') format('woff');
+  src: local('Open Sans'), local('OpenSans'), font-url('OpenSans-Regular.woff') format('woff');
 }
 
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 600;
-  src: local('Open Sans Semibold'), local('OpenSans-Semibold'), url('Open-Sans-Semibold.woff') format('woff');
+  src: local('Open Sans Semibold'), local('OpenSans-Semibold'), font-url('Open-Sans-Semibold.woff') format('woff');
 }
 /*# sourceMappingURL=roboto.css.map */

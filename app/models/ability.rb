@@ -12,9 +12,11 @@ class Ability
       can :manage, :all
     elsif user.has_role?(:member)
       # Topic
-      unless user.newbie?
-        can :create, Topic
-      end
+      # 取消新用户不能创建 Topic
+      #unless user.newbie?
+      #  can :create, Topic
+      #end
+      can :create, Topic
       can :favorite, Topic
       can :unfavorite, Topic
       can :follow, Topic

@@ -3,8 +3,6 @@ Rails.application.routes.draw do
     controllers applications: 'oauth/applications', authorized_applications: 'oauth/authorized_applications'
   end
 
-  require 'sidekiq/web'
-
   resources :sites
   resources :pages, path: 'wiki' do
     collection do
@@ -117,6 +115,7 @@ Rails.application.routes.draw do
   require 'dispatch'
   mount Api::Dispatch => '/api'
 
+  require 'sidekiq/web'
   authenticate :user, ->(u) { u.admin? } do
     mount Sidekiq::Web => '/sidekiq'
   end

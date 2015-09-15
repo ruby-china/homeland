@@ -18,7 +18,7 @@ class TopicsController < ApplicationController
         @topics = @topics.without_hide_nodes
       end
       @topics = @topics.fields_for_list
-      @topics = @topics.paginate(page: params[:page], per_page: 15, total_entries: 1500)
+      @topics = @topics.paginate(page: params[:page], per_page: 22, total_entries: 1500)
     end
 
     set_seo_meta t('menu.topics'), "#{Setting.app_name}#{t('menu.topics')}"
@@ -32,7 +32,7 @@ class TopicsController < ApplicationController
   def node
     @node = Node.find(params[:id])
     @topics = @node.topics.last_actived.fields_for_list
-    @topics = @topics.includes(:user).paginate(page: params[:page], per_page: 15)
+    @topics = @topics.includes(:user).paginate(page: params[:page], per_page: 25)
     title = @node.jobs? ? @node.name : "#{@node.name} &raquo; #{t('menu.topics')}"
     set_seo_meta title, "#{Setting.app_name}#{t('menu.topics')}#{@node.name}", @node.summary
     render action: 'index'
@@ -47,7 +47,7 @@ class TopicsController < ApplicationController
   %w(no_reply popular).each do |name|
     define_method(name) do
       @topics = Topic.without_hide_nodes.send(name.to_sym).last_actived.fields_for_list.includes(:user)
-      @topics = @topics.paginate(page: params[:page], per_page: 15, total_entries: 1500)
+      @topics = @topics.paginate(page: params[:page], per_page: 25, total_entries: 1500)
 
       set_seo_meta [t("topics.topic_list.#{name}"), t('menu.topics')].join(' &raquo; ')
       render action: 'index'
@@ -56,14 +56,14 @@ class TopicsController < ApplicationController
 
   def recent
     @topics = Topic.without_hide_nodes.recent.fields_for_list.includes(:user)
-    @topics = @topics.paginate(page: params[:page], per_page: 15, total_entries: 1500)
+    @topics = @topics.paginate(page: params[:page], per_page: 25, total_entries: 1500)
     set_seo_meta [t('topics.topic_list.recent'), t('menu.topics')].join(' &raquo; ')
     render action: 'index'
   end
 
   def excellent
     @topics = Topic.excellent.recent.fields_for_list.includes(:user)
-    @topics = @topics.paginate(page: params[:page], per_page: 15, total_entries: 1500)
+    @topics = @topics.paginate(page: params[:page], per_page: 25, total_entries: 1500)
 
     set_seo_meta [t('topics.topic_list.excellent'), t('menu.topics')].join(' &raquo; ')
     render action: 'index'
@@ -176,11 +176,9 @@ class TopicsController < ApplicationController
 
   def update
     @topic = Topic.find(params[:id])
-    if current_user.admin?
-      @topic.admin_editing = true
-    end
+    @topic.admin_editing = true if current_user.admin?
 
-    if @topic.lock_node == false || current_user.admin?
+    if can?(:change_node, @topic)
       # 锁定接点的时候，只有管理员可以修改节点
       @topic.node_id = topic_params[:node_id]
 
@@ -241,7 +239,7 @@ class TopicsController < ApplicationController
 
   def ban
     @topic = Topic.find(params[:id])
-    @topic.update_attribute(:node_id, Node.no_point_id)
+    @topic.ban!
     redirect_to @topic, success: '已转移到 NoPoint 节点。'
   end
 

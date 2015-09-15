@@ -1,7 +1,7 @@
 <%= simple_form_for @topic, html: { class: "form" } do |f| %>
   <%= render "shared/error_messages", target: @topic %>
   <div class="form-group">
-    <% if @topic.lock_node == false || admin? %>
+    <% if can? :change_node, @topic %>
     <div class="input-group">
       <span class="node-select input-group-btn">
         <%= render_topic_node_select_tag(@topic) %>

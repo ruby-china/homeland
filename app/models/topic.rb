@@ -51,7 +51,7 @@ class Topic
   belongs_to :last_reply, class_name: 'Reply'
   has_many :replies, dependent: :destroy
 
-  validates :user_id, :title, :body, :node, presence: true
+  validates :user_id, :title, :body, :node_id, presence: true
 
   index node_id: 1
   index user_id: 1
@@ -175,6 +175,10 @@ class Topic
 
   def excellent?
     excellent >= 1
+  end
+
+  def ban!
+    update_attributes(lock_node: true, node_id: Node.no_point_id, admin_editing: true)
   end
 
   def self.notify_topic_created(topic_id)

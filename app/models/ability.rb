@@ -22,6 +22,9 @@ class Ability
       can :update, Topic do |topic|
         (topic.user_id == user.id)
       end
+      can :change_node, Topic do |topic|
+        topic.lock_node == false || user.admin?
+      end
       can :destroy, Topic do |topic|
         (topic.user_id == user.id) && (topic.replies_count == 0)
       end

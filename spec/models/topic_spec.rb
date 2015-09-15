@@ -5,7 +5,7 @@ describe Topic, type: :model do
   let(:user) { FactoryGirl.create(:user) }
 
   it 'should no save invalid node_id' do
-    expect(FactoryGirl.build(:topic, node_id: 0).valid?).not_to be_truthy
+    expect(FactoryGirl.build(:topic, node_id: nil).valid?).not_to be_truthy
   end
 
   it 'should set last_active_mark on created' do
@@ -221,6 +221,18 @@ describe Topic, type: :model do
         topic.save
         expect(Topic).not_to receive(:notify_topic_node_changed)
       end
+    end
+  end
+
+  describe '.ban!' do
+    let!(:t) { Factory(:topic, user: user) }
+
+    it 'should ban! and lock topic' do
+      expect(Topic).to receive(:notify_topic_node_changed).with(t.id, Node.no_point_id)
+      t.ban!
+      t.reload
+      expect(t.node_id).to eq Node.no_point_id
+      expect(t.lock_node).to eq true
     end
   end
 end

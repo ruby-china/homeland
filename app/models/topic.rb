@@ -69,6 +69,7 @@ class Topic
   scope :last_actived, -> { desc(:last_active_mark) }
   # 推荐的话题
   scope :suggest, -> { where(:suggested_at.ne => nil).desc(:suggested_at) }
+  scope :without_suggest, -> { where(:suggested_at => nil) }
   scope :fields_for_list, -> { without(:body, :body_html, :who_deleted, :follower_ids) }
   scope :high_likes, -> { desc(:likes_count, :_id) }
   scope :high_replies, -> { desc(:replies_count, :_id) }

@@ -1,6 +1,6 @@
 ## Ruby China
 
-This is the source code of [Ruby China](http://ruby-china.org) website.
+This is the source code of [JStack](http://jstack.io) website.
 
 [![Build
 Status](https://secure.travis-ci.org/ruby-china/ruby-china.png?branch=master&.png)](http://travis-ci.org/ruby-china/ruby-china)

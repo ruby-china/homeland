@@ -1,4 +1,4 @@
-## Ruby China
+## JStack
 
 This is the source code of [JStack](http://jstack.io) website.
 

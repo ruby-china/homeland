@@ -94,10 +94,11 @@ class TopicsController < ApplicationController
 
       check_current_user_liked_replies
     end
-    @threads.each(&:join)
 
     check_current_user_status_for_topic
     set_special_node_active_menu
+
+    @threads.each(&:join)
 
     set_seo_meta "#{@topic.title} &raquo; #{t('menu.topics')}"
 

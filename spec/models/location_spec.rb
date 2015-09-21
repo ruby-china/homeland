@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe Location, type: :model do
   before(:each) do
-    @location = Factory(:location, name: 'foo')
+    @location = create(:location, name: 'foo')
   end
 
   it 'should validates_uniqueness_of :name ignore case' do

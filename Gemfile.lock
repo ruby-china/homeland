@@ -152,10 +152,10 @@ GEM
       actionmailer (>= 3.0.4)
       activesupport (>= 3.0.4)
     execjs (2.4.0)
-    factory_girl (2.3.2)
-      activesupport
-    factory_girl_rails (1.4.0)
-      factory_girl (~> 2.3.0)
+    factory_girl (4.5.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.5.0)
+      factory_girl (~> 4.5.0)
       railties (>= 3.0.0)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
@@ -453,7 +453,7 @@ DEPENDENCIES
   doorkeeper
   doorkeeper-i18n!
   exception_notification
-  factory_girl_rails (= 1.4.0)
+  factory_girl_rails (~> 4.5.0)
   grape (= 0.7.0)
   grape-active_model_serializers
   hiredis (~> 0.6.0)

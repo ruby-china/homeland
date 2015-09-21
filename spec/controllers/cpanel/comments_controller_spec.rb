@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 describe Cpanel::CommentsController, type: :controller do
-  let(:comment) { Factory :comment }
+  let(:comment) { create :comment }
 
   before do
-    sign_in Factory(:admin)
+    sign_in create(:admin)
   end
 
   describe 'GET index' do

@@ -14,9 +14,9 @@ describe 'API V3', 'notifications', type: :request do
     end
 
     it 'should get notification for a mention in a reply' do
-      topic = Factory :topic, user: current_user
-      reply = Factory :reply, topic: topic, user: current_user, body: 'Test to mention user'
-      Factory :notification_mention, user: current_user, mentionable: reply
+      topic = create :topic, user: current_user
+      reply = create :reply, topic: topic, user: current_user, body: 'Test to mention user'
+      create :notification_mention, user: current_user, mentionable: reply
       login_user!
       get '/api/v3/notifications.json'
       expect(response.status).to eq(200)
@@ -29,9 +29,9 @@ describe 'API V3', 'notifications', type: :request do
 
     it 'should get notification for a reply' do
       login_user!
-      topic = Factory :topic, user: current_user
-      reply = Factory :reply, topic: topic, user: current_user, body: 'Test to reply user'
-      Factory :notification_topic_reply, user: current_user, reply: reply
+      topic = create :topic, user: current_user
+      reply = create :reply, topic: topic, user: current_user, body: 'Test to reply user'
+      create :notification_topic_reply, user: current_user, reply: reply
       get '/api/v3/notifications.json'
       expect(response.status).to eq(200)
       json = JSON.parse(response.body)
@@ -43,9 +43,9 @@ describe 'API V3', 'notifications', type: :request do
 
     it 'should get notification for a mention in a topic' do
       login_user!
-      node = Factory :node
-      topic = Factory :topic, user: current_user, node: node, title: 'Test to mention user in a topic'
-      Factory :notification_mention, user: current_user, mentionable: topic
+      node = create :node
+      topic = create :topic, user: current_user, node: node, title: 'Test to mention user in a topic'
+      create :notification_mention, user: current_user, mentionable: topic
       get '/api/v3/notifications.json'
       expect(response.status).to eq(200)
       json = JSON.parse(response.body)
@@ -58,9 +58,9 @@ describe 'API V3', 'notifications', type: :request do
 
     it 'should return a list of notifications of the current user' do
       login_user!
-      topic = Factory :topic, user: current_user
-      replies = (0...10).map { |i| Factory :reply, topic: topic, user: current_user, body: "Test to mention user #{i}" }
-      (0...10).map { |i| Factory :notification_mention, user: current_user, mentionable: replies[i] }
+      topic = create :topic, user: current_user
+      replies = (0...10).map { |i| create :reply, topic: topic, user: current_user, body: "Test to mention user #{i}" }
+      (0...10).map { |i| create :notification_mention, user: current_user, mentionable: replies[i] }
 
       get '/api/v3/notifications.json'
       expect(response.status).to eq(200)
@@ -90,9 +90,9 @@ describe 'API V3', 'notifications', type: :request do
 
     it 'should work' do
       login_user!
-      topic = Factory :topic, user: current_user
-      replies = (0...10).map { |i| Factory :reply, topic: topic, user: current_user, body: "Test to mention user #{i}" }
-      (0...10).map { |i| Factory :notification_mention, user: current_user, mentionable: replies[i] }
+      topic = create :topic, user: current_user
+      replies = (0...10).map { |i| create :reply, topic: topic, user: current_user, body: "Test to mention user #{i}" }
+      (0...10).map { |i| create :notification_mention, user: current_user, mentionable: replies[i] }
       post '/api/v3/notifications/read.json', ids: current_user.notifications.pluck(:id)
       expect(response.status).to eq 201
       current_user.notifications.each do |item|
@@ -109,9 +109,9 @@ describe 'API V3', 'notifications', type: :request do
 
     it 'should delete all notifications of current user' do
       login_user!
-      topic = Factory :topic, user: current_user
-      replies = (0...10).map { |i| Factory :reply, topic: topic, user: current_user, body: "Test to mention user #{i}" }
-      (0...10).map { |i| Factory :notification_mention, user: current_user, mentionable: replies[i] }
+      topic = create :topic, user: current_user
+      replies = (0...10).map { |i| create :reply, topic: topic, user: current_user, body: "Test to mention user #{i}" }
+      (0...10).map { |i| create :notification_mention, user: current_user, mentionable: replies[i] }
 
       get '/api/v3/notifications.json'
       expect(response.status).to eq(200)
@@ -135,9 +135,9 @@ describe 'API V3', 'notifications', type: :request do
 
     it 'should delete the specified notification of current user' do
       login_user!
-      topic = Factory :topic, user: current_user
-      replies = (0...10).map { |i| Factory :reply, topic: topic, user: current_user, body: "Test to mention user #{i}" }
-      mentions = (0...10).map { |i| Factory :notification_mention, user: current_user, mentionable: replies[i] }
+      topic = create :topic, user: current_user
+      replies = (0...10).map { |i| create :reply, topic: topic, user: current_user, body: "Test to mention user #{i}" }
+      mentions = (0...10).map { |i| create :notification_mention, user: current_user, mentionable: replies[i] }
 
       get '/api/v3/notifications.json'
       expect(response.status).to eq(200)

@@ -2,12 +2,12 @@ require 'rails_helper'
 require 'digest/md5'
 
 describe User, type: :model do
-  let(:topic) { Factory :topic }
-  let(:user)  { Factory :user }
-  let(:user2) { Factory :user }
-  let(:reply) { Factory :reply }
-  let(:user_for_delete1) { Factory :user }
-  let(:user_for_delete2) { Factory :user }
+  let(:topic) { create :topic }
+  let(:user)  { create :user }
+  let(:user2) { create :user }
+  let(:reply) { create :reply }
+  let(:user_for_delete1) { create :user }
+  let(:user_for_delete2) { create :user }
 
   describe '#read_topic?' do
     before do
@@ -40,7 +40,7 @@ describe User, type: :model do
   end
 
   describe '#filter_readed_topics' do
-    let(:topics) { FactoryGirl.create_list(:topic, 3) }
+    let(:topics) { create_list(:topic, 3) }
 
     it 'should work' do
       user.read_topic(topics[1])
@@ -69,7 +69,7 @@ describe User, type: :model do
       old_name = user.location
       new_name = 'HongKong'
       old_location = Location.find_by_name(old_name)
-      hk_location = Factory(:location, name: new_name, users_count: 20)
+      hk_location = create(:location, name: new_name, users_count: 20)
       user.location = new_name
       user.save
       user.reload
@@ -81,7 +81,7 @@ describe User, type: :model do
   end
 
   describe 'admin?' do
-    let(:admin) { Factory :admin }
+    let(:admin) { create :admin }
     it 'should know you are an admin' do
       expect(admin).to be_admin
     end
@@ -92,7 +92,7 @@ describe User, type: :model do
   end
 
   describe 'wiki_editor?' do
-    let(:admin) { Factory :admin }
+    let(:admin) { create :admin }
     it 'should know admin is wiki editor' do
       expect(admin).to be_wiki_editor
     end
@@ -132,38 +132,38 @@ describe User, type: :model do
     subject { user }
 
     context 'when is a new user' do
-      let(:user) { Factory :user }
+      let(:user) { create :user }
       it { is_expected.to have_role(:member) }
     end
 
     context 'when is a blocked user' do
-      let(:user) { Factory :blocked_user }
+      let(:user) { create :blocked_user }
       it { is_expected.not_to have_role(:member) }
     end
 
     context 'when is a deleted user' do
-      let(:user) { Factory :blocked_user }
+      let(:user) { create :blocked_user }
       it { is_expected.not_to have_role(:member) }
     end
 
     context 'when is admin' do
-      let(:user) { Factory :admin }
+      let(:user) { create :admin }
       it { is_expected.to have_role(:admin) }
     end
 
     context 'when is wiki editor' do
-      let(:user) { Factory :wiki_editor }
+      let(:user) { create :wiki_editor }
       it { is_expected.to have_role(:wiki_editor) }
     end
 
     context 'when ask for some random role' do
-      let(:user) { Factory :user }
+      let(:user) { create :user }
       it { is_expected.not_to have_role(:savior_of_the_broken) }
     end
   end
 
   describe 'github url' do
-    subject { Factory(:user, github: 'monkey') }
+    subject { create(:user, github: 'monkey') }
     let(:expected) { 'https://github.com/monkey' }
 
     context 'user name provided correct' do
@@ -212,9 +212,9 @@ describe User, type: :model do
   end
 
   describe 'Like' do
-    let(:topic) { Factory :topic }
-    let(:user)  { Factory :user }
-    let(:user2) { Factory :user }
+    let(:topic) { create :topic }
+    let(:user)  { create :user }
+    let(:user2) { create :user }
 
     describe 'like topic' do
       it 'can like/unlike topic' do
@@ -259,7 +259,7 @@ describe User, type: :model do
   end
 
   describe '#find_login' do
-    let(:user) { Factory :user }
+    let(:user) { create :user }
 
     it 'should work' do
       u = User.find_login(user.login)
@@ -285,7 +285,7 @@ describe User, type: :model do
   end
 
   describe '.block_node' do
-    let(:user) { Factory :user }
+    let(:user) { create :user }
 
     it 'should work' do
       user.block_node(1)
@@ -300,7 +300,7 @@ describe User, type: :model do
   end
 
   describe '.block_user' do
-    let(:user) { Factory :user }
+    let(:user) { create :user }
 
     it 'should work' do
       user.block_user(1)
@@ -315,9 +315,9 @@ describe User, type: :model do
   end
 
   describe '.follow_user' do
-    let(:u1) { Factory :user }
-    let(:u2) { Factory :user }
-    let(:u3) { Factory :user }
+    let(:u1) { create :user }
+    let(:u2) { create :user }
+    let(:u3) { create :user }
 
     it 'should work' do
       u1.follow_user(u2)

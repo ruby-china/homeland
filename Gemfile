@@ -118,7 +118,7 @@ group :development, :test do
 
   gem 'rubocop'
   gem 'rspec-rails', '~> 3.1'
-  gem 'factory_girl_rails', '1.4.0'
+  gem 'factory_girl_rails', '~> 4.5.0'
   gem 'database_cleaner'
   gem 'capybara', '~> 2.3.0'
   gem 'api_taster', '0.6.0'

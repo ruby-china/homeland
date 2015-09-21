@@ -5,12 +5,12 @@ describe Section, type: :model do
     let(:old) { 1.minutes.ago }
     it 'should update on save' do
       CacheVersion.section_node_updated_at = old
-      Factory(:section)
+      create(:section)
       expect(CacheVersion.section_node_updated_at).not_to eq(old)
     end
 
     it 'should update on destroy' do
-      section = Factory(:section)
+      section = create(:section)
       CacheVersion.section_node_updated_at = old
       section.destroy
       expect(CacheVersion.section_node_updated_at).not_to eq(old)

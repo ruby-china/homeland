@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Notification::TopicReply, type: :model do
-  let(:n1) { Factory.create(:notification_topic_reply) }
+  let(:n1) { create(:notification_topic_reply) }
   describe '.content_path' do
     it 'should work' do
       expect(n1.content_path).to eq("/topics/#{n1.reply.topic_id}")

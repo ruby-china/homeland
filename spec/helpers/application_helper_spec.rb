@@ -23,8 +23,8 @@ describe ApplicationHelper, type: :helper do
   end
 
   describe 'admin?' do
-    let(:user) { Factory :user }
-    let(:admin) { Factory :admin }
+    let(:user) { create :user }
+    let(:admin) { create :admin }
 
     it 'knows you are not an admin' do
       expect(helper.admin?(user)).to be_falsey
@@ -51,8 +51,8 @@ describe ApplicationHelper, type: :helper do
   end
 
   describe 'wiki_editor?' do
-    let(:non_editor) { Factory :non_wiki_editor }
-    let(:editor) { Factory :wiki_editor }
+    let(:non_editor) { create :non_wiki_editor }
+    let(:editor) { create :wiki_editor }
 
     it 'knows non editor is not wiki editor' do
       expect(helper.wiki_editor?(non_editor)).to be_falsey
@@ -75,8 +75,8 @@ describe ApplicationHelper, type: :helper do
 
   describe 'owner?' do
     require 'ostruct'
-    let(:user) { Factory :user }
-    let(:user2) { Factory :user }
+    let(:user) { create :user }
+    let(:user2) { create :user }
     let(:item) { OpenStruct.new user_id: user.id }
 
     it 'knows who is owner' do

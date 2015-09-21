@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'API V3', 'replies', type: :request do
-  let!(:reply) { Factory(:reply, user: current_user) }
+  let!(:reply) { create(:reply, user: current_user) }
 
   describe 'GET /api/v3/replies/:id.json' do
     it 'should be ok' do
@@ -16,7 +16,7 @@ describe 'API V3', 'replies', type: :request do
     end
 
     it 'should return right abilities when owner visit' do
-      r = Factory(:reply, user: current_user)
+      r = create(:reply, user: current_user)
       login_user!
       get "/api/v3/replies/#{r.id}.json"
       expect(response.status).to eq(200)
@@ -40,7 +40,7 @@ describe 'API V3', 'replies', type: :request do
     end
 
     it 'require owner' do
-      r = Factory(:reply)
+      r = create(:reply)
       login_user!
       post "/api/v3/replies/#{r.id}.json", body: 'bar dar'
       expect(response.status).to eq(403)
@@ -57,7 +57,7 @@ describe 'API V3', 'replies', type: :request do
 
     it 'should work by admin' do
       login_admin!
-      r = Factory(:reply)
+      r = create(:reply)
       post "/api/v3/replies/#{r.id}.json", body: 'bar dar'
       expect(response.status).to eq(201)
     end
@@ -70,7 +70,7 @@ describe 'API V3', 'replies', type: :request do
     end
 
     it 'require owner' do
-      r = Factory(:reply)
+      r = create(:reply)
       login_user!
       delete "/api/v3/replies/#{r.id}.json"
       expect(response.status).to eq(403)
@@ -86,7 +86,7 @@ describe 'API V3', 'replies', type: :request do
 
     it 'should work by admin' do
       login_admin!
-      r = Factory(:reply)
+      r = create(:reply)
       delete "/api/v3/replies/#{r.id}.json"
       expect(response.status).to eq(200)
       r.reload

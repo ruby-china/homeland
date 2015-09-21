@@ -9,8 +9,8 @@ describe NotesController, type: :controller do
   end
 
   describe 'authenticated' do
-    let(:user) { Factory :user }
-    let(:note) { Factory :note, user: user }
+    let(:user) { create :user }
+    let(:note) { create :note, user: user }
 
     before(:each) { sign_in user }
 

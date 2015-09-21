@@ -2,10 +2,10 @@ require 'rails_helper'
 
 describe TopicsController, type: :controller do
   render_views
-  let(:topic) { Factory :topic, user: user }
-  let(:user) { Factory :user }
-  let(:newbie) { Factory :newbie }
-  let(:admin) { Factory :admin }
+  let(:topic) { create :topic, user: user }
+  let(:user) { create :user }
+  let(:newbie) { create :newbie }
+  let(:admin) { create :admin }
 
   describe ':index' do
     it 'should have an index action' do
@@ -85,8 +85,8 @@ describe TopicsController, type: :controller do
 
       context "other's topic" do
         it "should not allow edit other's topic" do
-          other_user = Factory :user
-          topic_of_other_user = Factory(:topic, user: other_user)
+          other_user = create :user
+          topic_of_other_user = create(:topic, user: other_user)
           sign_in user
           get :edit, id: topic_of_other_user.id
           expect(response).not_to be_success
@@ -97,9 +97,9 @@ describe TopicsController, type: :controller do
 
   describe '#show' do
     it 'should clear user mention notification when show topic' do
-      user = Factory :user
-      topic = Factory :topic, body: "@#{user.login}"
-      Factory :reply, body: "@#{user.login}", topic: topic
+      user = create :user
+      topic = create :topic, body: "@#{user.login}"
+      create :reply, body: "@#{user.login}", topic: topic
       sign_in user
       expect do
         get :show, id: topic.id
@@ -107,9 +107,9 @@ describe TopicsController, type: :controller do
     end
 
     context 'when the topic has 11 replies, and 10 are shown per page' do
-      let!(:user) { FactoryGirl.build_stubbed(:user) }
-      let!(:topic) { FactoryGirl.create(:topic) }
-      let!(:reply) { FactoryGirl.create_list(:reply, 11, topic: topic) }
+      let!(:user) { build_stubbed(:user) }
+      let!(:topic) { create(:topic) }
+      let!(:reply) { create_list(:reply, 11, topic: topic) }
 
       before { sign_in user }
 
@@ -137,7 +137,7 @@ describe TopicsController, type: :controller do
 
   describe '#unsuggest' do
     context 'suggested topic' do
-      let!(:topic) { FactoryGirl.create(:topic, excellent: 1) }
+      let!(:topic) { create(:topic, excellent: 1) }
 
       it 'should not allow user suggest' do
         sign_in user

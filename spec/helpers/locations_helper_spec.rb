@@ -6,7 +6,7 @@ describe LocationsHelper, type: :helper do
   end
 
   it 'should location_name_tag work with Location instance' do
-    location = Factory(:location)
+    location = create(:location)
     expect(helper.location_name_tag(location)).to eq(link_to(location.name, location_users_path(location.name)))
   end
 end

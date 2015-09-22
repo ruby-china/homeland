@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe HomeController, type: :controller do
   describe ':index' do
-    let(:user) { Factory :user }
+    let(:user) { create :user }
     it 'should show register link if user not signed in' do
       get :index
       expect(response).to be_success

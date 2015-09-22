@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 describe LikesController, type: :controller do
-  let(:user) { Factory(:user) }
-  let(:user2) { Factory(:user) }
-  let(:topic) { Factory(:topic) }
+  let(:user) { create(:user) }
+  let(:user2) { create(:user) }
+  let(:topic) { create(:topic) }
 
   before(:each) do
     allow(controller).to receive(:current_user).and_return(user)

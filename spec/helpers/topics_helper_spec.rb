@@ -71,7 +71,7 @@ describe TopicsHelper, type: :helper do
     end
 
     it 'should link mentioned user' do
-      user = Factory(:user)
+      user = create(:user)
       expect(helper.markdown("hello @#{user.name} @b @a @#{user.name}")).to eq(
         "<p>hello <a href=\"/#{user.name}\" class=\"at_user\" title=\"@#{user.name}\"><i>@</i>#{user.name}</a> <a href=\"/b\" class=\"at_user\" title=\"@b\"><i>@</i>b</a> <a href=\"/a\" class=\"at_user\" title=\"@a\"><i>@</i>a</a> <a href=\"/#{user.name}\" class=\"at_user\" title=\"@#{user.name}\"><i>@</i>#{user.name}</a></p>"
       )
@@ -149,8 +149,8 @@ describe TopicsHelper, type: :helper do
   end
 
   describe 'topic_favorite_tag' do
-    let(:user) { Factory :user }
-    let(:topic) { Factory :topic }
+    let(:user) { create :user }
+    let(:topic) { create :topic }
 
     it 'should run with nil param' do
       allow(helper).to receive(:current_user).and_return(nil)
@@ -177,8 +177,8 @@ describe TopicsHelper, type: :helper do
   end
 
   describe 'topic_follow_tag' do
-    let(:topic) { Factory :topic }
-    let(:user) { Factory :user }
+    let(:topic) { create :topic }
+    let(:user) { create :user }
 
     it 'should return empty when current_user is nil' do
       allow(helper).to receive(:current_user).and_return(nil)

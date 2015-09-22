@@ -2,8 +2,8 @@ require 'rails_helper'
 
 describe LikesHelper, type: :helper do
   describe 'likeable_tag' do
-    let(:user) { Factory :user }
-    let(:topic) { Factory :topic }
+    let(:user) { create :user }
+    let(:topic) { create :topic }
 
     it 'should run with nil param' do
       allow(helper).to receive(:current_user).and_return(nil)

@@ -5,7 +5,7 @@ describe 'API V3', 'nodes', type: :request do
   let(:json) { JSON.parse(response.body) }
   describe 'GET /api/nodes.json' do
     before do
-      %w(fun ruby nodes).each_with_index { |n, i| Factory(:node, name: n, id: i + 1) }
+      %w(fun ruby nodes).each_with_index { |n, i| create(:node, name: n, id: i + 1) }
     end
 
     it 'should return the list of nodes' do

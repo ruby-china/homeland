@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 describe Notification::Mention, type: :model do
-  let(:topic) { Factory.create(:topic) }
-  let(:n_topic) { Factory.create(:notification_mention, mentionable: topic) }
-  let(:topic1) { Factory.create(:topic) }
-  let(:reply) { Factory.create(:reply, topic: topic1) }
-  let(:n_reply) { Factory.create(:notification_mention, mentionable: reply) }
+  let(:topic) { create(:topic) }
+  let(:n_topic) { create(:notification_mention, mentionable: topic) }
+  let(:topic1) { create(:topic) }
+  let(:reply) { create(:reply, topic: topic1) }
+  let(:n_reply) { create(:notification_mention, mentionable: reply) }
 
   describe '.content_path' do
     it 'should work' do

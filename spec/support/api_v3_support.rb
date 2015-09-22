@@ -2,8 +2,8 @@ module APIV3Support
   extend ActiveSupport::Concern
 
   included do
-    let!(:current_user) { Factory :user }
-    let!(:access_token) { Factory(:access_token, resource_owner_id: current_user.id) }
+    let!(:current_user) { create :user }
+    let!(:access_token) { create(:access_token, resource_owner_id: current_user.id) }
     let(:json) { JSON.parse(response.body) }
 
     def login_user!

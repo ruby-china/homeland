@@ -15,12 +15,12 @@ describe Node, type: :model do
 
     it 'should update on save' do
       CacheVersion.section_node_updated_at = old
-      Factory(:node)
+      create(:node)
       expect(CacheVersion.section_node_updated_at).not_to eq(old)
     end
 
     it 'should update on destroy' do
-      node = Factory(:node)
+      node = create(:node)
       CacheVersion.section_node_updated_at = old
       node.destroy
       expect(CacheVersion.section_node_updated_at).not_to eq(old)
@@ -28,7 +28,7 @@ describe Node, type: :model do
   end
 
   describe '.summary_html' do
-    let(:node) { FactoryGirl.create(:node) }
+    let(:node) { create(:node) }
     it 'should return html' do
       node.summary = '# foo'
       expect(node.summary_html).to eq "<h1>foo</h1>\n"
@@ -44,7 +44,7 @@ describe Node, type: :model do
   end
 
   describe '.new_topic_dropdowns' do
-    let(:nodes) { FactoryGirl.create_list(:node, 10) }
+    let(:nodes) { create_list(:node, 10) }
 
     before do
       SiteConfig.new_topic_dropdown_node_ids = nodes.collect(&:id).join(',')

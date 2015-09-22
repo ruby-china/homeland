@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 describe 'API V3', 'likes', type: :request do
-  let!(:reply) { Factory(:reply) }
-  let!(:topic) { Factory(:topic) }
+  let!(:reply) { create(:reply) }
+  let!(:topic) { create(:topic) }
 
   describe 'POST /api/v3/likes.json' do
     it 'require login' do

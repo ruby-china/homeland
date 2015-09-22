@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'API V3', 'users', type: :request do
   describe 'GET /api/v3/users.json' do
     before do
-      FactoryGirl.create_list(:user, 10)
+      create_list(:user, 10)
     end
 
     it 'should work' do
@@ -22,7 +22,7 @@ describe 'API V3', 'users', type: :request do
 
   describe 'GET /api/v3/users/:login.json' do
     it 'should get user details with list of topics' do
-      user = Factory(:user, name: 'test user', login: 'test_user', email: 'foobar@gmail.com', email_public: true)
+      user = create(:user, name: 'test user', login: 'test_user', email: 'foobar@gmail.com', email_public: true)
       get '/api/v3/users/test_user.json'
       expect(response.status).to eq 200
       fields = %w(id name login email avatar_url location company twitter github website bio tagline)
@@ -33,7 +33,7 @@ describe 'API V3', 'users', type: :request do
     end
 
     it 'should hidden email when email_public is false' do
-      Factory(:user, name: 'test user',
+      create(:user, name: 'test user',
                      login: 'test_user',
                      email: 'foobar@gmail.com',
                      email_public: false)
@@ -51,11 +51,11 @@ describe 'API V3', 'users', type: :request do
   end
 
   describe 'GET /api/v3/users/:login/topics.json' do
-    let(:user) { Factory(:user) }
+    let(:user) { create(:user) }
 
     describe 'recent order' do
       it 'should work' do
-        @topics = FactoryGirl.create_list(:topic, 3, user: user)
+        @topics = create_list(:topic, 3, user: user)
         get "/api/v3/users/#{user.login}/topics.json", offset: 0, limit: 2
         expect(response.status).to eq 200
         expect(json['topics'].size).to eq 2
@@ -69,8 +69,8 @@ describe 'API V3', 'users', type: :request do
 
     describe 'hot order' do
       it 'should work' do
-        @hot_topic = Factory.create(:topic, user: user, likes_count: 4)
-        @topics = FactoryGirl.create_list(:topic, 3, user: user)
+        @hot_topic = create(:topic, user: user, likes_count: 4)
+        @topics = create_list(:topic, 3, user: user)
 
         get "/api/v3/users/#{user.login}/topics.json", order: 'likes', offset: 0, limit: 3
         expect(response.status).to eq 200
@@ -81,8 +81,8 @@ describe 'API V3', 'users', type: :request do
 
     describe 'hot order' do
       it 'should work' do
-        @hot_topic = Factory.create(:topic, user: user, replies_count: 4)
-        @topics = FactoryGirl.create_list(:topic, 3, user: user)
+        @hot_topic = create(:topic, user: user, replies_count: 4)
+        @topics = create_list(:topic, 3, user: user)
 
         get "/api/v3/users/#{user.login}/topics.json", order: 'replies', offset: 0, limit: 3
         expect(response.status).to eq 200
@@ -93,10 +93,10 @@ describe 'API V3', 'users', type: :request do
   end
 
   describe 'GET /api/v3/users/:login/favorites.json' do
-    let(:user) { Factory(:user) }
+    let(:user) { create(:user) }
 
     it 'should work' do
-      @topics = FactoryGirl.create_list(:topic, 4, user: user)
+      @topics = create_list(:topic, 4, user: user)
       user.favorite_topic(@topics[0].id)
       user.favorite_topic(@topics[1].id)
       user.favorite_topic(@topics[3].id)
@@ -112,10 +112,10 @@ describe 'API V3', 'users', type: :request do
   end
 
   describe 'GET /api/v3/users/:login/followers.json' do
-    let(:user) { Factory(:user) }
+    let(:user) { create(:user) }
 
     it 'should work' do
-      @users = FactoryGirl.create_list(:user, 3)
+      @users = create_list(:user, 3)
       @users.each do |u|
         u.follow_user(user)
       end
@@ -129,7 +129,7 @@ describe 'API V3', 'users', type: :request do
   end
 
   describe 'GET /api/v3/users/:login/blocked.json' do
-    let(:user) { Factory(:user) }
+    let(:user) { create(:user) }
 
     it 'require login' do
       get "/api/v3/users/#{user.login}/blocked.json"
@@ -143,7 +143,7 @@ describe 'API V3', 'users', type: :request do
     end
 
     it 'should work' do
-      @users = FactoryGirl.create_list(:user, 3)
+      @users = create_list(:user, 3)
       login_user!
 
       @users.each do |u|
@@ -159,10 +159,10 @@ describe 'API V3', 'users', type: :request do
   end
 
   describe 'GET /api/v3/users/:login/following.json' do
-    let(:user) { Factory(:user) }
+    let(:user) { create(:user) }
 
     it 'should work' do
-      @users = FactoryGirl.create_list(:user, 3)
+      @users = create_list(:user, 3)
       @users.each do |u|
         user.follow_user(u)
       end
@@ -176,7 +176,7 @@ describe 'API V3', 'users', type: :request do
   end
 
   describe 'POST /api/v3/users/:login/follow.json / unfollow' do
-    let(:user) { Factory(:user) }
+    let(:user) { create(:user) }
 
     it 'should 401 when nologin' do
       post "/api/v3/users/#{user.login}/follow.json"
@@ -207,7 +207,7 @@ describe 'API V3', 'users', type: :request do
   end
 
   describe 'POST /api/v3/users/:login/block.json / unblock.json' do
-    let(:user) { Factory(:user) }
+    let(:user) { create(:user) }
 
     it 'should 401 when nologin' do
       post "/api/v3/users/#{user.login}/block.json"

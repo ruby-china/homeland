@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe SiteConfig, type: :model do
-  let!(:config) { Factory :site_config }
+  let!(:config) { create :site_config }
 
   describe '#update_cache' do
     it 'should update cache' do
@@ -23,7 +23,7 @@ describe SiteConfig, type: :model do
 
   describe 'save_default' do
     it 'should create config if not exist' do
-      attributes = Factory.attributes_for :site_config
+      attributes = attributes_for :site_config
       expect(SiteConfig).to receive(:create).with(key: attributes[:key], value: attributes[:value])
       SiteConfig.save_default(attributes[:key], attributes[:value])
     end

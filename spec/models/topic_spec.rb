@@ -1,17 +1,17 @@
 require 'rails_helper'
 
 describe Topic, type: :model do
-  let(:topic) { FactoryGirl.create(:topic) }
-  let(:user) { FactoryGirl.create(:user) }
+  let(:topic) { create(:topic) }
+  let(:user) { create(:user) }
 
   it 'should no save invalid node_id' do
-    expect(FactoryGirl.build(:topic, node_id: nil).valid?).not_to be_truthy
+    expect(build(:topic, node_id: nil).valid?).not_to be_truthy
   end
 
   it 'should set last_active_mark on created' do
     # because the Topic index is sort by replied_at,
     # so the new Topic need to set a Time, that it will display in index page
-    expect(Factory(:topic).last_active_mark).not_to be_nil
+    expect(create(:topic).last_active_mark).not_to be_nil
   end
 
   it 'should not update last_active_mark on save' do
@@ -21,12 +21,12 @@ describe Topic, type: :model do
   end
 
   it 'should get node name' do
-    node = Factory :node
-    expect(Factory(:topic, node: node).node_name).to eq(node.name)
+    node = create :node
+    expect(create(:topic, node: node).node_name).to eq(node.name)
   end
 
   describe '#push_follower, #pull_follower' do
-    let(:t) { FactoryGirl.create(:topic, user_id: 0) }
+    let(:t) { create(:topic, user_id: 0) }
     it 'should push' do
       t.push_follower user.id
       expect(t.follower_ids.include?(user.id)).to be_truthy
@@ -45,7 +45,7 @@ describe Topic, type: :model do
   end
 
   it 'should update after reply' do
-    reply = Factory :reply, topic: topic, user: user
+    reply = create :reply, topic: topic, user: user
     expect(topic.last_active_mark).not_to be_nil
     expect(topic.replied_at.to_i).to eq(reply.created_at.to_i)
     expect(topic.last_reply_id).to eq(reply.id)
@@ -56,19 +56,19 @@ describe Topic, type: :model do
   it 'should update after reply without last_active_mark when the topic is created at month ago' do
     allow(topic).to receive(:created_at).and_return(1.month.ago)
     allow(topic).to receive(:last_active_mark).and_return(1)
-    reply = Factory :reply, topic: topic, user: user
+    reply = create :reply, topic: topic, user: user
     expect(topic.last_active_mark).not_to eq(reply.created_at.to_i)
     expect(topic.last_reply_user_id).to eq(reply.user_id)
     expect(topic.last_reply_user_login).to eq(reply.user.login)
   end
 
   it 'should covert body with Markdown on create' do
-    t = Factory(:topic, body: '*foo*')
+    t = create(:topic, body: '*foo*')
     expect(t.body_html).to eq('<p><em>foo</em></p>')
   end
 
   it 'should covert body on save' do
-    t = Factory(:topic, body: '*foo*')
+    t = create(:topic, body: '*foo*')
     old_html = t.body_html
     t.body = '*bar*'
     t.save
@@ -76,7 +76,7 @@ describe Topic, type: :model do
   end
 
   it 'should not store body_html when it not changed' do
-    t = Factory(:topic, body: '*foo*')
+    t = create(:topic, body: '*foo*')
     t.body = '*fooaa*'
     allow(t).to receive(:body_changed?).and_return(false)
     old_html = t.body_html
@@ -85,11 +85,11 @@ describe Topic, type: :model do
   end
 
   it 'should log deleted user name when use destroy_by' do
-    t = Factory(:topic)
+    t = create(:topic)
     t.destroy_by(user)
     expect(t.who_deleted).to eq(user.login)
     expect(t.deleted_at).not_to eq(nil)
-    t1 = Factory(:topic)
+    t1 = create(:topic)
     expect(t1.destroy_by(nil)).to eq(false)
   end
 
@@ -112,9 +112,9 @@ describe Topic, type: :model do
 
   describe '.update_last_reply' do
     it 'should work' do
-      t = Factory(:topic)
+      t = create(:topic)
       old_updated_at = t.updated_at
-      r = Factory(:reply, topic: t)
+      r = create(:reply, topic: t)
       expect(t.update_last_reply(r)).to be_truthy
       expect(t.replied_at).to eq r.created_at
       expect(t.last_reply_id).to eq r.id
@@ -125,7 +125,7 @@ describe Topic, type: :model do
     end
 
     it 'should update with nil when have :force' do
-      t = Factory(:topic)
+      t = create(:topic)
       t.update_last_reply(nil, force: true)
       expect(t.replied_at).to be_nil
       expect(t.last_reply_id).to be_nil
@@ -136,18 +136,18 @@ describe Topic, type: :model do
   end
 
   describe '.update_deleted_last_reply' do
-    let(:t) { Factory(:topic) }
+    let(:t) { create(:topic) }
     context 'when have last Reply and param it that Reply' do
       it 'last reply should going to previous Reply' do
-        r0 = Factory(:reply, topic: t)
-        r1 = Factory(:reply, topic: t)
+        r0 = create(:reply, topic: t)
+        r1 = create(:reply, topic: t)
         expect(t.last_reply_id).to eq r1.id
         expect(t).to receive(:update_last_reply).with(r0, force: true)
         t.update_deleted_last_reply(r1)
       end
 
       it 'last reply will be nil' do
-        r = Factory(:reply, topic: t)
+        r = create(:reply, topic: t)
         expect(t.update_deleted_last_reply(r)).to be_truthy
         t.reload
         expect(t.last_reply_id).to be_nil
@@ -164,8 +164,8 @@ describe Topic, type: :model do
 
     context 'when last reply is not equal param' do
       it 'should do nothing' do
-        r0 = Factory(:reply, topic: t)
-        r1 = Factory(:reply, topic: t)
+        r0 = create(:reply, topic: t)
+        r1 = create(:reply, topic: t)
         expect(t.update_deleted_last_reply(r0)).to be_falsey
         expect(t.last_reply_id).to eq r1.id
       end
@@ -173,8 +173,8 @@ describe Topic, type: :model do
   end
 
   describe '#notify_topic_created' do
-    let(:followers) { FactoryGirl.create_list(:user, 3) }
-    let(:topic) { Factory(:topic, user: user) }
+    let(:followers) { create_list(:user, 3) }
+    let(:topic) { create(:topic, user: user) }
 
     it 'should work' do
       followers.each do |f|
@@ -189,8 +189,8 @@ describe Topic, type: :model do
   end
 
   describe '#notify_topic_node_changed' do
-    let(:topic) { Factory(:topic, user: user) }
-    let(:new_node) { Factory(:node) }
+    let(:topic) { create(:topic, user: user) }
+    let(:new_node) { create(:node) }
 
     describe 'Call method' do
       it 'should work' do
@@ -225,7 +225,7 @@ describe Topic, type: :model do
   end
 
   describe '.ban!' do
-    let!(:t) { Factory(:topic, user: user) }
+    let!(:t) { create(:topic, user: user) }
 
     it 'should ban! and lock topic' do
       expect(Topic).to receive(:notify_topic_node_changed).with(t.id, Node.no_point_id)

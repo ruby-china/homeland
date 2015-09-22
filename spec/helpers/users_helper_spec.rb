@@ -13,7 +13,7 @@ describe UsersHelper, type: :helper do
 
   describe 'user_name_tag' do
     it 'should result right html in normal' do
-      user = Factory(:user)
+      user = create(:user)
       expect(helper.user_name_tag(user)).to eq(link_to(user.login, user_path(user.login), 'data-name' => user.name))
     end
 
@@ -28,7 +28,7 @@ describe UsersHelper, type: :helper do
   end
 
   describe 'user personal website' do
-    let(:user) { Factory(:user, website: 'http://example.com') }
+    let(:user) { create(:user, website: 'http://example.com') }
     subject { helper.render_user_personal_website(user) }
 
     it { is_expected.to eq(link_to(user.website, user.website, target: '_blank', class: 'url', rel: 'nofollow')) }
@@ -41,7 +41,7 @@ describe UsersHelper, type: :helper do
   end
 
   describe '.render_user_level_tag' do
-    let(:user) { Factory(:user) }
+    let(:user) { create(:user) }
     subject { helper.render_user_level_tag(user) }
 
     it 'admin should work' do

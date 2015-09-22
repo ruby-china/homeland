@@ -8,13 +8,13 @@ describe 'API V3', 'topics', type: :request do
     end
 
     it 'should be ok for all types' do
-      Factory(:topic, title: 'This is a normal topic', replies_count: 1)
-      Factory(:topic, title: 'This is an excellent topic', excellent: 1, replies_count: 1)
-      Factory(:topic, title: 'This is a no_reply topic', replies_count: 0)
-      Factory(:topic, title: 'This is a popular topic', replies_count: 1, likes_count: 10)
+      create(:topic, title: 'This is a normal topic', replies_count: 1)
+      create(:topic, title: 'This is an excellent topic', excellent: 1, replies_count: 1)
+      create(:topic, title: 'This is a no_reply topic', replies_count: 0)
+      create(:topic, title: 'This is a popular topic', replies_count: 1, likes_count: 10)
 
-      node = Factory(:node, name: 'No Point')
-      Factory(:topic, title: 'This is a No Point topic', node: node)
+      node = create(:node, name: 'No Point')
+      create(:topic, title: 'This is a No Point topic', node: node)
       SiteConfig.node_ids_hide_in_topics_index = node.id.to_s
 
       get '/api/v3/topics.json'
@@ -67,11 +67,11 @@ describe 'API V3', 'topics', type: :request do
 
     describe 'with logined user' do
       it 'should hide user blocked nodes/users' do
-        user = Factory(:user)
-        node = Factory(:node)
-        Factory(:topic, user: user)
-        Factory(:topic, node: node)
-        t3 = Factory(:topic)
+        user = create(:user)
+        node = create(:node)
+        create(:topic, user: user)
+        create(:topic, node: node)
+        t3 = create(:topic)
         current_user.block_user(user.id)
         current_user.block_node(node.id)
         login_user!
@@ -83,16 +83,16 @@ describe 'API V3', 'topics', type: :request do
   end
 
   describe 'GET /api/v3/topics.json with node_id' do
-    let(:node) { Factory(:node) }
-    let(:node1) { Factory(:node) }
+    let(:node) { create(:node) }
+    let(:node1) { create(:node) }
 
-    let(:t1) { Factory(:topic, node_id: node.id, title: 'This is a normal topic', replies_count: 1) }
-    let(:t2) { Factory(:topic, node_id: node.id, title: 'This is an excellent topic', excellent: 1, replies_count: 1) }
-    let(:t3) { Factory(:topic, node_id: node.id, title: 'This is a no_reply topic', replies_count: 0) }
-    let(:t4) { Factory(:topic, node_id: node.id, title: 'This is a popular topic', replies_count: 1, likes_count: 10) }
+    let(:t1) { create(:topic, node_id: node.id, title: 'This is a normal topic', replies_count: 1) }
+    let(:t2) { create(:topic, node_id: node.id, title: 'This is an excellent topic', excellent: 1, replies_count: 1) }
+    let(:t3) { create(:topic, node_id: node.id, title: 'This is a no_reply topic', replies_count: 0) }
+    let(:t4) { create(:topic, node_id: node.id, title: 'This is a popular topic', replies_count: 1, likes_count: 10) }
 
     it 'should return a list of topics that belong to the specified node' do
-      other_topics = [Factory(:topic, node_id: node1.id), Factory(:topic, node_id: node1.id)]
+      other_topics = [create(:topic, node_id: node1.id), create(:topic, node_id: node1.id)]
       topics = [t1, t2, t3, t4]
 
       get '/api/v3/topics.json', node_id: -1
@@ -169,7 +169,7 @@ describe 'API V3', 'topics', type: :request do
 
     it 'should work' do
       login_user!
-      node_id = Factory(:node)._id
+      node_id = create(:node)._id
       post '/api/v3/topics.json', title: 'api create topic', body: 'here we go', node_id: node_id
       expect(response.status).to eq(201)
       expect(json['topic']['body_html']).to eq '<p>here we go</p>'
@@ -182,7 +182,7 @@ describe 'API V3', 'topics', type: :request do
   end
 
   describe 'POST /api/v3/topics/:id.json' do
-    let!(:topic) { Factory(:topic) }
+    let!(:topic) { create(:topic) }
 
     it 'should require user' do
       post "/api/v3/topics/#{topic.id}.json", title: 'api create topic', body: 'here we go', node_id: 1
@@ -196,7 +196,7 @@ describe 'API V3', 'topics', type: :request do
     end
 
     it 'should update with admin user' do
-      new_node = Factory(:node)
+      new_node = create(:node)
       login_admin!
       post "/api/v3/topics/#{topic.id}.json", title: 'api create topic', body: 'here we go', node_id: new_node.id
       expect(response.status).to eq 201
@@ -205,11 +205,11 @@ describe 'API V3', 'topics', type: :request do
     end
 
     context 'with user' do
-      let!(:topic) { Factory(:topic, user: current_user) }
+      let!(:topic) { create(:topic, user: current_user) }
 
       it 'should work' do
         login_user!
-        node_id = Factory(:node)._id
+        node_id = create(:node)._id
         post "/api/v3/topics/#{topic.id}.json", title: 'api create topic', body: 'here we go', node_id: node_id
         expect(response.status).to eq(201)
         expect(json['topic']['body_html']).to eq '<p>here we go</p>'
@@ -224,7 +224,7 @@ describe 'API V3', 'topics', type: :request do
       it 'should node update node_id when topic is lock_node' do
         topic.update_attribute(:lock_node, true)
         login_user!
-        node_id = Factory(:node)._id
+        node_id = create(:node)._id
         post "/api/v3/topics/#{topic.id}.json", title: 'api create topic', body: 'here we go', node_id: node_id
         topic.reload
         expect(topic.node_id).not_to eq node_id
@@ -234,7 +234,7 @@ describe 'API V3', 'topics', type: :request do
 
   describe 'GET /api/v3/topics/:id.json' do
     it 'should get topic detail with list of replies' do
-      t = Factory(:topic, title: 'i want to know')
+      t = create(:topic, title: 'i want to know')
       old_hits = t.hits.to_i
       get "/api/v3/topics/#{t.id}.json"
       expect(response.status).to eq(200)
@@ -251,7 +251,7 @@ describe 'API V3', 'topics', type: :request do
     end
 
     it 'should return right abilities when owner visit' do
-      t = Factory(:topic, user: current_user)
+      t = create(:topic, user: current_user)
       login_user!
       get "/api/v3/topics/#{t.id}.json"
       expect(response.status).to eq(200)
@@ -260,7 +260,7 @@ describe 'API V3', 'topics', type: :request do
     end
 
     it 'should return right abilities when admin visit' do
-      t = Factory(:topic)
+      t = create(:topic)
       login_admin!
       get "/api/v3/topics/#{t.id}.json"
       expect(response.status).to eq(200)
@@ -277,9 +277,9 @@ describe 'API V3', 'topics', type: :request do
   describe 'GET /api/v3/topic/:id/replies.json' do
     it 'should work' do
       login_user!
-      t = Factory(:topic, title: 'i want to know')
-      r1 = Factory(:reply, topic_id: t.id, body: 'let me tell', user: current_user)
-      r2 = Factory(:reply, topic_id: t.id, body: 'let me tell again', deleted_at: Time.now)
+      t = create(:topic, title: 'i want to know')
+      r1 = create(:reply, topic_id: t.id, body: 'let me tell', user: current_user)
+      r2 = create(:reply, topic_id: t.id, body: 'let me tell again', deleted_at: Time.now)
       get "/api/v3/topics/#{t.id}/replies.json"
       expect(response.status).to eq(200)
       expect(json['replies'].size).to eq 2
@@ -297,9 +297,9 @@ describe 'API V3', 'topics', type: :request do
 
     it 'should return right abilities when admin visit' do
       login_admin!
-      t = Factory(:topic, title: 'i want to know')
-      Factory(:reply, topic_id: t.id, body: 'let me tell')
-      Factory(:reply, topic_id: t.id, body: 'let me tell again', deleted_at: Time.now)
+      t = create(:topic, title: 'i want to know')
+      create(:reply, topic_id: t.id, body: 'let me tell')
+      create(:reply, topic_id: t.id, body: 'let me tell again', deleted_at: Time.now)
       get "/api/v3/topics/#{t.id}/replies.json"
       expect(response.status).to eq(200)
       expect(json['replies'][0]['abilities']['update']).to eq true
@@ -312,7 +312,7 @@ describe 'API V3', 'topics', type: :request do
   describe 'POST /api/v3/topics/:id/replies.json' do
     it 'should post a new reply' do
       login_user!
-      t = Factory(:topic, title: 'new topic 1')
+      t = create(:topic, title: 'new topic 1')
       post "/api/v3/topics/#{t.id}/replies.json", body: 'new reply body'
       expect(response.status).to eq(201)
       expect(t.reload.replies.first.body).to eq('new reply body')
@@ -322,7 +322,7 @@ describe 'API V3', 'topics', type: :request do
   describe 'POST /api/v3/topics/:id/follow.json' do
     it 'should follow a topic' do
       login_user!
-      t = Factory(:topic, title: 'new topic 2')
+      t = create(:topic, title: 'new topic 2')
       post "/api/v3/topics/#{t.id}/follow.json"
       expect(response.status).to eq(201)
       expect(t.reload.follower_ids).to include(current_user.id)
@@ -332,7 +332,7 @@ describe 'API V3', 'topics', type: :request do
   describe 'POST /api/v3/topics/:id/unfollow.json' do
     it 'should unfollow a topic' do
       login_user!
-      t = Factory(:topic, title: 'new topic 2')
+      t = create(:topic, title: 'new topic 2')
       post "/api/v3/topics/#{t.id}/unfollow.json"
       expect(response.status).to eq(201)
       expect(t.reload.follower_ids).not_to include(current_user.id)
@@ -342,7 +342,7 @@ describe 'API V3', 'topics', type: :request do
   describe 'POST /api/v3/topics/:id/favorite.json' do
     it 'should favorite a topic' do
       login_user!
-      t = Factory(:topic, title: 'new topic 3')
+      t = create(:topic, title: 'new topic 3')
       post "/api/v3/topics/#{t.id}/favorite.json"
       expect(response.status).to eq(201)
       expect(current_user.reload.favorite_topic_ids).to include(t.id)
@@ -352,7 +352,7 @@ describe 'API V3', 'topics', type: :request do
   describe 'POST /api/v3/topics/:id/unfavorite.json' do
     it 'should unfavorite a topic' do
       login_user!
-      t = Factory(:topic, title: 'new topic 3')
+      t = create(:topic, title: 'new topic 3')
       post "/api/v3/topics/#{t.id}/unfavorite.json"
       expect(response.status).to eq(201)
       expect(current_user.reload.favorite_topic_ids).not_to include(t.id)

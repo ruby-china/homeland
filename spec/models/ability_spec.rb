@@ -5,7 +5,7 @@ describe Ability, type: :model do
   subject { ability }
 
   context 'Admin manage all' do
-    let(:admin) { Factory :admin }
+    let(:admin) { create :admin }
     let(:ability) { Ability.new(admin) }
 
     it { is_expected.to be_able_to(:manage, Topic) }
@@ -21,9 +21,9 @@ describe Ability, type: :model do
   end
 
   context 'Wiki Editor manage wiki' do
-    let(:wiki_editor) { Factory :wiki_editor }
+    let(:wiki_editor) { create :wiki_editor }
     let(:ability) { Ability.new(wiki_editor) }
-    let(:page_locked) { Factory :page, locked: true }
+    let(:page_locked) { create :page, locked: true }
     it { is_expected.not_to be_able_to(:destroy, Page) }
     it { is_expected.not_to be_able_to(:suggest, Topic) }
     it { is_expected.not_to be_able_to(:unsuggest, Topic) }
@@ -33,7 +33,7 @@ describe Ability, type: :model do
   end
 
   context 'Site editor users' do
-    let(:site_editor) { Factory :user, replies_count: 100 }
+    let(:site_editor) { create :user, replies_count: 100 }
     let(:ability) { Ability.new(site_editor) }
 
     context 'Site' do
@@ -43,13 +43,13 @@ describe Ability, type: :model do
   end
 
   context 'Normal users' do
-    let(:user) { Factory :user }
-    let(:topic) { Factory :topic, user: user }
-    let(:locked_topic) { Factory :topic, user: user, lock_node: true }
-    let(:reply) { Factory :reply, user: user }
-    let(:note) { Factory :note, user: user }
-    let(:comment) { Factory :comment, user: user }
-    let(:note_publish) { Factory :note, publish: true }
+    let(:user) { create :user }
+    let(:topic) { create :topic, user: user }
+    let(:locked_topic) { create :topic, user: user, lock_node: true }
+    let(:reply) { create :reply, user: user }
+    let(:note) { create :note, user: user }
+    let(:comment) { create :comment, user: user }
+    let(:note_publish) { create :note, publish: true }
 
     let(:ability) { Ability.new(user) }
 
@@ -115,7 +115,7 @@ describe Ability, type: :model do
   end
 
   context 'Newbie users' do
-    let(:newbie) { Factory :newbie }
+    let(:newbie) { create :newbie }
     let(:ability) { Ability.new(newbie) }
     context 'Topic' do
       it { is_expected.not_to be_able_to(:create, Topic) }
@@ -125,7 +125,7 @@ describe Ability, type: :model do
   end
 
   context 'Blocked users' do
-    let(:blocked_user) { Factory :blocked_user }
+    let(:blocked_user) { create :blocked_user }
     let(:ability) { Ability.new(blocked_user) }
 
     context 'Topic' do
@@ -146,7 +146,7 @@ describe Ability, type: :model do
   end
 
   context 'Deleted users' do
-    let(:deleted_user) { Factory :deleted_user }
+    let(:deleted_user) { create :deleted_user }
     let(:ability) { Ability.new(deleted_user) }
     context 'Topic' do
       it { is_expected.not_to be_able_to(:create, Topic) }

@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 describe PagesController, type: :controller do
-  let(:page) { Factory :page }
-  let(:user) { Factory :wiki_editor }
+  let(:page) { create :page }
+  let(:user) { create :wiki_editor }
 
   describe ':index' do
     it 'should have an index action' do
@@ -66,14 +66,14 @@ describe PagesController, type: :controller do
 
     it 'should create new page if all is well' do
       sign_in user
-      params = Factory.attributes_for(:page)
+      params = attributes_for(:page)
       post :create, page: params
       expect(response).to redirect_to page_path(params[:slug])
     end
 
     it 'should not create new page if title is not present' do
       sign_in user
-      params = Factory.attributes_for(:page)
+      params = attributes_for(:page)
       params[:title] = ''
       post :create, page: params
       expect(response).to render_template(:new)
@@ -88,7 +88,7 @@ describe PagesController, type: :controller do
 
     it 'should update page if all is well' do
       sign_in user
-      params = Factory.attributes_for(:page)
+      params = attributes_for(:page)
       page = Page.create!(params)
       params[:title] = 'shiney new title'
       params[:change_desc] = 'updated title'
@@ -98,7 +98,7 @@ describe PagesController, type: :controller do
 
     it 'should not update page if change_desc is not present' do
       sign_in user
-      params = Factory.attributes_for(:page)
+      params = attributes_for(:page)
       page = Page.create!(params)
       params[:title] = 'shiney new title'
       params[:change_desc] = nil

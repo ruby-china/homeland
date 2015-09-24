@@ -237,6 +237,20 @@ describe 'markdown' do
           expect(doc.to_html).to include('var')
         end
       end
+
+      context '=@var in sql' do
+        let(:raw) do
+          <<-MD.gsub(/^ {12}/, '')
+            ```sql
+            select (@x:=@var+1) as i
+            ```
+          MD
+        end
+
+        it 'should not leave it as placeholder' do
+          expect(doc.to_html).to include('var')
+        end
+      end
     end
 
     # }}}

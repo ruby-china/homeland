@@ -195,7 +195,7 @@ class MarkdownTopicConverter < MarkdownConverter
   # syntax class.
   def link_mention_user_in_code(doc, users)
     doc.css('pre.highlight span').each do |node|
-      next unless node.previous && node.previous.inner_html == '@' && node.inner_html =~ /\Auser(\d+)\z/
+      next unless node.previous && node.previous.inner_html.to_s =~ /(^|[^a-zA-Z0-9_!#\$%&*@＠])@\z/i && node.inner_html =~ /\Auser(\d+)\z/
       user_id = Regexp.last_match(1)
       user = users[user_id.to_i - 1]
       node.inner_html = user if user

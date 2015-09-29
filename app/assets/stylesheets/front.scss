@@ -1,5 +1,5 @@
 /*
- *= require application
+ *= require ./application
  *= require_self
  */
 #login {   }
@@ -8,7 +8,7 @@
 .box ol { margin-bottom:0; }
 
 .sidebar h2 { font-size:14px; line-height:100%; margin-bottom:10px; color:#666;}
-.sidebar ul, 
+.sidebar ul,
 .sidebar ol { margin-bottom:0; }
 .sidebar p { margin-bottom:6px; }
 .sidebar li { margin-bottom:4px; }
@@ -48,7 +48,7 @@
 .body code{font-size:12px!important;background-color:#f8f8ff!important;color:#444!important;padding:0 .2em!important;border:1px solid #dedede!important;}
 
 .cell_comments {
-  .comment { 
+  .comment {
     margin-bottom:10px;
     .info {
       .user_avatar {

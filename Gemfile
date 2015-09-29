@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem "rails", "3.1.1"
+gem "rails", "3.1.12"
 gem "bson", "1.3.1"
 gem "bson_ext", "1.3.1"
 gem "mongoid", "2.2.4"
@@ -17,7 +17,7 @@ gem 'mongoid_auto_increment_id', "0.2.2"
 # 用户系统
 gem "devise", "1.4.5"
 # 分页
-gem 'will_paginate', '3.0.pre2'  
+gem 'will_paginate', '3.0.pre2'
 # 三方平台 OAuth 验证登陆
 gem 'omniauth', '0.3.0'
 gem "oa-openid", '0.3.0'
@@ -43,16 +43,17 @@ gem "rails_autolink", ">= 1.0.4"
 # YAML 配置信息
 gem "settingslogic", "~> 2.0.6"
 gem "cells", "3.6.7"
-gem "resque", "~> 1.19.0", :require => "resque/server"
+gem "resque", "~> 1.20.0", :require => "resque/server"
 gem "resque_mailer", '2.0.2'
 gem "aws-ses", "~> 0.4.3"
-gem 'mail_view', :git => 'git://github.com/37signals/mail_view.git'
+gem 'mail_view'
 gem "daemon-spawn", "~> 0.4.2"
-gem "unicorn"
 # 用于组合小图片
 gem "sprite-factory", "1.4.1"
+gem 'unicorn'
 
 group :assets do
+  gem 'sprockets'
   gem 'sass-rails', "  ~> 3.1.4"
   gem 'coffee-rails', "~> 3.1.1"
   gem 'uglifier'

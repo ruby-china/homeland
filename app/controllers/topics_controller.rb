@@ -1,11 +1,11 @@
-# coding: utf-8  
+# coding: utf-8
 class TopicsController < ApplicationController
   before_filter :require_user, :only => [:new,:edit,:create,:update,:destroy,:reply]
   before_filter :init_list_sidebar, :only => [:index,:recent,:show,:cate,:search]
   caches_page :feed, :expires_in => 1.hours
 
   private
-  def init_list_sidebar 
+  def init_list_sidebar
    if !fragment_exist? "topic/init_list_sidebar/hot_nodes"
       @hot_nodes = Node.hots.limit(10)
     end
@@ -16,12 +16,11 @@ class TopicsController < ApplicationController
   # GET /topics
   # GET /topics.xml
   def index
-    @topics = Topic.last_actived.limit(10)
+    @topics = Topic.where(:_id.lt => 10).last_actived.limit(10)
     @sections = Section.all
     set_seo_meta("","#{Setting.app_name}社区")
-    render :stream => true
   end
-  
+
   def feed
     @topics = Topic.recent.limit(20)
     response.headers['Content-Type'] = 'application/rss+xml'
@@ -78,7 +77,7 @@ class TopicsController < ApplicationController
 
   def reply
     @topic = Topic.find(params[:id])
-    @reply = @topic.replies.build(params[:reply])        
+    @reply = @topic.replies.build(params[:reply])
     @reply.user_id = current_user.id
     if @reply.save
       @topic.user_readed(current_user.id)

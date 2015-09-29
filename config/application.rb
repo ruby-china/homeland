@@ -1,4 +1,4 @@
-# coding: utf-8  
+# coding: utf-8
 require File.expand_path('../boot', __FILE__)
 APP_VERSION = '0.6'
 
@@ -35,24 +35,22 @@ module RubyChina
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password,:password_confirm]
-    
+
     config.mongoid.logger = Logger.new($stdout, :warn)
-    
+
     config.mongoid.include_root_in_json = false
-    
+
     config.assets.precompile += %w(application.css application.js topics.css topics.js window.css front.css cpanel.css users.css posts.css posts.js pages.css pages.js notifications.js notifications.css)
     config.assets.enabled = true
     config.assets.version = '1.0'
 
-    config.generators do |g|  
+    config.generators do |g|
       g.test_framework :test_unit, :fixture_replacement => :factory_girl
     end
   end
 end
 
 require "daemon"
-
-I18n.locale = 'zh-CN'
 
 require 'yaml'
 YAML::ENGINE.yamler= 'syck'

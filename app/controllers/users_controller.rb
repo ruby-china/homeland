@@ -1,7 +1,7 @@
 require 'will_paginate/array'
 class UsersController < ApplicationController
   before_action :require_user, only: [:block, :unblock, :auth_unbind, :follow, :unfollow]
-  before_action :find_user, only: [:show, :topics, :favorites, :notes,
+  before_action :find_user, only: [:show, :topics, :replies, :favorites, :notes,
                                    :block, :unblock, :blocked,
                                    :follow, :unfollow, :followers, :following]
   caches_action :index, expires_in: 2.hours, layout: false
@@ -16,17 +16,22 @@ class UsersController < ApplicationController
     # 排除掉几个非技术的节点
     without_node_ids = [21, 22, 23, 31, 49, 51, 57, 25]
     @topics = @user.topics.fields_for_list.without_node_ids(without_node_ids).high_likes.limit(20)
-    @replies = @user.replies.only(:topic_id, :body_html, :created_at).recent.includes(:topic).limit(10)
+    @replies = @user.replies.fields_for_list.recent.includes(:topic).limit(10)
     set_seo_meta("#{@user.login}")
   end
 
   def topics
-    @topics = @user.topics.unscoped.fields_for_list.recent.paginate(page: params[:page], per_page: 30)
+    @topics = @user.topics.unscoped.fields_for_list.recent.paginate(page: params[:page], per_page: 40)
+    set_seo_meta("#{@user.login} 的帖子")
+  end
+
+  def replies
+    @replies = @user.replies.fields_for_list.recent.paginate(page: params[:page], per_page: 20)
     set_seo_meta("#{@user.login} 的帖子")
   end
 
   def favorites
-    @topic_ids = @user.favorite_topic_ids.reverse.paginate(page: params[:page], per_page: 30)
+    @topic_ids = @user.favorite_topic_ids.reverse.paginate(page: params[:page], per_page: 40)
     @topics = Topic.where(:_id.in => @topic_ids).fields_for_list
     @topics = @topics.to_a.sort do |a, b|
       @topic_ids.index(a.id) <=> @topic_ids.index(b.id)
@@ -35,7 +40,7 @@ class UsersController < ApplicationController
   end
 
   def notes
-    @notes = @user.notes.published.recent.paginate(page: params[:page], per_page: 30)
+    @notes = @user.notes.published.recent.paginate(page: params[:page], per_page: 40)
     set_seo_meta("#{@user.login} 的记事本")
   end
 

@@ -48,6 +48,7 @@ Rails.application.routes.draw do
   get 'topics/node:id' => 'topics#node', as: 'node_topics'
   get 'topics/node:id/feed' => 'topics#node_feed', as: 'feed_node_topics', defaults: { format: 'xml' }
   get 'topics/last' => 'topics#recent', as: 'recent_topics'
+
   resources :topics do
     member do
       post :reply
@@ -127,9 +128,11 @@ Rails.application.routes.draw do
   # 比如 http://ruby-china.org/huacnlee
   get 'users/city/:id' => 'users#city', as: 'location_users'
   get 'users' => 'users#index', as: 'users'
+
   resources :users, path: '' do
     member do
       get :topics
+      get :replies
       get :favorites
       get :notes
       get :blocked

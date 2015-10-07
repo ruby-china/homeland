@@ -29,8 +29,12 @@
     recent_joined: "最新加入的會員"
     edit_on_gravatar: "如需修改頭像，請進入"
     menu:
-      topics: "文章" 
+      topics: "文章"
+      replies: "回帖"
       recent_reply_topics: "最近回應"
       like: "喜歡"
       favorites: "收藏"
-
+      replies: "回帖"
+      following: "正在關注"
+      followers: "關注者"
+      blocked: "已屏蔽"

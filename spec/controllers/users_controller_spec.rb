@@ -36,6 +36,13 @@ describe UsersController, type: :controller do
     end
   end
 
+  describe ':replies' do
+    it 'should show user replies' do
+      get :replies, id: user.login
+      expect(response).to be_success
+    end
+  end
+
   describe ':favorites' do
     it 'should show user liked stuffs' do
       get :favorites, id: user.login

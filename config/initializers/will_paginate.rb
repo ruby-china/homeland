@@ -12,6 +12,7 @@ module WillPaginate
       # Taken from original will_paginate code to handle if the helper is not passed a collection object.
       collection ||= infer_collection_from_controller
       options[:renderer] ||= BootstrapLinkRenderer
+      options[:inner_window] ||= 2
       super.try :html_safe
     end
 

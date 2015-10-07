@@ -61,7 +61,7 @@
         <% end %>
       </div>
       <div class="panel-footer clearfix">
-        <%= will_paginate @replies, inner_window: 2, params: { anchor: 'replies' } %>
+        <%= will_paginate @replies, params: { anchor: 'replies' } %>
       </div>
     </div>
   <% end %>

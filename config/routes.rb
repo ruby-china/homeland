@@ -3,7 +3,6 @@ Rails.application.routes.draw do
     controllers applications: 'oauth/applications', authorized_applications: 'oauth/authorized_applications'
   end
 
-  resources :apps
   resources :sites
   resources :pages, path: 'wiki' do
     collection do

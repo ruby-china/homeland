@@ -213,6 +213,7 @@ describe User, type: :model do
 
   describe 'Like' do
     let(:topic) { create :topic }
+    let(:reply) { create :reply }
     let(:user)  { create :user }
     let(:user2) { create :user }
 
@@ -232,6 +233,16 @@ describe User, type: :model do
         topic.reload
         expect(topic.likes_count).to eq(1)
         expect(topic.liked_user_ids).not_to include(user2.id)
+
+        # can't like itself
+        topic.user.like(topic)
+        topic.reload
+        expect(topic.likes_count).to eq(1)
+        expect(topic.liked_user_ids).not_to include(topic.user_id)
+
+        expect {
+          user.like(reply)
+        }.to change(reply, :likes_count).by(1)
       end
 
       it 'can tell whether or not liked by a user' do

@@ -299,6 +299,7 @@ class User
   # 收藏东西
   def like(likeable)
     return false if likeable.blank?
+    return false if likeable.user_id == self.id
     return false if likeable.liked_by_user?(self)
     likeable.push(liked_user_ids: id)
     likeable.inc(likes_count: 1)

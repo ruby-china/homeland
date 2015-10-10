@@ -1,25 +1,25 @@
 module LikesHelper
-  # 喜欢功能
+  # 赞功能
   # 参数
   # likeable - Like 的对象
-  # :cache - 当为 true 时将不会监测用户是否喜欢过，直接返回未喜欢过的状态，以用于 cache 的场景
+  # :cache - 当为 true 时将不会监测用户是否赞过，直接返回未赞过的状态，以用于 cache 的场景
   def likeable_tag(likeable, opts = {})
     return '' if likeable.blank?
 
     # 没登录，并且也没用用 cache 的时候，直接返回会跳转倒登录的
     return unlogin_likeable_tag if opts[:cache].blank? && current_user.blank?
 
-    label = "#{likeable.likes_count} 人喜欢"
-    label = '喜欢' if likeable.likes_count == 0
+    label = "#{likeable.likes_count} 个赞"
+    label = '' if likeable.likes_count == 0
 
     if opts[:cache].blank? && likeable.liked_by_user?(current_user)
-      title = '取消喜欢'
+      title = '取消赞'
       state = 'followed'
-      icon = content_tag('i', '', class: 'fa fa-heart')
+      icon = content_tag('i', '', class: 'fa fa-thumbs-up')
     else
-      title = '喜欢'
+      title = '赞'
       state = ''
-      icon = content_tag('i', '', class: 'fa fa-heart-o')
+      icon = content_tag('i', '', class: 'fa fa-thumbs-up')
     end
     like_label = raw "#{icon} <span>#{label}</span>"
 
@@ -31,6 +31,6 @@ module LikesHelper
   private
 
   def unlogin_likeable_tag
-    link_to(raw("<i class=\"fa fa-heart-o\"></i> <span>喜欢</span>"), new_user_session_path, class: '')
+    link_to(raw("<i class=\"fa fa-thumbs-up\"></i> <span></span>"), new_user_session_path, class: '')
   end
 end

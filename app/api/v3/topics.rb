@@ -60,7 +60,7 @@ module V3
                         desc: %(- last_actived - 最近更新的（社区默认排序）
 - recent - 最新创建（会包含 NoPoint 的）
 - no_reply - 还没有任何回帖的
-- popular - 热门的话题（回帖和喜欢超过一定的数量）
+- popular - 热门的话题（回帖和赞超过一定的数量）
 - excellent - 精华帖
 )
         optional :node_id, type: Integer, desc: '如果你需要只看某个节点的，请传此参数'

@@ -4,7 +4,7 @@
   li << link_to(t("users.menu.replies"), replies_user_path(@user))
   li << link_to(t("users.menu.favorites"), favorites_user_path(@user))
   li << link_to(t("users.menu.notes"), notes_user_path(@user))
-  li << link_to(t("users.menu.following"), followers_user_path(@user))
-  li << link_to(t("users.menu.followers"), following_user_path(@user))
+  li << link_to(t("users.menu.following"), following_user_path(@user))
+  li << link_to(t("users.menu.followers"), followers_user_path(@user))
   li << link_to(t("users.menu.blocked"), blocked_user_path(@user)) if owner?(@user) and current_user.blocked_users?
 end %>

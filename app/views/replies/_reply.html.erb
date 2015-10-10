@@ -4,7 +4,7 @@
 %>
 <div class="reply<%= ' popular' if reply.popular? %>" id="reply<%= floor %>">
   <% if reply.deleted? and !@show_raw %>
-    <div class="deleted text-center"><%= floor %><%= t("common.floor")%> 已删除.</div>
+    <div class="deleted text-center"><%= floor %><%= t("common.floor")%> 已删除。</div>
   <% else %>
     <div class="avatar"><%= user_avatar_tag(reply.user, :normal) %></div>
     <div class="infos">

@@ -63,7 +63,7 @@
     hot_topics: "热门讨论"
     hot_locations: "热门城市"
     replies_count: "回复"
-    likes_count: 喜欢
+    likes_count: 赞
   reply:
     edit_reply: "修改回帖"
     delete_reply_success: '回帖删除成功.'

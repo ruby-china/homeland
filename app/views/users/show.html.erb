@@ -1,6 +1,6 @@
 <div class="row">
   <%= render "sidebar", user: @user %>
-  
+
   <div class="col-md-8">
     <%= render "menu" %>
     <%= render "info" %>
@@ -20,7 +20,7 @@
                 </div>
                 <div class="info">
                   <span class="node"><%= render_node_name(item.node_name,item.node_id) %></span>
-                  <span class="counter"><%= item.likes_count %> 人喜欢 • <%= item.replies_count %> 条回复</span>
+                  <span class="counter"><%= item.likes_count %> 个赞 • <%= item.replies_count %> 条回复</span>
                 </div>
               </li>
               <% end %>
@@ -35,5 +35,5 @@
       </div>
     </div>
   </div>
-  
+
 </div>

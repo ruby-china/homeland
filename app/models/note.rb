@@ -33,4 +33,8 @@ class Note
     self.changes_count = 0 if changes_count.blank?
     inc(changes_count: 1)
   end
+
+  def display_title
+    (title || "").gsub(/^[\#]+/, '')
+  end
 end

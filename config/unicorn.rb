@@ -40,6 +40,8 @@ before_fork do |server, _worker|
 end
 
 after_fork do |_server, _worker|
+  MessageBus.after_fork
+
   Signal.trap 'TERM' do
     puts 'Unicorn worker intercepting TERM and doing nothing. Wait for master to send QUIT'
   end

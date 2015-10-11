@@ -32,14 +32,6 @@ module Mongoid
           objects = limit(batch_size).skip(start)
         end
       end
-
-      def delay
-        Sidekiq::Extensions::Proxy.new(DelayedDocument, self)
-      end
-    end
-
-    def delay
-      Sidekiq::Extensions::Proxy.new(DelayedDocument, self)
     end
   end
 end

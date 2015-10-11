@@ -1,5 +1,3 @@
-require 'sidekiq/testing/inline'
-
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/environment.rb
 
@@ -33,6 +31,8 @@ Rails.application.configure do
   # Checks for improperly declared sprockets dependencies.
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
+
+  config.active_job.queue_adapter = :inline
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true

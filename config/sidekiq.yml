@@ -5,5 +5,7 @@
 :pidfile: tmp/pids/sidekiq.pid
 :logfile: log/sidekiq.log
 :queues:
-  - [mailer, 5]
+  - [notifications, 100]
+  - [http_request, 50]
+  - [mailers, 5]
   - [default, 3]

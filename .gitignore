@@ -30,3 +30,4 @@ solr/pids/
 tags
 chromedriver.log
 .idea/
+spec/examples.txt

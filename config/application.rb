@@ -66,7 +66,6 @@ module RubyChina
     config.middleware.insert 0, Rack::UTF8Sanitizer
 
     config.active_job.queue_adapter = :sidekiq
-    config.active_job.queue_name_prefix = Rails.env
   end
 end
 

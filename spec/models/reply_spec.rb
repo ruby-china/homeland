@@ -142,4 +142,51 @@ describe Reply, type: :model do
       r.destroy
     end
   end
+
+  describe 'Vote by content' do
+    let(:reply) { build :reply }
+
+    describe '.upvote?' do
+      let(:chars) { %w(+1 :+1: :thumbsup: :plus1: 👍 👍🏻 👍🏼 👍🏽 👍🏾 👍🏿) }
+      it 'should work' do
+        chars.each do |key|
+          reply.body = key
+          expect(reply.upvote?).to eq(true)
+        end
+
+        reply.body = 'Ok +1'
+        expect(reply.upvote?).to eq(false)
+      end
+    end
+
+    describe '.check_vote_chars_for_like_topic' do
+      let(:user) { create :user }
+      let(:topic) { create :topic }
+      let(:reply) { build :reply, user: user, topic: topic }
+
+      context 'UpVote' do
+        it 'should work' do
+          expect(user).to receive(:like).with(topic).once
+          allow(reply).to receive(:upvote?).and_return(true)
+          reply.check_vote_chars_for_like_topic
+        end
+      end
+
+      context 'None' do
+        it 'should work' do
+          expect(user).to receive(:like).with(topic).at_most(0).times
+          allow(reply).to receive(:upvote?).and_return(false)
+          reply.check_vote_chars_for_like_topic
+        end
+      end
+
+      context 'callback on created' do
+        it 'should work' do
+          expect(reply).to receive(:check_vote_chars_for_like_topic).once
+          reply.save
+        end
+      end
+    end
+  end
+
 end

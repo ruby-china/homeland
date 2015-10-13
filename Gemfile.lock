@@ -489,7 +489,7 @@ DEPENDENCIES
   redis-namespace (~> 1.5.1)
   redis-objects (= 1.1.0)
   rouge (~> 1.8.0)
-  rspec-rails (~> 3.1)
+  rspec-rails (~> 3.3)
   rubocop
   ruby-prof
   rvm-capistrano

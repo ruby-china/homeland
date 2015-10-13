@@ -117,7 +117,7 @@ group :development, :test do
   gem 'capistrano-sidekiq'
 
   gem 'rubocop'
-  gem 'rspec-rails', '~> 3.1'
+  gem 'rspec-rails', '~> 3.3'
   gem 'factory_girl_rails', '~> 4.5.0'
   gem 'database_cleaner'
   gem 'capybara', '~> 2.3.0'

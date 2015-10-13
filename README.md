@@ -2,8 +2,7 @@
 
 This is the source code of [Ruby China](http://ruby-china.org) website.
 
-[![Build
-Status](https://secure.travis-ci.org/ruby-china/ruby-china.png?branch=master&.png)](http://travis-ci.org/ruby-china/ruby-china)
+[![Build Status](https://travis-ci.org/ruby-china/ruby-china.svg?branch=master)](https://travis-ci.org/ruby-china/ruby-china)
 
 ## Requirements
 

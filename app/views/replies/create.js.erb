@@ -1,17 +1,21 @@
 <% if @reply.errors.blank? %>
-<% @page = 1 %>
-  if($("#replies").length == 0){
+  <% if @reply.upvote? %>
     Turbolinks.visit(location.href);
-  }
-  else {
-    var current_floor = parseInt($("#replies").data("last-floor")) + 1;
-    $("#replies .items").append('<%= j(render("reply", reply: @reply, reply_counter: @topic.replies_count - 1, display_edit: true)) %>')
-      .find(".total b").text('<%= @topic.replies_count %>');
-    $("#replies .items .reply:last .reply-floor").text(current_floor + " 楼");
-    $("#replies").data("last-floor", current_floor);
-    $("#replies .reply a.edit:last").css("display","inline-block");
-    _topicView.replyCallback(1,'<%= j(@msg) %>');
-  }
+  <% else %>
+    <% @page = 1 %>
+    if($("#replies").length == 0){
+      Turbolinks.visit(location.href);
+    }
+    else {
+      var current_floor = parseInt($("#replies").data("last-floor")) + 1;
+      $("#replies .items").append('<%= j(render("reply", reply: @reply, reply_counter: @topic.replies_count - 1, display_edit: true)) %>')
+        .find(".total b").text('<%= @topic.replies_count %>');
+      $("#replies .items .reply:last .reply-floor").text(current_floor + " 楼");
+      $("#replies").data("last-floor", current_floor);
+      $("#replies .reply a.edit:last").css("display", "inline-block");
+      _topicView.replyCallback(1, '<%= j(@msg) %>');
+    }
+  <% end %>
 <% else %>
-  _topicView.replyCallback(0,'<%= j(@msg) %>');
+  _topicView.replyCallback(0, '<%= j(@msg) %>');
 <% end %>

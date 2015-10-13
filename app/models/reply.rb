@@ -9,6 +9,8 @@ class Reply
   include Mongoid::Mentionable
   include Mongoid::Likeable
 
+  UPVOTES = %w(+1 :+1: :thumbsup: :plus1: 👍 👍🏻 👍🏼 👍🏽 👍🏾 👍🏿)
+
   field :body
   field :body_html
 
@@ -54,6 +56,13 @@ class Reply
     Reply.delay.notify_reply_created(id)
   end
 
+  after_create :check_vote_chars_for_like_topic
+  def check_vote_chars_for_like_topic
+    return unless self.upvote?
+    user.like(topic)
+  end
+
+
   def self.per_page
     50
   end
@@ -90,6 +99,10 @@ class Reply
   # 是否热门
   def popular?
     likes_count >= 5
+  end
+
+  def upvote?
+    body.strip.start_with?(*UPVOTES)
   end
 
   def destroy

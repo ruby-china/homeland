@@ -53,7 +53,7 @@ class Reply
   end
 
   after_create do
-    Reply.delay.notify_reply_created(id)
+    NotifyReplyJob.perform_later(id)
   end
 
   after_create :check_vote_chars_for_like_topic

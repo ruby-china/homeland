@@ -113,7 +113,7 @@ class Topic
   end
 
   after_create do
-    Topic.delay.notify_topic_created(id)
+    NotifyTopicJob.perform_later(id)
   end
 
   def push_follower(uid)

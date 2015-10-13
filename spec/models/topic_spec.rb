@@ -181,7 +181,9 @@ describe Topic, type: :model do
         f.follow_user(user)
       end
 
-      Topic.notify_topic_created(topic.id)
+      # touch topic to create
+      expect(topic).to be_a(Topic)
+
       followers.each do |f|
         expect(f.notifications.unread.where(_type: 'Notification::Topic').count).to eq 1
       end

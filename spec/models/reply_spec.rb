@@ -13,7 +13,7 @@ describe Reply, type: :model do
       topic = create :topic, user: user
       expect do
         create :reply, topic: topic
-      end.to change(Mongoid::DelayedDocument.jobs, :size).by(1)
+      end.to change(Notification::Base, :count).by(1)
 
       expect do
         create(:reply, topic: topic).destroy
@@ -38,7 +38,7 @@ describe Reply, type: :model do
       it 'should work' do
         expect do
           create :reply, topic: t, user: user
-        end.to change(Mongoid::DelayedDocument.jobs, :size).by(1)
+        end.to change(u1.notifications, :count).by(1)
       end
 
       # TODO: 需要更多的测试，测试 @ 并且有关注的时候不会重复通知，回复时候不会通知自己
@@ -71,14 +71,17 @@ describe Reply, type: :model do
         followers.each do |f|
           f.follow_user(replyer)
         end
+
         topic = create :topic, user: user
         reply = create :reply, topic: topic, user: replyer
-        expect do
-          Reply.notify_reply_created(reply.id)
-        end.to change(user.notifications.unread.where(_type: 'Notification::TopicReply'), :count).by(1)
+
         followers.each do |f|
           expect(f.notifications.unread.where(_type: 'Notification::TopicReply').count).to eq 1
         end
+
+        expect do
+          Reply.notify_reply_created(reply.id)
+        end.to change(user.notifications.unread.where(_type: 'Notification::TopicReply'), :count).by(1)
       end
     end
   end

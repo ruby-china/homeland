@@ -31,3 +31,4 @@ tags
 chromedriver.log
 .idea/
 spec/examples.txt
+.vagrant

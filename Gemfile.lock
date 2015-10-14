@@ -283,7 +283,7 @@ GEM
       postmark (>= 0.9.0)
       rake
     powerpack (0.1.1)
-    puma (2.12.0)
+    puma (2.14.0)
     rack (1.6.4)
     rack-accept (0.4.5)
       rack (>= 0.4)
@@ -478,7 +478,7 @@ DEPENDENCIES
   parallel
   postmark (= 0.9.15)
   postmark-rails (= 0.4.1)
-  puma
+  puma (~> 2.14.0)
   rack-cors
   rack-mini-profiler
   rack-utf8_sanitizer

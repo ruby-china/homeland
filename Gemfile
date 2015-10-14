@@ -131,7 +131,7 @@ group :development, :test do
   gem 'colorize'
   gem 'letter_opener'
 
-  gem 'puma'
+  gem 'puma', '~> 2.14.0'
 
   # Better Errors
   gem 'better_errors'

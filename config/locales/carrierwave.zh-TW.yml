@@ -7,4 +7,3 @@
       rmagick_processing_error: "用 rmagick 處理影像檔時發生錯誤，也許上載的不是影像檔？原錯誤訊息：%{e}"
       mime_types_processing_error: "處理檔案 MIME::Types 時發生錯誤，也許上載的檔案不是正確的 content-type ？原錯誤：%{e}"
       mini_magick_processing_error: "使用 MiniMagick 處理影像時發生錯誤，也許上載的不是影像檔？原錯誤：%{e}"
-

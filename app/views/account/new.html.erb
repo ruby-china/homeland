@@ -6,7 +6,7 @@
         <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: ""}) do |f| %>
         <%= render "shared/error_messages", target: resource %>
         <div class="form-group">
-          <%= f.text_field :login, type: :email, class: "form-control", placeholder: "用户名", hint: t("users.suggest_using_twitter_id") %>
+          <%= f.text_field :login, type: :email, class: "form-control", placeholder: t("users.login"), hint: t("users.suggest_using_twitter_id") %>
         </div>
         <div class="form-group">
           <%= f.text_field :name, class: "form-control", placeholder: t("mongoid.attributes.user.name") %>

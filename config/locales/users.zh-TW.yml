@@ -18,6 +18,7 @@
     dont_like_it: "不喜歡?"
     bind_another_account: "綁定其他帳號用於登陸"
     register_user: "註冊新用戶"
+    login: "使用者名稱"
     suggest_using_twitter_id: "謹慎填寫，以後不可修改，建議用 Twitter ID。"
     already_have_account: "已經有帳號了？"
     forget_password: "忘記了密碼?"

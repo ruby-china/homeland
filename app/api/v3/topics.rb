@@ -26,6 +26,7 @@ module V3
                 "avatar_url": "http://gravatar.com/avatar/dba7c3f68c94ec5f7ac96d0a5e7db205.png?s=120"
             },
             "deleted": false,
+            "excellent": true,
             "abilities": {
                 "update": true,
                 "destroy": true
@@ -44,6 +45,7 @@ module V3
             "last_reply_user_login": "huacnlee",
             "user": { ... },
             "deleted": false,
+            "excellent": false,
             "abilities": {
                 "update": true,
                 "destroy": true

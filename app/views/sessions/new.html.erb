@@ -30,7 +30,7 @@
   </div>
   <div class="col-md-3">
     <div class="panel panel-default">
-      <div class="panel-heading">用其他平台的帐号登录</div>
+      <div class="panel-heading"><%= t("common.auth_with_other_services") %></div>
       <ul class="list-group">
         <li class="list-group-item"><%= link_to raw("<i class='fa fa-github'></i> GitHub"), user_omniauth_authorize_path(:github), class: "btn btn-default" %> </li>
       </ul>

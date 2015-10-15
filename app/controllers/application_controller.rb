@@ -32,6 +32,16 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  before_action :set_locale
+  def set_locale
+    I18n.locale = user_locale
+
+    # after store current locale
+    cookies[:locale] = params[:locale] if params[:locale]
+  rescue I18n::InvalidLocale
+    I18n.locale = I18n.default_locale
+  end
+
   def render_404
     render_optional_error_file(404)
   end
@@ -101,4 +111,14 @@ class ApplicationController < ActionController::Base
     opts[:etag] << Date.current
     super(opts)
   end
+
+  private
+
+    def user_locale
+      params[:locale] || cookies[:locale] || http_head_locale || I18n.default_locale
+    end
+
+    def http_head_locale
+      http_accept_language.language_region_compatible_from(I18n.available_locales)
+    end
 end

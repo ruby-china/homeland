@@ -362,7 +362,7 @@ class User
   end
 
   def github_repositories_cache_key
-    "github_repositories:#{github}+10+v3"
+    "github_repositories:#{github}+10+v4"
   end
 
   def self.fetch_github_repositories(user_id)
@@ -373,13 +373,13 @@ class User
 
     url = "https://api.github.com/users/#{github_login}/repos?type=owner&sort=pushed&client_id=#{Setting.github_token}&client_secret=#{Setting.github_secret}"
     begin
-      json = Timeout.timeout(5) do
+      json = Timeout.timeout(10) do
         open(url).read
       end
     rescue => e
       Rails.logger.error("GitHub Repositiory fetch Error: #{e}")
       items = []
-      Rails.cache.write(user.github_repositories_cache_key, items, expires_in: 15.days)
+      Rails.cache.write(user.github_repositories_cache_key, items, expires_in: 1.minutes)
       return false
     end
 

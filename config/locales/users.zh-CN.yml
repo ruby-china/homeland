@@ -28,6 +28,7 @@
     hot_users: "TOP 100 活跃会员"
     recent_joined: "最新加入的会员"
     edit_on_gravatar: "如需修改头像，请进入"
+    submit_new_user: "提交注册信息"
     menu:
       topics: "帖子"
       recent_reply_topics: "最近回帖"

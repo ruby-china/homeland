@@ -178,6 +178,7 @@ GEM
     highline (1.7.3)
     hiredis (0.6.0)
     hitimes (1.2.2)
+    http_accept_language (2.0.5)
     httpauth (0.2.1)
     i18n (0.7.0)
     ice_nine (0.11.1)
@@ -456,6 +457,7 @@ DEPENDENCIES
   grape (= 0.7.0)
   grape-active_model_serializers
   hiredis (~> 0.6.0)
+  http_accept_language
   jasmine-rails (~> 0.10.2)
   jbuilder
   jquery-rails (~> 4.0.4)

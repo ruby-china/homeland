@@ -204,6 +204,7 @@ AppView = Backbone.View.extend
 
 
 window.App =
+  locale: 'zh-CN'
   notifier : null
   current_user_id: null
   access_token : ''

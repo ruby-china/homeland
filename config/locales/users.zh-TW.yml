@@ -28,6 +28,7 @@
     hot_users: "TOP 100 活躍會員"
     recent_joined: "最新加入的會員"
     edit_on_gravatar: "如需修改頭像，請進入"
+    submit_new_user: "提交帳號信息"
     menu:
       topics: "文章"
       replies: "回帖"

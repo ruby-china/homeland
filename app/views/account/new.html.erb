@@ -9,25 +9,25 @@
           <%= f.text_field :login, type: :email, class: "form-control", placeholder: "用户名", hint: t("users.suggest_using_twitter_id") %>
         </div>
         <div class="form-group">
-          <%= f.text_field :name, class: "form-control", placeholder: "名字" %>
+          <%= f.text_field :name, class: "form-control", placeholder: t("mongoid.attributes.user.name") %>
         </div>
         <div class="form-group">
-          <%= f.text_field :email, type: :email, class: "form-control", placeholder: "Email" %>
+          <%= f.text_field :email, type: :email, class: "form-control", placeholder: t("mongoid.attributes.user.email") %>
         </div>
         <div class="form-group">
           <div class="checkbox">
-            <label for="user_email_public" class="checkbox"><%= f.check_box :email_public, checked: true %> 公开 Email</label>
+            <label for="user_email_public" class="checkbox"><%= f.check_box :email_public, checked: true %> <%= t("mongoid.attributes.user.email_public") %></label>
           </div>
         </div>
         <div class="form-group">
-        <%= f.password_field :password, class: "form-control", placeholder: "密码" %>
+        <%= f.password_field :password, class: "form-control", placeholder: t("mongoid.attributes.user.password") %>
         </div>
         <div class="form-group">
-        <%= f.password_field :password_confirmation, class: "form-control", placeholder: "确认密码" %>
+        <%= f.password_field :password_confirmation, class: "form-control", placeholder: t("mongoid.attributes.user.password_confirmation") %>
         </div>
         <div class="form-group">
-          <%= f.submit "提交注册信息", class: "btn btn-primary", 'data-disable-with' => t("common.submitting") %>
-          或 <%= link_to t("common.login"), new_session_path(resource_name), class: "btn btn-default" %>
+          <%= f.submit t('users.submit_new_user'), class: "btn btn-primary", 'data-disable-with' => t("common.submitting") %>
+          / <%= link_to t("common.login"), new_session_path(resource_name), class: "btn btn-default" %>
         </div>
         <% end %>
       </div>

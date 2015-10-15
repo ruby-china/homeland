@@ -470,4 +470,8 @@ class User
       "#{Setting.gravatar_proxy}/avatar/#{email_md5}.png?s=120"
     end
   end
+
+  def favorites_count
+    favorite_topic_ids.count
+  end
 end

@@ -60,7 +60,7 @@ AppView = Backbone.View.extend
 
     # 绑定评论框 Ctrl+Enter 提交事件
     $(".cell_comments_new textarea").unbind "keydown"
-    $(".cell_comments_new textarea").bind "keydown","ctrl+return",(el) ->
+    $(".cell_comments_new textarea").bind "keydown", "ctrl+return", (el) ->
       if $(el.target).val().trim().length > 0
         $(el.target).parent().parent().submit()
       return false

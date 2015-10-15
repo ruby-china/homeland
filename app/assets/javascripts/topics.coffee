@@ -261,20 +261,20 @@ window.TopicView = Backbone.View.extend
     return false
 
   initComponents : ->
-    $("textarea").unbind "keydown.cr"
-    $("textarea").bind "keydown.cr","ctrl+return",(el) =>
+    $("textarea.topic-editor").unbind "keydown.cr"
+    $("textarea.topic-editor").bind "keydown.cr", "ctrl+return", (el) =>
       return @submitTextArea(el)
 
-    $("textarea").unbind "keydown.mr"
-    $("textarea").bind "keydown.mr","Meta+return",(el) =>
+    $("textarea.topic-editor").unbind "keydown.mr"
+    $("textarea.topic-editor").bind "keydown.mr", "Meta+return", (el) =>
       return @submitTextArea(el)
 
     # 绑定文本框 tab 按键事件
-    $("textarea").unbind "keydown"
-    $("textarea").bind "keydown","tab",(el) =>
+    $("textarea.topic-editor").unbind "keydown.tab"
+    $("textarea.topic-editor").bind "keydown.tab", "tab", (el) =>
       return @insertSpaces(el)
 
-    $("textarea").autogrow()
+    $("textarea.topic-editor").autogrow()
 
     # also highlight if hash is reply#
     matchResult = window.location.hash.match(/^#reply(\d+)$/)

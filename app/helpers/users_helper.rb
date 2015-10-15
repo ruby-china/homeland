@@ -81,19 +81,17 @@ module UsersHelper
   end
 
   def render_user_level_tag(user)
-    if admin?(user)
-      content_tag(:span, t('common.admin_user'), class: 'label label-danger role')
-    elsif user.verified?
-      content_tag(:span, t('common.vip_user'), class: 'label label-success role')
-    elsif user.hr?
-      content_tag(:span, t('common.hr_user'), class: 'label label-success role')
-    elsif user.blocked?
-      content_tag(:span, t('common.blocked_user'), class: 'label label-warning role')
-    elsif user.newbie?
-      content_tag(:span, t('common.newbie_user'), class: 'label label-default role')
-    else
-      content_tag(:span, t('common.normal_user'), class: 'label label-info role')
-    end
+    return '' if user.blank?
+    level_class = case user.level
+                  when 'admin' then 'label-danger'
+                  when 'vip' then 'label-success'
+                  when 'hr' then 'label-success'
+                  when 'blocked' then 'label-warning'
+                  when 'newbie' then 'label-default'
+                  else 'label-info'
+                  end
+
+    content_tag(:span, user.level_name, class: "label #{level_class} role")
   end
 
   def block_node_tag(node)

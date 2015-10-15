@@ -100,6 +100,16 @@ module V3
         nodes = Node.includes(:section).all
         render nodes, meta: { total: Node.count }
       end
+
+      desc %(获取单个 Node 的详情，结构类似 /api/v3/nodes.json 里面 Hash 的结构
+
+此接口的使用场景：
+
+需要获取单个 Node 的话题总数，介绍等信息的时候，你无须再拉取 Node 列表。)
+      get ':id' do
+        node = Node.find(params[:id])
+        render node
+      end
     end
 
     resource :photos do

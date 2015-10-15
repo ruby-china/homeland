@@ -22,7 +22,7 @@ describe 'API V3', 'topics', type: :request do
       expect(json['topics'].size).to eq(4)
       fields = %w(id title created_at updated_at replied_at
                   replies_count node_name node_id last_reply_user_id
-                  last_reply_user_login deleted)
+                  last_reply_user_login deleted excellent)
       expect(json['topics'][0]).to include(*fields)
       titles = json['topics'].map { |topic| topic['title'] }
       expect(titles).to be_include('This is a normal topic')
@@ -240,8 +240,9 @@ describe 'API V3', 'topics', type: :request do
       expect(response.status).to eq(200)
       fields = %w(id title created_at updated_at replied_at body body_html
                   replies_count node_name node_id last_reply_user_id
-                  last_reply_user_login deleted user)
+                  last_reply_user_login deleted user likes_count suggested_at)
       expect(json['topic']).to include(*fields)
+      expect(json['meta']).to include(*%w(liked favorited followed))
       expect(json['topic']['title']).to eq('i want to know')
       expect(json['topic']['hits']).to eq(old_hits + 1)
       expect(json['topic']['user']).to include(*%w(id name login avatar_url))
@@ -272,40 +273,76 @@ describe 'API V3', 'topics', type: :request do
       get '/api/v3/topics/-1.json'
       expect(response.status).to eq(404)
     end
+
+    context 'liked, followed, favorited' do
+      let(:topic) { create(:topic) }
+
+      it 'should work' do
+        login_user!
+        current_user.like(topic)
+        current_user.favorite_topic(topic.id)
+        get "/api/v3/topics/#{topic.id}.json"
+        expect(response.status).to eq(200)
+        expect(json['meta']).to include(*%w(liked favorited followed))
+        expect(json['meta']["liked"]).to eq true
+        expect(json['meta']["favorited"]).to eq true
+        expect(json['meta']["followed"]).to eq false
+      end
+    end
+
   end
 
   describe 'GET /api/v3/topic/:id/replies.json' do
-    it 'should work' do
-      login_user!
-      t = create(:topic, title: 'i want to know')
-      r1 = create(:reply, topic_id: t.id, body: 'let me tell', user: current_user)
-      r2 = create(:reply, topic_id: t.id, body: 'let me tell again', deleted_at: Time.now)
-      get "/api/v3/topics/#{t.id}/replies.json"
-      expect(response.status).to eq(200)
-      expect(json['replies'].size).to eq 2
-      expect(json['replies'][0]).to include(*%w(id user body_html created_at updated_at deleted))
-      expect(json['replies'][0]['user']).to include(*%w(id name login avatar_url))
-      expect(json['replies'][0]['id']).to eq r1.id
-      expect(json['replies'][0]['abilities']).to include(*%w(update destroy))
-      expect(json['replies'][0]['abilities']['update']).to eq true
-      expect(json['replies'][0]['abilities']['destroy']).to eq true
-      expect(json['replies'][1]['id']).to eq r2.id
-      expect(json['replies'][1]['deleted']).to eq true
-      expect(json['replies'][1]['abilities']['update']).to eq false
-      expect(json['replies'][1]['abilities']['destroy']).to eq false
+
+    context 'no login' do
+      it 'should work' do
+        t = create(:topic, title: 'i want to know')
+        r1 = create(:reply, topic_id: t.id, body: 'let me tell', user: current_user)
+        r2 = create(:reply, topic_id: t.id, body: 'let me tell again', deleted_at: Time.now)
+        get "/api/v3/topics/#{t.id}/replies.json"
+        expect(response.status).to eq(200)
+        expect(json['replies'].size).to eq 2
+        expect(json['meta']['user_liked_reply_ids']).to eq([])
+      end
     end
 
-    it 'should return right abilities when admin visit' do
-      login_admin!
-      t = create(:topic, title: 'i want to know')
-      create(:reply, topic_id: t.id, body: 'let me tell')
-      create(:reply, topic_id: t.id, body: 'let me tell again', deleted_at: Time.now)
-      get "/api/v3/topics/#{t.id}/replies.json"
-      expect(response.status).to eq(200)
-      expect(json['replies'][0]['abilities']['update']).to eq true
-      expect(json['replies'][0]['abilities']['destroy']).to eq true
-      expect(json['replies'][1]['abilities']['update']).to eq true
-      expect(json['replies'][1]['abilities']['destroy']).to eq true
+    context 'has login' do
+      it 'should work' do
+        login_user!
+        t = create(:topic, title: 'i want to know')
+        r1 = create(:reply, topic_id: t.id, body: 'let me tell', user: current_user)
+        r2 = create(:reply, topic_id: t.id, body: 'let me tell again', deleted_at: Time.now)
+        current_user.like(r2)
+        get "/api/v3/topics/#{t.id}/replies.json"
+        expect(response.status).to eq(200)
+        expect(json['replies'].size).to eq 2
+        expect(json['replies'][0]).to include(*%w(id user body_html created_at updated_at deleted))
+        expect(json['replies'][0]['user']).to include(*%w(id name login avatar_url))
+        expect(json['replies'][0]['id']).to eq r1.id
+        expect(json['replies'][0]['abilities']).to include(*%w(update destroy))
+        expect(json['replies'][0]['abilities']['update']).to eq true
+        expect(json['replies'][0]['abilities']['destroy']).to eq true
+        expect(json['replies'][1]['id']).to eq r2.id
+        expect(json['replies'][1]['deleted']).to eq true
+        expect(json['replies'][1]['abilities']['update']).to eq false
+        expect(json['replies'][1]['abilities']['destroy']).to eq false
+        expect(json['meta']['user_liked_reply_ids']).to eq([r2.id])
+      end
+    end
+
+    context 'admin login' do
+      it 'should return right abilities when admin visit' do
+        login_admin!
+        t = create(:topic, title: 'i want to know')
+        create(:reply, topic_id: t.id, body: 'let me tell')
+        create(:reply, topic_id: t.id, body: 'let me tell again', deleted_at: Time.now)
+        get "/api/v3/topics/#{t.id}/replies.json"
+        expect(response.status).to eq(200)
+        expect(json['replies'][0]['abilities']['update']).to eq true
+        expect(json['replies'][0]['abilities']['destroy']).to eq true
+        expect(json['replies'][1]['abilities']['update']).to eq true
+        expect(json['replies'][1]['abilities']['destroy']).to eq true
+      end
     end
   end
 

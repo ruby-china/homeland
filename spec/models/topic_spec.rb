@@ -30,6 +30,7 @@ describe Topic, type: :model do
     it 'should push' do
       t.push_follower user.id
       expect(t.follower_ids.include?(user.id)).to be_truthy
+      expect(t.followed?(user.id)).to eq(true)
     end
 
     it 'should pull' do
@@ -41,6 +42,7 @@ describe Topic, type: :model do
       allow(t).to receive(:user_id).and_return(user.id)
       expect(t.push_follower(user.id)).to eq(false)
       expect(t.follower_ids.include?(user.id)).not_to be_truthy
+      expect(t.followed?(user.id)).to eq(false)
     end
   end
 

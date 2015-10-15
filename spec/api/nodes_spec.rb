@@ -26,4 +26,15 @@ describe 'API V3', 'nodes', type: :request do
       ])
     end
   end
+
+  describe 'GET /api/nodes/:id.json' do
+    let(:node) { create(:node, topics_count: 100) }
+
+    it 'should work' do
+      get "/api/v3/nodes/#{node.id}.json"
+      expect(response.status).to eq(200)
+      expect(json["node"]).to include(*%w(id name topics_count summary section_id sort section_name updated_at))
+      expect(json["node"]["topics_count"]).to eq(100)
+    end
+  end
 end

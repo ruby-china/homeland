@@ -116,9 +116,13 @@ class Topic
     NotifyTopicJob.perform_later(id)
   end
 
+  def followed?(uid)
+    follower_ids.include?(uid)
+  end
+
   def push_follower(uid)
     return false if uid == user_id
-    return false if follower_ids.include?(uid)
+    return false if followed?(uid)
     push(follower_ids: uid)
     true
   end

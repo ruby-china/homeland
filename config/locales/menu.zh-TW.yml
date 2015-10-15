@@ -60,6 +60,7 @@
     at: "在"
     hot_topics: "熱門討論"
     hot_locations: "熱門城市"
+    has_deleted: 已刪除
   reply:
     edit_reply: "修改回應"
     delete_reply_success: '回應刪除成功'

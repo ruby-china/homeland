@@ -16,7 +16,7 @@
     upload: "Upload"
     uploading: "Uploading"
     published_at: "Published At"
-    register: "Register"
+    register: "Sign Up"
     login: "Sign In"
     logining: "Sign In..."
     logout: "Sign Out"
@@ -59,6 +59,7 @@
     by: "by"
     at: "on"
     hot_topics: "Hot topics"
+    has_deleted: "has deleted"
   reply:
     edit_reply: "Edit Reply"
     delete_reply_success: 'Delete successfully.'

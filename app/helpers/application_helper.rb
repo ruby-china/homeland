@@ -167,6 +167,11 @@ module ApplicationHelper
     end
   end
 
+  # Override cache helper for support multiple I18n locale
+  def cache(name = {}, options = nil, &block)
+    super([I18n.locale, name], options, &block)
+  end
+
   def render_list(opts = {})
     list = []
     yield(list)

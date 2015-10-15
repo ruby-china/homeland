@@ -19,6 +19,25 @@
       numbers: [],
       formatter: function(prefix, words, suffix) { return [prefix, words, suffix].join(""); }
     },
+    "en": {
+      prefixAgo: null,
+      prefixFromNow: null,
+      suffixAgo: "ago",
+      suffixFromNow: "one second",
+      seconds: "few seconds",
+      minute: "one minute",
+      minutes: "%d minutes",
+      hour: "one hour",
+      hours: "%d hours",
+      day: "one day",
+      days: "%d days",
+      month: "one month",
+      months: "%d months",
+      year: "one year",
+      years: "%d years",
+      numbers: [],
+      formatter: function(prefix, words, suffix) { return [prefix, words, suffix].join(" "); }
+    },
     "zh-TW": {
       prefixAgo: null,
       prefixFromNow: null,
@@ -40,9 +59,11 @@
     }
   };
 
-  var localized = strings["<%= I18n.locale %>"];
-  if (localized) {
-    jQuery.timeago.settings.strings = localized;
-  }
+  $("document").ready(function() {
+    var localized = strings[App.locale];
+    if (localized) {
+      jQuery.timeago.settings.strings = localized;
+    }
+  });
 
 })();

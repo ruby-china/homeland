@@ -52,7 +52,6 @@ AppView = Backbone.View.extend
       window._noteView = new NoteView({parentView: @})
 
   initComponents: () ->
-    $("abbr.timeago").timeago()
     $(".alert").alert()
     $('.dropdown-toggle').dropdown()
     $('.bootstrap-select').remove()

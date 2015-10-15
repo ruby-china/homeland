@@ -64,6 +64,7 @@
     if (localized) {
       jQuery.timeago.settings.strings = localized;
     }
+    $("abbr.timeago").timeago();
   });
 
 })();

@@ -178,6 +178,11 @@ module V3
         "hits": 19,
         "likes_count": 10,
         "suggested_at": "2015-04-23T19:47:28.173+08:00"
+    },
+    "meta" : {
+      "followed": true,
+      "liked": false,
+      "followed": true
     }
 }
 ```
@@ -185,7 +190,17 @@ module V3
         get '', serializer: TopicDetailSerializer, root: 'topic' do
           @topic = Topic.find(params[:id])
           @topic.hits.incr(1)
-          render @topic
+          meta = { followed: false, liked: false, favorited: false }
+
+          if current_user
+            # 处理通知
+            current_user.read_topic(@topic)
+            meta[:followed] = @topic.followed?(current_user.id)
+            meta[:liked] = current_user.liked?(@topic)
+            meta[:favorited] = current_user.favorited_topic?(@topic.id)
+          end
+
+          render @topic, meta: meta
         end
 
         desc %(获取某个话题的回帖列表
@@ -227,7 +242,10 @@ module V3
             }
         },
         ...
-    ]
+    ],
+    "meta": {
+      "user_liked_reply_ids": [上面列表里面，用户喜欢过的回复编号]
+    }
 }
 ```
 )
@@ -238,14 +256,25 @@ module V3
         get 'replies', each_serializer: ReplySerializer, root: 'replies' do
           @topic = Topic.find(params[:id])
           @replies = @topic.replies.unscoped.asc(:_id).includes(:user).offset(params[:offset]).limit(params[:limit])
-          render @replies
+
+          @user_liked_reply_ids = []
+          if current_user
+            # 找出用户 like 过的 Reply，给 JS 处理 like 功能的状态
+            @replies.each do |r|
+              unless r.liked_user_ids.index(current_user.id).nil?
+                @user_liked_reply_ids << r.id
+              end
+            end
+          end
+
+          render @replies, meta: { user_liked_reply_ids: @user_liked_reply_ids }
         end
 
         desc '创建回帖'
         params do
           requires :body, type: String, desc: '回帖内容, Markdown 格式'
         end
-        post 'replies', serializer: ReplySerializer, root: 'reply' do
+        post 'replies', root: 'reply' do
           doorkeeper_authorize!
           error!('当前用户没有回帖权限，具体请参考官网的说明。', 403) unless can?(:create, Reply)
           @topic = Topic.find(params[:id])

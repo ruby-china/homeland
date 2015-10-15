@@ -126,9 +126,9 @@ class TopicsController < ApplicationController
     end
 
     # 是否关注过
-    @has_followed = @topic.follower_ids.index(current_user.id).nil?
+    @has_followed = @topic.followed?(current_user.id)
     # 是否收藏
-    @has_favorited = current_user.favorite_topic_ids.index(@topic.id).nil?
+    @has_favorited = current_user.favorited_topic?(@topic.id)
   end
 
   def set_special_node_active_menu

@@ -201,6 +201,7 @@ describe User, type: :model do
       expect(user.favorite_topic(nil)).to eq(false)
       expect(user.favorite_topic(topic.id.to_s)).to eq(false)
       expect(user.favorite_topic_ids.include?(topic.id)).to eq(true)
+      expect(user.favorited_topic?(topic.id)).to eq(true)
     end
 
     it 'should unfavorite a topic' do
@@ -208,6 +209,7 @@ describe User, type: :model do
       expect(user.favorite_topic_ids.include?(topic.id)).to eq(false)
       expect(user.unfavorite_topic(nil)).to eq(false)
       expect(user.unfavorite_topic(topic.id.to_s)).to eq(true)
+      expect(user.favorited_topic?(topic.id)).to eq(false)
     end
   end
 
@@ -228,6 +230,7 @@ describe User, type: :model do
         topic.reload
         expect(topic.likes_count).to eq(2)
         expect(topic.liked_user_ids).to include(user2.id)
+        expect(user.liked?(topic)).to eq(true)
 
         user2.unlike(topic)
         topic.reload

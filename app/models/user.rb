@@ -299,8 +299,7 @@ class User
   # 收藏东西
   def like(likeable)
     return false if likeable.blank?
-    return false if likeable.user_id == self.id
-    return false if likeable.liked_by_user?(self)
+    return false if liked?(likeable)
     likeable.push(liked_user_ids: id)
     likeable.inc(likes_count: 1)
     likeable.touch
@@ -309,17 +308,22 @@ class User
   # 取消收藏
   def unlike(likeable)
     return false if likeable.blank?
-    return false unless likeable.liked_by_user?(self)
+    return false unless liked?(likeable)
     likeable.pull(liked_user_ids: id)
     likeable.inc(likes_count: -1)
     likeable.touch
+  end
+
+  # 是否喜欢过
+  def liked?(likeable)
+    likeable.liked_by_user?(self) || likeable.user_id == self.id
   end
 
   # 收藏话题
   def favorite_topic(topic_id)
     return false if topic_id.blank?
     topic_id = topic_id.to_i
-    return false if favorite_topic_ids.include?(topic_id)
+    return false if favorited_topic?(topic_id)
     push(favorite_topic_ids: topic_id)
     true
   end
@@ -330,6 +334,11 @@ class User
     topic_id = topic_id.to_i
     pull(favorite_topic_ids: topic_id)
     true
+  end
+
+  # 是否收藏过话题
+  def favorited_topic?(topic_id)
+    favorite_topic_ids.include?(topic_id)
   end
 
   def favorite_topics_count

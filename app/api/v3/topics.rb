@@ -175,7 +175,9 @@ module V3
         },
         "body": "## 初探ActiveJob",
         "body_html": "<h4>初探ActiveJob</h4>",
-        "hits": 19
+        "hits": 19,
+        "likes_count": 10,
+        "suggested_at": "2015-04-23T19:47:28.173+08:00"
     }
 }
 ```

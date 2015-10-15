@@ -240,7 +240,7 @@ describe 'API V3', 'topics', type: :request do
       expect(response.status).to eq(200)
       fields = %w(id title created_at updated_at replied_at body body_html
                   replies_count node_name node_id last_reply_user_id
-                  last_reply_user_login deleted user)
+                  last_reply_user_login deleted user likes_count suggested_at)
       expect(json['topic']).to include(*fields)
       expect(json['topic']['title']).to eq('i want to know')
       expect(json['topic']['hits']).to eq(old_hits + 1)

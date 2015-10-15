@@ -26,7 +26,8 @@ describe 'API V3', 'users', type: :request do
       get '/api/v3/users/test_user.json'
       expect(response.status).to eq 200
       fields = %w(id name login email avatar_url location company twitter github website bio tagline
-                  topics_count replies_count following_count followers_count favorites_count)
+                  topics_count replies_count following_count followers_count favorites_count
+                  level level_name)
       expect(json['user']).to include(*fields)
       fields.reject { |f| f == 'avatar_url' }.each do |field|
         expect(json['user'][field]).to eq user.send(field)

@@ -351,4 +351,65 @@ describe User, type: :model do
       expect(u3.follower_ids).to eq []
     end
   end
+
+  describe '.favorites_count' do
+    let(:u1) { create :user, favorite_topic_ids: [1, 2] }
+
+    it 'should work' do
+      expect(u1.favorites_count).to eq(2)
+    end
+
+  end
+
+  describe '.level / .level_name' do
+    let(:u1) { create(:user) }
+
+    context 'admin' do
+      it 'should work' do
+        allow(u1).to receive(:admin?).and_return(true)
+        expect(u1.level).to eq('admin')
+        expect(u1.level_name).to eq('管理员')
+      end
+    end
+
+    context 'vip' do
+      it 'should work' do
+        allow(u1).to receive(:verified?).and_return(true)
+        expect(u1.level).to eq('vip')
+        expect(u1.level_name).to eq('高级会员')
+      end
+    end
+
+    context 'hr' do
+      it 'should work' do
+        allow(u1).to receive(:hr?).and_return(true)
+        expect(u1.level).to eq('hr')
+        expect(u1.level_name).to eq('企业 HR')
+      end
+    end
+
+    context 'blocked' do
+      it 'should work' do
+        allow(u1).to receive(:blocked?).and_return(true)
+        expect(u1.level).to eq('blocked')
+        expect(u1.level_name).to eq('禁言用户')
+      end
+    end
+
+    context 'newbie' do
+      it 'should work' do
+        allow(u1).to receive(:newbie?).and_return(true)
+        expect(u1.level).to eq('newbie')
+        expect(u1.level_name).to eq('新手')
+      end
+    end
+
+    context 'normal' do
+      it 'should work' do
+        allow(u1).to receive(:newbie?).and_return(false)
+        expect(u1.level).to eq('normal')
+        expect(u1.level_name).to eq('会员')
+      end
+    end
+  end
 end

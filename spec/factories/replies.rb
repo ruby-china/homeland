@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :reply do
-    body 'body'
+    sequence(:body) { |n| "body#{n}" }
     association :user
     association :topic
   end

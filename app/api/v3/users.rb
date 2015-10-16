@@ -60,7 +60,7 @@ module V3
           else
             @topics = @topics.recent
           end
-          @topics = @topics.offset(params[:offset]).limit(params[:limit])
+          @topics = @topics.includes(:user).offset(params[:offset]).limit(params[:limit])
           render @topics
         end
 
@@ -70,9 +70,9 @@ module V3
           optional :offset, type: Integer, default: 0
           optional :limit, type: Integer, default: 20, values: 1..150
         end
-        get 'replies', each_serializer: ReplySerializer, root: 'replies' do
+        get 'replies', each_serializer: ReplyDetailSerializer, root: 'replies' do
           @replies = @user.replies.recent
-          @replies = @replies.offset(params[:offset]).limit(params[:limit])
+          @replies = @replies.includes(:user, :topic).offset(params[:offset]).limit(params[:limit])
           render @replies
         end
 
@@ -83,7 +83,7 @@ module V3
         end
         get 'favorites', each_serializer: TopicSerializer, root: 'topics' do
           @topic_ids = @user.favorite_topic_ids[params[:offset], params[:limit]]
-          @topics = Topic.where(:_id.in => @topic_ids).fields_for_list
+          @topics = Topic.where(:_id.in => @topic_ids).fields_for_list.includes(:user)
           @topics = @topics.to_a.sort do |a, b|
             @topic_ids.index(a.id) <=> @topic_ids.index(b.id)
           end

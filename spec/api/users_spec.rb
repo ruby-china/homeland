@@ -96,15 +96,17 @@ describe 'API V3', 'users', type: :request do
 
   describe 'GET /api/v3/users/:login/replies.json' do
     let(:user) { create(:user) }
+    let(:topic) { create(:topic, title: "Test topic title") }
 
     describe 'recent order' do
       it 'should work' do
-        @replies = create_list(:reply, 3, user: user)
+        @replies = create_list(:reply, 3, user: user, topic: topic)
         get "/api/v3/users/#{user.login}/replies.json", offset: 0, limit: 2
         expect(json['replies'].size).to eq 2
-        fields = %w(id topic_id user body_html)
+        fields = %w(id user body_html topic_id topic_title)
         expect(json['replies'][0]).to include(*fields)
         expect(json['replies'][0]['id']).to eq @replies[2].id
+        expect(json['replies'][0]['topic_title']).to eq topic.title
         expect(json['replies'][1]['id']).to eq @replies[1].id
       end
     end

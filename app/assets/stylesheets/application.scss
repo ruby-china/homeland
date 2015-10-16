@@ -417,6 +417,7 @@ kbd {
 }
 
 html.turbolinks-progress-bar::before {
+  position: absolute !important;
   background-color: $red !important;
   height: 2px !important;
 }

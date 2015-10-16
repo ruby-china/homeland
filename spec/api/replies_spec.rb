@@ -7,7 +7,7 @@ describe 'API V3', 'replies', type: :request do
     it 'should be ok' do
       get "/api/v3/replies/#{reply.id}.json"
       expect(response.status).to eq(200)
-      expect(json['reply']).to include(*%w(id topic_id user body body_html))
+      expect(json['reply']).to include(*%w(id topic_id user likes_count body body_html))
       expect(json['reply']['id']).to eq reply.id
       expect(json['reply']['body']).to eq reply.body
       expect(json['reply']['abilities']).to include(*%w(update destroy))

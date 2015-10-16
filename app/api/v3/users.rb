@@ -64,6 +64,18 @@ module V3
           render @topics
         end
 
+        desc '获取用户创建的回帖列表'
+        params do
+          optional :order, type: String, default: 'recent', values: %w(recent)
+          optional :offset, type: Integer, default: 0
+          optional :limit, type: Integer, default: 20, values: 1..150
+        end
+        get 'replies', each_serializer: ReplySerializer, root: 'replies' do
+          @replies = @user.replies.recent
+          @replies = @replies.offset(params[:offset]).limit(params[:limit])
+          render @replies
+        end
+
         desc '用户收藏的话题列表'
         params do
           optional :offset, type: Integer, default: 0

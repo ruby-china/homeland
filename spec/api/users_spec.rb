@@ -94,6 +94,22 @@ describe 'API V3', 'users', type: :request do
     end
   end
 
+  describe 'GET /api/v3/users/:login/replies.json' do
+    let(:user) { create(:user) }
+
+    describe 'recent order' do
+      it 'should work' do
+        @replies = create_list(:reply, 3, user: user)
+        get "/api/v3/users/#{user.login}/replies.json", offset: 0, limit: 2
+        expect(json['replies'].size).to eq 2
+        fields = %w(id topic_id user body_html)
+        expect(json['replies'][0]).to include(*fields)
+        expect(json['replies'][0]['id']).to eq @replies[2].id
+        expect(json['replies'][1]['id']).to eq @replies[1].id
+      end
+    end
+  end
+
   describe 'GET /api/v3/users/:login/favorites.json' do
     let(:user) { create(:user) }
 

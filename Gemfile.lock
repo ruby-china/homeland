@@ -405,6 +405,7 @@ GEM
     tilt (1.4.1)
     timers (4.0.1)
       hitimes
+    tunemygc (1.0.61)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.7.2)
@@ -502,6 +503,7 @@ DEPENDENCIES
   sinatra (>= 1.3.0)
   social-share-button (= 0.1.5)
   sprockets (~> 3.3.3)
+  tunemygc
   uglifier
   unicorn (= 4.9.0)
   will_paginate (= 3.0.7)

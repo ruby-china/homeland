@@ -22,6 +22,7 @@
 #= require topics
 #= require pages
 #= require notes
+#= require google_analytics
 #= require_self
 
 AppView = Backbone.View.extend

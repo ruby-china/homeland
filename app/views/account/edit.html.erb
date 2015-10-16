@@ -11,7 +11,7 @@
         <div class="form-group">
           <div class="col-sm-10 col-sm-offset-2">
             <div class="checkbox">
-              <label for="user_email_public" class="checkbox"><%= f.check_box :email_public %> 公开 Email</label>
+              <label for="user_email_public" class="checkbox"><%= f.check_box :email_public %> <%= t("users.email_permission")%></label>
             </div>
           </div>
         </div>
@@ -40,7 +40,7 @@
         <%= f.input :bio, as: :text, input_html: { class: "xxlarge", rows: "6" } %>
         <div class="form-group">
           <div class="col-sm-10 col-sm-offset-2">
-            <button type="submit" class="btn btn-primary" data-disable-with="<%= t("common.saving") %>">更新资料</button>
+            <button type="submit" class="btn btn-primary" data-disable-with="<%= t("common.saving") %>"><%= t("users.update_profile")%></button>
           </div>
         </div>
         <% end %>
@@ -57,7 +57,7 @@
         <%= f.input :password_confirmation %>
         <div class="form-group">
           <div class="col-sm-10 col-sm-offset-2">
-            <%= f.submit "修改密码", class: "btn btn-success", 'data-disable-with' => t("common.saving") %>
+            <%= f.submit t("users.update_password"), class: "btn btn-success", 'data-disable-with' => t("common.saving") %>
           </div>
         </div>
         <% end %>
@@ -91,32 +91,32 @@
     
     <div class="panel panel-default">
       <ul class="list-group">
-        <li class="list-group-item"><%= link_to "管理我的应用", oauth_applications_path %></li>
+        <li class="list-group-item"><%= link_to t("users.manage_my_apps"), oauth_applications_path %></li>
       </ul>
     </div>
     
     
     <div class="panel panel-default">
-      <div class="panel-heading">密钥</div>
+      <div class="panel-heading"><%= t("users.private_key")%></div>
       <div class="panel-body">
         <div class="form-group">
           <input id="private_token" class="form-control" value="<%= @user.private_token %>" readonly="readonly">
         </div>
         <div class="buttons">
-          <a href="#" class="btn btn-default btn-sm" id="update_private_token">更换一个</a> <span class="help-inline">用于浏览器 Push 通知</span>
+          <a href="#" class="btn btn-default btn-sm" id="update_private_token"><%= t("users.replace_token")%></a> <span class="help-inline"><%= t("users.token_usage")%></span>
         </div>
       </div>
     </div>
     <div class="panel panel-default">
-      <div class="panel-heading">删除账号</div>
+      <div class="panel-heading"><%= t("users.delete_account")%></div>
       <div class="panel-body">
         <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :method => :delete) do |f| %>
         <%= render "shared/error_messages", :target => resource if params[:by] == "destroy" %>
         <input type="hidden" name="by" value="destroy" />
         <div class="form-group">
-          <%= f.password_field :current_password, class: "form-control", placeholder: "要删除账号，请输入你的密码" %>
+          <%= f.password_field :current_password, class: "form-control", placeholder: t("users.confirm_delete_account") %>
         </div>
-        <%= f.submit "确定删除我的账号", :class => "btn btn-danger btn-sm btn-block", 'data-disable-with' => t("common.submitting") %>
+        <%= f.submit t("users.ensure_to_delete"), :class => "btn btn-danger btn-sm btn-block", 'data-disable-with' => t("common.submitting") %>
         <% end %>
       </div>
     </div>

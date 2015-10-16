@@ -125,7 +125,7 @@ group :development, :test do
   gem 'api_taster', '0.6.0'
 
   gem 'jasmine-rails', '~> 0.10.2'
-  gem 'derailed_benchmarks', github: 'schneems/derailed_benchmarks'
+  gem 'derailed'
 
   gem 'mongoid_colored_logger'
   gem 'colorize'

@@ -1,3 +1,5 @@
 class ReplyDetailSerializer < ReplySerializer
-  attributes :body
+  delegate :title, to: :topic, allow_nil: true
+
+  attributes :body, :topic_title
 end

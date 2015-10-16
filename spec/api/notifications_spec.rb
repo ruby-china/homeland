@@ -27,6 +27,39 @@ describe 'API V3', 'notifications', type: :request do
       expect(json['notifications'][0]['actor']['login']).to eq(current_user.login)
     end
 
+    context 'NodeChanged' do
+      let!(:node) { create :node }
+      let!(:topic) { create :topic, user: current_user }
+
+      it 'should work' do
+        login_user!
+        n = create :notification_node_changed, user: current_user, topic_id: topic.id, node: node
+        get '/api/v3/notifications.json'
+        expect(response.status).to eq(200)
+        expect(json['notifications'][0]['read']).to eq false
+        expect(json['notifications'][0]).to include(*%w(type topic node))
+        expect(json['notifications'][0]['type']).to eq 'NodeChanged'
+        expect(json['notifications'][0]['topic']["id"]).to eq topic.id
+        expect(json['notifications'][0]['topic']["title"]).to eq topic.title
+        expect(json['notifications'][0]['node']["id"]).to eq node.id
+        expect(json['notifications'][0]['node']["name"]).to eq node.name
+      end
+    end
+
+    it 'should get notification for a topic' do
+      login_user!
+      u = create(:user)
+      current_user.follow_user(u)
+      topic = create :topic, user: u
+      create :notification_topic, user: current_user, topic: topic
+      get '/api/v3/notifications.json'
+      expect(response.status).to eq(200)
+      json = JSON.parse(response.body)
+      expect(json['notifications'][0]['read']).to eq false
+      expect(json['notifications'][0]['topic']['id']).to eq(topic.id)
+      expect(json['notifications'][0]['actor']['login']).to eq(u.login)
+    end
+
     it 'should get notification for a reply' do
       login_user!
       topic = create :topic, user: current_user

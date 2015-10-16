@@ -1,6 +1,6 @@
 module Notification
   class TopicReply < Base
-    belongs_to :reply
+    belongs_to :reply, class_name: 'Reply'
 
     delegate :body, to: :reply, prefix: true, allow_nil: true
 

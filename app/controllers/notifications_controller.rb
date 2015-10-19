@@ -24,4 +24,11 @@ class NotificationsController < ApplicationController
       format.js { render layout: false }
     end
   end
+
+  def unread
+    @notifications = current_user.notifications.unread.recent.paginate page: params[:page], per_page: 20
+    current_user.read_notifications(@notifications)
+    set_seo_meta('未读提醒')
+    render action: :index
+  end
 end

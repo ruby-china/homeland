@@ -21,7 +21,7 @@
     login: "Pick a username"
     suggest_using_twitter_id: "Cannot modify after create."
     already_have_account: "Already have an account?"
-    forget_password: "Forgor your password?"
+    forget_password: "Forgot your password?"
     not_recieve_confirm_mail: "Havn't received your confirmation email?"
     not_recieve_unlock_mail: "Havn't received your unlock email?"
     current_have: "Current have"

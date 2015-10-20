@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   resources :notifications, only: [:index, :destroy] do
     collection do
       post :clear
+      get :unread
     end
   end
 

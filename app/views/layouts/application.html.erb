@@ -36,17 +36,19 @@
   <div class="header">
     <nav class="navbar navbar-inverse navbar-static-top navbar-default">
       <div class="container">
-        <div class="navbar-header">
+        <div class="navbar-header" id="navbar-header" data-turbolinks-permanent>
           <a href="/" class="navbar-brand"><b>Ruby</b> China</a>
         </div>
 
-        <%= render_list class: "nav navbar-nav" do |li|
-           li << link_to(t("menu.topics"), topics_path)
-           li << link_to(t("menu.wiki"), pages_path) if !mobile?
-           li << link_to(t("menu.jobs"), jobs_path)
-           li << link_to(t("menu.tweets"), twitter_path) if !mobile?
-           li << link_to(t("menu.sites"), sites_path) if !mobile?
-        end %>
+        <span id="main-nav-menu" data-turbolinks-temporary>
+          <%= render_list class: "nav navbar-nav" do |li|
+             li << link_to(t("menu.topics"), topics_path)
+             li << link_to(t("menu.wiki"), pages_path) if !mobile?
+             li << link_to(t("menu.jobs"), jobs_path)
+             li << link_to(t("menu.tweets"), twitter_path) if !mobile?
+             li << link_to(t("menu.sites"), sites_path) if !mobile?
+          end %>
+        </span>
 
         <%= render "common/user_nav" %>
 
@@ -81,7 +83,7 @@
   </div>
 
   <% if not mobile? %>
-  <footer class="footer">
+  <footer class="footer" id="footer" data-turbolinks-permanent>
     <div class="container">
       <%= raw SiteConfig.footer_html %>
     </div>

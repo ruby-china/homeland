@@ -176,6 +176,28 @@ describe TopicsHelper, type: :helper do
     end
   end
 
+  describe 'topic_title_tag' do
+    let(:topic) { create :topic, title: 'test title'}
+    let(:user) { create :user }
+
+    it 'should return topic_was_deleted without a topic' do
+      expect(helper.topic_title_tag(nil)).to eq(t('topics.topic_was_deleted'))
+    end
+
+    it 'should return title with a topic' do
+      expect(helper.topic_title_tag(topic)).to eq("<a title=\"#{topic.title}\" href=\"/topics/#{topic.id}\">#{topic.title}</a>")
+    end
+
+    it 'should return page and floor with a reply' do
+      replies = []
+      52.times do |e|
+        replies << create(:reply, topic: topic, user: user)
+      end
+      expect(helper.topic_title_tag(topic, reply: replies[21])).to eq("<a title=\"#{topic.title}\" href=\"/topics/#{topic.id}?page=1#reply22\">#{topic.title}</a>")
+      expect(helper.topic_title_tag(topic, reply: replies[51])).to eq("<a title=\"#{topic.title}\" href=\"/topics/#{topic.id}?page=2#reply52\">#{topic.title}</a>")
+    end
+  end
+
   describe 'topic_follow_tag' do
     let(:topic) { create :topic }
     let(:user) { create :user }

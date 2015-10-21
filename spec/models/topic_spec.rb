@@ -69,6 +69,18 @@ describe Topic, type: :model do
     expect(t.body_html).to eq('<p><em>foo</em></p>')
   end
 
+  it 'should get page and floor by reply' do
+    replies = []
+    100.times do |e|
+      replies << create(:reply, topic: topic, user: user)
+    end
+    expect(topic.page_floor_of_reply(replies[50])).to eq([2, 51])
+    expect(topic.page_floor_of_reply(replies[35])).to eq([1, 36])
+    expect(topic.page_floor_of_reply(replies[0])).to eq([1, 1])
+    expect(topic.page_floor_of_reply(replies[74])).to eq([2, 75])
+    expect(topic.page_floor_of_reply(replies[99])).to eq([2, 100])
+  end
+
   it 'should covert body on save' do
     t = create(:topic, body: '*foo*')
     old_html = t.body_html

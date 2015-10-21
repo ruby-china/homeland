@@ -41,9 +41,15 @@ module TopicsHelper
     link_to(raw("#{icon} 关注"), '#', 'data-id' => topic.id, 'data-followed' => followed, class: class_name)
   end
 
-  def topic_title_tag(topic)
+  def topic_title_tag(topic, opts = {})
     return t('topics.topic_was_deleted') if topic.blank?
-    link_to(topic.title, topic_path(topic), title: topic.title)
+    if opts[:reply]
+      page, index = topic.page_floor_of_reply(opts[:reply])
+      path = topic_path(topic, anchor: "reply#{index}", page: page)
+    else
+      path = topic_path(topic)
+    end
+    link_to(topic.title, path, title: topic.title)
   end
 
   def topic_excellent_tag(topic)

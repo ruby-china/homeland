@@ -243,6 +243,12 @@ describe User, type: :model do
         expect(topic.likes_count).to eq(1)
         expect(topic.liked_user_ids).not_to include(topic.user_id)
 
+        # can't unlike itself
+        topic.user.unlike(topic)
+        topic.reload
+        expect(topic.likes_count).to eq(1)
+        expect(topic.liked_user_ids).not_to include(topic.user_id)
+
         expect {
           user.like(reply)
         }.to change(reply, :likes_count).by(1)

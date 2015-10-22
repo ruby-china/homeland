@@ -309,6 +309,7 @@ class User
   def unlike(likeable)
     return false if likeable.blank?
     return false unless liked?(likeable)
+    return false if likeable.user_id == self.id
     likeable.pull(liked_user_ids: id)
     likeable.inc(likes_count: -1)
     likeable.touch

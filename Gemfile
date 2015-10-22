@@ -62,7 +62,7 @@ gem 'redis-namespace', '~> 1.5.1'
 gem 'redis-objects', '1.1.0'
 
 # Markdown 格式 & 文本处理
-gem 'redcarpet', '~> 3.2.3'
+gem 'redcarpet', '~> 3.3.3'
 gem 'rouge', '~> 1.8.0'
 gem 'auto-space', '0.0.4'
 gem 'nokogiri', '1.6.5'
@@ -71,9 +71,9 @@ gem 'nokogiri', '1.6.5'
 gem 'settingslogic', '~> 2.0.9'
 
 # 队列
-gem 'sidekiq', '3.4.2'
+gem 'sidekiq'
 # Sidekiq Web
-gem 'sinatra', '>= 1.3.0', require: nil
+gem 'sinatra', require: nil
 
 gem 'message_bus'
 

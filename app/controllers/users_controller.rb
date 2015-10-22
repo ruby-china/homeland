@@ -4,7 +4,6 @@ class UsersController < ApplicationController
   before_action :find_user, only: [:show, :topics, :replies, :favorites, :notes,
                                    :block, :unblock, :blocked,
                                    :follow, :unfollow, :followers, :following]
-  caches_action :index, expires_in: 2.hours, layout: false
 
   def index
     @total_user_count = User.count

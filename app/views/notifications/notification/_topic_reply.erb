@@ -14,7 +14,7 @@
         <%= user_name_tag(reply.user) %>
       </span>
       <span class="info">在帖子
-      <%= topic_title_tag(topic) %> 回复了：</span>
+      <%= topic_title_tag(topic, reply: reply) %> 回复了：</span>
       <% if !notification.read? %>
         <span class="new label label-warning">新</span>
       <% end %>

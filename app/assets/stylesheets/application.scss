@@ -134,7 +134,7 @@ body {
       border:none;
       width: 0px;
       height: 100%;
-      padding:6px 0 4px 0;
+      padding:6px 1px 4px 1px;
       margin-left: 4px;
       background: transparent;
       transition: all .3s;
@@ -165,27 +165,31 @@ body {
 
 a { color: $blue; }
 
-.btn { border-radius: 3px; }
+.btn {
+  border-radius: 3px;
+  border: 1px solid #ccc;
+  padding: 5px 18px; box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.15); }
+
+  .btn-default { box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 1);  }
 .btn-default,
-.btn-default:visited { background: #EBEDEE; border-color: #EBEDEE; }
-.btn-default:hover { background: $gray; border-color: $gray; }
+.btn-default:visited { background: #eee; border-color: #dadada;  }
+.btn-default:hover { background: #eaeaea; border-color: #ddd; }
 .btn-default.active { background: $grayDark; border-color: $grayDark;}
 .btn-primary,
-.btn-primary:visited { background: $blue; border-color: $blue; color: #FFF; }
-.btn-primary:hover { background: $blueLight; border-color: $blueLight; }
+.btn-primary:visited { background: $blue; border-color: $blueDark; color: #FFF; }
+.btn-primary:hover { background: $blueLight; border-color: $blue; }
 .btn-primary.active { background: $blueDark; border-color: $blueDark; }
 .btn-danger,
-.btn-danger:visited { background: $red; border-color: $red; }
-.btn-danger:hover { background: $redLight; border-color: $redLight;}
+.btn-danger:visited { background: $red; border-color: $redDark; }
+.btn-danger:hover { background: $redLight; border-color: $red;}
 .btn-danger.active { background: $redDark; border-color: $redDark; }
-.btn-danger { background: $red; border-color: $red; }
 .btn-warning,
 .btn-warning:visited { background:$yellow; border-color: $yellow; }
 .btn-warning:hover { background:$yellowLight; border-color: $yellowLight; }
 .btn-warning.active { background:$yellowDark; border-color: $yellowDark; }
 .btn-success,
-.btn-success:visited { background:$green; border-color: $green; }
-.btn-success:hover { background:$greenLight; border-color: $greenLight; }
+.btn-success:visited { background:$green; border-color: $greenDark; }
+.btn-success:hover { background:$greenLight; border-color: $green; }
 .btn-success.active { background:$greenDark; border-color: $greenDark; }
 .open>.dropdown-toggle.btn-primary { background: #0059C7; }
 
@@ -212,6 +216,7 @@ a { color: $blue; }
   label { font-weight: normal; color: rgba(0, 0, 0, 0.40); font-size: 13px; margin-bottom: 0px;}
 }
 .control-label { font-weight: 500 !important; }
+.form-horizontal .control-label { padding-top: 16px; }
 .control-label.checkbox { text-align: left; }
 .form-control {
   border-radius: 0px;
@@ -229,21 +234,21 @@ a { color: $blue; }
   }
 }
 textarea.form-control,
-#preview.form-control { border: 1px solid #D5DCE1;  }
+#preview.form-control { border: 1px solid #D5DCE1; }
 textarea.form-control,
 #preview.form-control,
-textarea.form-control:focus { padding: 6px; }
+textarea.form-control:focus { padding: 6px; border-bottom-width: 1px; }
 .editor-toolbar {
   .nav-pills { }
   .nav-pills>li>a {
-    border-radius: 0px;
-    padding: 3px 13px;
-    background-color: $grayLabel;
-    color: $grayLabelText;
+    border-radius: 3px 3px 0 0;
+    padding: 3px 23px;
+    background-color: #f0f0f0;
+    color: #999;
   }
   .nav-pills>li.active>a:link,
   .nav-pills>li.active>a:visited,
-  .nav-pills>li.active>a:hover { background-color: #D5DCE1; color: $black; }
+  .nav-pills>li.active>a:hover { background-color: $blueLight; color: #FFF; }
 }
 form {
   #preview { min-height: 500px; overflow-y: scroll; }
@@ -373,10 +378,6 @@ kbd {
     background: #f5f5f5;
     border-bottom-color: #e9e9e9;
     color: #777;
-    .btn-default {
-      background: #FFF;
-      border-color: #FFF;
-    }
   }
   .panel-footer {
     background: #f5f5f5;

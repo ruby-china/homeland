@@ -5,6 +5,13 @@ GIT
     doorkeeper-i18n (2.0.0)
 
 GIT
+  remote: git://github.com/huacnlee/rucaptcha.git
+  revision: d3e6240d3a2f1c52f9b82675f15edf322b08490b
+  specs:
+    rucaptcha (0.1.3)
+      posix-spawn (>= 0.3.0)
+
+GIT
   remote: git://github.com/rails/turbolinks.git
   revision: 83d4b3d2c52a681f07900c28adb28bc8da604733
   specs:
@@ -394,8 +401,6 @@ GEM
       ruby-progressbar (~> 1.4)
     ruby-prof (0.15.2)
     ruby-progressbar (1.7.1)
-    rucaptcha (0.1.2)
-      posix-spawn (>= 0.3.0)
     rvm-capistrano (1.4.1)
       capistrano (>= 2.0.0)
     sass (3.4.13)
@@ -522,7 +527,7 @@ DEPENDENCIES
   rspec-rails (~> 3.3)
   rubocop
   ruby-prof
-  rucaptcha (= 0.1.2)
+  rucaptcha (= 0.1.3)!
   rvm-capistrano
   sass-rails
   settingslogic (~> 2.0.9)

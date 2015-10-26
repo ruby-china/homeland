@@ -26,6 +26,12 @@
         <%= f.password_field :password_confirmation, class: "form-control", placeholder: t("mongoid.attributes.user.password_confirmation") %>
         </div>
         <div class="form-group">
+          <%= rucaptcha_input_tag(class: 'form-control', placeholder: t('common.captcha')) %>
+        </div>
+        <div class="form-group">
+          <%= rucaptcha_image_tag %>
+        </div>
+        <div class="form-group">
           <%= f.submit t('users.submit_new_user'), class: "btn btn-primary", 'data-disable-with' => t("common.submitting") %>
           / <%= link_to t("common.login"), new_session_path(resource_name), class: "btn btn-default" %>
         </div>

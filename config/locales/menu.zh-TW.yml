@@ -66,6 +66,7 @@
     likes_count: 贊
     has_deleted: 已刪除
     auth_with_other_services: "用其它服務登入"
+    captcha: '驗證碼'
   reply:
     edit_reply: "修改回帖"
     delete_reply_success: '回帖刪除成功.'

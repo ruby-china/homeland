@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 describe 'sign up and login', type: :feature do
+  before do
+    allow_any_instance_of(ActionController::Base).to receive(:verify_rucaptcha?).and_return(true)
+  end
+
   it 'let user sign up and login to the site' do
     visit '/'
     click_link '注册'

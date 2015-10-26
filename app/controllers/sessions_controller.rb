@@ -5,6 +5,14 @@ class SessionsController < Devise::SessionsController
   end
 
   def create
+    self.resource = resource_class.new(sign_in_params)
+    self.resource.login = params[resource_name][:login]
+    if !verify_rucaptcha?
+      flash[:alert] = t('rucaptcha.invalid')
+      render 'sessions/new'
+      return
+    end
+
     resource = warden.authenticate!(scope: resource_name, recall: "#{controller_path}#new")
     set_flash_message(:notice, :signed_in) if is_navigational_format?
     sign_in(resource_name, resource)

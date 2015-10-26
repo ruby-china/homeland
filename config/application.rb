@@ -30,6 +30,7 @@ module RubyChina
     config.i18n.fallbacks = true
 
     config.autoload_paths << Rails.root.join('app/api')
+    config.autoload_paths << Rails.root.join('lib')
     config.eager_load_paths += %W( #{config.root}/lib/exception_notifier )
 
     config.mongoid.include_root_in_json = false
@@ -67,10 +68,10 @@ module RubyChina
   end
 end
 
+require 'markdown'
+
 $memory_store = ActiveSupport::Cache::MemoryStore.new
 
 I18n.config.enforce_available_locales = false
 I18n.locale = 'zh-CN'
-
-require 'markdown'
 # GC::Profiler.enable

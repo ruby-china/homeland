@@ -33,7 +33,7 @@ gem 'carrierwave', '~> 0.10.0'
 gem 'carrierwave-upyun', '0.1.8'
 gem 'mini_magick'
 
-gem 'rucaptcha', '0.1.2'
+gem 'rucaptcha', '0.1.3', github: 'huacnlee/rucaptcha'
 
 # Mongoid 辅助插件
 gem 'mongoid', '4.0.2'

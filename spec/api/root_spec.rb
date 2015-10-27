@@ -17,7 +17,7 @@ describe 'API', type: :request do
       it 'should faild with 401' do
         get '/api/v3/hello.json'
         expect(response.status).to eq(401)
-        expect(json['error']).to eq 'Access Token 无效'
+        expect(json['error']).to eq 'The access token is invalid'
       end
     end
 

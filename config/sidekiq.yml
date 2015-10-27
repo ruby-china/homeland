@@ -7,5 +7,5 @@
 :queues:
   - [notifications, 100]
   - [http_request, 50]
-  - [mailers, 5]
+  - [mailer, 5]
   - [default, 3]

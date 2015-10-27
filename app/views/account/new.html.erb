@@ -29,7 +29,9 @@
           <%= rucaptcha_input_tag(class: 'form-control', placeholder: t('common.captcha')) %>
         </div>
         <div class="form-group">
-          <%= rucaptcha_image_tag %>
+          <a href="javascript:void(0);" onclick="$(this).find('img:first').attr('src', $(this).find('img:first').attr('src').split('?')[0] + '?' + (new Date()).getTime())">
+            <%= rucaptcha_image_tag %>
+          </a>
         </div>
         <div class="form-group">
           <%= f.submit t('users.submit_new_user'), class: "btn btn-primary", 'data-disable-with' => t("common.submitting") %>

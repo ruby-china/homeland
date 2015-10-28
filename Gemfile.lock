@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/huacnlee/letter_avatar.git
-  revision: 946432077cf374d1578710a4996215a7440c7266
+  revision: ac96ed53b70f297d23a914b7d11b2573818d92f9
   specs:
     letter_avatar (0.0.7)
 

@@ -67,10 +67,7 @@
   <div class="sidebar col-md-3">
     <div class="panel panel-default" style="text-align:center;">
       <div class="panel-body">
-        <%= user_avatar_tag(@user, :big, link: false) %>
-      </div>
-      <div class="panel-footer">
-        <%= t("users.edit_on_gravatar") %> <a href="http://www.gravatar.com">gravatar.com</a>
+        <%= user_avatar_tag(@user, :large, link: false) %>
       </div>
     </div>
     <div class="panel panel-default">
@@ -88,14 +85,14 @@
         <% end %>
       </ul>
     </div>
-    
+
     <div class="panel panel-default">
       <ul class="list-group">
         <li class="list-group-item"><%= link_to t("users.manage_my_apps"), oauth_applications_path %></li>
       </ul>
     </div>
-    
-    
+
+
     <div class="panel panel-default">
       <div class="panel-heading"><%= t("users.private_key")%></div>
       <div class="panel-body">

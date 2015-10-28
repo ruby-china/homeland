@@ -421,4 +421,11 @@ describe User, type: :model do
       end
     end
   end
+
+  describe '.letter_avatar_url' do
+    let(:user) { create(:user) }
+    it 'should work' do
+      expect(user.letter_avatar_url(240)).to include("//#{Setting.domain}/system/letter_avatars/")
+    end
+  end
 end

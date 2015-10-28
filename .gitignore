@@ -16,6 +16,7 @@ config/redis.yml
 config/mailer_daemon.yml
 config/secrets.yml
 public/uploads/**/*
+public/system/**/*
 public/topics
 public/topics/**/*
 .redcar

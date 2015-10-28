@@ -3,7 +3,7 @@ require 'rails_helper'
 describe TopicsController, type: :controller do
   render_views
   let(:topic) { create :topic, user: user }
-  let(:user) { create :user }
+  let(:user) { create :avatar_user }
   let(:newbie) { create :newbie }
   let(:admin) { create :admin }
 

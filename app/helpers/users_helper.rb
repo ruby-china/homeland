@@ -1,5 +1,7 @@
 require 'digest/md5'
 module UsersHelper
+  include LetterAvatar::AvatarHelper
+
   # 生成用户 login 的链接，user 参数可接受 user 对象或者 字符串的 login
   def user_name_tag(user, options = {})
     return '匿名'.freeze if user.blank?
@@ -39,7 +41,7 @@ module UsersHelper
   end
 
   def user_avatar_tag(user, size = :normal, opts = {})
-    link = opts[:link] || true
+    link = opts[:link].nil? ? true : opts[:link]
 
     width = user_avatar_width_for_size(size)
     img_class = "media-object avatar-#{width}"
@@ -49,11 +51,10 @@ module UsersHelper
       return image_tag("avatar/#{size}.png", class: img_class)
     end
 
-    if user[:avatar].blank?
-      img_src = "#{Setting.gravatar_proxy}/avatar/#{user.email_md5}.png?s=#{width * 2}&d=404"
-      img = image_tag(img_src, class: img_class)
-    else
+    if user.avatar?
       img = image_tag(user.avatar.url(user_avatar_size_name_for_2x(size)), class: img_class)
+    else
+      img = image_tag(user.letter_avatar_url(width * 2), class: img_class)
     end
 
     if link

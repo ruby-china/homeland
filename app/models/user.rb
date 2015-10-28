@@ -475,14 +475,6 @@ class User
     following.delete(user)
   end
 
-  def avatar_url
-    if self.avatar?
-      avatar.url(:large)
-    else
-      "#{Setting.gravatar_proxy}/avatar/#{email_md5}.png?s=120"
-    end
-  end
-
   def favorites_count
     favorite_topic_ids.count
   end
@@ -506,5 +498,11 @@ class User
 
   def level_name
     return I18n.t("common.#{level}_user")
+  end
+
+  def letter_avatar_url(size)
+    path = LetterAvatar.generate(self.login, size).sub('public/','/')
+
+    "//#{Setting.domain}#{path}"
   end
 end

@@ -43,7 +43,7 @@ describe Ability, type: :model do
   end
 
   context 'Normal users' do
-    let(:user) { create :user }
+    let(:user) { create :avatar_user }
     let(:topic) { create :topic, user: user }
     let(:locked_topic) { create :topic, user: user, lock_node: true }
     let(:reply) { create :reply, user: user }
@@ -112,6 +112,13 @@ describe Ability, type: :model do
       it { is_expected.to be_able_to(:update, comment) }
       it { is_expected.to be_able_to(:destroy, comment) }
     end
+  end
+
+  context 'Normal user but no avatar' do
+    let(:user) { create :user }
+    let(:ability) { Ability.new(user) }
+
+    it { is_expected.not_to be_able_to(:create, Topic) }
   end
 
   context 'Newbie users' do

@@ -28,7 +28,6 @@
     users_joined: "users joined"
     hot_users: "Top 100 active users"
     recent_joined: "Most recently joined users"
-    edit_on_gravatar: "Change you avatar you can go:"
     submit_new_user: "Submit Information"
     update_profile: "Update profile"
     update_password: "Update password"

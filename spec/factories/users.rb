@@ -10,6 +10,10 @@ FactoryGirl.define do
     verified false
   end
 
+  factory :avatar_user, parent: :user do
+    avatar File.open(Rails.root.join("spec/factories/foo.png"))
+  end
+
   factory :admin, parent: :user do
     email Setting.admin_emails.first
   end

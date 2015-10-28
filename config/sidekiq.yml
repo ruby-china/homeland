@@ -8,4 +8,5 @@
   - [notifications, 100]
   - [http_request, 50]
   - [mailer, 5]
+  - [mailers, 5]
   - [default, 3]

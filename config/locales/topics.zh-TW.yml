@@ -32,3 +32,4 @@
     has_new_replies: "有新內容"
     more_like_this: "相關帖子"
     node_recent_topics: "節點下其他話題"
+    have_no_avatar: "你還未設置頭像，不能創建新帖子。"

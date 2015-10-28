@@ -28,7 +28,6 @@
     users_joined: "位会员加入了"
     hot_users: "TOP 100 活跃会员"
     recent_joined: "最新加入的会员"
-    edit_on_gravatar: "如需修改头像，请进入"
     submit_new_user: "提交注册信息"
     update_profile: "更新资料"
     update_password: "修改密码"

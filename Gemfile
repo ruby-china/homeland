@@ -33,8 +33,8 @@ gem 'carrierwave', '~> 0.10.0'
 gem 'carrierwave-upyun', '0.1.8'
 gem 'mini_magick'
 
-gem 'rucaptcha', '0.1.4'
-gem 'letter_avatar', github: 'huacnlee/letter_avatar'
+gem 'rucaptcha', '0.2.0'
+gem 'letter_avatar'
 
 # Mongoid 辅助插件
 gem 'mongoid', '4.0.2'

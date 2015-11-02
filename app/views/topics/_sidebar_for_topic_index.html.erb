@@ -21,12 +21,14 @@
     </div>
   <% end %>
 <% else %>
+  <% if current_user %>
   <div class="panel panel-default clearfix">
     <div class="panel-body">
       <p><%= t('topics.have_no_avatar')%></p>
       <%= link_to t('common.upload'), edit_user_registration_path, class: 'btn btn-warning btn-block' %>
     </div>
   </div>
+  <% end %>
 <% end %>
 
 <% if current_user && current_user.newbie? %>

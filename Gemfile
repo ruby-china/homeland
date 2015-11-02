@@ -33,7 +33,7 @@ gem 'carrierwave', '~> 0.10.0'
 gem 'carrierwave-upyun', '0.1.8'
 gem 'mini_magick'
 
-gem 'rucaptcha', '0.2.0'
+gem 'rucaptcha', '0.2.3'
 gem 'letter_avatar'
 
 # Mongoid 辅助插件
@@ -99,7 +99,7 @@ gem 'postmark-rails', '0.4.1'
 gem 'kgio'
 gem 'dalli', '2.7.4'
 
-gem 'unicorn', '4.9.0'
+gem 'unicorn', '5.0.0'
 
 gem 'parallel'
 

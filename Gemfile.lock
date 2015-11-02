@@ -218,7 +218,7 @@ GEM
     json (1.8.3)
     jwt (0.1.13)
       multi_json (>= 1.5)
-    kgio (2.9.3)
+    kgio (2.10.0)
     launchy (2.4.2)
       addressable (~> 2.3)
     letter_avatar (0.0.9)
@@ -390,7 +390,7 @@ GEM
       ruby-progressbar (~> 1.4)
     ruby-prof (0.15.2)
     ruby-progressbar (1.7.1)
-    rucaptcha (0.2.0)
+    rucaptcha (0.2.3)
       posix-spawn (>= 0.3.0)
     rvm-capistrano (1.4.1)
       capistrano (>= 2.0.0)
@@ -433,7 +433,7 @@ GEM
     uglifier (2.7.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    unicorn (4.9.0)
+    unicorn (5.0.0)
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
@@ -519,7 +519,7 @@ DEPENDENCIES
   rspec-rails (~> 3.3)
   rubocop
   ruby-prof
-  rucaptcha (= 0.2.0)
+  rucaptcha (= 0.2.3)
   rvm-capistrano
   sass-rails
   settingslogic (~> 2.0.9)
@@ -531,7 +531,7 @@ DEPENDENCIES
   tunemygc
   turbolinks!
   uglifier
-  unicorn (= 4.9.0)
+  unicorn (= 5.0.0)
   will_paginate (= 3.0.7)
 
 BUNDLED WITH

@@ -390,7 +390,7 @@ GEM
       ruby-progressbar (~> 1.4)
     ruby-prof (0.15.2)
     ruby-progressbar (1.7.1)
-    rucaptcha (0.2.4)
+    rucaptcha (0.2.5)
       posix-spawn (>= 0.3.0)
     rvm-capistrano (1.4.1)
       capistrano (>= 2.0.0)
@@ -519,7 +519,7 @@ DEPENDENCIES
   rspec-rails (~> 3.3)
   rubocop
   ruby-prof
-  rucaptcha (= 0.2.4)
+  rucaptcha (= 0.2.5)
   rvm-capistrano
   sass-rails
   settingslogic (~> 2.0.9)

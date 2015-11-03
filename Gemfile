@@ -37,10 +37,9 @@ gem 'rucaptcha', '0.2.5'
 gem 'letter_avatar'
 
 # Mongoid 辅助插件
-gem 'mongoid', '4.0.2'
-gem 'mongoid-rails'
-gem 'mongoid_auto_increment_id', '0.6.4'
-gem 'mongoid_rails_migrations', '1.0.0'
+gem 'mongoid', '5.0.0'
+gem 'mongoid_auto_increment_id', github: 'huacnlee/mongoid_auto_increment_id'
+gem 'mongoid_rails_migrations'
 
 # 用户系统
 gem 'devise', '~> 3.5.1'
@@ -132,7 +131,6 @@ group :development, :test do
   gem 'jasmine-rails', '~> 0.10.2'
   gem 'derailed'
 
-  gem 'mongoid_colored_logger'
   gem 'colorize'
   gem 'letter_opener'
 

@@ -2,7 +2,7 @@ defaults: &defaults
 
 development:
   <<: *defaults
-  sessions:
+  clients:
     default:
       hosts:
         - 127.0.0.1:27017
@@ -10,7 +10,7 @@ development:
 
 test:
   <<: *defaults
-  sessions:
+  clients:
     default:
       hosts:
         - 127.0.0.1:27017
@@ -19,7 +19,7 @@ test:
 # set these environment variables on your prod server
 production:
   <<: *defaults
-  sessions:
+  clients:
     default:
       hosts:
         - 127.0.0.1:27017

@@ -912,3 +912,9 @@ footer {
 
   }
 }
+
+@media (max-width: 1200px) {
+  .new-topic-button, .feed-button {
+    padding: 5px 12px;
+  }
+}

@@ -174,7 +174,7 @@ a { color: $blue; }
 .btn-default,
 .btn-default:visited { background: #eee; border-color: #dadada;  }
 .btn-default:hover { background: #eaeaea; border-color: #ddd; }
-.btn-default.active { background: $grayDark; border-color: $grayDark;}
+.btn-default.active { background: #f0f0f0; border-color: #d0d0d0;}
 .btn-primary,
 .btn-primary:visited { background: $blue; border-color: $blueDark; color: #FFF; }
 .btn-primary:hover { background: $blueLight; border-color: $blue; }
@@ -282,7 +282,7 @@ form {
   .btn-default.active {
     border: 0px;
     background: #FFF;
-    border-bottom:1px solid #D5DCDB;
+    border-bottom:1px solid #F3F3F3;
     transition: none;
     padding-bottom: 7px;
     border-radius: 0;
@@ -461,7 +461,7 @@ img.emoji { width:20px; height:20px; }
 .deleted { text-decoration: line-through; color: $grayDark; }
 .no-result { color: #aaa; padding-bottom: 20px; text-align: center;}
 
-a.followed {
+.opts a.active {
   .fa {
     @extend .animated;
     @extend .bounceIn;
@@ -629,6 +629,28 @@ a.followed {
         &:hover { color: #333; }
       }
     }
+  }
+}
+
+#topic-sidebar {
+  width: 220px;
+  .buttons {
+    .group {
+      text-align: center; margin-bottom: 20px;
+    }
+    .likes {
+      a { display: block; width: 90px; margin: 0 auto; border-radius: 5px; padding: 10px 0;}
+      a:link, a:hover, a:visited { text-decoration: none; color: #333; }
+      a:hover { background: rgba(0, 0, 0, 0.03); }
+      i.fa { display: block; font-size: 40px;  margin-bottom: 10px; color: #666; }
+      a.active {
+        i.fa { color: #DC3030; }
+      }
+    }
+  }
+  .reply-buttons {
+    text-align:center;
+    .total { margin-bottom: 10px; }
   }
 }
 

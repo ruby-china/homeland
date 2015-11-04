@@ -11,8 +11,8 @@ window.TopicView = Backbone.View.extend
     "click #topic-upload-image": "browseUpload"
     "click .insert-codes a": "appendCodesFromHint"
     "click a.at_floor": "clickAtFloor"
-    "click .topic-detail a.follow": "follow"
-    "click .topic-detail a.bookmark": "bookmark"
+    "click a.follow": "follow"
+    "click a.bookmark": "bookmark"
 
   initialize: (opts) ->
     @parentView = opts.parentView
@@ -189,30 +189,30 @@ window.TopicView = Backbone.View.extend
   bookmark : (e) ->
     link = $(e.currentTarget)
     topic_id = link.data("id")
-    if link.hasClass("followed")
+    if link.hasClass("active")
       $.ajax
         url : "/topics/#{topic_id}/unfavorite"
         type : "DELETE"
-      link.attr("title","收藏").removeClass("followed")
+      link.attr("title","收藏").removeClass("active")
     else
       $.post "/topics/#{topic_id}/favorite"
-      link.attr("title","取消收藏").addClass("followed")
+      link.attr("title","取消收藏").addClass("active")
     false
 
   follow : (e) ->
     link = $(e.currentTarget)
     topic_id = link.data("id")
-    followed = link.data("followed")
+    followed = link.hasClass("active")
     if followed
       $.ajax
         url : "/topics/#{topic_id}/unfollow"
         type : "DELETE"
-      link.data("followed", false).removeClass("followed")
+      link.removeClass("active")
     else
       $.ajax
         url : "/topics/#{topic_id}/follow"
         type : "POST"
-      link.data("followed", true).addClass("followed")
+      link.addClass("active")
     false
 
   submitTextArea : (e) ->

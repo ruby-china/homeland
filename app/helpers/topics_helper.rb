@@ -13,32 +13,35 @@ module TopicsHelper
     end
   end
 
-  def topic_favorite_tag(topic)
+  def topic_favorite_tag(topic, opts = {})
     return '' if current_user.blank?
+    opts[:class] ||= ""
     class_name = ''
     link_title = '收藏'
     if current_user && current_user.favorite_topic_ids.include?(topic.id)
-      class_name = 'followed'
+      class_name = 'active'
       link_title = '取消收藏'
     end
 
     icon = raw(content_tag('i', '', class: 'fa fa-bookmark'))
 
-    link_to(icon, '#', title: link_title, class: "bookmark #{class_name}", 'data-id' => topic.id)
+    link_to(raw("#{icon} 收藏"), '#', title: link_title, class: "#{opts[:class]} bookmark #{class_name}", 'data-id' => topic.id)
   end
 
-  def topic_follow_tag(topic)
+  def topic_follow_tag(topic, opts = {})
     return '' if current_user.blank?
     return '' if topic.blank?
     return '' if owner?(topic)
+    opts[:class] ||= ""
     class_name = 'follow'
     followed = false
     if topic.follower_ids.include?(current_user.id)
-      class_name = 'follow followed'
+      class_name = 'follow active'
       followed = true
     end
+    class_name = "#{opts[:class]} #{class_name}"
     icon = content_tag('i', '', class: 'fa fa-eye')
-    link_to(raw("#{icon} 关注"), '#', 'data-id' => topic.id, 'data-followed' => followed, class: class_name)
+    link_to(raw("#{icon} 关注"), '#', 'data-id' => topic.id, class: class_name)
   end
 
   def topic_title_tag(topic, opts = {})

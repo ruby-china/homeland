@@ -1,6 +1,6 @@
 <% cache([reply,"raw:#{@show_raw}"]) do %>
 <%
-  floor = reply_counter + 1 + ((@page - 1) * Reply.per_page)
+  floor = reply_counter + 1
 %>
 <div class="reply<%= ' popular' if reply.popular? %>" id="reply<%= floor %>">
   <% if reply.deleted? and !@show_raw %>

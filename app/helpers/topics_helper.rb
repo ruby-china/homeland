@@ -44,8 +44,8 @@ module TopicsHelper
   def topic_title_tag(topic, opts = {})
     return t('topics.topic_was_deleted') if topic.blank?
     if opts[:reply]
-      page, index = topic.page_floor_of_reply(opts[:reply])
-      path = topic_path(topic, anchor: "reply#{index}", page: page)
+      index = topic.floor_of_reply(opts[:reply])
+      path = topic_path(topic, anchor: "reply#{index}")
     else
       path = topic_path(topic)
     end

@@ -1,6 +1,5 @@
 # TopicsController 下所有页面的 JS 功能
 window.Topics =
-  replies_per_page: 50
   user_liked_reply_ids: []
 
 window.TopicView = Backbone.View.extend
@@ -77,10 +76,6 @@ window.TopicView = Backbone.View.extend
     reply_body.focus().val(reply_body.val() + new_text)
     return false
 
-  # Given floor, calculate which page this floor is in
-  pageOfFloor: (floor) ->
-    Math.floor((floor - 1) / Topics.replies_per_page) + 1
-
   clickAtFloor: (e) ->
     floor = $(e.target).data('floor')
     @gotoFloor(floor)
@@ -92,13 +87,7 @@ window.TopicView = Backbone.View.extend
   gotoFloor: (floor) ->
     replyEl = $("#reply#{floor}")
 
-    if replyEl.length > 0
-      @highlightReply(replyEl)
-    else
-      page = @pageOfFloor(floor)
-      # TODO: merge existing query string
-      url = window.location.pathname + "?page=#{page}" + "#reply#{floor}"
-      App.gotoUrl url
+    @highlightReply(replyEl)
 
     replyEl
 
@@ -111,7 +100,6 @@ window.TopicView = Backbone.View.extend
 
   # 异步更改用户 like 过的回复的 like 按钮的状态
   checkRepliesLikeStatus : () ->
-    console.log Topics.user_liked_reply_ids
     for id in Topics.user_liked_reply_ids
       el = $("#replies a.likeable[data-id=#{id}]")
       @parentView.likeableAsLiked(el)

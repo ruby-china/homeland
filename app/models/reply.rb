@@ -62,11 +62,6 @@ class Reply
     user.like(topic)
   end
 
-
-  def self.per_page
-    50
-  end
-
   def self.notify_reply_created(reply_id)
     reply = Reply.find_by_id(reply_id)
     return if reply.blank?

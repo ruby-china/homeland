@@ -1,11 +1,4 @@
 GIT
-  remote: git://github.com/huacnlee/mongoid_auto_increment_id.git
-  revision: a37466c3bb27c6af364e487511e5a0aca9493376
-  specs:
-    mongoid_auto_increment_id (0.8.1)
-      mongoid (>= 5.0.0, < 6.0.0)
-
-GIT
   remote: git://github.com/rails/turbolinks.git
   revision: 83d4b3d2c52a681f07900c28adb28bc8da604733
   specs:
@@ -109,23 +102,6 @@ GEM
     carrierwave-upyun (0.1.8)
       carrierwave (>= 0.5.7)
       rest-client (>= 1.6.7)
-    celluloid (0.17.2)
-      celluloid-essentials
-      celluloid-extras
-      celluloid-fsm
-      celluloid-pool
-      celluloid-supervision
-      timers (>= 4.1.1)
-    celluloid-essentials (0.20.5)
-      timers (>= 4.1.1)
-    celluloid-extras (0.20.5)
-      timers (>= 4.1.1)
-    celluloid-fsm (0.20.5)
-      timers (>= 4.1.1)
-    celluloid-pool (0.20.5)
-      timers (>= 4.1.1)
-    celluloid-supervision (0.20.5)
-      timers (>= 4.1.1)
     coderay (1.1.0)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
@@ -137,6 +113,7 @@ GEM
       execjs
     coffee-script-source (1.9.1.1)
     colorize (0.7.5)
+    concurrent-ruby (1.0.0.pre4)
     connection_pool (2.2.0)
     dalli (2.7.4)
     database_cleaner (1.5.1)
@@ -201,7 +178,6 @@ GEM
     heapy (0.1.1)
     highline (1.7.3)
     hiredis (0.6.0)
-    hitimes (1.2.3)
     http_accept_language (2.0.5)
     httpauth (0.2.1)
     i18n (0.7.0)
@@ -253,6 +229,8 @@ GEM
       mongo (~> 2.1)
       origin (~> 2.1)
       tzinfo (>= 0.3.37)
+    mongoid_auto_increment_id (0.8.1)
+      mongoid (>= 5.0.0, < 6.0.0)
     mongoid_rails_migrations (1.0.0)
       activesupport (>= 3.2.0)
       bundler (>= 1.0.0)
@@ -400,8 +378,8 @@ GEM
       sprockets-rails (>= 2.0, < 4.0)
       tilt (~> 1.1)
     settingslogic (2.0.9)
-    sidekiq (3.5.1)
-      celluloid (~> 0.17.2)
+    sidekiq (4.0.0.pre2)
+      concurrent-ruby (= 1.0.0.pre4)
       connection_pool (~> 2.2, >= 2.2.0)
       json (~> 1.0)
       redis (~> 3.2, >= 3.2.1)
@@ -423,8 +401,6 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (1.4.1)
-    timers (4.1.1)
-      hitimes
     tunemygc (1.0.61)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
@@ -490,7 +466,7 @@ DEPENDENCIES
   message_bus
   mini_magick
   mongoid (= 5.0.0)
-  mongoid_auto_increment_id!
+  mongoid_auto_increment_id (= 0.8.1)
   mongoid_rails_migrations
   nokogiri (= 1.6.5)
   omniauth (~> 1.2.2)
@@ -519,7 +495,7 @@ DEPENDENCIES
   rvm-capistrano
   sass-rails
   settingslogic (~> 2.0.9)
-  sidekiq
+  sidekiq (= 4.0.0.pre2)
   simple_form (= 3.1.0)
   sinatra
   social-share-button (= 0.1.5)

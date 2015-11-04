@@ -38,7 +38,7 @@ gem 'letter_avatar'
 
 # Mongoid 辅助插件
 gem 'mongoid', '5.0.0'
-gem 'mongoid_auto_increment_id', github: 'huacnlee/mongoid_auto_increment_id'
+gem 'mongoid_auto_increment_id', '0.8.1'
 gem 'mongoid_rails_migrations'
 
 # 用户系统
@@ -73,7 +73,7 @@ gem 'nokogiri', '1.6.5'
 gem 'settingslogic', '~> 2.0.9'
 
 # 队列
-gem 'sidekiq'
+gem 'sidekiq', '4.0.0.pre2'
 # Sidekiq Web
 gem 'sinatra', require: nil
 

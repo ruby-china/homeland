@@ -8,11 +8,13 @@ window.TopicView = Backbone.View.extend
 
   events:
     "click #replies .reply .btn-reply": "reply"
+    "click .btn-focus-reply": "reply"
     "click #topic-upload-image": "browseUpload"
     "click .insert-codes a": "appendCodesFromHint"
     "click a.at_floor": "clickAtFloor"
     "click a.follow": "follow"
     "click a.bookmark": "bookmark"
+    "click .btn-move-page": "scrollPage"
 
   initialize: (opts) ->
     @parentView = opts.parentView
@@ -68,7 +70,10 @@ window.TopicView = Backbone.View.extend
     floor = _el.data("floor")
     login = _el.data("login")
     reply_body = $("#new_reply textarea")
-    new_text = "##{floor}楼 @#{login} "
+    if floor
+      new_text = "##{floor}楼 @#{login} "
+    else
+      new_text = ''
     if reply_body.val().trim().length == 0
       new_text += ''
     else
@@ -249,6 +254,16 @@ window.TopicView = Backbone.View.extend
     txtBox.caret('pos',caret_pos + src_merged.length - 5)
     txtBox.focus()
     txtBox.trigger('click')
+    return false
+
+  scrollPage: (e) ->
+    target = $(e.currentTarget)
+    moveType = target.data('type')
+    opts =
+      scrollTop: 0
+    if moveType == 'bottom'
+      opts.scrollTop = $('body').height()
+    $("body, html").animate(opts, 300)
     return false
 
   initComponents : ->

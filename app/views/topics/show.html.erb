@@ -98,55 +98,8 @@
   </div>
 
 <% if !mobile? %>
-  <div class="sidebar col-md-3">
-    <div id="topic-sidebar" data-spy="affix" data-offset-top="20" data-offset-bottom="50">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <div class="buttons">
-            <div class="group likes">
-              <%= likeable_tag(@topic) %>
-            </div>
-            <div class="group">
-              <div class="btn-group" role="group">
-                <%= topic_follow_tag(@topic, class: 'btn btn-default') %>
-                <%= topic_favorite_tag(@topic, class: 'btn btn-default') %>
-              </div>
-            </div>
-          </div>
-
-          <hr />
-          <div class="reply-buttons">
-            <div class="total">
-              共收到 <b><%= @topic.replies_count %></b> 条回复
-            </div>
-            <a href="#reply" class="btn btn-success btn-block">参与回复</a>
-          </div>
-          <hr />
-          <div class="opts">
-            <% if admin? %>
-              <% if !@topic.suggested_at.blank? %>
-              <%= link_to raw("<i class='fa fa-thumb-tack'></i> 取消"), unsuggest_cpanel_topic_path(@topic), 'data-confirm' => '确定要取消置顶么?', method: :post %>
-              <% else %>
-              <%= link_to raw("<i class='fa fa-thumb-tack'></i> 置顶"), suggest_cpanel_topic_path(@topic), 'data-confirm' => '确定要置顶么?', method: :post %>
-              <% end %>
-              <% if !@topic.excellent? %>
-              <%= link_to raw("<i class='fa fa-diamond'></i> 加精"), suggest_topic_path(@topic.id), title: "设为精华帖" , method: "patch", data: { confirm: "确定要设置成精华帖么？" } %>
-              <% end %>
-              <% if @topic.node_id != Node.no_point_id %>
-              <%= link_to raw("<i class='fa fa-ban'></i> 屏蔽"), ban_topic_path(@topic), method: 'post', title: "屏蔽此贴，移动到 NoPoint 节点" %>
-              <% end %>
-            <% end %>
-
-            <% if owner?(@topic) or admin? %>
-            <%= link_to "", edit_topic_path(@topic), class: "fa fa-pencil", title: "修改本帖" %>
-              <% if can?(:destroy, @topic) %>
-              <%= link_to "", topic_path(@topic.id), method: :delete, 'data-confirm' => t("common.confirm_delete"), class: "fa fa-trash", title: "删除本帖" %>
-              <% end %>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="sidebar hidden-mobile col-md-3">
+    <%= render 'topic_sidebar' %>
   </div>
 <% end %>
 </div>

@@ -114,17 +114,12 @@
             </div>
           </div>
 
-          <% if @topic.excellent? %>
-          <div class="excellent">
-            <%= topic_excellent_tag(@topic) %>
-          </div>
-          <% end %>
           <hr />
           <div class="reply-buttons">
             <div class="total">
               共收到 <b><%= @topic.replies_count %></b> 条回复
             </div>
-            <a href="#reply" class="btn btn-success btn-block">回复</a>
+            <a href="#reply" class="btn btn-success btn-block">参与回复</a>
           </div>
           <hr />
           <div class="opts">

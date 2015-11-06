@@ -187,8 +187,10 @@ window.TopicView = Backbone.View.extend
         $(window).unbind("beforeunload")
 
   bookmark : (e) ->
-    link = $(e.currentTarget)
-    topic_id = link.data("id")
+    target = $(e.currentTarget)
+    topic_id = target.data("id")
+    link = $(".bookmark[data-id='#{topic_id}']")
+
     if link.hasClass("active")
       $.ajax
         url : "/topics/#{topic_id}/unfavorite"
@@ -200,10 +202,11 @@ window.TopicView = Backbone.View.extend
     false
 
   follow : (e) ->
-    link = $(e.currentTarget)
-    topic_id = link.data("id")
-    followed = link.hasClass("active")
-    if followed
+    target = $(e.currentTarget)
+    topic_id = target.data("id")
+    link = $(".follow[data-id='#{topic_id}']")
+
+    if link.hasClass("active")
       $.ajax
         url : "/topics/#{topic_id}/unfollow"
         type : "DELETE"

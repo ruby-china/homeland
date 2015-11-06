@@ -82,10 +82,13 @@ AppView = Backbone.View.extend
       location.href = "/account/sign_in"
       return false
 
-    $el = $(e.currentTarget)
-    likeable_type = $el.data("type")
-    likeable_id = $el.data("id")
-    likes_count = parseInt($el.data("count"))
+    $target = $(e.currentTarget)
+    likeable_type = $target.data("type")
+    likeable_id = $target.data("id")
+    likes_count = parseInt($target.data("count"))
+
+    $el = $(".likeable[data-type='#{likeable_type}'][data-id='#{likeable_id}']")
+
     if $el.data("state") != "active"
       $.ajax
         url : "/likes"

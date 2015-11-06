@@ -8,11 +8,6 @@ Rails.application.load_tasks
 
 task default: 'bundle:audit'
 
-if Rails.env.development?
-  require 'derailed_benchmarks'
-  require 'derailed_benchmarks/tasks'
-end
-
 namespace :test do
   desc 'preparing config files...'
   task :prepare do
@@ -21,4 +16,3 @@ namespace :test do
     end
   end
 end
-

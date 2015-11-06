@@ -116,6 +116,10 @@ gem 'oneapm_rpm'
 
 gem 'rest-client', '~> 1.8.0'
 
+group :development do
+  gem 'derailed'
+end
+
 group :development, :test do
   gem 'capistrano', '2.9.0', require: false
   gem 'capistrano-unicorn'
@@ -130,7 +134,6 @@ group :development, :test do
   gem 'api_taster', '0.6.0'
 
   gem 'jasmine-rails', '~> 0.10.2'
-  gem 'derailed'
 
   gem 'colorize'
   gem 'letter_opener'

@@ -11,7 +11,7 @@ gem 'coffee-rails'
 gem 'uglifier'
 gem 'jquery-rails', '~> 4.0.4'
 gem 'jbuilder'
-gem 'turbolinks', github: 'rails/turbolinks'
+gem 'turbolinks', git: 'https://github.com/rails/turbolinks.git'
 gem 'jquery-turbolinks'
 
 gem 'actionpack-action_caching', '1.1.1'
@@ -113,6 +113,8 @@ gem 'rack-mini-profiler', require: false
 # gem 'newrelic-grape'
 
 gem 'oneapm_rpm'
+
+gem 'rest-client', '~> 1.8.0'
 
 group :development, :test do
   gem 'capistrano', '2.9.0', require: false

@@ -11,7 +11,7 @@ gem 'coffee-rails'
 gem 'uglifier'
 gem 'jquery-rails', '~> 4.0.4'
 gem 'jbuilder'
-gem 'turbolinks', github: 'rails/turbolinks'
+gem 'turbolinks', git: 'https://github.com/rails/turbolinks.git'
 gem 'jquery-turbolinks'
 
 gem 'actionpack-action_caching', '1.1.1'
@@ -114,6 +114,12 @@ gem 'rack-mini-profiler', require: false
 
 gem 'oneapm_rpm'
 
+gem 'rest-client', '~> 1.8.0'
+
+group :development do
+  gem 'derailed'
+end
+
 group :development, :test do
   gem 'capistrano', '2.9.0', require: false
   gem 'capistrano-unicorn'
@@ -128,7 +134,6 @@ group :development, :test do
   gem 'api_taster', '0.6.0'
 
   gem 'jasmine-rails', '~> 0.10.2'
-  gem 'derailed'
 
   gem 'colorize'
   gem 'letter_opener'
@@ -140,4 +145,6 @@ group :development, :test do
   gem 'binding_of_caller'
 
   gem 'tunemygc'
+
+  gem 'bundler-audit', require: false
 end

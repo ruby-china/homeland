@@ -24,8 +24,11 @@ module TopicsHelper
     end
 
     icon = raw(content_tag('i', '', class: 'fa fa-bookmark'))
+    if opts[:class].present?
+      class_name += ' ' + opts[:class]
+    end
 
-    link_to(raw("#{icon} 收藏"), '#', title: link_title, class: "#{opts[:class]} bookmark #{class_name}", 'data-id' => topic.id)
+    link_to(raw("#{icon} 收藏"), '#', title: link_title, class: "bookmark #{class_name}", 'data-id' => topic.id)
   end
 
   def topic_follow_tag(topic, opts = {})
@@ -39,7 +42,9 @@ module TopicsHelper
       class_name = 'follow active'
       followed = true
     end
-    class_name = "#{opts[:class]} #{class_name}"
+    if opts[:class].present?
+      class_name += ' ' + opts[:class]
+    end
     icon = content_tag('i', '', class: 'fa fa-eye')
     link_to(raw("#{icon} 关注"), '#', 'data-id' => topic.id, class: class_name)
   end

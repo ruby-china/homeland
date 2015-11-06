@@ -1,4 +1,3 @@
-# coding: utf-8
 if ENV['USE_OFFICIAL_GEM_SOURCE']
   source 'https://rubygems.org'
 else
@@ -33,7 +32,7 @@ gem 'carrierwave', '~> 0.10.0'
 gem 'carrierwave-upyun', '0.1.8'
 gem 'mini_magick'
 
-gem 'rucaptcha', '0.2.5'
+gem 'rucaptcha'
 gem 'letter_avatar'
 
 # Mongoid 辅助插件

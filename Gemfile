@@ -142,4 +142,6 @@ group :development, :test do
   gem 'binding_of_caller'
 
   gem 'tunemygc'
+
+  gem 'bundler-audit', require: false
 end

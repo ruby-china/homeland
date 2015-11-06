@@ -87,7 +87,7 @@ $ rails s
 ## Testing
 
 ```bash
-bundle exec rspec spec
+bundle exec rake
 ```
 
 ## Contributors

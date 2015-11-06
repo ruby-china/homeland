@@ -1,6 +1,5 @@
 <% content_for :scripts do %>
   <script type="text/javascript">
-    Topics.replies_per_page = <%= @per_page %>;
     <% if current_user && !@user_liked_reply_ids.blank? %>
     Topics.user_liked_reply_ids = [<%= @user_liked_reply_ids.join(",") %>];
     <% end %>
@@ -56,12 +55,9 @@
         共收到 <b><%= @topic.replies_count %></b> 条回复
       </div>
       <div class="items panel-body">
-        <%= cache([@topic,params[:page],"raw:#{@show_raw}"]) do %>
+        <%= cache([@topic, "raw:#{@show_raw}"]) do %>
           <%= render partial: "replies/reply", collection: @replies %>
         <% end %>
-      </div>
-      <div class="panel-footer clearfix">
-        <%= will_paginate @replies, params: { anchor: 'replies' } %>
       </div>
     </div>
   <% end %>
@@ -79,7 +75,8 @@
             <%= f.text_area :body, class: "topic-editor form-control", rows: "4", tabindex: "1" %>
           </div>
           <div class="submit-buttons">
-            <button type="submit" id="reply-button" class="btn btn-primary" tabindex="2"><%= t("topics.submit_reply")%></button> <span class="help-inline" title="或者 Ctrl + Enter"><kbd>Command</kbd> + <kbd>Enter</kbd></span>
+            <button type="submit" id="reply-button" class="btn btn-primary" tabindex="2"><%= t("topics.submit_reply")%></button>
+            <span class="help-inline" style="padding-left: 5px;" title="或者 Ctrl + Enter"><kbd>Command</kbd> + <kbd>Enter</kbd></span>
 
             <div class="pull-right"><a href="/markdown" target="_blank">排版说明</a></div>
           </div>
@@ -101,9 +98,8 @@
   </div>
 
 <% if !mobile? %>
-  <div class="sidebar col-md-3">
-    <%= render "sidebar_box_tips" %>
-    <%= render "sidebar_box_node_recent_topics", topic: @topic %>
+  <div class="sidebar hidden-mobile col-md-3">
+    <%= render 'topic_sidebar' %>
   </div>
 <% end %>
 </div>

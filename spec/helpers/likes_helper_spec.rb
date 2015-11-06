@@ -13,9 +13,9 @@ describe LikesHelper, type: :helper do
     it 'should result when logined user liked' do
       allow(helper).to receive(:current_user).and_return(user)
       allow(topic).to receive(:liked_by_user?).and_return(true)
-      expect(helper.likeable_tag(topic)).to eq(%(<a title=\"取消赞\" data-count=\"0\" data-state=\"followed\" data-type=\"Topic\" data-id=\"1\" class=\"likeable followed\" href=\"#\"><i class=\"fa fa-thumbs-up\"></i> <span></span></a>))
+      expect(helper.likeable_tag(topic)).to eq(%(<a title=\"取消赞\" data-count=\"0\" data-state=\"active\" data-type=\"Topic\" data-id=\"1\" class=\"likeable active\" href=\"#\"><i class=\"fa fa-thumbs-up\"></i> <span></span></a>))
       allow(topic).to receive(:likes_count).and_return(3)
-      expect(helper.likeable_tag(topic)).to eq(%(<a title=\"取消赞\" data-count=\"3\" data-state=\"followed\" data-type=\"Topic\" data-id=\"1\" class=\"likeable followed\" href=\"#\"><i class=\"fa fa-thumbs-up\"></i> <span>3 个赞</span></a>))
+      expect(helper.likeable_tag(topic)).to eq(%(<a title=\"取消赞\" data-count=\"3\" data-state=\"active\" data-type=\"Topic\" data-id=\"1\" class=\"likeable active\" href=\"#\"><i class=\"fa fa-thumbs-up\"></i> <span>3 个赞</span></a>))
     end
 
     it 'should result when unlogin user' do

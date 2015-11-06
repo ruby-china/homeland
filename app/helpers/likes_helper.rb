@@ -14,7 +14,7 @@ module LikesHelper
 
     if opts[:cache].blank? && likeable.liked_by_user?(current_user)
       title = '取消赞'
-      state = 'followed'
+      state = 'active'
       icon = content_tag('i', '', class: 'fa fa-thumbs-up')
     else
       title = '赞'

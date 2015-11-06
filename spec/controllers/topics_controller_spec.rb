@@ -105,20 +105,6 @@ describe TopicsController, type: :controller do
         get :show, id: topic.id
       end.to change(user.notifications.unread, :count).by(-2)
     end
-
-    context 'when the topic has 11 replies, and 10 are shown per page' do
-      let!(:user) { build_stubbed(:user) }
-      let!(:topic) { create(:topic) }
-      let!(:reply) { create_list(:reply, 11, topic: topic) }
-
-      before { sign_in user }
-
-      it 'should show the last page by default' do
-        allow(Reply).to receive(:per_page).and_return(10)
-        get :show, id: topic
-        expect(assigns[:page]).to eq(2)
-      end
-    end
   end
 
   describe '#suggest' do

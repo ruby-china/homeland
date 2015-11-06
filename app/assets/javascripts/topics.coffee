@@ -1,6 +1,5 @@
 # TopicsController 下所有页面的 JS 功能
 window.Topics =
-  replies_per_page: 50
   user_liked_reply_ids: []
 
 window.TopicView = Backbone.View.extend
@@ -9,11 +8,13 @@ window.TopicView = Backbone.View.extend
 
   events:
     "click #replies .reply .btn-reply": "reply"
+    "click .btn-focus-reply": "reply"
     "click #topic-upload-image": "browseUpload"
     "click .insert-codes a": "appendCodesFromHint"
     "click a.at_floor": "clickAtFloor"
-    "click .topic-detail a.follow": "follow"
-    "click .topic-detail a.bookmark": "bookmark"
+    "click a.follow": "follow"
+    "click a.bookmark": "bookmark"
+    "click .btn-move-page": "scrollPage"
 
   initialize: (opts) ->
     @parentView = opts.parentView
@@ -69,17 +70,16 @@ window.TopicView = Backbone.View.extend
     floor = _el.data("floor")
     login = _el.data("login")
     reply_body = $("#new_reply textarea")
-    new_text = "##{floor}楼 @#{login} "
+    if floor
+      new_text = "##{floor}楼 @#{login} "
+    else
+      new_text = ''
     if reply_body.val().trim().length == 0
       new_text += ''
     else
       new_text = "\n#{new_text}"
     reply_body.focus().val(reply_body.val() + new_text)
     return false
-
-  # Given floor, calculate which page this floor is in
-  pageOfFloor: (floor) ->
-    Math.floor((floor - 1) / Topics.replies_per_page) + 1
 
   clickAtFloor: (e) ->
     floor = $(e.target).data('floor')
@@ -92,13 +92,7 @@ window.TopicView = Backbone.View.extend
   gotoFloor: (floor) ->
     replyEl = $("#reply#{floor}")
 
-    if replyEl.length > 0
-      @highlightReply(replyEl)
-    else
-      page = @pageOfFloor(floor)
-      # TODO: merge existing query string
-      url = window.location.pathname + "?page=#{page}" + "#reply#{floor}"
-      App.gotoUrl url
+    @highlightReply(replyEl)
 
     replyEl
 
@@ -111,7 +105,6 @@ window.TopicView = Backbone.View.extend
 
   # 异步更改用户 like 过的回复的 like 按钮的状态
   checkRepliesLikeStatus : () ->
-    console.log Topics.user_liked_reply_ids
     for id in Topics.user_liked_reply_ids
       el = $("#replies a.likeable[data-id=#{id}]")
       @parentView.likeableAsLiked(el)
@@ -199,32 +192,35 @@ window.TopicView = Backbone.View.extend
         $(window).unbind("beforeunload")
 
   bookmark : (e) ->
-    link = $(e.currentTarget)
-    topic_id = link.data("id")
-    if link.hasClass("followed")
+    target = $(e.currentTarget)
+    topic_id = target.data("id")
+    link = $(".bookmark[data-id='#{topic_id}']")
+
+    if link.hasClass("active")
       $.ajax
         url : "/topics/#{topic_id}/unfavorite"
         type : "DELETE"
-      link.attr("title","收藏").removeClass("followed")
+      link.attr("title","收藏").removeClass("active")
     else
       $.post "/topics/#{topic_id}/favorite"
-      link.attr("title","取消收藏").addClass("followed")
+      link.attr("title","取消收藏").addClass("active")
     false
 
   follow : (e) ->
-    link = $(e.currentTarget)
-    topic_id = link.data("id")
-    followed = link.data("followed")
-    if followed
+    target = $(e.currentTarget)
+    topic_id = target.data("id")
+    link = $(".follow[data-id='#{topic_id}']")
+
+    if link.hasClass("active")
       $.ajax
         url : "/topics/#{topic_id}/unfollow"
         type : "DELETE"
-      link.data("followed", false).removeClass("followed")
+      link.removeClass("active")
     else
       $.ajax
         url : "/topics/#{topic_id}/follow"
         type : "POST"
-      link.data("followed", true).addClass("followed")
+      link.addClass("active")
     false
 
   submitTextArea : (e) ->
@@ -258,6 +254,16 @@ window.TopicView = Backbone.View.extend
     txtBox.caret('pos',caret_pos + src_merged.length - 5)
     txtBox.focus()
     txtBox.trigger('click')
+    return false
+
+  scrollPage: (e) ->
+    target = $(e.currentTarget)
+    moveType = target.data('type')
+    opts =
+      scrollTop: 0
+    if moveType == 'bottom'
+      opts.scrollTop = $('body').height()
+    $("body, html").animate(opts, 300)
     return false
 
   initComponents : ->

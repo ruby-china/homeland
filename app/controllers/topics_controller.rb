@@ -83,14 +83,8 @@ class TopicsController < ApplicationController
 
     @show_raw = params[:raw] == '1'
 
-    @per_page = Reply.per_page
-    # 默认最后一页
-    params[:page] = @topic.last_page_with_per_page(@per_page) if params[:page].blank?
-    @page = params[:page].to_i > 0 ? params[:page].to_i : 1
-
     @threads << Thread.new do
-      @replies = @topic.replies.unscoped.without_body.asc(:_id)
-      @replies = @replies.paginate(page: @page, per_page: @per_page)
+      @replies = @topic.replies.unscoped.without_body.asc(:_id).all
 
       check_current_user_liked_replies
     end
@@ -101,8 +95,6 @@ class TopicsController < ApplicationController
     @threads.each(&:join)
 
     set_seo_meta "#{@topic.title} &raquo; #{t('menu.topics')}"
-
-    fresh_when(etag: [@topic, @has_followed, @has_favorited, @replies, @node, @show_raw])
   end
 
   def check_current_user_liked_replies

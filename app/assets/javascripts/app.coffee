@@ -82,11 +82,14 @@ AppView = Backbone.View.extend
       location.href = "/account/sign_in"
       return false
 
-    $el = $(e.currentTarget)
-    likeable_type = $el.data("type")
-    likeable_id = $el.data("id")
-    likes_count = parseInt($el.data("count"))
-    if $el.data("state") != "followed"
+    $target = $(e.currentTarget)
+    likeable_type = $target.data("type")
+    likeable_id = $target.data("id")
+    likes_count = parseInt($target.data("count"))
+
+    $el = $(".likeable[data-type='#{likeable_type}'][data-id='#{likeable_id}']")
+
+    if $el.data("state") != "active"
       $.ajax
         url : "/likes"
         type : "POST"
@@ -105,7 +108,7 @@ AppView = Backbone.View.extend
           type : likeable_type
       if likes_count > 0
         likes_count -= 1
-      $el.data("state","").data('count', likes_count).attr("title", "").removeClass("followed")
+      $el.data("state","").data('count', likes_count).attr("title", "").removeClass("active")
       if likes_count == 0
         $('span',$el).text("")
       else
@@ -115,7 +118,7 @@ AppView = Backbone.View.extend
 
   likeableAsLiked : (el) ->
     likes_count = el.data("count")
-    el.data("state","followed").attr("title", "取消赞").addClass("followed")
+    el.data("state","active").attr("title", "取消赞").addClass("active")
     $('span',el).text("#{likes_count} 个赞")
     $("i.fa",el).attr("class","fa fa-thumbs-up")
 
@@ -211,7 +214,7 @@ AppView = Backbone.View.extend
     currentSrc = img.attr('src')
     img.attr('src', currentSrc.split('?')[0] + '?' + (new Date()).getTime())
     return false
-    
+
 window.App =
   locale: 'zh-CN'
   notifier : null

@@ -166,11 +166,6 @@ class Topic
     delete_notifiaction_mentions
   end
 
-  def last_page_with_per_page(per_page)
-    page = (replies_count.to_f / per_page).ceil
-    page > 1 ? page : nil
-  end
-
   # 所有的回复编号
   def reply_ids
     Rails.cache.fetch([self, 'reply_ids']) do
@@ -186,9 +181,9 @@ class Topic
     update_attributes(lock_node: true, node_id: Node.no_point_id, admin_editing: true)
   end
 
-  def page_floor_of_reply(reply)
+  def floor_of_reply(reply)
     reply_index = reply_ids.index(reply.id)
-    [reply_index / Reply.per_page + 1, reply_index + 1]
+    reply_index + 1
   end
 
   def self.notify_topic_created(topic_id)

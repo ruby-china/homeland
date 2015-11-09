@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/ksz2k/letter_avatar.git
+  remote: https://github.com/ksz2k/letter_avatar.git
   revision: 5ee9619c1d675d4e789c12600b322aa0f2b4c011
   branch: google-inbox-avatar-style
   specs:

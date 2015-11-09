@@ -6,8 +6,8 @@ GIT
     letter_avatar (0.1.0)
 
 GIT
-  remote: git://github.com/rails/turbolinks.git
-  revision: 83d4b3d2c52a681f07900c28adb28bc8da604733
+  remote: https://github.com/rails/turbolinks.git
+  revision: 90d4132be6275edd997beeb66bf3876b0207291d
   specs:
     turbolinks (3.0.0)
       coffee-rails
@@ -83,6 +83,9 @@ GEM
       sass (~> 3.2)
     bson (3.2.6)
     builder (3.2.2)
+    bundler-audit (0.4.0)
+      bundler (~> 1.2)
+      thor (~> 0.18)
     cancancan (1.8.4)
     capistrano (2.9.0)
       highline
@@ -149,6 +152,8 @@ GEM
     devise-encryptable (0.1.2)
       devise (>= 2.1.0)
     diff-lcs (1.2.5)
+    domain_name (0.5.25)
+      unf (>= 0.0.5, < 1.0.0)
     doorkeeper (2.2.1)
       railties (>= 3.2)
     doorkeeper-i18n (2.0.0)
@@ -185,6 +190,8 @@ GEM
     heapy (0.1.1)
     highline (1.7.3)
     hiredis (0.6.0)
+    http-cookie (1.0.2)
+      domain_name (~> 0.5)
     http_accept_language (2.0.5)
     httpauth (0.2.1)
     i18n (0.7.0)
@@ -252,7 +259,7 @@ GEM
     net-ssh (2.9.2)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
-    netrc (0.7.7)
+    netrc (0.11.0)
     nokogiri (1.6.5)
       mini_portile (~> 0.6.0)
     oauth2 (0.8.1)
@@ -343,7 +350,8 @@ GEM
     remotipart (1.2.1)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
-    rest-client (1.7.2)
+    rest-client (1.8.0)
+      http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
     rouge (1.8.0)
@@ -413,6 +421,9 @@ GEM
     uglifier (2.7.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.7.1)
     unicorn (5.0.0)
       kgio (~> 2.6)
       rack
@@ -438,6 +449,7 @@ DEPENDENCIES
   auto-space (= 0.0.4)
   better_errors
   binding_of_caller
+  bundler-audit
   cancancan (~> 1.8.4)
   capistrano (= 2.9.0)
   capistrano-sidekiq
@@ -493,6 +505,7 @@ DEPENDENCIES
   redis (~> 3.2.1)
   redis-namespace (~> 1.5.1)
   redis-objects (= 1.1.0)
+  rest-client (~> 1.8.0)
   rouge (~> 1.8.0)
   rspec-rails (~> 3.3)
   rubocop

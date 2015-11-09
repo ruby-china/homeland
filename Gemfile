@@ -33,7 +33,7 @@ gem 'carrierwave-upyun', '0.1.8'
 gem 'mini_magick'
 
 gem 'rucaptcha'
-gem 'letter_avatar'
+gem 'letter_avatar', github: 'ksz2k/letter_avatar', branch: 'google-inbox-avatar-style'
 
 # Mongoid 辅助插件
 gem 'mongoid', '5.0.0'

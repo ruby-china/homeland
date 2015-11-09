@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/ksz2k/letter_avatar.git
+  revision: 5ee9619c1d675d4e789c12600b322aa0f2b4c011
+  branch: google-inbox-avatar-style
+  specs:
+    letter_avatar (0.1.0)
+
+GIT
   remote: git://github.com/rails/turbolinks.git
   revision: 83d4b3d2c52a681f07900c28adb28bc8da604733
   specs:
@@ -204,7 +211,6 @@ GEM
     kgio (2.10.0)
     launchy (2.4.2)
       addressable (~> 2.3)
-    letter_avatar (0.0.9)
     letter_opener (1.2.0)
       launchy (~> 2.2)
     loofah (2.0.3)
@@ -460,7 +466,7 @@ DEPENDENCIES
   jquery-rails (~> 4.0.4)
   jquery-turbolinks
   kgio
-  letter_avatar
+  letter_avatar!
   letter_opener
   md_emoji (= 1.0.2)
   message_bus

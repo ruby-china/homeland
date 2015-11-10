@@ -10,7 +10,7 @@
 #= require jquery.timeago.settings
 #= require jquery.hotkeys
 #= require jquery.autogrow-textarea
-#= require jquery.html5-fileupload
+#= require dropzone
 #= require jquery.fluidbox.min
 #= require social-share-button
 #= require jquery.atwho

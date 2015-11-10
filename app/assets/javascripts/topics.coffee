@@ -20,31 +20,71 @@ window.TopicView = Backbone.View.extend
     @parentView = opts.parentView
 
     @initComponents()
-    @initUploader()
+    @initDropzone()
     @initContentImageZoom()
     @initCloseWarning()
     @checkRepliesLikeStatus()
 
-  initUploader: ->
-    self = @
-    opts =
-      url : "/photos"
-      type : "POST"
-      beforeSend : () ->
-        $("#topic-upload-image").hide()
-        $("#topic-upload-image").before("<span class='loading'><i class='fa fa-circle-o-notch fa-spin'></i></span>")
-      success : (result, status, xhr) ->
-        self.restoreUploaderStatus()
-        self.appendImageFromUpload([result])
-      error : (result, status, errorThrown) ->
-        self.restoreUploaderStatus()
-        alert(errorThrown)
 
-    $("#topic-upload-images").fileUpload opts
+  initDropzone: ->
+    self = @
+    editor = $("textarea.topic-editor")
+    editor.wrap "<div class=\"topic-editor-dropzone\"></div>"
+
+    editor_dropzone = $('.topic-editor-dropzone')
+
+    dropzone = editor_dropzone.dropzone(
+      url: "/photos"
+      dictDefaultMessage: ""
+      clickable: true
+      paramName: "file"
+      maxFilesize: 20
+      uploadMultiple: false
+      headers:
+        "X-CSRF-Token": $("meta[name=\"csrf-token\"]").attr("content")
+      previewContainer: false
+
+      processing: ->
+        $(".div-dropzone-alert").alert "close"
+        $("#topic-upload-image").hide()
+        if $("#topic-upload-image").parent().find("span.loading").length == 0
+          $("#topic-upload-image").before("<span class='loading'><i class='fa fa-circle-o-notch fa-spin'></i></span>")
+
+      dragover: ->
+        editor.addClass "div-dropzone-focus"
+        return
+
+      dragleave: ->
+        editor.removeClass "div-dropzone-focus"
+        return
+
+      drop: ->
+        editor.removeClass "div-dropzone-focus"
+        editor.focus()
+        return
+
+      success: (header, res) ->
+        self.appendImageFromUpload([res.url])
+        return
+
+      error: (temp, msg) ->
+        App.alert(msg)
+        return
+
+      totaluploadprogress: (num) ->
+        return
+
+      sending: ->
+        return
+
+      queuecomplete: ->
+        self.restoreUploaderStatus()
+        return
+    )
 
   browseUpload: (e) ->
     $(".topic-editor").focus()
-    $("#topic-upload-images").click()
+    $('.topic-editor-dropzone').click()
     return false
 
   restoreUploaderStatus: ->

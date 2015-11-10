@@ -82,6 +82,17 @@ window.TopicView = Backbone.View.extend
         return
     )
 
+    $("textarea").pastableTextarea()
+    .on 'pasteImage', (ev, data)->
+      pasteOpts = 
+        data: new FormData()
+        processData: false
+        contentType: false
+      pasteOpts.data.append 'Filedata', data.blob, "pasted_image.#{data.blob.type.replace /^.+\//g, ''}"
+      for hiddenField in $('#topic-upload-images').closest('form').find 'input[type="hidden"]'
+        pasteOpts.data.append hiddenField.name, hiddenField.value
+      pasteOpts[k] = v for k, v of opts 
+      $.ajax pasteOpts
   browseUpload: (e) ->
     $(".topic-editor").focus()
     $('.topic-editor-dropzone').click()

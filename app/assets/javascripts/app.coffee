@@ -14,6 +14,7 @@
 #= require jquery.fluidbox.min
 #= require social-share-button
 #= require jquery.atwho
+#= require paste
 #= require emoji_list
 #= require notifier
 #= require message-bus

@@ -12,7 +12,9 @@
   <% end %>
 
   <div class="panel-body markdown">
-    <%= raw @page.body_html %>
+    <article>
+      <%= raw @page.body_html %>
+    </article>
 
     <%= social_share_button_tag h("#{@page.title} via: @#{Setting.twitter_id} ") %>
   </div>

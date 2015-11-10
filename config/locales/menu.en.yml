@@ -45,6 +45,7 @@
     normal_user: "Member"
     newbie_user: "Newbie"
     blocked_user: "Blocked User"
+    hr_user: "HR"
     title: "Title"
     reply_count: "Reply count"
     last_reply_time: "Last replied at"

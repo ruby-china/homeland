@@ -32,6 +32,8 @@ window.TopicView = Backbone.View.extend
     editor.wrap "<div class=\"topic-editor-dropzone\"></div>"
 
     editor_dropzone = $('.topic-editor-dropzone')
+    editor_dropzone.on 'paste', (event) =>
+      self.handlePaste(event)
 
     dropzone = editor_dropzone.dropzone(
       url: "/photos"
@@ -43,49 +45,83 @@ window.TopicView = Backbone.View.extend
       headers:
         "X-CSRF-Token": $("meta[name=\"csrf-token\"]").attr("content")
       previewContainer: false
-
       processing: ->
         $(".div-dropzone-alert").alert "close"
-        $("#topic-upload-image").hide()
-        if $("#topic-upload-image").parent().find("span.loading").length == 0
-          $("#topic-upload-image").before("<span class='loading'><i class='fa fa-circle-o-notch fa-spin'></i></span>")
-
+        self.showUploading()
       dragover: ->
         editor.addClass "div-dropzone-focus"
         return
-
       dragleave: ->
         editor.removeClass "div-dropzone-focus"
         return
-
       drop: ->
         editor.removeClass "div-dropzone-focus"
         editor.focus()
         return
-
       success: (header, res) ->
         self.appendImageFromUpload([res.url])
         return
-
       error: (temp, msg) ->
         App.alert(msg)
         return
-
       totaluploadprogress: (num) ->
         return
-
       sending: ->
         return
-
       queuecomplete: ->
         self.restoreUploaderStatus()
         return
     )
 
+  uploadFile: (item, filename) ->
+    self = @
+    formData = new FormData()
+    formData.append "file", item, filename
+    $.ajax
+      url: '/photos'
+      type: "POST"
+      data: formData
+      dataType: "JSON"
+      processData: false
+      contentType: false
+      beforeSend: ->
+        self.showUploading()
+      success: (e, status, res) ->
+        self.appendImageFromUpload([res.responseJSON.url])
+        self.restoreUploaderStatus()
+      error: (res) ->
+        App.alert("上传失败")
+        self.restoreUploaderStatus()
+      complete: ->
+        self.restoreUploaderStatus()
+
+  handlePaste: (e) ->
+    self = @
+    pasteEvent = e.originalEvent
+    if pasteEvent.clipboardData and pasteEvent.clipboardData.items
+      image = self.isImage(pasteEvent)
+      if image
+        e.preventDefault()
+        self.uploadFile image.getAsFile(), "image.png"
+
+  isImage: (data) ->
+    i = 0
+    while i < data.clipboardData.items.length
+      item = data.clipboardData.items[i]
+      if item.type.indexOf("image") isnt -1
+        return item
+      i++
+    return false
+
   browseUpload: (e) ->
     $(".topic-editor").focus()
     $('.topic-editor-dropzone').click()
     return false
+
+  showUploading: () ->
+    $("#topic-upload-image").hide()
+    if $("#topic-upload-image").parent().find("span.loading").length == 0
+      $("#topic-upload-image").before("<span class='loading'><i class='fa fa-circle-o-notch fa-spin'></i></span>")
 
   restoreUploaderStatus: ->
     $("#topic-upload-image").parent().find("span.loading").remove()

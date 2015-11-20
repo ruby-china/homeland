@@ -32,6 +32,7 @@ describe 'API V3', 'users', type: :request do
       fields.reject { |f| f == 'avatar_url' }.each do |field|
         expect(json['user'][field]).to eq user.send(field)
       end
+      expect(json['meta']).to include(*%w(blocked followed))
     end
 
     it 'should hidden email when email_public is false' do
@@ -42,6 +43,20 @@ describe 'API V3', 'users', type: :request do
       get '/api/v3/users/test_user.json'
       expect(response.status).to eq 200
       expect(json['user']['email']).to eq ''
+    end
+
+    it 'should get right meta info' do
+      u = create(:user, name: 'test user',
+                        login: 'test_user',
+                        email: 'foobar@gmail.com',
+                        email_public: false)
+      login_user!
+      current_user.follow_user(u)
+      current_user.block_user(u.id)
+      get '/api/v3/users/test_user.json'
+      expect(response.status).to eq 200
+      expect(json['meta']['blocked']).to eq(true)
+      expect(json['meta']['followed']).to eq(true)
     end
 
     it 'should not hidden email when current_user itself' do

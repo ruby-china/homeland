@@ -503,6 +503,6 @@ class User
   def letter_avatar_url(size)
     path = LetterAvatar.generate(self.login, size).sub('public/','/')
 
-    "//#{Setting.domain}#{path}"
+    "#{Setting.protocol}://#{Setting.domain}#{path}"
   end
 end

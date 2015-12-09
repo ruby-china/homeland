@@ -44,12 +44,13 @@ $ brew install memcached
 $ brew install redis
 $ brew install mongodb
 $ brew install imagemagick
+$ brew install gs
 ```
 
 ### Ubuntu
 
 ```bash
-$ sudo apt-get install memcached mongodb redis-server imagemagick
+$ sudo apt-get install memcached mongodb redis-server imagemagick ghostscript
 ```
 
 ```bash

@@ -33,7 +33,7 @@ class Node
 
   # 招聘节点编号
   def self.jobs_id
-    25
+    9
   end
 
   # NoPoint 节点编号

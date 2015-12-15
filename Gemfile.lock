@@ -281,13 +281,12 @@ GEM
       ast (>= 1.1, < 3.0)
     phantomjs (1.9.7.1)
     posix-spawn (0.3.11)
-    postmark (0.9.15)
+    postmark (1.7.0)
       json
       rake
-    postmark-rails (0.4.1)
-      actionmailer
-      postmark (>= 0.9.0)
-      rake
+    postmark-rails (0.12.0)
+      actionmailer (>= 3.0.0)
+      postmark (~> 1.7.0)
     powerpack (0.1.1)
     puma (2.14.0)
     rack (1.6.4)
@@ -488,8 +487,8 @@ DEPENDENCIES
   omniauth-github (~> 1.1.0)
   oneapm_rpm
   parallel
-  postmark (= 0.9.15)
-  postmark-rails (= 0.4.1)
+  postmark (= 1.7.0)
+  postmark-rails (= 0.12.0)
   puma (~> 2.14.0)
   rack-cors
   rack-mini-profiler
@@ -523,4 +522,4 @@ DEPENDENCIES
   will_paginate (= 3.0.7)
 
 BUNDLED WITH
-   1.10.6
+   1.11.0

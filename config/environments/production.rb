@@ -57,7 +57,7 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default_url_options = { host: Setting.domain, protocol: Setting.protocol }
   config.action_mailer.delivery_method   = :postmark
-  config.action_mailer.postmark_settings = { api_key: Setting.email_password }
+  config.action_mailer.postmark_settings = { api_token: Setting.email_password }
 
   # Enable threaded mode
   # config.threadsafe!

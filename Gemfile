@@ -91,8 +91,8 @@ gem 'active_model_serializers'
 gem 'grape-active_model_serializers'
 
 # Mailer
-gem 'postmark', '0.9.15'
-gem 'postmark-rails', '0.4.1'
+gem 'postmark', '1.7.0'
+gem 'postmark-rails', '0.12.0'
 
 # Dalli, kgio is for Dalli
 gem 'kgio'

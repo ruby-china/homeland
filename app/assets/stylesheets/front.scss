@@ -64,3 +64,10 @@
 .bs-searchbox .form-control {
   float: none;
 }
+
+@media (min-width: 744px) and (max-width: 1200px) {
+  .sidebar .panel .panel-body .feed-button {
+    float: none !important;
+    margin-top: 15px;
+  }
+}

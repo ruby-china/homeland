@@ -45,7 +45,7 @@ class User
   field :github
   field :twitter
   # 是否信任用户
-  field :verified, type: Mongoid::Boolean, default: false
+  field :verified, type: Mongoid::Boolean, default: true
   # 是否是 HR
   field :hr, type: Mongoid::Boolean, default: false
   field :state, type: Integer, default: 1

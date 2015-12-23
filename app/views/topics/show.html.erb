@@ -48,11 +48,22 @@
 
     <%= render partial: "ban_reason" %>
 
+    <div class="panel panel-default">
+      <div class="panel-heading media clearfix">
+        <%= t("topics.recommend_topics") %>
+      </div>
+      <div class="panel-body">
+        <% cache(@recommend_topics) do %>
+          <%= render partial: "topics/topic", collection: @recommend_topics, locals: { suggest: false } %>
+        <% end %>
+      </div>
+    </div>
+
   <% if @replies.blank? %>
     <div class="no-result">
       <%= t("topics.no_replies") %>
     </div>
-    <% else %>
+  <% else %>
     <div id="replies" class="panel panel-default" data-last-floor="<%= @replies.count %>">
       <div class="total panel-heading">
         共收到 <b><%= @topic.replies_count %></b> 条回复

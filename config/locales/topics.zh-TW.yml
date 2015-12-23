@@ -3,6 +3,7 @@
     title: "發佈的帖子"
     create_topic: "新建帖子"
     edit_topic: "修改帖子"
+    recommend_topics: "推薦话题"
     no_replies: "暫無回覆。"
     recent_topics: "最近發佈的帖子"
     recent_replies: "最近回覆的帖子"

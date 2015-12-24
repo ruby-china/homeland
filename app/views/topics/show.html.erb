@@ -48,6 +48,17 @@
 
     <%= render partial: "ban_reason" %>
 
+    <% cache([@topic.user, "bio-markdown"]) do %>
+      <% if !@topic.user.bio.blank? %>
+        <div class="panel panel-default">
+          <div class="panel-heading"><%= @topic.user.fullname %></div>
+          <div class="panel-body markdown">
+            <%= markdown(@topic.user.bio) %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+
     <div class="panel panel-default topics">
       <div class="panel-heading media clearfix">
         <%= t("topics.recommend_topics") %>

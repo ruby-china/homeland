@@ -51,7 +51,7 @@
     <% cache([@topic.user, "bio-markdown"]) do %>
       <% if !@topic.user.bio.blank? %>
         <div class="panel panel-default">
-          <div class="panel-heading"><%= @topic.user.fullname %></div>
+          <div class="panel-heading"><%= "关于作者：" + @topic.user.fullname %></div>
           <div class="panel-body markdown">
             <%= markdown(@topic.user.bio) %>
           </div>

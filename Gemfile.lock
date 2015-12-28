@@ -376,7 +376,7 @@ GEM
       ruby-progressbar (~> 1.4)
     ruby-prof (0.15.2)
     ruby-progressbar (1.7.1)
-    rucaptcha (0.3.1)
+    rucaptcha (0.3.2)
       posix-spawn (>= 0.3.0)
     rvm-capistrano (1.4.1)
       capistrano (>= 2.0.0)
@@ -523,4 +523,4 @@ DEPENDENCIES
   will_paginate (= 3.0.7)
 
 BUNDLED WITH
-   1.10.6
+   1.11.2

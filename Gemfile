@@ -4,6 +4,8 @@ else
   source 'https://ruby.taobao.org'
 end
 
+ruby '2.3.0'
+
 gem 'rails', '~> 4.2.4'
 gem 'sprockets', '~> 3.3.3'
 gem 'sass-rails'

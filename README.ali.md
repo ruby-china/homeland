@@ -91,6 +91,12 @@ $ rails s
 bundle exec rake
 ```
 
+## About Emoji Asset files
+
+You may see emoji files 404 not found, after you publish you app. Because the emoji not include into Assets Pipline, what reason you can read Issue #522.
+
+You need upload emoji images into `/assets/emojis` production environment path / CDN path, you can find image here: [md_emoji](https://github.com/elm-city-craftworks/md_emoji/tree/master/vendor/assets/images/emojis)
+
 ## Contributors
 
 * [Contributors](https://github.com/ruby-china/ruby-china/contributors)

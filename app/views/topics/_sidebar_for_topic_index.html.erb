@@ -21,7 +21,7 @@
     </div>
   <% end %>
 <% else %>
-  <% if current_user %>
+  <% if current_user && !current_user.avatar? %>
   <div class="panel panel-default clearfix">
     <div class="panel-body">
       <p><%= t('topics.have_no_avatar')%></p>

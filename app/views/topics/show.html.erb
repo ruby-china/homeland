@@ -35,7 +35,7 @@
             <% end %>
           <% end %>
         </article>
-        <%= SiteConfig.after_topic_html %>
+        <%= raw SiteConfig.after_topic_html %>
         <%= social_share_button_tag h("#{@topic.title} via: @#{Setting.twitter_id} ") %>
       </div>
 

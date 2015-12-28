@@ -98,7 +98,6 @@ class MarkdownTopicConverter < MarkdownConverter
     text.gsub!("\n```", "\n\n```")
 
     result = convert(text)
-
     doc = Nokogiri::HTML.fragment(result)
     link_mention_floor(doc)
     link_mention_user(doc, users)
@@ -131,7 +130,9 @@ class MarkdownTopicConverter < MarkdownConverter
   # convert '#N楼' to link
   # Refer to emoji_filter in html-pipeline
   def link_mention_floor(doc)
-    doc.search('text()').each do |node|
+    # More info about xpath('.//text()'):
+    # https://github.com/sparklemotion/nokogiri/issues/1233
+    doc.xpath(".//text()").each do |node|
       content = node.to_html
       next unless content.include?('#')
       next if ancestors?(node, %w(pre code))
@@ -170,7 +171,7 @@ class MarkdownTopicConverter < MarkdownConverter
   # convert '@user' to link
   # match any user even not exist.
   def link_mention_user_in_text(doc, users)
-    doc.search('text()').each do |node|
+    doc.xpath(".//text()").each do |node|
       content = node.to_html
       next unless content.include?('@')
       in_code = ancestors?(node, %w(pre code))
@@ -203,7 +204,7 @@ class MarkdownTopicConverter < MarkdownConverter
   end
 
   def replace_emoji(doc)
-    doc.search('text()').each do |node|
+    doc.xpath(".//text()").each do |node|
       content = node.to_html
       next unless content.include?(':')
       next if ancestors?(node, %w(pre code))

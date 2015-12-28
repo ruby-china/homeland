@@ -337,7 +337,7 @@ GEM
     rainbow (2.0.0)
     raindrops (0.15.0)
     rake (10.4.2)
-    redcarpet (3.3.3)
+    redcarpet (3.3.4)
     redis (3.2.1)
     redis-namespace (1.5.2)
       redis (~> 3.0, >= 3.0.4)
@@ -498,7 +498,7 @@ DEPENDENCIES
   rails-i18n
   rails-perftest
   rails_autolink (>= 1.1.0)
-  redcarpet (~> 3.3.3)
+  redcarpet (~> 3.3.4)
   redis (~> 3.2.1)
   redis-namespace (~> 1.5.1)
   redis-objects (= 1.1.0)

@@ -24,7 +24,7 @@ gem 'rails_autolink'
 gem 'md_emoji'
 gem 'exception_notification'
 
-gem 'doorkeeper'
+gem 'doorkeeper', '~> 2.2.1'
 gem 'doorkeeper-i18n'
 
 gem 'rails-perftest'

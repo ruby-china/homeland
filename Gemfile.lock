@@ -116,7 +116,7 @@ GEM
       execjs
     coffee-script-source (1.9.1.1)
     colorize (0.7.5)
-    concurrent-ruby (1.0.0.pre4)
+    concurrent-ruby (1.0.0)
     connection_pool (2.2.0)
     dalli (2.7.4)
     database_cleaner (1.5.1)
@@ -338,7 +338,7 @@ GEM
     raindrops (0.15.0)
     rake (10.4.2)
     redcarpet (3.3.4)
-    redis (3.2.1)
+    redis (3.2.2)
     redis-namespace (1.5.2)
       redis (~> 3.0, >= 3.0.4)
     redis-objects (1.1.0)
@@ -388,12 +388,11 @@ GEM
       sprockets-rails (>= 2.0, < 4.0)
       tilt (~> 1.1)
     settingslogic (2.0.9)
-    sidekiq (4.0.0.pre2)
-      concurrent-ruby (= 1.0.0.pre4)
+    sidekiq (4.0.1)
+      concurrent-ruby (~> 1.0)
       connection_pool (~> 2.2, >= 2.2.0)
       json (~> 1.0)
       redis (~> 3.2, >= 3.2.1)
-      redis-namespace (~> 1.5, >= 1.5.2)
     simple_form (3.1.0)
       actionpack (~> 4.0)
       activemodel (~> 4.0)
@@ -511,7 +510,7 @@ DEPENDENCIES
   rvm-capistrano
   sass-rails
   settingslogic (~> 2.0.9)
-  sidekiq (= 4.0.0.pre2)
+  sidekiq
   simple_form (= 3.1.0)
   sinatra
   social-share-button (= 0.1.5)

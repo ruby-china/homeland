@@ -117,8 +117,6 @@ gem 'rack-mini-profiler', require: false
 
 gem 'oneapm_rpm'
 
-gem 'rest-client', '~> 1.8.0'
-
 group :development do
   gem 'derailed'
 end

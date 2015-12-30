@@ -6,22 +6,22 @@ end
 
 ruby '2.3.0'
 
-gem 'rails', '~> 4.2.4'
-gem 'sprockets', '~> 3.3.3'
+gem 'rails', '~> 4.2.5'
+gem 'sprockets'
 gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
-gem 'jquery-rails', '~> 4.0.4'
+gem 'jquery-rails'
 gem 'jbuilder'
 gem 'turbolinks', git: 'https://github.com/rails/turbolinks.git'
 gem 'jquery-turbolinks'
 gem 'dropzonejs-rails'
 
-gem 'actionpack-action_caching', '1.1.1'
+gem 'actionpack-action_caching'
 gem 'rails-i18n'
 gem 'http_accept_language'
-gem 'rails_autolink', '>= 1.1.0'
-gem 'md_emoji', '1.0.2'
+gem 'rails_autolink'
+gem 'md_emoji'
 gem 'exception_notification'
 
 gem 'doorkeeper'
@@ -32,7 +32,7 @@ gem 'ruby-prof'
 
 # 上传组件
 gem 'carrierwave', '~> 0.10.0'
-gem 'carrierwave-upyun', '0.1.8'
+gem 'carrierwave-upyun'
 gem 'mini_magick'
 
 gem 'rucaptcha'
@@ -40,16 +40,16 @@ gem 'letter_avatar'
 
 # Mongoid 辅助插件
 gem 'mongoid', '5.0.0'
-gem 'mongoid_auto_increment_id', '0.8.1'
+gem 'mongoid_auto_increment_id'
 gem 'mongoid_rails_migrations'
 
 # 用户系统
 gem 'devise', '~> 3.5.1'
 gem 'devise-async'
-gem 'devise-encryptable', '0.1.2'
+gem 'devise-encryptable'
 
 # 分页
-gem 'will_paginate', '3.0.7'
+gem 'will_paginate'
 
 # 三方平台 OAuth 验证登陆
 gem 'omniauth', '~> 1.2.2'
@@ -130,7 +130,7 @@ group :development, :test do
   gem 'capistrano-sidekiq'
 
   gem 'rubocop'
-  gem 'rspec-rails', '~> 3.3'
+  gem 'rspec-rails', '~> 3.4'
   gem 'factory_girl_rails', '~> 4.5.0'
   gem 'database_cleaner'
   gem 'capybara', '~> 2.3.0'

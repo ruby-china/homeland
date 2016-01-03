@@ -44,6 +44,10 @@ Rails.application.configure do
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   config.force_ssl = true
 
+  # The main JS and CSS files rendered as http, so that can not loaded by Chrome automatically.
+  # https://github.com/rails/rails/issues/8388
+  config.action_controller.default_asset_host_protocol = :relative
+
   # Decrease the log volume.
   config.log_level = :info
 

@@ -7,7 +7,7 @@ class HomeController < ApplicationController
 
   def api
     @routes = []
-    Api::Dispatch.routes.each do |route|
+    API::Dispatch.routes.each do |route|
       next if route.route_method.blank?
       path = route.route_path
       path.sub!('(.:format)', '.json')

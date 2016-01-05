@@ -51,6 +51,8 @@ describe 'API V3', 'replies', type: :request do
       post "/api/v3/replies/#{reply.id}.json", body: 'bar dar'
       expect(response.status).to eq(201)
       reply.reload
+      expect(json['reply']['body']).to eq 'bar dar'
+      expect(json['reply']['body_html']).to eq reply.body_html
       expect(reply.body).to eq 'bar dar'
       expect(reply.body_html).to eq '<p>bar dar</p>'
     end

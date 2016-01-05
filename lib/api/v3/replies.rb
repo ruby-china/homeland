@@ -16,12 +16,12 @@ module API
           params do
             requires :body, type: String
           end
-          post '' do
+          post '', serializer: ReplyDetailSerializer, root: 'reply' do
             doorkeeper_authorize!
             error!('没有权限修改', 403) unless can?(:update, @reply)
             @reply.body = params[:body]
             if @reply.save
-              { ok: 1 }
+              render @reply
             else
               error!({ error: @reply.errors.full_messages }, 400)
             end

@@ -1,4 +1,4 @@
-<% cache(["api", "v3.07"], expires_in: 1.days) do %>
+<% cache(["api", "v3.10"], expires_in: 1.days) do %>
 <div class="panel panel-default api-doc">
   <div class="panel-heading">Ruby China API 目录</div>
   <div class="panel-body markdown">
@@ -29,7 +29,7 @@
     <p>请参考源代码，确定那些路径是需要用户认证的，需要用户认证的路径，你需要带上 <code>access_token=?</code> 参数。</p>
     <strong>例如</strong>
     <%= markdown(%(```json
-{ 
+{
   "topic": {
     "id": 256170,
     ....,

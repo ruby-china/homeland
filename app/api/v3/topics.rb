@@ -1,70 +1,72 @@
 module V3
   class Topics < Grape::API
     resource :topics do
-      desc %(获取话题列表
+      desc <<~DESC
+      获取话题列表
 
-### Returns:
+      ### Returns:
 
-```json
-{
-    "topics": [
-        {
-            "id": 25262,
-            "title": "Rails 中自动布署工具 mina 的经验谈",
-            "created_at": "2015-05-12T22:08:53.509+08:00",
-            "updated_at": "2015-05-12T22:09:10.772+08:00",
-            "replied_at": "2015-05-12T22:09:10.005+08:00",
-            "replies_count": 1,
-            "node_name": "Sinatra",
-            "node_id": 43,
-            "last_reply_user_id": 2,
-            "last_reply_user_login": "huacnlee",
-            "user": {
-                "id": 35,
-                "login": "monster",
-                "name": null,
-                "avatar_url": "http://gravatar.com/avatar/dba7c3f68c94ec5f7ac96d0a5e7db205.png?s=120"
-            },
-            "deleted": false,
-            "excellent": true,
-            "abilities": {
-                "update": true,
-                "destroy": true
-            }
-        },
-        {
-            "id": 25253,
-            "title": "旧爱 Bootstrap，新欢 Materialize",
-            "created_at": "2015-04-22T18:12:53.160+08:00",
-            "updated_at": "2015-05-18T20:50:44.486+08:00",
-            "replied_at": "2015-05-12T21:59:13.520+08:00",
-            "replies_count": 10,
-            "node_name": "分享",
-            "node_id": 26,
-            "last_reply_user_id": 2,
-            "last_reply_user_login": "huacnlee",
-            "user": { ... },
-            "deleted": false,
-            "excellent": false,
-            "abilities": {
-                "update": true,
-                "destroy": true
-            }
-        },
-        ...
-    ]
-}
-```
-)
+      ```json
+      {
+          "topics": [
+              {
+                  "id": 25262,
+                  "title": "Rails 中自动布署工具 mina 的经验谈",
+                  "created_at": "2015-05-12T22:08:53.509+08:00",
+                  "updated_at": "2015-05-12T22:09:10.772+08:00",
+                  "replied_at": "2015-05-12T22:09:10.005+08:00",
+                  "replies_count": 1,
+                  "node_name": "Sinatra",
+                  "node_id": 43,
+                  "last_reply_user_id": 2,
+                  "last_reply_user_login": "huacnlee",
+                  "user": {
+                      "id": 35,
+                      "login": "monster",
+                      "name": null,
+                      "avatar_url": "http://gravatar.com/avatar/dba7c3f68c94ec5f7ac96d0a5e7db205.png?s=120"
+                  },
+                  "deleted": false,
+                  "excellent": true,
+                  "abilities": {
+                      "update": true,
+                      "destroy": true
+                  }
+              },
+              {
+                  "id": 25253,
+                  "title": "旧爱 Bootstrap，新欢 Materialize",
+                  "created_at": "2015-04-22T18:12:53.160+08:00",
+                  "updated_at": "2015-05-18T20:50:44.486+08:00",
+                  "replied_at": "2015-05-12T21:59:13.520+08:00",
+                  "replies_count": 10,
+                  "node_name": "分享",
+                  "node_id": 26,
+                  "last_reply_user_id": 2,
+                  "last_reply_user_login": "huacnlee",
+                  "user": { ... },
+                  "deleted": false,
+                  "excellent": false,
+                  "abilities": {
+                      "update": true,
+                      "destroy": true
+                  }
+              },
+              ...
+          ]
+      }
+      ```
+      DESC
       params do
         optional :type, type: String, default: 'last_actived',
                         values: %w(last_actived recent no_reply popular excellent),
-                        desc: %(- last_actived - 最近更新的（社区默认排序）
-- recent - 最新创建（会包含 NoPoint 的）
-- no_reply - 还没有任何回帖的
-- popular - 热门的话题（回帖和赞超过一定的数量）
-- excellent - 精华帖
-)
+                        desc: <<~DESC
+                        - last_actived - 最近更新的（社区默认排序）
+                        - recent - 最新创建（会包含 NoPoint 的）
+                        - no_reply - 还没有任何回帖的
+                        - popular - 热门的话题（回帖和赞超过一定的数量）
+                        - excellent - 精华帖
+                        DESC
         optional :node_id, type: Integer, desc: '如果你需要只看某个节点的，请传此参数'
         optional :offset, type: Integer, default: 0
         optional :limit, type: Integer, default: 20, values: 1..150
@@ -145,48 +147,49 @@ module V3
           end
         end
 
-        desc %(获取完整的话题内容
+        desc <<~DESC
+        获取完整的话题内容
 
-### Returns:
+        #### Returns:
 
-```json
-{
-    "topic": {
-        "id": 25209,
-        "title": "Rails 4.2 中 ActiveJob 的使用",
-        "created_at": "2015-04-20T13:01:24.262+08:00",
-        "updated_at": "2015-04-23T20:00:09.008+08:00",
-        "replied_at": "2015-04-23T19:47:28.173+08:00",
-        "replies_count": 10,
-        "node_name": "Rails",
-        "node_id": 2,
-        "last_reply_user_id": 2,
-        "last_reply_user_login": "huacnlee",
-        "user": {
-            "id": 10547,
-            "login": "jicheng1014",
-            "name": "哥有石头",
-            "avatar_url": "http://gravatar.com/avatar/ac312b6f8e75f1e2db5026b7a67078ba.png?s=120"
-        },
-        "deleted": false,
-        "abilities": {
-            "update": false,
-            "destroy": false
-        },
-        "body": "## 初探ActiveJob",
-        "body_html": "<h4>初探ActiveJob</h4>",
-        "hits": 19,
-        "likes_count": 10,
-        "suggested_at": "2015-04-23T19:47:28.173+08:00"
-    },
-    "meta" : {
-      "followed": true,
-      "liked": false,
-      "followed": true
-    }
-}
-```
-)
+        ```json
+        {
+            "topic": {
+                "id": 25209,
+                "title": "Rails 4.2 中 ActiveJob 的使用",
+                "created_at": "2015-04-20T13:01:24.262+08:00",
+                "updated_at": "2015-04-23T20:00:09.008+08:00",
+                "replied_at": "2015-04-23T19:47:28.173+08:00",
+                "replies_count": 10,
+                "node_name": "Rails",
+                "node_id": 2,
+                "last_reply_user_id": 2,
+                "last_reply_user_login": "huacnlee",
+                "user": {
+                    "id": 10547,
+                    "login": "jicheng1014",
+                    "name": "哥有石头",
+                    "avatar_url": "http://gravatar.com/avatar/ac312b6f8e75f1e2db5026b7a67078ba.png?s=120"
+                },
+                "deleted": false,
+                "abilities": {
+                    "update": false,
+                    "destroy": false
+                },
+                "body": "## 初探ActiveJob",
+                "body_html": "<h4>初探ActiveJob</h4>",
+                "hits": 19,
+                "likes_count": 10,
+                "suggested_at": "2015-04-23T19:47:28.173+08:00"
+            },
+            "meta" : {
+              "followed": true,
+              "liked": false,
+              "followed": true
+            }
+        }
+        ```
+        DESC
         get '', serializer: TopicDetailSerializer, root: 'topic' do
           @topic = Topic.find(params[:id])
           @topic.hits.incr(1)
@@ -203,52 +206,68 @@ module V3
           render @topic, meta: meta
         end
 
-        desc %(获取某个话题的回帖列表
+        desc <<~DESC
+        删除除话题
 
-### Returns:
+        ### Returns:
 
-```json
-{
-    "replies": [
+        以 status 为准
+        DESC
+        delete '' do
+          doorkeeper_authorize!
+          @topic = Topic.find(params[:id])
+          error!('没有权限删除话题', 403) unless can?(:destroy, @topic)
+          @topic.destroy_by(current_user)
+          { ok: 1 }
+        end
+
+        desc <<~DESC
+        获取某个话题的回帖列表
+
+        ### Returns:
+
+        ```json
         {
-            "id": 248607,
-            "body_html": "<p>在我刚毕业的时候读过这一篇, 收获颇丰.</p>",
-            "created_at": "2015-02-23T14:14:52.043+08:00",
-            "updated_at": "2015-02-23T14:14:52.043+08:00",
-            "deleted": false,
-            "topic_id": 24325,
-            "user": {
-                "id": 121,
-                "login": "lyfi2003",
-                "name": "windy",
-                "avatar_url": "http://ruby-china-files-dev.b0.upaiyun.com/user/large_avatar/121.jpg"
-            },
-            "abilities": {
-                "update": false,
-                "destroy": false
+            "replies": [
+                {
+                    "id": 248607,
+                    "body_html": "<p>在我刚毕业的时候读过这一篇, 收获颇丰.</p>",
+                    "created_at": "2015-02-23T14:14:52.043+08:00",
+                    "updated_at": "2015-02-23T14:14:52.043+08:00",
+                    "deleted": false,
+                    "topic_id": 24325,
+                    "user": {
+                        "id": 121,
+                        "login": "lyfi2003",
+                        "name": "windy",
+                        "avatar_url": "http://ruby-china-files-dev.b0.upaiyun.com/user/large_avatar/121.jpg"
+                    },
+                    "abilities": {
+                        "update": false,
+                        "destroy": false
+                    }
+                },
+                {
+                    "id": 248608,
+                    "body_html": "<p>投精华和置顶！</p>",
+                    "created_at": "2015-02-23T14:41:32.977+08:00",
+                    "updated_at": "2015-02-23T14:41:32.977+08:00",
+                    "deleted": false,
+                    "topic_id": 24325,
+                    "user": { ... },
+                    "abilities": {
+                        "update": false,
+                        "destroy": false
+                    }
+                },
+                ...
+            ],
+            "meta": {
+              "user_liked_reply_ids": [上面列表里面，用户喜欢过的回复编号]
             }
-        },
-        {
-            "id": 248608,
-            "body_html": "<p>投精华和置顶！</p>",
-            "created_at": "2015-02-23T14:41:32.977+08:00",
-            "updated_at": "2015-02-23T14:41:32.977+08:00",
-            "deleted": false,
-            "topic_id": 24325,
-            "user": { ... },
-            "abilities": {
-                "update": false,
-                "destroy": false
-            }
-        },
-        ...
-    ],
-    "meta": {
-      "user_liked_reply_ids": [上面列表里面，用户喜欢过的回复编号]
-    }
-}
-```
-)
+        }
+        ```
+        DESC
         params do
           optional :offset, type: Integer, default: 0
           optional :limit, type: Integer, default: 20, values: 1..150

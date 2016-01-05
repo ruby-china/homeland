@@ -64,48 +64,51 @@ module V3
 
     resource :nodes do
       # Get a list of all nodes
-      desc %(获取所有节点列表
+      desc <<~DESC
+      获取所有节点列表
 
-### Returns:
+      ### Returns:
 
-```json
-{
-    "nodes": [
-        {
-            "id": 1,
-            "name": "Ruby",
-            "topics_count": 1692,
-            "summary": "Ruby 是一门优美的语言",
-            "section_id": 1,
-            "sort": 0,
-            "section_name": "Ruby",
-            "updated_at": "2015-03-01T22:35:21.627+08:00"
-        },
-        {
-            "id": 2,
-            "name": "Rails",
-            "topics_count": 3160,
-            "summary": "Ruby on Rails, 也称 Rails, 是一个使用 Ruby 语言写的开源 Web 开发框架。",
-            "section_id": 1,
-            "sort": 98,
-            "section_name": "Ruby",
-            "updated_at": "2015-03-01T22:35:21.657+08:00"
-        },
-        ...
-    ]
-}
-```
-)
+      ```json
+      {
+          "nodes": [
+              {
+                  "id": 1,
+                  "name": "Ruby",
+                  "topics_count": 1692,
+                  "summary": "Ruby 是一门优美的语言",
+                  "section_id": 1,
+                  "sort": 0,
+                  "section_name": "Ruby",
+                  "updated_at": "2015-03-01T22:35:21.627+08:00"
+              },
+              {
+                  "id": 2,
+                  "name": "Rails",
+                  "topics_count": 3160,
+                  "summary": "Ruby on Rails, 也称 Rails, 是一个使用 Ruby 语言写的开源 Web 开发框架。",
+                  "section_id": 1,
+                  "sort": 98,
+                  "section_name": "Ruby",
+                  "updated_at": "2015-03-01T22:35:21.657+08:00"
+              },
+              ...
+          ]
+      }
+      ```
+      DESC
       get do
         nodes = Node.includes(:section).all
         render nodes, meta: { total: Node.count }
       end
 
-      desc %(获取单个 Node 的详情，结构类似 /api/v3/nodes.json 里面 Hash 的结构
+      desc <<~DESC
+      获取单个 Node 的详情，结构类似 /api/v3/nodes.json 里面 Hash 的结构
 
-此接口的使用场景：
+      此接口的使用场景：
 
-需要获取单个 Node 的话题总数，介绍等信息的时候，你无须再拉取 Node 列表。)
+      需要获取单个 Node 的话题总数，介绍等信息的时候，你无须再拉取 Node 列表。
+      DESC
       get ':id' do
         node = Node.find(params[:id])
         render node

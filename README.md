@@ -6,9 +6,9 @@ This is the source code of [Ruby China](http://ruby-china.org) website.
 
 ## Requirements
 
-* Ruby 2.2.0 +
+* Ruby 2.3.0 +
 * Memcached 1.4 +
-* Redis 2.2 +
+* Redis 2.8 +
 * MongoDb 2.4.4 +
 * ImageMagick 6.5+
 

@@ -232,6 +232,44 @@ describe 'API V3', 'topics', type: :request do
     end
   end
 
+  describe 'DELETE /api/v3/topics/:id.json' do
+    let!(:topic) { create(:topic) }
+
+    it 'should require user' do
+      delete "/api/v3/topics/#{topic.id}.json"
+      expect(response.status).to eq 401
+    end
+
+    it 'should return 404 when topic not found' do
+      login_user!
+      delete "/api/v3/topics/abc.json"
+      expect(response.status).to eq 404
+    end
+
+    it 'should return 403 when topic owner is now current_user, and not admin' do
+      login_user!
+      delete "/api/v3/topics/#{topic.id}.json"
+      expect(response.status).to eq 403
+    end
+
+    it 'should destroy with topic owner user' do
+      login_user!
+      topic = create(:topic, user: current_user)
+      delete "/api/v3/topics/#{topic.id}.json"
+      expect(response.status).to eq 200
+      topic.reload
+      expect(topic.deleted?).to eq true
+    end
+
+    it 'should destroy with admin user' do
+      login_admin!
+      delete "/api/v3/topics/#{topic.id}.json"
+      expect(response.status).to eq 200
+      topic.reload
+      expect(topic.deleted?).to eq true
+    end
+  end
+
   describe 'GET /api/v3/topics/:id.json' do
     it 'should get topic detail with list of replies' do
       t = create(:topic, title: 'i want to know')

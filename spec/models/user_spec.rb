@@ -430,10 +430,16 @@ describe User, type: :model do
   end
 
   describe '.avatar?' do
-    let(:user1) { build(:user, avatar: nil) }
-    let(:user2) { build(:user, avatar: '123') }
+    it "should return false when avatar is nil" do
+      u = User.new
+      u[:avatar] = nil
+      expect(u.avatar?).to eq(false)
+    end
 
-    it { expect(user1.avatar?).to eq(false) }
-    it { expect(user2.avatar?).to eq(true) }
+    it "should return true when avatar is not nil" do
+      u = User.new
+      u[:avatar] = '1234'
+      expect(u.avatar?).to eq(true)
+    end
   end
 end

@@ -29,8 +29,7 @@ module RubyChina
     config.i18n.available_locales = ['zh-CN', 'en', 'zh-TW']
     config.i18n.fallbacks = true
 
-    config.autoload_paths << Rails.root.join('app/api')
-    config.autoload_paths << Rails.root.join('lib')
+    config.autoload_paths.push(*%W(#{config.root}/lib))
     config.eager_load_paths += %W( #{config.root}/lib/exception_notifier )
 
     config.mongoid.include_root_in_json = false

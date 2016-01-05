@@ -1,8 +1,8 @@
-module Api
+module API
   class Dispatch < Grape::API
     use ActionDispatch::RemoteIp
 
-    mount V3::Root
+    mount API::V3::Root
 
     format :json
     content_type :json, 'application/json;charset=utf-8'

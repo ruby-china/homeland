@@ -117,8 +117,7 @@ Rails.application.routes.draw do
   get 'twitter' => 'home#twitter', as: 'twitter'
   get 'markdown' => 'home#markdown', as: 'markdown'
 
-  require 'dispatch'
-  mount Api::Dispatch => '/api'
+  mount API::Dispatch => '/api'
 
   require 'sidekiq/web'
   authenticate :user, ->(u) { u.admin? } do

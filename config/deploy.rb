@@ -50,4 +50,4 @@ end
 after 'deploy:finalize_update', 'deploy:symlink', :link_shared#, :migrate_db, :compile_assets
 after 'deploy:restart', 'unicorn:restart'
 after 'deploy:start', 'unicorn:start'
-aterr 'deploy:stop', 'unicorn:stop'
+after 'deploy:stop', 'unicorn:stop'

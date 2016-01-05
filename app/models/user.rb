@@ -505,4 +505,8 @@ class User
 
     "#{Setting.protocol}://#{Setting.domain}#{path}"
   end
+
+  def avatar?
+    self[:avatar].present?
+  end
 end

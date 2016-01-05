@@ -428,4 +428,12 @@ describe User, type: :model do
       expect(user.letter_avatar_url(240)).to include("#{Setting.protocol}://#{Setting.domain}/system/letter_avatars/")
     end
   end
+
+  describe '.avatar?' do
+    let(:user1) { build(:user, avatar: nil) }
+    let(:user2) { build(:user, avatar: '123') }
+
+    it { expect(user1.avatar?).to eq(false) }
+    it { expect(user2.avatar?).to eq(true) }
+  end
 end

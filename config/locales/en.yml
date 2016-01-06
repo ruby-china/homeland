@@ -16,6 +16,8 @@
         name: "Name"
         login: "Login name"
         email: "Email"
+        email_public: "Public Email"
+        avatar: "Avatar"
         location: "City"
         bio: "Bio"
         password: "Password"
@@ -25,11 +27,15 @@
         tagline: "Tagline"
         state: "Status"
         verified: "Verified"
+        hr: "Recruiter"
+        company: "Company"
+        github: "GitHub"
         remember_me: "Remember me"
         current_password: "Current Password"
       topic:
         title: "Title"
         user_id: "User"
+        node_id: "Node"
         body: "Content"
       reply:
         body: "Reply Content"  
@@ -45,6 +51,14 @@
         body: "Content"
         locked: "Lock"
         change_desc: "Change Description"
+      site:
+        name: "Name"
+        url: "URL"
+        desc: "Description"
+        site_node_id: "Category"
+      exception_log:
+        title: Abstract
+        body: Details
     errors:
       models:
         user: "User"        

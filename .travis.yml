@@ -6,6 +6,7 @@ services:
   - mongodb
   - memcached
   - redis-server
+  - elasticsearch
 
 rvm:
   - 2.3.0
@@ -15,6 +16,7 @@ before_script:
   - cp config/config.yml.default config/config.yml
   - cp config/mongoid.yml.default config/mongoid.yml
   - cp config/redis.yml.default config/redis.yml
+  - cp config/elasticsearch.yml.default config/elasticsearch.yml
   - cp config/secrets.yml.default config/secrets.yml
   - sed -i "s/SETUP_DEVELOPMENT_HOST/127.0.0.1:27017/g" config/mongoid.yml
   - sed -i "s/SETUP_REDIS_HOST/127.0.0.1/g" config/redis.yml

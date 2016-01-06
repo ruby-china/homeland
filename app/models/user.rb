@@ -8,6 +8,8 @@ class User
   include Mongoid::BaseModel
   include Redis::Objects
   extend OmniauthCallbacks
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
 
   ALLOW_LOGIN_CHARS_REGEXP = /\A\w+\z/
 
@@ -112,6 +114,21 @@ class User
     only(:_id, :name, :login, :email, :email_md5, :email_public, :avatar, :verified, :state,
          :tagline, :github, :website, :location, :location_id, :twitter, :co)
   }
+
+  mapping do
+    indexes :login, weight: 100
+    indexes :name, weight: 100
+    indexes :email, weight: 60
+    indexes :twitter, weight: 60
+    indexes :tagline, weight: 5
+    indexes :bio, weight: 5
+    indexes :location, weight: 30
+    indexes :company, weight: 30
+  end
+
+  def as_indexed_json(options={})
+    as_json(only: %w(login name))
+  end
 
   def to_param
     login

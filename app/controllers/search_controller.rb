@@ -1,7 +1,19 @@
 class SearchController < ApplicationController
   def index
-    keywords = params[:q] || ''
-    keywords.gsub!('#', '%23')
-    redirect_to "https://www.google.com.hk/#hl=zh-CN&q=site:ruby-china.org+#{CGI.escape(keywords)}"
+    search_params = {
+      query: {
+        query_string: {
+          query: params[:q],
+          default_operator: 'AND',
+          minimum_should_match: '90%'
+        }
+      },
+      highlight: {
+        pre_tags: ["[h]"],
+        post_tags: ["[/h]"],
+        fields: { title: {}, body: {}, name: {}, login: {} }
+      }
+    }
+    @result = Elasticsearch::Model.search(search_params, [User, Page, Topic]).paginate(page: params[:page], per_page: 30)
   end
 end

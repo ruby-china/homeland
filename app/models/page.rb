@@ -7,6 +7,8 @@ class Page
   include Mongoid::BaseModel
   include Mongoid::SoftDelete
   include Mongoid::MarkdownBody
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
 
   # 页面地址
   field :slug
@@ -34,6 +36,16 @@ class Page
   validates :slug, format: /\A[a-z0-9\-_]+\z/
   validates :slug, uniqueness: true
 
+  mapping do
+    indexes :title, weight: 100
+    indexes :body, weight: 50
+    indexes :slug, weight: 60
+  end
+
+  def as_indexed_json(options={})
+    as_json(only: %w(slug title body))
+  end
+
   before_save :append_editor
   def append_editor
     unless editor_ids.include?(user_id.to_i)
@@ -58,6 +70,10 @@ class Page
                          title: title,
                          slug: slug)
     end
+  end
+
+  def to_param
+    slug
   end
 
   # 撤掉到指定版本

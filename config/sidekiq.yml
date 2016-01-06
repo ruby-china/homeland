@@ -7,6 +7,7 @@
 :queues:
   - [notifications, 100]
   - [http_request, 50]
+  - [search_indexer, 30]
   - [mailer, 5]
   - [mailers, 5]
   - [default, 3]

@@ -51,6 +51,10 @@ gem 'devise-encryptable'
 # 分页
 gem 'will_paginate'
 
+# 搜索
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
+
 # 三方平台 OAuth 验证登陆
 gem 'omniauth', '~> 1.2.2'
 gem 'omniauth-github', '~> 1.1.0'

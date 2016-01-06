@@ -37,9 +37,9 @@ class Page
   validates :slug, uniqueness: true
 
   mapping do
-    indexes :title, weight: 100
-    indexes :body, weight: 50
-    indexes :slug, weight: 60
+    indexes :title
+    indexes :body
+    indexes :slug
   end
 
   def as_indexed_json(options={})

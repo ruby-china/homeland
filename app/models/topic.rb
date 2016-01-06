@@ -88,9 +88,9 @@ class Topic
   scope :without_users, proc { |user_ids| where(:user_id.nin => user_ids) }
 
   mapping do
-    indexes :title, weight: 100
-    indexes :body, weight: 50
-    indexes :node_name, weight: 60
+    indexes :title
+    indexes :body
+    indexes :node_name
   end
 
   def as_indexed_json(options={})

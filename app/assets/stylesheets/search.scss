@@ -1,0 +1,30 @@
+@import "vars";
+
+.search-results {
+  .result {
+    margin-bottom: 20px;
+
+    em { color: $red; font-style: normal;}
+
+    .title {
+      font-size: 15px;
+      line-height: 160%;
+
+      .badge { background: $grayLabel; color: $grayLabelText; font-weight: normal; font-size: 12px; margin-left: 4px; }
+    }
+    .info {
+      margin-bottom: 6px;
+      font-size: 12px;
+      .url a { color: $greenText; }
+
+      .date { color: #999; margin-left: 8px; }
+    }
+
+    .desc { font-size: 13px; }
+  }
+
+  .user {
+    .info { margin-top: 4px; font-size: 14px; }
+    .info.number { color: #666; font-size: 13px; }
+  }
+}

@@ -1,0 +1,21 @@
+<div class="result user media">
+  <div class="media">
+    <div class="avatar media-left">
+      <div class='image'><%= user_avatar_tag(item) %></div>
+    </div>
+    <div class="media-body">
+      <div class="info">
+        <%= link_to item.fullname, item %>
+        <span class="level"><%= render_user_level_tag(item) %></span>
+      </div>
+      <div class="info number">
+        第 <%= item.id %> 位<%= t("menu.users")%>
+         •
+        <span title="注册日期"><%= item.created_at.to_date %></span>
+        <% if item.location.present? %> • <span title="所在地"><%= location_name_tag(item.location) %></span><% end %>
+         •
+        <span><%= item.topics_count %></span> 篇帖子 • <span><%= item.replies_count %></span> 条回帖
+      </div>
+    </div>
+  </div>
+</div>

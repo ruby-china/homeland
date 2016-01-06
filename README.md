@@ -11,6 +11,7 @@ This is the source code of [Ruby China](http://ruby-china.org) website.
 * Redis 2.8 +
 * MongoDb 2.4.4 +
 * ImageMagick 6.5+
+* Elasticsearch 2.0+
 
 ## Install in development
 
@@ -45,12 +46,21 @@ $ brew install redis
 $ brew install mongodb
 $ brew install imagemagick
 $ brew install gs
+$ brew install elasticsearch
 ```
 
 ### Ubuntu
 
 ```bash
 $ sudo apt-get install memcached mongodb redis-server imagemagick ghostscript
+```
+
+Install Elasticsearch
+
+```bash
+wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+echo "deb http://packages.elastic.co/elasticsearch/2.x/debian stable main" | sudo tee -a /etc/apt/sources.list.d/elasticsearch-2.x.list
+sudo apt-get update && sudo apt-get install elasticsearch oracle-java7-set-default
 ```
 
 ```bash
@@ -63,6 +73,7 @@ MongoDB 2.0+                                                               [Yes]
 Redis 2.0+                                                                 [Yes]
 Memcached 1.4+                                                             [Yes]
 ImageMagick 6.5+                                                           [Yes]
+Elasticsearch 2.0                                                          [Yes]
 --------------------------------------------------------------------------------
 
 Installing dependencies
@@ -74,6 +85,7 @@ Configure
 --------------------------------------------------------------------------------
 Your MongoDB host (default: 127.0.0.1:27017):
 Your Redis host (default: 127.0.0.1:6379):
+Your Elasticsearch host (default: 127.0.0.1:9200):
 --------------------------------------------------------------------------------
 
 Seed default data...                                                      [Done]

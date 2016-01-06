@@ -14,4 +14,10 @@ describe Page, type: :model do
     page = Page.create(title: 'Foo bar', slug: 'foo-bar-1')
     expect(page.errors[:slug].size).to_not eq(1)
   end
+
+  describe '.to_param' do
+    let(:page) { create(:page, slug: 'foo') }
+
+    it { expect(page.to_param).to eq 'foo' }
+  end
 end

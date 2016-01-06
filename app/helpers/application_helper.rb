@@ -187,4 +187,12 @@ module ApplicationHelper
     end
     content_tag('ul', raw(items.join(EMPTY_STRING)), opts)
   end
+
+  def highlight(text)
+    text = escape_once(text)
+    text.gsub!('[h]', '<em>')
+    text.gsub!('[/h]', '</em>')
+    text.gsub!(/\\n|\\r/, '')
+    raw text
+  end
 end

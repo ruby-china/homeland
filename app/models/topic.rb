@@ -17,6 +17,8 @@ class Topic
   include Mongoid::MarkdownBody
   include Redis::Objects
   include Mongoid::Mentionable
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
 
   field :title
   field :body
@@ -85,6 +87,24 @@ class Topic
   }
   scope :without_users, proc { |user_ids| where(:user_id.nin => user_ids) }
 
+  mapping do
+    indexes :title, weight: 100
+    indexes :body, weight: 50
+    indexes :node_name, weight: 60
+  end
+
+  def as_indexed_json(options={})
+    {
+      title: self.title,
+      body: self.full_body,
+      node_name: self.node_name
+    }
+  end
+
+  def full_body
+    ([self.body] + self.replies.pluck(:body)).join('\n\n')
+  end
+
   def self.topic_index_hide_node_ids
     SiteConfig.node_ids_hide_in_topics_index.to_s.split(',').collect(&:to_i)
   end
@@ -142,6 +162,8 @@ class Topic
     self.last_reply_id = reply.try(:id)
     self.last_reply_user_id = reply.try(:user_id)
     self.last_reply_user_login = reply.try(:user_login)
+    # Reindex Search document
+    SearchIndexer.perform_later('update', 'topic', self.id)
     save
   end
 

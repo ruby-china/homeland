@@ -5,7 +5,7 @@ class SearchController < ApplicationController
         simple_query_string: {
           query: params[:q],
           default_operator: 'AND',
-          minimum_should_match: '90%',
+          minimum_should_match: '70%',
           fields: ['title', 'body', 'name', 'login']
         }
       },

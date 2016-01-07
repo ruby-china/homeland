@@ -75,7 +75,6 @@ MongoDB 2.0+                                                               [Yes]
 Redis 2.0+                                                                 [Yes]
 Memcached 1.4+                                                             [Yes]
 ImageMagick 6.5+                                                           [Yes]
-Elasticsearch 2.0                                                          [Yes]
 --------------------------------------------------------------------------------
 
 Installing dependencies

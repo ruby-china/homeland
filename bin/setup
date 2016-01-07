@@ -105,7 +105,7 @@ Dir.chdir APP_ROOT do
     print 'Your Elasticsearch host (default: 127.0.0.1:9200):'
     host = gets.strip
     host = '127.0.0.1:9200' if host == ''
-    replace_file('config/elasticsearch.yml', '127.0.0.1:9200', host
+    replace_file('config/elasticsearch.yml', '127.0.0.1:9200', host)
   end
 
   puts_line 'Seed default data...' do

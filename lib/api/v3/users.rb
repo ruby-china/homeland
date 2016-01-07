@@ -37,6 +37,12 @@ module API
           render @users
         end
 
+        desc '获取当然登陆者的资料'
+        get 'me', serializer: UserDetailSerializer, root: 'user' do
+          doorkeeper_authorize!
+          render current_user
+        end
+
         namespace ':login' do
           before do
             @user = User.find_login(params[:login])

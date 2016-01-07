@@ -20,6 +20,21 @@ describe 'API V3', 'users', type: :request do
     end
   end
 
+  describe 'GET /api/v3/users/me.json' do
+    it 'should 403 when not login' do
+      get '/api/v3/users/me.json'
+      expect(response.status).to eq 401
+    end
+
+    it 'should work' do
+      login_user!
+      get '/api/v3/users/me.json'
+      expect(response.status).to eq 200
+      expect(json['user']['login']).to eq(current_user.login)
+      expect(json['user']['email']).to eq(current_user.email)
+    end
+  end
+
   describe 'GET /api/v3/users/:login.json' do
     it 'should get user details with list of topics' do
       user = create(:user, name: 'test user', login: 'test_user', email: 'foobar@gmail.com', email_public: true)

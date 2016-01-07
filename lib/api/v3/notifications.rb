@@ -67,6 +67,11 @@ module API
           render @notifications
         end
 
+        desc '获得未读通知数量'
+        get 'unread_count' do
+          { count: current_user.notifications.unread.count }
+        end
+
         desc '将当前用户的一些通知设成已读状态'
         params do
           requires :ids, type: Array

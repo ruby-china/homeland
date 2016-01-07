@@ -134,6 +134,22 @@ describe 'API V3', 'notifications', type: :request do
     end
   end
 
+  describe 'GET /api/notifications/unread_count.json' do
+    it 'should 401 when not login' do
+      get '/api/v3/notifications/unread_count.json'
+      expect(response.status).to eq(401)
+    end
+
+    it 'should get count' do
+      login_user!
+      create :notification_topic, user: current_user
+      create :notification_topic, user: current_user, read: true
+      get '/api/v3/notifications/unread_count.json'
+      expect(response.status).to eq(200)
+      expect(json['count']).to eq(1)
+    end
+  end
+
   describe 'DELETE /api/notifications/all.json' do
     it 'must require token' do
       delete '/api/v3/notifications/all.json'

@@ -2,7 +2,7 @@ class SearchController < ApplicationController
   def index
     search_params = {
       query: {
-        query_string: {
+        simple_query_string: {
           query: params[:q],
           default_operator: 'AND',
           minimum_should_match: '90%',

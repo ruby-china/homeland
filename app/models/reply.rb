@@ -1,6 +1,8 @@
 require 'digest/md5'
 class Reply < ActiveRecord::Base
   include BaseModel
+  include SoftDelete
+  include MarkdownBody
 
   UPVOTES = %w(+1 :+1: :thumbsup: :plus1: 👍 👍🏻 👍🏼 👍🏽 👍🏾 👍🏿)
 
@@ -12,6 +14,7 @@ class Reply < ActiveRecord::Base
   delegate :login, to: :user, prefix: true, allow_nil: true
 
   scope :fields_for_list, -> { select(:topic_id, :id, :body_html, :updated_at, :created_at) }
+  scope :without_body, -> { select(column_names - ['body'])}
 
   validates :body, presence: true
   validates :body, uniqueness: { scope: [:topic_id, :user_id], message: '不能重复提交。' }

@@ -1,4 +1,5 @@
 class Photo < ActiveRecord::Base
+  include BaseModel
 
   belongs_to :user
 

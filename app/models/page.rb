@@ -3,6 +3,7 @@
 require 'redcarpet'
 class Page < ActiveRecord::Base
 
+  include MarkdownBody
   has_many :versions, class_name: 'PageVersion'
 
   attr_accessor :user_id, :change_desc, :version_enable

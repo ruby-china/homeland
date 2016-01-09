@@ -7,7 +7,7 @@ class Note < ActiveRecord::Base
 
   counter :hits, default: 0
 
-  scope :recent_updated, -> { desc(:updated_at) }
+  scope :recent_updated, -> { order(updated_at: :desc) }
   scope :published, -> { where(publish: true) }
 
   before_save :auto_set_value

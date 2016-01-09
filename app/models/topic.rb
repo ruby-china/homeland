@@ -10,6 +10,8 @@ CORRECT_CHARS = [
 class Topic < ActiveRecord::Base
   include Redis::Objects
   include BaseModel
+  include Likeable
+  include MarkdownBody
 
   # 临时存储检测用户是否读过的结果
   attr_accessor :read_state, :admin_editing
@@ -45,6 +47,7 @@ class Topic < ActiveRecord::Base
     where("node_id NOT IN (?)", ids)
   }
   scope :without_users, proc { |user_ids| where("user_id NOT IN (?)", user_ids) }
+  scope :without_body, -> { select(column_names - ['body'])}
 
   def self.fields_for_list
     columns = %w(body body_html who_deleted follower_ids)

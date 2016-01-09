@@ -1,20 +1,18 @@
-module Concerns
-    module MarkdownBody
-    extend ActiveSupport::Concern
-    include ActionView::Helpers::SanitizeHelper
-    include ApplicationHelper
+module MarkdownBody
+  extend ActiveSupport::Concern
+  include ActionView::Helpers::SanitizeHelper
+  include ApplicationHelper
 
-    included do
-      before_save :markdown_body
-      scope :without_body, -> { without(:body) }
-    end
+  included do
+    before_save :markdown_body
+    scope :without_body, -> { without(:body) }
+  end
 
-    private
+  private
 
-    def markdown_body
-      if self.body_changed?
-        self.body_html = sanitize_markdown(MarkdownTopicConverter.format(body))
-      end
+  def markdown_body
+    if self.body_changed?
+      self.body_html = sanitize_markdown(MarkdownTopicConverter.format(body))
     end
   end
 end

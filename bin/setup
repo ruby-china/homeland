@@ -66,7 +66,7 @@ Dir.chdir APP_ROOT do
 
   puts_section 'Checking Package Dependencies...' do
     pkg_exist = true
-    [['pg'], ['redis-server', 'Redis 2.0+'], ['memcached', 'Memcached 1.4+'], ['convert', 'ImageMagick 6.5+']].each do |item|
+    [['psql', 'PostgreSQL 9.4+'], ['redis-server', 'Redis 2.0+'], ['memcached', 'Memcached 1.4+'], ['convert', 'ImageMagick 6.5+']].each do |item|
       puts_line_with_yn item[1] do
         if `which #{item[0]}` == ''
           pkg_exist = false
@@ -102,10 +102,6 @@ Dir.chdir APP_ROOT do
     replace_file('config/redis.yml', '127.0.0.1', host.split(':')[0])
     replace_file('config/redis.yml', '6379', host.split(':')[1])
 
-    print 'Your Elasticsearch host (default: 127.0.0.1:9200):'
-    host = gets.strip
-    host = '127.0.0.1:9200' if host == ''
-    replace_file('config/elasticsearch.yml', '127.0.0.1:9200', host)
   end
 
   puts_line 'Seed default data...' do

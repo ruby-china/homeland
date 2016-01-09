@@ -53,7 +53,7 @@
       <%= t("topics.no_replies") %>
     </div>
     <% else %>
-    <div id="replies" class="panel panel-default" data-last-floor="<%= @replies.count %>">
+    <div id="replies" class="panel panel-default" data-last-floor="<%= @replies.count(:all) %>">
       <div class="total panel-heading">
         共收到 <b><%= @topic.replies_count %></b> 条回复
       </div>

@@ -1,7 +1,7 @@
 module Cpanel
   class SiteNodesController < ApplicationController
     def index
-      @site_nodes = SiteNode.desc('_id').paginate(page: params[:page], per_page: 20)
+      @site_nodes = SiteNode.order(id: :desc).paginate(page: params[:page], per_page: 20)
 
       respond_to do |format|
         format.html # index.html.erb

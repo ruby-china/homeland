@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :recoverable,
          :rememberable, :trackable, :validatable, :omniauthable, :async
 
+  mount_uploader :avatar, AvatarUploader
+
   has_many :topics, dependent: :destroy
   has_many :notes
   has_many :replies, dependent: :destroy
@@ -239,8 +241,8 @@ class User < ActiveRecord::Base
     return if self.topic_read?(topic)
 
     notifications.unread.any_of({ mentionable_type: 'Topic', mentionable_id: topic.id },
-                                { mentionable_type: 'Reply', :mentionable_id.in => topic.reply_ids },
-                                :reply_id.in => topic.reply_ids).update_all(read: true)
+                                { mentionable_type: 'Reply', mentionable_id: topic.reply_ids },
+                                reply_id: topic.reply_ids).update_all(read: true)
 
     # 处理 last_reply_id 是空的情况
     last_reply_id = topic.last_reply_id || -1

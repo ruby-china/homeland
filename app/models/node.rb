@@ -10,8 +10,8 @@ class Node < ActiveRecord::Base
 
   has_and_belongs_to_many :followers, class_name: 'User', inverse_of: :following_nodes
 
-  scope :hots, -> { desc(:topics_count) }
-  scope :sorted, -> { desc(:sort) }
+  scope :hots, -> { order(topics_count: :desc) }
+  scope :sorted, -> { order(sort: :desc) }
 
   after_save :update_cache_version
   after_destroy :update_cache_version

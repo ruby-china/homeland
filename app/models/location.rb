@@ -2,7 +2,7 @@ class Location < ActiveRecord::Base
 
   has_many :users
 
-  scope :hot, -> { desc(:users_count) }
+  scope :hot, -> { order(users_count: :desc) }
 
   validates :name, uniqueness: { case_sensitive: false }
 

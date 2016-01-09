@@ -1,7 +1,7 @@
 module Cpanel
   class PagesController < ApplicationController
     def index
-      @pages = Page.unscoped.desc(:_id).paginate page: params[:page], per_page: 30
+      @pages = Page.unscoped.order(id: :desc).paginate page: params[:page], per_page: 30
     end
 
     def show

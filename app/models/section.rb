@@ -4,7 +4,7 @@ class Section < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: true
 
-  default_scope -> { desc(:sort) }
+  default_scope -> { order(sort: :desc) }
 
   after_save :update_cache_version
   after_destroy :update_cache_version
@@ -15,6 +15,6 @@ class Section < ActiveRecord::Base
   end
 
   def sorted_nodes
-    nodes.where(:_id.nin => [Node.no_point_id]).sorted
+    nodes.where("id NOT IN (?)", [Node.no_point_id]).sorted
   end
 end

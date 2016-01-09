@@ -1,5 +1,6 @@
 # 记事本
 class Note < ActiveRecord::Base
+  include BaseModel
   include Redis::Objects
 
   belongs_to :user

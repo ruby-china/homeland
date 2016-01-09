@@ -1,19 +1,17 @@
 require 'digest/md5'
 class Reply < ActiveRecord::Base
+  include BaseModel
 
   UPVOTES = %w(+1 :+1: :thumbsup: :plus1: 👍 👍🏻 👍🏼 👍🏽 👍🏾 👍🏿)
 
-  belongs_to :user, inverse_of: :replies
-  belongs_to :topic, inverse_of: :replies, touch: true
-  has_many :notifications, class_name: 'Notification::Base', dependent: :delete
-
-  counter_cache name: :user, inverse_of: :replies
-  counter_cache name: :topic, inverse_of: :replies
+  belongs_to :user, inverse_of: :replies, counter_cache: true
+  belongs_to :topic, inverse_of: :replies, touch: true, counter_cache: true
+  has_many :notifications, class_name: 'Notification::Base', dependent: :destroy
 
   delegate :title, to: :topic, prefix: true, allow_nil: true
   delegate :login, to: :user, prefix: true, allow_nil: true
 
-  scope :fields_for_list, -> { only(:topic_id, :_id, :body_html, :updated_at, :created_at) }
+  scope :fields_for_list, -> { select(:topic_id, :id, :body_html, :updated_at, :created_at) }
 
   validates :body, presence: true
   validates :body, uniqueness: { scope: [:topic_id, :user_id], message: '不能重复提交。' }

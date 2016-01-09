@@ -21,7 +21,7 @@ class Site < ActiveRecord::Base
   end
 
   def check_uniq
-    if Site.unscoped.where(:url => url, :_id.ne => id).count > 0
+    if Site.unscoped.where(:url => url).not(id: id).count > 0
       errors.add(:url, '已经提交过了。')
     end
   end

@@ -9,14 +9,13 @@ CORRECT_CHARS = [
 
 class Topic < ActiveRecord::Base
   include Redis::Objects
+  include BaseModel
 
   # 临时存储检测用户是否读过的结果
   attr_accessor :read_state, :admin_editing
 
-  belongs_to :user, inverse_of: :topics
-  counter_cache name: :user, inverse_of: :topics
-  belongs_to :node
-  counter_cache name: :node, inverse_of: :topics
+  belongs_to :user, inverse_of: :topics, counter_cache: true
+  belongs_to :node, counter_cache: true
   belongs_to :last_reply_user, class_name: 'User'
   belongs_to :last_reply, class_name: 'Reply'
   has_many :replies, dependent: :destroy
@@ -29,25 +28,28 @@ class Topic < ActiveRecord::Base
   delegate :body, to: :last_reply, prefix: true, allow_nil: true
 
   # scopes
-  scope :last_actived, -> { desc(:last_active_mark) }
+  scope :last_actived, -> { order(last_active_mark: :desc) }
   # 推荐的话题
-  scope :suggest, -> { where(:suggested_at.ne => nil).desc(:suggested_at) }
-  scope :without_suggest, -> { where(:suggested_at => nil) }
-  scope :fields_for_list, -> { without(:body, :body_html, :who_deleted, :follower_ids) }
-  scope :high_likes, -> { desc(:likes_count, :_id) }
-  scope :high_replies, -> { desc(:replies_count, :_id) }
+  scope :suggest, -> { where("suggested_at IS NOT NULL").order(suggested_at: :desc) }
+  scope :without_suggest, -> { where(suggested_at: nil) }
+  scope :high_likes, -> { order(likes_count: :desc).order(id: :desc) }
+  scope :high_replies, -> { order(replies_count: :desc).order(id: :desc) }
   scope :no_reply, -> { where(replies_count: 0) }
-  scope :popular, -> { where(:likes_count.gt => 5) }
-  scope :without_node_ids, proc { |ids| where(:node_id.nin => ids) }
-  scope :excellent, -> { where(:excellent.gte => 1) }
-  scope :without_hide_nodes, -> { where(:node_id.nin => Topic.topic_index_hide_node_ids) }
+  scope :popular, -> { where("likes_count > 5") }
+  scope :without_node_ids, proc { |ids| where("node_id NOT IN (?)" ,ids) }
+  scope :excellent, -> { where("excellent >= 1") }
+  scope :without_hide_nodes, -> { where("node_id NOT IN (?)", Topic.topic_index_hide_node_ids) }
   scope :without_nodes, proc { |node_ids|
     ids = node_ids + topic_index_hide_node_ids
     ids.uniq!
-    where(:node_id.nin => ids)
+    where("node_id NOT IN (?)", ids)
   }
-  scope :without_users, proc { |user_ids| where(:user_id.nin => user_ids) }
+  scope :without_users, proc { |user_ids| where("user_id NOT IN (?)", user_ids) }
 
+  def self.fields_for_list
+    columns = %w(body body_html who_deleted follower_ids)
+    select(column_names - columns.map(&:to_s))
+  end
 
   def full_body
     ([self.body] + self.replies.pluck(:body)).join('\n\n')
@@ -120,7 +122,7 @@ class Topic < ActiveRecord::Base
     return false if deleted_reply.blank?
     return false if last_reply_user_id != deleted_reply.user_id
 
-    previous_reply = replies.where(:_id.nin => [deleted_reply.id]).recent.first
+    previous_reply = replies.where("id NOT IN (?)", [deleted_reply.id]).recent.first
     update_last_reply(previous_reply, force: true)
   end
 
@@ -139,7 +141,7 @@ class Topic < ActiveRecord::Base
   # 所有的回复编号
   def reply_ids
     Rails.cache.fetch([self, 'reply_ids']) do
-      replies.only(:_id).map(&:_id).sort
+      replies.only(:id).map(&:id).sort
     end
   end
 

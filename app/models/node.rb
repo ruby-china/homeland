@@ -46,6 +46,6 @@ class Node < ActiveRecord::Base
   def self.new_topic_dropdowns
     return [] if SiteConfig.new_topic_dropdown_node_ids.blank?
     node_ids = SiteConfig.new_topic_dropdown_node_ids.split(',').uniq.take(5)
-    where(:_id.in => node_ids)
+    where("id IN (?)", node_ids)
   end
 end

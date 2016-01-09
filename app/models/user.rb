@@ -4,6 +4,7 @@ require 'open-uri'
 
 class User < ActiveRecord::Base
   include Redis::Objects
+  include BaseModel
   extend OmniauthCallbacks
 
   ALLOW_LOGIN_CHARS_REGEXP = /\A\w+\z/
@@ -20,11 +21,10 @@ class User < ActiveRecord::Base
   has_many :oauth_applications, class_name: 'Doorkeeper::Application', as: :owner
 
   def read_notifications(notifications)
-    unread_ids = notifications.find_all { |notification| !notification.read? }.map(&:_id)
+    unread_ids = notifications.find_all { |notification| !notification.read? }.map(&:id)
     if unread_ids.any?
-      Notification::Base.where(user_id: id,
-                               :_id.in => unread_ids,
-                               read: false).update_all(read: true, updated_at: Time.now)
+      Notification::Base.where(user_id: id,read: false)
+        .where("id IN (?)", unread_ids).update_all(read: true, updated_at: Time.now)
     end
   end
 
@@ -47,14 +47,22 @@ class User < ActiveRecord::Base
                     length: { in: 3..20 }, presence: true,
                     uniqueness: { case_sensitive: false }
 
-  has_and_belongs_to_many :following, class_name: 'User', inverse_of: :followers
-  has_and_belongs_to_many :followers, class_name: 'User', inverse_of: :following
+#  has_and_belongs_to_many :following, class_name: 'User', inverse_of: :followers
+#  has_and_belongs_to_many :followers, class_name: 'User', inverse_of: :following
 
-  scope :hot, -> { desc(:replies_count, :topics_count) }
+  scope :hot, -> { order(replies_count: :desc).order(topics_count: :desc) }
   scope :fields_for_list, lambda {
-    only(:_id, :name, :login, :email, :email_md5, :email_public, :avatar, :verified, :state,
+    select(:id, :name, :login, :email, :email_md5, :email_public, :avatar, :verified, :state,
          :tagline, :github, :website, :location, :location_id, :twitter, :co)
   }
+
+  def following
+    User.where(id: self.following_ids)
+  end
+
+  def followers
+    User.where(id: self.follower_ids)
+  end
 
   def to_param
     login
@@ -188,9 +196,7 @@ class User < ActiveRecord::Base
   end
 
   def self.find_login(slug)
-    # FIXME: Regexp search in MongoDB is slow!!!
-    fail Mongoid::Errors::DocumentNotFound.new(self, slug: slug) unless slug =~ ALLOW_LOGIN_CHARS_REGEXP
-    where(login: /^#{slug}$/i).first || fail(Mongoid::Errors::DocumentNotFound.new(self, slug: slug))
+    where(login: slug).first
   end
 
   def bind?(provider)

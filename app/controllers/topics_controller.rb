@@ -84,7 +84,7 @@ class TopicsController < ApplicationController
     @show_raw = params[:raw] == '1'
 
     @threads << Thread.new do
-      @replies = @topic.replies.unscoped.without_body.asc(:_id).all
+      @replies = @topic.replies.unscoped.without_body.order(:id).all
 
       check_current_user_liked_replies
     end

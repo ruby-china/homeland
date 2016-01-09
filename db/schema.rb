@@ -234,18 +234,19 @@ ActiveRecord::Schema.define(version: 20160103132805) do
     t.string      "email_md5",                              null: false
     t.boolean     "email_public",            default: false, null: false
     t.string      "location"
-    t.integer     "location_id",                                   null: false
+    t.integer     "location_id"
     t.string      "bio"
     t.string      "website"
     t.string      "company"
     t.string      "github"
     t.string      "twitter"
     t.string      "qq"
-    t.string      "avatar_file_name"
+    t.string      "avatar"
     t.boolean     "verified",            default: false, null: false
     t.boolean     "hr",            default: false, null: false
     t.integer     "state",               default: 1,     null: false
     t.string      "tagline"
+    t.string      "co"
     t.datetime    "created_at"
     t.datetime    "updated_at"
     t.string      "encrypted_password",     default: "", null: false
@@ -267,6 +268,9 @@ ActiveRecord::Schema.define(version: 20160103132805) do
     t.integer     "favorite_topic_ids", array: true, default: []
     t.integer     "blocked_node_ids", array: true, default: []
     t.integer     "blocked_user_ids", array: true, default: []
+    t.integer     "following_ids", array: true, default: []
+    t.integer     "follower_ids", array: true, default: []
+
   end
 
   add_index "users", ["login"], name: "index_users_on_login"

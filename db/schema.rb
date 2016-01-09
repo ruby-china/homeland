@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20160109040800) do
+=======
+ActiveRecord::Schema.define(version: 20160109171447) do
+>>>>>>> df21a85... Add rails generate doorkeeper:application_owner
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -137,8 +141,11 @@ ActiveRecord::Schema.define(version: 20160109040800) do
     t.string   "scopes",       default: "", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "owner_id"
+    t.string   "owner_type"
   end
 
+  add_index "oauth_applications", ["owner_id", "owner_type"], name: "index_oauth_applications_on_owner_id_and_owner_type", using: :btree
   add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
 
   create_table "page_versions", force: :cascade do |t|

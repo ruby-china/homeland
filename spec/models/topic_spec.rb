@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 describe Topic, type: :model do
+  before do
+    PostgreSearch.stub(:index_searchable).and_return(true)
+  end
   let(:topic) { create(:topic) }
   let(:user) { create(:user) }
 
@@ -196,7 +199,7 @@ describe Topic, type: :model do
       expect(topic).to be_a(Topic)
 
       followers.each do |f|
-        expect(f.notifications.unread.where(_type: 'Notification::Topic').count).to eq 1
+        expect(f.notifications.unread.where(type: 'Notification::Topic').count).to eq 1
       end
     end
   end
@@ -208,7 +211,7 @@ describe Topic, type: :model do
     describe 'Call method' do
       it 'should work' do
         Topic.notify_topic_node_changed(topic.id, new_node.id)
-        last_notification = user.notifications.unread.where(_type: 'Notification::NodeChanged').first
+        last_notification = user.notifications.unread.where(type: 'Notification::NodeChanged').first
         expect(last_notification.topic_id).to eq topic.id
         expect(last_notification.node_id).to eq new_node.id
       end

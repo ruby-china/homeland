@@ -10,8 +10,8 @@ module SoftDelete
   def destroy
     run_callbacks(:destroy) do
       if persisted?
-        set(deleted_at: Time.now.utc)
-        set(updated_at: Time.now.utc)
+        update_attribute(:deleted_at, Time.now.utc)
+        update_attribute(:updated_at, Time.now.utc)
       end
 
       @destroyed = true

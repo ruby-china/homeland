@@ -9,8 +9,7 @@ class Location < ActiveRecord::Base
   def self.find_by_name(name)
     return nil if name.blank?
     name = name.downcase.strip
-    query = !name.match(/\p{Han}/).nil? ? name : /#{name}/i
-    where(name: query).first
+    where(name: "'#{name}'").first
   end
 
   def self.find_or_create_by_name(name)

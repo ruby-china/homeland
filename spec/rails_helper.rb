@@ -60,7 +60,7 @@ RSpec.configure do |config|
   config.render_views
 
   config.before(:each) do
-    DatabaseCleaner.orm = :mongoid
+    DatabaseCleaner.orm = :active_record
     DatabaseCleaner.strategy = :truncation
     DatabaseCleaner.clean
     Rails.cache.clear

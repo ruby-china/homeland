@@ -235,11 +235,15 @@ ActiveRecord::Schema.define(version: 20160109171447) do
   add_index "site_nodes", ["sort"], name: "index_site_nodes_on_sort", using: :btree
 
   create_table "sites", force: :cascade do |t|
+<<<<<<< HEAD
     t.integer  "user_id",      null: false
+=======
+    t.integer  "user_id"
+>>>>>>> ce3f080... Pass 96% model specs
     t.integer  "site_node_id"
     t.string   "name",         null: false
     t.string   "url",          null: false
-    t.string   "desc",         null: false
+    t.string   "desc"
     t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"

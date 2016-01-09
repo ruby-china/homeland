@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   end
 
   def topics
-    @topics = @user.topics.unscoped.fields_for_list.recent.paginate(page: params[:page], per_page: 40)
+    @topics = @user.topics.fields_for_list.recent.paginate(page: params[:page], per_page: 40)
     set_seo_meta("#{@user.login} 的帖子")
   end
 

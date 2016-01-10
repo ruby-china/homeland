@@ -168,7 +168,6 @@ ActiveRecord::Schema.define(version: 20160109171447) do
     t.string   "title",                          null: false
     t.text     "body",                           null: false
     t.text     "body_html"
-    t.integer  "user_id",                        null: false
     t.boolean  "locked",         default: false
     t.integer  "version",        default: 0,     null: false
     t.integer  "editor_ids",     default: [],    null: false, array: true
@@ -181,7 +180,6 @@ ActiveRecord::Schema.define(version: 20160109171447) do
   end
 
   add_index "pages", ["slug"], name: "index_pages_on_slug", using: :btree
-  add_index "pages", ["user_id"], name: "index_pages_on_user_id", using: :btree
 
   create_table "photos", force: :cascade do |t|
     t.integer  "user_id"

@@ -73,15 +73,15 @@ describe User, type: :model do
     it 'should update users_count when user location changed' do
       old_name = user.location
       new_name = 'HongKong'
-      old_location = Location.find_by(name: old_name)
+      old_location = Location.location_find_by_name(old_name)
       hk_location = create(:location, name: new_name, users_count: 20)
       user.location = new_name
       user.save
       user.reload
       expect(user.location).to eq(new_name)
       expect(user.location_id).to eq(hk_location.id)
-      expect(Location.find_by(name: old_name).users_count).to eq(old_location.users_count - 1)
-      expect(Location.find_by(name: new_name).users_count).to eq(hk_location.users_count + 1)
+      expect(Location.location_find_by_name(old_name).users_count).to eq(old_location.users_count - 1)
+      expect(Location.location_find_by_name(new_name).users_count).to eq(hk_location.users_count + 1)
     end
   end
 

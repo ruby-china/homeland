@@ -12,7 +12,7 @@ module API
 
       rescue_from :all do |e|
         case e
-        when Mongoid::Errors::DocumentNotFound
+        when ActiveRecord::RecordNotFound
           Rack::Response.new([{ error: '数据不存在' }.to_json], 404, {}).finish
         when Grape::Exceptions::ValidationErrors
           Rack::Response.new([{

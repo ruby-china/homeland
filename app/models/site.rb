@@ -1,5 +1,6 @@
 class Site < ActiveRecord::Base
   include BaseModel
+  include SoftDelete
 
   belongs_to :site_node
   belongs_to :user

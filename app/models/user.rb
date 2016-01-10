@@ -83,7 +83,7 @@ class User < ActiveRecord::Base
 
   def self.find_for_database_authentication(conditions)
     login = conditions.delete(:login)
-    where(login: /^#{login}$/i).first || where(email: /^#{login}$/i).first
+    where("login ~* ?", /^#{login}$/i).first || where("email ~* ?", /^#{login}$/i).first
   end
 
   def password_required?
@@ -173,9 +173,9 @@ class User < ActiveRecord::Base
   def store_location
     if self.location_changed?
       if !location.blank?
-        old_location = Location.find_by(name: self.location_was)
+        old_location = Location.location_find_by_name(self.location_was)
         old_location.decrement!(:users_count) unless old_location.blank?
-        location = Location.find_or_create_by(name: self.location)
+        location = Location.location_find_or_create_by_name(self.location)
         location.increment!(:users_count)
         self.location_id = (location.blank? ? nil : location.id)
       else
@@ -199,7 +199,7 @@ class User < ActiveRecord::Base
 
   def self.find_login(slug)
     fail ActiveRecord::RecordNotFound.new(slug: slug) unless slug =~ ALLOW_LOGIN_CHARS_REGEXP
-    where(login: slug.downcase).first || fail(ActiveRecord::RecordNotFound.new(slug: slug))
+    where("login ~* ?", slug).first || fail(ActiveRecord::RecordNotFound.new(slug: slug))
   end
 
   def bind?(provider)

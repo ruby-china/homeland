@@ -26,7 +26,7 @@ module API
         end
         post 'read' do
           if params[:ids].length > 0
-            @notifications = current_user.notifications.where(:_id.in => params[:ids])
+            @notifications = current_user.notifications.where(id: params[:ids])
             current_user.read_notifications(@notifications)
           end
           { ok: 1 }

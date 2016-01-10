@@ -39,22 +39,7 @@ module API
       mount API::V3::Notifications
       mount API::V3::Likes
 
-      desc %(简单的 API 测试接口，需要验证，便于快速测试 OAuth 以及其他 API 的基本格式是否正确
-  ### Returns:
-
-  ```json
-  {
-      "user": {
-          "id": 2,
-          "login": "huacnlee",
-          "name": "李华顺",
-          "avatar_url": "http://ruby-china-files-dev.b0.upaiyun.com/user/large_avatar/2.jpg"
-      },
-      "meta": {
-          "time": "2015-05-18T23:06:49.874+08:00"
-      }
-  }
-  ```)
+      desc %(简单的 API 测试接口，需要验证，便于快速测试 OAuth 以及其他 API 的基本格式是否正确)
       params do
         optional :limit, type: Integer, values: 0..100
       end

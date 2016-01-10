@@ -169,7 +169,7 @@ describe 'API V3', 'topics', type: :request do
 
     it 'should work' do
       login_user!
-      node_id = create(:node)._id
+      node_id = create(:node).id
       post '/api/v3/topics.json', title: 'api create topic', body: 'here we go', node_id: node_id
       expect(response.status).to eq(201)
       expect(json['topic']['body_html']).to eq '<p>here we go</p>'
@@ -209,7 +209,7 @@ describe 'API V3', 'topics', type: :request do
 
       it 'should work' do
         login_user!
-        node_id = create(:node)._id
+        node_id = create(:node).id
         post "/api/v3/topics/#{topic.id}.json", title: 'api create topic', body: 'here we go', node_id: node_id
         expect(response.status).to eq(201)
         expect(json['topic']['body_html']).to eq '<p>here we go</p>'
@@ -224,7 +224,7 @@ describe 'API V3', 'topics', type: :request do
       it 'should node update node_id when topic is lock_node' do
         topic.update_attribute(:lock_node, true)
         login_user!
-        node_id = create(:node)._id
+        node_id = create(:node).id
         post "/api/v3/topics/#{topic.id}.json", title: 'api create topic', body: 'here we go', node_id: node_id
         topic.reload
         expect(topic.node_id).not_to eq node_id

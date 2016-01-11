@@ -118,7 +118,7 @@ describe Ability, type: :model do
     let(:user) { create :user }
     let(:ability) { Ability.new(user) }
 
-    it { is_expected.not_to be_able_to(:create, Topic) }
+    it { is_expected.to be_able_to(:create, Topic) }
   end
 
   context 'Newbie users' do

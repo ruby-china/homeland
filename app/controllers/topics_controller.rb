@@ -18,7 +18,7 @@ class TopicsController < ApplicationController
         @topics = @topics.without_hide_nodes
       end
       @topics = @topics.fields_for_list
-      @topics = @topics.paginate(page: params[:page], per_page: 22, total_entries: 1500)
+      @topics = @topics.paginate(page: params[:page], per_page: 22, total_entries: 1500).to_a
     end
     @threads.each(&:join)
 

@@ -51,9 +51,6 @@ class User < ActiveRecord::Base
                     length: { in: 3..20 }, presence: true,
                     uniqueness: { case_sensitive: true}
 
-#  has_and_belongs_to_many :following, class_name: 'User', inverse_of: :followers
-#  has_and_belongs_to_many :followers, class_name: 'User', inverse_of: :following
-
   scope :hot, -> { order(replies_count: :desc).order(topics_count: :desc) }
   scope :fields_for_list, lambda {
     select(:id, :name, :login, :email, :email_md5, :email_public, :avatar, :verified, :state,
@@ -81,11 +78,6 @@ class User < ActiveRecord::Base
     Rails.cache.fetch("user-#{id}-temp_access_token-#{Time.now.strftime('%Y%m%d')}") do
       SecureRandom.hex
     end
-  end
-
-  def self.find_for_database_authentication(conditions)
-    login = conditions.delete(:login)
-    where("login ~* ?", /^#{login}$/i).first || where("email ~* ?", /^#{login}$/i).first
   end
 
   def password_required?
@@ -203,6 +195,14 @@ class User < ActiveRecord::Base
     fail ActiveRecord::RecordNotFound.new(slug: slug) unless slug =~ ALLOW_LOGIN_CHARS_REGEXP
     where("login ~* ?", slug).first || fail(ActiveRecord::RecordNotFound.new(slug: slug))
   end
+
+  def self.find_for_database_authentication(warden_conditions)
+    conditions = warden_conditions.dup
+    login = conditions.delete(:login)
+    login.downcase!
+    where(conditions.to_h).where(["lower(login) = :value OR lower(email) = :value", { value: login }]).first
+  end
+
 
   def bind?(provider)
     authorizations.collect(&:provider).include?(provider)

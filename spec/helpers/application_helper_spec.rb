@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 describe ApplicationHelper, type: :helper do
+  it 'sanitize_markdown' do
+    expect(helper.sanitize_markdown('<a href="javascript:alert()">link</a>')).to eq('<a>link</a>')
+  end
+
   it 'formats the flash messages' do
     expect(helper.notice_message).to eq('')
     expect(helper.notice_message.html_safe?).to eq(true)

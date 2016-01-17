@@ -39,8 +39,6 @@ module RubyChina
       g.fixture_replacement :factory_girl, dir: 'spec/factories'
     end
 
-    config.action_view.sanitized_allowed_attributes = %w(target)
-
     config.to_prepare do
       Devise::Mailer.layout 'mailer'
       # Only Applications list

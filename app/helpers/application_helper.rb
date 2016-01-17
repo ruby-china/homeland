@@ -8,7 +8,7 @@ module ApplicationHelper
 
   def sanitize_markdown(body)
     # TODO: This method slow, 3.5ms per call in topic body
-    sanitize body, tags: ALLOW_TAGS, attributes: ALLOW_ATTRIBUTES
+    sanitize sanitize(body), tags: ALLOW_TAGS, attributes: ALLOW_ATTRIBUTES
   end
 
   def notice_message

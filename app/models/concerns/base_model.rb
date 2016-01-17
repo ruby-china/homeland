@@ -12,15 +12,19 @@ module BaseModel
     def push(hash)
       hash.each_key do |key|
         old_val = self[key] || []
-        update_attributes key: old_val | [ hash[key] ]
+        old_val << hash[key].to_i
+        old_val.uniq!
+        update_column(key, old_val)
       end
     end
 
     # FIXME: 需要原子化操作
     def pull(hash)
       hash.each_key do |key|
-        return true if self[key].blank?
-        update_attributes key: self[key] - [ hash[key] ]
+        old_val = self[key]
+        return true if old_val.blank?
+        old_val.delete(hash[key].to_i)
+        update_column(key, old_val)
       end
     end
   end

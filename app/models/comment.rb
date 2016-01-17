@@ -15,12 +15,12 @@ class Comment < ActiveRecord::Base
   after_create :increase_counter_cache
   def increase_counter_cache
     return if commentable.blank?
-    commentable.increment(comments_count: 1)
+    commentable.increment!(:comments_count)
   end
 
   before_destroy :decrease_counter_cache
   def decrease_counter_cache
     return if commentable.blank?
-    commentable.increment(comments_count: -1)
+    commentable.decrement!(:comments_count)
   end
 end

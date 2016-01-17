@@ -257,7 +257,7 @@ class User < ActiveRecord::Base
     return false if likeable.blank?
     return false if liked?(likeable)
     likeable.push(liked_user_ids: id)
-    likeable.increment!(likes_count: 1)
+    likeable.increment!(:likes_count)
     likeable.touch
   end
 
@@ -267,7 +267,7 @@ class User < ActiveRecord::Base
     return false unless liked?(likeable)
     return false if likeable.user_id == self.id
     likeable.pull(liked_user_ids: id)
-    likeable.increment!(likes_count: -1)
+    likeable.decrement!(:likes_count)
     likeable.touch
   end
 
@@ -412,7 +412,10 @@ class User < ActiveRecord::Base
 
   def follow_user(user)
     return false if user.blank?
-    self.push(following_ids: user.id)
+    self.transaction do
+      self.push(following_ids: user.id)
+      user.push(follower_ids: self.id)
+    end
     Notification::Follow.notify(user: user, follower: self)
   end
 
@@ -426,7 +429,10 @@ class User < ActiveRecord::Base
 
   def unfollow_user(user)
     return false if user.blank?
-    self.pull(following_ids: user.id)
+    self.transaction do
+      self.pull(following_ids: user.id)
+      user.pull(follower_ids: self.id)
+    end
   end
 
   def favorites_count

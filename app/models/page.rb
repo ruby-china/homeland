@@ -34,7 +34,7 @@ class Page < ActiveRecord::Base
     return true unless version_enable
     # 只有 body, title, slug 更改了才更新版本
     if self.body_changed? || self.title_changed? || self.slug_changed?
-      increment(version: 1)
+      increment!(:version)
       PageVersion.create(user_id: user_id,
                          page_id: id,
                          desc: change_desc,

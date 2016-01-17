@@ -12,6 +12,7 @@ class Topic < ActiveRecord::Base
   include BaseModel
   include Likeable
   include MarkdownBody
+  include SoftDelete
 
   # 临时存储检测用户是否读过的结果
   attr_accessor :read_state, :admin_editing
@@ -38,15 +39,24 @@ class Topic < ActiveRecord::Base
   scope :high_replies, -> { order(replies_count: :desc).order(id: :desc) }
   scope :no_reply, -> { where(replies_count: 0) }
   scope :popular, -> { where("likes_count > 5") }
-  scope :without_node_ids, proc { |ids| where("node_id NOT IN (?)" ,ids) }
-  scope :excellent, -> { where("excellent >= 1") }
-  scope :without_hide_nodes, -> { where("node_id NOT IN (?)", Topic.topic_index_hide_node_ids) }
-  scope :without_nodes, proc { |node_ids|
-    ids = node_ids + topic_index_hide_node_ids
-    ids.uniq!
-    where("node_id NOT IN (?)", ids)
+  scope :exclude_column_ids, proc {|column, ids|
+    if ids.size == 0
+      all
+    else
+      where("#{column} NOT IN (?)", ids)
+    end
   }
-  scope :without_users, proc { |user_ids| where("user_id NOT IN (?)", user_ids) }
+  scope :without_node_ids, proc { |ids| exclude_column_ids("node_id", ids) }
+  scope :excellent, -> { where("excellent >= 1") }
+  scope :without_hide_nodes, -> { exclude_column_ids("node_id", Topic.topic_index_hide_node_ids) }
+  scope :without_nodes, proc { |node_ids|
+    ids = node_ids + Topic.topic_index_hide_node_ids
+    ids.uniq!
+    exclude_column_ids("node_id", ids)
+  }
+  scope :without_users, proc { |user_ids|
+    exclude_column_ids("user_id", user_ids)
+  }
   scope :without_body, -> { select(column_names - ['body'])}
 
   def self.fields_for_list

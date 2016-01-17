@@ -21,7 +21,7 @@ class Note < ActiveRecord::Base
   before_update :update_changes_count
   def update_changes_count
     self.changes_count = 0 if changes_count.blank?
-    inc(changes_count: 1)
+    increment(changes_count: 1)
   end
 
   def display_title

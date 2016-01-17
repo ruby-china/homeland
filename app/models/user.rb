@@ -174,9 +174,9 @@ class User < ActiveRecord::Base
     if self.location_changed?
       if !location.blank?
         old_location = Location.find_by_name(location_was)
-        old_location.inc(users_count: -1) unless old_location.blank?
+        old_location.increment(users_count: -1) unless old_location.blank?
         location = Location.find_or_create_by_name(self.location)
-        location.inc(users_count: 1)
+        location.increment(users_count: 1)
         self.location_id = (location.blank? ? nil : location.id)
       else
         self.location_id = nil
@@ -254,7 +254,7 @@ class User < ActiveRecord::Base
     return false if likeable.blank?
     return false if liked?(likeable)
     likeable.push(liked_user_ids: id)
-    likeable.inc(likes_count: 1)
+    likeable.increment(likes_count: 1)
     likeable.touch
   end
 
@@ -264,7 +264,7 @@ class User < ActiveRecord::Base
     return false unless liked?(likeable)
     return false if likeable.user_id == self.id
     likeable.pull(liked_user_ids: id)
-    likeable.inc(likes_count: -1)
+    likeable.increment(likes_count: -1)
     likeable.touch
   end
 
@@ -409,7 +409,7 @@ class User < ActiveRecord::Base
 
   def follow_user(user)
     return false if user.blank?
-    following.push(user)
+    self.push(following_ids: user.id)
     Notification::Follow.notify(user: user, follower: self)
   end
 
@@ -423,7 +423,7 @@ class User < ActiveRecord::Base
 
   def unfollow_user(user)
     return false if user.blank?
-    following.delete(user)
+    self.pull(following_ids: user.id)
   end
 
   def favorites_count

@@ -7,5 +7,19 @@ module BaseModel
     scope :by_week, -> { where("created_at > ?", 7.days.ago.utc) }
 
     delegate :url_helpers, to: 'Rails.application.routes'
+
+    # FIXME: 需要原子化操作
+    def push(hash)
+      hash.each_key do |key|
+        update_attributes key: self[key] + [ hash[key] ]
+      end
+    end
+
+    # FIXME: 需要原子化操作
+    def pull(hash)
+      hash.each_key do |key|
+        update_attributes key: self[key] - [ hash[key] ]
+      end
+    end
   end
 end

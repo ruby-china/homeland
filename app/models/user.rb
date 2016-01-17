@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   include Redis::Objects
   include BaseModel
   extend OmniauthCallbacks
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
 
   ALLOW_LOGIN_CHARS_REGEXP = /\A\w+\z/
 

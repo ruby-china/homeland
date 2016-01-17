@@ -1,9 +1,6 @@
 require 'rails_helper'
 
 describe Reply, type: :model do
-  before do
-    PostgreSearch.stub(:index_searchable).and_return(true)
-  end
   let(:user) { create(:user) }
   describe 'notifications' do
     it 'should delete mention notification after destroy' do

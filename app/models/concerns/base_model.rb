@@ -11,13 +11,15 @@ module BaseModel
     # FIXME: 需要原子化操作
     def push(hash)
       hash.each_key do |key|
-        update_attributes key: self[key] + [ hash[key] ]
+        old_val = self[key] || []
+        update_attributes key: old_val | [ hash[key] ]
       end
     end
 
     # FIXME: 需要原子化操作
     def pull(hash)
       hash.each_key do |key|
+        return true if self[key].blank?
         update_attributes key: self[key] - [ hash[key] ]
       end
     end

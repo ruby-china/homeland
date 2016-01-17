@@ -1,9 +1,6 @@
 require 'rails_helper'
 
 describe Topic, type: :model do
-  before do
-    PostgreSearch.stub(:index_searchable).and_return(true)
-  end
   let(:topic) { create(:topic) }
   let(:user) { create(:user) }
 

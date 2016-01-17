@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20160109040800) do
-=======
-ActiveRecord::Schema.define(version: 20160109171447) do
->>>>>>> df21a85... Add rails generate doorkeeper:application_owner
+ActiveRecord::Schema.define(version: 20160117061547) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -183,7 +179,7 @@ ActiveRecord::Schema.define(version: 20160109171447) do
 
   create_table "photos", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "image"
+    t.string   "image",      null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -233,11 +229,7 @@ ActiveRecord::Schema.define(version: 20160109171447) do
   add_index "site_nodes", ["sort"], name: "index_site_nodes_on_sort", using: :btree
 
   create_table "sites", force: :cascade do |t|
-<<<<<<< HEAD
-    t.integer  "user_id",      null: false
-=======
     t.integer  "user_id"
->>>>>>> ce3f080... Pass 96% model specs
     t.integer  "site_node_id"
     t.string   "name",         null: false
     t.string   "url",          null: false
@@ -251,10 +243,10 @@ ActiveRecord::Schema.define(version: 20160109171447) do
   add_index "sites", ["url"], name: "index_sites_on_url", using: :btree
 
   create_table "topics", force: :cascade do |t|
-    t.integer  "user_id",                            null: false
-    t.integer  "node_id",                            null: false
-    t.string   "title",                              null: false
-    t.text     "body",                               null: false
+    t.integer  "user_id",                               null: false
+    t.integer  "node_id",                               null: false
+    t.string   "title",                                 null: false
+    t.text     "body",                                  null: false
     t.text     "body_html"
     t.integer  "last_reply_id"
     t.integer  "last_reply_user_id"
@@ -262,15 +254,15 @@ ActiveRecord::Schema.define(version: 20160109171447) do
     t.string   "node_name"
     t.string   "who_deleted"
     t.integer  "last_active_mark"
-    t.boolean  "lock_node",          default: false
+    t.boolean  "lock_node",             default: false
     t.datetime "suggested_at"
-    t.integer  "excellent",          default: 0
+    t.integer  "excellent",             default: 0
     t.datetime "replied_at"
-    t.integer  "replies_count",      default: 0,     null: false
-    t.integer  "likes_count",        default: 0
-    t.integer  "follower_ids",       default: [],                 array: true
-    t.integer  "liked_user_ids",     default: [],                 array: true
-    t.integer  "mentioned_user_ids", default: [],                 array: true
+    t.integer  "replies_count",         default: 0,     null: false
+    t.integer  "likes_count",           default: 0
+    t.integer  "follower_ids",          default: [],                 array: true
+    t.integer  "liked_user_ids",        default: [],                 array: true
+    t.integer  "mentioned_user_ids",    default: [],                 array: true
     t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"

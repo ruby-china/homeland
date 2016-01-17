@@ -4,7 +4,6 @@ require 'digest/md5'
 describe User, type: :model do
   before do
     User.any_instance.stub(:update_index).and_return(true)
-    PostgreSearch.stub(:index_searchable).and_return(true)
   end
   let(:topic) { create :topic }
   let(:user)  { create :user }

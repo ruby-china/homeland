@@ -14,6 +14,8 @@ class Topic < ActiveRecord::Base
   include MarkdownBody
   include SoftDelete
   include Mentionable
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
 
   # 临时存储检测用户是否读过的结果
   attr_accessor :read_state, :admin_editing

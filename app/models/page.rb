@@ -4,6 +4,8 @@ require 'redcarpet'
 class Page < ActiveRecord::Base
   include BaseModel
   include MarkdownBody
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
 
   has_many :versions, class_name: 'PageVersion'
 

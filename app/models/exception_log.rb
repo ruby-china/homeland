@@ -1,8 +1,3 @@
-class ExceptionLog
-  include Mongoid::Document
-  include Mongoid::Timestamps
-  include Mongoid::BaseModel
+class ExceptionLog < ActiveRecord::Base
 
-  field :title
-  field :body
 end

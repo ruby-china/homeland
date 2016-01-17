@@ -1,10 +1,8 @@
-module Mongoid
-  module Likeable
+module Concerns
+    module Likeable
     extend ActiveSupport::Concern
 
     included do
-      field :liked_user_ids, type: Array, default: []
-      field :likes_count, type: Integer, default: 0
     end
 
     def liked_by_user?(user)

@@ -1,19 +1,9 @@
-class Node
-  include Mongoid::Document
-  include Mongoid::Timestamps
-  include Mongoid::BaseModel
-
-  field :name
-  field :summary
-  field :sort, type: Integer, default: 0
-  field :topics_count, type: Integer, default: 0
+class Node < ActiveRecord::Base
 
   delegate :name, to: :section, prefix: true, allow_nil: true
 
   has_many :topics
   belongs_to :section
-
-  index section_id: 1
 
   validates :name, :summary, :section, presence: true
   validates :name, uniqueness: true

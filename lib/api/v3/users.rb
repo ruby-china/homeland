@@ -3,31 +3,6 @@ module API
     class Users < Grape::API
       resource :users do
         # Get top 20 hot users
-        desc <<~DESC
-        获取活跃会员列表
-
-        ### Returns:
-
-        ```json
-        {
-            "users": [
-                {
-                    "id": 1,
-                    "login": "rei",
-                    "name": "Rei",
-                    "avatar_url": "http://ruby-china-files-dev.b0.upaiyun.com/user/large_avatar/1.jpg"
-                },
-                {
-                    "id": 2,
-                    "login": "huacnlee",
-                    "name": "李华顺",
-                    "avatar_url": "http://ruby-china-files-dev.b0.upaiyun.com/user/large_avatar/2.jpg"
-                },
-                ...
-            ]
-        }
-        ```
-        DESC
         params do
           optional :limit, type: Integer, default: 20, values: 1..150
         end

@@ -1,8 +1,7 @@
-module Mongoid
+module Concerns
   module Mentionable
     extend ActiveSupport::Concern
     included do
-      field :mentioned_user_ids, type: Array, default: []
       before_save :extract_mentioned_users
       after_create :send_mention_notification
       after_destroy :delete_notifiaction_mentions

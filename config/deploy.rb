@@ -44,7 +44,6 @@ end
 
 task :migrate_db, roles: :web do
   run "cd #{current_path}; RAILS_ENV=production bundle exec rake db:migrate"
-  run "cd #{current_path}; RAILS_ENV=production bundle exec rake db:mongoid:create_indexes"
 end
 
 after 'deploy:finalize_update', 'deploy:symlink', :link_shared#, :migrate_db, :compile_assets

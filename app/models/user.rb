@@ -2,79 +2,20 @@ require 'securerandom'
 require 'digest/md5'
 require 'open-uri'
 
-class User
-  include Mongoid::Document
-  include Mongoid::Timestamps
-  include Mongoid::BaseModel
+class User < ActiveRecord::Base
   include Redis::Objects
   extend OmniauthCallbacks
-  include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
 
   ALLOW_LOGIN_CHARS_REGEXP = /\A\w+\z/
 
   devise :database_authenticatable, :registerable, :recoverable,
          :rememberable, :trackable, :validatable, :omniauthable, :async
 
-  field :email, type: String, default: ''
-  # Email 的 md5 值，用于 Gravatar 头像
-  field :email_md5
-  # Email 是否公开
-  field :email_public, type: Mongoid::Boolean
-  field :encrypted_password, type: String, default: ''
-
-  ## Recoverable
-  field :reset_password_token,   type: String
-  field :reset_password_sent_at, type: Time
-
-  ## Rememberable
-  field :remember_created_at, type: Time
-
-  ## Trackable
-  field :sign_in_count,      type: Integer, default: 0
-  field :current_sign_in_at, type: Time
-  field :last_sign_in_at,    type: Time
-  field :current_sign_in_ip, type: String
-  field :last_sign_in_ip,    type: String
-
-  field :login
-  field :name
-  field :location
-  field :location_id, type: Integer
-  field :bio
-  field :website
-  field :company
-  field :github
-  field :twitter
-  # 是否信任用户
-  field :verified, type: Mongoid::Boolean, default: false
-  # 是否是 HR
-  field :hr, type: Mongoid::Boolean, default: false
-  field :state, type: Integer, default: 1
-  field :tagline
-  field :topics_count, type: Integer, default: 0
-  field :replies_count, type: Integer, default: 0
-  # 用户密钥，用于客户端验证
-  field :private_token
-  field :favorite_topic_ids, type: Array, default: []
-  # 屏蔽的节点
-  field :blocked_node_ids, type: Array, default: []
-  # 屏蔽的用户
-  field :blocked_user_ids, type: Array, default: []
-
-  mount_uploader :avatar, AvatarUploader
-
-  index login: 1
-  index email: 1
-  index location: 1
-  index replies_count: -1, topics_count: -1
-  index({ private_token: 1 }, sparse: true)
-
   has_many :topics, dependent: :destroy
   has_many :notes
   has_many :replies, dependent: :destroy
-  embeds_many :authorizations
-  has_many :notifications, class_name: 'Notification::Base', dependent: :delete
+  has_many :authorizations
+  has_many :notifications, class_name: 'Notification::Base', dependent: :destroy
   has_many :photos
   has_many :oauth_applications, class_name: 'Doorkeeper::Application', as: :owner
 
@@ -114,21 +55,6 @@ class User
     only(:_id, :name, :login, :email, :email_md5, :email_public, :avatar, :verified, :state,
          :tagline, :github, :website, :location, :location_id, :twitter, :co)
   }
-
-  mapping do
-    indexes :login
-    indexes :name
-    indexes :email
-    indexes :twitter
-    indexes :tagline
-    indexes :bio
-    indexes :location
-    indexes :company
-  end
-
-  def as_indexed_json(options={})
-    as_json(only: %w(login name))
-  end
 
   def to_param
     login

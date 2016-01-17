@@ -3,13 +3,7 @@
 # 使用方法
 # SiteConfig.foo
 # SiteConfig.foo = "asdkglaksdg"
-class SiteConfig
-  include Mongoid::Document
-
-  field :key
-  field :value
-
-  index key: 1
+class SiteConfig < ActiveRecord::Base
 
   validates :key, presence: true, uniqueness: true
 

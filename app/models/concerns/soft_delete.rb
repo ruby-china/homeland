@@ -1,11 +1,8 @@
-# 软删除
-module Mongoid
-  module SoftDelete
+module Concerns
+   module SoftDelete
     extend ActiveSupport::Concern
 
     included do
-      field :deleted_at, type: DateTime
-
       default_scope -> { where(deleted_at: nil) }
 
       alias_method :destroy!, :destroy

@@ -7,5 +7,3 @@ test:
   <<: *defaults
 production:
   <<: *defaults
-development_mongohq:
-  <<: *defaults

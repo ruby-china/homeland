@@ -1,5 +1,5 @@
-module Mongoid
-  module MarkdownBody
+module Concerns
+    module MarkdownBody
     extend ActiveSupport::Concern
     include ActionView::Helpers::SanitizeHelper
     include ApplicationHelper

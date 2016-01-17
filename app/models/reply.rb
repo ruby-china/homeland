@@ -1,18 +1,7 @@
 require 'digest/md5'
-class Reply
-  include Mongoid::Document
-  include Mongoid::Timestamps
-  include Mongoid::BaseModel
-  include Mongoid::CounterCache
-  include Mongoid::SoftDelete
-  include Mongoid::MarkdownBody
-  include Mongoid::Mentionable
-  include Mongoid::Likeable
+class Reply < ActiveRecord::Base
 
   UPVOTES = %w(+1 :+1: :thumbsup: :plus1: 👍 👍🏻 👍🏼 👍🏽 👍🏾 👍🏿)
-
-  field :body
-  field :body_html
 
   belongs_to :user, inverse_of: :replies
   belongs_to :topic, inverse_of: :replies, touch: true
@@ -20,9 +9,6 @@ class Reply
 
   counter_cache name: :user, inverse_of: :replies
   counter_cache name: :topic, inverse_of: :replies
-
-  index user_id: 1
-  index topic_id: 1
 
   delegate :title, to: :topic, prefix: true, allow_nil: true
   delegate :login, to: :user, prefix: true, allow_nil: true

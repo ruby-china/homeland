@@ -256,9 +256,10 @@ class User < ActiveRecord::Base
   def like(likeable)
     return false if likeable.blank?
     return false if liked?(likeable)
-    likeable.push(liked_user_ids: id)
-    likeable.increment!(:likes_count)
-    likeable.touch
+    likeable.transaction do
+      likeable.push(liked_user_ids: id)
+      likeable.increment!(:likes_count)
+    end
   end
 
   # 取消收藏
@@ -266,9 +267,10 @@ class User < ActiveRecord::Base
     return false if likeable.blank?
     return false unless liked?(likeable)
     return false if likeable.user_id == self.id
-    likeable.pull(liked_user_ids: id)
-    likeable.decrement!(:likes_count)
-    likeable.touch
+    likeable.transaction do
+      likeable.pull(liked_user_ids: id)
+      likeable.decrement!(:likes_count)
+    end
   end
 
   # 是否喜欢过

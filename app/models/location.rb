@@ -1,12 +1,11 @@
 class Location < ActiveRecord::Base
-
   has_many :users
 
   scope :hot, -> { order(users_count: :desc) }
 
   validates :name, uniqueness: { case_sensitive: false}
 
-  before_save {|loc| loc.name = loc.name.downcase.strip }
+  before_save { |loc| loc.name = loc.name.downcase.strip }
 
   def self.location_find_by_name(name)
     return nil if name.blank?

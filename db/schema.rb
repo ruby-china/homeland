@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160119163218) do
+ActiveRecord::Schema.define(version: 20160119191013) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 20160119163218) do
   end
 
   add_index "nodes", ["section_id"], name: "index_nodes_on_section_id", using: :btree
+  add_index "nodes", ["sort"], name: "index_nodes_on_sort", using: :btree
 
   create_table "notes", force: :cascade do |t|
     t.string   "title",                         null: false
@@ -175,7 +176,7 @@ ActiveRecord::Schema.define(version: 20160119163218) do
     t.datetime "updated_at"
   end
 
-  add_index "pages", ["slug"], name: "index_pages_on_slug", using: :btree
+  add_index "pages", ["slug"], name: "index_pages_on_slug", unique: true, using: :btree
 
   create_table "photos", force: :cascade do |t|
     t.integer  "user_id"
@@ -183,6 +184,8 @@ ActiveRecord::Schema.define(version: 20160119163218) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "photos", ["user_id"], name: "index_photos_on_user_id", using: :btree
 
   create_table "replies", force: :cascade do |t|
     t.integer  "user_id",                         null: false

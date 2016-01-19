@@ -116,7 +116,8 @@ module API
           end
           get 'replies', each_serializer: ReplySerializer, root: 'replies' do
             @topic = Topic.find(params[:id])
-            @replies = @topic.replies.unscoped.order(:id).includes(:user).offset(params[:offset]).limit(params[:limit])
+            @replies = Reply.unscoped.where(topic_id: @topic.id).order(:id).includes(:user)
+            @replies = @replies.offset(params[:offset]).limit(params[:limit])
 
             @user_liked_reply_ids = []
             if current_user

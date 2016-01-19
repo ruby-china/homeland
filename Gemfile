@@ -41,6 +41,9 @@ gem 'letter_avatar'
 gem 'pg'
 gem 'activerecord_any_of'
 
+# remove this after migrate MongoDB into PostgreSQL
+gem 'mongo', require: false
+
 # 用户系统
 gem 'devise', '~> 3.5.1'
 gem 'devise-async'

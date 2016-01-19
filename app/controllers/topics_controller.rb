@@ -87,9 +87,9 @@ class TopicsController < ApplicationController
       @replies = Reply.unscoped.where(topic_id: @topic.id).without_body.order(:id).all
 
       check_current_user_liked_replies
+      check_current_user_status_for_topic
     end
 
-    check_current_user_status_for_topic
     set_special_node_active_menu
 
     @threads.each(&:join)
@@ -114,7 +114,7 @@ class TopicsController < ApplicationController
 
     @threads << Thread.new do
       # 通知处理
-      current_user.read_topic(@topic)
+      current_user.read_topic(@topic, replies_ids: @replies.collect(&:id))
     end
 
     # 是否关注过

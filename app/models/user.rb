@@ -239,13 +239,15 @@ class User < ActiveRecord::Base
   end
 
   # 将 topic 的最后回复设置为已读
-  def read_topic(topic)
+  def read_topic(topic, opts = {})
     return if topic.blank?
     return if self.topic_read?(topic)
 
+    opts[:replies_ids] ||= topic.replies.pluck(:id)
+
     notifications.unread.where.any_of({ mentionable_type: 'Topic', mentionable_id: topic.id },
-                                { mentionable_type: 'Reply', mentionable_id: topic.reply_ids },
-                                reply_id: topic.reply_ids).update_all(read: true)
+                                { mentionable_type: 'Reply', mentionable_id: opts[:replies_ids] },
+                                reply_id: opts[:replies_ids]).update_all(read: true)
 
     # 处理 last_reply_id 是空的情况
     last_reply_id = topic.last_reply_id || -1

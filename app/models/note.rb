@@ -10,6 +10,8 @@ class Note < ActiveRecord::Base
   scope :recent_updated, -> { order(updated_at: :desc) }
   scope :published, -> { where(publish: true) }
 
+  validates :body, presence: true
+
   before_save :auto_set_value
   def auto_set_value
     unless body.blank?

@@ -1,5 +1,6 @@
 class SessionsController < Devise::SessionsController
   prepend_before_filter :valify_captcha!, only: [:create]
+  skip_before_action :set_locale, only: [:create]
 
   def new
     super
@@ -18,6 +19,7 @@ class SessionsController < Devise::SessionsController
   end
 
   def valify_captcha!
+    set_locale
     if !verify_rucaptcha?
       redirect_to new_user_session_path, alert: t('rucaptcha.invalid') and return
     end

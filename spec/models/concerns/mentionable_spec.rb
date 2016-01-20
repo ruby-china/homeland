@@ -4,7 +4,7 @@ ActiveRecord::Base.connection.create_table(:test_documents, force: true) do |t|
   t.integer :user_id
   t.integer :mentioned_user_ids, array: true, default: []
   t.text :body
-  t.timestamps
+  t.timestamps null: false
 end
 
 class TestDocument < ActiveRecord::Base

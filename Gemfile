@@ -142,12 +142,9 @@ group :development, :test do
 
   gem 'puma', '~> 2.14.0'
 
-  gem 'byebug'
   # Better Errors
   gem 'better_errors'
   gem 'binding_of_caller'
-
-  gem 'tunemygc'
 
   gem 'bundler-audit', require: false
 end

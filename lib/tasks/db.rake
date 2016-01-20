@@ -28,8 +28,16 @@ def append(klass, doc)
     doc[:type] = doc.delete(:_type)
   end
 
+  if klass == User
+    doc[:name] ||= ''
+  end
+
   if klass == Note
     doc[:title] ||= ''
+  end
+
+  if klass == PageVersion
+    doc[:desc] ||= ''
   end
 
   item = klass.unscoped.find_or_initialize_by(id: doc[:id].to_i)

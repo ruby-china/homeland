@@ -248,4 +248,13 @@ describe Topic, type: :model do
       expect(t.lock_node).to eq true
     end
   end
+
+  describe '.reply_ids' do
+    let(:t) { create(:topic) }
+    let!(:replies) { create_list(:reply, 10, topic: t) }
+
+    it 'should work' do
+      expect(t.reply_ids).to eq replies.collect(&:id)
+    end
+  end
 end

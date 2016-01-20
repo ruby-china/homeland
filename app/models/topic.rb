@@ -157,7 +157,7 @@ class Topic < ActiveRecord::Base
   # 所有的回复编号
   def reply_ids
     Rails.cache.fetch([self, 'reply_ids']) do
-      replies.only(:id).map(&:id).sort
+      self.replies.order('id asc').pluck(:id)
     end
   end
 

@@ -7,12 +7,12 @@
 
       <div class="panel-body">
         <% if @topics.current_page == 1 %>
-          <% cache(@suggest_topics) do %>
+          <% cache(['suggest_topics', @suggest_topics]) do %>
             <%= render partial: "topics/topic", collection: @suggest_topics, locals: { suggest: true } %>
           <% end %>
         <% end %>
 
-        <% cache(@topics) do %>
+        <% cache(['topics', @topics]) do %>
           <%= render partial: "topics/topic", collection: @topics, locals: { suggest: false } %>
         <% end %>
       </div>

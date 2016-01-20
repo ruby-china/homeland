@@ -27,6 +27,11 @@ def append(klass, doc)
   if doc[:_type]
     doc[:type] = doc.delete(:_type)
   end
+
+  if klass == Note
+    doc[:title] ||= ''
+  end
+
   item = klass.unscoped.find_or_initialize_by(id: doc[:id].to_i)
   item.attributes = doc.reject{ |k,v| !item.attributes.keys.member?(k.to_s) }
   if item.save(validate: false)
@@ -37,11 +42,16 @@ def append(klass, doc)
 end
 
 def update_table_seq(table_name)
-  res = ActiveRecord::Base.connection.exec_query("SELECT id FROM #{table_name} ORDER BY id DESC LIMIT 1;")[0]
-  last_id = res['id'].to_i + 1
+  last_id = last_id_in_table(table_name) + 1
   sql = "ALTER SEQUENCE #{table_name}_id_seq RESTART WITH #{last_id};"
   puts sql
   ActiveRecord::Base.connection.execute(sql)
+end
+
+def last_id_in_table(table_name)
+  rows = ActiveRecord::Base.connection.exec_query("SELECT id FROM #{table_name} ORDER BY id DESC LIMIT 1;")
+  return 0 if rows.count == 0
+  return rows[0]['id'].to_i
 end
 
 namespace :db do
@@ -58,7 +68,7 @@ namespace :db do
     puts "================ User ==============="
     unset_callbacks(User)
     unset_callbacks(Authorization)
-    db[:users].find({}).each do |doc|
+    db[:users].find({ _id: { '$gte' => last_id_in_table('users') } }).each do |doc|
       doc[:email] ||= ''
       u = append(User, doc)
       puts "User: #{u.id}"
@@ -73,7 +83,7 @@ namespace :db do
 
     puts "\n\n================ Photo =============="
     unset_callbacks(Photo)
-    db[:photos].find({}).each do |doc|
+    db[:photos].find({ _id: { '$gte' => last_id_in_table('photos') }}).each do |doc|
       next if doc[:image].blank?
       item = Photo.unscoped.find_or_initialize_by(id: doc[:_id])
       item[:user_id] = doc[:user_id]
@@ -113,25 +123,33 @@ namespace :db do
     table_names.each do |table_name|
       puts "\n\n================ #{table_name} =============="
       klass = table_name.classify.constantize
+      klass = Notification::Base if klass == Notification
       unset_callbacks(klass)
-      threads = []
-      count = db[table_name].count()
+      docs = []
+      count = db[table_name].count({ _id: { '$ne' => 0 }})
+      pg_count = klass.unscoped.count
       puts "#{table_name.upcase} COUNT IN MONGODB: #{count}"
-      db[table_name].find({}).each_with_index do |doc, idx|
-        threads << Thread.new do
-          s = append(klass, doc)
-          puts "#{table_name}: #{s.id}"
-        end
+      db[table_name].find({ _id: { '$gte' => last_id_in_table(table_name) } }).each_with_index do |doc, idx|
+        docs << doc
 
-        if threads.count == thread_pool || idx == count
-          threads.each(&:join)
-          threads = []
+        pg_idx = pg_count + idx
+        # puts "----------- #{idx}, #{pg_idx}, #{count}"
+
+        if docs.count == thread_pool || (pg_idx + thread_pool) >= count
+          klass.transaction do
+            docs.each do |doc|
+              s = append(klass, doc)
+              puts "#{table_name}: #{s.id}"
+            end
+            docs = []
+          end
         end
       end
 
-      sleep 4
       puts "#{table_name.upcase} COUNT IN MONGODB: #{count}"
+      puts "#{table_name.upcase} COUNT IN POSTGRESQL: #{klass.unscoped.count}"
       update_table_seq(table_name)
+      sleep 4
     end
 
     puts ""

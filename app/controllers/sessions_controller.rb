@@ -4,7 +4,7 @@ class SessionsController < Devise::SessionsController
 
   def new
     super
-    session['user_return_to'] = request.referrer
+    cache_referrer
   end
 
   def create
@@ -25,4 +25,11 @@ class SessionsController < Devise::SessionsController
     end
     true
   end
+
+  private
+    def cache_referrer
+      if request.referrer && request.referrer.include?(request.domain)
+        session['user_return_to'] = request.referrer
+      end
+    end
 end

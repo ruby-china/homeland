@@ -13,7 +13,10 @@
           </div>
         </div>
       </div>
-
+      <hr />
+      <div class="group">
+        <%= social_share_button_tag h("#{@topic.title} via: @#{Setting.twitter_id} ") %>
+      </div>
       <hr />
       <div class="reply-buttons">
         <div class="total">

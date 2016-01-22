@@ -32,10 +32,6 @@ eos
 
 # 话题后面的HTML代码
 SiteConfig.save_default('after_topic_html', <<-eos
-<div class="share_links">
- <a href="https://twitter.com/share" class="twitter-share-button" data-count="none"">Tweet</a>
- <script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
-</div>
 eos
                        )
 

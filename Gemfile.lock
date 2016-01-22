@@ -268,6 +268,7 @@ GEM
     omniauth-oauth2 (1.4.0)
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
+    oneapm_rpm (1.3.3)
     orm_adapter (0.5.0)
     parallel (1.6.1)
     parser (2.3.0.1)
@@ -469,10 +470,10 @@ DEPENDENCIES
   message_bus
   mini_magick
   mongo
-  newrelic_rpm
   nokogiri
   omniauth (~> 1.2.2)
   omniauth-github (~> 1.1.0)
+  oneapm_rpm
   parallel
   pg
   postmark (= 0.9.15)

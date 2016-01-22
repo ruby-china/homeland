@@ -116,7 +116,7 @@ gem 'rack-utf8_sanitizer'
 # Mini profiler
 gem 'rack-mini-profiler', require: false
 
-gem 'newrelic_rpm'
+gem 'oneapm_rpm'
 
 group :development do
   gem 'derailed'

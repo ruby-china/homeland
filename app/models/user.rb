@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
     unread_ids = notifications.find_all { |notification| !notification.read? }.map(&:id)
     if unread_ids.any?
       Notification::Base.where(user_id: id,read: false)
-        .where("id IN (?)", unread_ids).update_all(read: true, updated_at: Time.now)
+        .where(id: unread_ids).update_all(read: true, updated_at: Time.now)
     end
   end
 

@@ -15,6 +15,6 @@ class Section < ActiveRecord::Base
   end
 
   def sorted_nodes
-    nodes.where("id NOT IN (?)", [Node.no_point_id]).sorted
+    nodes.where.not(id: Node.no_point_id).sorted
   end
 end

@@ -15,21 +15,20 @@ module Mentionable
   end
 
   def mentioned_users
-    User.where("id IN (?)", mentioned_user_ids)
+    User.where(id: mentioned_user_ids)
   end
 
   def mentioned_user_logins
     # 用于作为缓存 key
     ids_md5 = Digest::MD5.hexdigest(mentioned_user_ids.to_s)
     Rails.cache.fetch("#{self.class.name.downcase}:#{id}:mentioned_user_logins:#{ids_md5}") do
-      User.where("id IN (?)", mentioned_user_ids).pluck(:login)
+      User.where(id: mentioned_user_ids).pluck(:login)
     end
   end
 
   def extract_mentioned_users
     logins = body.scan(/@(\w{3,20})/).flatten
     if logins.any?
-      #self.mentioned_user_ids = User.where(login: /^(#{logins.join('|')})$/i, :_id.ne => user.id).limit(5).only(:_id).map(&:_id).to_a
       self.mentioned_user_ids = User.where("login IN (?) AND id != (?)", logins, user.id).limit(5).pluck(:id)
     end
   end

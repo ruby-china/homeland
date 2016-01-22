@@ -46,7 +46,7 @@ class Topic < ActiveRecord::Base
     if ids.size == 0
       all
     else
-      where("#{column} NOT IN (?)", ids)
+      where.not({ column =>  ids })
     end
   }
   scope :without_node_ids, proc { |ids| exclude_column_ids("node_id", ids) }
@@ -138,7 +138,7 @@ class Topic < ActiveRecord::Base
     return false if deleted_reply.blank?
     return false if last_reply_user_id != deleted_reply.user_id
 
-    previous_reply = replies.where("id NOT IN (?)", [deleted_reply.id]).recent.first
+    previous_reply = replies.where.not(id: deleted_reply.id).recent.first
     update_last_reply(previous_reply, force: true)
   end
 

@@ -31,7 +31,7 @@ class UsersController < ApplicationController
 
   def favorites
     @topic_ids = @user.favorite_topic_ids.reverse.paginate(page: params[:page], per_page: 40)
-    @topics = Topic.where("id IN (?)", @topic_ids).fields_for_list
+    @topics = Topic.where(id: @topic_ids).fields_for_list
     @topics = @topics.to_a.sort do |a, b|
       @topic_ids.index(a.id) <=> @topic_ids.index(b.id)
     end
@@ -86,7 +86,7 @@ class UsersController < ApplicationController
       render_404
     end
 
-    @blocked_users = User.where("id IN (?)", current_user.blocked_user_ids).paginate(page: params[:page], per_page: 20)
+    @blocked_users = User.where(id: current_user.blocked_user_ids).paginate(page: params[:page], per_page: 20)
   end
 
   def follow

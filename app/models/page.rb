@@ -59,7 +59,7 @@ class Page < ActiveRecord::Base
   end
 
   def editors
-    User.where("id IN (?)", editor_ids)
+    User.where(id: editor_ids)
   end
 
   def self.find_by_slug(slug)

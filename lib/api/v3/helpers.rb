@@ -3,7 +3,7 @@ module API
     module Helpers
       # Monkey patch grape-active_model_serializers to avoid duplicate db query
       def render(result, options = {})
-        if result.is_a?(Mongoid::Criteria)
+        if result.is_a?(ActiveRecord::Relation)
           super(result.to_a, options)
         else
           super(result, options)

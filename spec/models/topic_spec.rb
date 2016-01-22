@@ -196,7 +196,7 @@ describe Topic, type: :model do
       expect(topic).to be_a(Topic)
 
       followers.each do |f|
-        expect(f.notifications.unread.where(_type: 'Notification::Topic').count).to eq 1
+        expect(f.notifications.unread.where(type: 'Notification::Topic').count).to eq 1
       end
     end
   end
@@ -208,7 +208,7 @@ describe Topic, type: :model do
     describe 'Call method' do
       it 'should work' do
         Topic.notify_topic_node_changed(topic.id, new_node.id)
-        last_notification = user.notifications.unread.where(_type: 'Notification::NodeChanged').first
+        last_notification = user.notifications.unread.where(type: 'Notification::NodeChanged').first
         expect(last_notification.topic_id).to eq topic.id
         expect(last_notification.node_id).to eq new_node.id
       end
@@ -246,6 +246,15 @@ describe Topic, type: :model do
       t.reload
       expect(t.node_id).to eq Node.no_point_id
       expect(t.lock_node).to eq true
+    end
+  end
+
+  describe '.reply_ids' do
+    let(:t) { create(:topic) }
+    let!(:replies) { create_list(:reply, 10, topic: t) }
+
+    it 'should work' do
+      expect(t.reply_ids).to eq replies.collect(&:id)
     end
   end
 end

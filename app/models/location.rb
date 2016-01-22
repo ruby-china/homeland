@@ -1,26 +1,22 @@
-class Location
-  include Mongoid::Document
-
-  field :name
-  field :users_count, type: Integer, default: 0
+class Location < ActiveRecord::Base
   has_many :users
 
-  scope :hot, -> { desc(:users_count) }
+  scope :hot, -> { order(users_count: :desc) }
 
-  validates :name, uniqueness: { case_sensitive: false }
+  validates :name, uniqueness: { case_sensitive: false}
 
-  index name: 1
+  before_save { |loc| loc.name = loc.name.downcase.strip }
 
-  def self.find_by_name(name)
+  def self.location_find_by_name(name)
     return nil if name.blank?
     name = name.downcase.strip
-    query = !name.match(/\p{Han}/).nil? ? name : /#{name}/i
-    where(name: query).first
+    where("name ~* ?", name).first
   end
 
-  def self.find_or_create_by_name(name)
-    unless (location = find_by_name(name))
-      location = create(name: name.strip)
+  def self.location_find_or_create_by_name(name)
+    name = name.strip
+    unless (location = location_find_by_name(name))
+      location = create(name: name)
     end
     location
   end

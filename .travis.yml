@@ -3,7 +3,7 @@ env:
   - USE_OFFICIAL_GEM_SOURCE=1
 
 services:
-  - mongodb
+  - postgresql
   - memcached
   - redis-server
   - elasticsearch
@@ -12,14 +12,14 @@ rvm:
   - 2.3.0
 
 before_script:
-  - mongo ruby_china_test --eval 'db.addUser("travis", "test");'
+  - psql -c "create database \"ruby-china-test\";" -U postgres
   - cp config/config.yml.default config/config.yml
-  - cp config/mongoid.yml.default config/mongoid.yml
+  - cp config/database.yml.default config/database.yml
   - cp config/redis.yml.default config/redis.yml
   - cp config/elasticsearch.yml.default config/elasticsearch.yml
   - cp config/secrets.yml.default config/secrets.yml
-  - sed -i "s/SETUP_DEVELOPMENT_HOST/127.0.0.1:27017/g" config/mongoid.yml
   - sed -i "s/SETUP_REDIS_HOST/127.0.0.1/g" config/redis.yml
   - sed -i "s/SETUP_REDIS_PORT/6379/g" config/redis.yml
+  - RAILS_ENV=test bundle exec rake db:migrate
 
 script: RAILS_ENV=test bundle exec rake

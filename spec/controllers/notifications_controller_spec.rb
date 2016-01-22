@@ -30,7 +30,7 @@ describe NotificationsController, type: :controller do
       3.times { create :notification_mention, user: user, mentionable: create(:reply) }
 
       post :clear
-      expect(user.notifications.unread.count).to eq(0)
+      expect(user.notifications.unread.size).to eq(0)
     end
   end
 
@@ -40,7 +40,7 @@ describe NotificationsController, type: :controller do
       3.times { create :notification_mention, user: user, mentionable: create(:reply) }
       1.times { create :notification_mention, user: user, mentionable: create(:reply), read: true }
       get :unread
-      expect(assigns(:notifications).count).to eq(3)
+      expect(assigns(:notifications).size).to eq(3)
       expect(user.notifications.unread.count).to eq(0)
     end
   end

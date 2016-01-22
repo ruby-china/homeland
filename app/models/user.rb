@@ -2,11 +2,9 @@ require 'securerandom'
 require 'digest/md5'
 require 'open-uri'
 
-class User
-  include Mongoid::Document
-  include Mongoid::Timestamps
-  include Mongoid::BaseModel
+class User < ActiveRecord::Base
   include Redis::Objects
+  include BaseModel
   extend OmniauthCallbacks
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
@@ -16,74 +14,21 @@ class User
   devise :database_authenticatable, :registerable, :recoverable,
          :rememberable, :trackable, :validatable, :omniauthable, :async
 
-  field :email, type: String, default: ''
-  # Email 的 md5 值，用于 Gravatar 头像
-  field :email_md5
-  # Email 是否公开
-  field :email_public, type: Mongoid::Boolean
-  field :encrypted_password, type: String, default: ''
-
-  ## Recoverable
-  field :reset_password_token,   type: String
-  field :reset_password_sent_at, type: Time
-
-  ## Rememberable
-  field :remember_created_at, type: Time
-
-  ## Trackable
-  field :sign_in_count,      type: Integer, default: 0
-  field :current_sign_in_at, type: Time
-  field :last_sign_in_at,    type: Time
-  field :current_sign_in_ip, type: String
-  field :last_sign_in_ip,    type: String
-
-  field :login
-  field :name
-  field :location
-  field :location_id, type: Integer
-  field :bio
-  field :website
-  field :company
-  field :github
-  field :twitter
-  # 是否信任用户
-  field :verified, type: Mongoid::Boolean, default: false
-  # 是否是 HR
-  field :hr, type: Mongoid::Boolean, default: false
-  field :state, type: Integer, default: 1
-  field :tagline
-  field :topics_count, type: Integer, default: 0
-  field :replies_count, type: Integer, default: 0
-  # 用户密钥，用于客户端验证
-  field :private_token
-  field :favorite_topic_ids, type: Array, default: []
-  # 屏蔽的节点
-  field :blocked_node_ids, type: Array, default: []
-  # 屏蔽的用户
-  field :blocked_user_ids, type: Array, default: []
-
   mount_uploader :avatar, AvatarUploader
-
-  index login: 1
-  index email: 1
-  index location: 1
-  index replies_count: -1, topics_count: -1
-  index({ private_token: 1 }, sparse: true)
 
   has_many :topics, dependent: :destroy
   has_many :notes
   has_many :replies, dependent: :destroy
-  embeds_many :authorizations
-  has_many :notifications, class_name: 'Notification::Base', dependent: :delete
+  has_many :authorizations
+  has_many :notifications, class_name: 'Notification::Base', dependent: :destroy
   has_many :photos
   has_many :oauth_applications, class_name: 'Doorkeeper::Application', as: :owner
 
   def read_notifications(notifications)
-    unread_ids = notifications.find_all { |notification| !notification.read? }.map(&:_id)
+    unread_ids = notifications.find_all { |notification| !notification.read? }.map(&:id)
     if unread_ids.any?
-      Notification::Base.where(user_id: id,
-                               :_id.in => unread_ids,
-                               read: false).update_all(read: true, updated_at: Time.now)
+      Notification::Base.where(user_id: id,read: false)
+        .where(id: unread_ids).update_all(read: true, updated_at: Time.now)
     end
   end
 
@@ -104,30 +49,20 @@ class User
 
   validates :login, format: { with: ALLOW_LOGIN_CHARS_REGEXP, message: '只允许数字、大小写字母和下划线' },
                     length: { in: 3..20 }, presence: true,
-                    uniqueness: { case_sensitive: false }
+                    uniqueness: { case_sensitive: true}
 
-  has_and_belongs_to_many :following, class_name: 'User', inverse_of: :followers
-  has_and_belongs_to_many :followers, class_name: 'User', inverse_of: :following
-
-  scope :hot, -> { desc(:replies_count, :topics_count) }
+  scope :hot, -> { order(replies_count: :desc).order(topics_count: :desc) }
   scope :fields_for_list, lambda {
-    only(:_id, :name, :login, :email, :email_md5, :email_public, :avatar, :verified, :state,
+    select(:id, :name, :login, :email, :email_md5, :email_public, :avatar, :verified, :state,
          :tagline, :github, :website, :location, :location_id, :twitter, :co)
   }
 
-  mapping do
-    indexes :login
-    indexes :name
-    indexes :email
-    indexes :twitter
-    indexes :tagline
-    indexes :bio
-    indexes :location
-    indexes :company
+  def following
+    User.where(id: self.following_ids)
   end
 
-  def as_indexed_json(options={})
-    as_json(only: %w(login name))
+  def followers
+    User.where(id: self.follower_ids)
   end
 
   def to_param
@@ -143,11 +78,6 @@ class User
     Rails.cache.fetch("user-#{id}-temp_access_token-#{Time.now.strftime('%Y%m%d')}") do
       SecureRandom.hex
     end
-  end
-
-  def self.find_for_database_authentication(conditions)
-    login = conditions.delete(:login)
-    where(login: /^#{login}$/i).first || where(email: /^#{login}$/i).first
   end
 
   def password_required?
@@ -237,10 +167,10 @@ class User
   def store_location
     if self.location_changed?
       if !location.blank?
-        old_location = Location.find_by_name(location_was)
-        old_location.inc(users_count: -1) unless old_location.blank?
-        location = Location.find_or_create_by_name(self.location)
-        location.inc(users_count: 1)
+        old_location = Location.location_find_by_name(self.location_was)
+        old_location.decrement!(:users_count) unless old_location.blank?
+        location = Location.location_find_or_create_by_name(self.location)
+        location.increment!(:users_count)
         self.location_id = (location.blank? ? nil : location.id)
       else
         self.location_id = nil
@@ -262,10 +192,17 @@ class User
   end
 
   def self.find_login(slug)
-    # FIXME: Regexp search in MongoDB is slow!!!
-    fail Mongoid::Errors::DocumentNotFound.new(self, slug: slug) unless slug =~ ALLOW_LOGIN_CHARS_REGEXP
-    where(login: /^#{slug}$/i).first || fail(Mongoid::Errors::DocumentNotFound.new(self, slug: slug))
+    fail ActiveRecord::RecordNotFound.new(slug: slug) unless slug =~ ALLOW_LOGIN_CHARS_REGEXP
+    where("login ~* ?", slug).first || fail(ActiveRecord::RecordNotFound.new(slug: slug))
   end
+
+  def self.find_for_database_authentication(warden_conditions)
+    conditions = warden_conditions.dup
+    login = conditions.delete(:login)
+    login.downcase!
+    where(conditions.to_h).where(["lower(login) = :value OR lower(email) = :value", { value: login }]).first
+  end
+
 
   def bind?(provider)
     authorizations.collect(&:provider).include?(provider)
@@ -302,13 +239,15 @@ class User
   end
 
   # 将 topic 的最后回复设置为已读
-  def read_topic(topic)
+  def read_topic(topic, opts = {})
     return if topic.blank?
     return if self.topic_read?(topic)
 
-    notifications.unread.any_of({ mentionable_type: 'Topic', mentionable_id: topic.id },
-                                { mentionable_type: 'Reply', :mentionable_id.in => topic.reply_ids },
-                                :reply_id.in => topic.reply_ids).update_all(read: true)
+    opts[:replies_ids] ||= topic.replies.pluck(:id)
+
+    notifications.unread.where.any_of({ mentionable_type: 'Topic', mentionable_id: topic.id },
+                                { mentionable_type: 'Reply', mentionable_id: opts[:replies_ids] },
+                                reply_id: opts[:replies_ids]).update_all(read: true)
 
     # 处理 last_reply_id 是空的情况
     last_reply_id = topic.last_reply_id || -1
@@ -319,9 +258,10 @@ class User
   def like(likeable)
     return false if likeable.blank?
     return false if liked?(likeable)
-    likeable.push(liked_user_ids: id)
-    likeable.inc(likes_count: 1)
-    likeable.touch
+    likeable.transaction do
+      likeable.push(liked_user_ids: id)
+      likeable.increment!(:likes_count)
+    end
   end
 
   # 取消收藏
@@ -329,9 +269,10 @@ class User
     return false if likeable.blank?
     return false unless liked?(likeable)
     return false if likeable.user_id == self.id
-    likeable.pull(liked_user_ids: id)
-    likeable.inc(likes_count: -1)
-    likeable.touch
+    likeable.transaction do
+      likeable.pull(liked_user_ids: id)
+      likeable.decrement!(:likes_count)
+    end
   end
 
   # 是否喜欢过
@@ -475,7 +416,10 @@ class User
 
   def follow_user(user)
     return false if user.blank?
-    following.push(user)
+    self.transaction do
+      self.push(following_ids: user.id)
+      user.push(follower_ids: self.id)
+    end
     Notification::Follow.notify(user: user, follower: self)
   end
 
@@ -489,7 +433,10 @@ class User
 
   def unfollow_user(user)
     return false if user.blank?
-    following.delete(user)
+    self.transaction do
+      self.pull(following_ids: user.id)
+      user.pull(follower_ids: self.id)
+    end
   end
 
   def favorites_count

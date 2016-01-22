@@ -47,13 +47,13 @@ describe PagesController, type: :controller do
 
   describe ':edit' do
     it 'should not allow anonymous access' do
-      get :edit, id: page.id
+      get :edit, id: page.slug
       expect(response).not_to be_success
     end
 
     it 'should allowed access from authenticated user' do
       sign_in user
-      get :edit, id: page.id
+      get :edit, id: page.slug
       expect(response).to be_success
     end
   end
@@ -66,7 +66,7 @@ describe PagesController, type: :controller do
 
     it 'should create new page if all is well' do
       sign_in user
-      params = attributes_for(:page)
+      params = attributes_for(:page).merge(change_desc: "xx")
       post :create, page: params
       expect(response).to redirect_to page_path(params[:slug])
     end
@@ -82,7 +82,7 @@ describe PagesController, type: :controller do
 
   describe ':update' do
     it 'should not allow anonymous access' do
-      put :update, id: 1
+      put :update, id: 'foo'
       expect(response).not_to be_success
     end
 
@@ -92,7 +92,7 @@ describe PagesController, type: :controller do
       page = Page.create!(params)
       params[:title] = 'shiney new title'
       params[:change_desc] = 'updated title'
-      put :update, page: params, id: page.id
+      put :update, page: params, id: page.slug
       expect(response).to redirect_to(page_path(page.slug))
     end
 
@@ -102,7 +102,7 @@ describe PagesController, type: :controller do
       page = Page.create!(params)
       params[:title] = 'shiney new title'
       params[:change_desc] = nil
-      put :update, page: params, id: page.id
+      put :update, page: params, id: page.slug
       expect(response).to render_template(:edit)
     end
   end

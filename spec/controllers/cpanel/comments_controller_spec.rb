@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 describe Cpanel::CommentsController, type: :controller do
-  let(:comment) { create :comment }
+  let(:user) {create :user}
+  let(:comment) { create :comment, user: user }
 
   before do
     sign_in create(:admin)

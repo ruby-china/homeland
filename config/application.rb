@@ -1,7 +1,11 @@
 require File.expand_path('../boot', __FILE__)
 
+require "active_model/railtie"
+require "active_job/railtie"
+require "active_record/railtie"
 require 'action_controller/railtie'
 require 'action_mailer/railtie'
+require "action_view/railtie"
 require 'rails/test_unit/railtie'
 require 'sprockets/railtie'
 
@@ -16,7 +20,7 @@ module RubyChina
 
     # Ensure App config files exist.
     if Rails.env.development?
-      %w(config redis mongoid secrets).each do |fname|
+      %w(config redis secrets).each do |fname|
         filename = "config/#{fname}.yml"
         next if File.exist?(Rails.root.join(filename))
         FileUtils.cp(Rails.root.join("#{filename}.default"), Rails.root.join(filename))
@@ -31,8 +35,6 @@ module RubyChina
 
     config.autoload_paths.push(*%W(#{config.root}/lib))
     config.eager_load_paths += %W( #{config.root}/lib/exception_notifier )
-
-    config.mongoid.include_root_in_json = false
 
     config.generators do |g|
       g.test_framework :rspec
@@ -62,6 +64,8 @@ module RubyChina
     config.middleware.insert 0, Rack::UTF8Sanitizer
 
     config.active_job.queue_adapter = :sidekiq
+
+    config.active_record.raise_in_transactional_callbacks = true
   end
 end
 
@@ -72,5 +76,3 @@ $memory_store = ActiveSupport::Cache::MemoryStore.new
 I18n.config.enforce_available_locales = false
 I18n.locale = 'zh-CN'
 # GC::Profiler.enable
-
-require 'elasticsearch/rails/instrumentation'

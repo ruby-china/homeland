@@ -38,10 +38,11 @@ gem 'mini_magick'
 gem 'rucaptcha'
 gem 'letter_avatar'
 
-# Mongoid 辅助插件
-gem 'mongoid', '5.0.0'
-gem 'mongoid_auto_increment_id'
-gem 'mongoid_rails_migrations'
+gem 'pg'
+gem 'activerecord_any_of'
+
+# remove this after migrate MongoDB into PostgreSQL
+gem 'mongo', require: false
 
 # 用户系统
 gem 'devise', '~> 3.5.1'
@@ -115,10 +116,6 @@ gem 'rack-utf8_sanitizer'
 # Mini profiler
 gem 'rack-mini-profiler', require: false
 
-# gem 'newrelic_rpm'
-# gem 'newrelic_moped'
-# gem 'newrelic-grape'
-
 gem 'oneapm_rpm'
 
 group :development do
@@ -148,8 +145,6 @@ group :development, :test do
   # Better Errors
   gem 'better_errors'
   gem 'binding_of_caller'
-
-  gem 'tunemygc'
 
   gem 'bundler-audit', require: false
 end

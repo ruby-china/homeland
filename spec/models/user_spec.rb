@@ -2,6 +2,9 @@ require 'rails_helper'
 require 'digest/md5'
 
 describe User, type: :model do
+  before do
+    User.any_instance.stub(:update_index).and_return(true)
+  end
   let(:topic) { create :topic }
   let(:user)  { create :user }
   let(:user2) { create :user }
@@ -11,6 +14,7 @@ describe User, type: :model do
 
   describe '#read_topic?' do
     before do
+      User.any_instance.stub(:update_index).and_return(true)
       Rails.cache.write("user:#{user.id}:topic_read:#{topic.id}", nil)
     end
 
@@ -68,15 +72,15 @@ describe User, type: :model do
     it 'should update users_count when user location changed' do
       old_name = user.location
       new_name = 'HongKong'
-      old_location = Location.find_by_name(old_name)
+      old_location = Location.location_find_by_name(old_name)
       hk_location = create(:location, name: new_name, users_count: 20)
       user.location = new_name
       user.save
       user.reload
       expect(user.location).to eq(new_name)
       expect(user.location_id).to eq(hk_location.id)
-      expect(Location.find_by_name(old_name).users_count).to eq(old_location.users_count - 1)
-      expect(Location.find_by_name(new_name).users_count).to eq(hk_location.users_count + 1)
+      expect(Location.location_find_by_name(old_name).users_count).to eq(old_location.users_count - 1)
+      expect(Location.location_find_by_name(new_name).users_count).to eq(hk_location.users_count + 1)
     end
   end
 
@@ -294,13 +298,13 @@ describe User, type: :model do
     it 'should raise DocumentNotFound error' do
       expect do
         User.find_login(user.login + '1')
-      end.to raise_error(Mongoid::Errors::DocumentNotFound)
+      end.to raise_error(ActiveRecord::RecordNotFound)
     end
 
     it 'should railse DocumentNotFound if have bad login' do
       expect do
         User.find_login(user.login + ')')
-      end.to raise_error(Mongoid::Errors::DocumentNotFound)
+      end.to raise_error(ActiveRecord::RecordNotFound)
     end
   end
 

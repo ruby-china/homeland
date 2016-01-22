@@ -1,15 +1,20 @@
 require 'rails_helper'
 
-class TestDocument
-  include Mongoid::Document
-  include Mongoid::Mentionable
+ActiveRecord::Base.connection.create_table(:test_documents, force: true) do |t|
+  t.integer :user_id
+  t.integer :mentioned_user_ids, array: true, default: []
+  t.text :body
+  t.timestamps null: false
+end
+
+class TestDocument < ActiveRecord::Base
+  include Mentionable
 
   belongs_to :user
   delegate :login, to: :user, prefix: true, allow_nil: true
-  field :body
 end
 
-describe Mongoid::Mentionable, type: :model do
+describe Mentionable, type: :model do
   it 'should extract mentioned user ids' do
     user = create :user
     doc = TestDocument.create body: "@#{user.login}", user: create(:user)

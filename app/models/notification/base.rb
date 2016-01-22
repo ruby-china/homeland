@@ -1,16 +1,10 @@
 module Notification
-  class Base
-    include Mongoid::Document
-    include Mongoid::Timestamps
-    include Mongoid::BaseModel
+  class Base < ActiveRecord::Base
+    include BaseModel
 
-    store_in collection: 'notifications'
+    self.table_name = 'notifications'
 
-    field :read, default: false
     belongs_to :user
-
-    index read: 1
-    index user_id: 1, read: 1
 
     scope :unread, -> { where(read: false) }
 

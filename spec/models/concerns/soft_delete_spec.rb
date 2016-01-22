@@ -1,21 +1,22 @@
 require 'rails_helper'
 
-class WalkingDead
-  include Mongoid::Document
-  include Mongoid::BaseModel
-  include Mongoid::Attributes::Dynamic
-  include Mongoid::Timestamps
-  include Mongoid::SoftDelete
-
-  field :name
-  field :tag
-
-  after_destroy do
-    self.tag = "after_destroy #{name}"
+describe SoftDelete, type: :model do
+  ActiveRecord::Base.connection.create_table(:walking_deads, force: true) do |t|
+    t.string :name
+    t.string :tag
+    t.datetime :deleted_at
+    t.timestamps null: false
   end
-end
 
-describe 'Soft Delete', type: :model do
+  class WalkingDead < ActiveRecord::Base
+    include BaseModel
+    include SoftDelete
+
+    after_destroy do
+      self.tag = "after_destroy #{name}"
+    end
+  end
+
   let!(:rick) { WalkingDead.create! name: 'Rick Grimes' }
 
   it 'should affect default count' do

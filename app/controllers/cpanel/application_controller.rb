@@ -7,7 +7,7 @@ module Cpanel
     before_action :set_active_menu
 
     def require_admin
-      render_404 unless Setting.admin_emails.include?(current_user.email)
+      render_404 unless current_user.admin?
     end
 
     def set_active_menu

@@ -1,9 +1,9 @@
 <%% content_for :sitemap do %>
-  <span class="current"><%%= t("mongoid.models.<%= file_name %>") %></span>
+  <span class="current"><%%= t("activerecord.models.<%= file_name %>") %></span>
 <%% end %>
 
 <%%= render 'base' %>
-<h1><%%= t("mongoid.models.<%= file_name %>") %></h1>
+<h1><%%= t("activerecord.models.<%= file_name %>") %></h1>
 
 <div class="toolbar">
   <a href="<%%= new_<%= singular_table_name %>_path %>" class="btn btn-sm btn-success">新建</a>
@@ -14,7 +14,7 @@
     <tr class="head">
       <td>编号</td>
 <% attributes.each do |attr| -%>
-      <td><%%= t("mongoid.attributes.<%= file_name %>.<%= attr.name %>") %></td>
+      <td><%%= t("activerecord.attributes.<%= file_name %>.<%= attr.name %>") %></td>
 <% end -%>
       <td>创建时间</td>
       <td class="opts"></td>

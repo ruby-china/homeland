@@ -37,7 +37,7 @@ class Page < ActiveRecord::Base
       update_column(:version, self.version + 1)
       PageVersion.create(user_id: user_id,
                          page_id: id,
-                         desc: change_desc,
+                         desc: change_desc || '',
                          version: version,
                          body: body,
                          title: title,

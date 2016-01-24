@@ -40,6 +40,11 @@ def append(klass, doc)
     doc[:desc] ||= ''
   end
 
+  if klass == Reply
+    doc[:body] = doc[:body].gsub("\u0000", "")
+    doc[:body_html] = doc[:body_html].gsub("\u0000", "")
+  end
+
   item = klass.unscoped.find_or_initialize_by(id: doc[:id].to_i)
   item.attributes = doc.reject{ |k,v| !item.attributes.keys.member?(k.to_s) }
   if item.save(validate: false)

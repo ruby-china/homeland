@@ -41,8 +41,8 @@ def append(klass, doc)
   end
 
   if klass == Reply
-    doc[:body] = doc[:body].gsub("\u0000", "")
-    doc[:body_html] = doc[:body_html].gsub("\u0000", "")
+    doc[:body] = doc[:body].gsub("\u0000", "") unless doc[:body].nil?
+    doc[:body_html] = doc[:body_html].gsub("\u0000", "") unless doc[:body_html].nil?
   end
 
   item = klass.unscoped.find_or_initialize_by(id: doc[:id].to_i)

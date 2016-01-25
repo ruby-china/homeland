@@ -29,10 +29,11 @@
     confirmations:
       send_instructions: '稍后，您将收到帐号激活的电子邮件。'
       confirmed: '您的帐号已经激活，请登录。'
-    account:
-      signed_up: '您的帐号已注册成功，如无意外，您将收到一封确认邮件。'
-      updated: '帐号资料更新成功。'
-      destroyed: '再见！您的帐户已成功注销。我们希望很快可以再见到您。'
+    registrations:
+      user:
+        signed_up: '您的帐号已注册成功，如无意外，您将收到一封确认邮件。'
+        updated: '帐号资料更新成功。'
+        destroyed: '再见！您的帐户已成功注销。我们希望很快可以再见到您。'
     unlocks:
       send_instructions: '稍后，您将收到一封帐号解锁的邮件。'
       unlocked: '您的帐号已成功解锁，请登录。'

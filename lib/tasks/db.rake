@@ -47,6 +47,11 @@ def append(klass, doc)
 
   item = klass.unscoped.find_or_initialize_by(id: doc[:id].to_i)
   item.attributes = doc.reject{ |k,v| !item.attributes.keys.member?(k.to_s) }
+
+  if klass == User
+    item[:avatar] = doc[:avatar]
+  end
+
   if item.save(validate: false)
     return item
   else

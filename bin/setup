@@ -91,11 +91,6 @@ Dir.chdir APP_ROOT do
       system "cp config/#{fname}.yml.default config/#{fname}.yml"
     end
 
-    print 'Your MongoDB host (default: 127.0.0.1:27017):'
-    host = gets.strip
-    host = '127.0.0.1:27017' if host == ''
-    replace_file('config/mongoid.yml', '127.0.0.1:27017', host)
-
     print 'Your Redis host (default: 127.0.0.1:6379):'
     host = gets.strip
     host = '127.0.0.1:6379' if host == ''

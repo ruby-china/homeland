@@ -288,6 +288,7 @@ describe User, type: :model do
     it 'should work' do
       u = User.find_login(user.login)
       expect(u.id).to eq user.id
+      expect(u.login).to eq(user.login)
     end
 
     it 'should ignore case' do
@@ -305,6 +306,18 @@ describe User, type: :model do
       expect do
         User.find_login(user.login + ')')
       end.to raise_error(ActiveRecord::RecordNotFound)
+    end
+
+    context 'Simple prefix user exists' do
+      let(:user1) { create :user, login: "foo" }
+      let(:user2) { create :user, login: "foobar" }
+      let(:user2) { create :user, login: "a2foo" }
+
+      it 'should get right user' do
+        u = User.find_login(user1.login)
+        expect(u.id).to eq user1.id
+        expect(u.login).to eq(user1.login)
+      end
     end
   end
 

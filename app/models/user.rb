@@ -193,7 +193,8 @@ class User < ActiveRecord::Base
 
   def self.find_login(slug)
     fail ActiveRecord::RecordNotFound.new(slug: slug) unless slug =~ ALLOW_LOGIN_CHARS_REGEXP
-    where("login ~* ?", slug).first || fail(ActiveRecord::RecordNotFound.new(slug: slug))
+    slug = slug.downcase
+    find_by(login: slug) || where("lower(login) = ?", slug).first || fail(ActiveRecord::RecordNotFound.new(slug: slug))
   end
 
   def self.find_for_database_authentication(warden_conditions)

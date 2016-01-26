@@ -46,7 +46,7 @@ task :migrate_db, roles: :web do
   run "cd #{current_path}; RAILS_ENV=production bundle exec rake db:migrate"
 end
 
-after 'deploy:finalize_update', 'deploy:symlink', :link_shared#, :migrate_db, :compile_assets
+after 'deploy:finalize_update', 'deploy:symlink', :link_shared, :migrate_db#, :compile_assets
 after 'deploy:restart', 'unicorn:restart'
 after 'deploy:start', 'unicorn:start'
 after 'deploy:stop', 'unicorn:stop'

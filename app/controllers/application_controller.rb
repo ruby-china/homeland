@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
       devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(*User::ACCESSABLE_ATTRS) }
     end
 
-    if current_user && current_user.admin?
+    if current_user
       Rack::MiniProfiler.authorize_request
     end
 

@@ -50,7 +50,7 @@ class UsersController < ApplicationController
       return
     end
 
-    current_user.authorizations.destroy_all(provider: provider)
+    current_user.authorizations.where(provider: provider).delete_all
     redirect_to edit_user_registration_path, flash: { warring: t('users.unbind_success', provider: provider.titleize) }
   end
 

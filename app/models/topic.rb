@@ -128,9 +128,9 @@ class Topic < ActiveRecord::Base
     self.last_reply_id = reply.try(:id)
     self.last_reply_user_id = reply.try(:user_id)
     self.last_reply_user_login = reply.try(:user_login)
+    save
     # Reindex Search document
     SearchIndexer.perform_later('update', 'topic', self.id)
-    save
   end
 
   # 更新最后更新人，当最后个回帖删除的时候

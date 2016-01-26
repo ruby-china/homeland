@@ -1,7 +1,7 @@
 module Cpanel
   class SiteConfigsController < ApplicationController
     def index
-      @site_configs = SiteConfig.order(id: :desc)
+      @site_configs = SiteConfig.unscoped.order(id: :desc)
     end
 
     def edit

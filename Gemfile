@@ -70,6 +70,8 @@ gem 'redis-namespace', '~> 1.5.1'
 # 将一些数据存放入 Redis
 gem 'redis-objects', '1.1.0'
 
+gem 'rails-settings-cached'
+
 # Markdown 格式 & 文本处理
 gem 'redcarpet', '~> 3.3.4'
 gem 'rouge', '~> 1.8.0'

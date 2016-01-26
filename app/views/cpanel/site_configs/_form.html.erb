@@ -1,15 +1,15 @@
 <%= simple_form_for([:cpanel,@site_config]) do |f| %>
   <%= render 'shared/error_messages', target: @site_config %>
     <div class="form-group">
-      <label class="col-sm-2 control-label">Key</label>
+      <label class="col-sm-2 control-label">Var</label>
       <div class="col-md-10">
-        <%= @site_config.key  %>
+        <%= @site_config.var  %>
       </div>
     </div>
     <div class="form-group">
       <label class="col-sm-2 control-label">说明</label>
       <div class="col-md-10">
-        <%= t("site_config.#{@site_config.key}")  %>
+        <%= t("site_config.#{@site_config.var}")  %>
       </div>
     </div>
     <%= f.input :value, as: :text, input_html: { class: "span8", rows: "20" } %>

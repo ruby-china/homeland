@@ -322,6 +322,8 @@ GEM
       i18n (~> 0.7)
       railties (~> 4.0)
     rails-perftest (0.0.6)
+    rails-settings-cached (0.5.3)
+      rails (>= 4.2.0)
     rails_autolink (1.1.6)
       rails (> 3.1)
     railties (4.2.5.1)
@@ -485,6 +487,7 @@ DEPENDENCIES
   rails (= 4.2.5.1)
   rails-i18n
   rails-perftest
+  rails-settings-cached
   rails_autolink
   redcarpet (~> 3.3.4)
   redis (~> 3.2.1)

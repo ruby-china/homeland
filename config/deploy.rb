@@ -1,6 +1,7 @@
 require 'bundler/capistrano'
 require 'capistrano/sidekiq'
 require 'rvm/capistrano'
+require 'capistrano-unicorn'
 
 default_run_options[:pty] = true
 
@@ -15,6 +16,7 @@ set :deploy_to, "/data/www/#{application}"
 set :runner, 'ruby'
 # set :deploy_via, :remote_cache
 set :git_shallow_clone, 1
+set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
 
 role :web, 'ruby-china.org'
 role :app, 'ruby-china.org'
@@ -44,12 +46,7 @@ task :migrate_db, roles: :web do
   run "cd #{current_path}; RAILS_ENV=production bundle exec rake db:migrate"
 end
 
-namespace :deploy do
-  desc 'Restart passenger'
-  task :restart do
-    run "mkdir -p #{current_path}/tmp"
-    run "touch #{current_path}/tmp/restart.txt"
-  end
-end
-
 after 'deploy:finalize_update', 'deploy:symlink', :link_shared#, :migrate_db, :compile_assets
+after 'deploy:restart', 'unicorn:restart'
+after 'deploy:start', 'unicorn:start'
+after 'deploy:stop', 'unicorn:stop'

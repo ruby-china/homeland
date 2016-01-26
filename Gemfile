@@ -105,6 +105,8 @@ gem 'postmark-rails', '0.4.1'
 gem 'kgio'
 gem 'dalli', '2.7.4'
 
+gem 'unicorn', '5.0.0'
+
 gem 'parallel'
 
 # for api 跨域
@@ -122,6 +124,7 @@ end
 
 group :development, :test do
   gem 'capistrano', '2.9.0', require: false
+  gem 'capistrano-unicorn'
   gem 'rvm-capistrano', require: false
   gem 'capistrano-sidekiq'
 

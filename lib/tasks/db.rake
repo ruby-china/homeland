@@ -52,6 +52,10 @@ def append(klass, doc)
     item[:avatar] = doc[:avatar]
   end
 
+  if klass == Photo
+    item[:image] = doc[:image]
+  end
+
   if item.save(validate: false)
     return item
   else

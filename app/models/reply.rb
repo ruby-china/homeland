@@ -41,11 +41,12 @@ class Reply < ActiveRecord::Base
     end
   end
 
-  after_create do
+  after_commit :async_create_reply_notify, on: :create
+  def async_create_reply_notify
     NotifyReplyJob.perform_later(id)
   end
 
-  after_create :check_vote_chars_for_like_topic
+  after_commit :check_vote_chars_for_like_topic, on: :create
   def check_vote_chars_for_like_topic
     return unless self.upvote?
     user.like(topic)

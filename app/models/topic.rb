@@ -62,6 +62,20 @@ class Topic < ActiveRecord::Base
   }
   scope :without_body, -> { select(column_names - ['body'])}
 
+  mapping do
+    indexes :title
+    indexes :body
+    indexes :node_name
+  end
+
+  def as_indexed_json(options={})
+    {
+      title: self.title,
+      body: self.full_body,
+      node_name: self.node_name
+    }
+  end
+
   def self.fields_for_list
     columns = %w(body body_html who_deleted follower_ids)
     select(column_names - columns.map(&:to_s))
@@ -128,9 +142,9 @@ class Topic < ActiveRecord::Base
     self.last_reply_id = reply.try(:id)
     self.last_reply_user_id = reply.try(:user_id)
     self.last_reply_user_login = reply.try(:user_login)
-    save
     # Reindex Search document
     SearchIndexer.perform_later('update', 'topic', self.id)
+    save
   end
 
   # 更新最后更新人，当最后个回帖删除的时候

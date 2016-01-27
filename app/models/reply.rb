@@ -60,24 +60,28 @@ class Reply < ActiveRecord::Base
 
     notified_user_ids = reply.mentioned_user_ids
 
-    # 给发帖人发回帖通知
-    if reply.user_id != topic.user_id && !notified_user_ids.include?(topic.user_id)
-      Notification::TopicReply.create user_id: topic.user_id, reply_id: reply.id
-      notified_user_ids << topic.user_id
+    Notification::TopicReply.transaction do
+      # 给发帖人发回帖通知
+      if reply.user_id != topic.user_id && !notified_user_ids.include?(topic.user_id)
+        Notification::TopicReply.create user_id: topic.user_id, reply_id: reply.id
+        notified_user_ids << topic.user_id
+      end
+
+      follower_ids = topic.follower_ids + (reply.user.try(:follower_ids) || [])
+      follower_ids.uniq!
+
+      # 给关注者发通知
+
+      follower_ids.each do |uid|
+        # 排除同一个回复过程中已经提醒过的人
+        next if notified_user_ids.include?(uid)
+        # 排除回帖人
+        next if uid == reply.user_id
+        logger.debug "Post Notification to: #{uid}"
+        Notification::TopicReply.create user_id: uid, reply_id: reply.id
+      end
     end
 
-    follower_ids = topic.follower_ids + (reply.user.try(:follower_ids) || [])
-    follower_ids.uniq!
-
-    # 给关注者发通知
-    follower_ids.each do |uid|
-      # 排除同一个回复过程中已经提醒过的人
-      next if notified_user_ids.include?(uid)
-      # 排除回帖人
-      next if uid == reply.user_id
-      logger.debug "Post Notification to: #{uid}"
-      Notification::TopicReply.create user_id: uid, reply_id: reply.id
-    end
     true
   end
 

@@ -459,4 +459,14 @@ describe User, type: :model do
       expect(u.avatar?).to eq(true)
     end
   end
+
+  describe '#find_for_database_authentication' do
+    let!(:user) { create(:user, login: 'foo', email: 'foobar@gmail.com') }
+
+    it 'should work' do
+      expect(User.find_for_database_authentication(login: 'foo').id).to eq user.id
+      expect(User.find_for_database_authentication(login: 'foobar@gmail.com').id).to eq user.id
+      expect(User.find_for_database_authentication(login: 'not found')).to eq nil
+    end
+  end
 end

@@ -112,7 +112,8 @@ class Topic < ActiveRecord::Base
     self.last_active_mark = Time.now.to_i
   end
 
-  after_create do
+  after_commit :async_create_reply_notify, on: :create
+  def async_create_reply_notify
     NotifyTopicJob.perform_later(id)
   end
 

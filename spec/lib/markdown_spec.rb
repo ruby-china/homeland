@@ -251,6 +251,11 @@ describe 'markdown' do
           expect(doc.to_html).to include('var')
         end
       end
+
+      context '@user in link' do
+        let(:raw) { 'http://medium.com/@user/foo' }
+        specify { expect(doc.css('.at_user')).to be_empty }
+      end
     end
 
     # }}}

@@ -17,7 +17,7 @@ module API
         when Grape::Exceptions::ValidationErrors
           Rack::Response.new([{
             error: '参数不符合要求，请检查参数是否按照 API 要求传输。',
-            validation_errors: e.errors
+            validation_errors: e.full_messages
           }.to_json], 400, {}).finish
         else
           # ExceptionNotifier.notify_exception(e) # Uncommit it when ExceptionNotification is available

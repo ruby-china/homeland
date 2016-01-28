@@ -9,9 +9,9 @@ class ApplicationController < ActionController::Base
     params[resource] &&= send(method) if respond_to?(method, true)
 
     if devise_controller?
-      devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(*User::ACCESSABLE_ATTRS) }
-      devise_parameter_sanitizer.for(:account_update) { |u| u.permit(*User::ACCESSABLE_ATTRS) }
-      devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(*User::ACCESSABLE_ATTRS) }
+      devise_parameter_sanitizer.permit(:sign_in) { |u| u.permit(*User::ACCESSABLE_ATTRS) }
+      devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(*User::ACCESSABLE_ATTRS) }
+      devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(*User::ACCESSABLE_ATTRS) }
     end
 
     if current_user

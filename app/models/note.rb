@@ -1,5 +1,5 @@
 # 记事本
-class Note < ActiveRecord::Base
+class Note < ApplicationRecord
   include BaseModel
   include Redis::Objects
 

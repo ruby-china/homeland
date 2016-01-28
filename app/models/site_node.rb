@@ -1,4 +1,4 @@
-class SiteNode < ActiveRecord::Base
+class SiteNode < ApplicationRecord
 
   has_many :sites
 

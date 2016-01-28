@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  # Serve websocket cable requests in-process
+  # mount ActionCable.server => '/cable'
   mount RuCaptcha::Engine => "/rucaptcha"
 
   use_doorkeeper do
@@ -119,10 +123,10 @@ Rails.application.routes.draw do
 
   mount API::Dispatch => '/api'
 
-  require 'sidekiq/web'
-  authenticate :user, ->(u) { u.admin? } do
-    mount Sidekiq::Web => '/sidekiq'
-  end
+  # require 'sidekiq/web'
+  # authenticate :user, ->(u) { u.admin? } do
+  #   mount Sidekiq::Web => '/sidekiq'
+  # end
 
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
 

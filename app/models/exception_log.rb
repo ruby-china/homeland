@@ -1,2 +1,2 @@
-class ExceptionLog < ActiveRecord::Base
+class ExceptionLog < ApplicationRecord
 end

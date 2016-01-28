@@ -1,4 +1,4 @@
-class Node < ActiveRecord::Base
+class Node < ApplicationRecord
 
   delegate :name, to: :section, prefix: true, allow_nil: true
 

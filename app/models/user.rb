@@ -2,7 +2,7 @@ require 'securerandom'
 require 'digest/md5'
 require 'open-uri'
 
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   include Redis::Objects
   include BaseModel
   extend OmniauthCallbacks
@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   ALLOW_LOGIN_CHARS_REGEXP = /\A\w+\z/
 
   devise :database_authenticatable, :registerable, :recoverable,
-         :rememberable, :trackable, :validatable, :omniauthable, :async
+         :rememberable, :trackable, :validatable, :omniauthable
 
   mount_uploader :avatar, AvatarUploader
 
@@ -246,9 +246,14 @@ class User < ActiveRecord::Base
 
     opts[:replies_ids] ||= topic.replies.pluck(:id)
 
-    notifications.unread.where.any_of({ mentionable_type: 'Topic', mentionable_id: topic.id },
-                                { mentionable_type: 'Reply', mentionable_id: opts[:replies_ids] },
-                                reply_id: opts[:replies_ids]).update_all(read: true)
+    any_sql = "
+      (mentionable_type = 'Topic' AND mentionable_id = ?) or
+      (mentionable_type = 'Reply' AND mentionable_id in (?)) or
+      (reply_id in (?))
+    "
+    notifications.unread
+      .where(any_sql, topic.id, opts[:replies_ids], opts[:replies_ids])
+      .update_all(read: true)
 
     # 处理 last_reply_id 是空的情况
     last_reply_id = topic.last_reply_id || -1

@@ -24,3 +24,4 @@ before_script:
   - RAILS_ENV=test bundle exec rake db:migrate
 
 script: RAILS_ENV=test bundle exec rake
+

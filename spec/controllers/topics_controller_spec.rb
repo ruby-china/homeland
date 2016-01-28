@@ -31,14 +31,14 @@ describe TopicsController, type: :controller do
 
   describe ':node' do
     it 'should have a node action' do
-      get :node, id: topic.id
+      get :node, params: { id: topic.id }
       expect(response).to be_success
     end
   end
 
   describe ':node_feed' do
     it 'should have a node_feed action' do
-      get :node_feed, id: topic.id
+      get :node_feed, params: { id: topic.id }
       expect(response).to be_success
     end
   end
@@ -69,7 +69,7 @@ describe TopicsController, type: :controller do
   describe ':edit' do
     context 'unauthenticated' do
       it 'should not allow anonymous access' do
-        get :edit, id: topic.id
+        get :edit, params: { id: topic.id }
         expect(response).not_to be_success
       end
     end
@@ -78,7 +78,7 @@ describe TopicsController, type: :controller do
       context 'own topic' do
         it 'should allow access from authenticated user' do
           sign_in user
-          get :edit, id: topic.id
+          get :edit, params: { id: topic.id }
           expect(response).to be_success
         end
       end
@@ -88,7 +88,7 @@ describe TopicsController, type: :controller do
           other_user = create :user
           topic_of_other_user = create(:topic, user: other_user)
           sign_in user
-          get :edit, id: topic_of_other_user.id
+          get :edit, params: { id: topic_of_other_user.id }
           expect(response).not_to be_success
         end
       end
@@ -102,7 +102,7 @@ describe TopicsController, type: :controller do
       create :reply, body: "@#{user.login}", topic: topic
       sign_in user
       expect do
-        get :show, id: topic.id
+        get :show, params: { id: topic.id }
       end.to change(user.notifications.unread, :count).by(-2)
     end
   end
@@ -110,13 +110,13 @@ describe TopicsController, type: :controller do
   describe '#suggest' do
     it 'should not allow user suggest' do
       sign_in user
-      put :suggest, id: topic
+      put :suggest, params: { id: topic }
       expect(topic.reload.excellent).to eq(0)
     end
 
     it 'should not allow user suggest by admin' do
       sign_in admin
-      put :suggest, id: topic
+      put :suggest, params: { id: topic }
       expect(topic.reload.excellent).to eq(1)
     end
   end
@@ -127,13 +127,13 @@ describe TopicsController, type: :controller do
 
       it 'should not allow user suggest' do
         sign_in user
-        put :unsuggest, id: topic
+        put :unsuggest, params: { id: topic }
         expect(topic.reload.excellent).to eq(1)
       end
 
       it 'should not allow user suggest by admin' do
         sign_in admin
-        put :unsuggest, id: topic
+        put :unsuggest, params: { id: topic }
         expect(topic.reload.excellent).to eq(0)
       end
     end
@@ -142,13 +142,13 @@ describe TopicsController, type: :controller do
   describe '#ban' do
     it 'should not allow user ban' do
       sign_in user
-      post :ban, id: topic
+      post :ban, params: { id: topic }
       expect(topic.reload.node_id).not_to eq(Node.no_point_id)
     end
 
     it 'should not allow user suggest by admin' do
       sign_in admin
-      post :ban, id: topic
+      post :ban, params: { id: topic }
       expect(response.status).to eq(302)
       expect(topic.reload.node_id).to eq(Node.no_point_id)
     end

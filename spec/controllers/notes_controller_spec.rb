@@ -30,7 +30,7 @@ describe NotesController, type: :controller do
 
     describe ':edit' do
       it 'should have an edit action' do
-        get :edit, id: note.id
+        get :edit, params: { id: note.id }
         expect(assigns[:note]).not_to be_blank
         expect(response).to be_success
       end
@@ -38,7 +38,7 @@ describe NotesController, type: :controller do
 
     describe ':show' do
       it 'should have a show action' do
-        get :show, id: note.id
+        get :show, params: { id: note.id }
         expect(response).to be_success
       end
     end

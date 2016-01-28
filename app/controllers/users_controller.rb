@@ -56,7 +56,7 @@ class UsersController < ApplicationController
 
   def update_private_token
     current_user.update_private_token
-    render text: current_user.private_token
+    render plain: current_user.private_token
   end
 
   def city

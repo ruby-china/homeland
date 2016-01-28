@@ -75,7 +75,7 @@ class PagesController < ApplicationController
   end
 
   def preview
-    render text: MarkdownConverter.convert(params[:body])
+    render plain: MarkdownConverter.convert(params[:body])
   end
 
   protected

@@ -23,7 +23,7 @@ gem 'rails_autolink'
 gem 'md_emoji'
 gem 'exception_notification'
 
-gem 'doorkeeper', '~> 2.2.1'
+gem 'doorkeeper', github: 'doorkeeper-gem/doorkeeper'
 gem 'doorkeeper-i18n'
 
 # gem 'rails-perftest'
@@ -142,9 +142,11 @@ group :development, :test do
   gem 'rspec-expectations', github: 'rspec/rspec-expectations'
   gem 'rspec', github: 'rspec/rspec'
 
+  gem 'rails-controller-testing'
+
   gem 'factory_girl_rails', '~> 4.5.0'
   gem 'database_cleaner'
-  gem 'capybara', '~> 2.3.0'
+  gem 'capybara'
 
   gem 'jasmine-rails', '~> 0.10.2'
 

@@ -9,6 +9,7 @@ class RepliesController < ApplicationController
     @reply.user_id = current_user.id
 
     if @reply.save
+      @replies_count = @topic.replies_count + 1
       current_user.read_topic(@topic)
       @msg = t('topics.reply_success')
     else

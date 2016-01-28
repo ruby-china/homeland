@@ -1,4 +1,4 @@
-class SearchIndexer < ActiveJob::Base
+class SearchIndexer < ApplicationJob
   queue_as :search_indexer
 
   def perform(operation, type, id)

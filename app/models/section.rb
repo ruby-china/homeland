@@ -1,4 +1,4 @@
-class Section < ActiveRecord::Base
+class Section < ApplicationRecord
 
   has_many :nodes, dependent: :destroy
 

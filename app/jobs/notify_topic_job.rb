@@ -1,4 +1,4 @@
-class NotifyTopicJob < ActiveJob::Base
+class NotifyTopicJob < ApplicationJob
   queue_as :notifications
 
   def perform(topic_id)

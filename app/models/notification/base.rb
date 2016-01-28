@@ -1,5 +1,5 @@
 module Notification
-  class Base < ActiveRecord::Base
+  class Base < ApplicationRecord
     include BaseModel
 
     self.table_name = 'notifications'

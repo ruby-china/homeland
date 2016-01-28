@@ -7,7 +7,7 @@ ActiveRecord::Base.connection.create_table(:test_documents, force: true) do |t|
   t.timestamps null: false
 end
 
-class TestDocument < ActiveRecord::Base
+class TestDocument < ApplicationRecord
   include Mentionable
 
   belongs_to :user

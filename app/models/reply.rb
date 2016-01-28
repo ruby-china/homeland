@@ -1,5 +1,5 @@
 require 'digest/md5'
-class Reply < ActiveRecord::Base
+class Reply < ApplicationRecord
   include BaseModel
   include SoftDelete
   include MarkdownBody

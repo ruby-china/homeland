@@ -1,4 +1,4 @@
-class OldSiteConfig < ActiveRecord::Base
+class OldSiteConfig < ApplicationRecord
   self.table_name = 'site_configs'
 end
 

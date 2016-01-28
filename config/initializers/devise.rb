@@ -191,5 +191,3 @@ Devise.setup do |config|
   #   manager.default_strategies(:scope => :user).unshift :twitter_oauth
   # end
 end
-
-Devise::Async.backend = :sidekiq

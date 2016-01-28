@@ -1,4 +1,4 @@
-class Location < ActiveRecord::Base
+class Location < ApplicationRecord
   has_many :users
 
   scope :hot, -> { order(users_count: :desc) }

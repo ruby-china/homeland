@@ -146,7 +146,7 @@ class MarkdownTopicConverter < MarkdownConverter
     end
   end
 
-  NORMALIZE_USER_REGEXP = /(^|[^a-zA-Z0-9_!#\$%&*@＠])@([a-zA-Z0-9_]{1,20})/io
+  NORMALIZE_USER_REGEXP = /(^|[^a-zA-Z0-9_!#\/\$%&*@＠])@([a-zA-Z0-9_]{1,20})/io
   LINK_USER_REGEXP = /(^|[^a-zA-Z0-9_!#\$%&*@＠])@(user[0-9]{1,6})/io
 
   # rename user name using incremental id

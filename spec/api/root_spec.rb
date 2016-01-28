@@ -40,8 +40,8 @@ describe 'API', type: :request do
         get '/api/v3/hello.json', limit: 2000
         expect(response.status).to eq 400
         expect(json['validation_errors'].size).to eq 1
-        expect(json['validation_errors']).to include(*%w(limit))
-        expect(json['validation_errors']['limit'][0]).to include('valid value')
+        # puts json.inspect
+        expect(json['validation_errors']).to include(*['limit does not have a valid value'])
       end
     end
   end

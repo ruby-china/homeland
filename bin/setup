@@ -100,7 +100,7 @@ Dir.chdir APP_ROOT do
   end
 
   puts_line 'Seed default data...' do
-    `bundle exec rake db:create db:migrate db:seed`
+    `bundle exec rake db:setup`
   end
 
   puts "\n== Removing old logs and tempfiles =="

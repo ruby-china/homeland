@@ -27,6 +27,7 @@ sudo apt-get install -y git \
                         memcached \
                         imagemagick \
                         nodejs \
+                        libpq-dev \
                         "postgresql-$PG_VERSION" \
                         "postgresql-contrib-$PG_VERSION" \
                         elasticsearch \

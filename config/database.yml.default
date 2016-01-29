@@ -16,6 +16,7 @@ production:
 #
 development:
   <<: *default
+  host: localhost
   database: ruby-china-dev
   username: admin
   password: admin
@@ -25,6 +26,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
+  host: localhost
   database: ruby-china-test
   username: admin
   password: admin

@@ -3,7 +3,7 @@
     title: "发布的话题"
     create_topic: "新建话题"
     edit_topic: "修改话题"
-    recommend_topics: "推荐话题"
+    related_topics: "相关话题"
     no_replies: "暂无回复。"
     recent_topics: "最近发布的话题"
     recent_replies: "最近回复的话题"

@@ -57,16 +57,18 @@
 
     <%= render partial: "ban_reason" %>
 
+  <% if @related_topics.present? %>
     <div class="panel panel-default topics">
       <div class="panel-heading media clearfix">
-        <%= t("topics.recommend_topics") %>
+        <%= t("topics.related_topics") %>
       </div>
       <div class="panel-body">
-        <% cache(@recommend_topics) do %>
-          <%= render partial: "topics/topic", collection: @recommend_topics, locals: { suggest: false } %>
+        <% cache(@related_topics) do %>
+          <%= render partial: "topics/topic", collection: @related_topics, locals: { suggest: false } %>
         <% end %>
       </div>
     </div>
+  <% end %>
 
   <% if @replies.blank? %>
     <div class="no-result">

@@ -94,7 +94,7 @@ class TopicsController < ApplicationController
 
     @threads.each(&:join)
 
-    @recommend_topics = Topic.excellent.where(:id.ne => @topic.id).recent.fields_for_list.limit(5).to_a
+    @related_topics = @topic.node.topics.where(:id.ne => @topic.id).fields_for_list.limit(5).to_a
 
     set_seo_meta "#{@topic.title} &raquo; #{t('menu.topics')}"
   end

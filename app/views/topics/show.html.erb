@@ -24,16 +24,6 @@
         <article>
           <%= raw @topic.body_html %>
 
-          <% cache([@topic.user, "bio-markdown"]) do %>
-            <% if !@topic.user.bio.blank? %>
-              <div class="panel panel-default">
-                <div class="panel-heading"><%= "关于作者：" + @topic.user.fullname %></div>
-                <div class="panel-body markdown">
-                  <%= markdown(@topic.user.bio) %>
-                </div>
-              </div>
-            <% end %>
-          <% end %>
         </article>
         <%= raw SiteConfig.after_topic_html %>
         <%= social_share_button_tag h("#{@topic.title} via: @#{Setting.twitter_id} ") %>
@@ -56,6 +46,17 @@
     </div>
 
     <%= render partial: "ban_reason" %>
+
+<% cache([@topic.user, "bio-markdown"]) do %>
+  <% if !@topic.user.bio.blank? %>
+    <div class="panel panel-default">
+      <div class="panel-heading"><%= "关于作者：" + @topic.user.fullname %></div>
+      <div class="panel-body markdown">
+        <%= markdown(@topic.user.bio) %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
 
   <% if @related_topics.present? %>
     <div class="panel panel-default topics">

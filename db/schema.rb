@@ -57,12 +57,6 @@ ActiveRecord::Schema.define(version: 20160126061903) do
 
   add_index "locations", ["name"], name: "index_locations_on_name", using: :btree
 
-  create_table "monkeys", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "nodes", force: :cascade do |t|
     t.string   "name",                     null: false
     t.string   "summary"
@@ -207,6 +201,8 @@ ActiveRecord::Schema.define(version: 20160126061903) do
     t.datetime "updated_at"
   end
 
+  add_index "replies", ["deleted_at"], name: "index_replies_on_deleted_at", using: :btree
+  add_index "replies", ["topic_id", "deleted_at"], name: "index_replies_on_topic_id_and_deleted_at", using: :btree
   add_index "replies", ["topic_id"], name: "index_replies_on_topic_id", using: :btree
   add_index "replies", ["user_id"], name: "index_replies_on_user_id", using: :btree
 
@@ -250,16 +246,10 @@ ActiveRecord::Schema.define(version: 20160126061903) do
     t.datetime "updated_at"
   end
 
+  add_index "sites", ["deleted_at"], name: "index_sites_on_deleted_at", using: :btree
+  add_index "sites", ["site_node_id", "deleted_at"], name: "index_sites_on_site_node_id_and_deleted_at", using: :btree
   add_index "sites", ["site_node_id"], name: "index_sites_on_site_node_id", using: :btree
   add_index "sites", ["url"], name: "index_sites_on_url", using: :btree
-
-  create_table "test_documents", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "mentioned_user_ids", default: [],              array: true
-    t.text     "body"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
-  end
 
   create_table "topics", force: :cascade do |t|
     t.integer  "user_id",                               null: false
@@ -287,9 +277,11 @@ ActiveRecord::Schema.define(version: 20160126061903) do
     t.datetime "updated_at"
   end
 
+  add_index "topics", ["deleted_at"], name: "index_topics_on_deleted_at", using: :btree
   add_index "topics", ["excellent"], name: "index_topics_on_excellent", using: :btree
   add_index "topics", ["last_active_mark"], name: "index_topics_on_last_active_mark", using: :btree
   add_index "topics", ["likes_count"], name: "index_topics_on_likes_count", using: :btree
+  add_index "topics", ["node_id", "deleted_at"], name: "index_topics_on_node_id_and_deleted_at", using: :btree
   add_index "topics", ["node_id"], name: "index_topics_on_node_id", using: :btree
   add_index "topics", ["suggested_at"], name: "index_topics_on_suggested_at", using: :btree
   add_index "topics", ["user_id"], name: "index_topics_on_user_id", using: :btree
@@ -343,13 +335,5 @@ ActiveRecord::Schema.define(version: 20160126061903) do
   add_index "users", ["location"], name: "index_users_on_location", using: :btree
   add_index "users", ["login"], name: "index_users_on_login", using: :btree
   add_index "users", ["private_token"], name: "index_users_on_private_token", using: :btree
-
-  create_table "walking_deads", force: :cascade do |t|
-    t.string   "name"
-    t.string   "tag"
-    t.datetime "deleted_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
 end

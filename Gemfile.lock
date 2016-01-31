@@ -81,6 +81,15 @@ GIT
       rspec-expectations (= 3.5.0.pre)
       rspec-mocks (= 3.5.0.pre)
 
+GIT
+  remote: git://github.com/sinatra/sinatra.git
+  revision: f8d4e9b332c15c22cbe8bad32aefbeeaaaed1e3f
+  specs:
+    sinatra (2.0.0.pre.alpha)
+      rack (= 2.0.0.alpha)
+      rack-protection (~> 1.5)
+      tilt (~> 2.0)
+
 GEM
   remote: https://ruby.taobao.org/
   specs:
@@ -377,6 +386,8 @@ GEM
     rack-cors (0.4.0)
     rack-mount (0.8.3)
       rack (>= 1.0.0)
+    rack-protection (1.5.3)
+      rack
     rack-test (0.6.3)
       rack (>= 1.0)
     rack-utf8_sanitizer (1.3.2)
@@ -571,6 +582,7 @@ DEPENDENCIES
   settingslogic
   sidekiq
   simple_form
+  sinatra!
   social-share-button
   sprockets
   turbolinks!

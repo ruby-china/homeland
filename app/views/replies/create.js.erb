@@ -9,10 +9,11 @@
     else {
       var current_floor = parseInt($("#replies").data("last-floor")) + 1;
       $("#replies .items").append('<%= j(render("reply", reply: @reply, reply_counter: @topic.replies_count - 1, display_edit: true)) %>')
-        .find(".total b").text('<%= @topic.replies_count %>');
       $("#replies .items .reply:last .reply-floor").text(current_floor + " 楼");
       $("#replies").data("last-floor", current_floor);
       $("#replies .reply a.edit:last").css("display", "inline-block");
+      $("#replies .total b").text('<%= @replies_count %>');
+      $('#topic-sidebar .total b').text('<%= @replies_count %>');
       _topicView.replyCallback(1, '<%= j(@msg) %>');
     }
   <% end %>

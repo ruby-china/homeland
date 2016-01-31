@@ -81,7 +81,7 @@ gem 'settingslogic'
 # 队列
 gem 'sidekiq'
 # Sidekiq Web
-# gem 'sinatra', require: nil
+gem 'sinatra', github: 'sinatra/sinatra', require: nil
 
 gem 'message_bus'
 

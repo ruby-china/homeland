@@ -123,10 +123,10 @@ Rails.application.routes.draw do
 
   mount API::Dispatch => '/api'
 
-  # require 'sidekiq/web'
-  # authenticate :user, ->(u) { u.admin? } do
-  #   mount Sidekiq::Web => '/sidekiq'
-  # end
+  require 'sidekiq/web'
+  authenticate :user, ->(u) { u.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
 

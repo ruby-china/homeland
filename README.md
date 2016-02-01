@@ -9,7 +9,7 @@ This is the source code of [Ruby China](http://ruby-china.org) website.
 * Ruby 2.3.0 +
 * Memcached 1.4 +
 * Redis 2.8 +
-* MongoDb 2.4.4 +
+* PostgreSQL 9.4 +
 * ImageMagick 6.5+
 * Elasticsearch 2.0+
 
@@ -43,7 +43,7 @@ Open http://localhost:3000 in host.
 $ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 $ brew install memcached
 $ brew install redis
-$ brew install mongodb
+$ brew install postgresql
 $ brew install imagemagick
 $ brew install gs
 $ brew install elasticsearch
@@ -52,8 +52,12 @@ $ brew install elasticsearch
 ### Ubuntu
 
 ```bash
-$ sudo apt-get install memcached mongodb redis-server imagemagick ghostscript
+$ sudo apt-get install memcached postgresql-9.4 redis-server imagemagick ghostscript
 ```
+
+More details about install PostgreSQL
+
+http://www.postgresql.org/download/linux/ubuntu/
 
 Install Elasticsearch
 
@@ -71,7 +75,6 @@ $ cd ruby-china
 $ ./bin/setup
 Checking Package Dependencies...
 --------------------------------------------------------------------------------
-MongoDB 2.0+                                                               [Yes]
 Redis 2.0+                                                                 [Yes]
 Memcached 1.4+                                                             [Yes]
 ImageMagick 6.5+                                                           [Yes]
@@ -84,7 +87,6 @@ The Gemfile's dependencies are satisfied
 
 Configure
 --------------------------------------------------------------------------------
-Your MongoDB host (default: 127.0.0.1:27017):
 Your Redis host (default: 127.0.0.1:6379):
 Your Elasticsearch host (default: 127.0.0.1:9200):
 --------------------------------------------------------------------------------

@@ -1,7 +1,6 @@
 class TopicsController < ApplicationController
   load_and_authorize_resource only: [:new, :edit, :create, :update, :destroy,
                                      :favorite, :unfavorite, :follow, :unfollow, :suggest, :unsuggest, :ban]
-  caches_action :feed, :node_feed, expires_in: 1.hours
 
   def index
     @threads = []
@@ -18,7 +17,7 @@ class TopicsController < ApplicationController
         @topics = @topics.without_hide_nodes
       end
       @topics = @topics.fields_for_list
-      @topics = @topics.paginate(page: params[:page], per_page: 22, total_entries: 1500)
+      @topics = @topics.paginate(page: params[:page], per_page: 22, total_entries: 1500).to_a
     end
     @threads.each(&:join)
 
@@ -84,12 +83,12 @@ class TopicsController < ApplicationController
     @show_raw = params[:raw] == '1'
 
     @threads << Thread.new do
-      @replies = @topic.replies.unscoped.without_body.asc(:_id).all
+      @replies = Reply.unscoped.where(topic_id: @topic.id).without_body.order(:id).all
 
       check_current_user_liked_replies
+      check_current_user_status_for_topic
     end
 
-    check_current_user_status_for_topic
     set_special_node_active_menu
 
     @threads.each(&:join)
@@ -114,7 +113,7 @@ class TopicsController < ApplicationController
 
     @threads << Thread.new do
       # 通知处理
-      current_user.read_topic(@topic)
+      current_user.read_topic(@topic, replies_ids: @replies.collect(&:id))
     end
 
     # 是否关注过
@@ -199,24 +198,24 @@ class TopicsController < ApplicationController
 
   def favorite
     current_user.favorite_topic(params[:id])
-    render text: '1'
+    render plain: '1'
   end
 
   def unfavorite
     current_user.unfavorite_topic(params[:id])
-    render text: '1'
+    render plain: '1'
   end
 
   def follow
     @topic = Topic.find(params[:id])
     @topic.push_follower(current_user.id)
-    render text: '1'
+    render plain: '1'
   end
 
   def unfollow
     @topic = Topic.find(params[:id])
     @topic.pull_follower(current_user.id)
-    render text: '1'
+    render plain: '1'
   end
 
   def suggest

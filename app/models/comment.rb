@@ -1,19 +1,9 @@
-class Comment
-  include Mongoid::Document
-  include Mongoid::Timestamps
-  include Mongoid::BaseModel
-  include Mongoid::SoftDelete
-  include Mongoid::MarkdownBody
-
-  field :body
-  field :body_html
+class Comment < ApplicationRecord
+  include BaseModel
+  include MarkdownBody
 
   belongs_to :commentable, polymorphic: true
   belongs_to :user
-
-  index user_id: 1
-  index commentable_type: 1
-  index commentable_id: 1
 
   validates :body, presence: true
 
@@ -25,12 +15,12 @@ class Comment
   after_create :increase_counter_cache
   def increase_counter_cache
     return if commentable.blank?
-    commentable.inc(comments_count: 1)
+    commentable.increment!(:comments_count)
   end
 
   before_destroy :decrease_counter_cache
   def decrease_counter_cache
     return if commentable.blank?
-    commentable.inc(comments_count: -1)
+    commentable.decrement!(:comments_count)
   end
 end

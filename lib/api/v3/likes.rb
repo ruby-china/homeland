@@ -2,17 +2,6 @@ module API
   module V3
     class Likes < Grape::API
       resource :likes do
-        desc <<~DESC
-        赞
-        这是一个多态的接口，支持赞 `topic` 和 `reply`，你可以将赞的函数设计成和 API 一样
-
-        例如：
-
-        ```ruby
-        # 赞编号为 1234 的话题
-        Faraday.post("/api/v3/likes.json", { obj_type: "topic", obj_id: 1234 })
-        ```
-        DESC
         params do
           requires :obj_type, type: String, values: %w(topic reply)
           requires :obj_id, type: Integer

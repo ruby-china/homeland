@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   end
 
   def topics
-    @topics = @user.topics.unscoped.fields_for_list.recent.paginate(page: params[:page], per_page: 40)
+    @topics = @user.topics.fields_for_list.recent.paginate(page: params[:page], per_page: 40)
     set_seo_meta("#{@user.login} 的帖子")
   end
 
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
 
   def favorites
     @topic_ids = @user.favorite_topic_ids.reverse.paginate(page: params[:page], per_page: 40)
-    @topics = Topic.where(:_id.in => @topic_ids).fields_for_list
+    @topics = Topic.where(id: @topic_ids).fields_for_list
     @topics = @topics.to_a.sort do |a, b|
       @topic_ids.index(a.id) <=> @topic_ids.index(b.id)
     end
@@ -50,23 +50,23 @@ class UsersController < ApplicationController
       return
     end
 
-    current_user.authorizations.destroy_all(provider: provider)
+    current_user.authorizations.where(provider: provider).delete_all
     redirect_to edit_user_registration_path, flash: { warring: t('users.unbind_success', provider: provider.titleize) }
   end
 
   def update_private_token
     current_user.update_private_token
-    render text: current_user.private_token
+    render plain: current_user.private_token
   end
 
   def city
-    @location = Location.find_by_name(params[:id])
+    @location = Location.location_find_by_name(params[:id])
     if @location.blank?
       render_404
       return
     end
 
-    @users = User.where(location_id: @location.id).fields_for_list.desc('replies_count').paginate(page: params[:page], per_page: 60)
+    @users = User.where(location_id: @location.id).fields_for_list.order(replies_count: :desc).paginate(page: params[:page], per_page: 60)
 
     render_404 if @users.count == 0
   end
@@ -86,7 +86,7 @@ class UsersController < ApplicationController
       render_404
     end
 
-    @blocked_users = User.where(:_id.in => current_user.blocked_user_ids).paginate(page: params[:page], per_page: 20)
+    @blocked_users = User.where(id: current_user.blocked_user_ids).paginate(page: params[:page], per_page: 20)
   end
 
   def follow

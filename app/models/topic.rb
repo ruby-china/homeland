@@ -7,60 +7,26 @@ CORRECT_CHARS = [
   ['）', ')']
 ]
 
-class Topic
-  include Mongoid::Document
-  include Mongoid::Timestamps
-  include Mongoid::BaseModel
-  include Mongoid::SoftDelete
-  include Mongoid::CounterCache
-  include Mongoid::Likeable
-  include Mongoid::MarkdownBody
+class Topic < ApplicationRecord
   include Redis::Objects
-  include Mongoid::Mentionable
+  include BaseModel
+  include Likeable
+  include MarkdownBody
+  include SoftDelete
+  include Mentionable
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
-
-  field :title
-  field :body
-  field :body_html
-  field :last_reply_id, type: Integer
-  field :replied_at, type: DateTime
-  field :replies_count, type: Integer, default: 0
-  # 回复过的人的 ids 列表
-  field :follower_ids, type: Array, default: []
-  field :suggested_at, type: DateTime
-  # 最后回复人的用户名 - cache 字段用于减少列表也的查询
-  field :last_reply_user_login
-  # 节点名称 - cache 字段用于减少列表也的查询
-  field :node_name
-  # 删除人
-  field :who_deleted
-  # 用于排序的标记
-  field :last_active_mark, type: Integer
-  # 是否锁定节点
-  field :lock_node, type: Mongoid::Boolean, default: false
-  # 精华帖 0 否， 1 是
-  field :excellent, type: Integer, default: 0
 
   # 临时存储检测用户是否读过的结果
   attr_accessor :read_state, :admin_editing
 
-  belongs_to :user, inverse_of: :topics
-  counter_cache name: :user, inverse_of: :topics
-  belongs_to :node
-  counter_cache name: :node, inverse_of: :topics
+  belongs_to :user, inverse_of: :topics, counter_cache: true
+  belongs_to :node, counter_cache: true
   belongs_to :last_reply_user, class_name: 'User'
   belongs_to :last_reply, class_name: 'Reply'
   has_many :replies, dependent: :destroy
 
   validates :user_id, :title, :body, :node_id, presence: true
-
-  index node_id: 1
-  index user_id: 1
-  index last_active_mark: -1
-  index likes_count: 1
-  index suggested_at: 1
-  index excellent: -1
 
   counter :hits, default: 0
 
@@ -68,24 +34,33 @@ class Topic
   delegate :body, to: :last_reply, prefix: true, allow_nil: true
 
   # scopes
-  scope :last_actived, -> { desc(:last_active_mark) }
+  scope :last_actived, -> { order(last_active_mark: :desc) }
   # 推荐的话题
-  scope :suggest, -> { where(:suggested_at.ne => nil).desc(:suggested_at) }
-  scope :without_suggest, -> { where(:suggested_at => nil) }
-  scope :fields_for_list, -> { without(:body, :body_html, :who_deleted, :follower_ids) }
-  scope :high_likes, -> { desc(:likes_count, :_id) }
-  scope :high_replies, -> { desc(:replies_count, :_id) }
+  scope :suggest, -> { where("suggested_at IS NOT NULL").order(suggested_at: :desc) }
+  scope :without_suggest, -> { where(suggested_at: nil) }
+  scope :high_likes, -> { order(likes_count: :desc).order(id: :desc) }
+  scope :high_replies, -> { order(replies_count: :desc).order(id: :desc) }
   scope :no_reply, -> { where(replies_count: 0) }
-  scope :popular, -> { where(:likes_count.gt => 5) }
-  scope :without_node_ids, proc { |ids| where(:node_id.nin => ids) }
-  scope :excellent, -> { where(:excellent.gte => 1) }
-  scope :without_hide_nodes, -> { where(:node_id.nin => Topic.topic_index_hide_node_ids) }
-  scope :without_nodes, proc { |node_ids|
-    ids = node_ids + topic_index_hide_node_ids
-    ids.uniq!
-    where(:node_id.nin => ids)
+  scope :popular, -> { where("likes_count > 5") }
+  scope :exclude_column_ids, proc {|column, ids|
+    if ids.size == 0
+      all
+    else
+      where.not({ column =>  ids })
+    end
   }
-  scope :without_users, proc { |user_ids| where(:user_id.nin => user_ids) }
+  scope :without_node_ids, proc { |ids| exclude_column_ids("node_id", ids) }
+  scope :excellent, -> { where("excellent >= 1") }
+  scope :without_hide_nodes, -> { exclude_column_ids("node_id", Topic.topic_index_hide_node_ids) }
+  scope :without_nodes, proc { |node_ids|
+    ids = node_ids + Topic.topic_index_hide_node_ids
+    ids.uniq!
+    exclude_column_ids("node_id", ids)
+  }
+  scope :without_users, proc { |user_ids|
+    exclude_column_ids("user_id", user_ids)
+  }
+  scope :without_body, -> { select(column_names - ['body'])}
 
   mapping do
     indexes :title
@@ -99,6 +74,11 @@ class Topic
       body: self.full_body,
       node_name: self.node_name
     }
+  end
+
+  def self.fields_for_list
+    columns = %w(body body_html who_deleted follower_ids)
+    select(column_names - columns.map(&:to_s))
   end
 
   def full_body
@@ -132,7 +112,8 @@ class Topic
     self.last_active_mark = Time.now.to_i
   end
 
-  after_create do
+  after_commit :async_create_reply_notify, on: :create
+  def async_create_reply_notify
     NotifyTopicJob.perform_later(id)
   end
 
@@ -172,7 +153,7 @@ class Topic
     return false if deleted_reply.blank?
     return false if last_reply_user_id != deleted_reply.user_id
 
-    previous_reply = replies.where(:_id.nin => [deleted_reply.id]).recent.first
+    previous_reply = replies.where.not(id: deleted_reply.id).recent.first
     update_last_reply(previous_reply, force: true)
   end
 
@@ -191,7 +172,7 @@ class Topic
   # 所有的回复编号
   def reply_ids
     Rails.cache.fetch([self, 'reply_ids']) do
-      replies.only(:_id).map(&:_id).sort
+      self.replies.order('id asc').pluck(:id)
     end
   end
 

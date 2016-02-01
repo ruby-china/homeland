@@ -2,7 +2,7 @@
   omniauth:
     github: GitHub
     twitter: Twitter
-  mongoid:
+  activerecord:
     models:
       user: "用户"
       topic: "话题"

@@ -3,31 +3,6 @@ module API
     class Users < Grape::API
       resource :users do
         # Get top 20 hot users
-        desc <<~DESC
-        获取活跃会员列表
-
-        ### Returns:
-
-        ```json
-        {
-            "users": [
-                {
-                    "id": 1,
-                    "login": "rei",
-                    "name": "Rei",
-                    "avatar_url": "http://ruby-china-files-dev.b0.upaiyun.com/user/large_avatar/1.jpg"
-                },
-                {
-                    "id": 2,
-                    "login": "huacnlee",
-                    "name": "李华顺",
-                    "avatar_url": "http://ruby-china-files-dev.b0.upaiyun.com/user/large_avatar/2.jpg"
-                },
-                ...
-            ]
-        }
-        ```
-        DESC
         params do
           optional :limit, type: Integer, default: 20, values: 1..150
         end
@@ -98,7 +73,7 @@ module API
           end
           get 'favorites', each_serializer: TopicSerializer, root: 'topics' do
             @topic_ids = @user.favorite_topic_ids[params[:offset], params[:limit]]
-            @topics = Topic.where(:_id.in => @topic_ids).fields_for_list.includes(:user)
+            @topics = Topic.where(id: @topic_ids).fields_for_list.includes(:user)
             @topics = @topics.to_a.sort do |a, b|
               @topic_ids.index(a.id) <=> @topic_ids.index(b.id)
             end
@@ -135,7 +110,7 @@ module API
             error!({ error: '不可以获取其他人的 blocked_users 列表。' }, 403) if current_user.id != @user.id
 
             user_ids = current_user.blocked_user_ids[params[:offset], params[:limit]]
-            @blocked_users = User.where(:_id.in => user_ids)
+            @blocked_users = User.where(id: user_ids)
             render @blocked_users
           end
 

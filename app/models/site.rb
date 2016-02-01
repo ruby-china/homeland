@@ -1,21 +1,11 @@
-class Site
-  include Mongoid::Document
-  include Mongoid::BaseModel
-  include Mongoid::Timestamps
-  include Mongoid::SoftDelete
-  include Mongoid::CounterCache
-
-  field :name
-  field :url
-  field :desc
+class Site < ApplicationRecord
+  include BaseModel
+  include SoftDelete
 
   belongs_to :site_node
   belongs_to :user
 
   validates :url, :name, :site_node_id, presence: true
-
-  index url: 1
-  index site_node_id: 1
 
   after_save :update_cache_version
   after_destroy :update_cache_version
@@ -33,7 +23,7 @@ class Site
   end
 
   def check_uniq
-    if Site.unscoped.where(:url => url, :_id.ne => id).count > 0
+    if Site.unscoped.where(:url => url).count > 0
       errors.add(:url, '已经提交过了。')
     end
   end

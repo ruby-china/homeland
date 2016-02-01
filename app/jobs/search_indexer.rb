@@ -1,4 +1,4 @@
-class SearchIndexer < ActiveJob::Base
+class SearchIndexer < ApplicationJob
   queue_as :search_indexer
 
   def perform(operation, type, id)
@@ -9,7 +9,7 @@ class SearchIndexer < ActiveJob::Base
     when 'page'
       obj = Page.find(id)
     when 'user'
-      obj = Page.find(id)
+      obj = User.find(id)
     end
 
     if operation == 'update'

@@ -1,12 +1,5 @@
-class Authorization
-  include Mongoid::Document
-  include Mongoid::Timestamps
-  include Mongoid::BaseModel
-
-  field :provider
-  field :uid, type: String
-  embedded_in :user, inverse_of: :authorizations
-
+class Authorization < ApplicationRecord
+  belongs_to :user
   validates :uid, :provider, presence: true
   validates :uid, uniqueness: { scope: :provider }
 end

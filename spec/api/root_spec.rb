@@ -40,8 +40,8 @@ describe 'API', type: :request do
         get '/api/v3/hello.json', limit: 2000
         expect(response.status).to eq 400
         expect(json['validation_errors'].size).to eq 1
-        expect(json['validation_errors']).to include(*%w(limit))
-        expect(json['validation_errors']['limit'][0]).to include('valid value')
+        # puts json.inspect
+        expect(json['validation_errors']).to include(*['limit does not have a valid value'])
       end
     end
   end
@@ -57,11 +57,11 @@ describe 'API', type: :request do
     context 'with login' do
       it 'should work' do
         login_user!
-        f = File.open(Rails.root.join('spec/factories/foo.png'))
+        f = Rack::Test::UploadedFile.new(Rails.root.join('spec/factories/foo.png'))
         post '/api/v3/photos.json', file: f
         @photo = Photo.last
-        expect(@photo.user_id).to eq current_user.id
         expect(response.status).to eq 201
+        expect(@photo.user_id).to eq current_user.id
         expect(json['image_url']).not_to eq nil
         expect(json['image_url']).not_to eq ''
       end

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe User::OmniauthCallbacks, type: :model do
   let(:callback) { Class.new.extend(User::OmniauthCallbacks) }
-  let(:data) { { 'email' => 'email@example.com', 'nickname' => '_why' } }
+  let(:data) { { 'email' => 'email@example.com', 'nickname' => '_why', 'name' => 'why' } }
   let(:uid) { '42' }
 
   describe 'new_from_provider_data' do

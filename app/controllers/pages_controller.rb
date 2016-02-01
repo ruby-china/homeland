@@ -46,7 +46,7 @@ class PagesController < ApplicationController
   end
 
   def edit
-    @page = Page.find(params[:id])
+    @page = Page.find_by_slug(params[:id])
     set_seo_meta t('pages.edit_wiki_page')
   end
 
@@ -63,7 +63,7 @@ class PagesController < ApplicationController
   end
 
   def update
-    @page = Page.find(params[:id])
+    @page = Page.find_by_slug(params[:id])
     @page.version_enable = true
     @page.user_id = current_user.id
 
@@ -75,7 +75,7 @@ class PagesController < ApplicationController
   end
 
   def preview
-    render text: MarkdownConverter.convert(params[:body])
+    render plain: MarkdownConverter.convert(params[:body])
   end
 
   protected

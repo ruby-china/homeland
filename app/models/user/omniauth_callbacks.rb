@@ -5,13 +5,13 @@ class User
         uid = response['uid'].to_s
         data = response['info']
 
-        if (user = User.where('authorizations.provider' => provider, 'authorizations.uid' => uid).first)
+        if (user = Authorization.find_by(provider: provider, uid: uid).try(:user))
           user
         else
           user = User.new_from_provider_data(provider, uid, data)
 
           if user.save(validate: false)
-            user.authorizations << Authorization.new(provider: provider, uid: uid)
+            Authorization.find_or_create_by(provider: provider, uid: uid, user_id: user.id)
             return user
           else
             Rails.logger.warn("User.create_from_hash 失败，#{user.errors.inspect}")

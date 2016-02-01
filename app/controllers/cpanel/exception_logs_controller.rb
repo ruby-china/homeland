@@ -1,7 +1,7 @@
 module Cpanel
   class ExceptionLogsController < ApplicationController
     def index
-      @exception_logs = ExceptionLog.desc('_id').paginate(page: params[:page], per_page: 20)
+      @exception_logs = ExceptionLog.order(id: :desc).paginate(page: params[:page], per_page: 20)
 
       respond_to do |format|
         format.html # index.html.erb
@@ -19,7 +19,7 @@ module Cpanel
     end
 
     def clean
-      ExceptionLog.where(:id.in => params[:ids].split(',')).delete_all
+      ExceptionLog.where(id: params[:ids].split(',')).delete_all
 
       redirect_to cpanel_exception_logs_path, notice: '清空成功。'
     end

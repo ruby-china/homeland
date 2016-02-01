@@ -9,21 +9,21 @@
           <%= f.text_field :login, type: :email, class: "form-control", placeholder: t("users.login"), hint: t("users.suggest_using_twitter_id") %>
         </div>
         <div class="form-group">
-          <%= f.text_field :name, class: "form-control", placeholder: t("mongoid.attributes.user.name") %>
+          <%= f.text_field :name, class: "form-control", placeholder: t("activerecord.attributes.user.name") %>
         </div>
         <div class="form-group">
-          <%= f.text_field :email, type: :email, class: "form-control", placeholder: t("mongoid.attributes.user.email") %>
+          <%= f.text_field :email, type: :email, class: "form-control", placeholder: t("activerecord.attributes.user.email") %>
         </div>
         <div class="form-group">
           <div class="checkbox">
-            <label for="user_email_public" class="checkbox"><%= f.check_box :email_public, checked: true %> <%= t("mongoid.attributes.user.email_public") %></label>
+            <label for="user_email_public" class="checkbox"><%= f.check_box :email_public, checked: true %> <%= t("activerecord.attributes.user.email_public") %></label>
           </div>
         </div>
         <div class="form-group">
-        <%= f.password_field :password, class: "form-control", placeholder: t("mongoid.attributes.user.password") %>
+        <%= f.password_field :password, class: "form-control", placeholder: t("activerecord.attributes.user.password") %>
         </div>
         <div class="form-group">
-        <%= f.password_field :password_confirmation, class: "form-control", placeholder: t("mongoid.attributes.user.password_confirmation") %>
+        <%= f.password_field :password_confirmation, class: "form-control", placeholder: t("activerecord.attributes.user.password_confirmation") %>
         </div>
         <div class="form-group">
           <%= rucaptcha_input_tag(class: 'form-control', placeholder: t('common.captcha')) %>

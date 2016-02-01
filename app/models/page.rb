@@ -1,29 +1,11 @@
 # 单页的文档页面
 # 采用 Markdown 编写
 require 'redcarpet'
-class Page
-  include Mongoid::Document
-  include Mongoid::Timestamps
-  include Mongoid::BaseModel
-  include Mongoid::SoftDelete
-  include Mongoid::MarkdownBody
+class Page < ApplicationRecord
+  include BaseModel
+  include MarkdownBody
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
-
-  # 页面地址
-  field :slug
-  field :title
-  # 原始 Markdown 内容
-  field :body
-  # Markdown 格式化后的 html
-  field :body_html
-  field :editor_ids, type: Array, default: []
-  field :locked, type: Mongoid::Boolean, default: false
-  field :comments_count, type: Integer, default: 0
-  # 目前版本号
-  field :version, type: Integer, default: 0
-
-  index slug: 1
 
   has_many :versions, class_name: 'PageVersion'
 
@@ -36,15 +18,6 @@ class Page
   validates :slug, format: /\A[a-z0-9\-_]+\z/
   validates :slug, uniqueness: true
 
-  mapping do
-    indexes :title
-    indexes :body
-    indexes :slug
-  end
-
-  def as_indexed_json(options={})
-    as_json(only: %w(slug title body))
-  end
 
   before_save :append_editor
   def append_editor
@@ -61,10 +34,10 @@ class Page
     return true unless version_enable
     # 只有 body, title, slug 更改了才更新版本
     if self.body_changed? || self.title_changed? || self.slug_changed?
-      inc(version: 1)
+      update_column(:version, self.version + 1)
       PageVersion.create(user_id: user_id,
                          page_id: id,
-                         desc: change_desc,
+                         desc: change_desc || '',
                          version: version,
                          body: body,
                          title: title,
@@ -86,7 +59,7 @@ class Page
   end
 
   def editors
-    User.where(:_id.in => editor_ids)
+    User.where(id: editor_ids)
   end
 
   def self.find_by_slug(slug)

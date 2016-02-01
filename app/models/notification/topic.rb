@@ -1,6 +1,6 @@
 module Notification
   class Topic < Base
-    belongs_to :topic, class_name: 'Topic'
+    belongs_to :topic, class_name: '::Topic'
 
     delegate :body, to: :topic, prefix: true, allow_nil: true
 

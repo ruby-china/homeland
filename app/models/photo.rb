@@ -1,13 +1,8 @@
-class Photo
-  include Mongoid::Document
-  include Mongoid::Timestamps
-  include Mongoid::BaseModel
-
-  field :image
-
+class Photo < ApplicationRecord
+  include BaseModel
   belongs_to :user
 
-  ACCESSABLE_ATTRS = [:image]
+  validates_presence_of :image
 
   # 封面图
   mount_uploader :image, PhotoUploader

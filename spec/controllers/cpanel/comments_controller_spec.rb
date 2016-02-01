@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 describe Cpanel::CommentsController, type: :controller do
-  let(:comment) { create :comment }
+  let(:user) {create :user}
+  let(:comment) { create :comment, user: user }
 
   before do
     sign_in create(:admin)
@@ -17,7 +18,7 @@ describe Cpanel::CommentsController, type: :controller do
 
   describe 'GET edit' do
     it 'assigns the requested comment as @comment' do
-      get :edit, id: comment.id
+      get :edit, params: { id: comment.id }
       expect(assigns(:comment)).to eq(comment)
     end
   end
@@ -25,17 +26,20 @@ describe Cpanel::CommentsController, type: :controller do
   describe 'PUT update' do
     describe 'with valid params' do
       it 'updates the requested comment' do
-        expect_any_instance_of(Comment).to receive(:update_attributes).with('body' => 'params')
-        put :update, id: comment.id, comment: { 'body' => 'params' }
+        comment_param = { body: '123' }
+        # expect_any_instance_of(Comment).to receive(:update_attributes).with("body" => '123')
+        put :update, params: { id: comment.id, comment: comment_param }
+        comment.reload
+        expect(comment.body).to eq '123'
       end
 
       it 'assigns the requested comment as @comment' do
-        put :update, id: comment.id, comment: { 'body' => 'body' }
+        put :update, params: { id: comment.id, comment: { 'body' => 'body' } }
         expect(assigns(:comment)).to eq(comment)
       end
 
       it 'redirects to the comment' do
-        put :update, id: comment.id, comment: { 'body' => 'body' }
+        put :update, params: { id: comment.id, comment: { 'body' => 'body' } }
         expect(response).to redirect_to(cpanel_comments_url)
       end
     end
@@ -45,13 +49,13 @@ describe Cpanel::CommentsController, type: :controller do
     it 'destroys the requested comment' do
       comment
       expect do
-        delete :destroy, id: comment.id
+        delete :destroy, params: { id: comment.id }
       end.to change(Comment, :count).by(-1)
     end
 
     it 'redirects to the comments list' do
       comment
-      delete :destroy, id: comment.id
+      delete :destroy, params: { id: comment.id }
       expect(response).to redirect_to(cpanel_comments_url)
     end
   end

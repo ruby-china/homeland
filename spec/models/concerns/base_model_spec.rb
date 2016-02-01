@@ -1,12 +1,13 @@
 require 'rails_helper'
 
-describe Mongoid::BaseModel, type: :model do
-  class Monkey
-    include Mongoid::Document
-    include Mongoid::BaseModel
-    include Mongoid::Attributes::Dynamic
+describe BaseModel, type: :model do
+  ActiveRecord::Base.connection.create_table(:monkeys, force: true) do |t|
+    t.string :name
+    t.timestamps null: false
+  end
 
-    field :name
+  class Monkey < ApplicationRecord
+    include BaseModel
   end
 
   after(:each) do
@@ -14,15 +15,15 @@ describe Mongoid::BaseModel, type: :model do
   end
 
   it 'should have recent scope method' do
-    monkey = Monkey.create(name: 'Caesar', _id: 1)
-    ghost = Monkey.create(name: 'Wukong', _id: 2)
+    monkey = Monkey.create(name: 'Caesar', id: 1)
+    ghost = Monkey.create(name: 'Wukong', id: 2)
 
     expect(Monkey.recent.to_a).to eq([ghost, monkey])
   end
 
   it 'should have exclude_ids scope method' do
     ids = Array(1..10)
-    ids.each { |i| Monkey.create(name: "entry##{i}", _id: i) }
+    ids.each { |i| Monkey.create(name: "entry##{i}", id: i) }
 
     result1 = Monkey.exclude_ids(ids.to(4).map(&:to_s)).map(&:name)
     result2 = Monkey.exclude_ids(ids.from(5)).map(&:name)
@@ -32,7 +33,7 @@ describe Mongoid::BaseModel, type: :model do
   end
 
   it 'should have find_by_id class methods' do
-    monkey = Monkey.create(name: 'monkey', _id: 1)
+    monkey = Monkey.create(name: 'monkey', id: 1)
     expect(Monkey.find_by_id(1)).to eq(monkey)
     expect(Monkey.find_by_id('1')).to eq(monkey)
     expect(Monkey.find_by_id(2)).to be_nil

@@ -1,15 +1,10 @@
-class Section
-  include Mongoid::Document
-  include Mongoid::Timestamps
-  include Mongoid::BaseModel
+class Section < ApplicationRecord
 
-  field :name
-  field :sort, type: Integer, default: 0
   has_many :nodes, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
 
-  default_scope -> { desc(:sort) }
+  default_scope -> { order(sort: :desc) }
 
   after_save :update_cache_version
   after_destroy :update_cache_version
@@ -20,6 +15,6 @@ class Section
   end
 
   def sorted_nodes
-    nodes.where(:_id.nin => [Node.no_point_id]).sorted
+    nodes.where.not(id: Node.no_point_id).sorted
   end
 end

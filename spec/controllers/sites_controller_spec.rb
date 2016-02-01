@@ -33,7 +33,7 @@ describe SitesController, type: :controller do
     let(:site_node) { create :site_node }
     it 'should not allow anonymous access' do
       params = attributes_for(:site, site_node_id: site_node.id)
-      post :create, site: params # avoids ActionController::ParameterMissing
+      post :create, params: { site: params } # avoids ActionController::ParameterMissing
       expect(response).not_to be_success
     end
 
@@ -44,14 +44,14 @@ describe SitesController, type: :controller do
 
       it 'should create new site if all is well' do
         params = attributes_for(:site, site_node_id: site_node.id)
-        post :create, site: params
+        post :create, params: { site: params }
         expect(response).to redirect_to(sites_path)
       end
 
       it 'should not create new site if url is blank' do
         params = attributes_for(:site)
         params[:url] = ''
-        post :create, site: params
+        post :create, params: { site: params }
         expect(response).to render_template(:new)
       end
     end

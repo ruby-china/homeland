@@ -10,7 +10,7 @@ class NotificationSerializer < BaseSerializer
   end
 
   def type
-    object._type.sub('Notification::', '')
+    object.type.sub('Notification::', '')
   end
 
   def actor

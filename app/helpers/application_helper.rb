@@ -8,7 +8,7 @@ module ApplicationHelper
 
   def sanitize_markdown(body)
     # TODO: This method slow, 3.5ms per call in topic body
-    sanitize sanitize(body, tags: ALLOW_TAGS, attributes: ALLOW_ATTRIBUTES)
+    sanitize(body, tags: ALLOW_TAGS, attributes: ALLOW_ATTRIBUTES)
   end
 
   def notice_message
@@ -168,7 +168,8 @@ module ApplicationHelper
   end
 
   # Override cache helper for support multiple I18n locale
-  def cache(name = {}, options = nil, &block)
+  def cache(name = {}, options = {}, &block)
+    options ||= {}
     super([I18n.locale, name], options, &block)
   end
 

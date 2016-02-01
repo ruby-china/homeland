@@ -1,27 +1,15 @@
-class Node
-  include Mongoid::Document
-  include Mongoid::Timestamps
-  include Mongoid::BaseModel
-
-  field :name
-  field :summary
-  field :sort, type: Integer, default: 0
-  field :topics_count, type: Integer, default: 0
+class Node < ApplicationRecord
 
   delegate :name, to: :section, prefix: true, allow_nil: true
 
   has_many :topics
   belongs_to :section
 
-  index section_id: 1
-
   validates :name, :summary, :section, presence: true
   validates :name, uniqueness: true
 
-  has_and_belongs_to_many :followers, class_name: 'User', inverse_of: :following_nodes
-
-  scope :hots, -> { desc(:topics_count) }
-  scope :sorted, -> { desc(:sort) }
+  scope :hots, -> { order(topics_count: :desc) }
+  scope :sorted, -> { order(sort: :desc) }
 
   after_save :update_cache_version
   after_destroy :update_cache_version
@@ -56,6 +44,6 @@ class Node
   def self.new_topic_dropdowns
     return [] if SiteConfig.new_topic_dropdown_node_ids.blank?
     node_ids = SiteConfig.new_topic_dropdown_node_ids.split(',').uniq.take(5)
-    where(:_id.in => node_ids)
+    where(id: node_ids)
   end
 end

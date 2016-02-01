@@ -8,7 +8,7 @@
   </div>
   <% end %>
 
-  <% cache(["sites/list", t: CacheVersion.sites_updated_at], expires_in: 1.days) do %>
+  <% cache(["sites/list", t: CacheVersion.sites_updated_at, d: Date.today]) do %>
     <% @site_nodes.each do |node| %>
     <div class="panel panel-default">
       <div class="panel-heading"><%= node.name %></div>

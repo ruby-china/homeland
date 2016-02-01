@@ -1,4 +1,4 @@
-class NotifyReplyJob < ActiveJob::Base
+class NotifyReplyJob < ApplicationJob
   queue_as :notifications
 
   def perform(reply_id)

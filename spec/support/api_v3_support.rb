@@ -30,7 +30,7 @@ module APIV3Support
         # override empty params and headers with default
         parameters = combine_parameters(parameters, default_parameters)
         headers = combine_parameters(headers, default_headers)
-        super(path, parameters, headers)
+        super(path, params: parameters, headers: headers)
       end
       EOV
     end

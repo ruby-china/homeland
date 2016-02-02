@@ -1,7 +1,6 @@
 class TopicsController < ApplicationController
   load_and_authorize_resource only: [:new, :edit, :create, :update, :destroy,
                                      :favorite, :unfavorite, :follow, :unfollow, :suggest, :unsuggest, :ban]
-  caches_action :feed, :node_feed, expires_in: 1.hours
 
   def index
     @threads = []
@@ -199,24 +198,24 @@ class TopicsController < ApplicationController
 
   def favorite
     current_user.favorite_topic(params[:id])
-    render text: '1'
+    render plain: '1'
   end
 
   def unfavorite
     current_user.unfavorite_topic(params[:id])
-    render text: '1'
+    render plain: '1'
   end
 
   def follow
     @topic = Topic.find(params[:id])
     @topic.push_follower(current_user.id)
-    render text: '1'
+    render plain: '1'
   end
 
   def unfollow
     @topic = Topic.find(params[:id])
     @topic.pull_follower(current_user.id)
-    render text: '1'
+    render plain: '1'
   end
 
   def suggest

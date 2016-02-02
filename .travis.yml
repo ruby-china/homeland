@@ -2,6 +2,9 @@ language: ruby
 env:
   - USE_OFFICIAL_GEM_SOURCE=1
 
+addons:
+  postgresql: "9.4"
+
 services:
   - postgresql
   - memcached

@@ -1,4 +1,4 @@
-class GithubRepoFetcherJob < ActiveJob::Base
+class GithubRepoFetcherJob < ApplicationJob
   queue_as :http_request
 
   def perform(user_id)

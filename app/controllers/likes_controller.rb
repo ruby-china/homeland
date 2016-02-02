@@ -4,12 +4,12 @@ class LikesController < ApplicationController
 
   def create
     current_user.like(@item)
-    render text: @item.reload.likes_count
+    render plain: @item.reload.likes_count
   end
 
   def destroy
     current_user.unlike(@item)
-    render text: @item.reload.likes_count
+    render plain: @item.reload.likes_count
   end
 
   private
@@ -18,7 +18,7 @@ class LikesController < ApplicationController
     @success = false
     @element_id = "likeable_#{params[:type]}_#{params[:id]}"
     unless params[:type].in?(%w(Topic Reply))
-      render text: '-1'
+      render plain: '-1'
       return false
     end
 
@@ -32,6 +32,6 @@ class LikesController < ApplicationController
     end
 
     @item = klass.find_by_id(params[:id])
-    render text: '-2' if @item.blank?
+    render plain: '-2' if @item.blank?
   end
 end

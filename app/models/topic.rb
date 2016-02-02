@@ -7,7 +7,7 @@ CORRECT_CHARS = [
   ['）', ')']
 ]
 
-class Topic < ActiveRecord::Base
+class Topic < ApplicationRecord
   include Redis::Objects
   include BaseModel
   include Likeable

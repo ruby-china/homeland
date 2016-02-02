@@ -1,5 +1,5 @@
 require 'digest/md5'
-class Reply < ActiveRecord::Base
+class Reply < ApplicationRecord
   include BaseModel
   include SoftDelete
   include MarkdownBody
@@ -82,7 +82,13 @@ class Reply < ActiveRecord::Base
       end
     end
 
+    self.broadcast_to_client(reply)
+
     true
+  end
+
+  def self.broadcast_to_client(reply)
+    ActionCable.server.broadcast "topics/#{reply.topic_id}/replies", { id: reply.id, user_id: reply.user_id, action: :create }
   end
 
   # 是否热门

@@ -19,7 +19,7 @@ describe NotificationsController, type: :controller do
       notification = create :notification_mention, user: user, mentionable: create(:reply)
 
       expect do
-        delete :destroy, id: notification
+        delete :destroy, params: { id: notification }
       end.to change(user.notifications, :count)
     end
   end

@@ -6,7 +6,7 @@ describe BaseModel, type: :model do
     t.timestamps null: false
   end
 
-  class Monkey < ActiveRecord::Base
+  class Monkey < ApplicationRecord
     include BaseModel
   end
 

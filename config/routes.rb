@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  # Serve websocket cable requests in-process
+  mount ActionCable.server => '/cable'
   mount RuCaptcha::Engine => "/rucaptcha"
 
   use_doorkeeper do
@@ -80,7 +84,7 @@ Rails.application.routes.draw do
   get '/search' => 'search#index', as: 'search'
 
   namespace :cpanel do
-    root to: 'home#index'
+    root to: 'home#index', as: 'root'
     resources :site_configs
     resources :replies
     resources :topics do
@@ -131,7 +135,7 @@ Rails.application.routes.draw do
   get 'users/city/:id' => 'users#city', as: 'location_users'
   get 'users' => 'users#index', as: 'users'
 
-  resources :users, path: '' do
+  resources :users, path: '', as: 'users' do
     member do
       get :topics
       get :replies

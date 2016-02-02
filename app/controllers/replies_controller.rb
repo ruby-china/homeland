@@ -17,6 +17,13 @@ class RepliesController < ApplicationController
     end
   end
 
+  def index
+    @replies = Reply.unscoped.where("topic_id = ? and id > ?", @topic.id, params[:last_id]).without_body.order(:id).all
+  end
+
+  def show
+  end
+
   def edit
     @reply = Reply.find(params[:id])
   end

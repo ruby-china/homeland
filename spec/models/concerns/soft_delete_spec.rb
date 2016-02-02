@@ -8,7 +8,7 @@ describe SoftDelete, type: :model do
     t.timestamps null: false
   end
 
-  class WalkingDead < ActiveRecord::Base
+  class WalkingDead < ApplicationRecord
     include BaseModel
     include SoftDelete
 

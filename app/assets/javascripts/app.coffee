@@ -1,4 +1,4 @@
-#= require jquery
+#= require jquery2
 #= require jquery.turbolinks
 #= require jquery_ujs
 #= require bootstrap.min
@@ -16,7 +16,7 @@
 #= require jquery.atwho
 #= require emoji_list
 #= require notifier
-#= require message-bus
+#= require action_cable
 #= require form_storage
 #= require topics
 #= require pages
@@ -43,7 +43,7 @@ AppView = Backbone.View.extend
     Turbolinks.ProgressBar.enable()
     @initForDesktopView()
     @initComponents()
-    @initNotificationSubscribe()
+    @initCabe()
 
     if $('body').data('controller-name') in ['topics', 'replies']
       window._topicView = new TopicView({parentView: @})
@@ -122,28 +122,26 @@ AppView = Backbone.View.extend
     $('span',el).text("#{likes_count} 个赞")
     $("i.fa",el).attr("class","fa fa-thumbs-up")
 
+  initCabe: () ->
+    @notification = App.cable.subscriptions.create "NotificationsChannel",
+      received: (data) =>
+        @receivedNotificationCount(data)
 
-  initNotificationSubscribe : () ->
-    return if not App.access_token?
-    return if App.access_token.length < 5
-    MessageBus.start()
-    MessageBus.callbackInterval = 1000
-    MessageBus.subscribe "/notifications_count/#{App.access_token}", (json) ->
-      span = $(".notification-count span")
-      link = $(".notification-count a")
-      new_title = document.title.replace(/^\(\d+\) /,'')
-      if json.count > 0
-        span.show()
-        new_title = "(#{json.count}) #{new_title}"
-        url = App.fixUrlDash("#{App.root_url}#{json.content_path}")
-        $.notifier.notify("",json.title,json.content,url)
-        link.addClass("new")
-      else
-        span.hide()
-        link.removeClass("new")
-      span.text(json.count)
-      document.title = new_title
-    true
+  receivedNotificationCount : (json) ->
+    span = $(".notification-count span")
+    link = $(".notification-count a")
+    new_title = document.title.replace(/^\(\d+\) /,'')
+    if json.count > 0
+      span.show()
+      new_title = "(#{json.count}) #{new_title}"
+      url = App.fixUrlDash("#{App.root_url}#{json.content_path}")
+      $.notifier.notify("",json.title,json.content,url)
+      link.addClass("new")
+    else
+      span.hide()
+      link.removeClass("new")
+    span.text(json.count)
+    document.title = new_title
 
   openHeaderSearchBox: (e) ->
     $(".header .form-search").addClass("active")
@@ -222,6 +220,7 @@ window.App =
   access_token : ''
   asset_url : ''
   root_url : ''
+  cable: ActionCable.createConsumer("/cable")
 
   isLogined : ->
     App.current_user_id != null

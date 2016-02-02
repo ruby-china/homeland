@@ -13,10 +13,12 @@ module Notification
 
     def realtime_push_to_client
       if user
-        hash = notify_hash
-        hash[:count] = user.notifications.unread.count
-        ActionCable.server.broadcast "notifications_count/#{user.id}", hash
+        self.class.realtime_push_to_client(user)
       end
+    end
+
+    def self.realtime_push_to_client(user)
+      ActionCable.server.broadcast "notifications_count/#{user.id}", { count: user.notifications.unread.count }
     end
 
     def content_path

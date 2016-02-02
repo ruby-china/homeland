@@ -25,6 +25,7 @@ class RepliesController < ApplicationController
     end
 
     @replies = Reply.unscoped.where("topic_id = ? and id > ?", @topic.id, last_id).without_body.order(:id).all
+    current_user.read_topic(@topic, replies_ids: @replies.collect(&:id))
   end
 
   def show

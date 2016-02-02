@@ -1,8 +1,10 @@
 class RepliesChannel < ApplicationCable::Channel
-  def subscribed
-    stream_from "topics/#{params[:topic_id]}/replies"
+  def follow(data)
+    stop_all_streams
+    stream_from "topics/#{data['topic_id']}/replies"
   end
 
-  def unsubscribed
+  def unfollow
+    stop_all_streams
   end
 end

@@ -394,15 +394,26 @@ window.TopicView = Backbone.View.extend
     $("body[data-controller-name='topics'] #topic_title").focus()
 
   initCableUpdate: () ->
-    params =
-      channel: 'RepliesChannel'
-      topic_id: Topics.topic_id
-    App.cable.subscriptions.create params,
-      received: (json) =>
-        if json.user_id == App.current_user_id
-          return false
-        if json.action == 'create'
-          $(".notify-updated").show()
+    self = @
+
+    if !window.repliesChannel
+      console.log "init repliesChannel"
+      window.repliesChannel = App.cable.subscriptions.create 'RepliesChannel',
+        connected: ->
+          setTimeout =>
+            @followCurrentTopic()
+            $(document).on 'page:change', -> window.repliesChannel.followCurrentTopic()
+          , 1000
+
+        received: (json) =>
+          if json.user_id == App.current_user_id
+            return false
+          if json.action == 'create'
+            $(".notify-updated").show()
+
+        followCurrentTopic: ->
+          @perform 'follow', topic_id: Topics.topic_id
+
 
   updateReplies: () ->
     lastId = $("#replies .reply:last").data('id')

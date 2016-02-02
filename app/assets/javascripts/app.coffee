@@ -43,7 +43,7 @@ AppView = Backbone.View.extend
     Turbolinks.ProgressBar.enable()
     @initForDesktopView()
     @initComponents()
-    @initCabe()
+    @initCable()
 
     if $('body').data('controller-name') in ['topics', 'replies']
       window._topicView = new TopicView({parentView: @})
@@ -122,12 +122,14 @@ AppView = Backbone.View.extend
     $('span',el).text("#{likes_count} 个赞")
     $("i.fa",el).attr("class","fa fa-thumbs-up")
 
-  initCabe: () ->
-    @notification = App.cable.subscriptions.create "NotificationsChannel",
-      received: (data) =>
-        @receivedNotificationCount(data)
+  initCable: () ->
+    if !window.notificationChannel
+      window.notificationChannel = App.cable.subscriptions.create "NotificationsChannel",
+        received: (data) =>
+          @receivedNotificationCount(data)
 
   receivedNotificationCount : (json) ->
+    console.log 'receivedNotificationCount', json
     span = $(".notification-count span")
     link = $(".notification-count a")
     new_title = document.title.replace(/^\(\d+\) /,'')

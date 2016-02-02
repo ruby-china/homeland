@@ -27,8 +27,9 @@ class User < ApplicationRecord
   def read_notifications(notifications)
     unread_ids = notifications.find_all { |notification| !notification.read? }.map(&:id)
     if unread_ids.any?
-      Notification::Base.where(user_id: id,read: false)
+      Notification::Base.where(user_id: id, read: false)
         .where(id: unread_ids).update_all(read: true, updated_at: Time.now)
+      Notification::Base.realtime_push_to_client(self)
     end
   end
 
@@ -254,6 +255,7 @@ class User < ApplicationRecord
     notifications.unread
       .where(any_sql, topic.id, opts[:replies_ids], opts[:replies_ids])
       .update_all(read: true)
+    Notification::Base.realtime_push_to_client(self)
 
     # 处理 last_reply_id 是空的情况
     last_reply_id = topic.last_reply_id || -1

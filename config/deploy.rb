@@ -1,7 +1,8 @@
 require 'bundler/capistrano'
 require 'capistrano/sidekiq'
 require 'rvm/capistrano'
-require 'capistrano-unicorn'
+require 'puma'
+require 'puma/capistrano'
 
 default_run_options[:pty] = true
 
@@ -16,7 +17,9 @@ set :deploy_to, "/data/www/#{application}"
 set :runner, 'ruby'
 # set :deploy_via, :remote_cache
 set :git_shallow_clone, 1
-set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
+
+set :puma_role, :app
+set :puma_config_file, "config/puma.rb"
 
 role :web, 'ruby-china.org'
 role :app, 'ruby-china.org'
@@ -47,6 +50,7 @@ task :migrate_db, roles: :web do
 end
 
 after 'deploy:finalize_update', 'deploy:symlink', :link_shared, :migrate_db#, :compile_assets
-after 'deploy:restart', 'unicorn:restart'
-after 'deploy:start', 'unicorn:start'
-after 'deploy:stop', 'unicorn:stop'
+after 'deploy:restart', 'puma:restart'
+after 'deploy:start', 'puma:start'
+after 'deploy:stop', 'puma:stop'
+

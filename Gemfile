@@ -117,7 +117,6 @@ gem 'oneapm_rpm'
 
 group :development do
   gem 'capistrano', '2.9.0', require: false
-  gem 'capistrano-unicorn'
   gem 'rvm-capistrano', require: false
   gem 'capistrano-sidekiq'
 

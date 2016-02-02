@@ -155,8 +155,6 @@ GEM
     capistrano-sidekiq (0.5.4)
       capistrano
       sidekiq (>= 3.4)
-    capistrano-unicorn (0.2.0)
-      capistrano (< 3.0)
     capybara (2.6.0)
       addressable
       mime-types (>= 1.16)
@@ -341,7 +339,7 @@ GEM
       actionmailer (>= 3.0.0)
       postmark (~> 1.7.0)
     powerpack (0.1.1)
-    puma (2.15.3)
+    puma (2.16.0)
     rack (2.0.0.alpha)
       json
     rack-accept (0.4.5)
@@ -470,7 +468,6 @@ DEPENDENCIES
   cancancan (~> 1.13.1)
   capistrano (= 2.9.0)
   capistrano-sidekiq
-  capistrano-unicorn
   capybara
   carrierwave
   carrierwave-upyun

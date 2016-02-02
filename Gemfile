@@ -58,7 +58,7 @@ gem 'omniauth'
 gem 'omniauth-github'
 
 # permission
-gem 'cancancan', '~> 1.8.4'
+gem 'cancancan', '~> 1.13.1'
 
 gem 'redis'
 gem 'hiredis'

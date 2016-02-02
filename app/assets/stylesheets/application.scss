@@ -953,5 +953,15 @@ footer {
   }
 }
 
+.notify-updated {
+  display: none;
+  padding: 4px 15px;
+  margin-bottom: 20px;
+  text-align: left;
+  background: #FDF8A6; border:1px solid #F5E3A4; color: $redLabelText;
+  a:link,
+  a:visited { color: $yellowText; }
+}
+
 .dz-preview { display: none; }
 textarea.div-dropzone-focus { border-color: #BBE1C9; background: #fafafa; }

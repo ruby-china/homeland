@@ -1,5 +1,6 @@
 <% content_for :scripts do %>
   <script type="text/javascript">
+    Topics.topic_id = <%= @topic.id %>;
     <% if current_user && !@user_liked_reply_ids.blank? %>
     Topics.user_liked_reply_ids = [<%= @user_liked_reply_ids.join(",") %>];
     <% end %>
@@ -63,6 +64,10 @@
       </div>
     </div>
   <% end %>
+
+  <div class="notify-updated">
+    <a class="update" href="#"><i class="fa fa-bell-o"></i> <b>新回复提示！</b> 此话题有了新增的回复，你可以点击这里立即载入新内容。</a>
+  </div>
 
   <% if current_user %>
     <div id="reply" class="panel panel-default">

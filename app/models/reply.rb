@@ -82,7 +82,13 @@ class Reply < ApplicationRecord
       end
     end
 
+    self.broadcast_to_client(reply)
+
     true
+  end
+
+  def self.broadcast_to_client(reply)
+    ActionCable.server.broadcast "topics/#{reply.topic_id}/replies", { id: reply.id, user_id: reply.user_id, action: :create }
   end
 
   # 是否热门

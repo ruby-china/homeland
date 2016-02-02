@@ -1,6 +1,15 @@
 require 'rails_helper'
 
 describe RepliesController, type: :controller do
+  describe '#index' do
+    it 'should work' do
+      topic = create :topic
+      replies = create_list :reply, 3
+      get :index, params { topic_id: topic.id, last_id: replies.first.id }
+      expect(response).to be_success
+    end
+  end
+
   describe '#create' do
     it 'should create reply and set topic read' do
       user = create :user

@@ -44,6 +44,13 @@ describe Reply, type: :model do
       # TODO: 需要更多的测试，测试 @ 并且有关注的时候不会重复通知，回复时候不会通知自己
     end
 
+    describe 'should boardcast replies to client' do
+      it 'should work' do
+        expect(Reply).to receive(:broadcast_to_client).once
+        create :reply
+      end
+    end
+
     describe 'Touch Topic in callback' do
       let(:topic) { create :topic, updated_at: 1.days.ago }
       let(:reply) { create :reply, topic: topic }
@@ -189,6 +196,16 @@ describe Reply, type: :model do
           reply.save
         end
       end
+    end
+  end
+
+  describe '#broadcast_to_client' do
+    let(:reply) { create(:reply) }
+
+    it 'should work' do
+      args = ["topics/#{reply.topic_id}/replies", { id: reply.id, user_id: reply.user_id, action: :create } ]
+      expect(ActionCable.server).to receive(:broadcast).with(*args).once
+      Reply.broadcast_to_client(reply)
     end
   end
 

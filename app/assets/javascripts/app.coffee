@@ -123,8 +123,7 @@ AppView = Backbone.View.extend
     $("i.fa",el).attr("class","fa fa-thumbs-up")
 
   initCabe: () ->
-    @cable = ActionCable.createConsumer("/cable")
-    @notification = @cable.subscriptions.create "NotificationChannel",
+    @notification = App.cable.subscriptions.create "NotificationsChannel",
       received: (data) =>
         @receivedNotificationCount(data)
 
@@ -221,6 +220,7 @@ window.App =
   access_token : ''
   asset_url : ''
   root_url : ''
+  cable: ActionCable.createConsumer("/cable")
 
   isLogined : ->
     App.current_user_id != null

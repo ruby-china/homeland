@@ -1,10 +1,12 @@
 # TopicsController 下所有页面的 JS 功能
 window.Topics =
+  topic_id: null
   user_liked_reply_ids: []
 
 window.TopicView = Backbone.View.extend
   el: "body"
   currentPageImageURLs : []
+  clearHightTimer: null
 
   events:
     "click #replies .reply .btn-reply": "reply"
@@ -15,15 +17,24 @@ window.TopicView = Backbone.View.extend
     "click a.follow": "follow"
     "click a.bookmark": "bookmark"
     "click .btn-move-page": "scrollPage"
+    "click .notify-updated .update": "updateReplies"
 
   initialize: (opts) ->
     @parentView = opts.parentView
 
     @initComponents()
+    @initCableUpdate()
     @initDropzone()
     @initContentImageZoom()
     @initCloseWarning()
     @checkRepliesLikeStatus()
+    @resetClearReplyHightTimer()
+
+  resetClearReplyHightTimer: ->
+    clearTimeout(@clearHightTimer)
+    @clearHightTimer = setTimeout ->
+      $(".reply").removeClass("light")
+    , 10000
 
 
   initDropzone: ->
@@ -187,6 +198,7 @@ window.TopicView = Backbone.View.extend
 
   # Ajax 回复后的事件
   replyCallback : (success, msg) ->
+    return if msg == ''
     $("#main .alert-message").remove()
     if success
       $("abbr.timeago",$("#replies .reply").last()).timeago()
@@ -198,6 +210,7 @@ window.TopicView = Backbone.View.extend
       App.alert(msg,'#reply')
     $("#new_reply textarea").focus()
     $('#reply-button').button('reset')
+    @resetClearReplyHightTimer()
 
   # 图片点击增加全屏预览功能
   initContentImageZoom : () ->
@@ -379,3 +392,20 @@ window.TopicView = Backbone.View.extend
 
     # Focus title field in new-topic page
     $("body[data-controller-name='topics'] #topic_title").focus()
+
+  initCableUpdate: () ->
+    params =
+      channel: 'RepliesChannel'
+      topic_id: Topics.topic_id
+    App.cable.subscriptions.create params,
+      received: (json) =>
+        if json.user_id == App.current_user_id
+          return false
+        if json.action == 'create'
+          $(".notify-updated").show()
+
+  updateReplies: () ->
+    lastId = $("#replies .reply:last").data('id')
+    $.get "/topics/#{Topics.topic_id}/replies.js?last_id=#{lastId}", ->
+      $(".notify-updated").hide()
+    false

@@ -28,6 +28,7 @@
 AppView = Backbone.View.extend
   el: "body"
   repliesPerPage: 50
+  windowInActive: true
 
   events:
     "click a.likeable": "likeable"
@@ -67,6 +68,9 @@ AppView = Backbone.View.extend
       if $(el.target).val().trim().length > 0
         $(el.target).parent().parent().submit()
       return false
+
+    $(window).off "blur.inactive focus.inactive"
+    $(window).on "blur.inactive focus.inactive", @updateWindowActiveState
 
   initForDesktopView : () ->
     return if typeof(app_mobile) != "undefined"
@@ -214,6 +218,18 @@ AppView = Backbone.View.extend
     currentSrc = img.attr('src')
     img.attr('src', currentSrc.split('?')[0] + '?' + (new Date()).getTime())
     return false
+
+  updateWindowActiveState: (e) ->
+    prevType = $(this).data("prevType")
+
+    if prevType != e.type
+      switch (e.type)
+        when "blur"
+          @windowInActive = false
+        when "focus"
+          @windowInActive = true
+
+    $(this).data("prevType", e.type)
 
 window.App =
   locale: 'zh-CN'

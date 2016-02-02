@@ -409,7 +409,10 @@ window.TopicView = Backbone.View.extend
           if json.user_id == App.current_user_id
             return false
           if json.action == 'create'
-            $(".notify-updated").show()
+            if App.windowInActive
+              @updateReplies()
+            else
+              $(".notify-updated").show()
 
         followCurrentTopic: ->
           @perform 'follow', topic_id: Topics.topic_id

@@ -406,6 +406,9 @@ window.TopicView = Backbone.View.extend
 
   updateReplies: () ->
     lastId = $("#replies .reply:last").data('id')
+    if(!lastId)
+      Turbolinks.visit(location.href)
+      return false
     $.get "/topics/#{Topics.topic_id}/replies.js?last_id=#{lastId}", =>
       $(".notify-updated").hide()
       $("#new_reply textarea").focus()

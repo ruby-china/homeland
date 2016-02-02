@@ -27,3 +27,4 @@
       trust_user_can_modify_wiki: "Allow user to modify Wiki"
     topic_list: "Topic List"
     check_photo: "View Photo"
+    reset_query: "Clear current search query"

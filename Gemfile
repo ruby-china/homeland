@@ -6,7 +6,7 @@ end
 
 ruby '2.3.0'
 
-gem 'rails', '5.0.0.beta1.1'
+gem 'rails', '5.0.0.beta2'
 gem 'sprockets'
 gem 'sass-rails'
 gem 'coffee-rails'
@@ -17,7 +17,7 @@ gem 'turbolinks', github: 'rails/turbolinks'
 gem 'jquery-turbolinks'
 gem 'dropzonejs-rails'
 
-gem 'rails-i18n', '~> 5.0.0.beta1'
+gem 'rails-i18n'
 gem 'http_accept_language'
 gem 'rails_autolink'
 gem 'md_emoji'
@@ -43,7 +43,7 @@ gem 'pg'
 gem 'mongo', require: false
 
 # 用户系统
-gem 'devise', github: 'plataformatec/devise'
+gem 'devise', '~> 4.0.0.rc1'
 gem 'devise-encryptable'
 
 # 分页

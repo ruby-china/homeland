@@ -80,7 +80,7 @@ GIT
       tilt (~> 2.0)
 
 GEM
-  remote: https://ruby.taobao.org/
+  remote: https://rubygems.org/
   specs:
     actioncable (5.0.0.beta2)
       actionpack (= 5.0.0.beta2)

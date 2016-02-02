@@ -150,3 +150,4 @@ group :development, :test do
 
   gem 'bundler-audit', require: false
 end
+gem 'omniauth-oauth2', '>= 1.1.1'

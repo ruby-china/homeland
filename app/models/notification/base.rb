@@ -15,7 +15,7 @@ module Notification
       if user
         hash = notify_hash
         hash[:count] = user.notifications.unread.count
-        MessageBus.publish "/notifications_count/#{user.temp_access_token}", hash
+        ActionCable.server.broadcast "notifications_count/#{user.id}", hash
       end
     end
 

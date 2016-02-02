@@ -83,8 +83,6 @@ gem 'sidekiq'
 # Sidekiq Web
 gem 'sinatra', github: 'sinatra/sinatra', require: nil
 
-gem 'message_bus'
-
 # 分享功能
 gem 'social-share-button'
 
@@ -104,7 +102,7 @@ gem 'postmark-rails'
 gem 'kgio'
 gem 'dalli'
 
-gem 'unicorn'
+gem 'puma'
 
 gem 'parallel'
 
@@ -118,8 +116,6 @@ gem 'rack-mini-profiler', github: 'MiniProfiler/rack-mini-profiler', require: fa
 gem 'oneapm_rpm'
 
 group :development do
-  gem 'puma'
-
   gem 'capistrano', '2.9.0', require: false
   gem 'capistrano-unicorn'
   gem 'rvm-capistrano', require: false

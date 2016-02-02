@@ -406,6 +406,7 @@ window.TopicView = Backbone.View.extend
 
   updateReplies: () ->
     lastId = $("#replies .reply:last").data('id')
-    $.get "/topics/#{Topics.topic_id}/replies.js?last_id=#{lastId}", ->
+    $.get "/topics/#{Topics.topic_id}/replies.js?last_id=#{lastId}", =>
       $(".notify-updated").hide()
+      $("#new_reply textarea").focus()
     false

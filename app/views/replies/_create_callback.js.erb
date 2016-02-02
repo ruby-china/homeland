@@ -10,7 +10,6 @@ if($("#replies").length == 0){
     dom.find(".reply-floor").text(current_floor + " 楼");
     dom.find("a.edit").css("display", "inline-block");
     dom.addClass('light');
-    $("#replies").data("last-floor", current_floor);
     _topicView.resetClearReplyHightTimer();
   }
 }

@@ -27,7 +27,7 @@ class Reply < ApplicationRecord
     end
   end
 
-  after_save :update_parent_topic
+  after_commit :update_parent_topic, on: :create
   def update_parent_topic
     topic.update_last_reply(self) if topic.present?
   end

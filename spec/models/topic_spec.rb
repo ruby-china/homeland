@@ -64,6 +64,14 @@ describe Topic, type: :model do
     expect(topic.last_reply_user_login).to eq(reply.user.login)
   end
 
+  it 'should not update last_active_mark when update reply' do
+    reply = create :reply, topic: topic, user: user
+    old_last_active_mark = topic.last_active_mark
+    reply.body = 'foobar'
+    reply.save
+    expect(topic.last_active_mark).to eq(old_last_active_mark)
+  end
+
   it 'should covert body with Markdown on create' do
     t = create(:topic, body: '*foo*')
     expect(t.body_html).to eq('<p><em>foo</em></p>')

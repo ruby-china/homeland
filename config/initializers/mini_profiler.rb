@@ -7,5 +7,5 @@ if !Rails.env.test?
   Rack::MiniProfiler.config.storage_options = { host: redis_config['host'], port: redis_config['port'] }
   Rack::MiniProfiler.config.storage = Rack::MiniProfiler::RedisStore
   Rack::MiniProfiler.config.disable_env_dump = true
-  Rack::MiniProfiler.config.skip_paths = ['/message-bus']
+  Rack::MiniProfiler.config.skip_paths = ['/cable']
 end

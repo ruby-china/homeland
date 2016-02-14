@@ -130,12 +130,7 @@ end
 group :development, :test do
   gem 'rubocop'
 
-  gem 'rspec-rails', github: 'rspec/rspec-rails'
-  gem 'rspec-mocks', github: 'rspec/rspec-mocks'
-  gem 'rspec-core', github: 'rspec/rspec-core'
-  gem 'rspec-support', github: 'rspec/rspec-support'
-  gem 'rspec-expectations', github: 'rspec/rspec-expectations'
-  gem 'rspec', github: 'rspec/rspec'
+  gem 'rspec-rails', '3.5.0.beta1'
 
   gem 'rails-controller-testing'
 

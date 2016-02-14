@@ -20,57 +20,6 @@ GIT
       coffee-rails
 
 GIT
-  remote: git://github.com/rspec/rspec-core.git
-  revision: e9b99468cbfa45d2c0f38e69a0c9c9184814e327
-  specs:
-    rspec-core (3.5.0.pre)
-      rspec-support (= 3.5.0.pre)
-
-GIT
-  remote: git://github.com/rspec/rspec-expectations.git
-  revision: 4c1856b5155f14b4fa5f2c623f2e3fe92bbd1463
-  specs:
-    rspec-expectations (3.5.0.pre)
-      diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (= 3.5.0.pre)
-
-GIT
-  remote: git://github.com/rspec/rspec-mocks.git
-  revision: 2fcdbaee682efc35c146c9f713c079356ca3ec6e
-  specs:
-    rspec-mocks (3.5.0.pre)
-      diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (= 3.5.0.pre)
-
-GIT
-  remote: git://github.com/rspec/rspec-rails.git
-  revision: f37065600822e49df993e58e86b07d54e4af3fd8
-  specs:
-    rspec-rails (3.5.0.pre)
-      actionpack (>= 3.0)
-      activesupport (>= 3.0)
-      railties (>= 3.0)
-      rspec-core (= 3.5.0.pre)
-      rspec-expectations (= 3.5.0.pre)
-      rspec-mocks (= 3.5.0.pre)
-      rspec-support (= 3.5.0.pre)
-
-GIT
-  remote: git://github.com/rspec/rspec-support.git
-  revision: 4b938ec512d2fbee945913afbb957b510244ecb3
-  specs:
-    rspec-support (3.5.0.pre)
-
-GIT
-  remote: git://github.com/rspec/rspec.git
-  revision: 5966b248d83a74c58784ff195cef5d6be22fa17c
-  specs:
-    rspec (3.5.0.pre)
-      rspec-core (= 3.5.0.pre)
-      rspec-expectations (= 3.5.0.pre)
-      rspec-mocks (= 3.5.0.pre)
-
-GIT
   remote: git://github.com/sinatra/sinatra.git
   revision: f8d4e9b332c15c22cbe8bad32aefbeeaaaed1e3f
   specs:
@@ -406,6 +355,23 @@ GEM
     responders (2.1.1)
       railties (>= 4.2.0, < 5.1)
     rouge (1.8.0)
+    rspec-core (3.5.0.beta1)
+      rspec-support (= 3.5.0.beta1)
+    rspec-expectations (3.5.0.beta1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (= 3.5.0.beta1)
+    rspec-mocks (3.5.0.beta1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (= 3.5.0.beta1)
+    rspec-rails (3.5.0.beta1)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec-core (= 3.5.0.beta1)
+      rspec-expectations (= 3.5.0.beta1)
+      rspec-mocks (= 3.5.0.beta1)
+      rspec-support (= 3.5.0.beta1)
+    rspec-support (3.5.0.beta1)
     rubocop (0.36.0)
       parser (>= 2.3.0.0, < 3.0)
       powerpack (~> 0.1)
@@ -528,12 +494,7 @@ DEPENDENCIES
   redis-namespace
   redis-objects
   rouge (~> 1.8.0)
-  rspec!
-  rspec-core!
-  rspec-expectations!
-  rspec-mocks!
-  rspec-rails!
-  rspec-support!
+  rspec-rails (= 3.5.0.beta1)
   rubocop
   rucaptcha
   rvm-capistrano

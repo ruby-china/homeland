@@ -396,6 +396,9 @@ window.TopicView = Backbone.View.extend
   initCableUpdate: () ->
     self = @
 
+    if not Topics.topic_id
+      return
+
     if !window.repliesChannel
       console.log "init repliesChannel"
       window.repliesChannel = App.cable.subscriptions.create 'RepliesChannel',

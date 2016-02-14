@@ -3,7 +3,7 @@ module Cpanel
     def index
       @users = User.all
       if params[:q]
-        @users = @users.where(login: /#{params[:q]}/)
+        @users = @users.where('login LIKE ?', "%#{params[:q]}%")
       end
       @users = @users.order(id: :desc).paginate page: params[:page], per_page: 30
     end

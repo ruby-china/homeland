@@ -35,7 +35,7 @@ gem 'carrierwave-upyun'
 gem 'mini_magick'
 
 gem 'rucaptcha'
-gem 'letter_avatar'
+gem 'letter_avatar', path: '../letter_avatar'
 
 gem 'pg'
 

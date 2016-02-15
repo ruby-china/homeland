@@ -8,9 +8,7 @@ class ApplicationController < ActionController::Base
     method = "#{resource}_params"
     params[resource] &&= send(method) if respond_to?(method, true)
 
-    if current_user
-      cookies.signed[:user_id] ||= current_user.id
-    end
+    cookies.signed[:user_id] ||= current_user.try(:id)
 
     if devise_controller?
       devise_parameter_sanitizer.permit(:sign_in) { |u| u.permit(*User::ACCESSABLE_ATTRS) }

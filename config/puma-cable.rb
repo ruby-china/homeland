@@ -4,6 +4,7 @@ workers 1
 threads 16,64
 port 7001
 preload_app!
+daemonize true
 
 on_worker_boot do
   ActiveSupport.on_load(:active_record) do

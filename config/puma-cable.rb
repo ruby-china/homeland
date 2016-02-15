@@ -1,3 +1,4 @@
+app_root = '/home/ruby/www/ruby-china/current'
 pidfile "#{app_root}/tmp/pids/puma-cable.pid"
 state_path "#{app_root}/tmp/pids/puma-cable.state"
 workers 1

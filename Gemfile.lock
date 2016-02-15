@@ -28,12 +28,6 @@ GIT
       rack-protection (~> 1.5)
       tilt (~> 2.0)
 
-PATH
-  remote: ../letter_avatar
-  specs:
-    letter_avatar (0.1.5)
-      posix-spawn (>= 0.3.0)
-
 GEM
   remote: https://ruby.taobao.org/
   specs:
@@ -235,6 +229,7 @@ GEM
     kgio (2.10.0)
     launchy (2.4.3)
       addressable (~> 2.3)
+    letter_avatar (0.1.4)
     letter_opener (1.4.1)
       launchy (~> 2.2)
     loofah (2.0.3)
@@ -467,7 +462,7 @@ DEPENDENCIES
   jquery-rails
   jquery-turbolinks
   kgio
-  letter_avatar!
+  letter_avatar
   letter_opener
   md_emoji
   mini_magick

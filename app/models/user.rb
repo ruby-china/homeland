@@ -6,8 +6,7 @@ class User < ApplicationRecord
   include Redis::Objects
   include BaseModel
   extend OmniauthCallbacks
-  include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
+  include Searchable
 
   ALLOW_LOGIN_CHARS_REGEXP = /\A\w+\z/
 

@@ -4,8 +4,7 @@ require 'redcarpet'
 class Page < ApplicationRecord
   include BaseModel
   include MarkdownBody
-  include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
+  include Searchable
 
   has_many :versions, class_name: 'PageVersion'
 
@@ -17,7 +16,6 @@ class Page < ApplicationRecord
   validates :change_desc, if: proc { |p| p.version_enable == true && !p.new_record? }, presence: true
   validates :slug, format: /\A[a-z0-9\-_]+\z/
   validates :slug, uniqueness: true
-
 
   before_save :append_editor
   def append_editor

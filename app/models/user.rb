@@ -330,7 +330,7 @@ class User < ApplicationRecord
   # GitHub 项目
   def github_repositories
     cache_key = github_repositories_cache_key
-    items = Rails.cache.read(cache_key)
+    items = $file_store.read(cache_key)
     if items.nil?
       GithubRepoFetcherJob.perform_later(id)
       items = []
@@ -339,7 +339,7 @@ class User < ApplicationRecord
   end
 
   def github_repositories_cache_key
-    "github_repositories:#{github}+10+v4"
+    "github-repos:#{github}"
   end
 
   def self.fetch_github_repositories(user_id)
@@ -356,7 +356,7 @@ class User < ApplicationRecord
     rescue => e
       Rails.logger.error("GitHub Repositiory fetch Error: #{e}")
       items = []
-      Rails.cache.write(user.github_repositories_cache_key, items, expires_in: 1.minutes)
+      $file_store.write(user.github_repositories_cache_key, items, expires_in: 1.minutes)
       return false
     end
 
@@ -371,7 +371,7 @@ class User < ApplicationRecord
       }
     end
     items = items.sort { |a1, a2| a2[:watchers] <=> a1[:watchers] }.take(10)
-    Rails.cache.write(user.github_repositories_cache_key, items, expires_in: 15.days)
+    $file_store.write(user.github_repositories_cache_key, items, expires_in: 15.days)
     items
   end
 

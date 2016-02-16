@@ -7,11 +7,11 @@ class SearchIndexer < ApplicationJob
 
     case type
     when 'topic'
-      obj = Topic.find(id)
+      obj = Topic.find_by_id(id)
     when 'page'
-      obj = Page.find(id)
+      obj = Page.find_by_id(id)
     when 'user'
-      obj = User.find(id)
+      obj = User.find_by_id(id)
     end
 
     return false if !obj

@@ -1,4 +1,6 @@
 class Location < ApplicationRecord
+  acts_as_cached version: 1, expires_in: 1.week
+
   has_many :users
 
   scope :hot, -> { order(users_count: :desc) }

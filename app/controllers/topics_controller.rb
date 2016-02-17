@@ -71,7 +71,8 @@ class TopicsController < ApplicationController
 
   def show
     @threads = []
-    @topic = Topic.without_body.includes(:user).find(params[:id])
+    @topic = Topic.unscoped.includes(:user).find(params[:id])
+    render_404 if @topic.deleted?
 
     @threads << Thread.new do
       @topic.hits.incr(1)

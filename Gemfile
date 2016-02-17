@@ -66,6 +66,7 @@ gem 'hiredis'
 gem 'redis-namespace'
 # 将一些数据存放入 Redis
 gem 'redis-objects'
+gem 'second_level_cache', '2.2.1'
 
 gem 'rails-settings-cached'
 

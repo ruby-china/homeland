@@ -1,4 +1,5 @@
 class Node < ApplicationRecord
+  acts_as_cached version: 1, expires_in: 1.week
 
   delegate :name, to: :section, prefix: true, allow_nil: true
 

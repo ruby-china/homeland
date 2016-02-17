@@ -6,6 +6,8 @@ class Page < ApplicationRecord
   include MarkdownBody
   include Searchable
 
+  acts_as_cached version: 1, expires_in: 1.week
+
   has_many :versions, class_name: 'PageVersion'
 
   attr_accessor :user_id, :change_desc, :version_enable
@@ -61,6 +63,6 @@ class Page < ApplicationRecord
   end
 
   def self.find_by_slug(slug)
-    where(slug: slug).first
+    fetch_by_uniq_keys(slug: slug)
   end
 end

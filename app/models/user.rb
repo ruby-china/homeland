@@ -8,6 +8,8 @@ class User < ApplicationRecord
   extend OmniauthCallbacks
   include Searchable
 
+  acts_as_cached version: 1, expires_in: 1.week
+
   ALLOW_LOGIN_CHARS_REGEXP = /\A\w+\z/
 
   devise :database_authenticatable, :registerable, :recoverable,
@@ -188,13 +190,22 @@ class User < ApplicationRecord
   end
 
   def self.find_by_email(email)
-    where(email: email).first
+    fetch_by_uniq_keys(email: email)
+  end
+
+  def self.find_login!(slug)
+    find_login(slug) || fail(ActiveRecord::RecordNotFound.new(slug: slug))
   end
 
   def self.find_login(slug)
-    fail ActiveRecord::RecordNotFound.new(slug: slug) unless slug =~ ALLOW_LOGIN_CHARS_REGEXP
+    return nil unless slug =~ ALLOW_LOGIN_CHARS_REGEXP
     slug = slug.downcase
-    find_by(login: slug) || where("lower(login) = ?", slug).first || fail(ActiveRecord::RecordNotFound.new(slug: slug))
+    fetch_by_uniq_keys(login: slug)
+  end
+
+  def self.find_by_login_or_email(login_or_email)
+    login_or_email = login_or_email.downcase
+    fetch_by_uniq_keys(login: login_or_email) || fetch_by_uniq_keys(email: login_or_email)
   end
 
   def self.find_for_database_authentication(warden_conditions)

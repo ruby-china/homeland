@@ -119,7 +119,7 @@ class UsersController < ApplicationController
       return
     end
 
-    @user = User.find_login(params[:id])
+    @user = User.find_login!(params[:id])
     if @user.deleted?
       render_404
     end

@@ -1,4 +1,5 @@
 class Section < ApplicationRecord
+  acts_as_cached version: 1, expires_in: 1.week
 
   has_many :nodes, dependent: :destroy
 

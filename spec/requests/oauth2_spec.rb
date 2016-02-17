@@ -38,6 +38,10 @@ describe 'OAuth2' do
         @access_token = client.password.get_token(user.email, password)
       end.to change(Doorkeeper::AccessToken, :count).by(1)
 
+      expect do
+        @access_token = client.password.get_token(user.login, password)
+      end.to change(Doorkeeper::AccessToken, :count).by(1)
+
       expect(@access_token.token).not_to be_nil
 
       # Refresh Token

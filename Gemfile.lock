@@ -385,6 +385,9 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    second_level_cache (2.2.1)
+      activerecord (>= 5.0.0.beta1, < 5.1.0)
+      activesupport (>= 5.0.0.beta1, < 5.1.0)
     settingslogic (2.0.9)
     sidekiq (4.0.2)
       concurrent-ruby (~> 1.0)
@@ -495,6 +498,7 @@ DEPENDENCIES
   rucaptcha
   rvm-capistrano
   sass-rails
+  second_level_cache (= 2.2.1)
   settingslogic
   sidekiq
   simple_form

@@ -63,7 +63,7 @@ namespace :cable do
   end
 end
 
-after 'deploy:finalize_update', 'deploy:symlink', :link_shared, :migrate_db, :compile_assets
+after 'deploy:finalize_update', 'deploy:symlink', :link_shared#, :migrate_db, :compile_assets
 after 'deploy:start', 'cable:start'
 after 'deploy:restart', 'cable:restart'
 after 'deploy:stop', 'cable:stop'

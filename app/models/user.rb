@@ -24,6 +24,7 @@ class User < ApplicationRecord
   has_many :notifications, class_name: 'Notification::Base', dependent: :destroy
   has_many :photos
   has_many :oauth_applications, class_name: 'Doorkeeper::Application', as: :owner
+  has_many :devices
 
   def read_notifications(notifications)
     unread_ids = notifications.find_all { |notification| !notification.read? }.map(&:id)

@@ -10,4 +10,8 @@ class Device < ApplicationRecord
     return true if last_actived_at.blank?
     (Date.current - last_actived_at.to_date).to_i <= 14
   end
+
+  def kind_name
+    @kind_name ||= I18n.t "device_kind.#{self.kind}"
+  end
 end

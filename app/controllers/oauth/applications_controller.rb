@@ -5,6 +5,7 @@ module Oauth
     def index
       @applications = current_user.oauth_applications
       @authorized_applications = Doorkeeper::Application.authorized_for(current_user)
+      @devices = current_user.devices.all
     end
 
     # only needed if each application must have some owner

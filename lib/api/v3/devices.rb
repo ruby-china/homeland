@@ -13,8 +13,7 @@ module API
         post '' do
           doorkeeper_authorize!
 
-          @device = current_user.devices.find_or_initialize_by(platform: params[:platform].downcase)
-          @device.token = params[:token]
+          @device = current_user.devices.find_or_initialize_by(platform: params[:platform].downcase, token: params[:token])
           @device.last_actived_at = Time.now
           if @device.save
             { ok: 1 }

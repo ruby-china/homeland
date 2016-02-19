@@ -25,6 +25,7 @@ Rails.application.routes.draw do
       post :preview
     end
   end
+  resources :devices
 
   root to: 'home#index'
 

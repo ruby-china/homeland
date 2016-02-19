@@ -64,3 +64,35 @@
     </table>
   </div>
 </div>
+
+<% if @devices.length > 0 %>
+<div class="panel panel-default">
+  <div class="panel-heading clearfix">
+    我的设备信息
+  </div>
+
+  <div class="panel-body">
+    <p>下面列表是已经连接上的设备，它们将会收到 Push 通知。</p>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+      <tr>
+        <th><%= t('activerecord.attributes.device.platform') %></th>
+        <th><%= t('activerecord.attributes.device.token') %></th>
+        <th><%= t('activerecord.attributes.device.alive') %></th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @devices.each do |device| %>
+        <tr>
+          <td><%= device.platform_name %></td>
+          <td><%= device.token %></td>
+          <td><%= device.alive? %></td>
+          <td><%= link_to '删除', device, class: 'btn btn-warning btn-xs', data: { confirm: '确定要删除么？', method: :delete } %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<% end %>

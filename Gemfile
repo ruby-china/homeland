@@ -99,6 +99,8 @@ gem 'grape-active_model_serializers'
 gem 'postmark'
 gem 'postmark-rails'
 
+gem 'ruby-push-notifications'
+
 # Dalli, kgio is for Dalli
 gem 'kgio'
 gem 'dalli'

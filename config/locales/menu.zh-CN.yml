@@ -118,3 +118,4 @@
     index_html: "网站首页 HTML"
     tips: "随机显示的小帖士（一行一个）"
     ban_words_on_reply: "回帖禁止内容（一行一个）"
+    apns_pem: Apple Push 证书内容，保持为空将不发送

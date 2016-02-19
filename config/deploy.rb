@@ -20,6 +20,7 @@ set :git_shallow_clone, 1
 
 set :puma_role, :app
 set :puma_config_file, "config/puma.rb"
+set :sidekiq_config, "#{current_path}/config/sidekiq.yml"
 
 role :web, 'ruby-china.org'
 role :app, 'ruby-china.org'

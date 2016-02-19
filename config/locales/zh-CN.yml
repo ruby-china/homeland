@@ -2,7 +2,7 @@
   omniauth:
     github: GitHub
     twitter: Twitter
-  device_kind:
+  device_platform:
     ios: iOS
     android: Android
   activerecord:
@@ -61,7 +61,7 @@
         title: 摘要
         body: 详细内容
       device:
-        kind: 类型
+        platform: 类型
         token: Token
         alive: 是否有效
     errors:

@@ -40,13 +40,13 @@ ActiveRecord::Schema.define(version: 20160219075601) do
   end
 
   create_table "devices", force: :cascade do |t|
-    t.integer  "kind",            null: false
+    t.integer  "platform",        null: false
     t.integer  "user_id",         null: false
     t.string   "token",           null: false
     t.datetime "last_actived_at"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.index ["user_id", "kind"], name: "index_devices_on_user_id_and_kind", using: :btree
+    t.index ["user_id", "platform"], name: "index_devices_on_user_id_and_platform", using: :btree
     t.index ["user_id"], name: "index_devices_on_user_id", using: :btree
   end
 
@@ -63,12 +63,6 @@ ActiveRecord::Schema.define(version: 20160219075601) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["name"], name: "index_locations_on_name", using: :btree
-  end
-
-  create_table "monkeys", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "nodes", force: :cascade do |t|
@@ -247,14 +241,6 @@ ActiveRecord::Schema.define(version: 20160219075601) do
     t.index ["url"], name: "index_sites_on_url", using: :btree
   end
 
-  create_table "test_documents", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "mentioned_user_ids", default: [],              array: true
-    t.text     "body"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
-  end
-
   create_table "topics", force: :cascade do |t|
     t.integer  "user_id",                               null: false
     t.integer  "node_id",                               null: false
@@ -334,14 +320,6 @@ ActiveRecord::Schema.define(version: 20160219075601) do
     t.index ["location"], name: "index_users_on_location", using: :btree
     t.index ["login"], name: "index_users_on_login", using: :btree
     t.index ["private_token"], name: "index_users_on_private_token", using: :btree
-  end
-
-  create_table "walking_deads", force: :cascade do |t|
-    t.string   "name"
-    t.string   "tag"
-    t.datetime "deleted_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
 end

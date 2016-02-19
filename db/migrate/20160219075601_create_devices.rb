@@ -1,7 +1,7 @@
 class CreateDevices < ActiveRecord::Migration[5.0]
   def change
     create_table :devices do |t|
-      t.integer :kind, null: false
+      t.integer :platform, null: false
       t.integer :user_id, null: false
       t.string :token, null: false
       t.datetime :last_actived_at
@@ -10,6 +10,6 @@ class CreateDevices < ActiveRecord::Migration[5.0]
     end
 
     add_index :devices, :user_id
-    add_index :devices, [:user_id, :kind]
+    add_index :devices, [:user_id, :platform]
   end
 end

@@ -17,7 +17,7 @@ describe Notification::Mention, type: :model do
   describe '.notify_hash' do
     it 'should work' do
       expect(n_topic.notify_hash.keys).to eq([:title, :content, :content_path])
-      expect(n_topic.notify_hash[:title]).to eq("#{n_topic.mentionable.user_login} 提及你：")
+      expect(n_topic.notify_hash[:title]).to eq("#{n_topic.mentionable.user_login} 在话题《#{topic.title}》中提及了你")
       expect(n_topic.notify_hash[:content]).to eq(n_topic.mentionable_body[0, 30])
       expect(n_topic.notify_hash[:content_path]).to eq(n_topic.content_path)
     end

@@ -133,8 +133,6 @@ group :development, :test do
 
   gem 'rspec-rails', '3.5.0.beta1'
 
-  # gem 'rails-controller-testing'
-
   gem 'factory_girl_rails', '~> 4.5.0'
   gem 'database_cleaner'
   gem 'capybara'

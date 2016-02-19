@@ -215,6 +215,10 @@ class User < ApplicationRecord
     where(conditions.to_h).where(["lower(login) = :value OR lower(email) = :value", { value: login }]).first
   end
 
+  # Override Devise to send mails with async
+  def send_devise_notification(notification, *args)
+    devise_mailer.send(notification, self, *args).deliver_later
+  end
 
   def bind?(provider)
     authorizations.collect(&:provider).include?(provider)

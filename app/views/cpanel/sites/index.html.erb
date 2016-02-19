@@ -33,7 +33,11 @@
       <td><%= l(item.created_at, format: :short) %></td>
       <td>
         <%= link_to "", edit_cpanel_site_path(item.id), class: "fa fa-pencil" %>
-        <%= link_to "", cpanel_site_path(item.id), method: :delete, 'data-confirm' => '确定要删除吗?', class: "fa fa-trash" %>
+        <% if item.deleted? %>
+          <%= link_to "", undestroy_cpanel_site_path(item.id), method: :post, 'data-confirm' => '确定要恢复么?', class: "fa fa-undo" %>
+        <% else %>
+          <%= link_to "", cpanel_site_path(item.id), method: :delete, 'data-confirm' => '确定要删除吗?', class: "fa fa-trash" %>
+        <% end %>
       </td>
     </tr>
     <% end %>

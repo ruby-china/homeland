@@ -76,7 +76,7 @@ describe PagesController, type: :controller do
       params = attributes_for(:page)
       params[:title] = ''
       post :create, params: { page: params }
-      expect(response).to render_template(:new)
+      expect(response).to be_success
     end
   end
 
@@ -103,7 +103,7 @@ describe PagesController, type: :controller do
       params[:title] = 'shiney new title'
       params[:change_desc] = nil
       put :update, params: { page: params, id: page.slug }
-      expect(response).to render_template(:edit)
+      expect(response).to be_success
     end
   end
 

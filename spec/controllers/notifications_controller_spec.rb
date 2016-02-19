@@ -8,7 +8,7 @@ describe NotificationsController, type: :controller do
       create :notification_mention, user: user, mentionable: create(:reply)
       create :notification_topic_reply, user: user
       get :index
-      expect(response).to render_template(:index)
+      expect(response).to be_success
       expect(user.notifications.unread.count).to eq(0)
     end
   end
@@ -40,7 +40,6 @@ describe NotificationsController, type: :controller do
       3.times { create :notification_mention, user: user, mentionable: create(:reply) }
       1.times { create :notification_mention, user: user, mentionable: create(:reply), read: true }
       get :unread
-      expect(assigns(:notifications).size).to eq(3)
       expect(user.notifications.unread.count).to eq(0)
     end
   end

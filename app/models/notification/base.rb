@@ -14,6 +14,8 @@ module Notification
     def realtime_push_to_client
       if user
         self.class.realtime_push_to_client(user)
+
+        PushJob.perform_later(user_id, apns_note)
       end
     end
 
@@ -23,6 +25,10 @@ module Notification
 
     def content_path
       ''
+    end
+
+    def apns_note
+      @note ||= { alert: notify_hash[:title], badge: user.notifications.unread.count }
     end
 
     def actor

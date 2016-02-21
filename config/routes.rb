@@ -25,6 +25,7 @@ Rails.application.routes.draw do
       post :preview
     end
   end
+  resources :devices
 
   root to: 'home#index'
 
@@ -107,7 +108,11 @@ Rails.application.routes.draw do
     end
     resources :comments
     resources :site_nodes
-    resources :sites
+    resources :sites do
+      member do
+        post :undestroy
+      end
+    end
     resources :locations
     resources :exception_logs do
       collection do

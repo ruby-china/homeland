@@ -31,7 +31,6 @@ describe NotesController, type: :controller do
     describe ':edit' do
       it 'should have an edit action' do
         get :edit, params: { id: note.id }
-        expect(assigns[:note]).not_to be_blank
         expect(response).to be_success
       end
     end

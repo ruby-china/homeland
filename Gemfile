@@ -35,7 +35,7 @@ gem 'carrierwave-upyun'
 gem 'mini_magick'
 
 gem 'rucaptcha'
-gem 'letter_avatar', path: '../letter_avatar'
+gem 'letter_avatar'
 
 gem 'pg'
 
@@ -66,6 +66,7 @@ gem 'hiredis'
 gem 'redis-namespace'
 # 将一些数据存放入 Redis
 gem 'redis-objects'
+gem 'second_level_cache', '2.2.1'
 
 gem 'rails-settings-cached'
 
@@ -97,6 +98,8 @@ gem 'grape-active_model_serializers'
 # Mailer
 gem 'postmark'
 gem 'postmark-rails'
+
+gem 'ruby-push-notifications'
 
 # Dalli, kgio is for Dalli
 gem 'kgio'
@@ -131,8 +134,6 @@ group :development, :test do
   gem 'rubocop'
 
   gem 'rspec-rails', '3.5.0.beta1'
-
-  gem 'rails-controller-testing'
 
   gem 'factory_girl_rails', '~> 4.5.0'
   gem 'database_cleaner'

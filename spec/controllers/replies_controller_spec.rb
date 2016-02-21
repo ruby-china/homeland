@@ -21,7 +21,6 @@ describe RepliesController, type: :controller do
       post :create, params: { topic_id: topic.id, reply: { body: 'content' } }, format: :js
       expect(response).to be_success
       expect(user.topic_read?(topic)).to be_truthy
-      expect(assigns(:replies_count)).to eq(topic.reload.replies_count)
     end
   end
 

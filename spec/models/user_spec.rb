@@ -282,29 +282,29 @@ describe User, type: :model do
     end
   end
 
-  describe '#find_login' do
+  describe '#find_login!' do
     let(:user) { create :user }
 
     it 'should work' do
-      u = User.find_login(user.login)
+      u = User.find_login!(user.login)
       expect(u.id).to eq user.id
       expect(u.login).to eq(user.login)
     end
 
     it 'should ignore case' do
-      u = User.find_login(user.login.upcase)
+      u = User.find_login!(user.login.upcase)
       expect(u.id).to eq user.id
     end
 
     it 'should raise DocumentNotFound error' do
       expect do
-        User.find_login(user.login + '1')
+        User.find_login!(user.login + '1')
       end.to raise_error(ActiveRecord::RecordNotFound)
     end
 
     it 'should railse DocumentNotFound if have bad login' do
       expect do
-        User.find_login(user.login + ')')
+        User.find_login!(user.login + ')')
       end.to raise_error(ActiveRecord::RecordNotFound)
     end
 
@@ -314,7 +314,7 @@ describe User, type: :model do
       let(:user2) { create :user, login: "a2foo" }
 
       it 'should get right user' do
-        u = User.find_login(user1.login)
+        u = User.find_login!(user1.login)
         expect(u.id).to eq user1.id
         expect(u.login).to eq(user1.login)
       end

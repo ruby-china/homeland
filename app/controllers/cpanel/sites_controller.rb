@@ -68,9 +68,15 @@ module Cpanel
       @site.destroy
 
       respond_to do |format|
-        format.html { redirect_to(cpanel_sites_path, notice: '删除成功。') }
+        format.html { redirect_to(cpanel_sites_path, notice: "#{@site.name} 删除成功。") }
         format.json
       end
+    end
+
+    def undestroy
+      @site = Site.unscoped.find(params[:id])
+      @site.update_attribute(:deleted_at, nil)
+      redirect_to(cpanel_sites_path, notice: "#{@site.name} 已恢复。")
     end
   end
 end

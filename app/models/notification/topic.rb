@@ -7,7 +7,7 @@ module Notification
     def notify_hash
       return {} if topic.blank?
       {
-        title: '发表了新话题',
+        title: "#{topic.user_login} 发表了新话题《#{topic.title}》",
         content: topic_body[0, 30],
         content_path: content_path
       }

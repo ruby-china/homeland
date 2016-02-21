@@ -2,12 +2,16 @@
   omniauth:
     github: GitHub
     twitter: Twitter
+  device_platform:
+    ios: iOS
+    android: Android
   activerecord:
     models:
       user: "用户"
       topic: "话题"
       post: 文章
       page: Wiki
+      device: "设备"
     attributes:
       user:
         name: "名字"
@@ -56,6 +60,10 @@
       exception_log:
         title: 摘要
         body: 详细内容
+      device:
+        platform: 类型
+        token: Token
+        alive: 是否有效
     errors:
       models:
         user: 用户

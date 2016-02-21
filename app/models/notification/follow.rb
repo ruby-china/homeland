@@ -20,7 +20,7 @@ module Notification
     def notify_hash
       return {} if follower.blank?
       {
-        title: [follower.login, '关注了你'].join(' '),
+        title: [follower.login, '开关注你了'].join(' '),
         content: '',
         content_path: content_path
       }

@@ -129,8 +129,21 @@ AppView = Backbone.View.extend
   initCable: () ->
     if !window.notificationChannel
       window.notificationChannel = App.cable.subscriptions.create "NotificationsChannel",
+        connected: ->
+          setTimeout =>
+            @subscribe()
+            $(window).on 'unload', -> window.notificationChannel.unsubscribe()
+            $(document).on 'page:change', -> window.notificationChannel.subscribe()
+          , 1000
+
         received: (data) =>
           @receivedNotificationCount(data)
+
+        subscribe: ->
+          @perform 'subscribed'
+
+        unsubscribe: ->
+          @perform 'unsubscribed'
 
   receivedNotificationCount : (json) ->
     console.log 'receivedNotificationCount', json

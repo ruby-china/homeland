@@ -5,7 +5,7 @@ describe SessionsController, type: :controller do
     before { request.env["devise.mapping"] = Devise.mappings[:user] }
     it 'should render new tempalte' do
       get :new
-      expect(response).to render_template(:new)
+      expect(response).to be_success
     end
 
     it "should store referrer if it's from self site" do

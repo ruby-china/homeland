@@ -20,6 +20,7 @@ set :git_shallow_clone, 1
 
 set :puma_role, :app
 set :puma_config_file, "config/puma.rb"
+set :sidekiq_config, "#{current_path}/config/sidekiq.yml"
 
 role :web, 'ruby-china.org'
 role :app, 'ruby-china.org'
@@ -49,8 +50,22 @@ task :migrate_db, roles: :web do
   run "cd #{current_path}; RAILS_ENV=production bundle exec rake db:migrate"
 end
 
-after 'deploy:finalize_update', 'deploy:symlink', :link_shared, :migrate_db, :compile_assets
-after 'deploy:restart', 'puma:restart'
-after 'deploy:start', 'puma:start'
-after 'deploy:stop', 'puma:stop'
+namespace :cable do
+  task :start do
+    run "cd #{current_path}; RAILS_ENV=production ./bin/cable"
+  end
+
+  task :stop do
+    run "cd #{current_path} && #{pumactl_cmd} -S #{current_path}/tmp/pids/puma-cable.state stop"
+  end
+
+  task :restart do
+    run "cd #{current_path} && #{pumactl_cmd} -S #{current_path}/tmp/pids/puma-cable.state restart"
+  end
+end
+
+after 'deploy:finalize_update', 'deploy:symlink', :link_shared#, :migrate_db, :compile_assets
+after 'deploy:start', 'cable:start'
+after 'deploy:restart', 'cable:restart'
+after 'deploy:stop', 'cable:stop'
 

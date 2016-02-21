@@ -7,7 +7,7 @@ module Notification
     def notify_hash
       return {} if mentionable.blank?
       {
-        title: [mentionable.user_login, '提及你：'].join(' '),
+        title: [mentionable.user_login, "在话题《#{topic_title}》中提及了你"].join(' '),
         content: mentionable_body[0, 30],
         content_path: content_path
       }
@@ -24,6 +24,18 @@ module Notification
       when 'reply'
         return '' if mentionable.blank?
         url_helpers.topic_path(mentionable.topic_id)
+      else
+        ''
+      end
+    end
+
+    def topic_title
+      case mentionable_type.downcase
+      when 'topic'
+        return mentionable.try(:title)
+      when 'reply'
+        return '' if mentionable.blank? || mentionable.topic.blank?
+        return mentionable.topic.title
       else
         ''
       end

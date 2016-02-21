@@ -98,6 +98,8 @@ SiteConfig.save_default('twitter_page_html', %(
 </div>
 ))
 
+SiteConfig.save_default('apns_pem', '')
+
 # ========================= init Section, Node =========================
 
 s1 = Section.create(:name => "Ruby")

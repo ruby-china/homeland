@@ -4,8 +4,9 @@ require 'redcarpet'
 class Page < ApplicationRecord
   include BaseModel
   include MarkdownBody
-  include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
+  include Searchable
+
+  acts_as_cached version: 1, expires_in: 1.week
 
   has_many :versions, class_name: 'PageVersion'
 
@@ -17,7 +18,6 @@ class Page < ApplicationRecord
   validates :change_desc, if: proc { |p| p.version_enable == true && !p.new_record? }, presence: true
   validates :slug, format: /\A[a-z0-9\-_]+\z/
   validates :slug, uniqueness: true
-
 
   before_save :append_editor
   def append_editor
@@ -63,6 +63,6 @@ class Page < ApplicationRecord
   end
 
   def self.find_by_slug(slug)
-    where(slug: slug).first
+    fetch_by_uniq_keys(slug: slug)
   end
 end

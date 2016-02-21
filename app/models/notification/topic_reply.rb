@@ -6,8 +6,9 @@ module Notification
 
     def notify_hash
       return {} if reply.blank?
+      return {} if reply.topic.blank?
       {
-        title: '关注的话题有了新回复:',
+        title: "你关注的话题《#{reply.topic.title}》有了新回复",
         content: reply_body[0, 30],
         content_path: content_path
       }

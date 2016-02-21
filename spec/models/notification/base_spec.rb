@@ -5,7 +5,7 @@ describe Notification::Base, type: :model do
 
   describe '.realtime_push_to_client' do
     it 'should work' do
-      hash = n.notify_hash
+      hash = {}
       hash[:count] = n.user.notifications.unread.count
       args = ["notifications_count/#{n.user_id}", hash]
       expect(ActionCable.server).to receive(:broadcast).with(*args).once

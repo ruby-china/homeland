@@ -3,23 +3,17 @@ class TopicsController < ApplicationController
                                      :favorite, :unfavorite, :follow, :unfollow, :suggest, :unsuggest, :ban]
 
   def index
-    @threads = []
-    @threads << Thread.new do
-      @suggest_topics = Topic.without_hide_nodes.suggest.fields_for_list.limit(3).to_a
-    end
+    @suggest_topics = Topic.without_hide_nodes.suggest.fields_for_list.limit(3).to_a
 
-    @threads << Thread.new do
-      @topics = Topic.last_actived.without_suggest
-      if current_user
-        @topics = @topics.without_nodes(current_user.blocked_node_ids)
-        @topics = @topics.without_users(current_user.blocked_user_ids)
-      else
-        @topics = @topics.without_hide_nodes
-      end
-      @topics = @topics.fields_for_list
-      @topics = @topics.paginate(page: params[:page], per_page: 22, total_entries: 1500).to_a
+    @topics = Topic.last_actived.without_suggest
+    if current_user
+      @topics = @topics.without_nodes(current_user.blocked_node_ids)
+      @topics = @topics.without_users(current_user.blocked_user_ids)
+    else
+      @topics = @topics.without_hide_nodes
     end
-    @threads.each(&:join)
+    @topics = @topics.fields_for_list
+    @topics = @topics.paginate(page: params[:page], per_page: 22, total_entries: 1500).to_a
 
     set_seo_meta t('menu.topics'), "#{Setting.app_name}#{t('menu.topics')}"
   end
@@ -70,28 +64,19 @@ class TopicsController < ApplicationController
   end
 
   def show
-    @threads = []
-    @topic = Topic.without_body.includes(:user).find(params[:id])
+    @topic = Topic.unscoped.includes(:user).find(params[:id])
+    render_404 if @topic.deleted?
 
-    @threads << Thread.new do
-      @topic.hits.incr(1)
-    end
-    @threads << Thread.new do
-      @node = @topic.node
-    end
+    @topic.hits.incr(1)
+    @node = @topic.node
 
     @show_raw = params[:raw] == '1'
 
-    @threads << Thread.new do
-      @replies = Reply.unscoped.where(topic_id: @topic.id).without_body.order(:id).all
+    @replies = Reply.unscoped.where(topic_id: @topic.id).without_body.order(:id).all
 
-      check_current_user_liked_replies
-      check_current_user_status_for_topic
-    end
-
+    check_current_user_liked_replies
+    check_current_user_status_for_topic
     set_special_node_active_menu
-
-    @threads.each(&:join)
 
     set_seo_meta "#{@topic.title} &raquo; #{t('menu.topics')}"
   end
@@ -110,12 +95,8 @@ class TopicsController < ApplicationController
 
   def check_current_user_status_for_topic
     return false unless current_user
-
-    @threads << Thread.new do
-      # 通知处理
-      current_user.read_topic(@topic, replies_ids: @replies.collect(&:id))
-    end
-
+    # 通知处理
+    current_user.read_topic(@topic, replies_ids: @replies.collect(&:id))
     # 是否关注过
     @has_followed = @topic.followed?(current_user.id)
     # 是否收藏

@@ -20,7 +20,7 @@ module API
 
         namespace ':login' do
           before do
-            @user = User.find_login(params[:login])
+            @user = User.find_login!(params[:login])
           end
 
           desc '获取用户详细资料'

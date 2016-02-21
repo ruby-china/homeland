@@ -55,13 +55,6 @@ describe UsersController, type: :controller do
       get :notes, params: { id: user.login }
       expect(response).to be_success
     end
-
-    it 'assigns @notes' do
-      note_1 = create(:note, publish: true, user: user)
-      create(:note, publish: false, user: user)
-      get :notes, params: { id: user.login }
-      expect(assigns(:notes)).to eq([note_1])
-    end
   end
 
   describe ':city' do
@@ -74,7 +67,6 @@ describe UsersController, type: :controller do
     it 'should show user associated with that city' do
       get :city, params: { id: user.location }
       expect(response.status).to eq(200)
-      expect(assigns[:users]).to include(user)
     end
   end
 end

@@ -15,6 +15,13 @@ describe SoftDelete, type: :model do
     after_destroy do
       self.tag = "after_destroy #{name}"
     end
+
+    before_validation :check_name_not_exist
+    def check_name_not_exist
+      if WalkingDead.unscoped.where(name: self.name).count > 0
+        errors.add("name", "已经存在")
+      end
+    end
   end
 
   let!(:rick) { WalkingDead.create! name: 'Rick Grimes' }
@@ -46,6 +53,7 @@ describe SoftDelete, type: :model do
   it 'should mark as destroyed and get proper query result' do
     rick.destroy
     expect(rick).to be_destroyed
+    expect(rick.errors.size).to eq 0
 
     expect(WalkingDead.where(name: rick.name).count).to eq(0)
     expect(WalkingDead.unscoped.where(name: rick.name).first).to eq(rick)

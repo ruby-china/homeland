@@ -49,7 +49,7 @@ Rails.application.configure do
   config.action_controller.default_asset_host_protocol = :relative
 
   # Decrease the log volume.
-  config.log_level = :info
+  config.log_level = :warn
 
   # Use a different logger for distributed setups.
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)

@@ -5,7 +5,7 @@ bind "unix:/tmp/unicorn.ruby-china.sock"
 daemonize true
 port 7000
 workers 4
-threads 16,64
+threads 8,16
 preload_app!
 
 on_worker_boot do

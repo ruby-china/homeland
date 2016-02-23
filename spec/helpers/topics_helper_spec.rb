@@ -64,12 +64,6 @@ describe TopicsHelper, type: :helper do
       )
     end
 
-    it 'should render bbcode style image tag' do
-      expect(helper.markdown('[img]http://ruby-china.org/logo.png[/img]')).to eq(
-        '<p><img src="http://ruby-china.org/logo.png" alt="Logo"></p>'
-      )
-    end
-
     it 'should link mentioned user' do
       user = create(:user)
       expect(helper.markdown("hello @#{user.name} @b @a @#{user.name}")).to eq(

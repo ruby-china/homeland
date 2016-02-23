@@ -75,6 +75,52 @@ describe 'markdown' do
       end
     end
 
+    describe 'image' do
+      subject { super().inner_html }
+
+      context 'simple image' do
+        let(:raw) { '![](foo.jpg)' }
+
+        it { is_expected.to eq(%(<p><img src="foo.jpg" title="" alt=""></p>)) }
+      end
+
+      context 'image with a title' do
+        let(:raw) { '![alt text](foo.jpg "titlebb")' }
+
+        it { is_expected.to eq(%(<p><img src="foo.jpg" title="titlebb" alt="alt text"></p>)) }
+      end
+
+      context 'image with a title without quote' do
+        let(:raw) { '![alt text](foo.jpg titlebb)' }
+
+        it { is_expected.to eq(%(<p><img src="foo.jpg" title="titlebb" alt="alt text"></p>)) }
+      end
+
+      context 'image has width' do
+        let(:raw) { '![alt text](foo.jpg =200x)' }
+
+        it { is_expected.to eq(%(<p><img src="foo.jpg" width="200px" alt="alt text"></p>)) }
+      end
+
+      context 'image has height' do
+        let(:raw) { '![alt text](foo.jpg =x200)' }
+
+        it { is_expected.to eq(%(<p><img src="foo.jpg" height="200px" alt="alt text"></p>)) }
+      end
+
+      context 'image has width and height' do
+        let(:raw) { '![alt text](foo.jpg =100x200)' }
+
+        it { is_expected.to eq(%(<p><img src="foo.jpg" width="100px" height="200px" alt="alt text"></p>)) }
+      end
+
+      context 'BBCode Image' do
+        let(:raw) { '[img]http://ruby-china.org/logo.png[/img]' }
+
+        it { is_expected.to eq(%(<p><img src="http://ruby-china.org/logo.png" title="" alt="Logo"></p>))}
+      end
+    end
+
     describe 'strong' do
       let(:raw) { 'some **strong** text' }
 

@@ -14,7 +14,7 @@
     <div class="panel-body">
       <%= render partial: "notification", collection: @notifications %>
     </div>
-    <div class="panel-footer">
+    <div class="panel-footer clearfix">
       <%= will_paginate @notifications %>
     </div>
   <% end %>

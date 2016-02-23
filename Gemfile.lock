@@ -216,6 +216,10 @@ GEM
     letter_avatar (0.1.0)
     letter_opener (1.2.0)
       launchy (~> 2.2)
+    lograge (0.3.6)
+      actionpack (>= 3)
+      activesupport (>= 3)
+      railties (>= 3)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -476,6 +480,7 @@ DEPENDENCIES
   kgio
   letter_avatar
   letter_opener
+  lograge
   md_emoji (= 1.0.2)
   message_bus
   mini_magick
@@ -522,4 +527,4 @@ DEPENDENCIES
   will_paginate (= 3.0.7)
 
 BUNDLED WITH
-   1.11.0
+   1.11.2

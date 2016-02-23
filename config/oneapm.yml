@@ -31,7 +31,7 @@ common: &default_settings
   monitor_mode: true
 
   # Specify its log level here.
-  log_level: info
+  log_level: warn
 
   # log_file_path: 'log'
   # log_file_name: 'oneapm_agent.log'

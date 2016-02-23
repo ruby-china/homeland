@@ -13,3 +13,7 @@ on_worker_boot do
     ActiveRecord::Base.establish_connection
   end
 end
+
+before_fork do
+  ActiveRecord::Base.connection_pool.disconnect!
+end

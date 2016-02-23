@@ -37,6 +37,7 @@ task :link_shared, roles: :web do
   run "ln -sf #{shared_path}/assets #{current_path}/public/assets"
   run "ln -sf #{shared_path}/config/*.yml #{current_path}/config/"
   run "ln -sf #{shared_path}/config/initializers/secret_token.rb #{current_path}/config/initializers"
+  run "ln -sf #{shared_path}/config/initializers/camo.rb #{current_path}/config/initializers"
   run "ln -sf #{shared_path}/pids #{current_path}/tmp/"
   run "ln -sf #{shared_path}/cache #{current_path}/tmp/"
 end
@@ -68,4 +69,3 @@ after 'deploy:finalize_update', 'deploy:symlink', :link_shared#, :migrate_db, :c
 after 'deploy:start', 'cable:start'
 after 'deploy:restart', 'cable:restart'
 after 'deploy:stop', 'cable:stop'
-

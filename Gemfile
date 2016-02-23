@@ -118,6 +118,8 @@ gem 'rack-mini-profiler', github: 'MiniProfiler/rack-mini-profiler', require: fa
 
 gem 'oneapm_rpm'
 
+gem 'camo'
+
 group :development do
   gem 'capistrano', '2.9.0', require: false
   gem 'rvm-capistrano', require: false

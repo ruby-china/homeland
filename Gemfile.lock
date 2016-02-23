@@ -94,6 +94,7 @@ GEM
     bundler-audit (0.4.0)
       bundler (~> 1.2)
       thor (~> 0.18)
+    camo (0.0.2)
     cancancan (1.13.1)
     capistrano (2.9.0)
       highline
@@ -437,6 +438,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bundler-audit
+  camo
   cancancan (~> 1.13.1)
   capistrano (= 2.9.0)
   capistrano-sidekiq

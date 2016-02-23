@@ -77,47 +77,49 @@ describe 'markdown' do
 
     describe 'image' do
       subject { super().inner_html }
+      let(:foo_image_url) { 'https://ruby-china-camo.herokuapp.com/01118da590fd3d42b7cc8a19c33e0e175616a479/666f6f2e6a7067' }
 
       context 'simple image' do
         let(:raw) { '![](foo.jpg)' }
 
-        it { is_expected.to eq(%(<p><img src="foo.jpg" title="" alt=""></p>)) }
+        it { is_expected.to eq(%(<p><img src="#{foo_image_url}" title="" alt=""></p>)) }
       end
 
       context 'image with a title' do
         let(:raw) { '![alt text](foo.jpg "titlebb")' }
 
-        it { is_expected.to eq(%(<p><img src="foo.jpg" title="titlebb" alt="alt text"></p>)) }
+        it { is_expected.to eq(%(<p><img src="#{foo_image_url}" title="titlebb" alt="alt text"></p>)) }
       end
 
       context 'image with a title without quote' do
         let(:raw) { '![alt text](foo.jpg titlebb)' }
 
-        it { is_expected.to eq(%(<p><img src="foo.jpg" title="titlebb" alt="alt text"></p>)) }
+        it { is_expected.to eq(%(<p><img src="#{foo_image_url}" title="titlebb" alt="alt text"></p>)) }
       end
 
       context 'image has width' do
         let(:raw) { '![alt text](foo.jpg =200x)' }
 
-        it { is_expected.to eq(%(<p><img src="foo.jpg" width="200px" alt="alt text"></p>)) }
+        it { is_expected.to eq(%(<p><img src="#{foo_image_url}" width="200px" alt="alt text"></p>)) }
       end
 
       context 'image has height' do
         let(:raw) { '![alt text](foo.jpg =x200)' }
 
-        it { is_expected.to eq(%(<p><img src="foo.jpg" height="200px" alt="alt text"></p>)) }
+        it { is_expected.to eq(%(<p><img src="#{foo_image_url}" height="200px" alt="alt text"></p>)) }
       end
 
       context 'image has width and height' do
         let(:raw) { '![alt text](foo.jpg =100x200)' }
 
-        it { is_expected.to eq(%(<p><img src="foo.jpg" width="100px" height="200px" alt="alt text"></p>)) }
+        it { is_expected.to eq(%(<p><img src="#{foo_image_url}" width="100px" height="200px" alt="alt text"></p>)) }
       end
 
       context 'BBCode Image' do
         let(:raw) { '[img]http://ruby-china.org/logo.png[/img]' }
+        let(:camo_image_url) { 'https://ruby-china-camo.herokuapp.com/0e9e45899127470daad093a361e23554c8aa340f/687474703a2f2f727562792d6368696e612e6f72672f6c6f676f2e706e67' }
 
-        it { is_expected.to eq(%(<p><img src="http://ruby-china.org/logo.png" title="" alt="Logo"></p>))}
+        it { is_expected.to eq(%(<p><img src="#{camo_image_url}" title="" alt="Logo"></p>))}
       end
     end
 

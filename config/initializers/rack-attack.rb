@@ -17,7 +17,7 @@ class Rack::Attack
 
   # 固定黑名单
   blacklist("blacklist/ip") do |req|
-    SiteConfig.blacklist_ips.index(req.ip) != nil
+    SiteConfig.blacklist_ips && SiteConfig.blacklist_ips.index(req.ip) != nil
   end
 
   # 允许 localhost

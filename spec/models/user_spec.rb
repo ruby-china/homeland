@@ -12,6 +12,58 @@ describe User, type: :model do
   let(:user_for_delete1) { create :user }
   let(:user_for_delete2) { create :user }
 
+  describe 'login format' do
+    context 'huacnlee' do
+      let(:user) { build(:user, login: 'huacnlee') }
+      it { expect(user.valid?).to eq true }
+    end
+
+    context 'huacnlee-github' do
+      let(:user) { build(:user, login: 'huacnlee-github') }
+      it { expect(user.valid?).to eq true }
+    end
+
+    context 'huacnlee_github' do
+      let(:user) { build(:user, login: 'huacnlee_github') }
+      it { expect(user.valid?).to eq true }
+    end
+
+    context 'huacnlee12' do
+      let(:user) { build(:user, login: 'huacnlee12') }
+      it { expect(user.valid?).to eq true }
+    end
+
+    context '123411' do
+      let(:user) { build(:user, login: '123411') }
+      it { expect(user.valid?).to eq true }
+    end
+
+    context 'zicheng.lhs' do
+      let(:user) { build(:user, login: 'zicheng.lhs') }
+      it { expect(user.valid?).to eq true }
+    end
+
+    context 'll&&^12' do
+      let(:user) { build(:user, login: '*ll&&^12') }
+      it { expect(user.valid?).to eq false }
+    end
+
+    context 'abdddddc$' do
+      let(:user) { build(:user, login: 'abdddddc$') }
+      it { expect(user.valid?).to eq false }
+    end
+
+    context '$abdddddc' do
+      let(:user) { build(:user, login: '$abdddddc') }
+      it { expect(user.valid?).to eq false }
+    end
+
+    context 'aaa*11' do
+      let(:user) { build(:user, login: 'aaa*11') }
+      it { expect(user.valid?).to eq false }
+    end
+  end
+
   describe '#read_topic?' do
     before do
       User.any_instance.stub(:update_index).and_return(true)
@@ -468,5 +520,10 @@ describe User, type: :model do
       expect(User.find_for_database_authentication(login: 'foobar@gmail.com').id).to eq user.id
       expect(User.find_for_database_authentication(login: 'not found')).to eq nil
     end
+  end
+
+  describe '.email_locked?' do
+    it { expect(User.new(email: 'foobar@gmail.com').email_locked?).to eq true }
+    it { expect(User.new(email: 'foobar@example.com').email_locked?).to eq false }
   end
 end

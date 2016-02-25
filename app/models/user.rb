@@ -10,7 +10,7 @@ class User < ApplicationRecord
 
   acts_as_cached version: 1, expires_in: 1.week
 
-  ALLOW_LOGIN_CHARS_REGEXP = /\A\w+\z/
+  ALLOW_LOGIN_CHARS_REGEXP = /\A[A-Za-z0-9\-\_\.]+\z/
 
   devise :database_authenticatable, :registerable, :recoverable,
          :rememberable, :trackable, :validatable, :omniauthable
@@ -20,7 +20,7 @@ class User < ApplicationRecord
   has_many :topics, dependent: :destroy
   has_many :notes
   has_many :replies, dependent: :destroy
-  has_many :authorizations
+  has_many :authorizations, dependent: :destroy
   has_many :notifications, class_name: 'Notification::Base', dependent: :destroy
   has_many :photos
   has_many :oauth_applications, class_name: 'Doorkeeper::Application', as: :owner
@@ -495,5 +495,10 @@ class User < ApplicationRecord
 
   def avatar?
     self[:avatar].present?
+  end
+
+  # @example.com 的可以修改邮件地址
+  def email_locked?
+    self.email.index('@example.com') == nil
   end
 end

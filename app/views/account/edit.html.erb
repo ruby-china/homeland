@@ -7,7 +7,7 @@
         <%= render "shared/error_messages", target: resource if params[:by].blank? %>
         <%= f.input :name %>
         <%= f.input :avatar %>
-        <%= f.input :email, input_html: { class: "span4", disabled: (!resource.email.blank?) } %>
+        <%= f.input :email, input_html: { class: "span4", disabled: (resource.email_locked?) } %>
         <div class="form-group">
           <div class="col-sm-10 col-sm-offset-2">
             <div class="checkbox">

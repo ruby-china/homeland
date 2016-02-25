@@ -9,6 +9,7 @@ module Redcarpet
   module Render
     class HTMLwithSyntaxHighlight < HTML
       include Rouge::Plugins::Redcarpet
+      include Camo
 
       def initialize(extensions = {})
         super(extensions.merge(xhtml: true,
@@ -36,7 +37,7 @@ module Redcarpet
       # Example: https://gist.github.com/uupaa/f77d2bcf4dc7a294d109
       def image(link, title, alt_text)
         links = link.split(" ")
-        link = links[0]
+        link = camo(links[0])
         if links.count > 1
           # 原本 Markdown 的 title 部分是需要引号的 ![](foo.jpg "Title")
           # ![](foo.jpg =300x)

@@ -17,6 +17,8 @@ gem 'turbolinks', github: 'rails/turbolinks'
 gem 'jquery-turbolinks'
 gem 'dropzonejs-rails'
 
+gem 'rack-attack'
+
 gem 'rails-i18n'
 gem 'http_accept_language'
 gem 'rails_autolink'

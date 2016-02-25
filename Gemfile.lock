@@ -296,6 +296,8 @@ GEM
       json
     rack-accept (0.4.5)
       rack (>= 0.4)
+    rack-attack (4.4.1)
+      rack
     rack-cors (0.4.0)
     rack-mount (0.8.3)
       rack (>= 1.0.0)
@@ -480,6 +482,7 @@ DEPENDENCIES
   postmark
   postmark-rails
   puma
+  rack-attack
   rack-cors
   rack-mini-profiler!
   rack-utf8_sanitizer

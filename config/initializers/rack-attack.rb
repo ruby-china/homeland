@@ -4,7 +4,7 @@ class Rack::Attack
   Rack::Attack.cache.store = ActiveSupport::Cache::DalliStore.new("127.0.0.1")
 
   ### Throttle Spammy Clients ###
-  throttle('req/ip', limit: 500, period: 5.minutes) do |req|
+  throttle('req/ip', limit: 300, period: 5.minutes) do |req|
     req.ip unless req.path.start_with?('/mini-profiler-resources')
   end
 

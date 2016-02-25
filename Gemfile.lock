@@ -21,6 +21,13 @@ GIT
       rack-protection (~> 1.5)
       tilt (~> 2.0)
 
+GIT
+  remote: https://github.com/turbolinks/turbolinks-classic.git
+  revision: 37a7c296232d20a61bd1946f600da7f2009189db
+  specs:
+    turbolinks (3.0.0)
+      coffee-rails
+
 GEM
   remote: https://ruby.taobao.org/
   specs:
@@ -401,9 +408,6 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.2)
-    turbolinks (5.0.0.beta2)
-      turbolinks-source
-    turbolinks-source (5.0.0.beta2)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.7.2)
@@ -500,7 +504,7 @@ DEPENDENCIES
   sinatra!
   social-share-button
   sprockets
-  turbolinks (= 5.0.0.beta2)
+  turbolinks!
   uglifier
   will_paginate
 

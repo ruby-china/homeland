@@ -401,8 +401,9 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.2)
-    turbolinks (2.5.3)
-      coffee-rails
+    turbolinks (5.0.0.beta2)
+      turbolinks-source
+    turbolinks-source (5.0.0.beta2)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.7.2)
@@ -499,7 +500,7 @@ DEPENDENCIES
   sinatra!
   social-share-button
   sprockets
-  turbolinks
+  turbolinks (= 5.0.0.beta2)
   uglifier
   will_paginate
 

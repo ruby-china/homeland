@@ -13,7 +13,7 @@ gem 'coffee-rails'
 gem 'uglifier'
 gem 'jquery-rails'
 gem 'jbuilder'
-gem 'turbolinks'
+gem 'turbolinks', '5.0.0.beta2'
 gem 'jquery-turbolinks'
 gem 'dropzonejs-rails'
 

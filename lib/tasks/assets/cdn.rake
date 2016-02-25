@@ -1,10 +1,10 @@
 namespace :assets do
   desc 'sync assets to cdns'
   task cdn: :environment do
-    # 排除 10 分钟以前创建的 assets 文件
+    # 排除 24 小时以前创建的 assets 文件
     new_assets = Dir['public/assets/**/*'].reject do |f|
       t = File.ctime(f).to_i
-      (Time.now.to_i - t) >= 600
+      (Time.now.to_i - t) >= (24 * 60 * 60)
     end
 
     if new_assets.length > 0

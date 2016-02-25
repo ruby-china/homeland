@@ -1,27 +1,20 @@
 GIT
-  remote: git://github.com/MiniProfiler/rack-mini-profiler.git
-  revision: cb7a6cf4d4cd7febb587bcffb4719233034c331b
+  remote: https://github.com/MiniProfiler/rack-mini-profiler.git
+  revision: f3096b55d308f0e0b9838f4fff4d1fcce2efa5ee
   specs:
     rack-mini-profiler (0.9.8)
       rack (>= 1.2.0)
 
 GIT
-  remote: git://github.com/doorkeeper-gem/doorkeeper.git
+  remote: https://github.com/doorkeeper-gem/doorkeeper.git
   revision: 56bfa579484ae9e554028b081227ec8d1b74c21d
   specs:
     doorkeeper (3.1.0)
       railties (>= 4.2)
 
 GIT
-  remote: git://github.com/rails/turbolinks.git
-  revision: dd31f4b2996f2300631f89339ada82c65b95f4c2
-  specs:
-    turbolinks (3.0.0)
-      coffee-rails
-
-GIT
-  remote: git://github.com/sinatra/sinatra.git
-  revision: f8d4e9b332c15c22cbe8bad32aefbeeaaaed1e3f
+  remote: https://github.com/sinatra/sinatra.git
+  revision: 4c7d38eb1b2cc02ce51029f28e0c3c34ca12ccfd
   specs:
     sinatra (2.0.0.pre.alpha)
       rack (= 2.0.0.alpha)
@@ -408,6 +401,8 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.2)
+    turbolinks (2.5.3)
+      coffee-rails
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.7.2)
@@ -504,7 +499,7 @@ DEPENDENCIES
   sinatra!
   social-share-button
   sprockets
-  turbolinks!
+  turbolinks
   uglifier
   will_paginate
 

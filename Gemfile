@@ -13,7 +13,7 @@ gem 'coffee-rails'
 gem 'uglifier'
 gem 'jquery-rails'
 gem 'jbuilder'
-gem 'turbolinks', github: 'rails/turbolinks'
+gem 'turbolinks'
 gem 'jquery-turbolinks'
 gem 'dropzonejs-rails'
 
@@ -25,7 +25,7 @@ gem 'rails_autolink'
 gem 'md_emoji'
 gem 'exception_notification'
 
-gem 'doorkeeper', github: 'doorkeeper-gem/doorkeeper'
+gem 'doorkeeper', git: 'https://github.com/doorkeeper-gem/doorkeeper.git'
 gem 'doorkeeper-i18n'
 
 # gem 'rails-perftest'
@@ -81,7 +81,7 @@ gem 'settingslogic'
 # 队列
 gem 'sidekiq'
 # Sidekiq Web
-gem 'sinatra', github: 'sinatra/sinatra', require: nil
+gem 'sinatra', git: 'https://github.com/sinatra/sinatra.git', require: false
 
 # 分享功能
 gem 'social-share-button'
@@ -113,7 +113,7 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'rack-utf8_sanitizer'
 
 # Mini profiler
-gem 'rack-mini-profiler', github: 'MiniProfiler/rack-mini-profiler', require: false
+gem 'rack-mini-profiler', git: 'https://github.com/MiniProfiler/rack-mini-profiler.git', require: false
 
 gem 'oneapm_rpm'
 

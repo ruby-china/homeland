@@ -41,9 +41,6 @@ gem 'letter_avatar'
 
 gem 'pg'
 
-# remove this after migrate MongoDB into PostgreSQL
-gem 'mongo', require: false
-
 # 用户系统
 gem 'devise', '~> 4.0.0.rc1'
 gem 'devise-encryptable'

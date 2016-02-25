@@ -89,7 +89,6 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bson (4.0.1)
     builder (3.2.2)
     bundler-audit (0.4.0)
       bundler (~> 1.2)
@@ -246,8 +245,6 @@ GEM
     mini_magick (4.3.6)
     mini_portile2 (2.0.0)
     minitest (5.8.4)
-    mongo (2.2.2)
-      bson (~> 4.0)
     multi_json (1.11.2)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
@@ -472,7 +469,6 @@ DEPENDENCIES
   letter_opener
   md_emoji
   mini_magick
-  mongo
   nokogiri
   omniauth
   omniauth-github

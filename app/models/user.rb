@@ -204,6 +204,11 @@ class User < ApplicationRecord
     fetch_by_uniq_keys(login: slug)
   end
 
+  def self.serialize_from_session(key, salt)
+    record = find(key).first rescue nil
+    record if record && record.authenticatable_salt == salt
+  end
+
   def self.find_by_login_or_email(login_or_email)
     login_or_email = login_or_email.downcase
     fetch_by_uniq_keys(login: login_or_email) || fetch_by_uniq_keys(email: login_or_email)

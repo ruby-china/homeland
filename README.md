@@ -104,6 +104,8 @@ $ rails s
 
 Install [Ruby 2.2.4](https://github.com/ruby-china/ruby-china/wiki/Windows-%E4%B8%8A%E5%AE%89%E8%A3%85-Ruby), [PostgreSQL 9.5](http://www.postgresql.org/download/windows/), and Redis [32bit](https://www.nuget.org/packages/Redis-32/) or [64bit](https://github.com/MSOpenTech/redis/releases).
 
+Install [Memcached 1.4.4](https://commaster.net/content/installing-memcached-windows) and setup as windows service following the document.
+
 Redis 32bit installation a little tricky, [download raw nupkg file](https://www.nuget.org/api/v2/package/Redis-32/2.6.12.1) and rename to zip and extract tools folder to `c:\redis`.
 
 Open `C:\Program Files\PostgreSQL\9.5\data\pg_hba.conf` and add/replace below line, get USERNAME via cmd: `echo %USERNAME%`.

@@ -4,8 +4,6 @@ else
   source 'https://ruby.taobao.org'
 end
 
-ruby '2.3.0'
-
 gem 'rails', '5.0.0.beta3'
 gem 'sprockets'
 gem 'sass-rails'
@@ -19,7 +17,7 @@ gem 'dropzonejs-rails'
 
 gem 'rack-attack'
 
-gem 'rails-i18n'
+gem 'rails-i18n', '~> 5.x'
 gem 'http_accept_language'
 gem 'rails_autolink'
 gem 'md_emoji'
@@ -101,7 +99,7 @@ gem 'postmark-rails'
 gem 'ruby-push-notifications'
 
 # Dalli, kgio is for Dalli
-gem 'kgio'
+gem 'kgio', platform: :ruby
 gem 'dalli'
 
 gem 'puma'
@@ -148,3 +146,6 @@ group :development, :test do
 
   gem 'bundler-audit', require: false
 end
+
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

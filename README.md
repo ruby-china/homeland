@@ -100,6 +100,35 @@ Ruby China Successfully Installed.
 $ rails s
 ```
 
+### Windows
+
+Install [Ruby 2.2.4](https://github.com/ruby-china/ruby-china/wiki/Windows-%E4%B8%8A%E5%AE%89%E8%A3%85-Ruby), [PostgreSQL 9.5](http://www.postgresql.org/download/windows/), and Redis [32bit](https://www.nuget.org/packages/Redis-32/) or [64bit](https://github.com/MSOpenTech/redis/releases).
+
+Redis 32bit installation a little tricky, [download raw nupkg file](https://www.nuget.org/api/v2/package/Redis-32/2.6.12.1) and rename to zip and extract tools folder to `c:\redis`.
+
+Open `C:\Program Files\PostgreSQL\9.5\data\pg_hba.conf` and add/replace below line, get USERNAME via cmd: `echo %USERNAME%`.
+
+```text
+# IPv4 local connections:
+host    all             all             127.0.0.1/32            trust
+# IPv6 local connections:
+host    all             all             ::1/128                 trust
+host    all             <USERNAME>            127.0.0.1/32            trust
+```
+
+Running redis-server via `c:\Redis\redis-server.exe c:\Redis\redis.conf`.
+
+```bat
+bundle install
+copy config/config.yml.default config/config.yml
+copy config/database.yml.default config/database.yml
+copy config/redis.yml.default config/redis.yml
+copy config/elasticsearch.yml.default config/elasticsearch.yml
+copy config/secrets.yml.default config/secrets.yml
+rake db:setup
+rails s
+```
+
 ## Testing
 
 ```bash

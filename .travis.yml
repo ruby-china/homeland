@@ -12,6 +12,7 @@ services:
   - elasticsearch
 
 rvm:
+  - 2.2.4
   - 2.3.0
 
 before_script:

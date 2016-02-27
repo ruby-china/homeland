@@ -131,6 +131,8 @@ rake db:setup
 rails s
 ```
 
+> *Caution* You may need disable `oneapm_rpm`, `elasticsearch`, `rucaptcha` and `LetterAvatar` as they are not compatible with windows.
+
 ## Testing
 
 ```bash

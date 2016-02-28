@@ -3,7 +3,8 @@ production:
   url: redis://localhost:6379/1
 
 development:
-  url: redis://localhost:6379/2
+  adapter: postgresql
+  url: postgres://localhost/ruby-china-dev
 
 test:
   url: redis://localhost:6379/3

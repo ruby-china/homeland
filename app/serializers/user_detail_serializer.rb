@@ -3,7 +3,7 @@ class UserDetailSerializer < UserSerializer
              :tagline, :github, :created_at, :email,
              :topics_count, :replies_count,
              :following_count, :followers_count, :favorites_count,
-             :level, :level_name, :admin
+             :level, :level_name
 
   def email
     if owner? || object.email_public == true
@@ -11,9 +11,5 @@ class UserDetailSerializer < UserSerializer
     else
       ''
     end
-  end
-
-  def admin
-    object.admin?
   end
 end

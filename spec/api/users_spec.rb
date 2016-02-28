@@ -42,7 +42,7 @@ describe 'API V3', 'users', type: :request do
       expect(response.status).to eq 200
       fields = %w(id name login email avatar_url location company twitter github website bio tagline
                   topics_count replies_count following_count followers_count favorites_count
-                  level level_name)
+                  level level_name admin)
       expect(json['user']).to include(*fields)
       fields.reject { |f| f == 'avatar_url' }.each do |field|
         expect(json['user'][field]).to eq user.send(field)

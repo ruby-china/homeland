@@ -291,7 +291,7 @@ GEM
       actionmailer (>= 3.0.0)
       postmark (~> 1.7.0)
     powerpack (0.1.1)
-    puma (3.0.0)
+    puma (3.0.2)
     rack (2.0.0.alpha)
       json
     rack-accept (0.4.5)

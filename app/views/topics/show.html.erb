@@ -23,10 +23,7 @@
 
         <article>
           <%= raw @topic.body_html %>
-
         </article>
-        <%= raw SiteConfig.after_topic_html %>
-        <%= social_share_button_tag h("#{@topic.title} via: @#{Setting.twitter_id} ") %>
       </div>
 
       <% if @topic.excellent? %>
@@ -46,30 +43,6 @@
     </div>
 
     <%= render partial: "ban_reason" %>
-
-<% cache([@topic.user, "bio-markdown"]) do %>
-  <% if !@topic.user.bio.blank? %>
-    <div class="panel panel-default">
-      <div class="panel-heading"><%= "关于作者：" + @topic.user.fullname %></div>
-      <div class="panel-body markdown">
-        <%= markdown(@topic.user.bio) %>
-      </div>
-    </div>
-  <% end %>
-<% end %>
-
-  <% if @related_topics.present? %>
-    <div class="panel panel-default topics">
-      <div class="panel-heading media clearfix">
-        <%= t("topics.related_topics") %>
-      </div>
-      <div class="panel-body">
-        <% cache(@related_topics) do %>
-          <%= render partial: "topics/topic", collection: @related_topics, locals: { suggest: false } %>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
 
   <% if @replies.blank? %>
     <div class="no-result">
@@ -101,7 +74,7 @@
             <%= f.text_area :body, class: "topic-editor form-control", rows: "4", tabindex: "1" %>
           </div>
           <div class="submit-buttons">
-            <button type="submit" id="reply-button" class="btn btn-primary" tabindex="2"><%= t("topics.submit_reply")%></button>
+            <button type="submit" id="reply-button" class="btn btn-primary" tabindex="2", data-disable-with='<%= t("topics.submit_reply") %>'><%= t("topics.submit_reply")%></button>
             <span class="help-inline" style="padding-left: 5px;" title="或者 Ctrl + Enter"><kbd>Command</kbd> + <kbd>Enter</kbd></span>
 
             <div class="pull-right"><a href="/markdown" target="_blank">排版说明</a></div>
@@ -121,11 +94,24 @@
       </div>
     </div>
   <% end %>
+
+  <% if @related_topics.present? %>
+      <div class="panel panel-default topics">
+        <div class="panel-heading media clearfix">
+          <%= t("topics.related_topics") %>
+        </div>
+        <div class="panel-body">
+          <% cache(@related_topics) do %>
+              <%= render partial: "topics/topic", collection: @related_topics, locals: { suggest: false } %>
+          <% end %>
+        </div>
+      </div>
+  <% end %>
   </div>
 
-<% if !mobile? %>
-  <div class="sidebar hidden-mobile col-md-3">
-    <%= render 'topic_sidebar' %>
-  </div>
-<% end %>
+  <% if !mobile? %>
+    <div class="sidebar hidden-mobile col-md-3">
+      <%= render 'topic_sidebar' %>
+    </div>
+  <% end %>
 </div>

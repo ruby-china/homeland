@@ -1,11 +1,4 @@
 GIT
-  remote: https://github.com/MiniProfiler/rack-mini-profiler.git
-  revision: f3096b55d308f0e0b9838f4fff4d1fcce2efa5ee
-  specs:
-    rack-mini-profiler (0.9.8)
-      rack (>= 1.2.0)
-
-GIT
   remote: https://github.com/doorkeeper-gem/doorkeeper.git
   revision: 56bfa579484ae9e554028b081227ec8d1b74c21d
   specs:
@@ -291,7 +284,7 @@ GEM
       actionmailer (>= 3.0.0)
       postmark (~> 1.7.0)
     powerpack (0.1.1)
-    puma (3.0.0)
+    puma (3.1.0)
     rack (2.0.0.alpha)
       json
     rack-accept (0.4.5)
@@ -299,6 +292,8 @@ GEM
     rack-attack (4.4.1)
       rack
     rack-cors (0.4.0)
+    rack-mini-profiler (0.9.9.2)
+      rack (>= 1.2.0)
     rack-mount (0.8.3)
       rack (>= 1.0.0)
     rack-protection (1.5.3)
@@ -493,7 +488,7 @@ DEPENDENCIES
   puma
   rack-attack
   rack-cors
-  rack-mini-profiler!
+  rack-mini-profiler
   rack-utf8_sanitizer
   rails (= 5.0.0.beta3)
   rails-i18n

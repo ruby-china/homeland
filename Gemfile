@@ -113,7 +113,7 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'rack-utf8_sanitizer'
 
 # Mini profiler
-gem 'rack-mini-profiler', git: 'https://github.com/MiniProfiler/rack-mini-profiler.git', require: false
+gem 'rack-mini-profiler', require: false
 
 gem 'oneapm_rpm'
 

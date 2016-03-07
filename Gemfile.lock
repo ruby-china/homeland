@@ -1,11 +1,4 @@
 GIT
-  remote: https://github.com/doorkeeper-gem/doorkeeper.git
-  revision: 56bfa579484ae9e554028b081227ec8d1b74c21d
-  specs:
-    doorkeeper (3.1.0)
-      railties (>= 4.2)
-
-GIT
   remote: https://github.com/sinatra/sinatra.git
   revision: 4c7d38eb1b2cc02ce51029f28e0c3c34ca12ccfd
   specs:
@@ -22,7 +15,7 @@ GIT
       coffee-rails
 
 GEM
-  remote: https://ruby.taobao.org/
+  remote: http://gems.ruby-china.org/
   specs:
     actioncable (5.0.0.beta3)
       actionpack (= 5.0.0.beta3)
@@ -148,6 +141,8 @@ GEM
     diff-lcs (1.2.5)
     domain_name (0.5.20160216)
       unf (>= 0.0.5, < 1.0.0)
+    doorkeeper (4.0.0.rc2)
+      railties (>= 4.2)
     doorkeeper-i18n (3.0.0)
     dropzonejs-rails (0.7.2)
       rails (> 3.1)
@@ -457,7 +452,7 @@ DEPENDENCIES
   derailed
   devise (~> 4.0.0.rc1)
   devise-encryptable
-  doorkeeper!
+  doorkeeper (= 4.0.0.rc2)
   doorkeeper-i18n
   dropzonejs-rails
   elasticsearch-model

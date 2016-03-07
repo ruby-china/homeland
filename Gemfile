@@ -1,7 +1,7 @@
 if ENV['USE_OFFICIAL_GEM_SOURCE']
   source 'https://rubygems.org'
 else
-  source 'https://ruby.taobao.org'
+  source 'http://gems.ruby-china.org'
 end
 
 ruby '2.3.0'
@@ -25,7 +25,7 @@ gem 'rails_autolink'
 gem 'md_emoji'
 gem 'exception_notification'
 
-gem 'doorkeeper', git: 'https://github.com/doorkeeper-gem/doorkeeper.git'
+gem 'doorkeeper', '4.0.0.rc2'
 gem 'doorkeeper-i18n'
 
 # gem 'rails-perftest'

@@ -15,7 +15,7 @@ GIT
       coffee-rails
 
 GEM
-  remote: http://gems.ruby-china.org/
+  remote: https://gems.ruby-china.org/
   specs:
     actioncable (5.0.0.beta3)
       actionpack (= 5.0.0.beta3)

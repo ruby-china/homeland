@@ -46,6 +46,7 @@ body {
     color: #666 !important;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: bold;
+    margin-left: 0 !important;
     b { color: $red; }
   }
   .navbar-default .navbar-brand,
@@ -364,7 +365,7 @@ kbd {
   border: 0px;
   border-radius: 3px;
   border: 0px;
-  box-shadow: 0 0px 1px rgba(0, 0, 0, 0.09);
+  box-shadow: 0 0px 3px 2px rgba(0, 0, 0, 0.03);
 
   .panel-heading {
     background: #f9f9f9;

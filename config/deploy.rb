@@ -19,6 +19,7 @@ set :runner, 'ruby'
 set :git_shallow_clone, 1
 
 set :puma_role, :app
+set :puma_state, "#{current_path}/tmp/pids/puma.state"
 set :puma_config_file, "config/puma-web.rb"
 set :sidekiq_config, "#{current_path}/config/sidekiq.yml"
 

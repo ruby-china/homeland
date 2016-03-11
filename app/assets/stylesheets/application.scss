@@ -404,13 +404,14 @@ kbd {
 /* App Style */
 .opts {
   color: #666;
-  a { margin-right: 5px; }
+  a { }
   a:link,
   a:visited {
     color: #666;
+    padding: 3px;
     text-decoration: none;
   }
-  a:hover { color: #666; text-decoration: none; }
+  a:hover { background: #f0f0f0; color: #666; text-decoration: none; }
   .loading {
   }
 }

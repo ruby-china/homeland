@@ -2,7 +2,7 @@
   <% cache(["sidebar_new_topic_box",SiteConfig.new_topic_dropdown_node_ids]) do %>
     <div class="panel panel-default clearfix">
       <div class="panel-body">
-        <div class="btn-group pull-left">
+        <div class="btn-group btn-block pull-left">
           <%= link_to(t("topics.start_a_new_topic_button"), new_topic_path, class: "btn btn-primary" )%>
           <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
             <span class="caret"></span>
@@ -15,8 +15,6 @@
             <% end %>
           </ul>
         </div>
-
-        <%= link_to(sanitize("<span class='icon icons-rss'></span> RSS"), feed_topics_url, title: t("topics.subscribe_with_rss", name: Setting.app_name), class: "pull-right feed-button btn btn-default", target: "_blank") %>
       </div>
     </div>
   <% end %>

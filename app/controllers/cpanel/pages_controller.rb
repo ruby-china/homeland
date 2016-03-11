@@ -5,7 +5,7 @@ module Cpanel
     end
 
     def show
-      @page = Page.unscoped.find(params[:id])
+      @page = Page.unscoped.find_by_slug(params[:id])
     end
 
     def new
@@ -13,7 +13,7 @@ module Cpanel
     end
 
     def edit
-      @page = Page.unscoped.find(params[:id])
+      @page = Page.unscoped.find_by_slug(params[:id])
     end
 
     def create
@@ -27,7 +27,7 @@ module Cpanel
     end
 
     def update
-      @page = Page.unscoped.find(params[:id])
+      @page = Page.unscoped.find_by_slug(params[:id])
       @page.title = params[:page][:title]
       @page.body = params[:page][:body]
       @page.slug = params[:page][:slug]
@@ -42,7 +42,7 @@ module Cpanel
     end
 
     def destroy
-      @page = Page.unscoped.find(params[:id])
+      @page = Page.unscoped.find_by_slug(params[:id])
       @page.destroy
 
       redirect_to(cpanel_pages_path)

@@ -12,22 +12,20 @@
   <%= f.input :bio, as: :text, input_html: { class: "span8", style: "height:60px;" } %>
   <%= f.input :website, as: :url, input_html: { class: "xxlarge" } %>
   <%= f.input :avatar %>
-  <div class="form-group">
-    <div class="col-md-10 col-sm-offset-2">
-      <%= user_avatar_tag(@user, :large) %>
-    </div>
+  <div class="form-group clearfix">
+    <%= user_avatar_tag(@user, :large) %>
   </div>
   <%= f.input :verified, as: :boolean, hint: t("cpanel.users.trust_user_can_modify_wiki") %>
   <%= f.input :hr, as: :boolean, hint: t("cpanel.users.hr_user_can_create_topic") %>
   <%= f.input :state, as: :select, collection: User::STATE.collect { |s| [s[0],s[1]] } %>
   <%= f.input :sign_in_count, readonly: true %>
-  <%= f.input :last_sign_in_at, readonly: true %>
-  <%= f.input :current_sign_in_at, readonly: true %>
+  <%= f.input :last_sign_in_at, as: :string, readonly: true %>
+  <%= f.input :current_sign_in_at, as: :string, readonly: true %>
   <%= f.input :last_sign_in_ip, readonly: true %>
   <%= f.input :current_sign_in_ip, readonly: true %>
   <% if not @user.authorizations.blank? %>
   <div class="form-group">
-    <table class="table col-md-10 col-sm-offset-2" style="display:block;">
+    <table class="table" style="display:block;">
       <% @user.authorizations.each do |auth| %>
         <tr>
           <td style="width:100px;"><%= auth.provider %></td>
@@ -38,15 +36,14 @@
   </div>
   <% end %>
   <div class="form-group">
-    <div class="col-md-10 col-sm-offset-2">
-      <% if @user.state != User::STATE[:deleted] %>
-        <div class="pull-right">
-          <%= link_to '删除此用户', cpanel_user_path(@user.id), 'data-confirm' => '警告！此动作无法撤销，确定要删除么?', method: :delete, class: "btn btn-danger"  %>
-        </div>
-      <% end %>
-      <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving") %>
-      或者
-      <%= link_to 'Back', cpanel_users_path %>
-    </div>
+
+    <% if @user.state != User::STATE[:deleted] %>
+      <div class="pull-right">
+        <%= link_to '删除此用户', cpanel_user_path(@user.id), 'data-confirm' => '警告！此动作无法撤销，确定要删除么?', method: :delete, class: "btn btn-danger"  %>
+      </div>
+    <% end %>
+    <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving") %>
+    或者
+    <%= link_to 'Back', cpanel_users_path %>
   </div>
 <% end %>

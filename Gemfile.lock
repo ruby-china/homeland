@@ -112,7 +112,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.10.0)
-    colorize (0.7.7)
     concurrent-ruby (1.0.0)
     connection_pool (2.2.0)
     dalli (2.7.5)
@@ -446,7 +445,6 @@ DEPENDENCIES
   carrierwave
   carrierwave-upyun
   coffee-rails
-  colorize
   dalli
   database_cleaner
   derailed

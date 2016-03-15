@@ -124,9 +124,7 @@ group :development do
   gem 'capistrano', '2.9.0', require: false
   gem 'rvm-capistrano', require: false
   gem 'capistrano-sidekiq'
-
   gem 'derailed'
-
   # Better Errors
   gem 'better_errors'
   gem 'binding_of_caller'
@@ -134,16 +132,11 @@ end
 
 group :development, :test do
   gem 'rubocop'
-
   gem 'rspec-rails', '3.5.0.beta1'
-
   gem 'factory_girl_rails', '~> 4.5.0'
   gem 'database_cleaner'
   gem 'capybara'
-
   gem 'jasmine-rails', '~> 0.10.2'
-
-  gem 'colorize'
   gem 'letter_opener'
 
   gem 'bundler-audit', require: false

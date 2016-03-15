@@ -61,7 +61,8 @@ namespace :cable do
   end
 
   task :restart do
-    run "cd #{current_path} && #{pumactl_cmd} -S #{current_path}/tmp/pids/puma-cable.state restart"
+    run "cd #{current_path} && #{pumactl_cmd} -S #{current_path}/tmp/pids/puma-cable.state stop"
+    run "cd #{current_path}; RAILS_ENV=production ./bin/cable"
   end
 end
 

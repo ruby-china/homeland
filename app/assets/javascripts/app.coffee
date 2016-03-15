@@ -127,7 +127,7 @@ AppView = Backbone.View.extend
     $("i.fa",el).attr("class","fa fa-thumbs-up")
 
   initCable: () ->
-    if !window.notificationChannel
+    if !window.notificationChannel && App.isLogined()
       window.notificationChannel = App.cable.subscriptions.create "NotificationsChannel",
         connected: ->
           setTimeout =>

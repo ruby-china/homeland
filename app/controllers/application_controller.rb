@@ -8,8 +8,6 @@ class ApplicationController < ActionController::Base
     method = "#{resource}_params"
     params[resource] &&= send(method) if respond_to?(method, true)
 
-    cookies.signed[:user_id] ||= current_user.try(:id)
-
     if devise_controller?
       devise_parameter_sanitizer.permit(:sign_in) { |u| u.permit(*User::ACCESSABLE_ATTRS) }
       devise_parameter_sanitizer.permit(:account_update) do |u|
@@ -25,6 +23,8 @@ class ApplicationController < ActionController::Base
     if current_user && current_user.admin?
       Rack::MiniProfiler.authorize_request
     end
+
+    cookies.signed[:user_id] ||= current_user.try(:id)
 
     # hit unread_notify_count
     unread_notify_count

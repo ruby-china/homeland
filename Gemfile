@@ -139,5 +139,6 @@ group :development, :test do
   gem 'jasmine-rails', '~> 0.10.2'
   gem 'letter_opener'
 
+  gem 'codecov', require: false
   gem 'bundler-audit', require: false
 end

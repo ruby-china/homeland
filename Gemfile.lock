@@ -102,6 +102,10 @@ GEM
     carrierwave-upyun (0.2.1)
       carrierwave (>= 0.5.7)
       faraday (>= 0.8.0)
+    codecov (0.1.4)
+      json
+      simplecov
+      url
     coderay (1.1.0)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
@@ -138,6 +142,7 @@ GEM
     devise-encryptable (0.2.0)
       devise (>= 2.1.0)
     diff-lcs (1.2.5)
+    docile (1.1.5)
     domain_name (0.5.20160216)
       unf (>= 0.0.5, < 1.0.0)
     doorkeeper (4.0.0.rc2)
@@ -391,6 +396,11 @@ GEM
     simple_form (3.2.1)
       actionpack (> 4, < 5.1)
       activemodel (> 4, < 5.1)
+    simplecov (0.11.2)
+      docile (~> 1.1.0)
+      json (~> 1.8)
+      simplecov-html (~> 0.10.0)
+    simplecov-html (0.10.0)
     social-share-button (0.1.10)
       coffee-rails
       sass-rails
@@ -415,6 +425,7 @@ GEM
     upyun (1.0.9)
       activesupport (>= 3.2.8)
       rest-client (>= 1.6.7)
+    url (0.3.2)
     virtus (1.0.5)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
@@ -444,6 +455,7 @@ DEPENDENCIES
   capybara
   carrierwave
   carrierwave-upyun
+  codecov
   coffee-rails
   dalli
   database_cleaner

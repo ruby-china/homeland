@@ -2,7 +2,7 @@
 
 This is the source code of [Ruby China](http://ruby-china.org) website.
 
-[![Build Status](https://travis-ci.org/ruby-china/ruby-china.svg?branch=master)](https://travis-ci.org/ruby-china/ruby-china)
+[![Build Status](https://travis-ci.org/ruby-china/ruby-china.svg?branch=master)](https://travis-ci.org/ruby-china/ruby-china) [![Code Climate](https://codeclimate.com/github/ruby-china/ruby-china/badges/gpa.svg)](https://codeclimate.com/github/ruby-china/ruby-china)
 
 ## Requirements
 

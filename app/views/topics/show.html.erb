@@ -24,6 +24,7 @@
         <article>
           <%= raw @topic.body_html %>
         </article>
+        <%= raw SiteConfig.after_topic_html %>
       </div>
 
       <% if @topic.excellent? %>

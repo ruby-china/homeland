@@ -65,6 +65,10 @@ module RubyChina
     config.middleware.insert 0, Rack::UTF8Sanitizer
 
     config.active_job.queue_adapter = :sidekiq
+
+    config.action_dispatch.default_headers = {
+      'X-Frame-Options' => 'ALLOW-FROM http://www.growingio.com'
+    }
   end
 end
 

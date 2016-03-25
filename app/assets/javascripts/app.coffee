@@ -251,7 +251,7 @@ window.App =
   access_token : ''
   asset_url : ''
   root_url : ''
-  cable: ActionCable.createConsumer("/cable")
+  cable: ActionCable.createConsumer()
 
   isLogined : ->
     App.current_user_id != null

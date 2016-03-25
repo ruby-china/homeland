@@ -2,7 +2,7 @@ require 'bundler/capistrano'
 require 'capistrano/sidekiq'
 require 'rvm/capistrano'
 require 'puma'
-require 'puma/capistrano'
+require File.expand_path("../../lib/puma/capistrano", __FILE__)
 
 default_run_options[:pty] = true
 

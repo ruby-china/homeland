@@ -24,7 +24,7 @@
       <tr><td><%= t("cpanel.menu.topics") %></td><td><%= Topic.unscoped.count %> 个</td></tr>
       <tr><td><%= t("cpanel.menu.replies") %></td><td><%= Reply.unscoped.count %> 条</td></tr>
       <tr><td><%= t("cpanel.menu.notes") %></td><td><%= Note.unscoped.count %> 条</td></tr>
-      <tr><td>通知</td><td><%= Notification::Base.unscoped.count %> 条</td></tr>
+      <tr><td>通知</td><td><%= Notification.unscoped.count %> 条</td></tr>
       <tr><td>图片</td><td><%= Photo.unscoped.count %> 张</td></tr>
       <tr><td>Device</td><td><%= Device.unscoped.count %> 台</td></tr>
       <tr><td>OAuth Token</td><td><%= Doorkeeper::AccessToken.count %> 条</td></tr>

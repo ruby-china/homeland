@@ -5,7 +5,7 @@
   <%= f.input :title, input_html: { class: "xxlarge" } %>
 
   <div class="form-group">
-    <div class="editor-toolbar col-sm-offset-2 col-sm-10">
+    <div class="editor-toolbar">
       <ul class="nav nav-pills">
         <li class="edit active"><%= link_to(t("common.editor_toolbar_edit"), "#") %></li>
         <li class="preview"><%= link_to(t("common.editor_toolbar_preview"), "#") %></li>
@@ -19,9 +19,7 @@
     <%= f.input :change_desc, as: :text, input_html: { rows: "2" }, hint: t("pages.describe_this_time_change") %>
   <% end %>
   <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving") %>
-      <%= link_to t("common.cancel"), pages_path, class: "btn btn-default reset" %>
-    </div>
+    <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving") %>
+    <%= link_to t("common.cancel"), pages_path, class: "btn btn-default reset" %>
   </div>
 <% end %>

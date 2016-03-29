@@ -19,13 +19,9 @@ describe User::OmniauthCallbacks, type: :model do
       expect(result.email).to eq('email@example.com')
     end
 
-    it 'should handle provider douban properly' do
-      expect(callback.new_from_provider_data('douban', uid, data).email).to eq('email@example.com')
-    end
-
-    it 'should handle provider google properly' do
-      data['name'] = 'the_lucky_stiff'
-      expect(callback.new_from_provider_data('google', uid, data).login).to eq('the_lucky_stiff')
+    it 'should handle provider github properly' do
+      result = callback.new_from_provider_data('github', uid, data)
+      expect(result.email).to eq('email@example.com')
     end
 
     it 'should escape illegal characters in nicknames properly' do
@@ -41,10 +37,10 @@ describe User::OmniauthCallbacks, type: :model do
     end
 
     it 'should generate random login if login is duplicated' do
-      callback.new_from_provider_data(nil, nil, data).save # create a new user first
+      callback.new_from_provider_data('github', nil, data).save # create a new user first
       time = Time.now
       allow(Time).to receive(:now).and_return(time)
-      expect(callback.new_from_provider_data(nil, nil, data).login).to eq("u#{time.to_i}")
+      expect(callback.new_from_provider_data('github', nil, data).login).to eq("#{data['nickname']}-github")
     end
 
     it 'should generate some random password' do

@@ -433,4 +433,24 @@ describe 'API V3', 'topics', type: :request do
       expect(current_user.reload.favorite_topic_ids).not_to include(t.id)
     end
   end
+
+  describe 'POST /api/v3/topics/:id/ban.json' do
+    it 'should work with admin' do
+      login_admin!
+      t = create(:topic, user: current_user, title: 'new topic 3')
+      post "/api/v3/topics/#{t.id}/ban.json"
+      expect(response.status).to eq(201)
+    end
+
+    it 'should not ban a topic with normal user' do
+      login_user!
+      t = create(:topic, title: 'new topic 3')
+      post "/api/v3/topics/#{t.id}/ban.json"
+      expect(response.status).to eq(403)
+
+      t = create(:topic, user: current_user, title: 'new topic 3')
+      post "/api/v3/topics/#{t.id}/ban.json"
+      expect(response.status).to eq(403)
+    end
+  end
 end

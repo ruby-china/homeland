@@ -180,6 +180,15 @@ module API
             current_user.unfavorite_topic(@topic.id)
             { ok: 1 }
           end
+
+          desc '屏蔽话题，移到 NoPoint 节点 (Admin only)'
+          post 'ban' do
+            doorkeeper_authorize!
+            @topic = Topic.find(params[:id])
+            error!('当前用户没有屏蔽别人话题的权限，具体请参考官网的说明。', 403) unless can?(:ban, @topic)
+            @topic.ban!
+            { ok: 1 }
+          end
         end
       end
     end

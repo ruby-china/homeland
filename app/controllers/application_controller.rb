@@ -12,7 +12,13 @@ class ApplicationController < ActionController::Base
 
     if devise_controller?
       devise_parameter_sanitizer.permit(:sign_in) { |u| u.permit(*User::ACCESSABLE_ATTRS) }
-      devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(*User::ACCESSABLE_ATTRS) }
+      devise_parameter_sanitizer.permit(:account_update) do |u|
+        if current_user.email_locked?
+          u.permit(*User::ACCESSABLE_ATTRS)
+        else
+          u.permit(:email, *User::ACCESSABLE_ATTRS)
+        end
+      end
       devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(*User::ACCESSABLE_ATTRS) }
     end
 

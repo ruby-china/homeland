@@ -47,6 +47,7 @@
              li << link_to(t("menu.jobs"), jobs_path)
              li << link_to(t("menu.tweets"), twitter_path) if !mobile?
              li << link_to(t("menu.sites"), sites_path) if !mobile?
+             li << link_to(t("menu.gems"), 'https://gems.ruby-china.org', target: '_blank') if !mobile?
           end %>
         </span>
 

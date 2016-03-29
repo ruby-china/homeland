@@ -1,21 +1,23 @@
 if ENV['USE_OFFICIAL_GEM_SOURCE']
   source 'https://rubygems.org'
 else
-  source 'https://ruby.taobao.org'
+  source 'https://gems.ruby-china.org'
 end
 
 ruby '2.3.0'
 
-gem 'rails', '5.0.0.beta2'
+gem 'rails', '5.0.0.beta3'
 gem 'sprockets'
 gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
 gem 'jquery-rails'
 gem 'jbuilder'
-gem 'turbolinks', github: 'rails/turbolinks'
+gem 'turbolinks', git: 'https://github.com/turbolinks/turbolinks-classic.git'
 gem 'jquery-turbolinks'
 gem 'dropzonejs-rails'
+
+gem 'rack-attack'
 
 gem 'rails-i18n'
 gem 'http_accept_language'
@@ -23,7 +25,7 @@ gem 'rails_autolink'
 gem 'md_emoji'
 gem 'exception_notification'
 
-gem 'doorkeeper', github: 'doorkeeper-gem/doorkeeper'
+gem 'doorkeeper', '4.0.0.rc2'
 gem 'doorkeeper-i18n'
 
 # gem 'rails-perftest'
@@ -38,9 +40,6 @@ gem 'rucaptcha'
 gem 'letter_avatar'
 
 gem 'pg'
-
-# remove this after migrate MongoDB into PostgreSQL
-gem 'mongo', require: false
 
 # 用户系统
 gem 'devise', '~> 4.0.0.rc1'
@@ -66,7 +65,7 @@ gem 'hiredis'
 gem 'redis-namespace'
 # 将一些数据存放入 Redis
 gem 'redis-objects'
-gem 'second_level_cache', '2.2.1'
+gem 'second_level_cache', '2.2.2'
 
 gem 'rails-settings-cached'
 
@@ -82,7 +81,7 @@ gem 'settingslogic'
 # 队列
 gem 'sidekiq'
 # Sidekiq Web
-gem 'sinatra', github: 'sinatra/sinatra', require: nil
+gem 'sinatra', git: 'https://github.com/sinatra/sinatra.git', require: false
 
 # 分享功能
 gem 'social-share-button'
@@ -114,9 +113,12 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'rack-utf8_sanitizer'
 
 # Mini profiler
-gem 'rack-mini-profiler', github: 'MiniProfiler/rack-mini-profiler', require: false
+gem 'rack-mini-profiler', require: false
 
 gem 'oneapm_rpm'
+
+# UpYun SDK 用于发布的时候上传 Assets 到 CDN
+gem 'upyun', require: false
 
 group :development do
   gem 'capistrano', '2.9.0', require: false

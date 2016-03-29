@@ -30,6 +30,31 @@ module Redcarpet
         %(<table class="table table-bordered table-striped">#{header}#{body}</table>)
       end
 
+      # Extend to support img width
+      # ![](foo.jpg =300x)
+      # ![](foo.jpg =300x200)
+      # Example: https://gist.github.com/uupaa/f77d2bcf4dc7a294d109
+      def image(link, title, alt_text)
+        links = link.split(" ")
+        link = links[0]
+        if links.count > 1
+          # 原本 Markdown 的 title 部分是需要引号的 ![](foo.jpg "Title")
+          # ![](foo.jpg =300x)
+          title = links[1]
+        end
+
+        if title =~ /=(\d+)x(\d+)/
+          %(<img src="#{link}" width="#{$1}px" height="#{$2}px" alt="#{alt_text}">)
+        elsif title =~ /=(\d+)x/
+          %(<img src="#{link}" width="#{$1}px" alt="#{alt_text}">)
+        elsif title =~ /=x(\d+)/
+          %(<img src="#{link}" height="#{$1}px" alt="#{alt_text}">)
+        else
+          %(<img src="#{link}" title="#{title}" alt="#{alt_text}">)
+        end
+      end
+
+      # Fix Chinese neer the URL
       def autolink(link, link_type)
         # return link
         if link_type.to_s == 'email'
@@ -61,30 +86,19 @@ module Redcarpet
   end
 end
 
-class MarkdownConverter
+class MarkdownTopicConverter
   include Singleton
 
   def self.convert(text)
     instance.convert(text)
   end
 
-  def convert(text)
-    @converter.render(text)
-  end
-
-  private
-
-  def initialize
-    highlight = Redcarpet::Render::HTMLwithSyntaxHighlight.new
-    @converter = Redcarpet::Markdown.new(highlight, autolink: true,
-                                                    fenced_code_blocks: true,
-                                                    no_intra_emphasis: true)
-  end
-end
-
-class MarkdownTopicConverter < MarkdownConverter
   def self.format(raw)
     instance.format(raw)
+  end
+
+  def convert(text)
+    @converter.render(text)
   end
 
   def format(raw)
@@ -234,13 +248,17 @@ class MarkdownTopicConverter < MarkdownConverter
   end
 
   def initialize
-    @converter = Redcarpet::Markdown.new(Redcarpet::Render::HTMLwithTopic.new,         autolink: true,
-                                                                                       fenced_code_blocks: true,
-                                                                                       strikethrough: true,
-                                                                                       tables: true,
-                                                                                       space_after_headers: true,
-                                                                                       disable_indented_code_blocks: true,
-                                                                                       no_intra_emphasis: true)
+    opts = {
+      autolink: true,
+      fenced_code_blocks: true,
+      strikethrough: true,
+      tables: true,
+      space_after_headers: true,
+      disable_indented_code_blocks: true,
+      no_intra_emphasis: true
+    }
+    html_topic_render = Redcarpet::Render::HTMLwithTopic.new
+    @converter = Redcarpet::Markdown.new(html_topic_render, opts)
     @emoji = MdEmoji::Render.new
   end
 end
@@ -292,6 +310,16 @@ Ruby China 支持表情符号，你可以用系统默认的 Emoji 符号（无�
 ##### Heading 5
 
 ###### Heading 6
+
+### 图片
+
+```
+![alt 文本](http://image-path.png)
+![alt 文本](http://image-path.png "图片 Title 值")
+![设置图片宽度高度](http://image-path.png =300x200)
+![设置图片宽度](http://image-path.png =300x)
+![设置图片高度](http://image-path.png =x200)
+```
 
 ### 代码块
 

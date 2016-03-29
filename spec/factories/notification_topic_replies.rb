@@ -1,5 +1,7 @@
 FactoryGirl.define do
-  factory :notification_topic_reply, class: Notification::TopicReply, parent: :notification_base do
-    association :reply
+  factory :notification_topic_reply, parent: :notification do
+    notify_type 'topic_reply'
+    association :target, factory: :reply
+    association :second_target, factory: :topic
   end
 end

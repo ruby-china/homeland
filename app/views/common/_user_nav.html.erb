@@ -7,25 +7,25 @@
       <i class="fa fa-reorder"></i>
     </button>
     <%= render_list class: "dropdown-menu", role: "menu" do |li|
-      li << link_to(t("menu.my_home_page"), user_path(current_user) )
+      li << link_to(t("menu.my_home_page"), main_app.user_path(current_user) )
       li << "<div class='divider'></div>"
-      li << link_to(t("menu.edit_account_path"), edit_user_registration_path)
-      li << link_to(t("menu.notes"), notes_path )
-      li << link_to(t("menu.likes"), favorites_user_path(current_user))
+      li << link_to(t("menu.edit_account_path"), main_app.edit_user_registration_path)
+      li << link_to(t("menu.notes"), main_app.notes_path )
+      li << link_to(t("menu.likes"), main_app.favorites_user_path(current_user))
       if admin?
         li << "<div class='divider'></div>"
         if params[:controller].start_with?("cpanel")
-          li << link_to("回到前台", root_path)
+          li << link_to("回到前台", main_app.root_path)
         else
           li << link_to(t("menu.cpanel"), "/cpanel")
         end
       end
       li << "<div class='divider'></div>"
-      li << link_to(t("common.logout"), destroy_user_session_path, method: "delete" )
+      li << link_to(t("common.logout"), main_app.destroy_user_session_path, method: "delete" )
     end %>
   </li>
   <% else %>
-  <li><%= link_to( t("common.register"), new_user_registration_path) %></li>
-  <li><%= link_to( t("common.login"), new_user_session_path ) %></li>
+  <li><%= link_to( t("common.register"), main_app.new_user_registration_path) %></li>
+  <li><%= link_to( t("common.login"), main_app.new_user_session_path ) %></li>
   <% end %>
 </ul>

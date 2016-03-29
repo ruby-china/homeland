@@ -21,12 +21,16 @@ module API
           }.to_json], 400, {}).finish
         else
           # ExceptionNotifier.notify_exception(e) # Uncommit it when ExceptionNotification is available
+          error_hash = {
+            error: "API 接口异常"
+          }
           if Rails.env.test?
             Rails.logger.error "Error: #{e}\n#{e.backtrace[0, 3].join("\n")}"
+            error_hash[:message] = e.backtrace.join("\n")
           else
             Rails.logger.error "Api V3 Error: #{e}\n#{e.backtrace.join("\n")}"
           end
-          Rack::Response.new([{ error: "API 接口异常" }.to_json], 500, {}).finish
+          Rack::Response.new([error_hash.to_json], 500, {}).finish
         end
       end
 

@@ -99,7 +99,7 @@ class ApplicationController < ActionController::Base
 
   def unread_notify_count
     return 0 if current_user.blank?
-    @unread_notify_count ||= current_user.notifications.unread.count
+    @unread_notify_count ||= Notification.unread_count(current_user)
   end
 
   def fresh_when(opts = {})

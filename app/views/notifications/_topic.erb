@@ -1,0 +1,8 @@
+<% topic = notification.target %>
+<% if topic.blank? %>
+  相关信息已删除
+<% else %>
+  <div class="media-heading">
+    创建了帖子 <%= topic_title_tag(topic) %>
+  </div>
+<% end %>

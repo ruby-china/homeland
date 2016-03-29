@@ -11,13 +11,13 @@ module API
           optional :limit, type: Integer, default: 20, values: 1..150
         end
         get '', each_serializer: NotificationSerializer, root: 'notifications' do
-          @notifications = current_user.notifications.recent.offset(params[:offset]).limit(params[:limit])
+          @notifications = Notification.where(user_id: current_user.id).order('id desc').offset(params[:offset]).limit(params[:limit])
           render @notifications
         end
 
         desc '获得未读通知数量'
         get 'unread_count' do
-          { count: current_user.notifications.unread.count }
+          { count: Notification.unread_count(current_user) }
         end
 
         desc '将当前用户的一些通知设成已读状态'
@@ -27,7 +27,7 @@ module API
         post 'read' do
           if params[:ids].length > 0
             @notifications = current_user.notifications.where(id: params[:ids])
-            current_user.read_notifications(@notifications)
+            Notification.read!(@notifications.collect(&:id))
           end
           { ok: 1 }
         end

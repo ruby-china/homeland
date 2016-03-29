@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Notification::Base, type: :model do
+describe Notification, type: :model do
   let(:n) { create(:notification_topic_reply) }
 
   describe '.realtime_push_to_client' do

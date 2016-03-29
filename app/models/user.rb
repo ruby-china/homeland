@@ -21,19 +21,10 @@ class User < ApplicationRecord
   has_many :notes
   has_many :replies, dependent: :destroy
   has_many :authorizations, dependent: :destroy
-  has_many :notifications, class_name: 'Notification::Base', dependent: :destroy
+  has_many :notifications, dependent: :destroy
   has_many :photos
   has_many :oauth_applications, class_name: 'Doorkeeper::Application', as: :owner
   has_many :devices
-
-  def read_notifications(notifications)
-    unread_ids = notifications.find_all { |notification| !notification.read? }.map(&:id)
-    if unread_ids.any?
-      Notification::Base.where(user_id: id, read: false)
-        .where(id: unread_ids).update_all(read: true, updated_at: Time.now)
-      Notification::Base.realtime_push_to_client(self)
-    end
-  end
 
   attr_accessor :password_confirmation
 
@@ -85,6 +76,10 @@ class User < ApplicationRecord
 
   def password_required?
     (authorizations.empty? || !password.blank?) && super
+  end
+
+  def profile_url
+    "/#{login}"
   end
 
   def github_url
@@ -263,14 +258,13 @@ class User < ApplicationRecord
     opts[:replies_ids] ||= topic.replies.pluck(:id)
 
     any_sql = "
-      (mentionable_type = 'Topic' AND mentionable_id = ?) or
-      (mentionable_type = 'Reply' AND mentionable_id in (?)) or
-      (reply_id in (?))
+      (target_type = 'Topic' AND target_id = ?) or
+      (target_type = 'Reply' AND target_id in (?))
     "
     notifications.unread
-      .where(any_sql, topic.id, opts[:replies_ids], opts[:replies_ids])
-      .update_all(read: true)
-    Notification::Base.realtime_push_to_client(self)
+      .where(any_sql, topic.id, opts[:replies_ids])
+      .update_all(read_at: Time.now)
+    Notification.realtime_push_to_client(self)
 
     # 处理 last_reply_id 是空的情况
     last_reply_id = topic.last_reply_id || -1
@@ -443,7 +437,7 @@ class User < ApplicationRecord
       self.push(following_ids: user.id)
       user.push(follower_ids: self.id)
     end
-    Notification::Follow.notify(user: user, follower: self)
+    Notification.notify_follow(user.id, self.id)
   end
 
   def followers_count
@@ -491,6 +485,14 @@ class User < ApplicationRecord
     path = LetterAvatar.generate(self.login, size).sub('public/','/')
 
     "#{Setting.protocol}://#{Setting.domain}#{path}"
+  end
+
+  def large_avatar_url
+    if self[:avatar].present?
+      self.avatar.url(:large)
+    else
+      self.letter_avatar_url(240)
+    end
   end
 
   def avatar?

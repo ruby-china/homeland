@@ -204,7 +204,10 @@ class Topic < ApplicationRecord
       # 排除回帖人
       next if uid == topic.user_id
       logger.debug "Post Notification to: #{uid}"
-      Notification::Topic.create user_id: uid, topic_id: topic.id
+      Notification.create notify_type: 'topic',
+                          actor_id: topic.user_id,
+                          user_id: uid,
+                          target: topic
     end
     true
   end
@@ -215,7 +218,10 @@ class Topic < ApplicationRecord
     node = Node.find_by_id(node_id)
     return if node.blank?
 
-    Notification::NodeChanged.create user_id: topic.user_id, topic_id: topic_id, node_id: node_id
+    Notification.create notify_type: 'node_changed',
+                        user_id: topic.user_id,
+                        target: topic,
+                        second_target: node
     true
   end
 end

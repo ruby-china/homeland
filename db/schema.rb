@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160302043713) do
+ActiveRecord::Schema.define(version: 20160329032533) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,6 +68,30 @@ ActiveRecord::Schema.define(version: 20160302043713) do
   end
 
   add_index "locations", ["name"], name: "index_locations_on_name", using: :btree
+
+  create_table "monkeys", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "new_notifications", force: :cascade do |t|
+    t.integer  "user_id",            null: false
+    t.integer  "actor_id"
+    t.string   "notify_type",        null: false
+    t.string   "target_type"
+    t.integer  "target_id"
+    t.string   "second_target_type"
+    t.integer  "second_target_id"
+    t.string   "third_target_type"
+    t.integer  "third_target_id"
+    t.datetime "read_at"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "new_notifications", ["user_id", "notify_type"], name: "index_new_notifications_on_user_id_and_notify_type", using: :btree
+  add_index "new_notifications", ["user_id"], name: "index_new_notifications_on_user_id", using: :btree
 
   create_table "nodes", force: :cascade do |t|
     t.string   "name",                     null: false
@@ -259,6 +283,14 @@ ActiveRecord::Schema.define(version: 20160302043713) do
   add_index "sites", ["site_node_id"], name: "index_sites_on_site_node_id", using: :btree
   add_index "sites", ["url"], name: "index_sites_on_url", using: :btree
 
+  create_table "test_documents", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "mentioned_user_ids", default: [],              array: true
+    t.text     "body"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
   create_table "topics", force: :cascade do |t|
     t.integer  "user_id",                               null: false
     t.integer  "node_id",                               null: false
@@ -341,5 +373,13 @@ ActiveRecord::Schema.define(version: 20160302043713) do
   add_index "users", ["location"], name: "index_users_on_location", using: :btree
   add_index "users", ["login"], name: "index_users_on_login", using: :btree
   add_index "users", ["private_token"], name: "index_users_on_private_token", using: :btree
+
+  create_table "walking_deads", force: :cascade do |t|
+    t.string   "name"
+    t.string   "tag"
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end

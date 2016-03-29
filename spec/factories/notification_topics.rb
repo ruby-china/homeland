@@ -1,5 +1,6 @@
 FactoryGirl.define do
-  factory :notification_topic, class: Notification::Topic, parent: :notification_base do
-    association :topic
+  factory :notification_topic, parent: :notification do
+    notify_type 'topic'
+    association :target, factory: :topic
   end
 end

@@ -17,7 +17,7 @@ module UsersHelper
     name ||= login
     options['data-name'.freeze] = name
 
-    link_to(login, user_path(login), options)
+    link_to(login, main_app.user_path(login), options)
   end
 
   def user_avatar_width_for_size(size)

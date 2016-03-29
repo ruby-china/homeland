@@ -10,7 +10,6 @@ class Reply < ApplicationRecord
 
   belongs_to :user, counter_cache: true
   belongs_to :topic, touch: true, counter_cache: true
-  has_many :notifications, dependent: :destroy
 
   delegate :title, to: :topic, prefix: true, allow_nil: true
   delegate :login, to: :user, prefix: true, allow_nil: true
@@ -63,7 +62,7 @@ class Reply < ApplicationRecord
     Notification.transaction do
       # 给发帖人发回帖通知
       if reply.user_id != topic.user_id && !notified_user_ids.include?(topic.user_id)
-        Notification.create notify_type: 'reply',
+        Notification.create notify_type: 'topic_reply',
                             actor_id: reply.user_id,
                             user_id: topic.user_id,
                             target: reply,
@@ -82,7 +81,7 @@ class Reply < ApplicationRecord
         # 排除回帖人
         next if uid == reply.user_id
         logger.debug "Post Notification to: #{uid}"
-        Notification.create notify_type: 'reply',
+        Notification.create notify_type: 'topic_reply',
                             actor_id: reply.user_id,
                             user_id: uid,
                             target: reply,
@@ -110,7 +109,7 @@ class Reply < ApplicationRecord
 
   def destroy
     super
-    notifications.delete_all
+    Notification.where(notify_type: 'topic_reply', target: self).delete_all
     delete_notifiaction_mentions
   end
 end

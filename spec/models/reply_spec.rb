@@ -13,7 +13,7 @@ describe Reply, type: :model do
       topic = create :topic, user: user
       expect do
         create :reply, topic: topic
-      end.to change(Notification::Base, :count).by(1)
+      end.to change(Notification, :count).by(1)
 
       expect do
         create(:reply, topic: topic).destroy
@@ -26,7 +26,7 @@ describe Reply, type: :model do
       # Don't duplicate notifiation with mention
       expect do
         create :reply, topic: topic, mentioned_user_ids: [user.id]
-      end.not_to change(user.notifications.unread.where(type: 'Notification::TopicReply'), :count)
+      end.not_to change(user.notifications.unread.where(notify_type: 'topic_reply'), :count)
     end
 
     describe 'should send topic reply notification to followers' do
@@ -83,12 +83,12 @@ describe Reply, type: :model do
         reply = create :reply, topic: topic, user: replyer
 
         followers.each do |f|
-          expect(f.notifications.unread.where(type: 'Notification::TopicReply').count).to eq 1
+          expect(f.notifications.unread.where(notify_type: 'topic_reply').count).to eq 1
         end
 
         expect do
           Reply.notify_reply_created(reply.id)
-        end.to change(user.notifications.unread.where(type: 'Notification::TopicReply'), :count).by(1)
+        end.to change(user.notifications.unread.where(notify_type: 'topic_reply'), :count).by(1)
       end
     end
   end

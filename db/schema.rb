@@ -69,6 +69,12 @@ ActiveRecord::Schema.define(version: 20160329032533) do
 
   add_index "locations", ["name"], name: "index_locations_on_name", using: :btree
 
+  create_table "monkeys", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "new_notifications", force: :cascade do |t|
     t.integer  "user_id",            null: false
     t.integer  "actor_id"
@@ -277,6 +283,14 @@ ActiveRecord::Schema.define(version: 20160329032533) do
   add_index "sites", ["site_node_id"], name: "index_sites_on_site_node_id", using: :btree
   add_index "sites", ["url"], name: "index_sites_on_url", using: :btree
 
+  create_table "test_documents", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "mentioned_user_ids", default: [],              array: true
+    t.text     "body"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
   create_table "topics", force: :cascade do |t|
     t.integer  "user_id",                               null: false
     t.integer  "node_id",                               null: false
@@ -359,5 +373,13 @@ ActiveRecord::Schema.define(version: 20160329032533) do
   add_index "users", ["location"], name: "index_users_on_location", using: :btree
   add_index "users", ["login"], name: "index_users_on_login", using: :btree
   add_index "users", ["private_token"], name: "index_users_on_private_token", using: :btree
+
+  create_table "walking_deads", force: :cascade do |t|
+    t.string   "name"
+    t.string   "tag"
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end

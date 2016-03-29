@@ -204,7 +204,7 @@ describe Topic, type: :model do
       expect(topic).to be_a(Topic)
 
       followers.each do |f|
-        expect(f.notifications.unread.where(type: 'Notification::Topic').count).to eq 1
+        expect(f.notifications.unread.where(notify_type: 'topic').count).to eq 1
       end
     end
   end
@@ -216,9 +216,11 @@ describe Topic, type: :model do
     describe 'Call method' do
       it 'should work' do
         Topic.notify_topic_node_changed(topic.id, new_node.id)
-        last_notification = user.notifications.unread.where(type: 'Notification::NodeChanged').first
-        expect(last_notification.topic_id).to eq topic.id
-        expect(last_notification.node_id).to eq new_node.id
+        last_notification = user.notifications.unread.where(notify_type: 'node_changed').first
+        expect(last_notification.target_type).to eq 'Topic'
+        expect(last_notification.target_id).to eq topic.id
+        expect(last_notification.second_target_type).to eq 'Node'
+        expect(last_notification.second_target_id).to eq new_node.id
       end
     end
 

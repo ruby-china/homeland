@@ -26,15 +26,6 @@ class User < ApplicationRecord
   has_many :oauth_applications, class_name: 'Doorkeeper::Application', as: :owner
   has_many :devices
 
-  def read_notifications(notifications)
-    unread_ids = notifications.find_all { |notification| !notification.read? }.map(&:id)
-    if unread_ids.any?
-      Notification::Base.where(user_id: id, read: false)
-        .where(id: unread_ids).update_all(read: true, updated_at: Time.now)
-      Notification::Base.realtime_push_to_client(self)
-    end
-  end
-
   attr_accessor :password_confirmation
 
   ACCESSABLE_ATTRS = [:name, :email_public, :location, :company, :bio, :website, :github, :twitter,

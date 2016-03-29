@@ -16,7 +16,7 @@ describe 'API V3', 'notifications', type: :request do
     it 'should get notification for a mention in a reply' do
       topic = create :topic, user: current_user
       reply = create :reply, topic: topic, user: current_user, body: 'Test to mention user'
-      create :notification_mention, user: current_user, mentionable: reply
+      note = create :notification_mention, user: current_user, target: reply
       login_user!
       get '/api/v3/notifications.json'
       expect(response.status).to eq(200)
@@ -24,7 +24,7 @@ describe 'API V3', 'notifications', type: :request do
       expect(json['notifications'][0]['mention_type']).to eq 'Reply'
       expect(json['notifications'][0]['mention']['body_html']).to eq('<p>Test to mention user</p>')
       expect(json['notifications'][0]['mention']['topic_id']).to eq(topic.id)
-      expect(json['notifications'][0]['actor']['login']).to eq(current_user.login)
+      expect(json['notifications'][0]['actor']['login']).to eq(note.actor.login)
     end
 
     context 'NodeChanged' do
@@ -33,8 +33,9 @@ describe 'API V3', 'notifications', type: :request do
 
       it 'should work' do
         login_user!
-        n = create :notification_node_changed, user: current_user, topic_id: topic.id, node: node
+        n = create :notification_node_changed, user: current_user, target: topic, second_target: node
         get '/api/v3/notifications.json'
+        puts json['message']
         expect(response.status).to eq(200)
         expect(json['notifications'][0]['read']).to eq false
         expect(json['notifications'][0]).to include(*%w(type topic node))
@@ -51,34 +52,35 @@ describe 'API V3', 'notifications', type: :request do
       u = create(:user)
       current_user.follow_user(u)
       topic = create :topic, user: u
-      create :notification_topic, user: current_user, topic: topic
+      create :notification_topic, user: current_user, target: topic
       get '/api/v3/notifications.json'
-      expect(response.status).to eq(200)
       json = JSON.parse(response.body)
+      # puts json['message']
+      expect(response.status).to eq(200)
       expect(json['notifications'][0]['read']).to eq false
       expect(json['notifications'][0]['topic']['id']).to eq(topic.id)
-      expect(json['notifications'][0]['actor']['login']).to eq(u.login)
     end
 
     it 'should get notification for a reply' do
       login_user!
       topic = create :topic, user: current_user
       reply = create :reply, topic: topic, user: current_user, body: 'Test to reply user'
-      create :notification_topic_reply, user: current_user, reply: reply
+      note = create :notification_topic_reply, user: current_user, target: reply, second_target: topic
       get '/api/v3/notifications.json'
-      expect(response.status).to eq(200)
       json = JSON.parse(response.body)
+      # puts json['message']
+      expect(response.status).to eq(200)
       expect(json['notifications'][0]['read']).to eq false
       expect(json['notifications'][0]['reply']['body_html']).to eq('<p>Test to reply user</p>')
       expect(json['notifications'][0]['reply']['topic_id']).to eq(topic.id)
-      expect(json['notifications'][0]['actor']['login']).to eq(current_user.login)
+      expect(json['notifications'][0]['actor']['login']).to eq(note.actor.login)
     end
 
     it 'should get notification for a mention in a topic' do
       login_user!
       node = create :node
       topic = create :topic, user: current_user, node: node, title: 'Test to mention user in a topic'
-      create :notification_mention, user: current_user, mentionable: topic
+      note = create :notification_mention, user: current_user, target: topic
       get '/api/v3/notifications.json'
       expect(response.status).to eq(200)
       json = JSON.parse(response.body)
@@ -86,14 +88,14 @@ describe 'API V3', 'notifications', type: :request do
       expect(json['notifications'][0]['mention_type']).to eq 'Topic'
       expect(json['notifications'][0]['mention']['title']).to eq('Test to mention user in a topic')
       expect(json['notifications'][0]['mention']['node_name']).to eq(node.name)
-      expect(json['notifications'][0]['actor']['login']).to eq(current_user.login)
+      expect(json['notifications'][0]['actor']['login']).to eq(note.actor.login)
     end
 
     it 'should return a list of notifications of the current user' do
       login_user!
       topic = create :topic, user: current_user
       replies = (0...10).map { |i| create :reply, topic: topic, user: current_user, body: "Test to mention user #{i}" }
-      (0...10).map { |i| create :notification_mention, user: current_user, mentionable: replies[i] }
+      (0...10).map { |i| create :notification_mention, user: current_user, target: replies[i] }
 
       get '/api/v3/notifications.json'
       expect(response.status).to eq(200)
@@ -125,11 +127,11 @@ describe 'API V3', 'notifications', type: :request do
       login_user!
       topic = create :topic, user: current_user
       replies = (0...10).map { |i| create :reply, topic: topic, user: current_user, body: "Test to mention user #{i}" }
-      (0...10).map { |i| create :notification_mention, user: current_user, mentionable: replies[i] }
+      (0...10).map { |i| create :notification_mention, user: current_user, target: replies[i] }
       post '/api/v3/notifications/read.json', ids: current_user.notifications.pluck(:id)
       expect(response.status).to eq 201
       current_user.notifications.each do |item|
-        expect(item.reload.read).to eq true
+        expect(item.reload.read?).to eq true
       end
     end
   end
@@ -143,7 +145,7 @@ describe 'API V3', 'notifications', type: :request do
     it 'should get count' do
       login_user!
       create :notification_topic, user: current_user
-      create :notification_topic, user: current_user, read: true
+      create :notification_topic, user: current_user, read_at: Time.now
       get '/api/v3/notifications/unread_count.json'
       expect(response.status).to eq(200)
       expect(json['count']).to eq(1)
@@ -160,7 +162,7 @@ describe 'API V3', 'notifications', type: :request do
       login_user!
       topic = create :topic, user: current_user
       replies = (0...10).map { |i| create :reply, topic: topic, user: current_user, body: "Test to mention user #{i}" }
-      (0...10).map { |i| create :notification_mention, user: current_user, mentionable: replies[i] }
+      (0...10).map { |i| create :notification_mention, user: current_user, target: replies[i] }
 
       get '/api/v3/notifications.json'
       expect(response.status).to eq(200)
@@ -186,7 +188,7 @@ describe 'API V3', 'notifications', type: :request do
       login_user!
       topic = create :topic, user: current_user
       replies = (0...10).map { |i| create :reply, topic: topic, user: current_user, body: "Test to mention user #{i}" }
-      mentions = (0...10).map { |i| create :notification_mention, user: current_user, mentionable: replies[i] }
+      mentions = (0...10).map { |i| create :notification_mention, user: current_user, target: replies[i] }
 
       get '/api/v3/notifications.json'
       expect(response.status).to eq(200)

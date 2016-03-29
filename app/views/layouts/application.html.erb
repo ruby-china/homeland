@@ -25,7 +25,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <link rel="apple-touch-icon-precomposed" href="<%= cached_asset_path("ios-icon.png") %>" />
   <link rel="shortcut icon" href="<%= cached_asset_path("big_logo.png") %>" />
-  <link rel="alternate" type="application/rss+xml" title="订阅最新帖" href="<%= feed_topics_url %>" />
+  <link rel="alternate" type="application/rss+xml" title="订阅最新帖" href="<%= main_app.feed_topics_url %>" />
   <link rel="mask-icon" href="<%= cached_asset_path("mask.svg") %>" color="#BD2D2D" />
   <%= stylesheet_link_tag_with_cached "front" %>
   <%= action_cable_meta_tag %>
@@ -43,11 +43,11 @@
 
         <span id="main-nav-menu" data-turbolinks-temporary>
           <%= render_list class: "nav navbar-nav" do |li|
-             li << link_to(t("menu.topics"), topics_path)
-             li << link_to(t("menu.wiki"), pages_path) if !mobile?
-             li << link_to(t("menu.jobs"), jobs_path)
-             li << link_to(t("menu.tweets"), twitter_path) if !mobile?
-             li << link_to(t("menu.sites"), sites_path) if !mobile?
+             li << link_to(t("menu.topics"), main_app.topics_path)
+             li << link_to(t("menu.wiki"), main_app.pages_path) if !mobile?
+             li << link_to(t("menu.jobs"), main_app.jobs_path)
+             li << link_to(t("menu.tweets"), main_app.twitter_path) if !mobile?
+             li << link_to(t("menu.sites"), main_app.sites_path) if !mobile?
              li << link_to(t("menu.gems"), 'https://gems.ruby-china.org', target: '_blank') if !mobile?
           end %>
         </span>
@@ -69,7 +69,7 @@
           badge_class = "new" if unread_notify_count > 0
           %>
           <li class="notification-count">
-            <a href="<%= notifications_path %>" class="<%= badge_class %>" title="通知"><i class="fa fa-bell"></i><span class="count"><%= unread_notify_count %></span></a>
+            <a href="<%= main_app.notifications_path %>" class="<%= badge_class %>" title="通知"><i class="fa fa-bell"></i><span class="count"><%= unread_notify_count %></span></a>
           </li>
           <% end %>
         </ul>
@@ -99,7 +99,7 @@
     </script>
   <% end %>
   <script type="text/javascript" data-turbolinks-eval=false>
-    App.root_url = "<%= root_url %>";
+    App.root_url = "<%= main_app.root_url %>";
     App.asset_url = "<%= Setting.upload_url %>";
     App.locale = "<%= I18n.locale %>";
     <% if current_user %>

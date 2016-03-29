@@ -53,9 +53,9 @@ module TopicsHelper
     return t('topics.topic_was_deleted') if topic.blank?
     if opts[:reply]
       index = topic.floor_of_reply(opts[:reply])
-      path = topic_path(topic, anchor: "reply#{index}")
+      path = main_app.topic_path(topic, anchor: "reply#{index}")
     else
-      path = topic_path(topic)
+      path = main_app.topic_path(topic)
     end
     link_to(topic.title, path, title: topic.title)
   end

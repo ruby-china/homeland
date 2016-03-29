@@ -1,4 +1,4 @@
 FactoryGirl.define do
-  factory :notification_mention, class: Notification::Mention, parent: :notification_base do
+  factory :notification_mention, class: Notification, parent: :notification_base do
   end
 end

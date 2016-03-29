@@ -1,0 +1,19 @@
+<div class="notifications panel">
+  <div class="panel-heading clearfix">
+    <%= t('notifications.all_notifications') %>
+
+    <span class="pull-right">
+      <%= link_to t('notifications.clean_all'), notifications.clean_notifications_path, class: 'btn btn-sm btn-danger', method: 'delete' %>
+    </span>
+  </div>
+  <div class="panel-body list">
+    <% if @notifications.blank? %>
+      <div class="no-records"><%= t('notifications.no_records') %></div>
+    <% else %>
+      <%= render @notifications %>
+    <% end %>
+  </div>
+  <div class="panel-footer">
+    <%= will_paginate @notifications %>
+  </div>
+</div>

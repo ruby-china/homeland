@@ -1,0 +1,38 @@
+.notifications {
+  .notification {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    color: #999;
+
+    a { color: #555; }
+
+    &.unread {
+      color: #444;
+
+      .media-heading {
+        font-weight: bold;
+        font-size: 14px;
+      }
+
+      a { color: #222; text-decoration: underline; }
+    }
+
+
+    .media-content {
+      p:last-chind {
+        margin-bottom: 0;
+      }
+    }
+
+    .user-avatar {
+      img { width: 32px; height: 32px; border-radius: 120px; }
+    }
+
+    .media-right {
+      min-width: 100px;
+      color: #AAA;
+      font-size: 13px;
+    }
+  }
+}

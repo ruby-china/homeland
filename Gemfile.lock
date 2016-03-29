@@ -14,6 +14,13 @@ GIT
     turbolinks (3.0.0)
       coffee-rails
 
+PATH
+  remote: ../notifications
+  specs:
+    notifications (0.0.4)
+      rails (>= 4.2.0, < 5.1)
+      will_paginate (>= 3.0.0)
+
 GEM
   remote: https://gems.ruby-china.org/
   specs:
@@ -483,6 +490,7 @@ DEPENDENCIES
   md_emoji
   mini_magick
   nokogiri
+  notifications!
   omniauth
   omniauth-github
   oneapm_rpm

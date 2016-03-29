@@ -45,7 +45,7 @@ gem 'pg'
 gem 'devise', '~> 4.0.0.rc1'
 gem 'devise-encryptable'
 
-gem 'notifications', path: '../notifications'
+gem 'notifications'
 
 # 分页
 gem 'will_paginate'

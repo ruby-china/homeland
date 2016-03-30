@@ -1,0 +1,24 @@
+image: ruby:2.3
+services:
+  - postgres
+  - memcached
+  - redis
+  - elasticsearch
+
+before_script:
+  - psql -c "CREATE USER \"admin\" WITH CREATEDB PASSWORD 'admin';" -U postgres
+  - psql -c "create database \"ruby-china-test\" WITH OWNER=\"admin\";" -U postgres
+  - cp config/config.yml.default config/config.yml
+  - cp config/database.yml.default config/database.yml
+  - cp config/redis.yml.default config/redis.yml
+  - cp config/elasticsearch.yml.default config/elasticsearch.yml
+  - cp config/secrets.yml.default config/secrets.yml
+  - sed -i "s/SETUP_REDIS_HOST/127.0.0.1/g" config/redis.yml
+  - sed -i "s/SETUP_REDIS_PORT/6379/g" config/redis.yml
+  - RAILS_ENV=test bundle exec rake db:migrate
+
+test:
+  script:
+    - RAILS_ENV=test bundle exec rake
+  tags:
+    - docker

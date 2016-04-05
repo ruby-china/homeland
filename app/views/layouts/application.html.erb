@@ -50,6 +50,18 @@
       })();
     })();
   </script>
+  <script>(function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","//widget.daovoice.io/widget/baa76c7b.js","daovoice");</script>
+  <script>
+    var config = { app_id: "baa76c7b" };
+  <% if current_user %>
+    config.user_id = '<%= current_user.id %>';
+    config.email = '<%= current_user.email %>';
+    config.name = '<%= current_user.fullname %>';
+    config.signed_up = <%= current_user.created_at.to_i %>;
+  <% end %>
+    daovoice('init', config);
+    daovoice('update');
+  </script>
 </head>
 <body data-controller-name="<%= controller_name %>">
   <div class="header">

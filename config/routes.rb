@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   mount RuCaptcha::Engine => "/rucaptcha"
 
+  get 'advertisements/show'
+
   use_doorkeeper do
     controllers applications: 'oauth/applications', authorized_applications: 'oauth/authorized_applications'
   end
@@ -122,6 +124,7 @@ Rails.application.routes.draw do
   require 'sidekiq/web'
   authenticate :user, ->(u) { u.admin? } do
     mount Sidekiq::Web => '/sidekiq'
+    mount Split::Dashboard => '/split'
   end
 
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)

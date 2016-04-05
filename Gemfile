@@ -119,6 +119,9 @@ gem 'lograge'
 
 gem 'rest-client', '~> 1.8.0'
 
+# A/B testing
+gem 'split', require: 'split/dashboard'
+
 group :development do
   gem 'derailed'
 end

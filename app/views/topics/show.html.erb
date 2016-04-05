@@ -45,6 +45,18 @@
 
     <%= render partial: "ban_reason" %>
 
+<% ab_test(:adv, 'visible', 'hidden') do |visibility| %>
+  <% if visibility == 'visible' %>
+    <div class="panel panel-default topics">
+      <div class="panel-body">
+        <%= link_to advertisements_show_path(1), target: '_blank' do %>
+          <%= image_tag 'https://codingstyle-cn.b0.upaiyun.com/photo/2016/58ab3e3d7297bfc79da7af09223eefec.png', style: 'max-width: 100%;max-height: 100%' %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
   <% if @replies.blank? %>
     <div class="no-result">
       <%= t("topics.no_replies") %>

@@ -1,0 +1,11 @@
+<div class='fullsize'>
+  <%= user_avatar_tag(user, link: false) %>
+</div>
+<p></p>
+<p><strong><%= user.fullname %></strong></p>
+<% if user.tagline.present? %>
+  <p><%= render_user_tagline(user) %></p>
+<% end %>
+<% if !owner? user %>
+  <%= follow_user_tag(user) %>
+<% end %>

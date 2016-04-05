@@ -91,6 +91,7 @@ class UsersController < ApplicationController
 
   def follow
     current_user.follow_user(@user)
+    finished :follow_author
     render json: { code: 0, data: { followers_count: @user.followers_count } }
   end
 

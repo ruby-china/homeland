@@ -31,6 +31,8 @@ gem 'doorkeeper-i18n'
 # gem 'rails-perftest'
 # gem 'ruby-prof'
 
+gem 'bulk_insert', git: 'https://github.com/huacnlee/bulk_insert.git', branch: 'fix/active-record-5-warning'
+
 # 上传组件
 gem 'carrierwave'
 gem 'carrierwave-upyun'

@@ -198,17 +198,18 @@ class Topic < ApplicationRecord
     follower_ids.uniq!
 
     # 给关注者发通知
-    follower_ids.each do |uid|
-      # 排除同一个回复过程中已经提醒过的人
-      next if notified_user_ids.include?(uid)
-      # 排除回帖人
-      next if uid == topic.user_id
-      logger.debug "Post Notification to: #{uid}"
-      Notification.create notify_type: 'topic',
-                          actor_id: topic.user_id,
-                          user_id: uid,
-                          target: topic
+    default_note = { notify_type: 'topic', target_type: "Topic", target_id: topic.id, actor_id: topic.user_id }
+    Notification.bulk_insert(set_size: 100) do |worker|
+      follower_ids.each do |uid|
+        # 排除同一个回复过程中已经提醒过的人
+        next if notified_user_ids.include?(uid)
+        # 排除回帖人
+        next if uid == topic.user_id
+        note = default_note.merge(user_id: uid)
+        worker.add(note)
+      end
     end
+
     true
   end
 

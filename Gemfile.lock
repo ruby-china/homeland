@@ -1,4 +1,12 @@
 GIT
+  remote: https://github.com/huacnlee/bulk_insert.git
+  revision: d5cdd5a37c544d01afd7cb081a1fd41df40812f2
+  branch: fix/active-record-5-warning
+  specs:
+    bulk_insert (1.2.0)
+      activerecord (>= 4.1.0)
+
+GIT
   remote: https://github.com/sinatra/sinatra.git
   revision: 4c7d38eb1b2cc02ce51029f28e0c3c34ca12ccfd
   specs:
@@ -451,6 +459,7 @@ DEPENDENCIES
   auto-space
   better_errors
   binding_of_caller
+  bulk_insert!
   bundler-audit
   cancancan (~> 1.13.1)
   capistrano (= 2.9.0)

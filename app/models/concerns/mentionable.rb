@@ -36,15 +36,21 @@ module Mentionable
   end
 
   def send_mention_notification
-    (mentioned_users - no_mention_users).each do |user|
-      opts = {
-        notify_type: 'mention',
-        actor_id: self.user_id,
-        user_id: user.id,
-        target: self
-      }
-      opts[:second_target] = self.send(:topic) if self.class.name == 'Reply'
-      Notification.create(opts)
+    Notification.bulk_insert(set_size: 100) do |worker|
+      (mentioned_users - no_mention_users).each do |user|
+        note = {
+          notify_type: 'mention',
+          actor_id: self.user_id,
+          user_id: user.id,
+          target_type: self.class.name,
+          target_id: self.id
+        }
+        if self.class.name == 'Reply'
+          note[:second_target_type] = 'Topic'
+          note[:second_target_id] = self.send(:topic_id)
+        end
+        worker.add(note)
+      end
     end
   end
 end

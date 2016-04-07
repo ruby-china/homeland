@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   post 'account/update_private_token' => 'users#update_private_token', as: 'update_private_token_account'
 
   mount Notifications::Engine => '/notifications'
+  mount StatusPage::Engine, at: '/'
 
   resources :nodes do
     member do

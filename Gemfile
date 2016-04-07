@@ -23,7 +23,6 @@ gem 'rails-i18n'
 gem 'http_accept_language'
 gem 'rails_autolink'
 gem 'md_emoji'
-gem 'exception_notification'
 
 gem 'doorkeeper', '4.0.0.rc2'
 gem 'doorkeeper-i18n'
@@ -120,6 +119,10 @@ gem 'rack-utf8_sanitizer'
 gem 'rack-mini-profiler', require: false
 
 gem 'oneapm_rpm'
+
+gem 'exception_notification'
+
+gem 'status-page'
 
 # UpYun SDK 用于发布的时候上传 Assets 到 CDN
 gem 'upyun', require: false

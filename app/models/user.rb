@@ -42,8 +42,11 @@ class User < ApplicationRecord
   }
 
   validates :login, format: { with: ALLOW_LOGIN_CHARS_REGEXP, message: '只允许数字、大小写字母和下划线' },
-                    length: { in: 3..20 }, presence: true,
-                    uniqueness: { case_sensitive: true}
+                    length: { in: 3..20 },
+                    presence: true,
+                    uniqueness: { case_sensitive: true }
+
+  validates :name, length: { in: 2..20 }
 
   scope :hot, -> { order(replies_count: :desc).order(topics_count: :desc) }
   scope :fields_for_list, lambda {

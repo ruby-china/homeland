@@ -1,6 +1,6 @@
 <%= render 'base' %>
 <div class="pull-right">
-  <%= link_to "删除本页所有记录", clean_cpanel_exception_logs_path(ids: @exception_logs.collect(&:id).join(",")), class: "btn btn-small btn-danger", data: { confirm: "确定要删除本页的所有异常记录么？" }, method: "post" %>
+  <%= link_to "删除本页所有记录", clean_cpanel_exception_logs_path, class: "btn btn-small btn-danger", data: { confirm: "确定要删除本页的所有异常记录么？" }, method: "post" %>
 </div>
 
 <div id="cpanel_exception_logs">

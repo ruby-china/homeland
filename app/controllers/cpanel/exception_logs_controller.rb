@@ -19,7 +19,7 @@ module Cpanel
     end
 
     def clean
-      ExceptionLog.where(id: params[:ids].split(',')).delete_all
+      ExceptionLog.delete_all
 
       redirect_to cpanel_exception_logs_path, notice: '清空成功。'
     end

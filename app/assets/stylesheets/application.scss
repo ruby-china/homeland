@@ -229,7 +229,8 @@ a { color: $blue; }
   }
 }
 textarea.form-control,
-#preview.form-control { border: 1px solid #317DDA; border-radius: 0px 3px 3px 3px; }
+#preview.form-control { border: 1px solid #317DDA; }
+#preview.form-control { border-radius: 0px 3px 3px 3px; }
 textarea.form-control,
 #preview.form-control,
 textarea.form-control:focus { padding: 6px; border-bottom-width: 1px; }

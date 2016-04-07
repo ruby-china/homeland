@@ -5,7 +5,7 @@ module StatusPage
     end
 
     def check!
-      result = Faraday.get('https://gems.ruby-china1.org') do |req|
+      result = Faraday.get('https://gems.ruby-china.org') do |req|
         req.options.timeout = 3
       end
       if result.status >= 400

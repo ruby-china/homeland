@@ -422,7 +422,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    status-page (0.1.1)
+    status-page (0.1.2)
       rails (>= 4.2)
     thor (0.19.1)
     thread_safe (0.3.5)

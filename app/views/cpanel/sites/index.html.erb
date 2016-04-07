@@ -6,6 +6,9 @@
       <input type="text" name="q" class="form-control" value="<%= params[:q] %>" placeholder="网站名称" />
     </div>
     <button class="btn btn-default">搜索</button>
+    <%if params[:q]%>
+      <%= render 'shared/reset_query'%>
+    <%end%>
   </form>
 </div>
 
@@ -44,4 +47,3 @@
   </table>
   <%= will_paginate @sites %>
 </div>
-

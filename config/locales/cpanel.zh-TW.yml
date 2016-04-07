@@ -28,3 +28,4 @@
       hr_user_can_create_topic: "招聘人員角色可以忽略新手限制直接發帖"
     topic_list: "話題列表"
     check_photo: "瀏覽圖片"
+    reset_query: "清除當前查詢參數"

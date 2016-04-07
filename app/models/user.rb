@@ -46,7 +46,7 @@ class User < ApplicationRecord
                     presence: true,
                     uniqueness: { case_sensitive: true }
 
-  validates :name, length: { in: 2..20 }
+  validates :name, length: { maximum: 20 }
 
   scope :hot, -> { order(replies_count: :desc).order(topics_count: :desc) }
   scope :fields_for_list, lambda {

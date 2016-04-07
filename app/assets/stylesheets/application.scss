@@ -229,7 +229,7 @@ a { color: $blue; }
   }
 }
 textarea.form-control,
-#preview.form-control { border: 1px solid #D5DCE1; }
+#preview.form-control { border: 1px solid #317DDA; border-radius: 0px 3px 3px 3px; }
 textarea.form-control,
 #preview.form-control,
 textarea.form-control:focus { padding: 6px; border-bottom-width: 1px; }
@@ -239,12 +239,17 @@ textarea.form-control:focus { padding: 6px; border-bottom-width: 1px; }
   .nav-pills>li>a {
     border-radius: 3px 3px 0 0;
     padding: 3px 23px;
+    margin-right: 5px;
     background-color: #f0f0f0;
     color: #999;
   }
   .nav-pills>li.active>a:link,
   .nav-pills>li.active>a:visited,
   .nav-pills>li.active>a:hover { background-color: $blueLight; color: #FFF; }
+}
+textarea.topic-editor {
+  border-radius: 0px 3px 3px 3px;
+  border-color: #317DDA;
 }
 form {
   #preview { min-height: 500px; overflow-y: scroll; }
@@ -684,12 +689,12 @@ img.emoji { width:20px; height:20px; }
   }
   .reply {
     margin: 0 -15px;
-    padding: 10px 15px;
+    padding: 15px 15px;
     position: relative;
     border-bottom: 1px solid #eee;
     padding-left: 74px;
     .infos { min-height: 48px; }
-    .avatar { position: absolute; top: 10px; left: 15px; }
+    .avatar { position: absolute; top: 15px; left: 15px; }
     &:last-child {
       border-bottom: 0px;
     }
@@ -714,11 +719,14 @@ img.emoji { width:20px; height:20px; }
 
     .media-body {
     }
-    .avatar { text-align:center; }
     .info {
       .name {
-        a { color: $blueLight; }
+        font-weight: bold;
+        font-size: 13px;
+        a { color: #555; }
       }
+      color: #999;
+      margin-bottom: 6px;
       font-size: 12px;
       .reply-floor { color: #7AA87A; }
     }

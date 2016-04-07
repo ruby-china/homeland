@@ -59,33 +59,35 @@ class Reply < ApplicationRecord
 
     notified_user_ids = reply.mentioned_user_ids
 
-    Notification.transaction do
-      # 给发帖人发回帖通知
-      if reply.user_id != topic.user_id && !notified_user_ids.include?(topic.user_id)
-        Notification.create notify_type: 'topic_reply',
-                            actor_id: reply.user_id,
-                            user_id: topic.user_id,
-                            target: reply,
-                            second_target: topic
-        notified_user_ids << topic.user_id
-      end
+    # 给发帖人发回帖通知
+    if reply.user_id != topic.user_id && !notified_user_ids.include?(topic.user_id)
+      Notification.create notify_type: 'topic_reply',
+                          actor_id: reply.user_id,
+                          user_id: topic.user_id,
+                          target: reply,
+                          second_target: topic
+      notified_user_ids << topic.user_id
+    end
 
-      follower_ids = topic.follower_ids + (reply.user.try(:follower_ids) || [])
-      follower_ids.uniq!
+    follower_ids = topic.follower_ids + (reply.user.try(:follower_ids) || [])
+    follower_ids.uniq!
 
-      # 给关注者发通知
-
+    # 给关注者发通知
+    default_note = {
+      notify_type: 'topic_reply',
+      target_type: "Reply", target_id: reply.id,
+      second_target_type: 'Topic', second_target_id: topic.id,
+      actor_id: reply.user_id
+    }
+    Notification.bulk_insert(set_size: 100) do |worker|
       follower_ids.each do |uid|
         # 排除同一个回复过程中已经提醒过的人
         next if notified_user_ids.include?(uid)
         # 排除回帖人
         next if uid == reply.user_id
         logger.debug "Post Notification to: #{uid}"
-        Notification.create notify_type: 'topic_reply',
-                            actor_id: reply.user_id,
-                            user_id: uid,
-                            target: reply,
-                            second_target: topic
+        note = default_note.merge(user_id: uid)
+        worker.add(note)
       end
     end
 

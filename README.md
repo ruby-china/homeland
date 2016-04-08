@@ -7,11 +7,11 @@ This is the source code of [Ruby China](http://ruby-china.org) website.
 ## Requirements
 
 * Ruby 2.3.0 +
-* Memcached 1.4 +
-* Redis 2.8 +
 * PostgreSQL 9.4 +
-* ImageMagick 6.5+
-* Elasticsearch 2.0+
+* Redis 2.8 +
+* Memcached 1.4 +
+* ImageMagick 6.5 +
+* Elasticsearch 2.0 +
 
 ## Install in development
 
@@ -130,10 +130,11 @@ Theme from [Mediom](https://github.com/huacnlee/mediom)
 * [Ruby China](https://ruby-china.org)
 * [36kr](http://36kr.com/)
 * [Testhome](http://testerhome.com/)
+* [DiyCode](http://www.diycode.cc/)
 
 ## License
 
-Copyright (c) 2011-2015 Ruby China
+Copyright (c) 2011-2016 Ruby China
 
 Released under the MIT license:
 

@@ -79,6 +79,7 @@
   menu:
     home: "首页"
     topics: "社区"
+    open_class: "公开课"
     wiki: "Wiki"
     users: "会员"
     cpanel: "后台"

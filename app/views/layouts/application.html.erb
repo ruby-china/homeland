@@ -62,6 +62,7 @@
         <span id="main-nav-menu" data-turbolinks-temporary>
           <%= render_list class: "nav navbar-nav" do |li|
              li << link_to(t("menu.topics"), topics_path)
+             li << link_to(t("menu.open_class"), node_topics_path(28))
           end %>
         </span>
 

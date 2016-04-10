@@ -36,6 +36,10 @@ class Node
     9
   end
 
+  def self.open_classes_id
+    28
+  end
+
   # NoPoint 节点编号
   def self.no_point_id
     61

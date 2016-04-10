@@ -124,6 +124,8 @@ gem 'split', require: 'split/dashboard'
 
 group :development do
   gem 'derailed'
+  gem 'byebug'
+  gem 'pry-byebug'
 end
 
 group :development, :test do

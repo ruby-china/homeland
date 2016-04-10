@@ -90,9 +90,8 @@ class TopicsController < ApplicationController
     end
 
     check_current_user_status_for_topic
-    set_special_node_active_menu
-
     @threads.each(&:join)
+    set_special_node_active_menu
 
     @related_topics = @topic.node.topics.where(:id.ne => @topic.id).fields_for_list.limit(5).to_a
 
@@ -129,6 +128,8 @@ class TopicsController < ApplicationController
     case @node.try(:id)
     when Node.jobs_id
       @current = ['/jobs']
+    when Node.open_classes_id
+      @current = ['/open_classes']
     end
   end
 

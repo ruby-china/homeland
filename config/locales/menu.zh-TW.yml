@@ -79,7 +79,7 @@
   menu:
     home: "首頁"
     topics: "社區"
-    open_class: "公開課"
+    open_classes: "公開課"
     wiki: "Wiki"
     users: "會員"
     cpanel: "後臺"

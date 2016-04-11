@@ -19,6 +19,7 @@ class Topic
   include Mongoid::Mentionable
 
   field :title
+  field :video
   field :body
   field :body_html
   field :last_reply_id, type: Integer

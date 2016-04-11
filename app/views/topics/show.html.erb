@@ -22,6 +22,7 @@
         <%= raw SiteConfig.before_topic_html %>
 
         <article>
+          <%= raw @topic.video if @topic.video %>
           <%= raw @topic.body_html %>
         </article>
         <%= raw SiteConfig.after_topic_html %>

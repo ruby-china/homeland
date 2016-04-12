@@ -22,7 +22,9 @@
         <%= raw SiteConfig.before_topic_html %>
 
         <article>
-          <%= raw @topic.video if @topic.video %>
+          <% if @topic.video %>
+            <embed height="415" width="100%" quality="high" allowfullscreen="true" type="application/x-shockwave-flash" src="https://static-s.bilibili.com/miniloader.swf" flashvars="aid=<%= @topic.video %>&page=1" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash">
+          <% end %>
           <%= raw @topic.body_html %>
         </article>
         <%= raw SiteConfig.after_topic_html %>

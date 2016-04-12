@@ -15,20 +15,13 @@ class Site < ApplicationRecord
     CacheVersion.sites_updated_at = Time.now.to_i
   end
 
-  before_validation :fix_urls #, :check_uniq
+  before_validation :fix_urls
   def fix_urls
     unless url.blank?
       url = self.url.gsub(%r{http[s]{0,1}://}, '').split('/').join('/')
       self.url = "http://#{url}"
     end
   end
-
-  # def check_uniq
-  #   fix_urls
-  #   if Site.unscoped.where(url: url).where.not(id: id).count > 0
-  #     errors.add(:url, '已经提交过了。')
-  #   end
-  # end
 
   def favicon_url
     return '' if url.blank?

@@ -130,7 +130,9 @@ Theme from [Mediom](https://github.com/huacnlee/mediom)
 * [Ruby China](https://ruby-china.org)
 * [36kr](http://36kr.com/)
 * [Testhome](http://testerhome.com/)
+* [Coding Style](https://codingstyle.cn)
 * [DiyCode](http://www.diycode.cc/)
+* [Japan Trip](http://www.japantrip.cn/)
 
 ## License
 

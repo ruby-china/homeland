@@ -40,5 +40,11 @@ describe Site, type: :model do
     site = build(:site, url: 'http://google.com')
     site.valid?
     expect(site.errors[:url].size).to eq(1)
+
+    site = create(:site, url: 'test-valid.com')
+    site.name = "Test Valid"
+    site.save
+    expect(site.errors[:url].size).to eq(0)
+    expect(site.name).to eq 'Test Valid'
   end
 end

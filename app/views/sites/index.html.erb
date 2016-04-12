@@ -15,7 +15,7 @@
       <div class="panel-body">
         <% node.sites.each do |item| %>
         <div class="col-md-2 site">
-          <%= image_tag(item.favicon_url, class: "favicon")%>
+          <%= image_tag(item.favicon_url, class: "favicon", style: "width: 16px; height: 16px;")%>
           <%= link_to item.name, item.url, target: "_blank", rel: "nofollow", title: item.desc %>
         </div>
         <% end %>

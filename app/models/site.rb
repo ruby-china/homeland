@@ -26,6 +26,6 @@ class Site < ApplicationRecord
   def favicon_url
     return '' if url.blank?
     domain = url.gsub('http://', '')
-    "http://www.google.com/profiles/c/favicons?domain=#{domain}"
+    "//icons.duckduckgo.com/ip2/#{domain}.ico"
   end
 end

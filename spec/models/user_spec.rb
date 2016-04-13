@@ -526,4 +526,24 @@ describe User, type: :model do
     it { expect(User.new(email: 'foobar@gmail.com').email_locked?).to eq true }
     it { expect(User.new(email: 'foobar@example.com').email_locked?).to eq false }
   end
+
+  describe '.calendar_data' do
+    let!(:user) { create(:user) }
+
+    it 'should work' do
+      d1 = 1.days.ago
+      d2 = 3.days.ago
+      d3 = 10.days.ago
+      create(:reply, user: user, created_at: d1)
+      create_list(:reply, 2, user: user, created_at: d2)
+      create_list(:reply, 6, user: user, created_at: d3)
+
+      data = user.calendar_data
+      expect(data.keys.count).to eq 3
+      expect(data.keys).to include(d1.to_date.to_time.to_i.to_s, d2.to_date.to_time.to_i.to_s, d3.to_date.to_time.to_i.to_s)
+      expect(data[d1.to_date.to_time.to_i.to_s]).to eq 1
+      expect(data[d2.to_date.to_time.to_i.to_s]).to eq 2
+      expect(data[d3.to_date.to_time.to_i.to_s]).to eq 6
+    end
+  end
 end

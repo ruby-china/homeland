@@ -506,4 +506,20 @@ class User < ApplicationRecord
   def email_locked?
     self.email.index('@example.com') == nil
   end
+
+  def calendar_data
+    user = self
+    Rails.cache.fetch(["user", self.id, 'calendar_data', Date.today, 'by-months']) do
+      date_from = 12.months.ago.beginning_of_month.to_date
+      dates = (date_from..Date.today).to_a
+      replies = user.replies.where('created_at > ?', date_from)
+                             .group('date(created_at)')
+                             .select('date(created_at) as date, count(id) as total_amount').all
+      timestamps = {}
+      replies.map do |reply|
+        timestamps[reply['date'].to_time.to_i.to_s] = reply['total_amount']
+      end
+      timestamps
+    end
+  end
 end

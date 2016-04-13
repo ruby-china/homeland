@@ -196,3 +196,9 @@ table.node-topics {
     .desc { font-size:12px; color:#888; }
   }
 }
+
+.user-activity-graph {
+  overflow-x: scroll;
+  text-align: center;
+  svg { margin: 0 auto; }
+}

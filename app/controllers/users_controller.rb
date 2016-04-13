@@ -2,7 +2,7 @@ require 'will_paginate/array'
 class UsersController < ApplicationController
   before_action :require_user, only: [:block, :unblock, :auth_unbind, :follow, :unfollow]
   before_action :find_user, only: [:show, :topics, :replies, :favorites, :notes,
-                                   :block, :unblock, :blocked,
+                                   :block, :unblock, :blocked, :calendar,
                                    :follow, :unfollow, :followers, :following]
 
   def index
@@ -108,6 +108,10 @@ class UsersController < ApplicationController
     @users = @user.following.fields_for_list.paginate(page: params[:page], per_page: 60)
     set_seo_meta("#{@user.login} 正在关注")
     render 'followers'
+  end
+
+  def calendar
+    render json: @user.calendar_data
   end
 
   protected

@@ -149,6 +149,7 @@ Rails.application.routes.draw do
       post :unfollow
       get :followers
       get :following
+      get :calendar
     end
   end
 

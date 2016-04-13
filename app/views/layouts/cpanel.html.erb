@@ -10,7 +10,7 @@
 </head>
 <body>
  <div class="header">
-    <nav class="navbar navbar-inverse navbar-static-top navbar-default">
+    <nav class="navbar navbar-inverse navbar-fixed-top navbar-default">
       <div class="container">
         <div class="navbar-header">
           <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
@@ -36,7 +36,7 @@
             li << link_to(t("cpanel.menu.locations"),cpanel_locations_path )
             li << link_to(t("cpanel.menu.exception_logs"),cpanel_exception_logs_path )
           end  %>
-          
+
           <%= render "common/user_nav" %>
         </div>
       </div>

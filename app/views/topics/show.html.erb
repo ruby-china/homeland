@@ -23,7 +23,7 @@
 
         <article>
           <% if @topic.video %>
-            <% @topic.split(',').each do |video_id| %>
+            <% @topic.video.split(',').each do |video_id| %>
               <embed height="415" width="100%" quality="high" allowfullscreen="true" type="application/x-shockwave-flash" src="https://static-s.bilibili.com/miniloader.swf" flashvars="aid=<%= video_id %>&page=1" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash">
             <% end %>
           <% end %>

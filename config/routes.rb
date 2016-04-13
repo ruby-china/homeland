@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   # Serve websocket cable requests in-process
-  mount RuCaptcha::Engine => "/rucaptcha"
+  mount ActionCable.server => '/cable'
 
   use_doorkeeper do
     controllers applications: 'oauth/applications', authorized_applications: 'oauth/authorized_applications'
@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   delete 'account/auth/:provider/unbind' => 'users#auth_unbind', as: 'unbind_account'
   post 'account/update_private_token' => 'users#update_private_token', as: 'update_private_token_account'
 
+  mount RuCaptcha::Engine => "/rucaptcha"
   mount Notifications::Engine => '/notifications'
   mount StatusPage::Engine, at: '/'
 

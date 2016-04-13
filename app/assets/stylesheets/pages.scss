@@ -7,6 +7,10 @@
   }
 }
 #page-show {
+  .panel-heading {
+    padding: 15px;
+    h1 { font-size: 20px; color: #111; margin: 0; margin-bottom: 6px;}
+  }
   .info {
     text-align:right;
     padding:10px;

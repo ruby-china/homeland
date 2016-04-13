@@ -1,5 +1,4 @@
 /*
- *= require bootstrap.min
  *= require bootstrap-select.min
  *= require font-awesome.min
  *= require roboto
@@ -10,6 +9,7 @@
  *= require_self
  */
 
+@import "bootstrap.min";
 @import "vars";
 
 @mixin clearfix() {
@@ -29,16 +29,18 @@
 
 /* Bootstrap Theme */
 body {
-  background: #f0f0f0;
+  background: #e9eaed;
   color: $black;
   font-family: "RobotoDraft", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding-top: 65px;
 }
 
 .header {
   .navbar {
     background-color: #FFF;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
-    border:0px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0,.11);
+    margin-bottom: 15px;
+    border: 0px;
     color: $blueText;
   }
 
@@ -68,11 +70,19 @@ body {
   .navbar-inverse .navbar-nav .open .dropdown-menu>li>a:hover { background-color: rgba(255,255,255,0.05); }
   .navbar-inverse .navbar-nav .open .dropdown-menu .divider { background-color: #F0F0F0; }
   .navbar-nav {
-    margin: 0px;
-    a { color: #333; }
     li.active a,
     li.active a:focus,
-    li.active a:hover { border-bottom:3px solid $red; color: $red; background: transparent; padding-bottom: 12px;}
+    li.active a:hover { color: $red; background: transparent; }
+  }
+  #main-nav-menu {
+    .navbar-nav {
+      margin: 0px;
+      a { color: #333; transition: all .2s ease-in-out; }
+      li a:hover,
+      li.active a,
+      li.active a:focus,
+      li.active a:hover { border-bottom:3px solid $red; color: $red; background: transparent; padding-bottom: 12px;}
+    }
   }
 
   .user-bar {
@@ -161,7 +171,7 @@ body {
   }
 }
 
-.sidebar { padding-left: 5px; }
+.sidebar { padding-left: 0px; }
 
 .dropdown-menu { border-color: #FFF; border-radius: 2px;   border-top-left-radius: 0;
   border-top-right-radius: 0; box-shadow: 0px 1px 2px rgba(0,0,0,0.15); }
@@ -296,6 +306,7 @@ form {
 
 .alert {
   padding:5px 10px 3px;
+  margin-bottom: 15px;
   border:0px; border-bottom:1px solid rgba(0, 0, 0, 0.07);
   border-radius: 0px; font-size: 13px;
   transform: scale(1,1);
@@ -370,11 +381,14 @@ kbd {
 .panel {
   border: 0px;
   border-radius: 3px;
-  border: 0px;
-  box-shadow: 0 0px 3px 2px rgba(0, 0, 0, 0.03);
+  border: 1px;
+  border-color: #e5e6e9 #dfe0e4 #d0d1d5;
+  margin-bottom: 15px;
+/*  box-shadow: 0 0px 3px 2px rgba(0, 0, 0, 0.03); */
 
   .panel-heading {
-    background: #f9f9f9;
+    background: #fafafa;
+    padding: 6px 15px;
     border-bottom-color: #eee;
     color: #777;
   }
@@ -433,7 +447,7 @@ html.turbolinks-progress-bar::before {
 }
 .avatar {
   .uface,
-  .media-object { border-radius: 3px; }
+  .media-object { border-radius: 120px; }
 }
 .avatar-16 { width: 16px; height: 16px; border-radius: 1px; }
 .avatar-48 { width: 48px; height: 48px; border-radius: 2px; }
@@ -586,9 +600,10 @@ img.emoji { width:20px; height:20px; }
 }
 
 .topic-detail {
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   .panel-heading {
     padding: 15px;
+    transition: all .3s;
     h1 { margin-top:0; font-size:24px; color:#333;text-align: left; line-height:100%; margin-bottom:8px; }
     .avatar { text-align:right; }
   }
@@ -637,7 +652,6 @@ img.emoji { width:20px; height:20px; }
   position: fixed;
   width: 260px;
 
-
   @media (min-width: 992px) {
     width: 240px;
   }
@@ -645,8 +659,6 @@ img.emoji { width:20px; height:20px; }
   @media (min-width: 1100px) {
     width: 260px;
   }
-
-
 
   .group {
     text-align: center; margin-bottom: 20px;
@@ -672,7 +684,7 @@ img.emoji { width:20px; height:20px; }
 }
 
 #replies {
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   .panel-body {
     padding-top: 0px;
     padding-bottom: 0px;

@@ -23,7 +23,9 @@
 
         <article>
           <% if @topic.video %>
-            <embed height="415" width="100%" quality="high" allowfullscreen="true" type="application/x-shockwave-flash" src="https://static-s.bilibili.com/miniloader.swf" flashvars="aid=<%= @topic.video %>&page=1" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash">
+            <% @topic.split(',').each do |video_id| %>
+              <embed height="415" width="100%" quality="high" allowfullscreen="true" type="application/x-shockwave-flash" src="https://static-s.bilibili.com/miniloader.swf" flashvars="aid=<%= video_id %>&page=1" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash">
+            <% end %>
           <% end %>
           <%= raw @topic.body_html %>
         </article>

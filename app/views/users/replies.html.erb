@@ -4,9 +4,7 @@
     <div class="col-md-8">
         <%= render "menu" %>
         <div class="panel panel-default">
-            <div class="panel-body">
-                <%= render "replies", replies: @replies %>
-            </div>
+            <%= render "replies", replies: @replies %>
             <div class="panel-footer clearfix">
                 <%= will_paginate @replies %>
             </div>

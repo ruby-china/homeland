@@ -55,7 +55,7 @@
         data: '<%= calendar_user_path(@user, format: 'json') %>',
         start: new Date(<%= start_date.year %>, <%= start_date.month %>, <%= start_date.day %>),
         legendHorizontalPosition: 'right',
-        legendColors: ["#E2FBAE", "#298401"],
+        legendColors: ["#E2FBAE", "#01840E"],
         // subDomainTextFormat: "%d",
         domainLabelFormat: "%b",
         legend: [1, 5, 10, 15],
@@ -69,14 +69,3 @@
     </script>
   </div>
 </div>
-
-<% cache([@user, "bio-markdown"]) do %>
-  <% if !@user.bio.blank? %>
-    <div class="panel panel-default bio">
-      <div class="panel-heading">个人介绍</div>
-      <div class="panel-body markdown">
-        <%= markdown(@user.bio) %>
-      </div>
-    </div>
-  <% end %>
-<% end %>

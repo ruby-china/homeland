@@ -85,18 +85,18 @@ Remove comment to apply this style to date with value equal to 0
 
 .cal-heatmap-container rect.highlight
 {
-  stroke:#444;
-  stroke-width:1
+  stroke: #aaa;
+  stroke-width: 1;
 }
 
 .cal-heatmap-container text.highlight
 {
-  fill: #444
+  fill: #aaa;
 }
 
 .cal-heatmap-container rect.now
 {
-  stroke: red
+  stroke: #D3DACF
 }
 
 .cal-heatmap-container text.now

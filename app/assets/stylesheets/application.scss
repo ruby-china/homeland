@@ -93,10 +93,11 @@ body {
   @media (max-width: 767px) {
     .navbar-header {
       text-align: center;
-      padding: 2px 0;
+      padding: 0;
+      margin-bottom: -41px;
       .navbar-brand {
         font-size: 12px; float: none; margin: 0 auto;
-        height: auto; padding: 0px 10px;
+        line-height: 46px;
       }
     }
     .navbar-nav { float: left; margin: 0px; }

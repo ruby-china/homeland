@@ -398,8 +398,9 @@ kbd {
     color: #777;
   }
   .panel-footer {
+    padding: 6px 15px;
     border-top-color: #eee;
-    background: #f9f9f9;
+    background: #fafafa;
   }
 }
 
@@ -419,6 +420,12 @@ kbd {
   color: $red;
   background-color: #FFF;
   border-color: $redLight;
+}
+
+.list-group {
+  .list-group-item {
+    border-color: #eee;
+  }
 }
 
 .fa-spin {

@@ -17,13 +17,10 @@ This is the source code of [Ruby China](http://ruby-china.org) website.
 
 ### Vagrant
 
-Install VirtualBox:
+Install VirtualBox + Vagrant:
 
-https://www.virtualbox.org/
-
-Install Vagrant:
-
-https://www.vagrantup.com/
+- https://www.virtualbox.org/
+- https://www.vagrantup.com/
 
 Then:
 
@@ -40,7 +37,6 @@ Open http://localhost:3000 in host.
 ### Mac OS X, use Homebrew
 
 ```bash
-$ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 $ brew install memcached
 $ brew install redis
 $ brew install postgresql
@@ -55,18 +51,10 @@ $ brew install elasticsearch
 $ sudo apt-get install memcached postgresql-9.4 redis-server imagemagick ghostscript
 ```
 
-More details about install PostgreSQL
-
-http://www.postgresql.org/download/linux/ubuntu/
-
 Install Elasticsearch
 
 ```bash
-wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
-echo "deb http://packages.elastic.co/elasticsearch/2.x/debian stable main" | sudo tee -a /etc/apt/sources.list.d/elasticsearch-2.x.list
-sudo apt-get update && sudo apt-get install elasticsearch openjdk-7-jre-headless
-sudo update-alternatives --config java
-# 选择 java-7
+curl -sSL https://git.io/vVHhm | bash
 ```
 
 ```bash

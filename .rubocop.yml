@@ -1,5 +1,6 @@
 AllCops:
-  RunRailsCops: true
+  Rails:
+    Enabled: true
   Exclude:
     - 'lib/templates/**/*'
     - 'lib/ftp_sync.rb'
@@ -47,7 +48,4 @@ Rails/FindBy:
   Enabled: false
 
 Rails/HasAndBelongsToMany:
-  Enabled: false
-
-Rails/DefaultScope:
   Enabled: false

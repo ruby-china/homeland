@@ -151,8 +151,6 @@ GEM
       devise (>= 2.1.0)
     diff-lcs (1.2.5)
     docile (1.1.5)
-    domain_name (0.5.20160216)
-      unf (>= 0.0.5, < 1.0.0)
     doorkeeper (4.0.0.rc2)
       railties (>= 4.2)
     doorkeeper-i18n (3.0.0)
@@ -204,8 +202,6 @@ GEM
     heapy (0.1.2)
     highline (1.7.8)
     hiredis (0.6.1)
-    http-cookie (1.0.2)
-      domain_name (~> 0.5)
     http_accept_language (2.0.5)
     i18n (0.7.0)
     ice_nine (0.11.1)
@@ -257,7 +253,6 @@ GEM
     net-ssh (3.0.2)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
-    netrc (0.11.0)
     nio4r (1.2.1)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
@@ -355,10 +350,6 @@ GEM
       redis (>= 3.0.2)
     responders (2.1.1)
       railties (>= 4.2.0, < 5.1)
-    rest-client (1.8.0)
-      http-cookie (>= 1.0.2, < 2.0)
-      mime-types (>= 1.16, < 3.0)
-      netrc (~> 0.7)
     rouge (1.8.0)
     rspec-core (3.5.0.beta1)
       rspec-support (= 3.5.0.beta1)
@@ -432,12 +423,6 @@ GEM
     uglifier (2.7.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    unf (0.1.4)
-      unf_ext
-    unf_ext (0.0.7.2)
-    upyun (1.0.9)
-      activesupport (>= 3.2.8)
-      rest-client (>= 1.6.7)
     url (0.3.2)
     virtus (1.0.5)
       axiom-types (~> 0.1)
@@ -535,7 +520,6 @@ DEPENDENCIES
   status-page
   turbolinks!
   uglifier
-  upyun
   will_paginate
 
 BUNDLED WITH

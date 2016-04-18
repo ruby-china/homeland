@@ -124,9 +124,6 @@ gem 'exception_notification'
 
 gem 'status-page'
 
-# UpYun SDK 用于发布的时候上传 Assets 到 CDN
-gem 'upyun', require: false
-
 group :development do
   gem 'capistrano', '2.9.0', require: false
   gem 'rvm-capistrano', require: false

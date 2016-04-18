@@ -7,6 +7,7 @@ defaults: &defaults
     - "admin@admin.com"
   google_analytics_key: ""
   upload_url: "http://ruby-china-files-dev.b0.upaiyun.com"
+  assets_url: "//ruby-china-assets.b0.upaiyun.com"
   upyun_username: "test"
   upyun_password: "123123"
   upyun_bucket: "ruby-china-files-dev"

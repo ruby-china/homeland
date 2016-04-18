@@ -44,7 +44,6 @@ end
 
 task :compile_assets, roles: :web do
   run "cd #{current_path}; RAILS_ENV=production bundle exec rake assets:precompile"
-  run "cd #{current_path}; RAILS_ENV=production bundle exec rake assets:cdn"
 end
 
 task :migrate_db, roles: :web do

@@ -135,7 +135,7 @@ group :development do
 end
 
 group :development, :test do
-  gem 'rubocop'
+  gem 'rubocop', '~> 0.39.0', require: false
   gem 'rspec-rails', '3.5.0.beta1'
   gem 'factory_girl_rails', '~> 4.5.0'
   gem 'database_cleaner'

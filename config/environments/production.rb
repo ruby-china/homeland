@@ -31,7 +31,7 @@ Rails.application.configure do
 
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  if Setting.assets_url.present?
+  if Setting.asset_host.present?
     config.action_controller.asset_host = Setting.asset_host
   end
 

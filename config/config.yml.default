@@ -16,7 +16,6 @@ defaults: &defaults
   email_password: 'test123456'
   github_token: "91726ee4170d8e2679ec"
   github_secret: "13c7e55e8e53c57a399181e96ea3a55a3fdd9c7c"
-  google_custom_search_id: "016658237367474087615:WMX464284035"
   twitter_id: "ruby_china"
 
 development:

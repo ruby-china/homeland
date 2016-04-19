@@ -17,7 +17,7 @@ class AccountController < Devise::RegistrationsController
     build_resource(sign_up_params)
     resource.login = params[resource_name][:login]
     resource.email = params[resource_name][:email]
-    if verify_rucaptcha?(resource) && resource.save
+    if resource.save
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_navigational_format?
         sign_in(resource_name, resource)

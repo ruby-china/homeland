@@ -31,25 +31,6 @@
   <%= javascript_include_tag_with_cached "app" %>
   <%= csrf_meta_tag %>
   <%= raw SiteConfig.custom_head_html %>
-  <script type='text/javascript'>
-    var _vds = _vds || [];
-    window._vds = _vds;
-    (function(){
-      _vds.push(['setAccountId', '96740c419d6751f3']);
-    <% if current_user %>
-      _vds.push(['setCS1', 'user_id', '<%= current_user.id %>']);
-      _vds.push(['setCS3', 'user_name', '<%= current_user.fullname %>']);
-    <% end %>
-      (function() {
-        var vds = document.createElement('script');
-        vds.type='text/javascript';
-        vds.async = true;
-        vds.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'dn-growing.qbox.me/vds.js';
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(vds, s);
-      })();
-    })();
-  </script>
 </head>
 <body data-controller-name="<%= controller_name %>">
   <div class="header">

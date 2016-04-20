@@ -1,4 +1,4 @@
-class OldSiteConfig < ApplicationRecord
+class OldSetting < ApplicationRecord
   self.table_name = 'site_configs'
 end
 

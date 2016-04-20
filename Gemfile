@@ -78,9 +78,6 @@ gem 'rouge', '~> 1.8.0'
 gem 'auto-space'
 gem 'nokogiri'
 
-# YAML 配置信息
-gem 'settingslogic'
-
 # 队列
 gem 'sidekiq'
 # Sidekiq Web

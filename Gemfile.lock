@@ -239,7 +239,9 @@ GEM
       redcarpet (>= 2.0)
     memory_profiler (0.9.6)
     method_source (0.8.2)
-    mime-types (2.99.1)
+    mime-types (3.0)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2016.0221)
     mini_magick (4.3.6)
     mini_portile2 (2.0.0)
     minitest (5.8.4)
@@ -330,7 +332,7 @@ GEM
     rails-i18n (5.0.0.beta2)
       i18n (~> 0.7)
       railties (~> 5.0.0.beta1)
-    rails-settings-cached (0.5.3)
+    rails-settings-cached (0.6.0)
       rails (>= 4.2.0)
     rails_autolink (1.1.6)
       rails (> 3.1)
@@ -391,7 +393,6 @@ GEM
     second_level_cache (2.2.2)
       activerecord (>= 5.0.0.beta1, < 5.1.0)
       activesupport (>= 5.0.0.beta1, < 5.1.0)
-    settingslogic (2.0.9)
     sidekiq (4.0.2)
       concurrent-ruby (~> 1.0)
       connection_pool (~> 2.2, >= 2.2.0)
@@ -513,7 +514,6 @@ DEPENDENCIES
   rvm-capistrano
   sass-rails
   second_level_cache (= 2.2.2)
-  settingslogic
   sidekiq
   simple_form
   sinatra!

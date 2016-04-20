@@ -15,7 +15,7 @@ describe 'API V3', 'topics', type: :request do
 
       node = create(:node, name: 'No Point')
       create(:topic, title: 'This is a No Point topic', node: node)
-      SiteConfig.node_ids_hide_in_topics_index = node.id.to_s
+      Setting.node_ids_hide_in_topics_index = node.id.to_s
 
       get '/api/v3/topics.json'
       expect(response.status).to eq(200)

@@ -109,8 +109,8 @@ class ApplicationController < ActionController::Base
     # 加入页面上直接调用的信息用于组合 etag
     opts[:etag] << current_user
     # Config 的某些信息
-    opts[:etag] << SiteConfig.custom_head_html
-    opts[:etag] << SiteConfig.footer_html
+    opts[:etag] << Setting.custom_head_html
+    opts[:etag] << Setting.footer_html
     # 加入通知数量
     opts[:etag] << unread_notify_count
     # 加入flash，确保当页面刷新后flash不会再出现

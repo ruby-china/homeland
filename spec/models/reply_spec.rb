@@ -128,18 +128,18 @@ describe Reply, type: :model do
   describe 'ban words for Reply body' do
     let(:topic) { create(:topic) }
     it 'should work' do
-      allow(SiteConfig).to receive(:ban_words_on_reply).and_return("mark\n顶")
+      allow(Setting).to receive(:ban_words_on_reply).and_return("mark\n顶")
       expect(topic.replies.create(body: '顶', user: user).errors[:body].size).to eq(1)
       expect(topic.replies.create(body: 'mark', user: user).errors[:body].size).to eq(1)
       expect(topic.replies.create(body: ' mark ', user: user).errors[:body].size).to eq(1)
       expect(topic.replies.create(body: 'MARK', user: user).errors[:body].size).to eq(1)
       expect(topic.replies.create(body: 'mark1', user: user).errors[:body].size).to eq(0)
-      allow(SiteConfig).to receive(:ban_words_on_reply).and_return("mark\r\n顶")
+      allow(Setting).to receive(:ban_words_on_reply).and_return("mark\r\n顶")
       expect(topic.replies.create(body: 'mark', user: user).errors[:body].size).to eq(1)
     end
 
     it 'should work when site_config value is nil' do
-      allow(SiteConfig).to receive(:ban_words_on_reply).and_return(nil)
+      allow(Setting).to receive(:ban_words_on_reply).and_return(nil)
       t = topic.replies.create(body: 'mark', user: user)
       expect(t.errors[:body].size).to eq(0)
     end

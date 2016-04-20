@@ -1,5 +1,5 @@
 <% if can? :create, Topic %>
-  <% cache(["sidebar_new_topic_box",SiteConfig.new_topic_dropdown_node_ids]) do %>
+  <% cache(["sidebar_new_topic_box",Setting.new_topic_dropdown_node_ids]) do %>
     <div class="panel panel-default clearfix">
       <div class="panel-body">
         <div class="btn-group btn-block pull-left">
@@ -24,14 +24,14 @@
 <div class="panel panel-default">
   <div class="panel-heading">新手必读</div>
   <div class="panel-body">
-    <%= raw SiteConfig.newbie_notices %>
+    <%= raw Setting.newbie_notices %>
   </div>
 </div>
 <% end %>
 
 <%= render "topics/sidebar_box_tips" %>
 
-<%= raw SiteConfig.topic_index_sidebar_html %>
+<%= raw Setting.topic_index_sidebar_html %>
 
 <% cache(["sidebar_statistics",Time.now.strftime("%Y-%m-%d %H")]) do %>
 <div class="panel panel-default">

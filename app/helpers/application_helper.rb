@@ -130,7 +130,7 @@ module ApplicationHelper
   end
 
   def random_tips
-    tips = SiteConfig.tips
+    tips = Setting.tips
     return EMPTY_STRING if tips.blank?
     tips.split("\n").sample
   end

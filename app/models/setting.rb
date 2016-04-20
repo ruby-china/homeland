@@ -1,7 +1,6 @@
-class Setting < Settingslogic
-  source "#{Rails.root}/config/config.yml"
-  namespace Rails.env
-  load! if Rails.env.development?
+# RailsSettings Model
+class Setting < RailsSettings::Base
+  source Rails.root.join('config/config.yml')
 
   class << self
     def protocol

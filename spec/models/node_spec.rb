@@ -47,7 +47,7 @@ describe Node, type: :model do
     let(:nodes) { create_list(:node, 10) }
 
     before do
-      SiteConfig.new_topic_dropdown_node_ids = nodes.collect(&:id).join(',')
+      Setting.new_topic_dropdown_node_ids = nodes.collect(&:id).join(',')
     end
 
     it 'should be 5 for length' do

@@ -1,4 +1,4 @@
-class OldSiteConfig < ApplicationRecord
+class OldSetting < ApplicationRecord
   self.table_name = 'site_configs'
 end
 
@@ -14,9 +14,9 @@ class CreateSettings < ActiveRecord::Migration
 
     add_index :settings, %i(thing_type thing_id var), unique: true
 
-    SiteConfig.transaction do
-      OldSiteConfig.all.each do |item|
-        SiteConfig.create!(var: item.key, value: item.value)
+    Setting.transaction do
+      OldSetting.all.each do |item|
+        Setting.create!(var: item.key, value: item.value)
       end
     end
 

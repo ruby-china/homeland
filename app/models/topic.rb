@@ -85,7 +85,7 @@ class Topic < ApplicationRecord
   end
 
   def self.topic_index_hide_node_ids
-    SiteConfig.node_ids_hide_in_topics_index.to_s.split(',').collect(&:to_i)
+    Setting.node_ids_hide_in_topics_index.to_s.split(',').collect(&:to_i)
   end
 
   before_save :store_cache_fields

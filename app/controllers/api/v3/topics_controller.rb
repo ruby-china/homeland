@@ -52,6 +52,7 @@ module Api
         render json: @topic, serializer: TopicDetailSerializer, meta: meta
       end
 
+      # 创建话题
       def create
         requires! :title
         requires! :body
@@ -67,6 +68,7 @@ module Api
         render json: @topic, serializer: TopicDetailSerializer, status: 201
       end
 
+      # 更新话题
       def update
         requires! :title
         requires! :body
@@ -96,6 +98,7 @@ module Api
         render json: { ok: 1 }
       end
 
+      # 获取帖子的回帖
       def replies
         if request.post?
           create_replies
@@ -118,6 +121,7 @@ module Api
         render json: @replies, meta: { user_liked_reply_ids: @user_liked_reply_ids }
       end
 
+      # 创建回帖
       def create_replies
         doorkeeper_authorize!
 
@@ -151,6 +155,7 @@ module Api
         render json: { ok: 1 }, status: 201
       end
 
+      # 屏蔽话题，移到 NoPoint 节点 (Admin only)
       def ban
         raise AccessDenied.new('当前用户没有屏蔽别人话题的权限，具体请参考官网的说明。') unless can?(:ban, @topic)
         @topic.ban!

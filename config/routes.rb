@@ -138,6 +138,18 @@ Rails.application.routes.draw do
           delete :all
         end
       end
+      resources :topics do
+        member do
+          post :update
+          get :replies
+          post :replies
+          post :follow
+          post :unfollow
+          post :favorite
+          post :unfavorite
+          post :ban
+        end
+      end
       resources :replies do
         member do
           post :update

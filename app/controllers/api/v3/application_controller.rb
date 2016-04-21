@@ -20,7 +20,7 @@ module Api
         render json: { error: 'RecordInvalid', message: err }, status: 400
       end
       rescue_from(AccessDenied) do |err|
-        render json: { error: 'AccessDenied' }, status: 403
+        render json: { error: 'AccessDenied', message: err }, status: 403
       end
       rescue_from(ActiveRecord::RecordNotFound) do |err|
         render json: { error: 'ResourceNotFound' }, status: 404
@@ -66,6 +66,11 @@ module Api
 
       def can?(*args)
         current_ability.can?(*args)
+      end
+
+      def admin?
+        return false if current_user.blank?
+        current_user.admin?
       end
     end
   end

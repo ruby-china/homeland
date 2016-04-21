@@ -17,6 +17,8 @@ gem 'turbolinks', git: 'https://github.com/turbolinks/turbolinks-classic.git'
 gem 'jquery-turbolinks'
 gem 'dropzonejs-rails'
 
+ gem 'rails_param'
+
 gem 'rack-attack'
 
 gem 'rails-i18n'

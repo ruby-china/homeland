@@ -336,6 +336,7 @@ GEM
       rails (>= 4.2.0)
     rails_autolink (1.1.6)
       rails (> 3.1)
+    rails_param (0.9.0)
     railties (5.0.0.beta3)
       actionpack (= 5.0.0.beta3)
       activesupport (= 5.0.0.beta3)
@@ -502,6 +503,7 @@ DEPENDENCIES
   rails-i18n
   rails-settings-cached
   rails_autolink
+  rails_param
   redcarpet (~> 3.3.4)
   redis
   redis-namespace

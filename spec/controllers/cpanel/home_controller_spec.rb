@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Cpanel::HomeController, type: :controller do
+describe Admin::HomeController, type: :controller do
   let(:user) { create :user }
   let(:admin) { create :admin }
   describe 'Admin requirement' do

@@ -1,0 +1,50 @@
+<% content_for :sitemap do %>
+  <span class="current"><%= t("admin.menu.topics")%></span>
+<% end %>
+
+<table class="table table-bordered table-striped table-condensed">
+  <tr class="head">
+    <td class="first">#</td>
+    <td style="width:300px">标题</td>
+    <td>节点</td>
+    <td>发帖人</td>
+    <td>回帖</td>
+    <td>时间</td>
+    <td style="width:100px"></td>
+  </tr>
+
+<% @topics.each do |topic| %>
+  <tr class="<%= 'deleted' if !topic.deleted_at.blank? %>">
+    <td class="first"><%= topic.id %></td>
+    <td>
+      <%= link_to truncate(topic.title, length: 30), topic, target: "_blank" %>
+    </td>
+    <td><%= topic.node_name %></td>
+    <td><%= user_name_tag(topic.user) %></td>
+    <td><%= topic.replies_count %></td>
+    <td>
+      <% if topic.deleted_at.blank? %>
+        <%= l topic.created_at, format: :short %>
+      <% else %>
+        <%= link_to topic.who_deleted, user_path(topic.who_deleted) if not topic.who_deleted.blank? %> 删除于 <br />
+        <%= l topic.deleted_at, format: :short %>
+      <% end %>
+    </td>
+    <td>
+      <% if !topic.suggested_at.blank? %>
+        <%= link_to t("common.un_top"), unsuggest_admin_topic_path(topic), 'data-confirm' => 'Are you sure?', method: :post %>
+      <% else %>
+        <%= link_to t("common.place_top"), suggest_admin_topic_path(topic), 'data-confirm' => 'Are you sure?', method: :post %>
+      <% end %>
+      <%= link_to "", edit_admin_topic_path(topic), class: "fa fa-pencil" %>
+      <% if topic.deleted_at.blank? %>
+        <%= link_to "", admin_topic_path(topic), 'data-confirm' => 'Are you sure?', method: :delete, class: "fa fa-trash" %>
+      <% else %>
+        <%= link_to "", undestroy_admin_topic_path(topic), title: t("common.undelete"), 'data-confirm' => 'Are you sure?', method: :post, class: "fa fa-undo" %>
+      <% end %>
+    </td>
+
+  </tr>
+<% end %>
+</table>
+<%= will_paginate @topics %>

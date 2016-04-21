@@ -11,7 +11,7 @@
             <%= @user.fullname %>
             <span class="opts pull-right">
               <% if admin? %>
-                <%= link_to icon_tag("pencil", label: "修改"), edit_cpanel_user_path(@user.id) %>
+                <%= link_to icon_tag("pencil", label: "修改"), edit_admin_user_path(@user.id) %>
               <% end %>
             </span>
           </div>

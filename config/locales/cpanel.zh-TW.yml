@@ -1,5 +1,5 @@
 "zh-TW":
-  cpanel:
+  admin:
     menu:
       root_path: "概況"
       site_configs: "設置"

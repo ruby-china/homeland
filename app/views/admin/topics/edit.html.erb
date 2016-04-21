@@ -1,0 +1,8 @@
+<% content_for :sitemap do %>
+  <a href="<%= admin_topics_path %>"><%= t("admin.menu.topics")%></a> &gt; <span class="current"><%= t("common.edit")%></span>
+<% end %>
+<h1>Editing topic</h1>
+
+<%= render 'form' %>
+
+

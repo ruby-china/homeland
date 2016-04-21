@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RubyChina - Control Panel</title>
+  <link rel="shortcut icon" href="<%= asset_path("big_logo.png") %>" />
+  <%= stylesheet_link_tag "admin" %>
+  <%= javascript_include_tag "app" %>
+  <%= csrf_meta_tag %>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+</head>
+<body>
+ <div class="header">
+    <nav class="navbar navbar-inverse navbar-fixed-top navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <i class="fa fa-reorder"></i>
+          </button>
+          <%= link_to("控制台", admin_root_path, class: "navbar-brand") %>
+        </div>
+        <nav class="navbar-collapse bs-navbar-collapse collapse">
+          <%= render_list class: "nav navbar-nav" do |li|
+            li << link_to(t("admin.menu.root_path"), admin_root_path)
+            li << link_to(t("admin.menu.site_configs"), admin_site_configs_path )
+            li << link_to(t("admin.menu.users"),admin_users_path)
+            li << link_to(t("admin.menu.sections"), admin_sections_path )
+            li << link_to(t("admin.menu.nodes"), admin_nodes_path )
+            li << link_to(t("admin.menu.wiki"),admin_pages_path )
+            li << link_to(t("admin.menu.topics"), admin_topics_path)
+            li << link_to(t("admin.menu.replies"), admin_replies_path)
+            li << link_to(t("admin.menu.comments"),admin_comments_path )
+            li << link_to(t("admin.menu.photos"),admin_photos_path )
+            li << link_to(t("admin.menu.site_nodes"),admin_site_nodes_path )
+            li << link_to(t("admin.menu.sites"),admin_sites_path )
+            li << link_to(t("admin.menu.locations"),admin_locations_path )
+            li << link_to(t("admin.menu.exception_logs"),admin_exception_logs_path )
+          end  %>
+
+          <%= render "common/user_nav" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="main-container container">
+    <div class="breadcrumb">
+      <a href="<%= admin_root_path %>">Root</a> &gt;
+      <%= yield :sitemap %>
+    </div>
+    <div id="main" class="panel panel-default">
+      <div class="panel-body">
+        <%= notice_message %>
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <p class="suggest">使用 <a href="http://www.mozillaonline.com/" target="_blank" rel="nofollow">Firefox</a> 或 <a href="http://www.google.com/chrome" target="_blank" rel="nofollow">Chrome</a> 浏览访问本站将会获得更佳的视觉体验.</p>
+    </div>
+  </footer>
+</body>
+</html>

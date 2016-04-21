@@ -1,5 +1,5 @@
 "en":
-  cpanel:
+  admin:
     menu:
       root_path: "Dashboard"
       site_configs: "Settings"

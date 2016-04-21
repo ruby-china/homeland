@@ -1,0 +1,7 @@
+<% content_for :sitemap do %>
+  <a href="<%= admin_sections_path %>">><%= t("admin.sections") %></a> &gt; <span class="current"><%= t("common.create") %></span>
+<% end %>
+<h1>New section</h1>
+
+<%= render 'form' %>
+

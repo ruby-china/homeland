@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Cpanel::CommentsController, type: :controller do
+describe Admin::CommentsController, type: :controller do
   let(:user) {create :user}
   let(:comment) { create :comment, user: user }
 
@@ -35,7 +35,7 @@ describe Cpanel::CommentsController, type: :controller do
 
       it 'redirects to the comment' do
         put :update, params: { id: comment.id, comment: { 'body' => 'body' } }
-        expect(response).to redirect_to(cpanel_comments_url)
+        expect(response).to redirect_to(admin_comments_url)
       end
     end
   end
@@ -51,7 +51,7 @@ describe Cpanel::CommentsController, type: :controller do
     it 'redirects to the comments list' do
       comment
       delete :destroy, params: { id: comment.id }
-      expect(response).to redirect_to(cpanel_comments_url)
+      expect(response).to redirect_to(admin_comments_url)
     end
   end
 end

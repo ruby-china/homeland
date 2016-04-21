@@ -1,5 +1,5 @@
 "zh-CN":
-  cpanel:
+  admin:
     menu:
       root_path: "概况"
       site_configs: "设置"

@@ -134,6 +134,11 @@ Rails.application.routes.draw do
           delete :all
         end
       end
+      resources :replies do
+        member do
+          post :update
+        end
+      end
     end
   end
 

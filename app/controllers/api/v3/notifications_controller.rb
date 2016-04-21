@@ -11,9 +11,7 @@ module Api
                                      .offset(params[:offset])
                                      .limit(params[:limit])
 
-        render json: {
-          notifications: @notifications.collect { |note| NotificationSerializer.new(note) }
-        }
+        render json: @notifications
       end
 
       def read

@@ -1,6 +1,4 @@
 class BaseSerializer < ActiveModel::Serializer
-  delegate :current_user, to: :scope, allow_nil: true
-
   def owner?(obj = nil)
     return false if current_user.blank?
 

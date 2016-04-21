@@ -10,9 +10,13 @@ module Api
         end
       end
 
+      class AccessDenied < StandardError; end
+
       rescue_from(ActionController::ParameterMissing, ActiveRecord::RecordInvalid) do |err|
-        puts "-------- #{err}"
-        error!({ error: err }, 400)
+        render json: { error: err }, status: 400
+      end
+      rescue_from(AccessDenied) do |err|
+        render json: { error: 'AccessDenied' }, status: 403
       end
 
       def requires!(name, opts = {})
@@ -37,7 +41,7 @@ module Api
         end
       end
 
-      def error!(data, status_code)
+      def error!(data, status_code = 400)
         render json: data, status: status_code
       end
 
@@ -47,6 +51,14 @@ module Api
 
       def current_user
         @current_user ||= User.find_by_id(doorkeeper_token.resource_owner_id) if doorkeeper_token
+      end
+
+      def current_ability
+        @current_ability ||= Ability.new(current_user)
+      end
+
+      def can?(*args)
+        current_ability.can?(*args)
       end
     end
   end

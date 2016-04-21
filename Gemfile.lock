@@ -48,8 +48,10 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
-    active_model_serializers (0.9.2)
-      activemodel (>= 3.2)
+    active_model_serializers (0.10.0.rc5)
+      actionpack (>= 4.0)
+      activemodel (>= 4.0)
+      railties (>= 4.0)
     activejob (5.0.0.beta3)
       activesupport (= 5.0.0.beta3)
       globalid (>= 0.3.6)
@@ -336,7 +338,6 @@ GEM
       rails (>= 4.2.0)
     rails_autolink (1.1.6)
       rails (> 3.1)
-    rails_param (0.9.0)
     railties (5.0.0.beta3)
       actionpack (= 5.0.0.beta3)
       activesupport (= 5.0.0.beta3)
@@ -446,7 +447,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  active_model_serializers (= 0.9.2)
+  active_model_serializers (= 0.10.0.rc5)
   auto-space
   better_errors
   binding_of_caller
@@ -503,7 +504,6 @@ DEPENDENCIES
   rails-i18n
   rails-settings-cached
   rails_autolink
-  rails_param
   redcarpet (~> 3.3.4)
   redis
   redis-namespace

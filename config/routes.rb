@@ -127,6 +127,13 @@ Rails.application.routes.draw do
     namespace :v3 do
       resource :devices
       resource :likes
+      resources :notifications do
+        collection do
+          post :read
+          get :unread_count
+          delete :all
+        end
+      end
     end
   end
 

@@ -17,8 +17,6 @@ gem 'turbolinks', git: 'https://github.com/turbolinks/turbolinks-classic.git'
 gem 'jquery-turbolinks'
 gem 'dropzonejs-rails'
 
- gem 'rails_param'
-
 gem 'rack-attack'
 
 gem 'rails-i18n'
@@ -93,7 +91,7 @@ gem 'simple_form'
 
 # API
 gem 'grape'
-gem 'active_model_serializers', '0.9.2'
+gem 'active_model_serializers', '0.10.0.rc5'
 gem 'grape-active_model_serializers'
 
 # Mailer

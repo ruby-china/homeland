@@ -126,6 +126,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v3 do
       resource :devices
+      resource :likes
     end
   end
 

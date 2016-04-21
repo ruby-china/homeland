@@ -122,7 +122,6 @@ Rails.application.routes.draw do
   get 'twitter' => 'home#twitter', as: 'twitter'
   get 'markdown' => 'home#markdown', as: 'markdown'
 
-  # mount API::Dispatch => '/api'
   namespace :api do
     namespace :v3 do
       match 'hello', via: :get, to: 'root#hello'

@@ -90,9 +90,7 @@ gem 'social-share-button'
 gem 'simple_form'
 
 # API
-gem 'grape'
 gem 'active_model_serializers', '0.10.0.rc5'
-gem 'grape-active_model_serializers'
 
 # Mailer
 gem 'postmark'

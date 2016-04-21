@@ -54,6 +54,14 @@ module Redcarpet
         end
       end
 
+      def link(link, title, content)
+        if content.eql?("icon")
+          %(<i class="fa fa-#{link}"></i>)
+        else
+          %(<a href="#{link}" target="_blank">#{content}</a>">)
+        end
+      end
+
       # Fix Chinese neer the URL
       def autolink(link, link_type)
         # return link

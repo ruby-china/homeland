@@ -125,6 +125,8 @@ Rails.application.routes.draw do
   # mount API::Dispatch => '/api'
   namespace :api do
     namespace :v3 do
+      match 'hello', via: :get, to: 'root#hello'
+
       resource :devices
       resource :likes
       resources :nodes
@@ -141,6 +143,8 @@ Rails.application.routes.draw do
           post :update
         end
       end
+
+      match '*path', via: :all, to: 'root#not_found'
     end
   end
 

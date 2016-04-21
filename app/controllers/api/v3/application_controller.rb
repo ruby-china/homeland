@@ -11,12 +11,19 @@ module Api
       end
 
       class AccessDenied < StandardError; end
+      class PageNotFound < StandardError; end
 
-      rescue_from(ActionController::ParameterMissing, ActiveRecord::RecordInvalid) do |err|
-        render json: { error: err }, status: 400
+      rescue_from(ActionController::ParameterMissing) do |err|
+        render json: { error: 'ParameterInvalid', message: err }, status: 400
+      end
+      rescue_from(ActiveRecord::RecordInvalid) do |err|
+        render json: { error: 'RecordInvalid', message: err }, status: 400
       end
       rescue_from(AccessDenied) do |err|
         render json: { error: 'AccessDenied' }, status: 403
+      end
+      rescue_from(ActiveRecord::RecordNotFound) do |err|
+        render json: { error: 'ResourceNotFound' }, status: 404
       end
 
       def requires!(name, opts = {})
@@ -32,7 +39,7 @@ module Api
         if opts[:values] && params[name].present?
           values = opts[:values].to_a
           if !values.include?(params[name]) && !values.include?(params[name].to_i)
-            raise ParameterValueNotAllowed.new(name, values)
+            raise ParameterValueNotAllowed.new(name, opts[:values])
           end
         end
 

@@ -8,7 +8,7 @@ describe 'API', type: :request do
     it 'should return status 404' do
       get '/api/v3/foo-bar.json'
       expect(response.status).to eq 404
-      expect(json['error']).to eq 'Page not found.'
+      expect(json['error']).to eq 'ResourceNotFound'
     end
   end
 
@@ -17,7 +17,6 @@ describe 'API', type: :request do
       it 'should faild with 401' do
         get '/api/v3/hello.json'
         expect(response.status).to eq(401)
-        expect(json['error']).to eq 'Access Token 无效'
       end
     end
 
@@ -39,31 +38,8 @@ describe 'API', type: :request do
         login_user!
         get '/api/v3/hello.json', limit: 2000
         expect(response.status).to eq 400
-        expect(json['validation_errors'].size).to eq 1
-        # puts json.inspect
-        expect(json['validation_errors']).to include(*['limit does not have a valid value'])
-      end
-    end
-  end
-
-  describe 'POST /api/v3/photos.json' do
-    context 'without login' do
-      it 'should response 401' do
-        post '/api/v3/photos.json'
-        expect(response.status).to eq 401
-      end
-    end
-
-    context 'with login' do
-      it 'should work' do
-        login_user!
-        f = Rack::Test::UploadedFile.new(Rails.root.join('spec/factories/foo.png'))
-        post '/api/v3/photos.json', file: f
-        @photo = Photo.last
-        expect(response.status).to eq 201
-        expect(@photo.user_id).to eq current_user.id
-        expect(json['image_url']).not_to eq nil
-        expect(json['image_url']).not_to eq ''
+        puts json.inspect
+        expect(json['error']).to eq 'ParameterInvalid'
       end
     end
   end

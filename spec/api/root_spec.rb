@@ -33,8 +33,8 @@ describe 'API', type: :request do
       end
     end
 
-    describe 'Grape validation' do
-      it 'should status 400 and give Grape validation errors' do
+    describe 'Validation' do
+      it 'should status 400 and give Validation errors' do
         login_user!
         get '/api/v3/hello.json', limit: 2000
         expect(response.status).to eq 400

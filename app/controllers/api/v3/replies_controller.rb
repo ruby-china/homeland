@@ -15,7 +15,7 @@ module Api
 
         @reply.body = params[:body]
         @reply.save!
-        render json: @reply, serializer: ReplyDetailSerializer, root: 'reply', adapter: :json, status: 201
+        render json: @reply, serializer: ReplyDetailSerializer, status: 201
       end
 
       def destroy

@@ -155,6 +155,23 @@ Rails.application.routes.draw do
           post :update
         end
       end
+      resources :users do
+        collection do
+          get :me
+        end
+        member do
+          get :topics
+          get :replies
+          get :favorites
+          get :followers
+          get :following
+          get :blocked
+          post :follow
+          post :unfollow
+          post :block
+          post :unblock
+        end
+      end
 
       match '*path', via: :all, to: 'root#not_found'
     end

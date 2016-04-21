@@ -38,7 +38,7 @@ describe 'API', type: :request do
         login_user!
         get '/api/v3/hello.json', limit: 2000
         expect(response.status).to eq 400
-        puts json.inspect
+        # puts json.inspect
         expect(json['error']).to eq 'ParameterInvalid'
       end
     end

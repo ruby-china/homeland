@@ -18,7 +18,7 @@ module RubyChina
 
     # Ensure App config files exist.
     if Rails.env.development?
-      %w(config redis secrets).each do |fname|
+      %w(config redis secrets elasticsearch).each do |fname|
         filename = "config/#{fname}.yml"
         next if File.exist?(Rails.root.join(filename))
         FileUtils.cp(Rails.root.join("#{filename}.default"), Rails.root.join(filename))
@@ -56,7 +56,7 @@ module RubyChina
       -> request { request.uuid }
     ]
 
-    config.cache_store = [:dalli_store, '127.0.0.1', { namespace: 'rb-1', compress: true }]
+    config.cache_store = [:mem_cache_store, '127.0.0.1', { namespace: 'rb-1', compress: true }]
 
     config.active_job.queue_adapter = :sidekiq
 

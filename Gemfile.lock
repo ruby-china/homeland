@@ -126,7 +126,7 @@ GEM
     coffee-script-source (1.10.0)
     concurrent-ruby (1.0.1)
     connection_pool (2.2.0)
-    dalli (2.7.5)
+    dalli (2.7.6)
     database_cleaner (1.5.1)
     debug_inspector (0.0.2)
     derailed (0.1.0)

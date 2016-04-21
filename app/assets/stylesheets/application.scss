@@ -301,10 +301,13 @@ form {
 }
 
 .popover {
-  border-radius: 3px; border-color: #eee; box-shadow: 0 1px 1px 0px rgba(0, 0, 0, 0.05);
+  border-radius: 3px; border-color: #FFF; box-shadow: 0 1px 3px rgba(0, 0, 0,.18);
 }
-.popover>.arrow { border-color: $grayDark; }
-.popover>.arrow:after { border-color: $grayDark; }
+.popover>.arrow { border-bottom-color: #f0f0f0 !important; }
+
+.popover-content {
+  padding: 15px;
+}
 
 .alert {
   padding:5px 10px 3px;

@@ -17,6 +17,8 @@ gem 'turbolinks', git: 'https://github.com/turbolinks/turbolinks-classic.git'
 gem 'jquery-turbolinks'
 gem 'dropzonejs-rails'
 
+gem 'pg'
+
 gem 'rack-attack'
 
 gem 'rails-i18n'
@@ -24,11 +26,9 @@ gem 'http_accept_language'
 gem 'rails_autolink'
 gem 'md_emoji'
 
+# OAuth Provider
 gem 'doorkeeper', '4.0.0.rc2'
 gem 'doorkeeper-i18n'
-
-# gem 'rails-perftest'
-# gem 'ruby-prof'
 
 gem 'bulk_insert', git: 'https://github.com/huacnlee/bulk_insert.git', branch: 'fix/active-record-5-warning'
 
@@ -37,16 +37,17 @@ gem 'carrierwave'
 gem 'carrierwave-upyun'
 gem 'mini_magick'
 
+# 验证码，头像
 gem 'rucaptcha'
 gem 'letter_avatar'
-
-gem 'pg'
 
 # 用户系统
 gem 'devise', '~> 4.0.0.rc1'
 gem 'devise-encryptable'
 
+# 通知系统
 gem 'notifications'
+gem 'ruby-push-notifications'
 
 # 分页
 gem 'will_paginate'
@@ -59,24 +60,25 @@ gem 'elasticsearch-rails'
 gem 'omniauth'
 gem 'omniauth-github'
 
-# permission
+# Permission
 gem 'cancancan', '~> 1.13.1'
 
+# Redis
 gem 'redis'
 gem 'hiredis'
-# Redis 命名空间
 gem 'redis-namespace'
-# 将一些数据存放入 Redis
 gem 'redis-objects'
+
+# Cache
 gem 'second_level_cache', '2.2.2'
 
+# Setting
 gem 'rails-settings-cached'
 
-# Markdown 格式 & 文本处理
+# Markdown
 gem 'redcarpet', '~> 3.3.4'
 gem 'rouge', '~> 1.8.0'
 gem 'auto-space'
-gem 'nokogiri'
 
 # 队列
 gem 'sidekiq'
@@ -92,11 +94,9 @@ gem 'simple_form'
 # API
 gem 'active_model_serializers', '0.10.0.rc5'
 
-# Mailer
+# Mailer Service
 gem 'postmark'
 gem 'postmark-rails'
-
-gem 'ruby-push-notifications'
 
 # Dalli, kgio is for Dalli
 gem 'kgio'
@@ -104,9 +104,7 @@ gem 'dalli'
 
 gem 'puma'
 
-gem 'parallel'
-
-# for api 跨域
+# API cors
 gem 'rack-cors', require: 'rack/cors'
 gem 'rack-utf8_sanitizer'
 
@@ -114,9 +112,7 @@ gem 'rack-utf8_sanitizer'
 gem 'rack-mini-profiler', require: false
 
 gem 'oneapm_rpm'
-
 gem 'exception_notification'
-
 gem 'status-page'
 
 group :development do

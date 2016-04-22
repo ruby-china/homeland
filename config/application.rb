@@ -74,3 +74,5 @@ $file_store = ActiveSupport::Cache::FileStore.new(Rails.root.join('tmp/cache'))
 I18n.config.enforce_available_locales = false
 I18n.locale = 'zh-CN'
 # GC::Profiler.enable
+
+ActiveModelSerializers.config.adapter = :json

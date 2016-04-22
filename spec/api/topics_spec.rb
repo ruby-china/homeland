@@ -171,7 +171,7 @@ describe 'API V3', 'topics', type: :request do
       login_user!
       node_id = create(:node).id
       post '/api/v3/topics.json', title: 'api create topic', body: 'here we go', node_id: node_id
-      expect(response.status).to eq(201)
+      expect(response.status).to eq(200)
       expect(json['topic']['body_html']).to eq '<p>here we go</p>'
 
       last_topic = current_user.reload.topics.first
@@ -199,7 +199,7 @@ describe 'API V3', 'topics', type: :request do
       new_node = create(:node)
       login_admin!
       post "/api/v3/topics/#{topic.id}.json", title: 'api create topic', body: 'here we go', node_id: new_node.id
-      expect(response.status).to eq 201
+      expect(response.status).to eq 200
       topic.reload
       expect(topic.lock_node).to eq true
     end
@@ -211,7 +211,7 @@ describe 'API V3', 'topics', type: :request do
         login_user!
         node_id = create(:node).id
         post "/api/v3/topics/#{topic.id}.json", title: 'api create topic', body: 'here we go', node_id: node_id
-        expect(response.status).to eq(201)
+        expect(response.status).to eq(200)
         expect(json['topic']['body_html']).to eq '<p>here we go</p>'
 
         last_topic = current_user.reload.topics.first
@@ -389,7 +389,7 @@ describe 'API V3', 'topics', type: :request do
       login_user!
       t = create(:topic, title: 'new topic 1')
       post "/api/v3/topics/#{t.id}/replies.json", body: 'new reply body'
-      expect(response.status).to eq(201)
+      expect(response.status).to eq(200)
       expect(t.reload.replies.first.body).to eq('new reply body')
     end
   end
@@ -399,7 +399,7 @@ describe 'API V3', 'topics', type: :request do
       login_user!
       t = create(:topic, title: 'new topic 2')
       post "/api/v3/topics/#{t.id}/follow.json"
-      expect(response.status).to eq(201)
+      expect(response.status).to eq(200)
       expect(t.reload.follower_ids).to include(current_user.id)
     end
   end
@@ -409,7 +409,7 @@ describe 'API V3', 'topics', type: :request do
       login_user!
       t = create(:topic, title: 'new topic 2')
       post "/api/v3/topics/#{t.id}/unfollow.json"
-      expect(response.status).to eq(201)
+      expect(response.status).to eq(200)
       expect(t.reload.follower_ids).not_to include(current_user.id)
     end
   end
@@ -419,7 +419,7 @@ describe 'API V3', 'topics', type: :request do
       login_user!
       t = create(:topic, title: 'new topic 3')
       post "/api/v3/topics/#{t.id}/favorite.json"
-      expect(response.status).to eq(201)
+      expect(response.status).to eq(200)
       expect(current_user.reload.favorite_topic_ids).to include(t.id)
     end
   end
@@ -429,7 +429,7 @@ describe 'API V3', 'topics', type: :request do
       login_user!
       t = create(:topic, title: 'new topic 3')
       post "/api/v3/topics/#{t.id}/unfavorite.json"
-      expect(response.status).to eq(201)
+      expect(response.status).to eq(200)
       expect(current_user.reload.favorite_topic_ids).not_to include(t.id)
     end
   end
@@ -439,7 +439,7 @@ describe 'API V3', 'topics', type: :request do
       login_admin!
       t = create(:topic, user: current_user, title: 'new topic 3')
       post "/api/v3/topics/#{t.id}/ban.json"
-      expect(response.status).to eq(201)
+      expect(response.status).to eq(200)
     end
 
     it 'should not ban a topic with normal user' do

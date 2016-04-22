@@ -122,7 +122,59 @@ Rails.application.routes.draw do
   get 'twitter' => 'home#twitter', as: 'twitter'
   get 'markdown' => 'home#markdown', as: 'markdown'
 
-  mount API::Dispatch => '/api'
+  namespace :api do
+    namespace :v3 do
+      match 'hello', via: :get, to: 'root#hello'
+
+      resource :devices
+      resource :likes
+      resources :nodes
+      resources :photos
+      resources :notifications do
+        collection do
+          post :read
+          get :unread_count
+          delete :all
+        end
+      end
+      resources :topics do
+        member do
+          post :update
+          get :replies
+          post :replies
+          post :follow
+          post :unfollow
+          post :favorite
+          post :unfavorite
+          post :ban
+        end
+      end
+      resources :replies do
+        member do
+          post :update
+        end
+      end
+      resources :users do
+        collection do
+          get :me
+        end
+        member do
+          get :topics
+          get :replies
+          get :favorites
+          get :followers
+          get :following
+          get :blocked
+          post :follow
+          post :unfollow
+          post :block
+          post :unblock
+        end
+      end
+
+      match '*path', via: :all, to: 'root#not_found'
+    end
+  end
 
   require 'sidekiq/web'
   authenticate :user, ->(u) { u.admin? } do

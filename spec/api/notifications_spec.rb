@@ -35,7 +35,7 @@ describe 'API V3', 'notifications', type: :request do
         login_user!
         n = create :notification_node_changed, user: current_user, target: topic, second_target: node
         get '/api/v3/notifications.json'
-        puts json['message']
+        # puts json['message']
         expect(response.status).to eq(200)
         expect(json['notifications'][0]['read']).to eq false
         expect(json['notifications'][0]).to include(*%w(type topic node))
@@ -129,7 +129,7 @@ describe 'API V3', 'notifications', type: :request do
       replies = (0...10).map { |i| create :reply, topic: topic, user: current_user, body: "Test to mention user #{i}" }
       (0...10).map { |i| create :notification_mention, user: current_user, target: replies[i] }
       post '/api/v3/notifications/read.json', ids: current_user.notifications.pluck(:id)
-      expect(response.status).to eq 201
+      expect(response.status).to eq 200
       current_user.notifications.each do |item|
         expect(item.reload.read?).to eq true
       end

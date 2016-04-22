@@ -1,6 +1,6 @@
 module Api
   module V3
-    class UsersController < ApplicationController
+    class UsersController < Api::V3::ApplicationController
       before_action :doorkeeper_authorize!, only: [:me, :follow, :unfollow, :block, :unblock, :blocked]
       before_action :set_user, except: [:index, :me]
 

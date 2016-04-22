@@ -1,6 +1,6 @@
 module Api
   module V3
-    class NotificationsController < ApplicationController
+    class NotificationsController < Api::V3::ApplicationController
       before_action :doorkeeper_authorize!
 
       ##

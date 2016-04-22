@@ -1,6 +1,6 @@
 module Api
   module V3
-    class PhotosController < ApplicationController
+    class PhotosController < Api::V3::ApplicationController
       before_action :doorkeeper_authorize!
 
       ##

@@ -1,6 +1,6 @@
 module Api
   module V3
-    class RootController < ApplicationController
+    class RootController < Api::V3::ApplicationController
       before_action :doorkeeper_authorize!, only: [:hello]
 
       def not_found

@@ -1,6 +1,6 @@
 module Api
   module V3
-    class TopicsController < ApplicationController
+    class TopicsController < Api::V3::ApplicationController
       before_action :doorkeeper_authorize!, except: [:index, :show, :replies]
       before_action :set_topic, except: [:index, :create]
 

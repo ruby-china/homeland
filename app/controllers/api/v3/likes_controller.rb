@@ -1,6 +1,6 @@
 module Api
   module V3
-    class LikesController < ApplicationController
+    class LikesController < Api::V3::ApplicationController
       before_action :doorkeeper_authorize!
 
       before_action do

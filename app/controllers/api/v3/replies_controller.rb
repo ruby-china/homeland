@@ -1,6 +1,6 @@
 module Api
   module V3
-    class RepliesController < ApplicationController
+    class RepliesController < Api::V3::ApplicationController
       before_action :doorkeeper_authorize!, only: [:update, :destroy]
       before_action :set_reply, only: [:show, :update, :destroy]
 

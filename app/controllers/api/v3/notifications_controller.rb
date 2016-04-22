@@ -39,7 +39,7 @@ module Api
           Notification.read!(@notifications.collect(&:id))
         end
 
-        render json: { ok: 1 }, status: 201
+        render json: { ok: 1 }
       end
 
       ##

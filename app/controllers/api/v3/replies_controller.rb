@@ -28,7 +28,7 @@ module Api
 
         @reply.body = params[:body]
         @reply.save!
-        render json: @reply, serializer: ReplyDetailSerializer, status: 201
+        render json: @reply, serializer: ReplyDetailSerializer
       end
 
       ##

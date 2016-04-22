@@ -28,7 +28,7 @@ module Api
         @device.last_actived_at = Time.now
         @device.save!
 
-        render json: { ok: 1 }, status: 201
+        render json: { ok: 1 }
       end
 
       ##

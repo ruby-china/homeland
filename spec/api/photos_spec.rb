@@ -18,7 +18,7 @@ describe 'API', type: :request do
         f = Rack::Test::UploadedFile.new(Rails.root.join('spec/factories/foo.png'))
         post '/api/v3/photos.json', file: f
         @photo = Photo.last
-        expect(response.status).to eq 201
+        expect(response.status).to eq 200
         expect(@photo.user_id).to eq current_user.id
         expect(json['image_url']).not_to eq nil
         expect(json['image_url']).not_to eq ''

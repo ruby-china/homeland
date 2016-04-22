@@ -176,7 +176,7 @@ module Api
       #
       def follow
         current_user.follow_user(@user)
-        render json: { ok: 1 }, status: 201
+        render json: { ok: 1 }
       end
 
       ##
@@ -186,7 +186,7 @@ module Api
       #
       def unfollow
         current_user.unfollow_user(@user)
-        render json: { ok: 1 }, status: 201
+        render json: { ok: 1 }
       end
 
       ##
@@ -196,7 +196,7 @@ module Api
       #
       def block
         current_user.block_user(@user.id)
-        render json: { ok: 1 }, status: 201
+        render json: { ok: 1 }
       end
 
       ##
@@ -206,7 +206,7 @@ module Api
       #
       def unblock
         current_user.unblock_user(@user.id)
-        render json: { ok: 1 }, status: 201
+        render json: { ok: 1 }
       end
 
 

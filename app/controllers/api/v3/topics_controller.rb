@@ -90,7 +90,7 @@ module Api
         @topic.save!
 
 
-        render json: @topic, serializer: TopicDetailSerializer, status: 201
+        render json: @topic, serializer: TopicDetailSerializer
       end
 
       ##
@@ -123,7 +123,7 @@ module Api
         @topic.body = params[:body]
         @topic.save!
 
-        render json: @topic, serializer: TopicDetailSerializer, status: 201
+        render json: @topic, serializer: TopicDetailSerializer
       end
 
       ##
@@ -188,7 +188,7 @@ module Api
         @reply = @topic.replies.build(body: params[:body])
         @reply.user_id = current_user.id
         @reply.save!
-        render json: @reply, status: 201
+        render json: @reply
       end
 
       ##
@@ -198,7 +198,7 @@ module Api
       #
       def follow
         @topic.push_follower(current_user.id)
-        render json: { ok: 1 }, status: 201
+        render json: { ok: 1 }
       end
 
       ##
@@ -208,7 +208,7 @@ module Api
       #
       def unfollow
         @topic.pull_follower(current_user.id)
-        render json: { ok: 1 }, status: 201
+        render json: { ok: 1 }
       end
 
       ##
@@ -218,7 +218,7 @@ module Api
       #
       def favorite
         current_user.favorite_topic(@topic.id)
-        render json: { ok: 1 }, status: 201
+        render json: { ok: 1 }
       end
 
       ##
@@ -228,7 +228,7 @@ module Api
       #
       def unfavorite
         current_user.unfavorite_topic(@topic.id)
-        render json: { ok: 1 }, status: 201
+        render json: { ok: 1 }
       end
 
       ##
@@ -239,7 +239,7 @@ module Api
       def ban
         raise AccessDenied.new('当前用户没有屏蔽别人话题的权限，具体请参考官网的说明。') unless can?(:ban, @topic)
         @topic.ban!
-        render json: { ok: 1 }, status: 201
+        render json: { ok: 1 }
       end
 
       private

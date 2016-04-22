@@ -18,7 +18,7 @@ module Api
         @photo.image = params[:file]
         @photo.user_id = current_user.id
         @photo.save!
-        render json: { image_url: @photo.image.url }, status: 201
+        render json: { image_url: @photo.image.url }
       end
     end
   end

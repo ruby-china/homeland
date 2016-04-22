@@ -20,7 +20,7 @@ module Api
       def create
         current_user.like(likeable)
         data = { obj_type: params[:obj_type], obj_id: likeable.id, count: likeable.likes_count }
-        render json: data, status: 201
+        render json: data
       end
 
       ##

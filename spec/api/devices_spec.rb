@@ -14,19 +14,19 @@ describe 'API V3', 'devices', type: :request do
       expect {
         post '/api/v3/devices.json', platform: 'ios', token: token
       }.to change(current_user.devices.ios, :count).by(1)
-      expect(response.status).to eq(201)
+      expect(response.status).to eq(200)
       expect(current_user.devices.ios.pluck(:token)).to include(token)
 
       expect {
         post '/api/v3/devices.json', platform: 'ios', token: SecureRandom.hex
       }.to change(current_user.devices.ios, :count).by(1)
-      expect(response.status).to eq(201)
+      expect(response.status).to eq(200)
       expect(current_user.devices.ios.pluck(:token).count).to eq 2
 
       expect {
         post '/api/v3/devices.json', platform: 'android', token: token
       }.to change(current_user.devices.android, :count).by(1)
-      expect(response.status).to eq(201)
+      expect(response.status).to eq(200)
       expect(current_user.devices.android.pluck(:token)).to include(token)
     end
 

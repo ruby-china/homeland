@@ -269,7 +269,7 @@ GEM
       actionmailer (>= 3.0.0)
       postmark (~> 1.7.0)
     powerpack (0.1.1)
-    puma (3.2.0)
+    puma (3.4.0)
     rack (2.0.0.alpha)
       json
     rack-attack (4.4.1)

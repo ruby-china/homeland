@@ -5,7 +5,7 @@ describe Site, type: :model do
 
   it 'can add favicon default when it not provide' do
     site = Site.create(name: 'Foo bar', url: 'http://foobar.com', site_node: site_node)
-    expect(site.favicon_url).to eq('https://favicon-ruby-china-org.qcloudcdn.com/ip2/foobar.com.ico')
+    expect(site.favicon_url).to eq('https://favicon.b0.upaiyun.com/ip2/foobar.com.ico')
   end
 
   it 'can add http:// to url field when it not profide' do

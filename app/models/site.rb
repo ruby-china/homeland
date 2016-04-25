@@ -26,6 +26,6 @@ class Site < ApplicationRecord
   def favicon_url
     return '' if url.blank?
     domain = url.gsub('http://', '')
-    "https://favicon-ruby-china-org.qcloudcdn.com/ip2/#{domain}.ico"
+    "https://favicon.b0.upaiyun.com/ip2/#{domain}.ico"
   end
 end

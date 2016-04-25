@@ -5,6 +5,4 @@ StatusPage.configure do
   self.use :database
 
   self.interval = 10
-
-  self.add_custom_service(StatusPage::RubyGems)
 end

@@ -353,7 +353,7 @@ GEM
     ruby-progressbar (1.7.5)
     ruby-push-notifications (0.3.1)
       builder (~> 3.0)
-    rucaptcha (0.3.2)
+    rucaptcha (0.4.2)
       posix-spawn (>= 0.3.0)
     rvm-capistrano (1.4.1)
       capistrano (>= 2.0.0)

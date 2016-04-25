@@ -123,6 +123,8 @@ group :development do
   # Better Errors
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'spring'
+  gem 'spring-commands-rspec'
 end
 
 group :development, :test do
@@ -136,4 +138,5 @@ group :development, :test do
 
   gem 'codecov', require: false
   gem 'bundler-audit', require: false
+  gem 'pry-byebug'
 end

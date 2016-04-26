@@ -36,7 +36,8 @@ class Reply < ApplicationRecord
   def update_parent_topic_updated_at
     unless topic.blank?
       topic.update_deleted_last_reply(self)
-      true
+      # FIXME: 本应该 belongs_to :topic, touch: true 来实现的，但貌似有个 Bug 哪里没起作用
+      topic.touch
     end
   end
 

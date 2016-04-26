@@ -83,7 +83,6 @@ GEM
     bundler-audit (0.4.0)
       bundler (~> 1.2)
       thor (~> 0.18)
-    byebug (8.2.4)
     cancancan (1.13.1)
     capistrano (2.9.0)
       highline
@@ -380,7 +379,6 @@ GEM
       json (~> 1.8)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.0)
-    slop (3.6.0)
     social-share-button (0.1.10)
       coffee-rails
       sass-rails

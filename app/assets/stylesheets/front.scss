@@ -225,22 +225,9 @@
       color: #999;
       min-height: 32px;
     }
-    &.deleted {
-      margin-bottom: 0px;
-      min-height: 24px !important;
-      padding-top: 5px;
-      padding-bottom: 0px;
-      background: #f9f9f9;
-      color:#aaa;
-      text-decoration: line-through;
-      font-size:12px; text-align:center;
-      .media-body { margin-left: 0px; }
-    }
     &.light { background:#F7F2FC; }
-        &.popular { background:#fffce9; }
+    &.popular { background:#fffce9; }
 
-    .media-body {
-    }
     .info {
       .name {
         font-weight: bold;

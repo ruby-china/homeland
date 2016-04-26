@@ -486,10 +486,10 @@ img.emoji { width:20px; height:20px; }
   .count { margin-left: 4px; display: none; font-size: 12px;}
   .new {
     color: $redLight !important;
-    .count { display: inline; }
+    .count { display: inline; line-height: 100%; }
   }
 }
-.deleted { text-decoration: line-through; color: $grayDark; }
+.deleted { text-decoration: line-through; color: #e0e0e0; }
 .no-result { color: #aaa; padding-bottom: 20px; text-align: center;}
 
 .opts a.active {

@@ -17,12 +17,7 @@ This is the source code of [Ruby China](http://ruby-china.org) website.
 
 ### Vagrant
 
-Install VirtualBox + Vagrant:
-
-- https://www.virtualbox.org/
-- https://www.vagrantup.com/
-
-Then:
+Install [VirtualBox](https://www.virtualbox.org/) + [Vagrant](https://www.vagrantup.com/), and then:
 
 ```bash
 $ vagrant up
@@ -37,12 +32,7 @@ Open http://localhost:3000 in host.
 ### Mac OS X, use Homebrew
 
 ```bash
-$ brew install memcached
-$ brew install redis
-$ brew install postgresql
-$ brew install imagemagick
-$ brew install gs
-$ brew install elasticsearch
+$ brew install memcached redis postgresql imagemagick gs elasticsearch
 ```
 
 ### Ubuntu

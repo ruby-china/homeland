@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160329032533) do
+ActiveRecord::Schema.define(version: 20160329091441) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -118,25 +118,6 @@ ActiveRecord::Schema.define(version: 20160329032533) do
   end
 
   add_index "notes", ["user_id"], name: "index_notes_on_user_id", using: :btree
-
-  create_table "notifications", force: :cascade do |t|
-    t.integer  "user_id",                            null: false
-    t.boolean  "read",               default: false
-    t.string   "type"
-    t.integer  "follower_id"
-    t.integer  "node_id"
-    t.integer  "topic_id"
-    t.integer  "reply_id"
-    t.integer  "mentionable_id"
-    t.string   "mentionable_type"
-    t.integer  "mentioned_user_ids", default: [],                 array: true
-    t.integer  "changes_count",      default: 0,     null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "notifications", ["user_id", "read"], name: "index_notifications_on_user_id_and_read", using: :btree
-  add_index "notifications", ["user_id"], name: "index_notifications_on_user_id", using: :btree
 
   create_table "oauth_access_grants", force: :cascade do |t|
     t.integer  "resource_owner_id",           null: false

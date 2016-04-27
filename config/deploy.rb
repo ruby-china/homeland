@@ -6,7 +6,7 @@ require File.expand_path("../../lib/puma/capistrano", __FILE__)
 
 default_run_options[:pty] = true
 
-set :rvm_ruby_string, 'ruby-2.3.0'
+set :rvm_ruby_string, 'ruby-2.3.1'
 set :rvm_type, :user
 set :application, 'ruby-china'
 set :repository,  'git://github.com/ruby-china/ruby-china.git'

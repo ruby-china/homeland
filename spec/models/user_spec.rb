@@ -239,6 +239,27 @@ describe User, type: :model do
     end
   end
 
+  describe 'website_url' do
+    subject { create(:user, website: 'monkey.com') }
+    let(:expected) { 'http://monkey.com' }
+
+    context 'website without http://' do
+      describe '#website_url' do
+        subject { super().website_url }
+        it { is_expected.to eq(expected) }
+      end
+    end
+
+    context 'website with http://' do
+      before { allow(subject).to receive(:github).and_return('http://monkey.com') }
+
+      describe '#website_url' do
+        subject { super().website_url }
+        it { is_expected.to eq(expected) }
+      end
+    end
+  end
+
   describe 'private token generate' do
     it 'should generate new token' do
       old_token = user.private_token

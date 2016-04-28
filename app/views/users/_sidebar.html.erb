@@ -16,14 +16,34 @@
             </span>
           </div>
           <div class="item number">
-            第 <%= @user.id %> 位<%= t("menu.users")%>
+            第 <%= @user.id %> 位<%= t("menu.users")%> / <span title="注册日期"><%= @user.created_at.to_date %></span>
           </div>
-          <div class="item number">
-            <span title="注册日期"><%= @user.created_at.to_date %></span>
-            <% if @user.location.present? %> • <span title="所在地"><%= location_name_tag(@user.location) %></span><% end %>
+          <% if !@user.company.blank? %>
+          <div class="item company">
+            <%= @user.company %>
+            <% if @user.location.present? %> @ <span title="所在地"><%= location_name_tag(@user.location) %></span><% end %>
           </div>
+          <% end %>
           <div class="item counts">
             <span><%= @user.topics_count %></span> 篇帖子 • <span><%= @user.replies_count %></span> 条回帖
+          </div>
+          <div class="item social">
+
+            <% if !@user.twitter.blank? %>
+              <%= link_to raw('<i class="fa fa-twitter"></i>'), @user.twitter_url, class: "twitter", rel: "nofollow" %>
+            <% end %>
+
+            <% if !@user.website.blank? %>
+              <%= link_to(raw('<i class="fa fa-globe"></i>'), @user.website_url, target: '_blank', rel: 'nofollow') %>
+            <% end %>
+
+            <% if !@user.github.blank? %>
+              <%= link_to(raw('<i class="fa fa-github"></i>'), @user.github_url, target: '_blank', rel: 'nofollow') %>
+            <% end %>
+
+            <% if !@user.email.blank? && @user.email_public %>
+              <a href="mailto: <%= @user.email %>"><i class="fa fa-envelope-o"></i></a>
+            <% end %>
           </div>
         </div>
       </div>
@@ -50,6 +70,12 @@
         <div class="col-sm-6">
           <%= block_user_tag(@user) %>
         </div>
+      </div>
+      <% end %>
+
+      <% if !@user.tagline.blank? %>
+      <div class="tagline row">
+        <%= @user.tagline %>
       </div>
       <% end %>
     </div>

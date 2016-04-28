@@ -187,6 +187,18 @@ table.node-topics {
       border-top: 1px solid #f0f0f0;
       margin-top: 15px; padding-top: 15px;
     }
+    .social {
+      font-size: 18px;
+      a { color: #999; margin-right: 8px; }
+      a:hover { color: #666; }
+    }
+    .tagline {
+      border-top: 1px solid #f0f0f0;
+      margin-top: 10px;
+      color: #999;
+      line-height: 100%;
+      padding: 10px; padding-bottom: 0;
+    }
   }
 }
 

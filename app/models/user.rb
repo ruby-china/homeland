@@ -90,6 +90,10 @@ class User < ApplicationRecord
     "https://github.com/#{github.split('/').last}"
   end
 
+  def website_url
+    website[%r{^https?://}] ? website : "http://#{website}"
+  end
+
   def twitter_url
     return '' if twitter.blank?
     "https://twitter.com/#{twitter}"

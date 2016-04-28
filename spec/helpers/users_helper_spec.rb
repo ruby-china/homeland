@@ -27,19 +27,6 @@ describe UsersHelper, type: :helper do
     end
   end
 
-  describe 'user personal website' do
-    let(:user) { create(:user, website: 'http://example.com') }
-    subject { helper.render_user_personal_website(user) }
-
-    it { is_expected.to eq(link_to(user.website, user.website, target: '_blank', class: 'url', rel: 'nofollow')) }
-
-    context 'url without protocal' do
-      before { user.update_attribute(:website, 'example.com') }
-
-      it { is_expected.to eq(link_to('http://' + user.website, 'http://' + user.website, target: '_blank', class: 'url', rel: 'nofollow')) }
-    end
-  end
-
   describe '.render_user_level_tag' do
     let(:user) { create(:user) }
     subject { helper.render_user_level_tag(user) }

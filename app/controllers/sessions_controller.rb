@@ -1,5 +1,5 @@
 class SessionsController < Devise::SessionsController
-  prepend_before_filter :valify_captcha!, only: [:create]
+  prepend_before_action :valify_captcha!, only: [:create]
   skip_before_action :set_locale, only: [:create]
 
   def new

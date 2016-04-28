@@ -40,7 +40,7 @@ gem 'rucaptcha'
 gem 'letter_avatar'
 
 # 用户系统
-gem 'devise', '~> 4.0.0.rc1'
+gem 'devise'
 gem 'devise-encryptable'
 
 # 通知系统

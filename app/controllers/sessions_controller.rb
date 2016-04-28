@@ -20,16 +20,19 @@ class SessionsController < Devise::SessionsController
 
   def valify_captcha!
     set_locale
-    if !verify_rucaptcha?
+    unless verify_rucaptcha?
       redirect_to new_user_session_path, alert: t('rucaptcha.invalid') and return
     end
     true
   end
 
   private
-    def cache_referrer
-      if request.referrer && request.referrer.include?(request.domain)
-        session['user_return_to'] = request.referrer
-      end
+
+  def cache_referrer
+    referrer = request.referrer
+    # ignore other site url and user sign in url.
+    if referrer && referrer.include?(request.domain) && referrer.exclude?(new_user_session_path)
+      session['user_return_to'] = request.referrer
     end
+  end
 end

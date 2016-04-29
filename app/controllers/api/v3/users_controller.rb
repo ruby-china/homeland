@@ -62,13 +62,13 @@ module Api
         optional! :limit, type: Integer, default: 20, values: 1..150
 
         @topics = @user.topics.fields_for_list
-        if params[:order] == 'likes'
-          @topics = @topics.high_likes
-        elsif params[:order] == 'replies'
-          @topics = @topics.high_replies
-        else
-          @topics = @topics.recent
-        end
+        @topics = if params[:order] == 'likes'
+                    @topics.high_likes
+                  elsif params[:order] == 'replies'
+                    @topics.high_replies
+                  else
+                    @topics.recent
+                  end
         @topics = @topics.includes(:user).offset(params[:offset]).limit(params[:limit])
         render json: @topics
       end
@@ -208,7 +208,6 @@ module Api
         current_user.unblock_user(@user.id)
         render json: { ok: 1 }
       end
-
 
       private
 

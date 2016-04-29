@@ -44,6 +44,7 @@ module Api
       end
 
       private
+
       def set_reply
         @reply = Reply.find(params[:id])
       end

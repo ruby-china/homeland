@@ -348,7 +348,6 @@
 .markdown {
   position:relative;
   line-height: 1.8em; font-size:14px; text-overflow: ellipsis; word-wrap: break-word;
-  font-family: "RobotoDraft", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
   img { max-width: 100%; }
   p,
   pre,
@@ -432,7 +431,7 @@
     border-radius: 0px;
     word-break: break-all;
     line-height: 20px;
-    font-family:Monaco,Menlo, "Courier New", monospace;
+    font-family: Monaco,Menlo, "Courier New", monospace;
   }
   a:link,
   a:visited {

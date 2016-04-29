@@ -98,7 +98,6 @@ You need upload emoji images into `/assets/emojis` production environment path /
 
 * [Twitter Bootstrap](https://twitter.github.com/bootstrap)
 * [Font Awesome](http://fortawesome.github.io/Font-Awesome/icons/)
-* [Google Roboto Font](https://github.com/google/roboto)
 
 Forked from [Homeland Project](https://github.com/huacnlee/homeland)
 Theme from [Mediom](https://github.com/huacnlee/mediom)

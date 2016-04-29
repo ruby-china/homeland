@@ -89,7 +89,6 @@ module Api
         @topic.node_id = params[:node_id]
         @topic.save!
 
-
         render json: @topic, serializer: TopicDetailSerializer
       end
 
@@ -243,6 +242,7 @@ module Api
       end
 
       private
+
       def set_topic
         @topic = Topic.find(params[:id])
       end

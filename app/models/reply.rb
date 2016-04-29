@@ -15,7 +15,7 @@ class Reply < ApplicationRecord
   delegate :login, to: :user, prefix: true, allow_nil: true
 
   scope :fields_for_list, -> { select(:topic_id, :id, :body_html, :updated_at, :created_at) }
-  scope :without_body, -> { select(column_names - ['body'])}
+  scope :without_body, -> { select(column_names - ['body']) }
 
   validates :body, presence: true
   validates :body, uniqueness: { scope: [:topic_id, :user_id], message: '不能重复提交。' }
@@ -76,7 +76,7 @@ class Reply < ApplicationRecord
     # 给关注者发通知
     default_note = {
       notify_type: 'topic_reply',
-      target_type: "Reply", target_id: reply.id,
+      target_type: 'Reply', target_id: reply.id,
       second_target_type: 'Topic', second_target_id: topic.id,
       actor_id: reply.user_id
     }

@@ -14,7 +14,7 @@ class SearchIndexer < ApplicationJob
       obj = User.find_by_id(id)
     end
 
-    return false if !obj
+    return false unless obj
 
     if operation == 'update'
       obj.__elasticsearch__.update_document

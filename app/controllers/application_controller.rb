@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
                  ['/wiki']
                else
                  ["/#{controller_name}"]
-    end
+               end
   end
 
   before_action :set_locale
@@ -70,7 +70,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_seo_meta(title = '', meta_keywords = '', meta_description = '')
-    @page_title = "#{title}" if title.length > 0
+    @page_title = title unless title.empty?
     @meta_keywords = meta_keywords
     @meta_description = meta_description
   end
@@ -122,11 +122,11 @@ class ApplicationController < ActionController::Base
 
   private
 
-    def user_locale
-      params[:locale] || cookies[:locale] || http_head_locale || I18n.default_locale
-    end
+  def user_locale
+    params[:locale] || cookies[:locale] || http_head_locale || I18n.default_locale
+  end
 
-    def http_head_locale
-      http_accept_language.language_region_compatible_from(I18n.available_locales)
-    end
+  def http_head_locale
+    http_accept_language.language_region_compatible_from(I18n.available_locales)
+  end
 end

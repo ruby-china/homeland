@@ -51,11 +51,12 @@ module UsersHelper
       return image_tag("avatar/#{size}.png", class: img_class)
     end
 
-    if user.avatar?
-      img = image_tag(user.avatar.url(user_avatar_size_name_for_2x(size)), class: img_class)
-    else
-      img = image_tag(user.letter_avatar_url(width * 2), class: img_class)
-    end
+    img =
+      if user.avatar?
+        image_tag(user.avatar.url(user_avatar_size_name_for_2x(size)), class: img_class)
+      else
+        image_tag(user.letter_avatar_url(width * 2), class: img_class)
+      end
 
     if link
       link_to(raw(img), user_path(user))

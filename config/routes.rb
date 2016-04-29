@@ -119,7 +119,6 @@ Rails.application.routes.draw do
   end
 
   get 'api' => 'home#api', as: 'api'
-  get 'twitter' => 'home#twitter', as: 'twitter'
   get 'markdown' => 'home#markdown', as: 'markdown'
 
   namespace :api do

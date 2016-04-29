@@ -1,11 +1,12 @@
 module Admin
-  class PagesController < ApplicationController
+  class PagesController < Admin::ApplicationController
+    before_action :set_page, only: [:show, :edit, :update, :destroy]
+
     def index
       @pages = Page.unscoped.order(id: :desc).paginate page: params[:page], per_page: 30
     end
 
     def show
-      @page = Page.unscoped.find_by_slug(params[:id])
     end
 
     def new
@@ -13,7 +14,6 @@ module Admin
     end
 
     def edit
-      @page = Page.unscoped.find_by_slug(params[:id])
     end
 
     def create
@@ -27,7 +27,6 @@ module Admin
     end
 
     def update
-      @page = Page.unscoped.find_by_slug(params[:id])
       @page.title = params[:page][:title]
       @page.body = params[:page][:body]
       @page.slug = params[:page][:slug]
@@ -42,10 +41,15 @@ module Admin
     end
 
     def destroy
-      @page = Page.unscoped.find_by_slug(params[:id])
       @page.destroy
 
       redirect_to(admin_pages_path)
+    end
+
+    private
+
+    def set_page
+      @page = Page.unscoped.find_by_slug(params[:id])
     end
   end
 end

@@ -1,11 +1,12 @@
 module Admin
-  class PhotosController < ApplicationController
+  class PhotosController < Admin::ApplicationController
+    before_action :set_photo, only: [:show, :edit, :update, :destroy]
+
     def index
-      @photos = Photo.recent.includes(:user).paginate page: params[:page], per_page: 20
+      @photos = Photo.recent.includes(:user).paginate(page: params[:page], per_page: 20)
     end
 
     def show
-      @photo = Photo.find(params[:id])
     end
 
     def new
@@ -13,7 +14,6 @@ module Admin
     end
 
     def edit
-      @photo = Photo.find(params[:id])
     end
 
     def create
@@ -27,7 +27,6 @@ module Admin
     end
 
     def update
-      @photo = Photo.find(params[:id])
       if @photo.update_attributes(params[:photo].permit!)
         redirect_to(admin_photo_path(@photo), notice: 'Photo was successfully updated.')
       else
@@ -36,10 +35,14 @@ module Admin
     end
 
     def destroy
-      @photo = Photo.find(params[:id])
       @photo.destroy
-
       redirect_to(admin_photos_url)
+    end
+
+    private
+
+    def set_photo
+      @photo = Photo.find(params[:id])
     end
   end
 end

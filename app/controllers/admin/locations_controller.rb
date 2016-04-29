@@ -1,72 +1,48 @@
 module Admin
-  class LocationsController < ApplicationController
+  class LocationsController < Admin::ApplicationController
+    before_action :set_location, only: [:show, :edit, :update, :destroy]
+
     def index
       @locations = Location.hot.paginate(page: params[:page], per_page: 20)
-
-      respond_to do |format|
-        format.html # index.html.erb
-        format.json
-      end
     end
 
     def show
-      @location = Location.find(params[:id])
-
-      respond_to do |format|
-        format.html # show.html.erb
-        format.json
-      end
     end
 
     def new
       @location = Location.new
-
-      respond_to do |format|
-        format.html # new.html.erb
-        format.json
-      end
     end
 
     def edit
-      @location = Location.find(params[:id])
     end
 
     def create
       @location = Location.new(params[:location].permit!)
 
-      respond_to do |format|
-        if @location.save
-          format.html { redirect_to(admin_locations_path, notice: 'Location 创建成功。') }
-          format.json
-        else
-          format.html { render action: 'new' }
-          format.json
-        end
+      if @location.save
+        redirect_to(admin_locations_path, notice: 'Location 创建成功。')
+      else
+        render action: 'new'
       end
     end
 
     def update
-      @location = Location.find(params[:id])
-
-      respond_to do |format|
-        if @location.update_attributes(params[:location].permit!)
-          format.html { redirect_to(admin_locations_path, notice: 'Location 更新成功。') }
-          format.json
-        else
-          format.html { render action: 'edit' }
-          format.json
-        end
+      if @location.update_attributes(params[:location].permit!)
+        redirect_to(admin_locations_path, notice: 'Location 更新成功。')
+      else
+        render action: 'edit'
       end
     end
 
     def destroy
-      @location = Location.find(params[:id])
       @location.destroy
+      redirect_to(admin_locations_path, notice: '删除成功。')
+    end
 
-      respond_to do |format|
-        format.html { redirect_to(admin_locations_path, notice: '删除成功。') }
-        format.json
-      end
+    private
+
+    def set_location
+      @location = Location.find(params[:id])
     end
   end
 end

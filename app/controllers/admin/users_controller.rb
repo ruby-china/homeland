@@ -1,5 +1,5 @@
 module Admin
-  class UsersController < ApplicationController
+  class UsersController < Admin::ApplicationController
     def index
       @users = User.all
       if params[:q]

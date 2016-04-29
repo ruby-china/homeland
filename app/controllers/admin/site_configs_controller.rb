@@ -1,5 +1,5 @@
 module Admin
-  class SiteConfigsController < ApplicationController
+  class SiteConfigsController < Admin::ApplicationController
     before_action :get_setting, only: [:edit, :update]
 
     def index

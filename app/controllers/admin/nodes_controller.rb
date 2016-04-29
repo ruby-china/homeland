@@ -1,11 +1,12 @@
 module Admin
-  class NodesController < ApplicationController
+  class NodesController < Admin::ApplicationController
+    before_action :set_node, only: [:show, :edit, :update, :destroy]
+
     def index
       @nodes = Node.sorted.includes(:section)
     end
 
     def show
-      @node = Node.find(params[:id])
     end
 
     def new
@@ -13,7 +14,6 @@ module Admin
     end
 
     def edit
-      @node = Node.find(params[:id])
     end
 
     def create
@@ -27,8 +27,6 @@ module Admin
     end
 
     def update
-      @node = Node.find(params[:id])
-
       if @node.update_attributes(params[:node].permit!)
         redirect_to(admin_nodes_path, notice: 'Node was successfully updated.')
       else
@@ -37,10 +35,14 @@ module Admin
     end
 
     def destroy
-      @node = Node.find(params[:id])
       @node.destroy
-
       redirect_to(admin_nodes_url)
+    end
+
+    private
+
+    def set_node
+      @node = Node.find(params[:id])
     end
   end
 end

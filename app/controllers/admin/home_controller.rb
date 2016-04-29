@@ -1,5 +1,5 @@
 module Admin
-  class HomeController < ApplicationController
+  class HomeController < Admin::ApplicationController
     def index
       @recent_topics = Topic.recent.limit(5)
     end

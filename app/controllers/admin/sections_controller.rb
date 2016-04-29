@@ -1,11 +1,12 @@
 module Admin
-  class SectionsController < ApplicationController
+  class SectionsController < Admin::ApplicationController
+    before_action :set_section, only: [:show, :edit, :update, :destroy]
+
     def index
       @sections = Section.all
     end
 
     def show
-      @section = Section.find(params[:id])
     end
 
     def new
@@ -13,7 +14,6 @@ module Admin
     end
 
     def edit
-      @section = Section.find(params[:id])
     end
 
     def create
@@ -27,8 +27,6 @@ module Admin
     end
 
     def update
-      @section = Section.find(params[:id])
-
       if @section.update_attributes(params[:section].permit!)
         redirect_to(admin_sections_path, notice: 'Section was successfully updated.')
       else
@@ -37,10 +35,15 @@ module Admin
     end
 
     def destroy
-      @section = Section.find(params[:id])
       @section.destroy
 
       redirect_to(admin_sections_url)
+    end
+
+    private
+
+    def set_section
+      @section = Section.find(params[:id])
     end
   end
 end

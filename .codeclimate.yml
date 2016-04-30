@@ -1,0 +1,13 @@
+engines:
+  bundler-audit:
+    enabled: true
+  brakeman:
+    enabled: true
+  coffeelint:
+    enabled: true
+  scss-lint:
+    enabled: true
+  fixme:
+    enabled: true
+  rubocop:
+    enabled: true

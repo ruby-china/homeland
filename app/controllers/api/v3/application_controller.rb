@@ -22,7 +22,7 @@ module Api
       rescue_from(AccessDenied) do |err|
         render json: { error: 'AccessDenied', message: err }, status: 403
       end
-      rescue_from(ActiveRecord::RecordNotFound) do |err|
+      rescue_from(ActiveRecord::RecordNotFound) do
         render json: { error: 'ResourceNotFound' }, status: 404
       end
 

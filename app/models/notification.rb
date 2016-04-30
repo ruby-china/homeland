@@ -25,7 +25,7 @@ class Notification < ActiveRecord::Base
   end
 
   def notify_title
-    return "" if self.actor.blank?
+    return '' if self.actor.blank?
     if notify_type == 'topic'
       "#{self.actor.login} 创建了话题 《#{self.target.title}》"
     elsif notify_type == "topic_reply"
@@ -37,7 +37,7 @@ class Notification < ActiveRecord::Base
     elsif notify_type == "node_changed"
       "你的话题被移动了节点到 #{self.second_target.name}"
     else
-      ""
+      ''
     end
   end
 

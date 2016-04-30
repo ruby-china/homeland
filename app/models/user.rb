@@ -215,7 +215,7 @@ class User < ApplicationRecord
     conditions = warden_conditions.dup
     login = conditions.delete(:login)
     login.downcase!
-    where(conditions.to_h).where(["lower(login) = :value OR lower(email) = :value", { value: login }]).first
+    where(conditions.to_h).where(['lower(login) = :value OR lower(email) = :value', { value: login }]).first
   end
 
   # Override Devise to send mails with async
@@ -485,7 +485,7 @@ class User < ApplicationRecord
   end
 
   def level_name
-    return I18n.t("common.#{level}_user")
+    I18n.t("common.#{level}_user")
   end
 
   def letter_avatar_url(size)
@@ -508,14 +508,13 @@ class User < ApplicationRecord
 
   # @example.com 的可以修改邮件地址
   def email_locked?
-    self.email.index('@example.com') == nil
+    self.email.exclude?('@example.com')
   end
 
   def calendar_data
     user = self
     Rails.cache.fetch(["user", self.id, 'calendar_data', Date.today, 'by-months']) do
       date_from = 12.months.ago.beginning_of_month.to_date
-      dates = (date_from..Date.today).to_a
       replies = user.replies.where('created_at > ?', date_from)
                              .group('date(created_at)')
                              .select('date(created_at) as date, count(id) as total_amount').all

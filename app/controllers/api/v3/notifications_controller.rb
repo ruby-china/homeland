@@ -34,7 +34,7 @@ module Api
       def read
         requires! :ids
 
-        if params[:ids].length > 0
+        if params[:ids].any?
           @notifications = current_user.notifications.where(id: params[:ids])
           Notification.read!(@notifications.collect(&:id))
         end

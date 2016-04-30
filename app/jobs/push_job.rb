@@ -15,7 +15,7 @@ class PushJob < ApplicationJob
     notification = RubyPushNotifications::APNS::APNSNotification.new tokens, { aps: note }
     pusher = RubyPushNotifications::APNS::APNSPusher.new(Setting.apns_pem, !Rails.env.production?)
     pusher.push [notification]
-    Rails.logger.tagged("PushJob") { Rails.logger.info "send to #{tokens.size} devices #{note} status: #{notification.success}"  }
+    Rails.logger.tagged('PushJob') { Rails.logger.info "send to #{tokens.size} devices #{note} status: #{notification.success}"  }
     notification.success
   end
 end

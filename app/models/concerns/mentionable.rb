@@ -27,7 +27,7 @@ module Mentionable
   def extract_mentioned_users
     logins = body.scan(/@(\w{3,20})/).flatten
     if logins.any?
-      self.mentioned_user_ids = User.where("login IN (?) AND id != (?)", logins, user.id).limit(5).pluck(:id)
+      self.mentioned_user_ids = User.where('login IN (?) AND id != (?)', logins, user.id).limit(5).pluck(:id)
     end
   end
 

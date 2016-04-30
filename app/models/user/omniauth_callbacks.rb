@@ -23,11 +23,12 @@ class User
 
     def new_from_provider_data(provider, uid, data)
       User.new do |user|
-        if data['email'].present? && !User.where(email: data['email']).exists?
-          user.email = data['email']
-        else
-          user.email = "#{provider}+#{uid}@example.com"
-        end
+        user.email =
+          if data['email'].present? && !User.where(email: data['email']).exists?
+            data['email']
+          else
+            "#{provider}+#{uid}@example.com"
+          end
 
         user.name = data['name']
         user.login = data['nickname']

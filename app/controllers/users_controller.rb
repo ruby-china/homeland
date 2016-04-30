@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     without_node_ids = [21, 22, 23, 31, 49, 51, 57, 25]
     @topics = @user.topics.fields_for_list.without_node_ids(without_node_ids).high_likes.limit(20)
     @replies = @user.replies.fields_for_list.recent.includes(:topic).limit(10)
-    set_seo_meta("#{@user.login}")
+    set_seo_meta(@user.login.to_s)
   end
 
   def topics

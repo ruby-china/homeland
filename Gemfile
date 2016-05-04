@@ -28,7 +28,7 @@ gem 'md_emoji'
 gem 'doorkeeper', '4.0.0.rc2'
 gem 'doorkeeper-i18n'
 
-gem 'bulk_insert', git: 'https://github.com/huacnlee/bulk_insert.git', branch: 'fix/active-record-5-warning'
+gem 'bulk_insert'
 
 # 上传组件
 gem 'carrierwave'

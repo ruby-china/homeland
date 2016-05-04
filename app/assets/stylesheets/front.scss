@@ -348,6 +348,7 @@
 .markdown {
   position:relative;
   line-height: 1.8em; font-size:14px; text-overflow: ellipsis; word-wrap: break-word;
+  font-family: "PingFang SC","Hiragino Sans GB",Helvetica,Arial,"Source Han Sans CN",Roboto,"Heiti SC","Microsoft Yahei",sans-serif !important;
   img { max-width: 100%; }
   p,
   pre,
@@ -365,7 +366,7 @@
     quotes: "\201C""\201D""\2018""\2019";
     position: relative;
     line-height: 1.45;
-    p { display:inline; font-size:12px; color: #999; }
+    p { display:inline; color: #999; }
     &:before,
     &:after {
       display: block;
@@ -431,7 +432,7 @@
     border-radius: 0px;
     word-break: break-all;
     line-height: 20px;
-    font-family: Monaco,Menlo, "Courier New", monospace;
+    font-family:Monaco,Menlo, "Courier New", monospace;
   }
   a:link,
   a:visited {
@@ -482,7 +483,7 @@
     p,
     blockquote,
     pre { margin-bottom:8px; }
-    li { line-height:1.6em; padding:2px 0; color:#333; font-size:13px; }
+    li { line-height:1.6em; padding:2px 0; color:#333; }
     ul { list-style-type: circle; margin-bottom: 0px; }
   }
   ol {

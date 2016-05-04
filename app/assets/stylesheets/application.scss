@@ -30,7 +30,7 @@
 body {
   background: #e9eaed;
   color: $black;
-  font-family: sans-serif;
+  font-family: Helvetica,Arial,"PingFang SC","Hiragino Sans GB","Source Han Sans CN",Roboto,"Heiti SC","Microsoft Yahei",sans-serif;
   padding-top: 65px;
 }
 
@@ -45,7 +45,7 @@ body {
 
   .navbar-brand {
     color: #666 !important;
-    font-family: sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: bold;
     margin-left: 0 !important;
     b { color: $red; }

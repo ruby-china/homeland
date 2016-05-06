@@ -516,8 +516,8 @@ class User < ApplicationRecord
     Rails.cache.fetch(["user", self.id, 'calendar_data', Date.today, 'by-months']) do
       date_from = 12.months.ago.beginning_of_month.to_date
       replies = user.replies.where('created_at > ?', date_from)
-                             .group('date(created_at)')
-                             .select('date(created_at) as date, count(id) as total_amount').all
+                             .group("date(created_at AT TIME ZONE 'CST')")
+                             .select("date(created_at AT TIME ZONE 'CST') AS date, count(id) AS total_amount").all
       timestamps = {}
       replies.map do |reply|
         timestamps[reply['date'].to_time.to_i.to_s] = reply['total_amount']

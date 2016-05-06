@@ -22,7 +22,7 @@ describe 'API V3', 'topics', type: :request do
       expect(json['topics'].size).to eq(4)
       fields = %w(id title created_at updated_at replied_at
                   replies_count node_name node_id last_reply_user_id
-                  last_reply_user_login deleted excellent)
+                  last_reply_user_login deleted excellent likes_count)
       expect(json['topics'][0]).to include(*fields)
       titles = json['topics'].map { |topic| topic['title'] }
       expect(titles).to be_include('This is a normal topic')

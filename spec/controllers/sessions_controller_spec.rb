@@ -13,21 +13,21 @@ describe SessionsController, type: :controller do
         referrer = "#{request.base_url}/account/edit"
         request.env['HTTP_REFERER'] = referrer
         get :new
-        session['user_return_to'].should be referrer
+        expect(session['user_return_to']).to eq referrer
       end
 
       it "should skip referrer if it's from other site" do
         referrer = "http://#{SecureRandom.hex(4)}.com"
         request.env['HTTP_REFERER'] = referrer
         get :new
-        session['user_return_to'].should be_nil
+        expect(session['user_return_to']).to eq nil
       end
 
       it 'should skip referrer if it is user sign in page' do
         referrer = "#{request.base_url}/account/sign_in"
         request.env['HTTP_REFERER'] = referrer
         get :new
-        session['user_return_to'].should be_nil
+        expect(session['user_return_to']).to eq nil
       end
     end
   end

@@ -3,7 +3,7 @@ require 'digest/md5'
 
 describe User, type: :model do
   before do
-    User.any_instance.stub(:update_index).and_return(true)
+    allow_any_instance_of(User).to receive(:update_index).and_return(true)
   end
   let(:topic) { create :topic }
   let(:user)  { create :user }
@@ -66,7 +66,7 @@ describe User, type: :model do
 
   describe '#read_topic?' do
     before do
-      User.any_instance.stub(:update_index).and_return(true)
+      allow_any_instance_of(User).to receive(:update_index).and_return(true)
       Rails.cache.write("user:#{user.id}:topic_read:#{topic.id}", nil)
     end
 

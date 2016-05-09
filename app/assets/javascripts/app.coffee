@@ -77,9 +77,7 @@ AppView = Backbone.View.extend
     $("a[rel=twipsy]").tooltip()
 
     # CommentAble @ 回复功能
-    commenters = App.scanLogins($(".cell_comments .comment .info .name a"))
-    commenters = ({login: k, name: v, search: "#{k} #{v}"} for k, v of commenters)
-    App.atReplyable(".cell_comments_new textarea", commenters)
+    App.atReplyable(".cell_comments_new textarea")
 
   likeable : (e) ->
     if !App.isLogined()
@@ -289,16 +287,19 @@ window.App =
     result
 
   atReplyable : (el, logins) ->
-    return if logins.length == 0
     $(el).atwho
       at : "@"
-      data : logins
-      search_key : "search"
-      tpl : "<li data-value='${login}'>${login} <small>${name}</small></li>"
+      searchKey: 'login'
+      callbacks:
+        remoteFilter: (query, callback) ->
+          $.getJSON '/search/users.json', { q: query }, (data) ->
+            callback(data)
+      displayTpl : "<li data-value='${login}'><img src='${avatar_url}' height='20' width='20'/> ${login} <small>${name}</small></li>"
+      insertTpl : "@${login}"
     .atwho
       at : ":"
       data : window.EMOJI_LIST
-      tpl : "<li data-value='${name}:'><img src='#{App.asset_url}/assets/emojis/${name}.png' height='20' width='20'/> ${name} </li>"
+      displayTpl : "<li data-value='${name}:'><img src='#{App.asset_url}/assets/emojis/${name}.png' height='20' width='20'/> ${name} </li>"
     true
 
 $(document).on 'page:change',  ->

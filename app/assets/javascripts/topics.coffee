@@ -384,11 +384,8 @@ window.TopicView = Backbone.View.extend
         backdrop : true
         show : true
 
-    # @ Reply
-    logins = App.scanLogins($("#topic-show .leader a[data-author]"))
-    $.extend logins, App.scanLogins($('#replies span.name a'))
-    logins = ({login: k, name: v, search: "#{k} #{v}"} for k, v of logins)
-    App.atReplyable("textarea", logins)
+    # @ Mention complete
+    App.atReplyable("textarea")
 
     # Focus title field in new-topic page
     $("body[data-controller-name='topics'] #topic_title").focus()

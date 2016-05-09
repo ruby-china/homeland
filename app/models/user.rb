@@ -7,6 +7,7 @@ class User < ApplicationRecord
   include BaseModel
   extend OmniauthCallbacks
   include Searchable
+  include Redis::Search
 
   acts_as_cached version: 1, expires_in: 1.week
 
@@ -14,6 +15,12 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable, :recoverable,
          :rememberable, :trackable, :validatable, :omniauthable
+
+  redis_search title_field: :login,
+               alias_field: :name,
+               score_field: :followers_count,
+               prefix_index_enable: true,
+               ext_fields: [:large_avatar_url, :name]
 
   mount_uploader :avatar, AvatarUploader
 
@@ -53,6 +60,10 @@ class User < ApplicationRecord
     select(:id, :name, :login, :email, :email_md5, :email_public, :avatar, :verified, :state,
          :tagline, :github, :website, :location, :location_id, :twitter, :co)
   }
+
+  def alias_fields
+    [self.name]
+  end
 
   def following
     User.where(id: self.following_ids)

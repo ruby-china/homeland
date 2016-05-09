@@ -190,6 +190,7 @@ GEM
     jbuilder (2.4.1)
       activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
+    jquery-atwho-rails (1.3.2)
     jquery-rails (4.1.1)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -331,8 +332,13 @@ GEM
       redis (~> 3.0, >= 3.0.4)
     redis-objects (1.2.1)
       redis (>= 3.0.2)
+    redis-search (1.0.0.beta2)
+      redis (>= 3.0.0)
+      redis-namespace (>= 1.3.0)
+      ruby-pinyin (~> 0.3, >= 0.3.0)
     responders (2.2.0)
       railties (>= 4.2.0, < 5.1)
+    rmmseg-cpp-new (0.3.1)
     rouge (1.8.0)
     rspec-core (3.5.0.beta1)
       rspec-support (= 3.5.0.beta1)
@@ -357,6 +363,8 @@ GEM
       rainbow (>= 1.99.1, < 3.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.0, >= 1.0.1)
+    ruby-pinyin (0.5.0)
+      rmmseg-cpp-new (~> 0.3.1)
     ruby-progressbar (1.8.0)
     ruby-push-notifications (0.4.0)
       builder (~> 3.0)
@@ -455,6 +463,7 @@ DEPENDENCIES
   http_accept_language
   jasmine-rails (~> 0.10.2)
   jbuilder
+  jquery-atwho-rails
   jquery-rails
   jquery-turbolinks
   kgio
@@ -483,6 +492,7 @@ DEPENDENCIES
   redis
   redis-namespace
   redis-objects
+  redis-search (= 1.0.0.beta2)
   rouge (~> 1.8.0)
   rspec-rails (= 3.5.0.beta1)
   rubocop (~> 0.39.0)

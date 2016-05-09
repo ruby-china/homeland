@@ -23,6 +23,7 @@ gem 'rails-i18n', '5.0.0.beta3'
 gem 'http_accept_language'
 gem 'rails_autolink'
 gem 'md_emoji'
+gem 'jquery-atwho-rails'
 
 # OAuth Provider
 gem 'doorkeeper', '4.0.0.rc2'
@@ -53,6 +54,7 @@ gem 'will_paginate'
 # 搜索
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
+gem 'redis-search', '1.0.0.beta2'
 
 # 三方平台 OAuth 验证登陆
 gem 'omniauth'

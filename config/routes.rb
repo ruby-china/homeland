@@ -79,6 +79,7 @@ Rails.application.routes.draw do
   resources :jobs
 
   get '/search' => 'search#index', as: 'search'
+  get '/search/users' => 'search#users', as: 'search_users'
 
   namespace :admin do
     root to: 'home#index', as: 'root'

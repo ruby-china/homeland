@@ -7,6 +7,7 @@ class User < ApplicationRecord
   include BaseModel
   extend OmniauthCallbacks
   include Searchable
+  include Redis::Search
 
   acts_as_cached version: 1, expires_in: 1.week
 
@@ -14,6 +15,10 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable, :recoverable,
          :rememberable, :trackable, :validatable, :omniauthable
+
+  redis_search title_field: :login,
+               alias_field: :name,
+               ext_fields: [:large_avatar_url, :name]
 
   mount_uploader :avatar, AvatarUploader
 

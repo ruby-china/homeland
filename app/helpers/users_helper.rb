@@ -53,7 +53,9 @@ module UsersHelper
 
     img =
       if user.avatar?
-        image_tag(user.avatar.url(user_avatar_size_name_for_2x(size)), class: img_class)
+        image_url = user.avatar.url(user_avatar_size_name_for_2x(size))
+        image_url += "?t=#{user.updated_at.to_i}" if opts[:timestamp]
+        image_tag(image_url, class: img_class)
       else
         image_tag(user.letter_avatar_url(width * 2), class: img_class)
       end

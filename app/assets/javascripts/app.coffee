@@ -300,6 +300,7 @@ window.App =
       at : ":"
       data : window.EMOJI_LIST
       displayTpl : "<li data-value='${name}:'><img src='#{App.asset_url}/assets/emojis/${name}.png' height='20' width='20'/> ${name} </li>"
+      insertTpl: ":${name}:"
     true
 
 $(document).on 'page:change',  ->

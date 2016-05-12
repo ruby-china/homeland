@@ -188,22 +188,20 @@ Rails.application.routes.draw do
   get 'users/city/:id' => 'users#city', as: 'location_users'
   get 'users' => 'users#index', as: 'users'
 
-  constraints(id: /[\w\.]*/) do
-    resources :users, path: '', as: 'users' do
-      member do
-        get :topics
-        get :replies
-        get :favorites
-        get :notes
-        get :blocked
-        post :block
-        post :unblock
-        post :follow
-        post :unfollow
-        get :followers
-        get :following
-        get :calendar
-      end
+  resources :users, path: '', as: 'users' do
+    member do
+      get :topics
+      get :replies
+      get :favorites
+      get :notes
+      get :blocked
+      post :block
+      post :unblock
+      post :follow
+      post :unfollow
+      get :followers
+      get :following
+      get :calendar
     end
   end
 

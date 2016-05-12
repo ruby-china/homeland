@@ -27,6 +27,43 @@ describe UsersHelper, type: :helper do
     end
   end
 
+  describe 'user_avatar_tag' do 
+    it "should work if user not exist" do 
+      user_avatar_tag(nil).should eq image_tag("avatar/normal.png", class: "media-object avatar-48")
+    end
+
+    it "should work if user exists" do 
+      user = create(:user)
+      img = image_tag(user.letter_avatar_url(96), class: "media-object avatar-48")
+      user_avatar_tag(user).should eq link_to(raw(img), user_path(user))
+    end
+
+    it "should work if avatar exist" do 
+      user = create(:avatar_user)
+      image_url = user.avatar.url(user_avatar_size_name_for_2x(:normal))
+      img = image_tag(image_url, class: "media-object avatar-48")
+      user_avatar_tag(user).should eq link_to(raw(img), user_path(user)) 
+    end
+
+    it "should work with defferent size" do 
+      user_avatar_tag(nil, :large).should eq image_tag("avatar/large.png", class: "media-object avatar-96")
+    end
+
+    it "should work with timestamp param" do 
+      user = create(:avatar_user)
+      image_url = user.avatar.url(user_avatar_size_name_for_2x(:normal)) + "?t=#{user.updated_at.to_i}"
+      img = image_tag(image_url, class: "media-object avatar-48")
+      user_avatar_tag(user, :normal, timestamp: true).should eq link_to(raw(img), user_path(user)) 
+    end
+
+    it "should work if link is false" do 
+      user = create(:avatar_user)
+      image_url = user.avatar.url(user_avatar_size_name_for_2x(:normal)) + "?t=#{user.updated_at.to_i}"
+      img = image_tag(image_url, class: "media-object avatar-48")
+      user_avatar_tag(user, :normal, timestamp: true, link: false).should eq img 
+    end
+  end
+
   describe '.render_user_level_tag' do
     let(:user) { create(:user) }
     subject { helper.render_user_level_tag(user) }

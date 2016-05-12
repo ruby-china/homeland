@@ -2,6 +2,7 @@
 comments = Comment.where(commentable_type: commentable.class.name, commentable_id: commentable.id).includes(:user)
 new_comment = Comment.new(commentable_type: commentable.class.name, commentable_id: commentable.id)
 %>
+
 <div id="<%= commentable.class.name %>_<%= commentable.id %>_cell_comments" class="cell_comments panel panel-default">
   <div class="panel-heading">评论列表</div>
   <div class="panel-body">
@@ -12,18 +13,19 @@ new_comment = Comment.new(commentable_type: commentable.class.name, commentable_
     <% end %>
   </div>
 </div>
+
 <% if @current_user %>
-<div id="<%= commentable.class.name %>_<%= commentable.id %>_cell_new_comment" class="cell_comments_new panel panel-default">
-  <div class="panel-heading">发表新评论</div>
-  <%= form_for(new_comment, remote: true, html: { class: "panel-body" }) do |f| %>
-  <%= f.hidden_field :commentable_type %>
-  <%= f.hidden_field :commentable_id %>
-  <div class="form-group">
-    <%= f.text_area :body, :class => "form-control", :rows => "3" %>
+  <div id="<%= commentable.class.name %>_<%= commentable.id %>_cell_new_comment" class="cell_comments_new panel panel-default">
+    <div class="panel-heading">发表新评论</div>
+    <%= form_for(new_comment, remote: true, html: { class: "panel-body" }) do |f| %>
+      <%= f.hidden_field :commentable_type %>
+      <%= f.hidden_field :commentable_id %>
+      <div class="form-group">
+        <%= f.text_area :body, :class => "form-control", :rows => "3" %>
+      </div>
+      <div class="buttons">
+        <%= f.submit t("comments.create_comment"), :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %> <span class="help-inline">Ctrl+Enter</span>
+      </div>
+    <% end %>
   </div>
-  <div class="buttons">
-    <%= f.submit t("comments.create_comment"), :class => "btn btn-primary", 'data-disable-with' => t("common.saving") %> <span class="help-inline">Ctrl+Enter</span>
-  </div>
-  <% end %>
-</div>
 <% end %>

@@ -45,7 +45,7 @@ describe UsersHelper, type: :helper do
       user_avatar_tag(user).should eq link_to(raw(img), user_path(user)) 
     end
 
-    it "should work with defferent size" do 
+    it "should work with different size" do 
       user_avatar_tag(nil, :large).should eq image_tag("avatar/large.png", class: "media-object avatar-96")
     end
 

@@ -14,6 +14,7 @@
   transition: all .25s ease-in-out;
 }
 .fluidbox-wrap {
+
   background-position: center center;
   background-size: cover;
   margin: 0 auto;
@@ -24,6 +25,7 @@
   background-size: cover;
   background-position: center center;
   position: absolute;
+  z-index: 2000 !important;
   transition: all .25s ease-in-out;
 }
 .fluidbox-closed .fluidbox-ghost {
@@ -37,4 +39,12 @@
   cursor: pointer;
   cursor: -webkit-zoom-out !important;
   cursor: -moz-zoom-out !important;
+}
+
+.fluidbox-opened .fluidbox-overlay {
+  z-index: 2000 !important;
+}
+
+.fluidbox-opened .fluidbox-wrap {
+  z-index: 2001 !important;
 }

@@ -8,3 +8,27 @@
       user:
         location: "請用中文填寫所在城市"
         email: "保存以後就不可以改了哦！"
+    labels:
+      user:
+        name: "名字"
+        login: "用戶名"
+        email: "Email"
+        email_public: "公開 Email"
+        avatar: "頭像"
+        location: "城市"
+        bio: "個人介紹"
+        password: "密碼"
+        password_confirmation: "確認密碼"
+        website: "個人主頁"
+        last_logined_at: "上次登錄時間"
+        tagline: "簽名"
+        state: "狀態"
+        verified: "信任用戶"
+        hr: "招聘人員"
+        company: "公司"
+        github: "GitHub"
+        remember_me: "記住登陸狀態"
+        current_password: "舊密碼"
+    placeholders:
+      user:
+        yourname: "帳號" 

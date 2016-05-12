@@ -1,10 +1,10 @@
 GIT
   remote: https://github.com/sinatra/sinatra.git
-  revision: aa4ad35b7c5e6ed5fb64b8572fc916003519bc3f
+  revision: d51513d094d1fe01543e546d07ef48663ecc2d8f
   specs:
     sinatra (2.0.0.pre.alpha)
       mustermann (~> 0.4)
-      rack (= 2.0.0.alpha)
+      rack (= 2.0.0.rc1)
       rack-protection (~> 1.5)
       tilt (~> 2.0)
 
@@ -96,7 +96,7 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    carrierwave (0.11.1)
+    carrierwave (0.11.2)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
       json (>= 1.7)
@@ -152,11 +152,11 @@ GEM
       elasticsearch-transport (= 1.0.17)
     elasticsearch-api (1.0.17)
       multi_json
-    elasticsearch-model (0.1.8)
+    elasticsearch-model (0.1.9)
       activesupport (> 3)
       elasticsearch (> 0.4)
       hashie
-    elasticsearch-rails (0.1.8)
+    elasticsearch-rails (0.1.9)
     elasticsearch-transport (1.0.17)
       faraday
       multi_json
@@ -238,7 +238,7 @@ GEM
     nio4r (1.2.1)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
-    notifications (0.0.5)
+    notifications (0.1.0)
       rails (>= 4.2.0, < 5.1)
       will_paginate (>= 3.0.0)
     oauth2 (1.1.0)
@@ -278,7 +278,7 @@ GEM
       byebug (~> 8.0)
       pry (~> 0.10)
     puma (3.4.0)
-    rack (2.0.0.alpha)
+    rack (2.0.0.rc1)
       json
     rack-attack (4.4.1)
       rack
@@ -412,7 +412,7 @@ GEM
       rails (>= 4.2)
     thor (0.19.1)
     thread_safe (0.3.5)
-    tilt (2.0.2)
+    tilt (2.0.3)
     tool (0.2.3)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)

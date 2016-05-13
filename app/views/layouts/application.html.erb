@@ -26,7 +26,7 @@
   <link rel="apple-touch-icon-precomposed" href="<%= cached_asset_path("ios-icon.png") %>" />
   <link rel="shortcut icon" href="<%= cached_asset_path("big_logo.png") %>" />
   <link rel="alternate" type="application/rss+xml" title="订阅最新帖" href="<%= main_app.feed_topics_url %>" />
-  <link rel="mask-icon" href="<%= cached_asset_path("mask.svg") %>" color="#BD2D2D" />
+  <link rel="mask-icon" href="<%= cached_asset_path("mask.svg") %>"/>
   <%= stylesheet_link_tag_with_cached "front" %>
   <%= action_cable_meta_tag %>
   <%= javascript_include_tag_with_cached "app" %>
@@ -41,7 +41,7 @@
           <a href="/" class="navbar-brand"><b>Ruby</b> China</a>
         </div>
 
-        <span id="main-nav-menu" data-turbolinks-temporary>
+        <div id="main-nav-menu" data-turbolinks-temporary>
           <%= render_list class: "nav navbar-nav" do |li|
              li << link_to(t("menu.topics"), main_app.topics_path)
              li << link_to(t("menu.wiki"), main_app.pages_path) if !mobile?
@@ -49,7 +49,7 @@
              li << link_to(t("menu.sites"), main_app.sites_path) if !mobile?
              li << link_to(t("menu.gems"), 'https://gems.ruby-china.org', target: '_blank') if !mobile?
           end %>
-        </span>
+        </div>
 
         <%= render "common/user_nav" %>
 

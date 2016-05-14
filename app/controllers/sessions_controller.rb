@@ -28,8 +28,12 @@ class SessionsController < Devise::SessionsController
 
   private
     def cache_referrer
-      if request.referrer && request.referrer.include?(request.domain)
+      if request.referrer && request.referrer.include?(domain_or_host)
         session['user_return_to'] = request.referrer
       end
+    end
+
+    def domain_or_host
+      request.domain || request.host
     end
 end

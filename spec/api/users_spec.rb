@@ -239,7 +239,7 @@ describe 'API V3', 'users', type: :request do
     it 'should follow work' do
       login_user!
       post "/api/v3/users/#{user.login}/follow.json"
-      expect(response.status).to eq 201
+      expect(response.status).to eq 200
       expect(json['ok']).to eq 1
       current_user.reload
       expect(current_user.followed?(user)).to eq true
@@ -249,7 +249,7 @@ describe 'API V3', 'users', type: :request do
       login_user!
       current_user.follow_user(user)
       post "/api/v3/users/#{user.login}/unfollow.json"
-      expect(response.status).to eq 201
+      expect(response.status).to eq 200
       expect(json['ok']).to eq 1
       current_user.reload
       expect(current_user.followed?(user)).to eq false
@@ -270,7 +270,7 @@ describe 'API V3', 'users', type: :request do
     it 'should work' do
       login_user!
       post "/api/v3/users/#{user.login}/block.json"
-      expect(response.status).to eq 201
+      expect(response.status).to eq 200
       expect(json['ok']).to eq 1
       current_user.reload
       expect(current_user.blocked_user?(user)).to eq true
@@ -280,7 +280,7 @@ describe 'API V3', 'users', type: :request do
       login_user!
       current_user.block_user(user.id)
       post "/api/v3/users/#{user.login}/unblock.json"
-      expect(response.status).to eq 201
+      expect(response.status).to eq 200
       expect(json['ok']).to eq 1
       current_user.reload
       expect(current_user.blocked_user?(user)).to eq false

@@ -1,0 +1,8 @@
+<% content_for :sitemap do %>
+  <a href="<%= admin_nodes_path %>"><%= t("cpane.menu.nodes")%></a> &gt; <span class="current"><%= t("common.edit")%></span>
+<% end %>
+<h1>Editing node</h1>
+
+<%= render 'form' %>
+
+

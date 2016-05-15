@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   # Serve websocket cable requests in-process
-  mount RuCaptcha::Engine => "/rucaptcha"
+  mount ActionCable.server => '/cable'
 
   use_doorkeeper do
     controllers applications: 'oauth/applications', authorized_applications: 'oauth/authorized_applications'
@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   delete 'account/auth/:provider/unbind' => 'users#auth_unbind', as: 'unbind_account'
   post 'account/update_private_token' => 'users#update_private_token', as: 'update_private_token_account'
 
+  mount RuCaptcha::Engine => "/rucaptcha"
   mount Notifications::Engine => '/notifications'
   mount StatusPage::Engine, at: '/'
 
@@ -78,8 +79,9 @@ Rails.application.routes.draw do
   resources :jobs
 
   get '/search' => 'search#index', as: 'search'
+  get '/search/users' => 'search#users', as: 'search_users'
 
-  namespace :cpanel do
+  namespace :admin do
     root to: 'home#index', as: 'root'
     resources :site_configs
     resources :replies
@@ -118,10 +120,61 @@ Rails.application.routes.draw do
   end
 
   get 'api' => 'home#api', as: 'api'
-  get 'twitter' => 'home#twitter', as: 'twitter'
   get 'markdown' => 'home#markdown', as: 'markdown'
 
-  mount API::Dispatch => '/api'
+  namespace :api do
+    namespace :v3 do
+      match 'hello', via: :get, to: 'root#hello'
+
+      resource :devices
+      resource :likes
+      resources :nodes
+      resources :photos
+      resources :notifications do
+        collection do
+          post :read
+          get :unread_count
+          delete :all
+        end
+      end
+      resources :topics do
+        member do
+          post :update
+          get :replies
+          post :replies
+          post :follow
+          post :unfollow
+          post :favorite
+          post :unfavorite
+          post :ban
+        end
+      end
+      resources :replies do
+        member do
+          post :update
+        end
+      end
+      resources :users do
+        collection do
+          get :me
+        end
+        member do
+          get :topics
+          get :replies
+          get :favorites
+          get :followers
+          get :following
+          get :blocked
+          post :follow
+          post :unfollow
+          post :block
+          post :unblock
+        end
+      end
+
+      match '*path', via: :all, to: 'root#not_found'
+    end
+  end
 
   require 'sidekiq/web'
   authenticate :user, ->(u) { u.admin? } do
@@ -135,19 +188,22 @@ Rails.application.routes.draw do
   get 'users/city/:id' => 'users#city', as: 'location_users'
   get 'users' => 'users#index', as: 'users'
 
-  resources :users, path: '', as: 'users' do
-    member do
-      get :topics
-      get :replies
-      get :favorites
-      get :notes
-      get :blocked
-      post :block
-      post :unblock
-      post :follow
-      post :unfollow
-      get :followers
-      get :following
+  constraints(id: /[\w\-\.]*/) do
+    resources :users, path: '', as: 'users' do
+      member do
+        get :topics
+        get :replies
+        get :favorites
+        get :notes
+        get :blocked
+        post :block
+        post :unblock
+        post :follow
+        post :unfollow
+        get :followers
+        get :following
+        get :calendar
+      end
     end
   end
 

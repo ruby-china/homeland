@@ -1,8 +1,19 @@
 .notifications {
+  .panel-heading {
+    font-size: 16px;
+    line-height: 32px;
+  }
+  .panel-body {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
   .notification {
-    margin-bottom: 10px;
-    padding: 10px;
+    margin: 0 -15px;
+    padding: 10px 15px;
     border-bottom: 1px solid #eee;
+    &:last-child {
+      border-bottom: 0;
+    }
     color: #999;
 
     a { color: #555; }

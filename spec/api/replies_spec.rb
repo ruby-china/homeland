@@ -49,7 +49,7 @@ describe 'API V3', 'replies', type: :request do
     it 'should work by owner' do
       login_user!
       post "/api/v3/replies/#{reply.id}.json", body: 'bar dar'
-      expect(response.status).to eq(201)
+      expect(response.status).to eq(200)
       reply.reload
       expect(json['reply']['body']).to eq 'bar dar'
       expect(json['reply']['body_html']).to eq reply.body_html
@@ -61,7 +61,7 @@ describe 'API V3', 'replies', type: :request do
       login_admin!
       r = create(:reply)
       post "/api/v3/replies/#{r.id}.json", body: 'bar dar'
-      expect(response.status).to eq(201)
+      expect(response.status).to eq(200)
     end
   end
 

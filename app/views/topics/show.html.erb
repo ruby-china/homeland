@@ -20,14 +20,14 @@
       <%= render partial: "topics/topic_info", locals: { topic: @topic } %>
 
       <div class="panel-body markdown">
-        <%= raw SiteConfig.before_topic_html %>
+        <%= raw Setting.before_topic_html %>
 
         <article>
           <%= raw @topic.body_html %>
         </article>
 
 
-        <%= raw SiteConfig.after_topic_html %>
+        <%= raw Setting.after_topic_html %>
       </div>
 
       <% if @topic.excellent? %>

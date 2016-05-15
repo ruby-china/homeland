@@ -8,6 +8,9 @@ echo "deb http://packages.elastic.co/elasticsearch/2.x/debian stable main" | sud
 echo "deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main" | sudo tee -a /etc/apt/sources.list.d/pgdb.list
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 
+# Add Ruby sources
+sudo apt-add-repository ppa:brightbox/ruby-ng
+
 sudo apt-get update
 sudo apt-get upgrade -y
 sudo apt-get install -y git \
@@ -18,21 +21,16 @@ sudo apt-get install -y git \
                         libpq-dev \
                         postgresql-9.4 \
                         elasticsearch \
-                        openjdk-7-jre-headless
+                        openjdk-7-jre-headless \
+                        ruby2.3 \
+                        ruby2.3-dev
 
 sudo update-rc.d elasticsearch defaults
 sudo service elasticsearch start
 
 sudo su postgres -c "createuser -d -R -S $USER"
 
-# Insall ruby
-gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-\curl -sSL https://get.rvm.io | bash -s stable
-source /home/vagrant/.rvm/scripts/rvm
-rvm get head
-rvm install 2.3
-
 gem sources --add https://ruby.taobao.org/ --remove https://rubygems.org/
 
-gem install bundler
+sudo gem install bundler
 bundle config mirror.https://rubygems.org https://ruby.taobao.org

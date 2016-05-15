@@ -1,0 +1,17 @@
+<ul class="list-group">
+  <li class="list-group-item">
+    <label class="col-sm-1">名称:</label> <%= @application.name %></li>
+  <li class="list-group-item">
+    <label class="col-sm-1">Uid:</label> <%= @application.uid %></li>
+  <li class="list-group-item">
+    <label class="col-sm-1">Secret:</label> <%= @application.secret %></li>
+  <li class="list-group-item">
+    <label class="col-sm-1">创建人:</label> <%= user_name_tag(@application.owner) %></li>
+  <li class="list-group-item">
+    <label class="col-sm-1">用户量:</label> <%= @application.access_tokens.count %></li>
+</ul>
+
+<div class="toolbar">
+  <%= link_to '修改', edit_admin_application_path(@application), class: "btn btn-sm btn-success" %>
+  <%= link_to '返回', admin_applications_path, class: "btn btn-sm btn-default" %>
+</div>

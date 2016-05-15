@@ -2,7 +2,7 @@
   <% if can? :create, Site %>
   <div class="panel panel-default">
     <div class="panel-body">
-      <%= raw SiteConfig.site_index_html %>
+      <%= raw Setting.site_index_html %>
       <%= link_to(t("sites.create"), new_site_path, class: "btn btn-success")%>
     </div>
   </div>
@@ -12,11 +12,11 @@
     <% @site_nodes.each do |node| %>
     <div class="panel panel-default">
       <div class="panel-heading"><%= node.name %></div>
-      <div class="panel-body">
+      <div class="panel-body row">
         <% node.sites.each do |item| %>
         <div class="col-md-2 site">
-          <%= image_tag(item.favicon_url, class: "favicon")%>
-          <%= link_to item.name, item.url, target: "_blank", rel: "nofollow", title: item.desc %>
+          <%= image_tag(item.favicon_url, class: "favicon", style: "width: 16px; height: 16px;")%>
+          <%= link_to item.name, item.url, target: "_blank", rel: "twipsy", title: item.desc %>
         </div>
         <% end %>
       </div>

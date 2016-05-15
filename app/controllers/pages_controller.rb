@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   def index
     set_seo_meta('Wiki')
 
-    fresh_when(etag: [SiteConfig.wiki_index_html])
+    fresh_when(etag: [Setting.wiki_index_html])
   end
 
   def recent

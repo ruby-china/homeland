@@ -7,6 +7,7 @@ class User < ApplicationRecord
   include BaseModel
   extend OmniauthCallbacks
   include Searchable
+  include Redis::Search
 
   acts_as_cached version: 1, expires_in: 1.week
 
@@ -14,6 +15,10 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable, :recoverable,
          :rememberable, :trackable, :validatable, :omniauthable
+
+  redis_search title_field: :login,
+               alias_field: :name,
+               ext_fields: [:large_avatar_url, :name]
 
   mount_uploader :avatar, AvatarUploader
 
@@ -88,6 +93,10 @@ class User < ApplicationRecord
   def github_url
     return '' if github.blank?
     "https://github.com/#{github.split('/').last}"
+  end
+
+  def website_url
+    website[%r{^https?://}] ? website : "http://#{website}"
   end
 
   def twitter_url
@@ -211,7 +220,7 @@ class User < ApplicationRecord
     conditions = warden_conditions.dup
     login = conditions.delete(:login)
     login.downcase!
-    where(conditions.to_h).where(["lower(login) = :value OR lower(email) = :value", { value: login }]).first
+    where(conditions.to_h).where(['lower(login) = :value OR lower(email) = :value', { value: login }]).first
   end
 
   # Override Devise to send mails with async
@@ -481,7 +490,7 @@ class User < ApplicationRecord
   end
 
   def level_name
-    return I18n.t("common.#{level}_user")
+    I18n.t("common.#{level}_user")
   end
 
   def letter_avatar_url(size)
@@ -504,6 +513,21 @@ class User < ApplicationRecord
 
   # @example.com 的可以修改邮件地址
   def email_locked?
-    self.email.index('@example.com') == nil
+    self.email.exclude?('@example.com')
+  end
+
+  def calendar_data
+    user = self
+    Rails.cache.fetch(["user", self.id, 'calendar_data', Date.today, 'by-months']) do
+      date_from = 12.months.ago.beginning_of_month.to_date
+      replies = user.replies.where('created_at > ?', date_from)
+                             .group("date(created_at AT TIME ZONE 'CST')")
+                             .select("date(created_at AT TIME ZONE 'CST') AS date, count(id) AS total_amount").all
+      timestamps = {}
+      replies.map do |reply|
+        timestamps[reply['date'].to_time.to_i.to_s] = reply['total_amount']
+      end
+      timestamps
+    end
   end
 end

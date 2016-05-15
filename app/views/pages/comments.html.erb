@@ -1,7 +1,7 @@
 <div class="panel panel-default">
-    <div id="comments" class="panel-body">
-        <%= link_to @page.title, page_path(@page.slug) %> 的评论
-    </div>
+  <div id="comments" class="panel-body">
+    <%= link_to @page.title, page_path(@page.slug) %> 的评论
+  </div>
 </div>
 
 <%= render "/shared/comments", commentable: @page %>

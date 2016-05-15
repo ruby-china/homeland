@@ -31,11 +31,11 @@
   <%= action_cable_meta_tag %>
   <%= javascript_include_tag_with_cached "app" %>
   <%= csrf_meta_tag %>
-  <%= raw SiteConfig.custom_head_html %>
+  <%= raw Setting.custom_head_html %>
 </head>
 <body data-controller-name="<%= controller_name %>">
   <div class="header">
-    <nav class="navbar navbar-inverse navbar-static-top navbar-default">
+    <nav class="navbar navbar-inverse navbar-fixed-top navbar-default">
       <div class="container">
         <div class="navbar-header" id="navbar-header" data-turbolinks-permanent>
           <a href="/" class="navbar-brand"><b>Ruby</b> China</a>
@@ -46,7 +46,6 @@
              li << link_to(t("menu.topics"), main_app.topics_path)
              li << link_to(t("menu.wiki"), main_app.pages_path) if !mobile?
              li << link_to(t("menu.jobs"), main_app.jobs_path)
-             li << link_to(t("menu.tweets"), main_app.twitter_path) if !mobile?
              li << link_to(t("menu.sites"), main_app.sites_path) if !mobile?
              li << link_to(t("menu.gems"), 'https://gems.ruby-china.org', target: '_blank') if !mobile?
           end %>
@@ -55,7 +54,7 @@
         <%= render "common/user_nav" %>
 
         <ul class="nav navbar-nav navbar-right">
-          <li class="nav-search hidden-xs">
+          <li class="nav-search hidden-xs hidden-sm">
             <form class="navbar-form form-search active" action="/search" method="GET">
               <div class="form-group">
                 <input class="form-control" name="q" type="text" value="<%= params[:q] %>" placeholder="搜索本站内容" />
@@ -86,7 +85,7 @@
   <% if not mobile? %>
   <footer class="footer" id="footer" data-turbolinks-permanent>
     <div class="container">
-      <%= raw SiteConfig.footer_html %>
+      <%= raw Setting.footer_html %>
     </div>
 
   </footer>

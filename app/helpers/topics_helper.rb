@@ -15,7 +15,7 @@ module TopicsHelper
 
   def topic_favorite_tag(topic, opts = {})
     return '' if current_user.blank?
-    opts[:class] ||= ""
+    opts[:class] ||= ''
     class_name = ''
     link_title = '收藏'
     if current_user && current_user.favorite_topic_ids.include?(topic.id)
@@ -35,13 +35,9 @@ module TopicsHelper
     return '' if current_user.blank?
     return '' if topic.blank?
     return '' if owner?(topic)
-    opts[:class] ||= ""
+    opts[:class] ||= ''
     class_name = 'follow'
-    followed = false
-    if topic.follower_ids.include?(current_user.id)
-      class_name = 'follow active'
-      followed = true
-    end
+    class_name += ' active' if topic.follower_ids.include?(current_user.id)
     if opts[:class].present?
       class_name += ' ' + opts[:class]
     end

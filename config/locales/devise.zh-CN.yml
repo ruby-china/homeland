@@ -10,7 +10,7 @@
       user:
         failure: '三方登陆过程异常，请重试。'
     failure:
-      already_authenticated: '您已经登录。'
+      already_authenticated: '登录成功。'
       unauthenticated: '继续操作前请注册或者登录。'
       unconfirmed: '请先激活您的帐号。'
       locked: '您的帐号已被锁定。'
@@ -23,6 +23,7 @@
     sessions:
       signed_in: '登录成功。'
       signed_out: '退出成功。'
+      already_signed_out: "退出成功。"
     passwords:
       send_instructions: '稍后，您将收到重置密码的电子邮件。'
       updated: '您的密码已修改成功，请重新登录。'

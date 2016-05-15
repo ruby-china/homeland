@@ -19,14 +19,14 @@
           <%= f.label :github, class: 'control-label' %>
           <div class="input-group">
             <span class="input-group-addon">https://github.com/</span>
-            <%= f.text_field :github, type: :email, class: "form-control", placeholder: "yourname" %>
+            <%= f.text_field :github, class: "form-control", placeholder: I18n.t('simple_form.placeholders.user.yourname') %>
           </div>
         </div>
         <div class="form-group">
           <%= f.label :twitter, class: 'control-label' %>
           <div class="input-group">
             <span class="input-group-addon">http://twitter.com/</span>
-            <%= f.text_field :twitter, type: :email, class: "form-control", placeholder: "yourname" %>
+            <%= f.text_field :twitter, class: "form-control", placeholder: I18n.t('simple_form.placeholders.user.yourname') %>
           </div>
         </div>
         <%= f.input :website, type: :url, input_html: { placeholder: "http://" } %>
@@ -57,7 +57,7 @@
   <div class="sidebar col-md-3">
     <div class="panel panel-default" style="text-align:center;">
       <div class="panel-body">
-        <%= user_avatar_tag(@user, :large, link: false) %>
+        <%= user_avatar_tag(@user, :large, link: false, timestamp: true) %>
       </div>
     </div>
     <div class="panel panel-default">

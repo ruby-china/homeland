@@ -35,31 +35,31 @@ class Topic < ApplicationRecord
   # scopes
   scope :last_actived, -> { order(last_active_mark: :desc) }
   # 推荐的话题
-  scope :suggest, -> { where("suggested_at IS NOT NULL").order(suggested_at: :desc) }
+  scope :suggest, -> { where('suggested_at IS NOT NULL').order(suggested_at: :desc) }
   scope :without_suggest, -> { where(suggested_at: nil) }
   scope :high_likes, -> { order(likes_count: :desc).order(id: :desc) }
   scope :high_replies, -> { order(replies_count: :desc).order(id: :desc) }
   scope :no_reply, -> { where(replies_count: 0) }
-  scope :popular, -> { where("likes_count > 5") }
+  scope :popular, -> { where('likes_count > 5') }
   scope :exclude_column_ids, proc {|column, ids|
-    if ids.size == 0
+    if ids.empty?
       all
     else
       where.not({ column =>  ids })
     end
   }
-  scope :without_node_ids, proc { |ids| exclude_column_ids("node_id", ids) }
-  scope :excellent, -> { where("excellent >= 1") }
-  scope :without_hide_nodes, -> { exclude_column_ids("node_id", Topic.topic_index_hide_node_ids) }
+  scope :without_node_ids, proc { |ids| exclude_column_ids('node_id', ids) }
+  scope :excellent, -> { where('excellent >= 1') }
+  scope :without_hide_nodes, -> { exclude_column_ids('node_id', Topic.topic_index_hide_node_ids) }
   scope :without_nodes, proc { |node_ids|
     ids = node_ids + Topic.topic_index_hide_node_ids
     ids.uniq!
-    exclude_column_ids("node_id", ids)
+    exclude_column_ids('node_id', ids)
   }
   scope :without_users, proc { |user_ids|
-    exclude_column_ids("user_id", user_ids)
+    exclude_column_ids('user_id', user_ids)
   }
-  scope :without_body, -> { select(column_names - ['body'])}
+  scope :without_body, -> { select(column_names - ['body']) }
 
   mapping do
     indexes :title
@@ -85,7 +85,7 @@ class Topic < ApplicationRecord
   end
 
   def self.topic_index_hide_node_ids
-    SiteConfig.node_ids_hide_in_topics_index.to_s.split(',').collect(&:to_i)
+    Setting.node_ids_hide_in_topics_index.to_s.split(',').collect(&:to_i)
   end
 
   before_save :store_cache_fields
@@ -198,7 +198,7 @@ class Topic < ApplicationRecord
     follower_ids.uniq!
 
     # 给关注者发通知
-    default_note = { notify_type: 'topic', target_type: "Topic", target_id: topic.id, actor_id: topic.user_id }
+    default_note = { notify_type: 'topic', target_type: 'Topic', target_id: topic.id, actor_id: topic.user_id }
     Notification.bulk_insert(set_size: 100) do |worker|
       follower_ids.each do |uid|
         # 排除同一个回复过程中已经提醒过的人

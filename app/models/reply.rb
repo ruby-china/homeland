@@ -15,12 +15,12 @@ class Reply < ApplicationRecord
   delegate :login, to: :user, prefix: true, allow_nil: true
 
   scope :fields_for_list, -> { select(:topic_id, :id, :body_html, :updated_at, :created_at) }
-  scope :without_body, -> { select(column_names - ['body'])}
+  scope :without_body, -> { select(column_names - ['body']) }
 
   validates :body, presence: true
   validates :body, uniqueness: { scope: [:topic_id, :user_id], message: '不能重复提交。' }
   validate do
-    ban_words = (SiteConfig.ban_words_on_reply || '').split("\n").collect(&:strip)
+    ban_words = (Setting.ban_words_on_reply || '').split("\n").collect(&:strip)
     if body.strip.downcase.in?(ban_words)
       errors.add(:body, '请勿回复无意义的内容，如你想收藏或赞这篇帖子，请用帖子后面的功能。')
     end
@@ -36,7 +36,8 @@ class Reply < ApplicationRecord
   def update_parent_topic_updated_at
     unless topic.blank?
       topic.update_deleted_last_reply(self)
-      true
+      # FIXME: 本应该 belongs_to :topic, touch: true 来实现的，但貌似有个 Bug 哪里没起作用
+      topic.touch
     end
   end
 
@@ -75,7 +76,7 @@ class Reply < ApplicationRecord
     # 给关注者发通知
     default_note = {
       notify_type: 'topic_reply',
-      target_type: "Reply", target_id: reply.id,
+      target_type: 'Reply', target_id: reply.id,
       second_target_type: 'Topic', second_target_id: topic.id,
       actor_id: reply.user_id
     }

@@ -69,7 +69,7 @@ module ApplicationHelper
 
   def timeago(time, options = {})
     options[:class] = options[:class].blank? ? 'timeago' : [options[:class], 'timeago'].join(' ')
-    options.merge!(title: time.iso8601)
+    options[:title] = time.iso8601
     content_tag(:abbr, EMPTY_STRING, class: options[:class], title: time.iso8601) if time
   end
 
@@ -130,7 +130,7 @@ module ApplicationHelper
   end
 
   def random_tips
-    tips = SiteConfig.tips
+    tips = Setting.tips
     return EMPTY_STRING if tips.blank?
     tips.split("\n").sample
   end

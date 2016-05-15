@@ -43,8 +43,8 @@ class Node < ApplicationRecord
   end
 
   def self.new_topic_dropdowns
-    return [] if SiteConfig.new_topic_dropdown_node_ids.blank?
-    node_ids = SiteConfig.new_topic_dropdown_node_ids.split(',').uniq.take(5)
+    return [] if Setting.new_topic_dropdown_node_ids.blank?
+    node_ids = Setting.new_topic_dropdown_node_ids.split(',').uniq.take(5)
     where(id: node_ids)
   end
 end

@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
                  ['/wiki']
                else
                  ["/#{controller_name}"]
-    end
+               end
   end
 
   before_action :set_locale
@@ -70,7 +70,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_seo_meta(title = '', meta_keywords = '', meta_description = '')
-    @page_title = "#{title}" if title.length > 0
+    @page_title = title unless title.empty?
     @meta_keywords = meta_keywords
     @meta_description = meta_description
   end
@@ -109,8 +109,8 @@ class ApplicationController < ActionController::Base
     # 加入页面上直接调用的信息用于组合 etag
     opts[:etag] << current_user
     # Config 的某些信息
-    opts[:etag] << SiteConfig.custom_head_html
-    opts[:etag] << SiteConfig.footer_html
+    opts[:etag] << Setting.custom_head_html
+    opts[:etag] << Setting.footer_html
     # 加入通知数量
     opts[:etag] << unread_notify_count
     # 加入flash，确保当页面刷新后flash不会再出现
@@ -122,11 +122,11 @@ class ApplicationController < ActionController::Base
 
   private
 
-    def user_locale
-      params[:locale] || cookies[:locale] || http_head_locale || I18n.default_locale
-    end
+  def user_locale
+    params[:locale] || cookies[:locale] || http_head_locale || I18n.default_locale
+  end
 
-    def http_head_locale
-      http_accept_language.language_region_compatible_from(I18n.available_locales)
-    end
+  def http_head_locale
+    http_accept_language.language_region_compatible_from(I18n.available_locales)
+  end
 end

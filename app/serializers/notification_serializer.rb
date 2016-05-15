@@ -1,6 +1,5 @@
 class NotificationSerializer < BaseSerializer
-  attributes :id, :type, :read, :actor,
-             :mention_type, :mention, :topic, :reply, :node,
+  attributes :id, :type, :read, :actor, :mention_type,
              :created_at, :updated_at
 
   def serializable_object(options = {})
@@ -17,8 +16,9 @@ class NotificationSerializer < BaseSerializer
     object.read?
   end
 
+  belongs_to :actor
   def actor
-    UserSerializer.new(object.actor, root: false) if object.actor
+    object.actor
   end
 
   def mention_type
@@ -26,35 +26,29 @@ class NotificationSerializer < BaseSerializer
     object.target_type
   end
 
+  belongs_to :mention, except: [:abilities, :user]
   def mention
     return nil if object.notify_type != 'mention'
-    klass = case object.target_type
-            when 'Reply'
-              ReplySerializer
-            when 'Topic'
-              TopicSerializer
-            else
-              return nil
-    end
-    return nil if klass.blank?
-    klass.new(object.target, root: false, except: [:abilities, :user])
+    object.target
   end
 
+  belongs_to :topic, except: [:abilities, :user]
   def topic
-    return nil if object.try(:target).blank?
     if object.notify_type == 'topic' || object.notify_type == 'node_changed'
-      TopicSerializer.new(object.target, root: false, except: [:abilities, :user])
+      object.try(:target)
     end
   end
 
+  belongs_to :reply, except: [:abilities, :user]
   def reply
     return nil if object.notify_type != 'topic_reply'
-    ReplyDetailSerializer.new(object.target, root: false, except: [:abilities, :user])
+    object.try(:target)
   end
 
+  belongs_to :node, only: [:name, :id]
   def node
     return nil if object.notify_type != 'node_changed'
     return nil if object.try(:second_target).blank?
-    NodeSerializer.new(object.second_target, root: false, only: [:name, :id])
+    object.second_target
   end
 end

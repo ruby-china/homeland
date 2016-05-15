@@ -1,0 +1,14 @@
+<div id="admin_location" class="form">
+
+<%= simple_form_for([:admin,@location]) do |f| %>
+  <%= render "/shared/error_messages", target: @location  %>
+  <fieldset>
+    <legend><%= t("common.edit") %></legend>
+      <%= f.input :name %>
+      <%= f.input :users_count %>
+      <div class="form-actions">
+      <%= f.submit t("common.save"), class: "btn btn-primary" %> or <%= link_to t("common.cancel"), admin_locations_path %>
+    </div>
+  </fieldset>
+<% end %>
+</div>

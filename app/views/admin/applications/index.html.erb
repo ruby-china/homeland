@@ -1,0 +1,34 @@
+<% content_for :sitemap do %>
+  <span class="current">OAuth 应用</span>
+<% end %>
+
+<div class="toolbar">
+  <a href="<%= new_admin_application_path %>" class="btn btn-sm btn-success">新建</a>
+</div>
+
+<div id="admin_applications">
+  <table class="table table-bordered table-striped table-condensed">
+    <tr class="head">
+      <td>编号</td>
+      <td>名称</td>
+      <td>Client Id</td>
+      <td>所有者</td>
+      <td>用户量</td>
+      <td>创建时间</td>
+      <td class="opts"></td>
+    </tr>
+    <% @applications.each do |item| %>
+    <tr class="<%= cycle("","even") %>">
+      <td><%= item.id %></td>
+      <td><%= link_to item.name, admin_application_path(item.id) %></td>
+      <td><%= item.uid %></td>
+      <td><%= user_name_tag(item.owner) %></td>
+      <td><%= item.access_tokens.count %></td>
+      <td><%= l(item.created_at, format: :long) %></td>
+      <td>
+        <%= link_to "", admin_application_path(item.id), method: :delete, 'data-confirm' => '确定要删除吗?', class: "fa fa-trash" %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+</div>

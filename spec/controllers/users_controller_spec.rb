@@ -69,4 +69,11 @@ describe UsersController, type: :controller do
       expect(response.status).to eq(200)
     end
   end
+
+  describe ':calendar' do
+    it 'should work' do
+      get :calendar, params: { id: user.login }
+      expect(response.status).to eq(200)
+    end
+  end
 end

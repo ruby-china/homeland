@@ -1,54 +1,35 @@
+<script src="//ruby-china-files.b0.upaiyun.com/assets/d3.min.js" data-turbolinks-track="true" type="text/javascript"></script>
+<script src="//ruby-china-files.b0.upaiyun.com/assets/cal-heatmap.min.js" data-turbolinks-track="true" type="text/javascript"></script>
+
 <div class="panel panel-default userinfo">
-  <div class="panel-body vcard clearfix">
-    <ul class="list-group">
-      <% if !@user.company.blank? %>
-        <li class="adr list-group-item">
-          <label><%= t("users.company")%>:</label>
-          <span class="org"><%= @user.company %></span>
-        </li>
-      <% end %>
-
-      <% if !@user.email.blank? && @user.email_public %>
-      <li class="list-group-item">
-        <label>Email:</label>
-        <span><%= auto_link @user.email %></span>
-      </li>
-      <% end %>
-
-      <% if !@user.twitter.blank? %>
-        <li class="list-group-item">
-          <label><%= t("users.twitter")%>:</label>
-          <span><%= link_to "@#{@user.twitter}", @user.twitter_url, class: "twitter", rel: "nofollow" %></span>
-        </li>
-      <% end %>
-
-      <% if !@user.website.blank? %>
-        <li class="list-group-item">
-          <label><%= t("users.personal_website")%>:</label>
-          <span><%= render_user_personal_website(@user)%></span>
-        </li>
-      <% end %>
-
-      <% if !@user.tagline.blank? %>
-        <li class="list-group-item">
-          <label><%= t("users.signature")%>:</label>
-          <span><%= render_user_tagline(@user) %></span>
-        </li>
-      <% end %>
-
-    </ul>
+  <div class="panel-body">
+    <div id="cal-heatmap" class="user-activity-graph"></div>
+    <%
+    start_date = 12.months.ago.beginning_of_month
+    %>
+    <script type="text/javascript">
+      var cal = new CalHeatMap();
+      cal.init({
+        itemSelector: "#cal-heatmap",
+        animationDuration: 200,
+        domain: "month",
+        subDomain: 'day',
+        rowLimit: 7,
+        domainGutter: 0,
+        data: '<%= calendar_user_path(@user, format: 'json') %>',
+        start: new Date(<%= start_date.year %>, <%= start_date.month %>, <%= start_date.day %>),
+        legendHorizontalPosition: 'right',
+        legendColors: ["#E2FBAE", "#01840E"],
+        // subDomainTextFormat: "%d",
+        domainLabelFormat: "%b",
+        legend: [1, 5, 10, 15],
+        itemName: ['event', 'events'],
+        highlight: 'now',
+        label: {
+          position: 'top'
+        },
+        displayLegend: true
+      });
+    </script>
   </div>
-
-
 </div>
-
-<% cache([@user, "bio-markdown"]) do %>
-  <% if !@user.bio.blank? %>
-    <div class="panel panel-default bio">
-      <div class="panel-heading">个人介绍</div>
-      <div class="panel-body markdown">
-        <%= markdown(@user.bio) %>
-      </div>
-    </div>
-  <% end %>
-<% end %>

@@ -14,10 +14,10 @@
       li << link_to(t("menu.likes"), main_app.favorites_user_path(current_user))
       if admin?
         li << "<div class='divider'></div>"
-        if params[:controller].start_with?("cpanel")
+        if params[:controller].start_with?("admin")
           li << link_to("回到前台", main_app.root_path)
         else
-          li << link_to(t("menu.cpanel"), "/cpanel")
+          li << link_to(t("menu.admin"), "/admin")
         end
       end
       li << "<div class='divider'></div>"

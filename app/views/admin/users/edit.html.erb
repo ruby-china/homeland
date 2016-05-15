@@ -1,0 +1,7 @@
+<% content_for :sitemap do %>
+  <a href="<%= admin_users_path %>"><%= t("admin.menu.users")%></a> &gt; <span class="current"><%= t("common.edit")%></span>
+<% end %>
+<h1>Editing user</h1>
+
+<%= render 'form' %>
+

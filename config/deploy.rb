@@ -6,7 +6,7 @@ require File.expand_path("../../lib/puma/capistrano", __FILE__)
 
 default_run_options[:pty] = true
 
-set :rvm_ruby_string, 'ruby-2.3.0'
+set :rvm_ruby_string, 'ruby-2.3.1'
 set :rvm_type, :user
 set :application, 'ruby-china'
 set :repository,  'git://github.com/ruby-china/ruby-china.git'
@@ -44,7 +44,6 @@ end
 
 task :compile_assets, roles: :web do
   run "cd #{current_path}; RAILS_ENV=production bundle exec rake assets:precompile"
-  run "cd #{current_path}; RAILS_ENV=production bundle exec rake assets:cdn"
 end
 
 task :migrate_db, roles: :web do

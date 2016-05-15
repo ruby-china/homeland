@@ -20,18 +20,23 @@
   }
 }
 .node-topics {
+  border-bottom:1px solid #ddd;
+  tbody > tr > td { padding: 8px; color: #666; }
   td.title {
     a:link,
-    a:visited {color:#2c64d7; text-decoration: none;}
+    a:visited { font-size: 15px; text-decoration: none; }
     a:hover { text-decoration: underline; }
     em { font-style:normal; font-size:12px; color:#bbb; }
     i.icon { margin-bottom: -1px; }
   }
+  td.node {
+    a { color: #666; }
+  }
   tr.head {
-    td {  border-top:none; padding-top:14px; color:#CCC; font-weight:bold; font-size:12px; }
+    td { border-top:none; padding-top:14px; color:#CCC; font-weight:bold; font-size:12px; }
   }
   tr.odd {
-    td { background:#F9F9F9; }
+    td { background: #fafafa; }
   }
   tr.topic {
     td.author {
@@ -58,14 +63,26 @@
 }
 
 .recent-replies {
+  padding: 0 15px;
+  margin-bottom: 0;
   li {
+    &.list-group-item {
+      border-radius: 0 !important;
+      border-left: 0px;
+      border-right: 0px;
+      padding: 10px 0;
+      border-color: #ddd;
+    }
+    &.list-group-item:even {
+      background: #f9f9f9;
+    }
     .title {
-      font-size:14px;
+      font-size:15px;
       .info { font-size:12px; color:#bbb; }
     }
     .body {
-      a { color:#333; }
-      margin-top:6px; color:#333;
+      a { color: #666; }
+      margin-top:6px; color: #666;
       p { font-size:13px; }
       img { max-width:680px; }
     }
@@ -142,6 +159,7 @@ table.node-topics {
 }
 
 .sidebar {
+  padding-right: 0;
   .profile {
     .avatar {
       .level { margin-top: 6px; text-align: center; }
@@ -169,6 +187,18 @@ table.node-topics {
       border-top: 1px solid #f0f0f0;
       margin-top: 15px; padding-top: 15px;
     }
+    .social {
+      font-size: 18px;
+      a { color: #999; margin-right: 8px; }
+      a:hover { color: #666; }
+    }
+    .tagline {
+      border-top: 1px solid #f0f0f0;
+      margin-top: 10px;
+      color: #999;
+      line-height: 100%;
+      padding: 10px; padding-bottom: 0;
+    }
   }
 }
 
@@ -189,10 +219,16 @@ table.node-topics {
   ul { margin:0; }
   li {
     .title {
-      position:relative;
+      position:relative; margin-bottom: 5px;
       a { color:#333; font-weight:bold; }
-      .watchers { position:absolute; top:2px; right:0; }
+      .watchers { position:absolute; top:2px; right:0; color: #999; }
     }
-    .desc { font-size:12px; color:#888; }
+    .desc { font-size:12px; color:#888; padding: 0; margin: 0; }
   }
+}
+
+.user-activity-graph {
+  overflow-x: scroll;
+  text-align: center;
+  svg { margin: 0 auto; }
 }

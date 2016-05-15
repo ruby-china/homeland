@@ -1,5 +1,5 @@
 class SessionsController < Devise::SessionsController
-  prepend_before_filter :valify_captcha!, only: [:create]
+  prepend_before_action :valify_captcha!, only: [:create]
   skip_before_action :set_locale, only: [:create]
 
   def new
@@ -20,20 +20,24 @@ class SessionsController < Devise::SessionsController
 
   def valify_captcha!
     set_locale
-    if !verify_rucaptcha?
+    unless verify_rucaptcha?
       redirect_to new_user_session_path, alert: t('rucaptcha.invalid') and return
     end
     true
   end
 
   private
-    def cache_referrer
-      if request.referrer && request.referrer.include?(domain_or_host)
-        session['user_return_to'] = request.referrer
-      end
-    end
 
-    def domain_or_host
-      request.domain || request.host
+  def cache_referrer
+    referrer = request.referrer
+    # Ignore other site url and user sign in url.
+    if referrer && referrer.include?(domain_or_host) && referrer.exclude?(new_user_session_path)
+      session['user_return_to'] = request.referrer
     end
+  end
+  
+  # If not bind to a domain, request.domain is nil.
+  def domain_or_host
+    request.domain || request.host
+  end
 end

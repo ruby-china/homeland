@@ -31,8 +31,13 @@ class SessionsController < Devise::SessionsController
   def cache_referrer
     referrer = request.referrer
     # Ignore other site url and user sign in url.
-    if referrer && referrer.include?(request.domain) && referrer.exclude?(new_user_session_path)
+    if referrer && referrer.include?(domain_or_host) && referrer.exclude?(new_user_session_path)
       session['user_return_to'] = request.referrer
     end
+  end
+  
+  # If not bind to a domain, request.domain is nil.
+  def domain_or_host
+    request.domain || request.host
   end
 end

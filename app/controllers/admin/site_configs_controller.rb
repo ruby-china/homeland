@@ -10,8 +10,8 @@ module Admin
     end
 
     def update
-      if @site_config.value != params[:setting][:value]
-        @site_config.value = YAML.load(params[:setting][:value])
+      if @site_config.value != setting_param[:value]
+        @site_config.value = setting_param[:value]
         @site_config.save
         redirect_to admin_site_configs_path, notice: '保存成功.'
       else
@@ -21,7 +21,12 @@ module Admin
 
     def get_setting
       @site_config = Setting.find_by(var: params[:id]) || Setting.new(var: params[:id])
-      @site_config[:value] = Setting[params[:id]]
+    end
+
+    private
+
+    def setting_param
+      params[:setting].permit!
     end
   end
 end

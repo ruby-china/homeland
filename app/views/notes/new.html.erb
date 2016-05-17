@@ -1,8 +1,12 @@
-<div class="panel panel-default">
-  <div class="panel-heading"><%= t("notes.create_note")%></div>
-  <div class="panel-body">
-    <%= render 'form' %>
+<div class="row">
+  <div class="col-sm-9">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <%= render 'form' %>
+      </div>
+    </div>
   </div>
-</div>
 
+  <%= render "sidebar" %>
+</div>
 

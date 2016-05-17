@@ -1,7 +1,7 @@
 "zh-TW":
   notes:
-    create_note: "新建記事本"
-    edit_note: "修改記事本"
+    create_note: "新建 Note"
+    edit_note: "修改 Note"
     page_link: "本頁地址"
     created_at: "於 %{time}創建"
     times_edit: "次修改"

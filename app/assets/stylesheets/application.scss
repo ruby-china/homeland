@@ -227,6 +227,11 @@ a:hover { color: #303030; }
 }
 .alert-danger { background: $redLabel; color: $redLabelText; }
 
+.text-success { color: $green; }
+.text-primary { color: $blue; }
+.text-warning { color: $yellow; }
+.text-danger { color: $red; }
+
 .control-label { color: #333; font-weight: normal; }
 .control-label.checkbox { text-align: left; }
 .form-control {

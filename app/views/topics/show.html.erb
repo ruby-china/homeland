@@ -66,31 +66,22 @@
   <% end %>
 
   <% if current_user %>
-    <div id="reply" class="panel panel-default">
-      <div class="panel-heading">回帖</div>
-      <div class="panel-body">
-      <% if can? :create, Reply %>
-
-        <%= render "editor_toolbar" %>
-        <%= form_for(Reply.new, remote: true, url: topic_replies_path(@topic)) do |f| %>
-
-          <div class="form-group">
-            <%= f.text_area :body, class: "topic-editor form-control", rows: "4", tabindex: "1" %>
-          </div>
-          <div class="submit-buttons">
-            <button type="submit" id="reply-button" class="btn btn-primary" tabindex="2", data-disable-with='<%= t("topics.submit_reply") %>'><%= t("topics.submit_reply")%></button>
-            <span class="help-inline" style="padding-left: 5px;" title="或者 Ctrl + Enter"><kbd>Command</kbd> + <kbd>Enter</kbd></span>
-
-            <div class="pull-right"><a href="/markdown" target="_blank">排版说明</a></div>
+    <% if @topic.closed? %>
+      <div class="alert alert-info">此话题已经于 <%= l @topic.closed_at, format: :long %> 关闭，不再接受任何回帖。</div>
+    <% else %>
+      <div id="reply" class="panel panel-default">
+        <div class="panel-heading">回帖</div>
+        <div class="panel-body">
+        <% if can? :create, Reply %>
+          <%= render 'reply_form' %>
+        <% else %>
+          <div class="alert alert-info">
+            当前设置新手用户不能在 22:00 ~ 9:00 发帖。
           </div>
         <% end %>
-      <% else %>
-        <div class="alert alert-info">
-          当前设置新手用户不能在 22:00 ~ 9:00 发帖。
         </div>
-      <% end %>
       </div>
-    </div>
+    <% end %>
   <% else %>
     <div class="panel panel-default">
       <div class="panel-body">

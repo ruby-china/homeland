@@ -14,6 +14,7 @@ class Topic < ApplicationRecord
   include MarkdownBody
   include SoftDelete
   include Mentionable
+  include Closeable
   include Searchable
 
   # 临时存储检测用户是否读过的结果

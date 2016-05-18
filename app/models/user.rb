@@ -397,16 +397,6 @@ class User < ApplicationRecord
     items
   end
 
-  # 重新生成 Private Token
-  def update_private_token
-    random_key = "#{SecureRandom.hex(10)}:#{id}"
-    update_attribute(:private_token, random_key)
-  end
-
-  def ensure_private_token!
-    update_private_token if private_token.blank?
-  end
-
   def block_node(node_id)
     new_node_id = node_id.to_i
     return false if blocked_node_ids.include?(new_node_id)

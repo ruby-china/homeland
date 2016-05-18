@@ -36,7 +36,6 @@ Rails.application.routes.draw do
   }
 
   delete 'account/auth/:provider/unbind' => 'users#auth_unbind', as: 'unbind_account'
-  post 'account/update_private_token' => 'users#update_private_token', as: 'update_private_token_account'
 
   mount RuCaptcha::Engine => "/rucaptcha"
   mount Notifications::Engine => '/notifications'

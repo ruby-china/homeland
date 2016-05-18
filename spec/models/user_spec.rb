@@ -260,16 +260,6 @@ describe User, type: :model do
     end
   end
 
-  describe 'private token generate' do
-    it 'should generate new token' do
-      old_token = user.private_token
-      user.update_private_token
-      expect(user.private_token).not_to eq(old_token)
-      user.update_private_token
-      expect(user.private_token).not_to eq(old_token)
-    end
-  end
-
   describe 'favorite topic' do
     it 'should favorite a topic' do
       user.favorite_topic(topic.id)

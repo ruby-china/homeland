@@ -211,6 +211,16 @@ class TopicsController < ApplicationController
     redirect_to @topic, success: '已转移到 NoPoint 节点。'
   end
 
+  def close
+    @topic.close!
+    redirect_to @topic, success: '话题已关闭，将不再接受任何新的回复。'
+  end
+
+  def open
+    @topic.open!
+    redirect_to @topic, success: '话题已重启开启。'
+  end
+
   private
 
   def set_topic

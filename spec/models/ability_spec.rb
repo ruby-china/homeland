@@ -46,6 +46,7 @@ describe Ability, type: :model do
   context 'Normal users' do
     let(:user) { create :avatar_user }
     let(:topic) { create :topic, user: user }
+    let(:topic1) { create :topic }
     let(:locked_topic) { create :topic, user: user, lock_node: true }
     let(:reply) { create :reply, user: user }
     let(:note) { create :note, user: user }
@@ -61,8 +62,15 @@ describe Ability, type: :model do
       it { is_expected.to be_able_to(:destroy, topic) }
       it { is_expected.not_to be_able_to(:suggest, Topic) }
       it { is_expected.not_to be_able_to(:unsuggest, Topic) }
+      it { is_expected.not_to be_able_to(:ban, Topic) }
+      it { is_expected.not_to be_able_to(:open, topic1) }
+      it { is_expected.not_to be_able_to(:close, topic1) }
+      it { is_expected.not_to be_able_to(:ban, topic) }
+      it { is_expected.to be_able_to(:open, topic) }
+      it { is_expected.to be_able_to(:close, topic) }
       it { is_expected.to be_able_to(:change_node, topic) }
       it { is_expected.not_to be_able_to(:change_node, locked_topic) }
+      it { is_expected.to be_able_to(:change_node, topic) }
     end
 
     context 'Reply' do

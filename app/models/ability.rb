@@ -45,13 +45,19 @@ class Ability
     can :follow, Topic
     can :unfollow, Topic
     can :update, Topic do |topic|
-      (topic.user_id == user.id)
+      topic.user_id == user.id
+    end
+    can :open, Topic do |topic|
+      topic.user_id == user.id
+    end
+    can :close, Topic do |topic|
+      topic.user_id == user.id
     end
     can :change_node, Topic do |topic|
       topic.lock_node == false || user.admin?
     end
     can :destroy, Topic do |topic|
-      (topic.user_id == user.id) && (topic.replies_count == 0)
+      topic.user_id == user.id && topic.replies_count == 0
     end
   end
 

@@ -15,7 +15,7 @@ module Closeable
   end
 
   def open!
-    self.closed_at = Time.now
+    self.closed_at = nil
     self.save
   end
 end

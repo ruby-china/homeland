@@ -275,6 +275,7 @@ describe Topic, type: :model do
       t.close!
       expect(t.closed?).to eq true
       t.open!
+      expect(t.closed_at).to eq nil
       expect(t.closed?).to eq false
       t.close!
     end

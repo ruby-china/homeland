@@ -2,7 +2,8 @@ class TopicsController < ApplicationController
   load_and_authorize_resource only: [:new, :edit, :create, :update, :destroy,
                                      :favorite, :unfavorite, :follow, :unfollow, :suggest, :unsuggest, :ban]
 
-  before_action :set_topic, only: [:ban, :edit, :update, :destroy, :follow, :unfollow, :suggest, :unsuggest]
+  before_action :set_topic, only: [:ban, :edit, :update, :destroy, :follow,
+                                   :unfollow, :suggest, :unsuggest, :close, :open]
 
   def index
     @suggest_topics = Topic.without_hide_nodes.suggest.fields_for_list.limit(3).to_a
@@ -198,27 +199,27 @@ class TopicsController < ApplicationController
 
   def suggest
     @topic.update_attributes(excellent: 1)
-    redirect_to @topic, success: '加精成功。'
+    redirect_to @topic, notice: '加精成功。'
   end
 
   def unsuggest
     @topic.update_attribute(:excellent, 0)
-    redirect_to @topic, success: '加精已经取消。'
+    redirect_to @topic, notice: '加精已经取消。'
   end
 
   def ban
     @topic.ban!
-    redirect_to @topic, success: '已转移到 NoPoint 节点。'
+    redirect_to @topic, notice: '已转移到 NoPoint 节点。'
   end
 
   def close
     @topic.close!
-    redirect_to @topic, success: '话题已关闭，将不再接受任何新的回复。'
+    redirect_to @topic, notice: '话题已关闭，将不再接受任何新的回复。'
   end
 
   def open
     @topic.open!
-    redirect_to @topic, success: '话题已重启开启。'
+    redirect_to @topic, notice: '话题已重启开启。'
   end
 
   private

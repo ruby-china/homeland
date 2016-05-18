@@ -40,22 +40,9 @@ class Ability
     unless user.newbie?
       can :create, Topic
     end
-    can :favorite, Topic
-    can :unfavorite, Topic
-    can :follow, Topic
-    can :unfollow, Topic
-    can :update, Topic do |topic|
-      topic.user_id == user.id
-    end
-    can :open, Topic do |topic|
-      topic.user_id == user.id
-    end
-    can :close, Topic do |topic|
-      topic.user_id == user.id
-    end
-    can :change_node, Topic do |topic|
-      topic.lock_node == false || user.admin?
-    end
+    can [:favorite, :unfavorite, :follow, :unfollow], Topic
+    can [:update, :open, :close], Topic, user_id: user.id
+    can :change_node, Topic, user_id: user.id, lock_node: false
     can :destroy, Topic do |topic|
       topic.user_id == user.id && topic.replies_count == 0
     end
@@ -71,62 +58,34 @@ class Ability
 
     cannot :create, Reply, topic: { :closed? => true }
 
-    can :update, Reply do |reply|
-      reply.user_id == user.id
-    end
-
-    can :destroy, Reply do |reply|
-      reply.user_id == user.id
-    end
+    can [:update, :destroy], Reply, user_id: user.id
   end
 
   def roles_for_notes
     can :create, Note
-    can :update, Note do |note|
-      note.user_id == user.id
-    end
-    can :destroy, Note do |note|
-      note.user_id == user.id
-    end
-    can :read, Note do |note|
-      note.user_id == user.id
-    end
-    can :read, Note do |note|
-      note.publish == true
-    end
+    can [:update, :destroy, :read], Note, user_id: user.id
+    can :read, Note, publish: true
   end
 
   def roles_for_pages
     if user.has_role?(:wiki_editor)
       can :create, Page
-      can :edit, Page do |page|
-        page.locked == false
-      end
-      can :update, Page do |page|
-        page.locked == false
-      end
+      can :edit, Page, locked: false
+      can :update, Page, locked: false
     end
   end
 
   def roles_for_photos
     can :tiny_new, Photo
     can :create, Photo
-    can :update, Photo do |photo|
-      photo.user_id == photo.id
-    end
-    can :destroy, Photo do |photo|
-      photo.user_id == photo.id
-    end
+    can :update, Photo, user_id: user.id
+    can :destroy, Photo, user_id: user.id
   end
 
   def roles_for_comments
     can :create, Comment
-    can :update, Comment do |comment|
-      comment.user_id == comment.id
-    end
-    can :destroy, Comment do |comment|
-      comment.user_id == comment.id
-    end
+    can :update, Comment, user_id: user.id
+    can :destroy, Comment, user_id: user.id
   end
 
   def roles_for_sites
@@ -136,26 +95,14 @@ class Ability
   end
 
   def basic_read_only
-    can :read, Topic
-    can :feed, Topic
-    can :node, Topic
-
+    can [:read, :feed, :node], Topic
     can :read, Reply
-
-    can :read, Page
-    can :recent, Page
-    can :preview, Page
-    can :comments, Page
-
+    can [:read, :recent, :preview, :comments], Page
     can :preview, Note
-
     can :read, Photo
     can :read, Site
     can :read, Section
     can :read, Node
-    can :read, Note do |note|
-      note.publish == true
-    end
     can :read, Comment
   end
 end

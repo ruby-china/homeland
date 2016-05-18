@@ -5,7 +5,6 @@
   </div>
   <div class="infos media-body">
     <div class="title media-heading">
-      <% binding.pry %>
       <%= link_to(truncate(topic.title, length: 40), topic_path(topic), title: topic.title) %>
       <% if suggest %>
         <i class="fa fa-thumb-tack" title="置顶"></i>

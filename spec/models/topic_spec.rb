@@ -267,4 +267,16 @@ describe Topic, type: :model do
       expect(t.reply_ids).to eq replies.collect(&:id)
     end
   end
+
+  describe '.close! / .open! / closed?' do
+    let!(:t) { create(:topic, user: user) }
+
+    it 'should work' do
+      t.close!
+      expect(t.closed?).to eq true
+      t.open!
+      expect(t.closed?).to eq false
+      t.close!
+    end
+  end
 end

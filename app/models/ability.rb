@@ -63,6 +63,8 @@ class Ability
       can :create, Reply
     end
 
+    cannot :create, Reply, topic: { :closed? => true }
+
     can :update, Reply do |reply|
       reply.user_id == user.id
     end

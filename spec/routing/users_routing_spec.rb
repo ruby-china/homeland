@@ -8,6 +8,7 @@ describe UsersController, type: :routing do
       expect(get('/1234')).to route_to('users#show', id: '1234')
       expect(get('/foo-bar')).to route_to('users#show', id: 'foo-bar')
       expect(get('/foo_bar')).to route_to('users#show', id: 'foo_bar')
+      expect(get('/foo_')).to route_to('users#show', id: 'foo_')
       expect(get('/foo.bar')).to route_to('users#show', id: 'foo.bar')
     end
   end

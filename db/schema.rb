@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160518061135) do
+ActiveRecord::Schema.define(version: 20160518083347) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -324,7 +324,6 @@ ActiveRecord::Schema.define(version: 20160518061135) do
     t.string   "perishable_token",       default: "",    null: false
     t.integer  "topics_count",           default: 0,     null: false
     t.integer  "replies_count",          default: 0,     null: false
-    t.string   "private_token"
     t.integer  "favorite_topic_ids",     default: [],                 array: true
     t.integer  "blocked_node_ids",       default: [],                 array: true
     t.integer  "blocked_user_ids",       default: [],                 array: true
@@ -333,7 +332,6 @@ ActiveRecord::Schema.define(version: 20160518061135) do
     t.index ["email"], name: "index_users_on_email", using: :btree
     t.index ["location"], name: "index_users_on_location", using: :btree
     t.index ["login"], name: "index_users_on_login", using: :btree
-    t.index ["private_token"], name: "index_users_on_private_token", using: :btree
   end
 
   create_table "walking_deads", force: :cascade do |t|

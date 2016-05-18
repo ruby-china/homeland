@@ -54,11 +54,6 @@ class UsersController < ApplicationController
     redirect_to edit_user_registration_path, flash: { warring: t('users.unbind_success', provider: provider.titleize) }
   end
 
-  def update_private_token
-    current_user.update_private_token
-    render plain: current_user.private_token
-  end
-
   def city
     @location = Location.location_find_by_name(params[:id])
     if @location.blank?

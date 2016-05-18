@@ -61,7 +61,7 @@ gem 'omniauth'
 gem 'omniauth-github'
 
 # Permission
-gem 'cancancan', '~> 1.13.1'
+gem 'cancancan'
 
 # Redis
 gem 'redis'

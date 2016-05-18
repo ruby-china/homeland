@@ -75,7 +75,7 @@ class Topic < ApplicationRecord
     }
   end
 
-  def related_topics(size = 3)
+  def related_topics(size = 5)
     self.class.__elasticsearch__.search({
       query: {
         more_like_this: {

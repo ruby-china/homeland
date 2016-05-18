@@ -79,7 +79,7 @@ GEM
       bundler (~> 1.2)
       thor (~> 0.18)
     byebug (8.2.5)
-    cancancan (1.13.1)
+    cancancan (1.14.0)
     capistrano (2.9.0)
       highline
       net-scp (>= 1.0.0)
@@ -439,7 +439,7 @@ DEPENDENCIES
   binding_of_caller
   bulk_insert
   bundler-audit
-  cancancan (~> 1.13.1)
+  cancancan
   capistrano (= 2.9.0)
   capistrano-sidekiq
   capybara

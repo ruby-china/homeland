@@ -26,7 +26,7 @@ gem 'md_emoji'
 gem 'jquery-atwho-rails'
 
 # OAuth Provider
-gem 'doorkeeper', '4.0.0.rc2'
+gem 'doorkeeper', '4.0.0.rc4'
 gem 'doorkeeper-i18n'
 
 gem 'bulk_insert'

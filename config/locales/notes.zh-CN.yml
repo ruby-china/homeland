@@ -1,7 +1,7 @@
 "zh-CN":
   notes:
-    create_note: "新建记事本"
-    edit_note: "修改记事本"
+    create_note: "新建 Note"
+    edit_note: "修改 Note"
     page_link: "本页地址"
     created_at: "于 %{time}创建"
     times_edit: "次修改"

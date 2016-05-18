@@ -51,6 +51,17 @@
     </div>
   </div>
 
+  <% if @topic.related_topics.present? %>
+    <div class="panel panel-default">
+      <div class="panel-heading">相关话题</div>
+      <ul class="list-group">
+        <% @topic.related_topics.each do |topic| %>
+          <li class="list-group-item"><%= link_to topic.title, topic %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <div class="notify-updated">
     <a class="update" href="#"><i class="fa fa-bell-o"></i> <b>有新回复！</b>点击这里立即载入</a>
   </div>

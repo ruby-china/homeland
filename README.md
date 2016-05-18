@@ -110,6 +110,7 @@ Theme from [Mediom](https://github.com/huacnlee/mediom)
 * [Coding Style](https://codingstyle.cn)
 * [DiyCode](http://www.diycode.cc/)
 * [Japan Trip](http://www.japantrip.cn/)
+* [EthFans](http://ethfans.org)
 
 ## License
 

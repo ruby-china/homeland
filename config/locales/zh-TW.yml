@@ -36,6 +36,8 @@
         body: "正文"
       reply:
         body: "回覆內容"
+      note:
+        title: "標題"
       post:
         title: 標題
         body: 正文

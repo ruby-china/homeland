@@ -62,8 +62,8 @@ class Topic < ApplicationRecord
   scope :without_body, -> { select(column_names - ['body']) }
 
   mapping do
-    indexes :title
-    indexes :body
+    indexes :title, term_vector: :yes
+    indexes :body, term_vector: :yes
     indexes :node_name
   end
 
@@ -73,6 +73,26 @@ class Topic < ApplicationRecord
       body: self.full_body,
       node_name: self.node_name
     }
+  end
+
+  def related_topics(size = 3)
+    self.class.__elasticsearch__.search({
+      query: {
+        more_like_this: {
+          fields: [:title, :body],
+          docs: [
+            {
+              _index: self.class.index_name,
+              _type: self.class.document_type,
+              _id: id
+            }
+          ],
+          min_term_freq: 2,
+          min_doc_freq: 5
+        }
+      },
+      size: size
+    }).records.to_a
   end
 
   def self.fields_for_list

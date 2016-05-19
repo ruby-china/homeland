@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/sinatra/sinatra.git
-  revision: d51513d094d1fe01543e546d07ef48663ecc2d8f
+  revision: 5e9e23621c1f6abbd793b46452cb11ae8ca1277e
   specs:
     sinatra (2.0.0.pre.alpha)
       mustermann (~> 0.4)
@@ -78,7 +78,7 @@ GEM
     bundler-audit (0.5.0)
       bundler (~> 1.2)
       thor (~> 0.18)
-    byebug (8.2.5)
+    byebug (9.0.3)
     cancancan (1.14.0)
     capistrano (2.9.0)
       highline
@@ -132,7 +132,7 @@ GEM
       rack (>= 1)
       rake (> 10, < 12)
       thor (~> 0.19)
-    devise (4.1.0)
+    devise (4.1.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0, < 5.1)
@@ -223,7 +223,7 @@ GEM
     mini_magick (4.5.1)
     mini_portile2 (2.0.0)
     minitest (5.9.0)
-    multi_json (1.12.0)
+    multi_json (1.12.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     mustermann (0.4.0)
@@ -256,7 +256,7 @@ GEM
     omniauth-oauth2 (1.4.0)
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
-    oneapm_rpm (1.3.5)
+    oneapm_rpm (1.3.6)
     orm_adapter (0.5.0)
     parser (2.3.1.0)
       ast (~> 2.2)
@@ -274,8 +274,8 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    pry-byebug (3.3.0)
-      byebug (~> 8.0)
+    pry-byebug (3.4.0)
+      byebug (~> 9.0)
       pry (~> 0.10)
     puma (3.4.0)
     rack (2.0.0.rc1)
@@ -283,7 +283,7 @@ GEM
     rack-attack (4.4.1)
       rack
     rack-cors (0.4.0)
-    rack-mini-profiler (0.9.9.2)
+    rack-mini-profiler (0.10.1)
       rack (>= 1.2.0)
     rack-protection (1.5.3)
       rack
@@ -365,7 +365,7 @@ GEM
       unicode-display_width (~> 1.0, >= 1.0.1)
     ruby-pinyin (0.5.0)
       rmmseg-cpp-new (~> 0.3.1)
-    ruby-progressbar (1.8.0)
+    ruby-progressbar (1.8.1)
     ruby-push-notifications (0.4.0)
       builder (~> 3.0)
     rucaptcha (0.4.2)
@@ -412,7 +412,7 @@ GEM
       rails (>= 4.2)
     thor (0.19.1)
     thread_safe (0.3.5)
-    tilt (2.0.3)
+    tilt (2.0.4)
     tool (0.2.3)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)

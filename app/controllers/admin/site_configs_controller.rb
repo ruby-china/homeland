@@ -1,6 +1,6 @@
 module Admin
   class SiteConfigsController < Admin::ApplicationController
-    before_action :get_setting, only: [:edit, :update]
+    before_action :set_setting, only: [:edit, :update]
 
     def index
       @site_configs = Setting.get_all
@@ -13,13 +13,14 @@ module Admin
       if @site_config.value != setting_param[:value]
         @site_config.value = setting_param[:value]
         @site_config.save
+        @site_config.expire_cache
         redirect_to admin_site_configs_path, notice: '保存成功.'
       else
         redirect_to admin_site_configs_path
       end
     end
 
-    def get_setting
+    def set_setting
       @site_config = Setting.find_by(var: params[:id]) || Setting.new(var: params[:id])
     end
 

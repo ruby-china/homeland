@@ -1,18 +1,13 @@
 <div class="row">
   <div class="col-sm-9">
     <div id="notes" class="panel panel-default">
-      <div class="panel-body">
-        <% if !@note.publish %>
-        <i class="fa fa-lock text-success pull-right" title="此内容保密"></i>
-        <% end %>
-        <div class="markdown">
-          <%= markdown(@note.body) %>
-        </div>
-      </div>
-
-      <div class="panel-footer clearfix">
+      <div class="panel-heading clearfix">
         <div class="info">
-          共 <%= @note.word_count %> <%= t("notes.chars") %> • 由 <%= user_name_tag(@note.user) %> <%= sanitize t("notes.created_at", time: timeago(@note.created_at)) %> • <%= @note.hits %> <%= t("common.read_times")%> • <%= @note.changes_count %> <%= t("notes.times_edit") %>
+          共 <%= @note.word_count %> <%= t("notes.chars") %>
+          • <%= user_name_tag(@note.user) if !owner? @note %>
+          <%= l @note.created_at, format: :long %>
+          • <%= @note.hits %> <%= t("common.read_times")%>
+          • <%= @note.changes_count %> <%= t("notes.times_edit") %>
           <% if owner? @note %>
           <span class="opts pull-right">
             <%= link_to icon_tag("fa fa-pencil"), edit_note_path(@note),  title: t("common.edit") %>
@@ -26,6 +21,14 @@
           <%= note_url(@note) %>
         </div>
         <% end %>
+      </div>
+      <div class="panel-body">
+        <% if !@note.publish %>
+        <i class="fa fa-lock text-success pull-right" title="此内容保密"></i>
+        <% end %>
+        <div class="markdown">
+          <%= markdown(@note.body) %>
+        </div>
       </div>
     </div>
   </div>

@@ -2,7 +2,7 @@ require 'bundler/capistrano'
 require 'capistrano/sidekiq'
 require 'rvm/capistrano'
 require 'puma'
-require File.expand_path("../../lib/puma/capistrano", __FILE__)
+require File.expand_path('../../lib/puma/capistrano', __FILE__)
 
 default_run_options[:pty] = true
 
@@ -20,7 +20,7 @@ set :git_shallow_clone, 1
 
 set :puma_role, :app
 set :puma_state, "#{current_path}/tmp/pids/puma.state"
-set :puma_config_file, "config/puma-web.rb"
+set :puma_config_file, 'config/puma-web.rb'
 set :sidekiq_config, "#{current_path}/config/sidekiq.yml"
 
 role :web, 'ruby-china.org'
@@ -69,4 +69,3 @@ after 'deploy:finalize_update', 'deploy:symlink', :link_shared, :migrate_db, :co
 after 'deploy:start', 'cable:start'
 after 'deploy:restart', 'cable:restart'
 after 'deploy:stop', 'cable:stop'
-

@@ -33,7 +33,9 @@ class User
         user.name = data['name']
         user.login = data['nickname']
         user.login.gsub!(/[^\w]/, '_')
-        user.github = data['nickname'] if provider == 'github'
+        if provider == 'github'
+          user.github = data['nickname']
+        end
 
         if user.login.blank?
           user.login = "u#{Time.now.to_i}"
@@ -45,7 +47,7 @@ class User
 
         user.password = Devise.friendly_token[0, 20]
         user.location = data['location']
-        user.tagline = data['description']
+        user.tagline  = data['description']
       end
     end
   end

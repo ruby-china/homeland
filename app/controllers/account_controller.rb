@@ -50,7 +50,7 @@ class AccountController < Devise::RegistrationsController
   # Overwrite the default url to be used after updating a resource.
   # It should be edit_user_registration_path
   # Note: resource param can't miss, because it's the super caller way.
-  def after_update_path_for(resource)
+  def after_update_path_for(_)
     edit_user_registration_path
   end
 end

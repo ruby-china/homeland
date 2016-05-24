@@ -24,7 +24,7 @@ module Api
         requires! :token, type: String
 
         @device = current_user.devices.find_or_initialize_by(platform: params[:platform].downcase,
-                                                token: params[:token])
+                                                             token: params[:token])
         @device.last_actived_at = Time.now
         @device.save!
 

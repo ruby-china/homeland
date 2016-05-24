@@ -8,10 +8,10 @@ module UsersHelper
 
     if user.is_a? String
       login = user
-      name = login
+      name  = login
     else
       login = user.login
-      name = user.name
+      name  = user.name
     end
 
     name ||= login
@@ -23,9 +23,9 @@ module UsersHelper
   def user_avatar_width_for_size(size)
     case size
     when :normal then 48
-    when :small then 16
-    when :large then 96
-    when :big then 120
+    when :small  then 16
+    when :large  then 96
+    when :big    then 120
     else size
     end
   end
@@ -33,9 +33,9 @@ module UsersHelper
   def user_avatar_size_name_for_2x(size)
     case size
     when :normal then :large
-    when :small then :normal
-    when :large then :big
-    when :big then :big
+    when :small  then :normal
+    when :large  then :big
+    when :big    then :big
     else size
     end
   end
@@ -68,11 +68,11 @@ module UsersHelper
   def render_user_level_tag(user)
     return '' if user.blank?
     level_class = case user.level
-                  when 'admin' then 'label-danger'
-                  when 'vip' then 'label-success'
-                  when 'hr' then 'label-success'
+                  when 'admin'   then 'label-danger'
+                  when 'vip'     then 'label-success'
+                  when 'hr'      then 'label-success'
                   when 'blocked' then 'label-warning'
-                  when 'newbie' then 'label-default'
+                  when 'newbie'  then 'label-default'
                   else 'label-info'
                   end
 

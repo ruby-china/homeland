@@ -34,33 +34,32 @@ class Topic < ApplicationRecord
   delegate :body, to: :last_reply, prefix: true, allow_nil: true
 
   # scopes
-  scope :last_actived, -> { order(last_active_mark: :desc) }
-  # 推荐的话题
-  scope :suggest, -> { where('suggested_at IS NOT NULL').order(suggested_at: :desc) }
-  scope :without_suggest, -> { where(suggested_at: nil) }
-  scope :high_likes, -> { order(likes_count: :desc).order(id: :desc) }
-  scope :high_replies, -> { order(replies_count: :desc).order(id: :desc) }
-  scope :no_reply, -> { where(replies_count: 0) }
-  scope :popular, -> { where('likes_count > 5') }
-  scope :exclude_column_ids, proc {|column, ids|
+  scope :last_actived,       -> { order(last_active_mark: :desc) }
+  scope :suggest,            -> { where('suggested_at IS NOT NULL').order(suggested_at: :desc) }
+  scope :without_suggest,    -> { where(suggested_at: nil) }
+  scope :high_likes,         -> { order(likes_count: :desc).order(id: :desc) }
+  scope :high_replies,       -> { order(replies_count: :desc).order(id: :desc) }
+  scope :no_reply,           -> { where(replies_count: 0) }
+  scope :popular,            -> { where('likes_count > 5') }
+  scope :excellent,          -> { where('excellent >= 1') }
+  scope :without_hide_nodes, -> { exclude_column_ids('node_id', Topic.topic_index_hide_node_ids) }
+  scope :without_body,       -> { select(column_names - ['body']) }
+  scope :without_node_ids,   -> (ids) { exclude_column_ids('node_id', ids) }
+  scope :exclude_column_ids, lambda { |column, ids|
     if ids.empty?
       all
     else
-      where.not({ column =>  ids })
+      where.not(column => ids)
     end
   }
-  scope :without_node_ids, proc { |ids| exclude_column_ids('node_id', ids) }
-  scope :excellent, -> { where('excellent >= 1') }
-  scope :without_hide_nodes, -> { exclude_column_ids('node_id', Topic.topic_index_hide_node_ids) }
-  scope :without_nodes, proc { |node_ids|
+  scope :without_nodes, lambda { |node_ids|
     ids = node_ids + Topic.topic_index_hide_node_ids
     ids.uniq!
     exclude_column_ids('node_id', ids)
   }
-  scope :without_users, proc { |user_ids|
+  scope :without_users, lambda { |user_ids|
     exclude_column_ids('user_id', user_ids)
   }
-  scope :without_body, -> { select(column_names - ['body']) }
 
   mapping do
     indexes :title, term_vector: :yes
@@ -68,7 +67,7 @@ class Topic < ApplicationRecord
     indexes :node_name
   end
 
-  def as_indexed_json(options={})
+  def as_indexed_json(_options = {})
     {
       title: self.title,
       body: self.full_body,
@@ -77,7 +76,7 @@ class Topic < ApplicationRecord
   end
 
   def related_topics(size = 5)
-    self.class.__elasticsearch__.search({
+    opts = {
       query: {
         more_like_this: {
           fields: [:title, :body],
@@ -93,7 +92,8 @@ class Topic < ApplicationRecord
         }
       },
       size: size
-    }).records.to_a
+    }
+    self.class.__elasticsearch__.search(opts).records.to_a
   end
 
   def self.fields_for_list

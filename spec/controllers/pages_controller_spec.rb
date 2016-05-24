@@ -66,7 +66,7 @@ describe PagesController, type: :controller do
 
     it 'should create new page if all is well' do
       sign_in user
-      params = attributes_for(:page).merge(change_desc: "xx")
+      params = attributes_for(:page).merge(change_desc: 'xx')
       post :create, params: { page: params }
       expect(response).to redirect_to page_path(params[:slug])
     end

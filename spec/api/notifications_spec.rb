@@ -33,17 +33,17 @@ describe 'API V3', 'notifications', type: :request do
 
       it 'should work' do
         login_user!
-        n = create :notification_node_changed, user: current_user, target: topic, second_target: node
+        create :notification_node_changed, user: current_user, target: topic, second_target: node
         get '/api/v3/notifications.json'
         # puts json['message']
         expect(response.status).to eq(200)
         expect(json['notifications'][0]['read']).to eq false
         expect(json['notifications'][0]).to include(*%w(type topic node))
         expect(json['notifications'][0]['type']).to eq 'NodeChanged'
-        expect(json['notifications'][0]['topic']["id"]).to eq topic.id
-        expect(json['notifications'][0]['topic']["title"]).to eq topic.title
-        expect(json['notifications'][0]['node']["id"]).to eq node.id
-        expect(json['notifications'][0]['node']["name"]).to eq node.name
+        expect(json['notifications'][0]['topic']['id']).to eq topic.id
+        expect(json['notifications'][0]['topic']['title']).to eq topic.title
+        expect(json['notifications'][0]['node']['id']).to eq node.id
+        expect(json['notifications'][0]['node']['name']).to eq node.name
       end
     end
 

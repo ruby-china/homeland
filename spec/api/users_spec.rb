@@ -52,9 +52,9 @@ describe 'API V3', 'users', type: :request do
 
     it 'should hidden email when email_public is false' do
       create(:user, name: 'test user',
-                     login: 'test_user',
-                     email: 'foobar@gmail.com',
-                     email_public: false)
+                    login: 'test_user',
+                    email: 'foobar@gmail.com',
+                    email_public: false)
       get '/api/v3/users/test_user.json'
       expect(response.status).to eq 200
       expect(json['user']['email']).to eq ''
@@ -126,7 +126,7 @@ describe 'API V3', 'users', type: :request do
 
   describe 'GET /api/v3/users/:login/replies.json' do
     let(:user) { create(:user) }
-    let(:topic) { create(:topic, title: "Test topic title") }
+    let(:topic) { create(:topic, title: 'Test topic title') }
 
     describe 'recent order' do
       it 'should work' do

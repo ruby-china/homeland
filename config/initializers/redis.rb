@@ -18,7 +18,7 @@ end
 
 # Redis Search
 PinYin.backend = PinYin::Backend::Simple.new
-redis_for_search = Redis::Namespace.new("rc-rs", redis: $redis)
+redis_for_search = Redis::Namespace.new('rc-rs', redis: $redis)
 redis_for_search.select(2)
 Redis::Search.configure do |config|
   config.redis = redis_for_search

@@ -96,7 +96,6 @@ Dir.chdir APP_ROOT do
     host = '127.0.0.1:6379' if host == ''
     replace_file('config/redis.yml', '127.0.0.1', host.split(':')[0])
     replace_file('config/redis.yml', '6379', host.split(':')[1])
-
   end
 
   puts_line 'Seed default data...' do

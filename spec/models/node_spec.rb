@@ -31,7 +31,7 @@ describe Node, type: :model do
     let(:node) { create(:node) }
     it 'should return html' do
       node.summary = '# foo'
-      expect(node.summary_html).to eq "<h2 id=\"foo\">foo</h2>"
+      expect(node.summary_html).to eq '<h2 id="foo">foo</h2>'
     end
 
     it 'should expire cache on node update' do
@@ -39,7 +39,7 @@ describe Node, type: :model do
       node.summary = '# dar'
       node.save
       node.reload
-      expect(node.summary_html).to eq "<h2 id=\"dar\">dar</h2>"
+      expect(node.summary_html).to eq '<h2 id="dar">dar</h2>'
     end
   end
 

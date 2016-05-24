@@ -3,7 +3,6 @@ AllCops:
     Enabled: true
   Exclude:
     - 'lib/templates/**/*'
-    - 'lib/ftp_sync.rb'
 
 Style/Documentation:
   Enabled: false
@@ -12,6 +11,15 @@ Style/AsciiComments:
   Enabled: false
 
 Style/IfUnlessModifier:
+  Enabled: false
+
+Style/RedundantSelf:
+  Enabled: false
+
+Style/RaiseArgs:
+  EnforcedStyle: compact
+
+Style/MutableConstant:
   Enabled: false
 
 Metrics/LineLength:

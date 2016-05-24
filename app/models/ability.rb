@@ -7,9 +7,9 @@ class Ability
     @user = u
     if @user.blank?
       roles_for_anonymous
-    elsif @user.has_role?(:admin)
+    elsif @user.roles?(:admin)
       can :manage, :all
-    elsif @user.has_role?(:member)
+    elsif @user.roles?(:member)
       roles_for_members
     else
       roles_for_anonymous
@@ -56,7 +56,7 @@ class Ability
       can :create, Reply
     end
 
-    cannot :create, Reply, topic: { :closed? => true }
+    cannot :create, Reply, topic: { closed?: true }
 
     can [:update, :destroy], Reply, user_id: user.id
   end
@@ -68,7 +68,7 @@ class Ability
   end
 
   def roles_for_pages
-    if user.has_role?(:wiki_editor)
+    if user.roles?(:wiki_editor)
       can :create, Page
       can :edit, Page, locked: false
       can :update, Page, locked: false
@@ -89,7 +89,7 @@ class Ability
   end
 
   def roles_for_sites
-    if user.has_role?(:site_editor)
+    if user.roles?(:site_editor)
       can :create, Site
     end
   end

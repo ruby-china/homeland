@@ -1,13 +1,12 @@
-$stderr.puts "DEPRECATED: To manage puma with capistrano, use https://github.com/seuros/capistrano-puma"
+$stderr.puts 'DEPRECATED: To manage puma with capistrano, use https://github.com/seuros/capistrano-puma'
 
 Capistrano::Configuration.instance.load do
-
   # Ensure the tmp/sockets directory is created by the deploy:setup task and
   # symlinked in by the deploy:update task. This is not handled by Capistrano
   # v2 but is fixed in v3.
   shared_children.push('tmp/sockets')
 
-  _cset(:puma_default_hooks)    { true }
+  _cset(:puma_default_hooks) { true }
   _cset(:puma_cmd)    { "#{fetch(:bundle_cmd, 'bundle')} exec puma" }
   _cset(:pumactl_cmd) { "#{fetch(:bundle_cmd, 'bundle')} exec pumactl" }
   _cset(:puma_env)    { fetch(:rack_env, fetch(:rails_env, 'production')) }
@@ -23,17 +22,17 @@ Capistrano::Configuration.instance.load do
 
   namespace :puma do
     desc 'Start puma'
-    task :start, :roles => lambda { puma_role }, :on_no_matching_servers => :continue do
-      run "cd #{current_path} && #{puma_rails_additional_env} #{puma_cmd} #{start_options}", :pty => false
+    task :start, roles: -> { puma_role }, on_no_matching_servers: :continue do
+      run "cd #{current_path} && #{puma_rails_additional_env} #{puma_cmd} #{start_options}", pty: false
     end
 
     desc 'Stop puma'
-    task :stop, :roles => lambda { puma_role }, :on_no_matching_servers => :continue do
+    task :stop, roles: -> { puma_role }, on_no_matching_servers: :continue do
       run "cd #{current_path} && #{pumactl_cmd} -S #{state_path} stop"
     end
 
     desc 'Restart puma'
-    task :restart, :roles => lambda { puma_role }, :on_no_matching_servers => :continue do
+    task :restart, roles: -> { puma_role }, on_no_matching_servers: :continue do
       begin
         run "cd #{current_path} && #{puma_rails_additional_env} #{pumactl_cmd} -S #{state_path} restart"
       rescue Capistrano::CommandError => ex
@@ -43,7 +42,7 @@ Capistrano::Configuration.instance.load do
     end
 
     desc 'Restart puma (phased restart)'
-    task :phased_restart, :roles => lambda { puma_role }, :on_no_matching_servers => :continue do
+    task :phased_restart, roles: -> { puma_role }, on_no_matching_servers: :continue do
       begin
         run "cd #{current_path} && #{puma_rails_additional_env} #{pumactl_cmd} -S #{state_path} phased-restart"
       rescue Capistrano::CommandError => ex
@@ -51,7 +50,6 @@ Capistrano::Configuration.instance.load do
         start
       end
     end
-
   end
 
   def start_options
@@ -65,7 +63,7 @@ Capistrano::Configuration.instance.load do
   def config_file
     @_config_file ||= begin
       file = fetch(:puma_config_file, nil)
-      file = "./config/puma/#{puma_env}.rb" if !file && File.exists?("./config/puma/#{puma_env}.rb")
+      file = "./config/puma/#{puma_env}.rb" if !file && File.exist?("./config/puma/#{puma_env}.rb")
       file
     end
   end
@@ -74,7 +72,7 @@ Capistrano::Configuration.instance.load do
     fetch(:rack_env, fetch(:rails_env, 'production'))
   end
 
-  #add additional env when start rails, such as : secret key, db username, db pwd or other what you want.
+  # add additional env when start rails, such as : secret key, db username, db pwd or other what you want.
   def puma_rails_additional_env
     fetch(:puma_rails_additional_env, '')
   end
@@ -87,7 +85,7 @@ Capistrano::Configuration.instance.load do
     require 'puma'
     require 'puma/configuration'
 
-    config = Puma::Configuration.new(:config_file => config_file)
+    config = Puma::Configuration.new(config_file: config_file)
     config.load
     config
   end

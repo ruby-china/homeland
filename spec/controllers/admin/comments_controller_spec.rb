@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Admin::CommentsController, type: :controller do
-  let(:user) {create :user}
+  let(:user) { create :user }
   let(:comment) { create :comment, user: user }
 
   before do

@@ -10,7 +10,7 @@ class Note < ApplicationRecord
   counter :hits, default: 0
 
   scope :recent_updated, -> { order(updated_at: :desc) }
-  scope :published, -> { where(publish: true) }
+  scope :published,      -> { where(publish: true) }
 
   validates :body, presence: true
 

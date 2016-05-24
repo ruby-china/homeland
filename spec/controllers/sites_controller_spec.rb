@@ -51,9 +51,9 @@ describe SitesController, type: :controller do
       it 'should not create new site if url is blank' do
         params = attributes_for(:site)
         params[:url] = ''
-        expect {
+        expect do
           post :create, params: { site: params }
-        }.to change(Site, :count).by(0)
+        end.to change(Site, :count).by(0)
         expect(response).to be_success
       end
     end

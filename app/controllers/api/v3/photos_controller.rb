@@ -15,7 +15,7 @@ module Api
         requires! :file
 
         @photo = Photo.new
-        @photo.image = params[:file]
+        @photo.image   = params[:file]
         @photo.user_id = current_user.id
         @photo.save!
         render json: { image_url: @photo.image.url }

@@ -19,11 +19,9 @@ describe 'API V3', 'nodes', type: :request do
         h.slice!(*keyset)
       end
 
-      expect(json['nodes']).to eq([
-        { 'id' => 1, 'name' => 'fun' },
-        { 'id' => 2, 'name' => 'ruby' },
-        { 'id' => 3, 'name' => 'nodes' }
-      ])
+      expect(json['nodes']).to eq([{ 'id' => 1, 'name' => 'fun' },
+                                   { 'id' => 2, 'name' => 'ruby' },
+                                   { 'id' => 3, 'name' => 'nodes' }])
     end
   end
 
@@ -33,8 +31,8 @@ describe 'API V3', 'nodes', type: :request do
     it 'should work' do
       get "/api/v3/nodes/#{node.id}.json"
       expect(response.status).to eq(200)
-      expect(json["node"]).to include(*%w(id name topics_count summary section_id sort section_name updated_at))
-      expect(json["node"]["topics_count"]).to eq(100)
+      expect(json['node']).to include(*%w(id name topics_count summary section_id sort section_name updated_at))
+      expect(json['node']['topics_count']).to eq(100)
     end
   end
 end

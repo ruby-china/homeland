@@ -6,7 +6,8 @@ class PhotosController < ApplicationController
     @photo = Photo.new
     @photo.image = params[:file]
     if @photo.image.blank?
-      render json: { ok: false }, status: 400 and return
+      render json: { ok: false }, status: 400
+      return
     end
 
     @photo.user_id = current_user.id

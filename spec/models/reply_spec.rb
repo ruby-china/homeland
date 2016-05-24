@@ -203,10 +203,9 @@ describe Reply, type: :model do
     let(:reply) { create(:reply) }
 
     it 'should work' do
-      args = ["topics/#{reply.topic_id}/replies", { id: reply.id, user_id: reply.user_id, action: :create } ]
+      args = ["topics/#{reply.topic_id}/replies", { id: reply.id, user_id: reply.user_id, action: :create }]
       expect(ActionCable.server).to receive(:broadcast).with(*args).once
       Reply.broadcast_to_client(reply)
     end
   end
-
 end

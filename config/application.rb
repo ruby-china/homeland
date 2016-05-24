@@ -52,8 +52,7 @@ module RubyChina
     end
 
     config.action_cable.log_tags = [
-      :action_cable,
-      -> request { request.uuid }
+      :action_cable, -> (request) { request.uuid }
     ]
 
     config.cache_store = [:mem_cache_store, '127.0.0.1', { namespace: 'rb-1', compress: true }]

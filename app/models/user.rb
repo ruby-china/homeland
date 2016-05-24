@@ -56,7 +56,7 @@ class User < ApplicationRecord
   scope :hot, -> { order(replies_count: :desc).order(topics_count: :desc) }
   scope :fields_for_list, lambda {
     select(:id, :name, :login, :email, :email_md5, :email_public, :avatar, :verified, :state,
-         :tagline, :github, :website, :location, :location_id, :twitter, :co)
+           :tagline, :github, :website, :location, :location_id, :twitter, :co)
   }
 
   def following
@@ -131,7 +131,7 @@ class User < ApplicationRecord
 
   # 是否能发帖
   def newbie?
-    return false if verified? or hr?
+    return false if verified? || hr?
     created_at > 1.week.ago
   end
 
@@ -151,7 +151,7 @@ class User < ApplicationRecord
     state == STATE[:deleted]
   end
 
-  def has_role?(role)
+  def roles?(role)
     case role
     when :admin then admin?
     when :wiki_editor then wiki_editor?
@@ -202,7 +202,7 @@ class User < ApplicationRecord
   end
 
   def self.find_login!(slug)
-    find_login(slug) || fail(ActiveRecord::RecordNotFound.new(slug: slug))
+    find_login(slug) || raise(ActiveRecord::RecordNotFound.new(slug: slug))
   end
 
   def self.find_login(slug)
@@ -253,7 +253,7 @@ class User < ApplicationRecord
     ids = []
     topics.each do |topic|
       val = results["user:#{id}:topic_read:#{topic.id}"]
-      if (val == (topic.last_reply_id || -1))
+      if val == (topic.last_reply_id || -1)
         ids << topic.id
       end
     end
@@ -274,8 +274,8 @@ class User < ApplicationRecord
       (target_type = 'Reply' AND target_id in (?))
     "
     notifications.unread
-      .where(any_sql, topic.id, opts[:replies_ids])
-      .update_all(read_at: Time.now)
+                 .where(any_sql, topic.id, opts[:replies_ids])
+                 .update_all(read_at: Time.now)
     Notification.realtime_push_to_client(self)
 
     # 处理 last_reply_id 是空的情况
@@ -484,7 +484,7 @@ class User < ApplicationRecord
   end
 
   def letter_avatar_url(size)
-    path = LetterAvatar.generate(self.login, size).sub('public/','/')
+    path = LetterAvatar.generate(self.login, size).sub('public/', '/')
 
     "#{Setting.protocol}://#{Setting.domain}#{path}"
   end
@@ -508,11 +508,11 @@ class User < ApplicationRecord
 
   def calendar_data
     user = self
-    Rails.cache.fetch(["user", self.id, 'calendar_data', Date.today, 'by-months']) do
+    Rails.cache.fetch(['user', self.id, 'calendar_data', Date.today, 'by-months']) do
       date_from = 12.months.ago.beginning_of_month.to_date
       replies = user.replies.where('created_at > ?', date_from)
-                             .group("date(created_at AT TIME ZONE 'CST')")
-                             .select("date(created_at AT TIME ZONE 'CST') AS date, count(id) AS total_amount").all
+                    .group("date(created_at AT TIME ZONE 'CST')")
+                    .select("date(created_at AT TIME ZONE 'CST') AS date, count(id) AS total_amount").all
       timestamps = {}
       replies.map do |reply|
         timestamps[reply['date'].to_time.to_i.to_s] = reply['total_amount']

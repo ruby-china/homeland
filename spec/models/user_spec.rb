@@ -189,32 +189,32 @@ describe User, type: :model do
 
     context 'when is a new user' do
       let(:user) { create :user }
-      it { is_expected.to have_role(:member) }
+      it { expect(user.roles?(:member)).to eq true }
     end
 
     context 'when is a blocked user' do
       let(:user) { create :blocked_user }
-      it { is_expected.not_to have_role(:member) }
+      it { expect(user.roles?(:member)).not_to eq true }
     end
 
     context 'when is a deleted user' do
       let(:user) { create :blocked_user }
-      it { is_expected.not_to have_role(:member) }
+      it { expect(user.roles?(:member)).not_to eq true }
     end
 
     context 'when is admin' do
       let(:user) { create :admin }
-      it { is_expected.to have_role(:admin) }
+      it { expect(user.roles?(:admin)).to eq true }
     end
 
     context 'when is wiki editor' do
       let(:user) { create :wiki_editor }
-      it { is_expected.to have_role(:wiki_editor) }
+      it { expect(user.roles?(:wiki_editor)).to eq true }
     end
 
     context 'when ask for some random role' do
       let(:user) { create :user }
-      it { is_expected.not_to have_role(:savior_of_the_broken) }
+      it { expect(user.roles?(:savior_of_the_broken)).not_to eq true }
     end
   end
 
@@ -316,9 +316,9 @@ describe User, type: :model do
         expect(topic.likes_count).to eq(1)
         expect(topic.liked_user_ids).not_to include(topic.user_id)
 
-        expect {
+        expect do
           user.like(reply)
-        }.to change(reply, :likes_count).by(1)
+        end.to change(reply, :likes_count).by(1)
       end
 
       it 'can tell whether or not liked by a user' do
@@ -372,9 +372,9 @@ describe User, type: :model do
     end
 
     context 'Simple prefix user exists' do
-      let(:user1) { create :user, login: "foo" }
-      let(:user2) { create :user, login: "foobar" }
-      let(:user2) { create :user, login: "a2foo" }
+      let(:user1) { create :user, login: 'foo' }
+      let(:user2) { create :user, login: 'foobar' }
+      let(:user2) { create :user, login: 'a2foo' }
 
       it 'should get right user' do
         u = User.find_login!(user1.login)
@@ -447,7 +447,6 @@ describe User, type: :model do
     it 'should work' do
       expect(u1.favorites_count).to eq(2)
     end
-
   end
 
   describe '.level / .level_name' do
@@ -510,13 +509,13 @@ describe User, type: :model do
   end
 
   describe '.avatar?' do
-    it "should return false when avatar is nil" do
+    it 'should return false when avatar is nil' do
       u = User.new
       u[:avatar] = nil
       expect(u.avatar?).to eq(false)
     end
 
-    it "should return true when avatar is not nil" do
+    it 'should return true when avatar is not nil' do
       u = User.new
       u[:avatar] = '1234'
       expect(u.avatar?).to eq(true)

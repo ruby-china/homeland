@@ -79,7 +79,7 @@ describe Topic, type: :model do
 
   it 'should get page and floor by reply' do
     replies = []
-    5.times do |e|
+    5.times do
       replies << create(:reply, topic: topic, user: user)
     end
     expect(topic.floor_of_reply(replies[2])).to eq(3)

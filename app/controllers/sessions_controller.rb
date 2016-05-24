@@ -20,7 +20,8 @@ class SessionsController < Devise::SessionsController
   def valify_captcha!
     set_locale
     unless verify_rucaptcha?
-      redirect_to new_user_session_path, alert: t('rucaptcha.invalid') and return
+      redirect_to new_user_session_path, alert: t('rucaptcha.invalid')
+      return
     end
     true
   end

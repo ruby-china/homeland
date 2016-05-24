@@ -242,7 +242,7 @@ describe 'API V3', 'topics', type: :request do
 
     it 'should return 404 when topic not found' do
       login_user!
-      delete "/api/v3/topics/abc.json"
+      delete '/api/v3/topics/abc.json'
       expect(response.status).to eq 404
     end
 
@@ -322,21 +322,19 @@ describe 'API V3', 'topics', type: :request do
         get "/api/v3/topics/#{topic.id}.json"
         expect(response.status).to eq(200)
         expect(json['meta']).to include(*%w(liked favorited followed))
-        expect(json['meta']["liked"]).to eq true
-        expect(json['meta']["favorited"]).to eq true
-        expect(json['meta']["followed"]).to eq false
+        expect(json['meta']['liked']).to eq true
+        expect(json['meta']['favorited']).to eq true
+        expect(json['meta']['followed']).to eq false
       end
     end
-
   end
 
   describe 'GET /api/v3/topic/:id/replies.json' do
-
     context 'no login' do
       it 'should work' do
         t = create(:topic, title: 'i want to know')
-        r1 = create(:reply, topic_id: t.id, body: 'let me tell', user: current_user)
-        r2 = create(:reply, topic_id: t.id, body: 'let me tell again', deleted_at: Time.now)
+        create(:reply, topic_id: t.id, body: 'let me tell', user: current_user)
+        create(:reply, topic_id: t.id, body: 'let me tell again', deleted_at: Time.now)
         get "/api/v3/topics/#{t.id}/replies.json"
         expect(response.status).to eq(200)
         expect(json['replies'].size).to eq 2

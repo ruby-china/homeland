@@ -10,6 +10,7 @@ wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-
 
 # Add Ruby sources
 sudo apt-add-repository ppa:brightbox/ruby-ng
+sudo add-apt-repository ppa:rwky/redis
 
 sudo apt-get update
 sudo apt-get upgrade -y

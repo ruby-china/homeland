@@ -110,9 +110,7 @@ module Api
 
         @topic_ids = @user.favorite_topic_ids[params[:offset].to_i, params[:limit].to_i]
         @topics = Topic.where(id: @topic_ids).fields_for_list.includes(:user)
-        @topics = @topics.to_a.sort do |a, b|
-          @topic_ids.index(a.id) <=> @topic_ids.index(b.id)
-        end
+        @topics = @topics.to_a.sort_by { |topic| @topic_ids.index(topic.id) }
         render json: @topics
       end
 

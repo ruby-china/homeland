@@ -32,9 +32,7 @@ class UsersController < ApplicationController
   def favorites
     @topic_ids = @user.favorite_topic_ids.reverse.paginate(page: params[:page], per_page: 40)
     @topics = Topic.where(id: @topic_ids).fields_for_list
-    @topics = @topics.to_a.sort do |a, b|
-      @topic_ids.index(a.id) <=> @topic_ids.index(b.id)
-    end
+    @topics = @topics.to_a.sort_by { |topic| @topic_ids.index(topic.id) }
     set_seo_meta("#{@user.login} 的收藏")
   end
 

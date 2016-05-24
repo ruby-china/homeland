@@ -392,7 +392,7 @@ class User < ApplicationRecord
         description: a1['description']
       }
     end
-    items = items.sort { |a1, a2| a2[:watchers] <=> a1[:watchers] }.take(10)
+    items = items.sort_by { |item| item[:watchers] }.take(10)
     $file_store.write(user.github_repositories_cache_key, items, expires_in: 15.days)
     items
   end

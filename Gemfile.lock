@@ -368,8 +368,7 @@ GEM
     ruby-progressbar (1.8.1)
     ruby-push-notifications (0.4.0)
       builder (~> 3.0)
-    rucaptcha (0.4.4)
-      posix-spawn (>= 0.3.0)
+    rucaptcha (0.5.0)
     rvm-capistrano (1.4.1)
       capistrano (>= 2.0.0)
     sass (3.4.22)
@@ -514,4 +513,4 @@ DEPENDENCIES
   will_paginate
 
 BUNDLED WITH
-   1.11.2
+   1.12.4

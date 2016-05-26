@@ -114,7 +114,7 @@ class TopicsController < ApplicationController
   end
 
   def new
-    @topic = Topic.new
+    @topic = Topic.new(user_id: current_user.id)
     unless params[:node].blank?
       @topic.node_id = params[:node]
       @node = Node.find_by_id(params[:node])

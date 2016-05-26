@@ -211,12 +211,12 @@ class Topic < ApplicationRecord
 
   def self.notify_topic_created(topic_id)
     topic = Topic.find_by_id(topic_id)
-    return if topic.blank?
+    return unless topic && topic.user
+
+    follower_ids = topic.user.follower_ids.uniq
+    return if follower_ids.empty?
 
     notified_user_ids = topic.mentioned_user_ids
-
-    follower_ids = (topic.user.try(:follower_ids) || [])
-    follower_ids.uniq!
 
     # 给关注者发通知
     default_note = { notify_type: 'topic', target_type: 'Topic', target_id: topic.id, actor_id: topic.user_id }

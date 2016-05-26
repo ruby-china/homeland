@@ -6,18 +6,17 @@ class TopicsController < ApplicationController
                                    :unfollow, :suggest, :unsuggest, :close, :open]
 
   def index
-    @suggest_topics = Topic.without_hide_nodes.suggest.fields_for_list.limit(3).to_a
-
+    @suggest_topics = Topic.without_hide_nodes.suggest.fields_for_list.limit(3)
     @topics = Topic.last_actived.without_suggest
-    if current_user
-      @topics = @topics.without_nodes(current_user.blocked_node_ids)
-      @topics = @topics.without_users(current_user.blocked_user_ids)
-    else
-      @topics = @topics.without_hide_nodes
-    end
+    @topics =
+      if current_user
+        @topics.without_nodes(current_user.blocked_node_ids)
+          .without_users(current_user.blocked_user_ids)
+      else
+        @topics.without_hide_nodes
+      end
     @topics = @topics.fields_for_list
     @topics = @topics.paginate(page: params[:page], per_page: 22, total_entries: 1500).to_a
-
     set_seo_meta t('menu.topics'), "#{Setting.app_name}#{t('menu.topics')}"
   end
 

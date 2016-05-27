@@ -62,7 +62,10 @@ module Admin
       if params[:type] == 'replies'
         # 为了避免误操作删除大量，限制一次清理 10 条，这个数字对刷垃圾回复的够用了。
         ids = @user.replies.recent.limit(10).pluck(:id)
-        Reply.where(id: ids).delete_all
+        Reply.where(id: ids).each do |reply|
+          reply.delete
+          reply.topic.touch
+        end
         redirect_to edit_admin_user_path(@user.id), notice: "最近 10 条删除，成功 #{@user.login} 还有 #{@user.replies.count} 条回帖。"
       end
     end

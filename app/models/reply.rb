@@ -10,18 +10,17 @@ class Reply < ApplicationRecord
 
   belongs_to :user, counter_cache: true
   belongs_to :topic, touch: true, counter_cache: true
-  has_many :notifications, class_name: 'Notification::Base', dependent: :destroy
 
   delegate :title, to: :topic, prefix: true, allow_nil: true
   delegate :login, to: :user, prefix: true, allow_nil: true
 
   scope :fields_for_list, -> { select(:topic_id, :id, :body_html, :updated_at, :created_at) }
-  scope :without_body, -> { select(column_names - ['body'])}
+  scope :without_body, -> { select(column_names - ['body']) }
 
   validates :body, presence: true
   validates :body, uniqueness: { scope: [:topic_id, :user_id], message: '不能重复提交。' }
   validate do
-    ban_words = (SiteConfig.ban_words_on_reply || '').split("\n").collect(&:strip)
+    ban_words = (Setting.ban_words_on_reply || '').split("\n").collect(&:strip)
     if body.strip.downcase.in?(ban_words)
       errors.add(:body, '请勿回复无意义的内容，如你想收藏或赞这篇帖子，请用帖子后面的功能。')
     end
@@ -37,7 +36,8 @@ class Reply < ApplicationRecord
   def update_parent_topic_updated_at
     unless topic.blank?
       topic.update_deleted_last_reply(self)
-      true
+      # FIXME: 本应该 belongs_to :topic, touch: true 来实现的，但貌似有个 Bug 哪里没起作用
+      topic.touch
     end
   end
 
@@ -60,25 +60,35 @@ class Reply < ApplicationRecord
 
     notified_user_ids = reply.mentioned_user_ids
 
-    Notification::TopicReply.transaction do
-      # 给发帖人发回帖通知
-      if reply.user_id != topic.user_id && !notified_user_ids.include?(topic.user_id)
-        Notification::TopicReply.create user_id: topic.user_id, reply_id: reply.id
-        notified_user_ids << topic.user_id
-      end
+    # 给发帖人发回帖通知
+    if reply.user_id != topic.user_id && !notified_user_ids.include?(topic.user_id)
+      Notification.create notify_type: 'topic_reply',
+                          actor_id: reply.user_id,
+                          user_id: topic.user_id,
+                          target: reply,
+                          second_target: topic
+      notified_user_ids << topic.user_id
+    end
 
-      follower_ids = topic.follower_ids + (reply.user.try(:follower_ids) || [])
-      follower_ids.uniq!
+    follower_ids = topic.follower_ids + (reply.user.try(:follower_ids) || [])
+    follower_ids.uniq!
 
-      # 给关注者发通知
-
+    # 给关注者发通知
+    default_note = {
+      notify_type: 'topic_reply',
+      target_type: 'Reply', target_id: reply.id,
+      second_target_type: 'Topic', second_target_id: topic.id,
+      actor_id: reply.user_id
+    }
+    Notification.bulk_insert(set_size: 100) do |worker|
       follower_ids.each do |uid|
         # 排除同一个回复过程中已经提醒过的人
         next if notified_user_ids.include?(uid)
         # 排除回帖人
         next if uid == reply.user_id
         logger.debug "Post Notification to: #{uid}"
-        Notification::TopicReply.create user_id: uid, reply_id: reply.id
+        note = default_note.merge(user_id: uid)
+        worker.add(note)
       end
     end
 
@@ -88,7 +98,7 @@ class Reply < ApplicationRecord
   end
 
   def self.broadcast_to_client(reply)
-    ActionCable.server.broadcast "topics/#{reply.topic_id}/replies", { id: reply.id, user_id: reply.user_id, action: :create }
+    ActionCable.server.broadcast("topics/#{reply.topic_id}/replies", id: reply.id, user_id: reply.user_id, action: :create)
   end
 
   # 是否热门
@@ -102,7 +112,7 @@ class Reply < ApplicationRecord
 
   def destroy
     super
-    notifications.delete_all
+    Notification.where(notify_type: 'topic_reply', target: self).delete_all
     delete_notifiaction_mentions
   end
 end

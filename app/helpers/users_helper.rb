@@ -8,24 +8,24 @@ module UsersHelper
 
     if user.is_a? String
       login = user
-      name = login
+      name  = login
     else
       login = user.login
-      name = user.name
+      name  = user.name
     end
 
     name ||= login
     options['data-name'.freeze] = name
 
-    link_to(login, user_path(login), options)
+    link_to(login, main_app.user_path(login), options)
   end
 
   def user_avatar_width_for_size(size)
     case size
     when :normal then 48
-    when :small then 16
-    when :large then 96
-    when :big then 120
+    when :small  then 16
+    when :large  then 96
+    when :big    then 120
     else size
     end
   end
@@ -33,16 +33,14 @@ module UsersHelper
   def user_avatar_size_name_for_2x(size)
     case size
     when :normal then :large
-    when :small then :normal
-    when :large then :big
-    when :big then :big
+    when :small  then :normal
+    when :large  then :big
+    when :big    then :big
     else size
     end
   end
 
   def user_avatar_tag(user, size = :normal, opts = {})
-    link = opts[:link].nil? ? true : opts[:link]
-
     width = user_avatar_width_for_size(size)
     img_class = "media-object avatar-#{width}"
 
@@ -51,44 +49,30 @@ module UsersHelper
       return image_tag("avatar/#{size}.png", class: img_class)
     end
 
-    if user.avatar?
-      img = image_tag(user.avatar.url(user_avatar_size_name_for_2x(size)), class: img_class)
-    else
-      img = image_tag(user.letter_avatar_url(width * 2), class: img_class)
-    end
+    img =
+      if user.avatar?
+        image_url = user.avatar.url(user_avatar_size_name_for_2x(size))
+        image_url += "?t=#{user.updated_at.to_i}" if opts[:timestamp]
+        image_tag(image_url, class: img_class)
+      else
+        image_tag(user.letter_avatar_url(width * 2), class: img_class)
+      end
 
-    if link
+    if opts[:link] != false
       link_to(raw(img), user_path(user))
     else
       raw img
     end
   end
 
-  def render_user_join_time(user)
-    I18n.l(user.created_at.to_date, format: :long)
-  end
-
-  def render_user_tagline(user)
-    user.tagline
-  end
-
-  def render_user_github_url(user)
-    link_to(user.github_url, user.github_url, target: '_blank', rel: 'nofollow')
-  end
-
-  def render_user_personal_website(user)
-    website = user.website[%r{^https?://}] ? user.website : 'http://' + user.website
-    link_to(website, website, target: '_blank', class: 'url', rel: 'nofollow')
-  end
-
   def render_user_level_tag(user)
     return '' if user.blank?
     level_class = case user.level
-                  when 'admin' then 'label-danger'
-                  when 'vip' then 'label-success'
-                  when 'hr' then 'label-success'
+                  when 'admin'   then 'label-danger'
+                  when 'vip'     then 'label-success'
+                  when 'hr'      then 'label-success'
                   when 'blocked' then 'label-warning'
-                  when 'newbie' then 'label-default'
+                  when 'newbie'  then 'label-default'
                   else 'label-info'
                   end
 

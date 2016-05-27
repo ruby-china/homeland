@@ -2,11 +2,11 @@ require 'bundler/capistrano'
 require 'capistrano/sidekiq'
 require 'rvm/capistrano'
 require 'puma'
-require 'puma/capistrano'
+require File.expand_path('../../lib/puma/capistrano', __FILE__)
 
 default_run_options[:pty] = true
 
-set :rvm_ruby_string, 'ruby-2.3.0'
+set :rvm_ruby_string, 'ruby-2.3.1'
 set :rvm_type, :user
 set :application, 'ruby-china'
 set :repository,  'git://github.com/ruby-china/ruby-china.git'
@@ -19,7 +19,8 @@ set :runner, 'ruby'
 set :git_shallow_clone, 1
 
 set :puma_role, :app
-set :puma_config_file, "config/puma-web.rb"
+set :puma_state, "#{current_path}/tmp/pids/puma.state"
+set :puma_config_file, 'config/puma-web.rb'
 set :sidekiq_config, "#{current_path}/config/sidekiq.yml"
 
 role :web, 'ruby-china.org'
@@ -43,7 +44,6 @@ end
 
 task :compile_assets, roles: :web do
   run "cd #{current_path}; RAILS_ENV=production bundle exec rake assets:precompile"
-  run "cd #{current_path}; RAILS_ENV=production bundle exec rake assets:cdn"
 end
 
 task :migrate_db, roles: :web do
@@ -60,12 +60,9 @@ namespace :cable do
   end
 
   task :restart do
-    run "cd #{current_path} && #{pumactl_cmd} -S #{current_path}/tmp/pids/puma-cable.state restart"
+    run "cd #{current_path} && #{pumactl_cmd} -S #{current_path}/tmp/pids/puma-cable.state stop"
+    run "cd #{current_path}; RAILS_ENV=production ./bin/cable"
   end
 end
 
 after 'deploy:finalize_update', 'deploy:symlink', :link_shared, :migrate_db, :compile_assets
-after 'deploy:start', 'cable:start'
-after 'deploy:restart', 'cable:restart'
-after 'deploy:stop', 'cable:stop'
-

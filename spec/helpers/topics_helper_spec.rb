@@ -72,7 +72,7 @@ describe TopicsHelper, type: :helper do
     end
 
     it 'should link mentioned user at first of line' do
-      expect(helper.markdown('@huacnlee hello @ruby_box')).to eq("<p><a href=\"/huacnlee\" class=\"at_user\" title=\"@huacnlee\"><i>@</i>huacnlee</a> hello <a href=\"/ruby_box\" class=\"at_user\" title=\"@ruby_box\"><i>@</i>ruby_box</a></p>")
+      expect(helper.markdown('@huacnlee hello @ruby_box')).to eq('<p><a href="/huacnlee" class="at_user" title="@huacnlee"><i>@</i>huacnlee</a> hello <a href="/ruby_box" class="at_user" title="@ruby_box"><i>@</i>ruby_box</a></p>')
     end
 
     it 'should support ul,ol' do
@@ -171,7 +171,7 @@ describe TopicsHelper, type: :helper do
   end
 
   describe 'topic_title_tag' do
-    let(:topic) { create :topic, title: 'test title'}
+    let(:topic) { create :topic, title: 'test title' }
     let(:user) { create :user }
 
     it 'should return topic_was_deleted without a topic' do

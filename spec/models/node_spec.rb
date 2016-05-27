@@ -31,7 +31,7 @@ describe Node, type: :model do
     let(:node) { create(:node) }
     it 'should return html' do
       node.summary = '# foo'
-      expect(node.summary_html).to eq "<h2 id=\"foo\">foo</h2>"
+      expect(node.summary_html).to eq '<h2 id="foo">foo</h2>'
     end
 
     it 'should expire cache on node update' do
@@ -39,7 +39,7 @@ describe Node, type: :model do
       node.summary = '# dar'
       node.save
       node.reload
-      expect(node.summary_html).to eq "<h2 id=\"dar\">dar</h2>"
+      expect(node.summary_html).to eq '<h2 id="dar">dar</h2>'
     end
   end
 
@@ -47,7 +47,7 @@ describe Node, type: :model do
     let(:nodes) { create_list(:node, 10) }
 
     before do
-      SiteConfig.new_topic_dropdown_node_ids = nodes.collect(&:id).join(',')
+      Setting.new_topic_dropdown_node_ids = nodes.collect(&:id).join(',')
     end
 
     it 'should be 5 for length' do

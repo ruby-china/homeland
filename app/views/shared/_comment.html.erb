@@ -3,11 +3,11 @@
     <%= user_avatar_tag(comment.user, :normal) %>
   </div>
   <div class="media-body">
-      <div class="info media-heading">
-         <span class="name"><%= user_name_tag(comment.user) %></span> 发表于 <%= timeago(comment.created_at) %>
-      </div>
-      <div class="body markdown">
-        <%= raw comment.body_html %>
-      </div>
-</div>
+    <div class="info media-heading">
+      <span class="name"><%= user_name_tag(comment.user) %></span> 发表于 <%= timeago(comment.created_at) %>
+    </div>
+    <div class="body markdown">
+      <%= raw comment.body_html %>
+    </div>
+  </div>
 </div>

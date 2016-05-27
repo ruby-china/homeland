@@ -79,7 +79,7 @@ describe Topic, type: :model do
 
   it 'should get page and floor by reply' do
     replies = []
-    5.times do |e|
+    5.times do
       replies << create(:reply, topic: topic, user: user)
     end
     expect(topic.floor_of_reply(replies[2])).to eq(3)
@@ -204,7 +204,7 @@ describe Topic, type: :model do
       expect(topic).to be_a(Topic)
 
       followers.each do |f|
-        expect(f.notifications.unread.where(type: 'Notification::Topic').count).to eq 1
+        expect(f.notifications.unread.where(notify_type: 'topic').count).to eq 1
       end
     end
   end
@@ -216,9 +216,11 @@ describe Topic, type: :model do
     describe 'Call method' do
       it 'should work' do
         Topic.notify_topic_node_changed(topic.id, new_node.id)
-        last_notification = user.notifications.unread.where(type: 'Notification::NodeChanged').first
-        expect(last_notification.topic_id).to eq topic.id
-        expect(last_notification.node_id).to eq new_node.id
+        last_notification = user.notifications.unread.where(notify_type: 'node_changed').first
+        expect(last_notification.target_type).to eq 'Topic'
+        expect(last_notification.target_id).to eq topic.id
+        expect(last_notification.second_target_type).to eq 'Node'
+        expect(last_notification.second_target_id).to eq new_node.id
       end
     end
 
@@ -263,6 +265,19 @@ describe Topic, type: :model do
 
     it 'should work' do
       expect(t.reply_ids).to eq replies.collect(&:id)
+    end
+  end
+
+  describe '.close! / .open! / closed?' do
+    let!(:t) { create(:topic, user: user) }
+
+    it 'should work' do
+      t.close!
+      expect(t.closed?).to eq true
+      t.open!
+      expect(t.closed_at).to eq nil
+      expect(t.closed?).to eq false
+      t.close!
     end
   end
 end

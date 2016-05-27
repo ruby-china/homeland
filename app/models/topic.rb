@@ -14,6 +14,7 @@ class Topic < ApplicationRecord
   include MarkdownBody
   include SoftDelete
   include Mentionable
+  include Closeable
   include Searchable
 
   # 临时存储检测用户是否读过的结果
@@ -33,46 +34,66 @@ class Topic < ApplicationRecord
   delegate :body, to: :last_reply, prefix: true, allow_nil: true
 
   # scopes
-  scope :last_actived, -> { order(last_active_mark: :desc) }
-  # 推荐的话题
-  scope :suggest, -> { where("suggested_at IS NOT NULL").order(suggested_at: :desc) }
-  scope :without_suggest, -> { where(suggested_at: nil) }
-  scope :high_likes, -> { order(likes_count: :desc).order(id: :desc) }
-  scope :high_replies, -> { order(replies_count: :desc).order(id: :desc) }
-  scope :no_reply, -> { where(replies_count: 0) }
-  scope :popular, -> { where("likes_count > 5") }
-  scope :exclude_column_ids, proc {|column, ids|
-    if ids.size == 0
+  scope :last_actived,       -> { order(last_active_mark: :desc) }
+  scope :suggest,            -> { where('suggested_at IS NOT NULL').order(suggested_at: :desc) }
+  scope :without_suggest,    -> { where(suggested_at: nil) }
+  scope :high_likes,         -> { order(likes_count: :desc).order(id: :desc) }
+  scope :high_replies,       -> { order(replies_count: :desc).order(id: :desc) }
+  scope :no_reply,           -> { where(replies_count: 0) }
+  scope :popular,            -> { where('likes_count > 5') }
+  scope :excellent,          -> { where('excellent >= 1') }
+  scope :without_hide_nodes, -> { exclude_column_ids('node_id', Topic.topic_index_hide_node_ids) }
+  scope :without_body,       -> { select(column_names - ['body']) }
+  scope :without_node_ids,   -> (ids) { exclude_column_ids('node_id', ids) }
+  scope :exclude_column_ids, lambda { |column, ids|
+    if ids.empty?
       all
     else
-      where.not({ column =>  ids })
+      where.not(column => ids)
     end
   }
-  scope :without_node_ids, proc { |ids| exclude_column_ids("node_id", ids) }
-  scope :excellent, -> { where("excellent >= 1") }
-  scope :without_hide_nodes, -> { exclude_column_ids("node_id", Topic.topic_index_hide_node_ids) }
-  scope :without_nodes, proc { |node_ids|
+  scope :without_nodes, lambda { |node_ids|
     ids = node_ids + Topic.topic_index_hide_node_ids
     ids.uniq!
-    exclude_column_ids("node_id", ids)
+    exclude_column_ids('node_id', ids)
   }
-  scope :without_users, proc { |user_ids|
-    exclude_column_ids("user_id", user_ids)
+  scope :without_users, lambda { |user_ids|
+    exclude_column_ids('user_id', user_ids)
   }
-  scope :without_body, -> { select(column_names - ['body'])}
 
   mapping do
-    indexes :title
-    indexes :body
+    indexes :title, term_vector: :yes
+    indexes :body, term_vector: :yes
     indexes :node_name
   end
 
-  def as_indexed_json(options={})
+  def as_indexed_json(_options = {})
     {
       title: self.title,
       body: self.full_body,
       node_name: self.node_name
     }
+  end
+
+  def related_topics(size = 5)
+    opts = {
+      query: {
+        more_like_this: {
+          fields: [:title, :body],
+          docs: [
+            {
+              _index: self.class.index_name,
+              _type: self.class.document_type,
+              _id: id
+            }
+          ],
+          min_term_freq: 2,
+          min_doc_freq: 5
+        }
+      },
+      size: size
+    }
+    self.class.__elasticsearch__.search(opts).records.to_a
   end
 
   def self.fields_for_list
@@ -85,7 +106,7 @@ class Topic < ApplicationRecord
   end
 
   def self.topic_index_hide_node_ids
-    SiteConfig.node_ids_hide_in_topics_index.to_s.split(',').collect(&:to_i)
+    Setting.node_ids_hide_in_topics_index.to_s.split(',').collect(&:to_i)
   end
 
   before_save :store_cache_fields
@@ -198,14 +219,18 @@ class Topic < ApplicationRecord
     follower_ids.uniq!
 
     # 给关注者发通知
-    follower_ids.each do |uid|
-      # 排除同一个回复过程中已经提醒过的人
-      next if notified_user_ids.include?(uid)
-      # 排除回帖人
-      next if uid == topic.user_id
-      logger.debug "Post Notification to: #{uid}"
-      Notification::Topic.create user_id: uid, topic_id: topic.id
+    default_note = { notify_type: 'topic', target_type: 'Topic', target_id: topic.id, actor_id: topic.user_id }
+    Notification.bulk_insert(set_size: 100) do |worker|
+      follower_ids.each do |uid|
+        # 排除同一个回复过程中已经提醒过的人
+        next if notified_user_ids.include?(uid)
+        # 排除回帖人
+        next if uid == topic.user_id
+        note = default_note.merge(user_id: uid)
+        worker.add(note)
+      end
     end
+
     true
   end
 
@@ -215,7 +240,10 @@ class Topic < ApplicationRecord
     node = Node.find_by_id(node_id)
     return if node.blank?
 
-    Notification::NodeChanged.create user_id: topic.user_id, topic_id: topic_id, node_id: node_id
+    Notification.create notify_type: 'node_changed',
+                        user_id: topic.user_id,
+                        target: topic,
+                        second_target: node
     true
   end
 end

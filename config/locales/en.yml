@@ -23,7 +23,7 @@ en:
   omniauth:
     github: GitHub
     twitter: Twitter
-  mongoid:
+  activerecord:
     models:
       user: "User"
       topic: "Topic"
@@ -57,6 +57,8 @@ en:
         body: "Content"
       reply:
         body: "Reply Content"
+      note:
+        title: "Title"
       post:
         title: "Title"
         body: "Content"

@@ -117,7 +117,7 @@ describe 'markdown' do
       context 'BBCode Image' do
         let(:raw) { '[img]http://ruby-china.org/logo.png[/img]' }
 
-        it { is_expected.to eq(%(<p><img src="http://ruby-china.org/logo.png" title="" alt="Logo"></p>))}
+        it { is_expected.to eq(%(<p><img src="http://ruby-china.org/logo.png" title="" alt="Logo"></p>)) }
       end
     end
 
@@ -505,7 +505,7 @@ describe 'markdown' do
 
         subject { super().inner_html }
         it 'auto link with @ issue #322' do
-          expect(subject).to eq "<p><a href=\"https://www.flickr.com/photos/123590011@N08/sets/72157644587013882/\" rel=\"nofollow\" target=\"_blank\">https://www.flickr.com/photos/123590011@N08/sets/72157644587013882/</a></p>"
+          expect(subject).to eq '<p><a href="https://www.flickr.com/photos/123590011@N08/sets/72157644587013882/" rel="nofollow" target="_blank">https://www.flickr.com/photos/123590011@N08/sets/72157644587013882/</a></p>'
         end
       end
     end

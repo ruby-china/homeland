@@ -56,4 +56,23 @@ describe Mentionable, type: :model do
       TestDocument.create(body: "@#{user.login}", user: create(:user)).destroy
     end.not_to change(user.notifications.unread, :count)
   end
+
+  describe '.send_mention_notification' do
+    let(:actor) { create(:user) }
+    let(:user1) { create(:user) }
+    let(:doc) { TestDocument.create body: "@#{user1.login} Bla bla", user: actor }
+
+    it 'should world' do
+      expect do
+        doc.send_mention_notification
+      end.to change(user1.notifications.unread, :count)
+
+      note = user1.notifications.unread.last
+      expect(note.notify_type).to eq 'mention'
+      expect(note.target_type).to eq 'TestDocument'
+      expect(note.target_id).to eq doc.id
+      expect(note.target.id).to eq doc.id
+      expect(note.actor_id).to eq actor.id
+    end
+  end
 end

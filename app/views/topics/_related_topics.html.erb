@@ -1,0 +1,12 @@
+<% cache([@topic, 'related_topic', Date.current]) do %>
+  <% if @topic.related_topics.present? %>
+    <div class="panel panel-default">
+      <div class="panel-heading">相关话题</div>
+      <ul class="list-group">
+        <% @topic.related_topics.each do |topic| %>
+          <li class="list-group-item"><%= link_to topic.title, topic %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+<% end %>

@@ -1,0 +1,10 @@
+<%= simple_form_for([:admin,@comment]) do |f| %>
+  <%= render "/shared/error_messages", target: @comment %>
+    <div class="form-group">
+        <%= f.input :body, as: :text, input_html: { class: "form-control" } %>
+    </div>
+    <div class="form-actions">
+      <%= f.submit "Save", class: "btn btn-primary", 'data-disable-with' => "Saving..." %> or
+      <%= link_to 'Cancel', admin_comments_path, class: "btn" %>
+    </div>
+<% end %>

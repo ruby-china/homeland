@@ -15,7 +15,7 @@ module TopicsHelper
 
   def topic_favorite_tag(topic, opts = {})
     return '' if current_user.blank?
-    opts[:class] ||= ""
+    opts[:class] ||= ''
     class_name = ''
     link_title = '收藏'
     if current_user && current_user.favorite_topic_ids.include?(topic.id)
@@ -35,13 +35,9 @@ module TopicsHelper
     return '' if current_user.blank?
     return '' if topic.blank?
     return '' if owner?(topic)
-    opts[:class] ||= ""
+    opts[:class] ||= ''
     class_name = 'follow'
-    followed = false
-    if topic.follower_ids.include?(current_user.id)
-      class_name = 'follow active'
-      followed = true
-    end
+    class_name += ' active' if topic.follower_ids.include?(current_user.id)
     if opts[:class].present?
       class_name += ' ' + opts[:class]
     end
@@ -53,9 +49,9 @@ module TopicsHelper
     return t('topics.topic_was_deleted') if topic.blank?
     if opts[:reply]
       index = topic.floor_of_reply(opts[:reply])
-      path = topic_path(topic, anchor: "reply#{index}")
+      path = main_app.topic_path(topic, anchor: "reply#{index}")
     else
-      path = topic_path(topic)
+      path = main_app.topic_path(topic)
     end
     link_to(topic.title, path, title: topic.title)
   end

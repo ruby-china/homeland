@@ -1,7 +1,7 @@
 BLOCK_MESSAGE = ['你请求过快，超过了频率限制，暂时屏蔽一段时间。如果有问题，请到 https://github.com/ruby-china/ruby-china/issues/new 提出。'.freeze]
 
 class Rack::Attack
-  Rack::Attack.cache.store = ActiveSupport::Cache::DalliStore.new("127.0.0.1")
+  Rack::Attack.cache.store = Rails.cache
 
   ### Throttle Spammy Clients ###
   throttle('req/ip', limit: 300, period: 5.minutes) do |req|
@@ -16,8 +16,8 @@ class Rack::Attack
   end
 
   # 固定黑名单
-  blacklist("blacklist/ip") do |req|
-    SiteConfig.blacklist_ips && SiteConfig.blacklist_ips.index(req.ip) != nil
+  blacklist('blacklist/ip') do |req|
+    Setting.blacklist_ips && !Setting.blacklist_ips.index(req.ip).nil?
   end
 
   # 允许 localhost
@@ -26,11 +26,11 @@ class Rack::Attack
   end
 
   ### Custom Throttle Response ###
-  self.throttled_response = lambda do |env|
-    [ 503, {}, BLOCK_MESSAGE]
+  self.throttled_response = lambda do |_env|
+    [503, {}, BLOCK_MESSAGE]
   end
 end
 
-ActiveSupport::Notifications.subscribe("rack.attack") do |name, start, finish, request_id, req|
+ActiveSupport::Notifications.subscribe('rack.attack') do |_name, _start, _finish, request_id, req|
   Rails.logger.info "  RackAttack: #{req.ip} #{request_id} blocked."
 end

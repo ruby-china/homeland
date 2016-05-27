@@ -1,7 +1,8 @@
 class RepliesController < ApplicationController
   load_and_authorize_resource :reply
 
-  before_action :find_topic
+  before_action :set_topic
+  before_action :set_reply, only: [:edit, :update, :destroy]
 
   def create
     @reply = Reply.new(reply_params)
@@ -24,7 +25,7 @@ class RepliesController < ApplicationController
       return
     end
 
-    @replies = Reply.unscoped.where("topic_id = ? and id > ?", @topic.id, last_id).without_body.order(:id).all
+    @replies = Reply.unscoped.where('topic_id = ? and id > ?', @topic.id, last_id).without_body.order(:id).all
     if current_user
       current_user.read_topic(@topic, replies_ids: @replies.collect(&:id))
     end
@@ -34,12 +35,9 @@ class RepliesController < ApplicationController
   end
 
   def edit
-    @reply = Reply.find(params[:id])
   end
 
   def update
-    @reply = Reply.find(params[:id])
-
     if @reply.update_attributes(reply_params)
       redirect_to(topic_path(@reply.topic_id), notice: '回帖更新成功。')
     else
@@ -48,7 +46,6 @@ class RepliesController < ApplicationController
   end
 
   def destroy
-    @reply = Reply.find(params[:id])
     if @reply.destroy
       redirect_to(topic_path(@reply.topic_id), notice: '回帖删除成功。')
     else
@@ -58,8 +55,12 @@ class RepliesController < ApplicationController
 
   protected
 
-  def find_topic
+  def set_topic
     @topic = Topic.find(params[:topic_id])
+  end
+
+  def set_reply
+    @reply = Reply.find(params[:id])
   end
 
   def reply_params

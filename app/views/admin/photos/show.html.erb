@@ -1,0 +1,16 @@
+<% content_for :sitemap do %>
+  <a href="<%= admin_photos_path %>"><%= t("admin.menu.photos")%></a> &gt; <span class="current"><%= t("admin.check_photo")%></span>
+<% end %>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @photo.user.login %>
+</p>
+<p>
+    <%= image_tag(@photo.image.url) %>
+</p>
+
+
+<%= link_to 'Edit', edit_admin_photo_path(@photo) %> |
+<%= link_to 'Back', admin_photos_path %>

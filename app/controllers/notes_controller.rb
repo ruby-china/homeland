@@ -1,5 +1,6 @@
 class NotesController < ApplicationController
-  before_action :require_user, except: [:show]
+  before_action :require_user
+  before_action :set_recent_notes, only: [:index, :show, :edit, :new, :create, :update]
   load_and_authorize_resource
 
   def index
@@ -54,6 +55,10 @@ class NotesController < ApplicationController
   end
 
   private
+
+  def set_recent_notes
+    @recent_notes = current_user.notes.recent.limit(10)
+  end
 
   def note_params
     params.require(:note).permit(:title, :body, :publish)

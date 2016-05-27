@@ -1,27 +1,33 @@
 <%= simple_form_for(@note, html: { class: "" }) do |f| %>
     <%= render "shared/error_messages", target: @note %>
-    <div class="form-group">
-      <div class="editor-toolbar">
-          <ul class="nav nav-pills" style="clear:none;">
-            <li class="edit active"><%= link_to(t("common.editor_toolbar_edit"), "#") %></li>
-            <li class="preview"><%= link_to(t("common.editor_toolbar_preview"), "#") %></li>
-          </ul>
-      </div>
-    </div>
 
     <div class="form-group">
-      <%= f.text_area :body, class: "form-control", rows: 20 %>
+      <div class="editor-toolbar">
+        <ul class="nav nav-pills">
+          <li class="edit active"><%= link_to(t("common.editor_toolbar_edit"), "#") %></li>
+          <li class="preview"><%= link_to(t("common.editor_toolbar_preview"), "#") %></li>
+        </ul>
+      </div>
+
+      <%= f.text_area :body, rows: 20, class: 'form-control topic-editor' %>
+
       <p class="help-block">
-      <%= t("notes.please_use") %> <a href="http://en.wikipedia.org/wiki/Markdown" target="_blank">Markdown</a> <%= t("notes.document_format_to_write") %>
+        <%= t("notes.please_use") %> <a href="<%= markdown_path %>" target="_blank">Markdown</a> <%= t("notes.document_format_to_write") %>
       </p>
     </div>
 
     <div class="form-group">
-      <label class="control-label" for="note_publish"><%= f.check_box :publish %> <%= t("common.public")%></label>
+      <label class="control-label" for="note_publish"><%= f.check_box :publish %> <%= t("common.public")%> <span class="text-danger"><i class="fa fa-warning"></i> 除非你选择公开，否则此 Note 的所有内容将是保密的！<span></label>
     </div>
 
-    <div class="form-group">
-      <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving") %>
-      <a href="<%= notes_path %>" class="btn btn-default"><%= t("common.cancel") %></a>
+    <div class="form-actions">
+      <div class="row">
+        <div class="col-sm-3">
+          <%= f.submit t("common.save"), class: "btn btn-primary btn-lg btn-block", 'data-disable-with' => t("common.saving") %>
+        </div>
+        <div class="col-sm-2">
+          <%= link_to t("common.cancel"), notes_path, class: "btn btn-default btn-lg btn-block" %>
+        </div>
+      </div>
     </div>
 <% end %>

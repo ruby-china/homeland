@@ -2,6 +2,9 @@ class TopicsController < ApplicationController
   load_and_authorize_resource only: [:new, :edit, :create, :update, :destroy,
                                      :favorite, :unfavorite, :follow, :unfollow, :suggest, :unsuggest, :ban]
 
+  before_action :set_topic, only: [:ban, :edit, :update, :destroy, :follow,
+                                   :unfollow, :suggest, :unsuggest, :close, :open]
+
   def index
     @suggest_topics = Topic.without_hide_nodes.suggest.fields_for_list.limit(3).to_a
 
@@ -111,7 +114,7 @@ class TopicsController < ApplicationController
   end
 
   def new
-    @topic = Topic.new
+    @topic = Topic.new(user_id: current_user.id)
     unless params[:node].blank?
       @topic.node_id = params[:node]
       @node = Node.find_by_id(params[:node])
@@ -122,7 +125,6 @@ class TopicsController < ApplicationController
   end
 
   def edit
-    @topic = Topic.find(params[:id])
     @node = @topic.node
 
     set_seo_meta "#{t('topics.edit_topic')} &raquo; #{t('menu.topics')}"
@@ -149,7 +151,6 @@ class TopicsController < ApplicationController
   end
 
   def update
-    @topic = Topic.find(params[:id])
     @topic.admin_editing = true if current_user.admin?
 
     if can?(:change_node, @topic)
@@ -172,7 +173,6 @@ class TopicsController < ApplicationController
   end
 
   def destroy
-    @topic = Topic.find(params[:id])
     @topic.destroy_by(current_user)
     redirect_to(topics_path, notice: t('topics.delete_topic_success'))
   end
@@ -188,36 +188,45 @@ class TopicsController < ApplicationController
   end
 
   def follow
-    @topic = Topic.find(params[:id])
     @topic.push_follower(current_user.id)
     render plain: '1'
   end
 
   def unfollow
-    @topic = Topic.find(params[:id])
     @topic.pull_follower(current_user.id)
     render plain: '1'
   end
 
   def suggest
-    @topic = Topic.find(params[:id])
     @topic.update_attributes(excellent: 1)
-    redirect_to @topic, success: '加精成功。'
+    redirect_to @topic, notice: '加精成功。'
   end
 
   def unsuggest
-    @topic = Topic.find(params[:id])
     @topic.update_attribute(:excellent, 0)
-    redirect_to @topic, success: '加精已经取消。'
+    redirect_to @topic, notice: '加精已经取消。'
   end
 
   def ban
-    @topic = Topic.find(params[:id])
     @topic.ban!
-    redirect_to @topic, success: '已转移到 NoPoint 节点。'
+    redirect_to @topic, notice: '已转移到 NoPoint 节点。'
+  end
+
+  def close
+    @topic.close!
+    redirect_to @topic, notice: '话题已关闭，将不再接受任何新的回复。'
+  end
+
+  def open
+    @topic.open!
+    redirect_to @topic, notice: '话题已重启开启。'
   end
 
   private
+
+  def set_topic
+    @topic ||= Topic.find(params[:id])
+  end
 
   def topic_params
     params.require(:topic).permit(:title, :body, :node_id)

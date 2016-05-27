@@ -28,11 +28,11 @@
   <%= stylesheet_link_tag_with_cached "front" %>
   <%= javascript_include_tag_with_cached "app" %>
   <%= csrf_meta_tag %>
-  <%= raw SiteConfig.custom_head_html %>
+  <%= raw Setting.custom_head_html %>
 </head>
 <body data-controller-name="<%= controller_name %>">
   <div class="header">
-    <nav class="navbar navbar-inverse navbar-static-top navbar-default">
+    <nav class="navbar navbar-inverse navbar-fixed-top navbar-default">
       <div class="container">
         <div class="navbar-header">
           <a href="/" class="navbar-brand"><b>Ruby</b> China</a>
@@ -42,7 +42,6 @@
            li << link_to(t("menu.topics"), topics_path)
            li << link_to(t("menu.wiki"), pages_path) if !mobile?
            li << link_to(t("menu.jobs"), jobs_path)
-           li << link_to(t("menu.tweets"), twitter_path) if !mobile?
            li << link_to(t("menu.sites"), sites_path) if !mobile?
         end %>
 
@@ -59,7 +58,7 @@
   <% if not mobile? %>
   <footer class="footer">
     <div class="container">
-      <%= raw SiteConfig.footer_html %>
+      <%= raw Setting.footer_html %>
     </div>
   </footer>
   <% end %>

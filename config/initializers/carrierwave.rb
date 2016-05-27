@@ -1,7 +1,5 @@
-
 require 'carrierwave'
 require 'carrierwave/validations/active_model'
-
 
 class NullStorage
   attr_reader :uploader

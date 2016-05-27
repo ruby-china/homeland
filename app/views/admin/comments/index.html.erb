@@ -1,0 +1,25 @@
+<% content_for :sitemap do %>
+  <span class="current">Comments</span>
+<% end %>
+
+<table class='grid table-bordered table-striped table-condensed'>
+  <tr>
+    <td style="width:100px">被评论对象</th>
+    <th>评论人</th>
+    <th>内容</th>
+    <td style="width:120px;">At</td>
+    <td style="width:60px;"></td>
+  </tr>
+
+<% @comments.each do |item| %>
+  <tr id="comment<%= item.id %>">
+    <td><%= item.commentable_type %>#<%= item.commentable_id %></td>
+    <td><%= item.user.login if !item.user.blank? %></td>
+    <td><%= item.body %></td>
+    <td><%= l item.created_at, format: :short %></td>
+    <td><%= link_to '', edit_admin_comment_path(item), class: "fa fa-pencil" %>
+    <%= link_to '', admin_comment_path(item), 'data-confirm' => 'Are you sure?', method: :delete, remote: true, class: "fa fa-trash" %></td>
+  </tr>
+<% end %>
+</table>
+<%= will_paginate @comments %>

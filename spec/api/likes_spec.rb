@@ -14,7 +14,7 @@ describe 'API V3', 'likes', type: :request do
       login_user!
       old_count = reply.likes_count
       post '/api/v3/likes.json', obj_type: 'reply', obj_id: reply.id
-      expect(response.status).to eq(201)
+      expect(response.status).to eq(200)
       expect(json).to include(*%w(obj_type obj_id count))
       reply.reload
       expect(reply.likes_count).to eq(old_count + 1)

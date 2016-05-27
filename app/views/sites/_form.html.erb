@@ -10,11 +10,9 @@
         <%= f.input :desc, as: :text, input_html: { class: "xxlarge", rows: "3" } %>
 
         <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-            <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving") %>
-            or
-            <%= link_to t("common.cancel"), sites_path %>
-          </div>
+          <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving") %>
+          or
+          <%= link_to t("common.cancel"), sites_path %>
         </div>
       <% end %>
     </div>

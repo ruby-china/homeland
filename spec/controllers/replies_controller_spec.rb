@@ -5,7 +5,7 @@ describe RepliesController, type: :controller do
     it 'should work' do
       topic = create :topic
       replies = create_list :reply, 3
-      get :index, params: { topic_id: topic.id, last_id: replies.first.id }
+      get :index, params: { topic_id: topic.id, last_id: replies.first.id }, xhr: true
       expect(response).to be_success
     end
   end

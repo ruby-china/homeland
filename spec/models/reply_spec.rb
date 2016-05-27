@@ -13,7 +13,7 @@ describe Reply, type: :model do
       topic = create :topic, user: user
       expect do
         create :reply, topic: topic
-      end.to change(Notification::Base, :count).by(1)
+      end.to change(Notification, :count).by(1)
 
       expect do
         create(:reply, topic: topic).destroy
@@ -26,7 +26,7 @@ describe Reply, type: :model do
       # Don't duplicate notifiation with mention
       expect do
         create :reply, topic: topic, mentioned_user_ids: [user.id]
-      end.not_to change(user.notifications.unread.where(type: 'Notification::TopicReply'), :count)
+      end.not_to change(user.notifications.unread.where(notify_type: 'topic_reply'), :count)
     end
 
     describe 'should send topic reply notification to followers' do
@@ -83,12 +83,12 @@ describe Reply, type: :model do
         reply = create :reply, topic: topic, user: replyer
 
         followers.each do |f|
-          expect(f.notifications.unread.where(type: 'Notification::TopicReply').count).to eq 1
+          expect(f.notifications.unread.where(notify_type: 'topic_reply').count).to eq 1
         end
 
         expect do
           Reply.notify_reply_created(reply.id)
-        end.to change(user.notifications.unread.where(type: 'Notification::TopicReply'), :count).by(1)
+        end.to change(user.notifications.unread.where(notify_type: 'topic_reply'), :count).by(1)
       end
     end
   end
@@ -128,18 +128,18 @@ describe Reply, type: :model do
   describe 'ban words for Reply body' do
     let(:topic) { create(:topic) }
     it 'should work' do
-      allow(SiteConfig).to receive(:ban_words_on_reply).and_return("mark\n顶")
+      allow(Setting).to receive(:ban_words_on_reply).and_return("mark\n顶")
       expect(topic.replies.create(body: '顶', user: user).errors[:body].size).to eq(1)
       expect(topic.replies.create(body: 'mark', user: user).errors[:body].size).to eq(1)
       expect(topic.replies.create(body: ' mark ', user: user).errors[:body].size).to eq(1)
       expect(topic.replies.create(body: 'MARK', user: user).errors[:body].size).to eq(1)
       expect(topic.replies.create(body: 'mark1', user: user).errors[:body].size).to eq(0)
-      allow(SiteConfig).to receive(:ban_words_on_reply).and_return("mark\r\n顶")
+      allow(Setting).to receive(:ban_words_on_reply).and_return("mark\r\n顶")
       expect(topic.replies.create(body: 'mark', user: user).errors[:body].size).to eq(1)
     end
 
     it 'should work when site_config value is nil' do
-      allow(SiteConfig).to receive(:ban_words_on_reply).and_return(nil)
+      allow(Setting).to receive(:ban_words_on_reply).and_return(nil)
       t = topic.replies.create(body: 'mark', user: user)
       expect(t.errors[:body].size).to eq(0)
     end
@@ -203,10 +203,9 @@ describe Reply, type: :model do
     let(:reply) { create(:reply) }
 
     it 'should work' do
-      args = ["topics/#{reply.topic_id}/replies", { id: reply.id, user_id: reply.user_id, action: :create } ]
+      args = ["topics/#{reply.topic_id}/replies", { id: reply.id, user_id: reply.user_id, action: :create }]
       expect(ActionCable.server).to receive(:broadcast).with(*args).once
       Reply.broadcast_to_client(reply)
     end
   end
-
 end

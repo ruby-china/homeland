@@ -7,6 +7,7 @@ class User < ApplicationRecord
   include BaseModel
   extend OmniauthCallbacks
   include Searchable
+  include Redis::Search
 
   acts_as_cached version: 1, expires_in: 1.week
 
@@ -15,25 +16,20 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable,
          :rememberable, :trackable, :validatable, :omniauthable
 
+  redis_search title_field: :login,
+               alias_field: :name,
+               ext_fields: [:large_avatar_url, :name]
+
   mount_uploader :avatar, AvatarUploader
 
   has_many :topics, dependent: :destroy
   has_many :notes
   has_many :replies, dependent: :destroy
   has_many :authorizations, dependent: :destroy
-  has_many :notifications, class_name: 'Notification::Base', dependent: :destroy
+  has_many :notifications, dependent: :destroy
   has_many :photos
   has_many :oauth_applications, class_name: 'Doorkeeper::Application', as: :owner
   has_many :devices
-
-  def read_notifications(notifications)
-    unread_ids = notifications.find_all { |notification| !notification.read? }.map(&:id)
-    if unread_ids.any?
-      Notification::Base.where(user_id: id, read: false)
-        .where(id: unread_ids).update_all(read: true, updated_at: Time.now)
-      Notification::Base.realtime_push_to_client(self)
-    end
-  end
 
   attr_accessor :password_confirmation
 
@@ -51,13 +47,16 @@ class User < ApplicationRecord
   }
 
   validates :login, format: { with: ALLOW_LOGIN_CHARS_REGEXP, message: '只允许数字、大小写字母和下划线' },
-                    length: { in: 3..20 }, presence: true,
-                    uniqueness: { case_sensitive: true}
+                    length: { in: 3..20 },
+                    presence: true,
+                    uniqueness: { case_sensitive: true }
+
+  validates :name, length: { maximum: 20 }
 
   scope :hot, -> { order(replies_count: :desc).order(topics_count: :desc) }
   scope :fields_for_list, lambda {
     select(:id, :name, :login, :email, :email_md5, :email_public, :avatar, :verified, :state,
-         :tagline, :github, :website, :location, :location_id, :twitter, :co)
+           :tagline, :github, :website, :location, :location_id, :twitter, :co)
   }
 
   def following
@@ -87,9 +86,17 @@ class User < ApplicationRecord
     (authorizations.empty? || !password.blank?) && super
   end
 
+  def profile_url
+    "/#{login}"
+  end
+
   def github_url
     return '' if github.blank?
     "https://github.com/#{github.split('/').last}"
+  end
+
+  def website_url
+    website[%r{^https?://}] ? website : "http://#{website}"
   end
 
   def twitter_url
@@ -124,7 +131,7 @@ class User < ApplicationRecord
 
   # 是否能发帖
   def newbie?
-    return false if verified? or hr?
+    return false if verified? || hr?
     created_at > 1.week.ago
   end
 
@@ -144,7 +151,7 @@ class User < ApplicationRecord
     state == STATE[:deleted]
   end
 
-  def has_role?(role)
+  def roles?(role)
     case role
     when :admin then admin?
     when :wiki_editor then wiki_editor?
@@ -195,7 +202,7 @@ class User < ApplicationRecord
   end
 
   def self.find_login!(slug)
-    find_login(slug) || fail(ActiveRecord::RecordNotFound.new(slug: slug))
+    find_login(slug) || raise(ActiveRecord::RecordNotFound.new(slug: slug))
   end
 
   def self.find_login(slug)
@@ -213,7 +220,7 @@ class User < ApplicationRecord
     conditions = warden_conditions.dup
     login = conditions.delete(:login)
     login.downcase!
-    where(conditions.to_h).where(["lower(login) = :value OR lower(email) = :value", { value: login }]).first
+    where(conditions.to_h).where(['lower(login) = :value OR lower(email) = :value', { value: login }]).first
   end
 
   # Override Devise to send mails with async
@@ -246,7 +253,7 @@ class User < ApplicationRecord
     ids = []
     topics.each do |topic|
       val = results["user:#{id}:topic_read:#{topic.id}"]
-      if (val == (topic.last_reply_id || -1))
+      if val == (topic.last_reply_id || -1)
         ids << topic.id
       end
     end
@@ -263,14 +270,13 @@ class User < ApplicationRecord
     opts[:replies_ids] ||= topic.replies.pluck(:id)
 
     any_sql = "
-      (mentionable_type = 'Topic' AND mentionable_id = ?) or
-      (mentionable_type = 'Reply' AND mentionable_id in (?)) or
-      (reply_id in (?))
+      (target_type = 'Topic' AND target_id = ?) or
+      (target_type = 'Reply' AND target_id in (?))
     "
     notifications.unread
-      .where(any_sql, topic.id, opts[:replies_ids], opts[:replies_ids])
-      .update_all(read: true)
-    Notification::Base.realtime_push_to_client(self)
+                 .where(any_sql, topic.id, opts[:replies_ids])
+                 .update_all(read_at: Time.now)
+    Notification.realtime_push_to_client(self)
 
     # 处理 last_reply_id 是空的情况
     last_reply_id = topic.last_reply_id || -1
@@ -386,19 +392,9 @@ class User < ApplicationRecord
         description: a1['description']
       }
     end
-    items = items.sort { |a1, a2| a2[:watchers] <=> a1[:watchers] }.take(10)
+    items = items.sort_by { |item| item[:watchers] }.take(10)
     $file_store.write(user.github_repositories_cache_key, items, expires_in: 15.days)
     items
-  end
-
-  # 重新生成 Private Token
-  def update_private_token
-    random_key = "#{SecureRandom.hex(10)}:#{id}"
-    update_attribute(:private_token, random_key)
-  end
-
-  def ensure_private_token!
-    update_private_token if private_token.blank?
   end
 
   def block_node(node_id)
@@ -443,7 +439,7 @@ class User < ApplicationRecord
       self.push(following_ids: user.id)
       user.push(follower_ids: self.id)
     end
-    Notification::Follow.notify(user: user, follower: self)
+    Notification.notify_follow(user.id, self.id)
   end
 
   def followers_count
@@ -484,13 +480,21 @@ class User < ApplicationRecord
   end
 
   def level_name
-    return I18n.t("common.#{level}_user")
+    I18n.t("common.#{level}_user")
   end
 
   def letter_avatar_url(size)
-    path = LetterAvatar.generate(self.login, size).sub('public/','/')
+    path = LetterAvatar.generate(self.login, size).sub('public/', '/')
 
     "#{Setting.protocol}://#{Setting.domain}#{path}"
+  end
+
+  def large_avatar_url
+    if self[:avatar].present?
+      self.avatar.url(:large)
+    else
+      self.letter_avatar_url(240)
+    end
   end
 
   def avatar?
@@ -499,6 +503,21 @@ class User < ApplicationRecord
 
   # @example.com 的可以修改邮件地址
   def email_locked?
-    self.email.index('@example.com') == nil
+    self.email.exclude?('@example.com')
+  end
+
+  def calendar_data
+    user = self
+    Rails.cache.fetch(['user', self.id, 'calendar_data', Date.today, 'by-months']) do
+      date_from = 12.months.ago.beginning_of_month.to_date
+      replies = user.replies.where('created_at > ?', date_from)
+                    .group("date(created_at AT TIME ZONE 'CST')")
+                    .select("date(created_at AT TIME ZONE 'CST') AS date, count(id) AS total_amount").all
+      timestamps = {}
+      replies.map do |reply|
+        timestamps[reply['date'].to_time.to_i.to_s] = reply['total_amount']
+      end
+      timestamps
+    end
   end
 end

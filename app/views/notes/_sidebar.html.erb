@@ -1,22 +1,21 @@
 <div class="sidebar col-md-3">
   <div class="panel panel-default">
-    <div class="panel-heading">记事本是什么？</div>
     <div class="panel-body">
-      <p>这是一个基于云存储的网络记事本，你可以放心的把你的一些文本资料存放在此处。</p>
-      <p><a href="<%= new_note_path %>" class="btn btn-success">新建记事</a></p>
+      <a href="<%= new_note_path %>" class="btn btn-success btn-block">新建 Note</a>
     </div>
+    <div class="panel-footer"><a href="<%= notes_path %>">查看我的 <%= current_user.notes.count %> 条 Note...</a></div>
   </div>
 
-  <% if ["new","edit"].index(params[:action]) %>
+  <% if @recent_notes.present? %>
   <div class="panel panel-default">
-    <div class="panel-heading">提示</div>
+    <div class="panel-heading">我最近创建的 Note</div>
     <ul class="list-group">
-      <li class="list-group-item">记事的第一行将自动成为标题</li>
-      <li class="list-group-item">超级链接会自动转换为可点击的状态</li>
-      <li class="list-group-item">目前只支持纯文本格式</li>
-      <li class="list-group-item">记事本的内容只有你自己才能看到</li>
+      <% @recent_notes.each do |note| %>
+        <li class="list-group-item">
+          <%= link_to note.display_title, note %>
+        </li>
+      <% end %>
     </ul>
   </div>
   <% end %>
 </div>
-

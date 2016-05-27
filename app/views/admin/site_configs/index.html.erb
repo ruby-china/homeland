@@ -1,0 +1,21 @@
+<% content_for :sitemap do %>
+  <span class="current"><%= t("admin.site_configs.settings") %></span>
+<% end %>
+
+<h1><%= t("admin.site_configs.settings") %></h1>
+
+<table class="table table-bordered table-striped table-condensed">
+  <tr>
+    <th>Var</th>
+    <th>说明</th>
+    <th></th>
+  </tr>
+
+<% @site_configs.each_key do |key| %>
+  <tr>
+    <td><%= key %></td>
+    <td><%= t("setting.#{key}") %></td>
+    <td class="opts"><%= link_to icon_tag("fa fa-pencil"), edit_admin_site_config_path(key) %></td>
+  </tr>
+<% end %>
+</table>

@@ -1,7 +1,10 @@
 class NotificationsChannel < ApplicationCable::Channel
   def subscribed
     stop_all_streams
-    stream_from "notifications_count/#{current_user_id}"
+    logger.info "current connections: #{ActionCable.server.connections.count}"
+    if self.current_user_id
+      stream_from "notifications_count/#{self.current_user_id}"
+    end
   end
 
   def unsubscribed

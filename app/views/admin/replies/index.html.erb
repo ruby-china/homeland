@@ -1,0 +1,34 @@
+<% content_for :sitemap do %>
+  <span class="current">回复</span>
+<% end %>
+
+<table class="table table-bordered table-striped table-condensed">
+  <tr class="head">
+    <td class="first">#</td>
+    <td style="width:500px">回帖内容</td>
+    <td>话题</td>
+    <td>回复人</td>
+    <td>时间</td>
+    <td></td>
+  </tr>
+
+<% @replies.each do |reply| %>
+  <tr id="reply-<%= reply.id %>" class="<%= 'deleted' if !reply.deleted_at.blank? %>">
+    <td class="first"><%= reply.id %></td>
+    <td><%= truncate(reply.body, length: 50) %></td>
+    <% if reply.topic %>
+      <td>
+          <%= link_to(reply.topic_id, topic_path(reply.topic_id), title: reply.topic.title)%>
+      </td>
+      <% else %>
+      <td><%= reply.topic_id %></td>
+      <% end %>
+    <td><%= link_to(reply.user.login, edit_admin_user_path(reply.user_id), target: "_blank") if reply.user %></td>
+    <td><%= l reply.created_at, format: :short %></td>
+    <td><%= link_to '', edit_admin_reply_path(reply), class: "fa fa-pencil" %>
+    <%= link_to '', admin_reply_path(reply), 'data-confirm' => 'Are you sure?', method: :delete, remote: true, class: "fa fa-trash" %></td>
+  </tr>
+<% end %>
+</table>
+<%= will_paginate @replies %>
+

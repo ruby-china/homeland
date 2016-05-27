@@ -2,8 +2,6 @@ module Mentionable
   extend ActiveSupport::Concern
 
   included do
-    has_many :notification_mentions, as: :mentionable, class_name: 'Notification::Mention'
-
     before_save :extract_mentioned_users
     after_create :send_mention_notification
     after_destroy :delete_notifiaction_mentions
@@ -11,7 +9,7 @@ module Mentionable
 
   # Wait for https://github.com/mongoid/mongoid/commit/2f94b5fab018b22a9e84ac2e988d4a3cf97e7f2e
   def delete_notifiaction_mentions
-    Notification::Mention.where(mentionable_id: id, mentionable_type: self.class.name).delete_all
+    Notification.where(notify_type: 'mention', target: self).delete_all
   end
 
   def mentioned_users
@@ -29,7 +27,7 @@ module Mentionable
   def extract_mentioned_users
     logins = body.scan(/@(\w{3,20})/).flatten
     if logins.any?
-      self.mentioned_user_ids = User.where("login IN (?) AND id != (?)", logins, user.id).limit(5).pluck(:id)
+      self.mentioned_user_ids = User.where('login IN (?) AND id != (?)', logins, user.id).limit(5).pluck(:id)
     end
   end
 
@@ -38,8 +36,21 @@ module Mentionable
   end
 
   def send_mention_notification
-    (mentioned_users - no_mention_users).each do |user|
-      Notification::Mention.create user: user, mentionable: self
+    Notification.bulk_insert(set_size: 100) do |worker|
+      (mentioned_users - no_mention_users).each do |user|
+        note = {
+          notify_type: 'mention',
+          actor_id: self.user_id,
+          user_id: user.id,
+          target_type: self.class.name,
+          target_id: self.id
+        }
+        if self.class.name == 'Reply'
+          note[:second_target_type] = 'Topic'
+          note[:second_target_id] = self.send(:topic_id)
+        end
+        worker.add(note)
+      end
     end
   end
 end

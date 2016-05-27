@@ -1,16 +1,14 @@
 <div class="row">
-    <%= render "sidebar", user: @user %>
-
-    <div class="col-md-8">
-        <%= render "menu" %>
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <%= render "topics", topics: @topics %>
-            </div>
-            <div class="panel-footer clearfix">
-                <%= will_paginate @topics %>
-            </div>
-        </div>
+  <%= render "sidebar", user: @user %>
+  <div class="col-md-8">
+    <%= render "menu" %>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <%= render "topics", topics: @topics %>
+      </div>
+      <div class="panel-footer clearfix">
+        <%= will_paginate @topics %>
+      </div>
     </div>
-
+  </div>
 </div>

@@ -1,0 +1,8 @@
+<% content_for :sitemap do %>
+  <a href="<%= admin_photos_path %>"><%= t("admin.menu.photos")%></a> &gt; <span class="current"><%= t("common.upload")%></span>
+<% end %>
+<h1>New photo</h1>
+
+<%= render 'form' %>
+
+

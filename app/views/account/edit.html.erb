@@ -19,14 +19,14 @@
           <%= f.label :github, class: 'control-label' %>
           <div class="input-group">
             <span class="input-group-addon">https://github.com/</span>
-            <%= f.text_field :github, type: :email, class: "form-control", placeholder: "yourname" %>
+            <%= f.text_field :github, class: "form-control", placeholder: I18n.t('simple_form.placeholders.user.yourname') %>
           </div>
         </div>
         <div class="form-group">
           <%= f.label :twitter, class: 'control-label' %>
           <div class="input-group">
             <span class="input-group-addon">http://twitter.com/</span>
-            <%= f.text_field :twitter, type: :email, class: "form-control", placeholder: "yourname" %>
+            <%= f.text_field :twitter, class: "form-control", placeholder: I18n.t('simple_form.placeholders.user.yourname') %>
           </div>
         </div>
         <%= f.input :website, type: :url, input_html: { placeholder: "http://" } %>
@@ -57,7 +57,7 @@
   <div class="sidebar col-md-3">
     <div class="panel panel-default" style="text-align:center;">
       <div class="panel-body">
-        <%= user_avatar_tag(@user, :large, link: false) %>
+        <%= user_avatar_tag(@user, :large, link: false, timestamp: true) %>
       </div>
     </div>
     <div class="panel panel-default">
@@ -82,18 +82,6 @@
       </ul>
     </div>
 
-
-    <div class="panel panel-default">
-      <div class="panel-heading"><%= t("users.private_key")%></div>
-      <div class="panel-body">
-        <div class="form-group">
-          <input id="private_token" class="form-control" value="<%= @user.private_token %>" readonly="readonly">
-        </div>
-        <div class="buttons">
-          <a href="#" class="btn btn-default btn-sm" id="update_private_token"><%= t("users.replace_token")%></a> <span class="help-inline"><%= t("users.token_usage")%></span>
-        </div>
-      </div>
-    </div>
     <div class="panel panel-default">
       <div class="panel-heading"><%= t("users.delete_account")%></div>
       <div class="panel-body">
@@ -109,15 +97,3 @@
     </div>
   </div>
 </div>
-<% content_for :scripts do %>
-<script type="text/javascript">
-$(document).ready(function(){
-$("#update_private_token").click(function(){
-$.post("<%= update_private_token_account_path %>",function(re){
-$("#private_token").val(re);
-});
-return false;
-})
-});
-</script>
-<% end %>

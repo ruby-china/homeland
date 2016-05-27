@@ -93,7 +93,6 @@ SimpleForm.setup do |config|
     b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
   end
 
-
   config.wrappers :vertical_radio_and_checkboxes, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
     b.use :html5
     b.optional :readonly
@@ -220,6 +219,6 @@ SimpleForm.setup do |config|
   config.wrapper_mappings = {
     check_boxes: :horizontal_radio_and_checkboxes,
     radio_buttons: :horizontal_radio_and_checkboxes,
-    boolean: :horizontal_boolean,
+    boolean: :horizontal_boolean
   }
 end

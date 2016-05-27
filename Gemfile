@@ -4,9 +4,7 @@ else
   source 'https://gems.ruby-china.org'
 end
 
-ruby '2.3.0'
-
-gem 'rails', '5.0.0.beta3'
+gem 'rails', '5.0.0.rc1'
 gem 'sprockets'
 gem 'sass-rails'
 gem 'coffee-rails'
@@ -17,33 +15,38 @@ gem 'turbolinks', git: 'https://github.com/turbolinks/turbolinks-classic.git'
 gem 'jquery-turbolinks'
 gem 'dropzonejs-rails'
 
+gem 'pg'
+
 gem 'rack-attack'
 
-gem 'rails-i18n'
+gem 'rails-i18n', '5.0.0.beta3'
 gem 'http_accept_language'
 gem 'rails_autolink'
 gem 'md_emoji'
-gem 'exception_notification'
+gem 'jquery-atwho-rails'
 
-gem 'doorkeeper', '4.0.0.rc2'
+# OAuth Provider
+gem 'doorkeeper', '4.0.0.rc4'
 gem 'doorkeeper-i18n'
 
-# gem 'rails-perftest'
-# gem 'ruby-prof'
+gem 'bulk_insert'
 
 # 上传组件
 gem 'carrierwave'
 gem 'carrierwave-upyun'
 gem 'mini_magick'
 
+# 验证码，头像
 gem 'rucaptcha'
 gem 'letter_avatar'
 
-gem 'pg'
-
 # 用户系统
-gem 'devise', '~> 4.0.0.rc1'
+gem 'devise'
 gem 'devise-encryptable'
+
+# 通知系统
+gem 'notifications'
+gem 'ruby-push-notifications'
 
 # 分页
 gem 'will_paginate'
@@ -51,32 +54,31 @@ gem 'will_paginate'
 # 搜索
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
+gem 'redis-search', '1.0.0.beta2'
 
 # 三方平台 OAuth 验证登陆
 gem 'omniauth'
 gem 'omniauth-github'
 
-# permission
-gem 'cancancan', '~> 1.13.1'
+# Permission
+gem 'cancancan'
 
+# Redis
 gem 'redis'
 gem 'hiredis'
-# Redis 命名空间
 gem 'redis-namespace'
-# 将一些数据存放入 Redis
 gem 'redis-objects'
+
+# Cache
 gem 'second_level_cache', '2.2.2'
 
+# Setting
 gem 'rails-settings-cached'
 
-# Markdown 格式 & 文本处理
+# Markdown
 gem 'redcarpet', '~> 3.3.4'
 gem 'rouge', '~> 1.8.0'
 gem 'auto-space'
-gem 'nokogiri'
-
-# YAML 配置信息
-gem 'settingslogic'
 
 # 队列
 gem 'sidekiq'
@@ -90,15 +92,11 @@ gem 'social-share-button'
 gem 'simple_form'
 
 # API
-gem 'grape'
-gem 'active_model_serializers', '0.9.2'
-gem 'grape-active_model_serializers'
+gem 'active_model_serializers', '0.10.0.rc5'
 
-# Mailer
+# Mailer Service
 gem 'postmark'
 gem 'postmark-rails'
-
-gem 'ruby-push-notifications'
 
 # Dalli, kgio is for Dalli
 gem 'kgio'
@@ -106,9 +104,7 @@ gem 'dalli'
 
 gem 'puma'
 
-gem 'parallel'
-
-# for api 跨域
+# API cors
 gem 'rack-cors', require: 'rack/cors'
 gem 'rack-utf8_sanitizer'
 
@@ -116,35 +112,31 @@ gem 'rack-utf8_sanitizer'
 gem 'rack-mini-profiler', require: false
 
 gem 'oneapm_rpm'
-
-# UpYun SDK 用于发布的时候上传 Assets 到 CDN
-gem 'upyun', require: false
+gem 'exception_notification'
+gem 'status-page'
 
 group :development do
   gem 'capistrano', '2.9.0', require: false
   gem 'rvm-capistrano', require: false
   gem 'capistrano-sidekiq'
-
   gem 'derailed'
-
   # Better Errors
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'spring'
+  gem 'spring-commands-rspec'
 end
 
 group :development, :test do
-  gem 'rubocop'
-
+  gem 'rubocop', '~> 0.39.0', require: false
   gem 'rspec-rails', '3.5.0.beta1'
-
   gem 'factory_girl_rails', '~> 4.5.0'
   gem 'database_cleaner'
   gem 'capybara'
-
   gem 'jasmine-rails', '~> 0.10.2'
-
-  gem 'colorize'
   gem 'letter_opener'
 
+  gem 'codecov', require: false
   gem 'bundler-audit', require: false
+  gem 'pry-byebug'
 end

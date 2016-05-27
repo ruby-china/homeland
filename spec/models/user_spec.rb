@@ -3,7 +3,7 @@ require 'digest/md5'
 
 describe User, type: :model do
   before do
-    User.any_instance.stub(:update_index).and_return(true)
+    allow_any_instance_of(User).to receive(:update_index).and_return(true)
   end
   let(:topic) { create :topic }
   let(:user)  { create :user }
@@ -66,7 +66,7 @@ describe User, type: :model do
 
   describe '#read_topic?' do
     before do
-      User.any_instance.stub(:update_index).and_return(true)
+      allow_any_instance_of(User).to receive(:update_index).and_return(true)
       Rails.cache.write("user:#{user.id}:topic_read:#{topic.id}", nil)
     end
 
@@ -189,32 +189,32 @@ describe User, type: :model do
 
     context 'when is a new user' do
       let(:user) { create :user }
-      it { is_expected.to have_role(:member) }
+      it { expect(user.roles?(:member)).to eq true }
     end
 
     context 'when is a blocked user' do
       let(:user) { create :blocked_user }
-      it { is_expected.not_to have_role(:member) }
+      it { expect(user.roles?(:member)).not_to eq true }
     end
 
     context 'when is a deleted user' do
       let(:user) { create :blocked_user }
-      it { is_expected.not_to have_role(:member) }
+      it { expect(user.roles?(:member)).not_to eq true }
     end
 
     context 'when is admin' do
       let(:user) { create :admin }
-      it { is_expected.to have_role(:admin) }
+      it { expect(user.roles?(:admin)).to eq true }
     end
 
     context 'when is wiki editor' do
       let(:user) { create :wiki_editor }
-      it { is_expected.to have_role(:wiki_editor) }
+      it { expect(user.roles?(:wiki_editor)).to eq true }
     end
 
     context 'when ask for some random role' do
       let(:user) { create :user }
-      it { is_expected.not_to have_role(:savior_of_the_broken) }
+      it { expect(user.roles?(:savior_of_the_broken)).not_to eq true }
     end
   end
 
@@ -239,13 +239,24 @@ describe User, type: :model do
     end
   end
 
-  describe 'private token generate' do
-    it 'should generate new token' do
-      old_token = user.private_token
-      user.update_private_token
-      expect(user.private_token).not_to eq(old_token)
-      user.update_private_token
-      expect(user.private_token).not_to eq(old_token)
+  describe 'website_url' do
+    subject { create(:user, website: 'monkey.com') }
+    let(:expected) { 'http://monkey.com' }
+
+    context 'website without http://' do
+      describe '#website_url' do
+        subject { super().website_url }
+        it { is_expected.to eq(expected) }
+      end
+    end
+
+    context 'website with http://' do
+      before { allow(subject).to receive(:github).and_return('http://monkey.com') }
+
+      describe '#website_url' do
+        subject { super().website_url }
+        it { is_expected.to eq(expected) }
+      end
     end
   end
 
@@ -305,9 +316,9 @@ describe User, type: :model do
         expect(topic.likes_count).to eq(1)
         expect(topic.liked_user_ids).not_to include(topic.user_id)
 
-        expect {
+        expect do
           user.like(reply)
-        }.to change(reply, :likes_count).by(1)
+        end.to change(reply, :likes_count).by(1)
       end
 
       it 'can tell whether or not liked by a user' do
@@ -361,9 +372,9 @@ describe User, type: :model do
     end
 
     context 'Simple prefix user exists' do
-      let(:user1) { create :user, login: "foo" }
-      let(:user2) { create :user, login: "foobar" }
-      let(:user2) { create :user, login: "a2foo" }
+      let(:user1) { create :user, login: 'foo' }
+      let(:user2) { create :user, login: 'foobar' }
+      let(:user2) { create :user, login: 'a2foo' }
 
       it 'should get right user' do
         u = User.find_login!(user1.login)
@@ -436,7 +447,6 @@ describe User, type: :model do
     it 'should work' do
       expect(u1.favorites_count).to eq(2)
     end
-
   end
 
   describe '.level / .level_name' do
@@ -499,13 +509,13 @@ describe User, type: :model do
   end
 
   describe '.avatar?' do
-    it "should return false when avatar is nil" do
+    it 'should return false when avatar is nil' do
       u = User.new
       u[:avatar] = nil
       expect(u.avatar?).to eq(false)
     end
 
-    it "should return true when avatar is not nil" do
+    it 'should return true when avatar is not nil' do
       u = User.new
       u[:avatar] = '1234'
       expect(u.avatar?).to eq(true)
@@ -525,5 +535,25 @@ describe User, type: :model do
   describe '.email_locked?' do
     it { expect(User.new(email: 'foobar@gmail.com').email_locked?).to eq true }
     it { expect(User.new(email: 'foobar@example.com').email_locked?).to eq false }
+  end
+
+  describe '.calendar_data' do
+    let!(:user) { create(:user) }
+
+    it 'should work' do
+      d1 = 1.days.ago
+      d2 = 3.days.ago
+      d3 = 10.days.ago
+      create(:reply, user: user, created_at: d1)
+      create_list(:reply, 2, user: user, created_at: d2)
+      create_list(:reply, 6, user: user, created_at: d3)
+
+      data = user.calendar_data
+      expect(data.keys.count).to eq 3
+      expect(data.keys).to include(d1.to_date.to_time.to_i.to_s, d2.to_date.to_time.to_i.to_s, d3.to_date.to_time.to_i.to_s)
+      expect(data[d1.to_date.to_time.to_i.to_s]).to eq 1
+      expect(data[d2.to_date.to_time.to_i.to_s]).to eq 2
+      expect(data[d3.to_date.to_time.to_i.to_s]).to eq 6
+    end
   end
 end

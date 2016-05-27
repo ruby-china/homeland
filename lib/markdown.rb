@@ -35,7 +35,7 @@ module Redcarpet
       # ![](foo.jpg =300x200)
       # Example: https://gist.github.com/uupaa/f77d2bcf4dc7a294d109
       def image(link, title, alt_text)
-        links = link.split(" ")
+        links = link.split(' ')
         link = links[0]
         if links.count > 1
           # 原本 Markdown 的 title 部分是需要引号的 ![](foo.jpg "Title")
@@ -44,11 +44,11 @@ module Redcarpet
         end
 
         if title =~ /=(\d+)x(\d+)/
-          %(<img src="#{link}" width="#{$1}px" height="#{$2}px" alt="#{alt_text}">)
+          %(<img src="#{link}" width="#{Regexp.last_match(1)}px" height="#{Regexp.last_match(2)}px" alt="#{alt_text}">)
         elsif title =~ /=(\d+)x/
-          %(<img src="#{link}" width="#{$1}px" alt="#{alt_text}">)
+          %(<img src="#{link}" width="#{Regexp.last_match(1)}px" alt="#{alt_text}">)
         elsif title =~ /=x(\d+)/
-          %(<img src="#{link}" height="#{$1}px" alt="#{alt_text}">)
+          %(<img src="#{link}" height="#{Regexp.last_match(1)}px" alt="#{alt_text}">)
         else
           %(<img src="#{link}" title="#{title}" alt="#{alt_text}">)
         end
@@ -146,7 +146,7 @@ class MarkdownTopicConverter
   def link_mention_floor(doc)
     # More info about xpath('.//text()'):
     # https://github.com/sparklemotion/nokogiri/issues/1233
-    doc.xpath(".//text()").each do |node|
+    doc.xpath('.//text()').each do |node|
       content = node.to_html
       next unless content.include?('#')
       next if ancestors?(node, %w(pre code))
@@ -161,7 +161,7 @@ class MarkdownTopicConverter
   end
 
   NORMALIZE_USER_REGEXP = /(^|[^a-zA-Z0-9_!#\/\$%&*@＠])@([a-zA-Z0-9_]{1,20})/io
-  LINK_USER_REGEXP = /(^|[^a-zA-Z0-9_!#\$%&*@＠])@(user[0-9]{1,6})/io
+  LINK_USER_REGEXP      = /(^|[^a-zA-Z0-9_!#\$%&*@＠])@(user[0-9]{1,6})/io
 
   # rename user name using incremental id
   def normalize_user_mentions(text)
@@ -185,7 +185,7 @@ class MarkdownTopicConverter
   # convert '@user' to link
   # match any user even not exist.
   def link_mention_user_in_text(doc, users)
-    doc.xpath(".//text()").each do |node|
+    doc.xpath('.//text()').each do |node|
       content = node.to_html
       next unless content.include?('@')
       in_code = ancestors?(node, %w(pre code))
@@ -218,7 +218,7 @@ class MarkdownTopicConverter
   end
 
   def replace_emoji(doc)
-    doc.xpath(".//text()").each do |node|
+    doc.xpath('.//text()').each do |node|
       content = node.to_html
       next unless content.include?(':')
       next if ancestors?(node, %w(pre code))
@@ -230,8 +230,7 @@ class MarkdownTopicConverter
         if MdEmoji::EMOJI.include?(emoji)
           file_name = "#{emoji.gsub('+', 'plus')}.png"
 
-          %(<img src="#{upload_url}/assets/emojis/#{file_name}" class="emoji" ) +
-          %(title="#{emoji_code}" alt="" />)
+          %(<img src="#{upload_url}/assets/emojis/#{file_name}" class="emoji" title="#{emoji_code}" alt="" />)
         else
           emoji_code
         end

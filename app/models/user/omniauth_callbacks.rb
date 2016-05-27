@@ -23,16 +23,19 @@ class User
 
     def new_from_provider_data(provider, uid, data)
       User.new do |user|
-        if data['email'].present? && !User.where(email: data['email']).exists?
-          user.email = data['email']
-        else
-          user.email = "#{provider}+#{uid}@example.com"
-        end
+        user.email =
+          if data['email'].present? && !User.where(email: data['email']).exists?
+            data['email']
+          else
+            "#{provider}+#{uid}@example.com"
+          end
 
         user.name = data['name']
         user.login = data['nickname']
         user.login.gsub!(/[^\w]/, '_')
-        user.github = data['nickname'] if provider == 'github'
+        if provider == 'github'
+          user.github = data['nickname']
+        end
 
         if user.login.blank?
           user.login = "u#{Time.now.to_i}"
@@ -44,7 +47,7 @@ class User
 
         user.password = Devise.friendly_token[0, 20]
         user.location = data['location']
-        user.tagline = data['description']
+        user.tagline  = data['description']
       end
     end
   end

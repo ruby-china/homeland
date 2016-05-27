@@ -24,6 +24,7 @@ describe Ability, type: :model do
     let(:wiki_editor) { create :wiki_editor }
     let(:ability) { Ability.new(wiki_editor) }
     let(:page_locked) { create :page, locked: true }
+
     it { is_expected.not_to be_able_to(:destroy, Page) }
     it { is_expected.not_to be_able_to(:suggest, Topic) }
     it { is_expected.not_to be_able_to(:unsuggest, Topic) }
@@ -45,6 +46,7 @@ describe Ability, type: :model do
   context 'Normal users' do
     let(:user) { create :avatar_user }
     let(:topic) { create :topic, user: user }
+    let(:topic1) { create :topic }
     let(:locked_topic) { create :topic, user: user, lock_node: true }
     let(:reply) { create :reply, user: user }
     let(:note) { create :note, user: user }
@@ -60,15 +62,26 @@ describe Ability, type: :model do
       it { is_expected.to be_able_to(:destroy, topic) }
       it { is_expected.not_to be_able_to(:suggest, Topic) }
       it { is_expected.not_to be_able_to(:unsuggest, Topic) }
+      it { is_expected.not_to be_able_to(:ban, Topic) }
+      it { is_expected.not_to be_able_to(:open, topic1) }
+      it { is_expected.not_to be_able_to(:close, topic1) }
+      it { is_expected.not_to be_able_to(:ban, topic) }
+      it { is_expected.to be_able_to(:open, topic) }
+      it { is_expected.to be_able_to(:close, topic) }
       it { is_expected.to be_able_to(:change_node, topic) }
       it { is_expected.not_to be_able_to(:change_node, locked_topic) }
+      it { is_expected.to be_able_to(:change_node, topic) }
     end
 
     context 'Reply' do
+      let(:t) { create(:topic, closed_at: Time.now) }
+      let(:new_reply) { Reply.new(topic: t) }
+
       it { is_expected.to be_able_to(:read, Reply) }
       it { is_expected.to be_able_to(:create, Reply) }
       it { is_expected.to be_able_to(:update, reply) }
       it { is_expected.to be_able_to(:destroy, reply) }
+      it { is_expected.not_to be_able_to(:create, new_reply) }
     end
 
     context 'Section' do
@@ -124,6 +137,7 @@ describe Ability, type: :model do
   context 'Newbie users' do
     let(:newbie) { create :newbie }
     let(:ability) { Ability.new(newbie) }
+
     context 'Topic' do
       it { is_expected.not_to be_able_to(:create, Topic) }
       it { is_expected.not_to be_able_to(:suggest, Topic) }

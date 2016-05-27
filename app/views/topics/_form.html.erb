@@ -2,12 +2,12 @@
   <%= render "shared/error_messages", target: @topic %>
   <div class="form-group">
     <% if can? :change_node, @topic %>
-    <div class="input-group">
-      <span class="node-select input-group-btn">
-        <%= render_topic_node_select_tag(@topic) %>
-      </span>
-      <%= f.text_field :title, class: "form-control", placeholder: "在这里填写标题" %>
-    </div>
+      <div class="input-group">
+        <span class="node-select input-group-btn">
+          <%= render_topic_node_select_tag(@topic) %>
+        </span>
+        <%= f.text_field :title, class: "form-control", placeholder: "在这里填写标题" %>
+      </div>
     <% else %>
       <%= f.text_field :title, class: "form-control", placeholder: "在这里填写标题" %>
     <% end %>

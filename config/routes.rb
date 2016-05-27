@@ -95,7 +95,11 @@ Rails.application.routes.draw do
     end
     resources :nodes
     resources :sections
-    resources :users
+    resources :users do
+      member do
+        delete :clean
+      end
+    end
     resources :photos
     resources :pages do
       resources :versions, controller: :page_versions do

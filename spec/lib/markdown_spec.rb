@@ -469,7 +469,7 @@ describe 'markdown' do
 | cell 3   | cell 4   |)
       end
 
-      it { expect(doc.inner_html).to eq "<table class=\"table table-bordered table-striped\">\n<tr>\n<th>header 1</th>\n<th>header 3</th>\n</tr>\n<tr>\n<td>cell 1</td>\n<td>cell 2</td>\n</tr>\n<tr>\n<td>cell 3</td>\n<td>cell 4</td>\n</tr>\n</table>" }
+      it { expect(doc.inner_html).to eq "<div class=\"table-responsive\"><table class=\"table table-bordered table-striped\">\n<tr>\n<th>header 1</th>\n<th>header 3</th>\n</tr>\n<tr>\n<td>cell 1</td>\n<td>cell 2</td>\n</tr>\n<tr>\n<td>cell 3</td>\n<td>cell 4</td>\n</tr>\n</table></div>" }
     end
 
     describe 'Escape HTML tags' do
@@ -641,7 +641,7 @@ _emphasize_    __strong__</code></pre>
 <li>Ruby</li>
 <li>Go</li>
 </ol>
-<h3 id="Tables">Tables</h3><table class="table table-bordered table-striped">
+<h3 id="Tables">Tables</h3><div class="table-responsive"><table class="table table-bordered table-striped">
 <tr>
 <th>header 1</th>
 <th>header 3</th>
@@ -654,7 +654,7 @@ _emphasize_    __strong__</code></pre>
 <td>cell 3</td>
 <td>cell 4</td>
 </tr>
-</table><h3 id="Links">Links</h3>
+</table></div><h3 id="Links">Links</h3>
 <p>Inline links:</p>
 
 <p><a href="http://url.com/" title="title" target="_blank">link text</a><br>

@@ -41,7 +41,7 @@ AppView = Backbone.View.extend
 
   initialize: ->
     FormStorage.restore()
-    Turbolinks.ProgressBar.enable()
+    Turbolinks.enableProgressBar()
     @initForDesktopView()
     @initComponents()
     @initCable()

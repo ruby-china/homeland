@@ -11,7 +11,7 @@ gem 'coffee-rails'
 gem 'uglifier'
 gem 'jquery-rails'
 gem 'jbuilder'
-gem 'turbolinks', git: 'https://github.com/turbolinks/turbolinks-classic.git'
+gem 'turbolinks', '~> 2.5.3'
 gem 'jquery-turbolinks'
 gem 'dropzonejs-rails'
 
@@ -92,7 +92,7 @@ gem 'social-share-button'
 gem 'simple_form'
 
 # API
-gem 'active_model_serializers', '0.10.0.rc5'
+gem 'active_model_serializers'
 
 # Mailer Service
 gem 'postmark'

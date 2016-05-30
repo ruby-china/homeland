@@ -8,13 +8,6 @@ GIT
       rack-protection (~> 1.5)
       tilt (~> 2.0)
 
-GIT
-  remote: https://github.com/turbolinks/turbolinks-classic.git
-  revision: 37a7c296232d20a61bd1946f600da7f2009189db
-  specs:
-    turbolinks (3.0.0)
-      coffee-rails
-
 GEM
   remote: https://gems.ruby-china.org/
   specs:
@@ -41,7 +34,7 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
-    active_model_serializers (0.10.0.rc5)
+    active_model_serializers (0.10.0)
       actionpack (>= 4.0)
       activemodel (>= 4.0)
       railties (>= 4.0)
@@ -413,6 +406,8 @@ GEM
     thread_safe (0.3.5)
     tilt (2.0.4)
     tool (0.2.3)
+    turbolinks (2.5.3)
+      coffee-rails
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (3.0.0)
@@ -432,7 +427,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  active_model_serializers (= 0.10.0.rc5)
+  active_model_serializers
   auto-space
   better_errors
   binding_of_caller
@@ -508,7 +503,7 @@ DEPENDENCIES
   spring-commands-rspec
   sprockets
   status-page
-  turbolinks!
+  turbolinks (~> 2.5.3)
   uglifier
   will_paginate
 

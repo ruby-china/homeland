@@ -27,7 +27,6 @@ module MentionTopic
 
   def extract_mentioned_topic_ids
     matched_ids = body.scan(TOPIC_LINK_REGEXP).flatten
-    puts matched_ids
     current_topic_id = self.class.name == 'Topic' ? self.id : self.topic_id
     if matched_ids.any?
       matched_ids = matched_ids.map(&:to_i).reject { |id| id == current_topic_id }

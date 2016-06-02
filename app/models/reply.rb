@@ -9,11 +9,12 @@ class Reply < ApplicationRecord
   UPVOTES = %w(+1 :+1: :thumbsup: :plus1: 👍 👍🏻 👍🏼 👍🏽 👍🏾 👍🏿)
 
   belongs_to :user, counter_cache: true
-  belongs_to :topic, touch: true, counter_cache: true
+  belongs_to :topic, touch: true
 
   delegate :title, to: :topic, prefix: true, allow_nil: true
   delegate :login, to: :user, prefix: true, allow_nil: true
 
+  scope :without_system, -> { where(action: nil) }
   scope :fields_for_list, -> { select(:topic_id, :id, :body_html, :updated_at, :created_at) }
   scope :without_body, -> { select(column_names - ['body']) }
 

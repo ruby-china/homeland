@@ -16,6 +16,7 @@ class Topic < ApplicationRecord
   include Mentionable
   include Closeable
   include Searchable
+  include MentionTopic
 
   # 临时存储检测用户是否读过的结果
   attr_accessor :read_state, :admin_editing

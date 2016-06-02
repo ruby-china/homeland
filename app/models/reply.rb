@@ -5,11 +5,13 @@ class Reply < ApplicationRecord
   include MarkdownBody
   include Likeable
   include Mentionable
+  include MentionTopic
 
   UPVOTES = %w(+1 :+1: :thumbsup: :plus1: 👍 👍🏻 👍🏼 👍🏽 👍🏾 👍🏿)
 
   belongs_to :user, counter_cache: true
   belongs_to :topic, touch: true
+  belongs_to :target, polymorphic: true
 
   delegate :title, to: :topic, prefix: true, allow_nil: true
   delegate :login, to: :user, prefix: true, allow_nil: true

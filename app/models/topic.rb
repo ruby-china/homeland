@@ -16,6 +16,7 @@ class Topic < ApplicationRecord
   include Mentionable
   include Closeable
   include Searchable
+  include MentionTopic
 
   # 临时存储检测用户是否读过的结果
   attr_accessor :read_state, :admin_editing
@@ -160,6 +161,7 @@ class Topic < ApplicationRecord
 
     self.last_active_mark = Time.now.to_i if created_at > 1.month.ago
     self.replied_at = reply.try(:created_at)
+    self.replies_count = replies.without_system.count
     self.last_reply_id = reply.try(:id)
     self.last_reply_user_id = reply.try(:user_id)
     self.last_reply_user_login = reply.try(:user_login)
@@ -173,7 +175,7 @@ class Topic < ApplicationRecord
     return false if deleted_reply.blank?
     return false if last_reply_user_id != deleted_reply.user_id
 
-    previous_reply = replies.where.not(id: deleted_reply.id).recent.first
+    previous_reply = replies.without_system.where.not(id: deleted_reply.id).recent.first
     update_last_reply(previous_reply, force: true)
   end
 
@@ -202,6 +204,20 @@ class Topic < ApplicationRecord
 
   def ban!
     update_attributes(lock_node: true, node_id: Node.no_point_id, admin_editing: true)
+  end
+
+  def excellent!
+    self.transaction do
+      Reply.create_system_event(action: 'excellent', topic_id: self.id)
+      update_attributes(excellent: 1)
+    end
+  end
+
+  def unexcellent!
+    self.transaction do
+      Reply.create_system_event(action: 'unexcellent', topic_id: self.id)
+      update_attributes(excellent: 0)
+    end
   end
 
   def floor_of_reply(reply)

@@ -1,0 +1,3 @@
+<%= user_avatar_tag(reply.user, :small) %> <%= user_name_tag(reply.user) %>
+<%= render "replies/system_events/#{reply.action}", reply: reply %>
+<span class='time'><%= l reply.created_at, format: :short %></span>

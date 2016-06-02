@@ -159,6 +159,7 @@ describe Topic, type: :model do
     context 'when have last Reply and param it that Reply' do
       it 'last reply should going to previous Reply' do
         r0 = create(:reply, topic: t)
+        create(:reply, action: 'foo')
         r1 = create(:reply, topic: t)
         expect(t.last_reply_id).to eq r1.id
         expect(t).to receive(:update_last_reply).with(r0, force: true)
@@ -278,6 +279,22 @@ describe Topic, type: :model do
       expect(t.closed_at).to eq nil
       expect(t.closed?).to eq false
       t.close!
+    end
+  end
+
+  describe '.excellent! / .unexcellent!' do
+    let!(:t) { create(:topic, user: user) }
+
+    it 'should work' do
+      allow(User).to receive(:current).and_return(user)
+      expect do
+        t.excellent!
+      end.to change(Reply.where(action: 'excellent', user: user), :count).by(1)
+      expect(t.excellent).to eq 1
+      expect do
+        t.unexcellent!
+      end.to change(Reply.where(action: 'unexcellent', user: user), :count).by(1)
+      expect(t.excellent).to eq 0
     end
   end
 end

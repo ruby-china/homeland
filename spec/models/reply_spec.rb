@@ -81,6 +81,7 @@ describe Reply, type: :model do
 
         topic = create :topic, user: user
         reply = create :reply, topic: topic, user: replyer
+        create :reply, action: 'nopoint', topic: topic, user: replyer
 
         followers.each do |f|
           expect(f.notifications.unread.where(notify_type: 'topic_reply').count).to eq 1
@@ -206,6 +207,15 @@ describe Reply, type: :model do
       args = ["topics/#{reply.topic_id}/replies", { id: reply.id, user_id: reply.user_id, action: :create }]
       expect(ActionCable.server).to receive(:broadcast).with(*args).once
       Reply.broadcast_to_client(reply)
+    end
+  end
+
+  describe '#create_system_event' do
+    it 'should create system event with empty body' do
+      allow(User).to receive(:current).and_return(user)
+      reply = Reply.create_system_event(topic_id: 1, action: 'bbb')
+      expect(reply.system_event?).to eq true
+      expect(reply.new_record?).to eq false
     end
   end
 end

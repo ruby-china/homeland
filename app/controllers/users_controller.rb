@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     # 排除掉几个非技术的节点
     without_node_ids = [21, 22, 23, 31, 49, 51, 57, 25]
     @topics = @user.topics.fields_for_list.without_node_ids(without_node_ids).high_likes.limit(20)
-    @replies = @user.replies.fields_for_list.recent.includes(:topic).limit(10)
+    @replies = @user.replies.without_system.fields_for_list.recent.includes(:topic).limit(10)
     set_seo_meta(@user.login.to_s)
   end
 
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   end
 
   def replies
-    @replies = @user.replies.fields_for_list.recent.paginate(page: params[:page], per_page: 20)
+    @replies = @user.replies.without_system.fields_for_list.recent.paginate(page: params[:page], per_page: 20)
     set_seo_meta("#{@user.login} 的帖子")
   end
 

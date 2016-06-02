@@ -9,7 +9,7 @@
     <%= link_to raw("<i class='fa fa-thumb-tack'></i> 置顶"), suggest_admin_topic_path(@topic), 'data-confirm' => '确定要置顶么?', method: :post %>
     <% end %>
     <% if !@topic.excellent? %>
-    <%= link_to raw("<i class='fa fa-diamond'></i> 加精"), suggest_topic_path(@topic.id), title: "设为精华帖" , method: "patch", data: { confirm: "确定要设置成精华帖么？" } %>
+    <%= link_to raw("<i class='fa fa-diamond'></i> 加精"), excellent_topic_path(@topic.id), title: "设为精华帖" , method: "post", data: { confirm: "确定要设置成精华帖么？" } %>
     <% end %>
 
     <% if @topic.node_id != Node.no_point_id %>

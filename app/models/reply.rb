@@ -17,8 +17,8 @@ class Reply < ApplicationRecord
   scope :fields_for_list, -> { select(:topic_id, :id, :body_html, :updated_at, :created_at) }
   scope :without_body, -> { select(column_names - ['body']) }
 
-  validates :body, presence: true
-  validates :body, uniqueness: { scope: [:topic_id, :user_id], message: '不能重复提交。' }
+  validates :body, presence: true, unless: -> { system_event? }
+  validates :body, uniqueness: { scope: [:topic_id, :user_id], message: '不能重复提交。' }, unless: -> { system_event? }
   validate do
     ban_words = (Setting.ban_words_on_reply || '').split("\n").collect(&:strip)
     if body.strip.downcase.in?(ban_words)
@@ -53,9 +53,9 @@ class Reply < ApplicationRecord
   end
 
   def self.notify_reply_created(reply_id)
-    return if system_event?
     reply = Reply.find_by_id(reply_id)
     return if reply.blank?
+    return if reply.system_event?
     topic = Topic.find_by_id(reply.topic_id)
     return if topic.blank?
 
@@ -102,23 +102,31 @@ class Reply < ApplicationRecord
     ActionCable.server.broadcast("topics/#{reply.topic_id}/replies", id: reply.id, user_id: reply.user_id, action: :create)
   end
 
-  # 是否是系统事件
-  def system_event?
-    action.present?
-  end
-
   # 是否热门
   def popular?
     likes_count >= 5
   end
 
   def upvote?
-    body.strip.start_with?(*UPVOTES)
+    (body || '').strip.start_with?(*UPVOTES)
   end
 
   def destroy
     super
     Notification.where(notify_type: 'topic_reply', target: self).delete_all
     delete_notifiaction_mentions
+  end
+
+  # 是否是系统事件
+  def system_event?
+    @system_event ||= action.present?
+  end
+
+  def self.create_system_event(opts = {})
+    opts[:body] = ''
+    opts[:user] ||= User.current
+    return false if opts[:action].blank?
+    return false if opts[:user].blank?
+    self.create(opts)
   end
 end

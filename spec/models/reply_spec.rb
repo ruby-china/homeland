@@ -210,8 +210,12 @@ describe Reply, type: :model do
     end
   end
 
-  describe '.system_event?' do
-    let(:reply) { create(:reply, action: 'bb') }
-    it { expect(reply.system_event?).to eq true }
+  describe '#create_system_event' do
+    it 'should create system event with empty body' do
+      allow(User).to receive(:current).and_return(user)
+      reply = Reply.create_system_event(topic_id: 1, action: 'bbb')
+      expect(reply.system_event?).to eq true
+      expect(reply.new_record?).to eq false
+    end
   end
 end

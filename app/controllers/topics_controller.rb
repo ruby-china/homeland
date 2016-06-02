@@ -1,9 +1,10 @@
 class TopicsController < ApplicationController
   load_and_authorize_resource only: [:new, :edit, :create, :update, :destroy,
-                                     :favorite, :unfavorite, :follow, :unfollow, :suggest, :unsuggest, :ban]
+                                     :favorite, :unfavorite, :follow, :unfollow,
+                                     :excellent, :unexcellent, :ban]
 
   before_action :set_topic, only: [:ban, :edit, :update, :destroy, :follow,
-                                   :unfollow, :suggest, :unsuggest, :close, :open]
+                                   :unfollow, :excellent, :unexcellent, :close, :open]
 
   def index
     @suggest_topics = Topic.without_hide_nodes.suggest.fields_for_list.limit(3).to_a
@@ -197,13 +198,13 @@ class TopicsController < ApplicationController
     render plain: '1'
   end
 
-  def suggest
-    @topic.update_attributes(excellent: 1)
+  def excellent
+    @topic.excellent!
     redirect_to @topic, notice: '加精成功。'
   end
 
-  def unsuggest
-    @topic.update_attribute(:excellent, 0)
+  def unexcellent
+    @topic.unexcellent!
     redirect_to @topic, notice: '加精已经取消。'
   end
 

@@ -59,8 +59,8 @@ Rails.application.routes.draw do
       delete :unfavorite
       post :follow
       delete :unfollow
-      patch :suggest
-      delete :unsuggest
+      post :excellent
+      post :unexcellent
       post :ban
       post :close
       post :open

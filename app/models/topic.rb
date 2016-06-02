@@ -173,7 +173,7 @@ class Topic < ApplicationRecord
     return false if deleted_reply.blank?
     return false if last_reply_user_id != deleted_reply.user_id
 
-    previous_reply = replies.where.not(id: deleted_reply.id).recent.first
+    previous_reply = replies.where(action: nil).where.not(id: deleted_reply.id).recent.first
     update_last_reply(previous_reply, force: true)
   end
 
@@ -202,6 +202,20 @@ class Topic < ApplicationRecord
 
   def ban!
     update_attributes(lock_node: true, node_id: Node.no_point_id, admin_editing: true)
+  end
+
+  def excellent!
+    self.transaction do
+      Reply.create_system_event(action: 'excellent', topic_id: self.id)
+      update_attributes(excellent: 1)
+    end
+  end
+
+  def unexcellent!
+    self.transaction do
+      Reply.create_system_event(action: 'unexcellent', topic_id: self.id)
+      update_attributes(excellent: 0)
+    end
   end
 
   def floor_of_reply(reply)

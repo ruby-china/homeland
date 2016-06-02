@@ -1,10 +1,10 @@
 class TopicsController < ApplicationController
   load_and_authorize_resource only: [:new, :edit, :create, :update, :destroy,
                                      :favorite, :unfavorite, :follow, :unfollow,
-                                     :excellent, :unexcellent, :ban]
+                                     :action]
 
   before_action :set_topic, only: [:ban, :edit, :update, :destroy, :follow,
-                                   :unfollow, :excellent, :unexcellent, :close, :open]
+                                   :unfollow, :action]
 
   def index
     @suggest_topics = Topic.without_hide_nodes.suggest.fields_for_list.limit(3).to_a
@@ -198,29 +198,24 @@ class TopicsController < ApplicationController
     render plain: '1'
   end
 
-  def excellent
-    @topic.excellent!
-    redirect_to @topic, notice: '加精成功。'
-  end
-
-  def unexcellent
-    @topic.unexcellent!
-    redirect_to @topic, notice: '加精已经取消。'
-  end
-
-  def ban
-    @topic.ban!
-    redirect_to @topic, notice: '已转移到 NoPoint 节点。'
-  end
-
-  def close
-    @topic.close!
-    redirect_to @topic, notice: '话题已关闭，将不再接受任何新的回复。'
-  end
-
-  def open
-    @topic.open!
-    redirect_to @topic, notice: '话题已重启开启。'
+  def action
+    case params[:type]
+    when 'excellent'
+      @topic.excellent!
+      redirect_to @topic, notice: '加精成功。'
+    when 'unexcellent'
+      @topic.unexcellent!
+      redirect_to @topic, notice: '加精已经取消。'
+    when 'ban'
+      @topic.ban!
+      redirect_to @topic, notice: '已转移到 NoPoint 节点。'
+    when 'close'
+      @topic.close!
+      redirect_to @topic, notice: '话题已关闭，将不再接受任何新的回复。'
+    when 'open'
+      @topic.open!
+      redirect_to @topic, notice: '话题已重启开启。'
+    end
   end
 
   private

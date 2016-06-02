@@ -59,11 +59,7 @@ Rails.application.routes.draw do
       delete :unfavorite
       post :follow
       delete :unfollow
-      post :excellent
-      post :unexcellent
-      post :ban
-      post :close
-      post :open
+      post :action
     end
     collection do
       get :no_reply

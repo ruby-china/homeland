@@ -35,7 +35,7 @@
           <i class="fa fa-diamond awesome"></i> 本帖已被设为精华帖！
           <% if admin? %>
           <div class="pull-right">
-            <%= link_to icon_tag("close"), unexcellent_topic_path(@topic.id), data: { confirm: "确定要取消么？", method: "post" } %>
+            <%= link_to icon_tag("close"), action_topic_path(@topic.id, type: 'unexcellent'), data: { confirm: "确定要取消么？", method: "post" } %>
           </div>
           <% end %>
         </div>

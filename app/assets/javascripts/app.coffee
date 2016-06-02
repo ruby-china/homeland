@@ -291,6 +291,10 @@ window.App =
       at : "@"
       searchKey: 'login'
       callbacks:
+        filter: (query, data, searchKey) ->
+          return data
+        sorter: (query, items, searchKey) ->
+          return items
         remoteFilter: (query, callback) ->
           $.getJSON '/search/users.json', { q: query }, (data) ->
             callback(data)

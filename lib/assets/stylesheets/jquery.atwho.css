@@ -5,26 +5,21 @@
   display: none;
   margin-top: 18px;
   background: #fff;
-  border: 1px solid #DDD;
+  border: 1px solid #e0e0e0;
   border-radius: 3px;
   box-shadow: 0 0 5px rgba(0,0,0,.1);
   min-width: 120px;
   z-index: 10
 }
 .atwho-view .cur {
-  background: #36F;
+  background: #317DDA;
   color: #fff
 }
 .atwho-view .cur small {
   color: #fff
 }
-.atwho-view strong {
-  color: #36F
-}
-.atwho-view .cur strong {
-  color: #fff;
-  font: bold
-}
+.atwho-view strong { font-weight: normal; }
+
 .atwho-view ul {
   list-style: none;
   padding: 0;
@@ -33,9 +28,10 @@
 .atwho-view ul li {
   display: block;
   padding: 5px 10px;
-  border-bottom: 1px solid #DDD;
+  border-bottom: 1px solid #eee;
   cursor: pointer
 }
+.atwho-view ul li img { width: 16px; height: 16px; border-radius: 180px; }
 .atwho-view small {
   font-size: smaller;
   color: #777;

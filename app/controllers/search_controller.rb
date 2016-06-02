@@ -1,4 +1,6 @@
 class SearchController < ApplicationController
+  before_action :require_user, only: [:users]
+
   def index
     search_params = {
       query: {
@@ -19,10 +21,15 @@ class SearchController < ApplicationController
   end
 
   def users
-    @users = []
+    @result = []
     if params[:q].present?
-      @users = User.prefix_match(params[:q])
+      users = User.prefix_match(params[:q], limit: 100)
+      users.sort_by! { |u| current_user.following_ids.index(u['id']) || 9999999999 }
+      @result = users.collect { |u| { login: u['title'], name: u['name'], avatar_url: u['large_avatar_url'] } }
+    else
+      users = current_user.following.limit(10)
+      @result = users.collect { |u| { login: u.login, name: u.name, avatar_url: u.large_avatar_url } }
     end
-    render json: @users.collect { |u| { login: u['title'], name: u['name'], avatar_url: u['large_avatar_url'] } }
+    render json: @result
   end
 end

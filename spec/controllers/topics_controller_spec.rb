@@ -110,13 +110,13 @@ describe TopicsController, type: :controller do
   describe '#suggest' do
     it 'should not allow user suggest' do
       sign_in user
-      put :suggest, params: { id: topic }
+      post :action, params: { id: topic, type: 'excellent' }
       expect(topic.reload.excellent).to eq(0)
     end
 
     it 'should not allow user suggest by admin' do
       sign_in admin
-      put :suggest, params: { id: topic }
+      post :action, params: { id: topic, type: 'excellent' }
       expect(topic.reload.excellent).to eq(1)
     end
   end
@@ -127,13 +127,13 @@ describe TopicsController, type: :controller do
 
       it 'should not allow user suggest' do
         sign_in user
-        put :unsuggest, params: { id: topic }
+        post :action, params: { id: topic, type: 'unexcellent' }
         expect(topic.reload.excellent).to eq(1)
       end
 
       it 'should not allow user suggest by admin' do
         sign_in admin
-        put :unsuggest, params: { id: topic }
+        post :action, params: { id: topic, type: 'unexcellent' }
         expect(topic.reload.excellent).to eq(0)
       end
     end
@@ -142,13 +142,13 @@ describe TopicsController, type: :controller do
   describe '#ban' do
     it 'should not allow user ban' do
       sign_in user
-      post :ban, params: { id: topic }
+      post :action, params: { id: topic, type: 'ban' }
       expect(topic.reload.node_id).not_to eq(Node.no_point_id)
     end
 
     it 'should not allow user suggest by admin' do
       sign_in admin
-      post :ban, params: { id: topic }
+      post :action, params: { id: topic, type: 'ban' }
       expect(response.status).to eq(302)
       expect(topic.reload.node_id).to eq(Node.no_point_id)
     end

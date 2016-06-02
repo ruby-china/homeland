@@ -81,6 +81,7 @@ describe Reply, type: :model do
 
         topic = create :topic, user: user
         reply = create :reply, topic: topic, user: replyer
+        create :reply, action: 'nopoint', topic: topic, user: replyer
 
         followers.each do |f|
           expect(f.notifications.unread.where(notify_type: 'topic_reply').count).to eq 1
@@ -207,5 +208,10 @@ describe Reply, type: :model do
       expect(ActionCable.server).to receive(:broadcast).with(*args).once
       Reply.broadcast_to_client(reply)
     end
+  end
+
+  describe '.system_event?' do
+    let(:reply) { create(:reply, action: 'bb') }
+    it { expect(reply.system_event?).to eq true }
   end
 end

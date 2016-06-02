@@ -53,6 +53,7 @@ class Reply < ApplicationRecord
   end
 
   def self.notify_reply_created(reply_id)
+    return if system_event?
     reply = Reply.find_by_id(reply_id)
     return if reply.blank?
     topic = Topic.find_by_id(reply.topic_id)
@@ -99,6 +100,11 @@ class Reply < ApplicationRecord
 
   def self.broadcast_to_client(reply)
     ActionCable.server.broadcast("topics/#{reply.topic_id}/replies", id: reply.id, user_id: reply.user_id, action: :create)
+  end
+
+  # 是否是系统事件
+  def system_event?
+    action.present?
   end
 
   # 是否热门

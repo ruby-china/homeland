@@ -34,6 +34,4 @@ module MentionTopic
       self.mentioned_topic_ids = Topic.where('id IN (?)', matched_ids).pluck(:id)
     end
   end
-
-
 end

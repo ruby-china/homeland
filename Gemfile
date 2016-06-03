@@ -22,7 +22,7 @@ gem 'rack-attack'
 gem 'rails-i18n', '5.0.0.beta3'
 gem 'http_accept_language'
 gem 'rails_autolink'
-gem 'md_emoji'
+gem 'twemoji'
 gem 'jquery-atwho-rails'
 
 # OAuth Provider

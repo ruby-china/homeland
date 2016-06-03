@@ -2,7 +2,6 @@ require 'rails'
 require 'rails_autolink'
 require 'redcarpet'
 require 'singleton'
-require 'md_emoji'
 require 'rouge/plugins/redcarpet'
 
 module Redcarpet
@@ -112,10 +111,11 @@ class MarkdownTopicConverter
     text.gsub!("\n```", "\n\n```")
 
     result = convert(text)
+    result = Twemoji.parse(result)
     doc = Nokogiri::HTML.fragment(result)
     link_mention_floor(doc)
     link_mention_user(doc, users)
-    replace_emoji(doc)
+    # replace_emoji(doc)
 
     return doc.to_html.strip
   rescue => e
@@ -217,30 +217,6 @@ class MarkdownTopicConverter
     end
   end
 
-  def replace_emoji(doc)
-    doc.xpath('.//text()').each do |node|
-      content = node.to_html
-      next unless content.include?(':')
-      next if ancestors?(node, %w(pre code))
-
-      html = content.gsub(/:(\S+):/) do |emoji|
-        emoji_code = emoji # .gsub("|", "_")
-        emoji      = emoji_code.delete(':')
-
-        if MdEmoji::EMOJI.include?(emoji)
-          file_name = "#{emoji.gsub('+', 'plus')}.png"
-
-          %(<img src="#{upload_url}/assets/emojis/#{file_name}" class="emoji" title="#{emoji_code}" alt="" />)
-        else
-          emoji_code
-        end
-      end
-
-      next if html == content
-      node.replace(html)
-    end
-  end
-
   # for testing
   def upload_url
     Setting.upload_url
@@ -258,7 +234,6 @@ class MarkdownTopicConverter
     }
     html_topic_render = Redcarpet::Render::HTMLwithTopic.new
     @converter = Redcarpet::Markdown.new(html_topic_render, opts)
-    @emoji = MdEmoji::Render.new
   end
 end
 

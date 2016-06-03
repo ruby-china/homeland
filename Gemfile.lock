@@ -203,9 +203,6 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.4)
       mime-types (>= 1.16, < 4)
-    md_emoji (1.0.2)
-      railties (>= 3.1.0)
-      redcarpet (>= 2.0)
     memory_profiler (0.9.6)
     method_source (0.8.2)
     mime-types (3.1)
@@ -406,6 +403,8 @@ GEM
     tool (0.2.3)
     turbolinks (2.5.3)
       coffee-rails
+    twemoji (2.1.1)
+      nokogiri (~> 1.6.2)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (3.0.0)
@@ -461,7 +460,6 @@ DEPENDENCIES
   kgio
   letter_avatar
   letter_opener
-  md_emoji
   mini_magick
   notifications
   omniauth
@@ -502,6 +500,7 @@ DEPENDENCIES
   sprockets
   status-page
   turbolinks (~> 2.5.3)
+  twemoji
   uglifier
   will_paginate
 

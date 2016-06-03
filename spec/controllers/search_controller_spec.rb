@@ -4,6 +4,7 @@ describe SearchController, type: :controller do
   describe '/search/users' do
     it 'should work' do
       u = create(:user)
+      sign_in u
       get :users, params: { q: u.login }
       expect(response).to be_success
       json = JSON.parse(response.body)

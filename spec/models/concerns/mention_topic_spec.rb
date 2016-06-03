@@ -13,8 +13,8 @@ describe MentionTopic, type: :model do
       reply = Reply.new body: "://#{Setting.domain}/topics/#{topics[0].id}
       ://#{Setting.domain}/topics/#{topics[1].id}
       ://#{Setting.domain}/topics/456"
-      expect(reply.extract_mentioned_topic_ids).to eq([topics[0].id, topics[1].id])
-      expect(reply.mentioned_topic_ids).to eq([topics[0].id, topics[1].id])
+      expect(reply.extract_mentioned_topic_ids).to include(topics[0].id, topics[1].id)
+      expect(reply.mentioned_topic_ids).to include(topics[0].id, topics[1].id)
     end
   end
 

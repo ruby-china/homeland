@@ -125,6 +125,15 @@ AppView = Backbone.View.extend
     $("i.fa",el).attr("class","fa fa-thumbs-up")
 
   initCable: () ->
+    if !window.UsersChannel
+      window.UsersChannel = App.cable.subscriptions.create "UsersChannel",
+      received: (data) ->
+        if $("#current_online")
+          $("#current_online").html(" #{data['count']}人")
+        $(document).on 'page:change', -> 
+          if $("#current_online")
+            $("#current_online").html(" #{data['count']}人")
+
     if !window.notificationChannel && App.isLogined()
       window.notificationChannel = App.cable.subscriptions.create "NotificationsChannel",
         connected: ->
@@ -142,6 +151,7 @@ AppView = Backbone.View.extend
 
         unsubscribe: ->
           @perform 'unsubscribed'
+
 
   receivedNotificationCount : (json) ->
     console.log 'receivedNotificationCount', json

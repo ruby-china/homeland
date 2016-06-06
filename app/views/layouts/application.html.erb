@@ -6,7 +6,7 @@
   /_/ |_|\__,_/_.___/\__, /   \____/_/ /_/_/_/ /_/\__,_/
                     /____/
   ========================================================
-                                          ruby-china.org
+              WordPress Log Proudly Powered By Ruby China!
 
   App Environments:
   --------------------------------------------------------
@@ -47,7 +47,6 @@
              li << link_to(t("menu.wiki"), main_app.pages_path) if !mobile?
              li << link_to(t("menu.jobs"), main_app.jobs_path)
              li << link_to(t("menu.sites"), main_app.sites_path) if !mobile?
-             li << link_to(t("menu.gems"), 'https://gems.ruby-china.org', target: '_blank') if !mobile?
           end %>
         </div>
 
@@ -107,11 +106,6 @@
     <% end %>
   </script>
   <%= yield :scripts %>
-  <script>
-    ga('create', '<%= Setting.google_analytics_key %>', 'auto');
-    ga('require', 'displayfeatures');
-    ga('send', 'pageview');
-  </script>
   <div class="zoom-overlay"></div>
 </body>
 </html>

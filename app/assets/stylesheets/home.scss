@@ -6,10 +6,9 @@
   .item {
     text-align: center;
     margin-bottom: 15px;
-    border-radius: 3px;
+    border-radius: 2px;
     background: #FFF;
-    border: 1px;
-    border-color: #e5e6e9 #dfe0e4 #d0d1d5 #dfe0e4;
+    box-shadow: 0 0 1px rgba(0,0,0,0.15);
 
     .icon {
       display: block;
@@ -19,14 +18,15 @@
     .text {
       display: block;
       text-align: left;
-      background: #F5F5F5;
-      border-top: 1px solid #E9E9E9;
-      font-size: 14px; font-weight:bold;
+      background: #fff;
+      border-top: 1px solid #eee;
+      font-size: 13px;
+      border-radius: 0 0 2px 2px;
 
       a { display:block; color: #666; padding: 6px 15px;  }
       a:hover { text-decoration: none; }
       .fa { margin-top: 3px; }
-      border-radius: 0 0 3px 3px;
+      border-radius: 0 0 2px 2px;
     }
     &:hover {
       opacity: 0.75;

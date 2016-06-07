@@ -65,7 +65,7 @@
     replies_count: "回复"
     likes_count: 赞
     has_deleted: 已删除
-    auth_with_other_services: "用其他平台的帐号登录"
+    auth_with_other_services: "用 GitHub 第三方账号登录"
     captcha: '验证码'
   reply:
     edit_reply: "修改回帖"

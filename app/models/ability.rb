@@ -37,9 +37,11 @@ class Ability
   end
 
   def roles_for_topics
-    unless user.newbie?
-      can :create, Topic
-    end
+    # 新用户允许发帖
+    #unless user.newbie?
+      
+    #end
+    can :create, Topic
     can [:favorite, :unfavorite, :follow, :unfollow], Topic
     can [:update, :open, :close], Topic, user_id: user.id
     can :change_node, Topic, user_id: user.id, lock_node: false

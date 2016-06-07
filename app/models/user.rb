@@ -135,9 +135,11 @@ class User < ApplicationRecord
   end
 
   # 是否能发帖
+  # 新手允许发帖
   def newbie?
-    return false if verified? || hr?
-    created_at > 1.week.ago
+    #return false if verified? || hr?
+    #created_at > 1.week.ago
+    return true;
   end
 
   def hr?

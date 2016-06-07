@@ -368,7 +368,7 @@
   ol,
   blockquote { margin-bottom: 16px; }
 
-  p { font-size: 14px; line-height: 1.5em; }
+  p { font-size: 14px; line-height: 1.5em; text-indent: 2em; }
   hr { border:2px dashed $gray; border-bottom:0px; margin: 18px auto; width:50%; }
   blockquote {
     margin: 0 18px 15px 18px;
@@ -553,3 +553,97 @@ footer {
 
 .dz-preview { display: none; }
 textarea.div-dropzone-focus { border-color: #BBE1C9; background: #fafafa; }
+
+/* Login Form */
+
+.btn { font-weight: 300; }
+
+.btn-lg { font-size: 14px; min-height: 36px; }
+
+body[data-controller-name="sessions"],body[data-controller-name="account"] {
+  background: #fff;
+}
+
+body[data-controller-name="sessions"] #main {
+  margin-top: 55px;
+}
+
+body[data-controller-name="account"] #main {
+  margin-top: 20px;
+}
+
+.connect-with-github {
+  width: 85%;
+  margin: 0 auto;
+}
+
+.connect-with-github h2 {
+    font-size: 27px;
+    line-height: 70px;
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 300;
+    color: #333;
+    margin: 0 auto;
+}
+
+.connect-with-github .btn {
+  min-height: 55px;
+  padding: 0 35px;
+  line-height: 53px;
+  font-size: 18px;
+  background-color: #3DC372;
+  color: #fff;
+  border-color: transparent;
+}
+
+.connect-with-github i {
+  font-size: 150%;
+  margin-right: 5px;
+  vertical-align: -10%;
+}
+
+.account-panel .panel .btn[type="submit"] {
+  min-height: 55px;
+  padding: 0 35px;
+  margin-top: 30px;
+  line-height: 53px;
+  font-size: 18px;
+}
+
+.account-panel .panel {
+  box-shadow: none;
+  border: none;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.account-panel .panel-heading {
+  border: 0;
+  text-align: center;
+  font-size: 27px;
+  line-height: 70px;
+  font-weight: 300;
+  color: #333;
+  margin: 0 auto;
+}
+
+.account-panel .panel-footer {
+  background: none;
+  border: none;
+  padding: 0 15px;
+}
+
+.account-panel a { color: $blueLight; }
+.account-panel a:hover { text-decoration: none; }
+.account-option { float: right; }
+.input-lg {
+    font-size: 14px;
+    height: 42px;
+    max-width: 100%;
+    padding: 4px 6px;
+    border: 1px solid #e5e5e5;
+    background: #fff;
+    color: #888888;
+    -webkit-transition: all linear .2s;
+    transition: all linear .2s;
+}

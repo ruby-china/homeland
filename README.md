@@ -1,6 +1,10 @@
-## Ruby China
+## WordPress Log
 
-This is the source code of [Ruby China](http://ruby-china.org) website.
+https://wordpresslog.b0.upaiyun.com/photo/2016/48d6d81d32965e2b56284beffb8f5d3f.png
+
+https://wordpresslog.b0.upaiyun.com/photo/2016/d48e0a0f124ddbe215a61c4825bc6a43.png
+
+This is the source code of [WordPress Log](https://wplog.org) based on [Ruby China](http://ruby-china.org).
 
 [![Build Status](https://travis-ci.org/ruby-china/ruby-china.svg?branch=master)](https://travis-ci.org/ruby-china/ruby-china) [![Code Climate](https://codeclimate.com/github/ruby-china/ruby-china/badges/gpa.svg)](https://codeclimate.com/github/ruby-china/ruby-china) [![codecov.io](https://codecov.io/github/ruby-china/ruby-china/coverage.svg?branch=master)](https://codecov.io/github/ruby-china/ruby-china?branch=master)
 

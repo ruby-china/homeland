@@ -1,1 +1,4 @@
-window.EMOJI_LIST = <%= Twemoji::SVG.collect { |k,v| { code: k, url: v } }.to_json %>;
+var default_emojis = [":+1:", ":-1:", ":clap:", ":smile:", ":sob:", ":heart_eyes:", ":sweat_smile:"];
+window.EMOJI_LIST = _.sortBy(<%= Twemoji.svg.collect { |k,v| { code: k, url: v } }.to_json %>, function(emoji) {
+  return 0 - default_emojis.indexOf(emoji.code);
+});

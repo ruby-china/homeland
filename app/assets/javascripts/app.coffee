@@ -248,7 +248,7 @@ window.App =
   current_user_id: null
   access_token : ''
   asset_url : ''
-  twemoji_url: 'https://twemoji.maxcdn.com/svg/'
+  twemoji_url: 'https://twemoji.maxcdn.com/2/svg/'
   root_url : ''
   cable: ActionCable.createConsumer()
 

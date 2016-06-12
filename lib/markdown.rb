@@ -111,11 +111,10 @@ class MarkdownTopicConverter
     text.gsub!("\n```", "\n\n```")
 
     result = convert(text)
-    result = Twemoji.parse(result)
     doc = Nokogiri::HTML.fragment(result)
     link_mention_floor(doc)
     link_mention_user(doc, users)
-    # replace_emoji(doc)
+    replace_emoji(doc)
 
     return doc.to_html.strip
   rescue => e
@@ -154,6 +153,19 @@ class MarkdownTopicConverter
       html = content.gsub(/#(\d+)([楼樓Ff])/) do
         %(<a href="#reply#{Regexp.last_match(1)}" class="at_floor" data-floor="#{Regexp.last_match(1)}">##{Regexp.last_match(1)}#{Regexp.last_match(2)}</a>)
       end
+
+      next if html == content
+      node.replace(html)
+    end
+  end
+
+  def replace_emoji(doc)
+    doc.xpath('.//text()').each do |node|
+      content = node.to_html
+      next unless content.include?(':')
+      next if ancestors?(node, %w(pre code))
+
+      html = Twemoji.parse(content)
 
       next if html == content
       node.replace(html)
@@ -267,9 +279,9 @@ Ruby China 支持表情符号，你可以用系统默认的 Emoji 符号（无�
 
 #### 一些表情例子
 
-:smile: :laughing: :dizzy_face: :sob: :cold_sweat: :sweat_smile:  :cry: :triumph: :heart_eyes:  :satisfied: :relaxed: :sunglasses: :weary:
+:smile: :laughing: :dizzy_face: :sob: :cold_sweat: :sweat_smile:  :cry: :triumph: :heart_eyes: :relaxed: :sunglasses: :weary:
 
-:+1: :-1: :100: :clap: :bell: :gift: :question: :bomb: :heart: :coffee: :cyclone: :bow: :kiss: :pray: :shit: :sweat_drops: :exclamation: :anger:
+:+1: :-1: :100: :clap: :bell: :gift: :question: :bomb: :heart: :coffee: :cyclone: :bow: :kiss: :pray: :sweat_drops: :exclamation: :anger:
 
 更多表情请访问：[http://www.emoji-cheat-sheet.com](http://www.emoji-cheat-sheet.com)
 

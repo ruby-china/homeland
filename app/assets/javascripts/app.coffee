@@ -129,10 +129,10 @@ AppView = Backbone.View.extend
       window.UsersChannel = App.cable.subscriptions.create "UsersChannel",
       received: (data) ->
         if $("#current_online")
-          $("#current_online").html(" #{data['count']}人")
+          $("#current_online").html("#{data['count']}")
         $(document).on 'page:change', -> 
           if $("#current_online")
-            $("#current_online").html(" #{data['count']}人")
+            $("#current_online").html("#{data['count']}")
 
     if !window.notificationChannel && App.isLogined()
       window.notificationChannel = App.cable.subscriptions.create "NotificationsChannel",

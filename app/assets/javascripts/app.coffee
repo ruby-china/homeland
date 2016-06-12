@@ -248,7 +248,7 @@ window.App =
   current_user_id: null
   access_token : ''
   asset_url : ''
-  twemoji_url: 'https://twemoji.maxcdn.com/2/svg/'
+  twemoji_url: 'https://twemoji.maxcdn.com/'
   root_url : ''
   cable: ActionCable.createConsumer()
 
@@ -305,7 +305,7 @@ window.App =
       at : ":"
       searchKey: 'code'
       data : window.EMOJI_LIST
-      displayTpl : "<li data-value='${code}'><img src='${url}' class='twemoji' /> ${code} </li>"
+      displayTpl : "<li data-value='${code}'><img src='#{App.twemoji_url}2/svg/${url}.svg' class='twemoji' /> ${code} </li>"
       insertTpl: "${code}"
     true
 

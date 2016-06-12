@@ -100,6 +100,7 @@
   <script type="text/javascript" data-turbolinks-eval=false>
     App.root_url = "<%= main_app.root_url %>";
     App.asset_url = "<%= Setting.upload_url %>";
+    App.twemoji_url = "<%= Twemoji.configuration.asset_root %>";
     App.locale = "<%= I18n.locale %>";
     <% if current_user %>
       App.current_user_id = <%= current_user.id %>;

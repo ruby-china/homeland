@@ -554,3 +554,36 @@ footer {
 
 .dz-preview { display: none; }
 textarea.div-dropzone-focus { border-color: #BBE1C9; background: #fafafa; }
+
+.emoji-modal {
+  .modal-dialog {
+    max-width: 496px;
+    .close { margin-top: 0px; }
+  }
+  .modal-header { border: 0px; padding: 8px; }
+  .modal-body { padding: 0 8px 8px 8px; }
+  .twemoji { width: 20px; height: 20px; }
+
+  .nav > li > a {
+    padding: 5px 8px;
+  }
+
+  .nav-tabs li:first-child { margin-left: 8px; }
+
+  .tab-pane {
+    padding: 0px;
+    height: 180px;
+    overflow: scroll;
+    a {
+      padding: 5px;
+      display: inline-block; width: 30px; height: 30px;
+      &:hover { background: #f0f0f0; }
+    }
+  }
+  .modal-footer {
+    padding: 8px;
+    text-align: left;
+    font-size: 16px;
+    .emoji { width: 48px; height: 48px; margin-right: 10px; }
+  }
+}

@@ -14,7 +14,8 @@
 #= require jquery.fluidbox.min
 #= require social-share-button
 #= require jquery.atwho
-#= require emoji_list
+#= require emoji-data
+#= require emoji-modal
 #= require notifier
 #= require action_cable
 #= require form_storage
@@ -305,7 +306,7 @@ window.App =
       at : ":"
       searchKey: 'code'
       data : window.EMOJI_LIST
-      displayTpl : "<li data-value='${code}'><img src='#{App.twemoji_url}2/svg/${url}.svg' class='twemoji' /> ${code} </li>"
+      displayTpl : "<li data-value='${code}'><img src='#{App.twemoji_url}/svg/${url}.svg' class='twemoji' /> ${code} </li>"
       insertTpl: "${code}"
     true
 

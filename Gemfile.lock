@@ -213,7 +213,7 @@ GEM
     mime-types-data (3.2016.0521)
     mimemagic (0.3.1)
     mini_magick (4.5.1)
-    mini_portile2 (2.0.0)
+    mini_portile2 (2.1.0)
     minitest (5.9.0)
     multi_json (1.12.1)
     multi_xml (0.5.5)
@@ -228,8 +228,9 @@ GEM
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
     nio4r (1.2.1)
-    nokogiri (1.6.7.2)
-      mini_portile2 (~> 2.0.0.rc2)
+    nokogiri (1.6.8)
+      mini_portile2 (~> 2.1.0)
+      pkg-config (~> 1.1.7)
     notifications (0.1.0)
       rails (>= 4.2.0, < 5.1)
       will_paginate (>= 3.0.0)
@@ -254,6 +255,7 @@ GEM
       ast (~> 2.2)
     pg (0.18.4)
     phantomjs (2.1.1.0)
+    pkg-config (1.1.7)
     postmark (1.7.1)
       json
       rake
@@ -463,6 +465,7 @@ DEPENDENCIES
   letter_opener
   md_emoji
   mini_magick
+  nokogiri (>= 1.6.8)
   notifications
   omniauth
   omniauth-github

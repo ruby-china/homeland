@@ -46,19 +46,34 @@ window.EmojiModalView = Backbone.View.extend
     return "#{App.twemoji_url}/svg/#{emoji.url}.svg"
 
   addGroup: (group) ->
-    navTab = "<li><a href='#emoji-group-#{group.name}' data-group='#{group.name}' role='tab' data-toggle='tab'><img src='#{@findEmojiUrlByName(group.tabicon)}' class='twemoji' /></a></li>"
-    emojis = []
-    for emojiName in group.icons
-      url = @findEmojiUrlByName(emojiName)
-      continue if !url
-      emojis.push "<a href='#' title='#{emojiName}' data-code='#{emojiName}' class='emoji'><img src='#{url}' class='twemoji' /></a>"
+    @renderGroupHTML(group)
+    if group.name == 'favorites'
+      return false if group.icons.length == 0
+    navTab = """
+      <li><a href="#emoji-group-#{group.name}"
+             data-group="#{group.name}" role="tab"
+             data-toggle="tab">
+          <img src="#{@findEmojiUrlByName(group.tabicon)}" class="twemoji" /></a>
+      </li>
+    """
     navPanel = """
     <div id="emoji-group-#{group.name}" class="tab-pane">
     </div>
     """
-    @panels[group.name] = emojis.join('')
+
     @.$el.find('.nav-tabs').append(navTab)
     @.$el.find('.tab-content').append(navPanel)
+
+  renderGroupHTML: (group) ->
+    emojis = []
+    if group.name == 'favorites'
+      group.icons = _.pluck(@favoriteEmojis(), 'code')
+    for emojiName in group.icons
+      url = @findEmojiUrlByName(emojiName)
+      if !url
+        continue
+      emojis.push "<a href='#' title='#{emojiName}' data-code='#{emojiName}' class='emoji'><img src='#{url}' class='twemoji' /></a>"
+    @panels[group.name] = emojis.join('')
 
   changePanel: (e) ->
     groupName = $(e.currentTarget).data('group')
@@ -66,8 +81,9 @@ window.EmojiModalView = Backbone.View.extend
 
   insertCode: (e) ->
     target = $(e.currentTarget)
-    code = ":#{target.data('code')}: "
-    window._topicView.insertString(code)
+    code = target.data('code')
+    @saveFavoritEmoji(code)
+    window._topicView.insertString(":#{code}: ")
     return false
 
   preview: (e) ->
@@ -84,3 +100,24 @@ window.EmojiModalView = Backbone.View.extend
 
   hide: ->
     @.$el.modal('hide')
+
+  saveFavoritEmoji: (code) ->
+    emojis = @favoriteEmojis()
+    emoji = _.find emojis, (item) ->
+      return item.code == code
+    if !emoji
+      emoji = { code: code, hits: 0 }
+      emojis.push(emoji)
+    emoji.hits += 1
+    emojis = _.sortBy emojis, (item) ->
+      return 0 - item.hits
+    emojis = _.first(emojis, 100)
+    localStorage.setItem('favorite-emojis', JSON.stringify(emojis))
+    @renderGroupHTML(EMOJI_GROUPS[0])
+
+  favoriteEmojis: ->
+    return [] if !window.localStorage
+    try
+      JSON.parse(localStorage.getItem('favorite-emojis') || '[]')
+    catch
+      []

@@ -1,9 +1,12 @@
 window.EmojiModalView = Backbone.View.extend
   className: 'emoji-modal modal'
 
+  panels: {}
+
   events:
     "click .tab-pane a.emoji": "insertCode"
     "mouseover .tab-pane a.emoji": "preview"
+    "click .nav-tabs li a": "changePanel"
 
   initialize: ->
     @.$el.html("""
@@ -23,13 +26,17 @@ window.EmojiModalView = Backbone.View.extend
       </div>
     </div>
     """)
-    t1 = new Date()
     for group in EMOJI_GROUPS
       @addGroup(group)
-    t2 = new Date()
-    console.log(t2 - t1)
+
+    @activeFirstPanel()
+
+  activeFirstPanel: ->
     @.$el.find('.nav-tabs li').first().addClass('active')
-    @.$el.find('.tab-pane').first().addClass('active')
+    firstGroupName = @.$el.find('.nav-tabs li a').first().data("group")
+    tabPane = @.$el.find("#emoji-group-#{firstGroupName}")
+    tabPane.html(@panels[firstGroupName])
+    tabPane.addClass("active")
 
   findEmojiUrlByName: (name) ->
     emoji = _.find EMOJI_LIST, (emoji) ->
@@ -39,7 +46,7 @@ window.EmojiModalView = Backbone.View.extend
     return "#{App.twemoji_url}/svg/#{emoji.url}.svg"
 
   addGroup: (group) ->
-    navTab = "<li><a href='#emoji-group-#{group.name}' role='tab' data-toggle='tab'><img src='#{@findEmojiUrlByName(group.tabicon)}' class='twemoji' /></a></li>"
+    navTab = "<li><a href='#emoji-group-#{group.name}' data-group='#{group.name}' role='tab' data-toggle='tab'><img src='#{@findEmojiUrlByName(group.tabicon)}' class='twemoji' /></a></li>"
     emojis = []
     for emojiName in group.icons
       url = @findEmojiUrlByName(emojiName)
@@ -47,11 +54,15 @@ window.EmojiModalView = Backbone.View.extend
       emojis.push "<a href='#' title='#{emojiName}' data-code='#{emojiName}' class='emoji'><img src='#{url}' class='twemoji' /></a>"
     navPanel = """
     <div id="emoji-group-#{group.name}" class="tab-pane">
-      #{emojis.join('')}
     </div>
     """
+    @panels[group.name] = emojis.join('')
     @.$el.find('.nav-tabs').append(navTab)
     @.$el.find('.tab-content').append(navPanel)
+
+  changePanel: (e) ->
+    groupName = $(e.currentTarget).data('group')
+    $("#emoji-group-#{groupName}").html(@panels[groupName])
 
   insertCode: (e) ->
     target = $(e.currentTarget)

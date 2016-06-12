@@ -209,7 +209,7 @@ window.TopicView = Backbone.View.extend
 
   # 图片点击增加全屏预览功能
   initContentImageZoom : () ->
-    exceptClasses = ["emoji"]
+    exceptClasses = ["emoji", "twemoji"]
     imgEls = $(".markdown img")
     for el in imgEls
       if exceptClasses.indexOf($(el).attr("class")) == -1

@@ -55,14 +55,6 @@ module ApplicationHelper
     content_tag('title', title, nil, false)
   end
 
-  # 去除区域里面的内容的换行标记
-  def spaceless(&block)
-    data = with_output_buffer(&block)
-    data = data.gsub(/\n\s+/, EMPTY_STRING)
-    data = data.gsub(/>\s+</, '><')
-    sanitize data
-  end
-
   MOBILE_USER_AGENTS = 'palm|blackberry|nokia|phone|midp|mobi|symbian|chtml|ericsson|minimo|' \
                        'audiovox|motorola|samsung|telit|upg1|windows ce|ucweb|astel|plucker|' \
                        'x320|x240|j2me|sgh|portable|sprint|docomo|kddi|softbank|android|mmp|' \

@@ -113,3 +113,9 @@ Copyright (c) 2011-2016 Ruby China
 Released under the MIT license:
 
 * [www.opensource.org/licenses/MIT](http://www.opensource.org/licenses/MIT)
+
+Emojis under the CC-BY 4.0 license from [Twitter/Twemoji][twemoji]:
+
+* https://github.com/twitter/twemoji#license
+
+[twemoji]: https://github.com/twitter/twemoji

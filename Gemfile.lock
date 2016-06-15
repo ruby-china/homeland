@@ -330,23 +330,23 @@ GEM
       railties (>= 4.2.0, < 5.1)
     rmmseg-cpp-new (0.3.1)
     rouge (1.8.0)
-    rspec-core (3.5.0.beta1)
-      rspec-support (= 3.5.0.beta1)
-    rspec-expectations (3.5.0.beta1)
+    rspec-core (3.5.0.beta2)
+      rspec-support (= 3.5.0.beta2)
+    rspec-expectations (3.5.0.beta2)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (= 3.5.0.beta1)
-    rspec-mocks (3.5.0.beta1)
+      rspec-support (= 3.5.0.beta2)
+    rspec-mocks (3.5.0.beta2)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (= 3.5.0.beta1)
-    rspec-rails (3.5.0.beta1)
+      rspec-support (= 3.5.0.beta2)
+    rspec-rails (3.5.0.beta2)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       railties (>= 3.0)
-      rspec-core (= 3.5.0.beta1)
-      rspec-expectations (= 3.5.0.beta1)
-      rspec-mocks (= 3.5.0.beta1)
-      rspec-support (= 3.5.0.beta1)
-    rspec-support (3.5.0.beta1)
+      rspec-core (= 3.5.0.beta2)
+      rspec-expectations (= 3.5.0.beta2)
+      rspec-mocks (= 3.5.0.beta2)
+      rspec-support (= 3.5.0.beta2)
+    rspec-support (3.5.0.beta2)
     rubocop (0.39.0)
       parser (>= 2.3.0.7, < 3.0)
       powerpack (~> 0.1)
@@ -487,7 +487,7 @@ DEPENDENCIES
   redis-objects
   redis-search (= 1.0.0.beta2)
   rouge (~> 1.8.0)
-  rspec-rails (= 3.5.0.beta1)
+  rspec-rails (= 3.5.0.beta2)
   rubocop (~> 0.39.0)
   ruby-push-notifications
   rucaptcha
@@ -508,4 +508,4 @@ DEPENDENCIES
   will_paginate
 
 BUNDLED WITH
-   1.12.4
+   1.12.5

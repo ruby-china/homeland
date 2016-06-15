@@ -84,6 +84,12 @@ $ rails s
 bundle exec rake
 ```
 
+## Reindex ElasticSearch
+
+```bash
+rake environment elasticsearch:import:all DIR=app/models FORCE=y
+```
+
 ## Contributors
 
 * [Contributors](https://github.com/ruby-china/ruby-china/contributors)

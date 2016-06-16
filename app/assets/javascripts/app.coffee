@@ -103,6 +103,7 @@ AppView = Backbone.View.extend
       likes_count += 1
       $el.data('count', likes_count)
       @likeableAsLiked($el)
+      $("i.fa", $el).attr("class","fa fa-heart")
     else
       $.ajax
         url : "/likes/#{likeable_id}"
@@ -113,17 +114,17 @@ AppView = Backbone.View.extend
         likes_count -= 1
       $el.data("state","").data('count', likes_count).attr("title", "").removeClass("active")
       if likes_count == 0
-        $('span',$el).text("")
+        $('span', $el).text("")
       else
-        $('span',$el).text("#{likes_count} 个赞")
-      $("i.fa",$el).attr("class","fa fa-thumbs-up")
+        $('span', $el).text("#{likes_count} 个赞")
+      $("i.fa", $el).attr("class","fa fa-heart-o")
     false
 
   likeableAsLiked : (el) ->
     likes_count = el.data("count")
     el.data("state","active").attr("title", "取消赞").addClass("active")
     $('span',el).text("#{likes_count} 个赞")
-    $("i.fa",el).attr("class","fa fa-thumbs-up")
+    $("i.fa",el).attr("class","fa fa-heart")
 
   initCable: () ->
     if !window.notificationChannel && App.isLogined()

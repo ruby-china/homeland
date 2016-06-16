@@ -181,7 +181,7 @@
       a:hover { background: rgba(0, 0, 0, 0.03); }
       i.fa { display: block; font-size: 40px;  margin-bottom: 10px; color: #666; }
       a.active {
-        i.fa { color: #DC3030; }
+        i.fa { color: #e76f3c; }
       }
     }
   }
@@ -252,6 +252,23 @@
       margin-bottom: 6px;
       font-size: 12px;
       .reply-floor { color: #7AA87A; }
+    }
+
+    .opts {
+      a {
+        display: inline-block;
+        vertical-align: baseline;
+        line-height: 22px;
+        padding: 2px 5px;
+        height: 22px;
+        min-width: 22px;
+        text-align: center;
+      }
+    }
+
+    .hideable { display: none; }
+    &:hover {
+      .hideable { display: inline-block; }
     }
   }
 

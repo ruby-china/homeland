@@ -24,6 +24,7 @@ gem 'http_accept_language'
 gem 'rails_autolink'
 gem 'twemoji'
 gem 'jquery-atwho-rails'
+gem 'font-awesome-rails'
 
 # OAuth Provider
 gem 'doorkeeper', '4.0.0.rc4'

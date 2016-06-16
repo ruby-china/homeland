@@ -12,13 +12,13 @@ module LikesHelper
     label = "#{likeable.likes_count} 个赞"
     label = '' if likeable.likes_count == 0
 
-    title, state =
+    title, state, icon_name =
       if opts[:cache].blank? && likeable.liked_by_user?(current_user)
-        %w(取消赞 active)
+        %w(取消赞 active heart)
       else
-        ['赞', '']
+        ['赞', '', 'heart-o']
       end
-    icon = content_tag('i', '', class: 'fa fa-thumbs-up')
+    icon = content_tag('i', '', class: "fa fa-#{icon_name}")
     like_label = raw "#{icon} <span>#{label}</span>"
 
     link_to(like_label, '#', title: title, 'data-count' => likeable.likes_count,
@@ -29,6 +29,6 @@ module LikesHelper
   private
 
   def unlogin_likeable_tag
-    link_to(raw('<i class="fa fa-thumbs-up"></i> <span></span>'), new_user_session_path, class: '')
+    link_to(raw('<i class="fa fa-heart-o"></i> <span></span>'), new_user_session_path, class: '')
   end
 end

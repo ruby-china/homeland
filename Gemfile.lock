@@ -165,6 +165,8 @@ GEM
       railties (>= 3.0.0)
     faraday (0.9.2)
       multipart-post (>= 1.2, < 3)
+    font-awesome-rails (4.6.3.0)
+      railties (>= 3.2, < 5.1)
     get_process_mem (0.2.1)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
@@ -452,6 +454,7 @@ DEPENDENCIES
   elasticsearch-rails
   exception_notification
   factory_girl_rails (~> 4.5.0)
+  font-awesome-rails
   hiredis
   http_accept_language
   jasmine-rails (~> 0.10.2)

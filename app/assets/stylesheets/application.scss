@@ -1,6 +1,6 @@
 /*
  *= require bootstrap-select.min
- *= require font-awesome.min
+ *= require font-awesome
  *= require highlight
  *= require social-share-button
  *= require jquery.atwho
@@ -536,7 +536,7 @@ img.emoji { width:20px; height:20px; }
   .fa {
     @extend .animated;
     @extend .bounceIn;
-    color: $red;
+    color: #e76f3c;
   }
 }
 

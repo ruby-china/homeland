@@ -1,3 +1,6 @@
+<!-- @suggest_topics maybe nil or ActiveRecord::Relation, but we need an array -->
+<% @suggest_topics = @suggest_topics.to_a %>
+
 <div class="row">
   <div class="col-md-9">
     <div class="topics panel panel-default">
@@ -7,7 +10,7 @@
 
       <div class="panel-body">
         <% if @topics.current_page == 1 %>
-          <% cache(['suggest_topics', @suggest_topics.to_a]) do %>
+          <% cache(['suggest_topics', @suggest_topics]) do %>
             <%= render partial: "topics/topic", collection: @suggest_topics, locals: { suggest: true } %>
           <% end %>
         <% end %>
@@ -30,7 +33,7 @@
 
     <% if current_user %>
     <script type="text/javascript">
-      var readed_topic_ids = <%= current_user.filter_readed_topics(@topics + (@suggest_topics || [])) %>;
+      var readed_topic_ids = <%= current_user.filter_readed_topics(@topics + @suggest_topics) %>;
       for (var i = 0; i < readed_topic_ids.length; i++) {
         topic_id = readed_topic_ids[i];
         $(".topic-"+ topic_id + " .count a").addClass("state-true");

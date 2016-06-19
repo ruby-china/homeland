@@ -140,3 +140,4 @@ group :development, :test do
   gem 'bundler-audit', require: false
   gem 'pry-byebug'
 end
+gem 'nokogiri', '>= 1.6.8'

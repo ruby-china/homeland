@@ -19,11 +19,13 @@
         </span>
         <span class="opts pull-right">
           <% if !reply.deleted? %>
-            <%= likeable_tag(reply, cache: true) %>
+            <span class="hideable">
             <%= link_to('', edit_topic_reply_path(@topic,reply), class: "edit fa fa-pencil", 'data-uid' => reply.user_id, title: "修改回帖")%>
             <%= link_to('', "#", 'data-floor' => floor, 'data-login' => reply.user_login,
                 title: t("topics.reply_this_floor"), class: "btn-reply fa fa-mail-reply" )
             %>
+            </span>
+            <%= likeable_tag(reply, cache: true) %>
           <% end %>
         </span>
       </div>

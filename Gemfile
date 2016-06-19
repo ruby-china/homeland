@@ -14,7 +14,7 @@ gem 'jbuilder'
 gem 'turbolinks', '~> 2.5.3'
 gem 'jquery-turbolinks'
 gem 'dropzonejs-rails'
-gem 'twemoji'
+
 gem 'pg'
 
 gem 'rack-attack'
@@ -22,8 +22,9 @@ gem 'rack-attack'
 gem 'rails-i18n', '5.0.0.beta3'
 gem 'http_accept_language'
 gem 'rails_autolink'
-gem 'md_emoji'
+gem 'twemoji'
 gem 'jquery-atwho-rails'
+gem 'font-awesome-rails'
 
 # OAuth Provider
 gem 'doorkeeper', '4.0.0.rc4'
@@ -129,7 +130,7 @@ end
 
 group :development, :test do
   gem 'rubocop', '~> 0.39.0', require: false
-  gem 'rspec-rails', '3.5.0.beta1'
+  gem 'rspec-rails', '3.5.0.beta2'
   gem 'factory_girl_rails', '~> 4.5.0'
   gem 'database_cleaner'
   gem 'capybara'

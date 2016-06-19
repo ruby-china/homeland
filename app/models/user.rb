@@ -367,7 +367,7 @@ class User < ApplicationRecord
   end
 
   def github_repositories_cache_key
-    "github-repos:#{github}"
+    "github-repos:#{github}:1"
   end
 
   def self.fetch_github_repositories(user_id)
@@ -397,7 +397,7 @@ class User < ApplicationRecord
         description: a1['description']
       }
     end
-    items = items.sort_by { |item| item[:watchers] }.take(10)
+    items = items.sort { |a, b| b[:watchers] <=> a[:watchers] }.take(10)
     $file_store.write(user.github_repositories_cache_key, items, expires_in: 15.days)
     items
   end

@@ -10,8 +10,8 @@
           • <%= @note.changes_count %> <%= t("notes.times_edit") %>
           <% if owner? @note %>
           <span class="opts pull-right">
-            <%= link_to icon_tag("fa fa-pencil"), edit_note_path(@note),  title: t("common.edit") %>
-            <%= link_to icon_tag("fa fa-trash"), note_path(@note), 'data-confirm' => t("common.confirm_delete"), method: :delete, title: t("common.confirm_delete") %>
+            <%= link_to icon_tag("pencil"), edit_note_path(@note),  title: t("common.edit") %>
+            <%= link_to icon_tag("trash"), note_path(@note), 'data-confirm' => t("common.confirm_delete"), method: :delete, title: t("common.confirm_delete") %>
           </span>
           <% end %>
         </div>

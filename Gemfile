@@ -14,7 +14,7 @@ gem 'jbuilder'
 gem 'turbolinks', '~> 2.5.3'
 gem 'jquery-turbolinks'
 gem 'dropzonejs-rails'
-
+gem 'twemoji'
 gem 'pg'
 
 gem 'rack-attack'

@@ -2,7 +2,7 @@ class OldSetting < ApplicationRecord
   self.table_name = 'site_configs'
 end
 
-class CreateSettings < ActiveRecord::Migration
+class CreateSettings < ActiveRecord::Migration[4.2]
   def self.up
     create_table :settings do |t|
       t.string  :var,        null: false

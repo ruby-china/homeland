@@ -1,4 +1,4 @@
-class InitPgDb < ActiveRecord::Migration
+class InitPgDb < ActiveRecord::Migration[4.2]
   def change
     create_table 'authorizations', force: :cascade do |t|
       t.string   'provider', null: false

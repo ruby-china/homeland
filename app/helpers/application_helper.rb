@@ -119,13 +119,13 @@ module ApplicationHelper
 
   def stylesheet_link_tag_with_cached(name)
     memory_cache('stylesheets_link_tag', name) do
-      stylesheet_link_tag(name, 'data-turbolinks-track' => true)
+      stylesheet_link_tag(name, 'data-turbolinks-track' => 'reload')
     end
   end
 
   def javascript_include_tag_with_cached(name)
     memory_cache('javascript_include_tag', name) do
-      javascript_include_tag(name, 'data-turbolinks-track' => true)
+      javascript_include_tag(name, 'data-turbolinks-track' => 'reload')
     end
   end
 

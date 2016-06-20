@@ -41,7 +41,7 @@
           <a href="/" class="navbar-brand"><b>Ruby</b> China</a>
         </div>
 
-        <div id="main-nav-menu" data-turbolinks-temporary>
+        <div id="main-nav-menu">
           <%= render_list class: "nav navbar-nav" do |li|
              li << link_to(t("menu.topics"), main_app.topics_path)
              li << link_to(t("menu.wiki"), main_app.pages_path) if !mobile?
@@ -97,7 +97,7 @@
     $('body').animate({ scrollTop: -1 },0);
     </script>
   <% end %>
-  <script type="text/javascript" data-turbolinks-eval=false>
+  <script type="text/javascript" data-turbolinks-eval="false">
     App.root_url = "<%= main_app.root_url %>";
     App.asset_url = "<%= Setting.upload_url %>";
     App.twemoji_url = "<%= Twemoji.configuration.asset_root %>";

@@ -596,6 +596,15 @@ textarea.div-dropzone-focus { border-color: #BBE1C9; background: #fafafa; }
     padding: 0px;
     height: 180px;
     overflow: scroll;
+
+    &::-webkit-scrollbar {
+      width: 4px;
+      border-radius: 3px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #e0e0e0;
+    }
+
     a {
       padding: 5px;
       display: inline-block; width: 30px; height: 30px;

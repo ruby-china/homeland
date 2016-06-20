@@ -29,13 +29,13 @@ describe UsersHelper, type: :helper do
 
   describe 'user_avatar_tag' do
     it 'should work if user not exist' do
-      user_avatar_tag(nil).should eq image_tag('avatar/normal.png', class: 'media-object avatar-48')
+      expect(user_avatar_tag(nil)).to eq image_tag('avatar/normal.png', class: 'media-object avatar-48')
     end
 
     it 'should work if user exists' do
       user = create(:user)
       img = image_tag(user.letter_avatar_url(96), class: 'media-object avatar-48')
-      user_avatar_tag(user).should eq link_to(raw(img), user_path(user))
+      expect(user_avatar_tag(user)).to eq link_to(raw(img), user_path(user))
     end
 
     it 'should work if avatar exist' do

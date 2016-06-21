@@ -49,10 +49,8 @@ module ApplicationHelper
     content_tag(:abbr, EMPTY_STRING, class: options[:class], title: time.iso8601) if time
   end
 
-  def render_page_title
-    site_name = Setting.app_name
-    title = @page_title ? "#{@page_title} &raquo; #{site_name}" : site_name
-    content_tag('title', title, nil, false)
+  def title_tag(str)
+    content_for :title, raw("#{str} · #{Setting.app_name}")
   end
 
   MOBILE_USER_AGENTS = 'palm|blackberry|nokia|phone|midp|mobi|symbian|chtml|ericsson|minimo|' \

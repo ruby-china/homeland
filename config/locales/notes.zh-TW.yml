@@ -1,6 +1,6 @@
 "zh-TW":
   notes:
-    create_note: "新建 Note"
+    new_note: "新建 Note"
     edit_note: "修改 Note"
     page_link: "本頁地址"
     created_at: "於 %{time}創建"

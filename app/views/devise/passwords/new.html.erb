@@ -1,7 +1,9 @@
+<% title_tag t('users.forget_password') %>
+
 <div class="row">
   <div class="col-md-6 col-sm-offset-3">
     <div class="panel panel-default">
-      <div class="panel-heading">忘记了密码</div>
+      <div class="panel-heading"><%= t('users.forget_password') %></div>
       <div class="panel-body">
         <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
         <%= render "shared/error_messages", target: resource %>

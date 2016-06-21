@@ -18,7 +18,7 @@ class TopicsController < ApplicationController
       end
     @topics = @topics.fields_for_list
     @topics = @topics.paginate(page: params[:page], per_page: 22, total_entries: 1500).to_a
-    set_seo_meta t('menu.topics'), "#{Setting.app_name}#{t('menu.topics')}"
+    @page_title = t('menu.topics')
   end
 
   def feed
@@ -31,7 +31,7 @@ class TopicsController < ApplicationController
     @topics = @node.topics.last_actived.fields_for_list
     @topics = @topics.includes(:user).paginate(page: params[:page], per_page: 25)
     title = @node.jobs? ? @node.name : "#{@node.name} &raquo; #{t('menu.topics')}"
-    set_seo_meta title, "#{Setting.app_name}#{t('menu.topics')}#{@node.name}", @node.summary
+    @page_title = [@node.name, t('menu.topics')].join(' · ')
     render action: 'index'
   end
 
@@ -46,7 +46,7 @@ class TopicsController < ApplicationController
       @topics = Topic.without_hide_nodes.send(name.to_sym).last_actived.fields_for_list.includes(:user)
       @topics = @topics.paginate(page: params[:page], per_page: 25, total_entries: 1500)
 
-      set_seo_meta [t("topics.topic_list.#{name}"), t('menu.topics')].join(' &raquo; ')
+      @page_title = [t("topics.topic_list.#{name}"), t('menu.topics')].join(' · ')
       render action: 'index'
     end
   end
@@ -54,7 +54,7 @@ class TopicsController < ApplicationController
   def recent
     @topics = Topic.without_hide_nodes.recent.fields_for_list.includes(:user)
     @topics = @topics.paginate(page: params[:page], per_page: 25, total_entries: 1500)
-    set_seo_meta [t('topics.topic_list.recent'), t('menu.topics')].join(' &raquo; ')
+    @page_title = [t('topics.topic_list.recent'), t('menu.topics')].join(' · ')
     render action: 'index'
   end
 
@@ -62,7 +62,7 @@ class TopicsController < ApplicationController
     @topics = Topic.excellent.recent.fields_for_list.includes(:user)
     @topics = @topics.paginate(page: params[:page], per_page: 25, total_entries: 1500)
 
-    set_seo_meta [t('topics.topic_list.excellent'), t('menu.topics')].join(' &raquo; ')
+    @page_title = [t('topics.topic_list.excellent'), t('menu.topics')].join(' · ')
     render action: 'index'
   end
 
@@ -80,8 +80,6 @@ class TopicsController < ApplicationController
     check_current_user_liked_replies
     check_current_user_status_for_topic
     set_special_node_active_menu
-
-    set_seo_meta "#{@topic.title} &raquo; #{t('menu.topics')}"
   end
 
   def check_current_user_liked_replies
@@ -120,14 +118,10 @@ class TopicsController < ApplicationController
       @node = Node.find_by_id(params[:node])
       render_404 if @node.blank?
     end
-
-    set_seo_meta "#{t('topics.post_topic')} &raquo; #{t('menu.topics')}"
   end
 
   def edit
     @node = @topic.node
-
-    set_seo_meta "#{t('topics.edit_topic')} &raquo; #{t('menu.topics')}"
   end
 
   def create

@@ -1,7 +1,6 @@
 "zh-TW":
   topics:
-    title: "發佈的帖子"
-    create_topic: "新建帖子"
+    new_topic: "新建帖子"
     edit_topic: "修改帖子"
     no_replies: "暫無回覆。"
     recent_topics: "最近發佈的帖子"
@@ -9,7 +8,6 @@
     check_recent_topics: "查看更多最近發佈的帖子..."
     reply_this_fllor: "回覆此樓"
     tips_for_create_topic: "發帖說明"
-    start_a_new_topic_button: "發佈新帖"
     subscribe_with_rss: "訂閱 %{name} 社區新帖"
     submit_reply: "提交回復"
     topic_list:
@@ -22,7 +20,6 @@
     create_topic_success: "帖子創建成功。"
     delete_topic_success: "帖子刪除成功。"
     update_topic_success: "帖子修改成功。"
-    post_topic: "發帖"
     reply_success: "回覆成功。"
     reply_this_floor: "回覆此樓"
     add_image: "上傳圖片"

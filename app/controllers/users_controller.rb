@@ -1,14 +1,13 @@
 require 'will_paginate/array'
 class UsersController < ApplicationController
   before_action :require_user, only: [:block, :unblock, :auth_unbind, :follow, :unfollow]
-  before_action :find_user, only: [:show, :topics, :replies, :favorites, :notes,
-                                   :block, :unblock, :blocked, :calendar,
-                                   :follow, :unfollow, :followers, :following]
+  before_action :set_user, only: [:show, :topics, :replies, :favorites, :notes,
+                                  :block, :unblock, :blocked, :calendar,
+                                  :follow, :unfollow, :followers, :following]
 
   def index
     @total_user_count = User.count
     @active_users = User.fields_for_list.hot.limit(100)
-    set_seo_meta('活跃会员')
   end
 
   def show
@@ -16,29 +15,24 @@ class UsersController < ApplicationController
     without_node_ids = [21, 22, 23, 31, 49, 51, 57, 25]
     @topics = @user.topics.fields_for_list.without_node_ids(without_node_ids).high_likes.limit(20)
     @replies = @user.replies.without_system.fields_for_list.recent.includes(:topic).limit(10)
-    set_seo_meta(@user.login.to_s)
   end
 
   def topics
     @topics = @user.topics.fields_for_list.recent.paginate(page: params[:page], per_page: 40)
-    set_seo_meta("#{@user.login} 的帖子")
   end
 
   def replies
     @replies = @user.replies.without_system.fields_for_list.recent.paginate(page: params[:page], per_page: 20)
-    set_seo_meta("#{@user.login} 的帖子")
   end
 
   def favorites
     @topic_ids = @user.favorite_topic_ids.reverse.paginate(page: params[:page], per_page: 40)
     @topics = Topic.where(id: @topic_ids).fields_for_list
     @topics = @topics.to_a.sort_by { |topic| @topic_ids.index(topic.id) }
-    set_seo_meta("#{@user.login} 的收藏")
   end
 
   def notes
     @notes = @user.notes.published.recent.paginate(page: params[:page], per_page: 40)
-    set_seo_meta("#{@user.login} 的记事本")
   end
 
   def auth_unbind
@@ -94,12 +88,10 @@ class UsersController < ApplicationController
 
   def followers
     @users = @user.followers.fields_for_list.paginate(page: params[:page], per_page: 60)
-    set_seo_meta("#{@user.login} 的关注者")
   end
 
   def following
     @users = @user.following.fields_for_list.paginate(page: params[:page], per_page: 60)
-    set_seo_meta("#{@user.login} 正在关注")
     render 'followers'
   end
 
@@ -109,7 +101,7 @@ class UsersController < ApplicationController
 
   protected
 
-  def find_user
+  def set_user
     # 处理 login 有大写字母的情况
     if params[:id] != params[:id].downcase
       redirect_to request.path.downcase, status: 301

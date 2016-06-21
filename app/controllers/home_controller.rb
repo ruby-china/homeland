@@ -14,6 +14,5 @@ class HomeController < ApplicationController
   end
 
   def markdown
-    set_seo_meta('Markdown Guide')
   end
 end

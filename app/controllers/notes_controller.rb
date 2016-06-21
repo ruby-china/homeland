@@ -5,23 +5,19 @@ class NotesController < ApplicationController
 
   def index
     @notes = current_user.notes.recent_updated.paginate(page: params[:page], per_page: 20)
-    set_seo_meta t('menu.notes')
   end
 
   def show
     @note = Note.find(params[:id])
     @note.hits.incr(1)
-    set_seo_meta("查看 &raquo; #{t('menu.notes')}")
   end
 
   def new
     @note = current_user.notes.build
-    set_seo_meta("新建 &raquo; #{t('menu.notes')}")
   end
 
   def edit
     @note = current_user.notes.find(params[:id])
-    set_seo_meta("修改 &raquo; #{t('menu.notes')}")
   end
 
   def create

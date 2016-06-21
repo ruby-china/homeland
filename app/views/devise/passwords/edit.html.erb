@@ -1,7 +1,9 @@
+<% title_tag t('users.update_password') %>
+
 <div class="row">
   <div class="col-md-6 col-sm-offset-3">
     <div class="panel panel-default">
-      <div class="panel-heading">修改我的密码</div>
+      <div class="panel-heading"><%= t('users.update_password') %></div>
       <div class="panel-body">
         <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
         <%= render "shared/error_messages", target: resource %>
@@ -9,9 +11,7 @@
         <%= f.input :password %>
         <%= f.input :password_confirmation %>
         <div class="form-group">
-          <div class="col-md-10 col-sm-offset-2">
-            <%= f.submit "修改我的密码", class: "btn btn-success", 'data-disable-with' => t("common.submitting") %>
-          </div>
+          <%= f.submit t('users.update_password'), class: "btn btn-success", 'data-disable-with' => t("common.submitting") %>
         </div>
         <% end %>
       </div>

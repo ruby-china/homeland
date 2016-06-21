@@ -6,20 +6,18 @@
   /_/ |_|\__,_/_.___/\__, /   \____/_/ /_/_/_/ /_/\__,_/
                     /____/
   ========================================================
-                                          ruby-china.org
+                                            ruby-china.org
 
   App Environments:
-  --------------------------------------------------------
-  Ruby:  <%= RUBY_VERSION %><%= "-p#{RUBY_PATCHLEVEL}" if defined? RUBY_PATCHLEVEL %>
-  Rails: <%= Rails.version %>
+
+  - Ruby:  <%= RUBY_VERSION %><%= "-p#{RUBY_PATCHLEVEL}" if defined? RUBY_PATCHLEVEL %>
+  - Rails: <%= Rails.version %>
 -->
 <!DOCTYPE html>
 <html>
 <head>
-  <%= render_page_title %>
+  <title><%= content_for?(:title) ? yield(:title) : Setting.app_name %></title>
   <meta charset='utf-8' />
-  <meta name="keywords" content="<%= @meta_keywords %>" />
-  <meta name="description" content="<%= @meta_description %>" />
   <meta name="apple-mobile-web-app-capable" content="no">
   <meta content='True' name='HandheldFriendly' />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
@@ -87,7 +85,6 @@
     <div class="container">
       <%= raw Setting.footer_html %>
     </div>
-
   </footer>
   <% end %>
 

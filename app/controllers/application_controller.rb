@@ -78,12 +78,6 @@ class ApplicationController < ActionController::Base
     redirect_to topics_path, alert: t('common.access_denied')
   end
 
-  def set_seo_meta(title = '', meta_keywords = '', meta_description = '')
-    @page_title = title unless title.empty?
-    @meta_keywords = meta_keywords
-    @meta_description = meta_description
-  end
-
   def store_location
     session[:return_to] = request.request_uri
   end

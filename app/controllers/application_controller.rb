@@ -3,6 +3,13 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :unread_notify_count
 
+  # Addition contents for etag
+  etag { current_user.try(:id) }
+  etag { unread_notify_count }
+  etag { flash }
+  etag { Setting.footer_html }
+  etag { Date.current }
+
   before_action do
     resource = controller_name.singularize.to_sym
     method = "#{resource}_params"
@@ -102,24 +109,6 @@ class ApplicationController < ActionController::Base
   def unread_notify_count
     return 0 if current_user.blank?
     @unread_notify_count ||= Notification.unread_count(current_user)
-  end
-
-  def fresh_when(opts = {})
-    opts[:etag] ||= []
-    # 保证 etag 参数是 Array 类型
-    opts[:etag] = [opts[:etag]] unless opts[:etag].is_a?(Array)
-    # 加入页面上直接调用的信息用于组合 etag
-    opts[:etag] << current_user
-    # Config 的某些信息
-    opts[:etag] << Setting.custom_head_html
-    opts[:etag] << Setting.footer_html
-    # 加入通知数量
-    opts[:etag] << unread_notify_count
-    # 加入flash，确保当页面刷新后flash不会再出现
-    opts[:etag] << flash
-    # 所有 etag 保持一天
-    opts[:etag] << Date.current
-    super(opts)
   end
 
   private

@@ -1,4 +1,4 @@
-class AddIndexesToTable < ActiveRecord::Migration
+class AddIndexesToTable < ActiveRecord::Migration[4.2]
   def change
     add_index :topics, :deleted_at
     add_index :topics, [:node_id, :deleted_at]

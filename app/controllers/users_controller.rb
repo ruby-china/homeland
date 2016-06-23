@@ -99,7 +99,7 @@ class UsersController < ApplicationController
 
   def following
     @users = @user.following.fields_for_list.paginate(page: params[:page], per_page: 60)
-    render 'followers' if stale?([@user, @users])
+    render 'followers' if stale?(etag: [@user, @users], template: 'users/followers')
   end
 
   def calendar

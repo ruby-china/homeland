@@ -33,7 +33,7 @@ class TopicsController < ApplicationController
     @topics = @topics.includes(:user).paginate(page: params[:page], per_page: 25)
     title = @node.jobs? ? @node.name : "#{@node.name} &raquo; #{t('menu.topics')}"
     @page_title = [@node.name, t('menu.topics')].join(' · ')
-    if stale?([@node, @topics])
+    if stale?(etag: [@node, @topics], template: 'topics/index')
       render action: 'index'
     end
   end
@@ -50,7 +50,7 @@ class TopicsController < ApplicationController
       @topics = @topics.paginate(page: params[:page], per_page: 25, total_entries: 1500)
 
       @page_title = [t("topics.topic_list.#{name}"), t('menu.topics')].join(' · ')
-      render action: 'index' if stale?(@topics)
+      render action: 'index' if stale?(etag: @topics, template: 'topics/index')
     end
   end
 
@@ -58,7 +58,7 @@ class TopicsController < ApplicationController
     @topics = Topic.without_hide_nodes.recent.fields_for_list.includes(:user)
     @topics = @topics.paginate(page: params[:page], per_page: 25, total_entries: 1500)
     @page_title = [t('topics.topic_list.recent'), t('menu.topics')].join(' · ')
-    render action: 'index' if stale?(@topics)
+    render action: 'index' if stale?(etag: @topics, template: 'topics/index')
   end
 
   def excellent
@@ -66,7 +66,7 @@ class TopicsController < ApplicationController
     @topics = @topics.paginate(page: params[:page], per_page: 25, total_entries: 1500)
 
     @page_title = [t('topics.topic_list.excellent'), t('menu.topics')].join(' · ')
-    render action: 'index' if stale?(@topics)
+    render action: 'index' if stale?(etag: @topics, template: 'topics/index')
   end
 
   def show

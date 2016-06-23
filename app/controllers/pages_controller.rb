@@ -2,12 +2,12 @@ class PagesController < ApplicationController
   authorize_resource :page
 
   def index
-    fresh_when(etag: [Setting.wiki_index_html])
+    fresh_when(Setting.wiki_index_html)
   end
 
   def recent
     @pages = Page.recent.paginate(page: params[:page], per_page: 30)
-    fresh_when(etag: [@pages])
+    fresh_when(@pages)
   end
 
   def show
@@ -21,7 +21,7 @@ class PagesController < ApplicationController
       redirect_to new_page_path(title: params[:id]), notice: 'Page not Found, Please create a new page'
       return
     end
-    fresh_when(etag: [@page, @page.comments_count])
+    fresh_when(@page)
   end
 
   def comments

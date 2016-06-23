@@ -1,7 +1,6 @@
 class HomeController < ApplicationController
   def index
     @excellent_topics = Topic.excellent.recent.fields_for_list.limit(20).to_a
-
     fresh_when(etag: [@excellent_topics, Setting.index_html])
   end
 

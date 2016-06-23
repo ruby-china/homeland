@@ -8,7 +8,6 @@ class ApplicationController < ActionController::Base
   etag { unread_notify_count }
   etag { flash }
   etag { Setting.footer_html }
-  etag { Date.current }
 
   before_action do
     resource = controller_name.singularize.to_sym

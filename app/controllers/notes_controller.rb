@@ -5,6 +5,7 @@ class NotesController < ApplicationController
 
   def index
     @notes = current_user.notes.recent_updated.paginate(page: params[:page], per_page: 20)
+    fresh_when(@notes)
   end
 
   def show
@@ -40,7 +41,8 @@ class NotesController < ApplicationController
   end
 
   def preview
-    render plain: MarkdownTopicConverter.convert(params[:body])
+    out = MarkdownTopicConverter.convert(params[:body])
+    render plain: out
   end
 
   def destroy

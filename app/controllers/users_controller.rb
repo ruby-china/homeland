@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   def index
     @total_user_count = User.count
     @active_users = User.fields_for_list.hot.limit(100)
+    fresh_when([@total_user_count, @active_users])
   end
 
   def show
@@ -15,24 +16,29 @@ class UsersController < ApplicationController
     without_node_ids = [21, 22, 23, 31, 49, 51, 57, 25]
     @topics = @user.topics.fields_for_list.without_node_ids(without_node_ids).high_likes.limit(20)
     @replies = @user.replies.without_system.fields_for_list.recent.includes(:topic).limit(10)
+    fresh_when([@user, @topics, @replies])
   end
 
   def topics
     @topics = @user.topics.fields_for_list.recent.paginate(page: params[:page], per_page: 40)
+    fresh_when([@user, @topics])
   end
 
   def replies
     @replies = @user.replies.without_system.fields_for_list.recent.paginate(page: params[:page], per_page: 20)
+    fresh_when([@user, @replies])
   end
 
   def favorites
     @topic_ids = @user.favorite_topic_ids.reverse.paginate(page: params[:page], per_page: 40)
     @topics = Topic.where(id: @topic_ids).fields_for_list
     @topics = @topics.to_a.sort_by { |topic| @topic_ids.index(topic.id) }
+    fresh_when([@user, @topics])
   end
 
   def notes
     @notes = @user.notes.published.recent.paginate(page: params[:page], per_page: 40)
+    fresh_when([@user, @notes])
   end
 
   def auth_unbind
@@ -88,15 +94,17 @@ class UsersController < ApplicationController
 
   def followers
     @users = @user.followers.fields_for_list.paginate(page: params[:page], per_page: 60)
+    fresh_when([@user, @users])
   end
 
   def following
     @users = @user.following.fields_for_list.paginate(page: params[:page], per_page: 60)
-    render 'followers'
+    render 'followers' if stale?([@user, @users])
   end
 
   def calendar
-    render json: @user.calendar_data
+    data = @user.calendar_data
+    render json: data if stale?(data)
   end
 
   protected

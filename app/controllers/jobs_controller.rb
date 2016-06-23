@@ -12,8 +12,7 @@ class JobsController < ApplicationController
     @topics = @node.topics.last_actived.fields_for_list
     @topics = @topics.where.not(id: suggest_topic_ids) if suggest_topic_ids.count > 0
     @topics = @topics.includes(:user).paginate(page: params[:page], per_page: 15)
-
     @page_title = "#{t('menu.jobs')} - #{t('menu.topics')}"
-    render '/topics/index'
+    render '/topics/index' if stale?([@node, @suggest_topics, @topics])
   end
 end

@@ -331,7 +331,7 @@ GEM
     responders (2.2.0)
       railties (>= 4.2.0, < 5.1)
     rmmseg-cpp-new (0.3.1)
-    rouge (1.8.0)
+    rouge (2.0.1)
     rspec-core (3.5.0.beta4)
       rspec-support (= 3.5.0.beta4)
     rspec-expectations (3.5.0.beta4)
@@ -489,7 +489,7 @@ DEPENDENCIES
   redis-namespace
   redis-objects
   redis-search
-  rouge (~> 1.8.0)
+  rouge
   rspec-rails (= 3.5.0.beta4)
   rubocop (~> 0.39.0)
   ruby-push-notifications

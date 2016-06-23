@@ -77,7 +77,7 @@ gem 'rails-settings-cached'
 
 # Markdown
 gem 'redcarpet', '~> 3.3.4'
-gem 'rouge', '~> 1.8.0'
+gem 'rouge'
 gem 'auto-space'
 
 # 队列

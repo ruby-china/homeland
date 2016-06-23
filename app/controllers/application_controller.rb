@@ -28,11 +28,6 @@ class ApplicationController < ActionController::Base
     end
 
     User.current = current_user
-
-    if current_user && current_user.admin?
-      Rack::MiniProfiler.authorize_request
-    end
-
     cookies.signed[:user_id] ||= current_user.try(:id)
 
     # hit unread_notify_count

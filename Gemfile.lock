@@ -275,8 +275,6 @@ GEM
     rack-attack (4.4.1)
       rack
     rack-cors (0.4.0)
-    rack-mini-profiler (0.10.1)
-      rack (>= 1.2.0)
     rack-protection (1.5.3)
       rack
     rack-test (0.6.3)
@@ -478,7 +476,6 @@ DEPENDENCIES
   puma
   rack-attack
   rack-cors
-  rack-mini-profiler
   rack-utf8_sanitizer
   rails (= 5.0.0.rc2)
   rails-i18n (= 5.0.0.beta3)

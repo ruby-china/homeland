@@ -82,7 +82,7 @@ class TopicsController < ApplicationController
     check_current_user_liked_replies
     check_current_user_status_for_topic
     set_special_node_active_menu
-    fresh_when([@topic, @node, @show_raw, @replies])
+    fresh_when([@topic, @node, @show_raw, @replies, @has_followed, @has_favorited])
   end
 
   def new

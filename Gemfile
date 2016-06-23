@@ -54,7 +54,7 @@ gem 'will_paginate'
 # 搜索
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
-gem 'redis-search', '1.0.0.beta2'
+gem 'redis-search'
 
 # 三方平台 OAuth 验证登陆
 gem 'omniauth'
@@ -70,7 +70,7 @@ gem 'redis-namespace'
 gem 'redis-objects'
 
 # Cache
-gem 'second_level_cache', '2.2.2'
+gem 'second_level_cache'
 
 # Setting
 gem 'rails-settings-cached'
@@ -129,8 +129,8 @@ end
 
 group :development, :test do
   gem 'rubocop', '~> 0.39.0', require: false
-  gem 'rspec-rails', '3.5.0.beta2'
-  gem 'factory_girl_rails', '~> 4.5.0'
+  gem 'rspec-rails', '3.5.0.beta4'
+  gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'capybara'
   gem 'jasmine-rails', '~> 0.10.2'
@@ -140,4 +140,3 @@ group :development, :test do
   gem 'bundler-audit', require: false
   gem 'pry-byebug'
 end
-gem 'nokogiri', '>= 1.6.8'

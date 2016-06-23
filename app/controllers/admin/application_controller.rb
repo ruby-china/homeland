@@ -2,7 +2,7 @@ module Admin
   class ApplicationController < ::ApplicationController
     layout 'admin'
 
-    before_action :require_user
+    before_action :authenticate_user!
     before_action :require_admin
     before_action :set_active_menu
 

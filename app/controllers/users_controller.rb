@@ -1,6 +1,6 @@
 require 'will_paginate/array'
 class UsersController < ApplicationController
-  before_action :require_user, only: [:block, :unblock, :auth_unbind, :follow, :unfollow]
+  before_action :authenticate_user!, only: [:block, :unblock, :auth_unbind, :follow, :unfollow]
   before_action :set_user, only: [:show, :topics, :replies, :favorites, :notes,
                                   :block, :unblock, :blocked, :calendar,
                                   :follow, :unfollow, :followers, :following]

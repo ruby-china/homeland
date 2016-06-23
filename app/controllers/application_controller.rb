@@ -91,15 +91,6 @@ class ApplicationController < ActionController::Base
     redirect_to(request.referrer || default)
   end
 
-  def require_user
-    if current_user.blank?
-      respond_to do |format|
-        format.html { authenticate_user! }
-        format.all { head(:unauthorized) }
-      end
-    end
-  end
-
   def unread_notify_count
     return 0 if current_user.blank?
     @unread_notify_count ||= Notification.unread_count(current_user)

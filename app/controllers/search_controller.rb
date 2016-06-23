@@ -1,5 +1,5 @@
 class SearchController < ApplicationController
-  before_action :require_user, only: [:users]
+  before_action :authenticate_user!, only: [:users]
 
   def index
     search_params = {

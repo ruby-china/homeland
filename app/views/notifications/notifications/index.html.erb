@@ -10,7 +10,12 @@
     <% if @notifications.blank? %>
       <div class="no-records"><%= t('notifications.no_records') %></div>
     <% else %>
-      <%= render @notifications %>
+      <% @notification_groups.each do |group, notifications| %>
+        <div class="notification-group">
+          <div class="group-title"><i class="fa fa-clock-o"></i> <%= group %></div>
+          <%= render notifications %>
+        </div>
+      <% end %>
     <% end %>
   </div>
   <div class="panel-footer">

@@ -7,14 +7,23 @@
     padding-top: 0;
     padding-bottom: 0;
   }
+
+  .notification-group {
+    padding: 10px;
+
+    .group-title {
+      color: #aaa;
+      border-bottom: 1px solid #eee;
+      padding: 5px 0;
+    }
+  }
+
   .notification {
     margin: 0 -15px;
     padding: 10px 15px;
-    border-bottom: 1px solid #eee;
     &:last-child {
       border-bottom: 0;
     }
-    color: #999;
 
     a { color: #555; }
 
@@ -31,7 +40,11 @@
 
 
     .media-content {
-      p:last-chind {
+      color: #999;
+
+      a { color: #999 !important; }
+      p { font-size: 13px;  margin-bottom: 6px; }
+      p:last-child {
         margin-bottom: 0;
       }
     }
@@ -41,7 +54,7 @@
     }
 
     .media-right {
-      min-width: 100px;
+      min-width: 40px;
       color: #AAA;
       font-size: 13px;
     }

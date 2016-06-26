@@ -230,7 +230,7 @@ GEM
     nokogiri (1.6.8)
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
-    notifications (0.1.0)
+    notifications (0.2.0)
       rails (>= 4.2.0, < 5.1)
       will_paginate (>= 3.0.0)
     oauth2 (1.1.0)

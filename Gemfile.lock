@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/sinatra/sinatra.git
-  revision: 5e9e23621c1f6abbd793b46452cb11ae8ca1277e
+  revision: 5fcb1e1bd49c6b296927c2a25d8e47031c323008
   specs:
     sinatra (2.0.0.pre.alpha)
       mustermann (~> 0.4)
@@ -166,7 +166,7 @@ GEM
       railties (>= 3.0.0)
     faraday (0.9.2)
       multipart-post (>= 1.2, < 3)
-    font-awesome-rails (4.6.3.0)
+    font-awesome-rails (4.6.3.1)
       railties (>= 3.2, < 5.1)
     get_process_mem (0.2.1)
     globalid (0.3.6)
@@ -304,7 +304,7 @@ GEM
     rails-i18n (5.0.0.beta3)
       i18n (~> 0.7)
       railties (~> 5.0.0.beta1)
-    rails-settings-cached (0.6.4)
+    rails-settings-cached (0.6.5)
       rails (>= 4.2.0)
     rails_autolink (1.1.6)
       rails (> 3.1)

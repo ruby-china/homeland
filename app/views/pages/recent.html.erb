@@ -1,11 +1,17 @@
 <% title_tag t('pages.wiki_index') %>
-<div class="panel panel-default">
-  <div class="panel-heading"><%= t('pages.wiki_index') %></div>
-  <div class="panel-body">
-    <ul>
-      <% @pages.each do |item| %>
-        <li><%= page_title_tag(item) %></li>
-      <% end %>
-    </ul>
+
+<div class="row">
+  <%= render 'sidebar' %>
+  <div class="col-sm-9">
+    <div class="panel panel-default">
+      <div class="panel-heading"><%= t('pages.wiki_index') %></div>
+      <div class="panel-body">
+        <ul>
+          <% @pages.each do |item| %>
+            <li><%= page_title_tag(item) %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>

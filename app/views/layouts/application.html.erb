@@ -31,7 +31,7 @@
   <%= csrf_meta_tag %>
   <%= raw Setting.custom_head_html %>
 </head>
-<body data-controller-name="<%= controller_name %>">
+<body class="page-<%= controller_name %>" data-controller-name="<%= controller_name %>">
   <div class="header">
     <nav class="navbar navbar-inverse navbar-fixed-top navbar-default">
       <div class="container">

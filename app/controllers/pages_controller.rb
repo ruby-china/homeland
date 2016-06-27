@@ -1,6 +1,8 @@
 class PagesController < ApplicationController
   authorize_resource :page
 
+  etag { Setting.wiki_sidebar_html }
+
   def index
     fresh_when(Setting.wiki_index_html)
   end

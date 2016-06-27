@@ -1,14 +1,12 @@
 <% title_tag t("menu.wiki") %>
 
-<div id="pages">
-  <div class="tools panel panel-default">
-    <div class="panel-body">
-        <%= link_to(t("pages.wiki_index"), recent_pages_path )%>
-        <% if can? :create, Page %>
-          <%= link_to(t("pages.new_page"), new_page_path, class: "btn btn-success")%>
-        <% end %>
+<div class="row">
+  <%= render 'sidebar' %>
+  <div class="col-sm-9">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <%= raw Setting.wiki_index_html %>
+      </div>
     </div>
   </div>
-
-  <%= raw Setting.wiki_index_html %>
 </div>

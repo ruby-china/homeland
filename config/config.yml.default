@@ -11,6 +11,12 @@ site_configs: &site_configs
     <div class="box">
       Wiki Home page.
     </div>
+  wiki_sidebar_html: >
+    <strong>推荐内容</strong>
+    <ul>
+      <li><a href="/wiki/about">关于我们</a></li>
+      <li><a href="/wiki/contributors">贡献者</a></li>
+    </ul>
   footer_html: >
     <p class="copyright">
      &copy; Powered by <a href="https://github.com/ruby-china/ruby-china">ruby-china</a>.

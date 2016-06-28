@@ -60,6 +60,8 @@ module RubyChina
     config.active_job.queue_adapter = :sidekiq
 
     config.middleware.use Rack::Attack
+
+    config.action_cable.mount_path = '/cable'
   end
 end
 

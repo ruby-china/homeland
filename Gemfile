@@ -4,21 +4,21 @@ else
   source 'https://gems.ruby-china.org'
 end
 
-gem 'rails', '5.0.0.rc2'
+gem 'rails', '5.0.0'
 gem 'sprockets'
 gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
 gem 'jquery-rails'
 gem 'jbuilder'
-gem 'turbolinks', '~> 5.0.0.beta2'
+gem 'turbolinks', '~> 5.0.0'
 gem 'dropzonejs-rails'
 
 gem 'pg'
 
 gem 'rack-attack'
 
-gem 'rails-i18n', '5.0.0.beta3'
+gem 'rails-i18n', '5.0.0.beta4'
 gem 'http_accept_language'
 gem 'rails_autolink'
 gem 'twemoji'

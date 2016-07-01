@@ -251,7 +251,7 @@ end
 
 MARKDOWN_DOC = %(# Guide
 
-这是一篇讲解如何正确使用 Ruby China 的 **Markdown** 的排版示例，学会这个很有必要，能让你的文章有更佳清晰的排版。
+这是一篇讲解如何正确使用 **Markdown** 的排版示例，学会这个很有必要，能让你的文章有更佳清晰的排版。
 
 > 引用文本：Markdown is a text formatting syntax inspired
 
@@ -274,7 +274,7 @@ MARKDOWN_DOC = %(# Guide
 
 ### 表情符号 Emoji
 
-Ruby China 支持表情符号，你可以用系统默认的 Emoji 符号（无法支持 Chrome 以及 Windows 用户）。
+支持表情符号，你可以用系统默认的 Emoji 符号（无法支持 Chrome 以及 Windows 用户）。
 也可以用图片的表情，输入 `:` 将会出现智能提示。
 
 #### 一些表情例子

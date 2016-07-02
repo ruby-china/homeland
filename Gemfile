@@ -126,7 +126,7 @@ end
 
 group :development, :test do
   gem 'rubocop', '~> 0.39.0', require: false
-  gem 'rspec-rails', '3.5.0.beta4'
+  gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'capybara'

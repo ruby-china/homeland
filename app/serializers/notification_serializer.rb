@@ -36,6 +36,14 @@ class NotificationSerializer < BaseSerializer
   def topic
     if object.notify_type == 'topic' || object.notify_type == 'node_changed'
       object.try(:target)
+    elsif object.notify_type == 'topic_reply'
+      object.try(:second_target)
+    elsif object.notify_type == 'mention'
+      if object.target_type == 'Topic'
+        object.try(:target)
+      elsif object.target_type == 'Reply'
+        object.try(:second_target)
+      end
     end
   end
 

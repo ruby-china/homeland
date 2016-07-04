@@ -5,7 +5,7 @@ require 'open-uri'
 class User < ApplicationRecord
   include Redis::Objects
   include BaseModel
-  extend OmniauthCallbacks
+  include OmniauthCallbacks
   include Searchable
   include Redis::Search
 

@@ -72,7 +72,7 @@ RSpec.configure do |config|
     Rails.cache.clear
   end
 
-  config.include Devise::TestHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :controller
   config.include RSpec::Rails::RequestExampleGroup, type: :request, file_path: %r{spec/api}
   config.include APIV3Support, type: :request, file_path: %r{spec/api/v3}
 

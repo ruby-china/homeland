@@ -1,39 +1,103 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
-  </head>
-  <body>
-    <style type="text/css">
-      * { margin:0; padding:0px; }
-      body { padding:10px; font-size:13px; font-family: "Lucida Grande";}
-      a { color:#0069D6; }
-      table { width:100%; border:0; }
-      table tr td { font-size:12px; }
-      h1 { font-size:18px; background:#EB5424; color:#FFF; padding:8px;}
-      p { margin:10px; padding:10px; margin-bottom:10px;}
-      blockquote {
-        margin-left:20px;
-        margin-bottom: 18px;
-        border-left: 5px solid #ddd;
-      }
-      blockquote p {
-        font-size: 14px;
-        font-weight: 300;
-        line-height: 18px;
-        margin-bottom: 0;
-      }
-      label { color:#666; }
-    </style>
-    <div style="line-height:160%;">
-        <%= yield %>
-      </div>
-      <div style="margin-top:30px;border-top:1px solid #ddd;padding:5px;">
-        <div style="float:right;"><img src="http://<%= Setting.domain %><%= asset_path("logo_48.png") %>" /></div>
-        <div style="padding-top:4px; line-height:160%; color:#999;">
-          <%= t("mail.this_is_a_notification_mail_please_do_not_reply") %> <br />
-          <a href="<%= root_url %>"><%= Setting.app_name %></a> <%= Setting.domain %>
-        </div>
-      </div>
-    </body>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+  <style type="text/css">
+    * { margin:0; padding:0px; }
+    #outlook a { padding: 10px; } /* Force Outlook to provide a "view in browser" menu link. */
+    body {
+      width:100% !important; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%;
+    }
+    .ExternalClass {width:100%;} /* Force Hotmail to display emails at full width */
+    .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {line-height: 100%;} /* Force Hotmail to display normal line spacing.  More on that: http://www.emailonacid.com/forum/viewthread/43/ */
+    #backgroundTable {margin:0; padding:0; width:100% !important; line-height: 100% !important;}
+
+    a { color: #0069D6; }
+    table { width:100%; border:0; }
+    table tr td { font-size:12px; }
+    h1 { font-size:18px; background:#EB5424; color:#FFF; padding:8px;}
+    p { margin:10px; padding:10px; margin-bottom:10px;}
+    blockquote {
+      margin-left:20px;
+      margin-bottom: 18px;
+      border-left: 5px solid #ddd;
+    }
+    blockquote p {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 18px;
+      margin-bottom: 0;
+    }
+    label { color:#666; }
+
+    html { background: #e9eaed; }
+    body {
+      background: #e9eaed;
+      font-size: 13px;
+      font-family: Helvetica,Arial,"PingFang SC","Hiragino Sans GB","Source Han Sans CN",Roboto,"Heiti SC","Microsoft Yahei",sans-serif;
+    }
+    p {
+      margin: 0;
+      padding: 5px;
+      margin-bottom: 15px;
+    }
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    .header { margin: 20px 0; text-align: center; }
+    .main {
+      background: #FFF;
+      margin: 20px;
+      padding: 20px;
+      border-radius: 3px;
+      border: 1px;
+      border-color: #e5e6e9 #dfe0e4 #d0d1d5;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    }
+    .footer {
+      color: #9CA4A9;
+      margin: 10px 20px;
+      margin-top: 10px;
+      line-height: 150%;
+    }
+    .footer .info { text-align: left;}
+
+    .btn {
+      border-radius: 3px;
+      border: 1px solid #ccc;
+      padding: 8px 12px;
+      outline: 0 !important;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: #356DD0;
+      border-color: #0D54AB;
+      color: #FFF;
+    }
+
+    .btn-default {
+      background: #FFF;
+      border-color: #dadada;
+    }
+
+    .text-danger { color: #EB5424; }
+    .text-muted { color: #999; }
+
+    p.lead { font-weight: bold; }
+  </style>
+  <div class="main">
+    <%= yield %>
+  </div>
+  <div class="footer">
+    <div class="info">
+      <div class="do-not-reply"><%= t("mail.this_is_a_notification_mail_please_do_not_reply") %></div>
+      <a href="<%= root_url %>"><%= Setting.app_name %></a> <%= Setting.domain %>
+    </div>
+  </div>
+  </body>
 </html>

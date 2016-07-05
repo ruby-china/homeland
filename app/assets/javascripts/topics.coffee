@@ -19,6 +19,7 @@ window.TopicView = Backbone.View.extend
     "click a.bookmark": "bookmark"
     "click .btn-move-page": "scrollPage"
     "click .notify-updated .update": "updateReplies"
+    "click #node-selector .nodes .name a": "nodeSelectorNodeSelected"
 
   initialize: (opts) ->
     @parentView = opts.parentView
@@ -434,4 +435,13 @@ window.TopicView = Backbone.View.extend
     if !window._emojiModal
       window._emojiModal = new EmojiModalView()
     window._emojiModal.show()
+    false
+
+  nodeSelectorNodeSelected: (e) ->
+    el = $(e.currentTarget)
+    e.preventDefault()
+    $("#node-selector").modal('hide')
+    nodeId = el.data('id')
+    $('.form input[name="topic[node_id]"]').val(nodeId)
+    $('#node-selector-button').html(el.text())
     false

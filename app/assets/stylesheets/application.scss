@@ -1,5 +1,4 @@
 /*
- *= require bootstrap-select.min
  *= require font-awesome
  *= require highlight
  *= require social-share-button
@@ -312,21 +311,22 @@ form {
   padding: 0 15px;
 }
 
+.input-group-btn > .btn {
+  padding: 6px 12px;
+  &:focus {
+    background: #FFF;
+    border-color: #ccc;
+  }
+}
+.input-group-btn:first-child > .btn {
+  border-right: 0px;
+}
+
 .input-group-captcha {
   background: #FFF;
   border-radius: 3px 0 0 3px;
   img {
     border-radius: 3px 0 0 3px;
-  }
-}
-
-.bootstrap-select {
-  .btn-default,
-  .btn-default.active {
-    background: #f9f9f9;
-    border: 1px solid #ddd;
-    transition: none;
-    padding-bottom: 7px;
   }
 }
 

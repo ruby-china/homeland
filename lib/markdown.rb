@@ -266,15 +266,15 @@ MARKDOWN_DOC = %(# Guide
 - ~~删除线~~ - `~~删除线~~`
 - `Code 标记` - `\`Code 标记\``
 - [超级链接](http://github.com) - `[超级链接](http://github.com)`
-- [huacnlee@gmail.com](mailto:huacnlee@gmail.com) - `[huacnlee@gmail.com](mailto:huacnlee@gmail.com)`
+- [username@gmail.com](mailto:username@gmail.com) - `[username@gmail.com](mailto:username@gmail.com)`
 
 ### 提及用户
 
-@huacnlee @rei @lgn21st ... 通过 @ 可以在发帖和回帖里面提及用户，信息提交以后，被提及的用户将会收到系统通知。以便让他来关注这个帖子或回帖。
+@foo @bar @someone ... 通过 @ 可以在发帖和回帖里面提及用户，信息提交以后，被提及的用户将会收到系统通知。以便让他来关注这个帖子或回帖。
 
 ### 表情符号 Emoji
 
-支持表情符号，你可以用系统默认的 Emoji 符号（无法支持 Chrome 以及 Windows 用户）。
+支持表情符号，你可以用系统默认的 Emoji 符号（无法支持 Windows 用户）。
 也可以用图片的表情，输入 `:` 将会出现智能提示。
 
 #### 一些表情例子
@@ -282,8 +282,6 @@ MARKDOWN_DOC = %(# Guide
 :smile: :laughing: :dizzy_face: :sob: :cold_sweat: :sweat_smile:  :cry: :triumph: :heart_eyes: :relaxed: :sunglasses: :weary:
 
 :+1: :-1: :100: :clap: :bell: :gift: :question: :bomb: :heart: :coffee: :cyclone: :bow: :kiss: :pray: :sweat_drops: :hankey: :exclamation: :anger:
-
-更多表情请访问：[http://www.emoji-cheat-sheet.com](http://www.emoji-cheat-sheet.com)
 
 ### 大标题 - Heading 3
 
@@ -326,7 +324,7 @@ _emphasize_    __strong__
 ```ruby
 class PostController < ApplicationController
   def index
-    @posts = Post.desc("id).limit(10)
+    @posts = Post.last_actived.limit(10)
   end
 end
 ```

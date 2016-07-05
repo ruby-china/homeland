@@ -29,7 +29,7 @@ class Reply < ApplicationRecord
     end
   end
 
-  after_commit :update_parent_topic, on: :create
+  after_commit :update_parent_topic, on: :create, unless: -> { system_event? }
   def update_parent_topic
     topic.update_last_reply(self) if topic.present?
   end
@@ -44,12 +44,12 @@ class Reply < ApplicationRecord
     end
   end
 
-  after_commit :async_create_reply_notify, on: :create
+  after_commit :async_create_reply_notify, on: :create, unless: -> { system_event? }
   def async_create_reply_notify
     NotifyReplyJob.perform_later(id)
   end
 
-  after_commit :check_vote_chars_for_like_topic, on: :create
+  after_commit :check_vote_chars_for_like_topic, on: :create, unless: -> { system_event? }
   def check_vote_chars_for_like_topic
     return unless self.upvote?
     user.like(topic)
@@ -122,7 +122,7 @@ class Reply < ApplicationRecord
 
   # 是否是系统事件
   def system_event?
-    @system_event ||= action.present?
+    action.present?
   end
 
   def self.create_system_event(opts = {})

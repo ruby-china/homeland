@@ -3,7 +3,7 @@ require 'rails_helper'
 describe SearchController, type: :controller do
   describe '/search/users' do
     it 'should work' do
-      u = create(:user)
+      u = create(:user, name: 'bbbsjskssk')
       sign_in u
       get :users, params: { q: u.login }
       expect(response).to be_success

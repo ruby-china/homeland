@@ -495,9 +495,9 @@ class User < ApplicationRecord
 
   def large_avatar_url
     if self[:avatar].present?
-      self.avatar.url(:large)
+      self.avatar.url(:lg)
     else
-      self.letter_avatar_url(240)
+      self.letter_avatar_url(192)
     end
   end
 

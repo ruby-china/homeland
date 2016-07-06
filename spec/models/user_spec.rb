@@ -556,4 +556,23 @@ describe User, type: :model do
       expect(data[d3.to_date.to_time.to_i.to_s]).to eq 6
     end
   end
+
+  describe '.large_avatar_url' do
+    let(:user) { build(:user) }
+
+    context 'avatar is nil' do
+      it 'should return letter_avatar_url' do
+        user.avatar = nil
+        expect(user.large_avatar_url).to include('system/letter_avatars/')
+        expect(user.large_avatar_url).to include('192.png')
+      end
+    end
+
+    context 'avatar is present' do
+      it 'should return upload url' do
+        user[:avatar] = 'aaa.jpg'
+        expect(user.large_avatar_url).to eq user.avatar.url(:lg)
+      end
+    end
+  end
 end

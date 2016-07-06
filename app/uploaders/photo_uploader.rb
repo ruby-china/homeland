@@ -1,6 +1,4 @@
 class PhotoUploader < BaseUploader
-  process resize_to_limit: [1280, nil]
-
   # Override the filename of the uploaded files:
   def filename
     if super.present?

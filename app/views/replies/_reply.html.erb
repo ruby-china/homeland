@@ -8,7 +8,7 @@
   <% elsif reply.system_event? %>
     <%= render 'replies/system_event', reply: reply %>
   <% else %>
-    <div class="avatar"><%= user_avatar_tag(reply.user, :normal) %></div>
+    <div class="avatar"><%= user_avatar_tag(reply.user, :md) %></div>
     <div class="infos">
       <div class="info">
         <span class="name">

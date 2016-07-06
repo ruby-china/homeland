@@ -3,10 +3,10 @@ require 'rails_helper'
 describe UsersHelper, type: :helper do
   describe 'user_avatar_width_for_size' do
     it 'should calculate avatar width correctly' do
-      expect(helper.user_avatar_width_for_size(:normal)).to eq(48)
-      expect(helper.user_avatar_width_for_size(:small)).to eq(16)
-      expect(helper.user_avatar_width_for_size(:large)).to eq(96)
-      expect(helper.user_avatar_width_for_size(:big)).to eq(120)
+      expect(helper.user_avatar_width_for_size(:xs)).to eq(16)
+      expect(helper.user_avatar_width_for_size(:sm)).to eq(32)
+      expect(helper.user_avatar_width_for_size(:md)).to eq(48)
+      expect(helper.user_avatar_width_for_size(:lg)).to eq(96)
       expect(helper.user_avatar_width_for_size(233)).to eq(233)
     end
   end
@@ -29,7 +29,7 @@ describe UsersHelper, type: :helper do
 
   describe 'user_avatar_tag' do
     it 'should work if user not exist' do
-      expect(user_avatar_tag(nil)).to eq image_tag('avatar/normal.png', class: 'media-object avatar-48')
+      expect(user_avatar_tag(nil)).to eq image_tag('avatar/md.png', class: 'media-object avatar-48')
     end
 
     it 'should work if user exists' do
@@ -40,27 +40,27 @@ describe UsersHelper, type: :helper do
 
     it 'should work if avatar exist' do
       user = create(:avatar_user)
-      image_url = user.avatar.url(user_avatar_size_name_for_2x(:normal))
+      image_url = user.avatar.url(:md)
       img = image_tag(image_url, class: 'media-object avatar-48')
       expect(user_avatar_tag(user)).to eq link_to(raw(img), user_path(user))
     end
 
     it 'should work with different size' do
-      expect(user_avatar_tag(nil, :large)).to eq image_tag('avatar/large.png', class: 'media-object avatar-96')
+      expect(user_avatar_tag(nil, :lg)).to eq image_tag('avatar/lg.png', class: 'media-object avatar-96')
     end
 
     it 'should work with timestamp param' do
       user = create(:avatar_user)
-      image_url = user.avatar.url(user_avatar_size_name_for_2x(:normal)) + "?t=#{user.updated_at.to_i}"
+      image_url = user.avatar.url(:md) + "?t=#{user.updated_at.to_i}"
       img = image_tag(image_url, class: 'media-object avatar-48')
-      expect(user_avatar_tag(user, :normal, timestamp: true)).to eq link_to(raw(img), user_path(user))
+      expect(user_avatar_tag(user, :md, timestamp: true)).to eq link_to(raw(img), user_path(user))
     end
 
     it 'should work if link is false' do
       user = create(:avatar_user)
-      image_url = user.avatar.url(user_avatar_size_name_for_2x(:normal)) + "?t=#{user.updated_at.to_i}"
+      image_url = user.avatar.url(:md) + "?t=#{user.updated_at.to_i}"
       img = image_tag(image_url, class: 'media-object avatar-48')
-      expect(user_avatar_tag(user, :normal, timestamp: true, link: false)).to eq img
+      expect(user_avatar_tag(user, :md, timestamp: true, link: false)).to eq img
     end
   end
 

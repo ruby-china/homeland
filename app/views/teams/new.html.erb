@@ -7,7 +7,7 @@
         <%= simple_form_for @team do |f| %>
           <%= render "shared/error_messages", target: @team %>
 
-          <%= f.input :login, placeholder: user_url('xxx').gsub('xxx', ':login') %>
+          <%= f.input :login, placeholder: user_url('xxx').gsub('xxx', ':slug') %>
           <%= f.input :name %>
           <%= f.input :email %>
           <%= f.input :bio, as: :text %>

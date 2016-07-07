@@ -35,7 +35,7 @@
         current_password: 旧密码
       team:
         name: '公司／组织名称'
-        login: '域名'
+        login: 'Slug'
         bio: '公司／组织介绍'
       topic:
         title: "标题"

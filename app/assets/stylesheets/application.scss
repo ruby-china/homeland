@@ -99,8 +99,12 @@ body {
   }
 
   .user-bar {
-    .dropdown-toggle { display: block; }
-    .navbar-toggle { display: none;   padding: 4px 8px; margin: 0;}
+    li > a { padding-left: 11px !important; padding-right: 11px !important; }
+    .dropdown-avatar {
+      margin-right: 6px;
+      .dropdown-toggle { padding-top: 14px !important; padding-bottom: 9px !important;}
+    }
+    .navbar-toggle { display: none;  margin: 0; padding: 6px 9px; }
 
     .avatar-32 { display: inline-block; width: 24px; height: 24px; }
   }

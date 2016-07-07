@@ -12,6 +12,10 @@ describe User, type: :model do
   let(:user_for_delete1) { create :user }
   let(:user_for_delete2) { create :user }
 
+  describe 'user_type' do
+    it { expect(user.user_type).to eq :user }
+  end
+
   describe 'login format' do
     context 'huacnlee' do
       let(:user) { build(:user, login: 'huacnlee') }

@@ -5,6 +5,7 @@ describe Team, type: :model do
 
   it { expect(team.class.name).to eq 'Team' }
   it { expect(team[:type]).to eq 'Team' }
+  it { expect(team.user_type).to eq :team }
 
   describe 'Create' do
     let(:team) { build :team, password: nil, password_confirmation: nil }

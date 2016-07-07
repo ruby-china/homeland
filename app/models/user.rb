@@ -66,6 +66,10 @@ class User < ApplicationRecord
     0
   end
 
+  def user_type
+    (self[:type] || 'User').downcase.to_sym
+  end
+
   def following
     User.where(id: self.following_ids)
   end

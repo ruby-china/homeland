@@ -67,7 +67,7 @@ class User < ApplicationRecord
   end
 
   def user_type
-    (self[:type] || 'User').downcase.to_sym
+    (self[:type] || 'User').underscore.to_sym
   end
 
   def following

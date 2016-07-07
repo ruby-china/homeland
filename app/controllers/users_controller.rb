@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :topics, :replies, :favorites, :notes,
                                   :block, :unblock, :blocked, :calendar,
                                   :follow, :unfollow, :followers, :following]
+  before_action :only_user!, except: [:index, :show, :topics, :replies, :notes]
 
   etag { @user }
   etag { @user&.teams }
@@ -121,8 +122,25 @@ class UsersController < ApplicationController
     end
 
     @user = User.find_login!(params[:id])
+    @user_type = @user.user_type
     if @user.deleted?
       render_404
     end
+  end
+
+  # Override render method to render difference view path
+  def render(*args)
+    options = args.extract_options!
+    template = options[:template] || params[:action]
+    options[:template] = "/#{@user_type.to_s.tableize}/#{template}"
+    super(*(args << options))
+  end
+
+  def only_user!
+    render_404 if @user_type != :user
+  end
+
+  def only_team!
+    render_404 if @user_type != :team
   end
 end

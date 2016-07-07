@@ -9,7 +9,7 @@
       <i class="fa fa-reorder"></i>
     </button>
     <%= render_list class: "dropdown-menu", role: "menu" do |li|
-      li << link_to(t("menu.my_home_page"), main_app.user_path(current_user) )
+      li << link_to(current_user.login, main_app.user_path(current_user) )
       li << "<div class='divider'></div>"
       li << link_to(t("menu.edit_account_path"), main_app.edit_user_registration_path)
       li << link_to(t("menu.notes"), main_app.notes_path )

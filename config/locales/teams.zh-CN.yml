@@ -1,3 +1,4 @@
 'zh-CN':
   teams:
-    new_team: '创建团队'
+    teams: '组织'
+    new_team: '创建公司／组织'

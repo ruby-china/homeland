@@ -34,9 +34,9 @@
         remember_me: 记住登陆状态
         current_password: 旧密码
       team:
-        name: '团队名称'
-        login: '用户名'
-        bio: '团队介绍'
+        name: '公司／组织名称'
+        login: '域名'
+        bio: '公司／组织介绍'
       topic:
         title: "标题"
         user_id: "用户"

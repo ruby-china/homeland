@@ -100,7 +100,9 @@ body {
 
   .user-bar {
     .dropdown-toggle { display: block; }
-    .navbar-toggle { display: none;   padding: 6px 8px; margin: 0;}
+    .navbar-toggle { display: none;   padding: 4px 8px; margin: 0;}
+
+    .avatar-32 { display: inline-block; width: 24px; height: 24px; }
   }
 
   @media (max-width: 767px) {

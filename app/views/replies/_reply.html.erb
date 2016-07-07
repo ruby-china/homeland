@@ -1,12 +1,11 @@
-<% cache([reply,"raw:#{@show_raw}"]) do %>
 <%
   floor = reply_counter + 1
 %>
-<div class="reply<%= ' popular' if reply.popular? %><%= ' reply-system' if reply.system_event? %><%= ' reply-deleted' if reply.deleted? %>" data-id="<%= reply.id %>" id="reply<%= floor %>">
-  <% if reply.deleted? and !@show_raw %>
+<div class="reply<%= ' popular' if reply.popular? %><%= ' reply-system' if reply.system_event? %><%= ' reply-deleted' if reply.deleted? && !show_raw %>" data-id="<%= reply.id %>" id="reply<%= floor %>">
+  <% if reply.deleted? && !show_raw %>
     <div class="deleted text-center"><%= floor %><%= t("common.floor")%> <%= t("common.has_deleted")%></div>
   <% elsif reply.system_event? %>
-    <%= render 'replies/system_event', reply: reply %>
+    <%= render '/replies/system_event', reply: reply %>
   <% else %>
     <div class="avatar"><%= user_avatar_tag(reply.user, :md) %></div>
     <div class="infos">
@@ -35,4 +34,3 @@
     </div>
   <% end %>
 </div>
-<% end %>

@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160602020013) do
+ActiveRecord::Schema.define(version: 20160707084438) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -249,6 +248,17 @@ ActiveRecord::Schema.define(version: 20160602020013) do
     t.index ["url"], name: "index_sites_on_url", using: :btree
   end
 
+  create_table "team_users", force: :cascade do |t|
+    t.integer  "team_id",    null: false
+    t.integer  "user_id",    null: false
+    t.integer  "role"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id", "user_id"], name: "index_team_users_on_team_id_and_user_id", unique: true, using: :btree
+    t.index ["team_id"], name: "index_team_users_on_team_id", using: :btree
+    t.index ["user_id"], name: "index_team_users_on_user_id", using: :btree
+  end
+
   create_table "test_documents", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "mentioned_user_ids", default: [],              array: true
@@ -291,11 +301,11 @@ ActiveRecord::Schema.define(version: 20160602020013) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "login",                                  null: false
+    t.string   "login",                                             null: false
     t.string   "name"
-    t.string   "email",                                  null: false
-    t.string   "email_md5",                              null: false
-    t.boolean  "email_public",           default: false, null: false
+    t.string   "email",                                             null: false
+    t.string   "email_md5",                                         null: false
+    t.boolean  "email_public",                      default: false, null: false
     t.string   "location"
     t.integer  "location_id"
     t.string   "bio"
@@ -305,33 +315,34 @@ ActiveRecord::Schema.define(version: 20160602020013) do
     t.string   "twitter"
     t.string   "qq"
     t.string   "avatar"
-    t.boolean  "verified",               default: false, null: false
-    t.boolean  "hr",                     default: false, null: false
-    t.integer  "state",                  default: 1,     null: false
+    t.boolean  "verified",                          default: false, null: false
+    t.boolean  "hr",                                default: false, null: false
+    t.integer  "state",                             default: 1,     null: false
     t.string   "tagline"
     t.string   "co"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "encrypted_password",     default: "",    null: false
+    t.string   "encrypted_password",                default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,     null: false
+    t.integer  "sign_in_count",                     default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.string   "password_salt",          default: "",    null: false
-    t.string   "persistence_token",      default: "",    null: false
-    t.string   "single_access_token",    default: "",    null: false
-    t.string   "perishable_token",       default: "",    null: false
-    t.integer  "topics_count",           default: 0,     null: false
-    t.integer  "replies_count",          default: 0,     null: false
-    t.integer  "favorite_topic_ids",     default: [],                 array: true
-    t.integer  "blocked_node_ids",       default: [],                 array: true
-    t.integer  "blocked_user_ids",       default: [],                 array: true
-    t.integer  "following_ids",          default: [],                 array: true
-    t.integer  "follower_ids",           default: [],                 array: true
+    t.string   "password_salt",                     default: "",    null: false
+    t.string   "persistence_token",                 default: "",    null: false
+    t.string   "single_access_token",               default: "",    null: false
+    t.string   "perishable_token",                  default: "",    null: false
+    t.integer  "topics_count",                      default: 0,     null: false
+    t.integer  "replies_count",                     default: 0,     null: false
+    t.integer  "favorite_topic_ids",                default: [],                 array: true
+    t.integer  "blocked_node_ids",                  default: [],                 array: true
+    t.integer  "blocked_user_ids",                  default: [],                 array: true
+    t.integer  "following_ids",                     default: [],                 array: true
+    t.integer  "follower_ids",                      default: [],                 array: true
+    t.string   "type",                   limit: 20
     t.index ["email"], name: "index_users_on_email", using: :btree
     t.index ["location"], name: "index_users_on_location", using: :btree
     t.index ["login"], name: "index_users_on_login", using: :btree

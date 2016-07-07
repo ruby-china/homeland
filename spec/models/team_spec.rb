@@ -21,6 +21,18 @@ describe Team, type: :model do
     it { expect(team.owner?(team_member.user)).to eq false }
     it { expect(team.member?(team_owner.user)).to eq true }
     it { expect(team.member?(team_member.user)).to eq true }
+
+    it 'should touch team when member changed' do
+      old_updated_at = team.updated_at
+      team.team_users.last.destroy
+      sleep 0.01
+      expect(team.updated_at.to_f).not_to eq old_updated_at.to_f
+
+      old_updated_at = team.updated_at
+      team.team_users.create(user: create(:user))
+      sleep 0.01
+      expect(team.updated_at.to_f).not_to eq old_updated_at.to_f
+    end
   end
 
   describe 'has_many' do

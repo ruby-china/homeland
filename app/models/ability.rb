@@ -27,6 +27,7 @@ class Ability
     roles_for_comments
     roles_for_photos
     roles_for_sites
+    roles_for_teams
     basic_read_only
   end
 
@@ -94,6 +95,13 @@ class Ability
     end
   end
 
+  def roles_for_teams
+    can :create, Team
+    can [:update, :destroy], Team do |team|
+      team.owner?(user)
+    end
+  end
+
   def basic_read_only
     can [:read, :feed, :node], Topic
     can :read, Reply
@@ -104,5 +112,6 @@ class Ability
     can :read, Section
     can :read, Node
     can :read, Comment
+    can :read, Team
   end
 end

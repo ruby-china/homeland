@@ -33,6 +33,10 @@
         github: "GitHub"
         remember_me: 记住登陆状态
         current_password: 旧密码
+      team:
+        name: '团队名称'
+        login: '用户名'
+        bio: '团队介绍'
       topic:
         title: "标题"
         user_id: "用户"
@@ -118,6 +122,3 @@
         unsaved_document:
           You cannot call create or create! through a relational association
           relation (%{document}) who's parent (%{base}) is not already saved.
-
-
-

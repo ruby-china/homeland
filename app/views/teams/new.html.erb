@@ -1,0 +1,19 @@
+<% title_tag t("teams.new_team") %>
+
+<div class="panel">
+  <div class="panel-body">
+    <%= simple_form_for @team do |f| %>
+      <%= render "shared/error_messages", target: @team %>
+
+      <%= f.input :login, placeholder: user_url('xxx').gsub('xxx', ':login') %>
+      <%= f.input :name %>
+      <%= f.input :email %>
+      <%= f.input :bio, as: :text %>
+
+      <div class="form-group">
+        <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving") %>
+      </div>
+    <% end %>
+
+  </div>
+</div>

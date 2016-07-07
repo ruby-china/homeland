@@ -31,4 +31,4 @@
         current_password: "旧密码"
     placeholders:
       user:
-        yourname: "帐号"          
+        yourname: "帐号"

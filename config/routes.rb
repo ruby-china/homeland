@@ -20,6 +20,8 @@ Rails.application.routes.draw do
     end
   end
   resources :devices
+  resources :teams
+  resources :team_users
 
   root to: 'home#index'
 

@@ -31,6 +31,8 @@ class User < ApplicationRecord
   has_many :photos
   has_many :oauth_applications, class_name: 'Doorkeeper::Application', as: :owner
   has_many :devices
+  has_many :team_users
+  has_many :teams, through: :team_users
 
   attr_accessor :password_confirmation
 

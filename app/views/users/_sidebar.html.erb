@@ -28,7 +28,6 @@
             <span><%= @user.topics_count %></span> 篇帖子 • <span><%= @user.replies_count %></span> 条回帖
           </div>
           <div class="item social">
-
             <% if !@user.twitter.blank? %>
               <%= link_to raw('<i class="fa fa-twitter"></i>'), @user.twitter_url, class: "twitter", rel: "nofollow" %>
             <% end %>
@@ -80,6 +79,15 @@
       <% end %>
     </div>
   </div>
+
+  <div class="panel user-teams">
+    <div class="panel-body">
+      <% @user.teams.each do |team| %>
+        <%= user_avatar_tag(team, :md) %>
+      <% end %>
+    </div>
+  </div>
+
   <div class="panel panel-default" id="user_github_repos">
     <% if not user.github.blank? %>
       <div class="panel-heading">GitHub Public Repos</div>

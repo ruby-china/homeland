@@ -16,11 +16,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= content_for?(:title) ? yield(:title) : Setting.app_name %></title>
   <meta charset='utf-8' />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title><%= content_for?(:title) ? yield(:title) : Setting.app_name %></title>
   <meta name="apple-mobile-web-app-capable" content="no">
   <meta content='True' name='HandheldFriendly' />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <link rel="apple-touch-icon-precomposed" href="<%= cached_asset_path("ios-icon.png") %>" />
   <link rel="shortcut icon" href="<%= cached_asset_path("big_logo.png") %>" />
   <link rel="alternate" type="application/rss+xml" title="订阅最新帖" href="<%= main_app.feed_topics_url %>" />

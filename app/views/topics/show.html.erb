@@ -60,7 +60,9 @@
         共收到 <b><%= @topic.replies_count %></b> 条回复
       </div>
       <div class="items panel-body">
-        <%= render partial: "replies/reply", collection: @replies, locals: { show_raw: @show_raw }, cached: -> (reply) { [reply, @show_raw] } %>
+        <%= cache([@topic, "raw:#{@show_raw}"]) do %>
+          <%= render partial: "/replies/reply", collection: @replies %>
+        <% end %>
       </div>
     </div>
   <% end %>

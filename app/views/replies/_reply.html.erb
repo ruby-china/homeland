@@ -1,7 +1,7 @@
 <% cache([reply,"raw:#{@show_raw}"]) do %>
 <%
   floor = reply_counter + 1
-  show_deleted = reply.deleted? && !show_raw
+  show_deleted = reply.deleted? && !@show_raw
   class_names = ['reply']
   class_names << 'popular' if reply.popular?
   class_names << 'reply-system' if reply.system_event?

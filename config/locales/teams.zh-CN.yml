@@ -1,4 +1,18 @@
 'zh-CN':
+  team_user_status:
+    pendding: '等待接受'
+    acceped: '已加入'
+  team_user_role:
+      owner: '管理者'
+      member: '普通成员'
   teams:
     teams: '组织'
+    user_existed: '已经在组里面了'
     new_team: '创建公司／组织'
+    edit_team: '设置公司／组织资料'
+    new_team_user: '邀请成员'
+    edit_team_user: '修改成员权限'
+    topics: '成员的话题列表'
+    users: '成员列表'
+    team_user_pendding: '等待接受'
+    settings: '设置'

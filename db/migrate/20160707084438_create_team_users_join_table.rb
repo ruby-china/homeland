@@ -6,6 +6,7 @@ class CreateTeamUsersJoinTable < ActiveRecord::Migration[5.0]
       t.integer :team_id, index: true, null: false
       t.integer :user_id, index: true, null: false
       t.integer :role
+      t.integer :status
 
       t.timestamps null: false
     end

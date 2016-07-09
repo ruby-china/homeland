@@ -8,6 +8,9 @@
       user:
         location: "请用中文填写所在城市"
         email: "保存以后就不可以改了哦！"
+      team_user:
+        login: '输入你要邀请的人的用户'
+        role: '选择此人在组里面的权限，Owner 可以管理'
     labels:
       user:
         name: "名字"

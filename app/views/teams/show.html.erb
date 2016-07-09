@@ -1,1 +1,16 @@
-Team <%= @user.name %>
+<%= render '/teams/header' %>
+
+<div class="row">
+  <div class="col-sm-8">
+    <div class="panel topics">
+      <div class="panel-body">
+        <%= render partial: '/topics/topic', collection: @topics, locals: { suggest: false }, cached: -> (topic) { [topic, 'normal'] } %>
+      </div>
+      <div class="panel-footer">
+        <%= will_paginate @topics %>
+      </div>
+    </div>
+  </div>
+
+  <%= render '/teams/sidebar' %>
+</div>

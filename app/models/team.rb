@@ -8,7 +8,7 @@ class Team < User
 
   attr_accessor :owner_id
   after_create do
-    self.team_users.create(user_id: owner_id, role: :owner) if self.owner_id.present?
+    self.team_users.create(user_id: owner_id, role: :owner, status: :accepted) if self.owner_id.present?
   end
 
   def user_ids
@@ -20,10 +20,10 @@ class Team < User
   end
 
   def owner?(user)
-    self.team_users.exists?(role: :owner, user_id: user.id)
+    self.team_users.accepted.exists?(role: :owner, user_id: user.id)
   end
 
   def member?(user)
-    self.team_users.exists?(user_id: user.id)
+    self.team_users.accepted.exists?(user_id: user.id)
   end
 end

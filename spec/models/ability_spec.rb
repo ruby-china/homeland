@@ -18,6 +18,8 @@ describe Ability, type: :model do
     it { is_expected.to be_able_to(:manage, Note) }
     it { is_expected.to be_able_to(:manage, Photo) }
     it { is_expected.to be_able_to(:manage, Comment) }
+    it { is_expected.to be_able_to(:manage, Team) }
+    it { is_expected.to be_able_to(:manage, TeamUser) }
   end
 
   context 'Wiki Editor manage wiki' do

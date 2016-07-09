@@ -37,6 +37,11 @@
         name: '公司／组织名称'
         login: 'Slug'
         bio: '公司／组织介绍'
+        website: '公司 / 项目网址'
+      team_user:
+        login: '用户名'
+        role: '权限'
+        user_id: '用户'
       topic:
         title: "标题"
         user_id: "用户"

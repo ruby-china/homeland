@@ -55,6 +55,7 @@ body {
     margin-bottom: 15px;
     border: 0px;
     color: $blueText;
+    z-index: 1030;
   }
 
   .navbar-brand {
@@ -87,6 +88,7 @@ body {
     li.active a:focus,
     li.active a:hover { color: $red; background: transparent; }
   }
+
   #main-nav-menu {
     .navbar-nav {
       margin: 0px;
@@ -189,6 +191,14 @@ body {
     }
 
   }
+}
+
+.sub-navbar {
+  padding: 18px 0;
+  background: #f9f9f9;
+  box-shadow: 0 1px 1px rgba(0, 0, 0,.11);
+  margin-top: -14px;
+  margin-bottom: 15px;
 }
 
 .sidebar.col-md-3 { padding-left: 0; }

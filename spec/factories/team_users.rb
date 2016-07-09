@@ -3,6 +3,7 @@ FactoryGirl.define do
     association :team
     association :user
     role :member
+    status :accepted
   end
 
   factory :team_owner, parent: :team_user do

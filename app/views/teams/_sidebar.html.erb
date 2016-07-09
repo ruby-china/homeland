@@ -1,0 +1,15 @@
+<div class="sidebar team-sidebar col-sm-4">
+  <div class="members panel">
+    <div class="panel-heading"><%= t('teams.users') %></div>
+    <div class="panel-body">
+      <% @team.team_users.accepted.includes(:user).limit(10).each do |team_user| %>
+        <%= user_avatar_tag(team_user.user, :sm) %>
+      <% end %>
+    </div>
+    <div class="panel-footer">
+      <%= link_to '所有成员...', user_team_users_path(@team) %>
+    </div>
+  </div>
+
+  <%= render '/users/repos', user: @team %>
+</div>

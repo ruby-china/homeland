@@ -252,6 +252,7 @@ ActiveRecord::Schema.define(version: 20160707084438) do
     t.integer  "team_id",    null: false
     t.integer  "user_id",    null: false
     t.integer  "role"
+    t.integer  "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["team_id", "user_id"], name: "index_team_users_on_team_id_and_user_id", unique: true, using: :btree

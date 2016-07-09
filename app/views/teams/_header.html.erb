@@ -40,5 +40,5 @@
 <%= render_list class: "nav nav-tabs team-menu" do |li|
   li << link_to(t("teams.topics"), user_path(@team))
   li << link_to(t("teams.users"), user_team_users_path(@team))
-  li << link_to(t("teams.settings"), edit_team_path(@team))
+  li << link_to(t("teams.settings"), edit_team_path(@team)) if can? :update, @team
 end %>

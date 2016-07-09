@@ -19,7 +19,17 @@
     <% if @team_user.new_record? %>
       <%= f.submit t("teams.new_team_user"), class: "btn btn-primary btn-block", 'data-disable-with' => t("common.saving") %>
     <% else %>
-      <%= f.submit t("common.save"), class: "btn btn-primary btn-block", 'data-disable-with' => t("common.saving") %>
+      <div class="row">
+        <div class="col-sm-8">
+          <%= f.submit t("common.save"), class: "btn btn-primary btn-block", 'data-disable-with' => t("common.saving") %>
+        </div>
+        <div class="col-sm-4">
+          <%= link_to t('teams.delete_team_user'),
+                      user_team_user_path(@team, @team_user),
+                      data: { method: 'DELETE', confirm: t('teams.delete_team_user_confirm') },
+                      class: 'btn btn-danger btn-block' %>
+        </div>
+      </div>
     <% end %>
   </div>
 

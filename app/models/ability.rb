@@ -28,6 +28,7 @@ class Ability
     roles_for_photos
     roles_for_sites
     roles_for_teams
+    roles_for_team_users
     basic_read_only
   end
 
@@ -100,6 +101,12 @@ class Ability
     can [:update, :destroy], Team do |team|
       team.owner?(user)
     end
+  end
+
+  def roles_for_team_users
+    can :read, TeamUser, user_id: user.id
+    can :accept, TeamUser, user_id: user.id
+    can :reject, TeamUser, user_id: user.id
   end
 
   def basic_read_only

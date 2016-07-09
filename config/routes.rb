@@ -203,7 +203,12 @@ Rails.application.routes.draw do
         get :calendar
       end
 
-      resources :team_users, path: 'people'
+      resources :team_users, path: 'people' do
+        member do
+          post :accept
+          post :reject
+        end
+      end
     end
   end
 

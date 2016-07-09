@@ -138,6 +138,11 @@ describe Ability, type: :model do
       it { is_expected.to be_able_to(:destroy, team_owner.team) }
       it { is_expected.not_to be_able_to(:destroy, team_member.team) }
     end
+
+    context 'TeamUser' do
+      it { is_expected.to be_able_to(:accept, team_member) }
+      it { is_expected.to be_able_to(:reject, team_member) }
+    end
   end
 
   context 'Normal user but no avatar' do

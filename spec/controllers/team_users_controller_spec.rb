@@ -77,4 +77,80 @@ describe TeamUsersController, type: :controller do
       end
     end
   end
+
+  describe 'edit' do
+    let(:team_user) { create(:team_member, team: team) }
+
+    it 'Owner should work' do
+      sign_in team_owner.user
+      get :edit, params: { user_id: team.login, id: team_user.id }
+      expect(response).to be_success
+    end
+
+    it 'Member should not open' do
+      sign_in team_member.user
+      get :edit, params: { user_id: team.login, id: team_user.id }
+      expect(response).to redirect_to topics_path
+    end
+  end
+
+  describe 'update' do
+    let(:team_user) { create(:team_member, team: team) }
+
+    it 'Owner should work' do
+      sign_in team_owner.user
+      params = {
+        user_id: 123,
+        role: :owner
+      }
+      put :update, params: { user_id: team.login, id: team_user.id, team_user: params }
+      old_user_id = team_user.user_id
+      team_user.reload
+      expect(team_user.user_id).to eq old_user_id
+      expect(team_user.owner?).to eq true
+      expect(response).to redirect_to user_team_users_path(team)
+    end
+
+    it 'Member should not open' do
+      user = create(:user)
+      sign_in team_member.user
+      params = {
+        login: user.login,
+        role: :member
+      }
+      get :edit, params: { user_id: team.login, id: team_user.id, team_user: params }
+      expect(response).to redirect_to topics_path
+    end
+  end
+
+  describe 'Show, Accept, Reject' do
+    let(:team_user) { create(:team_member, team: team, status: :pendding) }
+
+    it 'Owner should work' do
+      sign_in team_user.user
+      get :show, params: { user_id: team.login, id: team_user.id }
+      expect(response).to be_success
+      put :accept, params: { user_id: team.login, id: team_user.id }
+      team_user.reload
+      expect(team_user.accepted?).to eq true
+      expect(response).to redirect_to user_team_users_path(team)
+      get :show, params: { user_id: team.login, id: team_user.id }
+      expect(response).to redirect_to user_team_users_path(team)
+
+      expect do
+        put :reject, params: { user_id: team.login, id: team_user.id }
+      end.to change(team.team_users, :count).by(-1)
+      expect(response).to redirect_to user_team_users_path(team)
+    end
+
+    it 'Member should not open' do
+      sign_in team_owner.user
+      get :show, params: { user_id: team.login, id: team_user.id }
+      expect(response).to redirect_to topics_path
+      put :accept, params: { user_id: team.login, id: team_user.id }
+      expect(response).to redirect_to topics_path
+      put :reject, params: { user_id: team.login, id: team_user.id }
+      expect(response).to redirect_to topics_path
+    end
+  end
 end

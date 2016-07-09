@@ -51,7 +51,9 @@ class UsersController < ApplicationController
   # Override render method to render difference view path
   def render(*args)
     options = args.extract_options!
-    options[:template] ||= "/#{@user_type.to_s.tableize}/#{params[:action]}"
+    if @user_type
+      options[:template] ||= "/#{@user_type.to_s.tableize}/#{params[:action]}"
+    end
     super(*(args << options))
   end
 end

@@ -5,7 +5,11 @@ class TeamUsersController < ApplicationController
   load_and_authorize_resource only: [:accept, :reject, :show]
 
   def index
-    @team_users = @team.team_users.unscoped.order('id asc').includes(:user).paginate(page: params[:page], per_page: 20)
+    @team_users = @team.team_users
+    if cannot? :update, @team
+      @team_users= @team_users.accepted
+    end
+    @team_users = @team_users.order('id asc').includes(:user).paginate(page: params[:page], per_page: 20)
   end
 
   def new

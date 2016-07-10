@@ -5,6 +5,7 @@ class TeamsController < ApplicationController
   before_action :set_team, only: [:show, :edit, :update, :destroy]
 
   def index
+    render_404
   end
 
   def show

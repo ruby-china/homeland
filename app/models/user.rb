@@ -9,7 +9,7 @@ class User < ApplicationRecord
   include Searchable
   include Redis::Search
 
-  acts_as_cached version: 1, expires_in: 1.week
+  acts_as_cached version: 2, expires_in: 1.week
 
   ALLOW_LOGIN_CHARS_REGEXP = /\A[A-Za-z0-9\-\_\.]+\z/
 
@@ -58,7 +58,7 @@ class User < ApplicationRecord
 
   scope :hot, -> { order(replies_count: :desc).order(topics_count: :desc) }
   scope :fields_for_list, lambda {
-    select(:id, :name, :login, :email, :email_md5, :email_public, :avatar, :verified, :state,
+    select(:type, :id, :name, :login, :email, :email_md5, :email_public, :avatar, :verified, :state,
            :tagline, :github, :website, :location, :location_id, :twitter, :co)
   }
 

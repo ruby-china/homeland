@@ -97,7 +97,9 @@ class Ability
   end
 
   def roles_for_teams
-    can :create, Team
+    if user.roles?(:wiki_editor)
+      can :create, Team
+    end
     can [:update, :destroy], Team do |team|
       team.owner?(user)
     end

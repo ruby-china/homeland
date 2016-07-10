@@ -75,8 +75,10 @@
             <%= render_list class: "dropdown-menu", role: "menu" do |li|
               li << link_to(t("topics.new_topic"), main_app.new_topic_path)
               li << link_to(t("notes.new_note"), main_app.new_note_path)
-              li << "<div class='divider'></div>"
-              li << link_to(t("teams.new_team"), main_app.new_team_path)
+              if can? :create, Team
+                li << "<div class='divider'></div>"
+                li << link_to(t("teams.new_team"), main_app.new_team_path)
+              end
             end %>
           </li>
           <% end %>

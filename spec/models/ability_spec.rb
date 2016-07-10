@@ -33,6 +33,7 @@ describe Ability, type: :model do
     it { is_expected.to be_able_to(:create, Page) }
     it { is_expected.to be_able_to(:update, Page) }
     it { is_expected.not_to be_able_to(:update, page_locked) }
+    it { is_expected.to be_able_to(:create, Team) }
   end
 
   context 'Site editor users' do
@@ -131,7 +132,7 @@ describe Ability, type: :model do
     end
 
     context 'Team' do
-      it { is_expected.to be_able_to(:create, Team) }
+      it { is_expected.not_to be_able_to(:create, Team) }
       it { is_expected.to be_able_to(:read, Team) }
       it { is_expected.to be_able_to(:update, team_owner.team) }
       it { is_expected.not_to be_able_to(:update, team_member.team) }

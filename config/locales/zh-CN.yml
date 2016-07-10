@@ -46,6 +46,7 @@
         title: "标题"
         user_id: "用户"
         node_id: "节点"
+        team_id: "关联到组织"
         body: "正文"
       reply:
         body: "回复内容"

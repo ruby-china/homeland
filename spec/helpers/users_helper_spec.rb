@@ -13,13 +13,18 @@ describe UsersHelper, type: :helper do
 
   describe 'user_name_tag' do
     it 'should result right html in normal' do
-      user = create(:user)
-      expect(helper.user_name_tag(user)).to eq(link_to(user.login, user_path(user.login), 'data-name' => user.name))
+      user = build(:user)
+      expect(helper.user_name_tag(user)).to eq(link_to(user.login, user_path(user.login), class: 'user-name', 'data-name' => user.name))
     end
 
     it 'should result right html with string param and downcase url' do
       login = 'Monster'
-      expect(helper.user_name_tag(login)).to eq(link_to(login, user_path(login), 'data-name' => login))
+      expect(helper.user_name_tag(login)).to eq(link_to(login, user_path(login), class: 'user-name', 'data-name' => login))
+    end
+
+    it 'should out name with Team' do
+      user = build(:team)
+      expect(helper.user_name_tag(user)).to eq(link_to(user.name, user_path(user.login), class: 'team-name', 'data-name' => user.name))
     end
 
     it 'should result empty with nil param' do

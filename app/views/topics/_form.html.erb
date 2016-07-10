@@ -20,6 +20,12 @@
     <%= f.text_area :body, class: "topic-editor form-control closewarning", rows: 20 %>
   </div>
 
+  <% if current_user.team_collection.any? %>
+  <div class='form-group'>
+    <%= f.input :team_id, collection: current_user.team_collection, include_blank: '不要关联组织' %>
+  </div>
+  <% end %>
+
   <div class="form-group">
     <%= f.submit t("common.save"), class: "btn btn-primary col-xs-2", 'data-disable-with' => t("common.saving") %>
 

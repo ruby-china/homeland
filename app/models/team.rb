@@ -2,9 +2,7 @@ class Team < User
   has_many :team_users
   has_many :users, through: :team_users
 
-  %i(topics replies notes).each do |key|
-    has_many key, through: :users, source: key
-  end
+  has_many :topics
 
   attr_accessor :owner_id
   after_create do

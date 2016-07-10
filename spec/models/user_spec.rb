@@ -579,4 +579,19 @@ describe User, type: :model do
       end
     end
   end
+
+  describe '.team_collection' do
+    it 'should work' do
+      team_users = create_list(:team_user, 2, user: user)
+      teams = team_users.collect(&:team).sort
+      expect(user.team_collection.sort).to eq(teams.collect { |t| [t.name, t.id] })
+    end
+
+    it 'should get all with admin' do
+      ids1 = create_list(:team_user, 2, user: user).collect(&:team_id)
+      ids2 = create_list(:team_user, 2, user: user2).collect(&:team_id)
+      expect(user).to receive(:admin?).and_return(true)
+      expect(user.team_collection.collect { |_, id| id }).to include(*(ids1 + ids2))
+    end
+  end
 end

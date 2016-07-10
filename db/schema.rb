@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160707084438) do
+ActiveRecord::Schema.define(version: 20160710111853) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -293,11 +293,13 @@ ActiveRecord::Schema.define(version: 20160707084438) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "closed_at"
+    t.integer  "team_id"
     t.index ["excellent"], name: "index_topics_on_excellent", using: :btree
     t.index ["last_active_mark"], name: "index_topics_on_last_active_mark", using: :btree
     t.index ["likes_count"], name: "index_topics_on_likes_count", using: :btree
     t.index ["node_id"], name: "index_topics_on_node_id", using: :btree
     t.index ["suggested_at"], name: "index_topics_on_suggested_at", using: :btree
+    t.index ["team_id"], name: "index_topics_on_team_id", using: :btree
     t.index ["user_id"], name: "index_topics_on_user_id", using: :btree
   end
 

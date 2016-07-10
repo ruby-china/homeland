@@ -147,6 +147,11 @@
       color: #999;
       font-weight: bold;
     }
+    .user-name { color: $blue; font-size: 13px; }
+    .team-name {
+      font-size: 13px;
+      color: $green;
+    }
     em { font-style:normal; }
 
     .opts {

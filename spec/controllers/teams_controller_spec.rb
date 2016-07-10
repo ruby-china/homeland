@@ -5,8 +5,7 @@ describe TeamsController, type: :controller do
   describe 'index' do
     it 'should work' do
       get :index
-      expect(response).to be_success
-      expect(response.body).to match(/组织/)
+      expect(response.status).to eq 404
     end
   end
 

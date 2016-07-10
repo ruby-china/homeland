@@ -260,14 +260,6 @@ ActiveRecord::Schema.define(version: 20160710111853) do
     t.index ["user_id"], name: "index_team_users_on_user_id", using: :btree
   end
 
-  create_table "test_documents", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "mentioned_user_ids", default: [],              array: true
-    t.text     "body"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
-  end
-
   create_table "topics", force: :cascade do |t|
     t.integer  "user_id",                               null: false
     t.integer  "node_id",                               null: false
@@ -350,13 +342,4 @@ ActiveRecord::Schema.define(version: 20160710111853) do
     t.index ["location"], name: "index_users_on_location", using: :btree
     t.index ["login"], name: "index_users_on_login", using: :btree
   end
-
-  create_table "walking_deads", force: :cascade do |t|
-    t.string   "name"
-    t.string   "tag"
-    t.datetime "deleted_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
 end

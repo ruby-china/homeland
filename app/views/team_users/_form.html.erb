@@ -1,0 +1,36 @@
+<%= simple_form_for @team_user, url: @team_user.new_record? ? user_team_users_path(@team) : user_team_user_path(@team, @team_user) do |f| %>
+  <%= render "shared/error_messages", target: @team_user %>
+
+  <% if @team_user.new_record? %>
+    <%= f.input :login %>
+  <% else %>
+    <div class="form-group">
+      <div class="media">
+        <div class="media-left">
+          <%= user_avatar_tag(@team_user.user, :sm) %>
+        </div>
+        <div class="media-body"><%= user_name_tag(@team_user.user) %></div>
+      </div>
+    </div>
+  <% end %>
+  <%= f.input :role, as: :radio_buttons, collection: TeamUser.roles.keys %>
+
+  <div class="form-group">
+    <% if @team_user.new_record? %>
+      <%= f.submit t("teams.new_team_user"), class: "btn btn-primary btn-block", 'data-disable-with' => t("common.saving") %>
+    <% else %>
+      <div class="row">
+        <div class="col-sm-8">
+          <%= f.submit t("common.save"), class: "btn btn-primary btn-block", 'data-disable-with' => t("common.saving") %>
+        </div>
+        <div class="col-sm-4">
+          <%= link_to t('teams.delete_team_user'),
+                      user_team_user_path(@team, @team_user),
+                      data: { method: 'DELETE', confirm: t('teams.delete_team_user_confirm') },
+                      class: 'btn btn-danger btn-block' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+<% end %>

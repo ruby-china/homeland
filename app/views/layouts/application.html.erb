@@ -51,7 +51,7 @@
 
         <%= render "common/user_nav" %>
 
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav user-bar navbar-right">
           <li class="nav-search hidden-xs hidden-sm">
             <form class="navbar-form form-search active" action="/search" method="GET">
               <div class="form-group">
@@ -68,11 +68,24 @@
           <li class="notification-count">
             <a href="<%= main_app.notifications_path %>" class="<%= badge_class %>" title="通知"><i class="fa fa-bell"></i><span class="count"><%= unread_notify_count %></span></a>
           </li>
+          <li>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+              <i class="fa fa-plus"></i> <span class="caret"></span>
+            </a>
+            <%= render_list class: "dropdown-menu", role: "menu" do |li|
+              li << link_to(t("topics.new_topic"), main_app.new_topic_path)
+              li << link_to(t("notes.new_note"), main_app.new_note_path)
+              li << "<div class='divider'></div>"
+              li << link_to(t("teams.new_team"), main_app.new_team_path)
+            end %>
+          </li>
           <% end %>
         </ul>
       </div>
     </nav>
   </div>
+
+  <%= yield :sub_navbar %>
 
   <div id="main" class="main-container container">
     <%= birthday_tag %>

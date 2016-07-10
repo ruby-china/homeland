@@ -1,0 +1,78 @@
+@import 'vars';
+
+.team-header {
+  background: #fafafa;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-bottom: #d0d1d5;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+
+  .media {
+    .media-left {
+      padding-left: 20px; padding-right: 20px;
+      vertical-align: middle;
+    }
+    .media-right {
+      padding: 0 10px;
+
+      .icons {
+        width: 120px;
+        text-align: right;
+        display: block;
+        padding-top: 13px;
+        a {
+          margin-right: 10px; font-size: 18px; color: #666;
+          &:hover {
+            color: #333;
+          }
+        }
+      }
+    }
+    .media-heading {
+      font-size: 22px;
+      padding-top: 13px;
+      span.location {
+        color: #666;
+        margin-left: 14px; font-weight: normal; font-size: 14px;
+      }
+    }
+  }
+}
+
+.team-menu {
+  border-bottom: 0px;
+  li {
+    a {
+      &:hover {
+        border-bottom: 0px;
+      }
+    }
+  }
+}
+
+.team-sidebar {
+  .members {
+
+  }
+}
+
+.team-users {
+  .table {
+    margin-top: 15px;
+  }
+  tr.team-user {
+    td { padding: 14px; vertical-align: middle; }
+    padding: 14px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    border-bottom: 1px solid #e0e0e0;
+
+    &:last-child { border-bottom: 0px; }
+
+    .avatar { width: 48px; }
+    .name { font-size: 14px; }
+
+    .role  { min-width: 100px;}
+    .buttons { width: 180px; }
+  }
+}

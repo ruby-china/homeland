@@ -22,6 +22,7 @@ class Topic < ApplicationRecord
   attr_accessor :read_state, :admin_editing
 
   belongs_to :user, inverse_of: :topics, counter_cache: true
+  belongs_to :team, counter_cache: true
   belongs_to :node, counter_cache: true
   belongs_to :last_reply_user, class_name: 'User'
   belongs_to :last_reply, class_name: 'Reply'

@@ -5,6 +5,9 @@
       <%= render_node_name(topic.node_name,topic.node_id) %>
        ·
       <%= user_name_tag(topic.user, data: { author: true }) %>
+      <% if topic.team %>
+      for <%= user_name_tag(topic.team) %>
+      <% end %>
        ·
       <%= raw t("common.created_at", time: timeago(topic.created_at))%>
       <% if !topic.last_reply_user_login.blank? %>

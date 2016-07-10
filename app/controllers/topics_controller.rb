@@ -102,6 +102,7 @@ class TopicsController < ApplicationController
     @topic = Topic.new(topic_params)
     @topic.user_id = current_user.id
     @topic.node_id = params[:node] || topic_params[:node_id]
+    @topic.team_id = ability_team_id
 
     if @topic.save
       redirect_to(topic_path(@topic.id), notice: t('topics.create_topic_success'))
@@ -130,6 +131,7 @@ class TopicsController < ApplicationController
         @topic.lock_node = true
       end
     end
+    @topic.team_id = ability_team_id
     @topic.title = topic_params[:title]
     @topic.body = topic_params[:body]
 
@@ -192,7 +194,14 @@ class TopicsController < ApplicationController
   end
 
   def topic_params
-    params.require(:topic).permit(:title, :body, :node_id)
+    params.require(:topic).permit(:title, :body, :node_id, :team_id)
+  end
+
+  def ability_team_id
+    team = Team.find_by_id(topic_params[:team_id])
+    return nil if team.blank?
+    return nil if cannot?(:show, team)
+    team.id
   end
 
   def check_current_user_liked_replies

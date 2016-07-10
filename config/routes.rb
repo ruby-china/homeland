@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     end
   end
   resources :devices
+  resources :teams
 
   root to: 'home#index'
 
@@ -187,6 +188,7 @@ Rails.application.routes.draw do
   constraints(id: /[\w\-\.]*/) do
     resources :users, path: '', as: 'users' do
       member do
+        # User only
         get :topics
         get :replies
         get :favorites
@@ -199,6 +201,13 @@ Rails.application.routes.draw do
         get :followers
         get :following
         get :calendar
+      end
+
+      resources :team_users, path: 'people' do
+        member do
+          post :accept
+          post :reject
+        end
       end
     end
   end

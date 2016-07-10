@@ -1,0 +1,66 @@
+<% title_tag t("teams.edit_team") %>
+
+<%= render '/teams/header' %>
+
+<div class="row">
+  <div class="col-sm-8">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <%= simple_form_for @team do |f| %>
+          <%= render "shared/error_messages", target: @team %>
+
+          <%= f.input :login, placeholder: user_url('xxx').gsub('xxx', ':slug') %>
+          <%= f.input :name %>
+          <%= f.input :email %>
+          <div class="form-group">
+            <div class="checkbox">
+              <label for="user_email_public" class="checkbox"><%= f.check_box :email_public %> <%= t("users.email_permission")%></label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <%= f.input :avatar %>
+            </div>
+            <div class="col-sm-6">
+              <%= user_avatar_tag(@team, :lg, link: false) %>
+            </div>
+          </div>
+          <%= f.input :location %>
+          <div class="form-group">
+            <%= f.label :github, class: 'control-label' %>
+            <div class="input-group">
+              <span class="input-group-addon">https://github.com/</span>
+              <%= f.text_field :github, class: "form-control", placeholder: I18n.t('simple_form.placeholders.user.yourname') %>
+            </div>
+          </div>
+          <div class="form-group">
+            <%= f.label :twitter, class: 'control-label' %>
+            <div class="input-group">
+              <span class="input-group-addon">http://twitter.com/</span>
+              <%= f.text_field :twitter, class: "form-control", placeholder: I18n.t('simple_form.placeholders.user.yourname') %>
+            </div>
+          </div>
+          <%= f.input :website, type: :url, input_html: { placeholder: "http://" } %>
+          <%= f.input :bio, as: :text %>
+
+          <div class="form-group">
+            <%= f.submit t("common.save"), class: "btn btn-primary btn-block", 'data-disable-with' => t("common.saving") %>
+          </div>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-4">
+    <div class="panel">
+      <div class="panel-heading"><%= t('teams.teams')%></div>
+      <ul class="list-group">
+        <li class="list-group-item">公司／组织品牌展示；</li>
+        <li class="list-group-item">独立的组织首页；</li>
+        <li class="list-group-item">汇集成员在社区里面的话题；</li>
+        <li class="list-group-item">为团队招揽人才；</li>
+      </ul>
+    </div>
+  </div>
+</div>

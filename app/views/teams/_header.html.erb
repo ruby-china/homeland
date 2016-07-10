@@ -1,0 +1,44 @@
+<% content_for :sub_navbar do %>
+<div class="sub-navbar team-header">
+  <div class="container">
+    <div class="media">
+      <div class="media-left">
+        <%= user_avatar_tag(@team, :md, link: false) %>
+      </div>
+      <div class="media-body">
+        <h1 class="media-heading">
+          <%= @team.name %>
+          <% if @team.location.present? %>
+            <span class="location"><i class="fa fa-map-marker"></i> <%= @team.location %></span>
+          <% end %>
+        </h1>
+      </div>
+      <div class="media-right">
+        <span class="icons">
+          <% if !@team.website.blank? %>
+            <%= link_to(raw('<i class="fa fa-globe"></i>'), @team.website_url, target: '_blank', rel: 'nofollow') %>
+          <% end %>
+
+          <% if !@team.github.blank? %>
+            <%= link_to(raw('<i class="fa fa-github"></i>'), @team.github_url, target: '_blank', rel: 'nofollow') %>
+          <% end %>
+
+          <% if !@team.twitter.blank? %>
+            <%= link_to raw('<i class="fa fa-twitter"></i>'), @team.twitter_url, class: "twitter", rel: "nofollow" %>
+          <% end %>
+
+          <% if !@team.email.blank? && @team.email_public %>
+            <a href="mailto: <%= @team.email %>"><i class="fa fa-envelope-o"></i></a>
+          <% end %>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+
+<%= render_list class: "nav nav-tabs team-menu" do |li|
+  li << link_to(t("teams.topics"), user_path(@team))
+  li << link_to(t("teams.users"), user_team_users_path(@team))
+  li << link_to(t("teams.settings"), edit_team_path(@team)) if can? :update, @team
+end %>

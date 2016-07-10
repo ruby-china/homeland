@@ -379,13 +379,9 @@ class User < ApplicationRecord
     user = User.find_by_id(user_id)
     return unless user
 
-    github_login = user.github || user.login
-
-    url = "https://api.github.com/users/#{github_login}/repos?type=owner&sort=pushed&client_id=#{Setting.github_token}&client_secret=#{Setting.github_secret}"
+    url = github_repo_api_url
     begin
-      json = Timeout.timeout(10) do
-        open(url).read
-      end
+      json = Timeout.timeout(10) { open(url).read }
     rescue => e
       Rails.logger.error("GitHub Repositiory fetch Error: #{e}")
       $file_store.write(user.github_repositories_cache_key, [], expires_in: 1.minutes)
@@ -405,6 +401,12 @@ class User < ApplicationRecord
     items = items.sort { |a, b| b[:watchers] <=> a[:watchers] }.take(10)
     $file_store.write(user.github_repositories_cache_key, items, expires_in: 15.days)
     items
+  end
+
+  def github_repo_api_url
+    github_login = self.github || self.login
+    resource_name = self.user_type == :team ? 'orgs' : 'users'
+    "https://api.github.com/#{resource_name}/#{github_login}/repos?type=owner&sort=pushed&client_id=#{Setting.github_token}&client_secret=#{Setting.github_secret}"
   end
 
   def block_node(node_id)

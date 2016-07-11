@@ -228,6 +228,11 @@ describe 'markdown' do
         end
       end
 
+      context '@ruby-china in text' do
+        let(:raw) { '@ruby-china' }
+        specify { expect(doc.css('a').first.inner_html).to eq('<i>@</i>ruby-china') }
+      end
+
       context '@small_fish__ in text' do
         let(:raw) { '@small_fish__' }
         specify { expect(doc.css('a').first.inner_html).to eq('<i>@</i>small_fish__') }

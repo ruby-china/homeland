@@ -172,8 +172,8 @@ class MarkdownTopicConverter
     end
   end
 
-  NORMALIZE_USER_REGEXP = /(^|[^a-zA-Z0-9_!#\/\$%&*@＠])@([a-zA-Z0-9_]{1,20})/io
-  LINK_USER_REGEXP      = /(^|[^a-zA-Z0-9_!#\$%&*@＠])@(user[0-9]{1,6})/io
+  NORMALIZE_USER_REGEXP = /(^|[^a-zA-Z0-9\-_!#\/\$%&*@＠])@([a-zA-Z0-9\-_]{1,20})/io
+  LINK_USER_REGEXP      = /(^|[^a-zA-Z0-9\-_!#\$%&*@＠])@(user[0-9]{1,6})/io
 
   # rename user name using incremental id
   def normalize_user_mentions(text)

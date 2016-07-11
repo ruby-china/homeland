@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe TeamsController, type: :controller do
-  let(:user) { create :user }
+  let(:user) { create :wiki_editor }
   describe 'index' do
     it 'should work' do
       get :index

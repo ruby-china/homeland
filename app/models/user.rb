@@ -379,7 +379,7 @@ class User < ApplicationRecord
     user = User.find_by_id(user_id)
     return unless user
 
-    url = github_repo_api_url
+    url = user.github_repo_api_url
     begin
       json = Timeout.timeout(10) { open(url).read }
     rescue => e

@@ -1,7 +1,7 @@
 if ENV['USE_OFFICIAL_GEM_SOURCE']
   source 'https://rubygems.org'
 else
-  source 'https://ruby.taobao.org'
+  source 'https://gems.ruby-china.org'
 end
 
 gem 'rails', '~> 4.2.4'

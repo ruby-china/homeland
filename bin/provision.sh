@@ -11,7 +11,7 @@ sudo apt-get update
 sudo apt-get upgrade -y
 sudo apt-get install -y git redis-server memcached imagemagick mongodb-10gen ruby2.2 ruby2.2-dev nodejs
 
-gem sources --add https://ruby.taobao.org/ --remove https://rubygems.org/
+gem sources --add https://gems.ruby-china.org --remove https://rubygems.org/
 
 sudo gem install bundler
-bundle config mirror.https://rubygems.org https://ruby.taobao.org
+bundle config mirror.https://rubygems.org https://gems.ruby-china.org

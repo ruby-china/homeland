@@ -5,11 +5,11 @@ require 'open-uri'
 class User < ApplicationRecord
   include Redis::Objects
   include BaseModel
-  extend OmniauthCallbacks
+  include OmniauthCallbacks
   include Searchable
   include Redis::Search
 
-  acts_as_cached version: 1, expires_in: 1.week
+  acts_as_cached version: 2, expires_in: 1.week
 
   ALLOW_LOGIN_CHARS_REGEXP = /\A[A-Za-z0-9\-\_\.]+\z/
 
@@ -18,6 +18,7 @@ class User < ApplicationRecord
 
   redis_search title_field: :login,
                alias_field: :name,
+               score_field: :index_score,
                ext_fields: [:large_avatar_url, :name]
 
   mount_uploader :avatar, AvatarUploader
@@ -30,6 +31,8 @@ class User < ApplicationRecord
   has_many :photos
   has_many :oauth_applications, class_name: 'Doorkeeper::Application', as: :owner
   has_many :devices
+  has_many :team_users
+  has_many :teams, through: :team_users
 
   attr_accessor :password_confirmation
 
@@ -55,9 +58,17 @@ class User < ApplicationRecord
 
   scope :hot, -> { order(replies_count: :desc).order(topics_count: :desc) }
   scope :fields_for_list, lambda {
-    select(:id, :name, :login, :email, :email_md5, :email_public, :avatar, :verified, :state,
+    select(:type, :id, :name, :login, :email, :email_md5, :email_public, :avatar, :verified, :state,
            :tagline, :github, :website, :location, :location_id, :twitter, :co)
   }
+
+  def index_score
+    0
+  end
+
+  def user_type
+    (self[:type] || 'User').underscore.to_sym
+  end
 
   def following
     User.where(id: self.following_ids)
@@ -361,24 +372,19 @@ class User < ApplicationRecord
   end
 
   def github_repositories_cache_key
-    "github-repos:#{github}"
+    "github-repos:#{github}:1"
   end
 
   def self.fetch_github_repositories(user_id)
     user = User.find_by_id(user_id)
-    return false if user.blank?
+    return unless user
 
-    github_login = user.github || user.login
-
-    url = "https://api.github.com/users/#{github_login}/repos?type=owner&sort=pushed&client_id=#{Setting.github_token}&client_secret=#{Setting.github_secret}"
+    url = user.github_repo_api_url
     begin
-      json = Timeout.timeout(10) do
-        open(url).read
-      end
+      json = Timeout.timeout(10) { open(url).read }
     rescue => e
       Rails.logger.error("GitHub Repositiory fetch Error: #{e}")
-      items = []
-      $file_store.write(user.github_repositories_cache_key, items, expires_in: 1.minutes)
+      $file_store.write(user.github_repositories_cache_key, [], expires_in: 1.minutes)
       return false
     end
 
@@ -392,9 +398,15 @@ class User < ApplicationRecord
         description: a1['description']
       }
     end
-    items = items.sort_by { |item| item[:watchers] }.take(10)
+    items = items.sort { |a, b| b[:watchers] <=> a[:watchers] }.take(10)
     $file_store.write(user.github_repositories_cache_key, items, expires_in: 15.days)
     items
+  end
+
+  def github_repo_api_url
+    github_login = self.github || self.login
+    resource_name = self.user_type == :team ? 'orgs' : 'users'
+    "https://api.github.com/#{resource_name}/#{github_login}/repos?type=owner&sort=pushed&client_id=#{Setting.github_token}&client_secret=#{Setting.github_secret}"
   end
 
   def block_node(node_id)
@@ -491,9 +503,9 @@ class User < ApplicationRecord
 
   def large_avatar_url
     if self[:avatar].present?
-      self.avatar.url(:large)
+      self.avatar.url(:lg)
     else
-      self.letter_avatar_url(240)
+      self.letter_avatar_url(192)
     end
   end
 
@@ -519,5 +531,19 @@ class User < ApplicationRecord
       end
       timestamps
     end
+  end
+
+  def self.current
+    Thread.current[:current_user]
+  end
+
+  def self.current=(user)
+    Thread.current[:current_user] = user
+  end
+
+  def team_collection
+    return @team_collection if defined? @team_collection
+    teams = self.admin? ? Team.all : self.teams
+    @team_collection = teams.collect { |t| [t.name, t.id] }
   end
 end

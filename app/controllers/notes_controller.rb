@@ -1,27 +1,24 @@
 class NotesController < ApplicationController
-  before_action :require_user
+  before_action :authenticate_user!
   before_action :set_recent_notes, only: [:index, :show, :edit, :new, :create, :update]
   load_and_authorize_resource
 
   def index
     @notes = current_user.notes.recent_updated.paginate(page: params[:page], per_page: 20)
-    set_seo_meta t('menu.notes')
+    fresh_when(@notes)
   end
 
   def show
     @note = Note.find(params[:id])
     @note.hits.incr(1)
-    set_seo_meta("查看 &raquo; #{t('menu.notes')}")
   end
 
   def new
     @note = current_user.notes.build
-    set_seo_meta("新建 &raquo; #{t('menu.notes')}")
   end
 
   def edit
     @note = current_user.notes.find(params[:id])
-    set_seo_meta("修改 &raquo; #{t('menu.notes')}")
   end
 
   def create
@@ -44,7 +41,8 @@ class NotesController < ApplicationController
   end
 
   def preview
-    render plain: MarkdownTopicConverter.convert(params[:body])
+    out = MarkdownTopicConverter.convert(params[:body])
+    render plain: out
   end
 
   def destroy

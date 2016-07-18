@@ -1,1 +1,0 @@
-bundle exec puma -C config/puma-cable.rb cable/config.ru

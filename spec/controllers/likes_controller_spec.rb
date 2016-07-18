@@ -5,11 +5,8 @@ describe LikesController, type: :controller do
   let(:user2) { create(:user) }
   let(:topic) { create(:topic) }
 
-  before(:each) do
-    allow(controller).to receive(:current_user).and_return(user)
-  end
-
   it 'POST /likes' do
+    sign_in user
     post :create, params: { type: 'Topic', id: topic.id }
     expect(response.body).to eq('1')
     expect(topic.reload.likes_count).to eq(1)
@@ -17,25 +14,27 @@ describe LikesController, type: :controller do
     post :create, params: { type: 'Topic', id: topic.id }
     expect(response.body).to eq('1')
     expect(topic.reload.likes_count).to eq(1)
+    sign_out user
 
-    allow(controller).to receive(:current_user).and_return(user2)
+    sign_in user2
     post :create, params: { type: 'Topic', id: topic.id }
     expect(response.body).to eq('2')
     expect(topic.reload.likes_count).to eq(2)
+    sign_out user2
 
-    allow(controller).to receive(:current_user).and_return(user)
+    sign_in user
     delete :destroy, params: { type: 'Topic', id: topic.id }
     expect(response.body).to eq('1')
     expect(topic.reload.likes_count).to eq(1)
+    sign_out user
 
-    allow(controller).to receive(:current_user).and_return(user2)
+    sign_in user2
     delete :destroy, params: { type: 'Topic', id: topic.id }
     expect(response.body).to eq('0')
     expect(topic.reload.likes_count).to eq(0)
   end
 
   it 'require login' do
-    allow(controller).to receive(:current_user).and_return(nil)
     post :create
     expect(response.status).to eq(302)
 
@@ -44,6 +43,7 @@ describe LikesController, type: :controller do
   end
 
   it 'result -1, -2 when params is wrong' do
+    sign_in user
     post :create, params: { type: 'Ask', id: 1 }
     expect(response.body).to eq('-1')
 

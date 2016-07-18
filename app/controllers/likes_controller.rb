@@ -1,6 +1,6 @@
 class LikesController < ApplicationController
-  before_action :require_user
-  before_action :find_likeable
+  before_action :authenticate_user!
+  before_action :set_likeable
 
   def create
     current_user.like(@item)
@@ -14,7 +14,7 @@ class LikesController < ApplicationController
 
   private
 
-  def find_likeable
+  def set_likeable
     @success = false
     @element_id = "likeable_#{params[:type]}_#{params[:id]}"
     unless params[:type].in?(%w(Topic Reply))

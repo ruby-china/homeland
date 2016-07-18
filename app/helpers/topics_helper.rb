@@ -4,15 +4,6 @@ module TopicsHelper
     sanitize_markdown(MarkdownTopicConverter.format(text))
   end
 
-  def topic_use_readed_text(state)
-    case state
-    when true
-      t('topics.have_no_new_reply')
-    else
-      t('topics.has_new_replies')
-    end
-  end
-
   def topic_favorite_tag(topic, opts = {})
     return '' if current_user.blank?
     opts[:class] ||= ''
@@ -59,28 +50,5 @@ module TopicsHelper
   def topic_excellent_tag(topic)
     return '' unless topic.excellent?
     content_tag(:i, '', title: '精华帖', class: 'fa fa-diamond')
-  end
-
-  def render_topic_last_reply_time(topic)
-    l((topic.replied_at || topic.created_at), format: :short)
-  end
-
-  def render_topic_created_at(topic)
-    timeago(topic.created_at, class: 'published')
-  end
-
-  def render_topic_last_be_replied_time(topic)
-    timeago(topic.replied_at)
-  end
-
-  def render_topic_node_select_tag(topic)
-    return if topic.blank?
-    opts = {
-      'data-width' => '140px',
-      'data-live-search' => 'true',
-      class: 'show-menu-arrow'
-    }
-    grouped_collection_select :topic, :node_id, Section.all, :sorted_nodes, :name, :id, :name,
-                              { value: topic.node_id, prompt: '选择节点' }, opts
   end
 end

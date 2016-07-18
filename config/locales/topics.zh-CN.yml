@@ -1,7 +1,6 @@
 "zh-CN":
   topics:
-    title: "发布的话题"
-    create_topic: "新建话题"
+    new_topic: "发布新话题"
     edit_topic: "修改话题"
     no_replies: "暂无回复。"
     recent_topics: "最近发布的话题"
@@ -9,7 +8,6 @@
     check_recent_topics: "查看更多最近发布的话题..."
     reply_this_fllor: "回复此楼"
     tips_for_create_topic: "发帖说明"
-    start_a_new_topic_button: "发布新话题"
     subscribe_with_rss: "订阅 %{name} 社区新话题"
     submit_reply: "提交回复"
     topic_list:
@@ -22,7 +20,6 @@
     create_topic_success: "话题创建成功。"
     delete_topic_success: "话题删除成功。"
     update_topic_success: "话题修改成功。"
-    post_topic: "发帖"
     reply_success: "回复成功。"
     reply_this_floor: "回复此楼"
     add_image: "上传图片"

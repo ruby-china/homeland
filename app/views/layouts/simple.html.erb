@@ -1,28 +1,11 @@
-<!--
-      ____        __             ________    _
-     / __ \__  __/ /_  __  __   / ____/ /_  (_)___  ____ _
-    / /_/ / / / / __ \/ / / /  / /   / __ \/ / __ \/ __ `/
-   / _, _/ /_/ / /_/ / /_/ /  / /___/ / / / / / / / /_/ /
-  /_/ |_|\__,_/_.___/\__, /   \____/_/ /_/_/_/ /_/\__,_/
-                    /____/
-  ========================================================
-                                          ruby-china.org
-
-  App Environments:
-  --------------------------------------------------------
-  Ruby:  <%= RUBY_VERSION %><%= "-p#{RUBY_PATCHLEVEL}" if defined? RUBY_PATCHLEVEL %>
-  Rails: <%= Rails.version %>
--->
 <!DOCTYPE html>
 <html>
 <head>
-  <%= render_page_title %>
   <meta charset='utf-8' />
-  <meta name="keywords" content="<%= @meta_keywords %>" />
-  <meta name="description" content="<%= @meta_description %>" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title><%= yield(:title) || Setting.app_name %></title>
   <meta name="apple-mobile-web-app-capable" content="no">
   <meta content='True' name='HandheldFriendly' />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <link rel="apple-touch-icon-precomposed" href="<%= cached_asset_path("ios-icon.png") %>" />
   <link rel="shortcut icon" href="<%= cached_asset_path("big_logo.png") %>" />
   <%= stylesheet_link_tag_with_cached "front" %>
@@ -38,12 +21,15 @@
           <a href="/" class="navbar-brand"><b>Ruby</b> China</a>
         </div>
 
-        <%= render_list class: "nav navbar-nav" do |li|
-           li << link_to(t("menu.topics"), topics_path)
-           li << link_to(t("menu.wiki"), pages_path) if !mobile?
-           li << link_to(t("menu.jobs"), jobs_path)
-           li << link_to(t("menu.sites"), sites_path) if !mobile?
-        end %>
+        <div id="main-nav-menu">
+          <%= render_list class: "nav navbar-nav" do |li|
+             li << link_to(t("menu.topics"), main_app.topics_path)
+             li << link_to(t("menu.wiki"), main_app.pages_path) if !mobile?
+             li << link_to(t("menu.jobs"), main_app.jobs_path)
+             li << link_to(t("menu.sites"), main_app.sites_path) if !mobile?
+             li << link_to(t("menu.gems"), 'https://gems.ruby-china.org', target: '_blank') if !mobile?
+          end %>
+        </div>
 
         <%= render "common/user_nav" %>
       </div>
@@ -69,7 +55,7 @@
     $('body').animate({ scrollTop: -1 },0);
     </script>
   <% end %>
-  <script type="text/javascript" data-turbolinks-eval=false>
+  <script type="text/javascript" data-turbolinks-eval="false">
     App.root_url = "<%= root_url %>";
     App.asset_url = "<%= Setting.upload_url %>";
     <% if current_user %>

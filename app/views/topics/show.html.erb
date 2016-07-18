@@ -1,3 +1,5 @@
+<% title_tag @topic.title %>
+
 <% content_for :scripts do %>
   <script type="text/javascript">
     Topics.topic_id = <%= @topic.id %>;
@@ -35,7 +37,7 @@
           <i class="fa fa-diamond awesome"></i> 本帖已被设为精华帖！
           <% if admin? %>
           <div class="pull-right">
-            <%= link_to icon_tag("close"), unsuggest_topic_path(@topic.id), data: { confirm: "确定要取消么？", method: "delete" } %>
+            <%= link_to icon_tag("close"), action_topic_path(@topic.id, type: 'unexcellent'), data: { confirm: "确定要取消么？", method: "post" } %>
           </div>
           <% end %>
         </div>
@@ -59,7 +61,7 @@
       </div>
       <div class="items panel-body">
         <%= cache([@topic, "raw:#{@show_raw}"]) do %>
-          <%= render partial: "replies/reply", collection: @replies %>
+          <%= render partial: "/replies/reply", collection: @replies %>
         <% end %>
       </div>
     </div>

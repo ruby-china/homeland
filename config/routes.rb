@@ -1,9 +1,4 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-
-  # Serve websocket cable requests in-process
-  mount ActionCable.server => '/cable'
-
   use_doorkeeper do
     controllers applications: 'oauth/applications', authorized_applications: 'oauth/authorized_applications'
   end
@@ -25,6 +20,7 @@ Rails.application.routes.draw do
     end
   end
   resources :devices
+  resources :teams
 
   root to: 'home#index'
 
@@ -59,11 +55,7 @@ Rails.application.routes.draw do
       delete :unfavorite
       post :follow
       delete :unfollow
-      patch :suggest
-      delete :unsuggest
-      post :ban
-      post :close
-      post :open
+      post :action
     end
     collection do
       get :no_reply
@@ -196,6 +188,7 @@ Rails.application.routes.draw do
   constraints(id: /[\w\-\.]*/) do
     resources :users, path: '', as: 'users' do
       member do
+        # User only
         get :topics
         get :replies
         get :favorites
@@ -208,6 +201,13 @@ Rails.application.routes.draw do
         get :followers
         get :following
         get :calendar
+      end
+
+      resources :team_users, path: 'people' do
+        member do
+          post :accept
+          post :reject
+        end
       end
     end
   end

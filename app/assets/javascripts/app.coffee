@@ -1,8 +1,6 @@
 #= require jquery2
-#= require jquery.turbolinks
 #= require jquery_ujs
 #= require bootstrap.min
-#= require bootstrap-select.min
 #= require underscore
 #= require backbone
 #= require will_paginate
@@ -14,7 +12,8 @@
 #= require jquery.fluidbox.min
 #= require social-share-button
 #= require jquery.atwho
-#= require emoji_list
+#= require emoji-data
+#= require emoji-modal
 #= require notifier
 #= require action_cable
 #= require form_storage
@@ -41,7 +40,6 @@ AppView = Backbone.View.extend
 
   initialize: ->
     FormStorage.restore()
-    Turbolinks.ProgressBar.enable()
     @initForDesktopView()
     @initComponents()
     @initCable()
@@ -59,8 +57,6 @@ AppView = Backbone.View.extend
     $("abbr.timeago").timeago()
     $(".alert").alert()
     $('.dropdown-toggle').dropdown()
-    $('.bootstrap-select').remove()
-    $("select").selectpicker()
 
     # 绑定评论框 Ctrl+Enter 提交事件
     $(".cell_comments_new textarea").unbind "keydown"
@@ -102,6 +98,7 @@ AppView = Backbone.View.extend
       likes_count += 1
       $el.data('count', likes_count)
       @likeableAsLiked($el)
+      $("i.fa", $el).attr("class","fa fa-heart")
     else
       $.ajax
         url : "/likes/#{likeable_id}"
@@ -112,17 +109,17 @@ AppView = Backbone.View.extend
         likes_count -= 1
       $el.data("state","").data('count', likes_count).attr("title", "").removeClass("active")
       if likes_count == 0
-        $('span',$el).text("")
+        $('span', $el).text("")
       else
-        $('span',$el).text("#{likes_count} 个赞")
-      $("i.fa",$el).attr("class","fa fa-thumbs-up")
+        $('span', $el).text("#{likes_count} 个赞")
+      $("i.fa", $el).attr("class","fa fa-heart-o")
     false
 
   likeableAsLiked : (el) ->
     likes_count = el.data("count")
     el.data("state","active").attr("title", "取消赞").addClass("active")
     $('span',el).text("#{likes_count} 个赞")
-    $("i.fa",el).attr("class","fa fa-thumbs-up")
+    $("i.fa",el).attr("class","fa fa-heart")
 
   initCable: () ->
     if !window.notificationChannel && App.isLogined()
@@ -248,6 +245,7 @@ window.App =
   current_user_id: null
   access_token : ''
   asset_url : ''
+  twemoji_url: 'https://twemoji.maxcdn.com/'
   root_url : ''
   cable: ActionCable.createConsumer()
 
@@ -291,6 +289,10 @@ window.App =
       at : "@"
       searchKey: 'login'
       callbacks:
+        filter: (query, data, searchKey) ->
+          return data
+        sorter: (query, items, searchKey) ->
+          return items
         remoteFilter: (query, callback) ->
           $.getJSON '/search/users.json', { q: query }, (data) ->
             callback(data)
@@ -298,12 +300,13 @@ window.App =
       insertTpl : "@${login}"
     .atwho
       at : ":"
+      searchKey: 'code'
       data : window.EMOJI_LIST
-      displayTpl : "<li data-value='${name}:'><img src='#{App.asset_url}/assets/emojis/${name}.png' height='20' width='20'/> ${name} </li>"
-      insertTpl: ":${name}:"
+      displayTpl : "<li data-value='${code}'><img src='#{App.twemoji_url}/svg/${url}.svg' class='twemoji' /> ${code} </li>"
+      insertTpl: "${code}"
     true
 
-$(document).on 'page:change',  ->
+document.addEventListener 'turbolinks:load',  ->
   window._appView = new AppView()
 
 FormStorage.init()

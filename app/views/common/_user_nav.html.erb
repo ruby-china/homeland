@@ -1,13 +1,15 @@
 <ul class="nav user-bar navbar-nav navbar-right">
   <% if current_user %>
-  <li class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%= current_user.login %> <span class="caret"></span></a>
+  <li class="dropdown dropdown-avatar">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+      <%= user_avatar_tag(current_user, :sm, link: false) %> <span class="caret"></span>
+    </a>
     <button class="navbar-toggle" type="button" data-toggle="dropdown" role="button" aria-expanded="false">
       <span class="sr-only">Toggle</span>
       <i class="fa fa-reorder"></i>
     </button>
     <%= render_list class: "dropdown-menu", role: "menu" do |li|
-      li << link_to(t("menu.my_home_page"), main_app.user_path(current_user) )
+      li << link_to(current_user.login, main_app.user_path(current_user) )
       li << "<div class='divider'></div>"
       li << link_to(t("menu.edit_account_path"), main_app.edit_user_registration_path)
       li << link_to(t("menu.notes"), main_app.notes_path )

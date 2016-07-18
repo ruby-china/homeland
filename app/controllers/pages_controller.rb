@@ -1,17 +1,15 @@
 class PagesController < ApplicationController
   authorize_resource :page
 
-  def index
-    set_seo_meta('Wiki')
+  etag { Setting.wiki_sidebar_html }
 
-    fresh_when(etag: [Setting.wiki_index_html])
+  def index
+    fresh_when(Setting.wiki_index_html)
   end
 
   def recent
     @pages = Page.recent.paginate(page: params[:page], per_page: 30)
-    set_seo_meta t('pages.wiki_index')
-
-    fresh_when(etag: [@pages])
+    fresh_when(@pages)
   end
 
   def show
@@ -25,9 +23,7 @@ class PagesController < ApplicationController
       redirect_to new_page_path(title: params[:id]), notice: 'Page not Found, Please create a new page'
       return
     end
-
-    set_seo_meta("#{@page.title} - Wiki")
-    fresh_when(etag: [@page, @page.comments_count])
+    fresh_when(@page)
   end
 
   def comments
@@ -38,7 +34,6 @@ class PagesController < ApplicationController
   def new
     @page = Page.new
     @page.slug = params[:title]
-    set_seo_meta t('pages.new_wiki_page')
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @page }
@@ -47,7 +42,6 @@ class PagesController < ApplicationController
 
   def edit
     @page = Page.find_by_slug(params[:id])
-    set_seo_meta t('pages.edit_wiki_page')
   end
 
   def create

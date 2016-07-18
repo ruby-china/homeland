@@ -1,5 +1,5 @@
-<% cache(["index_locations",CacheVersion.section_node_updated_at]) do %>
-<div id="sections" class="panel panel-default">
+<% cache(["index_locations", CacheVersion.section_node_updated_at]) do %>
+<div class="index-sections panel panel-default">
   <div class="panel-heading"><%= t("common.index_node_navigation")%></div>
   <div class="panel-body">
     <div class="row node-list">
@@ -8,7 +8,7 @@
         <label class="media-left"><%= section.name %></label>
         <span class="nodes media-body">
           <% section.nodes.each do |node| %>
-              <span class="name"><%= link_to(node.name, node_topics_path(node), title: node.name )%></span>
+            <span class="name"><%= link_to(node.name, node_topics_path(node), title: node.name, data: { id: node.id })%></span>
           <% end %>
         </span>
       </div>

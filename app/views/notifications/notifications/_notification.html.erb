@@ -9,7 +9,7 @@
     <%= render partial: "/notifications/#{notification.notify_type}", locals: { notification: notification } %>
   </div>
   <div class="media-right">
-    <%= l notification.created_at, format: :short %>
+    <%= notification.created_at.strftime('%H:%M') %>
   </div>
 </div>
 <% end %>

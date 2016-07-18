@@ -1,7 +1,7 @@
 <% if !node.blank? %>
   <div class="node-info">
     <div class="name">
-      <strong><%= node.name %></strong> <span class="total">共有 <%= render_node_topics_count(node) %> 个讨论主题</span>
+      <strong><%= node.name %></strong> <span class="total">共有 <%= node.topics_count %> 个讨论主题</span>
       <div class="pull-right">
         <%= block_node_tag(node) %>
       </div>

@@ -67,6 +67,7 @@
     has_deleted: 已删除
     auth_with_other_services: "用其他平台的帐号登录"
     captcha: '验证码'
+    search_result: '搜索结果'
   reply:
     edit_reply: "修改回帖"
     delete_reply_success: '回帖删除成功.'
@@ -90,6 +91,7 @@
     my_home_page: "我的主页"
     edit_account_path: "个人资料设置"
     likes: "我的收藏"
+    teams: '公司／组织'
   comments:
     create_comment: "发表评论"
     no_comment: "暂无评论"
@@ -114,7 +116,8 @@
     before_topic_html: "话题正文前面的 HTML"
     after_topic_html: "话题后面的 HTML"
     footer_html: "页脚 HTML"
-    wiki_index_html: "WIKI 首页 HTMl"
+    wiki_index_html: "WIKI 首页 HTML"
+    wiki_sidebar_html: "WIKI 边栏 HTML"
     index_html: "网站首页 HTML"
     tips: "随机显示的小帖士（一行一个）"
     ban_words_on_reply: "回帖禁止内容（一行一个）"

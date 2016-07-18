@@ -1,7 +1,9 @@
+<% title_tag t("users.personal_information") %>
+
 <div class="row">
   <div class="col-md-9">
     <div class="panel panel-default">
-      <div class="panel-heading"><%= t("users.personal_information")%></div>
+      <div class="panel-heading"><%= t("users.personal_information") %></div>
       <div class="panel-body">
         <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, enctype:  "multipart/form-data" }) do |f| %>
         <%= render "shared/error_messages", target: resource if params[:by].blank? %>
@@ -57,7 +59,7 @@
   <div class="sidebar col-md-3">
     <div class="panel panel-default" style="text-align:center;">
       <div class="panel-body">
-        <%= user_avatar_tag(@user, :large, link: false, timestamp: true) %>
+        <%= user_avatar_tag(@user, :lg, link: false, timestamp: true) %>
       </div>
     </div>
     <div class="panel panel-default">

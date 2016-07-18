@@ -1,0 +1,15 @@
+<tr class="team-user media clearfix" data-id="<%= team_user.id %>">
+  <td class="avatar"><%= user_avatar_tag(team_user.user, :sm, link: false) %></div>
+  <td class="name">
+    <%= user_name_tag(team_user.user) %>
+    <%= team_user&.user&.name %>
+  </td>
+  <td class="role">
+    <%= team_user.pendding? ? team_user.status_name : team_user.role_name %>
+  </div>
+  <td class="buttons">
+    <% if can? :update, @team && team_user.user_id != current_user&.id %>
+      <%= link_to icon_tag('pencil'), edit_user_team_user_path(@team, team_user), class: 'btn btn-default' %>
+    <% end %>
+  </td>
+</tr>

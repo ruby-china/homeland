@@ -26,12 +26,12 @@ module APIV3Support
     # 覆盖 get, post .. 方法，让他们自己带上登录信息
     [:get, :post, :put, :delete, :head].each do |method|
       class_eval <<-EOV
-      def #{method}(path, parameters = nil, headers = nil)
-        # override empty params and headers with default
-        parameters = combine_parameters(parameters, default_parameters)
-        headers = combine_parameters(headers, default_headers)
-        super(path, params: parameters, headers: headers)
-      end
+        def #{method}(path, parameters = nil, headers = nil)
+          # override empty params and headers with default
+          parameters = combine_parameters(parameters, default_parameters)
+          headers = combine_parameters(headers, default_headers)
+          super(path, params: parameters, headers: headers)
+        end
       EOV
     end
 

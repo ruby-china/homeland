@@ -5,20 +5,23 @@ class Reply < ApplicationRecord
   include MarkdownBody
   include Likeable
   include Mentionable
+  include MentionTopic
 
   UPVOTES = %w(+1 :+1: :thumbsup: :plus1: 👍 👍🏻 👍🏼 👍🏽 👍🏾 👍🏿)
 
   belongs_to :user, counter_cache: true
-  belongs_to :topic, touch: true, counter_cache: true
+  belongs_to :topic, touch: true
+  belongs_to :target, polymorphic: true
 
   delegate :title, to: :topic, prefix: true, allow_nil: true
   delegate :login, to: :user, prefix: true, allow_nil: true
 
+  scope :without_system, -> { where(action: nil) }
   scope :fields_for_list, -> { select(:topic_id, :id, :body_html, :updated_at, :created_at) }
   scope :without_body, -> { select(column_names - ['body']) }
 
-  validates :body, presence: true
-  validates :body, uniqueness: { scope: [:topic_id, :user_id], message: '不能重复提交。' }
+  validates :body, presence: true, unless: -> { system_event? }
+  validates :body, uniqueness: { scope: [:topic_id, :user_id], message: '不能重复提交。' }, unless: -> { system_event? }
   validate do
     ban_words = (Setting.ban_words_on_reply || '').split("\n").collect(&:strip)
     if body.strip.downcase.in?(ban_words)
@@ -26,7 +29,7 @@ class Reply < ApplicationRecord
     end
   end
 
-  after_commit :update_parent_topic, on: :create
+  after_commit :update_parent_topic, on: :create, unless: -> { system_event? }
   def update_parent_topic
     topic.update_last_reply(self) if topic.present?
   end
@@ -41,12 +44,12 @@ class Reply < ApplicationRecord
     end
   end
 
-  after_commit :async_create_reply_notify, on: :create
+  after_commit :async_create_reply_notify, on: :create, unless: -> { system_event? }
   def async_create_reply_notify
     NotifyReplyJob.perform_later(id)
   end
 
-  after_commit :check_vote_chars_for_like_topic, on: :create
+  after_commit :check_vote_chars_for_like_topic, on: :create, unless: -> { system_event? }
   def check_vote_chars_for_like_topic
     return unless self.upvote?
     user.like(topic)
@@ -55,6 +58,7 @@ class Reply < ApplicationRecord
   def self.notify_reply_created(reply_id)
     reply = Reply.find_by_id(reply_id)
     return if reply.blank?
+    return if reply.system_event?
     topic = Topic.find_by_id(reply.topic_id)
     return if topic.blank?
 
@@ -107,12 +111,25 @@ class Reply < ApplicationRecord
   end
 
   def upvote?
-    body.strip.start_with?(*UPVOTES)
+    (body || '').strip.start_with?(*UPVOTES)
   end
 
   def destroy
     super
     Notification.where(notify_type: 'topic_reply', target: self).delete_all
     delete_notifiaction_mentions
+  end
+
+  # 是否是系统事件
+  def system_event?
+    action.present?
+  end
+
+  def self.create_system_event(opts = {})
+    opts[:body] = ''
+    opts[:user] ||= User.current
+    return false if opts[:action].blank?
+    return false if opts[:user].blank?
+    self.create(opts)
   end
 end

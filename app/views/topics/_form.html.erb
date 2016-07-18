@@ -1,16 +1,17 @@
+<%= render 'node_selector', node: @topic.node %>
+
 <%= simple_form_for @topic, html: { class: "form" } do |f| %>
   <%= render "shared/error_messages", target: @topic %>
+  <%= f.hidden_field :node_id %>
+
   <div class="form-group">
-    <% if can? :change_node, @topic %>
-      <div class="input-group">
-        <span class="node-select input-group-btn">
-          <%= render_topic_node_select_tag(@topic) %>
-        </span>
-        <%= f.text_field :title, class: "form-control", placeholder: "在这里填写标题" %>
+    <div class="input-group">
+      <div class="input-group-btn">
+        <button type="button" class="btn btn-default" id="node-selector-button"
+                data-toggle="modal" data-target="#node-selector"><%= @topic.node&.name || '选择节点...' %></button>
       </div>
-    <% else %>
       <%= f.text_field :title, class: "form-control", placeholder: "在这里填写标题" %>
-    <% end %>
+    </div>
   </div>
 
   <%= render "editor_toolbar" %>
@@ -18,6 +19,12 @@
   <div class="form-group">
     <%= f.text_area :body, class: "topic-editor form-control closewarning", rows: 20 %>
   </div>
+
+  <% if current_user.team_collection.any? %>
+  <div class='form-group'>
+    <%= f.input :team_id, collection: current_user.team_collection, include_blank: '不要关联组织' %>
+  </div>
+  <% end %>
 
   <div class="form-group">
     <%= f.submit t("common.save"), class: "btn btn-primary col-xs-2", 'data-disable-with' => t("common.saving") %>

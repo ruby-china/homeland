@@ -3,7 +3,6 @@ class SitesController < ApplicationController
 
   def index
     @site_nodes = SiteNode.all.order(sort: :desc)
-    set_seo_meta("Ruby #{t('menu.sites')}")
   end
 
   def new

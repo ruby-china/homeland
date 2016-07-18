@@ -1,12 +1,13 @@
 <div class="editor-toolbar">
   <div class="opts pull-right">
+    <a href="#" class="pickup-emoji"><i class="fa fa-smile-o"></i></a>
     <span class="dropdown dropdown-small" id="editor-toolbar-insert-code">
       <a href="#editor-toolbar-insert-code" data-toggle="dropdown" title="<%= t("topics.insert_codes") %>" href="#editor-toolbar-insert-code"><i class="fa fa-code"></i></a>
       <ul class="dropdown-menu insert-codes" role="menu">
         <%= insert_code_menu_items_tag %>
       </ul>
     </span>
-    <%= link_to(icon_tag("fa fa-image"), "#", id: "topic-upload-image", rel: "twipsy", title: t("topics.add_image") )%>
+    <%= link_to(icon_tag("image"), "#", id: "topic-upload-image", rel: "twipsy", title: t("topics.add_image") )%>
   </div>
   <ul class="nav nav-pills" style="clear:none;">
     <li class="edit active"><%= link_to(t("common.editor_toolbar_edit"), "#") %></li>

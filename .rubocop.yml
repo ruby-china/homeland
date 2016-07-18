@@ -3,6 +3,7 @@ AllCops:
     Enabled: true
   Exclude:
     - 'lib/templates/**/*'
+  TargetRubyVersion: 2.3
 
 Style/Documentation:
   Enabled: false

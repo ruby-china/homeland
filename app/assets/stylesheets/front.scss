@@ -6,6 +6,7 @@
  *= require users
  *= require pages
  *= require notes
+ *= require teams
  *= require search
  *= require_self
  */
@@ -146,6 +147,11 @@
       color: #999;
       font-weight: bold;
     }
+    .user-name { color: $blue; font-size: 13px; }
+    .team-name {
+      font-size: 13px;
+      color: $green;
+    }
     em { font-style:normal; }
 
     .opts {
@@ -159,13 +165,16 @@
 
 #topic-sidebar {
   position: fixed;
+  display: none;
   width: 260px;
 
-  @media (min-width: 992px) {
+  @media (min-width: 960px) {
+    display: block;
     width: 242px;
   }
 
   @media (min-width: 1200px) {
+    display: block;
    width: 292px;
   }
 
@@ -181,7 +190,7 @@
       a:hover { background: rgba(0, 0, 0, 0.03); }
       i.fa { display: block; font-size: 40px;  margin-bottom: 10px; color: #666; }
       a.active {
-        i.fa { color: #DC3030; }
+        i.fa { color: #e76f3c; }
       }
     }
   }
@@ -215,6 +224,20 @@
     position: relative;
     border-bottom: 1px solid #eee;
     padding-left: 74px;
+    &.reply-system,
+    &.reply-deleted {
+      padding: 8px 15px;
+      font-size: 12px;
+      color: #666;
+      border-bottom: 1px solid #F0F0F0;
+
+      img.media-object {
+        border-radius: 180px;
+        display: inline-block; margin-right: 3px; vertical-align: text-bottom;
+      }
+
+      .time { margin-left: 4px; color: #aaa; }
+    }
     .infos { min-height: 48px; }
     .avatar { position: absolute; top: 15px; left: 15px; }
     &:last-child {
@@ -239,6 +262,25 @@
       font-size: 12px;
       .reply-floor { color: #7AA87A; }
     }
+
+    .opts {
+      a {
+        display: inline-block;
+        vertical-align: baseline;
+        line-height: 22px;
+        padding: 2px 5px;
+        height: 22px;
+        min-width: 22px;
+        text-align: center;
+      }
+    }
+
+    @media (min-width: 1026px) {
+      .hideable { display: none; }
+    }
+    &:hover {
+      .hideable { display: inline-block; }
+    }
   }
 
   @media (max-width: 480px) {
@@ -246,6 +288,12 @@
       padding-left: 57px;
     }
   }
+}
+
+#node-selector {
+  .panel { box-shadow: 0 0 0; padding: 0; margin: 0; }
+  .panel-heading { display: none; }
+  .panel-body { padding: 0 20px; margin: 0; }
 }
 
 #notifications {
@@ -492,6 +540,7 @@
   a.zoom-image { cursor: zoom-in; }
   a.at_floor { color: #60B566 !important; }
   a.at_user { color: #0069D6 !important; }
+  img.twemoji { width: 20px; }
 }
 
 
@@ -539,3 +588,45 @@ footer {
 
 .dz-preview { display: none; }
 textarea.div-dropzone-focus { border-color: #BBE1C9; background: #fafafa; }
+
+.emoji-modal {
+  .modal-dialog {
+    max-width: 496px;
+    .close { margin-top: 0px; }
+  }
+  .modal-header { border: 0px; padding: 8px; }
+  .modal-body { padding: 0 8px 8px 8px; }
+  .twemoji { width: 20px; height: 20px; }
+
+  .nav > li > a {
+    padding: 5px 8px;
+  }
+
+  .nav-tabs li:first-child { margin-left: 8px; }
+
+  .tab-pane {
+    padding: 0px;
+    height: 180px;
+    overflow: scroll;
+
+    &::-webkit-scrollbar {
+      width: 4px;
+      border-radius: 3px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #e0e0e0;
+    }
+
+    a {
+      padding: 5px;
+      display: inline-block; width: 30px; height: 30px;
+      &:hover { background: #f0f0f0; }
+    }
+  }
+  .modal-footer {
+    padding: 8px;
+    text-align: left;
+    font-size: 16px;
+    .emoji { width: 48px; height: 48px; margin-right: 10px; }
+  }
+}

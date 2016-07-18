@@ -1,8 +1,9 @@
+<% title_tag t('menu.notes') %>
 <div class="row">
   <div class="col-md-9">
     <div id="notes" class="panel panel-default">
       <div class="panel-heading">
-        我的记事本
+        <%= t('menu.notes') %>
         <span class="total pull-right">
         已有 <%= current_user.notes.count %> 条 Note
         </span>

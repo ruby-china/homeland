@@ -1,3 +1,8 @@
+<% title_tag(@page_title || t('menu.topics')) %>
+
+<!-- @suggest_topics maybe nil or ActiveRecord::Relation, but we need an array -->
+<% @suggest_topics = @suggest_topics.to_a %>
+
 <div class="row">
   <div class="col-md-9">
     <div class="topics panel panel-default">
@@ -7,14 +12,10 @@
 
       <div class="panel-body">
         <% if @topics.current_page == 1 %>
-          <% cache(['suggest_topics', @suggest_topics.to_a]) do %>
-            <%= render partial: "topics/topic", collection: @suggest_topics, locals: { suggest: true } %>
-          <% end %>
+          <%= render partial: '/topics/topic', collection: @suggest_topics, locals: { suggest: true }, cached: -> (topic) { [topic, 'suggest'] } %>
         <% end %>
 
-        <% cache(['topics', @topics.to_a]) do %>
-          <%= render @topics, suggest: false %>
-        <% end %>
+        <%= render partial: '/topics/topic', collection: @topics, locals: { suggest: false }, cached: -> (topic) { [topic, 'normal'] } %>
       </div>
 
       <div class="panel-footer clearfix">
@@ -30,7 +31,7 @@
 
     <% if current_user %>
     <script type="text/javascript">
-      var readed_topic_ids = <%= current_user.filter_readed_topics(@topics + (@suggest_topics || [])) %>;
+      var readed_topic_ids = <%= current_user.filter_readed_topics(@topics + @suggest_topics) %>;
       for (var i = 0; i < readed_topic_ids.length; i++) {
         topic_id = readed_topic_ids[i];
         $(".topic-"+ topic_id + " .count a").addClass("state-true");

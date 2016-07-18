@@ -60,6 +60,8 @@ module RubyChina
     config.active_job.queue_adapter = :sidekiq
 
     config.middleware.use Rack::Attack
+
+    config.action_cable.mount_path = '/cable'
   end
 end
 
@@ -69,7 +71,5 @@ $memory_store = ActiveSupport::Cache::MemoryStore.new
 $file_store = ActiveSupport::Cache::FileStore.new(Rails.root.join('tmp/cache'))
 
 I18n.config.enforce_available_locales = false
-I18n.locale = 'zh-CN'
-# GC::Profiler.enable
 
 ActiveModelSerializers.config.adapter = :json

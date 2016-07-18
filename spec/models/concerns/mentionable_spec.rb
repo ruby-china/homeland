@@ -15,6 +15,12 @@ class TestDocument < ApplicationRecord
 end
 
 describe Mentionable, type: :model do
+  it 'should work with chars' do
+    user = create :user, login: 'foo-bar_12'
+    doc = TestDocument.create body: "@#{user.login}", user: create(:user)
+    expect(doc.mentioned_user_logins).to eq([user.login])
+  end
+
   it 'should extract mentioned user ids' do
     user = create :user
     doc = TestDocument.create body: "@#{user.login}", user: create(:user)

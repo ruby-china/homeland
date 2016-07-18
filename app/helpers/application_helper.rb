@@ -24,30 +24,6 @@ module ApplicationHelper
     flash_messages.join("\n").html_safe
   end
 
-  def controller_stylesheet_link_tag
-    fname = ''
-    case controller_name
-    when 'users', 'home', 'topics', 'pages', 'notes'
-      fname = "#{controller_name}.css"
-    when 'replies'
-      fname = 'topics.css'
-    end
-    return '' if fname.blank?
-    raw %(<link href="#{asset_path(fname)}" rel="stylesheet" data-turbolinks-track />)
-  end
-
-  def controller_javascript_include_tag
-    fname = ''
-    case controller_name
-    when 'pages', 'topics', 'notes'
-      fname = "#{controller_name}.js"
-    when 'replies'
-      fname = 'topics.js'
-    end
-    return '' if fname.blank?
-    raw %(<script src="#{asset_path(fname)}" data-turbolinks-track></script>)
-  end
-
   def admin?(user = nil)
     user ||= current_user
     user.try(:admin?)
@@ -73,18 +49,8 @@ module ApplicationHelper
     content_tag(:abbr, EMPTY_STRING, class: options[:class], title: time.iso8601) if time
   end
 
-  def render_page_title
-    site_name = Setting.app_name
-    title = @page_title ? "#{@page_title} &raquo; #{site_name}" : site_name
-    content_tag('title', title, nil, false)
-  end
-
-  # 去除区域里面的内容的换行标记
-  def spaceless(&block)
-    data = with_output_buffer(&block)
-    data = data.gsub(/\n\s+/, EMPTY_STRING)
-    data = data.gsub(/>\s+</, '><')
-    sanitize data
+  def title_tag(str)
+    content_for :title, raw("#{str} · #{Setting.app_name}")
   end
 
   MOBILE_USER_AGENTS = 'palm|blackberry|nokia|phone|midp|mobi|symbian|chtml|ericsson|minimo|' \
@@ -151,13 +117,13 @@ module ApplicationHelper
 
   def stylesheet_link_tag_with_cached(name)
     memory_cache('stylesheets_link_tag', name) do
-      stylesheet_link_tag(name, 'data-turbolinks-track' => true)
+      stylesheet_link_tag(name, 'data-turbolinks-track' => 'reload')
     end
   end
 
   def javascript_include_tag_with_cached(name)
     memory_cache('javascript_include_tag', name) do
-      javascript_include_tag(name, 'data-turbolinks-track' => true)
+      javascript_include_tag(name, 'data-turbolinks-track' => 'reload')
     end
   end
 

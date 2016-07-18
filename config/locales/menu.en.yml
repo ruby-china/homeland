@@ -65,6 +65,7 @@
     has_deleted: "has deleted"
     auth_with_other_services: "Sign in with other services"
     captcha: 'Captcha'
+    search_result: 'Search results'
   reply:
     edit_reply: "Edit Reply"
     delete_reply_success: 'Delete successfully.'

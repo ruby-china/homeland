@@ -7,51 +7,43 @@ module UsersHelper
     return '匿名'.freeze if user.blank?
 
     if user.is_a? String
+      user_type = :user
       login = user
       name  = login
     else
-      login = user.login
+      user_type = user.user_type
+      login = user_type == :team ? user.name : user.login
       name  = user.name
     end
 
     name ||= login
+    options[:class] ||= "#{user_type}-name"
     options['data-name'.freeze] = name
 
-    link_to(login, main_app.user_path(login), options)
+    link_to(login, main_app.user_path(user), options)
   end
 
   def user_avatar_width_for_size(size)
     case size
-    when :normal then 48
-    when :small  then 16
-    when :large  then 96
-    when :big    then 120
+    when :xs then 16
+    when :sm then 32
+    when :md then 48
+    when :lg then 96
     else size
     end
   end
 
-  def user_avatar_size_name_for_2x(size)
-    case size
-    when :normal then :large
-    when :small  then :normal
-    when :large  then :big
-    when :big    then :big
-    else size
-    end
-  end
-
-  def user_avatar_tag(user, size = :normal, opts = {})
-    width = user_avatar_width_for_size(size)
+  def user_avatar_tag(user, version = :md, opts = {})
+    width = user_avatar_width_for_size(version)
     img_class = "media-object avatar-#{width}"
 
     if user.blank?
-      # hash = Digest::MD5.hexdigest("") => d41d8cd98f00b204e9800998ecf8427e
-      return image_tag("avatar/#{size}.png", class: img_class)
+      return image_tag("avatar/#{version}.png", class: img_class)
     end
 
     img =
       if user.avatar?
-        image_url = user.avatar.url(user_avatar_size_name_for_2x(size))
+        image_url = user.avatar.url(version)
         image_url += "?t=#{user.updated_at.to_i}" if opts[:timestamp]
         image_tag(image_url, class: img_class)
       else

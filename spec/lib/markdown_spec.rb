@@ -228,6 +228,11 @@ describe 'markdown' do
         end
       end
 
+      context '@ruby-china in text' do
+        let(:raw) { '@ruby-china' }
+        specify { expect(doc.css('a').first.inner_html).to eq('<i>@</i>ruby-china') }
+      end
+
       context '@small_fish__ in text' do
         let(:raw) { '@small_fish__' }
         specify { expect(doc.css('a').first.inner_html).to eq('<i>@</i>small_fish__') }
@@ -379,12 +384,12 @@ describe 'markdown' do
 
           describe '[:src]' do
             subject { super()[:src] }
-            it { is_expected.to eq("#{upload_url}/assets/emojis/apple.png") }
+            it { is_expected.to eq("https://twemoji.b0.upaiyun.com/2/svg/1f34e.svg") }
           end
 
           describe '[:class]' do
             subject { super()[:class] }
-            it { is_expected.to eq('emoji') }
+            it { is_expected.to eq('twemoji') }
           end
 
           describe '[:title]' do
@@ -469,7 +474,7 @@ describe 'markdown' do
 | cell 3   | cell 4   |)
       end
 
-      it { expect(doc.inner_html).to eq "<table class=\"table table-bordered table-striped\">\n<tr>\n<th>header 1</th>\n<th>header 3</th>\n</tr>\n<tr>\n<td>cell 1</td>\n<td>cell 2</td>\n</tr>\n<tr>\n<td>cell 3</td>\n<td>cell 4</td>\n</tr>\n</table>" }
+      it { expect(doc.inner_html).to eq "<div class=\"table-responsive\"><table class=\"table table-bordered table-striped\">\n<tr>\n<th>header 1</th>\n<th>header 3</th>\n</tr>\n<tr>\n<td>cell 1</td>\n<td>cell 2</td>\n</tr>\n<tr>\n<td>cell 3</td>\n<td>cell 4</td>\n</tr>\n</table></div>" }
     end
 
     describe 'Escape HTML tags' do
@@ -595,7 +600,6 @@ end
 </blockquote>
 <h2 id="Syntax Guide - Heading 2">Syntax Guide - Heading 2</h2><h3 id="Strong and Emphasize - Heading 3">Strong and Emphasize - Heading 3</h3><h4 id="Heading 4">Heading 4</h4><h5 id="Heading 5">Heading 5</h5><h6 id="Heading 6">Heading 6</h6><pre class="highlight plaintext"><code>*emphasize*    **strong**
 _emphasize_    __strong__</code></pre>
-
 <hr>
 
 <p><strong>Shortcuts</strong></p>
@@ -641,7 +645,7 @@ _emphasize_    __strong__</code></pre>
 <li>Ruby</li>
 <li>Go</li>
 </ol>
-<h3 id="Tables">Tables</h3><table class="table table-bordered table-striped">
+<h3 id="Tables">Tables</h3><div class="table-responsive"><table class="table table-bordered table-striped">
 <tr>
 <th>header 1</th>
 <th>header 3</th>
@@ -654,7 +658,7 @@ _emphasize_    __strong__</code></pre>
 <td>cell 3</td>
 <td>cell 4</td>
 </tr>
-</table><h3 id="Links">Links</h3>
+</table></div><h3 id="Links">Links</h3>
 <p>Inline links:</p>
 
 <p><a href="http://url.com/" title="title" target="_blank">link text</a><br>

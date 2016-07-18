@@ -1,0 +1,19 @@
+<% title_tag t("teams.show_team_user") %>
+<%= render '/teams/header' %>
+
+<div class="panel team-users">
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-6 col-sm-offset-3 text-center">
+        <h3><%= t("teams.show_team_user") %></h3>
+        <p class="text-info" style="padding: 10px 0;">
+          你是否要接受邀请加入 <strong><%= user_name_tag(@team) %></strong>？
+        </p>
+        <div class="buttons">
+          <%= link_to t('teams.accept_team_user'), accept_user_team_user_path(@team, @team_user), data: { method: 'POST' }, class: 'btn btn-primary' %>
+          <%= link_to t('teams.reject_team_user'), reject_user_team_user_path(@team, @team_user), data: { method: 'POST' }, class: 'btn btn-default' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

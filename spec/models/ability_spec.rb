@@ -18,6 +18,8 @@ describe Ability, type: :model do
     it { is_expected.to be_able_to(:manage, Note) }
     it { is_expected.to be_able_to(:manage, Photo) }
     it { is_expected.to be_able_to(:manage, Comment) }
+    it { is_expected.to be_able_to(:manage, Team) }
+    it { is_expected.to be_able_to(:manage, TeamUser) }
   end
 
   context 'Wiki Editor manage wiki' do
@@ -31,6 +33,7 @@ describe Ability, type: :model do
     it { is_expected.to be_able_to(:create, Page) }
     it { is_expected.to be_able_to(:update, Page) }
     it { is_expected.not_to be_able_to(:update, page_locked) }
+    it { is_expected.to be_able_to(:create, Team) }
   end
 
   context 'Site editor users' do
@@ -51,6 +54,8 @@ describe Ability, type: :model do
     let(:reply) { create :reply, user: user }
     let(:note) { create :note, user: user }
     let(:comment) { create :comment, user: user }
+    let(:team_owner) { create :team_owner, user: user }
+    let(:team_member) { create :team_member, user: user }
     let(:note_publish) { create :note, publish: true }
 
     let(:ability) { Ability.new(user) }
@@ -124,6 +129,20 @@ describe Ability, type: :model do
       it { is_expected.to be_able_to(:read, Comment) }
       it { is_expected.to be_able_to(:update, comment) }
       it { is_expected.to be_able_to(:destroy, comment) }
+    end
+
+    context 'Team' do
+      it { is_expected.not_to be_able_to(:create, Team) }
+      it { is_expected.to be_able_to(:read, Team) }
+      it { is_expected.to be_able_to(:update, team_owner.team) }
+      it { is_expected.not_to be_able_to(:update, team_member.team) }
+      it { is_expected.to be_able_to(:destroy, team_owner.team) }
+      it { is_expected.not_to be_able_to(:destroy, team_member.team) }
+    end
+
+    context 'TeamUser' do
+      it { is_expected.to be_able_to(:accept, team_member) }
+      it { is_expected.to be_able_to(:reject, team_member) }
     end
   end
 

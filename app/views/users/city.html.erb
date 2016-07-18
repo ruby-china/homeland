@@ -1,3 +1,5 @@
+<% title_tag @location.name %>
+
 <div id="users" class="box">
   <div id="hot_users" class="panel panel-default user-list">
     <div class="panel-heading"><%= @location.name %>的会员</div>
@@ -5,7 +7,7 @@
       <% if !@users.blank? %>
       <% @users.each do |item| %>
       <div class="user col-sm-1">
-        <div class="avatar"><%= user_avatar_tag(item) %></div>
+        <div class="avatar"><%= user_avatar_tag(item, :md) %></div>
         <div class="name"><%= user_name_tag(item) %></div>
       </div>
       <% end %>

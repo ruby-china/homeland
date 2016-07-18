@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe Reply, type: :model do
   let(:user) { create(:user) }
+
   describe 'notifications' do
     it 'should delete mention notification after destroy' do
       expect do
@@ -68,6 +69,21 @@ describe Reply, type: :model do
         reply.destroy
         expect(topic.updated_at).not_to eq(old_updated_at)
       end
+
+      context 'system reply' do
+        let(:target) { create(:topic) }
+        it 'should not change topic last_replied_at when reply created' do
+          system_reply = build(:reply, action: 'mention', topic: topic, target: target)
+          old_last_active_mark = topic.last_active_mark
+          old_replied_at = topic.replied_at
+          expect(topic).not_to receive(:update_last_reply)
+          system_reply.save
+          expect(system_reply.new_record?).to eq false
+          topic.reload
+          expect(topic.last_active_mark).to eq old_last_active_mark
+          expect(topic.replied_at).to eq old_replied_at
+        end
+      end
     end
 
     describe 'Send reply notification' do
@@ -81,6 +97,7 @@ describe Reply, type: :model do
 
         topic = create :topic, user: user
         reply = create :reply, topic: topic, user: replyer
+        create :reply, action: 'nopoint', topic: topic, user: replyer
 
         followers.each do |f|
           expect(f.notifications.unread.where(notify_type: 'topic_reply').count).to eq 1
@@ -206,6 +223,15 @@ describe Reply, type: :model do
       args = ["topics/#{reply.topic_id}/replies", { id: reply.id, user_id: reply.user_id, action: :create }]
       expect(ActionCable.server).to receive(:broadcast).with(*args).once
       Reply.broadcast_to_client(reply)
+    end
+  end
+
+  describe '#create_system_event' do
+    it 'should create system event with empty body' do
+      allow(User).to receive(:current).and_return(user)
+      reply = Reply.create_system_event(topic_id: 1, action: 'bbb')
+      expect(reply.system_event?).to eq true
+      expect(reply.new_record?).to eq false
     end
   end
 end

@@ -7,6 +7,8 @@ module Notifications
       @notifications.each do |n|
         unread_ids << n.id unless n.read?
       end
+      @notification_groups = @notifications.group_by { |note| note.created_at.to_date }
+
       Notification.read!(unread_ids)
       Notification.realtime_push_to_client(current_user)
     end

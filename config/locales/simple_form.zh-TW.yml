@@ -27,8 +27,8 @@
         hr: "招聘人員"
         company: "公司"
         github: "GitHub"
-        remember_me: "記住登陸狀態"
+        remember_me: "記住登陸狀態（60 天）"
         current_password: "舊密碼"
     placeholders:
       user:
-        yourname: "帳號" 
+        yourname: "帳號"

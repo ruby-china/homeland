@@ -20,7 +20,7 @@
     login: "登录"
     logining: "正在登录"
     logout: "退出"
-    remember_me: "记住登录状态"
+    remember_me: "记住登录状态（60 天）"
     cancel: "取消"
     created_at: "于 %{time}发布"
     until: "截止"

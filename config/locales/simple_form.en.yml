@@ -27,7 +27,7 @@ en:
         hr: "Recruiter"
         company: "Company"
         github: "GitHub"
-        remember_me: "Remember me"
+        remember_me: "Remember me (2 months)"
         current_password: "Current Password"
     placeholders:
       user:

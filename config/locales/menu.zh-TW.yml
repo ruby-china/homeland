@@ -20,7 +20,7 @@
     login: "登錄"
     logining: "正在登錄"
     logout: "退出"
-    remember_me: "記住登錄狀態"
+    remember_me: "記住登錄狀態（60 天）"
     cancel: "取消"
     created_at: "於 %{time}發佈"
     until: "截止"

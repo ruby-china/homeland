@@ -20,7 +20,7 @@
     login: "Sign In"
     logining: "Sign In..."
     logout: "Sign Out"
-    remember_me: "Remember Me"
+    remember_me: "Remember me (2 months)"
     cancel: "Cancel"
     created_at: "Created at %{time}"
     until: "until"

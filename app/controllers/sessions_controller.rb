@@ -1,5 +1,5 @@
 class SessionsController < Devise::SessionsController
-  prepend_before_action :valify_captcha!, only: [:create]
+  prepend_before_action :valify_captcha!, only: [:create], if: :display_login_captcha?
   skip_before_action :set_locale, only: [:create]
 
   def new
@@ -8,9 +8,11 @@ class SessionsController < Devise::SessionsController
   end
 
   def create
+    increase_login_counter
     resource = warden.authenticate!(scope: resource_name, recall: "#{controller_path}#new")
     set_flash_message(:notice, :signed_in) if is_navigational_format?
     sign_in(resource_name, resource)
+    delete_login_counter
     respond_to do |format|
       format.html { redirect_to after_sign_in_path_for(resource) }
       format.json { render status: '201', json: resource.as_json(only: [:login, :email]) }
@@ -40,4 +42,19 @@ class SessionsController < Devise::SessionsController
   def domain_or_host
     request.domain || request.host
   end
+
+  def increase_login_counter
+    session[:_rucaptcha_logins] ||= 0
+    session[:_rucaptcha_logins] += 1
+  end
+
+  def delete_login_counter
+    session.delete(:_rucaptcha_logins)
+  end
+
+  def display_login_captcha?
+    session[:_rucaptcha_logins] && session[:_rucaptcha_logins] >= 3
+  end
+
+  helper_method :display_login_captcha?
 end

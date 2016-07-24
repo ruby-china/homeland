@@ -6,7 +6,8 @@
   }
 
 
-  .header, .footer { display: none; }
+  .header, .footer,
+  .index-sections, .index-locations { display: none; }
 
   .container {
     padding: 0;
@@ -64,6 +65,30 @@
     .topic-list-heading {
       display: none;
     }
+  }
+
+  .editor-toolbar {
+    .dropdown-menu {
+      left: auto;
+      right: 0;
+    }
+  }
+
+  .topic-editor {
+    height: 100px;
+  }
+
+  .new_reply {
+    .submit-buttons {
+      #reply-button { display: block; width: 100%; }
+      .help-inline,
+      .pull-right { display: none; }
+    }
+  }
+
+  .edit-reply {
+    .panel-heading { display: none; }
+    .col-xs-2 { display: block; width: 50%; }
   }
 
   .topic-detail {

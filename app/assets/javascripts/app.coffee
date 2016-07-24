@@ -22,6 +22,7 @@
 #= require notes
 #= require turbolinks
 #= require google_analytics
+#= require jquery.infinitescroll.min
 #= require_self
 
 AppView = Backbone.View.extend
@@ -42,6 +43,7 @@ AppView = Backbone.View.extend
     FormStorage.restore()
     @initForDesktopView()
     @initComponents()
+    @initInfiniteScroll()
     @initCable()
 
     if $('body').data('controller-name') in ['topics', 'replies']
@@ -239,6 +241,19 @@ AppView = Backbone.View.extend
 
     $(this).data("prevType", e.type)
 
+  initInfiniteScroll: ->
+    $('.infinite-scroll .item-list').infinitescroll
+      nextSelector: '.pagination .next a'
+      navSelector: '.pagination'
+      itemSelector: '.topic, .notification-group'
+      extraScrollPx: 200
+      bufferPx: 50
+      localMode: true
+      loading:
+        finishedMsg: '<div style="text-align: center; padding: 5px;">已到末尾</div>'
+        msgText: '<div style="text-align: center; padding: 5px;">载入中...</div>'
+        img: 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='
+
 window.App =
   locale: 'zh-CN'
   notifier : null
@@ -305,6 +320,7 @@ window.App =
       displayTpl : "<li data-value='${code}'><img src='#{App.twemoji_url}/svg/${url}.svg' class='twemoji' /> ${code} </li>"
       insertTpl: "${code}"
     true
+
 
 document.addEventListener 'turbolinks:load',  ->
   window._appView = new AppView()

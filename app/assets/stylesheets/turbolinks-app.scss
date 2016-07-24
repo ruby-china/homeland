@@ -8,6 +8,14 @@
 
   .header, .footer,
   .index-sections, .index-locations { display: none; }
+  #node-selector .panel {
+    display: block;
+    padding: 0px;
+    box-shadow: 0 0 0;
+    border: 0px;
+    .panel-body { border:0; }
+    .media-left { display: none; }
+  }
 
   .container {
     padding: 0;

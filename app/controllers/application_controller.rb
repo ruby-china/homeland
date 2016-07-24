@@ -102,7 +102,7 @@ class ApplicationController < ActionController::Base
 
   def turbolinks_app?
     agent_str = request.user_agent.to_s
-    agent_str =~ Regexp.new('turbolinks-app')
+    agent_str.include?('turbolinks-app')
   end
 
   private

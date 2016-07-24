@@ -26,6 +26,7 @@
   <link rel="alternate" type="application/rss+xml" title="订阅最新帖" href="<%= main_app.feed_topics_url %>" />
   <link rel="mask-icon" href="<%= cached_asset_path("mask.svg") %>"/>
   <%= stylesheet_link_tag_with_cached "front" %>
+  <%= stylesheet_link_tag_with_cached "turbolinks-app" if turbolinks_app? %>
   <%= action_cable_meta_tag %>
   <%= javascript_include_tag_with_cached "app" %>
   <script src="//ruby-china-files.b0.upaiyun.com/assets/d3.min.js" data-turbolinks-track type="text/javascript"></script>

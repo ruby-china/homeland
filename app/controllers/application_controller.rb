@@ -2,6 +2,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :unread_notify_count
+  helper_method :turbolinks_app?
 
   # Addition contents for etag
   etag { current_user.try(:id) }
@@ -89,6 +90,19 @@ class ApplicationController < ActionController::Base
   def unread_notify_count
     return 0 if current_user.blank?
     @unread_notify_count ||= Notification.unread_count(current_user)
+  end
+
+  def authenticate_user!
+    if turbolinks_app?
+      render text: '401 Unauthorized', status: 401 if current_user.blank?
+    else
+      super
+    end
+  end
+
+  def turbolinks_app?
+    agent_str = request.user_agent.to_s
+    agent_str =~ Regexp.new('turbolinks-app')
   end
 
   private

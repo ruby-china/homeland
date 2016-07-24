@@ -100,6 +100,13 @@
   }
 
   .page-users {
+    .sidebar {
+      display: block;
+      .profile {
+        .opts { display: none; }
+      }
+    }
+    #user_github_repos { display: none; }
     .nav-tabs {
       margin-top: 15px;
       li > a {

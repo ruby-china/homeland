@@ -47,15 +47,15 @@
         </div>
       </div>
       <div class="follow-info row">
-        <div class="col-sm-4 followers" data-login="<%= @user.login %>">
+        <div class="col-xs-4 followers" data-login="<%= @user.login %>">
           <%= link_to @user.followers_count, followers_user_path(@user), class: "counter" %>
           <%= link_to "关注者", followers_user_path(@user), class: "text" %>
         </div>
-        <div class="col-sm-4 following">
+        <div class="col-xs-4 following">
           <%= link_to @user.following_count, following_user_path(@user), class: "counter" %>
           <%= link_to "正在关注", following_user_path(@user), class: "text" %>
         </div>
-        <div class="col-sm-4 stars">
+        <div class="col-xs-4 stars">
           <%= link_to @user.favorite_topics_count, favorites_user_path(@user), class: "counter" %>
           <%= link_to "收藏", favorites_user_path(@user), class: "text" %>
         </div>

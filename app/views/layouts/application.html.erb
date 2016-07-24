@@ -119,7 +119,6 @@
     App.locale = "<%= I18n.locale %>";
     <% if current_user %>
       App.current_user_id = <%= current_user.id %>;
-      App.access_token = "<%= current_user.temp_access_token %>";
     <% end %>
   </script>
   <%= yield :scripts %>

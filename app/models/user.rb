@@ -87,12 +87,6 @@ class User < ApplicationRecord
     self[:email] = val
   end
 
-  def temp_access_token
-    Rails.cache.fetch("user-#{id}-temp_access_token-#{Time.now.strftime('%Y%m%d')}") do
-      SecureRandom.hex
-    end
-  end
-
   def password_required?
     (authorizations.empty? || !password.blank?) && super
   end

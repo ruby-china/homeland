@@ -268,7 +268,8 @@ a:hover { color: #303030; }
   border-radius: 3px;
   border-color: #ddd;
   box-shadow: inset 0 0 0px rgba(0,0,0, 0) !important;
-  transition:none;
+  transition: none;
+  -webkit-appearance: none;
   &:focus { box-shadow: inset 0 0px 0px #fff; border-color: $blueLight; }
   &[disabled], &[readonly] {
     background: #f0f0f0;

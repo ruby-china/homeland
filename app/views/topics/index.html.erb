@@ -6,11 +6,11 @@
 <div class="row">
   <div class="col-md-9">
     <div class="topics panel panel-default">
-      <div class="panel-heading clearfix">
+      <div class="topic-list-heading panel-heading clearfix">
         <%= render "topics/node_info", node: @node %>
       </div>
 
-      <div class="panel-body">
+      <div class="panel-body item-list">
         <% if @topics.current_page == 1 %>
           <%= render partial: '/topics/topic', collection: @suggest_topics, locals: { suggest: true }, cached: -> (topic) { [topic, 'suggest'] } %>
         <% end %>

@@ -92,11 +92,11 @@ class ApplicationController < ActionController::Base
     @unread_notify_count ||= Notification.unread_count(current_user)
   end
 
-  def authenticate_user!
+  def authenticate_user!(opts)
     if turbolinks_app?
       render text: '401 Unauthorized', status: 401 if current_user.blank?
     else
-      super
+      super(opts)
     end
   end
 

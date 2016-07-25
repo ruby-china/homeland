@@ -1,4 +1,7 @@
 class TopicsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :edit, :create, :update, :destroy,
+                                     :favorite, :unfavorite, :follow, :unfollow,
+                                     :action]
   load_and_authorize_resource only: [:new, :edit, :create, :update, :destroy,
                                      :favorite, :unfavorite, :follow, :unfollow,
                                      :action]

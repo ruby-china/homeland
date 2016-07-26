@@ -6,13 +6,6 @@ describe NotesController, type: :controller do
       get :index
       expect(response).not_to be_success
     end
-
-    it 'should got 401 with turbolinks-app' do
-      request.env['HTTP_USER_AGENT'] = 'turbolinks-app,sksk'
-      get :index
-      expect(response).not_to be_success
-      expect(response.status).to eq 401
-    end
   end
 
   describe 'authenticated' do

@@ -100,6 +100,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def current_user
+    if doorkeeper_token
+      @current_user ||= User.find_by_id(doorkeeper_token.resource_owner_id)
+    else
+      super
+    end
+  end
+
   def turbolinks_app?
     agent_str = request.user_agent.to_s
     agent_str.include?('turbolinks-app')

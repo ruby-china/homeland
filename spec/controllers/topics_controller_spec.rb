@@ -29,6 +29,14 @@ describe TopicsController, type: :controller do
     end
   end
 
+  describe ':favorites' do
+    it 'should have a recent action' do
+      sign_in user
+      get :favorites
+      expect(response).to be_success
+    end
+  end
+
   describe ':node' do
     it 'should have a node action' do
       get :node, params: { id: topic.id }

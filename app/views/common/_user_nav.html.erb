@@ -13,7 +13,7 @@
       li << "<div class='divider'></div>"
       li << link_to(t("menu.edit_account_path"), main_app.edit_user_registration_path)
       li << link_to(t("menu.notes"), main_app.notes_path )
-      li << link_to(t("menu.likes"), main_app.favorites_user_path(current_user))
+      li << link_to(t("menu.likes"), main_app.favorites_topics_path)
       if admin?
         li << "<div class='divider'></div>"
         if params[:controller].start_with?("admin")

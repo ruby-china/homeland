@@ -61,6 +61,7 @@ Rails.application.routes.draw do
       get :no_reply
       get :popular
       get :excellent
+      get :favorites
       get :feed, defaults: { format: 'xml' }
       post :preview
     end

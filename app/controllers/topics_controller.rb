@@ -1,7 +1,7 @@
 class TopicsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :create, :update, :destroy,
                                      :favorite, :unfavorite, :follow, :unfollow,
-                                     :action]
+                                     :action, :favorites]
   load_and_authorize_resource only: [:new, :edit, :create, :update, :destroy,
                                      :favorite, :unfavorite, :follow, :unfollow,
                                      :action]
@@ -10,7 +10,10 @@ class TopicsController < ApplicationController
                                    :unfollow, :action]
 
   def index
-    @suggest_topics = Topic.without_hide_nodes.suggest.fields_for_list.limit(3)
+    @suggest_topics = []
+    if params[:page].to_i <= 1
+      @suggest_topics = Topic.without_hide_nodes.suggest.fields_for_list.limit(3)
+    end
     @topics = Topic.last_actived.without_suggest
     @topics =
       if current_user
@@ -55,6 +58,12 @@ class TopicsController < ApplicationController
       @page_title = [t("topics.topic_list.#{name}"), t('menu.topics')].join(' · ')
       render action: 'index' if stale?(etag: @topics, template: 'topics/index')
     end
+  end
+
+  def favorites
+    # @topic_ids = current_user.favorite_topic_ids.reverse.paginate(page: params[:page], per_page: 40)
+    @topics = Topic.where(id: current_user.favorite_topic_ids).fields_for_list.recent.paginate(page: params[:page], per_page: 40)
+    render action: 'index' if stale?(etag: @topics, template: 'topics/index')
   end
 
   def recent

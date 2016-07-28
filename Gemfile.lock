@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/sinatra/sinatra.git
-  revision: a5da6fa82c46436f59ae482d07c1752ab908c852
+  revision: 751f2a7a8f26a01f984cecbfe1385ecc0feda9e0
   specs:
     sinatra (2.0.0.pre.alpha)
       mustermann (~> 0.4)
@@ -54,7 +54,7 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     addressable (2.4.0)
-    arel (7.0.0)
+    arel (7.1.0)
     ast (2.3.0)
     auto-space (0.0.4)
       activesupport (> 3.0.0)
@@ -141,21 +141,21 @@ GEM
     doorkeeper-i18n (3.0.0)
     dropzonejs-rails (0.7.3)
       rails (> 3.1)
-    elasticsearch (1.0.18)
-      elasticsearch-api (= 1.0.18)
-      elasticsearch-transport (= 1.0.18)
-    elasticsearch-api (1.0.18)
+    elasticsearch (2.0.0)
+      elasticsearch-api (= 2.0.0)
+      elasticsearch-transport (= 2.0.0)
+    elasticsearch-api (2.0.0)
       multi_json
     elasticsearch-model (0.1.9)
       activesupport (> 3)
       elasticsearch (> 0.4)
       hashie
     elasticsearch-rails (0.1.9)
-    elasticsearch-transport (1.0.18)
+    elasticsearch-transport (2.0.0)
       faraday
       multi_json
     erubis (2.7.0)
-    exception_notification (4.2.0)
+    exception_notification (4.2.1)
       actionmailer (>= 4.0, < 6)
       activesupport (>= 4.0, < 6)
     execjs (2.7.0)
@@ -183,7 +183,7 @@ GEM
       phantomjs (>= 1.9)
       railties (>= 3.2.0)
       sprockets-rails
-    jbuilder (2.5.0)
+    jbuilder (2.6.0)
       activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
     jquery-atwho-rails (1.3.2)
@@ -198,7 +198,7 @@ GEM
     kgio (2.10.0)
     launchy (2.4.3)
       addressable (~> 2.3)
-    letter_avatar (0.3.0)
+    letter_avatar (0.3.1)
     letter_opener (1.4.1)
       launchy (~> 2.2)
     loofah (2.0.3)
@@ -269,7 +269,7 @@ GEM
     pry-byebug (3.4.0)
       byebug (~> 9.0)
       pry (~> 0.10)
-    puma (3.4.0)
+    puma (3.5.2)
     rack (2.0.1)
     rack-attack (4.4.1)
       rack
@@ -313,7 +313,7 @@ GEM
     rainbow (2.1.0)
     rake (11.2.2)
     redcarpet (3.3.4)
-    redis (3.3.0)
+    redis (3.3.1)
     redis-namespace (1.5.2)
       redis (~> 3.0, >= 3.0.4)
     redis-objects (1.2.1)
@@ -325,7 +325,7 @@ GEM
     responders (2.2.0)
       railties (>= 4.2.0, < 5.1)
     rmmseg-cpp-new (0.3.1)
-    rouge (2.0.3)
+    rouge (2.0.5)
     rspec-core (3.5.1)
       rspec-support (~> 3.5.0)
     rspec-expectations (3.5.0)
@@ -359,7 +359,7 @@ GEM
     rvm-capistrano (1.4.1)
       capistrano (>= 2.0.0)
     sass (3.4.22)
-    sass-rails (5.0.5)
+    sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
       sass (~> 3.1)
       sprockets (>= 2.8, < 4.0)
@@ -388,7 +388,7 @@ GEM
     spring (1.7.2)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
-    sprockets (3.6.3)
+    sprockets (3.7.0)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
     sprockets-rails (3.1.1)

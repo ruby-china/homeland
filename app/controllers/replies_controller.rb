@@ -21,7 +21,7 @@ class RepliesController < ApplicationController
   def index
     last_id = params[:last_id].to_i
     if last_id == 0
-      render text: ''
+      render plain: ''
       return
     end
 

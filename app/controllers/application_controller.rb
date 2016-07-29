@@ -94,7 +94,7 @@ class ApplicationController < ActionController::Base
 
   def authenticate_user!(opts = {})
     if turbolinks_app?
-      render text: '401 Unauthorized', status: 401 if current_user.blank?
+      render plain: '401 Unauthorized', status: 401 if current_user.blank?
     else
       super(opts)
     end

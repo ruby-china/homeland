@@ -1,14 +1,16 @@
 <div class="notifications panel">
-  <div class="panel-heading clearfix">
+  <div class="panel-heading hide-ios clearfix">
     <%= t('notifications.all_notifications') %>
 
     <span class="pull-right">
-      <%= link_to t('notifications.clean_all'), notifications.clean_notifications_path, class: 'btn btn-sm btn-danger', method: 'delete' %>
+      <%= link_to t('notifications.clean_all'), notifications.clean_notifications_path, class: 'btn btn-sm btn-danger', id: 'btn-remove-all', method: 'delete', remote: true %>
     </span>
   </div>
   <div class="panel-body list item-list">
     <% if @notifications.blank? %>
-      <div class="no-records"><%= t('notifications.no_records') %></div>
+      <div class="notification-group">
+        <div class="no-records"><%= t('notifications.no_records') %></div>
+      </div>
     <% else %>
       <% @notification_groups.each do |group, notifications| %>
         <div class="notification-group">

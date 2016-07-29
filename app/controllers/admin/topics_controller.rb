@@ -49,13 +49,13 @@ module Admin
     def suggest
       @topic.update_attribute(:suggested_at, Time.now)
       CacheVersion.topic_last_suggested_at = Time.now
-      redirect_to(admin_topics_path, notice: "Topic:#{params[:id]} suggested.")
+      redirect_to(@topic, notice: "Topic:#{params[:id]} suggested.")
     end
 
     def unsuggest
       @topic.update_attribute(:suggested_at, nil)
       CacheVersion.topic_last_suggested_at = Time.now
-      redirect_to(admin_topics_path, notice: "Topic:#{params[:id]} unsuggested.")
+      redirect_to(@topic, notice: "Topic:#{params[:id]} unsuggested.")
     end
 
     private

@@ -5,7 +5,7 @@
       <ul>
         <li><a href="/wiki">首页</a></li>
         <li><%= link_to(t("pages.wiki_index"), recent_pages_path) %></li>
-        <li><%= link_to(t("pages.new_page"), new_page_path)%></li>
+        <li class="hide-ios"><%= link_to(t("pages.new_page"), new_page_path)%></li>
       </ul>
 
       <%= raw Setting.wiki_sidebar_html %>

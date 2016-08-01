@@ -2,11 +2,13 @@
 
 <div class="row">
   <%= render 'sidebar' %>
-  <div class="col-sm-9">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <%= raw Setting.wiki_index_html %>
+  <% if !turbolinks_app? %>
+    <div class="col-md-9">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <%= raw Setting.wiki_index_html %>
+        </div>
       </div>
     </div>
-  </div>
+  <% end %>
 </div>

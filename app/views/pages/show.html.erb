@@ -1,11 +1,13 @@
 <% title_tag @page.title %>
 
 <div class="row">
-  <%= render 'sidebar' %>
-  <div class="col-sm-9 page-detail">
+  <div class="hide-ios">
+    <%= render 'sidebar' %>
+  </div>
+  <div class="col-md-9 page-detail">
     <div class="panel panel-default">
       <% if !@page.locked or admin? %>
-        <div class="panel-heading">
+        <div class="panel-heading hide-ios">
           <h1><%= @page.title %></h1>
           <div class="infos">
             <%= link_to comments_page_path(@page.slug) do %>
@@ -36,7 +38,7 @@
             <%= user_avatar_tag(item, :xs) %>
           <% end %>
         </div>
-        <div class="buttons">
+        <div class="buttons hide-ios">
           <%= link_to "发表评论", comments_page_path(@page.slug, anchor: "new_comment"), class: "btn btn-success" %>
         </div>
       </div>

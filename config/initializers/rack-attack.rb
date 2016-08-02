@@ -4,12 +4,12 @@ class Rack::Attack
   Rack::Attack.cache.store = Rails.cache
 
   ### Throttle Spammy Clients ###
-  throttle('req/ip', limit: 300, period: 5.minutes) do |req|
+  throttle('req/ip', limit: 500, period: 5.minutes) do |req|
     req.ip unless req.path.start_with?('/mini-profiler-resources')
   end
 
   # 登陆保护
-  throttle('oauth/token/ip', limit: 5, period: 20.seconds) do |req|
+  throttle('oauth/token/ip', limit: 20, period: 5.seconds) do |req|
     if req.path.start_with?('/oauth/token')
       req.ip
     end

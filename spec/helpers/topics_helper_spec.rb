@@ -22,6 +22,16 @@ describe TopicsHelper, type: :helper do
       )
     end
 
+    context 'bad html' do
+      it 'filter script' do
+        expect(helper.markdown('<script>alert()</script> foo')).to eq('<p>alert() foo</p>')
+      end
+
+      it 'filter style' do
+        expect(helper.markdown('<style>.body {}</style> foo')).to eq('<p>.body {} foo</p>')
+      end
+    end
+
     it 'should match complex urls' do
       expect(helper.markdown('http://movie.douban.com/tag/%E7%BE%8E%E5%9B%BD')).to eq(
         '<p><a href="http://movie.douban.com/tag/%E7%BE%8E%E5%9B%BD" rel="nofollow" target="_blank">http://movie.douban.com/tag/%E7%BE%8E%E5%9B%BD</a></p>'

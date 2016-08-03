@@ -9,12 +9,13 @@ module Redcarpet
     class HTMLwithSyntaxHighlight < HTML
       include Rouge::Plugins::Redcarpet
 
-      def initialize(extensions = {})
-        super(extensions.merge(xhtml: true,
-                               no_styles: true,
-                               escape_html: true,
-                               hard_wrap: true,
-                               link_attributes: { target: '_blank' }))
+      def initialize(opts = {})
+        custom = {
+          xhtml: true,
+          no_styles: true,
+          hard_wrap: true
+        }
+        super(opts.merge(custom))
       end
 
       def block_code(code, language)
@@ -239,7 +240,10 @@ class MarkdownTopicConverter
       autolink: true,
       fenced_code_blocks: true,
       strikethrough: true,
+      underline: true,
+      superscript: true,
       tables: true,
+      footnotes: true,
       space_after_headers: true,
       disable_indented_code_blocks: true,
       no_intra_emphasis: true

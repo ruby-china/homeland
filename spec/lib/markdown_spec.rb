@@ -478,30 +478,21 @@ describe 'markdown' do
     end
 
     describe 'Escape HTML tags' do
-      context '<xxx> or a book names' do
-        let(:raw) { '<Enterprise Integration Patterns> book' }
-
-        describe '#inner_html' do
-          subject { super().inner_html }
-          it { is_expected.to eq('<p>&lt;Enterprise Integration Patterns&gt; book</p>') }
-        end
-      end
-
       context '<img> tag' do
-        let(:raw) { "<img src='aaa.jpg' /> aaa" }
+        let(:raw) { %(<img src="aaa.jpg" class="bb" /> aaa) }
 
         describe '#inner_html' do
           subject { super().inner_html }
-          it { is_expected.to eq("<p>&lt;img src='aaa.jpg' /&gt; aaa</p>") }
+          it { is_expected.to eq(%(<p><img src="aaa.jpg" class="bb"> aaa</p>)) }
         end
       end
 
-      context '<b> tag' do
-        let(:raw) { '<b>aaa</b>' }
+      context '<script> tag' do
+        let(:raw) { '<script>aaa</script>' }
 
         describe '#inner_html' do
           subject { super().inner_html }
-          it { is_expected.to eq('<p>&lt;b&gt;aaa&lt;/b&gt;</p>') }
+          it { is_expected.to eq('<script>aaa</script>') }
         end
       end
 

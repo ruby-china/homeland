@@ -66,6 +66,17 @@ describe User, type: :model do
       let(:user) { build(:user, login: 'aaa*11') }
       it { expect(user.valid?).to eq false }
     end
+
+    describe 'Login allow upcase downcase both' do
+      let(:user1) { create(:user, login: 'ReiIs123') }
+
+      it 'should work' do
+        expect(user1.login).to eq('ReiIs123')
+        expect(User.find_login('ReiIs123').id).to eq(user1.id)
+        expect(User.find_login('reiis123').id).to eq(user1.id)
+        expect(User.find_login('rEIIs123').id).to eq(user1.id)
+      end
+    end
   end
 
   describe '#read_topic?' do

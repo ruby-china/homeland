@@ -34,6 +34,11 @@ describe UsersController, type: :controller do
       get :topics, params: { id: user.login }
       expect(response).to be_success
     end
+
+    it 'should redirect to right spell login' do
+      get :topics, params: { id: user.login.upcase }
+      expect(response.status).to eq(301)
+    end
   end
 
   describe ':replies' do

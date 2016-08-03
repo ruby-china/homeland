@@ -212,13 +212,12 @@ class User < ApplicationRecord
 
   def self.find_login(slug)
     return nil unless slug =~ ALLOW_LOGIN_CHARS_REGEXP
-    slug = slug.downcase
-    fetch_by_uniq_keys(login: slug)
+    fetch_by_uniq_keys(login: slug) || where("lower(login) = ?", slug.downcase).take
   end
 
   def self.find_by_login_or_email(login_or_email)
     login_or_email = login_or_email.downcase
-    fetch_by_uniq_keys(login: login_or_email) || fetch_by_uniq_keys(email: login_or_email)
+    find_login(login_or_email) || find_by_email(login_or_email)
   end
 
   def self.find_for_database_authentication(warden_conditions)

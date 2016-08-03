@@ -19,7 +19,6 @@ module UsersHelper
     name ||= login
     options[:class] ||= "#{user_type}-name"
     options['data-name'.freeze] = name
-    options['data-turbolinks-action'] = 'replace'
 
     link_to(login, main_app.user_path(user), options)
   end
@@ -52,7 +51,6 @@ module UsersHelper
       end
 
     options = {}
-    options['data-turbolinks-action'] = 'replace'
 
     if opts[:link] != false
       link_to(raw(img), user_path(user), options)

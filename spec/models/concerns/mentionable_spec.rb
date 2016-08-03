@@ -17,8 +17,12 @@ end
 describe Mentionable, type: :model do
   it 'should work with chars' do
     user = create :user, login: 'foo-bar_12'
-    doc = TestDocument.create body: "@#{user.login}", user: create(:user)
-    expect(doc.mentioned_user_logins).to eq([user.login])
+    user1 = create :user, login: 'Rei.foo'
+    doc = TestDocument.create body: "@#{user.login} @#{user1.login}", user: create(:user)
+    expect(doc.mentioned_user_logins).to include(user.login, user1.login)
+
+    doc = TestDocument.create body: "@#{user.login.upcase} @#{user1.login.downcase}", user: create(:user)
+    expect(doc.mentioned_user_logins).to include(user.login, user1.login)
   end
 
   it 'should extract mentioned user ids' do

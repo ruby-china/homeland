@@ -4,7 +4,7 @@ class Rack::Attack
   Rack::Attack.cache.store = Rails.cache
 
   ### Throttle Spammy Clients ###
-  throttle('req/ip', limit: 500, period: 5.minutes) do |req|
+  throttle('req/ip', limit: 5000, period: 5.minutes) do |req|
     req.ip unless req.path.start_with?('/mini-profiler-resources')
   end
 

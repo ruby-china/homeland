@@ -3,6 +3,7 @@
 #= require bootstrap.min
 #= require underscore
 #= require backbone
+#= require backbone.touch.min
 #= require will_paginate
 #= require jquery.timeago
 #= require jquery.timeago.settings

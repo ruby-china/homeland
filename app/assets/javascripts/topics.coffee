@@ -9,7 +9,7 @@ window.TopicView = Backbone.View.extend
   clearHightTimer: null
 
   events:
-    "touchend .topics .topic": "openTopic"
+    "click .topics .topic": "openTopic"
     "click #replies .reply .btn-reply": "reply"
     "click .btn-focus-reply": "reply"
     "click #topic-upload-image": "browseUpload"

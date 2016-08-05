@@ -104,8 +104,9 @@ body {
 
 .topics {
   .topic {
-    &:hover,
-    &:active { background: #f9f9f9; }
+    &:active {
+      background: #f9f9f9;
+    }
 
     .title {
       a:hover,

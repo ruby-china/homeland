@@ -255,6 +255,7 @@ AppView = Backbone.View.extend
         img: 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='
 
 window.App =
+  turbolinks: false
   locale: 'zh-CN'
   notifier : null
   current_user_id: null

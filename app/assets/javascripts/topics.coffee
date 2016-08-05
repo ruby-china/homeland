@@ -9,6 +9,7 @@ window.TopicView = Backbone.View.extend
   clearHightTimer: null
 
   events:
+    "touchend .topics .topic": "openTopic"
     "click #replies .reply .btn-reply": "reply"
     "click .btn-focus-reply": "reply"
     "click #topic-upload-image": "browseUpload"
@@ -445,3 +446,10 @@ window.TopicView = Backbone.View.extend
     $('.form input[name="topic[node_id]"]').val(nodeId)
     $('#node-selector-button').html(el.text())
     false
+
+  openTopic: (e) ->
+    return false if !App.turbolinks
+    if e.target.tagName == 'DIV'
+      e.preventDefault()
+      el = $(".title a", e.currentTarget)
+      Turbolinks.visit(el.attr('href'))

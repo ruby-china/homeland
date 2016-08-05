@@ -102,6 +102,18 @@ body {
   .col-xs-2 { display: block; width: 50%; }
 }
 
+.topics {
+  .topic {
+    &:hover,
+    &:active { background: #f9f9f9; }
+
+    .title {
+      a:hover,
+      a:active { text-decoration: none; }
+    }
+  }
+}
+
 .topic-detail {
   .label-awesome {
     padding: 10px 15px;

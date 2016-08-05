@@ -14,7 +14,7 @@
   - Rails: <%= Rails.version %>
 -->
 <!DOCTYPE html>
-<html>
+<html data-turbolinks-preview>
 <head>
   <meta charset='utf-8' />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
@@ -119,6 +119,9 @@
     App.locale = "<%= I18n.locale %>";
     <% if current_user %>
       App.current_user_id = <%= current_user.id %>;
+    <% end %>
+    <% if turbolinks_app? %>
+      App.turbolinks = true;
     <% end %>
   </script>
   <%= yield :scripts %>

@@ -109,30 +109,6 @@ module ApplicationHelper
     raw "<i class='fa fa-#{name}'></i> #{label}"
   end
 
-  def memory_cache(*keys)
-    return yield unless Rails.application.config.cache_classes
-
-    $memory_store.fetch(keys) { yield }
-  end
-
-  def stylesheet_link_tag_with_cached(name)
-    memory_cache('stylesheets_link_tag', name) do
-      stylesheet_link_tag(name, 'data-turbolinks-track' => 'reload')
-    end
-  end
-
-  def javascript_include_tag_with_cached(name)
-    memory_cache('javascript_include_tag', name) do
-      javascript_include_tag(name, 'data-turbolinks-track' => 'reload')
-    end
-  end
-
-  def cached_asset_path(name)
-    memory_cache('asset_path', name) do
-      asset_path(name)
-    end
-  end
-
   # Override cache helper for support multiple I18n locale
   def cache(name = {}, options = {}, &block)
     options ||= {}

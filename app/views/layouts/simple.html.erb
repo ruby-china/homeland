@@ -6,10 +6,10 @@
   <title><%= yield(:title) || Setting.app_name %></title>
   <meta name="apple-mobile-web-app-capable" content="no">
   <meta content='True' name='HandheldFriendly' />
-  <link rel="apple-touch-icon-precomposed" href="<%= cached_asset_path("ios-icon.png") %>" />
-  <link rel="shortcut icon" href="<%= cached_asset_path("big_logo.png") %>" />
-  <%= stylesheet_link_tag_with_cached "front" %>
-  <%= javascript_include_tag_with_cached "app" %>
+  <link rel="apple-touch-icon-precomposed" href="<%= asset_path("ios-icon.png") %>" />
+  <link rel="shortcut icon" href="<%= asset_path("big_logo.png") %>" />
+  <%= stylesheet_link_tag "front" %>
+  <%= javascript_include_tag "app" %>
   <%= csrf_meta_tag %>
   <%= raw Setting.custom_head_html %>
 </head>

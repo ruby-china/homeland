@@ -5,6 +5,10 @@
     start_date = 12.months.ago.beginning_of_month
     %>
     <script type="text/javascript">
+      document.addEventListener("turbolinks:before-cache", function() {
+        $('#cal-heatmap').html('');
+      });
+
       var cal = new CalHeatMap();
       cal.init({
         itemSelector: "#cal-heatmap",

@@ -3,8 +3,11 @@ module Admin
     def index
       @users = User.all
       if params[:q]
-        qstr = "%#{params[:q]}%"
-        @users = @users.where('login LIKE ? or email LIKE ?', qstr, qstr)
+        qstr = "%#{params[:q].downcase}%"
+        @users = @users.where('lower(login) LIKE ? or lower(email) LIKE ?', qstr, qstr)
+      end
+      if params[:type].present?
+        @users = @users.where(type: params[:type])
       end
       @users = @users.order(id: :desc).paginate page: params[:page], per_page: 30
     end
@@ -52,7 +55,11 @@ module Admin
 
     def destroy
       @user = User.find(params[:id])
-      @user.soft_delete
+      if @user.user_type == :user
+        @user.soft_delete
+      else
+        @user.destroy
+      end
 
       redirect_to(admin_users_url)
     end

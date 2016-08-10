@@ -1,4 +1,4 @@
-<%= simple_form_for([:admin,@user]) do |f| %>
+<%= simple_form_for([:admin, @user], url: admin_user_path(@user)) do |f| %>
   <%= render 'shared/error_messages', target: @user %>
   <%= f.input :login %>
   <%= f.input :name %>
@@ -15,6 +15,7 @@
   <div class="form-group clearfix">
     <%= user_avatar_tag(@user, :lg) %>
   </div>
+  <% if @user.user_type == :user %>
   <%= f.input :verified, as: :boolean, hint: t("admin.users.trust_user_can_modify_wiki") %>
   <%= f.input :hr, as: :boolean, hint: t("admin.users.hr_user_can_create_topic") %>
   <%= f.input :state, as: :select, collection: User::STATE.collect { |s| [s[0],s[1]] } %>
@@ -23,6 +24,7 @@
   <%= f.input :current_sign_in_at, as: :string, readonly: true %>
   <%= f.input :last_sign_in_ip, readonly: true %>
   <%= f.input :current_sign_in_ip, readonly: true %>
+  <% end %>
   <% if not @user.authorizations.blank? %>
   <div class="form-group">
     <table class="table" style="display:block;">

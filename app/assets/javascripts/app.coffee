@@ -1,6 +1,7 @@
 #= require jquery2
 #= require jquery_ujs
 #= require bootstrap.min
+#= require jquery.mobile-events
 #= require underscore
 #= require backbone
 #= require will_paginate

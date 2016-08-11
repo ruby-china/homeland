@@ -20,6 +20,7 @@ window.TopicView = Backbone.View.extend
     "click .btn-move-page": "scrollPage"
     "click .notify-updated .update": "updateReplies"
     "click #node-selector .nodes .name a": "nodeSelectorNodeSelected"
+    "tap .topics .topic": "topicRowClick"
 
   initialize: (opts) ->
     @parentView = opts.parentView
@@ -445,3 +446,17 @@ window.TopicView = Backbone.View.extend
     $('.form input[name="topic[node_id]"]').val(nodeId)
     $('#node-selector-button').html(el.text())
     false
+
+  topicRowClick: (e) ->
+    if !App.turbolinks
+      return
+    target = $(e.currentTarget).find(".title a")
+    if e.target.tagName == "A"
+      return true
+    if $(e.target)[0] == target[0]
+      return true
+
+    e.preventDefault()
+
+    Turbolinks.visit(target.attr('href'))
+    return false

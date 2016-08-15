@@ -14,7 +14,7 @@
   - Rails: <%= Rails.version %>
 -->
 <!DOCTYPE html>
-<html data-turbolinks-preview>
+<html>
 <head>
   <meta charset='utf-8' />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
@@ -108,8 +108,7 @@
 
   <% if mobile? %>
     <script type="text/javascript">
-    app_mobile = true;
-    $('body').animate({ scrollTop: -1 },0);
+    App.mobile = true;
     </script>
   <% end %>
   <script type="text/javascript" data-turbolinks-eval="false">

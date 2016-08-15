@@ -72,7 +72,7 @@ AppView = Backbone.View.extend
     $(window).on "blur.inactive focus.inactive", @updateWindowActiveState
 
   initForDesktopView : () ->
-    return if typeof(app_mobile) != "undefined"
+    return if App.mobile != false
     $("a[rel=twipsy]").tooltip()
 
     # CommentAble @ 回复功能
@@ -257,6 +257,7 @@ AppView = Backbone.View.extend
 
 window.App =
   turbolinks: false
+  mobile: false
   locale: 'zh-CN'
   notifier : null
   current_user_id: null

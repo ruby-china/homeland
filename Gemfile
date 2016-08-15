@@ -125,6 +125,7 @@ group :development do
 end
 
 group :development, :test do
+  gem 'listen'
   gem 'rubocop', '~> 0.39.0', require: false
   gem 'rspec-rails'
   gem 'factory_girl_rails'

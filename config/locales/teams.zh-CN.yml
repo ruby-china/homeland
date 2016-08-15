@@ -3,8 +3,8 @@
     pendding: '等待接受'
     acceped: '已加入'
   team_user_role:
-      owner: '组管理员'
-      member: '成员'
+    owner: '组管理员'
+    member: '成员'
   teams:
     teams: '组织'
     user_existed: '已经在组里面了'

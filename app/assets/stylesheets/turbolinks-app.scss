@@ -132,6 +132,7 @@ body {
       .opts { display: none; }
     }
   }
+
   #user_github_repos { display: none; }
   .nav-tabs {
     margin-top: 15px;
@@ -139,5 +140,9 @@ body {
       padding: 8px 8px;
     }
 
+  }
+
+  .node-topics {
+    border-bottom: 1px solid #ddd;
   }
 }

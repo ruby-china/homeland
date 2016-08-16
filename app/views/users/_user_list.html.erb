@@ -1,21 +1,15 @@
-<%
-columns = 3 if columns == nil
-bs_col = 12 / columns
-%>
-<% users.each_slice(columns) do |sub_users| %>
-  <div class="row">
-    <% sub_users.each do |user| %>
-    <div class="col-xs-<%= bs_col %>" style="min-width: 100px;">
-      <div class="media user-card">
-        <div class="media-left"><%= user_avatar_tag(user, :md) %></div>
-        <div class="media-body">
-          <div class="media-heading"><%= user_name_tag(user) %></div>
-          <div class="infos">
-            <div class="item opts"><%= follow_user_tag(user, class: "") %></div>
-          </div>
+<div class="row">
+  <% users.each do |user| %>
+  <div class="col-xs-6 col-sm-6 col-md-4">
+    <div class="media user-card">
+      <div class="media-left"><%= user_avatar_tag(user, :md) %></div>
+      <div class="media-body">
+        <div class="media-heading"><%= user_name_tag(user) %></div>
+        <div class="infos">
+          <div class="item opts"><%= follow_user_tag(user, class: "") %></div>
         </div>
       </div>
     </div>
-    <% end %>
   </div>
-<% end %>
+  <% end %>
+</div>

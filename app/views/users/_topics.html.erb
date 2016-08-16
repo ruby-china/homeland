@@ -1,12 +1,12 @@
 <table class="node-topics table">
   <tr class="head">
-    <td class="node"><%=t("common.node")%></td>
+    <td class="node hide-ios"><%=t("common.node")%></td>
     <td class="title"><%=t("common.title")%></td>
     <td class="replies"><%=t("common.replies_count")%>/<%= t("common.likes_count") %></td>
   </tr>
   <% topics.each do |topic| %>
     <tr class="topic <%= cycle("odd","") %> <%= 'deleted' if topic.deleted? %>">
-      <td class="node"><%= render_node_name(topic.node_name,topic.node_id) %></td>
+      <td class="node hide-ios"><%= render_node_name(topic.node_name,topic.node_id) %></td>
       <td class="title"><%= link_to(topic.title, topic_path(topic)) %> <%= topic_excellent_tag(topic) %> <em><%= timeago(topic.created_at) %></td>
       <td class="replies"><%= topic.replies_count %>/<%= topic.likes_count %> </td>
     </tr>

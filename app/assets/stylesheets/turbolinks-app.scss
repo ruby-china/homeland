@@ -118,18 +118,19 @@ body {
     }
 
     .count {
+      padding-left: 0;
       width: auto;
       text-align: right; padding-top: 15px;
       a:link,
       a:hover,
       a:visited {
         line-height: 11px;
-        min-width: 40px;
+        min-width: 28px;
         color: #EB5424;
         text-align: right;
         border-radius: 80px;
         padding: 0;
-        display: inline;
+        display: inline-block;
         text-decoration: none;
       }
 

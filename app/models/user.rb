@@ -52,7 +52,7 @@ class User < ApplicationRecord
   validates :login, format: { with: ALLOW_LOGIN_CHARS_REGEXP, message: '只允许数字、大小写字母和下划线' },
                     length: { in: 3..20 },
                     presence: true,
-                    uniqueness: { case_sensitive: true }
+                    uniqueness: { case_sensitive: false }
 
   validates :name, length: { maximum: 20 }
 

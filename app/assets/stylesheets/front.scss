@@ -85,10 +85,24 @@
       i.fa { color: #999; margin-left: 3px; }
       i.fa-diamond { color: $red; }
     }
+
     .info {
       color: #ABA8A6; font-size: 12px; margin-top: 0;
       a { color: #ABA8A6; }
     }
+
+    &.topic-visited {
+      .title {
+        a:link,
+        a:visited { color: #AAA; }
+      }
+      .info {
+        color: #ddd;
+        a { color: #ddd; }
+      }
+    }
+
+
     .count {
       width: 100px; text-align: right; padding-top: 15px;
       a:link,

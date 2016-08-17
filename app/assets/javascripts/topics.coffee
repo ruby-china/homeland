@@ -458,5 +458,6 @@ window.TopicView = Backbone.View.extend
 
     e.preventDefault()
 
+    $(e.currentTarget).addClass('topic-visited')
     Turbolinks.visit(target.attr('href'))
     return false

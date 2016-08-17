@@ -34,6 +34,7 @@
       var readed_topic_ids = <%= current_user.filter_readed_topics(@topics + @suggest_topics) %>;
       for (var i = 0; i < readed_topic_ids.length; i++) {
         topic_id = readed_topic_ids[i];
+        $(".topic-"+ topic_id).addClass('topic-visited');
         $(".topic-"+ topic_id + " .count a").addClass("state-true");
       }
     </script>

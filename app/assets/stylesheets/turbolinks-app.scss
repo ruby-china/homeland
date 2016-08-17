@@ -108,9 +108,35 @@ body {
       background: #f9f9f9;
     }
 
+    .avatar {
+      padding-top: 6px;
+    }
+
     .title {
       a:hover,
       a:active { text-decoration: none; }
+    }
+
+    .count {
+      width: auto;
+      text-align: right; padding-top: 15px;
+      a:link,
+      a:hover,
+      a:visited {
+        line-height: 11px;
+        min-width: 40px;
+        color: #EB5424;
+        text-align: right;
+        border-radius: 80px;
+        padding: 0;
+        display: inline;
+        text-decoration: none;
+      }
+
+      a:link { background: transparent; color: #aaa;}
+      a:hover { background: transparent;  }
+      a.state-true,
+      a:visited { background: transparent; color: #eee; }
     }
   }
 }

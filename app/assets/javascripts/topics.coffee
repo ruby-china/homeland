@@ -218,7 +218,7 @@ window.TopicView = Backbone.View.extend
         $(el).wrap("<a href='#{$(el).attr("src")}' class='zoom-image' data-action='zoom'></a>")
 
     # Bind click event
-    if App.mobile == true
+    if App.turbolinks || App.mobile
       $('a.zoom-image').attr("target","_blank")
     else
       $('a.zoom-image').fluidbox

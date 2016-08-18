@@ -59,15 +59,6 @@ body {
       margin: 8px;
     }
   }
-
-  .zoom-image {
-    overflow: hidden;
-    .fluidbox-wrap {
-      margin: 8px -15px;
-      img { min-width: 100%; max-width: 100%; }
-    }
-
-  }
 }
 
 .topics {
@@ -104,17 +95,30 @@ body {
 
 .topics {
   .topic {
+    min-height: 60px;
     &:active {
       background: #f9f9f9;
     }
 
     .avatar {
-      padding-top: 6px;
+      padding-top: 3px;
     }
 
     .title {
+      margin-bottom: 0px;
+      a {
+        font-size: 14px;
+        line-height: 22px !important;
+      }
       a:hover,
-      a:active { text-decoration: none; }
+      a:active {
+        text-decoration: none; }
+    }
+
+    .info {
+      a.node {
+        color: #909090;
+      }
     }
 
     &.topic-visited {
@@ -135,9 +139,10 @@ body {
     }
 
     .count {
+      padding-top: 0px;
       padding-left: 0;
       width: auto;
-      text-align: right; padding-top: 15px;
+      text-align: right;
       a:link,
       a:hover,
       a:visited {
@@ -162,6 +167,21 @@ body {
 .topic-detail {
   .label-awesome {
     padding: 10px 15px;
+  }
+
+  .panel-heading {
+    h1 {
+      font-size: 18px;
+    }
+  }
+
+  .markdown {
+    .zoom-image {
+      overflow: hidden;
+      display: block;
+      margin: 8px -15px;
+      img {  width: 100%; }
+    }
   }
 }
 

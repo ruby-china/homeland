@@ -56,7 +56,7 @@
     </div>
     <% else %>
     <div id="replies" class="panel panel-default" data-last-floor="<%= @replies.count(:all) %>">
-      <div class="total panel-heading">
+      <div class="total panel-heading hide-ios">
         共收到 <b><%= @topic.replies_count %></b> 条回复
       </div>
       <div class="items panel-body">
@@ -72,7 +72,7 @@
       <div class="alert alert-info">此话题已经于 <%= l @topic.closed_at, format: :long %> 关闭，不再接受任何回帖。</div>
     <% else %>
       <div id="reply" class="panel panel-default">
-        <div class="panel-heading">回帖</div>
+        <div class="panel-heading hide-ios">回帖</div>
         <div class="panel-body">
         <% if can? :create, Reply %>
           <%= render 'reply_form' %>
@@ -93,7 +93,7 @@
   <% end %>
 
   <%= render 'related_topics' %>
-  </div>
+</div>
 
 <% if !mobile? %>
   <div class="sidebar hidden-mobile col-md-3">

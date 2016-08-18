@@ -117,6 +117,23 @@ body {
       a:active { text-decoration: none; }
     }
 
+    &.topic-visited {
+      .title {
+        a:link,
+        a:visited { color: #777; }
+      }
+      .info {
+        color: #bbb;
+        a { color: #bbb; }
+      }
+      .count {
+        a:link,
+        a:visited {
+          color: #eee;
+        }
+      }
+    }
+
     .count {
       padding-left: 0;
       width: auto;

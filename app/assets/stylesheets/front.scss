@@ -91,18 +91,6 @@
       a { color: #ABA8A6; }
     }
 
-    &.topic-visited {
-      .title {
-        a:link,
-        a:visited { color: #AAA; }
-      }
-      .info {
-        color: #ddd;
-        a { color: #ddd; }
-      }
-    }
-
-
     .count {
       width: 100px; text-align: right; padding-top: 15px;
       a:link,

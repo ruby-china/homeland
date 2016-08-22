@@ -1,6 +1,9 @@
 <div class="panel-heading media clearfix">
   <div class="media-body">
-    <h1 class="media-heading"><%= topic.title %></h1>
+    <h1 class="media-heading">
+      <%= topic.title %>
+      <%= topic_close_tag(topic) %>
+    </h1>
     <div class="info">
       <%= render_node_name(topic.node_name,topic.node_id) %>
        ·

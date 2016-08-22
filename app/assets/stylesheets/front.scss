@@ -74,7 +74,6 @@
     padding: 10px 15px;
     margin: 0 -15px;
     vertical-align: top;
-    position: relative;
     &:last-child { border-bottom: 0px; }
     .avatar { text-align:center; }
     .title {
@@ -84,6 +83,7 @@
       a:visited { color: #222; font-weight: 400; line-height: 30px; }
       i.fa { color: #999; margin-left: 3px; }
       i.fa-diamond { color: $red; }
+      i.fa-check { color: $green; }
     }
 
     .info {
@@ -118,7 +118,10 @@
   .panel-heading {
     padding: 15px;
     transition: all .3s;
-    h1 { margin-top:0; font-size:24px; color:#333;text-align: left; line-height:100%; margin-bottom:8px; }
+    h1 {
+      margin-top:0; font-size:24px; color:#333;text-align: left; line-height:100%; margin-bottom:8px;
+      i.fa-check { color: $green; font-size: 16px; }
+    }
     .avatar { text-align:right; }
   }
 

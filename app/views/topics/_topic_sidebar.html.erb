@@ -43,9 +43,9 @@
         <% if owner?(@topic) or admin? %>
           <% if can?(:close, @topic) %>
             <% if !@topic.closed? %>
-              <%= link_to raw("<i class='fa fa-lock'></i> 关闭"), action_topic_path(@topic, type: 'close'), method: 'post', title: "关闭话题，不再接受回帖", remote: true %>
+              <%= link_to raw("<i class='fa fa-check'></i> 结束"), action_topic_path(@topic, type: 'close'), method: 'post', title: "关闭讨论／问题已解决", remote: true, data: { toggle: 'tooltip' } %>
             <% else %>
-              <%= link_to raw("<i class='fa fa-unlock-alt'></i> 开启"), action_topic_path(@topic, type: 'open'), method: 'post', title: "重新开启话题", remote: true %>
+              <%= link_to raw("<i class='fa fa-undo'></i> 开启"), action_topic_path(@topic, type: 'open'), method: 'post', title: "重新开启话题", remote: true, data: { toggle: 'tooltip' } %>
             <% end %>
           <% end %>
           <%= link_to "", edit_topic_path(@topic), class: "fa fa-pencil", title: "修改本帖" %>

@@ -9,9 +9,10 @@ Doorkeeper.configure do
     current_user || warden.authenticate!(scope: :user)
   end
 
-  resource_owner_from_credentials do |_routes|
-    u = User.find_by_login_or_email(params[:username])
-    u if u && u.valid_password?(params[:password])
+  resource_owner_from_credentials do
+    request.params[:user] = { login: request.params[:username], password: request.params[:password] }
+    request.env["devise.allow_params_authentication"] = true
+    resource = request.env["warden"].authenticate!(scope: :user)
   end
 
   # If you want to restrict access to the web interface for adding oauth authorized applications, you need to declare the block below.

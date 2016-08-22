@@ -31,9 +31,6 @@
         </div>
         <% end %>
       </div>
-      <div class="panel-footer">
-        <%= render partial: "devise/shared/links" %>
-      </div>
     </div>
   </div>
   <div class="col-md-3">
@@ -42,6 +39,10 @@
       <ul class="list-group">
         <li class="list-group-item"><%= link_to raw("<i class='fa fa-github'></i> GitHub"), omniauth_authorize_path(:user, :github), class: "btn btn-default btn-lg btn-block" %> </li>
       </ul>
+    </div>
+
+    <div class="panel panel-default">
+      <%= render partial: "devise/shared/links" %>
     </div>
   </div>
 </div>

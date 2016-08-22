@@ -9,11 +9,11 @@ class User < ApplicationRecord
   include Searchable
   include Redis::Search
 
-  acts_as_cached version: 2, expires_in: 1.week
+  acts_as_cached version: 3, expires_in: 1.week
 
   ALLOW_LOGIN_CHARS_REGEXP = /\A[A-Za-z0-9\-\_\.]+\z/
 
-  devise :database_authenticatable, :registerable, :recoverable,
+  devise :database_authenticatable, :registerable, :recoverable, :lockable,
          :rememberable, :trackable, :validatable, :omniauthable
 
   redis_search title_field: :login,
@@ -222,6 +222,7 @@ class User < ApplicationRecord
 
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
+    logger.info "-------------- #{conditions.inspect}"
     login = conditions.delete(:login)
     login.downcase!
     where(conditions.to_h).where(['lower(login) = :value OR lower(email) = :value', { value: login }]).first

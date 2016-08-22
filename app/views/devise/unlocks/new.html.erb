@@ -1,14 +1,20 @@
-<% title_tag 'Resend unlock instructions' %>
+<% title_tag '重新发送解锁邮件' %>
 
-<h2>Resend unlock instructions</h2>
+<div class="row">
+  <div class="col-md-6 col-sm-offset-3">
+    <div class="panel">
+      <div class="panel-heading">重新发送解锁邮件</div>
+      <div class="panel-body">
+        <%= simple_form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
+          <%= devise_error_messages! %>
 
-<%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
+          <%= f.input :email, hint: '' %>
 
-  <p><%= f.label :email %><br />
-  <%= f.text_field :email %></p>
-
-  <p><%= f.submit "Resend unlock instructions" %></p>
-<% end %>
-
-<%= render partial: "devise/shared/links" %>
+          <div class="form-group">
+            <%= f.submit "重新发送解锁邮件", class: 'btn btn-primary' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

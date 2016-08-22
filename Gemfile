@@ -26,7 +26,7 @@ gem 'jquery-atwho-rails'
 gem 'font-awesome-rails'
 
 # OAuth Provider
-gem 'doorkeeper', '4.0.0.rc4'
+gem 'doorkeeper'
 gem 'doorkeeper-i18n'
 
 gem 'bulk_insert'

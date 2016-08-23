@@ -61,6 +61,7 @@ class Reply < ApplicationRecord
     return if reply.system_event?
     topic = Topic.find_by_id(reply.topic_id)
     return if topic.blank?
+    return if topic.ban?
 
     notified_user_ids = reply.mentioned_user_ids
 

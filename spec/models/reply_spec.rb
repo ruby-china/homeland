@@ -45,6 +45,18 @@ describe Reply, type: :model do
       # TODO: 需要更多的测试，测试 @ 并且有关注的时候不会重复通知，回复时候不会通知自己
     end
 
+    describe 'should not create notfications when topic has ban' do
+      let(:u1) { create(:user) }
+      let!(:t) { create(:topic, node_id: Node.no_point_id, follower_ids: [u1.id]) }
+
+      it 'should not create notifications' do
+        expect do
+          create :reply, topic: t, user: user
+          create :reply, topic: t, user: user
+        end.to change(u1.notifications, :count).by(0)
+      end
+    end
+
     describe 'should boardcast replies to client' do
       it 'should work' do
         expect(Reply).to receive(:broadcast_to_client).once

@@ -257,6 +257,7 @@ describe Topic, type: :model do
       t.reload
       expect(t.node_id).to eq Node.no_point_id
       expect(t.lock_node).to eq true
+      expect(t.ban?).to eq true
     end
   end
 

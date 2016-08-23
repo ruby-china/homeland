@@ -207,10 +207,6 @@ class Topic < ApplicationRecord
     update_attributes(lock_node: true, node_id: Node.no_point_id, admin_editing: true)
   end
 
-  def ban?
-    self.node_id == Node.no_point_id
-  end
-
   def excellent!
     self.transaction do
       Reply.create_system_event(action: 'excellent', topic_id: self.id)

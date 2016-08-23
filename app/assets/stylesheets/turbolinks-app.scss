@@ -1,7 +1,33 @@
+@import "vars";
+
+$primary: #e64645;
+$primary-dark: #c1202b;
+
 .hide-ios { display: none !important; }
 body {
   padding-top: 0;
-  background: #f0f0f0;
+  background: #d0d0d0;
+}
+
+.btn-primary {
+  background: $primary !important;
+  border-color: $primary-dark !important;
+
+  &.active,
+  &:active {
+    background: $primary-dark !important;
+    border-color: $primary-dark !important;
+  }
+}
+
+.btn-danger {
+  background: #555 !important;
+  border-color: #333 !important;
+
+  &:active {
+    background: #333 !important;
+    border-color: #111 !important;
+  }
 }
 
 .header, .footer,
@@ -34,8 +60,15 @@ body {
   border-radius: 0;
   margin-bottom: 0 !important;
   box-shadow: 0 0 0;
-  border-top: 1px solid #f0f0f0;
-  border-bottom: 1px solid #e0e0e0;
+  border-top: 0px solid #f0f0f0;
+  border-bottom: 1px solid #ece2d7;
+
+  .panel-heading,
+  .panel-footer {
+    background: #fffbf8;
+    border-color: #ece2d7;
+    border-radius: 0 !important;
+  }
 }
 
 .alert {
@@ -46,6 +79,10 @@ body {
 
 .form-control {
   -webkit-appearance: none;
+
+  &:focus {
+    border-color: #ccc;
+  }
 }
 
 .pagination { display: none; }
@@ -75,7 +112,7 @@ body {
 }
 
 .topic-editor {
-  height: 100px;
+  height: 140px;
 }
 
 .no-result { display: none; }
@@ -97,7 +134,7 @@ body {
   .topic {
     min-height: 60px;
     &:active {
-      background: #f9f9f9;
+      background: #f5f5f5;
     }
 
     .avatar {
@@ -112,7 +149,8 @@ body {
       }
       a:hover,
       a:active {
-        text-decoration: none; }
+        text-decoration: none;
+      }
     }
 
     .info {
@@ -124,7 +162,7 @@ body {
     &.topic-visited {
       .title {
         a:link,
-        a:visited { color: #777; }
+        a:visited { color: #666; }
       }
       .info {
         color: #bbb;
@@ -133,7 +171,7 @@ body {
       .count {
         a:link,
         a:visited {
-          color: #eee;
+          color: #ddd;
         }
       }
     }
@@ -148,7 +186,6 @@ body {
       a:visited {
         line-height: 11px;
         min-width: 28px;
-        color: #EB5424;
         text-align: right;
         border-radius: 80px;
         padding: 0;
@@ -156,10 +193,10 @@ body {
         text-decoration: none;
       }
 
-      a:link { background: transparent; color: #aaa;}
+      a:link { background: transparent; color: #666;}
       a:hover { background: transparent;  }
       a.state-true,
-      a:visited { background: transparent; color: #eee; }
+      a:visited { background: transparent; color: #ddd; }
     }
   }
 }
@@ -175,6 +212,15 @@ body {
     }
   }
 
+  .info {
+    color: #999;
+
+    .user-name {
+      color: #666;
+    }
+    .node { color: $primary; }
+  }
+
   .markdown {
     .zoom-image {
       overflow: hidden;
@@ -182,6 +228,24 @@ body {
       margin: 8px -15px;
       img {  width: 100%; }
     }
+
+    pre {
+      background: #fffefc !important;
+      border-color: #f9f4f0 !important;
+      code {
+        background: #fffefc !important;
+      }
+    }
+  }
+}
+
+.opts {
+  a:link,
+  a:visited {
+    color: #444 !important;
+  }
+  a.active {
+    .fa { color: $primary; }
   }
 }
 

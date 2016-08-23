@@ -10,19 +10,19 @@ describe ApplicationHelper, type: :helper do
     expect(helper.notice_message.html_safe?).to eq(true)
 
     controller.flash[:notice] = 'hello'
-    expect(helper.notice_message).to eq('<div class="alert alert-success"><a class="close" data-dismiss="alert" href="#">x</a>hello</div>')
+    expect(helper.notice_message).to eq('<div class="alert alert-success"><a class="close" data-dismiss="alert" href="#"><i class="fa fa-close"></i></a>hello</div>')
     controller.flash[:notice] = nil
 
     controller.flash[:warning] = 'hello'
-    expect(helper.notice_message).to eq('<div class="alert alert-warning"><a class="close" data-dismiss="alert" href="#">x</a>hello</div>')
+    expect(helper.notice_message).to eq('<div class="alert alert-warning"><a class="close" data-dismiss="alert" href="#"><i class="fa fa-close"></i></a>hello</div>')
     controller.flash[:warning] = nil
 
     controller.flash[:alert] = 'hello'
-    expect(helper.notice_message).to eq('<div class="alert alert-danger"><a class="close" data-dismiss="alert" href="#">x</a>hello</div>')
+    expect(helper.notice_message).to eq('<div class="alert alert-danger"><a class="close" data-dismiss="alert" href="#"><i class="fa fa-close"></i></a>hello</div>')
     controller.flash[:alert] = nil
 
     controller.flash[:error] = 'hello'
-    expect(helper.notice_message).to eq('<div class="alert alert-error"><a class="close" data-dismiss="alert" href="#">x</a>hello</div>')
+    expect(helper.notice_message).to eq('<div class="alert alert-error"><a class="close" data-dismiss="alert" href="#"><i class="fa fa-close"></i></a>hello</div>')
     controller.flash[:error] = nil
   end
 

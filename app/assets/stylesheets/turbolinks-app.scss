@@ -78,7 +78,23 @@ body {
 .alert {
   padding: 10px;
   font-size: 14px;
-  margin-bottom: 15px;
+  border-top: 0;
+  margin-bottom: 0px;
+
+  .close {
+    opacity: .4;
+    margin-top: 2px;
+  }
+}
+.alert-success {
+  background: #c3ffb8;
+  border-color: #b6f3b8;
+  color: #00a21c;
+}
+.alert-warning {
+  background: #fff8b8;
+  color: #CD8546;
+  border-color: #faebcc;
 }
 
 .form-control {

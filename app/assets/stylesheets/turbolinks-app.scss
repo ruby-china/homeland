@@ -63,6 +63,10 @@ body {
   border-top: 0px solid #f0f0f0;
   border-bottom: 1px solid #ece2d7;
 
+  &:last-child {
+    border-bottom: 0;
+  }
+
   .panel-heading,
   .panel-footer {
     background: #fffbf8;

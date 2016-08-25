@@ -607,8 +607,12 @@ describe User, type: :model do
   end
 
   describe 'welcome mail' do
+    let(:user) { build(:user) }
+
     it 'should send after create' do
-      expect { create :user }.to change{ ActionMailer::Base.deliveries.count }.by(1)
+      expect { user.save }.to change{ ActionMailer::Base.deliveries.count }.by(1)
+      mail = ActionMailer::Base.deliveries.last
+      expect(mail.to).to eq([user.email])
     end
   end
 end

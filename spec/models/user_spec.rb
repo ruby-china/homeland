@@ -605,4 +605,10 @@ describe User, type: :model do
       expect(user.team_collection.collect { |_, id| id }).to include(*(ids1 + ids2))
     end
   end
+
+  describe 'welcome mail' do
+    it 'should send after create' do
+      expect { create :user }.to change{ ActionMailer::Base.deliveries.count }.by(1)
+    end
+  end
 end

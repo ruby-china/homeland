@@ -25,10 +25,10 @@
   <link rel="shortcut icon" href="<%= asset_path("big_logo.png") %>" />
   <link rel="alternate" type="application/rss+xml" title="订阅最新帖" href="<%= main_app.feed_topics_url %>" />
   <link rel="mask-icon" href="<%= asset_path("mask.svg") %>"/>
-  <%= stylesheet_link_tag "front" %>
-  <%= stylesheet_link_tag "turbolinks-app" if turbolinks_app? %>
+  <%= stylesheet_link_tag "front", 'data-turbolinks-track': "reload" %>
+  <%= stylesheet_link_tag "turbolinks-app", 'data-turbolinks-track': 'reload' if turbolinks_app? %>
   <%= action_cable_meta_tag %>
-  <%= javascript_include_tag "app" %>
+  <%= javascript_include_tag "app", 'data-turbolinks-track': "reload" %>
   <script src="//ruby-china-files.b0.upaiyun.com/assets/d3.min.js" data-turbolinks-track="reload" type="text/javascript"></script>
   <script src="//ruby-china-files.b0.upaiyun.com/assets/cal-heatmap.min.js" data-turbolinks-track="reload" type="text/javascript"></script>
   <%= csrf_meta_tag %>

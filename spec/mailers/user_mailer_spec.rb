@@ -13,7 +13,7 @@ describe UserMailer, type: :mailer do
     end
 
     it "renders the body" do
-      expect(mail.body.encoded).to match(user.fullname)
+      expect(mail.body.encoded).to match(Regexp.escape user.fullname)
     end
   end
 end

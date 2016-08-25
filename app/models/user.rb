@@ -174,7 +174,7 @@ class User < ApplicationRecord
   # 注册邮件提醒
   after_create :send_welcome_mail
   def send_welcome_mail
-    UserMailer.welcome(id).deliver_later
+    UserMailer.welcome(self).deliver_later
   end
 
   # 保存用户所在城市

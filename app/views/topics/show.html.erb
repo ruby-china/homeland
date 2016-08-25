@@ -21,17 +21,6 @@
     <div class="topic-detail panel panel-default">
       <%= render partial: "topics/topic_info", locals: { topic: @topic } %>
 
-      <div class="panel-body markdown">
-        <%= raw Setting.before_topic_html %>
-
-        <article>
-          <%= raw @topic.body_html %>
-        </article>
-
-
-        <%= raw Setting.after_topic_html %>
-      </div>
-
       <% if @topic.excellent? %>
         <div class="label-awesome">
           <i class="fa fa-diamond awesome"></i> 本帖已被设为精华帖！
@@ -42,6 +31,17 @@
           <% end %>
         </div>
       <% end %>
+
+      <div class="panel-body markdown">
+        <%= raw Setting.before_topic_html %>
+
+        <article>
+          <%= raw @topic.body_html %>
+        </article>
+
+
+        <%= raw Setting.after_topic_html %>
+      </div>
 
       <div class="panel-footer clearfix">
         <%= render "buttons" %>

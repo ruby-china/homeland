@@ -61,7 +61,7 @@ body {
   margin-bottom: 0 !important;
   box-shadow: 0 0 0;
   border-top: 0px solid #f0f0f0;
-  border-bottom: 1px solid #ece2d7;
+  border-bottom: 0px solid #ece2d7;
 
   &:last-child {
     border-bottom: 0;
@@ -224,6 +224,14 @@ body {
 .topic-detail {
   .label-awesome {
     padding: 10px 15px;
+    margin-top: -1px;
+    background: #ff6060;
+    border: 0;
+    color: #FFF;
+    .fa.awesome {
+      color: #862000;
+    }
+    a { color: #ff9999; }
   }
 
   .panel-heading {
@@ -259,6 +267,16 @@ body {
   }
 }
 
+.notifications {
+  .notification-group {
+    .group-title {
+      margin: 0 -15px;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  }
+}
+
 .opts {
   a:link,
   a:visited {
@@ -266,6 +284,16 @@ body {
   }
   a.active {
     .fa { color: $primary; }
+  }
+}
+
+.page-topics {
+  .panel {
+    &.topic-detail,
+    &#replies,
+    &#reply {
+      border-bottom-width: 1px;
+    }
   }
 }
 
@@ -285,6 +313,7 @@ body {
   .nav-tabs {
     margin-top: 15px;
     li > a {
+      border: 0;
       padding: 8px 8px;
     }
 

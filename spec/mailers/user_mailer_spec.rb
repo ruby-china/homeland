@@ -4,7 +4,7 @@ describe UserMailer, type: :mailer do
   let(:user) { create :user }
 
   describe 'welcome' do
-  	let(:mail) { UserMailer.welcome(user) }
+    let(:mail) { UserMailer.welcome(user) }
 
     it "renders the headers" do
       expect(mail.subject).to eq(I18n.t('mail.welcome_subject', app_name: Setting.app_name).to_s)

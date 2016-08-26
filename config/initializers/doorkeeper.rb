@@ -30,12 +30,18 @@ Doorkeeper.configure do
 
   # Access token expiration time (default 2 hours).
   # If you want to disable expiration, set this to nil.
-  access_token_expires_in 7.days
+  access_token_expires_in 1.days
 
   # Assign a custom TTL for implicit grants.
-  # custom_access_token_expires_in do |oauth_client|
-  #   oauth_client.application.additional_settings.implicit_oauth_expiration
-  # end
+  custom_access_token_expires_in do |oauth_client|
+    case oauth_client.application.level
+    when 1 then 7.days
+    when 2 then 14.days
+    when 3 then 30.days
+    else
+      1.days
+    end
+  end
 
   # Use a custom class for generating the access token.
   # https://github.com/doorkeeper-gem/doorkeeper#custom-access-token-generator

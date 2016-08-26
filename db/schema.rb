@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160819093756) do
+ActiveRecord::Schema.define(version: 20160826044113) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -147,6 +147,7 @@ ActiveRecord::Schema.define(version: 20160819093756) do
     t.datetime "updated_at"
     t.integer  "owner_id"
     t.string   "owner_type"
+    t.integer  "level",        default: 0,  null: false
     t.index ["owner_id", "owner_type"], name: "index_oauth_applications_on_owner_id_and_owner_type", using: :btree
     t.index ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
   end
@@ -205,6 +206,8 @@ ActiveRecord::Schema.define(version: 20160819093756) do
     t.string   "action"
     t.string   "target_type"
     t.string   "target_id"
+    t.index ["deleted_at"], name: "index_replies_on_deleted_at", using: :btree
+    t.index ["topic_id", "deleted_at"], name: "index_replies_on_topic_id_and_deleted_at", using: :btree
     t.index ["topic_id"], name: "index_replies_on_topic_id", using: :btree
     t.index ["user_id"], name: "index_replies_on_user_id", using: :btree
   end
@@ -244,6 +247,8 @@ ActiveRecord::Schema.define(version: 20160819093756) do
     t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["deleted_at"], name: "index_sites_on_deleted_at", using: :btree
+    t.index ["site_node_id", "deleted_at"], name: "index_sites_on_site_node_id_and_deleted_at", using: :btree
     t.index ["site_node_id"], name: "index_sites_on_site_node_id", using: :btree
     t.index ["url"], name: "index_sites_on_url", using: :btree
   end
@@ -294,9 +299,11 @@ ActiveRecord::Schema.define(version: 20160819093756) do
     t.datetime "updated_at"
     t.datetime "closed_at"
     t.integer  "team_id"
+    t.index ["deleted_at"], name: "index_topics_on_deleted_at", using: :btree
     t.index ["excellent"], name: "index_topics_on_excellent", using: :btree
     t.index ["last_active_mark"], name: "index_topics_on_last_active_mark", using: :btree
     t.index ["likes_count"], name: "index_topics_on_likes_count", using: :btree
+    t.index ["node_id", "deleted_at"], name: "index_topics_on_node_id_and_deleted_at", using: :btree
     t.index ["node_id"], name: "index_topics_on_node_id", using: :btree
     t.index ["suggested_at"], name: "index_topics_on_suggested_at", using: :btree
     t.index ["team_id"], name: "index_topics_on_team_id", using: :btree

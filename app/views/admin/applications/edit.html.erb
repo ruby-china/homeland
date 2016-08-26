@@ -1,0 +1,14 @@
+<%= simple_form_for([:admin, @application], url: admin_application_path(@application)) do |f| %>
+  <%= render "/shared/error_messages", target: @application %>
+    <%= f.input :name %>
+    <%= f.input :redirect_uri %>
+    <%= f.input :level %>
+
+    <div class="form-actions">
+      <%= f.submit "保存", class: "btn btn-primary", 'data-disable-with' => "Saving..." %>
+      <%= link_to '取消', admin_applications_path, class: "btn" %>
+      <span class="pull-right">
+        <%= link_to "删除", admin_application_path(@application.id), class: 'btn btn-danger', method: :delete, 'data-confirm' => '确定要删除吗?' %>
+      </span>
+    </div>
+<% end %>

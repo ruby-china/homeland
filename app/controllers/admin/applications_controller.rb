@@ -17,7 +17,7 @@ module Admin
     end
 
     def create
-      @application = Doorkeeper::Application.new(params[:application].permit!)
+      @application = Doorkeeper::Application.new(params[:doorkeeper_application].permit!)
 
       if @application.save
         redirect_to(admin_applications_path, notice: 'Application 创建成功。')
@@ -27,7 +27,7 @@ module Admin
     end
 
     def update
-      if @application.update_attributes(params[:application].permit!)
+      if @application.update_attributes(params[:doorkeeper_application].permit!)
         redirect_to(admin_applications_path, notice: 'Application 更新成功。')
       else
         render action: 'edit'

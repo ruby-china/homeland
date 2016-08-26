@@ -9,13 +9,14 @@
 <div id="admin_applications">
   <table class="table table-bordered table-striped table-condensed">
     <tr class="head">
-      <td>编号</td>
-      <td>名称</td>
-      <td>Client Id</td>
-      <td>所有者</td>
-      <td>用户量</td>
-      <td>创建时间</td>
-      <td class="opts"></td>
+      <th>编号</th>
+      <th>名称</th>
+      <th>uid</th>
+      <th>Owner</th>
+      <th>Tokens</th>
+      <th>Level</th>
+      <th>创建时间</th>
+      <th class="opts"></th>
     </tr>
     <% @applications.each do |item| %>
     <tr class="<%= cycle("","even") %>">
@@ -24,9 +25,10 @@
       <td><%= item.uid %></td>
       <td><%= user_name_tag(item.owner) %></td>
       <td><%= item.access_tokens.count %></td>
+      <td><%= item.level %></td>
       <td><%= l(item.created_at, format: :long) %></td>
       <td>
-        <%= link_to "", admin_application_path(item.id), method: :delete, 'data-confirm' => '确定要删除吗?', class: "fa fa-trash" %>
+        <%= link_to '修改', edit_admin_application_path(item) %>
       </td>
     </tr>
     <% end %>

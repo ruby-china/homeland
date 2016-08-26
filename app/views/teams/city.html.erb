@@ -1,0 +1,34 @@
+<% title_tag @location.name %>
+
+<div id="teams" class="box">
+  <div id="hot_teams" class="panel panel-default user-list">
+    <%= render "shared/location_users_switches", location: @location %>
+    <div class="panel-body row">
+      <% if !@teams.blank? %>
+        <% @teams.each do |item| %>
+          <div class="team col-sm-3">
+            <div class="team-container">
+              <div class="team-banner">
+                <div class="avatar col-xs-2 col-md-3"><%= user_avatar_tag(item, :md) %></div>
+                <div class="name col-xs-10  col-md-9"><%= user_name_tag(item) %></div>
+                <div class="clearfix"></div>
+              </div>
+              <hr>
+              <div class="team-members">
+                <% item.users[0..5].each do |user| %>
+                  <div class="team-member col-xs-2">
+                    <%= user_avatar_tag(user, :sm) %>
+                  </div>
+                <% end %>
+                <div class="clearfix"></div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="panel-footer clearfix">
+      <%= will_paginate @teams %>
+    </div>
+  </div>
+</div>

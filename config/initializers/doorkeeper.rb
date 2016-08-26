@@ -33,8 +33,9 @@ Doorkeeper.configure do
   access_token_expires_in 1.days
 
   # Assign a custom TTL for implicit grants.
-  custom_access_token_expires_in do |oauth_client|
-    case oauth_client.application.level
+  custom_access_token_expires_in do |client|
+    application = client.is_a?(Doorkeeper::Application) ? client : client&.application
+    case application&.level
     when 1 then 7.days
     when 2 then 14.days
     when 3 then 30.days

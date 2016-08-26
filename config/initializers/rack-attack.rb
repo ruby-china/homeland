@@ -9,12 +9,12 @@ class Rack::Attack
   end
 
   # 固定黑名单
-  blacklist('blacklist/ip') do |req|
+  blocklist('blacklist/ip') do |req|
     Setting.blacklist_ips && !Setting.blacklist_ips.index(req.ip).nil?
   end
 
   # 允许 localhost
-  whitelist('allow from localhost') do |req|
+  safelist('allow from localhost') do |req|
     # '127.0.0.1' == req.ip || '::1' == req.ip
   end
 

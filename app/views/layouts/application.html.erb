@@ -33,6 +33,9 @@
   <script src="//ruby-china-files.b0.upaiyun.com/assets/cal-heatmap.min.js" data-turbolinks-track="reload" type="text/javascript"></script>
   <%= csrf_meta_tag %>
   <%= raw Setting.custom_head_html %>
+  <% if current_user %>
+    <meta name="current-user" data-user-id="<%= current_user.id %>" data-user-login="<%= current_user.login %>" data-user-name="<%= current_user.name %>" data-user-email="<%= current_user.email %>" data-user-avatar-url="<%= current_user.avatar? ? current_user.avatar.url(:md) : current_user.letter_avatar_url(96) %>">
+  <% end %>
 </head>
 <body class="page-<%= controller_name %><%= ' infinite-scroll' if turbolinks_app? %>" data-controller-name="<%= controller_name %>">
   <div class="header">

@@ -32,20 +32,18 @@ module Api
       end
 
       def optional!(name, opts = {})
-        if params[name].blank? && opts[:require] == true
+        if opts[:require] && !params.has_key?(name)
           raise ActionController::ParameterMissing.new(name)
         end
 
-        if opts[:values] && params[name].present?
+        if opts[:values] && params.has_key?(name)
           values = opts[:values].to_a
           if !values.include?(params[name]) && !values.include?(params[name].to_i)
             raise ParameterValueNotAllowed.new(name, opts[:values])
           end
         end
 
-        if params[name].blank? && opts[:default].present?
-          params[name] = opts[:default]
-        end
+        params[name] ||= opts[:default]
       end
 
       def error!(data, status_code = 400)

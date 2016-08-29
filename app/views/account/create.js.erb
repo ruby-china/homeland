@@ -1,0 +1,8 @@
+<% if resource.errors.empty? %>
+  <% flash[:notice] = t('devise.sessions.signed_in') %>
+  Turbolinks.visit('<%= topics_url %>');
+<% else %>
+  $('#new_user .alert').remove();
+  $('#new_user').prepend('<%= j render("shared/error_messages", target: resource) %>');
+  $('.rucaptcha-image-box').html('<%= j rucaptcha_image_tag %>');
+<% end %>

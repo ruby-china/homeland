@@ -141,12 +141,7 @@ class TopicsController < ApplicationController
     @topic.team_id = ability_team_id
     @topic.title = topic_params[:title]
     @topic.body = topic_params[:body]
-
-    if @topic.save
-      redirect_to(topic_path(@topic.id), notice: t('topics.update_topic_success'))
-    else
-      render action: 'edit'
-    end
+    @topic.save
   end
 
   def destroy

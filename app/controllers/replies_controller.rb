@@ -38,11 +38,7 @@ class RepliesController < ApplicationController
   end
 
   def update
-    if @reply.update_attributes(reply_params)
-      redirect_to(topic_path(@reply.topic_id), notice: '回帖更新成功。')
-    else
-      render action: 'edit'
-    end
+    @reply.update_attributes(reply_params)
   end
 
   def destroy

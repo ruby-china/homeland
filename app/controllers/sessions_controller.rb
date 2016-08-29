@@ -11,7 +11,7 @@ class SessionsController < Devise::SessionsController
     set_flash_message(:notice, :signed_in) if is_navigational_format?
     sign_in(resource_name, resource)
     respond_to do |format|
-      format.html { redirect_to after_sign_in_path_for(resource) }
+      format.html { redirect_to topics_url }
       format.json { render status: '201', json: resource.as_json(only: [:login, :email]) }
     end
   end
@@ -29,5 +29,9 @@ class SessionsController < Devise::SessionsController
   # If not bind to a domain, request.domain is nil.
   def domain_or_host
     request.domain || request.host
+  end
+
+  def respond_to_on_destroy
+    redirect_to topics_url
   end
 end

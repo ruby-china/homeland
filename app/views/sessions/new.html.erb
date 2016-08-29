@@ -5,7 +5,7 @@
     <div class="panel panel-default">
       <div class="panel-heading"><%= t("common.login") %></div>
       <div class="panel-body">
-        <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "" }) do |f| %>
+        <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), remote: true, html: { class: "" }) do |f| %>
         <div class="form-group">
           <%= f.text_field :login, type: :email, class: "form-control input-lg", placeholder: "用户名 / Email" %>
         </div>
@@ -40,3 +40,9 @@
     </div>
   </div>
 </div>
+
+<script>
+  $('#new_user').on('ajax:error', function(event, xhr, status, error) {
+    App.alert(xhr.responseText, '#main');
+  })
+</script>

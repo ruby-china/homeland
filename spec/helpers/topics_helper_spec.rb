@@ -5,8 +5,8 @@ describe TopicsHelper, type: :helper do
     it 'should right with Chinese neer URL' do
       # TODO: 这行是由于 Redcarpet 的 auto_link 方法转换连起来的会有编码错误
       #  @huacnlee提醒说在某些环境下面，下面测试会Pass。所以有可能在你的测试环境会失败。
-      expect(helper.markdown('此版本并非线上的http://yavaeye.com的源码.')).to eq(
-        '<p>此版本并非线上的<a href="http://yavaeye.com" rel="nofollow" target="_blank">http://yavaeye.com</a>的源码.</p>'
+      expect(helper.markdown('此版本并非线上的http://yavaeye.com 的源码.')).to eq(
+        '<p>此版本并非线上的<a href="http://yavaeye.com" rel="nofollow" target="_blank">http://yavaeye.com</a> 的源码.</p>'
       )
       expect(helper.markdown('http://foo.com,的???')).to eq(
         '<p><a href="http://foo.com," rel="nofollow" target="_blank">http://foo.com,</a>的???</p>'

@@ -83,7 +83,7 @@ gem 'auto-space'
 # 队列
 gem 'sidekiq'
 # Sidekiq Web
-gem 'sinatra', git: 'https://github.com/sinatra/sinatra.git', require: false
+gem 'sinatra', '~> 2.0.0.beta2'
 
 # 分享功能
 gem 'social-share-button'

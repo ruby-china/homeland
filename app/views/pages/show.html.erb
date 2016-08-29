@@ -13,7 +13,7 @@
             <%= link_to comments_page_path(@page.slug) do %>
               <%= @page.comments_count %> 条评论
             <% end %>,
-            版本 <%= @page.version %>， <%= t("common.last_modified_at")%> <%= timeago(@page.updated_at) %>
+            <%= @page.version %> 次修正，<%= @page.hits %> 次阅读， <%= t("common.last_modified_at")%> <%= timeago(@page.updated_at) %>
             <span class="pull-right opts hide-ios">
               <%= link_to(icon_tag('pencil'), edit_page_path(@page)) if can? :edit, @page %>
             </span>

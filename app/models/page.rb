@@ -2,9 +2,10 @@
 # 采用 Markdown 编写
 require 'redcarpet'
 class Page < ApplicationRecord
-  include BaseModel
   include MarkdownBody
   include Searchable
+
+  counter :hits, default: 0
 
   acts_as_cached version: 1, expires_in: 1.week
 

@@ -1,6 +1,5 @@
 require 'digest/md5'
 class Reply < ApplicationRecord
-  include BaseModel
   include SoftDelete
   include MarkdownBody
   include Likeable

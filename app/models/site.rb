@@ -1,5 +1,4 @@
 class Site < ApplicationRecord
-  include BaseModel
   include SoftDelete
 
   belongs_to :site_node

@@ -3,8 +3,6 @@ require 'digest/md5'
 require 'open-uri'
 
 class User < ApplicationRecord
-  include Redis::Objects
-  include BaseModel
   include OmniauthCallbacks
   include Searchable
   include Redis::Search

@@ -8,8 +8,6 @@ CORRECT_CHARS = [
 ]
 
 class Topic < ApplicationRecord
-  include Redis::Objects
-  include BaseModel
   include Likeable
   include MarkdownBody
   include SoftDelete

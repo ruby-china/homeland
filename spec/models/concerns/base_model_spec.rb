@@ -1,13 +1,12 @@
 require 'rails_helper'
 
-describe BaseModel, type: :model do
+describe ApplicationRecord, type: :model do
   ActiveRecord::Base.connection.create_table(:monkeys, force: true) do |t|
     t.string :name
     t.timestamps null: false
   end
 
   class Monkey < ApplicationRecord
-    include BaseModel
   end
 
   after(:each) do

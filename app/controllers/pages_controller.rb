@@ -1,6 +1,8 @@
 class PagesController < ApplicationController
   authorize_resource :page
 
+  before_action :set_page, only: [:show, :edit, :update, :destroy, :comments]
+
   etag { Setting.wiki_sidebar_html }
 
   def index
@@ -13,7 +15,6 @@ class PagesController < ApplicationController
   end
 
   def show
-    @page = Page.find_by_slug(params[:id])
     if @page.blank?
       if current_user.blank?
         render_404
@@ -23,11 +24,12 @@ class PagesController < ApplicationController
       redirect_to new_page_path(title: params[:id]), notice: 'Page not Found, Please create a new page'
       return
     end
+
+    @page.hits.incr(1)
     fresh_when(@page)
   end
 
   def comments
-    @page = Page.find_by_slug(params[:id])
     render_404 if @page.blank?
   end
 
@@ -41,7 +43,6 @@ class PagesController < ApplicationController
   end
 
   def edit
-    @page = Page.find_by_slug(params[:id])
   end
 
   def create
@@ -57,7 +58,6 @@ class PagesController < ApplicationController
   end
 
   def update
-    @page = Page.find_by_slug(params[:id])
     @page.version_enable = true
     @page.user_id = current_user.id
 
@@ -73,6 +73,10 @@ class PagesController < ApplicationController
   end
 
   protected
+
+  def set_page
+    @page = Page.find_by_slug(params[:id])
+  end
 
   def page_params
     params.require(:page).permit(:title, :body, :slug, :change_desc)

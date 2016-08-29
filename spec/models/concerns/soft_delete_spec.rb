@@ -9,7 +9,6 @@ describe SoftDelete, type: :model do
   end
 
   class WalkingDead < ApplicationRecord
-    include BaseModel
     include SoftDelete
 
     after_destroy do

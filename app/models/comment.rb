@@ -1,5 +1,4 @@
 class Comment < ApplicationRecord
-  include BaseModel
   include MarkdownBody
 
   belongs_to :commentable, polymorphic: true

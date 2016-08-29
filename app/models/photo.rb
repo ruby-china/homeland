@@ -1,5 +1,4 @@
 class Photo < ApplicationRecord
-  include BaseModel
   belongs_to :user
 
   validates_presence_of :image

@@ -9,7 +9,8 @@ echo "deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main" | sudo tee
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 
 # Add Ruby sources
-sudo apt-add-repository ppa:brightbox/ruby-ng
+sudo add-apt-repository ppa:brightbox/ruby-ng
+sudo add-apt-repository ppa:chris-lea/redis-server
 
 sudo apt-get update
 sudo apt-get upgrade -y

@@ -43,7 +43,6 @@
 
 <script>
   $('#new_user').on('ajax:error', function(event, xhr, status, error) {
-    $('#main .alert').remove();
-    $('#main').prepend('<div class="alert alert-danger"><a class="close" data-dismiss="alert" href="#"><i class="fa fa-close"></i></a>' + xhr.responseText + '</div>');
+    App.alert(xhr.responseText, '#main');
   })
 </script>

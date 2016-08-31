@@ -225,13 +225,13 @@ body {
   .label-awesome {
     padding: 10px 15px;
     margin-top: -1px;
-    background: #ff6060;
+    background: #fff2c4;
     border: 0;
-    color: #FFF;
+    color: $primary;
     .fa.awesome {
-      color: #862000;
+      color: $primary;
     }
-    a { color: #ff9999; }
+    a { color: #cccaa2; }
   }
 
   .panel-heading {

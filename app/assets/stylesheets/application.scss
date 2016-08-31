@@ -578,6 +578,15 @@ img.emoji { width:20px; height:20px; }
   body { padding-top: 50px; }
   .container { padding: 0; }
   .panel { border-radius: 0; }
+  .row {
+    margin: 0;
+    .col-md-9,
+    .col-md-8,
+    .col-md-6,
+    .col-md-5,
+    .col-md-4,
+    .col-md-3 { padding: 0; }
+  }
   .hidden-mobile { display: none !important; }
   .pagination {
     display: block;

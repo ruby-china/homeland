@@ -575,6 +575,9 @@ img.emoji { width:20px; height:20px; }
 }
 
 @media (max-width: 480px) {
+  body { padding-top: 50px; }
+  .container { padding: 0; }
+  .panel { border-radius: 0; }
   .hidden-mobile { display: none !important; }
   .pagination {
     display: block;

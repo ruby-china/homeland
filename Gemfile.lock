@@ -352,7 +352,7 @@ GEM
     ruby-push-notifications (0.4.0)
       builder (~> 3.0)
     ruby_dep (1.4.0)
-    rucaptcha (0.5.1)
+    rucaptcha (1.0.0)
       railties (>= 3.2)
     rvm-capistrano (1.4.1)
       capistrano (>= 2.0.0)

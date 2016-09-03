@@ -113,9 +113,11 @@ gem 'exception_notification'
 gem 'status-page'
 
 group :development do
-  gem 'capistrano', '2.9.0', require: false
-  gem 'rvm-capistrano', require: false
-  gem 'capistrano-sidekiq'
+  gem 'capistrano'
+  gem 'capistrano-rails'
+  gem 'capistrano-rvm'
+  gem 'capistrano-sidekiq', require: false
+  gem 'capistrano3-puma'
   gem 'derailed'
   # Better Errors
   gem 'better_errors'

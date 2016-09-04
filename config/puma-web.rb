@@ -1,4 +1,4 @@
-app_root = '/home/ruby/www/ruby-china/current'
+app_root = '/data/www/ruby-china/current'
 pidfile "#{app_root}/tmp/pids/puma.pid"
 state_path "#{app_root}/tmp/pids/puma.state"
 stdout_redirect "#{app_root}/log/puma.stdout.log", "#{app_root}/log/puma.stderr.log", true

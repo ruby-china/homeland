@@ -2,7 +2,7 @@
 
 <div id="users" class="box">
   <div id="hot_users" class="panel panel-default user-list">
-    <div class="panel-heading"><%= @location.name %>的会员</div>
+    <%= render "shared/location_users_switches", location: @location %>
     <div class="panel-body row">
       <% if !@users.blank? %>
       <% @users.each do |item| %>

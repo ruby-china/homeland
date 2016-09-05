@@ -76,3 +76,24 @@
     .buttons { width: 180px; }
   }
 }
+
+#teams {
+  .team {
+    padding: 10px;
+  }
+
+  .team-container {
+    border: 1px dashed #e8e1e1;
+    border-radius: 5px;
+    padding: 10px;
+  }
+
+  .media-object {
+    display: inline-block;
+  }
+
+  .team-member {
+    padding: 0;
+    text-align: center;
+  }
+}

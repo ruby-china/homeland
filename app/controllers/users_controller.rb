@@ -22,7 +22,7 @@ class UsersController < ApplicationController
       return
     end
 
-    @users = User.where(location_id: @location.id).fields_for_list
+    @users = User.personal.where(location_id: @location.id).fields_for_list
     @users = @users.order(replies_count: :desc).paginate(page: params[:page], per_page: 60)
 
     render_404 if @users.count == 0

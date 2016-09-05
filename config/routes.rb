@@ -20,7 +20,9 @@ Rails.application.routes.draw do
     end
   end
   resources :devices
-  resources :teams
+  resources :teams do
+    get "/city/:id", action: "city", on: :collection, as: "location"
+  end
 
   root to: 'home#index'
 

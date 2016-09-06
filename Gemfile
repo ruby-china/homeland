@@ -112,6 +112,8 @@ gem 'oneapm_rpm'
 gem 'exception_notification'
 gem 'status-page'
 
+gem 'bundler-audit', require: false
+
 group :development do
   gem 'capistrano'
   gem 'capistrano-rails'
@@ -137,6 +139,5 @@ group :development, :test do
   gem 'letter_opener'
 
   gem 'codecov', require: false
-  gem 'bundler-audit', require: false
   gem 'pry-byebug'
 end

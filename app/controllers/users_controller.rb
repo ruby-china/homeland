@@ -16,13 +16,10 @@ class UsersController < ApplicationController
   end
 
   def city
-    @location = Location.location_find_by_name(params[:id])
-    if @location.blank?
-      render_404
-      return
-    end
+    location = Location.location_find_by_name(params[:id])
+    render_404 and return if location.nil?
 
-    @users = User.where(location_id: @location.id).fields_for_list
+    @users = User.where(location_id: location.id).fields_for_list
     @users = @users.order(replies_count: :desc).paginate(page: params[:page], per_page: 60)
 
     render_404 if @users.count == 0

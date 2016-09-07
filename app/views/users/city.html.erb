@@ -1,8 +1,8 @@
-<% title_tag @location.name %>
+<% title_tag params[:id] %>
 
 <div id="users" class="box">
   <div id="hot_users" class="panel panel-default user-list">
-    <div class="panel-heading"><%= @location.name %>的会员</div>
+    <div class="panel-heading"><%= params[:id] %>的会员</div>
     <div class="panel-body row">
       <% if !@users.blank? %>
       <% @users.each do |item| %>

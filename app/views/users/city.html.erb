@@ -4,13 +4,11 @@
   <div id="hot_users" class="panel panel-default user-list">
     <div class="panel-heading"><%= params[:id] %>的会员</div>
     <div class="panel-body row">
-      <% if !@users.blank? %>
       <% @users.each do |item| %>
-      <div class="user col-sm-1">
-        <div class="avatar"><%= user_avatar_tag(item, :md) %></div>
-        <div class="name"><%= user_name_tag(item) %></div>
-      </div>
-      <% end %>
+        <div class="user col-sm-1">
+          <div class="avatar"><%= user_avatar_tag(item, :md) %></div>
+          <div class="name"><%= user_name_tag(item) %></div>
+        </div>
       <% end %>
     </div>
     <div class="panel-footer clearfix">

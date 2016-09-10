@@ -5,7 +5,9 @@ class TeamsController < ApplicationController
   before_action :set_team, only: [:show, :edit, :update, :destroy]
 
   def index
-    render_404
+    @total_team_count = Team.count
+    @active_teams = Team.fields_for_list.hot.limit(100)
+    fresh_when([@total_team_count, @active_teams])
   end
 
   def show

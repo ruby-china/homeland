@@ -1,1 +1,13 @@
 <% title_tag t('menu.teams')%>
+
+<div id="teams">
+  <div id="hot_teams" class="team-list panel panel-default">
+    <div class="panel-heading">
+      <strong><%= t("users.hot_teams") %></strong>
+      <div class="pull-right hidden-xs"><%= t("users.current_have") %> <%= @total_team_count %> <%= t("users.teams_joined") %> <%= Setting.app_name %></div>
+    </div>
+    <div class="panel-body">
+      <%= render "users/user_list", users: @active_teams %>
+    </div>
+  </div>
+</div>

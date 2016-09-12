@@ -34,3 +34,7 @@ table tr td a.fa {
     margin-right: 4px;
     &:hover { color: #333; text-decoration: none; }
 }
+
+.nav > li > a {
+  padding: 14px 6px;
+}

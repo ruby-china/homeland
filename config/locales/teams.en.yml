@@ -21,3 +21,4 @@
     users: 'Members'
     team_user_pendding: 'Awaiting response'
     settings: 'Settings'
+    team_users_count: "%{count} team members"

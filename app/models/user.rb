@@ -55,9 +55,10 @@ class User < ApplicationRecord
   validates :name, length: { maximum: 20 }
 
   scope :hot, -> { order(replies_count: :desc).order(topics_count: :desc) }
+  scope :without_team, -> { where(type: nil) }
   scope :fields_for_list, lambda {
     select(:type, :id, :name, :login, :email, :email_md5, :email_public, :avatar, :verified, :state,
-           :tagline, :github, :website, :location, :location_id, :twitter, :co)
+           :tagline, :github, :website, :location, :location_id, :twitter, :co, :team_users_count)
   }
 
   def index_score

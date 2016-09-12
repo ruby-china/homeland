@@ -91,6 +91,7 @@
     my_home_page: "我的主頁"
     edit_account_path: "個人資料設置"
     likes: "我的收藏"
+    teams: '團體 / 組織'
   comments:
     create_comment: "發表評論"
     no_comment: "暫無評論"

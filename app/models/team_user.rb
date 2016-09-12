@@ -2,7 +2,7 @@ class TeamUser < ApplicationRecord
   enum role: %i(owner member)
   enum status: %i(pendding accepted)
 
-  belongs_to :team, touch: true
+  belongs_to :team, touch: true, counter_cache: true
   belongs_to :user
 
   validates :login, :team_id, :role, presence: true, on: :invite

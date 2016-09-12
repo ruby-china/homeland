@@ -22,6 +22,7 @@ module UsersHelper
 
     link_to(login, main_app.user_path(user), options)
   end
+  alias_method :team_name_tag, :user_name_tag
 
   def user_avatar_width_for_size(size)
     case size
@@ -58,6 +59,7 @@ module UsersHelper
       raw img
     end
   end
+  alias_method :team_avatar_tag, :user_avatar_tag
 
   def render_user_level_tag(user)
     return '' if user.blank?

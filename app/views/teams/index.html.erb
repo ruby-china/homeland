@@ -7,7 +7,7 @@
       <div class="pull-right hidden-xs"><%= t("users.current_have") %> <%= @total_team_count %> <%= t("users.teams_joined") %> <%= Setting.app_name %></div>
     </div>
     <div class="panel-body">
-      <%= render "users/user_list", users: @active_teams %>
+      <%= render "team_list", teams: @active_teams %>
     </div>
   </div>
 </div>

@@ -46,6 +46,7 @@ AppView = Backbone.View.extend
     @initComponents()
     @initInfiniteScroll()
     @initCable()
+    @restoreHeaderSearchBox()
 
     if $('body').data('controller-name') in ['topics', 'replies']
       window._topicView = new TopicView({parentView: @})
@@ -160,6 +161,16 @@ AppView = Backbone.View.extend
       link.removeClass("new")
     span.text(json.count)
     document.title = new_title
+
+  restoreHeaderSearchBox: ->
+    $searchInput = $(".header .form-search input")
+
+    if location.pathname != "/search"
+      $searchInput.val("")
+    else
+      results = new RegExp('[\?&]q=([^&#]*)').exec(window.location.href)
+      q = results && decodeURIComponent(results[1])
+      $searchInput.val(q)
 
   openHeaderSearchBox: (e) ->
     $(".header .form-search").addClass("active")

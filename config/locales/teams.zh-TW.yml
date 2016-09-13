@@ -21,4 +21,4 @@
     users: '成員列表'
     team_user_pendding: '等待接受'
     settings: '設置'
-    team_users_count: "%{count}個團體成員"
+    team_users_count: "%{count} 個團體成員"

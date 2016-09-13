@@ -465,6 +465,16 @@ describe 'markdown' do
       end
     end
 
+		describe "list" do
+			let(:raw) do
+				%(foo\n- 123\n- 456)
+			end
+
+			it do
+				expect(doc.inner_html).to eq(%(<p>foo</p>\n\n<ul>\n<li>123</li>\n<li>456</li>\n</ul>))
+			end
+		end
+
     describe 'tables' do
       let(:raw) do
         %(
@@ -557,7 +567,6 @@ _emphasize_    __strong__
   - Express
 
 ### Number List
-
 1. Node.js
 2. Ruby
 3. Go

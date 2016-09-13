@@ -8,12 +8,12 @@ require 'capistrano/deploy'
 #
 # For documentation on these, see for example:
 #
-#   https://github.com/capistrano/rvm
-#   https://github.com/capistrano/rbenv
-#   https://github.com/capistrano/chruby
-#   https://github.com/capistrano/bundler
-#   https://github.com/capistrano/rails
-#   https://github.com/capistrano/passenger
+# https://github.com/capistrano/rvm
+# https://github.com/capistrano/rbenv
+# https://github.com/capistrano/chruby
+# https://github.com/capistrano/bundler
+# https://github.com/capistrano/rails
+# https://github.com/capistrano/passenger
 #
 require 'capistrano/rvm'
 # require 'capistrano/rbenv'

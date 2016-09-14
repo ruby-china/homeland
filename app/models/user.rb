@@ -139,14 +139,6 @@ class User < ApplicationRecord
     created_at > 1.week.ago
   end
 
-  def hr?
-    hr == true
-  end
-
-  def verified?
-    verified == true
-  end
-
   def blocked?
     state == STATE[:blocked]
   end
@@ -211,7 +203,7 @@ class User < ApplicationRecord
 
   def self.find_login(slug)
     return nil unless slug =~ ALLOW_LOGIN_CHARS_REGEXP
-    fetch_by_uniq_keys(login: slug) || where("lower(login) = ?", slug.downcase).take
+    fetch_by_uniq_keys(login: slug) || where('lower(login) = ?', slug.downcase).take
   end
 
   def self.find_by_login_or_email(login_or_email)
@@ -262,7 +254,7 @@ class User < ApplicationRecord
       end
     end
     t2 = Time.now
-    logger.info "  User filter_readed_topics (#{(t2 - t1) * 1000}ms)"
+    logger.info "User filter_readed_topics (#{(t2 - t1) * 1000}ms)"
     ids
   end
 

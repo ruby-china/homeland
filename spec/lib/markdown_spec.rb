@@ -465,15 +465,15 @@ describe 'markdown' do
       end
     end
 
-		describe "list" do
-			let(:raw) do
-				%(foo\n- 123\n- 456)
-			end
+    describe "list" do
+      let(:raw) do
+        %(foo\n- 123\n- 456)
+      end
 
-			it do
-				expect(doc.inner_html).to eq(%(<p>foo</p>\n\n<ul>\n<li>123</li>\n<li>456</li>\n</ul>))
-			end
-		end
+      it do
+        expect(doc.inner_html).to eq(%(<p>foo</p>\n\n<ul>\n<li>123</li>\n<li>456</li>\n</ul>))
+      end
+    end
 
     describe 'tables' do
       let(:raw) do

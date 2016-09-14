@@ -12,7 +12,8 @@ services:
   - elasticsearch
 
 rvm:
-  - 2.3.0
+  - 2.3.1
+  - ruby-2.4.0-preview1
 
 before_script:
   - psql -c "CREATE USER \"admin\" WITH CREATEDB PASSWORD 'admin';" -U postgres

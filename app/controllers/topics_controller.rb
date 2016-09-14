@@ -3,8 +3,7 @@ class TopicsController < ApplicationController
                                      :favorite, :unfavorite, :follow, :unfollow,
                                      :action, :favorites]
   load_and_authorize_resource only: [:new, :edit, :create, :update, :destroy,
-                                     :favorite, :unfavorite, :follow, :unfollow,
-                                     :action]
+                                     :favorite, :unfavorite, :follow, :unfollow]
 
   before_action :set_topic, only: [:ban, :edit, :update, :destroy, :follow,
                                    :unfollow, :action]
@@ -170,6 +169,8 @@ class TopicsController < ApplicationController
   end
 
   def action
+    authorize! params[:type].to_sym, @topic
+
     case params[:type]
     when 'excellent'
       @topic.excellent!

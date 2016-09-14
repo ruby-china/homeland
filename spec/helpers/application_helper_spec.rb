@@ -100,7 +100,8 @@ describe ApplicationHelper, type: :helper do
   describe 'timeago' do
     it 'should work' do
       t = Time.now
-      expect(helper.timeago(t, class: 'foo')).to eq "<abbr class=\"foo timeago\" title=\"#{t.iso8601}\"></abbr>"
+      text = l t.to_date, format: :long
+      expect(helper.timeago(t, class: 'foo')).to eq "<abbr class=\"foo timeago\" title=\"#{t.iso8601}\">#{text}</abbr>"
     end
   end
 

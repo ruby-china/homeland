@@ -16,7 +16,7 @@ module ApplicationHelper
 
     flash.each do |type, message|
       type = :success if type.to_sym == :notice
-      type = :danger if type.to_sym == :alert
+      type = :danger  if type.to_sym == :alert
       text = content_tag(:div, link_to(raw('<i class="fa fa-close"></i>'), '#', :class => 'close', 'data-dismiss' => 'alert') + message, class: "alert alert-#{type}")
       flash_messages << text if message
     end
@@ -44,9 +44,11 @@ module ApplicationHelper
   end
 
   def timeago(time, options = {})
+    return '' if time.blank?
     options[:class] = options[:class].blank? ? 'timeago' : [options[:class], 'timeago'].join(' ')
     options[:title] = time.iso8601
-    content_tag(:abbr, EMPTY_STRING, class: options[:class], title: time.iso8601) if time
+    text = l time.to_date, format: :long
+    content_tag(:abbr, text, options)
   end
 
   def title_tag(str)
@@ -65,9 +67,20 @@ module ApplicationHelper
   end
 
   # 可按需修改
-  LANGUAGES_LISTS = { 'Ruby' => 'ruby', 'HTML / ERB' => 'erb', 'CSS / SCSS' => 'scss', 'JavaScript' => 'js',
-                      'YAML <i>(.yml)</i>' => 'yml', 'CoffeeScript' => 'coffee', 'Nginx / Redis <i>(.conf)</i>' => 'conf',
-                      'Python' => 'python', 'PHP' => 'php', 'Java' => 'java', 'Erlang' => 'erlang', 'Shell / Bash' => 'shell' }
+  LANGUAGES_LISTS = {
+    'Ruby'                         => 'ruby',
+    'HTML / ERB'                   => 'erb',
+    'CSS / SCSS'                   => 'scss',
+    'JavaScript'                   => 'js',
+    'YAML</i>'                     => 'yml',
+    'CoffeeScript'                 => 'coffee',
+    'Nginx / Redis <i>(.conf)</i>' => 'conf',
+    'Python'                       => 'python',
+    'PHP'                          => 'php',
+    'Java'                         => 'java',
+    'Erlang'                       => 'erlang',
+    'Shell / Bash'                 => 'shell'
+  }
 
   def insert_code_menu_items_tag
     lang_list = []

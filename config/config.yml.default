@@ -35,9 +35,9 @@ site_configs: &site_configs
     顶
     赞
     up
-  tips: >
-    提示1
-    提示2
+  tips:
+    - "提示1"
+    - "提示2"
   newbie_notices: >
     <p>为提高社区质量，防止新人一来就发帖提问接触 Ruby 遇到的问题，新用户需要达到下面条件才可发帖：</p>
     <ol style="color:#ad2b2d;">

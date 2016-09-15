@@ -18,7 +18,7 @@ gem 'pg'
 
 gem 'rack-attack'
 
-gem 'rails-i18n', '5.0.0.beta4'
+gem 'rails-i18n'
 gem 'http_accept_language'
 gem 'rails_autolink'
 gem 'twemoji'

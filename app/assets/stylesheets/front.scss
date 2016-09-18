@@ -280,6 +280,13 @@
       }
     }
 
+    .markdown {
+      pre {
+        margin-right: 0px;
+        margin-left: 0px;
+      }
+    }
+
     @media (min-width: 1026px) {
       .hideable { display: none; }
     }
@@ -448,7 +455,8 @@
       padding: 0!important;
       font-size: 12px!important;
       background-color: #f9f9f9 !important;
-      border: none!important; }
+      border: none!important;
+    }
   }
   p:last-child,
   blockquote:last-child,

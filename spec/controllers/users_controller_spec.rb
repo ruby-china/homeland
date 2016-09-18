@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe UsersController, type: :controller do
   let(:user) { create :user, location: 'Shanghai' }
-  let(:deleted_user) { create :user, state: User::STATE[:deleted] }
+  let(:deleted_user) { create :user, state: User.states[:deleted] }
 
   describe 'Visit deleted user' do
     it 'should 404 with deleted user' do

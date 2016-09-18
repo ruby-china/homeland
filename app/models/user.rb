@@ -61,20 +61,20 @@ class User < ApplicationRecord
            :tagline, :github, :website, :location, :location_id, :twitter, :co, :team_users_count)
   }
 
+  include Blockable
+  include Likeable
+  include Followable
+
+  include TopicRead
+  include TopicFavorate
+  include GithubRepository
+
   def index_score
     0
   end
 
   def user_type
     (self[:type] || 'User').underscore.to_sym
-  end
-
-  def following
-    User.where(id: self.following_ids)
-  end
-
-  def followers
-    User.where(id: self.follower_ids)
   end
 
   def to_param
@@ -100,17 +100,13 @@ class User < ApplicationRecord
   end
 
   def website_url
+    return '' if website.blank?
     website[%r{^https?://}] ? website : "http://#{website}"
   end
 
   def twitter_url
     return '' if twitter.blank?
     "https://twitter.com/#{twitter}"
-  end
-
-  def google_profile_url
-    return '' if email.blank? || !email.match(/gmail\.com/)
-    "http://www.google.com/profiles/#{email.split('@').first}"
   end
 
   def fullname
@@ -172,12 +168,15 @@ class User < ApplicationRecord
   before_save :store_location
   def store_location
     if self.location_changed?
-      if !location.blank?
+      if location.present?
         old_location = Location.location_find_by_name(self.location_was)
-        old_location.decrement!(:users_count) unless old_location.blank?
+        old_location.decrement!(:users_count) if old_location
+
         location = Location.location_find_or_create_by_name(self.location)
-        location.increment!(:users_count)
-        self.location_id = (location.blank? ? nil : location.id)
+        unless location.new_record?
+          location.increment!(:users_count)
+          self.location_id = location.id
+        end
       else
         self.location_id = nil
       end
@@ -234,103 +233,6 @@ class User < ApplicationRecord
     authorizations.create(provider: provider, uid: uid)
   end
 
-  # 是否读过 topic 的最近更新
-  def topic_read?(topic)
-    # 用 last_reply_id 作为 cache key ，以便不热门的数据自动被 Memcached 挤掉
-    last_reply_id = topic.last_reply_id || -1
-    Rails.cache.read("user:#{id}:topic_read:#{topic.id}") == last_reply_id
-  end
-
-  def filter_readed_topics(topics)
-    t1 = Time.now
-    return [] if topics.blank?
-    cache_keys = topics.map { |t| "user:#{id}:topic_read:#{t.id}" }
-    results = Rails.cache.read_multi(*cache_keys)
-    ids = []
-    topics.each do |topic|
-      val = results["user:#{id}:topic_read:#{topic.id}"]
-      if val == (topic.last_reply_id || -1)
-        ids << topic.id
-      end
-    end
-    t2 = Time.now
-    logger.info "User filter_readed_topics (#{(t2 - t1) * 1000}ms)"
-    ids
-  end
-
-  # 将 topic 的最后回复设置为已读
-  def read_topic(topic, opts = {})
-    return if topic.blank?
-    return if self.topic_read?(topic)
-
-    opts[:replies_ids] ||= topic.replies.pluck(:id)
-
-    any_sql = "
-      (target_type = 'Topic' AND target_id = ?) or
-      (target_type = 'Reply' AND target_id in (?))
-    "
-    notifications.unread
-                 .where(any_sql, topic.id, opts[:replies_ids])
-                 .update_all(read_at: Time.now)
-    Notification.realtime_push_to_client(self)
-
-    # 处理 last_reply_id 是空的情况
-    last_reply_id = topic.last_reply_id || -1
-    Rails.cache.write("user:#{id}:topic_read:#{topic.id}", last_reply_id)
-  end
-
-  # 收藏东西
-  def like(likeable)
-    return false if likeable.blank?
-    return false if liked?(likeable)
-    likeable.transaction do
-      likeable.push(liked_user_ids: id)
-      likeable.increment!(:likes_count)
-    end
-  end
-
-  # 取消收藏
-  def unlike(likeable)
-    return false if likeable.blank?
-    return false unless liked?(likeable)
-    return false if likeable.user_id == self.id
-    likeable.transaction do
-      likeable.pull(liked_user_ids: id)
-      likeable.decrement!(:likes_count)
-    end
-  end
-
-  # 是否喜欢过
-  def liked?(likeable)
-    likeable.liked_by_user?(self) || likeable.user_id == self.id
-  end
-
-  # 收藏话题
-  def favorite_topic(topic_id)
-    return false if topic_id.blank?
-    topic_id = topic_id.to_i
-    return false if favorited_topic?(topic_id)
-    push(favorite_topic_ids: topic_id)
-    true
-  end
-
-  # 取消对话题的收藏
-  def unfavorite_topic(topic_id)
-    return false if topic_id.blank?
-    topic_id = topic_id.to_i
-    pull(favorite_topic_ids: topic_id)
-    true
-  end
-
-  # 是否收藏过话题
-  def favorited_topic?(topic_id)
-    favorite_topic_ids.include?(topic_id)
-  end
-
-  def favorite_topics_count
-    favorite_topic_ids.size
-  end
-
   # 软删除
   # 只是把用户信息修改了
   def soft_delete
@@ -343,120 +245,6 @@ class User < ApplicationRecord
     self.authorizations = []
     self.state = STATE[:deleted]
     save(validate: false)
-  end
-
-  # GitHub 项目
-  def github_repositories
-    cache_key = github_repositories_cache_key
-    items = $file_store.read(cache_key)
-    if items.nil?
-      GithubRepoFetcherJob.perform_later(id)
-      items = []
-    end
-    items
-  end
-
-  def github_repositories_cache_key
-    "github-repos:#{github}:1"
-  end
-
-  def self.fetch_github_repositories(user_id)
-    user = User.find_by_id(user_id)
-    return unless user
-
-    url = user.github_repo_api_url
-    begin
-      json = Timeout.timeout(10) { open(url).read }
-    rescue => e
-      Rails.logger.error("GitHub Repositiory fetch Error: #{e}")
-      $file_store.write(user.github_repositories_cache_key, [], expires_in: 1.minutes)
-      return false
-    end
-
-    items = JSON.parse(json)
-    items = items.collect do |a1|
-      {
-        name: a1['name'],
-        url: a1['html_url'],
-        watchers: a1['watchers'],
-        language: a1['language'],
-        description: a1['description']
-      }
-    end
-    items = items.sort { |a, b| b[:watchers] <=> a[:watchers] }.take(10)
-    $file_store.write(user.github_repositories_cache_key, items, expires_in: 15.days)
-    items
-  end
-
-  def github_repo_api_url
-    github_login = self.github || self.login
-    resource_name = self.user_type == :team ? 'orgs' : 'users'
-    "https://api.github.com/#{resource_name}/#{github_login}/repos?type=owner&sort=pushed&client_id=#{Setting.github_token}&client_secret=#{Setting.github_secret}"
-  end
-
-  def block_node(node_id)
-    new_node_id = node_id.to_i
-    return false if blocked_node_ids.include?(new_node_id)
-    push(blocked_node_ids: new_node_id)
-  end
-
-  def unblock_node(node_id)
-    new_node_id = node_id.to_i
-    pull(blocked_node_ids: new_node_id)
-  end
-
-  def blocked_users?
-    blocked_user_ids.count > 0
-  end
-
-  def blocked_user?(user)
-    uid = user.is_a?(User) ? user.id : user
-    blocked_user_ids.include?(uid)
-  end
-
-  def block_user(user_id)
-    user_id = user_id.to_i
-    return false if self.blocked_user?(user_id)
-    push(blocked_user_ids: user_id)
-  end
-
-  def unblock_user(user_id)
-    user_id = user_id.to_i
-    pull(blocked_user_ids: user_id)
-  end
-
-  def followed?(user)
-    uid = user.is_a?(User) ? user.id : user
-    following_ids.include?(uid)
-  end
-
-  def follow_user(user)
-    return false if user.blank?
-    self.transaction do
-      self.push(following_ids: user.id)
-      user.push(follower_ids: self.id)
-    end
-    Notification.notify_follow(user.id, self.id)
-  end
-
-  def followers_count
-    follower_ids.count
-  end
-
-  def following_count
-    following_ids.count
-  end
-
-  def unfollow_user(user)
-    return false if user.blank?
-    self.transaction do
-      self.pull(following_ids: user.id)
-      user.pull(follower_ids: self.id)
-    end
-  end
-
-  def favorites_count
-    favorite_topic_ids.count
   end
 
   # 用户的账号类型
@@ -504,17 +292,15 @@ class User < ApplicationRecord
   end
 
   def calendar_data
-    user = self
     Rails.cache.fetch(['user', self.id, 'calendar_data', Date.today, 'by-months']) do
       date_from = 12.months.ago.beginning_of_month.to_date
-      replies = user.replies.where('created_at > ?', date_from)
+      replies = self.replies.where('created_at > ?', date_from)
                     .group("date(created_at AT TIME ZONE 'CST')")
                     .select("date(created_at AT TIME ZONE 'CST') AS date, count(id) AS total_amount").all
-      timestamps = {}
-      replies.map do |reply|
+
+      replies.each_with_object({}) do |reply, timestamps|
         timestamps[reply['date'].to_time.to_i.to_s] = reply['total_amount']
       end
-      timestamps
     end
   end
 
@@ -530,5 +316,9 @@ class User < ApplicationRecord
     return @team_collection if defined? @team_collection
     teams = self.admin? ? Team.all : self.teams
     @team_collection = teams.collect { |t| [t.name, t.id] }
+  end
+
+  def organization?
+    self.user_type == :team
   end
 end

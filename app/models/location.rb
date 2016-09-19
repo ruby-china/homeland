@@ -5,7 +5,7 @@ class Location < ApplicationRecord
 
   scope :hot, -> { order(users_count: :desc) }
 
-  validates :name, uniqueness: { case_sensitive: false }
+  validates :name, presence: true, uniqueness: { case_sensitive: false }
 
   before_save { |loc| loc.name = loc.name.downcase.strip }
 

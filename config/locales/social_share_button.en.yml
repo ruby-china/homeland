@@ -6,11 +6,13 @@ en:
     facebook: Facebook
     douban: Douban
     qq: Qzone
-    tqq: Tqq
     delicious: Delicious
-    baidu: Baidu.com
-    kaixin001: Kaixin001.com
-    renren: Renren.com
+    google_plus: Google+
+    google_bookmark: Google Bookmark
+    tumblr: Tumblr
+    pinterest: Pinterest
+    email: Email
+    linkedin: Linkedin
     weichat: Weichat
     weichat_footer: Open your Weichat, click "Discover" button then click the "Scan QR Code" menu.
-    google_plus: Google+
+    vkontakte: Vkontakte

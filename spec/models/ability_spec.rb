@@ -162,6 +162,10 @@ describe Ability, type: :model do
       it { is_expected.not_to be_able_to(:suggest, Topic) }
       it { is_expected.not_to be_able_to(:unsuggest, Topic) }
     end
+
+    context 'Reply' do
+      it { is_expected.to be_able_to(:create, Reply) }
+    end
   end
 
   context 'Blocked users' do

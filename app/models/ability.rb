@@ -60,7 +60,7 @@ class Ability
   def current_lock_reply?
     return false if !user.newbie?
     return false if Setting.reject_newbie_reply_in_the_evening != 'true'
-    return Time.zone.now.hour > 22 && Time.zone.now.hour < 9
+    return Time.zone.now.hour > 22 || Time.zone.now.hour < 9
   end
 
   def roles_for_notes

@@ -18,7 +18,7 @@
   <% if @user.user_type == :user %>
   <%= f.input :verified, as: :boolean, hint: t("admin.users.trust_user_can_modify_wiki") %>
   <%= f.input :hr, as: :boolean, hint: t("admin.users.hr_user_can_create_topic") %>
-  <%= f.input :state, as: :select, collection: User.states.collect { |s| [s[0],s[1]] } %>
+  <%= f.input :state, as: :select, collection: User.states.collect { |s| [s[0], s[0]] } %>
   <%= f.input :sign_in_count, readonly: true %>
   <%= f.input :last_sign_in_at, as: :string, readonly: true %>
   <%= f.input :current_sign_in_at, as: :string, readonly: true %>

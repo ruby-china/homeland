@@ -39,7 +39,7 @@
   <% end %>
   <div class="form-group">
 
-    <% if @user.deleted? %>
+    <% if !@user.deleted? %>
       <div class="pull-right">
         <%= link_to '删除此用户', admin_user_path(@user.id), 'data-confirm' => '警告！此动作无法撤销，确定要删除么?', method: :delete, class: "btn btn-danger"  %>
       </div>

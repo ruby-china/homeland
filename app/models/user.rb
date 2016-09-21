@@ -7,7 +7,7 @@ class User < ApplicationRecord
   include Searchable
   include Redis::Search
 
-  acts_as_cached version: 3, expires_in: 1.week
+  acts_as_cached version: 4, expires_in: 1.week
 
   ALLOW_LOGIN_CHARS_REGEXP = /\A[A-Za-z0-9\-\_\.]+\z/
 

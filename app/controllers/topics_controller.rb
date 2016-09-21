@@ -87,13 +87,14 @@ class TopicsController < ApplicationController
     @topic.hits.incr(1)
     @node = @topic.node
     @show_raw = params[:raw] == '1'
+    @can_reply = can? :create, Reply
 
     @replies = Reply.unscoped.where(topic_id: @topic.id).without_body.order(:id).all
 
     check_current_user_liked_replies
     check_current_user_status_for_topic
     set_special_node_active_menu
-    fresh_when([@topic, @node, @show_raw, @replies, @has_followed, @has_favorited])
+    fresh_when([@topic, @node, @show_raw, @replies, @has_followed, @has_favorited, @can_reply])
   end
 
   def new

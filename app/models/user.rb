@@ -38,14 +38,7 @@ class User < ApplicationRecord
                       :tagline, :avatar, :by, :current_password, :password, :password_confirmation,
                       :_rucaptcha]
 
-  STATE = {
-    # 软删除
-    deleted: -1,
-    # 正常
-    normal: 1,
-    # 屏蔽
-    blocked: 2
-  }
+  enum state: { deleted: -1, normal: 1, blocked: 2 }
 
   validates :login, format: { with: ALLOW_LOGIN_CHARS_REGEXP, message: '只允许数字、大小写字母和下划线' },
                     length: { in: 2..20 },
@@ -135,28 +128,15 @@ class User < ApplicationRecord
     created_at > 1.week.ago
   end
 
-  def blocked?
-    state == STATE[:blocked]
-  end
-
-  def deleted?
-    state == STATE[:deleted]
-  end
-
   def roles?(role)
     case role
     when :admin then admin?
     when :wiki_editor then wiki_editor?
     when :site_editor then site_editor?
-    when :member then state == STATE[:normal]
+    when :member then self.normal?
     else false
     end
   end
-
-  # before_create :default_value_for_create
-  # def default_value_for_create
-  #   self.state = STATE[:normal]
-  # end
 
   # 注册邮件提醒
   after_create :send_welcome_mail
@@ -243,7 +223,7 @@ class User < ApplicationRecord
     self.tagline = ''
     self.location = ''
     self.authorizations = []
-    self.state = STATE[:deleted]
+    self.state = User.states[:deleted]
     save(validate: false)
   end
 
@@ -320,5 +300,9 @@ class User < ApplicationRecord
 
   def organization?
     self.user_type == :team
+  end
+
+  def as_indexed_json(_options = {})
+    as_json(only: [:login, :name])
   end
 end

@@ -66,4 +66,8 @@ class Page < ApplicationRecord
   def self.find_by_slug(slug)
     fetch_by_uniq_keys(slug: slug)
   end
+
+  def as_indexed_json(_options = {})
+    as_json(only: [:title, :body])
+  end
 end

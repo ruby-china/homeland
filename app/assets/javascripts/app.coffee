@@ -12,7 +12,7 @@
 #= require dropzone
 #= require jquery.fluidbox.min
 #= require social-share-button
-#= require social-share-button/weichat 
+#= require social-share-button/wechat 
 #= require jquery.atwho
 #= require emoji-data
 #= require emoji-modal

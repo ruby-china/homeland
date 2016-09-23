@@ -393,7 +393,7 @@ GEM
       rack-protection (= 2.0.0.beta2)
       tilt (~> 2.0)
     slop (3.6.0)
-    social-share-button (0.4.0)
+    social-share-button (0.5.0)
       coffee-rails
       sass-rails
     spring (1.7.2)

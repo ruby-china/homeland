@@ -12,7 +12,7 @@
 #= require dropzone
 #= require jquery.fluidbox.min
 #= require social-share-button
-#= require social-share-button/wechat 
+#= require social-share-button/wechat
 #= require jquery.atwho
 #= require emoji-data
 #= require emoji-modal
@@ -340,5 +340,9 @@ window.App =
 
 document.addEventListener 'turbolinks:load',  ->
   window._appView = new AppView()
+
+document.addEventListener 'turbolinks:click', (event) ->
+  if event.target.getAttribute('href').charAt(0) is '#'
+    event.preventDefault()
 
 FormStorage.init()

@@ -24,7 +24,10 @@ class TopicsController < ApplicationController
     @topics = @topics.fields_for_list
     @topics = @topics.paginate(page: params[:page], per_page: 22, total_entries: 1500).to_a
     @page_title = t('menu.topics')
-    @read_topic_ids = current_user.filter_readed_topics(@topics + @suggest_topics)
+    @read_topic_ids = []
+    if current_user
+      @read_topic_ids = current_user.filter_readed_topics(@topics + @suggest_topics)
+    end
     fresh_when([@suggest_topics, @topics, @read_topic_ids])
   end
 

@@ -31,7 +31,7 @@
 
     <% if current_user %>
     <script type="text/javascript">
-      var readed_topic_ids = <%= current_user.filter_readed_topics(@topics + @suggest_topics) %>;
+      var readed_topic_ids = <%= @read_topic_ids %>;
       for (var i = 0; i < readed_topic_ids.length; i++) {
         topic_id = readed_topic_ids[i];
         $(".topic-"+ topic_id).addClass('topic-visited');

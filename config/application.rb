@@ -55,7 +55,9 @@ module RubyChina
       :action_cable, -> (request) { request.uuid }
     ]
 
-    config.cache_store = [:mem_cache_store, '127.0.0.1', { namespace: 'rb-1', compress: true }]
+    memcached_config = YAML.load_file("#{Rails.root}/config/memcached.yml")[Rails.env]
+    config.cache_store = [:mem_cache_store, memcached_config['host'],
+      { namespace: memcached_config['namespace'], compress: memcached_config['compress:'] }]
 
     config.active_job.queue_adapter = :sidekiq
 

@@ -20,7 +20,6 @@ gem 'rack-attack'
 
 gem 'rails-i18n'
 gem 'http_accept_language'
-gem 'rails_autolink'
 gem 'twemoji'
 gem 'jquery-atwho-rails'
 gem 'font-awesome-rails'
@@ -75,9 +74,10 @@ gem 'second_level_cache'
 # Setting
 gem 'rails-settings-cached'
 
-# Markdown
-gem 'redcarpet', '~> 3.3.4'
-gem 'rouge'
+# HTML Pipeline
+gem 'html-pipeline'
+gem 'html-pipeline-rouge_filter'
+gem 'redcarpet'
 gem 'auto-space'
 
 # 队列

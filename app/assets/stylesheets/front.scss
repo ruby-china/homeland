@@ -556,7 +556,7 @@
   img { vertical-align: top; max-width: 100%; }
   a.zoom-image { cursor: zoom-in; }
   a.at_floor { color: #60B566 !important; }
-  a.at_user { color: #0069D6 !important; }
+  a.at_user, a.user-mention { color: #0069D6 !important; }
   img.twemoji { width: 20px; }
 }
 

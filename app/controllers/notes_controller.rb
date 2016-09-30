@@ -41,7 +41,7 @@ class NotesController < ApplicationController
   end
 
   def preview
-    out = MarkdownTopicConverter.convert(params[:body])
+    out = RubyChina::Markdown.call(params[:body])
     render plain: out
   end
 

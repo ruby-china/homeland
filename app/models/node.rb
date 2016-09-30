@@ -33,7 +33,7 @@ class Node < ApplicationRecord
   # Markdown 转换过后的 HTML
   def summary_html
     Rails.cache.fetch("#{cache_key}/summary_html") do
-      MarkdownTopicConverter.convert(summary)
+      RubyChina::Markdown.call(summary)
     end
   end
 

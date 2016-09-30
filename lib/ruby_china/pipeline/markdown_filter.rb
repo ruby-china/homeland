@@ -38,6 +38,11 @@ module RubyChina
           end
         end
 
+        def block_code(code, lang)
+          lang.downcase! if lang.is_a?(String)
+          super(code, lang)
+        end
+
         def table(header, body)
           %(<div class="table-responsive"><table class="table table-bordered table-striped">#{header}#{body}</table></div>)
         end

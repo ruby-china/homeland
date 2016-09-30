@@ -118,7 +118,7 @@ describe PagesController, type: :controller do
     it 'should give a text from markdown' do
       sign_in user
       post :preview, params: { body: '123' }
-      expect(response.body).to eq("<p>123</p>\n")
+      expect(response.body).to eq("<p>123</p>")
     end
   end
 end

@@ -9,6 +9,3 @@ test:
 
 production:
   <<: *defaults
-
-development_mongohq:
-  <<: *defaults

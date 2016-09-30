@@ -7,7 +7,6 @@ context = {
 filters = [
   RubyChina::Pipeline::NormalizeMentionFilter,
   RubyChina::Pipeline::MarkdownFilter,
-    # HTML::Pipeline::MentionFilter,
   RubyChina::Pipeline::MentionFilter,
   RubyChina::Pipeline::FloorFilter,
   RubyChina::Pipeline::TwemojiFilter

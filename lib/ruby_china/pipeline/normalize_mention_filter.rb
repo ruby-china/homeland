@@ -5,14 +5,16 @@ module RubyChina
 
       def call
         users = []
-        @text.gsub!(NORMALIZE_USER_REGEXP) do
+        # Makesure clone a new value, not change original value
+        text = @text.clone
+        text.gsub!(NORMALIZE_USER_REGEXP) do
           prefix = Regexp.last_match(1)
           user = Regexp.last_match(2)
           users.push(user)
           "#{prefix}@user#{users.size}"
         end
         result[:normalize_mentions] = users
-        @text
+        text
       end
     end
   end

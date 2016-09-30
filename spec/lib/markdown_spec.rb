@@ -543,6 +543,16 @@ describe 'markdown' do
       it { expect(doc.inner_html).to eq "<div class=\"table-responsive\"><table class=\"table table-bordered table-striped\">\n<tr>\n<th>header 1</th>\n<th>header 3</th>\n</tr>\n<tr>\n<td>cell 1</td>\n<td>cell 2</td>\n</tr>\n<tr>\n<td>cell 3</td>\n<td>cell 4</td>\n</tr>\n</table></div>" }
     end
 
+    describe 'embed' do
+      describe 'Youtube' do
+        let(:raw) do
+          %(https://www.youtube.com/watch?v=SccR4kqBvy8)
+        end
+
+        it { expect(doc.inner_html).to eq "<p><span class=\"embed-responsive embed-responsive-16by9\"><iframe class=\"embed-responsive-item\" src=\"//www.youtube.com/embed/SccR4kqBvy8\" allowfullscreen></iframe></span></p>" }
+      end
+    end
+
     describe 'Escape HTML tags' do
       context '<img> tag' do
         let(:raw) { %(<img src="aaa.jpg" class="bb" /> aaa) }

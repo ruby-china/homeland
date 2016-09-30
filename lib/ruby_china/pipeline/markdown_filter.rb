@@ -6,7 +6,6 @@ module RubyChina
   class Pipeline
     class MarkdownFilter < HTML::Pipeline::TextFilter
       DEFAULT_OPTIONS = {
-        xhtml: true,
         no_styles: true,
         hard_wrap: true,
         autolink: true,

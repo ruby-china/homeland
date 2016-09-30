@@ -1,15 +1,18 @@
 require 'html/pipeline'
 
 context = {
-  gfm: true
+  gfm: true,
+  video_width: 700,
+  video_height: 387
 }
 
 filters = [
   RubyChina::Pipeline::NormalizeMentionFilter,
+  RubyChina::Pipeline::YoutubeFilter,
   RubyChina::Pipeline::MarkdownFilter,
   RubyChina::Pipeline::MentionFilter,
   RubyChina::Pipeline::FloorFilter,
-  RubyChina::Pipeline::TwemojiFilter
+  RubyChina::Pipeline::TwemojiFilter,
 ]
 
 TopicPipeline = HTML::Pipeline.new(filters, context)

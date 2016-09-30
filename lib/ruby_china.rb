@@ -1,0 +1,2 @@
+module RubyChina
+end

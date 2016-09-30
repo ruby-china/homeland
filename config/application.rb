@@ -33,8 +33,13 @@ module RubyChina
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.i18n.fallbacks = true
 
-    config.autoload_paths.push(*%W(#{config.root}/lib))
-    config.eager_load_paths.push(*%W(#{config.root}/lib/exception_notifier))
+    config.autoload_paths += [
+      Rails.root.join("lib"),
+      Rails.root.join("lib/ruby_china")
+    ]
+    config.eager_load_paths += [
+      Rails.root.join("lib/exception_notifier")
+    ]
 
     config.generators do |g|
       g.test_framework :rspec
@@ -66,8 +71,6 @@ module RubyChina
     config.action_cable.mount_path = '/cable'
   end
 end
-
-require 'markdown'
 
 $memory_store = ActiveSupport::Cache::MemoryStore.new
 $file_store = ActiveSupport::Cache::FileStore.new(Rails.root.join('tmp/cache'))

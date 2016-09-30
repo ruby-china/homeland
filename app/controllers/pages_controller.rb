@@ -69,7 +69,7 @@ class PagesController < ApplicationController
   end
 
   def preview
-    render plain: MarkdownTopicConverter.convert(params[:body])
+    render plain: RubyChina::Markdown.call(params[:body])
   end
 
   protected

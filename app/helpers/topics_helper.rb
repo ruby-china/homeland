@@ -1,9 +1,5 @@
 require 'digest/md5'
 module TopicsHelper
-  def markdown(text)
-    sanitize_markdown(MarkdownTopicConverter.format(text))
-  end
-
   def topic_favorite_tag(topic, opts = {})
     return '' if current_user.blank?
     opts[:class] ||= ''

@@ -137,7 +137,7 @@ describe Reply, type: :model do
       it 'should add link to mention users' do
         body = '@foo'
         reply = create(:reply, body: body)
-        expect(reply.body_html).to eq('<p><a href="/foo" class="at_user" title="@foo"><i>@</i>foo</a></p>')
+        expect(reply.body_html).to eq('<p><a href="/foo" class="user-mention" title="@foo"><i>@</i>foo</a></p>')
       end
     end
   end

@@ -77,12 +77,12 @@ describe TopicsHelper, type: :helper do
     it 'should link mentioned user' do
       user = create(:user)
       expect(helper.markdown("hello @#{user.name} @b @a @#{user.name}")).to eq(
-        "<p>hello <a href=\"/#{user.name}\" class=\"at_user\" title=\"@#{user.name}\"><i>@</i>#{user.name}</a> <a href=\"/b\" class=\"at_user\" title=\"@b\"><i>@</i>b</a> <a href=\"/a\" class=\"at_user\" title=\"@a\"><i>@</i>a</a> <a href=\"/#{user.name}\" class=\"at_user\" title=\"@#{user.name}\"><i>@</i>#{user.name}</a></p>"
+        "<p>hello <a href=\"/#{user.name}\" class=\"user-mention\" title=\"@#{user.name}\"><i>@</i>#{user.name}</a> <a href=\"/b\" class=\"user-mention\" title=\"@b\"><i>@</i>b</a> <a href=\"/a\" class=\"user-mention\" title=\"@a\"><i>@</i>a</a> <a href=\"/#{user.name}\" class=\"user-mention\" title=\"@#{user.name}\"><i>@</i>#{user.name}</a></p>"
       )
     end
 
     it 'should link mentioned user at first of line' do
-      expect(helper.markdown('@huacnlee hello @ruby_box')).to eq('<p><a href="/huacnlee" class="at_user" title="@huacnlee"><i>@</i>huacnlee</a> hello <a href="/ruby_box" class="at_user" title="@ruby_box"><i>@</i>ruby_box</a></p>')
+      expect(helper.markdown('@huacnlee hello @ruby_box')).to eq('<p><a href="/huacnlee" class="user-mention" title="@huacnlee"><i>@</i>huacnlee</a> hello <a href="/ruby_box" class="user-mention" title="@ruby_box"><i>@</i>ruby_box</a></p>')
     end
 
     it 'should support ul,ol' do
@@ -103,7 +103,7 @@ describe TopicsHelper, type: :helper do
 
     it 'should right encoding with #1楼 @ichord 刚刚发布，有点问题' do
       expect(helper.markdown('#1楼 @ichord 刚刚发布，有点问题')).to eq(
-        %(<p><a href="#reply1" class="at_floor" data-floor="1">#1楼</a> <a href="/ichord" class="at_user" title="@ichord"><i>@</i>ichord</a> 刚刚发布，有点问题</p>)
+        %(<p><a href="#reply1" class="at_floor" data-floor="1">#1楼</a> <a href="/ichord" class="user-mention" title="@ichord"><i>@</i>ichord</a> 刚刚发布，有点问题</p>)
       )
     end
 

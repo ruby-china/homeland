@@ -1,14 +1,9 @@
 require 'rails_helper'
 
 describe 'markdown' do
-  let(:upload_url) { '' }
-  before do
-    allow(MarkdownTopicConverter.instance).to receive(:upload_url).and_return(upload_url)
-  end
-
-  describe MarkdownTopicConverter do
+  describe RubyChina::Markdown do
     let(:raw) { '' }
-    let!(:doc) { Nokogiri::HTML.fragment(MarkdownTopicConverter.format(raw)) }
+    let!(:doc) { Nokogiri::HTML.fragment(RubyChina::Markdown.call(raw)) }
     subject { doc }
 
     describe 'inline link in heading' do
@@ -61,7 +56,7 @@ describe 'markdown' do
 
         describe '#inner_html' do
           subject { super().inner_html }
-          it { is_expected.to eq(%(<p><a href="#reply1" class="at_floor" data-floor="1">#1楼</a> <a href="/ichord" class="at_user" title="@ichord"><i>@</i>ichord</a> 刚刚发布，有点问题</p>)) }
+          it { is_expected.to eq(%(<p><a href="#reply1" class="at_floor" data-floor="1">#1楼</a> <a href="/ichord" class="user-mention" title="@ichord"><i>@</i>ichord</a> 刚刚发布，有点问题</p>)) }
         end
       end
     end
@@ -113,12 +108,6 @@ describe 'markdown' do
 
         it { is_expected.to eq(%(<p><img src="foo.jpg" width="100px" height="200px" alt="alt text"></p>)) }
       end
-
-      context 'BBCode Image' do
-        let(:raw) { '[img]http://ruby-china.org/logo.png[/img]' }
-
-        it { is_expected.to eq(%(<p><img src="http://ruby-china.org/logo.png" title="" alt="Logo"></p>)) }
-      end
     end
 
     describe 'strong' do
@@ -136,106 +125,30 @@ describe 'markdown' do
 
         it 'has a link' do
           expect(doc.css('a').size).to eq(1)
-          expect(doc.inner_html).to eq(%(<p><a href="/foo" class="at_user" title="@foo"><i>@</i>foo</a></p>))
-        end
-
-        describe 'the link' do
-          subject { doc.css('a').first }
-
-          describe '[:href]' do
-            subject { super()[:href] }
-            it { is_expected.to eq('/foo') }
-          end
-
-          describe '[:class]' do
-            subject { super()[:class] }
-            it { is_expected.to eq('at_user') }
-          end
-
-          describe '[:title]' do
-            subject { super()[:title] }
-            it { is_expected.to eq('@foo') }
-          end
-
-          describe '#inner_html' do
-            subject { super().inner_html }
-            it { is_expected.to eq('<i>@</i>foo') }
-          end
+          expect(doc.inner_html).to eq(%(<p><a href="/foo" class="user-mention" title="@foo"><i>@</i>foo</a></p>))
         end
       end
 
       context '@_underscore_ in text' do
         let(:raw) { '@_underscore_' }
 
-        it 'has a link' do
-          expect(doc.css('a').size).to eq(1)
-        end
-
-        describe 'the link' do
-          subject { doc.css('a').first }
-
-          describe '[:href]' do
-            subject { super()[:href] }
-            it { is_expected.to eq('/_underscore_') }
-          end
-
-          describe '[:class]' do
-            subject { super()[:class] }
-            it { is_expected.to eq('at_user') }
-          end
-
-          describe '[:title]' do
-            subject { super()[:title] }
-            it { is_expected.to eq('@_underscore_') }
-          end
-
-          describe '#inner_html' do
-            subject { super().inner_html }
-            it { is_expected.to eq('<i>@</i>_underscore_') }
-          end
-        end
+        specify { expect(doc.inner_html).to eq(%(<p><a href="/_underscore_" class="user-mention" title="@_underscore_"><i>@</i>_underscore_</a></p>)) }
       end
 
       context '@__underscore__ in text' do
         let(:raw) { '@__underscore__' }
 
-        it 'has a link' do
-          expect(doc.css('a').size).to eq(1)
-        end
-
-        describe 'the link' do
-          subject { doc.css('a').first }
-
-          describe '[:href]' do
-            subject { super()[:href] }
-            it { is_expected.to eq('/__underscore__') }
-          end
-
-          describe '[:class]' do
-            subject { super()[:class] }
-            it { is_expected.to eq('at_user') }
-          end
-
-          describe '[:title]' do
-            subject { super()[:title] }
-            it { is_expected.to eq('@__underscore__') }
-          end
-
-          describe '#inner_html' do
-            subject { super().inner_html }
-            it { is_expected.to eq('<i>@</i>__underscore__') }
-          end
-        end
+        specify { expect(doc.inner_html).to eq(%(<p><a href="/__underscore__" class="user-mention" title="@__underscore__"><i>@</i>__underscore__</a></p>)) }
       end
 
       context '@ruby-china in text' do
         let(:raw) { '@ruby-china' }
-        specify { expect(doc.css('a').first.inner_html).to eq('<i>@</i>ruby-china') }
+        specify { expect(doc.inner_html).to eq(%(<p><a href="/ruby-china" class="user-mention" title="@ruby-china"><i>@</i>ruby-china</a></p>)) }
       end
 
       context '@small_fish__ in text' do
         let(:raw) { '@small_fish__' }
-        specify { expect(doc.css('a').first.inner_html).to eq('<i>@</i>small_fish__') }
+        specify { expect(doc.inner_html).to eq(%(<p><a href="/small_fish__" class="user-mention" title="@small_fish__"><i>@</i>small_fish__</a></p>)) }
       end
 
       context '@small_fish__ in code block' do
@@ -272,7 +185,7 @@ describe 'markdown' do
         end
 
         specify { expect(doc.css('a')).to be_empty }
-        specify { expect(doc.css('pre code').inner_html).to eq('@user') }
+        specify { expect(doc.css('pre code').inner_text).to eq("@user\n") }
       end
 
       context '@var in coffeescript' do
@@ -305,7 +218,7 @@ describe 'markdown' do
 
       context '@user in link' do
         let(:raw) { 'http://medium.com/@user/foo' }
-        specify { expect(doc.css('.at_user')).to be_empty }
+        specify { expect(doc.css('.user-mention')).to be_empty }
       end
     end
 
@@ -363,7 +276,7 @@ describe 'markdown' do
         end
 
         specify { expect(doc.css('a')).to be_empty }
-        specify { expect(doc.css('pre code').inner_html).to eq('#12f') }
+        specify { expect(doc.css('pre code').inner_html).to eq("#12f\n") }
       end
     end
 
@@ -425,7 +338,7 @@ describe 'markdown' do
         end
 
         specify { expect(doc.css('a')).to be_empty }
-        specify { expect(doc.css('pre code').inner_html).to eq(':apple:') }
+        specify { expect(doc.css('pre code').inner_html).to eq(":apple:\n") }
       end
     end
 
@@ -599,7 +512,9 @@ end
 <p>The idea is that a Markdown-formatted document should be publishable as-is, as plain text, without looking like it’s been marked up with tags or formatting instructions.</p>
 </blockquote>
 <h2 id="Syntax Guide - Heading 2">Syntax Guide - Heading 2</h2><h3 id="Strong and Emphasize - Heading 3">Strong and Emphasize - Heading 3</h3><h4 id="Heading 4">Heading 4</h4><h5 id="Heading 5">Heading 5</h5><h6 id="Heading 6">Heading 6</h6><pre class="highlight plaintext"><code>*emphasize*    **strong**
-_emphasize_    __strong__</code></pre>
+_emphasize_    __strong__
+</code></pre>
+
 <hr>
 
 <p><strong>Shortcuts</strong></p>
@@ -661,10 +576,11 @@ _emphasize_    __strong__</code></pre>
 </table></div><h3 id="Links">Links</h3>
 <p>Inline links:</p>
 
-<p><a href="http://url.com/" title="title">link text</a><br>
+<p><a href="http://url.com/" title="title">link text</a>
 <a href="http://url.com/">link text</a></p>
 <pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">Foo</span>
-<span class="k">end</span></code></pre>)
+<span class="k">end</span>
+</code></pre>)
       end
 
       it 'should work' do

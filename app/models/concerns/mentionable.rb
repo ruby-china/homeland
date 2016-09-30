@@ -7,7 +7,6 @@ module Mentionable
     after_destroy :delete_notifiaction_mentions
   end
 
-  # Wait for https://github.com/mongoid/mongoid/commit/2f94b5fab018b22a9e84ac2e988d4a3cf97e7f2e
   def delete_notifiaction_mentions
     Notification.where(notify_type: 'mention', target: self).delete_all
   end

@@ -5,6 +5,18 @@ describe ApplicationHelper, type: :helper do
     expect(helper.sanitize_markdown('<a href="javascript:alert()">link</a>')).to eq('<a>link</a>')
   end
 
+  describe 'markdown' do
+    context 'bad html' do
+      it 'filter script' do
+        expect(helper.markdown('<script>alert()</script> foo')).to eq('<p>alert() foo</p>')
+      end
+
+      it 'filter style' do
+        expect(helper.markdown('<style>.body {}</style> foo')).to eq('<p>.body {} foo</p>')
+      end
+    end
+  end
+
   it 'formats the flash messages' do
     expect(helper.notice_message).to eq('')
     expect(helper.notice_message.html_safe?).to eq(true)

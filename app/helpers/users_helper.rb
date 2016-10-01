@@ -45,7 +45,7 @@ module UsersHelper
     img =
       if user.avatar?
         image_url = user.avatar.url(version)
-        image_url += "?t=#{user.updated_at.to_i}" if opts[:timestamp]
+        image_url += "?t=#{user.updated_at.to_i}" if opts[:timestamp] && Setting.upload_provider == 'upyun'
         image_tag(image_url, class: img_class)
       else
         image_tag(user.letter_avatar_url(width * 2), class: img_class)

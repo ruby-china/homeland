@@ -46,6 +46,10 @@ GEM
     addressable (2.4.0)
     airbrussh (1.1.1)
       sshkit (>= 1.6.1, != 1.7.0)
+    aliyun-oss-sdk (0.1.8)
+      addressable
+      gyoku
+      httparty
     arel (7.1.2)
     ast (2.3.0)
     auto-space (0.0.4)
@@ -72,7 +76,7 @@ GEM
       i18n
       rake (>= 10.0.0)
       sshkit (>= 1.9.0)
-    capistrano-bundler (1.1.4)
+    capistrano-bundler (1.2.0)
       capistrano (~> 3.1)
       sshkit (~> 1.2)
     capistrano-harrow (0.5.3)
@@ -101,6 +105,9 @@ GEM
       json (>= 1.7)
       mime-types (>= 1.16)
       mimemagic (>= 0.3.0)
+    carrierwave-aliyun (0.7.0)
+      aliyun-oss-sdk (>= 0.1.6)
+      carrierwave (>= 0.5.7)
     carrierwave-upyun (0.2.1)
       carrierwave (>= 0.5.7)
       faraday (>= 0.8.0)
@@ -177,6 +184,8 @@ GEM
     get_process_mem (0.2.1)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
+    gyoku (1.3.1)
+      builder (>= 2.1.2)
     hashie (3.4.6)
     heapy (0.1.2)
     hiredis (0.6.1)
@@ -188,6 +197,8 @@ GEM
       html-pipeline (>= 1.11)
       rouge (~> 1.8)
     http_accept_language (2.0.5)
+    httparty (0.14.0)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     jasmine-core (2.5.2)
     jasmine-rails (0.10.8)
@@ -203,9 +214,12 @@ GEM
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
-    json (1.8.3)
-    jsonapi (0.1.1.beta2)
-      json (~> 1.8)
+    json (2.0.2)
+    jsonapi (0.1.1.beta5)
+      jsonapi-parser (= 0.1.1.beta2)
+      jsonapi-renderer (= 0.1.1.beta1)
+    jsonapi-parser (0.1.1.beta2)
+    jsonapi-renderer (0.1.1.beta1)
     jwt (1.5.6)
     kgio (2.10.0)
     launchy (2.4.3)
@@ -238,9 +252,8 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (3.2.0)
     nio4r (1.2.1)
-    nokogiri (1.6.8)
+    nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
-      pkg-config (~> 1.1.7)
     notifications (0.2.0)
       rails (>= 4.2.0, < 5.1)
       will_paginate (>= 3.0.0)
@@ -265,7 +278,6 @@ GEM
       ast (~> 2.2)
     pg (0.19.0)
     phantomjs (2.1.1.0)
-    pkg-config (1.1.7)
     postmark (1.8.1)
       json
       rake
@@ -398,10 +410,11 @@ GEM
       rack-protection (= 2.0.0.beta2)
       tilt (~> 2.0)
     slop (3.6.0)
-    social-share-button (0.6.0)
+    social-share-button (0.8.0)
       coffee-rails
       sass-rails
-    spring (1.7.2)
+    spring (2.0.0)
+      activesupport (>= 4.2)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
     sprockets (3.7.0)
@@ -457,6 +470,7 @@ DEPENDENCIES
   capistrano3-puma
   capybara
   carrierwave
+  carrierwave-aliyun
   carrierwave-upyun
   codecov
   coffee-rails
@@ -526,4 +540,4 @@ DEPENDENCIES
   will_paginate
 
 BUNDLED WITH
-   1.13.1
+   1.13.2

@@ -33,6 +33,8 @@ gem 'bulk_insert'
 # 上传组件
 gem 'carrierwave'
 gem 'carrierwave-upyun'
+# See more details about how to configure aliyun at wiki/Aliyun-OSS-picture-setting
+gem 'carrierwave-aliyun'
 gem 'mini_magick'
 
 # 验证码，头像

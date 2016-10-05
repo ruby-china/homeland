@@ -34,11 +34,11 @@ module RubyChina
     config.i18n.fallbacks = true
 
     config.autoload_paths += [
-      Rails.root.join("lib"),
-      Rails.root.join("lib/ruby_china")
+      Rails.root.join('lib')
     ]
     config.eager_load_paths += [
-      Rails.root.join("lib/exception_notifier")
+      Rails.root.join('lib/ruby_china'),
+      Rails.root.join('lib/exception_notifier')
     ]
 
     config.generators do |g|

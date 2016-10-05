@@ -63,11 +63,14 @@ defaults: &defaults
   admin_emails:
     - "admin@admin.com"
   google_analytics_key: ""
-  upload_url: "http://ruby-china-files-dev.b0.upaiyun.com"
   asset_host: ""
-  upyun_username: "test"
-  upyun_password: "123123"
-  upyun_bucket: "ruby-china-files-dev"
+  upload_provider: "upyun" # can be  upyun/aliyun
+  upload_access_id: "test" # or username
+  upload_access_secret: "123123"
+  upload_bucket: "ruby-china-files-dev"
+  upload_url: "http://ruby-china-files-dev.b0.upaiyun.com"
+  upload_aliyun_internal: true
+  upload_aliyun_area: "cn-shanghai"
   email_server: "smtp.exmail.qq.com"
   email_sender: 'dev-test@ruby-china.org'
   email_password: 'test123456'

@@ -56,7 +56,7 @@
   <% end %>
   <script type="text/javascript" data-turbolinks-eval="false">
     App.root_url = "<%= root_url %>";
-    App.asset_url = "<%= Setting.upload_url %>";
+    App.asset_url = "<%= Setting.upload_url -%>";
     <% if current_user %>
       App.current_user_id = <%= current_user.id %>;
     <% end %>

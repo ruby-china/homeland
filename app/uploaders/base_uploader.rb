@@ -30,6 +30,10 @@ class BaseUploader < CarrierWave::Uploader::Base
     unless version_name.in?(ALLOW_VERSIONS)
       raise "ImageUploader version_name:#{version_name} not allow."
     end
-    [@url, version_name].join('!') # thumb split with "!"
+    if Setting.upload_provider == 'aliyun'
+      super(thumb: "@!#{version_name}")
+    else
+      [@url, version_name].join('!') # thumb split with "!"
+    end
   end
 end

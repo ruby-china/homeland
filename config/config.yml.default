@@ -1,21 +1,12 @@
 site_configs: &site_configs
   index_html: >
-    <div class="box" style="text-align:center;">
-      <p><img alt="Big_logo" src="/assets/big_logo.png"></p>
-      <p></p>
-      <p>Ruby China Group， 致力于构建完善的 Ruby 中文社区。</p>
-      <p>功能正在完善中，欢迎 <a href="https://github.com/ruby-china/ruby-china">贡献代码</a> 。</p>
-      <p>诚邀有激情的活跃 Ruby 爱好者参与维护社区，联系 <b style="color:#c00;">lgn21st@gmail.com</b></p>
-    </div>
+    <div style="text-align:center;"></div>
   wiki_index_html: >
-    <div class="box">
-      Wiki Home page.
-    </div>
+    <div>Wiki Home page.</div>
   wiki_sidebar_html: >
     <strong>推荐内容</strong>
     <ul>
       <li><a href="/wiki/about">关于我们</a></li>
-      <li><a href="/wiki/contributors">贡献者</a></li>
     </ul>
   footer_html: >
     <p class="copyright">
@@ -26,7 +17,7 @@ site_configs: &site_configs
   topic_index_sidebar_html: ""
   site_index_html: "下面列出了相关网站。如果你知道还有不在此列表的，请帮忙补充。"
   custom_head_html: >
-    <link rel="dns-prefetch" href="//assets.youhost.com">
+    <link rel="dns-prefetch" href="//assets.your-host.com">
   node_ids_hide_in_topics_index: ""
   new_topic_dropdown_node_ids: ""
   ban_words_on_reply: >
@@ -39,44 +30,37 @@ site_configs: &site_configs
     提示1
     提示2
   newbie_notices: >
-    <p>为提高社区质量，防止新人一来就发帖提问接触 Ruby 遇到的问题，新用户需要达到下面条件才可发帖：</p>
+    <p>为提高社区质量，防止新人一来就发帖提问，新用户需要达到下面条件才可发帖：</p>
     <ol style="color:#ad2b2d;">
       <li>注册时间超过一个月；</li>
       <li>回帖数量必须达到 10 帖以上；</li>
     </ol>
     <p>请在新人阶段多浏览，看看其他老用户是如何在社区里面分享与解决问题的。</p>
   reject_newbie_reply_in_the_evening: false
-  twitter_page_html: >
-    <div class="box">
-    <a class="twitter-timeline" href="https://twitter.com/ruby_china/ruby-developers" data-widget-id="435676008880959489" data-tweet-limit="20" data-chrome="noscrollbar transparent" width="940" height="800">Ruby Developers 的 Twitter Timeline</a>
-    <script type="text/javasscript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-    </div>
   apns_pem: ""
   blacklist_ips: ""
 
 defaults: &defaults
   <<: *site_configs
-  app_name: "Ruby China"
-  foot_html: "&copy; Ruby China."
+  app_name: "Ruby China | Open Source"
   domain: "localhost:3000"
   https: false
   admin_emails:
     - "admin@admin.com"
   google_analytics_key: ""
   asset_host: ""
-  upload_provider: "upyun" # can be  upyun/aliyun
+  upload_provider: "aliyun" # can be  upyun/aliyun
   upload_access_id: "test" # or username
   upload_access_secret: "123123"
-  upload_bucket: "ruby-china-files-dev"
-  upload_url: "http://ruby-china-files-dev.b0.upaiyun.com"
+  upload_bucket: "your-bucket"
+  upload_url: "http://your-bucket.domain.com"
   upload_aliyun_internal: true
   upload_aliyun_area: "cn-shanghai"
-  email_server: "smtp.exmail.qq.com"
-  email_sender: 'dev-test@ruby-china.org'
+  email_server: "smtp.your-smtp-server.com"
+  email_sender: 'dev-test@your-host.com'
   email_password: 'test123456'
   github_token: "91726ee4170d8e2679ec"
   github_secret: "13c7e55e8e53c57a399181e96ea3a55a3fdd9c7c"
-  twitter_id: "ruby_china"
 
 development:
   <<: *defaults

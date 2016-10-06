@@ -22,10 +22,9 @@ class NullStorage
 end
 
 CarrierWave.configure do |config|
-  if Rails.env.test?
-    # http://stackoverflow.com/questions/7534341/rails-3-test-fixtures-with-carrierwave/25315883#25315883
-    config.storage NullStorage
-  end
+  # http://stackoverflow.com/questions/7534341/rails-3-test-fixtures-with-carrierwave/25315883#25315883
+  config.storage NullStorage if Rails.env.test?
+
   case Setting.upload_provider
   when 'aliyun'
     config.storage = :aliyun

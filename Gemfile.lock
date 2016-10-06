@@ -1,3 +1,13 @@
+GIT
+  remote: https://github.com/elasticsearch/elasticsearch-rails
+  revision: 15761247f3e99654bda946a178e50b5365414b59
+  specs:
+    elasticsearch-model (0.1.9)
+      activesupport (> 3)
+      elasticsearch (> 0.4)
+      hashie
+    elasticsearch-rails (0.1.9)
+
 GEM
   remote: https://gems.ruby-china.org/
   specs:
@@ -92,7 +102,7 @@ GEM
     capistrano3-puma (1.2.1)
       capistrano (~> 3.0)
       puma (>= 2.6)
-    capybara (2.9.2)
+    capybara (2.10.0)
       addressable
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -158,11 +168,6 @@ GEM
       elasticsearch-transport (= 2.0.0)
     elasticsearch-api (2.0.0)
       multi_json
-    elasticsearch-model (0.1.9)
-      activesupport (> 3)
-      elasticsearch (> 0.4)
-      hashie
-    elasticsearch-rails (0.1.9)
     elasticsearch-transport (2.0.0)
       faraday
       multi_json
@@ -481,8 +486,8 @@ DEPENDENCIES
   doorkeeper
   doorkeeper-i18n
   dropzonejs-rails
-  elasticsearch-model
-  elasticsearch-rails
+  elasticsearch-model!
+  elasticsearch-rails!
   exception_notification
   factory_girl_rails
   font-awesome-rails

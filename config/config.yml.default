@@ -49,12 +49,12 @@ defaults: &defaults
     - "admin@admin.com"
   google_analytics_key: ""
   asset_host: ""
-  upload_provider: "aliyun" # can be  upyun/aliyun
+  upload_provider: "upyun" # can be  upyun/aliyun
   upload_access_id: "your-access-id" # or username
   upload_access_secret: "your-access-secret" # or upyun password
   upload_bucket: "your-bucket"
   upload_url: "http://your-bucket.host.com"
-  upload_aliyun_internal: true
+  upload_aliyun_internal: false
   upload_aliyun_area: "cn-shanghai"
   email_server: "smtp.your-smtp-server.com"
   email_sender: 'dev-test@your-host.com'

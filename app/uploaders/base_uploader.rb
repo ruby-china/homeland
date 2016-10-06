@@ -28,15 +28,10 @@ class BaseUploader < CarrierWave::Uploader::Base
       raise "ImageUploader version_name:#{version_name} not allow."
     end
 
-    self.send("url_for_#{Setting.upload_provider}", version_name)
-  end
-
-  def url_for_aliyun(version_name)
-    super(thumb: "@!#{version_name}")
-  end
-
-  # thumb split with "!"
-  def url_for_upyun(version_name)
-    [@url, version_name].join('!')
+    if Setting.upload_provider == 'aliyun'
+      super(thumb: "@!#{version_name}")
+    else
+      [@url, version_name].join('!')
+    end
   end
 end

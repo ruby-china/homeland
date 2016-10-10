@@ -111,6 +111,7 @@
     new_topic_dropdown_node_ids: "Sidebar 新建話題按鈕，下拉顯示的節點 (node_id)，逗號隔開如 (1,3,4)"
     node_ids_hide_in_topics_index: "要在論壇首頁列表隱藏的節點,以逗號隔開"
     custom_head_html: "自定 HTML head 區域的內容"
+    navbar_html: "導航欄自定 HTML"
     site_index_html: "酷站列表首頁頭的 HTML"
     topic_index_sidebar_html: "話題列表首頁邊欄 HTML"
     before_topic_html: "話題正文前面的 HTML"

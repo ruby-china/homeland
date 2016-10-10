@@ -1,4 +1,6 @@
 site_configs: &site_configs
+  navbar_html: >
+    <li><a href="/topics/new">发帖</a>
   index_html: >
     <div style="text-align:center;"></div>
   wiki_index_html: >

@@ -112,6 +112,7 @@
     node_ids_hide_in_topics_index: "要在论坛首页列表隐藏的节点,以逗号隔开"
     custom_head_html: "自定 HTML head 区域的内容"
     site_index_html: "酷站列表首页头的 HTML"
+    navbar_html: "导航栏自定义 HTML"
     topic_index_sidebar_html: "话题列表首页边栏 HTML"
     before_topic_html: "话题正文前面的 HTML"
     after_topic_html: "话题后面的 HTML"

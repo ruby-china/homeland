@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   etag { current_user.try(:id) }
   etag { unread_notify_count }
   etag { flash }
+  etag { Setting.navbar_html }
   etag { Setting.footer_html }
   etag { Rails.env.development? ? Time.now : Date.current }
 

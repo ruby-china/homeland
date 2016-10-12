@@ -15,6 +15,7 @@ gem 'turbolinks', '~> 5.0.0'
 gem 'dropzonejs-rails'
 
 gem 'pg'
+gem 'pghero'
 
 gem 'rack-attack'
 

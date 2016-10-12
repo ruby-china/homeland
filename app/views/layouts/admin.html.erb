@@ -22,7 +22,6 @@
         <nav class="navbar-collapse bs-navbar-collapse collapse">
           <%= render_list class: "nav navbar-nav" do |li|
             li << link_to(t("admin.menu.root_path"), admin_root_path)
-            li << link_to(t("admin.menu.site_configs"), admin_site_configs_path )
             li << link_to(t("admin.menu.users"),admin_users_path)
             li << link_to(t("admin.menu.sections"), admin_sections_path )
             li << link_to(t("admin.menu.nodes"), admin_nodes_path )

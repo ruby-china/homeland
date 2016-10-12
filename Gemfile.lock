@@ -281,6 +281,8 @@ GEM
     parser (2.3.1.4)
       ast (~> 2.2)
     pg (0.19.0)
+    pghero (1.5.2)
+      activerecord
     phantomjs (2.1.1.0)
     postmark (1.8.1)
       json
@@ -508,6 +510,7 @@ DEPENDENCIES
   omniauth-github
   oneapm_rpm
   pg
+  pghero
   postmark
   postmark-rails
   pry-byebug

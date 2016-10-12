@@ -177,6 +177,7 @@ Rails.application.routes.draw do
   require 'sidekiq/web'
   authenticate :user, ->(u) { u.admin? } do
     mount Sidekiq::Web => '/sidekiq'
+    mount PgHero::Engine, at: "pghero"
   end
 
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)

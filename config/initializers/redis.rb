@@ -3,7 +3,7 @@ require 'redis-namespace'
 require 'redis/objects'
 require 'ruby-pinyin'
 
-redis_config = YAML.load_file("#{Rails.root}/config/redis.yml")[Rails.env]
+redis_config = Rails.application.config_for(:redis)
 
 $redis = Redis.new(host: redis_config['host'], port: redis_config['port'])
 $redis.select(0)

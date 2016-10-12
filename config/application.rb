@@ -60,14 +60,11 @@ module RubyChina
       :action_cable, -> (request) { request.uuid }
     ]
 
-    memcached_config = YAML.load_file("#{Rails.root}/config/memcached.yml")[Rails.env]
-    config.cache_store = [:mem_cache_store, memcached_config['host'],
-      { namespace: memcached_config['namespace'], compress: memcached_config['compress:'] }]
+    memcached_config = Application.config_for(:memcached)
+    config.cache_store = [:mem_cache_store, memcached_config['host'], memcached_config]
 
     config.active_job.queue_adapter = :sidekiq
-
     config.middleware.use Rack::Attack
-
     config.action_cable.mount_path = '/cable'
   end
 end

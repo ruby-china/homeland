@@ -4,14 +4,12 @@ module Api
       before_action :doorkeeper_authorize!, only: [:me, :follow, :unfollow, :block, :unblock, :blocked]
       before_action :set_user, except: [:index, :me]
 
-      ##
       # 获取热门用户
       #
       # GET /api/v3/users
+      # == params
       #
-      # params:
-      #   limit - default: 20，range: 1..100
-      #
+      # - limit - default: 20，range: 1..100
       def index
         optional! :limit, default: 20, values: 1..100
 
@@ -21,20 +19,18 @@ module Api
         render json: @users
       end
 
-      ##
       # 获取当前用户的完整信息，用于个人设置修改资料
       #
       # GET /api/v3/users/me
-      #
+      # @return [UserDetailSerializer]
       def me
         render json: current_user, serializer: UserDetailSerializer
       end
 
-      ##
       # 获取某个用户的详细信息
       #
       # GET /api/v3/users/:id
-      #
+      # @return [UserDetailSerializer]
       def show
         meta = { followed: false, blocked: false }
 
@@ -46,16 +42,17 @@ module Api
         render json: @user, serializer: UserDetailSerializer, meta: meta
       end
 
-      ##
       # 获取某个用户的话题列表
       #
       # GET /api/v3/users/:id/topics
       #
-      # params:
-      #   order - 排序方式, default: 'recent', range: %w(recent likes replies)
-      #   offset - default: 0
-      #   limit - default: 20, range: 1..150
+      # == params:
       #
+      # - order - 排序方式, default: 'recent', range: %w(recent likes replies)
+      # - offset - default: 0
+      # - limit - default: 20, range: 1..150
+      #
+      # @return [Array<TopicSerializer>]
       def topics
         optional! :order, type: String, default: 'recent', values: %w(recent likes replies)
         optional! :offset, type: Integer, default: 0
@@ -74,15 +71,18 @@ module Api
         render json: @topics
       end
 
-      ##
       # 获取某个用户的回帖列表
       #
       # GET /api/v3/users/:id/replies
+      # == params:
       #
-      # params:
-      #   order - 排序方式, default: 'recent', range: %w(recent)
-      #   offset - default: 0
-      #   limit - default: 20, range: 1..150
+      # - order - 排序方式, default: 'recent', range: %w(recent)
+      # - offset - default: 0
+      # - limit - default: 20, range: 1..150
+      #
+      # == returns:
+      #
+      # [ReplyDetailSerializer]
       #
       def replies
         optional! :order, type: String, default: 'recent', values: %w(recent)
@@ -95,15 +95,14 @@ module Api
         render json: @replies, each_serializer: ReplyDetailSerializer
       end
 
-      ##
       # 获取某个用户的收藏列表
       #
       # GET /api/v3/users/:id/favorites
       #
-      # params:
-      #   offset - default: 0
-      #   limit - default: 20, range: 1..150
+      # == params:
       #
+      # - offset - default: 0
+      # - limit - default: 20, range: 1..150
       def favorites
         optional! :offset, type: Integer, default: 0
         optional! :limit, type: Integer, default: 20, values: 1..150
@@ -114,14 +113,14 @@ module Api
         render json: @topics
       end
 
-      ##
       # 获取某个用户关注的人的列表
       #
       # GET /api/v3/users/:id/followers
       #
-      # params:
-      #   offset - default: 0
-      #   limit - default: 20, range: 1..150
+      # == params:
+      #
+      # - offset - default: 0
+      # - limit - default: 20, range: 1..150
       #
       def followers
         optional! :offset, type: Integer, default: 0
@@ -131,15 +130,13 @@ module Api
         render json: @users, root: 'followers'
       end
 
-      ##
       # 获取某个用户的关注者列表
       #
       # GET /api/v3/users/:id/following
+      # == params:
       #
-      # params:
-      #   offset - default: 0
-      #   limit - default: 20, range: 1..150
-      #
+      # - offset - default: 0
+      # - limit - default: 20, range: 1..150
       def following
         optional! :offset, type: Integer, default: 0
         optional! :limit, type: Integer, default: 20, values: 1..150
@@ -148,15 +145,14 @@ module Api
         render json: @users, root: 'following'
       end
 
-      ##
       # 获取用户的已屏蔽的人（只能获取自己的）
       #
       # GET /api/v3/users/:id/blocked
       #
-      # params:
-      #   offset - default: 0
-      #   limit - default: 20, range: 1..150
+      # == params:
       #
+      # - offset - default: 0
+      # - limit - default: 20, range: 1..150
       def blocked
         optional! :offset, type: Integer, default: 0
         optional! :limit, type: Integer, default: 20, values: 1..150
@@ -168,41 +164,33 @@ module Api
         render json: @blocked_users, root: 'blocked'
       end
 
-      ##
       # 关注用户
       #
       # POST /api/v3/users/:id/follow
-      #
       def follow
         current_user.follow_user(@user)
         render json: { ok: 1 }
       end
 
-      ##
       # 取消关注用户
       #
       # POST /api/v3/users/:id/unfollow
-      #
       def unfollow
         current_user.unfollow_user(@user)
         render json: { ok: 1 }
       end
 
-      ##
       # 屏蔽用户
       #
       # POST /api/v3/users/:id/block
-      #
       def block
         current_user.block_user(@user.id)
         render json: { ok: 1 }
       end
 
-      ##
       # 取消屏蔽用户
       #
       # POST /api/v3/users/:id/unblock
-      #
       def unblock
         current_user.unblock_user(@user.id)
         render json: { ok: 1 }
@@ -211,7 +199,7 @@ module Api
       private
 
       def set_user
-        @user = User.find_login!(params[:id])
+        @user = User.find_by_login!(params[:id])
       end
     end
   end

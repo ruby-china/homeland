@@ -72,7 +72,7 @@ class TeamUsersController < ApplicationController
   end
 
   def set_team
-    @team = Team.find_login!(params[:user_id])
+    @team = Team.find_by_login!(params[:user_id])
   end
 
   def team_user_params

@@ -40,7 +40,7 @@ module Admin
     end
 
     def update
-      @user = User.find_login!(params[:id])
+      @user = User.find_by_login!(params[:id])
       @user.email = params[:user][:email]
       @user.login = params[:user][:login]
       @user.state = params[:user][:state]
@@ -65,7 +65,7 @@ module Admin
     end
 
     def clean
-      @user = User.find_login!(params[:id])
+      @user = User.find_by_login!(params[:id])
       if params[:type] == 'replies'
         # 为了避免误操作删除大量，限制一次清理 10 条，这个数字对刷垃圾回复的够用了。
         ids = @user.replies.recent.limit(10).pluck(:id)

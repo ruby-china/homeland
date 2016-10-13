@@ -1,15 +1,21 @@
-require 'securerandom'
 require 'digest/md5'
-require 'open-uri'
 
 class User < ApplicationRecord
-  include OmniauthCallbacks
-  include Searchable
   include Redis::Search
+  include Searchable
+  include OmniauthCallbacks
+  include Blockable
+  include Likeable
+  include Followable
+  include TopicRead
+  include TopicFavorate
+  include GithubRepository
+  include UserCallbacks
 
   acts_as_cached version: 4, expires_in: 1.week
 
-  ALLOW_LOGIN_CHARS_REGEXP = /\A[A-Za-z0-9\-\_\.]+\z/
+  LOGIN_FORMAT = /[A-Za-z0-9\-\_\.]/
+  ALLOW_LOGIN_CHARS_REGEXP = /\A#{LOGIN_FORMAT}+\z/
 
   devise :database_authenticatable, :registerable, :recoverable, :lockable,
          :rememberable, :trackable, :validatable, :omniauthable
@@ -40,7 +46,7 @@ class User < ApplicationRecord
 
   enum state: { deleted: -1, normal: 1, blocked: 2 }
 
-  validates :login, format: { with: ALLOW_LOGIN_CHARS_REGEXP, message: '只允许数字、大小写字母和下划线' },
+  validates :login, format: { with: ALLOW_LOGIN_CHARS_REGEXP, message: '只允许数字、大小写字母、中横线、下划线' },
                     length: { in: 2..20 },
                     presence: true,
                     uniqueness: { case_sensitive: false }
@@ -49,29 +55,54 @@ class User < ApplicationRecord
 
   scope :hot, -> { order(replies_count: :desc).order(topics_count: :desc) }
   scope :without_team, -> { where(type: nil) }
-  scope :fields_for_list, lambda {
+  scope :fields_for_list, -> {
     select(:type, :id, :name, :login, :email, :email_md5, :email_public, :avatar, :verified, :state,
            :tagline, :github, :website, :location, :location_id, :twitter, :co, :team_users_count)
   }
 
-  include Blockable
-  include Likeable
-  include Followable
+  def self.find_by_email(email)
+    fetch_by_uniq_keys(email: email)
+  end
 
-  include TopicRead
-  include TopicFavorate
-  include GithubRepository
+  def self.find_by_login!(slug)
+    find_by_login(slug) || raise(ActiveRecord::RecordNotFound.new(slug: slug))
+  end
 
-  def index_score
-    0
+  def self.find_by_login(slug)
+    return nil unless slug =~ ALLOW_LOGIN_CHARS_REGEXP
+    fetch_by_uniq_keys(login: slug) || where('lower(login) = ?', slug.downcase).take
+  end
+
+  def self.find_by_login_or_email(login_or_email)
+    login_or_email = login_or_email.downcase
+    find_by_login(login_or_email) || find_by_email(login_or_email)
+  end
+
+  def self.find_for_database_authentication(warden_conditions)
+    conditions = warden_conditions.dup
+    login = conditions.delete(:login)
+    login.downcase!
+    where(conditions.to_h).where(['lower(login) = :value OR lower(email) = :value', { value: login }]).first
+  end
+
+  def self.current
+    Thread.current[:current_user]
+  end
+
+  def self.current=(user)
+    Thread.current[:current_user] = user
+  end
+
+  def to_param
+    login
   end
 
   def user_type
     (self[:type] || 'User').underscore.to_sym
   end
 
-  def to_param
-    login
+  def organization?
+    self.user_type == :team
   end
 
   def email=(val)
@@ -138,95 +169,6 @@ class User < ApplicationRecord
     end
   end
 
-  # 注册邮件提醒
-  after_create :send_welcome_mail
-  def send_welcome_mail
-    UserMailer.welcome(id).deliver_later
-  end
-
-  # 保存用户所在城市
-  before_save :store_location
-  def store_location
-    if self.location_changed?
-      if location.present?
-        old_location = Location.location_find_by_name(self.location_was)
-        old_location.decrement!(:users_count) if old_location
-
-        location = Location.location_find_or_create_by_name(self.location)
-        unless location.new_record?
-          location.increment!(:users_count)
-          self.location_id = location.id
-        end
-      else
-        self.location_id = nil
-      end
-    end
-  end
-
-  def update_with_password(params = {})
-    if !params[:current_password].blank? || !params[:password].blank? || !params[:password_confirmation].blank?
-      super
-    else
-      params.delete(:current_password)
-      update_without_password(params)
-    end
-  end
-
-  def self.find_by_email(email)
-    fetch_by_uniq_keys(email: email)
-  end
-
-  def self.find_login!(slug)
-    find_login(slug) || raise(ActiveRecord::RecordNotFound.new(slug: slug))
-  end
-
-  def self.find_login(slug)
-    return nil unless slug =~ ALLOW_LOGIN_CHARS_REGEXP
-    fetch_by_uniq_keys(login: slug) || where('lower(login) = ?', slug.downcase).take
-  end
-
-  def self.find_by_login_or_email(login_or_email)
-    login_or_email = login_or_email.downcase
-    find_login(login_or_email) || find_by_email(login_or_email)
-  end
-
-  def self.find_for_database_authentication(warden_conditions)
-    conditions = warden_conditions.dup
-    logger.info "-------------- #{conditions.inspect}"
-    login = conditions.delete(:login)
-    login.downcase!
-    where(conditions.to_h).where(['lower(login) = :value OR lower(email) = :value', { value: login }]).first
-  end
-
-  # Override Devise to send mails with async
-  def send_devise_notification(notification, *args)
-    devise_mailer.send(notification, self, *args).deliver_later
-  end
-
-  def bind?(provider)
-    authorizations.collect(&:provider).include?(provider)
-  end
-
-  def bind_service(response)
-    provider = response['provider']
-    uid = response['uid'].to_s
-    authorizations.create(provider: provider, uid: uid)
-  end
-
-  # 软删除
-  # 只是把用户信息修改了
-  def soft_delete
-    # assuming you have deleted_at column added already
-    self.bio = ''
-    self.website = ''
-    self.github = ''
-    self.tagline = ''
-    self.location = ''
-    self.authorizations = []
-    self.state = User.states[:deleted]
-    save(validate: false)
-  end
-
   # 用户的账号类型
   def level
     if admin?
@@ -246,6 +188,36 @@ class User < ApplicationRecord
 
   def level_name
     I18n.t("common.#{level}_user")
+  end
+
+  def update_with_password(params = {})
+    if !params[:current_password].blank? || !params[:password].blank? || !params[:password_confirmation].blank?
+      super
+    else
+      params.delete(:current_password)
+      update_without_password(params)
+    end
+  end
+
+  # Override Devise to send mails with async
+  def send_devise_notification(notification, *args)
+    devise_mailer.send(notification, self, *args).deliver_later
+  end
+
+  def bind?(provider)
+    authorizations.collect(&:provider).include?(provider)
+  end
+
+  def bind_service(response)
+    provider = response['provider']
+    uid = response['uid'].to_s
+    authorizations.create(provider: provider, uid: uid)
+  end
+
+  # 软删除
+  def soft_delete
+    self.state = 'deleted'
+    save(validate: false)
   end
 
   def letter_avatar_url(size)
@@ -273,23 +245,19 @@ class User < ApplicationRecord
 
   def calendar_data
     Rails.cache.fetch(['user', self.id, 'calendar_data', Date.today, 'by-months']) do
-      date_from = 12.months.ago.beginning_of_month.to_date
-      replies = self.replies.where('created_at > ?', date_from)
-                    .group("date(created_at AT TIME ZONE 'CST')")
-                    .select("date(created_at AT TIME ZONE 'CST') AS date, count(id) AS total_amount").all
-
-      replies.each_with_object({}) do |reply, timestamps|
-        timestamps[reply['date'].to_time.to_i.to_s] = reply['total_amount']
-      end
+      calendar_data_without_cache
     end
   end
 
-  def self.current
-    Thread.current[:current_user]
-  end
+  def calendar_data_without_cache
+    date_from = 12.months.ago.beginning_of_month.to_date
+    replies = self.replies.where('created_at > ?', date_from)
+                  .group("date(created_at AT TIME ZONE 'CST')")
+                  .select("date(created_at AT TIME ZONE 'CST') AS date, count(id) AS total_amount").all
 
-  def self.current=(user)
-    Thread.current[:current_user] = user
+    replies.each_with_object({}) do |reply, timestamps|
+      timestamps[reply['date'].to_time.to_i.to_s] = reply['total_amount']
+    end
   end
 
   def team_collection
@@ -298,10 +266,12 @@ class User < ApplicationRecord
     @team_collection = teams.collect { |t| [t.name, t.id] }
   end
 
-  def organization?
-    self.user_type == :team
+  # for Searchable
+  def index_score
+    0
   end
 
+  # for Searchable
   def as_indexed_json(_options = {})
     as_json(only: [:login, :name])
   end

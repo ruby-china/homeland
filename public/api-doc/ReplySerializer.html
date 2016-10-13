@@ -105,7 +105,37 @@
   
 </div>
 
-<div id="subclasses">
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>话题信息</p>
+
+<h2 id="label-attributes">attributes</h2>
+<ul><li>
+<p><strong>id</strong> [Integer] 编号</p>
+</li><li>
+<p><strong>body_html</strong> [String] 以转换成 HTML 的正文</p>
+</li><li>
+<p><strong>topic_id</strong> [Integer] 话题编号</p>
+</li><li>
+<p><strong>deleted</strong> [Boolean] 是否已删除</p>
+</li><li>
+<p><strong>likes_count</strong> [Integer] 赞数量</p>
+</li><li>
+<p><strong>user</strong> <span class='object_link'><a href="UserSerializer.html" title="UserSerializer (class)">UserSerializer</a></span> 最后回复者用户对象</p>
+</li><li>
+<p><strong>created_at</strong> [DateTime] 创建时间</p>
+</li><li>
+<p><strong>updated_at</strong> [DateTime] 更新时间</p>
+</li></ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><div id="subclasses">
   <h2>Direct Known Subclasses</h2>
   <p class="children"><span class='object_link'><a href="ReplyDetailSerializer.html" title="ReplyDetailSerializer (class)">ReplyDetailSerializer</a></span></p>
 </div>
@@ -181,7 +211,7 @@
   
   
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="BaseSerializer.html" title="BaseSerializer (class)">BaseSerializer</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="BaseSerializer.html#abilities-instance_method" title="BaseSerializer#abilities (method)">#abilities</a></span>, <span class='object_link'><a href="BaseSerializer.html#cache-instance_method" title="BaseSerializer#cache (method)">#cache</a></span>, <span class='object_link'><a href="BaseSerializer.html#can%3F-instance_method" title="BaseSerializer#can? (method)">#can?</a></span>, <span class='object_link'><a href="BaseSerializer.html#current_ability-instance_method" title="BaseSerializer#current_ability (method)">#current_ability</a></span>, <span class='object_link'><a href="BaseSerializer.html#owner%3F-instance_method" title="BaseSerializer#owner? (method)">#owner?</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="BaseSerializer.html#abilities-instance_method" title="BaseSerializer#abilities (method)">#abilities</a></span></p>
 
   
 
@@ -204,12 +234,12 @@
       <pre class="lines">
 
 
-9
-10
-11</pre>
+20
+21
+22</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/serializers/reply_serializer.rb', line 9</span>
+      <pre class="code"><span class="info file"># File 'app/serializers/reply_serializer.rb', line 20</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_deleted'>deleted</span>
   <span class='op'>!</span><span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_deleted_at'>deleted_at</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -234,12 +264,12 @@
       <pre class="lines">
 
 
-5
-6
-7</pre>
+16
+17
+18</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/serializers/reply_serializer.rb', line 5</span>
+      <pre class="code"><span class="info file"># File 'app/serializers/reply_serializer.rb', line 16</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_user'>user</span>
   <span class='const'>UserSerializer</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_user'>user</span><span class='comma'>,</span> <span class='label'>root:</span> <span class='kw'>false</span><span class='rparen'>)</span>
@@ -254,7 +284,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Oct 13 12:03:10 2016 by
+  Generated on Thu Oct 13 12:56:28 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.5 (ruby-2.3.1).
 </div>

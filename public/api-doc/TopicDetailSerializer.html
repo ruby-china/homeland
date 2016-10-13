@@ -110,7 +110,46 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     
-<p>完整话题详情</p>
+<p>完整话题详情 话题信息</p>
+
+<h2 id="label-attributes">attributes</h2>
+<ul><li>
+<p><strong>id</strong> [Integer] 话题编号</p>
+</li><li>
+<p><strong>title</strong> [String] 标题</p>
+</li><li>
+<p><strong>node_name</strong> [String] 节点名称</p>
+</li><li>
+<p><strong>node_id</strong> [Integer] 节点 ID</p>
+</li><li>
+<p><strong>excellent</strong> [Boolean] 是否精华</p>
+</li><li>
+<p><strong>deleted</strong> [Boolean] 是否已删除</p>
+</li><li>
+<p><strong>replies_count</strong> [Integer] 回帖数量</p>
+</li><li>
+<p><strong>likes_count</strong> [Integer] 赞数量</p>
+</li><li>
+<p><strong>last_reply_user_id</strong> [Integer] 最后回复人用户编号</p>
+</li><li>
+<p><strong>last_reply_user_login</strong> [String] 最后回复者 login</p>
+</li><li>
+<p><strong>user</strong> <span class='object_link'><a href="UserSerializer.html" title="UserSerializer (class)">UserSerializer</a></span> 最后回复者用户对象</p>
+</li><li>
+<p><strong>replied_at</strong> [DateTime] 最后回帖时间</p>
+</li><li>
+<p><strong>created_at</strong> [DateTime] 创建时间</p>
+</li><li>
+<p><strong>updated_at</strong> [DateTime] 更新时间</p>
+</li></ul>
+</p>
+<ul><li>
+<p><strong>body</strong> [String] 话题正文，原始 Markdown</p>
+</li><li>
+<p><strong>body_html</strong> [String] 以转换成 HTML 的正文</p>
+</li><li>
+<p><strong>hits</strong> [Integer] 阅读次数</p>
+</li></ul>
 
 
   </div>
@@ -179,7 +218,7 @@
   
   
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="BaseSerializer.html" title="BaseSerializer (class)">BaseSerializer</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="BaseSerializer.html#abilities-instance_method" title="BaseSerializer#abilities (method)">#abilities</a></span>, <span class='object_link'><a href="BaseSerializer.html#cache-instance_method" title="BaseSerializer#cache (method)">#cache</a></span>, <span class='object_link'><a href="BaseSerializer.html#can%3F-instance_method" title="BaseSerializer#can? (method)">#can?</a></span>, <span class='object_link'><a href="BaseSerializer.html#current_ability-instance_method" title="BaseSerializer#current_ability (method)">#current_ability</a></span>, <span class='object_link'><a href="BaseSerializer.html#owner%3F-instance_method" title="BaseSerializer#owner? (method)">#owner?</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="BaseSerializer.html#abilities-instance_method" title="BaseSerializer#abilities (method)">#abilities</a></span></p>
 
   
 
@@ -202,12 +241,12 @@
       <pre class="lines">
 
 
-5
-6
-7</pre>
+9
+10
+11</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/serializers/topic_detail_serializer.rb', line 5</span>
+      <pre class="code"><span class="info file"># File 'app/serializers/topic_detail_serializer.rb', line 9</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_hits'>hits</span>
   <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_hits'>hits</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span>
@@ -222,7 +261,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Oct 13 12:03:10 2016 by
+  Generated on Thu Oct 13 12:56:28 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.5 (ruby-2.3.1).
 </div>

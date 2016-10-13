@@ -62,7 +62,7 @@
       <iframe id="search_frame" src="class_list.html"></iframe>
 
       <div id="content"><h1>Class: BaseSerializer
-  
+  <span class="abstract note title">Abstract</span>
   
   
 </h1>
@@ -103,7 +103,20 @@
   
 </div>
 
-<div id="subclasses">
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <div class="note abstract">
+  <strong>This class is abstract.</strong>
+  <div class='inline'></div>
+</div>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><div id="subclasses">
   <h2>Direct Known Subclasses</h2>
   <p class="children"><span class='object_link'><a href="NodeSerializer.html" title="NodeSerializer (class)">NodeSerializer</a></span>, <span class='object_link'><a href="NotificationSerializer.html" title="NotificationSerializer (class)">NotificationSerializer</a></span>, <span class='object_link'><a href="ReplySerializer.html" title="ReplySerializer (class)">ReplySerializer</a></span>, <span class='object_link'><a href="TopicSerializer.html" title="TopicSerializer (class)">TopicSerializer</a></span>, <span class='object_link'><a href="UserSerializer.html" title="UserSerializer (class)">UserSerializer</a></span></p>
 </div>
@@ -139,95 +152,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#cache-instance_method" title="#cache (instance method)">#<strong>cache</strong>(keys = [])  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#can%3F-instance_method" title="#can? (instance method)">#<strong>can?</strong>(*args)  &#x21d2; Boolean </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#current_ability-instance_method" title="#current_ability (instance method)">#<strong>current_ability</strong>  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#owner%3F-instance_method" title="#owner? (instance method)">#<strong>owner?</strong>(obj = nil)  &#x21d2; Boolean </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>当前 accessToken 对应的用户对此数据的权限 == example 表示可修改，不可删除.</p>
+</div></span>
   
 </li>
 
@@ -251,203 +178,46 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>当前 accessToken 对应的用户对此数据的权限</p>
+
+<h2 id="label-example">example</h2>
+
+<p>表示可修改，不可删除</p>
+
+<pre class="code ruby"><code class="ruby"><span class='lbrace'>{</span> <span class='label'>update:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='label'>destroy:</span> <span class='kw'>false</span> <span class='rbrace'>}</span>
+</code></pre>
+
+<h2 id="label-returns">returns</h2>
+<ul><li>
+<p>update [Boolean] 当前 accessToken 是否有修改权限</p>
+</li><li>
+<p>destroy [Boolean] 当前 accessToken 是否有删除权限</p>
+</li></ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-27
-28
-29</pre>
+14
+15
+16</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/serializers/base_serializer.rb', line 27</span>
+      <pre class="code"><span class="info file"># File 'app/serializers/base_serializer.rb', line 14</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_abilities'>abilities</span>
   <span class='lbrace'>{</span> <span class='label'>update:</span> <span class='id identifier rubyid_can?'>can?</span><span class='lparen'>(</span><span class='symbol'>:update</span><span class='comma'>,</span> <span class='id identifier rubyid_object'>object</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='label'>destroy:</span> <span class='id identifier rubyid_can?'>can?</span><span class='lparen'>(</span><span class='symbol'>:destroy</span><span class='comma'>,</span> <span class='id identifier rubyid_object'>object</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="cache-instance_method">
-  
-    #<strong>cache</strong>(keys = [])  &#x21d2; <tt>Object</tt> 
-  
-
-  
-
-  
-</h3><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-13
-14
-15
-16
-17</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'app/serializers/base_serializer.rb', line 13</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_cache'>cache</span><span class='lparen'>(</span><span class='id identifier rubyid_keys'>keys</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='rparen'>)</span>
-  <span class='const'>Rails</span><span class='period'>.</span><span class='id identifier rubyid_cache'>cache</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>serializer</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_keys'>keys</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>do</span>
-    <span class='kw'>yield</span>
-  <span class='kw'>end</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="can?-instance_method">
-  
-    #<strong>can?</strong>(*args)  &#x21d2; <tt>Boolean</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Boolean</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-23
-24
-25</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'app/serializers/base_serializer.rb', line 23</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_can?'>can?</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_current_ability'>current_ability</span><span class='period'>.</span><span class='id identifier rubyid_can?'>can?</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="current_ability-instance_method">
-  
-    #<strong>current_ability</strong>  &#x21d2; <tt>Object</tt> 
-  
-
-  
-
-  
-</h3><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-19
-20
-21</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'app/serializers/base_serializer.rb', line 19</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_current_ability'>current_ability</span>
-  <span class='ivar'>@current_ability</span> <span class='op'>||=</span> <span class='const'>Ability</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_current_user'>current_user</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="owner?-instance_method">
-  
-    #<strong>owner?</strong>(obj = nil)  &#x21d2; <tt>Boolean</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Boolean</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'app/serializers/base_serializer.rb', line 2</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_owner?'>owner?</span><span class='lparen'>(</span><span class='id identifier rubyid_obj'>obj</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
-  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_blank?'>blank?</span>
-
-  <span class='id identifier rubyid_obj'>obj</span> <span class='op'>=</span> <span class='id identifier rubyid_object'>object</span> <span class='kw'>if</span> <span class='id identifier rubyid_obj'>obj</span><span class='period'>.</span><span class='id identifier rubyid_blank?'>blank?</span>
-  <span class='kw'>if</span> <span class='id identifier rubyid_obj'>obj</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>User</span><span class='rparen'>)</span>
-    <span class='kw'>return</span> <span class='id identifier rubyid_obj'>obj</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span> <span class='op'>==</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>
-  <span class='kw'>else</span>
-    <span class='kw'>return</span> <span class='id identifier rubyid_obj'>obj</span><span class='period'>.</span><span class='id identifier rubyid_user_id'>user_id</span> <span class='op'>==</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>
-  <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -459,7 +229,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Oct 13 12:03:10 2016 by
+  Generated on Thu Oct 13 12:56:28 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.5 (ruby-2.3.1).
 </div>

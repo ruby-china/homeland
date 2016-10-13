@@ -105,7 +105,29 @@
   
 </div>
 
-<div id="subclasses">
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>用户 API 返回数据结构</p>
+
+<h2 id="label-attributes">attributes</h2>
+<ul><li>
+<p><strong>id</strong> [Integer] 用户编号</p>
+</li><li>
+<p><strong>login</strong> [String] 用户名</p>
+</li><li>
+<p><strong>name</strong> [String] 用户姓名</p>
+</li><li>
+<p><strong>avatar_url</strong> [String] 头像 URL</p>
+</li></ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><div id="subclasses">
   <h2>Direct Known Subclasses</h2>
   <p class="children"><span class='object_link'><a href="UserDetailSerializer.html" title="UserDetailSerializer (class)">UserDetailSerializer</a></span></p>
 </div>
@@ -159,7 +181,7 @@
   
   
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="BaseSerializer.html" title="BaseSerializer (class)">BaseSerializer</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="BaseSerializer.html#abilities-instance_method" title="BaseSerializer#abilities (method)">#abilities</a></span>, <span class='object_link'><a href="BaseSerializer.html#cache-instance_method" title="BaseSerializer#cache (method)">#cache</a></span>, <span class='object_link'><a href="BaseSerializer.html#can%3F-instance_method" title="BaseSerializer#can? (method)">#can?</a></span>, <span class='object_link'><a href="BaseSerializer.html#current_ability-instance_method" title="BaseSerializer#current_ability (method)">#current_ability</a></span>, <span class='object_link'><a href="BaseSerializer.html#owner%3F-instance_method" title="BaseSerializer#owner? (method)">#owner?</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="BaseSerializer.html#abilities-instance_method" title="BaseSerializer#abilities (method)">#abilities</a></span></p>
 
   
 
@@ -182,12 +204,12 @@
       <pre class="lines">
 
 
-4
-5
-6</pre>
+10
+11
+12</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/serializers/user_serializer.rb', line 4</span>
+      <pre class="code"><span class="info file"># File 'app/serializers/user_serializer.rb', line 10</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_avatar_url'>avatar_url</span>
   <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_avatar?'>avatar?</span> <span class='op'>?</span> <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_avatar'>avatar</span><span class='period'>.</span><span class='id identifier rubyid_url'>url</span><span class='lparen'>(</span><span class='symbol'>:large</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_letter_avatar_url'>letter_avatar_url</span><span class='lparen'>(</span><span class='int'>240</span><span class='rparen'>)</span>
@@ -202,7 +224,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Oct 13 12:03:10 2016 by
+  Generated on Thu Oct 13 12:56:28 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.5 (ruby-2.3.1).
 </div>

@@ -1,6 +1,6 @@
 module Api
   module V3
-    # @private
+    # @abstract
     class ApplicationController < ActionController::API
       class ParameterValueNotAllowed < ActionController::ParameterMissing
         attr_reader :values

@@ -1,6 +1,9 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   use_doorkeeper do
-    controllers applications: 'oauth/applications', authorized_applications: 'oauth/authorized_applications'
+    controllers applications: 'oauth/applications',
+                authorized_applications: 'oauth/authorized_applications'
   end
 
   resources :sites
@@ -31,10 +34,10 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
 
-  delete 'account/auth/:provider/unbind' => 'users#auth_unbind', as: 'unbind_account'
+  delete 'account/auth/:provider/unbind', to: 'users#auth_unbind', as: 'unbind_account'
 
-  mount RuCaptcha::Engine => '/rucaptcha'
-  mount Notifications::Engine => '/notifications'
+  mount RuCaptcha::Engine, at: '/rucaptcha'
+  mount Notifications::Engine, at: '/notifications'
   mount StatusPage::Engine, at: '/'
 
   resources :nodes do
@@ -44,9 +47,9 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'topics/node:id' => 'topics#node', as: 'node_topics'
-  get 'topics/node:id/feed' => 'topics#node_feed', as: 'feed_node_topics', defaults: { format: 'xml' }
-  get 'topics/last' => 'topics#recent', as: 'recent_topics'
+  get 'topics/node:id', to: 'topics#node', as: 'node_topics'
+  get 'topics/node:id/feed', to: 'topics#node_feed', as: 'feed_node_topics', defaults: { format: 'xml' }
+  get 'topics/last', to: 'topics#recent', as: 'recent_topics'
 
   resources :topics do
     member do
@@ -72,8 +75,8 @@ Rails.application.routes.draw do
   resources :likes
   resources :jobs
 
-  get '/search' => 'search#index', as: 'search'
-  get '/search/users' => 'search#users', as: 'search_users'
+  get '/search', to: 'search#index', as: 'search'
+  get '/search/users', to: 'search#users', as: 'search_users'
 
   namespace :admin do
     root to: 'home#index', as: 'root'
@@ -117,12 +120,12 @@ Rails.application.routes.draw do
     resources :applications
   end
 
-  get 'api' => 'home#api', as: 'api'
-  get 'markdown' => 'home#markdown', as: 'markdown'
+  get 'api', to: 'home#api', as: 'api'
+  get 'markdown', to: 'home#markdown', as: 'markdown'
 
   namespace :api do
     namespace :v3 do
-      match 'hello', via: :get, to: 'root#hello'
+      get 'hello', to: 'root#hello'
 
       resource :devices
       resource :likes
@@ -170,22 +173,21 @@ Rails.application.routes.draw do
         end
       end
 
-      match '*path', via: :all, to: 'root#not_found'
+      match '*path', to: 'root#not_found', via: :all
     end
   end
 
-  require 'sidekiq/web'
   authenticate :user, ->(u) { u.admin? } do
-    mount Sidekiq::Web => '/sidekiq'
+    mount Sidekiq::Web, at: '/sidekiq'
     mount PgHero::Engine, at: "pghero"
   end
 
-  mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
+  mount JasmineRails::Engine, at: '/specs' if defined?(JasmineRails)
 
   # WARRING! 请保持 User 的 routes 在所有路由的最后，以便于可以让用户名在根目录下面使用，而又不影响到其他的 routes
   # 比如 http://ruby-china.org/huacnlee
-  get 'users/city/:id' => 'users#city', as: 'location_users'
-  get 'users' => 'users#index', as: 'users'
+  get 'users/city/:id', to: 'users#city', as: 'location_users'
+  get 'users', to: 'users#index', as: 'users'
 
   constraints(id: /[a-zA-Z0-9\_\-\.]*/) do
     resources :users, path: '', as: 'users' do
@@ -214,5 +216,5 @@ Rails.application.routes.draw do
     end
   end
 
-  match '*path', via: :all, to: 'home#error_404'
+  match '*path', to: 'home#error_404', via: :all
 end

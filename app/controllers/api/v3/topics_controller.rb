@@ -97,7 +97,7 @@ module Api
       # @param title [String] 标题, [required]
       # @param node_id [Integer] 节点编号, [required]
       # @param body [String] Markdown 格式的正文, [required]
-      #
+      # @return [TopicDetailSerializer]
       def update
         requires! :title
         requires! :body
@@ -136,6 +136,7 @@ module Api
       #
       # @param offset [Integer] default: 0
       # @param limit [Integer] default: 20, range: 1..150
+      # @return [Array<ReplySerializer]>
       def replies
         if request.post?
           create_replies
@@ -165,6 +166,7 @@ module Api
       # POST /api/v3/topics/:id/replies
       #
       # @param body [String] 回帖内容，[required]
+      # @return [ReplySerializer] 创建的回帖信息
       def create_replies
         doorkeeper_authorize!
 

@@ -8,7 +8,8 @@ module Api
       #
       # GET /api/v3/users
       #
-      # @param limit - default: 20，range: 1..100
+      # @param limit [Integer] default: 20，range: 1..100
+      # @return [Array<UserSerializer>]
       def index
         optional! :limit, default: 20, values: 1..100
 

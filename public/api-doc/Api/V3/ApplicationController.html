@@ -6,7 +6,7 @@
 <title>
   Class: Api::V3::ApplicationController
   
-    &mdash; Documentation by YARD 0.9.5
+    &mdash; Ruby China API 文档
   
 </title>
 
@@ -368,13 +368,13 @@
       <pre class="lines">
 
 
-70
-71
-72
-73</pre>
+84
+85
+86
+87</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/application_controller.rb', line 70</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/application_controller.rb', line 84</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_admin?'>admin?</span>
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_blank?'>blank?</span>
@@ -422,12 +422,12 @@
       <pre class="lines">
 
 
-66
-67
-68</pre>
+80
+81
+82</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/application_controller.rb', line 66</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/application_controller.rb', line 80</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_can?'>can?</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_current_ability'>current_ability</span><span class='period'>.</span><span class='id identifier rubyid_can?'>can?</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
@@ -452,12 +452,12 @@
       <pre class="lines">
 
 
-62
-63
-64</pre>
+76
+77
+78</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/application_controller.rb', line 62</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/application_controller.rb', line 76</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_current_ability'>current_ability</span>
   <span class='ivar'>@current_ability</span> <span class='op'>||=</span> <span class='const'>Ability</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_current_user'>current_user</span><span class='rparen'>)</span>
@@ -482,12 +482,12 @@
       <pre class="lines">
 
 
-58
-59
-60</pre>
+72
+73
+74</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/application_controller.rb', line 58</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/application_controller.rb', line 72</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_current_user'>current_user</span>
   <span class='ivar'>@current_user</span> <span class='op'>||=</span> <span class='const'>User</span><span class='period'>.</span><span class='id identifier rubyid_find_by_id'>find_by_id</span><span class='lparen'>(</span><span class='id identifier rubyid_doorkeeper_token'>doorkeeper_token</span><span class='period'>.</span><span class='id identifier rubyid_resource_owner_id'>resource_owner_id</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_doorkeeper_token'>doorkeeper_token</span>
@@ -512,12 +512,12 @@
       <pre class="lines">
 
 
-50
-51
-52</pre>
+64
+65
+66</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/application_controller.rb', line 50</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/application_controller.rb', line 64</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_error!'>error!</span><span class='lparen'>(</span><span class='id identifier rubyid_data'>data</span><span class='comma'>,</span> <span class='id identifier rubyid_status_code'>status_code</span> <span class='op'>=</span> <span class='int'>400</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_render'>render</span> <span class='label'>json:</span> <span class='id identifier rubyid_data'>data</span><span class='comma'>,</span> <span class='label'>status:</span> <span class='id identifier rubyid_status_code'>status_code</span>
@@ -542,12 +542,12 @@
       <pre class="lines">
 
 
-54
-55
-56</pre>
+68
+69
+70</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/application_controller.rb', line 54</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/application_controller.rb', line 68</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_error_404!'>error_404!</span>
   <span class='id identifier rubyid_error!'>error!</span><span class='lparen'>(</span><span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>error</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Page not found</span><span class='tstring_end'>&#39;</span></span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='int'>404</span><span class='rparen'>)</span>
@@ -572,23 +572,23 @@
       <pre class="lines">
 
 
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48</pre>
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/application_controller.rb', line 35</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/application_controller.rb', line 49</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_optional!'>optional!</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_opts'>opts</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:require</span><span class='rbracket'>]</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_has_key?'>has_key?</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
@@ -624,13 +624,13 @@
       <pre class="lines">
 
 
-30
-31
-32
-33</pre>
+44
+45
+46
+47</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/application_controller.rb', line 30</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/application_controller.rb', line 44</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_requires!'>requires!</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_opts'>opts</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:require</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>true</span>
@@ -646,7 +646,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Oct 13 12:56:28 2016 by
+  Generated on Thu Oct 13 13:24:44 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.5 (ruby-2.3.1).
 </div>

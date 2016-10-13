@@ -16,7 +16,8 @@ module Api
       #
       # POST /api/v3/replies/:id
       #
-      # @param body - 回帖内容, [required]
+      # @param body [String] 回帖内容 [required]
+      # @return [ReplyDetailSerializer] 更新过后的数据
       def update
         raise AccessDenied unless can?(:update, @reply)
 

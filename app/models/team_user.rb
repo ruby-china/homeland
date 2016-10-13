@@ -12,7 +12,7 @@ class TeamUser < ApplicationRecord
 
   before_validation do
     if login.present?
-      u = User.find_login(login)
+      u = User.find_by_login(login)
       self.errors.add(:login, :notfound) if u.blank?
       self.user_id = u&.id
     end

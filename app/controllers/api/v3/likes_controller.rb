@@ -8,30 +8,27 @@ module Api
         requires! :obj_id
       end
 
-      ##
       # 赞一个信息
       #
       # POST /api/v3/likes
       #
-      # params:
-      #   obj_type - [topic, reply]
-      #   obj_id - 用于 Push 的设备信息
+      # @param obj_type [String] 类型 [topic, reply]
+      # @param obj_id [Integer] 对应数据的编号
       #
+      # == returns
+      # - count [Integer] 已赞的数量
       def create
         current_user.like(likeable)
         data = { obj_type: params[:obj_type], obj_id: likeable.id, count: likeable.likes_count }
         render json: data
       end
 
-      ##
       # 取消之前的赞
       #
       # DELETE /api/v3/likes
       #
-      # params:
-      #   obj_type - [topic, reply]
-      #   obj_id - 用于 Push 的设备信息
-      #
+      # @param (see #create)
+      # @return (see #create)
       def destroy
         current_user.unlike(likeable)
         data = { obj_type: params[:obj_type], obj_id: likeable.id, count: likeable.likes_count }

@@ -32,7 +32,7 @@ class UsersController < ApplicationController
   protected
 
   def set_user
-    @user = User.find_login!(params[:id])
+    @user = User.find_by_login!(params[:id])
 
     # 转向正确的拼写
     if @user.login != params[:id]

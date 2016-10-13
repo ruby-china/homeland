@@ -5,7 +5,7 @@ class HomeController < ApplicationController
   end
 
   def api
-    @routes = []
+    redirect_to "/api-doc/"
   end
 
   def error_404

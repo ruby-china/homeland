@@ -189,7 +189,7 @@ Rails.application.routes.draw do
   get 'users/city/:id', to: 'users#city', as: 'location_users'
   get 'users', to: 'users#index', as: 'users'
 
-  constraints(id: /[a-zA-Z0-9\_\-\.]*/) do
+  constraints(id: /#{User::LOGIN_FORMAT}*/) do
     resources :users, path: '', as: 'users' do
       member do
         # User only

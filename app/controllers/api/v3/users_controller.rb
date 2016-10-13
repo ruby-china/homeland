@@ -7,9 +7,8 @@ module Api
       # 获取热门用户
       #
       # GET /api/v3/users
-      # == params
       #
-      # - limit - default: 20，range: 1..100
+      # @param limit - default: 20，range: 1..100
       def index
         optional! :limit, default: 20, values: 1..100
 
@@ -46,13 +45,11 @@ module Api
       #
       # GET /api/v3/users/:id/topics
       #
-      # == params:
+      # @param order [String] 排序方式, default: 'recent', range: %w(recent likes replies)
+      # @param offset [Integer] default: 0
+      # @param limit [Integer] default: 20, range: 1..150
       #
-      # - order - 排序方式, default: 'recent', range: %w(recent likes replies)
-      # - offset - default: 0
-      # - limit - default: 20, range: 1..150
-      #
-      # @return [Array<TopicSerializer>]
+      # @return [Array<TopicSerializer>] 话题列表
       def topics
         optional! :order, type: String, default: 'recent', values: %w(recent likes replies)
         optional! :offset, type: Integer, default: 0
@@ -76,14 +73,11 @@ module Api
       # GET /api/v3/users/:id/replies
       # == params:
       #
-      # - order - 排序方式, default: 'recent', range: %w(recent)
-      # - offset - default: 0
-      # - limit - default: 20, range: 1..150
+      # @param order [String] 排序方式, default: 'recent', range: %w(recent)
+      # @param offset [Integer] default: 0
+      # @param limit [Integer] default: 20, range: 1..150
       #
-      # == returns:
-      #
-      # [ReplyDetailSerializer]
-      #
+      # @return [Array<ReplyDetailSerializer>]
       def replies
         optional! :order, type: String, default: 'recent', values: %w(recent)
         optional! :offset, type: Integer, default: 0
@@ -99,10 +93,9 @@ module Api
       #
       # GET /api/v3/users/:id/favorites
       #
-      # == params:
-      #
-      # - offset - default: 0
-      # - limit - default: 20, range: 1..150
+      # @param offset [Integer] default: 0
+      # @param limit [Integer] default: 20, range: 1..150
+      # @return <Array[TopicSerializer]> 收藏的话题列表
       def favorites
         optional! :offset, type: Integer, default: 0
         optional! :limit, type: Integer, default: 20, values: 1..150
@@ -117,11 +110,9 @@ module Api
       #
       # GET /api/v3/users/:id/followers
       #
-      # == params:
-      #
-      # - offset - default: 0
-      # - limit - default: 20, range: 1..150
-      #
+      # @param offset [Integer] default: 0
+      # @param limit [Integer] default: 20, range: 1..150
+      # @return <Array[UserSerializer]> 收藏的话题列表
       def followers
         optional! :offset, type: Integer, default: 0
         optional! :limit, type: Integer, default: 20, values: 1..150
@@ -133,10 +124,9 @@ module Api
       # 获取某个用户的关注者列表
       #
       # GET /api/v3/users/:id/following
-      # == params:
       #
-      # - offset - default: 0
-      # - limit - default: 20, range: 1..150
+      # @param (see #followers)
+      # @return (see #followers)
       def following
         optional! :offset, type: Integer, default: 0
         optional! :limit, type: Integer, default: 20, values: 1..150
@@ -149,10 +139,8 @@ module Api
       #
       # GET /api/v3/users/:id/blocked
       #
-      # == params:
-      #
-      # - offset - default: 0
-      # - limit - default: 20, range: 1..150
+      # @param (see #followers)
+      # @return (see #followers)
       def blocked
         optional! :offset, type: Integer, default: 0
         optional! :limit, type: Integer, default: 20, values: 1..150

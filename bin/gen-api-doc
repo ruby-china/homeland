@@ -1,0 +1,1 @@
+yard --out public/api-doc -r API.md app/controllers/api/v3/ app/serializers

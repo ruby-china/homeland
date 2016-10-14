@@ -204,7 +204,7 @@ class Topic < ApplicationRecord
   end
 
   def ban!
-    update_attributes(lock_node: true, node_id: Node.no_point_id, admin_editing: true)
+    update_attributes(lock_node: true, node_id: Node.no_point.id, admin_editing: true)
   end
 
   def excellent!

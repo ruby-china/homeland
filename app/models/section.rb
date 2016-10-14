@@ -16,6 +16,10 @@ class Section < ApplicationRecord
   end
 
   def sorted_nodes
-    nodes.where.not(id: Node.no_point_id).sorted
+    nodes.where.not(id: Node.no_point.id).sorted
+  end
+
+  def self.default
+    @default ||= Section.first || Section.create(name: '分享')
   end
 end

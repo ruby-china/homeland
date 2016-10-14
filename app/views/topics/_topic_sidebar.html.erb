@@ -35,7 +35,7 @@
           <% if !@topic.excellent? %>
           <%= link_to raw("<i class='fa fa-diamond'></i> 加精"), action_topic_path(@topic, type: 'excellent'), method: "post", remote: true %>
           <% end %>
-          <% if @topic.node_id != Node.no_point_id %>
+          <% if @topic.node_id != Node.no_point.id %>
             <%= link_to raw("<i class='fa fa-ban'></i> 屏蔽"), action_topic_path(@topic, type: 'ban'), method: 'post', title: "屏蔽此贴，移动到 NoPoint 节点", remote: true %>
           <% end %>
         <% end %>

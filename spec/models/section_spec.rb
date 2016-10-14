@@ -1,6 +1,13 @@
 require 'rails_helper'
 
 describe Section, type: :model do
+  describe '.default' do
+    it 'should work' do
+      expect(Section.default).to be_a(Section)
+      expect(Section.default.new_record?).to eq false
+    end
+  end
+
   describe 'CacheVersion update' do
     let(:old) { 1.minutes.ago }
     it 'should update on save' do

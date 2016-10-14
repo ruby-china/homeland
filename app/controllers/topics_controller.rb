@@ -40,7 +40,7 @@ class TopicsController < ApplicationController
     @node = Node.find(params[:id])
     @topics = @node.topics.last_actived.fields_for_list
     @topics = @topics.includes(:user).paginate(page: params[:page], per_page: 25)
-    title = @node.jobs? ? @node.name : "#{@node.name} &raquo; #{t('menu.topics')}"
+    title = @node.id == Node.job.id ? @node.name : "#{@node.name} &raquo; #{t('menu.topics')}"
     @page_title = [@node.name, t('menu.topics')].join(' · ')
     if stale?(etag: [@node, @topics], template: 'topics/index')
       render action: 'index'
@@ -236,7 +236,7 @@ class TopicsController < ApplicationController
 
   def set_special_node_active_menu
     case @node.try(:id)
-    when Node.jobs_id
+    when Node.job.id
       @current = ['/jobs']
     end
   end

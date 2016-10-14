@@ -6,7 +6,7 @@ class JobsController < ApplicationController
   end
 
   def index
-    @node = Node.find(Node.jobs_id)
+    @node = Node.job
     @suggest_topics = Topic.where(node_id: @node.id).suggest.limit(3)
     suggest_topic_ids = @suggest_topics.map(&:id)
     @topics = @node.topics.last_actived.fields_for_list

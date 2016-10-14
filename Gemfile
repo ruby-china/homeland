@@ -139,6 +139,7 @@ group :development, :test do
   gem 'capybara'
   gem 'jasmine-rails', '~> 0.10.2'
   gem 'letter_opener'
+  gem 'yard'
 
   gem 'codecov', require: false
   gem 'pry-byebug'

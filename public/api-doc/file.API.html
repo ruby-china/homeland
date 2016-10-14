@@ -125,7 +125,9 @@
 <pre class="code rb"><code class="rb">require &quot;oauth2&quot;
 client = OAuth2::Client.new(&#39;client id&#39;, &#39;secret&#39;, site: &#39;https://ruby-china.org&#39;)
 access_token = client.password.get_token(&#39;username&#39;, &#39;password&#39;)
-Faraday.get(&quot;https://ruby-china.org/api/v3/hello.json?access_token=\#{access_token.token}&quot;).body
+res = Faraday.get(&quot;https://ruby-china.org/api/v3/hello.json?access_token=#{access_token.token}&quot;)
+puts res.status
+puts res.body
 </code></pre>
 
 <p>最后输出</p>
@@ -135,7 +137,7 @@ Faraday.get(&quot;https://ruby-china.org/api/v3/hello.json?access_token=\#{acces
 </div></div>
 
       <div id="footer">
-  Generated on Thu Oct 13 13:24:42 2016 by
+  Generated on Fri Oct 14 13:51:31 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.5 (ruby-2.3.1).
 </div>

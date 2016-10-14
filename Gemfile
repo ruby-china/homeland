@@ -69,6 +69,7 @@ gem 'redis'
 gem 'hiredis'
 gem 'redis-namespace'
 gem 'redis-objects'
+gem 'redis-session-store'
 
 # Cache
 gem 'second_level_cache'

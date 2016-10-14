@@ -31,6 +31,21 @@
   }
 }
 
+.node-header {
+  .container {
+    padding: 0 30px;
+  }
+  .title {
+    font-size: 24px; color: #333;
+    margin-bottom: 8px;
+    .total { color: #999; font-size: 14px; margin-left: 10px; }
+  }
+
+  .summary {
+    p:last-child { margin-bottom: 0; }
+  }
+}
+
 .topics {
   .panel-body {
     padding: 0 15px;

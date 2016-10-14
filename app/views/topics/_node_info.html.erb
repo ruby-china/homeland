@@ -1,15 +1,23 @@
 <% if !node.blank? %>
-  <div class="node-info">
-    <div class="name">
-      <strong><%= node.name %></strong> <span class="total">共有 <%= node.topics_count %> 个讨论主题</span>
-      <div class="pull-right">
-        <%= block_node_tag(node) %>
+  <% content_for :sub_navbar do %>
+  <div class="sub-navbar node-header">
+    <div class="container">
+      <div class="title">
+        <%= node.name %>
+        <span class="total">共有 <%= node.topics_count %> 个讨论主题</span>
+        <div class="pull-right">
+          <% if node.collapse_summary? %>
+          <a class="btn btn-default" data-toggle="collapse" href="#node-summary"><i class="fa fa-lightbulb-o"></i> 节点介绍</a>
+          <% end %>
+          <%= block_node_tag(node) %>
+        </div>
+      </div>
+      <div class="summary<%= ' collapse' if node.collapse_summary? %>" id="node-summary">
+        <%= sanitize_markdown node.summary_html %>
       </div>
     </div>
-    <div class="summary">
-      <%= sanitize_markdown node.summary_html %>
-    </div>
   </div>
+  <% end %>
 <% else %>
   <div class="filter pull-right">
     <span class="l">查看:</span>

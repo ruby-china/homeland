@@ -37,6 +37,11 @@ class Node < ApplicationRecord
     where(id: node_ids)
   end
 
+  # 是否 Summary 过多需要折叠
+  def collapse_summary?
+    @collapse_summary ||= self.summary_html.scan(/\<p\>|\<ul\>/).size > 2
+  end
+
   def update_cache_version
     # 记录节点变更时间，用于清除缓存
     CacheVersion.section_node_updated_at = Time.now

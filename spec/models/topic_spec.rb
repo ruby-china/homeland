@@ -252,10 +252,10 @@ describe Topic, type: :model do
     let!(:t) { create(:topic, user: user) }
 
     it 'should ban! and lock topic' do
-      expect(Topic).to receive(:notify_topic_node_changed).with(t.id, Node.no_point_id)
+      expect(Topic).to receive(:notify_topic_node_changed).with(t.id, Node.no_point.id)
       t.ban!
       t.reload
-      expect(t.node_id).to eq Node.no_point_id
+      expect(t.node_id).to eq Node.no_point.id
       expect(t.lock_node).to eq true
     end
   end

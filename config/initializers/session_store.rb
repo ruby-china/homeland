@@ -6,7 +6,7 @@ Rails.application.config.session_store :redis_session_store, {
   key: '_homeland_session',
   redis: {
     expire_after: 60.days,
-    key_prefix: '_homeland_session',
+    key_prefix: 'rc:session',
     url: "redis://#{redis_config['host']}:#{redis_config['port']}/0",
   }
 }

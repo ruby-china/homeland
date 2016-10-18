@@ -1,7 +1,7 @@
 class TopicsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :create, :update, :destroy,
-                                     :favorite, :unfavorite, :follow, :unfollow,
-                                     :action, :favorites]
+                                            :favorite, :unfavorite, :follow, :unfollow,
+                                            :action, :favorites]
   load_and_authorize_resource only: [:new, :edit, :create, :update, :destroy,
                                      :favorite, :unfavorite, :follow, :unfollow]
 
@@ -9,25 +9,10 @@ class TopicsController < ApplicationController
                                    :unfollow, :action]
 
   def index
-    @suggest_topics = []
-    if params[:page].to_i <= 1
-      @suggest_topics = Topic.without_hide_nodes.suggest.fields_for_list.limit(3)
-    end
-    @topics = Topic.last_actived.without_suggest
-    @topics =
-      if current_user
-        @topics.without_nodes(current_user.blocked_node_ids)
-          .without_users(current_user.blocked_user_ids)
-      else
-        @topics.without_hide_nodes
-      end
-    @topics = @topics.fields_for_list
-    @topics = @topics.paginate(page: params[:page], per_page: 22, total_entries: 1500).to_a
+    @suggest_topics = suggest_topics
+    @topics = index_topics
+    @read_topic_ids = read_topic_ids
     @page_title = t('menu.topics')
-    @read_topic_ids = []
-    if current_user
-      @read_topic_ids = current_user.filter_readed_topics(@topics + @suggest_topics)
-    end
     fresh_when([@suggest_topics, @topics, @read_topic_ids])
   end
 
@@ -40,7 +25,6 @@ class TopicsController < ApplicationController
     @node = Node.find(params[:id])
     @topics = @node.topics.last_actived.fields_for_list
     @topics = @topics.includes(:user).paginate(page: params[:page], per_page: 25)
-    title = @node.id == Node.job.id ? @node.name : "#{@node.name} &raquo; #{t('menu.topics')}"
     @page_title = [@node.name, t('menu.topics')].join(' · ')
     if stale?(etag: [@node, @topics], template: 'topics/index')
       render action: 'index'
@@ -64,7 +48,6 @@ class TopicsController < ApplicationController
   end
 
   def favorites
-    # @topic_ids = current_user.favorite_topic_ids.reverse.paginate(page: params[:page], per_page: 40)
     @topics = Topic.where(id: current_user.favorite_topic_ids).fields_for_list.recent.paginate(page: params[:page], per_page: 40)
     render action: 'index' if stale?(etag: @topics, template: 'topics/index')
   end
@@ -239,5 +222,25 @@ class TopicsController < ApplicationController
     when Node.job.id
       @current = ['/jobs']
     end
+  end
+
+  def suggest_topics
+    params[:page].to_i <= 1 ? Topic.without_hide_nodes.suggest.fields_for_list.limit(3) : []
+  end
+
+  def index_topics
+    condition = Topic.last_actived.without_suggest
+    condition =
+      if current_user
+        condition.without_nodes(current_user.blocked_node_ids).without_users(current_user.blocked_user_ids)
+      else
+        condition.without_hide_nodes
+      end
+    condition = condition.fields_for_list
+    condition.paginate(page: params[:page], per_page: 22, total_entries: 1500).to_a
+  end
+
+  def read_topic_ids
+    current_user ? current_user.filter_readed_topics(@topics + @suggest_topics) : []
   end
 end

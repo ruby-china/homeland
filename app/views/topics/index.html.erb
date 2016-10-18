@@ -20,16 +20,12 @@
       <div class="panel-footer clearfix">
         <%= will_paginate @topics %>
       </div>
-
     </div>
 
-    <% if controller_name == "topics" && action_name == "index" && !mobile? %>
-      <%= render "/shared/hot_locations" %>
-    <% end %>
 
     <% if current_user %>
     <script type="text/javascript">
-      var readed_topic_ids = <%= @read_topic_ids %>;
+      var readed_topic_ids = <%= @read_topic_ids || [] %>;
       for (var i = 0; i < readed_topic_ids.length; i++) {
         topic_id = readed_topic_ids[i];
         $(".topic-"+ topic_id).addClass('topic-visited');

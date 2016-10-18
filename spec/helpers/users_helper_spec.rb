@@ -67,9 +67,13 @@ describe UsersHelper, type: :helper do
       img = image_tag(image_url, class: 'media-object avatar-48')
       expect(user_avatar_tag(user, :md, timestamp: true, link: false)).to eq img
     end
+
+    it 'should alias to team_avatar_tag' do
+      expect(team_avatar_tag(nil)).to eq image_tag('avatar/md.png', class: 'media-object avatar-48')
+    end
   end
 
-  describe '.render_user_level_tag' do
+  describe 'render_user_level_tag' do
     let(:user) { create(:user) }
     subject { helper.render_user_level_tag(user) }
 
@@ -100,6 +104,74 @@ describe UsersHelper, type: :helper do
 
     it 'normal should work' do
       is_expected.to eq '<span class="label label-info role">会员</span>'
+    end
+  end
+
+  describe 'block_node_tag' do
+    let(:user) { create(:user) }
+    let(:node) { create(:node) }
+    before { allow(helper).to receive(:current_user).and_return(user) }
+
+    it 'should work if current_user is nil' do
+      allow(helper).to receive(:current_user).and_return(nil)
+      expect(helper.block_node_tag(node)).to eq ''
+    end
+
+    it 'should work if node is nil' do
+      expect(helper.block_node_tag(nil)).to eq ''
+    end
+
+    it 'should work if not blocked' do
+      expect(helper.block_node_tag(node)).to eq %(<a data-id="#{node.id}" class="btn btn-default btn-sm button-block-node" href="#"><i class="fa fa-eye-slash"></i><span>忽略节点</span></a>)
+    end
+
+    it 'should work if blocked' do
+      user.blocked_node_ids << node.id
+      expect(helper.block_node_tag(node)).to eq %(<a title="忽略后，社区首页列表将不会显示这里的内容。" data-id="#{node.id}" class="btn btn-default btn-sm button-block-node active" href="#"><i class="fa fa-eye-slash"></i><span>取消屏蔽</span></a>)
+    end
+  end
+
+  describe 'block_user_tag' do
+    let(:user) { create(:user) }
+    let(:block_user) { create(:user) }
+    before { allow(helper).to receive(:current_user).and_return(user) }
+
+    it 'should work' do
+      expect(helper.block_user_tag(block_user)).to eq %(<a data-id="#{block_user.login}" class="button-block-user btn btn-default btn-block" href="#"><i class="fa fa-eye-slash"></i><span>屏蔽</span></a>)
+    end
+
+    it 'should work if blocked' do
+      user.blocked_user_ids << block_user.id
+      expect(helper.block_user_tag(block_user)).to eq %(<a title="忽略后，社区首页列表将不会显示此用户发布的内容。" data-id="#{block_user.login}" class="button-block-user btn btn-default btn-block active" href="#"><i class="fa fa-eye-slash"></i><span>取消屏蔽</span></a>)
+    end
+
+    it 'should work if disable to block' do
+      expect(helper.block_user_tag(nil)).to eq ''
+      expect(helper.block_user_tag(user)).to eq ''
+      allow(helper).to receive(:current_user).and_return(nil)
+      expect(helper.block_user_tag(nil)).to eq ''
+    end
+  end
+
+  describe 'follow_user_tag' do
+    let(:user) { create(:user) }
+    let(:follow_user) { create(:user) }
+    before { allow(helper).to receive(:current_user).and_return(user) }
+
+    it 'should work' do
+      expect(helper.follow_user_tag(follow_user)).to eq %(<a data-id="#{follow_user.login}" class="button-follow-user btn btn-primary btn-block" href="#"><i class="fa fa-user"></i><span>关注</span></a>)
+    end
+
+    it 'should work if followed' do
+      allow(user).to receive(:followed?).and_return(true)
+      expect(helper.follow_user_tag(follow_user)).to eq %(<a data-id="#{follow_user.login}" class="button-follow-user btn btn-primary btn-block active" href="#"><i class="fa fa-user"></i><span>取消关注</span></a>)
+    end
+
+    it 'should work if disable to follow' do
+      expect(helper.follow_user_tag(nil)).to eq ''
+      expect(helper.follow_user_tag(user)).to eq ''
+      allow(helper).to receive(:current_user).and_return(nil)
+      expect(helper.follow_user_tag(nil)).to eq ''
     end
   end
 end

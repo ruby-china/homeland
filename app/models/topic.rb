@@ -158,14 +158,17 @@ class Topic < ApplicationRecord
 
   def update_last_reply(reply, opts = {})
     # replied_at 用于最新回复的排序，如果帖着创建时间在一个月以前，就不再往前面顶了
-    return false if reply.blank? && !opts[:force]
+    return false if reply.nil? && !opts[:force]
 
     self.last_active_mark = Time.now.to_i if created_at > 1.month.ago
-    self.replied_at = reply.try(:created_at)
     self.replies_count = replies.without_system.count
+
+    # update last_reply cache columns
+    self.replied_at = reply.try(:created_at)
     self.last_reply_id = reply.try(:id)
     self.last_reply_user_id = reply.try(:user_id)
     self.last_reply_user_login = reply.try(:user_login)
+
     # Reindex Search document
     SearchIndexer.perform_later('update', 'topic', self.id)
     save
@@ -208,17 +211,11 @@ class Topic < ApplicationRecord
   end
 
   def excellent!
-    self.transaction do
-      Reply.create_system_event(action: 'excellent', topic_id: self.id)
-      update_attributes(excellent: 1)
-    end
+    update_excellent!(action: 'excellent', excellent: 1)
   end
 
   def unexcellent!
-    self.transaction do
-      Reply.create_system_event(action: 'unexcellent', topic_id: self.id)
-      update_attributes(excellent: 0)
-    end
+    update_excellent!(action: 'unexcellent', excellent: 0)
   end
 
   def floor_of_reply(reply)
@@ -262,5 +259,14 @@ class Topic < ApplicationRecord
                         target: topic,
                         second_target: node
     true
+  end
+
+  private
+
+  def update_excellent!(params = {})
+    self.transaction do
+      Reply.create_system_event(action: params[:action], topic_id: self.id)
+      update_attributes(excellent: params[:excellent])
+    end
   end
 end

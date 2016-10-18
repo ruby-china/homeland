@@ -3,12 +3,11 @@
 <!-- @suggest_topics maybe nil or ActiveRecord::Relation, but we need an array -->
 <% @suggest_topics = @suggest_topics.to_a %>
 
+<%= render "topics/node_info", node: @node %>
+
 <div class="row">
   <div class="col-md-9">
     <div class="topics panel panel-default">
-      <div class="topic-list-heading panel-heading clearfix">
-        <%= render "topics/node_info", node: @node %>
-      </div>
 
       <div class="panel-body item-list">
         <% if @suggest_topics.present? %>
@@ -25,7 +24,6 @@
     </div>
 
     <% if controller_name == "topics" && action_name == "index" && !mobile? %>
-      <%= render "/shared/index_sections" %>
       <%= render "/shared/hot_locations" %>
     <% end %>
 

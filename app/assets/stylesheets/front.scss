@@ -35,6 +35,15 @@
   .container {
     padding: 0 30px;
   }
+  @media (max-width: 480px) {
+    .container {
+      padding: 0 5px;
+    }
+
+    .filter {
+      .all-nodes { display: none; }
+    }
+  }
   .title {
     font-size: 24px; color: #333;
     margin-bottom: 8px;
@@ -44,40 +53,68 @@
   .summary {
     p:last-child { margin-bottom: 0; }
   }
+
+  .filter {
+    &>li {
+      margin-right: 0px;
+      &.active {
+        a:link,
+        a:visited,
+        a:hover {
+          color: #000;
+          border-bottom: 2px dotted #666666;
+        }
+      }
+      &>a {
+        background: transparent;
+        border-radius: 0px;
+        line-height: 100%;
+        padding: 8px 8px;
+        margin-right: 5px;
+        font-size: 14px;
+        border-bottom: 2px dotted transparent;
+        display: inline-block;
+        color: #606060;
+
+        &:hover {
+          border-color: #eee;
+          background: transparent;
+        }
+
+        &.all-nodes {
+          border-radius: 3px;
+          outline: 0 !important;
+          padding-left: 15px;
+          padding-right: 15px;
+          margin-right: 15px;
+          border: 1px solid #e0e0e0;
+
+          .caret-right {
+            display: inline-block;
+            width: 0;
+            height: 0;
+            margin-left: 10px;
+            vertical-align: middle;
+            border-left: 4px solid;
+            border-top: 4px solid transparent;
+            border-bottom: 4px solid transparent;
+          }
+
+          &:hover {
+            background: #fff;
+          }
+        }
+
+      }
+    }
+  }
 }
 
 .topics {
   .panel-body {
     padding: 0 15px;
   }
-  .node-info {
-    .name {
-      strong {
-        font-weight: bold; color: #666;
-        text-align: left;
-        font-size: 16px; padding-bottom: 10px;
-      }
-      .total { font-size: 12px; font-weight: normal; margin-left: 8px; }
-      .button-block-node { font-size: 13px; border:1px solid #e0e0e0; }
-      .button-block-node.active { background-color: #e0e0e0; border-radius: #d0d0d0; }
-    }
-    .summary {
-      color: #888;
-      h1, h2, h3, h4, h5 { font-size: 14px; }
-      font-size: 13px;
-    }
-  }
-  .filter {
-    padding: 3px 0 2px 0;
-    font-size: 13px;
-    color: #ccc;
-    span.l { color: #bbb; margin-right: 5px; }
-    a:link,a:visited { color: #333; margin: 0 3px; }
-    a:hover { text-decoration:underline; }
-    a.popular { color: $red; }
-    a.active { color: #333; border-bottom: 1px dotted #ccc; text-decoration: none; }
-    a.popular.active { color: $red; border-bottom-color: $red;}
-  }
+
   .topics-group:first-child {
     @media (max-width: 991px) {
       .topic:last-child { border-bottom: 1px solid #F0F0F0; }

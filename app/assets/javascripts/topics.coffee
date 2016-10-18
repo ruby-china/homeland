@@ -440,12 +440,15 @@ window.TopicView = Backbone.View.extend
 
   nodeSelectorNodeSelected: (e) ->
     el = $(e.currentTarget)
-    e.preventDefault()
     $("#node-selector").modal('hide')
-    nodeId = el.data('id')
-    $('.form input[name="topic[node_id]"]').val(nodeId)
-    $('#node-selector-button').html(el.text())
-    false
+    if $('.form input[name="topic[node_id]"]').length > 0
+      e.preventDefault()
+      nodeId = el.data('id')
+      $('.form input[name="topic[node_id]"]').val(nodeId)
+      $('#node-selector-button').html(el.text())
+      return false
+    else
+      return true
 
   topicRowClick: (e) ->
     if !App.turbolinks

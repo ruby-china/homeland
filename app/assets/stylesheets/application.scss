@@ -194,11 +194,20 @@ body {
 }
 
 .sub-navbar {
-  padding: 18px 0;
+  padding: 8px 0;
   background: #f9f9f9;
   box-shadow: 0 1px 1px rgba(0, 0, 0,.11);
   margin-top: -14px;
   margin-bottom: 15px;
+
+  @media (max-width: 480px) {
+    margin-top: 0;
+    padding: 5px 0;
+
+    .container {
+      padding: 0 5px;
+    }
+  }
 }
 
 .sidebar.col-md-3 { padding-left: 0; }

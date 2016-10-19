@@ -16,7 +16,7 @@ site_configs: &site_configs
     </ul>
   footer_html: >
     <p class="copyright">
-     &copy; Powered by <a href="https://github.com/ruby-china/ruby-china">ruby-china</a>.
+     &copy; Powered by <a href="http://gethomeland.com">Homeland</a>.
     </p>
   after_topic_html: ""
   before_topic_html: ""

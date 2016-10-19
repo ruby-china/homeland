@@ -1,4 +1,4 @@
-module RubyChina
+module Homeland
   class Pipeline
     class NormalizeMentionFilter < HTML::Pipeline::TextFilter
       NORMALIZE_USER_REGEXP = /(^|[^a-zA-Z0-9\-_!#\/\$%&*@＠])@([a-zA-Z0-9\-_]{1,20})/io

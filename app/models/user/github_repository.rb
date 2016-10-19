@@ -8,7 +8,7 @@ class User
     # GitHub 项目
     def github_repositories
       cache_key = github_repositories_cache_key
-      items = $file_store.read(cache_key)
+      items = Homeland.file_store.read(cache_key)
       if items.nil?
         GithubRepoFetcherJob.perform_later(id)
         items = []
@@ -36,7 +36,7 @@ class User
           json = Timeout.timeout(10) { open(url).read }
         rescue => e
           Rails.logger.error("GitHub Repositiory fetch Error: #{e}")
-          $file_store.write(user.github_repositories_cache_key, [], expires_in: 1.minutes)
+          Homeland.file_store.write(user.github_repositories_cache_key, [], expires_in: 1.minutes)
           return
         end
 
@@ -51,7 +51,7 @@ class User
           }
         end
         items.sort! { |a, b| b[:watchers] <=> a[:watchers] }.take(10)
-        $file_store.write(user.github_repositories_cache_key, items, expires_in: 15.days)
+        Homeland.file_store.write(user.github_repositories_cache_key, items, expires_in: 15.days)
         items
       end
     end

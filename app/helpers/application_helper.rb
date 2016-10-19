@@ -5,7 +5,7 @@ module ApplicationHelper
   EMPTY_STRING = ''.freeze
 
   def markdown(text)
-    sanitize_markdown(RubyChina::Markdown.call(text))
+    sanitize_markdown(Homeland::Markdown.call(text))
   end
 
   def sanitize_markdown(body)

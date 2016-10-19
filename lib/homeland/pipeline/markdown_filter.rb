@@ -2,7 +2,7 @@ require 'redcarpet'
 require 'rouge/plugins/redcarpet'
 require 'nokogiri'
 
-module RubyChina
+module Homeland
   class Pipeline
     class MarkdownFilter < HTML::Pipeline::TextFilter
       DEFAULT_OPTIONS = {

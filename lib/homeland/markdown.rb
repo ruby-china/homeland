@@ -7,17 +7,17 @@ context = {
 }
 
 filters = [
-  RubyChina::Pipeline::NormalizeMentionFilter,
-  RubyChina::Pipeline::YoutubeFilter,
-  RubyChina::Pipeline::MarkdownFilter,
-  RubyChina::Pipeline::MentionFilter,
-  RubyChina::Pipeline::FloorFilter,
-  RubyChina::Pipeline::TwemojiFilter,
+  Homeland::Pipeline::NormalizeMentionFilter,
+  Homeland::Pipeline::YoutubeFilter,
+  Homeland::Pipeline::MarkdownFilter,
+  Homeland::Pipeline::MentionFilter,
+  Homeland::Pipeline::FloorFilter,
+  Homeland::Pipeline::TwemojiFilter,
 ]
 
 TopicPipeline = HTML::Pipeline.new(filters, context)
 
-module RubyChina
+module Homeland
   class Markdown
     class << self
       def call(body)

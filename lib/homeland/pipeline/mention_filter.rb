@@ -1,4 +1,4 @@
-module RubyChina
+module Homeland
   class Pipeline
     class MentionFilter < HTML::Pipeline::Filter
       MENTION_REGEXP = /(^|[^a-zA-Z0-9\-_!#\$%&*@＠])@(user[0-9]{1,6})/io

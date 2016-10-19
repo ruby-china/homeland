@@ -1,4 +1,4 @@
-module RubyChina
+module Homeland
   class Pipeline
     class FloorFilter < HTML::Pipeline::Filter
       FLOOR_REGEXP = /#(\d+)([楼樓Ff])/

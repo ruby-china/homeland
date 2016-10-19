@@ -12,7 +12,7 @@ module MarkdownBody
 
   def markdown_body
     if self.body_changed?
-      self.body_html = sanitize_markdown(RubyChina::Markdown.call(body))
+      self.body_html = sanitize_markdown(Homeland::Markdown.call(body))
     end
   end
 end

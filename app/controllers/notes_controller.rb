@@ -41,7 +41,7 @@ class NotesController < ApplicationController
   end
 
   def preview
-    out = RubyChina::Markdown.call(params[:body])
+    out = Homeland::Markdown.call(params[:body])
     render plain: out
   end
 

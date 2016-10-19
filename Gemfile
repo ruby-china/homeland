@@ -111,7 +111,6 @@ gem 'puma'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rack-utf8_sanitizer'
 
-gem 'oneapm_rpm'
 gem 'exception_notification'
 gem 'status-page'
 

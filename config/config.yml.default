@@ -1,4 +1,8 @@
 site_configs: &site_configs
+  # 导航栏 Logo 位置 HTML
+  navbar_brand_html: >
+    <a href="/" class="navbar-brand"><b>App</b> Name</a>
+  # 导航栏扩展菜单
   navbar_html: >
     <li><a href="/topics/new">发帖</a>
   index_html: >
@@ -44,7 +48,7 @@ site_configs: &site_configs
 
 defaults: &defaults
   <<: *site_configs
-  app_name: "Ruby China | Open Source"
+  app_name: "App Name"
   domain: "localhost:3000"
   https: false
   admin_emails:

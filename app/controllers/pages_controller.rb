@@ -69,7 +69,7 @@ class PagesController < ApplicationController
   end
 
   def preview
-    render plain: RubyChina::Markdown.call(params[:body])
+    render plain: Homeland::Markdown.call(params[:body])
   end
 
   protected

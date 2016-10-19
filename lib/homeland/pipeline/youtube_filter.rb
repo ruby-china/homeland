@@ -1,4 +1,4 @@
-module RubyChina
+module Homeland
   class Pipeline
     class YoutubeFilter < HTML::Pipeline::TextFilter
       YOUTUBE_URL_REGEXP = /(\s|^|<div>|<br>)(https?:\/\/)(www.)?(youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/watch\?feature=player_embedded&v=)([A-Za-z0-9_-]*)(\&\S+)?(\?\S+)?/

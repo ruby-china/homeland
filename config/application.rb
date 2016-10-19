@@ -6,7 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module RubyChina
+module Homeland
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -37,7 +37,7 @@ module RubyChina
       Rails.root.join('lib')
     ]
     config.eager_load_paths += [
-      Rails.root.join('lib/ruby_china'),
+      Rails.root.join('lib/homeland'),
       Rails.root.join('lib/exception_notifier')
     ]
 
@@ -68,9 +68,6 @@ module RubyChina
     config.action_cable.mount_path = '/cable'
   end
 end
-
-$memory_store = ActiveSupport::Cache::MemoryStore.new
-$file_store = ActiveSupport::Cache::FileStore.new(Rails.root.join('tmp/cache'))
 
 I18n.config.enforce_available_locales = false
 

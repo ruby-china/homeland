@@ -1,4 +1,4 @@
-module RubyChina
+module Homeland
   class Pipeline
     class TwemojiFilter < HTML::Pipeline::Filter
       def call

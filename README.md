@@ -1,6 +1,7 @@
-## Ruby China
+Homeland
+--------
 
-This is the source code of [Ruby China](http://ruby-china.org) website.
+This is an opensource forum project for [Ruby China](http://ruby-china.org) website.
 
 [![Build Status](https://travis-ci.org/ruby-china/ruby-china.svg?branch=master)](https://travis-ci.org/ruby-china/ruby-china) [![Code Climate](https://codeclimate.com/github/ruby-china/ruby-china/badges/gpa.svg)](https://codeclimate.com/github/ruby-china/ruby-china) [![codecov.io](https://codecov.io/github/ruby-china/ruby-china/coverage.svg?branch=master)](https://codecov.io/github/ruby-china/ruby-china?branch=master)
 
@@ -91,6 +92,10 @@ rake environment elasticsearch:import:model CLASS=Page FORCE=y
 rake environment elasticsearch:import:model CLASS=Topic FORCE=y
 rake environment elasticsearch:import:model CLASS=User FORCE=y
 ```
+
+## Deployment
+
+https://github.com/ruby-china/ruby-china-docker
 
 ## Contributors
 

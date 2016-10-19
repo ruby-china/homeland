@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 describe 'markdown' do
-  describe RubyChina::Markdown do
+  describe Homeland::Markdown do
     let(:raw) { '' }
-    let!(:doc) { Nokogiri::HTML.fragment(RubyChina::Markdown.call(raw)) }
+    let!(:doc) { Nokogiri::HTML.fragment(Homeland::Markdown.call(raw)) }
     subject { doc }
 
     describe 'general' do
@@ -11,138 +11,138 @@ describe 'markdown' do
         it 'should right with Chinese neer URL' do
           # TODO: 这行是由于 Redcarpet 的 auto_link 方法转换连起来的会有编码错误
           #  @huacnlee提醒说在某些环境下面，下面测试会Pass。所以有可能在你的测试环境会失败。
-          expect(RubyChina::Markdown.call('此版本并非线上的http://yavaeye.com 的源码.')).to eq(
+          expect(Homeland::Markdown.call('此版本并非线上的http://yavaeye.com 的源码.')).to eq(
             '<p>此版本并非线上的<a href="http://yavaeye.com" rel="nofollow" target="_blank">http://yavaeye.com</a> 的源码.</p>'
           )
-          expect(RubyChina::Markdown.call('http://foo.com,的???')).to eq(
+          expect(Homeland::Markdown.call('http://foo.com,的???')).to eq(
             '<p><a href="http://foo.com," rel="nofollow" target="_blank">http://foo.com,</a>的???</p>'
           )
-          expect(RubyChina::Markdown.call('http://foo.com，的???')).to eq(
+          expect(Homeland::Markdown.call('http://foo.com，的???')).to eq(
             '<p><a href="http://foo.com" rel="nofollow" target="_blank">http://foo.com</a>，的???</p>'
           )
-          expect(RubyChina::Markdown.call('http://foo.com。的???')).to eq(
+          expect(Homeland::Markdown.call('http://foo.com。的???')).to eq(
             '<p><a href="http://foo.com" rel="nofollow" target="_blank">http://foo.com</a>。的???</p>'
           )
-          expect(RubyChina::Markdown.call('http://foo.com；的???')).to eq(
+          expect(Homeland::Markdown.call('http://foo.com；的???')).to eq(
             '<p><a href="http://foo.com" rel="nofollow" target="_blank">http://foo.com</a>；的???</p>'
           )
         end
 
         it 'should match complex urls' do
-          expect(RubyChina::Markdown.call('http://movie.douban.com/tag/%E7%BE%8E%E5%9B%BD')).to eq(
+          expect(Homeland::Markdown.call('http://movie.douban.com/tag/%E7%BE%8E%E5%9B%BD')).to eq(
             '<p><a href="http://movie.douban.com/tag/%E7%BE%8E%E5%9B%BD" rel="nofollow" target="_blank">http://movie.douban.com/tag/%E7%BE%8E%E5%9B%BD</a></p>'
           )
-          expect(RubyChina::Markdown.call('http://ruby-china.org/self_posts/11?datas=20,33|100&format=.jpg')).to eq(
+          expect(Homeland::Markdown.call('http://ruby-china.org/self_posts/11?datas=20,33|100&format=.jpg')).to eq(
             '<p><a href="http://ruby-china.org/self_posts/11?datas=20,33%7C100&amp;format=.jpg" rel="nofollow" target="_blank">http://ruby-china.org/self_posts/11?datas=20,33|100&amp;format=.jpg</a></p>'
           )
-          expect(RubyChina::Markdown.call('https://g.l/b/?fromgroups#!searchin/gitlabhq/self$20regist/gitlabhq/5ha_FyX-Pr4/VNZTPnSN0S4J')).to eq(
+          expect(Homeland::Markdown.call('https://g.l/b/?fromgroups#!searchin/gitlabhq/self$20regist/gitlabhq/5ha_FyX-Pr4/VNZTPnSN0S4J')).to eq(
             '<p><a href="https://g.l/b/?fromgroups#!searchin/gitlabhq/self%2420regist/gitlabhq/5ha_FyX-Pr4/VNZTPnSN0S4J" rel="nofollow" target="_blank">https://g.l/b/?fromgroups#!searchin/gitlabhq/self$20regist/gitlabhq/5ha_FyX-Pr4/VNZTPnSN0S4J</a></p>'
           )
         end
 
         it 'should bold text ' do
-          expect(RubyChina::Markdown.call('**bold**')).to eq('<p><strong>bold</strong></p>')
+          expect(Homeland::Markdown.call('**bold**')).to eq('<p><strong>bold</strong></p>')
         end
 
         it 'should italic text' do
-          expect(RubyChina::Markdown.call('*italic*')).to eq('<p><em>italic</em></p>')
+          expect(Homeland::Markdown.call('*italic*')).to eq('<p><em>italic</em></p>')
         end
 
         it 'should strikethrough text' do
-          expect(RubyChina::Markdown.call('~~strikethrough~~')).to eq('<p><del>strikethrough</del></p>')
+          expect(Homeland::Markdown.call('~~strikethrough~~')).to eq('<p><del>strikethrough</del></p>')
         end
 
         it 'should auto link' do
-          expect(RubyChina::Markdown.call('this is a link: http://ruby-china.org test')).to eq(
+          expect(Homeland::Markdown.call('this is a link: http://ruby-china.org test')).to eq(
             '<p>this is a link: <a href="http://ruby-china.org" rel="nofollow" target="_blank">http://ruby-china.org</a> test</p>'
           )
         end
 
         it 'should auto link' do
-          expect(RubyChina::Markdown.call('http://ruby-china.org/~users')).to eq(
+          expect(Homeland::Markdown.call('http://ruby-china.org/~users')).to eq(
             '<p><a href="http://ruby-china.org/~users" rel="nofollow" target="_blank">http://ruby-china.org/~users</a></p>'
           )
         end
 
         it 'should auto link with Chinese' do
-          expect(RubyChina::Markdown.call('靠着中文http://foo.com，')).to eq(
+          expect(Homeland::Markdown.call('靠着中文http://foo.com，')).to eq(
             "<p>靠着中文<a href=\"http://foo.com\" rel=\"nofollow\" target=\"_blank\">http://foo.com</a>，</p>"
           )
         end
 
         it 'should link mentioned user' do
           user = create(:user)
-          expect(RubyChina::Markdown.call("hello @#{user.name} @b @a @#{user.name}")).to eq(
+          expect(Homeland::Markdown.call("hello @#{user.name} @b @a @#{user.name}")).to eq(
             "<p>hello <a href=\"/#{user.name}\" class=\"user-mention\" title=\"@#{user.name}\"><i>@</i>#{user.name}</a> <a href=\"/b\" class=\"user-mention\" title=\"@b\"><i>@</i>b</a> <a href=\"/a\" class=\"user-mention\" title=\"@a\"><i>@</i>a</a> <a href=\"/#{user.name}\" class=\"user-mention\" title=\"@#{user.name}\"><i>@</i>#{user.name}</a></p>"
           )
         end
 
         it 'should link mentioned user at first of line' do
-          expect(RubyChina::Markdown.call('@huacnlee hello @ruby_box')).to eq('<p><a href="/huacnlee" class="user-mention" title="@huacnlee"><i>@</i>huacnlee</a> hello <a href="/ruby_box" class="user-mention" title="@ruby_box"><i>@</i>ruby_box</a></p>')
+          expect(Homeland::Markdown.call('@huacnlee hello @ruby_box')).to eq('<p><a href="/huacnlee" class="user-mention" title="@huacnlee"><i>@</i>huacnlee</a> hello <a href="/ruby_box" class="user-mention" title="@ruby_box"><i>@</i>ruby_box</a></p>')
         end
 
         it 'should support ul,ol' do
-          expect(RubyChina::Markdown.call("* Ruby on Rails\n* Sinatra").delete("\n")).to eq('<ul><li>Ruby on Rails</li><li>Sinatra</li></ul>')
-          expect(RubyChina::Markdown.call("1. Ruby on Rails\n2. Sinatra").delete("\n")).to eq('<ol><li>Ruby on Rails</li><li>Sinatra</li></ol>')
+          expect(Homeland::Markdown.call("* Ruby on Rails\n* Sinatra").delete("\n")).to eq('<ul><li>Ruby on Rails</li><li>Sinatra</li></ul>')
+          expect(Homeland::Markdown.call("1. Ruby on Rails\n2. Sinatra").delete("\n")).to eq('<ol><li>Ruby on Rails</li><li>Sinatra</li></ol>')
         end
 
         it 'should email neer Chinese chars can work' do
           # 次处要保留 在某些场景下面 email 后面紧接中文逗号会出现编码异常，而导致错误
-          expect(RubyChina::Markdown.call('可以给我邮件 monster@gmail.com，')).to eq('<p>可以给我邮件 monster@gmail.com，</p>')
+          expect(Homeland::Markdown.call('可以给我邮件 monster@gmail.com，')).to eq('<p>可以给我邮件 monster@gmail.com，</p>')
         end
 
         it 'should link mentioned floor' do
-          expect(RubyChina::Markdown.call('#3楼很强大')).to eq(
+          expect(Homeland::Markdown.call('#3楼很强大')).to eq(
             '<p><a href="#reply3" class="at_floor" data-floor="3">#3楼</a>很强大</p>'
           )
         end
 
         it 'should right encoding with #1楼 @ichord 刚刚发布，有点问题' do
-          expect(RubyChina::Markdown.call('#1楼 @ichord 刚刚发布，有点问题')).to eq(
+          expect(Homeland::Markdown.call('#1楼 @ichord 刚刚发布，有点问题')).to eq(
             %(<p><a href="#reply1" class="at_floor" data-floor="1">#1楼</a> <a href="/ichord" class="user-mention" title="@ichord"><i>@</i>ichord</a> 刚刚发布，有点问题</p>)
           )
         end
 
         it 'should wrap break line' do
-          expect(RubyChina::Markdown.call("line 1\nline 2")).to eq(
+          expect(Homeland::Markdown.call("line 1\nline 2")).to eq(
             "<p>line 1\nline 2</p>"
           )
         end
 
         it 'should support inline code' do
-          expect(RubyChina::Markdown.call('This is `Ruby`')).to eq('<p>This is <code>Ruby</code></p>')
-          expect(RubyChina::Markdown.call('This is`Ruby`')).to eq('<p>This is<code>Ruby</code></p>')
+          expect(Homeland::Markdown.call('This is `Ruby`')).to eq('<p>This is <code>Ruby</code></p>')
+          expect(Homeland::Markdown.call('This is`Ruby`')).to eq('<p>This is<code>Ruby</code></p>')
         end
 
         it 'should highlight code block' do
-          expect(RubyChina::Markdown.call("```ruby\nclass Hello\n\nend\n```")).to eq(
+          expect(Homeland::Markdown.call("```ruby\nclass Hello\n\nend\n```")).to eq(
             %(<pre class=\"highlight ruby\"><code><span class=\"k\">class</span> <span class=\"nc\">Hello</span>\n\n<span class=\"k\">end</span>\n</code></pre>)
           )
         end
 
         it 'should be able to identigy Ruby or RUBY as ruby language' do
           %w(Ruby RUBY).each do |lang|
-            expect(RubyChina::Markdown.call("```#{lang}\nclass Hello\nend\n```")).to eq(
+            expect(Homeland::Markdown.call("```#{lang}\nclass Hello\nend\n```")).to eq(
               %(<pre class=\"highlight ruby\"><code><span class=\"k\">class</span> <span class=\"nc\">Hello</span>\n<span class=\"k\">end</span>\n</code></pre>)
             )
           end
         end
 
         it 'should highlight code block after the content' do
-          expect(RubyChina::Markdown.call("this code:\n```\ngem install rails\n```\n")).to eq(
+          expect(Homeland::Markdown.call("this code:\n```\ngem install rails\n```\n")).to eq(
             %(<p>this code:</p>\n<pre class=\"highlight plaintext\"><code>gem install rails\n</code></pre>)
           )
         end
 
         it 'should highlight code block without language' do
-          expect(RubyChina::Markdown.call("```\ngem install ruby\n```").delete("\n")).to eq(
+          expect(Homeland::Markdown.call("```\ngem install ruby\n```").delete("\n")).to eq(
             %(<pre class=\"highlight plaintext\"><code>gem install ruby</code></pre>)
           )
         end
 
         it 'should not filter underscore' do
-          expect(RubyChina::Markdown.call('ruby_china_image `ruby_china_image`')).to eq('<p>ruby_china_image <code>ruby_china_image</code></p>')
-          expect(RubyChina::Markdown.call("```\nruby_china_image\n```")).to eq(
+          expect(Homeland::Markdown.call('ruby_china_image `ruby_china_image`')).to eq('<p>ruby_china_image <code>ruby_china_image</code></p>')
+          expect(Homeland::Markdown.call("```\nruby_china_image\n```")).to eq(
             %(<pre class=\"highlight plaintext\"><code>ruby_china_image\n</code></pre>)
           )
         end

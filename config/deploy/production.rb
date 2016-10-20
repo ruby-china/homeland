@@ -1,1 +1,0 @@
-server 'ruby-china.org', user: 'ruby', roles: %w{app db web}

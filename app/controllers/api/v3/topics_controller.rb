@@ -232,7 +232,7 @@ module Api
       # POST /api/v3/topics/:id/action?type=:type
       # @param type [String] 动作类型, ban - 屏蔽话题, excellent - 加精华, unexcellent - 去掉精华, close - 关闭回复, open - 开启回复
       def action
-        authorize! params[:type].to_sym, @topic
+        raise AccessDenied unless can?(params[:type].to_sym, @topic)
 
         case params[:type]
         when 'excellent'

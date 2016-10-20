@@ -1,18 +1,23 @@
 # @abstract
 class BaseSerializer < ActiveModel::Serializer
   # 当前 accessToken 对应的用户对此数据的权限
-  # @readonly
   #
-  # == example
-  # 表示可修改，不可删除
+  # @example 表示可修改，不可删除
   #
   #     { update: true, destroy: false }
   #
-  # == returns
-  # - update [Boolean] 当前 accessToken 是否有修改权限
-  # - destroy [Boolean] 当前 accessToken 是否有删除权限
+  # @return update [Boolean] 当前 accessToken 是否有修改权限
+  # @return destroy [Boolean] 当前 accessToken 是否有删除权限
   def abilities
-    { update: can?(:update, object), destroy: can?(:destroy, object) }
+    res = { update: can?(:update, object), destroy: can?(:destroy, object) }
+
+    # More actions for Topic
+    if object && object.is_a?(Topic)
+      %i(ban excellent unexcellent close open).each do |action|
+        res.merge!({ action => can?(action, object) })
+      end
+    end
+    res
   end
 
   protected

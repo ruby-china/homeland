@@ -123,6 +123,30 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#action-instance_method" title="#action (instance method)">#<strong>action</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>更多功能 注意类型有不同的权限，详见 GET /api/v3/topics/:id 返回的 abilities.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#ban-instance_method" title="#ban (instance method)">#<strong>ban</strong>  &#x21d2; Object </a>
     
 
@@ -138,7 +162,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>屏蔽话题，移到 NoPoint 节点 (Admin only).</p>
+<p>屏蔽话题，移到 NoPoint 节点 (Admin only) [废弃] 请用 POST /api/v3/topics/:id/action.</p>
 </div></span>
   
 </li>
@@ -430,7 +454,99 @@
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="ban-instance_method">
+  <h3 class="signature first" id="action-instance_method">
+  
+    #<strong>action</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>更多功能 注意类型有不同的权限，详见 GET /api/v3/topics/:id 返回的 abilities</p>
+
+<p>POST /api/v3/topics/:id/action?type=:type</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>type</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>动作类型, ban - 屏蔽话题, excellent - 加精华, unexcellent - 去掉精华, close - 关闭回复, open -
+开启回复</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/topics_controller.rb', line 234</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_action'>action</span>
+  <span class='id identifier rubyid_authorize!'>authorize!</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:type</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span><span class='comma'>,</span> <span class='ivar'>@topic</span>
+
+  <span class='kw'>case</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:type</span><span class='rbracket'>]</span>
+  <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>excellent</span><span class='tstring_end'>&#39;</span></span>
+    <span class='ivar'>@topic</span><span class='period'>.</span><span class='id identifier rubyid_excellent!'>excellent!</span>
+  <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>unexcellent</span><span class='tstring_end'>&#39;</span></span>
+    <span class='ivar'>@topic</span><span class='period'>.</span><span class='id identifier rubyid_unexcellent!'>unexcellent!</span>
+  <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>ban</span><span class='tstring_end'>&#39;</span></span>
+    <span class='ivar'>@topic</span><span class='period'>.</span><span class='id identifier rubyid_ban!'>ban!</span>
+  <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>close</span><span class='tstring_end'>&#39;</span></span>
+    <span class='ivar'>@topic</span><span class='period'>.</span><span class='id identifier rubyid_close!'>close!</span>
+  <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>open</span><span class='tstring_end'>&#39;</span></span>
+    <span class='ivar'>@topic</span><span class='period'>.</span><span class='id identifier rubyid_open!'>open!</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_render'>render</span> <span class='label'>json:</span> <span class='lbrace'>{</span> <span class='label'>ok:</span> <span class='int'>1</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="ban-instance_method">
   
     #<strong>ban</strong>  &#x21d2; <tt>Object</tt> 
   
@@ -442,6 +558,10 @@
   <div class="discussion">
     
 <p>屏蔽话题，移到 NoPoint 节点 (Admin only)</p>
+<dl class="rdoc-list label-list"><dt>废弃
+<dd>
+<p>请用 POST /api/v3/topics/:id/action</p>
+</dd></dl>
 
 <p>POST /api/v3/topics/:id/ban</p>
 
@@ -470,14 +590,14 @@
       <pre class="lines">
 
 
-218
-219
-220
-221
-222</pre>
+223
+224
+225
+226
+227</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/topics_controller.rb', line 218</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/topics_controller.rb', line 223</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_ban'>ban</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='const'>AccessDenied</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>当前用户没有屏蔽别人话题的权限，具体请参考官网的说明。</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_can?'>can?</span><span class='lparen'>(</span><span class='symbol'>:ban</span><span class='comma'>,</span> <span class='ivar'>@topic</span><span class='rparen'>)</span>
@@ -595,10 +715,6 @@
       <pre class="lines">
 
 
-79
-80
-81
-82
 83
 84
 85
@@ -607,10 +723,14 @@
 88
 89
 90
-91</pre>
+91
+92
+93
+94
+95</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/topics_controller.rb', line 79</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/topics_controller.rb', line 83</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create'>create</span>
   <span class='id identifier rubyid_requires!'>requires!</span> <span class='symbol'>:title</span>
@@ -709,10 +829,6 @@
       <pre class="lines">
 
 
-170
-171
-172
-173
 174
 175
 176
@@ -720,10 +836,14 @@
 178
 179
 180
-181</pre>
+181
+182
+183
+184
+185</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/topics_controller.rb', line 170</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/topics_controller.rb', line 174</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_replies'>create_replies</span>
   <span class='id identifier rubyid_doorkeeper_authorize!'>doorkeeper_authorize!</span>
@@ -783,14 +903,14 @@
       <pre class="lines">
 
 
-127
-128
-129
-130
-131</pre>
+131
+132
+133
+134
+135</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/topics_controller.rb', line 127</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/topics_controller.rb', line 131</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_destroy'>destroy</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='const'>AccessDenied</span> <span class='kw'>unless</span> <span class='id identifier rubyid_can?'>can?</span><span class='lparen'>(</span><span class='symbol'>:destroy</span><span class='comma'>,</span> <span class='ivar'>@topic</span><span class='rparen'>)</span>
@@ -830,13 +950,13 @@
       <pre class="lines">
 
 
-202
-203
-204
-205</pre>
+206
+207
+208
+209</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/topics_controller.rb', line 202</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/topics_controller.rb', line 206</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_favorite'>favorite</span>
   <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_favorite_topic'>favorite_topic</span><span class='lparen'>(</span><span class='ivar'>@topic</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -875,13 +995,13 @@
       <pre class="lines">
 
 
-186
-187
-188
-189</pre>
+190
+191
+192
+193</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/topics_controller.rb', line 186</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/topics_controller.rb', line 190</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_follow'>follow</span>
   <span class='ivar'>@topic</span><span class='period'>.</span><span class='id identifier rubyid_push_follower'>push_follower</span><span class='lparen'>(</span><span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -1152,10 +1272,6 @@ excellent)</p>
       <pre class="lines">
 
 
-140
-141
-142
-143
 144
 145
 146
@@ -1174,10 +1290,14 @@ excellent)</p>
 159
 160
 161
-162</pre>
+162
+163
+164
+165
+166</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/topics_controller.rb', line 140</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/topics_controller.rb', line 144</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_replies'>replies</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_post?'>post?</span>
@@ -1223,6 +1343,9 @@ excellent)</p>
 
 <p>GET /api/v3/topics/:id</p>
 
+<p>“`json { followed: &#39;是否已关注&#39;, liked: &#39;是否已赞&#39;, favorited:
+&#39;是否已收藏&#39; } “`</p>
+
 
   </div>
 </div>
@@ -1258,6 +1381,11 @@ excellent)</p>
       
       
       
+        &mdash;
+        <div class='inline'>
+<p>此外 meta 里面包含当前用户对此话题的状态</p>
+</div>
+      
     </li>
   
 </ul>
@@ -1268,10 +1396,6 @@ excellent)</p>
       <pre class="lines">
 
 
-56
-57
-58
-59
 60
 61
 62
@@ -1281,10 +1405,14 @@ excellent)</p>
 66
 67
 68
-69</pre>
+69
+70
+71
+72
+73</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/topics_controller.rb', line 56</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/topics_controller.rb', line 60</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_show'>show</span>
   <span class='ivar'>@topic</span><span class='period'>.</span><span class='id identifier rubyid_hits'>hits</span><span class='period'>.</span><span class='id identifier rubyid_incr'>incr</span><span class='lparen'>(</span><span class='int'>1</span><span class='rparen'>)</span>
@@ -1333,13 +1461,13 @@ excellent)</p>
       <pre class="lines">
 
 
-210
-211
-212
-213</pre>
+214
+215
+216
+217</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/topics_controller.rb', line 210</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/topics_controller.rb', line 214</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_unfavorite'>unfavorite</span>
   <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_unfavorite_topic'>unfavorite_topic</span><span class='lparen'>(</span><span class='ivar'>@topic</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -1378,13 +1506,13 @@ excellent)</p>
       <pre class="lines">
 
 
-194
-195
-196
-197</pre>
+198
+199
+200
+201</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/topics_controller.rb', line 194</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/topics_controller.rb', line 198</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_unfollow'>unfollow</span>
   <span class='ivar'>@topic</span><span class='period'>.</span><span class='id identifier rubyid_pull_follower'>pull_follower</span><span class='lparen'>(</span><span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -1501,10 +1629,6 @@ excellent)</p>
       <pre class="lines">
 
 
-101
-102
-103
-104
 105
 106
 107
@@ -1522,10 +1646,14 @@ excellent)</p>
 119
 120
 121
-122</pre>
+122
+123
+124
+125
+126</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/topics_controller.rb', line 101</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/topics_controller.rb', line 105</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update'>update</span>
   <span class='id identifier rubyid_requires!'>requires!</span> <span class='symbol'>:title</span>
@@ -1559,7 +1687,7 @@ excellent)</p>
 </div>
 
       <div id="footer">
-  Generated on Thu Oct 13 13:24:43 2016 by
+  Generated on Thu Oct 20 19:35:16 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.5 (ruby-2.3.1).
 </div>

@@ -287,6 +287,11 @@ describe 'API V3', 'topics', type: :request do
       expect(json['topic']['abilities']).to include(*%w(update destroy))
       expect(json['topic']['abilities']['update']).to eq false
       expect(json['topic']['abilities']['destroy']).to eq false
+      expect(json['topic']['abilities']['ban']).to eq false
+      expect(json['topic']['abilities']['excellent']).to eq false
+      expect(json['topic']['abilities']['unexcellent']).to eq false
+      expect(json['topic']['abilities']['close']).to eq false
+      expect(json['topic']['abilities']['open']).to eq false
     end
 
     it 'should return right abilities when owner visit' do
@@ -296,6 +301,8 @@ describe 'API V3', 'topics', type: :request do
       expect(response.status).to eq(200)
       expect(json['topic']['abilities']['update']).to eq true
       expect(json['topic']['abilities']['destroy']).to eq true
+      expect(json['topic']['abilities']['close']).to eq true
+      expect(json['topic']['abilities']['open']).to eq true
     end
 
     it 'should return right abilities when admin visit' do
@@ -305,6 +312,11 @@ describe 'API V3', 'topics', type: :request do
       expect(response.status).to eq(200)
       expect(json['topic']['abilities']['update']).to eq true
       expect(json['topic']['abilities']['destroy']).to eq true
+      expect(json['topic']['abilities']['close']).to eq true
+      expect(json['topic']['abilities']['open']).to eq true
+      expect(json['topic']['abilities']['ban']).to eq true
+      expect(json['topic']['abilities']['excellent']).to eq true
+      expect(json['topic']['abilities']['unexcellent']).to eq true
     end
 
     it 'should work when id record found' do
@@ -449,6 +461,55 @@ describe 'API V3', 'topics', type: :request do
       t = create(:topic, user: current_user, title: 'new topic 3')
       post "/api/v3/topics/#{t.id}/ban.json"
       expect(response.status).to eq(403)
+    end
+  end
+
+  describe 'POST /api/v3/topics/:id/action.json' do
+    %w(excellent unexcellent ban).each do |action|
+      describe "#{action}" do
+        it 'should work with admin' do
+          login_admin!
+          t = create(:topic, user: current_user, title: 'new topic 3')
+          post "/api/v3/topics/#{t.id}/action.json?type=#{action}"
+          expect(response.status).to eq(200)
+        end
+
+        it 'should not work with normal user' do
+          login_user!
+          t = create(:topic, title: 'new topic 3')
+          post "/api/v3/topics/#{t.id}/action.json?type=#{action}"
+          expect(response.status).to eq(403)
+
+          t = create(:topic, user: current_user, title: 'new topic 3')
+          post "/api/v3/topics/#{t.id}/action.json?type=#{action}"
+          expect(response.status).to eq(403)
+        end
+      end
+    end
+
+    %w(close open).each do |action|
+      describe "#{action}" do
+        it 'should work with admin' do
+          login_admin!
+          t = create(:topic, user: current_user, title: 'new topic 3')
+          post "/api/v3/topics/#{t.id}/action.json?type=#{action}"
+          expect(response.status).to eq(200)
+        end
+
+        it 'should work with owner' do
+          login_user!
+          t = create(:topic, title: 'new topic 3', user: current_user)
+          post "/api/v3/topics/#{t.id}/action.json?type=#{action}"
+          expect(response.status).to eq(200)
+        end
+
+        it 'should not work with other users' do
+          login_user!
+          t = create(:topic, title: 'new topic 3')
+          post "/api/v3/topics/#{t.id}/action.json?type=#{action}"
+          expect(response.status).to eq(403)
+        end
+      end
     end
   end
 end

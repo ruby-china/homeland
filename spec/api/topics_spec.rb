@@ -278,7 +278,7 @@ describe 'API V3', 'topics', type: :request do
       expect(response.status).to eq(200)
       fields = %w(id title created_at updated_at replied_at body body_html
                   replies_count node_name node_id last_reply_user_id
-                  last_reply_user_login deleted user likes_count suggested_at)
+                  last_reply_user_login deleted user likes_count suggested_at closed_at)
       expect(json['topic']).to include(*fields)
       expect(json['meta']).to include(*%w(liked favorited followed))
       expect(json['topic']['title']).to eq('i want to know')

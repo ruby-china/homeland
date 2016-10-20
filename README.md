@@ -95,7 +95,7 @@ rake environment elasticsearch:import:model CLASS=User FORCE=y
 
 ## Deployment
 
-https://github.com/ruby-china/ruby-china-docker
+http://gethomeland.com
 
 ## Contributors
 

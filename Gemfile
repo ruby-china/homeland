@@ -117,11 +117,6 @@ gem 'status-page'
 gem 'bundler-audit', require: false
 
 group :development do
-  gem 'capistrano'
-  gem 'capistrano-rails'
-  gem 'capistrano-rvm'
-  gem 'capistrano-sidekiq', require: false
-  gem 'capistrano3-puma'
   gem 'derailed'
   # Better Errors
   gem 'better_errors'

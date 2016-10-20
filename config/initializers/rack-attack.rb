@@ -1,4 +1,4 @@
-BLOCK_MESSAGE = ['你请求过快，超过了频率限制，暂时屏蔽一段时间。如果有问题，请到 https://github.com/ruby-china/ruby-china/issues/new 提出。'.freeze]
+BLOCK_MESSAGE = ['你请求过快，超过了频率限制，暂时屏蔽一段时间。'.freeze]
 
 class Rack::Attack
   Rack::Attack.cache.store = Rails.cache

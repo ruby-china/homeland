@@ -1,14 +1,12 @@
 <!--
-      ____        __             ________    _
-     / __ \__  __/ /_  __  __   / ____/ /_  (_)___  ____ _
-    / /_/ / / / / __ \/ / / /  / /   / __ \/ / __ \/ __ `/
-   / _, _/ /_/ / /_/ / /_/ /  / /___/ / / / / / / / /_/ /
-  /_/ |_|\__,_/_.___/\__, /   \____/_/ /_/_/_/ /_/\__,_/
-                    /____/
-  ========================================================
-                                            ruby-china.org
-
-  App Environments:
+   _   _                      _                 _
+  | | | |                    | |               | |
+  | |_| | ___  _ __ ___   ___| | __ _ _ __   __| |
+  |  _  |/ _ \| '_ ` _ \ / _ \ |/ _` | '_ \ / _` |
+  | | | | (_) | | | | | |  __/ | (_| | | | | (_| |
+  \_| |_/\___/|_| |_| |_|\___|_|\__,_|_| |_|\__,_|
+  ------------------------------------------------
+                            http://gethomeland.com
 
   - Ruby:  <%= RUBY_VERSION %><%= "-p#{RUBY_PATCHLEVEL}" if defined? RUBY_PATCHLEVEL %>
   - Rails: <%= Rails.version %>
@@ -21,21 +19,17 @@
   <title><%= content_for?(:title) ? yield(:title) : Setting.app_name %></title>
   <meta name="apple-mobile-web-app-capable" content="no">
   <meta content='True' name='HandheldFriendly' />
-  <link rel="apple-touch-icon-precomposed" href="<%= asset_path("ios-icon.png") %>" />
-  <link rel="shortcut icon" href="<%= asset_path("big_logo.png") %>" />
   <link rel="alternate" type="application/rss+xml" title="订阅最新帖" href="<%= main_app.feed_topics_url %>" />
-  <link rel="mask-icon" href="<%= asset_path("mask.svg") %>"/>
   <%= stylesheet_link_tag "front", 'data-turbolinks-track': "reload" %>
   <%= stylesheet_link_tag "turbolinks-app", 'data-turbolinks-track': 'reload' if turbolinks_app? %>
   <%= action_cable_meta_tag %>
-  <%= javascript_include_tag "app", 'data-turbolinks-track': "reload" %>
-  <script src="//ruby-china-files.b0.upaiyun.com/assets/d3.min.js" data-turbolinks-track="reload" type="text/javascript"></script>
-  <script src="//ruby-china-files.b0.upaiyun.com/assets/cal-heatmap.min.js" data-turbolinks-track="reload" type="text/javascript"></script>
   <%= csrf_meta_tag %>
   <%= raw Setting.custom_head_html %>
   <% if current_user %>
     <meta name="current-user" data-user-id="<%= current_user.id %>" data-user-login="<%= current_user.login %>" data-user-name="<%= current_user.name %>" data-user-email="<%= current_user.email %>" data-user-avatar-url="<%= current_user.avatar? ? current_user.avatar.url(:md) : current_user.letter_avatar_url(96) %>">
   <% end %>
+
+  <%= javascript_include_tag "app", 'data-turbolinks-track': "reload" %>
 </head>
 <body class="page-<%= controller_name %><%= ' infinite-scroll' if turbolinks_app? %>" data-controller-name="<%= controller_name %>">
   <div class="header">

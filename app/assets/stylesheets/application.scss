@@ -63,13 +63,13 @@ body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: bold;
     margin-left: 0 !important;
-    b { color: $red; }
+    b { color: $blue; }
   }
   .navbar-default .navbar-brand,
   .navbar-default .navbar-nav>li>a  { color: #333; border-bottom: 3px solid #FFF; padding-bottom: 12px; }
   .navbar-default .navbar-nav>li>a:active { background-color: $grayDark; border-bottom-color: #999; }
   .navbar-inverse .navbar-nav .open .dropdown-menu .divider { color: #999 !important; }
-  .navbar-inverse .navbar-nav .open .dropdown-menu li.active a { border-bottom: 0px; color: $red; }
+  .navbar-inverse .navbar-nav .open .dropdown-menu li.active a { border-bottom: 0px; color: $blue; }
   .navbar-inverse .navbar-toggle { color: #333; padding: 3px 9px; font-size: 18px; border:1px solid rgba(255,255,255,0.1); background-color: rgba(255,255,255,0.05); }
   .navbar-inverse .navbar-toggle:focus { background-color: rgba(255,255,255,0.05);}
   .navbar-inverse .navbar-toggle:hover { background-color: rgba(255,255,255,0.1); }
@@ -86,7 +86,7 @@ body {
   .navbar-nav {
     li.active a,
     li.active a:focus,
-    li.active a:hover { color: $red; background: transparent; }
+    li.active a:hover { color: $blue; background: transparent; }
   }
 
   #main-nav-menu {
@@ -96,7 +96,7 @@ body {
       li a:hover,
       li.active a,
       li.active a:focus,
-      li.active a:hover { border-bottom:3px solid $red; color: $red; background: transparent; padding-bottom: 12px;}
+      li.active a:hover { border-bottom:3px solid $blue; color: $blue; background: transparent; padding-bottom: 12px;}
     }
   }
 
@@ -477,9 +477,9 @@ kbd {
 .nav-stacked.nav-pills>li.active>a,
 .nav-stacked.nav-pills>li.active>a:focus,
 .nav-stacked.nav-pills>li.active>a:hover {
-  color: $red;
+  color: $blue;
   background-color: #FFF;
-  border-color: $redLight;
+  border-color: $blueLight;
 }
 
 /* Modal */
@@ -536,7 +536,7 @@ kbd {
 }
 
 .turbolinks-progress-bar {
-  background-color: $red !important;
+  background-color: $blue !important;
   height: 2px !important;
 }
 

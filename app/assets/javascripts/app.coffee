@@ -25,6 +25,8 @@
 #= require turbolinks
 #= require google_analytics
 #= require jquery.infinitescroll.min
+#= require d3.min
+#= require cal-heatmap.min
 #= require_self
 
 AppView = Backbone.View.extend

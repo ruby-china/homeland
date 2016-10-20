@@ -69,6 +69,8 @@ module Homeland
   end
 end
 
+require 'homeland'
+
 I18n.config.enforce_available_locales = false
 
 ActiveModelSerializers.config.adapter = :json

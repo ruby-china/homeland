@@ -153,7 +153,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>当前 accessToken 对应的用户对此数据的权限 == example 表示可修改，不可删除.</p>
+<p>当前 accessToken 对应的用户对此数据的权限.</p>
 </div></span>
   
 </li>
@@ -183,25 +183,24 @@
     
 <p>当前 accessToken 对应的用户对此数据的权限</p>
 
-<h2 id="label-example">example</h2>
-
-<p>表示可修改，不可删除</p>
-
-<pre class="code ruby"><code class="ruby"><span class='lbrace'>{</span> <span class='label'>update:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='label'>destroy:</span> <span class='kw'>false</span> <span class='rbrace'>}</span>
-</code></pre>
-
-<h2 id="label-returns">returns</h2>
-<ul><li>
-<p>update [Boolean] 当前 accessToken 是否有修改权限</p>
-</li><li>
-<p>destroy [Boolean] 当前 accessToken 是否有删除权限</p>
-</li></ul>
-
 
   </div>
 </div>
 <div class="tags">
   
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>表示可修改，不可删除</p>
+</div></p>
+      
+      <pre class="example code"><code>
+<span class='lbrace'>{</span> <span class='label'>update:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='label'>destroy:</span> <span class='kw'>false</span> <span class='rbrace'>}</span></code></pre>
+    
+  </div>
+
 
 </div><table class="source_code">
   <tr>
@@ -209,15 +208,31 @@
       <pre class="lines">
 
 
+11
+12
+13
 14
 15
-16</pre>
+16
+17
+18
+19
+20
+21</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/serializers/base_serializer.rb', line 14</span>
+      <pre class="code"><span class="info file"># File 'app/serializers/base_serializer.rb', line 11</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_abilities'>abilities</span>
-  <span class='lbrace'>{</span> <span class='label'>update:</span> <span class='id identifier rubyid_can?'>can?</span><span class='lparen'>(</span><span class='symbol'>:update</span><span class='comma'>,</span> <span class='id identifier rubyid_object'>object</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='label'>destroy:</span> <span class='id identifier rubyid_can?'>can?</span><span class='lparen'>(</span><span class='symbol'>:destroy</span><span class='comma'>,</span> <span class='id identifier rubyid_object'>object</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_res'>res</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='label'>update:</span> <span class='id identifier rubyid_can?'>can?</span><span class='lparen'>(</span><span class='symbol'>:update</span><span class='comma'>,</span> <span class='id identifier rubyid_object'>object</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='label'>destroy:</span> <span class='id identifier rubyid_can?'>can?</span><span class='lparen'>(</span><span class='symbol'>:destroy</span><span class='comma'>,</span> <span class='id identifier rubyid_object'>object</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+
+  <span class='comment'># More actions for Topic
+</span>  <span class='kw'>if</span> <span class='id identifier rubyid_object'>object</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Topic</span><span class='rparen'>)</span>
+    <span class='qsymbols_beg'>%i(</span><span class='tstring_content'>ban</span><span class='words_sep'> </span><span class='tstring_content'>excellent</span><span class='words_sep'> </span><span class='tstring_content'>unexcellent</span><span class='words_sep'> </span><span class='tstring_content'>close</span><span class='words_sep'> </span><span class='tstring_content'>open</span><span class='words_sep'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_action'>action</span><span class='op'>|</span>
+      <span class='id identifier rubyid_res'>res</span><span class='period'>.</span><span class='id identifier rubyid_merge!'>merge!</span><span class='lparen'>(</span><span class='lbrace'>{</span> <span class='id identifier rubyid_action'>action</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_can?'>can?</span><span class='lparen'>(</span><span class='id identifier rubyid_action'>action</span><span class='comma'>,</span> <span class='id identifier rubyid_object'>object</span><span class='rparen'>)</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_res'>res</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -229,7 +244,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Oct 13 13:24:44 2016 by
+  Generated on Thu Oct 20 19:35:17 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.5 (ruby-2.3.1).
 </div>

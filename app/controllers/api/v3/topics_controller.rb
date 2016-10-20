@@ -52,7 +52,11 @@ module Api
       # GET /api/v3/topics/:id
       #
       # @param id [Integer] 话题编号
-      # @return [TopicDetailSerializer]
+      # @return [TopicDetailSerializer] 此外 meta 里面包含当前用户对此话题的状态
+      #
+      # ```json
+      # { followed: '是否已关注', liked: '是否已赞', favorited: '是否已收藏' }
+      # ```
       def show
         @topic.hits.incr(1)
         meta = { followed: false, liked: false, favorited: false }
@@ -213,11 +217,35 @@ module Api
       end
 
       # 屏蔽话题，移到 NoPoint 节点 (Admin only)
+      # [废弃] 请用 POST /api/v3/topics/:id/action
       #
       # POST /api/v3/topics/:id/ban
       def ban
         raise AccessDenied.new('当前用户没有屏蔽别人话题的权限，具体请参考官网的说明。') unless can?(:ban, @topic)
         @topic.ban!
+        render json: { ok: 1 }
+      end
+
+      # 更多功能
+      # 注意类型有不同的权限，详见 GET /api/v3/topics/:id 返回的 abilities
+      #
+      # POST /api/v3/topics/:id/action?type=:type
+      # @param type [String] 动作类型, ban - 屏蔽话题, excellent - 加精华, unexcellent - 去掉精华, close - 关闭回复, open - 开启回复
+      def action
+        raise AccessDenied unless can?(params[:type].to_sym, @topic)
+
+        case params[:type]
+        when 'excellent'
+          @topic.excellent!
+        when 'unexcellent'
+          @topic.unexcellent!
+        when 'ban'
+          @topic.ban!
+        when 'close'
+          @topic.close!
+        when 'open'
+          @topic.open!
+        end
         render json: { ok: 1 }
       end
 

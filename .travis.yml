@@ -22,7 +22,7 @@ matrix:
 
 before_script:
   - psql -c "CREATE USER \"admin\" WITH CREATEDB PASSWORD 'admin';" -U postgres
-  - psql -c "create database \"ruby-china-test\" WITH OWNER=\"admin\";" -U postgres
+  - psql -c "create database \"homeland-test\" WITH OWNER=\"admin\";" -U postgres
   - cp config/config.yml.default config/config.yml
   - cp config/database.yml.default config/database.yml
   - cp config/redis.yml.default config/redis.yml

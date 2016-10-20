@@ -6,5 +6,9 @@ class Setting < RailsSettings::Base
     def protocol
       self.https == true ? 'https' : 'http'
     end
+
+    def host
+      [self.protocol, self.domain].join("://")
+    end
   end
 end

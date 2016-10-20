@@ -82,7 +82,7 @@ class User < ApplicationRecord
     conditions = warden_conditions.dup
     login = conditions.delete(:login)
     login.downcase!
-    where(conditions.to_h).where(['lower(login) = :value OR lower(email) = :value', { value: login }]).first
+    where(conditions.to_h).where(['(lower(login) = :value OR lower(email) = :value) and state != -1', { value: login }]).first
   end
 
   def self.current

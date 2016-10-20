@@ -545,6 +545,13 @@ describe User, type: :model do
       expect(User.find_for_database_authentication(login: 'foobar@gmail.com').id).to eq user.id
       expect(User.find_for_database_authentication(login: 'not found')).to eq nil
     end
+
+    context 'deleted user' do
+      it "should nil" do
+        user.update_attributes(state: -1)
+        expect(User.find_for_database_authentication(login: 'foo')).to eq nil
+      end
+    end
   end
 
   describe '.email_locked?' do

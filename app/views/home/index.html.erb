@@ -1,48 +1,5 @@
 <%= raw Setting.index_html %>
 
-<div class="row home-icons hidden-sm hidden-xs">
-  <div class="col-md-3">
-    <div class="item item1">
-      <div class="icon">
-        <a href="<%= topics_path %>"><i class="fa fa-comments-o"></i></a>
-      </div>
-      <div class="text">
-        <a href="<%= topics_path %>">Ruby 社区 <i class="pull-right fa fa-arrow-right"></i></a>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-3">
-    <div class="item item2">
-      <div class="icon">
-        <a href="<%= pages_path %>"><i class="fa fa-support"></i></a>
-      </div>
-      <div class="text">
-        <a href="<%= pages_path %>">技术文档 <i class="pull-right fa fa-arrow-right"></i></a>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-3">
-    <div class="item item3">
-      <div class="icon">
-        <a href="<%= jobs_path %>"><i class="fa fa-users"></i></a>
-      </div>
-      <div class="text">
-        <a href="<%= jobs_path %>" title="Ruby 相关的招聘与求职">招聘与求职 <i class="pull-right fa fa-arrow-right"></i></a>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-3">
-    <div class="item item4">
-      <div class="icon">
-        <a href="<%= popular_topics_path %>"><i class="fa fa-diamond"></i></a>
-      </div>
-      <div class="text">
-        <a href="<%= popular_topics_path %>">精华文章 <i class="pull-right fa fa-arrow-right"></i></a>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="home_suggest_topics panel panel-default">
   <div class="panel-heading">社区精华帖</div>
   <div class="panel-body topics row">

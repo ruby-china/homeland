@@ -148,6 +148,7 @@ Rails.application.routes.draw do
           post :favorite
           post :unfavorite
           post :ban
+          post :action
         end
       end
       resources :replies do

@@ -13,7 +13,7 @@ class User
         GithubRepoFetcherJob.perform_later(id)
         items = []
       end
-      items
+      items.take(10)
     end
 
     def github_repositories_cache_key

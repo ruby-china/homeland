@@ -17,6 +17,7 @@
   <meta charset='utf-8' />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <title><%= content_for?(:title) ? yield(:title) : Setting.app_name %></title>
+  <link rel="icon" href="<%= asset_path('favicon.png') %>" />
   <meta name="apple-mobile-web-app-capable" content="no">
   <meta content='True' name='HandheldFriendly' />
   <link rel="alternate" type="application/rss+xml" title="订阅最新帖" href="<%= main_app.feed_topics_url %>" />

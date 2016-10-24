@@ -1,4 +1,4 @@
-if Setting.rack_attack
+if Setting.rack_attack.present?
   puts "Rack::Attack enabled."
   BLOCK_MESSAGE = ['你请求过快，超过了频率限制，暂时屏蔽一段时间。'.freeze]
 
@@ -6,7 +6,7 @@ if Setting.rack_attack
     Rack::Attack.cache.store = Rails.cache
 
     ### Throttle Spammy Clients ###
-    throttle('req/ip', limit: 500, period: 3.minutes) do |req|
+    throttle('req/ip', limit: Setting.rack_attack['limit'] || 300, period: Setting.rack_attack['period'] || 3.minutes) do |req|
       req.ip
     end
 

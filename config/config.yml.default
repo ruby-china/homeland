@@ -54,7 +54,11 @@ defaults: &defaults
   admin_emails:
     - "admin@admin.com"
   google_analytics_key: ""
-  rack_attack: false
+  rack_attack:
+    # limit requests in a period
+    limit: 300
+    # (second)
+    period: 180
   asset_host: ""
   upload_provider: "upyun" # can be  upyun/aliyun
   upload_access_id: "your-access-id" # or username

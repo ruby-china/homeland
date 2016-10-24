@@ -3,7 +3,6 @@ module Admin
     before_action :set_setting, only: [:edit, :update]
 
     def index
-      @site_configs = Setting.get_all
     end
 
     def edit

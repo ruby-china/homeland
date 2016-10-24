@@ -6,14 +6,14 @@
 
 <table class="table table-bordered table-striped table-condensed">
   <tr>
-    <th>Var</th>
+    <th>Key</th>
     <th>说明</th>
     <th></th>
   </tr>
 
-<% @site_configs.each_key do |key| %>
+<% Setting::KEYS_IN_ADMIN.each do |key| %>
   <tr>
-    <td><%= key %></td>
+    <td><a href="<%= edit_admin_site_config_path(key) %>"><%= key %></a></td>
     <td><%= t("setting.#{key}") %></td>
     <td class="opts"><%= link_to icon_tag("pencil"), edit_admin_site_config_path(key) %></td>
   </tr>

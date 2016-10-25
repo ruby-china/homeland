@@ -62,10 +62,12 @@ body {
   }
 
   .navbar-brand {
+    line-height: 100%;
     color: #666 !important;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: bold;
     margin-left: 0 !important;
+    border-bottom: 0px;
     b { color: $blue; }
   }
   .navbar-default .navbar-brand,

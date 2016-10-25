@@ -6,7 +6,7 @@
     <div class="title media-heading">
       <%= link_to(truncate(topic.title, length: 100), topic_path(topic), title: topic.title) %>
       <% if suggest %>
-        <i class="fa fa-thumb-tack" title="置顶"></i>
+        <i class="fa fa-angle-double-up" title="置顶"></i>
       <% end %>
       <%= topic_excellent_tag(topic) %>
       <%= topic_close_tag(topic) %>

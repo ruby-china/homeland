@@ -28,9 +28,9 @@
       <div class="group opts">
         <% if admin? %>
           <% if !@topic.suggested_at.blank? %>
-          <%= link_to raw("<i class='fa fa-thumb-tack'></i> 取消"), unsuggest_admin_topic_path(@topic), method: :post, remote: true %>
+          <%= link_to raw("<i class='fa fa-angle-double-up'></i> 取消"), unsuggest_admin_topic_path(@topic), method: :post, remote: true %>
           <% else %>
-          <%= link_to raw("<i class='fa fa-thumb-tack'></i> 置顶"), suggest_admin_topic_path(@topic), method: :post, remote: true %>
+          <%= link_to raw("<i class='fa fa-angle-double-up'></i> 置顶"), suggest_admin_topic_path(@topic), method: :post, remote: true %>
           <% end %>
           <% if !@topic.excellent? %>
           <%= link_to raw("<i class='fa fa-diamond'></i> 加精"), action_topic_path(@topic, type: 'excellent'), method: "post", remote: true %>

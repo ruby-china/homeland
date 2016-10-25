@@ -9,6 +9,7 @@ window.TopicView = Backbone.View.extend
   clearHightTimer: null
 
   events:
+    "click .navbar .topic-title": "scrollPage"
     "click #replies .reply .btn-reply": "reply"
     "click .btn-focus-reply": "reply"
     "click #topic-upload-image": "browseUpload"
@@ -26,6 +27,7 @@ window.TopicView = Backbone.View.extend
     @parentView = opts.parentView
 
     @initComponents()
+    @initScrollEvent()
     @initCableUpdate()
     @initDropzone()
     @initContentImageZoom()
@@ -464,3 +466,14 @@ window.TopicView = Backbone.View.extend
     $(e.currentTarget).addClass('topic-visited')
     Turbolinks.visit(target.attr('href'))
     return false
+
+  initScrollEvent: ->
+    $(window).off('scroll.fixed-title')
+    $(window).on('scroll.fixed-title', @activeTopicTitleOnNavbarOnScroll)
+
+  activeTopicTitleOnNavbarOnScroll: (e) ->
+    top = $(window).scrollTop()
+    if top >= 50
+      $(".navbar").addClass('fixed-title')
+    else
+      $(".navbar").removeClass('fixed-title')

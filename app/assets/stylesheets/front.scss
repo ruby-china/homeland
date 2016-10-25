@@ -31,6 +31,42 @@
   }
 }
 
+.navbar {
+  &.fixed-title {
+    .navbar-topic-title { display: none; }
+  }
+  .navbar-topic-title {
+    display: none;
+  }
+}
+
+@media (min-width: 767px) {
+  .navbar {
+    &.fixed-title {
+      .navbar-topic-title { display: block; }
+      #main-nav-menu { display: none; }
+      .nav-search { display: none; }
+    }
+    .navbar-topic-title {
+      display: none;
+      height: 50px;
+
+      a {
+        display: inline;
+        text-decoration: none;
+        overflow: hidden;
+        line-height: 0;
+        color: #000;
+        &:hover,
+        &:active,
+        &:visited { color: #000; }
+      }
+      .node { line-height: 50px; margin-left: 18px; color: $blue; }
+      h1 { margin: 0; padding: 0; font-size: 18px; line-height: 50px; }
+    }
+  }
+}
+
 .node-header {
   .container {
     padding: 0 30px;

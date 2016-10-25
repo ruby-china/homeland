@@ -472,6 +472,7 @@ window.TopicView = Backbone.View.extend
     $(window).on('scroll.fixed-title', @activeTopicTitleOnNavbarOnScroll)
 
   activeTopicTitleOnNavbarOnScroll: (e) ->
+    return if $(".navbar-topic-title").size() == 0
     top = $(window).scrollTop()
     if top >= 50
       $(".navbar").addClass('fixed-title')

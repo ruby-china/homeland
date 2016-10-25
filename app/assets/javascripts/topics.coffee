@@ -470,6 +470,7 @@ window.TopicView = Backbone.View.extend
   initScrollEvent: ->
     $(window).off('scroll.fixed-title')
     $(window).on('scroll.fixed-title', @activeTopicTitleOnNavbarOnScroll)
+    @activeTopicTitleOnNavbarOnScroll()
 
   activeTopicTitleOnNavbarOnScroll: (e) ->
     return if $(".navbar-topic-title").size() == 0

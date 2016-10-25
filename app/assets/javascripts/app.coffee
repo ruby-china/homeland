@@ -47,6 +47,7 @@ AppView = Backbone.View.extend
     FormStorage.restore()
     @initForDesktopView()
     @initComponents()
+    @initScrollEvent()
     @initInfiniteScroll()
     @initCable()
     @restoreHeaderSearchBox()
@@ -269,6 +270,25 @@ AppView = Backbone.View.extend
         finishedMsg: '<div style="text-align: center; padding: 5px;">已到末尾</div>'
         msgText: '<div style="text-align: center; padding: 5px;">载入中...</div>'
         img: 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='
+
+  initScrollEvent: ->
+    $(window).off('scroll.navbar-fixed')
+    $(window).on('scroll.navbar-fixed', @toggleNavbarFixed)
+    @toggleNavbarFixed()
+
+  toggleNavbarFixed: (e) ->
+    top = $(window).scrollTop()
+    if top >= 50
+      $(".header .navbar").addClass('navbar-fixed-active')
+    else
+      $(".header .navbar").removeClass('navbar-fixed-active')
+
+    return if $(".navbar-topic-title").size() == 0
+    if top >= 50
+      $(".header .navbar").addClass('fixed-title')
+    else
+      $(".header .navbar").removeClass('fixed-title')
+
 
 window.App =
   turbolinks: false

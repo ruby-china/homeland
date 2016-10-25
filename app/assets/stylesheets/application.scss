@@ -51,7 +51,10 @@ body {
 .header {
   .navbar {
     background-color: #FFF;
-    box-shadow: 0 1px 1px rgba(0, 0, 0,.11);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    &.navbar-fixed-active {
+      box-shadow: 0 1px 1px rgba(0, 0, 0,.21);
+    }
     margin-bottom: 15px;
     border: 0px;
     color: $blueText;
@@ -196,7 +199,7 @@ body {
 .sub-navbar {
   padding: 8px 0;
   background: #f9f9f9;
-  box-shadow: 0 1px 1px rgba(0, 0, 0,.11);
+  box-shadow: 0 1px 0px rgba(0, 0, 0, 0.02);
   margin-top: -14px;
   margin-bottom: 15px;
 

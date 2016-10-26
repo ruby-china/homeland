@@ -75,7 +75,13 @@ body {
   }
 }
 
+.container > .alert {
+  margin-right: 0;
+}
 .alert {
+  border-radius: 0;
+  border: 0;
+  box-shadow: 0;
   padding: 10px;
   font-size: 14px;
   border-top: 0;

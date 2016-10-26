@@ -263,13 +263,33 @@ a:hover { color: #303030; }
 .label-danger { background: $redLabel; color: $redLabelText; }
 .label-success { background: $greenLabel; color: $greenLabelText; }
 
-.alert-success { background: $greenLabel; color: $greenLabelText; }
-.alert-info { background: $blueLabel; color: $blueLabelText; }
-.alert-warning {
-  background: $yellowLabel; color: $yellowLabelText;
-  hr { border-color: #DAC264 !important; }
+.alert {
+  padding: 8px 15px;
+  margin-bottom: 15px;
+  color: #333 !important;
+  border:0 ;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+
+  .close {
+    font-size: 13px;
+    margin-top: 4px;
+    margin-right: 2px;
+    font-weight: normal;
+  }
 }
-.alert-danger { background: $redLabel; color: $redLabelText; }
+.alert-info { background-color: #b8ccee; }
+.alert-success { background-color: #d1ffc5; }
+.alert-warning {
+  background-color: #fffbce;
+  .markdown {
+    hr { border-color: #c1b5b4;}
+  }
+}
+.alert-danger { background-color: #ffe6df; }
+
+.container > .alert {
+  margin-right: -15px;
+}
 
 .text-success { color: $green; }
 .text-primary { color: $blue; }
@@ -370,22 +390,6 @@ form {
   padding: 15px;
 }
 
-.alert {
-  padding:5px 10px 3px;
-  margin-bottom: 15px;
-  border:0px; border-bottom:1px solid rgba(0, 0, 0, 0.07);
-  border-radius: 0px; font-size: 13px;
-  transform: scale(1,1);
-  transition: all .3s;
-
-  strong { color: $redDark; }
-
-  &>ul {
-    padding: 5px 18px;
-    list-style-type: square;
-  }
-  a.close { font-size: 14px; text-shadow: 0 0 0;}
-}
 
 .nav-tabs {
   li:first-child { margin-left: 15px; }

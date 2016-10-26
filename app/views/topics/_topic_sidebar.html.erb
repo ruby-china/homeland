@@ -27,20 +27,23 @@
       <hr />
       <div class="group opts">
         <% if admin? %>
-          <% if !@topic.suggested_at.blank? %>
-          <%= link_to raw("<i class='fa fa-angle-double-up'></i> 取消"), unsuggest_admin_topic_path(@topic), method: :post, remote: true %>
-          <% else %>
-          <%= link_to raw("<i class='fa fa-angle-double-up'></i> 置顶"), suggest_admin_topic_path(@topic), method: :post, remote: true %>
-          <% end %>
-          <% if !@topic.excellent? %>
-          <%= link_to raw("<i class='fa fa-diamond'></i> 加精"), action_topic_path(@topic, type: 'excellent'), method: "post", remote: true %>
-          <% end %>
-          <% if @topic.node_id != Node.no_point.id %>
-            <%= link_to raw("<i class='fa fa-ban'></i> 屏蔽"), action_topic_path(@topic, type: 'ban'), method: 'post', title: "屏蔽此贴，移动到 NoPoint 节点", remote: true %>
-          <% end %>
+          <div style="margin-bottom: 8px">
+            <% if !@topic.suggested_at.blank? %>
+            <%= link_to raw("<i class='fa fa-angle-double-up'></i> 取消"), unsuggest_admin_topic_path(@topic), method: :post, remote: true %>
+            <% else %>
+            <%= link_to raw("<i class='fa fa-angle-double-up'></i> 置顶"), suggest_admin_topic_path(@topic), method: :post, remote: true %>
+            <% end %>
+            <% if !@topic.excellent? %>
+            <%= link_to raw("<i class='fa fa-diamond'></i> 加精"), action_topic_path(@topic, type: 'excellent'), method: "post", remote: true %>
+            <% end %>
+            <% if @topic.node_id != Node.no_point.id %>
+              <%= link_to raw("<i class='fa fa-ban'></i> 屏蔽"), action_topic_path(@topic, type: 'ban'), method: 'post', title: "屏蔽此贴，移动到 NoPoint 节点", remote: true %>
+            <% end %>
+          </div>
         <% end %>
 
         <% if owner?(@topic) or admin? %>
+        <div>
           <% if can?(:close, @topic) %>
             <% if !@topic.closed? %>
               <%= link_to raw("<i class='fa fa-check'></i> 结束"), action_topic_path(@topic, type: 'close'), method: 'post', title: "关闭讨论／问题已解决", remote: true, data: { toggle: 'tooltip' } %>
@@ -48,10 +51,11 @@
               <%= link_to raw("<i class='fa fa-undo'></i> 开启"), action_topic_path(@topic, type: 'open'), method: 'post', title: "重新开启话题", remote: true, data: { toggle: 'tooltip' } %>
             <% end %>
           <% end %>
-          <%= link_to "", edit_topic_path(@topic), class: "fa fa-pencil", title: "修改本帖" %>
+          <%= link_to raw('<i class="fa fa-pencil"></i> 编辑'), edit_topic_path(@topic), title: "修改本帖" %>
           <% if can?(:destroy, @topic) %>
-            <%= link_to "", topic_path(@topic.id), method: :delete, 'data-confirm' => t("common.confirm_delete"), class: "fa fa-trash", title: "删除本帖", remote: true %>
+            <%= link_to raw('<i class="fa fa-trash"></i> 删除'), topic_path(@topic.id), method: :delete, 'data-confirm' => t("common.confirm_delete"), title: "删除本帖", remote: true %>
           <% end %>
+        </div>
         <% end %>
       </div>
       <a href="#" class="btn btn-block btn-move-page" data-type="bottom"><i class="fa fa-arrow-down"></i></a>

@@ -99,5 +99,10 @@
   <div class="sidebar hidden-mobile col-md-3">
     <%= render 'topic_sidebar' %>
   </div>
+<% else %>
+  <div class="move-page-buttons">
+    <a href="#" class="btn btn-block btn-sm btn-move-page" data-type="top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#" class="btn btn-block btn-sm btn-move-page" data-type="bottom"><i class="fa fa-arrow-down"></i></a>
+  </div>
 <% end %>
 </div>

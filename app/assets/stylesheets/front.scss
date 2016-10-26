@@ -68,6 +68,14 @@
   }
 }
 
+.move-page-buttons {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  width: 45px;
+  .btn { background: #fff; }
+}
+
 .node-header {
   .container {
     padding: 0 30px;

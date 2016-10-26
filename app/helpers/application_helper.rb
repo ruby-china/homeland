@@ -64,6 +64,7 @@ module ApplicationHelper
                        'webos|amoi|novarra|cdm|alcatel|pocket|iphone|mobileexplorer|mobile'
   def mobile?
     agent_str = request.user_agent.to_s.downcase
+    return true if turbolinks_app?
     return false if agent_str =~ /ipad/
     agent_str =~ Regexp.new(MOBILE_USER_AGENTS)
   end

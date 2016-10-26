@@ -2,7 +2,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :unread_notify_count
-  helper_method :turbolinks_app?
+  helper_method :turbolinks_app?, :turbolinks_ios?, :turbolinks_app_version
 
   # Addition contents for etag
   etag { current_user.try(:id) }
@@ -113,8 +113,21 @@ class ApplicationController < ActionController::Base
   end
 
   def turbolinks_app?
-    agent_str = request.user_agent.to_s
-    agent_str.include?('turbolinks-app')
+    @turbolinks_app ||= request.user_agent.to_s.include?('turbolinks-app')
+  end
+
+  def turbolinks_ios?
+    @turbolinks_ios ||= turbolinks_app? && request.user_agent.to_s.include?('iOS')
+  end
+
+  # read turbolinks app version
+  # example: version:2.1
+  def turbolinks_app_version
+    return '' if !turbolinks_app?
+    return @turbolinks_app_version if defined? @turbolinks_app_version
+    version_str = request.user_agent.to_s.match(/version:[\d\.]+/).to_s
+    @turbolinks_app_version = version_str.split(':').last
+    return @turbolinks_app_version
   end
 
   private

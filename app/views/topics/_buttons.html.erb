@@ -1,7 +1,10 @@
 <div class="opts">
-  <%= likeable_tag(@topic) %>
-  <%= topic_follow_tag(@topic) %>
-  <%= topic_favorite_tag(@topic) %>
+  <% if !turbolinks_ios? %>
+    <%= likeable_tag(@topic) %>
+    <%= topic_follow_tag(@topic) %>
+    <%= topic_favorite_tag(@topic) %>
+  <% end %>
+
   <% if admin? %>
     <% if !@topic.suggested_at.blank? %>
     <%= link_to raw("<i class='fa fa-angle-double-up'></i> 取消"), unsuggest_admin_topic_path(@topic), method: :post, remote: true %>

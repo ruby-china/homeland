@@ -1,5 +1,6 @@
 class SitesController < ApplicationController
   load_and_authorize_resource
+  require_module_enabled! :site
 
   def index
     @site_nodes = SiteNode.all.order(sort: :desc)

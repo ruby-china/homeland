@@ -1,4 +1,6 @@
 class NotesController < ApplicationController
+  require_module_enabled! :note
+
   before_action :authenticate_user!
   before_action :set_recent_notes, only: [:index, :show, :edit, :new, :create, :update]
   load_and_authorize_resource

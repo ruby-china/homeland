@@ -80,14 +80,16 @@
     </div>
   </div>
 
-  <% if !@user.teams.blank? %>
-  <div class="panel user-teams">
-    <div class="panel-body">
-      <% @user.teams.each do |team| %>
-        <%= user_avatar_tag(team, :md) %>
-      <% end %>
+  <% if Setting.has_module?(:team) %>
+    <% if !@user.teams.blank? %>
+    <div class="panel user-teams">
+      <div class="panel-body">
+        <% @user.teams.each do |team| %>
+          <%= user_avatar_tag(team, :md) %>
+        <% end %>
+      </div>
     </div>
-  </div>
+    <% end %>
   <% end %>
 
   <%= render '/users/repos', user: @user %>

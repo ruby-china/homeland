@@ -130,6 +130,15 @@ class ApplicationController < ActionController::Base
     return @turbolinks_app_version
   end
 
+  # Require Setting enabled module, else will render 404 page.
+  def self.require_module_enabled!(name)
+    before_action do
+      if !Setting.has_module?(name)
+        render_404
+      end
+    end
+  end
+
   private
 
   def user_locale

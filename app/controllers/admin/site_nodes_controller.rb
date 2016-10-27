@@ -1,5 +1,6 @@
 module Admin
   class SiteNodesController < Admin::ApplicationController
+    require_module_enabled! :site
     before_action :set_site_node, only: [:show, :edit, :update, :destroy]
 
     def index

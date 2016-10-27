@@ -34,5 +34,10 @@ class Setting < RailsSettings::Base
     def host
       [self.protocol, self.domain].join("://")
     end
+
+    def has_module?(name)
+      return true if self.modules.blank? || self.modules == 'all'
+      self.modules.include?(name.to_s)
+    end
   end
 end

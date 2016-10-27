@@ -1,5 +1,6 @@
 module Admin
   class SitesController < Admin::ApplicationController
+    require_module_enabled! :site
     before_action :set_site, only: [:show, :edit, :update, :destroy, :undestroy]
 
     def index

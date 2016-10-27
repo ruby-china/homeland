@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
+  require_module_enabled! :wiki
   authorize_resource :page
-
   before_action :set_page, only: [:show, :edit, :update, :destroy, :comments]
 
   etag { Setting.wiki_sidebar_html }

@@ -1,4 +1,6 @@
 class TeamUsersController < ApplicationController
+  require_module_enabled! :team
+
   before_action :set_team
   before_action :set_team_user, only: [:edit, :update, :destroy]
   before_action :authorize_team_owner!, except: [:index, :accept, :reject, :show]

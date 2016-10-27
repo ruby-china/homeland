@@ -1,4 +1,5 @@
 class TeamsController < ApplicationController
+  require_module_enabled! :team
   load_resource find_by: :login
   load_and_authorize_resource
 

@@ -25,7 +25,11 @@ Rails.application.routes.draw do
   resources :devices
   resources :teams
 
-  root to: 'home#index'
+  if Setting.has_module?(:home)
+    root to: 'home#index'
+  else
+    root to: 'topics#index'
+  end
 
   devise_for :users, path: 'account', controllers: {
     registrations: :account,

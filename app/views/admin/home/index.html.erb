@@ -17,7 +17,9 @@
     <tr><td style="width:120px;"><%= t("admin.menu.users") %></td><td><%= User.unscoped.count %> 人</td></tr>
     <tr><td><%= t("admin.menu.topics") %></td><td><%= Topic.unscoped.count %> 个</td></tr>
     <tr><td><%= t("admin.menu.replies") %></td><td><%= Reply.unscoped.count %> 条</td></tr>
-    <tr><td><%= t("admin.menu.notes") %></td><td><%= Note.unscoped.count %> 条</td></tr>
+    <% if Setting.has_module? :note %>
+      <tr><td><%= t("admin.menu.notes") %></td><td><%= Note.unscoped.count %> 条</td></tr>
+    <% end %>
     <tr><td>通知</td><td><%= Notification.unscoped.count %> 条</td></tr>
     <tr><td>图片</td><td><%= Photo.unscoped.count %> 张</td></tr>
     <tr><td>Device</td><td><%= Device.unscoped.count %> 台</td></tr>

@@ -96,16 +96,12 @@ module ApplicationHelper
   end
 
   def birthday_tag
-    return '' if Setting.domain != 'ruby-china.org'
+    return '' if Setting.app_name != 'Ruby China'
     t = Time.now
     return '' unless t.month == 10 && t.day == 28
     age = t.year - 2011
-    title = "🎉🎂🍰 Ruby China 创立 #{age} 周年纪念日 🍰🎂🎉"
-    html = []
-    html << "<div style='text-align:center;margin-bottom:20px; line-height:200%;'>"
-    html << title
-    html << '</div>'
-    raw html.join(' ')
+    title = markdown(":tada: :birthday: :cake:  Ruby China 创立 #{age} 周年纪念日 :cake: :birthday: :tada:")
+    raw %(<div class="markdown" style="text-align:center; margin-bottom:15px; line-height:100%;">#{title}</div>)
   end
 
   def random_tips

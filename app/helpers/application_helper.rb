@@ -96,16 +96,13 @@ module ApplicationHelper
   end
 
   def birthday_tag
+    return '' if Setting.domain != 'ruby-china.org'
     t = Time.now
     return '' unless t.month == 10 && t.day == 28
     age = t.year - 2011
-    title = "🎂🎂🎂 Ruby China 创立 #{age} 周年纪念日 🎂🎂🎂"
+    title = "🎉🎂🍰 Ruby China 创立 #{age} 周年纪念日 🍰🎂🎉"
     html = []
     html << "<div style='text-align:center;margin-bottom:20px; line-height:200%;'>"
-    %w(dancers beers cake birthday crown gift crown birthday cake beers dancers).each do |name|
-      #html << image_tag(asset_path("assets/emojis/#{name}.png"), class: 'emoji', title: title)
-    end
-    html << '<br />'
     html << title
     html << '</div>'
     raw html.join(' ')

@@ -30,6 +30,10 @@ class Setting < RailsSettings::Base
       self.https == true ? 'https' : 'http'
     end
 
+    def admin_emails
+      super.split("\n")
+    end
+
     def host
       [self.protocol, self.domain].join("://")
     end

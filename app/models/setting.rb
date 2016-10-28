@@ -15,7 +15,6 @@ class Setting < RailsSettings::Base
     topic_index_sidebar_html
     after_topic_html
     before_topic_html
-    new_topic_dropdown_node_ids
     node_ids_hide_in_topics_index
     reject_newbie_reply_in_the_evening
     ban_words_on_reply

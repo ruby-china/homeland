@@ -108,7 +108,7 @@
     recent_node_topics_description: "%{name} 社區 %{node_name} 節點最新發帖."
     recent_node_topics_title: "%{name} 社區 %{node_name} 節點"
   setting:
-    new_topic_dropdown_node_ids: "Sidebar 新建話題按鈕，下拉顯示的節點 (node_id)，逗號隔開如 (1,3,4)"
+    reject_newbie_reply_in_the_evening: "禁止新手在晚上回帖"
     node_ids_hide_in_topics_index: "要在論壇首頁列表隱藏的節點,以逗號隔開"
     custom_head_html: "自定 HTML head 區域的內容"
     navbar_brand_html: "導航欄 Logo"

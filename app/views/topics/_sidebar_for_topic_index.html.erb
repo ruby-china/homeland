@@ -1,25 +1,3 @@
-<% if can? :create, Topic %>
-  <% cache(["sidebar_new_topic_box",Setting.new_topic_dropdown_node_ids]) do %>
-    <div class="panel panel-default clearfix">
-      <div class="panel-body">
-        <div class="btn-group btn-block pull-left">
-          <%= link_to(t("topics.new_topic"), new_topic_path, class: "btn btn-primary" )%>
-          <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu">
-            <% Node.new_topic_dropdowns.each do |node| %>
-              <li>
-                <%= link_to(node.name, new_topic_path(node: node.id)) %>
-              </li>
-            <% end %>
-          </ul>
-        </div>
-      </div>
-    </div>
-  <% end %>
-<% end %>
-
 <% if current_user && current_user.newbie? %>
 <div class="panel panel-default">
   <div class="panel-heading">新手必读</div>

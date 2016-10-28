@@ -502,8 +502,11 @@
 /* Markdown Styles */
 .markdown {
   position:relative;
-  line-height: 1.8em; font-size:14px; text-overflow: ellipsis; word-wrap: break-word;
-  font-family: "PingFang SC","Hiragino Sans GB",Helvetica,Arial,"Source Han Sans CN",Roboto,"Heiti SC","Microsoft Yahei",sans-serif !important;
+  letter-spacing: .03em;
+  line-height: 1.8em;
+  font-size:14px;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
   img { max-width: 100%; }
   p,
   pre,

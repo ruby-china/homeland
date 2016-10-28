@@ -39,63 +39,9 @@
         <div class="navbar-header" id="navbar-header" data-turbolinks-permanent>
           <%= raw Setting.navbar_brand_html %>
         </div>
-
         <%= yield :header %>
-
-        <div id="main-nav-menu">
-          <ul class="nav navbar-nav">
-            <li class="nav-topics">
-              <%= link_to(t("menu.topics"), Setting.has_module?(:home) ? main_app.topics_path : main_app.root_path) %>
-            </li>
-            <% if !mobile? %>
-              <% if Setting.has_module?(:wiki) %>
-                <li class="nav-pages"><%= link_to(t("menu.wiki"), main_app.pages_path) %></li>
-              <% end %>
-              <% if Setting.has_module?(:site) %>
-                <li class="nav-sites"><%= link_to(t("menu.sites"), main_app.sites_path) %></li>
-              <% end %>
-            <% end %>
-            <%= raw Setting.navbar_html %>
-            <script type="text/javascript">
-            $('.navbar-nav .nav-<%= controller_name %>').addClass("active");
-            </script>
-          </ul>
-        </div>
-
-        <%= render "common/user_nav" %>
-
-        <ul class="nav navbar-nav user-bar navbar-right">
-          <li class="nav-search hidden-xs hidden-sm">
-            <form class="navbar-form form-search active" action="/search" method="GET">
-              <div class="form-group">
-                <input class="form-control" name="q" type="text" value="<%= params[:q] %>" placeholder="搜索本站内容" />
-              </div>
-              <i class="fa btn-search fa-search"></i>
-            </form>
-          </li>
-          <% if current_user %>
-          <%
-          badge_class = ""
-          badge_class = "new" if unread_notify_count > 0
-          %>
-          <li class="notification-count">
-            <a href="<%= main_app.notifications_path %>" class="<%= badge_class %>" title="通知"><i class="fa fa-bell"></i><span class="count"><%= unread_notify_count %></span></a>
-          </li>
-          <li>
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-              <i class="fa fa-plus"></i> <span class="caret"></span>
-            </a>
-            <%= render_list class: "dropdown-menu", role: "menu" do |li|
-              li << link_to(t("topics.new_topic"), main_app.new_topic_path)
-              li << link_to(t("notes.new_note"), main_app.new_note_path) if Setting.has_module?(:note)
-              if can? :create, Team
-                li << "<div class='divider'></div>"
-                li << link_to(t("teams.new_team"), main_app.new_team_path)
-              end
-            end %>
-          </li>
-          <% end %>
-        </ul>
+        <%= render "shared/navbar" %>
+        <%= render "shared/usernav" %>
       </div>
     </nav>
   </div>

@@ -25,7 +25,6 @@ site_configs: &site_configs
   custom_head_html: >
     <link rel="dns-prefetch" href="//assets.your-host.com">
   node_ids_hide_in_topics_index: ""
-  new_topic_dropdown_node_ids: ""
   ban_words_on_reply: >
     mark
     收藏
@@ -53,8 +52,8 @@ defaults: &defaults
   app_name: "Homeland"
   domain: "localhost:3000"
   https: false
-  admin_emails:
-    - "admin@admin.com"
+  admin_emails: >
+    admin@admin.com
   google_analytics_key: ""
   rack_attack:
     # limit requests in a period

@@ -1,0 +1,138 @@
+zh-CN:
+  activerecord:
+    attributes:
+      doorkeeper/application:
+        name: ''
+        redirect_uri: ''
+    errors:
+      models:
+        doorkeeper/application:
+          attributes:
+            redirect_uri:
+              fragment_present: ''
+              invalid_uri: ''
+              relative_uri: ''
+              secured_uri: ''
+  mongoid:
+    attributes:
+      doorkeeper/application:
+        name: ''
+        redirect_uri: ''
+    errors:
+      models:
+        doorkeeper/application:
+          attributes:
+            redirect_uri:
+              fragment_present: ''
+              invalid_uri: ''
+              relative_uri: ''
+              secured_uri: ''
+  mongo_mapper:
+    attributes:
+      doorkeeper/application:
+        name: ''
+        redirect_uri: ''
+    errors:
+      models:
+        doorkeeper/application:
+          attributes:
+            redirect_uri:
+              fragment_present: ''
+              invalid_uri: ''
+              relative_uri: ''
+              secured_uri: ''
+  doorkeeper:
+    applications:
+      confirmations:
+        destroy: ''
+      buttons:
+        edit: ''
+        destroy: ''
+        submit: ''
+        cancel: ''
+        authorize: ''
+      form:
+        error: ''
+      help:
+        redirect_uri: ''
+        native_redirect_uri: ''
+      edit:
+        title: ''
+      index:
+        title: ''
+        new: ''
+        name: ''
+        callback_url: ''
+      new:
+        title: ''
+      show:
+        title: ''
+        application_id: ''
+        secret: ''
+        callback_urls: ''
+        actions: ''
+    authorizations:
+      buttons:
+        authorize: ''
+        deny: ''
+      error:
+        title: ''
+      new:
+        title: ''
+        prompt: ''
+        able_to: ''
+      show:
+        title: ''
+    authorized_applications:
+      confirmations:
+        revoke: ''
+      buttons:
+        revoke: ''
+      index:
+        title: ''
+        application: ''
+        created_at: ''
+        date_format: ''
+    errors:
+      messages:
+        # Common error messages
+        invalid_request: ''
+        invalid_redirect_uri: ''
+        unauthorized_client: ''
+        access_denied: ''
+        invalid_scope: ''
+        server_error: ''
+        temporarily_unavailable: ''
+        # configuration error messages
+        credential_flow_not_configured: ''
+        resource_owner_authenticator_not_configured: ''
+        # Access grant errors
+        unsupported_response_type: ''
+        # Access token errors
+        invalid_client: ''
+        invalid_grant: ''
+        unsupported_grant_type: ''
+        # Password Access token errors
+        invalid_resource_owner: ''
+        invalid_token:
+          revoked: ""
+          expired: ""
+          unknown: ""
+    flash:
+      applications:
+        create:
+          notice: ''
+        destroy:
+          notice: ''
+        update:
+          notice: ''
+      authorized_applications:
+        destroy:
+          notice: ''
+    layouts:
+      admin:
+        nav:
+          oauth2_provider: ''
+          applications: ''
+      application:
+        title: ''

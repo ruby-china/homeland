@@ -31,12 +31,6 @@ class Node < ApplicationRecord
     @no_point ||= self.find_builtin_node(61, 'NoPoint')
   end
 
-  def self.new_topic_dropdowns
-    return [] if Setting.new_topic_dropdown_node_ids.blank?
-    node_ids = Setting.new_topic_dropdown_node_ids.split(',').uniq.take(5)
-    where(id: node_ids)
-  end
-
   # 是否 Summary 过多需要折叠
   def collapse_summary?
     @collapse_summary ||= self.summary_html.scan(/\<p\>|\<ul\>/).size > 2

@@ -15,7 +15,7 @@ FactoryGirl.define do
   end
 
   factory :admin, parent: :user do
-    email Setting.admin_emails.first
+    email Setting.admin_emails.split("\n").first
   end
 
   factory :wiki_editor, parent: :user do

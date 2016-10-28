@@ -140,7 +140,7 @@ class User < ApplicationRecord
 
   # 是否是管理员
   def admin?
-    Setting.admin_emails.include?(email)
+    Setting.has_admin?(email)
   end
 
   # 是否有 Wiki 维护权限

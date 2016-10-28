@@ -108,7 +108,9 @@
     recent_node_topics_description: "%{name} 社区 %{node_name} 节点最新发帖."
     recent_node_topics_title: "%{name} 社区 %{node_name} 节点"
   setting:
-    new_topic_dropdown_node_ids: "Sidebar 新建话题按钮，下拉显示的节点 (node_id)，逗号隔开如 (1,3,4)"
+    newbie_notices: "新手提示信息（支持 HTML）"
+    admin_emails: "管理员 Email，在此名单的将有管理员权限（一行一个）"
+    reject_newbie_reply_in_the_evening: "禁止新手在晚上回帖"
     node_ids_hide_in_topics_index: "要在论坛首页列表隐藏的节点,以逗号隔开"
     custom_head_html: "自定 HTML head 区域的内容"
     site_index_html: "酷站列表首页头的 HTML"
@@ -123,5 +125,5 @@
     index_html: "网站首页 HTML"
     tips: "随机显示的小帖士（一行一个）"
     ban_words_on_reply: "回帖禁止内容（一行一个）"
-    apns_pem: "Apple Push 证书内容，保持为空将不会触发 Push 发送动作。"
-    blacklist_ips: "黑名单 IP 列表，将会直接拦截请求，逗号隔开如 (10.11.121.15, 21.1.1.12)"
+    apns_pem: "Apple Push 证书内容，保持为空将不会触发 Push 发送动作"
+    blacklist_ips: "黑名单 IP 列表，将会直接拦截请求（一行一个）"

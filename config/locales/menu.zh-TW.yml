@@ -108,7 +108,9 @@
     recent_node_topics_description: "%{name} 社區 %{node_name} 節點最新發帖."
     recent_node_topics_title: "%{name} 社區 %{node_name} 節點"
   setting:
-    new_topic_dropdown_node_ids: "Sidebar 新建話題按鈕，下拉顯示的節點 (node_id)，逗號隔開如 (1,3,4)"
+    newbie_notices: "新手提示信息（支持 HTML）"
+    admin_emails: "管理員 Email，在此名單的將有管理員權限（一行一個）"
+    reject_newbie_reply_in_the_evening: "禁止新手在晚上回帖"
     node_ids_hide_in_topics_index: "要在論壇首頁列表隱藏的節點,以逗號隔開"
     custom_head_html: "自定 HTML head 區域的內容"
     navbar_brand_html: "導航欄 Logo"
@@ -122,3 +124,4 @@
     index_html: "網站首頁 HTML"
     tips: "隨機顯示的小帖士（一行一個）"
     ban_words_on_reply: "回帖禁止內容（一行一個）"
+    blacklist_ips: "黑名單 IP 列表，將會直接攔截請求（一行一個）"

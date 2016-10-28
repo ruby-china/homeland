@@ -129,10 +129,9 @@
         &.all-nodes {
           border-radius: 3px;
           outline: 0 !important;
-          padding-left: 15px;
-          padding-right: 15px;
           margin-right: 15px;
-          border: 1px solid #e0e0e0;
+          background: #f0f0f0;
+          border: 0;
 
           .caret-right {
             display: inline-block;
@@ -146,7 +145,8 @@
           }
 
           &:hover {
-            background: #fff;
+            border: 0;
+            background: #e0e0e0;
           }
         }
 

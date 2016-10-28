@@ -2,6 +2,9 @@
 class Setting < RailsSettings::Base
   source Rails.root.join('config/config.yml')
 
+  # List setting value separator chars
+  SEPARATOR_REGEXP = /[\s,]/
+
   # keys that allow update in admin
   KEYS_IN_ADMIN = %w(
     custom_head_html
@@ -15,7 +18,6 @@ class Setting < RailsSettings::Base
     topic_index_sidebar_html
     after_topic_html
     before_topic_html
-    new_topic_dropdown_node_ids
     node_ids_hide_in_topics_index
     reject_newbie_reply_in_the_evening
     ban_words_on_reply
@@ -35,9 +37,13 @@ class Setting < RailsSettings::Base
       [self.protocol, self.domain].join("://")
     end
 
+    def has_admin?(email)
+      self.admin_emails.split(SEPARATOR_REGEXP).include?(email)
+    end
+
     def has_module?(name)
       return true if self.modules.blank? || self.modules == 'all'
-      self.modules.include?(name.to_s)
+      self.modules.split(SEPARATOR_REGEXP).include?(name.to_s)
     end
   end
 end

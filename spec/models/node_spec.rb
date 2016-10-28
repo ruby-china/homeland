@@ -75,20 +75,4 @@ describe Node, type: :model do
       expect(node.collapse_summary?).to eq true
     end
   end
-
-  describe '.new_topic_dropdowns' do
-    let(:nodes) { create_list(:node, 10) }
-
-    before do
-      Setting.new_topic_dropdown_node_ids = nodes.collect(&:id).join(',')
-    end
-
-    it 'should be 5 for length' do
-      expect(Node.new_topic_dropdowns.length).to eq(5)
-    end
-
-    it 'should be within site config nodes' do
-      expect(nodes).to include(*Node.new_topic_dropdowns)
-    end
-  end
 end

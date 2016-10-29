@@ -360,7 +360,7 @@ GEM
     ruby-push-notifications (0.4.0)
       builder (~> 3.0)
     ruby_dep (1.5.0)
-    rucaptcha (1.1.0)
+    rucaptcha (1.1.1)
       railties (>= 3.2)
     sass (3.4.22)
     sass-rails (5.0.6)

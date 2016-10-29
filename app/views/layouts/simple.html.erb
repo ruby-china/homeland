@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8' />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title><%= yield(:title) || Setting.app_name %></title>
+  <meta name="apple-mobile-web-app-capable" content="no">
+  <meta content='True' name='HandheldFriendly' />
+  <link rel="apple-touch-icon-precomposed" href="<%= asset_path("ios-icon.png") %>" />
+  <link rel="shortcut icon" href="<%= asset_path("big_logo.png") %>" />
+  <%= stylesheet_link_tag "front" %>
+  <%= javascript_include_tag "app" %>
+  <%= csrf_meta_tag %>
+  <%= raw Setting.custom_head_html %>
+</head>
+<body data-controller-name="<%= controller_name %>">
+  <div class="header">
+    <nav class="navbar navbar-inverse navbar-fixed-top navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="/" class="navbar-brand"><b>Ruby</b> China</a>
+        </div>
+
+        <div id="main-nav-menu">
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <div id="main" class="main-container container">
+    <%= notice_message %>
+    <%= yield %>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <%= raw Setting.footer_html %>
+    </div>
+  </footer>
+
+  <script type="text/javascript" data-turbolinks-eval="false">
+    App.root_url = "<%= root_url %>";
+    App.asset_url = "<%= Setting.upload_url -%>";
+    <% if current_user %>
+      App.current_user_id = <%= current_user.id %>;
+    <% end %>
+  </script>
+  <%= yield :scripts %>
+</body>
+</html>

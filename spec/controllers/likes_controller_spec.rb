@@ -5,6 +5,11 @@ describe LikesController, type: :controller do
   let(:user2) { create(:user) }
   let(:topic) { create(:topic) }
 
+  it 'GET /likes' do
+    get :index, params: { type: 'Topic', id: topic.id }
+    expect(response).to be_success
+  end
+
   it 'POST /likes' do
     sign_in user
     post :create, params: { type: 'Topic', id: topic.id }

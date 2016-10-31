@@ -340,6 +340,7 @@ describe User, type: :model do
         expect(topic.liked_by_user?(user)).to be_falsey
         user.like(topic)
         expect(topic.liked_by_user?(user)).to be_truthy
+        expect(topic.liked_users).to include(user)
       end
     end
   end

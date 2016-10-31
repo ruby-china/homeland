@@ -69,6 +69,7 @@ defaults: &defaults
   upload_aliyun_internal: false
   upload_aliyun_area: "cn-shanghai"
   mailer_provider: 'smtp'
+  mailer_sender: 'no-reply@your-host.com'
   mailer_options:
     address: ''
     port: 25

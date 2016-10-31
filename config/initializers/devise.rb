@@ -5,7 +5,7 @@ Devise.setup do |config|
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in DeviseMailer.
-  config.mailer_sender = Setting.email_sender
+  config.mailer_sender = Setting.mailer_sender
 
   # Configure the class responsible to send e-mails.
   config.mailer = 'Devise::Mailer'

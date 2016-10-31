@@ -73,6 +73,8 @@ describe Mentionable, type: :model do
     let(:doc) { TestDocument.create body: "@#{user1.login} Bla bla", user: actor }
 
     it 'should world' do
+      expect(Notification).to receive(:realtime_push_to_client).exactly(2).times
+      expect(PushJob).to receive(:perform_later).exactly(2).times
       expect do
         doc.send_mention_notification
       end.to change(user1.notifications.unread, :count)

@@ -35,8 +35,9 @@ module Mentionable
   end
 
   def send_mention_notification
+    users = mentioned_users - no_mention_users
     Notification.bulk_insert(set_size: 100) do |worker|
-      (mentioned_users - no_mention_users).each do |user|
+      users.each do |user|
         note = {
           notify_type: 'mention',
           actor_id: self.user_id,
@@ -50,6 +51,13 @@ module Mentionable
         end
         worker.add(note)
       end
+    end
+
+    # Touch push to client
+    # TODO: 确保准确
+    users.each do |u|
+      n = u.notifications.last
+      n.realtime_push_to_client
     end
   end
 end

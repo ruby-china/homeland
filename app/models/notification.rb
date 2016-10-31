@@ -11,7 +11,7 @@ class Notification < ActiveRecord::Base
 
   def realtime_push_to_client
     if user
-      self.class.realtime_push_to_client(user)
+      Notification.realtime_push_to_client(user)
       PushJob.perform_later(user_id, apns_note)
     end
   end

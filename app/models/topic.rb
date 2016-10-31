@@ -125,7 +125,7 @@ class Topic < ApplicationRecord
   end
   before_save do
     if admin_editing == true && self.node_id_changed?
-      self.class.notify_topic_node_changed(id, node_id)
+      Topic.notify_topic_node_changed(id, node_id)
     end
   end
 

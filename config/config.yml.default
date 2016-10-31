@@ -61,7 +61,7 @@ defaults: &defaults
     # (second)
     period: 180
   asset_host: ""
-  upload_provider: "upyun" # can be  upyun/aliyun
+  upload_provider: "upyun" # can be  file/upyun/aliyun
   upload_access_id: "your-access-id" # or username
   upload_access_secret: "your-access-secret" # or upyun password
   upload_bucket: "your-bucket"

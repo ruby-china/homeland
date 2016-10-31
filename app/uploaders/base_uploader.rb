@@ -13,7 +13,11 @@ class BaseUploader < CarrierWave::Uploader::Base
   ALLOW_VERSIONS = %w(xs sm md lg large)
 
   def store_dir
-    model.class.to_s.underscore
+    dir = model.class.to_s.underscore
+    if Setting.upload_provider == 'file'
+      dir = "uploads/#{dir}"
+    end
+    dir
   end
 
   def extension_white_list
@@ -28,8 +32,11 @@ class BaseUploader < CarrierWave::Uploader::Base
       raise "ImageUploader version_name:#{version_name} not allow."
     end
 
-    if Setting.upload_provider == 'aliyun'
+    case Setting.upload_provider
+    when 'aliyun'
       super(thumb: "@!#{version_name}")
+    when 'upyun'
+      [@url, version_name].join('!')
     else
       [@url, version_name].join('!')
     end

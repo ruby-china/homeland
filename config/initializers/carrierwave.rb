@@ -42,5 +42,7 @@ CarrierWave.configure do |config|
     config.upyun_password = Setting.upload_access_secret
     config.upyun_bucket = Setting.upload_bucket
     config.upyun_bucket_host = Setting.upload_url
+  else
+    config.storage = :file
   end
 end

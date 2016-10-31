@@ -95,6 +95,12 @@ class Reply < ApplicationRecord
       end
     end
 
+    # Touch realtime_push_to_client
+    follower_ids.each do |uid|
+      next if notified_user_ids.include?(uid)
+      n = Notification.where(user_id: uid).last
+      n.realtime_push_to_client
+    end
     self.broadcast_to_client(reply)
 
     true

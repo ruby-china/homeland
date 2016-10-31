@@ -9,6 +9,7 @@
 #= require jquery.timeago.settings
 #= require jquery.hotkeys
 #= require jquery.autogrow-textarea
+#= require tooltipster.bundle.min
 #= require dropzone
 #= require jquery.fluidbox.min
 #= require social-share-button
@@ -77,6 +78,38 @@ AppView = Backbone.View.extend
     $(window).off "blur.inactive focus.inactive"
     $(window).on "blur.inactive focus.inactive", @updateWindowActiveState
 
+    # Likeable Popover
+    $('a.likeable[data-count!=0]').tooltipster
+      content: "Loading..."
+      theme: 'tooltipster-shadow'
+      side: 'bottom'
+      maxWidth: 230
+      interactive: true
+      contentAsHTML: true
+      triggerClose:
+        mouseleave: true
+      functionBefore: (instance, helper) ->
+        $target = $(helper.origin)
+        if $target.data('remote-loaded') is 1
+          return
+
+        likeable_type = $target.data("type")
+        likeable_id = $target.data("id")
+        data =
+          type: likeable_type
+          id: likeable_id
+        $.ajax
+          url: '/likes'
+          data: data
+          success: (html) ->
+            if html.length is 0
+              $target.data('remote-loaded', 1)
+              instance.hide()
+              instance.destroy()
+            else
+              instance.content(html)
+              $target.data('remote-loaded', 1)
+
   initForDesktopView : () ->
     return if App.mobile != false
     $("a[rel=twipsy]").tooltip()
@@ -122,6 +155,7 @@ AppView = Backbone.View.extend
       else
         $('span', $el).text("#{likes_count} 个赞")
       $("i.fa", $el).attr("class","fa fa-heart-o")
+    $el.data("remote-loaded", 0)
     false
 
   likeableAsLiked : (el) ->

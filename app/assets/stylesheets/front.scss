@@ -1,6 +1,7 @@
 /*
  *= require application
  *= require cal-heatmap
+ *= require tooltipster.bundle
  *= require notifications
  *= require home
  *= require users
@@ -671,28 +672,6 @@ footer {
   }
 }
 
-
-.profiler-results { display: none !important; }
-@media (min-width: 1100px) {
-  .profiler-results { display:block !important; }
-  .profiler-results.profiler-left {
-    top: 80px !important;
-    position: absolute !important;
-    background-color: transparent;
-  }
-  .profiler-results .profiler-button, .profiler-results .profiler-controls {
-    border-radius: 0px !important;
-    background-color: transparent !important;
-    color: $grayDark !important;
-    border: 0px !important;
-  }
-  .profiler-result .profiler-number { color: #aaa !important;}
-  .profiler-result .profiler-unit { color: #ccc !important;}
-  .profiler-results .profiler-popup {
-
-  }
-}
-
 .notify-updated {
   display: none;
   padding: 4px 15px;
@@ -745,5 +724,13 @@ textarea.div-dropzone-focus { border-color: #BBE1C9; background: #fafafa; }
     text-align: left;
     font-size: 16px;
     .emoji { width: 48px; height: 48px; margin-right: 10px; }
+  }
+}
+
+
+.popover-liked-users {
+  .avatar-16 {
+    display: inline-block;
+    margin: 5px 0;
   }
 }

@@ -40,14 +40,14 @@ describe UsersHelper, type: :helper do
     it 'should work if user exists' do
       user = create(:user)
       img = image_tag(user.letter_avatar_url(96), class: 'media-object avatar-48')
-      expect(user_avatar_tag(user)).to eq link_to(raw(img), user_path(user))
+      expect(user_avatar_tag(user)).to eq link_to(raw(img), user_path(user), title: user.fullname)
     end
 
     it 'should work if avatar exist' do
       user = create(:avatar_user)
       image_url = user.avatar.url(:md)
       img = image_tag(image_url, class: 'media-object avatar-48')
-      expect(user_avatar_tag(user)).to eq link_to(raw(img), user_path(user))
+      expect(user_avatar_tag(user)).to eq link_to(raw(img), user_path(user), title: user.fullname)
     end
 
     it 'should work with different size' do
@@ -58,7 +58,7 @@ describe UsersHelper, type: :helper do
       user = create(:avatar_user)
       image_url = user.avatar.url(:md) + "?t=#{user.updated_at.to_i}"
       img = image_tag(image_url, class: 'media-object avatar-48')
-      expect(user_avatar_tag(user, :md, timestamp: true)).to eq link_to(raw(img), user_path(user))
+      expect(user_avatar_tag(user, :md, timestamp: true)).to eq link_to(raw(img), user_path(user), title: user.fullname)
     end
 
     it 'should work if link is false' do

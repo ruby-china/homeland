@@ -51,7 +51,9 @@ module UsersHelper
         image_tag(user.letter_avatar_url(width * 2), class: img_class)
       end
 
-    options = {}
+    options = {
+      title: user.fullname
+    }
 
     if opts[:link] != false
       link_to(raw(img), user_path(user), options)

@@ -2,39 +2,43 @@
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <h1 class="page-title"><%= t("users.register_user")%></h1>
-    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), remote: true, html: { class: ""}) do |f| %>
-    <div class="form-group">
-      <%= f.text_field :login, type: :email, class: "form-control input-lg", placeholder: t("users.login"), hint: t("users.suggest_using_twitter_id") %>
-    </div>
-    <div class="form-group">
-      <%= f.text_field :name, class: "form-control input-lg", placeholder: t("activerecord.attributes.user.name") %>
-    </div>
-    <div class="form-group">
-      <%= f.text_field :email, type: :email, class: "form-control input-lg", placeholder: t("activerecord.attributes.user.email") %>
-    </div>
-    <div class="form-group">
-      <div class="checkbox">
-        <label for="user_email_public" class="checkbox"><%= f.check_box :email_public, checked: true %> <%= t("activerecord.attributes.user.email_public") %></label>
-      </div>
-    </div>
-    <div class="form-group">
-    <%= f.password_field :password, class: "form-control input-lg", placeholder: t("activerecord.attributes.user.password") %>
-    </div>
-    <div class="form-group">
-    <%= f.password_field :password_confirmation, class: "form-control input-lg", placeholder: t("activerecord.attributes.user.password_confirmation") %>
-    </div>
-    <div class="form-group">
-      <div class="input-group">
-        <%= rucaptcha_input_tag(class: 'form-control input-lg', placeholder: t('common.captcha')) %>
-        <span class="input-group-addon input-group-captcha"><a class="rucaptcha-image-box" href="#"><%= rucaptcha_image_tag %></a></span>
-      </div>
-    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading"><%= t("users.register_user")%></div>
+      <div class="panel-body">
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), remote: true, html: { class: ""}) do |f| %>
+        <div class="form-group">
+          <%= f.text_field :login, type: :email, class: "form-control input-lg", placeholder: t("users.login"), hint: t("users.suggest_using_twitter_id") %>
+        </div>
+        <div class="form-group">
+          <%= f.text_field :name, class: "form-control input-lg", placeholder: t("activerecord.attributes.user.name") %>
+        </div>
+        <div class="form-group">
+          <%= f.text_field :email, type: :email, class: "form-control input-lg", placeholder: t("activerecord.attributes.user.email") %>
+        </div>
+        <div class="form-group">
+          <div class="checkbox">
+            <label for="user_email_public" class="checkbox"><%= f.check_box :email_public, checked: true %> <%= t("activerecord.attributes.user.email_public") %></label>
+          </div>
+        </div>
+        <div class="form-group">
+        <%= f.password_field :password, class: "form-control input-lg", placeholder: t("activerecord.attributes.user.password") %>
+        </div>
+        <div class="form-group">
+        <%= f.password_field :password_confirmation, class: "form-control input-lg", placeholder: t("activerecord.attributes.user.password_confirmation") %>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <%= rucaptcha_input_tag(class: 'form-control input-lg', placeholder: t('common.captcha')) %>
+            <span class="input-group-addon input-group-captcha"><a class="rucaptcha-image-box" href="#"><%= rucaptcha_image_tag %></a></span>
+          </div>
+        </div>
 
-    <div class="form-group">
-      <%= f.submit t('users.submit_new_user'), class: "btn btn-lg btn-primary", 'data-disable-with' => t("common.submitting") %>
-      <%= link_to t("common.login"), new_session_path(resource_name), class: "btn btn-lg btn-default" %>
+        <div class="form-group">
+          <%= f.submit t('users.submit_new_user'), class: "btn btn-lg btn-primary", 'data-disable-with' => t("common.submitting") %>
+          <%= link_to t("common.login"), new_session_path(resource_name), class: "btn btn-lg btn-default" %>
+        </div>
+        <% end %>
+      </div>
     </div>
-    <% end %>
   </div>
 </div>

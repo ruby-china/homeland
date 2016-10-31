@@ -68,9 +68,15 @@ defaults: &defaults
   upload_url: "http://your-bucket.host.com"
   upload_aliyun_internal: false
   upload_aliyun_area: "cn-shanghai"
-  email_server: "smtp.your-smtp-server.com"
-  email_sender: 'dev-test@your-host.com'
-  email_password: 'test123456'
+  mailer_provider: 'smtp'
+  mailer_options:
+    address: ''
+    port: 25
+    domain: 'localhost:3000'
+    user_name: ''
+    password: ''
+    authentication: 'plain'
+    enable_starttls_auto: true
   github_token: "91726ee4170d8e2679ec"
   github_secret: "13c7e55e8e53c57a399181e96ea3a55a3fdd9c7c"
 

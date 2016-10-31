@@ -20,7 +20,7 @@ describe LikesHelper, type: :helper do
 
     it 'should result when unlogin user' do
       allow(helper).to receive(:current_user).and_return(nil)
-      expect(helper.likeable_tag(topic)).to eq(%(<a class=\"\" href=\"/account/sign_in\"><i class=\"fa fa-heart-o\"></i> <span></span></a>))
+      expect(helper.likeable_tag(topic)).to eq(%(<a title="赞" data-count="0" data-state="" data-type="Topic" data-id="1" class="likeable " href="#"><i class="fa fa-heart-o"></i> <span></span></a>))
     end
 
     it 'should result with no_cache params' do

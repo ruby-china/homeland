@@ -1,4 +1,6 @@
 class BaseUploader < CarrierWave::Uploader::Base
+  include CarrierWave::MiniMagick if Setting.upload_provider == 'file'
+
   # 在 UpYun 或其他平台配置图片缩略图
   # http://docs.upyun.com/guide/#_12
   # Avatar
@@ -38,7 +40,7 @@ class BaseUploader < CarrierWave::Uploader::Base
     when 'upyun'
       [@url, version_name].join('!')
     else
-      [@url, version_name].join('!')
+      version_name.to_sym == :large ? url : send(version_name).url
     end
   end
 end

@@ -36,6 +36,8 @@ gem 'carrierwave'
 # Aliyun / Upyun 可选项
 gem 'carrierwave-upyun'
 gem 'carrierwave-aliyun'
+# 处理本地图片上传 可选项
+gem 'mini_magick'
 
 # 验证码，头像
 gem 'rucaptcha'

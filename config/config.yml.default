@@ -61,11 +61,11 @@ defaults: &defaults
     # (second)
     period: 180
   asset_host: ""
+  upload_url: ""
   upload_provider: "file" # can be  file/upyun/aliyun
   upload_access_id: "your-access-id" # or username
   upload_access_secret: "your-access-secret" # or upyun password
   upload_bucket: "your-bucket"
-  upload_url: "http://your-bucket.host.com"
   upload_aliyun_internal: false
   upload_aliyun_area: "cn-shanghai"
   mailer_provider: 'smtp'
@@ -86,6 +86,9 @@ development:
 
 test:
   <<: *defaults
+  modules: 'all'
+  admin_emails: >
+    admin@admin.com
 
 production:
   <<: *defaults

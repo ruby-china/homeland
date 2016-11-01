@@ -1,7 +1,8 @@
 <%= simple_form_for(@site_config, url: admin_site_config_path(@site_config.var), method: 'patch') do |f| %>
   <div class="form-group">
-    <label class="control-label"><%= t("setting.#{@site_config.var}") %></label>
+    <label class="control-label"><%= @site_config.var %></label>
     <%= f.input :value, input_html: { rows: 20, value: Setting[@site_config.var] }, label: false, class: 'form-control' %>
+    <div class="help-block"><%= t("setting.#{@site_config.var}") %></div>
   </div>
   <div class="form-group">
     <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving") %>

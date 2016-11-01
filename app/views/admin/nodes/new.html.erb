@@ -1,6 +1,6 @@
 <% content_for :sitemap do %>
-  <a href="<%= admin_nodes_path %>"><%= t("cpane.menu.nodes")%></a> &gt; <span class="current"><%= t("common.create")%></span>
+  <a href="<%= admin_nodes_path %>"><%= t("admin.menu.nodes")%></a> <i class="fa fa-angle-right"></i> <span class="current"><%= t("common.create")%></span>
 <% end %>
-<h1>New node</h1>
+<h1>新建节点</h1>
 
 <%= render 'form' %>

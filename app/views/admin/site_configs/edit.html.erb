@@ -1,2 +1,7 @@
+<% content_for :sitemap do %>
+  <a href="<%= admin_site_configs_path %>"><%= t("admin.menu.site_configs")%></a> <i class="fa fa-angle-right"></i>
+  <span class="current"><%= @site_config.var %></span>
+<% end %>
+
 <%= render 'form' %>
 

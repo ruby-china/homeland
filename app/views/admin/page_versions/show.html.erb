@@ -1,7 +1,7 @@
 <% content_for :sitemap do %>
-  <a href="<%= admin_pages_path %>">Wiki</a> &gt;
-  <a href="<%= edit_admin_page_path(params[:page_id]) %>">Page:<%= params[:page_id] %></a> &gt;
-  <a href="<%= admin_page_versions_path(params[:page_id]) %>">版本历史</a> &gt;
+  <a href="<%= admin_pages_path %>">Wiki</a> <i class="fa fa-angle-right"></i>
+  <a href="<%= edit_admin_page_path(params[:page_id]) %>">Page:<%= params[:page_id] %></a> <i class="fa fa-angle-right"></i>
+  <a href="<%= admin_page_versions_path(params[:page_id]) %>">版本历史</a> <i class="fa fa-angle-right"></i>
   <span class="current">明细</span>
 <% end %>
 <div class="pull-right">

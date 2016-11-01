@@ -1,15 +1,15 @@
 <% content_for :sitemap do %>
-  <span class="current"><%= t("admin.sections") %></span>
+  <span class="current"><%= t("admin.menu.sections") %></span>
 <% end %>
 
 <div class="toolbar">
-  <%= link_to 'New Section', new_admin_section_path, class: "btn btn-default" %>
+  <%= link_to '新建分类', new_admin_section_path, class: "btn btn-default" %>
 </div>
 
 <table class="table table-bordered table-striped table-condensed">
   <tr class="head">
     <td class="first">#</td>
-    <td>Name</td>
+    <td>名称</td>
     <td>排序</td>
     <td></td>
   </tr>
@@ -21,7 +21,7 @@
     <td><%= section.name %></td>
     <td><%= section.sort %></td>
     <td><%= link_to '', edit_admin_section_path(section), class: "fa fa-pencil" %>
-    <%= link_to '', admin_section_path(section), 'data-confirm' => 'Are you sure?', method: :delete, class: "fa fa-trash" %></td>
+    <%= link_to '', admin_section_path(section), 'data-confirm' => '确定要删除吗?', method: :delete, class: "fa fa-trash" %></td>
   </tr>
 <% end %>
 </table>

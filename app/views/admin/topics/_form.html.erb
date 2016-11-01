@@ -6,7 +6,6 @@
     <%= f.input :title, input_html: { class: "span10" } %>
     <%= f.input :node_id %>
     <%= f.input :user_id %>
-    <%= f.input :last_reply_user_id %>
     <%= f.input :body, as: :text, input_html: { class: "span8", rows: "10"} %>
     <div class="form-actions">
       <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving") %>

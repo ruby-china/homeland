@@ -1,5 +1,5 @@
 <% content_for :sitemap do %>
-  <a href="<%= admin_replies_path %>">回复</a> &gt; <span class="current"><%= t("common.edit") %></span>
+  <a href="<%= admin_replies_path %>"><%= t('admin.menu.replies') %></a> <i class="fa fa-angle-right"></i> <span class="current"><%= t("common.edit") %></span>
 <% end %>
-<h1>Editing reply</h1>
+<h1><%= t("common.edit") %><%= t('admin.menu.replies') %></h1>
 <%= render 'form' %>

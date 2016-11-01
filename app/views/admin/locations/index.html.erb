@@ -15,7 +15,6 @@
       <td><%= item.users_count %></td>
       <td>
         <%= link_to "", edit_admin_location_path(item.id), class: "fa fa-pencil" %>
-        <%= link_to "", admin_location_path(item.id), method: :delete, 'data-confirm' => '确定要删除吗?', class: "fa fa-trash" %>
       </td>
     </tr>
     <% end %>

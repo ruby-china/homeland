@@ -1,1 +1,5 @@
+<% content_for :sitemap do %>
+  <a href="<%= admin_comments_path %>"><%= t("admin.menu.comments")%></a> <i class="fa fa-angle-right"></i> <span class="current"><%= t("common.edit")%></span>
+<% end %>
+
 <%= render 'form' %>

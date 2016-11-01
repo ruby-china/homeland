@@ -13,31 +13,6 @@ module Admin
       end
     end
 
-    def new
-      @reply = Reply.new
-    end
-
-    def edit
-    end
-
-    def create
-      @reply = Reply.new(params[:reply].permit!)
-
-      if @reply.save
-        redirect_to(admin_replies_path, notice: 'Reply was successfully created.')
-      else
-        render action: 'new'
-      end
-    end
-
-    def update
-      if @reply.update_attributes(params[:reply].permit!)
-        redirect_to(admin_replies_path, notice: 'Reply was successfully updated.')
-      else
-        render action: 'edit'
-      end
-    end
-
     def destroy
       @reply.destroy
     end

@@ -13,6 +13,11 @@
         role: '选择此人在组里面的权限，Owner 可以管理'
       topic:
         team_id: "选择以后，此话题会显示组织的名称，同时组织主页也会列出"
+      section:
+        sort: "数字较大的将会排在前面"
+      node:
+        sort: "数字较大的将会排在前面"
+        summary: "支持 Markdown 语法"
     labels:
       user:
         name: "名字"

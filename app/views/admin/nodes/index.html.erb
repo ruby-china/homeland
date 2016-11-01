@@ -1,16 +1,16 @@
 <% content_for :sitemap do %>
-  <span class="current"><%= t("cpane.menu.nodes")%></span>
+  <span class="current"><%= t("admin.menu.nodes")%></span>
 <% end %>
 
 <div class="toolbar">
-  <%= link_to '创建新节点', new_admin_node_path, class: "btn btn-default" %>
+  <%= link_to '新建节点', new_admin_node_path, class: "btn btn-default" %>
 </div>
 
 <table class="table table-bordered table-striped table-condensed">
   <tr class="head">
     <td class="first">#</td>
     <td>Name</td>
-    <td>Section</td>
+    <td>分类</td>
     <td>排序</td>
     <td>帖子数量</td>
     <td></td>

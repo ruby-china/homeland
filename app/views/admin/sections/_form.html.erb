@@ -1,9 +1,8 @@
-<%= simple_form_for([:admin,@section]) do |f| %>
+<%= simple_form_for([:admin, @section]) do |f| %>
   <%= render 'shared/error_messages', target: @section %>
   <%= f.input :name %>
   <%= f.input :sort %>
   <div class="form-group">
     <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving") %>
-    <%= link_to 'Back', admin_sections_path, class: 'btn btn-default' %>
   </div>
 <% end %>

@@ -1,7 +1,8 @@
 <% content_for :sitemap do %>
-  <a href="<%= admin_sections_path %>">><%= t("admin.sections") %></a> &gt; <span class="current"><%= t("common.create") %></span>
+  <a href="<%= admin_sections_path %>"><%= t("admin.menu.sections") %></a> <i class="fa fa-angle-right"></i> <span class="current"><%= t("common.create") %></span>
 <% end %>
-<h1>New section</h1>
+
+<h1>新建分类</h1>
 
 <%= render 'form' %>
 

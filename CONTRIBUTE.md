@@ -46,7 +46,7 @@ curl -sSL https://git.io/vVHhm | bash
 
 ```bash
 $ git clone https://github.com/ruby-china/homeland.git
-$ cd ruby-china
+$ cd homeland
 $ ./bin/setup
 Checking Package Dependencies...
 --------------------------------------------------------------------------------
@@ -70,7 +70,7 @@ Seed default data...                                                      [Done]
 
 == Removing old logs and tempfiles ==
 
-Ruby China Successfully Installed.
+Homeland Successfully Installed.
 
 $ rails s
 ```

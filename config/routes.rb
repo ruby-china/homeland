@@ -30,6 +30,9 @@ Rails.application.routes.draw do
   else
     root to: 'topics#index'
   end
+  match '/uploads/:path(![large|lg|md|sm|xs])', to: 'home#uploads', via: :get, constraints: {
+    path: /[\w\d\.\/]+/i
+  }
 
   devise_for :users, path: 'account', controllers: {
     registrations: :account,

@@ -107,5 +107,5 @@ Dir.chdir APP_ROOT do
   system 'rm -rf tmp/cache'
 
   puts ''
-  puts 'Ruby China Successfully Installed.'
+  puts 'Homeland Successfully Installed.'
 end

@@ -8,6 +8,12 @@ en:
       user:
         location: "Please input city with chinese"
         email: "Can't change after saved."
+      team_user:
+        login: 'Type username that you want invite'
+        role: 'Choice a role, owner can update'
+      topic:
+        team_id: "This Topic will display the Team name after you selected, and it\
+          \ will showing in Team page"
     labels:
       user:
         name: "Name"

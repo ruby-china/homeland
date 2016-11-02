@@ -1,10 +1,10 @@
-"en":
+en:
   admin:
     menu:
       root_path: "Dashboard"
       site_configs: "Settings"
       users: "Users"
-      sections: "Sections"
+      sections: "Category"
       nodes: "Nodes"
       wiki: "Wiki"
       topics: "Topics"
@@ -12,7 +12,7 @@
       photos: "Photos"
       notes: "Notes"
       comments: "Comments"
-      site_nodes: "Site Nodes"
+      site_nodes: "Category"
       sites: "Sites"
       locations: "Locations"
       exception_logs: "Errors"
@@ -25,5 +25,7 @@
       edit_setting: "Edit Settings"
     users:
       trust_user_can_modify_wiki: "Allow user to modify Wiki"
+      hr_user_can_create_topic: "Recruiters can ignore the role of novice restrict\
+        \ direct posting"
     topic_list: "Topic List"
     check_photo: "View Photo"

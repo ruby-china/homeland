@@ -61,53 +61,52 @@ class Reply < ApplicationRecord
     topic = Topic.find_by_id(reply.topic_id)
     return if topic.blank?
 
-    notified_user_ids = reply.mentioned_user_ids
-
-    # 给发帖人发回帖通知
-    if reply.user_id != topic.user_id && !notified_user_ids.include?(topic.user_id)
-      Notification.create notify_type: 'topic_reply',
-                          actor_id: reply.user_id,
-                          user_id: topic.user_id,
-                          target: reply,
-                          second_target: topic
-      notified_user_ids << topic.user_id
-    end
-
-    follower_ids = topic.follower_ids + (reply.user.try(:follower_ids) || [])
-    follower_ids.uniq!
-
-    # 给关注者发通知
-    default_note = {
-      notify_type: 'topic_reply',
-      target_type: 'Reply', target_id: reply.id,
-      second_target_type: 'Topic', second_target_id: topic.id,
-      actor_id: reply.user_id
-    }
     Notification.bulk_insert(set_size: 100) do |worker|
-      follower_ids.each do |uid|
-        # 排除同一个回复过程中已经提醒过的人
-        next if notified_user_ids.include?(uid)
-        # 排除回帖人
-        next if uid == reply.user_id
+      reply.notification_receiver_ids.each do |uid|
         logger.debug "Post Notification to: #{uid}"
-        note = default_note.merge(user_id: uid)
+        note = reply.default_notification.merge(user_id: uid)
         worker.add(note)
       end
     end
 
     # Touch realtime_push_to_client
-    follower_ids.each do |uid|
-      next if notified_user_ids.include?(uid)
+    reply.notification_receiver_ids.each do |uid|
       n = Notification.where(user_id: uid).last
       n.realtime_push_to_client
     end
-    self.broadcast_to_client(reply)
+    Reply.broadcast_to_client(reply)
 
     true
   end
 
   def self.broadcast_to_client(reply)
     ActionCable.server.broadcast("topics/#{reply.topic_id}/replies", id: reply.id, user_id: reply.user_id, action: :create)
+  end
+
+  def default_notification
+    @default_notification ||= {
+      notify_type: 'topic_reply',
+      target_type: 'Reply', target_id: self.id,
+      second_target_type: 'Topic', second_target_id: self.topic_id,
+      actor_id: self.user_id
+    }
+  end
+
+  def notification_receiver_ids
+    return @notification_receiver_ids if defined? @notification_receiver_ids
+    # 加入帖子关注着
+    follower_ids = self.topic.try(:follower_ids) || []
+    # 加入回帖人的关注者
+    follower_ids = follower_ids + (self.user.try(:follower_ids) || [])
+    # 加入发帖人
+    follower_ids << self.topic.try(:user_id)
+    # 去重复
+    follower_ids.uniq!
+    # 排除回帖人
+    follower_ids.delete(self.user_id)
+    # 排除同一个回复过程中已经提醒过的人
+    follower_ids = follower_ids - self.mentioned_user_ids
+    @notification_receiver_ids = follower_ids
   end
 
   # 是否热门

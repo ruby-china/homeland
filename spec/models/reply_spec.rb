@@ -234,4 +234,50 @@ describe Reply, type: :model do
       expect(reply.new_record?).to eq false
     end
   end
+
+  describe '.default_notification' do
+    let(:reply) { create(:reply, topic: create(:topic)) }
+
+    it 'should work' do
+      val = {
+        notify_type: 'topic_reply',
+        target_type: 'Reply', target_id: reply.id,
+        second_target_type: 'Topic', second_target_id: reply.topic_id,
+        actor_id: reply.user_id
+      }
+      expect(reply.default_notification).to eq val
+    end
+  end
+
+  describe '.notification_receiver_ids' do
+    let(:mentioned_user_ids) { [1, 2, 3] }
+    let(:user) { create(:user, follower_ids: [2, 3, 5, 7, 9]) }
+    let(:topic) { create(:topic, user_id: 10, follower_ids: [1, 3, 7, 11, 12, 14, user.id]) }
+    let(:reply) { create(:reply, user: user, topic: topic, mentioned_user_ids: mentioned_user_ids) }
+
+    it 'should be a Array' do
+      expect(reply.notification_receiver_ids).to be_a(Array)
+    end
+
+    it 'should not include mentioned_user_ids' do
+      expect(reply.notification_receiver_ids).not_to include(*reply.mentioned_user_ids)
+    end
+
+    it 'should not include topic follower and topic author' do
+      expect(reply.notification_receiver_ids).to include(10)
+      expect(reply.notification_receiver_ids).to include(*[7, 11, 12, 14])
+    end
+
+    it 'should not include reply user_id' do
+      expect(reply.notification_receiver_ids).not_to include(user.id)
+    end
+
+    it 'should include replyer followers' do
+      expect(reply.notification_receiver_ids).to include(*[5, 7, 9])
+    end
+
+    it 'should removed duplicate' do
+      expect(reply.notification_receiver_ids).to eq reply.notification_receiver_ids.uniq
+    end
+  end
 end

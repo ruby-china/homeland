@@ -72,7 +72,7 @@ class Reply < ApplicationRecord
     # Touch realtime_push_to_client
     reply.notification_receiver_ids.each do |uid|
       n = Notification.where(user_id: uid).last
-      n.realtime_push_to_client
+      n.realtime_push_to_client if n.present?
     end
     Reply.broadcast_to_client(reply)
 

@@ -125,6 +125,7 @@ Rails.application.routes.draw do
       end
     end
     resources :applications
+    resources :stats
   end
 
   get 'api', to: 'home#api', as: 'api'

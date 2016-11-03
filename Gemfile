@@ -36,6 +36,8 @@ gem 'carrierwave'
 # Aliyun / Upyun 可选项
 gem 'carrierwave-upyun'
 gem 'carrierwave-aliyun'
+# Lazy load
+gem 'mini_magick', require: false
 
 # 验证码，头像
 gem 'rucaptcha'

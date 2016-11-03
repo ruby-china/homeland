@@ -17,10 +17,6 @@ module ExceptionNotifier
 
       if Rails.env.production?
         ExceptionLog.create(title: @title, body: messages.join("\n"))
-      else
-        Rails.logger.info "\n======================"
-        Rails.logger.info messages.join("\n")
-        Rails.logger.info "======================\n"
       end
     end
   end

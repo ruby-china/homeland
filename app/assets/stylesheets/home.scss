@@ -75,3 +75,14 @@ h2 {
         a { color: #666; margin: 6px; display: inline-block; }
     }
 }
+
+.home_suggest_topics {
+  .topics {
+    .topic {
+      .title {
+        height: 30px;
+        overflow: hidden;
+      }
+    }
+  }
+}

@@ -1,7 +1,8 @@
 module Homeland
   class Pipeline
     class MentionFilter < HTML::Pipeline::Filter
-      MENTION_REGEXP = /(^|[^a-zA-Z0-9\-_!#\$%&*@＠])@(user[0-9]{1,6})/io
+      MENTION_REGEXP = /#{NormalizeMentionFilter::PREFIX_REGEXP}@(user[0-9]{1,6})/io
+      MENTION_REGEXP_IN_CODE = /#{NormalizeMentionFilter::PREFIX_REGEXP}@\z/i
 
       def call
         users = result[:normalize_mentions]
@@ -34,7 +35,7 @@ module Homeland
 
       def link_mention_user_in_code!(doc, users)
         doc.css('pre.highlight span').each do |node|
-          next unless node.previous && node.previous.inner_html.to_s =~ /(^|[^a-zA-Z0-9_!#\$%&*@＠])@\z/i && node.inner_html =~ /\Auser(\d+)\z/
+          next unless node.previous && node.previous.inner_html.to_s =~ MENTION_REGEXP_IN_CODE && node.inner_html =~ /\Auser(\d+)\z/
           user_id = Regexp.last_match(1)
           user = users[user_id.to_i - 1]
           node.inner_html = user if user

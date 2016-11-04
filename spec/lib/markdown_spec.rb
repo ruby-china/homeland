@@ -278,6 +278,13 @@ describe 'markdown' do
         specify { expect(doc.inner_html).to eq(%(<p><a href="/_underscore_" class="user-mention" title="@_underscore_"><i>@</i>_underscore_</a></p>)) }
       end
 
+      context '@foo.bar in text' do
+        let(:raw) { '@foo.bar ss' }
+
+        specify { expect(doc.inner_html).to eq(%(<p><a href="/foo.bar" class="user-mention" title="@foo.bar"><i>@</i>foo.bar</a> ss</p>)) }
+      end
+
+
       context '@__underscore__ in text' do
         let(:raw) { '@__underscore__' }
 

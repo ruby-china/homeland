@@ -14,8 +14,8 @@ class User < ApplicationRecord
 
   acts_as_cached version: 4, expires_in: 1.week
 
-  LOGIN_FORMAT = /[A-Za-z0-9\-\_\.]/
-  ALLOW_LOGIN_CHARS_REGEXP = /\A#{LOGIN_FORMAT}+\z/
+  LOGIN_FORMAT = 'A-Za-z0-9\-\_\.'
+  ALLOW_LOGIN_FORMAT_REGEXP = /\A[#{LOGIN_FORMAT}]+\z/
 
   devise :database_authenticatable, :registerable, :recoverable, :lockable,
          :rememberable, :trackable, :validatable, :omniauthable
@@ -46,7 +46,7 @@ class User < ApplicationRecord
 
   enum state: { deleted: -1, normal: 1, blocked: 2 }
 
-  validates :login, format: { with: ALLOW_LOGIN_CHARS_REGEXP, message: '只允许数字、大小写字母、中横线、下划线' },
+  validates :login, format: { with: ALLOW_LOGIN_FORMAT_REGEXP, message: '只允许数字、大小写字母、中横线、下划线' },
                     length: { in: 2..20 },
                     presence: true,
                     uniqueness: { case_sensitive: false }
@@ -69,7 +69,7 @@ class User < ApplicationRecord
   end
 
   def self.find_by_login(slug)
-    return nil unless slug =~ ALLOW_LOGIN_CHARS_REGEXP
+    return nil unless slug =~ ALLOW_LOGIN_FORMAT_REGEXP
     fetch_by_uniq_keys(login: slug) || where('lower(login) = ?', slug.downcase).take
   end
 

@@ -24,7 +24,7 @@ module Mentionable
   end
 
   def extract_mentioned_users
-    logins = body.scan(/@(#{User::LOGIN_FORMAT}{3,20})/).flatten.map(&:downcase)
+    logins = body.scan(/@([#{User::LOGIN_FORMAT}]{3,20})/).flatten.map(&:downcase)
     if logins.any?
       self.mentioned_user_ids = User.where('lower(login) IN (?) AND id != (?)', logins, user.id).limit(5).pluck(:id)
     end

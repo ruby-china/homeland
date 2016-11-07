@@ -167,6 +167,12 @@
     padding: 0 15px;
   }
 
+  .no-result {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    padding: 100px 0;
+  }
+
   .topics-group:first-child {
     @media (max-width: 991px) {
       .topic:last-child { border-bottom: 1px solid #F0F0F0; }

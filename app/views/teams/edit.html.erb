@@ -26,6 +26,8 @@
             </div>
           </div>
           <%= f.input :location %>
+
+          <% if Setting.has_module? :github %>
           <div class="form-group">
             <%= f.label :github, class: 'control-label' %>
             <div class="input-group">
@@ -33,6 +35,8 @@
               <%= f.text_field :github, class: "form-control", placeholder: I18n.t('simple_form.placeholders.user.yourname') %>
             </div>
           </div>
+          <% end %>
+
           <div class="form-group">
             <%= f.label :twitter, class: 'control-label' %>
             <div class="input-group">

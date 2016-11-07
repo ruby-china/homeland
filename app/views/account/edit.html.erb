@@ -17,6 +17,7 @@
         </div>
         <%= f.input :location  %>
         <%= f.input :company %>
+        <% if Setting.has_module? :github %>
         <div class="form-group">
           <%= f.label :github, class: 'control-label' %>
           <div class="input-group">
@@ -24,6 +25,7 @@
             <%= f.text_field :github, class: "form-control", placeholder: I18n.t('simple_form.placeholders.user.yourname') %>
           </div>
         </div>
+        <% end %>
         <div class="form-group">
           <%= f.label :twitter, class: 'control-label' %>
           <div class="input-group">
@@ -54,9 +56,11 @@
         </div>
         <% end %>
 
+        <% if Setting.has_module? :github %>
         <p>
           <a href="https://ruby-china.org/topics/31323" target="_blank">GitHub 登录的方式如何修改密码？</a>
         </p>
+        <% end %>
       </div>
     </div>
   </div>
@@ -66,6 +70,8 @@
         <%= user_avatar_tag(@user, :lg, link: false, timestamp: true) %>
       </div>
     </div>
+
+    <% if Setting.has_module? :github %>
     <div class="panel panel-default">
       <div class="panel-heading"><%= t("users.bind_another_account")%></div>
       <ul class="list-group">
@@ -81,6 +87,7 @@
         <% end %>
       </ul>
     </div>
+    <% end %>
 
     <div class="panel panel-default">
       <ul class="list-group">

@@ -4,7 +4,11 @@
   <div class="col-md-8">
     <div class="panel topics">
       <div class="panel-body">
+        <% if @topics.blank? %>
+        <div class="topic"><div class="no-result">暂无任何话题</div></div>
+        <% else %>
         <%= render partial: '/topics/topic', collection: @topics, locals: { suggest: false }, cached: -> (topic) { [topic, 'normal'] } %>
+        <% end %>
       </div>
       <div class="panel-footer">
         <%= will_paginate @topics %>

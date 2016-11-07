@@ -39,7 +39,7 @@
     confirm_delete_account: "要删除账号，请输入你的密码"
     ensure_to_delete: "确定删除我的账号"
     menu:
-      topics: "帖子"
+      topics: "话题"
       recent_reply_topics: "最近回帖"
       like: "赞"
       profile: "个人信息"

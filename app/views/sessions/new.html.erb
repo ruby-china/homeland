@@ -28,12 +28,14 @@
     </div>
   </div>
   <div class="col-md-3">
+    <% if Setting.has_module? :github %>
     <div class="panel panel-default">
       <div class="panel-heading"><%= t("common.auth_with_other_services") %></div>
       <ul class="list-group">
         <li class="list-group-item"><%= link_to raw("<i class='fa fa-github'></i> GitHub"), omniauth_authorize_path(:user, :github), class: "btn btn-default btn-lg btn-block" %> </li>
       </ul>
     </div>
+    <% end %>
 
     <div class="panel panel-default">
       <%= render partial: "devise/shared/links" %>

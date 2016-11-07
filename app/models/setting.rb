@@ -41,6 +41,7 @@ class Setting < RailsSettings::Base
       self.admin_emails.split(SEPARATOR_REGEXP).include?(email)
     end
 
+    # topic,home,wiki,site,note,team,github
     def has_module?(name)
       return true if self.modules.blank? || self.modules == 'all'
       self.modules.split(SEPARATOR_REGEXP).include?(name.to_s)

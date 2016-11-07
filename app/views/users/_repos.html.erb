@@ -1,3 +1,4 @@
+<% if Setting.has_module? :github %>
 <div class="panel panel-default" id="user_github_repos">
   <% if not user.github.blank? %>
     <div class="panel-heading">GitHub Public Repos</div>
@@ -22,3 +23,4 @@
     </div>
   <% end %>
 </div>
+<% end %>

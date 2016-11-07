@@ -36,8 +36,10 @@
               <%= link_to(raw('<i class="fa fa-globe"></i>'), @user.website_url, target: '_blank', rel: 'nofollow') %>
             <% end %>
 
-            <% if !@user.github.blank? %>
-              <%= link_to(raw('<i class="fa fa-github"></i>'), @user.github_url, target: '_blank', rel: 'nofollow') %>
+            <% if Setting.has_module? :github %>
+              <% if !@user.github.blank? %>
+                <%= link_to(raw('<i class="fa fa-github"></i>'), @user.github_url, target: '_blank', rel: 'nofollow') %>
+              <% end %>
             <% end %>
 
             <% if !@user.email.blank? && @user.email_public %>

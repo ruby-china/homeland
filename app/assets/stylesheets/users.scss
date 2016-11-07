@@ -60,6 +60,7 @@
         font-size:14px;
       }
       i.icon { margin-bottom: -1px; }
+      i.fa-diamond { color: $red; }
       .info { margin-top:3px; font-size:12px; color:#bbb; }
       .node {
         margin-right:5px;
@@ -139,6 +140,7 @@
 table.node-topics {
   td {
     a { color:#333; font-weight:normal; }
+    i.fa-diamond { color: $red; }
   }
   td.replied-at { width:80px; }
 }

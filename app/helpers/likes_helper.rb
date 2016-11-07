@@ -11,9 +11,9 @@ module LikesHelper
 
     title, state, icon_name =
       if opts[:cache].blank? && likeable.liked_by_user?(current_user)
-        %w(取消赞 active heart)
+        ['取消赞', 'active', 'heart']
       else
-        ['赞', '', 'heart-o']
+        ['赞', '', 'heart']
       end
     icon = content_tag('i', '', class: "fa fa-#{icon_name}")
     like_label = raw "#{icon} <span>#{label}</span>"

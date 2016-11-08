@@ -1,0 +1,4 @@
+exclude_paths:
+- "lib/assets/"
+- "app/controllers/admin/"
+- "public/api-doc/"

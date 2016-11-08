@@ -11,7 +11,6 @@ module Admin
                   else 30.days.ago.beginning_of_month.to_date
                   end
       res = {}
-      klass = params[:model].camelize.constantize
       group_cmd = case params[:by]
                   when 'day' then "date(created_at at time zone 'CST')"
                   when 'week' then "date_trunc('week', created_at)"
@@ -21,6 +20,18 @@ module Admin
                               .group("date")
                               .select("#{group_cmd} AS date, count(id) AS count").all
       render json: results.as_json
+    end
+
+    def klass
+      case params[:model]
+      when 'user' then User
+      when 'topic' then Topic
+      when 'reply' then Reply
+      when 'notification' then Notification
+      when 'photo' then Photo
+      else
+        raise "Bad params"
+      end
     end
   end
 end

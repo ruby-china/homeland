@@ -1,6 +1,6 @@
 # ApplicationController
 class ApplicationController < ActionController::Base
-  protect_from_forgery
+  protect_from_forgery with: :exception
   helper_method :unread_notify_count
   helper_method :turbolinks_app?, :turbolinks_ios?, :turbolinks_app_version
 

@@ -15,8 +15,7 @@ module Api
       #
       # @return [Array<TopicTopicSerializer>]
       def index
-        optional! :type, default: 'last_actived',
-                         values: %w(last_actived recent no_reply popular excellent)
+        optional! :type, default: 'last_actived'
         optional! :node_id
         optional! :offset, default: 0
         optional! :limit, default: 20, values: 1..150
@@ -36,7 +35,7 @@ module Api
           @topics = @node.topics
         end
 
-        @topics = @topics.fields_for_list.includes(:user).send(params[:type])
+        @topics = @topics.fields_for_list.includes(:user).send(scope_method_by_type)
         if %w(no_reply popular).index(params[:type])
           @topics = @topics.last_actived
         elsif params[:type] == 'excellent'
@@ -253,6 +252,18 @@ module Api
 
       def set_topic
         @topic = Topic.find(params[:id])
+      end
+
+      def scope_method_by_type
+        case params[:type]
+        when 'last_actived' then :last_actived
+        when 'recent' then :recent
+        when 'no_reply' then :no_reply
+        when 'popular' then :popular
+        when 'excellent' then :excellent
+        else
+          :last_actived
+        end
       end
     end
   end

@@ -55,11 +55,6 @@ defaults: &defaults
   admin_emails: >
     admin@admin.com
   google_analytics_key: ""
-  rack_attack:
-    # limit requests in a period
-    limit: 300
-    # (second)
-    period: 180
   asset_host: ""
   upload_url: ""
   upload_provider: "file" # can be  file/upyun/aliyun
@@ -87,6 +82,7 @@ development:
 test:
   <<: *defaults
   modules: 'all'
+  upload_provider: "file"
   admin_emails: >
     admin@admin.com
 

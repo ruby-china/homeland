@@ -101,7 +101,7 @@ module Api
         optional! :offset, type: Integer, default: 0
         optional! :limit, type: Integer, default: 20, values: 1..150
 
-        @topic_ids = @user.favorite_topic_ids[params[:offset].to_i, params[:limit].to_i]
+        @topic_ids = @user.favorite_topic_ids.reverse[params[:offset].to_i, params[:limit].to_i]
         @topics = Topic.where(id: @topic_ids).fields_for_list.includes(:user)
         @topics = @topics.to_a.sort_by { |topic| @topic_ids.index(topic.id) }
         render json: @topics

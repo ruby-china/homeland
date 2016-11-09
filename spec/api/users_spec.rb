@@ -157,7 +157,7 @@ describe 'API V3', 'users', type: :request do
                   last_reply_user_login created_at updated_at replies_count)
       expect(json['topics'][0]).to include(*fields)
       expect(json['topics'][0]['id']).to eq @topics[1].id
-      expect(json['topics'][1]['id']).to eq @topics[3].id
+      expect(json['topics'][1]['id']).to eq @topics[0].id
     end
   end
 

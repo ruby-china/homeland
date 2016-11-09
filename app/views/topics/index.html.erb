@@ -11,10 +11,14 @@
 
       <div class="panel-body item-list">
         <% if @suggest_topics.present? %>
-          <%= render partial: '/topics/topic', collection: @suggest_topics, locals: { suggest: true }, cached: -> (topic) { [topic, 'suggest'] } %>
+          <%= cache(['topics', 'suggest', @topics]) do %>
+            <%= render partial: '/topics/topic', collection: @suggest_topics, locals: { suggest: true } %>
+          <% end %>
         <% end %>
 
-        <%= render partial: '/topics/topic', collection: @topics, locals: { suggest: false }, cached: -> (topic) { [topic, 'normal'] } %>
+        <%= cache(['topics', 'normal', @topics]) do %>
+          <%= render partial: '/topics/topic', collection: @topics, locals: { suggest: false } %>
+        <% end %>
       </div>
 
       <div class="panel-footer clearfix">

@@ -23,15 +23,7 @@ module Admin
     end
 
     def klass
-      case params[:model]
-      when 'user' then User
-      when 'topic' then Topic
-      when 'reply' then Reply
-      when 'notification' then Notification
-      when 'photo' then Photo
-      else
-        raise "Bad params"
-      end
+      params[:model].camelize.safe_constantize
     end
   end
 end

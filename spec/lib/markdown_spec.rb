@@ -768,7 +768,7 @@ describe 'markdown' do
       end
 
       it 'should work' do
-        expect(doc.inner_html).to eq(out)
+        expect(doc.inner_html).to eq(out.strip)
       end
     end
   end

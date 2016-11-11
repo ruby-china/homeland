@@ -308,7 +308,7 @@ describe 'markdown' do
 
       context '@small_fish__ in ruby code block' do
         let(:raw) do
-          <<-MD.gsub(/^ {12}/, '')
+          <<~MD
             ```ruby
             @small_fish__ = 100
             ```
@@ -327,7 +327,7 @@ describe 'markdown' do
 
       context '@user in block code' do
         let(:raw) do
-          <<-MD.gsub(/^ {12}/, '')
+          <<~MD
             ```
             @user
             ```
@@ -340,7 +340,7 @@ describe 'markdown' do
 
       context '@var in coffeescript' do
         let(:raw) do
-          <<-MD.gsub(/^ {12}/, '')
+          <<~MD
             ```coffeescript
             @var
             ```
@@ -354,7 +354,7 @@ describe 'markdown' do
 
       context '=@var in sql' do
         let(:raw) do
-          <<-MD.gsub(/^ {12}/, '')
+          <<~MD
             ```sql
             select (@x:=@var+1) as i
             ```
@@ -418,7 +418,7 @@ describe 'markdown' do
 
       context ' #12f in block code' do
         let(:raw) do
-          <<-MD.gsub(/^ {12}/, '')
+          <<~MD
             ```
             #12f
             ```
@@ -480,7 +480,7 @@ describe 'markdown' do
 
       context ':apple: in block code' do
         let(:raw) do
-          <<-MD.gsub(/^ {12}/, '')
+          <<~MD
             ```
             :apple:
             ```
@@ -540,11 +540,12 @@ describe 'markdown' do
 
     describe 'tables' do
       let(:raw) do
-        %(
-| header 1 | header 3 |
-| -------- | -------- |
-| cell 1   | cell 2   |
-| cell 3   | cell 4   |)
+        <<~MD
+        | header 1 | header 3 |
+        | -------- | -------- |
+        | cell 1   | cell 2   |
+        | cell 3   | cell 4   |
+        MD
       end
 
       it { expect(doc.inner_html).to eq "<div class=\"table-responsive\"><table class=\"table table-bordered table-striped\">\n<tr>\n<th>header 1</th>\n<th>header 3</th>\n</tr>\n<tr>\n<td>cell 1</td>\n<td>cell 2</td>\n</tr>\n<tr>\n<td>cell 3</td>\n<td>cell 4</td>\n</tr>\n</table></div>" }
@@ -591,156 +592,160 @@ describe 'markdown' do
 
     describe 'Full example' do
       let(:raw) do
-        %(# Markdown
+        <<~MD
+        # Markdown
 
-Markdown is a text formatting syntax inspired on plain text email. In the words of its creator, [John Gruber][]:
+        Markdown is a text formatting syntax inspired on plain text email. In the words of its creator, [John Gruber][]:
 
-> The idea is that a Markdown-formatted document should be publishable as-is, as plain text, without looking like it’s been marked up with tags or formatting instructions.
+        > The idea is that a Markdown-formatted document should be publishable as-is, as plain text, without looking like it’s been marked up with tags or formatting instructions.
 
-[John Gruber]: http://daringfireball.net/
-
-
-## Syntax Guide - Heading 2
-
-### Strong and Emphasize - Heading 3
-
-#### Heading 4
-
-##### Heading 5
-
-###### Heading 6
-
-```
-*emphasize*    **strong**
-_emphasize_    __strong__
-```
-
-----
-
-**Shortcuts**
-
-- Add/remove bold:
-
-  ⌘-B for Mac / Ctrl-B for Windows and Linux
-
-- Add/remove italic:
-
-  ⌘-I for Mac / Ctrl-I for windows and Linux
-
-### List
-
-- Ruby
-  - Rails
-    - ActiveRecord
-- Go
-  - Gofmt
-  - Revel
-- Node.js
-  - Koa
-  - Express
-
-### Number List
-1. Node.js
-2. Ruby
-3. Go
-
-### Tables
-
-| header 1 | header 3 |
-| -------- | -------- |
-| cell 1   | cell 2   |
-| cell 3   | cell 4   |
-
-### Links
-
-Inline links:
-
-[link text](http://url.com/ "title")
-[link text](http://url.com/)
+        [John Gruber]: http://daringfireball.net/
 
 
-```rb
-class Foo
-end
-```)
+        ## Syntax Guide - Heading 2
+
+        ### Strong and Emphasize - Heading 3
+
+        #### Heading 4
+
+        ##### Heading 5
+
+        ###### Heading 6
+
+        ```
+        *emphasize*    **strong**
+        _emphasize_    __strong__
+        ```
+
+        ----
+
+        **Shortcuts**
+
+        - Add/remove bold:
+
+          ⌘-B for Mac / Ctrl-B for Windows and Linux
+
+        - Add/remove italic:
+
+          ⌘-I for Mac / Ctrl-I for windows and Linux
+
+        ### List
+
+        - Ruby
+          - Rails
+            - ActiveRecord
+        - Go
+          - Gofmt
+          - Revel
+        - Node.js
+          - Koa
+          - Express
+
+        ### Number List
+        1. Node.js
+        2. Ruby
+        3. Go
+
+        ### Tables
+
+        | header 1 | header 3 |
+        | -------- | -------- |
+        | cell 1   | cell 2   |
+        | cell 3   | cell 4   |
+
+        ### Links
+
+        Inline links:
+
+        [link text](http://url.com/ "title")
+        [link text](http://url.com/)
+
+
+        ```rb
+        class Foo
+        end
+        ```
+        MD
       end
       let(:out) do
-        %(<h2 id="Markdown">Markdown</h2>
-<p>Markdown is a text formatting syntax inspired on plain text email. In the words of its creator, <a href="http://daringfireball.net/">John Gruber</a>:</p>
+        <<~MD
+        <h2 id="Markdown">Markdown</h2>
+        <p>Markdown is a text formatting syntax inspired on plain text email. In the words of its creator, <a href="http://daringfireball.net/">John Gruber</a>:</p>
 
-<blockquote>
-<p>The idea is that a Markdown-formatted document should be publishable as-is, as plain text, without looking like it’s been marked up with tags or formatting instructions.</p>
-</blockquote>
-<h2 id="Syntax Guide - Heading 2">Syntax Guide - Heading 2</h2><h3 id="Strong and Emphasize - Heading 3">Strong and Emphasize - Heading 3</h3><h4 id="Heading 4">Heading 4</h4><h5 id="Heading 5">Heading 5</h5><h6 id="Heading 6">Heading 6</h6><pre class="highlight plaintext"><code>*emphasize*    **strong**
-_emphasize_    __strong__
-</code></pre>
+        <blockquote>
+        <p>The idea is that a Markdown-formatted document should be publishable as-is, as plain text, without looking like it’s been marked up with tags or formatting instructions.</p>
+        </blockquote>
+        <h2 id="Syntax Guide - Heading 2">Syntax Guide - Heading 2</h2><h3 id="Strong and Emphasize - Heading 3">Strong and Emphasize - Heading 3</h3><h4 id="Heading 4">Heading 4</h4><h5 id="Heading 5">Heading 5</h5><h6 id="Heading 6">Heading 6</h6><pre class="highlight plaintext"><code>*emphasize*    **strong**
+        _emphasize_    __strong__
+        </code></pre>
 
-<hr>
+        <hr>
 
-<p><strong>Shortcuts</strong></p>
+        <p><strong>Shortcuts</strong></p>
 
-<ul>
-<li>Add/remove bold:</li>
-</ul>
+        <ul>
+        <li>Add/remove bold:</li>
+        </ul>
 
-<p>⌘-B for Mac / Ctrl-B for Windows and Linux</p>
+        <p>⌘-B for Mac / Ctrl-B for Windows and Linux</p>
 
-<ul>
-<li>Add/remove italic:</li>
-</ul>
+        <ul>
+        <li>Add/remove italic:</li>
+        </ul>
 
-<p>⌘-I for Mac / Ctrl-I for windows and Linux</p>
-<h3 id="List">List</h3>
-<ul>
-<li>Ruby
+        <p>⌘-I for Mac / Ctrl-I for windows and Linux</p>
+        <h3 id="List">List</h3>
+        <ul>
+        <li>Ruby
 
-<ul>
-<li>Rails</li>
-<li>ActiveRecord</li>
-</ul>
-</li>
-<li>Go
+        <ul>
+        <li>Rails</li>
+        <li>ActiveRecord</li>
+        </ul>
+        </li>
+        <li>Go
 
-<ul>
-<li>Gofmt</li>
-<li>Revel</li>
-</ul>
-</li>
-<li>Node.js
+        <ul>
+        <li>Gofmt</li>
+        <li>Revel</li>
+        </ul>
+        </li>
+        <li>Node.js
 
-<ul>
-<li>Koa</li>
-<li>Express</li>
-</ul>
-</li>
-</ul>
-<h3 id="Number List">Number List</h3>
-<ol>
-<li>Node.js</li>
-<li>Ruby</li>
-<li>Go</li>
-</ol>
-<h3 id="Tables">Tables</h3><div class="table-responsive"><table class="table table-bordered table-striped">
-<tr>
-<th>header 1</th>
-<th>header 3</th>
-</tr>
-<tr>
-<td>cell 1</td>
-<td>cell 2</td>
-</tr>
-<tr>
-<td>cell 3</td>
-<td>cell 4</td>
-</tr>
-</table></div><h3 id="Links">Links</h3>
-<p>Inline links:</p>
+        <ul>
+        <li>Koa</li>
+        <li>Express</li>
+        </ul>
+        </li>
+        </ul>
+        <h3 id="Number List">Number List</h3>
+        <ol>
+        <li>Node.js</li>
+        <li>Ruby</li>
+        <li>Go</li>
+        </ol>
+        <h3 id="Tables">Tables</h3><div class="table-responsive"><table class="table table-bordered table-striped">
+        <tr>
+        <th>header 1</th>
+        <th>header 3</th>
+        </tr>
+        <tr>
+        <td>cell 1</td>
+        <td>cell 2</td>
+        </tr>
+        <tr>
+        <td>cell 3</td>
+        <td>cell 4</td>
+        </tr>
+        </table></div><h3 id="Links">Links</h3>
+        <p>Inline links:</p>
 
-<p><a href="http://url.com/" title="title">link text</a>
-<a href="http://url.com/">link text</a></p>
-<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">Foo</span>
-<span class="k">end</span>
-</code></pre>)
+        <p><a href="http://url.com/" title="title">link text</a>
+        <a href="http://url.com/">link text</a></p>
+        <pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">Foo</span>
+        <span class="k">end</span>
+        </code></pre>
+        MD
       end
 
       it 'should work' do

@@ -4,7 +4,7 @@ site_configs: &site_configs
     <a href="/" class="navbar-brand"><b>Home</b>land</a>
   # 导航栏扩展菜单
   navbar_html: >
-    <li><a href="/topics/new">发帖</a>
+    <li><a href="/topics/new">发帖</a></li>
   index_html: >
     <div style="text-align:center;"></div>
   wiki_index_html: >

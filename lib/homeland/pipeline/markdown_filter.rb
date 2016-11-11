@@ -39,6 +39,7 @@ module Homeland
 
         def block_code(code, lang)
           lang.downcase! if lang.is_a?(String)
+          code = code.strip_heredoc
           super(code, lang)
         end
 

@@ -140,6 +140,25 @@ describe 'markdown' do
           )
         end
 
+        it 'should strip code indent' do
+          code = <<~CODE
+          ```
+                def foo
+                  puts "Hahah"
+                end
+          ```
+          CODE
+
+          expect_code = <<~CODE
+          ```
+          def foo
+            puts "Hahah"
+          end
+          ```
+          CODE
+          expect(Homeland::Markdown.call(code)).to eq(Homeland::Markdown.call(expect_code))
+        end
+
         it 'should not filter underscore' do
           expect(Homeland::Markdown.call('ruby_china_image `ruby_china_image`')).to eq('<p>ruby_china_image <code>ruby_china_image</code></p>')
           expect(Homeland::Markdown.call("```\nruby_china_image\n```")).to eq(

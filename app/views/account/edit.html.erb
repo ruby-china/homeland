@@ -17,6 +17,7 @@
         </div>
         <script type="text/javascript">
         // Use HTTP Request Headers "Pragma: no-cache" for force update image cache.
+        // https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.32
         _.each($('img.media-object'), function(img) {
           if (!/avatar\-/.test($(img).attr("class"))) {
             return;
@@ -25,7 +26,7 @@
 /*          console.log(url);*/
           $.ajax({
             url: url,
-            headers: { 'Pragma': 'no-cache' },
+            headers: { 'Pragma': 'no-cache', 'Cache-Control': 'no-cache' },
             success: function (res) { $(img).attr('src', url); }
           });
         });

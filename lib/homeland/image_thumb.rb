@@ -8,12 +8,13 @@ module Homeland
     attr_reader :filename
     attr_reader :version
 
-    def initialize(filename, version)
+    def initialize(filename, version, pragma: false)
       @filename = filename
       @version = version
       @outpath = Rails.root.join('tmp', 'cache', 'uploads-thumb', "#{filename}-#{version}")
 
-      generate! unless File.exists? outpath
+      notfound = !File.exists?(outpath)
+      generate! if pragma || notfound
     end
 
     private

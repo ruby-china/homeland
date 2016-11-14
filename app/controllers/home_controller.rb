@@ -12,7 +12,8 @@ class HomeController < ApplicationController
     # DO NOT use this in production environment.
     format, version = params[:format].split("!")
     filename = [params[:path], format].join(".")
-    thumb = Homeland::ImageThumb.new(filename, version)
+    pragma = request.headers['Pragma'] == 'no-cache'
+    thumb = Homeland::ImageThumb.new(filename, version, pragma: pragma)
     send_file thumb.outpath, type: 'image/jpeg', disposition: 'inline'
   end
 

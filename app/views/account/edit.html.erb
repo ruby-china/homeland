@@ -9,6 +9,27 @@
         <%= render "shared/error_messages", target: resource if params[:by].blank? %>
         <%= f.input :name %>
         <%= f.input :avatar %>
+        <div class="form-group avatar-preview">
+          <%= user_avatar_tag(@user, :lg, link: false) %>
+          <%= user_avatar_tag(@user, :md, link: false) %>
+          <%= user_avatar_tag(@user, :sm, link: false) %>
+          <%= user_avatar_tag(@user, :xs, link: false) %>
+        </div>
+        <script type="text/javascript">
+        // Use HTTP Request Headers "Pragma: no-cache" for force update image cache.
+        _.each($('img.media-object'), function(img) {
+          if (!/avatar\-/.test($(img).attr("class"))) {
+            return;
+          }
+          var url = $(img).attr("src");
+/*          console.log(url);*/
+          $.ajax({
+            url: url,
+            headers: { 'Pragma': 'no-cache' },
+            success: function (res) { $(img).attr('src', url); }
+          });
+        });
+        </script>
         <%= f.input :email, input_html: { class: "span4", disabled: (resource.email_locked?) } %>
         <div class="form-group">
           <div class="checkbox">
@@ -65,12 +86,6 @@
     </div>
   </div>
   <div class="sidebar col-md-3 hide-ios">
-    <div class="panel panel-default" style="text-align:center;">
-      <div class="panel-body">
-        <%= user_avatar_tag(@user, :lg, link: false, timestamp: true) %>
-      </div>
-    </div>
-
     <% if Setting.has_module? :github %>
     <div class="panel panel-default">
       <div class="panel-heading"><%= t("users.bind_another_account")%></div>

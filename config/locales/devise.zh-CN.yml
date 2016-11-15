@@ -4,7 +4,7 @@
       not_found: "没有找到。"
       already_confirmed: "已经确认。"
       not_locked: "没有锁定。"
-      not_saved: "有 %{count} 个错误发生导致「%{model}」无法被保存。"
+      not_saved: "有 %{count} 个错误发生导致「%{resource}」无法被保存。"
   devise:
     omniauth_callbacks:
       user:

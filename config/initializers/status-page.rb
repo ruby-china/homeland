@@ -1,8 +1,10 @@
-StatusPage.configure do
-  self.use :cache
-  self.use :redis
-  self.use :sidekiq
-  self.use :database
+redis_config = Rails.application.config_for(:redis)
 
-  self.interval = 10
+StatusPage.configure do
+  use :cache
+  use :redis, url: "redis://#{redis_config['host']}:#{redis_config['port']}/0"
+  use :sidekiq
+  use :database
+
+  interval = 10
 end

@@ -1,7 +1,7 @@
 module Homeland
   class << self
     def version
-      '2.3.0'
+      '2.3.1'
     end
 
     def file_store

@@ -7,7 +7,7 @@
       <div class="node media">
         <label class="media-left"><%= section.name %></label>
         <span class="nodes media-body">
-          <% section.nodes.each do |node| %>
+          <% section.nodes.sorted.each do |node| %>
             <span class="name"><%= link_to(node.name, node_topics_path(node), title: node.name, data: { id: node.id })%></span>
           <% end %>
         </span>

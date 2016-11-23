@@ -14,7 +14,11 @@ class HomeController < ApplicationController
     filename = [params[:path], format].join(".")
     pragma = request.headers['Pragma'] == 'no-cache'
     thumb = Homeland::ImageThumb.new(filename, version, pragma: pragma)
-    send_file thumb.outpath, type: 'image/jpeg', disposition: 'inline'
+    if thumb.exists?
+      send_file thumb.outpath, type: 'image/jpeg', disposition: 'inline'
+    else
+      render plain: 'File not found', status: 404
+    end
   end
 
   def api

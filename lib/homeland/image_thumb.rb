@@ -10,19 +10,26 @@ module Homeland
 
     def initialize(filename, version, pragma: false)
       @filename = filename
-      @version = version
-      @outpath = Rails.root.join('tmp', 'cache', 'uploads-thumb', "#{filename}-#{version}")
+      @version  = version
+      @outpath  = Rails.root.join('tmp', 'cache', 'uploads-thumb', "#{filename}-#{version}")
+      @exists   = false
 
       notfound = !File.exists?(outpath)
       generate! if pragma || notfound
+    end
+
+    def exists?
+      File.exists? outpath
     end
 
     private
 
     def generate!
       filepath = Rails.root.join('public', 'uploads', filename)
+      return unless File.exists? filepath
       dest_dir = File.dirname(outpath)
       FileUtils.mkdir_p dest_dir unless File.exists? dest_dir
+
 
       @image = MiniMagick::Image.open(filepath)
       if resize?

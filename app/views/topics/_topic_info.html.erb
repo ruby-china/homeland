@@ -7,7 +7,7 @@
     <% content_for :header do %>
       <div class="navbar-nav">
         <div class="navbar-topic-title">
-          <a href="#" class="topic-title pull-left" data-type="top">
+          <a href="#" class="topic-title pull-left" title="<%= topic.title %>" data-type="top">
             <h1><%= topic.title %><%= topic_close_tag(topic) %></h1>
           </a>
           <span class="node"><%= topic.node_name %></span>

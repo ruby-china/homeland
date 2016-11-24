@@ -41,7 +41,6 @@
   }
 }
 
-
 @media (min-width: 767px) {
   .navbar {
     &.fixed-title {
@@ -52,12 +51,14 @@
     .navbar-topic-title {
       display: none;
       height: 50px;
+      overflow: hidden;
 
-      a {
+      a.topic-title {
         display: inline;
         text-decoration: none;
         overflow: hidden;
         line-height: 0;
+        max-width: 400px;
         color: #000;
         &:hover,
         &:active,
@@ -70,6 +71,16 @@
       .node { line-height: 50px; margin-left: 18px; color: $blue; }
       h1 {
         margin: 0; padding: 0; font-size: 18px; line-height: 50px;
+      }
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .navbar {
+    .navbar-topic-title {
+      a.topic-title {
+        max-width: 780px;
       }
     }
   }

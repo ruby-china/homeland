@@ -98,7 +98,7 @@ gem 'postmark-rails', '0.12.0'
 gem 'kgio'
 gem 'dalli', '2.7.4'
 
-gem 'unicorn', '5.0.0'
+gem 'unicorn'
 
 gem 'parallel'
 

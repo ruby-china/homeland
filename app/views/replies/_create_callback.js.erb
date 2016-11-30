@@ -3,10 +3,10 @@ if($("#replies").length == 0){
 } else {
   if ($(".reply[data-id=<%= reply.id %>]").length == 0) {
     var current_floor = parseInt($("#replies").data("last-floor")) + 1;
-    var dom = $('<%= j(render("reply", reply: reply, reply_counter: @topic.replies_count - 1, display_edit: true)) %>');
+    var dom = $('<%= j(render("reply", reply: reply, reply_counter: reply.topic.replies_count - 1, display_edit: true)) %>');
     $("#replies .items").append(dom);
-    $("#replies .total b").text('<%= @replies_count %>');
-    $('#topic-sidebar .total b').text('<%= @replies_count %>');
+    $("#replies .total b").text('<%= reply.topic.replies_count %>');
+    $('#topic-sidebar .total b').text('<%= reply.topic.replies_count %>');
     dom.find(".reply-floor").text(current_floor + " 楼");
     dom.find("a.edit").css("display", "inline-block");
     dom.addClass('light');

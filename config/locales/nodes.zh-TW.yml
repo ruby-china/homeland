@@ -1,3 +1,5 @@
 "zh-TW":
   nodes:
     hot_node: "熱門節點"
+    add_image: "上傳圖片"
+    insert_codes: "插入代碼"

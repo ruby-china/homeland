@@ -1,15 +1,10 @@
-<%= simple_form_for(@note, html: { class: "" }) do |f| %>
+<%= simple_form_for @note, html: { class: "form" } do |f| %>
     <%= render "shared/error_messages", target: @note %>
 
     <div class="form-group">
-      <div class="editor-toolbar">
-        <ul class="nav nav-pills">
-          <li class="edit active"><%= link_to(t("common.editor_toolbar_edit"), "#") %></li>
-          <li class="preview"><%= link_to(t("common.editor_toolbar_preview"), "#") %></li>
-        </ul>
-      </div>
+      <%= render "editor_toolbar" %>
 
-      <%= f.text_area :body, rows: 20, class: 'form-control topic-editor' %>
+      <%= f.text_area :body, rows: 20, class: 'form-control note-editor' %>
 
       <p class="help-block">
         <%= t("notes.please_use") %> <a href="<%= markdown_path %>" target="_blank">Markdown</a> <%= t("notes.document_format_to_write") %>

@@ -83,10 +83,7 @@ window.EmojiModalView = Backbone.View.extend
     target = $(e.currentTarget)
     code = target.data('code')
     @saveFavoritEmoji(code)
-    if window._topicView
-      window._topicView.insertString(":#{code}: ")
-    else if window._noteView
-      window._noteView.insertString(":#{code}: ")
+    window._topicView.insertString(":#{code}: ")
     return false
 
   preview: (e) ->

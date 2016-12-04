@@ -7,6 +7,7 @@ window.NoteView = Backbone.View.extend
   initialize: (opts) ->
     @parentView = opts.parentView
     $("<div id='preview' class='markdown' style='display:none;'></div>").insertAfter( $('#note_body') )
+    window._editorToolBar = new EditorToolbar()
 
   toggleEditView: (e) ->
     $(e.target).parent().addClass('active')

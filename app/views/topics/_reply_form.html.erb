@@ -1,4 +1,4 @@
-<%= render "editor_toolbar" %>
+<%= render "/shared/editor_toolbar" %>
 <%= form_for(Reply.new, remote: true, url: topic_replies_path(@topic)) do |f| %>
 
   <div class="form-group">

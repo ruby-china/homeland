@@ -4,14 +4,11 @@
   <%= f.input :slug, hint: "http://#{Setting.domain}/wiki/:slug"%>
   <%= f.input :title, input_html: { class: "xxlarge" } %>
 
-  <div class="form-group">
-    <div class="editor-toolbar">
-      <ul class="nav nav-pills">
-        <li class="edit active"><%= link_to(t("common.editor_toolbar_edit"), "#") %></li>
-        <li class="preview"><%= link_to(t("common.editor_toolbar_preview"), "#") %></li>
-      </ul>
-    </div>
+  <div class="edit-tools">
+    <%= render "/shared/editor_toolbar" %>
+  </div>
 
+  <div class="form-group">
     <%= f.text_area :body, rows: 30, class: 'form-control topic-editor' %>
     <p class="help-block">
       请使用 Markdown 格式编写,可以试试用 <a href='https://www.typora.io' target='_blank'>Typora</a> 这个 App 来编写。

@@ -57,6 +57,8 @@
     access_denied: "訪問被拒絕，你可能沒有權限或未登錄。"
     editor_toolbar_edit: "編輯"
     editor_toolbar_preview: "預覽"
+    editor_add_image: "上傳圖片"
+    editor_insert_codes: "插入代碼"
     node: "節點"
     by: "由"
     at: "在"

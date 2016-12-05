@@ -47,8 +47,8 @@ site_configs: &site_configs
 
 defaults: &defaults
   <<: *site_configs
-  # Plugin module, [topic, home, wiki, site, note, team, github]
-  modules: 'topic,home,wiki,site,note,team,github'
+  # Plugin module, [topic, home, wiki, site, note, team, github,editor.code]
+  modules: 'topic,home,wiki,site,note,team,github,editor.code'
   app_name: "Homeland"
   domain: "localhost:3000"
   https: false

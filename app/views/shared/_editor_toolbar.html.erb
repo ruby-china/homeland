@@ -1,12 +1,14 @@
 <div class="editor-toolbar">
   <div class="opts pull-right">
     <a href="#" class="pickup-emoji"><i class="fa fa-smile-o"></i></a>
+    <% if Setting.has_module? 'editor.code' %>
     <span class="dropdown dropdown-small" id="editor-toolbar-insert-code">
       <a href="#editor-toolbar-insert-code" data-toggle="dropdown" title="<%= t("common.editor_insert_codes") %>" href="#editor-toolbar-insert-code"><i class="fa fa-code"></i></a>
       <ul class="dropdown-menu insert-codes" role="menu">
         <%= insert_code_menu_items_tag %>
       </ul>
     </span>
+    <% end %>
     <%= link_to(icon_tag("image"), "#", id: "editor-upload-image", rel: "twipsy", title: t("common.editor_add_image") )%>
   </div>
   <ul class="nav nav-pills" style="clear:none;">

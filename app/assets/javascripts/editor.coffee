@@ -10,7 +10,6 @@ window.Editor = Backbone.View.extend
     @initComponents()
     @initDropzone()
 
-
   initDropzone: ->
     self = @
     editor = $("textarea.topic-editor")

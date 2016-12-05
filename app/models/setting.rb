@@ -38,6 +38,7 @@ class Setting < RailsSettings::Base
     end
 
     def has_admin?(email)
+      return false if self.admin_emails.blank?
       self.admin_emails.split(SEPARATOR_REGEXP).include?(email)
     end
 

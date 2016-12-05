@@ -16,6 +16,8 @@ config/thin.yml
 config/redis.yml
 config/mailer_daemon.yml
 config/secrets.yml
+public/photo/**/*
+public/user/**/*
 public/uploads/**/*
 public/system/**/*
 public/topics

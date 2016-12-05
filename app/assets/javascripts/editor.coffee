@@ -1,4 +1,4 @@
-window.EditorToolbar = Backbone.View.extend
+window.Editor = Backbone.View.extend
   el: '.editor-toolbar'
 
   events:

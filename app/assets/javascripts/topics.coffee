@@ -241,7 +241,7 @@ window.TopicView = Backbone.View.extend
     $("body[data-controller-name='topics'] #topic_title").focus()
 
     # init editor toolbar
-    window._editorToolBar = new EditorToolbar({moduleType: "topics"})
+    window._editor = new Editor()
 
   initCableUpdate: () ->
     self = @

@@ -11,7 +11,7 @@ window.PageView = Backbone.View.extend
   initialize: (opts) ->
     @parentView = opts.parentView
     $("<div id='preview' class='markdown form-control'></div>").insertAfter( $('#page_body') )
-    window._editorToolBar = new EditorToolbar()
+    window._editor = new Editor()
 
   toggleEditView: (e) ->
     $(e.target).parent().addClass('active')

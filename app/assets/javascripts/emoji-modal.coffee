@@ -83,7 +83,7 @@ window.EmojiModalView = Backbone.View.extend
     target = $(e.currentTarget)
     code = target.data('code')
     @saveFavoritEmoji(code)
-    window._editorToolBar.insertString(":#{code}: ")
+    window._editor.insertString(":#{code}: ")
     return false
 
   preview: (e) ->

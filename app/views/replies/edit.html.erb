@@ -6,7 +6,7 @@
     <%= simple_form_for([@topic, @reply], remote: true, html: { class: "", tb: 'edit-reply' }) do |f| %>
       <%= render "shared/error_messages", target: @reply %>
       <div class="edit-tools">
-        <%= render "/topics/editor_toolbar" %>
+        <%= render "/shared/editor_toolbar" %>
       </div>
       <div class="form-group">
         <%= f.text_area :body, class: "topic-editor form-control", rows: 10 %>

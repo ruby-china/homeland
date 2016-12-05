@@ -58,6 +58,8 @@
     access_denied: "Access denied, Please sign in and make sure you have proper permission."
     editor_toolbar_edit: "Edit"
     editor_toolbar_preview: "Preview"
+    editor_add_image: "Upload image"
+    editor_insert_codes: "Insert Codes"
     by: "by"
     at: "on"
     hot_topics: "Hot topics"

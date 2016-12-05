@@ -22,8 +22,6 @@
     update_topic_success: "话题修改成功。"
     reply_success: "回复成功。"
     reply_this_floor: "回复此楼"
-    add_image: "上传图片"
-    insert_codes: "插入代码"
     topic_was_deleted: "[该话题已被删除]"
     have_no_new_reply: "在你读过以后还没有新变化"
     has_new_replies: "有新内容"

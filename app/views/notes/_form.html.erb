@@ -1,13 +1,11 @@
 <%= simple_form_for(@note, html: { class: "" }) do |f| %>
     <%= render "shared/error_messages", target: @note %>
 
+    <div class="edit-tools">
+      <%= render "/shared/editor_toolbar" %>
+    </div>
+
     <div class="form-group">
-      <div class="editor-toolbar">
-        <ul class="nav nav-pills">
-          <li class="edit active"><%= link_to(t("common.editor_toolbar_edit"), "#") %></li>
-          <li class="preview"><%= link_to(t("common.editor_toolbar_preview"), "#") %></li>
-        </ul>
-      </div>
 
       <%= f.text_area :body, rows: 20, class: 'form-control topic-editor' %>
 

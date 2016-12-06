@@ -18,7 +18,7 @@ module APIV3Support
     def default_headers
       # Providing JSON data, default `application/x-www-form-urlencoded`
       # https://www.relishapp.com/rspec/rspec-rails/docs/request-specs/request-spec#providing-json-data
-      @default_headers ||= { 'CONTENT_TYPE" => "application/json' }
+      @default_headers ||= { 'CONTENT_TYPE' => 'application/json' }
     end
 
     def default_parameters

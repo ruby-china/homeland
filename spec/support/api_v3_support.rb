@@ -16,7 +16,9 @@ module APIV3Support
     end
 
     def default_headers
-      @default_headers ||= {}
+      # Providing JSON data, default `application/x-www-form-urlencoded`
+      # https://www.relishapp.com/rspec/rspec-rails/docs/request-specs/request-spec#providing-json-data
+      @default_headers ||= { 'CONTENT_TYPE" => "application/json' }
     end
 
     def default_parameters
@@ -30,12 +32,19 @@ module APIV3Support
           # override empty params and headers with default
           parameters = combine_parameters(parameters, default_parameters)
           headers = combine_parameters(headers, default_headers)
+          if [:post, :put, :delete].include?(__callee__)
+            parameters = jsonify(parameters)
+          end
           super(path, params: parameters, headers: headers)
         end
       EOV
     end
 
     private
+
+    def jsonify(parameters)
+      JSON.dump(parameters)
+    end
 
     def combine_parameters(argument, default)
       # if both of them are hashes combine them

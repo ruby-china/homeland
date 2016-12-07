@@ -1,7 +1,5 @@
 # Devise User Controller
 class AccountController < Devise::RegistrationsController
-  protect_from_forgery
-
   def edit
     @user = current_user
   end

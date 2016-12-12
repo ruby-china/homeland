@@ -44,6 +44,8 @@ defaults: &defaults
   app_name: "Homeland"
   domain: "localhost:3000"
   https: false
+  default_locale: 'zh-CN'
+  auto_locale: false
   admin_emails: >
     admin@admin.com
   google_analytics_key: ""

@@ -142,10 +142,11 @@ class ApplicationController < ActionController::Base
   private
 
   def user_locale
-    params[:locale] || cookies[:locale] || http_head_locale || I18n.default_locale
+    params[:locale] || cookies[:locale] || http_head_locale || Setting.default_locale || I18n.default_locale
   end
 
   def http_head_locale
+    return nil if Setting.auto_locale == false
     http_accept_language.language_region_compatible_from(I18n.available_locales)
   end
 end

@@ -3,21 +3,35 @@
   <%= f.input :login %>
   <%= f.input :name %>
   <%= f.input :email, as: :email, input_html: { class: "xxlarge" } %>
+  <% if Setting.has_profile_field? :location %>
   <%= f.input :location %>
+  <% end %>
+  <% if Setting.has_module? :github %>
   <%= f.input :github %>
+  <% end %>
+  <% if Setting.has_profile_field? :twitter %>
   <%= f.input :twitter %>
+  <% end %>
   <%= f.input :email_public, as: :boolean %>
+  <% if Setting.has_profile_field? :company %>
   <%= f.input :company %>
+  <% end %>
+  <% if Setting.has_profile_field? :tagline %>
   <%= f.input :tagline, input_html: { class: "span8" } %>
+  <% end %>
   <%= f.input :bio, as: :text, input_html: { class: "span8", style: "height:60px;" } %>
+  <% if Setting.has_profile_field? :website %>
   <%= f.input :website, as: :url, input_html: { class: "xxlarge" } %>
+  <% end %>
   <%= f.input :avatar %>
-  <div class="form-group clearfix">
+  <div class="form-group">
     <%= user_avatar_tag(@user, :lg) %>
   </div>
   <% if @user.user_type == :user %>
   <%= f.input :verified, as: :boolean, hint: t("admin.users.trust_user_can_modify_wiki") %>
+  <% if Setting.has_profile_field? :hr %>
   <%= f.input :hr, as: :boolean, hint: t("admin.users.hr_user_can_create_topic") %>
+  <% end %>
   <%= f.input :state, as: :select, collection: User.states.collect { |s| [s[0], s[0]] } %>
   <%= f.input :sign_in_count, readonly: true %>
   <%= f.input :last_sign_in_at, as: :string, readonly: true %>
@@ -37,15 +51,16 @@
     </table>
   </div>
   <% end %>
-  <div class="form-group">
-
-    <% if !@user.deleted? %>
-      <div class="pull-right">
-        <%= link_to '删除此用户', admin_user_path(@user.id), 'data-confirm' => '警告！此动作无法撤销，确定要删除么?', method: :delete, class: "btn btn-danger"  %>
-      </div>
-    <% end %>
-    <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving") %>
-    或者
-    <%= link_to 'Back', admin_users_path %>
+  <div class="row">
+    <div class="col-sm-6">
+      <%= f.submit t("common.save"), class: "btn btn-lg btn-block btn-primary", 'data-disable-with' => t("common.saving") %>
+    </div>
+    <div class="col-sm-6">
+      <% if !@user.deleted? %>
+        <div class="pull-right">
+          <%= link_to '删除此用户', admin_user_path(@user.id), 'data-confirm' => '警告！此动作无法撤销，确定要删除么?', method: :delete, class: "btn btn-danger"  %>
+        </div>
+      <% end %>
+    </div>
   </div>
 <% end %>

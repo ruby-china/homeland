@@ -35,7 +35,7 @@
 
         <div class="form-group">
           <%= f.submit t('users.submit_new_user'), class: "btn btn-lg btn-primary", 'data-disable-with' => t("common.submitting") %>
-          <%= link_to t("common.login"), new_session_path(resource_name), class: "btn btn-lg btn-default" %>
+          <%= link_to t("common.login"), new_session_path(resource_name), class: "btn btn-lg btn-default hide-ios" %>
         </div>
         <% end %>
       </div>

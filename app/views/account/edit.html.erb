@@ -37,8 +37,12 @@
             <label for="user_email_public" class="checkbox"><%= f.check_box :email_public %> <%= t("users.email_permission")%></label>
           </div>
         </div>
-        <%= f.input :location  %>
-        <%= f.input :company %>
+        <% if Setting.has_profile_field? :location %>
+          <%= f.input :location  %>
+        <% end %>
+        <% if Setting.has_profile_field? :company %>
+          <%= f.input :company %>
+        <% end %>
         <% if Setting.has_module? :github %>
         <div class="form-group">
           <%= f.label :github, class: 'control-label' %>
@@ -48,6 +52,7 @@
           </div>
         </div>
         <% end %>
+        <% if Setting.has_profile_field? :twitter %>
         <div class="form-group">
           <%= f.label :twitter, class: 'control-label' %>
           <div class="input-group">
@@ -55,8 +60,13 @@
             <%= f.text_field :twitter, class: "form-control", placeholder: I18n.t('simple_form.placeholders.user.yourname') %>
           </div>
         </div>
-        <%= f.input :website, type: :url, input_html: { placeholder: "http://" } %>
-        <%= f.input :tagline %>
+        <% end %>
+        <% if Setting.has_profile_field? :website %>
+          <%= f.input :website, type: :url, input_html: { placeholder: "http://" } %>
+        <% end %>
+        <% if Setting.has_profile_field? :tagline %>
+          <%= f.input :tagline %>
+        <% end %>
         <%= f.input :bio, as: :text, input_html: { class: "xxlarge", rows: "6" } %>
         <div class="form-group hide-ios">
           <button type="submit" class="btn btn-primary" data-disable-with="<%= t("common.saving") %>"><%= t("users.update_profile")%></button>

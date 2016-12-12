@@ -27,7 +27,7 @@ FactoryGirl.define do
   end
 
   factory :newbie, parent: :user do
-    created_at 1.days.ago
+    created_at 1.hours.ago
   end
 
   factory :blocked_user, parent: :user do

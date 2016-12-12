@@ -228,6 +228,20 @@ table.node-topics {
   }
 }
 
+.user-profile-fields {
+  margin-top: 20px;
+  border-top: 1px solid #ddd;
+  padding-top: 20px;
+
+  .field {
+    padding: 2px 0;
+    label { color: #666; display: inline-block; width: 100px; margin-right: 10px; }
+    .value {
+      a { text-decoration: underline; }
+    }
+  }
+}
+
 #user_github_repos {
   .more { text-align:right; }
   ul { margin:0; }

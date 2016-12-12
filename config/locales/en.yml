@@ -50,6 +50,21 @@ en:
         github: "GitHub"
         remember_me: "Remember me"
         current_password: "Current Password"
+        profile_fields:
+          qq: QQ
+          alipay: Alipay
+          paypal: PayPal
+          douban: Douban
+          weibo: Weibo
+          wechat: Wechat
+          dingding: DingDing
+          aliwangwang: WangWang
+          facebook: Facebook
+          instagram: Instragram
+          dribbble: Dribbble
+          battle_tag: BattleTag
+          psn_id: PSN ID
+          steam_id: Stream ID
       topic:
         title: "Title"
         user_id: "User"

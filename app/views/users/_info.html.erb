@@ -31,5 +31,17 @@
         displayLegend: true
       });
     </script>
+
+    <% if @user.profile_fields.present? %>
+    <div class="user-profile-fields">
+      <% @user.profile_fields.each_key do |field| %>
+        <% next if @user.profile_field(field).blank? %>
+        <div class="field">
+          <label><%= User.profile_field_label(field) %></label>
+          <span class="value"><%= auto_link @user.full_profile_field(field), link: :urls %></span>
+        </div>
+      <% end %>
+    </div>
+    <% end %>
   </div>
 </div>

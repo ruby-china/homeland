@@ -6,6 +6,10 @@ class AccountController < Devise::RegistrationsController
 
   def update
     super
+
+    if params[:user][:profiles]
+      current_user.update_profile_fields(params[:user][:profiles])
+    end
   end
 
   # POST /resource

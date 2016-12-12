@@ -29,6 +29,21 @@
         github: "GitHub"
         remember_me: 記住登陸狀態
         current_password: 舊密碼
+        profile_fields:
+          qq: QQ
+          alipay: 支付寶
+          paypal: PayPal
+          douban: 豆瓣
+          weibo: 微博
+          wechat: 微信
+          dingding: 釘釘
+          aliwangwang: 旺旺
+          facebook: Facebook
+          instagram: Instragram
+          dribbble: Dribbble
+          battle_tag: BattleTag
+          psn_id: PSN ID
+          steam_id: Stream ID
       topic:
         title: "標題"
         user_id: "用戶"

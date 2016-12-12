@@ -43,4 +43,17 @@ describe Setting, type: :model do
       expect(Setting.has_module?('bbb')).to eq false
     end
   end
+
+  describe '#has_profile_field?' do
+    it 'should work' do
+      allow(Setting).to receive(:profile_fields).and_return("all")
+      expect(Setting.has_profile_field?("foo")).to eq true
+      allow(Setting).to receive(:profile_fields).and_return("weibo,facebook\ndouban\nqq")
+      expect(Setting.has_profile_field?('weibo')).to eq true
+      expect(Setting.has_profile_field?('facebook')).to eq true
+      expect(Setting.has_profile_field?('douban')).to eq true
+      expect(Setting.has_profile_field?('qq')).to eq true
+      expect(Setting.has_profile_field?('ccc')).to eq false
+    end
+  end
 end

@@ -11,6 +11,7 @@ class User < ApplicationRecord
   include TopicFavorate
   include GithubRepository
   include UserCallbacks
+  include ProfileFields
 
   acts_as_cached version: 4, expires_in: 1.week
 

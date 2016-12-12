@@ -20,6 +20,7 @@ class Setting < RailsSettings::Base
     before_topic_html
     node_ids_hide_in_topics_index
     reject_newbie_reply_in_the_evening
+    newbie_limit_time
     ban_words_on_reply
     newbie_notices
     tips

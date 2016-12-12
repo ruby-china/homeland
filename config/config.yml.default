@@ -35,15 +35,7 @@ site_configs: &site_configs
     提示1
     提示2
   newbie_notices: >
-    <p>为提高社区质量，防止新人一来就发帖提问，新用户需要达到下面条件才可发帖：</p>
-    <ol style="color:#ad2b2d;">
-      <li>注册时间超过一个月；</li>
-      <li>回帖数量必须达到 10 帖以上；</li>
-    </ol>
-    <p>请在新人阶段多浏览，看看其他老用户是如何在社区里面分享与解决问题的。</p>
-  reject_newbie_reply_in_the_evening: false
-  apns_pem: ""
-  blacklist_ips: ""
+    <p>为提高社区质量，防止新人一来就发帖提问，注册时间超过 1 天才能发帖，请在新人阶段多浏览，看看其他老用户是如何在社区里面分享与解决问题的。</p>
 
 defaults: &defaults
   <<: *site_configs
@@ -75,6 +67,10 @@ defaults: &defaults
     enable_starttls_auto: true
   github_token: "91726ee4170d8e2679ec"
   github_secret: "13c7e55e8e53c57a399181e96ea3a55a3fdd9c7c"
+  apns_pem: ""
+  blacklist_ips: ""
+  reject_newbie_reply_in_the_evening: false
+  newbie_limit_time: 86400
 
 development:
   <<: *defaults

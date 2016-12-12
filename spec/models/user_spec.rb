@@ -182,20 +182,38 @@ describe User, type: :model do
   describe 'newbie?' do
     it 'should true when user created_at less than a week' do
       user.verified = false
-      user.created_at = 6.days.ago
+      allow(Setting).to receive(:newbie_limit_time).and_return(1.days.to_i)
+      user.created_at = 6.hours.ago
       expect(user.newbie?).to be_truthy
-    end
-
-    it 'should false when more than a week and have 10+ replies' do
-      user.verified = false
-      user.created_at = 10.days.ago
-      user.replies_count = 10
-      expect(user.newbie?).to be_falsey
     end
 
     it 'should false when user is verified' do
       user.verified = true
       expect(user.newbie?).to be_falsey
+    end
+
+    context 'Unverfied user with 2.days.ago registed.' do
+      let(:user) { build(:user, verified: false, created_at: 2.days.ago) }
+
+      it 'should tru with 1 days limit' do
+        allow(Setting).to receive(:newbie_limit_time).and_return(1.days.to_i)
+        expect(user.newbie?).to be_falsey
+      end
+
+      it 'should false with 3 days limit' do
+        allow(Setting).to receive(:newbie_limit_time).and_return(3.days.to_i)
+        expect(user.newbie?).to be_truthy
+      end
+
+      it 'should false with nil limit' do
+        allow(Setting).to receive(:newbie_limit_time).and_return(nil)
+        expect(user.newbie?).to be_falsey
+      end
+
+      it 'should false with 0 limit' do
+        allow(Setting).to receive(:newbie_limit_time).and_return('0')
+        expect(user.newbie?).to be_falsey
+      end
     end
   end
 

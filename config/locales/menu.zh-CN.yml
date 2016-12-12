@@ -129,3 +129,4 @@
     ban_words_on_reply: "回帖禁止内容（一行一个）"
     apns_pem: "Apple Push 证书内容，保持为空将不会触发 Push 发送动作"
     blacklist_ips: "黑名单 IP 列表，将会直接拦截请求（一行一个）"
+    newbie_limit_time: "新注册用户（新手）限制期，单位秒（0 不限制），在新手期不能创建新话题，仅能回帖"

@@ -156,7 +156,9 @@ class User < ApplicationRecord
   # 是否能发帖
   def newbie?
     return false if verified? || hr?
-    created_at > 1.week.ago
+    t = Setting.newbie_limit_time.to_i
+    return false if t == 0
+    created_at > t.seconds.ago
   end
 
   def roles?(role)

@@ -8,6 +8,8 @@ en:
       user:
         location: "Please input city with chinese"
         email: "Can't change after saved."
+      doorkeeper_application:
+        level: "Application level, this value will effect OAuth 2 accessToken expires, [0 - 1 day | 1 - 7 days | 2 - 14 days | 3 - 30 days]"
     labels:
       user:
         name: "Name"

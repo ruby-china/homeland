@@ -3,7 +3,16 @@ module Admin
     before_action :set_reply, only: [:show, :edit, :update, :destroy]
 
     def index
-      @replies = Reply.unscoped.order(id: :desc).includes(:topic, :user)
+      @replies = Reply.unscoped
+      if params[:q]
+        qstr = "%#{params[:q].downcase}%"
+        @replies = @replies.where('body LIKE ?', qstr)
+      end
+      if params[:login]
+        u = User.find_by_login(params[:login])
+        @replies = @replies.where('user_id = ?', u.try(:id))
+      end
+      @replies = @replies.order(id: :desc).includes(:topic, :user)
       @replies = @replies.paginate(page: params[:page], per_page: 30)
     end
 

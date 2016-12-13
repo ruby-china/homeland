@@ -3,7 +3,16 @@ module Admin
     before_action :set_topic, only: [:show, :edit, :update, :destroy, :undestroy, :suggest, :unsuggest]
 
     def index
-      @topics = Topic.unscoped.order(id: :desc)
+      @topics = Topic.unscoped
+      if params[:q]
+        qstr = "%#{params[:q].downcase}%"
+        @topics = @topics.where('title LIKE ?', qstr)
+      end
+      if params[:login]
+        u = User.find_by_login(params[:login])
+        @topics = @topics.where('user_id = ?', u.try(:id))
+      end
+      @topics = @topics.order(id: :desc)
       @topics = @topics.includes(:user).paginate(page: params[:page], per_page: 30)
     end
 

@@ -18,6 +18,8 @@
       node:
         sort: "数字较大的将会排在前面"
         summary: "支持 Markdown 语法"
+      doorkeeper_application:
+        level: "应用程序等级，影响 OAuth 2 accessToken 的有效期, 可选 [0 - 1 天 | 1 - 7 天 | 2 - 14 天 | 3 - 30 天]"
     labels:
       user:
         name: "名字"

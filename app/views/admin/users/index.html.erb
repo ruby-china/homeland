@@ -4,7 +4,7 @@
 <div class="toolbar">
   <form class="form-inline" action="<%= admin_users_path %>">
     <div class="form-group">
-      <input type="text" name="q" class="form-control" value="<%= params[:q] %>" placeholder="用户名" />
+      <input type="text" name="q" class="form-control" value="<%= params[:q] %>" placeholder="用户名/Email" />
     </div>
     <div class="form-group">
       <%= select_tag(:type, options_for_select([['全部类别',''], ['组织','Team']], params[:type]), class: 'form-control') %>

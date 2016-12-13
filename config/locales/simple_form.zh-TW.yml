@@ -8,6 +8,8 @@
       user:
         location: "請用中文填寫所在城市"
         email: "保存以後就不可以改了哦！"
+      doorkeeper_application:
+        level: "應用程序等級，影響 OAuth 2 accessToken 的有效期, 可選 [0 - 1 天 | 1 - 7 天 | 2 - 14 天 | 3 - 30 天]"
     labels:
       user:
         name: "名字"

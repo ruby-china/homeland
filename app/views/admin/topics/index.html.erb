@@ -2,6 +2,18 @@
   <span class="current"><%= t("admin.menu.topics")%></span>
 <% end %>
 
+<div class="toolbar">
+  <form class="form-inline" action="<%= admin_topics_path %>">
+    <div class="form-group">
+      <input type="text" name="q" class="form-control" value="<%= params[:q] %>" placeholder="标题" />
+    </div>
+    <div class="form-group">
+      <input type="text" name="login" class="form-control" value="<%= params[:login] %>" placeholder="用户名" />
+    </div>
+    <button class="btn btn-default">搜索</button>
+  </form>
+</div>
+
 <table class="table table-bordered table-striped table-condensed">
   <tr class="head">
     <td class="first">#</td>

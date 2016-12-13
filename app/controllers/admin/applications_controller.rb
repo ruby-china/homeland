@@ -3,7 +3,18 @@ module Admin
     before_action :set_application, only: [:show, :edit, :update, :destroy]
 
     def index
-      @applications = Doorkeeper::Application.order(id: :desc).paginate(page: params[:page], per_page: 20)
+      @applications = Doorkeeper::Application.all
+      if params[:q]
+        qstr = "%#{params[:q].downcase}%"
+        @applications = @applications.where('name LIKE ?', qstr)
+      end
+      if params[:level].present?
+        @applications = @applications.where(level: params[:level])
+      end
+      if params[:uid].present?
+        @applications = @applications.where(uid: params[:uid])
+      end
+      @applications = @applications.order(id: :desc).paginate(page: params[:page], per_page: 20)
     end
 
     def show

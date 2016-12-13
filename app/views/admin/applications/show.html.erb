@@ -1,3 +1,7 @@
+<% content_for :sitemap do %>
+  <a href="<%= admin_applications_path %>">OAuth 应用</a> <i class="fa fa-angle-right"></i> <span class="current">详情</span>
+<% end %>
+
 <ul class="list-group">
   <li class="list-group-item">
     <label class="col-sm-1">名称:</label> <%= @application.name %></li>

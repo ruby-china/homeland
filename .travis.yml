@@ -13,6 +13,7 @@ services:
 
 rvm:
   - 2.3.3
+  - 2.4.0-rc1
   - ruby-head
 
 matrix:

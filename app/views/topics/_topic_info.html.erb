@@ -1,6 +1,7 @@
 <div class="panel-heading media clearfix">
   <div class="media-body">
     <h1 class="media-heading">
+      <%= render_node_name(topic.node_name, topic.node_id) %>
       <%= topic.title %>
       <%= topic_close_tag(topic) %>
     </h1>
@@ -8,15 +9,12 @@
       <div class="navbar-nav">
         <div class="navbar-topic-title">
           <a href="#" class="topic-title pull-left" title="<%= topic.title %>" data-type="top">
-            <h1><%= topic.title %><%= topic_close_tag(topic) %></h1>
+            <h1><span class="node"><%= topic.node_name %></span> <%= topic.title %><%= topic_close_tag(topic) %></h1>
           </a>
-          <span class="node"><%= topic.node_name %></span>
         </div>
       </div>
     <% end %>
     <div class="info">
-      <%= render_node_name(topic.node_name,topic.node_id) %>
-       ·
       <%= user_name_tag(topic.user, data: { author: true }) %>
       <% if topic.team %>
       for <%= user_name_tag(topic.team) %>

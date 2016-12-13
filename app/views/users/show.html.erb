@@ -21,10 +21,10 @@
               <% @topics.each do |item| %>
               <li class="list-group-item">
                 <div class="title">
+                  <%= render_node_name(item.node_name,item.node_id) %>
                   <%= topic_title_tag(item) %> <%= topic_excellent_tag(item) %>
                 </div>
                 <div class="info">
-                  <span class="node"><%= render_node_name(item.node_name,item.node_id) %></span>
                   <span class="counter"><%= item.likes_count %> 个赞 • <%= item.replies_count %> 条回复</span>
                 </div>
               </li>

@@ -5,7 +5,10 @@
   </div>
   <div class="infos media-body">
     <div class="title media-heading">
-      <%= link_to(truncate(topic.title, length: 100), topic_path(topic), title: topic.title) %>
+      <%= link_to(topic_path(topic), title: topic.title) do %>
+        <%= raw content_tag(:span, topic.node_name, class: 'node') %>
+        <%= topic.title %>
+      <% end %>
       <% if suggest %>
         <i class="fa fa-angle-double-up" title="置顶"></i>
       <% end %>
@@ -13,10 +16,6 @@
       <%= topic_close_tag(topic) %>
     </div>
     <div class="info">
-      <% if action_name != "node" %>
-      <%= render_node_name(topic.node_name,topic.node_id) %>
-      •
-      <% end %>
       <%= user_name_tag(topic.user) %>
       <span class="hidden-mobile">
       •

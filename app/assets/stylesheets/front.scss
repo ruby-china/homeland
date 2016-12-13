@@ -68,7 +68,7 @@
         i.fa-diamond { color: $red; }
         i.fa-check { color: $green; }
       }
-      .node { line-height: 50px; margin-left: 18px; color: $blue; }
+      .node { line-height: 50px; margin-left: 18px; color: #777; margin-right: 3px; }
       h1 {
         margin: 0; padding: 0; font-size: 18px; line-height: 50px;
       }
@@ -173,6 +173,10 @@
   }
 }
 
+.topics-node {
+  .node { display: none; }
+}
+
 .topics {
   .panel-body {
     padding: 0 15px;
@@ -201,7 +205,16 @@
       font-size: 15px;
       margin-bottom: 0;
       a:link,
-      a:visited { color: #222; font-weight: 400; line-height: 30px; }
+      a:visited {
+        color: #222; font-weight: 400; line-height: 30px;
+        .node { color: #777; margin-right: 3px; }
+      }
+      a:active,
+      a:hover {
+        color: #555;
+        .node { color: #555; }
+        text-decoration: none;
+      }
       i.fa { color: #999; margin-left: 3px; }
       i.fa-diamond { color: $red; }
       i.fa-check { color: $green; }
@@ -240,7 +253,9 @@
     padding: 15px;
     transition: all .3s;
     h1 {
-      margin-top:0; font-size:24px; color:#333;text-align: left; line-height:100%; margin-bottom:8px;
+      margin-top:0;
+      font-size: 20px; color:#333; text-align: left; line-height:150%; margin-bottom:8px;
+      .node { color: #777; margin-right: 3px;  }
       i.fa-check { color: $green; font-size: 16px; }
     }
     .avatar { text-align:right; }

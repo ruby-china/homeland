@@ -38,7 +38,7 @@
         <% next if @user.profile_field(field).blank? %>
         <div class="field">
           <label><%= User.profile_field_label(field) %></label>
-          <span class="value"><%= auto_link @user.full_profile_field(field), link: :urls %></span>
+          <span class="value"><%= auto_link @user.full_profile_field(field), link: :urls, html: { target: '_blank' } %></span>
         </div>
       <% end %>
     </div>

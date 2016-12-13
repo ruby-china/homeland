@@ -4,11 +4,11 @@ module Admin
 
     def index
       @topics = Topic.unscoped
-      if params[:q]
+      if params[:q].present?
         qstr = "%#{params[:q].downcase}%"
         @topics = @topics.where('title LIKE ?', qstr)
       end
-      if params[:login]
+      if params[:login].present?
         u = User.find_by_login(params[:login])
         @topics = @topics.where('user_id = ?', u.try(:id))
       end

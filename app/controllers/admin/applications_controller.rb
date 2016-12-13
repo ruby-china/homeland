@@ -4,7 +4,7 @@ module Admin
 
     def index
       @applications = Doorkeeper::Application.all
-      if params[:q]
+      if params[:q].present?
         qstr = "%#{params[:q].downcase}%"
         @applications = @applications.where('name LIKE ?', qstr)
       end

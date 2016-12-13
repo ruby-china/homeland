@@ -2,7 +2,7 @@ module Admin
   class UsersController < Admin::ApplicationController
     def index
       @users = User.all
-      if params[:q]
+      if params[:q].present?
         qstr = "%#{params[:q].downcase}%"
         @users = @users.where('lower(login) LIKE ? or lower(email) LIKE ?', qstr, qstr)
       end

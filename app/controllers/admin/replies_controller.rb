@@ -4,11 +4,11 @@ module Admin
 
     def index
       @replies = Reply.unscoped
-      if params[:q]
+      if params[:q].present?
         qstr = "%#{params[:q].downcase}%"
         @replies = @replies.where('body LIKE ?', qstr)
       end
-      if params[:login]
+      if params[:login].present?
         u = User.find_by_login(params[:login])
         @replies = @replies.where('user_id = ?', u.try(:id))
       end

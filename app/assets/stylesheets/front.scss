@@ -547,7 +547,7 @@
   font-size:14px;
   text-overflow: ellipsis;
   word-wrap: break-word;
-  img { max-width: 100%; }
+  img, iframe { max-width: 100%; }
   p,
   pre,
   ul,

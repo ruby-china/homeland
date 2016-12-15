@@ -40,8 +40,9 @@ module Homeland
       attributes: ::Sanitize::Config.merge(::Sanitize::Config::BASIC[:attributes],
         'all'      => %w[class id lang style tabindex title translate],
         'a'        => %w[href rel data-floor target],
+        'h2'       => %w[id],
         'span'     => %w[class],
-        'img'      => %w[alt src width height],
+        'img'      => %w[class alt src width height],
         'ins'      => %w[cite datetime],
       ),
 

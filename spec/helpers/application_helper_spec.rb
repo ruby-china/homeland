@@ -26,7 +26,9 @@ describe ApplicationHelper, type: :helper do
       end
 
       it 'should allow youtube iframe' do
-        html = '<iframe width="560" height="315" src="https://www.youtube.com/embed/gFQpxAKx_ds" frameborder="0" allowfullscreen=""></iframe>'
+        html = '<span class="embed-responsive embed-responsive-16by9">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/gFQpxAKx_ds" class="embed" frameborder="0" allowfullscreen=""></iframe>
+        </span>'
         expect(helper.sanitize_markdown(html)).to eq(html)
       end
     end

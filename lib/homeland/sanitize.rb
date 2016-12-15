@@ -21,7 +21,7 @@ module Homeland
         :elements => %w[iframe],
 
         :attributes => {
-          'iframe'  => %w[allowfullscreen frameborder height src width]
+          'iframe'  => %w[allowfullscreen class frameborder height src width]
         }
       })
 
@@ -40,6 +40,7 @@ module Homeland
       attributes: ::Sanitize::Config.merge(::Sanitize::Config::BASIC[:attributes],
         'all'      => %w[class id lang style tabindex title translate],
         'a'        => %w[href rel data-floor target],
+        'span'     => %w[class],
         'img'      => %w[alt src width height],
         'ins'      => %w[cite datetime],
       ),

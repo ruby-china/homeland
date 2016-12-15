@@ -19,6 +19,7 @@ describe 'API V3', 'topics', type: :request do
 
       get '/api/v3/topics.json'
       expect(response.status).to eq(200)
+      json = JSON.parse(response.body)
       expect(json['topics'].size).to eq(4)
       fields = %w(id title created_at updated_at replied_at
                   replies_count node_name node_id last_reply_user_id
@@ -29,6 +30,11 @@ describe 'API V3', 'topics', type: :request do
       expect(titles).to be_include('This is an excellent topic')
       expect(titles).to be_include('This is a no_reply topic')
       expect(titles).to be_include('This is a popular topic')
+
+      get '/api/v3/topics.json', type: 'invalid_type'
+      expect(response.status).to eq(200)
+      json2 = JSON.parse(response.body)
+      expect(json2).to eq(json)
 
       get '/api/v3/topics.json', type: 'recent'
       expect(response.status).to eq(200)

@@ -32,7 +32,7 @@ class TopicsController < ApplicationController
   end
 
   def feed
-    @topics = Topic.without_hide_nodes.recent.without_body.limit(20).includes(:node, :user, :last_reply_user)
+    @topics = Topic.without_hide_nodes.recent.limit(20).includes(:node, :user, :last_reply_user)
     render layout: false if stale?(@topics)
   end
 
@@ -49,7 +49,7 @@ class TopicsController < ApplicationController
 
   def node_feed
     @node = Node.find(params[:id])
-    @topics = @node.topics.recent.without_body.limit(20)
+    @topics = @node.topics.recent.limit(20)
     render layout: false if stale?([@node, @topics])
   end
 
@@ -93,7 +93,7 @@ class TopicsController < ApplicationController
     @show_raw = params[:raw] == '1'
     @can_reply = can? :create, Reply
 
-    @replies = Reply.unscoped.where(topic_id: @topic.id).without_body.order(:id).all
+    @replies = Reply.unscoped.where(topic_id: @topic.id).order(:id).all
 
     check_current_user_liked_replies
     check_current_user_status_for_topic

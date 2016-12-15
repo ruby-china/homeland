@@ -110,38 +110,6 @@ describe Reply, type: :model do
     end
   end
 
-  describe 'format body' do
-    it 'should covert body with Markdown on create' do
-      r = create(:reply, body: '*foo*')
-      expect(r.body_html).to eq('<p><em>foo</em></p>')
-    end
-
-    it 'should covert body on save' do
-      r = create(:reply, body: '*foo*')
-      old_html = r.body_html
-      r.body = '*bar*'
-      r.save
-      expect(r.body_html).not_to eq(old_html)
-    end
-
-    it 'should not store body_html when it not changed' do
-      r = create(:reply, body: '*foo*')
-      r.body = '*fooaa*'
-      allow(r).to receive(:body_changed?).and_return(false)
-      old_html = r.body_html
-      r.save
-      expect(r.body_html).to eq(old_html)
-    end
-
-    context '#link_mention_user' do
-      it 'should add link to mention users' do
-        body = '@foo'
-        reply = create(:reply, body: body)
-        expect(reply.body_html).to eq('<p><a href="/foo" class="user-mention" title="@foo"><i>@</i>foo</a></p>')
-      end
-    end
-  end
-
   describe 'ban words for Reply body' do
     let(:topic) { create(:topic) }
     it 'should work' do

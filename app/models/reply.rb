@@ -1,7 +1,7 @@
 require 'digest/md5'
 class Reply < ApplicationRecord
-  include SoftDelete
   include MarkdownBody
+  include SoftDelete
   include Likeable
   include Mentionable
   include MentionTopic
@@ -16,8 +16,7 @@ class Reply < ApplicationRecord
   delegate :login, to: :user, prefix: true, allow_nil: true
 
   scope :without_system, -> { where(action: nil) }
-  scope :fields_for_list, -> { select(:topic_id, :id, :body_html, :updated_at, :created_at) }
-  scope :without_body, -> { select(column_names - ['body']) }
+  scope :fields_for_list, -> { select(:topic_id, :id, :body, :updated_at, :created_at) }
 
   validates :body, presence: true, unless: -> { system_event? }
   validates :body, uniqueness: { scope: [:topic_id, :user_id], message: '不能重复提交。' }, unless: -> { system_event? }

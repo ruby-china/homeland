@@ -11,7 +11,7 @@
   </div>
   <% if reply.present? %>
     <div class="media-content summary markdown">
-      <%= raw reply.body_html %>
+      <%= reply.body_html %>
     </div>
   <% end %>
 <% when Topic %>
@@ -26,7 +26,7 @@
       在 <%= topic_title_tag(topic) %> 提及你：
     </div>
     <div class="media-content summary markdown">
-      <%= raw topic.body_html %>
+      <%= topic.body_html %>
     </div>
   <% end %>
 <% end %>

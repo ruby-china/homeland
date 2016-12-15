@@ -72,11 +72,6 @@ describe Topic, type: :model do
     expect(topic.last_active_mark).to eq(old_last_active_mark)
   end
 
-  it 'should covert body with Markdown on create' do
-    t = create(:topic, body: '*foo*')
-    expect(t.body_html).to eq('<p><em>foo</em></p>')
-  end
-
   it 'should get page and floor by reply' do
     replies = []
     5.times do
@@ -84,23 +79,6 @@ describe Topic, type: :model do
     end
     expect(topic.floor_of_reply(replies[2])).to eq(3)
     expect(topic.floor_of_reply(replies[3])).to eq(4)
-  end
-
-  it 'should covert body on save' do
-    t = create(:topic, body: '*foo*')
-    old_html = t.body_html
-    t.body = '*bar*'
-    t.save
-    expect(t.body_html).not_to eq(old_html)
-  end
-
-  it 'should not store body_html when it not changed' do
-    t = create(:topic, body: '*foo*')
-    t.body = '*fooaa*'
-    allow(t).to receive(:body_changed?).and_return(false)
-    old_html = t.body_html
-    t.save
-    expect(t.body_html).to eq(old_html)
   end
 
   it 'should log deleted user name when use destroy_by' do

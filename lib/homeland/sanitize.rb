@@ -21,7 +21,7 @@ module Homeland
         :elements => %w[iframe],
 
         :attributes => {
-          'iframe'  => %w[allowfullscreen class frameborder height src width]
+          'iframe'  => %w[allowfullscreen class frameborder src]
         }
       })
 

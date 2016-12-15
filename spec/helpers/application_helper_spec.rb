@@ -29,7 +29,11 @@ describe ApplicationHelper, type: :helper do
         html = '<span class="embed-responsive embed-responsive-16by9">
         <iframe width="560" height="315" src="https://www.youtube.com/embed/gFQpxAKx_ds" class="embed" frameborder="0" allowfullscreen=""></iframe>
         </span>'
-        expect(helper.sanitize_markdown(html)).to eq(html)
+
+        expect_html = '<span class="embed-responsive embed-responsive-16by9">
+        <iframe src="https://www.youtube.com/embed/gFQpxAKx_ds" class="embed" frameborder="0" allowfullscreen=""></iframe>
+        </span>'
+        expect(helper.sanitize_markdown(html)).to eq(expect_html)
       end
     end
 

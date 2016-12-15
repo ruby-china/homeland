@@ -2,7 +2,6 @@
 #
 # == attributes
 # - *id* [Integer] 编号
-# - *body_html* [String] 以转换成 HTML 的正文
 # - *topic_id* [Integer] 话题编号
 # - *deleted* [Boolean] 是否已删除
 # - *likes_count* [Integer] 赞数量

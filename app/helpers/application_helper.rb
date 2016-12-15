@@ -1,16 +1,15 @@
 module ApplicationHelper
-  ALLOW_TAGS = %w(p br img h1 h2 h3 h4 h5 h6 blockquote pre code b i
-                  strong em table tr td tbody th strike del u a ul ol li span hr)
-  ALLOW_ATTRIBUTES = %w(href src class width height id title alt target rel data-floor frameborder allowfullscreen)
   EMPTY_STRING = ''.freeze
 
   def markdown(text)
-    sanitize_markdown(Homeland::Markdown.call(text))
+    Rails.cache.fetch(['markdown', Digest::MD5.hexdigest(text)]) do
+      raw sanitize_markdown(Homeland::Markdown.call(text))
+    end
   end
 
-  def sanitize_markdown(body)
+  def sanitize_markdown(html)
     # TODO: This method slow, 3.5ms per call in topic body
-    sanitize(body, tags: ALLOW_TAGS, attributes: ALLOW_ATTRIBUTES)
+    Sanitize.fragment(html, Homeland::Sanitize::DEFAULT)
   end
 
   def notice_message

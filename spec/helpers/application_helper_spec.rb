@@ -1,9 +1,37 @@
 require 'rails_helper'
 
 describe ApplicationHelper, type: :helper do
-  it 'sanitize_markdown' do
-    expect(helper.sanitize_markdown('<a href="javascript:alert()">link</a>')).to eq('<a>link</a>')
+  describe '.sanitize_markdown' do
+    describe '<a href>' do
+      it 'should block javascript' do
+        expect(helper.sanitize_markdown('<a href="javascript:alert()">link</a>')).to eq('<a>link</a>')
+      end
+    end
+
+    describe '<script>' do
+      it 'should block script' do
+        expect(helper.sanitize_markdown('<script>alert('');</script>')).to eq('alert();')
+      end
+    end
+
+    describe '<style>' do
+      it 'should block style' do
+        expect(helper.sanitize_markdown('<style>.body{}</style>')).to eq('.body{}')
+      end
+    end
+
+    describe '<iframe>' do
+      it 'should block iframe' do
+        expect(helper.sanitize_markdown('<iframe src="https://foobar.com"></iframe>')).to eq('')
+      end
+
+      it 'should allow youtube iframe' do
+        html = '<iframe width="560" height="315" src="https://www.youtube.com/embed/gFQpxAKx_ds" frameborder="0" allowfullscreen=""></iframe>'
+        expect(helper.sanitize_markdown(html)).to eq(html)
+      end
+    end
   end
+
 
   describe 'markdown' do
     context 'bad html' do

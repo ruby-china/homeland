@@ -3,7 +3,7 @@
    <%= user_name_tag(@reply.user) %>  回复了 《<%= topic_title_tag(@topic)%>》:</label> <br />
 </p>
 <blockquote>
-  <p><%= raw @reply.body_html %><br/></p>
+  <p><%= @reply.body_html %><br/></p>
 </blockquote>
 <p>
  <label> 帖子地址:</label> <%= topic_title_tag(@topic) %>.

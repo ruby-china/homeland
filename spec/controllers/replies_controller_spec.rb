@@ -3,14 +3,39 @@ require 'rails_helper'
 describe RepliesController, type: :controller do
   describe '#index' do
     it 'should work' do
+      user = create :user
       topic = create :topic
       replies = create_list :reply, 3
+
+      sign_in user
       get :index, params: { topic_id: topic.id, last_id: replies.first.id }, xhr: true
       expect(response).to be_success
+      expect(user.notifications.unread.count).to eq 0
+    end
+
+    it 'render blank for params last_id 0' do
+      topic = create :topic
+      replies = create_list :reply, 3
+      get :index, params: { topic_id: topic.id, last_id: 0 }, xhr: true
+      expect(response).to be_success
+      expect(response.body).to eq ''
     end
   end
 
   describe '#create' do
+    it 'should error if save fail' do
+      user = create :user
+      topic = create :topic
+      expect(user.topic_read?(topic)).to be_falsey
+
+      create :reply, topic: topic
+      sign_in user
+      post :create, params: { topic_id: topic.id, reply: { body: '' } }, format: :js
+      expect(response).to be_success
+      expect(response.body).to match(/回复内容不能为空字符/)
+      expect(user.topic_read?(topic)).to be_falsey
+    end
+
     it 'should create reply and set topic read' do
       user = create :user
       topic = create :topic
@@ -67,6 +92,14 @@ describe RepliesController, type: :controller do
       expect(response).to redirect_to(topic_path(topic))
 
       delete :destroy, params: { topic_id: topic.id, id: reply1.id }
+      expect(response).to redirect_to(topic_path(topic))
+    end
+
+    it 'should redirect if failure' do
+      allow_any_instance_of(Reply).to receive(:destroy).and_return(false)
+
+      sign_in user
+      delete :destroy, params: { topic_id: topic.id, id: reply.id }
       expect(response).to redirect_to(topic_path(topic))
     end
   end

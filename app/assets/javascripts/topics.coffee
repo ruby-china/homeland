@@ -250,14 +250,9 @@ window.TopicView = Backbone.View.extend
       return
 
     if !window.repliesChannel
-      console.log "init repliesChannel"
       window.repliesChannel = App.cable.subscriptions.create 'RepliesChannel',
         connected: ->
-          setTimeout =>
-            @followCurrentTopic()
-            $(window).on 'unload', -> window.repliesChannel.unfollow()
-            $(document).on 'page:change', -> window.repliesChannel.followCurrentTopic()
-          , 1000
+          @install
 
         received: (json) =>
           if json.user_id == App.current_user_id
@@ -268,12 +263,11 @@ window.TopicView = Backbone.View.extend
             else
               $(".notify-updated").show()
 
-        followCurrentTopic: ->
+        follow: ->
           @perform 'follow', topic_id: Topics.topic_id
 
-        unfollow: ->
-          @perform 'unfollow'
-
+        install: ->
+          @follow()
 
   updateReplies: () ->
     lastId = $("#replies .reply:last").data('id')

@@ -166,11 +166,10 @@ AppView = Backbone.View.extend
     if !window.notificationChannel && App.isLogined()
       window.notificationChannel = App.cable.subscriptions.create "NotificationsChannel",
         connected: ->
-          setTimeout =>
-            @subscribe()
-            $(window).on 'unload', -> window.notificationChannel.unsubscribe()
-            $(document).on 'page:change', -> window.notificationChannel.subscribe()
-          , 1000
+          @subscribe()
+
+        install: ->
+          @subscribe()
 
         received: (data) =>
           @receivedNotificationCount(data)
@@ -178,11 +177,8 @@ AppView = Backbone.View.extend
         subscribe: ->
           @perform 'subscribed'
 
-        unsubscribe: ->
-          @perform 'unsubscribed'
-
   receivedNotificationCount : (json) ->
-    console.log 'receivedNotificationCount', json
+    # console.log 'receivedNotificationCount', json
     span = $(".notification-count span")
     link = $(".notification-count a")
     new_title = document.title.replace(/^\(\d+\) /,'')

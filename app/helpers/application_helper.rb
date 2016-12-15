@@ -3,12 +3,12 @@ module ApplicationHelper
 
   def markdown(text)
     Rails.cache.fetch(['markdown', Digest::MD5.hexdigest(text)]) do
-      raw sanitize_markdown(Homeland::Markdown.call(text))
+      sanitize_markdown(Homeland::Markdown.call(text))
     end
   end
 
   def sanitize_markdown(html)
-    Sanitize.fragment(html, Homeland::Sanitize::DEFAULT)
+    raw Sanitize.fragment(html, Homeland::Sanitize::DEFAULT)
   end
 
   def notice_message

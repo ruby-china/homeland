@@ -28,13 +28,4 @@ describe SearchController, type: :controller do
       expect(json.map {|j|j['avatar_url']}).to match followings.map(&:large_avatar_url)
     end
   end
-
-  describe '/search' do\
-    let(:topic) { create(:topic) }
-    it 'should work' do
-      get :index, params: { q: topic.title }
-      expect(response.body).to match(Regexp.new("<div class=\"title\"><a href=\"/topics/#{topic.id}\"><em>#{topic.title}</em></a></div>"))
-    end
-  end
-
 end

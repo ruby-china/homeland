@@ -38,11 +38,10 @@ module Homeland
       ],
 
       attributes: ::Sanitize::Config.merge(::Sanitize::Config::BASIC[:attributes],
-        'all'      => %w[class id lang style tabindex title translate],
+        # 这里要确保是 :all, 而不是 'all'
+        :all       => %w[class id lang style tabindex title translate],
         'a'        => %w[href rel data-floor target],
-        'h2'       => %w[id],
-        'span'     => %w[class],
-        'img'      => %w[class alt src width height],
+        'img'      => %w[alt src width height],
         'ins'      => %w[cite datetime],
       ),
 

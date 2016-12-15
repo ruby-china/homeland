@@ -8,7 +8,6 @@ module ApplicationHelper
   end
 
   def sanitize_markdown(html)
-    # TODO: This method slow, 3.5ms per call in topic body
     Sanitize.fragment(html, Homeland::Sanitize::DEFAULT)
   end
 

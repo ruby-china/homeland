@@ -32,6 +32,20 @@ describe ApplicationHelper, type: :helper do
         expect(helper.sanitize_markdown(html)).to eq(html)
       end
     end
+
+    describe 'img' do
+      it 'should work' do
+        html = '<img src="/img/a.jpg" class="emoji" width="100" height="100">'
+        expect(helper.sanitize_markdown(html)).to eq(html)
+      end
+    end
+
+    describe 'a' do
+      it 'should work' do
+        html = '<a href="http://www.google.com" data-floor="100" target="_blank" rel="nofollow" class="btn btn-lg">111</a>'
+        expect(helper.sanitize_markdown(html)).to eq(html)
+      end
+    end
   end
 
 

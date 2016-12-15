@@ -32,20 +32,21 @@ module Homeland
     end
 
     DEFAULT = ::Sanitize::Config.freeze_config(
-      elements: ::Sanitize::Config::BASIC[:elements] + %w[
-        p br img h1 h2 h3 h4 h5 h6 blockquote pre code b i del ins
+      elements: %w[
+        p br img h1 h2 h3 h4 h5 h6 blockquote pre code b i del
         strong em table tr td tbody th strike del u a ul ol li span hr
       ],
 
-      attributes: ::Sanitize::Config.merge(::Sanitize::Config::BASIC[:attributes],
+      attributes: ::Sanitize::Config.merge({},
         # 这里要确保是 :all, 而不是 'all'
         :all       => %w[class id lang style tabindex title translate],
         'a'        => %w[href rel data-floor target],
-        'img'      => %w[alt src width height],
-        'ins'      => %w[cite datetime],
+        'img'      => %w[alt src width height]
       ),
 
-      protocols: ::Sanitize::Config::BASIC[:protocols],
+      protocols: {
+        'a'        => { 'href' => ['http', 'https', 'mailto', :relative] }
+      },
 
       transformers: [YOUTUBE_TRANSFORMER],
     )

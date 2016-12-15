@@ -9,14 +9,6 @@ describe Setting, type: :model do
     end
   end
 
-  describe '#host' do
-    it 'should work' do
-      allow(Setting).to receive(:domain).and_return("homeland.io")
-      allow(Setting).to receive(:https).and_return(true)
-      expect(Setting.host).to eq "https://homeland.io"
-    end
-  end
-
   describe '#has_admin?' do
     it 'should work' do
       allow(Setting).to receive(:admin_emails).and_return("a0@foo.com\na1@foo.com\r\na2@foo.com a3@foo.com,a4@foo.com")

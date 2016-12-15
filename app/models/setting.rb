@@ -34,10 +34,6 @@ class Setting < RailsSettings::Base
       self.https == true ? 'https' : 'http'
     end
 
-    def host
-      [self.protocol, self.domain].join("://")
-    end
-
     def has_admin?(email)
       return false if self.admin_emails.blank?
       self.admin_emails.split(SEPARATOR_REGEXP).include?(email)

@@ -140,6 +140,7 @@ group :development, :test do
   gem 'jasmine-rails', '~> 0.10.2'
   gem 'letter_opener'
   gem 'yard'
+  gem 'rails-controller-testing'
 
   gem 'codecov', require: false
   gem 'pry-byebug'

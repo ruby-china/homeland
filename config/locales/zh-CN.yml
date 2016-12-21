@@ -5,6 +5,10 @@
   device_platform:
     ios: iOS
     android: Android
+  sso:
+    timeout_expired: 'SSO Token 已过期，请重新发起请求。'
+    unknown_error: '抱歉 SSO 登录的过程遇到了未处理的异常，登录失败。'
+    not_found: '抱歉 SSO 登录的过程遇到了未处理的异常，登录失败。'
   activerecord:
     models:
       user: "用户"

@@ -2,6 +2,10 @@
   omniauth:
     github: GitHub
     twitter: Twitter
+  sso:
+    timeout_expired: 'SSO Token 已過期，請重新發起登錄請求。'
+    unknown_error: '抱歉 SSO 登錄的過程遇到了未處理的異常，登陸失敗。'
+    not_found: '抱歉 SSO 登錄的過程遇到了未處理的異常，登陸失敗。'
   activerecord:
     models:
       user: "用戶"

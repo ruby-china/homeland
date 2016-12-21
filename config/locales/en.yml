@@ -23,6 +23,10 @@ en:
   omniauth:
     github: GitHub
     twitter: Twitter
+  sso:
+    timeout_expired: 'SSO Token was expired.'
+    unknown_error: 'Sorry, this have an unknown error with SSO login.'
+    not_found: 'Sorry, this have an unknown error with SSO login.'
   activerecord:
     models:
       user: "User"

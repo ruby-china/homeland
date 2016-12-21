@@ -71,7 +71,9 @@ module Homeland
 
       # Add as admin
       if admin == true
-        Setting.admin_emails = Setting.admin_emails + "\n" + email
+        if !Setting.has_admin?(email)
+          Setting.admin_emails = Setting.admin_emails + "\n" + email
+        end
       end
 
       sso_record.save!

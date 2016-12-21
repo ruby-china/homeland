@@ -69,6 +69,7 @@ module Auth
       sso.bio = current_user.bio
       sso.external_id = current_user.id.to_s
       sso.admin = current_user.admin?
+      sso.avatar_url = current_user.avatar.url(:lg)
 
       redirect_to sso.to_url(sso.return_sso_url)
     end

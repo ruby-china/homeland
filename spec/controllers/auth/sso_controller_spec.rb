@@ -132,6 +132,7 @@ describe Auth::SSOController, type: :controller do
       expect(sso2.username).to eq(user.login)
       expect(sso2.external_id).to eq(user.id.to_s)
       expect(sso2.bio).to eq(user.bio)
+      expect(sso2.avatar_url).not_to eq(nil)
       expect(sso2.admin).to eq(true)
     end
 

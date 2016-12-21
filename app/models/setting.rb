@@ -34,7 +34,7 @@ class Setting < RailsSettings::Base
       self.https == true ? 'https' : 'http'
     end
 
-    def host
+    def base_url
       [self.protocol, self.domain].join("://")
     end
 
@@ -51,6 +51,15 @@ class Setting < RailsSettings::Base
     def has_profile_field?(name)
       return true if self.profile_fields.blank? || self.profile_fields == 'all'
       self.profile_fields.split(SEPARATOR_REGEXP).include?(name.to_s)
+    end
+
+    def sso_enabled?
+      return false if self.sso_provider_enabled?
+      self.sso['enable'] == true
+    end
+
+    def sso_provider_enabled?
+      self.sso['enable_provider'] == true
     end
   end
 end

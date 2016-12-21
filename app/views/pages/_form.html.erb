@@ -1,7 +1,7 @@
 <%= simple_form_for @page do |f| %>
   <%= render "shared/error_messages", target: @page %>
 
-  <%= f.input :slug, hint: "http://#{Setting.domain}/wiki/:slug"%>
+  <%= f.input :slug, hint: "#{Setting.base_url}/wiki/:slug"%>
   <%= f.input :title, input_html: { class: "xxlarge" } %>
 
   <div class="edit-tools">

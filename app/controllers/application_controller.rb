@@ -76,7 +76,7 @@ class ApplicationController < ActionController::Base
   end
 
   def store_location
-    session[:return_to] = request.request_uri
+    session[:return_to] = request.url
   end
 
   def redirect_back_or_default(default)
@@ -94,11 +94,19 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user!(opts = {})
+    return if current_user
     if turbolinks_app?
-      render plain: '401 Unauthorized', status: 401 if current_user.blank?
-    else
-      super(opts)
+      render plain: '401 Unauthorized', status: 401
+      return
     end
+
+    store_location
+
+    if Setting.sso_enabled?
+      redirect_to auth_sso_path and return
+    end
+
+    super(opts)
   end
 
   def current_user

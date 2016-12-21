@@ -34,8 +34,7 @@ class User
             end
 
           user.name = data['name']
-          user.login = data['nickname']
-          user.login.gsub!(/[^\w]/, '_')
+          user.login = Homeland::Username.sanitize(data['nickname'])
           if provider == 'github'
             user.github = data['nickname']
           end

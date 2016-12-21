@@ -27,7 +27,9 @@
     end %>
   </li>
   <% else %>
+  <% if !Setting.sso_enabled? %>
   <li><%= link_to( t("common.register"), main_app.new_user_registration_path) %></li>
+  <% end %>
   <li><%= link_to( t("common.login"), main_app.new_user_session_path ) %></li>
   <% end %>
 </ul>

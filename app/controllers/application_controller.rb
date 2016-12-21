@@ -102,10 +102,6 @@ class ApplicationController < ActionController::Base
 
     store_location
 
-    if Setting.sso_enabled?
-      redirect_to auth_sso_path and return
-    end
-
     super(opts)
   end
 
@@ -145,6 +141,10 @@ class ApplicationController < ActionController::Base
         render_404
       end
     end
+  end
+
+  def require_no_sso!
+    redirect_to auth_sso_path if Setting.sso_enabled?
   end
 
   private

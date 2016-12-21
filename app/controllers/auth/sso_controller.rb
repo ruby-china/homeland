@@ -29,6 +29,7 @@ module Auth
 
       begin
         user = sso.find_or_create_user(request)
+        sign_in :user, user
       rescue => e
         message = sso.diagnostics
         message << "\n\n" << "-" * 100 << "\n\n"

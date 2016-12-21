@@ -45,6 +45,8 @@
         <% end %>
       </div>
     </div>
+
+    <% if !Setting.sso_enabled? %>
     <div class="panel panel-default hide-ios">
       <div class="panel-heading"><%= t("users.edit_password")%></div>
       <div class="panel-body">
@@ -66,24 +68,28 @@
         <% end %>
       </div>
     </div>
+    <% end %>
+
   </div>
   <div class="sidebar col-md-3 hide-ios">
-    <% if Setting.has_module? :github %>
-    <div class="panel panel-default">
-      <div class="panel-heading"><%= t("users.bind_another_account")%></div>
-      <ul class="list-group">
-        <% ["github"].each do |provider| %>
-        <li class="list-group-item">
-          <% if @user.bind? provider %>
-          <%= t("omniauth.#{provider}") %>
-          <%= link_to(raw('<i class="fa fa-remove"></i>'),"/account/auth/#{provider}/unbind", rel: "twitsy", title: "点击解除绑定", method: 'delete' )%>
-          <% else %>
-          <%= link_to(t("omniauth.#{provider}"), "/account/auth/#{provider}", rel: "twitsy", title: "点击绑定" )%>
+    <% if !Setting.sso_enabled? %>
+      <% if Setting.has_module? :github %>
+      <div class="panel panel-default">
+        <div class="panel-heading"><%= t("users.bind_another_account")%></div>
+        <ul class="list-group">
+          <% ["github"].each do |provider| %>
+          <li class="list-group-item">
+            <% if @user.bind? provider %>
+            <%= t("omniauth.#{provider}") %>
+            <%= link_to(raw('<i class="fa fa-remove"></i>'),"/account/auth/#{provider}/unbind", rel: "twitsy", title: "点击解除绑定", method: 'delete' )%>
+            <% else %>
+            <%= link_to(t("omniauth.#{provider}"), "/account/auth/#{provider}", rel: "twitsy", title: "点击绑定" )%>
+            <% end %>
+          </li>
           <% end %>
-        </li>
-        <% end %>
-      </ul>
-    </div>
+        </ul>
+      </div>
+      <% end %>
     <% end %>
 
     <div class="panel panel-default">

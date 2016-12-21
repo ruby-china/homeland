@@ -90,6 +90,9 @@ test:
   upload_provider: "file"
   admin_emails: >
     admin@admin.com
+  sso:
+    enable: false
+    enable_provider: false
 
 production:
   <<: *defaults

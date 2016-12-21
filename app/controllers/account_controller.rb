@@ -1,5 +1,15 @@
 # Devise User Controller
 class AccountController < Devise::RegistrationsController
+  before_action :require_no_sso!, only: [:new, :create]
+
+  def new
+    if Setting.sso_enabled?
+      redirect_to auth_sso_path and return
+    end
+
+    super
+  end
+
   def edit
     @user = current_user
   end

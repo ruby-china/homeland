@@ -70,7 +70,7 @@ module Homeland
       user.update_tracked_fields!(request)
 
       # Add as admin
-      if !admin.nil?
+      if admin == true
         Setting.admin_emails = Setting.admin_emails + "\n" + email
       end
 

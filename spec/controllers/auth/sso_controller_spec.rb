@@ -40,12 +40,14 @@ describe Auth::SSOController, type: :controller do
       sso.username = 'test-sso-user'
       sso.bio = 'This is a bio text'
       sso.avatar_url = 'http://foobar.com/avatar/1.jpg'
+      sso.admin = false
 
       get :login, params: Rack::Utils.parse_query(sso.payload)
 
       expect(response).to redirect_to('/topics/123')
       user = User.find_by_email(sso.email)
       expect(user.new_record?).to eq(false)
+      expect(user.admin?).to eq(false)
       expect(user.login).to eq(sso.username)
       expect(user.name).to eq(sso.name)
       expect(user.bio).to eq(sso.bio)

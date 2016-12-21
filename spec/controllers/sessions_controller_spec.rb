@@ -10,24 +10,10 @@ describe SessionsController, type: :controller do
 
     context 'cache referrer' do
       it "should store referrer if it's from self site" do
-        referrer = "#{request.base_url}/account/edit"
-        request.env['HTTP_REFERER'] = referrer
+        session['return_to'] = "/account/edit?id=123"
+        old_return_to = session['return_to']
         get :new
-        expect(session['user_return_to']).to eq referrer
-      end
-
-      it "should skip referrer if it's from other site" do
-        referrer = "http://#{SecureRandom.hex(4)}.com"
-        request.env['HTTP_REFERER'] = referrer
-        get :new
-        expect(session['user_return_to']).to eq nil
-      end
-
-      it 'should skip referrer if it is user sign in page' do
-        referrer = "#{request.base_url}/account/sign_in"
-        request.env['HTTP_REFERER'] = referrer
-        get :new
-        expect(session['user_return_to']).to eq nil
+        expect(session['return_to']).to eq(old_return_to)
       end
     end
   end

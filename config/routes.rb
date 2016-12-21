@@ -41,6 +41,16 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
 
+  # SSO
+  namespace :auth do
+    resource :sso, controller: 'sso' do
+      collection do
+        get :login
+        get :provider
+      end
+    end
+  end
+
   delete 'account/auth/:provider/unbind', to: 'users#auth_unbind', as: 'unbind_account'
 
   mount RuCaptcha::Engine, at: '/rucaptcha'

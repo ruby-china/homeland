@@ -38,6 +38,7 @@ class User < ApplicationRecord
   has_many :devices
   has_many :team_users
   has_many :teams, through: :team_users
+  has_one :sso, class_name: 'UserSSO', dependent: :destroy
 
   attr_accessor :password_confirmation
 
@@ -226,7 +227,7 @@ class User < ApplicationRecord
   def letter_avatar_url(size)
     path = LetterAvatar.generate(self.login, size).sub('public/', '/')
 
-    "#{Setting.protocol}://#{Setting.domain}#{path}"
+    "#{Setting.base_url}#{path}"
   end
 
   def large_avatar_url

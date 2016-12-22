@@ -74,6 +74,7 @@ class SingleSignOn
   end
 
   def sign(payload)
+    return if payload.nil?
     OpenSSL::HMAC.hexdigest("sha256", sso_secret, payload)
   end
 

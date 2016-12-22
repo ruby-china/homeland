@@ -13,7 +13,7 @@
 <% @photos.each do |photo| %>
   <tr>
     <td><%= photo.id %></td>
-    <td><%= link_to image_tag(photo.image.url, style: "width: 150px"), photo.image.url, target: "_blank" if !photo[:image].blank? %></td>
+    <td><%= link_to image_tag(photo.image.url(:md), style: "width: 150px"), photo.image.url, target: "_blank" if !photo[:image].blank? %></td>
     <td><%= photo.user.login if !photo.user.blank? %></td>
     <td><%= link_to '', admin_photo_path(photo), 'data-confirm' => 'Are you sure?', method: :delete, class: "fa fa-trash" %></td>
   </tr>

@@ -12,15 +12,14 @@ services:
   - elasticsearch
 
 rvm:
+  - 2.4.0
   - 2.3.3
-  - 2.4.0-rc1
   - ruby-head
 
 matrix:
   fast_finish: true
   allow_failures:
     - rvm: ruby-head
-    - rvm: 2.4.0-rc1
 
 before_script:
   - psql -c "CREATE USER \"admin\" WITH CREATEDB PASSWORD 'admin';" -U postgres

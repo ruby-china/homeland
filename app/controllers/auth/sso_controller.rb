@@ -21,7 +21,7 @@ module Auth
 
       sso = Homeland::SSO.parse(request.query_string)
       if !sso.nonce_valid?
-        return render(text: I18n.t("sso.timeout_expired"), status: 419)
+        return render(plain: I18n.t("sso.timeout_expired"), status: 419)
       end
 
       return_path = sso.return_path
@@ -40,12 +40,12 @@ module Auth
         puts message
 
         ExceptionLog.create(title: "SSO Failed to create or lookup user:", body: message)
-        render text: I18n.t("sso.unknown_error"), status: 500
+        render plain: I18n.t("sso.unknown_error"), status: 500
         return
       end
 
       if !user
-        render text: I18n.t("sso.not_found"), status: 500
+        render plain: I18n.t("sso.not_found"), status: 500
         return
       end
 

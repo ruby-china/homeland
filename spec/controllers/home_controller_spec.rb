@@ -23,4 +23,18 @@ describe HomeController, type: :controller do
       expect(response.body).to match(/社区精华帖/)
     end
   end
+
+  describe ':uploads' do
+    it 'render 404 for non-existed file' do
+      get :uploads, params: { path: 'what', format: 'jpg' }
+      expect(response.status).to eq(404)
+    end
+  end
+
+  describe ':api' do
+    it 'should redirect to /api-doc' do
+      get :api
+      expect(response).to redirect_to('/api-doc/')
+    end
+  end
 end

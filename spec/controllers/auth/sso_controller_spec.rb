@@ -3,6 +3,36 @@ require 'rails_helper'
 describe Auth::SSOController, type: :controller do
   let(:sso_secret) { 'foo(*&@!12q36)' }
 
+  describe 'GET /auth/sso/show' do
+    before do
+      @sso_url = "http://somesite.com/homeland-sso"
+
+      allow(Setting).to receive(:sso).and_return({
+                                                     'enable' => true,
+                                                     'url'    => @sso_url,
+                                                     'secret' => sso_secret,
+                                                 })
+      allow(Setting).to receive(:sso_enabled?).and_return(true)
+    end
+
+    it "should work" do
+      get :show, params: { return_path: '/topics/123' }
+      expect(response.status).to eq(302)
+
+      # javascript code will handle redirection of user to return_sso_url
+      expect(response.location).to match(/^http:\/\/somesite.com\/homeland-sso\?sso=.*&sig=.*/)
+    end
+
+    it "should work with destination_url" do
+      request.cookies['destination_url'] = '/topics/123'
+      get :show
+      expect(response.status).to eq(302)
+
+      # javascript code will handle redirection of user to return_sso_url
+      expect(response.location).to match(/^http:\/\/somesite.com\/homeland-sso\?sso=.*&sig=.*/)
+    end
+  end
+
   describe 'GET /auth/sso/login' do
     let(:mock_ip) { '11.22.33.44' }
     before do
@@ -98,6 +128,41 @@ describe Auth::SSOController, type: :controller do
       user = User.find_by_email(sso.email)
       expect(user.admin?).to eq(true)
       expect(Setting.has_admin?(sso.email)).to eq(true)
+    end
+
+    it 'show error when create failure' do
+      allow_any_instance_of(Homeland::SSO).to receive(:find_or_create_user).and_raise(StandardError)
+
+      user_template = build(:user)
+      sso = get_sso('/topics/123')
+      sso.email = user_template.email
+      sso.external_id = 'abc123'
+      sso.name = 'Test SSO User'
+      sso.username = 'test-sso-user'
+      sso.bio = 'This is a bio text'
+      sso.avatar_url = 'http://foobar.com/avatar/1.jpg'
+      sso.admin = false
+
+      expect do
+        get :login, params: Rack::Utils.parse_query(sso.payload)
+      end.to output(/nonce: #{sso.nonce}/).to_stdout
+      expect(response.status).to eq(500)
+    end
+
+    it 'show error when timeout expried' do
+      user_template = build(:user)
+      sso = get_sso('/topics/123')
+      sso.email = user_template.email
+      sso.external_id = 'abc123'
+      sso.name = 'Test SSO User'
+      sso.username = 'test-sso-user'
+      sso.bio = 'This is a bio text'
+      sso.avatar_url = 'http://foobar.com/avatar/1.jpg'
+      sso.admin = false
+
+      $redis.del("SSO_NONCE_#{sso.nonce}")
+      get :login, params: Rack::Utils.parse_query(sso.payload)
+      expect(response.status).to eq(419)
     end
   end
 

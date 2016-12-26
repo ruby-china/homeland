@@ -100,7 +100,7 @@ gem 'social-share-button'
 gem 'simple_form'
 
 # API
-gem 'active_model_serializers'
+# gem 'active_model_serializers'
 
 # Mailer Service
 gem 'postmark'

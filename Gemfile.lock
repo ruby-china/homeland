@@ -34,10 +34,6 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
-    active_model_serializers (0.10.3)
-      actionpack (>= 4.1, < 6)
-      activemodel (>= 4.1, < 6)
-      jsonapi (= 0.1.1.beta2)
     activejob (5.0.0.1)
       activesupport (= 5.0.0.1)
       globalid (>= 0.3.6)
@@ -197,8 +193,6 @@ GEM
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     json (1.8.3)
-    jsonapi (0.1.1.beta2)
-      json (~> 1.8)
     jwt (1.5.6)
     kgio (2.11.0)
     launchy (2.4.3)
@@ -442,7 +436,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  active_model_serializers
   auto-space
   better_errors
   binding_of_caller

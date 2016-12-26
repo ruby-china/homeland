@@ -9,7 +9,6 @@ module Api
       # GET /api/v3/replies/:id
       # @return [ReplyDetailSerializer]
       def show
-        render json: @reply, serializer: ReplyDetailSerializer
       end
 
       # 更新回帖
@@ -25,7 +24,7 @@ module Api
 
         @reply.body = params[:body]
         @reply.save!
-        render json: @reply, serializer: ReplyDetailSerializer
+        render 'show'
       end
 
       # 删除回帖

@@ -3,7 +3,7 @@ module Users
     extend ActiveSupport::Concern
 
     included do
-      before_action :authenticate_user!, only: [:block, :unblock, :auth_unbind, :follow, :unfollow]
+      before_action :authenticate_user!, only: [:block, :unblock, :blocked, :auth_unbind, :follow, :unfollow]
       before_action :only_user!, only: [:topics, :replies, :favorites, :notes,
                                         :auth_unbind, :block, :unblock, :follow, :unfollow,
                                         :followers, :following, :calendar]

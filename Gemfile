@@ -87,6 +87,7 @@ gem 'html-pipeline'
 gem 'html-pipeline-rouge_filter'
 gem 'redcarpet'
 gem 'auto-space'
+gem 'rails_autolink'
 
 # 队列
 gem 'sidekiq'

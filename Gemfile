@@ -99,9 +99,6 @@ gem 'social-share-button'
 # 表单
 gem 'simple_form'
 
-# API
-# gem 'active_model_serializers'
-
 # Mailer Service
 gem 'postmark'
 gem 'postmark-rails'

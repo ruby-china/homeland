@@ -40,9 +40,9 @@ class User
     end
 
     def update_profile_fields(field_values)
-      field_values.each_key do |field|
-        next if !PROFILE_FILEDS.include?(field.to_sym)
-        profile_fields[field.to_sym] = field_values[field]
+      field_values.each do |key, value|
+        next if !PROFILE_FILEDS.include?(key.to_sym)
+        profile_fields[key.to_sym] = value
       end
       self.settings.profile_fields = profile_fields
     end

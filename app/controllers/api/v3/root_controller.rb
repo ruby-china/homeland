@@ -16,7 +16,10 @@ module Api
       def hello
         optional! :limit, values: 0..100
 
-        render json: current_user, meta: { time: Time.now }
+        @meta = { time: Time.now }
+        @user = current_user
+
+        render 'api/v3/users/show'
       end
     end
   end

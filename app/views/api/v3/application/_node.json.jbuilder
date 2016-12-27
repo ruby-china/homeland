@@ -1,3 +1,4 @@
+# @class NodeSerializer
 # 节点
 #
 # == attributes
@@ -9,6 +10,8 @@
 # - *topics_count* [Integer] 话题数量
 # - *sort* {Integer} 排序优先级
 # - *updated_at* [DateTime] 更新时间
-class NodeSerializer < BaseSerializer
-  attributes :id, :name, :topics_count, :summary, :section_id, :sort, :section_name, :updated_at
+if node
+  json.cache! ["v1", node] do
+    json.(node, :id, :name, :topics_count, :summary, :section_id, :sort, :section_name, :updated_at)
+  end
 end

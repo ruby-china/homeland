@@ -2,6 +2,12 @@ module Api
   module V3
     # @abstract
     class ApplicationController < ActionController::API
+      include ActionController::Caching
+      include ActionView::Helpers::OutputSafetyHelper
+      include ApplicationHelper
+
+      helper_method :can?, :current_user, :current_ability, :meta
+      helper_method :admin?, :owner?, :markdown, :raw
 
       # 参数值不在允许的范围内
       # HTTP Status 400
@@ -81,9 +87,8 @@ module Api
         current_ability.can?(*args)
       end
 
-      def admin?
-        return false if current_user.blank?
-        current_user.admin?
+      def meta
+        @meta || {}
       end
     end
   end

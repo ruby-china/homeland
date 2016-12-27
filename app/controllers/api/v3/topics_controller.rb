@@ -43,7 +43,6 @@ module Api
         end
 
         @topics = @topics.offset(params[:offset]).limit(params[:limit])
-        render json: @topics
       end
 
       # 获取话题详情（不含回帖）
@@ -58,17 +57,15 @@ module Api
       # ```
       def show
         @topic.hits.incr(1)
-        meta = { followed: false, liked: false, favorited: false }
+        @meta = { followed: false, liked: false, favorited: false }
 
         if current_user
           # 处理通知
           current_user.read_topic(@topic)
-          meta[:followed] = @topic.followed?(current_user.id)
-          meta[:liked] = current_user.liked?(@topic)
-          meta[:favorited] = current_user.favorited_topic?(@topic.id)
+          @meta[:followed] = @topic.followed?(current_user.id)
+          @meta[:liked] = current_user.liked?(@topic)
+          @meta[:favorited] = current_user.favorited_topic?(@topic.id)
         end
-
-        render json: @topic, serializer: TopicDetailSerializer, meta: meta
       end
 
       # 创建新话题
@@ -90,7 +87,7 @@ module Api
         @topic.node_id = params[:node_id]
         @topic.save!
 
-        render json: @topic, serializer: TopicDetailSerializer
+        render 'show'
       end
 
       # 更新话题
@@ -121,7 +118,7 @@ module Api
         @topic.body = params[:body]
         @topic.save!
 
-        render json: @topic, serializer: TopicDetailSerializer
+        render 'show'
       end
 
       # 删除话题
@@ -161,7 +158,7 @@ module Api
           end
         end
 
-        render json: @replies, meta: { user_liked_reply_ids: @user_liked_reply_ids }
+        @meta = { user_liked_reply_ids: @user_liked_reply_ids }
       end
 
       # 创建对话题的回帖
@@ -180,7 +177,7 @@ module Api
         @reply = @topic.replies.build(body: params[:body])
         @reply.user_id = current_user.id
         @reply.save!
-        render json: @reply
+        render 'api/v3/replies/show'
       end
 
       # 关注话题

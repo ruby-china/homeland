@@ -8,7 +8,7 @@ module Api
       # @return [Array<NodeSerializer>]
       def index
         @nodes = Node.includes(:section).all
-        render json: @nodes, meta: { total: Node.count }
+        @meta = { total: Node.count }
       end
 
       ##
@@ -18,7 +18,6 @@ module Api
       # @return [NodeSerializer]
       def show
         @node = Node.find(params[:id])
-        render json: @node
       end
     end
   end

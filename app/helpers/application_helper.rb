@@ -2,6 +2,7 @@ module ApplicationHelper
   EMPTY_STRING = ''.freeze
 
   def markdown(text)
+    return nil if text.blank?
     Rails.cache.fetch(['markdown', Digest::MD5.hexdigest(text)]) do
       sanitize_markdown(Homeland::Markdown.call(text))
     end

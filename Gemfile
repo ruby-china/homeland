@@ -58,9 +58,8 @@ gem 'ruby-push-notifications'
 gem 'will_paginate'
 
 # 搜索
-gem 'elasticsearch-model', git: 'https://github.com/elasticsearch/elasticsearch-rails'
-gem 'elasticsearch-rails', git: 'https://github.com/elasticsearch/elasticsearch-rails'
-gem 'redis-search'
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
 
 # 三方平台 OAuth 验证登陆
 gem 'omniauth'

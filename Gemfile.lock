@@ -1,13 +1,3 @@
-GIT
-  remote: https://github.com/elasticsearch/elasticsearch-rails
-  revision: b6d485748c71a07d064ea2a46a6da82d64a04cd7
-  specs:
-    elasticsearch-model (0.1.9)
-      activesupport (> 3)
-      elasticsearch (> 0.4)
-      hashie
-    elasticsearch-rails (0.1.9)
-
 GEM
   remote: https://gems.ruby-china.org/
   specs:
@@ -139,6 +129,11 @@ GEM
       elasticsearch-transport (= 5.0.0)
     elasticsearch-api (5.0.0)
       multi_json
+    elasticsearch-model (0.1.9)
+      activesupport (> 3)
+      elasticsearch (> 0.4)
+      hashie
+    elasticsearch-rails (0.1.9)
     elasticsearch-transport (5.0.0)
       faraday
       multi_json
@@ -315,16 +310,11 @@ GEM
       redis (~> 3.0, >= 3.0.4)
     redis-objects (1.2.1)
       redis (>= 3.0.2)
-    redis-search (1.0.3)
-      redis (>= 3.0.0)
-      redis-namespace (>= 1.3.0)
-      ruby-pinyin (~> 0.3, >= 0.3.0)
     redis-session-store (0.9.1)
       actionpack (>= 3, < 5.1)
       redis (~> 3)
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
-    rmmseg-cpp-new (0.3.1)
     rouge (1.11.1)
     rspec-core (3.5.4)
       rspec-support (~> 3.5.0)
@@ -349,8 +339,6 @@ GEM
       rainbow (>= 1.99.1, < 3.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.0, >= 1.0.1)
-    ruby-pinyin (0.5.0)
-      rmmseg-cpp-new (~> 0.3.1)
     ruby-progressbar (1.8.1)
     ruby-push-notifications (1.0.0)
       builder (~> 3.0)
@@ -453,8 +441,8 @@ DEPENDENCIES
   doorkeeper
   doorkeeper-i18n
   dropzonejs-rails
-  elasticsearch-model!
-  elasticsearch-rails!
+  elasticsearch-model
+  elasticsearch-rails
   exception_notification
   factory_girl_rails
   font-awesome-rails
@@ -491,7 +479,6 @@ DEPENDENCIES
   redis
   redis-namespace
   redis-objects
-  redis-search
   redis-session-store
   rspec-rails
   rubocop (~> 0.39.0)

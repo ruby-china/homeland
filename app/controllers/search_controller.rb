@@ -25,13 +25,18 @@ class SearchController < ApplicationController
   def users
     @result = []
     if params[:q].present?
-      users = User.prefix_match(params[:q], limit: 100)
-      users.sort_by! { |u| current_user.following_ids.index(u['id']) || 9999999999 }
-      @result = users.collect { |u| { login: u['title'], name: u['name'], avatar_url: u['large_avatar_url'] } }
+      @result = Elasticsearch::Model.search({
+        query: {
+          multi_match: {
+            type: :phrase_prefix,
+            query: params[:q],
+            fields: [:login, :name]
+          }
+        }
+      }, [User]).records
     else
-      users = current_user.following.limit(10)
-      @result = users.collect { |u| { login: u.login, name: u.name, avatar_url: u.large_avatar_url } }
+      @result = current_user.following.limit(10)
     end
-    render json: @result
+    render json: @result.collect { |u| { login: u.login, name: u.name, avatar_url: u.large_avatar_url } }
   end
 end

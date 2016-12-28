@@ -1,7 +1,6 @@
 require 'digest/md5'
 
 class User < ApplicationRecord
-  include Redis::Search
   include Searchable
   include OmniauthCallbacks
   include Blockable
@@ -20,11 +19,6 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable, :recoverable, :lockable,
          :rememberable, :trackable, :validatable, :omniauthable
-
-  redis_search title_field: :login,
-               alias_field: :name,
-               score_field: :index_score,
-               ext_fields: [:large_avatar_url, :name]
 
   mount_uploader :avatar, AvatarUploader
 

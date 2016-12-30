@@ -25,17 +25,10 @@ class SearchController < ApplicationController
   def users
     @result = []
     if params[:q].present?
-      @result = Elasticsearch::Model.search({
-        query: {
-          multi_match: {
-            type: :phrase_prefix,
-            query: params[:q],
-            fields: [:login, :name]
-          }
-        }
-      }, [User]).records
+      q = params[:q].downcase + '%'
+      @result = User.where('login ilike ? or name ilike ?', q, q).order('replies_count desc').limit(8)
     else
-      @result = current_user.following.limit(10)
+      @result = current_user.following.limit(8)
     end
     render json: @result.collect { |u| { login: u.login, name: u.name, avatar_url: u.large_avatar_url } }
   end

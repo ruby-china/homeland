@@ -368,6 +368,7 @@ window.App =
   atReplyable : (el, logins) ->
     $(el).atwho
       at : "@"
+      limit: 8
       searchKey: 'login'
       callbacks:
         filter: (query, data, searchKey) ->
@@ -381,6 +382,7 @@ window.App =
       insertTpl : "@${login}"
     .atwho
       at : ":"
+      limit: 8
       searchKey: 'code'
       data : window.EMOJI_LIST
       displayTpl : "<li data-value='${code}'><img src='#{App.twemoji_url}/svg/${url}.svg' class='twemoji' /> ${code} </li>"

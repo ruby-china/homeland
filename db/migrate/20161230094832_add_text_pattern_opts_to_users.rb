@@ -1,7 +1,7 @@
 class AddTextPatternOptsToUsers < ActiveRecord::Migration[5.0]
   def change
     execute <<~SQL
-    UPDATE users SET name = substring(name, 100) WHERE length(name) > 100
+    UPDATE users SET name = substring(name, 99) WHERE length(name) >= 100
     SQL
     change_column :users, :login, :string, limit: 100
     change_column :users, :name, :string, limit: 100

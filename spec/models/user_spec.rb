@@ -672,7 +672,7 @@ describe User, type: :model do
       end
 
       it 'other changed work' do
-        expect(.indexed_changed?).to eq false
+        expect(u.indexed_changed?).to eq false
         u.website = '124124124'
         u.github = '124u812'
         u.avatar = '---'

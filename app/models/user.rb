@@ -265,12 +265,11 @@ class User < ApplicationRecord
   end
 
   # for Searchable
-  def index_score
-    0
+  def as_indexed_json(_options = {})
+    as_json(only: [:login, :name, :tagline, :bio, :email, :location])
   end
 
-  # for Searchable
-  def as_indexed_json(_options = {})
-    as_json(only: [:login, :name])
+  def indexed_changed?
+    login_changed? || name_changed? || tagline_changed? || email_changed? || location_changed?
   end
 end

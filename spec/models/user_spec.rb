@@ -631,4 +631,56 @@ describe User, type: :model do
       expect(user.team_collection.collect { |_, id| id }).to include(*(ids1 + ids2))
     end
   end
+
+  describe 'Search methods' do
+    let(:u) { create :user }
+    describe '.indexed_changed?' do
+      it 'login changed work' do
+        expect(u.indexed_changed?).to eq false
+        u.login = u.login + '11'
+        expect(u.indexed_changed?).to eq true
+      end
+
+      it 'name changed work' do
+        expect(u.indexed_changed?).to eq false
+        u.name = u.name + '11'
+        expect(u.indexed_changed?).to eq true
+      end
+
+      it 'email changed work' do
+        expect(u.indexed_changed?).to eq false
+        u.email = u.email + '11'
+        expect(u.indexed_changed?).to eq true
+      end
+
+      it 'bio changed work' do
+        expect(u.indexed_changed?).to eq false
+        u.bio = u.bio + '11'
+        expect(u.indexed_changed?).to eq true
+      end
+
+      it 'tagline changed work' do
+        expect(u.indexed_changed?).to eq false
+        u.tagline = u.tagline + '11'
+        expect(u.indexed_changed?).to eq true
+      end
+
+      it 'location changed work' do
+        expect(u.indexed_changed?).to eq false
+        u.location = u.location + '11'
+        expect(u.indexed_changed?).to eq true
+      end
+
+      it 'other changed work' do
+        expect(.indexed_changed?).to eq false
+        u.website = '124124124'
+        u.github = '124u812'
+        u.avatar = '---'
+        u.sign_in_count = 190
+        u.last_sign_in_at = Time.now
+        u.replies_count = u.replies_count + 10
+        expect(u.indexed_changed?).to eq false
+      end
+    end
+  end
 end

@@ -275,4 +275,31 @@ describe Topic, type: :model do
       expect(t.excellent).to eq 0
     end
   end
+
+  describe 'Search methods' do
+    let(:t) { create :topic }
+    describe '.indexed_changed?' do
+      it 'title changed work' do
+        expect(t.indexed_changed?).to eq false
+        t.title = t.title + '1'
+        expect(t.indexed_changed?).to eq true
+      end
+
+      it 'body changed work' do
+        expect(t.indexed_changed?).to eq false
+        t.body = t.body + '1'
+        expect(t.indexed_changed?).to eq true
+      end
+
+      it 'other changed work' do
+        expect(t.indexed_changed?).to eq false
+        t.node_id = 3
+        t.last_reply_id = 3
+        t.who_deleted = '122'
+        t.last_active_mark = Time.now.to_i
+        t.suggested_at = Time.now
+        expect(t.indexed_changed?).to eq false
+      end
+    end
+  end
 end

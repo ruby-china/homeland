@@ -2,26 +2,6 @@
   <span class="current"><%= t("admin.overview") %></span>
 <% end %>
 
-<style type="text/css">
-.ac-tooltip{
-  position:absolute;
-  visibility:hidden;
-  border : 1px solid #efefef;
-  border-radius: 3px;
-  background-color: white;
-  opacity: .85;
-  padding: 3px;
-  font-size: 12px;
-}
-.ac-tooltip .ac-list{
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.ac-tooltip li{
-  line-height: 14px;
-}
-</style>
 
 <div class="toolbar">
   <div class="btn-group">
@@ -33,80 +13,103 @@
 </div>
 
 <div class="clearfix">
-  <h4><%= t("admin.statics") %></h4>
-  <table class="table table-striped table-condensed">
-    <tr>
-      <td style="width:120px;"><%= t("admin.menu.users") %></td>
-      <td><%= User.unscoped.count %> 人</td>
-    </tr>
-    <tr><td colspan="2"><div id="chart-user" class="chart"></div></td></tr>
-    <tr><td><%= t("admin.menu.topics") %></td><td><%= Topic.unscoped.count %> 个</td></tr>
-    <tr><td colspan="2"><div id="chart-topic" class="chart"></div></td></tr>
-    <tr><td><%= t("admin.menu.replies") %></td><td><%= Reply.unscoped.count %> 条</td></tr>
-    <tr><td colspan="2"><div id="chart-reply" class="chart"></div></td></tr>
-    <tr><td>通知</td><td><%= Notification.unscoped.count %> 条</td></tr>
-    <tr><td colspan="2"><div id="chart-notification" class="chart"></div></td></tr>
-    <tr><td>图片</td><td><%= Photo.unscoped.count %> 张</td></tr>
-    <tr><td colspan="2"><div id="chart-photo" class="chart"></div></td></tr>
-    <% if Setting.has_module? :note %>
-      <tr><td><%= t("admin.menu.notes") %></td><td><%= Note.unscoped.count %> 条</td></tr>
-    <% end %>
-    <tr><td>Device</td><td><%= Device.unscoped.count %> 台</td><td></td></tr>
-    <tr><td>OAuth Token</td><td><%= Doorkeeper::AccessToken.count %> 条</td><td></td></tr>
-  </table>
+  <div class="row">
+    <div class="col-sm-4" id="user-stat">
+      <div class="stat">
+        <div class="total">0</div>
+        <div class="name">
+          用户总数
+          <span class="total-week" rel="twipsy" title="本周新增">+0</span>
+          <span class="total-month" rel="twipsy" title="本月新增">+0</span>
+        </div>
+      </div>
+    </div>
 
-  <script src="https://as.alipayobjects.com/g/datavis/g2/2.0.5/index.js"></script>
+    <div class="col-sm-4" id="topic-stat">
+      <div class="stat">
+        <div class="total">0</div>
+        <div class="name">
+          话题总数
+          <span class="total-week" rel="twipsy" title="本周新增">+0</span>
+          <span class="total-month" rel="twipsy" title="本月新增">+0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-4" id="reply-stat">
+      <div class="stat">
+        <div class="total">0</div>
+        <div class="name">
+          回帖总数
+          <span class="total-week" rel="twipsy" title="本周新增">+0</span>
+          <span class="total-month" rel="twipsy" title="本月新增">+0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3" id="notification-stat">
+      <div class="stat">
+        <div class="total">0</div>
+        <div class="name">
+          通知总数
+          <span class="total-week" rel="twipsy" title="本周新增">+0</span>
+          <span class="total-month" rel="twipsy" title="本月新增">+0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-3" id="comment-stat">
+      <div class="stat">
+        <div class="total">0</div>
+        <div class="name">
+          评论总数
+          <span class="total-week" rel="twipsy" title="本周新增">+0</span>
+          <span class="total-month" rel="twipsy" title="本月新增">+0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-3" id="note-stat">
+      <div class="stat">
+        <div class="total">0</div>
+        <div class="name">
+          记事本总数
+          <span class="total-week" rel="twipsy" title="本周新增">+0</span>
+          <span class="total-month" rel="twipsy" title="本月新增">+0</span>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="col-sm-3" id="photo-stat">
+      <div class="stat">
+        <div class="total">0</div>
+        <div class="name">
+          照片总数
+          <span class="total-week" rel="twipsy" title="本周新增">+0</span>
+          <span class="total-month" rel="twipsy" title="本月新增">+0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script type="text/javascript">
-    function createChart(source, model, color) {
-      var dom = $('#chart-' + model);
-      dom.html("");
-      var chart = new G2.Chart({
-        id: 'chart-' + model,
-        width : dom.width(),
-        height : 60,
-        tickCount: 12,
-        plotCfg: {
-          margin: [10, 5]
-        }
-      });
-      chart.source(source, {
-        date: {
-          type: 'time',
-          alias: '时间',
-          formatter: function(val) {
-            var date = new Date(val);
-            return (date.getMonth() + 1) + '月';
-          }
-        },
-        count: {
-          nice: true,
-          type: 'linear',
-          alias: '新增数量',
-        }
-      });
-      chart.axis(false);
-      chart.tooltip({
-        title: ''
-      });
-      chart.line().color(color).position('date*count').shape('spline').tooltip('date*count').size(2);
-      chart.render();
+    function updateStatValue(data) {
+      var el = $('#' + data.model + '-stat');
+      el.find(".total").text(data.count);
+      el.find(".total-week").text('+' + data.week_count);
+      el.find(".total-month").text('+' + data.month_count);
     }
 
-    $.get("/admin/stats?model=user&by=month", function(data) {
-      createChart(data, 'user', '#356DD0');
-    });
-    $.get("/admin/stats?model=topic&by=month", function(data) {
-      createChart(data, 'topic', '#F44336');
-    });
-    $.get("/admin/stats?model=reply&by=month", function(data) {
-      createChart(data, 'reply', '#FFB300');
-    });
-    $.get("/admin/stats?model=notification&by=month", function(data) {
-      createChart(data, 'notification', '#795548');
-    });
-    $.get("/admin/stats?model=photo&by=month", function(data) {
-      createChart(data, 'photo', '#03A9F4');
-    });
+    var models = ['user', 'topic', 'reply', 'note', 'notification', 'photo', 'comment'];
+    for (var i = 0; i < models.length; i ++) {
+      var model = models[i];
+      $.get("/admin/stats?model="+ model +"&by=month", function(data) {
+        updateStatValue(data)
+      });
+    }
   </script>
 </div>
 

@@ -252,22 +252,18 @@ window.TopicView = Backbone.View.extend
     if !window.repliesChannel
       window.repliesChannel = App.cable.subscriptions.create 'RepliesChannel',
         connected: ->
-          @install
+          @subscribe()
 
         received: (json) =>
-          if json.user_id == App.current_user_id
-            return false
-          if json.action == 'create'
-            if App.windowInActive
-              @updateReplies()
-            else
-              $(".notify-updated").show()
+          return false if json.user_id == App.current_user_id
+          return false if json.action != 'create'
+          if App.windowInActive
+            @updateReplies()
+          else
+            $(".notify-updated").show()
 
-        follow: ->
+        subscribe: ->
           @perform 'follow', topic_id: Topics.topic_id
-
-        install: ->
-          @follow()
 
   updateReplies: () ->
     lastId = $("#replies .reply:last").data('id')

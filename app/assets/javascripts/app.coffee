@@ -168,9 +168,6 @@ AppView = Backbone.View.extend
         connected: ->
           @subscribe()
 
-        install: ->
-          @subscribe()
-
         received: (data) =>
           @receivedNotificationCount(data)
 

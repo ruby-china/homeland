@@ -633,7 +633,7 @@ describe User, type: :model do
   end
 
   describe 'Search methods' do
-    let(:u) { create :user }
+    let(:u) { create :user, bio: '111', tagline: '222' }
     describe '.indexed_changed?' do
       it 'login changed work' do
         expect(u.indexed_changed?).to eq false

@@ -270,6 +270,6 @@ class User < ApplicationRecord
   end
 
   def indexed_changed?
-    login_changed? || name_changed? || tagline_changed? || email_changed? || location_changed?
+    login_changed? || name_changed? || tagline_changed? || bio_changed? || email_changed? || location_changed?
   end
 end

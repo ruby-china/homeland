@@ -16,7 +16,7 @@
     edit_password: "修改密碼"
     delete_this_account: "刪除此帳號"
     dont_like_it: "不喜歡?"
-    bind_another_account: "綁定其他帳號用於登陸"
+    bind_another_account: "綁定其他帳號用於登錄"
     register_user: "註冊新用戶"
     login: "使用者名稱"
     suggest_using_twitter_id: "謹慎填寫，以後不可修改，建議用 Twitter ID。"

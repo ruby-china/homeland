@@ -16,7 +16,7 @@
     edit_password: "修改密码"
     delete_this_account: "删除此帐号"
     dont_like_it: "不喜欢?"
-    bind_another_account: "绑定其他帐号用于登陆"
+    bind_another_account: "绑定其他帐号用于登录"
     register_user: "注册新用户"
     login: "用户名"
     suggest_using_twitter_id: "谨慎填写，以后不可修改，建议用 Twitter ID。"

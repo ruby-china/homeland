@@ -20,7 +20,7 @@
 if reply
   json.cache! ["v1", reply, defined?(detail)] do
     json.(reply, :id, :body_html, :topic_id, :created_at, :updated_at,
-                 :likes_count)
+                 :likes_count, :action)
     json.deleted reply.deleted_at.present?
     json.user do
       json.partial! 'user', user: reply.user

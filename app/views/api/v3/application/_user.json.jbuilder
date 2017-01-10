@@ -29,7 +29,7 @@
 # - *level_name* [String] 用户级别(用于显示)
 # - *created_at* [DateTime] 注册时间 iso8601 格式
 if user
-  json.cache! ["v1", user, defined?(detail)] do
+  json.cache! ["v1.1", user, defined?(detail)] do
     json.(user, :id, :login, :name)
     json.avatar_url (user.avatar? ? user.avatar.url(:large) : user.letter_avatar_url(240))
 
@@ -45,7 +45,7 @@ if user
       else
         json.email ""
       end
-      json.partial! 'abilities', object: user
     end
+    json.partial! 'abilities', object: user
   end
 end

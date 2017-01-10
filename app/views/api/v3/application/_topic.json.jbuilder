@@ -26,7 +26,7 @@
 # - *hits* [Integer] 阅读次数
 
 if topic
-  json.cache! ["v1", topic, defined?(detail)] do
+  json.cache! ["v1.1", topic, defined?(detail)] do
     json.(topic, :id, :title, :created_at, :updated_at, :replied_at, :replies_count,
                  :node_name, :node_id, :last_reply_user_id, :last_reply_user_login,
                  :excellent, :likes_count, :suggested_at, :closed_at)
@@ -37,9 +37,8 @@ if topic
 
     if defined?(detail)
       json.(topic, :body, :body_html)
-      json.hits topic.hits.to_i
     end
-
-    json.partial! 'abilities', object: topic
   end
+  json.hits topic.hits.to_i
+  json.partial! 'abilities', object: topic
 end

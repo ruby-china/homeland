@@ -76,7 +76,7 @@ gem 'redis-objects'
 gem 'redis-session-store'
 
 # Cache
-gem 'second_level_cache'
+gem 'second_level_cache', '2.3.0.beta'
 
 # Setting
 gem 'rails-settings-cached'

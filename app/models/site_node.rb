@@ -1,5 +1,5 @@
 class SiteNode < ApplicationRecord
-  acts_as_cached version: 1, expires_in: 1.week
+  second_level_cache expires_in: 1.month
 
   has_many :sites
 

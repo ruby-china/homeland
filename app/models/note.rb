@@ -1,6 +1,6 @@
 # 记事本
 class Note < ApplicationRecord
-  acts_as_cached version: 1, expires_in: 1.week
+  second_level_cache
 
   belongs_to :user
 

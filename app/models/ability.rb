@@ -53,8 +53,8 @@ class Ability
   def roles_for_replies
     # 新手用户晚上禁止回帖，防 spam，可在面板设置是否打开
     can :create, Reply if !current_lock_reply?
-    cannot :create, Reply, topic: { closed?: true }
     can [:update, :destroy], Reply, user_id: user.id
+    cannot [:create, :update, :destroy], Reply, topic: { closed?: true }
   end
 
   def current_lock_reply?

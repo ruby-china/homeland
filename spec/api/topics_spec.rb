@@ -408,6 +408,15 @@ describe 'API V3', 'topics', type: :request do
       expect(response.status).to eq(200)
       expect(t.reload.replies.first.body).to eq('new reply body')
     end
+
+    it 'should not create Reply when Topic was closed' do
+      login_user!
+      t = create(:topic, title: 'new topic 1', closed_at: Time.now)
+      post "/api/v3/topics/#{t.id}/replies.json", body: 'new reply body'
+      expect(response.status).to eq(400)
+      expect(json['message']).to include('已关闭，不再接受回帖')
+      expect(t.reload.replies.first).to eq nil
+    end
   end
 
   describe 'POST /api/v3/topics/:id/follow.json' do

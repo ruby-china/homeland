@@ -25,6 +25,10 @@ class Reply < ApplicationRecord
     if body.strip.downcase.in?(ban_words)
       errors.add(:body, '请勿回复无意义的内容，如你想收藏或赞这篇帖子，请用帖子后面的功能。')
     end
+
+    if topic.closed?
+      errors.add(:topic_id, '已关闭，不再接受回帖或修改回帖。')
+    end
   end
 
   after_commit :update_parent_topic, on: :create, unless: -> { system_event? }

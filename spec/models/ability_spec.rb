@@ -79,14 +79,21 @@ describe Ability, type: :model do
     end
 
     context 'Reply' do
-      let(:t) { create(:topic, closed_at: Time.now) }
-      let(:new_reply) { Reply.new(topic: t) }
+      context 'normal' do
+        it { is_expected.to be_able_to(:read, Reply) }
+        it { is_expected.to be_able_to(:create, Reply) }
+        it { is_expected.to be_able_to(:update, reply) }
+        it { is_expected.to be_able_to(:destroy, reply) }
+      end
 
-      it { is_expected.to be_able_to(:read, Reply) }
-      it { is_expected.to be_able_to(:create, Reply) }
-      it { is_expected.to be_able_to(:update, reply) }
-      it { is_expected.to be_able_to(:destroy, reply) }
-      it { is_expected.not_to be_able_to(:create, new_reply) }
+      context 'Reply that Topic closed' do
+        let(:t) { create(:topic, closed_at: Time.now) }
+        let(:r) { Reply.new(topic: t) }
+
+        it { is_expected.not_to be_able_to(:create, r) }
+        it { is_expected.not_to be_able_to(:update, r) }
+        it { is_expected.not_to be_able_to(:destroy, r) }
+      end
     end
 
     context 'Section' do

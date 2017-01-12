@@ -3,6 +3,29 @@ require 'rails_helper'
 describe Reply, type: :model do
   let(:user) { create(:user) }
 
+  describe 'validates' do
+    describe 'topic close' do
+      it 'should not valid when Topic was closed' do
+        t = create :topic, closed_at: Time.now
+        r = build(:reply)
+        expect(r.valid?).to eq true
+        r.topic_id = t.id
+        expect(r.valid?).not_to eq true
+      end
+
+      it 'should not allowed update replies when Topic was closed' do
+        t = create :topic
+        r = create(:reply, topic: t)
+        expect(r.valid?).to eq true
+        t.close!
+        r.body = "new body"
+        expect(r.valid?).not_to eq true
+        expect(r.save).to eq false
+        expect(r.errors.full_messages.join('')).to include('已关闭，不再接受回帖或修改回帖')
+      end
+    end
+  end
+
   describe 'notifications' do
     it 'should delete mention notification after destroy' do
       expect do

@@ -14,6 +14,7 @@ describe TopicsController, type: :controller do
       get :index
       expect(response).to be_success
     end
+
     it 'should work when login' do
       sign_in user
       get :index

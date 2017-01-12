@@ -26,8 +26,8 @@ class Reply < ApplicationRecord
       errors.add(:body, '请勿回复无意义的内容，如你想收藏或赞这篇帖子，请用帖子后面的功能。')
     end
 
-    if topic.closed?
-      errors.add(:topic_id, '已关闭，不再接受回帖或修改回帖。')
+    if topic&.closed?
+      errors.add(:topic, '已关闭，不再接受回帖或修改回帖。')
     end
   end
 

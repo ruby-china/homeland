@@ -29,11 +29,12 @@
 # - *level_name* [String] 用户级别(用于显示)
 # - *created_at* [DateTime] 注册时间 iso8601 格式
 if user
-  json.cache! ["v1.1", user, defined?(detail)] do
+  detail = defined?(detail)
+  json.cache! ["v1.1", user, detail] do
     json.(user, :id, :login, :name)
     json.avatar_url (user.avatar? ? user.avatar.url(:large) : user.letter_avatar_url(240))
 
-    if defined?(detail)
+    if detail
       json.(user, :location, :company, :twitter, :website,
                   :tagline, :github, :created_at,
                   :topics_count, :replies_count,

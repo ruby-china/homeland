@@ -18,8 +18,7 @@
 # - *topic_title* [String] 话题标题
 # - *body* [String] 回帖正文，原始 Markdown
 if reply
-  detail = defined?(detail)
-  json.cache! ["v1.2", reply, detail] do
+  json.cache! ["v1.2", reply, defined?(detail)] do
     json.(reply, :id, :body_html, :topic_id, :created_at, :updated_at,
                  :likes_count, :action, :target_type)
     json.deleted reply.deleted_at.present?
@@ -27,7 +26,7 @@ if reply
       json.partial! 'user', user: reply.user
     end
 
-    if detail
+    if defined?(detail)
       json.(reply, :body)
       json.topic_title reply.topic.try(:title)
     end

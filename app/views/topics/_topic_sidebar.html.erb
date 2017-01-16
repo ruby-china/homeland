@@ -1,19 +1,16 @@
 <div id="topic-sidebar">
-<% ab_test(:follow_author, 'true', 'false') do |visible| %>
-  <% if visible == 'true' %>
-    <div class="panel panel-default">
-      <div class="panel-body text-center">
-        <%= render "author", user: @topic.user %>
-      </div>
-    </div>
-  <% end %>
-<% end %>
   <div class="panel panel-default">
     <div class="panel-body">
       <a href="#" class="btn btn-block btn-move-page" data-type="top"><i class="fa fa-arrow-up"></i></a>
       <div class="buttons">
         <div class="group likes opts">
           <%= likeable_tag(@topic) %>
+        </div>
+        <div class="group">
+          <div class="btn-group" role="group">
+            <%= topic_follow_tag(@topic, class: 'btn btn-default') %>
+            <%= topic_favorite_tag(@topic, class: 'btn btn-default') %>
+          </div>
         </div>
       </div>
 

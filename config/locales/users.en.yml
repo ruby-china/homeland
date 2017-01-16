@@ -18,7 +18,6 @@
     dont_like_it: "Do not like it?"
     bind_another_account: "Bind another account"
     register_user: "Sign Up"
-    register_benefits: "Why you should register?"
     login: "Pick a username"
     suggest_using_twitter_id: "Cannot modify after create."
     already_have_account: "Already have an account?"

@@ -93,7 +93,7 @@ class User < ApplicationRecord
     limit = (options[:limit] || 30).to_i
     user = options[:user]
     following = []
-    term = term + '%';
+    term = term.to_s + '%';
     users = User.where('login ilike ? or name ilike ?', term, term).order('replies_count desc').limit(limit).to_a
     if user
       following = user.following.where('login ilike ? or name ilike ?', term, term).to_a

@@ -133,7 +133,6 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'capybara'
-  gem 'jasmine-rails', '~> 0.10.2'
   gem 'letter_opener'
   gem 'yard'
 

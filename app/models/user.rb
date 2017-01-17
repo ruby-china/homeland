@@ -89,6 +89,22 @@ class User < ApplicationRecord
     Thread.current[:current_user] = user
   end
 
+  def self.search(term, options = {})
+    limit = (options[:limit] || 30).to_i
+    user = options[:user]
+    following = []
+    term = term + '%';
+    users = User.where('login ilike ? or name ilike ?', term, term).order('replies_count desc').limit(limit).to_a
+    if user
+      following = user.following.where('login ilike ? or name ilike ?', term, term).to_a
+    end
+    users.unshift(*Array(following))
+    users.uniq!
+    users.compact!
+
+    users.first(limit)
+  end
+
   def to_param
     login
   end

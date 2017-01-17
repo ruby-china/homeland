@@ -683,4 +683,34 @@ describe User, type: :model do
       end
     end
   end
+
+  describe '#search' do
+    before do
+      @rei = create(:user, login: 'Rei', replies_count: 5)
+      @rain = create(:user, login: 'rain')
+      @huacnlee = create(:user, login: 'huacnlee')
+      @hugo = create(:user, login: 'Hugo', name: 'Rugo', replies_count: 2)
+      @hot = create(:user, login: 'hot')
+    end
+
+    it 'should work simple query' do
+      res = User.search('r')
+      expect(res[0].id).to eq @rei.id
+      expect(res[1].id).to eq @hugo.id
+      expect(res[2].id).to eq @rain.id
+
+      expect(User.search('r').size).to eq 3
+      expect(User.search('re').size).to eq 1
+      expect(User.search('h').size).to eq 3
+      expect(User.search('hu').size).to eq 2
+    end
+
+    it 'should work with :user option to include following users first' do
+      @rei.follow_user(@hugo)
+      res = User.search('r', user: @rei, limit: 2)
+      expect(res[0].id).to eq @hugo.id
+      expect(res[1].id).to eq @rei.id
+      expect(res.length).to eq 2
+    end
+  end
 end

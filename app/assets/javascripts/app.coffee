@@ -356,13 +356,24 @@ window.App =
   # scan logins in jQuery collection and returns as a object,
   # which key is login, and value is the name.
   scanLogins: (query) ->
-    result = {}
+    result = []
+    logins = []
     for e in query
       $e = $(e)
-      result[$e.text()] = $e.attr('data-name')
-    result
+      login = $e.find(".user-name").text()
+      item =
+        login: login
+        name: $e.find(".user-name").attr('data-name')
+        avatar_url: $e.find(".avatar img").attr("src")
+      if logins.indexOf(login) != -1
+        continue
+
+      logins.push(login)
+      result.push(item)
+    _.uniq(result)
 
   atReplyable : (el, logins) ->
+    logins = [] if !logins
     $(el).atwho
       at : "@"
       limit: 8
@@ -373,7 +384,20 @@ window.App =
         sorter: (query, items, searchKey) ->
           return items
         remoteFilter: (query, callback) ->
+          r = new RegExp("^#{query}")
+          # 过滤出本地匹配的数据
+          localMatches = _.filter logins, (u) ->
+            return r.test(u.login) || r.test(u.name)
+          # Remote 匹配
           $.getJSON '/search/users.json', { q: query }, (data) ->
+            # 本地的排前面
+            for u in localMatches
+              data.unshift(u)
+            # 去重复
+            data = _.uniq data, false, (item) ->
+              return item.login;
+            # 限制数量
+            data = _.first(data, 8)
             callback(data)
       displayTpl : "<li data-value='${login}'><img src='${avatar_url}' height='20' width='20'/> ${login} <small>${name}</small></li>"
       insertTpl : "@${login}"

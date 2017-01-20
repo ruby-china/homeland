@@ -43,7 +43,7 @@ gem 'carrierwave-aliyun'
 gem 'mini_magick', require: false
 
 # 验证码，头像
-gem 'rucaptcha'
+gem 'rucaptcha', '2.0.0.beta4'
 gem 'letter_avatar'
 
 # 用户系统

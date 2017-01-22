@@ -3,7 +3,7 @@ comments = Comment.where(commentable_type: commentable.class.name, commentable_i
 new_comment = Comment.new(commentable_type: commentable.class.name, commentable_id: commentable.id)
 %>
 
-<div id="<%= commentable.class.name %>_<%= commentable.id %>_cell_comments" class="cell_comments panel panel-default">
+<div id="<%= commentable.class.name %>_<%= commentable.id %>_cell_comments" class="comments panel panel-default">
   <div class="panel-heading">评论列表</div>
   <div class="panel-body">
     <% if !comments.blank? %>

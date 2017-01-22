@@ -771,3 +771,18 @@ textarea.div-dropzone-focus { border-color: #BBE1C9; background: #fafafa; }
     margin: 5px 0;
   }
 }
+
+.comments {
+  .comment {
+    padding: 15px;
+    margin: 0 -15px;
+    border-bottom: 1px solid #f0f0f0;
+    &:first-child { padding-top: 0; }
+    &:last-child { border: 0; padding-bottom: 0;}
+
+    .info {
+      font-size: 13px;
+      color: #999;
+    }
+  }
+}

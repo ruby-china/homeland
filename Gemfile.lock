@@ -326,8 +326,8 @@ GEM
       rspec-mocks (~> 3.5.0)
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
-    rubocop (0.39.0)
-      parser (>= 2.3.0.7, < 3.0)
+    rubocop (0.47.1)
+      parser (>= 2.3.3.1, < 3.0)
       powerpack (~> 0.1)
       rainbow (>= 1.99.1, < 3.0)
       ruby-progressbar (~> 1.7)
@@ -473,7 +473,7 @@ DEPENDENCIES
   redis-objects
   redis-session-store
   rspec-rails
-  rubocop (~> 0.39.0)
+  rubocop
   ruby-push-notifications
   rucaptcha
   sanitize

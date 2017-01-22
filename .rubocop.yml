@@ -1,11 +1,13 @@
 AllCops:
-  Rails:
-    Enabled: true
   Exclude:
     - 'lib/templates/**/*'
-  TargetRubyVersion: 2.3
+    - 'spec/**/*'
+  TargetRubyVersion: 2.4
 
 Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
   Enabled: false
 
 Style/AsciiComments:
@@ -33,6 +35,9 @@ Metrics/MethodLength:
   Max: 1200
 
 Metrics/ModuleLength:
+  Max: 1200
+
+Metrics/BlockLength:
   Max: 1200
 
 Metrics/CyclomaticComplexity:

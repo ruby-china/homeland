@@ -336,7 +336,7 @@ GEM
     ruby-push-notifications (1.0.0)
       builder (~> 3.0)
     ruby_dep (1.5.0)
-    rucaptcha (2.0.0.beta4)
+    rucaptcha (2.0.0)
       railties (>= 3.2)
     sanitize (4.4.0)
       crass (~> 1.0.2)
@@ -475,7 +475,7 @@ DEPENDENCIES
   rspec-rails
   rubocop (~> 0.39.0)
   ruby-push-notifications
-  rucaptcha (= 2.0.0.beta4)
+  rucaptcha
   sanitize
   sass-rails
   second_level_cache (= 2.3.0.beta)

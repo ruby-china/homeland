@@ -37,12 +37,12 @@ class UsersController < ApplicationController
     # 转向正确的拼写
     if @user.login != params[:id]
       redirect_to user_path(@user.login), status: 301
+      return
     end
 
+    render_404 if @user.deleted?
+
     @user_type = @user.user_type
-    if @user.deleted?
-      render_404
-    end
   end
 
   # Override render method to render difference view path

@@ -1,5 +1,5 @@
 class Node < ApplicationRecord
-  second_level_cache expires_in: 1.month
+  second_level_cache expires_in: 2.weeks
 
   delegate :name, to: :section, prefix: true, allow_nil: true
 

@@ -4,7 +4,7 @@ class Page < ApplicationRecord
 
   counter :hits, default: 0
 
-  second_level_cache expires_in: 1.month
+  second_level_cache expires_in: 2.weeks
 
   has_many :versions, class_name: 'PageVersion'
 

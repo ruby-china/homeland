@@ -12,7 +12,7 @@ class User < ApplicationRecord
   include UserCallbacks
   include ProfileFields
 
-  second_level_cache expires_in: 1.month
+  second_level_cache expires_in: 2.weeks
 
   LOGIN_FORMAT = 'A-Za-z0-9\-\_\.'
   ALLOW_LOGIN_FORMAT_REGEXP = /\A[#{LOGIN_FORMAT}]+\z/

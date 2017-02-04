@@ -1,5 +1,5 @@
 class Section < ApplicationRecord
-  second_level_cache expires_in: 1.month
+  second_level_cache expires_in: 2.weeks
 
   has_many :nodes, dependent: :destroy
 

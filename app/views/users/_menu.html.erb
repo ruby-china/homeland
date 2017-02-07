@@ -6,7 +6,7 @@
   li << link_to(t("users.menu.notes"), notes_user_path(@user), class: 'hide-ios') if Setting.has_module?(:note)
   li << link_to(t("users.menu.following"), following_user_path(@user))
   li << link_to(t("users.menu.followers"), followers_user_path(@user))
-  if owner?(@user) && current_user.blocked_users?
+  if owner?(@user) && current_user.block_users?
     li << link_to(t("users.menu.blocked"), blocked_user_path(@user), class: 'hide-ios')
   end
 end %>

@@ -20,9 +20,7 @@ module Users
     end
 
     def favorites
-      @topic_ids = @user.favorite_topic_ids.reverse.paginate(page: params[:page], per_page: 40)
-      @topics = Topic.where(id: @topic_ids).fields_for_list
-      @topics = @topics.to_a.sort_by { |topic| @topic_ids.index(topic.id) }
+      @topics = @user.favorite_topics.includes(:user).order("actions.id desc").paginate(page: params[:page], per_page: 40)
       fresh_when([@topics])
     end
 
@@ -57,7 +55,7 @@ module Users
         render_404
       end
 
-      @blocked_users = User.where(id: current_user.blocked_user_ids).paginate(page: params[:page], per_page: 20)
+      @block_users = @user.block_users.order("actions.id asc").paginate(page: params[:page], per_page: 20)
     end
 
     def follow
@@ -71,12 +69,12 @@ module Users
     end
 
     def followers
-      @users = @user.followers.fields_for_list.paginate(page: params[:page], per_page: 60)
+      @users = @user.follow_by_users.order("actions.id asc").paginate(page: params[:page], per_page: 60)
       fresh_when([@users])
     end
 
     def following
-      @users = @user.following.fields_for_list.paginate(page: params[:page], per_page: 60)
+      @users = @user.follow_users.order("actions.id asc").paginate(page: params[:page], per_page: 60)
       render template: '/users/followers' if stale?(etag: [@users], template: 'users/followers')
     end
 

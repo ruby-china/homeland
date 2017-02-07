@@ -5,7 +5,7 @@ module TopicsHelper
     opts[:class] ||= ''
     class_name = ''
     link_title = '收藏'
-    if current_user && current_user.favorite_topic_ids.include?(topic.id)
+    if current_user && current_user.favorite_topic?(topic)
       class_name = 'active'
       link_title = '取消收藏'
     end
@@ -24,7 +24,7 @@ module TopicsHelper
     return '' if owner?(topic)
     opts[:class] ||= ''
     class_name = 'follow'
-    class_name += ' active' if topic.follower_ids.include?(current_user.id)
+    class_name += ' active' if current_user.follow_topic?(topic)
     if opts[:class].present?
       class_name += ' ' + opts[:class]
     end

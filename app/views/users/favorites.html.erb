@@ -12,7 +12,6 @@
             <td class="title"><%= t("common.title") %></td>
           </tr>
           <% @topics.each do |item| %>
-          <% next if item.blank? %>
           <tr class="topic <%= cycle('odd',"") %>">
             <td><%= render_node_name(item.node_name,item.node_id) %></td>
             <td class="title"><%= topic_title_tag(item) %></td>
@@ -21,7 +20,7 @@
         </table>
       </div>
       <div class="panel-footer clearfix">
-        <%= will_paginate @topic_ids %>
+        <%= will_paginate @topics %>
       </div>
     </div>
   </div>

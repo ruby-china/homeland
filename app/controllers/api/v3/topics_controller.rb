@@ -25,8 +25,8 @@ module Api
         if params[:node_id].blank?
           @topics = Topic
           if current_user
-            @topics = @topics.without_nodes(current_user.blocked_node_ids)
-            @topics = @topics.without_users(current_user.blocked_user_ids)
+            @topics = @topics.without_nodes(current_user.block_node_ids)
+            @topics = @topics.without_users(current_user.block_user_ids)
           else
             @topics = @topics.without_hide_nodes
           end
@@ -62,9 +62,9 @@ module Api
         if current_user
           # 处理通知
           current_user.read_topic(@topic)
-          @meta[:followed] = @topic.followed?(current_user.id)
-          @meta[:liked] = current_user.liked?(@topic)
-          @meta[:favorited] = current_user.favorited_topic?(@topic.id)
+          @meta[:followed] = current_user.follow_topic?(@topic)
+          @meta[:liked] = current_user.like_topic?(@topic)
+          @meta[:favorited] = current_user.favorite_topic?(@topic)
         end
       end
 
@@ -147,17 +147,7 @@ module Api
 
         @replies = Reply.unscoped.where(topic_id: @topic.id).order(:id).includes(:user)
         @replies = @replies.offset(params[:offset].to_i).limit(params[:limit].to_i)
-
-        @user_liked_reply_ids = []
-        if current_user
-          # 找出用户 like 过的 Reply，给 JS 处理 like 功能的状态
-          @replies.each do |r|
-            unless r.liked_user_ids.index(current_user.id).nil?
-              @user_liked_reply_ids << r.id
-            end
-          end
-        end
-
+        @user_liked_reply_ids = current_user&.like_reply_ids || []
         @meta = { user_liked_reply_ids: @user_liked_reply_ids }
       end
 
@@ -184,7 +174,7 @@ module Api
       #
       # POST /api/v3/topics/:id/follow
       def follow
-        @topic.push_follower(current_user.id)
+        current_user.follow_topic(@topic)
         render json: { ok: 1 }
       end
 
@@ -192,7 +182,7 @@ module Api
       #
       # POST /api/v3/topics/:id/unfollow
       def unfollow
-        @topic.pull_follower(current_user.id)
+        current_user.unfollow_topic(@topic)
         render json: { ok: 1 }
       end
 

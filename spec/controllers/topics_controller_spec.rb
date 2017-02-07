@@ -235,7 +235,7 @@ describe TopicsController, type: :controller do
     it 'should clear user mention notification when show topic' do
       user = create :user
       topic = create :topic, body: "@#{user.login}", node_id: Node.job.id
-      create :reply, body: "@#{user.login}", topic: topic, liked_user_ids: [user.id]
+      create :reply, body: "@#{user.login}", topic: topic, like_by_user_ids: [user.id]
       sign_in user
       expect do
         get :show, params: { id: topic.id }

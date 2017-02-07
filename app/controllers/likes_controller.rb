@@ -3,7 +3,7 @@ class LikesController < ApplicationController
   before_action :set_likeable
 
   def index
-    @users = @item.liked_users
+    @users = @item.like_by_users
     render :index, layout: false
   end
 

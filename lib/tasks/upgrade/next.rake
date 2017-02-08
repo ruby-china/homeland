@@ -14,7 +14,7 @@ end
 
 def copy_data_from_topics
   Topic.unscoped.where('
-    array_length(liked_user_ids,1) > 0 OR
+    array_length(liked_user_ids, 1) > 0 OR
     array_length(follower_ids, 1) > 0
   ').find_in_batches do |group|
     group.each do |t|
@@ -39,14 +39,14 @@ def copy_data_from_topics
           worker.add(action)
         end
       end
-      t.update_attributes(likes_count: t[:liked_user_ids].count)
+      t.update_columns(likes_count: t[:liked_user_ids].count)
     end
   end
 end
 
 def copy_data_from_replies
   Reply.unscoped.where('
-    array_length(liked_user_ids,1) > 0
+    array_length(liked_user_ids, 1) > 0
   ').find_in_batches do |group|
     group.each do |r|
       Action.bulk_insert(set_size: 100) do |worker|
@@ -63,7 +63,7 @@ def copy_data_from_replies
           worker.add(action)
         end
       end
-      r.update_attributes(likes_count: r[:liked_user_ids].count)
+      r.update_columns(likes_count: r[:liked_user_ids].count)
     end
   end
 end
@@ -71,7 +71,8 @@ end
 def copy_data_from_users
   User.unscoped.where('
     type is null AND
-    (array_length(following_ids,1) > 0 OR
+    (array_length(following_ids, 1) > 0 OR
+    array_length(follower_ids, 1) > 0 OR
     array_length(blocked_user_ids, 1) > 0 OR
     array_length(blocked_node_ids, 1) > 0 OR
     array_length(favorite_topic_ids, 1) > 0)
@@ -91,7 +92,7 @@ def copy_data_from_users
           action = default_action.merge(target_id: uid)
           worker.add(action)
         end
-        u.update_attributes(followers_count: u[:follower_ids].count, following_count: u[:following_ids].count)
+        u.update_columns(followers_count: u[:follower_ids].count, following_count: u[:following_ids].count)
 
         # block_user_ids
         default_action = {

@@ -54,6 +54,9 @@ gem 'devise-encryptable'
 gem 'notifications'
 gem 'ruby-push-notifications'
 
+# 赞、关注、收藏、屏蔽等功能的数据结构
+gem 'action-store'
+
 # 分页
 gem 'will_paginate'
 

@@ -16,8 +16,8 @@ class TopicsController < ApplicationController
     @topics = Topic.last_actived.without_suggest
     @topics =
       if current_user
-        @topics.without_nodes(current_user.blocked_node_ids)
-          .without_users(current_user.blocked_user_ids)
+        @topics.without_nodes(current_user.block_node_ids)
+          .without_users(current_user.block_user_ids)
       else
         @topics.without_hide_nodes
       end
@@ -95,7 +95,6 @@ class TopicsController < ApplicationController
 
     @replies = Reply.unscoped.where(topic_id: @topic.id).order(:id).all
 
-    check_current_user_liked_replies
     check_current_user_status_for_topic
     set_special_node_active_menu
     fresh_when([@topic, @node, @show_raw, @replies, @has_followed, @has_favorited, @can_reply])
@@ -164,12 +163,12 @@ class TopicsController < ApplicationController
   end
 
   def follow
-    @topic.push_follower(current_user.id)
+    current_user.follow_topic(@topic)
     render plain: '1'
   end
 
   def unfollow
-    @topic.pull_follower(current_user.id)
+    current_user.unfollow_topic(@topic)
     render plain: '1'
   end
 
@@ -212,26 +211,14 @@ class TopicsController < ApplicationController
     team.id
   end
 
-  def check_current_user_liked_replies
-    return false unless current_user
-
-    # 找出用户 like 过的 Reply，给 JS 处理 like 功能的状态
-    @user_liked_reply_ids = []
-    @replies.each do |r|
-      unless r.liked_user_ids.index(current_user.id).nil?
-        @user_liked_reply_ids << r.id
-      end
-    end
-  end
-
   def check_current_user_status_for_topic
     return false unless current_user
     # 通知处理
     current_user.read_topic(@topic, replies_ids: @replies.collect(&:id))
     # 是否关注过
-    @has_followed = @topic.followed?(current_user.id)
+    @has_followed = current_user.follow_topic?(@topic)
     # 是否收藏
-    @has_favorited = current_user.favorited_topic?(@topic.id)
+    @has_favorited = current_user.favorite_topic?(@topic)
   end
 
   def set_special_node_active_menu

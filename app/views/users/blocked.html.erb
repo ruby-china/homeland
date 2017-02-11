@@ -7,10 +7,10 @@
     <div class="panel bloced-users panel-default">
       <div class="panel-heading"><%= t('users.menu.blocked') %></div>
       <div class="panel-body">
-        <%= render "user_list", users: @blocked_users %>
+        <%= render "user_list", users: @block_users %>
       </div>
       <div class="panel-footer clearfix">
-        <%= will_paginate @blocked_users %>
+        <%= will_paginate @block_users %>
       </div>
     </div>
   </div>

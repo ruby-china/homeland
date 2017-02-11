@@ -11,7 +11,6 @@ CORRECT_CHARS = [
 
 class Topic < ApplicationRecord
   include MarkdownBody
-  include Likeable
   include SoftDelete
   include Mentionable
   include Closeable
@@ -100,7 +99,7 @@ class Topic < ApplicationRecord
   end
 
   def self.fields_for_list
-    columns = %w(body who_deleted follower_ids)
+    columns = %w(body who_deleted)
     select(column_names - columns.map(&:to_s))
   end
 
@@ -138,23 +137,6 @@ class Topic < ApplicationRecord
   after_commit :async_create_reply_notify, on: :create
   def async_create_reply_notify
     NotifyTopicJob.perform_later(id)
-  end
-
-  def followed?(uid)
-    follower_ids.include?(uid)
-  end
-
-  def push_follower(uid)
-    return false if uid == user_id
-    return false if followed?(uid)
-    push(follower_ids: uid)
-    true
-  end
-
-  def pull_follower(uid)
-    return false if uid == user_id
-    pull(follower_ids: uid)
-    true
   end
 
   def update_last_reply(reply, opts = {})
@@ -231,7 +213,7 @@ class Topic < ApplicationRecord
     topic = Topic.find_by_id(topic_id)
     return unless topic && topic.user
 
-    follower_ids = topic.user.follower_ids.uniq
+    follower_ids = topic.user.follow_by_user_ids
     return if follower_ids.empty?
 
     notified_user_ids = topic.mentioned_user_ids

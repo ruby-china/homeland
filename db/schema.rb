@@ -10,11 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161230094832) do
+ActiveRecord::Schema.define(version: 20170204090209) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "pg_stat_statements"
+
+  create_table "actions", force: :cascade do |t|
+    t.string   "action_type",   null: false
+    t.string   "action_option"
+    t.string   "target_type"
+    t.integer  "target_id"
+    t.string   "user_type"
+    t.integer  "user_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["target_type", "target_id", "action_type"], name: "index_actions_on_target_type_and_target_id_and_action_type", using: :btree
+    t.index ["user_type", "user_id", "action_type"], name: "index_actions_on_user_type_and_user_id_and_action_type", using: :btree
+  end
 
   create_table "authorizations", force: :cascade do |t|
     t.string   "provider",                null: false
@@ -346,6 +359,8 @@ ActiveRecord::Schema.define(version: 20161230094832) do
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.integer  "team_users_count"
+    t.integer  "followers_count",                    default: 0
+    t.integer  "following_count",                    default: 0
     t.index "lower((login)::text) varchar_pattern_ops", name: "index_users_on_lower_login_varchar_pattern_ops", using: :btree
     t.index "lower((name)::text) varchar_pattern_ops", name: "index_users_on_lower_name_varchar_pattern_ops", using: :btree
     t.index ["email"], name: "index_users_on_email", using: :btree

@@ -2,7 +2,6 @@ require 'digest/md5'
 class Reply < ApplicationRecord
   include MarkdownBody
   include SoftDelete
-  include Likeable
   include Mentionable
   include MentionTopic
 
@@ -98,9 +97,9 @@ class Reply < ApplicationRecord
   def notification_receiver_ids
     return @notification_receiver_ids if defined? @notification_receiver_ids
     # 加入帖子关注着
-    follower_ids = self.topic.try(:follower_ids) || []
+    follower_ids = self.topic.try(:follow_by_user_ids) || []
     # 加入回帖人的关注者
-    follower_ids = follower_ids + (self.user.try(:follower_ids) || [])
+    follower_ids = follower_ids + (self.user.try(:follow_by_user_ids) || [])
     # 加入发帖人
     follower_ids << self.topic.try(:user_id)
     # 去重复

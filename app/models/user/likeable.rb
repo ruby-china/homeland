@@ -2,30 +2,29 @@ class User
   module Likeable
     extend ActiveSupport::Concern
 
+    included do
+      # Action for Topic
+      action_store :like, :topic, counter_cache: true
+      # Action for Reply
+      action_store :like, :reply, counter_cache: true
+    end
+
     # 赞
     def like(likeable)
       return false if likeable.blank?
-      return false if liked?(likeable)
-      likeable.transaction do
-        likeable.push(liked_user_ids: id)
-        likeable.increment!(:likes_count)
-      end
+      return false if likeable.user_id == self.id
+      self.create_action(:like, target: likeable)
     end
 
     # 取消赞
     def unlike(likeable)
       return false if likeable.blank?
-      return false unless liked?(likeable)
-      return false if likeable.user_id == self.id
-      likeable.transaction do
-        likeable.pull(liked_user_ids: id)
-        likeable.decrement!(:likes_count)
-      end
+      self.destroy_action(:like, target: likeable)
     end
 
     # 是否喜欢过
     def liked?(likeable)
-      likeable.liked_by_user?(self) || likeable.user_id == self.id
+      self.find_action(:like, target: likeable).present?
     end
   end
 end

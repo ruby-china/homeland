@@ -25,27 +25,6 @@ describe Topic, type: :model do
     expect(create(:topic, node: node).node_name).to eq(node.name)
   end
 
-  describe '#push_follower, #pull_follower' do
-    let(:t) { create(:topic, user_id: 0) }
-    it 'should push' do
-      t.push_follower user.id
-      expect(t.follower_ids.include?(user.id)).to be_truthy
-      expect(t.followed?(user.id)).to eq(true)
-    end
-
-    it 'should pull' do
-      t.pull_follower user.id
-      expect(t.follower_ids.include?(user.id)).not_to be_truthy
-    end
-
-    it 'should not push when current_user is topic creater' do
-      allow(t).to receive(:user_id).and_return(user.id)
-      expect(t.push_follower(user.id)).to eq(false)
-      expect(t.follower_ids.include?(user.id)).not_to be_truthy
-      expect(t.followed?(user.id)).to eq(false)
-    end
-  end
-
   it 'should update after reply' do
     reply = create :reply, topic: topic, user: user
     expect(topic.last_active_mark).not_to be_nil

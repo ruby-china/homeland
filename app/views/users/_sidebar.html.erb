@@ -58,7 +58,7 @@
           <%= link_to "正在关注", following_user_path(@user), class: "text" %>
         </div>
         <div class="col-xs-4 stars">
-          <%= link_to @user.favorite_topics_count, favorites_user_path(@user), class: "counter" %>
+          <%= link_to @user.favorites_count, favorites_user_path(@user), class: "counter" %>
           <%= link_to "收藏", favorites_user_path(@user), class: "text" %>
         </div>
       </div>

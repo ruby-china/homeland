@@ -9,8 +9,18 @@ module LikesHelper
     label = "#{likeable.likes_count} 个赞"
     label = '' if likeable.likes_count == 0
 
+    liked = false
+
+    if opts[:cache].blank? && current_user
+      if likeable.is_a?(Topic)
+        liked = current_user.like_topic_ids.include?(likeable.id)
+      elsif likeable.is_a?(Reply)
+        liked = current_user.like_reply_ids.include?(likeable.id)
+      end
+    end
+
     title, state, icon_name =
-      if opts[:cache].blank? && likeable.liked_by_user?(current_user)
+      if opts[:cache].blank? && liked
         ['取消赞', 'active', 'heart']
       else
         ['赞', '', 'heart']

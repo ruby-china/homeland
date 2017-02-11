@@ -96,7 +96,7 @@ class User < ApplicationRecord
     term = term.to_s + '%';
     users = User.where('login ilike ? or name ilike ?', term, term).order('replies_count desc').limit(limit).to_a
     if user
-      following = user.following.where('login ilike ? or name ilike ?', term, term).to_a
+      following = user.follow_users.where('login ilike ? or name ilike ?', term, term).to_a
     end
     users.unshift(*Array(following))
     users.uniq!

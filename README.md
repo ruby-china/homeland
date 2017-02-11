@@ -7,6 +7,10 @@ Open source discussion website.
 
 [![Build Status](https://travis-ci.org/ruby-china/homeland.svg?branch=master)](https://travis-ci.org/ruby-china/homeland) [![Code Climate](https://codeclimate.com/github/ruby-china/homeland/badges/gpa.svg)](https://codeclimate.com/github/ruby-china/homeland) [![codecov.io](https://codecov.io/github/ruby-china/homeland/coverage.svg?branch=master)](https://codecov.io/github/ruby-china/homeland?branch=master)
 
+## Release Notes
+
+Please visit [Releases](https://github.com/ruby-china/homeland/releases) page.
+
 ## Contribute Guide
 
 Please read this document: [CONTRIBUTE GUIDE](CONTRIBUTE.md)

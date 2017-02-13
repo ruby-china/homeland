@@ -1,5 +1,5 @@
 class User
-  module TopicFavorate
+  module TopicFavorite
     extend ActiveSupport::Concern
 
     included do

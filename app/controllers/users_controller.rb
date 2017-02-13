@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :set_user, except: [:index, :city]
 
   etag { @user }
-  etag { @user&.teams }
+  etag { @user&.teams if @user&.user_type == :user }
 
   include Users::TeamActions
   include Users::UserActions

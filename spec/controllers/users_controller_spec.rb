@@ -27,6 +27,12 @@ describe UsersController, type: :controller do
       get :show, params: { id: user.login }
       expect(response).to be_success
     end
+
+    it 'should show team user' do
+      team = create(:team)
+      get :show, params: { id: team.login }
+      expect(response).to be_success
+    end
   end
 
   describe ':topics' do

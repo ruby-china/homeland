@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   helper_method :unread_notify_count
   helper_method :turbolinks_app?, :turbolinks_ios?, :turbolinks_app_version
 
+  rescue_from WillPaginate::InvalidPage, with: :render_404
+
   # Addition contents for etag
   etag { current_user.try(:id) }
   etag { unread_notify_count }

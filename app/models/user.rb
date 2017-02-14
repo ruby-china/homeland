@@ -7,7 +7,7 @@ class User < ApplicationRecord
   include Likeable
   include Followable
   include TopicRead
-  include TopicFavorate
+  include TopicFavorite
   include GithubRepository
   include UserCallbacks
   include ProfileFields

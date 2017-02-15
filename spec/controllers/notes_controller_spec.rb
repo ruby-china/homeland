@@ -55,7 +55,7 @@ describe NotesController, type: :controller do
       end
 
       it 'should render new when save failure' do
-        allow_any_instance_of(Note).to receive(:update_attributes).and_return(false)
+        allow_any_instance_of(Note).to receive(:update).and_return(false)
         post :update, params: { id: note, note: { title: 'new note', body: 'new body', publish: 1 } }
         expect(response).to be_success
       end

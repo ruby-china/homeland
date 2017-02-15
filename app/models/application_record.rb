@@ -16,7 +16,7 @@ class ApplicationRecord < ActiveRecord::Base
       old_val = self[key] || []
       old_val << hash[key].to_i
       old_val.uniq!
-      update_attributes(key => old_val)
+      update(key => old_val)
     end
   end
 
@@ -27,7 +27,7 @@ class ApplicationRecord < ActiveRecord::Base
       old_val = self[key]
       return true if old_val.blank?
       old_val.delete(hash[key].to_i)
-      update_attributes(key => old_val)
+      update(key => old_val)
     end
   end
 end

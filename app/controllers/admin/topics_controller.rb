@@ -37,7 +37,7 @@ module Admin
     end
 
     def update
-      if @topic.update_attributes(params[:topic].permit!)
+      if @topic.update(params[:topic].permit!)
         redirect_to(admin_topics_path, notice: 'Topic was successfully updated.')
       else
         render action: 'edit'

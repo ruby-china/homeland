@@ -67,11 +67,11 @@ describe Node, type: :model do
     let(:node) { create(:node) }
     it 'should work' do
       expect(node.collapse_summary?).to eq false
-      node.update_attributes(summary: "foo\n\nbar")
+      node.update(summary: "foo\n\nbar")
       expect(node.collapse_summary?).to eq false
-      node.update_attributes(summary: "foo\n\nbar\n\ndar")
+      node.update(summary: "foo\n\nbar\n\ndar")
       expect(node.collapse_summary?).to eq true
-      node.update_attributes(summary: "foo\n\n- bar\n- dar")
+      node.update(summary: "foo\n\n- bar\n- dar")
       expect(node.collapse_summary?).to eq true
     end
   end

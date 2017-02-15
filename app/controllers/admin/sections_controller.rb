@@ -27,7 +27,7 @@ module Admin
     end
 
     def update
-      if @section.update_attributes(params[:section].permit!)
+      if @section.update(params[:section].permit!)
         redirect_to(admin_sections_path, notice: 'Section was successfully updated.')
       else
         render action: 'edit'

@@ -33,7 +33,7 @@ class TeamsController < ApplicationController
   end
 
   def update
-    if @team.update_attributes(team_params)
+    if @team.update(team_params)
       redirect_to(edit_team_path(@team), notice: t('common.update_success'))
     else
       render action: 'edit'

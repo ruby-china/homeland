@@ -27,7 +27,7 @@ module Admin
     end
 
     def update
-      if @node.update_attributes(params[:node].permit!)
+      if @node.update(params[:node].permit!)
         redirect_to(admin_nodes_path, notice: 'Node was successfully updated.')
       else
         render action: 'edit'

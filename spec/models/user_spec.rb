@@ -542,7 +542,7 @@ describe User, type: :model do
 
     context 'deleted user' do
       it "should nil" do
-        user.update_attributes(state: -1)
+        user.update(state: -1)
         expect(User.find_for_database_authentication(login: 'foo')).to eq nil
       end
     end

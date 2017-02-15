@@ -54,7 +54,7 @@ describe TeamsController, type: :controller do
 
     it 'should render edit after save failure' do
       sign_in user
-      allow_any_instance_of(Team).to receive(:update_attributes).and_return(false)
+      allow_any_instance_of(Team).to receive(:update).and_return(false)
       put :update, params: { id: team.login, team: { login: team.login, name: team.name, email: team.email } }
       expect(response).to be_success
     end

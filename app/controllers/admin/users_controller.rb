@@ -46,7 +46,7 @@ module Admin
       @user.state = params[:user][:state]
       @user.verified = params[:user][:verified]
 
-      if @user.update_attributes(params[:user].permit!)
+      if @user.update(params[:user].permit!)
         redirect_to(edit_admin_user_path(@user.id), notice: 'User was successfully updated.')
       else
         render action: 'edit'

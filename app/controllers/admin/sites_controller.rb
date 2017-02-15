@@ -32,7 +32,7 @@ module Admin
     end
 
     def update
-      if @site.update_attributes(params[:site].permit!)
+      if @site.update(params[:site].permit!)
         redirect_to(admin_sites_path, notice: 'Site 更新成功。')
       else
         render action: 'edit'

@@ -28,7 +28,7 @@ module Admin
     end
 
     def update
-      if @site_node.update_attributes(site_node_params)
+      if @site_node.update(site_node_params)
         redirect_to(admin_site_nodes_path, notice: 'Site node 更新成功。')
       else
         render action: 'edit'

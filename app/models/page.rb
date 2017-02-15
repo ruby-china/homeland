@@ -59,7 +59,7 @@ class Page < ApplicationRecord
   def revert_version(version)
     page_version = PageVersion.where(page_id: id, version: version).first
     return false if page_version.blank?
-    update_attributes(body: page_version.body,
+    update(body: page_version.body,
                       title: page_version.title,
                       slug: page_version.slug)
   end

@@ -35,7 +35,7 @@ class NotesController < ApplicationController
 
   def update
     @note = current_user.notes.find(params[:id])
-    if @note.update_attributes(note_params)
+    if @note.update(note_params)
       redirect_to(@note, notice: t('common.update_success'))
     else
       render action: 'edit'

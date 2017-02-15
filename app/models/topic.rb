@@ -187,20 +187,20 @@ class Topic < ApplicationRecord
   end
 
   def ban!
-    update_attributes(lock_node: true, node_id: Node.no_point.id, admin_editing: true)
+    update(lock_node: true, node_id: Node.no_point.id, admin_editing: true)
   end
 
   def excellent!
     self.transaction do
       Reply.create_system_event(action: 'excellent', topic_id: self.id)
-      update_attributes(excellent: 1)
+      update(excellent: 1)
     end
   end
 
   def unexcellent!
     self.transaction do
       Reply.create_system_event(action: 'unexcellent', topic_id: self.id)
-      update_attributes(excellent: 0)
+      update(excellent: 0)
     end
   end
 

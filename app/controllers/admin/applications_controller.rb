@@ -38,7 +38,7 @@ module Admin
     end
 
     def update
-      if @application.update_attributes(params[:doorkeeper_application].permit!)
+      if @application.update(params[:doorkeeper_application].permit!)
         redirect_to(admin_applications_path, notice: 'Application 更新成功。')
       else
         render action: 'edit'

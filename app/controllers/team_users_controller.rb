@@ -35,7 +35,7 @@ class TeamUsersController < ApplicationController
   end
 
   def update
-    if @team_user.update_attributes(params.require(:team_user).permit(:role))
+    if @team_user.update(params.require(:team_user).permit(:role))
       redirect_to(user_team_users_path(@team), notice: '保存成功')
     else
       render action: 'edit'

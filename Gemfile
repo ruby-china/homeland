@@ -140,5 +140,4 @@ group :development, :test do
   gem 'yard'
 
   gem 'codecov', require: false
-  gem 'pry-byebug'
 end

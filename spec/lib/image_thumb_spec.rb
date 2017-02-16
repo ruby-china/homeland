@@ -12,6 +12,7 @@ describe 'image_thumb' do
 
     context 'pragma: true' do
       it '#exists?' do
+        FileUtils.mkdir_p(Rails.root.join('public', 'uploads'))
         FileUtils.cp Rails.root.join('app', 'assets', 'images', 'favicon.png'), Rails.root.join('public', 'uploads', 'favicon.png')
 
         image_thumb = Homeland::ImageThumb.new('favicon.png', 'large', pragma: true)

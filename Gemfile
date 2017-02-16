@@ -92,8 +92,6 @@ gem 'auto-space'
 
 # 队列
 gem 'sidekiq'
-# Sidekiq Web
-gem 'sinatra', '~> 2.0.0.beta2'
 
 # 分享功能
 gem 'social-share-button'

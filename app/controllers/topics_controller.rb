@@ -94,10 +94,11 @@ class TopicsController < ApplicationController
     @can_reply = can? :create, Reply
 
     @replies = Reply.unscoped.where(topic_id: @topic.id).order(:id).all
+    @user_like_reply_ids = current_user&.like_reply_ids_by_replies(@replies) || []
 
     check_current_user_status_for_topic
     set_special_node_active_menu
-    fresh_when([@topic, @node, @show_raw, @replies, @has_followed, @has_favorited, @can_reply])
+    fresh_when([@topic, @node, @show_raw, @replies, @user_like_reply_ids, @has_followed, @has_favorited, @can_reply])
   end
 
   def new

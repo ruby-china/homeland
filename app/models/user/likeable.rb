@@ -26,5 +26,13 @@ class User
     def liked?(likeable)
       self.find_action(:like, target: likeable).present?
     end
+
+    # 基于一组 Reply 获取用户已经喜欢过的内容
+    def like_reply_ids_by_replies(replies)
+      return [] if replies.blank?
+      return [] if self.like_reply_ids.blank?
+      # Intersection between reply ids and user like_reply_ids
+      replies.collect(&:id) & self.like_reply_ids
+    end
   end
 end

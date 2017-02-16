@@ -147,7 +147,7 @@ module Api
 
         @replies = Reply.unscoped.where(topic_id: @topic.id).order(:id).includes(:user)
         @replies = @replies.offset(params[:offset].to_i).limit(params[:limit].to_i)
-        @user_liked_reply_ids = current_user&.like_reply_ids || []
+        @user_liked_reply_ids = current_user&.like_reply_ids_by_replies(@replies) || []
         @meta = { user_liked_reply_ids: @user_liked_reply_ids }
       end
 

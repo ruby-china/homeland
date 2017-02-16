@@ -3,8 +3,8 @@
 <% content_for :scripts do %>
   <script type="text/javascript">
     Topics.topic_id = <%= @topic.id %>;
-    <% if current_user && !current_user.like_reply_ids.blank? %>
-    Topics.user_liked_reply_ids = [<%= current_user.like_reply_ids.join(",") %>];
+    <% if !@user_like_reply_ids.blank? %>
+    Topics.user_liked_reply_ids = [<%= @user_like_reply_ids.join(",") %>];
     <% end %>
     $(document).ready(function(){
       <% if admin? %>

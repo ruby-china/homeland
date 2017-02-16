@@ -314,7 +314,6 @@ describe User, type: :model do
 
   describe 'Like' do
     let(:topic) { create :topic }
-    let(:reply) { create :reply }
     let(:user)  { create :user }
     let(:user2) { create :user }
 
@@ -355,6 +354,26 @@ describe User, type: :model do
         topic.reload
         expect(user.like_topic?(topic)).to be_truthy
         expect(topic.like_by_users).to include(user)
+      end
+    end
+
+    describe 'like reply' do
+      let(:reply) { create :reply }
+
+      it 'should work' do
+        user.like(reply)
+        expect(user.like_reply?(reply)).to be_truthy
+      end
+
+      describe '.like_reply_ids_by_replies' do
+        let(:replies) { create_list(:reply, 3) }
+        it 'should work' do
+          user.like(replies[0])
+          user.like(replies[2])
+          like_ids = user.like_reply_ids_by_replies(replies)
+          expect(like_ids).not_to include(replies[1].id)
+          expect(like_ids).to include(replies[0].id, replies[2].id)
+        end
       end
     end
   end

@@ -364,9 +364,11 @@ describe 'API V3', 'topics', type: :request do
       it 'should work' do
         login_user!
         t = create(:topic, title: 'i want to know')
+        r0 = create(:reply)
         r1 = create(:reply, topic_id: t.id, body: 'let me tell', user: current_user)
         r2 = create(:reply, topic_id: t.id, body: 'let me tell again', deleted_at: Time.now)
         r3 = create(:reply, topic_id: t.id, body: 'let me tell again again')
+        current_user.like(r0)
         current_user.like(r2)
         current_user.like(r3)
         get "/api/v3/topics/#{t.id}/replies.json"
@@ -382,7 +384,8 @@ describe 'API V3', 'topics', type: :request do
         expect(json['replies'][1]['deleted']).to eq true
         expect(json['replies'][1]['abilities']['update']).to eq false
         expect(json['replies'][1]['abilities']['destroy']).to eq false
-        expect(json['meta']['user_liked_reply_ids']).to eq([r3.id])
+        expect(json['meta']['user_liked_reply_ids']).not_to include(r0.id)
+        expect(json['meta']['user_liked_reply_ids']).to include(r2.id, r3.id)
       end
     end
 

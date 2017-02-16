@@ -32,7 +32,7 @@ class User
       return [] if replies.blank?
       return [] if self.like_reply_ids.blank?
       # Intersection between reply ids and user like_reply_ids
-      replies.collect(&:id) & self.like_reply_ids
+      self.like_reply_actions.where(target_id: replies.collect(&:id)).pluck(:target_id)
     end
   end
 end

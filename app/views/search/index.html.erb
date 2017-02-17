@@ -6,9 +6,13 @@
   </div>
 
   <div class="panel-body">
-    <% @result.records.each_with_hit do |item, hit| %>
-      <% partial_view_name = item.class.name.downcase -%>
-      <%= render partial: (partial_view_name == 'team' ? 'user' : partial_view_name), locals: { item: item, hit: hit } %>
+    <% if @result.records.total == 0 %>
+      <div class="no-result">没有搜索到任何有关 “<%= params[:q]%>” 的内容</div>
+    <% else %>
+      <% @result.records.each_with_hit do |item, hit| %>
+        <% partial_view_name = item.class.name.downcase -%>
+        <%= render partial: (partial_view_name == 'team' ? 'user' : partial_view_name), locals: { item: item, hit: hit } %>
+      <% end %>
     <% end %>
   </div>
 

@@ -14,6 +14,7 @@ ActiveRecord::Schema.define(version: 20170217050010) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_stat_statements"
 
   create_table "actions", force: :cascade do |t|
     t.string   "action_type",   null: false

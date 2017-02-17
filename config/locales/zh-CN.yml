@@ -88,9 +88,6 @@
         url: 地址
         desc: 简单介绍
         site_node_id: 分类
-      exception_log:
-        title: 摘要
-        body: 详细内容
       device:
         platform: 类型
         token: Token

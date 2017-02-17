@@ -74,9 +74,6 @@
         url: 地址
         desc: 簡單介紹
         site_node_id: 分類
-      exception_log:
-        title: 摘要
-        body: 詳細內容
     errors:
       models:
         user: 用戶

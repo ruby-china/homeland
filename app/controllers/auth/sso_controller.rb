@@ -39,7 +39,7 @@ module Auth
 
         puts message
 
-        ExceptionLog.create(title: "SSO Failed to create or lookup user:", body: message)
+        ExceptionTrack::Log.create(title: "SSO Failed to create or lookup user:", body: message)
         render plain: I18n.t("sso.unknown_error"), status: 500
         return
       end

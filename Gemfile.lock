@@ -139,6 +139,10 @@ GEM
       faraday
       multi_json
     erubis (2.7.0)
+    exception-track (0.1.2)
+      exception_notification (~> 4.1)
+      rails (>= 4.2.0, < 5.1)
+      will_paginate (~> 3)
     exception_notification (4.2.1)
       actionmailer (>= 4.0, < 6)
       activesupport (>= 4.0, < 6)
@@ -424,7 +428,7 @@ DEPENDENCIES
   dropzonejs-rails
   elasticsearch-model
   elasticsearch-rails
-  exception_notification
+  exception-track
   factory_girl_rails
   font-awesome-rails
   hiredis

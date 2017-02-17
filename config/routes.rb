@@ -129,11 +129,6 @@ Rails.application.routes.draw do
       end
     end
     resources :locations
-    resources :exception_logs do
-      collection do
-        post :clean
-      end
-    end
     resources :applications
     resources :stats
   end
@@ -199,6 +194,7 @@ Rails.application.routes.draw do
   authenticate :user, ->(u) { u.admin? } do
     mount Sidekiq::Web, at: '/sidekiq'
     mount PgHero::Engine, at: "pghero"
+    mount ExceptionTrack::Engine, at: "/exception-track"
   end
 
   mount JasmineRails::Engine, at: '/specs' if defined?(JasmineRails)

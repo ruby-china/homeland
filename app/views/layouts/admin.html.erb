@@ -33,7 +33,6 @@
             li << link_to(t("admin.menu.site_nodes"),admin_site_nodes_path ) if Setting.has_module?(:site)
             li << link_to(t("admin.menu.sites"),admin_sites_path ) if Setting.has_module?(:site)
             li << link_to(t("admin.menu.locations"),admin_locations_path )
-            li << link_to(t("admin.menu.exception_logs"),admin_exception_logs_path )
           end  %>
 
           <%= render "shared/usernav" %>

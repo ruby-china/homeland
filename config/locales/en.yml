@@ -95,9 +95,6 @@ en:
         url: "URL"
         desc: "Description"
         site_node_id: "Category"
-      exception_log:
-        title: Abstract
-        body: Details
     errors:
       models:
         user: "User"

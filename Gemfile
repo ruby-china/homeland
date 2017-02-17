@@ -113,7 +113,7 @@ gem 'puma'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rack-utf8_sanitizer'
 
-gem 'exception_notification'
+gem 'exception-track'
 gem 'status-page'
 
 gem 'bundler-audit', require: false

@@ -1,5 +1,6 @@
 AllCops:
   Exclude:
+    - 'vendor/**/*'
     - 'lib/templates/**/*'
     - 'lib/tasks/release.rake'
     - 'spec/**/*'

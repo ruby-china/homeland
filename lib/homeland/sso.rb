@@ -8,15 +8,15 @@ module Homeland
       Setting.sso['secret']
     end
 
-    def self.generate_sso(return_path="/")
+    def self.generate_sso(return_path = '/')
       sso = new
       sso.nonce = SecureRandom.hex
       sso.register_nonce(return_path)
-      sso.return_sso_url = Setting.base_url + "/auth/sso/login"
+      sso.return_sso_url = Setting.base_url + '/auth/sso/login'
       sso
     end
 
-    def self.generate_url(return_path="/")
+    def self.generate_url(return_path = '/')
       generate_sso(return_path).to_url
     end
 
@@ -31,7 +31,7 @@ module Homeland
     end
 
     def return_path
-      $redis.get(nonce_key) || "/"
+      $redis.get(nonce_key) || '/'
     end
 
     def expire_nonce!
@@ -71,7 +71,7 @@ module Homeland
 
       # Add as admin
       if admin == true
-        if !Setting.has_admin?(email)
+        unless Setting.has_admin?(email)
           Setting.admin_emails = Setting.admin_emails + "\n" + email
         end
       end
@@ -82,7 +82,7 @@ module Homeland
 
     def match_email_or_create_user
       user = User.find_by_email(email)
-      if !user
+      unless user
         user_params = {
           email: email,
           name: name,

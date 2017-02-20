@@ -12,7 +12,7 @@ filters = [
   Homeland::Pipeline::MarkdownFilter,
   Homeland::Pipeline::MentionFilter,
   Homeland::Pipeline::FloorFilter,
-  Homeland::Pipeline::TwemojiFilter,
+  Homeland::Pipeline::TwemojiFilter
 ]
 
 TopicPipeline = HTML::Pipeline.new(filters, context)

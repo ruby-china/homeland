@@ -32,8 +32,8 @@ module Homeland
 
         class << self
           def to_html(raw)
-            @@render ||= Redcarpet::Markdown.new(self.new, DEFAULT_OPTIONS)
-            @@render.render(raw)
+            @render ||= Redcarpet::Markdown.new(self.new, DEFAULT_OPTIONS)
+            @render.render(raw)
           end
         end
 

@@ -1,10 +1,11 @@
 AllCops:
   Exclude:
     - 'lib/templates/**/*'
+    - 'lib/tasks/release.rake'
     - 'spec/**/*'
     - 'app/models/cache_version.rb'
     - 'Gemfile'
-    - 'db/schema.rb'
+    - 'db/**/*'
     - 'config/**/*'
   TargetRubyVersion: 2.4
 

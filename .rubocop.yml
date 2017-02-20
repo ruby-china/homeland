@@ -80,3 +80,6 @@ Rails/HasAndBelongsToMany:
 
 Style/EmptyMethod:
   EnforcedStyle: expanded
+
+Style/LambdaCall:
+  Enabled: false

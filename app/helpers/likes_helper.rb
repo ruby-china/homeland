@@ -21,7 +21,7 @@ module LikesHelper
 
     title, state, icon_name =
       if opts[:cache].blank? && liked
-        ['取消赞', 'active', 'heart']
+        %w(取消赞 active heart)
       else
         ['赞', '', 'heart']
       end

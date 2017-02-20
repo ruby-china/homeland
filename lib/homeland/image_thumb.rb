@@ -14,22 +14,21 @@ module Homeland
       @outpath  = Rails.root.join('tmp', 'cache', 'uploads-thumb', "#{filename}-#{version}")
       @exists   = false
 
-      notfound = !File.exists?(outpath)
+      notfound = !File.exist?(outpath)
       generate! if pragma || notfound
     end
 
     def exists?
-      File.exists? outpath
+      File.exist? outpath
     end
 
     private
 
     def generate!
       filepath = Rails.root.join('public', 'uploads', filename)
-      return unless File.exists? filepath
+      return unless File.exist? filepath
       dest_dir = File.dirname(outpath)
-      FileUtils.mkdir_p dest_dir unless File.exists? dest_dir
-
+      FileUtils.mkdir_p dest_dir unless File.exist? dest_dir
 
       @image = MiniMagick::Image.open(filepath)
       if resize?
@@ -59,17 +58,15 @@ module Homeland
     # copy from Carrierwave::MiniMagick#resize_to_fill
     # http://www.rubydoc.info/github/carrierwaveuploader/carrierwave/CarrierWave/MiniMagick#resize_to_fill-instance_method
     def resize_to_fill!
-      width, height = geometry.split('x').collect { |v| v.to_i }
+      width, height = geometry.split('x').collect(&:to_i)
       cols, rows = @image.dimensions
       if width != cols || height != rows
-        scale_x = width/cols.to_f
-        scale_y = height/rows.to_f
+        scale_x = width / cols.to_f
+        scale_y = height / rows.to_f
         if scale_x >= scale_y
           cols = (scale_x * (cols + 0.5)).round
-          rows = (scale_x * (rows + 0.5)).round
-          @image.resize "#{cols}"
+          @image.resize cols.to_s
         else
-          cols = (scale_y * (cols + 0.5)).round
           rows = (scale_y * (rows + 0.5)).round
           @image.resize "x#{rows}"
         end

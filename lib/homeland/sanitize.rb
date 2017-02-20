@@ -12,43 +12,40 @@ module Homeland
       return unless node_name == 'iframe'
 
       # Verify that the video URL is actually a valid YouTube video URL.
-      return unless node['src'] =~ %r|\A(?:https?:)?//(?:www\.)?youtube(?:-nocookie)?\.com/|
+      return unless node['src'].match?(%r{\A(?:https?:)?//(?:www\.)?youtube(?:-nocookie)?\.com/})
 
       # We're now certain that this is a YouTube embed, but we still need to run
       # it through a special Sanitize step to ensure that no unwanted elements or
       # attributes that don't belong in a YouTube embed can sneak in.
-      ::Sanitize.node!(node, {
-        :elements => %w[iframe],
+      ::Sanitize.node!(node, elements: %w(iframe),
 
-        :attributes => {
-          'iframe'  => %w[allowfullscreen class frameborder height src width]
-        }
-      })
+                             attributes: {
+                               'iframe' => %w(allowfullscreen class frameborder height src width)
+                             })
 
       # Now that we're sure that this is a valid YouTube embed and that there are
       # no unwanted elements or attributes hidden inside it, we can tell Sanitize
       # to whitelist the current node.
-      {:node_whitelist => [node]}
+      { node_whitelist: [node] }
     end
 
     DEFAULT = ::Sanitize::Config.freeze_config(
-      elements: %w[
+      elements: %w(
         p br img h1 h2 h3 h4 h5 h6 blockquote pre code b i del
         strong em table tr td tbody th strike del u a ul ol li span hr
-      ],
-
-      attributes: ::Sanitize::Config.merge({},
-        # 这里要确保是 :all, 而不是 'all'
-        :all       => %w[class id lang style tabindex title translate],
-        'a'        => %w[href rel data-floor target],
-        'img'      => %w[alt src width height]
       ),
 
+      attributes: ::Sanitize::Config.merge({},
+                                           # 这里要确保是 :all, 而不是 'all'
+                                           :all  => %w(class id lang style tabindex title translate),
+                                           'a'   => %w(href rel data-floor target),
+                                           'img' => %w(alt src width height)),
+
       protocols: {
-        'a'        => { 'href' => ['http', 'https', 'mailto', :relative] }
+        'a' => { 'href' => ['http', 'https', 'mailto', :relative] }
       },
 
-      transformers: [YOUTUBE_TRANSFORMER],
+      transformers: [YOUTUBE_TRANSFORMER]
     )
   end
 end

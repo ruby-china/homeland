@@ -35,7 +35,7 @@ class Setting < RailsSettings::Base
     end
 
     def base_url
-      [self.protocol, self.domain].join("://")
+      [self.protocol, self.domain].join('://')
     end
 
     def has_admin?(email)

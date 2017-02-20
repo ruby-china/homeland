@@ -1,7 +1,13 @@
 AllCops:
   Exclude:
+    - 'vendor/**/*'
     - 'lib/templates/**/*'
+    - 'lib/tasks/release.rake'
     - 'spec/**/*'
+    - 'app/models/cache_version.rb'
+    - 'Gemfile'
+    - 'db/**/*'
+    - 'config/**/*'
   TargetRubyVersion: 2.4
 
 Style/Documentation:
@@ -14,6 +20,15 @@ Style/AsciiComments:
   Enabled: false
 
 Style/IfUnlessModifier:
+  Enabled: false
+
+Style/NumericPredicate:
+  EnforcedStyle: comparison
+
+Style/PredicateName:
+  Enabled: false
+
+Style/GuardClause:
   Enabled: false
 
 Style/RedundantSelf:
@@ -62,4 +77,10 @@ Rails/FindBy:
   Enabled: false
 
 Rails/HasAndBelongsToMany:
+  Enabled: false
+
+Style/EmptyMethod:
+  EnforcedStyle: expanded
+
+Style/LambdaCall:
   Enabled: false

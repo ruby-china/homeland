@@ -17,8 +17,7 @@ class UsersController < ApplicationController
 
   def city
     location = Location.location_find_by_name(params[:id])
-    render_404 and return if location.nil?
-
+    return render_404 if location.nil?
     @users = User.where(location_id: location.id).without_team.fields_for_list
     @users = @users.order(replies_count: :desc).paginate(page: params[:page], per_page: 60)
 

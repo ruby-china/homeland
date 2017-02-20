@@ -30,4 +30,6 @@ before_script:
   - sed -i "s/SETUP_REDIS_PORT/6379/g" config/redis.yml
   - RAILS_ENV=test bundle exec rake db:migrate
 
-script: RAILS_ENV=test bundle exec rake
+script:
+  - bundle exec rubocop .
+  - RAILS_ENV=test bundle exec rake

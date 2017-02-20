@@ -51,7 +51,7 @@ class User < ApplicationRecord
 
   scope :hot, -> { order(replies_count: :desc).order(topics_count: :desc) }
   scope :without_team, -> { where(type: nil) }
-  scope :fields_for_list, -> {
+  scope :fields_for_list, lambda {
     select(:type, :id, :name, :login, :email, :email_md5, :email_public, :avatar, :verified, :state,
            :tagline, :github, :website, :location, :location_id, :twitter, :co, :team_users_count, :created_at, :updated_at)
   }
@@ -65,7 +65,7 @@ class User < ApplicationRecord
   end
 
   def self.find_by_login(slug)
-    return nil unless slug =~ ALLOW_LOGIN_FORMAT_REGEXP
+    return nil unless slug.match? ALLOW_LOGIN_FORMAT_REGEXP
     fetch_by_uniq_keys(login: slug) || where('lower(login) = ?', slug.downcase).take
   end
 
@@ -93,7 +93,7 @@ class User < ApplicationRecord
     limit = (options[:limit] || 30).to_i
     user = options[:user]
     following = []
-    term = term.to_s + '%';
+    term = term.to_s + '%'
     users = User.where('login ilike ? or name ilike ?', term, term).order('replies_count desc').limit(limit).to_a
     if user
       following = user.follow_users.where('login ilike ? or name ilike ?', term, term).to_a
@@ -186,17 +186,17 @@ class User < ApplicationRecord
   # 用户的账号类型
   def level
     if admin?
-      return 'admin'
+      'admin'
     elsif verified?
-      return 'vip'
+      'vip'
     elsif hr?
-      return 'hr'
+      'hr'
     elsif blocked?
-      return 'blocked'
+      'blocked'
     elsif newbie?
-      return 'newbie'
+      'newbie'
     else
-      return 'normal'
+      'normal'
     end
   end
 

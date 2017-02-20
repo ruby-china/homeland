@@ -2,7 +2,10 @@ AllCops:
   Exclude:
     - 'lib/templates/**/*'
     - 'spec/**/*'
+    - 'app/models/cache_version.rb'
     - 'Gemfile'
+    - 'db/schema.rb'
+    - 'config/**/*'
   TargetRubyVersion: 2.4
 
 Style/Documentation:
@@ -19,6 +22,9 @@ Style/IfUnlessModifier:
 
 Style/NumericPredicate:
   EnforcedStyle: comparison
+
+Style/PredicateName:
+  Enabled: false
 
 Style/GuardClause:
   Enabled: false
@@ -70,3 +76,6 @@ Rails/FindBy:
 
 Rails/HasAndBelongsToMany:
   Enabled: false
+
+Style/EmptyMethod:
+  EnforcedStyle: expanded

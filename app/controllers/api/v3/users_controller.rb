@@ -95,7 +95,7 @@ module Api
         optional! :offset, type: Integer, default: 0
         optional! :limit, type: Integer, default: 20, values: 1..150
 
-        @topics = @user.favorite_topics.includes(:user).order("actions.id desc").offset(params[:offset]).limit(params[:limit])
+        @topics = @user.favorite_topics.includes(:user).order('actions.id desc').offset(params[:offset]).limit(params[:limit])
         render 'topics'
       end
 
@@ -110,7 +110,7 @@ module Api
         optional! :offset, type: Integer, default: 0
         optional! :limit, type: Integer, default: 20, values: 1..150
 
-        @users = @user.follow_by_users.fields_for_list.order("actions.id asc").offset(params[:offset]).limit(params[:limit])
+        @users = @user.follow_by_users.fields_for_list.order('actions.id asc').offset(params[:offset]).limit(params[:limit])
       end
 
       # 获取某个用户的关注者列表
@@ -123,7 +123,7 @@ module Api
         optional! :offset, type: Integer, default: 0
         optional! :limit, type: Integer, default: 20, values: 1..150
 
-        @users = @user.follow_users.fields_for_list.order("actions.id asc").offset(params[:offset]).limit(params[:limit])
+        @users = @user.follow_users.fields_for_list.order('actions.id asc').offset(params[:offset]).limit(params[:limit])
       end
 
       # 获取用户的已屏蔽的人（只能获取自己的）
@@ -138,7 +138,7 @@ module Api
 
         raise AccessDenied.new('不可以获取其他人的 block_users 列表。') if current_user.id != @user.id
 
-        @users = current_user.block_users.fields_for_list.order("actions.id asc").offset(params[:offset]).limit(params[:limit])
+        @users = current_user.block_users.fields_for_list.order('actions.id asc').offset(params[:offset]).limit(params[:limit])
       end
 
       # 关注用户

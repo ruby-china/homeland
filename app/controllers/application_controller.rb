@@ -129,17 +129,17 @@ class ApplicationController < ActionController::Base
   # read turbolinks app version
   # example: version:2.1
   def turbolinks_app_version
-    return '' if !turbolinks_app?
+    return '' unless turbolinks_app?
     return @turbolinks_app_version if defined? @turbolinks_app_version
     version_str = request.user_agent.to_s.match(/version:[\d\.]+/).to_s
     @turbolinks_app_version = version_str.split(':').last
-    return @turbolinks_app_version
+    @turbolinks_app_version
   end
 
   # Require Setting enabled module, else will render 404 page.
   def self.require_module_enabled!(name)
     before_action do
-      if !Setting.has_module?(name)
+      unless Setting.has_module?(name)
         render_404
       end
     end

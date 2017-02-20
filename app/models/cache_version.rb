@@ -11,7 +11,7 @@ class CacheVersion
     method_name = method.to_s
     super(method, *args)
   rescue NoMethodError
-    if method_name =~ /=$/
+    if method_name.match?(/=$/)
       var_name = method_name.sub('='.freeze, ''.freeze)
       key = CacheVersion.mk_key(var_name)
       value = args.first.to_s

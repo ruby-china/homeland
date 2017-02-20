@@ -2,6 +2,7 @@ AllCops:
   Exclude:
     - 'lib/templates/**/*'
     - 'spec/**/*'
+    - 'Gemfile'
   TargetRubyVersion: 2.4
 
 Style/Documentation:
@@ -14,6 +15,12 @@ Style/AsciiComments:
   Enabled: false
 
 Style/IfUnlessModifier:
+  Enabled: false
+
+Style/NumericPredicate:
+  EnforcedStyle: comparison
+
+Style/GuardClause:
   Enabled: false
 
 Style/RedundantSelf:

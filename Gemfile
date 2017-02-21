@@ -58,7 +58,7 @@ gem 'ruby-push-notifications'
 gem 'action-store'
 
 # 分页
-gem 'will_paginate'
+gem 'kaminari'
 
 # 搜索
 gem 'elasticsearch-model'

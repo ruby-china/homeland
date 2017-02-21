@@ -22,7 +22,7 @@ class TopicsController < ApplicationController
         @topics.without_hide_nodes
       end
     @topics = @topics.fields_for_list
-    @topics = @topics.paginate(page: params[:page], total_entries: Topic.total_entries).to_a
+    @topics = @topics.page(params[:page])
     @page_title = t('menu.topics')
     @read_topic_ids = []
     if current_user
@@ -72,7 +72,7 @@ class TopicsController < ApplicationController
 
   def recent
     @topics = Topic.without_hide_nodes.recent.fields_for_list.includes(:user)
-    @topics = @topics.paginate(page: params[:page], total_entries: Topic.total_entries)
+    @topics = @topics.page(params[:page])
     @page_title = [t('topics.topic_list.recent'), t('menu.topics')].join(' · ')
     render action: 'index' if stale?(etag: @topics, template: 'topics/index')
   end

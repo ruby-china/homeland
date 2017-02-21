@@ -4,8 +4,6 @@ class Notification < ActiveRecord::Base
 
   include Notifications::Model
 
-  self.per_page = 20
-
   after_create :realtime_push_to_client
   after_update :realtime_push_to_client
 

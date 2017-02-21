@@ -106,3 +106,7 @@
     recent_topics_title: "%{name} Forum"
     recent_node_topics_description: "Recent Topic in %{node_name} of %{name} Forum."
     recent_node_topics_title: "%{node_name} node of %{name} Forum"
+  pagination:
+    next: "Next &#8594;"
+    prev: "&#8592; Prev"
+    gap: "&hellip;"

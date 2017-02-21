@@ -1,5 +1,0 @@
-"zh-CN":
-  will_paginate:
-    next_label: "下一页 &#8594;"
-    previous_label: "&#8592; 上一页"
-    page_gap: "&hellip;"

@@ -4,7 +4,7 @@
 #= require jquery.mobile-events
 #= require underscore
 #= require backbone
-#= require will_paginate
+#= require pagination
 #= require jquery.timeago
 #= require jquery.timeago.settings
 #= require jquery.hotkeys

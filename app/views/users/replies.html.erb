@@ -7,7 +7,7 @@
     <div class="panel panel-default">
       <%= render "replies", replies: @replies %>
       <div class="panel-footer clearfix">
-        <%= will_paginate @replies %>
+        <%= paginate @replies %>
       </div>
     </div>
   </div>

@@ -139,10 +139,10 @@ GEM
       faraday
       multi_json
     erubis (2.7.0)
-    exception-track (0.1.5)
+    exception-track (0.2.0)
       exception_notification (~> 4)
+      kaminari (>= 0.15)
       rails (>= 4.0, < 5.2)
-      will_paginate (~> 3)
     exception_notification (4.2.1)
       actionmailer (>= 4.0, < 6)
       activesupport (>= 4.0, < 6)
@@ -186,6 +186,18 @@ GEM
       thor (>= 0.14, < 2.0)
     json (2.0.3)
     jwt (1.5.6)
+    kaminari (1.0.1)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.0.1)
+      kaminari-activerecord (= 1.0.1)
+      kaminari-core (= 1.0.1)
+    kaminari-actionview (1.0.1)
+      actionview
+      kaminari-core (= 1.0.1)
+    kaminari-activerecord (1.0.1)
+      activerecord
+      kaminari-core (= 1.0.1)
+    kaminari-core (1.0.1)
     kgio (2.11.0)
     launchy (2.4.3)
       addressable (~> 2.3)
@@ -216,9 +228,9 @@ GEM
       mini_portile2 (~> 2.1.0)
     nokogumbo (1.4.10)
       nokogiri
-    notifications (0.3.0)
+    notifications (0.4.0)
+      kaminari (>= 0.15)
       rails (>= 4.2.0, < 5.1)
-      will_paginate (~> 3)
     oauth2 (1.3.0)
       faraday (>= 0.8, < 0.11)
       jwt (~> 1.0)
@@ -396,7 +408,6 @@ GEM
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
-    will_paginate (3.1.5)
     xpath (2.0.0)
       nokogiri (~> 1.3)
     yard (0.9.8)
@@ -438,6 +449,7 @@ DEPENDENCIES
   jbuilder
   jquery-atwho-rails
   jquery-rails
+  kaminari
   kgio
   letter_avatar
   letter_opener
@@ -480,7 +492,6 @@ DEPENDENCIES
   turbolinks (~> 5.0.0)
   twemoji
   uglifier
-  will_paginate
   yard
 
 BUNDLED WITH

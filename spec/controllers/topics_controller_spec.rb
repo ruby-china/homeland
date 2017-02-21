@@ -23,7 +23,7 @@ describe TopicsController, type: :controller do
 
     it 'should 404 with non integer :page value' do
       get :index, params: { page: '2/*' }
-      expect(response.status).to eq(404)
+      expect(response.status).to eq(200)
     end
   end
 

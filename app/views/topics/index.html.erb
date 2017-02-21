@@ -22,7 +22,7 @@
       </div>
 
       <div class="panel-footer clearfix">
-        <%= paginate @topics %>
+        <%= paginate @topics, total_pages: Topic.total_pages %>
       </div>
     </div>
 

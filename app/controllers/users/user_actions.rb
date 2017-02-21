@@ -74,13 +74,13 @@ module Users
 
     def followers
       @users = @user.follow_by_users.order('actions.id asc')
-      @users = @users.page(params[:page]).per_page(60)
+      @users = @users.page(params[:page]).per(60)
       fresh_when([@users])
     end
 
     def following
       @users = @user.follow_users.order('actions.id asc')
-      @users = @users.page(params[:page]).per_page(60)
+      @users = @users.page(params[:page]).per(60)
       render template: '/users/followers' if stale?(etag: [@users], template: 'users/followers')
     end
 

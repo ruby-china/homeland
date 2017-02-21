@@ -14,7 +14,7 @@ module Admin
       if params[:uid].present?
         @applications = @applications.where(uid: params[:uid])
       end
-      @applications = @applications.order(id: :desc).paginate(page: params[:page], per_page: 20)
+      @applications = @applications.order(id: :desc).page(params[:page])
     end
 
     def show

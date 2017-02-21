@@ -240,4 +240,16 @@ class Topic < ApplicationRecord
                         second_target: node
     true
   end
+
+  def self.total_entries
+    return @total_entries if defined? @total_entries
+
+    total_count = Rails.cache.fetch('topics/total_entries') do
+      self.unscoped.count
+    end
+    if total_count >= 1500
+      @total_entries = 1500
+    end
+    @total_entries
+  end
 end

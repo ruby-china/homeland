@@ -10,7 +10,7 @@ class PagesController < ApplicationController
   end
 
   def recent
-    @pages = Page.recent.paginate(page: params[:page], per_page: 30)
+    @pages = Page.recent.page(params[:page])
     fresh_when(@pages)
   end
 

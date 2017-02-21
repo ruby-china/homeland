@@ -21,7 +21,7 @@ class SearchController < ApplicationController
         fields: { title: {}, body: {}, name: {}, login: {} }
       }
     }
-    @result = Elasticsearch::Model.search(search_params, search_modules).paginate(page: params[:page], per_page: 30)
+    @result = Elasticsearch::Model.search(search_params, search_modules).page(params[:page])
   end
 
   def users

@@ -13,7 +13,7 @@ module Admin
         @topics = @topics.where('user_id = ?', u.try(:id))
       end
       @topics = @topics.order(id: :desc)
-      @topics = @topics.includes(:user).paginate(page: params[:page], per_page: 30)
+      @topics = @topics.includes(:user).page(params[:page])
     end
 
     def show

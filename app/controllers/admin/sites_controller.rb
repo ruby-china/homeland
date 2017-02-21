@@ -8,7 +8,7 @@ module Admin
       if params[:q].present?
         @sites = @sites.where('name LIKE ?', "%#{params[:q]}%")
       end
-      @sites = @sites.paginate(page: params[:page], per_page: 20)
+      @sites = @sites.page(params[:page])
     end
 
     def show

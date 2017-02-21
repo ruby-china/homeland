@@ -3,7 +3,7 @@ module Admin
     before_action :set_page, only: [:show, :edit, :update, :destroy]
 
     def index
-      @pages = Page.unscoped.order(id: :desc).paginate page: params[:page], per_page: 30
+      @pages = Page.unscoped.order(id: :desc).page(params[:page])
     end
 
     def show

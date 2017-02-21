@@ -4,7 +4,7 @@ module Admin
     respond_to :js, :html, only: [:destroy]
 
     def index
-      @comments = Comment.recent.includes(:user).paginate(page: params[:page], per_page: 20)
+      @comments = Comment.recent.includes(:user).page(params[:page])
     end
 
     def edit

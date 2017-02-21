@@ -13,7 +13,7 @@ module Admin
         @replies = @replies.where('user_id = ?', u.try(:id))
       end
       @replies = @replies.order(id: :desc).includes(:topic, :user)
-      @replies = @replies.paginate(page: params[:page], per_page: 30)
+      @replies = @replies.page(params[:page])
     end
 
     def show

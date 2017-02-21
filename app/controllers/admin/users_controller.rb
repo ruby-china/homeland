@@ -9,7 +9,7 @@ module Admin
       if params[:type].present?
         @users = @users.where(type: params[:type])
       end
-      @users = @users.order(id: :desc).paginate page: params[:page], per_page: 30
+      @users = @users.order(id: :desc).page(params[:page])
     end
 
     def show

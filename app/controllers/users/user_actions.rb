@@ -10,22 +10,26 @@ module Users
     end
 
     def topics
-      @topics = @user.topics.fields_for_list.recent.paginate(page: params[:page], per_page: 40)
+      @topics = @user.topics.fields_for_list.recent
+      @topics = @topics.page(params[:page])
       fresh_when([@topics])
     end
 
     def replies
-      @replies = @user.replies.without_system.fields_for_list.recent.paginate(page: params[:page], per_page: 20)
+      @replies = @user.replies.without_system.fields_for_list.recent
+      @replies = @replies.page(params[:page])
       fresh_when([@replies])
     end
 
     def favorites
-      @topics = @user.favorite_topics.includes(:user).order('actions.id desc').paginate(page: params[:page], per_page: 40)
+      @topics = @user.favorite_topics.includes(:user).order('actions.id desc')
+      @topics = @topics.page(params[:page])
       fresh_when([@topics])
     end
 
     def notes
-      @notes = @user.notes.published.recent.paginate(page: params[:page], per_page: 40)
+      @notes = @user.notes.published.recent
+      @notes = @notes.page(params[:page])
       fresh_when([@notes])
     end
 
@@ -55,7 +59,7 @@ module Users
         render_404
       end
 
-      @block_users = @user.block_users.order('actions.id asc').paginate(page: params[:page], per_page: 20)
+      @block_users = @user.block_users.order('actions.id asc').page(params[:page])
     end
 
     def follow
@@ -69,12 +73,14 @@ module Users
     end
 
     def followers
-      @users = @user.follow_by_users.order('actions.id asc').paginate(page: params[:page], per_page: 60)
+      @users = @user.follow_by_users.order('actions.id asc')
+      @users = @users.page(params[:page]).per_page(60)
       fresh_when([@users])
     end
 
     def following
-      @users = @user.follow_users.order('actions.id asc').paginate(page: params[:page], per_page: 60)
+      @users = @user.follow_users.order('actions.id asc')
+      @users = @users.page(params[:page]).per_page(60)
       render template: '/users/followers' if stale?(etag: [@users], template: 'users/followers')
     end
 

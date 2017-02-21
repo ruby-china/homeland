@@ -10,11 +10,11 @@ Notifications.configure do
   self.user_avatar_url_method = 'large_avatar_url'
 
   # Method name of user profile page path, in User model, default: 'profile_url'
-  # self.user_profile_url_method = 'profile_url'
+  self.user_profile_url_method = 'profile_url'
 
   # authenticate_user method in your Controller, default: 'authenticate_user!'
   # If you use Devise, authenticate_user! is correct
-  # self.authenticate_user_method = 'authenticate_user!'
+  self.authenticate_user_method = 'authenticate_user!'
 
   # current_user method name in your Controller, default: 'current_user'
   # If you use Devise, current_user is correct

@@ -234,9 +234,9 @@ window.TopicView = Backbone.View.extend
       return @submitTextArea(el)
 
     # also highlight if hash is reply#
-    matchResult = window.location.hash.match(/^#reply(\d+)$/)
+    matchResult = window.location.hash.match(/^#reply\-(\d+)$/)
     if matchResult?
-      @highlightReply($("#reply#{matchResult[1]}"))
+      @highlightReply($("#reply-#{matchResult[1]}").parent())
 
     @hookPreview($(".editor-toolbar"), $(".topic-editor"))
 

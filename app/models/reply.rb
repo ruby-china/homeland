@@ -29,6 +29,10 @@ class Reply < ApplicationRecord
     if topic&.closed?
       errors.add(:topic, '已关闭，不再接受回帖或修改回帖。')
     end
+
+    if reply_to_id
+      self.reply_to_id = nil if reply_to&.topic_id != self.topic_id
+    end
   end
 
   after_commit :update_parent_topic, on: :create, unless: -> { system_event? }

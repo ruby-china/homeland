@@ -34,6 +34,7 @@
           <% end %>
         </span>
       </div>
+      <%= render 'replies/reply_to', reply: reply, show_body: false %>
       <div class="markdown<%= ' deleted' if reply.deleted? %>">
         <%= reply.body_html %>
       </div>

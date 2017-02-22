@@ -1,0 +1,20 @@
+<% if reply.reply_to && reply.reply_to&.user %>
+  <div class="reply-to-block">
+    <div class="info">
+      对
+      <% if show_body %>
+        <%= user_avatar_tag(reply.user, :xs) %><%= user_name_tag(reply.user) %>
+      <% else %>
+        <%= link_to reply_to_topic_reply_path(@topic, reply), remote: true do %>
+          <%= user_avatar_tag(reply.user, :xs, link: false) %><span class="user-name"><%= reply.reply_to.user.login %></span>
+          <span class='reply-id'>#<%= reply.reply_to_id %></span><% end %>
+      <% end %>
+      回复
+    </div>
+    <% if show_body %>
+    <div class="markdown">
+      <%= markdown(reply.reply_to.body) %>
+    </div>
+    <% end %>
+  </div>
+<% end %>

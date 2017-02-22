@@ -113,7 +113,7 @@ class Ability
 
   def basic_read_only
     can [:read, :feed, :node], Topic
-    can :read, Reply
+    can [:read, :reply_to], Reply
     can [:read, :recent, :preview, :comments], Page
     can :preview, Note
     can :read, Photo

@@ -14,7 +14,6 @@ ActiveRecord::Schema.define(version: 20170222062457) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "pg_stat_statements"
 
   create_table "actions", force: :cascade do |t|
     t.string   "action_type",   null: false
@@ -74,6 +73,12 @@ ActiveRecord::Schema.define(version: 20170222062457) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["name"], name: "index_locations_on_name", using: :btree
+  end
+
+  create_table "monkeys", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "new_notifications", force: :cascade do |t|
@@ -265,6 +270,15 @@ ActiveRecord::Schema.define(version: 20170222062457) do
     t.index ["user_id"], name: "index_team_users_on_user_id", using: :btree
   end
 
+  create_table "test_documents", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "reply_to_id"
+    t.integer  "mentioned_user_ids", default: [],              array: true
+    t.text     "body"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
   create_table "topics", force: :cascade do |t|
     t.integer  "user_id",                               null: false
     t.integer  "node_id",                               null: false
@@ -368,6 +382,14 @@ ActiveRecord::Schema.define(version: 20170222062457) do
     t.index ["location"], name: "index_users_on_location", using: :btree
     t.index ["login"], name: "index_users_on_login", using: :btree
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
+  end
+
+  create_table "walking_deads", force: :cascade do |t|
+    t.string   "name"
+    t.string   "tag"
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

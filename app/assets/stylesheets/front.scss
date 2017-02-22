@@ -417,6 +417,23 @@
       }
     }
 
+    .reply-to-block {
+      padding: 8px 15px;
+      background: #f7f7f7;
+      border-radius: 3px;
+      margin-bottom: 15px;
+      .info {
+        a {
+          color: #666;
+        }
+        .media-object { display: inline-block; margin-right: 5px; }
+        margin: 0;
+
+        .user-name { font-weight: bold; }
+      }
+      .markdown { margin-top: 10px; }
+    }
+
     .markdown {
       pre {
         margin-right: 0px;

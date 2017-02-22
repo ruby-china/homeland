@@ -18,6 +18,7 @@ window.TopicView = Backbone.View.extend
     "click .btn-move-page": "scrollPage"
     "click .notify-updated .update": "updateReplies"
     "click #node-selector .nodes .name a": "nodeSelectorNodeSelected"
+    "click .editor-toolbar .reply-to a.close": "unsetReplyTo"
     "tap .topics .topic": "topicRowClick"
 
   initialize: (opts) ->
@@ -39,18 +40,28 @@ window.TopicView = Backbone.View.extend
   # 回复
   reply: (e) ->
     _el = $(e.target)
-    floor = _el.data("floor")
-    login = _el.data("login")
+    reply_to_id = _el.data('id')
+    @setReplyTo(reply_to_id)
     reply_body = $("#new_reply textarea")
-    if floor
-      new_text = "##{floor}楼 @#{login} "
-    else
-      new_text = ''
-    if reply_body.val().trim().length == 0
-      new_text += ''
-    else
-      new_text = "\n#{new_text}"
-    reply_body.focus().val(reply_body.val() + new_text)
+    reply_body.focus()
+    return false
+
+  setReplyTo: (id) ->
+    $('#reply_reply_to_id').val(id)
+    replyEl = $(".reply[data-id=#{id}]")
+    targetAnchor = replyEl.attr('id')
+    replyToPanel = $(".editor-toolbar .reply-to")
+    userNameEl = replyEl.find("a.user-name")
+    replyToLink = replyToPanel.find(".user")
+    replyToLink.attr("href", "##{targetAnchor}")
+    replyToLink.text(userNameEl.text())
+    replyToPanel.show()
+
+  unsetReplyTo: ->
+    $('#reply_reply_to_id').val('')
+    replyToPanel = $(".editor-toolbar .reply-to")
+    replyToPanel.hide()
+
     return false
 
   clickAtFloor: (e) ->
@@ -96,10 +107,11 @@ window.TopicView = Backbone.View.extend
     $("#new_reply textarea").focus()
     $('#reply-button').button('reset')
     @resetClearReplyHightTimer()
+    @unsetReplyTo()
 
   # 图片点击增加全屏预览功能
   initContentImageZoom : () ->
-    exceptClasses = ["emoji", "twemoji"]
+    exceptClasses = ["emoji", "twemoji", "media-object avatar-16"]
     imgEls = $(".markdown img")
     for el in imgEls
       if exceptClasses.indexOf($(el).attr("class")) == -1
@@ -222,9 +234,9 @@ window.TopicView = Backbone.View.extend
       return @submitTextArea(el)
 
     # also highlight if hash is reply#
-    matchResult = window.location.hash.match(/^#reply(\d+)$/)
+    matchResult = window.location.hash.match(/^#reply\-(\d+)$/)
     if matchResult?
-      @highlightReply($("#reply#{matchResult[1]}"))
+      @highlightReply($("#reply-#{matchResult[1]}").parent())
 
     @hookPreview($(".editor-toolbar"), $(".topic-editor"))
 

@@ -8,36 +8,37 @@
   class_names << 'reply-deleted' if show_deleted
 %>
 <div class="<%= class_names.join(' ') %>" data-id="<%= reply.id %>" id="reply<%= floor %>">
-  <% if show_deleted %>
-    <div class="deleted text-center"><%= floor %><%= t("common.floor")%> <%= t("common.has_deleted")%></div>
-  <% elsif reply.system_event? %>
-    <%= render '/replies/system_event', reply: reply %>
-  <% else %>
-    <div class="avatar"><%= user_avatar_tag(reply.user, :md) %></div>
-    <div class="infos">
-      <div class="info">
-        <span class="name">
-          <%= user_name_tag(reply.user) %>
-        </span> ·
-        <span class="time">
-          <a class="reply-floor" href="#reply<%= floor %>">#<%= floor %></a> · <%= timeago(reply.created_at) %>
-        </span>
-        <span class="opts pull-right">
-          <% if !reply.deleted? %>
-            <span class="hideable">
-            <%= link_to('', edit_topic_reply_path(@topic,reply), class: "edit fa fa-pencil", 'data-uid' => reply.user_id, title: "修改回帖")%>
-            <%= link_to('', "#", 'data-floor' => floor, 'data-login' => reply.user_login,
-                title: t("topics.reply_this_floor"), class: "btn-reply fa fa-mail-reply" )
-            %>
-            </span>
-            <%= likeable_tag(reply, cache: true) %>
-          <% end %>
-        </span>
+  <div id="reply-<%= reply.id %>">
+    <% if show_deleted %>
+      <div class="deleted text-center"><%= floor %><%= t("common.floor")%> <%= t("common.has_deleted")%></div>
+    <% elsif reply.system_event? %>
+      <%= render '/replies/system_event', reply: reply %>
+    <% else %>
+      <div class="avatar"><%= user_avatar_tag(reply.user, :md) %></div>
+      <div class="infos">
+        <div class="info">
+          <span class="name">
+            <%= user_name_tag(reply.user) %>
+          </span> ·
+          <a class="time" href="#reply-<%= reply.id %>"><%= timeago(reply.created_at) %></a>
+          <span class="opts pull-right">
+            <% if !reply.deleted? %>
+              <span class="hideable">
+              <%= link_to('', edit_topic_reply_path(@topic,reply), class: "edit fa fa-pencil", 'data-uid' => reply.user_id, title: "修改回帖")%>
+              <%= link_to('', "#", 'data-id' => reply.id, 'data-login' => reply.user_login,
+                  title: t("topics.reply_this_floor"), class: "btn-reply fa fa-mail-reply" )
+              %>
+              </span>
+              <%= likeable_tag(reply, cache: true) %>
+            <% end %>
+          </span>
+        </div>
+        <%= render 'replies/reply_to', reply: reply, show_body: false %>
+        <div class="markdown<%= ' deleted' if reply.deleted? %>">
+          <%= reply.body_html %>
+        </div>
       </div>
-      <div class="markdown<%= ' deleted' if reply.deleted? %>">
-        <%= reply.body_html %>
-      </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
 <% end %>

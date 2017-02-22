@@ -103,4 +103,17 @@ describe RepliesController, type: :controller do
       expect(response).to redirect_to(topic_path(topic))
     end
   end
+
+  describe '#reply_to' do
+    let(:topic) { create :topic }
+    let(:reply1) { create :reply, topic: topic }
+    let(:reply) { create :reply, topic: topic, reply_to: reply1 }
+
+    it 'should work' do
+      get :reply_to, params: { topic_id: topic.id, id: reply.id }
+      expect(response.status).to eq 404
+      xhr :get, :reply_to, params: { topic_id: topic.id, id: reply.id }
+      expect(response).to be_success
+    end
+  end
 end

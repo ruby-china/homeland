@@ -14,5 +14,12 @@
   <ul class="nav nav-pills" style="clear:none;">
     <li class="edit active"><%= link_to(t("common.editor_toolbar_edit"), "#") %></li>
     <li class="preview"><%= link_to(t("common.editor_toolbar_preview"), "#") %></li>
+    <li>
+      <div class="nav reply-to" style="display:none;">
+        <i class="fa fa-mail-reply" title="回复"></i>
+        <a href="#" class="user"></a>
+        <a href="#" class="close"><i class="fa fa-close"></i></a>
+      </div>
+    </li>
   </ul>
 </div>

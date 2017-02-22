@@ -23,6 +23,16 @@ describe Reply, type: :model do
         expect(r.save).to eq false
         expect(r.errors.full_messages.join('')).to include('已关闭，不再接受回帖或修改回帖')
       end
+
+      it 'should remove bas reply_to_id' do
+        t = create(:topic)
+        r1 = create(:reply, topic: t)
+        r2 = create(:reply)
+        r = create(:reply, topic: t, reply_to: r2)
+        expect(r.reply_to_id).to eq nil
+        r = create(:reply, topic: t, reply_to: r1)
+        expect(r.reply_to_id).to eq r1.id
+      end
     end
   end
 

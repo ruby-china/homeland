@@ -10,6 +10,7 @@ class Reply < ApplicationRecord
   belongs_to :user, counter_cache: true
   belongs_to :topic, touch: true
   belongs_to :target, polymorphic: true
+  belongs_to :reply_to, class_name: 'Reply'
 
   delegate :title, to: :topic, prefix: true, allow_nil: true
   delegate :login, to: :user, prefix: true, allow_nil: true

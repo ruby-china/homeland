@@ -331,6 +331,12 @@ textarea.form-control:focus { padding: 6px; border-bottom-width: 1px; }
   .nav-pills>li.active>a:link,
   .nav-pills>li.active>a:visited,
   .nav-pills>li.active>a:hover { background-color: #d0d0d0; color: #666; }
+
+  .reply-to {
+    padding-top: 3px;
+    padding-left: 8px;
+    .close { font-size: 14px; margin-left: 5px; margin-top: 3px; }
+  }
 }
 textarea.topic-editor {
   border-radius: 0px 3px 3px 3px;

@@ -19,6 +19,7 @@ matrix:
     - rvm: ruby-head
 
 before_script:
+  - sed -i "s/gems.ruby-china.org/rubygems.org/g" Gemfile.lock
   - psql -c "CREATE USER \"admin\" WITH CREATEDB PASSWORD 'admin';" -U postgres
   - psql -c "create database \"homeland-test\" WITH OWNER=\"admin\";" -U postgres
   - cp config/config.yml.default config/config.yml

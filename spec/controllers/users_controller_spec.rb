@@ -72,7 +72,7 @@ describe UsersController, type: :controller do
     it 'should word' do
       sign_in user
       delete :auth_unbind, params: { id: user.login, provider: 'github' }
-      expect(response).to redirect_to(edit_user_registration_path)
+      expect(response).to redirect_to(setting_path)
     end
 
     it 'have no provider' do
@@ -80,7 +80,7 @@ describe UsersController, type: :controller do
       user.bind_service('provider' => 'twitter', 'uid' => 'ruby-china')
       sign_in user
       delete :auth_unbind, params: { id: user.login, provider: 'github' }
-      expect(response).to redirect_to(edit_user_registration_path)
+      expect(response).to redirect_to(setting_path)
     end
   end
 

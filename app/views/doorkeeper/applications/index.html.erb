@@ -1,100 +1,103 @@
-<%= render "menu" %>
+<div class="row">
+  <%= render "/settings/menu" %>
+  <div class="col-md-9">
+    <div class="panel panel-default">
+      <div class="panel-heading clearfix">
+        管理的应用列表
+        <%= link_to "注册新应用", new_oauth_application_path, class: 'btn btn-success pull-right' %>
+      </div>
 
-<div class="panel panel-default">
-  <div class="panel-heading clearfix">
-    管理的应用列表
-    <%= link_to "注册新应用", new_oauth_application_path, class: 'btn btn-success pull-right' %>
-  </div>
+      <div class="panel-body">
+        <table class="table table-bordered table-striped table-condensed">
+          <thead>
+          <tr>
+            <th><%= t('.name') %></th>
+            <th>Client Id</th>
+            <th><%= t('.callback_url') %></th>
+            <th>Level</th>
+            <th>用户量</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @applications.each do |app| %>
+            <tr>
+              <td><%= link_to app.name, oauth_application_path(app) %></td>
+              <td><%= app.uid %></td>
+              <td><%= app.redirect_uri %></td>
+              <td><%= app.level %></td>
+              <td><%= app.access_tokens.count %></td>
+              <td class="opts">
+                <%= link_to icon_tag('pencil'), edit_oauth_application_path(app)%>
+                <%= link_to icon_tag('trash'), oauth_application_path(app), data: { method: :delete, confirm: "确定要删除么？" }%>
+            </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
 
-  <div class="panel-body">
-    <table class="table table-bordered table-striped table-condensed">
-      <thead>
-      <tr>
-        <th><%= t('.name') %></th>
-        <th>Client Id</th>
-        <th><%= t('.callback_url') %></th>
-        <th>Level</th>
-        <th>用户量</th>
-        <th></th>
-      </tr>
-      </thead>
-      <tbody>
-      <% @applications.each do |app| %>
-        <tr>
-          <td><%= link_to app.name, oauth_application_path(app) %></td>
-          <td><%= app.uid %></td>
-          <td><%= app.redirect_uri %></td>
-          <td><%= app.level %></td>
-          <td><%= app.access_tokens.count %></td>
-          <td class="opts">
-            <%= link_to icon_tag('pencil'), edit_oauth_application_path(app)%>
-            <%= link_to icon_tag('trash'), oauth_application_path(app), data: { method: :delete, confirm: "确定要删除么？" }%>
-        </td>
-        </tr>
-      <% end %>
-      </tbody>
-    </table>
+    <div class="panel panel-default">
+      <div class="panel-heading clearfix">
+        已授权的应用
+      </div>
+
+      <div class="panel-body">
+        <p>下面列表是已经认证的应用，它们可以访问你的帐号。</p>
+        <table class="table table-bordered table-striped table-condensed">
+          <thead>
+          <tr>
+            <th><%= t('doorkeeper.authorized_applications.index.application') %></th>
+            <th><%= t('doorkeeper.authorized_applications.index.created_at') %></th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @authorized_applications.each do |app| %>
+            <tr>
+              <td><%= app.name %></td>
+              <td><%= app.created_at.strftime(t('doorkeeper.authorized_applications.index.date_format')) %></td>
+              <td>
+                <%= link_to "注销", oauth_authorized_application_path(app), class: "btn btn-warning btn-xs", data: { confirm: "确定要注销么？", method: :delete } %>
+              </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <% if @devices.length > 0 %>
+    <div class="panel panel-default">
+      <div class="panel-heading clearfix">
+        我的设备信息
+      </div>
+
+      <div class="panel-body">
+        <p>下面列表是已经连接上的设备，它们将会收到 Push 通知。</p>
+        <table class="table table-bordered table-striped table-condensed">
+          <thead>
+          <tr>
+            <th><%= t('activerecord.attributes.device.platform') %></th>
+            <th><%= t('activerecord.attributes.device.token') %></th>
+            <th><%= t('activerecord.attributes.device.alive') %></th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @devices.each do |device| %>
+            <tr>
+              <td><%= device.platform_name %></td>
+              <td><%= device.token %></td>
+              <td><%= device.alive? %></td>
+              <td><%= link_to '删除', device, class: 'btn btn-warning btn-xs', data: { confirm: '确定要删除么？', method: :delete } %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <% end %>
   </div>
 </div>
-
-<div class="panel panel-default">
-  <div class="panel-heading clearfix">
-    已授权的应用
-  </div>
-
-  <div class="panel-body">
-    <p>下面列表是已经认证的应用，它们可以访问你的帐号。</p>
-    <table class="table table-bordered table-striped table-condensed">
-      <thead>
-      <tr>
-        <th><%= t('doorkeeper.authorized_applications.index.application') %></th>
-        <th><%= t('doorkeeper.authorized_applications.index.created_at') %></th>
-        <th></th>
-      </tr>
-      </thead>
-      <tbody>
-      <% @authorized_applications.each do |app| %>
-        <tr>
-          <td><%= app.name %></td>
-          <td><%= app.created_at.strftime(t('doorkeeper.authorized_applications.index.date_format')) %></td>
-          <td>
-            <%= link_to "注销", oauth_authorized_application_path(app), class: "btn btn-warning btn-xs", data: { confirm: "确定要注销么？", method: :delete } %>
-          </td>
-        </tr>
-      <% end %>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<% if @devices.length > 0 %>
-<div class="panel panel-default">
-  <div class="panel-heading clearfix">
-    我的设备信息
-  </div>
-
-  <div class="panel-body">
-    <p>下面列表是已经连接上的设备，它们将会收到 Push 通知。</p>
-    <table class="table table-bordered table-striped table-condensed">
-      <thead>
-      <tr>
-        <th><%= t('activerecord.attributes.device.platform') %></th>
-        <th><%= t('activerecord.attributes.device.token') %></th>
-        <th><%= t('activerecord.attributes.device.alive') %></th>
-        <th></th>
-      </tr>
-      </thead>
-      <tbody>
-      <% @devices.each do |device| %>
-        <tr>
-          <td><%= device.platform_name %></td>
-          <td><%= device.token %></td>
-          <td><%= device.alive? %></td>
-          <td><%= link_to '删除', device, class: 'btn btn-warning btn-xs', data: { confirm: '确定要删除么？', method: :delete } %></td>
-        </tr>
-      <% end %>
-      </tbody>
-    </table>
-  </div>
-</div>
-<% end %>

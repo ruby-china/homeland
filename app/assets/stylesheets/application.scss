@@ -483,13 +483,25 @@ kbd {
 }
 
 .nav-stacked { margin-bottom: 15px; }
+.nav-stacked.nav-pills>li {
+  &:first-child {
+    a { border-radius: 3px 3px 0 0 };
+  }
+  &:last-child {
+    a { border-radius: 0 0 3px 3px };
+  }
+}
 .nav-stacked.nav-pills>li>a {
-  text-align: right;
-  border-radius: 3px 0 0 3px;
-  box-shadow: 0 0px 1px rgba(0, 0, 0, 0.09);
-  padding: 5px 15px;
+  text-align: left;
+  font-size: 14px;
+  border-radius: 0px;
+  box-shadow: 0 1px 0px rgba(0, 0, 0, 0.09);
+  padding: 8px 20px;
   margin-bottom: 0px;
-  background: #fff; border-right:2px solid $blackLight; color: #666;
+  margin: 0;
+  background: #fff;
+  border-left: 3px solid $blackLight;
+  color: #666;
 }
 .nav-stacked.nav-pills>li>a:hover { border-color: $blueLight; color: $blueLight; background-color: #fff; }
 .nav-stacked.nav-pills>li.active>a,
@@ -606,6 +618,8 @@ img.emoji { width:20px; height:20px; }
     color: #e76f3c;
   }
 }
+
+.setting-menu { padding-right: 0;}
 
 @media (max-width: 480px) {
   body { padding-top: 50px; }

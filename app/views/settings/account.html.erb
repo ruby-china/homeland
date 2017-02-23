@@ -1,0 +1,45 @@
+<div class="row">
+  <%= render 'menu' %>
+
+
+  <div class="col-md-9">
+    <% if !Setting.sso_enabled? %>
+      <% if Setting.has_module? :github %>
+      <div class="panel panel-default">
+        <div class="panel-heading"><%= t("users.bind_another_account")%></div>
+        <ul class="list-group">
+          <% ["github"].each do |provider| %>
+          <li class="list-group-item">
+            <% if @user.bind? provider %>
+              <%= t("omniauth.#{provider}") %>
+              <%= link_to(raw('<i class="fa fa-remove"></i>'),"/setting/auth/#{provider}", rel: "twitsy", title: "点击解除绑定", method: 'delete' )%>
+            <% else %>
+              <%= link_to(t("omniauth.#{provider}"), "/account/auth/#{provider}", rel: "twitsy", title: "点击绑定" )%>
+            <% end %>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+      <% end %>
+    <% end %>
+
+    <div class="panel panel-default">
+      <div class="panel-heading"><%= t("users.delete_account")%></div>
+      <div class="panel-body">
+        <%= form_for(@user, url: setting_path, method: :delete) do |f| %>
+          <%= render "shared/error_messages", :target => resource if params[:by] == "destroy" %>
+          <input type="hidden" name="by" value="destroy" />
+          <div class="form-group">
+            <%= f.password_field :current_password, class: "form-control", placeholder: t("users.confirm_delete_account") %>
+          </div>
+          <%= f.submit t("users.ensure_to_delete"), :class => "btn btn-danger", 'data-disable-with' => t("common.submitting") %>
+          <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+

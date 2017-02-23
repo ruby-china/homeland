@@ -85,4 +85,20 @@ describe SettingsController, type: :controller do
       expect(response).to be_success
     end
   end
+
+  describe ':auto_unbind' do
+    it 'should word' do
+      sign_in user
+      delete :auth_unbind, params: { id: user.login, provider: 'github' }
+      expect(response).to redirect_to(account_setting_path)
+    end
+
+    it 'have no provider' do
+      user.bind_service('provider' => 'github', 'uid' => 'ruby-china')
+      user.bind_service('provider' => 'twitter', 'uid' => 'ruby-china')
+      sign_in user
+      delete :auth_unbind, params: { id: user.login, provider: 'github' }
+      expect(response).to redirect_to(account_setting_path)
+    end
+  end
 end

@@ -3,16 +3,15 @@
 
   <div class="col-md-9">
     <div class="panel panel-default">
-      <div class="panel-heading hide-ios"><%= t("users.personal_information") %></div>
       <div class="panel-body">
         <%= simple_form_for(@user, url: setting_path, html: { method: :put, enctype:  "multipart/form-data" }) do |f| %>
         <%= render "shared/error_messages", target: @user %>
         <input type="hidden" name="by" value="profile" />
         <% if Setting.has_profile_field? :location %>
-          <%= f.input :location  %>
+          <%= f.input :location, input_html: { style: 'width: 200px' }  %>
         <% end %>
         <% if Setting.has_profile_field? :company %>
-          <%= f.input :company %>
+          <%= f.input :company, input_html: { style: 'width: 400px' } %>
         <% end %>
         <% if Setting.has_module? :github %>
         <div class="form-group">
@@ -62,6 +61,7 @@
         </div>
         <% end %>
       </div>
+    </div>
     </div>
   </div>
 </div>

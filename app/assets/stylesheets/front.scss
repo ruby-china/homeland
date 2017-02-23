@@ -809,3 +809,11 @@ textarea.div-dropzone-focus { border-color: #BBE1C9; background: #fafafa; }
     }
   }
 }
+
+.panel-body {
+  .heading { font-size: 16px; color: #777; font-weight: bold; padding-bottom: 10px; border-bottom: 1px solid #eee; margin-bottom: 15px; }
+  form {
+    margin-bottom: 25px;
+    &:last-child { margin-bottom: 0; }
+  }
+}

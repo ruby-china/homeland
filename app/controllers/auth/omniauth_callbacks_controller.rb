@@ -1,4 +1,4 @@
-module Users
+module Auth
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     def self.provides_callback_for(*providers)
       providers.each do |provider|
@@ -6,7 +6,7 @@ module Users
           def #{provider}
             if not current_user.blank?
               current_user.bind_service(env["omniauth.auth"])#Add an auth to existing
-              redirect_to edit_user_registration_path, notice: "成功绑定了 #{provider} 帐号。"
+              redirect_to account_setting_path, notice: "成功绑定了 #{provider} 帐号。"
             else
               @user = User.find_or_create_for_#{provider}(env["omniauth.auth"])
 

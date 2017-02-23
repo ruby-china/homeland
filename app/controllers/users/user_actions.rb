@@ -3,9 +3,9 @@ module Users
     extend ActiveSupport::Concern
 
     included do
-      before_action :authenticate_user!, only: [:block, :unblock, :blocked, :auth_unbind, :follow, :unfollow]
+      before_action :authenticate_user!, only: [:block, :unblock, :blocked, :follow, :unfollow]
       before_action :only_user!, only: [:topics, :replies, :favorites, :notes,
-                                        :auth_unbind, :block, :unblock, :follow, :unfollow,
+                                        :block, :unblock, :follow, :unfollow,
                                         :followers, :following, :calendar]
     end
 
@@ -31,17 +31,6 @@ module Users
       @notes = @user.notes.published.recent
       @notes = @notes.page(params[:page])
       fresh_when([@notes])
-    end
-
-    def auth_unbind
-      provider = params[:provider]
-      if current_user.authorizations.count <= 1
-        redirect_to edit_user_registration_path, flash: { error: t('users.unbind_warning') }
-        return
-      end
-
-      current_user.authorizations.where(provider: provider).delete_all
-      redirect_to edit_user_registration_path, flash: { warring: t('users.unbind_success', provider: provider.titleize) }
     end
 
     def block

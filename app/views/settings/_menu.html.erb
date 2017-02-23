@@ -1,0 +1,11 @@
+<div class="col-sm-3 setting-menu">
+  <div class="panel panel-default">
+    <%= render_list class: "nav nav-pills nav-stacked" do |li|
+      li << link_to('基本信息', setting_path)
+      li << link_to('详细资料', profile_setting_path)
+      li << link_to('账号设置', account_setting_path)
+      li << link_to('登陆密码', password_setting_path) unless Setting.sso_enabled?
+      li << link_to(t("users.manage_my_apps"), oauth_applications_path)
+    end %>
+  </div>
+</div>

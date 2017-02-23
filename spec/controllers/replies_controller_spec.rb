@@ -112,7 +112,7 @@ describe RepliesController, type: :controller do
     it 'should work' do
       get :reply_to, params: { topic_id: topic.id, id: reply.id }
       expect(response.status).to eq 404
-      xhr :get, :reply_to, params: { topic_id: topic.id, id: reply.id }
+      get :reply_to, params: { topic_id: topic.id, id: reply.id }, xhr: true
       expect(response).to be_success
     end
   end

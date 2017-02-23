@@ -38,8 +38,16 @@ Rails.application.routes.draw do
     registrations: :account,
     sessions: :sessions,
     passwords: :passwords,
-    omniauth_callbacks: 'users/omniauth_callbacks'
+    omniauth_callbacks: 'auth/omniauth_callbacks'
   }
+
+  resource :setting do
+    member do
+      get :account
+      get :password
+      get :profile
+    end
+  end
 
   # SSO
   namespace :auth do
@@ -51,7 +59,7 @@ Rails.application.routes.draw do
     end
   end
 
-  delete 'account/auth/:provider/unbind', to: 'users#auth_unbind', as: 'unbind_account'
+  delete 'setting/auth/:provider', to: 'settings#auth_unbind'
 
   resources :nodes do
     member do

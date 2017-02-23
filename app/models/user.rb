@@ -204,15 +204,6 @@ class User < ApplicationRecord
     I18n.t("common.#{level}_user")
   end
 
-  def update_with_password(params = {})
-    if !params[:current_password].blank? || !params[:password].blank? || !params[:password_confirmation].blank?
-      super
-    else
-      params.delete(:current_password)
-      update_without_password(params)
-    end
-  end
-
   # Override Devise to send mails with async
   def send_devise_notification(notification, *args)
     devise_mailer.send(notification, self, *args).deliver_later

@@ -14,7 +14,6 @@ ActiveRecord::Schema.define(version: 20170222062457) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "pg_stat_statements"
 
   create_table "actions", force: :cascade do |t|
     t.string   "action_type",   null: false
@@ -199,7 +198,6 @@ ActiveRecord::Schema.define(version: 20170222062457) do
     t.integer  "topic_id",                        null: false
     t.text     "body",                            null: false
     t.integer  "state",              default: 1,  null: false
-    t.integer  "liked_user_ids",     default: [],              array: true
     t.integer  "likes_count",        default: 0
     t.integer  "mentioned_user_ids", default: [],              array: true
     t.datetime "deleted_at"
@@ -282,8 +280,6 @@ ActiveRecord::Schema.define(version: 20170222062457) do
     t.datetime "replied_at"
     t.integer  "replies_count",         default: 0,     null: false
     t.integer  "likes_count",           default: 0
-    t.integer  "follower_ids",          default: [],                 array: true
-    t.integer  "liked_user_ids",        default: [],                 array: true
     t.integer  "mentioned_user_ids",    default: [],                 array: true
     t.datetime "deleted_at"
     t.datetime "created_at"
@@ -350,10 +346,6 @@ ActiveRecord::Schema.define(version: 20170222062457) do
     t.string   "perishable_token",                   default: "",    null: false
     t.integer  "topics_count",                       default: 0,     null: false
     t.integer  "replies_count",                      default: 0,     null: false
-    t.integer  "favorite_topic_ids",                 default: [],                 array: true
-    t.integer  "blocked_node_ids",                   default: [],                 array: true
-    t.integer  "blocked_user_ids",                   default: [],                 array: true
-    t.integer  "following_ids",                      default: [],                 array: true
     t.integer  "follower_ids",                       default: [],                 array: true
     t.string   "type",                   limit: 20
     t.integer  "failed_attempts",                    default: 0,     null: false

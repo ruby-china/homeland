@@ -53,10 +53,6 @@ Rails.application.routes.draw do
 
   delete 'account/auth/:provider/unbind', to: 'users#auth_unbind', as: 'unbind_account'
 
-  mount RuCaptcha::Engine, at: '/rucaptcha'
-  mount Notifications::Engine, at: '/notifications'
-  mount StatusPage::Engine, at: '/'
-
   resources :nodes do
     member do
       post :block
@@ -192,12 +188,14 @@ Rails.application.routes.draw do
   end
 
   authenticate :user, ->(u) { u.admin? } do
-    mount Sidekiq::Web, at: '/sidekiq'
+    mount Sidekiq::Web, at: 'sidekiq'
     mount PgHero::Engine, at: "pghero"
-    mount ExceptionTrack::Engine, at: "/exception-track"
+    mount ExceptionTrack::Engine, at: "exception-track"
   end
 
-  mount JasmineRails::Engine, at: '/specs' if defined?(JasmineRails)
+  mount RuCaptcha::Engine, at: 'rucaptcha'
+  mount Notifications::Engine, at: 'notifications'
+  mount StatusPage::Engine, at: '/'
 
   # WARRING! 请保持 User 的 routes 在所有路由的最后，以便于可以让用户名在根目录下面使用，而又不影响到其他的 routes
   # 比如 http://localhost:3000/huacnlee

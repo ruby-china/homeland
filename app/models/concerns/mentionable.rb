@@ -28,6 +28,14 @@ module Mentionable
     if logins.any?
       self.mentioned_user_ids = User.where('lower(login) IN (?) AND id != (?)', logins, user.id).limit(5).pluck(:id)
     end
+
+    # add Reply to user_id
+    if self.respond_to?(:reply_to)
+      reply_to_user_id = self.reply_to&.user_id
+      if reply_to_user_id
+        self.mentioned_user_ids << reply_to_user_id
+      end
+    end
   end
 
   def no_mention_users

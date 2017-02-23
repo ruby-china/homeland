@@ -403,6 +403,12 @@
       margin-bottom: 6px;
       font-size: 12px;
       .reply-floor { color: #7AA87A; }
+      a.time {
+        color: #999;
+        border-bottom: 1px dashed #ccc;
+        text-decoration: none !important;
+        cursor: pointer;
+      }
     }
 
     .opts {
@@ -415,6 +421,23 @@
         min-width: 22px;
         text-align: center;
       }
+    }
+
+    .reply-to-block {
+      padding: 8px 15px;
+      background: #f7f7f7;
+      border-radius: 3px;
+      margin-bottom: 15px;
+      .info {
+        a {
+          color: #666;
+        }
+        .media-object { display: inline-block; margin-right: 5px; vertical-align: top; }
+        margin: 0;
+
+        .user-name { font-weight: bold; }
+      }
+      .markdown { margin-top: 10px; }
     }
 
     .markdown {

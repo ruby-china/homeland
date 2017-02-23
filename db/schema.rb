@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170217050010) do
+ActiveRecord::Schema.define(version: 20170222062457) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -208,6 +208,7 @@ ActiveRecord::Schema.define(version: 20170217050010) do
     t.string   "action"
     t.string   "target_type"
     t.string   "target_id"
+    t.integer  "reply_to_id"
     t.index ["deleted_at"], name: "index_replies_on_deleted_at", using: :btree
     t.index ["topic_id"], name: "index_replies_on_topic_id", using: :btree
     t.index ["user_id"], name: "index_replies_on_user_id", using: :btree

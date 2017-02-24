@@ -1,7 +1,7 @@
 <div class="row">
   <%= render 'menu' %>
 
-  <div class="col-md-9">
+  <div class="col-md-8">
     <div class="panel panel-default">
       <div class="panel-body">
         <%= simple_form_for(@user, url: setting_path, html: { method: :put, enctype:  "multipart/form-data" }) do |f| %>

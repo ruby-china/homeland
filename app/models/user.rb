@@ -11,6 +11,7 @@ class User < ApplicationRecord
   include GithubRepository
   include UserCallbacks
   include ProfileFields
+  include RewardFields
 
   second_level_cache expires_in: 2.weeks
 

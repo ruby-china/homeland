@@ -102,4 +102,21 @@ describe UsersHelper, type: :helper do
       is_expected.to eq '<span class="label label-info role">会员</span>'
     end
   end
+
+  describe '.reward_user_tag' do
+    it 'should work' do
+      user = create(:user)
+      expect(helper.reward_user_tag(user)).to eq ''
+      expect(helper.reward_user_tag(nil)).to eq ''
+    end
+
+    it 'should workd' do
+      user = create(:user)
+      user.update_reward_fields(alipay: 'xxx')
+      html = helper.reward_user_tag(user)
+      expect(html).to eq %Q(<a class="btn btn-success" data-remote="true" href="/#{user.login}/reward"><i class='fa fa-qrcode'></i> <span>打赏支持</span></a>)
+      html = helper.reward_user_tag(user, class: 'btn btn-default')
+      expect(html).to eq %Q(<a class="btn btn-default" data-remote="true" href="/#{user.login}/reward"><i class='fa fa-qrcode'></i> <span>打赏支持</span></a>)
+    end
+  end
 end

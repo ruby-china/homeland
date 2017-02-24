@@ -22,7 +22,7 @@
         <div class="total">
           共收到 <b><%= @topic.replies_count %></b> 条回复
         </div>
-        <a href="#reply" class="btn btn-success btn-block btn-focus-reply">参与回复</a>
+        <%= reward_user_tag(@topic.user) %>
       </div>
       <hr />
       <div class="group opts">

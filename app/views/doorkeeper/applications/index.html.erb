@@ -1,6 +1,6 @@
 <div class="row">
   <%= render "/settings/menu" %>
-  <div class="col-md-9">
+  <div class="col-md-8">
     <div class="panel panel-default">
       <div class="panel-heading clearfix">
         管理的应用列表
@@ -13,7 +13,6 @@
           <tr>
             <th><%= t('.name') %></th>
             <th>Client Id</th>
-            <th><%= t('.callback_url') %></th>
             <th>Level</th>
             <th>用户量</th>
             <th></th>
@@ -24,7 +23,6 @@
             <tr>
               <td><%= link_to app.name, oauth_application_path(app) %></td>
               <td><%= app.uid %></td>
-              <td><%= app.redirect_uri %></td>
               <td><%= app.level %></td>
               <td><%= app.access_tokens.count %></td>
               <td class="opts">

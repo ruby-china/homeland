@@ -148,4 +148,13 @@ describe UsersController, type: :controller do
       expect(response.status).to eq(200)
     end
   end
+
+  describe '.reward' do
+    it 'should not allow user close' do
+      user.update_reward_fields(alipay: 'XXXXXXX')
+      get :reward, params: { id: user.login }, xhr: true
+      expect(response).to be_success
+      expect(response.body).to include('XXXXXXX')
+    end
+  end
 end

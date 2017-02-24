@@ -23,7 +23,7 @@ class TopicsController < ApplicationController
       end
     @topics = @topics.fields_for_list
     @topics = @topics.page(params[:page])
-    @page_title = t('menu.topics')
+    @page_title = t("menu.topics")
     @read_topic_ids = []
     if current_user
       @read_topic_ids = current_user.filter_readed_topics(@topics + @suggest_topics)
@@ -40,8 +40,8 @@ class TopicsController < ApplicationController
     @topics = @node.topics.last_actived.fields_for_list
     @topics = @topics.includes(:user).page(params[:page])
     @page_title = "#{@node.name} &raquo; #{t('menu.topics')}"
-    @page_title = [@node.name, t('menu.topics')].join(' · ')
-    render action: 'index'
+    @page_title = [@node.name, t("menu.topics")].join(" · ")
+    render action: "index"
   end
 
   def node_feed
@@ -55,8 +55,8 @@ class TopicsController < ApplicationController
       @topics = Topic.without_hide_nodes.send(name.to_sym).last_actived.fields_for_list.includes(:user)
       @topics = @topics.page(params[:page])
 
-      @page_title = [t("topics.topic_list.#{name}"), t('menu.topics')].join(' · ')
-      render action: 'index'
+      @page_title = [t("topics.topic_list.#{name}"), t("menu.topics")].join(" · ")
+      render action: "index"
     end
   end
 
@@ -64,22 +64,22 @@ class TopicsController < ApplicationController
   def favorites
     @topics = current_user.favorite_topics.includes(:user)
     @topics = @topics.page(params[:page])
-    render action: 'index'
+    render action: "index"
   end
 
   def recent
     @topics = Topic.without_hide_nodes.recent.fields_for_list.includes(:user)
     @topics = @topics.page(params[:page])
-    @page_title = [t('topics.topic_list.recent'), t('menu.topics')].join(' · ')
-    render action: 'index'
+    @page_title = [t("topics.topic_list.recent"), t("menu.topics")].join(" · ")
+    render action: "index"
   end
 
   def excellent
     @topics = Topic.excellent.recent.fields_for_list.includes(:user)
     @topics = @topics.page(params[:page])
 
-    @page_title = [t('topics.topic_list.excellent'), t('menu.topics')].join(' · ')
-    render action: 'index'
+    @page_title = [t("topics.topic_list.excellent"), t("menu.topics")].join(" · ")
+    render action: "index"
   end
 
   def show
@@ -88,7 +88,7 @@ class TopicsController < ApplicationController
 
     @topic.hits.incr(1)
     @node = @topic.node
-    @show_raw = params[:raw] == '1'
+    @show_raw = params[:raw] == "1"
     @can_reply = can?(:create, Reply)
 
     @replies = Reply.unscoped.where(topic_id: @topic.id).order(:id).all
@@ -147,49 +147,49 @@ class TopicsController < ApplicationController
 
   def destroy
     @topic.destroy_by(current_user)
-    redirect_to(topics_path, notice: t('topics.delete_topic_success'))
+    redirect_to(topics_path, notice: t("topics.delete_topic_success"))
   end
 
   def favorite
     current_user.favorite_topic(params[:id])
-    render plain: '1'
+    render plain: "1"
   end
 
   def unfavorite
     current_user.unfavorite_topic(params[:id])
-    render plain: '1'
+    render plain: "1"
   end
 
   def follow
     current_user.follow_topic(@topic)
-    render plain: '1'
+    render plain: "1"
   end
 
   def unfollow
     current_user.unfollow_topic(@topic)
-    render plain: '1'
+    render plain: "1"
   end
 
   def action
     authorize! params[:type].to_sym, @topic
 
     case params[:type]
-    when 'excellent'
+    when "excellent"
       @topic.excellent!
-      redirect_to @topic, notice: '加精成功。'
-    when 'unexcellent'
+      redirect_to @topic, notice: "加精成功。"
+    when "unexcellent"
       @topic.unexcellent!
-      redirect_to @topic, notice: '加精已经取消。'
-    when 'ban'
-      params[:reason_text] ||= params[:reason] || ''
+      redirect_to @topic, notice: "加精已经取消。"
+    when "ban"
+      params[:reason_text] ||= params[:reason] || ""
       @topic.ban!(reason: params[:reason_text].strip)
-      redirect_to @topic, notice: '已转移到 NoPoint 节点。'
-    when 'close'
+      redirect_to @topic, notice: "已转移到 NoPoint 节点。"
+    when "close"
       @topic.close!
-      redirect_to @topic, notice: '话题已关闭，将不再接受任何新的回复。'
-    when 'open'
+      redirect_to @topic, notice: "话题已关闭，将不再接受任何新的回复。"
+    when "open"
       @topic.open!
-      redirect_to @topic, notice: '话题已重启开启。'
+      redirect_to @topic, notice: "话题已重启开启。"
     end
   end
 
@@ -228,7 +228,7 @@ class TopicsController < ApplicationController
     if Setting.has_module?(:jobs)
       # FIXME: Monkey Patch for homeland-jobs
       if @node&.id == 25
-        @current = ['/jobs']
+        @current = ["/jobs"]
       end
     end
   end

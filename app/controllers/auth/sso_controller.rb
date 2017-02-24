@@ -21,7 +21,7 @@ module Auth
 
       sso = Homeland::SSO.parse(request.query_string)
       unless sso.nonce_valid?
-        return render(plain: I18n.t('sso.timeout_expired'), status: 419)
+        return render(plain: I18n.t("sso.timeout_expired"), status: 419)
       end
 
       return_path = sso.return_path
@@ -32,20 +32,20 @@ module Auth
         sign_in :user, user
       rescue => e
         message = sso.diagnostics
-        message << "\n\n" << '-' * 100 << "\n\n"
+        message << "\n\n" << "-" * 100 << "\n\n"
         message << e.message
-        message << "\n\n" << '-' * 100 << "\n\n"
+        message << "\n\n" << "-" * 100 << "\n\n"
         message << e.backtrace.join("\n")
 
         puts message
 
-        ExceptionTrack::Log.create(title: 'SSO Failed to create or lookup user:', body: message)
-        render plain: I18n.t('sso.unknown_error'), status: 500
+        ExceptionTrack::Log.create(title: "SSO Failed to create or lookup user:", body: message)
+        render plain: I18n.t("sso.unknown_error"), status: 500
         return
       end
 
       unless user
-        render plain: I18n.t('sso.not_found'), status: 500
+        render plain: I18n.t("sso.not_found"), status: 500
         return
       end
 
@@ -63,7 +63,7 @@ module Auth
         return
       end
 
-      sso = SingleSignOn.parse(payload, Setting.sso['secret'])
+      sso = SingleSignOn.parse(payload, Setting.sso["secret"])
       sso.name = current_user.name
       sso.username = current_user.login
       sso.email = current_user.email

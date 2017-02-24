@@ -1,9 +1,9 @@
-require 'homeland/version'
+require "homeland/version"
 
 module Homeland
   class << self
     def file_store
-      @file_store ||= ActiveSupport::Cache::FileStore.new(Rails.root.join('tmp/cache'))
+      @file_store ||= ActiveSupport::Cache::FileStore.new(Rails.root.join("tmp/cache"))
     end
 
     # Get plugin list

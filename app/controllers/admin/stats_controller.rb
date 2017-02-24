@@ -7,8 +7,8 @@ module Admin
     def index
       result = { model: params[:model] }
       result[:count] = klass.unscoped.count
-      result[:week_count] = klass.unscoped.where('created_at >= ?', Date.today.beginning_of_week).count
-      result[:month_count] = klass.unscoped.where('created_at >= ?', Date.today.beginning_of_month).count
+      result[:week_count] = klass.unscoped.where("created_at >= ?", Date.today.beginning_of_week).count
+      result[:month_count] = klass.unscoped.where("created_at >= ?", Date.today.beginning_of_month).count
       render json: result.as_json
     end
 

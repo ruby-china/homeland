@@ -3,7 +3,7 @@ class LikesController < ApplicationController
   before_action :set_likeable
 
   def index
-    @users = @item.like_by_users.order('actions.id asc')
+    @users = @item.like_by_users.order("actions.id asc")
     render :index, layout: false
   end
 
@@ -26,11 +26,11 @@ class LikesController < ApplicationController
     defined_action = User.find_defined_action(:like, params[:type])
 
     if defined_action.blank?
-      render plain: '-1'
+      render plain: "-1"
       return false
     end
 
     @item = defined_action[:target_klass].find_by(id: params[:id])
-    render plain: '-2' if @item.blank?
+    render plain: "-2" if @item.blank?
   end
 end

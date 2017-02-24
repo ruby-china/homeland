@@ -1,4 +1,4 @@
-require 'digest/md5'
+require "digest/md5"
 class Reply < ApplicationRecord
   include MarkdownBody
   include SoftDelete
@@ -11,7 +11,7 @@ class Reply < ApplicationRecord
   belongs_to :user, counter_cache: true
   belongs_to :topic, touch: true
   belongs_to :target, polymorphic: true
-  belongs_to :reply_to, class_name: 'Reply'
+  belongs_to :reply_to, class_name: "Reply"
 
   delegate :title, to: :topic, prefix: true, allow_nil: true
   delegate :login, to: :user, prefix: true, allow_nil: true
@@ -20,15 +20,15 @@ class Reply < ApplicationRecord
   scope :fields_for_list, -> { select(:topic_id, :id, :body, :updated_at, :created_at) }
 
   validates :body, presence: true, unless: -> { system_event? }
-  validates :body, uniqueness: { scope: [:topic_id, :user_id], message: '不能重复提交。' }, unless: -> { system_event? }
+  validates :body, uniqueness: { scope: [:topic_id, :user_id], message: "不能重复提交。" }, unless: -> { system_event? }
   validate do
-    ban_words = (Setting.ban_words_on_reply || '').split("\n").collect(&:strip)
+    ban_words = (Setting.ban_words_on_reply || "").split("\n").collect(&:strip)
     if body.strip.downcase.in?(ban_words)
-      errors.add(:body, '请勿回复无意义的内容，如你想收藏或赞这篇帖子，请用帖子后面的功能。')
+      errors.add(:body, "请勿回复无意义的内容，如你想收藏或赞这篇帖子，请用帖子后面的功能。")
     end
 
     if topic&.closed?
-      errors.add(:topic, '已关闭，不再接受回帖或修改回帖。')
+      errors.add(:topic, "已关闭，不再接受回帖或修改回帖。")
     end
 
     if reply_to_id
@@ -93,9 +93,9 @@ class Reply < ApplicationRecord
 
   def default_notification
     @default_notification ||= {
-      notify_type: 'topic_reply',
-      target_type: 'Reply', target_id: self.id,
-      second_target_type: 'Topic', second_target_id: self.topic_id,
+      notify_type: "topic_reply",
+      target_type: "Reply", target_id: self.id,
+      second_target_type: "Topic", second_target_id: self.topic_id,
       actor_id: self.user_id
     }
   end
@@ -123,12 +123,12 @@ class Reply < ApplicationRecord
   end
 
   def upvote?
-    (body || '').strip.start_with?(*UPVOTES)
+    (body || "").strip.start_with?(*UPVOTES)
   end
 
   def destroy
     super
-    Notification.where(notify_type: 'topic_reply', target: self).delete_all
+    Notification.where(notify_type: "topic_reply", target: self).delete_all
     delete_notifiaction_mentions
   end
 
@@ -138,7 +138,7 @@ class Reply < ApplicationRecord
   end
 
   def self.create_system_event(opts = {})
-    opts[:body] ||= ''
+    opts[:body] ||= ""
     opts[:user] ||= User.current
     return false if opts[:action].blank?
     return false if opts[:user].blank?

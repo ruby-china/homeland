@@ -2,7 +2,7 @@ class SearchController < ApplicationController
   before_action :authenticate_user!, only: [:users]
 
   def index
-    params[:q] ||= ''
+    params[:q] ||= ""
 
     search_modules = [Topic, User]
     search_modules << Page if Setting.has_module?(:wiki)
@@ -10,14 +10,14 @@ class SearchController < ApplicationController
       query: {
         simple_query_string: {
           query: params[:q],
-          default_operator: 'AND',
-          minimum_should_match: '70%',
+          default_operator: "AND",
+          minimum_should_match: "70%",
           fields: %w(title body name login)
         }
       },
       highlight: {
-        pre_tags: ['[h]'],
-        post_tags: ['[/h]'],
+        pre_tags: ["[h]"],
+        post_tags: ["[/h]"],
         fields: { title: {}, body: {}, name: {}, login: {} }
       }
     }

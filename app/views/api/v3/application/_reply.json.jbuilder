@@ -23,7 +23,7 @@ if reply
           :likes_count, :action, :target_type)
     json.deleted reply.deleted_at.present?
     json.user do
-      json.partial! 'user', user: reply.user
+      json.partial! "user", user: reply.user
     end
 
     if defined?(detail)
@@ -33,15 +33,15 @@ if reply
   end
 
   # Mention Target
-  if reply.action == 'mention'
+  if reply.action == "mention"
     json.mention_topic do
-      if reply.target_type == 'Topic'
-        json.partial! 'topic', topic: reply.target
+      if reply.target_type == "Topic"
+        json.partial! "topic", topic: reply.target
       else
-        json.partial! 'topic', topic: reply&.target&.topic
+        json.partial! "topic", topic: reply&.target&.topic
       end
     end
   end
 
-  json.partial! 'abilities', object: reply
+  json.partial! "abilities", object: reply
 end

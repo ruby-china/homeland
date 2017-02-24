@@ -42,7 +42,7 @@ module Api
       def likeable
         return @likeable if defined? @likeable
         @likeable =
-          if params[:obj_type] == 'topic'
+          if params[:obj_type] == "topic"
             Topic.find(params[:obj_id])
           else
             Reply.find(params[:obj_id])

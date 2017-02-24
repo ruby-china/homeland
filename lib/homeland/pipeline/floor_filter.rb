@@ -4,9 +4,9 @@ module Homeland
       FLOOR_REGEXP = /#(\d+)([楼樓Ff])/
 
       def call
-        doc.search('.//text()').each do |node|
+        doc.search(".//text()").each do |node|
           content = node.to_html
-          next unless content.include?('#')
+          next unless content.include?("#")
           next if has_ancestor?(node, %w(pre code))
 
           content.gsub!(FLOOR_REGEXP) do

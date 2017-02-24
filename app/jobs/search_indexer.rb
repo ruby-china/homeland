@@ -6,21 +6,21 @@ class SearchIndexer < ApplicationJob
     type.downcase!
 
     case type
-    when 'topic'
+    when "topic"
       obj = Topic.find_by_id(id)
-    when 'page'
+    when "page"
       obj = Page.find_by_id(id)
-    when 'user'
+    when "user"
       obj = User.find_by_id(id)
     end
 
     return false unless obj
 
-    if operation == 'update'
+    if operation == "update"
       obj.__elasticsearch__.update_document
-    elsif operation == 'delete'
+    elsif operation == "delete"
       obj.__elasticsearch__.delete_document
-    elsif operation == 'index'
+    elsif operation == "index"
       obj.__elasticsearch__.index_document
     end
   end

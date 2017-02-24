@@ -5,8 +5,8 @@ class User
     module ClassMethods
       %w(github).each do |provider|
         define_method "find_or_create_for_#{provider}" do |response|
-          uid = response['uid'].to_s
-          data = response['info']
+          uid = response["uid"].to_s
+          data = response["info"]
 
           if (user = Authorization.find_by(provider: provider, uid: uid).try(:user))
             user
@@ -27,16 +27,16 @@ class User
       def new_from_provider_data(provider, uid, data)
         User.new do |user|
           user.email =
-            if data['email'].present? && !User.where(email: data['email']).exists?
-              data['email']
+            if data["email"].present? && !User.where(email: data["email"]).exists?
+              data["email"]
             else
               "#{provider}+#{uid}@example.com"
             end
 
-          user.name = data['name']
-          user.login = Homeland::Username.sanitize(data['nickname'])
-          if provider == 'github'
-            user.github = data['nickname']
+          user.name = data["name"]
+          user.login = Homeland::Username.sanitize(data["nickname"])
+          if provider == "github"
+            user.github = data["nickname"]
           end
 
           if user.login.blank?
@@ -48,8 +48,8 @@ class User
           end
 
           user.password = Devise.friendly_token[0, 20]
-          user.location = data['location']
-          user.tagline  = data['description']
+          user.location = data["location"]
+          user.tagline  = data["description"]
         end
       end
     end

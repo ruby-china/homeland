@@ -23,7 +23,7 @@ class Node < ApplicationRecord
 
   # 内建 [NoPoint] 节点
   def self.no_point
-    @no_point ||= self.find_builtin_node(61, 'NoPoint')
+    @no_point ||= self.find_builtin_node(61, "NoPoint")
   end
 
   # 是否 Summary 过多需要折叠

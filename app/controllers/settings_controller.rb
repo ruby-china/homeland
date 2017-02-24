@@ -20,11 +20,11 @@ class SettingsController < ApplicationController
 
   def update
     case params[:by]
-    when 'password'
+    when "password"
       update_password
-    when 'profile'
+    when "profile"
       update_profile
-    when 'reward'
+    when "reward"
       update_reward
     else
       update_basic
@@ -36,24 +36,24 @@ class SettingsController < ApplicationController
 
     unless @user.valid_password?(current_password)
       @user.errors.add(:current_password, :invalid)
-      render 'show'
+      render "show"
       return
     end
 
     @user.soft_delete
     sign_out
-    redirect_to root_path, notice: '账号删除成功。'
+    redirect_to root_path, notice: "账号删除成功。"
   end
 
   def auth_unbind
     provider = params[:provider]
     if current_user.authorizations.count <= 1
-      redirect_to account_setting_path, notice: t('users.unbind_warning')
+      redirect_to account_setting_path, notice: t("users.unbind_warning")
       return
     end
 
     current_user.authorizations.where(provider: provider).delete_all
-    redirect_to account_setting_path, notice: t('users.unbind_success', provider: provider.titleize)
+    redirect_to account_setting_path, notice: t("users.unbind_success", provider: provider.titleize)
   end
 
   private
@@ -68,18 +68,18 @@ class SettingsController < ApplicationController
 
   def update_basic
     if @user.update(user_params)
-      redirect_to setting_path, notice: '更新成功'
+      redirect_to setting_path, notice: "更新成功"
     else
-      render 'show'
+      render "show"
     end
   end
 
   def update_profile
     if @user.update(user_params)
       @user.update_profile_fields(params[:user][:profiles])
-      redirect_to profile_setting_path, notice: '更新成功'
+      redirect_to profile_setting_path, notice: "更新成功"
     else
-      render 'profile'
+      render "profile"
     end
   end
 
@@ -93,17 +93,17 @@ class SettingsController < ApplicationController
     end
 
     if @user.update_reward_fields(res)
-      redirect_to reward_setting_path, notice: '更新成功'
+      redirect_to reward_setting_path, notice: "更新成功"
     else
-      render 'reward'
+      render "reward"
     end
   end
 
   def update_password
     if @user.update_with_password(user_params)
-      redirect_to new_session_path(:user), notice: '密码更新成功，现在你需要重新登陆。'
+      redirect_to new_session_path(:user), notice: "密码更新成功，现在你需要重新登陆。"
     else
-      render 'password'
+      render "password"
     end
   end
 end

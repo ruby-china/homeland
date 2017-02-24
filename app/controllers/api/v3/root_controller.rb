@@ -19,7 +19,7 @@ module Api
         @meta = { time: Time.now }
         @user = current_user
 
-        render 'api/v3/users/show'
+        render "api/v3/users/show"
       end
     end
   end

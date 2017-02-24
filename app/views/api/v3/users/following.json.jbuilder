@@ -1,1 +1,1 @@
-json.following @users, partial: 'user', as: :user
+json.following @users, partial: "user", as: :user

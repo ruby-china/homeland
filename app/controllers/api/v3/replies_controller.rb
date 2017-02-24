@@ -24,7 +24,7 @@ module Api
 
         @reply.body = params[:body]
         @reply.save!
-        render 'show'
+        render "show"
       end
 
       # 删除回帖

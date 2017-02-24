@@ -1,5 +1,5 @@
 namespace :upgrade do
-  desc 'Updates the ruby-advisory-db and runs audit'
+  desc "Updates the ruby-advisory-db and runs audit"
   task action_store: :environment do
     Action.delete_all
     copy_data_from_users
@@ -20,22 +20,22 @@ def copy_data_from_topics
     group.each do |t|
       Action.bulk_insert(set_size: 100) do |worker|
         default_action = {
-          target_type: 'Topic',
+          target_type: "Topic",
           target_id: t.id,
-          user_type: 'User'
+          user_type: "User"
         }
 
         puts "Topic:#{t.id} follow users"
         t[:follower_ids].each do |uid|
           puts "  Add #{uid}"
-          action = default_action.merge(action_type: 'follow', user_id: uid)
+          action = default_action.merge(action_type: "follow", user_id: uid)
           worker.add(action)
         end
 
         puts "Topic:#{t.id} liked users"
         t[:liked_user_ids].each do |uid|
           puts "  Add #{uid}"
-          action = default_action.merge(action_type: 'like', user_id: uid)
+          action = default_action.merge(action_type: "like", user_id: uid)
           worker.add(action)
         end
       end
@@ -51,15 +51,15 @@ def copy_data_from_replies
     group.each do |r|
       Action.bulk_insert(set_size: 100) do |worker|
         default_action = {
-          target_type: 'Reply',
+          target_type: "Reply",
           target_id: r.id,
-          user_type: 'User'
+          user_type: "User"
         }
 
         puts "Reply:#{r.id} liked users"
         r[:liked_user_ids].each do |uid|
           puts "  Add #{uid}"
-          action = default_action.merge(action_type: 'like', user_id: uid)
+          action = default_action.merge(action_type: "like", user_id: uid)
           worker.add(action)
         end
       end
@@ -81,9 +81,9 @@ def copy_data_from_users
       Action.bulk_insert(set_size: 100) do |worker|
         # following_ids
         default_action = {
-          action_type: 'follow',
-          target_type: 'User',
-          user_type: 'User',
+          action_type: "follow",
+          target_type: "User",
+          user_type: "User",
           user_id: u.id
         }
         puts "User:#{u.id} follow users"
@@ -96,9 +96,9 @@ def copy_data_from_users
 
         # block_user_ids
         default_action = {
-          action_type: 'block',
-          target_type: 'User',
-          user_type: 'User',
+          action_type: "block",
+          target_type: "User",
+          user_type: "User",
           user_id: u.id
         }
         puts "User:#{u.id} block users"
@@ -110,9 +110,9 @@ def copy_data_from_users
 
         # blocked_node_ids
         default_action = {
-          action_type: 'block',
-          target_type: 'Node',
-          user_type: 'User',
+          action_type: "block",
+          target_type: "Node",
+          user_type: "User",
           user_id: u.id
         }
         puts "User:#{u.id} block users"
@@ -124,9 +124,9 @@ def copy_data_from_users
 
         # favorite_topic_ids
         default_action = {
-          action_type: 'favorite',
-          target_type: 'Topic',
-          user_type: 'User',
+          action_type: "favorite",
+          target_type: "Topic",
+          user_type: "User",
           user_id: u.id
         }
         puts "User:#{u.id} favorite topics"

@@ -1,4 +1,4 @@
-require 'digest/md5'
+require "digest/md5"
 
 class User < ApplicationRecord
   include Searchable
@@ -28,11 +28,11 @@ class User < ApplicationRecord
   has_many :authorizations, dependent: :destroy
   has_many :notifications, dependent: :destroy
   has_many :photos
-  has_many :oauth_applications, class_name: 'Doorkeeper::Application', as: :owner
+  has_many :oauth_applications, class_name: "Doorkeeper::Application", as: :owner
   has_many :devices
   has_many :team_users
   has_many :teams, through: :team_users
-  has_one :sso, class_name: 'UserSSO', dependent: :destroy
+  has_one :sso, class_name: "UserSSO", dependent: :destroy
 
   attr_accessor :password_confirmation
 
@@ -42,7 +42,7 @@ class User < ApplicationRecord
 
   enum state: { deleted: -1, normal: 1, blocked: 2 }
 
-  validates :login, format: { with: ALLOW_LOGIN_FORMAT_REGEXP, message: '只允许数字、大小写字母、中横线、下划线' },
+  validates :login, format: { with: ALLOW_LOGIN_FORMAT_REGEXP, message: "只允许数字、大小写字母、中横线、下划线" },
                     length: { in: 2..20 },
                     presence: true,
                     uniqueness: { case_sensitive: false }
@@ -67,7 +67,7 @@ class User < ApplicationRecord
 
   def self.find_by_login(slug)
     return nil unless slug.match? ALLOW_LOGIN_FORMAT_REGEXP
-    fetch_by_uniq_keys(login: slug) || where('lower(login) = ?', slug.downcase).take
+    fetch_by_uniq_keys(login: slug) || where("lower(login) = ?", slug.downcase).take
   end
 
   def self.find_by_login_or_email(login_or_email)
@@ -79,7 +79,7 @@ class User < ApplicationRecord
     conditions = warden_conditions.dup
     login = conditions.delete(:login)
     login.downcase!
-    where(conditions.to_h).where(['(lower(login) = :value OR lower(email) = :value) and state != -1', { value: login }]).first
+    where(conditions.to_h).where(["(lower(login) = :value OR lower(email) = :value) and state != -1", { value: login }]).first
   end
 
   def self.current
@@ -94,10 +94,10 @@ class User < ApplicationRecord
     limit = (options[:limit] || 30).to_i
     user = options[:user]
     following = []
-    term = term.to_s + '%'
-    users = User.where('login ilike ? or name ilike ?', term, term).order('replies_count desc').limit(limit).to_a
+    term = term.to_s + "%"
+    users = User.where("login ilike ? or name ilike ?", term, term).order("replies_count desc").limit(limit).to_a
     if user
-      following = user.follow_users.where('login ilike ? or name ilike ?', term, term).to_a
+      following = user.follow_users.where("login ilike ? or name ilike ?", term, term).to_a
     end
     users.unshift(*Array(following))
     users.uniq!
@@ -111,7 +111,7 @@ class User < ApplicationRecord
   end
 
   def user_type
-    (self[:type] || 'User').underscore.to_sym
+    (self[:type] || "User").underscore.to_sym
   end
 
   def organization?
@@ -119,7 +119,7 @@ class User < ApplicationRecord
   end
 
   def email=(val)
-    self.email_md5 = Digest::MD5.hexdigest(val || '')
+    self.email_md5 = Digest::MD5.hexdigest(val || "")
     self[:email] = val
   end
 
@@ -132,17 +132,17 @@ class User < ApplicationRecord
   end
 
   def github_url
-    return '' if github.blank?
+    return "" if github.blank?
     "https://github.com/#{github.split('/').last}"
   end
 
   def website_url
-    return '' if website.blank?
+    return "" if website.blank?
     website[%r{^https?://}] ? website : "http://#{website}"
   end
 
   def twitter_url
-    return '' if twitter.blank?
+    return "" if twitter.blank?
     "https://twitter.com/#{twitter}"
   end
 
@@ -187,15 +187,15 @@ class User < ApplicationRecord
   # 用户的账号类型
   def level
     if admin?
-      'admin'
+      "admin"
     elsif verified?
-      'vip'
+      "vip"
     elsif blocked?
-      'blocked'
+      "blocked"
     elsif newbie?
-      'newbie'
+      "newbie"
     else
-      'normal'
+      "normal"
     end
   end
 
@@ -213,19 +213,19 @@ class User < ApplicationRecord
   end
 
   def bind_service(response)
-    provider = response['provider']
-    uid = response['uid'].to_s
+    provider = response["provider"]
+    uid = response["uid"].to_s
     authorizations.create(provider: provider, uid: uid)
   end
 
   # 软删除
   def soft_delete
-    self.state = 'deleted'
+    self.state = "deleted"
     save(validate: false)
   end
 
   def letter_avatar_url(size)
-    path = LetterAvatar.generate(self.login, size).sub('public/', '/')
+    path = LetterAvatar.generate(self.login, size).sub("public/", "/")
 
     "#{Setting.base_url}#{path}"
   end
@@ -244,23 +244,23 @@ class User < ApplicationRecord
 
   # @example.com 的可以修改邮件地址
   def email_locked?
-    self.email.exclude?('@example.com')
+    self.email.exclude?("@example.com")
   end
 
   def calendar_data
-    Rails.cache.fetch(['user', self.id, 'calendar_data', Date.today, 'by-months']) do
+    Rails.cache.fetch(["user", self.id, "calendar_data", Date.today, "by-months"]) do
       calendar_data_without_cache
     end
   end
 
   def calendar_data_without_cache
     date_from = 12.months.ago.beginning_of_month.to_date
-    replies = self.replies.where('created_at > ?', date_from)
+    replies = self.replies.where("created_at > ?", date_from)
                   .group("date(created_at AT TIME ZONE 'CST')")
                   .select("date(created_at AT TIME ZONE 'CST') AS date, count(id) AS total_amount").all
 
     replies.each_with_object({}) do |reply, timestamps|
-      timestamps[reply['date'].to_time.to_i.to_s] = reply['total_amount']
+      timestamps[reply["date"].to_time.to_i.to_s] = reply["total_amount"]
     end
   end
 

@@ -20,17 +20,17 @@ module Admin
       @node = Node.new(params[:node].permit!)
 
       if @node.save
-        redirect_to(admin_nodes_path, notice: 'Node was successfully created.')
+        redirect_to(admin_nodes_path, notice: "Node was successfully created.")
       else
-        render action: 'new'
+        render action: "new"
       end
     end
 
     def update
       if @node.update(params[:node].permit!)
-        redirect_to(admin_nodes_path, notice: 'Node was successfully updated.')
+        redirect_to(admin_nodes_path, notice: "Node was successfully updated.")
       else
-        render action: 'edit'
+        render action: "edit"
       end
     end
 

@@ -1,22 +1,22 @@
 module Homeland
   class SSO < SingleSignOn
     def self.sso_url
-      Setting.sso['url']
+      Setting.sso["url"]
     end
 
     def self.sso_secret
-      Setting.sso['secret']
+      Setting.sso["secret"]
     end
 
-    def self.generate_sso(return_path = '/')
+    def self.generate_sso(return_path = "/")
       sso = new
       sso.nonce = SecureRandom.hex
       sso.register_nonce(return_path)
-      sso.return_sso_url = Setting.base_url + '/auth/sso/login'
+      sso.return_sso_url = Setting.base_url + "/auth/sso/login"
       sso
     end
 
-    def self.generate_url(return_path = '/')
+    def self.generate_url(return_path = "/")
       generate_sso(return_path).to_url
     end
 
@@ -31,7 +31,7 @@ module Homeland
     end
 
     def return_path
-      $redis.get(nonce_key) || '/'
+      $redis.get(nonce_key) || "/"
     end
 
     def expire_nonce!

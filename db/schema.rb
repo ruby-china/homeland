@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170222062457) do
+ActiveRecord::Schema.define(version: 20170224074052) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -322,13 +322,11 @@ ActiveRecord::Schema.define(version: 20170222062457) do
     t.string   "company"
     t.string   "github"
     t.string   "twitter"
-    t.string   "qq"
     t.string   "avatar"
     t.boolean  "verified",                           default: false, null: false
     t.boolean  "hr",                                 default: false, null: false
     t.integer  "state",                              default: 1,     null: false
     t.string   "tagline"
-    t.string   "co"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "encrypted_password",                 default: "",    null: false

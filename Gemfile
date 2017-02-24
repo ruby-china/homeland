@@ -4,7 +4,7 @@ else
   source 'https://gems.ruby-china.org'
 end
 
-gem 'rails', '~> 5.0'
+gem 'rails', '~> 5.1.0.beta'
 gem 'sprockets'
 gem 'sass-rails'
 gem 'coffee-rails'

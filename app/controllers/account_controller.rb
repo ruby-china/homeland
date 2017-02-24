@@ -6,6 +6,10 @@ class AccountController < Devise::RegistrationsController
     super
   end
 
+  def edit
+    redirect_to setting_path
+  end
+
   # POST /resource
   def create
     build_resource(sign_up_params)

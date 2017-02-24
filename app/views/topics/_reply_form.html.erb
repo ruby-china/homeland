@@ -1,5 +1,5 @@
 <%= render "/shared/editor_toolbar" %>
-<%= form_for(Reply.new, remote: true, url: topic_replies_path(@topic)) do |f| %>
+<%= form_with(model: Reply.new, remote: true, url: topic_replies_path(@topic)) do |f| %>
 
   <div class="form-group">
     <%= f.text_area :body, class: "topic-editor form-control", rows: "4", tabindex: "1" %>

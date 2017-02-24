@@ -6,7 +6,7 @@
       <div class="panel-body">
         <div class="heading">删除我的账号</div>
 
-        <%= form_for(@user, url: setting_path, method: :delete) do |f| %>
+        <%= form_with(model: @user, url: setting_path, method: :delete) do |f| %>
           <%= render "shared/error_messages", :target => resource if params[:by] == "destroy" %>
           <input type="hidden" name="by" value="destroy" />
           <div class="form-group">

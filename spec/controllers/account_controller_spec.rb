@@ -26,4 +26,15 @@ describe AccountController, type: :controller do
       expect(response).to be_success
     end
   end
+
+  describe ':edit' do
+    let(:user) { create :user }
+    before { request.env['devise.mapping'] = Devise.mappings[:user] }
+    it 'should work' do
+      sign_in user
+      get :edit
+      expect(response.status).to eq 302
+      expect(response.location).to include("/setting")
+    end
+  end
 end

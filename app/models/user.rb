@@ -276,6 +276,9 @@ class User < ApplicationRecord
   end
 
   def indexed_changed?
-    login_changed? || name_changed? || tagline_changed? || bio_changed? || email_changed? || location_changed?
+    %i(login name tagline bio email location).each do |key|
+      return true if saved_change_to_attribute?(key)
+    end
+    false
   end
 end

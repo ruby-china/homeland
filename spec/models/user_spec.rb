@@ -621,39 +621,43 @@ describe User, type: :model do
   describe 'Search methods' do
     let(:u) { create :user, bio: '111', tagline: '222' }
     describe '.indexed_changed?' do
+      before(:each) do
+        u.reload
+      end
       it 'login changed work' do
         expect(u.indexed_changed?).to eq false
-        u.login = u.login + '11'
+        u.login = u.login + '111'
+        u.save
         expect(u.indexed_changed?).to eq true
       end
 
       it 'name changed work' do
         expect(u.indexed_changed?).to eq false
-        u.name = u.name + '11'
+        u.update(name: u.name + '111')
         expect(u.indexed_changed?).to eq true
       end
 
       it 'email changed work' do
         expect(u.indexed_changed?).to eq false
-        u.email = u.email + '11'
+        u.update(email: u.email + '111')
         expect(u.indexed_changed?).to eq true
       end
 
       it 'bio changed work' do
         expect(u.indexed_changed?).to eq false
-        u.bio = u.bio + '11'
+        u.update(bio: u.bio + '111')
         expect(u.indexed_changed?).to eq true
       end
 
       it 'tagline changed work' do
         expect(u.indexed_changed?).to eq false
-        u.tagline = u.tagline + '11'
+        u.update(tagline: u.tagline + '111')
         expect(u.indexed_changed?).to eq true
       end
 
       it 'location changed work' do
         expect(u.indexed_changed?).to eq false
-        u.location = u.location + '11'
+        u.update(location: u.location + '111')
         expect(u.indexed_changed?).to eq true
       end
 
@@ -665,6 +669,7 @@ describe User, type: :model do
         u.sign_in_count = 190
         u.last_sign_in_at = Time.now
         u.replies_count = u.replies_count + 10
+        u.save
         expect(u.indexed_changed?).to eq false
       end
     end

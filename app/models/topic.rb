@@ -69,7 +69,7 @@ class Topic < ApplicationRecord
   end
 
   def indexed_changed?
-    title_changed? || body_changed?
+    saved_change_to_title? || saved_change_to_body?
   end
 
   def related_topics(size = 5)

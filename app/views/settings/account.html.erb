@@ -1,49 +1,43 @@
 <div class="row">
   <%= render 'menu' %>
 
-
-  <div class="col-md-9">
+  <div class="col-md-8">
     <div class="panel panel-default">
       <div class="panel-body">
-        <div class="row">
-          <div class="col-md-9">
-            <div class="heading">删除我的账号</div>
+        <div class="heading">删除我的账号</div>
 
-            <%= form_for(@user, url: setting_path, method: :delete) do |f| %>
-              <%= render "shared/error_messages", :target => resource if params[:by] == "destroy" %>
-              <input type="hidden" name="by" value="destroy" />
-              <div class="form-group">
-                <p>当然不在想使用这个账号的时候，可以选择删除账号。</p>
-                <p>删除以后数据将会保留，以匿名的方式存在，你的账号将无法再登陆。</p>
-              </div>
-              <div class="form-group">
-                <%= f.password_field :current_password, class: "form-control", placeholder: t("users.confirm_delete_account") %>
-              </div>
-              <%= f.submit t("users.ensure_to_delete"), :class => "btn btn-danger", 'data-disable-with' => t("common.submitting") %>
-            <% end %>
+        <%= form_for(@user, url: setting_path, method: :delete) do |f| %>
+          <%= render "shared/error_messages", :target => resource if params[:by] == "destroy" %>
+          <input type="hidden" name="by" value="destroy" />
+          <div class="form-group">
+            <p>当然不在想使用这个账号的时候，可以选择删除账号。</p>
+            <p>删除以后数据将会保留，以匿名的方式存在，你的账号将无法再登陆。</p>
+          </div>
+          <div class="form-group">
+            <%= f.password_field :current_password, class: "form-control", placeholder: t("users.confirm_delete_account") %>
+          </div>
+          <%= f.submit t("users.ensure_to_delete"), :class => "btn btn-danger", 'data-disable-with' => t("common.submitting") %>
+        <% end %>
 
-            <div class="heading">绑定其他帐号用于登录</div>
+        <div class="heading">绑定其他帐号用于登录</div>
 
-            <% if !Setting.sso_enabled? %>
-              <% if Setting.has_module? :github %>
-                <ul class="list-group col-sm-6">
-                  <% ["github"].each do |provider| %>
-                  <li class="list-group-item">
-                    <% if @user.bind? provider %>
-                      <%= t("omniauth.#{provider}") %>
-                      <%= link_to(raw('<i class="fa fa-remove"></i>'),"/setting/auth/#{provider}", rel: "twitsy", title: "点击解除绑定", method: 'delete' )%>
-                    <% else %>
-                      <%= link_to(t("omniauth.#{provider}"), "/account/auth/#{provider}", rel: "twitsy", title: "点击绑定" )%>
-                    <% end %>
-                  </li>
-                  <% end %>
-                </ul>
+        <% if !Setting.sso_enabled? %>
+          <% if Setting.has_module? :github %>
+            <ul class="list-group col-sm-6">
+              <% ["github"].each do |provider| %>
+              <li class="list-group-item">
+                <% if @user.bind? provider %>
+                  <%= t("omniauth.#{provider}") %>
+                  <%= link_to(raw('<i class="fa fa-remove"></i>'),"/setting/auth/#{provider}", rel: "twitsy", title: "点击解除绑定", method: 'delete' )%>
+                <% else %>
+                  <%= link_to(t("omniauth.#{provider}"), "/account/auth/#{provider}", rel: "twitsy", title: "点击绑定" )%>
+                <% end %>
+              </li>
               <% end %>
-            <% end %>
-          </div>
-          <div class="col-md-3">
-          </div>
-        </div>
+            </ul>
+          <% end %>
+        <% end %>
+      </div>
   </div>
 </div>
 

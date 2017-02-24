@@ -329,3 +329,11 @@ body {
     border-bottom: 1px solid #ddd;
   }
 }
+
+.setting-menu {
+  padding-left: 0;
+  .nav-stacked.nav-pills > li a {
+    border-radius: 0 !important;
+    border-left: 0;
+  }
+}

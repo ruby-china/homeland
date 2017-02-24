@@ -46,6 +46,7 @@ Rails.application.routes.draw do
       get :account
       get :password
       get :profile
+      get :reward
     end
   end
 
@@ -230,6 +231,7 @@ Rails.application.routes.draw do
         get :followers
         get :following
         get :calendar
+        get :reward
       end
 
       resources :team_users, path: 'people' do

@@ -500,16 +500,18 @@ kbd {
   margin-bottom: 0px;
   margin: 0;
   background: #fff;
-  border-left: 3px solid $blackLight;
   color: #666;
+
+  i.fa {
+    width: 20px;
+  }
 }
-.nav-stacked.nav-pills>li>a:hover { border-color: $blueLight; color: $blueLight; background-color: #fff; }
+.nav-stacked.nav-pills>li>a:hover { color: #555; background-color: #f9f9f9; }
 .nav-stacked.nav-pills>li.active>a,
 .nav-stacked.nav-pills>li.active>a:focus,
 .nav-stacked.nav-pills>li.active>a:hover {
   color: $blue;
-  background-color: #FFF;
-  border-color: $blueLight;
+  background-color: #fff;
 }
 
 /* Modal */

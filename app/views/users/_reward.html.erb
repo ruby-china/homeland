@@ -1,0 +1,20 @@
+<div class="modal" id="reward-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="message">
+          <div class="user-info"><%= user_avatar_tag(@user, :md, link: false) %></div>
+          <p><i class="fa fa-quote-left pull-left"></i>如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作！<i class="fa fa-quote-right pull-right"></i></p>
+        </div>
+      </div>
+      <div class="modal-body clearfix">
+        <% @user.reward_fields.each_with_index do |(field, val), idx| %>
+        <div class="reward-image"><img src="<%= @user.reward_field(field) %>"></div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+

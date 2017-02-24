@@ -11,7 +11,6 @@ window.TopicView = Backbone.View.extend
   events:
     "click .navbar .topic-title": "scrollPage"
     "click #replies .reply .btn-reply": "reply"
-    "click .btn-focus-reply": "reply"
     "click a.at_floor": "clickAtFloor"
     "click a.follow": "follow"
     "click a.bookmark": "bookmark"

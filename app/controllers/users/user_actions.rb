@@ -6,7 +6,7 @@ module Users
       before_action :authenticate_user!, only: [:block, :unblock, :blocked, :follow, :unfollow]
       before_action :only_user!, only: [:topics, :replies, :favorites, :notes,
                                         :block, :unblock, :follow, :unfollow,
-                                        :followers, :following, :calendar]
+                                        :followers, :following, :calendar, :reward]
     end
 
     def topics
@@ -76,6 +76,9 @@ module Users
     def calendar
       data = @user.calendar_data
       render json: data if stale?(data)
+    end
+
+    def reward
     end
 
     private

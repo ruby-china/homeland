@@ -15,12 +15,17 @@ class SettingsController < ApplicationController
     render_404 if Setting.sso_enabled?
   end
 
+  def reward
+  end
+
   def update
     case params[:by]
     when 'password'
       update_password
     when 'profile'
       update_profile
+    when 'reward'
+      update_reward
     else
       update_basic
     end
@@ -75,6 +80,22 @@ class SettingsController < ApplicationController
       redirect_to profile_setting_path, notice: '更新成功'
     else
       render 'profile'
+    end
+  end
+
+  def update_reward
+    reward_fields = params[:user][:rewards] || {}
+
+    res = {}
+    reward_fields.each_key do |key|
+      photo = Photo.create(image: reward_fields[key])
+      res[key] = photo.image.url
+    end
+
+    if @user.update_reward_fields(res)
+      redirect_to reward_setting_path, notice: '更新成功'
+    else
+      render 'reward'
     end
   end
 

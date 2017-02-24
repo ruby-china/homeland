@@ -1,7 +1,7 @@
 <div class="row">
   <%= render 'menu' %>
 
-  <div class="col-md-9">
+  <div class="col-md-8">
     <div class="panel panel-default">
       <div class="panel-body">
         <%= simple_form_for(@user, url: setting_path, html: { method: :put, enctype:  "multipart/form-data" }) do |f| %>
@@ -35,7 +35,7 @@
           <%= f.input :website, type: :url, input_html: { placeholder: "http://" } %>
         <% end %>
 
-        <% User::PROFILE_FILEDS.each do |field| %>
+        <% User::PROFILE_FIELDS.each do |field| %>
           <%
           next if !Setting.has_profile_field? field
           %>

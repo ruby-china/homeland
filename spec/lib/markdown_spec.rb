@@ -578,6 +578,14 @@ describe 'markdown' do
 
         it { expect(doc.inner_html).to eq "<p><span class=\"embed-responsive embed-responsive-16by9\"><iframe class=\"embed-responsive-item\" src=\"//www.youtube.com/embed/SccR4kqBvy8\" allowfullscreen></iframe></span></p>" }
       end
+
+      describe 'Youku' do
+        let(:raw) do
+          %(http://v.youku.com/v_show/id_XMjUzMTk4NTk2MA==.html?from=y1.3-idx-beta-1519-23042.223465.1-1&spm=a2hww.20023042.m_223465.5~5~5~5~5~5~A#paction)
+        end
+
+        it { expect(doc.inner_html).to eq "<p><span class=\"embed-responsive embed-responsive-16by9\"><iframe class=\"embed-responsive-item\" src=\"//player.youku.com/embed/XMjUzMTk4NTk2MA==\" allowfullscreen></iframe></span></p>" }
+      end
     end
 
     describe 'Escape HTML tags' do

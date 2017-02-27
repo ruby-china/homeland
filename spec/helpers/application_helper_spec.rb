@@ -30,6 +30,42 @@ describe ApplicationHelper, type: :helper do
         <iframe width="560" height="315" src="https://www.youtube.com/embed/gFQpxAKx_ds" class="embed" frameborder="0" allowfullscreen=""></iframe>
         </span>'
         expect(helper.sanitize_markdown(html)).to eq(html)
+
+        html = '<span class="embed-responsive embed-responsive-16by9">
+        <iframe width="560" height="315" src="http://www.youtube.com/embed/gFQpxAKx_ds" class="embed" frameborder="0" allowfullscreen=""></iframe>
+        </span>'
+        expect(helper.sanitize_markdown(html)).to eq(html)
+
+        html = '<span class="embed-responsive embed-responsive-16by9">
+        <iframe width="560" height="315" src="//www.youtube.com/embed/gFQpxAKx_ds" class="embed" frameborder="0" allowfullscreen=""></iframe>
+        </span>'
+        expect(helper.sanitize_markdown(html)).to eq(html)
+
+        html = '<iframe width="560" height="315" src="//www.youtube.com/aaa" class="embed" frameborder="0" allowfullscreen=""></iframe>'
+        expect(helper.sanitize_markdown(html)).to eq('')
+      end
+
+      it 'should allow youku iframe' do
+        html = '<span class="embed-responsive embed-responsive-16by9">
+        <iframe width="560" height="315" src="https://player.youku.com/embed/XMjUzMTk4NTk2MA==" class="embed" frameborder="0" allowfullscreen=""></iframe>
+        </span>'
+        expect(helper.sanitize_markdown(html)).to eq(html)
+
+        html = '<span class="embed-responsive embed-responsive-16by9">
+        <iframe width="560" height="315" src="http://player.youku.com/embed/XMjUzMTk4NTk2MA==" class="embed" frameborder="0" allowfullscreen=""></iframe>
+        </span>'
+        expect(helper.sanitize_markdown(html)).to eq(html)
+
+        html = '<span class="embed-responsive embed-responsive-16by9">
+        <iframe width="560" height="315" src="//player.youku.com/embed/XMjUzMTk4NTk2MA==" class="embed" frameborder="0" allowfullscreen=""></iframe>
+        </span>'
+        expect(helper.sanitize_markdown(html)).to eq(html)
+
+        html = '<iframe width="560" height="315" src="//player.youku.com/XMjUzMTk4NTk2MA==" class="embed" frameborder="0" allowfullscreen=""></iframe>'
+        expect(helper.sanitize_markdown(html)).to eq('')
+
+        html = '<iframe width="560" height="315" src="//www.youku.com/XMjUzMTk4NTk2MA==" class="embed" frameborder="0" allowfullscreen=""></iframe>'
+        expect(helper.sanitize_markdown(html)).to eq('')
       end
     end
 

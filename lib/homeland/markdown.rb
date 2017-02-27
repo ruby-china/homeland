@@ -8,7 +8,7 @@ context = {
 
 filters = [
   Homeland::Pipeline::NormalizeMentionFilter,
-  Homeland::Pipeline::YoutubeFilter,
+  Homeland::Pipeline::EmbedVideoFilter,
   Homeland::Pipeline::MarkdownFilter,
   Homeland::Pipeline::MentionFilter,
   Homeland::Pipeline::FloorFilter,
@@ -166,6 +166,22 @@ module Homeland
         留空白的换行，将会被自动转换成一个段落，会有一定的段落间距，便于阅读。
 
         请注意后面 Markdown 源代码的换行留空情况。
+
+        ### 视频插入
+
+        目前支持 Youtube 和 Youku 两家的视频插入，你只需要复制视频播放页面，浏览器地址栏的网页 URL 地址，并粘贴到话题／回复文本框，提交以后将自动转换成视频播放器。
+
+        #### 例如
+
+        **Youtube**
+
+        https://www.youtube.com/watch?v=CvVvwh3BRq8
+
+        **Youku**
+
+        http://v.youku.com/v_show/id_XMjQzMTY1MDk3Ng==.html
+
+        ···
         EXAMPLE
       end
     end

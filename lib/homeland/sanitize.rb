@@ -1,7 +1,9 @@
 module Homeland
+  # Sanitize
+  # Test case in: spec/helpers/application_helper_spec.rb
   module Sanitize
     # https://github.com/rgrove/sanitize#example-transformer-to-whitelist-youtube-video-embeds
-    YOUTUBE_TRANSFORMER = lambda do |env|
+    EMBED_VIDEO_TRANSFORMER = lambda do |env|
       node      = env[:node]
       node_name = env[:node_name]
 
@@ -12,7 +14,19 @@ module Homeland
       return unless node_name == 'iframe'
 
       # Verify that the video URL is actually a valid YouTube video URL.
-      return unless node['src'].match?(%r{\A(?:https?:)?//(?:www\.)?youtube(?:-nocookie)?\.com/})
+      valid_video_url = false
+
+      # Youtube
+      if node['src'].match?(%r{\A(?:https?:)?//(?:www\.)?youtube(?:-nocookie)?\.com/embed/})
+        valid_video_url = true
+      end
+
+      # Youku
+      if node['src'].match?(%r{\A(?:http[s]{0,1}?:)?//player\.youku\.com/embed/})
+        valid_video_url = true
+      end
+
+      return unless valid_video_url
 
       # We're now certain that this is a YouTube embed, but we still need to run
       # it through a special Sanitize step to ensure that no unwanted elements or
@@ -45,7 +59,7 @@ module Homeland
         'a' => { 'href' => ['http', 'https', 'mailto', :relative] }
       },
 
-      transformers: [YOUTUBE_TRANSFORMER]
+      transformers: [EMBED_VIDEO_TRANSFORMER]
     )
   end
 end

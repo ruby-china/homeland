@@ -56,7 +56,7 @@ describe TeamUsersController, type: :controller do
       it 'should work' do
         sign_in team_member.user
         get :new, params: { user_id: team.login }
-        expect(response).to redirect_to topics_path
+        expect(response).to redirect_to root_path
       end
     end
   end
@@ -90,7 +90,7 @@ describe TeamUsersController, type: :controller do
     it 'Member should not open' do
       sign_in team_member.user
       get :edit, params: { user_id: team.login, id: team_user.id }
-      expect(response).to redirect_to topics_path
+      expect(response).to redirect_to root_path
     end
   end
 
@@ -119,7 +119,7 @@ describe TeamUsersController, type: :controller do
         role: :member
       }
       get :edit, params: { user_id: team.login, id: team_user.id, team_user: params }
-      expect(response).to redirect_to topics_path
+      expect(response).to redirect_to root_path
     end
   end
 
@@ -146,11 +146,11 @@ describe TeamUsersController, type: :controller do
     it 'Member should not open' do
       sign_in team_owner.user
       get :show, params: { user_id: team.login, id: team_user.id }
-      expect(response).to redirect_to topics_path
+      expect(response).to redirect_to root_path
       put :accept, params: { user_id: team.login, id: team_user.id }
-      expect(response).to redirect_to topics_path
+      expect(response).to redirect_to root_path
       put :reject, params: { user_id: team.login, id: team_user.id }
-      expect(response).to redirect_to topics_path
+      expect(response).to redirect_to root_path
     end
   end
 end

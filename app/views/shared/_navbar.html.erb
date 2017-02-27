@@ -12,7 +12,7 @@
       <% end %>
     <% end %>
     <% Homeland.navbar_plugins.each do |plugin| %>
-    <li class="nav-<%= plugin.name %>">
+    <li class="nav-plugin-<%= plugin.name %>">
       <%= link_to(plugin.display_name, plugin.root_path) %>
     </li>
     <% end %>

@@ -23,6 +23,7 @@
   <link rel="alternate" type="application/rss+xml" title="订阅最新帖" href="<%= main_app.feed_topics_url %>" />
   <%= stylesheet_link_tag "front", 'data-turbolinks-track': "reload" %>
   <%= stylesheet_link_tag "turbolinks-app", 'data-turbolinks-track': 'reload' if turbolinks_app? %>
+  <%= yield :stylesheets %>
   <%= action_cable_meta_tag %>
   <%= csrf_meta_tag %>
   <%= raw Setting.custom_head_html %>
@@ -31,6 +32,7 @@
   <% end %>
 
   <%= javascript_include_tag "app", 'data-turbolinks-track': "reload" %>
+  <%= yield :javascripts %>
 </head>
 <body class="page-<%= controller_name %><%= ' infinite-scroll' if turbolinks_app? %>" data-controller-name="<%= controller_name %>">
   <div class="header">
@@ -51,7 +53,7 @@
   <div id="main" class="main-container container">
     <%= birthday_tag %>
     <%= notice_message %>
-    <%= yield %>
+    <%= content_for?(:main) ? yield(:main) : yield %>
   </div>
 
   <% if not mobile? %>

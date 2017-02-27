@@ -9,7 +9,7 @@ module Homeland
         autoplay = context[:video_autoplay] || false
         hide_related = context[:video_hide_related] || false
 
-        test = @text.gsub(YOUTUBE_URL_REGEXP) do
+        @text = @text.gsub(YOUTUBE_URL_REGEXP) do
           youtube_id = Regexp.last_match(5)
           close_tag = Regexp.last_match(1) if ['<br>', '<div>'].include? Regexp.last_match(1)
           src = "//www.youtube.com/embed/#{youtube_id}"
@@ -21,7 +21,7 @@ module Homeland
           embed_tag(close_tag, src)
         end
 
-        test = test.gsub(YOUKU_URL_REGEXP) do
+        @text.gsub(YOUKU_URL_REGEXP) do
           youku_id = Regexp.last_match(4)
           src = "//player.youku.com/embed/#{youku_id}"
           close_tag = Regexp.last_match(1) if ['<br>', '<div>'].include? Regexp.last_match(1)

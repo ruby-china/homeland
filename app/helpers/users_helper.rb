@@ -56,7 +56,7 @@ module UsersHelper
     }
 
     if opts[:link] != false
-      link_to(raw(img), user_path(user), options)
+      link_to(raw(img), main_app.user_path(user), options)
     else
       raw img
     end

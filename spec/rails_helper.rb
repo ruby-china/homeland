@@ -78,11 +78,4 @@ RSpec.configure do |config|
   config.include APIV3Support, type: :request, file_path: %r{spec/api/v3}
 
   config.include FactoryGirl::Syntax::Methods
-
-  spec_plugins = Homeland.plugins.select { |plugin| plugin.spec_path.present? }
-  spec_plugins.each do |plugin|
-    config.pattern += ",#{plugin.spec_path}/**/*_spec.rb"
-  end
-
-  puts config.pattern
 end

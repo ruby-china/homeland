@@ -32,10 +32,10 @@ module Homeland
     #   self.display_name = "头条"
     #   self.navbar_link = true
     # end
-    def register_plugin(&block)
+    def register_plugin
       @plugins ||= []
       plugin = Homeland::Plugin.new
-      plugin.instance_exec(&block)
+      yield plugin
       @plugins << plugin
       plugin
     end

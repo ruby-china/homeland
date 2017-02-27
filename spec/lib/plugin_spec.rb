@@ -3,20 +3,20 @@ require 'rails_helper'
 describe Homeland::Plugin do
   describe '.register_plugin' do
     before do
-      @plugin = Homeland.register_plugin do
-        self.name = "foo"
-        self.display_name = "Foo bar"
-        self.root_path = "/foo"
-        self.description = "Hello this is foo bar"
-        self.navbar_link = true
-        self.user_menu_link = true
+      @plugin = Homeland.register_plugin do |plugin|
+        plugin.name = "foo"
+        plugin.display_name = "Foo bar"
+        plugin.root_path = "/foo"
+        plugin.description = "Hello this is foo bar"
+        plugin.navbar_link = true
+        plugin.user_menu_link = true
       end
 
-      @plugin1 = Homeland.register_plugin do
-        self.name = "dar"
-        self.display_name = "Dar bar"
-        self.navbar_link = false
-        self.user_menu_link = false
+      @plugin1 = Homeland.register_plugin do |plugin|
+        plugin.name = "dar"
+        plugin.display_name = "Dar bar"
+        plugin.navbar_link = false
+        plugin.user_menu_link = false
       end
     end
 

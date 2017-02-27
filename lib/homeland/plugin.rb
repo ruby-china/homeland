@@ -17,5 +17,8 @@ module Homeland
 
     # path of plugin root, for example /blog
     attr_accessor :root_path
+
+    # add RSpec test path
+    attr_accessor :spec_path
   end
 end

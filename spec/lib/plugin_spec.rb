@@ -5,6 +5,7 @@ describe Homeland::Plugin do
     before do
       @plugin = Homeland.register_plugin do |plugin|
         plugin.name = "foo"
+        plugin.version = '0.1.0'
         plugin.display_name = "Foo bar"
         plugin.root_path = "/foo"
         plugin.description = "Hello this is foo bar"
@@ -23,11 +24,16 @@ describe Homeland::Plugin do
     it 'should work' do
       expect(@plugin).to be_a(Homeland::Plugin)
       expect(@plugin.name).to eq "foo"
+      expect(@plugin.version).to eq '0.1.0'
       expect(@plugin.display_name).to eq "Foo bar"
       expect(@plugin.root_path).to eq "/foo"
       expect(@plugin.description).to eq 'Hello this is foo bar'
       expect(@plugin.navbar_link).to eq true
       expect(@plugin.user_menu_link).to eq true
+
+      expect(@plugin1.version).to eq nil
+      expect(@plugin1.name).to eq 'dar'
+      expect(@plugin1.display_name).to eq 'Dar bar'
     end
 
     it '.plugins work' do

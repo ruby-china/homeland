@@ -3,6 +3,9 @@ module Homeland
     # name of plugin, use var name style.
     attr_accessor :name
 
+    # Plugin version
+    attr_accessor :version
+
     # Description of plugin
     attr_accessor :description
 

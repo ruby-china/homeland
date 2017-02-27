@@ -29,18 +29,20 @@ module Homeland
 
       initializer 'homeland_foo.register' do |app|
         # 注册 Homeland Plugin
-        Homeland.register_plugin do
+        Homeland.register_plugin do |plugin|
           # 插件名称，应用 Ruby 的变量命名风格，例如 foo_bar
-          self.name = 'foo'
+          plugin.name = 'foo'
+          # 版本号
+          plugin.version = Homeland::Foo::VERSION
           # 插件的名称用于显示
-          self.display_name = '测试插件'
-          self.description = '..'
+          plugin.display_name = '测试插件'
+          plugin.description = '..'
           # 是否在主导航栏显示链接
-          self.navbar_link = true
+          plugin.navbar_link = true
           # 是否在用户菜单显示链接
-          self.user_menu_link = true
+          plugin.user_menu_link = true
           # 应用的根路径，用于生成链接
-          self.root_path = "/posts"
+          plugin.root_path = "/posts"
         end
       end
 

@@ -1,14 +1,16 @@
 module Homeland
   class << self
-    # Get plugin list
-    attr_reader :plugins
-
     def version
       '2.6.2'
     end
 
     def file_store
       @file_store ||= ActiveSupport::Cache::FileStore.new(Rails.root.join('tmp/cache'))
+    end
+
+    # Get plugin list
+    def plugins
+      @plugins || []
     end
 
     # Get plugin list that enabled navbar

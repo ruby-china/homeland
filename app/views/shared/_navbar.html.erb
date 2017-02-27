@@ -11,6 +11,11 @@
         <li class="nav-sites"><%= link_to(t("menu.sites"), main_app.sites_path) %></li>
       <% end %>
     <% end %>
+    <% Homeland.navbar_plugins.each do |plugin| %>
+    <li class="nav-<%= plugin.name %>">
+      <%= link_to(plugin.display_name, plugin.root_path) %>
+    </li>
+    <% end %>
     <%= raw Setting.navbar_html %>
     <script type="text/javascript">
     $('.navbar-nav .nav-<%= controller_name %>').addClass("active");

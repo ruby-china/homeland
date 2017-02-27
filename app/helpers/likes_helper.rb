@@ -12,11 +12,11 @@ module LikesHelper
     liked = false
 
     if opts[:cache].blank? && current_user
-      if likeable.is_a?(Topic)
-        liked = current_user.like_topic_ids.include?(likeable.id)
-      elsif likeable.is_a?(Reply)
-        liked = current_user.like_reply_ids.include?(likeable.id)
-      end
+      target_type = likeable.class.name
+      defined_action = User.find_defined_action(:like, target_type)
+      return '' unless defined_action
+
+      liked = current_user.send("like_#{defined_action[:action_name]}_ids").include?(likeable.id)
     end
 
     title, state, icon_name =

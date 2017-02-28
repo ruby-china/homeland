@@ -15,12 +15,17 @@ module Homeland
 
     # Get plugin list that enabled navbar
     def navbar_plugins
-      plugins.select { |plugin| plugin.navbar_link == true }
+      plugins.select { |plugin| plugin.navbar_link == true && plugin.root_path.present? }
+    end
+
+    # Get plugin list that enabled navbar
+    def admin_navbar_plugins
+      plugins.select { |plugin| plugin.admin_navbar_link == true && plugin.admin_path.present? }
     end
 
     # Get plugin list that enabled navbar
     def user_menu_plugins
-      plugins.select { |plugin| plugin.user_menu_link == true }
+      plugins.select { |plugin| plugin.user_menu_link == true && plugin.root_path.present? }
     end
 
     # Register a new plugin

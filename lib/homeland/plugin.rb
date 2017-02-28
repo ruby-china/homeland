@@ -18,8 +18,14 @@ module Homeland
     # set true if plugin link wants list in user drodown menu
     attr_accessor :user_menu_link
 
+   # set true if plugin link wants list in admin navbar
+    attr_accessor :admin_navbar_link
+
     # path of plugin root, for example /blog
     attr_accessor :root_path
+
+    # path of plugin admin page for example /admin/blog
+    attr_accessor :admin_path
 
     # add RSpec test path
     attr_accessor :spec_path

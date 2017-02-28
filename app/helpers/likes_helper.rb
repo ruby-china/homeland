@@ -1,8 +1,10 @@
 module LikesHelper
-  # 赞功能
+  # Likeable Helper
+  #
   # 参数
-  # likeable - Like 的对象
-  # :cache - 当为 true 时将不会监测用户是否赞过，直接返回未赞过的状态，以用于 cache 的场景
+  # - likeable - Like 的对象
+  # - :cache - 当为 true 时将不会监测用户是否赞过，直接返回未赞过的状态，以用于 cache 的场景
+  # - :class - 增加 a 标签的 css class, 例如 "btn btn-default"
   def likeable_tag(likeable, opts = {})
     return '' if likeable.blank?
 
@@ -12,11 +14,11 @@ module LikesHelper
     liked = false
 
     if opts[:cache].blank? && current_user
-      if likeable.is_a?(Topic)
-        liked = current_user.like_topic_ids.include?(likeable.id)
-      elsif likeable.is_a?(Reply)
-        liked = current_user.like_reply_ids.include?(likeable.id)
-      end
+      target_type = likeable.class.name
+      defined_action = User.find_defined_action(:like, target_type)
+      return '' unless defined_action
+
+      liked = current_user.send("like_#{defined_action[:action_name]}_ids").include?(likeable.id)
     end
 
     title, state, icon_name =
@@ -25,11 +27,18 @@ module LikesHelper
       else
         ['赞', '', 'heart']
       end
-    icon = content_tag('i', '', class: "fa fa-#{icon_name}")
-    like_label = raw "#{icon} <span>#{label}</span>"
 
-    link_to(like_label, '#', title: title, 'data-count' => likeable.likes_count,
-                             'data-state' => state, 'data-type' => likeable.class, 'data-id' => likeable.id,
-                             class: "likeable #{state}")
+    icon_label = icon_tag(icon_name, label: label)
+    css_classes = ['likeable', state]
+    css_classes << opts[:class] if opts[:class]
+
+    data = {
+      count: likeable.likes_count,
+      state: state,
+      type: likeable.class.name,
+      id: likeable.id
+    }
+
+    link_to(icon_label, '#', title: title, data: data, class: css_classes.join(' '))
   end
 end

@@ -14,6 +14,11 @@
       li << link_to(t("menu.edit_account_path"), main_app.setting_path)
       li << link_to(t("menu.notes"), main_app.notes_path )
       li << link_to(t("menu.likes"), main_app.favorites_topics_path)
+
+      Homeland.user_menu_plugins.each do |plugin|
+        li << link_to(plugin.display_name, plugin.root_path)
+      end
+
       if admin?
         li << "<div class='divider'></div>"
         if params[:controller].start_with?("admin")

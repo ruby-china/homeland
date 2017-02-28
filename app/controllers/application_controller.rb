@@ -72,7 +72,7 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from CanCan::AccessDenied do |_exception|
-    redirect_to topics_path, alert: t('common.access_denied')
+    redirect_to main_app.root_path, alert: t('common.access_denied')
   end
 
   def store_location

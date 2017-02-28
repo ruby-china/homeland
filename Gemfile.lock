@@ -1,7 +1,7 @@
 GEM
   remote: https://gems.ruby-china.org/
   specs:
-    action-store (0.2.1)
+    action-store (0.3.0)
       rails (>= 4.2.0, < 5.1)
     actioncable (5.0.1)
       actionpack (= 5.0.1)
@@ -94,7 +94,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
-    concurrent-ruby (1.0.4)
+    concurrent-ruby (1.0.5)
     connection_pool (2.2.1)
     crass (1.0.2)
     dalli (2.7.6)
@@ -165,6 +165,8 @@ GEM
     hashie (3.5.3)
     heapy (0.1.2)
     hiredis (0.6.1)
+    homeland-press (0.1.0)
+      rails (~> 5)
     html-pipeline (2.5.0)
       activesupport (>= 2)
       nokogiri (>= 1.4)
@@ -175,7 +177,7 @@ GEM
     http_accept_language (2.1.0)
     httparty (0.14.0)
       multi_xml (>= 0.5.2)
-    i18n (0.8.0)
+    i18n (0.8.1)
     jbuilder (2.6.1)
       activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
@@ -390,7 +392,7 @@ GEM
     status-page (0.1.4)
       rails (>= 4.2)
     thor (0.19.4)
-    thread_safe (0.3.5)
+    thread_safe (0.3.6)
     tilt (2.0.6)
     turbolinks (5.0.1)
       turbolinks-source (~> 5)
@@ -443,6 +445,7 @@ DEPENDENCIES
   factory_girl_rails
   font-awesome-rails
   hiredis
+  homeland-press
   html-pipeline
   html-pipeline-rouge_filter
   http_accept_language

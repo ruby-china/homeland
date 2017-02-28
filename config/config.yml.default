@@ -40,7 +40,7 @@ site_configs: &site_configs
 defaults: &defaults
   <<: *site_configs
   # Plugin module, [topic,home,wiki,site,note,team,github,editor.code]
-  modules: 'topic,home,wiki,site,note,team,github,editor.code'
+  modules: 'topic,home,wiki,site,note,team,github,editor.code,press'
   # User profile module default: all [company,twitter,website,tagline,location,hr,alipay,paypal,qq,weibo,wechat,douban,dingding,aliwangwang,facebook,instagram,dribbble,battle_tag,psn_id,steam_id]
   profile_fields: 'company,twitter,website,tagline,location,hr,alipay,paypal,qq,weibo,wechat,douban,dingding,aliwangwang,facebook,instagram,dribbble,battle_tag,psn_id,steam_id'
   app_name: "Homeland"

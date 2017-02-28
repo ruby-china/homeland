@@ -18,7 +18,7 @@ module Homeland
     # set true if plugin link wants list in user drodown menu
     attr_accessor :user_menu_link
 
-   # set true if plugin link wants list in admin navbar
+    # set true if plugin link wants list in admin navbar
     attr_accessor :admin_navbar_link
 
     # path of plugin root, for example /blog

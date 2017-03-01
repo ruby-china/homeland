@@ -4,6 +4,8 @@ else
   source 'https://gems.ruby-china.org'
 end
 
+ruby '~> 2.4'
+
 gem 'rails', '~> 5.0.0'
 gem 'sprockets'
 gem 'sass-rails'

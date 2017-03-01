@@ -3,28 +3,13 @@ Contribute Guide
 
 ## Requirements
 
-* Ruby 2.3.0 +
+* Ruby 2.4.0 +
 * PostgreSQL 9.4 +
 * Redis 2.8 +
 * Memcached 1.4 +
-* ImageMagick 6.5 +
 * Elasticsearch 2.0 +
 
 ## Install in development
-
-### Vagrant
-
-Install [VirtualBox](https://www.virtualbox.org/) + [Vagrant](https://www.vagrantup.com/), and then:
-
-```bash
-$ vagrant up
-$ vagrant ssh
-$ cd /vagrant
-/vagrant $ ./bin/setup
-/vagrant $ rails s -b 0.0.0.0
-```
-
-Open http://localhost:3000 in host.
 
 ### Mac OS X, use Homebrew
 

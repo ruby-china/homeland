@@ -55,6 +55,7 @@ defaults: &defaults
   admin_emails: >
     admin@admin.com
   google_analytics_key: ""
+  elasticsearch_namespace_prefix: ""
   asset_host: ""
   upload_url: ""
   upload_provider: "file" # can be  file/upyun/aliyun

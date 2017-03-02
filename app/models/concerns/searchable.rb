@@ -5,6 +5,7 @@ module Searchable
 
   included do
     include Elasticsearch::Model
+    index_name "#{Setting.elasticsearch_namespace_prefix}#{name.pluralize}".downcase
 
     after_commit on: :create do
       SearchIndexer.perform_later("index", self.class.name, self.id)

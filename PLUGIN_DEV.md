@@ -19,7 +19,7 @@ rails plugin new homeland-foo --mountable
 
 打开 lib/homeland/foo/engine.rb
 
-```
+```rb
 module Homeland
   module Foo
     # 关于 Engine 的细节，可以阅读 Rails Guides - Engines 部分的内容

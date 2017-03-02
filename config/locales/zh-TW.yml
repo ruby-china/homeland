@@ -28,7 +28,6 @@
         tagline: "簽名"
         state: "狀態"
         verified: "信任用戶"
-        hr: "招聘人員"
         company: "公司"
         github: "GitHub"
         remember_me: 記住登陸狀態

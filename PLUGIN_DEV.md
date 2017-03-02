@@ -54,6 +54,9 @@ module Homeland
         app.routes.prepend do
           mount Homeland::Foo::Engine => '/'
         end
+        
+        # 让 Homeland Migration 的时候，包含插件的 Migration 
+        app.config.paths["db/migrate"].concat(config.paths["db/migrate"].expanded)
       end
     end
   end

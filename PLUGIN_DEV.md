@@ -48,14 +48,14 @@ module Homeland
           # 应用的根路径，用于生成链接
           plugin.root_path = "/foos"
           # 应用的管理后台路径
-          plugin.root_path = "/admin/foos"
+          plugin.admin_path = "/admin/foos"
         end
 
         app.routes.prepend do
           mount Homeland::Foo::Engine => '/'
         end
 
-        # 让 Homeland Migration 的时候，包含插件的 Migration 
+        # 让 Homeland Migration 的时候，包含插件的 Migration
         app.config.paths["db/migrate"].concat(config.paths["db/migrate"].expanded)
       end
     end

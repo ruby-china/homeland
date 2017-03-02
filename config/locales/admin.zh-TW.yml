@@ -25,6 +25,5 @@
       edit_setting: "修改設置"
     users:
       trust_user_can_modify_wiki: "信任用戶將可以修改 Wiki"
-      hr_user_can_create_topic: "招聘人員角色可以忽略新手限制直接發帖"
     topic_list: "話題列表"
     check_photo: "瀏覽圖片"

@@ -83,11 +83,6 @@ describe UsersHelper, type: :helper do
       is_expected.to eq '<span class="label label-success role">高级会员</span>'
     end
 
-    it 'hr should work' do
-      allow(user).to receive(:hr?).and_return(true)
-      is_expected.to eq '<span class="label label-success role">企业 HR</span>'
-    end
-
     it 'blocked should work' do
       allow(user).to receive(:blocked?).and_return(true)
       is_expected.to eq '<span class="label label-warning role">禁言用户</span>'

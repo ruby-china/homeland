@@ -19,15 +19,6 @@ describe Node, type: :model do
         expect(Node.no_point.id).to eq 61
       end
     end
-
-    describe '.job' do
-      it 'should work' do
-        expect(Node.job).to be_a(Node)
-        expect(Node.job.new_record?).to eq false
-        expect(Node.job.name).to eq '招聘'
-        expect(Node.job.id).to eq 25
-      end
-    end
   end
 
   describe 'CacheVersion update' do

@@ -27,35 +27,33 @@ module Homeland
     class Engine < ::Rails::Engine
       isolate_namespace Homeland::Foo
 
-      initializer 'homeland_foo.register' do |app|
+      initializer 'homeland.foo.init' do |app|
+        # 确定应用 config.modules 启用了 foo，才开启
+        return unless Setting.has_module?(:foo)
         # 注册 Homeland Plugin
         Homeland.register_plugin do |plugin|
           # 插件名称，应用 Ruby 的变量命名风格，例如 foo_bar
           plugin.name = 'foo'
-          # 版本号
-          plugin.version = Homeland::Foo::VERSION
           # 插件的名称用于显示
           plugin.display_name = '测试插件'
+          # 版本号
+          plugin.version = Homeland::Foo::VERSION
           plugin.description = '..'
           # 是否在主导航栏显示链接
           plugin.navbar_link = true
           # 是否在用户菜单显示链接
           plugin.user_menu_link = true
-          # 应用的根路径，用于生成链接
-          plugin.root_path = "/posts"
-        end
-      end
-
-      initializer 'homeland_press.mount' do |app|
-        # 自动挂载路由
+          # 是否在管理界面的导航显示链接，需要额外配置 plugin.admin_path
+          plugin.admin_navbar_link = true
+          # 应用的根路径，用于生成链接
+          plugin.root_path = "/foos"
+          # 应用的管理后台路径
+          plugin.root_path = "/admin/foos"
+        end
+        
         app.routes.prepend do
-          mount Homeland::Press::Engine, at: '/posts'
+          mount Homeland::Foo::Engine => '/'
         end
-      end
-
-      initializer 'homeland_press.migrations' do |app|
-        # 将 Plugin 的 Migration 并入 Homeland 主应用，以便于 Homeland 执行数据库合并的时候，会包含插件的部分
-        app.config.paths["db/migrate"].concat(config.paths["db/migrate"].expanded)
       end
     end
   end

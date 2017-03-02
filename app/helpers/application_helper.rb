@@ -126,6 +126,12 @@ module ApplicationHelper
   def render_list(opts = {})
     list = []
     yield(list)
+    list_items = render_list_items(list)
+    content_tag('ul', list_items, opts)
+  end
+
+  def render_list_items(list = [])
+    yield(list) if block_given?
     items = []
     list.each do |link|
       item_class = EMPTY_STRING
@@ -136,7 +142,8 @@ module ApplicationHelper
       end
       items << content_tag('li', raw(link), class: item_class)
     end
-    content_tag('ul', raw(items.join(EMPTY_STRING)), opts)
+
+    raw items.join(EMPTY_STRING)
   end
 
   def highlight(text)

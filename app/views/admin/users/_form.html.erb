@@ -29,9 +29,6 @@
   </div>
   <% if @user.user_type == :user %>
   <%= f.input :verified, as: :boolean, hint: t("admin.users.trust_user_can_modify_wiki") %>
-  <% if Setting.has_profile_field? :hr %>
-  <%= f.input :hr, as: :boolean, hint: t("admin.users.hr_user_can_create_topic") %>
-  <% end %>
   <%= f.input :state, as: :select, collection: User.states.collect { |s| [s[0], s[0]] } %>
   <%= f.input :sign_in_count, readonly: true %>
   <%= f.input :last_sign_in_at, as: :string, readonly: true %>

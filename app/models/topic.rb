@@ -56,8 +56,8 @@ class Topic < ApplicationRecord
   }
 
   mapping do
-    indexes :title, type: :text, store: :true
-    indexes :body, type: :text, store: :true
+    indexes :title, term_vector: :yes
+    indexes :body, term_vector: :yes
   end
 
   def as_indexed_json(_options = {})

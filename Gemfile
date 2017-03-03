@@ -141,6 +141,7 @@ group :development, :test do
   gem 'capybara'
   gem 'letter_opener'
   gem 'yard'
+  gem 'sdoc', '1.0.0.rc1'
 
   gem 'codecov', require: false
 end

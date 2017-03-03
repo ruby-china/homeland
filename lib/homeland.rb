@@ -18,25 +18,33 @@ module Homeland
       plugins.select { |plugin| plugin.navbar_link == true && plugin.root_path.present? }
     end
 
-    # Get plugin list that enabled navbar
+    # Get plugin list that enabled admin navbar
     def admin_navbar_plugins
       plugins.select { |plugin| plugin.admin_navbar_link == true && plugin.admin_path.present? }
     end
 
-    # Get plugin list that enabled navbar
+    # Get plugin list that enabled user menu
     def user_menu_plugins
       plugins.select { |plugin| plugin.user_menu_link == true && plugin.root_path.present? }
     end
 
     # Register a new plugin
     #
-    # ## Example
+    # *Example*
     #
-    # Homeland.register_plugin do
-    #   self.name = "press"
-    #   self.display_name = "头条"
-    #   self.navbar_link = true
-    # end
+    # see Homeland::Plugin
+    #
+    #   Homeland.register_plugin do |plugin|
+    #     plugin.name = 'test'
+    #     plugin.display_name = 'Test Plugin'
+    #     plugin.version = '0.1.0'
+    #     plugin.description = 'This is a test Homeland Plugin.'
+    #     plugin.navbar_link = true
+    #     plugin.root_path = "/test"
+    #   end
+    #
+    # More example see: https://github.com/ruby-china/homeland-press
+    #
     def register_plugin
       @plugins ||= []
       plugin = Homeland::Plugin.new

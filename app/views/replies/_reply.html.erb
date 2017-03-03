@@ -8,7 +8,7 @@
   class_names << 'reply-deleted' if show_deleted
 %>
 <div class="<%= class_names.join(' ') %>" data-id="<%= reply.id %>" id="reply<%= floor %>">
-  <div id="reply-<%= reply.id %>">
+  <div id="reply-<%= reply.id %>" data-floor="<%= floor %>">
     <% if show_deleted %>
       <div class="deleted text-center"><%= floor %><%= t("common.floor")%> <%= t("common.has_deleted")%></div>
     <% elsif reply.system_event? %>
@@ -20,6 +20,7 @@
           <span class="name">
             <%= user_name_tag(reply.user) %>
           </span> ·
+          <span class='floor'>#<%= floor %></span> ·
           <a class="time" href="#reply-<%= reply.id %>"><%= timeago(reply.created_at) %></a>
           <span class="opts pull-right">
             <% if !reply.deleted? %>

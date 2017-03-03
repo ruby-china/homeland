@@ -12,7 +12,6 @@ task default: 'bundle:audit'
 require 'sdoc'
 require 'rdoc/task'
 
-
 rdoc_files = %w(
   README.md
   PLUGIN_DEV.md

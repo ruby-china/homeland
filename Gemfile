@@ -124,6 +124,8 @@ gem 'bundler-audit', require: false
 gem 'homeland-press'
 gem 'homeland-jobs'
 
+gem 'sdoc', '1.0.0.rc1'
+
 group :development do
   gem 'derailed'
   # Better Errors
@@ -141,7 +143,6 @@ group :development, :test do
   gem 'capybara'
   gem 'letter_opener'
   gem 'yard'
-  gem 'sdoc', '1.0.0.rc1'
 
   gem 'codecov', require: false
 end

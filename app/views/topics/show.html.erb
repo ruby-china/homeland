@@ -39,7 +39,17 @@
       <div class="panel-body markdown">
         <%= raw Setting.before_topic_html %>
 
-        <article>
+        <div class="toc-container">
+          <a href="#toc" title="TOC" id='toc-link'>[TOC +]</a>
+          <div class="toc-panel">
+            <div>
+              <h5 id='toc-panel-title'><%= @topic.title %></h5>
+              <a id="close-toc-panel" href="#close" class='pull-right'>X</a>
+            </div>
+            <ul id="toc-list"></ul>
+          </div>
+        </div>
+        <article id='article'>
           <%= @topic.body_html %>
         </article>
 

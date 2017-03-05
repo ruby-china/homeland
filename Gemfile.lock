@@ -1,6 +1,6 @@
 GIT
-  remote: git@github.com:griffinqiu/homeland-wiki
-  revision: 386451bee8b84901d554852fa580cb734ab06eaa
+  remote: https://github.com/griffinqiu/homeland-wiki
+  revision: c21a4d59380f7778ee7277de9989563a6aaf5133
   specs:
     homeland-wiki (0.0.1)
       rails (~> 5)

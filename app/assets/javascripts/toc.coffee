@@ -7,7 +7,7 @@ window.TOCView = Backbone.View.extend
 
     # for mobile devices
     "touchend #toc-link": "displayTOCPanel"
-    "touchend #close-toc-panel": "hideTOCPanel"
+    "click #close-toc-panel": "hideTOCPanel"
 
   initialize: (opts) ->
     @parentView = opts.parentView
@@ -29,10 +29,8 @@ window.TOCView = Backbone.View.extend
       false
 
   displayTOCPanel: (e) ->
-    console.log("show")
     $(".toc-panel").show()
     false
 
   hideTOCPanel: (e) ->
-    console.log("hide")
     $(".toc-panel").hide()

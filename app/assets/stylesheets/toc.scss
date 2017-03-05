@@ -10,11 +10,9 @@
   position: absolute;
   background: white;
   border: 1px solid lightgray;
-  padding: 10px;
+  padding: 20px;
   box-shadow: 1px 1px 5px 0 lightgrey;
   width: 300px;
-  max-height: 400px;
-  overflow-y: scroll;
   z-index: 1031;
 }
 
@@ -32,6 +30,11 @@
   text-align: center;
   color: white !important;
   border-radius: 10px;
+}
+
+#toc-list-container {
+  max-height: 400px;
+  overflow-y: scroll;
 }
 
 #toc-list {
@@ -60,18 +63,6 @@
   }
 }
 
-.markdown a.toc-item-link:link {
-  color: $blackLight !important;
-
-  &:hover {
-    text-decoration: none;
-  }
-
-  &:visited {
-    color: $blackLight !important;
-  }
-}
-
 @media (max-width: 768px) {
   .toc-panel {
     position: fixed;
@@ -85,5 +76,9 @@
 
   #close-toc-panel {
     display: inline;
+  }
+
+  #toc-list-container {
+    max-height: 100%;
   }
 }

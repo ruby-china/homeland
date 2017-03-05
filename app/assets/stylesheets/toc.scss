@@ -22,14 +22,11 @@
 
 #close-toc-panel {
   display: none;
-  margin: 7px 0;
-  font-size: 10px;
-  width: 20px;
-  line-height: 20px;
-  background: $redLight;
-  text-align: center;
-  color: white !important;
-  border-radius: 10px;
+  font-size: 24px;
+
+  i.fa {
+    color: $redLight;
+  }
 }
 
 #toc-list-container {
@@ -60,6 +57,12 @@
 
   &.toc-level-6 {
     margin-left: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  #close-toc-panel {
+    font-size: 18px;
   }
 }
 

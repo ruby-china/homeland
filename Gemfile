@@ -123,6 +123,7 @@ gem 'bundler-audit', require: false
 # Homeland Plugins
 gem 'homeland-press'
 gem 'homeland-jobs'
+gem 'homeland-wiki', git: 'git@github.com:griffinqiu/homeland-wiki'
 
 group :development do
   gem 'derailed'

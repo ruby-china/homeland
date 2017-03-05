@@ -25,7 +25,6 @@
             li << link_to(t("admin.menu.users"), main_app.admin_users_path)
             li << link_to(t("admin.menu.sections"), main_app.admin_sections_path )
             li << link_to(t("admin.menu.nodes"), main_app.admin_nodes_path )
-            li << link_to(t("admin.menu.wiki"), main_app.admin_pages_path ) if Setting.has_module?(:wiki)
             li << link_to(t("admin.menu.topics"), main_app.admin_topics_path)
             li << link_to(t("admin.menu.replies"), main_app.admin_replies_path)
             li << link_to(t("admin.menu.comments"), main_app.admin_comments_path )

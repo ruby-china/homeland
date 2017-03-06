@@ -1,3 +1,4 @@
+# Table of Contents for Markdown body
 window.TOCView = Backbone.View.extend
   el: "body"
 
@@ -7,15 +8,28 @@ window.TOCView = Backbone.View.extend
     $(".toc-container").show() if haveAnyHeaders
 
   initHeadersInTopic: ->
-    $article = $(".markdown")
-    tocItems = $.map $article.find("h1,h2,h3,h4,h5,h6"), (element, _) ->
-      level = element.tagName.replace("H", "")
-      anchor = element.id
+    markdownEl = $(".markdown")
+    markdownEl.prepend """
+    <div class="toc-container dropdown pull-right">
+      <button data-toggle="dropdown" class="btn btn-default">
+        <i class="fa fa-list"></i> 目录 <span class="caret"></span>
+      </button>
+      <div class="toc-panel dropdown-menu">
+        <div class="list-container">
+          <ul class="list"></ul>
+        </div>
+      </div>
+    </div>
+    """
+
+    items = $.map markdownEl.find("h1,h2,h3,h4,h5,h6"), (el, _) ->
+      level = el.tagName.replace("H", "")
+      anchor = el.id
       "<li class=\"toc-item toc-level-#{level}\">
-        <a href=\"##{encodeURI(anchor)}\" class=\"toc-item-link\">#{element.textContent}</a>
+        <a href=\"##{encodeURI(anchor)}\" class=\"toc-item-link\">#{el.textContent}</a>
       </li>"
-    if tocItems.length
-      $(".toc-container .list").html(tocItems.join(""))
+    if items.length
+      $(".toc-container .list").html(items.join(""))
       true
     else
       false

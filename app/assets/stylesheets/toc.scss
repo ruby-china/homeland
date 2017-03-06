@@ -1,0 +1,87 @@
+@import "vars";
+
+.toc-container {
+  position: relative;
+  display: none;
+}
+
+.toc-panel {
+  display: none;
+  position: absolute;
+  background: white;
+  border: 1px solid lightgray;
+  padding: 20px;
+  box-shadow: 1px 1px 5px 0 lightgrey;
+  width: 300px;
+  z-index: 1031;
+}
+
+#toc-panel-title {
+  display: inline-block;
+}
+
+#close-toc-panel {
+  display: none;
+  font-size: 24px;
+
+  i.fa {
+    color: $redLight;
+  }
+}
+
+#toc-list-container {
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
+#toc-list {
+  margin-bottom: 0;
+}
+
+.toc-item {
+  &.toc-level-2 {
+    margin-left: 0;
+  }
+
+  &.toc-level-3 {
+    margin-left: 15px;
+  }
+
+  &.toc-level-4 {
+    margin-left: 30px;
+  }
+
+  &.toc-level-5 {
+    margin-left: 45px;
+  }
+
+  &.toc-level-6 {
+    margin-left: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  #close-toc-panel {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .toc-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    padding: 15%;
+  }
+
+  #close-toc-panel {
+    display: inline;
+  }
+
+  #toc-list-container {
+    max-height: 100%;
+  }
+}

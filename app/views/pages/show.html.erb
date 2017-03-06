@@ -23,7 +23,8 @@
       <% end %>
 
       <div class="panel-body markdown">
-        <article>
+        <%= render "shared/toc", title: @page.title %>
+        <article id="article">
           <%= @page.body_html %>
         </article>
       </div>

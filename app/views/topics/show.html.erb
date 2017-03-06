@@ -39,7 +39,8 @@
       <div class="panel-body markdown">
         <%= raw Setting.before_topic_html %>
 
-        <article>
+        <%= render "shared/toc", title: @topic.title %>
+        <article id='article'>
           <%= @topic.body_html %>
         </article>
 

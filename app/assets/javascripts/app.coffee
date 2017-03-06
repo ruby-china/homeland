@@ -21,6 +21,7 @@
 #= require action_cable
 #= require form_storage
 #= require topics
+#= require pages
 #= require notes
 #= require editor
 #= require turbolinks

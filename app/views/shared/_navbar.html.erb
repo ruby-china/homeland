@@ -8,6 +8,7 @@
           li << link_to(plugin.display_name, plugin.root_path) if Setting.has_module?(plugin.name)
         end
 
+        li << link_to(t("menu.wiki"), main_app.pages_path) if Setting.has_module?(:wiki)
         li << link_to(t("menu.sites"), main_app.sites_path) if Setting.has_module?(:site)
       end
     end %>

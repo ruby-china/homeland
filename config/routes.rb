@@ -7,6 +7,15 @@ Rails.application.routes.draw do
   end
 
   resources :sites
+  resources :pages, path: 'wiki' do
+    collection do
+      get :recent
+      post :preview
+    end
+    member do
+      get :comments
+    end
+  end
   resources :comments
   resources :notes do
     collection do
@@ -113,6 +122,13 @@ Rails.application.routes.draw do
       end
     end
     resources :photos
+    resources :pages do
+      resources :versions, controller: :page_versions do
+        member do
+          post :revert
+        end
+      end
+    end
     resources :comments
     resources :site_nodes
     resources :sites do

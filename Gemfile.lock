@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/griffinqiu/homeland-wiki
+  revision: c21a4d59380f7778ee7277de9989563a6aaf5133
+  specs:
+    homeland-wiki (0.0.1)
+      rails (~> 5)
+
 GEM
   remote: https://gems.ruby-china.org/
   specs:
@@ -448,6 +455,7 @@ DEPENDENCIES
   hiredis
   homeland-jobs
   homeland-press
+  homeland-wiki!
   html-pipeline
   html-pipeline-rouge_filter
   http_accept_language

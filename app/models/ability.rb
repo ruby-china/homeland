@@ -23,7 +23,6 @@ class Ability
     roles_for_topics
     roles_for_replies
     roles_for_notes
-    roles_for_pages
     roles_for_comments
     roles_for_photos
     roles_for_sites
@@ -69,14 +68,6 @@ class Ability
     can :read, Note, publish: true
   end
 
-  def roles_for_pages
-    if user.roles?(:wiki_editor)
-      can :create, Page
-      can :edit, Page, locked: false
-      can :update, Page, locked: false
-    end
-  end
-
   def roles_for_photos
     can :tiny_new, Photo
     can :create, Photo
@@ -114,7 +105,6 @@ class Ability
   def basic_read_only
     can [:read, :feed, :node], Topic
     can [:read, :reply_to], Reply
-    can [:read, :recent, :preview, :comments], Page
     can :preview, Note
     can :read, Photo
     can :read, Site

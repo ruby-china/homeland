@@ -233,10 +233,16 @@ a:hover { color: #303030; }
   outline: 0 !important;
 }
 
+
 .btn-default,
 .btn-default:visited { background: #FFF; border-color: #dadada;  }
 .btn-default:hover { background: #f9f9f9; border-color: #ddd; }
-.btn-default.active { background: #f0f0f0; border-color: #d0d0d0;}
+.btn-default.active,
+.btn-default.focus,
+.btn-default:active,
+.btn-default:focus,
+.btn-default:hover,
+.open > .dropdown-toggle.btn-default { background: #f0f0f0; border-color: #d0d0d0;}
 .btn-primary,
 .btn-primary:visited { background: $blue; border-color: $blueDark; color: #FFF; }
 .btn-primary:hover { background: $blueLight; border-color: $blue; }

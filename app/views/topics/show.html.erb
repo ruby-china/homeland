@@ -40,10 +40,8 @@
         <%= raw Setting.before_topic_html %>
 
         <%= render "shared/toc", title: @topic.title %>
-        <article id='article'>
-          <%= @topic.body_html %>
-        </article>
 
+        <%= @topic.body_html %>
 
         <%= raw Setting.after_topic_html %>
       </div>

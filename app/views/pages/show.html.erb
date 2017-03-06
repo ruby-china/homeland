@@ -24,9 +24,8 @@
 
       <div class="panel-body markdown">
         <%= render "shared/toc", title: @page.title %>
-        <article id="article">
-          <%= @page.body_html %>
-        </article>
+
+        <%= @page.body_html %>
       </div>
 
       <div class="editors panel-footer clearfix">

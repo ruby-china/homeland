@@ -1,14 +1,10 @@
-<div class="toc-container">
-  <a href="#toc" title="TOC" id='toc-link'>[<%= t(:contents) %> +]</a>
-  <div class="toc-panel">
-    <div>
-      <h5 id='toc-panel-title'><%= title %></h5>
-      <a id="close-toc-panel" href="#close" class='pull-right'>
-        <i class="fa fa-compress"></i>
-      </a>
-    </div>
-    <div id="toc-list-container">
-      <ul id="toc-list"></ul>
+<div class="toc-container dropdown pull-right">
+  <button data-toggle="dropdown" class="btn btn-default">
+    <i class="fa fa-list"></i> <%= t(:contents) %> <span class="caret"></span>
+  </button>
+  <div class="toc-panel dropdown-menu">
+    <div class="list-container">
+      <ul class="list"></ul>
     </div>
   </div>
 </div>

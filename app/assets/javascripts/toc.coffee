@@ -8,7 +8,7 @@ window.TOCView = Backbone.View.extend
     $(".toc-container").show() if haveAnyHeaders
 
   initHeadersInTopic: ->
-    markdownEl = $(".markdown")
+    markdownEl = $(".markdown-toc")
     markdownEl.prepend """
     <div class="toc-container dropdown pull-right">
       <button data-toggle="dropdown" class="btn btn-default">

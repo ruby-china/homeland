@@ -164,7 +164,7 @@ GEM
     hiredis (0.6.1)
     homeland-jobs (0.1.1)
       rails (~> 5)
-    homeland-press (0.3.2)
+    homeland-press (0.3.3)
       rails (~> 5)
     homeland-wiki (0.2.1)
       rails (~> 5)
@@ -502,9 +502,6 @@ DEPENDENCIES
   twemoji
   uglifier
   yard
-
-RUBY VERSION
-   ruby 2.4.0p0
 
 BUNDLED WITH
    1.14.5

@@ -166,7 +166,7 @@ GEM
       rails (~> 5)
     homeland-press (0.3.2)
       rails (~> 5)
-    homeland-wiki (0.2.0)
+    homeland-wiki (0.2.1)
       rails (~> 5)
     html-pipeline (2.5.0)
       activesupport (>= 2)

@@ -1,7 +1,9 @@
 @import "vars";
 .toc-container {
   display: none;
-  z-index: 99999;
+  z-index: 999;
+  margin-left: 32px;
+  margin-bottom: 32px;
 
   .dropdown-menu {
     background: #FFF;

@@ -14,9 +14,6 @@ class AddIndexesToTable < ActiveRecord::Migration[4.2]
 
     add_index :nodes, :sort
 
-    remove_index :pages, :slug
-    add_index :pages, :slug, unique: true
-
     add_index :photos, :user_id
   end
 end

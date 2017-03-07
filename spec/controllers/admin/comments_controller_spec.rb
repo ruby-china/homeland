@@ -1,8 +1,21 @@
 require 'rails_helper'
 
 describe Admin::CommentsController, type: :controller do
+  ActiveRecord::Base.connection.create_table(:commentable_pages, force: true) do |t|
+    t.string :name
+    t.integer :comments_count, default: 0, null: false
+    t.timestamps null: false
+  end
+
+  class CommentablePage < ApplicationRecord
+  end
+
+  after(:each) do
+    CommentablePage.delete_all
+  end
+
   let(:user) { create :user }
-  let(:comment) { create :comment, user: user }
+  let(:comment) { create :comment, user: user, commentable: CommentablePage.create(name: 'Fake Wiki', id: 1)}
 
   before do
     sign_in create(:admin)

@@ -22,7 +22,11 @@
       </div>
 
       <div class="panel-footer clearfix">
-        <%= paginate @topics, total_pages: Topic.total_pages %>
+        <% if action_name.in? %(index recent) %>
+          <%= paginate @topics, total_pages: Topic.total_pages %>
+        <% else %>
+          <%= paginate @topics %>
+        <% end %>
       </div>
     </div>
 

@@ -22,7 +22,7 @@ module Users
     end
 
     def favorites
-      @topics = @user.favorite_topics.includes(:user).order('actions.id desc')
+      @topics = @user.favorite_topics.order('actions.id desc')
       @topics = @topics.page(params[:page])
       fresh_when([@topics])
     end

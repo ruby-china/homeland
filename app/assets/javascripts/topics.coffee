@@ -55,7 +55,7 @@ window.TopicView = Backbone.View.extend
     replyEl = $(".reply[data-id=#{id}]")
     targetAnchor = replyEl.attr('id')
     replyToPanel = $(".editor-toolbar .reply-to")
-    userNameEl = replyEl.find("a.user-name")
+    userNameEl = replyEl.find("a.user-name:first-child")
     replyToLink = replyToPanel.find(".user")
     replyToLink.attr("href", "##{targetAnchor}")
     replyToLink.text(userNameEl.text())

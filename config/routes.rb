@@ -189,7 +189,6 @@ Rails.application.routes.draw do
     mount ExceptionTrack::Engine, at: "exception-track"
   end
 
-  mount RuCaptcha::Engine, at: 'rucaptcha'
   mount Notifications::Engine, at: 'notifications'
   mount StatusPage::Engine, at: '/'
 

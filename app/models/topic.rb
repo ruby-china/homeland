@@ -55,9 +55,11 @@ class Topic < ApplicationRecord
     exclude_column_ids('node_id', ids)
   }
 
+  # 由于 ElasticSearch 2.x 及 5.x 版本差异, 新部署环境是 5.0 的话, 请参考这里修改:
+  # https://github.com/ruby-china/homeland/pull/881
   mapping do
-    indexes :title, type: :text, store: :true
-    indexes :body, type: :text, store: :true
+    indexes :title, type: :string, term_vector: :yes, store: :false
+    indexes :body, type: :string, term_vector: :yes, store: :false
   end
 
   def as_indexed_json(_options = {})

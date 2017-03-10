@@ -11,7 +11,7 @@
 
       <div class="panel-body item-list">
         <% if @suggest_topics.present? %>
-          <%= cache(['topics', 'suggest', @topics]) do %>
+          <%= cache(['topics', 'suggest', @suggest_topics]) do %>
             <%= render partial: '/topics/topic', collection: @suggest_topics, locals: { suggest: true } %>
           <% end %>
         <% end %>

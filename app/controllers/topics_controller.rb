@@ -41,6 +41,7 @@ class TopicsController < ApplicationController
     @topics = @topics.includes(:user).page(params[:page])
     @page_title = "#{@node.name} &raquo; #{t('menu.topics')}"
     @page_title = [@node.name, t('menu.topics')].join(' · ')
+    render action: 'index'
   end
 
   def node_feed

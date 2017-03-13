@@ -7,7 +7,6 @@ class NotesController < ApplicationController
 
   def index
     @notes = current_user.notes.recent_updated.page(params[:page])
-    fresh_when(@notes)
   end
 
   def show

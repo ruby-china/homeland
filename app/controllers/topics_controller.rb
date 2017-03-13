@@ -28,7 +28,6 @@ class TopicsController < ApplicationController
     if current_user
       @read_topic_ids = current_user.filter_readed_topics(@topics + @suggest_topics)
     end
-    fresh_when([@suggest_topics, @topics, @read_topic_ids])
   end
 
   def feed
@@ -42,9 +41,6 @@ class TopicsController < ApplicationController
     @topics = @topics.includes(:user).page(params[:page])
     @page_title = "#{@node.name} &raquo; #{t('menu.topics')}"
     @page_title = [@node.name, t('menu.topics')].join(' · ')
-    if stale?(etag: [@node, @topics], template: 'topics/index')
-      render action: 'index'
-    end
   end
 
   def node_feed
@@ -59,7 +55,7 @@ class TopicsController < ApplicationController
       @topics = @topics.page(params[:page])
 
       @page_title = [t("topics.topic_list.#{name}"), t('menu.topics')].join(' · ')
-      render action: 'index' if stale?(etag: @topics, template: 'topics/index')
+      render action: 'index'
     end
   end
 
@@ -67,14 +63,14 @@ class TopicsController < ApplicationController
   def favorites
     @topics = current_user.favorite_topics.includes(:user).fields_for_list
     @topics = @topics.page(params[:page])
-    render action: 'index' if stale?(etag: @topics, template: 'topics/index')
+    render action: 'index'
   end
 
   def recent
     @topics = Topic.without_hide_nodes.recent.fields_for_list.includes(:user)
     @topics = @topics.page(params[:page])
     @page_title = [t('topics.topic_list.recent'), t('menu.topics')].join(' · ')
-    render action: 'index' if stale?(etag: @topics, template: 'topics/index')
+    render action: 'index'
   end
 
   def excellent
@@ -82,7 +78,7 @@ class TopicsController < ApplicationController
     @topics = @topics.page(params[:page])
 
     @page_title = [t('topics.topic_list.excellent'), t('menu.topics')].join(' · ')
-    render action: 'index' if stale?(etag: @topics, template: 'topics/index')
+    render action: 'index'
   end
 
   def show
@@ -99,7 +95,6 @@ class TopicsController < ApplicationController
 
     check_current_user_status_for_topic
     set_special_node_active_menu
-    fresh_when([@topic, @node, @show_raw, @replies, @user_like_reply_ids, @has_followed, @has_favorited, @can_reply])
   end
 
   def new

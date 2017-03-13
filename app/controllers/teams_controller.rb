@@ -8,7 +8,6 @@ class TeamsController < ApplicationController
   def index
     @total_team_count = Team.count
     @active_teams = Team.fields_for_list.hot.limit(100)
-    fresh_when([@total_team_count, @active_teams])
   end
 
   def show

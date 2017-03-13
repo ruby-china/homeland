@@ -62,7 +62,7 @@ class TopicsController < ApplicationController
 
   # GET /topics/favorites
   def favorites
-    @topics = current_user.favorite_topics.includes(:user).fields_for_list
+    @topics = current_user.favorite_topic_actions.includes(target: :user)
     @topics = @topics.page(params[:page])
     render action: 'index'
   end

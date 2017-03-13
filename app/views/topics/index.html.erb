@@ -16,10 +16,10 @@
           <% end %>
         <% end %>
 
-        <%= cache(['topics', 'normal', @topics]) do %>
-          <% if action_name == 'favorites' %>
-            <%= render partial: '/topics/topic', collection: @topics.collect(&:target), locals: { suggest: false } %>
-          <% else %>
+        <% if action_name == 'favorites' %>
+          <%= render partial: '/topics/topic', collection: @topics, locals: { suggest: false } %>
+        <% else %>
+          <%= cache(['topics', 'normal', @topics]) do %>
             <%= render partial: '/topics/topic', collection: @topics, locals: { suggest: false } %>
           <% end %>
         <% end %>

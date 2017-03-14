@@ -11,18 +11,10 @@
 
       <div class="panel-body item-list">
         <% if @suggest_topics.present? %>
-          <%= cache(['topics', 'suggest', @suggest_topics]) do %>
-            <%= render partial: '/topics/topic', collection: @suggest_topics, locals: { suggest: true } %>
-          <% end %>
+          <%= render partial: '/topics/topic', collection: @suggest_topics, locals: { suggest: true } %>
         <% end %>
 
-        <% if action_name == 'favorites' %>
-          <%= render partial: '/topics/topic', collection: @topics, locals: { suggest: false } %>
-        <% else %>
-          <%= cache(['topics', 'normal', @topics]) do %>
-            <%= render partial: '/topics/topic', collection: @topics, locals: { suggest: false } %>
-          <% end %>
-        <% end %>
+        <%= render partial: '/topics/topic', collection: @topics, locals: { suggest: false } %>
       </div>
 
       <div class="panel-footer clearfix">

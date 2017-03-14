@@ -18,8 +18,8 @@ module Closeable
 
   def open!
     transaction do
-      Reply.create_system_event(action: 'reopen', topic_id: self.id)
       update!(closed_at: nil)
+      Reply.create_system_event(action: 'reopen', topic_id: self.id)
     end
   end
 end

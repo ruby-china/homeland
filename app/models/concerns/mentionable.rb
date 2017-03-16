@@ -5,6 +5,8 @@ module Mentionable
     before_save :extract_mentioned_users
     after_create :send_mention_notification
     after_destroy :delete_notifiaction_mentions
+
+    attr_accessor :mentioned_user_ids
   end
 
   def delete_notifiaction_mentions
@@ -56,6 +58,9 @@ module Mentionable
         if self.class.name == 'Reply'
           note[:second_target_type] = 'Topic'
           note[:second_target_id] = self.send(:topic_id)
+        elsif self.class.name == 'Comment'
+          note[:second_target_type] = self.commentable_type
+          note[:second_target_id] = self.commentable_id
         end
         worker.add(note)
       end

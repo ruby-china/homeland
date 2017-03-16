@@ -23,4 +23,21 @@ class Comment < ApplicationRecord
     return if commentable.blank?
     commentable.decrement!(:comments_count)
   end
+
+  after_commit :notify_comment_created, on: [:create]
+  def notify_comment_created
+    return if self.commentable.blank?
+    receiver_id = self.commentable&.user_id
+    return if receiver_id.blank?
+    notified_user_ids = self.mentioned_user_ids || []
+    return if notified_user_ids.include?(receiver_id)
+
+    Notification.create(
+      notify_type: 'comment',
+      target: self,
+      second_target: self.commentable,
+      actor_id: self.user_id,
+      user_id: receiver_id
+    )
+  end
 end

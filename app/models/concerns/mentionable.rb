@@ -5,8 +5,6 @@ module Mentionable
     before_save :extract_mentioned_users
     after_create :send_mention_notification
     after_destroy :delete_notifiaction_mentions
-
-    attr_accessor :mentioned_user_ids
   end
 
   def delete_notifiaction_mentions

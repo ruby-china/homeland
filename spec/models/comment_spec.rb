@@ -1,16 +1,6 @@
 require 'rails_helper'
 
 describe Comment, type: :model do
-  ActiveRecord::Base.connection.create_table(:monkeys, force: true) do |t|
-    t.string :name
-    t.integer :user_id
-    t.integer :comments_count
-    t.timestamps null: false
-  end
-
-  class Monkey < ApplicationRecord
-  end
-
   let(:monkey) { Monkey.create(name: "Foo") }
   let(:user) { create(:user) }
 

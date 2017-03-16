@@ -2,19 +2,6 @@ require 'rails_helper'
 require 'cancan/matchers'
 
 describe Ability, type: :model do
-  ActiveRecord::Base.connection.create_table(:commentable_pages, force: true) do |t|
-    t.string :name
-    t.integer :comments_count, default: 0, null: false
-    t.timestamps null: false
-  end
-
-  class CommentablePage < ApplicationRecord
-  end
-
-  after(:each) do
-    CommentablePage.delete_all
-  end
-
   subject { ability }
 
   context 'Admin manage all' do

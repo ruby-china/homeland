@@ -7,6 +7,14 @@ class Comment < ApplicationRecord
 
   validates :body, presence: true
 
+  def mentioned_user_ids
+    @mentioned_user_ids ||= []
+  end
+
+  def mentioned_user_ids=(ids)
+    @mentioned_user_ids = ids
+  end
+
   before_create :fix_commentable_id
   def fix_commentable_id
     self.commentable_id = commentable_id.to_i

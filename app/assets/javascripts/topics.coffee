@@ -267,6 +267,8 @@ window.TopicView = Backbone.View.extend
 
     if !window.repliesChannel
       window.repliesChannel = App.cable.subscriptions.create 'RepliesChannel',
+        topicId: null
+
         connected: ->
           @subscribe()
 
@@ -279,7 +281,10 @@ window.TopicView = Backbone.View.extend
             $(".notify-updated").show()
 
         subscribe: ->
+          @topicId = Topics.topic_id
           @perform 'follow', topic_id: Topics.topic_id
+    else if window.repliesChannel.topicId != Topics.topic_id
+      window.repliesChannel.subscribe()
 
   updateReplies: () ->
     lastId = $("#replies .reply:last").data('id')

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170227080755) do
+ActiveRecord::Schema.define(version: 20170305220755) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -343,7 +343,6 @@ ActiveRecord::Schema.define(version: 20170227080755) do
     t.string   "twitter"
     t.string   "avatar"
     t.boolean  "verified",                           default: false, null: false
-    t.boolean  "hr",                                 default: false, null: false
     t.integer  "state",                              default: 1,     null: false
     t.string   "tagline"
     t.datetime "created_at"

@@ -16,6 +16,8 @@ module Homeland
       # Verify that the video URL is actually a valid YouTube video URL.
       valid_video_url = false
 
+      return if node['src'].blank?
+
       # Youtube
       if node['src'].match?(%r{\A(?:https?:)?//(?:www\.)?youtube(?:-nocookie)?\.com/embed/})
         valid_video_url = true

@@ -21,11 +21,6 @@ class Node < ApplicationRecord
     self.create(id: id, name: name, summary: name, section: Section.default)
   end
 
-  # 内建 [招聘] 节点
-  def self.job
-    @job ||= self.find_builtin_node(25, '招聘')
-  end
-
   # 内建 [NoPoint] 节点
   def self.no_point
     @no_point ||= self.find_builtin_node(61, 'NoPoint')

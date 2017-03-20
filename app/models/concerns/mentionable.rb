@@ -56,6 +56,9 @@ module Mentionable
         if self.class.name == 'Reply'
           note[:second_target_type] = 'Topic'
           note[:second_target_id] = self.send(:topic_id)
+        elsif self.class.name == 'Comment'
+          note[:second_target_type] = self.commentable_type
+          note[:second_target_id] = self.commentable_id
         end
         worker.add(note)
       end

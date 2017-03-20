@@ -143,24 +143,6 @@ class InitPgDb < ActiveRecord::Migration[4.2]
     add_index 'page_versions', %w(page_id version), name: 'index_page_versions_on_page_id_and_version', using: :btree
     add_index 'page_versions', ['page_id'], name: 'index_page_versions_on_page_id', using: :btree
 
-    create_table 'pages', force: :cascade do |t|
-      t.string   'slug',                           null: false
-      t.string   'title',                          null: false
-      t.text     'body',                           null: false
-      t.text     'body_html'
-      t.boolean  'locked',         default: false
-      t.integer  'version',        default: 0,     null: false
-      t.integer  'editor_ids',     default: [],    null: false, array: true
-      t.integer  'word_count',     default: 0,     null: false
-      t.integer  'changes_cout',   default: 1,     null: false
-      t.integer  'comments_count', default: 0,     null: false
-      t.datetime 'deleted_at'
-      t.datetime 'created_at'
-      t.datetime 'updated_at'
-    end
-
-    add_index 'pages', ['slug'], name: 'index_pages_on_slug', using: :btree
-
     create_table 'photos', force: :cascade do |t|
       t.integer  'user_id'
       t.string   'image', null: false

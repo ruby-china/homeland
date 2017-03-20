@@ -11,7 +11,6 @@ module Users
     def team_show
       @topics = @user.topics.fields_for_list.last_actived.includes(:user)
       @topics = @topics.page(params[:page])
-      fresh_when([@topics])
     end
 
     def only_team!

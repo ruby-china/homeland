@@ -5,10 +5,10 @@
  *= require notifications
  *= require home
  *= require users
- *= require pages
  *= require notes
  *= require teams
  *= require search
+ *= require toc
  *= require_self
  */
 
@@ -402,7 +402,7 @@
       color: #999;
       margin-bottom: 6px;
       font-size: 12px;
-      .reply-floor { color: #7AA87A; }
+      .floor { color: #7AA87A; }
       a.time {
         color: #999;
         border-bottom: 1px dashed #ccc;

@@ -12,25 +12,21 @@ module Users
     def topics
       @topics = @user.topics.fields_for_list.recent
       @topics = @topics.page(params[:page])
-      fresh_when([@topics])
     end
 
     def replies
       @replies = @user.replies.without_system.fields_for_list.recent
       @replies = @replies.page(params[:page])
-      fresh_when([@replies])
     end
 
     def favorites
-      @topics = @user.favorite_topics.includes(:user).order('actions.id desc')
+      @topics = @user.favorite_topics.order('actions.id desc')
       @topics = @topics.page(params[:page])
-      fresh_when([@topics])
     end
 
     def notes
       @notes = @user.notes.published.recent
       @notes = @notes.page(params[:page])
-      fresh_when([@notes])
     end
 
     def block
@@ -64,13 +60,12 @@ module Users
     def followers
       @users = @user.follow_by_users.order('actions.id asc')
       @users = @users.page(params[:page]).per(60)
-      fresh_when([@users])
     end
 
     def following
       @users = @user.follow_users.order('actions.id asc')
       @users = @users.page(params[:page]).per(60)
-      render template: '/users/followers' if stale?(etag: [@users], template: 'users/followers')
+      render template: '/users/followers'
     end
 
     def calendar
@@ -92,7 +87,6 @@ module Users
       without_node_ids = [21, 22, 23, 31, 49, 51, 57, 25]
       @topics = @user.topics.fields_for_list.without_node_ids(without_node_ids).high_likes.limit(20)
       @replies = @user.replies.without_system.fields_for_list.recent.includes(:topic).limit(10)
-      fresh_when([@topics, @replies])
     end
   end
 end

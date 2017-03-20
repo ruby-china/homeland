@@ -496,14 +496,6 @@ describe User, type: :model do
       end
     end
 
-    context 'hr' do
-      it 'should work' do
-        allow(u1).to receive(:hr?).and_return(true)
-        expect(u1.level).to eq('hr')
-        expect(u1.level_name).to eq('企业 HR')
-      end
-    end
-
     context 'blocked' do
       it 'should work' do
         allow(u1).to receive(:blocked?).and_return(true)

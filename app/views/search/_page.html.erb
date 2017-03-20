@@ -1,11 +1,13 @@
+<% if Setting.has_module?(:wiki) %>
 <%
 title = hit.highlight.title.try(:first) || item.title
 %>
 <div class="result">
-  <div class="title"><%= link_to highlight(title), item %> <span class="badge">Wiki</span></div>
+  <div class="title"><%= link_to highlight(title), homeland_wiki.page_path(item) %> <span class="badge">Wiki</span></div>
   <div class="info">
-    <span class="url"><%= link_to polymorphic_url(item), item %></span>
+    <span class="url"><%= link_to homeland_wiki.page_url(item), homeland_wiki.page_path(item) %></span>
     <span class="date" title="Last Updated At"><%= item.updated_at.to_date %></span>
   </div>
   <div class="desc"><%= highlight(hit.highlight.body.try(:first)) %></div>
 </div>
+<% end %>

@@ -202,4 +202,24 @@ describe ApplicationHelper, type: :helper do
       expect(helper.insert_code_menu_items_tag).to include('data-lang="ruby"')
     end
   end
+
+  describe 'render_list' do
+    it 'should work' do
+      html = helper.render_list class: 'nav navbar' do |li|
+        li << helper.link_to("foo", "/foo")
+        li << helper.link_to("bar", "/bar")
+      end
+      expect(html).to eq(%(<ul class="nav navbar"><li class=""><a href="/foo">foo</a></li><li class=""><a href="/bar">bar</a></li></ul>))
+    end
+
+    describe 'render_list_items' do
+      it 'should work' do
+        html = helper.render_list_items do |li|
+          li << helper.link_to("bar", "/bar")
+          li << helper.link_to("foo", "/foo")
+        end
+        expect(html).to eq(%(<li class=""><a href="/bar">bar</a></li><li class=""><a href="/foo">foo</a></li>))
+      end
+    end
+  end
 end

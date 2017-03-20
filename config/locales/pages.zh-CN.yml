@@ -1,9 +1,0 @@
-"zh-CN":
-  pages:
-    describe_this_time_change: "描述你本次修改的内容。"
-    edit_page: "修改页面"
-    new_page: "创建 Wiki 页面"
-    wiki_index: "Wiki 目录索引"
-    wiki_page_contributors: "本页贡献者:"
-    wiki_page_lock_warning: "抱歉，此页面已被锁定，只能管理员才能修改。"
-    comments: '评论'

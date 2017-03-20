@@ -36,13 +36,10 @@
         </div>
       <% end %>
 
-      <div class="panel-body markdown">
+      <div class="panel-body markdown markdown-toc">
         <%= raw Setting.before_topic_html %>
 
-        <article>
-          <%= @topic.body_html %>
-        </article>
-
+        <%= @topic.body_html %>
 
         <%= raw Setting.after_topic_html %>
       </div>

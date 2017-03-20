@@ -39,10 +39,16 @@
     <nav class="navbar navbar-inverse navbar-fixed-top navbar-default">
       <div class="container">
         <div class="navbar-header" id="navbar-header" data-turbolinks-permanent>
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar-collapse">
+            <span class="sr-only">Toggle</span>
+            <i class="fa fa-reorder"></i>
+          </button>
           <%= raw Setting.navbar_brand_html %>
         </div>
-        <%= yield :header %>
-        <%= render "shared/navbar" %>
+        <div class="collapse navbar-collapse" id="main-navbar-collapse">
+          <%= yield :header %>
+          <%= render "shared/navbar" %>
+        </div>
         <%= render "shared/usernav" %>
       </div>
     </nav>

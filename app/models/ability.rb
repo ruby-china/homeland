@@ -24,7 +24,6 @@ class Ability
     roles_for_replies
     roles_for_comments
     roles_for_photos
-    roles_for_sites
     roles_for_teams
     roles_for_team_users
     basic_read_only
@@ -74,12 +73,6 @@ class Ability
     can :destroy, Comment, user_id: user.id
   end
 
-  def roles_for_sites
-    if user.roles?(:site_editor)
-      can :create, Site
-    end
-  end
-
   def roles_for_teams
     if user.roles?(:wiki_editor)
       can :create, Team
@@ -99,7 +92,6 @@ class Ability
     can [:read, :feed, :node], Topic
     can [:read, :reply_to], Reply
     can :read, Photo
-    can :read, Site
     can :read, Section
     can :read, Comment
     can :read, Team

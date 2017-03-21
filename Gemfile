@@ -123,6 +123,7 @@ gem 'homeland-press'
 gem 'homeland-jobs'
 gem 'homeland-wiki'
 gem 'homeland-note'
+gem 'homeland-site'
 
 gem 'sdoc', '1.0.0.rc1'
 

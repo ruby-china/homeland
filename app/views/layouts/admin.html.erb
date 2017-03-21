@@ -29,8 +29,6 @@
             li << link_to(t("admin.menu.replies"), main_app.admin_replies_path)
             li << link_to(t("admin.menu.comments"), main_app.admin_comments_path )
             li << link_to(t("admin.menu.photos"), main_app.admin_photos_path )
-            li << link_to(t("admin.menu.site_nodes"), main_app.admin_site_nodes_path ) if Setting.has_module?(:site)
-            li << link_to(t("admin.menu.sites"), main_app.admin_sites_path ) if Setting.has_module?(:site)
             li << link_to(t("admin.menu.locations"), main_app.admin_locations_path )
             Homeland.admin_navbar_plugins.each do |plugin|
               li << link_to(plugin.display_name, plugin.admin_path)

@@ -55,6 +55,7 @@ module Homeland
       plugin = Homeland::Plugin.new
       yield plugin
       @plugins << plugin
+      @sorted_plugins = nil
       plugin
     end
   end

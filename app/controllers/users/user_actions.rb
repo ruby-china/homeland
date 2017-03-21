@@ -4,7 +4,7 @@ module Users
 
     included do
       before_action :authenticate_user!, only: [:block, :unblock, :blocked, :follow, :unfollow]
-      before_action :only_user!, only: [:topics, :replies, :favorites, :notes,
+      before_action :only_user!, only: [:topics, :replies, :favorites,
                                         :block, :unblock, :follow, :unfollow,
                                         :followers, :following, :calendar, :reward]
     end
@@ -22,11 +22,6 @@ module Users
     def favorites
       @topics = @user.favorite_topics.order('actions.id desc')
       @topics = @topics.page(params[:page])
-    end
-
-    def notes
-      @notes = @user.notes.published.recent
-      @notes = @notes.page(params[:page])
     end
 
     def block

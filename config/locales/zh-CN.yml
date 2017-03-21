@@ -69,14 +69,6 @@
         body: "正文"
       reply:
         body: "回复内容"
-      note:
-        title: "标题"
-      post:
-        title: 标题
-        body: 正文
-        tag_list: 标签
-        source: 来源
-        source_url: 来源地址
       page:
         slug: Slug
         title: 页面标题

@@ -76,14 +76,6 @@ en:
         body: "Content"
       reply:
         body: "Reply Content"
-      note:
-        title: "Title"
-      post:
-        title: "Title"
-        body: "Content"
-        tag_list: "Tags"
-        source: "Source"
-        source_url: "Source Url"
       page:
         slug: Slug
         title: "Title"

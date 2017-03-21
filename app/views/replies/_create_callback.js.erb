@@ -7,8 +7,10 @@ if($("#replies").length == 0){
     $("#replies .items").append(dom);
     $("#replies .total b").text('<%= reply.topic.replies_count %>');
     $('#topic-sidebar .total b').text('<%= reply.topic.replies_count %>');
-    dom.addClass('light').find("a.edit").css("display", "inline-block");
-    _topicView.itemsUpdated();
+    dom.find(".reply-floor").text(current_floor + " 楼");
+    dom.find("a.edit").css("display", "inline-block");
+    dom.addClass('light');
+    _topicView.resetClearReplyHightTimer();
   }
 }
 

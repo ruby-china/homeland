@@ -1,17 +1,11 @@
 Homeland
 --------
 
-![](https://gethomeland.com/images/text-logo.svg)
+<img src="https://cloud.githubusercontent.com/assets/5518/19587511/5484906c-9791-11e6-8e4a-8cdaea056270.png" width="400px" />
 
 Open source discussion website.
 
-开源的论坛／社区网站系统，基于 [Ruby China](https://ruby-china.org) 发展而来。
-
 [![Build Status](https://travis-ci.org/ruby-china/homeland.svg?branch=master)](https://travis-ci.org/ruby-china/homeland) [![codecov.io](https://codecov.io/github/ruby-china/homeland/coverage.svg?branch=master)](https://codecov.io/github/ruby-china/homeland?branch=master)
-
-## Deployment
-
-Please visit https://gethomeland.com get more documents.
 
 ## Release Notes
 
@@ -19,7 +13,11 @@ Please visit [Releases](https://github.com/ruby-china/homeland/releases) page.
 
 ## Contribute Guide
 
-Please read this document: [CONTRIBUTE GUIDE](https://github.com/ruby-china/homeland/blob/master/CONTRIBUTE.md)
+Please read this document: [CONTRIBUTE GUIDE](CONTRIBUTE.md)
+
+## Deployment
+
+Please visit http://gethomeland.com get more documents.
 
 ## Thanks
 
@@ -29,13 +27,13 @@ Please read this document: [CONTRIBUTE GUIDE](https://github.com/ruby-china/home
 * Forked from [Homeland Project](https://github.com/huacnlee/homeland)
 * Theme from [Mediom](https://github.com/huacnlee/mediom)
 
-## Sites used Homeland
+## Sites
 
-https://gethomeland.com/expo
+http://gethomeland.com/expo
 
 ## License
 
-Copyright (c) 2011-2017 Ruby China
+Copyright (c) 2011-2016 Ruby China
 
 Released under the MIT license:
 

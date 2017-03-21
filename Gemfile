@@ -4,7 +4,9 @@ else
   source 'https://gems.ruby-china.org'
 end
 
-gem 'rails', '~> 5.0'
+ruby '~> 2.4'
+
+gem 'rails', '~> 5.0.0'
 gem 'sprockets'
 gem 'sass-rails'
 gem 'coffee-rails'
@@ -79,7 +81,7 @@ gem 'redis-objects'
 gem 'redis-session-store'
 
 # Cache
-gem 'second_level_cache'
+gem 'second_level_cache', '2.3.0.beta'
 
 # Setting
 gem 'rails-settings-cached'
@@ -120,15 +122,12 @@ gem 'bundler-audit', require: false
 
 # Homeland Plugins
 gem 'homeland-press'
-gem 'homeland-jobs'
-gem 'homeland-wiki'
-
-gem 'sdoc', '1.0.0.rc1'
 
 group :development do
   gem 'derailed'
   # Better Errors
   gem 'better_errors'
+  gem 'binding_of_caller'
   gem 'spring'
   gem 'spring-commands-rspec'
 end

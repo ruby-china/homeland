@@ -21,9 +21,9 @@
 #= require action_cable
 #= require form_storage
 #= require topics
+#= require pages
 #= require notes
 #= require editor
-#= require toc
 #= require turbolinks
 #= require google_analytics
 #= require jquery.infinitescroll.min
@@ -62,9 +62,6 @@ AppView = Backbone.View.extend
 
     if $('body').data('controller-name') in ['notes']
       window._noteView = new NoteView({parentView: @})
-
-    if $('body').data('controller-name') in ['topics', 'pages']
-      window._tocView = new TOCView({parentView: @})
 
   initComponents: () ->
     $("abbr.timeago").timeago()

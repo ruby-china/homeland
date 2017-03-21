@@ -1,5 +1,4 @@
 "zh-CN":
-  contents: 目录
   omniauth:
     github: GitHub
     twitter: Twitter
@@ -33,6 +32,7 @@
         tagline: "签名"
         state: "状态"
         verified: "信任用户"
+        hr: "招聘人员"
         company: "公司"
         github: "GitHub"
         remember_me: 记住登陆状态

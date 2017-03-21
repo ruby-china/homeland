@@ -56,8 +56,8 @@ class Topic < ApplicationRecord
   }
 
   mapping do
-    indexes :title, term_vector: :yes
-    indexes :body, term_vector: :yes
+    indexes :title, type: :text, store: :true
+    indexes :body, type: :text, store: :true
   end
 
   def as_indexed_json(_options = {})
@@ -185,16 +185,16 @@ class Topic < ApplicationRecord
   end
 
   def excellent!
-    transaction do
+    self.transaction do
       Reply.create_system_event(action: 'excellent', topic_id: self.id)
-      update!(excellent: 1)
+      update(excellent: 1)
     end
   end
 
   def unexcellent!
-    transaction do
+    self.transaction do
       Reply.create_system_event(action: 'unexcellent', topic_id: self.id)
-      update!(excellent: 0)
+      update(excellent: 0)
     end
   end
 

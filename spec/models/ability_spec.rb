@@ -92,10 +92,6 @@ describe Ability, type: :model do
       it { is_expected.to be_able_to(:read, Section) }
     end
 
-    context 'Node' do
-      it { is_expected.to be_able_to(:read, Node) }
-    end
-
     context 'Site' do
       it { is_expected.to be_able_to(:read, Site) }
       it { is_expected.not_to be_able_to(:create, Site) }

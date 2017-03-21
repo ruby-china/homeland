@@ -52,4 +52,8 @@ module TopicsHelper
     return '' unless topic.closed?
     content_tag(:i, '', title: '问题已解决／话题已结束讨论', class: 'fa fa-check', data: { toggle: 'tooltip' })
   end
+
+  def render_node_name(name, id)
+    link_to(name, node_topics_path(id), class: 'node')
+  end
 end

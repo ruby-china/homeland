@@ -29,7 +29,7 @@ module Homeland
 
       initializer 'homeland.foo.init' do |app|
         # 确定应用 config.modules 启用了 foo，才开启
-        return unless Setting.has_module?(:foo)
+        next unless Setting.has_module?(:foo)
         # 注册 Homeland Plugin
         Homeland.register_plugin do |plugin|
           # 插件名称，应用 Ruby 的变量命名风格，例如 foo_bar

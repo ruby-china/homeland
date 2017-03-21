@@ -26,6 +26,7 @@ en:
         tagline: "Tagline"
         state: "Status"
         verified: "Verified"
+        hr: "Recruiter"
         company: "Company"
         github: "GitHub"
         remember_me: "Remember me (2 months)"

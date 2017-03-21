@@ -169,7 +169,7 @@ class User < ApplicationRecord
 
   # 是否能发帖
   def newbie?
-    return false if verified?
+    return false if verified? || hr?
     t = Setting.newbie_limit_time.to_i
     return false if t == 0
     created_at > t.seconds.ago
@@ -191,6 +191,8 @@ class User < ApplicationRecord
       'admin'
     elsif verified?
       'vip'
+    elsif hr?
+      'hr'
     elsif blocked?
       'blocked'
     elsif newbie?

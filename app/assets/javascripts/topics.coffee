@@ -28,12 +28,7 @@ window.TopicView = Backbone.View.extend
     @initContentImageZoom()
     @initCloseWarning()
     @checkRepliesLikeStatus()
-    @itemsUpdated()
-
-  # called by new Reply insterted.
-  itemsUpdated: ->
     @resetClearReplyHightTimer()
-    @loadReplyToFloor()
 
   resetClearReplyHightTimer: ->
     clearTimeout(@clearHightTimer)
@@ -55,7 +50,7 @@ window.TopicView = Backbone.View.extend
     replyEl = $(".reply[data-id=#{id}]")
     targetAnchor = replyEl.attr('id')
     replyToPanel = $(".editor-toolbar .reply-to")
-    userNameEl = replyEl.find("a.user-name:first-child")
+    userNameEl = replyEl.find("a.user-name")
     replyToLink = replyToPanel.find(".user")
     replyToLink.attr("href", "##{targetAnchor}")
     replyToLink.text(userNameEl.text())
@@ -267,8 +262,6 @@ window.TopicView = Backbone.View.extend
 
     if !window.repliesChannel
       window.repliesChannel = App.cable.subscriptions.create 'RepliesChannel',
-        topicId: null
-
         connected: ->
           @subscribe()
 
@@ -281,10 +274,7 @@ window.TopicView = Backbone.View.extend
             $(".notify-updated").show()
 
         subscribe: ->
-          @topicId = Topics.topic_id
           @perform 'follow', topic_id: Topics.topic_id
-    else if window.repliesChannel.topicId != Topics.topic_id
-      window.repliesChannel.subscribe()
 
   updateReplies: () ->
     lastId = $("#replies .reply:last").data('id')
@@ -322,9 +312,3 @@ window.TopicView = Backbone.View.extend
     $(e.currentTarget).addClass('topic-visited')
     Turbolinks.visit(target.attr('href'))
     return false
-
-  loadReplyToFloor: ->
-    _.each $(".reply-to-block"), (el) =>
-      replyToId = $(el).data('reply-to-id')
-      floor = $("#reply-#{replyToId}").data('floor');
-      $(el).find('.reply-floor').text("\##{floor}")

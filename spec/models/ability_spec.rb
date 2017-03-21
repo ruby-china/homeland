@@ -12,6 +12,8 @@ describe Ability, type: :model do
     it { is_expected.to be_able_to(:manage, Reply) }
     it { is_expected.to be_able_to(:manage, Section) }
     it { is_expected.to be_able_to(:manage, Node) }
+    it { is_expected.to be_able_to(:manage, Page) }
+    it { is_expected.to be_able_to(:manage, PageVersion) }
     it { is_expected.to be_able_to(:manage, Site) }
     it { is_expected.to be_able_to(:manage, Note) }
     it { is_expected.to be_able_to(:manage, Photo) }
@@ -23,9 +25,14 @@ describe Ability, type: :model do
   context 'Wiki Editor manage wiki' do
     let(:wiki_editor) { create :wiki_editor }
     let(:ability) { Ability.new(wiki_editor) }
+    let(:page_locked) { create :page, locked: true }
 
+    it { is_expected.not_to be_able_to(:destroy, Page) }
     it { is_expected.not_to be_able_to(:suggest, Topic) }
     it { is_expected.not_to be_able_to(:unsuggest, Topic) }
+    it { is_expected.to be_able_to(:create, Page) }
+    it { is_expected.to be_able_to(:update, Page) }
+    it { is_expected.not_to be_able_to(:update, page_locked) }
     it { is_expected.to be_able_to(:create, Team) }
   end
 
@@ -46,7 +53,7 @@ describe Ability, type: :model do
     let(:locked_topic) { create :topic, user: user, lock_node: true }
     let(:reply) { create :reply, user: user }
     let(:note) { create :note, user: user }
-    let(:comment) { create :comment, user: user, commentable: CommentablePage.create(name: 'Fake Wiki', id: 1)}
+    let(:comment) { create :comment, user: user }
     let(:team_owner) { create :team_owner, user: user }
     let(:team_member) { create :team_member, user: user }
     let(:note_publish) { create :note, publish: true }
@@ -100,6 +107,10 @@ describe Ability, type: :model do
     context 'Note' do
       it { is_expected.to be_able_to(:read, Note.new(publish: true)) }
       it { is_expected.not_to be_able_to(:read, Note.new(publish: false)) }
+    end
+
+    context 'Page (WIKI)' do
+      it { is_expected.to be_able_to(:read, Page) }
     end
 
     context 'Site' do
@@ -180,6 +191,9 @@ describe Ability, type: :model do
     context 'Photo' do
       it { is_expected.not_to be_able_to(:create, Photo) }
     end
+    context 'Page' do
+      it { is_expected.not_to be_able_to(:create, Page) }
+    end
   end
 
   context 'Deleted users' do
@@ -196,6 +210,9 @@ describe Ability, type: :model do
     end
     context 'Photo' do
       it { is_expected.not_to be_able_to(:create, Photo) }
+    end
+    context 'Page' do
+      it { is_expected.not_to be_able_to(:create, Page) }
     end
   end
 end

@@ -23,11 +23,11 @@ sudo apt-get install -y git \
                         postgresql-9.4 \
                         elasticsearch \
                         openjdk-7-jre-headless \
-                        ruby2.3 \
-                        ruby2.3-dev
+#                        ruby2.3 \
+#                        ruby2.3-dev
 
-sudo update-rc.d elasticsearch defaults
-sudo service elasticsearch start
+#sudo update-rc.d elasticsearch defaults
+#sudo service elasticsearch start
 
 sudo su postgres -c "createuser -d -R -S $USER"
 

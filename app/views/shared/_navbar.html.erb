@@ -3,13 +3,11 @@
     <%= render_list_items do |li|
       li << link_to(t("menu.topics"), Setting.has_module?(:home) ? main_app.topics_path : main_app.root_path)
 
-      unless mobile?
-        Homeland.navbar_plugins.each do |plugin|
-          li << link_to(plugin.display_name, plugin.root_path) if Setting.has_module?(plugin.name)
-        end
-
-        li << link_to(t("menu.sites"), main_app.sites_path) if Setting.has_module?(:site)
+      Homeland.navbar_plugins.each do |plugin|
+        li << link_to(plugin.display_name, plugin.root_path) if Setting.has_module?(plugin.name)
       end
+
+      li << link_to(t("menu.sites"), main_app.sites_path) if Setting.has_module?(:site)
     end %>
     <%= raw Setting.navbar_html %>
   </ul>

@@ -57,6 +57,10 @@ body {
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
     &.navbar-fixed-active {
       box-shadow: 0 1px 1px rgba(0, 0, 0,.21);
+      .navbar-collapse.in {
+        border-bottom-color: #FFF;
+        box-shadow: 0 1px 1px rgba(0, 0, 0,.21);
+      }
     }
     margin-bottom: 15px;
     border: 0px;
@@ -83,7 +87,6 @@ body {
   .navbar-inverse .navbar-toggle:hover { background-color: rgba(255,255,255,0.1); }
   .navbar-inverse .navbar-collapse,
   .navbar-inverse .navbar-form { border-color: $blueText; }
-  nav.navbar-collapse.bs-navbar-collapse { border-color: rgba(255,255,255,0.3); }
   .navbar-inverse .navbar-nav>.open>a,
   .navbar-inverse .navbar-nav>.open>a:focus,
   .navbar-inverse .navbar-nav>.open>a:hover { background: $grayDark; color: #333; }
@@ -119,16 +122,47 @@ body {
     .avatar-32 { display: inline-block; width: 24px; height: 24px; }
   }
 
+  /* navbar-collapse */
+  .navbar-header {
+    .navbar-toggle {
+      position: absolute;
+      float: none;
+      left: 5px;
+      top: 5px;
+      padding: 6px 9px;
+      margin: 0;
+    }
+  }
+
+  .navbar-collapse {
+    float: left;
+  }
+
   @media (max-width: 767px) {
     .navbar-header {
       text-align: center;
       padding: 0;
       margin-bottom: -41px;
       .navbar-brand {
-        font-size: 12px; float: none; margin: 0 auto;
-        line-height: 46px;
+        padding: 0px;
+        font-size: 16px; float: none; margin: 0 auto;
+        line-height: 45px;
       }
     }
+
+    .navbar-collapse {
+      float: none;
+      position: absolute;
+      width: 100%;
+      left: 0;
+      border-color: $gray !important;
+      box-shadow: 0 1px 1px rgba(0, 0, 0,.11);
+      margin: 0;
+      background: #FFF;
+      z-index: 10;
+      top: 50px;
+    }
+
     .navbar-nav { float: left; margin: 0px; }
     .navbar-nav>li { float: left; }
     .navbar-nav.navbar-right { float:right; }

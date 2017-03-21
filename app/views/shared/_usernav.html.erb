@@ -6,7 +6,7 @@
     </a>
     <button class="navbar-toggle" type="button" data-toggle="dropdown" role="button" aria-expanded="false">
       <span class="sr-only">Toggle</span>
-      <i class="fa fa-reorder"></i>
+      <%= user_avatar_tag(current_user, :sm, link: false) %>
     </button>
     <%= render_list class: "dropdown-menu", role: "menu" do |li|
       li << link_to(current_user.login, main_app.user_path(current_user) )

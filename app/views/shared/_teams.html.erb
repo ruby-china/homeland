@@ -1,0 +1,25 @@
+<div id="teams">
+  <div id="hot_teams" class="team-list panel panel-default">
+    <div class="panel-heading">
+      <strong><%= t("users.hot_teams") %></strong>
+      <div class="pull-right hidden-xs"><%= t("users.current_have") %> <%= @total_team_count %> <%= t("users.teams_joined") %> <%= Setting.app_name %></div>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+  <% @teams.each do |team| %>
+  <div class="col-xs-12 col-sm-6 col-md-4">
+    <div class="media user-card">
+      <div class="media-left"><%= team_avatar_tag(team, :md) %></div>
+      <div class="media-body">
+        <div class="media-heading"><%= team_name_tag(team) %></div>
+        <div class="infos">
+          <div class="item opts"><%= team_member_counts_tag(team) %></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
+    </div>
+  </div>
+</div>

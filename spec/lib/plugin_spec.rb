@@ -48,6 +48,11 @@ describe Homeland::Plugin do
       expect(Homeland.plugins.find { |p| p.name == 'dar' }).not_to eq nil
     end
 
+    it '.sorted_plugins work' do
+      expect(Homeland.sorted_plugins.find { |p| p.name == 'foo' }).not_to eq nil
+      expect(Homeland.sorted_plugins.find { |p| p.name == 'dar' }).not_to eq nil
+    end
+
     it '.navbar_plugins work' do
       expect(Homeland.navbar_plugins.find { |p| p.name == 'foo' }).not_to eq nil
       expect(Homeland.navbar_plugins.find { |p| p.name == 'dar' }).to eq nil

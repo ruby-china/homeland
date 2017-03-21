@@ -11,19 +11,26 @@ module Homeland
       @plugins || []
     end
 
+    # Plugin list sorted by `config.modules` order
+    def sorted_plugins
+      @sorted_plugins ||= plugins.sort do |a, b|
+        Setting.module_list.index(a.name)  <=> Setting.module_list.index(b.name)
+      end
+    end
+
     # Get plugin list that enabled navbar
     def navbar_plugins
-      plugins.select { |plugin| plugin.navbar_link == true && plugin.root_path.present? }
+      sorted_plugins.select { |plugin| plugin.navbar_link == true && plugin.root_path.present? }
     end
 
     # Get plugin list that enabled admin navbar
     def admin_navbar_plugins
-      plugins.select { |plugin| plugin.admin_navbar_link == true && plugin.admin_path.present? }
+      sorted_plugins.select { |plugin| plugin.admin_navbar_link == true && plugin.admin_path.present? }
     end
 
     # Get plugin list that enabled user menu
     def user_menu_plugins
-      plugins.select { |plugin| plugin.user_menu_link == true && plugin.root_path.present? }
+      sorted_plugins.select { |plugin| plugin.user_menu_link == true && plugin.root_path.present? }
     end
 
     # Register a new plugin

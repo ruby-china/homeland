@@ -45,7 +45,11 @@ class Setting < RailsSettings::Base
 
     def has_module?(name)
       return true if self.modules.blank? || self.modules == 'all'
-      self.modules.split(SEPARATOR_REGEXP).include?(name.to_s)
+      self.module_list.include?(name.to_s)
+    end
+
+    def module_list
+      self.modules.split(SEPARATOR_REGEXP)
     end
 
     def has_profile_field?(name)

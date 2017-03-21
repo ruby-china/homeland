@@ -82,11 +82,6 @@ en:
         body: "Content"
         locked: "Lock"
         change_desc: "Change Description"
-      site:
-        name: "Name"
-        url: "URL"
-        desc: "Description"
-        site_node_id: "Category"
     errors:
       models:
         user: "User"

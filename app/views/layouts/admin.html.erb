@@ -13,13 +13,13 @@
     <nav class="navbar navbar-inverse navbar-fixed-top navbar-default">
       <div class="container">
         <div class="navbar-header">
-          <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
+          <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar-collapse">
+            <span class="sr-only">Toggle</span>
             <i class="fa fa-reorder"></i>
           </button>
           <%= link_to("控制台", main_app.admin_root_path, class: "navbar-brand") %>
         </div>
-        <nav class="navbar-collapse bs-navbar-collapse collapse">
+        <nav class="collapse navbar-collapse" id="main-navbar-collapse">
           <%= render_list class: "nav navbar-nav" do |li|
             li << link_to(t("admin.menu.root_path"), main_app.admin_root_path)
             li << link_to(t("admin.menu.users"), main_app.admin_users_path)
@@ -36,9 +36,9 @@
               li << link_to(plugin.display_name, plugin.admin_path)
             end
           end  %>
+        </nav>
 
-          <%= render "shared/usernav" %>
-        </div>
+        <%= render "shared/usernav" %>
       </div>
     </div>
   </div>

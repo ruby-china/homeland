@@ -3,7 +3,6 @@
   li << link_to(t("users.menu.topics"), topics_user_path(@user))
   li << link_to(t("users.menu.replies"), replies_user_path(@user))
   li << link_to(t("users.menu.favorites"), favorites_user_path(@user), class: 'hide-ios')
-  li << link_to(t("users.menu.notes"), notes_user_path(@user), class: 'hide-ios') if Setting.has_module?(:note)
   li << link_to(t("users.menu.following"), following_user_path(@user))
   li << link_to(t("users.menu.followers"), followers_user_path(@user))
   if owner?(@user) && current_user.block_users?

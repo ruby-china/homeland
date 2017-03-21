@@ -12,7 +12,6 @@
       li << link_to(current_user.login, main_app.user_path(current_user) )
       li << "<div class='divider'></div>"
       li << link_to(t("menu.edit_account_path"), main_app.setting_path)
-      li << link_to(t("menu.notes"), main_app.notes_path )
       li << link_to(t("menu.likes"), main_app.favorites_topics_path)
 
       Homeland.user_menu_plugins.each do |plugin|
@@ -62,7 +61,6 @@
     </a>
     <%= render_list class: "dropdown-menu", role: "menu" do |li|
       li << link_to(t("topics.new_topic"), main_app.new_topic_path)
-      li << link_to(t("notes.new_note"), main_app.new_note_path) if Setting.has_module?(:note)
       if can? :create, Team
         li << "<div class='divider'></div>"
         li << link_to(t("teams.new_team"), main_app.new_team_path)

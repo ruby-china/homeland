@@ -24,7 +24,6 @@ class User < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
 
   has_many :topics, dependent: :destroy
-  has_many :notes
   has_many :replies, dependent: :destroy
   has_many :authorizations, dependent: :destroy
   has_many :notifications, dependent: :destroy

@@ -10,8 +10,6 @@ describe UsersController, type: :controller do
       expect(response.status).to eq(404)
       get :topics, params: { id: deleted_user.login }
       expect(response.status).to eq(404)
-      get :notes, params: { id: deleted_user.login }
-      expect(response.status).to eq(404)
     end
   end
 
@@ -57,13 +55,6 @@ describe UsersController, type: :controller do
   describe ':favorites' do
     it 'should show user liked stuffs' do
       get :favorites, params: { id: user.login }
-      expect(response).to be_success
-    end
-  end
-
-  describe ':notes' do
-    it 'should show user notes' do
-      get :notes, params: { id: user.login }
       expect(response).to be_success
     end
   end

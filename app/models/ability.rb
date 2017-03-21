@@ -22,7 +22,6 @@ class Ability
   def roles_for_members
     roles_for_topics
     roles_for_replies
-    roles_for_notes
     roles_for_comments
     roles_for_photos
     roles_for_sites
@@ -62,12 +61,6 @@ class Ability
     Time.zone.now.hour > 22 || Time.zone.now.hour < 9
   end
 
-  def roles_for_notes
-    can :create, Note
-    can [:update, :destroy, :read], Note, user_id: user.id
-    can :read, Note, publish: true
-  end
-
   def roles_for_photos
     can :tiny_new, Photo
     can :create, Photo
@@ -105,11 +98,9 @@ class Ability
   def basic_read_only
     can [:read, :feed, :node], Topic
     can [:read, :reply_to], Reply
-    can :preview, Note
     can :read, Photo
     can :read, Site
     can :read, Section
-    can :read, Node
     can :read, Comment
     can :read, Team
   end

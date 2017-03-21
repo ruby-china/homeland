@@ -21,7 +21,6 @@
 #= require action_cable
 #= require form_storage
 #= require topics
-#= require notes
 #= require editor
 #= require toc
 #= require turbolinks
@@ -57,14 +56,7 @@ AppView = Backbone.View.extend
     if $('body').data('controller-name') in ['topics', 'replies']
       window._topicView = new TopicView({parentView: @})
 
-    if $('body').data('controller-name') in ['pages']
-      window._pageView = new PageView({parentView: @})
-
-    if $('body').data('controller-name') in ['notes']
-      window._noteView = new NoteView({parentView: @})
-
-    if $('body').data('controller-name') in ['topics', 'pages']
-      window._tocView = new TOCView({parentView: @})
+    window._tocView = new TOCView({parentView: @})
 
   initComponents: () ->
     $("abbr.timeago").timeago()

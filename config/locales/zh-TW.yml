@@ -55,14 +55,6 @@
         body: "正文"
       reply:
         body: "回覆內容"
-      note:
-        title: "標題"
-      post:
-        title: 標題
-        body: 正文
-        tag_list: 標籤
-        source: 來源
-        source_url: 來源地址
       page:
         slug: Slug
         title: 頁面標題

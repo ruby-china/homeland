@@ -14,7 +14,7 @@ module Homeland
     # Plugin list sorted by `config.modules` order
     def sorted_plugins
       @sorted_plugins ||= plugins.sort do |a, b|
-        Setting.module_list.index(a.name)  <=> Setting.module_list.index(b.name)
+        Setting.module_list.index(a.name) <=> Setting.module_list.index(b.name)
       end
     end
 
@@ -55,6 +55,7 @@ module Homeland
       plugin = Homeland::Plugin.new
       yield plugin
       @plugins << plugin
+      @sorted_plugins = nil
       plugin
     end
   end

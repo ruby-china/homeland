@@ -8,11 +8,6 @@ Rails.application.routes.draw do
 
   resources :sites
   resources :comments
-  resources :notes do
-    collection do
-      post :preview
-    end
-  end
   resources :devices
   resources :teams
 
@@ -204,7 +199,6 @@ Rails.application.routes.draw do
         get :topics
         get :replies
         get :favorites
-        get :notes
         get :blocked
         post :block
         post :unblock

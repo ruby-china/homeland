@@ -75,11 +75,6 @@
         body: 内容
         locked: 锁定开关
         change_desc: 变更描述
-      site:
-        name: 网站名称
-        url: 地址
-        desc: 简单介绍
-        site_node_id: 分类
       device:
         platform: 类型
         token: Token

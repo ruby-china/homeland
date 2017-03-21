@@ -11,8 +11,6 @@
       replies: "Replies"
       photos: "Photos"
       comments: "Comments"
-      site_nodes: "Site Nodes"
-      sites: "Sites"
       locations: "Locations"
       exception_logs: "Errors"
     overview: "Overview"

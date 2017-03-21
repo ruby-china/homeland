@@ -77,8 +77,6 @@
   photos:
     upload_and_insert_code: "上传并插入代码"
     uploading: "正在上传"
-  sites:
-    create: 提交网站
   menu:
     home: "首页"
     topics: "社区"
@@ -87,7 +85,6 @@
     users: "会员"
     admin: "后台"
     nodes: "节点"
-    sites: "酷站"
     my_home_page: "我的主页"
     edit_account_path: "个人资料设置"
     likes: "我的收藏"

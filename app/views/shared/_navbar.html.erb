@@ -6,8 +6,6 @@
       Homeland.navbar_plugins.each do |plugin|
         li << link_to(plugin.display_name, plugin.root_path) if Setting.has_module?(plugin.name)
       end
-
-      li << link_to(t("menu.sites"), main_app.sites_path) if Setting.has_module?(:site)
     end %>
     <%= raw Setting.navbar_html %>
   </ul>

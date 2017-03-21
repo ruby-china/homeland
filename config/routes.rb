@@ -6,7 +6,6 @@ Rails.application.routes.draw do
                 authorized_applications: 'oauth/authorized_applications'
   end
 
-  resources :sites
   resources :comments
   resources :devices
   resources :teams
@@ -109,12 +108,6 @@ Rails.application.routes.draw do
     end
     resources :photos
     resources :comments
-    resources :site_nodes
-    resources :sites do
-      member do
-        post :undestroy
-      end
-    end
     resources :locations
     resources :applications
     resources :stats

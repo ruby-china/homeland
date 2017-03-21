@@ -75,8 +75,6 @@
   photos:
     upload_and_insert_code: "Upload and insert code"
     uploading: "Uploading"
-  sites:
-    create: Submit a site
   menu:
     topics: "Discussion"
     wiki: "Wiki"
@@ -84,7 +82,6 @@
     users: "Users"
     admin: "Control Panel"
     nodes: "Nodes"
-    sites: "Sites"
     my_home_page: "My home page"
     edit_account_path: "Account Profile"
     likes: "Favorites"

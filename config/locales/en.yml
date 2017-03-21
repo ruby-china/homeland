@@ -20,7 +20,6 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  contents: Contents
   omniauth:
     github: GitHub
     twitter: Twitter
@@ -50,6 +49,7 @@ en:
         tagline: "Tagline"
         state: "Status"
         verified: "Verified"
+        hr: "Recruiter"
         company: "Company"
         github: "GitHub"
         remember_me: "Remember me"

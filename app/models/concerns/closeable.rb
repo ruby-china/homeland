@@ -10,16 +10,18 @@ module Closeable
   end
 
   def close!
-    transaction do
+    self.closed_at = Time.now
+    self.transaction do
       Reply.create_system_event(action: 'close', topic_id: self.id)
-      update!(closed_at: Time.now)
+      self.save
     end
   end
 
   def open!
-    transaction do
-      update!(closed_at: nil)
+    self.closed_at = nil
+    self.transaction do
       Reply.create_system_event(action: 'reopen', topic_id: self.id)
+      self.save
     end
   end
 end

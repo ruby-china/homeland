@@ -32,6 +32,11 @@ describe ApplicationHelper, type: :helper do
         expect(helper.sanitize_markdown(html)).to eq(html)
 
         html = '<span class="embed-responsive embed-responsive-16by9">
+        <iframe width="560" height="315" src="https://player.vimeo.com/video/159449591" class="embed" frameborder="0" allowfullscreen=""></iframe>
+        </span>'
+        expect(helper.sanitize_markdown(html)).to eq(html)
+
+        html = '<span class="embed-responsive embed-responsive-16by9">
         <iframe width="560" height="315" src="http://www.youtube.com/embed/gFQpxAKx_ds" class="embed" frameborder="0" allowfullscreen=""></iframe>
         </span>'
         expect(helper.sanitize_markdown(html)).to eq(html)

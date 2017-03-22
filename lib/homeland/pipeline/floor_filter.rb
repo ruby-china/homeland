@@ -9,12 +9,11 @@ module Homeland
           next unless content.include?('#')
           next if has_ancestor?(node, %w(pre code))
 
-          html = content.gsub(FLOOR_REGEXP) do
+          content.gsub!(FLOOR_REGEXP) do
             %(<a href="#reply#{Regexp.last_match(1)}" class="at_floor" data-floor="#{Regexp.last_match(1)}">##{Regexp.last_match(1)}#{Regexp.last_match(2)}</a>)
           end
 
-          next if html == content
-          node.replace(html)
+          node.replace(content)
         end
         doc
       end

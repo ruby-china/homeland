@@ -17,9 +17,13 @@ module Homeland
       valid_video_url = false
 
       return if node['src'].blank?
-
       # Youtube
       if node['src'].match?(%r{\A(?:https?:)?//(?:www\.)?youtube(?:-nocookie)?\.com/embed/})
+        valid_video_url = true
+      end
+
+      # Vimeo
+      if node['src'].match?(%r{\Ahttps://player\.vimeo\.com/video/})
         valid_video_url = true
       end
 
@@ -34,7 +38,6 @@ module Homeland
       # it through a special Sanitize step to ensure that no unwanted elements or
       # attributes that don't belong in a YouTube embed can sneak in.
       ::Sanitize.node!(node, elements: %w(iframe),
-
                              attributes: {
                                'iframe' => %w(allowfullscreen class frameborder height src width)
                              })

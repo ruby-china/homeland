@@ -54,6 +54,6 @@ module TopicsHelper
   end
 
   def render_node_name(name, id)
-    link_to(name, node_topics_path(id), class: 'node')
+    link_to(name, main_app.node_topics_path(id), class: 'node')
   end
 end

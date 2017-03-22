@@ -180,8 +180,13 @@ class Topic < ApplicationRecord
     excellent >= 1
   end
 
-  def ban!
-    update(lock_node: true, node_id: Node.no_point.id, admin_editing: true)
+  def ban!(opts = {})
+    transaction do
+      update(lock_node: true, node_id: Node.no_point.id, admin_editing: true)
+      if opts[:reason]
+        Reply.create_system_event(action: 'ban', topic_id: self.id, body: opts[:reason])
+      end
+    end
   end
 
   def excellent!

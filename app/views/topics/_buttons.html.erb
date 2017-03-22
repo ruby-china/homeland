@@ -16,7 +16,7 @@
     <% end %>
 
     <% if @topic.node_id != Node.no_point.id %>
-    <%= link_to raw("<i class='fa fa-ban'></i> 屏蔽"), action_topic_path(@topic.id, type: 'ban'), method: 'post', remote: true, title: "屏蔽此贴，移动到 NoPoint 节点" %>
+      <%= link_to raw("<i class='fa fa-ban'></i> 屏蔽"), ban_topic_path(@topic), remote: true, title: "屏蔽此贴，移动到 NoPoint 节点" %>
     <% end %>
   <% end %>
   <span class="pull-right opts">

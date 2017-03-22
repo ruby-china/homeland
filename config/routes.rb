@@ -65,6 +65,7 @@ Rails.application.routes.draw do
       delete :unfavorite
       post :follow
       delete :unfollow
+      get :ban
       post :action
     end
     collection do

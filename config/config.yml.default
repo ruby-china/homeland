@@ -1,20 +1,20 @@
 site_configs: &site_configs
   # 导航栏 Logo 位置 HTML
-  navbar_brand_html: >
+  navbar_brand_html: |
     <a href="/" class="navbar-brand"><b>Home</b>land</a>
   # 导航栏扩展菜单
-  navbar_html: >
+  navbar_html: |
     <li><a href="/topics/new">发帖</a></li>
-  index_html: >
+  index_html: |
     <div style="text-align:center;"></div>
-  wiki_index_html: >
+  wiki_index_html: |
     <div>Wiki Home page.</div>
-  wiki_sidebar_html: >
+  wiki_sidebar_html: |
     <strong>推荐内容</strong>
     <ul>
       <li><a href="/wiki/about">关于我们</a></li>
     </ul>
-  footer_html: >
+  footer_html: |
     <p class="copyright">
      &copy; Powered by <a href="http://gethomeland.com">Homeland</a>.
     </p>
@@ -22,20 +22,24 @@ site_configs: &site_configs
   before_topic_html: ""
   topic_index_sidebar_html: ""
   site_index_html: "下面列出了相关网站。如果你知道还有不在此列表的，请帮忙补充。"
-  custom_head_html: >
+  custom_head_html: |
     <link rel="dns-prefetch" href="//assets.your-host.com">
   node_ids_hide_in_topics_index: ""
-  ban_words_on_reply: >
+  ban_words_on_reply: |
     mark
     收藏
     顶
     赞
     up
-  tips: >
+  tips: |
     提示1
     提示2
-  newbie_notices: >
+  newbie_notices: |
     <p>为提高社区质量，防止新人一来就发帖提问，注册时间超过 1 天才能发帖，请在新人阶段多浏览，看看其他老用户是如何在社区里面分享与解决问题的。</p>
+  ban_reasons: |
+    标题或正文描述不清楚
+    无意义的发帖
+    存在广告嫌疑
 
 defaults: &defaults
   <<: *site_configs

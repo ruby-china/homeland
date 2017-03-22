@@ -215,6 +215,17 @@ describe Topic, type: :model do
       expect(t.node_id).to eq Node.no_point.id
       expect(t.lock_node).to eq true
     end
+
+    it 'should ban! with reason' do
+      allow(User).to receive(:current).and_return(user)
+      t.ban!(reason: "Block this topic")
+      t.reload
+      expect(t.node_id).to eq Node.no_point.id
+      expect(t.lock_node).to eq true
+      r = t.replies.last
+      expect(r.action).to eq "ban"
+      expect(r.body).to eq "Block this topic"
+    end
   end
 
   describe '.reply_ids' do

@@ -123,6 +123,7 @@
     ban_words_on_reply: "回帖禁止內容（一行一個）"
     blacklist_ips: "黑名單 IP 列表，將會直接攔截請求（一行一個）"
     newbie_limit_time: "新註冊用戶（新手）限制期，單位秒（0 不限制），在新手期不能創建新話題，僅能回帖"
+    ban_reasons: "屏蔽原因，將會在屏蔽話題的時候作為選項（一行一個）"
   pagination:
     next: "下一頁 &#8594;"
     prev: "&#8592; 上一頁"

@@ -6,7 +6,7 @@ class TopicsController < ApplicationController
                                      :favorite, :unfavorite, :follow, :unfollow]
 
   before_action :set_topic, only: [:ban, :edit, :update, :destroy, :follow,
-                                   :unfollow, :action]
+                                   :unfollow, :action, :ban]
 
   def index
     @suggest_topics = []
@@ -181,7 +181,8 @@ class TopicsController < ApplicationController
       @topic.unexcellent!
       redirect_to @topic, notice: '加精已经取消。'
     when 'ban'
-      @topic.ban!
+      params[:reason_text] ||= params[:reason] || ''
+      @topic.ban!(reason: params[:reason_text].strip)
       redirect_to @topic, notice: '已转移到 NoPoint 节点。'
     when 'close'
       @topic.close!
@@ -190,6 +191,10 @@ class TopicsController < ApplicationController
       @topic.open!
       redirect_to @topic, notice: '话题已重启开启。'
     end
+  end
+
+  def ban
+    authorize! :ban, @topic
   end
 
   private

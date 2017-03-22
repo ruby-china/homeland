@@ -287,11 +287,25 @@ describe TopicsController, type: :controller do
       expect(topic.reload.node_id).not_to eq(Node.no_point.id)
     end
 
-    it 'should not allow user suggest by admin' do
+    it 'should allow by admin' do
       sign_in admin
       post :action, params: { id: topic, type: 'ban' }
       expect(response.status).to eq(302)
       expect(topic.reload.node_id).to eq(Node.no_point.id)
+
+      expect do
+        post :action, params: { id: topic, type: 'ban', reason: "Foobar" }
+      end.to change(topic.replies, :count).by(1)
+      r = topic.replies.last
+      expect(r.action).to eq("ban")
+      expect(r.body).to eq("Foobar")
+
+      expect do
+        post :action, params: { id: topic, type: 'ban', reason: "Foobar", reason_text: "Barfoo" }
+      end.to change(topic.replies, :count).by(1)
+      r = topic.replies.last
+      expect(r.action).to eq("ban")
+      expect(r.body).to eq("Barfoo")
     end
   end
 

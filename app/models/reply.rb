@@ -137,7 +137,7 @@ class Reply < ApplicationRecord
   end
 
   def self.create_system_event(opts = {})
-    opts[:body] = ''
+    opts[:body] ||= ''
     opts[:user] ||= User.current
     return false if opts[:action].blank?
     return false if opts[:user].blank?

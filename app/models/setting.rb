@@ -54,7 +54,7 @@ class Setting < RailsSettings::Base
     end
 
     def ban_reason_list
-      (self.ban_reasons || "").split("\n")
+      (self.ban_reasons || '').split("\n")
     end
 
     def has_profile_field?(name)

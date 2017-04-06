@@ -9,7 +9,7 @@ module Users
     private
 
     def team_show
-      @topics = @user.topics.fields_for_list.last_actived.includes(:user)
+      @topics = Topic.where(user_id: @team.user_ids).fields_for_list.last_actived.includes(:user)
       @topics = @topics.page(params[:page])
     end
 

@@ -1,4 +1,4 @@
-<%= cache(['notifications', Notifications::VERSION, notification, notification.read?]) do %>
+<%= cache(['notifications', Notifications::VERSION, notification, notification.actor, notification.read?]) do %>
 <div id="notification-<%= notification.id %>"
      data-id="<%= notification.id %>"
      class="media notification notification-<%= notification.notify_type %><%= ' unread' if !notification.read? %>">

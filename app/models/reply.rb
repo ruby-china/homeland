@@ -4,6 +4,7 @@ class Reply < ApplicationRecord
   include SoftDelete
   include Mentionable
   include MentionTopic
+  include UserAvatarDelegate
 
   UPVOTES = %w(+1 :+1: :thumbsup: :plus1: 👍 👍🏻 👍🏼 👍🏽 👍🏾 👍🏿)
 

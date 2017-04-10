@@ -1,6 +1,7 @@
 class Comment < ApplicationRecord
   include MarkdownBody
   include Mentionable
+  include UserAvatarDelegate
 
   belongs_to :commentable, polymorphic: true
   belongs_to :user

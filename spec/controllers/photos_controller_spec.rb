@@ -9,7 +9,7 @@ describe PhotosController, type: :controller do
     expect(response).to be_success
     json = JSON.parse(response.body)
     expect(json['ok']).to be_truthy
-    expect(json['url']).to match(Regexp.new("/uploads/photo/#{Date.today.year}/[a-z0-9]{32}.png!large"))
+    expect(json['url']).to match(Regexp.new("/uploads/photo/#{Date.today.year}/[a-zA-Z0-9\\-]+.png!large"))
   end
 
   it 'create failure for blank data' do

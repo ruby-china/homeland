@@ -9,18 +9,22 @@
   <%
   case notification.second_target_type
   when "Post" %>
+    <% if Setting.has_module? :press %>
     <div class="media-heading">
       在你发布的 <a href="<%= homeland_press.post_path(second_target) %>"><%= second_target.title %></a> 评论了：
     </div>
     <div class="media-content summary markdown">
       <%= comment.body_html %>
     </div>
+    <% end %>
   <% when "Page" %>
+    <% if Setting.has_module? :wiki %>
     <div class="media-heading">
       在你发布的 <a href="<%= homeland_wiki.page_path(second_target) %>"><%= second_target.title %></a> 评论了：
     </div>
     <div class="media-content summary markdown">
       <%= comment.body_html %>
     </div>
+    <% end %>
   <% end %>
 <% end %>

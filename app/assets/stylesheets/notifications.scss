@@ -32,7 +32,6 @@
 
       .media-heading {
         font-weight: bold;
-        font-size: 14px;
       }
 
       a { color: #222; text-decoration: underline; }
@@ -40,10 +39,10 @@
 
 
     .media-content {
-      color: #999;
+      color: #444;
 
       a { color: #999 !important; }
-      p { font-size: 13px;  margin-bottom: 6px; }
+      p { font-size: 14px;  margin-bottom: 6px; }
       p:last-child {
         margin-bottom: 0;
       }

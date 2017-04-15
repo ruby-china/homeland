@@ -250,6 +250,12 @@ body {
       padding: 0 5px;
     }
   }
+  .dropdown-menu {
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    a { padding: 3px 15px 4px 30px; }
+  }
 }
 
 .sidebar.col-md-3 { padding-left: 0; }

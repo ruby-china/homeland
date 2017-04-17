@@ -111,7 +111,7 @@ AppView = Backbone.View.extend
     $("a[rel=twipsy]").tooltip()
 
     # CommentAble @ 回复功能
-    App.atReplyable(".cell_comments_new textarea")
+    App.mentionable(".cell_comments_new textarea")
 
   likeable : (e) ->
     if !App.isLogined()
@@ -350,7 +350,7 @@ window.App =
 
   # scan logins in jQuery collection and returns as a object,
   # which key is login, and value is the name.
-  scanLogins: (query) ->
+  scanMentionableLogins: (query) ->
     result = []
     logins = []
     for e in query
@@ -367,7 +367,7 @@ window.App =
       result.push(item)
     _.uniq(result)
 
-  atReplyable : (el, logins) ->
+  mentionable : (el, logins) ->
     logins = [] if !logins
     $(el).atwho
       at : "@"

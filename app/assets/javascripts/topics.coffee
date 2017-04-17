@@ -251,7 +251,7 @@ window.TopicView = Backbone.View.extend
         show : true
 
     # @ Mention complete
-    App.atReplyable("textarea", App.scanLogins($(".reply")))
+    App.mentionable("textarea", App.scanMentionableLogins($(".reply .infos .info")))
 
     # Focus title field in new-topic page
     $("body[data-controller-name='topics'] #topic_title").focus()

@@ -355,16 +355,19 @@ window.App =
     logins = []
     for e in query
       $e = $(e)
-      login = $e.find(".user-name").text()
       item =
-        login: login
-        name: $e.find(".user-name").attr('data-name')
-        avatar_url: $e.find(".avatar img").attr("src")
-      if logins.indexOf(login) != -1
-        continue
+        login: $e.find(".user-name").first().text()
+        name: $e.find(".user-name").first().attr('data-name')
+        avatar_url: $e.find(".avatar img").first().attr("src")
 
-      logins.push(login)
+      continue if not item.login
+      continue if not item.name
+      continue if logins.indexOf(item.login) != -1
+
+      logins.push(item.login)
       result.push(item)
+
+    console.log result
     _.uniq(result)
 
   mentionable : (el, logins) ->

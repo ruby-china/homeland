@@ -490,7 +490,7 @@ DEPENDENCIES
   redis-objects
   redis-session-store
   rspec-rails
-  rubocop
+  rubocop (= 0.47.1)
   ruby-push-notifications
   rucaptcha
   sanitize

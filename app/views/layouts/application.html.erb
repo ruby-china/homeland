@@ -88,11 +88,14 @@
     <% end %>
   </script>
   <%= yield :scripts %>
+
+  <% if Rails.env.production? %>
   <script>
     ga('create', '<%= Setting.google_analytics_key %>', 'auto');
     ga('require', 'displayfeatures');
     ga('send', 'pageview');
   </script>
+  <% end %>
   <div class="zoom-overlay"></div>
 </body>
 </html>

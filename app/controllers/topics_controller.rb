@@ -116,7 +116,12 @@ class TopicsController < ApplicationController
     @topic.user_id = current_user.id
     @topic.node_id = params[:node] || topic_params[:node_id]
     @topic.team_id = ability_team_id
-    @topic.save
+
+    if @topic.save
+      redirect_to(topic_path(@topic.id), notice: t('topics.create_topic_success'))
+    else
+      render action: 'new'
+    end
   end
 
   def preview

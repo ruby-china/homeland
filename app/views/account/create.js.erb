@@ -4,5 +4,5 @@
 <% else %>
   $('#new_user .alert').remove();
   $('#new_user').prepend('<%= j render("shared/error_messages", target: resource) %>');
-  $('.rucaptcha-image-box').html('<%= j rucaptcha_image_tag %>');
+  $('.rucaptcha-image-box').html('<img class="rucaptcha-image" src="<%= ru_captcha.root_path -%>" alt="Rucaptcha">');
 <% end %>

@@ -8,7 +8,7 @@
     <%= team_user.pendding? ? team_user.status_name : team_user.role_name %>
   </div>
   <td class="buttons">
-    <% if can? :update, @team && team_user.user_id != current_user&.id %>
+    <% if can?(:update, @team) && team_user.user_id != current_user&.id %>
       <%= link_to icon_tag('pencil'), edit_user_team_user_path(@team, team_user), class: 'btn btn-default' %>
     <% end %>
   </td>

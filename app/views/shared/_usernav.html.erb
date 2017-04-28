@@ -61,7 +61,7 @@
     </a>
     <%= render_list class: "dropdown-menu", role: "menu" do |li|
       li << link_to(t("topics.new_topic"), main_app.new_topic_path)
-      if can? :create, Team
+      if can?(:create, Team) && Setting.has_module?(:team)
         li << "<div class='divider'></div>"
         li << link_to(t("teams.new_team"), main_app.new_team_path)
       end

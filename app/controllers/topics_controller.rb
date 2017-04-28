@@ -89,7 +89,7 @@ class TopicsController < ApplicationController
     @topic.hits.incr(1)
     @node = @topic.node
     @show_raw = params[:raw] == '1'
-    @can_reply = can? :create, Reply
+    @can_reply = can?(:create, Reply)
 
     @replies = Reply.unscoped.where(topic_id: @topic.id).order(:id).all
     @user_like_reply_ids = current_user&.like_reply_ids_by_replies(@replies) || []

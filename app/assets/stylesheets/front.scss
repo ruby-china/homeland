@@ -591,22 +591,12 @@
     padding: 0;
     padding-left: 32px;
     border: 0px;
-    quotes: "\201C""\201D""\2018""\2019";
     position: relative;
     font-size: 14px;
     line-height: 1.45;
-    p { display:inline; color: #999; }
-    &:before,
-    &:after {
-      display: block;
-      content: "\201C";
-      font-size: 35px;
-      position: absolute;
-      font-family: serif;
-      left: 0px;
-      top: 0px;
-      color: #aaa;
-    }
+    padding: 0 1em;
+    border-left: 0.25em solid #dfe2e5;
+    p { color: #999; }
   }
   pre {
     font-family: Menlo, Monaco, Consolas, "Courier New", monospace;

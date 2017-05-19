@@ -1,2 +1,2 @@
-json.replies @replies, partial: 'reply', as: :reply, locals: { detail: true }
+json.replies @replies, partial: 'reply', as: :reply
 json.meta @meta

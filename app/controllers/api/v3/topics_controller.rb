@@ -13,7 +13,7 @@ module Api
       # @param offset [Integer] default: 0
       # @param limit [Integer] default: 20, range: 1..150
       #
-      # @return [Array<TopicTopicSerializer>]
+      # @return [Array<TopicSerializer>]
       def index
         optional! :type, default: 'last_actived'
         optional! :node_id

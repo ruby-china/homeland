@@ -1,5 +1,11 @@
 <%= raw Setting.index_html %>
 
+
+<% if !mobile? %>
+    <%= render "/shared/index_sections" %>
+    <%= render "/shared/hot_locations" %>
+<% end %>
+
 <div class="home_suggest_topics panel panel-default">
   <div class="panel-heading">社区精华帖</div>
   <div class="panel-body topics row">
@@ -21,7 +27,3 @@
   </div>
 </div>
 
-<% if !mobile? %>
-  <%= render "/shared/index_sections" %>
-  <%= render "/shared/hot_locations" %>
-<% end %>

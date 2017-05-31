@@ -105,7 +105,7 @@ module Api
       #
       # @param offset [Integer] default: 0
       # @param limit [Integer] default: 20, range: 1..150
-      # @return <Array[UserSerializer]> 收藏的话题列表
+      # @return <Array[UserSerializer]> 用户列表
       def followers
         optional! :offset, type: Integer, default: 0
         optional! :limit, type: Integer, default: 20, values: 1..150

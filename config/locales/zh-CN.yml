@@ -89,7 +89,10 @@
         summary: 简介
     errors:
       models:
-        user: 用户
+        user:
+          attributes:
+            reset_password_token:
+              expired: 重置密码操作已过期
       messages:
         inclusion: "不包含于列表中"
         exclusion: "是保留关键字"

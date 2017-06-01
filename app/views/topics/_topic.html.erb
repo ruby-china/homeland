@@ -5,10 +5,10 @@
   </div>
   <div class="infos media-body">
     <div class="title media-heading">
-      <%= link_to(main_app.topic_path(topic), title: topic.title) do %>
+      <%= link_to(node_topics_path(topic.node_id), title: topic.node_name) do %>
         <%= raw content_tag(:span, topic.node_name, class: 'node') %>
-        <%= topic.title %>
       <% end %>
+      <%= link_to(topic.title, main_app.topic_path(topic), title: topic.title)%>
       <% if suggest %>
         <i class="fa fa-angle-double-up" title="置顶"></i>
       <% end %>

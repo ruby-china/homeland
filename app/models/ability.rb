@@ -5,11 +5,10 @@ class Ability
 
   def initialize(u)
     @user = u
-    if @user.blank?
-      roles_for_anonymous
-    elsif @user.roles?(:admin)
+    case @user.role
+    when 'admin'
       can :manage, :all
-    elsif @user.roles?(:member)
+    when 'member'
       roles_for_members
     else
       roles_for_anonymous

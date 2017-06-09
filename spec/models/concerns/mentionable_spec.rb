@@ -57,7 +57,7 @@ describe Mentionable, type: :model do
   it 'should send mention notification' do
     user = create :user
     expect do
-      TestDocument.new body: "@#{user.login}", user: create(:user)
+      TestDocument.create body: "@#{user.login}", user: create(:user)
     end.to change(user.notifications.unread, :count)
 
     expect do

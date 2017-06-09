@@ -51,7 +51,7 @@ window.TopicView = Backbone.View.extend
     return false
 
   setReplyTo: (id) ->
-    $('#reply_reply_to_id').val(id)
+    $('input[name="reply[reply_to_id]"]').val(id)
     replyEl = $(".reply[data-id=#{id}]")
     targetAnchor = replyEl.attr('id')
     replyToPanel = $(".editor-toolbar .reply-to")
@@ -62,7 +62,7 @@ window.TopicView = Backbone.View.extend
     replyToPanel.show()
 
   unsetReplyTo: ->
-    $('#reply_reply_to_id').val('')
+    $('input[name="reply[reply_to_id]"]').val('')
     replyToPanel = $(".editor-toolbar .reply-to")
     replyToPanel.hide()
 

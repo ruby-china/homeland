@@ -40,7 +40,7 @@ class Comment < ApplicationRecord
     return if notified_user_ids.include?(receiver_id)
 
     Notification.create(
-      notify_type: 'comment',
+      notify_type: "comment",
       target: self,
       second_target: self.commentable,
       actor_id: self.user_id,

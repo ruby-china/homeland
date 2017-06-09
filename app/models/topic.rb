@@ -185,7 +185,7 @@ class Topic < ApplicationRecord
     transaction do
       update(lock_node: true, node_id: Node.no_point.id, admin_editing: true)
       if opts[:reason]
-        Reply.create_system_event(action: 'ban', topic_id: self.id, body: opts[:reason])
+        Reply.create_system_event(action: "ban", topic_id: self.id, body: opts[:reason])
       end
     end
   end

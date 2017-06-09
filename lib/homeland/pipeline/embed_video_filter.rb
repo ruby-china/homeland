@@ -24,7 +24,7 @@ module Homeland
 
         @text.gsub!(VIMEO_URL_REGEXP) do
           vimeo_id = Regexp.last_match(4)
-          close_tag = Regexp.last_match(1) if ['<br>', '<div>'].include? Regexp.last_match(1)
+          close_tag = Regexp.last_match(1) if ["<br>", "<div>"].include? Regexp.last_match(1)
           src = "https://player.vimeo.com/video/#{vimeo_id}"
           embed_tag(close_tag, src)
         end

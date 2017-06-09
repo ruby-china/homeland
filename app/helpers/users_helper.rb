@@ -1,4 +1,5 @@
 require "digest/md5"
+
 module UsersHelper
   include LetterAvatar::AvatarHelper
 

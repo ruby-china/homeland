@@ -57,7 +57,7 @@ describe Mentionable, type: :model do
   it 'should send mention notification' do
     user = create :user
     expect do
-      TestDocument.create body: "@#{user.login}", user: create(:user)
+      TestDocument.new body: "@#{user.login}", user: create(:user)
     end.to change(user.notifications.unread, :count)
 
     expect do
@@ -67,6 +67,18 @@ describe Mentionable, type: :model do
     expect do
       TestDocument.create(body: "@#{user.login}", user: create(:user)).destroy
     end.not_to change(user.notifications.unread, :count)
+  end
+
+  it 'should not mention Team' do
+    team = create :team
+    user1 = create :user
+    doc = TestDocument.create body: "@#{team.login} @#{user1.login}", user: create(:user)
+    doc.extract_mentioned_users
+    assert_equal doc.mentioned_user_ids, [user1.id]
+
+    expect do
+      TestDocument.create body: "@#{team.login}", user: create(:user)
+    end.to change(Notification, :count).by(0)
   end
 
   it 'should send mention to reply_to user' do

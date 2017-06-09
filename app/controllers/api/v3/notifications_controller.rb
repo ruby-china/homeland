@@ -14,7 +14,7 @@ module Api
         optional! :offset, default: 0
         optional! :limit, default: 20, values: 1..150
 
-        @notifications = Notification.where(user_id: current_user.id).order('id desc')
+        @notifications = Notification.where(user_id: current_user.id).order("id desc")
                                      .offset(params[:offset])
                                      .limit(params[:limit])
       end

@@ -5,7 +5,7 @@ module Searchable
     include Elasticsearch::Model
 
     after_commit on: :create do
-      SearchIndexer.perform_later('index', self.class.name, self.id)
+      SearchIndexer.perform_later("index", self.class.name, self.id)
     end
 
     after_update do
@@ -14,11 +14,11 @@ module Searchable
         need_update = indexed_changed?
       end
 
-      SearchIndexer.perform_later('index', self.class.name, self.id) if need_update
+      SearchIndexer.perform_later("index", self.class.name, self.id) if need_update
     end
 
     after_commit on: :destroy do
-      SearchIndexer.perform_later('delete', self.class.name, self.id)
+      SearchIndexer.perform_later("delete", self.class.name, self.id)
     end
   end
 end

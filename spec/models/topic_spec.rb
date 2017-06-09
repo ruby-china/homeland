@@ -268,16 +268,21 @@ describe Topic, type: :model do
 
   describe 'Search methods' do
     let(:t) { create :topic }
+
+    before(:each) do
+      t.reload
+    end
+
     describe '.indexed_changed?' do
       it 'title changed work' do
         expect(t.indexed_changed?).to eq false
-        t.title = t.title + '1'
+        t.update(title: t.title + '1')
         expect(t.indexed_changed?).to eq true
       end
 
       it 'body changed work' do
         expect(t.indexed_changed?).to eq false
-        t.body = t.body + '1'
+        t.update(body: t.body + '1')
         expect(t.indexed_changed?).to eq true
       end
 
@@ -288,6 +293,7 @@ describe Topic, type: :model do
         t.who_deleted = '122'
         t.last_active_mark = Time.now.to_i
         t.suggested_at = Time.now
+        t.save
         expect(t.indexed_changed?).to eq false
       end
     end

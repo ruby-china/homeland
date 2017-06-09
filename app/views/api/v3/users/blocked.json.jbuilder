@@ -1,1 +1,1 @@
-json.blocked @users, partial: 'user', as: :user
+json.blocked @users, partial: "user", as: :user

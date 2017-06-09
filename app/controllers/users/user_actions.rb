@@ -20,7 +20,7 @@ module Users
     end
 
     def favorites
-      @topics = @user.favorite_topics.order('actions.id desc')
+      @topics = @user.favorite_topics.order("actions.id desc")
       @topics = @topics.page(params[:page])
     end
 
@@ -39,7 +39,7 @@ module Users
         render_404
       end
 
-      @block_users = @user.block_users.order('actions.id asc').page(params[:page])
+      @block_users = @user.block_users.order("actions.id asc").page(params[:page])
     end
 
     def follow
@@ -53,14 +53,14 @@ module Users
     end
 
     def followers
-      @users = @user.follow_by_users.order('actions.id asc')
+      @users = @user.follow_by_users.order("actions.id asc")
       @users = @users.page(params[:page]).per(60)
     end
 
     def following
-      @users = @user.follow_users.order('actions.id asc')
+      @users = @user.follow_users.order("actions.id asc")
       @users = @users.page(params[:page]).per(60)
-      render template: '/users/followers'
+      render template: "/users/followers"
     end
 
     def calendar

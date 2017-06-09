@@ -16,6 +16,13 @@ Style/Documentation:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
+Style/StringLiterals:
+  Enabled: true
+  EnforcedStyle: double_quotes
+
+Style/UnneededPercentQ:
+  Enabled: true
+
 Style/AsciiComments:
   Enabled: false
 

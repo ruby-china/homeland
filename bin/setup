@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
-require 'pathname'
+require "pathname"
 
 # path to your application root.
-APP_ROOT = Pathname.new File.expand_path('../../', __FILE__)
+APP_ROOT = Pathname.new File.expand_path("../../", __FILE__)
 
 ROW_SIZE = 80
 
@@ -20,10 +20,10 @@ end
 
 def puts_section(info, &block)
   puts info
-  puts '-' * ROW_SIZE
+  puts "-" * ROW_SIZE
   yield block
-  puts '-' * ROW_SIZE
-  puts ''
+  puts "-" * ROW_SIZE
+  puts ""
 end
 
 def puts_line(info, &block)
@@ -31,9 +31,9 @@ def puts_line(info, &block)
   rsize = ROW_SIZE - info.length
   success = yield block
   if success == false
-    puts '[Failed]'.rjust(rsize).colorize(:red)
+    puts "[Failed]".rjust(rsize).colorize(:red)
   else
-    puts '[Done]'.rjust(rsize).colorize(:green)
+    puts "[Done]".rjust(rsize).colorize(:green)
   end
 end
 
@@ -42,15 +42,15 @@ def puts_line_with_yn(info, &block)
   rsize = ROW_SIZE - info.length
   success = yield block
   if success == false
-    puts '[No]'.rjust(rsize).colorize(:red)
+    puts "[No]".rjust(rsize).colorize(:red)
   else
-    puts '[Yes]'.rjust(rsize).colorize(:green)
+    puts "[Yes]".rjust(rsize).colorize(:green)
   end
 end
 
 def replace_file(file_name, from, to)
-  File.open(file_name, 'r+') do |f|
-    out = ''
+  File.open(file_name, "r+") do |f|
+    out = ""
     f.each do |line|
       out << line.gsub(from, to)
     end
@@ -64,11 +64,11 @@ Dir.chdir APP_ROOT do
   # This script is a starting point to setup your application.
   # Add necessary setup steps to this file.
 
-  puts_section 'Checking Package Dependencies...' do
+  puts_section "Checking Package Dependencies..." do
     pkg_exist = true
-    [['psql', 'PostgreSQL 9.4+'], ['redis-server', 'Redis 2.0+'], ['memcached', 'Memcached 1.4+']].each do |item|
+    [["psql", "PostgreSQL 9.4+"], ["redis-server", "Redis 2.0+"], ["memcached", "Memcached 1.4+"]].each do |item|
       puts_line_with_yn item[1] do
-        if `which #{item[0]}` == ''
+        if `which #{item[0]}` == ""
           pkg_exist = false
           false
         else
@@ -80,32 +80,32 @@ Dir.chdir APP_ROOT do
     exit(0) if pkg_exist == false
   end
 
-  puts_section 'Installing dependencies' do
-    system 'gem install bundler --conservative'
-    system 'bundle check || bundle install'
+  puts_section "Installing dependencies" do
+    system "gem install bundler --conservative"
+    system "bundle check || bundle install"
   end
 
   # Config files
-  puts_section 'Configure' do
+  puts_section "Configure" do
     %w(database config redis secrets elasticsearch).each do |fname|
       system "cp config/#{fname}.yml.default config/#{fname}.yml"
     end
 
-    print 'Your Redis host (default: 127.0.0.1:6379):'
+    print "Your Redis host (default: 127.0.0.1:6379):"
     host = gets.strip
-    host = '127.0.0.1:6379' if host == ''
-    replace_file('config/redis.yml', '127.0.0.1', host.split(':')[0])
-    replace_file('config/redis.yml', '6379', host.split(':')[1])
+    host = "127.0.0.1:6379" if host == ""
+    replace_file("config/redis.yml", "127.0.0.1", host.split(":")[0])
+    replace_file("config/redis.yml", "6379", host.split(":")[1])
   end
 
-  puts_line 'Seed default data...' do
+  puts_line "Seed default data..." do
     `RAILS_ENV=development bundle exec rake db:setup`
   end
 
   puts "\n== Removing old logs and tempfiles =="
-  system 'rm -f log/*'
-  system 'rm -rf tmp/cache'
+  system "rm -f log/*"
+  system "rm -rf tmp/cache"
 
-  puts ''
-  puts 'Homeland Successfully Installed.'
+  puts ""
+  puts "Homeland Successfully Installed."
 end

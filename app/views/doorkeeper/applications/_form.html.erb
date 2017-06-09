@@ -3,7 +3,7 @@
     <% if application.new_record? %>注册新应用<% else %>修改应用信息<% end %>
   </div>
   <div class="panel-body">
-    <%= form_for application, url: doorkeeper_submit_path(application), html: { role: 'form'} do |f| %>
+    <%= form_with(model: application, url: doorkeeper_submit_path(application), html: { role: 'form'}) do |f| %>
       <% if application.errors.any? %>
         <div class="alert alert-danger" data-alert><p><%= t('doorkeeper.applications.form.error') %></p></div>
       <% end %>

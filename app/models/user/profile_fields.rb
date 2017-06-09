@@ -9,12 +9,12 @@ class User
                           facebook instagram dribbble battle_tag psn_id steam_id)
 
       PROFILE_FIELD_PREFIXS = {
-        douban: 'https://www.douban.com/people/',
-        weibo: 'https://weibo.com/',
-        facebook: 'https://facebook.com/',
-        instagram: 'https://instagram.com/',
-        dribbble: 'https://dribbble.com/',
-        battle_tag: '#'
+        douban: "https://www.douban.com/people/",
+        weibo: "https://weibo.com/",
+        facebook: "https://facebook.com/",
+        instagram: "https://instagram.com/",
+        dribbble: "https://dribbble.com/",
+        battle_tag: "#"
       }
     end
 
@@ -36,7 +36,7 @@ class User
       v = profile_field(field)
       prefix = User.profile_field_prefix(field)
       return v if prefix.blank?
-      [prefix, v].join('')
+      [prefix, v].join("")
     end
 
     def update_profile_fields(field_values)

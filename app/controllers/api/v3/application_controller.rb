@@ -35,16 +35,16 @@ module Api
       class PageNotFound < StandardError; end
 
       rescue_from(ActionController::ParameterMissing) do |err|
-        render json: { error: 'ParameterInvalid', message: err }, status: 400
+        render json: { error: "ParameterInvalid", message: err }, status: 400
       end
       rescue_from(ActiveRecord::RecordInvalid) do |err|
-        render json: { error: 'RecordInvalid', message: err }, status: 400
+        render json: { error: "RecordInvalid", message: err }, status: 400
       end
       rescue_from(AccessDenied) do |err|
-        render json: { error: 'AccessDenied', message: err }, status: 403
+        render json: { error: "AccessDenied", message: err }, status: 403
       end
       rescue_from(ActiveRecord::RecordNotFound) do
-        render json: { error: 'ResourceNotFound' }, status: 404
+        render json: { error: "ResourceNotFound" }, status: 404
       end
 
       def requires!(name, opts = {})
@@ -72,7 +72,7 @@ module Api
       end
 
       def error_404!
-        error!({ 'error' => 'Page not found' }, 404)
+        error!({ "error" => "Page not found" }, 404)
       end
 
       def current_user

@@ -12,19 +12,19 @@ module Homeland
 
         @text.gsub!(YOUTUBE_URL_REGEXP) do
           youtube_id = Regexp.last_match(5)
-          close_tag = Regexp.last_match(1) if ['<br>', '<div>'].include? Regexp.last_match(1)
+          close_tag = Regexp.last_match(1) if ["<br>", "<div>"].include? Regexp.last_match(1)
           src = "//www.youtube.com/embed/#{youtube_id}"
           params = []
           params << "wmode=#{wmode}" if wmode
-          params << 'autoplay=1' if autoplay
-          params << 'rel=0' if hide_related
+          params << "autoplay=1" if autoplay
+          params << "rel=0" if hide_related
           src += "?#{params.join '&'}" unless params.empty?
           embed_tag(close_tag, src)
         end
 
         @text.gsub!(VIMEO_URL_REGEXP) do
           vimeo_id = Regexp.last_match(4)
-          close_tag = Regexp.last_match(1) if ['<br>', '<div>'].include? Regexp.last_match(1)
+          close_tag = Regexp.last_match(1) if ["<br>", "<div>"].include? Regexp.last_match(1)
           src = "https://player.vimeo.com/video/#{vimeo_id}"
           embed_tag(close_tag, src)
         end
@@ -32,7 +32,7 @@ module Homeland
         @text.gsub!(YOUKU_URL_REGEXP) do
           youku_id = Regexp.last_match(4)
           src = "//player.youku.com/embed/#{youku_id}"
-          close_tag = Regexp.last_match(1) if ['<br>', '<div>'].include? Regexp.last_match(1)
+          close_tag = Regexp.last_match(1) if ["<br>", "<div>"].include? Regexp.last_match(1)
           embed_tag(close_tag, src)
         end
 

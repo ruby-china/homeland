@@ -1,6 +1,6 @@
-require 'redcarpet'
-require 'rouge/plugins/redcarpet'
-require 'nokogiri'
+require "redcarpet"
+require "rouge/plugins/redcarpet"
+require "nokogiri"
 
 module Homeland
   class Pipeline
@@ -49,7 +49,7 @@ module Homeland
 
         def header(text, header_level)
           l = header_level <= 2 ? 2 : header_level
-          raw_text = Nokogiri::HTML(text).xpath('//text()')
+          raw_text = Nokogiri::HTML(text).xpath("//text()")
           %(<h#{l} id="#{raw_text}">#{text}</h#{l}>)
         end
 
@@ -58,7 +58,7 @@ module Homeland
         # ![](foo.jpg =300x200)
         # Example: https://gist.github.com/uupaa/f77d2bcf4dc7a294d109
         def image(link, title, alt_text)
-          links = link.split(' ')
+          links = link.split(" ")
           link = links[0]
           if links.count > 1
             # 原本 Markdown 的 title 部分是需要引号的 ![](foo.jpg "Title")
@@ -80,7 +80,7 @@ module Homeland
         # Fix Chinese neer the URL
         def autolink(link, link_type)
           # return link
-          if link_type.to_s == 'email'
+          if link_type.to_s == "email"
             link
           else
             begin
@@ -92,7 +92,7 @@ module Homeland
             end
             # Fix Chinese neer the URL
             bad_text = link.match(%r{[^\w:@/\-~,$!.=?&#+|%]+}im).to_s
-            link.gsub!(bad_text, '')
+            link.gsub!(bad_text, "")
             %(<a href="#{link}" rel="nofollow" target="_blank">#{link}</a>#{bad_text})
           end
         end

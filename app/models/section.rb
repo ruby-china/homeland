@@ -20,6 +20,6 @@ class Section < ApplicationRecord
   end
 
   def self.default
-    @default ||= Section.first || Section.create(name: '分享')
+    @default ||= Section.first || Section.create(name: "分享")
   end
 end

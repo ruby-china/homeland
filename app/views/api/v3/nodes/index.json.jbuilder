@@ -1,1 +1,1 @@
-json.nodes @nodes, partial: 'node', as: :node
+json.nodes @nodes, partial: "node", as: :node

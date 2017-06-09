@@ -713,7 +713,6 @@ describe 'markdown' do
         <h2 id="Syntax Guide - Heading 2">Syntax Guide - Heading 2</h2><h3 id="Strong and Emphasize - Heading 3">Strong and Emphasize - Heading 3</h3><h4 id="Heading 4">Heading 4</h4><h5 id="Heading 5">Heading 5</h5><h6 id="Heading 6">Heading 6</h6><pre class="highlight plaintext"><code>*emphasize*    **strong**
         _emphasize_    __strong__
         </code></pre>
-
         <hr>
 
         <p><strong>Shortcuts</strong></p>

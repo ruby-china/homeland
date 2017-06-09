@@ -1,4 +1,4 @@
-require 'html/pipeline'
+require "html/pipeline"
 
 context = {
   gfm: true,

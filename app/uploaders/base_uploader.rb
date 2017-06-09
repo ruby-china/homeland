@@ -14,7 +14,7 @@ class BaseUploader < CarrierWave::Uploader::Base
 
   def store_dir
     dir = model.class.to_s.underscore
-    if Setting.upload_provider == 'file'
+    if Setting.upload_provider == "file"
       dir = "uploads/#{dir}"
     end
     dir
@@ -33,12 +33,12 @@ class BaseUploader < CarrierWave::Uploader::Base
     end
 
     case Setting.upload_provider
-    when 'aliyun'
+    when "aliyun"
       super(thumb: "?x-oss-process=image/#{aliyun_thumb_key(version_name)}")
-    when 'upyun'
-      [@url, version_name].join('!')
+    when "upyun"
+      [@url, version_name].join("!")
     else
-      [@url, version_name].join('!')
+      [@url, version_name].join("!")
     end
   end
 
@@ -46,13 +46,13 @@ class BaseUploader < CarrierWave::Uploader::Base
 
   def aliyun_thumb_key(version_name)
     case version_name
-    when 'large' then 'resize,w_1920'
-    when 'lg'    then 'resize,w_192,h_192,m_fill'
-    when 'md'    then 'resize,w_96,h_96,m_fill'
-    when 'sm'    then 'resize,w_48,h_48,m_fill'
-    when 'xs'    then 'resize,w_32,h_32,m_fill'
+    when "large" then "resize,w_1920"
+    when "lg"    then "resize,w_192,h_192,m_fill"
+    when "md"    then "resize,w_96,h_96,m_fill"
+    when "sm"    then "resize,w_48,h_48,m_fill"
+    when "xs"    then "resize,w_32,h_32,m_fill"
     else
-      'resize,w_32,h_32,m_fill'
+      "resize,w_32,h_32,m_fill"
     end
   end
 end

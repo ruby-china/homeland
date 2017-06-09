@@ -8,7 +8,7 @@ class SessionsController < Devise::SessionsController
     sign_in(resource_name, resource)
     respond_to do |format|
       format.html { redirect_back_or_default(root_url) }
-      format.json { render status: '201', json: resource.as_json(only: [:login, :email]) }
+      format.json { render status: "201", json: resource.as_json(only: [:login, :email]) }
     end
   end
 

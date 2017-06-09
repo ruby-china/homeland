@@ -11,9 +11,9 @@ module Admin
 
     def update
       if @location.update(params[:location].permit!)
-        redirect_to(admin_locations_path, notice: 'Location 更新成功。')
+        redirect_to(admin_locations_path, notice: "Location 更新成功。")
       else
-        render action: 'edit'
+        render action: "edit"
       end
     end
 

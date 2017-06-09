@@ -22,7 +22,7 @@ class User
 
     def github_repo_api_url
       github_login = self.github || self.login
-      resource_name = organization? ? 'orgs' : 'users'
+      resource_name = organization? ? "orgs" : "users"
       "https://api.github.com/#{resource_name}/#{github_login}/repos?type=owner&sort=pushed&client_id=#{Setting.github_token}&client_secret=#{Setting.github_secret}"
     end
 
@@ -43,11 +43,11 @@ class User
         items = JSON.parse(json)
         items = items.collect do |a1|
           {
-            name: a1['name'],
-            url: a1['html_url'],
-            watchers: a1['watchers'],
-            language: a1['language'],
-            description: a1['description']
+            name: a1["name"],
+            url: a1["html_url"],
+            watchers: a1["watchers"],
+            language: a1["language"],
+            description: a1["description"]
           }
         end
         items.sort! { |a, b| b[:watchers] <=> a[:watchers] }.take(10)

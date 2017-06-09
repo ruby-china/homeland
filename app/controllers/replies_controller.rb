@@ -11,20 +11,20 @@ class RepliesController < ApplicationController
 
     if @reply.save
       current_user.read_topic(@topic)
-      @msg = t('topics.reply_success')
+      @msg = t("topics.reply_success")
     else
-      @msg = @reply.errors.full_messages.join('<br />')
+      @msg = @reply.errors.full_messages.join("<br />")
     end
   end
 
   def index
     last_id = params[:last_id].to_i
     if last_id == 0
-      render plain: ''
+      render plain: ""
       return
     end
 
-    @replies = Reply.unscoped.where('topic_id = ? and id > ?', @topic.id, last_id).order(:id).all
+    @replies = Reply.unscoped.where("topic_id = ? and id > ?", @topic.id, last_id).order(:id).all
     current_user&.read_topic(@topic, replies_ids: @replies.collect(&:id))
   end
 
@@ -47,9 +47,9 @@ class RepliesController < ApplicationController
 
   def destroy
     if @reply.destroy
-      redirect_to(topic_path(@reply.topic_id), notice: '回帖删除成功。')
+      redirect_to(topic_path(@reply.topic_id), notice: "回帖删除成功。")
     else
-      redirect_to(topic_path(@reply.topic_id), alert: '程序异常，删除失败。')
+      redirect_to(topic_path(@reply.topic_id), alert: "程序异常，删除失败。")
     end
   end
 

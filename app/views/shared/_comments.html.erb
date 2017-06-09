@@ -17,7 +17,7 @@ new_comment = Comment.new(commentable_type: commentable.class.name, commentable_
 <% if @current_user %>
   <div id="<%= commentable.class.name %>_<%= commentable.id %>_cell_new_comment" class="cell_comments_new panel panel-default">
     <div class="panel-heading">发表新评论</div>
-    <%= form_for(new_comment, remote: true, html: { class: "panel-body" }) do |f| %>
+    <%= form_with(model: new_comment, remote: true, html: { class: "panel-body" }) do |f| %>
       <%= f.hidden_field :commentable_type %>
       <%= f.hidden_field :commentable_id %>
       <div class="form-group">

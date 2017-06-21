@@ -43,7 +43,7 @@ Rails.application.routes.draw do
 
   delete 'account/auth/:provider/unbind', to: 'users#auth_unbind', as: 'unbind_account'
 
-  mount RuCaptcha::Engine, at: '/rucaptcha'
+  # mount RuCaptcha::Engine, at: '/rucaptcha'
   mount Notifications::Engine, at: '/notifications'
   mount StatusPage::Engine, at: '/'
 

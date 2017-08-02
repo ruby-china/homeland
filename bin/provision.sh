@@ -20,6 +20,7 @@ sudo apt-get install -y git \
                         imagemagick \
                         nodejs \
                         libpq-dev \
+                        zlib1g-dev \
                         postgresql-9.4 \
                         elasticsearch \
                         openjdk-7-jre-headless \

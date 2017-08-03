@@ -30,6 +30,7 @@ sudo apt-get install -y apt-transport-https \
                         ruby2.4-dev
 
 echo "ES_JAVA_OPTS='-Xms128m -Xmx1g'" | sudo tee -a /etc/default/elasticsearch
+sudo update-rc.d elasticsearch defaults 95 10
 sudo service elasticsearch start
 
 sudo su postgres -c "createuser -d -R -S $USER"

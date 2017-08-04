@@ -8,8 +8,3 @@ Node.create(name: 'Apple', summary: '...', section_id: s2.id)
 Node.create(name: 'Google', summary: '...', section_id: s2.id)
 Node.create(name: 'Coding', summary: '...', section_id: s2.id)
 Node.create(name: 'PlayStation / XBox', summary: '...', section_id: s2.id)
-
-# ============ create elasticsearch index ================
-Topic.__elasticsearch__.create_index!
-User.__elasticsearch__.create_index!
-Page.__elasticsearch__.create_index! if Setting.has_module?(:wiki)

@@ -1,0 +1,55 @@
+<div class="row">
+  <%= render 'menu' %>
+
+  <div class="col-md-8">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-8">
+            <%= simple_form_for(@user, url: setting_path, method: :put, html: { enctype:  "multipart/form-data" }) do |f| %>
+              <%= render "shared/error_messages", target: @user %>
+              <input type="hidden" name="by" value="reward" />
+
+              <% User::REWARD_FIELDS.each do |field| %>
+              <div class="form-group form-group-reward-field-<%= field %>">
+                <label class="control-label" for="user_reward_<%= field %>"><%= User.reward_field_label(field) %></label>
+                <input class="form-control" type="file" name="user[rewards][<%= field %>]" id="user_reward_<%= field %>">
+                <p class="help-block">
+                  <% if field == :alipay %>
+                  打开支付宝客户端：右上角 “+” -> 我要收款 -> 设定金额 -> 保存二维码图片
+                  <% elsif field == :wechat %>
+                  打开微信手机客户端：右上角 “+” -> 收付款 -> 我要收款 -> 保存二维码图片
+                  <% end %>
+                </p>
+              </div>
+
+                <% if @user.reward_field(field) %>
+                <div class="form-group">
+                  <div class="reward-image">
+                    <img src="<%= @user.reward_field(field) %>" >
+                  </div>
+                </div>
+                <% end %>
+              <% end %>
+
+              <div class="form-actions hide-ios">
+                <button type="submit" class="btn btn-lg btn-primary" data-disable-with="<%= t("common.saving") %>"><%= t("users.update_profile")%></button>
+              </div>
+            <% end %>
+          </div>
+          <div class="col-md-4">
+            <div class="markdown">
+              <%= markdown("### :gift: 关于打赏\n\n
+
+              打赏功能为了鼓励分享而设计。
+
+              上传你的微信、支付宝 **收款二维码**，之后打赏按钮将会出现在 “个人主页” 和 “文章末尾” 显示。
+              ") %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>

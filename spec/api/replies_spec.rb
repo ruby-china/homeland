@@ -52,9 +52,7 @@ describe 'API V3', 'replies', type: :request do
       expect(response.status).to eq(200)
       reply.reload
       expect(json['reply']['body']).to eq 'bar dar'
-      expect(json['reply']['body_html']).to eq reply.body_html
       expect(reply.body).to eq 'bar dar'
-      expect(reply.body_html).to eq '<p>bar dar</p>'
     end
 
     it 'should work by admin' do

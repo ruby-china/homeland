@@ -1,10 +1,6 @@
 'zh-CN':
   simple_form:
     hints:
-      site:
-        desc: '100字左右的介绍'
-        url: "别忘了要写 http:// 哦!"
-        favicon: '此网站的 Favicon，不填将会用 Google 来分析此网站的图标.'
       user:
         location: "请用中文填写所在城市"
         email: "保存以后就不可以改了哦！"
@@ -36,7 +32,6 @@
         tagline: "签名"
         state: "状态"
         verified: "信任用户"
-        hr: "招聘人员"
         company: "公司"
         github: "GitHub"
         remember_me: "记住登陆状态（60 天）"

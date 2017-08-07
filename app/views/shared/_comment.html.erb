@@ -7,7 +7,7 @@
       <span class="name"><%= user_name_tag(comment.user) %></span> 发表于 <%= timeago(comment.created_at) %>
     </div>
     <div class="body markdown">
-      <%= raw comment.body_html %>
+      <%= comment.body_html %>
     </div>
   </div>
 </div>

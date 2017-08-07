@@ -14,12 +14,12 @@
   transition: all .25s ease-in-out;
 }
 .fluidbox-wrap {
-
   background-position: center center;
   background-size: cover;
   margin: 0 auto;
   position: relative;
   transition: all .25s ease-in-out;
+  text-align: center;
 }
 .fluidbox-ghost {
   background-size: cover;

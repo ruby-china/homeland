@@ -10,8 +10,6 @@ describe UsersController, type: :controller do
       expect(response.status).to eq(404)
       get :topics, params: { id: deleted_user.login }
       expect(response.status).to eq(404)
-      get :notes, params: { id: deleted_user.login }
-      expect(response.status).to eq(404)
     end
   end
 
@@ -25,6 +23,12 @@ describe UsersController, type: :controller do
   describe ':show' do
     it 'should show user' do
       get :show, params: { id: user.login }
+      expect(response).to be_success
+    end
+
+    it 'should show team user' do
+      team = create(:team)
+      get :show, params: { id: team.login }
       expect(response).to be_success
     end
   end
@@ -55,9 +59,63 @@ describe UsersController, type: :controller do
     end
   end
 
-  describe ':notes' do
-    it 'should show user notes' do
-      get :notes, params: { id: user.login }
+  describe ':block' do
+    it 'should work' do
+      sign_in user
+      get :block, params: { id: user.login }
+      expect(response).to be_success
+    end
+  end
+
+  describe ':unblock' do
+    it 'should work' do
+      sign_in user
+      get :unblock, params: { id: user.login }
+      expect(response).to be_success
+    end
+  end
+
+  describe ':blocked' do
+    it 'should work' do
+      sign_in user
+      get :blocked, params: { id: user.login }
+      expect(response).to be_success
+    end
+
+    it 'render 404 for wrong user' do
+      user2 = create(:user)
+      sign_in user
+      get :blocked, params: { id: user2.login }
+      expect(response.status).to eq 404
+    end
+  end
+
+  describe ':follow' do
+    it 'should work' do
+      sign_in user
+      get :follow, params: { id: user.login }
+      expect(response).to be_success
+    end
+  end
+
+  describe ':unfollow' do
+    it 'should work' do
+      sign_in user
+      get :unfollow, params: { id: user.login }
+      expect(response).to be_success
+    end
+  end
+
+  describe ':followers' do
+    it 'should work' do
+      get :followers, params: { id: user.login }
+      expect(response).to be_success
+    end
+  end
+
+  describe ':following' do
+    it 'should work' do
+      get :following, params: { id: user.login }
       expect(response).to be_success
     end
   end
@@ -79,6 +137,15 @@ describe UsersController, type: :controller do
     it 'should work' do
       get :calendar, params: { id: user.login }
       expect(response.status).to eq(200)
+    end
+  end
+
+  describe '.reward' do
+    it 'should not allow user close' do
+      user.update_reward_fields(alipay: 'XXXXXXX')
+      get :reward, params: { id: user.login }, xhr: true
+      expect(response).to be_success
+      expect(response.body).to include('XXXXXXX')
     end
   end
 end

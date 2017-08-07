@@ -19,15 +19,6 @@ describe Node, type: :model do
         expect(Node.no_point.id).to eq 61
       end
     end
-
-    describe '.job' do
-      it 'should work' do
-        expect(Node.job).to be_a(Node)
-        expect(Node.job.new_record?).to eq false
-        expect(Node.job.name).to eq '招聘'
-        expect(Node.job.id).to eq 25
-      end
-    end
   end
 
   describe 'CacheVersion update' do
@@ -67,11 +58,11 @@ describe Node, type: :model do
     let(:node) { create(:node) }
     it 'should work' do
       expect(node.collapse_summary?).to eq false
-      node.update_attributes(summary: "foo\n\nbar")
+      node.update(summary: "foo\n\nbar")
       expect(node.collapse_summary?).to eq false
-      node.update_attributes(summary: "foo\n\nbar\n\ndar")
+      node.update(summary: "foo\n\nbar\n\ndar")
       expect(node.collapse_summary?).to eq true
-      node.update_attributes(summary: "foo\n\n- bar\n- dar")
+      node.update(summary: "foo\n\n- bar\n- dar")
       expect(node.collapse_summary?).to eq true
     end
   end

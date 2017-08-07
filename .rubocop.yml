@@ -1,17 +1,41 @@
 AllCops:
-  Rails:
-    Enabled: true
   Exclude:
+    - 'vendor/**/*'
     - 'lib/templates/**/*'
-  TargetRubyVersion: 2.3
+    - 'lib/tasks/release.rake'
+    - 'spec/**/*'
+    - 'app/models/cache_version.rb'
+    - 'Gemfile'
+    - 'db/**/*'
+    - 'config/**/*'
+  TargetRubyVersion: 2.4
 
 Style/Documentation:
   Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/StringLiterals:
+  Enabled: true
+  EnforcedStyle: double_quotes
+
+Style/UnneededPercentQ:
+  Enabled: true
 
 Style/AsciiComments:
   Enabled: false
 
 Style/IfUnlessModifier:
+  Enabled: false
+
+Style/NumericPredicate:
+  EnforcedStyle: comparison
+
+Style/PredicateName:
+  Enabled: false
+
+Style/GuardClause:
   Enabled: false
 
 Style/RedundantSelf:
@@ -33,6 +57,9 @@ Metrics/MethodLength:
   Max: 1200
 
 Metrics/ModuleLength:
+  Max: 1200
+
+Metrics/BlockLength:
   Max: 1200
 
 Metrics/CyclomaticComplexity:
@@ -57,4 +84,10 @@ Rails/FindBy:
   Enabled: false
 
 Rails/HasAndBelongsToMany:
+  Enabled: false
+
+Style/EmptyMethod:
+  EnforcedStyle: expanded
+
+Style/LambdaCall:
   Enabled: false

@@ -1,5 +1,5 @@
 class Location < ApplicationRecord
-  acts_as_cached version: 1, expires_in: 1.week
+  second_level_cache expires_in: 2.weeks
 
   has_many :users
 
@@ -12,7 +12,7 @@ class Location < ApplicationRecord
   def self.location_find_by_name(name)
     return nil if name.blank?
     name = name.downcase.strip
-    where('name ~* ?', name).first
+    where("name ~* ?", name).first
   end
 
   def self.location_find_or_create_by_name(name)

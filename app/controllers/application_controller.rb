@@ -39,8 +39,8 @@ class ApplicationController < ActionController::Base
   before_action :set_active_menu
   def set_active_menu
     @current = case controller_name
-               when 'pages'
-                 ['/wiki']
+               when "pages"
+                 ["/wiki"]
                else
                  ["/#{controller_name}"]
                end
@@ -66,17 +66,20 @@ class ApplicationController < ActionController::Base
 
   def render_optional_error_file(status_code)
     status = status_code.to_s
-    fname = %w(404 403 422 500).include?(status) ? status : 'unknown'
-    render template: "/errors/#{fname}", format: [:html],
-           handler: [:erb], status: status, layout: 'application'
+    fname = %w(404 403 422 500).include?(status) ? status : "unknown"
+
+    respond_to do |format|
+      format.html { render template: "/errors/#{fname}", handler: [:erb], status: status, layout: "application" }
+      format.all  { render nothing: true, status: status }
+    end
   end
 
   rescue_from CanCan::AccessDenied do |_exception|
-    redirect_to topics_path, alert: t('common.access_denied')
+    redirect_to main_app.root_path, alert: t("common.access_denied")
   end
 
   def store_location
-    session[:return_to] = request.request_uri
+    session[:return_to] = request.url
   end
 
   def redirect_back_or_default(default)
@@ -94,11 +97,15 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user!(opts = {})
+    return if current_user
     if turbolinks_app?
-      render plain: '401 Unauthorized', status: 401 if current_user.blank?
-    else
-      super(opts)
+      render plain: "401 Unauthorized", status: 401
+      return
     end
+
+    store_location
+
+    super(opts)
   end
 
   def current_user
@@ -113,30 +120,34 @@ class ApplicationController < ActionController::Base
   end
 
   def turbolinks_app?
-    @turbolinks_app ||= request.user_agent.to_s.include?('turbolinks-app')
+    @turbolinks_app ||= request.user_agent.to_s.include?("turbolinks-app")
   end
 
   def turbolinks_ios?
-    @turbolinks_ios ||= turbolinks_app? && request.user_agent.to_s.include?('iOS')
+    @turbolinks_ios ||= turbolinks_app? && request.user_agent.to_s.include?("iOS")
   end
 
   # read turbolinks app version
   # example: version:2.1
   def turbolinks_app_version
-    return '' if !turbolinks_app?
+    return "" unless turbolinks_app?
     return @turbolinks_app_version if defined? @turbolinks_app_version
     version_str = request.user_agent.to_s.match(/version:[\d\.]+/).to_s
-    @turbolinks_app_version = version_str.split(':').last
-    return @turbolinks_app_version
+    @turbolinks_app_version = version_str.split(":").last
+    @turbolinks_app_version
   end
 
   # Require Setting enabled module, else will render 404 page.
   def self.require_module_enabled!(name)
     before_action do
-      if !Setting.has_module?(name)
+      unless Setting.has_module?(name)
         render_404
       end
     end
+  end
+
+  def require_no_sso!
+    redirect_to auth_sso_path if Setting.sso_enabled?
   end
 
   private

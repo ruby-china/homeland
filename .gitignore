@@ -22,6 +22,7 @@ public/uploads/**/*
 public/system/**/*
 public/topics
 public/topics/**/*
+public/doc
 .redcar
 .DS_Store
 *.swp
@@ -38,3 +39,4 @@ chromedriver.log
 spec/examples.txt
 .vagrant
 .byebug_history
+.ruby-version

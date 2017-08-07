@@ -10,10 +10,7 @@
       topics: "帖子"
       replies: "回覆"
       photos: "圖片"
-      notes: "記事本"
       comments: "評論"
-      site_nodes: "酷站類別"
-      sites: "酷站"
       locations: "城市"
       exception_logs: "異常"
     overview: "概覽"
@@ -25,6 +22,5 @@
       edit_setting: "修改設置"
     users:
       trust_user_can_modify_wiki: "信任用戶將可以修改 Wiki"
-      hr_user_can_create_topic: "招聘人員角色可以忽略新手限制直接發帖"
     topic_list: "話題列表"
     check_photo: "瀏覽圖片"

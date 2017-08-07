@@ -5,7 +5,7 @@
         <%= user_name_tag(item.user) %> <%= t("common.published_at") %> <%= timeago(item.created_at) %>
       </div>
       <div class="body markdown">
-        <%= sanitize item.body_html %>
+        <%= item.body_html %>
       </div>
     </div>
 </div>

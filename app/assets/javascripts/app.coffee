@@ -4,7 +4,7 @@
 #= require jquery.mobile-events
 #= require underscore
 #= require backbone
-#= require will_paginate
+#= require pagination
 #= require jquery.timeago
 #= require jquery.timeago.settings
 #= require jquery.hotkeys
@@ -21,9 +21,8 @@
 #= require action_cable
 #= require form_storage
 #= require topics
-#= require pages
-#= require notes
 #= require editor
+#= require toc
 #= require turbolinks
 #= require google_analytics
 #= require jquery.infinitescroll.min
@@ -57,11 +56,7 @@ AppView = Backbone.View.extend
     if $('body').data('controller-name') in ['topics', 'replies']
       window._topicView = new TopicView({parentView: @})
 
-    if $('body').data('controller-name') in ['pages']
-      window._pageView = new PageView({parentView: @})
-
-    if $('body').data('controller-name') in ['notes']
-      window._noteView = new NoteView({parentView: @})
+    window._tocView = new TOCView({parentView: @})
 
   initComponents: () ->
     $("abbr.timeago").timeago()
@@ -116,7 +111,7 @@ AppView = Backbone.View.extend
     $("a[rel=twipsy]").tooltip()
 
     # CommentAble @ 回复功能
-    App.atReplyable(".cell_comments_new textarea")
+    App.mentionable(".cell_comments_new textarea")
 
   likeable : (e) ->
     if !App.isLogined()
@@ -166,11 +161,7 @@ AppView = Backbone.View.extend
     if !window.notificationChannel && App.isLogined()
       window.notificationChannel = App.cable.subscriptions.create "NotificationsChannel",
         connected: ->
-          setTimeout =>
-            @subscribe()
-            $(window).on 'unload', -> window.notificationChannel.unsubscribe()
-            $(document).on 'page:change', -> window.notificationChannel.subscribe()
-          , 1000
+          @subscribe()
 
         received: (data) =>
           @receivedNotificationCount(data)
@@ -178,11 +169,8 @@ AppView = Backbone.View.extend
         subscribe: ->
           @perform 'subscribed'
 
-        unsubscribe: ->
-          @perform 'unsubscribed'
-
   receivedNotificationCount : (json) ->
-    console.log 'receivedNotificationCount', json
+    # console.log 'receivedNotificationCount', json
     span = $(".notification-count span")
     link = $(".notification-count a")
     new_title = document.title.replace(/^\(\d+\) /,'')
@@ -362,16 +350,31 @@ window.App =
 
   # scan logins in jQuery collection and returns as a object,
   # which key is login, and value is the name.
-  scanLogins: (query) ->
-    result = {}
+  scanMentionableLogins: (query) ->
+    result = []
+    logins = []
     for e in query
       $e = $(e)
-      result[$e.text()] = $e.attr('data-name')
-    result
+      item =
+        login: $e.find(".user-name").first().text()
+        name: $e.find(".user-name").first().attr('data-name')
+        avatar_url: $e.find(".avatar img").first().attr("src")
 
-  atReplyable : (el, logins) ->
+      continue if not item.login
+      continue if not item.name
+      continue if logins.indexOf(item.login) != -1
+
+      logins.push(item.login)
+      result.push(item)
+
+    console.log result
+    _.uniq(result)
+
+  mentionable : (el, logins) ->
+    logins = [] if !logins
     $(el).atwho
       at : "@"
+      limit: 8
       searchKey: 'login'
       callbacks:
         filter: (query, data, searchKey) ->
@@ -379,12 +382,26 @@ window.App =
         sorter: (query, items, searchKey) ->
           return items
         remoteFilter: (query, callback) ->
+          r = new RegExp("^#{query}")
+          # 过滤出本地匹配的数据
+          localMatches = _.filter logins, (u) ->
+            return r.test(u.login) || r.test(u.name)
+          # Remote 匹配
           $.getJSON '/search/users.json', { q: query }, (data) ->
+            # 本地的排前面
+            for u in localMatches
+              data.unshift(u)
+            # 去重复
+            data = _.uniq data, false, (item) ->
+              return item.login;
+            # 限制数量
+            data = _.first(data, 8)
             callback(data)
       displayTpl : "<li data-value='${login}'><img src='${avatar_url}' height='20' width='20'/> ${login} <small>${name}</small></li>"
       insertTpl : "@${login}"
     .atwho
       at : ":"
+      limit: 8
       searchKey: 'code'
       data : window.EMOJI_LIST
       displayTpl : "<li data-value='${code}'><img src='#{App.twemoji_url}/svg/${url}.svg' class='twemoji' /> ${code} </li>"

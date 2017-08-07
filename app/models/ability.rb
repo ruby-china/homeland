@@ -22,11 +22,8 @@ class Ability
   def roles_for_members
     roles_for_topics
     roles_for_replies
-    roles_for_notes
-    roles_for_pages
     roles_for_comments
     roles_for_photos
-    roles_for_sites
     roles_for_teams
     roles_for_team_users
     basic_read_only
@@ -52,29 +49,15 @@ class Ability
 
   def roles_for_replies
     # 新手用户晚上禁止回帖，防 spam，可在面板设置是否打开
-    can :create, Reply if !current_lock_reply?
-    cannot :create, Reply, topic: { closed?: true }
+    can :create, Reply unless current_lock_reply?
     can [:update, :destroy], Reply, user_id: user.id
+    cannot [:create, :update, :destroy], Reply, topic: { closed?: true }
   end
 
   def current_lock_reply?
-    return false if !user.newbie?
-    return false if Setting.reject_newbie_reply_in_the_evening != 'true'
-    return Time.zone.now.hour > 22 || Time.zone.now.hour < 9
-  end
-
-  def roles_for_notes
-    can :create, Note
-    can [:update, :destroy, :read], Note, user_id: user.id
-    can :read, Note, publish: true
-  end
-
-  def roles_for_pages
-    if user.roles?(:wiki_editor)
-      can :create, Page
-      can :edit, Page, locked: false
-      can :update, Page, locked: false
-    end
+    return false unless user.newbie?
+    return false if Setting.reject_newbie_reply_in_the_evening != "true"
+    Time.zone.now.hour > 22 || Time.zone.now.hour < 9
   end
 
   def roles_for_photos
@@ -88,12 +71,6 @@ class Ability
     can :create, Comment
     can :update, Comment, user_id: user.id
     can :destroy, Comment, user_id: user.id
-  end
-
-  def roles_for_sites
-    if user.roles?(:site_editor)
-      can :create, Site
-    end
   end
 
   def roles_for_teams
@@ -113,13 +90,9 @@ class Ability
 
   def basic_read_only
     can [:read, :feed, :node], Topic
-    can :read, Reply
-    can [:read, :recent, :preview, :comments], Page
-    can :preview, Note
+    can [:read, :reply_to], Reply
     can :read, Photo
-    can :read, Site
     can :read, Section
-    can :read, Node
     can :read, Comment
     can :read, Team
   end

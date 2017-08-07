@@ -6,14 +6,14 @@ module Admin
       @topics = Topic.unscoped
       if params[:q].present?
         qstr = "%#{params[:q].downcase}%"
-        @topics = @topics.where('title LIKE ?', qstr)
+        @topics = @topics.where("title LIKE ?", qstr)
       end
       if params[:login].present?
         u = User.find_by_login(params[:login])
-        @topics = @topics.where('user_id = ?', u.try(:id))
+        @topics = @topics.where("user_id = ?", u.try(:id))
       end
       @topics = @topics.order(id: :desc)
-      @topics = @topics.includes(:user).paginate(page: params[:page], per_page: 30)
+      @topics = @topics.includes(:user).page(params[:page])
     end
 
     def show
@@ -30,17 +30,17 @@ module Admin
       @topic = Topic.new(params[:topic].permit!)
 
       if @topic.save
-        redirect_to(admin_topics_path, notice: 'Topic was successfully created.')
+        redirect_to(admin_topics_path, notice: "Topic was successfully created.")
       else
-        render action: 'new'
+        render action: "new"
       end
     end
 
     def update
-      if @topic.update_attributes(params[:topic].permit!)
-        redirect_to(admin_topics_path, notice: 'Topic was successfully updated.')
+      if @topic.update(params[:topic].permit!)
+        redirect_to(admin_topics_path, notice: "Topic was successfully updated.")
       else
-        render action: 'edit'
+        render action: "edit"
       end
     end
 

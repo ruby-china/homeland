@@ -6,22 +6,7 @@ Rails.application.routes.draw do
                 authorized_applications: 'oauth/authorized_applications'
   end
 
-  resources :sites
-  resources :pages, path: 'wiki' do
-    collection do
-      get :recent
-      post :preview
-    end
-    member do
-      get :comments
-    end
-  end
   resources :comments
-  resources :notes do
-    collection do
-      post :preview
-    end
-  end
   resources :devices
   resources :teams
 
@@ -38,14 +23,29 @@ Rails.application.routes.draw do
     registrations: :account,
     sessions: :sessions,
     passwords: :passwords,
-    omniauth_callbacks: 'users/omniauth_callbacks'
+    omniauth_callbacks: 'auth/omniauth_callbacks'
   }
 
-  delete 'account/auth/:provider/unbind', to: 'users#auth_unbind', as: 'unbind_account'
+  resource :setting do
+    member do
+      get :account
+      get :password
+      get :profile
+      get :reward
+    end
+  end
 
-  mount RuCaptcha::Engine, at: '/rucaptcha'
-  mount Notifications::Engine, at: '/notifications'
-  mount StatusPage::Engine, at: '/'
+  # SSO
+  namespace :auth do
+    resource :sso, controller: 'sso' do
+      collection do
+        get :login
+        get :provider
+      end
+    end
+  end
+
+  delete 'setting/auth/:provider', to: 'settings#auth_unbind'
 
   resources :nodes do
     member do
@@ -65,6 +65,7 @@ Rails.application.routes.draw do
       delete :unfavorite
       post :follow
       delete :unfollow
+      get :ban
       post :action
     end
     collection do
@@ -75,12 +76,15 @@ Rails.application.routes.draw do
       get :feed, defaults: { format: 'xml' }
       post :preview
     end
-    resources :replies
+    resources :replies do
+      member do
+        get :reply_to
+      end
+    end
   end
 
   resources :photos
   resources :likes
-  resources :jobs
 
   get '/search', to: 'search#index', as: 'search'
   get '/search/users', to: 'search#users', as: 'search_users'
@@ -98,32 +102,14 @@ Rails.application.routes.draw do
     end
     resources :nodes
     resources :sections
-    resources :users do
+    resources :users, constraints: { id: /[#{User::LOGIN_FORMAT}]*/ } do
       member do
         delete :clean
       end
     end
     resources :photos
-    resources :pages do
-      resources :versions, controller: :page_versions do
-        member do
-          post :revert
-        end
-      end
-    end
     resources :comments
-    resources :site_nodes
-    resources :sites do
-      member do
-        post :undestroy
-      end
-    end
     resources :locations
-    resources :exception_logs do
-      collection do
-        post :clean
-      end
-    end
     resources :applications
     resources :stats
   end
@@ -187,11 +173,13 @@ Rails.application.routes.draw do
   end
 
   authenticate :user, ->(u) { u.admin? } do
-    mount Sidekiq::Web, at: '/sidekiq'
+    mount Sidekiq::Web, at: 'sidekiq'
     mount PgHero::Engine, at: "pghero"
+    mount ExceptionTrack::Engine, at: "exception-track"
   end
 
-  mount JasmineRails::Engine, at: '/specs' if defined?(JasmineRails)
+  mount Notifications::Engine, at: 'notifications'
+  mount StatusPage::Engine, at: '/'
 
   # WARRING! 请保持 User 的 routes 在所有路由的最后，以便于可以让用户名在根目录下面使用，而又不影响到其他的 routes
   # 比如 http://localhost:3000/huacnlee
@@ -205,7 +193,6 @@ Rails.application.routes.draw do
         get :topics
         get :replies
         get :favorites
-        get :notes
         get :blocked
         post :block
         post :unblock
@@ -214,6 +201,7 @@ Rails.application.routes.draw do
         get :followers
         get :following
         get :calendar
+        get :reward
       end
 
       resources :team_users, path: 'people' do

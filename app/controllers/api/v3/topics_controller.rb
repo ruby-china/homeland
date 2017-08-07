@@ -13,9 +13,9 @@ module Api
       # @param offset [Integer] default: 0
       # @param limit [Integer] default: 20, range: 1..150
       #
-      # @return [Array<TopicTopicSerializer>]
+      # @return [Array<TopicSerializer>]
       def index
-        optional! :type, default: 'last_actived'
+        optional! :type, default: "last_actived"
         optional! :node_id
         optional! :offset, default: 0
         optional! :limit, default: 20, values: 1..150
@@ -25,8 +25,8 @@ module Api
         if params[:node_id].blank?
           @topics = Topic
           if current_user
-            @topics = @topics.without_nodes(current_user.blocked_node_ids)
-            @topics = @topics.without_users(current_user.blocked_user_ids)
+            @topics = @topics.without_nodes(current_user.block_node_ids)
+            @topics = @topics.without_users(current_user.block_user_ids)
           else
             @topics = @topics.without_hide_nodes
           end
@@ -38,12 +38,11 @@ module Api
         @topics = @topics.fields_for_list.includes(:user).send(scope_method_by_type)
         if %w(no_reply popular).index(params[:type])
           @topics = @topics.last_actived
-        elsif params[:type] == 'excellent'
+        elsif params[:type] == "excellent"
           @topics = @topics.recent
         end
 
         @topics = @topics.offset(params[:offset]).limit(params[:limit])
-        render json: @topics
       end
 
       # 获取话题详情（不含回帖）
@@ -58,17 +57,15 @@ module Api
       # ```
       def show
         @topic.hits.incr(1)
-        meta = { followed: false, liked: false, favorited: false }
+        @meta = { followed: false, liked: false, favorited: false }
 
         if current_user
           # 处理通知
           current_user.read_topic(@topic)
-          meta[:followed] = @topic.followed?(current_user.id)
-          meta[:liked] = current_user.liked?(@topic)
-          meta[:favorited] = current_user.favorited_topic?(@topic.id)
+          @meta[:followed] = current_user.follow_topic?(@topic)
+          @meta[:liked] = current_user.like_topic?(@topic)
+          @meta[:favorited] = current_user.favorite_topic?(@topic)
         end
-
-        render json: @topic, serializer: TopicDetailSerializer, meta: meta
       end
 
       # 创建新话题
@@ -84,13 +81,13 @@ module Api
         requires! :body
         requires! :node_id
 
-        raise AccessDenied.new('当前登录的用户没有发帖权限，具体请参考官网的相关说明。') unless can?(:create, Topic)
+        raise AccessDenied.new("当前登录的用户没有发帖权限，具体请参考官网的相关说明。") unless can?(:create, Topic)
 
         @topic = current_user.topics.new(title: params[:title], body: params[:body])
         @topic.node_id = params[:node_id]
         @topic.save!
 
-        render json: @topic, serializer: TopicDetailSerializer
+        render "show"
       end
 
       # 更新话题
@@ -121,7 +118,7 @@ module Api
         @topic.body = params[:body]
         @topic.save!
 
-        render json: @topic, serializer: TopicDetailSerializer
+        render "show"
       end
 
       # 删除话题
@@ -150,18 +147,8 @@ module Api
 
         @replies = Reply.unscoped.where(topic_id: @topic.id).order(:id).includes(:user)
         @replies = @replies.offset(params[:offset].to_i).limit(params[:limit].to_i)
-
-        @user_liked_reply_ids = []
-        if current_user
-          # 找出用户 like 过的 Reply，给 JS 处理 like 功能的状态
-          @replies.each do |r|
-            unless r.liked_user_ids.index(current_user.id).nil?
-              @user_liked_reply_ids << r.id
-            end
-          end
-        end
-
-        render json: @replies, meta: { user_liked_reply_ids: @user_liked_reply_ids }
+        @user_liked_reply_ids = current_user&.like_reply_ids_by_replies(@replies) || []
+        @meta = { user_liked_reply_ids: @user_liked_reply_ids }
       end
 
       # 创建对话题的回帖
@@ -175,19 +162,19 @@ module Api
 
         requires! :body
 
-        raise AccessDenied.new('当前用户没有回帖权限，具体请参考官网的说明。') unless can?(:create, Reply)
+        raise AccessDenied.new("当前用户没有回帖权限，具体请参考官网的说明。") unless can?(:create, Reply)
 
         @reply = @topic.replies.build(body: params[:body])
         @reply.user_id = current_user.id
         @reply.save!
-        render json: @reply
+        render "api/v3/replies/show"
       end
 
       # 关注话题
       #
       # POST /api/v3/topics/:id/follow
       def follow
-        @topic.push_follower(current_user.id)
+        current_user.follow_topic(@topic)
         render json: { ok: 1 }
       end
 
@@ -195,7 +182,7 @@ module Api
       #
       # POST /api/v3/topics/:id/unfollow
       def unfollow
-        @topic.pull_follower(current_user.id)
+        current_user.unfollow_topic(@topic)
         render json: { ok: 1 }
       end
 
@@ -220,7 +207,7 @@ module Api
       #
       # POST /api/v3/topics/:id/ban
       def ban
-        raise AccessDenied.new('当前用户没有屏蔽别人话题的权限，具体请参考官网的说明。') unless can?(:ban, @topic)
+        raise AccessDenied.new("当前用户没有屏蔽别人话题的权限，具体请参考官网的说明。") unless can?(:ban, @topic)
         @topic.ban!
         render json: { ok: 1 }
       end
@@ -234,15 +221,15 @@ module Api
         raise AccessDenied unless can?(params[:type].to_sym, @topic)
 
         case params[:type]
-        when 'excellent'
+        when "excellent"
           @topic.excellent!
-        when 'unexcellent'
+        when "unexcellent"
           @topic.unexcellent!
-        when 'ban'
+        when "ban"
           @topic.ban!
-        when 'close'
+        when "close"
           @topic.close!
-        when 'open'
+        when "open"
           @topic.open!
         end
         render json: { ok: 1 }
@@ -256,11 +243,11 @@ module Api
 
       def scope_method_by_type
         case params[:type]
-        when 'last_actived' then :last_actived
-        when 'recent' then :recent
-        when 'no_reply' then :no_reply
-        when 'popular' then :popular
-        when 'excellent' then :excellent
+        when "last_actived" then :last_actived
+        when "recent" then :recent
+        when "no_reply" then :no_reply
+        when "popular" then :popular
+        when "excellent" then :excellent
         else
           :last_actived
         end

@@ -1,6 +1,6 @@
 # RailsSettings Model
 class Setting < RailsSettings::Base
-  source Rails.root.join('config/config.yml')
+  source Rails.root.join("config/config.yml")
 
   # List setting value separator chars
   SEPARATOR_REGEXP = /[\s,]/
@@ -27,14 +27,15 @@ class Setting < RailsSettings::Base
     apns_pem
     blacklist_ips
     admin_emails
+    ban_reasons
   )
 
   class << self
     def protocol
-      self.https == true ? 'https' : 'http'
+      self.https == true ? "https" : "http"
     end
 
-    def host
+    def base_url
       [self.protocol, self.domain].join("://")
     end
 
@@ -44,13 +45,30 @@ class Setting < RailsSettings::Base
     end
 
     def has_module?(name)
-      return true if self.modules.blank? || self.modules == 'all'
-      self.modules.split(SEPARATOR_REGEXP).include?(name.to_s)
+      return true if self.modules.blank? || self.modules == "all"
+      self.module_list.include?(name.to_s)
+    end
+
+    def module_list
+      self.modules.split(SEPARATOR_REGEXP)
+    end
+
+    def ban_reason_list
+      (self.ban_reasons || "").split("\n")
     end
 
     def has_profile_field?(name)
-      return true if self.profile_fields.blank? || self.profile_fields == 'all'
+      return true if self.profile_fields.blank? || self.profile_fields == "all"
       self.profile_fields.split(SEPARATOR_REGEXP).include?(name.to_s)
+    end
+
+    def sso_enabled?
+      return false if self.sso_provider_enabled?
+      self.sso["enable"] == true
+    end
+
+    def sso_provider_enabled?
+      self.sso["enable_provider"] == true
     end
   end
 end

@@ -11,18 +11,18 @@
 
       <div class="panel-body item-list">
         <% if @suggest_topics.present? %>
-          <%= cache(['topics', 'suggest', @topics]) do %>
-            <%= render partial: '/topics/topic', collection: @suggest_topics, locals: { suggest: true } %>
-          <% end %>
+          <%= render partial: '/topics/topic', collection: @suggest_topics, locals: { suggest: true } %>
         <% end %>
 
-        <%= cache(['topics', 'normal', @topics]) do %>
-          <%= render partial: '/topics/topic', collection: @topics, locals: { suggest: false } %>
-        <% end %>
+        <%= render partial: '/topics/topic', collection: @topics, locals: { suggest: false } %>
       </div>
 
       <div class="panel-footer clearfix">
-        <%= will_paginate @topics %>
+        <% if action_name.in? %(index recent) %>
+          <%= paginate @topics, total_pages: Topic.total_pages %>
+        <% else %>
+          <%= paginate @topics %>
+        <% end %>
       </div>
     </div>
 

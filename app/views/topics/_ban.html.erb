@@ -1,0 +1,30 @@
+<div class="modal" id="ban-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_for('', url: action_topic_path(topic, type: "ban"), method: "post") do |f| %>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>选择原因</label>
+          <select class="form-control" onchange="$('#ban-modal textarea').val($(this).val())" name="reason">
+            <option value="" selected>直接屏蔽</option>
+            <% Setting.ban_reason_list.each do |str| %>
+            <option value="<%= str %>"><%= str %></option>
+            <% end %>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>或手工输入原因:</label>
+          <textarea class="form-control" name="reason_text" rows="4"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">确定</button>
+        <a class="btn btn-default" data-dismiss="modal">取消</a>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

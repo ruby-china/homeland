@@ -3,7 +3,7 @@ module Admin
     before_action :set_photo, only: [:show, :destroy]
 
     def index
-      @photos = Photo.recent.includes(:user).paginate(page: params[:page], per_page: 20)
+      @photos = Photo.recent.includes(:user).page(params[:page])
     end
 
     def destroy

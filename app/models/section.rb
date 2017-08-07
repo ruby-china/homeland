@@ -1,5 +1,9 @@
 class Section < ApplicationRecord
+<<<<<<< HEAD
   second_level_cache version: 1, expires_in: 1.week
+=======
+  second_level_cache expires_in: 2.weeks
+>>>>>>> 793cb369927cda773c0575efc71ee8fcfe052f5c
 
   has_many :nodes, dependent: :destroy
 
@@ -20,6 +24,6 @@ class Section < ApplicationRecord
   end
 
   def self.default
-    @default ||= Section.first || Section.create(name: '分享')
+    @default ||= Section.first || Section.create(name: "分享")
   end
 end

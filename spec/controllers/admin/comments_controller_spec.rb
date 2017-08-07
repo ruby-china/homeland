@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe Admin::CommentsController, type: :controller do
   let(:user) { create :user }
-  let(:comment) { create :comment, user: user }
+  let(:comment) { create :comment, user: user, commentable: CommentablePage.create(name: 'Fake Wiki', id: 1)}
 
   before do
     sign_in create(:admin)
@@ -27,7 +27,7 @@ describe Admin::CommentsController, type: :controller do
     describe 'with valid params' do
       it 'updates the requested comment' do
         comment_param = { body: '123' }
-        # expect_any_instance_of(Comment).to receive(:update_attributes).with("body" => '123')
+        # expect_any_instance_of(Comment).to receive(:update).with("body" => '123')
         put :update, params: { id: comment.id, comment: comment_param }
         comment.reload
         expect(comment.body).to eq '123'

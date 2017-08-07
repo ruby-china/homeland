@@ -20,9 +20,14 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  contents: Contents
   omniauth:
     github: GitHub
     twitter: Twitter
+  sso:
+    timeout_expired: 'SSO Token was expired.'
+    unknown_error: 'Sorry, this have an unknown error with SSO login.'
+    not_found: 'Sorry, this have an unknown error with SSO login.'
   activerecord:
     models:
       user: "User"
@@ -45,7 +50,6 @@ en:
         tagline: "Tagline"
         state: "Status"
         verified: "Verified"
-        hr: "Recruiter"
         company: "Company"
         github: "GitHub"
         remember_me: "Remember me"
@@ -72,28 +76,12 @@ en:
         body: "Content"
       reply:
         body: "Reply Content"
-      note:
-        title: "Title"
-      post:
-        title: "Title"
-        body: "Content"
-        tag_list: "Tags"
-        source: "Source"
-        source_url: "Source Url"
       page:
         slug: Slug
         title: "Title"
         body: "Content"
         locked: "Lock"
         change_desc: "Change Description"
-      site:
-        name: "Name"
-        url: "URL"
-        desc: "Description"
-        site_node_id: "Category"
-      exception_log:
-        title: Abstract
-        body: Details
     errors:
       models:
         user: "User"

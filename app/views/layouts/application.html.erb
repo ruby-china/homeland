@@ -6,7 +6,7 @@
   | | | | (_) | | | | | |  __/ | (_| | | | | (_| |
   \_| |_/\___/|_| |_| |_|\___|_|\__,_|_| |_|\__,_|
   ------------------------------------------------
-                            http://gethomeland.com
+                          https://gethomeland.com
 
   - Ruby:  <%= RUBY_VERSION %><%= "-p#{RUBY_PATCHLEVEL}" if defined? RUBY_PATCHLEVEL %>
   - Rails: <%= Rails.version %>
@@ -18,12 +18,12 @@
   <meta charset='utf-8' />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <title><%= content_for?(:title) ? yield(:title) : Setting.app_name %></title>
-  <link rel="icon" href="<%= asset_path('favicon.png') %>" />
   <meta name="apple-mobile-web-app-capable" content="no">
   <meta content='True' name='HandheldFriendly' />
   <link rel="alternate" type="application/rss+xml" title="订阅最新帖" href="<%= main_app.feed_topics_url %>" />
   <%= stylesheet_link_tag "front", 'data-turbolinks-track': "reload" %>
   <%= stylesheet_link_tag "turbolinks-app", 'data-turbolinks-track': 'reload' if turbolinks_app? %>
+  <%= yield :stylesheets %>
   <%= action_cable_meta_tag %>
   <%= csrf_meta_tag %>
   <%= raw Setting.custom_head_html %>
@@ -32,16 +32,23 @@
   <% end %>
 
   <%= javascript_include_tag "app", 'data-turbolinks-track': "reload" %>
+  <%= yield :javascripts %>
 </head>
 <body class="page-<%= controller_name %><%= ' infinite-scroll' if turbolinks_app? %>" data-controller-name="<%= controller_name %>">
   <div class="header">
     <nav class="navbar navbar-inverse navbar-fixed-top navbar-default">
       <div class="container">
         <div class="navbar-header" id="navbar-header" data-turbolinks-permanent>
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar-collapse">
+            <span class="sr-only">Toggle</span>
+            <i class="fa fa-reorder"></i>
+          </button>
           <%= raw Setting.navbar_brand_html %>
         </div>
-        <%= yield :header %>
-        <%= render "shared/navbar" %>
+        <div class="collapse navbar-collapse" id="main-navbar-collapse">
+          <%= yield :header %>
+          <%= render "shared/navbar" %>
+        </div>
         <%= render "shared/usernav" %>
       </div>
     </nav>
@@ -52,7 +59,7 @@
   <div id="main" class="main-container container">
     <%= birthday_tag %>
     <%= notice_message %>
-    <%= yield %>
+    <%= content_for?(:main) ? yield(:main) : yield %>
   </div>
 
   <% if not mobile? %>

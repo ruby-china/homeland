@@ -3,7 +3,7 @@ class <%= controller_class_name %>Controller < <%= controller_class_name.include
 
   def index
     @<%= plural_file_name %> = <%= file_name.camelize %>.desc('_id')
-    @<%= plural_file_name %> = @<%= plural_file_name %>.paginate(page: params[:page], per_page: 30)
+    @<%= plural_file_name %> = @<%= plural_file_name %>.page(params[:page])
   end
 
   def show
@@ -27,7 +27,7 @@ class <%= controller_class_name %>Controller < <%= controller_class_name.include
   end
 
   def update
-    if @<%= file_name %>.update_attributes(params[:<%= file_name %>].permit!)
+    if @<%= file_name %>.update(params[:<%= file_name %>].permit!)
       redirect_to(<%= index_helper %>_path, notice: '<%= human_name %> 更新成功。')
     else
       render action: "edit"

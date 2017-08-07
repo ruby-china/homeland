@@ -1,11 +1,11 @@
-<% cache([topic, suggest]) do %>
+<% cache([topic, topic.user_avatar_raw, suggest]) do %>
 <div class="topic media topic-<%= topic.id %>">
   <div class="avatar media-left">
     <%= user_avatar_tag(topic.user, :md) %>
   </div>
   <div class="infos media-body">
     <div class="title media-heading">
-      <%= link_to(topic_path(topic), title: topic.title) do %>
+      <%= link_to(main_app.topic_path(topic), title: topic.title) do %>
         <%= raw content_tag(:span, topic.node_name, class: 'node') %>
         <%= topic.title %>
       <% end %>
@@ -29,7 +29,7 @@
   </div>
   <div class="count media-right">
     <% if topic.replies_count > 0 %>
-      <%= link_to(topic.replies_count,"#{topic_path(topic)}#reply#{topic.replies_count}", class: "state-false") %>
+      <%= link_to(topic.replies_count,"#{main_app.topic_path(topic)}#reply-#{topic.last_reply_id}", class: "state-false") %>
     <% end %>
   </div>
 </div>

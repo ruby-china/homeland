@@ -25,27 +25,6 @@ describe Topic, type: :model do
     expect(create(:topic, node: node).node_name).to eq(node.name)
   end
 
-  describe '#push_follower, #pull_follower' do
-    let(:t) { create(:topic, user_id: 0) }
-    it 'should push' do
-      t.push_follower user.id
-      expect(t.follower_ids.include?(user.id)).to be_truthy
-      expect(t.followed?(user.id)).to eq(true)
-    end
-
-    it 'should pull' do
-      t.pull_follower user.id
-      expect(t.follower_ids.include?(user.id)).not_to be_truthy
-    end
-
-    it 'should not push when current_user is topic creater' do
-      allow(t).to receive(:user_id).and_return(user.id)
-      expect(t.push_follower(user.id)).to eq(false)
-      expect(t.follower_ids.include?(user.id)).not_to be_truthy
-      expect(t.followed?(user.id)).to eq(false)
-    end
-  end
-
   it 'should update after reply' do
     reply = create :reply, topic: topic, user: user
     expect(topic.last_active_mark).not_to be_nil
@@ -72,11 +51,6 @@ describe Topic, type: :model do
     expect(topic.last_active_mark).to eq(old_last_active_mark)
   end
 
-  it 'should covert body with Markdown on create' do
-    t = create(:topic, body: '*foo*')
-    expect(t.body_html).to eq('<p><em>foo</em></p>')
-  end
-
   it 'should get page and floor by reply' do
     replies = []
     5.times do
@@ -84,23 +58,6 @@ describe Topic, type: :model do
     end
     expect(topic.floor_of_reply(replies[2])).to eq(3)
     expect(topic.floor_of_reply(replies[3])).to eq(4)
-  end
-
-  it 'should covert body on save' do
-    t = create(:topic, body: '*foo*')
-    old_html = t.body_html
-    t.body = '*bar*'
-    t.save
-    expect(t.body_html).not_to eq(old_html)
-  end
-
-  it 'should not store body_html when it not changed' do
-    t = create(:topic, body: '*foo*')
-    t.body = '*fooaa*'
-    allow(t).to receive(:body_changed?).and_return(false)
-    old_html = t.body_html
-    t.save
-    expect(t.body_html).to eq(old_html)
   end
 
   it 'should log deleted user name when use destroy_by' do
@@ -258,6 +215,17 @@ describe Topic, type: :model do
       expect(t.node_id).to eq Node.no_point.id
       expect(t.lock_node).to eq true
     end
+
+    it 'should ban! with reason' do
+      allow(User).to receive(:current).and_return(user)
+      t.ban!(reason: "Block this topic")
+      t.reload
+      expect(t.node_id).to eq Node.no_point.id
+      expect(t.lock_node).to eq true
+      r = t.replies.last
+      expect(r.action).to eq "ban"
+      expect(r.body).to eq "Block this topic"
+    end
   end
 
   describe '.reply_ids' do
@@ -295,6 +263,39 @@ describe Topic, type: :model do
         t.unexcellent!
       end.to change(Reply.where(action: 'unexcellent', user: user), :count).by(1)
       expect(t.excellent).to eq 0
+    end
+  end
+
+  describe 'Search methods' do
+    let(:t) { create :topic }
+
+    before(:each) do
+      t.reload
+    end
+
+    describe '.indexed_changed?' do
+      it 'title changed work' do
+        expect(t.indexed_changed?).to eq false
+        t.update(title: t.title + '1')
+        expect(t.indexed_changed?).to eq true
+      end
+
+      it 'body changed work' do
+        expect(t.indexed_changed?).to eq false
+        t.update(body: t.body + '1')
+        expect(t.indexed_changed?).to eq true
+      end
+
+      it 'other changed work' do
+        expect(t.indexed_changed?).to eq false
+        t.node_id = 3
+        t.last_reply_id = 3
+        t.who_deleted = '122'
+        t.last_active_mark = Time.now.to_i
+        t.suggested_at = Time.now
+        t.save
+        expect(t.indexed_changed?).to eq false
+      end
     end
   end
 end

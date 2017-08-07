@@ -8,7 +8,6 @@ class TeamsController < ApplicationController
   def index
     @total_team_count = Team.count
     @active_teams = Team.fields_for_list.hot.limit(100)
-    fresh_when([@total_team_count, @active_teams])
   end
 
   def show
@@ -23,9 +22,9 @@ class TeamsController < ApplicationController
     @team = Team.new(team_params)
     @team.owner_id = current_user.id
     if @team.save
-      redirect_to(edit_team_path(@team), notice: '创建成功')
+      redirect_to(edit_team_path(@team), notice: "创建成功")
     else
-      render action: 'new'
+      render action: "new"
     end
   end
 
@@ -33,10 +32,10 @@ class TeamsController < ApplicationController
   end
 
   def update
-    if @team.update_attributes(team_params)
-      redirect_to(edit_team_path(@team), notice: t('common.update_success'))
+    if @team.update(team_params)
+      redirect_to(edit_team_path(@team), notice: t("common.update_success"))
     else
-      render action: 'edit'
+      render action: "edit"
     end
   end
 

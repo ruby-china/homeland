@@ -1,7 +1,6 @@
 require 'redis'
 require 'redis-namespace'
 require 'redis/objects'
-require 'ruby-pinyin'
 
 redis_config = Rails.application.config_for(:redis)
 
@@ -15,14 +14,4 @@ Sidekiq.configure_server do |config|
 end
 Sidekiq.configure_client do |config|
   config.redis = { namespace: 'sidekiq', url: sidekiq_url }
-end
-
-# Redis Search
-PinYin.backend = PinYin::Backend::Simple.new
-redis_for_search = Redis::Namespace.new('rc-rs', redis: Redis.new(host: redis_config['host'], port: redis_config['port']))
-redis_for_search.select(2)
-Redis::Search.configure do |config|
-  config.redis = redis_for_search
-  config.complete_max_length = 100
-  config.pinyin_match = true
 end

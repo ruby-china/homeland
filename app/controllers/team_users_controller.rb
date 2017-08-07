@@ -9,9 +9,9 @@ class TeamUsersController < ApplicationController
   def index
     @team_users = @team.team_users
     if cannot? :update, @team
-      @team_users= @team_users.accepted
+      @team_users = @team_users.accepted
     end
-    @team_users = @team_users.order('id asc').includes(:user).paginate(page: params[:page], per_page: 20)
+    @team_users = @team_users.order("id asc").includes(:user).page(params[:page])
   end
 
   def new
@@ -25,9 +25,9 @@ class TeamUsersController < ApplicationController
     @team_user.actor_id = current_user.id
     @team_user.status = :pendding
     if @team_user.save(context: :invite)
-      redirect_to(user_team_users_path(@team), notice: '邀请成功。')
+      redirect_to(user_team_users_path(@team), notice: "邀请成功。")
     else
-      render action: 'new'
+      render action: "new"
     end
   end
 
@@ -35,16 +35,16 @@ class TeamUsersController < ApplicationController
   end
 
   def update
-    if @team_user.update_attributes(params.require(:team_user).permit(:role))
-      redirect_to(user_team_users_path(@team), notice: '保存成功')
+    if @team_user.update(params.require(:team_user).permit(:role))
+      redirect_to(user_team_users_path(@team), notice: "保存成功")
     else
-      render action: 'edit'
+      render action: "edit"
     end
   end
 
   def destroy
     @team_user.destroy
-    redirect_to(user_team_users_path(@team), notice: '移除成功')
+    redirect_to(user_team_users_path(@team), notice: "移除成功")
   end
 
   def show
@@ -55,12 +55,12 @@ class TeamUsersController < ApplicationController
 
   def accept
     @team_user.accepted!
-    redirect_to(user_team_users_path(@team), notice: '接受成功，已加入组织')
+    redirect_to(user_team_users_path(@team), notice: "接受成功，已加入组织")
   end
 
   def reject
     @team_user.destroy
-    redirect_to(user_team_users_path(@team), notice: '已拒绝成功')
+    redirect_to(user_team_users_path(@team), notice: "已拒绝成功")
   end
 
   private

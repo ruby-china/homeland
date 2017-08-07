@@ -1,0 +1,1 @@
+$(".reply[data-id=<%= @reply.id %>] .reply-to-block").replaceWith("<%= j(render('reply_to', reply: @reply, show_body: true)) %>")

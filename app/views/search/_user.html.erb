@@ -1,3 +1,6 @@
+<% if item.organization? %>
+  <%= render 'team', item: item, hit: hit %>
+<% else %>
 <div class="result user media">
   <div class="media">
     <div class="avatar media-left">
@@ -19,3 +22,4 @@
     </div>
   </div>
 </div>
+<% end %>

@@ -75,18 +75,13 @@
   photos:
     upload_and_insert_code: "Upload and insert code"
     uploading: "Uploading"
-  sites:
-    create: Submit a site
   menu:
     topics: "Discussion"
     wiki: "Wiki"
     gems: "Gems"
     users: "Users"
     admin: "Control Panel"
-    notes: "Notes"
     nodes: "Nodes"
-    sites: "Sites"
-    jobs: "Jobs"
     my_home_page: "My home page"
     edit_account_path: "Account Profile"
     likes: "Favorites"
@@ -106,3 +101,7 @@
     recent_topics_title: "%{name} Forum"
     recent_node_topics_description: "Recent Topic in %{node_name} of %{name} Forum."
     recent_node_topics_title: "%{node_name} node of %{name} Forum"
+  pagination:
+    next: "Next &#8594;"
+    prev: "&#8592; Prev"
+    gap: "&hellip;"

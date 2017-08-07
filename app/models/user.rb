@@ -1,19 +1,23 @@
-require 'digest/md5'
+require "digest/md5"
 
 class User < ApplicationRecord
-  include Redis::Search
   include Searchable
   include OmniauthCallbacks
   include Blockable
   include Likeable
   include Followable
   include TopicRead
-  include TopicFavorate
+  include TopicFavorite
   include GithubRepository
   include UserCallbacks
   include ProfileFields
+  include RewardFields
 
+<<<<<<< HEAD
   second_level_cache version: 4, expires_in: 1.week
+=======
+  second_level_cache expires_in: 2.weeks
+>>>>>>> 793cb369927cda773c0575efc71ee8fcfe052f5c
 
   LOGIN_FORMAT = 'A-Za-z0-9\-\_\.'
   ALLOW_LOGIN_FORMAT_REGEXP = /\A[#{LOGIN_FORMAT}]+\z/
@@ -21,23 +25,18 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :lockable,
          :rememberable, :trackable, :validatable, :omniauthable
 
-  redis_search title_field: :login,
-               alias_field: :name,
-               score_field: :index_score,
-               ext_fields: [:large_avatar_url, :name]
-
   mount_uploader :avatar, AvatarUploader
 
   has_many :topics, dependent: :destroy
-  has_many :notes
   has_many :replies, dependent: :destroy
   has_many :authorizations, dependent: :destroy
   has_many :notifications, dependent: :destroy
   has_many :photos
-  has_many :oauth_applications, class_name: 'Doorkeeper::Application', as: :owner
+  has_many :oauth_applications, class_name: "Doorkeeper::Application", as: :owner
   has_many :devices
   has_many :team_users
   has_many :teams, through: :team_users
+  has_one :sso, class_name: "UserSSO", dependent: :destroy
 
   attr_accessor :password_confirmation
 
@@ -47,7 +46,7 @@ class User < ApplicationRecord
 
   enum state: { deleted: -1, normal: 1, blocked: 2 }
 
-  validates :login, format: { with: ALLOW_LOGIN_FORMAT_REGEXP, message: '只允许数字、大小写字母、中横线、下划线' },
+  validates :login, format: { with: ALLOW_LOGIN_FORMAT_REGEXP, message: "只允许数字、大小写字母、中横线、下划线" },
                     length: { in: 2..20 },
                     presence: true,
                     uniqueness: { case_sensitive: false }
@@ -56,9 +55,10 @@ class User < ApplicationRecord
 
   scope :hot, -> { order(replies_count: :desc).order(topics_count: :desc) }
   scope :without_team, -> { where(type: nil) }
-  scope :fields_for_list, -> {
-    select(:type, :id, :name, :login, :email, :email_md5, :email_public, :avatar, :verified, :state,
-           :tagline, :github, :website, :location, :location_id, :twitter, :co, :team_users_count)
+  scope :fields_for_list, lambda {
+    select(:type, :id, :name, :login, :email, :email_md5, :email_public,
+           :avatar, :verified, :state, :tagline, :github, :website, :location,
+           :location_id, :twitter, :team_users_count, :created_at, :updated_at)
   }
 
   def self.find_by_email(email)
@@ -70,8 +70,8 @@ class User < ApplicationRecord
   end
 
   def self.find_by_login(slug)
-    return nil unless slug =~ ALLOW_LOGIN_FORMAT_REGEXP
-    fetch_by_uniq_keys(login: slug) || where('lower(login) = ?', slug.downcase).take
+    return nil unless slug.match? ALLOW_LOGIN_FORMAT_REGEXP
+    fetch_by_uniq_keys(login: slug) || where("lower(login) = ?", slug.downcase).take
   end
 
   def self.find_by_login_or_email(login_or_email)
@@ -83,7 +83,7 @@ class User < ApplicationRecord
     conditions = warden_conditions.dup
     login = conditions.delete(:login)
     login.downcase!
-    where(conditions.to_h).where(['(lower(login) = :value OR lower(email) = :value) and state != -1', { value: login }]).first
+    where(conditions.to_h).where(["(lower(login) = :value OR lower(email) = :value) and state != -1", { value: login }]).first
   end
 
   def self.current
@@ -94,12 +94,28 @@ class User < ApplicationRecord
     Thread.current[:current_user] = user
   end
 
+  def self.search(term, options = {})
+    limit = (options[:limit] || 30).to_i
+    user = options[:user]
+    following = []
+    term = term.to_s + "%"
+    users = User.where("login ilike ? or name ilike ?", term, term).order("replies_count desc").limit(limit).to_a
+    if user
+      following = user.follow_users.where("login ilike ? or name ilike ?", term, term).to_a
+    end
+    users.unshift(*Array(following))
+    users.uniq!
+    users.compact!
+
+    users.first(limit)
+  end
+
   def to_param
     login
   end
 
   def user_type
-    (self[:type] || 'User').underscore.to_sym
+    (self[:type] || "User").underscore.to_sym
   end
 
   def organization?
@@ -107,7 +123,7 @@ class User < ApplicationRecord
   end
 
   def email=(val)
-    self.email_md5 = Digest::MD5.hexdigest(val || '')
+    self.email_md5 = Digest::MD5.hexdigest(val || "")
     self[:email] = val
   end
 
@@ -120,17 +136,17 @@ class User < ApplicationRecord
   end
 
   def github_url
-    return '' if github.blank?
+    return "" if github.blank?
     "https://github.com/#{github.split('/').last}"
   end
 
   def website_url
-    return '' if website.blank?
+    return "" if website.blank?
     website[%r{^https?://}] ? website : "http://#{website}"
   end
 
   def twitter_url
-    return '' if twitter.blank?
+    return "" if twitter.blank?
     "https://twitter.com/#{twitter}"
   end
 
@@ -156,7 +172,7 @@ class User < ApplicationRecord
 
   # 是否能发帖
   def newbie?
-    return false if verified? || hr?
+    return false if verified?
     t = Setting.newbie_limit_time.to_i
     return false if t == 0
     created_at > t.seconds.ago
@@ -175,31 +191,20 @@ class User < ApplicationRecord
   # 用户的账号类型
   def level
     if admin?
-      return 'admin'
+      "admin"
     elsif verified?
-      return 'vip'
-    elsif hr?
-      return 'hr'
+      "vip"
     elsif blocked?
-      return 'blocked'
+      "blocked"
     elsif newbie?
-      return 'newbie'
+      "newbie"
     else
-      return 'normal'
+      "normal"
     end
   end
 
   def level_name
     I18n.t("common.#{level}_user")
-  end
-
-  def update_with_password(params = {})
-    if !params[:current_password].blank? || !params[:password].blank? || !params[:password_confirmation].blank?
-      super
-    else
-      params.delete(:current_password)
-      update_without_password(params)
-    end
   end
 
   # Override Devise to send mails with async
@@ -212,21 +217,21 @@ class User < ApplicationRecord
   end
 
   def bind_service(response)
-    provider = response['provider']
-    uid = response['uid'].to_s
+    provider = response["provider"]
+    uid = response["uid"].to_s
     authorizations.create(provider: provider, uid: uid)
   end
 
   # 软删除
   def soft_delete
-    self.state = 'deleted'
+    self.state = "deleted"
     save(validate: false)
   end
 
   def letter_avatar_url(size)
-    path = LetterAvatar.generate(self.login, size).sub('public/', '/')
+    path = LetterAvatar.generate(self.login, size).sub("public/", "/")
 
-    "#{Setting.protocol}://#{Setting.domain}#{path}"
+    "#{Setting.base_url}#{path}"
   end
 
   def large_avatar_url
@@ -243,23 +248,23 @@ class User < ApplicationRecord
 
   # @example.com 的可以修改邮件地址
   def email_locked?
-    self.email.exclude?('@example.com')
+    self.email.exclude?("@example.com")
   end
 
   def calendar_data
-    Rails.cache.fetch(['user', self.id, 'calendar_data', Date.today, 'by-months']) do
+    Rails.cache.fetch(["user", self.id, "calendar_data", Date.today, "by-months"]) do
       calendar_data_without_cache
     end
   end
 
   def calendar_data_without_cache
     date_from = 12.months.ago.beginning_of_month.to_date
-    replies = self.replies.where('created_at > ?', date_from)
+    replies = self.replies.where("created_at > ?", date_from)
                   .group("date(created_at AT TIME ZONE 'CST')")
                   .select("date(created_at AT TIME ZONE 'CST') AS date, count(id) AS total_amount").all
 
     replies.each_with_object({}) do |reply, timestamps|
-      timestamps[reply['date'].to_time.to_i.to_s] = reply['total_amount']
+      timestamps[reply["date"].to_time.to_i.to_s] = reply["total_amount"]
     end
   end
 
@@ -270,12 +275,14 @@ class User < ApplicationRecord
   end
 
   # for Searchable
-  def index_score
-    0
+  def as_indexed_json(_options = {})
+    as_json(only: [:login, :name, :tagline, :bio, :email, :location])
   end
 
-  # for Searchable
-  def as_indexed_json(_options = {})
-    as_json(only: [:login, :name])
+  def indexed_changed?
+    %i(login name tagline bio email location).each do |key|
+      return true if saved_change_to_attribute?(key)
+    end
+    false
   end
 end

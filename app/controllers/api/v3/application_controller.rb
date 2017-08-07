@@ -2,6 +2,12 @@ module Api
   module V3
     # @abstract
     class ApplicationController < ActionController::API
+      include ActionController::Caching
+      include ActionView::Helpers::OutputSafetyHelper
+      include ApplicationHelper
+
+      helper_method :can?, :current_user, :current_ability, :meta
+      helper_method :admin?, :owner?, :markdown, :raw
 
       # 参数值不在允许的范围内
       # HTTP Status 400
@@ -29,16 +35,16 @@ module Api
       class PageNotFound < StandardError; end
 
       rescue_from(ActionController::ParameterMissing) do |err|
-        render json: { error: 'ParameterInvalid', message: err }, status: 400
+        render json: { error: "ParameterInvalid", message: err }, status: 400
       end
       rescue_from(ActiveRecord::RecordInvalid) do |err|
-        render json: { error: 'RecordInvalid', message: err }, status: 400
+        render json: { error: "RecordInvalid", message: err }, status: 400
       end
       rescue_from(AccessDenied) do |err|
-        render json: { error: 'AccessDenied', message: err }, status: 403
+        render json: { error: "AccessDenied", message: err }, status: 403
       end
       rescue_from(ActiveRecord::RecordNotFound) do
-        render json: { error: 'ResourceNotFound' }, status: 404
+        render json: { error: "ResourceNotFound" }, status: 404
       end
 
       def requires!(name, opts = {})
@@ -47,11 +53,11 @@ module Api
       end
 
       def optional!(name, opts = {})
-        if opts[:require] && !params.has_key?(name)
+        if opts[:require] && !params.key?(name)
           raise ActionController::ParameterMissing.new(name)
         end
 
-        if opts[:values] && params.has_key?(name)
+        if opts[:values] && params.key?(name)
           values = opts[:values].to_a
           if !values.include?(params[name]) && !values.include?(params[name].to_i)
             raise ParameterValueNotAllowed.new(name, opts[:values])
@@ -66,7 +72,7 @@ module Api
       end
 
       def error_404!
-        error!({ 'error' => 'Page not found' }, 404)
+        error!({ "error" => "Page not found" }, 404)
       end
 
       def current_user
@@ -81,9 +87,8 @@ module Api
         current_ability.can?(*args)
       end
 
-      def admin?
-        return false if current_user.blank?
-        current_user.admin?
+      def meta
+        @meta || {}
       end
     end
   end

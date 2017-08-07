@@ -1,2 +1,0 @@
-class ExceptionLog < ApplicationRecord
-end

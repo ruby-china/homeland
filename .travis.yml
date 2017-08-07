@@ -1,6 +1,4 @@
 language: ruby
-env:
-  - USE_OFFICIAL_GEM_SOURCE=1
 
 addons:
   postgresql: "9.4"
@@ -12,17 +10,15 @@ services:
   - elasticsearch
 
 rvm:
-  - 2.3.3
-  - 2.4.0-rc1
-  - ruby-head
+  - 2.4.0
 
 matrix:
   fast_finish: true
   allow_failures:
     - rvm: ruby-head
-    - rvm: 2.4.0-rc1
 
-before_script:
+before_install:
+  - sed -i "s/gems.ruby-china.org/rubygems.org/g" Gemfile.lock
   - psql -c "CREATE USER \"admin\" WITH CREATEDB PASSWORD 'admin';" -U postgres
   - psql -c "create database \"homeland-test\" WITH OWNER=\"admin\";" -U postgres
   - cp config/config.yml.default config/config.yml
@@ -32,6 +28,10 @@ before_script:
   - cp config/secrets.yml.default config/secrets.yml
   - sed -i "s/SETUP_REDIS_HOST/127.0.0.1/g" config/redis.yml
   - sed -i "s/SETUP_REDIS_PORT/6379/g" config/redis.yml
+
+before_script:
   - RAILS_ENV=test bundle exec rake db:migrate
 
-script: RAILS_ENV=test bundle exec rake
+script:
+  - bundle exec rubocop .
+  - RAILS_ENV=test bundle exec rake

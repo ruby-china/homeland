@@ -1,9 +1,0 @@
-"zh-TW":
-  pages:
-    describe_this_time_change: "描述你本次修改的內容。"
-    edit_page: "修改頁面"
-    new_page: "創建新頁面"
-    wiki_index: "Wiki目錄"
-    wiki_page_contributors: "本頁貢獻者:"
-    wiki_page_lock_warning: "抱歉，此頁面已被鎖定，只能管理員才能修改。"
-    comments: '評論'

@@ -77,8 +77,6 @@
   photos:
     upload_and_insert_code: "上傳並插入代碼"
     uploading: "正在上傳"
-  sites:
-    create: 提交網站
   menu:
     home: "首頁"
     topics: "社區"
@@ -86,10 +84,7 @@
     gems: "Gems"
     users: "會員"
     admin: "後臺"
-    notes: "記事本"
     nodes: "節點"
-    sites: "酷站"
-    jobs: "招聘"
     my_home_page: "我的主頁"
     edit_account_path: "個人資料設置"
     likes: "我的收藏"
@@ -128,3 +123,8 @@
     ban_words_on_reply: "回帖禁止內容（一行一個）"
     blacklist_ips: "黑名單 IP 列表，將會直接攔截請求（一行一個）"
     newbie_limit_time: "新註冊用戶（新手）限制期，單位秒（0 不限制），在新手期不能創建新話題，僅能回帖"
+    ban_reasons: "屏蔽原因，將會在屏蔽話題的時候作為選項（一行一個）"
+  pagination:
+    next: "下一頁 &#8594;"
+    prev: "&#8592; 上一頁"
+    gap: "&hellip;"

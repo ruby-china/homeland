@@ -16,15 +16,14 @@ module Api
         limit = params[:limit].to_i
         limit = 100 if limit > 100
         @users = User.fields_for_list.hot.limit(limit)
-        render json: @users
       end
 
       # 获取当前用户的完整信息，用于个人设置修改资料
       #
       # GET /api/v3/users/me
-      # @return [UserDetailSerializer]
       def me
-        render json: current_user, serializer: UserDetailSerializer
+        @user = current_user
+        render "show"
       end
 
       # 获取某个用户的详细信息
@@ -32,14 +31,12 @@ module Api
       # GET /api/v3/users/:id
       # @return [UserDetailSerializer]
       def show
-        meta = { followed: false, blocked: false }
+        @meta = { followed: false, blocked: false }
 
         if current_user
-          meta[:followed] = current_user.followed?(@user)
-          meta[:blocked] = current_user.blocked_user?(@user)
+          @meta[:followed] = current_user.follow_user?(@user)
+          @meta[:blocked] = current_user.block_user?(@user)
         end
-
-        render json: @user, serializer: UserDetailSerializer, meta: meta
       end
 
       # 获取某个用户的话题列表
@@ -52,21 +49,20 @@ module Api
       #
       # @return [Array<TopicSerializer>] 话题列表
       def topics
-        optional! :order, type: String, default: 'recent', values: %w(recent likes replies)
+        optional! :order, type: String, default: "recent", values: %w(recent likes replies)
         optional! :offset, type: Integer, default: 0
         optional! :limit, type: Integer, default: 20, values: 1..150
 
         @topics = @user.topics.fields_for_list
         @topics =
-          if params[:order] == 'likes'
+          if params[:order] == "likes"
             @topics.high_likes
-          elsif params[:order] == 'replies'
+          elsif params[:order] == "replies"
             @topics.high_replies
           else
             @topics.recent
           end
         @topics = @topics.includes(:user).offset(params[:offset]).limit(params[:limit])
-        render json: @topics
       end
 
       # 获取某个用户的回帖列表
@@ -80,14 +76,12 @@ module Api
       #
       # @return [Array<ReplyDetailSerializer>]
       def replies
-        optional! :order, type: String, default: 'recent', values: %w(recent)
+        optional! :order, type: String, default: "recent", values: %w(recent)
         optional! :offset, type: Integer, default: 0
         optional! :limit, type: Integer, default: 20, values: 1..150
 
         @replies = @user.replies.recent
         @replies = @replies.includes(:user, :topic).offset(params[:offset]).limit(params[:limit])
-
-        render json: @replies, each_serializer: ReplyDetailSerializer
       end
 
       # 获取某个用户的收藏列表
@@ -101,10 +95,8 @@ module Api
         optional! :offset, type: Integer, default: 0
         optional! :limit, type: Integer, default: 20, values: 1..150
 
-        @topic_ids = @user.favorite_topic_ids.reverse[params[:offset].to_i, params[:limit].to_i]
-        @topics = Topic.where(id: @topic_ids).fields_for_list.includes(:user)
-        @topics = @topics.to_a.sort_by { |topic| @topic_ids.index(topic.id) }
-        render json: @topics
+        @topics = @user.favorite_topics.includes(:user).order("actions.id desc").offset(params[:offset]).limit(params[:limit])
+        render "topics"
       end
 
       # 获取某个用户关注的人的列表
@@ -113,13 +105,12 @@ module Api
       #
       # @param offset [Integer] default: 0
       # @param limit [Integer] default: 20, range: 1..150
-      # @return <Array[UserSerializer]> 收藏的话题列表
+      # @return <Array[UserSerializer]> 用户列表
       def followers
         optional! :offset, type: Integer, default: 0
         optional! :limit, type: Integer, default: 20, values: 1..150
 
-        @users = @user.followers.fields_for_list.offset(params[:offset]).limit(params[:limit])
-        render json: @users, root: 'followers'
+        @users = @user.follow_by_users.fields_for_list.order("actions.id asc").offset(params[:offset]).limit(params[:limit])
       end
 
       # 获取某个用户的关注者列表
@@ -132,8 +123,7 @@ module Api
         optional! :offset, type: Integer, default: 0
         optional! :limit, type: Integer, default: 20, values: 1..150
 
-        @users = @user.following.fields_for_list.offset(params[:offset]).limit(params[:limit])
-        render json: @users, root: 'following'
+        @users = @user.follow_users.fields_for_list.order("actions.id asc").offset(params[:offset]).limit(params[:limit])
       end
 
       # 获取用户的已屏蔽的人（只能获取自己的）
@@ -146,11 +136,9 @@ module Api
         optional! :offset, type: Integer, default: 0
         optional! :limit, type: Integer, default: 20, values: 1..150
 
-        raise AccessDenied.new('不可以获取其他人的 blocked_users 列表。') if current_user.id != @user.id
+        raise AccessDenied.new("不可以获取其他人的 block_users 列表。") if current_user.id != @user.id
 
-        user_ids = current_user.blocked_user_ids[params[:offset].to_i, params[:limit].to_i]
-        @blocked_users = User.where(id: user_ids)
-        render json: @blocked_users, root: 'blocked'
+        @users = current_user.block_users.fields_for_list.order("actions.id asc").offset(params[:offset]).limit(params[:limit])
       end
 
       # 关注用户

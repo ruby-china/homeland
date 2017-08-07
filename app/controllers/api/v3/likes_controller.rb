@@ -19,6 +19,7 @@ module Api
       # - count [Integer] 已赞的数量
       def create
         current_user.like(likeable)
+        likeable.reload
         data = { obj_type: params[:obj_type], obj_id: likeable.id, count: likeable.likes_count }
         render json: data
       end
@@ -31,6 +32,7 @@ module Api
       # @return (see #create)
       def destroy
         current_user.unlike(likeable)
+        likeable.reload
         data = { obj_type: params[:obj_type], obj_id: likeable.id, count: likeable.likes_count }
         render json: data
       end
@@ -40,7 +42,7 @@ module Api
       def likeable
         return @likeable if defined? @likeable
         @likeable =
-          if params[:obj_type] == 'topic'
+          if params[:obj_type] == "topic"
             Topic.find(params[:obj_id])
           else
             Reply.find(params[:obj_id])

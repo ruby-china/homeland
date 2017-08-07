@@ -1,0 +1,12 @@
+<%
+  reply = notification.target
+  topic = notification.second_target || reply.topic
+%>
+<div class="media-heading">
+  <span class="info">在 <%= topic_title_tag(topic) %> 提及你：</span>
+</div>
+<% if reply.present? %>
+  <div class="media-content summary markdown">
+    <%= reply.body_html %>
+  </div>
+<% end %>

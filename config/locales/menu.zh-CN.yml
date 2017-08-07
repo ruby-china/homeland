@@ -77,8 +77,6 @@
   photos:
     upload_and_insert_code: "上传并插入代码"
     uploading: "正在上传"
-  sites:
-    create: 提交网站
   menu:
     home: "首页"
     topics: "社区"
@@ -86,10 +84,7 @@
     gems: "Gems"
     users: "会员"
     admin: "后台"
-    notes: "记事本"
     nodes: "节点"
-    sites: "酷站"
-    jobs: "招聘"
     my_home_page: "我的主页"
     edit_account_path: "个人资料设置"
     likes: "我的收藏"
@@ -130,3 +125,8 @@
     apns_pem: "Apple Push 证书内容，保持为空将不会触发 Push 发送动作"
     blacklist_ips: "黑名单 IP 列表，将会直接拦截请求（一行一个）"
     newbie_limit_time: "新注册用户（新手）限制期，单位秒（0 不限制），在新手期不能创建新话题，仅能回帖"
+    ban_reasons: "屏蔽原因，将会在屏蔽话题的时候作为选项（一行一个）"
+  pagination:
+    next: "下一页 &#8594;"
+    prev: "&#8592; 上一页"
+    gap: "&hellip;"

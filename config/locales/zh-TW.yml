@@ -1,7 +1,12 @@
 "zh-TW":
+  contents: 目錄
   omniauth:
     github: GitHub
     twitter: Twitter
+  sso:
+    timeout_expired: 'SSO Token 已過期，請重新發起登錄請求。'
+    unknown_error: '抱歉 SSO 登錄的過程遇到了未處理的異常，登陸失敗。'
+    not_found: '抱歉 SSO 登錄的過程遇到了未處理的異常，登陸失敗。'
   activerecord:
     models:
       user: "用戶"
@@ -24,7 +29,6 @@
         tagline: "簽名"
         state: "狀態"
         verified: "信任用戶"
-        hr: "招聘人員"
         company: "公司"
         github: "GitHub"
         remember_me: 記住登陸狀態
@@ -51,28 +55,12 @@
         body: "正文"
       reply:
         body: "回覆內容"
-      note:
-        title: "標題"
-      post:
-        title: 標題
-        body: 正文
-        tag_list: 標籤
-        source: 來源
-        source_url: 來源地址
       page:
         slug: Slug
         title: 頁面標題
         body: 內容
         locked: 鎖定開關
         change_desc: 變更描述
-      site:
-        name: 網站名稱
-        url: 地址
-        desc: 簡單介紹
-        site_node_id: 分類
-      exception_log:
-        title: 摘要
-        body: 詳細內容
     errors:
       models:
         user: 用戶

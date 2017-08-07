@@ -5,10 +5,9 @@
  *= require notifications
  *= require home
  *= require users
- *= require pages
- *= require notes
  *= require teams
  *= require search
+ *= require toc
  *= require_self
  */
 
@@ -129,7 +128,7 @@
         }
       }
       &>a {
-        background: transparent;
+        background: transparent !important;
         border-radius: 0px;
         line-height: 100%;
         padding: 8px 8px;
@@ -379,6 +378,7 @@
       }
 
       .time { margin-left: 4px; color: #aaa; }
+      .ban-reason { color: #444; border-bottom: 1px dashed #eee; }
     }
     .infos { min-height: 48px; }
     .avatar { position: absolute; top: 15px; left: 15px; }
@@ -402,7 +402,13 @@
       color: #999;
       margin-bottom: 6px;
       font-size: 12px;
-      .reply-floor { color: #7AA87A; }
+      .floor { color: #7AA87A; }
+      a.time {
+        color: #999;
+        border-bottom: 1px dashed #ccc;
+        text-decoration: none !important;
+        cursor: pointer;
+      }
     }
 
     .opts {
@@ -414,6 +420,29 @@
         height: 22px;
         min-width: 22px;
         text-align: center;
+      }
+    }
+
+    .reply-to-block {
+      padding: 8px 15px;
+      background: #f7f7f7;
+      border-radius: 3px;
+      margin-bottom: 15px;
+      .info {
+        a {
+          color: #666;
+        }
+        .media-object { display: inline-block; margin-right: 5px; vertical-align: top; }
+        margin: 0;
+
+        .user-name { font-weight: bold; }
+      }
+      .markdown {
+        margin-top: 10px;
+        font-size: 14px;
+        p {
+          font-size: 14px;
+        }
       }
     }
 
@@ -460,11 +489,6 @@
     .info { color: #999; margin-bottom: 8px; font-size: 13px; }
     .date { font-size: 12px; color: #aaa;}
   }
-}
-
-#site_nodes .site {
-  margin-bottom: 10px;
-  a { color: #777; }
 }
 
 .sidebar {
@@ -543,26 +567,33 @@
 .markdown {
   position:relative;
   letter-spacing: .03em;
-  line-height: 1.8em;
-  font-size:14px;
+  font-size: 15px;
   text-overflow: ellipsis;
   word-wrap: break-word;
-  img { max-width: 100%; }
+  img, iframe { max-width: 100%; border: 0; }
   p,
   pre,
   ul,
   ol,
-  blockquote { margin-bottom: 16px; }
+  hr,
+  blockquote { margin-bottom: 20px; }
+  p:last-child,
+  blockquote:last-child,
+  pre:last-child,
+  ul:last-child,
+  ol:last-child,
+  hr:last-child { margin-bottom:0; }
 
-  p { font-size: 14px; line-height: 1.5em; }
-  hr { border:2px dashed $gray; border-bottom:0px; margin: 18px auto; width:50%; }
+  p { font-size: 15px; line-height: 26px; }
+  hr { border:2px dashed $gray; border-bottom:0px; margin-left: auto; margin-right: auto; width: 50%; }
   blockquote {
-    margin: 0 18px 15px 18px;
+    margin-left: 0 18px 20px 18px;
     padding: 0;
     padding-left: 32px;
     border: 0px;
     quotes: "\201C""\201D""\2018""\2019";
     position: relative;
+    font-size: 14px;
     line-height: 1.45;
     p { display:inline; color: #999; }
     &:before,
@@ -584,7 +615,7 @@
     border: 0px;
     border-top: 1px solid #f0f0f0;
     border-bottom: 1px solid #f0f0f0;
-    margin: 0 -15px 15px -15px;
+    margin: 0 -15px 20px -15px;
     padding: 5px 15px;
     color: #444;
     overflow: auto;
@@ -592,15 +623,12 @@
     code {
       display: block;
       line-height: 150%;
-      padding: 0!important;
-      font-size: 12px!important;
+      padding: 0 !important;
+      font-size: 12px !important;
       background-color: #f9f9f9 !important;
       border: none!important;
     }
   }
-  p:last-child,
-  blockquote:last-child,
-  pre:last-child { margin-bottom:0; }
   pre::-webkit-scrollbar {
     height: 8px;
     width: 8px; }
@@ -654,7 +682,7 @@
   h5,
   h6 {
     font-weight:bold; text-align:left;
-    margin-top: 10px !important; margin-bottom: 16px;
+    margin-top: 0px; margin-bottom: 20px;
   }
   h1 { font-size: 26px !important; text-align: center; margin-bottom: 30px !important; }
   h2,
@@ -665,19 +693,18 @@
     font-size: 16px !important;
     line-height: 100%;
     margin: 0; color: #555;
-    margin-top: 16px; margin-bottom:16px;
-    border-bottom:1px solid #eee;
-    padding-bottom: 5px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
   }
-  h2 { font-size: 20px !important; border-bottom-width: 2px; padding-bottom: 15px; margin-top: 20px; margin-bottom:20px; color: #111; }
-  h3 { font-size: 18px !important; padding-bottom: 10px; margin-top: 20px; margin-bottom: 20px; color: #333; }
+  h2 { font-size: 20px !important; color: #111; }
+  h3 { font-size: 18px !important; color: #333; }
   h5, h6 { font-size: 15px; line-height: 100%; color: #777; }
   h6 { font-size: 14px; color: #999; }
 
   strong { color:#000; }
   ul,
   ol {
-    list-style-position: inside;
     list-style-type: square;
     margin:0;
     margin-bottom: 20px;
@@ -692,6 +719,7 @@
     list-style-type: decimal;
     ol { list-style-type: lower-alpha; margin-bottom: 0px; }
   }
+
   img { vertical-align: top; max-width: 100%; }
   a.zoom-image { cursor: zoom-in; }
   a.at_floor { color: #60B566 !important; }
@@ -770,5 +798,55 @@ textarea.div-dropzone-focus { border-color: #BBE1C9; background: #fafafa; }
   .avatar-16 {
     display: inline-block;
     margin: 5px 0;
+  }
+}
+
+.comments {
+  .comment {
+    padding: 15px;
+    margin: 0 -15px;
+    border-bottom: 1px solid #f0f0f0;
+    &:first-child { padding-top: 0; }
+    &:last-child { border: 0; padding-bottom: 0;}
+
+    .info {
+      font-size: 13px;
+      color: #999;
+    }
+  }
+}
+
+.panel-body {
+  .heading { font-size: 16px; color: #777; font-weight: bold; padding-bottom: 10px; border-bottom: 1px solid #eee; margin-bottom: 15px; }
+  form {
+    margin-bottom: 25px;
+    &:last-child { margin-bottom: 0; }
+  }
+}
+
+.reward-image {
+  border-radius: 3px;
+  padding: 20px;
+  background: #FFF;
+  text-align: center;
+  img { max-width: 240px; }
+}
+
+#reward-modal {
+  padding-top: 50px;
+  text-align: center;
+  .modal-dialog {
+    max-width: 750px;
+    min-height: 300px;
+  }
+  .reward-image { display: inline-block; padding: 0px 20px 10px 20px; }
+  .message {
+    margin: 10px auto 0 auto;
+    max-width: 580px;
+    font-size: 16px;
+    text-align: center;
+    .user-info { margin-bottom: 15px; }
+    .media-object { display: inline-block; }
+    i.fa { color: #aaa; }
   }
 }

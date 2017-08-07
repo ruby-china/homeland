@@ -18,7 +18,7 @@ class User
           self.location_id = nil
         else
           old_location = Location.location_find_by_name(self.location_was)
-          old_location.decrement!(:users_count) if old_location
+          old_location&.decrement!(:users_count)
 
           location = Location.location_find_or_create_by_name(self.location)
           unless location.new_record?

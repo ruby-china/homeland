@@ -3,14 +3,18 @@
 <% content_for :scripts do %>
   <script type="text/javascript">
     Topics.topic_id = <%= @topic.id %>;
-    <% if current_user && !@user_liked_reply_ids.blank? %>
-    Topics.user_liked_reply_ids = [<%= @user_liked_reply_ids.join(",") %>];
+    <% if !@user_like_reply_ids.blank? %>
+    Topics.user_liked_reply_ids = [<%= @user_like_reply_ids.join(",") %>];
     <% end %>
     $(document).ready(function(){
       <% if admin? %>
         $("#replies .reply a.edit").css('display','inline-block');
       <% elsif current_user %>
         $("#replies .reply a.edit[data-uid='<%= current_user.id %>']").css('display','inline-block');
+      <% end %>
+
+      <% if @topic.closed? %>
+        $("#replies .reply .hideable").remove();
       <% end %>
     })
   </script>
@@ -32,13 +36,10 @@
         </div>
       <% end %>
 
-      <div class="panel-body markdown">
+      <div class="panel-body markdown markdown-toc">
         <%= raw Setting.before_topic_html %>
 
-        <article>
-          <%= raw @topic.body_html %>
-        </article>
-
+        <%= @topic.body_html %>
 
         <%= raw Setting.after_topic_html %>
       </div>
@@ -60,9 +61,7 @@
         共收到 <b><%= @topic.replies_count %></b> 条回复
       </div>
       <div class="items panel-body">
-        <%= cache([@topic, "raw:#{@show_raw}"]) do %>
-          <%= render partial: "/replies/reply", collection: @replies %>
-        <% end %>
+        <%= render partial: "/replies/reply", collection: @replies %>
       </div>
     </div>
   <% end %>

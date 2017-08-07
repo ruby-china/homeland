@@ -1,5 +1,9 @@
 class Node < ApplicationRecord
+<<<<<<< HEAD
   second_level_cache version: 1, expires_in: 1.week
+=======
+  second_level_cache expires_in: 2.weeks
+>>>>>>> 793cb369927cda773c0575efc71ee8fcfe052f5c
 
   delegate :name, to: :section, prefix: true, allow_nil: true
 
@@ -21,14 +25,9 @@ class Node < ApplicationRecord
     self.create(id: id, name: name, summary: name, section: Section.default)
   end
 
-  # 内建 [招聘] 节点
-  def self.job
-    @job ||= self.find_builtin_node(25, '招聘')
-  end
-
   # 内建 [NoPoint] 节点
   def self.no_point
-    @no_point ||= self.find_builtin_node(61, 'NoPoint')
+    @no_point ||= self.find_builtin_node(61, "NoPoint")
   end
 
   # 是否 Summary 过多需要折叠

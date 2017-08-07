@@ -6,14 +6,18 @@
     </a>
     <button class="navbar-toggle" type="button" data-toggle="dropdown" role="button" aria-expanded="false">
       <span class="sr-only">Toggle</span>
-      <i class="fa fa-reorder"></i>
+      <%= user_avatar_tag(current_user, :sm, link: false) %>
     </button>
     <%= render_list class: "dropdown-menu", role: "menu" do |li|
       li << link_to(current_user.login, main_app.user_path(current_user) )
       li << "<div class='divider'></div>"
-      li << link_to(t("menu.edit_account_path"), main_app.edit_user_registration_path)
-      li << link_to(t("menu.notes"), main_app.notes_path )
+      li << link_to(t("menu.edit_account_path"), main_app.setting_path)
       li << link_to(t("menu.likes"), main_app.favorites_topics_path)
+
+      Homeland.user_menu_plugins.each do |plugin|
+        li << link_to(plugin.display_name, plugin.root_path)
+      end
+
       if admin?
         li << "<div class='divider'></div>"
         if params[:controller].start_with?("admin")
@@ -27,7 +31,9 @@
     end %>
   </li>
   <% else %>
+  <% if !Setting.sso_enabled? %>
   <li><%= link_to( t("common.register"), main_app.new_user_registration_path) %></li>
+  <% end %>
   <li><%= link_to( t("common.login"), main_app.new_user_session_path ) %></li>
   <% end %>
 </ul>
@@ -55,8 +61,7 @@
     </a>
     <%= render_list class: "dropdown-menu", role: "menu" do |li|
       li << link_to(t("topics.new_topic"), main_app.new_topic_path)
-      li << link_to(t("notes.new_note"), main_app.new_note_path) if Setting.has_module?(:note)
-      if can? :create, Team
+      if can?(:create, Team) && Setting.has_module?(:team)
         li << "<div class='divider'></div>"
         li << link_to(t("teams.new_team"), main_app.new_team_path)
       end

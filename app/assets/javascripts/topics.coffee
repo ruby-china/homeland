@@ -11,13 +11,13 @@ window.TopicView = Backbone.View.extend
   events:
     "click .navbar .topic-title": "scrollPage"
     "click #replies .reply .btn-reply": "reply"
-    "click .btn-focus-reply": "reply"
     "click a.at_floor": "clickAtFloor"
     "click a.follow": "follow"
     "click a.bookmark": "bookmark"
     "click .btn-move-page": "scrollPage"
     "click .notify-updated .update": "updateReplies"
     "click #node-selector .nodes .name a": "nodeSelectorNodeSelected"
+    "click .editor-toolbar .reply-to a.close": "unsetReplyTo"
     "tap .topics .topic": "topicRowClick"
 
   initialize: (opts) ->
@@ -28,7 +28,12 @@ window.TopicView = Backbone.View.extend
     @initContentImageZoom()
     @initCloseWarning()
     @checkRepliesLikeStatus()
+    @itemsUpdated()
+
+  # called by new Reply insterted.
+  itemsUpdated: ->
     @resetClearReplyHightTimer()
+    @loadReplyToFloor()
 
   resetClearReplyHightTimer: ->
     clearTimeout(@clearHightTimer)
@@ -39,18 +44,28 @@ window.TopicView = Backbone.View.extend
   # 回复
   reply: (e) ->
     _el = $(e.target)
-    floor = _el.data("floor")
-    login = _el.data("login")
+    reply_to_id = _el.data('id')
+    @setReplyTo(reply_to_id)
     reply_body = $("#new_reply textarea")
-    if floor
-      new_text = "##{floor}楼 @#{login} "
-    else
-      new_text = ''
-    if reply_body.val().trim().length == 0
-      new_text += ''
-    else
-      new_text = "\n#{new_text}"
-    reply_body.focus().val(reply_body.val() + new_text)
+    reply_body.focus()
+    return false
+
+  setReplyTo: (id) ->
+    $('input[name="reply[reply_to_id]"]').val(id)
+    replyEl = $(".reply[data-id=#{id}]")
+    targetAnchor = replyEl.attr('id')
+    replyToPanel = $(".editor-toolbar .reply-to")
+    userNameEl = replyEl.find("a.user-name:first-child")
+    replyToLink = replyToPanel.find(".user")
+    replyToLink.attr("href", "##{targetAnchor}")
+    replyToLink.text(userNameEl.text())
+    replyToPanel.show()
+
+  unsetReplyTo: ->
+    $('input[name="reply[reply_to_id]"]').val('')
+    replyToPanel = $(".editor-toolbar .reply-to")
+    replyToPanel.hide()
+
     return false
 
   clickAtFloor: (e) ->
@@ -96,10 +111,11 @@ window.TopicView = Backbone.View.extend
     $("#new_reply textarea").focus()
     $('#reply-button').button('reset')
     @resetClearReplyHightTimer()
+    @unsetReplyTo()
 
   # 图片点击增加全屏预览功能
   initContentImageZoom : () ->
-    exceptClasses = ["emoji", "twemoji"]
+    exceptClasses = ["emoji", "twemoji", "media-object avatar-16"]
     imgEls = $(".markdown img")
     for el in imgEls
       if exceptClasses.indexOf($(el).attr("class")) == -1
@@ -222,9 +238,9 @@ window.TopicView = Backbone.View.extend
       return @submitTextArea(el)
 
     # also highlight if hash is reply#
-    matchResult = window.location.hash.match(/^#reply(\d+)$/)
+    matchResult = window.location.hash.match(/^#reply\-(\d+)$/)
     if matchResult?
-      @highlightReply($("#reply#{matchResult[1]}"))
+      @highlightReply($("#reply-#{matchResult[1]}").parent())
 
     @hookPreview($(".editor-toolbar"), $(".topic-editor"))
 
@@ -235,7 +251,7 @@ window.TopicView = Backbone.View.extend
         show : true
 
     # @ Mention complete
-    App.atReplyable("textarea")
+    App.mentionable("textarea", App.scanMentionableLogins($(".reply")))
 
     # Focus title field in new-topic page
     $("body[data-controller-name='topics'] #topic_title").focus()
@@ -250,30 +266,25 @@ window.TopicView = Backbone.View.extend
       return
 
     if !window.repliesChannel
-      console.log "init repliesChannel"
       window.repliesChannel = App.cable.subscriptions.create 'RepliesChannel',
+        topicId: null
+
         connected: ->
-          setTimeout =>
-            @followCurrentTopic()
-            $(window).on 'unload', -> window.repliesChannel.unfollow()
-            $(document).on 'page:change', -> window.repliesChannel.followCurrentTopic()
-          , 1000
+          @subscribe()
 
         received: (json) =>
-          if json.user_id == App.current_user_id
-            return false
-          if json.action == 'create'
-            if App.windowInActive
-              @updateReplies()
-            else
-              $(".notify-updated").show()
+          return false if json.user_id == App.current_user_id
+          return false if json.action != 'create'
+          if App.windowInActive
+            @updateReplies()
+          else
+            $(".notify-updated").show()
 
-        followCurrentTopic: ->
+        subscribe: ->
+          @topicId = Topics.topic_id
           @perform 'follow', topic_id: Topics.topic_id
-
-        unfollow: ->
-          @perform 'unfollow'
-
+    else if window.repliesChannel.topicId != Topics.topic_id
+      window.repliesChannel.subscribe()
 
   updateReplies: () ->
     lastId = $("#replies .reply:last").data('id')
@@ -311,3 +322,9 @@ window.TopicView = Backbone.View.extend
     $(e.currentTarget).addClass('topic-visited')
     Turbolinks.visit(target.attr('href'))
     return false
+
+  loadReplyToFloor: ->
+    _.each $(".reply-to-block"), (el) =>
+      replyToId = $(el).data('reply-to-id')
+      floor = $("#reply-#{replyToId}").data('floor');
+      $(el).find('.reply-floor').text("\##{floor}")

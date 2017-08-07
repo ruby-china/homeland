@@ -1,30 +1,38 @@
-require 'digest/md5'
+require "digest/md5"
 class Reply < ApplicationRecord
-  include SoftDelete
   include MarkdownBody
-  include Likeable
+  include SoftDelete
   include Mentionable
   include MentionTopic
+  include UserAvatarDelegate
 
   UPVOTES = %w(+1 :+1: :thumbsup: :plus1: 👍 👍🏻 👍🏼 👍🏽 👍🏾 👍🏿)
 
   belongs_to :user, counter_cache: true
   belongs_to :topic, touch: true
   belongs_to :target, polymorphic: true
+  belongs_to :reply_to, class_name: "Reply"
 
   delegate :title, to: :topic, prefix: true, allow_nil: true
   delegate :login, to: :user, prefix: true, allow_nil: true
 
   scope :without_system, -> { where(action: nil) }
-  scope :fields_for_list, -> { select(:topic_id, :id, :body_html, :updated_at, :created_at) }
-  scope :without_body, -> { select(column_names - ['body']) }
+  scope :fields_for_list, -> { select(:topic_id, :id, :body, :updated_at, :created_at) }
 
   validates :body, presence: true, unless: -> { system_event? }
-  validates :body, uniqueness: { scope: [:topic_id, :user_id], message: '不能重复提交。' }, unless: -> { system_event? }
+  validates :body, uniqueness: { scope: [:topic_id, :user_id], message: "不能重复提交。" }, unless: -> { system_event? }
   validate do
-    ban_words = (Setting.ban_words_on_reply || '').split("\n").collect(&:strip)
+    ban_words = (Setting.ban_words_on_reply || "").split("\n").collect(&:strip)
     if body.strip.downcase.in?(ban_words)
-      errors.add(:body, '请勿回复无意义的内容，如你想收藏或赞这篇帖子，请用帖子后面的功能。')
+      errors.add(:body, "请勿回复无意义的内容，如你想收藏或赞这篇帖子，请用帖子后面的功能。")
+    end
+
+    if topic&.closed?
+      errors.add(:topic, "已关闭，不再接受回帖或修改回帖。")
+    end
+
+    if reply_to_id
+      self.reply_to_id = nil if reply_to&.topic_id != self.topic_id
     end
   end
 
@@ -85,9 +93,9 @@ class Reply < ApplicationRecord
 
   def default_notification
     @default_notification ||= {
-      notify_type: 'topic_reply',
-      target_type: 'Reply', target_id: self.id,
-      second_target_type: 'Topic', second_target_id: self.topic_id,
+      notify_type: "topic_reply",
+      target_type: "Reply", target_id: self.id,
+      second_target_type: "Topic", second_target_id: self.topic_id,
       actor_id: self.user_id
     }
   end
@@ -95,9 +103,9 @@ class Reply < ApplicationRecord
   def notification_receiver_ids
     return @notification_receiver_ids if defined? @notification_receiver_ids
     # 加入帖子关注着
-    follower_ids = self.topic.try(:follower_ids) || []
+    follower_ids = self.topic.try(:follow_by_user_ids) || []
     # 加入回帖人的关注者
-    follower_ids = follower_ids + (self.user.try(:follower_ids) || [])
+    follower_ids += self.user.try(:follow_by_user_ids) || []
     # 加入发帖人
     follower_ids << self.topic.try(:user_id)
     # 去重复
@@ -105,7 +113,7 @@ class Reply < ApplicationRecord
     # 排除回帖人
     follower_ids.delete(self.user_id)
     # 排除同一个回复过程中已经提醒过的人
-    follower_ids = follower_ids - self.mentioned_user_ids
+    follower_ids -= self.mentioned_user_ids
     @notification_receiver_ids = follower_ids
   end
 
@@ -115,12 +123,12 @@ class Reply < ApplicationRecord
   end
 
   def upvote?
-    (body || '').strip.start_with?(*UPVOTES)
+    (body || "").strip.start_with?(*UPVOTES)
   end
 
   def destroy
     super
-    Notification.where(notify_type: 'topic_reply', target: self).delete_all
+    Notification.where(notify_type: "topic_reply", target: self).delete_all
     delete_notifiaction_mentions
   end
 
@@ -130,7 +138,7 @@ class Reply < ApplicationRecord
   end
 
   def self.create_system_event(opts = {})
-    opts[:body] = ''
+    opts[:body] ||= ""
     opts[:user] ||= User.current
     return false if opts[:action].blank?
     return false if opts[:user].blank?

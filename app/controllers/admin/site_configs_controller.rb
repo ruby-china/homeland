@@ -13,7 +13,7 @@ module Admin
         @site_config.value = setting_param[:value]
         @site_config.save
         @site_config.expire_cache
-        redirect_to admin_site_configs_path, notice: '保存成功.'
+        redirect_to admin_site_configs_path, notice: "保存成功."
       else
         redirect_to admin_site_configs_path
       end

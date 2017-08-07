@@ -11,14 +11,14 @@ describe TopicsHelper, type: :helper do
     end
 
     it 'should result when logined user did not favorite topic' do
-      allow(user).to receive(:favorite_topic_ids).and_return([])
+      allow(user).to receive(:favorite_topic?).and_return(false)
       allow(helper).to receive(:current_user).and_return(user)
       res = helper.topic_favorite_tag(topic)
       expect(res).to eq("<a title=\"收藏\" class=\"bookmark \" data-id=\"1\" href=\"#\"><i class=\"fa fa-bookmark\"></i> 收藏</a>")
     end
 
     it 'should result when logined user favorited topic' do
-      allow(user).to receive(:favorite_topic_ids).and_return([topic.id])
+      allow(user).to receive(:favorite_topic?).and_return(true)
       allow(helper).to receive(:current_user).and_return(user)
       expect(helper.topic_favorite_tag(topic)).to eq("<a title=\"取消收藏\" class=\"bookmark active\" data-id=\"1\" href=\"#\"><i class=\"fa fa-bookmark\"></i> 收藏</a>")
     end
@@ -71,7 +71,7 @@ describe TopicsHelper, type: :helper do
     context 'was active' do
       it 'should work' do
         allow(helper).to receive(:current_user).and_return(user)
-        allow(topic).to receive(:follower_ids).and_return([user.id])
+        allow(user).to receive(:follow_topic?).and_return(true)
         expect(helper.topic_follow_tag(topic)).to eq "<a data-id=\"#{topic.id}\" class=\"follow active\" href=\"#\"><i class=\"fa fa-eye\"></i> 关注</a>"
       end
     end

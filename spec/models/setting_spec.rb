@@ -13,7 +13,7 @@ describe Setting, type: :model do
     it 'should work' do
       allow(Setting).to receive(:domain).and_return("homeland.io")
       allow(Setting).to receive(:https).and_return(true)
-      expect(Setting.host).to eq "https://homeland.io"
+      expect(Setting.base_url).to eq "https://homeland.io"
     end
   end
 

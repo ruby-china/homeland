@@ -4,17 +4,17 @@ module Admin
     respond_to :js, :html, only: [:destroy]
 
     def index
-      @comments = Comment.recent.includes(:user).paginate(page: params[:page], per_page: 20)
+      @comments = Comment.recent.includes(:user).page(params[:page])
     end
 
     def edit
     end
 
     def update
-      if @comment.update_attributes(params[:comment].permit!)
-        redirect_to admin_comments_path(@admin_comment), notice: 'Comment was successfully updated.'
+      if @comment.update(params[:comment].permit!)
+        redirect_to admin_comments_path(@admin_comment), notice: "Comment was successfully updated."
       else
-        render action: 'edit'
+        render action: "edit"
       end
     end
 

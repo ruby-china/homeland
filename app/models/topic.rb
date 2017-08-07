@@ -1,22 +1,22 @@
-require 'auto-space'
+require "auto-space"
 
 CORRECT_CHARS = [
-  ['［', '['],
-  ['］', ']'],
-  ['【', '['],
-  ['】', ']'],
-  ['（', '('],
-  ['）', ')']
+  ["［", "["],
+  ["］", "]"],
+  ["【", "["],
+  ["】", "]"],
+  ["（", "("],
+  ["）", ")"]
 ]
 
 class Topic < ApplicationRecord
-  include Likeable
   include MarkdownBody
   include SoftDelete
   include Mentionable
   include Closeable
   include Searchable
   include MentionTopic
+  include UserAvatarDelegate
 
   # 临时存储检测用户是否读过的结果
   attr_accessor :read_state, :admin_editing
@@ -24,8 +24,8 @@ class Topic < ApplicationRecord
   belongs_to :user, inverse_of: :topics, counter_cache: true
   belongs_to :team, counter_cache: true
   belongs_to :node, counter_cache: true
-  belongs_to :last_reply_user, class_name: 'User'
-  belongs_to :last_reply, class_name: 'Reply'
+  belongs_to :last_reply_user, class_name: "User"
+  belongs_to :last_reply, class_name: "Reply"
   has_many :replies, dependent: :destroy
 
   validates :user_id, :title, :body, :node_id, presence: true
@@ -37,44 +37,39 @@ class Topic < ApplicationRecord
 
   # scopes
   scope :last_actived,       -> { order(last_active_mark: :desc) }
-  scope :suggest,            -> { where('suggested_at IS NOT NULL').order(suggested_at: :desc) }
+  scope :suggest,            -> { where("suggested_at IS NOT NULL").order(suggested_at: :desc) }
   scope :without_suggest,    -> { where(suggested_at: nil) }
   scope :high_likes,         -> { order(likes_count: :desc).order(id: :desc) }
   scope :high_replies,       -> { order(replies_count: :desc).order(id: :desc) }
   scope :no_reply,           -> { where(replies_count: 0) }
-  scope :popular,            -> { where('likes_count > 5') }
-  scope :excellent,          -> { where('excellent >= 1') }
-  scope :without_hide_nodes, -> { exclude_column_ids('node_id', Topic.topic_index_hide_node_ids) }
-  scope :without_body,       -> { select(column_names - ['body']) }
-  scope :without_node_ids,   -> (ids) { exclude_column_ids('node_id', ids) }
-  scope :exclude_column_ids, lambda { |column, ids|
-    if ids.empty?
-      all
-    else
-      where.not(column => ids)
-    end
-  }
+  scope :popular,            -> { where("likes_count > 5") }
+  scope :excellent,          -> { where("excellent >= 1") }
+  scope :without_hide_nodes, -> { exclude_column_ids("node_id", Topic.topic_index_hide_node_ids) }
+
+  scope :without_node_ids,   ->(ids) { exclude_column_ids("node_id", ids) }
+  scope :without_users,      ->(ids) { exclude_column_ids("user_id", ids) }
+  scope :exclude_column_ids, ->(column, ids) { ids.empty? ? all : where.not(column => ids) }
+
   scope :without_nodes, lambda { |node_ids|
     ids = node_ids + Topic.topic_index_hide_node_ids
     ids.uniq!
-    exclude_column_ids('node_id', ids)
-  }
-  scope :without_users, lambda { |user_ids|
-    exclude_column_ids('user_id', user_ids)
+    exclude_column_ids("node_id", ids)
   }
 
   mapping do
     indexes :title, term_vector: :yes
     indexes :body, term_vector: :yes
-    indexes :node_name
   end
 
   def as_indexed_json(_options = {})
     {
       title: self.title,
-      body: self.full_body,
-      node_name: self.node_name
+      body: self.full_body
     }
+  end
+
+  def indexed_changed?
+    saved_change_to_title? || saved_change_to_body?
   end
 
   def related_topics(size = 5)
@@ -99,7 +94,7 @@ class Topic < ApplicationRecord
   end
 
   def self.fields_for_list
-    columns = %w(body body_html who_deleted follower_ids)
+    columns = %w(body who_deleted)
     select(column_names - columns.map(&:to_s))
   end
 
@@ -108,12 +103,12 @@ class Topic < ApplicationRecord
   end
 
   def self.topic_index_hide_node_ids
-    Setting.node_ids_hide_in_topics_index.to_s.split(',').collect(&:to_i)
+    Setting.node_ids_hide_in_topics_index.to_s.split(",").collect(&:to_i)
   end
 
   before_save :store_cache_fields
   def store_cache_fields
-    self.node_name = node.try(:name) || ''
+    self.node_name = node.try(:name) || ""
   end
 
   before_save :auto_correct_title
@@ -139,23 +134,6 @@ class Topic < ApplicationRecord
     NotifyTopicJob.perform_later(id)
   end
 
-  def followed?(uid)
-    follower_ids.include?(uid)
-  end
-
-  def push_follower(uid)
-    return false if uid == user_id
-    return false if followed?(uid)
-    push(follower_ids: uid)
-    true
-  end
-
-  def pull_follower(uid)
-    return false if uid == user_id
-    pull(follower_ids: uid)
-    true
-  end
-
   def update_last_reply(reply, opts = {})
     # replied_at 用于最新回复的排序，如果帖着创建时间在一个月以前，就不再往前面顶了
     return false if reply.blank? && !opts[:force]
@@ -167,7 +145,7 @@ class Topic < ApplicationRecord
     self.last_reply_user_id = reply.try(:user_id)
     self.last_reply_user_login = reply.try(:user_login)
     # Reindex Search document
-    SearchIndexer.perform_later('update', 'topic', self.id)
+    SearchIndexer.perform_later("update", "topic", self.id)
     save
   end
 
@@ -194,8 +172,8 @@ class Topic < ApplicationRecord
 
   # 所有的回复编号
   def reply_ids
-    Rails.cache.fetch([self, 'reply_ids']) do
-      self.replies.order('id asc').pluck(:id)
+    Rails.cache.fetch([self, "reply_ids"]) do
+      self.replies.order("id asc").pluck(:id)
     end
   end
 
@@ -203,21 +181,26 @@ class Topic < ApplicationRecord
     excellent >= 1
   end
 
-  def ban!
-    update_attributes(lock_node: true, node_id: Node.no_point.id, admin_editing: true)
+  def ban!(opts = {})
+    transaction do
+      update(lock_node: true, node_id: Node.no_point.id, admin_editing: true)
+      if opts[:reason]
+        Reply.create_system_event(action: "ban", topic_id: self.id, body: opts[:reason])
+      end
+    end
   end
 
   def excellent!
-    self.transaction do
-      Reply.create_system_event(action: 'excellent', topic_id: self.id)
-      update_attributes(excellent: 1)
+    transaction do
+      Reply.create_system_event(action: "excellent", topic_id: self.id)
+      update!(excellent: 1)
     end
   end
 
   def unexcellent!
-    self.transaction do
-      Reply.create_system_event(action: 'unexcellent', topic_id: self.id)
-      update_attributes(excellent: 0)
+    transaction do
+      Reply.create_system_event(action: "unexcellent", topic_id: self.id)
+      update!(excellent: 0)
     end
   end
 
@@ -230,13 +213,13 @@ class Topic < ApplicationRecord
     topic = Topic.find_by_id(topic_id)
     return unless topic && topic.user
 
-    follower_ids = topic.user.follower_ids.uniq
+    follower_ids = topic.user.follow_by_user_ids
     return if follower_ids.empty?
 
     notified_user_ids = topic.mentioned_user_ids
 
     # 给关注者发通知
-    default_note = { notify_type: 'topic', target_type: 'Topic', target_id: topic.id, actor_id: topic.user_id }
+    default_note = { notify_type: "topic", target_type: "Topic", target_id: topic.id, actor_id: topic.user_id }
     Notification.bulk_insert(set_size: 100) do |worker|
       follower_ids.each do |uid|
         # 排除同一个回复过程中已经提醒过的人
@@ -257,10 +240,22 @@ class Topic < ApplicationRecord
     node = Node.find_by_id(node_id)
     return if node.blank?
 
-    Notification.create notify_type: 'node_changed',
+    Notification.create notify_type: "node_changed",
                         user_id: topic.user_id,
                         target: topic,
                         second_target: node
     true
+  end
+
+  def self.total_pages
+    return @total_pages if defined? @total_pages
+
+    total_count = Rails.cache.fetch("topics/total_count", expires_in: 1.week) do
+      self.unscoped.count
+    end
+    if total_count >= 1500
+      @total_pages = 60
+    end
+    @total_pages
   end
 end

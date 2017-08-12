@@ -13,11 +13,7 @@ class User < ApplicationRecord
   include ProfileFields
   include RewardFields
 
-<<<<<<< HEAD
-  second_level_cache version: 4, expires_in: 1.week
-=======
   second_level_cache expires_in: 2.weeks
->>>>>>> 793cb369927cda773c0575efc71ee8fcfe052f5c
 
   LOGIN_FORMAT = 'A-Za-z0-9\-\_\.'
   ALLOW_LOGIN_FORMAT_REGEXP = /\A[#{LOGIN_FORMAT}]+\z/

@@ -1,9 +1,6 @@
 class Section < ApplicationRecord
-<<<<<<< HEAD
-  second_level_cache version: 1, expires_in: 1.week
-=======
+
   second_level_cache expires_in: 2.weeks
->>>>>>> 793cb369927cda773c0575efc71ee8fcfe052f5c
 
   has_many :nodes, dependent: :destroy
 

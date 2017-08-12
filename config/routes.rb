@@ -35,11 +35,6 @@ Rails.application.routes.draw do
     end
   end
 
-<<<<<<< HEAD
-  mount Notifications::Engine, at: '/notifications'
-  mount StatusPage::Engine, at: '/'
-=======
-  # SSO
   namespace :auth do
     resource :sso, controller: 'sso' do
       collection do
@@ -50,7 +45,6 @@ Rails.application.routes.draw do
   end
 
   delete 'setting/auth/:provider', to: 'settings#auth_unbind'
->>>>>>> 793cb369927cda773c0575efc71ee8fcfe052f5c
 
   resources :nodes do
     member do

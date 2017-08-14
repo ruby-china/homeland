@@ -167,7 +167,7 @@ class Topic < ApplicationRecord
 
   def destroy
     super
-    delete_notifiaction_mentions
+    delete_notification_mentions
   end
 
   # 所有的回复编号

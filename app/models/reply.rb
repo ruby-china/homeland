@@ -129,7 +129,7 @@ class Reply < ApplicationRecord
   def destroy
     super
     Notification.where(notify_type: "topic_reply", target: self).delete_all
-    delete_notifiaction_mentions
+    delete_notification_mentions
   end
 
   # 是否是系统事件

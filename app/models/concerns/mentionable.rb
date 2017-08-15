@@ -4,10 +4,10 @@ module Mentionable
   included do
     before_save :extract_mentioned_users
     after_create :send_mention_notification
-    after_destroy :delete_notifiaction_mentions
+    after_destroy :delete_notification_mentions
   end
 
-  def delete_notifiaction_mentions
+  def delete_notification_mentions
     Notification.where(notify_type: "mention", target: self).delete_all
   end
 

@@ -323,7 +323,7 @@ window.App =
   cable: ActionCable.createConsumer()
 
   isLogined : ->
-    App.current_user_id != null
+    document.getElementsByName('current-user').length > 0
 
   loading : () ->
     console.log "loading..."

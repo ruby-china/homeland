@@ -44,7 +44,7 @@ textarea,
 
 /* Bootstrap Theme */
 body {
-  background: #e9eaed;
+  background: #e5e5e5;
   color: $black;
   font-family: Helvetica, Arial, "PingFang SC", "Noto Sans", Roboto, "Microsoft Yahei", sans-serif;
   letter-spacing: .03em;
@@ -484,7 +484,7 @@ form {
     &:hover { color: #ddd; background: transparent; }
   }
 }
-abbr[title] { border-bottom: 0px; cursor: pointer; }
+abbr {  text-decoration: none; border-bottom: 0px; cursor: pointer; }
 
 kbd {
   background-color: #f5f5f5; color: #999; border-radius: 2px; border-color: #fafafa;

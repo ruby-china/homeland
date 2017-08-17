@@ -69,7 +69,7 @@ bundle exec rake
 ## Reindex ElasticSearch
 
 ```bash
-rake environment elasticsearch:import:model CLASS=Topic FORCE=y
-rake environment elasticsearch:import:model CLASS=User FORCE=y
-rake environment elasticsearch:import:model CLASS=Page FORCE=y
+rails environment elasticsearch:import:model CLASS=Page FORCE=y
+rails environment elasticsearch:import:model CLASS=Topic FORCE=y
+rails environment elasticsearch:import:model CLASS=User FORCE=y
 ```

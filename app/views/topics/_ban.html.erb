@@ -1,7 +1,7 @@
 <div class="modal" id="ban-modal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <%= form_for('', url: action_topic_path(topic, type: "ban"), method: "post") do |f| %>
+      <%= form_for('', url: action_topic_path(topic, type: "ban"), method: "post", remote: true) do |f| %>
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>

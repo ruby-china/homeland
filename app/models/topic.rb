@@ -77,7 +77,7 @@ class Topic < ApplicationRecord
       query: {
         more_like_this: {
           fields: [:title, :body],
-          docs: [
+          like: [
             {
               _index: self.class.index_name,
               _type: self.class.document_type,
@@ -167,7 +167,7 @@ class Topic < ApplicationRecord
 
   def destroy
     super
-    delete_notifiaction_mentions
+    delete_notification_mentions
   end
 
   # 所有的回复编号

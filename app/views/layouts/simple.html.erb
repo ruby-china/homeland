@@ -3,7 +3,7 @@
 <head>
   <meta charset='utf-8' />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-  <title><%= yield(:title) || Setting.app_name %></title>
+  <title><%= content_for?(:title) ? yield(:title) : Setting.app_name %></title>
   <meta name="apple-mobile-web-app-capable" content="no">
   <meta content='True' name='HandheldFriendly' />
   <%= stylesheet_link_tag "front" %>
@@ -19,8 +19,10 @@
           <%= raw Setting.navbar_brand_html %>
         </div>
 
-        <div id="main-nav-menu">
+        <div class="collapse navbar-collapse" id="main-navbar-collapse">
+          <%= render "shared/navbar" %>
         </div>
+        <%= render "shared/usernav" %>
       </div>
     </nav>
   </div>

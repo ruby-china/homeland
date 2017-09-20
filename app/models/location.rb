@@ -1,4 +1,5 @@
 class Location < ApplicationRecord
+
   second_level_cache expires_in: 2.weeks
 
   has_many :users

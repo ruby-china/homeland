@@ -35,7 +35,6 @@ Rails.application.routes.draw do
     end
   end
 
-  # SSO
   namespace :auth do
     resource :sso, controller: 'sso' do
       collection do

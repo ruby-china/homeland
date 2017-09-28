@@ -127,6 +127,6 @@
     newbie_limit_time: "新注册用户（新手）限制期，单位秒（0 不限制），在新手期不能创建新话题，仅能回帖"
     ban_reasons: "屏蔽原因，将会在屏蔽话题的时候作为选项（一行一个）"
   pagination:
-    next: "下一页 &#8594;"
-    prev: "&#8592; 上一页"
+    next: "下一页"
+    prev: "上一页"
     gap: "&hellip;"

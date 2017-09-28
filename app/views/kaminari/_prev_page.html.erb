@@ -1,3 +1,3 @@
 <li class="prev">
-  <%= link_to_unless current_page.first?, raw(t('pagination.prev')), url, rel: 'prev', remote: remote %>
+  <%= link_to_unless current_page.first?, raw([icon_tag('angle-left'), t('pagination.prev')].join(' ')), url, rel: 'prev', remote: remote %>
 </li>

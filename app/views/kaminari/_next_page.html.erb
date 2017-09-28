@@ -1,3 +1,3 @@
 <li class="next">
-  <%= link_to_unless current_page.last?, raw([t('pagination.next'), icon_tag('angle-right')].join(' ')), url, rel: 'next', remote: remote %>
+  <%= link_to_unless current_page.last?, raw([t('pagination.next'), '<i class="fa fa-angle-right"></i>'].join(' ')), url, rel: 'next', remote: remote %>
 </li>

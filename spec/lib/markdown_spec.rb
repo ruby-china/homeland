@@ -116,27 +116,27 @@ describe 'markdown' do
 
         it 'should highlight code block' do
           expect(Homeland::Markdown.call("```ruby\nclass Hello\n\nend\n```")).to eq(
-            %(<pre class=\"highlight ruby\"><code><span class=\"k\">class</span> <span class=\"nc\">Hello</span>\n\n<span class=\"k\">end</span>\n</code></pre>)
+            %(<div class="highlight"><pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">Hello</span>\n\n<span class="k">end</span>\n</code></pre></div>)
           )
         end
 
         it 'should be able to identigy Ruby or RUBY as ruby language' do
           %w(Ruby RUBY).each do |lang|
             expect(Homeland::Markdown.call("```#{lang}\nclass Hello\nend\n```")).to eq(
-              %(<pre class=\"highlight ruby\"><code><span class=\"k\">class</span> <span class=\"nc\">Hello</span>\n<span class=\"k\">end</span>\n</code></pre>)
+              %(<div class="highlight"><pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">Hello</span>\n<span class="k">end</span>\n</code></pre></div>)
             )
           end
         end
 
         it 'should highlight code block after the content' do
           expect(Homeland::Markdown.call("this code:\n```\ngem install rails\n```\n")).to eq(
-            %(<p>this code:</p>\n<pre class=\"highlight plaintext\"><code>gem install rails\n</code></pre>)
+            %(<p>this code:</p>\n<div class="highlight"><pre class="highlight plaintext"><code>gem install rails\n</code></pre></div>)
           )
         end
 
         it 'should highlight code block without language' do
           expect(Homeland::Markdown.call("```\ngem install ruby\n```").delete("\n")).to eq(
-            %(<pre class=\"highlight plaintext\"><code>gem install ruby</code></pre>)
+            %(<div class="highlight"><pre class="highlight plaintext"><code>gem install ruby</code></pre></div>)
           )
         end
 
@@ -162,7 +162,7 @@ describe 'markdown' do
         it 'should not filter underscore' do
           expect(Homeland::Markdown.call('ruby_china_image `ruby_china_image`')).to eq('<p>ruby_china_image <code>ruby_china_image</code></p>')
           expect(Homeland::Markdown.call("```\nruby_china_image\n```")).to eq(
-            %(<pre class=\"highlight plaintext\"><code>ruby_china_image\n</code></pre>)
+            %(<div class="highlight"><pre class="highlight plaintext"><code>ruby_china_image\n</code></pre></div>)
           )
         end
       end
@@ -710,9 +710,9 @@ describe 'markdown' do
         <blockquote>
         <p>The idea is that a Markdown-formatted document should be publishable as-is, as plain text, without looking like it’s been marked up with tags or formatting instructions.</p>
         </blockquote>
-        <h2 id="Syntax Guide - Heading 2">Syntax Guide - Heading 2</h2><h3 id="Strong and Emphasize - Heading 3">Strong and Emphasize - Heading 3</h3><h4 id="Heading 4">Heading 4</h4><h5 id="Heading 5">Heading 5</h5><h6 id="Heading 6">Heading 6</h6><pre class="highlight plaintext"><code>*emphasize*    **strong**
+        <h2 id="Syntax Guide - Heading 2">Syntax Guide - Heading 2</h2><h3 id="Strong and Emphasize - Heading 3">Strong and Emphasize - Heading 3</h3><h4 id="Heading 4">Heading 4</h4><h5 id="Heading 5">Heading 5</h5><h6 id="Heading 6">Heading 6</h6><div class="highlight"><pre class="highlight plaintext"><code>*emphasize*    **strong**
         _emphasize_    __strong__
-        </code></pre>
+        </code></pre></div>
         <hr>
 
         <p><strong>Shortcuts</strong></p>
@@ -776,9 +776,9 @@ describe 'markdown' do
 
         <p><a href="http://url.com/" title="title">link text</a>
         <a href="http://url.com/">link text</a></p>
-        <pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">Foo</span>
+        <div class="highlight"><pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">Foo</span>
         <span class="k">end</span>
-        </code></pre>
+        </code></pre></div>
         MD
       end
 

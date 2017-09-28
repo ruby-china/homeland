@@ -485,6 +485,8 @@ form {
   }
 }
 abbr {  text-decoration: none; border-bottom: 0px; cursor: pointer; }
+abbr[title] { border: 0 !important; cursor: text; }
+a abbr[title] { cursor: pointer; }
 
 kbd {
   background-color: #f5f5f5; color: #999; border-radius: 2px; border-color: #fafafa;

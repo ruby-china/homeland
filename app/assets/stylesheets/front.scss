@@ -163,7 +163,7 @@
 
           &:hover {
             border: 0;
-            background: #e0e0e0;
+            color: #222;
           }
         }
 
@@ -220,8 +220,8 @@
     }
 
     .info {
-      color: #ABA8A6; font-size: 12px; margin-top: 0;
-      a { color: #ABA8A6; }
+      color: #8f8d8b; font-size: 12px; margin-top: 0;
+      a { color: #797776; text-decoration: underline; }
     }
 
     .count {
@@ -280,7 +280,7 @@
   }
 
   .info {
-    color:#c0c0c0;
+    color: #8f8d8b;
     font-size:12px;
     a { color: #444; }
     .node {
@@ -405,9 +405,12 @@
       .floor { color: #7AA87A; }
       a.time {
         color: #999;
-        border-bottom: 1px dashed #ccc;
         text-decoration: none !important;
         cursor: pointer;
+
+        &:hover {
+          border-bottom: 1px dashed #ccc;
+        }
       }
     }
 

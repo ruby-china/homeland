@@ -6,7 +6,7 @@ class TopicsController < ApplicationController
                                      :favorite, :unfavorite, :follow, :unfollow]
 
   before_action :set_topic, only: [:ban, :edit, :update, :destroy, :follow,
-                                   :unfollow, :action, :ban]
+                                   :unfollow, :action]
 
   def index
     @suggest_topics = []

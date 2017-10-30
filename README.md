@@ -8,6 +8,7 @@ Open source discussion website.
 开源的论坛／社区网站系统，基于 [Ruby China](https://ruby-china.org) 发展而来。
 
 [![Build Status](https://travis-ci.org/ruby-china/homeland.svg?branch=master)](https://travis-ci.org/ruby-china/homeland) [![codecov.io](https://codecov.io/github/ruby-china/homeland/coverage.svg?branch=master)](https://codecov.io/github/ruby-china/homeland?branch=master)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fruby-china%2Fhomeland.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fruby-china%2Fhomeland?ref=badge_shield)
 
 ## Deployment
 
@@ -46,3 +47,6 @@ Emojis under the CC-BY 4.0 license from [Twitter/Twemoji][twemoji]:
 * https://github.com/twitter/twemoji#license
 
 [twemoji]: https://github.com/twitter/twemoji
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fruby-china%2Fhomeland.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fruby-china%2Fhomeland?ref=badge_large)

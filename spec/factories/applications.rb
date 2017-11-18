@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :application, class: Doorkeeper::Application do
     sequence(:name) { |n| "name#{n}" }
     sequence(:uid) { |n| "uid#{n}" }

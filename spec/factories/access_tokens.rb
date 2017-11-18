@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :access_token, class: Doorkeeper::AccessToken do
     sequence(:resource_owner_id) { |n| n }
     application

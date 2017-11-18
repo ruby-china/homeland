@@ -3,8 +3,8 @@ require 'oauth2'
 
 describe 'OAuth2' do
   let(:password) { '123123' }
-  let(:user) { FactoryGirl.create(:user, password: password, password_confirmation: password) }
-  let(:app) { FactoryGirl.create(:application) }
+  let(:user) { FactoryBot.create(:user, password: password, password_confirmation: password) }
+  let(:app) { FactoryBot.create(:application) }
 
   let(:client) do
     OAuth2::Client.new(app.uid, app.secret) do |b|
@@ -14,7 +14,7 @@ describe 'OAuth2' do
   end
 
   describe 'auth_code' do
-    let(:grant) { FactoryGirl.create(:access_grant, application: app, redirect_uri: "#{app.redirect_uri}/callback") }
+    let(:grant) { FactoryBot.create(:access_grant, application: app, redirect_uri: "#{app.redirect_uri}/callback") }
 
     it 'should work' do
       expect do

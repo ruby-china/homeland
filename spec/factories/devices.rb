@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :device do
     platform 1
     association :user

@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/Eric-Guo/cancancan
+  revision: 5ae12b0b8acf9f430f4a306af4a921f6ad5a9c93
+  branch: develop
+  specs:
+    cancancan (2.1.1)
+
 GEM
   remote: https://gems.ruby-china.org/
   specs:
@@ -62,7 +69,6 @@ GEM
     bundler-audit (0.6.0)
       bundler (~> 1.2)
       thor (~> 0.18)
-    cancancan (2.1.1)
     capybara (2.16.0)
       addressable
       mini_mime (>= 0.1.3)
@@ -277,7 +283,7 @@ GEM
     rack-cors (1.0.2)
     rack-protection (2.0.0)
       rack
-    rack-test (0.8.0)
+    rack-test (0.7.0)
       rack (>= 1.0, < 3)
     rack-utf8_sanitizer (1.3.2)
       rack (>= 1.0, < 3.0)
@@ -437,7 +443,7 @@ DEPENDENCIES
   better_errors
   bulk_insert
   bundler-audit
-  cancancan
+  cancancan!
   capybara
   carrierwave
   carrierwave-aliyun

@@ -81,6 +81,9 @@ gem 'redis-objects'
 # Cache
 gem 'second_level_cache'
 
+# Attributes on Steroids for Plain Old Ruby Objects
+gem 'virtus'
+
 # Setting
 gem 'rails-settings-cached'
 

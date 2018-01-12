@@ -1,28 +1,15 @@
 # encoding: utf-8
 
+require 'elasticsearch/persistence/model'
+
 class PageView
-  include Virtus.model
+  include Elasticsearch::Persistence::Model
 
-  attribute :target_id, Integer
-  attribute :timestamp, Integer, default: Time.now.to_i
+  attribute :target_id,   Integer, mapping: { type: 'integer' }
+  attribute :target_type, String,  mapping: { type: 'text' }
+  attribute :timestamp,   Integer, mapping: { type: 'long' }, default: -> { Time.now.to_i }
 
-  def repository
-    @repository ||= Repository::PageView.instance
-  end
+  validates :target_id, :target_type, presence: true
 
-  def valid?
-    target_id.present?
-  end
-
-  def save
-    repository.save(self)
-  end
-
-  class << self
-
-    def create(*args)
-      obj = new(*args)
-      obj.valid? && obj.save
-    end
-  end
+  create_index!
 end

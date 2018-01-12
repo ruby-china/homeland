@@ -535,7 +535,6 @@ DEPENDENCIES
   turbolinks (~> 5.0.0)
   twemoji
   uglifier
-  virtus
   yard
 
 BUNDLED WITH

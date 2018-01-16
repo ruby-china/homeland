@@ -10,6 +10,8 @@ class RepliesController < ApplicationController
     @reply.user_id = current_user.id
 
     if @reply.save
+      3.times { TopicPageViewJob.perform_later(@topic.id) }
+
       current_user.read_topic(@topic)
       @msg = t("topics.reply_success")
     else

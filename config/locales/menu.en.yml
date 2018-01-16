@@ -77,6 +77,8 @@
     uploading: "Uploading"
   menu:
     topics: "Discussion"
+    weekly_hot_topics: "Weekly hot Discussion"
+    daily_hot_topics: "Daliy hot Discussion"
     wiki: "Wiki"
     gems: "Gems"
     users: "Users"

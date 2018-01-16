@@ -75,6 +75,9 @@ Rails.application.routes.draw do
       get :favorites
       get :feed, defaults: { format: 'xml' }
       post :preview
+
+      get :weekly_hot
+      get :daily_hot
     end
     resources :replies do
       member do

@@ -57,6 +57,8 @@ module Api
       # ```
       def show
         @topic.hits.incr(1)
+        TopicPageViewJob.perform_later(@topic.id)
+
         @meta = { followed: false, liked: false, favorited: false }
 
         if current_user

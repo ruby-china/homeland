@@ -30,6 +30,22 @@ class TopicsController < ApplicationController
     end
   end
 
+  def weekly_hot
+    topic_ids = Analysis::HotTopic.instance.weekly_hot_topic_ids
+    @page_title = t("menu.weekly_hot_topics")
+    @topics = Topic.where(id: topic_ids).page(params[:page])
+
+    render :index
+  end
+
+  def daily_hot
+    topic_ids = Analysis::HotTopic.instance.daily_hot_topic_ids
+    @page_title = t("menu.daily_hot_topics")
+    @topics = Topic.where(id: topic_ids).page(params[:page])
+
+    render :index
+  end
+
   def feed
     @topics = Topic.without_hide_nodes.recent.limit(20).includes(:node, :user, :last_reply_user)
     render layout: false if stale?(@topics)
@@ -87,6 +103,8 @@ class TopicsController < ApplicationController
     render_404 if @topic.deleted?
 
     @topic.hits.incr(1)
+    TopicPageViewJob.perform_later(@topic.id)
+
     @node = @topic.node
     @show_raw = params[:raw] == "1"
     @can_reply = can?(:create, Reply)
@@ -147,6 +165,8 @@ class TopicsController < ApplicationController
 
   def destroy
     @topic.destroy_by(current_user)
+    TopicPageViewJob.perform_later(@topic.id, :destroy)
+
     redirect_to(topics_path, notice: t("topics.delete_topic_success"))
   end
 

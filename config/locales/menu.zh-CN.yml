@@ -80,6 +80,8 @@
   menu:
     home: "首页"
     topics: "社区"
+    weekly_hot_topics: "本周热门"
+    daily_hot_topics: "24小时热门"
     wiki: "Wiki"
     gems: "Gems"
     users: "会员"

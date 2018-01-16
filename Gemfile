@@ -113,6 +113,8 @@ gem 'puma'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rack-utf8_sanitizer'
 
+gem 'whenever', require: false
+
 gem 'exception-track'
 gem 'status-page'
 
@@ -133,6 +135,7 @@ group :development do
   gem 'better_errors'
   gem 'spring'
   gem 'spring-commands-rspec'
+  gem 'pry-rails'
 end
 
 group :development, :test do

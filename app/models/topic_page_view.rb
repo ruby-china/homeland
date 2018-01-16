@@ -14,22 +14,12 @@ class TopicPageView
   create_index!
 
   class << self
-    def fake_pv
-      data = self.new(
-        topic_id:   rand(3_000),
-        created_at: Time.at(Time.now.to_i - rand(1.month.to_i))
-      ).as_json
 
-      data.delete(:id)
-      data
-    end
-
-    def fake_data
-      Elasticsearch::Persistence.client.bulk(
-        index: 'topic_page_views',
-        type:  'topic_page_view',
-        body:  (1..10_000).map { { index: { data: fake_pv } } },
-        refresh: true
+    def destroy(topic_id)
+      Elasticsearch::Persistence.client.delete_by_query(
+        index: self.index_name,
+        type:  self.document_type,
+        body:  { query: { term: { topic_id: topic_id } } }
       )
     end
   end

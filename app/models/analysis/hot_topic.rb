@@ -6,15 +6,42 @@ module Analysis
 
     HOT_TOPIC_SEARCH_SIZE = 700 # 聚合热门话题搜索数量
     HOT_TOPIC_SIZE = 100        # 热门话题数量
+
     WEEK_DAY_NUM = 7
     DAY_HOUR_NUM = 24
 
-    def week_hot_topic
+    WEEKLY_CACHE_KEY = "hot_topic:weekly".freeze
+    DAILY_CACHE_KEY  = "hot_topic:daily".freeze
+
+    def weekly_hot_topic_ids
+      Rails.cache.fetch(WEEKLY_CACHE_KEY) do
+        calc_weekly_hot_topic_ids
+      end
+    end
+
+    def daily_hot_topic_ids
+      Rails.cache.fetch(DAILY_CACHE_KEY) do
+        calc_daily_hot_topic_ids
+      end
+    end
+
+    def calc_weekly_hot_topic_ids
       hot_topic = {}
-      week_search_result.each_with_index do |result, index|
+      weekly_search_result.each_with_index do |result, index|
         result.each do |topic_id, pv|
           hot_topic[topic_id] ||= 0
           hot_topic[topic_id] += pv * (WEEK_DAY_NUM - index)
+        end
+      end
+      hot_topic.sort_by { |_, v| -v }[0, HOT_TOPIC_SIZE].map { |r| r[0] }
+    end
+
+    def calc_daily_hot_topic_ids
+      hot_topic = {}
+      daily_search_result.each_with_index do |result, index|
+        result.each do |topic_id, pv|
+          hot_topic[topic_id] ||= 0
+          hot_topic[topic_id] += pv * (DAY_HOUR_NUM - index)
         end
       end
       hot_topic.sort_by { |_, v| -v }[0, HOT_TOPIC_SIZE].map { |r| r[0] }
@@ -29,8 +56,8 @@ module Analysis
     #   ...
     #   { topic_id1 => pv, topic_id1 => pv, ...}
     # ]
-    def week_search_result
-      result = TopicPageView.search(week_search_query)
+    def weekly_search_result
+      result = TopicPageView.search(weekly_search_query)
       result = result.response.aggregations.deep_symbolize_keys
       result[:by_day][:buckets].map do |bucket|
         bucket[:topic_ids][:buckets].reduce({}) do |result, tb|
@@ -40,7 +67,7 @@ module Analysis
       end
     end
 
-    def week_search_query
+    def weekly_search_query
       {
         size: 0,
         query: {
@@ -80,17 +107,6 @@ module Analysis
       }
     end
 
-    def day_hot_topic
-      hot_topic = {}
-      day_search_result.each_with_index do |result, index|
-        result.each do |topic_id, pv|
-          hot_topic[topic_id] ||= 0
-          hot_topic[topic_id] += pv * (DAY_HOUR_NUM - index)
-        end
-      end
-      hot_topic.sort_by { |_, v| -v }[0, HOT_TOPIC_SIZE].map { |r| r[0] }
-    end
-
     # 返回一个 size 为 24 的 Array
     # Array 第一个元素为现在所在小时热门话题所对应的 Hash, Hash 结构为 { topic_id1 => pv, topic_id1 => pv, ...}
     # Array 第二个元素为上1个小时当天热门话题所对应的 Hash, 依次类推
@@ -100,8 +116,8 @@ module Analysis
     #   ...
     #   { topic_id1 => pv, topic_id1 => pv, ...}
     # ]
-    def day_search_result
-      result = TopicPageView.search(day_search_query)
+    def daily_search_result
+      result = TopicPageView.search(daily_search_query)
       result = result.response.aggregations.deep_symbolize_keys
       result[:by_hour][:buckets].map do |bucket|
         bucket[:topic_ids][:buckets].reduce({}) do |result, tb|
@@ -111,7 +127,7 @@ module Analysis
       end
     end
 
-    def day_search_query
+    def daily_search_query
       {
         size: 0,
         query: {

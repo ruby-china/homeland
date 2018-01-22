@@ -9,7 +9,7 @@ var ignoreKeyCodeMax = 46;
 var commandKey = 91;
 
 RegExp.escape = function(text) {
-    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
 }
 
 function escapeShortcut() {
@@ -28,7 +28,7 @@ function navResizer() {
   }).mouseup(function(e) {
     window.parent.postMessage({action: 'mouseup'}, '*');
   });
-  window.parent.postMessage("navReady", "*");
+  window.parent.postMessage('navReady', '*');
 }
 
 function clearSearchTimeout() {
@@ -84,14 +84,14 @@ function populateSearchCache() {
 function enableSearch() {
   $('#search input').keyup(function(event) {
     if (ignoredKeyPress(event)) return;
-    if (this.value === "") {
+    if (this.value === '') {
       clearSearch();
     } else {
       performSearch(this.value);
     }
   });
 
-  $('#full_list').after("<div id='noresults' style='display:none'></div>");
+  $('#full_list').after('<div id=\'noresults\' style=\'display:none\'></div>');
 }
 
 function ignoredKeyPress(event) {
@@ -130,7 +130,7 @@ function partialSearch(searchString, offset) {
     var item = searchCache[i];
     var searchName = (searchString.indexOf('::') != -1 ? item.fullName : item.name);
     var matchString = buildMatchString(searchString);
-    var matchRegexp = new RegExp(matchString, caseSensitiveMatch ? "" : "i");
+    var matchRegexp = new RegExp(matchString, caseSensitiveMatch ? '' : 'i');
     if (searchName.match(matchRegexp) == null) {
       item.node.removeClass('found');
       item.link.text(item.link.text());
@@ -139,7 +139,7 @@ function partialSearch(searchString, offset) {
       item.node.addClass('found');
       item.node.removeClass(lastRowClass).addClass(lastRowClass == 'r1' ? 'r2' : 'r1');
       lastRowClass = item.node.hasClass('r1') ? 'r1' : 'r2';
-      item.link.html(item.name.replace(matchRegexp, "<strong>$&</strong>"));
+      item.link.html(item.name.replace(matchRegexp, '<strong>$&</strong>'));
     }
   }
   if(i == searchCache.length) {
@@ -166,7 +166,7 @@ function buildMatchString(searchString, event) {
   caseSensitiveMatch = searchString.match(/[A-Z]/) != null;
   var regexSearchString = RegExp.escape(searchString);
   if (caseSensitiveMatch) {
-    regexSearchString += "|" +
+    regexSearchString += '|' +
       $.map(searchString.split(''), function(e) { return RegExp.escape(e); }).
       join('.+?');
   }
@@ -196,13 +196,13 @@ function expandTo(path) {
 
 function windowEvents(event) {
   var msg = event.data;
-  if (msg.action === "expand") {
+  if (msg.action === 'expand') {
     expandTo(msg.path);
   }
   return false;
 }
 
-window.addEventListener("message", windowEvents, false);
+window.addEventListener('message', windowEvents, false);
 
 $(document).ready(function() {
   escapeShortcut();

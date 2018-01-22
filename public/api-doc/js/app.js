@@ -6,30 +6,30 @@ try { sessionStorage = window.sessionStorage; } catch (e) { }
 
 function createSourceLinks() {
     $('.method_details_list .source_code').
-        before("<span class='showSource'>[<a href='#' class='toggleSource'>View source</a>]</span>");
+        before('<span class=\'showSource\'>[<a href=\'#\' class=\'toggleSource\'>View source</a>]</span>');
     $('.toggleSource').toggle(function() {
        $(this).parent().nextAll('.source_code').slideDown(100);
-       $(this).text("Hide source");
+       $(this).text('Hide source');
     },
     function() {
         $(this).parent().nextAll('.source_code').slideUp(100);
-        $(this).text("View source");
+        $(this).text('View source');
     });
 }
 
 function createDefineLinks() {
     var tHeight = 0;
-    $('.defines').after(" <a href='#' class='toggleDefines'>more...</a>");
+    $('.defines').after(' <a href=\'#\' class=\'toggleDefines\'>more...</a>');
     $('.toggleDefines').toggle(function() {
         tHeight = $(this).parent().prev().height();
         $(this).prev().css('display', 'inline');
         $(this).parent().prev().height($(this).parent().height());
-        $(this).text("(less)");
+        $(this).text('(less)');
     },
     function() {
         $(this).prev().hide();
         $(this).parent().prev().height(tHeight);
-        $(this).text("more...");
+        $(this).text('more...');
     });
 }
 
@@ -38,13 +38,13 @@ function createFullTreeLinks() {
     $('.inheritanceTree').toggle(function() {
         tHeight = $(this).parent().prev().height();
         $(this).parent().toggleClass('showAll');
-        $(this).text("(hide)");
+        $(this).text('(hide)');
         $(this).parent().prev().height($(this).parent().height());
     },
     function() {
         $(this).parent().toggleClass('showAll');
         $(this).parent().prev().height(tHeight);
-        $(this).text("show all");
+        $(this).text('show all');
     });
 }
 
@@ -73,7 +73,7 @@ function searchFrameButtons() {
 function toggleSearchFrame(id, link) {
   var frame = $('#search_frame');
   $('#search a').removeClass('active').addClass('inactive');
-  if (frame.attr('src') === link && frame.css('display') !== "none") {
+  if (frame.attr('src') === link && frame.css('display') !== 'none') {
     frame.slideUp(100);
     $('#search a').removeClass('active inactive');
   }
@@ -95,7 +95,7 @@ function summaryToggle() {
     e.preventDefault();
     localStorage.summaryCollapsed = $(this).text();
     $('.summary_toggle').each(function() {
-      $(this).text($(this).text() == "collapse" ? "expand" : "collapse");
+      $(this).text($(this).text() == 'collapse' ? 'expand' : 'collapse');
       var next = $(this).parent().parent().nextAll('ul.summary').first();
       if (next.hasClass('compact')) {
         next.toggle();
@@ -115,9 +115,9 @@ function summaryToggle() {
     });
     return false;
   });
-  if (localStorage.summaryCollapsed == "collapse") {
+  if (localStorage.summaryCollapsed == 'collapse') {
     $('.summary_toggle').first().click();
-  } else { localStorage.summaryCollapsed = "expand"; }
+  } else { localStorage.summaryCollapsed = 'expand'; }
 }
 
 function generateTOC() {
@@ -133,12 +133,12 @@ function generateTOC() {
   var lastTag = parseInt(tags[0][1], 10);
   $(tags.join(', ')).each(function() {
     if ($(this).parents('.method_details .docstring').length != 0) return;
-    if (this.id == "filecontents") return;
+    if (this.id == 'filecontents') return;
     show = true;
     var thisTag = parseInt(this.tagName[1], 10);
     if (this.id.length === 0) {
       var proposedId = $(this).attr('toc-id');
-      if (typeof(proposedId) != "undefined") this.id = proposedId;
+      if (typeof(proposedId) != 'undefined') this.id = proposedId;
       else {
         var proposedId = $(this).text().replace(/[^a-z0-9-]/ig, '_');
         if ($('#' + proposedId).length > 0) { proposedId += counter; counter++; }
@@ -154,7 +154,7 @@ function generateTOC() {
       for (i = 0; i < lastTag - thisTag; i++) toc = toc.parent();
     }
     var title = $(this).attr('toc-title');
-    if (typeof(title) == "undefined") title = $(this).text();
+    if (typeof(title) == 'undefined') title = $(this).text();
     toc.append('<li><a href="#' + this.id + '">' + title + '</a></li>');
     lastTag = thisTag;
   });

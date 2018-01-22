@@ -57,7 +57,7 @@ module Homeland
     end
 
     config.action_cable.log_tags = [
-      :action_cable, -> (request) { request.uuid }
+      :action_cable, ->(request) { request.uuid }
     ]
 
     memcached_config = Application.config_for(:memcached)

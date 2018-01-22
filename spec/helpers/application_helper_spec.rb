@@ -89,7 +89,6 @@ describe ApplicationHelper, type: :helper do
     end
   end
 
-
   describe 'markdown' do
     context 'bad html' do
       it 'filter script' do

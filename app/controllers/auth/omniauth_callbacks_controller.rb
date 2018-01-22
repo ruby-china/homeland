@@ -9,7 +9,6 @@ module Auth
               redirect_to account_setting_path, notice: "成功绑定了 #{provider} 帐号。"
             else
               @user = User.find_or_create_for_#{provider}(request.env["omniauth.auth"])
-
               if @user.persisted?
                 flash[:notice] = t('devise.sessions.signed_in')
                 sign_in_and_redirect @user, event: :authentication

@@ -33,7 +33,6 @@ describe 'image_thumb' do
         image_thumb = Homeland::ImageThumb.new('favicon.png', 'other', pragma: true)
         expect(image_thumb.exists?).to be_truthy
       end
-
     end
   end
 end

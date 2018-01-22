@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe Admin::CommentsController, type: :controller do
   let(:user) { create :user }
-  let(:comment) { create :comment, user: user, commentable: CommentablePage.create(name: 'Fake Wiki', id: 1)}
+  let(:comment) { create :comment, user: user, commentable: CommentablePage.create(name: 'Fake Wiki', id: 1) }
 
   before do
     sign_in create(:admin)

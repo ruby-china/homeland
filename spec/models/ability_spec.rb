@@ -34,7 +34,7 @@ describe Ability, type: :model do
     let(:locked_topic) { create :topic, user: user, lock_node: true }
     let(:reply) { create :reply, user: user }
     let(:note) { create :note, user: user }
-    let(:comment) { create :comment, user: user, commentable: CommentablePage.create(name: 'Fake Wiki', id: 1)}
+    let(:comment) { create :comment, user: user, commentable: CommentablePage.create(name: 'Fake Wiki', id: 1) }
     let(:team_owner) { create :team_owner, user: user }
     let(:team_member) { create :team_member, user: user }
     let(:note_publish) { create :note, publish: true }

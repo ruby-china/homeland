@@ -69,7 +69,7 @@ gem 'omniauth'
 gem 'omniauth-github'
 
 # Permission
-gem 'cancancan'
+gem 'cancancan', git: 'https://github.com/Eric-Guo/cancancan', branch: :develop
 
 # Redis
 gem 'redis'

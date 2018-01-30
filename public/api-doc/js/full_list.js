@@ -10,7 +10,7 @@ var commandKey = 91;
 
 RegExp.escape = function(text) {
     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
-}
+};
 
 function escapeShortcut() {
   $(document).keydown(function(evt) {

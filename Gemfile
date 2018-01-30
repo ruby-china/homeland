@@ -136,13 +136,13 @@ end
 
 group :development, :test do
   gem 'listen'
-  gem 'rubocop', '0.47.1', require: false
+  gem 'rubocop', '>= 0.49.0', require: false
   gem 'rspec-rails'
   gem 'factory_bot_rails'
   gem 'database_cleaner'
   gem 'capybara'
   gem 'letter_opener'
-  gem 'yard'
+  gem 'yard', '>= 0.9.11'
 
   gem 'codecov', require: false
 end

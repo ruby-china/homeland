@@ -126,6 +126,8 @@ gem 'homeland-site'
 
 gem 'sdoc', '~> 1.0.0.rc3'
 
+gem 'bootsnap'
+
 group :development do
   gem 'derailed'
   # Better Errors

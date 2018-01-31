@@ -3,10 +3,10 @@ module Users
     extend ActiveSupport::Concern
 
     included do
-      before_action :authenticate_user!, only: [:block, :unblock, :blocked, :follow, :unfollow]
-      before_action :only_user!, only: [:topics, :replies, :favorites,
-                                        :block, :unblock, :follow, :unfollow,
-                                        :followers, :following, :calendar, :reward]
+      before_action :authenticate_user!, only: %i[block unblock blocked follow unfollow]
+      before_action :only_user!, only: %i[topics replies favorites
+                                          block unblock follow unfollow
+                                          followers following calendar reward]
     end
 
     def topics

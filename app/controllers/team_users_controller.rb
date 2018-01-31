@@ -2,9 +2,9 @@ class TeamUsersController < ApplicationController
   require_module_enabled! :team
 
   before_action :set_team
-  before_action :set_team_user, only: [:edit, :update, :destroy]
-  before_action :authorize_team_owner!, except: [:index, :accept, :reject, :show]
-  load_and_authorize_resource only: [:accept, :reject, :show]
+  before_action :set_team_user, only: %i[edit update destroy]
+  before_action :authorize_team_owner!, except: %i[index accept reject show]
+  load_and_authorize_resource only: %i[accept reject show]
 
   def index
     @team_users = @team.team_users

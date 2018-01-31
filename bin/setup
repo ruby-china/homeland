@@ -87,7 +87,7 @@ Dir.chdir APP_ROOT do
 
   # Config files
   puts_section "Configure" do
-    %w(database config redis secrets elasticsearch).each do |fname|
+    %w[database config redis secrets elasticsearch].each do |fname|
       system "cp config/#{fname}.yml.default config/#{fname}.yml"
     end
 

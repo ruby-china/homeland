@@ -1,6 +1,6 @@
 module Admin
   class NodesController < Admin::ApplicationController
-    before_action :set_node, only: [:show, :edit, :update, :destroy]
+    before_action :set_node, only: %i[show edit update destroy]
 
     def index
       @nodes = Node.sorted.includes(:section)

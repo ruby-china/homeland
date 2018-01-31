@@ -5,7 +5,7 @@ module Homeland
         doc.xpath(".//text()").each do |node|
           content = node.to_html
           next unless content.include?(":")
-          next if has_ancestor?(node, %w(pre code))
+          next if has_ancestor?(node, %w[pre code])
 
           html = Twemoji.parse(content)
 

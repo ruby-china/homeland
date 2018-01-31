@@ -76,7 +76,7 @@ class Topic < ApplicationRecord
     opts = {
       query: {
         more_like_this: {
-          fields: [:title, :body],
+          fields: %i[title body],
           like: [
             {
               _index: self.class.index_name,
@@ -94,7 +94,7 @@ class Topic < ApplicationRecord
   end
 
   def self.fields_for_list
-    columns = %w(body who_deleted)
+    columns = %w[body who_deleted]
     select(column_names - columns.map(&:to_s))
   end
 
@@ -211,7 +211,7 @@ class Topic < ApplicationRecord
 
   def self.notify_topic_created(topic_id)
     topic = Topic.find_by_id(topic_id)
-    return unless topic && topic.user
+    return unless topic&.user
 
     follower_ids = topic.user.follow_by_user_ids
     return if follower_ids.empty?

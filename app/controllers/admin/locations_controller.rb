@@ -1,6 +1,6 @@
 module Admin
   class LocationsController < Admin::ApplicationController
-    before_action :set_location, only: [:show, :edit, :update, :destroy]
+    before_action :set_location, only: %i[show edit update destroy]
 
     def index
       @locations = Location.hot.page(params[:page])

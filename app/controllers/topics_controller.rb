@@ -1,12 +1,12 @@
 class TopicsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :edit, :create, :update, :destroy,
-                                            :favorite, :unfavorite, :follow, :unfollow,
-                                            :action, :favorites]
-  load_and_authorize_resource only: [:new, :edit, :create, :update, :destroy,
-                                     :favorite, :unfavorite, :follow, :unfollow]
+  before_action :authenticate_user!, only: %i[new edit create update destroy
+                                              favorite unfavorite follow unfollow
+                                              action favorites]
+  load_and_authorize_resource only: %i[new edit create update destroy
+                                       favorite unfavorite follow unfollow]
 
-  before_action :set_topic, only: [:ban, :edit, :update, :destroy, :follow,
-                                   :unfollow, :action]
+  before_action :set_topic, only: %i[ban edit update destroy follow
+                                     unfollow action]
 
   def index
     @suggest_topics = []
@@ -50,7 +50,7 @@ class TopicsController < ApplicationController
     render layout: false if stale?([@node, @topics])
   end
 
-  %w(no_reply popular).each do |name|
+  %w[no_reply popular].each do |name|
     define_method(name) do
       @topics = Topic.without_hide_nodes.send(name.to_sym).last_actived.fields_for_list.includes(:user)
       @topics = @topics.page(params[:page])

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, except: [:index, :city]
+  before_action :set_user, except: %i[index city]
 
   etag { @user }
   etag { @user&.teams if @user&.user_type == :user }

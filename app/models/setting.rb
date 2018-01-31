@@ -6,7 +6,7 @@ class Setting < RailsSettings::Base
   SEPARATOR_REGEXP = /[\s,]/
 
   # keys that allow update in admin
-  KEYS_IN_ADMIN = %w(
+  KEYS_IN_ADMIN = %w[
     custom_head_html
     navbar_html
     navbar_brand_html
@@ -28,7 +28,7 @@ class Setting < RailsSettings::Base
     blacklist_ips
     admin_emails
     ban_reasons
-  )
+  ]
 
   class << self
     def protocol

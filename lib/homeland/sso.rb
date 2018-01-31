@@ -77,7 +77,7 @@ module Homeland
       end
 
       sso_record.save!
-      sso_record && sso_record.user
+      sso_record&.user
     end
 
     def match_email_or_create_user

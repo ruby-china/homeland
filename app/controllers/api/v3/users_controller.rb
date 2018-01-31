@@ -1,8 +1,8 @@
 module Api
   module V3
     class UsersController < Api::V3::ApplicationController
-      before_action :doorkeeper_authorize!, only: [:me, :follow, :unfollow, :block, :unblock, :blocked]
-      before_action :set_user, except: [:index, :me]
+      before_action :doorkeeper_authorize!, only: %i[me follow unfollow block unblock blocked]
+      before_action :set_user, except: %i[index me]
 
       # 获取热门用户
       #
@@ -49,7 +49,7 @@ module Api
       #
       # @return [Array<TopicSerializer>] 话题列表
       def topics
-        optional! :order, type: String, default: "recent", values: %w(recent likes replies)
+        optional! :order, type: String, default: "recent", values: %w[recent likes replies]
         optional! :offset, type: Integer, default: 0
         optional! :limit, type: Integer, default: 20, values: 1..150
 
@@ -76,7 +76,7 @@ module Api
       #
       # @return [Array<ReplyDetailSerializer>]
       def replies
-        optional! :order, type: String, default: "recent", values: %w(recent)
+        optional! :order, type: String, default: "recent", values: %w[recent]
         optional! :offset, type: Integer, default: 0
         optional! :limit, type: Integer, default: 20, values: 1..150
 

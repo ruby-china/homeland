@@ -87,7 +87,7 @@ module Homeland
               # 防止 C 的 autolink 出来的内容有编码错误，万一有就直接跳过转换
               # 比如这句: 此版本并非线上的http://yavaeye.com的源码.
               link.match(/.+?/)
-            rescue
+            rescue StandardError
               return link
             end
             # Fix Chinese neer the URL
@@ -96,7 +96,7 @@ module Homeland
             %(<a href="#{link}" rel="nofollow" target="_blank">#{link}</a>#{bad_text})
           end
         end
-      end # end RenderHTML
+      end
     end
   end
 end

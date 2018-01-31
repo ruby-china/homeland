@@ -66,7 +66,7 @@ class ApplicationController < ActionController::Base
 
   def render_optional_error_file(status_code)
     status = status_code.to_s
-    fname = %w(404 403 422 500).include?(status) ? status : "unknown"
+    fname = %w[404 403 422 500].include?(status) ? status : "unknown"
 
     respond_to do |format|
       format.html { render template: "/errors/#{fname}", handler: [:erb], status: status, layout: "application" }

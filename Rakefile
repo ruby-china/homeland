@@ -12,7 +12,7 @@ task default: "bundle:audit"
 require "sdoc"
 require "rdoc/task"
 
-rdoc_files = %w(
+rdoc_files = %w[
   README.md
   PLUGIN_DEV.md
   CONTRIBUTE.md
@@ -23,7 +23,7 @@ rdoc_files = %w(
   lib/homeland.rb
   lib/single_sign_on.rb
   lib/homeland
-)
+]
 
 RDoc::Task.new do |rdoc|
   rdoc.rdoc_dir = "public/doc"

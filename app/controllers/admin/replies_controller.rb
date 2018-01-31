@@ -1,6 +1,6 @@
 module Admin
   class RepliesController < Admin::ApplicationController
-    before_action :set_reply, only: [:show, :edit, :update, :destroy]
+    before_action :set_reply, only: %i[show edit update destroy]
 
     def index
       @replies = Reply.unscoped

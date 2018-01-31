@@ -10,7 +10,7 @@ class BaseUploader < CarrierWave::Uploader::Base
   #
   # Photo
   # large - 1920x? - 限定宽度，高度自适应
-  ALLOW_VERSIONS = %w(xs sm md lg large)
+  ALLOW_VERSIONS = %w[xs sm md lg large]
 
   def store_dir
     dir = model.class.to_s.underscore
@@ -21,7 +21,7 @@ class BaseUploader < CarrierWave::Uploader::Base
   end
 
   def extension_white_list
-    %w(jpg jpeg gif png svg)
+    %w[jpg jpeg gif png svg]
   end
 
   def url(version_name = nil)

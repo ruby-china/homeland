@@ -4,7 +4,7 @@ module Api
       before_action :doorkeeper_authorize!
 
       before_action do
-        requires! :obj_type, values: %w(topic reply)
+        requires! :obj_type, values: %w[topic reply]
         requires! :obj_id
       end
 

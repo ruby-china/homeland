@@ -3,7 +3,7 @@ class User
     extend ActiveSupport::Concern
 
     module ClassMethods
-      %w(github).each do |provider|
+      %w[github].each do |provider|
         define_method "find_or_create_for_#{provider}" do |response|
           uid = response["uid"].to_s
           data = response["info"]

@@ -1,12 +1,12 @@
 # From: https://github.com/discourse/discourse/blob/master/lib/single_sign_on.rb
 class SingleSignOn
-  ACCESSORS         = [:nonce, :name, :username, :email, :avatar_url, :bio, :external_id, :return_sso_url, :admin]
+  ACCESSORS         = %i[nonce name username email avatar_url bio external_id return_sso_url admin]
   FIXNUMS           = []
   BOOLS             = [:admin]
   NONCE_EXPIRY_TIME = 10.minutes
 
   attr_accessor(*ACCESSORS)
-  attr_accessor :sso_secret, :sso_url
+  attr_writer :sso_secret, :sso_url
 
   def self.sso_secret
     raise "sso_secret not implemented on class, be sure to set it on instance"
@@ -37,7 +37,7 @@ class SingleSignOn
       val = decoded_hash[k.to_s]
       val = val.to_i if FIXNUMS.include? k
       if BOOLS.include? k
-        val = %w(true false).include?(val) ? val == "true" : nil
+        val = %w[true false].include?(val) ? val == "true" : nil
       end
       sso.send("#{k}=", val)
     end

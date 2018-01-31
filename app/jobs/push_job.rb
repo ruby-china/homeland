@@ -8,7 +8,7 @@ class PushJob < ApplicationJob
 
     note[:sound] ||= "true"
     devices = Device.where(user_id: user_ids).all.to_a
-    devices.reject! { |d| !d.alive? }
+    devices.select!(&:alive?)
     tokens = devices.collect(&:token)
     return false if tokens.blank?
 

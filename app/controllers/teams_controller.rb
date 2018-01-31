@@ -3,7 +3,7 @@ class TeamsController < ApplicationController
   load_resource find_by: :login
   load_and_authorize_resource
 
-  before_action :set_team, only: [:show, :edit, :update, :destroy]
+  before_action :set_team, only: %i[show edit update destroy]
 
   def index
     @total_team_count = Team.count

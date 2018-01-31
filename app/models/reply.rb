@@ -6,7 +6,7 @@ class Reply < ApplicationRecord
   include MentionTopic
   include UserAvatarDelegate
 
-  UPVOTES = %w(+1 :+1: :thumbsup: :plus1: 👍 👍🏻 👍🏼 👍🏽 👍🏾 👍🏿)
+  UPVOTES = %w[+1 :+1: :thumbsup: :plus1: 👍 👍🏻 👍🏼 👍🏽 👍🏾 👍🏿]
 
   belongs_to :user, counter_cache: true
   belongs_to :topic, touch: true
@@ -20,7 +20,7 @@ class Reply < ApplicationRecord
   scope :fields_for_list, -> { select(:topic_id, :id, :body, :updated_at, :created_at) }
 
   validates :body, presence: true, unless: -> { system_event? }
-  validates :body, uniqueness: { scope: [:topic_id, :user_id], message: "不能重复提交。" }, unless: -> { system_event? }
+  validates :body, uniqueness: { scope: %i[topic_id user_id], message: "不能重复提交。" }, unless: -> { system_event? }
   validate do
     ban_words = (Setting.ban_words_on_reply || "").split("\n").collect(&:strip)
     if body.strip.downcase.in?(ban_words)

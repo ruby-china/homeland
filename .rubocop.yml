@@ -8,6 +8,7 @@ AllCops:
     - 'Gemfile'
     - 'db/**/*'
     - 'config/**/*'
+    - 'bin/**/*'
   TargetRubyVersion: 2.4
 
 Style/Documentation:

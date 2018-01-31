@@ -12,7 +12,7 @@ json.abilities do
   json.update can?(:update, object)
   json.destroy can?(:destroy, object)
   if object && object.is_a?(Topic)
-    %i(ban excellent unexcellent close open).each do |action|
+    %i[ban excellent unexcellent close open].each do |action|
       json.set! action, can?(action, object)
     end
   end

@@ -39,8 +39,8 @@ class Ability
     unless user.newbie?
       can :create, Topic
     end
-    can [:favorite, :unfavorite, :follow, :unfollow], Topic
-    can [:update, :open, :close], Topic, user_id: user.id
+    can %i[favorite unfavorite follow unfollow], Topic
+    can %i[update open close], Topic, user_id: user.id
     can :change_node, Topic, user_id: user.id, lock_node: false
     can :destroy, Topic do |topic|
       topic.user_id == user.id && topic.replies_count == 0
@@ -50,8 +50,8 @@ class Ability
   def roles_for_replies
     # 新手用户晚上禁止回帖，防 spam，可在面板设置是否打开
     can :create, Reply unless current_lock_reply?
-    can [:update, :destroy], Reply, user_id: user.id
-    cannot [:create, :update, :destroy], Reply, topic: { closed?: true }
+    can %i[update destroy], Reply, user_id: user.id
+    cannot %i[create update destroy], Reply, topic: { closed?: true }
   end
 
   def current_lock_reply?
@@ -89,8 +89,8 @@ class Ability
   end
 
   def basic_read_only
-    can [:read, :feed, :node], Topic
-    can [:read, :reply_to], Reply
+    can %i[read feed node], Topic
+    can %i[read reply_to], Reply
     can :read, Photo
     can :read, Section
     can :read, Comment

@@ -1,6 +1,6 @@
 module Admin
   class SectionsController < Admin::ApplicationController
-    before_action :set_section, only: [:show, :edit, :update, :destroy]
+    before_action :set_section, only: %i[show edit update destroy]
 
     def index
       @sections = Section.all

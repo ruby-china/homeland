@@ -955,3 +955,75 @@ footer {
 
 .dz-preview { display: none; }
 textarea.div-dropzone-focus { border-color: #BBE1C9; background: #fafafa; }
+
+.full-screen-mask-container {
+  background: rgba(0, 0, 0, 0.62);
+  
+  width: 100vw; 
+  height: 100vh;
+  
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1001;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  &__title {
+    color: white;
+    font-size: 22px;
+
+    margin-top: 10%;
+  }
+
+  &__poster {
+    margin-top: 5%;
+    margin-bottom: 15%;
+  }
+
+  &__button {
+    &--primary {
+      background-color: black;
+      border-color: black;
+      color: white;
+
+      border-radius: 20px;
+      
+      width: 125px;
+
+      padding: 10px 0;
+
+      &:focus,
+      &:hover {
+        color: #ffea01;
+      }
+    }
+
+    &--secondary {
+      color: #999999;
+      text-decoration: underline;
+
+      font-size: 14px;
+
+      &:active,
+      &:focus,
+      &:hover {
+        color: #999999;
+      }
+    }
+  }
+}
+
+.not-scroll {
+  overflow: hidden;
+}
+
+.center-vertically-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

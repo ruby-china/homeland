@@ -52,6 +52,15 @@
   </script>
 </head>
 <body data-controller-name="<%= controller_name %>">
+  <div id="advertisement-container" class="full-screen-mask-container hidden" onClick="onClickAdvertisementPassButton();">
+    <div class="center-vertically-container">
+      <p class="full-screen-mask-container__title">您有一份定制课程等待领取</p>
+      <img class="full-screen-mask-container__poster"src="http://codingstyle.oss-cn-shenzhen.aliyuncs.com/card2.png">
+      <button class="btn full-screen-mask-container__button--primary" type="submit" onClick="onClickAdvertisementSubmitButton();">立即领取</button>
+    </div>
+    <a class="full-screen-mask-container__button--secondary" href="javascript:void(0)" role="button" onClick="onClickAdvertisementPassButton();">我先随意逛逛</a>
+  </div>
+
   <div class="header">
     <nav class="navbar navbar-inverse navbar-static-top navbar-default">
       <div class="container">
@@ -113,6 +122,39 @@
     $('body').animate({ scrollTop: -1 },0);
     </script>
   <% end %>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      var visitedAd = Cookies.get("advertisement") === "1";
+
+      if (!visitedAd) {
+        showAd();
+      }
+    });
+
+    function onClickAdvertisementSubmitButton() {
+      window.open("https://study.163.com/course/introduction.htm?courseId=1004959029&utm_source=cp-400000000382021&utm_medium=share&utm_campaign=commission");
+
+      passAd();
+    }
+
+    function onClickAdvertisementPassButton() {
+      passAd();
+    }
+
+    function passAd() {
+      $("#advertisement-container").addClass("hidden");      
+      $("body").removeClass("not-scroll");      
+
+      Cookies.set("advertisement", '1');  
+    }
+
+    function showAd() {
+      $("body").addClass("not-scroll");
+      $("#advertisement-container").removeClass("hidden")
+    }
+  </script>
+
   <script type="text/javascript" data-turbolinks-eval=false>
     App.root_url = "<%= root_url %>";
     App.asset_url = "<%= Setting.upload_url %>";

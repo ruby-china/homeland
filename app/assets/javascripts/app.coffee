@@ -10,6 +10,7 @@
 #= require jquery.timeago.settings
 #= require jquery.hotkeys
 #= require jquery.autogrow-textarea
+#= require js.cookie.js
 #= require dropzone
 #= require jquery.fluidbox.min
 #= require social-share-button

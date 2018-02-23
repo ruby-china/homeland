@@ -200,7 +200,7 @@ describe Reply, type: :model do
         it "should work" do
           expect(user).to receive(:like).with(topic).once
           allow(reply).to receive(:upvote?).and_return(true)
-          reply.check_vote_chars_for_like_topic
+          reply.send(:check_vote_chars_for_like_topic)
         end
       end
 
@@ -208,7 +208,7 @@ describe Reply, type: :model do
         it "should work" do
           expect(user).to receive(:like).with(topic).at_most(0).times
           allow(reply).to receive(:upvote?).and_return(false)
-          reply.check_vote_chars_for_like_topic
+          reply.send(:check_vote_chars_for_like_topic)
         end
       end
 
@@ -250,7 +250,7 @@ describe Reply, type: :model do
         second_target_type: "Topic", second_target_id: reply.topic_id,
         actor_id: reply.user_id
       }
-      expect(reply.default_notification).to eq val
+      expect(reply.send(:default_notification)).to eq val
     end
   end
 

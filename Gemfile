@@ -128,7 +128,7 @@ gem "homeland-wiki"
 
 gem "sdoc", "~> 1.0.0.rc3"
 
-gem 'bootsnap'
+gem "bootsnap"
 
 group :development do
   gem "derailed"

@@ -4,10 +4,11 @@ require "rails_helper"
 
 describe PhotosController, type: :controller do
   let(:user) { create(:user) }
+  let(:file) { fixture_file_upload("test.png") }
 
   it "create success for valid image" do
     sign_in user
-    post :create, params: { file: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, "/app/assets/images/favicon.png"))) }
+    post :create, params: { file: file }
     expect(response).to be_success
     json = JSON.parse(response.body)
     expect(json["ok"]).to be_truthy
@@ -27,7 +28,7 @@ describe PhotosController, type: :controller do
   it "create failure for save error" do
     allow_any_instance_of(Photo).to receive(:save).and_return(false)
     sign_in user
-    post :create, params: { file: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, "/app/assets/images/favicon.png"))) }
+    post :create, params: { file: file }
     expect(response).to be_success
     json = JSON.parse(response.body)
     expect(json["ok"]).to be_falsey

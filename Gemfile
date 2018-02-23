@@ -104,9 +104,7 @@ gem "simple_form"
 gem "postmark"
 gem "postmark-rails"
 
-# Dalli, kgio is for Dalli
 gem "dalli"
-gem "kgio"
 
 gem "puma"
 

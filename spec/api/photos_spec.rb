@@ -7,6 +7,8 @@ describe "API", type: :request do
   let(:json) { JSON.parse(response.body) }
 
   describe "POST /api/v3/photos.json" do
+    include ActionDispatch::TestProcess
+
     context "without login" do
       it "should response 401" do
         post "/api/v3/photos.json"
@@ -17,8 +19,7 @@ describe "API", type: :request do
     context "with login" do
       it "should work" do
         login_user!
-        f = Rack::Test::UploadedFile.new(Rails.root.join("spec/factories/foo.png"))
-        post "/api/v3/photos.json", file: f
+        post "/api/v3/photos.json", file: fixture_file_upload("test.png")
         @photo = Photo.last
         expect(response.status).to eq 200
         expect(@photo.user_id).to eq current_user.id

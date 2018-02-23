@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 module Api
   module V3
     class LikesController < Api::V3::ApplicationController
       before_action :doorkeeper_authorize!
 
       before_action do
-        requires! :obj_type, values: %w(topic reply)
+        requires! :obj_type, values: %w[topic reply]
         requires! :obj_id
       end
 
@@ -39,15 +41,15 @@ module Api
 
       private
 
-      def likeable
-        return @likeable if defined? @likeable
-        @likeable =
-          if params[:obj_type] == "topic"
-            Topic.find(params[:obj_id])
-          else
-            Reply.find(params[:obj_id])
-          end
-      end
+        def likeable
+          return @likeable if defined? @likeable
+          @likeable =
+            if params[:obj_type] == "topic"
+              Topic.find(params[:obj_id])
+            else
+              Reply.find(params[:obj_id])
+            end
+        end
     end
   end
 end

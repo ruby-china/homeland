@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SearchController < ApplicationController
   before_action :authenticate_user!, only: [:users]
 
@@ -12,7 +14,7 @@ class SearchController < ApplicationController
           query: params[:q],
           default_operator: "AND",
           minimum_should_match: "70%",
-          fields: %w(title body name login)
+          fields: %w[title body name login]
         }
       },
       highlight: {

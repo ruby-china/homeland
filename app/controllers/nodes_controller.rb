@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class NodesController < ApplicationController
-  before_action :authenticate_user!, only: [:block, :unblock]
+  before_action :authenticate_user!, only: %i[block unblock]
 
   def index
     @nodes = Node.all

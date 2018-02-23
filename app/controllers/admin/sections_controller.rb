@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module Admin
   class SectionsController < Admin::ApplicationController
-    before_action :set_section, only: [:show, :edit, :update, :destroy]
+    before_action :set_section, only: %i[show edit update destroy]
 
     def index
       @sections = Section.all
@@ -42,8 +44,8 @@ module Admin
 
     private
 
-    def set_section
-      @section = Section.find(params[:id])
-    end
+      def set_section
+        @section = Section.find(params[:id])
+      end
   end
 end

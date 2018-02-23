@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User
   module RewardFields
     extend ActiveSupport::Concern
@@ -5,7 +7,7 @@ class User
     included do
       include RailsSettings::Extend
 
-      REWARD_FIELDS = %i(alipay wechat)
+      REWARD_FIELDS = %i[alipay wechat]
     end
 
     def reward_enabled?

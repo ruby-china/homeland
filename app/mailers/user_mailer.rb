@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserMailer < BaseMailer
   def welcome(user_id)
     @user = User.find_by_id(user_id)

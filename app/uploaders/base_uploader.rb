@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BaseUploader < CarrierWave::Uploader::Base
   # 在 UpYun 或其他平台配置图片缩略图
   # http://docs.upyun.com/guide/#_12
@@ -10,7 +12,7 @@ class BaseUploader < CarrierWave::Uploader::Base
   #
   # Photo
   # large - 1920x? - 限定宽度，高度自适应
-  ALLOW_VERSIONS = %w(xs sm md lg large)
+  ALLOW_VERSIONS = %w[xs sm md lg large]
 
   def store_dir
     dir = model.class.to_s.underscore
@@ -21,7 +23,7 @@ class BaseUploader < CarrierWave::Uploader::Base
   end
 
   def extension_white_list
-    %w(jpg jpeg gif png svg)
+    %w[jpg jpeg gif png svg]
   end
 
   def url(version_name = nil)
@@ -44,15 +46,15 @@ class BaseUploader < CarrierWave::Uploader::Base
 
   private
 
-  def aliyun_thumb_key(version_name)
-    case version_name
-    when "large" then "resize,w_1920"
-    when "lg"    then "resize,w_192,h_192,m_fill"
-    when "md"    then "resize,w_96,h_96,m_fill"
-    when "sm"    then "resize,w_48,h_48,m_fill"
-    when "xs"    then "resize,w_32,h_32,m_fill"
-    else
-      "resize,w_32,h_32,m_fill"
+    def aliyun_thumb_key(version_name)
+      case version_name
+      when "large" then "resize,w_1920"
+      when "lg"    then "resize,w_192,h_192,m_fill"
+      when "md"    then "resize,w_96,h_96,m_fill"
+      when "sm"    then "resize,w_48,h_48,m_fill"
+      when "xs"    then "resize,w_32,h_32,m_fill"
+      else
+        "resize,w_32,h_32,m_fill"
+      end
     end
-  end
 end

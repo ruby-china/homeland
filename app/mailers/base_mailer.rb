@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BaseMailer < ActionMailer::Base
   default from: Setting.mailer_sender
   default charset: "utf-8"

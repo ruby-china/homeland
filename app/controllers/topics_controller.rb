@@ -1,12 +1,14 @@
-class TopicsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :edit, :create, :update, :destroy,
-                                            :favorite, :unfavorite, :follow, :unfollow,
-                                            :action, :favorites]
-  load_and_authorize_resource only: [:new, :edit, :create, :update, :destroy,
-                                     :favorite, :unfavorite, :follow, :unfollow]
+# frozen_string_literal: true
 
-  before_action :set_topic, only: [:ban, :edit, :update, :destroy, :follow,
-                                   :unfollow, :action]
+class TopicsController < ApplicationController
+  before_action :authenticate_user!, only: %i[new edit create update destroy
+                                              favorite unfavorite follow unfollow
+                                              action favorites]
+  load_and_authorize_resource only: %i[new edit create update destroy
+                                       favorite unfavorite follow unfollow]
+
+  before_action :set_topic, only: %i[ban edit update destroy follow
+                                     unfollow action]
 
   def index
     @suggest_topics = []
@@ -50,7 +52,7 @@ class TopicsController < ApplicationController
     render layout: false if stale?([@node, @topics])
   end
 
-  %w(no_reply popular).each do |name|
+  %w[no_reply popular].each do |name|
     define_method(name) do
       @topics = Topic.without_hide_nodes.send(name.to_sym).last_actived.fields_for_list.includes(:user)
       @topics = @topics.page(params[:page])
@@ -199,37 +201,37 @@ class TopicsController < ApplicationController
 
   private
 
-  def set_topic
-    @topic ||= Topic.find(params[:id])
-  end
+    def set_topic
+      @topic ||= Topic.find(params[:id])
+    end
 
-  def topic_params
-    params.require(:topic).permit(:title, :body, :node_id, :team_id)
-  end
+    def topic_params
+      params.require(:topic).permit(:title, :body, :node_id, :team_id)
+    end
 
-  def ability_team_id
-    team = Team.find_by_id(topic_params[:team_id])
-    return nil if team.blank?
-    return nil if cannot?(:show, team)
-    team.id
-  end
+    def ability_team_id
+      team = Team.find_by_id(topic_params[:team_id])
+      return nil if team.blank?
+      return nil if cannot?(:show, team)
+      team.id
+    end
 
-  def check_current_user_status_for_topic
-    return false unless current_user
-    # 通知处理
-    current_user.read_topic(@topic, replies_ids: @replies.collect(&:id))
-    # 是否关注过
-    @has_followed = current_user.follow_topic?(@topic)
-    # 是否收藏
-    @has_favorited = current_user.favorite_topic?(@topic)
-  end
+    def check_current_user_status_for_topic
+      return false unless current_user
+      # 通知处理
+      current_user.read_topic(@topic, replies_ids: @replies.collect(&:id))
+      # 是否关注过
+      @has_followed = current_user.follow_topic?(@topic)
+      # 是否收藏
+      @has_favorited = current_user.favorite_topic?(@topic)
+    end
 
-  def set_special_node_active_menu
-    if Setting.has_module?(:jobs)
-      # FIXME: Monkey Patch for homeland-jobs
-      if @node&.id == 25
-        @current = ["/jobs"]
+    def set_special_node_active_menu
+      if Setting.has_module?(:jobs)
+        # FIXME: Monkey Patch for homeland-jobs
+        if @node&.id == 25
+          @current = ["/jobs"]
+        end
       end
     end
-  end
 end

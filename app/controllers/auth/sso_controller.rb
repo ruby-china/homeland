@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Auth
   class SSOController < ApplicationController
     def show
@@ -8,7 +10,7 @@ module Auth
 
       if destination_url && return_path == root_path
         uri = URI.parse(destination_url)
-        return_path = "#{uri.path}#{uri.query ? '?' << uri.query : ''}"
+        return_path = "#{uri.path}#{uri.query ? '?' + uri.query : ''}"
       end
 
       sso = Homeland::SSO.generate_sso(return_path)
@@ -30,12 +32,12 @@ module Auth
       begin
         user = sso.find_or_create_user(request)
         sign_in :user, user
-      rescue => e
+      rescue StandardError => e
         message = sso.diagnostics
-        message << "\n\n" << "-" * 100 << "\n\n"
-        message << e.message
-        message << "\n\n" << "-" * 100 << "\n\n"
-        message << e.backtrace.join("\n")
+        message += "\n\n" + "-" * 100 + "\n\n"
+        message += e.message
+        message += "\n\n" + "-" * 100 + "\n\n"
+        message += e.backtrace.join("\n")
 
         puts message
 

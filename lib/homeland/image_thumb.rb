@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Homeland
   # Generate Upload Image thumbs for development environment.
   class ImageThumb
@@ -24,60 +26,60 @@ module Homeland
 
     private
 
-    def generate!
-      filepath = Rails.root.join("public", "uploads", filename)
-      return unless File.exist? filepath
-      dest_dir = File.dirname(outpath)
-      FileUtils.mkdir_p dest_dir unless File.exist? dest_dir
+      def generate!
+        filepath = Rails.root.join("public", "uploads", filename)
+        return unless File.exist? filepath
+        dest_dir = File.dirname(outpath)
+        FileUtils.mkdir_p dest_dir unless File.exist? dest_dir
 
-      @image = MiniMagick::Image.open(filepath)
-      if resize?
-        resize_to_limit!
-      else
-        resize_to_fill!
-      end
-      @image.write outpath
-    end
-
-    def geometry
-      case version
-      when "large" then "1920x1920>"
-      when "lg" then "192x192"
-      when "md" then "96x96"
-      when "sm" then "48x48"
-      when "xs" then "32x32"
-      else
-        "32x32"
-      end
-    end
-
-    def resize_to_limit!
-      @image.resize(geometry)
-    end
-
-    # copy from Carrierwave::MiniMagick#resize_to_fill
-    # http://www.rubydoc.info/github/carrierwaveuploader/carrierwave/CarrierWave/MiniMagick#resize_to_fill-instance_method
-    def resize_to_fill!
-      width, height = geometry.split("x").collect(&:to_i)
-      cols, rows = @image.dimensions
-      if width != cols || height != rows
-        scale_x = width / cols.to_f
-        scale_y = height / rows.to_f
-        if scale_x >= scale_y
-          cols = (scale_x * (cols + 0.5)).round
-          @image.resize cols.to_s
+        @image = MiniMagick::Image.open(filepath)
+        if resize?
+          resize_to_limit!
         else
-          rows = (scale_y * (rows + 0.5)).round
-          @image.resize "x#{rows}"
+          resize_to_fill!
+        end
+        @image.write outpath
+      end
+
+      def geometry
+        case version
+        when "large" then "1920x1920>"
+        when "lg" then "192x192"
+        when "md" then "96x96"
+        when "sm" then "48x48"
+        when "xs" then "32x32"
+        else
+          "32x32"
         end
       end
-      @image.gravity "Center"
-      @image.background "rgba(255,255,255,0.0)"
-      @image.extent(geometry)
-    end
 
-    def resize?
-      version == "large"
-    end
+      def resize_to_limit!
+        @image.resize(geometry)
+      end
+
+      # copy from Carrierwave::MiniMagick#resize_to_fill
+      # http://www.rubydoc.info/github/carrierwaveuploader/carrierwave/CarrierWave/MiniMagick#resize_to_fill-instance_method
+      def resize_to_fill!
+        width, height = geometry.split("x").collect(&:to_i)
+        cols, rows = @image.dimensions
+        if width != cols || height != rows
+          scale_x = width / cols.to_f
+          scale_y = height / rows.to_f
+          if scale_x >= scale_y
+            cols = (scale_x * (cols + 0.5)).round
+            @image.resize cols.to_s
+          else
+            rows = (scale_y * (rows + 0.5)).round
+            @image.resize "x#{rows}"
+          end
+        end
+        @image.gravity "Center"
+        @image.background "rgba(255,255,255,0.0)"
+        @image.extent(geometry)
+      end
+
+      def resize?
+        version == "large"
+      end
   end
 end

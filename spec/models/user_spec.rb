@@ -1,5 +1,7 @@
-require 'rails_helper'
-require 'digest/md5'
+# frozen_string_literal: true
+
+require "rails_helper"
+require "digest/md5"
 
 describe User, type: :model do
   before do
@@ -12,133 +14,133 @@ describe User, type: :model do
   let(:user_for_delete1) { create :user }
   let(:user_for_delete2) { create :user }
 
-  describe 'user_type' do
+  describe "user_type" do
     it { expect(user.user_type).to eq :user }
   end
 
-  describe 'login format' do
-    context 'huacnlee' do
-      let(:user) { build(:user, login: 'huacnlee') }
+  describe "login format" do
+    context "huacnlee" do
+      let(:user) { build(:user, login: "huacnlee") }
       it { expect(user.valid?).to eq true }
     end
 
-    context 'huacnlee-github' do
-      let(:user) { build(:user, login: 'huacnlee-github') }
+    context "huacnlee-github" do
+      let(:user) { build(:user, login: "huacnlee-github") }
       it { expect(user.valid?).to eq true }
     end
 
-    context 'huacnlee_github' do
-      let(:user) { build(:user, login: 'huacnlee_github') }
+    context "huacnlee_github" do
+      let(:user) { build(:user, login: "huacnlee_github") }
       it { expect(user.valid?).to eq true }
     end
 
-    context 'huacnlee12' do
-      let(:user) { build(:user, login: 'huacnlee12') }
+    context "huacnlee12" do
+      let(:user) { build(:user, login: "huacnlee12") }
       it { expect(user.valid?).to eq true }
     end
 
-    context '123411' do
-      let(:user) { build(:user, login: '123411') }
+    context "123411" do
+      let(:user) { build(:user, login: "123411") }
       it { expect(user.valid?).to eq true }
     end
 
-    context 'zicheng.lhs' do
-      let(:user) { build(:user, login: 'zicheng.lhs') }
+    context "zicheng.lhs" do
+      let(:user) { build(:user, login: "zicheng.lhs") }
       it { expect(user.valid?).to eq true }
     end
 
-    context 'll&&^12' do
-      let(:user) { build(:user, login: '*ll&&^12') }
+    context "ll&&^12" do
+      let(:user) { build(:user, login: "*ll&&^12") }
       it { expect(user.valid?).to eq false }
     end
 
-    context 'abdddddc$' do
-      let(:user) { build(:user, login: 'abdddddc$') }
+    context "abdddddc$" do
+      let(:user) { build(:user, login: "abdddddc$") }
       it { expect(user.valid?).to eq false }
     end
 
-    context '$abdddddc' do
-      let(:user) { build(:user, login: '$abdddddc') }
+    context "$abdddddc" do
+      let(:user) { build(:user, login: "$abdddddc") }
       it { expect(user.valid?).to eq false }
     end
 
-    context 'aaa*11' do
-      let(:user) { build(:user, login: 'aaa*11') }
+    context "aaa*11" do
+      let(:user) { build(:user, login: "aaa*11") }
       it { expect(user.valid?).to eq false }
     end
 
-    describe 'Login allow upcase downcase both' do
-      let(:user1) { create(:user, login: 'ReiIs123') }
+    describe "Login allow upcase downcase both" do
+      let(:user1) { create(:user, login: "ReiIs123") }
 
-      it 'should work' do
-        expect(user1.login).to eq('ReiIs123')
-        expect(User.find_by_login('ReiIs123').id).to eq(user1.id)
-        expect(User.find_by_login('reiis123').id).to eq(user1.id)
-        expect(User.find_by_login('rEIIs123').id).to eq(user1.id)
+      it "should work" do
+        expect(user1.login).to eq("ReiIs123")
+        expect(User.find_by_login("ReiIs123").id).to eq(user1.id)
+        expect(User.find_by_login("reiis123").id).to eq(user1.id)
+        expect(User.find_by_login("rEIIs123").id).to eq(user1.id)
       end
     end
   end
 
-  describe '#read_topic?' do
+  describe "#read_topic?" do
     before do
       allow_any_instance_of(User).to receive(:update_index).and_return(true)
       Rails.cache.write("user:#{user.id}:topic_read:#{topic.id}", nil)
     end
 
-    it 'marks the topic as unread' do
+    it "marks the topic as unread" do
       expect(user.topic_read?(topic)).to eq(false)
       user.read_topic(topic)
       expect(user.topic_read?(topic)).to eq(true)
       expect(user2.topic_read?(topic)).to eq(false)
     end
 
-    it 'marks the topic as unread when got new reply' do
+    it "marks the topic as unread when got new reply" do
       topic.replies << reply
       expect(user.topic_read?(topic)).to eq(false)
       user.read_topic(topic)
       expect(user.topic_read?(topic)).to eq(true)
     end
 
-    it 'user can soft_delete' do
+    it "user can soft_delete" do
       user_for_delete1.soft_delete
       user_for_delete1.reload
-      expect(user_for_delete1.state).to eq('deleted')
+      expect(user_for_delete1.state).to eq("deleted")
       user_for_delete2.soft_delete
       user_for_delete1.reload
-      expect(user_for_delete1.state).to eq('deleted')
+      expect(user_for_delete1.state).to eq("deleted")
       expect(user_for_delete1.authorizations).to eq([])
     end
   end
 
-  describe '#filter_readed_topics' do
+  describe "#filter_readed_topics" do
     let(:topics) { create_list(:topic, 3) }
 
-    it 'should work' do
+    it "should work" do
       user.read_topic(topics[1])
       user.read_topic(topics[2])
       expect(user.filter_readed_topics(topics)).to eq([topics[1].id, topics[2].id])
     end
 
-    it 'should work when params is nil or empty' do
+    it "should work when params is nil or empty" do
       expect(user.filter_readed_topics(nil)).to eq([])
       expect(user.filter_readed_topics([])).to eq([])
     end
   end
 
-  describe 'location' do
-    it 'should not get results when user location not set' do
+  describe "location" do
+    it "should not get results when user location not set" do
       Location.count == 0
     end
 
-    it 'should get results when user location is set' do
-      user.location = 'hangzhou'
-      user2.location = 'Hongkong'
+    it "should get results when user location is set" do
+      user.location = "hangzhou"
+      user2.location = "Hongkong"
       Location.count == 2
     end
 
-    it 'should update users_count when user location changed' do
+    it "should update users_count when user location changed" do
       old_name = user.location
-      new_name = 'HongKong'
+      new_name = "HongKong"
       old_location = Location.location_find_by_name(old_name)
       hk_location = create(:location, name: new_name, users_count: 20)
       user.location = new_name
@@ -151,150 +153,136 @@ describe User, type: :model do
     end
   end
 
-  describe 'admin?' do
+  describe "admin?" do
     let(:admin) { create :admin }
-    it 'should know you are an admin' do
+    it "should know you are an admin" do
       expect(admin).to be_admin
     end
 
-    it 'should know normal user is not admin' do
+    it "should know normal user is not admin" do
       expect(user).not_to be_admin
     end
   end
 
-  describe 'wiki_editor?' do
+  describe "wiki_editor?" do
     let(:admin) { create :admin }
-    it 'should know admin is wiki editor' do
+    it "should know admin is wiki editor" do
       expect(admin).to be_wiki_editor
     end
 
-    it 'should know verified user is wiki editor' do
+    it "should know verified user is wiki editor" do
       user.verified = true
       expect(user).to be_wiki_editor
     end
 
-    it 'should know not verified user is not a wiki editor' do
+    it "should know not verified user is not a wiki editor" do
       user.verified = false
       expect(user).not_to be_wiki_editor
     end
   end
 
-  describe 'newbie?' do
-    it 'should true when user created_at less than a week' do
+  describe "newbie?" do
+    it "should true when user created_at less than a week" do
       user.verified = false
       allow(Setting).to receive(:newbie_limit_time).and_return(1.days.to_i)
       user.created_at = 6.hours.ago
       expect(user.newbie?).to be_truthy
     end
 
-    it 'should false when user is verified' do
+    it "should false when user is verified" do
       user.verified = true
       expect(user.newbie?).to be_falsey
     end
 
-    context 'Unverfied user with 2.days.ago registed.' do
+    context "Unverfied user with 2.days.ago registed." do
       let(:user) { build(:user, verified: false, created_at: 2.days.ago) }
 
-      it 'should tru with 1 days limit' do
+      it "should tru with 1 days limit" do
         allow(Setting).to receive(:newbie_limit_time).and_return(1.days.to_i)
         expect(user.newbie?).to be_falsey
       end
 
-      it 'should false with 3 days limit' do
+      it "should false with 3 days limit" do
         allow(Setting).to receive(:newbie_limit_time).and_return(3.days.to_i)
         expect(user.newbie?).to be_truthy
       end
 
-      it 'should false with nil limit' do
+      it "should false with nil limit" do
         allow(Setting).to receive(:newbie_limit_time).and_return(nil)
         expect(user.newbie?).to be_falsey
       end
 
-      it 'should false with 0 limit' do
-        allow(Setting).to receive(:newbie_limit_time).and_return('0')
+      it "should false with 0 limit" do
+        allow(Setting).to receive(:newbie_limit_time).and_return("0")
         expect(user.newbie?).to be_falsey
       end
     end
   end
 
-  describe 'roles' do
+  describe "roles" do
     subject { user }
 
-    context 'when is a new user' do
+    context "when is a new user" do
       let(:user) { create :user }
       it { expect(user.roles?(:member)).to eq true }
     end
 
-    context 'when is a blocked user' do
+    context "when is a blocked user" do
       let(:user) { create :blocked_user }
       it { expect(user.roles?(:member)).not_to eq true }
     end
 
-    context 'when is a deleted user' do
+    context "when is a deleted user" do
       let(:user) { create :blocked_user }
       it { expect(user.roles?(:member)).not_to eq true }
     end
 
-    context 'when is admin' do
+    context "when is admin" do
       let(:user) { create :admin }
       it { expect(user.roles?(:admin)).to eq true }
     end
 
-    context 'when is wiki editor' do
+    context "when is wiki editor" do
       let(:user) { create :wiki_editor }
       it { expect(user.roles?(:wiki_editor)).to eq true }
     end
 
-    context 'when ask for some random role' do
+    context "when ask for some random role" do
       let(:user) { create :user }
       it { expect(user.roles?(:savior_of_the_broken)).not_to eq true }
     end
   end
 
-  describe 'github url' do
-    subject { create(:user, github: 'monkey') }
-    let(:expected) { 'https://github.com/monkey' }
+  describe "github_url" do
+    let(:user) { create(:user, github: "monkey") }
+    let(:expected) { "https://github.com/monkey" }
 
-    context 'user name provided correct' do
-      describe '#github_url' do
-        subject { super().github_url }
-        it { is_expected.to eq(expected) }
-      end
+    it "user name provided correct" do
+      expect(user.github_url).to eq expected
     end
 
-    context 'user name provided as full url' do
-      before { allow(subject).to receive(:github).and_return('http://github.com/monkey') }
-
-      describe '#github_url' do
-        subject { super().github_url }
-        it { is_expected.to eq(expected) }
-      end
+    it "user name provided as full url" do
+      user.github = "http://github.com/monkey"
+      expect(user.github_url).to eq expected
     end
   end
 
-  describe 'website_url' do
-    subject { create(:user, website: 'monkey.com') }
-    let(:expected) { 'http://monkey.com' }
+  describe "website_url" do
+    let(:user) { create(:user, website: "monkey.com") }
+    let(:expected) { "http://monkey.com" }
 
-    context 'website without http://' do
-      describe '#website_url' do
-        subject { super().website_url }
-        it { is_expected.to eq(expected) }
-      end
+    it "website without http://" do
+      expect(user.website_url).to eq expected
     end
 
-    context 'website with http://' do
-      before { allow(subject).to receive(:github).and_return('http://monkey.com') }
-
-      describe '#website_url' do
-        subject { super().website_url }
-        it { is_expected.to eq(expected) }
-      end
+    it "website with http://" do
+      user.github = "http://monkey.com"
+      expect(user.website_url).to eq expected
     end
   end
 
-  describe 'favorite topic' do
-    it 'should favorite a topic' do
+  describe "favorite topic" do
+    it "should favorite a topic" do
       user.favorite_topic(topic.id)
       expect(user.favorite_topic_ids.include?(topic.id)).to eq(true)
       expect(user.favorite_topic(nil)).to eq(false)
@@ -303,7 +291,7 @@ describe User, type: :model do
       expect(user.favorite_topic?(topic.id)).to eq(true)
     end
 
-    it 'should unfavorite a topic' do
+    it "should unfavorite a topic" do
       user.unfavorite_topic(topic.id)
       expect(user.favorite_topic_ids.include?(topic.id)).to eq(false)
       expect(user.unfavorite_topic(nil)).to eq(false)
@@ -312,13 +300,13 @@ describe User, type: :model do
     end
   end
 
-  describe 'Like' do
+  describe "Like" do
     let(:topic) { create :topic }
     let(:user)  { create :user }
     let(:user2) { create :user }
 
-    describe 'like topic' do
-      it 'can like/unlike topic' do
+    describe "like topic" do
+      it "can like/unlike topic" do
         user.like(topic)
         topic.reload
         expect(topic.likes_count).to eq(1)
@@ -348,7 +336,7 @@ describe User, type: :model do
         expect(topic.like_by_user_ids).not_to include(topic.user_id)
       end
 
-      it 'can tell whether or not liked by a user' do
+      it "can tell whether or not liked by a user" do
         expect(user.like_topic?(topic)).to be_falsey
         user.like(topic)
         topic.reload
@@ -357,17 +345,17 @@ describe User, type: :model do
       end
     end
 
-    describe 'like reply' do
+    describe "like reply" do
       let(:reply) { create :reply }
 
-      it 'should work' do
+      it "should work" do
         user.like(reply)
         expect(user.like_reply?(reply)).to be_truthy
       end
 
-      describe '.like_reply_ids_by_replies' do
+      describe ".like_reply_ids_by_replies" do
         let(:replies) { create_list(:reply, 3) }
-        it 'should work' do
+        it "should work" do
           user.like(replies[0])
           user.like(replies[2])
           like_ids = user.like_reply_ids_by_replies(replies)
@@ -378,54 +366,54 @@ describe User, type: :model do
     end
   end
 
-  describe 'email and email_md5' do
-    it 'should generate email_md5 when give value to email attribute' do
-      user.email = 'fooaaaa@gmail.com'
+  describe "email and email_md5" do
+    it "should generate email_md5 when give value to email attribute" do
+      user.email = "fooaaaa@gmail.com"
       user.save
-      expect(user.email_md5).to eq(Digest::MD5.hexdigest('fooaaaa@gmail.com'))
-      expect(user.email).to eq('fooaaaa@gmail.com')
+      expect(user.email_md5).to eq(Digest::MD5.hexdigest("fooaaaa@gmail.com"))
+      expect(user.email).to eq("fooaaaa@gmail.com")
     end
 
-    it 'should genrate email_md5 with params' do
+    it "should genrate email_md5 with params" do
       u = User.new
-      u.email = 'a@gmail.com'
-      expect(u.email).to eq('a@gmail.com')
-      expect(u.email_md5).to eq(Digest::MD5.hexdigest('a@gmail.com'))
+      u.email = "a@gmail.com"
+      expect(u.email).to eq("a@gmail.com")
+      expect(u.email_md5).to eq(Digest::MD5.hexdigest("a@gmail.com"))
     end
   end
 
-  describe '#find_by_login!' do
+  describe "#find_by_login!" do
     let(:user) { create :user }
 
-    it 'should work' do
+    it "should work" do
       u = User.find_by_login!(user.login)
       expect(u.id).to eq user.id
       expect(u.login).to eq(user.login)
     end
 
-    it 'should ignore case' do
+    it "should ignore case" do
       u = User.find_by_login!(user.login.upcase)
       expect(u.id).to eq user.id
     end
 
-    it 'should raise DocumentNotFound error' do
+    it "should raise DocumentNotFound error" do
       expect do
-        User.find_by_login!(user.login + '1')
+        User.find_by_login!(user.login + "1")
       end.to raise_error(ActiveRecord::RecordNotFound)
     end
 
-    it 'should railse DocumentNotFound if have bad login' do
+    it "should railse DocumentNotFound if have bad login" do
       expect do
-        User.find_by_login!(user.login + ')')
+        User.find_by_login!(user.login + ")")
       end.to raise_error(ActiveRecord::RecordNotFound)
     end
 
-    context 'Simple prefix user exists' do
-      let(:user1) { create :user, login: 'foo' }
-      let(:user2) { create :user, login: 'foobar' }
-      let(:user2) { create :user, login: 'a2foo' }
+    context "Simple prefix user exists" do
+      let(:user1) { create :user, login: "foo" }
+      let(:user2) { create :user, login: "foobar" }
+      let(:user2) { create :user, login: "a2foo" }
 
-      it 'should get right user' do
+      it "should get right user" do
         u = User.find_by_login!(user1.login)
         expect(u.id).to eq user1.id
         expect(u.login).to eq(user1.login)
@@ -433,12 +421,12 @@ describe User, type: :model do
     end
   end
 
-  describe '.block_user' do
+  describe ".block_user" do
     let(:user) { create :user }
     let(:u2) { create :user }
     let(:u3) { create :user }
 
-    it 'should work' do
+    it "should work" do
       user.block_user(u2)
       user.block_user(u3)
       expect(user.block_user_ids).to include(u2.id, u3.id)
@@ -447,12 +435,12 @@ describe User, type: :model do
     end
   end
 
-  describe '.follow_user' do
+  describe ".follow_user" do
     let(:u1) { create :user }
     let(:u2) { create :user }
     let(:u3) { create :user }
 
-    it 'should work' do
+    it "should work" do
       u1.follow_user(u2)
       u1.follow_user(u3)
       expect(u1.follow_user_ids).to include(u2.id, u3.id)
@@ -467,107 +455,107 @@ describe User, type: :model do
     end
   end
 
-  describe '.favorites_count' do
+  describe ".favorites_count" do
     let(:u1) { create :user }
 
-    it 'should work' do
+    it "should work" do
       u1.favorite_topic(1)
       u1.favorite_topic(2)
       expect(u1.favorites_count).to eq(2)
     end
   end
 
-  describe '.level / .level_name' do
+  describe ".level / .level_name" do
     let(:u1) { create(:user) }
 
-    context 'admin' do
-      it 'should work' do
+    context "admin" do
+      it "should work" do
         allow(u1).to receive(:admin?).and_return(true)
-        expect(u1.level).to eq('admin')
-        expect(u1.level_name).to eq('管理员')
+        expect(u1.level).to eq("admin")
+        expect(u1.level_name).to eq("管理员")
       end
     end
 
-    context 'vip' do
-      it 'should work' do
+    context "vip" do
+      it "should work" do
         allow(u1).to receive(:verified?).and_return(true)
-        expect(u1.level).to eq('vip')
-        expect(u1.level_name).to eq('高级会员')
+        expect(u1.level).to eq("vip")
+        expect(u1.level_name).to eq("高级会员")
       end
     end
 
-    context 'blocked' do
-      it 'should work' do
+    context "blocked" do
+      it "should work" do
         allow(u1).to receive(:blocked?).and_return(true)
-        expect(u1.level).to eq('blocked')
-        expect(u1.level_name).to eq('禁言用户')
+        expect(u1.level).to eq("blocked")
+        expect(u1.level_name).to eq("禁言用户")
       end
     end
 
-    context 'newbie' do
-      it 'should work' do
+    context "newbie" do
+      it "should work" do
         allow(u1).to receive(:newbie?).and_return(true)
-        expect(u1.level).to eq('newbie')
-        expect(u1.level_name).to eq('新手')
+        expect(u1.level).to eq("newbie")
+        expect(u1.level_name).to eq("新手")
       end
     end
 
-    context 'normal' do
-      it 'should work' do
+    context "normal" do
+      it "should work" do
         allow(u1).to receive(:newbie?).and_return(false)
-        expect(u1.level).to eq('normal')
-        expect(u1.level_name).to eq('会员')
+        expect(u1.level).to eq("normal")
+        expect(u1.level_name).to eq("会员")
       end
     end
   end
 
-  describe '.letter_avatar_url' do
+  describe ".letter_avatar_url" do
     let(:user) { create(:user) }
-    it 'should work' do
+    it "should work" do
       expect(user.letter_avatar_url(240)).to include("#{Setting.base_url}/system/letter_avatars/")
     end
   end
 
-  describe '.avatar?' do
-    it 'should return false when avatar is nil' do
+  describe ".avatar?" do
+    it "should return false when avatar is nil" do
       u = User.new
       u[:avatar] = nil
       expect(u.avatar?).to eq(false)
     end
 
-    it 'should return true when avatar is not nil' do
+    it "should return true when avatar is not nil" do
       u = User.new
-      u[:avatar] = '1234'
+      u[:avatar] = "1234"
       expect(u.avatar?).to eq(true)
     end
   end
 
-  describe '#find_for_database_authentication' do
-    let!(:user) { create(:user, login: 'foo', email: 'foobar@gmail.com') }
+  describe "#find_for_database_authentication" do
+    let!(:user) { create(:user, login: "foo", email: "foobar@gmail.com") }
 
-    it 'should work' do
-      expect(User.find_for_database_authentication(login: 'foo').id).to eq user.id
-      expect(User.find_for_database_authentication(login: 'foobar@gmail.com').id).to eq user.id
-      expect(User.find_for_database_authentication(login: 'not found')).to eq nil
+    it "should work" do
+      expect(User.find_for_database_authentication(login: "foo").id).to eq user.id
+      expect(User.find_for_database_authentication(login: "foobar@gmail.com").id).to eq user.id
+      expect(User.find_for_database_authentication(login: "not found")).to eq nil
     end
 
-    context 'deleted user' do
+    context "deleted user" do
       it "should nil" do
         user.update(state: -1)
-        expect(User.find_for_database_authentication(login: 'foo')).to eq nil
+        expect(User.find_for_database_authentication(login: "foo")).to eq nil
       end
     end
   end
 
-  describe '.email_locked?' do
-    it { expect(User.new(email: 'foobar@gmail.com').email_locked?).to eq true }
-    it { expect(User.new(email: 'foobar@example.com').email_locked?).to eq false }
+  describe ".email_locked?" do
+    it { expect(User.new(email: "foobar@gmail.com").email_locked?).to eq true }
+    it { expect(User.new(email: "foobar@example.com").email_locked?).to eq false }
   end
 
-  describe '.calendar_data' do
+  describe ".calendar_data" do
     let!(:user) { create(:user) }
 
-    it 'should work' do
+    it "should work" do
       d1 = 1.days.ago
       d2 = 3.days.ago
       d3 = 10.days.ago
@@ -584,33 +572,33 @@ describe User, type: :model do
     end
   end
 
-  describe '.large_avatar_url' do
+  describe ".large_avatar_url" do
     let(:user) { build(:user) }
 
-    context 'avatar is nil' do
-      it 'should return letter_avatar_url' do
+    context "avatar is nil" do
+      it "should return letter_avatar_url" do
         user.avatar = nil
-        expect(user.large_avatar_url).to include('system/letter_avatars/')
-        expect(user.large_avatar_url).to include('192.png')
+        expect(user.large_avatar_url).to include("system/letter_avatars/")
+        expect(user.large_avatar_url).to include("192.png")
       end
     end
 
-    context 'avatar is present' do
-      it 'should return upload url' do
-        user[:avatar] = 'aaa.jpg'
+    context "avatar is present" do
+      it "should return upload url" do
+        user[:avatar] = "aaa.jpg"
         expect(user.large_avatar_url).to eq user.avatar.url(:lg)
       end
     end
   end
 
-  describe '.team_collection' do
-    it 'should work' do
+  describe ".team_collection" do
+    it "should work" do
       team_users = create_list(:team_user, 2, user: user)
       teams = team_users.collect(&:team).sort
       expect(user.team_collection.sort).to eq(teams.collect { |t| [t.name, t.id] })
     end
 
-    it 'should get all with admin' do
+    it "should get all with admin" do
       ids1 = create_list(:team_user, 2, user: user).collect(&:team_id)
       ids2 = create_list(:team_user, 2, user: user2).collect(&:team_id)
       expect(user).to receive(:admin?).and_return(true)
@@ -618,54 +606,54 @@ describe User, type: :model do
     end
   end
 
-  describe 'Search methods' do
-    let(:u) { create :user, bio: '111', tagline: '222' }
-    describe '.indexed_changed?' do
+  describe "Search methods" do
+    let(:u) { create :user, bio: "111", tagline: "222" }
+    describe ".indexed_changed?" do
       before(:each) do
         u.reload
       end
-      it 'login changed work' do
+      it "login changed work" do
         expect(u.indexed_changed?).to eq false
-        u.login = u.login + '111'
+        u.login = u.login + "111"
         u.save
         expect(u.indexed_changed?).to eq true
       end
 
-      it 'name changed work' do
+      it "name changed work" do
         expect(u.indexed_changed?).to eq false
-        u.update(name: u.name + '111')
+        u.update(name: u.name + "111")
         expect(u.indexed_changed?).to eq true
       end
 
-      it 'email changed work' do
+      it "email changed work" do
         expect(u.indexed_changed?).to eq false
-        u.update(email: u.email + '111')
+        u.update(email: u.email + "111")
         expect(u.indexed_changed?).to eq true
       end
 
-      it 'bio changed work' do
+      it "bio changed work" do
         expect(u.indexed_changed?).to eq false
-        u.update(bio: u.bio + '111')
+        u.update(bio: u.bio + "111")
         expect(u.indexed_changed?).to eq true
       end
 
-      it 'tagline changed work' do
+      it "tagline changed work" do
         expect(u.indexed_changed?).to eq false
-        u.update(tagline: u.tagline + '111')
+        u.update(tagline: u.tagline + "111")
         expect(u.indexed_changed?).to eq true
       end
 
-      it 'location changed work' do
+      it "location changed work" do
         expect(u.indexed_changed?).to eq false
-        u.update(location: u.location + '111')
+        u.update(location: u.location + "111")
         expect(u.indexed_changed?).to eq true
       end
 
-      it 'other changed work' do
+      it "other changed work" do
         expect(u.indexed_changed?).to eq false
-        u.website = '124124124'
-        u.github = '124u812'
-        u.avatar = '---'
+        u.website = "124124124"
+        u.github = "124u812"
+        u.avatar = "---"
         u.sign_in_count = 190
         u.last_sign_in_at = Time.now
         u.replies_count = u.replies_count + 10
@@ -675,30 +663,30 @@ describe User, type: :model do
     end
   end
 
-  describe '#search' do
+  describe "#search" do
     before do
-      @rei = create(:user, login: 'Rei', replies_count: 5)
-      @rain = create(:user, login: 'rain')
-      @huacnlee = create(:user, login: 'huacnlee')
-      @hugo = create(:user, login: 'Hugo', name: 'Rugo', replies_count: 2)
-      @hot = create(:user, login: 'hot')
+      @rei = create(:user, login: "Rei", replies_count: 5)
+      @rain = create(:user, login: "rain")
+      @huacnlee = create(:user, login: "huacnlee")
+      @hugo = create(:user, login: "Hugo", name: "Rugo", replies_count: 2)
+      @hot = create(:user, login: "hot")
     end
 
-    it 'should work simple query' do
-      res = User.search('r')
+    it "should work simple query" do
+      res = User.search("r")
       expect(res[0].id).to eq @rei.id
       expect(res[1].id).to eq @hugo.id
       expect(res[2].id).to eq @rain.id
 
-      expect(User.search('r').size).to eq 3
-      expect(User.search('re').size).to eq 1
-      expect(User.search('h').size).to eq 3
-      expect(User.search('hu').size).to eq 2
+      expect(User.search("r").size).to eq 3
+      expect(User.search("re").size).to eq 1
+      expect(User.search("h").size).to eq 3
+      expect(User.search("hu").size).to eq 2
     end
 
-    it 'should work with :user option to include following users first' do
+    it "should work with :user option to include following users first" do
       @rei.follow_user(@hugo)
-      res = User.search('r', user: @rei, limit: 2)
+      res = User.search("r", user: @rei, limit: 2)
       expect(res[0].id).to eq @hugo.id
       expect(res[1].id).to eq @rei.id
       expect(res.length).to eq 2

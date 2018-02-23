@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
-  EMPTY_STRING = "".freeze
+  EMPTY_STRING = ""
 
   def markdown(text)
     return nil if text.blank?
@@ -137,7 +139,7 @@ module ApplicationHelper
       item_class = EMPTY_STRING
       urls = link.match(/href=(["'])(.*?)(\1)/) || []
       url = urls.length > 2 ? urls[2] : nil
-      if url && current_page?(url) || (@current && @current.include?(url))
+      if url && current_page?(url) || (@current&.include?(url))
         item_class = "active"
       end
       items << content_tag("li", raw(link), class: item_class)
@@ -146,10 +148,7 @@ module ApplicationHelper
   end
 
   def highlight(text)
-    text = escape_once(text)
-    text.gsub!("[h]", "<em>")
-    text.gsub!("[/h]", "</em>")
-    text.gsub!(/\\n|\\r/, "")
+    text = escape_once(text).gsub("[h]", "<em>").gsub("[/h]", "</em>").gsub(/\\n|\\r/, "")
     raw text
   end
 end

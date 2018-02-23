@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 module Api
   module V3
     class DevicesController < Api::V3::ApplicationController
       before_action :doorkeeper_authorize!
 
       before_action do
-        requires! :platform, type: String, values: %w(ios android)
+        requires! :platform, type: String, values: %w[ios android]
         requires! :token, type: String
       end
 
@@ -18,7 +20,7 @@ module Api
       # @param platform [String] 平台类型 [ios, android]
       # @param token [String] 用于 Push 的设备信息
       def create
-        requires! :platform, type: String, values: %w(ios android)
+        requires! :platform, type: String, values: %w[ios android]
         requires! :token, type: String
 
         @device = current_user.devices.find_or_initialize_by(platform: params[:platform].downcase,
@@ -35,7 +37,7 @@ module Api
       #
       # @param (see #create)
       def destroy
-        requires! :platform, type: String, values: %w(ios android)
+        requires! :platform, type: String, values: %w[ios android]
         requires! :token, type: String
         current_user.devices.where(platform: params[:platform].downcase, token: params[:token]).delete_all
         render json: { ok: 1 }

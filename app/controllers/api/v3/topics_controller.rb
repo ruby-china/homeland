@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 module Api
   module V3
     class TopicsController < Api::V3::ApplicationController
-      before_action :doorkeeper_authorize!, except: [:index, :show, :replies]
-      before_action :set_topic, except: [:index, :create]
+      before_action :doorkeeper_authorize!, except: %i[index show replies]
+      before_action :set_topic, except: %i[index create]
 
       # 获取话题列表，类似网站的 /topics 的结构，支持多种排序方式。
       #
@@ -20,7 +22,7 @@ module Api
         optional! :offset, default: 0
         optional! :limit, default: 20, values: 1..150
 
-        params[:type].downcase!
+        params[:type] = params[:type].downcase
 
         if params[:node_id].blank?
           @topics = Topic
@@ -36,7 +38,7 @@ module Api
         end
 
         @topics = @topics.fields_for_list.includes(:user).send(scope_method_by_type)
-        if %w(no_reply popular).index(params[:type])
+        if %w[no_reply popular].index(params[:type])
           @topics = @topics.last_actived
         elsif params[:type] == "excellent"
           @topics = @topics.recent
@@ -237,21 +239,21 @@ module Api
 
       private
 
-      def set_topic
-        @topic = Topic.find(params[:id])
-      end
-
-      def scope_method_by_type
-        case params[:type]
-        when "last_actived" then :last_actived
-        when "recent" then :recent
-        when "no_reply" then :no_reply
-        when "popular" then :popular
-        when "excellent" then :excellent
-        else
-          :last_actived
+        def set_topic
+          @topic = Topic.find(params[:id])
         end
-      end
+
+        def scope_method_by_type
+          case params[:type]
+          when "last_actived" then :last_actived
+          when "recent" then :recent
+          when "no_reply" then :no_reply
+          when "popular" then :popular
+          when "excellent" then :excellent
+          else
+            :last_actived
+          end
+        end
     end
   end
 end

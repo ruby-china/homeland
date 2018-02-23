@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module Admin
   class NodesController < Admin::ApplicationController
-    before_action :set_node, only: [:show, :edit, :update, :destroy]
+    before_action :set_node, only: %i[show edit update destroy]
 
     def index
       @nodes = Node.sorted.includes(:section)
@@ -41,8 +43,8 @@ module Admin
 
     private
 
-    def set_node
-      @node = Node.find(params[:id])
-    end
+      def set_node
+        @node = Node.find(params[:id])
+      end
   end
 end

@@ -18,27 +18,27 @@ describe UsersController, type: :controller do
   describe ":index" do
     it "should have an index action" do
       get :index
-      expect(response).to be_success
+      expect(response).to have_http_status(200)
     end
   end
 
   describe ":show" do
     it "should show user" do
       get :show, params: { id: user.login }
-      expect(response).to be_success
+      expect(response).to have_http_status(200)
     end
 
     it "should show team user" do
       team = create(:team)
       get :show, params: { id: team.login }
-      expect(response).to be_success
+      expect(response).to have_http_status(200)
     end
   end
 
   describe ":topics" do
     it "should show user topics" do
       get :topics, params: { id: user.login }
-      expect(response).to be_success
+      expect(response).to have_http_status(200)
     end
 
     it "should redirect to right spell login" do
@@ -50,14 +50,14 @@ describe UsersController, type: :controller do
   describe ":replies" do
     it "should show user replies" do
       get :replies, params: { id: user.login }
-      expect(response).to be_success
+      expect(response).to have_http_status(200)
     end
   end
 
   describe ":favorites" do
     it "should show user liked stuffs" do
       get :favorites, params: { id: user.login }
-      expect(response).to be_success
+      expect(response).to have_http_status(200)
     end
   end
 
@@ -65,7 +65,7 @@ describe UsersController, type: :controller do
     it "should work" do
       sign_in user
       get :block, params: { id: user.login }
-      expect(response).to be_success
+      expect(response).to have_http_status(200)
     end
   end
 
@@ -73,7 +73,7 @@ describe UsersController, type: :controller do
     it "should work" do
       sign_in user
       get :unblock, params: { id: user.login }
-      expect(response).to be_success
+      expect(response).to have_http_status(200)
     end
   end
 
@@ -81,7 +81,7 @@ describe UsersController, type: :controller do
     it "should work" do
       sign_in user
       get :blocked, params: { id: user.login }
-      expect(response).to be_success
+      expect(response).to have_http_status(200)
     end
 
     it "render 404 for wrong user" do
@@ -96,7 +96,7 @@ describe UsersController, type: :controller do
     it "should work" do
       sign_in user
       get :follow, params: { id: user.login }
-      expect(response).to be_success
+      expect(response).to have_http_status(200)
     end
   end
 
@@ -104,28 +104,28 @@ describe UsersController, type: :controller do
     it "should work" do
       sign_in user
       get :unfollow, params: { id: user.login }
-      expect(response).to be_success
+      expect(response).to have_http_status(200)
     end
   end
 
   describe ":followers" do
     it "should work" do
       get :followers, params: { id: user.login }
-      expect(response).to be_success
+      expect(response).to have_http_status(200)
     end
   end
 
   describe ":following" do
     it "should work" do
       get :following, params: { id: user.login }
-      expect(response).to be_success
+      expect(response).to have_http_status(200)
     end
   end
 
   describe ":city" do
     it "should render 404 if there is no user in that city" do
       get :city, params: { id: "Mars" }
-      expect(response).not_to be_success
+      expect(response).not_to have_http_status(200)
       expect(response.status).to eq(404)
     end
 
@@ -146,7 +146,7 @@ describe UsersController, type: :controller do
     it "should not allow user close" do
       user.update_reward_fields(alipay: "XXXXXXX")
       get :reward, params: { id: user.login }, xhr: true
-      expect(response).to be_success
+      expect(response).to have_http_status(200)
       expect(response.body).to include("XXXXXXX")
     end
   end

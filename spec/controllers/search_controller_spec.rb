@@ -12,7 +12,7 @@ describe SearchController, type: :controller do
       allow(User).to receive(:search).and_return(users)
       get :users
       res = JSON.parse(response.body)
-      expect(response).to be_success
+      expect(response).to have_http_status(200)
       expect(res[0]).to include("login", "name", "avatar_url")
       expect(res.map { |j| j["login"] }).to match users.map(&:login)
       expect(res.map { |j| j["name"] }).to match users.map(&:name)

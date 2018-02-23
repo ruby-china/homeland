@@ -35,7 +35,7 @@ describe Node, type: :model do
     it "should update on destroy" do
       node = create(:node)
       CacheVersion.section_node_updated_at = old
-      node.destroy
+      node.destroy!
       expect(CacheVersion.section_node_updated_at).not_to eq(old)
     end
   end
@@ -49,10 +49,9 @@ describe Node, type: :model do
 
     it "should expire cache on node update" do
       node.summary_html
-      node.summary = "# dar"
-      node.save
-      node.reload
-      expect(node.summary_html).to eq '<h2 id="dar">dar</h2>'
+      node.update!(summary: "# dar")
+      assert_equal "# dar", node.summary
+      assert_equal '<h2 id="dar">dar</h2>', node.summary_html
     end
   end
 
@@ -60,11 +59,11 @@ describe Node, type: :model do
     let(:node) { create(:node) }
     it "should work" do
       expect(node.collapse_summary?).to eq false
-      node.update(summary: "foo\n\nbar")
+      node.update!(summary: "foo\n\nbar")
       expect(node.collapse_summary?).to eq false
-      node.update(summary: "foo\n\nbar\n\ndar")
+      node.update!(summary: "foo\n\nbar\n\ndar")
       expect(node.collapse_summary?).to eq true
-      node.update(summary: "foo\n\n- bar\n- dar")
+      node.update!(summary: "foo\n\n- bar\n- dar")
       expect(node.collapse_summary?).to eq true
     end
   end

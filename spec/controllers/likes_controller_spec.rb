@@ -9,7 +9,7 @@ describe LikesController, type: :controller do
 
   it "GET /likes" do
     get :index, params: { type: "Topic", id: topic.id }
-    expect(response).to be_success
+    expect(response).to have_http_status(200)
   end
 
   it "POST /likes" do

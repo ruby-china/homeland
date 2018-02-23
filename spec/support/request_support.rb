@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module APIV3Support
+module RequestSupport
   extend ActiveSupport::Concern
 
   included do

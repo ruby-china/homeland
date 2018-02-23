@@ -7,14 +7,14 @@ describe HomeController, type: :controller do
     let(:user) { create :user }
     it "should show register link if user not signed in" do
       get :index
-      expect(response).to be_success
+      expect(response).to have_http_status(200)
       expect(response.body).to match(/注册/)
     end
 
     it "should not show register link if sso enabled" do
       allow(Setting).to receive(:sso_enabled?).and_return(true)
       get :index
-      expect(response).to be_success
+      expect(response).to have_http_status(200)
       expect(response.body).not_to match(/注册/)
     end
 

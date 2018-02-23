@@ -10,7 +10,7 @@ describe SettingsController, type: :controller do
       sign_in user
       allow(Setting).to receive(:sso_enabled?).and_return(false)
       get :show
-      expect(response).to be_success
+      expect(response).to have_http_status(200)
       expect(response.body).to include("更新资料")
       expect(response.body).to include("登陆密码")
 
@@ -29,7 +29,7 @@ describe SettingsController, type: :controller do
     it "should work" do
       sign_in user
       get :account
-      expect(response).to be_success
+      expect(response).to have_http_status(200)
       expect(response.body).to include("绑定其他帐号用于登录")
       expect(response.body).to include("删除账号")
     end
@@ -40,7 +40,7 @@ describe SettingsController, type: :controller do
       sign_in user
       allow(Setting).to receive(:sso_enabled?).and_return(false)
       get :password
-      expect(response).to be_success
+      expect(response).to have_http_status(200)
       expect(response.body).to include("修改密码")
     end
 
@@ -84,7 +84,7 @@ describe SettingsController, type: :controller do
     it "should render edit after failure" do
       sign_in user
       delete :destroy, params: { user: { current_password: "invalid password" } }
-      expect(response).to be_success
+      expect(response).to have_http_status(200)
     end
   end
 

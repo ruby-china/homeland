@@ -13,8 +13,8 @@ end
 class TestDocument < ApplicationRecord
   include Mentionable
 
-  belongs_to :user
-  belongs_to :reply_to, class_name: "TestDocument"
+  belongs_to :user, optional: true
+  belongs_to :reply_to, class_name: "TestDocument", optional: true
   delegate :login, to: :user, prefix: true, allow_nil: true
 end
 

@@ -100,7 +100,7 @@ RSpec.configure do |config|
 
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include RSpec::Rails::RequestExampleGroup, type: :request, file_path: %r{spec/api}
-  config.include APIV3Support, type: :request, file_path: %r{spec/api/v3}
+  config.include RequestSupport, type: :request, file_path: %r{requst|spec/api/v3}
 
   config.include FactoryBot::Syntax::Methods
 end

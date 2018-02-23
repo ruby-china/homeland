@@ -19,10 +19,7 @@ module MentionTopic
         topic = Topic.find_by(id: topic_id)
         next if topic.blank?
         next if topic.replies.where(target: self).any?
-        Reply.create_system_event(user: self.user,
-                                  topic: topic,
-                                  action: "mention",
-                                  target: self)
+        Reply.create_system_event!(user: self.user, topic: topic, action: "mention", target: self)
       end
     end
   end

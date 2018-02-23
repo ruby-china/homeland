@@ -12,8 +12,8 @@ class Reply < ApplicationRecord
 
   belongs_to :user, counter_cache: true
   belongs_to :topic, touch: true
-  belongs_to :target, polymorphic: true
-  belongs_to :reply_to, class_name: "Reply"
+  belongs_to :target, polymorphic: true, optional: true
+  belongs_to :reply_to, class_name: "Reply", optional: true
 
   delegate :title, to: :topic, prefix: true, allow_nil: true
   delegate :login, to: :user, prefix: true, allow_nil: true
@@ -69,11 +69,11 @@ class Reply < ApplicationRecord
     action.present?
   end
 
-  def self.create_system_event(opts = {})
+  def self.create_system_event!(opts = {})
     opts[:body] ||= ""
     opts[:user] ||= User.current
     return false if opts[:action].blank?
     return false if opts[:user].blank?
-    self.create(opts)
+    self.create!(opts)
   end
 end

@@ -1,22 +1,24 @@
-require 'rails_helper'
+# frozen_string_literal: true
+
+require "rails_helper"
 
 describe Auth::SSOController, type: :controller do
-  let(:sso_secret) { 'foo(*&@!12q36)' }
+  let(:sso_secret) { "foo(*&@!12q36)" }
 
-  describe 'GET /auth/sso/show' do
+  describe "GET /auth/sso/show" do
     before do
       @sso_url = "http://somesite.com/homeland-sso"
 
-      allow(Setting).to receive(:sso).and_return({
-                                                     'enable' => true,
-                                                     'url'    => @sso_url,
-                                                     'secret' => sso_secret,
-                                                 })
+      allow(Setting).to receive(:sso).and_return(
+        "enable" => true,
+        "url"    => @sso_url,
+        "secret" => sso_secret
+      )
       allow(Setting).to receive(:sso_enabled?).and_return(true)
     end
 
     it "should work" do
-      get :show, params: { return_path: '/topics/123' }
+      get :show, params: { return_path: "/topics/123" }
       expect(response.status).to eq(302)
 
       # javascript code will handle redirection of user to return_sso_url
@@ -24,7 +26,7 @@ describe Auth::SSOController, type: :controller do
     end
 
     it "should work with destination_url" do
-      request.cookies['destination_url'] = '/topics/123'
+      request.cookies["destination_url"] = "/topics/123"
       get :show
       expect(response.status).to eq(302)
 
@@ -33,18 +35,18 @@ describe Auth::SSOController, type: :controller do
     end
   end
 
-  describe 'GET /auth/sso/login' do
-    let(:mock_ip) { '11.22.33.44' }
+  describe "GET /auth/sso/login" do
+    let(:mock_ip) { "11.22.33.44" }
     before do
       @sso_url = "http://somesite.com/homeland-sso"
 
       request.host = Setting.domain
 
-      allow(Setting).to receive(:sso).and_return({
-        'enable' => true,
-        'url'    => @sso_url,
-        'secret' => sso_secret,
-      })
+      allow(Setting).to receive(:sso).and_return(
+        "enable" => true,
+        "url"    => @sso_url,
+        "secret" => sso_secret
+      )
       allow(Setting).to receive(:sso_enabled?).and_return(true)
       allow_any_instance_of(ActionDispatch::Request).to receive(:remote_ip).and_return(mock_ip)
     end
@@ -61,20 +63,20 @@ describe Auth::SSOController, type: :controller do
       sso
     end
 
-    it 'can take over an account' do
+    it "can take over an account" do
       user_template = build(:user)
-      sso = get_sso('/topics/123')
+      sso = get_sso("/topics/123")
       sso.email = user_template.email
-      sso.external_id = 'abc123'
-      sso.name = 'Test SSO User'
-      sso.username = 'test-sso-user'
-      sso.bio = 'This is a bio text'
-      sso.avatar_url = 'http://foobar.com/avatar/1.jpg'
+      sso.external_id = "abc123"
+      sso.name = "Test SSO User"
+      sso.username = "test-sso-user"
+      sso.bio = "This is a bio text"
+      sso.avatar_url = "http://foobar.com/avatar/1.jpg"
       sso.admin = false
 
       get :login, params: Rack::Utils.parse_query(sso.payload)
 
-      expect(response).to redirect_to('/topics/123')
+      expect(response).to redirect_to("/topics/123")
       user = User.find_by_email(sso.email)
       expect(user.new_record?).to eq(false)
       expect(user.admin?).to eq(false)
@@ -91,56 +93,56 @@ describe Auth::SSOController, type: :controller do
       expect(user.current_sign_in_at).not_to eq(nil)
     end
 
-    it 'can sign a exist user' do
+    it "can sign a exist user" do
       user = create(:user, name: nil, bio: nil)
-      user.create_sso({ uid: 'abc1237161', last_payload: '' })
+      user.create_sso(uid: "abc1237161", last_payload: "")
 
-      sso = get_sso('/')
+      sso = get_sso("/")
       sso.email = user.email
       sso.external_id = user.sso.uid
-      sso.name = 'Test SSO User'
-      sso.username = 'test-sso-user'
-      sso.bio = 'This is a bio text'
-      sso.avatar_url = 'http://foobar.com/avatar/1.jpg'
+      sso.name = "Test SSO User"
+      sso.username = "test-sso-user"
+      sso.bio = "This is a bio text"
+      sso.avatar_url = "http://foobar.com/avatar/1.jpg"
 
       expect do
         get :login, params: Rack::Utils.parse_query(sso.payload)
       end.to change(User, :count).by(0)
 
-      expect(response).to redirect_to('/')
+      expect(response).to redirect_to("/")
       user1 = User.find_by_id(user.id)
       expect(user1.name).to eq(sso.name)
       expect(user1.login).to eq(user.login)
       expect(user1.bio).to eq(sso.bio)
     end
 
-    it 'can take an admin account' do
+    it "can take an admin account" do
       user_template = build(:user)
-      sso = get_sso('/hello/world')
+      sso = get_sso("/hello/world")
       sso.email = user_template.email
-      sso.external_id = 'abc123'
-      sso.name = 'Test SSO User'
+      sso.external_id = "abc123"
+      sso.name = "Test SSO User"
       sso.username = user_template.login
       sso.admin = true
 
       get :login, params: Rack::Utils.parse_query(sso.payload)
-      expect(response).to redirect_to('/hello/world')
+      expect(response).to redirect_to("/hello/world")
       user = User.find_by_email(sso.email)
       expect(user.admin?).to eq(true)
       expect(Setting.has_admin?(sso.email)).to eq(true)
     end
 
-    it 'show error when create failure' do
+    it "show error when create failure" do
       allow_any_instance_of(Homeland::SSO).to receive(:find_or_create_user).and_raise(StandardError)
 
       user_template = build(:user)
-      sso = get_sso('/topics/123')
+      sso = get_sso("/topics/123")
       sso.email = user_template.email
-      sso.external_id = 'abc123'
-      sso.name = 'Test SSO User'
-      sso.username = 'test-sso-user'
-      sso.bio = 'This is a bio text'
-      sso.avatar_url = 'http://foobar.com/avatar/1.jpg'
+      sso.external_id = "abc123"
+      sso.name = "Test SSO User"
+      sso.username = "test-sso-user"
+      sso.bio = "This is a bio text"
+      sso.avatar_url = "http://foobar.com/avatar/1.jpg"
       sso.admin = false
 
       expect do
@@ -149,15 +151,15 @@ describe Auth::SSOController, type: :controller do
       expect(response.status).to eq(500)
     end
 
-    it 'show error when timeout expried' do
+    it "show error when timeout expried" do
       user_template = build(:user)
-      sso = get_sso('/topics/123')
+      sso = get_sso("/topics/123")
       sso.email = user_template.email
-      sso.external_id = 'abc123'
-      sso.name = 'Test SSO User'
-      sso.username = 'test-sso-user'
-      sso.bio = 'This is a bio text'
-      sso.avatar_url = 'http://foobar.com/avatar/1.jpg'
+      sso.external_id = "abc123"
+      sso.name = "Test SSO User"
+      sso.username = "test-sso-user"
+      sso.bio = "This is a bio text"
+      sso.avatar_url = "http://foobar.com/avatar/1.jpg"
       sso.admin = false
 
       $redis.del("SSO_NONCE_#{sso.nonce}")
@@ -166,19 +168,19 @@ describe Auth::SSOController, type: :controller do
     end
   end
 
-  describe 'GET /auth/sso/provider' do
+  describe "GET /auth/sso/provider" do
     let(:user) { create(:user) }
 
     before do
-      allow(Setting).to receive(:sso).and_return({
-        'secret' => sso_secret,
-      })
+      allow(Setting).to receive(:sso).and_return(
+        "secret" => sso_secret
+      )
       allow(Setting).to receive(:sso_provider_enabled?).and_return(true)
 
       @sso = SingleSignOn.new
       @sso.nonce = "mynonce"
       @sso.sso_secret = sso_secret
-      @sso.return_sso_url = 'http://foobar.com/sso/callback'
+      @sso.return_sso_url = "http://foobar.com/sso/callback"
     end
 
     it "should work" do
@@ -203,11 +205,11 @@ describe Auth::SSOController, type: :controller do
       expect(sso2.admin).to eq(true)
     end
 
-    it 'should work with sign in' do
+    it "should work with sign in" do
       get :provider, params: Rack::Utils.parse_query(@sso.payload)
-      expect(response).to redirect_to('/account/sign_in')
+      expect(response).to redirect_to("/account/sign_in")
 
-      expect(session[:return_to]).to match('/auth/sso/provider')
+      expect(session[:return_to]).to match("/auth/sso/provider")
       expect(session[:return_to]).to eq(request.url)
     end
   end

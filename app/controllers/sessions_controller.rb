@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SessionsController < Devise::SessionsController
   skip_before_action :set_locale, only: [:create]
   before_action :require_no_sso!, only: %i[new create]
@@ -14,12 +16,12 @@ class SessionsController < Devise::SessionsController
 
   private
 
-  # If not bind to a domain, request.domain is nil.
-  def domain_or_host
-    request.domain || request.host
-  end
+    # If not bind to a domain, request.domain is nil.
+    def domain_or_host
+      request.domain || request.host
+    end
 
-  def respond_to_on_destroy
-    redirect_to topics_url
-  end
+    def respond_to_on_destroy
+      redirect_to topics_url
+    end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Admin
   class TopicsController < Admin::ApplicationController
     before_action :set_topic, only: %i[show edit update destroy undestroy suggest unsuggest]
@@ -67,8 +69,8 @@ module Admin
 
     private
 
-    def set_topic
-      @topic = Topic.unscoped.find(params[:id])
-    end
+      def set_topic
+        @topic = Topic.unscoped.find(params[:id])
+      end
   end
 end

@@ -1,10 +1,12 @@
-require 'rails_helper'
-require 'cancan/matchers'
+# frozen_string_literal: true
+
+require "rails_helper"
+require "cancan/matchers"
 
 describe Ability, type: :model do
   subject { ability }
 
-  context 'Admin manage all' do
+  context "Admin manage all" do
     let(:admin) { create :admin }
     let(:ability) { Ability.new(admin) }
 
@@ -18,7 +20,7 @@ describe Ability, type: :model do
     it { is_expected.to be_able_to(:manage, TeamUser) }
   end
 
-  context 'Wiki Editor manage wiki' do
+  context "Wiki Editor manage wiki" do
     let(:wiki_editor) { create :wiki_editor }
     let(:ability) { Ability.new(wiki_editor) }
 
@@ -27,21 +29,21 @@ describe Ability, type: :model do
     it { is_expected.to be_able_to(:create, Team) }
   end
 
-  context 'Normal users' do
+  context "Normal users" do
     let(:user) { create :avatar_user }
     let(:topic) { create :topic, user: user }
     let(:topic1) { create :topic }
     let(:locked_topic) { create :topic, user: user, lock_node: true }
     let(:reply) { create :reply, user: user }
     let(:note) { create :note, user: user }
-    let(:comment) { create :comment, user: user, commentable: CommentablePage.create(name: 'Fake Wiki', id: 1) }
+    let(:comment) { create :comment, user: user, commentable: CommentablePage.create(name: "Fake Wiki", id: 1) }
     let(:team_owner) { create :team_owner, user: user }
     let(:team_member) { create :team_member, user: user }
     let(:note_publish) { create :note, publish: true }
 
     let(:ability) { Ability.new(user) }
 
-    context 'Topic' do
+    context "Topic" do
       it { is_expected.to be_able_to(:read, Topic) }
       it { is_expected.to be_able_to(:create, Topic) }
       it { is_expected.to be_able_to(:update, topic) }
@@ -59,15 +61,15 @@ describe Ability, type: :model do
       it { is_expected.to be_able_to(:change_node, topic) }
     end
 
-    context 'Reply' do
-      context 'normal' do
+    context "Reply" do
+      context "normal" do
         it { is_expected.to be_able_to(:read, Reply) }
         it { is_expected.to be_able_to(:create, Reply) }
         it { is_expected.to be_able_to(:update, reply) }
         it { is_expected.to be_able_to(:destroy, reply) }
       end
 
-      context 'Reply that Topic closed' do
+      context "Reply that Topic closed" do
         let(:t) { create(:topic, closed_at: Time.now) }
         let(:r) { Reply.new(topic: t) }
 
@@ -77,23 +79,23 @@ describe Ability, type: :model do
       end
     end
 
-    context 'Section' do
+    context "Section" do
       it { is_expected.to be_able_to(:read, Section) }
     end
 
-    context 'Photo' do
+    context "Photo" do
       it { is_expected.to be_able_to(:create, Photo) }
       it { is_expected.to be_able_to(:read, Photo) }
     end
 
-    context 'Comment' do
+    context "Comment" do
       it { is_expected.to be_able_to(:create, Comment) }
       it { is_expected.to be_able_to(:read, Comment) }
       it { is_expected.to be_able_to(:update, comment) }
       it { is_expected.to be_able_to(:destroy, comment) }
     end
 
-    context 'Team' do
+    context "Team" do
       it { is_expected.not_to be_able_to(:create, Team) }
       it { is_expected.to be_able_to(:read, Team) }
       it { is_expected.to be_able_to(:update, team_owner.team) }
@@ -102,65 +104,65 @@ describe Ability, type: :model do
       it { is_expected.not_to be_able_to(:destroy, team_member.team) }
     end
 
-    context 'TeamUser' do
+    context "TeamUser" do
       it { is_expected.to be_able_to(:accept, team_member) }
       it { is_expected.to be_able_to(:reject, team_member) }
     end
   end
 
-  context 'Normal user but no avatar' do
+  context "Normal user but no avatar" do
     let(:user) { create :user }
     let(:ability) { Ability.new(user) }
 
     it { is_expected.to be_able_to(:create, Topic) }
   end
 
-  context 'Newbie users' do
+  context "Newbie users" do
     let(:newbie) { create :newbie }
     let(:ability) { Ability.new(newbie) }
 
-    context 'Topic' do
+    context "Topic" do
       it { is_expected.not_to be_able_to(:create, Topic) }
       it { is_expected.not_to be_able_to(:suggest, Topic) }
       it { is_expected.not_to be_able_to(:unsuggest, Topic) }
     end
 
-    context 'Reply' do
+    context "Reply" do
       it { is_expected.to be_able_to(:create, Reply) }
     end
   end
 
-  context 'Blocked users' do
+  context "Blocked users" do
     let(:blocked_user) { create :blocked_user }
     let(:ability) { Ability.new(blocked_user) }
 
-    context 'Topic' do
+    context "Topic" do
       it { is_expected.not_to be_able_to(:create, Topic) }
     end
-    context 'Reply' do
+    context "Reply" do
       it { is_expected.not_to be_able_to(:create, Reply) }
     end
-    context 'Comment' do
+    context "Comment" do
       it { is_expected.not_to be_able_to(:create, Comment) }
     end
-    context 'Photo' do
+    context "Photo" do
       it { is_expected.not_to be_able_to(:create, Photo) }
     end
   end
 
-  context 'Deleted users' do
+  context "Deleted users" do
     let(:deleted_user) { create :deleted_user }
     let(:ability) { Ability.new(deleted_user) }
-    context 'Topic' do
+    context "Topic" do
       it { is_expected.not_to be_able_to(:create, Topic) }
     end
-    context 'Reply' do
+    context "Reply" do
       it { is_expected.not_to be_able_to(:create, Reply) }
     end
-    context 'Comment' do
+    context "Comment" do
       it { is_expected.not_to be_able_to(:create, Comment) }
     end
-    context 'Photo' do
+    context "Photo" do
       it { is_expected.not_to be_able_to(:create, Photo) }
     end
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails/generators/erb"
 require "rails/generators/resource_helpers"
 
@@ -21,9 +23,9 @@ module Erb
 
       protected
 
-      def available_views
-        %w[index edit show new _form _base]
-      end
+        def available_views
+          %w[index edit show new _form _base]
+        end
     end
   end
 end

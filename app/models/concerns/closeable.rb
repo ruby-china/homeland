@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # 开启关闭帖子功能
 module Closeable
   extend ActiveSupport::Concern

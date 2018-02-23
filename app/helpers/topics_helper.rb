@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "digest/md5"
 module TopicsHelper
   def topic_favorite_tag(topic, opts = {})

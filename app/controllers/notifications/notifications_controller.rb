@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Notifications
   class NotificationsController < Notifications::ApplicationController
     def index
@@ -18,8 +20,8 @@ module Notifications
 
     private
 
-    def notifications
-      Notification.where(user_id: current_user.id)
-    end
+      def notifications
+        Notification.where(user_id: current_user.id)
+      end
   end
 end

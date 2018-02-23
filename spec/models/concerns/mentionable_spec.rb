@@ -1,4 +1,6 @@
-require 'rails_helper'
+# frozen_string_literal: true
+
+require "rails_helper"
 
 ActiveRecord::Base.connection.create_table(:test_documents, force: true) do |t|
   t.integer :user_id
@@ -12,14 +14,14 @@ class TestDocument < ApplicationRecord
   include Mentionable
 
   belongs_to :user
-  belongs_to :reply_to, class_name: 'TestDocument'
+  belongs_to :reply_to, class_name: "TestDocument"
   delegate :login, to: :user, prefix: true, allow_nil: true
 end
 
 describe Mentionable, type: :model do
-  it 'should work with chars' do
-    user = create :user, login: 'foo-bar_12'
-    user1 = create :user, login: 'Rei.foo'
+  it "should work with chars" do
+    user = create :user, login: "foo-bar_12"
+    user1 = create :user, login: "Rei.foo"
     doc = TestDocument.create body: "@#{user.login} @#{user1.login}", user: create(:user)
     expect(doc.mentioned_user_logins).to include(user.login, user1.login)
 
@@ -27,34 +29,34 @@ describe Mentionable, type: :model do
     expect(doc.mentioned_user_logins).to include(user.login, user1.login)
   end
 
-  it 'should extract mentioned user ids' do
+  it "should extract mentioned user ids" do
     user = create :user
     doc = TestDocument.create body: "@#{user.login}", user: create(:user)
     expect(doc.mentioned_user_ids).to eq([user.id])
     expect(doc.mentioned_user_logins).to eq([user.login])
   end
 
-  it 'limit 5 mentioned user' do
-    logins = ''
+  it "limit 5 mentioned user" do
+    logins = "".dup
     6.times { logins << " @#{create(:user).login}" }
     doc = TestDocument.create body: logins, user: create(:user)
     expect(doc.mentioned_user_ids.count).to eq(5)
   end
 
-  it 'except self user' do
+  it "except self user" do
     user = create :user
     doc = TestDocument.create body: "@#{user.login}", user: user
     expect(doc.mentioned_user_ids.count).to eq(0)
   end
 
-  it 'should get mentioned user logins' do
+  it "should get mentioned user logins" do
     user1 = create :user
     user2 = create :user
     doc = TestDocument.create body: "@#{user1.login} @#{user2.login}", user: create(:user)
     expect(doc.mentioned_user_logins).to match_array([user1.login, user2.login])
   end
 
-  it 'should send mention notification' do
+  it "should send mention notification" do
     user = create :user
     expect do
       TestDocument.create body: "@#{user.login}", user: create(:user)
@@ -69,7 +71,7 @@ describe Mentionable, type: :model do
     end.not_to change(user.notifications.unread, :count)
   end
 
-  it 'should not mention Team' do
+  it "should not mention Team" do
     team = create :team
     user1 = create :user
     doc = TestDocument.create body: "@#{team.login} @#{user1.login}", user: create(:user)
@@ -81,7 +83,7 @@ describe Mentionable, type: :model do
     end.to change(Notification, :count).by(0)
   end
 
-  it 'should send mention to reply_to user' do
+  it "should send mention to reply_to user" do
     user = create :user
     last_doc = TestDocument.create body: "@#{user.login}", user: user
     user1 = create :user
@@ -90,12 +92,12 @@ describe Mentionable, type: :model do
     end.to change(user.notifications.unread, :count)
   end
 
-  describe '.send_mention_notification' do
+  describe ".send_mention_notification" do
     let(:actor) { create(:user) }
     let(:user1) { create(:user) }
     let(:doc) { TestDocument.create body: "@#{user1.login} Bla bla", user: actor }
 
-    it 'should world' do
+    it "should world" do
       expect(Notification).to receive(:realtime_push_to_client).exactly(2).times
       expect(PushJob).to receive(:perform_later).exactly(2).times
       expect do
@@ -103,8 +105,8 @@ describe Mentionable, type: :model do
       end.to change(user1.notifications.unread, :count)
 
       note = user1.notifications.unread.last
-      expect(note.notify_type).to eq 'mention'
-      expect(note.target_type).to eq 'TestDocument'
+      expect(note.notify_type).to eq "mention"
+      expect(note.target_type).to eq "TestDocument"
       expect(note.target_id).to eq doc.id
       expect(note.target.id).to eq doc.id
       expect(note.actor_id).to eq actor.id

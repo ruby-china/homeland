@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Users
   module UserActions
     extend ActiveSupport::Concern
@@ -73,15 +75,15 @@ module Users
 
     private
 
-    def only_user!
-      render_404 if @user_type != :user
-    end
+      def only_user!
+        render_404 if @user_type != :user
+      end
 
-    def user_show
-      # 排除掉几个非技术的节点
-      without_node_ids = [21, 22, 23, 31, 49, 51, 57, 25]
-      @topics = @user.topics.fields_for_list.without_node_ids(without_node_ids).high_likes.limit(20)
-      @replies = @user.replies.without_system.fields_for_list.recent.includes(:topic).limit(10)
-    end
+      def user_show
+        # 排除掉几个非技术的节点
+        without_node_ids = [21, 22, 23, 31, 49, 51, 57, 25]
+        @topics = @user.topics.fields_for_list.without_node_ids(without_node_ids).high_likes.limit(20)
+        @replies = @user.replies.without_system.fields_for_list.recent.includes(:topic).limit(10)
+      end
   end
 end

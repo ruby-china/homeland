@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Homeland
   # Sanitize
   # Test case in: spec/helpers/application_helper_spec.rb
@@ -56,9 +58,9 @@ module Homeland
       ],
       attributes: ::Sanitize::Config.merge({},
                                            # 这里要确保是 :all, 而不是 'all'
-                                           :all  => %w[class id lang style tabindex title translate],
+                                           { :all => %w[class id lang style tabindex title translate],
                                            "a"   => %w[href rel data-floor target],
-                                           "img" => %w[alt src width height]),
+                                           "img" => %w[alt src width height] }),
       protocols: {
         "a" => { "href" => ["http", "https", "mailto", :relative] }
       },

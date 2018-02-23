@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   module V3
     class TopicsController < Api::V3::ApplicationController
@@ -20,7 +22,7 @@ module Api
         optional! :offset, default: 0
         optional! :limit, default: 20, values: 1..150
 
-        params[:type].downcase!
+        params[:type] = params[:type].downcase
 
         if params[:node_id].blank?
           @topics = Topic
@@ -237,21 +239,21 @@ module Api
 
       private
 
-      def set_topic
-        @topic = Topic.find(params[:id])
-      end
-
-      def scope_method_by_type
-        case params[:type]
-        when "last_actived" then :last_actived
-        when "recent" then :recent
-        when "no_reply" then :no_reply
-        when "popular" then :popular
-        when "excellent" then :excellent
-        else
-          :last_actived
+        def set_topic
+          @topic = Topic.find(params[:id])
         end
-      end
+
+        def scope_method_by_type
+          case params[:type]
+          when "last_actived" then :last_actived
+          when "recent" then :recent
+          when "no_reply" then :no_reply
+          when "popular" then :popular
+          when "excellent" then :excellent
+          else
+            :last_actived
+          end
+        end
     end
   end
 end

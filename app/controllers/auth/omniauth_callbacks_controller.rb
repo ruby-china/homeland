@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 module Auth
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     def self.provides_callback_for(*providers)
       providers.each do |provider|
-        self.define_method(provider) do
+        self.send(:define_method, provider) do
           unless current_user.blank?
             # add an auth to existing
             current_user.bind_service(request.env["omniauth.auth"])

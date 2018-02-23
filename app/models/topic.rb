@@ -1,13 +1,4 @@
-require "auto-space"
-
-CORRECT_CHARS = [
-  ["［", "["],
-  ["］", "]"],
-  ["【", "["],
-  ["】", "]"],
-  ["（", "("],
-  ["）", ")"]
-]
+# frozen_string_literal: true
 
 class Topic < ApplicationRecord
   include MarkdownBody
@@ -17,6 +8,9 @@ class Topic < ApplicationRecord
   include Searchable
   include MentionTopic
   include UserAvatarDelegate
+  include Topic::AutoCorrect
+  include Topic::Search
+  include Topic::Notify
 
   # 临时存储检测用户是否读过的结果
   attr_accessor :read_state, :admin_editing
@@ -56,43 +50,6 @@ class Topic < ApplicationRecord
     exclude_column_ids("node_id", ids)
   }
 
-  mapping do
-    indexes :title, term_vector: :yes
-    indexes :body, term_vector: :yes
-  end
-
-  def as_indexed_json(_options = {})
-    {
-      title: self.title,
-      body: self.full_body
-    }
-  end
-
-  def indexed_changed?
-    saved_change_to_title? || saved_change_to_body?
-  end
-
-  def related_topics(size = 5)
-    opts = {
-      query: {
-        more_like_this: {
-          fields: %i[title body],
-          like: [
-            {
-              _index: self.class.index_name,
-              _type: self.class.document_type,
-              _id: id
-            }
-          ],
-          min_term_freq: 2,
-          min_doc_freq: 5
-        }
-      },
-      size: size
-    }
-    self.class.__elasticsearch__.search(opts).records.to_a
-  end
-
   def self.fields_for_list
     columns = %w[body who_deleted]
     select(column_names - columns.map(&:to_s))
@@ -111,27 +68,9 @@ class Topic < ApplicationRecord
     self.node_name = node.try(:name) || ""
   end
 
-  before_save :auto_correct_title
-  def auto_correct_title
-    CORRECT_CHARS.each do |chars|
-      title.gsub!(chars[0], chars[1])
-    end
-    title.auto_space!
-  end
-  before_save do
-    if admin_editing == true && self.node_id_changed?
-      Topic.notify_topic_node_changed(id, node_id)
-    end
-  end
-
   before_create :init_last_active_mark_on_create
   def init_last_active_mark_on_create
     self.last_active_mark = Time.now.to_i
-  end
-
-  after_commit :async_create_reply_notify, on: :create
-  def async_create_reply_notify
-    NotifyTopicJob.perform_later(id)
   end
 
   def update_last_reply(reply, opts = {})
@@ -207,44 +146,6 @@ class Topic < ApplicationRecord
   def floor_of_reply(reply)
     reply_index = reply_ids.index(reply.id)
     reply_index + 1
-  end
-
-  def self.notify_topic_created(topic_id)
-    topic = Topic.find_by_id(topic_id)
-    return unless topic&.user
-
-    follower_ids = topic.user.follow_by_user_ids
-    return if follower_ids.empty?
-
-    notified_user_ids = topic.mentioned_user_ids
-
-    # 给关注者发通知
-    default_note = { notify_type: "topic", target_type: "Topic", target_id: topic.id, actor_id: topic.user_id }
-    Notification.bulk_insert(set_size: 100) do |worker|
-      follower_ids.each do |uid|
-        # 排除同一个回复过程中已经提醒过的人
-        next if notified_user_ids.include?(uid)
-        # 排除回帖人
-        next if uid == topic.user_id
-        note = default_note.merge(user_id: uid)
-        worker.add(note)
-      end
-    end
-
-    true
-  end
-
-  def self.notify_topic_node_changed(topic_id, node_id)
-    topic = Topic.find_by_id(topic_id)
-    return if topic.blank?
-    node = Node.find_by_id(node_id)
-    return if node.blank?
-
-    Notification.create notify_type: "node_changed",
-                        user_id: topic.user_id,
-                        target: topic,
-                        second_target: node
-    true
   end
 
   def self.total_pages

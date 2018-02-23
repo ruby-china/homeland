@@ -234,7 +234,7 @@ GEM
     multi_xml (0.6.0)
     multipart-post (2.0.0)
     nio4r (2.1.0)
-    nokogiri (1.8.1)
+    nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
     nokogumbo (1.4.13)
       nokogiri
@@ -515,6 +515,5 @@ DEPENDENCIES
   uglifier
   yard (>= 0.9.11)
 
-
 BUNDLED WITH
-   1.15.4
+   1.16.1

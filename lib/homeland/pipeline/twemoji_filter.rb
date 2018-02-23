@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Homeland
   class Pipeline
     class TwemojiFilter < HTML::Pipeline::Filter

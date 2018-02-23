@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # From: https://github.com/discourse/discourse/blob/master/lib/single_sign_on.rb
 class SingleSignOn
   ACCESSORS         = %i[nonce name username email avatar_url bio external_id return_sso_url admin]

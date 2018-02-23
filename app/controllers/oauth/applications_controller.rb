@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Oauth
   class ApplicationsController < Doorkeeper::ApplicationsController
     before_action :authenticate_user!

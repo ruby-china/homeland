@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -21,7 +23,7 @@ Rails.application.configure do
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
-  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  config.public_file_server.enabled = ENV["RAILS_SERVE_STATIC_FILES"].present?
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
@@ -38,7 +40,7 @@ Rails.application.configure do
 
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = 'X-Sendfile' # for Apache
-  config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
+  config.action_dispatch.x_sendfile_header = "X-Accel-Redirect" # for NGINX
 
   # Mount Action Cable outside main process or domain
   # config.action_cable.mount_path = nil
@@ -70,7 +72,7 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: Setting.domain, protocol: Setting.protocol }
 
   config.action_mailer.delivery_method = Setting.mailer_provider.to_sym
-  if Setting.mailer_provider == 'postmark'
+  if Setting.mailer_provider == "postmark"
     config.action_mailer.postmark_settings = Setting.mailer_options.deep_symbolize_keys
   else
     config.action_mailer.smtp_settings = Setting.mailer_options.deep_symbolize_keys

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "redcarpet"
 require "rouge/plugins/redcarpet"
 require "nokogiri"
@@ -38,7 +40,7 @@ module Homeland
         end
 
         def block_code(code, lang)
-          lang.downcase! if lang.is_a?(String)
+          lang = lang.downcase if lang.is_a?(String)
           code = code.strip_heredoc
           super(code, lang)
         end

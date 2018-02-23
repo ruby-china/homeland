@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   module V3
     class UsersController < Api::V3::ApplicationController
@@ -175,9 +177,9 @@ module Api
 
       private
 
-      def set_user
-        @user = User.find_by_login!(params[:id])
-      end
+        def set_user
+          @user = User.find_by_login!(params[:id])
+        end
     end
   end
 end

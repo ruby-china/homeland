@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TeamUser < ApplicationRecord
   enum role: %i[owner member]
   enum status: %i[pendding accepted]

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Node < ApplicationRecord
   second_level_cache expires_in: 2.weeks
 

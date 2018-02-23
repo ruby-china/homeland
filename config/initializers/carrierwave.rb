@@ -1,5 +1,7 @@
-require 'carrierwave'
-require 'carrierwave/validations/active_model'
+# frozen_string_literal: true
+
+require "carrierwave"
+require "carrierwave/validations/active_model"
 
 class NullStorage
   attr_reader :uploader
@@ -26,15 +28,15 @@ CarrierWave.configure do |config|
   config.storage NullStorage if Rails.env.test?
 
   case Setting.upload_provider
-  when 'aliyun'
+  when "aliyun"
     config.storage = :aliyun
     config.aliyun_access_id  = Setting.upload_access_id
     config.aliyun_access_key = Setting.upload_access_secret
     config.aliyun_bucket     = Setting.upload_bucket
-    config.aliyun_internal   = Setting.upload_aliyun_internal.to_s == 'false' ? false : true
+    config.aliyun_internal   = Setting.upload_aliyun_internal.to_s != "false"
     config.aliyun_area       = Setting.upload_aliyun_area
     config.aliyun_host       = Setting.upload_url
-  when 'upyun'
+  when "upyun"
     config.storage = :upyun
     # Do not remove previously file after new file uploaded
     config.remove_previously_stored_files_after_update = false

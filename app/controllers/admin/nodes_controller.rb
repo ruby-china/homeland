@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Admin
   class NodesController < Admin::ApplicationController
     before_action :set_node, only: %i[show edit update destroy]
@@ -41,8 +43,8 @@ module Admin
 
     private
 
-    def set_node
-      @node = Node.find(params[:id])
-    end
+      def set_node
+        @node = Node.find(params[:id])
+      end
   end
 end

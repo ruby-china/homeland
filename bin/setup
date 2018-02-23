@@ -1,4 +1,6 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
+
 require "pathname"
 
 # path to your application root.
@@ -52,7 +54,7 @@ def replace_file(file_name, from, to)
   File.open(file_name, "r+") do |f|
     out = ""
     f.each do |line|
-      out << line.gsub(from, to)
+      out += line.gsub(from, to)
     end
     f.pos = 0
     f.print out

@@ -1,6 +1,8 @@
-require_relative 'boot'
+# frozen_string_literal: true
 
-require 'rails/all'
+require_relative "boot"
+
+require "rails/all"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -14,11 +16,11 @@ module Homeland
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
-    config.time_zone = 'Beijing'
+    config.time_zone = "Beijing"
 
     # Ensure App config files exist.
     if Rails.env.development?
-      %w(config redis secrets elasticsearch).each do |fname|
+      %w[config redis secrets elasticsearch].each do |fname|
         filename = "config/#{fname}.yml"
         next if File.exist?(Rails.root.join(filename))
         FileUtils.cp(Rails.root.join("#{filename}.default"), Rails.root.join(filename))
@@ -26,34 +28,34 @@ module Homeland
     end
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
-    config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
-    config.i18n.default_locale = 'zh-CN'
-    config.i18n.available_locales = ['zh-CN', 'en', 'zh-TW']
+    config.i18n.load_path += Dir[Rails.root.join("my", "locales", "*.{rb,yml}").to_s]
+    config.i18n.default_locale = "zh-CN"
+    config.i18n.available_locales = ["zh-CN", "en", "zh-TW"]
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.i18n.fallbacks = true
 
     config.autoload_paths += [
-      Rails.root.join('lib')
+      Rails.root.join("lib")
     ]
     config.eager_load_paths += [
-      Rails.root.join('lib/homeland'),
-      Rails.root.join('lib/exception_notifier')
+      Rails.root.join("lib/homeland"),
+      Rails.root.join("lib/exception_notifier")
     ]
 
     config.generators do |g|
       g.test_framework :rspec
-      g.fixture_replacement :factory_bot, dir: 'spec/factories'
+      g.fixture_replacement :factory_bot, dir: "spec/factories"
     end
 
     config.to_prepare do
-      Devise::Mailer.layout 'mailer'
+      Devise::Mailer.layout "mailer"
       # Only Applications list
-      Doorkeeper::ApplicationsController.layout 'simple'
+      Doorkeeper::ApplicationsController.layout "simple"
       # Only Authorization endpoint
-      Doorkeeper::AuthorizationsController.layout 'simple'
+      Doorkeeper::AuthorizationsController.layout "simple"
       # Only Authorized Applications
-      Doorkeeper::AuthorizedApplicationsController.layout 'simple'
+      Doorkeeper::AuthorizedApplicationsController.layout "simple"
     end
 
     config.action_cable.log_tags = [
@@ -61,15 +63,15 @@ module Homeland
     ]
 
     memcached_config = Application.config_for(:memcached)
-    config.cache_store = [:mem_cache_store, memcached_config['host'], memcached_config]
+    config.cache_store = [:mem_cache_store, memcached_config["host"], memcached_config]
 
     config.active_job.queue_adapter = :sidekiq
     config.middleware.use Rack::Attack
-    config.action_cable.mount_path = '/cable'
+    config.action_cable.mount_path = "/cable"
   end
 end
 
-require 'homeland'
+require "homeland"
 
 I18n.config.enforce_available_locales = false
 

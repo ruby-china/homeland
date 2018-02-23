@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   module V3
     class RepliesController < Api::V3::ApplicationController
@@ -39,9 +41,9 @@ module Api
 
       private
 
-      def set_reply
-        @reply = Reply.find(params[:id])
-      end
+        def set_reply
+          @reply = Reply.find(params[:id])
+        end
     end
   end
 end

@@ -1,11 +1,12 @@
+# frozen_string_literal: true
+
 class SearchIndexer < ApplicationJob
   queue_as :search_indexer
 
   def perform(operation, type, id)
     obj = nil
-    type.downcase!
 
-    case type
+    case type.downcase
     when "topic"
       obj = Topic.find_by_id(id)
     when "page"

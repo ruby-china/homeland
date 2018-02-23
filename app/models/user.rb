@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "digest/md5"
 
 class User < ApplicationRecord
@@ -77,8 +79,7 @@ class User < ApplicationRecord
 
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
-    login = conditions.delete(:login)
-    login.downcase!
+    login = conditions.delete(:login).downcase
     where(conditions.to_h).where(["(lower(login) = :value OR lower(email) = :value) and state != -1", { value: login }]).first
   end
 

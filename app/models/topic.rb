@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "auto-space"
 
 CORRECT_CHARS = [
@@ -113,11 +115,14 @@ class Topic < ApplicationRecord
 
   before_save :auto_correct_title
   def auto_correct_title
+    return if title.blank?
+    title.dup
     CORRECT_CHARS.each do |chars|
       title.gsub!(chars[0], chars[1])
     end
     title.auto_space!
   end
+
   before_save do
     if admin_editing == true && self.node_id_changed?
       Topic.notify_topic_node_changed(id, node_id)

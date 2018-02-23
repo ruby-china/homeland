@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Homeland
   class Plugin
     # name of plugin, use var name style.

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   module V3
     class DevicesController < Api::V3::ApplicationController

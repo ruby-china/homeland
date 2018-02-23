@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
-  EMPTY_STRING = "".freeze
+  EMPTY_STRING = ""
 
   def markdown(text)
     return nil if text.blank?
@@ -146,10 +148,7 @@ module ApplicationHelper
   end
 
   def highlight(text)
-    text = escape_once(text)
-    text.gsub!("[h]", "<em>")
-    text.gsub!("[/h]", "</em>")
-    text.gsub!(/\\n|\\r/, "")
+    text = escape_once(text).gsub("[h]", "<em>").gsub("[/h]", "</em>").gsub(/\\n|\\r/, "")
     raw text
   end
 end

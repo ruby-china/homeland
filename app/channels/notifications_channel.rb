@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class NotificationsChannel < ApplicationCable::Channel
   def subscribed
     logger.info "current connections: #{ActionCable.server.connections.count}"

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Devise User Controller
 class AccountController < Devise::RegistrationsController
   before_action :require_no_sso!, only: %i[new create]
@@ -22,10 +24,10 @@ class AccountController < Devise::RegistrationsController
 
   private
 
-  # Overwrite the default url to be used after updating a resource.
-  # It should be edit_user_registration_path
-  # Note: resource param can't miss, because it's the super caller way.
-  def after_update_path_for(_)
-    edit_user_registration_path
-  end
+    # Overwrite the default url to be used after updating a resource.
+    # It should be edit_user_registration_path
+    # Note: resource param can't miss, because it's the super caller way.
+    def after_update_path_for(_)
+      edit_user_registration_path
+    end
 end

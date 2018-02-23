@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # @class BaseSerializer
 # @!method abilities
 # 当前 accessToken 对应的用户对此数据的权限

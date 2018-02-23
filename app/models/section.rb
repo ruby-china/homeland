@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Section < ApplicationRecord
   second_level_cache expires_in: 2.weeks
 

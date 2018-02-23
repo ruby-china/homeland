@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RepliesController < ApplicationController
   load_and_authorize_resource :reply
 
@@ -55,15 +57,15 @@ class RepliesController < ApplicationController
 
   protected
 
-  def set_topic
-    @topic = Topic.find(params[:topic_id])
-  end
+    def set_topic
+      @topic = Topic.find(params[:topic_id])
+    end
 
-  def set_reply
-    @reply = Reply.find(params[:id])
-  end
+    def set_reply
+      @reply = Reply.find(params[:id])
+    end
 
-  def reply_params
-    params.require(:reply).permit(:body, :reply_to_id)
-  end
+    def reply_params
+      params.require(:reply).permit(:body, :reply_to_id)
+    end
 end

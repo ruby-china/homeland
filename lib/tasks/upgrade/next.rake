@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :upgrade do
   desc "Updates the ruby-advisory-db and runs audit"
   task action_store: :environment do

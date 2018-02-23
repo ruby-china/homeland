@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AvatarUploader < BaseUploader
   def filename
     if super.present?

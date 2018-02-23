@@ -1,19 +1,21 @@
+# frozen_string_literal: true
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
-ENV['RAILS_ENV'] ||= 'test'
-require File.expand_path('../../config/environment', __FILE__)
+ENV["RAILS_ENV"] ||= "test"
+require File.expand_path("../../config/environment", __FILE__)
 # Prevent database truncation if the environment is production
-abort('The Rails environment is running in production mode!') if Rails.env.production?
-abort('Do not use "upyun" as upload_provider!') if Setting.upload_provider == 'upyun'
-require 'spec_helper'
-require 'rspec/rails'
-require 'capybara/rspec'
-require 'sidekiq/testing'
-require 'database_cleaner'
-require 'simplecov'
+abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('Do not use "upyun" as upload_provider!') if Setting.upload_provider == "upyun"
+require "spec_helper"
+require "rspec/rails"
+require "capybara/rspec"
+require "sidekiq/testing"
+require "database_cleaner"
+require "simplecov"
 
 SimpleCov.start
-if ENV['CI'] == 'true'
-  require 'codecov'
+if ENV["CI"] == "true"
+  require "codecov"
   SimpleCov.formatter = SimpleCov::Formatter::Codecov
 end
 
@@ -33,7 +35,7 @@ Rails.logger.level = 4
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
-Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.

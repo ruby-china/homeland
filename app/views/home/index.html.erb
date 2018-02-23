@@ -8,11 +8,11 @@
       odd_topics, even_topics = @excellent_topics.partition.each_with_index { |t, i| i.odd?  }
     %>
     <div class="col-md-6 topics-group">
-      <%= render partial: "topics/topic", collection: odd_topics, locals: { suggest: false } %>
+      <%= render partial: "topics/topic", collection: even_topics, locals: { suggest: false } %>
     </div>
 
     <div class="col-md-6 topics-group">
-      <%= render partial: "topics/topic", collection: even_topics, locals: { suggest: false } %>
+      <%= render partial: "topics/topic", collection: odd_topics, locals: { suggest: false } %>
     </div>
     <% end %>
   </div>

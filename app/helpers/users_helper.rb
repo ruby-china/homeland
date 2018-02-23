@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "digest/md5"
 
 module UsersHelper
@@ -73,7 +75,7 @@ module UsersHelper
                   when "blocked" then "label-warning"
                   when "newbie"  then "label-default"
                   else "label-info"
-                  end
+    end
 
     content_tag(:span, user.level_name, class: "label #{level_class} role")
   end

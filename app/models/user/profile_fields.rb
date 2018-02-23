@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User
   module ProfileFields
     extend ActiveSupport::Concern
@@ -5,8 +7,8 @@ class User
     included do
       include RailsSettings::Extend
 
-      PROFILE_FIELDS = %i(alipay paypal qq weibo wechat douban dingding aliwangwang
-                          facebook instagram dribbble battle_tag psn_id steam_id)
+      PROFILE_FIELDS = %i[alipay paypal qq weibo wechat douban dingding aliwangwang
+                          facebook instagram dribbble battle_tag psn_id steam_id]
 
       PROFILE_FIELD_PREFIXS = {
         douban: "https://www.douban.com/people/",

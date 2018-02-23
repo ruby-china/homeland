@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Use this hook to configure devise mailer, warden hooks and so forth. The first
 # four configuration values can also be set straight in your models.
 Devise.setup do |config|
@@ -6,13 +8,13 @@ Devise.setup do |config|
   config.mailer_sender = Setting.mailer_sender
 
   # Configure the class responsible to send e-mails.
-  config.mailer = 'Devise::Mailer'
+  config.mailer = "Devise::Mailer"
 
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
   # :mongoid (bson_ext recommended) by default. Other ORMs may be
   # available as additional gems.
-  require 'devise/orm/active_record'
+  require "devise/orm/active_record"
 
   # ==> Configuration for any authentication mechanism
   # Configure which keys are used when authenticating an user. By default is
@@ -31,7 +33,7 @@ Devise.setup do |config|
   # Configure which authentication keys should have whitespace stripped.
   # These keys will have whitespace before and after removed upon creating or
   # modifying a user and when used to authenticate or find a user. Default is :email.
-  config.strip_whitespace_keys = [:email, :login]
+  config.strip_whitespace_keys = %i[email login]
 
   # Tell if authentication through request.params is enabled. True by default.
   # config.params_authenticatable = true
@@ -73,7 +75,7 @@ Devise.setup do |config|
   # config.encryptor = :bcrypt
 
   # Setup a pepper to generate the encrypted password.
-  config.pepper = 'c7d4ed7d1ea1a7fee16e8a7ef80ca1d391fc3bb8e79a2da9ca23a68dc5c82e6cf3715a6f3d8369335372ab8be36a526bc2e778f17075ed241a1c14c5b93eea60'
+  config.pepper = "c7d4ed7d1ea1a7fee16e8a7ef80ca1d391fc3bb8e79a2da9ca23a68dc5c82e6cf3715a6f3d8369335372ab8be36a526bc2e778f17075ed241a1c14c5b93eea60"
 
   # ==> Configuration for :confirmable
   # The time you want to give your user to confirm his account. During this time

@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module Admin
   class RepliesController < Admin::ApplicationController
-    before_action :set_reply, only: [:show, :edit, :update, :destroy]
+    before_action :set_reply, only: %i[show edit update destroy]
 
     def index
       @replies = Reply.unscoped
@@ -28,8 +30,8 @@ module Admin
 
     private
 
-    def set_reply
-      @reply = Reply.unscoped.find(params[:id])
-    end
+      def set_reply
+        @reply = Reply.unscoped.find(params[:id])
+      end
   end
 end

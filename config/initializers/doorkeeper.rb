@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Doorkeeper.configure do
   # Change the ORM that doorkeeper will use.
   # Currently supported options are :active_record, :mongoid2, :mongoid3,
@@ -84,7 +86,7 @@ Doorkeeper.configure do
   # The value can be any string. Use nil to disable this feature. When disabled, clients must provide a valid URL
   # (Similar behaviour: https://developers.google.com/accounts/docs/OAuth2InstalledApp#choosingredirecturi)
   #
-  native_redirect_uri 'urn:ietf:wg:oauth:2.0:oob'
+  native_redirect_uri "urn:ietf:wg:oauth:2.0:oob"
 
   # Forces the usage of the HTTPS protocol in non-native redirect uris (enabled
   # by default in non-development environments). OAuth2 delegates security in
@@ -121,4 +123,4 @@ Doorkeeper.configure do
   realm Setting.app_name
 end
 
-Doorkeeper.configuration.token_grant_types << 'password'
+Doorkeeper.configuration.token_grant_types << "password"

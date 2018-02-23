@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class RepliesController < ApplicationController
   load_and_authorize_resource :reply
 
   before_action :set_topic
-  before_action :set_reply, only: [:edit, :reply_to, :update, :destroy]
+  before_action :set_reply, only: %i[edit reply_to update destroy]
 
   def create
     @reply = Reply.new(reply_params)
@@ -55,15 +57,15 @@ class RepliesController < ApplicationController
 
   protected
 
-  def set_topic
-    @topic = Topic.find(params[:topic_id])
-  end
+    def set_topic
+      @topic = Topic.find(params[:topic_id])
+    end
 
-  def set_reply
-    @reply = Reply.find(params[:id])
-  end
+    def set_reply
+      @reply = Reply.find(params[:id])
+    end
 
-  def reply_params
-    params.require(:reply).permit(:body, :reply_to_id)
-  end
+    def reply_params
+      params.require(:reply).permit(:body, :reply_to_id)
+    end
 end

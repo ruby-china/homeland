@@ -1,10 +1,12 @@
-require 'rails_helper'
+# frozen_string_literal: true
+
+require "rails_helper"
 
 describe DevicesController, type: :controller do
   let(:user) { create(:user) }
   let!(:device) { create(:device, user: user) }
 
-  it 'DELETE /devices/:id' do
+  it "DELETE /devices/:id" do
     sign_in user
     expect(device.new_record?).to eq false
     expect do
@@ -14,7 +16,7 @@ describe DevicesController, type: :controller do
     expect(user.devices.where(id: device.id).count).to eq 0
   end
 
-  it 'require login' do
+  it "require login" do
     expect do
       delete :destroy, params: { id: device.id }
     end.to change(user.devices, :count).by(0)

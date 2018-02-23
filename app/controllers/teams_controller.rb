@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class TeamsController < ApplicationController
   require_module_enabled! :team
   load_resource find_by: :login
   load_and_authorize_resource
 
-  before_action :set_team, only: [:show, :edit, :update, :destroy]
+  before_action :set_team, only: %i[show edit update destroy]
 
   def index
     @total_team_count = Team.count
@@ -41,11 +43,11 @@ class TeamsController < ApplicationController
 
   private
 
-  def team_params
-    params.require(:team).permit(:login, :name, :email, :email_public, :bio, :website, :twitter, :github, :location, :avatar)
-  end
+    def team_params
+      params.require(:team).permit(:login, :name, :email, :email_public, :bio, :website, :twitter, :github, :location, :avatar)
+    end
 
-  def set_team
-    @team = Team.find_by_login!(params[:id])
-  end
+    def set_team
+      @team = Team.find_by_login!(params[:id])
+    end
 end

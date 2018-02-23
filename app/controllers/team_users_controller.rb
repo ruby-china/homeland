@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class TeamUsersController < ApplicationController
   require_module_enabled! :team
 
   before_action :set_team
-  before_action :set_team_user, only: [:edit, :update, :destroy]
-  before_action :authorize_team_owner!, except: [:index, :accept, :reject, :show]
-  load_and_authorize_resource only: [:accept, :reject, :show]
+  before_action :set_team_user, only: %i[edit update destroy]
+  before_action :authorize_team_owner!, except: %i[index accept reject show]
+  load_and_authorize_resource only: %i[accept reject show]
 
   def index
     @team_users = @team.team_users
@@ -65,19 +67,19 @@ class TeamUsersController < ApplicationController
 
   private
 
-  def authorize_team_owner!
-    authorize! :update, @team
-  end
+    def authorize_team_owner!
+      authorize! :update, @team
+    end
 
-  def set_team_user
-    @team_user = @team.team_users.find(params[:id])
-  end
+    def set_team_user
+      @team_user = @team.team_users.find(params[:id])
+    end
 
-  def set_team
-    @team = Team.find_by_login!(params[:user_id])
-  end
+    def set_team
+      @team = Team.find_by_login!(params[:user_id])
+    end
 
-  def team_user_params
-    params.require(:team_user).permit(:login, :user_id, :role)
-  end
+    def team_user_params
+      params.require(:team_user).permit(:login, :user_id, :role)
+    end
 end

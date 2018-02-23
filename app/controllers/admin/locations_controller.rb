@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module Admin
   class LocationsController < Admin::ApplicationController
-    before_action :set_location, only: [:show, :edit, :update, :destroy]
+    before_action :set_location, only: %i[show edit update destroy]
 
     def index
       @locations = Location.hot.page(params[:page])
@@ -19,8 +21,8 @@ module Admin
 
     private
 
-    def set_location
-      @location = Location.find(params[:id])
-    end
+      def set_location
+        @location = Location.find(params[:id])
+      end
   end
 end

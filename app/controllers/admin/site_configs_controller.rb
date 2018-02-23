@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module Admin
   class SiteConfigsController < Admin::ApplicationController
-    before_action :set_setting, only: [:edit, :update]
+    before_action :set_setting, only: %i[edit update]
 
     def index
     end
@@ -25,8 +27,8 @@ module Admin
 
     private
 
-    def setting_param
-      params[:setting].permit!
-    end
+      def setting_param
+        params[:setting].permit!
+      end
   end
 end

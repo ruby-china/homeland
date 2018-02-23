@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "digest/md5"
 
 class User < ApplicationRecord
@@ -36,9 +38,9 @@ class User < ApplicationRecord
 
   attr_accessor :password_confirmation
 
-  ACCESSABLE_ATTRS = [:name, :email_public, :location, :company, :bio, :website, :github, :twitter,
-                      :tagline, :avatar, :by, :current_password, :password, :password_confirmation,
-                      :_rucaptcha]
+  ACCESSABLE_ATTRS = %i[name email_public location company bio website github twitter
+                        tagline avatar by current_password password password_confirmation
+                        _rucaptcha]
 
   enum state: { deleted: -1, normal: 1, blocked: 2 }
 
@@ -77,8 +79,7 @@ class User < ApplicationRecord
 
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
-    login = conditions.delete(:login)
-    login.downcase!
+    login = conditions.delete(:login).downcase
     where(conditions.to_h).where(["(lower(login) = :value OR lower(email) = :value) and state != -1", { value: login }]).first
   end
 
@@ -272,11 +273,11 @@ class User < ApplicationRecord
 
   # for Searchable
   def as_indexed_json(_options = {})
-    as_json(only: [:login, :name, :tagline, :bio, :email, :location])
+    as_json(only: %i[login name tagline bio email location])
   end
 
   def indexed_changed?
-    %i(login name tagline bio email location).each do |key|
+    %i[login name tagline bio email location].each do |key|
       return true if saved_change_to_attribute?(key)
     end
     false

@@ -57,6 +57,7 @@ class Reply
     end
 
     private
+
       def default_notification
         @default_notification ||= {
           notify_type: "topic_reply",

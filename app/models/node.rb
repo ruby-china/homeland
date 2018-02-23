@@ -6,7 +6,7 @@ class Node < ApplicationRecord
   delegate :name, to: :section, prefix: true, allow_nil: true
 
   has_many :topics
-  belongs_to :section
+  belongs_to :section, optional: true
 
   validates :name, :summary, :section, presence: true
   validates :name, uniqueness: true
@@ -40,7 +40,7 @@ class Node < ApplicationRecord
 
   # Markdown 转换过后的 HTML
   def summary_html
-    Rails.cache.fetch("#{cache_key}/summary_html") do
+    Rails.cache.fetch("#{cache_key_with_version}/summary_html") do
       Homeland::Markdown.call(summary)
     end
   end

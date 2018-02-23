@@ -7,7 +7,7 @@ describe TeamsController, type: :controller do
   describe "index" do
     it "should work" do
       get :index
-      expect(response).to be_success
+      expect(response).to have_http_status(200)
     end
   end
 
@@ -23,7 +23,7 @@ describe TeamsController, type: :controller do
     it "should work" do
       sign_in user
       get :new
-      expect(response).to be_success
+      expect(response).to have_http_status(200)
       expect(response.body).to match(/创建公司／组织/)
     end
   end
@@ -41,7 +41,7 @@ describe TeamsController, type: :controller do
       sign_in user
       allow_any_instance_of(Team).to receive(:save).and_return(false)
       post :create, params: { team: { login: team.login, name: team.name, email: team.email } }
-      expect(response).to be_success
+      expect(response).to have_http_status(200)
     end
   end
 
@@ -58,7 +58,7 @@ describe TeamsController, type: :controller do
       sign_in user
       allow_any_instance_of(Team).to receive(:update).and_return(false)
       put :update, params: { id: team.login, team: { login: team.login, name: team.name, email: team.email } }
-      expect(response).to be_success
+      expect(response).to have_http_status(200)
     end
   end
 end

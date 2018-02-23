@@ -41,7 +41,7 @@ class Topic
         node = Node.find_by_id(node_id)
         return if node.blank?
 
-        Notification.create notify_type: "node_changed", user_id: topic.user_id, target: topic, second_target: node
+        Notification.create! notify_type: "node_changed", user_id: topic.user_id, target: topic, second_target: node
         true
       end
     end

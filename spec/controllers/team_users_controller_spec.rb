@@ -11,7 +11,7 @@ describe TeamUsersController, type: :controller do
   describe "index" do
     it "should work" do
       get :index, params: { user_id: team.login }
-      expect(response).to be_success
+      expect(response).to have_http_status(200)
       expect(response.body).to match(/成员列表/)
     end
 
@@ -19,7 +19,7 @@ describe TeamUsersController, type: :controller do
       it "should not have invite button" do
         sign_in user
         get :index, params: { user_id: team.login }
-        expect(response).to be_success
+        expect(response).to have_http_status(200)
         expect(response.body).not_to match(/\/people\/new/)
       end
     end
@@ -28,7 +28,7 @@ describe TeamUsersController, type: :controller do
       it "should not have invite button" do
         sign_in team_member.user
         get :index, params: { user_id: team.login }
-        expect(response).to be_success
+        expect(response).to have_http_status(200)
         expect(response.body).not_to match(/邀请成员/)
         expect(response.body).not_to match(/\/people\/new/)
       end
@@ -38,7 +38,7 @@ describe TeamUsersController, type: :controller do
       it "should have invite button" do
         sign_in team_owner.user
         get :index, params: { user_id: team.login }
-        expect(response).to be_success
+        expect(response).to have_http_status(200)
         expect(response.body).to match(/邀请成员/)
         expect(response.body).to match(/\/people\/new/)
       end
@@ -50,7 +50,7 @@ describe TeamUsersController, type: :controller do
       it "should work" do
         sign_in team_owner.user
         get :new, params: { user_id: team.login }
-        expect(response).to be_success
+        expect(response).to have_http_status(200)
       end
     end
 
@@ -86,7 +86,7 @@ describe TeamUsersController, type: :controller do
     it "Owner should work" do
       sign_in team_owner.user
       get :edit, params: { user_id: team.login, id: team_user.id }
-      expect(response).to be_success
+      expect(response).to have_http_status(200)
     end
 
     it "Member should not open" do
@@ -131,7 +131,7 @@ describe TeamUsersController, type: :controller do
     it "Owner should work" do
       sign_in team_user.user
       get :show, params: { user_id: team.login, id: team_user.id }
-      expect(response).to be_success
+      expect(response).to have_http_status(200)
       put :accept, params: { user_id: team.login, id: team_user.id }
       team_user.reload
       expect(team_user.accepted?).to eq true

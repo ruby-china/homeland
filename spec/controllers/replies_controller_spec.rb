@@ -11,7 +11,7 @@ describe RepliesController, type: :controller do
 
       sign_in user
       get :index, params: { topic_id: topic.id, last_id: replies.first.id }, xhr: true
-      expect(response).to be_success
+      expect(response).to have_http_status(200)
       expect(user.notifications.unread.count).to eq 0
     end
 
@@ -19,7 +19,7 @@ describe RepliesController, type: :controller do
       topic = create :topic
       replies = create_list :reply, 3
       get :index, params: { topic_id: topic.id, last_id: 0 }, xhr: true
-      expect(response).to be_success
+      expect(response).to have_http_status(200)
       expect(response.body).to eq ""
     end
   end
@@ -33,7 +33,7 @@ describe RepliesController, type: :controller do
       create :reply, topic: topic
       sign_in user
       post :create, params: { topic_id: topic.id, reply: { body: "" } }, format: :js
-      expect(response).to be_success
+      expect(response).to have_http_status(200)
       expect(response.body).to match(/回复内容不能为空字符/)
       expect(user.topic_read?(topic)).to be_falsey
     end
@@ -46,7 +46,7 @@ describe RepliesController, type: :controller do
       create :reply, topic: topic
       sign_in user
       post :create, params: { topic_id: topic.id, reply: { body: "content" } }, format: :js
-      expect(response).to be_success
+      expect(response).to have_http_status(200)
       expect(user.topic_read?(topic)).to be_truthy
     end
   end
@@ -73,13 +73,13 @@ describe RepliesController, type: :controller do
 
     it "should require login to destroy reply" do
       delete :destroy, params: { topic_id: topic.id, id: reply.id }
-      expect(response).not_to be_success
+      expect(response).not_to have_http_status(200)
     end
 
     it "user1 should not allow destroy reply" do
       sign_in user1
       delete :destroy, params: { topic_id: topic.id, id: reply.id }
-      expect(response).not_to be_success
+      expect(response).not_to have_http_status(200)
     end
 
     it "user should destroy reply with itself" do
@@ -115,7 +115,7 @@ describe RepliesController, type: :controller do
       get :reply_to, params: { topic_id: topic.id, id: reply.id }
       expect(response.status).to eq 404
       get :reply_to, params: { topic_id: topic.id, id: reply.id }, xhr: true
-      expect(response).to be_success
+      expect(response).to have_http_status(200)
     end
   end
 end

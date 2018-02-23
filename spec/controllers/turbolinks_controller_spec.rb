@@ -12,7 +12,7 @@ describe TopicsController, type: :controller do
 
   it "should got 401 with turbolinks-app" do
     get :new
-    expect(response).not_to be_success
+    expect(response).not_to have_http_status(200)
     expect(response.status).to eq 401
   end
 

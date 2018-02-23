@@ -15,11 +15,11 @@ class Topic < ApplicationRecord
   # 临时存储检测用户是否读过的结果
   attr_accessor :read_state, :admin_editing
 
-  belongs_to :user, inverse_of: :topics, counter_cache: true
-  belongs_to :team, counter_cache: true
-  belongs_to :node, counter_cache: true
-  belongs_to :last_reply_user, class_name: "User"
-  belongs_to :last_reply, class_name: "Reply"
+  belongs_to :user, inverse_of: :topics, counter_cache: true, optional: true
+  belongs_to :team, counter_cache: true, optional: true
+  belongs_to :node, counter_cache: true, optional: true
+  belongs_to :last_reply_user, class_name: "User", optional: true
+  belongs_to :last_reply, class_name: "Reply", optional: true
   has_many :replies, dependent: :destroy
 
   validates :user_id, :title, :body, :node_id, presence: true
@@ -122,23 +122,23 @@ class Topic < ApplicationRecord
 
   def ban!(opts = {})
     transaction do
-      update(lock_node: true, node_id: Node.no_point.id, admin_editing: true)
+      update!(lock_node: true, node_id: Node.no_point.id, admin_editing: true)
       if opts[:reason]
-        Reply.create_system_event(action: "ban", topic_id: self.id, body: opts[:reason])
+        Reply.create_system_event!(action: "ban", topic_id: self.id, body: opts[:reason])
       end
     end
   end
 
   def excellent!
     transaction do
-      Reply.create_system_event(action: "excellent", topic_id: self.id)
+      Reply.create_system_event!(action: "excellent", topic_id: self.id)
       update!(excellent: 1)
     end
   end
 
   def unexcellent!
     transaction do
-      Reply.create_system_event(action: "unexcellent", topic_id: self.id)
+      Reply.create_system_event!(action: "unexcellent", topic_id: self.id)
       update!(excellent: 0)
     end
   end

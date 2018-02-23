@@ -8,18 +8,18 @@ describe NodesController, type: :controller do
 
   it "should have an index action" do
     get :index
-    expect(response).to be_success
+    expect(response).to have_http_status(200)
   end
 
   it "should have an block action" do
     sign_in user
     post :block, params: { id: node }
-    expect(response).to be_success
+    expect(response).to have_http_status(200)
   end
 
   it "should have an unblock action" do
     sign_in user
     post :unblock, params: { id: node }
-    expect(response).to be_success
+    expect(response).to have_http_status(200)
   end
 end

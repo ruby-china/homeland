@@ -7,7 +7,7 @@ describe SessionsController, type: :controller do
     before { request.env["devise.mapping"] = Devise.mappings[:user] }
     it "should render new template" do
       get :new
-      expect(response).to be_success
+      expect(response).to have_http_status(200)
     end
 
     it "should redirect to sso login" do

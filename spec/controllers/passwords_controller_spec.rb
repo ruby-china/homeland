@@ -8,7 +8,7 @@ describe PasswordsController, type: :controller do
 
     it "should render new tempalte" do
       get :new
-      expect(response).to be_success
+      expect(response).to have_http_status(200)
     end
 
     it "should redirect to sso login" do
@@ -25,7 +25,7 @@ describe PasswordsController, type: :controller do
 
     it "should work" do
       post :create, params: { user: { email: user.email } }
-      expect(response).to be_success
+      expect(response).to have_http_status(200)
     end
     it "should redirect to sign in path after success" do
       allow_any_instance_of(ActionController::Base).to receive(:verify_rucaptcha?).and_return(true)

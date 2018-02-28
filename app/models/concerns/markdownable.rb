@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module MarkdownBody
+module Markdownable
   extend ActiveSupport::Concern
   include ActionView::Helpers::OutputSafetyHelper
   include ApplicationHelper

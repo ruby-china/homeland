@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class User
-  module GithubRepository
+  module GitHubRepository
     extend ActiveSupport::Concern
 
     included do
@@ -12,7 +12,7 @@ class User
       cache_key = github_repositories_cache_key
       items = Homeland.file_store.read(cache_key)
       if items.nil?
-        GithubRepoFetcherJob.perform_later(id)
+        GitHubRepoFetcherJob.perform_later(id)
         items = []
       end
       items.take(10)

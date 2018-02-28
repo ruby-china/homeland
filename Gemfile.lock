@@ -285,7 +285,7 @@ GEM
     rack-attack (5.0.1)
       rack
     rack-cors (1.0.2)
-    rack-protection (2.0.0)
+    rack-protection (2.0.1)
       rack
     rack-test (0.8.2)
       rack (>= 1.0, < 3)

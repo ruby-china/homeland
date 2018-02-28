@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class User
+  # 用户个性资料，支持任意扩展，基于 rails-settings-cached 的特性
   module ProfileFields
     extend ActiveSupport::Concern
 
@@ -18,6 +19,8 @@ class User
         dribbble: "https://dribbble.com/",
         battle_tag: "#"
       }
+
+      before_save :store_location
     end
 
     def profile_fields
@@ -58,5 +61,25 @@ class User
         I18n.t("activerecord.attributes.user.profile_fields.#{field}")
       end
     end
+
+    private
+      # 在用户设置 user.location 保存的时候，自动创建 Location 数据，并更新统计
+      def store_location
+        return if !self.location_changed?
+
+        if location.blank?
+          self.location_id = nil
+          return
+        end
+
+        old_location = Location.location_find_by_name(self.location_was)
+        old_location&.decrement!(:users_count)
+
+        location = Location.location_find_or_create_by_name(self.location)
+        if !location.new_record?
+          location.increment!(:users_count)
+          self.location_id = location.id
+        end
+      end
   end
 end

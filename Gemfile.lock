@@ -285,7 +285,7 @@ GEM
     rack-attack (5.0.1)
       rack
     rack-cors (1.0.2)
-    rack-protection (2.0.0)
+    rack-protection (2.0.1)
       rack
     rack-test (0.8.2)
       rack (>= 1.0, < 3)
@@ -496,6 +496,7 @@ DEPENDENCIES
   puma
   rack-attack
   rack-cors
+  rack-protection (>= 2.0.1)
   rack-utf8_sanitizer
   rails (~> 5.2.0.rc)
   rails-i18n
@@ -524,6 +525,7 @@ DEPENDENCIES
   twemoji
   uglifier
   yard (>= 0.9.11)
+
 
 BUNDLED WITH
    1.16.1

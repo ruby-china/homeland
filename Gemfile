@@ -148,3 +148,4 @@ group :development, :test do
 
   gem "codecov", require: false
 end
+gem "rack-protection", ">= 2.0.1"

@@ -1,4 +1,5 @@
 .bundle
+node_modules/
 tmp/
 coverage/
 db/*.sqlite3
@@ -9,6 +10,7 @@ tmp/**/*
 .sass-cache/
 .yardoc/
 public/assets/
+public/packs/
 config/database.yml
 config/mongoid.yml
 config/config.yml

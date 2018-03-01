@@ -40,37 +40,39 @@ module Mentionable
     end
   end
 
-  def no_mention_users
-    [user]
-  end
+  private
 
-  def send_mention_notification
-    users = mentioned_users - no_mention_users
-    Notification.bulk_insert(set_size: 100) do |worker|
-      users.each do |user|
-        note = {
-          notify_type: "mention",
-          actor_id: self.user_id,
-          user_id: user.id,
-          target_type: self.class.name,
-          target_id: self.id
-        }
-        if self.class.name == "Reply"
-          note[:second_target_type] = "Topic"
-          note[:second_target_id] = self.send(:topic_id)
-        elsif self.class.name == "Comment"
-          note[:second_target_type] = self.commentable_type
-          note[:second_target_id] = self.commentable_id
+    def no_mention_users
+      [user]
+    end
+
+    def send_mention_notification
+      users = mentioned_users - no_mention_users
+      Notification.bulk_insert(set_size: 100) do |worker|
+        users.each do |user|
+          note = {
+            notify_type: "mention",
+            actor_id: self.user_id,
+            user_id: user.id,
+            target_type: self.class.name,
+            target_id: self.id
+          }
+          if self.class.name == "Reply"
+            note[:second_target_type] = "Topic"
+            note[:second_target_id] = self.send(:topic_id)
+          elsif self.class.name == "Comment"
+            note[:second_target_type] = self.commentable_type
+            note[:second_target_id] = self.commentable_id
+          end
+          worker.add(note)
         end
-        worker.add(note)
+      end
+
+      # Touch push to client
+      # TODO: 确保准确
+      users.each do |u|
+        n = u.notifications.last
+        n.realtime_push_to_client
       end
     end
-
-    # Touch push to client
-    # TODO: 确保准确
-    users.each do |u|
-      n = u.notifications.last
-      n.realtime_push_to_client
-    end
-  end
 end

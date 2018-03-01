@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class User
+  # 对话题、回帖点赞
   module Likeable
     extend ActiveSupport::Concern
 

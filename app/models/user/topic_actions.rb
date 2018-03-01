@@ -1,8 +1,17 @@
 # frozen_string_literal: true
 
 class User
-  module TopicRead
+  # 用户对话题的动作
+  module TopicActions
     extend ActiveSupport::Concern
+
+    included do
+      action_store :favorite, :topic
+    end
+
+    def favorites_count
+      favorite_topic_actions.count
+    end
 
     # 是否读过 topic 的最近更新
     def topic_read?(topic)

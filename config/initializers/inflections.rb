@@ -16,4 +16,6 @@
 ActiveSupport::Inflector.inflections(:en) do |inflect|
   # user_sso -> UserSSO
   inflect.acronym "SSO"
+  # github -> GitHub
+  inflect.acronym "GitHub"
 end

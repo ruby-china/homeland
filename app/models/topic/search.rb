@@ -22,7 +22,7 @@ class Topic
       saved_change_to_title? || saved_change_to_body?
     end
 
-    def related_topics(size = 5)
+    def related_topics(limit: 5)
       opts = {
         query: {
           more_like_this: {
@@ -38,7 +38,7 @@ class Topic
             min_doc_freq: 5
           }
         },
-        size: size
+        size: limit
       }
       self.class.__elasticsearch__.search(opts).records.to_a
     end

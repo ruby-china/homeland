@@ -2,8 +2,11 @@
 
 require "rails_helper"
 
-describe User::OmniauthCallbacks, type: :model do
-  let(:callback) { Class.new.include(User::OmniauthCallbacks) }
+describe User::Omniauthable, type: :model do
+  class Monkey
+    include User::Omniauthable
+  end
+  let(:callback) { Monkey.new }
   let(:data) { { "email" => "email@example.com", "nickname" => "_why", "name" => "why" } }
   let(:uid) { "42" }
 

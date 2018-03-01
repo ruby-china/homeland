@@ -1,16 +1,8 @@
 # frozen_string_literal: true
 
 class Topic < ApplicationRecord
-  include MarkdownBody
-  include SoftDelete
-  include Mentionable
-  include Closeable
-  include Searchable
-  include MentionTopic
-  include UserAvatarDelegate
-  include Topic::AutoCorrect
-  include Topic::Search
-  include Topic::Notify
+  include SoftDelete, Markdownable, Mentionable, MentionTopic, Closeable, Searchable, UserAvatarDelegate
+  include Topic::Actions, Topic::AutoCorrect, Topic::Search, Topic::Notify
 
   # 临时存储检测用户是否读过的结果
   attr_accessor :read_state, :admin_editing
@@ -50,6 +42,9 @@ class Topic < ApplicationRecord
     exclude_column_ids("node_id", ids)
   }
 
+  before_save { self.node_name = node.try(:name) || "" }
+  before_create { self.last_active_mark = Time.now.to_i }
+
   def self.fields_for_list
     columns = %w[body who_deleted]
     select(column_names - columns.map(&:to_s))
@@ -63,26 +58,24 @@ class Topic < ApplicationRecord
     Setting.node_ids_hide_in_topics_index.to_s.split(",").collect(&:to_i)
   end
 
-  before_save :store_cache_fields
-  def store_cache_fields
-    self.node_name = node.try(:name) || ""
+  # 所有的回复编号
+  def reply_ids
+    Rails.cache.fetch([self, "reply_ids"]) do
+      self.replies.order("id asc").pluck(:id)
+    end
   end
 
-  before_create :init_last_active_mark_on_create
-  def init_last_active_mark_on_create
-    self.last_active_mark = Time.now.to_i
-  end
-
-  def update_last_reply(reply, opts = {})
+  def update_last_reply(reply, force: false)
     # replied_at 用于最新回复的排序，如果帖着创建时间在一个月以前，就不再往前面顶了
-    return false if reply.blank? && !opts[:force]
+    return false if reply.blank? && !force
 
-    self.last_active_mark = Time.now.to_i if created_at > 1.month.ago
-    self.replied_at = reply.try(:created_at)
-    self.replies_count = replies.without_system.count
-    self.last_reply_id = reply.try(:id)
-    self.last_reply_user_id = reply.try(:user_id)
+    self.last_active_mark      = Time.now.to_i if created_at > 1.month.ago
+    self.replied_at            = reply.try(:created_at)
+    self.replies_count         = replies.without_system.count
+    self.last_reply_id         = reply.try(:id)
+    self.last_reply_user_id    = reply.try(:user_id)
     self.last_reply_user_login = reply.try(:user_login)
+
     # Reindex Search document
     SearchIndexer.perform_later("update", "topic", self.id)
     save
@@ -95,52 +88,6 @@ class Topic < ApplicationRecord
 
     previous_reply = replies.without_system.where.not(id: deleted_reply.id).recent.first
     update_last_reply(previous_reply, force: true)
-  end
-
-  # 删除并记录删除人
-  def destroy_by(user)
-    return false if user.blank?
-    update_attribute(:who_deleted, user.login)
-    destroy
-  end
-
-  def destroy
-    super
-    delete_notification_mentions
-  end
-
-  # 所有的回复编号
-  def reply_ids
-    Rails.cache.fetch([self, "reply_ids"]) do
-      self.replies.order("id asc").pluck(:id)
-    end
-  end
-
-  def excellent?
-    excellent >= 1
-  end
-
-  def ban!(opts = {})
-    transaction do
-      update!(lock_node: true, node_id: Node.no_point.id, admin_editing: true)
-      if opts[:reason]
-        Reply.create_system_event!(action: "ban", topic_id: self.id, body: opts[:reason])
-      end
-    end
-  end
-
-  def excellent!
-    transaction do
-      Reply.create_system_event!(action: "excellent", topic_id: self.id)
-      update!(excellent: 1)
-    end
-  end
-
-  def unexcellent!
-    transaction do
-      Reply.create_system_event!(action: "unexcellent", topic_id: self.id)
-      update!(excellent: 0)
-    end
   end
 
   def floor_of_reply(reply)

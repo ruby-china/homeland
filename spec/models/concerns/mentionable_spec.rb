@@ -100,9 +100,9 @@ describe Mentionable, type: :model do
     it "should world" do
       expect(Notification).to receive(:realtime_push_to_client).exactly(2).times
       expect(PushJob).to receive(:perform_later).exactly(2).times
-      expect do
-        doc.send_mention_notification
-      end.to change(user1.notifications.unread, :count)
+      expect {
+        doc.send(:send_mention_notification)
+      }.to change(user1.notifications.unread, :count)
 
       note = user1.notifications.unread.last
       expect(note.notify_type).to eq "mention"

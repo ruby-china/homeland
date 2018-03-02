@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-module Markdownable
+# 转换 body -> html
+# [Plugin API]
+module MarkdownBody
   extend ActiveSupport::Concern
   include ActionView::Helpers::OutputSafetyHelper
   include ApplicationHelper

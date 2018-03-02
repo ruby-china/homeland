@@ -496,6 +496,7 @@ DEPENDENCIES
   puma
   rack-attack
   rack-cors
+  rack-protection (>= 2.0.1)
   rack-utf8_sanitizer
   rails (~> 5.2.0.rc)
   rails-i18n
@@ -524,6 +525,7 @@ DEPENDENCIES
   twemoji
   uglifier
   yard (>= 0.9.11)
+
 
 BUNDLED WITH
    1.16.1

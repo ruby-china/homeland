@@ -1,14 +1,19 @@
-Homeland
---------
-
-![](https://gethomeland.com/images/text-logo.svg)
-
-Open source discussion website.
-
-开源的论坛／社区网站系统，基于 [Ruby China](https://ruby-china.org) 发展而来。
-
-[![Build Status](https://travis-ci.org/ruby-china/homeland.svg?branch=master)](https://travis-ci.org/ruby-china/homeland) [![codecov.io](https://codecov.io/github/ruby-china/homeland/coverage.svg?branch=master)](https://codecov.io/github/ruby-china/homeland?branch=master)
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fruby-china%2Fhomeland.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fruby-china%2Fhomeland?ref=badge_shield)
+<p align="center">
+  <img src="https://gethomeland.com/images/text-logo.svg" width="400" />
+  <p align="center">Open source discussion website.</p>
+  <p align="center">开源的论坛／社区网站系统，基于 <a href="https://ruby-china.org">Ruby China</a> 发展而来。</p>
+  <p align="center">
+    <a href="https://travis-ci.org/ruby-china/homeland">
+      <img src="https://travis-ci.org/ruby-china/homeland.svg?branch=master" />
+    </a>
+    <a href="https://codecov.io/github/ruby-china/homeland?branch=master">
+      <img src="https://codecov.io/github/ruby-china/homeland/coverage.svg?branch=master" />
+    </a>
+    <a href="https://app.fossa.io/projects/git%2Bgithub.com%2Fruby-china%2Fhomeland?ref=badge_shiel">
+      <img src="https://app.fossa.io/api/projects/git%2Bgithub.com%2Fruby-china%2Fhomeland.svg?type=shield" />
+    </a>
+  </p>
+</p>
 
 ## Deployment
 

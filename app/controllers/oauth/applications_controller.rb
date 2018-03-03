@@ -3,7 +3,7 @@
 module Oauth
   class ApplicationsController < Doorkeeper::ApplicationsController
     before_action :authenticate_user!
-    helper_method :unread_notify_count
+    include Homeland::UserNotificationHelper
 
     def index
       @applications = current_user.oauth_applications
@@ -23,11 +23,6 @@ module Oauth
       else
         render :new
       end
-    end
-
-    def unread_notify_count
-      return 0 if current_user.blank?
-      @unread_notify_count ||= Notification.unread_count(current_user)
     end
   end
 end

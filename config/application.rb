@@ -52,6 +52,7 @@ module Homeland
 
     config.to_prepare do
       Devise::Mailer.layout "mailer"
+      Doorkeeper::ApplicationController.include Homeland::UserNotificationHelper
       # Only Applications list
       Doorkeeper::ApplicationsController.layout "simple"
       # Only Authorization endpoint

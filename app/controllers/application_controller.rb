@@ -3,8 +3,8 @@
 # ApplicationController
 class ApplicationController < ActionController::Base
   protect_from_forgery prepend: true
-  helper_method :unread_notify_count
   helper_method :turbolinks_app?, :turbolinks_ios?, :turbolinks_app_version
+  include Homeland::UserNotificationHelper
 
   # Addition contents for etag
   etag { current_user.try(:id) }
@@ -91,11 +91,6 @@ class ApplicationController < ActionController::Base
 
   def redirect_referrer_or_default(default)
     redirect_to(request.referrer || default)
-  end
-
-  def unread_notify_count
-    return 0 if current_user.blank?
-    @unread_notify_count ||= Notification.unread_count(current_user)
   end
 
   def authenticate_user!(opts = {})

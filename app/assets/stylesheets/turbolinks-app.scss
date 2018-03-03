@@ -309,6 +309,13 @@ body {
       .sub-info { float: right; }
     }
 
+    .reply-to-block {
+      .info {
+        padding-left: 0px;
+        line-height: 16px;
+      }
+    }
+
     .opts {
       position: absolute;
       right: 15px;

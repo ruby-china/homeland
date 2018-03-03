@@ -16,15 +16,19 @@
     <% end %>
     <div class="info">
       <%= user_name_tag(topic.user, data: { author: true }) %>
-      <% if topic.team %>
-      for <%= user_name_tag(topic.team) %>
-      <% end %>
+      <span class="hidden-mobile">
+        <% if topic.team %>
+        for <%= user_name_tag(topic.team) %>
+        <% end %>
+      </span>
        ·
-      <%= raw t("common.created_at", time: timeago(topic.created_at))%>
+      <%= timeago(topic.created_at) %>
       <% if !topic.last_reply_user_login.blank? %>
+      <span class="hidden-mobile">
          ·
         <%= t("common.last_by")%> <%= user_name_tag(topic.last_reply_user_login) %> <%= raw t("common.reply_at", time: timeago(topic.replied_at))%>
       <% end %>
+      </span>
        ·
       <%= topic.hits %> <%= t("common.read_times")%>
     </div>

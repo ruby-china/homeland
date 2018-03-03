@@ -61,7 +61,7 @@ body {
   margin-bottom: 0 !important;
   box-shadow: 0 0 0;
   border-top: 0px solid #f0f0f0;
-  border-bottom: 0px solid #ece2d7;
+  border-bottom: 0px solid #f0f0f0;
 
   &:last-child {
     border-bottom: 0;
@@ -69,8 +69,8 @@ body {
 
   .panel-heading,
   .panel-footer {
-    background: #fffbf8;
-    border-color: #ece2d7;
+    background: #fff;
+    border-color: #f0f0f0;
     border-radius: 0 !important;
   }
 }
@@ -113,17 +113,6 @@ body {
 
 .pagination { display: none; }
 
-.markdown {
-  pre {
-    margin-left: -15px;
-    margin-right: -15px;
-
-    code {
-      margin: 8px;
-    }
-  }
-}
-
 .topics {
   .topic-list-heading {
     display: none;
@@ -159,6 +148,8 @@ body {
 .topics {
   .topic {
     min-height: 60px;
+    padding: 15px;
+    border-bottom-color: #eee;
     &:active {
       background: #f5f5f5;
     }
@@ -168,10 +159,10 @@ body {
     }
 
     .title {
-      margin-bottom: 0px;
+      margin-bottom: 4px;
       a {
-        font-size: 14px;
-        line-height: 22px !important;
+        font-size: 16px;
+        line-height: 24px !important;
       }
       a:hover,
       a:active {
@@ -180,8 +171,9 @@ body {
     }
 
     .info {
+      font-size: 14px;
+
       a.node {
-        color: #909090;
       }
     }
 
@@ -210,6 +202,7 @@ body {
       a:link,
       a:hover,
       a:visited {
+        font-size: 14px;
         line-height: 11px;
         min-width: 28px;
         text-align: right;
@@ -229,9 +222,9 @@ body {
 
 .topic-detail {
   .label-awesome {
-    padding: 10px 15px;
+    padding: 15px 15px 0 15px;
     margin-top: -1px;
-    background: #fff2c4;
+    background: #FFF;
     border: 0;
     color: $primary;
     .fa.awesome {
@@ -241,34 +234,85 @@ body {
   }
 
   .panel-heading {
+    position: relative;
     h1 {
-      font-size: 18px;
+      font-size: 20px;
+      margin-bottom: 0;
+
+      a.node {
+        display: block;
+        font-size: 15px;
+        line-height: 24px;
+        height: 30px;
+        text-align: right;
+        font-weight: normal;
+      }
+    }
+
+    .media-right {
+      display: block; position: absolute; top: 15px; left: 5px;
+      .avatar-48 { width: 24px; height: 24px; }
     }
   }
 
   .info {
+    font-size: 14px;
     color: #999;
 
     .user-name {
       color: #666;
     }
+
     .node { color: $primary; }
   }
 
-  .markdown {
-    .zoom-image {
-      overflow: hidden;
-      display: block;
-      margin: 8px -15px;
-      img {  width: 100%; }
+  .toc-container { display: none !important; }
+}
+
+.markdown {
+  p { font-size: 16px; }
+  .zoom-image {
+    overflow: hidden;
+    display: block;
+    margin: 8px -15px;
+    img {  width: 100%; }
+  }
+
+  pre {
+    background: #fefeff !important;
+    border-color: #f0f0f0 !important;
+    padding: 10px 15px !important;
+    margin-left: -15px !important;
+    margin-right: -15px !important;
+    code {
+      background: #fefeff !important;
+      margin: 0;
+    }
+  }
+}
+
+#replies {
+  .reply {
+    padding-left: 15px;
+    padding-bottom: 40px;
+    .avatar-48 {
+      width: 24px;
+      height: 24px;
     }
 
-    pre {
-      background: #fffefc !important;
-      border-color: #f9f4f0 !important;
-      code {
-        background: #fffefc !important;
-      }
+    .info {
+      .name { font-size: 14px; }
+      padding-left: 32px;
+      font-size: 14px;
+      line-height: 24px;
+
+      .sub-info { float: right; }
+    }
+
+    .opts {
+      position: absolute;
+      right: 15px;
+      bottom: 15px;
     }
   }
 }

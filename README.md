@@ -9,9 +9,6 @@
     <a href="https://codecov.io/github/ruby-china/homeland?branch=master">
       <img src="https://codecov.io/github/ruby-china/homeland/coverage.svg?branch=master" />
     </a>
-    <a href="https://app.fossa.io/projects/git%2Bgithub.com%2Fruby-china%2Fhomeland?ref=badge_shiel">
-      <img src="https://app.fossa.io/api/projects/git%2Bgithub.com%2Fruby-china%2Fhomeland.svg?type=shield" />
-    </a>
   </p>
 </p>
 
@@ -52,6 +49,3 @@ Emojis under the CC-BY 4.0 license from [Twitter/Twemoji][twemoji]:
 * https://github.com/twitter/twemoji#license
 
 [twemoji]: https://github.com/twitter/twemoji
-
-
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fruby-china%2Fhomeland.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fruby-china%2Fhomeland?ref=badge_large)

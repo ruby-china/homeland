@@ -20,12 +20,12 @@ class Reply < ApplicationRecord
   validates :body, uniqueness: { scope: %i[topic_id user_id], message: "不能重复提交。" }, unless: -> { system_event? }
   validate do
     ban_words = (Setting.ban_words_on_reply || "").split("\n").collect(&:strip)
-    if body.strip.downcase.in?(ban_words)
+    if body && body.strip.downcase.in?(ban_words)
       errors.add(:body, "请勿回复无意义的内容，如你想收藏或赞这篇帖子，请用帖子后面的功能。")
     end
 
     if topic&.closed?
-      errors.add(:topic, "已关闭，不再接受回帖或修改回帖。")
+      errors.add(:topic, "已关闭，不再接受回帖或修改回帖。") unless system_event?
     end
 
     if reply_to_id

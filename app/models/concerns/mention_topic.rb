@@ -16,7 +16,7 @@ module MentionTopic
     current_topic_id = self.class.name == "Topic" ? self.id : self.topic_id
     return if matched_ids.blank?
     matched_ids = matched_ids.map(&:to_i).reject { |id| id == current_topic_id }
-    return Topic.where("id IN (?)", matched_ids).pluck(:id)
+    Topic.where("id IN (?)", matched_ids).pluck(:id)
   end
 
   private

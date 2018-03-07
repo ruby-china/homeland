@@ -91,7 +91,9 @@
     </div>
   <% end %>
 
+  <% if !mobile? %>
   <%= render 'related_topics' %>
+  <% end %>
 </div>
 
 <% if !mobile? %>

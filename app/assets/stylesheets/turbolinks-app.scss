@@ -6,7 +6,7 @@ $primary-dark: #af2913;
 .hide-ios { display: none !important; }
 body {
   padding-top: 0;
-  background: #e9e3e3;
+  background: #FFF;
 }
 
 .btn-primary {
@@ -67,12 +67,16 @@ body {
     border-bottom: 0;
   }
 
+  .panel-body,
   .panel-heading,
   .panel-footer {
     background: #fff;
     border-color: #f0f0f0;
     border-radius: 0 !important;
+    padding: 10px 20px;
   }
+
+  .panel-footer { background: #f0f0f0; padding: 5px 20px; }
 }
 
 .container > .alert {
@@ -222,7 +226,7 @@ body {
 
 .topic-detail {
   .label-awesome {
-    padding: 15px 15px 0 15px;
+    padding: 15px 20px 0 20px;
     margin-top: -1px;
     background: #FFF;
     border: 0;
@@ -250,7 +254,7 @@ body {
     }
 
     .media-right {
-      display: block; position: absolute; top: 15px; left: 5px;
+      display: block; position: absolute; top: 15px; left: 15px;
       .avatar-48 { width: 24px; height: 24px; }
     }
   }
@@ -274,16 +278,22 @@ body {
   .zoom-image {
     overflow: hidden;
     display: block;
-    margin: 8px -15px;
+    margin: 8px -20px !important;
     img {  width: 100%; }
   }
+
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 { border-bottom: 0 !important; padding-bottom: 0 !important; }
 
   pre {
     background: #fefeff !important;
     border-color: #f0f0f0 !important;
-    padding: 10px 15px !important;
-    margin-left: -15px !important;
-    margin-right: -15px !important;
+    padding: 10px 20px !important;
+    margin-left: -20px !important;
+    margin-right: -20px !important;
     code {
       background: #fefeff !important;
       margin: 0;
@@ -293,8 +303,14 @@ body {
 
 #replies {
   .reply {
-    padding-left: 15px;
-    padding-bottom: 40px;
+    margin: 0 -20px;
+    padding: 15px 20px 40px 20px;
+
+    &.reply-system {
+      padding: 15px 20px;
+    }
+
+    .avatar { left: 20px; }
     .avatar-48 {
       width: 24px;
       height: 24px;

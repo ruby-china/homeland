@@ -76,7 +76,7 @@ body {
     padding: 10px 20px;
   }
 
-  .panel-footer { background: #f0f0f0; padding: 5px 20px; }
+  .panel-footer { background: #f0f0f0; padding: 10px 20px; }
 }
 
 .container > .alert {
@@ -246,15 +246,16 @@ body {
       a.node {
         display: block;
         font-size: 15px;
-        line-height: 24px;
+        line-height: 30px;
         height: 30px;
+        margin-right: 0;
         text-align: right;
         font-weight: normal;
       }
     }
 
     .media-right {
-      display: block; position: absolute; top: 15px; left: 15px;
+      display: block; position: absolute; top: 15px; left: 10px;
       .avatar-48 { width: 24px; height: 24px; }
     }
   }
@@ -368,6 +369,17 @@ body {
       border-bottom-width: 1px;
     }
   }
+
+  #node-selector-button {
+    background: #000;
+    border-color: #000;
+    color: #FFF;
+    border-radius: 0;
+  }
+
+  textarea.topic-editor {
+    border-radius: 0;
+  }
 }
 
 .page-pages {
@@ -397,10 +409,69 @@ body {
   }
 }
 
-.setting-menu {
-  padding-left: 0;
-  .nav-stacked.nav-pills > li a {
-    border-radius: 0 !important;
-    border-left: 0;
+.form-control {
+  width: 100% !important;
+  border-color: #000 !important;
+  color: #000 !important;
+  border-radius: 0;
+}
+
+.editor-toolbar {
+  .nav-pills {
+    li {
+      &.active {
+        a {
+          color: #FFF !important;
+          background: #000 !important;
+        }
+      }
+
+      a {
+       border-radius: 0 !important;
+       color: #000;
+      }
+    }
   }
 }
+
+.setting-menu {
+  margin-top: 15px;
+  padding-left: 0;
+  display: none;
+
+  .nav-pills {
+    text-align: center;
+  }
+  .nav-pills > li {
+    float: none;
+    display: inline-block;
+
+    &.active {
+      a {
+        color: #FFF !important;
+        background: #000 !important;
+      }
+    }
+
+    &:last-child {
+      a {
+        border-left: 0;
+      }
+    }
+
+    a {
+      border-radius: 0 !important;
+      box-shadow: 0 0 0;
+      border-left: 0;
+      border: 1px solid #000 !important;
+      color: #000  !important;
+    }
+  }
+}
+
+.page-users {
+  .user-teams,
+  .nav-tabs,
+  .userinfo { display: none; }
+}
+

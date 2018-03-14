@@ -89,8 +89,8 @@ class SettingsController < ApplicationController
       reward_fields = params[:user][:rewards] || {}
 
       res = {}
-      reward_fields.each_key do |key|
-        photo = Photo.create(image: reward_fields[key])
+      reward_fields.each do |key, value|
+        photo = Photo.create(image: value)
         res[key] = photo.image.url
       end
 

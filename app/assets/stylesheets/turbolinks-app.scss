@@ -1,12 +1,25 @@
 @import "vars";
 
-$primary: #e23c28;
-$primary-dark: #af2913;
+$primary: #000;
+$primary-dark: #000;
+$danger: #D00D2E;
+$danger-dark: #261B1B;
 
 .hide-ios { display: none !important; }
 body {
   padding-top: 0;
   background: #FFF;
+}
+
+.btn {
+  border-radius: 0;
+  border-color: #000;
+
+  &.active,
+  &:active {
+    border-color: $primary;
+    background: #eee;
+  }
 }
 
 .btn-primary {
@@ -15,18 +28,19 @@ body {
 
   &.active,
   &:active {
-    background: $primary-dark !important;
-    border-color: $primary-dark !important;
+    border-color: $primary !important;
+    background: #eee !important;
+    color: $primary;
   }
 }
 
 .btn-danger {
-  background: #555 !important;
-  border-color: #333 !important;
+  background: $danger !important;
+  border-color: $danger !important;
 
   &:active {
-    background: #333 !important;
-    border-color: #111 !important;
+    background: $danger-dark !important;
+    border-color: $danger-dark !important;
   }
 }
 
@@ -73,7 +87,7 @@ body {
     background: #fff;
     border-color: #f0f0f0;
     border-radius: 0 !important;
-    padding: 10px 20px;
+    padding: 20px 20px;
   }
 
   .panel-footer { background: #f0f0f0; padding: 10px 20px; }
@@ -153,6 +167,12 @@ body {
   .topic {
     min-height: 60px;
     padding: 15px;
+    &:first-child {
+      padding-top: 0;
+    }
+    &:last-child {
+      padding-bottom: 0;
+    }
     border-bottom-color: #eee;
     &:active {
       background: #f5f5f5;
@@ -244,18 +264,22 @@ body {
       margin-bottom: 0;
 
       a.node {
-        display: block;
+        display: inline-block;
         font-size: 15px;
         line-height: 30px;
         height: 30px;
+        position: absolute;
+        top: 20px;
+        right: 25px;
         margin-right: 0;
         text-align: right;
         font-weight: normal;
       }
+      .title { display: block; margin-top: 30px; }
     }
 
     .media-right {
-      display: block; position: absolute; top: 15px; left: 10px;
+      display: block; position: absolute; top: 20px; left: 10px;
       .avatar-48 { width: 24px; height: 24px; }
     }
   }
@@ -267,8 +291,6 @@ body {
     .user-name {
       color: #666;
     }
-
-    .node { color: $primary; }
   }
 
   .toc-container { display: none !important; }
@@ -354,10 +376,10 @@ body {
 .opts {
   a:link,
   a:visited {
-    color: #444 !important;
+    color: $primary !important;
   }
   a.active {
-    .fa { color: $primary; }
+    .fa { color: $danger; }
   }
 }
 
@@ -413,7 +435,7 @@ body {
   width: 100% !important;
   border-color: #000 !important;
   color: #000 !important;
-  border-radius: 0;
+  border-radius: 0 !important;
 }
 
 .editor-toolbar {
@@ -473,5 +495,9 @@ body {
   .user-teams,
   .nav-tabs,
   .userinfo { display: none; }
+}
+
+.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+  padding: 0;
 }
 

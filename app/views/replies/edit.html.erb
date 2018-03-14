@@ -14,7 +14,7 @@
       <div class="form-group">
         <%= f.submit t("common.save"), class: "btn btn-primary col-xs-2 hide-ios", 'data-disable-with' => t("common.saving") %>
         <% if can? :destroy, @reply %>
-        <%= link_to "删除",[@topic,@reply], class: "pull-right btn btn-danger", method: :delete, data: { confirm: "确定要删除此回复么？" } %>
+        <%= link_to "删除",[@topic,@reply], class: "btn btn-danger", method: :delete, data: { confirm: "确定要删除此回复么？" } %>
         <% end %>
       </div>
     <% end %>

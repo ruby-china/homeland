@@ -225,6 +225,15 @@ describe "markdown" do
       end
     end
 
+    describe "footnotes" do
+      let(:raw) { "some ^strikethrough^" }
+
+      describe "#inner_html" do
+        subject { super().inner_html }
+        it { is_expected.to eq(%(<p>some ^strikethrough^</p>)) }
+      end
+    end
+
     describe "strikethrough" do
       let(:raw) { "some ~~strikethrough~~ text" }
 

@@ -14,13 +14,15 @@ module Homeland
         fenced_code_blocks: true,
         strikethrough: true,
         underline: true,
-        superscript: true,
+        superscript: false,
+        footnotes: false,
+        highlight: false,
         tables: true,
         footnotes: true,
         lax_spacing: true,
         space_after_headers: true,
         disable_indented_code_blocks: true,
-        no_intra_emphasis: true
+        no_intra_emphasis: true,
       }
 
       def call

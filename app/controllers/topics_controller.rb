@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class TopicsController < ApplicationController
+  include Topics::ListActions
+
   before_action :authenticate_user!, only: %i[new edit create update destroy
                                               favorite unfavorite follow unfollow
                                               action favorites]
@@ -13,18 +15,9 @@ class TopicsController < ApplicationController
   def index
     @suggest_topics = []
     if params[:page].to_i <= 1
-      @suggest_topics = Topic.without_hide_nodes.suggest.fields_for_list.limit(3)
+      @suggest_topics = topics_scope.suggest.limit(3)
     end
-    @topics = Topic.last_actived.without_suggest
-    @topics =
-      if current_user
-        @topics.without_nodes(current_user.block_node_ids)
-               .without_users(current_user.block_user_ids)
-      else
-        @topics.without_hide_nodes
-      end
-    @topics = @topics.fields_for_list
-    @topics = @topics.page(params[:page])
+    @topics = topics_scope.without_suggest.last_actived.page(params[:page])
     @page_title = t("menu.topics")
     @read_topic_ids = []
     if current_user
@@ -33,14 +26,13 @@ class TopicsController < ApplicationController
   end
 
   def feed
-    @topics = Topic.without_hide_nodes.recent.limit(20).includes(:node, :user, :last_reply_user)
+    @topics = Topic.recent.includes(:node, :user, :last_reply_user).limit(20)
     render layout: false if stale?(@topics)
   end
 
   def node
     @node = Node.find(params[:id])
-    @topics = @node.topics.last_actived.fields_for_list
-    @topics = @topics.includes(:user).page(params[:page])
+    @topics = topics_scope(@node.topics).last_actived.page(params[:page])
     @page_title = "#{@node.name} &raquo; #{t('menu.topics')}"
     @page_title = [@node.name, t("menu.topics")].join(" · ")
     render action: "index"
@@ -50,38 +42,6 @@ class TopicsController < ApplicationController
     @node = Node.find(params[:id])
     @topics = @node.topics.recent.limit(20)
     render layout: false if stale?([@node, @topics])
-  end
-
-  %w[no_reply popular].each do |name|
-    define_method(name) do
-      @topics = Topic.without_hide_nodes.send(name.to_sym).last_actived.fields_for_list.includes(:user)
-      @topics = @topics.page(params[:page])
-
-      @page_title = [t("topics.topic_list.#{name}"), t("menu.topics")].join(" · ")
-      render action: "index"
-    end
-  end
-
-  # GET /topics/favorites
-  def favorites
-    @topics = current_user.favorite_topics.includes(:user)
-    @topics = @topics.page(params[:page])
-    render action: "index"
-  end
-
-  def recent
-    @topics = Topic.without_hide_nodes.recent.fields_for_list.includes(:user)
-    @topics = @topics.page(params[:page])
-    @page_title = [t("topics.topic_list.recent"), t("menu.topics")].join(" · ")
-    render action: "index"
-  end
-
-  def excellent
-    @topics = Topic.excellent.recent.fields_for_list.includes(:user)
-    @topics = @topics.page(params[:page])
-
-    @page_title = [t("topics.topic_list.excellent"), t("menu.topics")].join(" · ")
-    render action: "index"
   end
 
   def show

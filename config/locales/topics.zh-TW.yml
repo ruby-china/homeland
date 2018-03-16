@@ -13,6 +13,7 @@
     topic_list:
       hot_topic: "活躍帖子"
       recent: "最新創建"
+      last_reply: "最新回覆"
       popular: "優質帖子"
       no_reply: "無人問津"
       excellent: "精華帖"

@@ -28,8 +28,11 @@
           <li class="<%= ' active' if action_name == 'no_reply' %>">
             <%= link_to('无人问津', main_app.no_reply_topics_path, data: { 'turbolinks-action': 'replace' }) %>
           </li>
-          <li class="<%= ' active' if action_name == 'recent' %>">
-            <%= link_to('最新发布', main_app.recent_topics_path, data: { 'turbolinks-action': 'replace' }) %>
+          <li class="<%= ' active' if action_name == 'last_reply' %>">
+            <%= link_to('最新回复', main_app.last_reply_topics_path, data: { 'turbolinks-action': 'replace' }) %>
+          </li>
+          <li class="<%= ' active' if action_name == 'last' %>">
+            <%= link_to('最新发布', main_app.last_topics_path, data: { 'turbolinks-action': 'replace' }) %>
           </li>
         </ul>
       <% end %>

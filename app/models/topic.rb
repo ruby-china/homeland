@@ -27,6 +27,7 @@ class Topic < ApplicationRecord
   scope :without_suggest,    -> { where(suggested_at: nil) }
   scope :high_likes,         -> { order(likes_count: :desc).order(id: :desc) }
   scope :high_replies,       -> { order(replies_count: :desc).order(id: :desc) }
+  scope :last_reply,         -> { where("last_reply_id IS NOT NULL").order(last_reply_id: :desc) }
   scope :no_reply,           -> { where(replies_count: 0) }
   scope :popular,            -> { where("likes_count > 5") }
   scope :excellent,          -> { where("excellent >= 1") }

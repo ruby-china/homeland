@@ -23,7 +23,7 @@ module UsersHelper
     options[:class] ||= "#{user_type}-name"
     options["data-name".freeze] = name
 
-    link_to(login, main_app.user_path(user), options)
+    link_to(login, "/#{login}", options)
   end
   alias team_name_tag user_name_tag
 

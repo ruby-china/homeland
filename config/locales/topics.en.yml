@@ -13,6 +13,7 @@
     topic_list:
       hot_topic: "Active Topics"
       recent: "Recent Topics"
+      last_reply: "Recent Reply Topics"
       popular: "Popular Topics"
       no_reply: "Unactive Topics"
       excellent: "Excellent Topics"

@@ -155,7 +155,7 @@ describe TopicsController, type: :controller do
   describe ":create" do
     context "unauthenticated" do
       it "should not allow anonymous access" do
-        post :create, params: { title: 'Hello world' }
+        post :create, params: { title: "Hello world" }
         expect(response).not_to have_http_status(200)
       end
     end

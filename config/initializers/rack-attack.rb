@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 if Setting.rack_attack.present?
-  puts "Rack::Attack enabled."
-  BLOCK_MESSAGE = ["你请求过快，超过了频率限制，暂时屏蔽一段时间。".freeze]
+  BLOCK_MESSAGE = ["你请求过快，超过了频率限制，暂时屏蔽一段时间。"]
 
   class Rack::Attack
     Rack::Attack.cache.store = Rails.cache

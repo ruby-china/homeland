@@ -58,7 +58,7 @@ Rails.application.routes.draw do
 
   get "topics/node:id", to: "topics#node", as: "node_topics"
   get "topics/node:id/feed", to: "topics#node_feed", as: "feed_node_topics", defaults: { format: "xml" }
-  get "topics/last", to: "topics#recent", as: "recent_topics"
+  # get "topics/last", to: "topics#recent", as: "recent_topics"
 
   resources :topics do
     member do
@@ -73,6 +73,8 @@ Rails.application.routes.draw do
     collection do
       get :no_reply
       get :popular
+      get :last
+      get :last_reply
       get :excellent
       get :favorites
       get :feed, defaults: { format: "xml" }

@@ -37,9 +37,9 @@ describe TopicsController, type: :controller do
     end
   end
 
-  describe ":recent" do
+  describe ":last" do
     it "should have a recent action" do
-      get :recent
+      get :last
       expect(response).to have_http_status(200)
     end
   end
@@ -61,28 +61,35 @@ describe TopicsController, type: :controller do
 
   describe ":node" do
     it "should have a node action" do
-      get :node, params: { id: topic.id }
+      get :node, params: { id: topic.node_id }
       expect(response).to have_http_status(200)
     end
   end
 
   describe ":node_feed" do
     it "should have a node_feed action" do
-      get :node_feed, params: { id: topic.id }
+      get :node_feed, params: { id: topic.node_id }
       expect(response).to have_http_status(200)
     end
   end
 
   describe ":no_reply" do
     it "should have a no_reply action" do
-      get :no_reply, params: { id: topic.id }
+      get :no_reply
+      expect(response).to have_http_status(200)
+    end
+  end
+
+  describe ":last_reply" do
+    it "should have a no_reply action" do
+      get :last_reply
       expect(response).to have_http_status(200)
     end
   end
 
   describe ":popular" do
     it "should have a popular action" do
-      get :popular, params: { id: topic.id }
+      get :popular
       expect(response).to have_http_status(200)
     end
   end
@@ -148,7 +155,7 @@ describe TopicsController, type: :controller do
   describe ":create" do
     context "unauthenticated" do
       it "should not allow anonymous access" do
-        post :create, params: { id: topic.id }
+        post :create, params: { title: "Hello world" }
         expect(response).not_to have_http_status(200)
       end
     end

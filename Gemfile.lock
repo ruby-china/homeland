@@ -368,7 +368,7 @@ GEM
     ruby_dep (1.5.0)
     rucaptcha (2.2.0)
       railties (>= 3.2)
-    sanitize (4.6.0)
+    sanitize (4.6.4)
       crass (~> 1.0.2)
       nokogiri (>= 1.4.4)
       nokogumbo (~> 1.4)
@@ -524,7 +524,6 @@ DEPENDENCIES
   twemoji
   uglifier
   yard (>= 0.9.11)
-
 
 BUNDLED WITH
    1.16.1

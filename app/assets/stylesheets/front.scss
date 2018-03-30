@@ -170,6 +170,17 @@
       }
     }
   }
+
+  .prefix-filter {
+    @extend .filter;
+    &>li {
+      margin-right: 40px;
+      &>a {
+        padding: 0px 0px;
+      }
+    }
+  }
+
 }
 
 .topics-node {

@@ -61,6 +61,7 @@ module Homeland
         # ![](foo.jpg =300x200)
         # Example: https://gist.github.com/uupaa/f77d2bcf4dc7a294d109
         def image(link, title, alt_text)
+          link ||= ""
           links = link.split(" ")
           link = links[0]
           if links.count > 1

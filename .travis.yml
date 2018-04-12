@@ -31,7 +31,9 @@ before_install:
 
 before_script:
   - RAILS_ENV=test bundle exec rake db:migrate
+  - gem install code_quality --no-ri --no-rdoc
 
 script:
+  - code_quality security_audit
   - bundle exec rubocop .
   - RAILS_ENV=test bundle exec rake

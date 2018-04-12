@@ -8,7 +8,7 @@ end
 
 gem "coffee-rails"
 gem "dropzonejs-rails"
-gem "jbuilder"
+gem "jbuilder", github: "rails/jbuilder"
 gem "jquery-rails"
 gem "rails", "~> 5.2.0.rc"
 gem "rails_autolink"

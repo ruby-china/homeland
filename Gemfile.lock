@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/rails/jbuilder.git
+  remote: https://github.com/rails/jbuilder.git
   revision: a0dc0bd42737aaef3dd622d8338a816aed03c8ff
   specs:
     jbuilder (2.7.0)
@@ -7,7 +7,7 @@ GIT
       multi_json (>= 1.2)
 
 GEM
-  remote: https://gems.ruby-china.org/
+  remote: https://rubygems.org/
   specs:
     action-store (0.3.3)
       rails (~> 5)
@@ -76,8 +76,8 @@ GEM
     bundler-audit (0.6.0)
       bundler (~> 1.2)
       thor (~> 0.18)
-    cancancan (2.1.4)
-    capybara (3.0.1)
+    cancancan (2.2.0)
+    capybara (3.0.2)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
@@ -272,7 +272,7 @@ GEM
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
     parallel (1.12.1)
-    parser (2.5.0.5)
+    parser (2.5.1.0)
       ast (~> 2.4.0)
     pg (1.0.0)
     pghero (2.1.0)
@@ -285,7 +285,7 @@ GEM
       postmark (~> 1.11.0)
     powerpack (0.1.1)
     public_suffix (3.0.2)
-    puma (3.11.3)
+    puma (3.11.4)
     rack (2.0.4)
     rack-attack (5.2.0)
       rack
@@ -431,7 +431,7 @@ GEM
       nokogiri (~> 1.6)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
-    uglifier (4.1.8)
+    uglifier (4.1.9)
       execjs (>= 0.3.0, < 3)
     unicode-display_width (1.3.0)
     url (0.3.2)

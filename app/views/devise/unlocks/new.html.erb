@@ -1,20 +1,24 @@
 <% title_tag '重新发送解锁邮件' %>
 
 <div class="row">
-  <div class="col-md-6 col-sm-offset-3">
-    <div class="panel">
-      <div class="panel-heading">重新发送解锁邮件</div>
-      <div class="panel-body">
-        <%= simple_form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
-          <%= devise_error_messages! %>
-
-          <%= f.input :email, hint: '' %>
+  <div class="col"></div>
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">重新发送解锁邮件</div>
+      <div class="card-body">
+        <%= form_for resource, as: resource_name, url: unlock_path(resource_name), method: :post do |f| %>
+          <%= render "shared/error_messages", target: resource %>
 
           <div class="form-group">
+            <%= f.text_field :email, class: "form-control", placeholder: "Email" %>
+          </div>
+
+          <div class="form-actions">
             <%= f.submit "重新发送解锁邮件", class: 'btn btn-primary' %>
           </div>
         <% end %>
       </div>
     </div>
   </div>
+  <div class="col"></div>
 </div>

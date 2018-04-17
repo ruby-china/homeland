@@ -3,9 +3,9 @@ comments = Comment.where(commentable_type: commentable.class.name, commentable_i
 new_comment = Comment.new(commentable_type: commentable.class.name, commentable_id: commentable.id)
 %>
 
-<div id="<%= commentable.class.name %>_<%= commentable.id %>_cell_comments" class="comments panel panel-default">
-  <div class="panel-heading">评论列表</div>
-  <div class="panel-body">
+<div id="<%= commentable.class.name %>_<%= commentable.id %>_cell_comments" class="comments card">
+  <div class="card-header">评论列表</div>
+  <div class="card-body">
     <% if !comments.blank? %>
     <%= render :partial => "/shared/comment", :collection => comments %>
     <% else %>
@@ -15,9 +15,9 @@ new_comment = Comment.new(commentable_type: commentable.class.name, commentable_
 </div>
 
 <% if @current_user %>
-  <div id="<%= commentable.class.name %>_<%= commentable.id %>_cell_new_comment" class="cell_comments_new panel panel-default">
-    <div class="panel-heading">发表新评论</div>
-    <%= form_with(model: new_comment, remote: true, html: { class: "panel-body" }) do |f| %>
+  <div id="<%= commentable.class.name %>_<%= commentable.id %>_cell_new_comment" class="cell_comments_new card">
+    <div class="card-header">发表新评论</div>
+    <%= form_with(model: new_comment, remote: true, html: { class: "card-body" }) do |f| %>
       <%= f.hidden_field :commentable_type %>
       <%= f.hidden_field :commentable_id %>
       <div class="form-group">

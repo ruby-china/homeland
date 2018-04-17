@@ -5,8 +5,8 @@
   %>
 
   <% if topics.present? %>
-  <div class="panel panel-default">
-    <div class="panel-heading"><%= t("topics.node_recent_topics") %></div>
+  <div class="card">
+    <div class="card-header"><%= t("topics.node_recent_topics") %></div>
     <ul class="list-group">
     <% topics.each do |item| %>
       <li class="list-group-item"><%= link_to(truncate(item.title, length: 30), topic_path(item), title: item.title) %></li>

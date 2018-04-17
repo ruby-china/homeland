@@ -1,46 +1,52 @@
 <% title_tag t("common.login") %>
 
 <div class="row">
-  <div class="col-md-5 col-md-offset-2">
-    <div class="panel panel-default">
-      <div class="panel-heading"><%= t("common.login") %></div>
-      <div class="panel-body">
-        <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), remote: true, html: { class: "" }) do |f| %>
-        <div class="form-group">
-          <%= f.text_field :login, type: :email, class: "form-control input-lg", placeholder: "用户名 / Email" %>
-        </div>
-        <div class="form-group">
-          <%= f.text_field :password, type: :password, class: "form-control input-lg", placeholder: "密码" %>
-        </div>
+  <div class="col"></div>
+  <div class="col-md-5">
+    <div class="card">
+      <div class="card-header"><%= t("common.login") %></div>
+      <div class="card-body">
+        <%= form_for resource, as: resource_name, url: session_path(resource_name), remote: true do |f| %>
+          <div class="form-group">
+            <%= f.text_field :login, class: "form-control input-lg", placeholder: "用户名 / Email" %>
+          </div>
+          <div class="form-group">
+            <%= f.text_field :password, type: :password, class: "form-control input-lg", placeholder: "密码" %>
+          </div>
 
-        <% if devise_mapping.rememberable? -%>
-        <div class="from-group checkbox">
-            <label for="user_remember_me">
-              <%= f.check_box :remember_me %> <%= t("common.remember_me") %>
+          <% if devise_mapping.rememberable? -%>
+          <div class="form-group from-check">
+            <label class="form-check-label" for="user_remember_me">
+              <%= f.check_box :remember_me %>
+              <%= t("common.remember_me") %>
             </label>
-        </div>
-        <% end -%>
-        <div class="form-actions">
+          </div>
+          <% end -%>
+
+          <div class="form-actions">
             <%= f.submit t("common.login"), class: "btn btn-primary btn-lg btn-block", 'data-disable-with' => t("common.logining") %>
-        </div>
+          </div>
         <% end %>
       </div>
     </div>
   </div>
   <div class="col-md-3">
     <% if Setting.has_module? :github %>
-    <div class="panel panel-default">
-      <div class="panel-heading"><%= t("common.auth_with_other_services") %></div>
-      <ul class="list-group">
-        <li class="list-group-item"><%= link_to raw("<i class='fa fa-github'></i> GitHub"), omniauth_authorize_path(:user, :github), class: "btn btn-default btn-lg btn-block" %> </li>
+    <div class="card">
+      <div class="card-header"><%= t("common.auth_with_other_services") %></div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <%= link_to raw("<i class='fa fa-github'></i> GitHub"), omniauth_authorize_path(:user, :github), class: "btn btn-default btn-lg btn-block" %>
+        </li>
       </ul>
     </div>
     <% end %>
 
-    <div class="panel panel-default">
+    <div class="card">
       <%= render partial: "devise/shared/links" %>
     </div>
   </div>
+  <div class="col"></div>
 </div>
 
 <script>

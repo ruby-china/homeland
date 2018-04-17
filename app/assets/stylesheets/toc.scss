@@ -1,4 +1,5 @@
 @import "vars";
+
 .toc-container {
   display: none;
   z-index: 999;
@@ -9,7 +10,7 @@
     background: #FFF;
     border-radius: 3px;
     padding: 15px;
-    border: 1px solid #FFF;
+    border: 1px solid $primary;
     width: 300px;
     z-index: 1031;
   }

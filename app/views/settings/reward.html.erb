@@ -2,26 +2,26 @@
   <%= render 'menu' %>
 
   <div class="col-md-8">
-    <div class="panel panel-default">
-      <div class="panel-body">
+    <div class="card">
+      <div class="card-body">
         <div class="row">
           <div class="col-md-8">
-            <%= simple_form_for(@user, url: setting_path, method: :put, html: { enctype:  "multipart/form-data" }) do |f| %>
+            <%= form_for @user, url: setting_path, method: :put, enctype: "multipart/form-data" do |f| %>
               <%= render "shared/error_messages", target: @user %>
               <input type="hidden" name="by" value="reward" />
 
               <% User::REWARD_FIELDS.each do |field| %>
-              <div class="form-group form-group-reward-field-<%= field %>">
-                <label class="control-label" for="user_reward_<%= field %>"><%= User.reward_field_label(field) %></label>
-                <input class="form-control" type="file" name="user[rewards][<%= field %>]" id="user_reward_<%= field %>">
-                <p class="help-block">
-                  <% if field == :alipay %>
-                  打开支付宝客户端：右上角 “+” -> 我要收款 -> 设定金额 -> 保存二维码图片
-                  <% elsif field == :wechat %>
-                  打开微信手机客户端：右上角 “+” -> 收付款 -> 我要收款 -> 保存二维码图片
-                  <% end %>
-                </p>
-              </div>
+                <div class="form-group form-group-reward-field-<%= field %>">
+                  <label><%= User.reward_field_label(field) %></label>
+                  <input class="form-control" type="file" name="user[rewards][<%= field %>]" id="user_reward_<%= field %>">
+                  <p class="form-text">
+                    <% if field == :alipay %>
+                    打开支付宝客户端：右上角 “+” -> 我要收款 -> 设定金额 -> 保存二维码图片
+                    <% elsif field == :wechat %>
+                    打开微信手机客户端：右上角 “+” -> 收付款 -> 我要收款 -> 保存二维码图片
+                    <% end %>
+                  </p>
+                </div>
 
                 <% if @user.reward_field(field) %>
                 <div class="form-group">

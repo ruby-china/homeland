@@ -36,13 +36,12 @@
 </head>
 <body class="page-<%= controller_name %><%= ' infinite-scroll' if turbolinks_app? %>" data-controller-name="<%= controller_name %>">
   <div class="header">
-    <nav class="navbar navbar-inverse navbar-fixed-top navbar-default">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
       <div class="container">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
         <div class="navbar-header" id="navbar-header" data-turbolinks-permanent>
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar-collapse">
-            <span class="sr-only">Toggle</span>
-            <i class="fa fa-reorder"></i>
-          </button>
           <%= raw Setting.navbar_brand_html %>
         </div>
         <div class="collapse navbar-collapse" id="main-navbar-collapse">

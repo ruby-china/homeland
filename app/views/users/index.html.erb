@@ -1,12 +1,12 @@
 <% title_tag t('users.hot_users') %>
 
 <div id="users">
-  <div id="hot_users" class="user-list panel panel-default">
-    <div class="panel-heading">
+  <div id="hot_users" class="user-list card">
+    <div class="card-header">
       <strong><%= t("users.hot_users") %></strong>
       <div class="pull-right"><%= t("users.current_have") %> <%= @total_user_count %> <%= t("users.users_joined") %> <%= Setting.app_name %></div>
     </div>
-    <div class="panel-body">
+    <div class="card-body">
       <%= render "user_list", users: @active_users, columns: 4 %>
     </div>
   </div>

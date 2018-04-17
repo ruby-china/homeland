@@ -1,8 +1,8 @@
 <%= raw Setting.index_html %>
 
-<div class="home_suggest_topics panel panel-default">
-  <div class="panel-heading">社区精华帖</div>
-  <div class="panel-body topics row">
+<div class="home_suggest_topics card">
+  <div class="card-header">社区精华帖</div>
+  <div class="card-body topics row">
     <% cache(["home_suggest_topics", @excellent_topics]) do %>
     <%
       odd_topics, even_topics = @excellent_topics.partition.each_with_index { |t, i| i.odd?  }
@@ -16,7 +16,7 @@
     </div>
     <% end %>
   </div>
-  <div class="panel-footer">
+  <div class="card-footer">
     <%= link_to "查看更多精华帖...", excellent_topics_path %>
   </div>
 </div>

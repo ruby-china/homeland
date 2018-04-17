@@ -2,15 +2,15 @@
 
 <div class="row">
   <div class="col-md-8">
-    <div class="panel topics">
-      <div class="panel-body">
+    <div class="card topics">
+      <div class="card-body">
         <% if @topics.blank? %>
         <div class="topic"><div class="no-result">暂无任何话题</div></div>
         <% else %>
         <%= render partial: '/topics/topic', collection: @topics, locals: { suggest: false }, cached: -> (topic) { [topic, 'normal'] } %>
         <% end %>
       </div>
-      <div class="panel-footer">
+      <div class="card-footer">
         <%= paginate @topics %>
       </div>
     </div>

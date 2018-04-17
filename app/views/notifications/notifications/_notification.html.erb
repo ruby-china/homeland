@@ -2,7 +2,7 @@
 <div id="notification-<%= notification.id %>"
      data-id="<%= notification.id %>"
      class="media notification notification-<%= notification.notify_type %><%= ' unread' if !notification.read? %>">
-  <div class="media-left">
+  <div class="media-left mr-3">
     <%= link_to image_tag(notification.actor_avatar_url), notification.actor_profile_url, title: notification.actor_name, class: 'user-avatar' %>
   </div>
   <div class="media-body">

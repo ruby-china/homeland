@@ -49,7 +49,7 @@
     }
     .navbar-topic-title {
       display: none;
-      height: 50px;
+      height: 44px;
       overflow: hidden;
 
       a.topic-title {
@@ -67,9 +67,9 @@
         i.fa-diamond { color: $red; }
         i.fa-check { color: $green; }
       }
-      .node { line-height: 50px; margin-left: 18px; color: #777; margin-right: 3px; }
+      .node { line-height: 50px; margin-left: 16px; color: #777; margin-right: 3px; }
       h1 {
-        margin: 0; padding: 0; font-size: 18px; line-height: 50px;
+        margin: 0; padding: 0; font-size: 16px; line-height: 50px;
       }
     }
   }
@@ -124,6 +124,7 @@
         a:visited,
         a:hover {
           color: #000;
+          text-decoration: none;
           border-bottom: 2px dotted #666666;
         }
       }
@@ -135,6 +136,7 @@
         margin-right: 5px;
         font-size: 14px;
         border-bottom: 2px dotted transparent;
+        text-decoration: none;
         display: inline-block;
         color: #606060;
 
@@ -146,7 +148,7 @@
         &.all-nodes {
           border-radius: 3px;
           outline: 0 !important;
-          margin-right: 15px;
+          margin-right: 1.25rem;
           background: #f0f0f0;
           border: 0;
 
@@ -188,8 +190,8 @@
 }
 
 .topics {
-  .panel-body {
-    padding: 0 15px;
+  .card-body {
+    padding: 0 1.25rem;
   }
 
   .no-result {
@@ -206,8 +208,8 @@
   .topic {
     min-height: 68px;
     border-bottom: 1px solid #F0F0F0;
-    padding: 10px 15px;
-    margin: 0 -15px;
+    padding: 10px 1.25rem;
+    margin: 0 -1.25rem;
     vertical-align: top;
     &:last-child { border-bottom: 0px; }
     .avatar { text-align:center; }
@@ -231,17 +233,18 @@
     }
 
     .info {
-      color: #8f8d8b; font-size: 12px; margin-top: 0;
+      color: #8f8d8b; font-size: 14px; margin-top: 0;
       a { color: #797776; text-decoration: underline; }
     }
 
     .count {
-      width: 100px; text-align: right; padding-top: 15px;
+      width: 100px; text-align: right; padding-top: 1.25rem;
       a:link,
       a:hover,
       a:visited {
         line-height: 11px;
         color: #fff;
+        font-size: 13px;
         min-width: 32px;
         text-align: center;
         border-radius: 80px; padding: 3px 8px 3px 8px;
@@ -249,18 +252,18 @@
         text-decoration: none;
       }
 
-      a:link { background: #CFD3E6; }
-      a:hover { background: #A9BBDC; }
+      a:link { background: lighten($primary, 75%); }
+      a:hover { background: lighten($primary, 80%); }
       a.state-true,
-      a:visited { background: #f0f0f0; }
+      a:visited { background: lighten($primary, 80%); }
     }
   }
 }
 
 .topic-detail {
-  margin-bottom: 15px;
-  .panel-heading {
-    padding: 15px;
+  margin-bottom: 1.25rem;
+  .card-header {
+    padding: 1.25rem;
     transition: all .3s;
     h1 {
       margin-top:0;
@@ -272,18 +275,20 @@
   }
 
   .label-awesome {
-    font-size: 13px;
-    background: #FCF8F7;
-    padding: 5px 15px;
-    border-bottom: 1px solid #f3f0f0;
-    color: #eb5424;
+    font-size: 16px;
+    background: lighten($red, 55%);
+    border-bottom:1px solid lighten($red, 52%);
+    padding: 10px 1.25rem;
+    color: $red;
 
+    .fa { font-size: 16px; }
     a { color: #aAa5a4; }
   }
+
   .label-nopoint {
     font-size: 13px;
     background:#FCF8E3;
-    padding: 3px 15px;
+    padding: 3px 1.25rem;
     border-top: 1px solid #FAEBCC;
     color: #ae938B;
 
@@ -292,23 +297,22 @@
 
   .info {
     color: #8f8d8b;
-    font-size:12px;
-    a { color: #444; }
+    font-size: 14px;
+    a { color: $primary; }
     .node {
-      color: #999;
+      color: $primary;
       font-weight: bold;
     }
-    .user-name { color: $blue; font-size: 13px; }
+    .user-name { color: $primary; font-size: 15px; }
     .team-name {
-      font-size: 13px;
+      font-size: 15px;
       color: $green;
     }
     em { font-style:normal; }
 
     .opts {
       a {
-        margin-left: 5px; color: #999;
-        &:hover { color: #333; }
+        margin-left: 5px; color: $primary;
       }
     }
   }
@@ -337,11 +341,11 @@
     margin-top: 20px;
     .likes {
       a { display: block; width: 90px; margin: 0 auto; border-radius: 5px; padding: 10px 0;}
-      a:link, a:hover, a:visited { text-decoration: none; color: #333; }
+      a:link, a:hover, a:visited { text-decoration: none; color: $primary; }
       a:hover { background: rgba(0, 0, 0, 0.03); }
-      i.fa { display: block; font-size: 40px;  color: #666; }
+      i.fa { display: block; font-size: 40px; color: $primary; }
       a.active {
-        i.fa { color: #e76f3c; }
+        i.fa { color: $red; }
       }
       span { display: block; color: #666; }
     }
@@ -350,36 +354,35 @@
     text-align:center;
     .total { margin-bottom: 10px; }
   }
-  a.btn-move-page { color: #666; }
+  a.btn-move-page { color: $primary; }
 }
 
 #replies {
-  margin-bottom: 15px;
-  .panel-body {
+  margin-bottom: 1.25rem;
+  .card-body {
     padding-top: 0px;
     padding-bottom: 0px;
   }
   .info {
-    .uname { color: #777; font-weight: bold; }
+    .uname { color: $primary; }
     .opts {
       a {
-        font-size: 13px;
-        margin-left: 5px; color: #999;
-        &:hover { color: #333; }
+        font-size: 14px;
+        margin-left: 5px; color: $primary;
       }
       a.edit { display: none; }
     }
   }
   .reply {
-    margin: 0 -15px;
-    padding: 15px 15px;
+    margin: 0 -1.25rem;
+    padding: 1.25rem;
     position: relative;
     border-bottom: 1px solid #eee;
     padding-left: 74px;
     &.reply-system,
     &.reply-deleted {
-      padding: 8px 15px;
-      font-size: 12px;
+      padding: 10px 1.25rem;
+      font-size: 15px;
       color: #666;
       border-bottom: 1px solid #F0F0F0;
 
@@ -392,7 +395,7 @@
       .ban-reason { color: #444; border-bottom: 1px dashed #eee; }
     }
     .infos { min-height: 48px; }
-    .avatar { position: absolute; top: 15px; left: 15px; }
+    .avatar { position: absolute; top: 1.25rem; left: 1.25rem; }
     &:last-child {
       border-bottom: 0px;
     }
@@ -406,13 +409,13 @@
 
     .info {
       .name {
-        font-weight: bold;
-        font-size: 13px;
-        a { color: #555; }
+        font-size: 15px;
+        a { color: $primary; }
       }
       color: #999;
-      margin-bottom: 6px;
-      font-size: 12px;
+      margin-bottom: 10px;
+      font-size: 14px;
+
       .floor { color: #7AA87A; }
       a.time {
         color: #999;
@@ -438,18 +441,15 @@
     }
 
     .reply-to-block {
-      padding: 8px 15px;
+      padding: 10px 1.25rem;
       background: #f7f7f7;
       border-radius: 3px;
-      margin-bottom: 15px;
+      margin-bottom: 1.25rem;
       .info {
-        a {
-          color: #666;
-        }
-        .media-object { display: inline-block; margin-right: 5px; vertical-align: top; }
         margin: 0;
 
-        .user-name { font-weight: bold; }
+        a { color: $primary; }
+        .media-object { display: inline-block; margin-right: 5px; vertical-align: middle; }
       }
       .markdown {
         margin-top: 10px;
@@ -489,30 +489,38 @@
 }
 
 #node-selector {
-  .panel { box-shadow: 0 0 0; padding: 0; margin: 0; }
-  .panel-heading { display: none; }
-  .panel-body { padding: 0 20px; margin: 0; }
+  .card { border: 0; box-shadow: 0 0 0; padding: 0; margin: 0; }
+  .card-header { display: none; }
+  .card-body { padding: 0 20px; margin: 0; }
+}
+
+#node-selector-button {
+  border-color: #ced4da;
 }
 
 #notifications {
-  .panel-heading {
+  .card-header {
     .clean-button { margin-left: 10px; }
   }
   .notification {
     position: relative;
-    margin-bottom: 15px;
-    padding-bottom: 15px;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1.25rem;
     border-bottom: 1px solid $gray;
     &:last-child { margin-bottom: 0px; border-bottom: 0px; padding-bottom: 0px; }
-    .unread { color: $blueLight; font-size: 10px;  position: absolute; right: 5px; top: 20px;}
+    .unread { color: $blue; font-size: 10px;  position: absolute; right: 5px; top: 20px;}
     .avatar { text-align:center; }
-    .info { color: #999; margin-bottom: 8px; font-size: 13px; }
-    .date { font-size: 12px; color: #aaa;}
+    .info { color: #999; margin-bottom: 8px; font-size: 14px; }
+    .date { font-size: 14px; color: #aaa;}
   }
 }
 
 .sidebar {
-  .panel-body {
+  .card {
+    margin-bottom: 1.25rem;
+  }
+
+  .card-body {
     word-break: break-all;
   }
 }
@@ -530,7 +538,7 @@
 
   }
   .route {
-    margin-top: 15px;
+    margin-top: 1.25rem;
     h5 {
       color: #333;
       border-bottom: 1px solid $gray;
@@ -538,10 +546,10 @@
       padding: 5px 0 0 0;
       label {
         font-size: 12px;
-        font-weight: normal; display: inline-block; width: 50px; color: $blackLight;
+        font-weight: normal; display: inline-block; width: 50px; color: $gray;
       }
     }
-    .content { margin: 0 15px; }
+    .content { margin: 0 1.25rem; }
     .desc {
       h4 { border: 0px; font-size: 13px !important; margin:0; color: #999; }
     }
@@ -563,9 +571,9 @@
 }
 
 @media (min-width: 744px) and (max-width: 1200px) {
-  .sidebar .panel .panel-body .feed-button {
+  .sidebar .card .card-body .feed-button {
     float: none !important;
-    margin-top: 15px;
+    margin-top: 1.25rem;
   }
 }
 /* Social Share Button */
@@ -575,7 +583,7 @@
     i.fa { font-size: 24px; margin: 0 4px; }
     &:link, &:visited { color: #777; }
     &:hover {
-      color: $blueLight;
+      color: $blue;
     }
   }
 }
@@ -635,8 +643,8 @@
     border: 0px;
     border-top: 1px solid #f0f0f0;
     border-bottom: 1px solid #f0f0f0;
-    margin: 0 -15px 20px -15px;
-    padding: 5px 15px;
+    margin: 0 -1.25rem 1.25rem -1.25rem;
+    padding: 10px 1.25rem;
     color: #444;
     overflow: auto;
     border-radius: 0px;
@@ -649,6 +657,13 @@
       border: none!important;
     }
   }
+  .zoom-image {
+    overflow: hidden;
+    display: block;
+    margin: 1.25rem -1.25rem !important;
+    img {  width: 100%; }
+  }
+
   pre::-webkit-scrollbar {
     height: 8px;
     width: 8px; }
@@ -686,9 +701,9 @@
   }
   a:link,
   a:visited {
-    color:#0069D6 !important; text-decoration: none !important;
+    color: $blue !important; text-decoration: none !important;
   }
-  a:hover { text-decoration: underline !important; color:#00438A !important; }
+  a:hover { text-decoration: underline !important; color: $primary !important; }
   a.mention-floor { color:#60b566 !important; margin-right: 3px;  }
   a.mention {
     color:#777 !important; font-weight: bold;
@@ -750,7 +765,7 @@
 
 footer {
   margin-top: 10px; margin-bottom: 20px;
-  color: $blackLight;
+  color: #909090;
   a { color: #666; }
   .links { color: #ddd; }
   .socials {
@@ -763,18 +778,23 @@ footer {
   padding: 4px 15px;
   margin-bottom: 20px;
   text-align: left;
-  background: #FDF8A6; border:1px solid #F5E3A4; color: $redLabelText;
+  background: #FDF8A6; border:1px solid #F5E3A4; color: $red;
   a:link,
-  a:visited { color: $yellowText; }
+  a:visited { color: $yellow; }
 }
 
 .dz-preview { display: none; }
 textarea.div-dropzone-focus { border-color: #BBE1C9; background: #fafafa; }
 
+#dropdown-insert-codes {
+  .dropdown-toggle::after {
+    display: none;
+  }
+}
+
 .emoji-modal {
   .modal-dialog {
     max-width: 496px;
-    .close { margin-top: 0px; }
   }
   .modal-header { border: 0px; padding: 8px; }
   .modal-body { padding: 0 8px 8px 8px; }
@@ -823,8 +843,8 @@ textarea.div-dropzone-focus { border-color: #BBE1C9; background: #fafafa; }
 
 .comments {
   .comment {
-    padding: 15px;
-    margin: 0 -15px;
+    padding: 1.25rem;
+    margin: 0 -1.25rem;
     border-bottom: 1px solid #f0f0f0;
     &:first-child { padding-top: 0; }
     &:last-child { border: 0; padding-bottom: 0;}
@@ -836,7 +856,7 @@ textarea.div-dropzone-focus { border-color: #BBE1C9; background: #fafafa; }
   }
 }
 
-.panel-body {
+.card-body {
   .heading { font-size: 16px; color: #777; font-weight: bold; padding-bottom: 10px; border-bottom: 1px solid #eee; margin-bottom: 15px; }
   form {
     margin-bottom: 25px;

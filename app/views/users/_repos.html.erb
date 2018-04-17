@@ -1,7 +1,7 @@
 <% if Setting.has_module? :github %>
-<div class="panel panel-default" id="user_github_repos">
+<div class="card" id="user_github_repos">
   <% if not user.github.blank? %>
-    <div class="panel-heading">GitHub Public Repos</div>
+    <div class="card-header">GitHub Public Repos</div>
     <ul class="list-group">
       <% user.github_repositories.each do |item| %>
       <li class="list-group-item">
@@ -14,11 +14,11 @@
       </li>
       <% end %>
     </ul>
-    <div class="panel-footer more">
+    <div class="card-footer more">
       <%= link_to "More on GitHub", user.github_url, target: "_blank", rel: "nofollow" %>
     </div>
   <% else %>
-    <div class="panel-body">
+    <div class="card-body">
       未设置 GitHub 信息.
     </div>
   <% end %>

@@ -29,7 +29,6 @@ body {
   &.active,
   &:active {
     border-color: $primary !important;
-    background: #eee !important;
     color: $primary;
   }
 }
@@ -46,12 +45,12 @@ body {
 
 .header, .footer,
 .index-sections, .index-locations { display: none; }
-#node-selector .panel {
+#node-selector .card {
   display: block;
   padding: 0px;
   box-shadow: 0 0 0;
   border: 0px;
-  .panel-body { border:0; }
+  .card-body { border:0; }
   .media-left { display: none; }
 }
 
@@ -70,7 +69,7 @@ body {
   .col-md-3 { padding: 0; }
 }
 
-.panel {
+.card {
   border-radius: 0;
   margin-bottom: 0 !important;
   box-shadow: 0 0 0;
@@ -81,16 +80,16 @@ body {
     border-bottom: 0;
   }
 
-  .panel-body,
-  .panel-heading,
-  .panel-footer {
+  .card-body,
+  .card-header,
+  .card-footer {
     background: #fff;
     border-color: #f0f0f0;
     border-radius: 0 !important;
     padding: 20px 20px;
   }
 
-  .panel-footer { background: #f0f0f0; padding: 10px 20px; }
+  .card-footer { background: #f0f0f0; padding: 10px 20px; }
 }
 
 .container > .alert {
@@ -159,7 +158,7 @@ body {
 }
 
 .edit-reply {
-  .panel-heading { display: none; }
+  .card-header { display: none; }
   .col-xs-2 { display: block; width: 50%; }
 }
 
@@ -257,7 +256,7 @@ body {
     a { color: #cccaa2; }
   }
 
-  .panel-heading {
+  .card-header {
     position: relative;
     h1 {
       font-size: 20px;
@@ -279,7 +278,7 @@ body {
     }
 
     .media-right {
-      display: block; position: absolute; top: 20px; left: 10px;
+      display: block; position: absolute; top: 20px; left: 20px;
       .avatar-48 { width: 24px; height: 24px; }
     }
   }
@@ -384,7 +383,7 @@ body {
 }
 
 .page-topics {
-  .panel {
+  .card {
     &.topic-detail,
     &#replies,
     &#reply {

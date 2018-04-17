@@ -10,14 +10,14 @@
 
     <div class="tabbable">
       <ul class="nav nav-tabs">
-        <li class="active"><a href="#topics" data-toggle="tab">热门话题</a></li>
-        <li><a href="#replies" data-toggle="tab">最近回帖</a></li>
-        <li><a href="#description" data-toggle="tab">个人介绍</a></li>
+        <li class="nav-item"><a href="#topics" class="nav-link active" data-toggle="tab">热门话题</a></li>
+        <li class="nav-item"><a href="#replies" class="nav-link" data-toggle="tab">最近回帖</a></li>
+        <li class="nav-item"><a href="#description" class="nav-link" data-toggle="tab">个人介绍</a></li>
       </ul>
       <div class="tab-content">
         <div class="tab-pane active recent-topics" id="topics">
-          <div class="panel panel-default">
-            <ul class="list-group">
+          <div class="card">
+            <ul class="list-group list-group-flush">
               <% @topics.each do |item| %>
               <li class="list-group-item">
                 <div class="title">
@@ -33,15 +33,15 @@
           </div>
         </div>
         <div class="tab-pane" id="replies">
-          <div class="panel panel-default">
+          <div class="card">
             <%= render "replies", replies: @replies %>
           </div>
         </div>
         <div class="tab-pane" id="description">
           <% cache([@user, "bio-markdown"]) do %>
             <% if !@user.bio.blank? %>
-              <div class="panel panel-default bio">
-                <div class="panel-body markdown">
+              <div class="card bio">
+                <div class="card-body markdown">
                   <%= markdown(@user.bio) %>
                 </div>
               </div>

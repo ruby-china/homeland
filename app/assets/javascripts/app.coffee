@@ -1,6 +1,7 @@
-#= require jquery2
+#= require jquery3
+#= require popper
+#= require bootstrap
 #= require jquery_ujs
-#= require bootstrap.min
 #= require jquery.mobile-events
 #= require underscore
 #= require backbone
@@ -303,7 +304,7 @@ AppView = Backbone.View.extend
     else
       $(".header .navbar").removeClass('navbar-fixed-active')
 
-    return if $(".navbar-topic-title").size() == 0
+    return if $(".navbar-topic-title").length == 0
     if top >= 50
       $(".header .navbar").addClass('fixed-title')
     else

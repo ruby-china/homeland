@@ -1,13 +1,11 @@
-<div class="edit-reply panel panel-default">
-  <div class="panel-heading">
+<div class="edit-reply card">
+  <div class="card-header">
     修改回帖 <span class="pull-right"><%= topic_title_tag(@topic) %></span>
   </div>
-  <div class="panel-body">
-    <%= simple_form_for([@topic, @reply], remote: true, html: { class: "", tb: 'edit-reply' }) do |f| %>
+  <div class="card-body">
+    <%= form_for [@topic, @reply], remote: true, tb: 'edit-reply' do |f| %>
       <%= render "shared/error_messages", target: @reply %>
-      <div class="edit-tools">
-        <%= render "/shared/editor_toolbar" %>
-      </div>
+      <%= render "/shared/editor_toolbar" %>
       <div class="form-group">
         <%= f.text_area :body, class: "topic-editor form-control", rows: 10 %>
       </div>
@@ -20,8 +18,8 @@
     <% end %>
   </div>
 </div>
-<div class="panel panel-default hide-ios">
-  <div class="panel-body">
+<div class="card hide-ios">
+  <div class="card-body">
     <%= render "/shared/editor_help_block" %>
   </div>
 </div>

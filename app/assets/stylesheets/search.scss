@@ -10,12 +10,12 @@
       font-size: 15px;
       line-height: 160%;
 
-      .badge { background: $grayLabel; color: $grayLabelText; font-weight: normal; font-size: 12px; margin-left: 4px; }
+      .badge { background: $gray; color: $gray; font-weight: normal; font-size: 12px; margin-left: 4px; }
     }
     .info {
       margin-bottom: 6px;
-      font-size: 12px;
-      .url a { color: $greenText; }
+      font-size: 14px;
+      .url a { color: $green; }
 
       .date { color: #999; margin-left: 8px; }
     }
@@ -24,7 +24,7 @@
       color: #666;
       font-size: 13px;
       word-break: break-all;
-      em { color: $redLight; }
+      em { color: $red; }
     }
   }
 

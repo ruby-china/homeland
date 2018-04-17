@@ -1,5 +1,5 @@
 App.loading(false);
-comments_box = $("#<%= @comment.commentable_type %>_<%= @comment.commentable_id %>_cell_comments .panel-body");
+comments_box = $("#<%= @comment.commentable_type %>_<%= @comment.commentable_id %>_cell_comments .card-body");
 comments_form = $("#<%= @comment.commentable_type %>_<%= @comment.commentable_id %>_cell_new_comment");
 <% if @success %>
 comment_line = '<%= j(render("comment", item: @comment)) %>';

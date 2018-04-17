@@ -74,6 +74,12 @@
   padding: 0 15px;
   margin-bottom: 0;
   li {
+    &.list-group-item:first-child {
+      border-top: 0;
+    }
+    &.list-group-item:last-child {
+      border-bottom: 0;
+    }
     &.list-group-item {
       border-radius: 0 !important;
       border-left: 0px;
@@ -116,7 +122,7 @@
     label { color:#999; margin-right:8px; display:inline-block; width:80px; text-align: right;}
   }
 
-  .panel-footer {
+  .card-footer {
   }
 }
 
@@ -186,7 +192,7 @@ table.node-topics {
       a { display:block; text-decoration: none; }
       a.counter {
         font-size: 32px; color: $blue;
-        &:hover { color: $blueLight; }
+        &:hover { color: $blue; }
       }
       a.text {
         color: #999;

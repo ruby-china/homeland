@@ -1,28 +1,30 @@
 <% title_tag t('users.forget_password') %>
 
 <div class="row">
-  <div class="col-md-6 col-sm-offset-3">
-    <div class="panel panel-default">
-      <div class="panel-heading"><%= t('users.forget_password') %></div>
-      <div class="panel-body">
-        <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-        <%= render "shared/error_messages", target: resource %>
-        <div class="form-group">
-          <%= f.text_field :email, type: :email, class: "form-control input-lg", placeholder: t("activerecord.attributes.user.email") %>
-          <p class="help-block">此功能将会发送一个找回密码的特别链接到你的邮箱，通过改链接可以进入重置密码的页面。</p>
-        </div>
-        <div class="form-group">
-          <div class="input-group">
-            <%= rucaptcha_input_tag(class: 'form-control input-lg', placeholder: t('common.captcha')) %>
-            <span class="input-group-addon input-group-captcha"><a class="rucaptcha-image-box" href="#"><%= rucaptcha_image_tag %></a></span>
+  <div class="col"></div>
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header"><%= t('users.forget_password') %></div>
+      <div class="card-body">
+        <%= form_for resource, as: resource_name, url: password_path(resource_name), method: :post do |f| %>
+          <%= render "shared/error_messages", target: resource %>
+          <div class="form-group">
+            <%= f.text_field :email, type: :email, class: "form-control input-lg", placeholder: t("activerecord.attributes.user.email") %>
+            <p class="form-text text-muted">此功能将会发送一个找回密码的特别链接到你的邮箱，通过改链接可以进入重置密码的页面。</p>
           </div>
-        </div>
+          <div class="form-group">
+            <div class="input-group">
+              <%= rucaptcha_input_tag(class: 'form-control input-lg', placeholder: t('common.captcha')) %>
+              <span class="input-group-addon input-group-captcha"><a class="rucaptcha-image-box" href="#"><%= rucaptcha_image_tag %></a></span>
+            </div>
+          </div>
 
-        <div class="form-actions">
-          <%= f.submit "找回密码", class: "btn btn-lg btn-primary", 'data-disable-with' => t("common.submitting") %>
-        </div>
+          <div class="form-actions">
+            <%= f.submit "找回密码", class: "btn btn-lg btn-primary", 'data-disable-with' => t("common.submitting") %>
+          </div>
         <% end %>
       </div>
     </div>
   </div>
+  <div class="col"></div>
 </div>

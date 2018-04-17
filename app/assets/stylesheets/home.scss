@@ -34,22 +34,22 @@
   }
   .item1 {
     .icon {
-      .fa { color: $redLight; }
+      .fa { color: lighten($red, 10%); }
     }
   }
   .item3 {
     .icon {
-      .fa { color: $blueLight; }
+      .fa { color: lighten($blue, 10%); }
     }
   }
   .item2 {
     .icon {
-      .fa { color: $yellowLight; }
+      .fa { color: lighten($yellow, 10%); }
     }
   }
   .item4 {
     .icon {
-      .fa { color: $greenLight; }
+      .fa { color: lighten($green, 10%); }
     }
   }
 

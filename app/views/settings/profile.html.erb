@@ -1,7 +1,7 @@
 <div class="row">
   <%= render 'menu' %>
 
-  <div class="col-md-8">
+  <div class="col-md-10">
     <div class="card">
       <div class="card-body">
         <%= form_for @user, url: setting_path, method: :put, enctype:  "multipart/form-data" do |f| %>
@@ -71,7 +71,7 @@
           </div>
           <% end %>
           <div class="form-actions hide-ios">
-            <button type="submit" class="btn btn-lg btn-primary" data-disable-with="<%= t("common.saving") %>"><%= t("users.update_profile")%></button>
+            <button type="submit" class="btn btn-primary" data-disable-with="<%= t("common.saving") %>"><%= t("users.update_profile")%></button>
           </div>
         <% end %>
       </div>

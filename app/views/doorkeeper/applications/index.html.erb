@@ -1,6 +1,7 @@
 <div class="row">
   <%= render "/settings/menu" %>
-  <div class="col-md-8">
+
+  <div class="col-md-10">
     <div class="card">
       <div class="card-header clearfix">
         管理的应用列表
@@ -57,7 +58,7 @@
               <td><%= app.name %></td>
               <td><%= app.created_at.strftime(t('doorkeeper.authorized_applications.index.date_format')) %></td>
               <td>
-                <%= link_to "注销", oauth_authorized_application_path(app), class: "btn btn-warning btn-xs", data: { confirm: "确定要注销么？", method: :delete } %>
+                <%= link_to "注销", oauth_authorized_application_path(app), class: "btn btn-default btn-sm", data: { confirm: "确定要注销么？", method: :delete } %>
               </td>
             </tr>
           <% end %>
@@ -89,7 +90,7 @@
               <td><%= device.platform_name %></td>
               <td><%= device.token %></td>
               <td><%= device.alive? %></td>
-              <td><%= link_to '删除', device, class: 'btn btn-warning btn-xs', data: { confirm: '确定要删除么？', method: :delete } %></td>
+              <td><%= link_to '删除', device, class: "btn btn-default btn-sm", data: { confirm: '确定要删除么？', method: :delete } %></td>
             </tr>
           <% end %>
           </tbody>

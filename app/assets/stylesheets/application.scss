@@ -137,7 +137,10 @@ body {
     margin-right: 10px;
     .form-control {
       font-size: 14px;
-      border-color: $primary;
+      border-color: #f0f0f0;
+      &:focus {
+        border-color: $primary;
+      }
     }
   }
 }

@@ -152,7 +152,14 @@ body {
   }
 }
 
-.btn-default { border-color: #333; background: #FFF; }
+.btn-default {
+  border-color: $primary; background: #FFF;
+
+  &.active {
+    color: darken($primary, 20%);
+    background: lighten($primary, 45%);
+  }
+}
 
 .sidebar.col-md-3 { padding-left: 0; }
 

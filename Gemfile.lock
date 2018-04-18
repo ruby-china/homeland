@@ -190,7 +190,7 @@ GEM
       rails (~> 5)
     homeland-site (0.2.0)
       rails (~> 5)
-    homeland-wiki (0.4.0)
+    homeland-wiki (0.4.1)
       rails (~> 5)
     html-pipeline (2.7.1)
       activesupport (>= 2)

@@ -9,6 +9,8 @@ module Api
       include ActionView::Helpers::OutputSafetyHelper
       include ApplicationHelper
 
+      skip_before_action :verify_authenticity_token
+
       helper_method :can?, :current_user, :current_ability, :meta
       helper_method :admin?, :owner?, :markdown, :raw
 

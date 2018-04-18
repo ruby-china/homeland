@@ -49,6 +49,18 @@ textarea,
   }
 }
 
+.alert {
+  box-shadow: 0 0 0; padding: 0.65rem 1.25rem; border: 2px solid transparent !important;
+  .close { color: $primary; opacity: .7; }
+}
+.alert-block {
+  ul { margin-bottom: 0; margin-top: 1.25em; }
+}
+.alert-danger { color: $red; background: lighten($red, 55%); }
+.alert-warning { color: darken($yellow, 10%); background: lighten($yellow, 45%); }
+.alert-success { color: $green; background: lighten($green, 65%); }
+.alert-info { color: $blue; background: lighten($blue, 50%); }
+
 .rucaptcha-image { width: 120px; }
 
 /* Bootstrap Theme */
@@ -97,6 +109,13 @@ body {
     }
   }
 
+  .navbar-nav .nav-item.dropdown a { text-decoration: none; }
+
+  .dropdown-menu {
+    border-radius: 0;
+    font-size: 14px;
+  }
+
   .navbar-brand {
     line-height: 100%;
     color: #666 !important;
@@ -139,6 +158,15 @@ body {
 
 .nav-tabs {
   li:first-child { margin-left: 15px; }
+
+  .nav-item {
+    .nav-link {
+      &:hover {
+        background: #f2f2f2;
+        border-color: #f2f2f2;
+      }
+    }
+  }
 }
 
 .close {

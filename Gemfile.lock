@@ -6,29 +6,6 @@ GIT
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
 
-PATH
-  remote: ../homeland-note
-  specs:
-    homeland-note (0.2.0)
-      rails (~> 5)
-
-PATH
-  remote: ../homeland-press
-  specs:
-    homeland-press (0.4.0)
-
-PATH
-  remote: ../homeland-site
-  specs:
-    homeland-site (0.2.0)
-      rails (~> 5)
-
-PATH
-  remote: ../homeland-wiki
-  specs:
-    homeland-wiki (0.4.0)
-      rails (~> 5)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -207,6 +184,14 @@ GEM
     hiredis (0.6.1)
     homeland-jobs (0.2.0)
       rails (~> 5)
+    homeland-note (0.2.0)
+      rails (~> 5)
+    homeland-press (0.4.0)
+      rails (~> 5)
+    homeland-site (0.2.0)
+      rails (~> 5)
+    homeland-wiki (0.4.0)
+      rails (~> 5)
     html-pipeline (2.7.1)
       activesupport (>= 2)
       nokogiri (>= 1.4)
@@ -217,7 +202,7 @@ GEM
     http_accept_language (2.1.1)
     httparty (0.16.2)
       multi_xml (>= 0.5.2)
-    i18n (1.0.0)
+    i18n (1.0.1)
       concurrent-ruby (~> 1.0)
     jquery-atwho-rails (1.5.4)
     jquery-rails (4.3.1)
@@ -382,7 +367,7 @@ GEM
       rspec-mocks (~> 3.7.0)
       rspec-support (~> 3.7.0)
     rspec-support (3.7.1)
-    rubocop (0.54.0)
+    rubocop (0.55.0)
       parallel (~> 1.10)
       parser (>= 2.5)
       powerpack (~> 0.1)
@@ -495,11 +480,11 @@ DEPENDENCIES
   factory_bot_rails
   font-awesome-rails
   hiredis
-  homeland-jobs
-  homeland-note!
-  homeland-press!
-  homeland-site!
-  homeland-wiki!
+  homeland-jobs (~> 0.2.0)
+  homeland-note (~> 0.2.0)
+  homeland-press (~> 0.4.0)
+  homeland-site (~> 0.2.0)
+  homeland-wiki (~> 0.4.0)
   html-pipeline
   html-pipeline-rouge_filter
   http_accept_language

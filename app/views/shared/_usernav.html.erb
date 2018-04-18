@@ -13,7 +13,7 @@
   </li>
   <li class="nav-item dropdown">
     <a href="#" id="navbar-new-menu" class="nav-link dropdown-toggle ml-2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      <i class="fa fa-plus"></i> <span class="caret"></span>
+      <i class="fa fa-plus"></i>
     </a>
     <div class="dropdown-menu" aria-labelledby="navbar-new-menu">
       <%= link_to t("topics.new_topic"), main_app.new_topic_path, class: "dropdown-item" %>
@@ -29,10 +29,10 @@
 <ul class="nav user-bar navbar-nav">
   <% if current_user %>
     <li class="nav-item dropdown dropdown-avatar">
-      <a href="#" class="dropdown-toggle ml-2" data-toggle="dropdown" role="button" aria-expanded="false">
-        <%= user_avatar_tag(current_user, :sm, link: false) %> <span class="caret"></span>
+      <a href="#" class="dropdown-toggle ml-2" id="navbar-user-menu" data-toggle="dropdown" role="button" aria-expanded="false">
+        <%= user_avatar_tag(current_user, :sm, link: false) %>
       </a>
-      <div class="dropdown-menu" aria-labelledby="navbar-new-menu">
+      <div class="dropdown-menu" aria-labelledby="navbar-user-menu">
         <%= link_to current_user.login, main_app.user_path(current_user), class: "dropdown-item" %>
         <div class="dropdown-divider"></div>
         <%= link_to t("menu.edit_account_path"), main_app.setting_path, class: "dropdown-item" %>
@@ -43,10 +43,10 @@
 
         <% if admin? %>
           <div class="dropdown-divider"></div>
-          <% if params[:controller].start_with?("admin") %>
+          <% if params[:controller].start_with?("admin/") %>
             <%= link_to "回到前台", main_app.root_path, class: "dropdown-item" %>
           <% else %>
-            <%= link_to t("menu.admin"), main_app.admin_root_path, class: "dropdown-item" %>
+            <%= link_to "管理后台", main_app.admin_root_path, class: "dropdown-item" %>
           <% end %>
         <% end %>
 

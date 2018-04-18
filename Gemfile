@@ -114,11 +114,11 @@ gem "status-page"
 gem "bundler-audit", require: false
 
 # Homeland Plugins
-gem "homeland-jobs"
-gem "homeland-note"
-gem "homeland-press"
-gem "homeland-site"
-gem "homeland-wiki"
+gem "homeland-jobs", "~> 0.2.0"
+gem "homeland-note", "~> 0.2.0"
+gem "homeland-press", "~> 0.4.0"
+gem "homeland-site",  "~> 0.2.0"
+gem "homeland-wiki",  "~> 0.4.0"
 
 gem "sdoc", "~> 1.0.0.rc3"
 

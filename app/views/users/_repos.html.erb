@@ -2,7 +2,7 @@
 <div class="card" id="user_github_repos">
   <% if not user.github.blank? %>
     <div class="card-header">GitHub Public Repos</div>
-    <ul class="list-group">
+    <ul class="list-group list-group-flush">
       <% user.github_repositories.each do |item| %>
       <li class="list-group-item">
         <div class="title">

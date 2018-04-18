@@ -105,9 +105,9 @@ window.TopicView = Backbone.View.extend
       $("abbr.timeago",$("#replies .total")).timeago()
       $("#new_reply textarea").val('')
       $("#preview").text('')
-      App.notice(msg,'#reply')
+      App.notice(msg, '#reply')
     else
-      App.alert(msg,'#reply')
+      App.alert(msg, '#reply')
     $("#new_reply textarea").focus()
     $('#reply-button').button('reset')
     @resetClearReplyHightTimer()

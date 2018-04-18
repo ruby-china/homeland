@@ -7,7 +7,7 @@
   <% if topics.present? %>
   <div class="card">
     <div class="card-header"><%= t("topics.node_recent_topics") %></div>
-    <ul class="list-group">
+    <ul class="list-group list-group-flush">
     <% topics.each do |item| %>
       <li class="list-group-item"><%= link_to(truncate(item.title, length: 30), topic_path(item), title: item.title) %></li>
     <% end %>

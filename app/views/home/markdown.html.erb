@@ -1,6 +1,27 @@
 <% title_tag 'Markdown 教程' %>
 
 <% cache(['markdown-guide', Digest::MD5.hexdigest(Homeland::Markdown.example)]) do %>
+
+<div class="alert alert-danger">
+  这是提示文字
+  <button class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span></button>
+</div>
+
+<div class="alert alert-success">
+  这是提示文字
+  <button class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span></button>
+</div>
+
+<div class="alert alert-warning">
+  这是提示文字
+  <button class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span></button>
+</div>
+
+<div class="alert alert-info">
+  这是提示文字
+  <button class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span></button>
+</div>
+
 <div class="card markdown">
   <div class="card-body">
     <h1>Markdown 教程</h1>

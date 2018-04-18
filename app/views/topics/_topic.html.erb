@@ -1,6 +1,6 @@
 <% cache([topic, topic.user_avatar_raw, suggest]) do %>
 <div class="topic media topic-<%= topic.id %>">
-  <div class="avatar media-left">
+  <div class="avatar mr-2">
     <%= user_avatar_tag(topic.user, :md) %>
   </div>
   <div class="infos media-body">

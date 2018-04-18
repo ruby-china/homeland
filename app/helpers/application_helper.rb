@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
-  EMPTY_STRING = ""
-
   def markdown(text)
     return nil if text.blank?
     Rails.cache.fetch(["markdown", Digest::MD5.hexdigest(text)]) do
@@ -17,10 +15,12 @@ module ApplicationHelper
   def notice_message
     flash_messages = []
 
+    close_html = %(<button name="button" type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>)
+
     flash.each do |type, message|
       type = :success if type.to_sym == :notice
       type = :danger  if type.to_sym == :alert
-      text = content_tag(:div, link_to(raw('<i class="fa fa-close"></i>'), "#", :class => "close", "data-dismiss" => "alert") + message, class: "alert alert-#{type}")
+      text = content_tag(:div, raw(close_html) + message, class: "alert alert-#{type}")
       flash_messages << text if message
     end
 
@@ -87,13 +87,8 @@ module ApplicationHelper
   }
 
   def insert_code_menu_items_tag
-    lang_list = []
-    LANGUAGES_LISTS.each do |k, l|
-      lang_list << content_tag(:li) do
-        link_to raw(k), "#", data: { lang: l }
-      end
-    end
-    raw lang_list.join(EMPTY_STRING)
+    lang_list = LANGUAGES_LISTS.map { |k, l| link_to raw(k), "#", class: "dropdown-item", data: { lang: l } }
+    raw lang_list.join("")
   end
 
   def birthday_tag
@@ -107,12 +102,12 @@ module ApplicationHelper
 
   def random_tips
     tips = Setting.tips
-    return EMPTY_STRING if tips.blank?
+    return "" if tips.blank?
     tips.split("\n").sample
   end
 
   def icon_tag(name, opts = {})
-    label = EMPTY_STRING
+    label = ""
     if opts[:label]
       label = %(<span>#{opts[:label]}</span>)
     end
@@ -136,15 +131,14 @@ module ApplicationHelper
     yield(list) if block_given?
     items = []
     list.each do |link|
-      item_class = EMPTY_STRING
       urls = link.match(/href=(["'])(.*?)(\1)/) || []
       url = urls.length > 2 ? urls[2] : nil
       if url && current_page?(url) || (@current&.include?(url))
-        item_class = "active"
+        link = link.gsub("nav-link", "nav-link active")
       end
-      items << content_tag("li", raw(link), class: item_class)
+      items << content_tag("li", raw(link), class: "nav-item")
     end
-    raw items.join(EMPTY_STRING)
+    raw items.join("")
   end
 
   def highlight(text)

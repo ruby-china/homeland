@@ -1,8 +1,8 @@
-<div class="panel panel-default">
-  <div class="panel-heading">
+<div class="card">
+  <div class="card-header">
     <%= t('doorkeeper.authorizations.error.title') %>
   </div>
-  <div class="panel-body">
+  <div class="card-body">
     <pre><%= @pre_auth.error_response.body[:error_description] %></pre>
   </div>
 </div>

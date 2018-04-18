@@ -5,7 +5,6 @@ source "https://rubygems.org"
 git_source(:github) { |repo_name| "https://github.com/#{repo_name}.git" }
 
 gem "coffee-rails"
-gem "dropzonejs-rails"
 gem "jbuilder", github: "rails/jbuilder"
 gem "jquery-rails"
 gem "rails", "~> 5.2.0.rc"
@@ -22,10 +21,12 @@ gem "pghero"
 
 gem "rack-attack"
 
+gem "bootstrap", "~> 4.1.0"
 gem "font-awesome-rails"
 gem "http_accept_language"
 gem "jquery-atwho-rails"
 gem "rails-i18n"
+gem "dropzonejs-rails"
 gem "twemoji"
 
 # OAuth Provider
@@ -95,9 +96,6 @@ gem "sidekiq"
 # 分享功能
 gem "social-share-button"
 
-# 表单
-gem "simple_form"
-
 # Mailer Service
 gem "postmark"
 gem "postmark-rails"
@@ -116,11 +114,11 @@ gem "status-page"
 gem "bundler-audit", require: false
 
 # Homeland Plugins
-gem "homeland-jobs"
-gem "homeland-note"
-gem "homeland-press"
-gem "homeland-site"
-gem "homeland-wiki"
+gem "homeland-jobs", "~> 0.2.0"
+gem "homeland-note", "~> 0.2.0"
+gem "homeland-press", "~> 0.4.0"
+gem "homeland-site",  "~> 0.2.0"
+gem "homeland-wiki",  "~> 0.4.0"
 
 gem "sdoc", "~> 1.0.0.rc3"
 

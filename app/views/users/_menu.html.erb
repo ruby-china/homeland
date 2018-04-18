@@ -1,11 +1,11 @@
 <%= render_list class: "nav nav-tabs" do |li|
-  li << link_to(t("users.menu.profile"), user_path(@user))
-  li << link_to(t("users.menu.topics"), topics_user_path(@user))
-  li << link_to(t("users.menu.replies"), replies_user_path(@user))
-  li << link_to(t("users.menu.favorites"), favorites_user_path(@user), class: 'hide-ios')
-  li << link_to(t("users.menu.following"), following_user_path(@user))
-  li << link_to(t("users.menu.followers"), followers_user_path(@user))
+  li << link_to(t("users.menu.profile"), user_path(@user), class: "nav-link")
+  li << link_to(t("users.menu.topics"), topics_user_path(@user), class: "nav-link")
+  li << link_to(t("users.menu.replies"), replies_user_path(@user), class: "nav-link")
+  li << link_to(t("users.menu.favorites"), favorites_user_path(@user), class: "nav-link hide-ios")
+  li << link_to(t("users.menu.following"), following_user_path(@user), class: "nav-link")
+  li << link_to(t("users.menu.followers"), followers_user_path(@user), class: "nav-link")
   if owner?(@user) && current_user.block_users?
-    li << link_to(t("users.menu.blocked"), blocked_user_path(@user), class: 'hide-ios')
+    li << link_to(t("users.menu.blocked"), blocked_user_path(@user), class: "nav-link hide-ios")
   end
 end %>

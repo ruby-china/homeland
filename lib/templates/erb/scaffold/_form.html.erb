@@ -5,14 +5,16 @@
     form_model_name = "[:#{namespace},@#{file_name}]"
   end
 %>
-<%%= simple_form_for(<%= form_model_name %>) do |f| %>
+<%%= form_for(<%= form_model_name %>) do |f| %>
   <%%= render "/shared/error_messages", target: @<%= file_name %>  %>
   <% for attribute in attributes -%>
-  <%%= f.<%= attribute.reference? ? :association : :input %> :<%= attribute.name %> %>
-  <% end -%>
   <div class="form-group">
-    <div class="col-md-10 col-sm-offset-2">
-      <%%= f.submit t("common.save"), class: "btn btn-primary" %> or <%%= link_to t("common.cancel"), <%= index_helper %>_path %>
-    </div>
+    <%%= f.label :<%= attribute.name %> %>
+    <%%= f.text_field :<%= attribute.name %>, class: "form-control" %>
+  </div>
+  <% end -%>
+
+  <div class="form-actions">
+    <%%= f.submit t("common.save"), class: "btn btn-primary" %> or <%%= link_to t("common.cancel"), <%= index_helper %>_path %>
   </div>
 <%% end %>

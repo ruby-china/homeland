@@ -1,8 +1,8 @@
 <div class="sidebar col-md-4<%= ' hide-ios' if turbolinks_app? && action_name != 'show' %>" id='sidebar'>
-  <div class="panel profile panel-default">
-    <div class="panel-body">
+  <div class="card profile">
+    <div class="card-body">
       <div class="media">
-        <div class="avatar media-left">
+        <div class="avatar media-left mr-3">
           <div class='image'><%= user_avatar_tag(@user, :lg, link: false) %></div>
           <div class="level"><%= render_user_level_tag(@user) %></div>
         </div>
@@ -49,26 +49,26 @@
         </div>
       </div>
       <div class="follow-info row hide-ios">
-        <div class="col-xs-4 followers" data-login="<%= @user.login %>">
+        <div class="col-sm-4 followers" data-login="<%= @user.login %>">
           <%= link_to @user.followers_count, followers_user_path(@user), class: "counter" %>
           <%= link_to "关注者", followers_user_path(@user), class: "text" %>
         </div>
-        <div class="col-xs-4 following">
+        <div class="col-sm-4 following">
           <%= link_to @user.following_count, following_user_path(@user), class: "counter" %>
           <%= link_to "正在关注", following_user_path(@user), class: "text" %>
         </div>
-        <div class="col-xs-4 stars">
+        <div class="col-sm-4 stars">
           <%= link_to @user.favorites_count, favorites_user_path(@user), class: "counter" %>
           <%= link_to "收藏", favorites_user_path(@user), class: "text" %>
         </div>
       </div>
       <% if !owner? @user %>
       <div class="buttons row">
-        <div class="col-xs-6">
+        <div class="col-sm-6">
           <%= follow_user_tag(@user) %>
         </div>
 
-        <div class="col-xs-6">
+        <div class="col-sm-6">
           <%= block_user_tag(@user) %>
         </div>
       </div>
@@ -88,8 +88,8 @@
 
   <% if Setting.has_module?(:team) %>
     <% if !@user.teams.blank? %>
-    <div class="panel user-teams">
-      <div class="panel-body">
+    <div class="card user-teams">
+      <div class="card-body">
         <% @user.teams.each do |team| %>
           <%= user_avatar_tag(team, :md) %>
         <% end %>

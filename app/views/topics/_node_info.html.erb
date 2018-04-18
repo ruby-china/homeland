@@ -15,12 +15,13 @@
         <div class="summary<%= ' collapse' if node.collapse_summary? %>" id="node-summary">
           <%= sanitize_markdown node.summary_html %>
         </div>
+
         <% if node.name == '招聘' %>
+          <hr />
           <ul class="nav nav-pills prefix-filter">
-            <hr>
             <% cache "prefixes", expires_in: 7.days do %>
               <% Location.hot.limit(12).each do |prefix| %>
-                <li><%= link_to prefix.name, homeland_jobs.jobs_path(location: prefix.name) %></li>
+                <li class="nav-item"><%= link_to prefix.name, homeland_jobs.jobs_path(location: prefix.name), class: "nav-link" %></li>
               <% end %>
             <% end %>
           </ul>

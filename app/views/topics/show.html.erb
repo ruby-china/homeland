@@ -22,7 +22,7 @@
 
 <div class="row">
   <div class="col-md-9">
-    <div class="topic-detail panel panel-default">
+    <div class="topic-detail card">
       <%= render partial: "topics/topic_info", locals: { topic: @topic } %>
 
       <% if @topic.excellent? %>
@@ -36,7 +36,7 @@
         </div>
       <% end %>
 
-      <div class="panel-body markdown markdown-toc">
+      <div class="card-body markdown markdown-toc">
         <%= raw Setting.before_topic_html %>
 
         <%= @topic.body_html %>
@@ -44,7 +44,7 @@
         <%= raw Setting.after_topic_html %>
       </div>
 
-      <div class="panel-footer clearfix">
+      <div class="card-footer clearfix">
         <%= render "buttons" %>
       </div>
     </div>
@@ -56,11 +56,11 @@
       <%= t("topics.no_replies") %>
     </div>
     <% else %>
-    <div id="replies" class="panel panel-default" data-last-floor="<%= @replies.count(:all) %>">
-      <div class="total panel-heading hide-ios">
+    <div id="replies" class="card" data-last-floor="<%= @replies.count(:all) %>">
+      <div class="total card-header hide-ios">
         共收到 <b><%= @topic.replies_count %></b> 条回复
       </div>
-      <div class="items panel-body">
+      <div class="items card-body">
         <%= render partial: "/replies/reply", collection: @replies %>
       </div>
     </div>
@@ -70,9 +70,9 @@
     <% if @topic.closed? %>
       <div class="alert alert-info">此话题已经于 <%= l @topic.closed_at, format: :long %> 关闭，不再接受任何回帖。</div>
     <% else %>
-      <div id="reply" class="panel panel-default">
-        <div class="panel-heading hide-ios">回帖</div>
-        <div class="panel-body">
+      <div id="reply" class="card">
+        <div class="card-header hide-ios">回帖</div>
+        <div class="card-body">
         <% if can? :create, Reply %>
           <%= render 'reply_form' %>
         <% else %>
@@ -84,8 +84,8 @@
       </div>
     <% end %>
   <% else %>
-    <div class="panel panel-default">
-      <div class="panel-body">
+    <div class="card">
+      <div class="card-body">
         <%= render partial: "topics/translation/need_login_to_reply" %>
       </div>
     </div>

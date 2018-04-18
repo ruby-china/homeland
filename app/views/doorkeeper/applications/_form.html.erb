@@ -1,28 +1,28 @@
-<div class="panel panel-default">
-  <div class="panel-heading">
+<div class="card">
+  <div class="card-header">
     <% if application.new_record? %>注册新应用<% else %>修改应用信息<% end %>
   </div>
-  <div class="panel-body">
+  <div class="card-body">
     <%= form_with(model: application, url: doorkeeper_submit_path(application), html: { role: 'form'}) do |f| %>
       <% if application.errors.any? %>
         <div class="alert alert-danger" data-alert><p><%= t('doorkeeper.applications.form.error') %></p></div>
       <% end %>
 
       <%= content_tag :div, class: "form-group#{' has-error' if application.errors[:name].present?}" do %>
-        <%= f.label :name, class: 'control-label' %>
+        <%= f.label :name %>
         <%= f.text_field :name, class: 'form-control' %>
         <%= doorkeeper_errors_for application, :name %>
       <% end %>
 
       <%= content_tag :div, class: "form-group#{' has-error' if application.errors[:redirect_uri].present?}" do %>
-        <%= f.label :redirect_uri, class: 'control-label' %>
+        <%= f.label :redirect_uri %>
         <%= f.text_area :redirect_uri, class: 'form-control' %>
         <%= doorkeeper_errors_for application, :redirect_uri %>
-        <span class="help-block">
+        <span class="form-text">
            <%= t('doorkeeper.applications.help.redirect_uri') %>
           </span>
         <% if Doorkeeper.configuration.native_redirect_uri %>
-            <span class="help-block">
+            <span class="form-text">
               <%= raw t('doorkeeper.applications.help.native_redirect_uri', native_redirect_uri: "<code>#{ Doorkeeper.configuration.native_redirect_uri }</code>") %>
             </span>
         <% end %>

@@ -1,13 +1,13 @@
 <div class="row">
   <%= render "/settings/menu" %>
   <div class="col-md-8">
-    <div class="panel panel-default">
-      <div class="panel-heading clearfix">
+    <div class="card">
+      <div class="card-header clearfix">
         管理的应用列表
         <%= link_to "注册新应用", new_oauth_application_path, class: 'btn btn-success pull-right' %>
       </div>
 
-      <div class="panel-body">
+      <div class="card-body">
         <table class="table table-bordered table-striped table-condensed">
           <thead>
           <tr>
@@ -36,12 +36,12 @@
       </div>
     </div>
 
-    <div class="panel panel-default">
-      <div class="panel-heading clearfix">
+    <div class="card">
+      <div class="card-header clearfix">
         已授权的应用
       </div>
 
-      <div class="panel-body">
+      <div class="card-body">
         <p>下面列表是已经认证的应用，它们可以访问你的帐号。</p>
         <table class="table table-bordered table-striped table-condensed">
           <thead>
@@ -67,12 +67,12 @@
     </div>
 
     <% if @devices.length > 0 %>
-    <div class="panel panel-default">
-      <div class="panel-heading clearfix">
+    <div class="card">
+      <div class="card-header clearfix">
         我的设备信息
       </div>
 
-      <div class="panel-body">
+      <div class="card-body">
         <p>下面列表是已经连接上的设备，它们将会收到 Push 通知。</p>
         <table class="table table-bordered table-striped table-condensed">
           <thead>

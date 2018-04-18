@@ -29,10 +29,10 @@
   transition: all .25s ease-in-out;
 }
 .fluidbox-closed .fluidbox-ghost {
-  -webkit-transition-property: top, left, opacity, -webkit-transform;
-  -moz-transition-property: top, left, opacity, -moz-transform;
-  -o-transition-propert: top, left, opacity, -o-transform;
-  transition-property: top, left, opacity, transform;
+  -webkit-transition: top, left, opacity, -webkit-transform;
+  -moz-transition: top, left, opacity, -moz-transform;
+  -o-transition: top, left, opacity, -o-transform;
+  transition: top, left, opacity, transform;
   transition-delay: 0, 0, .25s, 0;
 }
 .fluidbox-opened {

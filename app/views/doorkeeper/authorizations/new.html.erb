@@ -1,9 +1,9 @@
 <div class="row" style="padding: 50px 0;">
   <div class="col-md-6 col-md-offset-3">
-    <div class="panel panel-default">
-      <div class="panel-heading"><%= t('.title') %></div>
+    <div class="card">
+      <div class="card-header"><%= t('.title') %></div>
   
-      <div class="panel-body">
+      <div class="card-body">
         <p>
           应用 <strong class="text-danger"><%= @pre_auth.client.name %></strong> 希望你授权使用你的帐号
         </p>
@@ -20,7 +20,7 @@
           </div>
         <% end %>
       </div>
-      <div class="panel-footer">
+      <div class="card-footer">
         <div class="row">
           <%= form_tag oauth_authorization_path, class: "col-md-6", method: :post do %>
             <%= hidden_field_tag :client_id, @pre_auth.client.uid %>

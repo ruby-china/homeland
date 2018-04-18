@@ -1,71 +1,66 @@
-<ul class="nav user-bar navbar-nav navbar-right">
-  <% if current_user %>
-  <li class="dropdown dropdown-avatar">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-      <%= user_avatar_tag(current_user, :sm, link: false) %> <span class="caret"></span>
-    </a>
-    <button class="navbar-toggle" type="button" data-toggle="dropdown" role="button" aria-expanded="false">
-      <span class="sr-only">Toggle</span>
-      <%= user_avatar_tag(current_user, :sm, link: false) %>
-    </button>
-    <%= render_list class: "dropdown-menu", role: "menu" do |li|
-      li << link_to(current_user.login, main_app.user_path(current_user) )
-      li << "<div class='divider'></div>"
-      li << link_to(t("menu.edit_account_path"), main_app.setting_path)
-      li << link_to(t("menu.likes"), main_app.favorites_topics_path)
+ <form class="form-inline" action="/search" method="GET">
+   <input class="form-control mr-auto" name="q" type="text" value="<%= params[:q] %>" placeholder="搜索本站内容" />
+ </form>
 
-      Homeland.user_menu_plugins.each do |plugin|
-        li << link_to(plugin.display_name, plugin.root_path)
-      end
-
-      if admin?
-        li << "<div class='divider'></div>"
-        if params[:controller].start_with?("admin")
-          li << link_to("回到前台", main_app.root_path)
-        else
-          li << link_to(t("menu.admin"), "/admin")
-        end
-      end
-      li << "<div class='divider'></div>"
-      li << link_to(t("common.logout"), main_app.destroy_user_session_path, method: "delete" )
-    end %>
-  </li>
-  <% else %>
-  <% if !Setting.sso_enabled? %>
-  <li><%= link_to( t("common.register"), main_app.new_user_registration_path) %></li>
-  <% end %>
-  <li><%= link_to( t("common.login"), main_app.new_user_session_path ) %></li>
-  <% end %>
-</ul>
-
-<ul class="nav navbar-nav user-bar navbar-right">
-  <li class="nav-search hidden-xs hidden-sm">
-    <form class="navbar-form form-search active" action="/search" method="GET">
-      <div class="form-group">
-        <input class="form-control" name="q" type="text" value="<%= params[:q] %>" placeholder="搜索本站内容" />
-      </div>
-      <i class="fa btn-search fa-search"></i>
-    </form>
-  </li>
+<ul class="nav navbar-nav user-bar">
   <% if current_user %>
   <%
   badge_class = ""
   badge_class = "new" if unread_notify_count > 0
   %>
-  <li class="notification-count">
-    <a href="<%= main_app.notifications_path %>" class="<%= badge_class %>" title="通知"><i class="fa fa-bell"></i><span class="count"><%= unread_notify_count %></span></a>
+  <li class="nav-item notification-count">
+    <a href="<%= main_app.notifications_path %>" class="nav-link <%= badge_class %>  ml-2" title="通知"><i class="fa fa-bell"></i><span class="count"><%= unread_notify_count %></span></a>
   </li>
-  <li>
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-      <i class="fa fa-plus"></i> <span class="caret"></span>
+  <li class="nav-item dropdown">
+    <a href="#" id="navbar-new-menu" class="nav-link dropdown-toggle ml-2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <i class="fa fa-plus"></i>
     </a>
-    <%= render_list class: "dropdown-menu", role: "menu" do |li|
-      li << link_to(t("topics.new_topic"), main_app.new_topic_path)
-      if can?(:create, Team) && Setting.has_module?(:team)
-        li << "<div class='divider'></div>"
-        li << link_to(t("teams.new_team"), main_app.new_team_path)
-      end
-    end %>
+    <div class="dropdown-menu" aria-labelledby="navbar-new-menu">
+      <%= link_to t("topics.new_topic"), main_app.new_topic_path, class: "dropdown-item" %>
+      <% if can?(:create, Team) && Setting.has_module?(:team) %>
+        <div class="dropdown-divider"></div>
+        <%= link_to t("teams.new_team"), main_app.new_team_path, class: "dropdown-item" %>
+      <% end %>
+    </div>
   </li>
   <% end %>
 </ul>
+
+<ul class="nav user-bar navbar-nav">
+  <% if current_user %>
+    <li class="nav-item dropdown dropdown-avatar">
+      <a href="#" class="dropdown-toggle ml-2" id="navbar-user-menu" data-toggle="dropdown" role="button" aria-expanded="false">
+        <%= user_avatar_tag(current_user, :sm, link: false) %>
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbar-user-menu">
+        <%= link_to current_user.login, main_app.user_path(current_user), class: "dropdown-item" %>
+        <div class="dropdown-divider"></div>
+        <%= link_to t("menu.edit_account_path"), main_app.setting_path, class: "dropdown-item" %>
+        <%= link_to t("menu.likes"), main_app.favorites_topics_path, class: "dropdown-item" %>
+        <% Homeland.user_menu_plugins.each do |plugin| %>
+          <%= link_to plugin.display_name, plugin.root_path, class: "dropdown-item" %>
+        <% end %>
+
+        <% if admin? %>
+          <div class="dropdown-divider"></div>
+          <% if params[:controller].start_with?("admin/") %>
+            <%= link_to "回到前台", main_app.root_path, class: "dropdown-item" %>
+          <% else %>
+            <%= link_to "管理后台", main_app.admin_root_path, class: "dropdown-item" %>
+          <% end %>
+        <% end %>
+
+        <div class="dropdown-divider"></div>
+        <%= link_to t("common.logout"), main_app.destroy_user_session_path, method: "delete", class: "dropdown-item" %>
+      </div>
+    </li>
+  <% else %>
+    <% if !Setting.sso_enabled? %>
+    <li class="nav-item"><%= link_to t("common.register"), main_app.new_user_registration_path, class: "nav-link" %></li>
+    <% end %>
+
+    <li class="nav-item"><%= link_to t("common.login"), main_app.new_user_session_path, class: "nav-link" %></li>
+  <% end %>
+</ul>
+
+

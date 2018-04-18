@@ -7,9 +7,9 @@
 
 <div class="row">
   <div class="col-md-9">
-    <div class="topics topics-<%= action_name %> panel panel-default">
+    <div class="topics topics-<%= action_name %> card">
 
-      <div class="panel-body item-list">
+      <div class="card-body item-list">
         <% if @suggest_topics.present? %>
           <%= render partial: '/topics/topic', collection: @suggest_topics, locals: { suggest: true } %>
         <% end %>
@@ -17,7 +17,7 @@
         <%= render partial: '/topics/topic', collection: @topics, locals: { suggest: false } %>
       </div>
 
-      <div class="panel-footer clearfix">
+      <div class="card-footer clearfix">
         <% if action_name.in? %(index recent) %>
           <%= paginate @topics, total_pages: Topic.total_pages %>
         <% else %>

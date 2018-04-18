@@ -1,6 +1,7 @@
-#= require jquery2
+#= require jquery3
+#= require popper
+#= require bootstrap
 #= require jquery_ujs
-#= require bootstrap.min
 #= require jquery.mobile-events
 #= require underscore
 #= require backbone
@@ -303,7 +304,7 @@ AppView = Backbone.View.extend
     else
       $(".header .navbar").removeClass('navbar-fixed-active')
 
-    return if $(".navbar-topic-title").size() == 0
+    return if $(".navbar-topic-title").length == 0
     if top >= 50
       $(".header .navbar").addClass('fixed-title')
     else
@@ -331,15 +332,23 @@ window.App =
   fixUrlDash : (url) ->
     url.replace(/\/\//g,"/").replace(/:\//,"://")
 
-  # 警告信息显示, to 显示在那个dom前(可以用 css selector)
-  alert : (msg,to) ->
+  # 警告信息显示, to 显示在那个 DOM 前 (可以用 css selector)
+  alert : (msg, to) ->
     $(".alert").remove()
-    $(to).before("<div class='alert alert-warning'><a class='close' href='#' data-dismiss='alert'><i class='fa fa-close'></i></a>#{msg}</div>")
+    html = "<div class='alert alert-warning'><button class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span></button>#{msg}</div>"
+    if to
+      $(to).before(html)
+    else
+      $("#main").prepend(html)
 
-  # 成功信息显示, to 显示在那个dom前(可以用 css selector)
-  notice : (msg,to) ->
+  # 成功信息显示, to 显示在那个 DOM 前 (可以用 css selector)
+  notice : (msg, to) ->
     $(".alert").remove()
-    $(to).before("<div class='alert alert-success'><a class='close' data-dismiss='alert' href='#'><i class='fa fa-close'></i></a>#{msg}</div>")
+    html = "<div class='alert alert-success'><button class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span></button>#{msg}</div>"
+    if to
+      $(to).before(html)
+    else
+      $("#main").prepend(html)
 
   openUrl : (url) ->
     window.open(url)

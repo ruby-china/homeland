@@ -2,31 +2,44 @@
   <%= render 'menu' %>
 
   <div class="col-md-8">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <%= simple_form_for(@user, url: setting_path, html: { method: :put, enctype:  "multipart/form-data" }) do |f| %>
-        <%= render "shared/error_messages", target: @user %>
-        <div class="row">
-          <div class="col-sm-9">
-            <%= f.input :name, input_html: { style: 'width: 200px' } %>
-            <%= f.input :email, input_html: { disabled: (@user.email_locked?) } %>
-            <div class="form-group">
-              <div class="checkbox">
-                <label for="user_email_public" class="checkbox"><%= f.check_box :email_public %> <%= t("users.email_permission")%></label>
+    <div class="card">
+      <div class="card-body">
+        <%= form_for @user, url: setting_path, method: :put, enctype:  "multipart/form-data" do |f| %>
+          <%= render "shared/error_messages", target: @user %>
+          <div class="row">
+            <div class="col-sm-9">
+              <div class="form-group">
+                <%= f.text_field :name, style: "width: 200px", class: "form-control", placeholder: "姓名" %>
+              </div>
+
+              <div class="form-group">
+                <%= f.text_field :email, disabled: @user.email_locked?, class: "form-control", placeholder: "Email" %>
+              </div>
+
+              <div class="form-group form-check">
+                <label for="user_email_public" class="form-check-label">
+                  <%= f.check_box :email_public, class: "form-check-input" %> <%= t("users.email_permission")%>
+                </label>
+              </div>
+
+              <div class="form-group">
+                <%= f.file_field :avatar %>
+                <div class="form-text">选择上传头像</div>
+              </div>
+
+              <div class="form-group">
+                <%= f.text_area :bio, class: "form-control" %>
               </div>
             </div>
-            <%= f.input :avatar %>
-            <%= f.input :bio, as: :text, input_html: { class: "xxlarge", rows: "6" } %>
-          </div>
-          <div class="col-sm-3">
-            <div class="form-group avatar-preview" style="text-align: center;">
-              <%= user_avatar_tag(@user, :lg, link: false) %>
+            <div class="col-sm-3">
+              <div class="form-group avatar-preview" style="text-align: center;">
+                <%= user_avatar_tag(@user, :lg, link: false) %>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="form-actions hide-ios">
-          <button type="submit" class="btn btn-lg btn-primary" data-disable-with="<%= t("common.saving") %>"><%= t("users.update_profile")%></button>
-        </div>
+          <div class="form-actions hide-ios">
+            <button type="submit" class="btn btn-lg btn-primary" data-disable-with="<%= t("common.saving") %>"><%= t("users.update_profile")%></button>
+          </div>
         <% end %>
       </div>
     </div>

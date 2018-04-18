@@ -1,7 +1,7 @@
 <% cache(["index-locations",Time.now.strftime("%Y-%m-%d")]) do %>
-  <div class="index-locations panel panel-default">
-    <div class="panel-heading"><%=t("common.hot_locations")%></div>
-    <div class="panel-body location-list" style="text-align:center;">
+  <div class="index-locations card">
+    <div class="card-header"><%=t("common.hot_locations")%></div>
+    <div class="card-body location-list" style="text-align:center;">
       <% Location.hot.limit(12).each do |item| %>
         <span class="name"><%= location_name_tag(item) %></span>
       <% end %>

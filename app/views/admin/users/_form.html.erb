@@ -1,62 +1,141 @@
-<%= simple_form_for([:admin, @user], url: admin_user_path(@user)) do |f| %>
+<%= form_for [:admin, @user], url: admin_user_path(@user) do |f| %>
   <%= render 'shared/error_messages', target: @user %>
-  <%= f.input :login %>
-  <%= f.input :name %>
-  <%= f.input :email, as: :email, input_html: { class: "xxlarge" } %>
+  <div class="form-group">
+    <%= f.label :login %>
+    <%= f.text_field :login, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :email %>
+    <%= f.email_field :email, class: "form-control" %>
+  </div>
+
   <% if Setting.has_profile_field? :location %>
-  <%= f.input :location %>
+  <div class="form-group">
+    <%= f.label :location %>
+    <%= f.text_field :location, class: "form-control" %>
+  </div>
   <% end %>
+
   <% if Setting.has_module? :github %>
-  <%= f.input :github %>
+  <div class="form-group">
+    <%= f.label :github %>
+    <%= f.text_field :github, class: "form-control" %>
+  </div>
   <% end %>
+
   <% if Setting.has_profile_field? :twitter %>
-  <%= f.input :twitter %>
+  <div class="form-group">
+    <%= f.label :twitter %>
+    <%= f.text_field :twitter, class: "form-control" %>
+  </div>
   <% end %>
-  <%= f.input :email_public, as: :boolean %>
+
+  <div class="form-group form-check">
+    <%= f.check_box :email_public, class: "form-check-input" %>
+    <%= f.label :email_public, class: "form-check-label" %>
+  </div>
+
   <% if Setting.has_profile_field? :company %>
-  <%= f.input :company %>
+  <div class="form-group">
+    <%= f.label :company %>
+    <%= f.text_field :company, class: "form-control" %>
+  </div>
   <% end %>
+
   <% if Setting.has_profile_field? :tagline %>
-  <%= f.input :tagline, input_html: { class: "span8" } %>
+  <div class="form-group">
+    <%= f.label :tagline %>
+    <%= f.text_field :tagline, class: "form-control" %>
+  </div>
   <% end %>
-  <%= f.input :bio, as: :text, input_html: { class: "span8", style: "height:60px;" } %>
+
+  <div class="form-group">
+    <%= f.label :bio %>
+    <%= f.text_area :bio, class: "form-control" %>
+  </div>
+
+
   <% if Setting.has_profile_field? :website %>
-  <%= f.input :website, as: :url, input_html: { class: "xxlarge" } %>
+  <div class="form-group">
+    <%= f.label :website %>
+    <%= f.text_field :website, class: "form-control" %>
+  </div>
   <% end %>
-  <%= f.input :avatar %>
+
+  <div class="form-group">
+    <%= f.label :avatar %>
+    <%= f.file_field :avatar, class: "form-control" %>
+  </div>
+
   <div class="form-group">
     <%= user_avatar_tag(@user, :lg) %>
   </div>
+
   <% if @user.user_type == :user %>
-  <%= f.input :verified, as: :boolean, hint: t("admin.users.trust_user_can_modify_wiki") %>
-  <%= f.input :state, as: :select, collection: User.states.collect { |s| [s[0], s[0]] } %>
-  <%= f.input :sign_in_count, readonly: true %>
-  <%= f.input :last_sign_in_at, as: :string, readonly: true %>
-  <%= f.input :current_sign_in_at, as: :string, readonly: true %>
-  <%= f.input :last_sign_in_ip, readonly: true %>
-  <%= f.input :current_sign_in_ip, readonly: true %>
+
+    <div class="form-group form-check">
+      <%= f.check_box :verified, class: "form-check-input" %>
+      <%= f.label :verified, class: "form-check-label" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :state %>
+      <%= f.select :state, User.states.collect { |s| [s[0], s[0]] }, {}, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :sign_in_count %>
+      <%= f.text_field :sign_in_count, class: "form-control", readonly: true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :last_sign_in_at %>
+      <%= f.text_field :last_sign_in_at, class: "form-control", readonly: true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :current_sign_in_at %>
+      <%= f.text_field :current_sign_in_at, class: "form-control", readonly: true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :last_sign_in_ip %>
+      <%= f.text_field :last_sign_in_ip, class: "form-control", readonly: true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :current_sign_in_ip %>
+      <%= f.text_field :current_sign_in_ip, class: "form-control", readonly: true %>
+    </div>
+
+    <% if @user.authorizations.any? %>
+    <div class="form-group">
+      <table class="table">
+        <% @user.authorizations.each do |auth| %>
+          <tr>
+            <td style="width:100px;"><%= auth.provider %></td>
+            <td><%= auth.uid %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+    <% end %>
+
   <% end %>
-  <% if not @user.authorizations.blank? %>
-  <div class="form-group">
-    <table class="table" style="display:block;">
-      <% @user.authorizations.each do |auth| %>
-        <tr>
-          <td style="width:100px;"><%= auth.provider %></td>
-          <td><%= auth.uid %></td>
-        </tr>
-      <% end %>
-    </table>
-  </div>
-  <% end %>
+
   <div class="row">
     <div class="col-sm-6">
-      <%= f.submit t("common.save"), class: "btn btn-lg btn-block btn-primary", 'data-disable-with' => t("common.saving") %>
+      <%= f.submit t("common.save"), class: "btn btn-block btn-primary", 'data-disable-with' => t("common.saving") %>
     </div>
     <div class="col-sm-6">
       <% if !@user.deleted? %>
-        <div class="pull-right">
-          <%= link_to '删除此用户', admin_user_path(@user.id), 'data-confirm' => '警告！此动作无法撤销，确定要删除么?', method: :delete, class: "btn btn-danger"  %>
-        </div>
+        <%= link_to '删除此用户', admin_user_path(@user.id), 'data-confirm' => '警告！此动作无法撤销，确定要删除么?', method: :delete, class: "btn btn-danger"  %>
       <% end %>
     </div>
   </div>

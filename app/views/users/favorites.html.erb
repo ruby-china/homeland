@@ -4,8 +4,8 @@
   <%= render "sidebar", user: @user %>
   <div class="col-md-8">
     <%= render "menu" %>
-    <div class="panel panel-default">
-      <div class="panel-body">
+    <div class="card">
+      <div class="card-body">
         <table class="node-topics table">
           <tr class="head">
             <td class="opts"><%= t("common.node") %></td>
@@ -19,7 +19,7 @@
           <% end %>
         </table>
       </div>
-      <div class="panel-footer clearfix">
+      <div class="card-footer clearfix">
         <%= paginate @topics %>
       </div>
     </div>

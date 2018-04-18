@@ -8,7 +8,7 @@ window.TOCView = Backbone.View.extend
     $(".toc-container").show() if haveAnyHeaders
 
   initHeadersInTopic: ->
-    if $(".markdown-toc .toc-container").size() > 0
+    if $(".markdown-toc .toc-container").length > 0
       return false
     markdownEl = $(".markdown-toc")
     markdownEl.prepend """

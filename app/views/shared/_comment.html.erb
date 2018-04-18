@@ -1,9 +1,9 @@
 <div class="comment media">
-  <div class="avatar media-left">
+  <div class="avatar media-left mr-3">
     <%= user_avatar_tag(comment.user, :md) %>
   </div>
   <div class="media-body">
-    <div class="info media-heading">
+    <div class="info media-heading mb-2">
       <span class="name"><%= user_name_tag(comment.user) %></span> 发表于 <%= timeago(comment.created_at) %>
     </div>
     <div class="body markdown">

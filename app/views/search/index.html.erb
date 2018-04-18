@@ -1,11 +1,11 @@
 <% title_tag [params[:q], t('common.search_result')].join(' · ') %>
 
-<div class="search-results panel panel-default">
-  <div class="panel-heading clearfix">
+<div class="search-results card">
+  <div class="card-header clearfix">
     关于 “<%= params[:q] %>” 的搜索结果, 共 <%= @result.records.total %> 条
   </div>
 
-  <div class="panel-body">
+  <div class="card-body">
     <% if @result.records.total == 0 %>
       <div class="no-result">没有搜索到任何有关 “<%= params[:q]%>” 的内容</div>
     <% else %>
@@ -16,7 +16,7 @@
     <% end %>
   </div>
 
-  <div class="panel-footer clearfix">
+  <div class="card-footer clearfix">
     <%= paginate @result %>
   </div>
 </div>

@@ -107,21 +107,18 @@ describe ApplicationHelper, type: :helper do
     expect(helper.notice_message).to eq("")
     expect(helper.notice_message.html_safe?).to eq(true)
 
+    close_html = %(<button name="button" type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>)
+
     controller.flash[:notice] = "hello"
-    expect(helper.notice_message).to eq('<div class="alert alert-success"><a class="close" data-dismiss="alert" href="#"><i class="fa fa-close"></i></a>hello</div>')
+    expect(helper.notice_message).to eq(%{<div class="alert alert-success">#{close_html}hello</div>})
     controller.flash[:notice] = nil
 
     controller.flash[:warning] = "hello"
-    expect(helper.notice_message).to eq('<div class="alert alert-warning"><a class="close" data-dismiss="alert" href="#"><i class="fa fa-close"></i></a>hello</div>')
+    expect(helper.notice_message).to eq(%{<div class="alert alert-warning">#{close_html}hello</div>})
     controller.flash[:warning] = nil
 
     controller.flash[:alert] = "hello"
-    expect(helper.notice_message).to eq('<div class="alert alert-danger"><a class="close" data-dismiss="alert" href="#"><i class="fa fa-close"></i></a>hello</div>')
-    controller.flash[:alert] = nil
-
-    controller.flash[:error] = "hello"
-    expect(helper.notice_message).to eq('<div class="alert alert-error"><a class="close" data-dismiss="alert" href="#"><i class="fa fa-close"></i></a>hello</div>')
-    controller.flash[:error] = nil
+    expect(helper.notice_message).to eq(%{<div class="alert alert-danger">#{close_html}hello</div>})
   end
 
   describe "admin?" do
@@ -212,10 +209,10 @@ describe ApplicationHelper, type: :helper do
   describe "render_list" do
     it "should work" do
       html = helper.render_list class: "nav navbar" do |li|
-        li << helper.link_to("foo", "/foo")
-        li << helper.link_to("bar", "/bar")
+        li << helper.link_to("foo", "/foo", class: "nav-link")
+        li << helper.link_to("bar", "/bar", class: "nav-link hide-ios")
       end
-      expect(html).to eq(%(<ul class="nav navbar"><li class=""><a href="/foo">foo</a></li><li class=""><a href="/bar">bar</a></li></ul>))
+      expect(html).to eq(%(<ul class="nav navbar"><li class="nav-item"><a class="nav-link" href="/foo">foo</a></li><li class="nav-item"><a class="nav-link hide-ios" href="/bar">bar</a></li></ul>))
     end
 
     describe "render_list_items" do
@@ -224,7 +221,7 @@ describe ApplicationHelper, type: :helper do
           li << helper.link_to("bar", "/bar")
           li << helper.link_to("foo", "/foo")
         end
-        expect(html).to eq(%(<li class=""><a href="/bar">bar</a></li><li class=""><a href="/foo">foo</a></li>))
+        expect(html).to eq(%(<li class="nav-item"><a href="/bar">bar</a></li><li class="nav-item"><a href="/foo">foo</a></li>))
       end
     end
   end

@@ -13,9 +13,9 @@ window.EmojiModalView = Backbone.View.extend
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <ul class="nav nav-tabs">
           </ul>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>
         <div class="modal-body">
           <div class="tab-content">
@@ -32,7 +32,7 @@ window.EmojiModalView = Backbone.View.extend
     @activeFirstPanel()
 
   activeFirstPanel: ->
-    @.$el.find('.nav-tabs li').first().addClass('active')
+    @.$el.find('.nav-tabs li a').first().addClass('active')
     firstGroupName = @.$el.find('.nav-tabs li a').first().data("group")
     tabPane = @.$el.find("#emoji-group-#{firstGroupName}")
     tabPane.html(@panels[firstGroupName])
@@ -50,8 +50,8 @@ window.EmojiModalView = Backbone.View.extend
     if group.name == 'favorites'
       return false if group.icons.length == 0
     navTab = """
-      <li><a href="#emoji-group-#{group.name}"
-             data-group="#{group.name}" role="tab"
+      <li class="nav-item"><a href="#emoji-group-#{group.name}"
+             data-group="#{group.name}" role="tab" class="nav-link"
              data-toggle="tab">
           <img src="#{@findEmojiUrlByName(group.tabicon)}" class="twemoji" /></a>
       </li>
@@ -94,7 +94,7 @@ window.EmojiModalView = Backbone.View.extend
     @.$el.find('.modal-footer').html(html)
 
   show: ->
-    if $('.emoji-modal').size() == 0
+    if $('.emoji-modal').length == 0
       $('body').append(@.$el)
     @.$el.modal('show')
 

@@ -1,13 +1,19 @@
-<%= simple_form_for([:admin,@reply]) do |f| %>
+<%= form_for [:admin,@reply] do |f| %>
   <%= render 'shared/error_messages', target: @reply %>
-  <fieldset>
-    <legend></legend>
-    <%= f.input :body, as: :text, input_html: { class: "span8", rows: "10"} %>
-    <%= f.input :user_id %>
-    <div class="form-actions">
-      <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving") %>
-      or
-      <%= link_to 'Back', admin_replies_path %>
-    </div>
-  </fieldset>
+
+  <div class="form-group">
+    <%= f.label :body %>
+    <%= f.text_area :body, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :user_id %>
+    <%= f.text_field :user_id, class: "form-control" %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving") %>
+    or
+    <%= link_to 'Back', admin_replies_path %>
+  </div>
 <% end %>

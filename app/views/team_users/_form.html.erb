@@ -1,8 +1,11 @@
-<%= simple_form_for @team_user, url: @team_user.new_record? ? user_team_users_path(@team) : user_team_user_path(@team, @team_user) do |f| %>
+<%= form_for @team_user, url: @team_user.new_record? ? user_team_users_path(@team) : user_team_user_path(@team, @team_user) do |f| %>
   <%= render "shared/error_messages", target: @team_user %>
 
   <% if @team_user.new_record? %>
-    <%= f.input :login %>
+    <div class="form-group">
+      <%= f.label :login %>
+      <%= f.text_field :login, class: "form-control" %>
+    </div>
   <% else %>
     <div class="form-group">
       <div class="media">
@@ -13,9 +16,13 @@
       </div>
     </div>
   <% end %>
-  <%= f.input :role, as: :radio_buttons, collection: TeamUser.roles.keys %>
 
   <div class="form-group">
+    <%= f.label :role %>
+    <%= f.select :role, TeamUser.roles.keys, {}, class: "form-control" %>
+  </div>
+
+  <div class="form-actions">
     <% if @team_user.new_record? %>
       <%= f.submit t("teams.new_team_user"), class: "btn btn-primary btn-block", 'data-disable-with' => t("common.saving") %>
     <% else %>

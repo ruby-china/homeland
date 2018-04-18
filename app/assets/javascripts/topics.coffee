@@ -10,7 +10,7 @@ window.TopicView = Backbone.View.extend
 
   events:
     "click .navbar .topic-title": "scrollPage"
-    "click #replies .reply .btn-reply": "reply"
+    "click .reply .btn-reply": "reply"
     "click a.at_floor": "clickAtFloor"
     "click a.follow": "follow"
     "click a.bookmark": "bookmark"
@@ -297,10 +297,11 @@ window.TopicView = Backbone.View.extend
   nodeSelectorNodeSelected: (e) ->
     el = $(e.currentTarget)
     $("#node-selector").modal('hide')
-    if $('.form input[name="topic[node_id]"]').length > 0
+    $('form input[name="topic[title]"]').focus()
+    if $('form input[name="topic[node_id]"]').length > 0
       e.preventDefault()
       nodeId = el.data('id')
-      $('.form input[name="topic[node_id]"]').val(nodeId)
+      $('form input[name="topic[node_id]"]').val(nodeId)
       $('#node-selector-button').html(el.text())
       return false
     else

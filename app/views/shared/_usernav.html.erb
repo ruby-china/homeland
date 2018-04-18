@@ -1,18 +1,18 @@
- <form class="form-inline" action="/search" method="GET">
-   <input class="form-control mr-auto" name="q" type="text" value="<%= params[:q] %>" placeholder="搜索本站内容" />
- </form>
+<form class="form-inline d-none d-md-flex" action="/search" method="GET">
+ <input class="form-control mr-auto" name="q" type="text" value="<%= params[:q] %>" placeholder="搜索本站内容" />
+</form>
 
-<ul class="nav navbar-nav user-bar">
+<ul class="nav navbar-nav user-bar flex-row ml-md-auto">
   <% if current_user %>
   <%
   badge_class = ""
   badge_class = "new" if unread_notify_count > 0
   %>
   <li class="nav-item notification-count">
-    <a href="<%= main_app.notifications_path %>" class="nav-link <%= badge_class %>  ml-2" title="通知"><i class="fa fa-bell"></i><span class="count"><%= unread_notify_count %></span></a>
+    <a href="<%= main_app.notifications_path %>" class="nav-link <%= badge_class %>" title="通知"><i class="fa fa-bell"></i><span class="count"><%= unread_notify_count %></span></a>
   </li>
   <li class="nav-item dropdown">
-    <a href="#" id="navbar-new-menu" class="nav-link dropdown-toggle ml-2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <a href="#" id="navbar-new-menu" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <i class="fa fa-plus"></i>
     </a>
     <div class="dropdown-menu" aria-labelledby="navbar-new-menu">
@@ -24,12 +24,10 @@
     </div>
   </li>
   <% end %>
-</ul>
 
-<ul class="nav user-bar navbar-nav">
   <% if current_user %>
     <li class="nav-item dropdown dropdown-avatar">
-      <a href="#" class="dropdown-toggle ml-2" id="navbar-user-menu" data-toggle="dropdown" role="button" aria-expanded="false">
+      <a href="#" class="dropdown-toggle nav-link" id="navbar-user-menu" data-toggle="dropdown" role="button" aria-expanded="false">
         <%= user_avatar_tag(current_user, :sm, link: false) %>
       </a>
       <div class="dropdown-menu" aria-labelledby="navbar-user-menu">

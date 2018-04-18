@@ -1,4 +1,4 @@
-#= require jquery3
+#= require jquery2
 #= require popper
 #= require bootstrap
 #= require jquery_ujs

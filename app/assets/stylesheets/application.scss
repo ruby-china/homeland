@@ -10,7 +10,6 @@
 @import "vars";
 @import "bootstrap";
 
-
 @mixin clearfix() {
   &:before,
   &:after {
@@ -88,6 +87,10 @@ body {
         box-shadow: 0 1px 1px rgba(0, 0, 0,.21);
       }
     }
+    .navbar-toggler {
+      border: 0;
+      padding: 0 .25em;
+    }
   }
 
   .navbar-nav .nav-item a.nav-link { color: $primary; }
@@ -110,6 +113,10 @@ body {
   }
 
   .navbar-nav .nav-item.dropdown a { text-decoration: none; }
+
+  .dropdown-avatar {
+    img { width: 24px; height: 24px; }
+  }
 
   .dropdown-menu {
     border-radius: 0;
@@ -406,7 +413,6 @@ img.emoji { width:20px; height:20px; }
 }
 
 @media (max-width: 480px) {
-  body { padding-top: 50px; }
   .container { padding: 0; }
   .card { border-radius: 0; }
   .row {

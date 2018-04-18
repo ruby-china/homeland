@@ -71,34 +71,17 @@
 }
 
 .recent-replies {
-  padding: 0 15px;
   margin-bottom: 0;
   li {
-    &.list-group-item:first-child {
-      border-top: 0;
-    }
-    &.list-group-item:last-child {
-      border-bottom: 0;
-    }
-    &.list-group-item {
-      border-radius: 0 !important;
-      border-left: 0px;
-      border-right: 0px;
-      padding: 10px 0;
-      border-color: #ddd;
-    }
-    &.list-group-item:even {
-      background: #f9f9f9;
-    }
     .title {
       font-size:15px;
-      .info { font-size:12px; color:#bbb; }
+      .info { font-size:14px; color: lighten($secondary, 20%); }
     }
     .body {
-      a { color: #666; }
-      margin-top:6px; color: #666;
-      p { font-size:13px; }
-      img { max-width:680px; }
+      a { color: $primary; }
+      margin-top: 6px; color: $secondary;
+      p { font-size: 14px; }
+      img { max-width: 680px; }
     }
   }
 }

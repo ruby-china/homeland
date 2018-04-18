@@ -15,10 +15,12 @@ module ApplicationHelper
   def notice_message
     flash_messages = []
 
+    close_html = %(<button name="button" type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>)
+
     flash.each do |type, message|
       type = :success if type.to_sym == :notice
       type = :danger  if type.to_sym == :alert
-      text = content_tag(:div, button_tag(raw("<span aria-hidden=\"true\">&times;</span>"), type: "button", class: "close", "data-dismiss" => "alert") + message, class: "alert alert-#{type}")
+      text = content_tag(:div, raw(close_html) + message, class: "alert alert-#{type}")
       flash_messages << text if message
     end
 

@@ -257,36 +257,12 @@ kbd {
   }
 }
 
-.nav-stacked { margin-bottom: 15px; }
-.nav-stacked.nav-pills>li {
-  &:first-child {
-    a { border-radius: 3px 3px 0 0 };
-  }
-  &:last-child {
-    a { border-radius: 0 0 3px 3px };
-  }
-}
 .nav-stacked.nav-pills>li>a {
-  text-align: left;
-  font-size: 14px;
   border-radius: 0px;
-  box-shadow: 0 1px 0px rgba(0, 0, 0, 0.09);
-  padding: 8px 20px;
-  margin-bottom: 0px;
-  margin: 0;
-  background: #fff;
-  color: #666;
 
   i.fa {
     width: 20px;
   }
-}
-.nav-stacked.nav-pills>li>a:hover { color: #555; background-color: #f9f9f9; }
-.nav-stacked.nav-pills>li.active>a,
-.nav-stacked.nav-pills>li.active>a:focus,
-.nav-stacked.nav-pills>li.active>a:hover {
-  color: $blue;
-  background-color: #fff;
 }
 
 /* Modal */

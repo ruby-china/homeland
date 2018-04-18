@@ -1,4 +1,4 @@
-<ul class="list-group recent-replies">
+<ul class="list-group list-group-flush recent-replies">
   <% replies.each do |reply| %>
     <% cache(['users', reply]) do %>
       <% next if reply.topic.blank? %>

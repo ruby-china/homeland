@@ -1,7 +1,7 @@
 <%= form_for [:admin,@comment] do |f| %>
   <%= render "/shared/error_messages", target: @comment %>
   <div class="form-group">
-    <%= f.label %>
+    <%= f.label :body %>
     <%= f.text_area :body, class: "form-control" %>
   </div>
 

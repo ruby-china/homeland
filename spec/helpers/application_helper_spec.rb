@@ -107,21 +107,18 @@ describe ApplicationHelper, type: :helper do
     expect(helper.notice_message).to eq("")
     expect(helper.notice_message.html_safe?).to eq(true)
 
+    close_html = %(<button name="button" type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>)
+
     controller.flash[:notice] = "hello"
-    expect(helper.notice_message).to eq('<div class="alert alert-success"><a class="close" data-dismiss="alert" href="#"><i class="fa fa-close"></i></a>hello</div>')
+    expect(helper.notice_message).to eq(%{<div class="alert alert-success">#{close_html}hello</div>})
     controller.flash[:notice] = nil
 
     controller.flash[:warning] = "hello"
-    expect(helper.notice_message).to eq('<div class="alert alert-warning"><a class="close" data-dismiss="alert" href="#"><i class="fa fa-close"></i></a>hello</div>')
+    expect(helper.notice_message).to eq(%{<div class="alert alert-warning">#{close_html}hello</div>})
     controller.flash[:warning] = nil
 
     controller.flash[:alert] = "hello"
-    expect(helper.notice_message).to eq('<div class="alert alert-danger"><a class="close" data-dismiss="alert" href="#"><i class="fa fa-close"></i></a>hello</div>')
-    controller.flash[:alert] = nil
-
-    controller.flash[:error] = "hello"
-    expect(helper.notice_message).to eq('<div class="alert alert-error"><a class="close" data-dismiss="alert" href="#"><i class="fa fa-close"></i></a>hello</div>')
-    controller.flash[:error] = nil
+    expect(helper.notice_message).to eq(%{<div class="alert alert-danger">#{close_html}hello</div>})
   end
 
   describe "admin?" do

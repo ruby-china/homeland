@@ -252,10 +252,10 @@
         text-decoration: none;
       }
 
-      a:link { background: lighten($primary, 75%); }
-      a:hover { background: lighten($primary, 80%); }
+      a:link { background: #d0e2f8; }
+      a:hover { background: #f0f0f0; }
       a.state-true,
-      a:visited { background: lighten($primary, 80%); }
+      a:visited { background: #f0f0f0; }
     }
   }
 }

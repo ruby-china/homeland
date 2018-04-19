@@ -233,7 +233,7 @@
     }
 
     .info {
-      color: #8f8d8b; font-size: 14px; margin-top: 0;
+      color: #adaaa8; font-size: 14px; margin-top: 0;
       a { color: #797776; text-decoration: underline; }
     }
 
@@ -296,7 +296,7 @@
   }
 
   .info {
-    color: #8f8d8b;
+    color: #adaaa8;
     font-size: 14px;
     a { color: $primary; }
     .node {
@@ -453,9 +453,9 @@
       }
       .markdown {
         margin-top: 10px;
-        font-size: 14px;
+        font-size: 15px;
         p {
-          font-size: 14px;
+          font-size: 15px;
         }
       }
     }
@@ -595,9 +595,10 @@
 .markdown {
   position:relative;
   letter-spacing: .03em;
-  font-size: 15px;
+  font-size: 16px;
   text-overflow: ellipsis;
   word-wrap: break-word;
+    a { color: $blue; }
   img, iframe { max-width: 100%; border: 0; }
   p,
   pre,
@@ -612,7 +613,7 @@
   ol:last-child,
   hr:last-child { margin-bottom:0; }
 
-  p { font-size: 15px; line-height: 26px; }
+  p { font-size: 16px; line-height: 26px; }
   hr { border:2px dashed $gray; border-bottom:0px; margin-left: auto; margin-right: auto; width: 50%; }
   blockquote {
     margin-left: 0 18px 20px 18px;
@@ -621,7 +622,7 @@
     border: 0px;
     quotes: "\201C""\201D""\2018""\2019";
     position: relative;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.45;
     p { display:inline; color: #999; }
     &:before,

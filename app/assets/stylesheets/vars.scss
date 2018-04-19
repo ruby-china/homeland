@@ -1,16 +1,22 @@
-$primary: #222;
+$primary: #404040;
+$default: #e0e0e0;
 $secondary: #666;
 $gray: #F2F2F2;
-$red: #D00D2E;
+$red: #EB5424;
 $yellow: #FEE209;
-$blue: #0E35E0;
+$blue: #2275da;
 $green: #19A302;
 
 $body-bg: #FFF;
 $theme-colors: (
-  "primary": $primary,
+  "primary": $blue,
   "warning": $yellow,
 );
+
+$input-border: $default;
+$input-color-placeholder: $default;
+
+$link-color: $primary;
 
 $colors: (
   "blue": $blue,

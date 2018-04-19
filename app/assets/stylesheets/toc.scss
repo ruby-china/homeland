@@ -10,7 +10,7 @@
     background: #FFF;
     border-radius: 3px;
     padding: 15px;
-    border: 1px solid $primary;
+    border: 1px solid $default;
     width: 300px;
     z-index: 1031;
   }
@@ -22,6 +22,8 @@
     .list {
       padding: 0;
       margin-bottom: 0 !important;
+
+      a { color: $primary !important; }
     }
   }
 }

@@ -62,7 +62,8 @@ module Homeland
                                            "a"   => %w[href rel data-floor target],
                                            "img" => %w[alt src width height] }),
       protocols: {
-        "a" => { "href" => ["http", "https", "mailto", :relative] }
+        "a" => { "href" => ["http", "https", "mailto", :relative] },
+        "img" => { "src" => ["http", "https"] }
       },
       transformers: [EMBED_VIDEO_TRANSFORMER]
     )

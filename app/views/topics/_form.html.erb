@@ -1,6 +1,6 @@
 <%= render 'node_selector', node: @topic.node %>
 
-<%= form_for @topic, remote: true, class: "form", tb: 'edit-topic' do |f| %>
+<%= form_for @topic, remote: true, class: "form", html: { tb: 'edit-topic' } do |f| %>
   <%= render "shared/error_messages", target: @topic %>
   <%= f.hidden_field :node_id %>
 

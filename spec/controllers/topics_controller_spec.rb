@@ -137,6 +137,7 @@ describe TopicsController, type: :controller do
           sign_in user
           get :edit, params: { id: topic.id }
           expect(response).to have_http_status(200)
+          expect(response.body).to include('tb="edit-topic"')
         end
       end
 

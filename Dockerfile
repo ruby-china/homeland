@@ -8,8 +8,7 @@ ENV HOMELAND_VERSION 'master'
 
 RUN useradd ruby -s /bin/bash -m -U &&\
     mkdir -p /var/www &&\
-    cd /var/www &&\
-    bundle config mirror.https://rubygems.org https://gems.ruby-china.org
+    cd /var/www
 ADD . /var/www/homeland
 RUN cd /var/www/homeland && bundle install --deployment &&\
     find /var/www/homeland/vendor/bundle -name tmp -type d -exec rm -rf {} + &&\

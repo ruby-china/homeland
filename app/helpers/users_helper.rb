@@ -67,15 +67,15 @@ module UsersHelper
   def render_user_level_tag(user)
     return "" if user.blank?
     level_class = case user.level
-                  when "admin"   then "label-danger"
-                  when "vip"     then "label-success"
-                  when "hr"      then "label-success"
-                  when "blocked" then "label-warning"
-                  when "newbie"  then "label-default"
+                  when "admin"   then "badge-danger"
+                  when "vip"     then "badge-success"
+                  when "hr"      then "badge-success"
+                  when "blocked" then "badge-warning"
+                  when "newbie"  then "badge-light"
                   else "label-info"
     end
 
-    content_tag(:span, user.level_name, class: "label #{level_class} role")
+    content_tag(:span, user.level_name, class: "badge #{level_class} role")
   end
 
   def block_node_tag(node)

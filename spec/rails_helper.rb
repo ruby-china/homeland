@@ -89,6 +89,11 @@ RSpec.configure do |config|
   config.render_views
 
   config.before(:each) do
+    # Mock Topic::RateLimit
+    allow(Setting).to receive(:topic_create_limit_interval).and_return("")
+    allow(Setting).to receive(:topic_create_hour_limit_count).and_return("")
+
+    # Database cleaner
     DatabaseCleaner.orm = :active_record
     DatabaseCleaner.strategy = :truncation
     DatabaseCleaner.clean

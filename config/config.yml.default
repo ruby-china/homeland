@@ -84,6 +84,8 @@ defaults: &defaults
   blacklist_ips: ""
   reject_newbie_reply_in_the_evening: false
   newbie_limit_time: 86400
+  topic_create_limit_interval: 60
+  topic_create_hour_limit_count: 10
 
 development:
   <<: *defaults

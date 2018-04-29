@@ -32,7 +32,7 @@ class TopicsController < ApplicationController
 
   def node
     @node = Node.find(params[:id])
-    @topics = topics_scope(@node.topics, without_nodes: true).last_actived.page(params[:page])
+    @topics = topics_scope(@node.topics, without_nodes: false).last_actived.page(params[:page])
     @page_title = "#{@node.name} &raquo; #{t('menu.topics')}"
     @page_title = [@node.name, t("menu.topics")].join(" · ")
     render action: "index"

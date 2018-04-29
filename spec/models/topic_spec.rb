@@ -303,7 +303,7 @@ describe Topic, type: :model do
 
   describe "RateLimit" do
     it "should limit by minute" do
-      Setting.topic_create_limit_interval = 1.minute.seconds.to_s
+      allow(Setting).to receive(:topic_create_limit_interval).and_return("60")
       user_id = 11
       t = build(:topic, user_id: user_id)
       assert_equal true, t.save
@@ -317,7 +317,7 @@ describe Topic, type: :model do
       assert_equal ["创建太频繁，请稍后再试"], t.errors&.messages.dig(:base)
 
       Rails.cache.delete("users:#{user_id}:topic-create")
-      Setting.topic_create_limit_interval = ""
+      allow(Setting).to receive(:topic_create_limit_interval).and_return("")
       t = build(:topic, user_id: user_id)
       assert_equal true, t.save
       assert_nil Rails.cache.read("users:#{user_id}:topic-create")
@@ -326,13 +326,13 @@ describe Topic, type: :model do
     it "should limit by hour" do
       user_id = 12
 
-      Setting.topic_create_hour_limit_count = "10"
+      allow(Setting).to receive(:topic_create_hour_limit_count).and_return("10")
       Rails.cache.write("users:#{user_id}:topic-create-by-hour", 10)
       t = build(:topic, user_id: user_id)
       assert_equal false, t.save
       assert_equal ["1 小时内创建话题量不允许超过 10 篇，无法再次发布"], t.errors&.messages.dig(:base)
 
-      Setting.topic_create_hour_limit_count = ""
+      allow(Setting).to receive(:topic_create_hour_limit_count).and_return("0")
       t = build(:topic, user_id: user_id)
       assert_equal true, t.save
     end

@@ -72,7 +72,7 @@ module UsersHelper
                   when "hr"      then "badge-success"
                   when "blocked" then "badge-warning"
                   when "newbie"  then "badge-light"
-                  else "label-info"
+                  else "badge-info"
     end
 
     content_tag(:span, user.level_name, class: "badge #{level_class} role")

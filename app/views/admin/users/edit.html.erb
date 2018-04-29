@@ -5,9 +5,13 @@
 <% if @user.user_type == :user %>
 <div class="toolbar clearfix">
   <span class="pull-right">
+    <%= link_to '删除他的最近 10 篇话题', clean_admin_user_path(@user, type: 'topics'),
+                method: 'delete', class: 'btn btn-warning',
+                data: { confirm: '注意！！！此动作是直接删除，无法恢复的，你确定要删除么？' } %>
+
     <%= link_to '删除他的最近 10 条回帖', clean_admin_user_path(@user, type: 'replies'),
                 method: 'delete', class: 'btn btn-warning',
-                data: { confirm: '注意！！！此动作是直接删除，无法恢复的，你确定要删除他的所有回帖么？' } %>
+                data: { confirm: '注意！！！此动作是直接删除，无法恢复的，你确定要删除么？' } %>
   </span>
 </div>
 <% end %>

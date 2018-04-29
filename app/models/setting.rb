@@ -76,7 +76,7 @@ class Setting < RailsSettings::Base
     end
 
     def topic_create_rate_limit?
-      self.topic_create_rate_limit == 'true'
+      self.topic_create_rate_limit == "true"
     end
   end
 end

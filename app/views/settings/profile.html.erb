@@ -4,7 +4,7 @@
   <div class="col-md-10">
     <div class="card">
       <div class="card-body">
-        <%= form_for @user, url: setting_path, method: :put, enctype:  "multipart/form-data" do |f| %>
+        <%= form_for @user, url: setting_path, method: :put, html: { enctype: "multipart/form-data" } do |f| %>
           <%= render "shared/error_messages", target: @user %>
           <input type="hidden" name="by" value="profile" />
           <% if Setting.has_profile_field? :location %>

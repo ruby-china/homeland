@@ -13,6 +13,7 @@ describe SettingsController, type: :controller do
       expect(response).to have_http_status(200)
       expect(response.body).to include("更新资料")
       expect(response.body).to include("登陆密码")
+      expect(response.body).to include(%(enctype="multipart/form-data"))
 
       allow(Setting).to receive(:sso_enabled?).and_return(true)
       get :show
@@ -22,6 +23,16 @@ describe SettingsController, type: :controller do
     it "should new work with non user" do
       get :show
       expect(response.status).to eq 302
+    end
+  end
+
+  describe ":reword" do
+    it "should work" do
+      sign_in user
+      get :reward
+      expect(response).to have_http_status(200)
+      expect(response.body).to include(%(关于打赏))
+      expect(response.body).to include(%(enctype="multipart/form-data"))
     end
   end
 

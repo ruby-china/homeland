@@ -6,7 +6,7 @@
       <div class="card-body">
         <div class="row">
           <div class="col-md-8">
-            <%= form_for @user, url: setting_path, method: :put, enctype: "multipart/form-data" do |f| %>
+            <%= form_for @user, url: setting_path, method: :put, html: { enctype: "multipart/form-data" } do |f| %>
               <%= render "shared/error_messages", target: @user %>
               <input type="hidden" name="by" value="reward" />
 

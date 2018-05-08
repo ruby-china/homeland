@@ -36,12 +36,14 @@
           <li class="<%= ' active' if action_name == 'popular' %>">
             <a href="<%= main_app.popular_topics_path %>" data-turbolinks-action="replace"><i class="fa fa-diamond"></i> 优质帖子</a>
           </li>
+          <% if !mobile? %>
           <li class="<%= ' active' if action_name == 'no_reply' %>">
             <%= link_to('无人问津', main_app.no_reply_topics_path, data: { 'turbolinks-action': 'replace' }) %>
           </li>
           <li class="<%= ' active' if action_name == 'last_reply' %>">
             <%= link_to('最新回复', main_app.last_reply_topics_path, data: { 'turbolinks-action': 'replace' }) %>
           </li>
+          <% end %>
           <li class="<%= ' active' if action_name == 'last' %>">
             <%= link_to('最新发布', main_app.last_topics_path, data: { 'turbolinks-action': 'replace' }) %>
           </li>

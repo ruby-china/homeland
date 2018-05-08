@@ -99,7 +99,7 @@
   }
   @media (max-width: 480px) {
     .container {
-      padding: 0 5px;
+      padding: 8px;
     }
 
     .filter {
@@ -477,7 +477,9 @@
 
   @media (max-width: 480px) {
     .reply {
-      padding-left: 57px;
+      padding: 10px;
+      margin: 0 -10px;
+      padding-left: 65px;
     }
   }
 }

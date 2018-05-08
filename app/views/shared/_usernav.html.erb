@@ -1,8 +1,8 @@
-<form class="form-inline d-none d-md-flex" action="/search" method="GET">
+<form class="form-inline d-none d-lg-flex mr-3" action="/search" method="GET">
  <input class="form-control mr-auto" name="q" type="text" value="<%= params[:q] %>" placeholder="搜索本站内容" />
 </form>
 
-<ul class="nav navbar-nav user-bar flex-row ml-md-auto">
+<ul class="nav navbar-nav user-bar align-items-center">
   <% if current_user %>
   <%
   badge_class = ""
@@ -15,7 +15,7 @@
     <a href="#" id="navbar-new-menu" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <i class="fa fa-plus"></i>
     </a>
-    <div class="dropdown-menu" aria-labelledby="navbar-new-menu">
+    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-new-menu">
       <%= link_to t("topics.new_topic"), main_app.new_topic_path, class: "dropdown-item" %>
       <% if can?(:create, Team) && Setting.has_module?(:team) %>
         <div class="dropdown-divider"></div>
@@ -30,7 +30,7 @@
       <a href="#" class="dropdown-toggle nav-link" id="navbar-user-menu" data-toggle="dropdown" role="button" aria-expanded="false">
         <%= user_avatar_tag(current_user, :sm, link: false) %>
       </a>
-      <div class="dropdown-menu" aria-labelledby="navbar-user-menu">
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-user-menu">
         <%= link_to current_user.login, main_app.user_path(current_user), class: "dropdown-item" %>
         <div class="dropdown-divider"></div>
         <%= link_to t("menu.edit_account_path"), main_app.setting_path, class: "dropdown-item" %>

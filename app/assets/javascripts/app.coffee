@@ -300,15 +300,15 @@ AppView = Backbone.View.extend
   toggleNavbarFixed: (e) ->
     top = $(window).scrollTop()
     if top >= 50
-      $(".header .navbar").addClass('navbar-fixed-active')
+      $(".header.navbar").addClass('navbar-fixed-active')
     else
-      $(".header .navbar").removeClass('navbar-fixed-active')
+      $(".header.navbar").removeClass('navbar-fixed-active')
 
     return if $(".navbar-topic-title").length == 0
     if top >= 50
-      $(".header .navbar").addClass('fixed-title')
+      $(".header.navbar").addClass('fixed-title')
     else
-      $(".header .navbar").removeClass('fixed-title')
+      $(".header.navbar").removeClass('fixed-title')
 
 
 window.App =

@@ -619,6 +619,7 @@
   font-size: 16px;
   text-overflow: ellipsis;
   word-wrap: break-word;
+  overflow: scroll;
     a { color: $blue; }
   img, iframe { max-width: 100%; border: 0; }
   p,

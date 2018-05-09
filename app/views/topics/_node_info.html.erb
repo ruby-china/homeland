@@ -33,11 +33,11 @@
           <li class="<%= ' active' if action_name == 'index' %>">
             <a href="<%= main_app.topics_path %>" data-turbolinks-action="replace">默认</a>
           </li>
-          <li class="<%= ' active' if action_name == 'popular' %>">
-            <a href="<%= main_app.popular_topics_path %>" data-turbolinks-action="replace"> 优质帖子</a>
-          </li>
           <li class="<%= ' active' if action_name == 'excellent' %>">
-            <a href="<%= main_app.excellent_topics_path %>" data-turbolinks-action="replace"><i class="fa fa-diamond"></i> 精华帖</a>
+            <a href="<%= main_app.excellent_topics_path %>" data-turbolinks-action="replace"><i class="fa fa-diamond"></i>精华帖</a>
+          </li>
+          <li class="<%= ' active' if action_name == 'popular' %>">
+            <a href="<%= main_app.popular_topics_path %>" data-turbolinks-action="replace">优质帖子</a>
           </li>
           <li class="<%= ' active' if action_name == 'no_reply' %>">
             <%= link_to('无人问津', main_app.no_reply_topics_path, data: { 'turbolinks-action': 'replace' }) %>

@@ -72,7 +72,9 @@ body {
 }
 
 .bd-navbar {
-  min-height: 4rem;
+  height: 50px;
+  overflow: hidden;
+  padding: 0;
   background: #FFF;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
   border: 0px;
@@ -83,9 +85,6 @@ body {
 
   &.navbar-fixed-active {
     box-shadow: 0 1px 1px rgba(0, 0, 0,.21);
-
-    .navbar-topic-title  { display: block; }
-    #main-nav-menu { display: none !important; }
   }
 
   .navbar-brand {
@@ -93,7 +92,7 @@ body {
     color: #666 !important;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: bold;
-    margin-left: 0 !important;
+    margin-left: 1em;
     border-bottom: 0px;
     b { color: $blue; }
   }
@@ -197,6 +196,15 @@ body {
     color: #aaa;
     border-color: $default;
     background: #f0f0f0;
+  }
+}
+
+.page-topics {
+  .navbar-fixed-active {
+    .navbar-topic-title  { display: block; }
+    .navbar-topic-title:after {
+      display: block;
+    }
   }
 }
 

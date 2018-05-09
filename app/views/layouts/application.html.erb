@@ -40,8 +40,8 @@
       <div class="navbar-header d-none d-md-flex" id="navbar-header" data-turbolinks-permanent>
         <%= raw Setting.navbar_brand_html %>
       </div>
-      <%= yield :header %>
       <div class="navbar-nav-scroll">
+        <%= yield :header %>
         <%= render "shared/navbar" %>
       </div>
       <div class="ml-auto d-md-flex">

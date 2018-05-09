@@ -49,15 +49,24 @@
     }
     .navbar-topic-title {
       display: none;
-      height: 44px;
+      height: 50px;
+      text-align: left;
       overflow: hidden;
+      position: absolute;
+      background: #FFF;
+      display: none;
+
+      &:after {
+        clear: all;
+        display: block;
+      }
 
       a.topic-title {
         display: inline;
         text-decoration: none;
         overflow: hidden;
         line-height: 0;
-        max-width: 400px;
+        max-width: 0px;
         color: #000;
         &:hover,
         &:active,
@@ -79,7 +88,17 @@
   .navbar {
     .navbar-topic-title {
       a.topic-title {
-        max-width: 780px;
+        max-width: 450px;
+      }
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .navbar {
+    .navbar-topic-title {
+      a.topic-title {
+        max-width: 640px;
       }
     }
   }
@@ -95,11 +114,11 @@
 
 .node-header {
   .container {
-    padding: 0 30px;
+    padding: 5px 30px;
   }
   @media (max-width: 480px) {
     .container {
-      padding: 8px;
+      padding: 5px 8px;
     }
 
     .filter {

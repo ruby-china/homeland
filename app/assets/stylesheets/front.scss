@@ -52,9 +52,11 @@
       height: 50px;
       text-align: left;
       overflow: hidden;
+      top: 0;
       position: absolute;
       background: #FFF;
       display: none;
+      min-width: 400px;
 
       &:after {
         clear: all;

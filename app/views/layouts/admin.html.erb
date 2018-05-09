@@ -9,34 +9,30 @@
 </head>
 <body>
  <div class="header">
-    <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
-      <div class="container">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar-collapse">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="navbar-header">
+    <div class="header navbar navbar-expand flex-md-row bd-navbar">
+      <div class="container d-sm-flex flex-wrap">
+        <div class="navbar-header d-none d-md-flex" id="navbar-header" data-turbolinks-permanent>
           <%= link_to("控制台", main_app.admin_root_path, class: "navbar-brand") %>
         </div>
-        <nav class="collapse navbar-collapse" id="main-navbar-collapse">
-          <ul class="nav navbar-nav">
-            <%= render_list class: "nav navbar-nav" do |li|
-              li << link_to(t("admin.menu.root_path"), main_app.admin_root_path, class: "nav-link")
-              li << link_to(t("admin.menu.users"), main_app.admin_users_path, class: "nav-link")
-              li << link_to(t("admin.menu.sections"), main_app.admin_sections_path, class: "nav-link")
-              li << link_to(t("admin.menu.nodes"), main_app.admin_nodes_path, class: "nav-link")
-              li << link_to(t("admin.menu.topics"), main_app.admin_topics_path, class: "nav-link")
-              li << link_to(t("admin.menu.replies"), main_app.admin_replies_path, class: "nav-link")
-              li << link_to(t("admin.menu.comments"), main_app.admin_comments_path, class: "nav-link")
-              li << link_to(t("admin.menu.photos"), main_app.admin_photos_path, class: "nav-link")
-              li << link_to(t("admin.menu.locations"), main_app.admin_locations_path, class: "nav-link")
-              Homeland.admin_navbar_plugins.each do |plugin|
-                li << link_to(plugin.display_name, plugin.admin_path, class: "nav-link")
-              end
-            end  %>
-          </ul>
-        </nav>
-
-        <%= render "shared/usernav" %>
+        <div class="navbar-nav-scroll">
+          <%= render_list class: "nav navbar-nav" do |li|
+            li << link_to(t("admin.menu.root_path"), main_app.admin_root_path, class: "nav-link")
+            li << link_to(t("admin.menu.users"), main_app.admin_users_path, class: "nav-link")
+            li << link_to(t("admin.menu.sections"), main_app.admin_sections_path, class: "nav-link")
+            li << link_to(t("admin.menu.nodes"), main_app.admin_nodes_path, class: "nav-link")
+            li << link_to(t("admin.menu.topics"), main_app.admin_topics_path, class: "nav-link")
+            li << link_to(t("admin.menu.replies"), main_app.admin_replies_path, class: "nav-link")
+            li << link_to(t("admin.menu.comments"), main_app.admin_comments_path, class: "nav-link")
+            li << link_to(t("admin.menu.photos"), main_app.admin_photos_path, class: "nav-link")
+            li << link_to(t("admin.menu.locations"), main_app.admin_locations_path, class: "nav-link")
+            Homeland.admin_navbar_plugins.each do |plugin|
+              li << link_to(plugin.display_name, plugin.admin_path, class: "nav-link")
+            end
+          end  %>
+        </div>
+        <div class="ml-auto d-md-flex">
+          <%= render "shared/usernav" %>
+        </div>
       </div>
     </div>
   </div>

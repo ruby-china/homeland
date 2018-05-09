@@ -34,6 +34,8 @@ textarea, input[text] {
 
 textarea,
 #preview {
+  overflow: scroll;
+
   &::-webkit-scrollbar {
     width: 12px;
   }

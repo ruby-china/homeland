@@ -3,7 +3,7 @@
 module ApplicationHelper
   def markdown(text)
     return nil if text.blank?
-    Rails.cache.fetch(["markdown", Digest::MD5.hexdigest(text)]) do
+    Rails.cache.fetch(["markdown", "v1", Digest::MD5.hexdigest(text)]) do
       sanitize_markdown(Homeland::Markdown.call(text))
     end
   end

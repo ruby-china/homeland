@@ -87,16 +87,22 @@ describe ApplicationHelper, type: :helper do
     end
 
     describe "img" do
-      it "should work" do
-        html = '<img src="/img/a.jpg" class="emoji" width="100" height="100">'
+      it "should filter bad" do
+        html = '<img src="javascript:alert" class="emoji" width="100" height="100">'
         expect(helper.sanitize_markdown(html)).to eq('<img class="emoji" width="100" height="100">')
       end
 
-      it "should work with url" do
+      it "should work" do
+        html = '<img src="/img/a.jpg" class="emoji" width="100" height="100">'
+        expect(helper.sanitize_markdown(html)).to eq(html)
+
         html = '<img src="http://foo.com/img/a.jpg" class="emoji" width="100" height="100">'
         expect(helper.sanitize_markdown(html)).to eq(html)
 
         html = '<img src="https://foo.com/img/a.jpg" class="emoji" width="100" height="100">'
+        expect(helper.sanitize_markdown(html)).to eq(html)
+
+        html = '<img src="//foo.com/img/a.jpg" class="emoji" width="100" height="100">'
         expect(helper.sanitize_markdown(html)).to eq(html)
       end
 

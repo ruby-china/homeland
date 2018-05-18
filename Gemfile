@@ -74,9 +74,9 @@ gem "cancancan"
 
 # Redis
 gem "hiredis"
-gem "redis"
+gem "redis", "~> 3.3"
 gem "redis-namespace"
-gem "redis-objects"
+gem "redis-objects", "~> 1.3.1"
 
 # Cache
 gem "second_level_cache"

@@ -341,11 +341,11 @@ GEM
       ffi (>= 0.5.0, < 2)
     rdoc (6.0.3)
     redcarpet (3.4.0)
-    redis (4.0.1)
+    redis (3.3.5)
     redis-namespace (1.6.0)
       redis (>= 3.0.4)
-    redis-objects (1.4.0)
-      redis (~> 4.0)
+    redis-objects (1.3.1)
+      redis (~> 3.3)
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
@@ -512,9 +512,9 @@ DEPENDENCIES
   rails-settings-cached
   rails_autolink
   redcarpet
-  redis
+  redis (~> 3.3)
   redis-namespace
-  redis-objects
+  redis-objects (~> 1.3.1)
   rspec-rails
   rubocop (>= 0.49.0)
   ruby-push-notifications

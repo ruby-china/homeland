@@ -211,10 +211,6 @@
 }
 
 .topics {
-  .card-body {
-    padding: 0 1.25rem;
-  }
-
   .no-result {
     padding-bottom: 0;
     margin-bottom: 0;
@@ -229,9 +225,10 @@
   .topic {
     min-height: 68px;
     border-bottom: 1px solid #F0F0F0;
-    padding: 10px 1.25rem;
-    margin: 0 -1.25rem;
+    padding: 10px 15px;
+    margin: 0 -15px;
     vertical-align: top;
+    &:first-child { padding-top: 0;}
     &:last-child { border-bottom: 0px; }
     .avatar { text-align:center; }
     .title {
@@ -254,7 +251,7 @@
     }
 
     .info {
-      color: #adaaa8; font-size: 14px; margin-top: 0;
+      color: #adaaa8; font-size: 13px; margin-top: 0;
       a { color: #797776; text-decoration: underline; }
     }
 
@@ -273,7 +270,7 @@
         text-decoration: none;
       }
 
-      a:link { background: #d0e2f8; }
+      a:link { background: rgba(79, 147, 248, 0.24); }
       a:hover { background: #f0f0f0; }
       a.state-true,
       a:visited { background: #f0f0f0; }
@@ -282,9 +279,15 @@
 }
 
 .topic-detail {
-  margin-bottom: 1.25rem;
+  margin-bottom: 15px;
+
+  .card-body {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
   .card-header {
-    padding: 1.25rem;
+    padding: 15px;
     transition: all .3s;
     h1 {
       margin-top:0;
@@ -297,9 +300,9 @@
 
   .label-awesome {
     font-size: 16px;
-    background: lighten($red, 55%);
-    border-bottom:1px solid lighten($red, 52%);
-    padding: 10px 1.25rem;
+    background: lighten($red, 45%);
+    border-bottom:1px solid lighten($red, 42%);
+    padding: 10px 15px;
     color: $red;
 
     .fa { font-size: 16px; }
@@ -309,7 +312,7 @@
   .label-nopoint {
     font-size: 13px;
     background:#FCF8E3;
-    padding: 3px 1.25rem;
+    padding: 3px 15px;
     border-top: 1px solid #FAEBCC;
     color: #ae938B;
 
@@ -318,15 +321,15 @@
 
   .info {
     color: #adaaa8;
-    font-size: 14px;
+    font-size: 13px;
     a { color: $primary; }
     .node {
       color: $primary;
       font-weight: bold;
     }
-    .user-name { color: $primary; font-size: 15px; }
+    .user-name { color: $primary; font-size: 14px; }
     .team-name {
-      font-size: 15px;
+      font-size: 14px;
       color: $green;
     }
     em { font-style:normal; }
@@ -379,7 +382,7 @@
 }
 
 #replies {
-  margin-bottom: 1.25rem;
+  margin-bottom: 15px;
   .card-body {
     padding-top: 0px;
     padding-bottom: 0px;
@@ -395,14 +398,15 @@
     }
   }
   .reply {
-    margin: 0 -1.25rem;
-    padding: 1.25rem;
+    margin: 0 -15px;
+    padding: 15px;
     position: relative;
     border-bottom: 1px solid #eee;
-    padding-left: 74px;
+    padding-left: 78px;
+
     &.reply-system,
     &.reply-deleted {
-      padding: 10px 1.25rem;
+      padding: 10px 15px;
       font-size: 15px;
       color: #666;
       border-bottom: 1px solid #F0F0F0;
@@ -416,7 +420,7 @@
       .ban-reason { color: #444; border-bottom: 1px dashed #eee; }
     }
     .infos { min-height: 48px; }
-    .avatar { position: absolute; top: 1.25rem; left: 1.25rem; }
+    .avatar { position: absolute; top: 15px; left: 15px; }
     &:last-child {
       border-bottom: 0px;
     }
@@ -430,12 +434,12 @@
 
     .info {
       .name {
-        font-size: 15px;
+        font-size: 14px;
         a { color: $primary; }
       }
       color: #999;
       margin-bottom: 10px;
-      font-size: 14px;
+      font-size: 13px;
 
       .floor { color: #7AA87A; }
       a.time {
@@ -618,10 +622,10 @@
 .markdown {
   position:relative;
   letter-spacing: .03em;
-  font-size: 16px;
+  font-size: 15px;
   text-overflow: ellipsis;
   word-wrap: break-word;
-    a { color: $blue; }
+  a { color: $blue; }
   img, iframe { max-width: 100%; border: 0; }
   p,
   pre,
@@ -636,10 +640,10 @@
   ol:last-child,
   hr:last-child { margin-bottom:0; }
 
-  p { font-size: 16px; line-height: 26px; }
+  p { font-size: 15px; line-height: 26px; }
   hr { border:2px dashed $gray; border-bottom:0px; margin-left: auto; margin-right: auto; width: 50%; }
   blockquote {
-    margin-left: 0 18px 20px 18px;
+    margin-left: 0 15px 15px 15px;
     padding: 0;
     padding-left: 32px;
     border: 0px;
@@ -667,8 +671,8 @@
     border: 0px;
     border-top: 1px solid #f0f0f0;
     border-bottom: 1px solid #f0f0f0;
-    margin: 0 -1.25rem 1.25rem -1.25rem;
-    padding: 10px 1.25rem;
+    margin: 0 -15px 15px -15px;
+    padding: 10px 15px;
     color: #444;
     overflow: auto;
     border-radius: 0px;
@@ -861,8 +865,8 @@ textarea.div-dropzone-focus { border-color: #BBE1C9; background: #fafafa; }
 
 .comments {
   .comment {
-    padding: 1.25rem;
-    margin: 0 -1.25rem;
+    padding: 15px;
+    margin: 0 -15px;
     border-bottom: 1px solid #f0f0f0;
     &:first-child { padding-top: 0; }
     &:last-child { border: 0; padding-bottom: 0;}

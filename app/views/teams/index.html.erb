@@ -4,7 +4,7 @@
   <div id="hot_teams" class="team-list card">
     <div class="card-header">
       <strong><%= t("users.hot_teams") %></strong>
-      <div class="pull-right hidden-xs"><%= t("users.current_have") %> <%= @total_team_count %> <%= t("users.teams_joined") %> <%= Setting.app_name %></div>
+      <div class="pull-right d-none"><%= t("users.current_have") %> <%= @total_team_count %> <%= t("users.teams_joined") %> <%= Setting.app_name %></div>
     </div>
     <div class="card-body">
       <%= render "team_list", teams: @active_teams %>

@@ -83,7 +83,7 @@ module UsersHelper
     return "" if node.blank?
 
     blocked     = current_user.block_node?(node)
-    class_names = "btn btn-default btn-sm button-block-node"
+    class_names = "btn btn-default button-block-node"
     icon        = '<i class="fa fa-eye-slash"></i>'
 
     if blocked

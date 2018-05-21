@@ -14,9 +14,9 @@ window.TOCView = Backbone.View.extend
     markdownEl.prepend """
     <div class="toc-container dropdown pull-right">
       <button data-toggle="dropdown" class="btn btn-default">
-        <i class="fa fa-list"></i> 目录 <span class="caret"></span>
+        <i class="fa fa-list"></i> 目录
       </button>
-      <div class="toc-panel dropdown-menu">
+      <div class="toc-panel dropdown-menu dropdown-menu-right">
         <div class="list-container">
           <ul class="list"></ul>
         </div>

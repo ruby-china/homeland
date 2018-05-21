@@ -45,11 +45,9 @@
         <%= render "shared/navbar" %>
       </div>
       <div class="ml-auto d-md-flex">
-        <form class="navbar-form d-none d-lg-flex form-search active" action="/search" method="GET">
-          <div class="form-group">
-            <input class="form-control" name="q" type="text" value="<%= params[:q] %>" placeholder="搜索本站内容" />
-          </div>
+        <form class="navbar-form d-none d-lg-flex mr-2 form-search active" action="/search" method="GET">
           <i class="fa btn-search fa-search"></i>
+          <input class="form-control" name="q" type="text" value="<%= params[:q] %>" placeholder="搜索本站内容" />
         </form>
         <%= render "shared/usernav" %>
       </div>

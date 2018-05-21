@@ -74,13 +74,26 @@ body {
 }
 
 .bd-navbar {
-  min-height: 50px;
+  height: 50px;
   padding: 0;
   background: #FFF;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
   border: 0px;
   color: $primary;
   z-index: 1030;
+  line-height: 100%;
+
+  .ml-auto {
+    height: 50px;
+  }
+
+  .navbar-nav {
+    padding: 0px;
+    .nav-link {
+      padding: 15px 10px;
+      color: $primary;
+    }
+  }
 
   .navbar-topic-title { display: none; }
 
@@ -121,13 +134,6 @@ body {
     }
   }
 
-  .navbar-nav {
-    .nav-link {
-      padding: 12px 8px;
-      color: $primary;
-    }
-  }
-
   #main-nav-menu {
     &.navbar-nav .nav-item a.nav-link  {
       color: $primary;
@@ -147,8 +153,7 @@ body {
   .form-search {
     font-size: 14px;
     position: relative;
-    margin-top: 13px;
-    margin-right: 10px;
+    padding: 15px 0;
 
     .fa {
       color: #333;
@@ -157,7 +162,7 @@ body {
     .fa-search{
       cursor: pointer;
       position: absolute;
-      top: 5px;
+      top: 18px;
       left: 8px;
       transition: all .3s;
     }
@@ -186,24 +191,32 @@ body {
     vertical-align: text-top;
   }
 
-  .dropdown-avatar {
-    line-height: 100%;
-    display: inline-block;
-    img { width: 24px; height: 24px; }
+  .dropdown.show {
+    background: rgba(0, 0, 0, 0.04);
   }
 
   .dropdown-menu {
-    font-size: .875rem;
+    border-radius: 0;
+    border: 0px;
+    border-left: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.10);
+    .dropdown-item {
+      padding: 0.4rem 1.5rem;
+    }
+  }
+
+  .dropdown-avatar {
+    line-height: 100%;
+    display: inline-block;
+    .nav-link {
+      padding: 7px 10px;
+    }
   }
 
   .dropdown-item.active {
     font-weight: 500;
     color: $gray-900;
-    background-color: transparent;
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='%23292b2c' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: .4rem .6rem;
-    background-size: .75rem .75rem;
+    background-color: rgba(0, 0, 0, 0.04);
   }
 
   .user-bar {
@@ -332,7 +345,10 @@ kbd {
   border-top: 0;
 
   .card-header,
-  .card-footer,
+  .card-footer {
+    padding: 6px 15px;
+  }
+
   .card-body,
   .list-group-item { padding: 10px 15px; }
 

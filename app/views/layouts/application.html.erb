@@ -36,7 +36,7 @@
 </head>
 <body class="page-<%= controller_name %><%= ' infinite-scroll' if turbolinks_app? %>" data-controller-name="<%= controller_name %>">
   <div class="header navbar navbar-expand flex-md-row bd-navbar">
-    <div class="container d-sm-flex flex-wrap">
+    <div class="container d-sm-flex">
       <div class="navbar-header d-none d-md-flex" id="navbar-header" data-turbolinks-permanent>
         <%= raw Setting.navbar_brand_html %>
       </div>
@@ -45,6 +45,12 @@
         <%= render "shared/navbar" %>
       </div>
       <div class="ml-auto d-md-flex">
+        <form class="navbar-form d-none d-lg-flex form-search active" action="/search" method="GET">
+          <div class="form-group">
+            <input class="form-control" name="q" type="text" value="<%= params[:q] %>" placeholder="搜索本站内容" />
+          </div>
+          <i class="fa btn-search fa-search"></i>
+        </form>
         <%= render "shared/usernav" %>
       </div>
     </div>
@@ -58,7 +64,7 @@
     <%= content_for?(:main) ? yield(:main) : yield %>
   </div>
 
-  <% if not mobile? %>
+  <% if !mobile? %>
   <footer class="footer" id="footer" data-turbolinks-permanent>
     <div class="container">
       <%= raw Setting.footer_html %>

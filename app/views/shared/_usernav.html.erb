@@ -1,8 +1,4 @@
-<form class="navbar-search form-inline d-none d-lg-flex mr-3" action="/search" method="GET">
- <input class="form-control mr-auto" name="q" type="text" value="<%= params[:q] %>" placeholder="搜索本站内容" />
-</form>
-
-<ul class="nav navbar-nav user-bar align-items-center">
+<ul class="nav navbar-nav user-bar align-items-center justify-content-end">
   <% if current_user %>
   <%
   badge_class = ""

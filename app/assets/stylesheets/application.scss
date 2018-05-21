@@ -69,15 +69,15 @@ body {
   background: #e5e5e5;
   color: $primary;
   font-family: Helvetica, Arial, "PingFang SC", "Noto Sans", Roboto, "Microsoft Yahei", sans-serif;
-  font-size: 15px;
+  font-size: 14px;
   letter-spacing: .03em;
 }
 
 .bd-navbar {
-  height: 50px;
+  min-height: 50px;
   padding: 0;
   background: #FFF;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.03);
   border: 0px;
   color: $primary;
   z-index: 1030;
@@ -85,7 +85,7 @@ body {
   .navbar-topic-title { display: none; }
 
   &.navbar-fixed-active {
-    box-shadow: 0 1px 1px rgba(0, 0, 0,.21);
+    box-shadow: 0 1px 1px rgba(0, 0, 0,.07);
   }
 
   .navbar-brand {
@@ -104,13 +104,9 @@ body {
 
     .navbar-nav-scroll {
       max-width: 100%;
-      height: 2.5rem;
-      margin-top: .25rem;
       overflow: hidden;
-      font-size: .875rem;
 
       .navbar-nav {
-        padding-bottom: 2rem;
         overflow-x: auto;
         white-space: nowrap;
         -webkit-overflow-scrolling: touch;
@@ -127,8 +123,7 @@ body {
 
   .navbar-nav {
     .nav-link {
-      padding-right: .5rem;
-      padding-left: .5rem;
+      padding: 12px 8px;
       color: $primary;
     }
   }
@@ -136,6 +131,7 @@ body {
   #main-nav-menu {
     &.navbar-nav .nav-item a.nav-link  {
       color: $primary;
+      font-size: 15px;
       border-top: 3px solid #fff;
       border-bottom: 3px solid #FFF;
       transition: all .2s ease-in-out;
@@ -145,6 +141,41 @@ body {
       a.active,
       a.active:focus,
       a.active:hover { color: $red; background: transparent; border-bottom-color: $red; }
+    }
+  }
+
+  .form-search {
+    font-size: 14px;
+    position: relative;
+    margin-top: 13px;
+    margin-right: 10px;
+
+    .fa {
+      color: #333;
+      &:hover { color: #666; }
+    }
+    .fa-search{
+      cursor: pointer;
+      position: absolute;
+      top: 5px;
+      left: 8px;
+      transition: all .3s;
+    }
+    .form-control {
+      font-size: 12px;
+      border:none;
+      cursor: text;
+      width: 150px;
+      height: 100%;
+      padding: 6px 1px 4px 20px;
+      margin-left: 4px;
+      background: transparent;
+      transition: all .3s;
+      box-sizing: border-box;
+      color: #333;
+      &::-webkit-input-placeholder {
+        color: #aaa;
+      }
     }
   }
 
@@ -173,6 +204,11 @@ body {
     background-repeat: no-repeat;
     background-position: .4rem .6rem;
     background-size: .75rem .75rem;
+  }
+
+  .user-bar {
+    background: #FFF;
+    min-width: 140px;
   }
 }
 
@@ -295,14 +331,18 @@ kbd {
   margin-bottom: 15px;
   border-top: 0;
 
+  .card-header,
+  .card-footer,
+  .card-body,
+  .list-group-item { padding: 10px 15px; }
+
   .card-header {
     background: #fafafa;
-    padding: 10px 15px;
     border-bottom-color: #eee;
     color: #777;
   }
+
   .card-footer {
-    padding: 10px 15px;
     border-top-color: #eee;
     background: #fafafa;
   }
@@ -335,7 +375,7 @@ kbd {
     padding: 10px 15px;
     .modal-title {
       line-height: 100%;
-      font-size: 16px;
+      font-size: 15px;
     }
     .close {
       font-size: 1.2rem;

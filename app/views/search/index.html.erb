@@ -2,7 +2,12 @@
 
 <div class="search-results card">
   <div class="card-header clearfix">
-    关于 “<%= params[:q] %>” 的搜索结果, 共 <%= @result.records.total %> 条
+    <form class="form" action="/search" method="GET">
+     <input class="form-control mb-2" name="q" type="text" value="<%= params[:q] %>" placeholder="搜索本站内容" />
+     <button type="submit" class="btn btn-block btn-sm btn-default">搜索</button>
+    </form>
+
+    <div class="text-mutted">关于 “<%= params[:q] %>” 的搜索结果, 共 <%= @result.records.total %> 条</div>
   </div>
 
   <div class="card-body">

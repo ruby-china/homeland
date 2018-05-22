@@ -230,7 +230,10 @@
     vertical-align: top;
     &:first-child { padding-top: 0;}
     &:last-child { border-bottom: 0px; }
-    .avatar { text-align:center; }
+    .avatar {
+      padding-top: 6px;
+      margin-right: 10px;
+    }
     .title {
       font-size: 15px;
       margin-bottom: 0;
@@ -403,7 +406,7 @@
     padding: 15px;
     position: relative;
     border-bottom: 1px solid #eee;
-    padding-left: 78px;
+    padding-left: 65px;
 
     &.reply-system,
     &.reply-deleted {
@@ -421,7 +424,9 @@
       .ban-reason { color: #444; border-bottom: 1px dashed #eee; }
     }
     .infos { min-height: 48px; }
-    .avatar { position: absolute; top: 15px; left: 15px; }
+    .avatar {
+      position: absolute; top: 17px; left: 15px;
+    }
     &:last-child {
       border-bottom: 0px;
     }

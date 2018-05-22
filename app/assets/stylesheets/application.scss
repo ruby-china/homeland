@@ -90,7 +90,7 @@ body {
   .navbar-nav {
     padding: 0px;
     .nav-link {
-      padding: 15px 10px;
+      padding: 15px 15px;
       color: $primary;
     }
   }
@@ -144,6 +144,7 @@ body {
     }
     &.navbar-nav .nav-item a.nav-link:active { background-color: $gray; border-bottom-color: #999; }
     &.navbar-nav .nav-item {
+      a:hover,
       a.active,
       a.active:focus,
       a.active:hover { color: $red; background: transparent; border-bottom-color: $red; }
@@ -167,11 +168,12 @@ body {
       transition: all .3s;
     }
     .form-control {
-      font-size: 12px;
+      font-size: 14px;
       border:none;
       cursor: text;
       width: 150px;
       height: 100%;
+      line-height: 100%;
       padding: 6px 1px 4px 20px;
       margin-left: 4px;
       background: transparent;
@@ -209,8 +211,9 @@ body {
     line-height: 100%;
     display: inline-block;
     .nav-link {
-      padding: 7px 10px;
+      padding: 10px 5px;
     }
+    img.avatar-32 { width: 20px; height: 20px; }
   }
 
   .dropdown-item.active {
@@ -221,14 +224,20 @@ body {
 
   .user-bar {
     background: #FFF;
-    min-width: 140px;
+    min-width: 150px;
+  }
+
+  @include media-breakpoint-down(md) {
+    .user-bar {
+      .nav-link { padding-left: 5px; padding-right: 5px; }
+    }
   }
 }
 
 #main { margin-top: 20px; }
 
 .sub-navbar {
-  background: #f3f3f3;
+  background: #f9f9f9;
   box-shadow: 0 1px 0px rgba(0, 0, 0, 0.02);
 
   a { color: $blue; }
@@ -343,6 +352,8 @@ kbd {
 .card {
   margin-bottom: 15px;
   border-top: 0;
+  box-shadow: 0 0 0;
+  border-color: #e5e6e9 #dfe0e4 #d0d1d5;
 
   .card-header,
   .card-footer {
@@ -381,6 +392,7 @@ kbd {
 
 /* Modal */
 .modal {
+  top: 50px;
   .modal-content {
     border: 0px;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15), 0px 0px 1px 1px rgba(0, 0, 0, 0.05);
@@ -388,10 +400,11 @@ kbd {
     p { margin-bottom: 5px; }
   }
   .modal-header {
-    padding: 10px 15px;
+    padding: 8px 15px;
+    border-bottom: 0px;
     .modal-title {
       line-height: 100%;
-      font-size: 15px;
+      font-size: 14px;
     }
     .close {
       font-size: 1.2rem;
@@ -454,11 +467,11 @@ kbd {
   .media-object { border-radius: 120px; }
 }
 .avatar-16 { width: 16px; height: 16px; border-radius: 120px; }
-.avatar-32 { width: 32px; height: 32px; border-radius: 120px; }
-.avatar-48 { width: 48px; height: 48px; border-radius: 120px; }
+.avatar-32 { width: 28px; height: 28px; border-radius: 120px; }
+.avatar-48 { width: 40px; height: 40px; border-radius: 120px; }
 .avatar-96 { width: 96px; height: 96px; border-radius: 120px; }
 @media (max-width: 480px) {
-  .avatar-48 { width: 32px; height: 32px; }
+  .avatar-48 { width: 28px; height: 28px; }
 }
 
 .uname { color:#666; }

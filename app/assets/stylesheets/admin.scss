@@ -13,6 +13,15 @@ body, p, ol, ul, td {
   line-height: 18px;
 }
 
+.nav-item .nav-link {
+  font-size: 14px;
+  padding-left: 10px !important;
+  padding-right: 10px  !important;
+  &.active {
+    color: $red;
+  }
+}
+
 .navbar-search { display: none !important; }
 
 .card-body h1,

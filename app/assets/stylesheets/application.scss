@@ -144,6 +144,7 @@ body {
     }
     &.navbar-nav .nav-item a.nav-link:active { background-color: $gray; border-bottom-color: #999; }
     &.navbar-nav .nav-item {
+      a:hover,
       a.active,
       a.active:focus,
       a.active:hover { color: $red; background: transparent; border-bottom-color: $red; }
@@ -167,7 +168,7 @@ body {
       transition: all .3s;
     }
     .form-control {
-      font-size: 12px;
+      font-size: 14px;
       border:none;
       cursor: text;
       width: 150px;
@@ -209,8 +210,9 @@ body {
     line-height: 100%;
     display: inline-block;
     .nav-link {
-      padding: 7px 10px;
+      padding: 10px 5px;
     }
+    img.avatar-32 { width: 20px; height: 20px; }
   }
 
   .dropdown-item.active {
@@ -221,7 +223,13 @@ body {
 
   .user-bar {
     background: #FFF;
-    min-width: 140px;
+    min-width: 150px;
+  }
+
+  @include media-breakpoint-up(md) {
+    .user-bar {
+      .nav-link { padding-left: 5px; padding-right: 5px; }
+    }
   }
 }
 
@@ -454,11 +462,11 @@ kbd {
   .media-object { border-radius: 120px; }
 }
 .avatar-16 { width: 16px; height: 16px; border-radius: 120px; }
-.avatar-32 { width: 32px; height: 32px; border-radius: 120px; }
-.avatar-48 { width: 48px; height: 48px; border-radius: 120px; }
+.avatar-32 { width: 28px; height: 28px; border-radius: 120px; }
+.avatar-48 { width: 40px; height: 40px; border-radius: 120px; }
 .avatar-96 { width: 96px; height: 96px; border-radius: 120px; }
 @media (max-width: 480px) {
-  .avatar-48 { width: 32px; height: 32px; }
+  .avatar-48 { width: 28px; height: 28px; }
 }
 
 .uname { color:#666; }

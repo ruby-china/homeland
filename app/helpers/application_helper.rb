@@ -55,7 +55,7 @@ module ApplicationHelper
   end
 
   def title_tag(str)
-    content_for :title, raw("#{str} · #{Setting.app_name}")
+    content_for :title, h("#{str} · #{Setting.app_name}")
   end
 
   MOBILE_USER_AGENTS = "palm|blackberry|nokia|phone|midp|mobi|symbian|chtml|ericsson|minimo|" \

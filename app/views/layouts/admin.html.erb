@@ -5,12 +5,11 @@
   <%= stylesheet_link_tag "admin" %>
   <%= javascript_include_tag "app" %>
   <%= csrf_meta_tag %>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 </head>
 <body>
  <div class="header">
     <div class="header navbar navbar-expand flex-md-row bd-navbar">
-      <div class="container d-sm-flex flex-wrap">
+      <div class="container d-sm-flex">
         <div class="navbar-header d-none d-md-flex" id="navbar-header" data-turbolinks-permanent>
           <%= link_to("控制台", main_app.admin_root_path, class: "navbar-brand") %>
         </div>

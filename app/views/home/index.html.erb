@@ -5,7 +5,7 @@
 <% end %>
 
 <div class="home_suggest_topics card">
-  <div class="card-header d-none">社区精华帖</div>
+  <div class="card-header hidden-mobile">社区精华帖</div>
   <div class="card-body topics row">
     <% cache(["home_suggest_topics", @excellent_topics]) do %>
     <%
@@ -20,7 +20,7 @@
     </div>
     <% end %>
   </div>
-  <div class="card-footer d-none">
+  <div class="card-footer hidden-mobile">
     <%= link_to "查看更多精华帖...", excellent_topics_path %>
   </div>
 </div>

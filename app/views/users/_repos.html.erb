@@ -1,5 +1,5 @@
 <% if Setting.has_module? :github %>
-<div class="card" id="user_github_repos">
+<div class="card hidden-mobile" id="user_github_repos">
   <% if not user.github.blank? %>
     <div class="card-header">GitHub Public Repos</div>
     <ul class="list-group list-group-flush">

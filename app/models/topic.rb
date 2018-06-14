@@ -30,7 +30,7 @@ class Topic < ApplicationRecord
   scope :last_reply,         -> { where("last_reply_id IS NOT NULL").order(last_reply_id: :desc) }
   scope :no_reply,           -> { where(replies_count: 0) }
   scope :popular,            -> { where("likes_count > 5") }
-  scope :excellent,          -> { where("excellent >= 1") }
+  scope :without_ban,        -> { where.not(grade: :ban) }
   scope :without_hide_nodes, -> { exclude_column_ids("node_id", Topic.topic_index_hide_node_ids) }
 
   scope :without_node_ids,   ->(ids) { exclude_column_ids("node_id", ids) }

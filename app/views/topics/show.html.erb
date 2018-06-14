@@ -30,7 +30,7 @@
           <i class="fa fa-diamond awesome"></i> 本帖已被设为精华帖！
           <% if admin? %>
           <div class="pull-right">
-            <%= link_to icon_tag("close"), action_topic_path(@topic.id, type: 'unexcellent'), data: { method: "post", remote: true } %>
+            <%= link_to icon_tag("close"), action_topic_path(@topic.id, type: 'normal'), method: :post, remote: true %>
           </div>
           <% end %>
         </div>

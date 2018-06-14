@@ -11,7 +11,7 @@ describe "API V3", "topics", type: :request do
 
     it "should be ok for all types" do
       create(:topic, title: "This is a normal topic", replies_count: 1)
-      create(:topic, title: "This is an excellent topic", excellent: 1, replies_count: 1)
+      create(:topic, title: "This is an excellent topic", grade: :excellent, replies_count: 1)
       create(:topic, title: "This is a no_reply topic", replies_count: 0)
       create(:topic, title: "This is a popular topic", replies_count: 1, likes_count: 10)
 
@@ -95,9 +95,10 @@ describe "API V3", "topics", type: :request do
     let(:node1) { create(:node) }
 
     let(:t1) { create(:topic, node_id: node.id, title: "This is a normal topic", replies_count: 1) }
-    let(:t2) { create(:topic, node_id: node.id, title: "This is an excellent topic", excellent: 1, replies_count: 1) }
+    let(:t2) { create(:topic, node_id: node.id, title: "This is an excellent topic", grade: :excellent, replies_count: 1) }
     let(:t3) { create(:topic, node_id: node.id, title: "This is a no_reply topic", replies_count: 0) }
     let(:t4) { create(:topic, node_id: node.id, title: "This is a popular topic", replies_count: 1, likes_count: 10) }
+    let(:t5) { create(:topic, node_id: node.id, title: "This is an excellent topic", grade: :ban, replies_count: 1) }
 
     it "should return a list of topics that belong to the specified node" do
       other_topics = [create(:topic, node_id: node1.id), create(:topic, node_id: node1.id)]
@@ -291,6 +292,8 @@ describe "API V3", "topics", type: :request do
       expect(json["meta"]).to include("liked", "favorited", "followed")
       expect(json["topic"]["title"]).to eq("i want to know")
       expect(json["topic"]["hits"]).to eq(old_hits + 1)
+      expect(json["topic"]["excellent"]).to eq(0)
+      expect(json["topic"]["grade"]).to eq("normal")
       expect(json["topic"]["user"]).to include("id", "name", "login", "avatar_url")
       expect(json["topic"]["abilities"]).to include("update", "destroy")
       expect(json["topic"]["abilities"]["update"]).to eq false
@@ -298,6 +301,7 @@ describe "API V3", "topics", type: :request do
       expect(json["topic"]["abilities"]["ban"]).to eq false
       expect(json["topic"]["abilities"]["excellent"]).to eq false
       expect(json["topic"]["abilities"]["unexcellent"]).to eq false
+      expect(json["topic"]["abilities"]["normal"]).to eq false
       expect(json["topic"]["abilities"]["close"]).to eq false
       expect(json["topic"]["abilities"]["open"]).to eq false
     end
@@ -325,6 +329,7 @@ describe "API V3", "topics", type: :request do
       expect(json["topic"]["abilities"]["ban"]).to eq true
       expect(json["topic"]["abilities"]["excellent"]).to eq true
       expect(json["topic"]["abilities"]["unexcellent"]).to eq true
+      expect(json["topic"]["abilities"]["normal"]).to eq true
     end
 
     it "should work when id record found" do
@@ -487,7 +492,7 @@ describe "API V3", "topics", type: :request do
   end
 
   describe "POST /api/v3/topics/:id/action.json" do
-    %w[excellent unexcellent ban].each do |action|
+    %w[excellent normal unexcellent ban].each do |action|
       describe action.to_s do
         it "should work with admin" do
           login_admin!

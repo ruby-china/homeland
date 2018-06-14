@@ -51,6 +51,13 @@ describe TopicsController, type: :controller do
     end
   end
 
+  describe ":ban" do
+    it "should have a excellent action" do
+      get :ban
+      expect(response).to have_http_status(200)
+    end
+  end
+
   describe ":favorites" do
     it "should have a recent action" do
       sign_in user
@@ -258,34 +265,34 @@ describe TopicsController, type: :controller do
     end
   end
 
-  describe "#suggest" do
+  describe "#excellent" do
     it "should not allow user suggest" do
       sign_in user
       post :action, params: { id: topic, type: "excellent" }
-      expect(topic.reload.excellent).to eq(0)
+      assert_equal false, topic.reload.excellent?
     end
 
     it "should not allow user suggest by admin" do
       sign_in admin
       post :action, params: { id: topic, type: "excellent" }
-      expect(topic.reload.excellent).to eq(1)
+      assert_equal true, topic.reload.excellent?
     end
   end
 
-  describe "#unsuggest" do
+  describe "#normal" do
     context "suggested topic" do
-      let!(:topic) { create(:topic, excellent: 1) }
+      let!(:topic) { create(:topic, grade: :excellent) }
 
       it "should not allow user suggest" do
         sign_in user
-        post :action, params: { id: topic, type: "unexcellent" }
-        expect(topic.reload.excellent).to eq(1)
+        post :action, params: { id: topic, type: "normal" }
+        assert_equal true, topic.reload.excellent?
       end
 
       it "should not allow user suggest by admin" do
         sign_in admin
-        post :action, params: { id: topic, type: "unexcellent" }
-        expect(topic.reload.excellent).to eq(0)
+        post :action, params: { id: topic, type: "normal" }
+        assert_equal false, topic.reload.excellent?
       end
     end
   end
@@ -294,14 +301,14 @@ describe TopicsController, type: :controller do
     it "should not allow user ban" do
       sign_in user
       post :action, params: { id: topic, type: "ban" }
-      expect(topic.reload.node_id).not_to eq(Node.no_point.id)
+      assert_equal false, topic.reload.ban?
     end
 
     it "should allow by admin" do
       sign_in admin
       post :action, params: { id: topic, type: "ban" }
       expect(response.status).to eq(302)
-      expect(topic.reload.node_id).to eq(Node.no_point.id)
+      assert_equal true, topic.reload.ban?
 
       expect do
         post :action, params: { id: topic, type: "ban", reason: "Foobar" }
@@ -323,7 +330,7 @@ describe TopicsController, type: :controller do
     it "should not allow user close" do
       sign_in user
       post :action, params: { id: topic, type: "close" }
-      expect(topic.reload.node_id).not_to eq(Node.no_point.id)
+      assert_equal false, topic.reload.ban?
     end
 
     it "should not allow user suggest by admin" do
@@ -338,7 +345,7 @@ describe TopicsController, type: :controller do
     it "should not allow user close" do
       sign_in user
       post :action, params: { id: topic, type: "open" }
-      expect(topic.reload.node_id).not_to eq(Node.no_point.id)
+      assert_equal false, topic.reload.ban?
     end
 
     it "should not allow user suggest by admin" do

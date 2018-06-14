@@ -31,11 +31,14 @@ if topic
   json.cache! ["v1.1", topic, defined?(detail)] do
     json.(topic, :id, :title, :created_at, :updated_at, :replied_at, :replies_count,
           :node_name, :node_id, :last_reply_user_id, :last_reply_user_login,
-          :excellent, :likes_count, :suggested_at, :closed_at)
+          :grade, :likes_count, :suggested_at, :closed_at)
     json.deleted topic.deleted_at.present?
     json.user do
       json.partial! "user", user: topic.user
     end
+
+    # 老的设计兼容，返回 1 或 0
+    json.excellent topic.excellent? ? 1 : 0
 
     if defined?(detail)
       json.(topic, :body, :body_html)

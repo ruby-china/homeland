@@ -37,7 +37,7 @@ module Api
           @topics = @node.topics
         end
 
-        @topics = @topics.fields_for_list.includes(:user).send(scope_method_by_type)
+        @topics = @topics.without_ban.fields_for_list.includes(:user).send(scope_method_by_type)
         if %w[no_reply popular].index(params[:type])
           @topics = @topics.last_actived
         elsif params[:type] == "excellent"
@@ -204,7 +204,7 @@ module Api
         render json: { ok: 1 }
       end
 
-      # 屏蔽话题，移到 NoPoint 节点 (Admin only)
+      # 屏蔽话题 (Admin only)
       # [废弃] 请用 POST /api/v3/topics/:id/action
       #
       # POST /api/v3/topics/:id/ban
@@ -218,7 +218,7 @@ module Api
       # 注意类型有不同的权限，详见 GET /api/v3/topics/:id 返回的 abilities
       #
       # POST /api/v3/topics/:id/action?type=:type
-      # @param type [String] 动作类型, ban - 屏蔽话题, excellent - 加精华, unexcellent - 去掉精华, close - 关闭回复, open - 开启回复
+      # @param type [String] 动作类型, ban - 屏蔽话题, normal - 取消屏蔽, excellent - 加精华, unexcellent - 取消精华, close - 关闭回复, open - 开启回复
       def action
         raise AccessDenied unless can?(params[:type].to_sym, @topic)
 
@@ -227,6 +227,8 @@ module Api
           @topic.excellent!
         when "unexcellent"
           @topic.unexcellent!
+        when "normal"
+          @topic.normal!
         when "ban"
           @topic.ban!
         when "close"

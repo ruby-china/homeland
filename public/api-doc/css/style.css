@@ -55,14 +55,30 @@ body {
 }
 
 @media (max-width: 920px) {
-  .nav_wrap { display: none; }
+  .nav_wrap { width: 100%; top: 0; right: 0; overflow: visible; position: absolute; }
+  #resizer { display: none; }
+  #nav {
+    z-index: 9999;
+    background: #fff;
+    display: none;
+    position: absolute;
+    top: 40px;
+    right: 12px;
+    width: 500px;
+    max-width: 80%;
+    height: 80%;
+    overflow-y: scroll;
+    border: 1px solid #999;
+    border-collapse: collapse;
+    box-shadow: -7px 5px 25px #aaa;
+    border-radius: 2px;
+  }
 }
 
 @media (min-width: 920px) {
   body { height: 100%; overflow: hidden; }
   #main { height: 100%; overflow: auto; }
   #search { display: none; }
-  #search_frame { display: none; }
 }
 
 #main img { max-width: 100%; }
@@ -108,6 +124,9 @@ h2 small a {
 }
 .rdoc-term { padding-right: 25px; font-weight: bold; }
 .rdoc-list p { margin: 0; padding: 0; margin-bottom: 4px; }
+.summary_desc pre.code .object_link a, .docstring pre.code .object_link a {
+  padding: 0px; background: inherit; color: inherit; border-radius: inherit;
+}
 
 /* style for <table> */
 #filecontents table, .docstring table { border-collapse: collapse; }
@@ -385,23 +404,6 @@ ul.fullTree li:last-child { padding-bottom: 0; }
 li.r1 { background: #f0f0f0; }
 li.r2 { background: #fafafa; }
 
-#search_frame {
-  z-index: 9999;
-  background: #fff;
-  display: none;
-  position: absolute;
-  top: 40px;
-  right: 12px;
-  width: 500px;
-  max-width: 80%;
-  height: 80%;
-  overflow-y: scroll;
-  border: 1px solid #999;
-  border-collapse: collapse;
-  box-shadow: -7px 5px 25px #aaa;
-  border-radius: 2px;
-}
-
 #content ul.summary li.deprecated .summary_signature a,
 #content ul.summary li.deprecated .summary_signature a:visited { text-decoration: line-through; font-style: italic; }
 
@@ -459,7 +461,10 @@ pre.code .info.file { color: #555; }
 pre.code .val { color: #036A07; }
 pre.code .tstring_content,
 pre.code .heredoc_beg, pre.code .heredoc_end,
-pre.code .qwords_beg, pre.code .qwords_end,
+pre.code .qwords_beg, pre.code .qwords_end, pre.code .qwords_sep,
+pre.code .words_beg, pre.code .words_end, pre.code .words_sep,
+pre.code .qsymbols_beg, pre.code .qsymbols_end, pre.code .qsymbols_sep,
+pre.code .symbols_beg, pre.code .symbols_end, pre.code .symbols_sep,
 pre.code .tstring, pre.code .dstring { color: #036A07; }
 pre.code .fid, pre.code .rubyid_new, pre.code .rubyid_to_s,
 pre.code .rubyid_to_sym, pre.code .rubyid_to_f,
@@ -479,3 +484,16 @@ pre.code .rubyid_backref,
 pre.code .rubyid_nth_ref { color: #6D79DE; }
 pre.code .regexp, .dregexp { color: #036A07; }
 pre.code a { border-bottom: 1px dotted #bbf; }
+/* inline code */
+p > code {
+	padding: 1px 3px 1px 3px;
+	border: 1px solid #E1E1E8;
+	background: #F7F7F9;
+	border-radius: 4px;
+}
+
+/* Color fix for links */
+#content .summary_desc pre.code .id > .object_link a, /* identifier */
+#content .docstring pre.code .id > .object_link a { color: #0085FF; }
+#content .summary_desc pre.code .const > .object_link a, /* constant */
+#content .docstring pre.code .const > .object_link a { color: #585CF6; }

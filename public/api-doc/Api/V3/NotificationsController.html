@@ -28,7 +28,7 @@
   </head>
   <body>
     <div class="nav_wrap">
-      <iframe id="nav" src="../../class_list.html"></iframe>
+      <iframe id="nav" src="../../class_list.html?1"></iframe>
       <div id="resizer"></div>
     </div>
 
@@ -59,8 +59,6 @@
         <div class="clear"></div>
       </div>
 
-      <iframe id="search_frame" src="../../class_list.html"></iframe>
-
       <div id="content"><h1>Class: Api::V3::NotificationsController
   
   
@@ -76,7 +74,7 @@
         <ul class="fullTree">
           <li>Object</li>
           
-            <li class="next">ActionController::API</li>
+            <li class="next">ActionController::Base</li>
           
             <li class="next"><span class='object_link'><a href="ApplicationController.html" title="Api::V3::ApplicationController (class)">ApplicationController</a></span></li>
           
@@ -253,8 +251,11 @@
   
   
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="ApplicationController.html" title="Api::V3::ApplicationController (class)">ApplicationController</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="ApplicationController.html#admin%3F-instance_method" title="Api::V3::ApplicationController#admin? (method)">#admin?</a></span>, <span class='object_link'><a href="ApplicationController.html#can%3F-instance_method" title="Api::V3::ApplicationController#can? (method)">#can?</a></span>, <span class='object_link'><a href="ApplicationController.html#current_ability-instance_method" title="Api::V3::ApplicationController#current_ability (method)">#current_ability</a></span>, <span class='object_link'><a href="ApplicationController.html#current_user-instance_method" title="Api::V3::ApplicationController#current_user (method)">#current_user</a></span>, <span class='object_link'><a href="ApplicationController.html#error%21-instance_method" title="Api::V3::ApplicationController#error! (method)">#error!</a></span>, <span class='object_link'><a href="ApplicationController.html#error_404%21-instance_method" title="Api::V3::ApplicationController#error_404! (method)">#error_404!</a></span>, <span class='object_link'><a href="ApplicationController.html#optional%21-instance_method" title="Api::V3::ApplicationController#optional! (method)">#optional!</a></span>, <span class='object_link'><a href="ApplicationController.html#requires%21-instance_method" title="Api::V3::ApplicationController#requires! (method)">#requires!</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="ApplicationController.html#can%3F-instance_method" title="Api::V3::ApplicationController#can? (method)">#can?</a></span>, <span class='object_link'><a href="ApplicationController.html#current_ability-instance_method" title="Api::V3::ApplicationController#current_ability (method)">#current_ability</a></span>, <span class='object_link'><a href="ApplicationController.html#current_user-instance_method" title="Api::V3::ApplicationController#current_user (method)">#current_user</a></span>, <span class='object_link'><a href="ApplicationController.html#error!-instance_method" title="Api::V3::ApplicationController#error! (method)">#error!</a></span>, <span class='object_link'><a href="ApplicationController.html#error_404!-instance_method" title="Api::V3::ApplicationController#error_404! (method)">#error_404!</a></span>, <span class='object_link'><a href="ApplicationController.html#meta-instance_method" title="Api::V3::ApplicationController#meta (method)">#meta</a></span>, <span class='object_link'><a href="ApplicationController.html#optional!-instance_method" title="Api::V3::ApplicationController#optional! (method)">#optional!</a></span>, <span class='object_link'><a href="ApplicationController.html#requires!-instance_method" title="Api::V3::ApplicationController#requires! (method)">#requires!</a></span></p>
 
+  
+  
+  
   
 
   <div id="instance_method_details" class="method_details_list">
@@ -356,7 +357,7 @@
       <div class="method_details ">
   <h3 class="signature " id="index-instance_method">
   
-    #<strong>index</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="../../NotificationSerializer.html" title="NotificationSerializer (class)">NotificationSerializer</a></span>&gt;</tt> 
+    #<strong>index</strong>  &#x21d2; <tt>Array&lt;NotificationSerializer&gt;</tt> 
   
 
   
@@ -416,7 +417,7 @@
     <li>
       
       
-        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../../NotificationSerializer.html" title="NotificationSerializer (class)">NotificationSerializer</a></span>&gt;</tt>)</span>
+        <span class='type'>(<tt>Array&lt;NotificationSerializer&gt;</tt>)</span>
       
       
       
@@ -430,8 +431,6 @@
       <pre class="lines">
 
 
-13
-14
 15
 16
 17
@@ -442,17 +441,15 @@
 22</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/notifications_controller.rb', line 13</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/notifications_controller.rb', line 15</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_index'>index</span>
   <span class='id identifier rubyid_optional!'>optional!</span> <span class='symbol'>:offset</span><span class='comma'>,</span> <span class='label'>default:</span> <span class='int'>0</span>
   <span class='id identifier rubyid_optional!'>optional!</span> <span class='symbol'>:limit</span><span class='comma'>,</span> <span class='label'>default:</span> <span class='int'>20</span><span class='comma'>,</span> <span class='label'>values:</span> <span class='int'>1</span><span class='op'>..</span><span class='int'>150</span>
 
-  <span class='ivar'>@notifications</span> <span class='op'>=</span> <span class='const'>Notification</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>user_id:</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_order'>order</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>id desc</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+  <span class='ivar'>@notifications</span> <span class='op'>=</span> <span class='const'>Notification</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>user_id:</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_order'>order</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>id desc</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
                                <span class='period'>.</span><span class='id identifier rubyid_offset'>offset</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:offset</span><span class='rbracket'>]</span><span class='rparen'>)</span>
                                <span class='period'>.</span><span class='id identifier rubyid_limit'>limit</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:limit</span><span class='rbracket'>]</span><span class='rparen'>)</span>
-
-  <span class='id identifier rubyid_render'>render</span> <span class='label'>json:</span> <span class='ivar'>@notifications</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -589,9 +586,9 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Oct 20 19:35:17 2016 by
+  Generated on Thu Jun 14 19:16:10 2018 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.5 (ruby-2.3.1).
+  0.9.12 (ruby-2.5.1).
 </div>
 
     </div>

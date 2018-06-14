@@ -34,6 +34,13 @@ module Topics
       render_index("recent")
     end
 
+    # GET /topics/ban
+    def ban
+      @topics = Topic.ban.recent.page(params[:page])
+      render_index("recent")
+    end
+
+    # GET /topics/excellent
     def excellent
       @topics = topics_scope.excellent.recent.page(params[:page])
       render_index("excellent")
@@ -47,8 +54,9 @@ module Topics
       end
 
       def topics_scope(base_scope = Topic, without_nodes: true)
-        scope = base_scope.fields_for_list
+        scope = base_scope.without_ban.fields_for_list
         scope = scope.without_hide_nodes if without_nodes
+
         if current_user
           scope = scope.without_nodes(current_user.block_node_ids) if without_nodes
           scope = scope.without_users(current_user.block_user_ids)

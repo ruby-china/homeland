@@ -55,7 +55,7 @@ function searchFrameButtons() {
   });
   window.addEventListener('message', function(e) {
     if (e.data === 'navEscape') {
-      $('#search_frame').slideUp(100);
+      $('#nav').slideUp(100);
       $('#search a').removeClass('active inactive');
       $(window).focus();
     }
@@ -63,7 +63,7 @@ function searchFrameButtons() {
 
   $(window).resize(function() {
     if ($('#search:visible').length === 0) {
-      $('#search_frame').slideUp(100);
+      $('#nav').removeAttr('style');
       $('#search a').removeClass('active inactive');
       $(window).focus();
     }
@@ -71,7 +71,7 @@ function searchFrameButtons() {
 }
 
 function toggleSearchFrame(id, link) {
-  var frame = $('#search_frame');
+  var frame = $('#nav');
   $('#search a').removeClass('active').addClass('inactive');
   if (frame.attr('src') === link && frame.css('display') !== "none") {
     frame.slideUp(100);
@@ -224,7 +224,12 @@ function navExpander() {
 }
 
 function mainFocus() {
-  $('#main')[0].focus();
+  var hash = window.location.hash;
+  if (hash !== '' && $(hash)[0]) {
+    $(hash)[0].scrollIntoView();
+  }
+
+  setTimeout(function() { $('#main').focus(); }, 10);
 }
 
 $(document).ready(function() {

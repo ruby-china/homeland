@@ -28,7 +28,7 @@
   </head>
   <body>
     <div class="nav_wrap">
-      <iframe id="nav" src="../../class_list.html"></iframe>
+      <iframe id="nav" src="../../class_list.html?1"></iframe>
       <div id="resizer"></div>
     </div>
 
@@ -59,8 +59,6 @@
         <div class="clear"></div>
       </div>
 
-      <iframe id="search_frame" src="../../class_list.html"></iframe>
-
       <div id="content"><h1>Class: Api::V3::ApplicationController
   <span class="abstract note title">Abstract</span>
   
@@ -71,12 +69,12 @@
   <dl>
     <dt>Inherits:</dt>
     <dd>
-      <span class="inheritName">ActionController::API</span>
+      <span class="inheritName">ActionController::Base</span>
       
         <ul class="fullTree">
           <li>Object</li>
           
-            <li class="next">ActionController::API</li>
+            <li class="next">ActionController::Base</li>
           
             <li class="next">Api::V3::ApplicationController</li>
           
@@ -90,6 +88,11 @@
   
   
   
+  
+  <dl>
+      <dt>Includes:</dt>
+      <dd>ActionController::Caching, ActionView::Helpers::OutputSafetyHelper, ApplicationHelper</dd>
+  </dl>
   
   
 
@@ -109,6 +112,8 @@
   <strong>This class is abstract.</strong>
   <div class='inline'></div>
 </div>
+
+<p>FIXME: change to ActionController::API after jbuilder fix for Rails 5.2</p>
 
 
   </div>
@@ -144,28 +149,6 @@
     </h2>
 
     <ul class="summary">
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#admin%3F-instance_method" title="#admin? (instance method)">#<strong>admin?</strong>  &#x21d2; Boolean </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
       
         <li class="public ">
   <span class="summary_signature">
@@ -236,7 +219,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#error%21-instance_method" title="#error! (instance method)">#<strong>error!</strong>(data, status_code = 400)  &#x21d2; Object </a>
+      <a href="#error!-instance_method" title="#error! (instance method)">#<strong>error!</strong>(data, status_code = 400)  &#x21d2; Object </a>
     
 
     
@@ -258,7 +241,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#error_404%21-instance_method" title="#error_404! (instance method)">#<strong>error_404!</strong>  &#x21d2; Object </a>
+      <a href="#error_404!-instance_method" title="#error_404! (instance method)">#<strong>error_404!</strong>  &#x21d2; Object </a>
     
 
     
@@ -280,7 +263,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#optional%21-instance_method" title="#optional! (instance method)">#<strong>optional!</strong>(name, opts = {})  &#x21d2; Object </a>
+      <a href="#meta-instance_method" title="#meta (instance method)">#<strong>meta</strong>  &#x21d2; Object </a>
     
 
     
@@ -302,7 +285,29 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#requires%21-instance_method" title="#requires! (instance method)">#<strong>requires!</strong>(name, opts = {})  &#x21d2; Object </a>
+      <a href="#optional!-instance_method" title="#optional! (instance method)">#<strong>optional!</strong>(name, opts = {})  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#requires!-instance_method" title="#requires! (instance method)">#<strong>requires!</strong>(name, opts = {})  &#x21d2; Object </a>
     
 
     
@@ -326,67 +331,16 @@
 
 
   
+  
+  
+  
 
   <div id="instance_method_details" class="method_details_list">
     <h2>Instance Method Details</h2>
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="admin?-instance_method">
-  
-    #<strong>admin?</strong>  &#x21d2; <tt>Boolean</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Boolean</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-84
-85
-86
-87</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/application_controller.rb', line 84</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_admin?'>admin?</span>
-  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_blank?'>blank?</span>
-  <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_admin?'>admin?</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="can?-instance_method">
+  <h3 class="signature first" id="can?-instance_method">
   
     #<strong>can?</strong>(*args)  &#x21d2; <tt>Boolean</tt> 
   
@@ -422,12 +376,12 @@
       <pre class="lines">
 
 
-80
-81
-82</pre>
+91
+92
+93</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/application_controller.rb', line 80</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/application_controller.rb', line 91</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_can?'>can?</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_current_ability'>current_ability</span><span class='period'>.</span><span class='id identifier rubyid_can?'>can?</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
@@ -452,12 +406,12 @@
       <pre class="lines">
 
 
-76
-77
-78</pre>
+87
+88
+89</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/application_controller.rb', line 76</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/application_controller.rb', line 87</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_current_ability'>current_ability</span>
   <span class='ivar'>@current_ability</span> <span class='op'>||=</span> <span class='const'>Ability</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_current_user'>current_user</span><span class='rparen'>)</span>
@@ -482,12 +436,12 @@
       <pre class="lines">
 
 
-72
-73
-74</pre>
+83
+84
+85</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/application_controller.rb', line 72</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/application_controller.rb', line 83</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_current_user'>current_user</span>
   <span class='ivar'>@current_user</span> <span class='op'>||=</span> <span class='const'>User</span><span class='period'>.</span><span class='id identifier rubyid_find_by_id'>find_by_id</span><span class='lparen'>(</span><span class='id identifier rubyid_doorkeeper_token'>doorkeeper_token</span><span class='period'>.</span><span class='id identifier rubyid_resource_owner_id'>resource_owner_id</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_doorkeeper_token'>doorkeeper_token</span>
@@ -512,12 +466,12 @@
       <pre class="lines">
 
 
-64
-65
-66</pre>
+75
+76
+77</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/application_controller.rb', line 64</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/application_controller.rb', line 75</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_error!'>error!</span><span class='lparen'>(</span><span class='id identifier rubyid_data'>data</span><span class='comma'>,</span> <span class='id identifier rubyid_status_code'>status_code</span> <span class='op'>=</span> <span class='int'>400</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_render'>render</span> <span class='label'>json:</span> <span class='id identifier rubyid_data'>data</span><span class='comma'>,</span> <span class='label'>status:</span> <span class='id identifier rubyid_status_code'>status_code</span>
@@ -542,15 +496,45 @@
       <pre class="lines">
 
 
-68
-69
-70</pre>
+79
+80
+81</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/application_controller.rb', line 68</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/application_controller.rb', line 79</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_error_404!'>error_404!</span>
-  <span class='id identifier rubyid_error!'>error!</span><span class='lparen'>(</span><span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>error</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Page not found</span><span class='tstring_end'>&#39;</span></span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='int'>404</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_error!'>error!</span><span class='lparen'>(</span><span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>error</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Page not found</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='int'>404</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="meta-instance_method">
+  
+    #<strong>meta</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+95
+96
+97</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/application_controller.rb', line 95</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_meta'>meta</span>
+  <span class='ivar'>@meta</span> <span class='op'>||</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -572,33 +556,33 @@
       <pre class="lines">
 
 
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
 60
 61
-62</pre>
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/application_controller.rb', line 49</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/application_controller.rb', line 60</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_optional!'>optional!</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_opts'>opts</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
-  <span class='kw'>if</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:require</span><span class='rbracket'>]</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_has_key?'>has_key?</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:require</span><span class='rbracket'>]</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_key?'>key?</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
     <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ActionController</span><span class='op'>::</span><span class='const'>ParameterMissing</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 
-  <span class='kw'>if</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:values</span><span class='rbracket'>]</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_has_key?'>has_key?</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:values</span><span class='rbracket'>]</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_key?'>key?</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
     <span class='id identifier rubyid_values'>values</span> <span class='op'>=</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:values</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_a'>to_a</span>
     <span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_values'>values</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='id identifier rubyid_name'>name</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_values'>values</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='id identifier rubyid_name'>name</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ParameterValueNotAllowed</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:values</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="ApplicationController/ParameterValueNotAllowed.html" title="Api::V3::ApplicationController::ParameterValueNotAllowed (class)">ParameterValueNotAllowed</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="ApplicationController/ParameterValueNotAllowed.html#initialize-instance_method" title="Api::V3::ApplicationController::ParameterValueNotAllowed#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:values</span><span class='rbracket'>]</span><span class='rparen'>)</span>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
 
@@ -624,13 +608,13 @@
       <pre class="lines">
 
 
-44
-45
-46
-47</pre>
+55
+56
+57
+58</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/application_controller.rb', line 44</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/api/v3/application_controller.rb', line 55</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_requires!'>requires!</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_opts'>opts</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:require</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>true</span>
@@ -646,9 +630,9 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Oct 20 19:35:16 2016 by
+  Generated on Thu Jun 14 19:16:10 2018 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.5 (ruby-2.3.1).
+  0.9.12 (ruby-2.5.1).
 </div>
 
     </div>

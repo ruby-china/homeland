@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_03_16_130855) do
+ActiveRecord::Schema.define(version: 2018_06_14_093642) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -294,7 +295,7 @@ ActiveRecord::Schema.define(version: 2018_03_16_130855) do
     t.integer "last_active_mark"
     t.boolean "lock_node", default: false
     t.datetime "suggested_at"
-    t.integer "excellent", default: 0
+    t.integer "grade", default: 0
     t.datetime "replied_at"
     t.integer "replies_count", default: 0, null: false
     t.integer "likes_count", default: 0
@@ -305,7 +306,7 @@ ActiveRecord::Schema.define(version: 2018_03_16_130855) do
     t.datetime "closed_at"
     t.integer "team_id"
     t.index ["deleted_at"], name: "index_topics_on_deleted_at"
-    t.index ["excellent"], name: "index_topics_on_excellent"
+    t.index ["grade"], name: "index_topics_on_grade"
     t.index ["last_active_mark"], name: "index_topics_on_last_active_mark"
     t.index ["last_reply_id"], name: "index_topics_on_last_reply_id"
     t.index ["likes_count"], name: "index_topics_on_likes_count"

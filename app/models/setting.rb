@@ -9,6 +9,10 @@ class Setting < RailsSettings::Base
 
   # keys that allow update in admin
   KEYS_IN_ADMIN = %w[
+    app_name
+    default_locale
+    auto_locale
+    admin_emails
     custom_head_html
     navbar_html
     navbar_brand_html
@@ -28,7 +32,6 @@ class Setting < RailsSettings::Base
     tips
     apns_pem
     blacklist_ips
-    admin_emails
     ban_reasons
     topic_create_limit_interval
     topic_create_hour_limit_count
@@ -75,8 +78,20 @@ class Setting < RailsSettings::Base
       self.sso["enable_provider"] == true
     end
 
+    def reject_newbie_reply_in_the_evening?
+      self[:reject_newbie_reply_in_the_evening] == "true"
+    end
+
     def topic_create_rate_limit?
-      self.topic_create_rate_limit == "true"
+      self[:topic_create_rate_limit] == "true"
+    end
+
+    def default_locale
+      self[:default_locale] || "zh-CN"
+    end
+
+    def auto_locale?
+      self[:auto_locale] == "true"
     end
   end
 end

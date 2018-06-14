@@ -154,7 +154,7 @@ class ApplicationController < ActionController::Base
     end
 
     def http_head_locale
-      return nil if Setting.auto_locale == false
+      return nil if !Setting.auto_locale?
       http_accept_language.language_region_compatible_from(I18n.available_locales)
     end
 end

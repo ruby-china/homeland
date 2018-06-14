@@ -118,13 +118,12 @@ describe Ability, type: :model do
   end
 
   context "Newbie users" do
+    before { allow(Setting).to receive(:newbie_limit_time).and_return("100000") }
     let(:newbie) { create :newbie }
     let(:ability) { Ability.new(newbie) }
 
     context "Topic" do
       it { is_expected.not_to be_able_to(:create, Topic) }
-      it { is_expected.not_to be_able_to(:suggest, Topic) }
-      it { is_expected.not_to be_able_to(:unsuggest, Topic) }
     end
 
     context "Reply" do

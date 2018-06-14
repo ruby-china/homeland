@@ -12,17 +12,6 @@ describe Node, type: :model do
     end
   end
 
-  describe "Builtin nodes" do
-    describe ".no_point" do
-      it "should work" do
-        expect(Node.no_point).to be_a(Node)
-        expect(Node.no_point.new_record?).to eq false
-        expect(Node.no_point.name).to eq "NoPoint"
-        expect(Node.no_point.id).to eq 61
-      end
-    end
-  end
-
   describe "CacheVersion update" do
     let(:old) { 1.minutes.ago }
 

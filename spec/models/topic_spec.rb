@@ -82,7 +82,7 @@ describe Topic, type: :model do
 
   describe "#excellent" do
     it "should suggest a topic as excellent" do
-      topic.excellent = 1
+      topic.excellent!
       topic.save
       expect(Topic.excellent).to include(topic)
     end
@@ -211,19 +211,16 @@ describe Topic, type: :model do
     let!(:t) { create(:topic, user: user) }
 
     it "should ban! and lock topic" do
-      expect(Topic).to receive(:notify_topic_node_changed).with(t.id, Node.no_point.id)
       t.ban!
       t.reload
-      expect(t.node_id).to eq Node.no_point.id
-      expect(t.lock_node).to eq true
+      expect(t.ban?).to eq true
     end
 
     it "should ban! with reason" do
       allow(User).to receive(:current).and_return(user)
       t.ban!(reason: "Block this topic")
       t.reload
-      expect(t.node_id).to eq Node.no_point.id
-      expect(t.lock_node).to eq true
+      expect(t.ban?).to eq true
       r = t.replies.last
       expect(r.action).to eq "ban"
       expect(r.body).to eq "Block this topic"
@@ -260,11 +257,11 @@ describe Topic, type: :model do
       expect do
         t.excellent!
       end.to change(Reply.where(action: "excellent", user: user), :count).by(1)
-      expect(t.excellent).to eq 1
+      expect(t.excellent?).to eq true
       expect do
         t.unexcellent!
       end.to change(Reply.where(action: "unexcellent", user: user), :count).by(1)
-      expect(t.excellent).to eq 0
+      expect(t.excellent?).to eq false
     end
   end
 

@@ -134,7 +134,7 @@ describe Reply, type: :model do
 
         topic = create :topic, user: user
         reply = create :reply, topic: topic, user: replyer
-        create :reply, action: "nopoint", topic: topic, user: replyer
+        create :reply, action: "ban", topic: topic, user: replyer
 
         followers.each do |f|
           expect(f.notifications.unread.where(notify_type: "topic_reply").count).to eq 1

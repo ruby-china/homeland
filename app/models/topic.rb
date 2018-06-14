@@ -7,8 +7,6 @@ class Topic < ApplicationRecord
   # 临时存储检测用户是否读过的结果
   attr_accessor :read_state, :admin_editing
 
-  enum grade: { ban: -1, normal: 0, excellent: 1 }
-
   belongs_to :user, inverse_of: :topics, counter_cache: true, optional: true
   belongs_to :team, counter_cache: true, optional: true
   belongs_to :node, counter_cache: true, optional: true
@@ -32,6 +30,7 @@ class Topic < ApplicationRecord
   scope :last_reply,         -> { where("last_reply_id IS NOT NULL").order(last_reply_id: :desc) }
   scope :no_reply,           -> { where(replies_count: 0) }
   scope :popular,            -> { where("likes_count > 5") }
+  scope :without_ban,        -> { where.not(grade: :ban) }
   scope :without_hide_nodes, -> { exclude_column_ids("node_id", Topic.topic_index_hide_node_ids) }
 
   scope :without_node_ids,   ->(ids) { exclude_column_ids("node_id", ids) }

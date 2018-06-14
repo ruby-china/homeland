@@ -18,7 +18,7 @@ class Section < ApplicationRecord
   end
 
   def sorted_nodes
-    nodes.where.not(id: Node.no_point.id).sorted
+    nodes.where.sorted
   end
 
   def self.default

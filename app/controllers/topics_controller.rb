@@ -6,11 +6,8 @@ class TopicsController < ApplicationController
   before_action :authenticate_user!, only: %i[new edit create update destroy
                                               favorite unfavorite follow unfollow
                                               action favorites]
-  load_and_authorize_resource only: %i[new edit create update destroy
-                                       favorite unfavorite follow unfollow]
-
-  before_action :set_topic, only: %i[ban edit update destroy follow
-                                     unfollow action]
+  load_and_authorize_resource only: %i[new edit create update destroy favorite unfavorite follow unfollow]
+  before_action :set_topic, only: %i[edit update destroy follow unfollow action]
 
   def index
     @suggest_topics = []
@@ -26,7 +23,7 @@ class TopicsController < ApplicationController
   end
 
   def feed
-    @topics = Topic.recent.without_hide_nodes.includes(:node, :user, :last_reply_user).limit(20)
+    @topics = Topic.recent.without_ban.without_hide_nodes.includes(:node, :user, :last_reply_user).limit(20)
     render layout: false if stale?(@topics)
   end
 
@@ -139,13 +136,13 @@ class TopicsController < ApplicationController
     when "excellent"
       @topic.excellent!
       redirect_to @topic, notice: "加精成功。"
-    when "unexcellent"
-      @topic.unexcellent!
-      redirect_to @topic, notice: "加精已经取消。"
+    when "normal"
+      @topic.normal!
+      redirect_to @topic, notice: "话题已恢复到普通评级。"
     when "ban"
       params[:reason_text] ||= params[:reason] || ""
       @topic.ban!(reason: params[:reason_text].strip)
-      redirect_to @topic, notice: "已转移到 NoPoint 节点。"
+      redirect_to @topic, notice: "话题已放进屏蔽栏目。"
     when "close"
       @topic.close!
       redirect_to @topic, notice: "话题已关闭，将不再接受任何新的回复。"
@@ -153,10 +150,6 @@ class TopicsController < ApplicationController
       @topic.open!
       redirect_to @topic, notice: "话题已重启开启。"
     end
-  end
-
-  def ban
-    authorize! :ban, @topic
   end
 
   private

@@ -23,11 +23,6 @@ class Node < ApplicationRecord
     self.create(id: id, name: name, summary: name, section: Section.default)
   end
 
-  # 内建 [NoPoint] 节点
-  def self.no_point
-    @no_point ||= self.find_builtin_node(61, "NoPoint")
-  end
-
   # 是否 Summary 过多需要折叠
   def collapse_summary?
     @collapse_summary ||= self.summary_html.scan(/\<p\>|\<ul\>/).size > 2

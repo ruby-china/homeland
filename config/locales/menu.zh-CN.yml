@@ -129,6 +129,7 @@
     blacklist_ips: "黑名单 IP 列表，将会直接拦截请求（一行一个）"
     newbie_limit_time: "新注册用户（新手）限制期，单位秒（0 不限制），在新手期不能创建新话题，仅能回帖"
     ban_reasons: "屏蔽原因，将会在屏蔽话题的时候作为选项（一行一个）"
+    ban_reason_html: "屏蔽原因详细描述，用于在被屏蔽的话题后面给做补充提示（HTML 格式编写）"
     topic_create_limit_interval: "话题创建频率限制，间隔多久（单位: 秒）"
     topic_create_hour_limit_count: "1 小时内，创建话题的数量限制（单位：篇）"
   pagination:

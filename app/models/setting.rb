@@ -56,6 +56,7 @@ class Setting < RailsSettings::Base
     tips
     apns_pem
     blacklist_ips
+    ban_reason_html
     ban_reasons
     topic_create_limit_interval
     topic_create_hour_limit_count
@@ -69,6 +70,7 @@ class Setting < RailsSettings::Base
   field :topic_create_rate_limit, default: "false", type: :boolean
   field :admin_emails, default: "admin@admin.com", type: :array
   field :ban_reasons, default: "标题或正文描述不清楚", type: :array, separator: "\n"
+  field :ban_reason_html, default: "此贴因内容原因不符合要求，被管理员屏蔽，请根据管理员给出的原因进行调整"
   field :modules, default: "all", type: :array
   field :profile_fields, default: "all", type: :array
 

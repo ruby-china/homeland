@@ -2,7 +2,7 @@
 <div class="alert alert-warning alert-block">
   <h5 class="title">此贴已暂时被屏蔽!</h5>
   <div class="markdown">
-    <%= markdown @topic.node.summary %>
+    <%= raw Setting.ban_reason_html %>
   </div>
 </div>
 <% end %>

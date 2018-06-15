@@ -56,6 +56,12 @@ describe Setting, type: :model do
     end
   end
 
+  describe "ban_reason_html" do
+    it "should work" do
+      expect(Setting.ban_reason_html).to eq "此贴因内容原因不符合要求，被管理员屏蔽，请根据管理员给出的原因进行调整"
+    end
+  end
+
   describe "protocol" do
     it "should work" do
       expect(Setting.protocol).to eq "http"

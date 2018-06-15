@@ -123,9 +123,10 @@ describe TopicsController, type: :controller do
       end
 
       it "should not allow access from newbie user" do
+        allow(Setting).to receive(:newbie_limit_time).and_return("100000")
         sign_in newbie
         get :new
-        expect(response).not_to have_http_status(200)
+        expect(response.status).not_to eq 200
       end
     end
   end

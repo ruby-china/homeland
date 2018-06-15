@@ -105,10 +105,13 @@
     recent_node_topics_description: "%{name} 社区 %{node_name} 节点最新发帖."
     recent_node_topics_title: "%{name} 社区 %{node_name} 节点"
   setting:
+    app_name: "网站名称"
     newbie_notices: "新手提示信息（支持 HTML）"
     admin_emails: "管理员 Email，在此名单的将有管理员权限（一行一个）"
     reject_newbie_reply_in_the_evening: "禁止新手在晚上回帖"
     node_ids_hide_in_topics_index: "要在论坛首页列表隐藏的节点,以逗号隔开"
+    default_locale: "默认语言 可选值: [zh-CN, en]"
+    auto_locale: "是否自动根据用户浏览器语言来切换显示语言 [true | false]"
     custom_head_html: "自定 HTML head 区域的内容"
     site_index_html: "酷站列表首页头的 HTML"
     navbar_brand_html: "导航栏 Logo"

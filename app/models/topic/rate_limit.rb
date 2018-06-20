@@ -39,7 +39,8 @@ class Topic
           Rails.cache.write(_rate_limit_key, 1, expires_in: limit_interval)
         end
 
-        Rails.cache.increment(_rate_limit_hour_key, 1, expires_in: 1.hour) || Rails.cache.write(_rate_limit_hour_key, 1, expires_in: 1.hour)
+        count = Rails.cache.read(_rate_limit_hour_key) || 0
+        Rails.cache.write(_rate_limit_hour_key, count + 1, expires_in: 1.hour)
       end
   end
 end

@@ -323,6 +323,14 @@ describe Topic, type: :model do
     it "should limit by hour" do
       user_id = 12
 
+      create(:topic, user_id: user_id)
+      count = Rails.cache.read("users:#{user_id}:topic-create-by-hour")
+      assert_equal 1, count
+
+      create(:topic, user_id: user_id)
+      count = Rails.cache.read("users:#{user_id}:topic-create-by-hour")
+      assert_equal 2, count
+
       allow(Setting).to receive(:topic_create_hour_limit_count).and_return("10")
       Rails.cache.write("users:#{user_id}:topic-create-by-hour", 10)
       t = build(:topic, user_id: user_id)

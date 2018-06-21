@@ -299,31 +299,47 @@ describe TopicsController, type: :controller do
   end
 
   describe "#ban" do
-    it "should not allow user ban" do
-      sign_in user
-      post :action, params: { id: topic, type: "ban" }
-      assert_equal false, topic.reload.ban?
+    describe "GET /topics/:id/ban" do
+      it "should user not work" do
+        sign_in user
+        get :ban, params: { id: topic }, xhr: true
+        assert_equal 302, response.status
+      end
+
+      it "should admin work" do
+        sign_in admin
+        get :ban, params: { id: topic }, xhr: true
+        assert_equal 200, response.status
+      end
     end
 
-    it "should allow by admin" do
-      sign_in admin
-      post :action, params: { id: topic, type: "ban" }
-      expect(response.status).to eq(302)
-      assert_equal true, topic.reload.ban?
+    describe "POST /topics/:id/action" do
+      it "should not allow user ban" do
+        sign_in user
+        post :action, params: { id: topic, type: "ban" }
+        assert_equal false, topic.reload.ban?
+      end
 
-      expect do
-        post :action, params: { id: topic, type: "ban", reason: "Foobar" }
-      end.to change(topic.replies, :count).by(1)
-      r = topic.replies.last
-      expect(r.action).to eq("ban")
-      expect(r.body).to eq("Foobar")
+      it "should allow by admin" do
+        sign_in admin
+        post :action, params: { id: topic, type: "ban" }
+        expect(response.status).to eq(302)
+        assert_equal true, topic.reload.ban?
 
-      expect do
-        post :action, params: { id: topic, type: "ban", reason: "Foobar", reason_text: "Barfoo" }
-      end.to change(topic.replies, :count).by(1)
-      r = topic.replies.last
-      expect(r.action).to eq("ban")
-      expect(r.body).to eq("Barfoo")
+        expect do
+          post :action, params: { id: topic, type: "ban", reason: "Foobar" }
+        end.to change(topic.replies, :count).by(1)
+        r = topic.replies.last
+        expect(r.action).to eq("ban")
+        expect(r.body).to eq("Foobar")
+
+        expect do
+          post :action, params: { id: topic, type: "ban", reason: "Foobar", reason_text: "Barfoo" }
+        end.to change(topic.replies, :count).by(1)
+        r = topic.replies.last
+        expect(r.action).to eq("ban")
+        expect(r.body).to eq("Barfoo")
+      end
     end
   end
 

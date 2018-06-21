@@ -7,7 +7,7 @@ class TopicsController < ApplicationController
                                               favorite unfavorite follow unfollow
                                               action favorites]
   load_and_authorize_resource only: %i[new edit create update destroy favorite unfavorite follow unfollow]
-  before_action :set_topic, only: %i[edit update destroy follow unfollow action]
+  before_action :set_topic, only: %i[edit update destroy follow unfollow action ban]
 
   def index
     @suggest_topics = []
@@ -127,6 +127,10 @@ class TopicsController < ApplicationController
   def unfollow
     current_user.unfollow_topic(@topic)
     render plain: "1"
+  end
+
+  def ban
+    authorize! :ban, @topic
   end
 
   def action

@@ -38,7 +38,7 @@
             <% end %>
 
             <% if !@topic.ban? %>
-              <%= link_to raw("<i class='fa fa-ban'></i> 屏蔽"), action_topic_path(@topic, type: 'ban'), method: :post, remote: true, title: "全站屏蔽此贴" %>
+              <%= link_to raw("<i class='fa fa-ban'></i> 屏蔽"), ban_topic_path(@topic), remote: true, title: "全站屏蔽此贴" %>
             <% else %>
               <%= link_to raw("<i class='fa fa-ban'></i> 取消"), action_topic_path(@topic, type: 'normal'), method: :post, remote: true, title: "取消全站屏蔽此贴" %>
             <% end %>

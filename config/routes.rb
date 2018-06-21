@@ -67,6 +67,8 @@ Rails.application.routes.draw do
       post :follow
       delete :unfollow
       post :action
+      # ban popup window
+      get :ban
     end
 
     collection do

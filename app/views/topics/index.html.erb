@@ -18,7 +18,7 @@
       </div>
 
       <div class="card-footer clearfix">
-        <% if action_name.in? %(index recent) %>
+        <% if (action_name.in? %(index recent)) && (controller_name == "topics") %>
           <%= paginate @topics, total_pages: Topic.total_pages %>
         <% else %>
           <%= paginate @topics %>

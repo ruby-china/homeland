@@ -29,15 +29,16 @@ module Topics
       render_index("favorites")
     end
 
+    # GET /topics/last
     def last
       @topics = topics_scope.recent.page(params[:page])
       render_index("recent")
     end
 
-    # GET /topics/ban
-    def ban
+    # GET /topics/banned
+    def banned
       @topics = Topic.ban.recent.page(params[:page])
-      render_index("recent")
+      render_index("banned")
     end
 
     # GET /topics/excellent

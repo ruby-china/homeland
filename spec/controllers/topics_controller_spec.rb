@@ -51,9 +51,9 @@ describe TopicsController, type: :controller do
     end
   end
 
-  describe ":ban" do
-    it "should have a excellent action" do
-      get :ban
+  describe ":banned" do
+    it "should have a banned action" do
+      get :banned
       expect(response).to have_http_status(200)
     end
   end

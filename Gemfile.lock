@@ -7,7 +7,7 @@ GIT
       multi_json (>= 1.2)
 
 GEM
-  remote: https://rubygems.org/
+  remote: https://gems.ruby-china.com/
   specs:
     action-store (0.3.3)
       rails (~> 5)
@@ -535,4 +535,4 @@ DEPENDENCIES
   yard (>= 0.9.11)
 
 BUNDLED WITH
-   1.16.2
+   1.16.3

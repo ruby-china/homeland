@@ -92,6 +92,7 @@ gem "redcarpet"
 
 # 队列
 gem "sidekiq"
+gem "sidekiq-scheduler"
 
 # 分享功能
 gem "social-share-button"

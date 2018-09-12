@@ -11,3 +11,10 @@
   - [mailer, 5]
   - [mailers, 5]
   - [default, 3]
+:schedule:
+  doorkeeper_cleanup:
+    cron: "<%= Random.rand(0..59) %> <%= Random.rand(3..5) %> * * * *"
+    class: Scheduler::DoorkeeperCleanupJob
+  notification_cleanup:
+    cron: "<%= Random.rand(0..59) %> <%= Random.rand(3..5) %> * * * *"
+    class: Scheduler::NotificationCleanupJob

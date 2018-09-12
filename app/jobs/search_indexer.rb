@@ -24,5 +24,7 @@ class SearchIndexer < ApplicationJob
     elsif operation == "index"
       obj.__elasticsearch__.index_document
     end
+  rescue => e
+    raise e unless Rails.env.test?
   end
 end

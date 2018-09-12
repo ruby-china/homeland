@@ -113,7 +113,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
-    connection_pool (2.2.1)
+    connection_pool (2.2.2)
     crass (1.0.4)
     dalli (2.7.8)
     database_cleaner (1.6.2)
@@ -156,6 +156,8 @@ GEM
       faraday
       multi_json
     erubi (1.7.1)
+    et-orbi (1.1.6)
+      tzinfo
     exception-track (0.3.0)
       exception_notification (~> 4)
       kaminari (>= 0.15)
@@ -174,6 +176,9 @@ GEM
     ffi (1.9.25)
     font-awesome-rails (4.7.0.4)
       railties (>= 3.2, < 6.0)
+    fugit (1.1.6)
+      et-orbi (~> 1.1, >= 1.1.6)
+      raabro (~> 1.1)
     get_process_mem (0.2.1)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
@@ -293,11 +298,12 @@ GEM
     powerpack (0.1.1)
     public_suffix (3.0.2)
     puma (3.11.4)
+    raabro (1.1.6)
     rack (2.0.5)
     rack-attack (5.2.0)
       rack
     rack-cors (1.0.2)
-    rack-protection (2.0.1)
+    rack-protection (2.0.3)
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -380,6 +386,8 @@ GEM
     ruby_dep (1.5.0)
     rucaptcha (2.3.0)
       railties (>= 3.2)
+    rufus-scheduler (3.5.2)
+      fugit (~> 1.1, >= 1.1.5)
     sanitize (4.6.4)
       crass (~> 1.0.2)
       nokogiri (>= 1.4.4)
@@ -400,11 +408,15 @@ GEM
     second_level_cache (2.4.1)
       activerecord (>= 5.2.0.rc, < 6)
       activesupport (>= 5.2.0.rc, < 6)
-    sidekiq (5.1.3)
-      concurrent-ruby (~> 1.0)
-      connection_pool (~> 2.2, >= 2.2.0)
+    sidekiq (5.2.1)
+      connection_pool (~> 2.2, >= 2.2.2)
       rack-protection (>= 1.5.0)
       redis (>= 3.3.5, < 5)
+    sidekiq-scheduler (3.0.0)
+      redis (>= 3, < 5)
+      rufus-scheduler (~> 3.2)
+      sidekiq (>= 3)
+      tilt (>= 1.4.0)
     simplecov (0.16.1)
       docile (~> 1.1)
       json (>= 1.8, < 3)
@@ -524,6 +536,7 @@ DEPENDENCIES
   sdoc (~> 1.0.0.rc3)
   second_level_cache
   sidekiq
+  sidekiq-scheduler
   social-share-button
   spring
   spring-commands-rspec

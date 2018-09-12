@@ -4,8 +4,13 @@ class PasswordsController < Devise::PasswordsController
   before_action :require_no_sso!
 
   def create
+    self.resource = resource_class.new(resource_params.permit(:email))
+    unless verify_rucaptcha?(self.resource)
+      return render "devise/passwords/new"
+    end
+
     self.resource = resource_class.find_or_initialize_with_errors(Devise.reset_password_keys, resource_params, :not_found)
-    if self.resource.persisted? && verify_rucaptcha?(resource)
+    if self.resource.persisted?
       self.resource.send_reset_password_instructions
     end
 

@@ -1,13 +1,14 @@
 <div class="row" style="padding: 50px 0;">
-  <div class="col-md-6 col-md-offset-3">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
     <div class="card">
       <div class="card-header"><%= t('.title') %></div>
-  
+
       <div class="card-body">
         <p>
           应用 <strong class="text-danger"><%= @pre_auth.client.name %></strong> 希望你授权使用你的帐号
         </p>
-    
+
         <% if @pre_auth.scopes %>
           <div id="oauth-permissions">
             <p><%= t('.able_to') %>:</p>
@@ -28,7 +29,7 @@
             <%= hidden_field_tag :state, @pre_auth.state %>
             <%= hidden_field_tag :response_type, @pre_auth.response_type %>
             <%= hidden_field_tag :scope, @pre_auth.scope %>
-            <%= submit_tag t('doorkeeper.authorizations.buttons.authorize'), class: "btn btn-success btn-lg btn-block" %>
+            <%= submit_tag t('doorkeeper.authorizations.buttons.authorize'), class: "btn btn-primary btn-block" %>
           <% end %>
           <%= form_tag oauth_authorization_path, class: "col-md-6", method: :delete do %>
             <%= hidden_field_tag :client_id, @pre_auth.client.uid %>
@@ -36,11 +37,11 @@
             <%= hidden_field_tag :state, @pre_auth.state %>
             <%= hidden_field_tag :response_type, @pre_auth.response_type %>
             <%= hidden_field_tag :scope, @pre_auth.scope %>
-            <%= submit_tag t('doorkeeper.authorizations.buttons.deny'), class: "btn btn-danger btn-lg btn-block" %>
+            <%= submit_tag t('doorkeeper.authorizations.buttons.deny'), class: "btn btn-danger btn-block" %>
           <% end %>
         </div>
       </div>
     </div>
-    
+
   </div>
 </div>

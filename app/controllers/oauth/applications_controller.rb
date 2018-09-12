@@ -21,7 +21,7 @@ module Oauth
     end
 
     def new
-      @application = Application.new
+      @application = Doorkeeper::Application.new
     end
 
     # only needed if each application must have some owner

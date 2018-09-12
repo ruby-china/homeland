@@ -14,6 +14,17 @@
         <%= doorkeeper_errors_for application, :name %>
       <% end %>
 
+      <%= content_tag :div, class: "form-group#{' has-error' if application.errors[:confidential].present?}" do %>
+        <label class="form-check-label">
+          <%= f.check_box :confidential %>
+          <%= f.label :confidential %>
+        </label>
+        <%= doorkeeper_errors_for application, :confidential %>
+        <span class="form-text">
+          <%= raw t('doorkeeper.applications.help.confidential') %>
+        </span>
+      <% end %>
+
       <%= content_tag :div, class: "form-group#{' has-error' if application.errors[:redirect_uri].present?}" do %>
         <%= f.label :redirect_uri %>
         <%= f.text_area :redirect_uri, class: 'form-control' %>

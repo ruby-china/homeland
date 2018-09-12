@@ -1,0 +1,9 @@
+zh-CN:
+  doorkeeper:
+    applications:
+      help:
+        confidential: "应用程序是否有能力确保 Client Secret 的私密性，如服务端应用可以开启此项（Native 手机应用或单页 Web 应用属于无法保密的类型）"
+      index:
+        confidential: "保密能力？"
+      show:
+        confidential: "保密能力"

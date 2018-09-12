@@ -19,6 +19,16 @@
     <%= f.text_field :level, class: "form-control" %>
   </div>
 
+  <div class="form-group">
+    <label class="form-check-label">
+      <%= f.check_box :confidential %>
+      <%= f.label :confidential %>
+    </label>
+    <span class="form-text">
+      <%= raw t('doorkeeper.applications.help.confidential') %>
+    </span>
+  </div>
+
   <div class="form-actions">
     <%= f.submit "保存", class: "btn btn-primary", 'data-disable-with' => "Saving..." %>
     <%= link_to '取消', admin_applications_path, class: "btn" %>

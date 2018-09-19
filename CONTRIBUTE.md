@@ -20,7 +20,7 @@ $ brew install memcached redis postgresql imagemagick gs elasticsearch
 ### Ubuntu
 
 ```bash
-$ sudo apt-get install memcached postgresql postgresql-contrib redis-server imagemagick ghostscript
+$ sudo apt-get install memcached postgresql postgresql-contrib redis-server imagemagick ghostscript libpq-dev
 ```
 
 Install Elasticsearch

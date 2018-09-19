@@ -11,13 +11,6 @@ tmp/**/*
 .yardoc/
 public/assets/
 public/packs/
-config/database.yml
-config/mongoid.yml
-config/config.yml
-config/thin.yml
-config/redis.yml
-config/mailer_daemon.yml
-config/secrets.yml
 public/photo/**/*
 public/user/**/*
 public/uploads/**/*
@@ -25,6 +18,13 @@ public/system/**/*
 public/topics
 public/topics/**/*
 public/doc
+data/
+shared/
+vendor/cache/
+config/nginx/nginx.conf
+.env.production
+.env.development
+.env.test
 .redcar
 .DS_Store
 *.swp
@@ -43,3 +43,4 @@ spec/examples.txt
 .byebug_history
 .ruby-version
 /storage/*
+app.local.env

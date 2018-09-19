@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+# Build Nginx config files with ERB template
+require "erb"
+
+TEMPLATE_FILES = %w[nginx.conf homeland.conf]
+TEMPLATE_FILES.each do |fname|
+  file_path = File.expand_path(File.join(__FILE__, "../#{fname}.erb"))
+  out_path = File.expand_path(File.join(__FILE__, "../#{fname}"))
+  out = ERB.new(File.open(file_path).read).result
+  File.open(out_path, "w") { |f| f.write(out) }
+end

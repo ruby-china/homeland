@@ -1,6 +1,6 @@
 default: &default
   adapter: postgresql
-  pool: 64
+  pool: <%= ENV["DATABASE_POOL"] || 64 %>
   timeout: 5000
   encoding: utf-8
 
@@ -9,7 +9,7 @@ default: &default
 #
 production:
   <<: *default
-  database: homeland
+  url: <%= ENV["DATABASE_URL"] %>
 
 #
 # Development specific

@@ -1,5 +1,5 @@
 # NAME:     homeland/homeland
-FROM homeland/base:1.0.1
+FROM homeland/base:latest
 MAINTAINER Jason Lee "https://github.com/huacnlee"
 
 ENV RAILS_ENV 'production'

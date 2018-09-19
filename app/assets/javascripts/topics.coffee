@@ -281,7 +281,11 @@ window.TopicView = Backbone.View.extend
         subscribe: ->
           @topicId = Topics.topic_id
           @perform 'follow', topic_id: Topics.topic_id
+
+        unfollow: ->
+          @perform 'unfollow'
     else if window.repliesChannel.topicId != Topics.topic_id
+      window.repliesChannel.unfollow()
       window.repliesChannel.subscribe()
 
   updateReplies: () ->

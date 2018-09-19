@@ -19,6 +19,8 @@ gem "sanitize"
 gem "pg"
 gem "pghero"
 
+gem "dotenv-rails"
+
 gem "rack-attack"
 
 gem "bootstrap", "~> 4.1.0"

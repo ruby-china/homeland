@@ -1,5 +1,5 @@
 defaults: &defaults
-  host: 127.0.0.1:11211
+  host: <%= ENV["MEMCACHED_HOST"] || "localhost:11211" %>
   namespace: rb-1
   compress: true
 

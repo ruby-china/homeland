@@ -1,5 +1,5 @@
 defaults: &defaults
-  host: 127.0.0.1:9200
+  url: <%= ENV["REDIS_URL"] || "redis://localhost:6379/1" %>
 
 development:
   <<: *defaults
@@ -9,3 +9,4 @@ test:
 
 production:
   <<: *defaults
+

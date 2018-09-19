@@ -1,0 +1,155 @@
+# DO NOT CHANGE THIS
+proxy_cache_path /home/app/cache/uploads-thumb levels=1:2 keys_zone=uploads_thumb:10m max_size=50G;
+
+upstream app_backend {
+  server app:7000 fail_timeout=0;
+  server app_backup:7001 backup;
+  keepalive 3;
+}
+
+log_format timed_combined '$remote_addr - $remote_user [$time_local] '
+                          '"$request" $status $body_bytes_sent '
+                          '"$http_referer" "$http_user_agent" '
+                          '$request_time $upstream_response_time $pipe';
+
+server {
+  listen 80 default_server;
+
+  <% if ENV['https'] == "true" || ENV["https"] == "1" %>
+  include /etc/nginx/ssl.conf;
+  <% end %>
+
+  location /nginx_status {
+    allow 127.0.0.1;
+    deny all;
+    stub_status on;
+  }
+
+  root /home/app/homeland/public;
+
+  # DO NOT CHANGE THIS
+  location ~ (/system|.well-known|/avatar.png|/favicon.ico|/*.txt) {
+    access_log        off;
+    expires           7d;
+    gzip_static on;
+    add_header  Cache-Control public;
+  }
+
+  location /404.png {
+    root /etc/nginx/html;
+    rewrite ^ /404.png break;
+  }
+
+  location /415.png {
+    root /etc/nginx/html;
+    rewrite ^ /415.png break;
+  }
+
+  # DO NOT CHANGE THIS
+  location /assets {
+    access_log        off;
+    expires           365d;
+    gzip_static on;
+    add_header  Cache-Control public;
+  }
+
+  # DO NOT CHANGE THIS
+  # Generate image thumb on the fly
+  location /uploads {
+    expires 7d;
+    gzip_static on;
+
+    add_header Cache-Control public;
+    add_header X-Pownered "nginx_image_filter";
+    add_header X-Cache-Status $upstream_cache_status;
+
+    proxy_pass http://127.0.0.1/_img/uploads;
+    proxy_cache uploads_thumb;
+    proxy_cache_bypass $http_pragma;
+    proxy_cache_key "$host$document_uri";
+    proxy_cache_valid 200 7d;
+    proxy_cache_use_stale error timeout invalid_header updating;
+    proxy_cache_revalidate on;
+    proxy_intercept_errors on;
+    error_page   415 = /415.png;
+    error_page   404 = /404.png;
+  }
+
+  location ~* /_img/uploads/(.+)!(large|lg|md|sm|xs)$ {
+    set $filename /uploads/$1;
+
+    if (-f $filename) {
+      break;
+    }
+
+    set $img_version $2;
+    set $img_type resize;
+    set $img_w    -;
+    set $img_h    -;
+    if ($img_version = 'large') {
+      set $img_type resize;
+      set $img_w    1920;
+    }
+    if ($img_version = 'lg') {
+      set $img_type crop;
+      set $img_w    192;
+      set $img_h    192;
+    }
+    if ($img_version = 'md') {
+      set $img_type crop;
+      set $img_w    96;
+      set $img_h    96;
+    }
+    if ($img_version = 'sm') {
+      set $img_type crop;
+      set $img_w    48;
+      set $img_h    48;
+    }
+    if ($img_version = 'xs') {
+      set $img_type crop;
+      set $img_w    32;
+      set $img_h    32;
+    }
+    rewrite ^ /_$img_type;
+  }
+
+  location /_img/uploads {
+    alias /home/app/homeland/public/uploads/$filename;
+    expires 7d;
+  }
+
+  location /_resize {
+    alias /home/app/homeland/public$filename;
+    image_filter resize $img_w $img_h;
+    image_filter_jpeg_quality 95;
+    image_filter_buffer         20M;
+    image_filter_interlace      on;
+  }
+
+  location /_crop {
+    alias /home/app/homeland/public$filename;
+    image_filter crop $img_w $img_h;
+    image_filter_jpeg_quality 95;
+    image_filter_buffer         20M;
+    image_filter_interlace      on;
+  }
+
+  # DO NOT CHANGE THIS
+  location / {
+    proxy_redirect     off;
+    proxy_set_header   Host $http_host;
+    proxy_set_header   X-Forwarded-Host $http_host;
+    proxy_set_header   X-Forwarded-Server $http_host;
+    proxy_set_header   X-Real-IP        $remote_addr;
+    proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
+    proxy_buffering    on;
+    proxy_http_version 1.1;
+    proxy_set_header   Upgrade $http_upgrade;
+    proxy_set_header   Connection "Upgrade";
+    proxy_set_header   X-Forwarded-Proto $scheme;
+    proxy_pass         http://app_backend;
+    gzip on;
+  }
+
+  <%= ENV["NGINX_SERVER_SCRIPT"] %>
+}

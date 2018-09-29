@@ -14,9 +14,7 @@ RUN curl https://get.acme.sh | sh
 ENV RAILS_ENV "production"
 ENV HOMELAND_VERSION "master"
 
-RUN addgroup -g 1000 app &&\
-    adduser -u 1000 -D -G app -s /bin/bash app &&\
-    mkdir -p /home/app &&\
+RUN mkdir -p /home/app &&\
     cd /home/app
 ADD . /home/app/homeland
 ADD ./config/nginx/ /etc/nginx
@@ -24,9 +22,11 @@ ADD ./config/nginx/ /etc/nginx
 RUN cd /home/app/homeland && bundle install --deployment &&\
     find /home/app/homeland/vendor/bundle -name tmp -type d -exec rm -rf {} + &&\
     rm -Rf /home/app/homeland/vendor/cache &&\
-    chown -R app:app /home/app &&\
-    chown -R app:app /var/tmp/nginx &&\
+    chown -R nginx:nginx /home/app &&\
     find / -type f -iname '*.apk-new' -delete &&\
-    rm -rf '/var/cache/apk/*' '/tmp/*' '/var/tmp/*'
+    rm -rf '/var/cache/apk/*' '/tmp/*'
 
 WORKDIR /home/app/homeland
+RUN bundle exec rails assets:precompile RAILS_ENV=production SECRET_KEY_BASE=fake_secure_for_compile
+
+

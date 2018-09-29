@@ -11,9 +11,10 @@ if redis_config["url"]
   sidekiq_url = redis_config["url"]
 else
   $redis = Redis.new(host: redis_config["host"], port: redis_config["port"], driver: :hiredis)
-  $redis.select(0)
   sidekiq_url = "redis://#{redis_config['host']}:#{redis_config['port']}/0"
 end
+# alway use 0 db for Redis Object
+$redis.select(0)
 Redis::Objects.redis = $redis
 
 

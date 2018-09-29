@@ -41,6 +41,8 @@ class Topic
         size: limit
       }
       self.class.__elasticsearch__.search(opts).records.to_a
+    rescue => e
+      []
     end
   end
 end

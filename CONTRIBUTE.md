@@ -6,7 +6,6 @@ Contribute Guide
 * Ruby 2.4.0 +
 * PostgreSQL 9.4 +
 * Redis 2.8 +
-* Memcached 1.4 +
 * Elasticsearch 2.0 +
 
 ## Install in development
@@ -14,13 +13,13 @@ Contribute Guide
 ### Mac OS X, use Homebrew
 
 ```bash
-$ brew install memcached redis postgresql imagemagick gs elasticsearch
+$ brew install redis postgresql imagemagick gs elasticsearch
 ```
 
 ### Ubuntu
 
 ```bash
-$ sudo apt-get install memcached postgresql postgresql-contrib redis-server imagemagick ghostscript libpq-dev
+$ sudo apt-get install postgresql postgresql-contrib redis-server imagemagick ghostscript libpq-dev
 ```
 
 Install Elasticsearch

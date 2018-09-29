@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-memcached_config = Rails.application.config_for(:memcached)
+redis_config = Rails.application.config_for(:redis)
 RuCaptcha.configure do
-  self.cache_store = [:mem_cache_store, memcached_config["host"], memcached_config]
+  self.cache_store = [:redis_cache_store, { url: redis_config["url"] }]
 end

@@ -3,12 +3,6 @@
 require "rails_helper"
 
 describe Setting, type: :model do
-  describe "app_name" do
-    it "should work" do
-      expect(Setting.app_name).to eq "Homeland"
-    end
-  end
-
   describe "navbar_brand_html" do
     it "should work" do
       expect(Setting.navbar_brand_html).to eq %(<a href="/" class="navbar-brand"><b>#{Setting.app_name}</b></a>)

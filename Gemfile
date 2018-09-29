@@ -76,9 +76,9 @@ gem "cancancan"
 
 # Redis
 gem "hiredis"
-gem "redis", "~> 3.3"
+gem "redis"
 gem "redis-namespace"
-gem "redis-objects", "~> 1.3.1"
+gem "redis-objects"
 
 # Cache
 gem "second_level_cache"
@@ -102,8 +102,6 @@ gem "social-share-button"
 # Mailer Service
 gem "postmark"
 gem "postmark-rails"
-
-gem "dalli"
 
 gem "puma"
 

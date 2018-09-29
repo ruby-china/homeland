@@ -18,7 +18,6 @@ sudo apt-get upgrade -y
 sudo apt-get install -y apt-transport-https \
                         git \
                         redis-server \
-                        memcached \
                         imagemagick \
                         nodejs \
                         libpq-dev \

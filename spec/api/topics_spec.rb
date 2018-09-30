@@ -282,7 +282,6 @@ describe "API V3", "topics", type: :request do
   describe "GET /api/v3/topics/:id.json" do
     it "should get topic detail with list of replies" do
       t = create(:topic, title: "i want to know")
-      old_hits = t.hits.to_i
       get "/api/v3/topics/#{t.id}.json"
       expect(response.status).to eq(200)
       fields = %w[id title created_at updated_at replied_at body body_html
@@ -291,7 +290,6 @@ describe "API V3", "topics", type: :request do
       expect(json["topic"]).to include(*fields)
       expect(json["meta"]).to include("liked", "favorited", "followed")
       expect(json["topic"]["title"]).to eq("i want to know")
-      expect(json["topic"]["hits"]).to eq(old_hits + 1)
       expect(json["topic"]["excellent"]).to eq(0)
       expect(json["topic"]["grade"]).to eq("normal")
       expect(json["topic"]["user"]).to include("id", "name", "login", "avatar_url")

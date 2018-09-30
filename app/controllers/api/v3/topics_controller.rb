@@ -58,7 +58,6 @@ module Api
       # { followed: '是否已关注', liked: '是否已赞', favorited: '是否已收藏' }
       # ```
       def show
-        @topic.hits.incr(1)
         @meta = { followed: false, liked: false, favorited: false }
 
         if current_user

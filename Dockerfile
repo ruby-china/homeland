@@ -4,9 +4,9 @@ MAINTAINER Jason Lee "https://github.com/huacnlee"
 
 RUN gem install bundler
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
-RUN apk --update add ca-certificates tzdata imagemagick nodejs nginx nginx-mod-http-image-filter nginx-mod-http-geoip &&\
+RUN apk --update add ca-certificates tzdata imagemagick nginx nginx-mod-http-image-filter nginx-mod-http-geoip &&\
     apk add --virtual .builddeps build-base ruby-dev libc-dev openssl linux-headers postgresql-dev \
-    libxml2-dev libxslt-dev curl git &&\
+    libxml2-dev libxslt-dev curl nodejs git &&\
     curl https://get.acme.sh | sh &&\
     rm /etc/nginx/conf.d/default.conf
 

@@ -225,6 +225,7 @@ body {
   .user-bar {
     background: #FFF;
     min-width: 150px;
+		padding-right: 15px;
   }
 
   @include media-breakpoint-down(md) {

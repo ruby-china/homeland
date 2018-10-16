@@ -120,6 +120,7 @@ gem "homeland-site",  "~> 0.2.0"
 gem "homeland-wiki", "~> 0.4.0"
 
 gem "bootsnap"
+gem "sdoc", "~> 1.0.0.rc3"
 
 group :development do
   gem "derailed"
@@ -130,7 +131,6 @@ group :development do
 end
 
 group :development, :test do
-  gem "sdoc", "~> 1.0.0.rc3"
   gem "bundler-audit", require: false
   gem "capybara"
   gem "database_cleaner"

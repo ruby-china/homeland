@@ -7,7 +7,7 @@ git_source(:github) { |repo_name| "https://github.com/#{repo_name}.git" }
 gem "coffee-rails"
 gem "jbuilder", github: "rails/jbuilder"
 gem "jquery-rails"
-gem "rails", "~> 5.2.0.rc"
+gem "rails", "~> 5.2.0"
 gem "rails_autolink"
 gem "sass-rails"
 gem "sprockets"
@@ -112,16 +112,12 @@ gem "rack-utf8_sanitizer"
 gem "exception-track"
 gem "status-page"
 
-gem "bundler-audit", require: false
-
 # Homeland Plugins
 gem "homeland-jobs", "~> 0.3.0"
 gem "homeland-note", "~> 0.2.0"
 gem "homeland-press", "~> 0.4.0"
 gem "homeland-site",  "~> 0.2.0"
 gem "homeland-wiki", "~> 0.4.0"
-
-gem "sdoc", "~> 1.0.0.rc3"
 
 gem "bootsnap"
 
@@ -134,6 +130,8 @@ group :development do
 end
 
 group :development, :test do
+  gem "sdoc", "~> 1.0.0.rc3"
+  gem "bundler-audit", require: false
   gem "capybara"
   gem "database_cleaner"
   gem "factory_bot_rails"

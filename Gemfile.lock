@@ -179,6 +179,8 @@ GEM
     ffi (1.9.25)
     font-awesome-rails (4.7.0.4)
       railties (>= 3.2, < 6.0)
+    form-select (0.2.0)
+      rails (>= 4.2)
     fugit (1.1.6)
       et-orbi (~> 1.1, >= 1.1.6)
       raabro (~> 1.1)
@@ -494,6 +496,7 @@ DEPENDENCIES
   exception-track
   factory_bot_rails
   font-awesome-rails
+  form-select
   hiredis
   homeland-jobs (~> 0.3.0)
   homeland-note (~> 0.2.0)

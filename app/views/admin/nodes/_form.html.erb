@@ -8,7 +8,7 @@
 
   <div class="form-group">
     <%= f.label :name %>
-    <%= f.select :section_id, Section.all.collect { |s| [s.name,s.id] }, {}, { class: "form-control" } %>
+    <%= f.select :section_id, Section.name_options, {}, { class: "form-control" } %>
   </div>
 
   <div class="form-group">

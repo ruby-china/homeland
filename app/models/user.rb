@@ -198,10 +198,10 @@ class User < ApplicationRecord
     end
   end
 
-  def team_collection
-    return @team_collection if defined? @team_collection
+  def team_options
+    return @team_options if defined? @team_options
     teams = self.admin? ? Team.all : self.teams
-    @team_collection = teams.collect { |t| [t.name, t.id] }
+    @team_options = teams.collect { |t| [t.name, t.id] }
   end
 
   # for Searchable

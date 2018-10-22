@@ -8,7 +8,7 @@
 
   <div class="form-group">
     <%= f.label :node_id %>
-    <%= f.text_field :node_id, class: "form-control" %>
+    <%= f.select :node_id, Node.name_options, {}, class: "form-control" %>
   </div>
 
   <div class="form-group">

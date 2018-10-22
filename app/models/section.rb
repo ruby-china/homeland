@@ -9,6 +9,8 @@ class Section < ApplicationRecord
 
   default_scope -> { order(sort: :desc) }
 
+  form_select :name
+
   after_save :update_cache_version
   after_destroy :update_cache_version
 

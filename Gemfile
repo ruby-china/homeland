@@ -63,6 +63,9 @@ gem "action-store"
 # 分页
 gem "kaminari"
 
+# Form select 选项
+gem "form-select"
+
 # 搜索
 gem "elasticsearch-model"
 gem "elasticsearch-rails"

@@ -14,6 +14,8 @@ class Node < ApplicationRecord
   scope :hots, -> { order(topics_count: :desc) }
   scope :sorted, -> { order(sort: :desc) }
 
+  form_select :name
+
   after_save :update_cache_version
   after_destroy :update_cache_version
 

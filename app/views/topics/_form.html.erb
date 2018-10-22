@@ -23,9 +23,9 @@
   </div>
 
   <% if Setting.has_module?(:team) %>
-    <% if current_user.team_collection.any? %>
+    <% if current_user.team_options.any? %>
     <div class='form-group'>
-      <%= f.select :team_id, current_user.team_collection, { include_blank: "不要关联组织" }, { class: "form-control" } %>
+      <%= f.select :team_id, current_user.team_options, { include_blank: "不要关联组织" }, { class: "form-control" } %>
     </div>
     <% end %>
   <% end %>

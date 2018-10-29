@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-app_root = "/home/appr/homeland"
+app_root = "/home/app/homeland"
 daemonize false
 environment ENV.fetch("RAILS_ENV") { "production" }
 port 7001

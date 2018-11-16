@@ -91,8 +91,13 @@ module Homeland
           login: Homeland::Username.sanitize(username || name),
           password: Devise.friendly_token[0, 20]
         }
+        user = User.new(user_params)
 
-        user = User.create!(user_params)
+        if !user.valid?
+          user.login += "-#{external_id}"
+        end
+
+        user.save!
       end
 
       sso_record = user.sso || user.create_sso(

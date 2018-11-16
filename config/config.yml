@@ -51,6 +51,10 @@ defaults: &defaults
 
 development:
   <<: *defaults
+  sso:
+    enable: true
+    url: http://localhost:3000/forum/sso
+    secret: NSU5fRU1BSUwgPSAiYWRtaW5AYW
 
 test:
   <<: *defaults

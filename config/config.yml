@@ -47,6 +47,7 @@ defaults: &defaults
   newbie_limit_time: 86400
   topic_create_limit_interval: 60
   topic_create_hour_limit_count: 10
+  allow_change_login: <%= ENV['allow_change_login'] || false %>
 
 development:
   <<: *defaults

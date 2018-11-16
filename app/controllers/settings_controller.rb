@@ -65,7 +65,12 @@ class SettingsController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(*User::ACCESSABLE_ATTRS)
+      attrs = User::ACCESSABLE_ATTRS.dup
+      if Setting.allow_change_login?
+        attrs << :login
+      end
+
+      params.require(:user).permit(*attrs)
     end
 
     def update_basic

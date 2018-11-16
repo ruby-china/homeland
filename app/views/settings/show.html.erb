@@ -8,11 +8,20 @@
           <%= render "shared/error_messages", target: @user %>
           <div class="row">
             <div class="col-sm-9">
+              <% if Setting.allow_change_login? %>
               <div class="form-group">
+                <label class="control-label">用户名</label>
+                <%= f.text_field :login, style: "width: 200px", class: "form-control", placeholder: "用户名" %>
+              </div>
+              <% end %>
+
+              <div class="form-group">
+                <label class="control-label">姓名</label>
                 <%= f.text_field :name, style: "width: 200px", class: "form-control", placeholder: "姓名" %>
               </div>
 
               <div class="form-group">
+                <label class="control-label">Email</label>
                 <%= f.text_field :email, disabled: @user.email_locked?, class: "form-control", placeholder: "Email" %>
               </div>
 

@@ -60,6 +60,7 @@ class Setting < RailsSettings::Base
     ban_reasons
     topic_create_limit_interval
     topic_create_hour_limit_count
+    allow_change_login
   ]
 
   field :app_name, default: "Homeland"
@@ -73,6 +74,7 @@ class Setting < RailsSettings::Base
   field :ban_reason_html, default: "此贴因内容原因不符合要求，被管理员屏蔽，请根据管理员给出的原因进行调整"
   field :modules, default: "all", type: :array
   field :profile_fields, default: "all", type: :array
+  field :allow_change_login, default: false, type: :boolean
 
   class << self
     def protocol

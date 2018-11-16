@@ -65,6 +65,21 @@ describe SettingsController, type: :controller do
 
   describe ":update" do
     it "should work" do
+      old_login = user.login
+      sign_in user
+      put :update, params: { user: { login: "new-#{user.login}", location: "BeiJing", profiles: { alipay: "alipay" } } }
+      expect(response).to redirect_to(action: :show)
+
+      user.reload
+      expect(user.login).to eq(old_login)
+
+      allow(Setting).to receive(:allow_change_login?).and_return(true)
+      put :update, params: { user: { login: "new-#{user.login}" } }
+      expect(response).to redirect_to(action: :show)
+
+      user.reload
+      expect(user.login).to eq("new-#{old_login}")
+
       sign_in user
       put :update, params: { user: { location: "BeiJing", profiles: { alipay: "alipay" } } }
       expect(response).to redirect_to(action: :show)

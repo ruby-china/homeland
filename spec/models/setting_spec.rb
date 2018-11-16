@@ -126,4 +126,12 @@ describe Setting, type: :model do
       expect(Setting.sso_enabled?).to eq false
     end
   end
+
+  describe "allow_change_login" do
+    it "should work" do
+      expect(Setting.allow_change_login?).to eq false
+      Setting.allow_change_login = "true"
+      expect(Setting.allow_change_login?).to eq true
+    end
+  end
 end

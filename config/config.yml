@@ -44,7 +44,7 @@ defaults: &defaults
     secret: '<%= ENV['sso_secret'] || ENV['sso.secret'] %>'
   github_token: "<%= ENV['github_token'] %>"
   github_secret: "<%= ENV['github_secret'] %>"
-  newbie_limit_time: 86400
+  newbie_limit_time: 0
   topic_create_limit_interval: 60
   topic_create_hour_limit_count: 10
   allow_change_login: <%= ENV['allow_change_login'] || false %>

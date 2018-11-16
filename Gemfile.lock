@@ -304,7 +304,7 @@ GEM
     public_suffix (3.0.2)
     puma (3.11.4)
     raabro (1.1.6)
-    rack (2.0.5)
+    rack (2.0.6)
     rack-attack (5.2.0)
       rack
     rack-cors (1.0.2)
@@ -554,4 +554,4 @@ DEPENDENCIES
   yard (>= 0.9.11)
 
 BUNDLED WITH
-   1.16.2
+   1.17.1

@@ -8,10 +8,10 @@ defaults: &defaults
   https: <%= ENV['https'] || 'true' %>
   admin_emails: <%= ENV['admin_emails'] || 'admin@admin.com' %>
   asset_host: "<%= ENV['asset_host'] %>"
-  <% if ENV['rack_attack_limit'] == 'true' %>
+  <% if ENV['rack_attack_limit'] == 'true' || ENV['rack_attack.limit'] == 'true' %>
   rack_attack:
-    limit: <%= ENV['rack_attack_limit'] %>
-    period: <%= ENV['rack_attack_period'] %>
+    limit: <%= ENV['rack_attack_limit'] || ENV['rack_attack.limit'] %>
+    period: <%= ENV['rack_attack_period'] || ENV['rack_attack.period'] %>
   <% end %>
   upload_provider: "<%= ENV['upload_provider'] || 'file' %>" # can be  upyun/aliyun
   upload_access_id: "<%= ENV['upload_access_id'] %>" # or username
@@ -24,24 +24,24 @@ defaults: &defaults
   mailer_sender: "<%= ENV['mailer_sender'] || 'no-reply@localhost' %>"
   mailer_options:
     <% if ENV['mailer_provider'] == 'postmark' %>
-    api_key: '<%= ENV['mailer_options_api_key'] %>'
+    api_key: '<%= ENV['mailer_options_api_key'] || ENV['mailer_options.api_key'] %>'
     <% else %>
-    address: '<%= ENV['mailer_options_address'] %>'
-    port: <%= ENV['mailer_options_port'] %>
-    domain: '<%= ENV['mailer_options_domain'] %>'
-    user_name: '<%= ENV['mailer_options_user_name'] %>'
-    password: '<%= ENV['mailer_options_password'] %>'
-    authentication: '<%= ENV['mailer_options_authentication'] %>'
-    enable_starttls_auto: <%= ENV['mailer_options_enable_starttls_auto'] %>
+    address: '<%= ENV['mailer_options_address'] || ENV['mailer_options.address'] %>'
+    port: <%= ENV['mailer_options_port'] || ENV['mailer_options.port'] %>
+    domain: '<%= ENV['mailer_options_domain'] || ENV['mailer_options.domain'] %>'
+    user_name: '<%= ENV['mailer_options_user_name'] || ENV['mailer_options.user_name'] %>'
+    password: '<%= ENV['mailer_options_password'] || ENV['mailer_options.password'] %>'
+    authentication: '<%= ENV['mailer_options_authentication'] || ENV['mailer_options.authentication'] %>'
+    enable_starttls_auto: <%= ENV['mailer_options_enable_starttls_auto'] || ENV['mailer_options.enable_starttls_auto'] %>
     <% end %>
   sso:
-    <% if ENV['sso_enable_provider'] != 'true' %>
-    enable: <%= ENV['sso_enable'] || false %>
+    <% if ENV['sso_enable_provider'] != 'true' && ENV['sso_enable.provider'] != 'true' %>
+    enable: <%= ENV['sso_enable'] || ENV['sso.enable'] || false %>
     <% else %>
-    enable_provider: <%= ENV['sso_enable_provider'] || false %>
+    enable_provider: <%= ENV['sso_enable_provider'] || ENV['sso_enable.provider'] || false %>
     <% end %>
-    url: '<%= ENV['sso_url'] %>'
-    secret: '<%= ENV['sso_secret'] %>'
+    url: '<%= ENV['sso_url'] || ENV['sso.url'] %>'
+    secret: '<%= ENV['sso_secret'] || ENV['sso.secret'] %>'
   github_token: "<%= ENV['github_token'] %>"
   github_secret: "<%= ENV['github_secret'] %>"
   newbie_limit_time: 86400

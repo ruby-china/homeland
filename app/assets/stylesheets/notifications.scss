@@ -25,6 +25,15 @@
       border-bottom: 0;
     }
 
+    .media-body {
+      overflow: hidden;
+
+      .markdown {
+        pre,
+        img { margin-left: 0; margin-right: 0; }
+      }
+    }
+
     a { color: #555; }
 
     &.unread {

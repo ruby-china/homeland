@@ -24,6 +24,7 @@ vendor/cache/
 config/nginx/nginx.conf
 .env.production
 .env.development
+.env.development.local
 .env.test
 .redcar
 .DS_Store

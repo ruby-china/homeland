@@ -29,21 +29,28 @@ CarrierWave.configure do |config|
 
   case Setting.upload_provider
   when "aliyun"
-    config.storage = :aliyun
-    config.aliyun_access_id  = Setting.upload_access_id
-    config.aliyun_access_key = Setting.upload_access_secret
-    config.aliyun_bucket     = Setting.upload_bucket
-    config.aliyun_internal   = Setting.upload_aliyun_internal.to_s != "false"
-    config.aliyun_area       = Setting.upload_aliyun_area
-    config.aliyun_host       = Setting.upload_url
+    config.storage                                     = :aliyun
+    config.aliyun_access_id                            = Setting.upload_access_id
+    config.aliyun_access_key                           = Setting.upload_access_secret
+    config.aliyun_bucket                               = Setting.upload_bucket
+    config.aliyun_internal                             = Setting.upload_aliyun_internal.to_s != "false"
+    config.aliyun_area                                 = Setting.upload_aliyun_area
+    config.aliyun_host                                 = Setting.upload_url
   when "upyun"
-    config.storage = :upyun
+    config.storage                                     = :upyun
     # Do not remove previously file after new file uploaded
     config.remove_previously_stored_files_after_update = false
-    config.upyun_username = Setting.upload_access_id
-    config.upyun_password = Setting.upload_access_secret
-    config.upyun_bucket = Setting.upload_bucket
-    config.upyun_bucket_host = Setting.upload_url
+    config.upyun_username                              = Setting.upload_access_id
+    config.upyun_password                              = Setting.upload_access_secret
+    config.upyun_bucket                                = Setting.upload_bucket
+    config.upyun_bucket_host                           = Setting.upload_url
+  when "qiniu"
+    config.storage                                     = :qiniu
+    config.qiniu_access_key                            = Setting.upload_access_id
+    config.qiniu_secret_key                            = Setting.upload_access_secret
+    config.qiniu_bucket                                = Setting.upload_bucket
+    config.qiniu_protocol                              = Setting.upload_url.split("://")[0]
+    config.qiniu_bucket_domain                         = Setting.upload_url.split("://")[1]
   else
     config.storage = :file
   end

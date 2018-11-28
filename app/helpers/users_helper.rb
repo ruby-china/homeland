@@ -10,15 +10,15 @@ module UsersHelper
     return "匿名" if user.blank?
 
     user_type = :user
-    login     = user
-    label     = login
-    name      = login
+    login = user
+    label = login
+    name = login
 
     if user.is_a? User
       user_type = user.user_type
-      login     = user.login
-      label     = user_type == :team ? user.name : user.login
-      name      = user.name
+      login = user.login
+      label = user_type == :team ? user.name : user.login
+      name = user.name
     end
 
     name ||= login
@@ -27,6 +27,7 @@ module UsersHelper
 
     link_to(label, "/#{login}", options)
   end
+
   alias team_name_tag user_name_tag
 
   def user_avatar_width_for_size(size)
@@ -40,19 +41,23 @@ module UsersHelper
   end
 
   def user_avatar_tag(user, version = :md, link: true, timestamp: nil)
-    width     = user_avatar_width_for_size(version)
+    width = user_avatar_width_for_size(version)
     img_class = "media-object avatar-#{width}"
 
     return image_tag("avatar/#{version}.png", class: img_class) if user.blank?
 
     img =
-      if user.avatar?
-        image_url = user.avatar.url(version)
-        image_url += "?t=#{user.updated_at.to_i}" if timestamp
-        image_tag(image_url, class: img_class)
-      else
-        image_tag(user.letter_avatar_url(width * 2), class: img_class)
-      end
+        if user.avatar?
+          image_url = user.avatar.url(version)
+          if image_url.nil?
+            image_tag(user.letter_avatar_url(width * 2), class: img_class)
+          else
+            image_url += "?t=#{user.updated_at.to_i}" if timestamp
+            image_tag(image_url, class: img_class)
+          end
+        else
+          image_tag(user.letter_avatar_url(width * 2), class: img_class)
+        end
 
     html_options = {}
     html_options[:title] = user.fullname
@@ -67,13 +72,13 @@ module UsersHelper
   def render_user_level_tag(user)
     return "" if user.blank?
     level_class = case user.level
-                  when "admin"   then "badge-danger"
-                  when "vip"     then "badge-success"
-                  when "hr"      then "badge-success"
+                  when "admin" then "badge-danger"
+                  when "vip" then "badge-success"
+                  when "hr" then "badge-success"
                   when "blocked" then "badge-warning"
-                  when "newbie"  then "badge-light"
+                  when "newbie" then "badge-light"
                   else "badge-info"
-    end
+                  end
 
     content_tag(:span, user.level_name, class: "badge #{level_class} role")
   end
@@ -82,9 +87,9 @@ module UsersHelper
     return "" if current_user.blank?
     return "" if node.blank?
 
-    blocked     = current_user.block_node?(node)
+    blocked = current_user.block_node?(node)
     class_names = "btn btn-default button-block-node"
-    icon        = '<i class="fa fa-eye-slash"></i>'
+    icon = '<i class="fa fa-eye-slash"></i>'
 
     if blocked
       link_to raw("#{icon} <span>取消屏蔽</span>"), "#", title: "忽略后，社区首页列表将不会显示这里的内容。", "data-id" => node.id, class: "#{class_names} active"
@@ -98,9 +103,9 @@ module UsersHelper
     return "" if user.blank?
     return "" if current_user.id == user.id
 
-    blocked     = current_user.block_user?(user)
+    blocked = current_user.block_user?(user)
     class_names = "button-block-user btn btn-default btn-block"
-    icon        = '<i class="fa fa-eye-slash"></i>'
+    icon = '<i class="fa fa-eye-slash"></i>'
 
     if blocked
       link_to raw("#{icon} <span>取消屏蔽</span>"), "#", title: "忽略后，社区首页列表将不会显示此用户发布的内容。", "data-id" => user.login, class: "#{class_names} active"
@@ -117,8 +122,8 @@ module UsersHelper
     opts[:class] ||= "btn btn-primary btn-block"
 
     class_names = "button-follow-user #{opts[:class]}"
-    icon        = '<i class="fa fa-user"></i>'
-    login       = user.login
+    icon = '<i class="fa fa-user"></i>'
+    login = user.login
 
     if followed
       link_to raw("#{icon} <span>取消关注</span>"), "#", "data-id" => login, class: "#{class_names} active"

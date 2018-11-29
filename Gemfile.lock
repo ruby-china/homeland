@@ -97,6 +97,9 @@ GEM
     carrierwave-aliyun (0.9.0)
       aliyun-oss-sdk (>= 0.1.6)
       carrierwave (>= 0.5.7)
+    carrierwave-qiniu (1.1.5)
+      carrierwave (~> 1.0)
+      qiniu (~> 6.8, >= 6.8.0)
     carrierwave-upyun (0.2.2)
       carrierwave (>= 0.5.7)
       faraday (>= 0.8.0)
@@ -136,6 +139,8 @@ GEM
       devise (>= 2.1.0)
     diff-lcs (1.3)
     docile (1.3.0)
+    domain_name (0.5.20180417)
+      unf (>= 0.0.5, < 1.0.0)
     doorkeeper (5.0.0)
       railties (>= 4.2)
     doorkeeper-i18n (4.0.0)
@@ -209,6 +214,8 @@ GEM
       activesupport
       html-pipeline (>= 1.11)
       rouge (>= 2.0.0, < 4)
+    http-cookie (1.0.3)
+      domain_name (~> 0.5)
     http_accept_language (2.1.1)
     httparty (0.16.2)
       multi_xml (>= 0.5.2)
@@ -263,6 +270,7 @@ GEM
     multi_json (1.13.1)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
+    netrc (0.11.0)
     nio4r (2.3.1)
     nokogiri (1.8.5)
       mini_portile2 (~> 2.3.0)
@@ -303,6 +311,9 @@ GEM
     powerpack (0.1.1)
     public_suffix (3.0.2)
     puma (3.11.4)
+    qiniu (6.9.0)
+      mime-types (~> 3.1)
+      rest-client (~> 2.0)
     raabro (1.1.6)
     rack (2.0.6)
     rack-attack (5.2.0)
@@ -360,6 +371,10 @@ GEM
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
+    rest-client (2.0.2)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 4.0)
+      netrc (~> 0.8)
     rouge (3.1.1)
     rspec-core (3.7.1)
       rspec-support (~> 3.7.0)
@@ -454,6 +469,9 @@ GEM
       thread_safe (~> 0.1)
     uglifier (4.1.9)
       execjs (>= 0.3.0, < 3)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.7.5)
     unicode-display_width (1.3.0)
     url (0.3.2)
     warden (1.2.7)
@@ -480,6 +498,7 @@ DEPENDENCIES
   capybara
   carrierwave
   carrierwave-aliyun
+  carrierwave-qiniu
   carrierwave-upyun
   codecov
   coffee-rails

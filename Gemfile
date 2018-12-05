@@ -5,7 +5,7 @@ source "https://rubygems.org"
 git_source(:github) { |repo_name| "https://github.com/#{repo_name}.git" }
 
 gem "coffee-rails"
-gem "jbuilder", github: "rails/jbuilder"
+gem "jbuilder"
 gem "jquery-rails"
 gem "rails", "~> 5.2.0"
 gem "rails_autolink"
@@ -126,14 +126,12 @@ gem "bootsnap"
 
 group :development do
   gem "derailed"
-  # Better Errors
-  gem "better_errors"
   gem "spring"
   gem "spring-commands-rspec"
 end
 
 group :development, :test do
-  gem "sdoc", "~> 1.0.0.rc3"
+  gem "sdoc"
   gem "bundler-audit", require: false
   gem "capybara"
   gem "database_cleaner"

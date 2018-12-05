@@ -6,11 +6,11 @@ describe ApplicationHelper, type: :helper do
   describe "markdown" do
     context "bad html" do
       it "filter script" do
-        expect(helper.markdown("<script>alert()</script> foo")).to eq("<p>alert() foo</p>")
+        expect(helper.markdown("<script>alert()</script> foo")).to eq("<p> foo</p>")
       end
 
       it "filter style" do
-        expect(helper.markdown("<style>.body {}</style> foo")).to eq("<p>.body {} foo</p>")
+        expect(helper.markdown("<style>.body {}</style> foo")).to eq("<p> foo</p>")
       end
     end
   end

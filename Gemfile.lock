@@ -133,17 +133,17 @@ GEM
       railties (>= 3.2, < 6.0)
     dropzonejs-rails (0.8.4)
       rails (> 3.1)
-    elasticsearch (6.1.0)
-      elasticsearch-api (= 6.1.0)
-      elasticsearch-transport (= 6.1.0)
-    elasticsearch-api (6.1.0)
+    elasticsearch (5.0.5)
+      elasticsearch-api (= 5.0.5)
+      elasticsearch-transport (= 5.0.5)
+    elasticsearch-api (5.0.5)
       multi_json
-    elasticsearch-model (6.0.0)
+    elasticsearch-model (5.0.2)
       activesupport (> 3)
-      elasticsearch (> 1)
+      elasticsearch (~> 5)
       hashie
-    elasticsearch-rails (6.0.0)
-    elasticsearch-transport (6.1.0)
+    elasticsearch-rails (5.0.2)
+    elasticsearch-transport (5.0.5)
       faraday
       multi_json
     erubi (1.7.1)
@@ -486,8 +486,8 @@ DEPENDENCIES
   doorkeeper-i18n
   dotenv-rails
   dropzonejs-rails
-  elasticsearch-model
-  elasticsearch-rails
+  elasticsearch-model (~> 5.0.2)
+  elasticsearch-rails (~> 5.0.2)
   exception-track
   factory_bot_rails
   font-awesome-rails

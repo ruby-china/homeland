@@ -44,6 +44,13 @@ CarrierWave.configure do |config|
     config.upyun_password = Setting.upload_access_secret
     config.upyun_bucket = Setting.upload_bucket
     config.upyun_bucket_host = Setting.upload_url
+  when "qiniu"
+    config.storage              = :qiniu
+    config.qiniu_access_key     = Setting.upload_access_id
+    config.qiniu_secret_key     = Setting.upload_access_secret
+    config.qiniu_bucket         = Setting.upload_bucket
+    config.qiniu_protocol       = Setting.upload_url.split("://")[0]
+    config.qiniu_bucket_domain  = Setting.upload_url.split("://")[1]
   else
     config.storage = :file
   end

@@ -22,13 +22,13 @@ describe ApplicationHelper, type: :helper do
 
     describe "<script>" do
       it "should block script" do
-        expect(helper.sanitize_markdown("<script>alert("");</script>")).to eq("alert();")
+        expect(helper.sanitize_markdown("<script>alert("");</script>foo")).to eq("foo")
       end
     end
 
     describe "<style>" do
       it "should block style" do
-        expect(helper.sanitize_markdown("<style>.body{}</style>")).to eq(".body{}")
+        expect(helper.sanitize_markdown("<style>.body{}</style>foo")).to eq("foo")
       end
     end
 

@@ -17,6 +17,7 @@
       popular: "Popular Topics"
       no_reply: "Unactive Topics"
       excellent: "Excellent Topics"
+      favorites: "Favorite Topics"
     read_topic: "Read Topic"
     create_topic_success: "Topic created successfully."
     delete_topic_success: "Topic deleted successfully.."

@@ -42,7 +42,7 @@ gem "carrierwave"
 # Aliyun / Upyun / Qiniu 可选项
 gem "carrierwave-aliyun"
 gem "carrierwave-upyun"
-gem 'carrierwave-qiniu'
+gem "carrierwave-qiniu"
 
 # Lazy load
 gem "mini_magick", require: false

@@ -46,12 +46,12 @@ module Users
 
     def follow
       current_user.follow_user(@user)
-      render json: { code: 0, data: { followers_count: @user.followers_count } }
+      render json: { code: 0, data: { followers_count: @user.reload.followers_count } }
     end
 
     def unfollow
       current_user.unfollow_user(@user)
-      render json: { code: 0, data: { followers_count: @user.followers_count } }
+      render json: { code: 0, data: { followers_count: @user.reload.followers_count } }
     end
 
     def followers

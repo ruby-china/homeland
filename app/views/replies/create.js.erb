@@ -1,5 +1,5 @@
 <% if !@reply.errors.blank? %>
-  _topicView.replyCallback(0, '<%= j(@msg) %>');
+  _topicView.replyCallback(0, '<%= raw(@msg) %>');
 <% else %>
   <% if @reply.upvote? %>
     Turbolinks.visit(location.href);

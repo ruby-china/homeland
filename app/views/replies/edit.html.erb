@@ -3,7 +3,7 @@
     修改回帖 <span class="pull-right"><%= topic_title_tag(@topic) %></span>
   </div>
   <div class="card-body">
-    <%= form_for [@topic, @reply], remote: true, tb: 'edit-reply' do |f| %>
+    <%= form_for [@topic, @reply], remote: true, html: { tb: 'edit-reply' }  do |f| %>
       <%= render "shared/error_messages", target: @reply %>
       <%= render "/shared/editor_toolbar" %>
       <div class="form-group">

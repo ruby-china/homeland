@@ -27,7 +27,6 @@ window.Editor = Backbone.View.extend
       maxFilesize: 20
       uploadMultiple: false
       acceptedFiles: 'image/*'
-      capture: 'image/'
       headers:
         "X-CSRF-Token": $("meta[name=\"csrf-token\"]").attr("content")
       previewContainer: false

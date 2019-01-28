@@ -21,7 +21,7 @@ module Homeland
         lax_spacing: true,
         space_after_headers: true,
         disable_indented_code_blocks: true,
-        no_intra_emphasis: true,
+        no_intra_emphasis: true
       }
 
       def call
@@ -33,9 +33,13 @@ module Homeland
       class Render < Redcarpet::Render::HTML
         include Rouge::Plugins::Redcarpet
 
+        attr_accessor :domain
+
         class << self
           def to_html(raw)
-            @render ||= Redcarpet::Markdown.new(self.new, DEFAULT_OPTIONS)
+            renderer = self.new
+            renderer.domain = Setting.domain
+            @render ||= Redcarpet::Markdown.new(renderer, DEFAULT_OPTIONS)
             @render.render(raw)
           end
         end
@@ -78,6 +82,20 @@ module Homeland
             %(<img src="#{link}" height="#{Regexp.last_match(1)}px" alt="#{alt_text}">)
           else
             %(<img src="#{link}" title="#{title}" alt="#{alt_text}">)
+          end
+        end
+
+        def link(link, title, content)
+          uri = URI.parse(link)
+          internal = false
+          if uri.host.blank? || uri.host.downcase == self.domain
+            internal = true
+          end
+
+          if internal
+            %(<a href="#{link}" title="#{title}">#{content}</a>)
+          else
+            %(<a href="#{link}" rel="nofollow" target="_blank" title="#{title}">#{content}</a>)
           end
         end
 

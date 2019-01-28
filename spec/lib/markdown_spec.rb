@@ -79,6 +79,20 @@ describe "markdown" do
           )
         end
 
+        it "should link with nofollow" do
+          expect(Homeland::Markdown.call("[Hello](http://hello.com)")).to eq(
+            %(<p><a href="http://hello.com" rel="nofollow" target="_blank" title="">Hello</a></p>)
+          )
+
+          expect(Homeland::Markdown.call("[Hello](http://#{Setting.domain}/foo/bar \"This is title\")")).to eq(
+            %(<p><a href="http://#{Setting.domain}/foo/bar" title="This is title">Hello</a></p>)
+          )
+
+          expect(Homeland::Markdown.call("[Hello](/foo/bar)")).to eq(
+            %(<p><a href="/foo/bar" title="">Hello</a></p>)
+          )
+        end
+
         it "should link mentioned user at first of line" do
           expect(Homeland::Markdown.call("@huacnlee hello @ruby_box")).to eq('<p><a href="/huacnlee" class="user-mention" title="@huacnlee"><i>@</i>huacnlee</a> hello <a href="/ruby_box" class="user-mention" title="@ruby_box"><i>@</i>ruby_box</a></p>')
         end
@@ -175,7 +189,7 @@ describe "markdown" do
 
       context "h3 with inline link" do
         let(:raw) { "### [rails_panel](https://github.com/dejan/rails_panel)" }
-        let(:html) { %(<h3 id="rails_panel"><a href="https://github.com/dejan/rails_panel">rails_panel</a></h3>) }
+        let(:html) { %(<h3 id="rails_panel"><a href="https://github.com/dejan/rails_panel" rel="nofollow" target="_blank" title="">rails_panel</a></h3>) }
         it { is_expected.to eq(html) }
       end
     end

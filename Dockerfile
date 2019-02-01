@@ -1,5 +1,5 @@
 # NAME:     homeland/homeland
-FROM ruby:2.6.0-rc2-alpine
+FROM ruby:2.6.0-alpine
 
 MAINTAINER Jason Lee "https://github.com/huacnlee"
 RUN gem install bundler

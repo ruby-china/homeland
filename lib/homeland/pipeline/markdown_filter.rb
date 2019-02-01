@@ -86,16 +86,16 @@ module Homeland
         end
 
         def link(link, title, content)
-          uri = URI.parse(link)
-          internal = false
-          if uri.host.blank? || uri.host.downcase == self.domain
-            internal = true
+          external = false
+          uri = URI.parse(link) rescue nil
+          if uri&.host && uri&.host&.downcase != self.domain
+            external = true
           end
 
-          if internal
-            %(<a href="#{link}" title="#{title}">#{content}</a>)
-          else
+          if external
             %(<a href="#{link}" rel="nofollow" target="_blank" title="#{title}">#{content}</a>)
+          else
+            %(<a href="#{link}" title="#{title}">#{content}</a>)
           end
         end
 

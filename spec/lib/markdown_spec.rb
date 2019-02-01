@@ -93,6 +93,12 @@ describe "markdown" do
           )
         end
 
+        it "should work with invalid url" do
+          expect(Homeland::Markdown.call(%([Hello](#foobar)))).to eq(
+            %(<p><a href="#foobar" title="">Hello</a></p>)
+          )
+        end
+
         it "should link mentioned user at first of line" do
           expect(Homeland::Markdown.call("@huacnlee hello @ruby_box")).to eq('<p><a href="/huacnlee" class="user-mention" title="@huacnlee"><i>@</i>huacnlee</a> hello <a href="/ruby_box" class="user-mention" title="@ruby_box"><i>@</i>ruby_box</a></p>')
         end

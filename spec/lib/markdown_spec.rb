@@ -99,6 +99,13 @@ describe "markdown" do
           )
         end
 
+        it "should work with complex invalid url" do
+          url = "https://google.com/foo/bar.html?spm=5176.2020520101.0.0.FAnpY8#Foo中文的Anchor"
+          expect(Homeland::Markdown.call(%([Hello](#{url})))).to eq(
+            %(<p><a href="https://google.com/foo/bar.html?spm=5176.2020520101.0.0.FAnpY8#Foo%E4%B8%AD%E6%96%87%E7%9A%84Anchor" rel="nofollow" target="_blank" title="">Hello</a></p>)
+          )
+        end
+
         it "should link mentioned user at first of line" do
           expect(Homeland::Markdown.call("@huacnlee hello @ruby_box")).to eq('<p><a href="/huacnlee" class="user-mention" title="@huacnlee"><i>@</i>huacnlee</a> hello <a href="/ruby_box" class="user-mention" title="@ruby_box"><i>@</i>ruby_box</a></p>')
         end

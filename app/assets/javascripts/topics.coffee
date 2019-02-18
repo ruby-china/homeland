@@ -227,35 +227,69 @@ window.TopicView = Backbone.View.extend
     return false
 
   initComponents : ->
-    $("textarea.topic-editor").unbind "keydown.cr"
-    $("textarea.topic-editor").bind "keydown.cr", "ctrl+return", (el) =>
-      return @submitTextArea(el)
+    if Config.editor == 'simditor' && $('.simditor-textarea').length > 0
+      toolbarItems = []
+      if App.mobile || $('.simditor-textarea-simplified').length > 0
+        toolbarItems = if Config.editor_code
+          ['title','bold','fontScale', 'color','ol','ul','code','table','link','image','hr', 'alignment']
+        else
+          ['title','bold','fontScale', 'color','ol','ul','table','link','image','hr', 'alignment']
+      else
+        toolbarItems = if Config.editor_code
+          ['title','bold','italic','underline','strikethrough','fontScale', 'color','|', 'ol','ul','blockquote','code','table','|','link','image','hr','|',
+            'indent','outdent', 'alignment']
+        else
+          ['title','bold','italic','underline','strikethrough','fontScale', 'color','|', 'ol','ul','blockquote','table','|','link','image','hr','|',
+            'indent','outdent', 'alignment']
 
-    $("textarea.topic-editor").unbind "keydown.mr"
-    $("textarea.topic-editor").bind "keydown.mr", "Meta+return", (el) =>
-      return @submitTextArea(el)
+      toolbarFloatOffset = if document.body.clientWidth < 768 then 0 else 50
+      window._editor = new Simditor
+        textarea: $('.simditor-textarea'),
+        toolbar: toolbarItems,
+        toolbarFloat: true,
+        toolbarFloatOffset: toolbarFloatOffset,
+        pasteImage: true,
+        #cleanPaste: true,
+        defaultImage: '',
+        upload:
+          url: '/photos',
+          params: null,
+          fileKey: 'file',
+          connectionCount: 3,
+          leaveConfirm: '正在上传文件'
 
-    # also highlight if hash is reply#
-    matchResult = window.location.hash.match(/^#reply\-(\d+)$/)
-    if matchResult?
-      @highlightReply($("#reply-#{matchResult[1]}").parent())
+      # @ Mention complete
+      App.mentionable(".simditor-body", App.scanMentionableLogins($(".reply")))
+    else
+      $("textarea.topic-editor").unbind "keydown.cr"
+      $("textarea.topic-editor").bind "keydown.cr", "ctrl+return", (el) =>
+        return @submitTextArea(el)
 
-    @hookPreview($(".editor-toolbar"), $(".topic-editor"))
+      $("textarea.topic-editor").unbind "keydown.mr"
+      $("textarea.topic-editor").bind "keydown.mr", "Meta+return", (el) =>
+        return @submitTextArea(el)
 
-    $("body").bind "keydown", "m", (el) ->
-      $('#markdown_help_tip_modal').modal
-        keyboard : true
-        backdrop : true
-        show : true
+      # also highlight if hash is reply#
+      matchResult = window.location.hash.match(/^#reply\-(\d+)$/)
+      if matchResult?
+        @highlightReply($("#reply-#{matchResult[1]}").parent())
 
-    # @ Mention complete
-    App.mentionable("textarea", App.scanMentionableLogins($(".reply")))
+      @hookPreview($(".editor-toolbar"), $(".topic-editor"))
 
-    # Focus title field in new-topic page
-    $("body[data-controller-name='topics'] #topic_title").focus()
+      $("body").bind "keydown", "m", (el) ->
+        $('#markdown_help_tip_modal').modal
+          keyboard : true
+          backdrop : true
+          show : true
 
-    # init editor toolbar
-    window._editor = new Editor()
+      # @ Mention complete
+      App.mentionable("textarea", App.scanMentionableLogins($(".reply")))
+
+      # Focus title field in new-topic page
+      $("body[data-controller-name='topics'] #topic_title").focus()
+
+      # init editor toolbar
+      window._editor = new Editor()
 
   initCableUpdate: () ->
     self = @

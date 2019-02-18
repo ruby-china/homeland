@@ -36,13 +36,19 @@
         </div>
       <% end %>
 
-      <div class="card-body markdown markdown-toc">
-        <%= raw Setting.before_topic_html %>
+      <%if Setting.editor == 'simditor'%>
+        <div class="card-body simditor-html">
+          <%=raw @topic.body%>
+        </div>
+      <%else%>
+        <div class="card-body markdown markdown-toc">
+          <%= raw Setting.before_topic_html %>
 
-        <%= @topic.body_html %>
+          <%= @topic.body_html %>
 
-        <%= raw Setting.after_topic_html %>
-      </div>
+          <%= raw Setting.after_topic_html %>
+        </div>
+      <%end%>
 
       <div class="card-footer clearfix">
         <%= render "buttons" %>
@@ -107,3 +113,14 @@
   </div>
 <% end %>
 </div>
+
+
+<% if Setting.editor == 'simditor'%>
+  <link href="/vendor/prism/assets/stylesheet/prism.css" rel="stylesheet"/>
+  <script src="/vendor/prism/assets/javascript/prism.js"></script>
+  <script>
+    $(document).on('ready page:load', function() {
+      Prism.highlightAll();
+    });
+  </script>
+<%end%>

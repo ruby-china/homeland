@@ -14,9 +14,17 @@ class PhotosController < ApplicationController
 
     @photo.user_id = current_user.id
     if @photo.save
-      render json: { ok: true, url: @photo.image.url(:large) }
+      if Setting.editor == 'simditor'
+        render json: { success: true, file_path: @photo.image.url(:large) }
+      else
+        render json: { ok: true, url: @photo.image.url(:large) }
+      end
     else
-      render json: { ok: false }
+      if Setting.editor == 'simditor'
+        render json: { success: false, file_path: '' }
+      else
+        render json: { ok: false }
+      end
     end
   end
 end

@@ -433,6 +433,7 @@ GEM
       rufus-scheduler (~> 3.2)
       sidekiq (>= 3)
       tilt (>= 1.4.0)
+    simditor (2.3.6)
     simplecov (0.16.1)
       docile (~> 1.1)
       json (>= 1.8, < 3)
@@ -557,6 +558,7 @@ DEPENDENCIES
   second_level_cache
   sidekiq
   sidekiq-scheduler
+  simditor
   social-share-button
   spring
   spring-commands-rspec
@@ -568,4 +570,4 @@ DEPENDENCIES
   yard (>= 0.9.11)
 
 BUNDLED WITH
-   1.17.1
+   1.17.2

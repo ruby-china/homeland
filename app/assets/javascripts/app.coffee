@@ -1,3 +1,4 @@
+#= require config
 #= require jquery2
 #= require popper
 #= require bootstrap
@@ -29,6 +30,7 @@
 #= require jquery.infinitescroll.min
 #= require d3.min
 #= require cal-heatmap.min
+#= require simditor
 #= require_self
 
 AppView = Backbone.View.extend

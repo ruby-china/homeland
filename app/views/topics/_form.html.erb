@@ -16,11 +16,18 @@
     </div>
   </div>
 
-  <%= render "/shared/editor_toolbar" %>
+  <%if Setting.editor == 'simditor'%>
+    <div class="form-group topic-simditor-area">
+      <%= f.text_area :body, class: "closewarning simditor-textarea"%>
+    </div>
+  <%else%>
+    <%= render "/shared/editor_toolbar" %>
 
-  <div class="form-group">
-    <%= f.text_area :body, class: "topic-editor form-control closewarning", rows: 20 %>
-  </div>
+    <div class="form-group">
+      <%= f.text_area :body, class: "topic-editor form-control closewarning", rows: 20 %>
+    </div>
+  <%end%>
+
 
   <% if Setting.has_module?(:team) %>
     <% if current_user.team_options.any? %>
@@ -33,6 +40,9 @@
   <div class="form-actions hide-ios">
     <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving"), 'data-tb' => "save-topic" %>
 
-    <div class="pull-right hide-ios"><a href="/markdown" target="_blank"><i class="fa fa-tip"></i> 排版说明</a></div>
+    <%if Setting.editor == 'simditor'%>
+    <%else%>
+      <div class="pull-right hide-ios"><a href="/markdown" target="_blank"><i class="fa fa-tip"></i> 排版说明</a></div>
+    <%end%>
   </div>
 <% end %>

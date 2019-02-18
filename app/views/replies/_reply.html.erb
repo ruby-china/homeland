@@ -37,9 +37,16 @@
           </span>
         </div>
         <%= render 'replies/reply_to', reply: reply, show_body: false %>
-        <div class="markdown<%= ' deleted' if reply.deleted? %>">
-          <%= reply.body_html %>
-        </div>
+
+        <%if Setting.editor == 'simditor'%>
+          <div class="simditor-html <%= ' deleted' if reply.deleted? %>">
+            <%= raw reply.body%>
+          </div>
+        <%else%>
+          <div class="markdown<%= ' deleted' if reply.deleted? %>">
+            <%= reply.body_html %>
+          </div>
+        <%end%>
       </div>
     <% end %>
   </div>

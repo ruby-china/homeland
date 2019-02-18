@@ -126,6 +126,8 @@ gem "homeland-wiki", "~> 0.4.0"
 
 gem "bootsnap"
 
+gem 'simditor'
+
 group :development do
   gem "derailed"
   gem "spring"

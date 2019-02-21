@@ -5,7 +5,7 @@ defaults: &defaults
   # User profile module default: all [company,twitter,website,tagline,location,alipay,paypal,qq,weibo,wechat,douban,dingding,aliwangwang,facebook,instagram,dribbble,battle_tag,psn_id,steam_id]
   profile_fields: "<%= ENV['profile_fields'] || 'all' %>"
   #Optional editors: markdown/simditor
-  editor: 'markdown'
+  editor: "<%= ENV['editor'] || 'simditor' %>"
   domain: "<%= ENV['domain'] || 'localhost' %>"
   https: <%= ENV['https'] || 'true' %>
   admin_emails: <%= ENV['admin_emails'] || 'admin@admin.com' %>

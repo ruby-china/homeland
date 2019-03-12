@@ -104,6 +104,10 @@ describe "markdown" do
           expect(Homeland::Markdown.call(%([Hello](#{url})))).to eq(
             %(<p><a href="https://google.com/foo/bar.html?spm=5176.2020520101.0.0.FAnpY8#Foo%E4%B8%AD%E6%96%87%E7%9A%84Anchor" rel="nofollow" target="_blank" title="">Hello</a></p>)
           )
+
+          expect(Homeland::Markdown.call(%([Hello]()))).to eq(
+            %(<p><a href="" title="">Hello</a></p>)
+          )
         end
 
         it "should link mentioned user at first of line" do

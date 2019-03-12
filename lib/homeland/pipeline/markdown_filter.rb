@@ -87,7 +87,7 @@ module Homeland
 
         def link(link, title, content)
           external = false
-          safe_link = link.split("?").first
+          safe_link = link&.split("?")&.first
           uri = URI.parse(safe_link) rescue nil
           if uri&.host && uri&.host&.downcase != self.domain
             external = true

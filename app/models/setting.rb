@@ -6,7 +6,7 @@ class Setting < RailsSettings::Base
 
   class << self
     def field(key, default: nil, type: :string, separator: nil)
-      self.class.define_method(key) do
+      self.class.send(:define_method, key) do
         val = self[key]
         default = default.call if default.is_a?(Proc)
         return default if val.nil?
@@ -14,12 +14,12 @@ class Setting < RailsSettings::Base
       end
 
       if type == :boolean
-        self.class.define_method("#{key}?") do
+        self.class.send(:define_method, "#{key}?") do
           val = self.send(key.to_sym)
           val == "true" || val == "1"
         end
       elsif type == :array
-        self.class.define_method("#{key.to_s.singularize}_list") do
+        self.class.send(:define_method, "#{key.to_s.singularize}_list") do
           val = self.send(key.to_sym) || ""
           separator = SEPARATOR_REGEXP if separator.nil?
           val.split(separator).reject { |str| str.empty? }

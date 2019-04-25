@@ -14,10 +14,22 @@ class AccountController < Devise::RegistrationsController
 
   # POST /resource
   def create
+    cache_key = ["user-sign-up", request.remote_ip, Date.today]
+    # IP limit
+    sign_up_count = Rails.cache.read(cache_key) || 0
+    setting_limit = Setting.sign_up_daily_limit.to_i
+    if setting_limit > 0 && sign_up_count >= setting_limit
+      message = "You not allow to sign up new Account, because your IP #{request.remote_ip} has over #{setting_limit} times in today."
+      logger.warn message
+      return render status: 403, plain: message
+    end
+
     build_resource(sign_up_params)
     resource.login = params[resource_name][:login]
     resource.email = params[resource_name][:email]
     if verify_rucaptcha?(resource) && resource.save
+      Rails.cache.write(cache_key, sign_up_count + 1)
+
       sign_in(resource_name, resource)
     end
   end

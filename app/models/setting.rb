@@ -61,6 +61,7 @@ class Setting < RailsSettings::Base
     topic_create_limit_interval
     topic_create_hour_limit_count
     allow_change_login
+    sign_up_daily_limit
   ]
 
   field :app_name, default: "Homeland"
@@ -75,6 +76,7 @@ class Setting < RailsSettings::Base
   field :modules, default: "all", type: :array
   field :profile_fields, default: "all", type: :array
   field :allow_change_login, default: false, type: :boolean
+  field :sign_up_daily_limit, default: "0"
 
   class << self
     def protocol

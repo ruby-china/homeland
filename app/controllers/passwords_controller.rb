@@ -5,7 +5,7 @@ class PasswordsController < Devise::PasswordsController
 
   def create
     self.resource = resource_class.new(resource_params.permit(:email))
-    unless verify_rucaptcha?(self.resource)
+    unless verify_complex_rucaptcha?(self.resource)
       return render "devise/passwords/new"
     end
 

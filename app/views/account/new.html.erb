@@ -29,8 +29,7 @@
         </div>
         <div class="form-group">
           <div class="input-group">
-            <%= rucaptcha_input_tag(class: 'form-control input-lg', placeholder: t('common.captcha')) %>
-            <span class="input-group-addon input-group-captcha"><a class="rucaptcha-image-box" href="#"><%= rucaptcha_image_tag %></a></span>
+            <%= render "/shared/captcha_input" %>
           </div>
         </div>
 

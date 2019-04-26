@@ -23,7 +23,7 @@ describe AccountController, type: :controller do
     let(:user) { create :user }
     before { request.env["devise.mapping"] = Devise.mappings[:user] }
     it "should work" do
-      allow_any_instance_of(ActionController::Base).to receive(:verify_rucaptcha?).and_return(true)
+      allow_any_instance_of(ActionController::Base).to receive(:verify_complex_rucaptcha?).and_return(true)
       post :create, params: { format: :js, user: { login: "newlogin", email: "newlogin@email.com", password: "password" } }
       expect(response).to have_http_status(200)
     end

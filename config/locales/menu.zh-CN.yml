@@ -133,6 +133,9 @@
     topic_create_limit_interval: "话题创建频率限制，间隔多久（单位: 秒）"
     topic_create_hour_limit_count: "1 小时内，创建话题的数量限制（单位：篇）"
     sign_up_daily_limit: "单日每个 IP 的注册用户数量限制，(0 不限制)"
+    use_recaptcha: "启用 Google reCaptcha 开启更强的验证码保护"
+    recaptcha_key: "Google reCaptcha 网站密钥"
+    recaptcha_secret: "Google reCaptcha 密钥"
   pagination:
     next: "下一页"
     prev: "上一页"

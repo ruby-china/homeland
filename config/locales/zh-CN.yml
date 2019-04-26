@@ -10,6 +10,9 @@
     timeout_expired: 'SSO Token 已过期，请重新发起请求。'
     unknown_error: '抱歉 SSO 登录的过程遇到了未处理的异常，登录失败。'
     not_found: '抱歉 SSO 登录的过程遇到了未处理的异常，登录失败。'
+  recaptcha:
+    errors:
+      verification_failed: "reCaptcha 验证不通过，请重试"
   activerecord:
     models:
       user: "用户"

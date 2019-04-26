@@ -356,6 +356,8 @@ GEM
     rb-inotify (0.10.0)
       ffi (~> 1.0)
     rdoc (6.0.4)
+    recaptcha (4.14.0)
+      json
     redcarpet (3.4.0)
     redis (4.0.3)
     redis-namespace (1.6.0)
@@ -543,6 +545,7 @@ DEPENDENCIES
   rails-i18n
   rails-settings-cached
   rails_autolink
+  recaptcha
   redcarpet
   redis
   redis-namespace

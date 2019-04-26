@@ -4,3 +4,15 @@ redis_config = Rails.application.config_for(:redis)
 RuCaptcha.configure do
   self.cache_store = [:redis_cache_store, { namespace: "rucaptcha", url: redis_config["url"], expires_in: 1.day }]
 end
+
+module ComplexCaptchaHelper
+  def verify_complex_rucaptcha?(resource = nil, opts = {})
+    if Setting.use_recaptcha?
+      return verify_recaptcha(model: resource, secret_key: Setting.recaptcha_secret)
+    else
+      return verify_complex_rucaptcha?(resource)
+    end
+  end
+end
+
+ActionController::Base.send :include, ComplexCaptchaHelper

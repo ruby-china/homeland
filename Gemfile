@@ -50,6 +50,7 @@ gem "mini_magick", require: false
 # 验证码，头像
 gem "letter_avatar"
 gem "rucaptcha"
+gem "recaptcha"
 
 # 用户系统
 gem "devise"

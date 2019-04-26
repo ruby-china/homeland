@@ -62,6 +62,9 @@ class Setting < RailsSettings::Base
     topic_create_hour_limit_count
     allow_change_login
     sign_up_daily_limit
+    use_recaptcha
+    recaptcha_key
+    recaptcha_secret
   ]
 
   field :app_name, default: "Homeland"
@@ -77,6 +80,10 @@ class Setting < RailsSettings::Base
   field :profile_fields, default: "all", type: :array
   field :allow_change_login, default: false, type: :boolean
   field :sign_up_daily_limit, default: "0"
+  field :use_recaptcha, default: false, type: :boolean
+  # default key for development env
+  field :recaptcha_key, default: "6Lcalg8TAAAAAFhLrcbC4QmxNuseboteXxP3wLxI"
+  field :recaptcha_secret, default: "6Lcalg8TAAAAAN-nZr547ORtmtpw78mTLWtVWFW2"
 
   class << self
     def protocol

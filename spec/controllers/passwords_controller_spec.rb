@@ -28,7 +28,7 @@ describe PasswordsController, type: :controller do
       expect(response).to have_http_status(200)
     end
     it "should redirect to sign in path after success" do
-      allow_any_instance_of(ActionController::Base).to receive(:verify_complex_rucaptcha?).and_return(true)
+      allow_any_instance_of(ActionController::Base).to receive(:verify_complex_captcha?).and_return(true)
       post :create, params: { user: { email: user.email } }
       expect(response).to redirect_to("/account/sign_in")
     end

@@ -6,11 +6,11 @@ RuCaptcha.configure do
 end
 
 module ComplexCaptchaHelper
-  def verify_complex_rucaptcha?(resource = nil, opts = {})
+  def verify_complex_captcha?(resource = nil, opts = {})
     if Setting.use_recaptcha?
       return verify_recaptcha(model: resource, secret_key: Setting.recaptcha_secret)
     else
-      return verify_complex_rucaptcha?(resource)
+      return verify_rucaptcha?(resource)
     end
   end
 end

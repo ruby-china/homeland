@@ -7,6 +7,7 @@ end
 
 Recaptcha.configure do |config|
   config.api_server_url = "https://recaptcha.net/recaptcha/api.js"
+  config.verify_url = "https://recaptcha.net/recaptcha/api/siteverify"
 end
 
 module ComplexCaptchaHelper

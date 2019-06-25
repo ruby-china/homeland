@@ -151,6 +151,8 @@ GEM
     elasticsearch-transport (5.0.5)
       faraday
       multi_json
+    enumize (0.2.0)
+      rails (>= 5.0.0)
     erubi (1.8.0)
     et-orbi (1.1.6)
       tzinfo
@@ -509,6 +511,7 @@ DEPENDENCIES
   dropzonejs-rails
   elasticsearch-model (~> 5.0.2)
   elasticsearch-rails (~> 5.0.2)
+  enumize
   exception-track
   factory_bot_rails
   font-awesome-rails

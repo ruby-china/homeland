@@ -63,6 +63,9 @@ gem "ruby-push-notifications"
 # 赞、关注、收藏、屏蔽等功能的数据结构
 gem "action-store"
 
+# Rails Enum 扩展
+gem "enumize"
+
 # 分页
 gem "kaminari"
 

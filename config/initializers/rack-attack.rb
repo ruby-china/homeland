@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-if Setting.rack_attack.present?
+if Setting.rack_attack[:limit] == "true"
   BLOCK_MESSAGE = ["你请求过快，超过了频率限制，暂时屏蔽一段时间。"]
 
   class Rack::Attack
     Rack::Attack.cache.store = Rails.cache
 
     ### Throttle Spammy Clients ###
-    throttle("req/ip", limit: Setting.rack_attack["limit"] || 300, period: Setting.rack_attack["period"] || 3.minutes, &:ip)
+    throttle("req/ip", limit: Setting.rack_attack[:limit] || 300, period: Setting.rack_attack[:period] || 3.minutes, &:ip)
 
     # 固定黑名单
     blocklist("blacklist/ip") do |req|

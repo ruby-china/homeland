@@ -4,7 +4,6 @@
 class Setting < RailsSettings::Base
   # keys that allow update in admin
   KEYS_IN_ADMIN = %w[
-    app_name
     navbar_brand_html
     default_locale
     auto_locale
@@ -100,21 +99,42 @@ class Setting < RailsSettings::Base
   field :topic_create_hour_limit_count, type: :integer, default: 0
   field :sign_up_daily_limit, type: :integer, default: 0
 
+  field :reject_newbie_reply_in_the_evening, default: "false", type: :boolean
   field :allow_change_login, type: :boolean, default: (ENV['allow_change_login'] || false)
+  field :topic_create_rate_limit, default: "false", type: :boolean
+  field :node_ids_hide_in_topics_index, type: :array, default: []
 
+  field :apns_pem, default: ""
+  field :blacklist_ips, default: [], type: :array
+
+  # = UI custom html
   field :navbar_brand_html, default: -> { %(<a href="/" class="navbar-brand"><b>#{self.app_name}</b></a>) }
   field :default_locale, default: "zh-CN"
   field :auto_locale, default: "false", type: :boolean
-  field :reject_newbie_reply_in_the_evening, default: "false", type: :boolean
-  field :topic_create_rate_limit, default: "false", type: :boolean
-  field :ban_reasons, default: "标题或正文描述不清楚", type: :array, separator: "\n"
+  field :custom_head_html, default: ""
+  field :navbar_html, default: ""
+  field :footer_html, default: ""
+  field :index_html, default: ""
+  field :wiki_index_html, default: ""
+  field :wiki_sidebar_html, default: ""
+  field :site_index_html, default: ""
+  field :index_html, default: ""
+  field :topic_index_sidebar_html, default: ""
+  field :before_topic_html, default: ""
+  field :after_topic_html, default: ""
+  field :topic_index_sidebar_html, default: ""
+  field :ban_reasons, default: "标题或正文描述不清楚", type: :array
   field :ban_reason_html, default: "此贴因内容原因不符合要求，被管理员屏蔽，请根据管理员给出的原因进行调整"
+  field :ban_words_on_reply, default: ""
+  field :newbie_notices, default: ""
+  field :tips, default: [], type: :array
 
   # = ReCaptcha
   field :use_recaptcha, default: false, type: :boolean
   # default key for development env
   field :recaptcha_key, default: "6Lcalg8TAAAAAFhLrcbC4QmxNuseboteXxP3wLxI"
   field :recaptcha_secret, default: "6Lcalg8TAAAAAN-nZr547ORtmtpw78mTLWtVWFW2"
+  field :google_analytics_key, default: ""
 
   class << self
     def protocol
@@ -126,27 +146,27 @@ class Setting < RailsSettings::Base
     end
 
     def has_admin?(email)
-      return false if self.admin_email_list.blank?
-      self.admin_email_list.include?(email)
+      return false if self.admin_emails.blank?
+      self.admin_emails.include?(email)
     end
 
     def has_module?(name)
-      return true if self.modules.blank? || self.modules == "all"
+      return true if self.modules.blank? || self.modules.include?("all")
       self.modules.include?(name.to_s)
     end
 
     def has_profile_field?(name)
-      return true if self.profile_fields.blank? || self.profile_fields == "all"
-      self.profile_field_list.include?(name.to_s)
+      return true if self.profile_fields.blank? || self.profile_fields.include?("all")
+      self.profile_fields.include?(name.to_s)
     end
 
     def sso_enabled?
       return false if self.sso_provider_enabled?
-      self.sso["enable"] == true
+      self.sso[:enable] == true
     end
 
     def sso_provider_enabled?
-      self.sso["enable_provider"] == true
+      self.sso[:enable_provider] == true
     end
   end
 end

@@ -10,7 +10,7 @@
         <div class="form-group">
           <select class="form-control" onchange="$('#ban-modal textarea').val($(this).val())" name="reason">
             <option value="" selected>直接屏蔽</option>
-            <% Setting.ban_reason_list.each do |str| %>
+            <% Setting.ban_reasons.each do |str| %>
             <option value="<%= str %>"><%= str %></option>
             <% end %>
           </select>

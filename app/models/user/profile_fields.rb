@@ -6,7 +6,9 @@ class User
     extend ActiveSupport::Concern
 
     included do
-      include RailsSettings::Extend
+      include ScopedSetting
+
+      scoped_field :profile_fields, default: {}
 
       PROFILE_FIELDS = %i[alipay paypal qq weibo wechat douban dingding aliwangwang
                           facebook instagram dribbble battle_tag psn_id steam_id]
@@ -23,15 +25,6 @@ class User
       before_save :store_location
     end
 
-    def profile_fields
-      return @profile_fields if defined? @profile_fields
-      @profile_fields = self.settings.profile_fields || {}
-      unless @profile_fields.is_a?(Hash)
-        @profile_fields = {}
-      end
-      @profile_fields
-    end
-
     def profile_field(field)
       return nil unless PROFILE_FIELDS.include?(field.to_sym)
       profile_fields[field.to_sym]
@@ -45,11 +38,12 @@ class User
     end
 
     def update_profile_fields(field_values)
+      val = profile_fields
       field_values.each do |key, value|
         next unless PROFILE_FIELDS.include?(key.to_sym)
-        profile_fields[key.to_sym] = value
+        val[key.to_sym] = value
       end
-      self.settings.profile_fields = profile_fields
+      self.profile_fields = val
     end
 
     module ClassMethods

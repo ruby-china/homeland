@@ -14,7 +14,6 @@ describe User, type: :model do
       expect(user.reward_enabled?).to eq false
       user.update_reward_fields(params)
       expect(user.reward_enabled?).to eq true
-      expect(user.settings.reward_fields).to eq(params)
       expect(user.reward_fields).to eq(params)
       expect(user.reward_field(:wechat)).to eq "wechat111"
       expect(user.reward_field("wechat")).to eq "wechat111"

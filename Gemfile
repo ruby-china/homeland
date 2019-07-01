@@ -23,7 +23,7 @@ gem "dotenv-rails"
 
 gem "rack-attack"
 
-gem "bootstrap", "~> 4.1.0"
+gem "bootstrap", "~> 4.3.1"
 gem "font-awesome-rails"
 gem "http_accept_language"
 gem "jquery-atwho-rails"

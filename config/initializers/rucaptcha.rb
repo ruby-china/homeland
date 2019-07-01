@@ -13,9 +13,9 @@ end
 module ComplexCaptchaHelper
   def verify_complex_captcha?(resource = nil, opts = {})
     if Setting.use_recaptcha?
-      return verify_recaptcha(model: resource, secret_key: Setting.recaptcha_secret)
+      verify_recaptcha(model: resource, secret_key: Setting.recaptcha_secret)
     else
-      return verify_rucaptcha?(resource)
+      verify_rucaptcha?(resource)
     end
   end
 end

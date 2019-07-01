@@ -507,7 +507,7 @@ describe "markdown" do
 
           describe "[:src]" do
             subject { super()[:src] }
-            it { is_expected.to eq("https://twemoji.b0.upaiyun.com/2/svg/1f34e.svg") }
+            it { is_expected.to eq("https://twemoji.ruby-china.com/2/svg/1f34e.svg") }
           end
 
           describe "[:class]" do

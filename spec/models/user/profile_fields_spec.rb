@@ -24,7 +24,6 @@ describe User, type: :model do
           dribbble: "dribbble1"
         }
         user.update_profile_fields(params)
-        expect(user.settings.profile_fields).to eq(params)
         expect(user.profile_fields).to eq(params)
         expect(user.profile_field(:weibo)).to eq "weibo1"
         expect(user.profile_field("weibo")).to eq "weibo1"

@@ -56,7 +56,7 @@ class Topic < ApplicationRecord
   end
 
   def self.topic_index_hide_node_ids
-    Setting.node_ids_hide_in_topics_index.to_s.split(",").collect(&:to_i)
+    Setting.node_ids_hide_in_topics_index.collect(&:to_i)
   end
 
   # 所有的回复编号

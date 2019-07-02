@@ -92,9 +92,7 @@ module ApplicationHelper
   end
 
   def random_tips
-    tips = Setting.tips
-    return "" if tips.blank?
-    tips.split("\n").sample
+    Setting.tips.sample
   end
 
   def icon_tag(name, opts = {})

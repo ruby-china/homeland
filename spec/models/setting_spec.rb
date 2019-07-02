@@ -11,20 +11,14 @@ describe Setting, type: :model do
 
   describe "reject_newbie_reply_in_the_evening" do
     it "should work" do
-      expect(Setting.reject_newbie_reply_in_the_evening).to eq "false"
+      expect(Setting.reject_newbie_reply_in_the_evening).to eq false
       expect(Setting.reject_newbie_reply_in_the_evening?).to eq false
-      allow(Setting).to receive(:reject_newbie_reply_in_the_evening).and_return("true")
-      expect(Setting.reject_newbie_reply_in_the_evening?).to eq true
-      allow(Setting).to receive(:reject_newbie_reply_in_the_evening).and_return("0")
-      expect(Setting.reject_newbie_reply_in_the_evening?).to eq false
-      allow(Setting).to receive(:reject_newbie_reply_in_the_evening).and_return("1")
-      expect(Setting.reject_newbie_reply_in_the_evening?).to eq true
     end
   end
 
   describe "topic_create_rate_limit" do
     it "should work" do
-      expect(Setting.topic_create_rate_limit).to eq "false"
+      expect(Setting.topic_create_rate_limit).to eq false
       expect(Setting.topic_create_rate_limit?).to eq false
     end
   end
@@ -37,16 +31,13 @@ describe Setting, type: :model do
 
   describe "auto_locale" do
     it "should work" do
-      expect(Setting.auto_locale).to eq "false"
+      expect(Setting.auto_locale).to eq false
     end
   end
 
   describe "ban_reasons" do
     it "should work" do
-      expect(Setting.ban_reasons).to eq "标题或正文描述不清楚"
-      expect(Setting.ban_reason_list).to eq ["标题或正文描述不清楚"]
-      allow(Setting).to receive(:ban_reasons).and_return("Foo Bar\nBar")
-      expect(Setting.ban_reason_list).to eq ["Foo Bar", "Bar"]
+      expect(Setting.ban_reasons).to eq ["标题或正文描述不清楚"]
     end
   end
 
@@ -74,8 +65,8 @@ describe Setting, type: :model do
 
   describe "admin_emails" do
     it "should work" do
-      expect(Setting.admin_emails).to eq "admin@admin.com"
-      allow(Setting).to receive(:admin_emails).and_return("a0@foo.com\na1@foo.com\r\na2@foo.com a3@foo.com,a4@foo.com")
+      expect(Setting.admin_emails).to eq ["admin@admin.com"]
+      allow(Setting).to receive(:admin_emails).and_return(%w[a0@foo.com a1@foo.com a2@foo.com a3@foo.com a4@foo.com])
       expect(Setting.has_admin?("huacnlee@gmail.com")).to eq false
       expect(Setting.has_admin?("a0@foo.com")).to eq true
       expect(Setting.has_admin?("a1@foo.com")).to eq true
@@ -90,8 +81,9 @@ describe Setting, type: :model do
     it "should work" do
       allow(Setting).to receive(:modules).and_return("all")
       expect(Setting.has_module?("foo")).to eq true
-      allow(Setting).to receive(:modules).and_return("home,topic\nnote\r\nsite team")
-      expect(Setting.module_list).to eq ["home", "topic", "note", "site", "team"]
+      expect(Setting.has_module?("home")).to eq true
+      expect(Setting.has_module?("topic")).to eq true
+      allow(Setting).to receive(:modules).and_return(["home", "topic", "note", "site", "team"])
       expect(Setting.has_module?("home")).to eq true
       expect(Setting.has_module?("topic")).to eq true
       expect(Setting.has_module?("note")).to eq true
@@ -105,8 +97,9 @@ describe Setting, type: :model do
     it "should work" do
       allow(Setting).to receive(:profile_fields).and_return("all")
       expect(Setting.has_profile_field?("foo")).to eq true
-      allow(Setting).to receive(:profile_fields).and_return("weibo,facebook\ndouban\nqq")
-      expect(Setting.profile_field_list).to eq ["weibo", "facebook", "douban", "qq"]
+      expect(Setting.has_profile_field?("weibo")).to eq true
+      expect(Setting.has_profile_field?("douban")).to eq true
+      allow(Setting).to receive(:profile_fields).and_return(["weibo", "facebook", "douban", "qq"])
       expect(Setting.has_profile_field?("weibo")).to eq true
       expect(Setting.has_profile_field?("facebook")).to eq true
       expect(Setting.has_profile_field?("douban")).to eq true

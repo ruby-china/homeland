@@ -6,7 +6,9 @@ class User
     extend ActiveSupport::Concern
 
     included do
-      include RailsSettings::Extend
+      include ScopedSetting
+
+      scoped_field :reward_fields, default: {}
 
       REWARD_FIELDS = %i[alipay wechat]
     end
@@ -23,21 +25,13 @@ class User
       reward_fields[field.to_sym]
     end
 
-    def reward_fields
-      return @reward_fields if defined? @reward_fields
-      @reward_fields = self.settings.reward_fields || {}
-      unless @reward_fields.is_a?(Hash)
-        @reward_fields = {}
-      end
-      @reward_fields
-    end
-
     def update_reward_fields(field_values)
+      val = self.reward_fields
       field_values.each do |key, value|
         next unless REWARD_FIELDS.include?(key.to_sym)
-        reward_fields[key.to_sym] = value
+        val[key.to_sym] = value
       end
-      self.settings.reward_fields = reward_fields
+      self.reward_fields = val
     end
 
     module ClassMethods

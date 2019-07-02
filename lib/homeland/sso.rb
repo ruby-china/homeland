@@ -74,7 +74,9 @@ module Homeland
       # Add as admin
       if admin == true
         unless Setting.has_admin?(email)
-          Setting.admin_emails = Setting.admin_emails + "\n" + email
+          emails = Setting.admin_emails
+          emails << email
+          Setting.admin_emails = emails
         end
       end
 

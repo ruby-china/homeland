@@ -127,4 +127,11 @@ describe Setting, type: :model do
       expect(Setting.allow_change_login?).to eq true
     end
   end
+
+  describe "twitter_id" do
+    it "should work" do
+      Setting.twitter_id = "ruby_china"
+      expect(Setting.twitter_id).to eq "ruby_china"
+    end
+  end
 end

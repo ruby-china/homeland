@@ -35,6 +35,7 @@ class Setting < RailsSettings::Base
     use_recaptcha
     recaptcha_key
     recaptcha_secret
+    twitter_id
   ]
 
   # = Basic
@@ -106,6 +107,8 @@ class Setting < RailsSettings::Base
 
   field :apns_pem, default: ""
   field :blacklist_ips, default: [], type: :array
+
+  field :twitter_id
 
   # = UI custom html
   field :navbar_brand_html, default: -> { %(<a href="/" class="navbar-brand"><b>#{self.app_name}</b></a>) }

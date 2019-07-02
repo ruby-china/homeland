@@ -137,6 +137,7 @@
     recaptcha_key: "Google reCaptcha 网站密钥"
     recaptcha_secret: "Google reCaptcha 密钥"
     allow_change_login: "允许用户修改用户名"
+    twitter_id: "Twitter ID 用于 Twitter 分享的时候提及，比如: ruby_china，不带 @"
   pagination:
     next: "下一页"
     prev: "上一页"

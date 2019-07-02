@@ -7,7 +7,7 @@ git_source(:github) { |repo_name| "https://github.com/#{repo_name}.git" }
 gem "coffee-rails"
 gem "jbuilder"
 gem "jquery-rails"
-gem "rails", "~> 5.2.2.1"
+gem "rails", "~> 5.2"
 gem "rails_autolink"
 gem "sass-rails"
 gem "sprockets"
@@ -23,7 +23,7 @@ gem "dotenv-rails"
 
 gem "rack-attack"
 
-gem "bootstrap", "~> 4.3.1"
+gem "bootstrap", "~> 4"
 gem "font-awesome-rails"
 gem "http_accept_language"
 gem "jquery-atwho-rails"

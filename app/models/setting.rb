@@ -45,54 +45,54 @@ class Setting < RailsSettings::Base
   field :profile_fields, default: (ENV["profile_fields"] || "all"), type: :array, readonly: true
   field :domain, default: (ENV["domain"] || "localhost"), readonly: true
   field :https, type: :boolean, default: (ENV["https"] || "true"), readonly: true
-  field :asset_host, default: ENV['asset_host'], readonly: true
+  field :asset_host, default: (ENV["asset_host"] || nil), readonly: true
 
   # = Rack Attach
   field :rack_attack, type: :hash, readonly: true, default: {
-    limit: ENV['rack_attack_limit'] || ENV['rack_attack.limit'] || "false",
-    period: ENV['rack_attack_period'] || ENV['rack_attack.period'],
+    limit: ENV["rack_attack_limit"] || ENV["rack_attack.limit"] || "false",
+    period: ENV["rack_attack_period"] || ENV["rack_attack.period"],
   }
 
   # = Uploader
   # can be  upyun/aliyun
-  field :upload_provider, default: (ENV['upload_provider'] || 'file'), readonly: true
+  field :upload_provider, default: (ENV["upload_provider"] || "file"), readonly: true
   # access_id or upyun username
-  field :upload_access_id, default: ENV['upload_access_id'], readonly: true
+  field :upload_access_id, default: ENV["upload_access_id"], readonly: true
   # access_secret or upyun password
-  field :upload_access_secret, default: ENV['upload_access_secret'], readonly: true
-  field :upload_bucket, default: ENV['upload_bucket'], readonly: true
-  field :upload_url, default: ENV['upload_url'], readonly: true
-  field :upload_aliyun_internal, type: :boolean, default: (ENV['upload_aliyun_internal'] || "false"), readonly: true
-  field :upload_aliyun_area, default: ENV['upload_aliyun_area'], readonly: true
+  field :upload_access_secret, default: ENV["upload_access_secret"], readonly: true
+  field :upload_bucket, default: ENV["upload_bucket"], readonly: true
+  field :upload_url, default: ENV["upload_url"], readonly: true
+  field :upload_aliyun_internal, type: :boolean, default: (ENV["upload_aliyun_internal"] || "false"), readonly: true
+  field :upload_aliyun_area, default: ENV["upload_aliyun_area"], readonly: true
 
   # = Mailer
-  field :mailer_provider, default: (ENV['mailer_provider'] || 'smtp'), readonly: true
-  field :mailer_sender, default: (ENV['mailer_sender'] || 'no-reply@localhost'), readonly: true
+  field :mailer_provider, default: (ENV["mailer_provider"] || "smtp"), readonly: true
+  field :mailer_sender, default: (ENV["mailer_sender"] || "no-reply@localhost"), readonly: true
   field :mailer_options, type: :hash, readonly: true, default: {
-    api_key: (ENV['mailer_options_api_key'] || ENV['mailer_options.api_key']),
-    address: (ENV['mailer_options_address'] || ENV['mailer_options.address']),
-    port: (ENV['mailer_options_port'] || ENV['mailer_options.port']),
-    domain: (ENV['mailer_options_domain'] || ENV['mailer_options.domain']),
-    user_name: (ENV['mailer_options_user_name'] || ENV['mailer_options.user_name']),
-    password: (ENV['mailer_options_password'] || ENV['mailer_options.password']),
-    authentication: (ENV['mailer_options_authentication'] || ENV['mailer_options.authentication'] || "login"),
-    enable_starttls_auto: (ENV['mailer_options_enable_starttls_auto'] || ENV['mailer_options.enable_starttls_auto'])
+    api_key: (ENV["mailer_options_api_key"] || ENV["mailer_options.api_key"]),
+    address: (ENV["mailer_options_address"] || ENV["mailer_options.address"]),
+    port: (ENV["mailer_options_port"] || ENV["mailer_options.port"]),
+    domain: (ENV["mailer_options_domain"] || ENV["mailer_options.domain"]),
+    user_name: (ENV["mailer_options_user_name"] || ENV["mailer_options.user_name"]),
+    password: (ENV["mailer_options_password"] || ENV["mailer_options.password"]),
+    authentication: (ENV["mailer_options_authentication"] || ENV["mailer_options.authentication"] || "login"),
+    enable_starttls_auto: (ENV["mailer_options_enable_starttls_auto"] || ENV["mailer_options.enable_starttls_auto"])
   }
 
   # = SSO
   field :sso, type: :hash, readonly: true, default: {
-    enable: (ENV['sso_enable'] || ENV['sso.enable'] || false),
-    enable_provider: (ENV['sso_enable_provider'] || ENV['sso_enable.provider'] || false),
-    url: (ENV['sso_url'] || ENV['sso.url']),
-    secret: (ENV['sso_secret'] || ENV['sso.secret']),
+    enable: (ENV["sso_enable"] || ENV["sso.enable"] || false),
+    enable_provider: (ENV["sso_enable_provider"] || ENV["sso_enable.provider"] || false),
+    url: (ENV["sso_url"] || ENV["sso.url"]),
+    secret: (ENV["sso_secret"] || ENV["sso.secret"]),
   }
 
   # = API Keys
-  field :github_token, default: ENV['github_token'], readonly: true
-  field :github_secret, default: ENV['github_secret'], readonly: true
+  field :github_token, default: ENV["github_token"], readonly: true
+  field :github_secret, default: ENV["github_secret"], readonly: true
 
   # = Other Site Configs
-  field :admin_emails, type: :array, default: (ENV['admin_emails'] || "admin@admin.com")
+  field :admin_emails, type: :array, default: (ENV["admin_emails"] || "admin@admin.com")
 
   field :newbie_limit_time, type: :integer, default: 0
   field :topic_create_limit_interval, type: :integer, default: 0
@@ -100,7 +100,7 @@ class Setting < RailsSettings::Base
   field :sign_up_daily_limit, type: :integer, default: 0
 
   field :reject_newbie_reply_in_the_evening, default: "false", type: :boolean
-  field :allow_change_login, type: :boolean, default: (ENV['allow_change_login'] || false)
+  field :allow_change_login, type: :boolean, default: (ENV["allow_change_login"] || false)
   field :topic_create_rate_limit, default: "false", type: :boolean
   field :node_ids_hide_in_topics_index, type: :array, default: []
 

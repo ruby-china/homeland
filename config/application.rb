@@ -24,7 +24,7 @@ module Homeland
 
     # Ensure App config files exist.
     if Rails.env.development?
-      %w[config redis secrets elasticsearch].each do |fname|
+      %w[redis secrets elasticsearch].each do |fname|
         filename = "config/#{fname}.yml"
         next if File.exist?(Rails.root.join(filename))
         FileUtils.cp(Rails.root.join("#{filename}.default"), Rails.root.join(filename))

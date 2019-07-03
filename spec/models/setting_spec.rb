@@ -134,4 +134,44 @@ describe Setting, type: :model do
       expect(Setting.twitter_id).to eq "ruby_china"
     end
   end
+
+  describe "node_ids_hide_in_topics_index" do
+    it "should work" do
+      Setting.node_ids_hide_in_topics_index = <<~LINES
+      100
+      101,102,103
+      LINES
+      expect(Setting.node_ids_hide_in_topics_index).to eq %w[100 101 102 103]
+    end
+  end
+
+  describe "blacklist_ips" do
+    it "should work" do
+      Setting.blacklist_ips = <<~LINES
+      10.10.10.10
+      11.11.11.11,12.12.12.12
+      LINES
+      expect(Setting.blacklist_ips).to eq ["10.10.10.10", "11.11.11.11", "12.12.12.12"]
+    end
+  end
+
+  describe "ban_words_on_reply" do
+    it "should work" do
+      Setting.ban_words_on_reply = <<~LINES
+      This is first line.
+      And, this is second line.
+      LINES
+      expect(Setting.ban_words_on_reply).to eq ["This is first line.", "And, this is second line."]
+    end
+  end
+
+  describe "tips" do
+    it "should work" do
+      Setting.tips = <<~LINES
+      This is first line.
+      And, this is second line.
+      LINES
+      expect(Setting.tips).to eq ["This is first line.", "And, this is second line."]
+    end
+  end
 end

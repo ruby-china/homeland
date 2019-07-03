@@ -126,11 +126,11 @@ class Setting < RailsSettings::Base
   field :before_topic_html, default: ""
   field :after_topic_html, default: ""
   field :topic_index_sidebar_html, default: ""
-  field :ban_reasons, default: "标题或正文描述不清楚", type: :array
+  field :ban_reasons, default: "标题或正文描述不清楚", type: :array, separator: /[\n]+/
   field :ban_reason_html, default: "此贴因内容原因不符合要求，被管理员屏蔽，请根据管理员给出的原因进行调整"
-  field :ban_words_on_reply, default: ""
+  field :ban_words_on_reply, default: [], type: :array, separator: /[\n]+/
   field :newbie_notices, default: ""
-  field :tips, default: [], type: :array
+  field :tips, default: [], type: :array, separator: /[\n]+/
 
   # = ReCaptcha
   field :use_recaptcha, default: false, type: :boolean

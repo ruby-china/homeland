@@ -93,7 +93,7 @@ class Setting < RailsSettings::Base
   field :github_secret, default: ENV["github_secret"], readonly: true
 
   # = Other Site Configs
-  field :admin_emails, type: :array, default: (ENV["admin_emails"] || "admin@admin.com")
+  field :admin_emails, type: :array, default: (ENV["admin_emails"] || "admin@admin.com"), separator: /[\s,]+/
 
   field :newbie_limit_time, type: :integer, default: 0
   field :topic_create_limit_interval, type: :integer, default: 0
@@ -150,17 +150,17 @@ class Setting < RailsSettings::Base
 
     def has_admin?(email)
       return false if self.admin_emails.blank?
-      self.admin_emails.include?(email)
+      self.admin_emails.map { |str| str.strip }.include?(email)
     end
 
     def has_module?(name)
       return true if self.modules.blank? || self.modules.include?("all")
-      self.modules.include?(name.to_s)
+      self.modules.map { |str| str.strip }.include?(name.to_s)
     end
 
     def has_profile_field?(name)
       return true if self.profile_fields.blank? || self.profile_fields.include?("all")
-      self.profile_fields.include?(name.to_s)
+      self.profile_fields.map { |str| str.strip }.include?(name.to_s)
     end
 
     def sso_enabled?

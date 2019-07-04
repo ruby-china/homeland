@@ -66,14 +66,18 @@ describe Setting, type: :model do
   describe "admin_emails" do
     it "should work" do
       expect(Setting.admin_emails).to eq ["admin@admin.com"]
-      allow(Setting).to receive(:admin_emails).and_return(%w[a0@foo.com a1@foo.com a2@foo.com a3@foo.com a4@foo.com])
+      Setting.admin_emails = "admin@admin.com a0@foo.com\r\na1@foo.com\na2@foo.com\ra3@foo.com,a4@foo.com"
       expect(Setting.has_admin?("huacnlee@gmail.com")).to eq false
+      expect(Setting.has_admin?("admin@admin.com")).to eq true
       expect(Setting.has_admin?("a0@foo.com")).to eq true
       expect(Setting.has_admin?("a1@foo.com")).to eq true
       expect(Setting.has_admin?("a2@foo.com")).to eq true
       expect(Setting.has_admin?("a3@foo.com")).to eq true
       expect(Setting.has_admin?("a4@foo.com")).to eq true
       expect(Setting.has_admin?("a5@foo.com")).to eq false
+      allow(Setting).to receive(:admin_emails).and_return(["foo@bar.com\n", "foo1@bar.com "])
+      expect(Setting.has_admin?("foo@bar.com")).to eq true
+      expect(Setting.has_admin?("foo1@bar.com")).to eq true
     end
   end
 
@@ -83,7 +87,7 @@ describe Setting, type: :model do
       expect(Setting.has_module?("foo")).to eq true
       expect(Setting.has_module?("home")).to eq true
       expect(Setting.has_module?("topic")).to eq true
-      allow(Setting).to receive(:modules).and_return(["home", "topic", "note", "site", "team"])
+      allow(Setting).to receive(:modules).and_return(["home", "topic\n", "note", "site", "team "])
       expect(Setting.has_module?("home")).to eq true
       expect(Setting.has_module?("topic")).to eq true
       expect(Setting.has_module?("note")).to eq true
@@ -99,7 +103,7 @@ describe Setting, type: :model do
       expect(Setting.has_profile_field?("foo")).to eq true
       expect(Setting.has_profile_field?("weibo")).to eq true
       expect(Setting.has_profile_field?("douban")).to eq true
-      allow(Setting).to receive(:profile_fields).and_return(["weibo", "facebook", "douban", "qq"])
+      allow(Setting).to receive(:profile_fields).and_return(["weibo", "facebook\n", "douban ", "qq"])
       expect(Setting.has_profile_field?("weibo")).to eq true
       expect(Setting.has_profile_field?("facebook")).to eq true
       expect(Setting.has_profile_field?("douban")).to eq true

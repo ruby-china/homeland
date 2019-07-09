@@ -22,7 +22,7 @@ class BaseUploader < CarrierWave::Uploader::Base
     dir
   end
 
-  def extension_white_list
+  def extension_whitelist
     %w[jpg jpeg gif png svg]
   end
 

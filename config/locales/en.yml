@@ -28,6 +28,9 @@ en:
     timeout_expired: 'SSO Token was expired.'
     unknown_error: 'Sorry, this have an unknown error with SSO login.'
     not_found: 'Sorry, this have an unknown error with SSO login.'
+  errors:
+    messages:
+      extension_whitelist_error: "Invalid file format, only image allowed [jpg, jpeg, gif, png, svg]"
   activerecord:
     models:
       user: "User"
@@ -95,7 +98,7 @@ en:
         blank: "Cannot be blank."
         too_long: "Too long (limited to %{count} characters)."
         too_short: "Too short (at least %{count} characters are required)."
-        wrong_length: "Invvalid length (valid length: %{count} characters)."
+        wrong_length: "Invalid length (valid length: %{count} characters)."
         taken: "already taken"
         not_a_number: "Not a number"
         not_an_integer: "Not an integer"

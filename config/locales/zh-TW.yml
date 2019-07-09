@@ -9,7 +9,7 @@
     not_found: '抱歉 SSO 登錄的過程遇到了未處理的異常，登陸失敗。'
   errors:
     message:
-      extension_whitelist_error: "僅允許圖片文件上傳 [jpg, jpeg, gif, png, svg]"
+      extension_whitelist_error: "僅允許圖片文件上傳 [jpg, jpeg, gif, png]"
   activerecord:
     models:
       user: "用戶"

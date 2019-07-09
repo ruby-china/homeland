@@ -15,7 +15,7 @@
       verification_failed: "reCaptcha 验证不通过，请重试"
   errors:
     messages:
-      extension_whitelist_error: "仅允许图片文件上传 [jpg, jpeg, gif, png, svg]"
+      extension_whitelist_error: "仅允许图片文件上传 [jpg, jpeg, gif, png]"
   activerecord:
     enums:
       user:

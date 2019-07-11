@@ -3,9 +3,9 @@
 require "rails_helper"
 
 describe "PhotoUploader" do
-  let(:not_an_image) { fixture_file_upload('test.html', 'text/html') }
-  let(:svg_image) { fixture_file_upload('test.html', 'text/html') }
-  let(:image) { fixture_file_upload('test.png', 'image/png') }
+  let(:not_an_image) { fixture_file_upload("test.html", "text/html") }
+  let(:svg_image) { fixture_file_upload("test.html", "text/html") }
+  let(:image) { fixture_file_upload("test.png", "image/png") }
 
   it "extension limit" do
     photo = build(:photo, image: not_an_image)

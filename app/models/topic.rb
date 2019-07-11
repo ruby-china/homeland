@@ -7,11 +7,11 @@ class Topic < ApplicationRecord
   # 临时存储检测用户是否读过的结果
   attr_accessor :read_state, :admin_editing
 
-  belongs_to :user, inverse_of: :topics, counter_cache: true, optional: true
-  belongs_to :team, counter_cache: true, optional: true
-  belongs_to :node, counter_cache: true, optional: true
-  belongs_to :last_reply_user, class_name: "User", optional: true
-  belongs_to :last_reply, class_name: "Reply", optional: true
+  belongs_to :user, inverse_of: :topics, counter_cache: true, required: false
+  belongs_to :team, counter_cache: true, required: false
+  belongs_to :node, counter_cache: true, required: false
+  belongs_to :last_reply_user, class_name: "User", required: false
+  belongs_to :last_reply, class_name: "Reply", required: false
   has_many :replies, dependent: :destroy
 
   validates :user_id, :title, :body, :node_id, presence: true

@@ -21,6 +21,8 @@ end
 
 Devise.stretches = 1
 Rails.logger.level = 4
+# https://github.com/thoughtbot/factory_bot/blob/master/GETTING_STARTED.md#associations
+FactoryBot.use_parent_strategy = false
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are

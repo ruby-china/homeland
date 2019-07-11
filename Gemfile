@@ -7,7 +7,7 @@ git_source(:github) { |repo_name| "https://github.com/#{repo_name}.git" }
 gem "coffee-rails"
 gem "jbuilder"
 gem "jquery-rails"
-gem "rails", "~> 5.2"
+gem "rails", "~> 6.0.0.rc1"
 gem "rails_autolink"
 gem "sass-rails"
 gem "sprockets"
@@ -122,11 +122,11 @@ gem "exception-track"
 gem "status-page"
 
 # Homeland Plugins
-gem "homeland-jobs", "~> 0.3.0"
-gem "homeland-note", "~> 0.2.0"
-gem "homeland-press",  "~> 0.4.0"
-gem "homeland-site",  "~> 0.3.0"
-gem "homeland-wiki", "~> 0.4.0"
+gem "homeland-jobs"
+gem "homeland-note"
+gem "homeland-press"
+gem "homeland-site"
+gem "homeland-wiki"
 
 gem "bootsnap"
 

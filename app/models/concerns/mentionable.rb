@@ -27,9 +27,12 @@ module Mentionable
 
   def extract_mentioned_users
     logins = body.scan(/@([#{User::LOGIN_FORMAT}]{3,20})/).flatten.map(&:downcase)
+    logins.delete(user.login.downcase) if user
+
     if logins.any?
-      self.mentioned_user_ids = User.without_team.where("lower(login) IN (?) AND id != (?)", logins, user.id).limit(5).pluck(:id)
+      self.mentioned_user_ids = User.without_team.where("lower(login) IN (?)", logins).limit(5).pluck(:id)
     end
+
 
     # add Reply to user_id
     if self.respond_to?(:reply_to)

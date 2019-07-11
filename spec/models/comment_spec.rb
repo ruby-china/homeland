@@ -18,7 +18,7 @@ describe Comment, type: :model do
     it "should work" do
       comment = build(:comment, commentable: monkey)
       expect do
-        comment.save
+        comment.save!
       end.to change(Comment, :count).by(1)
       monkey.reload
       expect(monkey.comments_count).to eq 1
@@ -28,7 +28,7 @@ describe Comment, type: :model do
       body = "@#{user.login} 还好"
       comment = build(:comment, commentable: monkey, body: body)
       expect do
-        comment.save
+        comment.save!
       end.to change(Notification, :count).by(1)
       note = user.notifications.last
       expect(note.notify_type).to eq("mention")
@@ -45,7 +45,7 @@ describe Comment, type: :model do
       it "should notify commentable creator" do
         comment = build(:comment, commentable: monkey, body: "Hello")
         expect do
-          comment.save
+          comment.save!
         end.to change(Notification, :count).by(1)
         note = monkey_user.notifications.last
         expect(note.notify_type).to eq("comment")
@@ -58,7 +58,7 @@ describe Comment, type: :model do
       it "should only once notify when have mention" do
         comment = build(:comment, commentable: monkey, body: "Hello @#{monkey_user.login}")
         expect do
-          comment.save
+          comment.save!
         end.to change(Notification, :count).by(1)
         note = monkey_user.notifications.last
         expect(note.notify_type).to eq("mention")

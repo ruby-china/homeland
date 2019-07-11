@@ -56,4 +56,19 @@ describe Node, type: :model do
       expect(node.collapse_summary?).to eq true
     end
   end
+
+  describe "find_builtin_node" do
+    it "should work" do
+      node = Node.find_builtin_node(10, "Foo")
+      expect(node.new_record?).to eq(false)
+      expect(node.id).to eq(10)
+      expect(node.name).to eq("Foo")
+    end
+
+    it "should work when same id exists" do
+      exist_node = create(:node)
+      node = Node.find_builtin_node(exist_node.id, "Foo")
+      expect(exist_node).to eq(node)
+    end
+  end
 end

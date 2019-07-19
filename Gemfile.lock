@@ -80,9 +80,6 @@ GEM
     builder (3.2.3)
     bulk_insert (1.7.0)
       activerecord (>= 3.2.0)
-    bundler-audit (0.6.1)
-      bundler (>= 1.2.0, < 3)
-      thor (~> 0.18)
     cancancan (3.0.1)
     capybara (3.26.0)
       addressable
@@ -518,7 +515,6 @@ DEPENDENCIES
   bootsnap
   bootstrap (~> 4)
   bulk_insert
-  bundler-audit
   cancancan
   capybara
   carrierwave

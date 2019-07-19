@@ -9,8 +9,6 @@ require "elasticsearch/rails/tasks/import"
 
 Rails.application.load_tasks
 
-task default: "bundle:audit"
-
 require "sdoc"
 require "rdoc/task"
 

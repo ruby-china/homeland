@@ -138,7 +138,6 @@ end
 
 group :development, :test do
   gem "sdoc"
-  gem "bundler-audit", require: false
   gem "capybara"
   gem "database_cleaner"
   gem "factory_bot_rails"

@@ -30,12 +30,14 @@ CarrierWave.configure do |config|
   case Setting.upload_provider
   when "aliyun"
     config.storage = :aliyun
-    config.aliyun_access_id  = Setting.upload_access_id
-    config.aliyun_access_key = Setting.upload_access_secret
+    config.aliyun_access_key_id  = Setting.upload_access_id
+    config.aliyun_access_key_secret = Setting.upload_access_secret
     config.aliyun_bucket     = Setting.upload_bucket
     config.aliyun_internal   = Setting.upload_aliyun_internal.to_s != "false"
-    config.aliyun_area       = Setting.upload_aliyun_area
-    config.aliyun_host       = Setting.upload_url
+    config.aliyun_region       = Setting.upload_aliyun_region
+    if Setting.upload_url.present?
+      config.aliyun_host       = Setting.upload_url
+    end
   when "upyun"
     config.storage = :upyun
     # Do not remove previously file after new file uploaded

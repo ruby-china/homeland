@@ -64,7 +64,7 @@ class Setting < RailsSettings::Base
   field :upload_bucket, default: ENV["upload_bucket"], readonly: true
   field :upload_url, default: ENV["upload_url"], readonly: true
   field :upload_aliyun_internal, type: :boolean, default: (ENV["upload_aliyun_internal"] || "false"), readonly: true
-  field :upload_aliyun_area, default: ENV["upload_aliyun_area"], readonly: true
+  field :upload_aliyun_region, default: (ENV["upload_aliyun_region"] || ENV["upload_aliyun_area"]), readonly: true
 
   # = Mailer
   field :mailer_provider, default: (ENV["mailer_provider"] || "smtp"), readonly: true

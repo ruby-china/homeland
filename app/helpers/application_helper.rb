@@ -134,4 +134,8 @@ module ApplicationHelper
     text = escape_once(text).gsub("[h]", "<em>").gsub("[/h]", "</em>").gsub(/\\n|\\r/, "")
     raw text
   end
+
+  def social_share_button_tag(title)
+    super(title, allow_sites: Setting.share_allow_sites)
+  end
 end

@@ -36,6 +36,7 @@ class Setting < RailsSettings::Base
     recaptcha_key
     recaptcha_secret
     twitter_id
+    share_allow_sites
   ]
 
   # = Basic
@@ -109,6 +110,7 @@ class Setting < RailsSettings::Base
   field :blacklist_ips, default: [], type: :array
 
   field :twitter_id
+  field :share_allow_sites, default: %w[twitter weibo facebook wechat], type: :array, separator: /[\s]+/
 
   # = UI custom html
   field :navbar_brand_html, default: -> { %(<a href="/" class="navbar-brand"><b>#{self.app_name}</b></a>) }

@@ -178,4 +178,15 @@ describe Setting, type: :model do
       expect(Setting.tips).to eq ["This is first line.", "And, this is second line."]
     end
   end
+
+  describe "share_allow_sites" do
+    it "should work" do
+      Setting.share_allow_sites, = <<~LINES
+      weibo
+      facebook
+      twitter
+      LINES
+      expect(Setting.share_allow_sites).to eq ["weibo", "facebook", "twitter"]
+    end
+  end
 end

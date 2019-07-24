@@ -126,6 +126,7 @@
     ban_reasons: "屏蔽原因，將會在屏蔽話題的時候作為選項（一行一個）"
     allow_change_login: "允許用戶修改用戶名"
     twitter_id: "Twitter ID 用於 Twitter 分享的時候提及，比如: ruby​​_china，不帶 @"
+    share_allow_sites: "分享目标，可选 [twitter,weibo,facebook,wechat,google_plus,douban,tumblr,pinterest,linkedin,email,reddit,hacker_news]"
   pagination:
     next: "下一頁"
     prev: "上一頁"

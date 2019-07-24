@@ -106,7 +106,7 @@ gem "sidekiq"
 gem "sidekiq-scheduler"
 
 # 分享功能
-gem "social-share-button", path: "../social-share-button"
+gem "social-share-button"
 
 # Mailer Service
 gem "postmark"

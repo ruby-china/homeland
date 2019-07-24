@@ -106,7 +106,7 @@ gem "sidekiq"
 gem "sidekiq-scheduler"
 
 # 分享功能
-gem "social-share-button"
+gem "social-share-button", path: "../social-share-button"
 
 # Mailer Service
 gem "postmark"
@@ -145,7 +145,6 @@ group :development, :test do
   gem "listen"
   gem "rspec-rails"
   gem "rubocop", ">= 0.49.0", require: false
-  gem "yard", ">= 0.9.11"
 
   gem "codecov", require: false
 end

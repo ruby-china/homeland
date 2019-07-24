@@ -1,1 +1,0 @@
-yard --title "Ruby China API 文档" --out public/api-doc --no-private -r API.md app/controllers/api/v3/ app/views/api/v3

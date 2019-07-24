@@ -1,3 +1,9 @@
+PATH
+  remote: ../social-share-button
+  specs:
+    social-share-button (1.2.0)
+      coffee-rails
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -459,8 +465,6 @@ GEM
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.2)
-    social-share-button (1.2.0)
-      coffee-rails
     spring (2.1.0)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
@@ -497,7 +501,6 @@ GEM
     websocket-extensions (0.1.4)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    yard (0.9.20)
     zeitwerk (2.1.9)
 
 PLATFORMS
@@ -579,7 +582,7 @@ DEPENDENCIES
   second_level_cache
   sidekiq
   sidekiq-scheduler
-  social-share-button
+  social-share-button!
   spring
   spring-commands-rspec
   sprockets
@@ -587,7 +590,6 @@ DEPENDENCIES
   turbolinks (~> 5.0.0)
   twemoji
   uglifier
-  yard (>= 0.9.11)
 
 BUNDLED WITH
    1.17.2

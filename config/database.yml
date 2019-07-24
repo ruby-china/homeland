@@ -4,17 +4,6 @@ default: &default
   timeout: 5000
   encoding: utf-8
 
-#
-# PRODUCTION
-#
-production:
-  <<: *default
-  # url: <%= ENV["DATABASE_URL"] %>
-  database: homeland-dev
-
-#
-# Development specific
-#
 development:
   <<: *default
   database: homeland-dev
@@ -25,3 +14,6 @@ development:
 test:
   <<: *default
   database: homeland-test
+
+production:
+  <<: *default

@@ -72,7 +72,7 @@ class ApplicationController < ActionController::Base
 
     respond_to do |format|
       format.html { render template: "/errors/#{fname}", handler: [:erb], status: status, layout: "application" }
-      format.all  { render nothing: true, status: status }
+      format.all { render body: nil, status: status }
     end
   end
 

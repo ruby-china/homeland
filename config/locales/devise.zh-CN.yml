@@ -8,7 +8,7 @@
   devise:
     omniauth_callbacks:
       user:
-        failure: '三方登陆过程异常，请重试。'
+        failure: '三方登录过程异常，请重试。'
     failure:
       already_authenticated: '登录成功。'
       unauthenticated: '继续操作前请注册或者登录。'

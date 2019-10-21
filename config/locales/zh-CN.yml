@@ -51,7 +51,7 @@
         verified: "信任用户"
         company: "公司"
         github: "GitHub"
-        remember_me: 记住登陆状态
+        remember_me: 记住登录状态
         current_password: 旧密码
         profile_fields:
           qq: QQ

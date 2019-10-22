@@ -108,7 +108,7 @@ class SettingsController < ApplicationController
 
     def update_password
       if @user.update_with_password(user_params)
-        redirect_to new_session_path(:user), notice: "密码更新成功，现在你需要重新登陆。"
+        redirect_to new_session_path(:user), notice: "密码更新成功，现在你需要重新登录。"
       else
         render "password"
       end

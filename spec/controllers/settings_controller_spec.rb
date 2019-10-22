@@ -12,12 +12,12 @@ describe SettingsController, type: :controller do
       get :show
       expect(response).to have_http_status(200)
       expect(response.body).to include("更新资料")
-      expect(response.body).to include("登陆密码")
+      expect(response.body).to include("登录密码")
       expect(response.body).to include(%(enctype="multipart/form-data"))
 
       allow(Setting).to receive(:sso_enabled?).and_return(true)
       get :show
-      expect(response.body).not_to include("登陆密码")
+      expect(response.body).not_to include("登录密码")
     end
 
     it "should new work with non user" do

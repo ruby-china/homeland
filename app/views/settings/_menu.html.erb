@@ -5,7 +5,7 @@
       li << link_to(icon_tag('address-card', label: '详细资料'), profile_setting_path, class: "nav-link hide-ios")
       li << link_to(icon_tag('qrcode', label: '打赏'), reward_setting_path, class: "nav-link hide-ios")
       li << link_to(icon_tag('gear', label: '账户设置'), account_setting_path, class: "nav-link hide-ios")
-      li << link_to(icon_tag('keyboard-o', label: '登陆密码'), password_setting_path, class: "nav-link hide-ios") unless Setting.sso_enabled?
+      li << link_to(icon_tag('keyboard-o', label: '登录密码'), password_setting_path, class: "nav-link hide-ios") unless Setting.sso_enabled?
       li << link_to(icon_tag('cube', label: '管理我的应用'), oauth_applications_path, class: "nav-link hide-ios")
     end %>
   </div>

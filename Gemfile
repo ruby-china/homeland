@@ -76,7 +76,7 @@ gem "form-select"
 gem "elasticsearch-model", "~> 5.0.2"
 gem "elasticsearch-rails", "~> 5.0.2"
 
-# 三方平台 OAuth 验证登陆
+# 三方平台 OAuth 验证登录
 gem "omniauth"
 gem "omniauth-github"
 

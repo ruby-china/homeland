@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://gethomeland.com/images/text-logo.svg" width="400" />
+  <img src="https://homeland.ruby-china.org/images/text-logo.svg" width="400" />
   <p align="center">Open source discussion website.</p>
   <p align="center">开源的论坛／社区网站系统，基于 <a href="https://ruby-china.org">Ruby China</a> 发展而来。</p>
   <p align="center">
@@ -14,7 +14,7 @@
 
 ## Deployment
 
-Please visit https://gethomeland.com get more documents.
+Please visit https://homeland.ruby-china.org get more documents.
 
 ## Release Notes
 
@@ -34,7 +34,7 @@ Please read this document: [CONTRIBUTE GUIDE](https://github.com/ruby-china/home
 
 ## Sites used Homeland
 
-https://gethomeland.com/expo
+https://homeland.ruby-china.org/expo
 
 ## License
 

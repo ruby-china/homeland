@@ -10,7 +10,7 @@ services:
   - elasticsearch
 
 rvm:
-  - 2.5.3
+  - 2.7.0
 
 matrix:
   fast_finish: true

@@ -12,7 +12,6 @@ abort('Do not use "upyun" as upload_provider!') if Setting.upload_provider == "u
 require "spec_helper"
 require "rspec/rails"
 require "sidekiq/testing"
-require "database_cleaner"
 require "simplecov"
 
 SimpleCov.start
@@ -25,6 +24,8 @@ Devise.stretches = 1
 Rails.logger.level = 4
 # https://github.com/thoughtbot/factory_bot/blob/master/GETTING_STARTED.md#associations
 FactoryBot.use_parent_strategy = false
+DatabaseCleaner.orm = :active_record
+DatabaseCleaner.strategy = :truncation
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -98,8 +99,6 @@ RSpec.configure do |config|
     allow(Setting).to receive(:topic_create_hour_limit_count).and_return("")
 
     # Database cleaner
-    DatabaseCleaner.orm = :active_record
-    DatabaseCleaner.strategy = :truncation
     DatabaseCleaner.clean
     Rails.cache.clear
 

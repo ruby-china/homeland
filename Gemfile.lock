@@ -308,8 +308,6 @@ GEM
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
-    rack-utf8_sanitizer (1.6.0)
-      rack (>= 1.0, < 3.0)
     rails (6.0.2.1)
       actioncable (= 6.0.2.1)
       actionmailbox (= 6.0.2.1)
@@ -534,7 +532,6 @@ DEPENDENCIES
   puma
   rack-attack
   rack-cors
-  rack-utf8_sanitizer
   rails (~> 6.0.0)
   rails-i18n
   rails-settings-cached

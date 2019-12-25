@@ -14,5 +14,3 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
     resource "/oauth/*", headers: :any, methods: %i[get post put delete destroy]
   end
 end
-
-Rails.application.config.middleware.insert_before 0, Rack::UTF8Sanitizer

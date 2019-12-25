@@ -119,7 +119,6 @@ gem "puma"
 
 # API cors
 gem "rack-cors", require: "rack/cors"
-gem "rack-utf8_sanitizer"
 
 gem "exception-track"
 gem "status-page"

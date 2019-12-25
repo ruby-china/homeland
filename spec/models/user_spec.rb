@@ -556,19 +556,19 @@ describe User, type: :model do
     let!(:user) { create(:user) }
 
     it "should work" do
-      d1 = 1.days.ago
-      d2 = 3.days.ago
-      d3 = 10.days.ago
-      create(:reply, user: user, created_at: d1)
-      create_list(:reply, 2, user: user, created_at: d2)
-      create_list(:reply, 6, user: user, created_at: d3)
+      d1 = "1576339200"
+      d2 = "1576944000"
+      d3 = "1577116800"
+      create(:reply, user: user, created_at: Time.at(d1.to_i + 2.hours))
+      create_list(:reply, 2, user: user, created_at: Time.at(d2.to_i + 2.hours))
+      create_list(:reply, 6, user: user, created_at: Time.at(d3.to_i + 2.hours))
 
       data = user.calendar_data
       expect(data.keys.count).to eq 3
-      expect(data.keys).to include(d1.to_date.to_time.to_i.to_s, d2.to_date.to_time.to_i.to_s, d3.to_date.to_time.to_i.to_s)
-      expect(data[d1.to_date.to_time.to_i.to_s]).to eq 1
-      expect(data[d2.to_date.to_time.to_i.to_s]).to eq 2
-      expect(data[d3.to_date.to_time.to_i.to_s]).to eq 6
+      expect(data.keys).to include(d1, d2, d3)
+      expect(data[d1]).to eq 1
+      expect(data[d2]).to eq 2
+      expect(data[d3]).to eq 6
     end
   end
 

@@ -11,7 +11,6 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 abort('Do not use "upyun" as upload_provider!') if Setting.upload_provider == "upyun"
 require "spec_helper"
 require "rspec/rails"
-require "capybara/rspec"
 require "sidekiq/testing"
 require "database_cleaner"
 require "simplecov"

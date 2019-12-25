@@ -104,6 +104,9 @@ gem "redcarpet"
 # 队列
 gem "sidekiq"
 gem "sidekiq-scheduler"
+# Fix sidekiq-scheduler in Ruby 2.7, require thwait, e2mmap
+gem "thwait"
+gem "e2mmap"
 
 # 分享功能
 gem "social-share-button"
@@ -131,14 +134,12 @@ gem "homeland-wiki"
 gem "bootsnap"
 
 group :development do
-  gem "derailed"
   gem "spring"
   gem "spring-commands-rspec"
 end
 
 group :development, :test do
   gem "sdoc"
-  gem "capybara"
   gem "database_cleaner"
   gem "factory_bot_rails"
   gem "letter_opener"

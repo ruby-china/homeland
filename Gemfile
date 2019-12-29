@@ -4,10 +4,9 @@ source "https://rubygems.org"
 
 git_source(:github) { |repo_name| "https://github.com/#{repo_name}.git" }
 
-gem "coffee-rails"
-gem "jbuilder"
+gem "jbuilder", github: "rails/jbuilder"
 gem "jquery-rails"
-gem "rails", "~> 6.0.0"
+gem "rails"
 gem "rails_autolink"
 gem "sass-rails"
 gem "sprockets"

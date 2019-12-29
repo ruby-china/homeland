@@ -15,7 +15,8 @@ class Notification < ActiveRecord::Base
   end
 
   def self.realtime_push_to_client(user)
-    ActionCable.server.broadcast("notifications_count/#{user.id}", count: Notification.unread_count(user))
+    message = { count: Notification.unread_count(user) }
+    ActionCable.server.broadcast("notifications_count/#{user.id}", message)
   end
 
   def apns_note

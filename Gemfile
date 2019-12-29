@@ -4,10 +4,9 @@ source "https://rubygems.org"
 
 git_source(:github) { |repo_name| "https://github.com/#{repo_name}.git" }
 
-gem "coffee-rails"
-gem "jbuilder"
+gem "jbuilder", github: "rails/jbuilder"
 gem "jquery-rails"
-gem "rails", "~> 6.0.0"
+gem "rails"
 gem "rails_autolink"
 gem "sass-rails"
 gem "sprockets"
@@ -104,6 +103,9 @@ gem "redcarpet"
 # 队列
 gem "sidekiq"
 gem "sidekiq-scheduler"
+# Fix sidekiq-scheduler in Ruby 2.7, require thwait, e2mmap
+gem "thwait"
+gem "e2mmap"
 
 # 分享功能
 gem "social-share-button"
@@ -116,7 +118,6 @@ gem "puma"
 
 # API cors
 gem "rack-cors", require: "rack/cors"
-gem "rack-utf8_sanitizer"
 
 gem "exception-track"
 gem "status-page"
@@ -131,20 +132,18 @@ gem "homeland-wiki"
 gem "bootsnap"
 
 group :development do
-  gem "derailed"
   gem "spring"
   gem "spring-commands-rspec"
 end
 
 group :development, :test do
   gem "sdoc"
-  gem "capybara"
   gem "database_cleaner"
   gem "factory_bot_rails"
   gem "letter_opener"
   gem "listen"
   gem "rspec-rails"
-  gem "rubocop", ">= 0.49.0", require: false
+  gem "rubocop", require: false
 
   gem "codecov", require: false
 end

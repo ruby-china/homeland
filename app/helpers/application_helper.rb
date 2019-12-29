@@ -77,7 +77,7 @@ module ApplicationHelper
     "CSS / SCSS"                   => "scss",
     "JavaScript"                   => "js",
     "YAML</i>"                     => "yml",
-    "CoffeeScript"                 => "coffee",
+    "Go"                           => "go",
     "Nginx / Redis <i>(.conf)</i>" => "conf",
     "Python"                       => "python",
     "PHP"                          => "php",

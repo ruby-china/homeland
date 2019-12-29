@@ -1,12 +1,11 @@
-production: &defaults
+development:
+  adapter: async
+
+test:
+  adapter: test
+
+production:
   adapter: redis
   url: <%= ENV["REDIS_URL"] || "redis://localhost:6379/1"  %>
   timeout: 1
-
-development:
-  <<: *defaults
-  url: redis://localhost:6379/2
-
-test:
-  <<: *defaults
-  url: redis://localhost:6379/3
+  channel_prefix: homeland_prod

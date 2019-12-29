@@ -143,7 +143,7 @@ group :development, :test do
   gem "letter_opener"
   gem "listen"
   gem "rspec-rails"
-  gem "rubocop", ">= 0.49.0", require: false
+  gem "rubocop", require: false
 
   gem "codecov", require: false
 end

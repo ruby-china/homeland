@@ -37,10 +37,10 @@ gem "doorkeeper-i18n"
 gem "bulk_insert"
 
 # 上传组件
-gem "carrierwave"
+gem "carrierwave", "1.3.1"
 # Aliyun / Upyun / Qiniu 可选项
 gem "carrierwave-aliyun"
-gem "carrierwave-upyun"
+gem "carrierwave-upyun", "0.2.2"
 gem "carrierwave-qiniu"
 
 # Lazy load

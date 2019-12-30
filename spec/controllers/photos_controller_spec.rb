@@ -29,7 +29,7 @@ describe PhotosController, type: :controller do
     allow_any_instance_of(Photo).to receive(:save).and_return(false)
     sign_in user
     post :create, params: { file: file }
-    expect(response).to have_http_status(200)
+    expect(response).to have_http_status(400)
     json = JSON.parse(response.body)
     expect(json["ok"]).to be_falsey
     expect(json["url"]).to be_blank

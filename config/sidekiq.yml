@@ -3,7 +3,6 @@
 ---
 :concurrency: <%= ENV["sidekiq_threads"] || 20 %>
 :pidfile: tmp/pids/sidekiq.pid
-:logfile: log/sidekiq.log
 :queues:
   - [notifications, 100]
   - [http_request, 50]

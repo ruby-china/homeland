@@ -3,15 +3,27 @@
 module Admin
   class UsersController < Admin::ApplicationController
     def index
-      @users = User.all
+      scope = User.all
+      if params[:type].present?
+        scope = scope.where(type: params[:type])
+      end
+      field = params[:field] || "login"
+
       if params[:q].present?
         qstr = "%#{params[:q].downcase}%"
-        @users = @users.where("lower(login) LIKE ? or lower(email) LIKE ?", qstr, qstr)
+        scope = begin
+          case params[:field]
+          when "login"
+            scope.where("lower(login) LIKE ?", qstr)
+          when "email"
+            scope.where("lower(email) LIKE ?", qstr)
+          when "name"
+            scope.where("lower(name) LIKE ?", qstr)
+          end
+        end
       end
-      if params[:type].present?
-        @users = @users.where(type: params[:type])
-      end
-      @users = @users.order(id: :desc).page(params[:page])
+
+      @users = scope.order(id: :desc).page(params[:page])
     end
 
     def show

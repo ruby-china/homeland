@@ -13,6 +13,7 @@ RUN curl https://get.acme.sh | sh
 
 ENV RAILS_ENV "production"
 ENV HOMELAND_VERSION "master"
+ENV RUBYOPT "W0"
 
 WORKDIR /home/app/homeland
 

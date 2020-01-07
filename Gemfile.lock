@@ -139,7 +139,6 @@ GEM
       railties (>= 3.2, < 6.1)
     dropzonejs-rails (0.8.4)
       rails (> 3.1)
-    e2mmap (0.1.0)
     elasticsearch (5.0.5)
       elasticsearch-api (= 5.0.5)
       elasticsearch-transport (= 5.0.5)
@@ -404,8 +403,6 @@ GEM
       ffi (~> 1.9)
     rucaptcha (2.5.2)
       railties (>= 3.2)
-    rufus-scheduler (3.6.0)
-      fugit (~> 1.1, >= 1.1.6)
     sanitize (5.1.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.8.0)
@@ -430,11 +427,9 @@ GEM
       rack (>= 2.0.0)
       rack-protection (>= 2.0.0)
       redis (>= 4.1.0)
-    sidekiq-scheduler (3.0.0)
-      redis (>= 3, < 5)
-      rufus-scheduler (~> 3.2)
-      sidekiq (>= 3)
-      tilt (>= 1.4.0)
+    sidekiq-cron (1.1.0)
+      fugit (~> 1.1)
+      sidekiq (>= 4.2.1)
     simplecov (0.17.1)
       docile (~> 1.1)
       json (>= 1.8, < 3)
@@ -456,7 +451,6 @@ GEM
       rails (>= 4.2)
     thor (1.0.1)
     thread_safe (0.3.6)
-    thwait (0.1.0)
     tilt (2.0.10)
     turbolinks (5.0.1)
       turbolinks-source (~> 5)
@@ -501,7 +495,6 @@ DEPENDENCIES
   doorkeeper-i18n
   dotenv-rails
   dropzonejs-rails
-  e2mmap
   elasticsearch-model (~> 5.0.2)
   elasticsearch-rails (~> 5.0.2)
   enumize
@@ -554,13 +547,12 @@ DEPENDENCIES
   sdoc
   second_level_cache
   sidekiq
-  sidekiq-scheduler
+  sidekiq-cron
   social-share-button
   spring
   spring-commands-rspec
   sprockets
   status-page
-  thwait
   turbolinks (~> 5.0.0)
   twemoji
   uglifier

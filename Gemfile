@@ -102,10 +102,7 @@ gem "redcarpet"
 
 # 队列
 gem "sidekiq"
-gem "sidekiq-scheduler"
-# Fix sidekiq-scheduler in Ruby 2.7, require thwait, e2mmap
-gem "thwait"
-gem "e2mmap"
+gem "sidekiq-cron"
 
 # 分享功能
 gem "social-share-button"

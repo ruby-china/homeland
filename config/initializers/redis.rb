@@ -18,6 +18,6 @@ Sidekiq.configure_client do |config|
 end
 
 if Sidekiq.server?
-   schedule_config = YAML.load(ERB.new(File.read("config/schedule.yml")).result)
-   Sidekiq::Cron::Job.load_from_hash(schedule_config)
+  schedule_config = YAML.load(ERB.new(File.read("config/schedule.yml")).result)
+  Sidekiq::Cron::Job.load_from_hash(schedule_config)
 end

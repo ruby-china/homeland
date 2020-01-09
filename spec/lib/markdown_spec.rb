@@ -37,9 +37,6 @@ describe "markdown" do
           expect(Homeland::Markdown.call("http://ruby-china.org/self_posts/11?datas=20,33|100&format=.jpg")).to eq(
             '<p><a href="http://ruby-china.org/self_posts/11?datas=20,33%7C100&amp;format=.jpg" rel="nofollow" target="_blank">http://ruby-china.org/self_posts/11?datas=20,33|100&amp;format=.jpg</a></p>'
           )
-          expect(Homeland::Markdown.call("https://g.l/b/?fromgroups#!searchin/gitlabhq/self$20regist/gitlabhq/5ha_FyX-Pr4/VNZTPnSN0S4J")).to eq(
-            '<p><a href="https://g.l/b/?fromgroups#!searchin/gitlabhq/self%2420regist/gitlabhq/5ha_FyX-Pr4/VNZTPnSN0S4J" rel="nofollow" target="_blank">https://g.l/b/?fromgroups#!searchin/gitlabhq/self$20regist/gitlabhq/5ha_FyX-Pr4/VNZTPnSN0S4J</a></p>'
-          )
         end
 
         it "should bold text " do
@@ -126,13 +123,13 @@ describe "markdown" do
 
         it "should link mentioned floor" do
           expect(Homeland::Markdown.call("#3楼很强大")).to eq(
-            '<p><a href="#reply3" class="at_floor" data-floor="3">#3楼</a>很强大</p>'
+            '<p><a href="#reply3" class="at_floor" data-floor="3">#3 楼</a>很强大</p>'
           )
         end
 
         it "should right encoding with #1楼 @ichord 刚刚发布，有点问题" do
           expect(Homeland::Markdown.call("#1楼 @ichord 刚刚发布，有点问题")).to eq(
-            %(<p><a href="#reply1" class="at_floor" data-floor="1">#1楼</a> <a href="/ichord" class="user-mention" title="@ichord"><i>@</i>ichord</a> 刚刚发布，有点问题</p>)
+            %(<p><a href="#reply1" class="at_floor" data-floor="1">#1 楼</a> <a href="/ichord" class="user-mention" title="@ichord"><i>@</i>ichord</a> 刚刚发布，有点问题</p>)
           )
         end
 
@@ -251,7 +248,7 @@ describe "markdown" do
 
         describe "#inner_html" do
           subject { super().inner_html }
-          it { is_expected.to eq(%(<p><a href="#reply1" class="at_floor" data-floor="1">#1楼</a> <a href="/ichord" class="user-mention" title="@ichord"><i>@</i>ichord</a> 刚刚发布，有点问题</p>)) }
+          it { is_expected.to eq(%(<p><a href="#reply1" class="at_floor" data-floor="1">#1 楼</a> <a href="/ichord" class="user-mention" title="@ichord"><i>@</i>ichord</a> 刚刚发布，有点问题</p>)) }
         end
       end
     end
@@ -668,7 +665,7 @@ describe "markdown" do
 
     describe "Full example" do
       let(:raw) { File.open(Rails.root.join("spec/fixtures/markdown/raw.md")).read }
-      let(:out) { File.open(Rails.root.join("spec/fixtures/markdown/out.html")).read }
+      let(:out) { File.open(Rails.root.join("spec/fixtures/markdown/out.html.txt")).read }
 
       it "should work" do
         expect(doc.inner_html).to eq(out.strip)

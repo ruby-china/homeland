@@ -95,7 +95,7 @@ gem "second_level_cache"
 gem "rails-settings-cached"
 
 # HTML Pipeline
-gem "auto-space"
+gem "auto-correct"
 gem "html-pipeline"
 gem "html-pipeline-rouge_filter"
 gem "redcarpet"

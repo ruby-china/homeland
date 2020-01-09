@@ -14,6 +14,7 @@ filters = [
   Homeland::Pipeline::MarkdownFilter,
   Homeland::Pipeline::MentionFilter,
   Homeland::Pipeline::FloorFilter,
+  Homeland::Pipeline::AutoCorrectFilter,
   Homeland::Pipeline::TwemojiFilter
 ]
 

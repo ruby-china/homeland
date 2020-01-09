@@ -65,6 +65,9 @@ Inline links:
 [link text](http://url.com/ "title")
 [link text](http://url.com/)
 
+### AutoSpace
+
+这是一段不标准的中文English以及数字，比如1,200次访问的混排，格式化以后将自动补充空格。
 
 ```rb
 class Foo

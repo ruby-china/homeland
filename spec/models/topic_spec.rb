@@ -342,4 +342,18 @@ describe Topic, type: :model do
       t.save!
     end
   end
+
+  describe "Ban word in topic" do
+    it "should work" do
+      allow(Setting).to receive(:ban_words_in_body).and_return(["FFF", "AAAA"])
+      t = build(:topic, body: "This is CCC")
+      assert_equal true, t.valid?
+      t = build(:topic, body: "This is FFFF")
+      assert_equal false, t.valid?
+      assert_equal ["敏感词 “FFF” 禁止发布！"],  t.errors&.messages.dig(:body)
+      t = build(:topic, body: "This is AAAA")
+      assert_equal false, t.valid?
+      assert_equal ["敏感词 “AAAA” 禁止发布！"],  t.errors&.messages.dig(:body)
+    end
+  end
 end

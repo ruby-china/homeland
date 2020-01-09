@@ -24,9 +24,36 @@
   }
 }
 
+.flex {
+  display: flex;
+}
+
+.aic {
+  align-items: center !important;
+}
+
+.aib {
+  align-items: baseline !important;
+}
+
+.jcc {
+  justify-content: center !important;
+}
+
+.jcsb {
+  justify-content: space-between !important;
+}
+
+.jcsa {
+  justify-content: space-around !important;
+}
+
 /* 去掉 Bootstrap 的蓝色 outline */
-* { outline-style: none; }
-textarea, input[text] {
+* {
+  outline-style: none;
+}
+textarea,
+input[text] {
   outline: none !important;
   box-shadow: none !important;
   -webkit-appearance: none !important;
@@ -51,18 +78,40 @@ textarea,
 }
 
 .alert {
-  box-shadow: 0 0 0; padding: 0.65rem 1.25rem; border: 2px solid transparent !important;
-  .close { color: $primary; opacity: .7; }
+  box-shadow: 0 0 0;
+  padding: 0.65rem 1.25rem;
+  border: 2px solid transparent !important;
+  .close {
+    color: $primary;
+    opacity: 0.7;
+  }
 }
 .alert-block {
-  ul { margin-bottom: 0; margin-top: 1.25em; }
+  ul {
+    margin-bottom: 0;
+    margin-top: 1.25em;
+  }
 }
-.alert-danger { color: $red; background: lighten($red, 43%); }
-.alert-warning { color: darken($yellow, 10%); background: lighten($yellow, 45%); }
-.alert-success { color: $green; background: lighten($green, 65%); }
-.alert-info { color: $blue; background: lighten($blue, 45%); }
+.alert-danger {
+  color: $red;
+  background: lighten($red, 43%);
+}
+.alert-warning {
+  color: darken($yellow, 10%);
+  background: lighten($yellow, 45%);
+}
+.alert-success {
+  color: $green;
+  background: lighten($green, 65%);
+}
+.alert-info {
+  color: $blue;
+  background: lighten($blue, 45%);
+}
 
-.rucaptcha-image { width: 120px; }
+.rucaptcha-image {
+  width: 120px;
+}
 
 /* Bootstrap Theme */
 body {
@@ -70,13 +119,13 @@ body {
   color: $primary;
   font-family: Helvetica, Arial, "PingFang SC", "Noto Sans", Roboto, "Microsoft Yahei", sans-serif;
   font-size: 14px;
-  letter-spacing: .03em;
+  letter-spacing: 0.03em;
 }
 
 .bd-navbar {
   height: 50px;
   padding: 0;
-  background: #FFF;
+  background: #fff;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
   border: 0px;
   color: $primary;
@@ -95,10 +144,12 @@ body {
     }
   }
 
-  .navbar-topic-title { display: none; }
+  .navbar-topic-title {
+    display: none;
+  }
 
   &.navbar-fixed-active {
-    box-shadow: 0 1px 1px rgba(0, 0, 0,.07);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.07);
   }
 
   .navbar-brand {
@@ -108,12 +159,14 @@ body {
     font-weight: bold;
     margin-left: 1em;
     border-bottom: 0px;
-    b { color: $blue; }
+    b {
+      color: $blue;
+    }
   }
 
   @include media-breakpoint-down(md) {
-    padding-right: .5rem;
-    padding-left: .5rem;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
 
     .navbar-nav-scroll {
       max-width: 100%;
@@ -135,19 +188,26 @@ body {
   }
 
   #main-nav-menu {
-    &.navbar-nav .nav-item a.nav-link  {
+    &.navbar-nav .nav-item a.nav-link {
       color: $primary;
       font-size: 15px;
       border-top: 3px solid #fff;
-      border-bottom: 3px solid #FFF;
-      transition: all .2s ease-in-out;
+      border-bottom: 3px solid #fff;
+      transition: all 0.2s ease-in-out;
     }
-    &.navbar-nav .nav-item a.nav-link:active { background-color: $gray; border-bottom-color: #999; }
+    &.navbar-nav .nav-item a.nav-link:active {
+      background-color: $gray;
+      border-bottom-color: #999;
+    }
     &.navbar-nav .nav-item {
       a:hover,
       a.active,
       a.active:focus,
-      a.active:hover { color: $red; background: transparent; border-bottom-color: $red; }
+      a.active:hover {
+        color: $red;
+        background: transparent;
+        border-bottom-color: $red;
+      }
     }
   }
 
@@ -158,18 +218,20 @@ body {
 
     .fa {
       color: #333;
-      &:hover { color: #666; }
+      &:hover {
+        color: #666;
+      }
     }
-    .fa-search{
+    .fa-search {
       cursor: pointer;
       position: absolute;
       top: 18px;
       left: 8px;
-      transition: all .3s;
+      transition: all 0.3s;
     }
     .form-control {
       font-size: 14px;
-      border:none;
+      border: none;
       cursor: text;
       width: 150px;
       height: 100%;
@@ -177,7 +239,7 @@ body {
       padding: 6px 1px 4px 20px;
       margin-left: 4px;
       background: transparent;
-      transition: all .3s;
+      transition: all 0.3s;
       box-sizing: border-box;
       color: #333;
       &::-webkit-input-placeholder {
@@ -201,7 +263,7 @@ body {
     border-radius: 0;
     border: 0px;
     border-left: 1px solid rgba(0, 0, 0, 0.04);
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.10);
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
     .dropdown-item {
       padding: 0.4rem 1.5rem;
     }
@@ -213,7 +275,10 @@ body {
     .nav-link {
       padding: 10px 5px;
     }
-    img.avatar-32 { width: 20px; height: 20px; }
+    img.avatar-32 {
+      width: 20px;
+      height: 20px;
+    }
   }
 
   .dropdown-item.active {
@@ -223,29 +288,38 @@ body {
   }
 
   .user-bar {
-    background: #FFF;
+    background: #fff;
     min-width: 150px;
-		padding-right: 15px;
+    padding-right: 15px;
   }
 
   @include media-breakpoint-down(md) {
     .user-bar {
-      .nav-link { padding-left: 5px; padding-right: 5px; }
+      .nav-link {
+        padding-left: 5px;
+        padding-right: 5px;
+      }
     }
   }
 }
 
-#main { margin-top: 20px; }
+#main {
+  margin-top: 20px;
+}
 
 .sub-navbar {
   background: #f9f9f9;
   box-shadow: 0 1px 0px rgba(0, 0, 0, 0.02);
 
-  a { color: $blue; }
+  a {
+    color: $blue;
+  }
 }
 
 .btn-default {
-  border-color: $input-border-color; background: #fcfcfc; color: $primary !important;
+  border-color: $input-border-color;
+  background: #fcfcfc;
+  color: $primary !important;
 
   &:hover {
     border-color: #ccc;
@@ -260,7 +334,9 @@ body {
 
 .page-topics {
   .navbar-fixed-active {
-    .navbar-topic-title  { display: block; }
+    .navbar-topic-title {
+      display: block;
+    }
     .navbar-topic-title:after {
       display: block;
     }
@@ -268,13 +344,19 @@ body {
 }
 
 .list-group-item {
-  a { color: $primary; }
+  a {
+    color: $primary;
+  }
 }
 
-.sidebar.col-md-3 { padding-left: 0; }
+.sidebar.col-md-3 {
+  padding-left: 0;
+}
 
 .nav-tabs {
-  li:first-child { margin-left: 15px; }
+  li:first-child {
+    margin-left: 15px;
+  }
 
   .nav-item {
     .nav-link {
@@ -293,62 +375,98 @@ body {
 
 .pagination {
   margin: 0;
-  &>li:first-child>a,
-  &>li:first-child>span { border-top-left-radius: 3px; border-bottom-left-radius: 3px; }
+  & > li:first-child > a,
+  & > li:first-child > span {
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+  }
 
-  &>li:last-child>a,
-  &>li:last-child>span { border-top-right-radius: 3px; border-bottom-right-radius: 3px; }
-  li>a { color: $primary; }
+  & > li:last-child > a,
+  & > li:last-child > span {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+  }
+  li > a {
+    color: $primary;
+  }
 
-  li>a,
-  .disabled>a,
-  li>span { border-color: #E0E0E0 !important; }
+  li > a,
+  .disabled > a,
+  li > span {
+    border-color: #e0e0e0 !important;
+  }
 
-  li>a:hover { color: #555; background: $gray; }
+  li > a:hover {
+    color: #555;
+    background: $gray;
+  }
 
-  li.active>a,
-  li.active>a:hover { background-color: $blue !important; border-color: $blue !important; color: #FFF !important; }
+  li.active > a,
+  li.active > a:hover {
+    background-color: $blue !important;
+    border-color: $blue !important;
+    color: #fff !important;
+  }
 }
 .pager {
   margin: 0px;
   .info {
     line-height: 32px;
     color: #ccc;
-    samp { color: #999; }
+    samp {
+      color: #999;
+    }
   }
-  li>a,
-  li>span {
+  li > a,
+  li > span {
     color: #666;
     border-radius: 3px;
     border: 0px;
     background: transparent;
-    &:hover { background: #fff; }
+    &:hover {
+      background: #fff;
+    }
   }
-  li.disabled>a,
-  li.disabled>span {
+  li.disabled > a,
+  li.disabled > span {
     color: #ddd;
     background: transparent;
-    &:hover { color: #ddd; background: transparent; }
+    &:hover {
+      color: #ddd;
+      background: transparent;
+    }
   }
 }
-abbr {  text-decoration: none; border-bottom: 0px; cursor: pointer; }
-abbr[title] { border: 0 !important; text-decoration: none; cursor: text; }
-a abbr[title] { cursor: pointer; }
+abbr {
+  text-decoration: none;
+  border-bottom: 0px;
+  cursor: pointer;
+}
+abbr[title] {
+  border: 0 !important;
+  text-decoration: none;
+  cursor: text;
+}
+a abbr[title] {
+  cursor: pointer;
+}
 
 kbd {
-  background-color: #f5f5f5; color: #999; border-radius: 2px; border-color: #fafafa;
+  background-color: #f5f5f5;
+  color: #999;
+  border-radius: 2px;
+  border-color: #fafafa;
   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.05);
 }
 
-.table>tbody>tr>td,
-.table>tbody>tr>th,
-.table>tfoot>tr>td,
-.table>tfoot>tr>th,
-.table>thead>tr>td,
-.table>thead>tr>th {
+.table > tbody > tr > td,
+.table > tbody > tr > th,
+.table > tfoot > tr > td,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > thead > tr > th {
   padding: 4px 5px;
 }
-
 
 .card {
   margin-bottom: 15px;
@@ -362,7 +480,9 @@ kbd {
   }
 
   .card-body,
-  .list-group-item { padding: 10px 15px; }
+  .list-group-item {
+    padding: 10px 15px;
+  }
 
   .card-header {
     background: #fafafa;
@@ -383,7 +503,7 @@ kbd {
   }
 }
 
-.nav-stacked.nav-pills>li>a {
+.nav-stacked.nav-pills > li > a {
   border-radius: 0px;
 
   i.fa {
@@ -398,7 +518,9 @@ kbd {
     border: 0px;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15), 0px 0px 1px 1px rgba(0, 0, 0, 0.05);
 
-    p { margin-bottom: 5px; }
+    p {
+      margin-bottom: 5px;
+    }
   }
   .modal-header {
     padding: 8px 15px;
@@ -442,7 +564,10 @@ kbd {
 /* App Style */
 .opts {
   color: #666;
-  a { display: inline-block; border-radius: 3px; }
+  a {
+    display: inline-block;
+    border-radius: 3px;
+  }
   a:link,
   a:visited {
     color: $primary;
@@ -450,7 +575,10 @@ kbd {
     padding: 4px;
     text-decoration: none;
   }
-  a:hover { background: #eee; text-decoration: none; }
+  a:hover {
+    background: #eee;
+    text-decoration: none;
+  }
   .loading {
   }
 }
@@ -461,39 +589,89 @@ kbd {
 }
 
 .pull-right.opts {
-  a { margin-left: 5px; margin-right: 0px; }
+  a {
+    margin-left: 5px;
+    margin-right: 0px;
+  }
 }
 .avatar {
   .uface,
-  .media-object { border-radius: 120px; }
+  .media-object {
+    border-radius: 120px;
+  }
 }
-.avatar-16 { width: 16px; height: 16px; border-radius: 120px; }
-.avatar-32 { width: 28px; height: 28px; border-radius: 120px; }
-.avatar-48 { width: 40px; height: 40px; border-radius: 120px; }
-.avatar-96 { width: 96px; height: 96px; border-radius: 120px; }
+.avatar-16 {
+  width: 16px;
+  height: 16px;
+  border-radius: 120px;
+}
+.avatar-32 {
+  width: 28px;
+  height: 28px;
+  border-radius: 120px;
+}
+.avatar-48 {
+  width: 40px;
+  height: 40px;
+  border-radius: 120px;
+}
+.avatar-96 {
+  width: 96px;
+  height: 96px;
+  border-radius: 120px;
+}
 @media (max-width: 480px) {
-  .avatar-48 { width: 28px; height: 28px; }
+  .avatar-48 {
+    width: 28px;
+    height: 28px;
+  }
 }
 
-.uname { color:#666; }
-img.emoji { width:20px; height:20px; }
+.uname {
+  color: #666;
+}
+img.emoji {
+  width: 20px;
+  height: 20px;
+}
 .node-name {
-  background: #f0f0f0; padding: 1px 3px; color: #777; margin-right: 5px;
-  &:hover { color:#555; text-decoration:none; background:#e0e0e0; }
+  background: #f0f0f0;
+  padding: 1px 3px;
+  color: #777;
+  margin-right: 5px;
+  &:hover {
+    color: #555;
+    text-decoration: none;
+    background: #e0e0e0;
+  }
 }
 .fa.awesome {
   font-size: 13px;
   color: $red;
 }
 .notification-count {
-  .count { margin-left: 4px; display: none; font-size: 12px;}
+  .count {
+    margin-left: 4px;
+    display: none;
+    font-size: 12px;
+  }
   .new {
     color: $red !important;
-    .count { display: inline; line-height: 100%; }
+    .count {
+      display: inline;
+      line-height: 100%;
+    }
   }
 }
-.deleted { text-decoration: line-through; color: #e0e0e0; }
-.no-result { color: #aaa; padding-bottom: 20px; text-align: center;}
+.deleted {
+  text-decoration: line-through;
+  color: #e0e0e0;
+}
+.no-result {
+  color: #aaa;
+  padding-bottom: 20px;
+  text-align: center;
+}
 
 .opts a.active {
   .fa {
@@ -503,7 +681,9 @@ img.emoji { width:20px; height:20px; }
   }
 }
 
-.setting-menu { padding-right: 0;}
+.setting-menu {
+  padding-right: 0;
+}
 
 .editor-toolbar {
   margin-bottom: 5px;
@@ -526,22 +706,39 @@ img.emoji { width:20px; height:20px; }
     margin-top: 10px;
     font-size: 14px;
     line-height: 14px;
-    .fa { margin-right: 8px; }
-    .close { font-size: 14px; margin-left: 5px; }
+    .fa {
+      margin-right: 8px;
+    }
+    .close {
+      font-size: 14px;
+      margin-left: 5px;
+    }
   }
 }
 
 @media (max-width: 480px) {
-  body { font-size: 14px; line-height: 100%; }
-  .container { padding: 0; }
+  body {
+    font-size: 14px;
+    line-height: 100%;
+  }
+  .container {
+    padding: 0;
+  }
   .card {
-    border-radius: 0; border-left: 0px; border-right: 0px;
+    border-radius: 0;
+    border-left: 0px;
+    border-right: 0px;
   }
 
-  #main { margin-top: 1px; }
+  #main {
+    margin-top: 1px;
+  }
 
   .opts {
-    a { padding: 5px !important; margin:0 !important; }
+    a {
+      padding: 5px !important;
+      margin: 0 !important;
+    }
   }
   .row {
     margin: 0;
@@ -550,31 +747,47 @@ img.emoji { width:20px; height:20px; }
     .col-md-6,
     .col-md-5,
     .col-md-4,
-    .col-md-3 { padding: 0; }
+    .col-md-3 {
+      padding: 0;
+    }
   }
-  .sidebar { display: none; }
-  .hidden-mobile { display: none !important; }
+  .sidebar {
+    display: none;
+  }
+  .hidden-mobile {
+    display: none !important;
+  }
 
   .topics {
     .topic {
       padding: 8px !important;
       margin: 0 -8px !important;
 
-      .avatar { margin-top: 8px; }
-      .count { font-size: 12px; width: 38px !important; }
+      .avatar {
+        margin-top: 8px;
+      }
+      .count {
+        font-size: 12px;
+        width: 38px !important;
+      }
     }
   }
 
   .pagination {
     display: block;
-    li { display: none; }
+    li {
+      display: none;
+    }
     li.prev,
     li.next {
-      float: left; display: block;
+      float: left;
+      display: block;
       a {
         border-radius: 20px !important;
       }
     }
-    li.next { float: right; }
+    li.next {
+      float: right;
+    }
   }
 }

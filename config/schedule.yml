@@ -9,3 +9,9 @@ notification_cleanup:
   class: "Scheduler::NotificationCleanupJob"
   queue: cleanup
   description: "Cleanup expired notifications"
+
+spam_cleanup:
+  cron: "<%= Random.rand(0..59) %> <%= Random.rand(3..5) %> * * *"
+  class: "Scheduler::SpamCleanupJob"
+  queue: cleanup
+  description: "Cleanup spam contents before 1 month ago"

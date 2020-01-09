@@ -1,15 +1,14 @@
 <%= form_for @site_config, url: admin_site_config_path(@site_config.var), method: 'patch' do |f| %>
   <div class="form-group">
     <label><%= @site_config.var %></label>
+    <div class="form-text" style="margin-bottom: 10px"><%= t("setting.#{@site_config.var}") %></div>
     <%
 
     value = Setting.send(@site_config.var)
     value = value.join("\n") if value.is_a?(Array)
     %>
     <%= f.text_area :value, value: value, class: 'form-control', rows: 15 %>
-    <div class="form-text"><%= t("setting.#{@site_config.var}") %></div>
   </div>
-
   <div class="form-actions">
     <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving") %>
     <a href="<%= admin_site_configs_path %>" class="btn"><%= t("common.cancel") %></a>

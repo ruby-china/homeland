@@ -1,8 +1,8 @@
 "zh-CN":
   common:
-    justnow: '刚刚'
-    hour: '小时'
-    minute: '分钟'
+    justnow: "刚刚"
+    hour: "小时"
+    minute: "分钟"
     edit: "修改"
     create: "新建"
     avatar: "头像"
@@ -68,12 +68,12 @@
     likes_count: 赞
     has_deleted: 已删除
     auth_with_other_services: "用其他平台的帐号登录"
-    captcha: '验证码'
-    search_result: '搜索结果'
+    captcha: "验证码"
+    search_result: "搜索结果"
   reply:
     edit_reply: "修改回帖"
-    delete_reply_success: '回帖删除成功.'
-    topic_location: '回帖所在文章'
+    delete_reply_success: "回帖删除成功."
+    topic_location: "回帖所在文章"
   photos:
     upload_and_insert_code: "上传并插入代码"
     uploading: "正在上传"
@@ -88,7 +88,7 @@
     my_home_page: "我的主页"
     edit_account_path: "个人资料设置"
     likes: "我的收藏"
-    teams: '公司／组织'
+    teams: "公司／组织"
   comments:
     create_comment: "发表评论"
     no_comment: "暂无评论"
@@ -125,6 +125,7 @@
     index_html: "网站首页 HTML"
     tips: "随机显示的小帖士（一行一个）"
     ban_words_on_reply: "回帖禁止内容（一行一个）"
+    ban_words_in_body: "正文里面禁止提及的内容，为避免误判，请准确描述，不要写太短的词"
     apns_pem: "Apple Push 证书内容，保持为空将不会触发 Push 发送动作"
     blacklist_ips: "黑名单 IP 列表，将会直接拦截请求（一行一个）"
     newbie_limit_time: "新注册用户（新手）限制期，单位秒（0 不限制），在新手期不能创建新话题，仅能回帖"

@@ -71,8 +71,8 @@ GEM
       nokogiri (~> 1.6)
       rest-client (~> 2.0)
     ast (2.4.0)
-    auto-space (0.0.4)
-      activesupport (> 3.0.0)
+    auto-correct (0.2.0)
+      nokogiri (>= 1.4)
     autoprefixer-rails (9.7.3)
       execjs
     bcrypt (3.1.13)
@@ -478,7 +478,7 @@ PLATFORMS
 
 DEPENDENCIES
   action-store
-  auto-space
+  auto-correct
   bootsnap
   bootstrap (~> 4)
   bulk_insert

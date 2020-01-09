@@ -1,8 +1,8 @@
 "zh-TW":
   common:
-    justnow: '剛剛'
-    hour: '小時'
-    minute: '分鐘'
+    justnow: "剛剛"
+    hour: "小時"
+    minute: "分鐘"
     edit: "修改"
     create: "新建"
     avatar: "頭像"
@@ -68,12 +68,12 @@
     likes_count: 贊
     has_deleted: 已刪除
     auth_with_other_services: "用其它服務登入"
-    captcha: '驗證碼'
-    search_result: '搜索结果'
+    captcha: "驗證碼"
+    search_result: "搜索结果"
   reply:
     edit_reply: "修改回帖"
-    delete_reply_success: '回帖刪除成功.'
-    topic_location: '回帖所在文章'
+    delete_reply_success: "回帖刪除成功."
+    topic_location: "回帖所在文章"
   photos:
     upload_and_insert_code: "上傳並插入代碼"
     uploading: "正在上傳"
@@ -88,7 +88,7 @@
     my_home_page: "我的主頁"
     edit_account_path: "個人資料設置"
     likes: "我的收藏"
-    teams: '團體 / 組織'
+    teams: "團體 / 組織"
   comments:
     create_comment: "發表評論"
     no_comment: "暫無評論"
@@ -121,6 +121,7 @@
     index_html: "網站首頁 HTML"
     tips: "隨機顯示的小帖士（一行一個）"
     ban_words_on_reply: "回帖禁止內容（一行一個）"
+    ban_words_in_body: "正文裡面禁止提及的內容，為避免誤判，請準確描述，不要寫太短的詞（一行一個）"
     blacklist_ips: "黑名單 IP 列表，將會直接攔截請求（一行一個）"
     newbie_limit_time: "新註冊用戶（新手）限制期，單位秒（0 不限制），在新手期不能創建新話題，僅能回帖"
     ban_reasons: "屏蔽原因，將會在屏蔽話題的時候作為選項（一行一個）"

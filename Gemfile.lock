@@ -1,10 +1,3 @@
-GIT
-  remote: https://github.com/rails/jbuilder.git
-  revision: bec0d6c840c3486ee589d5de0ba9c348ccbc27ee
-  specs:
-    jbuilder (2.9.1)
-      activesupport (>= 5.0.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -212,6 +205,8 @@ GEM
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
     jaro_winkler (1.5.4)
+    jbuilder (2.9.1)
+      activesupport (>= 4.2.0)
     jquery-atwho-rails (1.5.4)
     jquery-rails (4.3.5)
       rails-dom-testing (>= 1, < 3)
@@ -511,7 +506,7 @@ DEPENDENCIES
   html-pipeline
   html-pipeline-rouge_filter
   http_accept_language
-  jbuilder!
+  jbuilder
   jquery-atwho-rails
   jquery-rails
   kaminari

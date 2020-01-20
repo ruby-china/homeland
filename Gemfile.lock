@@ -188,10 +188,9 @@ GEM
     html-pipeline (2.12.3)
       activesupport (>= 2)
       nokogiri (>= 1.4)
-    html-pipeline-rouge_filter (1.0.7)
-      activesupport
-      html-pipeline (>= 1.11)
-      rouge (>= 2.0.0, < 4)
+    html-pipeline-auto-correct (0.1.0)
+      auto-correct (>= 0.2.0)
+      html-pipeline (>= 2.0)
     http-accept (1.7.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
@@ -495,7 +494,7 @@ DEPENDENCIES
   homeland-site
   homeland-wiki
   html-pipeline
-  html-pipeline-rouge_filter
+  html-pipeline-auto-correct
   http_accept_language
   jbuilder
   jquery-atwho-rails
@@ -524,6 +523,7 @@ DEPENDENCIES
   redis
   redis-namespace
   redis-objects
+  rouge
   rspec-rails
   rubocop
   ruby-push-notifications

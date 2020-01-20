@@ -97,8 +97,9 @@ gem "rails-settings-cached"
 # HTML Pipeline
 gem "auto-correct"
 gem "html-pipeline"
-gem "html-pipeline-rouge_filter"
+gem "html-pipeline-auto-correct"
 gem "redcarpet"
+gem "rouge"
 
 # 队列
 gem "sidekiq"

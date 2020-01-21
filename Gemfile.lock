@@ -147,7 +147,7 @@ GEM
     erubi (1.9.0)
     et-orbi (1.2.2)
       tzinfo
-    exception-track (0.6.1)
+    exception-track (0.6.2)
       exception_notification (~> 4)
       kaminari (>= 0.15)
       rails (>= 4.0)

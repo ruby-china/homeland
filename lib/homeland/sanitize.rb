@@ -2,7 +2,7 @@
 
 module Homeland
   # Sanitize
-  # Test case in: spec/helpers/application_helper_spec.rb
+  # Test case in: test/helpers/application_helper_spec.rb
   module Sanitize
     # https://github.com/rgrove/sanitize#example-transformer-to-whitelist-youtube-video-embeds
     EMBED_VIDEO_TRANSFORMER = lambda do |env|

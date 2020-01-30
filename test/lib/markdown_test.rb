@@ -416,8 +416,8 @@ class Homeland::MarkdownTest < ActiveSupport::TestCase
   end
 
   test "Full example" do
-    raw = File.open(Rails.root.join("spec/fixtures/markdown/raw.md")).read
-    out = File.open(Rails.root.join("spec/fixtures/markdown/out.html.txt")).read
+    raw = read_file("markdown/raw.md")
+    out = read_file("markdown/out.html.txt")
 
     assert_markdown_render out, raw
   end

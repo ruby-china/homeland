@@ -66,11 +66,15 @@ class ActiveSupport::TestCase
   end
 
   def load_file(fname)
-    File.open(Rails.root.join("test", "factories", fname))
+    File.open(Rails.root.join("test", "fixtures", fname))
   end
 
   def assert_html_equal(excepted, html)
     assert_equal excepted.strip.gsub(/>[\s]+</, "><"), html.strip.gsub(/>[\s]+</, "><")
+  end
+
+  def fixture_file_upload(name, content_type = "text/plain")
+    Rack::Test::UploadedFile.new(Rails.root.join("test/fixtures/#{name}"), content_type)
   end
 end
 

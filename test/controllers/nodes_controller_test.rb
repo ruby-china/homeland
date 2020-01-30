@@ -2,24 +2,24 @@
 
 require "rails_helper"
 
-describe NodesController, type: :controller do
+describe NodesController do
   let(:node) { create(:node) }
   let(:user) { create(:user) }
 
-  it "should have an index action" do
-    get :index
+  it "GET /nodes" do
+    get nodes_path
     assert_equal 200, response.status
   end
 
-  it "should have an block action" do
+  it "POST /nodes/id/block" do
     sign_in user
-    post :block, params: { id: node }
+    post block_node_path(node)
     assert_equal 200, response.status
   end
 
-  it "should have an unblock action" do
+  it "POST /nodes/id/unblock" do
     sign_in user
-    post :unblock, params: { id: node }
+    post unblock_node_path(node)
     assert_equal 200, response.status
   end
 end

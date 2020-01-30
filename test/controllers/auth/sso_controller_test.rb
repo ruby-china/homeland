@@ -2,23 +2,23 @@
 
 require "rails_helper"
 
-describe Auth::SSOController, type: :controller do
+describe Auth::SSOController do
   let(:sso_secret) { "foo(*&@!12q36)" }
 
   describe "GET /auth/sso/show" do
     before do
       @sso_url = "http://somesite.com/homeland-sso"
 
-      allow(Setting).to receive(:sso).and_return(
+      Setting.stubs(:sso).returns({
         "enable" => true,
         "url"    => @sso_url,
         "secret" => sso_secret
-      )
-      allow(Setting).to receive(:sso_enabled?).and_return(true)
+      })
+      Setting.stubs(:sso_enabled?).returns(true)
     end
 
     it "should work" do
-      get :show, params: { return_path: "/topics/123" }
+      get auth_sso_path, params: { return_path: "/topics/123" }
       assert_equal 302, response.status
 
       # javascript code will handle redirection of user to return_sso_url
@@ -26,8 +26,7 @@ describe Auth::SSOController, type: :controller do
     end
 
     it "should work with destination_url" do
-      request.cookies["destination_url"] = "/topics/123"
-      get :show
+      get auth_sso_path, headers: { "Cookie": "destination_url=/topics/123" }
       assert_equal 302, response.status
 
       # javascript code will handle redirection of user to return_sso_url
@@ -40,15 +39,17 @@ describe Auth::SSOController, type: :controller do
     before do
       @sso_url = "http://somesite.com/homeland-sso"
 
-      request.host = Setting.domain
+      @headers = {
+        "HTTP_CLIENT_IP": mock_ip,
+        "Host": Setting.domain,
+      }
 
-      allow(Setting).to receive(:sso).and_return(
+      Setting.stubs(:sso).returns(
         "enable" => true,
         "url"    => @sso_url,
         "secret" => sso_secret
       )
-      allow(Setting).to receive(:sso_enabled?).and_return(true)
-      allow_any_instance_of(ActionDispatch::Request).to receive(:remote_ip).and_return(mock_ip)
+      Setting.stubs(:sso_enabled?).returns(true)
     end
 
     def get_sso(return_path)
@@ -74,7 +75,7 @@ describe Auth::SSOController, type: :controller do
       sso.avatar_url = "http://foobar.com/avatar/1.jpg"
       sso.admin = false
 
-      get :login, params: Rack::Utils.parse_query(sso.payload)
+      get login_auth_sso_path, params: Rack::Utils.parse_query(sso.payload), headers: @headers
       assert_redirected_to "/topics/123"
 
       user = User.find_by_email(sso.email)
@@ -105,9 +106,9 @@ describe Auth::SSOController, type: :controller do
       sso.bio = "This is a bio text"
       sso.avatar_url = "http://foobar.com/avatar/1.jpg"
 
-      expect do
-        get :login, params: Rack::Utils.parse_query(sso.payload)
-      end.to change(User, :count).by(0)
+      assert_no_changes -> { User.count }  do
+        get login_auth_sso_path, params: Rack::Utils.parse_query(sso.payload), headers: @headers
+      end
       assert_redirected_to "/"
 
       user1 = User.find_by_id(user.id)
@@ -125,7 +126,7 @@ describe Auth::SSOController, type: :controller do
       sso.username = user_template.login
       sso.admin = true
 
-      get :login, params: Rack::Utils.parse_query(sso.payload)
+      get login_auth_sso_path, params: Rack::Utils.parse_query(sso.payload), headers: @headers
       assert_redirected_to "/hello/world"
 
       user = User.find_by_email(sso.email)
@@ -134,7 +135,7 @@ describe Auth::SSOController, type: :controller do
     end
 
     it "show error when create failure" do
-      allow_any_instance_of(Homeland::SSO).to receive(:find_or_create_user).and_raise(StandardError)
+      Homeland::SSO.any_instance.stubs(:find_or_create_user).raises(StandardError)
 
       user_template = build(:user)
       sso = get_sso("/topics/123")
@@ -146,9 +147,9 @@ describe Auth::SSOController, type: :controller do
       sso.avatar_url = "http://foobar.com/avatar/1.jpg"
       sso.admin = false
 
-      expect do
-        get :login, params: Rack::Utils.parse_query(sso.payload)
-      end.to output(/nonce: #{sso.nonce}/).to_stdout
+      assert_output /nonce: #{sso.nonce}/ do
+        get login_auth_sso_path, params: Rack::Utils.parse_query(sso.payload), headers: @headers
+      end
       assert_equal 500, response.status
     end
 
@@ -164,7 +165,7 @@ describe Auth::SSOController, type: :controller do
       sso.admin = false
 
       $redis.del("SSO_NONCE_#{sso.nonce}")
-      get :login, params: Rack::Utils.parse_query(sso.payload)
+      get login_auth_sso_path, params: Rack::Utils.parse_query(sso.payload), headers: @headers
       assert_equal 419, response.status
     end
   end
@@ -173,10 +174,10 @@ describe Auth::SSOController, type: :controller do
     let(:user) { create(:user) }
 
     before do
-      allow(Setting).to receive(:sso).and_return(
+      Setting.stubs(:sso).returns(
         "secret" => sso_secret
       )
-      allow(Setting).to receive(:sso_provider_enabled?).and_return(true)
+      Setting.stubs(:sso_provider_enabled?).returns(true)
 
       @sso = SingleSignOn.new
       @sso.nonce = "mynonce"
@@ -186,8 +187,8 @@ describe Auth::SSOController, type: :controller do
 
     it "should work" do
       sign_in user
-      allow(Setting).to receive(:has_admin?).with(user.email).and_return(true)
-      get :provider, params: Rack::Utils.parse_query(@sso.payload)
+      Setting.stubs(:has_admin?).returns(true)
+      get provider_auth_sso_path, params: Rack::Utils.parse_query(@sso.payload)
       assert_equal 302, response.status
 
       location = response.location
@@ -201,13 +202,12 @@ describe Auth::SSOController, type: :controller do
       assert_equal user.name, sso2.name
       assert_equal user.login, sso2.username
       assert_equal user.id.to_s, sso2.external_id
-      assert_equal user.bio, sso2.bio
       refute_equal nil, sso2.avatar_url
       assert_equal true, sso2.admin
     end
 
     it "should work with sign in" do
-      get :provider, params: Rack::Utils.parse_query(@sso.payload)
+      get provider_auth_sso_path, params: Rack::Utils.parse_query(@sso.payload)
       assert_redirected_to "/account/sign_in"
       assert_match /\/auth\/sso\/provider/, session[:return_to]
       assert_equal request.url, session[:return_to]

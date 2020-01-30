@@ -48,7 +48,7 @@ Rails.application.routes.draw do
     end
   end
 
-  delete "setting/auth/:provider", to: "settings#auth_unbind"
+  delete "setting/auth/:provider", to: "settings#auth_unbind", as: "auth_unbind_setting"
 
   resources :nodes do
     member do

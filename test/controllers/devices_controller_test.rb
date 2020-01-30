@@ -2,24 +2,27 @@
 
 require "rails_helper"
 
-describe DevicesController, type: :controller do
+describe DevicesController do
   let(:user) { create(:user) }
-  let!(:device) { create(:device, user: user) }
 
   it "DELETE /devices/:id" do
     sign_in user
+    device = create(:device, user: user)
+
     assert_equal false, device.new_record?
-    expect do
-      delete :destroy, params: { id: device.id }
-    end.to change(user.devices, :count).by(-1)
+    assert_changes -> { user.devices.count }, -1 do
+      delete device_path(device.id)
+    end
     assert_redirected_to oauth_applications_path
     assert_equal 0, user.devices.where(id: device.id).count
   end
 
   it "require login" do
-    expect do
-      delete :destroy, params: { id: device.id }
-    end.to change(user.devices, :count).by(0)
+    device = create(:device, user: user)
+
+    assert_no_changes -> { delete device_path(device.id) } do
+      delete device_path(device.id)
+    end
     assert_equal 302, response.status
   end
 end

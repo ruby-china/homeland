@@ -3,14 +3,14 @@
 require "rails_helper"
 
 describe RepliesController, type: :controller do
-  describe "#index" do
+  describe "GET /topics/:id/replies" do
     it "should work" do
       user = create :user
       topic = create :topic
       replies = create_list :reply, 3
 
       sign_in user
-      get :index, params: { topic_id: topic.id, last_id: replies.first.id }, xhr: true
+      get topic_replies_path(topic), params: { last_id: replies.first.id }, xhr: true
       assert_equal 200, response.status
       assert_equal 0, user.notifications.unread.count
     end
@@ -18,13 +18,13 @@ describe RepliesController, type: :controller do
     it "render blank for params last_id 0" do
       topic = create :topic
       replies = create_list :reply, 3
-      get :index, params: { topic_id: topic.id, last_id: 0 }, xhr: true
+      get topic_replies_path(topic), params: { last_id: 0 }, xhr: true
       assert_equal 200, response.status
       assert_equal "", response.body
     end
   end
 
-  describe "#create" do
+  describe "POST /topics/:id/replies" do
     it "should error if save fail" do
       user = create :user
       topic = create :topic
@@ -32,7 +32,7 @@ describe RepliesController, type: :controller do
 
       create :reply, topic: topic
       sign_in user
-      post :create, params: { topic_id: topic.id, reply: { body: "" } }, format: :js
+      post topic_replies_path(topic), params: { reply: { body: "" }, format: :js }
       assert_equal 200, response.status
       assert_match /回复内容不能为空字符/, response.body
       assert_equal false, user.topic_read?(topic)
@@ -45,25 +45,25 @@ describe RepliesController, type: :controller do
 
       create :reply, topic: topic
       sign_in user
-      post :create, params: { topic_id: topic.id, reply: { body: "content" } }, format: :js
+      post topic_replies_path(topic), params: { reply: { body: "content" }, format: :js }
       assert_equal 200, response.status
       assert_equal true, user.topic_read?(topic)
     end
   end
 
-  describe "#update" do
+  describe "POST /topics/:id/replies/:id" do
     let(:topic) { create :topic }
     let(:user) { create :user }
     let(:reply) { create :reply, user: user, topic: topic }
 
     it "should not change topic's last reply info to previous one" do
       sign_in user
-      post :update, params: { topic_id: topic.id, id: reply.id, reply: { body: "content" } }, format: :js
+      post topic_reply_path(topic, reply), params: { reply: { body: "content" }, format: :js }
       assert_equal user.login, topic.reload.last_reply_user_login
     end
   end
 
-  describe "#destroy" do
+  describe "DELETE /replies/:id" do
     let(:topic) { create :topic }
     let(:admin) { create :admin }
     let(:user) { create :user }
@@ -72,36 +72,35 @@ describe RepliesController, type: :controller do
     let(:reply1) { create :reply, user: user1, topic: topic }
 
     it "should require login to destroy reply" do
-      delete :destroy, params: { topic_id: topic.id, id: reply.id }
+      delete topic_reply_path(topic, reply)
       refute_equal 200, response.status
     end
 
     it "user1 should not allow destroy reply" do
       sign_in user1
-      delete :destroy, params: { topic_id: topic.id, id: reply.id }
+      delete topic_reply_path(topic, reply)
       refute_equal 200, response.status
     end
 
     it "user should destroy reply with itself" do
       sign_in user
-      delete :destroy, params: { topic_id: topic.id, id: reply.id }
+      delete topic_reply_path(topic, reply)
       assert_redirected_to topic_path(topic)
     end
 
     it "admin should destroy reply" do
       sign_in admin
-      delete :destroy, params: { topic_id: topic.id, id: reply.id }
+      delete topic_reply_path(topic, reply)
       assert_redirected_to topic_path(topic)
 
-      delete :destroy, params: { topic_id: topic.id, id: reply1.id }
+      delete topic_reply_path(topic, reply1)
       assert_redirected_to topic_path(topic)
     end
 
     it "should redirect if failure" do
-      allow_any_instance_of(Reply).to receive(:destroy).and_return(false)
-
+      Reply.any_instance.stubs(:destroy).returns(false)
       sign_in user
-      delete :destroy, params: { topic_id: topic.id, id: reply.id }
+      delete topic_reply_path(topic, reply)
       assert_redirected_to topic_path(topic)
     end
   end
@@ -112,9 +111,10 @@ describe RepliesController, type: :controller do
     let(:reply) { create :reply, topic: topic, reply_to: reply1 }
 
     it "should work" do
-      get :reply_to, params: { topic_id: topic.id, id: reply.id }
+      get reply_to_topic_reply_path(topic, reply1)
       assert_equal 404, response.status
-      get :reply_to, params: { topic_id: topic.id, id: reply.id }, xhr: true
+
+      get reply_to_topic_reply_path(topic, reply), xhr: true
       assert_equal 200, response.status
     end
   end

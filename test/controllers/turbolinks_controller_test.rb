@@ -2,17 +2,13 @@
 
 require "rails_helper"
 
-describe TopicsController, type: :controller do
+describe TopicsController do
   let(:user) { create(:user) }
   let(:user1) { create(:user) }
+  let(:headers) { { "User-Agent": "turbolinks-app, rspec" } }
 
-  before do
-    request.env["HTTP_USER_AGENT"] = "turbolinks-app, rspec"
-  end
-
-  it "should got 401 with turbolinks-app" do
-    get :new
-    refute_equal 200, response.status
+  it "GET /topics/new should got 401 with turbolinks-app" do
+    get new_topic_path, headers: headers
     assert_equal 401, response.status
   end
 
@@ -21,14 +17,14 @@ describe TopicsController, type: :controller do
     let(:access_token1) { create(:access_token, resource_owner_id: user1.id) }
 
     it "should work" do
-      get :new, params: { access_token: access_token.token }
+      get new_topic_path, params: { access_token: access_token.token }, headers: headers
       assert_equal 200, response.status
       assert_includes response.body, "发布新话题"
       assert_includes response.body, "App.current_user_id = #{user.id}"
     end
 
     it "should work with other user" do
-      get :new, params: { access_token: access_token1.token }
+      get new_topic_path, params: { access_token: access_token1.token }, headers: headers
       assert_equal 200, response.status
       assert_includes response.body, "App.current_user_id = #{user1.id}"
     end

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 ENV["RAILS_ENV"] = "test"
+ENV["upload_provider"] = "file"
 
 require_relative "../config/environment"
 require "minitest/autorun"
@@ -99,4 +100,10 @@ end
 
 class ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
+
+  def assert_require_user(&block)
+    yield block
+    assert_equal 302, response.status
+    assert_match /\/account\/sign_in/, response.headers["Location"]
+  end
 end

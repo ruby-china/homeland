@@ -113,7 +113,7 @@ class ReplyTest < ActiveSupport::TestCase
     assert_equal false, system_reply.new_record?
     topic.reload
     assert_equal old_last_active_mark, topic.last_active_mark
-    assert_equal old_replied_at, topic.replied_at
+    assert_equal old_replied_at.to_i, topic.replied_at.to_i
   end
 
   test "Send reply notification" do

@@ -29,4 +29,5 @@ before_script:
 
 script:
   - bundle exec rubocop .
-  - RUBYOPT=W0 RAILS_ENV=test bundle exec rake
+  - RUBYOPT=W0 RAILS_ENV=test bundle exec rspec spec
+  - RUBYOPT=W0 RAILS_ENV=test bundle exec rails test

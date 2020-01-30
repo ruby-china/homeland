@@ -1,25 +1,25 @@
 # frozen_string_literal: true
 
-require "rails_helper"
+require "test_helper"
 
-ActiveRecord::Base.connection.create_table(:test_documents, force: true) do |t|
-  t.integer :user_id
-  t.integer :reply_to_id
-  t.integer :mentioned_user_ids, array: true, default: []
-  t.text :body
-  t.timestamps null: false
-end
+class MentionableTest < ActiveSupport::TestCase
+  ActiveRecord::Base.connection.create_table(:test_documents, force: true) do |t|
+    t.integer :user_id
+    t.integer :reply_to_id
+    t.integer :mentioned_user_ids, array: true, default: []
+    t.text :body
+    t.timestamps null: false
+  end
 
-class TestDocument < ApplicationRecord
-  include Mentionable
+  class TestDocument < ApplicationRecord
+    include Mentionable
 
-  belongs_to :user, optional: true
-  belongs_to :reply_to, class_name: "TestDocument", optional: true
-  delegate :login, to: :user, prefix: true, allow_nil: true
-end
+    belongs_to :user, optional: true
+    belongs_to :reply_to, class_name: "TestDocument", optional: true
+    delegate :login, to: :user, prefix: true, allow_nil: true
+  end
 
-describe Mentionable, type: :model do
-  it "should work with chars" do
+  test "should work with chars" do
     user = create :user, login: "foo-bar_12"
     user1 = create :user, login: "Rei.foo"
     doc = TestDocument.create body: "@#{user.login} @#{user1.login}", user: create(:user)
@@ -31,27 +31,27 @@ describe Mentionable, type: :model do
     assert_includes doc.mentioned_user_logins, user1.login
   end
 
-  it "should extract mentioned user ids" do
+  test "should extract mentioned user ids" do
     user = create :user
     doc = TestDocument.create body: "@#{user.login}", user: create(:user)
     assert_equal [user.id], doc.mentioned_user_ids
     assert_equal [user.login], doc.mentioned_user_logins
   end
 
-  it "limit 5 mentioned user" do
+  test "limtest 5 mentioned user" do
     logins = "".dup
     6.times { logins << " @#{create(:user).login}" }
     doc = TestDocument.create body: logins, user: create(:user)
     assert_equal 5, doc.mentioned_user_ids.count
   end
 
-  it "except self user" do
+  test "except self user" do
     user = create :user
     doc = TestDocument.create body: "@#{user.login}", user: user
     assert_equal 0, doc.mentioned_user_ids.count
   end
 
-  it "should get mentioned user logins" do
+  test "should get mentioned user logins" do
     user1 = create :user
     user2 = create :user
     doc = TestDocument.create body: "@#{user1.login} @#{user2.login}", user: create(:user)
@@ -59,60 +59,60 @@ describe Mentionable, type: :model do
     assert_includes doc.mentioned_user_logins, user2.login
   end
 
-  it "should send mention notification" do
+  test "should send mention notification" do
     user = create :user
-    expect do
+    assert_changes -> { user.notifications.unread.count } do
       TestDocument.create body: "@#{user.login}", user: create(:user)
-    end.to change(user.notifications.unread, :count)
+    end
 
-    expect do
+    assert_no_changes -> { user.notifications.unread.count } do
       TestDocument.create(body: "@#{user.login}", user: user)
-    end.not_to change(user.notifications.unread, :count)
+    end
 
-    expect do
+    assert_no_changes -> { user.notifications.unread.count } do
       TestDocument.create(body: "@#{user.login}", user: create(:user)).destroy
-    end.not_to change(user.notifications.unread, :count)
+    end
   end
 
-  it "should not mention Team" do
+  test "should not mention Team" do
     team = create :team
     user1 = create :user
     doc = TestDocument.create body: "@#{team.login} @#{user1.login}", user: create(:user)
     doc.extract_mentioned_users
     assert_equal doc.mentioned_user_ids, [user1.id]
 
-    expect do
+    assert_no_changes -> { Notification.count } do
       TestDocument.create body: "@#{team.login}", user: create(:user)
-    end.to change(Notification, :count).by(0)
+    end
   end
 
-  it "should send mention to reply_to user" do
+  test "should send mention to reply_to user" do
     user = create :user
     last_doc = TestDocument.create body: "@#{user.login}", user: user
     user1 = create :user
-    expect do
+
+    assert_changes -> { user.notifications.unread.count } do
       TestDocument.create body: "hello", reply_to_id: last_doc.id, user: user1
-    end.to change(user.notifications.unread, :count)
+    end
   end
 
-  describe ".send_mention_notification" do
-    let(:actor) { create(:user) }
-    let(:user1) { create(:user) }
-    let(:doc) { TestDocument.create body: "@#{user1.login} Bla bla", user: actor }
+  test ".send_mention_notification" do
+    actor = create(:user)
+    user = create(:user)
+    doc = TestDocument.create(body: "@#{user.login} Bla bla", user: actor)
 
-    it "should world" do
-      expect(Notification).to receive(:realtime_push_to_client).exactly(2).times
-      expect(PushJob).to receive(:perform_later).exactly(2).times
-      expect {
-        doc.send(:send_mention_notification)
-      }.to change(user1.notifications.unread, :count)
+    Notification.expects(:realtime_push_to_client).once
+    PushJob.expects(:perform_later).once
 
-      note = user1.notifications.unread.last
-      assert_equal "mention", note.notify_type
-      assert_equal "TestDocument", note.target_type
-      assert_equal doc.id, note.target_id
-      assert_equal doc.id, note.target.id
-      assert_equal actor.id, note.actor_id
+    assert_changes -> { user.notifications.unread.count } do
+      doc.send(:send_mention_notification)
     end
+
+    note = user.notifications.unread.last
+    assert_equal "mention", note.notify_type
+    assert_equal "MentionableTest::TestDocument", note.target_type
+    assert_equal doc.id, note.target_id
+    assert_equal doc.id, note.target.id
+    assert_equal actor.id, note.actor_id
   end
 end

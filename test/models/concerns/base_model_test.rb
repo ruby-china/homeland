@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-require "rails_helper"
+require "test_helper"
 
-describe ApplicationRecord, type: :model do
-  it "should have recent scope method" do
+class ApplicationRecordTest < ActiveSupport::TestCase
+  test "should have recent scope method" do
     monkey = Monkey.create(name: "Caesar", id: 1)
     ghost = Monkey.create(name: "Wukong", id: 2)
 
     assert_equal [ghost, monkey], Monkey.recent.to_a
   end
 
-  it "should have exclude_ids scope method" do
+  test "should have exclude_ids scope method" do
     ids = Array(1..10)
     ids.each { |i| Monkey.create(name: "entry##{i}", id: i) }
 
@@ -21,14 +21,14 @@ describe ApplicationRecord, type: :model do
     assert_equal ids.to(4).map { |i| "entry##{i}" }, result2
   end
 
-  it "should have find_by_id class methods" do
+  test "should have find_by_id class methods" do
     monkey = Monkey.create(name: "monkey", id: 1)
     assert_equal monkey, Monkey.find_by_id(1)
     assert_equal monkey, Monkey.find_by_id("1")
     assert_nil Monkey.find_by_id(2)
   end
 
-  it "should have by_week method" do
+  test "should have by_week method" do
     Monkey.create(name: "Caesar", created_at: 2.weeks.ago.utc)
     Monkey.create(name: "Caesar1", created_at: 3.days.ago.utc)
     Monkey.create(name: "Caesar1", created_at: Time.now.utc)

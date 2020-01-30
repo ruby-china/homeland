@@ -23,9 +23,6 @@ OmniAuth.config.test_mode = true
 Devise.stretches = 1
 Rails.logger.level = 4
 FactoryBot.use_parent_strategy = false
-# DatabaseCleaner.orm = :active_record
-# DatabaseCleaner.strategy = :truncation
-
 
 ActiveRecord::Base.connection.create_table(:monkeys, force: true) do |t|
   t.string :name
@@ -55,13 +52,10 @@ class ActiveSupport::TestCase
   setup do
     Setting.stubs(:topic_create_limit_interval).returns("")
     Setting.stubs(:topic_create_hour_limit_count).returns("")
+  end
 
-    # Database cleaner
-    # DatabaseCleaner.clean
+  teardown do
     Rails.cache.clear
-
-    Monkey.delete_all
-    CommentablePage.delete_all
   end
 
   def read_file(fname)

@@ -135,13 +135,13 @@ end
 
 group :development, :test do
   gem "sdoc"
-  gem "database_cleaner"
-  gem "factory_bot_rails"
   gem "letter_opener"
   gem "listen"
+
   gem "mocha"
   gem "minitest-spec-rails"
-  gem "rubocop", require: false
+  gem "factory_bot_rails"
 
+  gem "rubocop", require: false
   gem "codecov", require: false
 end

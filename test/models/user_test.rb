@@ -476,7 +476,7 @@ class UserTest < ActiveSupport::TestCase
 
     team_users = create_list(:team_user, 2, user: user)
     teams = team_users.collect(&:team).sort
-    assert_equal teams.collect { |t| [t.name, t.id] }, user.team_options.sort
+    assert_equal teams.collect { |t| [t.name, t.id] }.sort, user.team_options.sort
   end
 
   test ".team_options should get all with admin" do

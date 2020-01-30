@@ -3,18 +3,18 @@
 ENV["RAILS_ENV"] = "test"
 ENV["upload_provider"] = "file"
 
+require "simplecov"
+if ENV["CI"] == "true"
+  require "codecov"
+  SimpleCov.formatter = SimpleCov::Formatter::Codecov
+end
+SimpleCov.start "rails"
+
 require_relative "../config/environment"
 require "minitest/autorun"
 require "mocha/minitest"
 require "rails/test_help"
 require "sidekiq/testing"
-require "simplecov"
-
-SimpleCov.start
-if ENV["CI"] == "true"
-  require "codecov"
-  SimpleCov.formatter = SimpleCov::Formatter::Codecov
-end
 
 FileUtils.mkdir_p(Rails.root.join("tmp/cache"))
 
@@ -47,7 +47,7 @@ end
 class ActiveSupport::TestCase
   include FactoryBot::Syntax::Methods
 
-  # parallelize(workers: :number_of_processors)
+  # parallelize(workers: 2)
 
   setup do
     Setting.stubs(:topic_create_limit_interval).returns("")

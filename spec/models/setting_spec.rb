@@ -5,53 +5,53 @@ require "rails_helper"
 describe Setting, type: :model do
   describe "navbar_brand_html" do
     it "should work" do
-      expect(Setting.navbar_brand_html).to eq %(<a href="/" class="navbar-brand"><b>#{Setting.app_name}</b></a>)
+      assert_equal %(<a href="/" class="navbar-brand"><b>#{Setting.app_name}</b></a>), Setting.navbar_brand_html
     end
   end
 
   describe "reject_newbie_reply_in_the_evening" do
     it "should work" do
-      expect(Setting.reject_newbie_reply_in_the_evening).to eq false
-      expect(Setting.reject_newbie_reply_in_the_evening?).to eq false
+      assert_equal false, Setting.reject_newbie_reply_in_the_evening
+      assert_equal false, Setting.reject_newbie_reply_in_the_evening?
     end
   end
 
   describe "topic_create_rate_limit" do
     it "should work" do
-      expect(Setting.topic_create_rate_limit).to eq false
-      expect(Setting.topic_create_rate_limit?).to eq false
+      assert_equal false, Setting.topic_create_rate_limit
+      assert_equal false, Setting.topic_create_rate_limit?
     end
   end
 
   describe "default_locale" do
     it "should work" do
-      expect(Setting.default_locale).to eq "zh-CN"
+      assert_equal "zh-CN", Setting.default_locale
     end
   end
 
   describe "auto_locale" do
     it "should work" do
-      expect(Setting.auto_locale).to eq false
+      assert_equal false, Setting.auto_locale
     end
   end
 
   describe "ban_reasons" do
     it "should work" do
-      expect(Setting.ban_reasons).to eq ["标题或正文描述不清楚"]
+      assert_equal ["标题或正文描述不清楚"], Setting.ban_reasons
     end
   end
 
   describe "ban_reason_html" do
     it "should work" do
-      expect(Setting.ban_reason_html).to eq "此贴因内容原因不符合要求，被管理员屏蔽，请根据管理员给出的原因进行调整"
+      assert_equal "此贴因内容原因不符合要求，被管理员屏蔽，请根据管理员给出的原因进行调整", Setting.ban_reason_html
     end
   end
 
   describe "protocol" do
     it "should work" do
-      expect(Setting.protocol).to eq "http"
+      assert_equal "http", Setting.protocol
       allow(Setting).to receive(:https).and_return(true)
-      expect(Setting.protocol).to eq "https"
+      assert_equal "https", Setting.protocol
     end
   end
 
@@ -59,83 +59,83 @@ describe Setting, type: :model do
     it "should work" do
       allow(Setting).to receive(:domain).and_return("homeland.io")
       allow(Setting).to receive(:https).and_return(true)
-      expect(Setting.base_url).to eq "https://homeland.io"
+      assert_equal "https://homeland.io", Setting.base_url
     end
   end
 
   describe "admin_emails" do
     it "should work" do
-      expect(Setting.admin_emails).to eq ["admin@admin.com"]
+      assert_equal ["admin@admin.com"], Setting.admin_emails
       Setting.admin_emails = "admin@admin.com a0@foo.com\r\na1@foo.com\na2@foo.com\ra3@foo.com,a4@foo.com"
-      expect(Setting.has_admin?("huacnlee@gmail.com")).to eq false
-      expect(Setting.has_admin?("admin@admin.com")).to eq true
-      expect(Setting.has_admin?("a0@foo.com")).to eq true
-      expect(Setting.has_admin?("a1@foo.com")).to eq true
-      expect(Setting.has_admin?("a2@foo.com")).to eq true
-      expect(Setting.has_admin?("a3@foo.com")).to eq true
-      expect(Setting.has_admin?("a4@foo.com")).to eq true
-      expect(Setting.has_admin?("a5@foo.com")).to eq false
+      assert_equal false, Setting.has_admin?("huacnlee@gmail.com")
+      assert_equal true, Setting.has_admin?("admin@admin.com")
+      assert_equal true, Setting.has_admin?("a0@foo.com")
+      assert_equal true, Setting.has_admin?("a1@foo.com")
+      assert_equal true, Setting.has_admin?("a2@foo.com")
+      assert_equal true, Setting.has_admin?("a3@foo.com")
+      assert_equal true, Setting.has_admin?("a4@foo.com")
+      assert_equal false, Setting.has_admin?("a5@foo.com")
       allow(Setting).to receive(:admin_emails).and_return(["foo@bar.com\n", "foo1@bar.com "])
-      expect(Setting.has_admin?("foo@bar.com")).to eq true
-      expect(Setting.has_admin?("foo1@bar.com")).to eq true
+      assert_equal true, Setting.has_admin?("foo@bar.com")
+      assert_equal true, Setting.has_admin?("foo1@bar.com")
     end
   end
 
   describe "modules" do
     it "should work" do
       allow(Setting).to receive(:modules).and_return("all")
-      expect(Setting.has_module?("foo")).to eq true
-      expect(Setting.has_module?("home")).to eq true
-      expect(Setting.has_module?("topic")).to eq true
+      assert_equal true, Setting.has_module?("foo")
+      assert_equal true, Setting.has_module?("home")
+      assert_equal true, Setting.has_module?("topic")
       allow(Setting).to receive(:modules).and_return(["home", "topic\n", "note", "site", "team "])
-      expect(Setting.has_module?("home")).to eq true
-      expect(Setting.has_module?("topic")).to eq true
-      expect(Setting.has_module?("note")).to eq true
-      expect(Setting.has_module?("site")).to eq true
-      expect(Setting.has_module?("team")).to eq true
-      expect(Setting.has_module?("bbb")).to eq false
+      assert_equal true, Setting.has_module?("home")
+      assert_equal true, Setting.has_module?("topic")
+      assert_equal true, Setting.has_module?("note")
+      assert_equal true, Setting.has_module?("site")
+      assert_equal true, Setting.has_module?("team")
+      assert_equal false, Setting.has_module?("bbb")
     end
   end
 
   describe "profile_fields" do
     it "should work" do
       allow(Setting).to receive(:profile_fields).and_return("all")
-      expect(Setting.has_profile_field?("foo")).to eq true
-      expect(Setting.has_profile_field?("weibo")).to eq true
-      expect(Setting.has_profile_field?("douban")).to eq true
+      assert_equal true, Setting.has_profile_field?("foo")
+      assert_equal true, Setting.has_profile_field?("weibo")
+      assert_equal true, Setting.has_profile_field?("douban")
       allow(Setting).to receive(:profile_fields).and_return(["weibo", "facebook\n", "douban ", "qq"])
-      expect(Setting.has_profile_field?("weibo")).to eq true
-      expect(Setting.has_profile_field?("facebook")).to eq true
-      expect(Setting.has_profile_field?("douban")).to eq true
-      expect(Setting.has_profile_field?("qq")).to eq true
-      expect(Setting.has_profile_field?("ccc")).to eq false
+      assert_equal true, Setting.has_profile_field?("weibo")
+      assert_equal true, Setting.has_profile_field?("facebook")
+      assert_equal true, Setting.has_profile_field?("douban")
+      assert_equal true, Setting.has_profile_field?("qq")
+      assert_equal false, Setting.has_profile_field?("ccc")
     end
   end
 
   describe "sso_provider_enabled" do
     it "should work" do
-      expect(Setting.sso_provider_enabled?).to eq false
+      assert_equal false, Setting.sso_provider_enabled?
     end
   end
 
   describe "sso_enabled" do
     it "should work" do
-      expect(Setting.sso_enabled?).to eq false
+      assert_equal false, Setting.sso_enabled?
     end
   end
 
   describe "allow_change_login" do
     it "should work" do
-      expect(Setting.allow_change_login?).to eq false
+      assert_equal false, Setting.allow_change_login?
       Setting.allow_change_login = "true"
-      expect(Setting.allow_change_login?).to eq true
+      assert_equal true, Setting.allow_change_login?
     end
   end
 
   describe "twitter_id" do
     it "should work" do
       Setting.twitter_id = "ruby_china"
-      expect(Setting.twitter_id).to eq "ruby_china"
+      assert_equal "ruby_china", Setting.twitter_id
     end
   end
 
@@ -145,7 +145,7 @@ describe Setting, type: :model do
       100
       101,102,103
       LINES
-      expect(Setting.node_ids_hide_in_topics_index).to eq %w[100 101 102 103]
+      assert_equal %w[100 101 102 103], Setting.node_ids_hide_in_topics_index
     end
   end
 
@@ -155,7 +155,7 @@ describe Setting, type: :model do
       10.10.10.10
       11.11.11.11,12.12.12.12
       LINES
-      expect(Setting.blacklist_ips).to eq ["10.10.10.10", "11.11.11.11", "12.12.12.12"]
+      assert_equal ["10.10.10.10", "11.11.11.11", "12.12.12.12"], Setting.blacklist_ips
     end
   end
 
@@ -165,7 +165,7 @@ describe Setting, type: :model do
       This is first line.
       And, this is second line.
       LINES
-      expect(Setting.ban_words_on_reply).to eq ["This is first line.", "And, this is second line."]
+      assert_equal ["This is first line.", "And, this is second line."], Setting.ban_words_on_reply
     end
   end
 
@@ -175,7 +175,7 @@ describe Setting, type: :model do
       This is first line.
       And, this is second line.
       LINES
-      expect(Setting.tips).to eq ["This is first line.", "And, this is second line."]
+      assert_equal ["This is first line.", "And, this is second line."], Setting.tips
     end
   end
 
@@ -186,7 +186,7 @@ describe Setting, type: :model do
       facebook
       twitter
       LINES
-      expect(Setting.share_allow_sites).to eq ["weibo", "facebook", "twitter"]
+      assert_equal ["weibo", "facebook", "twitter"], Setting.share_allow_sites
     end
   end
 end

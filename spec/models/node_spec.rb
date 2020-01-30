@@ -18,14 +18,14 @@ describe Node, type: :model do
     it "should update on save" do
       CacheVersion.section_node_updated_at = old
       create(:node)
-      expect(CacheVersion.section_node_updated_at).not_to eq(old)
+      refute_equal old, CacheVersion.section_node_updated_at
     end
 
     it "should update on destroy" do
       node = create(:node)
       CacheVersion.section_node_updated_at = old
       node.destroy!
-      expect(CacheVersion.section_node_updated_at).not_to eq(old)
+      refute_equal old, CacheVersion.section_node_updated_at
     end
   end
 
@@ -33,7 +33,7 @@ describe Node, type: :model do
     let(:node) { create(:node) }
     it "should return html" do
       node.summary = "# foo"
-      expect(node.summary_html).to eq '<h2 id="foo">foo</h2>'
+      assert_equal '<h2 id="foo">foo</h2>', node.summary_html
     end
 
     it "should expire cache on node update" do
@@ -47,28 +47,28 @@ describe Node, type: :model do
   describe ".collapse_summary?" do
     let(:node) { create(:node) }
     it "should work" do
-      expect(node.collapse_summary?).to eq false
+      assert_equal false, node.collapse_summary?
       node.update!(summary: "foo\n\nbar")
-      expect(node.collapse_summary?).to eq false
+      assert_equal false, node.collapse_summary?
       node.update!(summary: "foo\n\nbar\n\ndar")
-      expect(node.collapse_summary?).to eq true
+      assert_equal true, node.collapse_summary?
       node.update!(summary: "foo\n\n- bar\n- dar")
-      expect(node.collapse_summary?).to eq true
+      assert_equal true, node.collapse_summary?
     end
   end
 
   describe "find_builtin_node" do
     it "should work" do
       node = Node.find_builtin_node(10, "Foo")
-      expect(node.new_record?).to eq(false)
-      expect(node.id).to eq(10)
-      expect(node.name).to eq("Foo")
+      assert_equal false, node.new_record?
+      assert_equal 10, node.id
+      assert_equal "Foo", node.name
     end
 
     it "should work when same id exists" do
       exist_node = create(:node)
       node = Node.find_builtin_node(exist_node.id, "Foo")
-      expect(exist_node).to eq(node)
+      assert_equal node, exist_node
     end
   end
 end

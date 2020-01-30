@@ -7,42 +7,42 @@ describe Topic, type: :model do
   let(:user) { create(:user) }
 
   it "should no save invalid node_id" do
-    expect(build(:topic, node_id: nil).valid?).not_to be_truthy
+    refute_equal true, build(:topic, node_id: nil).valid?
   end
 
   it "should set last_active_mark on created" do
     # because the Topic index is sort by replied_at,
     # so the new Topic need to set a Time, that it will display in index page
-    expect(create(:topic).last_active_mark).not_to be_nil
+    refute_nil create(:topic).last_active_mark
   end
 
   it "should not update last_active_mark on save" do
     last_active_mark_was = topic.last_active_mark
     topic.save
-    expect(topic.last_active_mark).to eq(last_active_mark_was)
+    assert_equal last_active_mark_was, topic.last_active_mark
   end
 
   it "should get node name" do
     node = create :node
-    expect(create(:topic, node: node).node_name).to eq(node.name)
+    assert_equal node.name, create(:topic, node: node).node_name
   end
 
   it "should update after reply" do
     reply = create :reply, topic: topic, user: user
-    expect(topic.last_active_mark).not_to be_nil
-    expect(topic.replied_at.to_i).to eq(reply.created_at.to_i)
-    expect(topic.last_reply_id).to eq(reply.id)
-    expect(topic.last_reply_user_id).to eq(reply.user_id)
-    expect(topic.last_reply_user_login).to eq(reply.user.login)
+    refute_nil topic.last_active_mark
+    assert_equal reply.created_at.to_i, topic.replied_at.to_i
+    assert_equal reply.id, topic.last_reply_id
+    assert_equal reply.user_id, topic.last_reply_user_id
+    assert_equal reply.user.login, topic.last_reply_user_login
   end
 
   it "should update after reply without last_active_mark when the topic is created at month ago" do
     allow(topic).to receive(:created_at).and_return(1.month.ago)
     allow(topic).to receive(:last_active_mark).and_return(1)
     reply = create :reply, topic: topic, user: user
-    expect(topic.last_active_mark).not_to eq(reply.created_at.to_i)
-    expect(topic.last_reply_user_id).to eq(reply.user_id)
-    expect(topic.last_reply_user_login).to eq(reply.user.login)
+    refute_equal reply.created_at.to_i, topic.last_active_mark
+    assert_equal reply.user_id, topic.last_reply_user_id
+    assert_equal reply.user.login, topic.last_reply_user_login
   end
 
   it "should not update last_active_mark when update reply" do
@@ -50,7 +50,7 @@ describe Topic, type: :model do
     old_last_active_mark = topic.last_active_mark
     reply.body = "foobar"
     reply.save
-    expect(topic.last_active_mark).to eq(old_last_active_mark)
+    assert_equal old_last_active_mark, topic.last_active_mark
   end
 
   it "should get page and floor by reply" do
@@ -58,17 +58,17 @@ describe Topic, type: :model do
     5.times do
       replies << create(:reply, topic: topic, user: user)
     end
-    expect(topic.floor_of_reply(replies[2])).to eq(3)
-    expect(topic.floor_of_reply(replies[3])).to eq(4)
+    assert_equal 3, topic.floor_of_reply(replies[2])
+    assert_equal 4, topic.floor_of_reply(replies[3])
   end
 
   it "should log deleted user name when use destroy_by" do
     t = create(:topic)
     t.destroy_by(user)
-    expect(t.who_deleted).to eq(user.login)
-    expect(t.deleted_at).not_to eq(nil)
+    assert_equal user.login, t.who_deleted
+    refute_equal nil, t.deleted_at
     t1 = create(:topic)
-    expect(t1.destroy_by(nil)).to eq(false)
+    assert_equal false, t1.destroy_by(nil)
   end
 
   describe "#auto_space_with_en_zh" do
@@ -76,7 +76,7 @@ describe Topic, type: :model do
       topic.title = "Gitlab怎么集成GitlabCI"
       topic.save
       topic.reload
-      expect(topic.title).to eq("Gitlab 怎么集成 GitlabCI")
+      assert_equal "Gitlab 怎么集成 GitlabCI", topic.title
     end
   end
 
@@ -93,23 +93,23 @@ describe Topic, type: :model do
       t = create(:topic)
       old_updated_at = t.updated_at
       r = create(:reply, topic: t)
-      expect(t.update_last_reply(r)).to be_truthy
-      expect(t.replied_at).to eq r.created_at
-      expect(t.last_reply_id).to eq r.id
-      expect(t.last_reply_user_id).to eq r.user_id
-      expect(t.last_reply_user_login).to eq r.user.login
-      expect(t.last_active_mark).not_to be_nil
-      expect(t.updated_at).not_to eq old_updated_at
+      assert_equal true, t.update_last_reply(r)
+      assert_equal r.created_at, t.replied_at
+      assert_equal r.id, t.last_reply_id
+      assert_equal r.user_id, t.last_reply_user_id
+      assert_equal r.user.login, t.last_reply_user_login
+      refute_nil t.last_active_mark
+      refute_equal old_updated_at, t.updated_at
     end
 
     it "should update with nil when have :force" do
       t = create(:topic)
       t.update_last_reply(nil, force: true)
-      expect(t.replied_at).to be_nil
-      expect(t.last_reply_id).to be_nil
-      expect(t.last_reply_user_id).to be_nil
-      expect(t.last_reply_user_login).to be_nil
-      expect(t.last_active_mark).not_to be_nil
+      assert_nil t.replied_at
+      assert_nil t.last_reply_id
+      assert_nil t.last_reply_user_id
+      assert_nil t.last_reply_user_login
+      refute_nil t.last_active_mark
     end
   end
 
@@ -120,24 +120,24 @@ describe Topic, type: :model do
         r0 = create(:reply, topic: t)
         create(:reply, action: "foo")
         r1 = create(:reply, topic: t)
-        expect(t.last_reply_id).to eq r1.id
+        assert_equal r1.id, t.last_reply_id
         expect(t).to receive(:update_last_reply).with(r0, force: true)
         t.update_deleted_last_reply(r1)
       end
 
       it "last reply will be nil" do
         r = create(:reply, topic: t)
-        expect(t.update_deleted_last_reply(r)).to be_truthy
+        assert_equal true, t.update_deleted_last_reply(r)
         t.reload
-        expect(t.last_reply_id).to be_nil
-        expect(t.last_reply_user_login).to be_nil
-        expect(t.last_reply_user_id).to be_nil
+        assert_nil t.last_reply_id
+        assert_nil t.last_reply_user_login
+        assert_nil t.last_reply_user_id
       end
     end
 
     context "when param is nil" do
       it "should work" do
-        expect(t.update_deleted_last_reply(nil)).to be_falsey
+        assert_equal false, t.update_deleted_last_reply(nil)
       end
     end
 
@@ -145,8 +145,8 @@ describe Topic, type: :model do
       it "should do nothing" do
         r0 = create(:reply, topic: t)
         r1 = create(:reply, topic: t)
-        expect(t.update_deleted_last_reply(r0)).to be_falsey
-        expect(t.last_reply_id).to eq r1.id
+        assert_equal false, t.update_deleted_last_reply(r0)
+        assert_equal r1.id, t.last_reply_id
       end
     end
   end
@@ -177,10 +177,10 @@ describe Topic, type: :model do
       it "should work" do
         Topic.notify_topic_node_changed(topic.id, new_node.id)
         last_notification = user.notifications.unread.where(notify_type: "node_changed").first
-        expect(last_notification.target_type).to eq "Topic"
-        expect(last_notification.target_id).to eq topic.id
-        expect(last_notification.second_target_type).to eq "Node"
-        expect(last_notification.second_target_id).to eq new_node.id
+        assert_equal "Topic", last_notification.target_type
+        assert_equal topic.id, last_notification.target_id
+        assert_equal "Node", last_notification.second_target_type
+        assert_equal new_node.id, last_notification.second_target_id
       end
     end
 
@@ -213,17 +213,17 @@ describe Topic, type: :model do
     it "should ban! and lock topic" do
       t.ban!
       t.reload
-      expect(t.ban?).to eq true
+      assert_equal true, t.ban?
     end
 
     it "should ban! with reason" do
       allow(User).to receive(:current).and_return(user)
       t.ban!(reason: "Block this topic")
       t.reload
-      expect(t.ban?).to eq true
+      assert_equal true, t.ban?
       r = t.replies.last
-      expect(r.action).to eq "ban"
-      expect(r.body).to eq "Block this topic"
+      assert_equal "ban", r.action
+      assert_equal "Block this topic", r.body
     end
   end
 
@@ -232,7 +232,7 @@ describe Topic, type: :model do
     let!(:replies) { create_list(:reply, 10, topic: t) }
 
     it "should work" do
-      expect(t.reply_ids).to eq replies.collect(&:id)
+      assert_equal replies.collect(&:id), t.reply_ids
     end
   end
 
@@ -241,10 +241,10 @@ describe Topic, type: :model do
 
     it "should work" do
       t.close!
-      expect(t.closed?).to eq true
+      assert_equal true, t.closed?
       t.open!
-      expect(t.closed_at).to eq nil
-      expect(t.closed?).to eq false
+      assert_nil t.closed_at
+      assert_equal false, t.closed?
       t.close!
     end
   end
@@ -257,11 +257,11 @@ describe Topic, type: :model do
       expect do
         t.excellent!
       end.to change(Reply.where(action: "excellent", user: user), :count).by(1)
-      expect(t.excellent?).to eq true
+      assert_equal true, t.excellent?
       expect do
         t.unexcellent!
       end.to change(Reply.where(action: "unexcellent", user: user), :count).by(1)
-      expect(t.excellent?).to eq false
+      assert_equal false, t.excellent?
     end
   end
 
@@ -274,26 +274,26 @@ describe Topic, type: :model do
 
     describe ".indexed_changed?" do
       it "title changed work" do
-        expect(t.indexed_changed?).to eq false
+        assert_equal false, t.indexed_changed?
         t.update(title: t.title + "1")
-        expect(t.indexed_changed?).to eq true
+        assert_equal true, t.indexed_changed?
       end
 
       it "body changed work" do
-        expect(t.indexed_changed?).to eq false
+        assert_equal false, t.indexed_changed?
         t.update(body: t.body + "1")
-        expect(t.indexed_changed?).to eq true
+        assert_equal true, t.indexed_changed?
       end
 
       it "other changed work" do
-        expect(t.indexed_changed?).to eq false
+        assert_equal false, t.indexed_changed?
         t.node_id = 3
         t.last_reply_id = 3
         t.who_deleted = "122"
         t.last_active_mark = Time.now.to_i
         t.suggested_at = Time.now
         t.save
-        expect(t.indexed_changed?).to eq false
+        assert_equal false, t.indexed_changed?
       end
     end
   end

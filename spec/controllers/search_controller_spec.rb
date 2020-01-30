@@ -11,12 +11,10 @@ describe SearchController, type: :controller do
       sign_in user
       allow(User).to receive(:search).and_return(users)
       get :users
-      res = JSON.parse(response.body)
-      expect(response).to have_http_status(200)
-      expect(res[0]).to include("login", "name", "avatar_url")
-      expect(res.map { |j| j["login"] }).to match users.map(&:login)
-      expect(res.map { |j| j["name"] }).to match users.map(&:name)
-      expect(res.map { |j| j["avatar_url"] }).to match users.map(&:large_avatar_url)
+      assert_equal 200, response.status
+      assert_equal users.map(&:login).sort, response.parsed_body.collect { |j| j["login"] }.sort
+      assert_equal users.map(&:name).sort, response.parsed_body.collect { |j| j["name"] }.sort
+      assert_equal users.map(&:large_avatar_url).sort, response.parsed_body.collect { |j| j["avatar_url"] }.sort
     end
   end
 end

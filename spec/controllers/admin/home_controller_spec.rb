@@ -9,13 +9,13 @@ describe Admin::HomeController, type: :controller do
     it "should open with admin user" do
       sign_in admin
       get :index
-      expect(response.status).to eq 200
+      assert_equal 200, response.status
     end
 
     it "should 404 with non admin user" do
       sign_in user
       get :index
-      expect(response.status).to eq 404
+      assert_equal 404, response.status
     end
   end
 end

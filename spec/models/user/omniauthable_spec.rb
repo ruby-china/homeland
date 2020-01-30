@@ -21,31 +21,31 @@ describe User::Omniauthable, type: :model do
 
     it "should handle provider twitter properly" do
       result = Monkey.new_from_provider_data("twitter", uid, data)
-      expect(result.email).to eq("email@example.com")
+      assert_equal "email@example.com", result.email
     end
 
     it "should handle provider github properly" do
       result = Monkey.new_from_provider_data("github", uid, data)
-      expect(result.email).to eq("email@example.com")
+      assert_equal "email@example.com", result.email
     end
 
     it "should escape illegal characters in nicknames properly" do
       data["nickname"] = "I <3 Rails"
-      expect(Monkey.new_from_provider_data(nil, nil, data).login).to eq("I__3_Rails")
+      assert_equal "I__3_Rails", Monkey.new_from_provider_data(nil, nil, data).login
     end
 
     it "should generate random login if login is empty" do
       data["nickname"] = ""
       time = Time.now
       allow(Time).to receive(:now).and_return(time)
-      expect(Monkey.new_from_provider_data(nil, nil, data).login).to eq("u#{time.to_i}")
+      assert_equal "u#{time.to_i}", Monkey.new_from_provider_data(nil, nil, data).login
     end
 
     it "should generate random login if login is duplicated" do
       Monkey.new_from_provider_data("github", nil, data).save # create a new user first
       time = Time.now
       allow(Time).to receive(:now).and_return(time)
-      expect(Monkey.new_from_provider_data("github", nil, data).login).to eq("#{data['nickname']}-github")
+      assert_equal "#{data['nickname']}-github", Monkey.new_from_provider_data("github", nil, data).login
     end
 
     it "should generate some random password" do
@@ -54,12 +54,12 @@ describe User::Omniauthable, type: :model do
 
     it "should set user location" do
       data["location"] = "Shanghai"
-      expect(Monkey.new_from_provider_data(nil, nil, data).location).to eq("Shanghai")
+      assert_equal "Shanghai", Monkey.new_from_provider_data(nil, nil, data).location
     end
 
     it "should set user tagline" do
       description = data["description"] = "A newbie Ruby developer"
-      expect(Monkey.new_from_provider_data(nil, nil, data).tagline).to eq(description)
+      assert_equal description, Monkey.new_from_provider_data(nil, nil, data).tagline
     end
   end
 end

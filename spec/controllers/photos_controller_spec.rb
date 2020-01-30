@@ -9,29 +9,26 @@ describe PhotosController, type: :controller do
   it "create success for valid image" do
     sign_in user
     post :create, params: { file: file }
-    expect(response).to have_http_status(200)
-    json = JSON.parse(response.body)
-    expect(json["ok"]).to be_truthy
-    expect(json["url"]).to match(Regexp.new("/uploads/photo/#{Date.today.year}/[a-zA-Z0-9\\-]+.png!large"))
+    assert_equal 200, response.status
+    assert_equal true, response.parsed_body["ok"]
+    assert_match Regexp.new("/uploads/photo/#{Date.today.year}/[a-zA-Z0-9\\-]+.png!large"), response.parsed_body["url"]
   end
 
   it "create failure for blank data" do
     sign_in user
     post :create
-    expect(response).not_to have_http_status(200)
-    expect(response.status).to eq(400)
-    json = JSON.parse(response.body)
-    expect(json["ok"]).to be_falsey
-    expect(json["url"]).to be_blank
+    refute_equal 200, response.status
+    assert_equal 400, response.status
+    assert_equal false, response.parsed_body["ok"]
+    assert_equal true, response.parsed_body["url"].blank?
   end
 
   it "create failure for save error" do
     allow_any_instance_of(Photo).to receive(:save).and_return(false)
     sign_in user
     post :create, params: { file: file }
-    expect(response).to have_http_status(400)
-    json = JSON.parse(response.body)
-    expect(json["ok"]).to be_falsey
-    expect(json["url"]).to be_blank
+    assert_equal 400, response.status
+    assert_equal false, response.parsed_body["ok"]
+    assert_equal true, response.parsed_body["url"].blank?
   end
 end

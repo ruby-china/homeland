@@ -8,7 +8,7 @@ describe "image_thumb" do
     context "pragma: false" do
       it "#exists?" do
         image_thumb = Homeland::ImageThumb.new("test", "xs")
-        expect(image_thumb.exists?).to be_falsey
+        assert_equal false, image_thumb.exists?
       end
     end
 
@@ -18,22 +18,22 @@ describe "image_thumb" do
         FileUtils.cp Rails.root.join("app", "assets", "images", "favicon.png"), Rails.root.join("public", "uploads", "favicon.png")
 
         image_thumb = Homeland::ImageThumb.new("favicon.png", "large", pragma: true)
-        expect(image_thumb.exists?).to be_truthy
+        assert_equal true, image_thumb.exists?
 
         image_thumb = Homeland::ImageThumb.new("favicon.png", "lg", pragma: true)
-        expect(image_thumb.exists?).to be_truthy
+        assert_equal true, image_thumb.exists?
 
         image_thumb = Homeland::ImageThumb.new("favicon.png", "md", pragma: true)
-        expect(image_thumb.exists?).to be_truthy
+        assert_equal true, image_thumb.exists?
 
         image_thumb = Homeland::ImageThumb.new("favicon.png", "sm", pragma: true)
-        expect(image_thumb.exists?).to be_truthy
+        assert_equal true, image_thumb.exists?
 
         image_thumb = Homeland::ImageThumb.new("favicon.png", "xs", pragma: true)
-        expect(image_thumb.exists?).to be_truthy
+        assert_equal true, image_thumb.exists?
 
         image_thumb = Homeland::ImageThumb.new("favicon.png", "other", pragma: true)
-        expect(image_thumb.exists?).to be_truthy
+        assert_equal true, image_thumb.exists?
       end
     end
   end

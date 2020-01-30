@@ -23,14 +23,14 @@ describe "OAuth2" do
         @access_token = client.auth_code.get_token(grant.token, redirect_uri: grant.redirect_uri)
       end.to change(Doorkeeper::AccessToken, :count).by(1)
 
-      expect(@access_token.token).not_to be_nil
+      refute_nil @access_token.token
 
       # Refresh Token
       expect do
         @new_token = @access_token.refresh!
       end.to change(Doorkeeper::AccessToken, :count).by(1)
-      expect(@new_token.token).not_to be_nil
-      expect(@new_token.token).not_to eq @access_token.token
+      refute_nil @new_token.token
+      refute_equal @access_token.token, @new_token.token
     end
   end
 
@@ -44,14 +44,14 @@ describe "OAuth2" do
         @access_token = client.password.get_token(user.login, password)
       end.to change(Doorkeeper::AccessToken, :count).by(1)
 
-      expect(@access_token.token).not_to be_nil
+      refute_nil @access_token.token
 
       # Refresh Token
       expect do
         @new_token = @access_token.refresh!
       end.to change(Doorkeeper::AccessToken, :count).by(1)
-      expect(@new_token.token).not_to be_nil
-      expect(@new_token.token).not_to eq @access_token.token
+      refute_nil @new_token.token
+      refute_equal @access_token.token, @new_token.token
     end
   end
 end

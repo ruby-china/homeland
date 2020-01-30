@@ -6,7 +6,7 @@ describe Section, type: :model do
   describe ".default" do
     it "should work" do
       expect(Section.default).to be_a(Section)
-      expect(Section.default.new_record?).to eq false
+      assert_equal false, Section.default.new_record?
     end
   end
 
@@ -15,14 +15,14 @@ describe Section, type: :model do
     it "should update on save" do
       CacheVersion.section_node_updated_at = old
       create(:section)
-      expect(CacheVersion.section_node_updated_at).not_to eq(old)
+      refute_equal old, CacheVersion.section_node_updated_at
     end
 
     it "should update on destroy" do
       section = create(:section)
       CacheVersion.section_node_updated_at = old
       section.destroy
-      expect(CacheVersion.section_node_updated_at).not_to eq(old)
+      refute_equal old, CacheVersion.section_node_updated_at
     end
   end
 end

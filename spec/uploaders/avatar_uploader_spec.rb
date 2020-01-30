@@ -9,14 +9,14 @@ describe "AvatarUploader" do
 
   it "extension limit" do
     user = build(:user, avatar: not_an_image)
-    expect(user.valid?).to eq(false)
-    expect(user.errors.full_messages_for(:avatar)).to eq(["头像仅允许图片文件上传 [jpg, jpeg, gif, png]"])
+    assert_equal false, user.valid?
+    assert_equal ["头像仅允许图片文件上传 [jpg, jpeg, gif, png]"], user.errors.full_messages_for(:avatar)
 
     user = build(:user, avatar: svg_image)
-    expect(user.valid?).to eq(false)
-    expect(user.errors.full_messages_for(:avatar)).to eq(["头像仅允许图片文件上传 [jpg, jpeg, gif, png]"])
+    assert_equal false, user.valid?
+    assert_equal ["头像仅允许图片文件上传 [jpg, jpeg, gif, png]"], user.errors.full_messages_for(:avatar)
 
     user = build(:user, avatar: image)
-    expect(user.valid?).to eq(true)
+    assert_equal true, user.valid?
   end
 end

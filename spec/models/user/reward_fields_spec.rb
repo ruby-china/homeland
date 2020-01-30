@@ -11,17 +11,17 @@ describe User, type: :model do
         alipay: "alipay111",
         wechat: "wechat111"
       }
-      expect(user.reward_enabled?).to eq false
+      assert_equal false, user.reward_enabled?
       user.update_reward_fields(params)
-      expect(user.reward_enabled?).to eq true
-      expect(user.reward_fields).to eq(params)
-      expect(user.reward_field(:wechat)).to eq "wechat111"
-      expect(user.reward_field("wechat")).to eq "wechat111"
-      expect(user.reward_field("alipay")).to eq "alipay111"
-      expect(user.reward_field(:ddd)).to eq nil
-      expect(user.reward_field(:facebook)).to eq nil
-      expect(User.reward_field_label(:wechat)).to eq "微信"
-      expect(User.reward_field_label(:alipay)).to eq "支付宝"
+      assert_equal true, user.reward_enabled?
+      assert_equal params, user.reward_fields
+      assert_equal "wechat111", user.reward_field(:wechat)
+      assert_equal "wechat111", user.reward_field("wechat")
+      assert_equal "alipay111", user.reward_field("alipay")
+      assert_nil user.reward_field(:ddd)
+      assert_nil user.reward_field(:facebook)
+      assert_equal "微信", User.reward_field_label(:wechat)
+      assert_equal "支付宝", User.reward_field_label(:alipay)
     end
   end
 end

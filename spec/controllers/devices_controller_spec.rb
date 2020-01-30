@@ -8,18 +8,18 @@ describe DevicesController, type: :controller do
 
   it "DELETE /devices/:id" do
     sign_in user
-    expect(device.new_record?).to eq false
+    assert_equal false, device.new_record?
     expect do
       delete :destroy, params: { id: device.id }
     end.to change(user.devices, :count).by(-1)
-    expect(response).to redirect_to(oauth_applications_path)
-    expect(user.devices.where(id: device.id).count).to eq 0
+    assert_redirected_to oauth_applications_path
+    assert_equal 0, user.devices.where(id: device.id).count
   end
 
   it "require login" do
     expect do
       delete :destroy, params: { id: device.id }
     end.to change(user.devices, :count).by(0)
-    expect(response.status).to eq(302)
+    assert_equal 302, response.status
   end
 end

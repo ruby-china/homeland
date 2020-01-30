@@ -12,18 +12,20 @@ describe "API V3", "nodes", type: :request do
 
     it "should return the list of nodes" do
       get "/api/v3/nodes.json"
-      expect(response.status).to eq(200)
+      assert_equal 200, response.status
       keyset = %w[id name]
-      expect(json).to include("nodes")
-      expect(json["nodes"].size).to eq 3
-      expect(json["nodes"][0]).to include("id", "name", "topics_count", "summary", "section_id", "sort", "section_name", "updated_at")
+      assert_equal 3, json["nodes"].size
+      assert_has_keys json["nodes"][0], "id", "name", "topics_count", "summary", "section_id", "sort", "section_name", "updated_at"
       json["nodes"].each do |h|
         h.slice!(*keyset)
       end
 
-      expect(json["nodes"]).to eq([{ "id" => 1, "name" => "fun" },
-                                   { "id" => 2, "name" => "ruby" },
-                                   { "id" => 3, "name" => "nodes" }])
+      expected = [
+        { "id" => 1, "name" => "fun" },
+        { "id" => 2, "name" => "ruby" },
+        { "id" => 3, "name" => "nodes" },
+      ]
+      assert_equal expected, json["nodes"]
     end
   end
 
@@ -32,9 +34,9 @@ describe "API V3", "nodes", type: :request do
 
     it "should work" do
       get "/api/v3/nodes/#{node.id}.json"
-      expect(response.status).to eq(200)
-      expect(json["node"]).to include("id", "name", "topics_count", "summary", "section_id", "sort", "section_name", "updated_at")
-      expect(json["node"]["topics_count"]).to eq(100)
+      assert_equal 200, response.status
+      assert_has_keys json["node"], "id", "name", "topics_count", "summary", "section_id", "sort", "section_name", "updated_at"
+      assert_equal 100, json["node"]["topics_count"]
     end
   end
 end

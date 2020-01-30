@@ -8,14 +8,14 @@ describe AccountController, type: :controller do
 
     it "should render new template" do
       get :new
-      expect(response).to have_http_status(200)
+      assert_equal 200, response.status
     end
 
     it "should redirect to sso login" do
       allow(Setting).to receive(:sso_enabled?).and_return(true)
       get :new
-      expect(response.status).to eq(302)
-      expect(response.location).to include("/auth/sso")
+      assert_equal 302, response.status
+      assert_includes response.location, "/auth/sso"
     end
   end
 
@@ -25,7 +25,7 @@ describe AccountController, type: :controller do
     it "should work" do
       allow_any_instance_of(ActionController::Base).to receive(:verify_complex_captcha?).and_return(true)
       post :create, params: { format: :js, user: { login: "newlogin", email: "newlogin@email.com", password: "password" } }
-      expect(response).to have_http_status(200)
+      assert_equal 200, response.status
     end
   end
 
@@ -35,8 +35,8 @@ describe AccountController, type: :controller do
     it "should work" do
       sign_in user
       get :edit
-      expect(response.status).to eq 302
-      expect(response.location).to include("/setting")
+      assert_equal 302, response.status
+      assert_includes response.location, "/setting"
     end
   end
 end

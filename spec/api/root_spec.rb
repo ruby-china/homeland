@@ -9,8 +9,8 @@ describe "API", type: :request do
   describe "Not found routes" do
     it "should return status 404" do
       get "/api/v3/foo-bar.json"
-      expect(response.status).to eq 404
-      expect(json["error"]).to eq "ResourceNotFound"
+      assert_equal 404, response.status
+      assert_equal "ResourceNotFound", json["error"]
     end
   end
 
@@ -18,7 +18,7 @@ describe "API", type: :request do
     context "without oauth2" do
       it "should faild with 401" do
         get "/api/v3/hello.json"
-        expect(response.status).to eq(401)
+        assert_equal 401, response.status
       end
     end
 
@@ -26,12 +26,11 @@ describe "API", type: :request do
       it "should work" do
         login_user!
         get "/api/v3/hello.json"
-        expect(response.status).to eq 200
-        expect(json["user"]).to include("id", "name", "login", "avatar_url")
-        expect(json["meta"]).to include("time")
-        expect(json["user"]["login"]).to eq current_user.login
-        expect(json["user"]["name"]).to eq current_user.name
-        expect(json["user"]["avatar_url"]).not_to be_nil
+        assert_equal 200, response.status
+        assert_equal current_user.id, json["user"]["id"]
+        assert_equal current_user.login, json["user"]["login"]
+        assert_equal current_user.name, json["user"]["name"]
+        assert_equal true, json["user"]["avatar_url"].present?
       end
     end
 
@@ -39,9 +38,8 @@ describe "API", type: :request do
       it "should status 400 and give Validation errors" do
         login_user!
         get "/api/v3/hello.json", limit: 2000
-        expect(response.status).to eq 400
-        # puts json.inspect
-        expect(json["error"]).to eq "ParameterInvalid"
+        assert_equal 400, response.status
+        assert_equal "ParameterInvalid", json["error"]
       end
     end
   end

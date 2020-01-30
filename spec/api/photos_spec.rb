@@ -12,7 +12,7 @@ describe "API", type: :request do
     context "without login" do
       it "should response 401" do
         post "/api/v3/photos.json"
-        expect(response.status).to eq 401
+        assert_equal 401, response.status
       end
     end
 
@@ -21,10 +21,9 @@ describe "API", type: :request do
         login_user!
         post "/api/v3/photos.json", file: fixture_file_upload("test.png")
         @photo = Photo.last
-        expect(response.status).to eq 200
-        expect(@photo.user_id).to eq current_user.id
-        expect(json["image_url"]).not_to eq nil
-        expect(json["image_url"]).not_to eq ""
+        assert_equal 200, response.status
+        assert_equal current_user.id, @photo.user_id
+        assert_equal true, json["image_url"].present?
       end
     end
   end

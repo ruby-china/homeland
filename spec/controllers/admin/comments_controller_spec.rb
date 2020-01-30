@@ -14,14 +14,14 @@ describe Admin::CommentsController, type: :controller do
     it "should work" do
       comment
       get :index
-      expect(response.status).to eq 200
+      assert_equal 200, response.status
     end
   end
 
   describe "GET edit" do
     it "assigns the requested comment as @comment" do
       get :edit, params: { id: comment.id }
-      expect(response.status).to eq 200
+      assert_equal 200, response.status
     end
   end
 
@@ -32,12 +32,12 @@ describe Admin::CommentsController, type: :controller do
         # expect_any_instance_of(Comment).to receive(:update).with("body" => '123')
         put :update, params: { id: comment.id, comment: comment_param }
         comment.reload
-        expect(comment.body).to eq "123"
+        assert_equal "123", comment.body
       end
 
       it "redirects to the comment" do
         put :update, params: { id: comment.id, comment: { "body" => "body" } }
-        expect(response).to redirect_to(admin_comments_url)
+        assert_redirected_to admin_comments_url
       end
     end
   end
@@ -53,7 +53,7 @@ describe Admin::CommentsController, type: :controller do
     it "redirects to the comments list" do
       comment
       delete :destroy, params: { id: comment.id }
-      expect(response).to redirect_to(admin_comments_url)
+      assert_redirected_to admin_comments_url
     end
   end
 end

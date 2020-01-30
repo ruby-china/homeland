@@ -26,48 +26,48 @@ describe Homeland::Plugin do
     end
 
     it "should work" do
-      expect(@plugin).to be_a(Homeland::Plugin)
-      expect(@plugin.name).to eq "foo"
-      expect(@plugin.version).to eq "0.1.0"
-      expect(@plugin.display_name).to eq "Foo bar"
-      expect(@plugin.root_path).to eq "/foo"
-      expect(@plugin.admin_path).to eq "/admin/foo"
-      expect(@plugin.description).to eq "Hello this is foo bar"
-      expect(@plugin.navbar_link).to eq true
-      expect(@plugin.user_menu_link).to eq true
-      expect(@plugin.admin_navbar_link).to eq true
+      assert_kind_of Homeland::Plugin, @plugin
+      assert_equal "foo", @plugin.name
+      assert_equal "0.1.0", @plugin.version
+      assert_equal "Foo bar", @plugin.display_name
+      assert_equal "/foo", @plugin.root_path
+      assert_equal "/admin/foo", @plugin.admin_path
+      assert_equal "Hello this is foo bar", @plugin.description
+      assert_equal true, @plugin.navbar_link
+      assert_equal true, @plugin.user_menu_link
+      assert_equal true, @plugin.admin_navbar_link
 
-      expect(@plugin1.version).to eq nil
-      expect(@plugin1.name).to eq "dar"
-      expect(@plugin1.display_name).to eq "Dar bar"
-      expect(@plugin1.navbar_link).to eq false
-      expect(@plugin1.admin_navbar_link).to eq nil
-      expect(@plugin1.user_menu_link).to eq false
+      assert_nil @plugin1.version
+      assert_equal "dar", @plugin1.name
+      assert_equal "Dar bar", @plugin1.display_name
+      assert_equal false, @plugin1.navbar_link
+      assert_nil @plugin1.admin_navbar_link
+      assert_equal false, @plugin1.user_menu_link
     end
 
     it ".plugins work" do
-      expect(Homeland.plugins.find { |p| p.name == "foo" }).not_to eq nil
-      expect(Homeland.plugins.find { |p| p.name == "dar" }).not_to eq nil
+      refute_equal nil, Homeland.plugins.find { |p| p.name == "foo" }
+      refute_equal nil, Homeland.plugins.find { |p| p.name == "dar" }
     end
 
     it ".sorted_plugins work" do
-      expect(Homeland.sorted_plugins.find { |p| p.name == "foo" }).not_to eq nil
-      expect(Homeland.sorted_plugins.find { |p| p.name == "dar" }).not_to eq nil
+      refute_equal nil, Homeland.sorted_plugins.find { |p| p.name == "foo" }
+      refute_equal nil, Homeland.sorted_plugins.find { |p| p.name == "dar" }
     end
 
     it ".navbar_plugins work" do
-      expect(Homeland.navbar_plugins.find { |p| p.name == "foo" }).not_to eq nil
-      expect(Homeland.navbar_plugins.find { |p| p.name == "dar" }).to eq nil
+      refute_equal nil, Homeland.navbar_plugins.find { |p| p.name == "foo" }
+      assert_nil Homeland.navbar_plugins.find { |p| p.name == "dar" }
     end
 
     it ".admin_navbar_plugins work" do
-      expect(Homeland.admin_navbar_plugins.find { |p| p.name == "foo" }).not_to eq nil
-      expect(Homeland.admin_navbar_plugins.find { |p| p.name == "dar" }).to eq nil
+      refute_equal nil, Homeland.admin_navbar_plugins.find { |p| p.name == "foo" }
+      assert_nil Homeland.admin_navbar_plugins.find { |p| p.name == "dar" }
     end
 
     it ".user_menu_plugins work" do
-      expect(Homeland.user_menu_plugins.find { |p| p.name == "foo" }).not_to eq nil
-      expect(Homeland.user_menu_plugins.find { |p| p.name == "dar" }).to eq nil
+      refute_equal nil, Homeland.user_menu_plugins.find { |p| p.name == "foo" }
+      assert_nil Homeland.user_menu_plugins.find { |p| p.name == "dar" }
     end
   end
 end

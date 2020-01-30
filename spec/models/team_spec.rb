@@ -5,37 +5,37 @@ require "rails_helper"
 describe Team, type: :model do
   let(:team) { create(:team) }
 
-  it { expect(team.class.name).to eq "Team" }
-  it { expect(team[:type]).to eq "Team" }
-  it { expect(team.user_type).to eq :team }
+  it { assert_equal "Team", team.class.name}
+  it { assert_equal "Team", team[:type]}
+  it { assert_equal :team, team.user_type}
 
   describe "Create" do
     let(:team) { build :team, password: nil, password_confirmation: nil }
 
-    it { expect(team.valid?).to eq true }
+    it { assert_equal true, team.valid?}
   end
 
   describe ".owner? / .member?" do
     let!(:team_owner) { create(:team_owner, team: team) }
     let!(:team_member) { create(:team_member, team: team) }
 
-    it { expect(team.owner?(team_owner.user)).to eq true }
-    it { expect(team.owner?(team_member.user)).to eq false }
-    it { expect(team.member?(team_owner.user)).to eq true }
-    it { expect(team.member?(team_member.user)).to eq true }
+    it { assert_equal true, team.owner?(team_owner.user)}
+    it { assert_equal false, team.owner?(team_member.user)}
+    it { assert_equal true, team.member?(team_owner.user)}
+    it { assert_equal true, team.member?(team_member.user)}
 
     it "should touch team when member changed" do
       old_updated_at = team.updated_at
       team.team_users.last.destroy!
       team.reload
       sleep 0.01
-      expect(team.updated_at.to_f).not_to eq old_updated_at.to_f
+      refute_equal old_updated_at.to_f, team.updated_at.to_f
 
       old_updated_at = team.updated_at
       team.team_users.create!(user: create(:user))
       sleep 0.01
       team.reload
-      expect(team.updated_at.to_f).not_to eq old_updated_at.to_f
+      refute_equal old_updated_at.to_f, team.updated_at.to_f
     end
   end
 

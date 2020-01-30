@@ -6,31 +6,31 @@ describe ApplicationHelper, type: :helper do
   describe "markdown" do
     context "bad html" do
       it "filter script" do
-        expect(helper.markdown("<script>alert()</script> foo")).to eq("<p> foo</p>")
+        assert_equal "<p> foo</p>", helper.markdown("<script>alert()</script> foo")
       end
 
       it "filter style" do
-        expect(helper.markdown("<style>.body {}</style> foo")).to eq("<p> foo</p>")
+        assert_equal "<p> foo</p>", helper.markdown("<style>.body {}</style> foo")
       end
     end
   end
 
   it "formats the flash messages" do
-    expect(helper.notice_message).to eq("")
-    expect(helper.notice_message.html_safe?).to eq(true)
+    assert_equal "", helper.notice_message
+    assert_equal true, helper.notice_message.html_safe?
 
     close_html = %(<button name="button" type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>)
 
     controller.flash[:notice] = "hello"
-    expect(helper.notice_message).to eq(%{<div class="alert alert-success">#{close_html}hello</div>})
+    assert_equal %{<div class="alert alert-success">#{close_html}hello</div>}, helper.notice_message
     controller.flash[:notice] = nil
 
     controller.flash[:warning] = "hello"
-    expect(helper.notice_message).to eq(%{<div class="alert alert-warning">#{close_html}hello</div>})
+    assert_equal %{<div class="alert alert-warning">#{close_html}hello</div>}, helper.notice_message
     controller.flash[:warning] = nil
 
     controller.flash[:alert] = "hello"
-    expect(helper.notice_message).to eq(%{<div class="alert alert-danger">#{close_html}hello</div>})
+    assert_equal %{<div class="alert alert-danger">#{close_html}hello</div>}, helper.notice_message
   end
 
   describe "admin?" do
@@ -38,26 +38,26 @@ describe ApplicationHelper, type: :helper do
     let(:admin) { create :admin }
 
     it "knows you are not an admin" do
-      expect(helper.admin?(user)).to be_falsey
+      assert_equal false, helper.admin?(user)
     end
 
     it "knows who is the boss" do
-      expect(helper.admin?(admin)).to be_truthy
+      assert_equal true, helper.admin?(admin)
     end
 
     it "use current_user if user not given" do
       allow(helper).to receive(:current_user).and_return(admin)
-      expect(helper.admin?(nil)).to be_truthy
+      assert_equal true, helper.admin?(nil)
     end
 
     it "use current_user if user not given a user" do
       allow(helper).to receive(:current_user).and_return(user)
-      expect(helper.admin?(nil)).to be_falsey
+      assert_equal false, helper.admin?(nil)
     end
 
     it "know you are not an admin if current_user not present and user param is not given" do
       allow(helper).to receive(:current_user).and_return(nil)
-      expect(helper.admin?(nil)).to be_falsey
+      assert_equal false, helper.admin?(nil)
     end
   end
 
@@ -66,21 +66,21 @@ describe ApplicationHelper, type: :helper do
     let(:editor) { create :wiki_editor }
 
     it "knows non editor is not wiki editor" do
-      expect(helper.wiki_editor?(non_editor)).to be_falsey
+      assert_equal false, helper.wiki_editor?(non_editor)
     end
 
     it "knows wiki editor is wiki editor" do
-      expect(helper.wiki_editor?(editor)).to be_truthy
+      assert_equal true, helper.wiki_editor?(editor)
     end
 
     it "use current_user if user not given" do
       allow(helper).to receive(:current_user).and_return(editor)
-      expect(helper.wiki_editor?(nil)).to be_truthy
+      assert_equal true, helper.wiki_editor?(nil)
     end
 
     it "know you are not an wiki editor if current_user not present and user param is not given" do
       allow(helper).to receive(:current_user).and_return(nil)
-      expect(helper.wiki_editor?(nil)).to be_falsey
+      assert_equal false, helper.wiki_editor?(nil)
     end
   end
 
@@ -91,16 +91,16 @@ describe ApplicationHelper, type: :helper do
     let(:item) { OpenStruct.new user_id: user.id }
 
     it "knows who is owner" do
-      expect(helper.owner?(nil)).to be_falsey
+      assert_equal false, helper.owner?(nil)
 
       allow(helper).to receive(:current_user).and_return(nil)
-      expect(helper.owner?(item)).to be_falsey
+      assert_equal false, helper.owner?(item)
 
       allow(helper).to receive(:current_user).and_return(user)
-      expect(helper.owner?(item)).to be_truthy
+      assert_equal true, helper.owner?(item)
 
       allow(helper).to receive(:current_user).and_return(user2)
-      expect(helper.owner?(item)).to be_falsey
+      assert_equal false, helper.owner?(item)
     end
   end
 
@@ -108,13 +108,13 @@ describe ApplicationHelper, type: :helper do
     it "should work" do
       t = Time.now
       text = l t.to_date, format: :long
-      expect(helper.timeago(t, class: "foo")).to eq "<abbr class=\"foo timeago\" title=\"#{t.iso8601}\">#{text}</abbr>"
+      assert_equal "<abbr class=\"foo timeago\" title=\"#{t.iso8601}\">#{text}</abbr>", helper.timeago(t, class: "foo")
     end
   end
 
   describe "insert_code_menu_items_tag" do
     it "should work" do
-      expect(helper.insert_code_menu_items_tag).to include('data-lang="ruby"')
+      assert_includes helper.insert_code_menu_items_tag, 'data-lang="ruby"'
     end
   end
 
@@ -124,7 +124,7 @@ describe ApplicationHelper, type: :helper do
         li << helper.link_to("foo", "/foo", class: "nav-link")
         li << helper.link_to("bar", "/bar", class: "nav-link hide-ios")
       end
-      expect(html).to eq(%(<ul class="nav navbar"><li class="nav-item"><a class="nav-link" href="/foo">foo</a></li><li class="nav-item"><a class="nav-link hide-ios" href="/bar">bar</a></li></ul>))
+      assert_equal %(<ul class="nav navbar"><li class="nav-item"><a class="nav-link" href="/foo">foo</a></li><li class="nav-item"><a class="nav-link hide-ios" href="/bar">bar</a></li></ul>), html
     end
 
     describe "render_list_items" do
@@ -133,7 +133,7 @@ describe ApplicationHelper, type: :helper do
           li << helper.link_to("bar", "/bar")
           li << helper.link_to("foo", "/foo")
         end
-        expect(html).to eq(%(<li class="nav-item"><a href="/bar">bar</a></li><li class="nav-item"><a href="/foo">foo</a></li>))
+        assert_equal %(<li class="nav-item"><a href="/bar">bar</a></li><li class="nav-item"><a href="/foo">foo</a></li>), html
       end
     end
   end

@@ -9,14 +9,14 @@ describe "PhotoUploader" do
 
   it "extension limit" do
     photo = build(:photo, image: not_an_image)
-    expect(photo.valid?).to eq(false)
-    expect(photo.errors.full_messages_for(:image)).to eq(["Image仅允许图片文件上传 [jpg, jpeg, gif, png]"])
+    assert_equal false, photo.valid?
+    assert_equal ["Image仅允许图片文件上传 [jpg, jpeg, gif, png]"], photo.errors.full_messages_for(:image)
 
     photo = build(:photo, image: svg_image)
-    expect(photo.valid?).to eq(false)
-    expect(photo.errors.full_messages_for(:image)).to eq(["Image仅允许图片文件上传 [jpg, jpeg, gif, png]"])
+    assert_equal false, photo.valid?
+    assert_equal ["Image仅允许图片文件上传 [jpg, jpeg, gif, png]"], photo.errors.full_messages_for(:image)
 
     photo = build(:photo, image: image)
-    expect(photo.valid?).to eq(true)
+    assert_equal true, photo.valid?
   end
 end

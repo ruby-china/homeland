@@ -7,12 +7,12 @@ describe User, type: :model do
     let(:user) { create(:user) }
     describe "#profile_field_prefix" do
       it "should work" do
-        expect(User.profile_field_prefix(:weibo)).to eq("https://weibo.com/")
-        expect(User.profile_field_prefix(:facebook)).to eq("https://facebook.com/")
-        expect(User.profile_field_prefix(:instagram)).to eq("https://instagram.com/")
-        expect(User.profile_field_prefix(:dribbble)).to eq("https://dribbble.com/")
-        expect(User.profile_field_prefix(:douban)).to eq("https://www.douban.com/people/")
-        expect(User.profile_field_prefix(:bb)).to eq(nil)
+        assert_equal "https://weibo.com/", User.profile_field_prefix(:weibo)
+        assert_equal "https://facebook.com/", User.profile_field_prefix(:facebook)
+        assert_equal "https://instagram.com/", User.profile_field_prefix(:instagram)
+        assert_equal "https://dribbble.com/", User.profile_field_prefix(:dribbble)
+        assert_equal "https://www.douban.com/people/", User.profile_field_prefix(:douban)
+        assert_nil User.profile_field_prefix(:bb)
       end
     end
 
@@ -24,13 +24,13 @@ describe User, type: :model do
           dribbble: "dribbble1"
         }
         user.update_profile_fields(params)
-        expect(user.profile_fields).to eq(params)
-        expect(user.profile_field(:weibo)).to eq "weibo1"
-        expect(user.profile_field("weibo")).to eq "weibo1"
-        expect(user.profile_field("douban")).to eq "douban1"
-        expect(user.profile_field(:ddd)).to eq nil
-        expect(user.profile_field(:facebook)).to eq nil
-        expect(user.full_profile_field(:weibo)).to eq "https://weibo.com/weibo1"
+        assert_equal params, user.profile_fields
+        assert_equal "weibo1", user.profile_field(:weibo)
+        assert_equal "weibo1", user.profile_field("weibo")
+        assert_equal "douban1", user.profile_field("douban")
+        assert_nil user.profile_field(:ddd)
+        assert_nil user.profile_field(:facebook)
+        assert_equal "https://weibo.com/weibo1", user.full_profile_field(:weibo)
       end
     end
   end

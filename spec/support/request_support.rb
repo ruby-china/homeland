@@ -6,7 +6,10 @@ module RequestSupport
   included do
     let!(:current_user) { create :avatar_user }
     let!(:access_token) { create(:access_token, resource_owner_id: current_user.id) }
-    let(:json) { JSON.parse(response.body) }
+
+    def json
+      response.parsed_body
+    end
 
     def login_user!
       default_parameters[:access_token] = access_token.token
@@ -35,6 +38,12 @@ module RequestSupport
           super(path, params: parameters, headers: headers)
         end
       EOV
+    end
+
+    def assert_has_keys(collection, *keys)
+      keys.each do |key|
+        assert_equal true, collection.has_key?(key)
+      end
     end
 
     private

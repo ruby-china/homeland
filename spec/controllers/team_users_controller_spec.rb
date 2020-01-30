@@ -11,16 +11,16 @@ describe TeamUsersController, type: :controller do
   describe "index" do
     it "should work" do
       get :index, params: { user_id: team.login }
-      expect(response).to have_http_status(200)
-      expect(response.body).to match(/成员列表/)
+      assert_equal 200, response.status
+      assert_equal true, response.body.include?("成员列表")
     end
 
     context "Normal user" do
       it "should not have invite button" do
         sign_in user
         get :index, params: { user_id: team.login }
-        expect(response).to have_http_status(200)
-        expect(response.body).not_to match(/\/people\/new/)
+        assert_equal 200, response.status
+        assert_equal false, response.body.include?("/people/new")
       end
     end
 
@@ -28,9 +28,9 @@ describe TeamUsersController, type: :controller do
       it "should not have invite button" do
         sign_in team_member.user
         get :index, params: { user_id: team.login }
-        expect(response).to have_http_status(200)
-        expect(response.body).not_to match(/邀请成员/)
-        expect(response.body).not_to match(/\/people\/new/)
+        assert_equal 200, response.status
+        assert_equal false, response.body.include?("邀请成员")
+        assert_equal false, response.body.include?("/people/new")
       end
     end
 
@@ -38,9 +38,9 @@ describe TeamUsersController, type: :controller do
       it "should have invite button" do
         sign_in team_owner.user
         get :index, params: { user_id: team.login }
-        expect(response).to have_http_status(200)
-        expect(response.body).to match(/邀请成员/)
-        expect(response.body).to match(/\/people\/new/)
+        assert_equal 200, response.status
+        assert_equal true, response.body.include?("邀请成员")
+        assert_equal true, response.body.include?("/people/new")
       end
     end
   end
@@ -50,7 +50,7 @@ describe TeamUsersController, type: :controller do
       it "should work" do
         sign_in team_owner.user
         get :new, params: { user_id: team.login }
-        expect(response).to have_http_status(200)
+        assert_equal 200, response.status
       end
     end
 
@@ -58,7 +58,7 @@ describe TeamUsersController, type: :controller do
       it "should work" do
         sign_in team_member.user
         get :new, params: { user_id: team.login }
-        expect(response).to redirect_to root_path
+        assert_redirected_to root_path
       end
     end
   end
@@ -68,14 +68,18 @@ describe TeamUsersController, type: :controller do
       it "should work" do
         user = create(:user)
         sign_in team_owner.user
+
         team_user = {
           login: user.login,
           role: :member
         }
-        expect do
-          post :create, params: { user_id: team.login, team_user: team_user }
-        end.to change(team.team_users, :count).by(1)
-        expect(response).to redirect_to user_team_users_path(team)
+        post :create, params: { user_id: team.login, team_user: team_user }
+        assert_redirected_to user_team_users_path(team)
+
+        team_user = team.team_users.last
+        assert_equal user.id, team_user.user_id
+        assert_equal "member", team_user.role
+        assert_equal true, team_user.pendding?
       end
     end
   end
@@ -86,13 +90,13 @@ describe TeamUsersController, type: :controller do
     it "Owner should work" do
       sign_in team_owner.user
       get :edit, params: { user_id: team.login, id: team_user.id }
-      expect(response).to have_http_status(200)
+      assert_equal 200, response.status
     end
 
     it "Member should not open" do
       sign_in team_member.user
       get :edit, params: { user_id: team.login, id: team_user.id }
-      expect(response).to redirect_to root_path
+      assert_redirected_to root_path
     end
   end
 
@@ -108,9 +112,9 @@ describe TeamUsersController, type: :controller do
       put :update, params: { user_id: team.login, id: team_user.id, team_user: params }
       old_user_id = team_user.user_id
       team_user.reload
-      expect(team_user.user_id).to eq old_user_id
-      expect(team_user.owner?).to eq true
-      expect(response).to redirect_to user_team_users_path(team)
+      assert_equal old_user_id, team_user.user_id
+      assert_equal true, team_user.owner?
+      assert_redirected_to user_team_users_path(team)
     end
 
     it "Member should not open" do
@@ -121,7 +125,7 @@ describe TeamUsersController, type: :controller do
         role: :member
       }
       get :edit, params: { user_id: team.login, id: team_user.id, team_user: params }
-      expect(response).to redirect_to root_path
+      assert_redirected_to root_path
     end
   end
 
@@ -130,29 +134,33 @@ describe TeamUsersController, type: :controller do
 
     it "Owner should work" do
       sign_in team_user.user
+
       get :show, params: { user_id: team.login, id: team_user.id }
-      expect(response).to have_http_status(200)
+      assert_equal 200, response.status
+
       put :accept, params: { user_id: team.login, id: team_user.id }
       team_user.reload
-      expect(team_user.accepted?).to eq true
-      expect(response).to redirect_to user_team_users_path(team)
-      get :show, params: { user_id: team.login, id: team_user.id }
-      expect(response).to redirect_to user_team_users_path(team)
+      assert_equal true, team_user.accepted?
+      assert_redirected_to user_team_users_path(team)
 
-      expect do
-        put :reject, params: { user_id: team.login, id: team_user.id }
-      end.to change(team.team_users, :count).by(-1)
-      expect(response).to redirect_to user_team_users_path(team)
+      get :show, params: { user_id: team.login, id: team_user.id }
+      assert_redirected_to user_team_users_path(team)
+
+      put :reject, params: { user_id: team.login, id: team_user.id }
+      assert_redirected_to user_team_users_path(team)
+      assert_nil team.team_users.find_by_id(team_user.id)
     end
 
     it "Member should not open" do
       sign_in team_owner.user
       get :show, params: { user_id: team.login, id: team_user.id }
-      expect(response).to redirect_to root_path
+      assert_redirected_to root_path
+
       put :accept, params: { user_id: team.login, id: team_user.id }
-      expect(response).to redirect_to root_path
+      assert_redirected_to root_path
+
       put :reject, params: { user_id: team.login, id: team_user.id }
-      expect(response).to redirect_to root_path
+      assert_redirected_to root_path
     end
   end
 end

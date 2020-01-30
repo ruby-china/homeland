@@ -19,19 +19,19 @@ describe Auth::SSOController, type: :controller do
 
     it "should work" do
       get :show, params: { return_path: "/topics/123" }
-      expect(response.status).to eq(302)
+      assert_equal 302, response.status
 
       # javascript code will handle redirection of user to return_sso_url
-      expect(response.location).to match(/^http:\/\/somesite.com\/homeland-sso\?sso=.*&sig=.*/)
+      assert_match /^http:\/\/somesite.com\/homeland-sso\?sso=.*&sig=.*/, response.location
     end
 
     it "should work with destination_url" do
       request.cookies["destination_url"] = "/topics/123"
       get :show
-      expect(response.status).to eq(302)
+      assert_equal 302, response.status
 
       # javascript code will handle redirection of user to return_sso_url
-      expect(response.location).to match(/^http:\/\/somesite.com\/homeland-sso\?sso=.*&sig=.*/)
+      assert_match /^http:\/\/somesite.com\/homeland-sso\?sso=.*&sig=.*/, response.location
     end
   end
 
@@ -75,22 +75,22 @@ describe Auth::SSOController, type: :controller do
       sso.admin = false
 
       get :login, params: Rack::Utils.parse_query(sso.payload)
+      assert_redirected_to "/topics/123"
 
-      expect(response).to redirect_to("/topics/123")
       user = User.find_by_email(sso.email)
-      expect(user.new_record?).to eq(false)
-      expect(user.admin?).to eq(false)
-      expect(user.login).to eq(sso.username)
-      expect(user.name).to eq(sso.name)
-      expect(user.bio).to eq(sso.bio)
-      expect(user.sso).not_to eq(nil)
-      expect(user.sso.uid).to eq(sso.external_id)
-      expect(user.sso.username).to eq(sso.username)
-      expect(user.sso.name).to eq(sso.name)
-      expect(user.sso.email).to eq(sso.email)
-      expect(user.sso.avatar_url).to eq(sso.avatar_url)
-      expect(user.current_sign_in_ip).to eq(mock_ip)
-      expect(user.current_sign_in_at).not_to eq(nil)
+      assert_equal false, user.new_record?
+      assert_equal false, user.admin?
+      assert_equal sso.username, user.login
+      assert_equal sso.name, user.name
+      assert_equal sso.bio, user.bio
+      refute_equal nil, user.sso
+      assert_equal sso.external_id, user.sso.uid
+      assert_equal sso.username, user.sso.username
+      assert_equal sso.name, user.sso.name
+      assert_equal sso.email, user.sso.email
+      assert_equal sso.avatar_url, user.sso.avatar_url
+      assert_equal mock_ip, user.current_sign_in_ip
+      refute_equal nil, user.current_sign_in_at
     end
 
     it "can sign a exist user" do
@@ -108,12 +108,12 @@ describe Auth::SSOController, type: :controller do
       expect do
         get :login, params: Rack::Utils.parse_query(sso.payload)
       end.to change(User, :count).by(0)
+      assert_redirected_to "/"
 
-      expect(response).to redirect_to("/")
       user1 = User.find_by_id(user.id)
-      expect(user1.name).to eq(sso.name)
-      expect(user1.login).to eq(user.login)
-      expect(user1.bio).to eq(sso.bio)
+      assert_equal sso.name, user1.name
+      assert_equal user.login, user1.login
+      assert_equal sso.bio, user1.bio
     end
 
     it "can take an admin account" do
@@ -126,10 +126,11 @@ describe Auth::SSOController, type: :controller do
       sso.admin = true
 
       get :login, params: Rack::Utils.parse_query(sso.payload)
-      expect(response).to redirect_to("/hello/world")
+      assert_redirected_to "/hello/world"
+
       user = User.find_by_email(sso.email)
-      expect(user.admin?).to eq(true)
-      expect(Setting.has_admin?(sso.email)).to eq(true)
+      assert_equal true, user.admin?
+      assert_equal true, Setting.has_admin?(sso.email)
     end
 
     it "show error when create failure" do
@@ -148,7 +149,7 @@ describe Auth::SSOController, type: :controller do
       expect do
         get :login, params: Rack::Utils.parse_query(sso.payload)
       end.to output(/nonce: #{sso.nonce}/).to_stdout
-      expect(response.status).to eq(500)
+      assert_equal 500, response.status
     end
 
     it "show error when timeout expried" do
@@ -164,7 +165,7 @@ describe Auth::SSOController, type: :controller do
 
       $redis.del("SSO_NONCE_#{sso.nonce}")
       get :login, params: Rack::Utils.parse_query(sso.payload)
-      expect(response.status).to eq(419)
+      assert_equal 419, response.status
     end
   end
 
@@ -187,30 +188,29 @@ describe Auth::SSOController, type: :controller do
       sign_in user
       allow(Setting).to receive(:has_admin?).with(user.email).and_return(true)
       get :provider, params: Rack::Utils.parse_query(@sso.payload)
-      expect(response.status).to eq(302)
+      assert_equal 302, response.status
 
       location = response.location
       # javascript code will handle redirection of user to return_sso_url
-      expect(location).to match(/^http:\/\/foobar.com\/sso\/callback/)
+      assert_match /^http:\/\/foobar.com\/sso\/callback/, location
 
       payload = location.split("?")[1]
       sso2 = SingleSignOn.parse(payload, @sso.sso_secret)
 
-      expect(sso2.email).to eq(user.email)
-      expect(sso2.name).to eq(user.name)
-      expect(sso2.username).to eq(user.login)
-      expect(sso2.external_id).to eq(user.id.to_s)
-      expect(sso2.bio).to eq(user.bio)
-      expect(sso2.avatar_url).not_to eq(nil)
-      expect(sso2.admin).to eq(true)
+      assert_equal user.email, sso2.email
+      assert_equal user.name, sso2.name
+      assert_equal user.login, sso2.username
+      assert_equal user.id.to_s, sso2.external_id
+      assert_equal user.bio, sso2.bio
+      refute_equal nil, sso2.avatar_url
+      assert_equal true, sso2.admin
     end
 
     it "should work with sign in" do
       get :provider, params: Rack::Utils.parse_query(@sso.payload)
-      expect(response).to redirect_to("/account/sign_in")
-
-      expect(session[:return_to]).to match("/auth/sso/provider")
-      expect(session[:return_to]).to eq(request.url)
+      assert_redirected_to "/account/sign_in"
+      assert_match /\/auth\/sso\/provider/, session[:return_to]
+      assert_equal request.url, session[:return_to]
     end
   end
 end

@@ -10,19 +10,19 @@ describe Reply, type: :model do
       it "should not valid when Topic was closed" do
         t = create :topic, closed_at: Time.now
         r = build(:reply)
-        expect(r.valid?).to eq true
+        assert_equal true, r.valid?
         r.topic_id = t.id
-        expect(r.valid?).not_to eq true
+        refute_equal true, r.valid?
       end
 
       it "should not allowed update replies when Topic was closed" do
         t = create :topic
         r = create(:reply, topic: t)
-        expect(r.valid?).to eq true
+        assert_equal true, r.valid?
         t.close!
         r.body = "new body"
-        expect(r.valid?).not_to eq true
-        expect(r.save).to eq false
+        refute_equal true, r.valid?
+        assert_equal false, r.save
         expect(r.errors.full_messages.join("")).to include("已关闭，不再接受回帖或修改回帖")
       end
 
@@ -31,9 +31,9 @@ describe Reply, type: :model do
         r1 = create(:reply, topic: t)
         r2 = create(:reply)
         r = create(:reply, topic: t, reply_to: r2)
-        expect(r.reply_to_id).to eq nil
+        assert_nil r.reply_to_id
         r = create(:reply, topic: t, reply_to: r1)
-        expect(r.reply_to_id).to eq r1.id
+        assert_equal r1.id, r.reply_to_id
       end
     end
   end
@@ -97,14 +97,14 @@ describe Reply, type: :model do
         old_updated_at = topic.updated_at
         reply.body = "foobar"
         reply.save
-        expect(topic.updated_at).not_to eq(old_updated_at)
+        refute_equal old_updated_at, topic.updated_at
       end
 
       it "should update Topic updated_at on Reply deleted" do
         old_updated_at = topic.updated_at
         reply.body = "foobar"
         reply.destroy
-        expect(topic.updated_at).not_to eq(old_updated_at)
+        refute_equal old_updated_at, topic.updated_at
       end
 
       context "system reply" do
@@ -115,10 +115,10 @@ describe Reply, type: :model do
           old_replied_at = topic.replied_at
           expect(topic).not_to receive(:update_last_reply)
           system_reply.save
-          expect(system_reply.new_record?).to eq false
+          assert_equal false, system_reply.new_record?
           topic.reload
-          expect(topic.last_active_mark).to eq old_last_active_mark
-          expect(topic.replied_at).to eq old_replied_at
+          assert_equal old_last_active_mark, topic.last_active_mark
+          assert_equal old_replied_at, topic.replied_at
         end
       end
     end
@@ -151,19 +151,19 @@ describe Reply, type: :model do
     let(:topic) { create(:topic) }
     it "should work" do
       allow(Setting).to receive(:ban_words_on_reply).and_return(%w[mark 顶])
-      expect(topic.replies.create(body: "顶", user: user).errors[:body].size).to eq(1)
-      expect(topic.replies.create(body: "mark", user: user).errors[:body].size).to eq(1)
-      expect(topic.replies.create(body: " mark ", user: user).errors[:body].size).to eq(1)
-      expect(topic.replies.create(body: "MARK", user: user).errors[:body].size).to eq(1)
-      expect(topic.replies.create(body: "mark1", user: user).errors[:body].size).to eq(0)
+      assert_equal 1, topic.replies.create(body: "顶", user: user).errors[:body].size
+      assert_equal 1, topic.replies.create(body: "mark", user: user).errors[:body].size
+      assert_equal 1, topic.replies.create(body: " mark ", user: user).errors[:body].size
+      assert_equal 1, topic.replies.create(body: "MARK", user: user).errors[:body].size
+      assert_equal 0, topic.replies.create(body: "mark1", user: user).errors[:body].size
       allow(Setting).to receive(:ban_words_on_reply).and_return(%w[mark 顶])
-      expect(topic.replies.create(body: "mark", user: user).errors[:body].size).to eq(1)
+      assert_equal 1, topic.replies.create(body: "mark", user: user).errors[:body].size
     end
 
     it "should work when site_config value is nil" do
       allow(Setting).to receive(:ban_words_on_reply).and_return([])
       t = topic.replies.create(body: "mark", user: user)
-      expect(t.errors[:body].size).to eq(0)
+      assert_equal 0, t.errors[:body].size
     end
   end
 
@@ -183,11 +183,11 @@ describe Reply, type: :model do
       it "should work" do
         chars.each do |key|
           reply.body = key
-          expect(reply.upvote?).to eq(true)
+          assert_equal true, reply.upvote?
         end
 
         reply.body = "Ok +1"
-        expect(reply.upvote?).to eq(false)
+        assert_equal false, reply.upvote?
       end
     end
 
@@ -237,8 +237,8 @@ describe Reply, type: :model do
       topic = create :topic
       reply = Reply.create_system_event!(topic: topic, action: "bbb")
       assert_equal false, reply.new_record?
-      expect(reply.system_event?).to eq true
-      expect(reply.new_record?).to eq false
+      assert_equal true, reply.system_event?
+      assert_equal false, reply.new_record?
     end
   end
 
@@ -252,7 +252,7 @@ describe Reply, type: :model do
         second_target_type: "Topic", second_target_id: reply.topic_id,
         actor_id: reply.user_id
       }
-      expect(reply.send(:default_notification)).to eq val
+      assert_equal val, reply.send(:default_notification)
     end
   end
 
@@ -289,7 +289,7 @@ describe Reply, type: :model do
     end
 
     it "should removed duplicate" do
-      expect(reply.notification_receiver_ids).to eq reply.notification_receiver_ids.uniq
+      assert_equal reply.notification_receiver_ids.uniq, reply.notification_receiver_ids
     end
   end
 end

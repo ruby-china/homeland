@@ -12,8 +12,8 @@ describe TopicsController, type: :controller do
 
   it "should got 401 with turbolinks-app" do
     get :new
-    expect(response).not_to have_http_status(200)
-    expect(response.status).to eq 401
+    refute_equal 200, response.status
+    assert_equal 401, response.status
   end
 
   describe "access with access_token" do
@@ -22,15 +22,15 @@ describe TopicsController, type: :controller do
 
     it "should work" do
       get :new, params: { access_token: access_token.token }
-      expect(response.status).to eq 200
-      expect(response.body).to include("发布新话题")
-      expect(response.body).to include("App.current_user_id = #{user.id}")
+      assert_equal 200, response.status
+      assert_includes response.body, "发布新话题"
+      assert_includes response.body, "App.current_user_id = #{user.id}"
     end
 
     it "should work with other user" do
       get :new, params: { access_token: access_token1.token }
-      expect(response.status).to eq 200
-      expect(response.body).to include("App.current_user_id = #{user1.id}")
+      assert_equal 200, response.status
+      assert_includes response.body, "App.current_user_id = #{user1.id}"
     end
   end
 end

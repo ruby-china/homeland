@@ -8,13 +8,13 @@ describe TeamUser, type: :model do
   describe "Create via login" do
     it "should work" do
       team_user = build(:team_user, login: user.login)
-      expect(team_user.save).to eq true
-      expect(team_user.user_id).to eq user.id
+      assert_equal true, team_user.save
+      assert_equal user.id, team_user.user_id
     end
 
     it "should add error when user not exists" do
       team_user = build(:team_user, login: "lasdjgalksdjgsad")
-      expect(team_user.valid?).to eq false
+      assert_equal false, team_user.valid?
     end
   end
 end

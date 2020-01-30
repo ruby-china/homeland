@@ -11,16 +11,16 @@ describe RepliesController, type: :controller do
 
       sign_in user
       get :index, params: { topic_id: topic.id, last_id: replies.first.id }, xhr: true
-      expect(response).to have_http_status(200)
-      expect(user.notifications.unread.count).to eq 0
+      assert_equal 200, response.status
+      assert_equal 0, user.notifications.unread.count
     end
 
     it "render blank for params last_id 0" do
       topic = create :topic
       replies = create_list :reply, 3
       get :index, params: { topic_id: topic.id, last_id: 0 }, xhr: true
-      expect(response).to have_http_status(200)
-      expect(response.body).to eq ""
+      assert_equal 200, response.status
+      assert_equal "", response.body
     end
   end
 
@@ -28,26 +28,26 @@ describe RepliesController, type: :controller do
     it "should error if save fail" do
       user = create :user
       topic = create :topic
-      expect(user.topic_read?(topic)).to be_falsey
+      assert_equal false, user.topic_read?(topic)
 
       create :reply, topic: topic
       sign_in user
       post :create, params: { topic_id: topic.id, reply: { body: "" } }, format: :js
-      expect(response).to have_http_status(200)
-      expect(response.body).to match(/回复内容不能为空字符/)
-      expect(user.topic_read?(topic)).to be_falsey
+      assert_equal 200, response.status
+      assert_match /回复内容不能为空字符/, response.body
+      assert_equal false, user.topic_read?(topic)
     end
 
     it "should create reply and set topic read" do
       user = create :user
       topic = create :topic
-      expect(user.topic_read?(topic)).to be_falsey
+      assert_equal false, user.topic_read?(topic)
 
       create :reply, topic: topic
       sign_in user
       post :create, params: { topic_id: topic.id, reply: { body: "content" } }, format: :js
-      expect(response).to have_http_status(200)
-      expect(user.topic_read?(topic)).to be_truthy
+      assert_equal 200, response.status
+      assert_equal true, user.topic_read?(topic)
     end
   end
 
@@ -59,7 +59,7 @@ describe RepliesController, type: :controller do
     it "should not change topic's last reply info to previous one" do
       sign_in user
       post :update, params: { topic_id: topic.id, id: reply.id, reply: { body: "content" } }, format: :js
-      expect(topic.reload.last_reply_user_login).to eq user.login
+      assert_equal user.login, topic.reload.last_reply_user_login
     end
   end
 
@@ -73,28 +73,28 @@ describe RepliesController, type: :controller do
 
     it "should require login to destroy reply" do
       delete :destroy, params: { topic_id: topic.id, id: reply.id }
-      expect(response).not_to have_http_status(200)
+      refute_equal 200, response.status
     end
 
     it "user1 should not allow destroy reply" do
       sign_in user1
       delete :destroy, params: { topic_id: topic.id, id: reply.id }
-      expect(response).not_to have_http_status(200)
+      refute_equal 200, response.status
     end
 
     it "user should destroy reply with itself" do
       sign_in user
       delete :destroy, params: { topic_id: topic.id, id: reply.id }
-      expect(response).to redirect_to(topic_path(topic))
+      assert_redirected_to topic_path(topic)
     end
 
     it "admin should destroy reply" do
       sign_in admin
       delete :destroy, params: { topic_id: topic.id, id: reply.id }
-      expect(response).to redirect_to(topic_path(topic))
+      assert_redirected_to topic_path(topic)
 
       delete :destroy, params: { topic_id: topic.id, id: reply1.id }
-      expect(response).to redirect_to(topic_path(topic))
+      assert_redirected_to topic_path(topic)
     end
 
     it "should redirect if failure" do
@@ -102,7 +102,7 @@ describe RepliesController, type: :controller do
 
       sign_in user
       delete :destroy, params: { topic_id: topic.id, id: reply.id }
-      expect(response).to redirect_to(topic_path(topic))
+      assert_redirected_to topic_path(topic)
     end
   end
 
@@ -113,9 +113,9 @@ describe RepliesController, type: :controller do
 
     it "should work" do
       get :reply_to, params: { topic_id: topic.id, id: reply.id }
-      expect(response.status).to eq 404
+      assert_equal 404, response.status
       get :reply_to, params: { topic_id: topic.id, id: reply.id }, xhr: true
-      expect(response).to have_http_status(200)
+      assert_equal 200, response.status
     end
   end
 end

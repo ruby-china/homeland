@@ -9,25 +9,25 @@ describe TopicsHelper, type: :helper do
 
     it "should run with nil param" do
       allow(helper).to receive(:current_user).and_return(nil)
-      expect(helper.topic_favorite_tag(nil)).to eq("")
+      assert_equal "", helper.topic_favorite_tag(nil)
     end
 
     it "should result when logined user did not favorite topic" do
       allow(user).to receive(:favorite_topic?).and_return(false)
       allow(helper).to receive(:current_user).and_return(user)
       res = helper.topic_favorite_tag(topic)
-      expect(res).to eq("<a title=\"收藏\" class=\"bookmark \" data-id=\"1\" href=\"#\"><i class=\"fa fa-bookmark\"></i> 收藏</a>")
+      assert_equal "<a title=\"收藏\" class=\"bookmark \" data-id=\"1\" href=\"#\"><i class=\"fa fa-bookmark\"></i> 收藏</a>", res
     end
 
     it "should result when logined user favorited topic" do
       allow(user).to receive(:favorite_topic?).and_return(true)
       allow(helper).to receive(:current_user).and_return(user)
-      expect(helper.topic_favorite_tag(topic)).to eq("<a title=\"取消收藏\" class=\"bookmark active\" data-id=\"1\" href=\"#\"><i class=\"fa fa-bookmark\"></i> 收藏</a>")
+      assert_equal "<a title=\"取消收藏\" class=\"bookmark active\" data-id=\"1\" href=\"#\"><i class=\"fa fa-bookmark\"></i> 收藏</a>", helper.topic_favorite_tag(topic)
     end
 
     it "should result blank when unlogin user" do
       allow(helper).to receive(:current_user).and_return(nil)
-      expect(helper.topic_favorite_tag(topic)).to eq("")
+      assert_equal "", helper.topic_favorite_tag(topic)
     end
   end
 
@@ -36,11 +36,11 @@ describe TopicsHelper, type: :helper do
     let(:user) { create :user }
 
     it "should return topic_was_deleted without a topic" do
-      expect(helper.topic_title_tag(nil)).to eq(t("topics.topic_was_deleted"))
+      assert_equal t("topics.topic_was_deleted"), helper.topic_title_tag(nil)
     end
 
     it "should return title with a topic" do
-      expect(helper.topic_title_tag(topic)).to eq("<a title=\"#{topic.title}\" href=\"/topics/#{topic.id}\">#{topic.title}</a>")
+      assert_equal "<a title=\"#{topic.title}\" href=\"/topics/#{topic.id}\">#{topic.title}</a>", helper.topic_title_tag(topic)
     end
   end
 
@@ -50,23 +50,23 @@ describe TopicsHelper, type: :helper do
 
     it "should return empty when current_user is nil" do
       allow(helper).to receive(:current_user).and_return(nil)
-      expect(helper.topic_follow_tag(topic)).to eq("")
+      assert_equal "", helper.topic_follow_tag(topic)
     end
 
     it "should return empty when is owner" do
       allow(helper).to receive(:current_user).and_return(topic.user)
-      expect(helper.topic_follow_tag(topic)).to eq("")
+      assert_equal "", helper.topic_follow_tag(topic)
     end
 
     it "should return empty when topic is nil" do
       allow(helper).to receive(:current_user).and_return(user)
-      expect(helper.topic_follow_tag(nil)).to eq("")
+      assert_equal "", helper.topic_follow_tag(nil)
     end
 
     context "was unfollow" do
       it "should work" do
         allow(helper).to receive(:current_user).and_return(user)
-        expect(helper.topic_follow_tag(topic)).to eq "<a data-id=\"#{topic.id}\" class=\"follow\" href=\"#\"><i class=\"fa fa-eye\"></i> 关注</a>"
+        assert_equal "<a data-id=\"#{topic.id}\" class=\"follow\" href=\"#\"><i class=\"fa fa-eye\"></i> 关注</a>", helper.topic_follow_tag(topic)
       end
     end
 
@@ -74,7 +74,7 @@ describe TopicsHelper, type: :helper do
       it "should work" do
         allow(helper).to receive(:current_user).and_return(user)
         allow(user).to receive(:follow_topic?).and_return(true)
-        expect(helper.topic_follow_tag(topic)).to eq "<a data-id=\"#{topic.id}\" class=\"follow active\" href=\"#\"><i class=\"fa fa-eye\"></i> 关注</a>"
+        assert_equal "<a data-id=\"#{topic.id}\" class=\"follow active\" href=\"#\"><i class=\"fa fa-eye\"></i> 关注</a>", helper.topic_follow_tag(topic)
       end
     end
   end

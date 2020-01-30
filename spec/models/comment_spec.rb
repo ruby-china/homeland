@@ -9,33 +9,29 @@ describe Comment, type: :model do
   describe "base" do
     it "should work" do
       comment = Comment.new
-      expect(comment.respond_to?(:mentioned_user_ids)).to eq true
-      expect(comment.respond_to?(:extract_mentioned_users)).to eq true
+      assert_equal true, comment.respond_to?(:mentioned_user_ids)
+      assert_equal true, comment.respond_to?(:extract_mentioned_users)
     end
   end
 
   describe "create" do
     it "should work" do
       comment = build(:comment, commentable: monkey)
-      expect do
-        comment.save!
-      end.to change(Comment, :count).by(1)
+      comment.save!
       monkey.reload
-      expect(monkey.comments_count).to eq 1
+      assert_equal 1, monkey.comments_count
     end
 
     it "should mention" do
       body = "@#{user.login} 还好"
       comment = build(:comment, commentable: monkey, body: body)
-      expect do
-        comment.save!
-      end.to change(Notification, :count).by(1)
+      comment.save!
       note = user.notifications.last
-      expect(note.notify_type).to eq("mention")
-      expect(note.target_type).to eq("Comment")
-      expect(note.target_id).to eq comment.id
-      expect(note.second_target_type).to eq "Monkey"
-      expect(note.second_target_id).to eq monkey.id
+      assert_equal "mention", note.notify_type
+      assert_equal "Comment", note.target_type
+      assert_equal comment.id, note.target_id
+      assert_equal "Monkey", note.second_target_type
+      assert_equal monkey.id, note.second_target_id
     end
 
     describe "Base notify for commentable" do
@@ -44,28 +40,24 @@ describe Comment, type: :model do
 
       it "should notify commentable creator" do
         comment = build(:comment, commentable: monkey, body: "Hello")
-        expect do
-          comment.save!
-        end.to change(Notification, :count).by(1)
+        comment.save!
         note = monkey_user.notifications.last
-        expect(note.notify_type).to eq("comment")
-        expect(note.target_type).to eq("Comment")
-        expect(note.target_id).to eq comment.id
-        expect(note.second_target_type).to eq "Monkey"
-        expect(note.second_target_id).to eq monkey.id
+        assert_equal "comment", note.notify_type
+        assert_equal "Comment", note.target_type
+        assert_equal comment.id, note.target_id
+        assert_equal "Monkey", note.second_target_type
+        assert_equal monkey.id, note.second_target_id
       end
 
       it "should only once notify when have mention" do
         comment = build(:comment, commentable: monkey, body: "Hello @#{monkey_user.login}")
-        expect do
-          comment.save!
-        end.to change(Notification, :count).by(1)
+        comment.save!
         note = monkey_user.notifications.last
-        expect(note.notify_type).to eq("mention")
-        expect(note.target_type).to eq("Comment")
-        expect(note.target_id).to eq comment.id
-        expect(note.second_target_type).to eq "Monkey"
-        expect(note.second_target_id).to eq monkey.id
+        assert_equal "mention", note.notify_type
+        assert_equal "Comment", note.target_type
+        assert_equal comment.id, note.target_id
+        assert_equal "Monkey", note.second_target_type
+        assert_equal monkey.id, note.second_target_id
       end
     end
   end

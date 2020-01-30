@@ -23,37 +23,40 @@ describe Mentionable, type: :model do
     user = create :user, login: "foo-bar_12"
     user1 = create :user, login: "Rei.foo"
     doc = TestDocument.create body: "@#{user.login} @#{user1.login}", user: create(:user)
-    expect(doc.mentioned_user_logins).to include(user.login, user1.login)
+    assert_includes doc.mentioned_user_logins, user.login
+    assert_includes doc.mentioned_user_logins, user1.login
 
     doc = TestDocument.create body: "@#{user.login.upcase} @#{user1.login.downcase}", user: create(:user)
-    expect(doc.mentioned_user_logins).to include(user.login, user1.login)
+    assert_includes doc.mentioned_user_logins, user.login
+    assert_includes doc.mentioned_user_logins, user1.login
   end
 
   it "should extract mentioned user ids" do
     user = create :user
     doc = TestDocument.create body: "@#{user.login}", user: create(:user)
-    expect(doc.mentioned_user_ids).to eq([user.id])
-    expect(doc.mentioned_user_logins).to eq([user.login])
+    assert_equal [user.id], doc.mentioned_user_ids
+    assert_equal [user.login], doc.mentioned_user_logins
   end
 
   it "limit 5 mentioned user" do
     logins = "".dup
     6.times { logins << " @#{create(:user).login}" }
     doc = TestDocument.create body: logins, user: create(:user)
-    expect(doc.mentioned_user_ids.count).to eq(5)
+    assert_equal 5, doc.mentioned_user_ids.count
   end
 
   it "except self user" do
     user = create :user
     doc = TestDocument.create body: "@#{user.login}", user: user
-    expect(doc.mentioned_user_ids.count).to eq(0)
+    assert_equal 0, doc.mentioned_user_ids.count
   end
 
   it "should get mentioned user logins" do
     user1 = create :user
     user2 = create :user
     doc = TestDocument.create body: "@#{user1.login} @#{user2.login}", user: create(:user)
-    expect(doc.mentioned_user_logins).to match_array([user1.login, user2.login])
+    assert_includes doc.mentioned_user_logins, user1.login
+    assert_includes doc.mentioned_user_logins, user2.login
   end
 
   it "should send mention notification" do
@@ -105,11 +108,11 @@ describe Mentionable, type: :model do
       }.to change(user1.notifications.unread, :count)
 
       note = user1.notifications.unread.last
-      expect(note.notify_type).to eq "mention"
-      expect(note.target_type).to eq "TestDocument"
-      expect(note.target_id).to eq doc.id
-      expect(note.target.id).to eq doc.id
-      expect(note.actor_id).to eq actor.id
+      assert_equal "mention", note.notify_type
+      assert_equal "TestDocument", note.target_type
+      assert_equal doc.id, note.target_id
+      assert_equal doc.id, note.target.id
+      assert_equal actor.id, note.actor_id
     end
   end
 end

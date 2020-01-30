@@ -56,13 +56,13 @@ describe SoftDelete, type: :model do
     expect(rick).to be_destroyed
     expect(rick.errors.size).to eq 0
 
-    expect(WalkingDead.where(name: rick.name).count).to eq(0)
-    expect(WalkingDead.unscoped.where(name: rick.name).first).to eq(rick)
+    assert_equal 0, WalkingDead.where(name: rick.name).count
+    assert_equal rick, WalkingDead.unscoped.where(name: rick.name).first
   end
 
   it "is run callback after destroy" do
     rick.name = "foo"
     rick.destroy
-    expect(rick.tag).to eq("after_destroy foo")
+    assert_equal "after_destroy foo", rick.tag
   end
 end

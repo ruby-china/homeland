@@ -8,7 +8,7 @@ describe "API V3", "devices", type: :request do
   describe "POST /api/v3/devices.json" do
     it "require login" do
       post "/api/v3/devices.json", platform: "ios", token: token
-      expect(response.status).to eq(401)
+      assert_equal 401, response.status
     end
 
     it "should be ok" do
@@ -16,20 +16,20 @@ describe "API V3", "devices", type: :request do
       expect do
         post "/api/v3/devices.json", platform: "ios", token: token
       end.to change(current_user.devices.ios, :count).by(1)
-      expect(response.status).to eq(200)
-      expect(current_user.devices.ios.pluck(:token)).to include(token)
+      assert_equal 200, response.status
+      assert_includes current_user.devices.ios.pluck(:token), token
 
       expect do
         post "/api/v3/devices.json", platform: "ios", token: SecureRandom.hex
       end.to change(current_user.devices.ios, :count).by(1)
-      expect(response.status).to eq(200)
-      expect(current_user.devices.ios.pluck(:token).count).to eq 2
+      assert_equal 200, response.status
+      assert_equal 2, current_user.devices.ios.pluck(:token).count
 
       expect do
         post "/api/v3/devices.json", platform: "android", token: token
       end.to change(current_user.devices.android, :count).by(1)
-      expect(response.status).to eq(200)
-      expect(current_user.devices.android.pluck(:token)).to include(token)
+      assert_equal 200, response.status
+      assert_includes current_user.devices.android.pluck(:token), token
     end
 
     it "should not be ok" do
@@ -37,12 +37,12 @@ describe "API V3", "devices", type: :request do
       expect do
         post "/api/v3/devices.json", platform: "ios"
       end.to change(Device, :count).by(0)
-      expect(response.status).to eq(400)
+      assert_equal 400, response.status
 
       expect do
         post "/api/v3/devices.json", platform: "foo", token: token
       end.to change(Device, :count).by(0)
-      expect(response.status).to eq(400)
+      assert_equal 400, response.status
     end
   end
 
@@ -50,16 +50,16 @@ describe "API V3", "devices", type: :request do
     let(:token) { SecureRandom.hex }
     it "require login" do
       delete "/api/v3/devices.json", platform: "bb", token: token
-      expect(response.status).to eq 401
+      assert_equal 401, response.status
     end
 
     it "validation params" do
       login_user!
       delete "/api/v3/devices.json", platform: "bb"
-      expect(response.status).to eq(400)
+      assert_equal 400, response.status
 
       delete "/api/v3/devices.json", platform: "ios"
-      expect(response.status).to eq(400)
+      assert_equal 400, response.status
     end
 
     it "should be ok" do
@@ -70,14 +70,14 @@ describe "API V3", "devices", type: :request do
       expect do
         delete "/api/v3/devices.json", platform: "android", token: android.token
       end.to change(current_user.devices.android, :count).by(-1)
-      expect(response.status).to eq(200)
-      expect(current_user.devices.android.pluck(:token)).not_to include(android.token)
+      assert_equal 200, response.status
+      refute_includes current_user.devices.android.pluck(:token), android.token
 
       expect do
         delete "/api/v3/devices.json", platform: "ios", token: ios.token
       end.to change(current_user.devices.ios, :count).by(-1)
-      expect(response.status).to eq(200)
-      expect(current_user.devices.ios.pluck(:token)).not_to include(ios.token)
+      assert_equal 200, response.status
+      refute_includes current_user.devices.ios.pluck(:token), token
     end
   end
 end

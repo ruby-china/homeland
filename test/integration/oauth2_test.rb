@@ -19,22 +19,30 @@ class OAuth2Test < ActiveSupport::TestCase
   test "auth_code" do
     grant = FactoryBot.create(:access_grant, application: app, redirect_uri: "#{app.redirect_uri}/callback")
 
-    @access_token = client.auth_code.get_token(grant.token, redirect_uri: grant.redirect_uri)
+    assert_changes -> { Doorkeeper::AccessToken.count }, 1 do
+      @access_token = client.auth_code.get_token(grant.token, redirect_uri: grant.redirect_uri)
+    end
 
     refute_nil @access_token.token
 
     # Refresh Token
-    @new_token = @access_token.refresh!
+    assert_changes -> { Doorkeeper::AccessToken.count }, 1 do
+      @new_token = @access_token.refresh!
+    end
     refute_nil @new_token.token
     refute_equal @access_token.token, @new_token.token
   end
 
   test "password get_token" do
-    @access_token = client.password.get_token(user.email, password)
+    assert_changes -> { Doorkeeper::AccessToken.count }, 1 do
+      @access_token = client.password.get_token(user.email, password)
+    end
     refute_nil @access_token.token
 
     # Refresh Token
-    @new_token = @access_token.refresh!
+    assert_changes -> { Doorkeeper::AccessToken.count }, 1 do
+      @new_token = @access_token.refresh!
+    end
 
     refute_nil @new_token.token
     refute_equal @access_token.token, @new_token.token

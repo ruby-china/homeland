@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require "rails_helper"
+require "spec_helper"
 
 describe TopicsController do
   let(:user) { create(:user) }
   let(:user1) { create(:user) }
-  let(:headers) { { "User-Agent": "turbolinks-app, rspec" } }
+  let(:headers) { { "User-Agent": "turbolinks-app, test" } }
 
   it "GET /topics/new should got 401 with turbolinks-app" do
     get new_topic_path, headers: headers

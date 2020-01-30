@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "rails_helper"
+require "spec_helper"
 
 class SoftDeleteTest < ActiveSupport::TestCase
   ActiveRecord::Base.connection.create_table(:walking_deads, force: true) do |t|

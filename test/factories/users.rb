@@ -13,7 +13,7 @@ FactoryBot.define do
   end
 
   factory :avatar_user, parent: :user do
-    avatar { File.open(Rails.root.join("spec/fixtures/test.png")) }
+    avatar { File.open(Rails.root.join("test/fixtures/test.png")) }
   end
 
   factory :admin, parent: :user do

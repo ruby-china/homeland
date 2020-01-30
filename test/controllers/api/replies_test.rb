@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "rails_helper"
+require "spec_helper"
 
 describe Api::V3::RepliesController do
   let(:reply) { create(:reply, user: current_user) }

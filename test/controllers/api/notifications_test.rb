@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "rails_helper"
+require "spec_helper"
 
 describe Api::V3::NotificationsController do
   describe "GET /api/notifications.json" do

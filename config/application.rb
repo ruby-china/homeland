@@ -35,8 +35,7 @@ module Homeland
     ]
 
     config.generators do |g|
-      g.test_framework :rspec
-      g.fixture_replacement :factory_bot, dir: "spec/factories"
+      g.fixture_replacement :factory_bot, dir: "test/factories"
     end
 
     config.to_prepare do

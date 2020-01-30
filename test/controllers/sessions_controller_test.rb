@@ -17,9 +17,15 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
 
   test "GET /account/sign_in should store referrer if it's from self site" do
     old_return_to = "/account/edit?id=123"
-    session["return_to"] = old_return_to
+    topic = create(:topic)
+    # visit topic to store session["return_to"]
+    get new_topic_path
+    assert_equal new_topic_url, session["return_to"]
+
+    old_return_to = new_topic_url
 
     get "/account/sign_in"
+    assert_equal 200, response.status
     assert_equal old_return_to, session["return_to"]
   end
 

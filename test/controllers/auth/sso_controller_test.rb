@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "rails_helper"
+require "spec_helper"
 
 describe Auth::SSOController do
   let(:sso_secret) { "foo(*&@!12q36)" }
@@ -9,11 +9,11 @@ describe Auth::SSOController do
     before do
       @sso_url = "http://somesite.com/homeland-sso"
 
-      Setting.stubs(:sso).returns({
+      Setting.stubs(:sso).returns(
         "enable" => true,
         "url"    => @sso_url,
         "secret" => sso_secret
-      })
+      )
       Setting.stubs(:sso_enabled?).returns(true)
     end
 

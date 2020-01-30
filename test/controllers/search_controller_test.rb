@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "rails_helper"
+require "spec_helper"
 
 describe SearchController do
   describe "GET /search/users" do
@@ -10,7 +10,7 @@ describe SearchController do
     it "should work" do
       sign_in user
       User.stubs(:search).returns(users)
-      get users_search_path
+      get search_users_path
       assert_equal 200, response.status
       assert_equal users.map(&:login).sort, response.parsed_body.collect { |j| j["login"] }.sort
       assert_equal users.map(&:name).sort, response.parsed_body.collect { |j| j["name"] }.sort

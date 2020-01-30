@@ -189,7 +189,7 @@ class Homeland::MarkdownTest < ActiveSupport::TestCase
   end
 
   test "inline link in heading - h3 with inline link" do
-    assert_markdown_render %(<h3 id="rails_panel"><a href="https://github.com/dejan/rails_panel" rel="nofollow" target="_blank" title="">rails_panel</a></h3>) , "### [rails_panel](https://github.com/dejan/rails_panel)"
+    assert_markdown_render %(<h3 id="rails_panel"><a href="https://github.com/dejan/rails_panel" rel="nofollow" target="_blank" title="">rails_panel</a></h3>), "### [rails_panel](https://github.com/dejan/rails_panel)"
   end
 
   test "h1" do
@@ -294,7 +294,7 @@ class Homeland::MarkdownTest < ActiveSupport::TestCase
   end
 
   test "mention floor #12f in block code" do
-    raw =  <<~MD
+    raw = <<~MD
     ```
     #12f
     ```

@@ -131,7 +131,6 @@ gem "bootsnap"
 
 group :development do
   gem "spring"
-  gem "spring-commands-rspec"
 end
 
 group :development, :test do
@@ -140,9 +139,8 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "letter_opener"
   gem "listen"
-  gem "rspec-rails"
   gem "mocha"
-  gem 'minitest-spec-rails'
+  gem "minitest-spec-rails"
   gem "rubocop", require: false
 
   gem "codecov", require: false

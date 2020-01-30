@@ -80,6 +80,18 @@ class ActiveSupport::TestCase
     end
   end
 
+  def assert_includes_all(collection, *other)
+    other.each do |item|
+      assert_includes collection, item
+    end
+  end
+
+  def assert_not_includes_any(collection, *other)
+    other.each do |item|
+      assert_not_includes collection, item
+    end
+  end
+
   def fixture_file_upload(name, content_type = "text/plain")
     Rack::Test::UploadedFile.new(Rails.root.join("test/fixtures/#{name}"), content_type)
   end

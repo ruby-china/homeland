@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class APIControllerTest < ActionDispatch::IntegrationTest
   include FactoryBot::Syntax::Methods
 
@@ -54,4 +56,4 @@ class APIControllerTest < ActionDispatch::IntegrationTest
     end
 end
 
-MiniTest::Spec.register_spec_type /Api::V3/, APIControllerTest
+MiniTest::Spec.register_spec_type /^Api::V3/, APIControllerTest

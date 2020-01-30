@@ -18,12 +18,12 @@ class LikesHelperTest < ActionView::TestCase
   end
 
   test "should result when logined user liked" do
-      sign_in user
-      user.like_topic_ids = [topic.id]
-      assert_equal %(<a title="取消赞" data-count="0" data-state="active" data-type="Topic" data-id="1" class="likeable active" href="#"><i class='fa fa-heart'></i> <span></span></a>), likeable_tag(topic)
+    sign_in user
+    user.like_topic_ids = [topic.id]
+    assert_equal %(<a title="取消赞" data-count="0" data-state="active" data-type="Topic" data-id="1" class="likeable active" href="#"><i class='fa fa-heart'></i> <span></span></a>), likeable_tag(topic)
 
-      topic.likes_count = 3
-      assert_equal %(<a title="取消赞" data-count="3" data-state="active" data-type="Topic" data-id="1" class="likeable active" href="#"><i class='fa fa-heart'></i> <span>3 个赞</span></a>), likeable_tag(topic)
+    topic.likes_count = 3
+    assert_equal %(<a title="取消赞" data-count="3" data-state="active" data-type="Topic" data-id="1" class="likeable active" href="#"><i class='fa fa-heart'></i> <span>3 个赞</span></a>), likeable_tag(topic)
   end
 
   test "should result when unlogin user" do

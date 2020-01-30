@@ -4,7 +4,7 @@ require "test_helper"
 
 class ApplicationHelperTest < ActionView::TestCase
   def current_page?(url)
-    return false
+    false
   end
 
   test "markdown" do

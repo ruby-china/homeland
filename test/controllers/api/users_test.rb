@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "rails_helper"
+require "spec_helper"
 
 describe Api::V3::UsersController do
   describe "GET /api/v3/users.json" do

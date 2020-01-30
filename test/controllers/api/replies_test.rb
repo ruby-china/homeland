@@ -2,8 +2,8 @@
 
 require "rails_helper"
 
-describe "API V3", "replies", type: :request do
-  let!(:reply) { create(:reply, user: current_user) }
+describe Api::V3::RepliesController do
+  let(:reply) { create(:reply, user: current_user) }
 
   describe "GET /api/v3/replies/:id.json" do
     it "should be ok" do

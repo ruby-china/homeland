@@ -142,6 +142,7 @@ group :development, :test do
   gem "listen"
   gem "rspec-rails"
   gem "mocha"
+  gem 'minitest-spec-rails'
   gem "rubocop", require: false
 
   gem "codecov", require: false

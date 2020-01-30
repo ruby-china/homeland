@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-describe "API V3", "notifications", type: :request do
+describe Api::V3::NotificationsController do
   describe "GET /api/notifications.json" do
     it "must require token" do
       get "/api/v3/notifications.json"
@@ -29,9 +29,9 @@ describe "API V3", "notifications", type: :request do
       assert_equal note.actor.login, json["notifications"][0]["actor"]["login"]
     end
 
-    context "NodeChanged" do
-      let!(:node) { create :node }
-      let!(:topic) { create :topic, user: current_user }
+    describe "NodeChanged" do
+      let(:node) { create :node }
+      let(:topic) { create :topic, user: current_user }
 
       it "should work" do
         login_user!

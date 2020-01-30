@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-describe "API V3", "users", type: :request do
+describe Api::V3::UsersController do
   describe "GET /api/v3/users.json" do
     before do
       create_list(:user, 10)
@@ -48,7 +48,12 @@ describe "API V3", "users", type: :request do
 
       assert_has_keys json["user"], *fields
       fields.reject { |f| f == "avatar_url" }.each do |field|
-        assert_equal user.send(field), json["user"][field]
+        val = user.send(field)
+        if val.nil?
+          assert_nil json["user"][field]
+        else
+          assert_equal val, json["user"][field]
+        end
       end
       assert_has_keys json["meta"], "blocked", "followed"
     end

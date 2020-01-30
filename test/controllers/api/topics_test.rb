@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-describe "API V3", "topics", type: :request do
+describe Api::V3::TopicsController do
   describe "GET /api/v3/topics.json" do
     it "should be ok" do
       get "/api/v3/topics.json"
@@ -197,7 +197,7 @@ describe "API V3", "topics", type: :request do
   end
 
   describe "POST /api/v3/topics/:id.json" do
-    let!(:topic) { create(:topic) }
+    let(:topic) { create(:topic) }
 
     it "should require user" do
       post "/api/v3/topics/#{topic.id}.json", title: "api create topic", body: "here we go", node_id: 1
@@ -219,8 +219,8 @@ describe "API V3", "topics", type: :request do
       assert_equal true, topic.lock_node
     end
 
-    context "with user" do
-      let!(:topic) { create(:topic, user: current_user) }
+    describe "with user" do
+      let(:topic) { create(:topic, user: current_user) }
 
       it "should work" do
         login_user!
@@ -248,7 +248,7 @@ describe "API V3", "topics", type: :request do
   end
 
   describe "DELETE /api/v3/topics/:id.json" do
-    let!(:topic) { create(:topic) }
+    let(:topic) { create(:topic) }
 
     it "should require user" do
       delete "/api/v3/topics/#{topic.id}.json"
@@ -342,7 +342,7 @@ describe "API V3", "topics", type: :request do
       assert_equal 404, response.status
     end
 
-    context "liked, followed, favorited" do
+    describe "liked, followed, favorited" do
       let(:topic) { create(:topic) }
 
       it "should work" do
@@ -360,61 +360,55 @@ describe "API V3", "topics", type: :request do
   end
 
   describe "GET /api/v3/topic/:id/replies.json" do
-    context "no login" do
-      it "should work" do
-        t = create(:topic, title: "i want to know")
-        create(:reply, topic_id: t.id, body: "let me tell", user: current_user)
-        create(:reply, topic_id: t.id, body: "let me tell again", deleted_at: Time.now)
-        get "/api/v3/topics/#{t.id}/replies.json"
-        assert_equal 200, response.status
-        assert_equal 2, json["replies"].size
-        assert_equal [], json["meta"]["user_liked_reply_ids"]
-      end
+    it "without login should work" do
+      t = create(:topic, title: "i want to know")
+      create(:reply, topic_id: t.id, body: "let me tell", user: current_user)
+      create(:reply, topic_id: t.id, body: "let me tell again", deleted_at: Time.now)
+      get "/api/v3/topics/#{t.id}/replies.json"
+      assert_equal 200, response.status
+      assert_equal 2, json["replies"].size
+      assert_equal [], json["meta"]["user_liked_reply_ids"]
     end
 
-    context "has login" do
-      it "should work" do
-        login_user!
-        t = create(:topic, title: "i want to know")
-        r0 = create(:reply)
-        r1 = create(:reply, topic_id: t.id, body: "let me tell", user: current_user)
-        r2 = create(:reply, topic_id: t.id, body: "let me tell again", deleted_at: Time.now)
-        r3 = create(:reply, topic_id: t.id, body: "let me tell again again")
-        current_user.like(r0)
-        current_user.like(r2)
-        current_user.like(r3)
-        get "/api/v3/topics/#{t.id}/replies.json"
-        assert_equal 200, response.status
-        assert_equal 3, json["replies"].size
-        assert_has_keys json["replies"][0], "id", "user", "body_html", "created_at", "updated_at", "deleted"
-        assert_has_keys json["replies"][0]["user"], "id", "name", "login", "avatar_url"
-        assert_equal r1.id, json["replies"][0]["id"]
-        assert_has_keys json["replies"][0]["abilities"], "update", "destroy"
-        assert_equal true, json["replies"][0]["abilities"]["update"]
-        assert_equal true, json["replies"][0]["abilities"]["destroy"]
-        assert_equal r2.id, json["replies"][1]["id"]
-        assert_equal true, json["replies"][1]["deleted"]
-        assert_equal false, json["replies"][1]["abilities"]["update"]
-        assert_equal false, json["replies"][1]["abilities"]["destroy"]
-        assert_equal false, json["meta"]["user_liked_reply_ids"].include?(r0.id)
-        assert_equal true, json["meta"]["user_liked_reply_ids"].include?(r2.id)
-        assert_equal true, json["meta"]["user_liked_reply_ids"].include?(r3.id)
-      end
+    it "with logined should work" do
+      login_user!
+      t = create(:topic, title: "i want to know")
+      r0 = create(:reply)
+      r1 = create(:reply, topic_id: t.id, body: "let me tell", user: current_user)
+      r2 = create(:reply, topic_id: t.id, body: "let me tell again", deleted_at: Time.now)
+      r3 = create(:reply, topic_id: t.id, body: "let me tell again again")
+      current_user.like(r0)
+      current_user.like(r2)
+      current_user.like(r3)
+      get "/api/v3/topics/#{t.id}/replies.json"
+      assert_equal 200, response.status
+      assert_equal 3, json["replies"].size
+      assert_has_keys json["replies"][0], "id", "user", "body_html", "created_at", "updated_at", "deleted"
+      assert_has_keys json["replies"][0]["user"], "id", "name", "login", "avatar_url"
+      assert_equal r1.id, json["replies"][0]["id"]
+      assert_has_keys json["replies"][0]["abilities"], "update", "destroy"
+      assert_equal true, json["replies"][0]["abilities"]["update"]
+      assert_equal true, json["replies"][0]["abilities"]["destroy"]
+      assert_equal r2.id, json["replies"][1]["id"]
+      assert_equal true, json["replies"][1]["deleted"]
+      assert_equal false, json["replies"][1]["abilities"]["update"]
+      assert_equal false, json["replies"][1]["abilities"]["destroy"]
+      assert_equal false, json["meta"]["user_liked_reply_ids"].include?(r0.id)
+      assert_equal true, json["meta"]["user_liked_reply_ids"].include?(r2.id)
+      assert_equal true, json["meta"]["user_liked_reply_ids"].include?(r3.id)
     end
 
-    context "admin login" do
-      it "should return right abilities when admin visit" do
-        login_admin!
-        t = create(:topic, title: "i want to know")
-        create(:reply, topic_id: t.id, body: "let me tell")
-        create(:reply, topic_id: t.id, body: "let me tell again", deleted_at: Time.now)
-        get "/api/v3/topics/#{t.id}/replies.json"
-        assert_equal 200, response.status
-        assert_equal true, json["replies"][0]["abilities"]["update"]
-        assert_equal true, json["replies"][0]["abilities"]["destroy"]
-        assert_equal true, json["replies"][1]["abilities"]["update"]
-        assert_equal true, json["replies"][1]["abilities"]["destroy"]
-      end
+    it "admin login should return right abilities when admin visit" do
+      login_admin!
+      t = create(:topic, title: "i want to know")
+      create(:reply, topic_id: t.id, body: "let me tell")
+      create(:reply, topic_id: t.id, body: "let me tell again", deleted_at: Time.now)
+      get "/api/v3/topics/#{t.id}/replies.json"
+      assert_equal 200, response.status
+      assert_equal true, json["replies"][0]["abilities"]["update"]
+      assert_equal true, json["replies"][0]["abilities"]["destroy"]
+      assert_equal true, json["replies"][1]["abilities"]["update"]
+      assert_equal true, json["replies"][1]["abilities"]["destroy"]
     end
   end
 

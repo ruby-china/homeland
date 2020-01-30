@@ -73,6 +73,12 @@ class ActiveSupport::TestCase
     assert_equal excepted.strip.gsub(/>[\s]+</, "><"), html.strip.gsub(/>[\s]+</, "><")
   end
 
+  def assert_has_keys(collection, *keys)
+    keys.each do |key|
+      assert_equal true, collection.has_key?(key)
+    end
+  end
+
   def fixture_file_upload(name, content_type = "text/plain")
     Rack::Test::UploadedFile.new(Rails.root.join("test/fixtures/#{name}"), content_type)
   end

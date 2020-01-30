@@ -3,8 +3,7 @@
 require "rails_helper"
 require "active_support/core_ext"
 
-describe "API V3", "nodes", type: :request do
-  let(:json) { JSON.parse(response.body) }
+describe Api::V3::NodesController do
   describe "GET /api/nodes.json" do
     before do
       %w[fun ruby nodes].each_with_index { |n, i| create(:node, name: n, id: i + 1) }

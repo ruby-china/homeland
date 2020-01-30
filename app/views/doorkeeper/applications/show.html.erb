@@ -3,7 +3,7 @@
 <div class="card">
   <div class="card-header"><%= t('.title', name: @application.name) %></div>
   <div class="card-body">
-    <table class="table table-bordered">
+    <table class="table table-striped table-bordered">
       <tr>
         <td><%= t('.application_id') %></td>
         <td><%= @application.uid %></td>
@@ -24,7 +24,7 @@
               <tr>
                 <td><%= uri %></td>
                 <td style="text-align:right; width: 100px;">
-                  <%= link_to t('doorkeeper.applications.buttons.authorize'), oauth_authorization_path(client_id: @application.uid, redirect_uri: uri, response_type: 'code'), class: 'btn btn-sm btn-success', target: '_blank' %>
+                  <%= link_to t('doorkeeper.applications.buttons.authorize'), oauth_authorization_path(client_id: @application.uid, redirect_uri: uri, response_type: "code", scope: Doorkeeper.config.default_scopes), target: '_blank' %>
                 </td>
               </tr>
             <% end %>

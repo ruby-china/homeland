@@ -57,9 +57,6 @@
     </div>
     <% else %>
     <div id="replies" class="card" data-last-floor="<%= @replies.count(:all) %>">
-      <div class="total card-header hide-ios">
-        共收到 <b><%= @topic.replies_count %></b> 条回复
-      </div>
       <div class="items card-body">
         <%= render partial: "/replies/reply", collection: @replies %>
       </div>
@@ -71,15 +68,15 @@
       <div class="alert alert-info">此话题已经于 <%= l @topic.closed_at, format: :long %> 关闭，不再接受任何回帖。</div>
     <% else %>
       <div id="reply" class="card">
-        <div class="card-header hide-ios">回帖</div>
         <div class="card-body">
-        <% if can? :create, Reply %>
-          <%= render 'reply_form' %>
-        <% else %>
-          <div class="alert alert-info">
-            当前设置新手用户不能在 22:00 ~ 9:00 发帖。
-          </div>
-        <% end %>
+          <div class="card-title hide-ios">发起回帖</div>
+          <% if can? :create, Reply %>
+            <%= render 'reply_form' %>
+          <% else %>
+            <div class="alert alert-info">
+              当前设置新手用户不能在 22:00 ~ 9:00 发帖。
+            </div>
+          <% end %>
         </div>
       </div>
     <% end %>

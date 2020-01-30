@@ -3,18 +3,12 @@
     font-size: 16px;
     line-height: 32px;
   }
-  .card-body {
-    padding-top: 0;
-    padding-bottom: 0;
-  }
 
   .notification-group {
-    padding: 10px 0;
-
+    margin-bottom: 10px;
     .group-title {
       color: #aaa;
-      border-bottom: 1px solid #eee;
-      padding: 5px 0;
+      font-size: 15px;
     }
   }
 
@@ -30,11 +24,16 @@
 
       .markdown {
         pre,
-        img { margin-left: 0; margin-right: 0; }
+        img {
+          margin-left: 0;
+          margin-right: 0;
+        }
       }
     }
 
-    a { color: #555; }
+    a {
+      color: #555;
+    }
 
     &.unread {
       color: #444;
@@ -43,27 +42,38 @@
         font-weight: bold;
       }
 
-      a { color: #222; text-decoration: underline; }
+      a {
+        color: #222;
+        text-decoration: underline;
+      }
     }
-
 
     .media-content {
       color: #444;
 
-      a { color: #999 !important; }
-      p { font-size: 14px;  margin-bottom: 6px; }
+      a {
+        color: #999 !important;
+      }
+      p {
+        font-size: 14px;
+        margin-bottom: 6px;
+      }
       p:last-child {
         margin-bottom: 0;
       }
     }
 
     .user-avatar {
-      img { width: 32px; height: 32px; border-radius: 120px; }
+      img {
+        width: 32px;
+        height: 32px;
+        border-radius: 120px;
+      }
     }
 
     .media-right {
       min-width: 40px;
-      color: #AAA;
+      color: #aaa;
       font-size: 13px;
     }
   }

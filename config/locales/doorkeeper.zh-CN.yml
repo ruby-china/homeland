@@ -7,3 +7,5 @@ zh-CN:
         confidential: "保密能力？"
       show:
         confidential: "保密能力"
+    scopes:
+      all: "账户完全访问权限"

@@ -39,3 +39,4 @@ spec/examples.txt
 .ruby-version
 /storage/*
 app.local.env
+*.tmp

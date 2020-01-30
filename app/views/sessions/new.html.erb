@@ -4,8 +4,8 @@
   <div class="col"></div>
   <div class="col-md-5">
     <div class="card">
-      <div class="card-header"><%= t("common.login") %></div>
       <div class="card-body">
+        <div class="card-title"><%= t("common.login") %> <%= Setting.app_name %></div>
         <%= form_for resource, as: resource_name, url: session_path(resource_name), remote: true do |f| %>
           <div class="form-group">
             <%= f.text_field :login, class: "form-control input-lg", placeholder: "用户名 / Email" %>

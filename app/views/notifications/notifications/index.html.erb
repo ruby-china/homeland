@@ -1,12 +1,12 @@
 <div class="notifications card">
-  <div class="card-header hide-ios clearfix">
-    <%= t('notifications.all_notifications') %>
-
-    <span class="pull-right">
-      <%= link_to t('notifications.clean_all'), notifications.clean_notifications_path, class: 'btn btn-sm btn-danger', id: 'btn-remove-all', method: 'delete', remote: true %>
-    </span>
-  </div>
-  <div class="card-body list item-list">
+  <div class="card-body">
+    <div class="card-title hide-ios clearfix">
+      <%= t('notifications.all_notifications') %>
+      <span class="counter"><%= @notifications.total_count %></span>
+      <span class="actions">
+        <%= link_to icon_tag("trash", label: t('notifications.clean_all')), notifications.clean_notifications_path, class: "text-danger", id: 'btn-remove-all', method: 'delete', remote: true %>
+      </span>
+    </div>
     <% if @notifications.blank? %>
       <div class="notification-group">
         <div class="no-records"><%= t('notifications.no_records') %></div>
@@ -19,8 +19,6 @@
         </div>
       <% end %>
     <% end %>
-  </div>
-  <div class="card-footer hide-ios">
     <%= paginate @notifications %>
   </div>
 </div>

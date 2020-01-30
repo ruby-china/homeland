@@ -96,6 +96,12 @@ pre {
 
 .toolbar {
   margin-bottom: 15px;
+
+  .form-inline {
+    .form-group {
+      margin-right: 10px;
+    }
+  }
 }
 
 table tr.deleted td {

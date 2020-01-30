@@ -3,12 +3,12 @@
 
   <div class="col-md-10">
     <div class="card">
-      <div class="card-header clearfix">
-        管理的应用列表
-        <%= link_to "注册新应用", new_oauth_application_path, class: 'btn btn-success pull-right' %>
-      </div>
-
       <div class="card-body">
+        <div class="card-title clearfix">
+          管理的应用列表
+          <%= link_to "注册新应用", new_oauth_application_path, class: 'btn btn-primary float-right' %>
+        </div>
+
         <table class="table table-bordered table-striped table-condensed">
           <thead>
           <tr>
@@ -38,12 +38,11 @@
     </div>
 
     <div class="card">
-      <div class="card-header clearfix">
-        已授权的应用
-      </div>
-
       <div class="card-body">
-        <p>下面列表是已经认证的应用，它们可以访问你的帐号。</p>
+        <div class="card-title clearfix">
+          <div>已授权的应用</div>
+          <div class="card-subtitle">下面列表是已经认证的应用，它们可以访问你的帐号。</div>
+        </div>
         <table class="table table-bordered table-striped table-condensed">
           <thead>
           <tr>

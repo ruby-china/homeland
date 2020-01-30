@@ -1,19 +1,19 @@
 <% cache(["index_locations", CacheVersion.section_node_updated_at]) do %>
-<div class="index-sections card">
-  <div class="card-header"><%= t("common.index_node_navigation")%></div>
-  <div class="card-body">
-    <div class="row node-list">
-      <% Section.includes(:nodes).all.each do |section| %>
-      <div class="node media">
-        <label class="mr-2 media-left"><%= section.name %></label>
-        <span class="nodes media-body">
-          <% section.nodes.sorted.each do |node| %>
-            <span class="name"><%= link_to(node.name, node_topics_path(node), title: node.name, data: { id: node.id })%></span>
-          <% end %>
-        </span>
+  <div class="index-sections card">
+    <div class="card-header"><%= t("common.index_node_navigation")%></div>
+    <div class="card-body">
+      <div class="row node-list">
+        <% Section.includes(:nodes).all.each do |section| %>
+          <div class="node media">
+            <label class="mr-2 media-left"><%= section.name %></label>
+            <span class="nodes media-body">
+              <% section.nodes.sorted.each do |node| %>
+                <span class="name"><%= link_to(node.name, node_topics_path(node), title: node.name, data: { id: node.id })%></span>
+              <% end %>
+            </span>
+          </div>
+        <% end %>
       </div>
-      <% end %>
     </div>
   </div>
-</div>
 <% end %>

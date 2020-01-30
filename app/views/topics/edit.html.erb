@@ -1,8 +1,12 @@
 <% title_tag t('topics.edit_topic') %>
-
 <div class="card">
-  <div class="card-header hide-ios"><%= t('topics.edit_topic') %> <span class="pull-right d-none"><%= topic_title_tag(@topic) %></span></div>
   <div class="card-body">
+    <div class="card-title hide-ios">
+      <%= t('topics.edit_topic') %>
+      <div class="actions">
+        <%= link_to "返回", topic_path(@topic) %>
+      </div>
+    </div>
     <%= render 'form' %>
   </div>
 </div>

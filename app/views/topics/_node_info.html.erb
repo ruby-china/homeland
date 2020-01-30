@@ -1,5 +1,5 @@
 <% content_for :sub_navbar do %>
-  <div class="sub-navbar node-header hide-ios">
+  <div class="sub-navbar node-header <%= "node-header-with-node" if node %> hide-ios">
     <div class="container">
       <% if !node.blank? %>
         <div class="title">

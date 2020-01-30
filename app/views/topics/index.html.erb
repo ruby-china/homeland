@@ -1,47 +1,38 @@
 <% title_tag(@page_title || t('menu.topics')) %>
-
 <!-- @suggest_topics maybe nil or ActiveRecord::Relation, but we need an array -->
 <% @suggest_topics = @suggest_topics.to_a %>
-
 <%= render "topics/node_info", node: @node %>
-
 <div class="row">
   <div class="col-md-9">
     <div class="topics topics-<%= action_name %> card">
-
       <div class="card-body item-list">
         <% if @suggest_topics.present? %>
           <%= render partial: '/topics/topic', collection: @suggest_topics, locals: { suggest: true } %>
         <% end %>
-
         <%= render partial: '/topics/topic', collection: @topics, locals: { suggest: false } %>
       </div>
-
-      <div class="card-footer clearfix">
-        <% if (action_name.in? %(index recent)) && (controller_name == "topics") %>
-          <%= paginate @topics, total_pages: Topic.total_pages %>
-        <% else %>
-          <%= paginate @topics %>
-        <% end %>
-      </div>
+      <% if  @topics.total_pages > 1 %>
+        <div class="card-footer clearfix">
+          <% if (action_name.in? %(index recent)) && (controller_name == "topics") %>
+            <%= paginate @topics, total_pages: Topic.total_pages %>
+          <% else %>
+            <%= paginate @topics %>
+          <% end %>
+        </div>
+      <% end %>
     </div>
-
-
     <% if current_user %>
-    <script type="text/javascript">
-      var readed_topic_ids = <%= @read_topic_ids || [] %>;
-      for (var i = 0; i < readed_topic_ids.length; i++) {
-        topic_id = readed_topic_ids[i];
-        $(".topic-"+ topic_id).addClass('topic-visited');
-        $(".topic-"+ topic_id + " .count a").addClass("state-true");
-      }
-    </script>
+      <script type="text/javascript">
+        var readed_topic_ids = <%= @read_topic_ids || [] %>;
+        for (var i = 0; i < readed_topic_ids.length; i++) {
+          topic_id = readed_topic_ids[i];
+          $(".topic-"+ topic_id).addClass('topic-visited');
+          $(".topic-"+ topic_id + " .count a").addClass("state-true");
+        }
+      </script>
     <% end %>
   </div>
-
-
   <div class="sidebar col-md-3">
     <%= render "topics/sidebar_for_topic_index" %>
   </div>
-
 </div>

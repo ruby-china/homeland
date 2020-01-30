@@ -474,12 +474,37 @@ kbd {
   box-shadow: 0 0 0;
   border-color: #e5e6e9 #dfe0e4 #d0d1d5;
 
-  .card-header,
-  .card-footer {
+  .card-header {
     padding: 6px 15px;
   }
 
-  .card-body,
+  .card-title {
+    margin-bottom: 25px;
+    font-size: 18px;
+    line-height: 100%;
+    display: flex;
+
+    .card-subtitle {
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .counter {
+      margin-left: 5px;
+      color: #777;
+      font-size: 14px;
+    }
+
+    .actions {
+      font-size: 14px;
+      margin-left: 15px;
+    }
+  }
+
+  .card-body {
+    padding: 15px;
+  }
+
   .list-group-item {
     padding: 10px 15px;
   }
@@ -688,7 +713,7 @@ img.emoji {
 .editor-toolbar {
   margin-bottom: 5px;
 
-  .opts {
+  .toolbar-buttons {
     a.nav-link {
       border: 1px solid $input-border-color;
 
@@ -697,6 +722,7 @@ img.emoji {
       font-size: 14px;
       line-height: 14px;
       display: inline-block;
+      border-radius: 3px;
       padding: 8px;
       margin: 0;
     }

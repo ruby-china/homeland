@@ -79,7 +79,15 @@ class ActiveSupport::TestCase
 end
 
 class ActionView::TestCase
-  include Devise::Test::IntegrationHelpers
+  def sign_in(user)
+    @user = user
+  end
+
+  def sign_out
+    @user = nil
+  end
+
+  def current_user; @user; end
 end
 
 

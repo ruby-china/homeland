@@ -141,6 +141,7 @@ group :development, :test do
   gem "letter_opener"
   gem "listen"
   gem "rspec-rails"
+  gem "mocha"
   gem "rubocop", require: false
 
   gem "codecov", require: false

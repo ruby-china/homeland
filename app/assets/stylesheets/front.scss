@@ -280,7 +280,7 @@
   .topic {
     min-height: 68px;
     border-bottom: 1px solid #f0f0f0;
-    padding: 10px 15px;
+    padding: 15px 15px;
     margin: 0 -15px;
     vertical-align: top;
     &:first-child {
@@ -291,7 +291,7 @@
     }
     .avatar {
       padding-top: 6px;
-      margin-right: 10px;
+      margin-right: 15px;
     }
     .title {
       font-size: 15px;
@@ -539,7 +539,7 @@
     padding: 15px;
     position: relative;
     border-bottom: 1px solid #eee;
-    padding-left: 65px;
+    padding-left: 70px;
 
     &.reply-system,
     &.reply-deleted {

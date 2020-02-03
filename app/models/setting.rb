@@ -144,6 +144,10 @@ class Setting < RailsSettings::Base
   field :google_analytics_key, default: ""
 
   class << self
+    def modules
+      ["home", "topic", "jobs", "wiki", "site", "note", "team", "github", "editor.code"]
+    end
+
     def editable_keys
       EDITABLE_KEYS
     end

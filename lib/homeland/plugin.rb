@@ -42,7 +42,7 @@ module Homeland
     end
 
     def <=>(other)
-      Setting.modules.index(self.name) <=> Setting.modules.index(other.name)
+      Setting.modules.index(self.name).to_i <=> Setting.modules.index(other.name).to_i
     end
 
     class << self

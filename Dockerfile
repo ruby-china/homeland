@@ -23,6 +23,7 @@ RUN mkdir -p /home/app &&\
   rm -rf '/var/cache/apk/*' '/tmp/*'
 
 ADD Gemfile Gemfile.lock /home/app/homeland/
+# RUN bundler update --bundler
 RUN bundle install --deployment --jobs 20 --retry 5 &&\
   find /home/app/homeland/vendor/bundle -name tmp -type d -exec rm -rf {} +
 ADD . /home/app/homeland

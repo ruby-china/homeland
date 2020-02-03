@@ -64,10 +64,12 @@ module Homeland
 
     def boot
       ActiveSupport.on_load(:after_initialize) do
-        puts "=> Booting Homeland"
+        puts "=> Booting Homeland" unless Rails.env.test?
         Homeland::Plugin.boot
-        puts "=> Plugins: #{Homeland.plugins.collect(&:name).join(", ")}"
+        puts "=> Plugins: #{Homeland.plugins.collect(&:name).join(", ")}" unless Rails.env.test?
       end
     end
   end
 end
+
+Homeland.boot

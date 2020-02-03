@@ -63,4 +63,3 @@ module Homeland
 end
 
 require "homeland"
-Homeland.boot

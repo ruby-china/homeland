@@ -51,8 +51,8 @@ class Homeland::PluginTest < ActiveSupport::TestCase
   end
 
   test ".sorted_plugins work" do
-    refute_equal nil, Homeland.sorted_plugins.find { |p| p.name == "foo" }
-    refute_equal nil, Homeland.sorted_plugins.find { |p| p.name == "dar" }
+    refute_equal nil, Homeland.plugins.sort.find { |p| p.name == "foo" }
+    refute_equal nil, Homeland.plugins.sort.find { |p| p.name == "dar" }
   end
 
   test ".navbar_plugins work" do

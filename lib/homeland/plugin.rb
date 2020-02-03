@@ -41,6 +41,10 @@ module Homeland
       source_path.starts_with? Rails.root.join("plugins").to_s
     end
 
+    def <=>(other)
+      Setting.modules.index(self.name) <=> Setting.modules.index(other.name)
+    end
+
     class << self
       # Booting Homeland plugins
       def boot

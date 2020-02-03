@@ -39,5 +39,6 @@ spec/examples.txt
 .ruby-version
 /storage/*
 /plugins/*
+!/plugins/test/
 app.local.env
 *.tmp

@@ -9,6 +9,7 @@ class PluginLoadTest < ActiveSupport::TestCase
     assert_kind_of Homeland::Plugin, plugin
     assert_equal "Test plugin", plugin.display_name
     assert_equal "Plugin for Homeland development test.", plugin.description
+    assert_equal "0.0.0", plugin.version
   end
 
   test "I18n load paths" do

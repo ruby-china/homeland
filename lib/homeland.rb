@@ -61,7 +61,12 @@ module Homeland
       yield plugin
       @plugins << plugin
       @sorted_plugins = nil
+      plugin.version ||= "0.0.0"
       plugin
+    end
+
+    def find_plugin(name)
+      self.plugins.find { |p| p.name == name.strip }
     end
 
     def boot

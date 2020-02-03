@@ -14,6 +14,9 @@ module Homeland
     # Display name of plugin
     attr_accessor :display_name
 
+    # Project url
+    attr_accessor :url
+
     # set true if plugin link wants list in top navbar
     attr_accessor :navbar_link
 
@@ -31,6 +34,14 @@ module Homeland
 
     # add RSpec test path
     attr_accessor :spec_path
+
+    def source_path
+      @source_path ||= Rails.root.join("plugins", self.name)
+    end
+
+    def deleteable?
+      File.exists?(source_path)
+    end
 
     class << self
       # Booting Homeland plugins

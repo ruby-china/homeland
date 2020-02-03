@@ -17,3 +17,5 @@ end
 before_fork do
   ActiveRecord::Base.connection_pool.disconnect!
 end
+
+plugin :tmp_restart

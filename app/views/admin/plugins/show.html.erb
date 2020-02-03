@@ -5,6 +5,7 @@
     <%= link_to "返回", admin_plugins_path, class: "btn btn-default btn-sm" %>
   </div>
 </div>
+<p><%= @plugin.source_path %></p>
 <div class="form">
   <% if @plugin.url %>
     <div class="form-group">

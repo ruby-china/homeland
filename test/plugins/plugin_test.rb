@@ -35,6 +35,7 @@ class Homeland::PluginTest < ActiveSupport::TestCase
     assert_equal true, @plugin.navbar_link
     assert_equal true, @plugin.user_menu_link
     assert_equal true, @plugin.admin_navbar_link
+    assert_equal false, @plugin.uninstallable?
 
     assert_equal "0.0.0", @plugin1.version
     assert_equal "dar", @plugin1.name

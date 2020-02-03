@@ -22,7 +22,7 @@ module Admin
     end
 
     def destroy
-      if @plugin.deleteable?
+      if @plugin.uninstallable?
         FileUtils.rm_rf(@plugin.source_path)
       end
       Homeland.reboot

@@ -10,6 +10,8 @@ class PluginLoadTest < ActiveSupport::TestCase
     assert_equal "Test plugin", plugin.display_name
     assert_equal "Plugin for Homeland development test.", plugin.description
     assert_equal "0.0.0", plugin.version
+    assert_equal Rails.root.join("plugins", "test").to_s, plugin.source_path
+    assert_equal true, plugin.uninstallable?
   end
 
   test "I18n load paths" do

@@ -62,6 +62,7 @@ module Homeland
       @plugins << plugin
       @sorted_plugins = nil
       plugin.version ||= "0.0.0"
+      plugin.source_path = File.dirname(caller[0])
       plugin
     end
 

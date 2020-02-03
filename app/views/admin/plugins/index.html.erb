@@ -9,7 +9,7 @@
   <% Homeland.plugins.each do |plugin| %>
     <li class="list-group-item clearfix">
       <%= icon_tag("plug") %><strong><%= link_to plugin.display_name, admin_plugin_path(plugin.name) %></strong> <span class="text-gray"><%= plugin.version %></span>
-      <% if plugin.deleteable? %>
+      <% if plugin.uninstallable? %>
         <%= link_to "卸载", admin_plugin_path(plugin.name), data: { method: :delete, confirm: "确定要卸载这个插件吗？", confirm_with: "卸载中..." }, class: "pull-right" %>
       <% end %>
     </li>

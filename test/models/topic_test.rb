@@ -156,6 +156,7 @@ class TopicTest < ActiveSupport::TestCase
   test "#notify_topic_node_changed" do
     topic = create(:topic, user: user)
     new_node = create(:node)
+    admin = create(:admin)
 
     Topic.notify_topic_node_changed(topic.id, new_node.id)
     last_notification = user.notifications.unread.where(notify_type: "node_changed").first
@@ -165,18 +166,18 @@ class TopicTest < ActiveSupport::TestCase
     assert_equal new_node.id, last_notification.second_target_id
 
     # on save callback, with admin_editing no node_id changed
-    topic.admin_editing = true
+    Current.stubs(:user).returns(admin)
     Topic.expects(:notify_topic_node_changed).never
     topic.save
 
     # on save callback, with admin_editing and node_id_changed
-    topic.admin_editing = true
+    Current.stubs(:user).returns(admin)
     topic.node_id = new_node.id
     Topic.stubs(:notify_topic_node_changed).once
     topic.save
 
     # on save callback, without admin_editing
-    topic.admin_editing = false
+    Current.stubs(:user).returns(user)
     topic.node_id = new_node.id
     Topic.expects(:notify_topic_node_changed).never
     topic.save
@@ -189,7 +190,8 @@ class TopicTest < ActiveSupport::TestCase
   end
 
   test ".ban! with reason" do
-    User.stubs(:current).returns(user)
+    admin = create(:admin)
+    Current.stubs(:user).returns(admin)
     topic.ban!(reason: "Block this topic")
     topic.reload
     assert_equal true, topic.ban?
@@ -214,9 +216,10 @@ class TopicTest < ActiveSupport::TestCase
   end
 
   test ".excellent! / .unexcellent!" do
+    admin = create(:admin)
     topic = create(:topic, user: user)
 
-    User.stubs(:current).returns(user)
+    Current.stubs(:user).returns(user)
     assert_changes -> { Reply.where(action: "excellent", user: user).count }, 1 do
       topic.excellent!
     end

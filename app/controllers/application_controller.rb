@@ -4,6 +4,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery prepend: true
   helper_method :turbolinks_app?, :turbolinks_ios?, :turbolinks_app_version
+
+  include SetCurrentInfo
   include Homeland::UserNotificationHelper
 
   # Addition contents for etag
@@ -31,7 +33,6 @@ class ApplicationController < ActionController::Base
       devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(*User::ACCESSABLE_ATTRS) }
     end
 
-    User.current = current_user
     cookies.signed[:user_id] ||= current_user.try(:id)
 
     # hit unread_notify_count

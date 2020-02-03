@@ -5,7 +5,7 @@ class Topic < ApplicationRecord
   include Topic::Actions, Topic::AutoCorrect, Topic::Search, Topic::Notify, Topic::RateLimit
 
   # 临时存储检测用户是否读过的结果
-  attr_accessor :read_state, :admin_editing
+  attr_accessor :read_state
 
   belongs_to :user, inverse_of: :topics, counter_cache: true, required: false
   belongs_to :team, counter_cache: true, required: false

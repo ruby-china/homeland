@@ -11,7 +11,7 @@ class Topic
 
       def ban!(reason: "")
         transaction do
-          update!(grade: :ban, admin_editing: true)
+          update!(grade: :ban)
           if reason
             Reply.create_system_event!(action: "ban", topic_id: self.id, body: reason)
           end

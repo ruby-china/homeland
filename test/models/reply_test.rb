@@ -207,7 +207,7 @@ class ReplyTest < ActiveSupport::TestCase
 
   test "#create_system_event!" do
     # should create system event with empty body
-    User.stubs(:current).returns(user)
+    Current.stubs(:user).returns(user)
     topic = create :topic
     reply = Reply.create_system_event!(topic: topic, action: "bbb")
     assert_equal false, reply.new_record?

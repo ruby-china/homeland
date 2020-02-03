@@ -87,8 +87,6 @@ class TopicsController < ApplicationController
   end
 
   def update
-    @topic.admin_editing = true if current_user.admin?
-
     if can?(:change_node, @topic)
       # 锁定接点的时候，只有管理员可以修改节点
       @topic.node_id = topic_params[:node_id]

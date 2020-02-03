@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "homeland/version"
+require "homeland/plugin"
 
 module Homeland
   class << self
@@ -59,6 +60,14 @@ module Homeland
       @plugins << plugin
       @sorted_plugins = nil
       plugin
+    end
+
+    def boot
+      ActiveSupport.on_load(:after_initialize) do
+        puts "=> Booting Homeland"
+        Homeland::Plugin.boot
+        puts "=> Plugins: #{Homeland.plugins.collect(&:name).join(", ")}"
+      end
     end
   end
 end

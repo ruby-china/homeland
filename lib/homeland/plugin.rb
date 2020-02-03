@@ -31,5 +31,17 @@ module Homeland
 
     # add RSpec test path
     attr_accessor :spec_path
+
+    class << self
+      # Booting Homeland plugins
+      def boot
+        Dir.glob(Rails.root.join("plugins", "*")).each do |path|
+          boot_file = File.join(path, "boot.rb")
+          if File.exists?(boot_file)
+            require boot_file
+          end
+        end
+      end
+    end
   end
 end

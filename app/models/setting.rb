@@ -3,7 +3,7 @@
 # RailsSettings Model
 class Setting < RailsSettings::Base
   # keys that allow update in admin
-  KEYS_IN_ADMIN = %w[
+  EDITABLE_KEYS = %w[
     navbar_brand_html
     default_locale
     auto_locale
@@ -144,6 +144,10 @@ class Setting < RailsSettings::Base
   field :google_analytics_key, default: ""
 
   class << self
+    def editable_keys
+      EDITABLE_KEYS
+    end
+
     def protocol
       self.https? ? "https" : "http"
     end

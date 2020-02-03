@@ -98,7 +98,12 @@ Rails.application.routes.draw do
   get "/search/users", to: "search#users", as: "search_users"
 
   namespace :admin do
-    root to: "home#index", as: "root"
+    root to: "dashboards#index", as: "root"
+    resource :dashboards do
+      collection do
+        post :reboot
+      end
+    end
     resources :site_configs
     resources :replies
     resources :topics do
@@ -120,6 +125,7 @@ Rails.application.routes.draw do
     resources :locations
     resources :applications
     resources :stats
+    resources :plugins
   end
 
   get "api", to: "home#api", as: "api"

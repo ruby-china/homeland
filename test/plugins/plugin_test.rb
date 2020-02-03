@@ -36,7 +36,7 @@ class Homeland::PluginTest < ActiveSupport::TestCase
     assert_equal true, @plugin.user_menu_link
     assert_equal true, @plugin.admin_navbar_link
 
-    assert_nil @plugin1.version
+    assert_equal "0.0.0", @plugin1.version
     assert_equal "dar", @plugin1.name
     assert_equal "Dar bar", @plugin1.display_name
     assert_equal false, @plugin1.navbar_link

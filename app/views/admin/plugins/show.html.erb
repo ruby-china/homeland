@@ -1,0 +1,17 @@
+<div class="card-title">
+  <div><%= icon_tag("plug") %> <%= @plugin.display_name %></div>
+  <div class="counter"><%= @plugin.version %></div>
+  <div class="actions">
+    <%= link_to "返回", admin_plugins_path, class: "btn btn-default btn-sm" %>
+  </div>
+</div>
+<div class="form">
+  <% if @plugin.url %>
+    <div class="form-group">
+      <%= link_to @plugin.url %>
+    </div>
+  <% end %>
+  <p>
+    <%= @plugin.description %>
+  </p>
+</div>

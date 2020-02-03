@@ -14,6 +14,9 @@ module Homeland
     # Display name of plugin
     attr_accessor :display_name
 
+    # Project url
+    attr_accessor :url
+
     # set true if plugin link wants list in top navbar
     attr_accessor :navbar_link
 
@@ -31,5 +34,25 @@ module Homeland
 
     # add RSpec test path
     attr_accessor :spec_path
+
+    def source_path
+      @source_path ||= Rails.root.join("plugins", self.name)
+    end
+
+    def deleteable?
+      File.exists?(source_path)
+    end
+
+    class << self
+      # Booting Homeland plugins
+      def boot
+        Dir.glob(Rails.root.join("plugins", "*")).each do |path|
+          boot_file = File.join(path, "boot.rb")
+          if File.exists?(boot_file)
+            require boot_file
+          end
+        end
+      end
+    end
   end
 end

@@ -3,7 +3,7 @@
 <% end %>
 <h1><%= t("admin.site_configs.settings") %></h1>
 <ul class="list-group">
-  <% Setting::KEYS_IN_ADMIN.each do |key| %>
+  <% Setting.editable_keys.each do |key| %>
     <li class="list-group-item">
       <div class="mb-1"><%= icon_tag("gear") %><a href="<%= edit_admin_site_config_path(key) %>" style="font-size: 15px; color: #2162D2;"><%= key %></a></div>
       <div class="text-gray"><%= t("setting.#{key}") %></div>

@@ -38,5 +38,7 @@ spec/examples.txt
 .byebug_history
 .ruby-version
 /storage/*
+/plugins/*
+!/plugins/test/
 app.local.env
 *.tmp

@@ -1,0 +1,11 @@
+<div class="card-title">安装插件</div>
+<%= form_for User.new, url: admin_plugins_path, method: :post, html: { enctype: "multipart/form-data" } do |f| %>
+  <div class="form-group">
+    <label class="control-label">选择插件包</label>
+    <input name="file" type="file" accept="*.zip" class="form-control" />
+    <div class="form-text">请选择 Homeland 的插件 zip 包，并安装。请勿安装非 Homeland 插件，否则会导致无法预期的问题！</div>
+  </div>
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">安装</button>
+  </div>
+<% end %>

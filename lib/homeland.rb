@@ -4,6 +4,8 @@ require "homeland/version"
 require "homeland/plugin"
 
 module Homeland
+  cattr_reader :boot_at
+
   class << self
     def file_store
       @file_store ||= ActiveSupport::Cache::FileStore.new(Rails.root.join("tmp/cache"))
@@ -67,7 +69,12 @@ module Homeland
         puts "=> Booting Homeland" unless Rails.env.test?
         Homeland::Plugin.boot
         puts "=> Plugins: #{Homeland.plugins.collect(&:name).join(", ")}" unless Rails.env.test?
+        @@boot_at = Time.now
       end
+    end
+
+    def reboot
+      `touch #{Rails.root.join("tmp/restart.txt")}`
     end
   end
 end

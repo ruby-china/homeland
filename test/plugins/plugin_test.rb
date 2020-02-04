@@ -54,7 +54,7 @@ class Homeland::PluginTest < ActiveSupport::TestCase
     refute_equal nil, Homeland.plugins.sort.find { |p| p.name == "foo" }
     refute_equal nil, Homeland.plugins.sort.find { |p| p.name == "dar" }
 
-    Setting.stub(:modules, ["home", "topic", "jobs", "wiki", "site", "note", "team", "github", "editor.code"]) do
+    Setting.stub(:modules, ["home", "topic", "wiki", "site", "note", "team", "github", "editor.code"]) do
       assert_kind_of Array, Homeland.plugins.sort
     end
   end

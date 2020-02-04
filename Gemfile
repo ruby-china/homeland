@@ -121,7 +121,6 @@ gem "exception-track"
 gem "status-page"
 
 # Homeland Plugins
-gem "homeland-jobs"
 gem "homeland-note"
 gem "homeland-press"
 gem "homeland-site"

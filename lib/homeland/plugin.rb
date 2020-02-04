@@ -45,6 +45,12 @@ module Homeland
       Setting.modules.index(self.name).to_i <=> Setting.modules.index(other.name).to_i
     end
 
+    def destroy
+      return false unless self.uninstallable?
+      FileUtils.rm_rf(self.source_path)
+      true
+    end
+
     class << self
       # Booting Homeland plugins
       def boot
@@ -54,6 +60,31 @@ module Homeland
             require boot_file
           end
         end
+
+        # Must run on after Rails initialize
+        # Because of the plugins wants to override the autoload classes.
+        # ActiveSupport.on_load(:after_initialize) do
+        ActiveSupport.on_load(:after_initialize) do
+          Homeland.plugins.each do |plugin|
+            begin
+              require plugin.name
+            rescue LoadError
+            end
+          end
+        end
+      end
+
+      # Install a new plugin via zip rack_file
+      # Homeland::Plugin.install(params[:file])
+      def install(zip_file)
+        tmp = zip_file.tempfile
+        FileUtils.move tmp.path, Rails.root.join("plugins")
+        basename = File.basename(tmp.path)
+        zip_filename = Rails.root.join("plugins", basename)
+        `cd plugins; unzip -o #{zip_filename}`
+        true
+      ensure
+        FileUtils.rm_f(zip_filename) if zip_filename
       end
     end
   end

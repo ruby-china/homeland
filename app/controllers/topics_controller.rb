@@ -54,7 +54,6 @@ class TopicsController < ApplicationController
     @user_like_reply_ids = current_user&.like_reply_ids_by_replies(@replies) || []
 
     check_current_user_status_for_topic
-    set_special_node_active_menu
   end
 
   def new
@@ -179,14 +178,5 @@ class TopicsController < ApplicationController
       @has_followed = current_user.follow_topic?(@topic)
       # 是否收藏
       @has_favorited = current_user.favorite_topic?(@topic)
-    end
-
-    def set_special_node_active_menu
-      if Setting.has_module?(:jobs)
-        # FIXME: Monkey Patch for homeland-jobs
-        if @node&.id == 25
-          @current = ["/jobs"]
-        end
-      end
     end
 end

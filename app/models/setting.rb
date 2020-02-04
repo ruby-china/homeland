@@ -42,7 +42,7 @@ class Setting < RailsSettings::Base
 
   # = Basic
   field :app_name, default: (ENV["app_name"] || "Homeland"), readonly: true
-  # Plugin module, [topic,home,wiki,site,note,team,github,editor.code,press,jobs]
+  # Plugin module, [topic,home,wiki,site,note,team,github,editor.code,press]
   field :modules, default: (ENV["modules"] || "all"), type: :array, readonly: true
   # User profile module default: all [company,twitter,website,tagline,location,alipay,paypal,qq,weibo,wechat,douban,dingding,aliwangwang,facebook,instagram,dribbble,battle_tag,psn_id,steam_id]
   field :profile_fields, default: (ENV["profile_fields"] || "all"), type: :array, readonly: true
@@ -144,10 +144,6 @@ class Setting < RailsSettings::Base
   field :google_analytics_key, default: ""
 
   class << self
-    def modules
-      ["home", "topic", "jobs", "wiki", "site", "note", "team", "github", "editor.code"]
-    end
-
     def editable_keys
       EDITABLE_KEYS
     end

@@ -10,23 +10,21 @@ module Admin
     end
 
     def create
-      tmp = params[:file].tempfile
-      FileUtils.move tmp.path, Rails.root.join("plugins")
-      basename = File.basename(tmp.path)
-      zip_filename = Rails.root.join("plugins", basename)
-      `cd plugins; unzip -o #{zip_filename}`
-      Homeland.reboot
-      redirect_to admin_plugins_path, notice: "插件安装成功，如列表没有更新，请再次刷新页面。"
-    ensure
-      FileUtils.rm_f(zip_filename)
+      if Homeland::Plugin.install(params[:file])
+        Homeland.reboot
+        redirect_to admin_plugins_path, notice: "插件安装成功，如列表没有更新，请再次刷新页面。"
+      else
+        redirect_to admin_plugins_path, alert: "插件安装失败，请检查 ZIP 包确定是否正确。"
+      end
     end
 
     def destroy
-      if @plugin.uninstallable?
-        FileUtils.rm_rf(@plugin.source_path)
+      if @plugin.destroy
+        Homeland.reboot
+        redirect_to admin_plugins_path, notice: "卸载成功，如列表没有更新，请再次刷新页面"
+      else
+        redirect_to admin_plugins_path, alert: "卸载失败。"
       end
-      Homeland.reboot
-      redirect_to admin_plugins_path, notice: "卸载成功，如列表没有更新，请再次刷新页面"
     end
 
     private

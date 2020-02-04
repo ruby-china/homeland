@@ -64,12 +64,11 @@ module Homeland
     end
 
     def boot
-      ActiveSupport.on_load(:after_initialize) do
-        puts "=> Booting Homeland" unless Rails.env.test?
-        Homeland::Plugin.boot
-        puts "=> Plugins: #{Homeland.plugins.collect(&:name).join(", ")}" unless Rails.env.test?
-        @@boot_at = Time.now
-      end
+      puts "=> Booting Homeland" unless Rails.env.test?
+      Homeland::Plugin.boot
+      puts "=> Plugins: #{Homeland.plugins.collect(&:name).join(", ")}" unless Rails.env.test?
+      @@boot_at = Time.now
+      # end
     end
 
     def reboot

@@ -172,8 +172,6 @@ GEM
       activesupport (>= 4.2.0)
     hashie (3.6.0)
     hiredis (0.6.3)
-    homeland-jobs (0.3.1)
-      rails
     homeland-note (0.2.2)
       rails
     homeland-press (0.4.2)
@@ -469,7 +467,6 @@ DEPENDENCIES
   font-awesome-rails
   form-select
   hiredis
-  homeland-jobs
   homeland-note
   homeland-press
   homeland-site
@@ -524,3 +521,5 @@ DEPENDENCIES
   twemoji
   uglifier
 
+BUNDLED WITH
+   2.1.4

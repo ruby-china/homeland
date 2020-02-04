@@ -15,17 +15,6 @@
         <div class="summary<%= ' collapse' if node.collapse_summary? %>" id="node-summary">
           <%= sanitize_markdown node.summary_html %>
         </div>
-
-        <% if node.name == '招聘' %>
-          <hr />
-          <ul class="nav nav-pills prefix-filter">
-            <% cache "prefixes", expires_in: 7.days do %>
-              <% Location.hot.limit(12).each do |prefix| %>
-                <li class="nav-item"><%= link_to prefix.name, homeland_jobs.jobs_path(location: prefix.name), class: "nav-link" %></li>
-              <% end %>
-            <% end %>
-          </ul>
-        <% end %>
       <% else %>
         <%= render 'node_selector' %>
         <ul class="filter nav nav-pills">
@@ -40,17 +29,17 @@
             <a href="<%= main_app.popular_topics_path %>" data-turbolinks-action="replace">优质帖子</a>
           </li>
           <% if admin? %>
-          <li class="<%= ' active' if action_name == 'banned' %>">
-            <%= link_to('已屏蔽', main_app.banned_topics_path, data: { 'turbolinks-action': 'replace' }) %>
-          </li>
+            <li class="<%= ' active' if action_name == 'banned' %>">
+              <%= link_to('已屏蔽', main_app.banned_topics_path, data: { 'turbolinks-action': 'replace' }) %>
+            </li>
           <% end %>
           <% if !mobile? %>
-          <li class="<%= ' active' if action_name == 'no_reply' %>">
-            <%= link_to('无人问津', main_app.no_reply_topics_path, data: { 'turbolinks-action': 'replace' }) %>
-          </li>
-          <li class="<%= ' active' if action_name == 'last_reply' %>">
-            <%= link_to('最新回复', main_app.last_reply_topics_path, data: { 'turbolinks-action': 'replace' }) %>
-          </li>
+            <li class="<%= ' active' if action_name == 'no_reply' %>">
+              <%= link_to('无人问津', main_app.no_reply_topics_path, data: { 'turbolinks-action': 'replace' }) %>
+            </li>
+            <li class="<%= ' active' if action_name == 'last_reply' %>">
+              <%= link_to('最新回复', main_app.last_reply_topics_path, data: { 'turbolinks-action': 'replace' }) %>
+            </li>
           <% end %>
           <li class="<%= ' active' if action_name == 'last' %>">
             <%= link_to('最新发布', main_app.last_topics_path, data: { 'turbolinks-action': 'replace' }) %>

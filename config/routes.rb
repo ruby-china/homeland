@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   match "/uploads/:path(![large|lg|md|sm|xs])", to: "home#uploads", via: :get, constraints: {
     path: /[\w\d\.\/\-]+/i
   }
+  get "status", to: "home#status"
 
   devise_for :users, path: "account", controllers: {
     registrations: :account,
@@ -193,7 +194,6 @@ Rails.application.routes.draw do
   end
 
   mount Notifications::Engine, at: "notifications"
-  mount StatusPage::Engine, at: "/"
 
   # WARRING! 请保持 User 的 routes 在所有路由的最后，以便于可以让用户名在根目录下面使用，而又不影响到其他的 routes
   # 比如 http://localhost:3000/huacnlee

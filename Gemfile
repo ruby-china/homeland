@@ -118,7 +118,6 @@ gem "puma"
 gem "rack-cors", require: "rack/cors"
 
 gem "exception-track"
-gem "status-page"
 
 # Homeland Plugins
 gem "homeland-note"

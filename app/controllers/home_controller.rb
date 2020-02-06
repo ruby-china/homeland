@@ -22,14 +22,14 @@ class HomeController < ApplicationController
     end
   end
 
-  def api
-    redirect_to "/api-doc/"
-  end
-
   def error_404
     render_404
   end
 
   def markdown
+  end
+
+  def status
+    render plain: "OK #{Time.now.iso8601}"
   end
 end

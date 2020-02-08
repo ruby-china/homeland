@@ -72,7 +72,7 @@ module Homeland
     end
 
     def reboot
-      `touch #{Rails.root.join("tmp/restart.txt")}`
+      FileUtils.touch(Rails.root.join("tmp/restart.txt"))
     end
   end
 end

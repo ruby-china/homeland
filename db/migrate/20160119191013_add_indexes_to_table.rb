@@ -6,9 +6,6 @@ class AddIndexesToTable < ActiveRecord::Migration[4.2]
     add_index :replies, :deleted_at
     add_index :replies, [:topic_id, :deleted_at]
 
-    add_index :sites, :deleted_at
-    add_index :sites, [:site_node_id, :deleted_at]
-
     remove_index :users, :location
     add_index :users, :location
 

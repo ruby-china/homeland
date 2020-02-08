@@ -122,7 +122,6 @@ gem "exception-track"
 # Homeland Plugins
 gem "homeland-note"
 gem "homeland-press"
-gem "homeland-site"
 gem "homeland-wiki"
 
 gem "bootsnap"

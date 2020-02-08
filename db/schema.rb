@@ -250,28 +250,6 @@ ActiveRecord::Schema.define(version: 2018_09_12_075805) do
     t.index ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true
   end
 
-  create_table "site_nodes", id: :serial, force: :cascade do |t|
-    t.string "name", null: false
-    t.integer "sort", default: 0, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["sort"], name: "index_site_nodes_on_sort"
-  end
-
-  create_table "sites", id: :serial, force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "site_node_id"
-    t.string "name", null: false
-    t.string "url", null: false
-    t.string "desc"
-    t.datetime "deleted_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["deleted_at"], name: "index_sites_on_deleted_at"
-    t.index ["site_node_id"], name: "index_sites_on_site_node_id"
-    t.index ["url"], name: "index_sites_on_url"
-  end
-
   create_table "team_users", id: :serial, force: :cascade do |t|
     t.integer "team_id", null: false
     t.integer "user_id", null: false

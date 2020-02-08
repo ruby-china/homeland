@@ -176,9 +176,6 @@ GEM
       rails
     homeland-press (0.4.2)
       rails
-    homeland-site (0.3.3)
-      form-select (>= 0.2.0)
-      rails
     homeland-wiki (0.4.4)
       rails
     html-pipeline (2.12.3)
@@ -467,7 +464,6 @@ DEPENDENCIES
   hiredis
   homeland-note
   homeland-press
-  homeland-site
   homeland-wiki
   html-pipeline
   html-pipeline-auto-correct

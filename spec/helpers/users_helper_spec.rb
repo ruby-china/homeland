@@ -36,7 +36,7 @@ describe UsersHelper, type: :helper do
 
   describe "user_avatar_tag" do
     it "should work if user not exist" do
-      expect(user_avatar_tag(nil)).to eq image_tag("avatar/md.png", class: "media-object avatar-48")
+      expect(user_avatar_tag(nil)).to eq ""
     end
 
     it "should work if user exists" do
@@ -53,7 +53,7 @@ describe UsersHelper, type: :helper do
     end
 
     it "should work with different size" do
-      expect(user_avatar_tag(nil, :lg)).to eq image_tag("avatar/lg.png", class: "media-object avatar-96")
+      expect(user_avatar_tag(nil, :lg)).to eq ""
     end
 
     it "should work with timestamp param" do

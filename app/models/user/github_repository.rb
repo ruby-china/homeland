@@ -22,10 +22,10 @@ class User
       "github-repos:#{github}:1"
     end
 
-    def github_repo_api_url
+    def github_repos_path
       github_login = self.github || self.login
       resource_name = organization? ? "orgs" : "users"
-      "https://api.github.com/#{resource_name}/#{github_login}/repos?type=owner&sort=pushed&client_id=#{Setting.github_token}&client_secret=#{Setting.github_secret}"
+      "/#{resource_name}/#{github_login}/repos?type=owner&sort=pushed"
     end
 
     module ClassMethods
@@ -33,16 +33,18 @@ class User
         user = User.find_by(id: user_id)
         return unless user
 
-        url = user.github_repo_api_url
         begin
-          json = Timeout.timeout(10) { open(url).read }
+          conn = Faraday.new("https://api.github.com") do |conn|
+            conn.basic_auth Setting.github_token, Setting.github_secret
+          end
+          resp = conn.get(user.github_repos_path)
         rescue StandardError => e
           Rails.logger.error("GitHub Repositiory fetch Error: #{e}")
           Homeland.file_store.write(user.github_repositories_cache_key, [], expires_in: 1.minutes)
           return
         end
 
-        items = JSON.parse(json)
+        items = JSON.parse(resp.body)
         items = items.collect do |a1|
           {
             name: a1["name"],

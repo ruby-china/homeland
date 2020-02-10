@@ -32,7 +32,7 @@
     <td><%= user_name_tag(user) %></td>
     <td><%= user.name %></td>
     <td><%= user.email %></td>
-    <td><%= user.created_at.to_date %></td>
+    <td><%= user.created_at&.to_date %></td>
     <td>
       <%= link_to '', edit_admin_user_path(user.id), class: "fa fa-pencil" %>
     </td>

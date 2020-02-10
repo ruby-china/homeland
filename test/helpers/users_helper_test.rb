@@ -33,7 +33,7 @@ class UsersHelperTest < ActionView::TestCase
   end
 
   test "user_avatar_tag should work if user not exist" do
-    assert_equal image_tag("avatar/md.png", class: "media-object avatar-48"), user_avatar_tag(nil)
+    assert_equal "", user_avatar_tag(nil)
   end
 
   test "user_avatar_tag should work if user exists" do
@@ -50,7 +50,7 @@ class UsersHelperTest < ActionView::TestCase
   end
 
   test "user_avatar_tag should work with different size" do
-    assert_equal image_tag("avatar/lg.png", class: "media-object avatar-96"), user_avatar_tag(nil, :lg)
+    assert_equal "", user_avatar_tag(nil, :lg)
   end
 
   test "user_avatar_tag should work with timestamp param" do

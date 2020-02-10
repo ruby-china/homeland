@@ -43,7 +43,7 @@ module UsersHelper
     width     = user_avatar_width_for_size(version)
     img_class = "media-object avatar-#{width}"
 
-    return image_tag("avatar/#{version}.png", class: img_class) if user.blank?
+    return "" if user.blank?
 
     img =
       if user.avatar?

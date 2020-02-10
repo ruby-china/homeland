@@ -60,7 +60,7 @@ _这里用到 RubyGem [oauth2](https://github.com/intridea/oauth2)_
 require "oauth2"
 client = OAuth2::Client.new('client id', 'secret', site: 'https://ruby-china.org')
 access_token = client.password.get_token('username', 'password')
-res = Faraday.get("https://ruby-china.org/api/v3/hello.json?access_token=#{access_token.token}")
+res = access_token.get("/api/v3/hello.json")
 puts res.status
 puts res.body
 ```

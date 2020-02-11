@@ -189,4 +189,15 @@ describe Setting, type: :model do
       expect(Setting.share_allow_sites).to eq ["weibo", "facebook", "twitter"]
     end
   end
+
+  describe "editor_languages" do
+    it "should work" do
+      Setting.editor_languages, = <<~LINES
+      rb
+      py
+      go
+      LINES
+      expect(Setting.editor_languages).to eq ["rb", "py", "go"]
+    end
+  end
 end

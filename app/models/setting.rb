@@ -37,6 +37,7 @@ class Setting < RailsSettings::Base
     recaptcha_secret
     twitter_id
     share_allow_sites
+    editor_languages
   ]
 
   # = Basic
@@ -133,6 +134,7 @@ class Setting < RailsSettings::Base
   field :ban_words_on_reply, default: [], type: :array, separator: /[\n]+/
   field :newbie_notices, default: ""
   field :tips, default: [], type: :array, separator: /[\n]+/
+  field :editor_languages, default: %w[rb go js py java rs php css html yml json xml], type: :array, separator: /[\s,]+/
 
   # = ReCaptcha
   field :use_recaptcha, default: false, type: :boolean

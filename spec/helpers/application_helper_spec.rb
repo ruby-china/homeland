@@ -114,7 +114,7 @@ describe ApplicationHelper, type: :helper do
 
   describe "insert_code_menu_items_tag" do
     it "should work" do
-      expect(helper.insert_code_menu_items_tag).to include('data-lang="ruby"')
+      expect(helper.insert_code_menu_items_tag).to include('data-lang="rb"')
     end
   end
 

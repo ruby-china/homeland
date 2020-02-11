@@ -143,11 +143,21 @@ class SettingTest < ActiveSupport::TestCase
   end
 
   test "share_allow_sites" do
-    Setting.share_allow_sites, = <<~LINES
+    Setting.share_allow_sites = <<~LINES
     weibo
     facebook
     twitter
     LINES
     assert_equal ["weibo", "facebook", "twitter"], Setting.share_allow_sites
+  end
+
+  test "editor_languages" do
+    Setting.editor_languages = <<~LINES
+    rb
+    html
+    js
+    LINES
+
+    assert_equal ["rb", "html", "js"], Setting.editor_languages
   end
 end

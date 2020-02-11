@@ -70,25 +70,15 @@ module ApplicationHelper
     agent_str =~ Regexp.new(MOBILE_USER_AGENTS)
   end
 
-  # 可按需修改
-  LANGUAGES_LISTS = {
-    "Ruby"                         => "ruby",
-    "HTML / ERB"                   => "erb",
-    "CSS / SCSS"                   => "scss",
-    "JavaScript"                   => "js",
-    "YAML</i>"                     => "yml",
-    "Go"                           => "go",
-    "Nginx / Redis <i>(.conf)</i>" => "conf",
-    "Python"                       => "python",
-    "PHP"                          => "php",
-    "Java"                         => "java",
-    "Erlang"                       => "erlang",
-    "Shell / Bash"                 => "shell"
-  }
-
   def insert_code_menu_items_tag
-    lang_list = LANGUAGES_LISTS.map { |k, l| link_to raw(k), "#", class: "dropdown-item", data: { lang: l } }
-    raw lang_list.join("")
+    dropdown_items = []
+    Setting.editor_languages.each do |lang|
+      lexer = Rouge::Lexer.find(lang)
+      if lexer
+        dropdown_items << link_to(lexer.title, "#", class: "dropdown-item", data: { lang: lang })
+      end
+    end
+    raw dropdown_items.join("")
   end
 
   def random_tips

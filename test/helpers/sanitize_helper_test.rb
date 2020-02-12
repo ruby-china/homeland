@@ -77,6 +77,11 @@ class SanitizeHelperTest < ActionView::TestCase
 
     html = '<iframe width="560" height="315" src="//www.youku.com/XMjUzMTk4NTk2MA==" class="embed" frameborder="0" allowfullscreen=""></iframe>'
     assert_equal "", sanitize_markdown(html)
+
+    html = '<span class="embed-responsive embed-responsive-16by9">
+    <iframe width="560" height="315" src="//player.bilibili.com/player.html?aid=86873549" class="embed" frameborder="0" allowfullscreen=""></iframe>
+    </span>'
+    assert_equal html, sanitize_markdown(html)
   end
 
   test "img filter bad" do

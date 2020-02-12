@@ -397,7 +397,15 @@ class Homeland::MarkdownTest < ActiveSupport::TestCase
     end
 
     assert_markdown_render "<p><span class=\"embed-responsive embed-responsive-16by9\"><iframe class=\"embed-responsive-item\" src=\"//player.youku.com/embed/XMjUzMTk4NTk2MA==\" allowfullscreen></iframe></span></p>" do
-      %(http://v.youku.com/v_show/id_XMjUzMTk4NTk2MA==.html?from=y1.3-idx-beta-1519-23042.223465.1-1&spm=a2hww.20023042.m_223465.5~5~5~5~5~5~A#paction)
+      %(https://v.youku.com/v_show/id_XMjUzMTk4NTk2MA==.html?from=y1.3-idx-beta-1519-23042.223465.1-1&spm=a2hww.20023042.m_223465.5~5~5~5~5~5~A#paction)
+    end
+
+    assert_markdown_render "<p><span class=\"embed-responsive embed-responsive-16by9\"><iframe class=\"embed-responsive-item\" src=\"//player.bilibili.com/player.html?aid=86873549\" allowfullscreen></iframe></span></p>" do
+      %(https://www.bilibili.com/video/av86873549)
+    end
+
+    assert_markdown_render "<p><span class=\"embed-responsive embed-responsive-16by9\"><iframe class=\"embed-responsive-item\" src=\"//player.bilibili.com/player.html?aid=86873549\" allowfullscreen></iframe></span></p>" do
+      %(https://bilibili.com/video/av86873549)
     end
   end
 

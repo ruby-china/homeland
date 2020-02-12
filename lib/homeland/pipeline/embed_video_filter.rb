@@ -4,9 +4,9 @@ module Homeland
   class Pipeline
     class EmbedVideoFilter < HTML::Pipeline::TextFilter
       YOUTUBE_URL_REGEXP = %r{(\s|^|<div>|<br>)(https?://)(www.)?(youtube\.com/watch\?v=|youtu\.be/|youtube\.com/watch\?feature=player_embedded&v=)([A-Za-z0-9_\-]*)(\&\S+)?(\?\S+)?}
-      YOUKU_URL_REGEXP   = %r{(\s|^|<div>|<br>)(http?://)(v\.youku\.com/v_show/id_)([a-zA-Z0-9\-_\=]*)(\.html)(\&\S+)?(\?\S+)?}
-      VIMEO_URL_REGEXP   = %r{(\s|^|<div>|<br>)(https?://)(vimeo\.com/)([0-9]+)(\&\S+)?(\?\S+)?}
-      BILI_URL_REGEXP    = %r{(\s|^|<div>|<br>)(https?://)(bilibili\.com/video/av)([0-9]+)(\&\S+)?(\?\S+)?}
+      YOUKU_URL_REGEXP   = %r{(\s|^|<div>|<br>)(https?://)(v\.youku\.com/v_show/id_)([a-zA-Z0-9\-_\=]*)(\.html)(\&\S+)?(\?\S+)?}
+      VIMEO_URL_REGEXP   = %r{(\s|^|<div>|<br>)(https://)(vimeo\.com/)([0-9]+)(\&\S+)?(\?\S+)?}
+      BILI_URL_REGEXP    = %r{(\s|^|<div>|<br>)(https?://)(www.)?(bilibili\.com/video/av)([0-9]+)(\&\S+)?(\?\S+)?}
 
       def call
         wmode = context[:video_wmode]
@@ -38,10 +38,10 @@ module Homeland
           close_tag = Regexp.last_match(1) if ["<br>", "<div>"].include? Regexp.last_match(1)
           embed_tag(close_tag, src)
         end
-        
+
         @text.gsub!(BILI_URL_REGEXP) do
-          bili_id = Regexp.last_match(4)
-          src = "//player.bilibili.com/player.html?aid={bili_id}"
+          bili_id = Regexp.last_match(5)
+          src = "//player.bilibili.com/player.html?aid=#{bili_id}"
           close_tag = Regexp.last_match(1) if ["<br>", "<div>"].include? Regexp.last_match(1)
           embed_tag(close_tag, src)
         end

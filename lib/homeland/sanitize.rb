@@ -35,6 +35,11 @@ module Homeland
         valid_video_url = true
       end
 
+      # Bilibili
+      if node["src"].match?(%r{\A(?:http[s]{0,1}?:)?//player\.bilibili\.com/player\.html})
+        valid_video_url = true
+      end
+
       return unless valid_video_url
 
       # We're now certain that this is a YouTube embed, but we still need to run

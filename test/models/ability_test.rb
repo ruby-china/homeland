@@ -17,6 +17,16 @@ class AbilityTest < ActiveSupport::TestCase
     assert ability.can?(:manage, TeamUser)
   end
 
+  test "Maintainer manage Topic, Node" do
+    user = create :user, state: :maintainer
+    ability = Ability.new(user)
+    assert ability.can?(:manage, Topic)
+    assert ability.can?(:manage, Reply)
+    assert ability.can?(:manage, Section)
+    assert ability.can?(:manage, Node)
+    assert ability.can?(:create, Team)
+  end
+
   test "Vip manage wiki" do
     vip = create :vip
     ability = Ability.new(vip)

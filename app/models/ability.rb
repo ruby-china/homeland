@@ -16,6 +16,9 @@ class Ability
     elsif @user.vip?
       roles_for_members
       roles_for_vip
+    elsif @user.maintainer?
+      roles_for_members
+      roles_for_maintainer
     else
       roles_for_anonymous
     end
@@ -43,6 +46,15 @@ class Ability
     # Vip 用户权限
     def roles_for_vip
       can :create, Team
+    end
+
+    # 版主权限
+    def roles_for_maintainer
+      can :create, Team
+      can :manage, Node
+      can :manage, Section
+      can :manage, Topic
+      can :manage, Reply
     end
 
     def roles_for_topics

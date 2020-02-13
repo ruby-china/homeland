@@ -124,6 +124,11 @@ class UserTest < ActiveSupport::TestCase
     admin = User.new(state: :admin)
     assert_equal true, admin.admin?
     assert_equal false, user.admin?
+
+    Setting.stub(:admin_emails, %w[foobar@gmail.com]) do
+      user = User.new(email: "foobar@gmail.com")
+      assert true, user.admin?
+    end
   end
 
   test "wiki_editor?" do

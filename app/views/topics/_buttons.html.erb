@@ -5,7 +5,7 @@
     <%= topic_favorite_tag(@topic) %>
   <% end %>
 
-  <% if admin? %>
+  <% if can? :suggest, @topic %>
     <% if !@topic.suggested_at.blank? %>
     <%= link_to raw("<i class='fa fa-angle-double-up'></i> 取消"), unsuggest_admin_topic_path(@topic), method: :post, remote: true %>
     <% else %>
@@ -22,7 +22,6 @@
     <% end %>
   <% end %>
   <span class="pull-right opts">
-    <% if owner?(@topic) or admin? %>
     <% if can?(:close, @topic) %>
       <% if !@topic.closed? %>
         <%= link_to raw("<i class='fa fa-check'></i>"), action_topic_path(@topic, type: 'close'), method: 'post', title: "关闭讨论／问题已解决", remote: true, data: { toggle: 'tooltip' } %>
@@ -30,10 +29,12 @@
         <%= link_to raw("<i class='fa fa-undo'></i>"), action_topic_path(@topic, type: 'open'), method: 'post', title: "重新开启话题", remote: true, data: { toggle: 'tooltip' } %>
       <% end %>
     <% end %>
+
+    <% if can?(:edit, @topic) %>
     <%= link_to "", edit_topic_path(@topic), class: "fa fa-pencil", title: "修改本帖" %>
-      <% if can?(:destroy, @topic) %>
-      <%= link_to "", topic_path(@topic.id), method: :delete, remote: true, 'data-confirm': t("common.confirm_delete"), class: "fa fa-trash", title: "删除本帖" %>
-      <% end %>
+    <% end %>
+    <% if can?(:destroy, @topic) %>
+    <%= link_to "", topic_path(@topic.id), method: :delete, remote: true, 'data-confirm': t("common.confirm_delete"), class: "fa fa-trash", title: "删除本帖" %>
     <% end %>
   </span>
 </div>

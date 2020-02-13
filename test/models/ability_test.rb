@@ -21,6 +21,7 @@ class AbilityTest < ActiveSupport::TestCase
     user = create :user, state: :maintainer
     ability = Ability.new(user)
     assert ability.can?(:manage, Topic)
+    assert ability.can?(:lock_node, Topic)
     assert ability.can?(:manage, Reply)
     assert ability.can?(:manage, Section)
     assert ability.can?(:manage, Node)

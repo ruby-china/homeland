@@ -54,6 +54,7 @@ class Ability
       can :manage, Node
       can :manage, Section
       can :manage, Topic
+      can :lock_node, Topic
       can :manage, Reply
     end
 

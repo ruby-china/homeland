@@ -106,11 +106,11 @@ module Api
 
         raise AccessDenied unless can?(:update, @topic)
 
-        if @topic.lock_node == false || admin?
+        if @topic.lock_node == false || can?(:lock_node, @topic)
           # 锁定接点的时候，只有管理员可以修改节点
           @topic.node_id = params[:node_id]
 
-          if admin? && @topic.node_id_changed?
+          if @topic.node_id_changed? || can?(:lock_node, @topic)
             # 当管理员修改节点的时候，锁定节点
             @topic.lock_node = true
           end

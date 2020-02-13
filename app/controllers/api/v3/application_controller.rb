@@ -13,7 +13,7 @@ module Api
       skip_before_action :verify_authenticity_token
 
       helper_method :can?, :current_user, :current_ability, :meta
-      helper_method :admin?, :owner?, :markdown, :raw
+      helper_method :owner?, :markdown, :raw
 
       # 参数值不在允许的范围内
       # HTTP Status 400

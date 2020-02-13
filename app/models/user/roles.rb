@@ -17,12 +17,12 @@ class User
 
     # 是否有 Wiki 维护权限
     def wiki_editor?
-      self.admin? || self.vip?
+      self.admin? || self.maintainer? || self.vip?
     end
 
     # 回帖大于 150 的才有酷站的发布权限
     def site_editor?
-      self.admin? || replies_count >= 100
+      self.admin? || self.maintainer? || replies_count >= 100
     end
 
     # 是否能发帖

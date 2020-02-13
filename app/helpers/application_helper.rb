@@ -27,6 +27,7 @@ module ApplicationHelper
     flash_messages.join("\n").html_safe
   end
 
+  # used in Plugin
   def admin?(user = nil)
     user ||= current_user
     return false if user.blank?

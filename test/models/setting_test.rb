@@ -49,18 +49,7 @@ class SettingTest < ActiveSupport::TestCase
   test "admin_emails" do
     assert_equal ["admin@admin.com"], Setting.admin_emails
     Setting.admin_emails = "admin@admin.com a0@foo.com\r\na1@foo.com\na2@foo.com\ra3@foo.com,a4@foo.com"
-    assert_equal false, Setting.has_admin?("huacnlee@gmail.com")
-    assert_equal true, Setting.has_admin?("admin@admin.com")
-    assert_equal true, Setting.has_admin?("a0@foo.com")
-    assert_equal true, Setting.has_admin?("a1@foo.com")
-    assert_equal true, Setting.has_admin?("a2@foo.com")
-    assert_equal true, Setting.has_admin?("a3@foo.com")
-    assert_equal true, Setting.has_admin?("a4@foo.com")
-    assert_equal false, Setting.has_admin?("a5@foo.com")
-
-    Setting.stubs(:admin_emails).returns(["foo@bar.com\n", "foo1@bar.com "])
-    assert_equal true, Setting.has_admin?("foo@bar.com")
-    assert_equal true, Setting.has_admin?("foo1@bar.com")
+    assert_equal ["admin@admin.com", "a0@foo.com", "a1@foo.com", "a2@foo.com", "a3@foo.com", "a4@foo.com"], Setting.admin_emails
   end
 
   test "modules" do

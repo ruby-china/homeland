@@ -130,8 +130,7 @@ describe Auth::SSOController do
       assert_redirected_to "/hello/world"
 
       user = User.find_by_email(sso.email)
-      assert_equal true, user.admin?
-      assert_equal true, Setting.has_admin?(sso.email)
+      assert_equal "admin", user.state
     end
 
     it "show error when create failure" do
@@ -186,8 +185,8 @@ describe Auth::SSOController do
     end
 
     it "should work" do
-      sign_in user
-      Setting.stubs(:has_admin?).returns(true)
+      admin = create(:admin)
+      sign_in admin
       get provider_auth_sso_path, params: Rack::Utils.parse_query(@sso.payload)
       assert_equal 302, response.status
 
@@ -198,10 +197,10 @@ describe Auth::SSOController do
       payload = location.split("?")[1]
       sso2 = SingleSignOn.parse(payload, @sso.sso_secret)
 
-      assert_equal user.email, sso2.email
-      assert_equal user.name, sso2.name
-      assert_equal user.login, sso2.username
-      assert_equal user.id.to_s, sso2.external_id
+      assert_equal admin.email, sso2.email
+      assert_equal admin.name, sso2.name
+      assert_equal admin.login, sso2.username
+      assert_equal admin.id.to_s, sso2.external_id
       refute_equal nil, sso2.avatar_url
       assert_equal true, sso2.admin
     end

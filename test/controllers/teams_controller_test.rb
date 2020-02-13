@@ -3,7 +3,7 @@
 require "spec_helper"
 
 describe TeamsController do
-  let(:user) { create :wiki_editor }
+  let(:user) { create :vip }
 
   it "GET /teams" do
     get teams_path

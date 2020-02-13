@@ -31,7 +31,6 @@ en:
         last_logined_at: "Last signed in at"
         tagline: "Tagline"
         state: "Status"
-        verified: "Verified"
         company: "Company"
         github: "GitHub"
         remember_me: "Remember me"

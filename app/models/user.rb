@@ -33,9 +33,6 @@ class User < ApplicationRecord
 
   attr_accessor :password_confirmation
 
-
-  enum state: { deleted: -1, normal: 1, blocked: 2 }
-
   validates :login, format: { with: ALLOW_LOGIN_FORMAT_REGEXP, message: "只允许数字、大小写字母、中横线、下划线" },
                     length: { in: 2..20 },
                     presence: true,
@@ -48,7 +45,7 @@ class User < ApplicationRecord
   scope :without_team, -> { where(type: nil) }
   scope :fields_for_list, lambda {
     select(:type, :id, :name, :login, :email, :email_md5, :email_public,
-           :avatar, :verified, :state, :tagline, :github, :website, :location,
+           :avatar, :state, :tagline, :github, :website, :location,
            :location_id, :twitter, :team_users_count, :created_at, :updated_at)
   }
 

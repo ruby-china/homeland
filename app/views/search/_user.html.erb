@@ -9,7 +9,7 @@
     <div class="media-body">
       <div class="info">
         <%= link_to item.fullname, item %>
-        <span class="level"><%= render_user_level_tag(item) %></span>
+        <span class="level"><%= user_level_tag(item) %></span>
       </div>
       <div class="info number">
         第 <%= item.id %> 位<%= t("menu.users")%>

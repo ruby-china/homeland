@@ -4,9 +4,8 @@ module Admin
   class UsersController < Admin::ApplicationController
     def index
       scope = User.all
-      if params[:type].present?
-        scope = scope.where(type: params[:type])
-      end
+      scope = scope.where(type: params[:type]) if params[:type].present?
+      scope = scope.where(state: params[:state]) if params[:state].present?
       field = params[:field] || "login"
 
       if params[:q].present?
@@ -44,7 +43,6 @@ module Admin
       @user.email = params[:user][:email]
       @user.login = params[:user][:login]
       @user.state = params[:user][:state]
-      @user.verified = params[:user][:verified]
 
       if @user.save
         redirect_to(admin_users_path, notice: "User was successfully created.")
@@ -58,7 +56,6 @@ module Admin
       @user.email = params[:user][:email]
       @user.login = params[:user][:login]
       @user.state = params[:user][:state]
-      @user.verified = params[:user][:verified]
 
       if @user.update(params[:user].permit!)
         redirect_to(edit_admin_user_path(@user.id), notice: "User was successfully updated.")

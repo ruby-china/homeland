@@ -5,14 +5,19 @@ class User
   module Roles
     extend ActiveSupport::Concern
 
-    # 是否是管理员
+    included do
+      enum state: { deleted: -1, member: 1, blocked: 2, vip: 3, hr: 4, maintainer: 90, admin: 99 }
+
+      # TODO: remove user.verified in Homeland 3.4.0
+    end
+
     def admin?
-      Setting.has_admin?(email)
+      self.state.to_s == "admin" || Setting.admin_emails.include?(self.email)
     end
 
     # 是否有 Wiki 维护权限
     def wiki_editor?
-      self.admin? || verified == true
+      self.admin? || self.vip?
     end
 
     # 回帖大于 150 的才有酷站的发布权限
@@ -22,39 +27,34 @@ class User
 
     # 是否能发帖
     def newbie?
-      return false if verified?
+      return false if self.vip?
       t = Setting.newbie_limit_time.to_i
       return false if t == 0
       created_at > t.seconds.ago
     end
 
+    # used in Plugin
     def roles?(role)
       case role
-      when :admin then admin?
       when :wiki_editor then wiki_editor?
       when :site_editor then site_editor?
-      when :member then self.normal?
-      else false
+      else
+        self.state.to_s == role.to_s
       end
     end
 
     # 用户的账号类型
     def level
-      if admin?
-        "admin"
-      elsif verified?
-        "vip"
-      elsif blocked?
-        "blocked"
-      elsif newbie?
-        "newbie"
-      else
-        "normal"
-      end
+      return "newbie" if self.newbie?
+      self.state
     end
 
     def level_name
-      I18n.t("common.#{level}_user")
+      I18n.t("activerecord.enums.user.state.#{self.level}")
+    end
+
+    def level_color
+      I18n.t("activerecord.enums.user.state_color.#{self.level}")
     end
   end
 end

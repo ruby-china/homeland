@@ -2,15 +2,15 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# Note that this schema.rb definition is the authoritative source for your
-# database schema. If you need to create the application database on another
-# system, you should be using db:schema:load, not running all the migrations
-# from scratch. The latter is a flawed and unsustainable approach (the more migrations
-# you'll amass, the slower it'll run and the greater likelihood for issues).
+# This file is the source Rails uses to define your schema when running `rails
+# db:schema:load`. When creating a new database, `rails db:schema:load` tends to
+# be faster and is potentially less error prone than running all of your
+# migrations from scratch. Old migrations may fail to apply correctly if those
+# migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_12_075805) do
+ActiveRecord::Schema.define(version: 2020_02_13_155459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -250,6 +250,28 @@ ActiveRecord::Schema.define(version: 2018_09_12_075805) do
     t.index ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true
   end
 
+  create_table "site_nodes", id: :serial, force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "sort", default: 0, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["sort"], name: "index_site_nodes_on_sort"
+  end
+
+  create_table "sites", id: :serial, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "site_node_id"
+    t.string "name", null: false
+    t.string "url", null: false
+    t.string "desc"
+    t.datetime "deleted_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["site_node_id", "deleted_at"], name: "index_sites_on_site_node_id_and_deleted_at"
+    t.index ["site_node_id"], name: "index_sites_on_site_node_id"
+    t.index ["url"], name: "index_sites_on_url"
+  end
+
   create_table "team_users", id: :serial, force: :cascade do |t|
     t.integer "team_id", null: false
     t.integer "user_id", null: false
@@ -352,9 +374,9 @@ ActiveRecord::Schema.define(version: 2018_09_12_075805) do
     t.integer "following_count", default: 0
     t.index "lower((login)::text) varchar_pattern_ops", name: "index_users_on_lower_login_varchar_pattern_ops"
     t.index "lower((name)::text) varchar_pattern_ops", name: "index_users_on_lower_name_varchar_pattern_ops"
-    t.index ["email"], name: "index_users_on_email"
+    t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["location"], name: "index_users_on_location"
-    t.index ["login"], name: "index_users_on_login"
+    t.index ["login"], name: "index_users_on_login", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 

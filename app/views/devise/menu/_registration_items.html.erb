@@ -2,7 +2,7 @@
 你好 <strong><a href="<%= user_path(current_user.login)%>"><%= current_user.login %></a></strong>,
 <% if not params[:controller].match(/admin/) %>
   <%= link_to('设置', setting_path) %> |
-  <% if admin? current_user %><a href="/admin">后台</a> | <% end %>
+  <% if current_user&.admin? %><a href="/admin">后台</a> | <% end %>
 <% end %>
 <% else %>
   <%= link_to('加入社区', new_user_registration_path)  %>

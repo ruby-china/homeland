@@ -35,7 +35,7 @@
           <%= link_to plugin.display_name, plugin.root_path, class: "dropdown-item" %>
         <% end %>
 
-        <% if admin? %>
+        <% if current_user&.admin? %>
           <div class="dropdown-divider"></div>
           <% if params[:controller].start_with?("admin/") %>
             <%= link_to "回到前台", main_app.root_path, class: "dropdown-item" %>

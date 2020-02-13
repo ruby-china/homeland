@@ -19,8 +19,8 @@ class APIControllerTest < ActionDispatch::IntegrationTest
   end
 
   def login_admin!
+    @current_user.update!(state: :admin)
     login_user!
-    User.any_instance.stubs(:admin?).returns(true)
   end
 
   def default_headers

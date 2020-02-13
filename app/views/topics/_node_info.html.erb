@@ -28,7 +28,7 @@
           <li class="<%= ' active' if action_name == 'popular' %>">
             <a href="<%= main_app.popular_topics_path %>" data-turbolinks-action="replace">优质帖子</a>
           </li>
-          <% if admin? %>
+          <% if can?(:ban, Topic) %>
             <li class="<%= ' active' if action_name == 'banned' %>">
               <%= link_to('已屏蔽', main_app.banned_topics_path, data: { 'turbolinks-action': 'replace' }) %>
             </li>

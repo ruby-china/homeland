@@ -4,14 +4,14 @@
       <div class="media">
         <div class="avatar media-left mr-3">
           <div class='image'><%= user_avatar_tag(@user, :lg, link: false) %></div>
-          <div class="level"><%= render_user_level_tag(@user) %></div>
+          <div class="level"><%= user_level_tag(@user) %></div>
         </div>
         <div class="media-body">
           <div class="item">
             <%= @user.fullname %>
             <span class="opts pull-right">
-              <% if admin? %>
-                <%= link_to icon_tag("pencil", label: "修改"), edit_admin_user_path(@user.id) %>
+              <% if current_user&.admin? %>
+                <%= link_to icon_tag("pencil", label: "管理"), edit_admin_user_path(@user.id) %>
               <% end %>
             </span>
           </div>
@@ -19,10 +19,10 @@
             第 <%= @user.id %> 位<%= t("menu.users")%> / <span title="注册日期"><%= @user.created_at.to_date %></span>
           </div>
           <% if !@user.company.blank? %>
-          <div class="item company">
-            <%= @user.company %>
-            <% if @user.location.present? %> @ <span title="所在地"><%= location_name_tag(@user.location) %></span><% end %>
-          </div>
+            <div class="item company">
+              <%= @user.company %>
+              <% if @user.location.present? %> @ <span title="所在地"><%= location_name_tag(@user.location) %></span><% end %>
+            </div>
           <% end %>
           <div class="item counts">
             <span><%= @user.topics_count %></span> 篇帖子 • <span><%= @user.replies_count %></span> 条回帖
@@ -31,17 +31,14 @@
             <% if !@user.twitter.blank? %>
               <%= link_to raw('<i class="fa fa-twitter"></i>'), @user.twitter_url, class: "twitter", rel: "nofollow" %>
             <% end %>
-
             <% if !@user.website.blank? %>
               <%= link_to(raw('<i class="fa fa-globe"></i>'), @user.website_url, target: '_blank', rel: 'nofollow') %>
             <% end %>
-
             <% if Setting.has_module? :github %>
               <% if !@user.github.blank? %>
                 <%= link_to(raw('<i class="fa fa-github"></i>'), @user.github_url, target: '_blank', rel: 'nofollow') %>
               <% end %>
             <% end %>
-
             <% if !@user.email.blank? && @user.email_public %>
               <a href="mailto: <%= @user.email %>"><i class="fa fa-envelope-o"></i></a>
             <% end %>
@@ -63,40 +60,35 @@
         </div>
       </div>
       <% if !owner? @user %>
-      <div class="buttons row">
-        <div class="col-sm-6">
-          <%= follow_user_tag(@user) %>
+        <div class="buttons row">
+          <div class="col-sm-6">
+            <%= follow_user_tag(@user) %>
+          </div>
+          <div class="col-sm-6">
+            <%= block_user_tag(@user) %>
+          </div>
         </div>
-
-        <div class="col-sm-6">
-          <%= block_user_tag(@user) %>
-        </div>
-      </div>
       <% end %>
-
       <% if !@user.tagline.blank? %>
-      <div class="tagline row">
-        <%= @user.tagline %>
-      </div>
+        <div class="tagline row">
+          <%= @user.tagline %>
+        </div>
       <% end %>
-
       <div class="buttons">
         <%= reward_user_tag(@user, class: "btn btn-block btn-default") %>
       </div>
     </div>
   </div>
-
   <% if Setting.has_module?(:team) %>
     <% if !@user.teams.blank? %>
-    <div class="card user-teams">
-      <div class="card-body">
-        <% @user.teams.each do |team| %>
-          <%= user_avatar_tag(team, :md) %>
-        <% end %>
+      <div class="card user-teams">
+        <div class="card-body">
+          <% @user.teams.each do |team| %>
+            <%= user_avatar_tag(team, :md) %>
+          <% end %>
+        </div>
       </div>
-    </div>
     <% end %>
   <% end %>
-
   <%= render '/users/repos', user: @user %>
 </div>

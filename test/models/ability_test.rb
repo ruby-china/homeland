@@ -17,16 +17,27 @@ class AbilityTest < ActiveSupport::TestCase
     assert ability.can?(:manage, TeamUser)
   end
 
-  test "Wiki Editor manage wiki" do
-    wiki_editor = create :wiki_editor
-    ability = Ability.new(wiki_editor)
+  test "Maintainer manage Topic, Node" do
+    user = create :user, state: :maintainer
+    ability = Ability.new(user)
+    assert ability.can?(:manage, Topic)
+    assert ability.can?(:lock_node, Topic)
+    assert ability.can?(:manage, Reply)
+    assert ability.can?(:manage, Section)
+    assert ability.can?(:manage, Node)
+    assert ability.can?(:create, Team)
+  end
+
+  test "Vip manage wiki" do
+    vip = create :vip
+    ability = Ability.new(vip)
 
     assert ability.cannot?(:suggest, Topic)
     assert ability.cannot?(:unsuggest, Topic)
     assert ability.can?(:create, Team)
   end
 
-  test "Normal users" do
+  test "Member" do
     user = create :avatar_user
     topic = create :topic, user: user
     topic1 = create :topic

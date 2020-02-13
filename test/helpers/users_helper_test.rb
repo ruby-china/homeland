@@ -67,31 +67,14 @@ class UsersHelperTest < ActionView::TestCase
     assert_equal img, user_avatar_tag(user, :md, timestamp: true, link: false)
   end
 
-  test "render_user_level_tag admin should work" do
-    user = create(:user)
+  test "user_level_tag admin should work" do
+    user = User.new(created_at: 30.days.ago)
 
-    # admin
-    user.stub(:admin?, true) do
-      assert_equal '<span class="badge badge-danger role">管理员</span>', render_user_level_tag(user)
+    %w[admin vip hr maintainer blocked deleted newbie member].each do |level|
+      user.stub(:level, level) do
+        assert_equal %(<span class="badge-role role-#{level}" style="background: #{user.level_color};">#{user.level_name}</span>), user_level_tag(user)
+      end
     end
-
-    # vip
-    user.stub(:verified?, true) do
-      assert_equal '<span class="badge badge-success role">高级会员</span>', render_user_level_tag(user)
-    end
-
-    # blocked
-    user.stub(:blocked?, true) do
-      assert_equal '<span class="badge badge-warning role">禁言用户</span>', render_user_level_tag(user)
-    end
-
-    # newbie
-    user.stub(:newbie?, true) do
-      assert_equal '<span class="badge badge-light role">新手</span>', render_user_level_tag(user)
-    end
-
-    # normal
-    assert_equal '<span class="badge badge-info role">会员</span>', render_user_level_tag(user)
   end
 
   test "reward_user_tag" do

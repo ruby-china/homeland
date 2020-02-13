@@ -158,11 +158,6 @@ class Setting < RailsSettings::Base
       [self.protocol, self.domain].join("://")
     end
 
-    def has_admin?(email)
-      return false if self.admin_emails.blank?
-      self.admin_emails.map { |str| str.strip }.include?(email)
-    end
-
     def has_module?(name)
       return true if self.modules.blank? || self.modules.include?("all")
       self.modules.map { |str| str.strip }.include?(name.to_s)

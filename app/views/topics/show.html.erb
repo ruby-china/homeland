@@ -1,5 +1,4 @@
 <% title_tag @topic.title %>
-
 <% content_for :scripts do %>
   <script type="text/javascript">
     Topics.topic_id = <%= @topic.id %>;
@@ -7,100 +6,89 @@
     Topics.user_liked_reply_ids = [<%= @user_like_reply_ids.join(",") %>];
     <% end %>
     $(document).ready(function(){
-      <% if admin? %>
+      <% if can?(:manage, Reply) %>
         $("#replies .reply a.edit").css('display','inline-block');
       <% elsif current_user %>
         $("#replies .reply a.edit[data-uid='<%= current_user.id %>']").css('display','inline-block');
       <% end %>
-
+    
       <% if @topic.closed? %>
         $("#replies .reply .hideable").remove();
       <% end %>
     })
   </script>
 <% end %>
-
 <div class="row">
   <div class="col-md-9">
     <div class="topic-detail card">
       <%= render partial: "topics/topic_info", locals: { topic: @topic } %>
-
       <% if @topic.excellent? %>
         <div class="label-awesome">
           <i class="fa fa-diamond awesome"></i> 本帖已被设为精华帖！
-          <% if admin? %>
-          <div class="pull-right">
-            <%= link_to icon_tag("close"), action_topic_path(@topic.id, type: 'normal'), method: :post, remote: true %>
-          </div>
+          <% if can?(:close, @topic) %>
+            <div class="pull-right">
+              <%= link_to icon_tag("close"), action_topic_path(@topic.id, type: 'normal'), method: :post, remote: true %>
+            </div>
           <% end %>
         </div>
       <% end %>
-
       <div class="card-body markdown markdown-toc">
         <%= raw Setting.before_topic_html %>
-
         <%= @topic.body_html %>
-
         <%= raw Setting.after_topic_html %>
       </div>
-
       <div class="card-footer clearfix">
         <%= render "buttons" %>
       </div>
     </div>
-
     <%= render partial: "ban_reason" %>
-
-  <% if @replies.blank? %>
-    <div class="no-result">
-      <%= t("topics.no_replies") %>
-    </div>
-    <% else %>
-    <div id="replies" class="card" data-last-floor="<%= @replies.count(:all) %>">
-      <div class="items card-body">
-        <%= render partial: "/replies/reply", collection: @replies %>
+    <% if @replies.blank? %>
+      <div class="no-result">
+        <%= t("topics.no_replies") %>
       </div>
-    </div>
-  <% end %>
-
-  <% if current_user %>
-    <% if @topic.closed? %>
-      <div class="alert alert-info">此话题已经于 <%= l @topic.closed_at, format: :long %> 关闭，不再接受任何回帖。</div>
     <% else %>
-      <div id="reply" class="card">
-        <div class="card-body">
-          <div class="card-title hide-ios">发起回帖</div>
-          <% if can? :create, Reply %>
-            <%= render 'reply_form' %>
-          <% else %>
-            <div class="alert alert-info">
-              当前设置新手用户不能在 22:00 ~ 9:00 发帖。
-            </div>
-          <% end %>
+      <div id="replies" class="card" data-last-floor="<%= @replies.count(:all) %>">
+        <div class="items card-body">
+          <%= render partial: "/replies/reply", collection: @replies %>
         </div>
       </div>
     <% end %>
-  <% else %>
-    <div class="card">
-      <div class="card-body">
-        <%= render partial: "topics/translation/need_login_to_reply" %>
+    <% if current_user %>
+      <% if @topic.closed? %>
+        <div class="alert alert-info">此话题已经于 <%= l @topic.closed_at, format: :long %> 关闭，不再接受任何回帖。</div>
+      <% else %>
+        <div id="reply" class="card">
+          <div class="card-body">
+            <div class="card-title hide-ios">发起回帖</div>
+            <% if can? :create, Reply %>
+              <%= render 'reply_form' %>
+            <% else %>
+              <div class="alert alert-info">
+                当前设置新手用户不能在 22:00 ~ 9:00 发帖。
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="card">
+        <div class="card-body">
+          <%= render partial: "topics/translation/need_login_to_reply" %>
+        </div>
       </div>
+    <% end %>
+    <% if !mobile? %>
+      <%= render 'related_topics' %>
+    <% end %>
+  </div>
+  <% if !mobile? %>
+    <div class="sidebar hidden-mobile col-md-3">
+      <%= render 'topic_sidebar' %>
+    </div>
+  <% else %>
+    <div class="move-page-buttons">
+      <a href="#" class="btn btn-block btn-sm btn-move-page" data-type="top"><i class="fa fa-arrow-up"></i></a>
+      <a href="#" class="btn btn-block btn-sm btn-move-page" data-type="bottom"><i class="fa fa-arrow-down"></i></a>
     </div>
   <% end %>
-
-  <% if !mobile? %>
-  <%= render 'related_topics' %>
-  <% end %>
-</div>
-
-<% if !mobile? %>
-  <div class="sidebar hidden-mobile col-md-3">
-    <%= render 'topic_sidebar' %>
-  </div>
-<% else %>
-  <div class="move-page-buttons">
-    <a href="#" class="btn btn-block btn-sm btn-move-page" data-type="top"><i class="fa fa-arrow-up"></i></a>
-    <a href="#" class="btn btn-block btn-sm btn-move-page" data-type="bottom"><i class="fa fa-arrow-down"></i></a>
-  </div>
-<% end %>
 </div>

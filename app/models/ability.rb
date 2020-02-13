@@ -9,10 +9,16 @@ class Ability
     @user = u
     if @user.blank?
       roles_for_anonymous
-    elsif @user.roles?(:admin)
+    elsif @user.admin?
       can :manage, :all
-    elsif @user.roles?(:member)
+    elsif @user.member?
       roles_for_members
+    elsif @user.vip?
+      roles_for_members
+      roles_for_vip
+    elsif @user.maintainer?
+      roles_for_members
+      roles_for_maintainer
     else
       roles_for_anonymous
     end
@@ -35,6 +41,21 @@ class Ability
     def roles_for_anonymous
       cannot :manage, :all
       basic_read_only
+    end
+
+    # Vip 用户权限
+    def roles_for_vip
+      can :create, Team
+    end
+
+    # 版主权限
+    def roles_for_maintainer
+      can :create, Team
+      can :manage, Node
+      can :manage, Section
+      can :manage, Topic
+      can :lock_node, Topic
+      can :manage, Reply
     end
 
     def roles_for_topics
@@ -76,9 +97,6 @@ class Ability
     end
 
     def roles_for_teams
-      if user.roles?(:wiki_editor)
-        can :create, Team
-      end
       can [:update, :destroy], Team do |team|
         team.owner?(user)
       end

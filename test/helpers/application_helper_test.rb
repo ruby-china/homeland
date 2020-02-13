@@ -54,8 +54,8 @@ class ApplicationHelperTest < ActionView::TestCase
   end
 
   test "wiki_editor?" do
-    non_editor = create :non_wiki_editor
-    editor = create :wiki_editor
+    non_editor = create :user
+    editor = create :vip
 
     # knows non editor is not wiki editor
     assert_equal false, wiki_editor?(non_editor)

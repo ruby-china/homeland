@@ -699,6 +699,16 @@ img.emoji {
   text-align: center;
 }
 
+/* User role */
+.badge-role {
+  @extend .badge;
+  font-size: 12px;
+  font-weight: normal;
+  font-family: sans-serif;
+  background: #564cf5;
+  color: #fff;
+}
+
 .opts a.active {
   .fa {
     @extend .animated;

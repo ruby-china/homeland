@@ -62,6 +62,9 @@ module Homeland
       user.name = name if user.name.blank?
       user.bio = bio if user.bio.blank?
 
+      # Add as admin
+      user.state = :admin if admin == true
+
       # change external attributes for sso record
       sso_record.username = username
       sso_record.email = email
@@ -70,15 +73,6 @@ module Homeland
 
       user.save!
       user.update_tracked_fields!(request)
-
-      # Add as admin
-      if admin == true
-        unless Setting.has_admin?(email)
-          emails = Setting.admin_emails
-          emails << email
-          Setting.admin_emails = emails
-        end
-      end
 
       sso_record.save!
       sso_record&.user

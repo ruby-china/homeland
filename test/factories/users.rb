@@ -9,7 +9,6 @@ FactoryBot.define do
     password_confirmation { "password" }
     location { "China" }
     created_at { 100.days.ago }
-    verified { false }
   end
 
   factory :avatar_user, parent: :user do
@@ -17,15 +16,11 @@ FactoryBot.define do
   end
 
   factory :admin, parent: :user do
-    email { Setting.admin_emails.first }
+    state { "admin" }
   end
 
-  factory :wiki_editor, parent: :user do
-    verified { true }
-  end
-
-  factory :non_wiki_editor, parent: :user do
-    verified { false }
+  factory :vip, parent: :user do
+    state { "vip" }
   end
 
   factory :newbie, parent: :user do
@@ -34,11 +29,11 @@ FactoryBot.define do
 
   factory :blocked_user, parent: :user do
     created_at { 30.days.ago }
-    state { 2 }
+    state { "blocked" }
   end
 
   factory :deleted_user, parent: :user do
     created_at { 100.days.ago }
-    state { -1 }
+    state { "deleted" }
   end
 end

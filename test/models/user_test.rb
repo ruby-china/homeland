@@ -121,38 +121,35 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "admin?" do
-    admin = create :admin
-
+    admin = User.new(state: :admin)
     assert_equal true, admin.admin?
     assert_equal false, user.admin?
   end
 
   test "wiki_editor?" do
-    admin = create :admin
-
+    admin = User.new(state: :admin)
     assert_equal true, admin.wiki_editor?
     assert_equal false, user.wiki_editor?
 
-    user.verified = true
+    user = User.new(state: :vip)
     assert_equal true, user.wiki_editor?
 
-    user.verified = false
+    user = User.new
     assert_equal false, user.wiki_editor?
   end
 
   test "newbie?" do
     # should true when user created_at less than a week
-    user.verified = false
     Setting.stubs(:newbie_limit_time).returns(1.days.to_i)
     user.created_at = 6.hours.ago
     assert_equal true, user.newbie?
 
-    # should false when user is verified
-    user.verified = true
+    # should false when user is vip
+    user.state = :vip
     assert_equal false, user.newbie?
 
     # Unverfied user with 2.days.ago registed.
-    user = build(:user, verified: false, created_at: 2.days.ago)
+    user = User.new(created_at: 2.days.ago)
 
     Setting.stubs(:newbie_limit_time).returns(1.days.to_i)
     assert_equal false, user.newbie?
@@ -168,24 +165,23 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "roles" do
-
     # when is a new user
     assert_equal true, user.roles?(:member)
 
     # when is a blocked user
-    user = create :blocked_user
+    user = User.new(state: :blocked)
     assert_equal false, user.roles?(:member)
 
     # when is a deleted user" do
-    user = create :user, state: :deleted
+    user = User.new(state: :deleted)
     assert_equal false, user.roles?(:member)
 
     # when is admin
-    user = create :admin
+    user = User.new(state: :admin)
     assert_equal true, user.roles?(:admin)
 
     # when is wiki editor
-    user = create :wiki_editor
+    user = User.new(state: :vip)
     assert_equal true, user.roles?(:wiki_editor)
 
     # when ask for some random role
@@ -194,7 +190,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "github_url" do
-    user = build(:user, github: "monkey")
+    user = User.new(github: "monkey")
 
     expected = "https://github.com/monkey"
     assert_equal expected, user.github_url
@@ -204,7 +200,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "website_url" do
-    user = build(:user, website: "monkey.com")
+    user = User.new(website: "monkey.com")
     expected = "http://monkey.com"
 
     # website without http://
@@ -378,35 +374,38 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test ".level / .level_name" do
-    u1 = create :admin
-
-    assert_equal "admin", u1.level
-    assert_equal "管理员", u1.level_name
-
-    # vip
-    u1 = create :user, verified: true
-    assert_equal "vip", u1.level
-    assert_equal "高级会员", u1.level_name
-
-    # blocked
-    u1 = create :user
-    u1.stub(:blocked?, true) do
-      assert_equal "blocked", u1.level
-      assert_equal "禁言用户", u1.level_name
-    end
+    u1 = User.new(state: :member)
+    assert_equal "member", u1.level
+    assert_equal "会员", u1.level_name
 
     # newbie
-    u1 = create :user
     u1.stub(:newbie?, true) do
       assert_equal "newbie", u1.level
       assert_equal "新手", u1.level_name
     end
 
-    u1 = create :user
-    u1.stub(:newbie?, false) do
-      assert_equal "normal", u1.level
-      assert_equal "会员", u1.level_name
-    end
+    u1 = User.new(state: :admin)
+    assert_equal "admin", u1.level
+    assert_equal "管理员", u1.level_name
+
+    u1 = User.new(state: :maintainer)
+    assert_equal "maintainer", u1.level
+    assert_equal "版主", u1.level_name
+
+    # vip
+    u1 = User.new(state: :vip)
+    assert_equal "vip", u1.level
+    assert_equal "高级会员", u1.level_name
+
+    # blocked
+    u1 = User.new(state: :blocked)
+    assert_equal "blocked", u1.level
+    assert_equal "禁言用户", u1.level_name
+
+    # blocked
+    u1 = User.new(state: :deleted)
+    assert_equal "deleted", u1.level
+    assert_equal "已注销", u1.level_name
   end
 
   test ".letter_avatar_url" do
@@ -443,7 +442,6 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test ".calendar_data" do
-
     d1 = "1576339200"
     d2 = "1576944000"
     d3 = "1577116800"

@@ -26,7 +26,7 @@
       </div>
       <hr />
       <div class="group opts">
-        <% if admin? %>
+        <% if can?(:manage, @topic) %>
           <div style="margin-bottom: 8px">
             <% if !@topic.suggested_at.blank? %>
             <%= link_to raw("<i class='fa fa-angle-double-up'></i> 取消"), unsuggest_admin_topic_path(@topic), method: :post, remote: true %>
@@ -45,7 +45,6 @@
           </div>
         <% end %>
 
-        <% if owner?(@topic) or admin? %>
         <div>
           <% if can?(:close, @topic) %>
             <% if !@topic.closed? %>
@@ -54,12 +53,13 @@
               <%= link_to raw("<i class='fa fa-undo'></i> 开启"), action_topic_path(@topic, type: 'open'), method: 'post', title: "重新开启话题", remote: true, data: { toggle: 'tooltip' } %>
             <% end %>
           <% end %>
+          <% if can?(:edit, @topic) %>
           <%= link_to raw('<i class="fa fa-pencil"></i> 编辑'), edit_topic_path(@topic), title: "修改本帖" %>
+          <% end %>
           <% if can?(:destroy, @topic) %>
             <%= link_to raw('<i class="fa fa-trash"></i> 删除'), topic_path(@topic.id), method: :delete, 'data-confirm' => t("common.confirm_delete"), title: "删除本帖", remote: true %>
           <% end %>
         </div>
-        <% end %>
       </div>
       <a href="#" class="btn btn-default btn-sm btn-block btn-move-page" data-type="bottom"><i class="fa fa-arrow-down"></i></a>
     </div>

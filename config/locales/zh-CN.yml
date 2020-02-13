@@ -20,13 +20,23 @@
     enums:
       user:
         state:
-          deleted: 删除
-          normal: 正常
-          blocked: 禁言
+          deleted: 已注销
+          newbie: 新手
+          member: 会员
+          blocked: 禁言用户
+          vip: 高级会员
+          hr: HR
+          maintainer: 版主
+          admin: 管理员
         state_color:
-          deleted: "yellow"
-          normal: "green"
-          blocked: "red"
+          deleted: 已注销
+          newbie: "#564cf5"
+          member: "#564cf5"
+          blocked: "#505050"
+          vip: "#12ce0f"
+          hr: "#12ce0f"
+          maintainer: "#c800cc"
+          admin: "#f54821"
     models:
       user: "用户"
       topic: "话题"
@@ -47,8 +57,7 @@
         website: "个人主页"
         last_logined_at: "上次登录时间"
         tagline: "签名"
-        state: "状态"
-        verified: "信任用户"
+        state: "等级"
         company: "公司"
         github: "GitHub"
         remember_me: 记住登录状态

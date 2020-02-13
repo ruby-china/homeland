@@ -48,10 +48,11 @@ class Topic
 
     private
       def notify_admin_editing_node_changed
-        return unless Current.user&.admin?
         return unless self.node_id_changed?
 
-        Topic.notify_topic_node_changed(id, node_id)
+        if Current.user&.admin? || Current.user&.maintainer?
+          Topic.notify_topic_node_changed(id, node_id)
+        end
       end
 
       def async_create_reply_notification

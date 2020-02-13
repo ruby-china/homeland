@@ -90,7 +90,7 @@ class TopicsController < ApplicationController
       # 锁定接点的时候，只有管理员可以修改节点
       @topic.node_id = topic_params[:node_id]
 
-      if current_user.admin? && @topic.node_id_changed?
+      if @topic.node_id_changed? && can?(:lock_node, @topic)
         # 当管理员修改节点的时候，锁定节点
         @topic.lock_node = true
       end

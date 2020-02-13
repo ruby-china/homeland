@@ -7,7 +7,7 @@ class User < ApplicationRecord
   include User::Roles, User::Blockable, User::Likeable, User::Followable, User::TopicActions,
           User::GitHubRepository, User::ProfileFields, User::RewardFields, User::Omniauthable
 
-  second_level_cache expires_in: 2.weeks
+  second_level_cache version: 2, expires_in: 2.weeks
 
   LOGIN_FORMAT              = 'A-Za-z0-9\-\_\.'
   ALLOW_LOGIN_FORMAT_REGEXP = /\A[#{LOGIN_FORMAT}]+\z/

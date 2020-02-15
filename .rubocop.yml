@@ -2,6 +2,7 @@ AllCops:
   DisabledByDefault: true
   Exclude:
     - 'vendor/**/*'
+    - 'plugins/**/*'
     - 'lib/templates/**/*'
     - 'lib/tasks/release.rake'
     - 'app/models/cache_version.rb'

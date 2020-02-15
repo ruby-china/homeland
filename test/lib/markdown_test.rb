@@ -139,6 +139,27 @@ class Homeland::MarkdownTest < ActiveSupport::TestCase
     assert_markdown_render html do
       "```ruby\nclass Hello\n\nend\n```"
     end
+
+    html = <<~HTML
+    <div class="highlight">
+    <pre class="highlight plaintext"><code>Hello world
+    </code></pre>
+    </div>
+    HTML
+
+    assert_markdown_render html do
+      "```foo\nHello world\n```"
+    end
+
+    html = <<~HTML
+    <div class="highlight">
+    <pre class="highlight objective_c"><code><span class="n">Hello</span><span class="n">world</span></code></pre>
+    </div>
+    HTML
+
+    assert_markdown_render html do
+      "```objc\nHello world\n```"
+    end
   end
 
   test "be able to identigy Ruby or RUBY as ruby language" do

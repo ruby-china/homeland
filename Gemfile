@@ -121,6 +121,10 @@ gem "exception-track"
 
 gem "bootsnap"
 
+# HOTFIX
+# Lock ffi 1.11.1
+gem "ffi", "1.11.1"
+
 group :development do
   gem "spring"
   gem "byebug"

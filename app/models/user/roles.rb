@@ -2,17 +2,17 @@
 
 class User
   # 用户权限相关
+  # remove user.verified in Homeland 3.4.0
   module Roles
     extend ActiveSupport::Concern
 
     included do
       enum state: { deleted: -1, member: 1, blocked: 2, vip: 3, hr: 4, maintainer: 90, admin: 99 }
 
-      # TODO: remove user.verified in Homeland 3.4.0
-    end
-
-    def admin?
-      self.state.to_s == "admin" || Setting.admin_emails.include?(self.email)
+      # user.admin?
+      define_method :admin? do
+        self.state.to_s == "admin" || Setting.admin_emails.include?(self.email)
+      end
     end
 
     # 是否有 Wiki 维护权限

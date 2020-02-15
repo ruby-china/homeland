@@ -22,7 +22,8 @@ class ApplicationController < ActionController::Base
     params[resource] &&= send(method) if respond_to?(method, true)
 
     if devise_controller?
-      devise_parameter_sanitizer.permit(:sign_in) { |u| u.permit(*User::ACCESSABLE_ATTRS) }
+      devise_parameter_sanitizer.permit(:sign_up, keys: %i[login email email_public name password password_confirmation _rucaptcha])
+      devise_parameter_sanitizer.permit(:sign_in, keys: %i[login password remember_me])
       devise_parameter_sanitizer.permit(:account_update) do |u|
         if current_user.email_locked?
           u.permit(*User::ACCESSABLE_ATTRS)
@@ -30,7 +31,6 @@ class ApplicationController < ActionController::Base
           u.permit(:email, *User::ACCESSABLE_ATTRS)
         end
       end
-      devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(*User::ACCESSABLE_ATTRS) }
     end
 
     cookies.signed[:user_id] ||= current_user.try(:id)

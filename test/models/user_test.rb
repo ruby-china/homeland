@@ -126,7 +126,7 @@ class UserTest < ActiveSupport::TestCase
     assert_equal false, user.admin?
 
     Setting.stub(:admin_emails, %w[foobar@gmail.com]) do
-      user = User.new(email: "foobar@gmail.com")
+      user = User.new(email: "foobar@gmail.com", state: :member)
       assert true, user.admin?
     end
   end

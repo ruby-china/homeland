@@ -3,20 +3,21 @@
 <div class="row">
   <div class="col"></div>
   <div class="col-md-6">
-    <div class="card">
-      <div class="card-header"><%= t('users.update_password') %></div>
+    <div class="card card-lg">
       <div class="card-body">
+        <div class="card-title"><%= t('users.update_password') %></div>
+
         <%= form_for resource, as: resource_name, url: password_path(resource_name), method: :put do |f| %>
         <%= render "shared/error_messages", target: resource %>
         <%= f.hidden_field :reset_password_token %>
         <div class="form-group">
-          <%= f.password_field :password, class: "form-control", placeholder: "密码" %>
+          <%= f.password_field :password, class: "form-control form-control-lg", placeholder: "密码" %>
         </div>
         <div class="form-group">
-          <%= f.password_field :password_confirmation, class: "form-control", placeholder: "确认密码" %>
+          <%= f.password_field :password_confirmation, class: "form-control form-control-lg", placeholder: "确认密码" %>
         </div>
         <div class="form-actions">
-          <%= f.submit t('users.update_password'), class: "btn btn-success", 'data-disable-with' => t("common.submitting") %>
+          <%= f.submit t('users.update_password'), class: "btn btn-success btn-lg btn-block", 'data-disable-with' => t("common.submitting") %>
         </div>
         <% end %>
       </div>

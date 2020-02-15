@@ -1,15 +1,19 @@
-<div class="edit-reply card">
-  <div class="card-header">
-    修改回帖 <span class="pull-right"><%= topic_title_tag(@topic) %></span>
-  </div>
+<div class="edit-reply card card-lg">
   <div class="card-body">
+    <div class="card-title">
+      修改回帖
+      <div class="actions">
+        <div class="topic-link"><%= topic_title_tag(@topic) %></div>
+      </div>
+    </div>
+
     <%= form_for [@topic, @reply], remote: true, html: { tb: 'edit-reply' }  do |f| %>
       <%= render "shared/error_messages", target: @reply %>
       <%= render "/shared/editor_toolbar" %>
       <div class="form-group">
         <%= f.text_area :body, class: "topic-editor form-control", rows: 10 %>
       </div>
-      <div class="form-group">
+      <div class="form-actions">
         <%= f.submit t("common.save"), class: "btn btn-primary col-xs-2 hide-ios", 'data-disable-with' => t("common.saving") %>
         <% if can? :destroy, @reply %>
         <%= link_to "删除",[@topic,@reply], class: "btn btn-danger", method: :delete, data: { confirm: "确定要删除此回复么？" } %>
@@ -18,7 +22,7 @@
     <% end %>
   </div>
 </div>
-<div class="card hide-ios">
+<div class="card card-lg hide-ios">
   <div class="card-body">
     <%= render "/shared/editor_help_block" %>
   </div>

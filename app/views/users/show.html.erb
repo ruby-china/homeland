@@ -12,11 +12,18 @@
       <ul class="nav nav-tabs">
         <li class="nav-item"><a href="#topics" class="nav-link active" data-toggle="tab">热门话题</a></li>
         <li class="nav-item"><a href="#replies" class="nav-link" data-toggle="tab">最近回帖</a></li>
+        <% if !@user.bio.blank? %>
         <li class="nav-item"><a href="#description" class="nav-link" data-toggle="tab">个人介绍</a></li>
+        <% end %>
       </ul>
       <div class="tab-content">
         <div class="tab-pane active recent-topics" id="topics">
           <div class="card">
+            <% if @topics.blank? %>
+            <div class="card-body">
+              <div class="no-result" style="padding:20px">还未发布过话题</div>
+            </div>
+            <% else %>
             <ul class="list-group list-group-flush">
               <% @topics.each do |item| %>
               <li class="list-group-item">
@@ -25,11 +32,12 @@
                   <%= topic_title_tag(item) %> <%= topic_excellent_tag(item) %>
                 </div>
                 <div class="info">
-                  <span class="counter"><%= item.likes_count %> 个赞 • <%= item.replies_count %> 条回复</span>
+                  <span class="counter"><%= item.likes_count %> 个赞 / <%= item.replies_count %> 条回复</span>
                 </div>
               </li>
               <% end %>
             </ul>
+            <% end %>
           </div>
         </div>
         <div class="tab-pane" id="replies">

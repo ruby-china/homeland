@@ -2,7 +2,7 @@
 <div class="row">
   <div class="col"></div>
   <div class="col-lg-6">
-    <div class="card">
+    <div class="card card-lg">
       <div class="card-body">
         <div class="card-title">
           <%= t("users.register_user") %>
@@ -12,27 +12,28 @@
         </div>
         <%= form_for resource, as: resource_name, url: registration_path(resource_name), remote: true do |f| %>
           <div class="form-group">
-            <%= f.text_field :login, class: "form-control input-lg", placeholder: t("users.login"), hint: t("users.suggest_using_twitter_id") %>
+            <%= f.text_field :login, class: "form-control form-control-lg", placeholder: t("users.login"), hint: t("users.suggest_using_twitter_id") %>
           </div>
           <div class="form-group">
-            <%= f.text_field :name, class: "form-control input-lg", placeholder: t("activerecord.attributes.user.name") %>
+            <%= f.text_field :name, class: "form-control form-control-lg", placeholder: t("activerecord.attributes.user.name") %>
           </div>
           <div class="form-group">
-            <%= f.text_field :email, type: :email, class: "form-control input-lg", placeholder: t("activerecord.attributes.user.email") %>
-          </div>
-          <div class="form-group form-check">
-            <label for="user_email_public" class="form-check-label">
-              <%= f.check_box :email_public, checked: true, class: "form-check-input" %> <%= t("activerecord.attributes.user.email_public") %>
-            </label>
+            <%= f.text_field :email, type: :email, class: "form-control form-control-lg", placeholder: t("activerecord.attributes.user.email") %>
           </div>
           <div class="form-group">
-            <%= f.password_field :password, class: "form-control input-lg", placeholder: t("activerecord.attributes.user.password") %>
+            <div class="custom-control custom-checkbox custom-checkbox-lg">
+              <%= f.check_box :email_public, checked: true, class: "custom-control-input" %>
+              <label for="user_email_public"  class="custom-control-label"><%= t("activerecord.attributes.user.email_public") %></label>
+            </div>
           </div>
           <div class="form-group">
-            <%= f.password_field :password_confirmation, class: "form-control input-lg", placeholder: t("activerecord.attributes.user.password_confirmation") %>
+            <%= f.password_field :password, class: "form-control form-control-lg", placeholder: t("activerecord.attributes.user.password") %>
           </div>
           <div class="form-group">
-            <div class="input-group">
+            <%= f.password_field :password_confirmation, class: "form-control form-control-lg", placeholder: t("activerecord.attributes.user.password_confirmation") %>
+          </div>
+          <div class="form-group">
+            <div class="input-group input-group-lg">
               <%= render "/shared/captcha_input" %>
             </div>
           </div>

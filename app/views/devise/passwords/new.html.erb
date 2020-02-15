@@ -3,23 +3,24 @@
 <div class="row">
   <div class="col"></div>
   <div class="col-md-6">
-    <div class="card">
-      <div class="card-header"><%= t('users.forget_password') %></div>
+    <div class="card card-lg">
       <div class="card-body">
+        <div class="card-title"><%= t('users.forget_password') %></div>
+
         <%= form_for resource, as: resource_name, url: password_path(resource_name), method: :post do |f| %>
           <%= render "shared/error_messages", target: resource %>
           <div class="form-group">
-            <%= f.text_field :email, type: :email, class: "form-control input-lg", placeholder: t("activerecord.attributes.user.email") %>
+            <%= f.text_field :email, type: :email, class: "form-control form-control-lg", placeholder: t("activerecord.attributes.user.email") %>
             <p class="form-text text-muted">此功能将会发送一个找回密码的特别链接到你的邮箱，通过改链接可以进入重置密码的页面。</p>
           </div>
           <div class="form-group">
-            <div class="input-group">
+            <div class="input-group input-group-lg">
               <%= render "/shared/captcha_input" %>
             </div>
           </div>
 
           <div class="form-actions">
-            <%= f.submit "找回密码", class: "btn btn-lg btn-primary", 'data-disable-with' => t("common.submitting") %>
+            <%= f.submit "找回密码", class: "btn btn-lg btn-block btn-primary", 'data-disable-with' => t("common.submitting") %>
           </div>
         <% end %>
       </div>

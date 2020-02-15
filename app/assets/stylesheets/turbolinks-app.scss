@@ -90,6 +90,12 @@ body {
   }
 
   .card-footer { background: #f0f0f0; padding: 10px 20px; }
+
+  &.card-lg {
+    .card-body {
+      padding: 20px;
+    }
+  }
 }
 
 .container > .alert {

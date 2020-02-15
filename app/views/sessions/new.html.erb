@@ -3,23 +3,23 @@
 <div class="row">
   <div class="col"></div>
   <div class="col-md-5">
-    <div class="card">
+    <div class="card card-l6">
       <div class="card-body">
         <div class="card-title"><%= t("common.login") %> <%= Setting.app_name %></div>
         <%= form_for resource, as: resource_name, url: session_path(resource_name), remote: true do |f| %>
           <div class="form-group">
-            <%= f.text_field :login, class: "form-control input-lg", placeholder: "用户名 / Email" %>
+            <%= f.text_field :login, class: "form-control form-control-lg", placeholder: "用户名 / Email" %>
           </div>
           <div class="form-group">
-            <%= f.text_field :password, type: :password, class: "form-control input-lg", placeholder: "密码" %>
+            <%= f.text_field :password, type: :password, class: "form-control form-control-lg", placeholder: "密码" %>
           </div>
 
           <% if devise_mapping.rememberable? -%>
-          <div class="form-group from-check">
-            <label class="form-check-label" for="user_remember_me">
-              <%= f.check_box :remember_me %>
-              <%= t("common.remember_me") %>
-            </label>
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <%= f.check_box :remember_me, class: "custom-control-input" %>
+              <label class="custom-control-label" for="user_remember_me"><%= t("common.remember_me") %></label>
+            </div>
           </div>
           <% end -%>
 

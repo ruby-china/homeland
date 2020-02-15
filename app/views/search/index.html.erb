@@ -1,6 +1,6 @@
 <% title_tag [params[:q], t('common.search_result')].join(' · ') %>
 
-<div class="search-results card">
+<div class="search-results card card-lg">
   <div class="card-body">
     <div class="card-title clearfix">
       关于 “<%= params[:q] %>” 的搜索结果
@@ -14,11 +14,7 @@
         <%= render partial: (partial_view_name == 'team' ? 'user' : partial_view_name), locals: { item: item, hit: hit } %>
       <% end %>
     <% end %>
-  </div>
 
-  <% if @result.total_pages > 1 %>
-  <div class="card-footer clearfix">
     <%= paginate @result %>
   </div>
-  <% end %>
 </div>

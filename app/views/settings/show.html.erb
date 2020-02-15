@@ -2,7 +2,7 @@
   <%= render 'menu' %>
 
   <div class="col-md-10">
-    <div class="card">
+    <div class="card card-lg">
       <div class="card-body">
         <%= form_for @user, url: setting_path, method: :put, html: { enctype: "multipart/form-data" } do |f| %>
           <%= render "shared/error_messages", target: @user %>
@@ -21,6 +21,11 @@
               </div>
 
               <div class="form-group">
+                <label class="control-label">头像</label>
+                <%= f.file_field :avatar, class: "form-control" %>
+              </div>
+
+              <div class="form-group">
                 <label class="control-label">Email</label>
                 <%= f.text_field :email, disabled: @user.email_locked?, class: "form-control", placeholder: "Email" %>
               </div>
@@ -29,11 +34,6 @@
                 <label for="user_email_public" class="form-check-label">
                   <%= f.check_box :email_public, class: "form-check-input" %> <%= t("users.email_permission")%>
                 </label>
-              </div>
-
-              <div class="form-group">
-                <%= f.file_field :avatar %>
-                <div class="form-text">选择上传头像</div>
               </div>
 
               <div class="form-group">

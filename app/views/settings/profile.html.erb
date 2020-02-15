@@ -2,7 +2,7 @@
   <%= render 'menu' %>
 
   <div class="col-md-10">
-    <div class="card">
+    <div class="card card-lg">
       <div class="card-body">
         <%= form_for @user, url: setting_path, method: :put, html: { enctype: "multipart/form-data" } do |f| %>
           <%= render "shared/error_messages", target: @user %>

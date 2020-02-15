@@ -2,7 +2,7 @@
   <%= render 'menu' %>
 
   <div class="col-md-10">
-    <div class="card">
+    <div class="card card-lg">
       <div class="card-body">
         <div class="row">
           <div class="col-md-8">
@@ -12,15 +12,15 @@
 
               <% User::REWARD_FIELDS.each do |field| %>
                 <div class="form-group form-group-reward-field-<%= field %>">
-                  <label><%= User.reward_field_label(field) %></label>
+                  <label class="control-label"><%= User.reward_field_label(field) %></label>
                   <input class="form-control" type="file" name="user[rewards][<%= field %>]" id="user_reward_<%= field %>">
-                  <p class="form-text">
+                  <div class="form-text">
                     <% if field == :alipay %>
                     打开支付宝客户端：右上角 “+” -> 我要收款 -> 设定金额 -> 保存二维码图片
                     <% elsif field == :wechat %>
                     打开微信手机客户端：右上角 “+” -> 收付款 -> 我要收款 -> 保存二维码图片
                     <% end %>
-                  </p>
+                  </div>
                 </div>
 
                 <% if @user.reward_field(field) %>

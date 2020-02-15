@@ -3,18 +3,19 @@
 <div class="row">
   <div class="col"></div>
   <div class="col-md-6">
-    <div class="card">
-      <div class="card-header">重新发送解锁邮件</div>
+    <div class="card card-lg">
       <div class="card-body">
+        <div class="card-title">重新发送解锁邮件</div>
+
         <%= form_for resource, as: resource_name, url: unlock_path(resource_name), method: :post do |f| %>
           <%= render "shared/error_messages", target: resource %>
 
           <div class="form-group">
-            <%= f.text_field :email, class: "form-control", placeholder: "Email" %>
+            <%= f.text_field :email, class: "form-control form-control-lg", placeholder: "Email" %>
           </div>
 
           <div class="form-actions">
-            <%= f.submit "重新发送解锁邮件", class: 'btn btn-primary' %>
+            <%= f.submit "重新发送解锁邮件", class: 'btn btn-primary btn-lg btn-block' %>
           </div>
         <% end %>
       </div>

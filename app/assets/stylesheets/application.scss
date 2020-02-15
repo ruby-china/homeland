@@ -52,11 +52,15 @@
 * {
   outline-style: none;
 }
-textarea,
-input[text] {
-  outline: none !important;
-  box-shadow: none !important;
+
+input[type=file]::-webkit-file-upload-button {
+  color: $primary;
   -webkit-appearance: none !important;
+  border: 0;
+  outline: none;
+  font-weight: bold;
+  padding: 0;
+  padding-right: 10px;
 }
 
 textarea,
@@ -110,7 +114,8 @@ textarea,
 }
 
 .rucaptcha-image {
-  width: 120px;
+  width: 100px;
+  border-radius: 3px;
 }
 
 /* Bootstrap Theme */
@@ -522,6 +527,14 @@ kbd {
   }
 }
 
+@media (min-width: 768px) {
+  .card.card-lg {
+    .card-body {
+      padding: 30px;
+    }
+  }
+}
+
 .nav-link {
   color: $primary;
   &:hover {
@@ -719,6 +732,13 @@ img.emoji {
 
 .setting-menu {
   padding-right: 0;
+  padding-left: 0px;
+}
+
+@media (min-width: 768px) {
+  .setting-menu {
+    padding-left: 15px;
+  }
 }
 
 .editor-toolbar {

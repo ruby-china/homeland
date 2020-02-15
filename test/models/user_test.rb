@@ -570,4 +570,13 @@ class UserTest < ActiveSupport::TestCase
     assert_equal @rei.id, res[1].id
     assert_equal 2, res.length
   end
+
+  test "github_repos_path" do
+    user = User.new(github: "huacnlee")
+    assert_equal "/users/huacnlee/repos?type=owner&sort=pushed", user.github_repos_path
+
+    user = User.new(github: "")
+    assert_nil user.github_repos_path
+    assert_nil User.fetch_github_repositories(user.id)
+  end
 end

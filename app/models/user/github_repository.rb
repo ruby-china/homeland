@@ -23,15 +23,16 @@ class User
     end
 
     def github_repos_path
-      github_login = self.github || self.login
+      return nil if self.github.blank?
       resource_name = organization? ? "orgs" : "users"
-      "/#{resource_name}/#{github_login}/repos?type=owner&sort=pushed"
+      "/#{resource_name}/#{self.github}/repos?type=owner&sort=pushed"
     end
 
     module ClassMethods
       def fetch_github_repositories(user_id)
         user = User.find_by(id: user_id)
         return unless user
+        return if user.github_repos_path.blank?
 
         begin
           conn = Faraday.new("https://api.github.com") do |conn|
@@ -44,17 +45,21 @@ class User
           return
         end
 
-        items = JSON.parse(resp.body)
-        items = items.collect do |a1|
-          {
-            name: a1["name"],
-            url: a1["html_url"],
-            watchers: a1["watchers"],
-            language: a1["language"],
-            description: a1["description"]
-          }
+        items = []
+        if resp.status == 200
+          items = JSON.parse(resp.body)
+          items = items.collect do |a1|
+            {
+              name: a1["name"],
+              url: a1["html_url"],
+              watchers: a1["watchers"],
+              language: a1["language"],
+              description: a1["description"]
+            }
+          end
+          items.sort! { |a, b| b[:watchers] <=> a[:watchers] }.take(10)
         end
-        items.sort! { |a, b| b[:watchers] <=> a[:watchers] }.take(10)
+
         Homeland.file_store.write(user.github_repositories_cache_key, items, expires_in: 15.days)
         items
       end

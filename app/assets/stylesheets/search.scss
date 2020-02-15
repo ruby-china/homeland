@@ -1,8 +1,15 @@
 @import "vars";
 
 .search-results {
+  .card-body {
+    padding: 30px;
+  }
   .result {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
 
     em { color: $red; font-style: normal;}
 
@@ -21,8 +28,8 @@
     }
 
     .desc {
-      color: #666;
-      font-size: 14px;
+      color: #888;
+      font-size: 15px;
       word-break: break-all;
       em { color: $red; }
     }

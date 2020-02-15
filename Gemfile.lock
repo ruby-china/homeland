@@ -173,8 +173,6 @@ GEM
       activesupport (>= 4.2.0)
     hashie (3.6.0)
     hiredis (0.6.3)
-    homeland-wiki (0.4.4)
-      rails
     html-pipeline (2.12.3)
       activesupport (>= 2)
       nokogiri (>= 1.4)
@@ -460,7 +458,6 @@ DEPENDENCIES
   font-awesome-rails
   form-select
   hiredis
-  homeland-wiki
   html-pipeline
   html-pipeline-auto-correct
   http_accept_language

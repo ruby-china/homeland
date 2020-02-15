@@ -119,9 +119,6 @@ gem "rack-cors", require: "rack/cors"
 
 gem "exception-track"
 
-# Homeland Plugins
-gem "homeland-wiki"
-
 gem "bootsnap"
 
 group :development do

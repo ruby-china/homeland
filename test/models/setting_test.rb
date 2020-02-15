@@ -57,14 +57,16 @@ class SettingTest < ActiveSupport::TestCase
     assert_equal true, Setting.has_module?("foo")
     assert_equal true, Setting.has_module?("home")
     assert_equal true, Setting.has_module?("topic")
-    Setting.stubs(:modules).returns(["home", "topic\n", "note", "site", "team "])
+    Setting.stubs(:modules).returns(["home", "topic\n", "team "])
     assert_equal true, Setting.has_module?("home")
     assert_equal true, Setting.has_module?("topic")
-    assert_equal true, Setting.has_module?("note")
-    assert_equal true, Setting.has_module?("site")
     assert_equal true, Setting.has_module?("team")
     assert_equal false, Setting.has_module?("bbb")
+  end
 
+  test "sorted_plugins" do
+    Setting.sorted_plugins = "press,wiki,note,jobs"
+    assert_equal %w[press wiki note jobs], Setting.sorted_plugins
   end
 
   test "profile_fields" do

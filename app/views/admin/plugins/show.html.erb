@@ -5,14 +5,27 @@
     <%= link_to "返回", admin_plugins_path, class: "btn btn-default btn-sm" %>
   </div>
 </div>
-<p><%= @plugin.source_path %></p>
-<div class="form">
+<form class="form">
+  <div class="form-group">
+    <code><%= @plugin.source_path.sub(Rails.root.to_s, "${Rails.root}") %></code>
+  </div>
   <% if @plugin.url %>
     <div class="form-group">
       <%= link_to @plugin.url %>
     </div>
   <% end %>
+  <div class="form-group">
+    <% if @plugin.navbar_link %>
+      <span class="badge badge-primary">导航链接</span>
+    <% end %>
+    <% if @plugin.user_menu_link %>
+      <span class="badge badge-primary">用户菜单</span>
+    <% end %>
+    <% if @plugin.admin_path %>
+      <span class="badge badge-primary">管理界面</span>
+    <% end %>
+  </div>
   <p>
     <%= @plugin.description %>
   </p>
-</div>
+</form>

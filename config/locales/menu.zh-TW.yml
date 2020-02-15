@@ -129,6 +129,7 @@
     twitter_id: "Twitter ID 用於 Twitter 分享的時候提及，比如: ruby​​_china，不帶 @"
     share_allow_sites: "分享目标，可选 [twitter,weibo,facebook,wechat,google_plus,douban,tumblr,pinterest,linkedin,email,reddit,hacker_news]"
     editor_languages: 編輯器插入代碼語言可選項（一行一個），填寫文件擴展名比如："rb, go, php, js, html"
+    sorted_plugins: 插件排序，調整這個可以影響插件在導航欄的順序。請用換行或逗號間隔，比如："jobs, wiki, press, site"。
   pagination:
     next: "下一頁"
     prev: "上一頁"

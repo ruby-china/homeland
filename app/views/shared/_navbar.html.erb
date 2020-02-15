@@ -3,7 +3,7 @@
     li << link_to(t("menu.topics"), Setting.has_module?(:home) ? main_app.topics_path : main_app.root_path, class: "nav-link")
 
     Homeland.navbar_plugins.each do |plugin|
-      li << link_to(plugin.display_name, plugin.root_path, class: "nav-link") if Setting.has_module?(plugin.name)
+      li << link_to(plugin.display_name, plugin.root_path, class: "nav-link")
     end
   end %>
   <%= raw Setting.navbar_html %>

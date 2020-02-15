@@ -32,9 +32,6 @@ module Homeland
     # path of plugin admin page for example /admin/blog
     attr_accessor :admin_path
 
-    # add RSpec test path
-    attr_accessor :spec_path
-
     attr_accessor :source_path
 
     def uninstallable?
@@ -42,7 +39,12 @@ module Homeland
     end
 
     def <=>(other)
-      Setting.modules.index(self.name).to_i <=> Setting.modules.index(other.name).to_i
+      self_idx = Setting.sorted_plugins.index(self.name)
+      self_idx = 99999999 if self_idx.nil?
+      other_idx = Setting.sorted_plugins.index(other.name)
+      other_idx = 99999999 if other_idx.nil?
+
+      self_idx <=> other_idx
     end
 
     def destroy

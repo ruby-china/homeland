@@ -39,12 +39,15 @@ class Setting < RailsSettings::Base
     twitter_id
     share_allow_sites
     editor_languages
+    sorted_plugins
   ]
 
   # = Basic
   field :app_name, default: (ENV["app_name"] || "Homeland"), readonly: true
-  # Plugin module, [topic,home,wiki,site,note,team,github,editor.code,press]
+  # Module [topic,home,team,github,editor.code]
   field :modules, default: (ENV["modules"] || "all"), type: :array, readonly: true
+  # Plugin sort
+  field :sorted_plugins, default: [], type: :array, separator: /[\s,]+/
   # User profile module default: all [company,twitter,website,tagline,location,alipay,paypal,qq,weibo,wechat,douban,dingding,aliwangwang,facebook,instagram,dribbble,battle_tag,psn_id,steam_id]
   field :profile_fields, default: (ENV["profile_fields"] || "all"), type: :array, readonly: true
   field :domain, default: (ENV["domain"] || "localhost"), readonly: true

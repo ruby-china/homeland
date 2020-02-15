@@ -7,7 +7,7 @@ class SearchController < ApplicationController
     params[:q] ||= ""
 
     search_modules = [Topic, User]
-    search_modules << Page if Setting.has_module?(:wiki)
+    search_modules << Page if defined?(Page)
     search_params = {
       query: {
         simple_query_string: {

@@ -157,3 +157,17 @@ table tr td a.fa {
     font-size: 12px;
   }
 }
+
+.plugin-item {
+  .plugin-title {
+    font-size: 16px;
+    .fa {
+      color: #aaa;
+    }
+
+    .version {
+      font-size: 14px;
+      color: #aaa;
+    }
+  }
+}

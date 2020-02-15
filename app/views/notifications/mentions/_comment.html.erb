@@ -8,7 +8,7 @@
   <%
   case notification.second_target_type
   when "Post" %>
-  <% if respond_to?(homeland_press) %>
+  <% if respond_to?(:homeland_press) %>
     <div class="media-heading">
       在 <a href="<%= homeland_press.post_path(second_target) %>"><%= second_target.title %></a> 的评论中提及你：
     </div>
@@ -17,7 +17,7 @@
     </div>
   <% end %>
   <% when "Page" %>
-  <% if respond_to?(homeland_wiki) %>
+  <% if respond_to?(:homeland_wiki) %>
     <div class="media-heading">
       在 <a href="<%= homeland_wiki.page_path(second_target) %>"><%= second_target.title %></a> 的评论中提及你：
     </div>

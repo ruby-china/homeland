@@ -7,10 +7,10 @@
     em { color: $red; font-style: normal;}
 
     .title {
-      font-size: 15px;
+      font-size: 16px;
       line-height: 160%;
 
-      .badge { background: $gray; color: $gray; font-weight: normal; font-size: 12px; margin-left: 4px; }
+      .badge { background: #e0e0e0; color: #777; font-weight: normal; font-size: 12px; margin-left: 4px; }
     }
     .info {
       margin-bottom: 6px;
@@ -22,7 +22,7 @@
 
     .desc {
       color: #666;
-      font-size: 13px;
+      font-size: 14px;
       word-break: break-all;
       em { color: $red; }
     }

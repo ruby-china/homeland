@@ -18,5 +18,4 @@ docker\:install:
 docker\:reindex:
 	@echo "Reindex ElasticSearch..."
 	@$(RAKE) environment elasticsearch:import:model CLASS=Topic FORCE=y
-	@$(RAKE) environment elasticsearch:import:model CLASS=Page FORCE=y
 	@$(RAKE) environment elasticsearch:import:model CLASS=User FORCE=y

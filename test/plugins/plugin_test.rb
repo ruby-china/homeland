@@ -45,6 +45,10 @@ class Homeland::PluginTest < ActiveSupport::TestCase
     assert_equal false, @plugin1.user_menu_link
   end
 
+  test ".migrate_plugin" do
+    assert_equal true, Homeland.respond_to?(:migrate_plugin)
+  end
+
   test ".plugins work" do
     refute_equal nil, Homeland.plugins.find { |p| p.name == "foo" }
     refute_equal nil, Homeland.plugins.find { |p| p.name == "dar" }

@@ -74,6 +74,17 @@ module Homeland
     def reboot
       FileUtils.touch(Rails.root.join("tmp/restart.txt"))
     end
+
+    # Run rails migrate directly for Plugin migrations
+    # Used in plugin
+    def migrate_plugin(migration_path)
+      # Execute Migrations on engine load.
+      ActiveRecord::Migrator.migrations_paths += [migration_path]
+      begin
+        ActiveRecord::Tasks::DatabaseTasks.migrate
+      rescue ActiveRecord::NoDatabaseError
+      end
+    end
   end
 end
 

@@ -120,7 +120,6 @@ gem "rack-cors", require: "rack/cors"
 gem "exception-track"
 
 # Homeland Plugins
-gem "homeland-press"
 gem "homeland-wiki"
 
 gem "bootsnap"

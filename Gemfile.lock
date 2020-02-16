@@ -161,7 +161,7 @@ GEM
       railties (>= 4.2.0)
     faraday (1.0.0)
       multipart-post (>= 1.2, < 3)
-    ffi (1.11.1)
+    ffi (1.12.0)
     font-awesome-rails (4.7.0.5)
       railties (>= 3.2, < 6.1)
     form-select (0.3.2)
@@ -455,7 +455,6 @@ DEPENDENCIES
   enumize
   exception-track
   factory_bot_rails
-  ffi (= 1.11.1)
   font-awesome-rails
   form-select
   hiredis

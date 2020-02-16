@@ -121,6 +121,9 @@ gem "exception-track"
 
 gem "bootsnap"
 
+# Lock version
+gem "sassc", "2.0.1"
+
 group :development do
   gem "spring"
   gem "byebug"

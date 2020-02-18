@@ -3,8 +3,6 @@
 require "digest/md5"
 
 module UsersHelper
-  include LetterAvatar::AvatarHelper
-
   # 生成用户 login 的链接，user 参数可接受 user 对象或者 字符串的 login
   def user_name_tag(user, options = {})
     return "匿名" if user.blank?

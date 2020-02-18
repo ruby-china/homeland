@@ -22,8 +22,4 @@ class Team < User
   def owner?(user)
     self.team_users.accepted.exists?(role: :owner, user_id: user.id)
   end
-
-  def member?(user)
-    self.team_users.accepted.exists?(user_id: user.id)
-  end
 end

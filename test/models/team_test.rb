@@ -23,8 +23,6 @@ class TeamTest < ActiveSupport::TestCase
 
     assert_equal true, team.owner?(team_owner.user)
     assert_equal false, team.owner?(team_member.user)
-    assert_equal true, team.member?(team_owner.user)
-    assert_equal true, team.member?(team_member.user)
 
     # should touch team when member changed
     old_updated_at = team.updated_at

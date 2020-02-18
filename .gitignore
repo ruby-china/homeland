@@ -14,7 +14,6 @@ tmp/**/*
 /public/photo/**/*
 /public/user/**/*
 /public/uploads/**/*
-/public/system/**/*
 /public/topics
 /public/topics/**/*
 /public/doc

@@ -48,7 +48,7 @@ gem "carrierwave-qiniu"
 gem "mini_magick", require: false
 
 # 验证码，头像
-gem "letter_avatar"
+gem "letter_avatar", "0.3.6"
 gem "rucaptcha"
 gem "recaptcha"
 

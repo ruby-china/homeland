@@ -40,10 +40,16 @@ class SettingTest < ActiveSupport::TestCase
     end
   end
 
-  test "host" do
+  test "base_url" do
     Setting.stubs(:domain).returns("homeland.io")
     Setting.stubs(:https).returns(true)
-    assert_equal "https://homeland.io", Setting.base_url
+    Rails.env.stub(:development?, false) do
+      assert_equal "https://homeland.io", Setting.base_url
+    end
+
+    Rails.env.stub(:development?, true) do
+      assert_equal "http://localhost:3000", Setting.base_url
+    end
   end
 
   test "admin_emails" do

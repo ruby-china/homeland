@@ -158,6 +158,7 @@ class Setting < RailsSettings::Base
     end
 
     def base_url
+      return "http://localhost:3000" if Rails.env.development?
       [self.protocol, self.domain].join("://")
     end
 

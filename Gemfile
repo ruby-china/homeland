@@ -46,8 +46,7 @@ gem "carrierwave-qiniu"
 # Lazy load
 gem "mini_magick", require: false
 
-# 验证码，头像
-gem "letter_avatar"
+# 验证码
 gem "rucaptcha"
 gem "recaptcha"
 

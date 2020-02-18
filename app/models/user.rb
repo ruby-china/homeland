@@ -5,7 +5,8 @@ require "digest/md5"
 class User < ApplicationRecord
   include Searchable
   include User::Roles, User::Blockable, User::Likeable, User::Followable, User::TopicActions,
-          User::GitHubRepository, User::ProfileFields, User::RewardFields, User::Omniauthable
+          User::GitHubRepository, User::ProfileFields, User::RewardFields, User::Omniauthable,
+          User::Avatar
 
   second_level_cache version: 2, expires_in: 2.weeks
 
@@ -17,8 +18,6 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable, :recoverable, :lockable,
          :rememberable, :trackable, :validatable, :omniauthable
-
-  mount_uploader :avatar, AvatarUploader
 
   has_many :topics, dependent: :destroy
   has_many :replies, dependent: :destroy
@@ -153,24 +152,6 @@ class User < ApplicationRecord
   def soft_delete
     self.state = "deleted"
     save(validate: false)
-  end
-
-  def letter_avatar_url(size)
-    path = LetterAvatar.generate(self.login, size).sub("public/", "/")
-
-    "#{Setting.base_url}#{path}"
-  end
-
-  def large_avatar_url
-    if self[:avatar].present?
-      self.avatar.url(:lg)
-    else
-      self.letter_avatar_url(192)
-    end
-  end
-
-  def avatar?
-    self[:avatar].present?
   end
 
   # @example.com 的可以修改邮件地址

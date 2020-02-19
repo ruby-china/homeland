@@ -172,7 +172,6 @@ GEM
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     hashie (3.6.0)
-    hiredis (0.6.3)
     html-pipeline (2.12.3)
       activesupport (>= 2)
       nokogiri (>= 1.4)
@@ -457,7 +456,6 @@ DEPENDENCIES
   factory_bot_rails
   font-awesome-rails
   form-select
-  hiredis
   html-pipeline
   html-pipeline-auto-correct
   http_accept_language

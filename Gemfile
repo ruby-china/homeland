@@ -82,7 +82,6 @@ gem "omniauth-github"
 gem "cancancan"
 
 # Redis
-gem "hiredis"
 gem "redis"
 gem "redis-namespace"
 gem "redis-objects"

@@ -24,7 +24,7 @@ class User
 
     def letter_avatar_char
       matchs = LETTER_AVATAR_REGEXP.match(login)
-      matchs[0] || "-"
+      (matchs[0] || "-").downcase
     end
 
     def letter_avatar_url(size)

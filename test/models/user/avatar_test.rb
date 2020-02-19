@@ -8,6 +8,8 @@ class User::AvatarTest < ActiveSupport::TestCase
     assert_equal "h", u.letter_avatar_char
     u = User.new(login: "apple")
     assert_equal "a", u.letter_avatar_char
+    u = User.new(login: "Apple")
+    assert_equal "a", u.letter_avatar_char
     u = User.new(login: "100px")
     assert_equal "1", u.letter_avatar_char
     u = User.new(login: "_100px")

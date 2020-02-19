@@ -8,7 +8,7 @@ class User < ApplicationRecord
           User::GitHubRepository, User::ProfileFields, User::RewardFields, User::Omniauthable,
           User::Avatar
 
-  second_level_cache version: 3, expires_in: 2.weeks
+  second_level_cache version: 4, expires_in: 2.weeks
 
   LOGIN_FORMAT              = 'A-Za-z0-9\-\_\.'
   ALLOW_LOGIN_FORMAT_REGEXP = /\A[#{LOGIN_FORMAT}]+\z/

@@ -1,7 +1,6 @@
 data/
 log/
 tmp/
-public/system/
 public/uploads/
 spec/
 test/

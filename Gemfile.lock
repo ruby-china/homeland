@@ -64,7 +64,7 @@ GEM
       nokogiri (~> 1.6)
       rest-client (~> 2.0)
     ast (2.4.0)
-    auto-correct (0.2.0)
+    auto-correct (0.2.2)
       nokogiri (>= 1.4)
     autoprefixer-rails (9.7.4)
       execjs

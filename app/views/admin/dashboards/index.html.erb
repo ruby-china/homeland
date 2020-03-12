@@ -88,7 +88,7 @@
       el.find(".total-month").text('+' + data.month_count);
     }
     
-    var models = ['user', 'topic', 'reply', 'note', 'notification', 'photo', 'comment'];
+    var models = ['user', 'topic', 'reply', 'notification', 'photo', 'comment'];
     for (var i = 0; i < models.length; i ++) {
       var model = models[i];
       $.get("/admin/stats?model="+ model +"&by=month", function(data) {

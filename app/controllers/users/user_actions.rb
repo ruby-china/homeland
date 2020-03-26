@@ -67,7 +67,7 @@ module Users
 
     def calendar
       data = @user.calendar_data
-      render json: data if stale?(data)
+      render json: data if stale?(etag: data)
     end
 
     def reward

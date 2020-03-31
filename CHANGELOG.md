@@ -6,8 +6,12 @@
 - 去掉 Topic 后面的相关话题，意义不大，并且 MeiliSearch 暂时无法支持；
 - 正式去掉 `users.verified` 字段 (#1149) 里面已经将它升级到 `state` 字段里面（如你未用升级过 Homeland 3.3.x 请先升级这个版本）；
 
+> NOTE: 当前版本请更新到最新的 homeland-docker。
+
 3.3.0
 ----------
+
+> NOTE: 请使用 [homeland-docker@3.2.x](https://github.com/ruby-china/homeland-docker/tree/3.3.x) 分支
 
 - 全新的插件模式，你可以自由开发插件，并通过后台来管理插件；(#1143)
 - 招聘、酷站按新插件模式重构，请注意重新下载插件安装。

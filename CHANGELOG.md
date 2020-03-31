@@ -8,6 +8,16 @@
 
 > NOTE: 当前版本请更新到最新的 homeland-docker。
 
+### 升级说明
+
+请更新 homeland-docker 到最新版本，并调整 `app.local.env`，增加 `MEILI_HOST`、`MEILI_MASTER_KEY`：
+
+```diff
+- ELASTICSEARCH_HOST=elasticsearch:9200
++ MEILI_HOST=http://meilisearch:7700
++ MEILI_MASTER_KEY=homeland
+```
+
 3.3.0
 ----------
 

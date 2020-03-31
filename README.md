@@ -12,29 +12,12 @@
   </p>
 </p>
 
-## Deployment
+## Usage
 
-Please visit https://homeland.ruby-china.org get more documents.
-
-## Release Notes
-
-Please visit [Releases](https://github.com/ruby-china/homeland/releases) page.
-
-## Contribute Guide
-
-Please read this document: [CONTRIBUTE GUIDE](https://github.com/ruby-china/homeland/blob/master/CONTRIBUTE.md)
-
-## Thanks
-
-* [Contributors](https://github.com/ruby-china/homeland/contributors)
-* [Twitter Bootstrap](https://twitter.github.com/bootstrap)
-* [Font Awesome](http://fortawesome.github.io/Font-Awesome/icons/)
-* Forked from [Homeland Project](https://github.com/huacnlee/homeland)
-* Theme from [Mediom](https://github.com/huacnlee/mediom)
-
-## Sites used Homeland
-
-https://homeland.ruby-china.org/expo
+- [DEPLOYMENT GUIDE](https://homeland.ruby-china.org)
+- [EXAMPLE](https://homeland.ruby-china.org/expo)
+- [CHANGELOG](https://github.com/ruby-china/homeland/blob/master/CHANGELOG.md)
+- [CONTRIBUTE GUIDE](https://github.com/ruby-china/homeland/blob/master/CONTRIBUTE.md)
 
 ## License
 

@@ -24,7 +24,7 @@ RUN mkdir -p /home/app &&\
 
 ADD Gemfile Gemfile.lock /home/app/homeland/
 RUN gem install puma
-RUN bundle install --jobs 20 --retry 5 &&\
+RUN bundle install --deployment --jobs 20 --retry 5 &&\
   find /home/app/homeland/vendor/bundle -name tmp -type d -exec rm -rf {} +
 ADD . /home/app/homeland
 ADD ./config/nginx/ /etc/nginx

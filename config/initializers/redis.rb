@@ -4,6 +4,8 @@ require "redis"
 require "redis-namespace"
 require "redis/objects"
 
+return if ENV["RAILS_PRECOMPILE"]
+
 redis_config = Rails.application.config_for(:redis)
 
 $redis = Redis.new(url: redis_config["url"], db: 0)

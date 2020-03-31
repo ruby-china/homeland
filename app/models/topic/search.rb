@@ -4,17 +4,13 @@ class Topic
   module Search
     extend ActiveSupport::Concern
 
-    included do
-      mapping do
-        indexes :title, term_vector: :yes
-        indexes :body, term_vector: :yes
-      end
-    end
-
     def as_indexed_json(_options = {})
       {
+        id: self.id,
         title: self.title,
-        body: self.full_body
+        body: self.full_body,
+        created_at: self.created_at,
+        updated_at: self.updated_at,
       }
     end
 

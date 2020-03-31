@@ -17,12 +17,14 @@ class SearchIndexer < ApplicationJob
 
     return false unless obj
 
+    index = obj.class.__meilisearch_index
+
     if operation == "update"
-      obj.__elasticsearch__.update_document
+      index.add_documents(obj.as_indexed_json)
     elsif operation == "delete"
-      obj.__elasticsearch__.delete_document
+      index.delete_document(obj.id)
     elsif operation == "index"
-      obj.__elasticsearch__.index_document
+      index.add_documents(obj.as_indexed_json)
     end
   rescue => e
     raise e unless Rails.env.test?

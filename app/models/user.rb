@@ -184,7 +184,7 @@ class User < ApplicationRecord
 
   # for Searchable
   def as_indexed_json(_options = {})
-    as_json(only: %i[id login name tagline bio email location created_at updated_at])
+    as_json(only: %i[login name tagline bio email location])
   end
 
   def indexed_changed?

@@ -128,6 +128,19 @@ GEM
       railties (>= 3.2, < 6.1)
     dropzonejs-rails (0.8.4)
       rails (> 3.1)
+    elasticsearch (5.0.5)
+      elasticsearch-api (= 5.0.5)
+      elasticsearch-transport (= 5.0.5)
+    elasticsearch-api (5.0.5)
+      multi_json
+    elasticsearch-model (5.0.2)
+      activesupport (> 3)
+      elasticsearch (~> 5)
+      hashie
+    elasticsearch-rails (5.0.2)
+    elasticsearch-transport (5.0.5)
+      faraday
+      multi_json
     enumize (0.2.0)
       rails (>= 5.0.0)
     erubi (1.9.0)
@@ -169,9 +182,6 @@ GEM
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     http_accept_language (2.1.1)
-    httparty (0.17.3)
-      mime-types (~> 3.0)
-      multi_xml (>= 0.5.2)
     i18n (1.8.2)
       concurrent-ruby (~> 1.0)
     jaro_winkler (1.5.4)
@@ -210,8 +220,6 @@ GEM
       mini_mime (>= 0.1.1)
     marcel (0.3.3)
       mimemagic (~> 0.3.2)
-    meilisearch (0.9.0)
-      httparty (~> 0.17.1)
     method_source (1.0.0)
     mime-types (3.3.1)
       mime-types-data (~> 3.2015)
@@ -443,6 +451,8 @@ DEPENDENCIES
   doorkeeper-i18n
   dotenv-rails
   dropzonejs-rails
+  elasticsearch-model (~> 5.0.2)
+  elasticsearch-rails (~> 5.0.2)
   enumize
   exception-track
   factory_bot_rails
@@ -457,7 +467,6 @@ DEPENDENCIES
   kaminari
   letter_opener
   listen
-  meilisearch
   mini_magick
   minitest-spec-rails
   mocha

@@ -1,0 +1,15 @@
+<div class="result user media">
+  <div class="media">
+    <div class="avatar media-left">
+      <div class='image'><%= user_avatar_tag(item, :md) %></div>
+    </div>
+    <div class="media-body">
+      <div class="info">
+        <%= link_to item.name, item %>
+      </div>
+      <div class="info number">
+        <%= markdown item.bio %>
+      </div>
+    </div>
+  </div>
+</div>

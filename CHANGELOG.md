@@ -1,22 +1,9 @@
 3.4.0
 ---------
 
-- 采用 [MeiliSearch](https://github.com/meilisearch/MeiliSearch) 代替 ElasticSearch，以减少 ElasticSearch 的大量内存开销；
-- 搜索结果暂时只搜索讨论区主题，MeiliSearch 当前不支持多种数据同时搜索；
-- 去掉 Topic 后面的相关话题，意义不大，并且 MeiliSearch 暂时无法支持；
 - 正式去掉 `users.verified` 字段 (#1149) 里面已经将它升级到 `state` 字段里面（如你未用升级过 Homeland 3.3.x 请先升级这个版本）；
 
 > NOTE: 当前版本请更新到最新的 homeland-docker。
-
-### 升级说明
-
-请更新 homeland-docker 到最新版本，并调整 `app.local.env`，增加 `MEILI_HOST`、`MEILI_MASTER_KEY`：
-
-```diff
-- ELASTICSEARCH_HOST=elasticsearch:9200
-+ MEILI_HOST=http://meilisearch:7700
-+ MEILI_MASTER_KEY=homeland
-```
 
 3.3.0
 ----------

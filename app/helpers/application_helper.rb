@@ -124,7 +124,7 @@ module ApplicationHelper
   end
 
   def highlight(text)
-    # text = escape_once(text).gsub("[h]", "<em>").gsub("[/h]", "</em>").gsub(/\\n|\\r/, "")
+    text = escape_once(text).gsub("[h]", "<em>").gsub("[/h]", "</em>").gsub(/\\n|\\r/, "")
     raw text
   end
 

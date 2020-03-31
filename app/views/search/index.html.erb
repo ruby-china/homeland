@@ -4,17 +4,17 @@
   <div class="card-body">
     <div class="card-title clearfix">
       关于 “<%= params[:q] %>” 的搜索结果
-      <div class="counter">共 <%= @result.records.total %> 条</div>
+      <div class="counter">共 <%= @result.total_count %> 条</div>
     </div>
-    <% if @result.records.total == 0 %>
-      <div class="no-result">没有搜索到任何有关 “<%= params[:q]%>” 的内容</div>
+    <% if @result.total_count == 0 %>
+      <div class="no-result">没有搜索到任何有关 “<%= params[:q] %>” 的内容</div>
     <% else %>
-      <% @result.records.each_with_hit do |item, hit| %>
-        <% partial_view_name = item.class.name.downcase -%>
-        <%= render partial: (partial_view_name == 'team' ? 'user' : partial_view_name), locals: { item: item, hit: hit } %>
+      <% @result.each do |hit| %>
+        <% partial_view_name = @klass.name.downcase -%>
+        <%= render partial: (partial_view_name == 'team' ? 'user' : partial_view_name), locals: {  hit: hit } %>
       <% end %>
     <% end %>
 
-    <%= paginate @result %>
+    <%= paginate @result  %>
   </div>
 </div>

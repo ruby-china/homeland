@@ -4,8 +4,6 @@ module Searchable
   extend ActiveSupport::Concern
 
   included do
-    include Elasticsearch::Model
-
     after_commit on: :create do
       SearchIndexer.perform_later("index", self.class.name, self.id)
     end
@@ -21,6 +19,27 @@ module Searchable
 
     after_commit on: :destroy do
       SearchIndexer.perform_later("delete", self.class.name, self.id)
+    end
+  end
+
+  def reindex
+    SearchIndexer.perform_later("index", self.class.name, self.id)
+  end
+
+  class_methods do
+    def __meilisearch_index
+      return @__meilisearch_index  if defined? @__meilisearch_index
+      index = $meilisearch.index(self.name.tableize)
+      index.show
+      @__meilisearch_index = index
+      @__meilisearch_index
+    rescue MeiliSearch::HTTPError => e
+      if e.message.include?("Not found - Index")
+        @__meilisearch_index = $meilisearch.create_index(self.name.tableize)
+        @__meilisearch_index
+      else
+        raise e
+      end
     end
   end
 end

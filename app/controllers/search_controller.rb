@@ -5,25 +5,23 @@ class SearchController < ApplicationController
 
   def index
     params[:q] ||= ""
+    @klass = (params[:type] || "topic").classify.constantize
 
-    search_modules = [Topic, User]
-    search_modules << Page if defined?(Page)
+    limit = 15
+    offset = ((params[:page] || 1).to_i - 1) * limit
+
     search_params = {
-      query: {
-        simple_query_string: {
-          query: params[:q],
-          default_operator: "AND",
-          minimum_should_match: "70%",
-          fields: %w[title body name login]
-        }
-      },
-      highlight: {
-        pre_tags: ["[h]"],
-        post_tags: ["[/h]"],
-        fields: { title: {}, body: {}, name: {}, login: {} }
-      }
+      limit: limit,
+      offset: offset,
+      cropLength: 150,
+      attributesToCrop: "body",
+      attributesToHighlight: "*",
     }
-    @result = Elasticsearch::Model.search(search_params, search_modules).page(params[:page])
+
+    result = @klass.__meilisearch_index.search(params[:q], search_params)
+    result.deep_symbolize_keys!
+
+    @result = Kaminari.paginate_array(result[:hits], total_count: result[:nbHits]).page(params[:page]).per(limit)
   end
 
   def users

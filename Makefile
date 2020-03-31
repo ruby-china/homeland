@@ -16,6 +16,5 @@ docker\:install:
 	@$(RUN) bundle exec rails db:seed RAILS_ENV=production
 	@$(RUN) bundle exec rails assets:precompile RAILS_ENV=production
 docker\:reindex:
-	@echo "Reindex ElasticSearch..."
-	@$(RAKE) environment elasticsearch:import:model CLASS=Topic FORCE=y
-	@$(RAKE) environment elasticsearch:import:model CLASS=User FORCE=y
+	@echo "Reindex Search..."
+	@$(RAKE) search:reindex

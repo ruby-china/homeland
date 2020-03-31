@@ -1,11 +1,13 @@
 <%
-title = hit.highlight.title.try(:first) || item.title
+title = hit.dig(:_formatted, :title)
+description = hit.dig(:_formatted, :body)
+url = topic_url(hit[:id])
 %>
 <div class="result">
-  <div class="title"><%= link_to highlight(title), item %></div>
+  <div class="title"><%= link_to highlight(title), url %></div>
   <div class="info">
-    <span class="url"><%= link_to polymorphic_url(item), item %></span>
-    <span class="date" title="Last Updated At"><%= item.created_at.to_date %></span>
+    <span class="url"><%= link_to url, url %></span>
+    <span class="date"><%= hit[:updated_at]&.to_time&.to_date %></span>
   </div>
-  <div class="desc"><%= highlight(hit.highlight.body.try(:first)) %></div>
+  <div class="desc"><%= highlight(description) %></div>
 </div>

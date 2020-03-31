@@ -3,6 +3,7 @@ log/
 tmp/
 public/uploads/
 spec/
+plugins/*
 test/
 doc/
 coverage/

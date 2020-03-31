@@ -2,7 +2,6 @@
 
 class User
   # 用户权限相关
-  # remove user.verified in Homeland 3.4.0
   module Roles
     extend ActiveSupport::Concern
 

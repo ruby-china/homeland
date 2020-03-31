@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_13_155459) do
+ActiveRecord::Schema.define(version: 2020_03_31_102233) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -167,6 +167,7 @@ ActiveRecord::Schema.define(version: 2020_02_13_155459) do
     t.text "body", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["page_id", "version"], name: "index_page_versions_on_page_id_and_version"
     t.index ["page_id"], name: "index_page_versions_on_page_id"
   end
 
@@ -322,7 +323,6 @@ ActiveRecord::Schema.define(version: 2020_02_13_155459) do
     t.string "github"
     t.string "twitter"
     t.string "avatar"
-    t.boolean "verified", default: false, null: false
     t.integer "state", default: 1, null: false
     t.string "tagline"
     t.datetime "created_at"

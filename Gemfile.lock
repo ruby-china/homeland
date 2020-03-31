@@ -375,7 +375,7 @@ GEM
     second_level_cache (2.5.2)
       activerecord (>= 5.2, < 7)
       activesupport (>= 5.2, < 7)
-    sidekiq (6.0.6)
+    sidekiq (6.0.5)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       rack-protection (>= 2.0.0)

@@ -22,6 +22,10 @@ module Searchable
     end
   end
 
+  def reindex
+    SearchIndexer.perform_later("index", self.class.name, self.id)
+  end
+
   class_methods do
     def __meilisearch_index
       return @__meilisearch_index  if defined? @__meilisearch_index

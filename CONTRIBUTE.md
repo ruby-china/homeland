@@ -6,14 +6,14 @@ Contribute Guide
 * Ruby 2.4.0 +
 * PostgreSQL 9.4 +
 * Redis 2.8 +
-* Elasticsearch 2.0 +
+* MeiliSearch 0.9.1 +
 
 ## Install in development
 
 ### Mac OS X, use Homebrew
 
 ```bash
-$ brew install redis postgresql imagemagick gs elasticsearch
+$ brew install redis postgresql imagemagick gs meilisearch
 ```
 
 ### Ubuntu
@@ -22,10 +22,10 @@ $ brew install redis postgresql imagemagick gs elasticsearch
 $ sudo apt-get install postgresql postgresql-contrib redis-server imagemagick ghostscript libpq-dev
 ```
 
-Install Elasticsearch
+Install MeiliSearch
 
 ```bash
-curl -sSL https://git.io/vVHhm | bash
+./bin/meilisearch
 ```
 
 ```bash
@@ -47,7 +47,7 @@ The Gemfile's dependencies are satisfied
 Configure
 --------------------------------------------------------------------------------
 Your Redis host (default: 127.0.0.1:6379):
-Your Elasticsearch host (default: 127.0.0.1:9200):
+Your MeiliSearch host (default: 127.0.0.1:7700):
 --------------------------------------------------------------------------------
 
 Seed default data...                                                      [Done]
@@ -65,10 +65,8 @@ $ rails s
 bundle exec rake
 ```
 
-## Reindex ElasticSearch
+## Reindex Search Indexes
 
 ```bash
-rails environment elasticsearch:import:model CLASS=Page FORCE=y
-rails environment elasticsearch:import:model CLASS=Topic FORCE=y
-rails environment elasticsearch:import:model CLASS=User FORCE=y
+rails search:reindex
 ```

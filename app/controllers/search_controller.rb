@@ -7,16 +7,21 @@ class SearchController < ApplicationController
     params[:q] ||= ""
     @klass = (params[:type] || "topic").classify.constantize
 
-    limit = 20
+    limit = 15
     offset = ((params[:page] || 1).to_i - 1) * limit
 
     search_params = {
       limit: limit,
       offset: offset,
+      cropLength: 150,
+      attributesToCrop: "body",
       attributesToHighlight: "*",
     }
 
-    @result = @klass.__meilisearch_index.search(params[:q], search_params)
+    result = @klass.__meilisearch_index.search(params[:q], search_params)
+    result.deep_symbolize_keys!
+
+    @result = Kaminari.paginate_array(result[:hits], total_count: result[:nbHits]).page(params[:page]).per(limit)
   end
 
   def users

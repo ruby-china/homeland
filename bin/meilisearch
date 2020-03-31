@@ -1,0 +1,1 @@
+docker run -it -p 7700:7700 --rm homeland/meilisearch:latest

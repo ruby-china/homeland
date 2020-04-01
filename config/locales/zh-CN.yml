@@ -7,9 +7,9 @@
     ios: iOS
     android: Android
   sso:
-    timeout_expired: 'SSO Token 已过期，请重新发起请求。'
-    unknown_error: '抱歉 SSO 登录的过程遇到了未处理的异常，登录失败。'
-    not_found: '抱歉 SSO 登录的过程遇到了未处理的异常，登录失败。'
+    timeout_expired: "SSO Token 已过期，请重新发起请求。"
+    unknown_error: "抱歉 SSO 登录的过程遇到了未处理的异常，登录失败。"
+    not_found: "抱歉 SSO 登录的过程遇到了未处理的异常，登录失败。"
   recaptcha:
     errors:
       verification_failed: "reCaptcha 验证不通过，请重试"
@@ -78,14 +78,14 @@
           psn_id: PSN ID
           steam_id: Stream ID
       team:
-        name: '公司／组织名称'
-        login: 'Slug'
-        bio: '公司／组织介绍'
-        website: '公司 / 项目网址'
+        name: "公司／组织名称"
+        login: "Slug"
+        bio: "公司／组织介绍"
+        website: "公司 / 项目网址"
       team_user:
-        login: '用户名'
-        role: '权限'
-        user_id: '用户'
+        login: "用户名"
+        role: "权限"
+        user_id: "用户"
       topic:
         title: "标题"
         user_id: "用户"
@@ -118,52 +118,3 @@
           attributes:
             reset_password_token:
               expired: 重置密码操作已过期
-      messages:
-        inclusion: "不包含于列表中"
-        exclusion: "是保留关键字"
-        invalid: "是无效的"
-        confirmation: "与确认值不匹配"
-        accepted: "必须是可被接受的"
-        empty: "不能留空"
-        blank: "不能为空字符"
-        too_long: "过长（最长为 %{count} 个字符）"
-        too_short: "过短（最短为 %{count} 个字符）"
-        wrong_length: "长度非法（必须为 %{count} 个字符）"
-        taken: "已经被使用"
-        not_a_number: "不是数字"
-        not_an_integer: "必须是整数"
-        greater_than: "必须大于 %{count}"
-        greater_than_or_equal_to: "必须大于或等于 %{count}"
-        equal_to: "必须等于 %{count}"
-        less_than: "必须小于 %{count}"
-        less_than_or_equal_to: "必须小于或等于 %{count}"
-        odd: "必须为单数"
-        even: "必须为双数"
-        record_invalid: "校验失败: %{errors}"
-        taken:
-          已占用
-        document_not_found:
-          没有发现类是 %{klass} ID 是 %{identifiers} 的文档
-        invalid_database:
-          数据库应该是Mongo::DB,而不是%{name}.
-        invalid_type:
-          在类%{klass}中定义了字段,实际值是%{value}的%{other}.
-        unsupported_version:
-          MongoDB %{version} 版本已过期，请升级到 %{mongo_version}.
-        validations:
-          校验失败 - %{errors}.
-        invalid_collection:
-          不允许直接访问嵌入式的集合%{klass} , 请从文档的根访问集合.
-        invalid_field:
-          字段的名字不允许为 %{name}. 你不应该定义跟Mongoid内部属性或者方法相同的名字，详细请看Use Document#instance_methods.
-        too_many_nested_attribute_records:
-          被关联的%{association} 嵌入式属性不能超过 %{limit}.
-        embedded_in_must_have_inverse_of:
-          embedded_in的关联属性必须包含inverse_of.
-        dependent_only_references_one_or_many:
-          dependent => destroy|delete 选项只有在references_one或者references_many时候有效.
-        association_cant_have_inverse_of:
-          在当前的关联中，不允许定义inverse_of去,其只有在embedded_in或者references_many是数组的情况下使用
-        unsaved_document:
-          You cannot call create or create! through a relational association
-          relation (%{document}) who's parent (%{base}) is not already saved.

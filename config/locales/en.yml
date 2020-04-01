@@ -4,9 +4,9 @@ en:
     github: GitHub
     twitter: Twitter
   sso:
-    timeout_expired: 'SSO Token was expired.'
-    unknown_error: 'Sorry, this have an unknown error with SSO login.'
-    not_found: 'Sorry, this have an unknown error with SSO login.'
+    timeout_expired: "SSO Token was expired."
+    unknown_error: "Sorry, this have an unknown error with SSO login."
+    not_found: "Sorry, this have an unknown error with SSO login."
   errors:
     messages:
       extension_whitelist_error: "Invalid file format, only image allowed [jpg, jpeg, gif, png]"
@@ -63,27 +63,3 @@ en:
         body: "Content"
         locked: "Lock"
         change_desc: "Change Description"
-    errors:
-      models:
-        user: "User"
-      messages:
-        inclusion: "Inclusion"
-        exclusion: "Exclusion"
-        invalid: "Invalid"
-        confirmation: "Confirmation did not match"
-        accepted: "acceptance required."
-        empty: "Cannot be empty."
-        blank: "Cannot be blank."
-        too_long: "Too long (limited to %{count} characters)."
-        too_short: "Too short (at least %{count} characters are required)."
-        wrong_length: "Invalid length (valid length: %{count} characters)."
-        taken: "already taken"
-        not_a_number: "Not a number"
-        not_an_integer: "Not an integer"
-        greater_than: "should be greater than %{count}"
-        greater_than_or_equal_to: "should be greater than or equal to %{count}"
-        equal_to: "should be equal to %{count}"
-        less_than: "should be less than %{count}"
-        less_than_or_equal_to: "should be less than or equal to %{count}"
-        odd: "should be odd number."
-        even: "should be even number."

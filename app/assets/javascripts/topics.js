@@ -306,6 +306,10 @@ window.TopicView = Backbone.View.extend({
   initCableUpdate() {
     const self = this;
 
+    if (!App.isLogined()) {
+      return;
+    }
+
     if (!Topics.topic_id) {
       return;
     }

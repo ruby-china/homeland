@@ -5,7 +5,7 @@ require "test_helper"
 class PhotoUploaderTest < ActiveSupport::TestCase
   test "extension limit" do
     not_an_image = fixture_file_upload("test.html", "text/html")
-    svg_image = fixture_file_upload("test.html", "text/html")
+    svg_image = fixture_file_upload("test.svg", "image/svg+xml")
     image = fixture_file_upload("test.png", "image/png")
 
     photo = build(:photo, image: not_an_image)

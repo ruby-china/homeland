@@ -13,7 +13,7 @@
 3.3.0
 ----------
 
-> NOTE: 请使用 [homeland-docker@3.2.x](https://github.com/ruby-china/homeland-docker/tree/3.3.x) 分支
+> NOTE: 请使用 [homeland-docker@3.3.x](https://github.com/ruby-china/homeland-docker/tree/3.3.x) 分支
 
 - 全新的插件模式，你可以自由开发插件，并通过后台来管理插件；(#1143)
 - 招聘、酷站按新插件模式重构，请注意重新下载插件安装。

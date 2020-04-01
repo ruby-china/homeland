@@ -118,6 +118,7 @@ gem "rack-cors", require: "rack/cors"
 gem "exception-track"
 
 gem "bootsnap"
+gem "lograge"
 
 # Lock version
 gem "sassc", "2.0.1"

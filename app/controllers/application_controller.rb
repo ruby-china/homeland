@@ -4,6 +4,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery prepend: true
   helper_method :turbolinks_app?, :turbolinks_ios?, :turbolinks_app_version
+  around_action :set_time_zone
 
   include SetCurrentInfo
   include Homeland::UserNotificationHelper
@@ -156,6 +157,12 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+    def set_time_zone(&block)
+      tz = Setting.timezone
+      ActiveSupport::TimeZone.find_tzinfo(tz) rescue tz = "UTC"
+      Time.use_zone(tz, &block)
+    end
 
     def user_locale
       params[:locale] || cookies[:locale] || http_head_locale || Setting.default_locale || I18n.default_locale

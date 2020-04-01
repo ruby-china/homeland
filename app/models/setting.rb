@@ -4,10 +4,11 @@
 class Setting < RailsSettings::Base
   # keys that allow update in admin
   EDITABLE_KEYS = %w[
-    navbar_brand_html
     default_locale
     auto_locale
+    timezone
     admin_emails
+    navbar_brand_html
     custom_head_html
     navbar_html
     footer_html
@@ -44,6 +45,7 @@ class Setting < RailsSettings::Base
 
   # = Basic
   field :app_name, default: (ENV["app_name"] || "Homeland"), readonly: true
+  field :timezone, default: "UTC"
   # Module [topic,home,team,github,editor.code]
   field :modules, default: (ENV["modules"] || "all"), type: :array, readonly: true
   # Plugin sort

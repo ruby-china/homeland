@@ -7,7 +7,11 @@
     value = Setting.send(@site_config.var)
     value = value.join("\n") if value.is_a?(Array)
     %>
-    <%= f.text_area :value, value: value, class: 'form-control', rows: 15 %>
+    <% if @site_config.var == "timezone" %>
+      <%= f.select :value, ActiveSupport::TimeZone.all.collect(&:name), { value: value }, { class: 'form-control' } %>
+    <% else %>
+      <%= f.text_area :value, value: value, class: 'form-control', rows: 15 %>
+    <% end %>
   </div>
   <div class="form-actions">
     <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving") %>

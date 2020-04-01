@@ -32,4 +32,12 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     get "/status"
     assert_equal 200, response.status
   end
+
+  test "GET /status with timezone" do
+    # Bad timezone
+    Setting.stub(:timezone, "foo") do
+      get "/status"
+      assert_equal 200, response.status
+    end
+  end
 end

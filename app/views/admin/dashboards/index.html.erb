@@ -12,7 +12,7 @@
   </div>
 </div>
 <div class="alert alert-info">
-  服务启动于：<%= l Homeland.boot_at, format: :long %>
+  服务启动于：<%= l Homeland.boot_at.in_time_zone(Time.zone), format: :long %> (<%= timeago Homeland.boot_at %>)
   <%= link_to icon_tag("power-off", label: "重启应用"), reboot_admin_dashboards_path, data: { method: :post, confirm: "你确定要重启 Homeland 吗？", disable_with: "请求中..." }, class: "text-danger pull-right" %>
 </div>
 <div class="clearfix">
@@ -87,7 +87,7 @@
       el.find(".total-week").text('+' + data.week_count);
       el.find(".total-month").text('+' + data.month_count);
     }
-
+    
     var models = ['user', 'topic', 'reply', 'notification', 'photo', 'comment'];
     for (var i = 0; i < models.length; i ++) {
       var model = models[i];

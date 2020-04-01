@@ -16,6 +16,13 @@ class ApplicationController < ActionController::Base
   etag { Setting.footer_html }
   etag { Rails.env.development? ? Time.now : Date.current }
 
+  rescue_from ActiveRecord::RecordNotFound do |exception|
+    respond_to do |format|
+      format.json { head :not_found }
+      format.html { render "/errors/404", status: :not_found }
+    end
+  end
+
   before_action do
     resource = controller_name.singularize.to_sym
     method = "#{resource}_params"

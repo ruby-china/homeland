@@ -57,10 +57,10 @@ const AppView = Backbone.View.extend({
     this.restoreHeaderSearchBox();
 
     if ((needle = $('body').data('controller-name'), ['topics', 'replies'].includes(needle))) {
-      window._topicView = new TopicView({parentView: this});
+      window._topicView = new TopicView({ parentView: this });
     }
 
-    return window._tocView = new TOCView({parentView: this});
+    return window._tocView = new TOCView({ parentView: this });
   },
 
   initComponents() {
@@ -71,7 +71,7 @@ const AppView = Backbone.View.extend({
 
     // 绑定评论框 Ctrl+Enter 提交事件
     $(".cell_comments_new textarea").unbind("keydown");
-    $(".cell_comments_new textarea").bind("keydown", "ctrl+return", function(el) {
+    $(".cell_comments_new textarea").bind("keydown", "ctrl+return", function (el) {
       if ($(el.target).val().trim().length > 0) {
         $(el.target).parent().parent().submit();
       }
@@ -145,11 +145,11 @@ const AppView = Backbone.View.extend({
 
     if ($el.data("state") !== "active") {
       $.ajax({
-        url : "/likes",
-        type : "POST",
-        data : {
-          type : likeable_type,
-          id : likeable_id
+        url: "/likes",
+        type: "POST",
+        data: {
+          type: likeable_type,
+          id: likeable_id
         }
       });
 
@@ -158,16 +158,16 @@ const AppView = Backbone.View.extend({
       this.likeableAsLiked($el);
     } else {
       $.ajax({
-        url : `/likes/${likeable_id}`,
-        type : "DELETE",
-        data : {
-          type : likeable_type
+        url: `/likes/${likeable_id}`,
+        type: "DELETE",
+        data: {
+          type: likeable_type
         }
       });
       if (likes_count > 0) {
         likes_count -= 1;
       }
-      $el.data("state","").data('count', likes_count).attr("title", "").removeClass("active");
+      $el.data("state", "").data('count', likes_count).attr("title", "").removeClass("active");
       if (likes_count === 0) {
         $('span', $el).text("");
       } else {
@@ -180,8 +180,8 @@ const AppView = Backbone.View.extend({
 
   likeableAsLiked(el) {
     const likes_count = el.data("count");
-    el.data("state","active").attr("title", "取消赞").addClass("active");
-    return $('span',el).text(`${likes_count} 个赞`);
+    el.data("state", "active").attr("title", "取消赞").addClass("active");
+    return $('span', el).text(`${likes_count} 个赞`);
   },
 
   initCable() {
@@ -207,12 +207,12 @@ const AppView = Backbone.View.extend({
     // console.log 'receivedNotificationCount', json
     const span = $(".notification-count span");
     const link = $(".notification-count a");
-    let new_title = document.title.replace(/^\(\d+\) /,'');
+    let new_title = document.title.replace(/^\(\d+\) /, '');
     if (json.count > 0) {
       span.show();
       new_title = `(${json.count}) ${new_title}`;
       const url = App.fixUrlDash(`${App.root_url}${json.content_path}`);
-      $.notifier.notify("",json.title,json.content,url);
+      $.notifier.notify("", json.title, json.content, url);
       link.addClass("new");
     } else {
       span.hide();
@@ -380,12 +380,12 @@ window.App = {
   turbolinks: false,
   mobile: false,
   locale: 'zh-CN',
-  notifier : null,
+  notifier: null,
   current_user_id: null,
-  access_token : '',
-  asset_url : '',
+  access_token: '',
+  asset_url: '',
   twemoji_url: 'https://twemoji.maxcdn.com/',
-  root_url : '',
+  root_url: '',
   cable: ActionCable.createConsumer(),
 
   isLogined() {
@@ -397,7 +397,7 @@ window.App = {
   },
 
   fixUrlDash(url) {
-    return url.replace(/\/\//g,"/").replace(/:\//,"://");
+    return url.replace(/\/\//g, "/").replace(/:\//, "://");
   },
 
   // 警告信息显示, to 显示在那个 DOM 前 (可以用 css selector)
@@ -459,7 +459,7 @@ window.App = {
   mentionable(el, logins) {
     if (!logins) { logins = []; }
     $(el).atwho({
-      at : "@",
+      at: "@",
       limit: 8,
       searchKey: 'login',
       callbacks: {
@@ -474,7 +474,7 @@ window.App = {
           // 过滤出本地匹配的数据
           const localMatches = _.filter(logins, u => r.test(u.login) || r.test(u.name));
           // Remote 匹配
-          return $.getJSON('/search/users.json', { q: query }, function(data) {
+          return $.getJSON('/search/users.json', { q: query }, function (data) {
             // 本地的排前面
             for (let u of Array.from(localMatches)) {
               data.unshift(u);
@@ -487,13 +487,14 @@ window.App = {
           });
         }
       },
-      displayTpl : "<li data-value='${login}'><img src='${avatar_url}' height='20' width='20'/> ${login} <small>${name}</small></li>",
-      insertTpl : "@${login}"}).atwho({
-      at : ":",
+      displayTpl: "<li data-value='${login}'><img src='${avatar_url}' height='20' width='20'/> ${login} <small>${name}</small></li>",
+      insertTpl: "@${login}"
+    }).atwho({
+      at: ":",
       limit: 8,
       searchKey: 'code',
-      data : window.EMOJI_LIST,
-      displayTpl : `<li data-value='\${code}'><img src='${App.twemoji_url}/svg/\${url}.svg' class='twemoji' /> \${code} </li>`,
+      data: window.EMOJI_LIST,
+      displayTpl: `<li data-value='\${code}'><img src='${App.twemoji_url}/svg/\${url}.svg' class='twemoji' /> \${code} </li>`,
       insertTpl: "${code}"
     });
     return true;
@@ -501,9 +502,9 @@ window.App = {
 };
 
 
-document.addEventListener('turbolinks:load',  () => window._appView = new AppView());
+document.addEventListener('turbolinks:load', () => window._appView = new AppView());
 
-document.addEventListener('turbolinks:click', function(event) {
+document.addEventListener('turbolinks:click', function (event) {
   if (event.target.getAttribute('href').charAt(0) === '#') {
     return event.preventDefault();
   }

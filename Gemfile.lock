@@ -374,7 +374,7 @@ GEM
       builder (~> 3.0)
     ruby-vips (2.0.17)
       ffi (~> 1.9)
-    rucaptcha (2.5.2)
+    rucaptcha (2.5.3)
       railties (>= 3.2)
     sanitize (5.1.0)
       crass (~> 1.0.2)

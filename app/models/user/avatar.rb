@@ -24,6 +24,7 @@ class User
 
     def letter_avatar_char
       matchs = LETTER_AVATAR_REGEXP.match(login)
+      return "-" if matchs.blank?
       (matchs[0] || "-").downcase
     end
 

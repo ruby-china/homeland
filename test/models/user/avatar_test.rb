@@ -18,6 +18,8 @@ class User::AvatarTest < ActiveSupport::TestCase
     assert_equal "1", u.letter_avatar_char
     u = User.new(login: "__hello")
     assert_equal "h", u.letter_avatar_char
+    u = User.new(login: "_@")
+    assert_equal "-", u.letter_avatar_char
   end
 
   test ".letter_avatar_url" do

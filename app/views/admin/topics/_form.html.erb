@@ -3,7 +3,10 @@
 
   <div class="form-group">
     <%= f.label :title %>
-    <%= f.text_field :title, class: "form-control" %>
+    <div class="input-group">
+      <%= f.text_field :title, class: "form-control" %>
+      <%= link_to "前台预览", @topic, target: "_blank", class: "btn btn-default ml-2" %>
+    </div>
   </div>
 
   <div class="form-group">
@@ -12,18 +15,15 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :user_id %>
-    <%= f.text_field :user_id, class: "form-control" %>
+    发布者：<%= user_name_tag @topic.user %>
   </div>
 
   <div class="form-group">
     <%= f.label :body %>
-    <%= f.text_area :body, class: "form-control" %>
+    <%= f.text_area :body, class: "form-control", rows: 20 %>
   </div>
 
   <div class="form-actions">
     <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving") %>
-    or
-    <%= link_to 'Back', admin_topics_path %>
   </div>
 <% end %>

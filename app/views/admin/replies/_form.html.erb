@@ -2,18 +2,19 @@
   <%= render 'shared/error_messages', target: @reply %>
 
   <div class="form-group">
-    <%= f.label :body %>
-    <%= f.text_area :body, class: "form-control" %>
+    <h4><%= link_to @reply.topic&.title, topic_path(@reply.topic_id), target: "_blank" %></h4>
+    <div class="mt-2">
+      <%= user_name_tag(@reply.user) %>
+      <%= timeago @reply.created_at %>
+    </div>
   </div>
 
   <div class="form-group">
-    <%= f.label :user_id %>
-    <%= f.text_field :user_id, class: "form-control" %>
+    <%= f.label :body %>
+    <%= f.text_area :body, class: "form-control", rows: 10 %>
   </div>
 
   <div class="form-actions">
     <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving") %>
-    or
-    <%= link_to 'Back', admin_replies_path %>
   </div>
 <% end %>

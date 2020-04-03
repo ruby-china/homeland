@@ -19,6 +19,7 @@ module Admin
     end
 
     def show
+      redirect_to edit_admin_topic_path(@topic.id)
     end
 
     def new

@@ -19,9 +19,7 @@ module Admin
     end
 
     def show
-      if @reply.topic.blank?
-        redirect_to admin_replies_path, alert: "帖子已经不存在"
-      end
+      redirect_to edit_admin_reply_path(@reply.id)
     end
 
     def destroy

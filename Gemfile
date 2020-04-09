@@ -120,6 +120,8 @@ gem "exception-track"
 gem "bootsnap"
 gem "lograge"
 
+gem "puma_worker_killer"
+
 # Lock version
 gem "sassc", "2.0.1"
 

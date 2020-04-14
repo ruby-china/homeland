@@ -53,7 +53,7 @@
   outline-style: none;
 }
 
-input[type=file]::-webkit-file-upload-button {
+input[type="file"]::-webkit-file-upload-button {
   color: $primary;
   -webkit-appearance: none !important;
   border: 0;
@@ -756,6 +756,21 @@ img.emoji {
       border-radius: 3px;
       padding: 8px;
       margin: 0;
+    }
+
+    .upload-button {
+      &.active {
+        .upload-icon {
+          display: none;
+        }
+        .loading {
+          display: inline-block;
+        }
+      }
+
+      .loading {
+        display: none;
+      }
     }
   }
 

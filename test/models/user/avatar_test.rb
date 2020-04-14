@@ -44,9 +44,5 @@ class User::AvatarTest < ActiveSupport::TestCase
 
     user.avatar = nil
     assert_includes user.large_avatar_url, "/system/letter_avatars/h.png"
-
-    # avatar is present
-    user[:avatar] = "aaa.jpg"
-    assert_equal user.avatar.url(:lg), user.large_avatar_url
   end
 end

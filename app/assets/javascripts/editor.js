@@ -124,15 +124,12 @@ window.Editor = Backbone.View.extend({
   },
 
   showUploading() {
-    $("#editor-upload-image").hide();
-    if ($("#editor-upload-image").parent().find("span.loading").length === 0) {
-      return $("#editor-upload-image").before("<span class='loading'><i class='fa fa-circle-o-notch fa-spin'></i></span>");
-    }
+    const btn = $("#editor-upload-image")
+    btn.addClass("active");
   },
 
   restoreUploaderStatus() {
-    $("#editor-upload-image").parent().find("span.loading").remove();
-    return $("#editor-upload-image").show();
+    $("#editor-upload-image").removeClass("active");
   },
 
   appendImageFromUpload(srcs) {

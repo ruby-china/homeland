@@ -14,7 +14,12 @@
       </div>
     </span>
     <% end %>
-    <%= link_to icon_tag("image"), "#", id: "editor-upload-image", title: t("common.editor_add_image"), class: "nav-link" %>
-    <a href="#" class="nav-link preview"><%= t("common.editor_toolbar_preview") %></a>
+    <a id="editor-upload-image" href="#" title="<%= t("common.editor_add_image") %>" class="nav-link upload-button">
+      <i class="upload-icon fa fa-image"></i>
+      <i class='loading fa fa-circle-o-notch fa-spin'></i>
+    </a>
+    <a href="#" class="nav-link preview" title="<%= t("common.editor_toolbar_preview") %>">
+      <%= icon_tag("eye") %>
+    </a>
   </div>
 </div>

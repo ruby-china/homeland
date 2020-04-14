@@ -187,6 +187,7 @@ describe Auth::SSOController do
     it "should work" do
       admin = create(:admin)
       sign_in admin
+
       get provider_auth_sso_path, params: Rack::Utils.parse_query(@sso.payload)
       assert_equal 302, response.status
 
@@ -195,13 +196,12 @@ describe Auth::SSOController do
       assert_match /^http:\/\/foobar.com\/sso\/callback/, location
 
       payload = location.split("?")[1]
-      sso2 = SingleSignOn.parse(payload, @sso.sso_secret)
 
+      sso2 = SingleSignOn.parse(payload, @sso.sso_secret)
       assert_equal admin.email, sso2.email
       assert_equal admin.name, sso2.name
       assert_equal admin.login, sso2.username
       assert_equal admin.id.to_s, sso2.external_id
-      refute_equal nil, sso2.avatar_url
       assert_equal true, sso2.admin
     end
 

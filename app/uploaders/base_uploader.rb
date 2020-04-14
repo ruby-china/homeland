@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class BaseUploader < CarrierWave::Uploader::Base
+  THUMB_IMAGE_EXTS = %w[.jpg .jpeg .gif .png]
+
   # 在 UpYun 或其他平台配置图片缩略图
   # http://docs.upyun.com/guide/#_12
   # Avatar
@@ -23,12 +25,19 @@ class BaseUploader < CarrierWave::Uploader::Base
   end
 
   def extension_whitelist
-    %w[jpg jpeg gif png]
+    %w[jpg jpeg gif png svg]
+  end
+
+  def allow_thumb?(url)
+    return false if url.nil?
+    THUMB_IMAGE_EXTS.include?(File.extname(url))
   end
 
   def url(version_name = nil)
     @url ||= super({})
     return @url if version_name.blank?
+    return @url unless allow_thumb?(@url)
+
     version_name = version_name.to_s
     unless version_name.in?(ALLOW_VERSIONS)
       raise "ImageUploader version_name:#{version_name} not allow."

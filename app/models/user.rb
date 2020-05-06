@@ -72,14 +72,6 @@ class User < ApplicationRecord
     where(conditions.to_h).where(["(lower(login) = :value OR lower(email) = :value) and state != -1", { value: login }]).first
   end
 
-  def self.current
-    Thread.current[:current_user]
-  end
-
-  def self.current=(user)
-    Thread.current[:current_user] = user
-  end
-
   def self.search(term, user: nil, limit: 30)
     following = []
     term = term.to_s + "%"

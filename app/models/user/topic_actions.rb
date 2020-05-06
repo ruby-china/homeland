@@ -39,23 +39,7 @@ class User
 
     # 将 topic 的最后回复设置为已读
     def read_topic(topic, opts = {})
-      return if topic.blank?
-      return if self.topic_read?(topic)
-
-      opts[:replies_ids] ||= topic.replies.pluck(:id)
-
-      any_sql = "
-        (target_type = 'Topic' AND target_id = ?) or
-        (target_type = 'Reply' AND target_id in (?))
-      "
-      notifications.unread
-                   .where(any_sql, topic.id, opts[:replies_ids])
-                   .update_all(read_at: Time.now)
-      Notification.realtime_push_to_client(self)
-
-      # 处理 last_reply_id 是空的情况
-      last_reply_id = topic.last_reply_id || -1
-      Rails.cache.write("user:#{id}:topic_read:#{topic.id}", last_reply_id)
+      TopicReadJob.perform_later(topic_id: topic.id, user_id: self.id, replies_ids: opts[:replies_ids])
     end
   end
 end

@@ -260,8 +260,10 @@ describe TopicsController do
       create :reply, body: "@#{user.login}", topic: topic, like_by_user_ids: [user.id]
       sign_in user
 
-      assert_changes -> { user.notifications.unread.count }, -2 do
-        get topic_path(topic)
+      perform_enqueued_jobs do
+        assert_changes -> { user.notifications.unread.count }, -2 do
+          get topic_path(topic)
+        end
       end
       assert_equal 200, response.status
     end

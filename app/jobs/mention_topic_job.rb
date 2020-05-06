@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# 在被提及的话题里面创建 mention 回复，连接到提及的话题
 class MentionTopicJob < ApplicationJob
   queue_as :notifications
 

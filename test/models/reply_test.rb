@@ -79,11 +79,6 @@ class ReplyTest < ActiveSupport::TestCase
     # TODO: 需要更多的测试，测试 @ 并且有关注的时候不会重复通知，回复时候不会通知自己
   end
 
-  test "should boardcast replies to client" do
-    Reply.expects(:broadcast_to_client).once
-    create :reply
-  end
-
   test "Touch Topic in callback" do
     topic = create :topic, updated_at: 1.days.ago
     reply = create :reply, topic: topic
@@ -114,28 +109,6 @@ class ReplyTest < ActiveSupport::TestCase
     topic.reload
     assert_equal old_last_active_mark, topic.last_active_mark
     assert_equal old_replied_at.to_i, topic.replied_at.to_i
-  end
-
-  test "Send reply notification" do
-    followers = create_list(:user, 3)
-    replyer = create :user
-
-    # should notify_reply_created work
-    followers.each do |f|
-      f.follow_user(replyer)
-    end
-
-    topic = create :topic, user: user
-    reply = create :reply, topic: topic, user: replyer
-    create :reply, action: "ban", topic: topic, user: replyer
-
-    followers.each do |f|
-      assert_equal 1, f.notifications.unread.where(notify_type: "topic_reply").count
-    end
-
-    assert_changes -> { user.notifications.unread.where(notify_type: "topic_reply").count }, 1 do
-      Reply.notify_reply_created(reply.id)
-    end
   end
 
   test "ban words for Reply body" do
@@ -202,7 +175,7 @@ class ReplyTest < ActiveSupport::TestCase
 
     args = ["topics/#{reply.topic_id}/replies", { id: reply.id, user_id: reply.user_id, action: :create }]
     ActionCable.server.expects(:broadcast).with(*args).once
-    Reply.broadcast_to_client(reply)
+    reply.broadcast_to_client
   end
 
   test "#create_system_event!" do

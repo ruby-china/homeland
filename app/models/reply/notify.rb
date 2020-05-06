@@ -5,39 +5,14 @@ class Reply
     extend ActiveSupport::Concern
 
     included do
-      after_commit :async_create_reply_notify, on: :create, unless: -> { system_event? }
+      after_commit on: :create, unless: -> { system_event? } do
+        NotifyReplyJob.perform_later(id)
+      end
     end
 
-    module ClassMethods
-      def notify_reply_created(reply_id)
-        reply = Reply.find_by_id(reply_id)
-        return if reply.blank?
-        return if reply.system_event?
-        topic = Topic.find_by_id(reply.topic_id)
-        return if topic.blank?
-
-        Notification.bulk_insert(set_size: 100) do |worker|
-          reply.notification_receiver_ids.each do |uid|
-            logger.debug "Post Notification to: #{uid}"
-            note = reply.send(:default_notification).merge(user_id: uid)
-            worker.add(note)
-          end
-        end
-
-        # Touch realtime_push_to_client
-        reply.notification_receiver_ids.each do |uid|
-          n = Notification.where(user_id: uid).last
-          n.realtime_push_to_client if n.present?
-        end
-        Reply.broadcast_to_client(reply)
-
-        true
-      end
-
-      def broadcast_to_client(reply)
-        message = { id: reply.id, user_id: reply.user_id, action: :create }
-        ActionCable.server.broadcast("topics/#{reply.topic_id}/replies", message)
-      end
+    def broadcast_to_client
+      message = { id: self.id, user_id: self.user_id, action: :create }
+      ActionCable.server.broadcast("topics/#{self.topic_id}/replies", message)
     end
 
     def notification_receiver_ids
@@ -67,10 +42,6 @@ class Reply
           second_target_id: self.topic_id,
           actor_id: self.user_id
         }
-      end
-
-      def async_create_reply_notify
-        NotifyReplyJob.perform_later(id)
       end
   end
 end

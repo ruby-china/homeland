@@ -141,48 +141,6 @@ class TopicTest < ActiveSupport::TestCase
     assert_equal r1.id, t.last_reply_id
   end
 
-  test "#notify_topic_created" do
-    followers = create_list(:user, 3)
-    followers.each do |f|
-      f.follow_user(user)
-    end
-
-    topic = create(:topic, user: user)
-    followers.each do |f|
-      assert_equal 1, f.notifications.unread.where(notify_type: "topic").count
-    end
-  end
-
-  test "#notify_topic_node_changed" do
-    topic = create(:topic, user: user)
-    new_node = create(:node)
-    admin = create(:admin)
-
-    Topic.notify_topic_node_changed(topic.id, new_node.id)
-    last_notification = user.notifications.unread.where(notify_type: "node_changed").first
-    assert_equal "Topic", last_notification.target_type
-    assert_equal topic.id, last_notification.target_id
-    assert_equal "Node", last_notification.second_target_type
-    assert_equal new_node.id, last_notification.second_target_id
-
-    # on save callback, with admin_editing no node_id changed
-    Current.stubs(:user).returns(admin)
-    Topic.expects(:notify_topic_node_changed).never
-    topic.save
-
-    # on save callback, with admin_editing and node_id_changed
-    Current.stubs(:user).returns(admin)
-    topic.node_id = new_node.id
-    Topic.stubs(:notify_topic_node_changed).once
-    topic.save
-
-    # on save callback, without admin_editing
-    Current.stubs(:user).returns(user)
-    topic.node_id = new_node.id
-    Topic.expects(:notify_topic_node_changed).never
-    topic.save
-  end
-
   test ".ban!" do
     topic.ban!
     topic.reload

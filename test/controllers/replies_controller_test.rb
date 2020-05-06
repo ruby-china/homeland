@@ -43,10 +43,14 @@ describe RepliesController, type: :controller do
       topic = create :topic
       assert_equal false, user.topic_read?(topic)
 
-      create :reply, topic: topic
       sign_in user
-      post topic_replies_path(topic), params: { reply: { body: "content" }, format: :js }
-      assert_equal 200, response.status
+
+      create :reply, topic: topic
+      perform_enqueued_jobs do
+        post topic_replies_path(topic), params: { reply: { body: "content" }, format: :js }
+        assert_equal 200, response.status
+      end
+      topic.reload
       assert_equal true, user.topic_read?(topic)
     end
   end

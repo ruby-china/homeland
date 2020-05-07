@@ -120,7 +120,7 @@ textarea,
 
 /* Bootstrap Theme */
 body {
-  background: #e5e5e5;
+  background: #e5e5e566;
   color: $primary;
   font-family: Helvetica, Arial, "PingFang SC", "Noto Sans", Roboto, "Microsoft Yahei", sans-serif;
   font-size: 14px;
@@ -313,8 +313,8 @@ body {
 }
 
 .sub-navbar {
-  background: #f9f9f9;
-  box-shadow: 0 1px 0px rgba(0, 0, 0, 0.02);
+  background: #fafafa;
+  box-shadow: 0 1px 0px rgba(0, 0, 0, 0.04);
 
   a {
     color: $blue;
@@ -477,10 +477,20 @@ kbd {
   margin-bottom: 15px;
   border-top: 0;
   box-shadow: 0 0 0;
-  border-color: #e5e6e9 #dfe0e4 #d0d1d5;
+  border-color: #e5e6e9eb #dfe0e470 #d0d1d559;
 
   .card-header {
-    padding: 6px 15px;
+    padding: 8px 15px 0 15px;
+    background: #ffffff;
+    border: 0;
+    color: #777;
+    font-size: 14px;
+  }
+
+  .card-footer {
+    border: 0;
+    padding-top: 0;
+    background: #fff;
   }
 
   .card-title {
@@ -513,17 +523,6 @@ kbd {
 
   .list-group-item {
     padding: 10px 15px;
-  }
-
-  .card-header {
-    background: #fafafa;
-    border-bottom-color: #eee;
-    color: #777;
-  }
-
-  .card-footer {
-    border-top-color: #eee;
-    background: #fafafa;
   }
 }
 
@@ -591,7 +590,7 @@ kbd {
 
 .list-group {
   .list-group-item {
-    border-color: #eee;
+    border-color: #f5f5f5;
   }
 }
 

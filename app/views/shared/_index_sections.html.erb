@@ -1,6 +1,5 @@
 <% cache(["index_locations", CacheVersion.section_node_updated_at]) do %>
   <div class="index-sections card">
-    <div class="card-header"><%= t("common.index_node_navigation")%></div>
     <div class="card-body">
       <div class="row node-list">
         <% Section.includes(:nodes).all.each do |section| %>

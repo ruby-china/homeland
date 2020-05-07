@@ -13,6 +13,10 @@
 
 @import "vars";
 
+hr {
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
 .node-list {
   .node {
     margin-bottom: 10px;
@@ -279,7 +283,7 @@
   }
   .topic {
     min-height: 68px;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid #f0f0f0a3;
     padding: 15px 15px;
     margin: 0 -15px;
     vertical-align: top;
@@ -378,17 +382,17 @@
   }
 
   .card-header {
-    padding: 15px;
+    padding: 15px 15px 0 15px;
     transition: all 0.3s;
     h1 {
       margin-top: 0;
-      font-size: 20px;
+      font-size: 22px;
       color: #333;
       text-align: left;
       line-height: 150%;
       margin-bottom: 8px;
       .node {
-        color: #777;
+        color: #999;
         margin-right: 3px;
       }
       i.fa-check {
@@ -401,10 +405,16 @@
     }
   }
 
+  .card-footer {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
   .label-awesome {
     font-size: 16px;
-    background: lighten($red, 45%);
-    border-bottom: 1px solid lighten($red, 42%);
+    margin-top: 15px;
+    background: lighten($red, 43%);
+    border: 0;
     padding: 10px 15px;
     color: $red;
 
@@ -412,7 +422,7 @@
       font-size: 16px;
     }
     a {
-      color: #aaa5a4;
+      color: #adaaa8;
     }
   }
 

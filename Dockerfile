@@ -1,7 +1,6 @@
 # NAME:     homeland/homeland
 FROM ruby:2.7-alpine
 
-MAINTAINER Jason Lee "https://github.com/huacnlee"
 RUN gem install bundler
 RUN apk --update add ca-certificates nodejs tzdata imagemagick &&\
   apk add --virtual .builddeps build-base ruby-dev libc-dev openssl linux-headers postgresql-dev \

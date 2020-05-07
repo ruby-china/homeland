@@ -131,18 +131,18 @@ GEM
       railties (>= 3.2, < 6.1)
     dropzonejs-rails (0.8.4)
       rails (> 3.1)
-    elasticsearch (5.0.5)
-      elasticsearch-api (= 5.0.5)
-      elasticsearch-transport (= 5.0.5)
-    elasticsearch-api (5.0.5)
+    elasticsearch (7.6.0)
+      elasticsearch-api (= 7.6.0)
+      elasticsearch-transport (= 7.6.0)
+    elasticsearch-api (7.6.0)
       multi_json
-    elasticsearch-model (5.0.2)
+    elasticsearch-model (7.1.0)
       activesupport (> 3)
-      elasticsearch (~> 5)
+      elasticsearch (> 1)
       hashie
-    elasticsearch-rails (5.0.2)
-    elasticsearch-transport (5.0.5)
-      faraday
+    elasticsearch-rails (7.1.0)
+    elasticsearch-transport (7.6.0)
+      faraday (~> 1)
       multi_json
     enumize (0.2.0)
       rails (>= 5.0.0)
@@ -468,8 +468,8 @@ DEPENDENCIES
   doorkeeper-i18n
   dotenv-rails
   dropzonejs-rails
-  elasticsearch-model (~> 5.0.2)
-  elasticsearch-rails (~> 5.0.2)
+  elasticsearch-model
+  elasticsearch-rails
   enumize
   exception-track
   factory_bot_rails

@@ -71,8 +71,8 @@ gem "kaminari"
 gem "form-select"
 
 # 搜索
-gem "elasticsearch-model", "~> 5.0.2"
-gem "elasticsearch-rails", "~> 5.0.2"
+gem "elasticsearch-model"
+gem "elasticsearch-rails"
 
 # 三方平台 OAuth 验证登录
 gem "omniauth"

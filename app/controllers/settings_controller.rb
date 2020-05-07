@@ -70,6 +70,10 @@ class SettingsController < ApplicationController
         attrs << :login
       end
 
+      if !current_user.email_locked?
+        attrs << :email
+      end
+
       params.require(:user).permit(*attrs)
     end
 

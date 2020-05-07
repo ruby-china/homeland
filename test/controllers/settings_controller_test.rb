@@ -96,6 +96,22 @@ describe SettingsController do
       put setting_path, params: { by: "password", user: password_params }
       assert_redirected_to "/account/sign_in"
     end
+
+    it "should work for update email" do
+      old_email = user.email
+      sign_in user
+      put setting_path, params: { user: { email: "new@email.com" } }
+      assert_redirected_to setting_path
+      user.reload
+      assert_equal old_email, user.email
+
+      # email was not locked
+      user.update(email: "github+123@example.com")
+      put setting_path, params: { user: { email: "new@email.com" } }
+      assert_redirected_to setting_path
+      user.reload
+      assert_equal "new@email.com", user.email
+    end
   end
 
   describe "DELETE /setting" do

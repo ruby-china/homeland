@@ -10,7 +10,7 @@ gem "rails"
 gem "rails_autolink"
 gem "sass-rails"
 gem "sprockets"
-gem "turbolinks", "~> 5.0.0"
+gem "turbolinks"
 gem "uglifier"
 
 gem "sanitize"
@@ -121,9 +121,6 @@ gem "bootsnap"
 gem "lograge"
 
 gem "puma_worker_killer"
-
-# Lock version
-gem "sassc", "2.0.1"
 
 group :development do
   gem "spring"

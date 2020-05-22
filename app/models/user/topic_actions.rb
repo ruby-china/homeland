@@ -33,7 +33,7 @@ class User
         end
       end
       t2 = Time.now
-      logger.info "User filter_readed_topics (#{(t2 - t1) * 1000}ms)"
+      logger.debug "  User filter_readed_topics (#{(t2 - t1) * 1000}ms)"
       ids
     end
 

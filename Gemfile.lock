@@ -397,7 +397,7 @@ GEM
       tilt
     sdoc (1.1.0)
       rdoc (>= 5.0)
-    second_level_cache (2.5.3)
+    second_level_cache (2.6.1)
       activerecord (>= 5.2, < 7)
       activesupport (>= 5.2, < 7)
     sidekiq (6.0.7)

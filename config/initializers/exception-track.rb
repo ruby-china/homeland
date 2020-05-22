@@ -16,5 +16,6 @@ ExceptionNotification.configure do |config|
     ActionController::UnknownFormat
     ActionController::InvalidCrossOriginRequest
     ActionController::ParameterMissing
+    Mime::Type::InvalidMimeType
   ]
 end

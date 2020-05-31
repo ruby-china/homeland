@@ -9,7 +9,6 @@ module Homeland
     class MarkdownFilter < HTML::Pipeline::TextFilter
       DEFAULT_OPTIONS = {
         no_styles: true,
-        hard_wrap: true,
         autolink: true,
         fenced_code_blocks: true,
         strikethrough: true,
@@ -37,7 +36,7 @@ module Homeland
 
         class << self
           def to_html(raw)
-            renderer = self.new
+            renderer = self.new(hard_wrap: true)
             renderer.domain = Setting.domain
             @render ||= Redcarpet::Markdown.new(renderer, DEFAULT_OPTIONS)
             @render.render(raw)

@@ -1,0 +1,62 @@
+.social-share-button .ssb-icon {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 18px 18px;
+  display: inline-block;
+  height: 18px;
+  width: 18px;
+}
+
+.social-share-button .ssb-twitter {
+  background-image: url("~vendor/social-share-button/twitter.svg");
+}
+
+.social-share-button .ssb-facebook {
+  background-image: url("~vendor/social-share-button/facebook.svg");
+}
+
+.social-share-button .ssb-weibo {
+  background-image: url("~vendor/social-share-button/weibo.svg");
+}
+
+.social-share-button .ssb-wechat {
+  background-image: url("~vendor/social-share-button/wechat.svg");
+}
+
+.ss-wechat-dialog {
+  width: 300px;
+  position: fixed;
+  background: #fff;
+  padding: 15px;
+  border-radius: 3px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
+  z-index: 11001;
+  font-size: 14px;
+  line-height: 1.2em;
+}
+
+.ss-wechat-dialog .wechat-popup-header {
+  font-weight: bold;
+}
+
+.ss-wechat-dialog .wechat-dialog-qr {
+  text-align: center;
+  margin: 25px 0;
+}
+
+.ss-wechat-dialog .wechat-popup-close {
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  color: #999;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.ss-wechat-dialog .wechat-popup-footer {
+  text-align: left;
+  line-height: 22px;
+  color: #666;
+}

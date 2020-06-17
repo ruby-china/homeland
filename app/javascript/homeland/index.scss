@@ -1,28 +1,9 @@
-/*
- *= require font-awesome
- *= require highlight
- *= require social-share-button
- *= require jquery.atwho
- *= require jquery.fluidbox
- *= require_self
- */
+@import "_mixins";
+@import "_vars";
 
-@import "vars";
-@import "bootstrap";
-
-@mixin clearfix() {
-  &:before,
-  &:after {
-    content: " ";
-    display: table;
-  }
-  &:after {
-    clear: both;
-  }
-  & {
-    zoom: 1;
-  }
-}
+@import "~bootstrap/scss/bootstrap";
+$fa-font-path: "~font-awesome/fonts";
+@import "~font-awesome/scss/font-awesome";
 
 .flex {
   display: flex;
@@ -121,8 +102,6 @@ textarea,
 /* Bootstrap Theme */
 body {
   background: #e5e5e566;
-  color: $primary;
-  font-family: Helvetica, Arial, "PingFang SC", "Noto Sans", Roboto, "Microsoft Yahei", sans-serif;
   font-size: 14px;
   letter-spacing: 0.03em;
 }
@@ -321,6 +300,10 @@ body {
   }
 }
 
+.btn {
+  outline: none;
+}
+
 .btn-default {
   border-color: $input-border-color;
   background: #fcfcfc;
@@ -334,17 +317,6 @@ body {
     color: #aaa;
     border-color: $default;
     background: #f0f0f0;
-  }
-}
-
-.page-topics {
-  .navbar-fixed-active {
-    .navbar-topic-title {
-      display: block;
-    }
-    .navbar-topic-title:after {
-      display: block;
-    }
   }
 }
 

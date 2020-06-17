@@ -1,16 +1,16 @@
 $primary: #404040;
 $default: #e0e0e0;
 $secondary: #666;
-$gray: #F2F2F2;
-$red: #EB5424;
-$yellow: #FEE209;
+$gray: #f2f2f2;
+$red: #eb5424;
+$yellow: #fee209;
 $blue: #2275da;
-$green: #19A302;
+$green: #19a302;
 
-$body-bg: #FFF;
+$body-bg: #fff;
 $theme-colors: (
-  "primary": $blue,
-  "warning": $yellow,
+    "primary": $blue,
+    "warning": $yellow,
 );
 
 $input-border: $default;
@@ -19,17 +19,18 @@ $input-color-placeholder: $default;
 $link-color: $primary;
 
 $colors: (
-  "blue": $blue,
-  "red": $red,
-  "yellow": $yellow,
-  "green": $green,
-  "white": #FFF,
-  "gray": $gray,
-  "gray-dark": $gray
+    "blue": $blue,
+    "red": $red,
+    "yellow": $yellow,
+    "green": $green,
+    "white": #fff,
+    "gray": $gray,
+    "gray-dark": $gray,
 ) !default;
 
-$font-size-base: 0.875rem;
 $spacer: 15px;
+$font-size-base: 0.875rem;
+$font-family-sans-serif: Helvetica, Arial, "PingFang SC", "Noto Sans", Roboto, "Microsoft Yahei", sans-serif;
 
 /* Animations */
 .animated {
@@ -42,7 +43,7 @@ $spacer: 15px;
 @-webkit-keyframes bounceIn {
     0% {
         opacity: 0;
-        -webkit-transform: scale(.5);
+        -webkit-transform: scale(0.5);
     }
 
     50% {
@@ -51,18 +52,18 @@ $spacer: 15px;
     }
 
     70% {
-        -webkit-transform: scale(.9);
+        -webkit-transform: scale(0.9);
     }
 
     100% {
-         -webkit-transform: scale(1);
+        -webkit-transform: scale(1);
     }
 }
 
 @keyframes bounceIn {
     0% {
         opacity: 0;
-        transform: scale(.5);
+        transform: scale(0.5);
     }
 
     50% {
@@ -71,7 +72,7 @@ $spacer: 15px;
     }
 
     70% {
-        transform: scale(.9);
+        transform: scale(0.9);
     }
 
     100% {

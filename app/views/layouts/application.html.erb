@@ -21,8 +21,8 @@
   <meta name="apple-mobile-web-app-capable" content="no">
   <meta content='True' name='HandheldFriendly' />
   <link rel="alternate" type="application/rss+xml" title="订阅最新帖" href="<%= main_app.feed_topics_url %>" />
-  <%= stylesheet_link_tag "front", 'data-turbolinks-track': "reload" %>
-  <%= stylesheet_link_tag "turbolinks-app", 'data-turbolinks-track': 'reload' if turbolinks_app? %>
+  <%= stylesheet_pack_tag "front", "data-turbolinks-track": "reload" %>
+  <%= stylesheet_pack_tag "turbolinks-app", 'data-turbolinks-track': 'reload' if turbolinks_app? %>
   <%= yield :stylesheets %>
   <%= action_cable_meta_tag %>
   <%= csrf_meta_tag %>

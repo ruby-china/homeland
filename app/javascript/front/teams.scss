@@ -1,4 +1,4 @@
-@import 'vars';
+@import "~homeland/_vars";
 
 .team-header {
   background: #fafafa;
@@ -9,7 +9,8 @@
 
   .media {
     .media-left {
-      padding-left: 20px; padding-right: 20px;
+      padding-left: 20px;
+      padding-right: 20px;
       vertical-align: middle;
     }
     .media-right {
@@ -21,7 +22,9 @@
         display: block;
         padding-top: 13px;
         a {
-          margin-right: 10px; font-size: 18px; color: #666;
+          margin-right: 10px;
+          font-size: 18px;
+          color: #666;
           &:hover {
             color: #333;
           }
@@ -33,7 +36,9 @@
       padding-top: 13px;
       span.location {
         color: #666;
-        margin-left: 14px; font-weight: normal; font-size: 14px;
+        margin-left: 14px;
+        font-weight: normal;
+        font-size: 14px;
       }
     }
   }
@@ -52,7 +57,10 @@
 
 .team-sidebar {
   .members {
-    .media-object { display: inline-block; margin: 5px; }
+    .media-object {
+      display: inline-block;
+      margin: 5px;
+    }
   }
 }
 
@@ -61,19 +69,32 @@
     margin-top: 15px;
   }
   tr.team-user {
-    td { padding: 14px; vertical-align: middle; }
+    td {
+      padding: 14px;
+      vertical-align: middle;
+    }
     padding: 14px;
     margin-top: 0px;
     margin-bottom: 0px;
     border-bottom: 1px solid #e0e0e0;
 
-    &:last-child { border-bottom: 0px; }
+    &:last-child {
+      border-bottom: 0px;
+    }
 
-    .avatar { width: 48px; }
-    .name { font-size: 14px; }
+    .avatar {
+      width: 48px;
+    }
+    .name {
+      font-size: 14px;
+    }
 
-    .role  { min-width: 100px;}
-    .buttons { width: 180px; }
+    .role {
+      min-width: 100px;
+    }
+    .buttons {
+      width: 180px;
+    }
   }
 }
 

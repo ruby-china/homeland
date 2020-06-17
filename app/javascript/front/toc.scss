@@ -1,4 +1,4 @@
-@import "vars";
+@import "~homeland/_vars";
 
 .toc-container {
   display: none;
@@ -8,7 +8,7 @@
   background: #fff;
 
   .dropdown-menu {
-    background: #FFF;
+    background: #fff;
     border-radius: 3px;
     padding: 15px;
     border: 1px solid $default;
@@ -24,7 +24,9 @@
       padding: 0;
       margin-bottom: 0 !important;
 
-      a { color: $primary !important; }
+      a {
+        color: $primary !important;
+      }
     }
   }
 }

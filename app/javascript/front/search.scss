@@ -1,0 +1,63 @@
+@import "~homeland/_vars";
+.search-results {
+  .pagination {
+    margin-top: 25px;
+  }
+  .result {
+    margin-bottom: 25px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    em {
+      color: $red;
+      font-style: normal;
+    }
+
+    .title {
+      font-size: 16px;
+      line-height: 160%;
+
+      .badge {
+        background: #e0e0e0;
+        color: #777;
+        font-weight: normal;
+        font-size: 12px;
+        margin-left: 4px;
+      }
+    }
+    .info {
+      margin-bottom: 6px;
+      font-size: 14px;
+      .url a {
+        color: $green;
+      }
+
+      .date {
+        color: #999;
+        margin-left: 8px;
+      }
+    }
+
+    .desc {
+      color: #888;
+      font-size: 15px;
+      word-break: break-all;
+      em {
+        color: $red;
+      }
+    }
+  }
+
+  .user {
+    .info {
+      margin-top: 4px;
+      font-size: 14px;
+    }
+    .info.number {
+      color: #666;
+      font-size: 13px;
+    }
+  }
+}

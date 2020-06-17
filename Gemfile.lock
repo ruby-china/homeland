@@ -110,7 +110,7 @@ GEM
     concurrent-ruby (1.1.6)
     connection_pool (2.2.2)
     crass (1.0.6)
-    devise (4.7.1)
+    devise (4.7.2)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0)
@@ -297,12 +297,14 @@ GEM
       mime-types (~> 3.1)
       rest-client (~> 2.0)
     raabro (1.1.6)
-    rack (2.2.2)
+    rack (2.2.3)
     rack-attack (6.3.0)
       rack (>= 1.0, < 3)
     rack-cors (1.1.1)
       rack (>= 2.0.0)
     rack-protection (2.0.8.1)
+      rack
+    rack-proxy (0.6.5)
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -356,7 +358,7 @@ GEM
       redis (~> 4.0)
     request_store (1.5.0)
       rack (>= 1.4)
-    responders (3.0.0)
+    responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
     rest-client (2.1.0)
@@ -400,6 +402,7 @@ GEM
     second_level_cache (2.6.1)
       activerecord (>= 5.2, < 7)
       activesupport (>= 5.2, < 7)
+    semantic_range (2.3.0)
     sidekiq (6.0.7)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
@@ -441,6 +444,11 @@ GEM
     url (0.3.2)
     warden (1.2.8)
       rack (>= 2.0.6)
+    webpacker (5.1.1)
+      activesupport (>= 5.2)
+      rack-proxy (>= 0.6.1)
+      railties (>= 5.2)
+      semantic_range (>= 2.3.0)
     websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -524,6 +532,7 @@ DEPENDENCIES
   turbolinks
   twemoji
   uglifier
+  webpacker (~> 5.x)
 
 BUNDLED WITH
    2.1.4

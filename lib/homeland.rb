@@ -64,9 +64,9 @@ module Homeland
     end
 
     def boot
-      puts "=> Booting Homeland" unless Rails.env.test?
+      # puts "=> Booting Homeland" unless Rails.env.test?
       Homeland::Plugin.boot
-      puts "=> Plugins: #{Homeland.plugins.collect(&:name).join(", ")}" unless Rails.env.test?
+      # puts "=> Plugins: #{Homeland.plugins.collect(&:name).join(", ")}" unless Rails.env.test?
       @@boot_at = Time.now
       # end
     end
@@ -87,5 +87,3 @@ module Homeland
     end
   end
 end
-
-Homeland.boot

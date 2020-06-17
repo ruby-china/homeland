@@ -41,3 +41,10 @@ spec/examples.txt
 !/plugins/test/
 app.local.env
 *.tmp
+
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity

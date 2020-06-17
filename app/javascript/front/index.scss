@@ -1,17 +1,29 @@
-/*
- *= require application
- *= require cal-heatmap
- *= require tooltipster.bundle
- *= require notifications
- *= require home
- *= require users
- *= require teams
- *= require search
- *= require toc
- *= require_self
- */
+@import "~homeland/index";
 
-@import "vars";
+@import "~vendor/cal-heatmap";
+@import "~vendor/atwho";
+@import "~vendor/jquery.fluidbox";
+@import "~vendor/tooltipster.bundle";
+@import "~vendor/social-share-button/index";
+
+@import "notifications";
+@import "home";
+@import "users";
+@import "teams";
+@import "search";
+@import "toc";
+@import "highlight";
+
+.page-topics {
+  .navbar-fixed-active {
+    .navbar-topic-title {
+      display: block;
+    }
+    .navbar-topic-title:after {
+      display: block;
+    }
+  }
+}
 
 hr {
   border-top: 1px solid rgba(0, 0, 0, 0.05);

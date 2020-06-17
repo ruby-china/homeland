@@ -59,5 +59,3 @@ module Homeland
     config.action_cable.mount_path = "/cable"
   end
 end
-
-require "homeland"

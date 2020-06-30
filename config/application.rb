@@ -59,3 +59,6 @@ module Homeland
     config.action_cable.mount_path = "/cable"
   end
 end
+
+# Homeland boot must keep in here
+require "homeland"

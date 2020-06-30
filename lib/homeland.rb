@@ -87,3 +87,5 @@ module Homeland
     end
   end
 end
+
+Homeland.boot

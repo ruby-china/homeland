@@ -11,6 +11,7 @@ tmp/**/*
 .yardoc/
 /public/assets/
 /public/packs/
+/public/packs-test
 /public/photo/**/*
 /public/user/**/*
 /public/uploads/**/*

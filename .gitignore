@@ -12,6 +12,7 @@ tmp/**/*
 /public/assets/
 /public/packs/
 /public/packs-test
+!/public/packs-test/manifest.json
 /public/photo/**/*
 /public/user/**/*
 /public/uploads/**/*

@@ -1,4 +1,7 @@
-export const SocialShareButton = {
+require("jquery.qrcode.min")
+require("./wechat");
+
+window.SocialShareButton = {
   openUrl(url, width, height) {
     if (width == null) { width = 640; }
     if (height == null) { height = 480; }

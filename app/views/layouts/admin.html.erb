@@ -2,8 +2,8 @@
 <html>
   <head>
     <title><%= Setting.app_name %> - 控制台</title>
-    <%= stylesheet_link_tag "admin" %>
-    <%= javascript_include_tag "app" %>
+    <%= stylesheet_pack_tag "admin" %>
+    <%= javascript_packs_with_chunks_tag "application" %>
     <%= csrf_meta_tag %>
   </head>
   <body>

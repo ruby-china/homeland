@@ -3,56 +3,56 @@ GEM
   specs:
     action-store (0.4.4)
       rails (>= 5, < 7)
-    actioncable (6.0.3.1)
-      actionpack (= 6.0.3.1)
+    actioncable (6.0.3.2)
+      actionpack (= 6.0.3.2)
       nio4r (~> 2.0)
       websocket-driver (>= 0.6.1)
-    actionmailbox (6.0.3.1)
-      actionpack (= 6.0.3.1)
-      activejob (= 6.0.3.1)
-      activerecord (= 6.0.3.1)
-      activestorage (= 6.0.3.1)
-      activesupport (= 6.0.3.1)
+    actionmailbox (6.0.3.2)
+      actionpack (= 6.0.3.2)
+      activejob (= 6.0.3.2)
+      activerecord (= 6.0.3.2)
+      activestorage (= 6.0.3.2)
+      activesupport (= 6.0.3.2)
       mail (>= 2.7.1)
-    actionmailer (6.0.3.1)
-      actionpack (= 6.0.3.1)
-      actionview (= 6.0.3.1)
-      activejob (= 6.0.3.1)
+    actionmailer (6.0.3.2)
+      actionpack (= 6.0.3.2)
+      actionview (= 6.0.3.2)
+      activejob (= 6.0.3.2)
       mail (~> 2.5, >= 2.5.4)
       rails-dom-testing (~> 2.0)
-    actionpack (6.0.3.1)
-      actionview (= 6.0.3.1)
-      activesupport (= 6.0.3.1)
+    actionpack (6.0.3.2)
+      actionview (= 6.0.3.2)
+      activesupport (= 6.0.3.2)
       rack (~> 2.0, >= 2.0.8)
       rack-test (>= 0.6.3)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.2.0)
-    actiontext (6.0.3.1)
-      actionpack (= 6.0.3.1)
-      activerecord (= 6.0.3.1)
-      activestorage (= 6.0.3.1)
-      activesupport (= 6.0.3.1)
+    actiontext (6.0.3.2)
+      actionpack (= 6.0.3.2)
+      activerecord (= 6.0.3.2)
+      activestorage (= 6.0.3.2)
+      activesupport (= 6.0.3.2)
       nokogiri (>= 1.8.5)
-    actionview (6.0.3.1)
-      activesupport (= 6.0.3.1)
+    actionview (6.0.3.2)
+      activesupport (= 6.0.3.2)
       builder (~> 3.1)
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
-    activejob (6.0.3.1)
-      activesupport (= 6.0.3.1)
+    activejob (6.0.3.2)
+      activesupport (= 6.0.3.2)
       globalid (>= 0.3.6)
-    activemodel (6.0.3.1)
-      activesupport (= 6.0.3.1)
-    activerecord (6.0.3.1)
-      activemodel (= 6.0.3.1)
-      activesupport (= 6.0.3.1)
-    activestorage (6.0.3.1)
-      actionpack (= 6.0.3.1)
-      activejob (= 6.0.3.1)
-      activerecord (= 6.0.3.1)
+    activemodel (6.0.3.2)
+      activesupport (= 6.0.3.2)
+    activerecord (6.0.3.2)
+      activemodel (= 6.0.3.2)
+      activesupport (= 6.0.3.2)
+    activestorage (6.0.3.2)
+      actionpack (= 6.0.3.2)
+      activejob (= 6.0.3.2)
+      activerecord (= 6.0.3.2)
       marcel (~> 0.3.1)
-    activesupport (6.0.3.1)
+    activesupport (6.0.3.2)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
@@ -66,15 +66,9 @@ GEM
     ast (2.4.0)
     auto-correct (0.2.2)
       nokogiri (>= 1.4)
-    autoprefixer-rails (9.7.6)
-      execjs
     bcrypt (3.1.13)
     bootsnap (1.4.6)
       msgpack (~> 1.0)
-    bootstrap (4.4.1)
-      autoprefixer-rails (>= 9.1.0)
-      popper_js (>= 1.14.3, < 2)
-      sassc-rails (>= 2.0.0)
     builder (3.2.4)
     bulk_insert (1.7.0)
       activerecord (>= 3.2.0)
@@ -110,7 +104,7 @@ GEM
     concurrent-ruby (1.1.6)
     connection_pool (2.2.2)
     crass (1.0.6)
-    devise (4.7.1)
+    devise (4.7.2)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0)
@@ -129,8 +123,6 @@ GEM
     dotenv-rails (2.7.5)
       dotenv (= 2.7.5)
       railties (>= 3.2, < 6.1)
-    dropzonejs-rails (0.8.4)
-      rails (> 3.1)
     elasticsearch (7.6.0)
       elasticsearch-api (= 7.6.0)
       elasticsearch-transport (= 7.6.0)
@@ -165,8 +157,6 @@ GEM
     faraday (1.0.1)
       multipart-post (>= 1.2, < 3)
     ffi (1.12.2)
-    font-awesome-rails (4.7.0.5)
-      railties (>= 3.2, < 6.1)
     form-select (0.3.2)
       rails (>= 4.2)
     fugit (1.3.4)
@@ -195,11 +185,6 @@ GEM
     jaro_winkler (1.5.4)
     jbuilder (2.10.0)
       activesupport (>= 5.0.0)
-    jquery-atwho-rails (1.5.4)
-    jquery-rails (4.3.5)
-      rails-dom-testing (>= 1, < 3)
-      railties (>= 4.2.0)
-      thor (>= 0.14, < 2.0)
     json (2.3.0)
     jwt (2.2.1)
     kaminari (1.2.1)
@@ -281,7 +266,6 @@ GEM
     pg (1.2.3)
     pghero (2.4.2)
       activerecord (>= 5)
-    popper_js (1.16.0)
     postmark (1.21.1)
       json
     postmark-rails (0.20.0)
@@ -297,29 +281,31 @@ GEM
       mime-types (~> 3.1)
       rest-client (~> 2.0)
     raabro (1.1.6)
-    rack (2.2.2)
+    rack (2.2.3)
     rack-attack (6.3.0)
       rack (>= 1.0, < 3)
     rack-cors (1.1.1)
       rack (>= 2.0.0)
     rack-protection (2.0.8.1)
       rack
+    rack-proxy (0.6.5)
+      rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
-    rails (6.0.3.1)
-      actioncable (= 6.0.3.1)
-      actionmailbox (= 6.0.3.1)
-      actionmailer (= 6.0.3.1)
-      actionpack (= 6.0.3.1)
-      actiontext (= 6.0.3.1)
-      actionview (= 6.0.3.1)
-      activejob (= 6.0.3.1)
-      activemodel (= 6.0.3.1)
-      activerecord (= 6.0.3.1)
-      activestorage (= 6.0.3.1)
-      activesupport (= 6.0.3.1)
+    rails (6.0.3.2)
+      actioncable (= 6.0.3.2)
+      actionmailbox (= 6.0.3.2)
+      actionmailer (= 6.0.3.2)
+      actionpack (= 6.0.3.2)
+      actiontext (= 6.0.3.2)
+      actionview (= 6.0.3.2)
+      activejob (= 6.0.3.2)
+      activemodel (= 6.0.3.2)
+      activerecord (= 6.0.3.2)
+      activestorage (= 6.0.3.2)
+      activesupport (= 6.0.3.2)
       bundler (>= 1.3.0)
-      railties (= 6.0.3.1)
+      railties (= 6.0.3.2)
       sprockets-rails (>= 2.0.0)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
@@ -334,9 +320,9 @@ GEM
       request_store
     rails_autolink (1.1.6)
       rails (> 3.1)
-    railties (6.0.3.1)
-      actionpack (= 6.0.3.1)
-      activesupport (= 6.0.3.1)
+    railties (6.0.3.2)
+      actionpack (= 6.0.3.2)
+      activesupport (= 6.0.3.2)
       method_source
       rake (>= 0.8.7)
       thor (>= 0.20.3, < 2.0)
@@ -356,7 +342,7 @@ GEM
       redis (~> 4.0)
     request_store (1.5.0)
       rack (>= 1.4)
-    responders (3.0.0)
+    responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
     rest-client (2.1.0)
@@ -400,6 +386,7 @@ GEM
     second_level_cache (2.6.1)
       activerecord (>= 5.2, < 7)
       activesupport (>= 5.2, < 7)
+    semantic_range (2.3.0)
     sidekiq (6.0.7)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
@@ -412,10 +399,10 @@ GEM
       docile (~> 1.1)
       simplecov-html (~> 0.11)
     simplecov-html (0.12.2)
-    social-share-button (1.2.1)
+    social-share-button (1.2.3)
       coffee-rails
     spring (2.1.0)
-    sprockets (4.0.0)
+    sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
     sprockets-rails (3.2.1)
@@ -441,10 +428,15 @@ GEM
     url (0.3.2)
     warden (1.2.8)
       rack (>= 2.0.6)
-    websocket-driver (0.7.1)
+    webpacker (5.1.1)
+      activesupport (>= 5.2)
+      rack-proxy (>= 0.6.1)
+      railties (>= 5.2)
+      semantic_range (>= 2.3.0)
+    websocket-driver (0.7.2)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    zeitwerk (2.3.0)
+    zeitwerk (2.3.1)
 
 PLATFORMS
   ruby
@@ -453,7 +445,6 @@ DEPENDENCIES
   action-store
   auto-correct
   bootsnap
-  bootstrap (~> 4)
   bulk_insert
   byebug
   cancancan
@@ -467,20 +458,16 @@ DEPENDENCIES
   doorkeeper
   doorkeeper-i18n
   dotenv-rails
-  dropzonejs-rails
   elasticsearch-model
   elasticsearch-rails
   enumize
   exception-track
   factory_bot_rails
-  font-awesome-rails
   form-select
   html-pipeline
   html-pipeline-auto-correct
   http_accept_language
   jbuilder
-  jquery-atwho-rails
-  jquery-rails
   kaminari
   letter_opener
   listen
@@ -520,10 +507,10 @@ DEPENDENCIES
   sidekiq-cron
   social-share-button
   spring
-  sprockets
   turbolinks
   twemoji
   uglifier
+  webpacker (~> 5.x)
 
 BUNDLED WITH
    2.1.4

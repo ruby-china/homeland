@@ -1,0 +1,29 @@
+{
+  "name": "homeland",
+  "private": true,
+  "scripts": {
+    "start": "./bin/webpack-dev-server"
+  },
+  "dependencies": {
+    "@babel/preset-react": "^7.10.1",
+    "@rails/actioncable": "^6.0.3-2",
+    "@rails/ujs": "^6.0.3",
+    "@rails/webpacker": "5.1.1",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "backbone": "^1.4.0",
+    "bootstrap": "^4.5.0",
+    "dropzone": "^5.7.1",
+    "font-awesome": "^4.7.0",
+    "jquery": "^1.12.0",
+    "jquery.caret": "^0.3.1",
+    "popper.js": "^1.16.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "turbolinks": "^5.2.0",
+    "underscore": "^1.10.2"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3.11.0"
+  }
+}

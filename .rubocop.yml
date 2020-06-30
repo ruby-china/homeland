@@ -2,6 +2,7 @@ AllCops:
   DisabledByDefault: true
   Exclude:
     - 'vendor/**/*'
+    - 'node_modules/**/*'
     - 'plugins/**/*'
     - 'lib/templates/**/*'
     - 'lib/tasks/release.rake'

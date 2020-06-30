@@ -11,6 +11,8 @@ tmp/**/*
 .yardoc/
 /public/assets/
 /public/packs/
+/public/packs-test
+!/public/packs-test/manifest.json
 /public/photo/**/*
 /public/user/**/*
 /public/uploads/**/*
@@ -41,3 +43,7 @@ spec/examples.txt
 !/plugins/test/
 app.local.env
 *.tmp
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity

@@ -11,7 +11,7 @@ class Homeland::ImageThumbTest < ActiveSupport::TestCase
 
   test "pragma: true" do
     FileUtils.mkdir_p(Rails.root.join("public", "uploads"))
-    FileUtils.cp Rails.root.join("app", "assets", "images", "favicon.png"), Rails.root.join("public", "uploads", "favicon.png")
+    FileUtils.cp Rails.root.join("public", "favicon.png"), Rails.root.join("public", "uploads", "favicon.png")
 
     image_thumb = Homeland::ImageThumb.new("favicon.png", "large", pragma: true)
     assert_equal true, image_thumb.exists?

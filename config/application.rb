@@ -60,4 +60,5 @@ module Homeland
   end
 end
 
+# Homeland boot must keep in here
 require "homeland"

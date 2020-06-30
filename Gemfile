@@ -10,7 +10,7 @@ gem "rails_autolink"
 gem "sass-rails"
 gem "turbolinks"
 gem "uglifier"
-gem 'webpacker', "~> 5.x"
+gem "webpacker", "~> 5.x"
 
 gem "sanitize"
 

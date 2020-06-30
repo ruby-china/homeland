@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="no">
   <meta content='True' name='HandheldFriendly' />
   <%= stylesheet_pack_tag "front" %>
-  <%= javascript_pack_tag "application" %>
+  <%= javascript_packs_with_chunks_tag "application" %>
   <%= csrf_meta_tag %>
   <%= raw Setting.custom_head_html %>
 </head>

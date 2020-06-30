@@ -1,36 +1,8 @@
 <div class="card userinfo">
   <div class="card-body">
-    <div id="cal-heatmap" class="user-activity-graph"></div>
-    <%
-    start_date = 12.months.ago.beginning_of_month
-    %>
-    <script type="text/javascript">
-      document.addEventListener("turbolinks:before-cache", function() {
-        $('#cal-heatmap').html('');
-      });
-
-      var cal = new CalHeatMap();
-      cal.init({
-        itemSelector: "#cal-heatmap",
-        animationDuration: 200,
-        domain: "month",
-        subDomain: 'day',
-        rowLimit: 7,
-        domainGutter: 0,
-        data: '<%= calendar_user_path(@user, format: 'json') %>',
-        start: new Date(<%= start_date.year %>, <%= start_date.month %>, <%= start_date.day %>),
-        legendHorizontalPosition: 'right',
-        // subDomainTextFormat: "%d",
-        domainLabelFormat: "%b",
-        legend: [1, 5, 10, 15],
-        itemName: ['event', 'events'],
-        highlight: 'now',
-        label: {
-          position: 'top'
-        },
-        displayLegend: true
-      });
-    </script>
+    <div class="user-bio">
+      <%= auto_link(simple_format(@user.bio)) %>
+    </div>
 
     <% if @user.profile_fields.present? %>
     <div class="user-profile-fields">

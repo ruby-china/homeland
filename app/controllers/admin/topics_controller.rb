@@ -33,7 +33,7 @@ module Admin
       @topic = Topic.new(params[:topic].permit!)
 
       if @topic.save
-        redirect_to(admin_topics_path, notice: "Topic was successfully created.")
+        redirect_to(admin_topics_path, notice: "话题创建成功")
       else
         render action: "new"
       end
@@ -41,7 +41,7 @@ module Admin
 
     def update
       if @topic.update(params[:topic].permit!)
-        redirect_to(admin_topics_path, notice: "Topic was successfully updated.")
+        redirect_to(admin_topics_path, notice: "话题更新成功")
       else
         render action: "edit"
       end
@@ -60,12 +60,12 @@ module Admin
 
     def suggest
       @topic.update_attribute(:suggested_at, Time.now)
-      redirect_to(@topic, notice: "Topic:#{params[:id]} suggested.")
+      redirect_to(@topic, notice: "话题置顶成功")
     end
 
     def unsuggest
       @topic.update_attribute(:suggested_at, nil)
-      redirect_to(@topic, notice: "Topic:#{params[:id]} unsuggested.")
+      redirect_to(@topic, notice: "话题已取消置顶")
     end
 
     private

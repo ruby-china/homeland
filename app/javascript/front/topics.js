@@ -198,11 +198,7 @@ window.TopicView = Backbone.View.extend({
     return text.change(function () {
       if (text.val().length > 0) {
         return $(window).bind("beforeunload", function (e) {
-          if ($.browser.msie) {
-            return e.returnValue = msg;
-          } else {
-            return msg;
-          }
+          return msg;
         });
       } else {
         return $(window).unbind("beforeunload");

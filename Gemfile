@@ -5,11 +5,9 @@ source "https://rubygems.org"
 git_source(:github) { |repo_name| "https://github.com/#{repo_name}.git" }
 
 gem "jbuilder"
-gem "jquery-rails"
 gem "rails"
 gem "rails_autolink"
 gem "sass-rails"
-gem "sprockets"
 gem "turbolinks"
 gem "uglifier"
 gem 'webpacker', "~> 5.x"
@@ -23,12 +21,8 @@ gem "dotenv-rails"
 
 gem "rack-attack"
 
-gem "bootstrap", "~> 4"
-gem "font-awesome-rails"
 gem "http_accept_language"
-gem "jquery-atwho-rails"
 gem "rails-i18n"
-gem "dropzonejs-rails"
 gem "twemoji"
 
 # OAuth Provider

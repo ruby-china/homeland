@@ -1,3 +1,5 @@
+import { EMOJI_LIST, EMOJI_GROUPS } from './emoji-data';
+
 window.EmojiModalView = Backbone.View.extend({
   className: 'emoji-modal modal',
 

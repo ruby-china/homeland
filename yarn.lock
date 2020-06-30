@@ -4043,9 +4043,9 @@ jquery.caret@^0.3.1:
   resolved "https://registry.npm.taobao.org/jquery.caret/download/jquery.caret-0.3.1.tgz#9c093318faf327eff322e826ca9f3241368bc7b8"
   integrity sha1-nAkzGPrzJ+/zIugmyp8yQTaLx7g=
 
-jquery@^1.12.0:
+jquery@^1.12.4:
   version "1.12.4"
-  resolved "https://registry.npm.taobao.org/jquery/download/jquery-1.12.4.tgz?cache=0&sync_timestamp=1588633811418&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fjquery%2Fdownload%2Fjquery-1.12.4.tgz#01e1dfba290fe73deba77ceeacb0f9ba2fec9e0c"
+  resolved "https://registry.npm.taobao.org/jquery/download/jquery-1.12.4.tgz#01e1dfba290fe73deba77ceeacb0f9ba2fec9e0c"
   integrity sha1-AeHfuikP5z3rp3zurLD5ui/sngw=
 
 js-base64@^2.1.8:

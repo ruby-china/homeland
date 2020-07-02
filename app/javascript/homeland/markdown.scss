@@ -1,0 +1,254 @@
+/* Markdown Styles */
+.markdown {
+  position: relative;
+  letter-spacing: 0.03em;
+  font-size: 14px;
+  @media (min-width: 992px) {
+    font-size: 16px;
+  }
+  @media (min-width: 1600px) {
+    font-size: 17px;
+  }
+
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  a {
+    color: $blue;
+  }
+  img,
+  iframe {
+    max-width: 100%;
+    border: 0;
+  }
+  p,
+  pre,
+  ul,
+  ol,
+  hr,
+  blockquote {
+    margin-bottom: 1.2em;
+  }
+  p:last-child,
+  blockquote:last-child,
+  pre:last-child,
+  ul:last-child,
+  ol:last-child,
+  hr:last-child {
+    margin-bottom: 0;
+  }
+
+  p {
+    font-size: 1em;
+    line-height: 1.6em;
+  }
+  hr {
+    border: 3px dashed $gray;
+    border-bottom: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  }
+  blockquote {
+    margin-left: 15px 25px 15px 25px;
+    padding: 0;
+    padding-left: 32px;
+    border: 0px;
+    quotes: "\201C""\201D""\2018""\2019";
+    position: relative;
+    line-height: 1.45;
+    p {
+      display: inline;
+      color: #808080;
+    }
+    &:before,
+    &:after {
+      display: block;
+      content: "\201C";
+      font-size: 2.8em;
+      position: absolute;
+      font-family: serif;
+      left: 0px;
+      top: -10px;
+      color: #ccc;
+    }
+  }
+  pre {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+    font-size: 0.8em;
+    background-color: #f9f9f9;
+    border: 0px;
+    margin-left: -25px;
+    margin-right: -25px;
+    margin-top: 0;
+    padding: 15px 25px;
+    color: #444;
+    overflow: auto;
+    border-radius: 5px;
+    code {
+      display: block;
+      line-height: 150%;
+      padding: 0 !important;
+      font-size: 1em !important;
+      background-color: #f9f9f9 !important;
+      border: none !important;
+    }
+  }
+
+  pre::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+  }
+
+  pre::-webkit-scrollbar-thumb:horizontal {
+    width: 25px;
+    background-color: #ccc;
+    -webkit-border-radius: 4px;
+  }
+
+  pre::-webkit-scrollbar-track-piece {
+    margin-bottom: 10px;
+    background-color: #e5e5e5;
+    border-bottom-left-radius: 4px 4px;
+    border-bottom-right-radius: 4px 4px;
+    border-top-left-radius: 4px 4px;
+    border-top-right-radius: 4px 4px;
+  }
+
+  pre::-webkit-scrollbar-thumb:vertical {
+    height: 25px;
+    background-color: #ccc;
+    -webkit-border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px white;
+  }
+
+  code {
+    display: inline-block;
+    font-size: 0.9em;
+    background-color: #f5f5f5 !important;
+    border: 0px;
+    color: #444 !important;
+    padding: 0px 8px !important;
+    margin: 0 2px;
+    border-radius: 3px;
+    word-break: break-all;
+  }
+  a:link,
+  a:visited {
+    color: $blue !important;
+    text-decoration: none !important;
+  }
+  a:hover {
+    text-decoration: underline !important;
+    color: $primary !important;
+  }
+  a.mention-floor {
+    color: #60b566 !important;
+    margin-right: 3px;
+  }
+  a.mention {
+    color: #777 !important;
+    font-weight: bold;
+    margin-right: 2px;
+    b {
+      color: #777 !important;
+      font-weight: normal;
+    }
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: bold;
+    text-align: left;
+    margin-top: 0px;
+    margin-bottom: 20px;
+  }
+  h1 {
+    font-size: 26px !important;
+    text-align: center;
+    margin-bottom: 30px !important;
+  }
+  h2,
+  h3,
+  h4 {
+    text-align: left;
+    font-weight: bold;
+    font-size: 16px !important;
+    line-height: 100%;
+    margin: 0;
+    color: #555;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+  }
+  h2 {
+    font-size: 20px !important;
+    color: #111;
+  }
+  h3 {
+    font-size: 18px !important;
+    color: #333;
+  }
+  h5,
+  h6 {
+    font-size: 15px;
+    line-height: 100%;
+    color: #777;
+  }
+  h6 {
+    font-size: 14px;
+    color: #999;
+  }
+
+  strong {
+    color: #000;
+  }
+  ul,
+  ol {
+    list-style-type: square;
+    margin: 0;
+    margin-bottom: 20px;
+    padding: 0px 20px;
+    p,
+    blockquote,
+    pre {
+      margin-bottom: 8px;
+    }
+    li {
+      line-height: 1.6em;
+      padding: 2px 0;
+      color: #333;
+    }
+    ul {
+      list-style-type: circle;
+      margin-bottom: 0px;
+    }
+  }
+  ol {
+    list-style-type: decimal;
+    ol {
+      list-style-type: lower-alpha;
+      margin-bottom: 0px;
+    }
+  }
+
+  img {
+    vertical-align: top;
+    max-width: 100%;
+  }
+  a.zoom-image {
+    cursor: zoom-in;
+  }
+  a.at_floor {
+    color: #60b566 !important;
+  }
+  a.at_user,
+  a.user-mention {
+    color: #0069d6 !important;
+  }
+  img.twemoji {
+    width: 20px;
+  }
+}

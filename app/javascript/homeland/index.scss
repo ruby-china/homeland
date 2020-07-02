@@ -4,6 +4,7 @@
 @import "~bootstrap/scss/bootstrap";
 $fa-font-path: "~font-awesome/fonts";
 @import "~font-awesome/scss/font-awesome";
+@import "./markdown.scss";
 
 .flex {
   display: flex;
@@ -247,7 +248,7 @@ body {
     border-radius: 0;
     border: 0px;
     border-left: 1px solid rgba(0, 0, 0, 0.04);
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.08);
     .dropdown-item {
       padding: 0.4rem 1.5rem;
     }
@@ -446,22 +447,23 @@ kbd {
 }
 
 .card {
-  margin-bottom: 15px;
+  margin-bottom: 25px;
   border-top: 0;
   box-shadow: 0 0 0;
-  border-color: #e5e6e9eb #dfe0e470 #d0d1d559;
+  border: 1px solid hsla(210, 8%, 51%, 0.09);
 
   .card-header {
-    padding: 8px 15px 0 15px;
+    padding: 15px 25px 0 25px;
     background: #ffffff;
+    border: 0px;
     border: 0;
-    color: #777;
-    font-size: 14px;
+    font-size: 18px;
   }
 
   .card-footer {
     border: 0;
     padding-top: 0;
+    padding: 0 25px 25px 25px;
     background: #fff;
   }
 
@@ -473,7 +475,7 @@ kbd {
     align-items: center;
 
     .card-subtitle {
-      margin-top: 10px;
+      margin-top: 20px;
       font-size: 14px;
     }
 
@@ -485,16 +487,16 @@ kbd {
 
     .actions {
       font-size: 14px;
-      margin-left: 15px;
+      margin-left: 25px;
     }
   }
 
   .card-body {
-    padding: 15px;
+    padding: 25px;
   }
 
   .list-group-item {
-    padding: 10px 15px;
+    padding: 15px 25px;
   }
 }
 
@@ -523,29 +525,37 @@ kbd {
 
 /* Modal */
 .modal {
-  top: 50px;
+  top: 120px;
+  .modal-dialog {
+    max-width: 640px;
+  }
+
   .modal-content {
     border: 0px;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15), 0px 0px 1px 1px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.07) !important;
 
     p {
       margin-bottom: 5px;
     }
   }
   .modal-header {
-    padding: 8px 15px;
-    border-bottom: 0px;
+    border: 0px;
+    padding: 15px 25px;
+    .close {
+      font-size: 1.9rem;
+      font-weight: normal;
+    }
     .modal-title {
       font-size: 16px;
       font-weight: bold;
     }
-    .close {
-      font-size: 1.2rem;
-      font-weight: normal;
-    }
   }
   .modal-footer {
-    border-color: #e5e5e5;
+    padding: 15px 25px;
+    text-align: left;
+    font-size: 16px;
+    border: 0;
+    justify-content: flex-start;
   }
 
   @media (min-width: 768px) {
@@ -555,12 +565,12 @@ kbd {
   }
 }
 
-.modal-backdrop.in {
-  opacity: 1;
-  background-color: rgba(0, 0, 0, 0.1);
+.modal-backdrop {
+  opacity: 0 !important;
 }
 
 .list-group {
+  border-top: 0 !important;
   .list-group-item {
     border-color: #f5f5f5;
   }
@@ -576,20 +586,18 @@ kbd {
   color: #666;
   a {
     display: inline-block;
-    border-radius: 3px;
+    border-radius: 5px;
   }
   a:link,
   a:visited {
     color: $primary;
     line-height: 100%;
-    padding: 4px;
+    padding: 5px 8px;
     text-decoration: none;
   }
   a:hover {
     background: #eee;
     text-decoration: none;
-  }
-  .loading {
   }
 }
 

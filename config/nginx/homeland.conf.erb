@@ -46,7 +46,7 @@ server {
   }
 
   # DO NOT CHANGE THIS
-  location /assets {
+  location ~ (/assets|/packs) {
     access_log        off;
     expires           365d;
     gzip_static on;

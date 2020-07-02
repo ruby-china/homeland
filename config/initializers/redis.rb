@@ -23,6 +23,3 @@ if Sidekiq.server?
   schedule_config = YAML.load(ERB.new(File.read("config/schedule.yml")).result)
   Sidekiq::Cron::Job.load_from_hash(schedule_config)
 end
-
-
-SecondLevelCache.configure.cache_key_prefix = "slc"

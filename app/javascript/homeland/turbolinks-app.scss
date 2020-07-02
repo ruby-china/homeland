@@ -2,13 +2,15 @@
 
 $primary: #000;
 $primary-dark: #000;
-$danger: #D00D2E;
-$danger-dark: #261B1B;
+$danger: #d00d2e;
+$danger-dark: #261b1b;
 
-.hide-ios { display: none !important; }
+.hide-ios {
+  display: none !important;
+}
 body {
   padding-top: 0;
-  background: #FFF;
+  background: #fff;
 }
 
 .btn {
@@ -43,22 +45,33 @@ body {
   }
 }
 
-.header, .footer,
-.index-sections, .index-locations { display: none; }
+.header,
+.footer,
+.index-sections,
+.index-locations {
+  display: none;
+}
 #node-selector .card {
   display: block;
   padding: 0px;
   box-shadow: 0 0 0;
   border: 0px;
-  .card-body { border:0; }
-  .media-left { display: none; }
+  .card-body {
+    border: 0;
+  }
+  .media-left {
+    display: none;
+  }
 }
 
 .container {
   padding: 0;
 }
 
-.sidebar { padding: 0; display: none; }
+.sidebar {
+  padding: 0;
+  display: none;
+}
 #main > .row {
   margin: 0;
   .col-md-9,
@@ -66,7 +79,9 @@ body {
   .col-md-6,
   .col-md-5,
   .col-md-4,
-  .col-md-3 { padding: 0; }
+  .col-md-3 {
+    padding: 0;
+  }
 }
 
 .card {
@@ -89,7 +104,10 @@ body {
     padding: 20px 20px;
   }
 
-  .card-footer { background: #f0f0f0; padding: 10px 20px; }
+  .card-footer {
+    background: #f0f0f0;
+    padding: 10px 20px;
+  }
 
   &.card-lg {
     .card-body {
@@ -111,7 +129,7 @@ body {
   margin-bottom: 0px;
 
   .close {
-    opacity: .4;
+    opacity: 0.4;
     margin-top: 2px;
   }
 }
@@ -122,7 +140,7 @@ body {
 }
 .alert-warning {
   background: #fff8b8;
-  color: #CD8546;
+  color: #cd8546;
   border-color: #faebcc;
 }
 
@@ -134,7 +152,9 @@ body {
   }
 }
 
-.pagination { display: none; }
+.pagination {
+  display: none;
+}
 
 .topics {
   .topic-list-heading {
@@ -153,19 +173,31 @@ body {
   height: 140px;
 }
 
-.no-result { display: none; }
+.no-result {
+  display: none;
+}
 
 .new_reply {
   .submit-buttons {
-    #reply-button { display: block; width: 100%; }
+    #reply-button {
+      display: block;
+      width: 100%;
+    }
     .help-inline,
-    .pull-right { display: none; }
+    .pull-right {
+      display: none;
+    }
   }
 }
 
 .edit-reply {
-  .card-header { display: none; }
-  .col-xs-2 { display: block; width: 50%; }
+  .card-header {
+    display: none;
+  }
+  .col-xs-2 {
+    display: block;
+    width: 50%;
+  }
 }
 
 .topics {
@@ -209,11 +241,15 @@ body {
     &.topic-visited {
       .title {
         a:link,
-        a:visited { color: #666; }
+        a:visited {
+          color: #666;
+        }
       }
       .info {
         color: #bbb;
-        a { color: #bbb; }
+        a {
+          color: #bbb;
+        }
       }
       .count {
         a:link,
@@ -241,10 +277,18 @@ body {
         text-decoration: none;
       }
 
-      a:link { background: transparent; color: #666;}
-      a:hover { background: transparent;  }
+      a:link {
+        background: transparent;
+        color: #666;
+      }
+      a:hover {
+        background: transparent;
+      }
       a.state-true,
-      a:visited { background: transparent; color: #ddd; }
+      a:visited {
+        background: transparent;
+        color: #ddd;
+      }
     }
   }
 }
@@ -253,13 +297,15 @@ body {
   .label-awesome {
     padding: 15px 20px 0 20px;
     margin-top: -1px;
-    background: #FFF;
+    background: #fff;
     border: 0;
     color: $primary;
     .fa.awesome {
       color: $primary;
     }
-    a { color: #cccaa2; }
+    a {
+      color: #cccaa2;
+    }
   }
 
   .card-header {
@@ -269,27 +315,32 @@ body {
       margin-bottom: 0;
 
       a.node {
+        margin-left: 30px;
         display: inline-block;
-        font-size: 15px;
-        line-height: 30px;
-        height: 30px;
-        position: absolute;
-        top: 20px;
-        right: 25px;
         margin-right: 0;
+        font-size: 0.9em;
         text-align: right;
         font-weight: normal;
       }
-      .title { display: block; margin-top: 30px; }
+      .title {
+      }
     }
 
     .media-right {
-      display: block; position: absolute; top: 20px; left: 20px;
-      .avatar-48 { width: 24px; height: 24px; }
+      display: block;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      margin-left: 0;
+      .avatar-48 {
+        width: 24px;
+        height: 24px;
+      }
     }
   }
 
   .info {
+    margin-top: 8px;
     font-size: 14px;
     color: #999;
 
@@ -298,32 +349,38 @@ body {
     }
   }
 
-  .toc-container { display: none !important; }
+  .toc-container {
+    display: none !important;
+  }
 }
 
 .markdown {
-  p { font-size: 16px; }
+  p {
+    font-size: 16px;
+  }
   .zoom-image {
     overflow: hidden;
     display: block;
     margin: 8px -20px !important;
-    img {  width: 100%; }
+    img {
+      width: 100%;
+    }
   }
 
   h2,
   h3,
   h4,
   h5,
-  h6 { border-bottom: 0 !important; padding-bottom: 0 !important; }
+  h6 {
+    border-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
 
   pre {
-    background: #fefeff !important;
-    border-color: #f0f0f0 !important;
     padding: 10px 20px !important;
     margin-left: -20px !important;
     margin-right: -20px !important;
     code {
-      background: #fefeff !important;
       margin: 0;
     }
   }
@@ -338,19 +395,25 @@ body {
       padding: 15px 20px;
     }
 
-    .avatar { left: 20px; }
+    .avatar {
+      left: 20px;
+    }
     .avatar-48 {
       width: 24px;
       height: 24px;
     }
 
     .info {
-      .name { font-size: 14px; }
+      .name {
+        font-size: 14px;
+      }
       padding-left: 32px;
       font-size: 14px;
       line-height: 24px;
 
-      .sub-info { float: right; }
+      .sub-info {
+        float: right;
+      }
     }
 
     .reply-to-block {
@@ -384,7 +447,9 @@ body {
     color: $primary !important;
   }
   a.active {
-    .fa { color: $danger; }
+    .fa {
+      color: $danger;
+    }
   }
 }
 
@@ -400,7 +465,7 @@ body {
   #node-selector-button {
     background: #000;
     border-color: #000;
-    color: #FFF;
+    color: #fff;
     border-radius: 0;
   }
 
@@ -410,25 +475,30 @@ body {
 }
 
 .page-pages {
-  .wiki-sidebar { display: block; }
+  .wiki-sidebar {
+    display: block;
+  }
 }
 
 .page-users {
   .sidebar {
     display: block;
     .profile {
-      .opts { display: none; }
+      .opts {
+        display: none;
+      }
     }
   }
 
-  #user_github_repos { display: none; }
+  #user_github_repos {
+    display: none;
+  }
   .nav-tabs {
     margin-top: 15px;
     li > a {
       border: 0;
       padding: 8px 8px;
     }
-
   }
 
   .node-topics {
@@ -448,14 +518,14 @@ body {
     li {
       &.active {
         a {
-          color: #FFF !important;
+          color: #fff !important;
           background: #000 !important;
         }
       }
 
       a {
-       border-radius: 0 !important;
-       color: #000;
+        border-radius: 0 !important;
+        color: #000;
       }
     }
   }
@@ -475,7 +545,7 @@ body {
 
     &.active {
       a {
-        color: #FFF !important;
+        color: #fff !important;
         background: #000 !important;
       }
     }
@@ -491,7 +561,7 @@ body {
       box-shadow: 0 0 0;
       border-left: 0;
       border: 1px solid #000 !important;
-      color: #000  !important;
+      color: #000 !important;
     }
   }
 }
@@ -499,10 +569,58 @@ body {
 .page-users {
   .user-teams,
   .nav-tabs,
-  .userinfo { display: none; }
+  .userinfo {
+    display: none;
+  }
 }
 
-.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+.col-lg-1,
+.col-lg-10,
+.col-lg-11,
+.col-lg-12,
+.col-lg-2,
+.col-lg-3,
+.col-lg-4,
+.col-lg-5,
+.col-lg-6,
+.col-lg-7,
+.col-lg-8,
+.col-lg-9,
+.col-md-1,
+.col-md-10,
+.col-md-11,
+.col-md-12,
+.col-md-2,
+.col-md-3,
+.col-md-4,
+.col-md-5,
+.col-md-6,
+.col-md-7,
+.col-md-8,
+.col-md-9,
+.col-sm-1,
+.col-sm-10,
+.col-sm-11,
+.col-sm-12,
+.col-sm-2,
+.col-sm-3,
+.col-sm-4,
+.col-sm-5,
+.col-sm-6,
+.col-sm-7,
+.col-sm-8,
+.col-sm-9,
+.col-xs-1,
+.col-xs-10,
+.col-xs-11,
+.col-xs-12,
+.col-xs-2,
+.col-xs-3,
+.col-xs-4,
+.col-xs-5,
+.col-xs-6,
+.col-xs-7,
+.col-xs-8,
+.col-xs-9 {
   padding: 0;
 }
-

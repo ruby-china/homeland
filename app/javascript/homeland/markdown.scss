@@ -19,6 +19,7 @@
   iframe {
     max-width: 100%;
     border: 0;
+    border-radius: 8px;
   }
   p,
   pre,
@@ -39,7 +40,7 @@
 
   p {
     font-size: 1em;
-    line-height: 1.6em;
+    line-height: 1.8em;
   }
   hr {
     border: 3px dashed $gray;
@@ -83,7 +84,7 @@
     padding: 15px 25px;
     color: #444;
     overflow: auto;
-    border-radius: 5px;
+    border-radius: 0px;
     code {
       display: block;
       line-height: 150%;

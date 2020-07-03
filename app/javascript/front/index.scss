@@ -425,7 +425,7 @@ hr {
   .label-awesome {
     font-size: 16px;
     margin-top: 25px;
-    background: lighten($red, 43%);
+    background: #ffcc8b24;
     border: 0;
     padding: 15px 25px;
     color: $red;
@@ -538,8 +538,7 @@ hr {
 #replies {
   margin-bottom: 15px;
   .card-body {
-    padding-top: 0px;
-    padding-bottom: 0px;
+    padding-bottom: 10px;
   }
   .info {
     .uname {
@@ -557,16 +556,29 @@ hr {
     }
   }
   .reply {
-    padding: 15px;
+    padding: 15px 25px 25px 25px;
+    margin: 0 -25px 0px -25px;
     position: relative;
-    border-bottom: 1px solid #eee;
-    padding-left: 58px;
+    padding-left: calc(25px + 58px);
+
+    .infos {
+      min-height: 48px;
+    }
+    .avatar {
+      position: absolute;
+      top: 12px;
+      left: calc(25px + 6px);
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
 
     &.reply-system,
     &.reply-deleted {
-      padding: 15px 10px;
+      padding: 10px calc(25px + 10px);
+      margin-bottom: 0;
       color: #666;
-      border-bottom: 1px solid #f0f0f0;
 
       img.media-object {
         border-radius: 180px;
@@ -584,14 +596,7 @@ hr {
         border-bottom: 1px dashed #eee;
       }
     }
-    .infos {
-      min-height: 48px;
-    }
-    .avatar {
-      position: absolute;
-      top: 15px;
-      left: 0px;
-    }
+
     &:last-child {
       border-bottom: 0px;
     }
@@ -601,10 +606,10 @@ hr {
       min-height: 32px;
     }
     &.light {
-      background: #f7f2fc;
+      background: #f7f2fc94;
     }
     &.popular {
-      background: #fffce9;
+      background: #ff000005;
     }
 
     .info {
@@ -668,6 +673,7 @@ hr {
 
     .markdown {
       pre {
+        border-radius: 6px;
         margin-right: 0px;
         margin-left: 0px;
       }

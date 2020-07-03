@@ -45,7 +45,7 @@
   <% else %>
     <%= link_to t("common.place_top"), suggest_admin_topic_path(topic), 'data-confirm' => 'Are you sure?', method: :post %>
   <% end %>
-  <%= link_to "", edit_admin_topic_path(topic), class: "fa fa-pencil" %>
+  <%= link_to "", edit_admin_topic_path(topic), class: "fa fa-edit" %>
   <% if topic.deleted_at.blank? %>
     <%= link_to "", admin_topic_path(topic), 'data-confirm' => 'Are you sure?', method: :delete, class: "fa fa-trash" %>
   <% else %>

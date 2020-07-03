@@ -11,7 +11,7 @@
       <% elsif current_user %>
         $("#replies .reply a.edit[data-uid='<%= current_user.id %>']").css('display','inline-block');
       <% end %>
-    
+
       <% if @topic.closed? %>
         $("#replies .reply .hideable").remove();
       <% end %>
@@ -24,7 +24,7 @@
       <%= render partial: "topics/topic_info", locals: { topic: @topic } %>
       <% if @topic.excellent? %>
         <div class="label-awesome">
-          <i class="fa fa-diamond awesome"></i> 本帖已被设为精华帖！
+          <i class="fa fa-award awesome"></i> 本帖已被设为精华帖！
           <% if can?(:close, @topic) %>
             <div class="pull-right">
               <%= link_to icon_tag("close"), action_topic_path(@topic.id, type: 'normal'), method: :post, remote: true %>

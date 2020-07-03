@@ -891,6 +891,11 @@
   resolved "https://registry.npm.taobao.org/@csstools/convert-colors/download/@csstools/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
   integrity sha1-rUldxBsS511YjG24uYNPCPoTHrc=
 
+"@fortawesome/fontawesome-free@^5.13.1":
+  version "5.13.1"
+  resolved "https://registry.npm.taobao.org/@fortawesome/fontawesome-free/download/@fortawesome/fontawesome-free-5.13.1.tgz#c53b4066edae16cd1fd669f687baf031b45fb9d6"
+  integrity sha1-xTtAZu2uFs0f1mn2h7rwMbRfudY=
+
 "@rails/actioncable@^6.0.3-2":
   version "6.0.3-2"
   resolved "https://registry.npm.taobao.org/@rails/actioncable/download/@rails/actioncable-6.0.3-2.tgz#18933d870649e356f3c47a134af9430f17ce51ca"
@@ -3098,11 +3103,6 @@ follow-redirects@^1.0.0:
   version "1.12.0"
   resolved "https://registry.npm.taobao.org/follow-redirects/download/follow-redirects-1.12.0.tgz?cache=0&sync_timestamp=1592338623374&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ffollow-redirects%2Fdownload%2Ffollow-redirects-1.12.0.tgz#ff0ccf85cf2c867c481957683b5f91b75b25e240"
   integrity sha1-/wzPhc8shnxIGVdoO1+Rt1sl4kA=
-
-font-awesome@^4.7.0:
-  version "4.7.0"
-  resolved "https://registry.npm.taobao.org/font-awesome/download/font-awesome-4.7.0.tgz#8fa8cf0411a1a31afd07b06d2902bb9fc815a133"
-  integrity sha1-j6jPBBGhoxr9B7BtKQK7n8gVoTM=
 
 for-in@^1.0.2:
   version "1.0.2"

@@ -2,8 +2,7 @@
 @import "_vars";
 
 @import "~bootstrap/scss/bootstrap";
-$fa-font-path: "~font-awesome/fonts";
-@import "~font-awesome/scss/font-awesome";
+@import "./iconfont.scss";
 @import "./markdown.scss";
 
 .flex {
@@ -28,6 +27,10 @@ $fa-font-path: "~font-awesome/fonts";
 
 .jcsa {
   justify-content: space-around !important;
+}
+
+.pull-right {
+  float: right;
 }
 
 /* 去掉 Bootstrap 的蓝色 outline */

@@ -20,7 +20,7 @@
     <td class="first"><%= section.id %></td>
     <td><%= section.name %></td>
     <td><%= section.sort %></td>
-    <td><%= link_to '', edit_admin_section_path(section), class: "fa fa-pencil" %>
+    <td><%= link_to '', edit_admin_section_path(section), class: "fa fa-edit" %>
     <%= link_to '', admin_section_path(section), 'data-confirm' => '确定要删除吗?', method: :delete, class: "fa fa-trash" %></td>
   </tr>
 <% end %>

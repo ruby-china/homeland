@@ -47,12 +47,12 @@ module TopicsHelper
 
   def topic_excellent_tag(topic)
     return "" unless topic.excellent?
-    content_tag(:i, "", title: "精华帖", class: "fa fa-diamond", data: { toggle: "tooltip" })
+    content_tag(:i, "", title: "精华帖", class: "fa fa-award", data: { toggle: "tooltip" })
   end
 
   def topic_close_tag(topic)
     return "" unless topic.closed?
-    content_tag(:i, "", title: "问题已解决／话题已结束讨论", class: "fa fa-check", data: { toggle: "tooltip" })
+    content_tag(:i, "", title: "问题已解决／话题已结束讨论", class: "fa fa-check-circle", data: { toggle: "tooltip" })
   end
 
   def render_node_name(name, id)

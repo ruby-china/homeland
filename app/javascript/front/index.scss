@@ -114,10 +114,13 @@ hr {
           color: #999;
           margin-left: 3px;
         }
-        i.fa-diamond {
+        i.fa-pin {
+          color: #222;
+        }
+        i.fa-award {
           color: $red;
         }
-        i.fa-check {
+        i.fa-check-circle {
           color: $green;
         }
       }
@@ -333,10 +336,13 @@ hr {
         color: #999;
         margin-left: 3px;
       }
-      i.fa-diamond {
+      i.fa-pin {
+        color: #222;
+      }
+      i.fa-award {
         color: $red;
       }
-      i.fa-check {
+      i.fa-check-circle {
         color: $green;
       }
     }
@@ -405,7 +411,7 @@ hr {
         color: #999;
         margin-right: 3px;
       }
-      i.fa-check {
+      i.fa-check-circle {
         color: $green;
         font-size: 16px;
       }
@@ -512,6 +518,7 @@ hr {
         display: block;
         font-size: 40px;
         color: $primary;
+        margin-bottom: 6px;
       }
       a.active {
         i.fa {

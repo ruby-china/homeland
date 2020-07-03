@@ -1,0 +1,16 @@
+$fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
+@import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "~@fortawesome/fontawesome-free/scss/solid.scss";
+@import "~@fortawesome/fontawesome-free/scss/brands.scss";
+
+.fa {
+  &-pin {
+    @extend .fa-chevron-circle-up;
+  }
+  &-close {
+    @extend .fa-times;
+  }
+  &-warning {
+    @extend .fa-exclamation-triangle;
+  }
+}

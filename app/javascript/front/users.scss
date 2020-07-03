@@ -95,7 +95,10 @@
       i.icon {
         margin-bottom: -1px;
       }
-      i.fa-diamond {
+      i.fa-pin {
+        color: #222;
+      }
+      i.fa-award {
         color: $red;
       }
       .info {
@@ -217,7 +220,7 @@ table.node-topics {
       color: #333;
       font-weight: normal;
     }
-    i.fa-diamond {
+    i.fa-award {
       color: $red;
     }
   }

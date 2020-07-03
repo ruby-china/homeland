@@ -11,7 +11,7 @@
             <%= @user.fullname %>
             <span class="opts pull-right">
               <% if current_user&.admin? %>
-                <%= link_to icon_tag("pencil", label: "管理"), edit_admin_user_path(@user.id) %>
+                <%= link_to icon_tag("edit", label: "管理"), edit_admin_user_path(@user.id) %>
               <% end %>
             </span>
           </div>
@@ -29,7 +29,7 @@
           </div>
           <div class="item social">
             <% if !@user.twitter.blank? %>
-              <%= link_to raw('<i class="fa fa-twitter"></i>'), @user.twitter_url, class: "twitter", rel: "nofollow" %>
+              <%= link_to raw('<i class="fab fa-twitter"></i>'), @user.twitter_url, class: "twitter", rel: "nofollow" %>
             <% end %>
             <% if !@user.website.blank? %>
               <%= link_to(raw('<i class="fa fa-globe"></i>'), @user.website_url, target: '_blank', rel: 'nofollow') %>

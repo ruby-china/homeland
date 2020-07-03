@@ -27,7 +27,7 @@
                 <td><%= app.level %></td>
                 <td><%= app.access_tokens.count %></td>
                 <td class="opts">
-                  <%= link_to icon_tag('pencil'), edit_oauth_application_path(app)%>
+                  <%= link_to icon_tag('edit'), edit_oauth_application_path(app)%>
                   <%= link_to icon_tag('trash'), oauth_application_path(app), data: { method: :delete, confirm: "确定要删除么？" }%>
                 </td>
               </tr>

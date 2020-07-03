@@ -24,7 +24,7 @@
           <% end %>
 
           <% if !@team.twitter.blank? %>
-            <%= link_to raw('<i class="fa fa-twitter"></i>'), @team.twitter_url, class: "twitter", rel: "nofollow" %>
+            <%= link_to raw('<i class="fab fa-twitter"></i>'), @team.twitter_url, class: "twitter", rel: "nofollow" %>
           <% end %>
 
           <% if !@team.email.blank? && @team.email_public %>

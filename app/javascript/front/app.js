@@ -18,7 +18,6 @@ const AppView = Backbone.View.extend({
 
   initialize() {
     let needle;
-    FormStorage.restore();
     this.initForDesktopView();
     this.initComponents();
     this.initScrollEvent();

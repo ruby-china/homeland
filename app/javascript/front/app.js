@@ -1,6 +1,5 @@
 require("./emoji-modal");
 require("./notifier");
-require("./form_storage");
 
 const AppView = Backbone.View.extend({
   el: "body",
@@ -346,12 +345,14 @@ const AppView = Backbone.View.extend({
   }
 });
 
-document.addEventListener('turbolinks:load', () => window._appView = new AppView());
+document.addEventListener('turbolinks:load', () => {
+  window._appView = new AppView();
+})
 
-document.addEventListener('turbolinks:click', function (event) {
+document.addEventListener('turbolinks:click', (event) => {
   if (event.target.getAttribute('href').charAt(0) === '#') {
     return event.preventDefault();
   }
 });
 
-FormStorage.init();
+

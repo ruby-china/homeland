@@ -37,6 +37,32 @@ class AbilityTest < ActiveSupport::TestCase
     assert ability.can?(:create, Team)
   end
 
+  test "Vip create topic" do
+    vip = create :vip
+    ability = Ability.new(vip)
+
+    assert ability.can?(:create, Topic)
+    assert ability.can?(:create, Reply)
+  end
+
+  test "HR create topic" do
+    hr = create :hr
+    topic = create :topic, user: hr
+    reply = create :reply, user: hr
+
+    ability = Ability.new(hr)
+
+    assert ability.can?(:create, Topic)
+    assert ability.can?(:update, topic)
+    assert ability.can?(:close, topic)
+    assert ability.can?(:open, topic)
+    assert ability.can?(:destroy, topic)
+    assert ability.can?(:create, Reply)
+    assert ability.can?(:update, reply)
+    assert ability.can?(:destroy, reply)
+  end
+
+
   test "Member" do
     user = create :avatar_user
     topic = create :topic, user: user

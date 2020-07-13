@@ -13,6 +13,8 @@ class Ability
       can :manage, :all
     elsif @user.member?
       roles_for_members
+    elsif @user.hr?
+      roles_for_members
     elsif @user.vip?
       roles_for_members
       roles_for_vip

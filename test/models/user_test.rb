@@ -153,6 +153,10 @@ class UserTest < ActiveSupport::TestCase
     user.state = :vip
     assert_equal false, user.newbie?
 
+    # should false when user is hr
+    user.state = :hr
+    assert_equal false, user.newbie?
+
     # Unverfied user with 2.days.ago registed.
     user = User.new(created_at: 2.days.ago)
 

@@ -26,7 +26,7 @@ class User
 
     # 是否能发帖
     def newbie?
-      return false if self.vip?
+      return false if self.vip? || self.hr?
       t = Setting.newbie_limit_time.to_i
       return false if t == 0
       created_at > t.seconds.ago

@@ -23,6 +23,10 @@ FactoryBot.define do
     state { "vip" }
   end
 
+  factory :hr, parent: :user do
+    state { "hr" }
+  end
+
   factory :newbie, parent: :user do
     created_at { 1.hours.ago }
   end

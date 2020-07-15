@@ -703,8 +703,11 @@ hr {
   @media (max-width: 480px) {
     .reply {
       padding: 10px;
-      margin: 0 -10px;
-      padding-left: 65px;
+      padding-left: 58px;
+
+      .avatar {
+        left: calc(10px + 6px);
+      }
     }
   }
 }

@@ -9,9 +9,9 @@
     text-align: center;
     margin-bottom: 15px;
     border-radius: 3px;
-    background: #fff;
+    background: var(--card-background-color);
     border: 1px;
-    border-color: #e5e6e9 #dfe0e4 #d0d1d5 #dfe0e4;
+    border-color: var(--card-border-color);
 
     .icon {
       display: block;
@@ -26,14 +26,14 @@
     .text {
       display: block;
       text-align: left;
-      background: #fff;
-      border-top: 1px solid #f0f0f0;
+      background: var(--card-background-color);
+      border-top: 1px solid var(--card-border-color);
       font-size: 14px;
       font-weight: bold;
 
       a {
         display: block;
-        color: #666;
+        color: var(--text-color1);
         padding: 6px 15px;
       }
       a:hover {
@@ -51,28 +51,28 @@
   .item1 {
     .icon {
       .fa {
-        color: lighten($red, 10%);
+        color: var(--red);
       }
     }
   }
   .item3 {
     .icon {
       .fa {
-        color: lighten($blue, 10%);
+        color: var(--blue);
       }
     }
   }
   .item2 {
     .icon {
       .fa {
-        color: lighten($yellow, 10%);
+        color: var(--yellow);
       }
     }
   }
   .item4 {
     .icon {
       .fa {
-        color: lighten($green, 10%);
+        color: var(--green);
       }
     }
   }
@@ -80,7 +80,7 @@
 
 h2 {
   font-size: 12px;
-  color: #999;
+  color: var(--text-color2);
   line-height: 100%;
   margin-bottom: 10px;
   text-align: center;
@@ -104,7 +104,7 @@ h2 {
 .location-list {
   .name {
     a {
-      color: #666;
+      color: var(--text-color1);
       margin: 6px;
       display: inline-block;
     }

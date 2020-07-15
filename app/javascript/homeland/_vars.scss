@@ -1,31 +1,90 @@
-$primary: #404040;
-$default: #e0e0e0;
-$secondary: #666;
-$gray: #f2f2f2;
 $red: #eb5424;
-$yellow: #fee209;
 $blue: #2275da;
 $green: #19a302;
+$yellow: #fee209;
 
-$theme-colors: (
-    "primary": $blue,
-    "warning": $yellow,
-);
+:root {
+    --primary: #404040;
+    --text-color: #333;
+    --text-color1: #666;
+    --text-color2: #999;
+    --text-color3: #bbb;
+    --link-color: #222;
+    --default: #e0e0e0;
+    --secondary: #666;
+    --gray: #f2f2f2;
+    --red: #eb5424;
+    --red-light: #fdf1ed;
+    --yellow: #fee209;
+    --yellow-light: #fffdee;
+    --blue: #2275da;
+    --blue-light: #e6f0fb;
+    --green: #19a302;
+    --green-light: #f4fff2;
 
-$input-border: $default;
-$input-color-placeholder: $default;
+    // speical vars
+    --btn-default-text-color: #202020;
+    --btn-default-background-color: #fcfcfc;
+    --btn-default-border-color: #ced4da;
+    --btn-default-active-background-color: #f0f0f0;
+    --btn-default-active-border-color: #e0e0e0;
+    --btn-default-active-text-color: #aaa;
+    --btn-default-hover-border-color: #73739038;
 
-$link-color: $primary;
+    --form-control-background-color: #fff;
+    --form-control-border-color: #ced4da;
+    --form-control-disabled-background-color: #e9ecef;
 
-$colors: (
-    "blue": $blue,
-    "red": $red,
-    "yellow": $yellow,
-    "green": $green,
-    "white": #fff,
-    "gray": $gray,
-    "gray-dark": $gray,
-) !default;
+    --input-group-background-color: #e9ecef;
+    --input-group-border-color: #ced4da;
+
+    --body-background-color: #e5e5e566;
+
+    --navbar-background-color: #fff;
+    --navbar-text-color: #404040;
+    --navbar-shadow-color: rgba(0, 0, 0, 0.05);
+    --navbar-fixed-shadow-color: rgba(0, 0, 0, 0.07);
+    --navbar-item-link-active-background-color: #f2f2f2;
+    --navbar-item-active-text-color: #eb5424;
+
+    --navbar-topic-title-background-color: #fff;
+
+    --navbar-brand-text-color: #666;
+    --navbar-brand-text-strong-color: #2275da;
+
+    --navbar-dropdown-show-background-color: rgba(0, 0, 0, 0.04);
+
+    --sub-navbar-background-color: #fff;
+    --sub-navbar-shadow-color: rgba(0, 0, 0, 0.04);
+
+    --card-border-color: hsla(210, 8%, 51%, 0.09);
+    --card-background-color: #fff;
+    --card-title-secondary-color: #777;
+
+    --dropdown-menu-background-color: #fff;
+    --dropdown-menu-border-color: rgba(0, 0, 0, 0.15);
+
+    --dropdown-item-active-text-color: #222;
+    --dropdown-menu-divider-color: #e9ecef;
+    --dropdown-item-active-background-color: rgba(0, 0, 0, 0.05);
+
+    --modal-background-color: #fff;
+    --modal-shadow-color: rgba(0, 0, 0, 0.07);
+
+    --list-group-item-border-color: #f7f7f7;
+
+    --topic-item-border-color: #f0f0f0a3;
+
+    --label-awesome-background-color: #ffcc8b24;
+    --label-awesome-link-color: #adaaa8;
+
+    --opts-text-color: #666;
+    --opts-link-color: #404040;
+    --opts-link-hover-background-color: #eee;
+
+    --scrollbar-thumb-color: #ccc;
+    --scrollbar-track-color: #e5e5e5;
+}
 
 $spacer: 15px;
 $font-size-base: 0.875rem;

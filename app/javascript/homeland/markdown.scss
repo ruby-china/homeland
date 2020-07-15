@@ -43,7 +43,7 @@
     line-height: 1.8em;
   }
   hr {
-    border: 3px dashed $gray;
+    border: 3px dashed var(--gray);
     border-bottom: 0px;
     margin-left: auto;
     margin-right: auto;
@@ -76,7 +76,7 @@
   pre {
     font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
     font-size: 0.8em;
-    background-color: #f9f9f9;
+    background-color: #f6f8fa;
     border: 0px;
     margin-left: -25px;
     margin-right: -25px;
@@ -90,7 +90,7 @@
       line-height: 150%;
       padding: 0 !important;
       font-size: 1em !important;
-      background-color: #f9f9f9 !important;
+      background-color: transparent !important;
       border: none !important;
     }
   }
@@ -102,13 +102,13 @@
 
   pre::-webkit-scrollbar-thumb:horizontal {
     width: 25px;
-    background-color: #ccc;
+    background-color: var(--scrollbar-thumb-color);
     -webkit-border-radius: 4px;
   }
 
   pre::-webkit-scrollbar-track-piece {
     margin-bottom: 10px;
-    background-color: #e5e5e5;
+    background-color: var(--scrollbar-track-color);
     border-bottom-left-radius: 4px 4px;
     border-bottom-right-radius: 4px 4px;
     border-top-left-radius: 4px 4px;
@@ -117,7 +117,7 @@
 
   pre::-webkit-scrollbar-thumb:vertical {
     height: 25px;
-    background-color: #ccc;
+    background-color: var(--scrollbar-thumb-color);
     -webkit-border-radius: 4px;
     -webkit-box-shadow: 0 1px 1px white;
   }
@@ -125,9 +125,9 @@
   code {
     display: inline-block;
     font-size: 0.9em;
-    background-color: #f5f5f5 !important;
+    background-color: var(--gray) !important;
     border: 0px;
-    color: #444 !important;
+    color: var(--secondary) !important;
     padding: 0px 8px !important;
     margin: 0 2px;
     border-radius: 3px;
@@ -140,18 +140,18 @@
   }
   a:hover {
     text-decoration: underline !important;
-    color: $primary !important;
+    color: var(--primary) !important;
   }
   a.mention-floor {
     color: #60b566 !important;
     margin-right: 3px;
   }
   a.mention {
-    color: #777 !important;
+    color: var(--secondary) !important;
     font-weight: bold;
     margin-right: 2px;
     b {
-      color: #777 !important;
+      color: var(--secondary) !important;
       font-weight: normal;
     }
   }
@@ -179,33 +179,25 @@
     font-size: 16px !important;
     line-height: 100%;
     margin: 0;
-    color: #555;
+    color: var(--secondary);
     margin-bottom: 20px;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
   }
   h2 {
     font-size: 20px !important;
-    color: #111;
+    color: var(--primary);
   }
   h3 {
     font-size: 18px !important;
-    color: #333;
   }
   h5,
   h6 {
     font-size: 15px;
     line-height: 100%;
-    color: #777;
   }
   h6 {
     font-size: 14px;
-    color: #999;
   }
 
-  strong {
-    color: #000;
-  }
   ul,
   ol {
     list-style-type: square;
@@ -220,7 +212,6 @@
     li {
       line-height: 1.6em;
       padding: 2px 0;
-      color: #333;
     }
     ul {
       list-style-type: circle;

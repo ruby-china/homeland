@@ -2,14 +2,14 @@
 
 <% cache(['markdown-guide', Digest::MD5.hexdigest(Homeland::Markdown.example)]) do %>
 
-<div class="card markdown">
+<div class="card">
   <div class="card-body">
     <h1>Markdown 教程</h1>
     <div class="row">
       <div class="col-md-6">
         <pre><code><%= Homeland::Markdown.example %></code></pre>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 markdown">
         <%= markdown(Homeland::Markdown.example)%>
       </div>
     </div>

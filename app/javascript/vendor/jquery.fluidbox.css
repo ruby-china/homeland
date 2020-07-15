@@ -1,6 +1,7 @@
 .fluidbox {
   outline: none;
 }
+
 .fluidbox-overlay {
   cursor: pointer;
   cursor: -webkit-zoom-out;
@@ -13,6 +14,7 @@
   right: 0;
   transition: all .25s ease-in-out;
 }
+
 .fluidbox-wrap {
   background-position: center center;
   background-size: cover;
@@ -21,6 +23,7 @@
   transition: all .25s ease-in-out;
   text-align: center;
 }
+
 .fluidbox-ghost {
   background-size: cover;
   background-position: center center;
@@ -28,6 +31,7 @@
   z-index: 2000 !important;
   transition: all .25s ease-in-out;
 }
+
 .fluidbox-closed .fluidbox-ghost {
   -webkit-transition: top, left, opacity, -webkit-transform;
   -moz-transition: top, left, opacity, -moz-transform;
@@ -35,6 +39,7 @@
   transition: top, left, opacity, transform;
   transition-delay: 0, 0, .25s, 0;
 }
+
 .fluidbox-opened {
   cursor: pointer;
   cursor: -webkit-zoom-out !important;
@@ -43,6 +48,7 @@
 
 .fluidbox-opened .fluidbox-overlay {
   z-index: 2000 !important;
+  background: var(--navbar-background-color) !important;
 }
 
 .fluidbox-opened .fluidbox-wrap {

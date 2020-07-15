@@ -1,9 +1,9 @@
 @import "vars";
 
-$primary: #000;
-$primary-dark: #000;
-$danger: #d00d2e;
-$danger-dark: #261b1b;
+:root {
+  --primary: #000;
+  --danger: d00d2e;
+}
 
 .hide-ios {
   display: none !important;
@@ -15,33 +15,33 @@ body {
 
 .btn {
   border-radius: 0;
-  border-color: #000;
+  border-color: var(--primary);
 
   &.active,
   &:active {
-    border-color: $primary;
+    border-color: var(--primary);
     background: #eee;
   }
 }
 
 .btn-primary {
-  background: $primary !important;
-  border-color: $primary-dark !important;
+  background: var(--primary) !important;
+  border-color: var(--primary) !important;
 
   &.active,
   &:active {
-    border-color: $primary !important;
-    color: $primary;
+    border-color: var(--primary) !important;
+    color: var(--primary);
   }
 }
 
 .btn-danger {
-  background: $danger !important;
-  border-color: $danger !important;
+  background: var(--danger) !important;
+  border-color: var(--danger) !important;
 
   &:active {
-    background: $danger-dark !important;
-    border-color: $danger-dark !important;
+    background: var(--danger) !important;
+    border-color: var(--danger) !important;
   }
 }
 
@@ -299,9 +299,9 @@ body {
     margin-top: -1px;
     background: #fff;
     border: 0;
-    color: $primary;
+    color: var(--primary);
     .fa.awesome {
-      color: $primary;
+      color: var(--primary);
     }
     a {
       color: #cccaa2;
@@ -444,11 +444,11 @@ body {
 .opts {
   a:link,
   a:visited {
-    color: $primary !important;
+    color: var(--primary) !important;
   }
   a.active {
     .fa {
-      color: $danger;
+      color: var(--danger);
     }
   }
 }

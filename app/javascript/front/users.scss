@@ -12,9 +12,9 @@
   }
   .nav-tabs > .active > a,
   .nav-tabs > .active > a:hover {
-    color: #555555;
-    background-color: #ffffff;
-    border: 1px solid #ddd;
+    color: var(--btn-default-text-color);
+    background-color: var(--btn-default-background-color);
+    border: 1px solid var(--btn-default-border-color);
     border-bottom-color: transparent;
     cursor: default;
   }
@@ -33,10 +33,10 @@
 }
 
 .node-topics {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid var(--gray);
   tbody > tr > td {
     padding: 8px;
-    color: #666;
+    color: var(--text-color1);
   }
   td.title {
     a:link,
@@ -50,7 +50,7 @@
     em {
       font-style: normal;
       font-size: 12px;
-      color: #bbb;
+      color: var(--text-color3);
     }
     i.icon {
       margin-bottom: -1px;
@@ -58,28 +58,28 @@
   }
   td.node {
     a {
-      color: #666;
+      color: var(--text-color1);
     }
   }
   tr.head {
     td {
       border-top: none;
       padding-top: 14px;
-      color: #ccc;
+      color: var(--text-color3);
       font-weight: bold;
       font-size: 12px;
     }
   }
   tr.odd {
     td {
-      background: #fafafa;
+      background: var(--gray);
     }
   }
   tr.topic {
     td.author {
       width: 80px;
       a {
-        color: #666;
+        color: var(--text-color1);
         font-weight: bold;
       }
     }
@@ -96,19 +96,19 @@
         margin-bottom: -1px;
       }
       i.fa-pin {
-        color: #222;
+        color: var(--text-color);
       }
       i.fa-award {
-        color: $red;
+        color: var(--red);
       }
       .info {
         margin-top: 3px;
         font-size: 12px;
-        color: #bbb;
+        color: var(--text-color3);
       }
       .node {
         margin-right: 5px;
-        color: #777;
+        color: var(--text-color1);
         margin-right: 3px;
       }
     }
@@ -122,15 +122,15 @@
       font-size: 15px;
       .info {
         font-size: 14px;
-        color: lighten($secondary, 20%);
+        color: var(--secondary);
       }
     }
     .body {
       a {
-        color: $primary;
+        color: var(--primary);
       }
       margin-top: 6px;
-      color: $secondary;
+      color: var(--secondary);
       p {
         font-size: 14px;
       }
@@ -165,10 +165,10 @@
     margin-bottom: 0px;
   }
   li {
-    border-color: #f0f0f0;
+    border-color: var(--gray);
     font-size: 13px;
     label {
-      color: #999;
+      color: var(--text-color2);
       margin-right: 8px;
       display: inline-block;
       width: 80px;
@@ -194,12 +194,12 @@
 .replies ul {
   margin: 0;
   h6 {
-    color: #999;
+    color: var(--text-color2);
     font-weight: normal;
   }
   li {
     line-height: 180%;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--gray);
     list-style: none;
   }
   blockquote {
@@ -208,7 +208,7 @@
 }
 
 .content > .tabs {
-  border-bottom: 2px solid #ccc;
+  border-bottom: 2px solid var(--gray);
   .active {
     margin-bottom: 0;
   }
@@ -217,11 +217,11 @@
 table.node-topics {
   td {
     a {
-      color: #333;
+      color: var(--text-color);
       font-weight: normal;
     }
     i.fa-award {
-      color: $red;
+      color: var(--red);
     }
   }
   td.replied-at {
@@ -248,7 +248,7 @@ table.node-topics {
     }
     .name {
       a {
-        color: #333;
+        color: var(--text-color);
       }
     }
   }
@@ -277,19 +277,19 @@ table.node-topics {
       margin-bottom: 5px;
     }
     .item a {
-      color: #666;
+      color: var(--text-color);
     }
     .number {
-      color: #999;
+      color: var(--text-color2);
     }
     .counts {
-      color: #999;
+      color: var(--text-color2);
       span {
-        color: #666;
+        color: var(--text-color1);
       }
     }
     .follow-info {
-      border-top: 1px solid #f0f0f0;
+      border-top: 1px solid var(--gray);
       text-align: center;
       margin-top: 15px;
       padding-top: 15px;
@@ -299,34 +299,34 @@ table.node-topics {
       }
       a.counter {
         font-size: 32px;
-        color: $primary;
+        color: var(--primary);
         &:hover {
-          color: $primary;
+          color: var(--primary);
         }
       }
       a.text {
-        color: #999;
+        color: var(--text-color2);
       }
     }
     .buttons {
-      border-top: 1px solid #f0f0f0;
+      border-top: 1px solid var(--gray);
       margin-top: 15px;
       padding-top: 15px;
     }
     .social {
       font-size: 18px;
       a {
-        color: #999;
+        color: var(--text-color2);
         margin-right: 8px;
       }
       a:hover {
-        color: #666;
+        color: var(--text-color1);
       }
     }
     .tagline {
-      border-top: 1px solid #f0f0f0;
+      border-top: 1px solid var(--gray);
       margin-top: 10px;
-      color: #999;
+      color: var(--text-color2);
       line-height: 100%;
       padding: 10px;
       padding-bottom: 0;
@@ -347,11 +347,11 @@ table.node-topics {
   .media-heading {
     font-weight: bold;
     a {
-      color: #333;
+      color: var(--text-color);
     }
   }
   .infos {
-    color: #999;
+    color: var(--text-color2);
     font-size: 12px;
     .item {
       margin-top: 5px;
@@ -361,13 +361,13 @@ table.node-topics {
 
 .user-profile-fields {
   margin-top: 20px;
-  border-top: 1px solid #eee;
+  border-top: 1px solid var(--gray);
   padding-top: 20px;
 
   .field {
     padding: 2px 0;
     label {
-      color: #666;
+      color: var(--text-color1);
       display: inline-block;
       width: 100px;
       margin-right: 10px;
@@ -392,19 +392,19 @@ table.node-topics {
       position: relative;
       margin-bottom: 5px;
       a {
-        color: #333;
+        color: var(--text-color);
         font-weight: bold;
       }
       .watchers {
         position: absolute;
         top: 2px;
         right: 0;
-        color: #999;
+        color: var(--text-color2);
       }
     }
     .desc {
       font-size: 12px;
-      color: #888;
+      color: var(--text-color2);
       padding: 0;
       margin: 0;
     }

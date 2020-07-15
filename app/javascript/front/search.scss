@@ -11,7 +11,7 @@
     }
 
     em {
-      color: $red;
+      color: var(--red);
       font-style: normal;
     }
 
@@ -45,7 +45,7 @@
       font-size: 15px;
       word-break: break-all;
       em {
-        color: $red;
+        color: var(--red);
       }
     }
   }

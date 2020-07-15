@@ -39,7 +39,7 @@
 }
 
 input[type="file"]::-webkit-file-upload-button {
-  color: $primary;
+  color: var(--primary);
   -webkit-appearance: none !important;
   border: 0;
   outline: none;
@@ -71,7 +71,7 @@ textarea,
   padding: 0.65rem 1.25rem;
   border: 2px solid transparent !important;
   .close {
-    color: $primary;
+    color: var(--primary);
     opacity: 0.7;
   }
 }
@@ -82,20 +82,20 @@ textarea,
   }
 }
 .alert-danger {
-  color: $red;
-  background: lighten($red, 43%);
+  color: var(--red);
+  background: var(--red-light);
 }
 .alert-warning {
-  color: darken($yellow, 10%);
-  background: lighten($yellow, 45%);
+  color: var(--yellow);
+  background: var(--yellow-light);
 }
 .alert-success {
-  color: $green;
-  background: lighten($green, 65%);
+  color: var(--green);
+  background: var(--green-light);
 }
 .alert-info {
-  color: $blue;
-  background: lighten($blue, 45%);
+  color: var(--blue);
+  background: var(--blue-light);
 }
 
 .rucaptcha-image {
@@ -105,7 +105,8 @@ textarea,
 
 /* Bootstrap Theme */
 body {
-  background: #e5e5e566;
+  background: var(--body-background-color);
+  color: var(--primary);
   font-size: 14px;
   letter-spacing: 0.03em;
 }
@@ -113,10 +114,10 @@ body {
 .bd-navbar {
   height: 50px;
   padding: 0;
-  background: #fff;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  background: var(--navbar-background-color);
+  box-shadow: 0 1px 1px var(--navbar-shadow-color);
   border: 0px;
-  color: $primary;
+  color: var(--navbar-text-color);
   z-index: 1030;
   line-height: 100%;
 
@@ -128,7 +129,7 @@ body {
     padding: 0px;
     .nav-link {
       padding: 15px 15px;
-      color: $primary;
+      color: var(--navbar-text-color);
     }
   }
 
@@ -137,18 +138,18 @@ body {
   }
 
   &.navbar-fixed-active {
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.07);
+    box-shadow: 0 1px 1px var(--navbar-fixed-shadow-color);
   }
 
   .navbar-brand {
     line-height: 100%;
-    color: #666 !important;
+    color: var(--navbar-brand-text-color) !important;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: bold;
     margin-left: 1em;
     border-bottom: 0px;
     b {
-      color: $blue;
+      color: var(--navbar-brand-text-strong-color);
     }
   }
 
@@ -177,24 +178,24 @@ body {
 
   #main-nav-menu {
     &.navbar-nav .nav-item a.nav-link {
-      color: $primary;
+      color: var(--navbar-text-color);
       font-size: 15px;
-      border-top: 3px solid #fff;
-      border-bottom: 3px solid #fff;
+      border-top: 3px solid var(--navbar-background-color);
+      border-bottom: 3px solidvar(--navbar-background-color);
       transition: all 0.2s ease-in-out;
     }
     &.navbar-nav .nav-item a.nav-link:active {
-      background-color: $gray;
-      border-bottom-color: #999;
+      background-color: var(--navbar-item-link-active-background-color);
+      border-bottom-color: var(--navbar-item-link-active-background-color);
     }
     &.navbar-nav .nav-item {
       a:hover,
       a.active,
       a.active:focus,
       a.active:hover {
-        color: $red;
+        color: var(--navbar-item-active-text-color);
         background: transparent;
-        border-bottom-color: $red;
+        border-bottom-color: var(--navbar-item-active-text-color);
       }
     }
   }
@@ -213,8 +214,8 @@ body {
     .fa-search {
       cursor: pointer;
       position: absolute;
-      top: 18px;
-      left: 8px;
+      top: 19px;
+      left: 3px;
       transition: all 0.3s;
     }
     .form-control {
@@ -244,7 +245,7 @@ body {
   }
 
   .dropdown.show {
-    background: rgba(0, 0, 0, 0.04);
+    background: var(--navbar-dropdown-show-background-color);
   }
 
   .dropdown-menu {
@@ -269,14 +270,7 @@ body {
     }
   }
 
-  .dropdown-item.active {
-    font-weight: 500;
-    color: $gray-900;
-    background-color: rgba(0, 0, 0, 0.04);
-  }
-
   .user-bar {
-    background: #fff;
     min-width: 150px;
     padding-right: 15px;
   }
@@ -296,8 +290,8 @@ body {
 }
 
 .sub-navbar {
-  background: #fafafa;
-  box-shadow: 0 1px 0px rgba(0, 0, 0, 0.04);
+  background: var(--sub-navbar-background-color);
+  box-shadow: 0 1px 0px var(--sub-navbar-shadow-color);
 
   a {
     color: $blue;
@@ -306,27 +300,65 @@ body {
 
 .btn {
   outline: none;
+
+  &:focus {
+    box-shadow: none;
+  }
 }
 
 .btn-default {
-  border-color: $input-border-color;
-  background: #fcfcfc;
-  color: $primary !important;
+  border-color: var(--btn-default-border-color);
+  background: var(--btn-default-background-color);
+  color: var(--btn-default-text-color) !important;
 
   &:hover {
-    border-color: #ccc;
+    border-color: var(--btn-default-hover-border-color);
   }
   &:active,
   &.active {
-    color: #aaa;
-    border-color: $default;
-    background: #f0f0f0;
+    color: var(--btn-default-active-text-color);
+    border-color: var(--btn-default-active-border-color);
+    background: var(--btn-default-active-background-color);
   }
+}
+
+.form-control {
+  background-color: var(--form-control-background-color);
+  border-color: var(--form-control-border-color);
+  color: var(--primary);
+
+  &:-internal-autofill-selected {
+    background-color: var(--form-control-background-color) !important;
+    border-color: var(--form-control-border-color) !important;
+    color: var(--primary) !important;
+  }
+
+  &:focus {
+    background-color: var(--form-control-background-color);
+    border-color: var(--form-control-border-color);
+    color: var(--primary);
+    box-shadow: 0 0 0 0.2rem rgba(34, 117, 218, 0.08);
+  }
+
+  &[readonly],
+  &:disabled {
+    background: var(--form-control-disabled-background-color);
+  }
+}
+
+input[type="file"] {
+  background: transparent;
+}
+
+.input-group-text {
+  background-color: var(--input-group-background-color);
+  border-color: var(--input-group-border-color);
+  color: var(--primary);
 }
 
 .list-group-item {
   a {
-    color: $primary;
+    color: var(--primary);
   }
 }
 
@@ -342,8 +374,13 @@ body {
   .nav-item {
     .nav-link {
       &:hover {
-        background: #f2f2f2;
-        border-color: #f2f2f2;
+        background: var(--gray);
+        border-color: var(--gray);
+      }
+
+      &.active {
+        background: var(--btn-default-background-color);
+        border-color: var(--btn-default-background-color);
       }
     }
   }
@@ -352,6 +389,31 @@ body {
 .close {
   font-size: 1.2rem;
   font-weight: normal;
+}
+
+.dropdown-menu {
+  background-color: var(--dropdown-menu-background-color);
+  border-color: var(--dropdown-menu-border-color);
+  color: var(--dropdown-menu-text-color);
+
+  .dropdown-item {
+    color: var(--dropdown-menu-text-color);
+
+    &:hover {
+      color: var(--dropdown-item-active-text-color);
+      background-color: var(--dropdown-item-active-background-color);
+    }
+  }
+
+  .dropdown-item.active {
+    font-weight: 500;
+    color: var(--dropdown-item-active-text-color);
+    background-color: var(--dropdown-item-active-background-color);
+  }
+
+  .dropdown-divider {
+    border-color: var(--dropdown-menu-divider-color);
+  }
 }
 
 .pagination {
@@ -368,27 +430,34 @@ body {
     border-bottom-right-radius: 3px;
   }
   li > a {
-    color: $primary;
+    color: var(--primary);
+  }
+
+  .page-link {
+    @extend .btn-default;
   }
 
   li > a,
   .disabled > a,
   li > span {
-    border-color: #e0e0e0 !important;
+    border-color: var(--gray) !important;
   }
 
   li > a:hover {
-    color: #555;
-    background: $gray;
+    color: vra(--text-color1);
+    background: var(--gray);
   }
 
   li.active > a,
   li.active > a:hover {
-    background-color: $blue !important;
-    border-color: $blue !important;
-    color: #fff !important;
+    @extend .btn-primary;
   }
 }
+
+.breadcrumb {
+  background: transparent;
+}
+
 .pager {
   margin: 0px;
   .info {
@@ -433,11 +502,19 @@ a abbr[title] {
 }
 
 kbd {
-  background-color: #f5f5f5;
-  color: #999;
+  background-color: var(--gray);
+  color: var(--secondary);
   border-radius: 2px;
-  border-color: #fafafa;
+  border-color: var(--gray);
   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+}
+
+.table {
+  th,
+  td {
+    color: var(--text-color);
+    border-color: var(--gray) !important;
+  }
 }
 
 .table > tbody > tr > td,
@@ -453,21 +530,22 @@ kbd {
   margin-bottom: 25px;
   border-top: 0;
   box-shadow: 0 0 0;
-  border: 1px solid hsla(210, 8%, 51%, 0.09);
+  border: 1px solid var(--card-border-color);
+  background: var(--card-background-color);
 
   .card-header {
     padding: 15px 25px 0 25px;
-    background: #ffffff;
     border: 0px;
     border: 0;
     font-size: 18px;
+    background: transparent !important;
   }
 
   .card-footer {
     border: 0;
     padding-top: 0;
     padding: 0 25px 25px 25px;
-    background: #fff;
+    background: transparent !important;
   }
 
   .card-title {
@@ -484,7 +562,7 @@ kbd {
 
     .counter {
       margin-left: 5px;
-      color: #777;
+      color: var(--card-title-sencondary-color);
       font-size: 14px;
     }
 
@@ -512,9 +590,9 @@ kbd {
 }
 
 .nav-link {
-  color: $primary;
+  color: var(--navbar-text-color);
   &:hover {
-    color: $primary;
+    color: var(--primary);
   }
 }
 
@@ -535,7 +613,17 @@ kbd {
 
   .modal-content {
     border: 0px;
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.07) !important;
+    background-color: var(--modal-background-color);
+    box-shadow: 0 2px 15px var(--modal-shadow-color) !important;
+
+    .card {
+      background-color: var(--modal-background-color);
+    }
+
+    .close {
+      color: var(--secondary);
+      text-shadow: none;
+    }
 
     p {
       margin-bottom: 5px;
@@ -575,7 +663,8 @@ kbd {
 .list-group {
   border-top: 0 !important;
   .list-group-item {
-    border-color: #f5f5f5;
+    background-color: transparent;
+    border-color: var(--list-group-item-border-color);
   }
 }
 
@@ -586,26 +675,26 @@ kbd {
 
 /* App Style */
 .opts {
-  color: #666;
+  color: var(--opts-text-color);
   a {
     display: inline-block;
     border-radius: 5px;
   }
   a:link,
   a:visited {
-    color: $primary;
+    color: var(--opts-link-color);
     line-height: 100%;
     padding: 5px 8px;
     text-decoration: none;
   }
   a:hover {
-    background: #eee;
+    background: var(--opts-link-hover-background-color);
     text-decoration: none;
   }
 }
 
 .turbolinks-progress-bar {
-  background-color: $blue !important;
+  background-color: var(--blue) !important;
   height: 2px !important;
 }
 
@@ -708,7 +797,7 @@ img.emoji {
   .fa {
     @extend .animated;
     @extend .bounceIn;
-    color: $red;
+    color: var(--red);
   }
 }
 
@@ -728,8 +817,6 @@ img.emoji {
 
   .toolbar-buttons {
     a.nav-link {
-      border: 1px solid $input-border-color;
-
       @extend .btn-default;
 
       font-size: 14px;

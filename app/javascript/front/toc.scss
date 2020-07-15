@@ -5,13 +5,12 @@
   z-index: 999;
   padding-left: 10px;
   padding-bottom: 10px;
-  background: #fff;
 
   .dropdown-menu {
-    background: #fff;
+    background: var(--dropdown-menu-background-color);
     border-radius: 3px;
     padding: 15px;
-    border: 1px solid $default;
+    border: 1px solid var(--dropdown-menu-border-color);
     width: 300px;
     z-index: 1031;
   }
@@ -25,7 +24,7 @@
       margin-bottom: 0 !important;
 
       a {
-        color: $primary !important;
+        color: var(--primary) !important;
       }
     }
   }

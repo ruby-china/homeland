@@ -12,6 +12,7 @@
 @import "search";
 @import "toc";
 @import "highlight";
+@import "~homeland/dark-mode";
 
 .page-topics {
   .navbar-fixed-active {
@@ -40,7 +41,7 @@ hr {
     }
     label {
       font-weight: normal;
-      color: #aaa;
+      color: var(--secondary);
       text-align: right;
     }
     .name {
@@ -51,7 +52,7 @@ hr {
       text-align: left;
       a:link,
       a:visited {
-        color: #333;
+        color: var(--primary);
       }
     }
   }
@@ -88,7 +89,7 @@ hr {
       overflow: hidden;
       top: 0;
       position: absolute;
-      background: #fff;
+      background: var(--navbar-topic-title-background-color);
       display: none;
       min-width: 400px;
 
@@ -103,31 +104,31 @@ hr {
         overflow: hidden;
         line-height: 0;
         max-width: 0px;
-        color: #000;
+        color: var(--primary);
         &:hover,
         &:active,
         &:visited {
-          color: #000;
+          color: var(--primary);
         }
 
         i.fa {
-          color: #999;
+          color: var(--secondary);
           margin-left: 3px;
         }
         i.fa-pin {
-          color: #222;
+          color: var(--primary);
         }
         i.fa-award {
-          color: $red;
+          color: var(--red);
         }
         i.fa-check-circle {
-          color: $green;
+          color: var(--green);
         }
       }
       .node {
         line-height: 50px;
         margin-left: 16px;
-        color: #777;
+        color: var(--secondary);
         margin-right: 3px;
       }
       h1 {
@@ -194,10 +195,10 @@ hr {
   }
   .title {
     font-size: 24px;
-    color: #333;
+    color: var(--primary);
     margin-bottom: 8px;
     .total {
-      color: #999;
+      color: var(--secondary);
       font-size: 14px;
       margin-left: 10px;
     }
@@ -216,7 +217,7 @@ hr {
         a:link,
         a:visited,
         a:hover {
-          color: #000;
+          color: var(--primary);
           text-decoration: none;
         }
       }
@@ -230,10 +231,10 @@ hr {
         border-bottom: 2px dotted transparent;
         text-decoration: none;
         display: inline-block;
-        color: #777;
+        color: var(--secondary);
 
         &:hover {
-          border-color: #eee;
+          border-color: var(--gray);
           background: transparent;
         }
 
@@ -241,7 +242,7 @@ hr {
           border-radius: 3px;
           outline: 0 !important;
           margin-right: 1.25rem;
-          background: #f0f0f0;
+          background: var(--gray);
           border: 0;
 
           .caret-right {
@@ -257,7 +258,7 @@ hr {
 
           &:hover {
             border: 0;
-            color: #222;
+            color: var(--primary);
           }
         }
       }
@@ -297,7 +298,7 @@ hr {
   }
   .topic {
     min-height: 68px;
-    border-bottom: 1px solid #f0f0f0a3;
+    border-bottom: 1px solid var(--topic-item-border-color);
     padding: 15px 0px;
     vertical-align: top;
     &:first-child {
@@ -315,35 +316,35 @@ hr {
       margin-bottom: 0;
       a:link,
       a:visited {
-        color: #222;
+        color: var(--link-color);
         font-weight: 400;
         line-height: 30px;
         word-break: break-all;
         .node {
-          color: #777;
+          color: var(--secondary);
           margin-right: 3px;
         }
       }
       a:active,
       a:hover {
-        color: #555;
+        color: var(--link-color);
         .node {
-          color: #555;
+          color: var(--link-color);
         }
         text-decoration: none;
       }
       i.fa {
-        color: #999;
+        color: var(--secondary);
         margin-left: 3px;
       }
       i.fa-pin {
-        color: #222;
+        color: var(--primary);
       }
       i.fa-award {
-        color: $red;
+        color: var(--red);
       }
       i.fa-check-circle {
-        color: $green;
+        color: var(--green);
       }
     }
 
@@ -354,6 +355,7 @@ hr {
       a {
         color: #797776;
         text-decoration: underline;
+        text-decoration-color: #4a4a4a5e;
       }
     }
 
@@ -365,7 +367,7 @@ hr {
       a:hover,
       a:visited {
         line-height: 11px;
-        color: #fff;
+        color: var(--secondary);
         font-size: 13px;
         min-width: 32px;
         text-align: center;
@@ -379,11 +381,11 @@ hr {
         background: rgba(79, 147, 248, 0.24);
       }
       a:hover {
-        background: #f0f0f0;
+        background: var(--gray);
       }
       a.state-true,
       a:visited {
-        background: #f0f0f0;
+        background: var(--gray);
       }
     }
   }
@@ -403,16 +405,16 @@ hr {
     h1 {
       margin-top: 0;
       font-size: 22px;
-      color: #333;
+      color: var(--primary);
       text-align: left;
       line-height: 150%;
       margin-bottom: 8px;
       .node {
-        color: #999;
+        color: var(--secondary);
         margin-right: 3px;
       }
       i.fa-check-circle {
-        color: $green;
+        color: var(--green);
         font-size: 16px;
       }
     }
@@ -431,16 +433,16 @@ hr {
   .label-awesome {
     font-size: 16px;
     margin-top: 25px;
-    background: #ffcc8b24;
+    background: var(--label-awesome-background-color);
     border: 0;
     padding: 15px 25px;
-    color: $red;
+    color: var(--red);
 
     .fa {
       font-size: 16px;
     }
     a {
-      color: #adaaa8;
+      color: var(--label-awesome-link-color);
     }
   }
 
@@ -448,14 +450,14 @@ hr {
     color: #adaaa8;
     font-size: 13px;
     a {
-      color: $primary;
+      color: var(--primary);
     }
     .node {
-      color: $primary;
+      color: var(--primary);
       font-weight: bold;
     }
     .user-name {
-      color: $primary;
+      color: var(--primary);
       font-size: 14px;
     }
     .team-name {
@@ -469,7 +471,7 @@ hr {
     .opts {
       a {
         margin-left: 5px;
-        color: $primary;
+        color: var(--primary);
       }
     }
   }
@@ -509,7 +511,7 @@ hr {
       a:hover,
       a:visited {
         text-decoration: none;
-        color: $primary;
+        color: var(--primary);
       }
       a:hover {
         background: rgba(0, 0, 0, 0.03);
@@ -517,12 +519,12 @@ hr {
       i.fa {
         display: block;
         font-size: 40px;
-        color: $primary;
+        color: var(--primary);
         margin-bottom: 6px;
       }
       a.active {
         i.fa {
-          color: $red;
+          color: var(--red);
         }
       }
       span {
@@ -538,7 +540,7 @@ hr {
     }
   }
   a.btn-move-page {
-    color: $primary;
+    color: var(--primary);
   }
 }
 
@@ -549,13 +551,13 @@ hr {
   }
   .info {
     .uname {
-      color: $primary;
+      color: var(--primary);
     }
     .opts {
       a {
         font-size: 14px;
         margin-left: 5px;
-        color: $primary;
+        color: var(--primary);
       }
       a.edit {
         display: none;
@@ -654,14 +656,14 @@ hr {
 
     .reply-to-block {
       padding: 15px 30px;
-      background: #f7f7f7;
+      background: var(--gray);
       border-radius: 3px;
       margin-bottom: 1.25rem;
       .info {
         margin: 0;
 
         a {
-          color: $primary;
+          color: var(--primary);
         }
         .media-object {
           display: inline-block;
@@ -731,10 +733,6 @@ hr {
   }
 }
 
-#node-selector-button {
-  border-color: #ced4da;
-}
-
 #notifications {
   .card-header {
     .clean-button {
@@ -745,7 +743,7 @@ hr {
     position: relative;
     margin-bottom: 1.25rem;
     padding-bottom: 1.25rem;
-    border-bottom: 1px solid $gray;
+    border-bottom: 1px solid var(--gray);
     &:last-child {
       margin-bottom: 0px;
       border-bottom: 0px;
@@ -801,7 +799,7 @@ hr {
     margin-top: 1.25rem;
     h5 {
       color: #333;
-      border-bottom: 1px solid $gray;
+      border-bottom: 1px solid var(--gray);
       margin: 0;
       margin-bottom: 10px;
       padding: 5px 0 0 0;
@@ -810,7 +808,7 @@ hr {
         font-weight: normal;
         display: inline-block;
         width: 50px;
-        color: $gray;
+        color: var(--gray);
       }
     }
     .content {
@@ -904,12 +902,12 @@ footer {
   padding: 4px 15px;
   margin-bottom: 20px;
   text-align: left;
-  background: #fdf8a6;
-  border: 1px solid #f5e3a4;
-  color: $red;
+  background: var(--yellow-light);
+  border: 1px solid var(--yellow-light);
+  color: var(--red);
   a:link,
   a:visited {
-    color: $yellow;
+    color: var(--yellow);
   }
 }
 
@@ -918,7 +916,7 @@ footer {
 }
 textarea.div-dropzone-focus {
   border-color: #bbe1c9;
-  background: #fafafa;
+  background: var(--gray);
 }
 
 #dropdown-insert-codes {
@@ -951,7 +949,7 @@ textarea.div-dropzone-focus {
       border-radius: 3px;
     }
     &::-webkit-scrollbar-thumb {
-      background: #e0e0e0;
+      background: var(--gray);
     }
 
     a {
@@ -959,7 +957,7 @@ textarea.div-dropzone-focus {
       border-radius: 6px;
       display: inline-block;
       &:hover {
-        background: #f0f0f0;
+        background: var(--gray);
       }
     }
   }
@@ -983,7 +981,7 @@ textarea.div-dropzone-focus {
   .comment {
     padding: 15px;
     margin: 0 -15px;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid var(--gray);
     &:first-child {
       padding-top: 0;
     }
@@ -998,7 +996,7 @@ textarea.div-dropzone-focus {
 
     .info {
       font-size: 15px;
-      color: #777;
+      color: var(--text-color1);
     }
   }
 }
@@ -1006,10 +1004,10 @@ textarea.div-dropzone-focus {
 .card-body {
   .heading {
     font-size: 16px;
-    color: #777;
+    color: var(--text-color1);
     font-weight: bold;
     padding-bottom: 10px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--gray);
     margin-bottom: 15px;
   }
   form {
@@ -1023,7 +1021,7 @@ textarea.div-dropzone-focus {
 .reward-image {
   border-radius: 3px;
   padding: 20px;
-  background: #fff;
+  background: transparent;
   text-align: center;
   img {
     max-width: 240px;

@@ -1,7 +1,8 @@
 @import "~homeland/index";
+@import "~homeland/dark-mode";
 
 body {
-  color: #333;
+  color: var(--primary);
 }
 
 body,
@@ -40,7 +41,6 @@ td {
   }
 
   .user-bar {
-    background: #fff;
     min-width: auto;
   }
 }
@@ -50,7 +50,7 @@ td {
   padding-left: 10px !important;
   padding-right: 10px !important;
   &.active {
-    color: $red;
+    color: var(--red);
   }
 }
 

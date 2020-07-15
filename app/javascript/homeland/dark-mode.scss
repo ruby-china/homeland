@@ -72,8 +72,8 @@
     --opts-link-color: #f7f7f7a6;
     --opts-link-hover-background-color: #77787926;
 
-    --scrollbar-thumb-color: #4a4a4a;
-    --scrollbar-track-color: #3d3d3d;
+    --scrollbar-thumb-color: #333333aa;
+    --scrollbar-track-color: transparent;
   }
 
   pre {
@@ -82,14 +82,54 @@
 
   .markdown {
     code {
-      background: #333;
+      background: #33333347;
     }
     pre {
-      background: #333;
+      background: #33333347;
       color: #eee;
       code {
         background: transparent !important;
       }
+    }
+  }
+
+  .highlight {
+    .n {
+      color: var(--text-color1);
+    }
+    .o {
+      color: var(--text-color1);
+    }
+    .nc {
+      color: var(--blue);
+    }
+    .nn {
+      color: var(--blue);
+    }
+    .no {
+      color: var(--red);
+    }
+    .nf {
+      color: var(--blue);
+    }
+    .s1 {
+      color: var(--text-color2);
+    }
+    .k,
+    .kp {
+      color: #795d8a;
+    }
+    .nt {
+      color: var(--green);
+    }
+    .nl {
+      color: var(--yellow);
+    }
+    .mh {
+      color: var(--text-color2);
+    }
+    .c1 {
+      color: var(--text-color3);
     }
   }
 }

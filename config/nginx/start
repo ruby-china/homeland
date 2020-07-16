@@ -1,3 +1,4 @@
 #!/usr/bin/env sh
 /etc/nginx/build
+mkdir -p /home/app/pids /home/app/log /home/app/cache
 nginx -c /etc/nginx/nginx.conf

@@ -123,8 +123,11 @@ module ApplicationHelper
     raw items.join("")
   end
 
-  def highlight(text)
-    text = escape_once(text).gsub("[h]", "<em>").gsub("[/h]", "</em>").gsub(/\\n|\\r/, "")
+  def highlight(text, terms: [])
+    text = escape_once(text)
+    terms.each do |term|
+      text = text.gsub(term, "<em>" + term + "</em>").gsub(/\\n|\\r/, "")
+    end
     raw text
   end
 

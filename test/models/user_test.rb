@@ -485,30 +485,6 @@ class UserTest < ActiveSupport::TestCase
     u.update(name: u.name + "111")
     assert_equal true, u.indexed_changed?
 
-    # email changed work
-    u.reload
-    assert_equal false, u.indexed_changed?
-    u.update(email: u.email + "111")
-    assert_equal true, u.indexed_changed?
-
-    # bio changed work
-    u.reload
-    assert_equal false, u.indexed_changed?
-    u.update(bio: u.bio + "111")
-    assert_equal true, u.indexed_changed?
-
-    # tagline changed work
-    u.reload
-    assert_equal false, u.indexed_changed?
-    u.update(tagline: u.tagline + "111")
-    assert_equal true, u.indexed_changed?
-
-    # location changed work
-    u.reload
-    assert_equal false, u.indexed_changed?
-    u.update(location: u.location + "111")
-    assert_equal true, u.indexed_changed?
-
     # other changed work
     u.reload
     assert_equal false, u.indexed_changed?

@@ -1,20 +1,18 @@
 <% title_tag [params[:q], t('common.search_result')].join(' · ') %>
-
 <div class="search-results card card-lg">
   <div class="card-body">
     <div class="card-title clearfix">
       关于 “<%= params[:q] %>” 的搜索结果
-      <div class="counter">共 <%= @result.records.total %> 条</div>
+      <div class="counter">共 <%= @result.count %> 条</div>
     </div>
-    <% if @result.records.total == 0 %>
+    <% if @result.count == 0 %>
       <div class="no-result">没有搜索到任何有关 “<%= params[:q]%>” 的内容</div>
     <% else %>
-      <% @result.records.each_with_hit do |item, hit| %>
-        <% partial_view_name = item.class.name.downcase -%>
-        <%= render partial: (partial_view_name == 'team' ? 'user' : partial_view_name), locals: { item: item, hit: hit } %>
+      <% @result.each do |doc| %>
+        <% partial_view_name = doc.searchable_type.downcase -%>
+        <%= render partial: (partial_view_name == 'team' ? 'user' : partial_view_name), locals: { item: doc.searchable, hit: doc } %>
       <% end %>
     <% end %>
-
     <%= paginate @result %>
   </div>
 </div>

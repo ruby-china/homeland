@@ -15,6 +15,7 @@ gem "webpacker", "~> 5.x"
 gem "sanitize"
 
 gem "pg"
+gem "jieba_rb"
 gem "pghero"
 
 gem "dotenv-rails"
@@ -64,10 +65,6 @@ gem "kaminari"
 
 # Form select 选项
 gem "form-select"
-
-# 搜索
-gem "elasticsearch-model"
-gem "elasticsearch-rails"
 
 # 三方平台 OAuth 验证登录
 gem "omniauth"

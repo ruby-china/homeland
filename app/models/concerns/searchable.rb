@@ -4,23 +4,22 @@ module Searchable
   extend ActiveSupport::Concern
 
   included do
-    include Elasticsearch::Model
+    has_one :search_document, as: :searchable, dependent: :delete
 
     after_commit on: :create do
-      SearchIndexer.perform_later("index", self.class.name, self.id)
+      self.reindex!
     end
 
     after_update do
-      need_update = false
-      if self.respond_to?(:indexed_changed?)
-        need_update = indexed_changed?
-      end
-
-      SearchIndexer.perform_later("index", self.class.name, self.id) if need_update
+      self.reindex! # if self&.indexed_changed?
     end
+  end
 
-    after_commit on: :destroy do
-      SearchIndexer.perform_later("delete", self.class.name, self.id)
-    end
+  def indexed_changed?
+    true
+  end
+
+  def reindex!
+    SearchDocument.index(self)
   end
 end

@@ -175,12 +175,14 @@ class User < ApplicationRecord
   end
 
   # for Searchable
-  def as_indexed_json(_options = {})
-    as_json(only: %i[login name tagline bio email location])
+  def as_indexed_json
+    {
+      title: fullname,
+    }.as_json
   end
 
   def indexed_changed?
-    %i[login name tagline bio email location].each do |key|
+    %i[login name].each do |key|
       return true if saved_change_to_attribute?(key)
     end
     false

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_31_102233) do
+ActiveRecord::Schema.define(version: 2020_07_17_154057) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,14 @@ ActiveRecord::Schema.define(version: 2020_03_31_102233) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["provider", "uid"], name: "index_authorizations_on_provider_and_uid"
+  end
+
+  create_table "commentable_pages", force: :cascade do |t|
+    t.string "name"
+    t.integer "user_id"
+    t.integer "comments_count", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "comments", id: :serial, force: :cascade do |t|
@@ -73,6 +81,14 @@ ActiveRecord::Schema.define(version: 2020_03_31_102233) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["name"], name: "index_locations_on_name"
+  end
+
+  create_table "monkeys", force: :cascade do |t|
+    t.string "name"
+    t.integer "user_id"
+    t.integer "comments_count"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "nodes", id: :serial, force: :cascade do |t|
@@ -233,6 +249,17 @@ ActiveRecord::Schema.define(version: 2020_03_31_102233) do
     t.index ["user_id"], name: "index_replies_on_user_id"
   end
 
+  create_table "search_documents", force: :cascade do |t|
+    t.string "searchable_type", limit: 32, null: false
+    t.integer "searchable_id", null: false
+    t.tsvector "tokens"
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["searchable_type", "searchable_id"], name: "index_search_documents_on_searchable_type_and_searchable_id", unique: true
+    t.index ["tokens"], name: "index_search_documents_on_tokens", using: :gin
+  end
+
   create_table "sections", id: :serial, force: :cascade do |t|
     t.string "name", null: false
     t.integer "sort", default: 0, null: false
@@ -251,6 +278,28 @@ ActiveRecord::Schema.define(version: 2020_03_31_102233) do
     t.index ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true
   end
 
+  create_table "site_nodes", id: :serial, force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "sort", default: 0, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["sort"], name: "index_site_nodes_on_sort"
+  end
+
+  create_table "sites", id: :serial, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "site_node_id"
+    t.string "name", null: false
+    t.string "url", null: false
+    t.string "desc"
+    t.datetime "deleted_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["site_node_id", "deleted_at"], name: "index_sites_on_site_node_id_and_deleted_at"
+    t.index ["site_node_id"], name: "index_sites_on_site_node_id"
+    t.index ["url"], name: "index_sites_on_url"
+  end
+
   create_table "team_users", id: :serial, force: :cascade do |t|
     t.integer "team_id", null: false
     t.integer "user_id", null: false
@@ -260,6 +309,15 @@ ActiveRecord::Schema.define(version: 2020_03_31_102233) do
     t.datetime "updated_at", null: false
     t.index ["team_id"], name: "index_team_users_on_team_id"
     t.index ["user_id"], name: "index_team_users_on_user_id"
+  end
+
+  create_table "test_documents", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "reply_to_id"
+    t.integer "mentioned_user_ids", default: [], array: true
+    t.text "body"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "topics", id: :serial, force: :cascade do |t|
@@ -356,6 +414,14 @@ ActiveRecord::Schema.define(version: 2020_03_31_102233) do
     t.index ["location"], name: "index_users_on_location"
     t.index ["login"], name: "index_users_on_login", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
+  end
+
+  create_table "walking_deads", force: :cascade do |t|
+    t.string "name"
+    t.string "tag"
+    t.datetime "deleted_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
 end

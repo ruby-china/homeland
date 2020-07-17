@@ -124,9 +124,10 @@ module ApplicationHelper
   end
 
   def highlight(text, terms: [])
+    text = text.gsub(/<.+?>/, "")
     text = escape_once(text)
     terms.each do |term|
-      text = text.gsub(term, "<em>" + term + "</em>").gsub(/\\n|\\r/, "")
+      text = text.gsub(term, "<b>" + term + "</b>").gsub(/\\n|\\r/, "")
     end
     raw text
   end

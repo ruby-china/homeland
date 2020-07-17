@@ -124,19 +124,6 @@ GEM
     dotenv-rails (2.7.6)
       dotenv (= 2.7.6)
       railties (>= 3.2)
-    elasticsearch (7.8.0)
-      elasticsearch-api (= 7.8.0)
-      elasticsearch-transport (= 7.8.0)
-    elasticsearch-api (7.8.0)
-      multi_json
-    elasticsearch-model (7.1.0)
-      activesupport (> 3)
-      elasticsearch (> 1)
-      hashie
-    elasticsearch-rails (7.1.0)
-    elasticsearch-transport (7.8.0)
-      faraday (~> 1)
-      multi_json
     enumize (0.2.0)
       rails (>= 5.0.0)
     erubi (1.9.0)
@@ -185,6 +172,7 @@ GEM
       ruby-vips (>= 2.0.17, < 3)
     jbuilder (2.10.0)
       activesupport (>= 5.0.0)
+    jieba_rb (0.0.5)
     json (2.3.1)
     jwt (2.2.1)
     kaminari (1.2.1)
@@ -458,8 +446,6 @@ DEPENDENCIES
   doorkeeper
   doorkeeper-i18n
   dotenv-rails
-  elasticsearch-model
-  elasticsearch-rails
   enumize
   exception-track
   factory_bot_rails
@@ -468,6 +454,7 @@ DEPENDENCIES
   html-pipeline-auto-correct
   http_accept_language
   jbuilder
+  jieba_rb
   kaminari
   letter_opener
   listen

@@ -11,7 +11,7 @@
       <% elsif current_user %>
         $("#replies .reply a.edit[data-uid='<%= current_user.id %>']").css('display','inline-block');
       <% end %>
-
+    
       <% if @topic.closed? %>
         $("#replies .reply .hideable").remove();
       <% end %>
@@ -76,9 +76,6 @@
           <%= render partial: "topics/translation/need_login_to_reply" %>
         </div>
       </div>
-    <% end %>
-    <% if !mobile? %>
-      <%= render 'related_topics' %>
     <% end %>
   </div>
   <% if !mobile? %>

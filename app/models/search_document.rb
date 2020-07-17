@@ -10,10 +10,10 @@ class SearchDocument < ActiveRecord::Base
     end
 
     indexed_json = obj.as_indexed_json
-    tokens = Homeland::Search.prepare_data([indexed_json[:title], indexed_json[:body]].join(" "))
+    tokens = Homeland::Search.prepare_data([indexed_json["title"], indexed_json["body"]].join(" "))
     SearchDocument.exec_sql("UPDATE search_documents SET
                              tokens = TO_TSVECTOR('simple', :tokens), content = :content
-                             WHERE id = :id", tokens: tokens, content: indexed_json[:body], id: doc.id)
+                             WHERE id = :id", tokens: tokens, content: indexed_json["body"], id: doc.id)
   end
 
   # Execute SQL manually

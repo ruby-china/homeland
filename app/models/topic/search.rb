@@ -10,7 +10,7 @@ class Topic
       {
         title: self.title,
         body: Homeland::Html.plain(self.body_html),
-      }
+      }.as_json
     end
   end
 end

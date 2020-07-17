@@ -178,7 +178,7 @@ class User < ApplicationRecord
   def as_indexed_json
     {
       title: fullname,
-    }
+    }.as_json
   end
 
   def indexed_changed?

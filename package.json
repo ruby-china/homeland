@@ -6,6 +6,7 @@
   },
   "dependencies": {
     "@babel/preset-react": "^7.10.1",
+    "@fortawesome/fontawesome-free": "^5.13.1",
     "@rails/actioncable": "^6.0.3-2",
     "@rails/ujs": "^6.0.3",
     "@rails/webpacker": "5.1.1",
@@ -13,7 +14,6 @@
     "backbone": "^1.4.0",
     "bootstrap": "^4.5.0",
     "dropzone": "^5.7.1",
-    "@fortawesome/fontawesome-free": "^5.13.1",
     "jquery": "^1.12.4",
     "jquery.caret": "^0.3.1",
     "popper.js": "^1.16.1",

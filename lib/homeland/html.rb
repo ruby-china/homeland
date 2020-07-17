@@ -1,9 +1,8 @@
 module Homeland
   class Html
-    PLAIN_REGEXP = /<.+?>/
-
     def self.plain(html)
-      html.gsub(PLAIN_REGEXP, " ")
+      doc = Nokogiri::HTML.parse(html)
+      doc.text.gsub(/\s+/, " ").strip
     end
   end
 end

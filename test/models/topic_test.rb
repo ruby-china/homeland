@@ -269,4 +269,11 @@ class TopicTest < ActiveSupport::TestCase
     assert_equal false, topic.valid?
     assert_equal ["敏感词 “AAAA” 禁止发布！"],  topic.errors&.messages.dig(:body)
   end
+
+  test "as_indexed_json" do
+    topic = build(:topic, title: "hello world", body: "This **is** body New line")
+    json = topic.as_indexed_json
+    assert_equal "hello world", json["title"]
+    assert_equal "This is body New line", json["body"]
+  end
 end

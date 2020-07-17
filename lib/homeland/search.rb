@@ -2,13 +2,14 @@ module Homeland
   class Search
     attr_accessor :term, :terms
 
-    def initialize(term, opts = nil)
-      if term.present?
-        @terms = Search.jieba.cut(term.to_s.squish)
-        @term = @terms.join(" ")
-        @original_term = PG::Connection.escape_string(@term)
+    INVALID_CHARS = /[:()&!'"]/
 
-        @opts = opts || {}
+    def initialize(term)
+      if term.present?
+        term = term.to_s.squish.gsub(INVALID_CHARS, "")
+        @terms = Search.jieba.cut(term)
+        @term = @terms.join(" ")
+
         @results = []
       end
     end
@@ -35,7 +36,7 @@ module Homeland
 
     def ts_query
       @ts_query ||= begin
-                      all_terms = @term.gsub(/[:()&!'"]/, "").split
+                      all_terms = @term.split
                       query = SearchDocument.sanitize_sql(all_terms.map { |t| "#{PG::Connection.escape_string(t)}:*" }.join(" & "))
                       "TO_TSQUERY('simple', '#{query}')"
                     end

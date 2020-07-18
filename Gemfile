@@ -15,7 +15,7 @@ gem "webpacker", "~> 5.x"
 gem "sanitize"
 
 gem "pg"
-gem "jieba_rb"
+gem "jieba-rb"
 gem "pghero"
 
 gem "dotenv-rails"

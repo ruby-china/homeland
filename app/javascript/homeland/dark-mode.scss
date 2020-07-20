@@ -1,6 +1,6 @@
 @media (prefers-color-scheme: dark) {
   :root {
-    --primary: #9e9e9e;
+    --primary: #9e9e9e !important;
     --text-color: #e0e0e0;
     --text-color1: #bbb;
     --text-color2: #999;
@@ -64,6 +64,8 @@
 
     --list-group-item-border-color: #3d3d3d99;
 
+    --table-border-color: #36373ab5;
+
     --topic-item-border-color: #3d3d3d99;
 
     --label-awesome-background-color: #f9cd940d;
@@ -74,6 +76,10 @@
 
     --scrollbar-thumb-color: #333333aa;
     --scrollbar-track-color: transparent;
+  }
+
+  a {
+    color: var(--link-color);
   }
 
   pre {
@@ -131,5 +137,9 @@
     .c1 {
       color: var(--text-color3);
     }
+  }
+
+  .page-pages h1 {
+    color: #fff !important;
   }
 }

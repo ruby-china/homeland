@@ -4,7 +4,7 @@ $green: #19a302;
 $yellow: #fee209;
 
 :root {
-    --primary: #404040;
+    --primary: #404040 !important;
     --text-color: #333;
     --text-color1: #666;
     --text-color2: #999;
@@ -72,6 +72,8 @@ $yellow: #fee209;
     --modal-shadow-color: rgba(0, 0, 0, 0.07);
 
     --list-group-item-border-color: #f7f7f7;
+
+    --table-border-color: #e0e0e0;
 
     --topic-item-border-color: #f0f0f0a3;
 

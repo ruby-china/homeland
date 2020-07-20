@@ -8,7 +8,7 @@
     margin-bottom: 10px;
 
     .group-title {
-      color: #aaa;
+      color: var(--text-color3);
       font-size: 15px;
     }
   }
@@ -33,27 +33,28 @@
     }
 
     a {
-      color: #555;
+      color: var(--link-color);
     }
 
     &.unread {
-      color: #444;
+      color: var(--text-color1);
 
       .media-heading {
         font-weight: bold;
       }
 
       a {
-        color: #222;
+        font-weight: bold;
+        color: var(--link-color);
         text-decoration: underline;
       }
     }
 
     .media-content {
-      color: #444;
+      color: var(--text-color1);
 
       a {
-        color: #999 !important;
+        color: var(--text-color2) !important;
       }
       p {
         font-size: 14px;
@@ -74,7 +75,7 @@
 
     .media-right {
       min-width: 40px;
-      color: #aaa;
+      color: var(--text-color3);
       font-size: 13px;
     }
   }

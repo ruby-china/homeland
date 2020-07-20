@@ -19,7 +19,7 @@
     },
     "front": {
       "css": [
-        "/packs-test/css/front-0affe4c0.css"
+        "/packs-test/css/front-9dc9bdce.css"
       ],
       "js": [
         "/packs-test/js/front-d92d07559dc663e62049.js"
@@ -34,7 +34,7 @@
       ]
     }
   },
-  "front.css": "/packs-test/css/front-0affe4c0.css",
+  "front.css": "/packs-test/css/front-9dc9bdce.css",
   "front.js": "/packs-test/js/front-d92d07559dc663e62049.js",
   "media/webfonts/fa-brands-400.eot": "/packs-test/media/webfonts/fa-brands-400-140e875e.eot",
   "media/webfonts/fa-brands-400.svg": "/packs-test/media/webfonts/fa-brands-400-65ed7d00.svg",

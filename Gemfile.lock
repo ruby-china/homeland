@@ -165,7 +165,7 @@ GEM
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     http_accept_language (2.1.1)
-    i18n (1.8.3)
+    i18n (1.8.4)
       concurrent-ruby (~> 1.0)
     image_processing (1.11.0)
       mini_magick (>= 4.9.5, < 5)
@@ -373,7 +373,7 @@ GEM
       tilt
     sdoc (1.1.0)
       rdoc (>= 5.0)
-    second_level_cache (2.6.1)
+    second_level_cache (2.6.3)
       activerecord (>= 5.2, < 7)
       activesupport (>= 5.2, < 7)
     semantic_range (2.3.0)

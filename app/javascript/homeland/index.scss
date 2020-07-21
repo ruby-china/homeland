@@ -440,7 +440,19 @@ input[type="file"] {
   li > a,
   .disabled > a,
   li > span {
-    border-color: var(--gray) !important;
+    outline: none;
+    border-color: #eee;
+  }
+
+  .disabled > .page-link {
+    background-color: #f0f0f0;
+    color: #aaa !important;
+
+    @media (prefers-color-scheme: dark) {
+      color: #555 !important;
+      border-color: #222;
+      background-color: #222;
+    }
   }
 
   li > a:hover {
@@ -451,6 +463,8 @@ input[type="file"] {
   li.active > a,
   li.active > a:hover {
     @extend .btn-primary;
+    color: #fff !important;
+    border-color: var(--blue) !important;
   }
 }
 

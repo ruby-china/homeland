@@ -12,7 +12,7 @@
 
               <% User::REWARD_FIELDS.each do |field| %>
                 <div class="form-group form-group-reward-field-<%= field %>">
-                  <label class="control-label"><%= User.reward_field_label(field) %></label>
+                  <label class="control-label"><%= Profile.reward_field_label(field) %></label>
                   <input class="form-control" type="file" name="user[rewards][<%= field %>]" id="user_reward_<%= field %>">
                   <div class="form-text">
                     <% if field == :alipay %>

@@ -6,54 +6,32 @@ class User
     extend ActiveSupport::Concern
 
     included do
-      include ScopedSetting
-
-      scoped_field :profile_fields, default: {}
-
-      PROFILE_FIELDS = %i[alipay paypal qq weibo wechat douban dingding aliwangwang
-                          facebook instagram dribbble battle_tag psn_id steam_id]
-
-      PROFILE_FIELD_PREFIXS = {
-        douban: "https://www.douban.com/people/",
-        weibo: "https://weibo.com/",
-        facebook: "https://facebook.com/",
-        instagram: "https://instagram.com/",
-        dribbble: "https://dribbble.com/",
-        battle_tag: "#"
-      }
+      delegate :contacts, to: :profile, allow_nil: true
 
       before_save :store_location
     end
 
     def profile_field(field)
-      return nil unless PROFILE_FIELDS.include?(field.to_sym)
-      profile_fields[field.to_sym]
+      return nil if contacts.nil?
+      contacts[field.to_sym]
     end
 
     def full_profile_field(field)
       v = profile_field(field)
-      prefix = User.profile_field_prefix(field)
+      prefix = Profile.contact_field_prefix(field)
       return v if prefix.blank?
       [prefix, v].join("")
     end
 
     def update_profile_fields(field_values)
-      val = profile_fields
+      val = contacts || {}
       field_values.each do |key, value|
-        next unless PROFILE_FIELDS.include?(key.to_sym)
+        next unless Profile.has_field?(key)
         val[key.to_sym] = value
       end
-      self.profile_fields = val
-    end
 
-    module ClassMethods
-      def profile_field_prefix(field)
-        PROFILE_FIELD_PREFIXS[field.to_sym]
-      end
-
-      def profile_field_label(field)
-        I18n.t("activerecord.attributes.user.profile_fields.#{field}")
-      end
+      self.create_profile if self.profile.blank?
+      self.profile.update(contacts: val)
     end
 
     private

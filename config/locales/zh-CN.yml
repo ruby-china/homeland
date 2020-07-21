@@ -62,7 +62,8 @@
         github: "GitHub"
         remember_me: 记住登录状态
         current_password: 旧密码
-        profile_fields:
+      profile:
+        contacts:
           qq: QQ
           alipay: 支付宝
           paypal: PayPal

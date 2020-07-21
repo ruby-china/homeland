@@ -35,7 +35,8 @@ en:
         github: "GitHub"
         remember_me: "Remember me"
         current_password: "Current Password"
-        profile_fields:
+      profile:
+        contacts:
           qq: QQ
           alipay: Alipay
           paypal: PayPal

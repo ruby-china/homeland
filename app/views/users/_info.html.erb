@@ -3,17 +3,16 @@
     <div class="user-bio">
       <%= auto_link(simple_format(@user.bio)) %>
     </div>
-
-    <% if @user.profile_fields.present? %>
-    <div class="user-profile-fields">
-      <% @user.profile_fields.each_key do |field| %>
-        <% next if @user.profile_field(field).blank? %>
-        <div class="field">
-          <label><%= User.profile_field_label(field) %></label>
-          <span class="value"><%= auto_link @user.full_profile_field(field), link: :urls, html: { target: '_blank' } %></span>
-        </div>
-      <% end %>
-    </div>
+    <% if @user.contacts.present? %>
+      <div class="user-profile-fields">
+        <% @user.contacts.each_key do |field| %>
+          <% next if @user.profile_field(field).blank? %>
+          <div class="field">
+            <label><%= Profile.contact_field_label(field) %></label>
+            <span class="value"><%= auto_link @user.full_profile_field(field), link: :urls, html: { target: '_blank' } %></span>
+          </div>
+        <% end %>
+      </div>
     <% end %>
   </div>
 </div>

@@ -1,0 +1,34 @@
+class Profile < ApplicationRecord
+  belongs_to :user
+
+  serialize :contacts
+  serialize :rewards
+
+  CONTACT_FIELDS = %i[alipay paypal qq weibo wechat douban dingding aliwangwang
+                      facebook instagram dribbble battle_tag psn_id steam_id]
+
+  CONTACT_FIELD_PREFIXS = {
+    douban: "https://www.douban.com/people/",
+    weibo: "https://weibo.com/",
+    facebook: "https://facebook.com/",
+    instagram: "https://instagram.com/",
+    dribbble: "https://dribbble.com/",
+    battle_tag: "#"
+  }
+
+  def self.contact_field_label(field)
+    I18n.t("activerecord.attributes.profile.contacts.#{field}")
+  end
+
+  def self.reward_field_label(field)
+    I18n.t("activerecord.attributes.profile.contacts.#{field}")
+  end
+
+  def self.contact_field_prefix(field)
+    CONTACT_FIELD_PREFIXS[field.to_sym]
+  end
+
+  def self.has_field?(field)
+    CONTACT_FIELDS.include?(field.to_s.to_sym)
+  end
+end

@@ -5,12 +5,10 @@ class User
   module RewardFields
     extend ActiveSupport::Concern
 
+    REWARD_FIELDS = %i[alipay wechat]
+
     included do
-      include ScopedSetting
-
-      scoped_field :reward_fields, default: {}
-
-      REWARD_FIELDS = %i[alipay wechat]
+      delegate :rewards, to: :profile, allow_nil: true
     end
 
     def reward_enabled?
@@ -21,23 +19,19 @@ class User
     end
 
     def reward_field(field)
-      return nil unless REWARD_FIELDS.include?(field.to_sym)
-      reward_fields[field.to_sym]
+      return nil if self.rewards.blank?
+      rewards[field.to_sym]
     end
 
     def update_reward_fields(field_values)
-      val = self.reward_fields
+      val = self.rewards || {}
       field_values.each do |key, value|
         next unless REWARD_FIELDS.include?(key.to_sym)
         val[key.to_sym] = value
       end
-      self.reward_fields = val
-    end
 
-    module ClassMethods
-      def reward_field_label(field)
-        I18n.t("activerecord.attributes.user.profile_fields.#{field}")
-      end
+      self.create_profile if self.profile.blank?
+      self.profile.update(rewards: val)
     end
   end
 end

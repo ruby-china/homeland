@@ -130,7 +130,6 @@ class Setting < RailsSettings::Base
   field :wiki_index_html, default: ""
   field :wiki_sidebar_html, default: ""
   field :site_index_html, default: ""
-  field :index_html, default: ""
   field :topic_index_sidebar_html, default: ""
   field :before_topic_html, default: ""
   field :after_topic_html, default: ""

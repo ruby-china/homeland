@@ -14,7 +14,7 @@ class PhotosController < ApplicationController
     if @photo.save
       render json: { ok: true, url: @photo.image.url(:large) }
     else
-      render json: { ok: false, message: @photo.errors.full_messages }, status: 400
+      render json: { ok: false, message: @photo.errors.full_messages.join }, status: 400
     end
   end
 end

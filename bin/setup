@@ -104,7 +104,7 @@ Dir.chdir APP_ROOT do
     `RAILS_ENV=development bundle exec rake db:setup`
   end
 
-  puts_line "Install npm package..." do
+  puts_line "Install NPM packages..." do
     `yarn`
   end
 

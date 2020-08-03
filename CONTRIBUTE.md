@@ -44,14 +44,14 @@ Your Redis host (default: 127.0.0.1:6379):
 
 Seed default data...                                                      [Done]
 
-Install npm package...                                                    [Done]
+Install NPM packages...                                                   [Done]
 
 == Removing old logs and tempfiles ==
 
 Homeland Successfully Installed.
 
 # Session 1:
-$ bin/webpack-dev-server
+$ yarn start
 
 # Session 2:
 $ rails s

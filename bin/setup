@@ -104,6 +104,10 @@ Dir.chdir APP_ROOT do
     `RAILS_ENV=development bundle exec rake db:setup`
   end
 
+  puts_line "Install npm package..." do
+    `yarn`
+  end
+
   puts "\n== Removing old logs and tempfiles =="
   system "rm -f log/*"
   system "rm -rf tmp/cache"

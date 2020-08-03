@@ -50,10 +50,14 @@ window.Editor = Backbone.View.extend({
         editor.focus();
       },
       success(header, res) {
-        self.appendImageFromUpload([res.url]);
+        self.appendImageFromUpload(res.url);
       },
       error(temp, msg) {
-        App.alert(msg);
+        if (typeof msg === "string") { // from client side
+          App.alert(msg);
+        } else { // from server side
+          App.alert(msg.message)
+        }
       },
       totaluploadprogress(num) {
       },
@@ -80,7 +84,7 @@ window.Editor = Backbone.View.extend({
         return self.showUploading();
       },
       success(e, status, res) {
-        self.appendImageFromUpload([res.responseJSON.url]);
+        self.appendImageFromUpload(res.responseJSON.url);
         return self.restoreUploaderStatus();
       },
       error(res) {
@@ -132,11 +136,8 @@ window.Editor = Backbone.View.extend({
     $("#editor-upload-image").removeClass("active");
   },
 
-  appendImageFromUpload(srcs) {
-    let src_merged = "";
-    for (let src of Array.from(srcs)) {
-      src_merged = `![](${src})\n`;
-    }
+  appendImageFromUpload(src) {
+    let src_merged = `![](${src})\n`;
     this.insertString(src_merged);
     return false;
   },

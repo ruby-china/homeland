@@ -30,5 +30,6 @@ describe PhotosController do
     assert_equal 400, response.status
     assert_equal false, response.parsed_body["ok"]
     assert_equal true, response.parsed_body["url"].blank?
+    assert_equal String, response.parsed_body["message"].class
   end
 end

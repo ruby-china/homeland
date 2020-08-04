@@ -37,6 +37,16 @@ Installing dependencies
 The Gemfile's dependencies are satisfied
 --------------------------------------------------------------------------------
 
+Installing NPM packages
+--------------------------------------------------------------------------------
+yarn install v1.22.4
+[1/4] 🔍  Resolving packages...
+[2/4] 🚚  Fetching packages...
+[3/4] 🔗  Linking dependencies...
+[4/4] 🔨  Building fresh packages...
+✨  Done in 32.20s.
+--------------------------------------------------------------------------------
+
 Configure
 --------------------------------------------------------------------------------
 Your Redis host (default: 127.0.0.1:6379):
@@ -48,6 +58,10 @@ Seed default data...                                                      [Done]
 
 Homeland Successfully Installed.
 
+# Session 1:
+$ yarn start
+
+# Session 2:
 $ rails s
 ```
 

@@ -22,15 +22,15 @@
         <div class="heading">绑定其他帐号用于登录</div>
 
         <% if !Setting.sso_enabled? %>
-          <% if Setting.has_module? :github %>
+          <% if Setting.has_module?(:github) %>
             <ul class="list-group col-sm-6">
               <% ["github"].each do |provider| %>
               <li class="list-group-item">
-                <% if @user.bind? provider %>
+                <% if @user.bind?(provider) %>
                   <%= t("omniauth.#{provider}") %>
-                  <%= link_to(raw('<i class="fa fa-remove"></i>'),"/setting/auth/#{provider}", rel: "twitsy", title: "点击解除绑定", method: 'delete' )%>
+                  <%= link_to(raw('<i class="fas fa-minus-circle"></i>'), auth_unbind_setting_path(provider), rel: "twitsy", title: "点击解除绑定", method: 'delete' )%>
                 <% else %>
-                  <%= link_to(t("omniauth.#{provider}"), "/account/auth/#{provider}", rel: "twitsy", title: "点击绑定" )%>
+                  <%= link_to(t("omniauth.#{provider}"), omniauth_authorize_path(:user, provider), rel: "twitsy", title: "点击绑定" )%>
                 <% end %>
               </li>
               <% end %>

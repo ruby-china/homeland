@@ -87,6 +87,10 @@ Dir.chdir APP_ROOT do
     system "bundle check || bundle install"
   end
 
+  puts_section "Installing NPM packages" do
+    system "yarn"
+  end
+
   # Config files
   puts_section "Configure" do
     %w[database redis secrets].each do |fname|

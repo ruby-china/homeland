@@ -50,8 +50,6 @@ input[type="file"]::-webkit-file-upload-button {
 
 textarea,
 #preview {
-  overflow: scroll;
-
   &::-webkit-scrollbar {
     width: 12px;
   }

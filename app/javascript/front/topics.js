@@ -246,7 +246,9 @@ window.TopicView = Backbone.View.extend({
 
   submitTextArea(e) {
     if ($(e.target).val().trim().length > 0) {
-      $("form#new_reply").submit();
+      // “Note the data-remote="true". Now, the form will be submitted by Ajax rather than by the browser's normal submit mechanism.”
+      // So we need to send ajax submit here.
+      $("form#new_reply #reply-button").click();
     }
     return false;
   },

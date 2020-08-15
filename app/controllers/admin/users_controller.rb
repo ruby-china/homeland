@@ -53,11 +53,13 @@ module Admin
 
     def update
       @user = User.find_by_login!(params[:id])
-      @user.email = params[:user][:email]
-      @user.login = params[:user][:login]
-      @user.state = params[:user][:state]
+      type = @user.user_type # Can be :team or :user
 
-      if @user.update(params[:user].permit!)
+      @user.email = params[type][:email]
+      @user.login = params[type][:login]
+      @user.state = params[type][:state] if params[type][:state] # Avoid `ActiveRecord::NotNullViolation` exception for Team entity.
+
+      if @user.update(params[type].permit!)
         redirect_to(edit_admin_user_path(@user.id), notice: "User was successfully updated.")
       else
         render action: "edit"

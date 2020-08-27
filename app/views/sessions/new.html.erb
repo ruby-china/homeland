@@ -51,6 +51,14 @@
 
 <script>
   $('#new_user').on('ajax:error', function(event, xhr, status, error) {
-    App.alert(xhr.responseText);
+    var lastIndex = event.detail.length - 1
+    var item = event.detail[lastIndex]
+
+    if (item) {
+      App.alert(item.responseText);
+    } else {
+      App.alert("未知错误");
+    }
+
   })
 </script>

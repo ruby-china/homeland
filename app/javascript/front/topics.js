@@ -179,9 +179,11 @@ window.TopicView = Backbone.View.extend({
         $(textarea).show();
       } else {
         $(this).addClass("active");
-        $(preview_box).show();
+        $box = $(preview_box)
+        $box.show();
         $(textarea).hide();
-        $(preview_box).css("height", $(textarea).height());
+        $box.css("height", "auto");
+        $box.css("min-height", $(textarea).height());
         self.preview($(textarea).val());
       }
       return false;

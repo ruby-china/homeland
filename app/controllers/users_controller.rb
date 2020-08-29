@@ -2,6 +2,8 @@
 
 class UsersController < ApplicationController
   before_action :set_user, except: %i[index city]
+  before_action :check_exist!, except: %i[index city block unblock
+                                          follow unfollow]
 
   etag { @user }
   etag { @user&.teams if @user&.user_type == :user }
@@ -38,9 +40,11 @@ class UsersController < ApplicationController
         return
       end
 
-      render_404 if @user.deleted?
-
       @user_type = @user.user_type
+    end
+
+    def check_exist!
+      render_404 if @user.deleted?
     end
 
     # Override render method to render difference view path

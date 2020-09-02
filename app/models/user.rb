@@ -74,6 +74,10 @@ class User < ApplicationRecord
     where(conditions.to_h).where(["(lower(login) = :value OR lower(email) = :value) and state != -1", { value: login }]).first
   end
 
+  def self.admin_users
+    User.where(:email => Setting.admin_email_list).to_a
+  end
+
   def self.search(term, user: nil, limit: 30)
     following = []
     term = term.to_s + "%"

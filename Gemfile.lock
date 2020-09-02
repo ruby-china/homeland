@@ -384,6 +384,9 @@ GEM
     sidekiq-cron (1.2.0)
       fugit (~> 1.1)
       sidekiq (>= 4.2.1)
+    simple_form (5.0.2)
+      actionpack (>= 5.0)
+      activemodel (>= 5.0)
     simplecov (0.18.5)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
@@ -492,6 +495,7 @@ DEPENDENCIES
   second_level_cache
   sidekiq
   sidekiq-cron
+  simple_form
   social-share-button
   spring
   turbolinks

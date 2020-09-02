@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_21_022652) do
+ActiveRecord::Schema.define(version: 2020_09_02_160923) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,14 +35,6 @@ ActiveRecord::Schema.define(version: 2020_07_21_022652) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["provider", "uid"], name: "index_authorizations_on_provider_and_uid"
-  end
-
-  create_table "commentable_pages", force: :cascade do |t|
-    t.string "name"
-    t.integer "user_id"
-    t.integer "comments_count", default: 0, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "comments", id: :serial, force: :cascade do |t|
@@ -81,14 +73,6 @@ ActiveRecord::Schema.define(version: 2020_07_21_022652) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["name"], name: "index_locations_on_name"
-  end
-
-  create_table "monkeys", force: :cascade do |t|
-    t.string "name"
-    t.integer "user_id"
-    t.integer "comments_count"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "nodes", id: :serial, force: :cascade do |t|
@@ -183,24 +167,7 @@ ActiveRecord::Schema.define(version: 2020_07_21_022652) do
     t.text "body", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["page_id", "version"], name: "index_page_versions_on_page_id_and_version"
     t.index ["page_id"], name: "index_page_versions_on_page_id"
-  end
-
-  create_table "pages", id: :serial, force: :cascade do |t|
-    t.string "slug", null: false
-    t.string "title", null: false
-    t.text "body", null: false
-    t.boolean "locked", default: false
-    t.integer "version", default: 0, null: false
-    t.integer "editor_ids", default: [], null: false, array: true
-    t.integer "word_count", default: 0, null: false
-    t.integer "changes_cout", default: 1, null: false
-    t.integer "comments_count", default: 0, null: false
-    t.datetime "deleted_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["slug"], name: "index_pages_on_slug", unique: true
   end
 
   create_table "photos", id: :serial, force: :cascade do |t|
@@ -209,25 +176,6 @@ ActiveRecord::Schema.define(version: 2020_07_21_022652) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["user_id"], name: "index_photos_on_user_id"
-  end
-
-  create_table "posts", id: :serial, force: :cascade do |t|
-    t.string "title", null: false
-    t.string "slug", null: false
-    t.text "body", null: false
-    t.string "summary", limit: 5000
-    t.string "banner"
-    t.integer "user_id"
-    t.integer "likes_count", default: 0, null: false
-    t.integer "comments_count", default: 0, null: false
-    t.integer "status", default: 0, null: false
-    t.datetime "published_at", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["published_at"], name: "index_posts_on_published_at"
-    t.index ["slug"], name: "index_posts_on_slug"
-    t.index ["status"], name: "index_posts_on_status"
-    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -285,28 +233,6 @@ ActiveRecord::Schema.define(version: 2020_07_21_022652) do
     t.index ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true
   end
 
-  create_table "site_nodes", id: :serial, force: :cascade do |t|
-    t.string "name", null: false
-    t.integer "sort", default: 0, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["sort"], name: "index_site_nodes_on_sort"
-  end
-
-  create_table "sites", id: :serial, force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "site_node_id"
-    t.string "name", null: false
-    t.string "url", null: false
-    t.string "desc"
-    t.datetime "deleted_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["site_node_id", "deleted_at"], name: "index_sites_on_site_node_id_and_deleted_at"
-    t.index ["site_node_id"], name: "index_sites_on_site_node_id"
-    t.index ["url"], name: "index_sites_on_url"
-  end
-
   create_table "team_users", id: :serial, force: :cascade do |t|
     t.integer "team_id", null: false
     t.integer "user_id", null: false
@@ -318,13 +244,19 @@ ActiveRecord::Schema.define(version: 2020_07_21_022652) do
     t.index ["user_id"], name: "index_team_users_on_user_id"
   end
 
-  create_table "test_documents", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "reply_to_id"
-    t.integer "mentioned_user_ids", default: [], array: true
-    t.text "body"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table "tip_offs", force: :cascade do |t|
+    t.integer "reporter_id"
+    t.string "reporter_email"
+    t.string "tip_off_type"
+    t.string "body"
+    t.datetime "create_time"
+    t.string "content_url"
+    t.string "content_author_id"
+    t.integer "follower_id"
+    t.datetime "follow_time"
+    t.string "follow_result"
+    t.datetime "deleted_at"
+    t.index ["reporter_id"], name: "index_tip_offs_on_reporter_id"
   end
 
   create_table "topics", id: :serial, force: :cascade do |t|
@@ -421,14 +353,6 @@ ActiveRecord::Schema.define(version: 2020_07_21_022652) do
     t.index ["location"], name: "index_users_on_location"
     t.index ["login"], name: "index_users_on_login", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
-  end
-
-  create_table "walking_deads", force: :cascade do |t|
-    t.string "name"
-    t.string "tag"
-    t.datetime "deleted_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
 end

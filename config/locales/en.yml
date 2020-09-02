@@ -64,3 +64,22 @@ en:
         body: "Content"
         locked: "Lock"
         change_desc: "Change Description"
+
+  tip_off:
+    reporter: 'Reporter'
+    reporter_email: 'Reporter Email'
+    report_time: 'Report Time'
+    report_type: 'Report Type'
+    content_url: 'Url of content reported'
+    content_author: 'Author of content reported'
+    description: 'Description'
+    follow_result: 'Follow result'
+    follower: 'Follower'
+    follow_time: 'Follow time'
+    follow: 'Follow this tip off'
+    follow_status: 'Follow status'
+    following: 'Admin followed'
+    not_follow: 'Waiting for follow'
+  github_statistics:
+    TTF_total_contributors: 'TTF project totally have %{count} contributor'
+    contribution: 'Contribution: %{value}'

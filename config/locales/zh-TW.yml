@@ -64,3 +64,27 @@
         body: 內容
         locked: 鎖定開關
         change_desc: 變更描述
+
+  tip_off:
+    reporter: '舉報人'
+    reporter_email: '舉報人郵箱'
+    report_time: '舉報時間'
+    report_type: '舉報類型'
+    content_url: '被舉報信息地址'
+    content_author: '被舉報信息作者'
+    description: '舉報說明'
+    follow_result: '處理結果'
+    follower: '處理人'
+    follow_time: '處理時間'
+    follow: '處理舉報'
+    follow_status: '跟進情況'
+    following: '管理員已處理'
+    not_follow: '待處理'
+  github_statistics:
+    no_data: '暫無數據'
+    TTF_contributor_list: 'TTF 貢獻者榜單'
+    TTF_total_contributors: '共計有 %{count} 人給 TTF 項目進行了代碼貢獻'
+    testerhome_user: '社區用戶'
+    contribution: '貢獻指數：%{value}'
+    TTF_repos: 'TTF 統計項目列表'
+    contribution_calculate_rule: '貢獻指數計算規則'

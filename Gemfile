@@ -63,6 +63,9 @@ gem "enumize"
 # 分页
 gem "kaminari"
 
+# 表单
+gem "simple_form"
+
 # Form select 选项
 gem "form-select"
 

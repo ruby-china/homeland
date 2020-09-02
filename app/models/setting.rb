@@ -2,6 +2,9 @@
 
 # RailsSettings Model
 class Setting < RailsSettings::Base
+  # List setting value separator chars
+  SEPARATOR_REGEXP = /[\s,]/
+
   # keys that allow update in admin
   EDITABLE_KEYS = %w[
     default_locale
@@ -153,6 +156,16 @@ class Setting < RailsSettings::Base
     def editable_keys
       EDITABLE_KEYS
     end
+
+    def has_admin?(email)
+      return false if self.admin_emails.blank?
+      self.admin_emails.split(SEPARATOR_REGEXP).include?(email)
+    end
+
+    def admin_email_list
+      self.admin_emails.split(SEPARATOR_REGEXP)
+    end
+
 
     def protocol
       self.https? ? "https" : "http"

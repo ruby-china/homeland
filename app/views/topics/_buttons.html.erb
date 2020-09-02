@@ -5,6 +5,8 @@
     <%= topic_favorite_tag(@topic) %>
   <% end %>
 
+  <%= link_to raw("<i class='fa fa-flag'></i> " + t('common.tip_off')), new_tip_off_path(content_url: request.original_url, content_author_id: @topic.user.id), remote: true, title: t('common.tip_off') %>
+
   <% if can? :suggest, @topic %>
     <% if !@topic.suggested_at.blank? %>
     <%= link_to raw("<i class='fa fa-pin'></i> 取消"), unsuggest_admin_topic_path(@topic), method: :post, remote: true %>

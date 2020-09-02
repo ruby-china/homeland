@@ -119,3 +119,26 @@
           attributes:
             reset_password_token:
               expired: 重置密码操作已过期
+  tip_off:
+    reporter: '举报人'
+    reporter_email: '举报人邮箱'
+    report_time: '举报时间'
+    report_type: '举报类型'
+    content_url: '被举报信息地址'
+    content_author: '被举报信息作者'
+    description: '举报说明'
+    follow_result: '处理结果'
+    follower: '处理人'
+    follow_time: '处理时间'
+    follow: '处理举报'
+    follow_status: '处理情况'
+    following: '管理员已处理'
+    not_follow: '待处理'
+  github_statistics:
+    no_data: '暂无数据'
+    TTF_contributor_list: 'TTF 贡献者榜单'
+    TTF_total_contributors: '共计有 %{count} 人给 TTF 项目进行了代码贡献'
+    testerhome_user: '社区用户'
+    contribution: '贡献指数：%{value}'
+    TTF_repos: 'TTF 统计项目列表'
+    contribution_calculate_rule: '贡献指数计算规则'

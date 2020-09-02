@@ -70,6 +70,7 @@
     auth_with_other_services: "用其他平台的帐号登录"
     captcha: "验证码"
     search_result: "搜索结果"
+    tip_off: '举报'
   reply:
     edit_reply: "修改回帖"
     delete_reply_success: "回帖删除成功."

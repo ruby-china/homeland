@@ -661,6 +661,10 @@ kbd {
     justify-content: flex-start;
   }
 
+  .modal-body {
+    padding: 15px 25px;
+  }
+
   @media (min-width: 768px) {
     .modal-dialog {
       width: 768px;

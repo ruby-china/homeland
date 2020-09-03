@@ -127,6 +127,7 @@ Rails.application.routes.draw do
     resources :locations
     resources :applications
     resources :stats
+    resources :tip_offs
     resources :plugins
   end
 

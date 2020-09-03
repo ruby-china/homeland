@@ -13,6 +13,7 @@
       comments: "Comments"
       locations: "Locations"
       exception_logs: "Errors"
+      tip_offs: "Tip Offs"
     overview: "Overview"
     recent_topics: "Recent Topics"
     statics: "Statistics"

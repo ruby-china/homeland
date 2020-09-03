@@ -24,6 +24,7 @@
             li << link_to(t("admin.menu.comments"), main_app.admin_comments_path, class: "nav-link")
             li << link_to(t("admin.menu.photos"), main_app.admin_photos_path, class: "nav-link")
             li << link_to(t("admin.menu.locations"), main_app.admin_locations_path, class: "nav-link")
+            li << link_to(t("admin.menu.tip_offs"), main_app.admin_tip_offs_path, class: "nav-link")
             Homeland.admin_navbar_plugins.each do |plugin|
               li << link_to(plugin.display_name, plugin.admin_path, class: "nav-link")
             end

@@ -1,0 +1,5 @@
+<% content_for :sitemap do %>
+  <a href="<%= admin_tip_offs_path %>"><%= t("admin.menu.tip_offs")%></a> <i class="fa fa-angle-right"></i> <span class="current"><%= t("admin.tip_off.details")%></span>
+<% end %>
+
+<%= render 'form' %>

@@ -1,0 +1,51 @@
+<%= simple_form_for([:admin, @tipOff], url: admin_tip_off_path(@tipOff)) do |f| %>
+  <%= render 'shared/error_messages', target: @tipOff %>
+
+  <dl class="row">
+    <dt class="col-sm-3"><%=t("tip_off.reporter")%></dt>
+    <dd class="col-sm-9"><%=user_name_tag @tipOff.reporter%></dd>
+
+    <dt class="col-sm-3"><%=t("tip_off.reporter_email")%></dt>
+    <dd class="col-sm-9"><%= @tipOff[:reporter_email] %></dd>
+
+    <dt class="col-sm-3"><%=t("tip_off.report_type")%></dt>
+    <dd class="col-sm-9"><%= @tipOff[:tip_off_type] %></dd>
+
+    <dt class="col-sm-3"><%=t("tip_off.report_time")%></dt>
+    <dd class="col-sm-9"><%= @tipOff[:create_time] %></dd>
+
+    <dt class="col-sm-3"><%=t("tip_off.content_url")%></dt>
+    <dd class="col-sm-9"><a href="<%= @tipOff[:content_url] %>" target="_blank"><%=@tipOff[:content_url]%></a></dd>
+
+    <dt class="col-sm-3"><%=t("tip_off.content_author")%></dt>
+    <dd class="col-sm-9"><%=user_name_tag @tipOff.content_author %></dd>
+    <dt class="col-sm-3"><%=t("tip_off.description")%></dt>
+    <dd class="col-sm-9"><%= @tipOff[:body] %></dd>
+
+    <% if @tipOff[:follower_id] %>
+      <dt class="col-sm-3"><%=t("tip_off.follower")%></dt>
+      <dd class="col-sm-9"><%= User.find(@tipOff[:follower_id])[:name] %></dd>
+
+      <dt class="col-sm-3"><%=t("tip_off.follow_time")%></dt>
+      <dd class="col-sm-9"><%= @tipOff[:follow_time] %></dd>
+
+      <dt class="col-sm-3"><%=t("tip_off.follow_result")%></dt>
+      <dd class="col-sm-9"><%= @tipOff[:follow_result] %></dd>
+    <% end %>
+
+    <%= f.input :follower_id, as: :hidden, input_html: { value: current_user[:id] } %>
+
+  </dl>
+
+  <dl class="row">
+    <dt class="col-sm-12">
+      <% if not @tipOff[:follower_id] %>
+        <%= f.input :follow_result, as: :text, required: true %>
+
+        <%= f.submit t("tip_off.follow"), class: "btn btn-lg btn-block btn-primary", 'data-disable-with' => t("tip_off.follow") %>
+      <% else %>
+        <%= f.submit '已处理', class: "btn btn-lg btn-block btn-primary", 'data-disable-with' => t("tip_off.follow"), disabled: true %>
+      <% end %>
+    </dt>
+  </dl>
+<% end %>

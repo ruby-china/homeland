@@ -13,6 +13,7 @@
       comments: "评论"
       locations: "城市"
       exception_logs: "异常"
+      tip_offs: "举报"
     overview: "概览"
     recent_topics: "最近帖子"
     statics: "统计信息"

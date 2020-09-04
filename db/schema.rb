@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_02_160923) do
+ActiveRecord::Schema.define(version: 2020_09_04_133818) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -199,6 +199,7 @@ ActiveRecord::Schema.define(version: 2020_09_02_160923) do
     t.string "target_type"
     t.string "target_id"
     t.integer "reply_to_id"
+    t.integer "real_user_id"
     t.index ["deleted_at"], name: "index_replies_on_deleted_at"
     t.index ["topic_id"], name: "index_replies_on_topic_id"
     t.index ["user_id"], name: "index_replies_on_user_id"
@@ -282,6 +283,7 @@ ActiveRecord::Schema.define(version: 2020_09_02_160923) do
     t.datetime "updated_at"
     t.datetime "closed_at"
     t.integer "team_id"
+    t.integer "real_user_id"
     t.index ["deleted_at"], name: "index_topics_on_deleted_at"
     t.index ["grade"], name: "index_topics_on_grade"
     t.index ["last_active_mark"], name: "index_topics_on_last_active_mark"

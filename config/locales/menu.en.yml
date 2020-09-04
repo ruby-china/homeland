@@ -8,6 +8,8 @@
     avatar: "Avatar"
     save: "Save"
     saving: "Saving"
+    save_as_draft: "Save as draft"
+    saving_as_draft: "Saving as draft"
     submitting: "Submitting"
     delete: "Delete"
     undelete: "Revert"

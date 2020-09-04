@@ -33,6 +33,11 @@
   <div class="form-actions hide-ios">
     <%= f.submit t("common.save"), class: "btn btn-primary", style: "min-width: 200px", 'data-disable-with' => t("common.saving"), 'data-tb' => "save-topic" %>
 
+    <% if @topic.draft or @topic.new_record? %>
+    <span>or</span>
+    <%=	 button_tag  t("common.save_as_draft"), name: 'commit',id: 'save_as_draft', value: 'draft', type: 'submit', class: "btn btn-info", 'data-disable-with' => t("common.saving_as_draft"), 'data-tb' => "save-topic-draft"  %>
+    <%	end %>
+
     <div class="pull-right hide-ios"><a href="/markdown" target="_blank"><i class="fa fa-life-ring"></i> 排版说明</a></div>
   </div>
 <% end %>

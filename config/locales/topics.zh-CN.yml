@@ -1,5 +1,6 @@
 "zh-CN":
   topics:
+    real_name: "实名"
     new_topic: "发布新话题"
     edit_topic: "修改话题"
     no_replies: "暂无回复。"

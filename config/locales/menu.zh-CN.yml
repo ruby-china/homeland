@@ -8,6 +8,8 @@
     avatar: "头像"
     save: "保存"
     saving: "正在保存"
+    save_as_draft: "保存为草稿"
+    saving_as_draft: "正在保存为草稿"
     submitting: "正在提交"
     delete: "删除"
     undelete: "恢复"

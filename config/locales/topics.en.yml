@@ -1,5 +1,6 @@
 "en":
   topics:
+    real_name: "Real Name"
     new_topic: "New Topic"
     edit_topic: "Edit Topic"
     no_replies: "No Reply at the moment."

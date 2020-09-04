@@ -55,7 +55,7 @@ module Topics
       end
 
       def topics_scope(base_scope = Topic, without_nodes: true)
-        scope = base_scope.without_ban.fields_for_list
+        scope = base_scope.without_draft.without_ban.fields_for_list
         scope = scope.without_hide_nodes if without_nodes
 
         if current_user

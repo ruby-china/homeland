@@ -37,7 +37,7 @@ module Api
           @topics = @node.topics
         end
 
-        @topics = @topics.without_ban.fields_for_list.includes(:user).send(scope_method_by_type)
+        @topics = @topics.without_draft.without_ban.fields_for_list.includes(:user).send(scope_method_by_type)
         if %w[no_reply popular].index(params[:type])
           @topics = @topics.last_actived
         elsif params[:type] == "excellent"

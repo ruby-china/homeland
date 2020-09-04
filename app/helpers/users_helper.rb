@@ -27,6 +27,17 @@ module UsersHelper
   end
   alias team_name_tag user_name_tag
 
+  def user_name_plain_span(user, options = {})
+    return "匿名" if user.blank?
+    login     = user.login
+    name      = user.name
+    if name.blank?
+      name = login
+    end
+    content_tag(:span, name, class: 'user-name')
+  end
+
+
   def user_avatar_width_for_size(size)
     case size
     when :xs then 16

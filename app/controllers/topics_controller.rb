@@ -23,7 +23,7 @@ class TopicsController < ApplicationController
   end
 
   def feed
-    @topics = Topic.recent.without_ban.without_hide_nodes.includes(:node, :user, :last_reply_user).limit(20)
+    @topics = Topic.recent.without_draft.without_ban.without_hide_nodes.includes(:node, :user, :last_reply_user).limit(20)
     render layout: false if stale?(@topics)
   end
 
@@ -74,6 +74,9 @@ class TopicsController < ApplicationController
     @topic.user_id = current_user.id
     @topic.node_id = params[:node] || topic_params[:node_id]
     @topic.team_id = ability_team_id
+
+    draft_and_anonymous_prepare
+
     @topic.save
   end
 
@@ -98,6 +101,9 @@ class TopicsController < ApplicationController
     @topic.team_id = ability_team_id
     @topic.title = topic_params[:title]
     @topic.body = topic_params[:body]
+
+    draft_and_anonymous_prepare
+
     @topic.save
   end
 
@@ -178,5 +184,22 @@ class TopicsController < ApplicationController
       @has_followed = current_user.follow_topic?(@topic)
       # 是否收藏
       @has_favorited = current_user.favorite_topic?(@topic)
+    end
+
+    def draft_and_anonymous_prepare
+      if params[:commit] and params[:commit] == 'draft'
+        @topic.draft = true
+      else
+        @topic.draft = false
+      end
+
+      # 加入匿名功能
+      if @topic.node_id
+        node = Node.find(@topic.node_id)
+        if node.name.index("匿名") && @topic.draft == false
+          @topic.user_id = 12
+          @topic.real_user_id = current_user.id
+        end
+      end
     end
 end

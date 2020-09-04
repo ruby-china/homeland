@@ -11,6 +11,13 @@ class RepliesController < ApplicationController
     @reply.topic_id = @topic.id
     @reply.user_id = current_user.id
 
+    # 加入匿名
+    node = Node.find(@topic.node_id)
+    if node.name.index("匿名") && @reply.anonymous == 0
+      @reply.user_id = 12
+      @reply.real_user_id = current_user.id
+    end
+
     if @reply.save
       current_user.read_topic(@topic)
       @msg = t("topics.reply_success")
@@ -66,6 +73,6 @@ class RepliesController < ApplicationController
     end
 
     def reply_params
-      params.require(:reply).permit(:body, :reply_to_id)
+      params.require(:reply).permit(:body, :reply_to_id, :anonymous)
     end
 end

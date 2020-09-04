@@ -44,6 +44,7 @@ class Topic < ApplicationRecord
     ids.uniq!
     exclude_column_ids("node_id", ids)
   }
+  scope :without_draft, -> { where(draft: false) }
 
   before_save { self.node_name = node.try(:name) || "" }
   before_create { self.last_active_mark = Time.now.to_i }

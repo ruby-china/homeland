@@ -1,0 +1,8 @@
+<% tipOff = notification.target %>
+<div class="media-heading">
+  用户 <%= notification.actor.login %> 举报了内容 <%= link_to tipOff.content_url, tipOff.content_url %>。举报说明：
+  <div class="media-content summary markdown">
+    <p><%= tipOff.body %></p>
+    <%= link_to '查看详情', main_app.edit_admin_tip_off_path(tipOff), class: 'btn btn-default btn-sm' %>
+  </div>
+</div>

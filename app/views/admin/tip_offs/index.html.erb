@@ -23,11 +23,14 @@
       <td><%= tipOff[:body] %></td>
       <td><%= l tipOff[:create_time], format: :short %></td>
       <% if tipOff[:follower_id] %>
-        <td><%= User.find(tipOff[:follower_id])[:name] %></td>
+        <td>
+          <% user = User.find(tipOff[:follower_id]) %>
+          <%= link_to user&.fullname, main_app.user_path(user) %>
+        </td>
       <% else %>
         <td>--</td>
       <% end %>
-      <td class="opts"><a href="<%= edit_admin_tip_off_path(tipOff[:id]) %>"><%=t('admin.tip_off.details')%></a></td>
+      <td><a class="active" href="<%= edit_admin_tip_off_path(tipOff[:id]) %>"><%=t('admin.tip_off.details')%></a></td>
     </tr>
   <% end %>
 

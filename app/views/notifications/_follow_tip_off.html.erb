@@ -1,0 +1,33 @@
+<% tipOff = notification.target %>
+<div class="media-heading">
+  管理员 <%= link_to notification.actor.login, main_app.user_path(notification.actor) %> 已处理了您的这个举报：
+
+  <% if User.exists?(tipOff[:content_author_id]) %>
+  <div class="media-content summary markdown">
+    <p>
+      <dl class="row">
+        <dt class="col-sm-3"><%=t("tip_off.report_type")%></dt>
+        <dd class="col-sm-9"><%= tipOff[:tip_off_type] %></dd>
+  
+        <dt class="col-sm-3"><%=t("tip_off.report_time")%></dt>
+        <dd class="col-sm-9"><%= tipOff[:create_time] %></dd>
+  
+        <dt class="col-sm-3"><%=t("tip_off.content_url")%></dt>
+        <dd class="col-sm-9"><a href="<%= tipOff[:content_url] %>" target="_blank"><%=tipOff[:content_url]%></a></dd>
+  
+        <dt class="col-sm-3"><%=t("tip_off.content_author")%></dt>
+        <dd class="col-sm-9"><%= link_to User.find(tipOff[:content_author_id])[:name], main_app.user_path(User.find(tipOff[:content_author_id])), target: "_blank" %></dd>
+  
+        <dt class="col-sm-3"><%=t("tip_off.description")%></dt>
+        <dd class="col-sm-9"><%= tipOff[:body] %></dd>
+
+        <dt class="col-sm-3"><%=t("tip_off.follow_result")%></dt>
+        <dd class="col-sm-9 text-primary"><%= tipOff[:follow_result] %></dd>
+      </dl>
+
+    </p>
+  </div>
+  <% else %>
+    <p class="text-danger">您举报的用户被删除</p>
+  <% end %>
+</div>

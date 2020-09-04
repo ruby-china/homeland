@@ -1,0 +1,8 @@
+<% tipOff = notification.target %>
+<div class="media-heading">
+  管理员 <%= notification.actor.login %> 处理了被举报内容为 <%= link_to tipOff.content_url, tipOff.content_url %> 的举报。处理结果：<%= tipOff.follow_result %>
+  <div class="media-content summary markdown">
+    <p>剩余待处理举报数为 <%= TipOff.where(follower_id: nil).to_a.length%> 个</p>
+    <%= link_to '查看所有举报', main_app.admin_tip_offs_path, class: 'btn btn-default btn-sm', target: '_blank' %>
+  </div>
+</div>

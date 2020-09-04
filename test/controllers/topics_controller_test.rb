@@ -171,12 +171,12 @@ describe TopicsController do
     describe "authenticated" do
       it "should allow access from authenticated user" do
         sign_in user
-        post topics_path, params: { format: :js, topic: { title: "new topic", body: "new body", node_id: node } }
+        post topics_path, params: { format: :js, topic: { title: "new topic", body: "new body", node: node } }
         assert_equal 200, response.status
       end
       it "should allow access from authenticated user with team" do
         sign_in user
-        post topics_path, params: { format: :js, topic: { title: "new topic", body: "new body", node_id: node, team_id: team.id } }
+        post topics_path, params: { format: :js, topic: { title: "new topic", body: "new body", node: node, team_id: team.id } }
         assert_equal 200, response.status
       end
     end
@@ -201,7 +201,7 @@ describe TopicsController do
     it "should update with admin user" do
       # new_node = create(:node)
       sign_in admin
-      put topic_path(topic), params: { format: :js, topic: { title: "new topic 2", body: "new body 2", node_id: node } }
+      put topic_path(topic), params: { format: :js, topic: { title: "new topic 2", body: "new body 2", node_id: node.id } }
       assert_equal 200, response.status
       topic.reload
       assert_equal true, topic.lock_node

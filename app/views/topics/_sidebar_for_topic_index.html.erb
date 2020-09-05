@@ -9,7 +9,7 @@
 
 <div class="card">
   <div class="card-body">
-    <%= link_to t('topics.new_topic'), main_app.new_topic_path, class: 'btn btn-primary btn-block' %>
+    <%= link_to t('topics.new_topic'), main_app.new_topic_path(node: @node&.id), class: 'btn btn-primary btn-block' %>
   </div>
 </div>
 <% end %>

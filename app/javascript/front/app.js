@@ -25,7 +25,7 @@ const AppView = Backbone.View.extend({
     this.initCable();
     this.restoreHeaderSearchBox();
 
-    if ((needle = $('body').data('controller-name'), ['topics', 'replies'].includes(needle))) {
+    if ((needle = $('body').data('controller-name'), ['topics', 'replies', 'articles'].includes(needle))) {
       window._topicView = new TopicView({ parentView: this });
     }
 

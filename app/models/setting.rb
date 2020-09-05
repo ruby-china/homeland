@@ -38,6 +38,8 @@ class Setting < RailsSettings::Base
     column_max_count
     column_user_white_list
     column_enabled
+    before_wechat_html
+    after_wechat_html
     editor
     article_node
     allow_change_login
@@ -156,6 +158,9 @@ class Setting < RailsSettings::Base
   field :column_user_white_list, default: [], separator: SEPARATOR_REGEXP
   field :editor, default: [], separator: SEPARATOR_REGEXP
   field :article_node, default: 1, type: :integer
+  field :before_wechat_html, type: :string
+  field :after_wechat_html, type: :string
+
 
   # = ReCaptcha
   field :use_recaptcha, default: false, type: :boolean

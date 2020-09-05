@@ -61,10 +61,25 @@ class RepliesController < ApplicationController
     end
   end
 
+  def reply_suggest
+    @reply.update_suggested_at(Time.now)
+    redirect_to(topic_path(@reply.topic_id), notice: "设为最佳回复成功。")
+  end
+
+  def reply_unsuggest
+    @reply.update_suggested_at(nil)
+    redirect_to(topic_path(@reply.topic_id), notice: "取消最佳回复成功。")
+  end
+
   protected
 
     def set_topic
-      @topic = Topic.find(params[:topic_id])
+      # 兼容 topic 和 article
+      if (params[:topic_id])
+        @topic = Topic.find(params[:topic_id])
+      else
+        @topic = Topic.find(params[:article_id])
+      end
     end
 
     def set_reply

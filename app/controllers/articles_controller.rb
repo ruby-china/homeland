@@ -37,8 +37,6 @@ class ArticlesController < TopicsController
   end
 
   def update
-    @article.admin_editing = true if current_user.admin?
-
     if current_user.admin? && current_user.id != @article.user_id
       # 管理员且非本帖作者
       @article.modified_admin = current_user

@@ -1,0 +1,14 @@
+<% title_tag t('topics.raw_topic') %>
+
+<div class="card">
+  <div class="card-header hide-ios"><%= t('topics.raw_topic') %> <span class="pull-right hidden-xs"><%= topic_title_tag(@topic) %></span></div>
+  <div class="card-body">
+    <%= simple_form_for @topic, remote: true, html: { class: "form", tb: 'edit-topic' } do |f| %>
+      <div class="form-group">
+        <%= f.text_area :body, class: "topic-editor form-control closewarning",  style: "resize: none", rows: 20 %>
+      </div>
+
+    <% end %>
+
+  </div>
+</div>

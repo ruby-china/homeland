@@ -1,0 +1,236 @@
+/*
+ *= require highlight
+ */
+
+/*
+ * NOTE:
+ * - The use of browser-specific styles (-moz-, -webkit-) should be avoided.
+ *   If used, they may not render correctly for people reading the email in
+ *   a different browser than the one from which the email was sent.
+ * - The use of state-dependent styles (like a:hover) don't work because they
+ *   don't match at the time the styles are made explicit. (In email, styles
+ *   must be explicitly applied to all elements -- stylesheets get stripped.)
+ */
+
+/* This is the overall wrapper, it should be treated as the `body` section. */
+body {
+  font-size: 14px;
+}
+
+/* To add site specific rules, you can use the `data-md-url` attribute that we
+   add to the wrapper element. Note that rules like this are used depending
+   on the URL you're *sending* from, not the URL where the recipient views it.
+*/
+/* .markdown-here-wrapper[data-md-url*="mail.yahoo."] ul { color: red; } */
+
+pre, code {
+  font-family: Consolas, Inconsolata, Courier, monospace;
+  border-radius: 0px;
+}
+
+code {
+  word-wrap: break-word;
+  padding: 2px 4px;
+  border-radius: 4px;
+  margin: 0 2px;
+  color: #e96900;
+  background: #f8f8f8;
+}
+
+pre {
+  font-size: 14px;
+  line-height: 1.2em;
+}
+
+pre code {
+  white-space: pre;
+  border-radius: 3px;
+  padding: 0.5em 0.7em;
+  display: block !important; /* added to counteract the Yahoo-specific `code` rule; without this, code blocks in Blogger are broken */
+  word-wrap: normal !important;
+  word-break: normal !important;
+  overflow: auto !important;
+}
+
+pre.highlight code .c {
+  display: block;
+  margin-top: 10px;
+}
+
+/* In edit mode, Wordpress uses a `* { font: ...;} rule+style that makes highlighted
+code look non-monospace. This rule will override it. */
+.markdown-here-wrapper[data-md-url*="wordpress."] code span {
+  font: inherit;
+}
+
+/* Wordpress adds a grey background to `pre` elements that doesn't go well with
+our syntax highlighting. */
+.markdown-here-wrapper[data-md-url*="wordpress."] pre {
+  background-color: transparent;
+}
+
+/* This spacing has been tweaked to closely match Gmail+Chrome "paragraph" (two line breaks) spacing.
+Note that we only use a top margin and not a bottom margin -- this prevents the
+"blank line" look at the top of the email (issue #243).
+*/
+p {
+  /* !important is needed here because Hotmail/Outlook.com uses !important to
+     kill the margin in <p>. We need this to win. */
+  margin: 0 0 20px 0;
+}
+
+table, pre, dl, blockquote, q, ul, ol {
+  margin: 1.2em 0;
+}
+
+ul, ol {
+  padding-left: 32px;
+}
+
+ul { /*无序列表*/
+  list-style-type: disc;
+}
+
+ol { /*有序列表*/
+  list-style-type: decimal;
+}
+
+li * {
+  /* color: #3e3e3e;*/
+}
+
+li { /*在公众号下，改变不了li符号的属性（如颜色），并会影响其子元素的属性;而在其它博客平台中，则能正常使用*/
+  margin-bottom: 0.5em;
+  /*  color:#159957; */
+}
+
+/* Space paragraphs in a list the same as the list itself. */
+li p {
+  /* Needs !important to override rule above. */
+  margin: 0.5em 0 !important;
+}
+
+/* Smaller spacing for sub-lists */
+ul ul, ul ol, ol ul, ol ol {
+  margin: 0;
+  padding-left: 1em;
+}
+
+/* Use Roman numerals for sub-ordered-lists. (Like Github.) */
+ol ol, ul ol {
+  list-style-type: lower-roman;
+}
+
+/* Use letters for sub-sub-ordered lists. (Like Github.) */
+ul ul ol, ul ol ol, ol ul ol, ol ol ol {
+  list-style-type: lower-alpha;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+}
+
+dl dd {
+  margin: 0 0 1em;
+  padding: 0 1em;
+}
+
+blockquote, q {
+  border-left: 4px solid #DDD;
+  padding: 0 1em;
+  color: #777;
+  quotes: none;
+}
+
+blockquote::before, blockquote::after, q::before, q::after {
+  content: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 20px;
+  padding: 0;
+  font-weight: bold;
+  color: blue;
+}
+
+h1 {
+  font-size: 18px;
+  border-bottom: 1px solid #ddd;
+  color: blue;
+}
+
+h2 {
+  font-size: 18px;
+  border-bottom: 1px solid #eee;
+}
+
+h3 {
+  font-size: 18px;
+  color: orange;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 16px;
+}
+
+h6 {
+  font-size: 1em;
+  color: #777;
+}
+
+table {
+  padding: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 14px;
+  font: inherit;
+  border: 0;
+}
+
+tbody {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+table tr {
+  border: 0;
+  border-top: 1px solid #CCC;
+  background-color: white;
+  margin: 0;
+  padding: 0;
+}
+
+table tr:nth-child(2n) {
+  background-color: #F8F8F8;
+}
+
+table tr th, table tr td {
+  font-size: 14px;
+  border: 1px solid #CCC;
+  margin: 0;
+  padding: 0.5em 1em;
+}
+
+table tr th {
+  font-weight: bold;
+  background-color: #F0F0F0;
+}
+
+// 超链接粘贴后都会失效，干脆去掉蓝色底和下划线，让它长得不像超链接
+a {
+  color: black;
+  text-decoration: none;
+}
+
+

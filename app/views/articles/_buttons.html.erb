@@ -8,7 +8,7 @@
 
   <% if admin? %>
     <% if !@article.excellent? %>
-    <%= link_to raw("<i class='fa fa-diamond'></i> 加精"), action_article_path(@article.id, type: 'excellent'), title: "设为精华帖" , method: "post", remote: true %>
+    <%= link_to raw("<i class='fa fa-award'></i> 加精"), action_article_path(@article.id, type: 'excellent'), title: "设为精华帖" , method: "post", remote: true %>
     <% end %>
 
   <% end %>
@@ -22,14 +22,14 @@
         <%= link_to raw("<i class='fa fa-undo'></i>"), action_article_path(@article, type: 'open'), method: 'post', title: "重新开启话题", remote: true, data: { toggle: 'tooltip' } %>
       <% end %>
     <% end %>
-    <%= link_to "", edit_column_article_path(@article.column.id, @article), class: "fa fa-pencil", title: "修改本帖" %>
+    <%= link_to "", edit_column_article_path(@article.column.id, @article), class: "fa fa-edit", title: "修改本帖" %>
     <% if can?(:destroy, @article) %>
       <%= link_to "", article_path(@article.id), method: :delete, remote: true, 'data-confirm': t("common.confirm_delete"), class: "fa fa-trash", title: "删除本帖" %>
       <% end %>
     <% end %>
-    <%= link_to raw("<i class='fa fa-weixin'></i>"), show_wechat_article_path(@article), target: "_blank", title: "微信排版" %>
+    <%= link_to raw("<i class='fab fa-weixin'></i>"), show_wechat_article_path(@article), target: "_blank", title: "微信排版" %>
     <% if editor? or admin? %>
-      <%= link_to "", raw_markdown_topic_path(topic_id: @topic.id), class: "fa fa-file-code-o", title: "markdown" %>
+      <%= link_to "", raw_markdown_topic_path(topic_id: @topic.id), class: "fas fa-file-code", title: "markdown" %>
     <% end %>
   </span>
 </div>

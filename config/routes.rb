@@ -63,7 +63,6 @@ Rails.application.routes.draw do
 
   resources :topics do
     member do
-      post :reply
       post :favorite
       delete :unfavorite
       post :follow
@@ -219,7 +218,6 @@ Rails.application.routes.draw do
   # TODO: Be similar to topic, can we refactor it?
   resources :articles do
     member do
-      post :reply
       post :favorite
       delete :unfavorite
       post :follow
@@ -230,6 +228,7 @@ Rails.application.routes.draw do
       post :action
       get :show_wechat
     end
+
     resources :replies do
       member do
         get :reply_to

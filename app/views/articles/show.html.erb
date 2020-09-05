@@ -48,7 +48,7 @@
           <i class="fa fa-diamond awesome"></i> 本帖已被设为精华帖！
           <% if admin? %>
           <div class="pull-right">
-            <%= link_to icon_tag("close"), action_topic_path(@article.id, type: 'unexcellent'), data: { method: "post", remote: true } %>
+            <%= link_to icon_tag("close"), action_topic_path(@article.id, type: 'normal'), method: :post, remote: true %>
           </div>
           <% end %>
         </div>
@@ -58,7 +58,7 @@
         <%= raw Setting.before_topic_html %>
         <%	if @article.draft %>
             <div class="text-center alert alert-warning">
-              当前状态为 <i class="fa fa-file-text-o"></i> 草稿，仅作者可见，请前往 <%= link_to "", edit_article_path(@article), class: "fa fa-pencil", title: "编辑发布" %> 编辑发布</a>
+              当前状态为 <i class="fa fa-file-text-o"></i> 草稿，仅作者可见，请前往 <%= link_to "", edit_article_path(@article), class: "fa fa-edit", title: "编辑发布" %> 编辑发布</a>
             </div>
         <%	end %>
         <%= @article.body_html %>
@@ -119,8 +119,9 @@
     <% else %>
       <div id="reply" class="card">
         <div class="card-header hide-ios">回帖</div>
+
         <% if not mobile? %>
-        <div id="reply_notice" class="box">
+        <div id="reply_notice" class="box" style="margin: 10px 20px 0;">
           <ul class="helpblock list">
             <li>请注意单词拼写，以及中英文排版，<a href="https://github.com/sparanoid/chinese-copywriting-guidelines">参考此页</a>
             </li>
@@ -131,15 +132,16 @@
             <li>发布框支持本地存储功能，会在内容变更时保存，「提交」按钮点击时清空</li>
           </ul>
         </div>
-        <%	 end %>
-        <div class="card-body">
-        <% if can? :create, Reply %>
-          <%= render 'reply_form' %>
-        <% else %>
-          <div class="alert alert-info">
-            当前设置新手用户不能在 22:00 ~ 9:00 发帖。
-          </div>
         <% end %>
+
+        <div class="card-body">
+          <% if can? :create, Reply %>
+            <%= render 'reply_form' %>
+          <% else %>
+            <div class="alert alert-info">
+              当前设置新手用户不能在 22:00 ~ 9:00 发帖。
+            </div>
+          <% end %>
         </div>
       </div>
     <% end %>

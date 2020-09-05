@@ -61,4 +61,15 @@ class NodeTest < ActiveSupport::TestCase
     node = Node.find_builtin_node(exist_node.id, "Foo")
     assert_equal node, exist_node
   end
+
+  test "is nickname node" do
+    node1 = create(:node, name: '你好')
+    assert_equal false, node1.nickname_node?
+
+    node2 = create(:node, name: '匿名')
+    assert_equal true, node2.nickname_node?
+
+    node3 = create(:node, name: '匿名包裹')
+    assert_equal true, node3.nickname_node?
+  end
 end

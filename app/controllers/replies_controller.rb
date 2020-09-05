@@ -12,9 +12,8 @@ class RepliesController < ApplicationController
     @reply.user_id = current_user.id
 
     # 加入匿名
-    node = Node.find(@topic.node_id)
-    if node.name.index("匿名") && @reply.anonymous == 0
-      @reply.user_id = 12
+    if @topic.belongs_to_nickname_node? && @reply.anonymous == 0
+      @reply.user_id = User::ANONYMOUS_ID
       @reply.real_user_id = current_user.id
     end
 

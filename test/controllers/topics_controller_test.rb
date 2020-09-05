@@ -180,6 +180,36 @@ describe TopicsController do
         assert_equal 200, response.status
       end
     end
+
+    describe "nickname" do
+      let(:nickname_node) { create(:node, name: "匿名") }
+
+      it "can create realname topic" do
+        sign_in user
+        post topics_path, params: { format: :js, topic: { title: "title", body: "body", team_id: team.id, node_id: node.id } }
+        assert_equal 200, response.status
+        assert_equal user, Topic.last.user
+        assert_equal nil, Topic.last.real_user
+      end
+
+      it "should not create nickname topic while saving with draft" do
+        sign_in user
+        nickname_user = create(:user, id: User::ANONYMOUS_ID)
+        post topics_path, params: { format: :js, topic: { title: "title", body: "body", team_id: team.id, node_id: nickname_node.id }, commit: "draft" }
+        assert_equal 200, response.status
+        assert_equal user, Topic.last.user
+        assert_equal nil, Topic.last.real_user
+      end
+
+      it "should create nickname topic while saving without draft" do
+        sign_in user
+        nickname_user = create(:user, id: User::ANONYMOUS_ID)
+        post topics_path, params: { format: :js, topic: { title: "title", body: "body", team_id: team.id, node_id: nickname_node.id } }
+        assert_equal 200, response.status
+        assert_equal nickname_user, Topic.last.user
+        assert_equal user, Topic.last.real_user
+      end
+    end
   end
 
   describe "POST /topics/preview" do

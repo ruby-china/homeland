@@ -25,9 +25,11 @@ describe RepliesController, type: :controller do
   end
 
   describe "POST /topics/:id/replies" do
+    let(:user) { create(:user) }
+    let(:node) { create(:node) }
+    let(:topic) { create(:topic) }
+
     it "should error if save fail" do
-      user = create :user
-      topic = create :topic
       assert_equal false, user.topic_read?(topic)
 
       create :reply, topic: topic
@@ -39,8 +41,6 @@ describe RepliesController, type: :controller do
     end
 
     it "should create reply and set topic read" do
-      user = create :user
-      topic = create :topic
       assert_equal false, user.topic_read?(topic)
 
       sign_in user
@@ -52,6 +52,39 @@ describe RepliesController, type: :controller do
       end
       topic.reload
       assert_equal true, user.topic_read?(topic)
+    end
+
+    describe "nickname logic" do
+      let(:nickname_node) { create(:node, name: "匿名") }
+      let(:nickname_topic) { create(:topic, node: nickname_node) }
+
+      it "realname topic can create realname reply" do
+        sign_in user
+        post topic_replies_path(topic), params: { reply: { body: "content" }, format: :js }
+        assert_equal 200, response.status
+        realname_reply = Reply.last
+        assert_equal true, realname_reply.real_user.nil?
+        assert_equal user, realname_reply.user
+      end
+
+      it "realname topic can not create realname reply " do
+        sign_in user
+        post topic_replies_path(topic), params: { reply: { body: "content", anonymous: 0 }, format: :js }
+        assert_equal 200, response.status
+        realname_reply = Reply.last
+        assert_equal true, realname_reply.real_user.nil?
+        assert_equal user, realname_reply.user
+      end
+
+      it "nickname topic create nickname reply" do
+        sign_in user
+        nickname_user = create(:user, id: User::ANONYMOUS_ID)
+        post topic_replies_path(nickname_topic), params: { reply: { body: "content", anonymous: 0 }, format: :js }
+        assert_equal 200, response.status
+        nickname_reply = Reply.last
+        assert_equal user, nickname_reply.real_user
+        assert_equal nickname_user, nickname_reply.user
+      end
     end
   end
 

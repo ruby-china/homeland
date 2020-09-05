@@ -74,10 +74,7 @@ class TopicsController < ApplicationController
     @topic.user_id = current_user.id
     @topic.node_id = params[:node] || topic_params[:node_id]
     @topic.team_id = ability_team_id
-
-    draft_and_anonymous_prepare
-
-    @topic.save
+    draft_and_anonymous_save
   end
 
   def preview
@@ -101,10 +98,7 @@ class TopicsController < ApplicationController
     @topic.team_id = ability_team_id
     @topic.title = topic_params[:title]
     @topic.body = topic_params[:body]
-
-    draft_and_anonymous_prepare
-
-    @topic.save
+    draft_and_anonymous_save
   end
 
   def destroy
@@ -186,20 +180,19 @@ class TopicsController < ApplicationController
       @has_favorited = current_user.favorite_topic?(@topic)
     end
 
-    def draft_and_anonymous_prepare
-      if params[:commit] and params[:commit] == 'draft'
+    def draft_and_anonymous_save
+      if params[:commit] && params[:commit] == 'draft'
         @topic.draft = true
       else
         @topic.draft = false
       end
 
       # 加入匿名功能
-      if @topic.node_id
-        node = Node.find(@topic.node_id)
-        if node.name.index("匿名") && @topic.draft == false
-          @topic.user_id = 12
-          @topic.real_user_id = current_user.id
-        end
+      if @topic.belongs_to_nickname_node? && @topic.draft == false
+        @topic.user_id = User::ANONYMOUS_ID
+        @topic.real_user_id = current_user.id
       end
+
+      @topic.save
     end
 end

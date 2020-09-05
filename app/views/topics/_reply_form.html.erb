@@ -11,7 +11,7 @@
 
     <div class="pull-right"><a href="/markdown" target="_blank">排版说明</a></div>
 
-    <% if Node.find_by_id(@topic.node_id) && Node.find(@topic.node_id).name.index("匿名") %>
+    <% if @topic.belongs_to_nickname_node? %>
     <span class="help-inline" style="margin-left: 20px;">
       <label>
         <%= f.check_box :anonymous %>  <%= t("topics.real_name") %>

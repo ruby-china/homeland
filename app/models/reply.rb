@@ -5,6 +5,7 @@ class Reply < ApplicationRecord
   include SoftDelete, MarkdownBody, Mentionable, MentionTopic, UserAvatarDelegate
   include Reply::Notify, Reply::Voteable
 
+  belongs_to :real_user, class_name: "User", required: false
   belongs_to :user, counter_cache: true
   belongs_to :topic, touch: true
   belongs_to :target, polymorphic: true, optional: true

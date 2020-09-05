@@ -41,4 +41,8 @@ class Node < ApplicationRecord
       Homeland::Markdown.call(summary)
     end
   end
+
+  def nickname_node?
+    name.index("匿名").present?
+  end
 end

@@ -24,7 +24,7 @@ describe Api::V3::NodesController do
         { "id" => 2, "name" => "ruby" },
         { "id" => 3, "name" => "nodes" },
       ]
-      assert_equal expected, json["nodes"]
+      assert_equal expected, json["nodes"].sort_by { |m| m[:id] }
     end
   end
 

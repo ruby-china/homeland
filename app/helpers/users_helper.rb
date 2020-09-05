@@ -34,7 +34,7 @@ module UsersHelper
     if name.blank?
       name = login
     end
-    content_tag(:span, name, class: 'user-name')
+    content_tag(:span, name, class: "user-name")
   end
 
 

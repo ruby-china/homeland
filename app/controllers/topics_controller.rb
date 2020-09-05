@@ -181,7 +181,7 @@ class TopicsController < ApplicationController
     end
 
     def draft_and_anonymous_save
-      if params[:commit] && params[:commit] == 'draft'
+      if params[:commit] && params[:commit] == "draft"
         @topic.draft = true
       else
         @topic.draft = false

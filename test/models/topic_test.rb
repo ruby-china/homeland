@@ -278,8 +278,8 @@ class TopicTest < ActiveSupport::TestCase
   end
 
   test "belongs to nickname node" do
-    node1 = create(:node, name: '你好')
-    node2 = create(:node, name: '匿名')
+    node1 = create(:node, name: "你好")
+    node2 = create(:node, name: "匿名")
 
     topic1 = create(:topic, node: node1)
     assert_equal false, topic1.belongs_to_nickname_node?

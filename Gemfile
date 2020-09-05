@@ -119,7 +119,7 @@ gem "puma_worker_killer"
 
 group :development do
   gem "pry"
-  gem 'pry-byebug'
+  gem "pry-byebug"
   gem "spring"
   gem "byebug"
 end

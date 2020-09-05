@@ -17,7 +17,7 @@ module Admin
       tip_off_params[:follow_time] = Time.now
 
       # fixme: 比较笨的一种办法，用于防止 follow_result 为空
-      if tip_off_params[:follow_result] == ''
+      if tip_off_params[:follow_result] == ""
         redirect_to(edit_admin_tip_off_path(@tipOff), alert: "处理失败，请检查必填字段是否都已填上")
         return
       end
@@ -25,7 +25,7 @@ module Admin
       if @tipOff.update(tip_off_params)
         # 给管理员群发通知
         admin_users = User.admin_users
-        default_note = {notify_type: "admin_follow_tip_off", target_type: TipOff,
+        default_note = { notify_type: "admin_follow_tip_off", target_type: TipOff,
                         target_id: @tipOff.id, actor_id: current_user.id
         }
         Notification.bulk_insert(set_size: 100) do |worker|
@@ -54,9 +54,8 @@ module Admin
 
     private
 
-    def set_tip_off
-      @tipOff = TipOff.find(params[:id])
-    end
-
+      def set_tip_off
+        @tipOff = TipOff.find(params[:id])
+      end
   end
 end

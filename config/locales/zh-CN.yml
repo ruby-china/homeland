@@ -113,6 +113,10 @@
         section_id: 分类
         sort: 排序
         summary: 简介
+      column:
+        slug: 专栏别名
+        name: 专栏名称
+        cover: 专栏封面
     errors:
       models:
         user:

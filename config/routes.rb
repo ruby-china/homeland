@@ -116,6 +116,13 @@ Rails.application.routes.draw do
       end
     end
     resources :nodes
+    resources :columns do
+      member do
+        get :ban
+        post :block
+        post :unban
+      end
+    end
     resources :sections
     resources :users, constraints: { id: /[#{User::LOGIN_FORMAT}]*/ } do
       member do
@@ -173,6 +180,7 @@ Rails.application.routes.draw do
         end
         member do
           get :topics
+          get :columns
           get :replies
           get :favorites
           get :followers
@@ -195,6 +203,16 @@ Rails.application.routes.draw do
     mount ExceptionTrack::Engine, at: "exception-track"
   end
 
+  resources :columns do
+    resources :articles
+    member do
+      post :follow
+      delete :unfollow
+      post :block
+      post :unblock
+    end
+  end
+
   mount Notifications::Engine, at: "notifications"
 
   # WARRING! 请保持 User 的 routes 在所有路由的最后，以便于可以让用户名在根目录下面使用，而又不影响到其他的 routes
@@ -208,6 +226,7 @@ Rails.application.routes.draw do
         # User only
         get :topics
         get :replies
+        get :columns
         get :favorites
         get :blocked
         post :block

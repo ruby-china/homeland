@@ -1,6 +1,5 @@
 "en":
   topics:
-    real_name: "Real Name"
     new_topic: "New Topic"
     edit_topic: "Edit Topic"
     no_replies: "No Reply at the moment."
@@ -28,3 +27,8 @@
     topic_was_deleted: "[Topic was deleted]"
     have_no_new_reply: "No new activites since your last read."
     have_no_avatar: "You can't create a new Topic, before you upload a avatar."
+    real_name: "not Anonymous"
+    exposed_to_author_only: "Author only"
+    cannot_be_shared: "All right reserved, any unauthorized reproduction or transfer is prohibitted"
+    from_column: "from %{user}'s column"
+    article_public: "published to community"

@@ -1,0 +1,31 @@
+'zh-TW':
+  simple_form:
+    hints:
+      user:
+        location: "請用中文填寫所在城市"
+        email: "保存以后就不可以改了哦！使用 github 登录的同学在修改邮箱之后，请前往该邮箱进行激活认证，否则修改不会生效，后续可以通过该邮箱找回密码，实现邮箱地址+密码登录"
+      doorkeeper_application:
+        level: "應用程序等級，影響 OAuth 2 accessToken 的有效期, 可選 [0 - 1 天 | 1 - 7 天 | 2 - 14 天 | 3 - 30 天]"
+    labels:
+      user:
+        name: "名字"
+        login: "用戶名"
+        email: "Email"
+        email_public: "公開 Email"
+        avatar: "頭像"
+        location: "城市"
+        bio: "個人介紹"
+        password: "密碼"
+        password_confirmation: "確認密碼"
+        website: "個人主頁"
+        last_logined_at: "上次登錄時間"
+        tagline: "簽名"
+        state: "狀態"
+        verified: "信任用戶"
+        company: "公司"
+        github: "GitHub"
+        remember_me: "記住登陸狀態（60 天）"
+        current_password: "舊密碼"
+    placeholders:
+      user:
+        yourname: "帳號"

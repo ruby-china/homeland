@@ -1,31 +1,31 @@
 en:
   simple_form:
-    "yes": 'Yes'
-    "no": 'No'
-    required:
-      text: 'required'
-      mark: '*'
-      # You can uncomment the line below if you need to overwrite the whole required html.
-      # When using html, text and mark won't be used.
-      # html: '<abbr title="required">*</abbr>'
-    error_notification:
-      default_message: "Please review the problems below:"
-    # Examples
-    # labels:
-    #   defaults:
-    #     password: 'Password'
-    #   user:
-    #     new:
-    #       email: 'E-mail to sign in.'
-    #     edit:
-    #       email: 'E-mail.'
-    # hints:
-    #   defaults:
-    #     username: 'User name to sign in.'
-    #     password: 'No special characters, please.'
-    # include_blanks:
-    #   defaults:
-    #     age: 'Rather not say'
-    # prompts:
-    #   defaults:
-    #     age: 'Select your age'
+    hints:
+      user:
+        location: "Please input city with chinese"
+        email: "Can't change after saved. If github login is used, please go to active your account using the email address after change email. Or it will not work. Later you can use the email to get your password."
+      doorkeeper_application:
+        level: "Application level, this value will effect OAuth 2 accessToken expires, [0 - 1 day | 1 - 7 days | 2 - 14 days | 3 - 30 days]"
+    labels:
+      user:
+        name: "Name"
+        login: "Login name"
+        email: "Email"
+        email_public: "Public Email"
+        avatar: "Avatar"
+        location: "City"
+        bio: "Bio"
+        password: "Password"
+        password_confirmation: "Password Confirmation"
+        website: "Personal Website"
+        last_logined_at: "Last signed in at"
+        tagline: "Tagline"
+        state: "Status"
+        verified: "Verified"
+        company: "Company"
+        github: "GitHub"
+        remember_me: "Remember me (2 months)"
+        current_password: "Current Password"
+    placeholders:
+      user:
+        yourname: "yourname"

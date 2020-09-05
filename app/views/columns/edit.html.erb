@@ -1,0 +1,61 @@
+<% if !mobile? %>
+  <div class="col-md-3 sidebar">
+
+    <div class="panel panel-default">
+      <div class="panel-heading">已有专栏</div>
+      <div class="panel-body">
+        <div class="panel-body blog-info">
+          <% if @column_already_have.blank? %>
+            <div class="alert alert-success" role="alert">你还未开通属于自己的专栏！</div>
+          <% else %>
+            <% @column_already_have.each do |column| %>
+              <div class="column media column-<%= column.id %>">
+                <div class="avatar media-left">
+                  <%= image_tag(column.cover.url, class: "column-cover") %>
+                </div>
+                <div class="infos media-body">
+                  <div class="title media-heading column-heading">
+                    <%= link_to(main_app.column_path(column), title: column.name) do %>
+                      <%= column.name %>
+                    <% end %>
+                  </div>
+                </div>
+                <div class="count media-right">
+                <span class="badge">
+                  <%= column.articles.withoutDraft.count %> 篇
+                  </span>
+                </div>
+              </div>
+            <%end %>
+          <%end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <div class="move-page-buttons">
+    <a href="#" class="btn btn-block btn-sm btn-move-page" data-type="top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#" class="btn btn-block btn-sm btn-move-page" data-type="bottom"><i class="fa fa-arrow-down"></i></a>
+  </div>
+<% end %>
+<div class="col-md-9">
+  <div class="panel panel-default">
+    <div class="panel-heading">编辑专栏</div>
+    <div class="panel-body">
+      <%= simple_form_for(@column, html: { method: :patch, enctype:  "multipart/form-data" }) do |f| %>
+        <%= render 'shared/error_messages', target: @column %>
+        <fieldset>
+          <%= f.input :name, input_html: { disabled: true } %>
+          <%= f.input :slug, input_html: { disabled: true } %>
+          <%= f.input :description %>
+          <%= f.input :cover %>
+          <img class='column-edit-image' src="<%= @column.cover_url %>">
+          <div class="form-actions">
+            <%= f.submit t("users.update_column"), class: "btn btn-primary", 'data-disable-with' => t("common.saving") %>
+          </div>
+        </fieldset>
+      <% end %>
+
+    </div>
+  </div>
+</div>

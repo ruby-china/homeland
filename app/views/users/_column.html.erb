@@ -1,0 +1,19 @@
+<div class="col-sm-6 col-md-4">
+  <div class="thumbnail single-column">
+    <img class='column-cover-image' src="<%= column.cover_url %>">
+    <div class="caption">
+      <h3><%= column.name %></h3>
+      <div class="column-desc"><i><%= column.description %></i></div>
+      <p>
+        <a href="<%=column_path(column) %>" class="btn btn-primary <%= 'disabled' if !column.active%>" role="button">进入该专栏</a>
+        <% if current_user && @user.id == current_user.id %>
+          <a href="<%=edit_column_path(column) %>" class="btn btn-default <%= 'disabled' if !column.active%>" role="button">编辑专栏</a>
+        <% end %>
+      </p>
+    </div>
+    <% if !column.active%>
+      <div class="label">禁用</div>
+    <% end %>
+  </div>
+
+</div>

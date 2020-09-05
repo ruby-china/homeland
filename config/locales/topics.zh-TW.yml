@@ -30,3 +30,8 @@
     more_like_this: "相關帖子"
     node_recent_topics: "節點下其他話題"
     have_no_avatar: "你還未設置頭像，不能創建新帖子。"
+    real_name: "显示名字"
+    exposed_to_author_only: "僅樓主可見"
+    cannot_be_shared: "原创声明：保留所有权利，禁止转载"
+    from_column: "来自 %{user} 的专栏"
+    article_public: "是否允許推送到社區？"

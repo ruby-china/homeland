@@ -1,0 +1,3 @@
+$('#ban-modal').remove();
+$('body').append("<%= j(render('ban', topic: @topic)) %>");
+$('#ban-modal').modal();

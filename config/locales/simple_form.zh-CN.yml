@@ -1,0 +1,46 @@
+'zh-CN':
+  simple_form:
+    hints:
+      user:
+        location: "请用中文填写所在城市"
+        email: "保存以后就不可以改了哦！使用 github 登录的同学在修改邮箱之后，请前往该邮箱进行激活认证，否则修改不会生效，后续可以通过该邮箱找回密码，实现邮箱地址+密码登录"
+      team_user:
+        login: '输入你要邀请的人的用户'
+        role: '选择此人在组里面的权限，Owner 可以管理'
+      topic:
+        team_id: "选择以后，此话题会显示组织的名称，同时组织主页也会列出"
+      section:
+        sort: "数字较大的将会排在前面"
+      node:
+        sort: "数字较大的将会排在前面"
+        summary: "支持 Markdown 语法"
+      doorkeeper_application:
+        level: "应用程序等级，影响 OAuth 2 accessToken 的有效期, 可选 [0 - 1 天 | 1 - 7 天 | 2 - 14 天 | 3 - 30 天]"
+    labels:
+      column:
+        name: "专栏名称"
+        slug: "别名"
+        description: "专栏介绍"
+        cover: "专栏封面"
+      user:
+        name: "名字"
+        login: "用户名"
+        email: "Email"
+        email_public: "公开 Email"
+        avatar: "头像"
+        location: "城市"
+        bio: "个人介绍"
+        password: "密码"
+        password_confirmation: "确认密码"
+        website: "个人主页"
+        last_logined_at: "上次登录时间"
+        tagline: "签名"
+        state: "状态"
+        verified: "信任用户"
+        company: "公司"
+        github: "GitHub"
+        remember_me: "记住登录状态（60 天）"
+        current_password: "旧密码"
+    placeholders:
+      user:
+        yourname: "帐号"

@@ -35,6 +35,9 @@ class Setting < RailsSettings::Base
     ban_reasons
     topic_create_limit_interval
     topic_create_hour_limit_count
+    column_max_count
+    column_user_white_list
+    column_enabled
     allow_change_login
     sign_up_daily_limit
     use_recaptcha
@@ -144,6 +147,11 @@ class Setting < RailsSettings::Base
   field :newbie_notices, default: ""
   field :tips, default: [], type: :array, separator: /[\n]+/
   field :editor_languages, default: %w[rb go js py java rs php css html yml json xml], type: :array, separator: /[\s,]+/
+
+  # = Column
+  field :column_max_count, default: 2, type: :integer
+  field :column_enabled, default: false, type: :string
+  field :column_user_white_list, default: [], separator: SEPARATOR_REGEXP
 
   # = ReCaptcha
   field :use_recaptcha, default: false, type: :boolean

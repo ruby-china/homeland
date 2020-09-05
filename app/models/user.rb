@@ -23,6 +23,7 @@ class User < ApplicationRecord
   has_one :profile, dependent: :destroy
 
   has_many :topics, dependent: :destroy
+  has_many :columns, dependent: :destroy
   has_many :replies, dependent: :destroy
   has_many :authorizations, dependent: :destroy
   has_many :notifications, dependent: :destroy
@@ -121,6 +122,10 @@ class User < ApplicationRecord
 
   def send_welcome_mail
     UserMailer.welcome(id).deliver_later
+  end
+
+  def user_column_count_left
+    Setting.column_max_count.to_i - self.columns.size
   end
 
   def profile_url

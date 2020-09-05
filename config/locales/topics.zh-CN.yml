@@ -1,6 +1,5 @@
 "zh-CN":
   topics:
-    real_name: "实名"
     new_topic: "发布新话题"
     edit_topic: "修改话题"
     no_replies: "暂无回复。"
@@ -32,3 +31,8 @@
     more_like_this: "相关话题"
     node_recent_topics: "节点下其他话题"
     have_no_avatar: "你还未设置头像，不能发布新话题。"
+    real_name: "显示名字"
+    exposed_to_author_only: "仅楼主可见"
+    cannot_be_shared: "原创声明：保留所有权利，禁止转载"
+    from_column: "来自 %{user} 的专栏"
+    article_public: "是否允许推送到社区？"

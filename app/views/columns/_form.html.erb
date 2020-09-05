@@ -1,0 +1,12 @@
+<%= simple_form_for(@column, url: columns_path, html: { method: :post, enctype:  "multipart/form-data" }) do |f| %>
+    <%= render 'shared/error_messages', target: @column %>
+    <fieldset>
+        <%= f.input :name %>
+        <%= f.input :slug %>
+        <%= f.input :description %>
+        <%= f.input :cover %>
+        <div class="form-actions">
+            <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving") %>
+        </div>
+    </fieldset>
+<% end %>

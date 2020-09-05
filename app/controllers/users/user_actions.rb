@@ -8,12 +8,16 @@ module Users
       before_action :authenticate_user!, only: %i[block unblock blocked follow unfollow]
       before_action :only_user!, only: %i[topics replies favorites
                                           block unblock follow unfollow
-                                          followers following calendar reward]
+                                          followers following calendar reward columns]
     end
 
     def topics
       @topics = @user.topics.without_draft.fields_for_list.recent
       @topics = @topics.page(params[:page])
+    end
+
+    def columns
+      @columns = @user.columns
     end
 
     def replies

@@ -90,6 +90,7 @@
     nodes: "节点"
     my_home_page: "我的主页"
     edit_account_path: "个人资料设置"
+    my_columns_path: "我的专栏"
     likes: "我的收藏"
     teams: "公司／组织"
   comments:
@@ -145,6 +146,8 @@
     share_allow_sites: "分享目标，可选 [twitter,weibo,facebook,wechat,google_plus,douban,tumblr,pinterest,linkedin,email,reddit,hacker_news]"
     editor_languages: 编辑器插入代码语言可选项（一行一个），填写文件扩展名比如："rb, go, php, js, html"
     sorted_plugins: 插件排序，调整这个可以影响插件在导航栏的顺序。请用换行或逗号间隔，比如："jobs, wiki, press, site"。
+    column_user_white_list: "专栏功能白名单列表，写入可使用专栏功能的用户名称（一行一个）。非白名单用户看不到创建专栏入口。"
+    column_enabled: "专栏功能开关。若值不为空，表示开。关闭时用户可编辑已有专栏，但不能新增"
     timezone: "日期时间显示时区，默认: UTC"
   pagination:
     next: "下一页"

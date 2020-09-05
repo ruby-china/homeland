@@ -1,0 +1,30 @@
+<% content_for :sitemap do %>
+  <span class="current"><%= t("admin.menu.columns")%></span>
+<% end %>
+
+<table class="table table-bordered table-striped table-condensed">
+  <tr class="head">
+    <th class="first">#</th>
+    <th>名称</th>
+    <th>作者</th>
+    <th>帖子数量</th>
+    <th>解封时间</th>
+    <th class="opts">action</th>
+  </tr>
+
+<% @columns.each do |column| %>
+  <tr>
+    <td class="first"><%= column.id %></td>
+    <td><%= link_to column.name, column_path(column) %></td>
+    <td><%= column.user.login %></td>
+    <td><%= column.articles_count %></td>
+    <% if column.unseal_time %>
+      <td class="alert-danger"><%= column.unseal_time.to_date %></td>
+      <td><%= link_to '解封', unban_admin_column_path(column.id), 'data-confirm' => 'Are you sure?', method: :post, class: "fa fa-folder-open" %></td>
+  <% else %>
+      <td class="alert-success">未屏蔽</td>
+      <td><%= link_to '屏蔽', ban_admin_column_path(column.id), remote: true,  method: :get, class: "fa fa-ban" %></td>
+  <% end %>
+    </tr>
+<% end %>
+</table>

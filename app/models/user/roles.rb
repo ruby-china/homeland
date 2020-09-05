@@ -19,6 +19,17 @@ class User
       self.admin? || self.maintainer? || self.vip?
     end
 
+    # 是否可以发专栏
+    def column_editor?
+      # 开关为关时，不能发专栏
+      return false if Setting.column_enabled.blank?
+      # 只有白名单用户可以发专栏
+      return false if Setting.column_user_white_list.nil?
+      if Setting.column_user_white_list.split(Setting::SEPARATOR_REGEXP).include? login
+        return true
+      end
+    end
+
     # 回帖大于 150 的才有酷站的发布权限
     def site_editor?
       self.admin? || self.maintainer? || replies_count >= 100

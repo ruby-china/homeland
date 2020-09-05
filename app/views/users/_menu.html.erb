@@ -1,5 +1,6 @@
 <%= render_list class: "users-menu nav nav-tabs" do |li|
   li << link_to(t("users.menu.profile"), user_path(@user), class: "nav-link")
+  li << link_to(t("users.menu.columns"), columns_user_path(@user), class: "nav-link")
   li << link_to(t("users.menu.topics"), topics_user_path(@user), class: "nav-link")
   li << link_to(t("users.menu.replies"), replies_user_path(@user), class: "nav-link")
   li << link_to(t("users.menu.favorites"), favorites_user_path(@user), class: "nav-link hide-ios hidden-mobile")

@@ -39,6 +39,7 @@ class Topic < ApplicationRecord
   scope :without_node_ids,   ->(ids) { exclude_column_ids("node_id", ids) }
   scope :without_users,      ->(ids) { exclude_column_ids("user_id", ids) }
   scope :exclude_column_ids, ->(column, ids) { ids.empty? ? all : where.not(column => ids) }
+  scope :without_columns, ->(ids) { where.not("column_id" => ids).or(where(column_id: nil)) }
 
   scope :without_nodes, lambda { |node_ids|
     ids = node_ids + Topic.topic_index_hide_node_ids
@@ -46,6 +47,7 @@ class Topic < ApplicationRecord
     exclude_column_ids("node_id", ids)
   }
   scope :without_draft, -> { where(draft: false) }
+  scope :with_public_articles, -> { where(article_public: true) }
 
   before_save { self.node_name = node.try(:name) || "" }
   before_create { self.last_active_mark = Time.now.to_i }

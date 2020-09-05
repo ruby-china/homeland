@@ -1,0 +1,47 @@
+<div class="row">
+
+  <%= render '/shared/article_sidebar' %>
+  <% if mobile? %>
+    <div class="move-page-buttons">
+      <a href="#" class="btn btn-block btn-sm btn-move-page" data-type="top"><i class="fa fa-arrow-up"></i></a>
+      <a href="#" class="btn btn-block btn-sm btn-move-page" data-type="bottom"><i class="fa fa-arrow-down"></i></a>
+    </div>
+  <% end %>
+
+  <div class="col-md-9 article-content">
+    <div class="topics panel panel-default">
+    <% if  @articles.count > 0 %>
+      <% if @column.articles %>
+        <div class="panel-heading node-header">
+          <ul class="filter nav nav-pills">
+            最新文章
+          </ul>
+        </div>
+      <%end%>
+      <div class="panel-body item-list">
+
+        <%= render partial: '/articles/article', collection: @articles, locals: { suggest: false } %>
+
+      </div>
+
+      <div class="panel-footer clearfix">
+        <%= paginate @articles, total_pages: Article.total_pages %>
+      </div>
+    </div>
+
+    <% else %>
+        <div class="panel-heading node-header">
+          <ul class="filter nav nav-pills">
+            暂时没有文章或页数已超过最后一页
+          </ul>
+        </div>
+        <% if current_user == @column.user %>
+          <div class="column">
+            <div class="bs-dropzone">
+              <%= link_to " 写文章", new_column_article_path(@column.id), class: "fa fa-pencil", title: "编辑发布" %>
+            </div>
+          </div>
+        <% end %>
+    <%end%>
+      </div>
+</div>

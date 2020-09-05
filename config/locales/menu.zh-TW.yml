@@ -130,6 +130,8 @@
     share_allow_sites: "分享目标，可选 [twitter,weibo,facebook,wechat,google_plus,douban,tumblr,pinterest,linkedin,email,reddit,hacker_news]"
     editor_languages: 編輯器插入代碼語言可選項（一行一個），填寫文件擴展名比如："rb, go, php, js, html"
     sorted_plugins: 插件排序，調整這個可以影響插件在導航欄的順序。請用換行或逗號間隔，比如："jobs, wiki, press, site"。
+    column_user_white_list: "專欄功能白名單列表，寫入可使用專欄功能的用戶名稱（一行一個）。非白名單用戶看不到創建專欄入口。"
+    column_enabled: "專欄功能開關。若值不為空，表示開。關閉時用戶可編輯已有專欄，但不能新增"
     timezone: "日期時間顯示時區，默認: UTC"
   pagination:
     next: "下一頁"

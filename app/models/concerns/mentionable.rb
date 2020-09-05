@@ -60,6 +60,7 @@ module Mentionable
             target_type: self.class.name,
             target_id: self.id
           }
+
           if self.class.name == "Reply"
             note[:second_target_type] = "Topic"
             note[:second_target_id] = self.send(:topic_id)

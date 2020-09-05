@@ -1,0 +1,8 @@
+<% title_tag t('topics.edit_article') %>
+
+<div class="card">
+  <div class="card-header hide-ios"><%= t('topics.edit_article') %> <span class="pull-right hidden-xs"><%= topic_title_tag(@article) %></span></div>
+  <div class="panel-body">
+    <%= render 'form' %>
+  </div>
+</div>

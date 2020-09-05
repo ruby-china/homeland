@@ -152,6 +152,18 @@ class User < ApplicationRecord
     "#{login} (#{name})"
   end
 
+  def has_draft?
+    !self.topics.where(draft: true).empty?
+  end
+
+  def draft_size
+    self.topics.where(draft: true).size
+  end
+
+  def my_drafts
+    self.topics.where(draft: true)
+  end
+
   # 软删除
   def soft_delete
     self.state = "deleted"

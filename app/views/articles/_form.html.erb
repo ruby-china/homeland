@@ -1,0 +1,52 @@
+<%= simple_form_for @article, remote: true, html: { class: "form", tb: 'edit-article' } do |f| %>
+  <%= render "shared/error_messages", target: @article %>
+  <%= f.hidden_field :node_id, value: "1" %>
+  <%= f.hidden_field :column_id, value: @article.column_id %>
+
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-btn">
+        <button type="button" class="btn btn-default" id="node-selector-button"
+                data-toggle="modal" data-target="#node-selector"><%= @article.column&.name || '选择专栏...' %></button>
+      </div>
+      <%= f.text_field :title, class: "form-control", placeholder: "在这里填写标题" %>
+    </div>
+  </div>
+  <span class="help-inline">
+      <label>
+        <%= f.check_box :cannot_be_shared %>  <%= t("topics.cannot_be_shared")%>
+      </label>
+    </span>
+    <div id="reply_notice" class="box hide-ios">
+      <ul class="helpblock list">
+        <li>请注意单词拼写，以及中英文排版，<a href="https://github.com/sparanoid/chinese-copywriting-guidelines">参考此页</a>
+        </li>
+        <li>支持 Markdown 格式, <strong>**粗体**</strong>、~~删除线~~、<code>`单行代码`</code>, 更多语法请见这里 <a href="/markdown">Markdown 语法</a>
+        </li>
+        <li>支持表情，使用方法请点击☺</li>
+        <li>上传图片, 支持拖拽和剪切板黏贴上传, 格式限制 - jpg, png, gif</li>
+        <li>发布框支持本地存储功能，会在内容变更时保存，「提交」按钮点击时清空</li>
+      </ul>
+    </div>
+
+  <%= render "/shared/editor_toolbar" %>
+
+  <div class="form-group">
+    <%= f.text_area :body, class: "topic-editor form-control closewarning", rows: 20 %>
+  </div>
+
+  <div class="form-group hide-ios">
+    <label for="article_public"><%= f.check_box :article_public %> <%= t("topics.article_public")%></label>
+  </div>
+
+  <div class="form-group hide-ios">
+    <%= f.submit t("common.save"), id: 'publish', class: "btn btn-primary col-xs-2", 'data-disable-with' => t("common.saving"), 'data-tb' => "save-topic" %>
+    <% if @article.draft or @article.new_record? %>
+      &nbsp;&nbsp;or&nbsp;&nbsp;
+      <%=	 button_tag  t("common.save_as_draft"), name: 'commit',id: 'save_as_draft', value: 'draft', type: 'submit', class: "btn btn-info", 'data-disable-with' => t("common.saving_as_draft"), 'data-tb' => "save-topic-draft"  %>
+    <%	end %>
+
+    <div class="pull-right hide-ios"><a href="/markdown" target="_blank"><i class="fa fa-tip"></i> 排版说明</a></div>
+  </div>
+
+<% end %>

@@ -1,0 +1,43 @@
+<div class="card-header media clearfix">
+  <div class="media-body">
+    <h1 class="media-heading">
+      <%= render_column_name(article.column.name, article.column) %>
+      <span class="title">
+        <%= article.title %>
+      </span>
+      <%= topic_close_tag(article) %>
+    </h1>
+    <% content_for :header do %>
+      <div class="navbar-nav">
+        <div class="navbar-topic-title">
+          <a href="#" class="topic-title pull-left" title="<%= article.title %>" data-type="top">
+            <h1><span class="node"><%= article.column.name %></span> <span class="title"><%= article.title %><%= topic_close_tag(article) %></span></h1>
+          </a>
+        </div>
+      </div>
+    <% end %>
+    <div class="info">
+      <%= user_name_tag(article.user, data: { author: true }) %>
+       ·
+      <%= timeago(article.created_at) %>
+      <% if !article.last_reply_user_login.blank? %>
+      <span class="hidden-mobile">
+         ·
+        <%= t("common.last_by")%> <%= user_name_tag(article.last_reply_user) %> <%= raw t("common.reply_at", time: timeago(article.replied_at))%>
+      <% end %>
+      </span>
+      <% if !article.modified_admin.blank? %>
+         ·
+        <%= t("common.modified_by_admin")%> <%= user_name_tag(article.modified_admin) %>
+      <% end %>
+       ·
+      <%= article.hits %> <%= t("common.read_times")%>
+    </div>
+  </div>
+
+  <% if mobile? %>
+  <div class="avatar media-right">
+    <%= user_avatar_tag(@article.user, :md) %>
+  </div>
+  <%end%>
+</div>

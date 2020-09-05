@@ -1,0 +1,7 @@
+<% if @article.errors.empty? %>
+  <% flash[:notice] = t('topics.create_article_success') %>
+  Turbolinks.visit('<%= article_path(@article.id) %>');
+<% else %>
+  $('form[tb="edit-article"] .alert').remove();
+  $('form[tb="edit-article"]').prepend('<%= j render("shared/error_messages", target: @article) %>');
+<% end %>

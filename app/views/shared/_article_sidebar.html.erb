@@ -1,0 +1,92 @@
+<div class="article-sidebar sidebar  col-md-3<%= ' hide-ios' if turbolinks_app? && action_name != 'show' %>" id='sidebar'>
+  <div class="card">
+    <div class="card-body">
+      <div class="panel-body text-center topic-author-box blog-info">
+
+        <div class="media  hidden-mobile">
+
+          <div class="media-body text-left">
+            <h4 class="media-heading">作者</h4>
+            <div class="item">
+              <%= user_name_tag(@user) %>
+            </div>
+          </div>
+          <div class="avatar media-right">
+            <div class='image'><%= user_avatar_tag(@user, :md, link: false) %></div>
+          </div>
+          <hr>
+        </div>
+        <%= link_to column_path(@column), class: "" do %>
+        <div class="image blog-cover">
+          <img class='avatar img-thumbnail' src="<%= @column.cover_url %>">
+        </div>
+        <div class="blog-name">
+          <h4>
+
+              <%= @column.name %>
+
+          </h4>
+        </div>
+            <% end %>
+        <div class="blog-description">
+          <%= @column.description %>
+        </div>
+
+        <div class="follow-info row hide-ios">
+
+          <div class="col-sm-4 articles">
+            <span class="counter"><%= @column.articles.without_draft.count %></span>
+            <span class="text">文章</span>
+          </div>
+
+          <div class="col-sm-4 excellent">
+            <span class="counter"><%=@column.articles.excellent.count %></span>
+            <span class="text">精华</span>
+          </div>
+
+          <div class="col-sm-4 followers" data-login="<%= @column.slug %>">
+            <span class="counter"><%=@column.followers_count %></span>
+            <span class="text">粉丝</span>
+          </div>
+
+        </div>
+
+        <hr>
+
+        <% if @column.user == current_user %>
+          <a class="btn btn-default btn-block <%= 'disabled' if !@column.active%>" href="<%= edit_column_path @column %>">
+            <i class="fa fa-edit"></i> 编辑专栏
+          </a>
+          <% if current_user.column_editor? %>
+            <a class="btn btn-primary btn-block <%= 'disabled' if !@column.active%>" href="<%= new_column_article_path @column.id %>">
+              <i class="fa fa-new"></i> 新增文章
+            </a>
+          <% end %>
+        <% end %>
+
+        <% if !owner? @user %>
+          <div class="buttons row">
+            <div class="col-xs-6">
+              <%= follow_column_tag(@column) %>
+            </div>
+
+            <div class="col-xs-6">
+              <%= block_column_tag(@column) %>
+            </div>
+          </div>
+
+        <% end %>
+
+        <% if owner?(@user) && current_user && current_user.has_draft? %>
+          <div class="text-center panel panel-default alert alert-warning draft-box hide-ios">
+            <div class="panel-body">
+              <%= link_to  drafts_user_path(@user) do %>
+                <i class="fa fa-file-text-o"></i> 草稿 <%=	 current_user.draft_size %> 篇
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

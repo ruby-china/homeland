@@ -1,0 +1,38 @@
+<% cache([article, article.user_avatar_raw, suggest]) do %>
+<div class="topic media topic-<%= article.id %>">
+
+  <div class="infos media-body">
+    <div class="title media-heading">
+      <%= link_to(main_app.article_path(article), title: article.title) do %>
+        <%= article.title %>
+      <% end %>
+      <% if suggest %>
+        <i class="fa fa-thumb-tack" title="置顶"></i>
+      <% end %>
+      <%= topic_excellent_tag(article) %>
+      <%= topic_close_tag(article) %>
+    </div>
+    <div class="info">
+      创建于 <%= timeago(article.created_at) %>
+      <% if !article.last_reply_user_login.blank? %>
+      <span class="hidden-mobile">
+         ·
+        <%= t("common.last_by")%> <%= user_name_tag(article.last_reply_user) %> <%= raw t("common.reply_at", time: timeago(article.replied_at))%>
+      <% end %>
+      </span>
+      <% if !article.modified_admin.blank? %>
+        ·
+        <%= t("common.modified_by_admin")%> <%= user_name_tag(article.modified_admin) %>
+      <% end %>
+
+      <% if article.hits > 0 %>
+      ·
+      <%= article.hits %> <%= t("common.read_times")%>
+      <% end %>
+      <% if article.replies_count > 0 %>
+        · <%= link_to("#{article.replies_count} 个回复","#{main_app.article_path(article)}#reply-#{article.last_reply_id}", class: "state-false") %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% end %>

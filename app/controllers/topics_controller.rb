@@ -5,8 +5,8 @@ class TopicsController < ApplicationController
 
   before_action :authenticate_user!, only: %i[new edit create update destroy
                                               favorite unfavorite follow unfollow
-                                              action favorites]
-  load_and_authorize_resource only: %i[new edit create update destroy favorite unfavorite follow unfollow]
+                                              action favorites raw_markdown]
+  load_and_authorize_resource only: %i[new edit create update destroy favorite unfavorite follow unfollow raw_markdown]
   before_action :set_topic, only: %i[edit update destroy follow unfollow action ban]
 
   def index
@@ -55,6 +55,29 @@ class TopicsController < ApplicationController
 
     check_current_user_status_for_topic
   end
+
+  def show_wechat
+    @topic = Topic.unscoped.includes(:user).find(params[:id])
+    if @topic.deleted?
+      render_404
+      return
+    end
+
+    @node = @topic.node
+    render template: "topics/show_wechat", handler: [:erb], layout: 'wechat'
+  end
+
+  def raw_markdown
+    @topic = Topic.unscoped.includes(:user).find(params[:id])
+    if @topic.deleted?
+      render_404
+      return
+    end
+
+    @node = @topic.node
+    render template: "topics/raw_markdown"
+  end
+
 
   def new
     @topic = Topic.new(user_id: current_user.id)

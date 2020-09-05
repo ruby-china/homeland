@@ -13,6 +13,51 @@
 @import "toc";
 @import "highlight";
 @import "~homeland/dark-mode";
+@import "columns";
+
+.label-legal {
+  font-size: 13px;
+  padding: 10px 15px;
+
+  a {
+    color: #aAa5a4;
+  }
+}
+
+.help-inline {
+  label {
+    margin: 0;
+
+    input {
+      position: relative;
+      top: 2px;
+    }
+  }
+}
+
+div#reply_notice {
+  background-color: #fafafa;
+  color: #333;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 0.25rem;
+
+  a {
+    color: #0069D6 !important;
+    text-decoration: none !important;
+  }
+
+  .helpblock.list {
+    padding: 0;
+    list-style: none;
+    margin: 0;
+
+    li {
+      line-height: 30px;
+      margin-bottom: 0px;
+    }
+  }
+}
 
 .page-topics {
   .navbar-fixed-active {

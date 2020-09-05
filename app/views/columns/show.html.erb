@@ -9,34 +9,34 @@
   <% end %>
 
   <div class="col-md-9 article-content">
-    <div class="topics panel panel-default">
+    <div class="topics card">
     <% if  @articles.count > 0 %>
       <% if @column.articles %>
-        <div class="panel-heading node-header">
+        <div class="card-header node-header">
           <ul class="filter nav nav-pills">
             最新文章
           </ul>
         </div>
       <%end%>
-      <div class="panel-body item-list">
+      <div class="card-body item-list">
 
         <%= render partial: '/articles/article', collection: @articles, locals: { suggest: false } %>
 
       </div>
 
-      <div class="panel-footer clearfix">
+      <div class="card-footer clearfix">
         <%= paginate @articles, total_pages: Article.total_pages %>
       </div>
     </div>
 
     <% else %>
-        <div class="panel-heading node-header">
+        <div class="card-header node-header">
           <ul class="filter nav nav-pills">
             暂时没有文章或页数已超过最后一页
           </ul>
         </div>
         <% if current_user == @column.user %>
-          <div class="column">
+          <div class="card-body">
             <div class="bs-dropzone">
               <%= link_to " 写文章", new_column_article_path(@column.id), class: "fa fa-pencil", title: "编辑发布" %>
             </div>

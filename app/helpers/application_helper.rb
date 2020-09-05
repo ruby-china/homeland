@@ -34,6 +34,11 @@ module ApplicationHelper
     user.admin?
   end
 
+  def editor?(user = nil)
+    user ||= current_user
+    user.try(:editor?)
+  end
+
   def wiki_editor?(user = nil)
     user ||= current_user
     return false if user.blank?

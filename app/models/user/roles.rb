@@ -53,6 +53,16 @@ class User
       end
     end
 
+    # 是否可以编辑帖子
+    def editor?
+      return false if Setting.editor.nil?
+      if Setting.editor.split(Setting::SEPARATOR_REGEXP).include? login
+        true
+      else
+        false
+      end
+    end
+
     # 用户的账号类型
     def level
       return "newbie" if self.newbie?

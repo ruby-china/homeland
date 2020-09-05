@@ -71,6 +71,8 @@ Rails.application.routes.draw do
       post :action
       # ban popup window
       get :ban
+
+      get :raw_markdown
     end
 
     collection do
@@ -124,6 +126,7 @@ Rails.application.routes.draw do
       end
     end
     resources :sections
+    resources :articles
     resources :users, constraints: { id: /[#{User::LOGIN_FORMAT}]*/ } do
       member do
         delete :clean
@@ -213,6 +216,29 @@ Rails.application.routes.draw do
     end
   end
 
+  # TODO: Be similar to topic, can we refactor it?
+  resources :articles do
+    member do
+      post :reply
+      post :favorite
+      delete :unfavorite
+      post :follow
+      delete :unfollow
+      get :ban
+      get :append
+      get :down
+      post :action
+      get :show_wechat
+    end
+    resources :replies do
+      member do
+        get :reply_to
+        post :reply_suggest
+        post :reply_unsuggest
+      end
+    end
+  end
+
   mount Notifications::Engine, at: "notifications"
 
   # WARRING! 请保持 User 的 routes 在所有路由的最后，以便于可以让用户名在根目录下面使用，而又不影响到其他的 routes
@@ -237,6 +263,8 @@ Rails.application.routes.draw do
         get :following
         get :calendar
         get :reward
+        get :drafts
+        get :tip_offs
       end
 
       resources :team_users, path: "people" do

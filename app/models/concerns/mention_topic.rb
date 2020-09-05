@@ -13,7 +13,7 @@ module MentionTopic
 
   def extract_mentioned_topic_ids
     matched_ids = body.scan(TOPIC_LINK_REGEXP).flatten
-    current_topic_id = self.class.name == "Topic" ? self.id : self.topic_id
+    current_topic_id = self.is_a?(Topic) ? self.id : self.topic_id
     return if matched_ids.blank?
     matched_ids = matched_ids.map(&:to_i).reject { |id| id == current_topic_id }
     Topic.where("id IN (?)", matched_ids).pluck(:id)

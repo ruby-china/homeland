@@ -11,8 +11,9 @@ class Node < ApplicationRecord
   validates :name, :summary, :section, presence: true
   validates :name, uniqueness: true
 
-  scope :hots, -> { order(topics_count: :desc) }
-  scope :sorted, -> { order(sort: :desc) }
+  scope :hots, -> { where("id != #{Setting.article_node}").order(topics_count: :desc) }
+  scope :sorted, -> { where("id != #{Setting.article_node}").where("id != 55 and id != 61").order(sort: :desc) }
+
 
   form_select :name
 

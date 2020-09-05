@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_05_025600) do
+ActiveRecord::Schema.define(version: 2020_09_05_082411) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -310,6 +310,8 @@ ActiveRecord::Schema.define(version: 2020_09_05_025600) do
     t.string "type"
     t.boolean "article_public", default: true, null: false
     t.integer "column_id"
+    t.integer "modified_admin_id"
+    t.boolean "cannot_be_shared", default: false
     t.index ["deleted_at"], name: "index_topics_on_deleted_at"
     t.index ["grade"], name: "index_topics_on_grade"
     t.index ["last_active_mark"], name: "index_topics_on_last_active_mark"

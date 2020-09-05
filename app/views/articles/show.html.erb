@@ -1,0 +1,156 @@
+<% title_tag @article.title %>
+
+<% content_for :scripts do %>
+  <script type="text/javascript">
+    Topics.topic_id = <%= @article.id %>;
+    <% if !@user_like_reply_ids.blank? %>
+    Topics.user_liked_reply_ids = [<%= @user_like_reply_ids.join(",") %>];
+    <% end %>
+    $(document).ready(function(){
+      <% if admin? %>
+        $("#replies .reply a.edit").css('display','inline-block');
+        $("#replies .reply a.suggest").css('display','inline-block');
+      <% elsif current_user %>
+        $("#replies .reply a.edit[data-uid='<%= current_user.id %>']").css('display','inline-block');
+        $("#replies .reply a.suggest[data-uid='<%= current_user.id %>']").css('display','inline-block');
+      <% end %>
+
+      <% if @article.closed? %>
+        $("#replies .reply .hideable").remove();
+      <% end %>
+    })
+  </script>
+<% end %>
+
+<div class="row">
+  <% if !mobile? %>
+    <%= render '/shared/article_sidebar' %>
+  <% else %>
+    <div class="move-page-buttons">
+      <a href="#" class="btn btn-block btn-sm btn-move-page" data-type="top"><i class="fa fa-arrow-up"></i></a>
+      <a href="#" class="btn btn-block btn-sm btn-move-page" data-type="bottom"><i class="fa fa-arrow-down"></i></a>
+    </div>
+  <% end %>
+
+  <div class="col-md-9 article-content">
+    <div class="topic-detail card">
+      <%= render partial: "articles/article_info", locals: { article: @article } %>
+
+      <% if @article.cannot_be_shared? %>
+        <div class="label-legal">
+          <i class="fa fa-legal"></i>「<%= t("topics.cannot_be_shared")%>」
+        </div>
+      <% end %>
+
+
+      <% if @article.excellent? %>
+        <div class="label-awesome">
+          <i class="fa fa-diamond awesome"></i> 本帖已被设为精华帖！
+          <% if admin? %>
+          <div class="pull-right">
+            <%= link_to icon_tag("close"), action_topic_path(@article.id, type: 'unexcellent'), data: { method: "post", remote: true } %>
+          </div>
+          <% end %>
+        </div>
+      <% end %>
+
+      <div class="card-body markdown markdown-toc">
+        <%= raw Setting.before_topic_html %>
+        <%	if @article.draft %>
+            <div class="text-center alert alert-warning">
+              当前状态为 <i class="fa fa-file-text-o"></i> 草稿，仅作者可见，请前往 <%= link_to "", edit_article_path(@article), class: "fa fa-pencil", title: "编辑发布" %> 编辑发布</a>
+            </div>
+        <%	end %>
+        <%= @article.body_html %>
+
+        <%= raw Setting.after_topic_html %>
+      </div>
+
+      <%= render partial: "cannot_be_shared" %>
+      <div class="card-footer clearfix">
+        <%= render "buttons" %>
+      </div>
+    </div>
+
+    <% if @article.user&.reward_enabled? %>
+      <%= render partial: "reward" %>
+    <%end%>
+
+  <% if @replies.blank? %>
+    <div class="no-result">
+      <%= t("topics.no_replies") %>
+    </div>
+    <% else %>
+
+    <!--先显示最佳回复-->
+    <% if !@suggest_replies.blank? %>
+    <div id="replies" class="card" data-last-floor="<%= @replies.count(:all) %>">
+      <div class="best-reply card-header hide-ios">
+        <i class="fa fa-check" aria-hidden="true"> </i> 最佳回复
+      </div>
+
+      <div class="card-body">
+        <%= render partial: "/replies/reply", collection: @suggest_replies %>
+      </div>
+    </div>
+    <% end %>
+
+    <div id="replies" class="card" data-last-floor="<%= @replies.count(:all) %>">
+      <div class="total card-header hide-ios">
+        <span class="total-info">
+        共收到 <b><%= @article.replies_count %></b> 条回复
+        </span>
+        <span class="pull-right">
+          <a data-toggle="tooltip" data-original-title="按创建时间排序" class="btn btn-default btn-sm <%=params[:order_by] == 'created_at'? 'active' : ''  %>" href="?order_by=created_at&#replies">时间</a>
+          <a data-toggle="tooltip" data-original-title="按回复点赞数量排序" class="btn btn-default btn-sm <%=params[:order_by] == 'like'? 'active' : ''  %>" href="?order_by=like&#replies" >点赞</a>
+        </span>
+
+      </div>
+
+      <div class="items card-body">
+        <%= render partial: "/replies/reply", collection: @replies %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if current_user %>
+    <% if @article.closed? %>
+      <div class="alert alert-info">此文章已经于 <%= l @article.closed_at, format: :long %> 关闭，不再接受任何评论。</div>
+    <% else %>
+      <div id="reply" class="card">
+        <div class="card-header hide-ios">回帖</div>
+        <% if not mobile? %>
+        <div id="reply_notice" class="box">
+          <ul class="helpblock list">
+            <li>请注意单词拼写，以及中英文排版，<a href="https://github.com/sparanoid/chinese-copywriting-guidelines">参考此页</a>
+            </li>
+            <li>支持 Markdown 格式, <strong>**粗体**</strong>、~~删除线~~、<code>`单行代码`</code>, 更多语法请见这里 <a href="/markdown">Markdown 语法</a>
+            </li>
+            <li>支持表情，使用方法请点击☺</li>
+            <li>上传图片, 支持拖拽和剪切板黏贴上传, 格式限制 - jpg, png, gif</li>
+            <li>发布框支持本地存储功能，会在内容变更时保存，「提交」按钮点击时清空</li>
+          </ul>
+        </div>
+        <%	 end %>
+        <div class="card-body">
+        <% if can? :create, Reply %>
+          <%= render 'reply_form' %>
+        <% else %>
+          <div class="alert alert-info">
+            当前设置新手用户不能在 22:00 ~ 9:00 发帖。
+          </div>
+        <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="card">
+      <div class="card-body">
+        <%= render partial: "topics/translation/need_login_to_reply" %>
+      </div>
+    </div>
+  <% end %>
+
+</div>
+
+</div>

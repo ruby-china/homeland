@@ -15,7 +15,7 @@ class ColumnsController < ApplicationController
 
   def show
     @user = @column.user
-    @articles = @column.articles.withoutDraft.last_actived.page(params[:page])
+    @articles = @column.articles.without_draft.last_actived.page(params[:page])
   end
 
   def create

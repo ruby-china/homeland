@@ -5,7 +5,7 @@ module Users
     extend ActiveSupport::Concern
 
     included do
-      before_action :authenticate_user!, only: %i[block unblock blocked follow unfollow]
+      before_action :authenticate_user!, only: %i[block unblock blocked follow unfollow draft tip_offs]
       before_action :only_user!, only: %i[topics replies favorites
                                           block unblock follow unfollow
                                           followers following calendar reward columns]
@@ -48,6 +48,10 @@ module Users
       @block_users = @user.block_users.order("actions.id asc").page(params[:page])
     end
 
+    def drafts
+      @drafts = @user.my_drafts
+    end
+
     def follow
       current_user.follow_user(@user)
       render json: { code: 0, data: { followers_count: @user.reload.followers_count } }
@@ -67,6 +71,10 @@ module Users
       @users = @user.follow_users.order("actions.id asc")
       @users = @users.page(params[:page]).per(60)
       render template: "/users/followers"
+    end
+
+    def tip_offs
+      @tipOffs = TipOff.by_reporter(@user.id).order('create_time desc').page(params[:page])
     end
 
     def calendar

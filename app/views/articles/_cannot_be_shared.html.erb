@@ -1,0 +1,13 @@
+<div class="alert alert-block topic-copyright">
+  <div class="markdown">
+<% if @article.cannot_be_shared%>
+
+          TesterHome 为用户提供「保留所有权利，禁止转载」的选项。
+          除非获得原作者的单独授权，任何第三方不得转载标注了「<%= t("topics.cannot_be_shared")%>」的内容，否则均视为侵权。
+          具体请参见<a href="https://testerhome.com/wiki/protocol">TesterHome 知识产权保护协议</a>。
+
+<% else %>
+   转载文章时务必注明原作者及原始链接，并注明「发表于 TesterHome 」，并不得对作品进行修改。
+<% end %>
+  </div>
+</div>

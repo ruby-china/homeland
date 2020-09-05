@@ -38,6 +38,8 @@ class Setting < RailsSettings::Base
     column_max_count
     column_user_white_list
     column_enabled
+    editor
+    article_node
     allow_change_login
     sign_up_daily_limit
     use_recaptcha
@@ -152,6 +154,8 @@ class Setting < RailsSettings::Base
   field :column_max_count, default: 2, type: :integer
   field :column_enabled, default: false, type: :string
   field :column_user_white_list, default: [], separator: SEPARATOR_REGEXP
+  field :editor, default: [], separator: SEPARATOR_REGEXP
+  field :article_node, default: 1, type: :integer
 
   # = ReCaptcha
   field :use_recaptcha, default: false, type: :boolean

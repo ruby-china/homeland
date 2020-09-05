@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_04_143354) do
+ActiveRecord::Schema.define(version: 2020_09_05_025600) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,27 @@ ActiveRecord::Schema.define(version: 2020_09_04_143354) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["provider", "uid"], name: "index_authorizations_on_provider_and_uid"
+  end
+
+  create_table "columns", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "cover"
+    t.integer "user_id", null: false
+    t.string "who_deleted"
+    t.integer "modified_admin_id"
+    t.integer "likes_count", default: 0
+    t.datetime "suggested_at"
+    t.datetime "deleted_at"
+    t.string "slug", null: false
+    t.datetime "unseal_time"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "followers_count", default: 0
+    t.integer "articles_count", default: 0, null: false
+    t.index ["likes_count"], name: "index_columns_on_likes_count"
+    t.index ["name"], name: "index_columns_on_name"
+    t.index ["suggested_at"], name: "index_columns_on_suggested_at"
   end
 
   create_table "comments", id: :serial, force: :cascade do |t|
@@ -286,6 +307,9 @@ ActiveRecord::Schema.define(version: 2020_09_04_143354) do
     t.integer "team_id"
     t.integer "real_user_id"
     t.boolean "draft", default: true, null: false
+    t.string "type"
+    t.boolean "article_public", default: true, null: false
+    t.integer "column_id"
     t.index ["deleted_at"], name: "index_topics_on_deleted_at"
     t.index ["grade"], name: "index_topics_on_grade"
     t.index ["last_active_mark"], name: "index_topics_on_last_active_mark"
@@ -351,6 +375,7 @@ ActiveRecord::Schema.define(version: 2020_09_04_143354) do
     t.integer "team_users_count"
     t.integer "followers_count", default: 0
     t.integer "following_count", default: 0
+    t.integer "columns_count", default: 0
     t.index "lower((login)::text) varchar_pattern_ops", name: "index_users_on_lower_login_varchar_pattern_ops"
     t.index "lower((name)::text) varchar_pattern_ops", name: "index_users_on_lower_name_varchar_pattern_ops"
     t.index ["email"], name: "index_users_on_email", unique: true

@@ -63,7 +63,6 @@ Rails.application.routes.draw do
 
   resources :topics do
     member do
-      post :reply
       post :favorite
       delete :unfavorite
       post :follow

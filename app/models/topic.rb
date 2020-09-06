@@ -73,6 +73,14 @@ class Topic < ApplicationRecord
     end
   end
 
+  def topic_type
+    (self[:type] || "Topic").underscore.to_sym
+  end
+
+  def is_article?
+    topic_type == :article
+  end
+
   def update_last_reply(reply, force: false)
     # replied_at 用于最新回复的排序，如果帖着创建时间在一个月以前，就不再往前面顶了
     return false if reply.blank? && !force

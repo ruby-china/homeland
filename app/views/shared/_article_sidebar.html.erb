@@ -81,7 +81,7 @@
           <div class="text-center panel panel-default alert alert-warning draft-box hide-ios">
             <div class="panel-body">
               <%= link_to  drafts_user_path(@user) do %>
-                <i class="fa fa-file-text-o"></i> 草稿 <%=	 current_user.draft_size %> 篇
+                <i class="fa fa-file-text-o"></i> 草稿 <%= current_user.draft_size %> 篇
               <% end %>
             </div>
           </div>

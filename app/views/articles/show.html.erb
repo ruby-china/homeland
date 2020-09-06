@@ -58,7 +58,7 @@
         <%= raw Setting.before_topic_html %>
         <%	if @article.draft %>
             <div class="text-center alert alert-warning">
-              当前状态为 <i class="fa fa-file-text-o"></i> 草稿，仅作者可见，请前往 <%= link_to "", edit_article_path(@article), class: "fa fa-edit", title: "编辑发布" %> 编辑发布</a>
+              当前状态为 <i class="fas fa-file"></i> 草稿，仅作者可见，请前往 <%= link_to "", edit_article_path(@article), class: "fa fa-edit", title: "编辑发布" %> 编辑发布</a>
             </div>
         <%	end %>
         <%= @article.body_html %>

@@ -1,0 +1,13 @@
+<% title_tag [@user.fullname, t('users.menu.drafts')].join(' · ') %>
+
+<div class="row">
+  <%= render "sidebar", user: @user %>
+  <div class="col-md-8">
+    <%= render "menu" %>
+    <div class="card">
+      <div class="card-body">
+        <%= render "topics", topics: @drafts %>
+      </div>
+    </div>
+  </div>
+</div>

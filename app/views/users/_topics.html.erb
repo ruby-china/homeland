@@ -6,9 +6,15 @@
   </tr>
   <% topics.each do |topic| %>
     <tr class="topic <%= cycle("odd","") %> <%= 'deleted' if topic.deleted? %>">
-      <td class="node hide-ios"><%= render_node_name(topic.node_name,topic.node_id) %></td>
-      <td class="title"><%= link_to(topic.title, topic_path(topic)) %> <%= topic_excellent_tag(topic) %> <em><%= timeago(topic.created_at) %></td>
-      <td class="replies"><%= topic.replies_count %>/<%= topic.likes_count %> </td>
+      <% if topic.is_article? %>
+n        <td class="node hide-ios"><%=  render_column_name(topic.column_name, topic.column_slug) %></td>
+        <td class="title"><%= link_to(topic.title, article_path(topic)) %> <%= topic_excellent_tag(topic) %> <em><%= timeago(topic.created_at) %></td>
+      <% else %>
+          <td class="node hide-ios"><%=  render_node_name(topic.node_name, topic.node_id) %></td>
+          <td class="title"><%= link_to(topic.title, topic_path(topic)) %> <%= topic_excellent_tag(topic) %> <em><%= timeago(topic.created_at) %></td>
+      <% end %>
+
+        <td class="replies"><%= topic.replies_count %>/<%= topic.likes_count %> </td>
     </tr>
   <% end %>
 </table>

@@ -34,6 +34,12 @@
       <% end %>
       <div class="card-body markdown markdown-toc">
         <%= raw Setting.before_topic_html %>
+        <% if @topic.draft %>
+          <div class="text-center alert alert-warning">
+            当前状态为 <i class="fas fa-file"></i> 草稿，仅作者可见，请前往 <%= link_to "", edit_topic_path(@topic), class: "fa fa-edit", title: "编辑发布" %> 编辑发布</a>
+          </div>
+        <% end %>
+
         <%= @topic.body_html %>
         <%= raw Setting.after_topic_html %>
       </div>

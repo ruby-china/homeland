@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_06_082056) do
+ActiveRecord::Schema.define(version: 2020_09_06_091122) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,6 +86,20 @@ ActiveRecord::Schema.define(version: 2020_09_06_082056) do
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "github_statistics", force: :cascade do |t|
+    t.string "github_user"
+    t.string "testerhome_user"
+    t.integer "ttf_contribution"
+    t.integer "monthly_contribution"
+    t.integer "discovery_contribution"
+    t.date "data_of_month"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["data_of_month"], name: "index_github_statistics_on_data_of_month"
+    t.index ["github_user"], name: "index_github_statistics_on_github_user"
+    t.index ["testerhome_user"], name: "index_github_statistics_on_testerhome_user"
   end
 
   create_table "locations", id: :serial, force: :cascade do |t|

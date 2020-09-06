@@ -54,6 +54,7 @@
       </div>
     <% else %>
       <div id="replies" class="card" data-last-floor="<%= @replies.count(:all) %>">
+        <%= render partial: "/replies/reply_total", locals: { resource: @topic } %>
         <div class="items card-body">
           <%= render partial: "/replies/reply", collection: @replies %>
         </div>

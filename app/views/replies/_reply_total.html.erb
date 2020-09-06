@@ -1,0 +1,10 @@
+<div class="total card-header hide-ios">
+  <span class="total-info">
+    共收到 <b><%= resource.replies_count %></b> 条回复
+  </span>
+  <span class="pull-right">
+    <a data-toggle="tooltip" data-original-title="按创建时间排序" class="btn btn-default btn-sm <%=params[:order_by] == 'created_at'? 'active' : ''  %>" href="?order_by=created_at&#replies">时间</a>
+    <a data-toggle="tooltip" data-original-title="按回复点赞数量排序" class="btn btn-default btn-sm <%=params[:order_by] == 'like'? 'active' : ''  %>" href="?order_by=like&#replies" >点赞</a>
+  </span>
+
+</div>

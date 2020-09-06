@@ -29,7 +29,7 @@
     <% end %>
     <%= link_to raw("<i class='fab fa-weixin'></i>"), show_wechat_article_path(@article), target: "_blank", title: "微信排版" %>
     <% if editor? or admin? %>
-      <%= link_to "", raw_markdown_topic_path(topic_id: @topic.id), class: "fas fa-file", title: "markdown" %>
+      <%= link_to "", raw_markdown_topic_path(topic_id: @article.id), class: "fas fa-file", title: "markdown" %>
     <% end %>
   </span>
 </div>

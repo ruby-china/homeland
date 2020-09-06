@@ -42,18 +42,7 @@ class TopicsController < ApplicationController
   end
 
   def show
-    @topic = Topic.unscoped.includes(:user).find(params[:id])
-    render_404 if @topic.deleted?
-
-    @topic.hits.incr(1)
-    @node = @topic.node
-    @show_raw = params[:raw] == "1"
-    @can_reply = can?(:create, Reply)
-
-    @replies = Reply.unscoped.where(topic_id: @topic.id).order(:id).all
-    @user_like_reply_ids = current_user&.like_reply_ids_by_replies(@replies) || []
-
-    check_current_user_status_for_topic
+    common_logic_for_show(Topic)
   end
 
   def show_wechat
@@ -198,14 +187,14 @@ class TopicsController < ApplicationController
       team.id
     end
 
-    def check_current_user_status_for_topic
+    def check_current_user_status_for_topic(resource)
       return false unless current_user
       # 通知处理
-      current_user.read_topic(@topic, replies_ids: @replies.collect(&:id))
+      current_user.read_topic(resource, replies_ids: @replies.collect(&:id))
       # 是否关注过
-      @has_followed = current_user.follow_topic?(@topic)
+      @has_followed = current_user.follow_topic?(resource)
       # 是否收藏
-      @has_favorited = current_user.favorite_topic?(@topic)
+      @has_favorited = current_user.favorite_topic?(resource)
     end
 
     def draft_and_anonymous_save
@@ -222,5 +211,30 @@ class TopicsController < ApplicationController
       end
 
       @topic.save
+    end
+
+  protected
+
+    def common_logic_for_show(class_scope)
+      topic = class_scope.unscoped.includes(:user).find(params[:id])
+      render_404 if topic.deleted?
+
+      topic.hits.incr(1)
+      @node = topic.node
+      @show_raw = params[:raw] == "1"
+      @can_reply = can?(:create, Reply)
+
+      if params[:order_by] == 'like'
+        @replies = Reply.unscoped.where(topic_id: topic.id).order(likes_count: :desc).all
+      elsif params[:order_by] == 'created_at'
+        @replies = Reply.unscoped.where(topic_id: topic.id).order(created_at: :desc).all
+      else
+        @replies = Reply.unscoped.where(topic_id: topic.id).order(:id).all
+      end
+
+      @user_like_reply_ids = current_user&.like_reply_ids_by_replies(@replies) || []
+
+      check_current_user_status_for_topic(topic)
+      instance_variable_set("@#{class_scope.name.downcase}", topic)
     end
 end

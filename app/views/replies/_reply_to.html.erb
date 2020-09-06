@@ -9,7 +9,7 @@
       <% if show_body %>
         <%= user_avatar_tag(user, :xs) %><%= user_name_tag(user) %>
       <% else %>
-        <%= link_to reply_to_topic_reply_path(@topic, reply), remote: true do %>
+        <%= link_to reply_to_topic_reply_path(reply.topic, reply), remote: true do %>
           <%= user_avatar_tag(user, :xs, link: false) %><%= user_name_plain_span(user) %>
           <span class='reply-floor'></span>
         <% end %>

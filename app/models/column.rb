@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Column < ApplicationRecord
   include SoftDelete, MarkdownBody, Searchable
 
@@ -16,7 +17,7 @@ class Column < ApplicationRecord
 
   scope :hot, -> { order(followers_count: :desc) }
   scope :banned, -> { order(unseal_time: :asc) }
-  scope :global_block_columns, -> { where('columns.unseal_time IS NOT NULL').where('columns.unseal_time > :current_time', { current_time: Time.current }) }
+  scope :global_block_columns, -> { where("columns.unseal_time IS NOT NULL").where("columns.unseal_time > :current_time", { current_time: Time.current }) }
 
   belongs_to :user, counter_cache: true, optional: true
   has_many :comments, dependent: :destroy

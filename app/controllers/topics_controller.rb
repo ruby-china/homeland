@@ -53,7 +53,7 @@ class TopicsController < ApplicationController
     end
 
     @node = @topic.node
-    render template: "topics/show_wechat", handler: [:erb], layout: 'wechat'
+    render template: "topics/show_wechat", handler: [:erb], layout: "wechat"
   end
 
   def raw_markdown
@@ -224,9 +224,9 @@ class TopicsController < ApplicationController
       @show_raw = params[:raw] == "1"
       @can_reply = can?(:create, Reply)
 
-      if params[:order_by] == 'like'
+      if params[:order_by] == "like"
         @replies = Reply.unscoped.where(topic_id: topic.id).order(likes_count: :desc).all
-      elsif params[:order_by] == 'created_at'
+      elsif params[:order_by] == "created_at"
         @replies = Reply.unscoped.where(topic_id: topic.id).order(created_at: :desc).all
       else
         @replies = Reply.unscoped.where(topic_id: topic.id).order(:id).all

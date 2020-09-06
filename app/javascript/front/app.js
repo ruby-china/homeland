@@ -1,5 +1,6 @@
 require("./emoji-modal");
 require("./notifier");
+require("./github-statistics")
 
 const AppView = Backbone.View.extend({
   el: "body",
@@ -28,6 +29,8 @@ const AppView = Backbone.View.extend({
     if ((needle = $('body').data('controller-name'), ['topics', 'replies', 'articles'].includes(needle))) {
       window._topicView = new TopicView({ parentView: this });
     }
+
+    window._githubStatisticsView = new GitHubStatisticsView({parentView: this})
 
     return window._tocView = new TOCView({ parentView: this });
   },

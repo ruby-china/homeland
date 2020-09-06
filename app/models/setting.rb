@@ -51,6 +51,7 @@ class Setting < RailsSettings::Base
     share_allow_sites
     editor_languages
     sorted_plugins
+    github_stats_repos
   ]
 
   # = Basic
@@ -109,6 +110,7 @@ class Setting < RailsSettings::Base
   # = API Keys
   field :github_token, default: ENV["github_token"], readonly: true
   field :github_secret, default: ENV["github_secret"], readonly: true
+  field :github_stats_repos, default: "", type: :string
 
   # = Other Site Configs
   field :admin_emails, type: :array, default: (ENV["admin_emails"] || "admin@admin.com"), separator: /[\s,]+/
@@ -196,6 +198,11 @@ class Setting < RailsSettings::Base
     def has_module?(name)
       return true if self.modules.blank? || self.modules.include?("all")
       self.modules.map { |str| str.strip }.include?(name.to_s)
+    end
+
+    def github_stats_repos_list
+      # 去掉其中空字符串的元素
+      self.github_stats_repos.split(SEPARATOR_REGEXP).select { |urls| urls != "" }
     end
 
     def has_profile_field?(name)

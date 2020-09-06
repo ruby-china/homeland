@@ -11,3 +11,7 @@
   - [cleanup, 5]
   - [mailers, 5]
   - [default, 3]
+:schedule:
+  github_statistics_fetcher:
+    cron: "0 0 1 * * *"
+    class: Scheduler::GitHubStatisticsFetcherJob

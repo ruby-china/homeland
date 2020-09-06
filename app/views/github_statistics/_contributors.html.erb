@@ -1,0 +1,33 @@
+<div class="card">
+  <div class="card-header">
+    <strong><%= title %></strong>
+    <!--<div class="pull-right hidden-xs"><%= t("github_statistics.TTF_total_contributors", count: contributors.length) %></div>-->
+  </div>
+
+  <div class="card-body">
+    <!--说明区-->
+    <div class="card">
+      <div class="statistics-description">
+        <%= description %>
+      </div>
+    </div>
+
+
+    <% if contributors.blank? %>
+      <div class="no-result"><%= t("github_statistics.no_data") %></div>
+    <% else %>
+
+      <div class="statistics-operation">
+        <% if type != "discovery"  %>
+          <label><button type="button" class="btn btn-primary" data-target="<%=type %>" data-toggle="button" aria-pressed="false"  id="display-all">显示非社区用户</button></label>
+        <% end %>
+      </div>
+
+
+      <table class="<%=type %>">
+        <%= render partial: 'opensource_contributor', collection: contributors, locals: {type: type} %>
+      </table>
+
+    <% end %>
+  </div>
+</div>

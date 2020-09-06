@@ -1,0 +1,40 @@
+<% title_tag t("github_statistics.TTF_contributor_list") %>
+
+<div class="github-statistics">
+  <div class="card">
+    <div class="card-body">
+      <% @available_months.each do |available_month| %>
+
+        <%
+        if @data_of_month && available_month.data_of_month.to_s == @data_of_month # 用户自行选中日期
+          btn_style = 'btn-primary'
+        elsif !@data_of_month && available_month.data_of_month == Date.today.beginning_of_month # 用户没有选中任何日期，默认为当月
+          btn_style = 'btn-primary'
+        else
+          btn_style = 'btn-light'
+        end
+        %>
+
+        <label><a class="btn <%=btn_style%>" href="?month=<%=available_month.data_of_month%>"><%=available_month.data_of_month.strftime("%Y-%m") %></a></label>
+      <% end %>
+
+    </div>
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 col-sm-6 col-md-4">
+    <%= render partial: 'github_statistics/contributors', locals: {title: 'TTF贡献者总榜单', description: '贡献指数=此用户在各个 TTF 项目中的合计代码提交数', contributors: @github_ttf_contributors, type: "ttf"} %>
+  </div>
+
+
+  <div class="col-xs-12 col-sm-6 col-md-4">
+    <%= render partial: 'github_statistics/contributors' , locals: {title: 'TTF贡献者月度榜单', description: '贡献指数=此用户本月在各个 TTF 项目中 master 分支合计代码提交数', contributors: @github_monthly_conributors, type: "monthly"} %>
+  </div>
+
+  <div class="col-xs-12 col-sm-6 col-md-4">
+    <%= render partial: 'github_statistics/contributors' , locals: {title: '社区潜力总榜',  description: '贡献指数=用户 github follower 数 + 此用户本月在 github 的事件数 * 0.2', contributors: @github_discovery_contributor, type: "discovery"}%>
+  </div>
+
+</div>

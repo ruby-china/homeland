@@ -74,7 +74,7 @@ module Users
     end
 
     def tip_offs
-      @tipOffs = TipOff.by_reporter(@user.id).order('create_time desc').page(params[:page])
+      @tipOffs = TipOff.by_reporter(@user.id).order("create_time desc").page(params[:page])
     end
 
     def calendar

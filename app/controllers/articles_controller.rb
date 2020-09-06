@@ -3,7 +3,6 @@
 
 # 专栏文章称为 article ，model 层继续用 topic
 class ArticlesController < TopicsController
-
   before_action :set_article, only: [:ban, :append, :edit, :update, :destroy, :follow,
                                    :unfollow, :action, :down]
 
@@ -28,7 +27,7 @@ class ArticlesController < TopicsController
     @article.body = article_params[:body]
     @article.cannot_be_shared = article_params[:cannot_be_shared]
     @article.article_public = article_params[:article_public]
-    if params[:commit] and params[:commit] == 'draft'
+    if params[:commit] && (params[:commit] == "draft")
       @article.draft = true
     else
       @article.draft = false
@@ -57,7 +56,7 @@ class ArticlesController < TopicsController
     # 固定给一个 node id 占位
     @article.node_id = Setting.article_node.to_s
 
-    if params[:commit] and params[:commit] == 'draft'
+    if params[:commit] && (params[:commit] == "draft")
       @article.draft = true
     else
       @article.draft = false
@@ -68,12 +67,11 @@ class ArticlesController < TopicsController
 
   protected
 
-  def article_params
-    params.require(:article).permit(:title, :body, :node_id, :column_id, :cannot_be_shared, :article_public)
-  end
+    def article_params
+      params.require(:article).permit(:title, :body, :node_id, :column_id, :cannot_be_shared, :article_public)
+    end
 
-  def set_article
-    @article ||= Article.find(params[:id])
-  end
+    def set_article
+      @article ||= Article.find(params[:id])
+    end
 end
-

@@ -1,0 +1,52 @@
+<%
+  if opensource_contributor.github_user # 社区用户
+    @user = User.find_by_github(opensource_contributor.github_user)
+  else
+    @user = nil
+  end
+
+  if opensource_contributor_counter + 1 <= 3 # 前三名
+    @style = 'danger'
+  elsif not @user.blank? # 社区用户
+    @style = 'success'
+  else # 非社区用户
+    @style = 'muted'
+  end
+%>
+
+
+<tr class="statistics-contributor user-card <%= @user.blank? ? 'not_testehome_user' : '' %>  ">
+  <td class="statistics-number media-left text-middle">
+    <div class="text-<%= @style %>"><%= "#{opensource_contributor_counter + 1}" %></div>
+  </td>
+  <td>
+    <div class="media">
+      <div class="align-self-end mr-1">
+        <%= user_avatar_tag(@user, :md) %>
+      </div>
+      <div class="media-body text-middle">
+        <% if not @user.blank? %>
+          <%= link_to @user.login, user_path(@user), target: '_blank' %>
+          <a href="https://github.com/<%=@user.github %>" target="_blank"><i class="fa fa-github"></i></a>
+          <span class="badge badge-info role"><%= t("github_statistics.testerhome_user") %></span>
+        <% else %>
+          <%= link_to opensource_contributor.github_user, "https://github.com/#{opensource_contributor.github_user}", target: '_blank' %>
+        <% end %>
+      </div>
+    </div>
+  </td>
+
+  <td class="statistics-count text-<%= @style %>">
+    <div>
+      <% if type == "ttf"
+           total = opensource_contributor.ttf_contribution
+         elsif type == "monthly"
+           total = opensource_contributor.monthly_contribution
+         else
+           total = opensource_contributor.discovery_contribution
+         end
+      %>
+      <%= total %>
+    </div>
+  </td>
+</tr>

@@ -18,8 +18,8 @@ class Reply < ApplicationRecord
   scope :fields_for_list, -> { select(:topic_id, :id, :body, :updated_at, :created_at) }
 
   # 最佳回复
-  scope :suggest,            -> { where('suggested_at IS NOT NULL').order(suggested_at: :desc) }
-  scope :no_suggest,         -> { where('suggested_at IS NULL') }
+  scope :suggest,            -> { where("suggested_at IS NOT NULL").order(suggested_at: :desc) }
+  scope :no_suggest,         -> { where("suggested_at IS NULL") }
   scope :without_suggest,    -> { where(suggested_at: nil) }
 
   validates :body, presence: true, unless: -> { system_event? }

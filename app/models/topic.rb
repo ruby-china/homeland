@@ -7,7 +7,7 @@ class Topic < ApplicationRecord
   # 临时存储检测用户是否读过的结果
   attr_accessor :read_state
 
-  belongs_to :modified_admin, class_name: 'User', optional: true
+  belongs_to :modified_admin, class_name: "User", optional: true
   belongs_to :real_user, class_name: "User", required: false
   belongs_to :user, inverse_of: :topics, counter_cache: true, required: false
   belongs_to :team, counter_cache: true, required: false

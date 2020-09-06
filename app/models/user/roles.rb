@@ -26,7 +26,7 @@ class User
       # 只有白名单用户可以发专栏
       return false if Setting.column_user_white_list.nil?
       if Setting.column_user_white_list.split(Setting::SEPARATOR_REGEXP).include? login
-        return true
+        true
       end
     end
 

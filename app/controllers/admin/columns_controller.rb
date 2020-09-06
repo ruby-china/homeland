@@ -28,8 +28,8 @@ module Admin
 
     private
 
-    def set_column
-      @column = Column.unscoped.find(params[:id])
-    end
+      def set_column
+        @column = Column.unscoped.find(params[:id])
+      end
   end
 end

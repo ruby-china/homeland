@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_06_091122) do
+ActiveRecord::Schema.define(version: 2020_09_06_095546) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -397,6 +397,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_091122) do
     t.index "lower((login)::text) varchar_pattern_ops", name: "index_users_on_lower_login_varchar_pattern_ops"
     t.index "lower((name)::text) varchar_pattern_ops", name: "index_users_on_lower_name_varchar_pattern_ops"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["github"], name: "index_users_on_github"
     t.index ["location"], name: "index_users_on_location"
     t.index ["login"], name: "index_users_on_login", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true

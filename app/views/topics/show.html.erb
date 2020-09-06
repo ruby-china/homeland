@@ -11,7 +11,7 @@
       <% elsif current_user %>
         $("#replies .reply a.edit[data-uid='<%= current_user.id %>']").css('display','inline-block');
       <% end %>
-    
+
       <% if @topic.closed? %>
         $("#replies .reply .hideable").remove();
       <% end %>
@@ -53,6 +53,19 @@
         <%= t("topics.no_replies") %>
       </div>
     <% else %>
+      <!--先显示最佳回复-->
+      <% if !@suggest_replies.blank? %>
+        <div id="replies" class="card" data-last-floor="<%= @replies.count(:all) %>">
+          <div class="best-reply card-header hide-ios">
+            <i class="fa fa-check check-green" aria-hidden="true"> </i> 最佳回复
+          </div>
+
+          <div class="card-body">
+            <%= render partial: "/replies/reply", collection: @suggest_replies %>
+          </div>
+        </div>
+      <% end %>
+
       <div id="replies" class="card" data-last-floor="<%= @replies.count(:all) %>">
         <%= render partial: "/replies/reply_total", locals: { resource: @topic } %>
         <div class="items card-body">

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_05_082411) do
+ActiveRecord::Schema.define(version: 2020_09_06_082056) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -222,6 +222,8 @@ ActiveRecord::Schema.define(version: 2020_09_05_082411) do
     t.integer "reply_to_id"
     t.integer "real_user_id"
     t.integer "anonymous", default: 0, null: false
+    t.boolean "exposed_to_author_only", default: false, null: false
+    t.datetime "suggested_at"
     t.index ["deleted_at"], name: "index_replies_on_deleted_at"
     t.index ["topic_id"], name: "index_replies_on_topic_id"
     t.index ["user_id"], name: "index_replies_on_user_id"

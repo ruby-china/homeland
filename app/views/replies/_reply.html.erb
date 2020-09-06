@@ -27,10 +27,18 @@
           <span class="opts pull-right">
             <% if !reply.deleted? %>
               <span class="hideable">
-              <%= link_to('', edit_topic_reply_path(reply.topic, reply), class: "edit fa fa-edit", 'data-uid' => reply.user_id, title: "修改回帖")%>
-              <%= link_to('', "#", 'data-id' => reply.id, 'data-login' => reply.user_login,
+                <%= link_to('', send("edit_#{reply.topic.class.name.downcase}_reply_path", reply.topic, reply), class: "edit fa fa-edit", 'data-uid' => reply.user_id, title: "修改回帖")
+                %>
+
+                <% if reply.suggested? %>
+                  <%= link_to raw("<i class='fa fa-times-circle'></i>"), send("reply_unsuggest_#{reply.topic.class.name.downcase}_reply_path", reply.topic, reply), 'data-uid' => reply.user_id, method: :post, remote: true, class: "suggest", title: "取消最佳回复" %>
+                <% else %>
+                  <%= link_to raw("<i class='fa fa-check'></i>"), send("reply_suggest_#{reply.topic.class.name.downcase}_reply_path", reply.topic, reply), 'data-uid' => reply.user_id, method: :post, remote: true, class: "suggest", title: "设为最佳回复" %>
+                <% end %>
+
+                <%= link_to('', "#", 'data-id' => reply.id, 'data-login' => reply.user_login,
                   title: t("topics.reply_this_floor"), class: "btn-reply fa fa-reply" )
-              %>
+                %>
               </span>
               <%= likeable_tag(reply, cache: true) %>
             <% end %>

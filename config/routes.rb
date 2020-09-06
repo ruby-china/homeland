@@ -89,6 +89,8 @@ Rails.application.routes.draw do
     resources :replies do
       member do
         get :reply_to
+        post :reply_suggest
+        post :reply_unsuggest
       end
     end
   end

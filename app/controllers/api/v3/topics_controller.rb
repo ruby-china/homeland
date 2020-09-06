@@ -148,6 +148,16 @@ module Api
 
         @replies = Reply.unscoped.where(topic_id: @topic.id).order(:id).includes(:user)
         @replies = @replies.offset(params[:offset].to_i).limit(params[:limit].to_i)
+
+        @replies = @replies.map do |r|
+          if not r.exposed_to_author_only? || (current_user && (r.topic && r.topic.user == current_user || r.user == current_user))
+            r
+          else
+            r.body = I18n.t("topics.exposed_to_author_only")
+            r
+          end
+        end
+
         @user_liked_reply_ids = current_user&.like_reply_ids_by_replies(@replies) || []
         @meta = { user_liked_reply_ids: @user_liked_reply_ids }
       end

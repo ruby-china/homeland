@@ -194,7 +194,7 @@ describe TopicsController do
 
       it "should not create nickname topic while saving with draft" do
         sign_in user
-        nickname_user = create(:user, id: User::ANONYMOUS_ID)
+        nickname_user = create(:user, id: User.anonymous_user_id)
         post topics_path, params: { format: :js, topic: { title: "title", body: "body", team_id: team.id, node_id: nickname_node.id }, commit: "draft" }
         assert_equal 200, response.status
         assert_equal user, Topic.last.user
@@ -203,7 +203,7 @@ describe TopicsController do
 
       it "should create nickname topic while saving without draft" do
         sign_in user
-        nickname_user = create(:user, id: User::ANONYMOUS_ID)
+        nickname_user = create(:user, id: User.anonymous_user_id)
         post topics_path, params: { format: :js, topic: { title: "title", body: "body", team_id: team.id, node_id: nickname_node.id } }
         assert_equal 200, response.status
         assert_equal nickname_user, Topic.last.user

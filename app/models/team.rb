@@ -22,4 +22,8 @@ class Team < User
   def owner?(user)
     self.team_users.accepted.exists?(role: :owner, user_id: user.id)
   end
+
+  def team_notify_users
+    self.team_users.accepted.where(is_receive_notifications: true)
+  end
 end

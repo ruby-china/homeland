@@ -12,11 +12,16 @@
     <div class="pull-right"><a href="/markdown" target="_blank">排版说明</a></div>
 
     <% if @topic.belongs_to_nickname_node? %>
-    <span class="help-inline" style="margin-left: 20px;">
+      <span class="help-inline" style="margin-left: 20px;">
+        <label>
+          <%= f.check_box :anonymous %>  <%= t("topics.real_name") %>
+        </label>
+      </span>
+    <% end %>
+    <span class="help-inline">
       <label>
-        <%= f.check_box :anonymous %>  <%= t("topics.real_name") %>
+        <%= f.check_box :exposed_to_author_only %>  <%= t("topics.exposed_to_author_only") %>
       </label>
     </span>
-    <% end %>
   </div>
 <% end %>

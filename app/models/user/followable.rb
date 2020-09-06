@@ -6,6 +6,7 @@ class User
 
     included do
       action_store :follow, :topic
+      action_store :follow, :column, counter_cache: "followers_count"
       action_store :follow, :user, counter_cache: "followers_count",
                                    user_counter_cache: "following_count"
     end

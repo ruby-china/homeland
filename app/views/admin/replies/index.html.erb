@@ -22,6 +22,7 @@
     <td>话题</td>
     <td>回复人</td>
     <td>时间</td>
+    <td>仅楼主可见</td>
     <td></td>
   </tr>
 
@@ -38,6 +39,7 @@
       <% end %>
     <td><%= link_to(reply.user.login, edit_admin_user_path(reply.user_id), target: "_blank") if reply.user %></td>
     <td><%= l reply.created_at, format: :short %></td>
+    <td><%= reply.exposed_to_author_only %></td>
     <td><%= link_to '', edit_admin_reply_path(reply), class: "fa fa-edit" %>
     <%= link_to '', admin_reply_path(reply), 'data-confirm' => 'Are you sure?', method: :delete, remote: true, class: "fa fa-trash" %></td>
   </tr>

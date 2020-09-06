@@ -13,7 +13,7 @@ class RepliesController < ApplicationController
 
     # 加入匿名
     if @topic.belongs_to_nickname_node? && @reply.anonymous == 0
-      @reply.user_id = User::ANONYMOUS_ID
+      @reply.user_id = User.anonymous_user_id
       @reply.real_user_id = current_user.id
     end
 
@@ -87,6 +87,6 @@ class RepliesController < ApplicationController
     end
 
     def reply_params
-      params.require(:reply).permit(:body, :reply_to_id, :anonymous)
+      params.require(:reply).permit(:body, :reply_to_id, :anonymous, :exposed_to_author_only)
     end
 end

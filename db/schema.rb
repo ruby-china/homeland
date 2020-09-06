@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_06_095546) do
+ActiveRecord::Schema.define(version: 2020_09_06_135825) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -279,6 +279,8 @@ ActiveRecord::Schema.define(version: 2020_09_06_095546) do
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "comment"
+    t.boolean "is_receive_notifications", default: true, null: false
     t.index ["team_id"], name: "index_team_users_on_team_id"
     t.index ["user_id"], name: "index_team_users_on_user_id"
   end
@@ -394,6 +396,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_095546) do
     t.integer "followers_count", default: 0
     t.integer "following_count", default: 0
     t.integer "columns_count", default: 0
+    t.boolean "private", default: false, null: false
     t.index "lower((login)::text) varchar_pattern_ops", name: "index_users_on_lower_login_varchar_pattern_ops"
     t.index "lower((name)::text) varchar_pattern_ops", name: "index_users_on_lower_name_varchar_pattern_ops"
     t.index ["email"], name: "index_users_on_email", unique: true

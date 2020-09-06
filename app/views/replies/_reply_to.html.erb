@@ -1,7 +1,7 @@
 <% if reply.reply_to && reply.reply_to&.user %>
   <%
-    reply_to = reply.reply_to
-    user = reply_to.user
+  reply_to = reply.reply_to
+  user = reply_to.user
   %>
   <div class="reply-to-block" data-reply-to-id="<%= reply_to.id %>">
     <div class="info">
@@ -16,10 +16,25 @@
       <% end %>
       回复
     </div>
+
     <% if show_body %>
-    <div class="markdown">
-      <%= markdown(reply_to.body) %>
-    </div>
+      <div class="markdown">
+        <% if !reply.exposed_to_author_only? %>
+          <% if !reply_to.exposed_to_author_only? || current_user == @topic.user || current_user == user %>
+            <%= markdown(reply_to.body) %>
+          <% else %>
+            <i class="fa fa-lock"></i>
+            <span class="author-only"><%= t("topics.exposed_to_author_only") %></span>
+          <% end %>
+        <% else %>
+          <% if !reply_to.exposed_to_author_only? %>
+            <%= markdown(reply_to.body) %>
+          <% else %>
+            <i class="fa fa-lock"></i>
+            <span class="author-only"><%= t("topics.exposed_to_author_only") %></span>
+          <% end %>
+        <% end %>
+      </div>
     <% end %>
   </div>
 <% end %>

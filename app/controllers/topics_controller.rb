@@ -206,7 +206,7 @@ class TopicsController < ApplicationController
 
       # 加入匿名功能
       if @topic.belongs_to_nickname_node? && @topic.draft == false
-        @topic.user_id = User::ANONYMOUS_ID
+        @topic.user_id = User.anonymous_user_id
         @topic.real_user_id = current_user.id
       end
 

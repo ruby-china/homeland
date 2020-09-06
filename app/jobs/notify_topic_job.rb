@@ -6,9 +6,21 @@ class NotifyTopicJob < ApplicationJob
   def perform(topic_id)
     topic = Topic.find_by_id(topic_id)
     return if topic&.user.blank?
+    return if topic.draft
 
     follower_ids = topic.user.follow_by_user_ids
     return if follower_ids.empty?
+
+    # 私密组织，组内广播
+    if topic.private_org
+      follower_ids = topic&.team.team_notify_users.pluck(:user_id) || []
+    end
+
+    # 对于专题文章来说只通知关注了该专题的用户
+    if topic.is_article?
+      column_focus_user_ids = topic.column.follow_by_user_ids || []
+      follower_ids = follower_ids | column_focus_user_ids
+    end
 
     notified_user_ids = topic.mentioned_user_ids
 

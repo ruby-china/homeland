@@ -84,6 +84,15 @@ module Api
 
         @replies = @user.replies.recent
         @replies = @replies.includes(:user, :topic).offset(params[:offset]).limit(params[:limit])
+
+        @replies = @replies.map do |r|
+          if not r.exposed_to_author_only? || (current_user && (r.topic && r.topic.user == current_user || r.user == current_user))
+            r
+          else
+            r.body = I18n.t("topics.exposed_to_author_only")
+            r
+          end
+        end
       end
 
       # 获取某个用户的收藏列表

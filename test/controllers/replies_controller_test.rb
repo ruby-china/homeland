@@ -78,7 +78,7 @@ describe RepliesController, type: :controller do
 
       it "nickname topic create nickname reply" do
         sign_in user
-        nickname_user = create(:user, id: User::ANONYMOUS_ID)
+        nickname_user = create(:user, id: User.anonymous_user_id)
         post topic_replies_path(nickname_topic), params: { reply: { body: "content", anonymous: 0 }, format: :js }
         assert_equal 200, response.status
         nickname_reply = Reply.last

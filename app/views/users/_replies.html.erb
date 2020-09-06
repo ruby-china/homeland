@@ -1,22 +1,37 @@
 <% if replies.blank? %>
-<div class="card-body">
-  <div class="no-result" style="padding:20px">还未参与讨论</div>
-</div>
+  <div class="card-body">
+    <div class="no-result" style="padding:20px">还未参与讨论</div>
+  </div>
 <% else %>
-<ul class="list-group list-group-flush recent-replies">
-  <% replies.each do |reply| %>
-    <% cache(['users', reply]) do %>
-      <% next if reply.topic.blank? %>
-      <li class="list-group-item">
-        <div class="title">
-          <%= link_to(reply.topic.title, topic_path(reply.topic_id)) %>
-          <span class="info">at <%= timeago(reply.created_at) %></span>
-        </div>
-        <div class="body markdown">
-          <%= reply.body_html %>
-        </div>
-      </li>
+  <ul class="list-group list-group-flush recent-replies">
+    <% replies.each do |reply| %>
+      <% cache(['users', reply]) do %>
+        <% next if reply.topic.blank? %>
+        <li class="list-group-item">
+          <% if !reply.exposed_to_author_only? || (current_user && (reply.topic && reply.topic.user == current_user || reply.user == current_user)) %>
+            <div class="title">
+              <%= link_to(reply.topic.title, send("#{reply.topic.class.name.downcase}_path", reply.topic_id)) %>
+              <span class="info">at <%= timeago(reply.created_at) %></span>
+
+              <% if reply.exposed_to_author_only? %>
+                <span class="info"><i class="fa fa-lock"></i> <%= t("topics.exposed_to_author_only") %></span>
+              <% end %>
+            </div>
+            <div class="body markdown">
+              <%= reply.body_html %>
+            </div>
+          <% else %>
+            <div class="title">
+              <%= link_to(reply.topic.title, send("#{reply.topic.class.name.downcase}_path", reply.topic_id)) %>
+              <span class="info">at <%= timeago(reply.created_at) %></span>
+            </div>
+            <div class="body markdown">
+              <i class="fa fa-lock"></i>
+              <span class="author-only"><%= t("topics.exposed_to_author_only") %></span>
+            </div>
+          <% end %>
+        </li>
+      <% end %>
     <% end %>
-  <% end %>
-</ul>
+  </ul>
 <% end %>

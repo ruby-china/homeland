@@ -15,7 +15,7 @@ class Reply < ApplicationRecord
   delegate :login, to: :user, prefix: true, allow_nil: true
 
   scope :without_system, -> { where(action: nil) }
-  scope :fields_for_list, -> { select(:topic_id, :id, :body, :updated_at, :created_at) }
+  scope :fields_for_list, -> { select(:topic_id, :id, :body, :user_id, :exposed_to_author_only, :updated_at, :created_at) }
 
   # 最佳回复
   scope :suggest,            -> { where("suggested_at IS NOT NULL").order(suggested_at: :desc) }

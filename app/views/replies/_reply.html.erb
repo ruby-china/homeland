@@ -13,7 +13,7 @@
       <div class="deleted text-center"><%= floor %><%= t("common.floor")%> <%= t("common.has_deleted")%></div>
     <% elsif reply.system_event? %>
       <%= render '/replies/system_event', reply: reply %>
-    <% else %>
+    <% elsif !reply.exposed_to_author_only? || (current_user && (reply.topic && reply.topic.user == current_user || reply.user == current_user)) %>
       <div class="avatar"><%= user_avatar_tag(reply.user, :md) %></div>
       <div class="infos">
         <div class="info">
@@ -23,6 +23,15 @@
           <span class="sub-info">
             <span class='floor'>#<%= floor %></span> ·
             <a class="time" href="#reply-<%= reply.id %>"><%= timeago(reply.created_at) %></a>
+            <% if reply.user && reply.user.id == reply.topic.user_id && reply.topic.user_id != User.anonymous_user_id %>
+              <span class="label label-info reply_by_author"><%= t("common.author")%></span>
+            <% end %>
+
+            <% if reply.exposed_to_author_only? %>
+              <i class="fa fa-lock"></i>
+              <span class="author-only"><%= t("topics.exposed_to_author_only") %></span>
+            <% end %>
+
           </span>
           <span class="opts pull-right">
             <% if !reply.deleted? %>
@@ -47,6 +56,26 @@
         <%= render 'replies/reply_to', reply: reply, show_body: false %>
         <div class="markdown<%= ' deleted' if reply.deleted? %>">
           <%= reply.body_html %>
+        </div>
+      </div>
+    <% else %>
+      <div class="author-only-no-content">
+        <div class="avatar"><%= user_avatar_tag(reply.user, :md) %></div>
+        <div class="infos">
+          <div class="info">
+            <span class="name">
+              <%= user_name_tag(reply.user) %>
+            </span> ·
+            <span class='floor'>#<%= floor %></span> ·
+            <a class="time" href="#reply-<%= reply.id %>"><%= timeago(reply.created_at) %></a>
+            <% if reply.user && reply.user.id == reply.topic.user_id && reply.topic.user_id != User.anonymous_user_id %>
+              <span class="label label-info reply_by_author"><%= t("common.author")%></span>
+            <% end %>
+          </div>
+          <div class="markdown">
+            <i class="fa fa-lock"></i>
+            <span class="author-only"><%= t("topics.exposed_to_author_only") %></span>
+          </div>
         </div>
       </div>
     <% end %>

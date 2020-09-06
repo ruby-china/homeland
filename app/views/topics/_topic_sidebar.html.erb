@@ -54,10 +54,10 @@
             <% end %>
           <% end %>
           <% if can?(:edit, @topic) %>
-          <%= link_to raw('<i class="fa fa-edit"></i> 编辑'), edit_topic_path(@topic), title: "修改本帖" %>
+          <%= link_to raw('<i class="fa fa-edit"></i> 编辑'), send("edit_#{@topic.class.name.downcase}_path", @topic), title: "修改本帖" %>
           <% end %>
           <% if can?(:destroy, @topic) %>
-            <%= link_to raw('<i class="fa fa-trash"></i> 删除'), topic_path(@topic.id), method: :delete, 'data-confirm' => t("common.confirm_delete"), title: "删除本帖", remote: true %>
+            <%= link_to raw('<i class="fa fa-trash"></i> 删除'), send("#{@topic.class.name.downcase}_path", @topic), method: :delete, 'data-confirm' => t("common.confirm_delete"), title: "删除本帖", remote: true %>
           <% end %>
         </div>
       </div>

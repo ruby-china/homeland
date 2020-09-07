@@ -9,7 +9,7 @@
     "@fortawesome/fontawesome-free": "^5.13.1",
     "@rails/actioncable": "^6.0.3-2",
     "@rails/ujs": "^6.0.3",
-    "@rails/webpacker": "5.1.1",
+    "@rails/webpacker": "^5.1.1",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "backbone": "^1.4.0",
     "bootstrap": "^4.5.0",

@@ -37,6 +37,8 @@ class TeamsController < ApplicationController
     if @team.update(team_params)
       redirect_to(edit_team_path(@team), notice: t("common.update_success"))
     else
+      # 转向正确的拼写
+      @team.login = @team.login_was || @team.login
       render action: "edit"
     end
   end

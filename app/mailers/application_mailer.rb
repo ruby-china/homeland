@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class BaseMailer < ActionMailer::Base
+class ApplicationMailer < ActionMailer::Base
   default from: Setting.mailer_sender
   default charset: "utf-8"
   default content_type: "text/html"
@@ -8,4 +8,8 @@ class BaseMailer < ActionMailer::Base
 
   layout "mailer"
   helper :topics, :users
+
+  rescue_from Postmark::InactiveRecipientError do |exception|
+    # do nothing
+  end
 end

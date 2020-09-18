@@ -112,8 +112,6 @@ gem "exception-track"
 gem "bootsnap"
 gem "lograge"
 
-gem "puma_worker_killer"
-
 group :development do
   gem "spring"
   gem "byebug"

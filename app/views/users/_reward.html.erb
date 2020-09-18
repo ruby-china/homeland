@@ -9,13 +9,12 @@
           <div class="user-info"><%= user_avatar_tag(@user, :md, link: false) %></div>
           <p><i class="fa fa-quote-left pull-left"></i>如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作！<i class="fa fa-quote-right pull-right"></i></p>
         </div>
-
-        <% @user.rewards.each_with_index do |(field, val), idx| %>
-        <div class="reward-image"><img src="<%= @user.reward_field(field) %>"></div>
+        <% if @user.rewards %>
+          <% @user.rewards.each_with_index do |(field, val), idx| %>
+            <div class="reward-image"><img src="<%= @user.reward_field(field) %>"></div>
+          <% end %>
         <% end %>
       </div>
     </div>
   </div>
 </div>
-
-

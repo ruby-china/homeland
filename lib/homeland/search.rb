@@ -7,13 +7,11 @@ module Homeland
     INVALID_CHARS = /[:()&!'"]/
 
     def initialize(term)
-      if term.present?
-        term = term.to_s.squish.gsub(INVALID_CHARS, "")
-        @terms = Search.jieba.cut(term)
-        @term = @terms.join(" ")
+      term = term.to_s.squish.gsub(INVALID_CHARS, "")
+      @terms = Search.jieba.cut(term)
+      @term = @terms.join(" ")
 
-        @results = []
-      end
+      @results = []
     end
 
     def query_results

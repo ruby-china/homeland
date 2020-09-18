@@ -17,5 +17,6 @@ ExceptionNotification.configure do |config|
     ActionController::InvalidCrossOriginRequest
     ActionController::ParameterMissing
     Mime::Type::InvalidMimeType
+    Postmark::InactiveRecipientError
   ]
 end

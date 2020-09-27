@@ -7,6 +7,7 @@ window._ = require('underscore');
 
 import Turbolinks from 'turbolinks';
 
+
 window.Turbolinks = Turbolinks;
 Turbolinks.start();
 Turbolinks.setProgressBarDelay(150);
@@ -28,6 +29,7 @@ require("google_analytics");
 require("jquery.infinitescroll.min");
 require("jquery.mobile-events");
 require("vendor/social-share-button");
+require("vendor/turbolinks-prefetch")
 
 import { createConsumer } from '@rails/actioncable';
 

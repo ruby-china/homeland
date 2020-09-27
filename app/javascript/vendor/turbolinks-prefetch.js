@@ -46,13 +46,22 @@ function cleanup(event) {
 }
 
 document.addEventListener('mouseover', event => {
-  const href = event.target.getAttribute("href");
-  if (!href || href === '#') return
-  if (href.includes("://")) return
-  const url = href
-  if (prefetched(url)) return
-  if (prefetching(url)) return
+  const { target } = event;
+  if (target.hasAttribute('data-remote')) return
+  if (target.getAttribute('data-prefetch') === 'false') return
+  if (target.getAttribute('target') === '_blank') return
+  const href = target.getAttribute("href") || target.getAttribute("data-prefetch");
+
+  // skip no fetch link
+  if (!href) return
+  // skip anchor
+  if (href.startsWith('#')) return
+  // skip outside link
+  if (href.includes("://") && !href.startsWith(window.location.origin)) return
+
+  if (prefetched(href)) return
+  if (prefetching(href)) return
   cleanup(event)
   event.target.addEventListener('mouseleave', cleanup)
-  fetchers[url] = setTimeout(() => prefetch(url), hoverTime)
+  fetchers[href] = setTimeout(() => prefetch(href), hoverTime)
 })

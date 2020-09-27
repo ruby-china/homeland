@@ -3,6 +3,9 @@ const fetchers = {}
 const doc = document.implementation.createHTMLDocument('prefetch')
 const xhr = new XMLHttpRequest()
 
+// Increment Turbolinks cache size upto 30
+Turbolinks.controller.cache.size = 30
+
 function fetchPage(url, success) {
   xhr.open('GET', url)
   xhr.setRequestHeader('VND.PREFETCH', 'true')

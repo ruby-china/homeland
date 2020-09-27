@@ -10,7 +10,7 @@ import Turbolinks from 'turbolinks';
 
 window.Turbolinks = Turbolinks;
 Turbolinks.start();
-Turbolinks.setProgressBarDelay(150);
+Turbolinks.setProgressBarDelay(200);
 
 window.Rails = require('@rails/ujs');
 Rails.start();

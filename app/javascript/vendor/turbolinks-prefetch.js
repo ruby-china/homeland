@@ -38,11 +38,16 @@ function prefetching(url) {
   return !!fetchers[url]
 }
 
-function cleanup(event) {
+function cleanup(event, href) {
   const element = event.target
+  clearTimeout(fetchers[href])
+  fetchers[href] = null
+  element.removeEventListener('mouseleave', mouseleave)
+}
+
+function mouseleave(event, href) {
   xhr.abort()
-  clearTimeout(fetchers[element.href])
-  element.removeEventListener('mouseleave', cleanup)
+  cleanup(event, href)
 }
 
 document.addEventListener('mouseover', event => {
@@ -61,7 +66,7 @@ document.addEventListener('mouseover', event => {
 
   if (prefetched(href)) return
   if (prefetching(href)) return
-  cleanup(event)
-  event.target.addEventListener('mouseleave', cleanup)
+  cleanup(event, href)
+  event.target.addEventListener('mouseleave', (event) => mouseleave(event, href))
   fetchers[href] = setTimeout(() => prefetch(href), hoverTime)
 })

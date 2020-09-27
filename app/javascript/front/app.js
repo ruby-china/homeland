@@ -149,7 +149,7 @@ const AppView = Backbone.View.extend({
 
   likeableAsLiked(el) {
     const likes_count = el.data("count");
-    el.data("state", "active").attr("title", "取消赞").addClass("active");
+    el.data("state", "active").attr("title", "取消赞").addClass("active").addClass("animate");
     return $('span', el).text(`${likes_count} 个赞`);
   },
 

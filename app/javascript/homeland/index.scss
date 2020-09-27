@@ -807,9 +807,13 @@ img.emoji {
 
 .opts a.active {
   .fa {
-    @extend .animated;
-    @extend .bounceIn;
     color: var(--red);
+  }
+  &.animate {
+    .fa {
+      @extend .animated;
+      @extend .bounceIn;
+    }
   }
 }
 

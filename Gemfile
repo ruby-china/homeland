@@ -24,7 +24,7 @@ gem "rack-attack"
 
 gem "http_accept_language"
 gem "rails-i18n"
-gem "twemoji", github: 'jollygoodcode/twemoji'
+gem "twemoji", github: "jollygoodcode/twemoji"
 
 # OAuth Provider
 gem "doorkeeper"
@@ -76,7 +76,7 @@ gem "cancancan"
 
 # Redis
 gem "redis", "~>4.1.0"
-gem "redis-namespace", github: 'resque/redis-namespace'
+gem "redis-namespace", github: "resque/redis-namespace"
 gem "redis-objects"
 
 # Cache
@@ -121,7 +121,7 @@ end
 group :development, :test do
   gem "sdoc"
   gem "letter_opener"
-  gem "listen", github: 'guard/listen'
+  gem "listen", github: "guard/listen"
 
   gem "mocha"
   gem "minitest-spec-rails"

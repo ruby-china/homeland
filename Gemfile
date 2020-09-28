@@ -24,7 +24,7 @@ gem "rack-attack"
 
 gem "http_accept_language"
 gem "rails-i18n"
-gem "twemoji"
+gem "twemoji", github: "jollygoodcode/twemoji"
 
 # OAuth Provider
 gem "doorkeeper"
@@ -38,6 +38,7 @@ gem "carrierwave"
 gem "carrierwave-aliyun"
 gem "carrierwave-upyun"
 gem "carrierwave-qiniu"
+gem "qiniu", github: "huacnlee/qiniu-ruby-sdk", branch: "patch-1"
 
 # Lazy load
 gem "mini_magick", require: false
@@ -74,8 +75,8 @@ gem "omniauth-github"
 gem "cancancan"
 
 # Redis
-gem "redis"
-gem "redis-namespace"
+gem "redis", "~>4.1.0"
+gem "redis-namespace", github: "resque/redis-namespace"
 gem "redis-objects"
 
 # Cache
@@ -92,7 +93,7 @@ gem "redcarpet"
 gem "rouge"
 
 # 队列
-gem "sidekiq"
+gem "sidekiq", "6.0.7"
 gem "sidekiq-cron"
 
 # 分享功能
@@ -120,7 +121,7 @@ end
 group :development, :test do
   gem "sdoc"
   gem "letter_opener"
-  gem "listen"
+  gem "listen", github: "guard/listen"
 
   gem "mocha"
   gem "minitest-spec-rails"

@@ -1,3 +1,35 @@
+GIT
+  remote: https://github.com/guard/listen.git
+  revision: 86e06aeb0878dcd46fd635d620656748255d3f67
+  specs:
+    listen (3.2.1)
+      rb-fsevent (~> 0.10, >= 0.10.3)
+      rb-inotify (~> 0.9, >= 0.9.10)
+
+GIT
+  remote: https://github.com/huacnlee/qiniu-ruby-sdk.git
+  revision: 5adc7487d7df1ac3ad70db46071a741685e580bd
+  branch: patch-1
+  specs:
+    qiniu (6.9.0)
+      mime-types (~> 3.1)
+      rest-client (~> 2.0)
+      rexml (~> 3.2)
+
+GIT
+  remote: https://github.com/jollygoodcode/twemoji.git
+  revision: baf9ba04f21f79b08b0cc80fb645f71c370adc93
+  specs:
+    twemoji (3.1.6)
+      nokogiri (~> 1.6)
+
+GIT
+  remote: https://github.com/resque/redis-namespace.git
+  revision: c31e63dc3cd5e59ef5ea394d4d46ac60d1e6f82e
+  specs:
+    redis-namespace (1.8.0)
+      redis (>= 3.0.4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -90,7 +122,7 @@ GEM
     carrierwave-upyun (1.0.5)
       carrierwave (>= 1.0.0)
       faraday (>= 0.8.0)
-    codecov (0.2.10)
+    codecov (0.2.11)
       json
       simplecov
     coffee-rails (5.0.0)
@@ -187,9 +219,6 @@ GEM
       addressable (~> 2.7)
     letter_opener (1.7.0)
       launchy (~> 2.2)
-    listen (3.2.1)
-      rb-fsevent (~> 0.10, >= 0.10.3)
-      rb-inotify (~> 0.9, >= 0.9.10)
     lograge (0.11.2)
       actionpack (>= 4)
       activesupport (>= 4)
@@ -258,15 +287,14 @@ GEM
     public_suffix (4.0.6)
     puma (5.0.0)
       nio4r (~> 2.0)
-    qiniu (6.9.0)
-      mime-types (~> 3.1)
-      rest-client (~> 2.0)
     raabro (1.3.1)
     rack (2.2.3)
     rack-attack (6.3.1)
       rack (>= 1.0, < 3)
     rack-cors (1.1.1)
       rack (>= 2.0.0)
+    rack-protection (2.1.0)
+      rack
     rack-proxy (0.6.5)
       rack
     rack-test (1.1.0)
@@ -314,9 +342,7 @@ GEM
     recaptcha (5.5.0)
       json
     redcarpet (3.5.0)
-    redis (4.2.2)
-    redis-namespace (1.7.0)
-      redis (>= 3.0.4)
+    redis (4.1.4)
     redis-objects (1.5.0)
       redis (~> 4.0)
     regexp_parser (1.7.1)
@@ -370,17 +396,18 @@ GEM
       activerecord (>= 5.2, < 7)
       activesupport (>= 5.2, < 7)
     semantic_range (2.3.0)
-    sidekiq (6.1.2)
+    sidekiq (6.0.7)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
-      redis (>= 4.2.0)
+      rack-protection (>= 2.0.0)
+      redis (>= 4.1.0)
     sidekiq-cron (1.2.0)
       fugit (~> 1.1)
       sidekiq (>= 4.2.1)
     simplecov (0.19.0)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
-    simplecov-html (0.12.2)
+    simplecov-html (0.12.3)
     social-share-button (1.2.3)
       coffee-rails
     spring (2.1.1)
@@ -397,8 +424,6 @@ GEM
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
-    twemoji (3.1.6)
-      nokogiri (~> 1.6)
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
     uglifier (4.2.0)
@@ -450,7 +475,7 @@ DEPENDENCIES
   jieba-rb
   kaminari
   letter_opener
-  listen
+  listen!
   lograge
   mini_magick
   minitest-spec-rails
@@ -463,6 +488,7 @@ DEPENDENCIES
   postmark
   postmark-rails
   puma
+  qiniu!
   rack-attack
   rack-cors
   rails
@@ -471,8 +497,8 @@ DEPENDENCIES
   rails_autolink
   recaptcha
   redcarpet
-  redis
-  redis-namespace
+  redis (~> 4.1.0)
+  redis-namespace!
   redis-objects
   rouge
   rubocop
@@ -482,14 +508,14 @@ DEPENDENCIES
   sass-rails
   sdoc
   second_level_cache
-  sidekiq
+  sidekiq (= 6.0.7)
   sidekiq-cron
   social-share-button
   spring
   turbolinks
-  twemoji
+  twemoji!
   uglifier
   webpacker (~> 5.x)
 
 BUNDLED WITH
-   2.1.4
+   2.2.0.rc.1

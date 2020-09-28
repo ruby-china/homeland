@@ -1,4 +1,4 @@
-FROM ruby:2.7-slim-buster
+FROM rubylang/ruby:3.0.0-preview1-bionic
 
 RUN gem install bundler
 RUN sed -i 's#http://deb.debian.org#https://mirrors.163.com#g' /etc/apt/sources.list && \

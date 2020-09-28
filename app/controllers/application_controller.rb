@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery prepend: true
   helper_method :turbolinks_app?, :turbolinks_ios?, :turbolinks_app_version
   around_action :set_time_zone
+  fragment_cache_key I18n.locale
 
   include SetCurrentInfo
   include Homeland::UserNotificationHelper

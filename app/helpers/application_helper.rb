@@ -96,21 +96,15 @@ module ApplicationHelper
     raw "<i class='fa fa-#{name}'></i> #{label}"
   end
 
-  # Override cache helper for support multiple I18n locale
-  def cache(name = {}, options = {}, &block)
-    options ||= {}
-    super([I18n.locale, name], options, &block)
-  end
-
   def render_list(opts = {})
     list = []
-    yield(list)
+    yield list
     list_items = render_list_items(list)
     content_tag("ul", list_items, opts)
   end
 
   def render_list_items(list = [])
-    yield(list) if block_given?
+    yield list if block_given?
     items = []
     list.each do |link|
       urls = link.match(/href=(["'])(.*?)(\1)/) || []

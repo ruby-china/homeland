@@ -5,12 +5,10 @@ addons:
 
 services:
   - postgresql
-  - memcached
   - redis-server
-  - elasticsearch
 
 rvm:
-  - 2.7.0
+  - ruby-3.0.0-preview1
 
 matrix:
   fast_finish: true

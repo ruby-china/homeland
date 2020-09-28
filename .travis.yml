@@ -5,9 +5,7 @@ addons:
 
 services:
   - postgresql
-  - memcached
   - redis-server
-  - elasticsearch
 
 rvm:
   - ruby-3.0.0-preview1

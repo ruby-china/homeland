@@ -6,11 +6,15 @@ window.Backbone = require('backbone');
 window._ = require('underscore');
 
 import Turbolinks from 'turbolinks';
+import TubrolinksPrefetch from 'turbolinks-prefetch'
 
 
 window.Turbolinks = Turbolinks;
 Turbolinks.start();
 Turbolinks.setProgressBarDelay(200);
+// Increment Turbolinks cache size upto 30
+Turbolinks.controller.cache.size = 30
+TubrolinksPrefetch.start()
 
 window.Rails = require('@rails/ujs');
 Rails.start();
@@ -29,7 +33,6 @@ require("google_analytics");
 require("jquery.infinitescroll.min");
 require("jquery.mobile-events");
 require("vendor/social-share-button");
-require("vendor/turbolinks-prefetch")
 
 import { createConsumer } from '@rails/actioncable';
 

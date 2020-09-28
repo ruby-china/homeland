@@ -47,12 +47,10 @@ module Homeland
       Doorkeeper::AuthorizedApplicationsController.layout "simple"
     end
 
-    config.action_cable.log_tags = [
-      :action_cable, ->(request) { request.uuid }
-    ]
+    config.action_cable.log_tags = [:action_cable, ->(request) { request.uuid }]
 
     redis_config = Application.config_for(:redis)
-    config.cache_store = [:redis_cache_store, { namespace: "cache", url: redis_config["url"], expires_in: 2.weeks }]
+    config.cache_store = [:redis_cache_store, { namespace: "cache", url: redis_config["url"], expires_in: 4.weeks }]
 
     config.active_job.queue_adapter = :sidekiq
     config.middleware.use Rack::Attack

@@ -94,7 +94,7 @@ class ActiveSupport::TestCase
   end
 
   def fixture_file_upload(name, content_type = "text/plain")
-    Rack::Test::UploadedFile.new(Rails.root.join("test/fixtures/#{name}"), content_type)
+    Rack::Test::UploadedFile.new(name, content_type)
   end
 end
 

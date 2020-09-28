@@ -5,7 +5,7 @@ source "https://rubygems.org"
 git_source(:github) { |repo_name| "https://github.com/#{repo_name}.git" }
 
 gem "jbuilder"
-gem "rails"
+gem "rails", github: "rails/rails"
 gem "rails_autolink"
 gem "sass-rails"
 gem "turbolinks"
@@ -77,7 +77,7 @@ gem "omniauth-wechat-oauth2"
 gem "cancancan"
 
 # Redis
-gem "redis", "~>4.1.0"
+gem "redis"
 gem "redis-namespace", github: "resque/redis-namespace"
 gem "redis-objects"
 

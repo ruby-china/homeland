@@ -1,5 +1,5 @@
 # NAME:     homeland/homeland
-FROM homeland/base:3.0.0-preview1
+FROM homeland/base:2.7-slim-buster
 
 ENV RAILS_ENV "production"
 ENV HOMELAND_VERSION "master"

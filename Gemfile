@@ -24,7 +24,7 @@ gem "rack-attack"
 
 gem "http_accept_language"
 gem "rails-i18n"
-gem "twemoji", github: "jollygoodcode/twemoji"
+gem "twemoji"
 
 # OAuth Provider
 gem "doorkeeper"

@@ -17,13 +17,6 @@ GIT
       rexml (~> 3.2)
 
 GIT
-  remote: https://github.com/jollygoodcode/twemoji.git
-  revision: baf9ba04f21f79b08b0cc80fb645f71c370adc93
-  specs:
-    twemoji (3.1.6)
-      nokogiri (~> 1.6)
-
-GIT
   remote: https://github.com/resque/redis-namespace.git
   revision: c31e63dc3cd5e59ef5ea394d4d46ac60d1e6f82e
   specs:
@@ -424,6 +417,8 @@ GEM
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
+    twemoji (3.1.7)
+      nokogiri (~> 1.6)
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
     uglifier (4.2.0)
@@ -513,7 +508,7 @@ DEPENDENCIES
   social-share-button
   spring
   turbolinks
-  twemoji!
+  twemoji
   uglifier
   webpacker (~> 5.x)
 

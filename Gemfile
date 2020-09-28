@@ -30,7 +30,7 @@ gem "twemoji"
 gem "doorkeeper"
 gem "doorkeeper-i18n"
 
-gem "bulk_insert"
+gem "bulk_insert", github: "huacnlee/bulk_insert", branch: "fix-for-rails-6.1"
 
 # 上传组件
 gem "carrierwave"

@@ -45,7 +45,6 @@ class TopicsController < ApplicationController
     @topic = Topic.unscoped.includes(:user).find(params[:id])
     render_404 if @topic.deleted?
 
-    @topic.hits.incr(1)
     @node = @topic.node
     @show_raw = params[:raw] == "1"
     @can_reply = can?(:create, Reply)
@@ -53,7 +52,10 @@ class TopicsController < ApplicationController
     @replies = Reply.unscoped.where(topic_id: @topic.id).order(:id).all
     @user_like_reply_ids = current_user&.like_reply_ids_by_replies(@replies) || []
 
-    check_current_user_status_for_topic
+    unless prefetch?
+      @topic.hits.incr(1)
+      check_current_user_status_for_topic
+    end
   end
 
   def new

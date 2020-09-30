@@ -157,6 +157,10 @@ class ApplicationController < ActionController::Base
     redirect_to auth_sso_path if Setting.sso_enabled?
   end
 
+  def prefetch?
+    request.headers["Purpose"] == "prefetch"
+  end
+
   private
 
     def set_time_zone(&block)

@@ -4,13 +4,6 @@
   <%= render "sidebar", user: @user %>
   <div class="col-md-8">
     <%= render "menu" %>
-    <div class="card">
-      <div class="card-body">
-        <%= render "topics", topics: @topics %>
-      </div>
-      <div class="card-footer clearfix">
-        <%= paginate @topics %>
-      </div>
-    </div>
+    <%= render "topics", topics: @topics %>
   </div>
 </div>

@@ -13,7 +13,8 @@ const AppView = Backbone.View.extend({
     "click a.button-block-user": "blockUser",
     "click a.button-follow-user": "followUser",
     "click a.button-block-node": "blockNode",
-    "click a.rucaptcha-image-box": "reLoadRucaptchaImage"
+    "click a.rucaptcha-image-box": "reLoadRucaptchaImage",
+    "click .topics .topic": "visitTopic",
   },
 
   initialize() {
@@ -341,7 +342,17 @@ const AppView = Backbone.View.extend({
     } else {
       return $(".header.navbar").removeClass('fixed-title');
     }
-  }
+  },
+
+
+  visitTopic(e) {
+    const { target, currentTarget } = e
+    if (target.tagName === 'A' || target.tagName === 'IMG') {
+      return
+    }
+    currentTarget.querySelector(".title a").click()
+  },
+
 });
 
 document.addEventListener('turbolinks:load', () => {

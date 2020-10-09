@@ -12,7 +12,6 @@ window.TopicView = Backbone.View.extend({
   events: {
     "click .navbar .topic-title": "scrollPage",
     "click .reply .btn-reply": "reply",
-    "click .topic": "visitTopic",
     "click a.at_floor": "clickAtFloor",
     "click a.follow": "follow",
     "click a.bookmark": "bookmark",
@@ -44,14 +43,6 @@ window.TopicView = Backbone.View.extend({
     clearTimeout(this.clearHightTimer);
     return this.clearHightTimer = setTimeout(() => $(".reply").removeClass("light")
       , 10000);
-  },
-
-  visitTopic(e) {
-    const { target, currentTarget } = e
-    if (target.tagName === 'A' || target.tagName === 'IMG') {
-      return
-    }
-    currentTarget.querySelector(".title a").click()
   },
 
   // 回复

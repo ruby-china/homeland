@@ -8,51 +8,9 @@
 
     <%= render "info" %>
 
-    <div class="tabbable">
-      <ul class="nav nav-tabs">
-        <li class="nav-item"><a href="#topics" class="nav-link active" data-toggle="tab">热门话题</a></li>
-        <li class="nav-item"><a href="#replies" class="nav-link" data-toggle="tab">最近回帖</a></li>
-      </ul>
-      <div class="tab-content">
-        <div class="tab-pane active recent-topics" id="topics">
-          <div class="card">
-            <% if @topics.blank? %>
-            <div class="card-body">
-              <div class="no-result" style="padding:20px">还未发布过话题</div>
-            </div>
-            <% else %>
-            <ul class="list-group list-group-flush">
-              <% @topics.each do |item| %>
-              <li class="list-group-item">
-                <div class="title">
-                  <%= render_node_name(item.node_name,item.node_id) %>
-                  <%= topic_title_tag(item) %> <%= topic_excellent_tag(item) %>
-                </div>
-                <div class="info">
-                  <span class="counter"><%= item.likes_count %> 个赞 / <%= item.replies_count %> 条回复</span>
-                </div>
-              </li>
-              <% end %>
-            </ul>
-            <% end %>
-          </div>
-        </div>
-        <div class="tab-pane" id="replies">
-          <div class="card">
-            <%= render "replies", replies: @replies %>
-          </div>
-        </div>
-        <div class="tab-pane" id="description">
-          <% cache([@user, "bio-markdown"]) do %>
-            <% if !@user.bio.blank? %>
-              <div class="card bio">
-                <div class="card-body markdown">
-                  <%= markdown(@user.bio) %>
-                </div>
-              </div>
-            <% end %>
-          <% end %>
-        </div>
+    <div class="topics topics-<%= action_name %> card">
+      <div class="card-body item-list">
+        <%= render partial: '/topics/topic', collection: @topics, locals: { suggest: false } %>
       </div>
     </div>
   </div>

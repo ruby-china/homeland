@@ -4,24 +4,7 @@
   <%= render "sidebar", user: @user %>
   <div class="col-md-8">
     <%= render "menu" %>
-    <div class="card">
-      <div class="card-body">
-        <table class="node-topics table">
-          <tr class="head">
-            <td class="opts"><%= t("common.node") %></td>
-            <td class="title"><%= t("common.title") %></td>
-          </tr>
-          <% @topics.each do |item| %>
-          <tr class="topic <%= cycle('odd',"") %>">
-            <td><%= render_node_name(item.node_name,item.node_id) %></td>
-            <td class="title"><%= topic_title_tag(item) %></td>
-          </tr>
-          <% end %>
-        </table>
-      </div>
-      <div class="card-footer clearfix">
-        <%= paginate @topics %>
-      </div>
-    </div>
+
+    <%= render "topics", topics: @topics %>
   </div>
 </div>

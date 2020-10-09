@@ -21,7 +21,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "turbolinks": "^5.2.0",
-    "turbolinks-prefetch": "^0.3.0",
+    "turbolinks-prefetch": "^1.0.2",
     "underscore": "^1.10.2"
   },
   "devDependencies": {

@@ -7249,10 +7249,10 @@ tunnel-agent@^0.6.0:
   dependencies:
     safe-buffer "^5.0.1"
 
-turbolinks-prefetch@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.npm.taobao.org/turbolinks-prefetch/download/turbolinks-prefetch-0.3.0.tgz?cache=0&sync_timestamp=1601451142516&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fturbolinks-prefetch%2Fdownload%2Fturbolinks-prefetch-0.3.0.tgz#0b3ab49d03b9374f5c499e49ef5683a747a77bb5"
-  integrity sha1-Czq0nQO5N09cSZ5J71aDp0ene7U=
+turbolinks-prefetch@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.npm.taobao.org/turbolinks-prefetch/download/turbolinks-prefetch-1.0.2.tgz?cache=0&sync_timestamp=1602227408034&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fturbolinks-prefetch%2Fdownload%2Fturbolinks-prefetch-1.0.2.tgz#43dc9a3077251c7d1e5e59fd115d933192ea2869"
+  integrity sha1-Q9yaMHclHH0eXln9EV2TMZLqKGk=
 
 turbolinks@^5.2.0:
   version "5.2.0"

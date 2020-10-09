@@ -58,12 +58,6 @@
               <% end %>
             </div>
           <% end %>
-          <% if Setting.has_profile_field? :tagline %>
-            <div class="form-group">
-              <%= f.label :tagline %>
-              <%= f.text_field :tagline, class: "form-control" %>
-            </div>
-          <% end %>
           <div class="form-actions hide-ios">
             <button type="submit" class="btn btn-primary" data-disable-with="<%= t("common.saving") %>"><%= t("users.update_profile")%></button>
           </div>

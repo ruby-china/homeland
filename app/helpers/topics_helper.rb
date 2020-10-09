@@ -31,7 +31,7 @@ module TopicsHelper
       class_name += " " + opts[:class]
     end
     icon = content_tag("i", "", class: "fa fa-eye")
-    link_to(raw("#{icon} 关注"), "#", "data-id" => topic.id, class: class_name)
+    link_to(raw("#{icon} 订阅"), "#", "data-id" => topic.id, class: class_name)
   end
 
   def topic_title_tag(topic, opts = {})

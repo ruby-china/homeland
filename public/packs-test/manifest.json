@@ -1,11 +1,11 @@
 {
-  "admin.css": "/packs-test/css/admin-af24a667.css",
+  "admin.css": "/packs-test/css/admin-45f3d408.css",
   "admin.js": "/packs-test/js/admin-ffcf61e7b3c79ae446a5.js",
-  "application.js": "/packs-test/js/application-6abddd27f8751d480d5a.js",
+  "application.js": "/packs-test/js/application-a53e3d022bc26f7e015d.js",
   "entrypoints": {
     "admin": {
       "css": [
-        "/packs-test/css/admin-af24a667.css"
+        "/packs-test/css/admin-45f3d408.css"
       ],
       "js": [
         "/packs-test/js/admin-ffcf61e7b3c79ae446a5.js"
@@ -14,12 +14,12 @@
     "application": {
       "js": [
         "/packs-test/js/vendors-eac24ffed6f34eead7ea.chunk.js",
-        "/packs-test/js/application-6abddd27f8751d480d5a.js"
+        "/packs-test/js/application-a53e3d022bc26f7e015d.js"
       ]
     },
     "front": {
       "css": [
-        "/packs-test/css/front-e6547e3b.css"
+        "/packs-test/css/front-a3ddf99b.css"
       ],
       "js": [
         "/packs-test/js/front-c53a5cbd9c08e94d7f27.js"
@@ -27,14 +27,14 @@
     },
     "turbolinks-app": {
       "css": [
-        "/packs-test/css/turbolinks-app-6f778b6c.css"
+        "/packs-test/css/turbolinks-app-b2f0cd9f.css"
       ],
       "js": [
         "/packs-test/js/turbolinks-app-1e26708b9ea93cb5371f.js"
       ]
     }
   },
-  "front.css": "/packs-test/css/front-e6547e3b.css",
+  "front.css": "/packs-test/css/front-a3ddf99b.css",
   "front.js": "/packs-test/js/front-c53a5cbd9c08e94d7f27.js",
   "media/webfonts/fa-brands-400.eot": "/packs-test/media/webfonts/fa-brands-400-bfcc3384.eot",
   "media/webfonts/fa-brands-400.svg": "/packs-test/media/webfonts/fa-brands-400-63b56623.svg",
@@ -46,7 +46,7 @@
   "media/webfonts/fa-solid-900.ttf": "/packs-test/media/webfonts/fa-solid-900-a480ec97.ttf",
   "media/webfonts/fa-solid-900.woff": "/packs-test/media/webfonts/fa-solid-900-22aa6d43.woff",
   "media/webfonts/fa-solid-900.woff2": "/packs-test/media/webfonts/fa-solid-900-4055b057.woff2",
-  "turbolinks-app.css": "/packs-test/css/turbolinks-app-6f778b6c.css",
+  "turbolinks-app.css": "/packs-test/css/turbolinks-app-b2f0cd9f.css",
   "turbolinks-app.js": "/packs-test/js/turbolinks-app-1e26708b9ea93cb5371f.js",
   "vendors.js": "/packs-test/js/vendors-eac24ffed6f34eead7ea.chunk.js"
 }

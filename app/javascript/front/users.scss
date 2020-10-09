@@ -424,3 +424,50 @@ table.node-topics {
     display: inline-block;
   }
 }
+
+.user-profile-card {
+  text-align: left;
+  .item {
+    margin-bottom: 5px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  .name-box {
+    text-decoration: none;
+
+    .fullname {
+      color: var(--text-color);
+      font-weight: bold;
+    }
+    .login {
+      color: var(--text-color1);
+    }
+  }
+
+  .avatar-box {
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+  .tagline {
+    margin-bottom: 10px;
+    line-height: 18px;
+    max-height: 54px;
+    color: var(--text-color2);
+    // white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .company {
+    color: var(--text-color1);
+  }
+  .buttons {
+    margin-top: 10px;
+    .btn {
+      margin-top: 0;
+    }
+    .btn + .btn {
+      margin-left: 8px;
+    }
+  }
+}

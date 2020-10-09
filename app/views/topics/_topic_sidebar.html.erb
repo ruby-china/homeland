@@ -1,7 +1,11 @@
 <div id="topic-sidebar" data-spy="affix" data-offset-bottom="65">
   <div class="card">
     <div class="card-body">
-      <a href="#" class="btn btn-default btn-block btn-sm btn-move-page" data-type="top"><i class="fa fa-arrow-up"></i></a>
+      <%= render "users/profile_card", user: @topic.user %>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
       <div class="buttons">
         <div class="group likes opts">
           <%= likeable_tag(@topic) %>
@@ -24,6 +28,7 @@
         </div>
         <%= reward_user_tag(@topic.user) %>
       </div>
+      <% if can?(:manage, @topic) || can?(:close, @topic) %>
       <hr />
       <div class="group opts">
         <% if can?(:manage, @topic) %>
@@ -59,7 +64,7 @@
           <% end %>
         </div>
       </div>
-      <a href="#" class="btn btn-default btn-sm btn-block btn-move-page" data-type="bottom"><i class="fa fa-arrow-down"></i></a>
+      <% end %>
     </div>
   </div>
   <div class="notify-updated">

@@ -55,11 +55,11 @@ class TopicsHelperTest < ActionView::TestCase
     assert_equal "", topic_follow_tag(nil)
 
     # was unfollow
-    assert_equal "<a data-id=\"#{topic.id}\" class=\"follow\" href=\"#\"><i class=\"fa fa-eye\"></i> 关注</a>", topic_follow_tag(topic)
+    assert_equal "<a data-id=\"#{topic.id}\" class=\"follow\" href=\"#\"><i class=\"fa fa-eye\"></i> 订阅</a>", topic_follow_tag(topic)
 
     # was active
     user.stub(:follow_topic?, true) do
-      assert_equal "<a data-id=\"#{topic.id}\" class=\"follow active\" href=\"#\"><i class=\"fa fa-eye\"></i> 关注</a>", topic_follow_tag(topic)
+      assert_equal "<a data-id=\"#{topic.id}\" class=\"follow active\" href=\"#\"><i class=\"fa fa-eye\"></i> 订阅</a>", topic_follow_tag(topic)
     end
   end
 end

@@ -1,0 +1,34 @@
+<div class="user-profile-card">
+  <div class="media">
+    <div class="avatar-box">
+      <%= user_avatar_tag(user, :md) %>
+    </div>
+
+    <div class="media-meta">
+      <%= link_to user, class: "name-box" do %>
+        <div class="fullname">
+          <%= user.name %>
+        </div>
+        <div class="login">
+          <%= "@#{user.login}" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <% if user.tagline.present? %>
+  <hr />
+  <div class="item tagline"><%= user.tagline %></div>
+  <% end %>
+  <% if !user.company.blank? %>
+    <div class="item company">
+      <%= icon_tag("company") %>
+      <%= user.company %>
+    </div>
+  <% end %>
+  <% if !owner? user %>
+  <hr />
+    <div class="item buttons flex aic">
+      <%= follow_user_tag(user) %>
+    </div>
+  <% end %>
+</div>

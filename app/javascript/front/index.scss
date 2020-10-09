@@ -501,10 +501,12 @@ hr {
   .group {
     text-align: center;
     margin-bottom: 20px;
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 
   .buttons {
-    margin-top: 20px;
     .likes {
       a {
         display: block;

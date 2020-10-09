@@ -36,6 +36,13 @@
                 </label>
               </div>
 
+              <% if Setting.has_profile_field? :tagline %>
+                <div class="form-group">
+                  <%= f.label :tagline %>
+                  <%= f.text_field :tagline, class: "form-control" %>
+                </div>
+              <% end %>
+
               <div class="form-group">
                 <label class="control-label">自我介绍</label>
                 <%= f.text_area :bio, class: "form-control", rows: 6 %>

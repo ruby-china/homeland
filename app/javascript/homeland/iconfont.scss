@@ -16,4 +16,7 @@ $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
   &-pencil {
     @extend .fa-edit;
   }
+  &-company {
+    @extend .fa-briefcase;
+  }
 }

@@ -38,8 +38,8 @@ class User
     end
 
     # 将 topic 的最后回复设置为已读
-    def read_topic(topic, opts = {})
-      TopicReadJob.perform_later(topic_id: topic.id, user_id: self.id, replies_ids: opts[:replies_ids])
+    def read_topic(topic)
+      TopicReadJob.perform_later(topic_id: topic.id, user_id: self.id)
     end
   end
 end

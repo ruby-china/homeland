@@ -11,10 +11,11 @@
       <% elsif current_user %>
         $("#replies .reply a.edit[data-uid='<%= current_user.id %>']").css('display','inline-block');
       <% end %>
-    
+
       <% if @topic.closed? %>
         $("#replies .reply .hideable").remove();
       <% end %>
+      $.post("<%= read_topic_path(@topic) %>");
     })
   </script>
 <% end %>

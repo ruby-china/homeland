@@ -253,15 +253,24 @@ describe TopicsController do
   end
 
   describe "GET /topics/:id" do
-    it "should clear user mention notification when show topic" do
+    it "should work" do
+      user = create :user
+      topic = create :topic, body: "@#{user.login}"
+      create :reply, body: "@#{user.login}", topic: topic, like_by_user_ids: [user.id]
+      get topic_path(topic)
+      assert_equal 200, response.status
+    end
+  end
+
+  describe "POST /topics/:id/read" do
+    it "should work" do
       user = create :user
       topic = create :topic, body: "@#{user.login}"
       create :reply, body: "@#{user.login}", topic: topic, like_by_user_ids: [user.id]
       sign_in user
-
       perform_enqueued_jobs do
         assert_changes -> { user.notifications.unread.count }, -2 do
-          get topic_path(topic)
+          post read_topic_path(topic)
         end
       end
       assert_equal 200, response.status

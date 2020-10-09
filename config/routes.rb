@@ -70,6 +70,7 @@ Rails.application.routes.draw do
       post :action
       # ban popup window
       get :ban
+      post :read
     end
 
     collection do

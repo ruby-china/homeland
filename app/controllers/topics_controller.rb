@@ -7,7 +7,7 @@ class TopicsController < ApplicationController
                                               favorite unfavorite follow unfollow
                                               action favorites]
   load_and_authorize_resource only: %i[new edit create update destroy favorite unfavorite follow unfollow]
-  before_action :set_topic, only: %i[edit update destroy follow unfollow action ban]
+  before_action :set_topic, only: %i[edit read update destroy follow unfollow action ban]
 
   def index
     @suggest_topics = []
@@ -52,10 +52,17 @@ class TopicsController < ApplicationController
     @replies = Reply.unscoped.where(topic_id: @topic.id).order(:id).all
     @user_like_reply_ids = current_user&.like_reply_ids_by_replies(@replies) || []
 
-    unless prefetch?
-      @topic.hits.incr(1)
-      check_current_user_status_for_topic
-    end
+    # 是否关注过
+    @has_followed = current_user&.follow_topic?(@topic)
+    # 是否收藏
+    @has_favorited = current_user&.favorite_topic?(@topic)
+  end
+
+  def read
+    @topic.hits.incr(1)
+    # 通知处理
+    current_user&.read_topic(@topic)
+    render plain: "1"
   end
 
   def new
@@ -170,15 +177,5 @@ class TopicsController < ApplicationController
       return nil if team.blank?
       return nil if cannot?(:show, team)
       team.id
-    end
-
-    def check_current_user_status_for_topic
-      return false unless current_user
-      # 通知处理
-      current_user.read_topic(@topic, replies_ids: @replies.collect(&:id))
-      # 是否关注过
-      @has_followed = current_user.follow_topic?(@topic)
-      # 是否收藏
-      @has_favorited = current_user.favorite_topic?(@topic)
     end
 end

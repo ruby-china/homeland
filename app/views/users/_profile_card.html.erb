@@ -25,6 +25,12 @@
       <%= user.company %>
     </div>
   <% end %>
+  <% if !user.location.blank? %>
+    <div class="item location">
+      <%= icon_tag("city") %>
+      <%= user.location %>
+    </div>
+  <% end %>
   <% if !owner? user %>
   <hr />
     <div class="item buttons flex aic">

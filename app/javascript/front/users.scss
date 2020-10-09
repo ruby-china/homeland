@@ -458,8 +458,16 @@ table.node-topics {
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  .company {
+  .company,
+  .location {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     color: var(--text-color1);
+
+    .fa {
+      width: 18px;
+    }
   }
   .buttons {
     margin-top: 10px;

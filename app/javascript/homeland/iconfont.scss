@@ -13,4 +13,7 @@ $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
   &-warning {
     @extend .fa-exclamation-triangle;
   }
+  &-pencil {
+    @extend .fa-edit;
+  }
 }

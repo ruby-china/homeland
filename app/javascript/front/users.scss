@@ -471,3 +471,15 @@ table.node-topics {
     }
   }
 }
+
+.opts {
+  .button-follow-user {
+    &.active {
+      background: var(--opts-link-hover-background-color);
+      color: var(--text-color1) !important;
+      .fa {
+        color: var(--text-color1) !important;
+      }
+    }
+  }
+}

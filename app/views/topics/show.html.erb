@@ -20,7 +20,7 @@
   </script>
 <% end %>
 <div class="row">
-  <div class="col-md-9">
+  <div class="col-lg-9">
     <div class="topic-detail card">
       <%= render partial: "topics/topic_info", locals: { topic: @topic } %>
       <% if @topic.excellent? %>
@@ -80,7 +80,7 @@
     <% end %>
   </div>
   <% if !mobile? %>
-    <div class="sidebar hidden-mobile col-md-3">
+    <div class="sidebar hidden-mobile col-lg-3">
       <%= render 'topic_sidebar' %>
     </div>
   <% else %>

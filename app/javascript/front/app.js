@@ -240,7 +240,7 @@ const AppView = Backbone.View.extend({
         success(res) {
           if (res.code === 0) {
             btn.addClass('active').attr("title", "");
-            span.text("取消关注");
+            span.text("已关注");
             return followerCounter.text(res.data.followers_count);
           }
         }

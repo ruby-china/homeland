@@ -8,11 +8,13 @@ GIT
 
 GIT
   remote: https://github.com/qiniu/ruby-sdk.git
-  revision: 2272dfebc2cfd718b56110a9d54b175200dc1d6f
+  revision: 24ba7c7bcde4b51e8b9ecbee08ede5c12293c92d
+  branch: develop
   specs:
     qiniu (6.9.0)
       mime-types (~> 3.1)
       rest-client (~> 2.0)
+      rexml (~> 3.2)
 
 GIT
   remote: https://github.com/resque/redis-namespace.git

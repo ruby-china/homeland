@@ -283,6 +283,14 @@ hr {
 }
 
 .topics {
+  .card-body {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .pagination {
+    margin-top: 25px;
+  }
+
   .no-result {
     padding-bottom: 0;
     margin-bottom: 0;
@@ -299,10 +307,12 @@ hr {
   .topic {
     min-height: 68px;
     border-bottom: 1px solid var(--topic-item-border-color);
-    padding: 15px 0px;
+    padding: 15px 25px;
+    margin: 0 -25px;
     vertical-align: top;
-    &:first-child {
-      padding-top: 0;
+    cursor: pointer;
+    &:hover {
+      background: var(--topic-item-hover-background-color);
     }
     &:last-child {
       border-bottom: 0px;
@@ -327,10 +337,6 @@ hr {
       }
       a:active,
       a:hover {
-        color: var(--link-color);
-        .node {
-          color: var(--link-color);
-        }
         text-decoration: none;
       }
       i.fa {

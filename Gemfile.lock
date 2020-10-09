@@ -7,14 +7,12 @@ GIT
       rb-inotify (~> 0.9, >= 0.9.10)
 
 GIT
-  remote: https://github.com/huacnlee/qiniu-ruby-sdk.git
-  revision: 5adc7487d7df1ac3ad70db46071a741685e580bd
-  branch: patch-1
+  remote: https://github.com/qiniu/ruby-sdk.git
+  revision: 2272dfebc2cfd718b56110a9d54b175200dc1d6f
   specs:
     qiniu (6.9.0)
       mime-types (~> 3.1)
       rest-client (~> 2.0)
-      rexml (~> 3.2)
 
 GIT
   remote: https://github.com/resque/redis-namespace.git

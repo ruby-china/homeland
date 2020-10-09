@@ -19,6 +19,9 @@
         </div>
       <% end %>
     <% end %>
+    <script type="text/javascript">
+      $.post("<%= notifications.read_notifications_path %>", { ids: <%= j @unread_ids.as_json %> })
+    </script>
     <%= paginate @notifications %>
   </div>
 </div>

@@ -28,11 +28,8 @@ module Api
       # @param ids [Array<Integer>] of Notification id, [required]
       def read
         requires! :ids
-
-        if params[:ids].any?
-          @notifications = current_user.notifications.where(id: params[:ids])
-          Notification.read!(@notifications.collect(&:id))
-        end
+        ids = current_user.notifications.where(id: params[:ids]).pluck(:id)
+        Notification.read!(current_user, ids)
 
         render json: { ok: 1 }
       end

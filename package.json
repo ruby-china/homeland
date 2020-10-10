@@ -5,26 +5,26 @@
     "start": "./bin/webpack-dev-server"
   },
   "dependencies": {
-    "@babel/preset-react": "^7.10.1",
-    "@fortawesome/fontawesome-free": "^5.13.1",
-    "@rails/actioncable": "^6.0.3-2",
-    "@rails/ujs": "^6.0.3",
-    "@rails/webpacker": "^5.1.1",
-    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
-    "backbone": "^1.4.0",
-    "bootstrap": "^4.5.0",
-    "dropzone": "^5.7.1",
-    "jquery": "^1.12.4",
-    "jquery.caret": "^0.3.1",
-    "popper.js": "^1.16.1",
-    "prop-types": "^15.7.2",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "turbolinks": "^5.2.0",
-    "turbolinks-prefetch": "^1.0.2",
-    "underscore": "^1.10.2"
+    "@babel/preset-react": "~7.10",
+    "@fortawesome/fontawesome-free": "~5.15",
+    "@rails/actioncable": "~6.0",
+    "@rails/ujs": "~6.0",
+    "@rails/webpacker": "~5.2",
+    "babel-plugin-transform-react-remove-prop-types": "~0.4.24",
+    "backbone": "~1.4",
+    "bootstrap": "~4.5",
+    "dropzone": "~5.7",
+    "jquery": "~1.12",
+    "jquery.caret": "~0.3.1",
+    "popper.js": "~1.16",
+    "prop-types": "~15.7.2",
+    "react": "~16.13",
+    "react-dom": "~16.13",
+    "turbolinks": "~5.2",
+    "turbolinks-prefetch": "~1.0",
+    "underscore": "~1.11"
   },
   "devDependencies": {
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "~3.11"
   }
 }

@@ -1,12 +1,26 @@
 <% title_tag t("common.login") %>
 
+<%
+auth_session = session[:omniauth] || {}
+auth_info = auth_session["info"]
+%>
+
 <div class="row">
   <div class="col"></div>
   <div class="col-md-5">
     <div class="card card-l6">
       <div class="card-body">
         <div class="card-title"><%= t("common.login") %> <%= Setting.app_name %></div>
+
+        <% if auth_info.present? %>
+        <div class="alert">
+          登录 <%= Setting.app_name %> 账号，以绑定 <strong><%= Homeland::Utils.omniauth_camelize(auth_session["provider"]) %></strong> 三方登录。
+        </div>
+        <% end %>
+
         <%= form_for resource, as: resource_name, url: session_path(resource_name), remote: true do |f| %>
+          <%= render "/shared/error_messages", target: resource %>
+
           <div class="form-group">
             <%= f.text_field :login, class: "form-control form-control-lg", placeholder: "用户名 / Email" %>
           </div>

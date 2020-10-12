@@ -320,6 +320,11 @@ body {
   }
 }
 
+.form-error {
+  margin-top: 5px;
+  color: #ee4343;
+}
+
 .form-control {
   background-color: var(--form-control-background-color);
   border-color: var(--form-control-border-color);

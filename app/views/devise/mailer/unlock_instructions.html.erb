@@ -1,7 +1,7 @@
 <p class='lead'>你好 <%= @resource.fullname %></p>
 
-<p>由于多次错误密码尝试登录，你的帐号已经暂时被锁定了，锁定时间为 1 小时，锁定期间此帐号将无法登录，也无法尝试密码。</p>
+<p>由于多次错误密码尝试登录，你的账号已经暂时被锁定了，锁定时间为 1 小时，锁定期间此账号将无法登录，也无法尝试密码。</p>
 
 <p>你也可以点击下面的链接立即解锁:</p>
 
-<p><%= link_to '解锁我的帐号', unlock_url(@resource, unlock_token: @token), class: 'btn' %></p>
+<p><%= link_to '解锁我的账号', unlock_url(@resource, unlock_token: @token), class: 'btn' %></p>

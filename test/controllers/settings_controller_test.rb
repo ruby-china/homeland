@@ -41,7 +41,7 @@ describe SettingsController do
       sign_in user
       get account_setting_path
       assert_equal 200, response.status
-      assert_equal true, response.body.include?("绑定其他帐号用于登录")
+      assert_equal true, response.body.include?("绑定其他账号用于登录")
       assert_equal true, response.body.include?("删除账号")
     end
   end
@@ -143,6 +143,20 @@ describe SettingsController do
       sign_in user
       delete auth_unbind_setting_path("github"), params: { id: user.login }
       assert_redirected_to account_setting_path
+      assert_nil user.authorizations.where(provider: "github").first
+    end
+
+    it "should not unbind with legacy oauth user" do
+      user = create(:user, email: "foo@example.com")
+      user.bind_service("provider" => "github", "uid" => "ruby-china")
+      assert_equal true, user.legacy_omniauth_logined?
+
+      sign_in user
+      delete auth_unbind_setting_path("github"), params: { id: user.login }
+
+      assert_redirected_to account_setting_path
+      follow_redirect!
+      assert_select ".alert", text: /账户三方账号登录且未设置 Email 和密码，不允许解绑/
     end
   end
 end

@@ -2,9 +2,9 @@
 
 require "test_helper"
 
-class User::OmniauthableTest < ActiveSupport::TestCase
-  class Monkey
-    include User::Omniauthable
+class User::DeviseableTest < ActiveSupport::TestCase
+  class Monkey < ApplicationRecord
+    include User::Deviseable
   end
 
   setup do

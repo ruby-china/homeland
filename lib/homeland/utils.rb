@@ -3,20 +3,20 @@
 module Homeland
   class Utils
     class << self
-      # Get camelize name for OmniAuth provider
-      # LDAP -> Setting.ldap_title
+      # Get name for OmniAuth provider
       # Other -> OmniAuth::Utils.camelize
-      def omniauth_camelize(provider)
+      def omniauth_name(provider)
         provider = provider.to_s
 
         case provider
-        when "ldap"
-          Setting.ldap_name
-        when "google_oauth2"
-          "Google"
+        when "wechat"
+          "微信"
         else
           OmniAuth::Utils.camelize(provider)
         end
+      end
+
+      def icon(provider)
       end
     end
   end

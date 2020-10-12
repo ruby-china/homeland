@@ -14,7 +14,7 @@ auth_info = auth_session["info"]
 
         <% if auth_info.present? %>
         <div class="alert">
-          登录 <%= Setting.app_name %> 账号，以绑定 <strong><%= Homeland::Utils.omniauth_camelize(auth_session["provider"]) %></strong> 三方登录。
+          登录 <%= Setting.app_name %> 账号，以绑定 <strong><%= Homeland::Utils.omniauth_name(auth_session["provider"]) %></strong> 三方登录。
         </div>
         <% end %>
 
@@ -49,8 +49,8 @@ auth_info = auth_session["info"]
       <div class="card-header"><%= t("common.auth_with_other_services") %></div>
       <ul class="list-group list-group-flush">
         <% User.omniauth_providers.each do |provider| %>
-        <li class="list-group-item">
-          <%= link_to raw("<i class='fab fa-#{provider}'></i> #{Homeland::Utils.omniauth_camelize(provider)}"), omniauth_authorize_path(:user, provider), class: "btn btn-default btn-lg btn-block" %>
+        <li class="list-group-item omniauth-<%= provider %>">
+          <%= link_to raw("<i class='fab fa-#{provider}'></i> #{Homeland::Utils.omniauth_name(provider)}"), omniauth_authorize_path(:user, provider), class: "btn btn-default btn-lg btn-block" %>
         </li>
         <% end %>
       </ul>

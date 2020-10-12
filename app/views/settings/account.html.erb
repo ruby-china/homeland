@@ -28,7 +28,7 @@
             <ul class="list-group col-sm-6">
               <% @user.authorizations.each do |authorizaion| %>
               <li class="list-group-item">
-                <%= Homeland::Utils.omniauth_camelize(authorizaion.provider) %>
+                <%= Homeland::Utils.omniauth_name(authorizaion.provider) %>
                 <%= link_to(raw('<i class="fas fa-minus-circle"></i>'), auth_unbind_setting_path(authorizaion.provider), rel: "twitsy", title: "点击解除绑定", method: 'delete' )%>
               </li>
               <% end %>

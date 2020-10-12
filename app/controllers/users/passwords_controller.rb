@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class PasswordsController < Devise::PasswordsController
+class Users::PasswordsController < Devise::PasswordsController
   before_action :require_no_sso!
 
   def create

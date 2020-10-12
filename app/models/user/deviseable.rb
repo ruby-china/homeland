@@ -2,8 +2,26 @@
 
 class User
   # Omniauth 认证函数
-  module Omniauthable
+  module Deviseable
     extend ActiveSupport::Concern
+
+    included do
+      attr_accessor :omniauth_provider, :omniauth_uid
+
+      devise :database_authenticatable, :registerable, :recoverable, :lockable,
+         :rememberable, :trackable, :validatable, :omniauthable
+
+      after_create :bind_omniauth_on_create
+    end
+
+    def password_required?
+      (authorizations.empty? || !password.blank?) && super
+    end
+
+    # Override Devise to send mails with async
+    def send_devise_notification(notification, *args)
+      devise_mailer.send(notification, self, *args).deliver_later
+    end
 
     def bind?(provider)
       authorizations.collect(&:provider).include?(provider)
@@ -16,7 +34,23 @@ class User
       authorizations.create(provider: provider, uid: uid)
     end
 
+    def bind_omniauth_on_create
+      if self.omniauth_provider
+        Authorization.find_or_create_by!(provider: self.omniauth_provider, uid: self.omniauth_uid, user_id: self.id)
+      end
+    end
+
+    # User who was logined with omniauth but not bind user info (email and password)
+    def legacy_omniauth_logined?
+      self.email.include?("@example.com")
+    end
+
     module ClassMethods
+      # Use Omniauth callback info to create and bind user
+      def find_or_create_by_omniauth(omniauth_auth)
+        Authorization.find_user_by_provider(omniauth_auth["provider"], omniauth_auth["uid"])
+      end
+
       def new_from_provider_data(provider, uid, data)
         User.new do |user|
           user.email =

@@ -10,6 +10,10 @@ Devise.setup do |config|
   # Configure the class responsible to send e-mails.
   config.mailer = "Devise::Mailer"
 
+  # ==> Controller configuration
+  # Configure the parent class to the devise controllers.
+  # config.parent_controller = "DeviseController"
+
   config.parent_mailer = "ApplicationMailer"
 
   # ==> ORM configuration

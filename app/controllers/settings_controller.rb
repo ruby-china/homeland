@@ -49,8 +49,9 @@ class SettingsController < ApplicationController
 
   def auth_unbind
     provider = params[:provider]
-    if current_user.authorizations.count <= 1
-      redirect_to account_setting_path, notice: t("users.unbind_warning")
+
+    if current_user.legacy_omniauth_logined?
+      redirect_to account_setting_path, alert: "账户三方账号登录且未设置 Email 和密码，不允许解绑，请设置密码，并修改 Email。"
       return
     end
 

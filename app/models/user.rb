@@ -5,7 +5,7 @@ require "digest/md5"
 class User < ApplicationRecord
   include Searchable
   include User::Roles, User::Blockable, User::Likeable, User::Followable, User::TopicActions,
-          User::GitHubRepository, User::ProfileFields, User::RewardFields, User::Omniauthable,
+          User::GitHubRepository, User::ProfileFields, User::RewardFields, User::Deviseable,
           User::Avatar
 
   second_level_cache version: 4, expires_in: 2.weeks
@@ -15,9 +15,6 @@ class User < ApplicationRecord
 
   ACCESSABLE_ATTRS = %i[name email_public location company bio website github twitter tagline avatar by
                         current_password password password_confirmation _rucaptcha]
-
-  devise :database_authenticatable, :registerable, :recoverable, :lockable,
-         :rememberable, :trackable, :validatable, :omniauthable
 
   has_one :profile, dependent: :destroy
 
@@ -50,6 +47,13 @@ class User < ApplicationRecord
            :location_id, :twitter, :team_users_count, :created_at, :updated_at)
   }
 
+  # Override Devise database authentication
+  def self.find_for_database_authentication(warden_conditions)
+    conditions = warden_conditions.dup
+    login = conditions.delete(:login).downcase
+    where(conditions.to_h).where(["(lower(login) = :value OR lower(email) = :value) and state != -1", { value: login }]).first
+  end
+
   def self.find_by_email(email)
     fetch_by_uniq_keys(email: email)
   end
@@ -66,12 +70,6 @@ class User < ApplicationRecord
   def self.find_by_login_or_email(login_or_email)
     login_or_email = login_or_email.downcase
     find_by_login(login_or_email) || find_by_email(login_or_email)
-  end
-
-  def self.find_for_database_authentication(warden_conditions)
-    conditions = warden_conditions.dup
-    login = conditions.delete(:login).downcase
-    where(conditions.to_h).where(["(lower(login) = :value OR lower(email) = :value) and state != -1", { value: login }]).first
   end
 
   def self.search(term, user: nil, limit: 30)
@@ -103,15 +101,6 @@ class User < ApplicationRecord
   def email=(val)
     self.email_md5 = Digest::MD5.hexdigest(val || "")
     self[:email] = val
-  end
-
-  def password_required?
-    (authorizations.empty? || !password.blank?) && super
-  end
-
-  # Override Devise to send mails with async
-  def send_devise_notification(notification, *args)
-    devise_mailer.send(notification, self, *args).deliver_later
   end
 
   def send_welcome_mail
@@ -150,7 +139,7 @@ class User < ApplicationRecord
 
   # @example.com 的可以修改邮件地址
   def email_locked?
-    self.email.exclude?("@example.com")
+    !legacy_omniauth_logined?
   end
 
   def calendar_data

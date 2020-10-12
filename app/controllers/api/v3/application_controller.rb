@@ -8,7 +8,7 @@ module Api
       include ActionController::Caching
       include ActionView::Helpers::OutputSafetyHelper
       include ApplicationHelper
-      include SetCurrentInfo
+      include ::ApplicationController::CurrentInfo
 
       skip_before_action :verify_authenticity_token
 

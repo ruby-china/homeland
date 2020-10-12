@@ -19,7 +19,7 @@
           <%= f.submit t("users.ensure_to_delete"), :class => "btn btn-danger", 'data-disable-with' => t("common.submitting") %>
         <% end %>
 
-        <div class="heading">绑定其他帐号用于登录</div>
+        <div class="heading">绑定其他账号用于登录</div>
 
         <% if !Setting.sso_enabled? %>
           <% if Setting.has_module?(:github) %>

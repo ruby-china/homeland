@@ -114,4 +114,10 @@ class ActionDispatch::IntegrationTest
     assert_equal 302, response.status
     assert_match /\/account\/sign_in/, response.headers["Location"]
   end
+
+  def assert_signed_in
+    get setting_path
+    assert_equal 200, response.status
+    assert_select "a[href='/account/sign_out']"
+  end
 end

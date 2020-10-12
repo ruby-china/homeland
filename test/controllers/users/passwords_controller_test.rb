@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe PasswordsController, type: :controller do
+describe Users::PasswordsController, type: :controller do
   describe "GET /account/password/new" do
     it "should render new tempalte" do
       get "/account/password/new"

@@ -71,6 +71,7 @@ gem "form-select"
 gem "omniauth"
 gem "omniauth-github"
 gem "omniauth-twitter"
+gem "omniauth-wechat-oauth2"
 
 # Permission
 gem "cancancan"

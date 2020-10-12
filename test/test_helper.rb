@@ -6,6 +6,7 @@ ENV["upload_provider"] = "file"
 # Mock to enable all Omniauth providers
 ENV["github_api_key"] = "fake-key"
 ENV["twitter_api_key"] = "fake-key"
+ENV["wechat_api_key"] = "fake-key"
 
 require "simplecov"
 if ENV["CI"] == "true"

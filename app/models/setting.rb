@@ -98,12 +98,13 @@ class Setting < RailsSettings::Base
     secret: (ENV["sso_secret"] || ENV["sso.secret"]),
   }
 
-  # = API Keys
+  # = Omniauth API Keys
   field :github_api_key, default: (ENV["github_api_key"] || ENV["github_token"]), readonly: true
   field :github_api_secret, default: (ENV["github_api_secret"] || ENV["github_secret"]), readonly: true
   field :twitter_api_key, default: ENV["twitter_api_key"], readonly: true
   field :twitter_api_secret, default: ENV["twitter_api_secret"], readonly: true
-
+  field :wechat_api_key, default: ENV["wechat_api_key"], readonly: true
+  field :wechat_api_secret, default: ENV["wechat_api_secret"], readonly: true
 
   # = Other Site Configs
   field :admin_emails, type: :array, default: (ENV["admin_emails"] || "admin@admin.com"), separator: /[\s,]+/
@@ -179,6 +180,8 @@ class Setting < RailsSettings::Base
         self.github_api_key.present?
       when "twitter"
         self.twitter_api_key.present?
+      when "wechat"
+        self.wechat_api_key.present?
       end
     end
 

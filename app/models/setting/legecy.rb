@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Setting
   module Legecy
     extend ActiveSupport::Concern

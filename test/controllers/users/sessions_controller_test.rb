@@ -12,6 +12,10 @@ class Users::SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 200, response.status
     assert_select "title", text: /登录/
 
+    assert_select ".omniauth-github"
+    assert_select ".omniauth-twitter"
+    assert_select ".omniauth-wechat"
+
     sign_in @user
     get new_user_session_path
     assert_redirected_to root_path
@@ -86,6 +90,21 @@ class Users::SessionsControllerTest < ActionDispatch::IntegrationTest
     auth = user1.authorizations.where(provider: "github").first
     assert_not_nil auth
     assert_equal "github-234", auth.uid
+    assert_equal user1.id, auth.user_id
+
+    # sign out, and sign in with other user
+    delete destroy_user_session_path
+
+    OmniAuth.config.add_mock(:wechat, uid: "wechat-123")
+    get "/account/auth/wechat/callback"
+    assert_redirected_to new_user_registration_path
+    post user_session_path, params: { user: { login: user1.email, password: "123456" } }
+    assert_signed_in
+    assert_select ".alert-success", text: /登录成功，并成功绑定 微信/
+
+    auth = user1.authorizations.where(provider: "wechat").first
+    assert_not_nil auth
+    assert_equal "wechat-123", auth.uid
     assert_equal user1.id, auth.user_id
   end
 

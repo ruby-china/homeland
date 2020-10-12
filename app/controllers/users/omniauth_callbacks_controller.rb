@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  def github
-    process_callback
+  User.omniauth_providers.each do |provider|
+    self.send(:define_method, provider) do
+      process_callback
+    end
   end
 
   def failure

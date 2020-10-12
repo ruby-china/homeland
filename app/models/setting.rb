@@ -2,6 +2,8 @@
 
 # RailsSettings Model
 class Setting < RailsSettings::Base
+  include Setting::Legecy
+
   # keys that allow update in admin
   EDITABLE_KEYS = %w[
     default_locale
@@ -97,8 +99,11 @@ class Setting < RailsSettings::Base
   }
 
   # = API Keys
-  field :github_token, default: ENV["github_token"], readonly: true
-  field :github_secret, default: ENV["github_secret"], readonly: true
+  field :github_api_key, default: (ENV["github_api_key"] || ENV["github_token"]), readonly: true
+  field :github_api_secret, default: (ENV["github_api_secret"] || ENV["github_secret"]), readonly: true
+  field :twitter_api_key, default: ENV["twitter_api_key"], readonly: true
+  field :twitter_api_secret, default: ENV["twitter_api_secret"], readonly: true
+
 
   # = Other Site Configs
   field :admin_emails, type: :array, default: (ENV["admin_emails"] || "admin@admin.com"), separator: /[\s,]+/
@@ -166,6 +171,15 @@ class Setting < RailsSettings::Base
     def has_module?(name)
       return true if self.modules.blank? || self.modules.include?("all")
       self.modules.map { |str| str.strip }.include?(name.to_s)
+    end
+
+    def has_omniauth?(provider)
+      case provider.to_s
+      when "github"
+        self.github_api_key.present?
+      when "twitter"
+        self.twitter_api_key.present?
+      end
     end
 
     def has_profile_field?(name)

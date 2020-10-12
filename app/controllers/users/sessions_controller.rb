@@ -5,6 +5,7 @@ class Users::SessionsController < Devise::SessionsController
 
   def create
     resource = warden.authenticate!(auth_options)
+    set_flash_message(:notice, :signed_in) if is_navigational_format?
 
     if session[:omniauth]
       @auth = Authorization.find_or_create_by!(provider: session[:omniauth]["provider"], uid: session[:omniauth]["uid"], user_id: resource.id)
@@ -13,10 +14,10 @@ class Users::SessionsController < Devise::SessionsController
         return
       end
 
+      set_flash_message(:notice, "登录成功，并成功绑定 #{Homeland::Utils.omniauth_camelize(session[:omniauth]["provider"])}")
       session[:omniauth] = nil
     end
 
-    set_flash_message(:notice, :signed_in) if is_navigational_format?
     sign_in(resource_name, resource)
     yield resource if block_given?
     respond_to do |format|

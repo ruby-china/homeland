@@ -24,7 +24,7 @@ class User
     end
 
     def bind?(provider)
-      authorizations.collect(&:provider).include?(provider)
+      authorizations.collect(&:provider).include?(provider.to_s)
     end
 
     def bind_service(response)

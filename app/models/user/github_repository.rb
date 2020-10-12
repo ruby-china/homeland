@@ -36,7 +36,7 @@ class User
 
         begin
           conn = Faraday.new("https://api.github.com") do |conn|
-            conn.basic_auth Setting.github_token, Setting.github_secret
+            conn.basic_auth Setting.github_api_key, Setting.github_api_secret
           end
           resp = conn.get(user.github_repos_path)
         rescue StandardError => e

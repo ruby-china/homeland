@@ -180,8 +180,11 @@ Devise.setup do |config|
   # If you have any extra navigational formats, like :iphone or :mobile, you
   # should add them to the navigational formats lists. Default is [:html]
   # config.navigational_formats = [:html, :iphone]
-  if Setting.has_module? :github
-    config.omniauth :github, Setting.github_token, Setting.github_secret
+  if Setting.has_omniauth? :github
+    config.omniauth :github, Setting.github_api_key, Setting.github_api_secret
+  end
+  if Setting.has_omniauth? :twitter
+    config.omniauth :twitter, Setting.twitter_api_key, Setting.twitter_api_secret
   end
   # config.omniauth :open_id, :store => OpenID::Store::Filesystem.new('/tmp'), :name => 'google', :identifier => 'https://www.google.com/accounts/o8/id', :require => 'omniauth-openid'
 

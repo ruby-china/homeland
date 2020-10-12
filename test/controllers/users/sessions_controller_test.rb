@@ -81,6 +81,7 @@ class Users::SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to new_user_registration_path
     post user_session_path, params: { user: { login: user1.email, password: "123456" } }
     assert_signed_in
+    assert_select ".alert-success", text: /登录成功，并成功绑定 GitHub/
 
     auth = user1.authorizations.where(provider: "github").first
     assert_not_nil auth

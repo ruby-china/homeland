@@ -15,6 +15,17 @@
   服务启动于：<%= l Homeland.boot_at.in_time_zone(Time.zone), format: :long %> (<%= timeago Homeland.boot_at %>)
   <%= link_to icon_tag("power-off", label: "重启应用"), reboot_admin_dashboards_path, data: { method: :post, confirm: "你确定要重启 Homeland 吗？", disable_with: "请求中..." }, class: "text-danger pull-right" %>
 </div>
+<% if Setting.legecy_envs.any? %>
+<div class="alert alert-warning">
+  <h4 class="alert-heading">检测到废弃的环境配置</h4>
+  <ul>
+    <% Setting.legecy_envs.each do |key| %>
+    <li><code><%= key %></code> 已经废弃，请改用 <code><%= Setting.legecy_env_instead(key) %></code></li>
+    <% end %>
+  </ul>
+  <div>关于更多的配置说明，请参考: <a href="https://homeland.ruby-china.org/docs/configuration/config-file/" target="_blank">Homeland 配置文档</a></div>
+</div>
+<% end %>
 <div class="clearfix">
   <div class="row">
     <div class="col-sm-4" id="user-stat">
@@ -87,7 +98,7 @@
       el.find(".total-week").text('+' + data.week_count);
       el.find(".total-month").text('+' + data.month_count);
     }
-    
+
     var models = ['user', 'topic', 'reply', 'notification', 'photo', 'comment'];
     for (var i = 0; i < models.length; i ++) {
       var model = models[i];

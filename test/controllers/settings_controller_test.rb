@@ -41,8 +41,8 @@ describe SettingsController do
       sign_in user
       get account_setting_path
       assert_equal 200, response.status
-      assert_equal true, response.body.include?("绑定其他账号用于登录")
-      assert_equal true, response.body.include?("删除账号")
+      assert_select ".authorizations", 0
+      assert_select ".delete-account", text: /删除账号/
     end
   end
 

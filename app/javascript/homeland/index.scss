@@ -450,12 +450,6 @@ input[type="file"] {
   .disabled > .page-link {
     background-color: #f0f0f0;
     color: #aaa !important;
-
-    @media (prefers-color-scheme: dark) {
-      color: #555 !important;
-      border-color: #222;
-      background-color: #222;
-    }
   }
 
   li > a:hover {
@@ -595,6 +589,20 @@ kbd {
 
   .list-group-item {
     padding: 15px 25px;
+  }
+}
+
+.custom-control-right {
+  .custom-control-label::before {
+    right: -2.35rem;
+    left: auto;
+    top: -7.5%;
+  }
+
+  .custom-control-label::after {
+    right: -1.5rem;
+    left: auto;
+    top: 7.5%;
   }
 }
 

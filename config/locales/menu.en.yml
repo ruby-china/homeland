@@ -86,6 +86,7 @@
     edit_account_path: "Account Profile"
     likes: "Favorites"
     teams: "Teams"
+    dark_mode: "Dark Mode"
   comments:
     create_comment: "Comment"
     no_comment: "No Comment at the moment"

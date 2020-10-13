@@ -15,6 +15,7 @@ const AppView = Backbone.View.extend({
     "click a.button-block-node": "blockNode",
     "click a.rucaptcha-image-box": "reLoadRucaptchaImage",
     "click .topics .topic": "visitTopic",
+    "click #dark-mode-switch": "switchTheme"
   },
 
   initialize() {
@@ -25,6 +26,7 @@ const AppView = Backbone.View.extend({
     this.initInfiniteScroll();
     this.initCable();
     this.restoreHeaderSearchBox();
+    this.initDarkModeSwitch();
 
     if ((needle = $('body').data('controller-name'), ['topics', 'replies'].includes(needle))) {
       window._topicView = new TopicView({ parentView: this });
@@ -289,6 +291,18 @@ const AppView = Backbone.View.extend({
     return false;
   },
 
+  initDarkModeSwitch() {
+    let theme = getTheme();
+    $('#dark-mode-switch').prop('checked', theme === 'dark');
+  },
+
+  switchTheme(e) {
+    const checked = e.target.checked;
+    const theme = checked ? 'dark' : 'light';
+    localStorage.setItem('theme', theme);
+    document.documentElement.setAttribute('data-theme', theme);
+  },
+
   updateWindowActiveState(e) {
     const prevType = $(this).data("prevType");
 
@@ -357,7 +371,7 @@ const AppView = Backbone.View.extend({
 
 document.addEventListener('turbolinks:load', () => {
   window._appView = new AppView();
-})
+});
 
 document.addEventListener('turbolinks:click', (event) => {
   if (event.target.getAttribute('href').charAt(0) === '#') {
@@ -365,4 +379,25 @@ document.addEventListener('turbolinks:click', (event) => {
   }
 });
 
+function detectTheme() {
+  let theme = getTheme();
+  document.documentElement.setAttribute('data-theme', theme);
+}
 
+function getTheme() {
+  let theme = 'light';
+
+  if (localStorage.getItem('theme')) {
+    if (localStorage.getItem('theme') === 'dark') {
+      theme = 'dark';
+    }
+  } else if (!window.matchMedia) {
+    return false;
+  } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    theme = 'dark';
+  }
+
+  return theme;
+}
+
+detectTheme();

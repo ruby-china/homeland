@@ -35,7 +35,8 @@
           <%= link_to plugin.display_name, plugin.root_path, class: "dropdown-item" %>
         <% end %>
 
-        <div class="custom-control custom-control-right custom-switch dropdown-item">
+        <div class="dropdown-divider"></div>
+        <div class="dark-mode-switch custom-control custom-switch dropdown-item">
           <input type="checkbox" class="custom-control-input" id="dark-mode-switch">
           <label class="custom-control-label" for="dark-mode-switch"><%= t("menu.dark_mode") %></label>
         </div>

@@ -273,6 +273,20 @@ body {
     padding-right: 15px;
   }
 
+  .dark-mode-switch {
+    .custom-control-label::before {
+      right: -2.85rem;
+      left: auto;
+      top: 0;
+    }
+
+    .custom-control-label::after {
+      right: -2rem;
+      left: auto;
+      top: 2px;
+    }
+  }
+
   @include media-breakpoint-down(md) {
     .user-bar {
       .nav-link {
@@ -589,20 +603,6 @@ kbd {
 
   .list-group-item {
     padding: 15px 25px;
-  }
-}
-
-.custom-control-right {
-  .custom-control-label::before {
-    right: -2.35rem;
-    left: auto;
-    top: -7.5%;
-  }
-
-  .custom-control-label::after {
-    right: -1.5rem;
-    left: auto;
-    top: 7.5%;
   }
 }
 

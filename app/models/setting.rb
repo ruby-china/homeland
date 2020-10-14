@@ -182,6 +182,8 @@ class Setting < RailsSettings::Base
         self.twitter_api_key.present?
       when "wechat"
         self.wechat_api_key.present?
+      else
+        false
       end
     end
 

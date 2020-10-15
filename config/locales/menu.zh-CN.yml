@@ -143,6 +143,17 @@
     editor_languages: 编辑器插入代码语言可选项（一行一个），填写文件扩展名比如："rb, go, php, js, html"
     sorted_plugins: 插件排序，调整这个可以影响插件在导航栏的顺序。请用换行或逗号间隔，比如："jobs, wiki, press, site"。
     timezone: "日期时间显示时区，默认: UTC"
+    profile_fields: "用户个性资料支持字段，默认：all 可选：[company,twitter,website,tagline,location,alipay,paypal,qq,weibo,wechat,douban,dingding,aliwangwang,facebook,instagram,dribbble,battle_tag,psn_id,steam_id]"
+    modules: "启用模块，默认 all 全部开启，可选：[topic,home,team,github,editor.code]"
+    domain: "网站域名，默认: localhost"
+    asset_host: "静态资源 CDN，比如：https://assets.your-host.com (如果没有，请留空)"
+    https: "是否启用 HTTPS"
+    github_api_key: "GitHub 登录 API key (留空禁用）"
+    github_api_secret: "GitHub 登录 API secret key"
+    twitter_api_key: "Twitter 登录 API key (留空禁用）"
+    twitter_api_secret: "Twitter 登录 API secret key"
+    wechat_api_key: "微信登录 API key (留空禁用）"
+    wechat_api_secret: "微信登录 API secret key"
   pagination:
     next: "下一页"
     prev: "上一页"

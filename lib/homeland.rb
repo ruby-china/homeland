@@ -72,6 +72,7 @@ module Homeland
     end
 
     def reboot
+      Setting.require_restart = "0"
       FileUtils.touch(Rails.root.join("tmp/restart.txt"))
     end
 

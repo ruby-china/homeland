@@ -4,8 +4,10 @@
 class Setting < RailsSettings::Base
   include Setting::Legecy
 
-  # keys that allow update in admin
-  EDITABLE_KEYS = %w[
+  SYSTEM_KEYS = %w[require_restart doman https asset_host]
+
+  # keys that allow update without restart
+  HOT_UPDATE_KEYS = %w[
     default_locale
     auto_locale
     timezone
@@ -43,25 +45,29 @@ class Setting < RailsSettings::Base
     share_allow_sites
     editor_languages
     sorted_plugins
+    profile_fields
   ]
 
-  # = Basic
-  field :app_name, default: (ENV["app_name"] || "Homeland"), readonly: true
-  field :timezone, default: "UTC"
-  # Module [topic,home,team,github,editor.code]
-  field :modules, default: (ENV["modules"] || "all"), type: :array, readonly: true
-  # Plugin sort
-  field :sorted_plugins, default: [], type: :array, separator: /[\s,]+/
-  # User profile module default: all [company,twitter,website,tagline,location,alipay,paypal,qq,weibo,wechat,douban,dingding,aliwangwang,facebook,instagram,dribbble,battle_tag,psn_id,steam_id]
-  field :profile_fields, default: (ENV["profile_fields"] || "all"), type: :array, readonly: true
+  # = System
+  field :require_restart, default: false, type: :boolean
   field :domain, default: (ENV["domain"] || "localhost"), readonly: true
   field :https, type: :boolean, default: (ENV["https"] || "true"), readonly: true
   field :asset_host, default: (ENV["asset_host"] || nil), readonly: true
 
+  # = Basic
+  field :app_name, default: (ENV["app_name"] || "Homeland")
+  field :timezone, default: "UTC"
+  # Module [topic,home,team,github,editor.code]
+  field :modules, default: (ENV["modules"] || "all"), type: :array
+  # Plugin sort
+  field :sorted_plugins, default: [], type: :array, separator: /[\s,]+/
+  # User profile module default: all [company,twitter,website,tagline,location,alipay,paypal,qq,weibo,wechat,douban,dingding,aliwangwang,facebook,instagram,dribbble,battle_tag,psn_id,steam_id]
+  field :profile_fields, default: (ENV["profile_fields"] || "all"), type: :array
+
   # = Rack Attach
   field :rack_attack, type: :hash, readonly: true, default: {
-    limit: ENV["rack_attack_limit"] || ENV["rack_attack.limit"] || "false",
-    period: ENV["rack_attack_period"] || ENV["rack_attack.period"],
+    limit: ENV["rack_attack.limit"] || "false",
+    period: ENV["rack_attack.period"],
   }
 
   # = Uploader
@@ -99,12 +105,12 @@ class Setting < RailsSettings::Base
   }
 
   # = Omniauth API Keys
-  field :github_api_key, default: (ENV["github_api_key"] || ENV["github_token"]), readonly: true
-  field :github_api_secret, default: (ENV["github_api_secret"] || ENV["github_secret"]), readonly: true
-  field :twitter_api_key, default: ENV["twitter_api_key"], readonly: true
-  field :twitter_api_secret, default: ENV["twitter_api_secret"], readonly: true
-  field :wechat_api_key, default: ENV["wechat_api_key"], readonly: true
-  field :wechat_api_secret, default: ENV["wechat_api_secret"], readonly: true
+  field :github_api_key, default: (ENV["github_api_key"] || ENV["github_token"])
+  field :github_api_secret, default: (ENV["github_api_secret"] || ENV["github_secret"])
+  field :twitter_api_key, default: ENV["twitter_api_key"]
+  field :twitter_api_secret, default: ENV["twitter_api_secret"]
+  field :wechat_api_key, default: ENV["wechat_api_key"]
+  field :wechat_api_secret, default: ENV["wechat_api_secret"]
 
   # = Other Site Configs
   field :admin_emails, type: :array, default: (ENV["admin_emails"] || "admin@admin.com"), separator: /[\s,]+/
@@ -156,10 +162,6 @@ class Setting < RailsSettings::Base
   field :google_analytics_key, default: ""
 
   class << self
-    def editable_keys
-      EDITABLE_KEYS
-    end
-
     def protocol
       self.https? ? "https" : "http"
     end
@@ -200,5 +202,13 @@ class Setting < RailsSettings::Base
     def sso_provider_enabled?
       self.sso[:enable_provider] == true
     end
+
+    def rails_initialized?
+      true
+    end
+  end
+
+  def require_restart?
+    !HOT_UPDATE_KEYS.include?(self.var)
   end
 end

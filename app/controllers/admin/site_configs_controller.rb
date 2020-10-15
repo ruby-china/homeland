@@ -14,6 +14,11 @@ module Admin
       if @site_config.value != setting_param[:value]
         @site_config.value = setting_param[:value]
         @site_config.save
+
+        if @site_config.require_restart?
+          Setting.require_restart = true
+        end
+
         redirect_to admin_site_configs_path, notice: "保存成功."
       else
         redirect_to admin_site_configs_path

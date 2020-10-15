@@ -164,4 +164,12 @@ class SettingTest < ActiveSupport::TestCase
     assert_equal true, Setting.has_omniauth?(:wechat)
     assert_equal false, Setting.has_omniauth?(:google)
   end
+
+  test ".require_restart?" do
+    setting = Setting.new(var: "app_name")
+    assert_equal true, setting.require_restart?
+
+    setting = Setting.new(var: "admin_emails")
+    assert_equal false, setting.require_restart?
+  end
 end

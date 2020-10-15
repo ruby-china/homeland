@@ -2,6 +2,9 @@
   <div class="form-group">
     <label><%= @site_config.var %></label>
     <div class="form-text" style="margin-bottom: 10px"><%= t("setting.#{@site_config.var}") %></div>
+    <% if @site_config.require_restart? %>
+    <div class="alert alert-warning">修改此项配置需要重启方可生效</div>
+    <% end %>
     <%
 
     value = Setting.send(@site_config.var)

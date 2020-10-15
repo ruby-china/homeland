@@ -123,4 +123,14 @@ class ApplicationHelperTest < ActionView::TestCase
     end
     assert_equal %(<li class="nav-item"><a href="/bar">bar</a></li><li class="nav-item"><a href="/foo">foo</a></li>), html
   end
+
+  test "user_theme" do
+    assert_equal "auto", user_theme
+
+    user = create :user
+    sign_in user
+    assert_equal "auto", user_theme
+    user.update_theme("dark")
+    assert_equal "dark", user_theme
+  end
 end

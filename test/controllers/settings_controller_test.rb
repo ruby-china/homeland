@@ -84,6 +84,17 @@ describe SettingsController do
       put setting_path, params: { user: { location: "BeiJing", profiles: { alipay: "alipay" } } }
       assert_redirected_to setting_path
 
+      put setting_path, params: { user: { location: "BeiJing", theme: "dark" } }
+      user.reload
+      assert_equal "dark", user.theme
+      assert_redirected_to setting_path
+
+      old_theme = user.theme
+      put setting_path, params: { user: { location: "BeiJing", theme: "foo" } }
+      user.reload
+      assert_equal old_theme, user.theme
+      assert_redirected_to setting_path
+
       put setting_path, params: { by: "profile", user: { location: "BeiJing", profiles: { alipay: "alipay" } } }
       assert_redirected_to profile_setting_path
 

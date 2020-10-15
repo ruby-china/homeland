@@ -3,6 +3,7 @@
   <head>
     <meta charset='utf-8' />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="theme" content="<%= user_theme %>">
     <title><%= content_for?(:title) ? yield(:title) : Setting.app_name %></title>
     <meta name="apple-mobile-web-app-capable" content="no">
     <meta content='True' name='HandheldFriendly' />
@@ -25,7 +26,7 @@
             <%= render "shared/usernav" %>
           </div>
         </div>
-      </nav>
+      </div>
     </div>
     <div id="main" class="main-container container">
       <%= notice_message %>

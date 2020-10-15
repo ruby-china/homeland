@@ -148,6 +148,7 @@
     domain: "网站域名，默认: localhost"
     asset_host: "静态资源 CDN，比如：https://assets.your-host.com (如果没有，请留空)"
     https: "是否启用 HTTPS"
+    rack_attack: "访问频率限制，limit - 每个周期单个 IP 请求次数限制, period - 多少时间（秒）为一个请求限制周期"
     github_api_key: "GitHub 登录 API key (留空禁用）"
     github_api_secret: "GitHub 登录 API secret key"
     twitter_api_key: "Twitter 登录 API key (留空禁用）"

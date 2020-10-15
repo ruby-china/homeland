@@ -65,9 +65,9 @@ class Setting < RailsSettings::Base
   field :profile_fields, default: (ENV["profile_fields"] || "all"), type: :array
 
   # = Rack Attach
-  field :rack_attack, type: :hash, readonly: true, default: {
-    limit: ENV["rack_attack.limit"] || "false",
-    period: ENV["rack_attack.period"],
+  field :rack_attack, type: :hash, default: {
+    limit: ENV["rack_attack.limit"] || 0,
+    period: ENV["rack_attack.period"] || 3.minutes,
   }
 
   # = Uploader
@@ -210,5 +210,10 @@ class Setting < RailsSettings::Base
 
   def require_restart?
     !HOT_UPDATE_KEYS.include?(self.var)
+  end
+
+  def type
+    @option ||= self.class.get_field(self.var)
+    @option[:type]
   end
 end

@@ -4,6 +4,7 @@
 <h1><%= t("admin.site_configs.settings") %></h1>
 <ul class="list-group">
   <% Setting.editable_keys.each do |key| %>
+    <% if !Setting::SYSTEM_KEYS.include?(key) %>
     <li class="list-group-item">
       <div class="mb-1">
         <%= icon_tag("cog") %><a href="<%= edit_admin_site_config_path(key) %>"><%= key %></a>
@@ -15,5 +16,6 @@
       </div>
       <div class="text-gray"><%= t("setting.#{key}") %></div>
     </li>
+    <% end %>
   <% end %>
 </ul>

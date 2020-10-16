@@ -1,7 +1,11 @@
 <%= form_for @site_config, url: admin_site_config_path(@site_config.var), method: 'patch' do |f| %>
   <div class="form-group">
-    <label><%= @site_config.var %></label>
-    <div class="form-text" style="margin-bottom: 10px"><%= t("setting.#{@site_config.var}") %></div>
+    <label>
+      <%= @site_config.var %>
+      <% if @site_config.require_restart? %>
+        <span class="badge badge-warning">需要重启方可生效</span>
+      <% end %>
+    </label>
     <%
 
     value = Setting.send(@site_config.var)
@@ -10,7 +14,22 @@
     <% if @site_config.var == "timezone" %>
       <%= f.select :value, ActiveSupport::TimeZone.all.collect(&:name), { value: value }, { class: 'form-control' } %>
     <% else %>
-      <%= f.text_area :value, value: value, class: 'form-control', rows: 15 %>
+      <% if @site_config.type == :boolean %>
+        <label class="form-check">
+          <%= f.check_box :value, checked: value, class: "form-check-input" %>
+          <%= t("setting.#{@site_config.var}") %>
+        </label>
+      <% elsif @site_config.type == :integer %>
+        <%= f.number_field :value, value: value, class: 'form-control' %>
+      <% elsif @site_config.type == :hash %>
+        <%= f.text_area :value, value: JSON.pretty_generate(value), class: 'form-control', rows: 15 %>
+      <% else %>
+        <%= f.text_area :value, value: value, class: 'form-control', rows: 15 %>
+      <% end %>
+    <% end %>
+
+    <% if @site_config.type != :boolean %>
+    <div class="form-text"><%= t("setting.#{@site_config.var}") %></div>
     <% end %>
   </div>
   <div class="form-actions">

@@ -14,64 +14,62 @@
 -->
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset='utf-8' />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-  <title><%= content_for?(:title) ? yield(:title) : Setting.app_name %></title>
-  <meta name="apple-mobile-web-app-capable" content="no">
-  <meta content='True' name='HandheldFriendly' />
-  <link rel="alternate" type="application/rss+xml" title="订阅最新帖" href="<%= main_app.feed_topics_url %>" />
-  <%= stylesheet_pack_tag "front", "data-turbolinks-track": "reload" %>
-  <%= stylesheet_pack_tag "turbolinks-app", 'data-turbolinks-track': 'reload' if turbolinks_app? %>
-  <%= yield :stylesheets %>
-  <%= action_cable_meta_tag %>
-  <%= csrf_meta_tag %>
-  <%= raw Setting.custom_head_html %>
-  <% if current_user %>
-    <meta name="current-user" data-user-id="<%= current_user.id %>" data-user-login="<%= current_user.login %>" data-user-name="<%= current_user.name %>" data-user-email="<%= current_user.email %>" data-user-avatar-url="<%= current_user.avatar? ? current_user.avatar.url(:md) : current_user.letter_avatar_url(96) %>">
-  <% end %>
-
-  <%= javascript_packs_with_chunks_tag "application", 'data-turbolinks-track': "reload" %>
-  <%= yield :javascripts %>
-</head>
-<body class="page-<%= controller_name %><%= ' infinite-scroll' if turbolinks_app? %>" data-controller-name="<%= controller_name %>">
-  <div class="header navbar navbar-expand flex-md-row bd-navbar">
-    <div class="container d-sm-flex">
-      <div class="navbar-header d-none d-md-flex" id="navbar-header" data-turbolinks-permanent>
-        <%= raw Setting.navbar_brand_html %>
-      </div>
-      <div class="navbar-nav-scroll">
-        <%= yield :header %>
-        <%= render "shared/navbar" %>
-      </div>
-      <div class="ml-auto d-md-flex">
-        <form class="navbar-form d-none d-lg-flex mr-2 form-search active" action="/search" method="GET">
-          <i class="fa btn-search fa-search"></i>
-          <input class="form-control" name="q" type="text" value="<%= params[:q] %>" placeholder="搜索本站内容" />
+  <head>
+    <meta charset='utf-8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title><%= content_for?(:title) ? yield(:title) : Setting.app_name %></title>
+    <meta name="apple-mobile-web-app-capable" content="no">
+    <meta content='True' name='HandheldFriendly' />
+    <link rel="alternate" type="application/rss+xml" title="订阅最新帖" href="<%= main_app.feed_topics_url %>" />
+    <%= stylesheet_pack_tag "front", "data-turbolinks-track": "reload" %>
+    <%= stylesheet_pack_tag "turbolinks-app", 'data-turbolinks-track': 'reload' if turbolinks_app? %>
+    <%= yield :stylesheets %>
+    <%= action_cable_meta_tag %>
+    <%= csrf_meta_tag %>
+    <%= raw Setting.custom_head_html %>
+    <% if current_user %>
+      <meta name="current-user" data-user-id="<%= current_user.id %>" data-user-login="<%= current_user.login %>" data-user-name="<%= current_user.name %>" data-user-email="<%= current_user.email %>" data-user-avatar-url="<%= current_user.avatar? ? current_user.avatar.url(:md) : current_user.letter_avatar_url(96) %>">
+    <% end %>
+    <%= javascript_packs_with_chunks_tag "application", 'data-turbolinks-track': "reload" %>
+    <%= yield :javascripts %>
+  </head>
+  <body class="page-<%= controller_name %><%= ' infinite-scroll' if turbolinks_app? %>" data-controller-name="<%= controller_name %>">
+    <div class="header navbar navbar-expand-md">
+      <div class="container">
+        <div class="navbar-header" data-turbolinks-permanent>
+          <%= raw Setting.navbar_brand_html %>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar">
+          <span class="navbar-toggler-icon"><i class="fa fa-bars"></i></span>
+        </button>
+        <div id="main-navbar"  class="collapse navbar-collapse">
+          <%= yield :header %>
+          <%= render "shared/navbar" %>
+        </div>
+        <div class="ml-auto d-flex navbar-right">
+          <form class="navbar-form d-none d-lg-flex mr-2 form-search active" action="/search" method="GET">
+            <i class="fa btn-search fa-search"></i>
+            <input type="text" name="q" class="form-control" value="<%= params[:q] %>" placeholder="搜索"></input>
         </form>
         <%= render "shared/usernav" %>
       </div>
     </div>
   </div>
-
   <%= yield :sub_navbar %>
-
   <div id="main" class="main-container container">
     <%= notice_message %>
     <%= content_for?(:main) ? yield(:main) : yield %>
   </div>
-
   <% if !mobile? %>
-  <footer class="footer" id="footer" data-turbolinks-permanent>
-    <div class="container">
-      <%= raw Setting.footer_html %>
-    </div>
-  </footer>
+    <footer class="footer" id="footer" data-turbolinks-permanent>
+      <div class="container">
+        <%= raw Setting.footer_html %>
+      </div>
+    </footer>
   <% end %>
-
   <% if mobile? %>
     <script type="text/javascript">
-    App.mobile = true;
+      App.mobile = true;
     </script>
   <% end %>
   <script type="text/javascript" data-turbolinks-eval="false">

@@ -1,26 +1,25 @@
-<ul class="nav navbar-nav user-bar align-items-center justify-content-end">
+<ul class="nav navbar-nav user-bar">
   <% if current_user %>
-  <%
+    <%
   badge_class = ""
   badge_class = "new" if unread_notify_count > 0
   %>
-  <li class="nav-item notification-count">
-    <a href="<%= main_app.notifications_path %>" class="nav-link <%= badge_class %>" title="通知"><i class="fa fa-bell"></i><span class="count"><%= unread_notify_count %></span></a>
-  </li>
-  <li class="nav-item dropdown">
-    <a href="#" id="navbar-new-menu" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      <i class="fa fa-plus"></i>
-    </a>
-    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-new-menu">
-      <%= link_to t("topics.new_topic"), main_app.new_topic_path, class: "dropdown-item" %>
-      <% if can?(:create, Team) && Setting.has_module?(:team) %>
-        <div class="dropdown-divider"></div>
-        <%= link_to t("teams.new_team"), main_app.new_team_path, class: "dropdown-item" %>
-      <% end %>
-    </div>
-  </li>
+    <li class="nav-item notification-count">
+      <a href="<%= main_app.notifications_path %>" class="nav-link <%= badge_class %>" title="通知"><i class="fa fa-bell"></i><span class="count"><%= unread_notify_count %></span></a>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" id="navbar-new-menu" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-plus"></i>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-new-menu">
+        <%= link_to t("topics.new_topic"), main_app.new_topic_path, class: "dropdown-item" %>
+        <% if can?(:create, Team) && Setting.has_module?(:team) %>
+          <div class="dropdown-divider"></div>
+          <%= link_to t("teams.new_team"), main_app.new_team_path, class: "dropdown-item" %>
+        <% end %>
+      </div>
+    </li>
   <% end %>
-
   <% if current_user %>
     <li class="nav-item dropdown dropdown-avatar">
       <a href="#" class="dropdown-toggle nav-link" id="navbar-user-menu" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -34,7 +33,6 @@
         <% Homeland.user_menu_plugins.each do |plugin| %>
           <%= link_to plugin.display_name, plugin.root_path, class: "dropdown-item" %>
         <% end %>
-
         <% if current_user&.admin? %>
           <div class="dropdown-divider"></div>
           <% if params[:controller].start_with?("admin/") %>
@@ -43,18 +41,14 @@
             <%= link_to "管理后台", main_app.admin_root_path, class: "dropdown-item" %>
           <% end %>
         <% end %>
-
         <div class="dropdown-divider"></div>
         <%= link_to t("common.logout"), main_app.destroy_user_session_path, method: "delete", class: "dropdown-item" %>
       </div>
     </li>
   <% else %>
     <% if !Setting.sso_enabled? %>
-    <li class="nav-item"><%= link_to t("common.register"), main_app.new_user_registration_path, class: "nav-link" %></li>
+      <li class="nav-item"><%= link_to t("common.register"), main_app.new_user_registration_path, class: "nav-link" %></li>
     <% end %>
-
     <li class="nav-item"><%= link_to t("common.login"), main_app.new_user_session_path, class: "nav-link" %></li>
   <% end %>
 </ul>
-
-

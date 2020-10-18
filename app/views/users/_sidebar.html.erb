@@ -18,6 +18,9 @@
           <div class="item number">
             第 <%= @user.id %> 位<%= t("menu.users")%> / <span title="注册日期"><%= @user.created_at.to_date %></span>
           </div>
+          <% if @user.email.present? && @user.email_public %>
+            <div class="item"><a href="mailto: <%= @user.email %>"><%= @user.email %></a></div>
+          <% end %>
           <% if !@user.company.blank? %>
             <div class="item company">
               <%= @user.company %>
@@ -38,9 +41,6 @@
               <% if !@user.github.blank? %>
                 <%= link_to(raw('<i class="fab fa-github"></i>'), @user.github_url, target: '_blank', rel: 'nofollow') %>
               <% end %>
-            <% end %>
-            <% if !@user.email.blank? && @user.email_public %>
-              <a href="mailto: <%= @user.email %>"><i class="fa fa-envelope-o"></i></a>
             <% end %>
           </div>
         </div>

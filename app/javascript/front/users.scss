@@ -460,6 +460,7 @@ table.node-topics {
   }
   .company,
   .location {
+    font-size: 13px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -467,6 +468,13 @@ table.node-topics {
 
     .fa {
       width: 18px;
+    }
+  }
+  .social {
+    margin-top: 5px;
+    margin-left: -5px;
+    a + a {
+      margin-left: 6px;
     }
   }
   .buttons {

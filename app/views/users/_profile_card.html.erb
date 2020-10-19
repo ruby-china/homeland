@@ -12,26 +12,26 @@
           <div class="login">
             <%= "@#{user.login}" %>
           </div>
-          <div class="item social">
-            <% if !user.twitter.blank? %>
-              <%= link_to raw('<i class="fab fa-twitter"></i>'), user.twitter_url, class: "twitter", rel: "nofollow" %>
-            <% end %>
-            <% if !user.website.blank? %>
-              <%= link_to(raw('<i class="fa fa-globe"></i>'), user.website_url, target: '_blank', rel: 'nofollow') %>
-            <% end %>
-            <% if Setting.has_module? :github %>
-              <% if !user.github.blank? %>
-                <%= link_to(raw('<i class="fab fa-github"></i>'), user.github_url, target: '_blank', rel: 'nofollow') %>
-              <% end %>
-            <% end %>
-          </div>
         <% end %>
       </div>
     </div>
     <% if user.tagline.present? %>
-      <hr />
       <div class="item tagline"><%= user.tagline %></div>
     <% end %>
+    <hr />
+    <div class="item social">
+      <% if !user.twitter.blank? %>
+        <%= link_to icon_bold_tag("twitter"), user.twitter_url, class: "twitter", rel: "nofollow" %>
+      <% end %>
+      <% if Setting.has_module? :github %>
+        <% if !user.github.blank? %>
+          <%= link_to icon_bold_tag("github"), user.github_url, target: '_blank', rel: 'nofollow' %>
+        <% end %>
+      <% end %>
+      <% if !user.website.blank? %>
+        <%= link_to icon_tag("globe"), user.website_url, target: '_blank', rel: 'nofollow' %>
+      <% end %>
+    </div>
     <% if !user.company.blank? %>
       <div class="item company">
         <%= user.company %>

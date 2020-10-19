@@ -93,7 +93,15 @@ module ApplicationHelper
     if opts[:label]
       label = %(<span>#{opts[:label]}</span>)
     end
-    raw "<i class='fa fa-#{name}'></i> #{label}"
+    raw "<i class='icon fa fa-#{name}'></i> #{label}"
+  end
+
+  def icon_bold_tag(name, opts = {})
+    label = ""
+    if opts[:label]
+      label = %(<span>#{opts[:label]}</span>)
+    end
+    raw "<i class='icon fab fa-#{name}'></i> #{label}"
   end
 
   def render_list(opts = {})

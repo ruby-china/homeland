@@ -16,8 +16,14 @@ $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
   &-pencil {
     @extend .fa-edit;
   }
+  &-email {
+    @extend .fa-envelope;
+  }
   &-company {
     @extend .fa-briefcase;
+  }
+  &-location {
+    @extend .fa-map-marked;
   }
   &-wechat {
     @extend .fa-weixin;

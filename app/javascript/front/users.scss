@@ -268,20 +268,52 @@ table.node-topics {
   padding-right: 0;
   .profile {
     .avatar {
+      .media-object {
+        width: 64px;
+        height: 64px;
+      }
       .level {
         margin-top: 6px;
         text-align: center;
       }
     }
+
+    .name-box {
+      text-decoration: none;
+
+      .fullname {
+        font-size: 18px;
+        color: var(--text-color);
+        font-weight: bold;
+      }
+      .login {
+        font-size: 16px;
+        color: var(--text-color1);
+      }
+
+      .user-badge {
+        text-align: right;
+        .opts {
+          margin-top: 5px;
+        }
+      }
+    }
     .item {
       margin-bottom: 5px;
+      a {
+        color: var(--text-color);
+      }
+      .fa {
+        color: #aaa;
+        margin-right: 6px;
+      }
     }
-    .item a {
-      color: var(--text-color);
-    }
+
     .number {
+      font-size: 14px;
       color: var(--text-color2);
     }
+
     .counts {
       color: var(--text-color2);
       span {
@@ -314,13 +346,22 @@ table.node-topics {
       padding-top: 15px;
     }
     .social {
-      font-size: 18px;
-      a {
-        color: var(--text-color2);
-        margin-right: 8px;
+      font-size: 24px;
+      a:link,
+      a:visited {
+        text-decoration: none;
+        .icon {
+          color: var(--text-color1);
+        }
       }
       a:hover {
-        color: var(--text-color1);
+        .icon {
+          color: var(--text-color);
+        }
+      }
+
+      a + a {
+        margin-left: 20px;
       }
     }
     .tagline {
@@ -471,10 +512,23 @@ table.node-topics {
     }
   }
   .social {
-    margin-top: 5px;
-    margin-left: -5px;
+    font-size: 18px;
+
+    a {
+      text-decoration: none;
+    }
+
+    .icon {
+      color: var(--text-color1);
+    }
+
+    a:hover {
+      .icon {
+        color: var(--text-color);
+      }
+    }
     a + a {
-      margin-left: 6px;
+      margin-left: 10px;
     }
   }
   .buttons {

@@ -4,45 +4,62 @@
       <div class="media">
         <div class="avatar media-left mr-3">
           <div class='image'><%= user_avatar_tag(@user, :lg, link: false) %></div>
-          <div class="level"><%= user_level_tag(@user) %></div>
         </div>
         <div class="media-body">
-          <div class="item">
-            <%= @user.fullname %>
-            <span class="opts pull-right">
-              <% if current_user&.admin? %>
-                <%= link_to icon_tag("edit", label: "管理"), edit_admin_user_path(@user.id) %>
+          <div class="item name-box flex aic jcsb">
+            <div>
+              <% if @user.name.present? %>
+                <div class="fullname"><%= @user.name %></div>
               <% end %>
-            </span>
+              <div class="login">@<%= @user.login %></div>
+            </div>
+            <div class="user-badge">
+              <div class="level"><%= user_level_tag(@user) %></div>
+              <% if current_user&.admin? %>
+                <div class="opts">
+                  <%= link_to icon_tag("user-cog"), edit_admin_user_path(@user.id) %>
+                </div>
+              <% end %>
+            </div>
           </div>
           <div class="item number">
             第 <%= @user.id %> 位<%= t("menu.users")%> / <span title="注册日期"><%= @user.created_at.to_date %></span>
           </div>
-          <% if @user.email.present? && @user.email_public %>
-            <div class="item"><a href="mailto: <%= @user.email %>"><%= @user.email %></a></div>
-          <% end %>
-          <% if !@user.company.blank? %>
-            <div class="item company">
-              <%= @user.company %>
-              <% if @user.location.present? %> @ <span title="所在地"><%= location_name_tag(@user.location) %></span><% end %>
-            </div>
-          <% end %>
-          <div class="item counts">
-            <span><%= @user.topics_count %></span> 篇帖子 • <span><%= @user.replies_count %></span> 条回帖
+        </div>
+      </div>
+      <hr />
+      <div class="user-items">
+        <% if @user.email.present? && @user.email_public %>
+          <div class="item"><a href="mailto: <%= @user.email %>"><%= icon_tag("email") %> <%= @user.email %></a></div>
+        <% end %>
+        <% if !@user.company.blank? %>
+          <div class="item company">
+            <%= icon_tag("company") %> <%= @user.company %>
           </div>
-          <div class="item social">
-            <% if !@user.twitter.blank? %>
-              <%= link_to raw('<i class="fab fa-twitter"></i>'), @user.twitter_url, class: "twitter", rel: "nofollow" %>
+        <% end %>
+        <% if @user.location.present? %>
+        <div class="item location" title="所在地">
+          <%= icon_tag("location") %> <%= location_name_tag(@user.location) %>
+        </div>
+        <% end %>
+        <div class="item counts">
+          <span><%= @user.topics_count %></span> 篇帖子
+          <span class="divider">/</span>
+          <span><%= @user.replies_count %></span> 条回帖
+        </div>
+        <div class="item social">
+          <% if !@user.twitter.blank? %>
+            <%= link_to icon_bold_tag("twitter"), @user.twitter_url, class: "twitter", rel: "nofollow" %>
+          <% end %>
+          <% if Setting.has_module? :github %>
+            <% if !@user.github.blank? %>
+              <%= link_to(icon_bold_tag("github"), @user.github_url, target: '_blank', rel: 'nofollow') %>
             <% end %>
-            <% if !@user.website.blank? %>
-              <%= link_to(raw('<i class="fa fa-globe"></i>'), @user.website_url, target: '_blank', rel: 'nofollow') %>
-            <% end %>
-            <% if Setting.has_module? :github %>
-              <% if !@user.github.blank? %>
-                <%= link_to(raw('<i class="fab fa-github"></i>'), @user.github_url, target: '_blank', rel: 'nofollow') %>
-              <% end %>
-            <% end %>
-          </div>
+          <% end %>
+          <% if !@user.website.blank? %>
+            <%= link_to(icon_tag("globe"), @user.website_url, target: '_blank', rel: 'nofollow') %>
+          <% end %>
+          <%= link_to(icon_tag("rss"), feed_user_url(@user), target: '_blank', rel: 'nofollow') %>
         </div>
       </div>
       <div class="follow-info row hide-ios">

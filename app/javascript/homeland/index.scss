@@ -33,6 +33,10 @@
   float: right;
 }
 
+.divider {
+  color: var(--divider-color) !important;
+}
+
 /* 去掉 Bootstrap 的蓝色 outline */
 * {
   outline-style: none;

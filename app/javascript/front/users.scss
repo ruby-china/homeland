@@ -10,11 +10,12 @@
     background: none;
     text-decoration: underline;
   }
+
   .nav-tabs > .active > a,
   .nav-tabs > .active > a:hover {
     color: var(--btn-default-text-color);
-    background-color: var(--btn-default-background-color);
-    border: 1px solid var(--btn-default-border-color);
+    background: var(--card-background-color);
+    border: 1px solid var(--card-border-color);
     border-bottom-color: transparent;
     cursor: default;
   }

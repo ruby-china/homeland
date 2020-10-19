@@ -418,14 +418,25 @@ input[type="file"] {
   .nav-item {
     .nav-link {
       &:hover {
-        background: var(--gray);
-        border-color: var(--gray);
+        background: transparent;
+        border-color: transparent;
+        color: var(--text-color);
       }
 
       &.active {
-        background: var(--btn-default-background-color);
-        border-color: var(--btn-default-background-color);
+        color: var(--text-color1);
+        background: var(--card-background-color);
+        border: 1px solid var(--card-border-color);
       }
+    }
+  }
+}
+
+.nav-pills {
+  .nav-link {
+    &.active {
+      background: var(--nav-pills-active-background-color);
+      color: var(--nav-pills-active-text-color);
     }
   }
 }

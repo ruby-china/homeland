@@ -7,6 +7,20 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   end
 
+  if Rails.env.development?
+    # File 'lib/devise/controllers/helpers.rb', line 254
+
+    # def handle_unverified_request
+    #   super # call the default behaviour which resets/nullifies/raises
+    #   request.env["devise.skip_storage"] = true
+    #   sign_out_all_scopes(false)
+    # end
+
+    # TODO 生产环境没事，开发环境总是会触发这个方法，走登录流程的时候读取到的是这个类ProtectionMethods::NullSession::NullSessionHash，无法完成第三方登录的流程。
+    define_method :handle_unverified_request do
+    end
+  end
+
   def failure
     set_flash_message! :alert, :failure, kind: Homeland::Utils.omniauth_name(failed_strategy.name), reason: failure_message
 

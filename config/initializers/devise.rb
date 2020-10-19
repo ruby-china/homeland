@@ -180,6 +180,11 @@ Devise.setup do |config|
   # If you have any extra navigational formats, like :iphone or :mobile, you
   # should add them to the navigational formats lists. Default is [:html]
   # config.navigational_formats = [:html, :iphone]
+  if Rails.env.development?
+    config.omniauth :developer, fields: %w[nickname sex province city country headimgurl unionid], uid_field: :unionid
+    # config.omniauth :developer, fields: %w[name nickname email], uid_field: :nickname
+  end
+
   if Setting.has_omniauth? :github
     config.omniauth :github, Setting.github_api_key, Setting.github_api_secret
   end

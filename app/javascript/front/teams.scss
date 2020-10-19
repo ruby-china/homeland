@@ -1,11 +1,10 @@
 @import "~homeland/_vars";
 
 .team-header {
-  background: #fafafa;
+  background: var(--sub-navbar-background-color);
   padding-top: 15px;
   padding-bottom: 15px;
-  border-bottom: #d0d1d5;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px var(--sub-navbar-shadow-color);
 
   .media {
     .media-left {

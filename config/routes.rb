@@ -203,6 +203,7 @@ Rails.application.routes.draw do
   constraints(id: /[#{User::LOGIN_FORMAT}]*/) do
     resources :users, path: "", as: "users" do
       member do
+        get :feed
         # User only
         get :topics
         get :replies

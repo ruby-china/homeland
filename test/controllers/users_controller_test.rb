@@ -48,6 +48,11 @@ describe UsersController do
     end
   end
 
+  it "GET /users/:id/feed" do
+    get feed_user_path(user)
+    assert_equal 200, response.status
+  end
+
   it "GET /users/:id/replies" do
     get replies_user_path(user)
     assert_equal 200, response.status

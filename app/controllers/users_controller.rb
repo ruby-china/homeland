@@ -16,6 +16,10 @@ class UsersController < ApplicationController
     @active_users = User.without_team.fields_for_list.hot.limit(100)
   end
 
+  def feed
+    @topics = @user.topics.recent.limit(20)
+  end
+
   def city
     location = Location.location_find_by_name(params[:id])
     return render_404 if location.nil?

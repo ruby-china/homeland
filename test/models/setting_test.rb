@@ -172,4 +172,15 @@ class SettingTest < ActiveSupport::TestCase
     setting = Setting.new(var: "admin_emails")
     assert_equal false, setting.require_restart?
   end
+
+  test "cable_allowed_request_origin" do
+    Setting.stub(:domain, "localhost") do
+      assert_equal false, Setting.cable_allowed_request_origin.match?("http://foobar.com")
+      assert_equal false, Setting.cable_allowed_request_origin.match?("http://foobar.com:80")
+      assert_equal true, Setting.cable_allowed_request_origin.match?("http://localhost")
+      assert_equal true, Setting.cable_allowed_request_origin.match?("https://localhost")
+      assert_equal true, Setting.cable_allowed_request_origin.match?("http://localhost:3000")
+      assert_equal true, Setting.cable_allowed_request_origin.match?("https://localhost:3000")
+    end
+  end
 end

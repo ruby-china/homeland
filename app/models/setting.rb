@@ -4,7 +4,7 @@
 class Setting < RailsSettings::Base
   include Setting::Legecy
 
-  SYSTEM_KEYS = %w[require_restart doman https asset_host]
+  SYSTEM_KEYS = %w[require_restart domain https asset_host]
 
   # keys that allow update without restart
   HOT_UPDATE_KEYS = %w[
@@ -205,6 +205,10 @@ class Setting < RailsSettings::Base
 
     def rails_initialized?
       true
+    end
+
+    def cable_allowed_request_origin
+      /http(s)?:\/\/#{Setting.domain}(:[\d]+)?/
     end
   end
 

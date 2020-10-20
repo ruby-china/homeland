@@ -182,5 +182,13 @@ class SettingTest < ActiveSupport::TestCase
       assert_equal true, Setting.cable_allowed_request_origin.match?("http://localhost:3000")
       assert_equal true, Setting.cable_allowed_request_origin.match?("https://localhost:3000")
     end
+    Setting.stub(:domain, "www.foo.com") do
+      assert_equal false, Setting.cable_allowed_request_origin.match?("http://foobar.com")
+      assert_equal false, Setting.cable_allowed_request_origin.match?("http://foobar.com:80")
+      assert_equal true, Setting.cable_allowed_request_origin.match?("http://www.foo.com")
+      assert_equal true, Setting.cable_allowed_request_origin.match?("https://www.foo.com")
+      assert_equal true, Setting.cable_allowed_request_origin.match?("http://www.foo.com:3000")
+      assert_equal true, Setting.cable_allowed_request_origin.match?("https://www.foo.com:3000")
+    end
   end
 end

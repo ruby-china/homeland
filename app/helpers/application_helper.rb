@@ -161,4 +161,8 @@ module ApplicationHelper
     return nil if message.blank?
     content_tag(:div, message, class: "form-error")
   end
+
+  def user_theme
+    current_user&.theme || "auto"
+  end
 end

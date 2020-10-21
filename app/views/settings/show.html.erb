@@ -47,6 +47,22 @@
                 <label class="control-label">自我介绍</label>
                 <%= f.text_area :bio, class: "form-control", rows: 6 %>
               </div>
+
+              <div class="form-group">
+                <label class="control-label">主题偏好</label>
+                <div class="form-check">
+                  <%= f.radio_button :theme, "auto", checked: ["auto", nil].include?(@user.theme), class: "form-check-input" %>
+                  <%= f.label :theme_auto, "自动切换", class: "form-check-label" %>
+                </div>
+                <div class="form-check">
+                  <%= f.radio_button :theme, "light", class: "form-check-input" %>
+                  <%= f.label :theme_light, "浅色模式", class: "form-check-label" %>
+                </div>
+                <div class="form-check">
+                  <%= f.radio_button :theme, "dark", class: "form-check-input" %>
+                  <%= f.label :theme_dark, "深色模式", class: "form-check-label" %>
+                </div>
+              </div>
             </div>
             <div class="col-sm-3">
               <div class="form-group avatar-preview" style="text-align: center;">

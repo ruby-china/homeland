@@ -6,6 +6,10 @@ class Profile < ApplicationRecord
   serialize :contacts
   serialize :rewards
 
+  store_accessor :preferences, :theme
+
+  validates :theme, inclusion: %w[auto light dark], allow_nil: true
+
   CONTACT_FIELDS = %i[alipay paypal qq weibo wechat douban dingding aliwangwang
                       facebook instagram dribbble battle_tag psn_id steam_id]
 

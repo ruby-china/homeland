@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_21_022652) do
+ActiveRecord::Schema.define(version: 2020_10_16_074728) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -234,6 +234,7 @@ ActiveRecord::Schema.define(version: 2020_07_21_022652) do
     t.integer "user_id", null: false
     t.jsonb "contacts", default: {}, null: false
     t.jsonb "rewards", default: {}, null: false
+    t.jsonb "preferences", default: {}, null: false
     t.index ["user_id"], name: "index_profiles_on_user_id", unique: true
   end
 

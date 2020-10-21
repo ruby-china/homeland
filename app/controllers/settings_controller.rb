@@ -80,6 +80,8 @@ class SettingsController < ApplicationController
 
     def update_basic
       if @user.update(user_params)
+        theme = params[:user][:theme]
+        @user.update_theme(theme)
         redirect_to setting_path, notice: "更新成功"
       else
         render "show"

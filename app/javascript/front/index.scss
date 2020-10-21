@@ -630,15 +630,6 @@ hr {
       background: #ff000005;
     }
 
-    @media (prefers-color-scheme: dark) {
-      &.light {
-        background: #e9e6ff0d;
-      }
-      &.popular {
-        background: #f7f2fc1c;
-      }
-    }
-
     .info {
       color: #777;
       margin-bottom: 10px;

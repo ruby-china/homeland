@@ -7,6 +7,7 @@ class User
 
     included do
       delegate :contacts, to: :profile, allow_nil: true
+      delegate :theme, to: :profile, allow_nil: true
 
       before_save :store_location
     end
@@ -21,6 +22,11 @@ class User
       prefix = Profile.contact_field_prefix(field)
       return v if prefix.blank?
       [prefix, v].join("")
+    end
+
+    def update_theme(value)
+      self.create_profile if self.profile.blank?
+      self.profile.update(theme: value)
     end
 
     def update_profile_fields(field_values)

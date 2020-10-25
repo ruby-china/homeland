@@ -1014,6 +1014,14 @@ textarea.div-dropzone-focus {
 }
 
 .card-body {
+  .card-section {
+    margin-bottom: 30px;
+
+    &:last-child {
+      margin-top: 0;
+    }
+  }
+
   .heading {
     font-size: 16px;
     color: var(--text-color1);

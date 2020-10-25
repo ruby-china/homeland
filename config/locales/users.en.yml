@@ -31,7 +31,7 @@
     hot_teams: "Top active teams"
     recent_joined: "Most recently joined users"
     submit_new_user: "Submit Information"
-    update_profile: "Update profile"
+    update_profile: "Update"
     update_password: "Update password"
     email_permission: "Show my email to others"
     manage_my_apps: "Manage applications"

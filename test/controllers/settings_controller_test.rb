@@ -11,7 +11,7 @@ describe SettingsController do
       Setting.stubs(:sso_enabled?).returns(false)
       get setting_path
       assert_equal 200, response.status
-      assert_equal true, response.body.include?("更新资料")
+      assert_equal true, response.body.include?("更新")
       assert_equal true, response.body.include?("登录密码")
       assert_equal true, response.body.include?(%(enctype="multipart/form-data"))
 

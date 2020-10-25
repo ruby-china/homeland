@@ -8,59 +8,63 @@
           <%= render "shared/error_messages", target: @user %>
           <div class="row">
             <div class="col-sm-9">
-              <% if Setting.allow_change_login? %>
-              <div class="form-group">
-                <label class="control-label">用户名</label>
-                <%= f.text_field :login, style: "width: 200px", class: "form-control", placeholder: "用户名" %>
+              <div class="card-section">
+                <% if Setting.allow_change_login? %>
+                  <div class="form-group">
+                    <label class="control-label">用户名</label>
+                    <%= f.text_field :login, style: "width: 200px", class: "form-control", placeholder: "用户名" %>
+                  </div>
+                  <% end %>
+
+                  <div class="form-group">
+                    <label class="control-label">姓名</label>
+                    <%= f.text_field :name, style: "width: 200px", class: "form-control", placeholder: "姓名" %>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="control-label">头像</label>
+                    <%= f.file_field :avatar, class: "form-control" %>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="control-label">Email</label>
+                    <%= f.text_field :email, disabled: @user.email_locked?, class: "form-control", placeholder: "Email" %>
+                  </div>
+
+                  <div class="form-group form-check">
+                    <label for="user_email_public" class="form-check-label">
+                      <%= f.check_box :email_public, class: "form-check-input" %> <%= t("users.email_permission")%>
+                    </label>
+                  </div>
+
+                  <% if Setting.has_profile_field? :tagline %>
+                    <div class="form-group">
+                      <%= f.label :tagline %>
+                      <%= f.text_field :tagline, class: "form-control" %>
+                    </div>
+                  <% end %>
+
+                  <div class="form-group">
+                    <label class="control-label">自我介绍</label>
+                    <%= f.text_area :bio, class: "form-control", rows: 6 %>
+                  </div>
               </div>
-              <% end %>
 
-              <div class="form-group">
-                <label class="control-label">姓名</label>
-                <%= f.text_field :name, style: "width: 200px", class: "form-control", placeholder: "姓名" %>
-              </div>
-
-              <div class="form-group">
-                <label class="control-label">头像</label>
-                <%= f.file_field :avatar, class: "form-control" %>
-              </div>
-
-              <div class="form-group">
-                <label class="control-label">Email</label>
-                <%= f.text_field :email, disabled: @user.email_locked?, class: "form-control", placeholder: "Email" %>
-              </div>
-
-              <div class="form-group form-check">
-                <label for="user_email_public" class="form-check-label">
-                  <%= f.check_box :email_public, class: "form-check-input" %> <%= t("users.email_permission")%>
-                </label>
-              </div>
-
-              <% if Setting.has_profile_field? :tagline %>
-                <div class="form-group">
-                  <%= f.label :tagline %>
-                  <%= f.text_field :tagline, class: "form-control" %>
-                </div>
-              <% end %>
-
-              <div class="form-group">
-                <label class="control-label">自我介绍</label>
-                <%= f.text_area :bio, class: "form-control", rows: 6 %>
-              </div>
-
-              <div class="form-group">
-                <label class="control-label">主题偏好</label>
-                <div class="form-check">
-                  <%= f.radio_button :theme, "auto", checked: ["auto", nil].include?(@user.theme), class: "form-check-input" %>
-                  <%= f.label :theme_auto, "自动切换", class: "form-check-label" %>
-                </div>
-                <div class="form-check">
-                  <%= f.radio_button :theme, "light", class: "form-check-input" %>
-                  <%= f.label :theme_light, "浅色模式", class: "form-check-label" %>
-                </div>
-                <div class="form-check">
-                  <%= f.radio_button :theme, "dark", class: "form-check-input" %>
-                  <%= f.label :theme_dark, "深色模式", class: "form-check-label" %>
+              <div class="card-section themes">
+                <div class="heading">主题偏好</div>
+                <div class="flex aic">
+                  <div class="form-check">
+                    <%= f.radio_button :theme, "auto", checked: ["auto", nil].include?(@user.theme), class: "form-check-input" %>
+                    <%= f.label :theme_auto, "自动切换", class: "form-check-label" %>
+                  </div>
+                  <div class="form-check">
+                    <%= f.radio_button :theme, "light", class: "form-check-input" %>
+                    <%= f.label :theme_light, "浅色模式", class: "form-check-label" %>
+                  </div>
+                  <div class="form-check">
+                    <%= f.radio_button :theme, "dark", class: "form-check-input" %>
+                    <%= f.label :theme_dark, "深色模式", class: "form-check-label" %>
+                  </div>
                 </div>
               </div>
             </div>

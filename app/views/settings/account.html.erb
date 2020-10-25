@@ -4,7 +4,7 @@
   <div class="col-md-10">
     <div class="card card-lg">
       <div class="card-body">
-        <div class="delete-account">
+        <div class="card-section delete-account">
           <div class="heading">删除我的账号</div>
 
           <%= form_with(model: @user, url: setting_path, method: :delete) do |f| %>
@@ -22,7 +22,7 @@
         </div>
 
         <% if !Setting.sso_enabled? && @user.authorizations.any? %>
-          <div class="authorizations">
+          <div class="card-section authorizations">
             <div class="heading">绑定其他账号用于登录</div>
 
             <ul class="list-group col-sm-6">

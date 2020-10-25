@@ -560,3 +560,17 @@ table.node-topics {
     }
   }
 }
+
+.page-settings {
+  .themes {
+    .form-check + .form-check {
+      margin-left: 15px;
+    }
+  }
+
+  .form-actions {
+    .btn-primary {
+      min-width: 150px;
+    }
+  }
+}

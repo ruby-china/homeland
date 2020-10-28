@@ -14,7 +14,7 @@ auth_info = auth_session["info"]
             登录 <%= Setting.app_name %> 账号，以绑定 <strong><%= Homeland::Utils.omniauth_name(auth_session["provider"]) %></strong> 三方登录。
           </div>
         <% end %>
-        <%= form_for resource, as: resource_name, url: session_path(resource_name), remote: true do |f| %>
+        <%= form_for resource, as: resource_name, url: session_path(resource_name) do |f| %>
           <%= render "/shared/error_messages", target: resource %>
           <div class="form-group">
             <%= f.text_field :login, class: "form-control form-control-lg", placeholder: "用户名 / Email" %>

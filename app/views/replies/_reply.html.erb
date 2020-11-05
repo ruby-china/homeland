@@ -23,6 +23,7 @@
             <span class="sub-info">
               <span class='floor'>#<%= floor %></span> ·
               <a class="time" href="#reply-<%= reply.id %>"><%= timeago(reply.created_at) %></a>
+              <a href="#reply<%= floor %>"> </a>
             </span>
             <span class="opts pull-right">
               <% if !reply.deleted? %>

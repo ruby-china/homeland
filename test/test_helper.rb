@@ -49,7 +49,7 @@ end
 class ActiveSupport::TestCase
   include FactoryBot::Syntax::Methods
 
-  parallelize
+  # parallelize(workers: :number_of_processors, with: :threads)
 
   setup do
     Setting.stubs(:topic_create_limit_interval).returns("")
@@ -91,7 +91,7 @@ class ActiveSupport::TestCase
   end
 
   def fixture_file_upload(name, content_type = "text/plain")
-    Rack::Test::UploadedFile.new(Path.join("files", name), content_type)
+    Rack::Test::UploadedFile.new(File.join("test", "fixtures", "files", name), content_type)
   end
 end
 

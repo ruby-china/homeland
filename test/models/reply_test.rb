@@ -3,7 +3,10 @@
 require "test_helper"
 
 class ReplyTest < ActiveSupport::TestCase
+  include ActiveJob::TestHelper
+
   attr_accessor :user
+
   setup do
     @user = create(:user)
   end
@@ -44,23 +47,25 @@ class ReplyTest < ActiveSupport::TestCase
   end
 
   test "should send topic reply notification to topic author" do
-    topic = create :topic, user: user
+    perform_enqueued_jobs do
+      topic = create :topic, user: user
 
-    assert_changes -> { Notification.count }, 1 do
-      create :reply, topic: topic
-    end
+      assert_changes -> { Notification.count }, 1 do
+        create :reply, topic: topic
+      end
 
-    assert_no_changes -> { user.notifications.unread.count } do
-      create(:reply, topic: topic).destroy
-    end
+      assert_no_changes -> { user.notifications.unread.count } do
+        create(:reply, topic: topic).destroy
+      end
 
-    assert_no_changes -> { user.notifications.unread.count } do
-      create :reply, topic: topic, user: user
-    end
+      assert_no_changes -> { user.notifications.unread.count } do
+        create :reply, topic: topic, user: user
+      end
 
-    # Don't duplicate notifiation with mention
-    assert_no_changes -> { user.notifications.unread.where(notify_type: "topic_reply").count } do
-      create :reply, topic: topic, mentioned_user_ids: [user.id]
+      # Don't duplicate notifiation with mention
+      assert_no_changes -> { user.notifications.unread.where(notify_type: "topic_reply").count } do
+        create :reply, topic: topic, mentioned_user_ids: [user.id]
+      end
     end
   end
 
@@ -70,10 +75,12 @@ class ReplyTest < ActiveSupport::TestCase
     t = create(:topic)
 
     # 正常状况
-    u1.follow_topic(t)
-    u2.follow_topic(t)
-    assert_changes -> { u1.notifications.count }, 1 do
-      create :reply, topic: t, user: user
+    perform_enqueued_jobs do
+      u1.follow_topic(t)
+      u2.follow_topic(t)
+      assert_changes -> { u1.notifications.count }, 1 do
+        create :reply, topic: t, user: user
+      end
     end
 
     # TODO: 需要更多的测试，测试 @ 并且有关注的时候不会重复通知，回复时候不会通知自己

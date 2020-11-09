@@ -16,7 +16,7 @@
 
 - [DEPLOYMENT GUIDE](https://homeland.ruby-china.org)
 - [EXAMPLE](https://homeland.ruby-china.org/expo)
-- [CHANGELOG](https://github.com/ruby-china/homeland/blob/master/CHANGELOG.md)
+- [RELEASE NOTES](https://github.com/ruby-china/homeland/releases)
 - [CONTRIBUTE GUIDE](https://github.com/ruby-china/homeland/blob/master/CONTRIBUTE.md)
 
 ## License

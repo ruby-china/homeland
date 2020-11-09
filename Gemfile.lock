@@ -1,4 +1,11 @@
 GIT
+  remote: https://github.com/ankane/pghero.git
+  revision: ebc926c04cd67950d428b6eb02096769030efcb8
+  specs:
+    pghero (2.7.2)
+      activerecord (>= 5)
+
+GIT
   remote: https://github.com/guard/listen.git
   revision: ab255a5779e9b4910abbe35b8ebe03238036c053
   specs:
@@ -291,8 +298,6 @@ GEM
     parser (2.7.2.0)
       ast (~> 2.4.1)
     pg (1.2.3)
-    pghero (2.7.2)
-      activerecord (>= 5)
     postmark (1.21.2)
       json
     postmark-rails (0.20.0)
@@ -440,7 +445,7 @@ GEM
     turbolinks-source (5.2.0)
     twemoji (3.1.7)
       nokogiri (~> 1.6)
-    tzinfo (2.0.2)
+    tzinfo (2.0.3)
       concurrent-ruby (~> 1.0)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
@@ -502,7 +507,7 @@ DEPENDENCIES
   omniauth-twitter
   omniauth-wechat-oauth2
   pg
-  pghero
+  pghero!
   postmark
   postmark-rails
   puma

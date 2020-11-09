@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "active_support/core_ext/integer/time"
+
 # The test environment is used exclusively to run your application's
 # test suite. You never need to work with it otherwise. Remember that
 # your test database is "scratch space" for the test suite and is wiped
@@ -8,7 +10,8 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
-  config.cache_classes = true
+  config.cache_classes = false
+  config.action_view.cache_template_loading = true
 
   # Do not eager load code on boot. This avoids loading your whole application
   # just for the purpose of running a single test. If you are using a tool that
@@ -45,8 +48,15 @@ Rails.application.configure do
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
-  config.active_job.queue_adapter = :inline
+  # Raise exceptions for disallowed deprecations.
+  config.active_support.disallowed_deprecation = :raise
+
+  # Tell Active Support which deprecation messages to disallow.
+  config.active_support.disallowed_deprecation_warnings = []
 
   # Raises error for missing translations.
-  # config.action_view.raise_on_missing_translations = true
+  # config.i18n.raise_on_missing_translations = true
+
+  # Annotate rendered view with file names.
+  # config.action_view.annotate_rendered_view_with_filenames = true
 end

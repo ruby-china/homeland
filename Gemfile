@@ -16,7 +16,7 @@ gem "sanitize"
 
 gem "pg"
 gem "jieba-rb"
-gem "pghero"
+gem "pghero", github: "ankane/pghero"
 
 gem "dotenv-rails"
 

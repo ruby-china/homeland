@@ -303,6 +303,9 @@ ActiveRecord::Schema.define(version: 2020_10_16_074728) do
     t.index ["user_id"], name: "index_team_users_on_user_id"
   end
 
+  create_table "test_documents", force: :cascade do |t|
+  end
+
   create_table "topics", id: :serial, force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "node_id", null: false

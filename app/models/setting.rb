@@ -207,6 +207,7 @@ class Setting < RailsSettings::Base
       true
     end
 
+    # https://regex101.com/r/m1UOqT/1
     def cable_allowed_request_origin
       /http(s)?:\/\/#{Setting.domain}(:[\d]+)?/
     end

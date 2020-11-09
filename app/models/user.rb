@@ -104,7 +104,7 @@ class User < ApplicationRecord
   end
 
   def send_welcome_mail
-    UserMailer.welcome(id).deliver_later
+    # UserMailer.welcome(id).deliver_later
   end
 
   def profile_url

@@ -23,10 +23,7 @@ require "sidekiq/testing"
 
 FileUtils.mkdir_p(Rails.root.join("tmp/cache"))
 
-
 OmniAuth.config.test_mode = true
-Devise.stretches = 1
-Rails.logger.level = 4
 FactoryBot.use_parent_strategy = false
 
 ActiveRecord::Base.connection.create_table(:monkeys, force: true) do |t|
@@ -52,7 +49,7 @@ end
 class ActiveSupport::TestCase
   include FactoryBot::Syntax::Methods
 
-  # parallelize(workers: 2)
+  # parallelize(workers: :number_of_processors, with: :threads)
 
   setup do
     Setting.stubs(:topic_create_limit_interval).returns("")
@@ -94,7 +91,7 @@ class ActiveSupport::TestCase
   end
 
   def fixture_file_upload(name, content_type = "text/plain")
-    Rack::Test::UploadedFile.new(Rails.root.join("test/fixtures/#{name}"), content_type)
+    Rack::Test::UploadedFile.new(File.join("test", "fixtures", "files", name), content_type)
   end
 end
 

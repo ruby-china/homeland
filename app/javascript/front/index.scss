@@ -309,6 +309,11 @@ hr {
     min-height: 68px;
     border-bottom: 1px solid var(--topic-item-border-color);
     padding: 15px 25px;
+
+    @media (max-width: 480px) {
+      padding: 15px;
+    }
+
     margin: 0 -25px;
     vertical-align: top;
     cursor: pointer;
@@ -404,10 +409,20 @@ hr {
   .card-body {
     padding-top: 20px;
     padding-bottom: 20px;
+
+    @media (max-width: 480px) {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
   }
 
   .card-header {
     padding: 25px 25px 0 25px;
+
+    @media (max-width: 480px) {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
     transition: all 0.3s;
     h1 {
       margin-top: 0;
@@ -435,6 +450,10 @@ hr {
     font-size: 16px;
     padding-left: 25px;
     padding-right: 25px;
+    @media (max-width: 480px) {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
   }
 
   .label-awesome {
@@ -443,6 +462,10 @@ hr {
     background: var(--label-awesome-background-color);
     border: 0;
     padding: 15px 25px;
+    @media (max-width: 480px) {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
     color: var(--red);
 
     .fa {
@@ -716,6 +739,11 @@ hr {
 
       .avatar {
         left: calc(10px + 6px);
+      }
+
+      &.reply-system,
+      &.reply-deleted {
+        padding: 10px 18px;
       }
     }
   }

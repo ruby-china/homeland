@@ -1602,9 +1602,9 @@ boolbase@^1.0.0, boolbase@~1.0.0:
   integrity sha1-aN/1++YMUes3cl6p4+0xDcwed24=
 
 bootstrap@~4.5:
-  version "4.5.2"
-  resolved "https://registry.npm.taobao.org/bootstrap/download/bootstrap-4.5.2.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fbootstrap%2Fdownload%2Fbootstrap-4.5.2.tgz#a85c4eda59155f0d71186b6e6ad9b875813779ab"
-  integrity sha1-qFxO2lkVXw1xGGtuatm4dYE3eas=
+  version "4.5.3"
+  resolved "https://registry.npm.taobao.org/bootstrap/download/bootstrap-4.5.3.tgz#c6a72b355aaf323920be800246a6e4ef30997fe6"
+  integrity sha1-xqcrNVqvMjkgvoACRqbk7zCZf+Y=
 
 brace-expansion@^1.1.7:
   version "1.1.11"

@@ -5,7 +5,7 @@ source "https://rubygems.org"
 git_source(:github) { |repo_name| "https://github.com/#{repo_name}.git" }
 
 gem "jbuilder"
-gem "rails"
+gem "rails", "6.1.0.rc1"
 gem "rails_autolink"
 gem "sass-rails"
 gem "turbolinks"
@@ -16,7 +16,7 @@ gem "sanitize"
 
 gem "pg"
 gem "jieba-rb"
-gem "pghero"
+gem "pghero", github: "ankane/pghero"
 
 gem "dotenv-rails"
 
@@ -30,7 +30,7 @@ gem "twemoji"
 gem "doorkeeper"
 gem "doorkeeper-i18n"
 
-gem "bulk_insert"
+gem "bulk_insert", github: "huacnlee/bulk_insert", branch: "fix-for-rails-6.1"
 
 # 上传组件
 gem "carrierwave"
@@ -77,7 +77,7 @@ gem "omniauth-wechat-oauth2"
 gem "cancancan"
 
 # Redis
-gem "redis", "~>4.1.0"
+gem "redis"
 gem "redis-namespace", github: "resque/redis-namespace"
 gem "redis-objects"
 

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "active_support/core_ext/integer/time"
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -46,14 +48,13 @@ Rails.application.configure do
   # config.action_cable.mount_path = nil
   # config.action_cable.url = 'wss://example.com/cable'
   # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
-  # https://regex101.com/r/m1UOqT/1
   config.action_cable.allowed_request_origins = [Setting.cable_allowed_request_origin]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   config.force_ssl = Setting.https
 
-  # Use the lowest log level to ensure availability of diagnostic information
-  # when problems arise.
+  # Include generic and useful information about system operation, but avoid logging too much
+  # information to avoid inadvertent exposure of personally identifiable information (PII).
   config.log_level = :info
 
   config.lograge.enabled = true
@@ -67,6 +68,7 @@ Rails.application.configure do
   # Use a real queuing backend for Active Job (and separate queues per environment).
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "homeland_#{Rails.env}"
+
   config.action_mailer.perform_caching = false
 
   # Ignore bad email addresses and do not raise email delivery errors.
@@ -87,6 +89,12 @@ Rails.application.configure do
 
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify
+
+  # Log disallowed deprecations.
+  config.active_support.disallowed_deprecation = :log
+
+  # Tell Active Support which deprecation messages to disallow.
+  config.active_support.disallowed_deprecation_warnings = []
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new

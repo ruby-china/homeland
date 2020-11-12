@@ -71,7 +71,6 @@ class Topic < ApplicationRecord
     # replied_at 用于最新回复的排序，如果帖着创建时间在一个月以前，就不再往前面顶了
     return false if reply.blank? && !force
 
-    self.last_active_mark      = Time.now.to_i if created_at > 1.month.ago
     self.replied_at            = reply.try(:created_at)
     self.replies_count         = replies.without_system.count
     self.last_reply_id         = reply.try(:id)

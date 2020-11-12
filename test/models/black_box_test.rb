@@ -12,11 +12,56 @@ class BlackBoxTest < ActiveSupport::TestCase
     @user_over_a_week = create(:user, created_at: 8.days.ago)
   end
 
+  test "hotness_score" do
+    topic_score = 342917
+    topic = create(:topic)
+    BlackBox.stub(:calc_topic_score, topic_score) do
+      topic.created_at = 97.hours.ago
+      time_seed = 0
+      assert_equal topic_score + time_seed, BlackBox.hotness_score(topic)
+
+      topic.created_at = 95.hours.ago
+      time_seed += 930
+      assert_equal topic_score + time_seed, BlackBox.hotness_score(topic)
+
+      topic.created_at = 47.hours.ago
+      time_seed += 830
+      assert_equal topic_score + time_seed, BlackBox.hotness_score(topic)
+
+      topic.created_at = 23.hours.ago
+      time_seed += 795
+      assert_equal topic_score + time_seed, BlackBox.hotness_score(topic)
+
+      topic.created_at = 11.hours.ago
+      time_seed += 280
+      assert_equal topic_score + time_seed, BlackBox.hotness_score(topic)
+
+      topic.created_at = 7.hours.ago
+      time_seed += 81
+      assert_equal topic_score + time_seed, BlackBox.hotness_score(topic)
+
+      topic.created_at = 50.minutes.ago
+      time_seed += 28
+      assert_equal topic_score + time_seed, BlackBox.hotness_score(topic)
+    end
+  end
+
   test "calc_topic_score" do
     t = Time.at(1605192897)
     topic = create(:topic, created_at: t)
     assert_equal 342917, BlackBox.calc_topic_score(topic)
-    topic.body = ""
+    base_score = 342917
+    BlackBox.stub(:calc_topic_quality_score, 10) do
+      assert_equal base_score + 10 * 2, BlackBox.calc_topic_score(topic)
+    end
+    BlackBox.stub(:calc_topic_quality_score, 680) do
+      assert_equal base_score + 650 * 2, BlackBox.calc_topic_score(topic)
+    end
+    create(:reply, topic: topic, score: 2)
+    create(:reply, topic: topic, score: 4)
+    BlackBox.stub(:calc_topic_quality_score, 10) do
+      assert_equal base_score + 10 * 2 + (2 + 4) * 2, BlackBox.calc_topic_score(topic)
+    end
   end
 
   test "calc_topic_quality_score" do

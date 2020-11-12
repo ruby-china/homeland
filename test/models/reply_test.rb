@@ -106,15 +106,13 @@ class ReplyTest < ActiveSupport::TestCase
     target = create(:topic)
 
     # should not change topic last_replied_at when reply created
-    topic = create(:topic, replied_at: 1.days.ago, last_active_mark: 1.days.ago.to_i)
+    topic = create(:topic, replied_at: 1.days.ago)
     system_reply = build(:reply, action: "mention", topic: topic, target: target)
-    old_last_active_mark = topic.last_active_mark
     old_replied_at = topic.replied_at
     topic.stubs(:update_last_reply).returns(true)
     system_reply.save
     assert_equal false, system_reply.new_record?
     topic.reload
-    assert_equal old_last_active_mark, topic.last_active_mark
     assert_equal old_replied_at.to_i, topic.replied_at.to_i
   end
 

@@ -3,20 +3,20 @@ class BlackBox
   EPOCH_NUMBER = "2010-01-01 00:00:01".to_time.to_i
 
   class << self
-    def article_hotness_score(topic)
+    def hotness_score(topic)
       usable_date = topic.created_at
 
       super_super_recent_bonus = usable_date > 1.hour.ago ? 28 : 0
       super_recent_bonus = usable_date > 8.hours.ago ? 81 : 0
       recency_bonus = usable_date > 12.hours.ago ? 280 : 0
-      today_bonus = usable_date > 26.hours.ago ? 795 : 0
+      today_bonus = usable_date > 24.hours.ago ? 795 : 0
       two_day_bonus = usable_date > 48.hours.ago ? 830 : 0
       four_day_bonus = usable_date > 96.hours.ago ? 930 : 0
 
-      topic_hotness = calc_topic_score(topic)
+      topic_score = calc_topic_score(topic)
 
       (
-        article_hotness + recency_bonus + super_recent_bonus +
+        topic_score + recency_bonus + super_recent_bonus +
         super_super_recent_bonus + today_bonus + two_day_bonus + four_day_bonus
       )
     end

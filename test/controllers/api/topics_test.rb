@@ -148,10 +148,10 @@ describe Api::V3::TopicsController do
       assert_equal "This is an excellent topic", json["topics"][2]["title"]
       assert_equal "This is a normal topic", json["topics"][3]["title"]
 
-      t1.update(last_active_mark: 4)
-      t2.update(last_active_mark: 3)
-      t3.update(last_active_mark: 2)
-      t4.update(last_active_mark: 1)
+      t1.update(score: 4)
+      t2.update(score: 3)
+      t3.update(score: 2)
+      t4.update(score: 1)
 
       get "/api/v3/topics.json", node_id: node.id, limit: 2
       assert_equal 200, response.status

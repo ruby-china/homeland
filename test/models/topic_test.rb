@@ -14,16 +14,10 @@ class TopicTest < ActiveSupport::TestCase
     refute_equal true, build(:topic, node_id: nil).valid?
   end
 
-  test "should set last_active_mark on created" do
+  test "should set score on created" do
     # because the Topic index is sort by replied_at,
     # so the new Topic need to set a Time, that test will display in index page
-    refute_nil create(:topic).last_active_mark
-  end
-
-  test "should not update last_active_mark on save" do
-    last_active_mark_was = topic.last_active_mark
-    topic.save
-    assert_equal last_active_mark_was, topic.last_active_mark
+    refute_nil create(:topic).score
   end
 
   test "should get node name" do
@@ -33,28 +27,11 @@ class TopicTest < ActiveSupport::TestCase
 
   test "should update after reply" do
     reply = create :reply, topic: topic, user: user
-    refute_nil topic.last_active_mark
+    refute_nil topic.score
     assert_equal reply.created_at.to_i, topic.replied_at.to_i
     assert_equal reply.id, topic.last_reply_id
     assert_equal reply.user_id, topic.last_reply_user_id
     assert_equal reply.user.login, topic.last_reply_user_login
-  end
-
-  test "should update after reply without last_active_mark when the topic is created at month ago" do
-    topic.stubs(:created_at).returns(1.month.ago)
-    topic.stubs(:last_active_mark).returns(1)
-    reply = create :reply, topic: topic, user: user
-    refute_equal reply.created_at.to_i, topic.last_active_mark
-    assert_equal reply.user_id, topic.last_reply_user_id
-    assert_equal reply.user.login, topic.last_reply_user_login
-  end
-
-  test "should not update last_active_mark when update reply" do
-    reply = create :reply, topic: topic, user: user
-    old_last_active_mark = topic.last_active_mark
-    reply.body = "foobar"
-    reply.save
-    assert_equal old_last_active_mark, topic.last_active_mark
   end
 
   test "should get page and floor by reply" do
@@ -96,7 +73,6 @@ class TopicTest < ActiveSupport::TestCase
     assert_equal r.id, topic.last_reply_id
     assert_equal r.user_id, topic.last_reply_user_id
     assert_equal r.user.login, topic.last_reply_user_login
-    refute_nil topic.last_active_mark
     refute_equal old_updated_at, topic.updated_at
   end
 
@@ -106,7 +82,6 @@ class TopicTest < ActiveSupport::TestCase
     assert_nil topic.last_reply_id
     assert_nil topic.last_reply_user_id
     assert_nil topic.last_reply_user_login
-    refute_nil topic.last_active_mark
   end
 
   test ".update_deleted_last_reply when have last Reply and param test that Reply" do
@@ -209,7 +184,7 @@ class TopicTest < ActiveSupport::TestCase
     topic.node_id = 3
     topic.last_reply_id = 3
     topic.who_deleted = "122"
-    topic.last_active_mark = Time.now.to_i
+    topic.score = Time.now.to_i
     topic.suggested_at = Time.now
     topic.save
     assert_equal false, topic.indexed_changed?

@@ -46,6 +46,7 @@ class BlackBox
     end
 
     def calculate_bonus_score(body)
+      return 0 if body.blank?
       size_bonus = body.size > 200 ? 2 : 0
       code_bonus = body.include?("```") ? 1 : 0
       size_bonus + code_bonus

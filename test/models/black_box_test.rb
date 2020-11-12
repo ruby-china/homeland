@@ -36,4 +36,11 @@ class BlackBoxTest < ActiveSupport::TestCase
       assert_equal 50, BlackBox.calculate_spaminess(target)
     end
   end
+
+  test "calculate_bonus_score" do
+    assert_equal 0, BlackBox.calculate_bonus_score(nil)
+    assert_equal 0, BlackBox.calculate_bonus_score("")
+    assert_equal 2, BlackBox.calculate_bonus_score("1" * 201)
+    assert_equal 3, BlackBox.calculate_bonus_score("```" * 201)
+  end
 end

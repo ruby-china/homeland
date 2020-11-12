@@ -12,14 +12,35 @@ class BlackBoxTest < ActiveSupport::TestCase
     @user_over_a_week = create(:user, created_at: 8.days.ago)
   end
 
+  test "calc_topic_score" do
+    t = Time.at(1605192897)
+    topic = create(:topic, created_at: t)
+    assert_equal 342917, BlackBox.calc_topic_score(topic)
+    topic.body = ""
+  end
+
+  test "calc_topic_quality_score" do
+    topic = Topic.new
+    BlackBox.stub(:calculate_spaminess, 25) do
+      assert_equal -25, BlackBox.calc_topic_quality_score(topic)
+      topic.replies_count = 5
+      assert_equal -20, BlackBox.calc_topic_quality_score(topic)
+      topic.likes_count = 12
+      assert_equal -8, BlackBox.calc_topic_quality_score(topic)
+      BlackBox.stub(:calculate_bonus_score, 2) do
+        assert_equal -6, BlackBox.calc_topic_quality_score(topic)
+      end
+    end
+  end
+
   test "calc_reply_quality_score" do
     reply = Reply.new
     BlackBox.stub(:calculate_spaminess, 100) do
       assert_equal -100, BlackBox.calc_reply_quality_score(reply)
       reply.likes_count = 20
       assert_equal -80, BlackBox.calc_reply_quality_score(reply)
-      BlackBox.stub(:calculate_bonus_score, 12) do
-        assert_equal -68, BlackBox.calc_reply_quality_score(reply)
+      BlackBox.stub(:calculate_bonus_score, 1) do
+        assert_equal -79, BlackBox.calc_reply_quality_score(reply)
       end
     end
   end

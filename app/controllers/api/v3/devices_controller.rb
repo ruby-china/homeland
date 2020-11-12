@@ -25,7 +25,7 @@ module Api
 
         @device = current_user.devices.find_or_initialize_by(platform: params[:platform].downcase,
                                                              token: params[:token])
-        @device.last_actived_at = Time.now
+        @device.hotness_at = Time.now
         @device.save!
 
         render json: { ok: 1 }

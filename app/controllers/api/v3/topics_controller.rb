@@ -39,7 +39,7 @@ module Api
 
         @topics = @topics.without_ban.fields_for_list.includes(:user).send(scope_method_by_type)
         if %w[no_reply popular].index(params[:type])
-          @topics = @topics.last_actived
+          @topics = @topics.hotness
         elsif params[:type] == "excellent"
           @topics = @topics.recent
         end

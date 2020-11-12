@@ -143,6 +143,24 @@ class UserTest < ActiveSupport::TestCase
     assert_equal false, user.wiki_editor?
   end
 
+  test "trust?" do
+    user = User.new(state: :admin)
+    assert_equal true, admin.trust?
+    user = User.new(state: :vip)
+    assert_equal true, admin.trust?
+    user = User.new(state: :maintainer)
+    assert_equal true, admin.trust?
+
+    user = User.new(replies_count: 100)
+    assert_equal true, user.trust?
+
+    user = User.new(topics_count: 20)
+    assert_equal true, user.trust?
+
+    user = User.new
+    assert_equal false, admin.trust?
+  end
+
   test "newbie?" do
     # should true when user created_at less than a week
     Setting.stubs(:newbie_limit_time).returns(1.days.to_i)

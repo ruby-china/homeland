@@ -14,7 +14,7 @@ class TopicsController < ApplicationController
     if params[:page].to_i <= 1
       @suggest_topics = topics_scope.suggest.limit(3)
     end
-    @topics = topics_scope.without_suggest.last_actived.page(params[:page])
+    @topics = topics_scope.without_suggest.hotness.page(params[:page])
     @page_title = t("menu.topics")
     @read_topic_ids = []
     if current_user
@@ -29,7 +29,7 @@ class TopicsController < ApplicationController
 
   def node
     @node = Node.find(params[:id])
-    @topics = topics_scope(@node.topics, without_nodes: false).last_actived.page(params[:page])
+    @topics = topics_scope(@node.topics, without_nodes: false).hotness.page(params[:page])
     @page_title = "#{@node.name} &raquo; #{t('menu.topics')}"
     @page_title = [@node.name, t("menu.topics")].join(" · ")
     render action: "index"

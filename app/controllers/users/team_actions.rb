@@ -13,7 +13,7 @@ module Users
       def team_show
         @topics = Topic.where(user_id: @team.user_ids, team_id: [nil, @team.id])
           .fields_for_list
-          .last_actived.includes(:user)
+          .hotness.includes(:user)
         @topics = @topics.page(params[:page])
       end
 

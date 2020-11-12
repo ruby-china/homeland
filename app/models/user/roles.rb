@@ -24,6 +24,11 @@ class User
       self.admin? || self.maintainer? || replies_count >= 100
     end
 
+    # Trust user
+    def trust?
+      self.admin? || self.maintainer? || self.vip? || topics_count >= 20 || replies_count >= 100
+    end
+
     # 是否能发帖
     def newbie?
       return false if self.vip? || self.hr?

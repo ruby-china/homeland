@@ -73,7 +73,7 @@ _emphasize_    __strong__
 ```ruby
 class PostController < ApplicationController
   def index
-    @posts = Post.last_actived.limit(10)
+    @posts = Post.hotness.limit(10)
   end
 end
 ```

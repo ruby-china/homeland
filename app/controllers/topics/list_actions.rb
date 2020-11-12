@@ -11,7 +11,7 @@ module Topics
     # GET /topics/no_reply
     %i[no_reply popular].each do |name|
       define_method(name) do
-        @topics = topics_scope.send(name).last_actived.page(params[:page])
+        @topics = topics_scope.send(name).hotness.page(params[:page])
 
         render_index(name)
       end

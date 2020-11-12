@@ -24,7 +24,7 @@ class Topic < ApplicationRecord
   delegate :body, to: :last_reply, prefix: true, allow_nil: true
 
   # scopes
-  scope :last_actived,       -> { order(last_active_mark: :desc) }
+  scope :hotness,       -> { order(score: :desc) }
   scope :suggest,            -> { where("suggested_at IS NOT NULL").order(suggested_at: :desc) }
   scope :without_suggest,    -> { where(suggested_at: nil) }
   scope :high_likes,         -> { order(likes_count: :desc).order(id: :desc) }
@@ -46,7 +46,6 @@ class Topic < ApplicationRecord
   }
 
   before_save { self.node_name = node.try(:name) || "" }
-  before_create { self.last_active_mark = Time.now.to_i }
 
   def self.fields_for_list
     columns = %w[body who_deleted]

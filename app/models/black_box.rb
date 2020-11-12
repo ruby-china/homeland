@@ -36,7 +36,10 @@ class BlackBox
       rep_points = topic.replies_count
       bonus_points = calculate_bonus_score(topic.body)
       spaminess_rating = calculate_spaminess(topic)
-      (likes_points + rep_points + bonus_points - spaminess_rating).to_i
+      spaminess_rating += 100 if topic.ban?
+
+      grade_points = topic.excellent? ? 1.2 : 1
+      ((likes_points + rep_points + bonus_points) * grade_points - spaminess_rating).to_i
     end
 
     def calc_reply_quality_score(reply)

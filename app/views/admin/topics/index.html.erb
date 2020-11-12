@@ -19,6 +19,7 @@
     <td>节点</td>
     <td>发帖人</td>
     <td>回帖</td>
+    <td>热度</td>
     <td>时间</td>
     <td style="width:100px"></td>
   </tr>
@@ -31,6 +32,7 @@
     <td><%= topic.node_name %></td>
     <td><%= user_name_tag(topic.user) %></td>
     <td><%= topic.replies_count %></td>
+    <td><%= topic.score %></td>
     <td>
       <% if topic.deleted_at.blank? %>
         <%= l topic.created_at, format: :short %>

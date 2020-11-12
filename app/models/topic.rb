@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Topic < ApplicationRecord
-  include SoftDelete, MarkdownBody, Mentionable, MentionTopic, Closeable, Searchable, UserAvatarDelegate
+  include SoftDelete, MarkdownBody, Mentionable, MentionTopic, Closeable, Searchable, UserAvatarDelegate, HotnessScore
   include Topic::Actions, Topic::AutoCorrect, Topic::Search, Topic::Notify, Topic::RateLimit
 
   # 临时存储检测用户是否读过的结果

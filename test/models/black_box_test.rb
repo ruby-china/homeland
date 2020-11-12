@@ -75,6 +75,10 @@ class BlackBoxTest < ActiveSupport::TestCase
       BlackBox.stub(:calculate_bonus_score, 2) do
         assert_equal -6, BlackBox.calc_topic_quality_score(topic)
       end
+      topic.grade = :ban
+      assert_equal -108, BlackBox.calc_topic_quality_score(topic)
+      topic.grade = :excellent
+      assert_equal -3, BlackBox.calc_topic_quality_score(topic)
     end
   end
 

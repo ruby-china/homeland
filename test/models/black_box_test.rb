@@ -12,6 +12,18 @@ class BlackBoxTest < ActiveSupport::TestCase
     @user_over_a_week = create(:user, created_at: 8.days.ago)
   end
 
+  test "calc_reply_quality_score" do
+    reply = Reply.new
+    BlackBox.stub(:calculate_spaminess, 100) do
+      assert_equal -100, BlackBox.calc_reply_quality_score(reply)
+      reply.likes_count = 20
+      assert_equal -80, BlackBox.calc_reply_quality_score(reply)
+      BlackBox.stub(:calculate_bonus_score, 12) do
+        assert_equal -68, BlackBox.calc_reply_quality_score(reply)
+      end
+    end
+  end
+
   test "calculate_spaminess" do
     [Topic, Comment].each do |klass|
       target = klass.new(user: @trust_user)

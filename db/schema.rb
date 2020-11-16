@@ -167,7 +167,6 @@ ActiveRecord::Schema.define(version: 2020_10_16_074728) do
     t.text "body", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["page_id", "version"], name: "index_page_versions_on_page_id_and_version"
     t.index ["page_id"], name: "index_page_versions_on_page_id"
   end
 
@@ -193,25 +192,6 @@ ActiveRecord::Schema.define(version: 2020_10_16_074728) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["user_id"], name: "index_photos_on_user_id"
-  end
-
-  create_table "posts", id: :serial, force: :cascade do |t|
-    t.string "title", null: false
-    t.string "slug", null: false
-    t.text "body", null: false
-    t.string "summary", limit: 5000
-    t.string "banner"
-    t.integer "user_id"
-    t.integer "likes_count", default: 0, null: false
-    t.integer "comments_count", default: 0, null: false
-    t.integer "status", default: 0, null: false
-    t.datetime "published_at", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["published_at"], name: "index_posts_on_published_at"
-    t.index ["slug"], name: "index_posts_on_slug"
-    t.index ["status"], name: "index_posts_on_status"
-    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -301,9 +281,6 @@ ActiveRecord::Schema.define(version: 2020_10_16_074728) do
     t.datetime "updated_at", null: false
     t.index ["team_id"], name: "index_team_users_on_team_id"
     t.index ["user_id"], name: "index_team_users_on_user_id"
-  end
-
-  create_table "test_documents", force: :cascade do |t|
   end
 
   create_table "topics", id: :serial, force: :cascade do |t|

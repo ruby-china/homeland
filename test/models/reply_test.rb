@@ -136,6 +136,16 @@ class ReplyTest < ActiveSupport::TestCase
     end
   end
 
+  test "ban words should not for system event Reply" do
+    topic = create(:topic)
+
+    Setting.stub(:ban_words_on_reply, [""]) do
+      assert_nothing_raised do
+        Reply.create_system_event!(action: "excellent", topic_id: topic.id)
+      end
+    end
+  end
+
   test "after_destroy" do
     # should call topic.update_deleted_last_reply
     r = create(:reply)

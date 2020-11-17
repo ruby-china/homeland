@@ -2,7 +2,29 @@
 
 # RailsSettings Model
 class Setting < RailsSettings::Base
-  include Setting::Legecy
+  concerning :Legacy do
+    LEGECY_ENVS = {
+      github_token: "github_api_key",
+      github_secret: "github_api_secret",
+    }
+
+    included do
+    end
+
+    class_methods do
+      def legecy_env_instead(key)
+        LEGECY_ENVS[key]
+      end
+
+      def legecy_envs
+        keys = []
+        LEGECY_ENVS.each_key do |key|
+          keys << key if ENV[key.to_s].present?
+        end
+        keys
+      end
+    end
+  end
 
   SYSTEM_KEYS = %w[require_restart domain https asset_host]
 

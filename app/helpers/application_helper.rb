@@ -57,7 +57,9 @@ module ApplicationHelper
     content_tag(:abbr, text, options)
   end
 
-  def title_tag(str)
+  def title_tag(str, description: nil)
+    @content_title = str
+    @content_description = description
     content_for :title, h("#{str} · #{Setting.app_name}")
   end
 

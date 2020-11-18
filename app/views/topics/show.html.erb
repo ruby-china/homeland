@@ -1,4 +1,4 @@
-<% title_tag @topic.title %>
+<% title_tag @topic.title, description: @topic.description %>
 <% content_for :scripts do %>
   <script type="text/javascript">
     Topics.topic_id = <%= @topic.id %>;

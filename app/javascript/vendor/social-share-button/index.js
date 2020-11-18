@@ -43,7 +43,8 @@ window.SocialShareButton = {
         var hashtags = encodeURIComponent(el.getAttribute("data-" + site + "-hashtags") || $parent.getAttribute("data-hashtags") || '');
         var via_str = '';
         if (via.length > 0) { via_str = `&via=${via}`; }
-        SocialShareButton.openUrl(`https://twitter.com/intent/tweet?url=${url}&text=${title}&hashtags=${hashtags}${via_str}`, 650, 300);
+        title = `${title}` + encodeURIComponent("\n\n") + `${url}`
+        SocialShareButton.openUrl(`https://twitter.com/intent/tweet?text=${title}&hashtags=${hashtags}${via_str}`, 650, 300);
         break;
       case "facebook":
         SocialShareButton.openUrl(`http://www.facebook.com/sharer/sharer.php?u=${url}&display=popup&quote=${desc}`, 555, 400);

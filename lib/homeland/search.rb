@@ -18,8 +18,8 @@ module Homeland
       SearchDocument.select("ts_headline(search_documents.content, #{ts_query}) as hit_content")
         .select(:id, :searchable_type, :searchable_id)
         .where("tokens @@ #{ts_query}")
-        .order("#{ts_query} DESC")
-        .order("TS_RANK_CD(tokens, #{ts_query}) DESC")
+        .order(Arel.sql("#{ts_query} DESC"))
+        .order(Arel.sql("TS_RANK_CD(tokens, #{ts_query}) DESC"))
     end
 
     class << self

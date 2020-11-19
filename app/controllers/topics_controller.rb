@@ -12,9 +12,9 @@ class TopicsController < ApplicationController
   def index
     @suggest_topics = []
     if params[:page].to_i <= 1
-      @suggest_topics = topics_scope.suggest.limit(3)
+      @suggest_topics = topics_scope.suggest.includes(:node).limit(3)
     end
-    @topics = topics_scope.without_suggest.last_actived.page(params[:page])
+    @topics = topics_scope.without_suggest.last_actived.includes(:node).page(params[:page])
     @page_title = t("menu.topics")
     @read_topic_ids = []
     if current_user

@@ -6,7 +6,7 @@
     <div class="infos media-body">
       <div class="title media-heading">
         <%= link_to(main_app.topic_path(topic), title: topic.title) do %>
-          <%= raw content_tag(:span, topic.node_name, class: 'node') %>
+          <%= raw content_tag(:span, topic.node&.name, class: 'node') %>
           <%= topic.title %>
         <% end %>
         <% if suggest %>

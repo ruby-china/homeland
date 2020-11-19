@@ -28,7 +28,7 @@
     <td>
       <%= link_to truncate(topic.title, length: 30), topic, target: "_blank" %>
     </td>
-    <td><%= topic.node_name %></td>
+    <td><%= topic.node&.name %></td>
     <td><%= user_name_tag(topic.user) %></td>
     <td><%= topic.replies_count %></td>
     <td>

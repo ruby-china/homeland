@@ -55,7 +55,8 @@ module TopicsHelper
     content_tag(:i, "", title: "问题已解决／话题已结束讨论", class: "fa fa-check-circle", data: { toggle: "tooltip" })
   end
 
-  def render_node_name(name, id)
-    link_to(name, main_app.node_topics_path(id), class: "node")
+  def render_node_name(node)
+    return "" if node.blank?
+    link_to(node.name, main_app.node_topics_path(node.id), class: "node")
   end
 end

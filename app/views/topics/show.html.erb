@@ -22,7 +22,7 @@
 <div class="row">
   <div class="col-lg-9">
     <div class="topic-detail card">
-      <%= render partial: "topics/topic_info", locals: { topic: @topic } %>
+      <%= render partial: "topics/topic_info", locals: { topic: @topic, node: @node } %>
       <% if @topic.excellent? %>
         <div class="label-awesome">
           <i class="fa fa-award awesome"></i> 本帖已被设为精华帖！

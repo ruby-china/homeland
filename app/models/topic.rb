@@ -45,7 +45,6 @@ class Topic < ApplicationRecord
     exclude_column_ids("node_id", ids)
   }
 
-  before_save { self.node_name = node.try(:name) || "" }
   before_create { self.last_active_mark = Time.now.to_i }
 
   def self.fields_for_list

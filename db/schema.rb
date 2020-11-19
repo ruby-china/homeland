@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_16_074728) do
+ActiveRecord::Schema.define(version: 2020_11_19_010515) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -291,7 +291,6 @@ ActiveRecord::Schema.define(version: 2020_10_16_074728) do
     t.integer "last_reply_id"
     t.integer "last_reply_user_id"
     t.string "last_reply_user_login"
-    t.string "node_name"
     t.string "who_deleted"
     t.integer "last_active_mark"
     t.boolean "lock_node", default: false

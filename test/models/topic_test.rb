@@ -26,11 +26,6 @@ class TopicTest < ActiveSupport::TestCase
     assert_equal last_active_mark_was, topic.last_active_mark
   end
 
-  test "should get node name" do
-    node = create :node
-    assert_equal node.name, create(:topic, node: node).node_name
-  end
-
   test "should update after reply" do
     reply = create :reply, topic: topic, user: user
     refute_nil topic.last_active_mark

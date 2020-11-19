@@ -62,4 +62,14 @@ class TopicsHelperTest < ActionView::TestCase
       assert_equal "<a data-id=\"#{topic.id}\" class=\"follow active\" href=\"#\"><i class=\"fa fa-eye\"></i> 订阅</a>", topic_follow_tag(topic)
     end
   end
+
+  test "render_node_name" do
+    node = create :node
+
+    # should return empty when node is nil
+    assert_equal "", render_node_name(nil)
+
+    # should return a link with node name
+    assert_equal "<a class=\"node\" href=\"/topics/node#{node.id}\">#{node.name}</a>", render_node_name(node)
+  end
 end

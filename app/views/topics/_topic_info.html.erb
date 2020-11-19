@@ -1,7 +1,7 @@
 <div class="card-header media clearfix">
   <div class="media-body">
     <h1 class="media-heading">
-      <%= render_node_name(topic.node_name, topic.node_id) %>
+      <%= render_node_name(node) %>
       <span class="title">
         <%= topic.title %>
       </span>
@@ -10,7 +10,7 @@
     <% content_for :header do %>
       <div class="navbar-topic-title">
         <a href="#" class="topic-title pull-left" title="<%= topic.title %>" data-type="top">
-          <h1><span class="node"><%= topic.node_name %></span> <span class="title"><%= topic.title %><%= topic_close_tag(topic) %></span></h1>
+          <h1><span class="node"><%= node&.name %></span> <span class="title"><%= topic.title %><%= topic_close_tag(topic) %></span></h1>
         </a>
       </div>
     <% end %>

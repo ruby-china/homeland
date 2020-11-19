@@ -30,8 +30,9 @@
 if topic
   json.cache! ["v1.1", topic, defined?(detail)] do
     json.(topic, :id, :title, :created_at, :updated_at, :replied_at, :replies_count,
-          :node_name, :node_id, :last_reply_user_id, :last_reply_user_login,
+          :node_id, :last_reply_user_id, :last_reply_user_login,
           :grade, :likes_count, :suggested_at, :closed_at)
+    json.merge!(node_name: topic.node&.name)
     json.deleted topic.deleted_at.present?
     json.user do
       json.partial! "user", user: topic.user

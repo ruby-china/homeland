@@ -44,6 +44,7 @@
 
 input[type="file"]::-webkit-file-upload-button {
   color: var(--primary);
+  background: var(--btn-default-background-color);
   -webkit-appearance: none !important;
   border: 0;
   outline: none;

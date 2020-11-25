@@ -179,8 +179,8 @@ class Setting < RailsSettings::Base
   # = ReCaptcha
   field :use_recaptcha, default: false, type: :boolean
   # default key for development env
-  field :recaptcha_key, default: "6Lcalg8TAAAAAFhLrcbC4QmxNuseboteXxP3wLxI"
-  field :recaptcha_secret, default: "6Lcalg8TAAAAAN-nZr547ORtmtpw78mTLWtVWFW2"
+  field :recaptcha_key, default: "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+  field :recaptcha_secret, default: "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe"
   field :google_analytics_key, default: ""
 
   class << self

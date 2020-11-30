@@ -1,6 +1,15 @@
 Contribute Guide
 ----------------
 
+## HOW TO Contribute
+- Fork https://github.com/w2solo/dreamland as your own repo.
+- Switch to `dev` branch.
+- Create your feature branch (git checkout -b my-new-branch origin/dev)
+- Commit your changes (git commit -am 'Add some feature')
+- Push to the branch (git push origin my-new-branch)
+- Create new Pull Request to `dev` branch
+
+
 ## Requirements
 
 * Ruby 2.4.0 +

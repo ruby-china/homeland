@@ -113,7 +113,6 @@ gem "rack-cors", require: "rack/cors"
 gem "exception-track"
 
 gem "bootsnap"
-gem "lograge"
 
 group :development do
   gem "spring"

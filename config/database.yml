@@ -17,3 +17,4 @@ test:
 
 production:
   <<: *default
+  database: homeland-dev

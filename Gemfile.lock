@@ -1,15 +1,15 @@
 GIT
   remote: https://github.com/ankane/pghero.git
-  revision: ebc926c04cd67950d428b6eb02096769030efcb8
+  revision: 1340c30df38ecd503f84ced549ca2b912dbf6306
   specs:
-    pghero (2.7.2)
+    pghero (2.7.3)
       activerecord (>= 5)
 
 GIT
   remote: https://github.com/guard/listen.git
-  revision: ab255a5779e9b4910abbe35b8ebe03238036c053
+  revision: afeca12c0b91ee068f9b97bb0d6d90adaba306d0
   specs:
-    listen (3.3.0.pre.2)
+    listen (3.3.3)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
 
@@ -111,7 +111,7 @@ GEM
     auto-correct (0.3.1)
       nokogiri (>= 1.4)
     bcrypt (3.1.16)
-    bootsnap (1.5.0)
+    bootsnap (1.5.1)
       msgpack (~> 1.0)
     builder (3.2.4)
     byebug (11.1.3)
@@ -166,7 +166,7 @@ GEM
       railties (>= 3.2)
     enumize (0.2.0)
       rails (>= 5.0.0)
-    erubi (1.9.0)
+    erubi (1.10.0)
     et-orbi (1.2.4)
       tzinfo
     exception-track (1.1.0)
@@ -188,7 +188,7 @@ GEM
     ffi (1.13.1)
     form-select (0.3.2)
       rails (>= 4.2)
-    fugit (1.4.0)
+    fugit (1.4.1)
       et-orbi (~> 1.1, >= 1.1.8)
       raabro (~> 1.4)
     globalid (0.4.2)
@@ -206,7 +206,7 @@ GEM
     http_accept_language (2.1.1)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
-    image_processing (1.12.0)
+    image_processing (1.12.1)
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
     jbuilder (2.10.1)
@@ -230,12 +230,7 @@ GEM
       addressable (~> 2.7)
     letter_opener (1.7.0)
       launchy (~> 2.2)
-    lograge (0.11.2)
-      actionpack (>= 4)
-      activesupport (>= 4)
-      railties (>= 4)
-      request_store (~> 1.0)
-    loofah (2.7.0)
+    loofah (2.8.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
@@ -245,9 +240,9 @@ GEM
     method_source (1.0.0)
     mime-types (3.3.1)
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2020.0512)
+    mime-types-data (3.2020.1104)
     mimemagic (0.3.5)
-    mini_magick (4.10.1)
+    mini_magick (4.11.0)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.14.2)
@@ -263,7 +258,7 @@ GEM
     nio4r (2.5.4)
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
-    nokogumbo (2.0.2)
+    nokogumbo (2.0.4)
       nokogiri (~> 1.8, >= 1.8.4)
     notifications (1.1.0)
       kaminari (>= 0.15)
@@ -294,7 +289,7 @@ GEM
       omniauth (>= 1.3.2)
       omniauth-oauth2 (>= 1.1.1)
     orm_adapter (0.5.0)
-    parallel (1.19.2)
+    parallel (1.20.1)
     parser (2.7.2.0)
       ast (~> 2.4.1)
     pg (1.2.3)
@@ -304,7 +299,7 @@ GEM
       actionmailer (>= 3.0.0)
       postmark (~> 1.15)
     public_suffix (4.0.6)
-    puma (5.0.4)
+    puma (5.1.0)
       nio4r (~> 2.0)
     raabro (1.4.0)
     rack (2.2.3)
@@ -361,10 +356,10 @@ GEM
     recaptcha (5.6.0)
       json
     redcarpet (3.5.0)
-    redis (4.2.2)
+    redis (4.2.5)
     redis-objects (1.5.0)
       redis (~> 4.0)
-    regexp_parser (1.8.2)
+    regexp_parser (2.0.0)
     request_store (1.5.0)
       rack (>= 1.4)
     responders (3.0.1)
@@ -376,17 +371,17 @@ GEM
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
     rexml (3.2.4)
-    rouge (3.24.0)
-    rubocop (1.1.0)
+    rouge (3.25.0)
+    rubocop (1.4.2)
       parallel (~> 1.10)
       parser (>= 2.7.1.5)
       rainbow (>= 2.2.2, < 4.0)
       regexp_parser (>= 1.8)
       rexml
-      rubocop-ast (>= 1.0.1)
+      rubocop-ast (>= 1.1.1)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 2.0)
-    rubocop-ast (1.1.0)
+    rubocop-ast (1.3.0)
       parser (>= 2.7.1.5)
     ruby-progressbar (1.10.1)
     ruby-push-notifications (1.3.0)
@@ -410,7 +405,7 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
-    sdoc (2.0.0)
+    sdoc (2.0.2)
       rdoc (>= 5.0)
     second_level_cache (2.6.4)
       activerecord (>= 5.2, < 7)
@@ -424,10 +419,12 @@ GEM
     sidekiq-cron (1.2.0)
       fugit (~> 1.1)
       sidekiq (>= 4.2.1)
-    simplecov (0.19.1)
+    simplecov (0.20.0)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
+      simplecov_json_formatter (~> 0.1)
     simplecov-html (0.12.3)
+    simplecov_json_formatter (0.1.2)
     social-share-button (1.2.3)
       coffee-rails
     spring (2.1.1)
@@ -463,7 +460,7 @@ GEM
     websocket-driver (0.7.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    zeitwerk (2.4.1)
+    zeitwerk (2.4.2)
 
 PLATFORMS
   ruby
@@ -497,7 +494,6 @@ DEPENDENCIES
   kaminari
   letter_opener
   listen!
-  lograge
   mini_magick
   minitest-spec-rails
   mocha

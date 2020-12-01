@@ -8,9 +8,9 @@ upstream app_backend {
 }
 
 log_format timed_combined '$remote_addr - $remote_user [$time_local] '
-                          '"$request" $status $body_bytes_sent '
-                          '"$http_referer" "$http_user_agent" '
-                          '$request_time $upstream_response_time $pipe';
+'"$request" $status $body_bytes_sent '
+'"$http_referer" "$http_user_agent" '
+'$request_time $upstream_response_time $pipe';
 
 server {
   listen 80 default_server;
@@ -29,10 +29,10 @@ server {
 
   # DO NOT CHANGE THIS
   location ~ (/system|.well-known|/avatar.png|/favicon.ico|/*.txt) {
-    access_log        off;
-    expires           7d;
+    access_log off;
+    expires 7d;
     gzip_static on;
-    add_header  Cache-Control public;
+    add_header Cache-Control public;
   }
 
   location /404.png {
@@ -47,10 +47,10 @@ server {
 
   # DO NOT CHANGE THIS
   location ~ (/assets|/packs) {
-    access_log        off;
-    expires           365d;
+    access_log off;
+    expires 365d;
     gzip_static on;
-    add_header  Cache-Control public;
+    add_header Cache-Control public;
   }
 
   # DO NOT CHANGE THIS
@@ -71,8 +71,8 @@ server {
     proxy_cache_use_stale error timeout invalid_header updating;
     proxy_cache_revalidate on;
     proxy_intercept_errors on;
-    error_page   415 = /415.png;
-    error_page   404 = /404.png;
+    error_page 415 = /415.png;
+    error_page 404 = /404.png;
   }
 
   location ~* /_img/uploads/(.+)!(large|lg|md|sm|xs)$ {
@@ -84,31 +84,31 @@ server {
 
     set $img_version $2;
     set $img_type resize;
-    set $img_w    -;
-    set $img_h    -;
+    set $img_w -;
+    set $img_h -;
     if ($img_version = 'large') {
       set $img_type resize;
-      set $img_w    1920;
+      set $img_w 1920;
     }
     if ($img_version = 'lg') {
       set $img_type crop;
-      set $img_w    192;
-      set $img_h    192;
+      set $img_w 192;
+      set $img_h 192;
     }
     if ($img_version = 'md') {
       set $img_type crop;
-      set $img_w    96;
-      set $img_h    96;
+      set $img_w 96;
+      set $img_h 96;
     }
     if ($img_version = 'sm') {
       set $img_type crop;
-      set $img_w    48;
-      set $img_h    48;
+      set $img_w 48;
+      set $img_h 48;
     }
     if ($img_version = 'xs') {
       set $img_type crop;
-      set $img_w    32;
-      set $img_h    32;
+      set $img_w 32;
+      set $img_h 32;
     }
     rewrite ^ /_$img_type;
   }
@@ -122,32 +122,32 @@ server {
     alias /home/app/homeland/public$filename;
     image_filter resize $img_w $img_h;
     image_filter_jpeg_quality 95;
-    image_filter_buffer         20M;
-    image_filter_interlace      on;
+    image_filter_buffer 20M;
+    image_filter_interlace on;
   }
 
   location /_crop {
     alias /home/app/homeland/public$filename;
     image_filter crop $img_w $img_h;
     image_filter_jpeg_quality 95;
-    image_filter_buffer         20M;
-    image_filter_interlace      on;
+    image_filter_buffer 20M;
+    image_filter_interlace on;
   }
 
   # DO NOT CHANGE THIS
   location / {
-    proxy_redirect     off;
-    proxy_set_header   Host $http_host;
-    proxy_set_header   X-Forwarded-Host $http_host;
-    proxy_set_header   X-Forwarded-Server $http_host;
-    proxy_set_header   X-Real-IP        $remote_addr;
-    proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
-    proxy_buffering    on;
+    proxy_redirect off;
+    proxy_set_header Host $http_host;
+    proxy_set_header X-Forwarded-Host $http_host;
+    proxy_set_header X-Forwarded-Server $http_host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_buffering on;
     proxy_http_version 1.1;
-    proxy_set_header   Upgrade $http_upgrade;
-    proxy_set_header   Connection "Upgrade";
-    proxy_set_header   X-Forwarded-Proto $scheme;
-    proxy_pass         http://app_backend;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "Upgrade";
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_pass http://app_backend;
     gzip on;
   }
 }

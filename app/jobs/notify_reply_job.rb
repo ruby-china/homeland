@@ -8,17 +8,19 @@ class NotifyReplyJob < ApplicationJob
     return if reply.blank?
     return if reply.system_event?
 
-    Notification.bulk_insert(set_size: 100) do |worker|
-      reply.notification_receiver_ids.each do |uid|
-        logger.debug "Post Notification to: #{uid}"
-        note = reply.send(:default_notification).merge(user_id: uid)
-        worker.add(note)
-      end
+    default_note = reply.default_notification
+    all_records = []
+    reply.notification_receiver_ids.each do |user_id|
+      all_records << default_note.merge(user_id: user_id)
+    end
+
+    all_records.each_slice(100) do |records|
+      Notification.insert_all(records)
     end
 
     # Touch realtime_push_to_client
-    reply.notification_receiver_ids.each do |uid|
-      n = Notification.where(user_id: uid).last
+    reply.notification_receiver_ids.each do |user_id|
+      n = Notification.where(user_id: user_id).last
       n.realtime_push_to_client if n.present?
     end
     reply.broadcast_to_client

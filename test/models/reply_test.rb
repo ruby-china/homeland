@@ -207,14 +207,20 @@ class ReplyTest < ActiveSupport::TestCase
 
   test ".default_notification" do
     reply = create(:reply, topic: create(:topic))
-
+    t = Time.now
+    
     val = {
       notify_type: "topic_reply",
       target_type: "Reply", target_id: reply.id,
       second_target_type: "Topic", second_target_id: reply.topic_id,
-      actor_id: reply.user_id
+      actor_id: reply.user_id,
+      created_at: t,
+      updated_at: t
     }
-    assert_equal val, reply.send(:default_notification)
+
+    Time.stub(:now, t) do
+      assert_equal val, reply.default_notification
+    end
   end
 
   test ".notification_receiver_ids" do

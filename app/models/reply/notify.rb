@@ -32,16 +32,17 @@ class Reply
       @notification_receiver_ids = follower_ids
     end
 
-    private
-      def default_notification
-        @default_notification ||= {
-          notify_type: "topic_reply",
-          target_type: "Reply",
-          target_id: self.id,
-          second_target_type: "Topic",
-          second_target_id: self.topic_id,
-          actor_id: self.user_id
-        }
-      end
+    def default_notification
+      @default_notification ||= {
+        notify_type: "topic_reply",
+        target_type: "Reply",
+        target_id: self.id,
+        second_target_type: "Topic",
+        second_target_id: self.topic_id,
+        actor_id: self.user_id,
+        created_at: Time.now,
+        updated_at: Time.now
+      }
+    end
   end
 end

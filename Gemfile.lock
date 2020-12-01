@@ -1,25 +1,10 @@
 GIT
-  remote: https://github.com/ankane/pghero.git
-  revision: 1340c30df38ecd503f84ced549ca2b912dbf6306
-  specs:
-    pghero (2.7.3)
-      activerecord (>= 5)
-
-GIT
   remote: https://github.com/guard/listen.git
   revision: afeca12c0b91ee068f9b97bb0d6d90adaba306d0
   specs:
     listen (3.3.3)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-
-GIT
-  remote: https://github.com/huacnlee/bulk_insert.git
-  revision: 64c057778c668e71b5f5909a68488a741517f3ee
-  branch: fix-for-rails-6.1
-  specs:
-    bulk_insert (1.8.1)
-      activerecord (>= 3.2.0)
 
 GIT
   remote: https://github.com/qiniu/ruby-sdk.git
@@ -293,6 +278,8 @@ GEM
     parser (2.7.2.0)
       ast (~> 2.4.1)
     pg (1.2.3)
+    pghero (2.7.3)
+      activerecord (>= 5)
     postmark (1.21.2)
       json
     postmark-rails (0.20.0)
@@ -469,7 +456,6 @@ DEPENDENCIES
   action-store
   auto-correct
   bootsnap
-  bulk_insert!
   byebug
   cancancan
   carrierwave
@@ -503,7 +489,7 @@ DEPENDENCIES
   omniauth-twitter
   omniauth-wechat-oauth2
   pg
-  pghero!
+  pghero
   postmark
   postmark-rails
   puma

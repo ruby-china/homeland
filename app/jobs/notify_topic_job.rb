@@ -13,16 +13,19 @@ class NotifyTopicJob < ApplicationJob
     notified_user_ids = topic.mentioned_user_ids
 
     # 给关注者发通知
-    default_note = { notify_type: "topic", target_type: "Topic", target_id: topic.id, actor_id: topic.user_id }
-    Notification.bulk_insert(set_size: 100) do |worker|
-      follower_ids.each do |uid|
-        # 排除同一个回复过程中已经提醒过的人
-        next if notified_user_ids.include?(uid)
-        # 排除回帖人
-        next if uid == topic.user_id
-        note = default_note.merge(user_id: uid)
-        worker.add(note)
-      end
+    default_note = { notify_type: "topic", target_type: "Topic", target_id: topic.id, actor_id: topic.user_id, created_at: Time.now, updated_at: Time.now }
+
+    all_records = []
+    follower_ids.each do |uid|
+      # 排除同一个回复过程中已经提醒过的人
+      next if notified_user_ids.include?(uid)
+      # 排除回帖人
+      next if uid == topic.user_id
+      all_records << default_note.merge(user_id: uid)
+    end
+
+    all_records.each_slice(100) do |records|
+      Notification.insert_all(records)
     end
   end
 end

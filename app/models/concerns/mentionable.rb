@@ -51,24 +51,29 @@ module Mentionable
 
     def send_mention_notification
       users = mentioned_users - no_mention_users
-      Notification.bulk_insert(set_size: 100) do |worker|
-        users.each do |user|
-          note = {
-            notify_type: "mention",
-            actor_id: self.user_id,
-            user_id: user.id,
-            target_type: self.class.name,
-            target_id: self.id
-          }
-          if self.class.name == "Reply"
-            note[:second_target_type] = "Topic"
-            note[:second_target_id] = self.send(:topic_id)
-          elsif self.class.name == "Comment"
-            note[:second_target_type] = self.commentable_type
-            note[:second_target_id] = self.commentable_id
-          end
-          worker.add(note)
+
+      all_records = users.map do |user|
+        note = {
+          notify_type: "mention",
+          actor_id: self.user_id,
+          user_id: user.id,
+          target_type: self.class.name,
+          target_id: self.id,
+          created_at: Time.now,
+          updated_at: Time.now,
+        }
+        if self.class.name == "Reply"
+          note[:second_target_type] = "Topic"
+          note[:second_target_id] = self.send(:topic_id)
+        elsif self.class.name == "Comment"
+          note[:second_target_type] = self.commentable_type
+          note[:second_target_id] = self.commentable_id
         end
+        note
+      end
+
+      all_records.each_slice(100) do |records|
+        Notification.insert_all(records)
       end
 
       # Touch push to client

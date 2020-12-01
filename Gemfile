@@ -93,7 +93,7 @@ gem "redcarpet"
 gem "rouge"
 
 # 队列
-gem "sidekiq", "6.0.7"
+gem "sidekiq"
 gem "sidekiq-cron"
 
 # 分享功能

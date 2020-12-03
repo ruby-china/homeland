@@ -183,6 +183,9 @@ class Setting < RailsSettings::Base
   field :recaptcha_secret, default: "6Lcalg8TAAAAAN-nZr547ORtmtpw78mTLWtVWFW2"
   field :google_analytics_key, default: ""
 
+  # = Emoji
+  field :emoji_enable, type: :boolean, default: (ENV["emoji_enable"] || true)
+
   class << self
     def protocol
       self.https? ? "https" : "http"
@@ -232,6 +235,10 @@ class Setting < RailsSettings::Base
     # https://regex101.com/r/m1UOqT/1
     def cable_allowed_request_origin
       /http(s)?:\/\/#{Setting.domain}(:[\d]+)?/
+    end
+
+    def can_emoji?
+      self.emoji_enable? == true
     end
   end
 

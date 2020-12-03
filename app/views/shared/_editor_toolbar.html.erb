@@ -5,7 +5,9 @@
     <a href="#" class="close"><i class="fa fa-close"></i></a>
   </div>
   <div class="toolbar-buttons">
-    <a href="#" class="nav-link pickup-emoji"><i class="fa fa-smile"></i></a>
+    <% if Setting.can_emoji? %>
+      <a href="#" class="nav-link pickup-emoji"><i class="fa fa-smile"></i></a>
+    <% end %>
     <% if Setting.has_module? 'editor.code' %>
     <span class="dropdown" id="dropdown-insert-codes">
       <a href="#editor-toolbar-insert-code" class="nav-link dropdown-toggle" data-toggle="dropdown" title="<%= t("common.editor_insert_codes") %>"><i class="fa fa-code"></i></a>

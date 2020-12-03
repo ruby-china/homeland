@@ -6,7 +6,8 @@ class ApplicationController
 
     included do
       before_action do
-        Current.user = current_user if current_user
+        Current.request_id = request.uuid
+        Current.user = current_user
       end
     end
   end

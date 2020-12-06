@@ -5,7 +5,7 @@ addons:
 
 services:
   - postgresql
-  - redis-server
+  - redis
 
 rvm:
   - ruby-3.0.0-preview1

@@ -208,7 +208,7 @@ class ReplyTest < ActiveSupport::TestCase
   test ".default_notification" do
     reply = create(:reply, topic: create(:topic))
     t = Time.now
-    
+
     val = {
       notify_type: "topic_reply",
       target_type: "Reply", target_id: reply.id,

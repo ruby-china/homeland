@@ -77,7 +77,7 @@ class Setting < RailsSettings::Base
   field :asset_host, default: (ENV["asset_host"] || nil), readonly: true
 
   # = Basic
-  field :app_name, default: (ENV["app_name"] || "Homeland")
+  field :app_name, default: (ENV["app_name"] || "Homeland"), validates: { presence: true }
   field :timezone, default: "UTC"
   # Module [topic,home,team,github,editor.code]
   field :modules, default: (ENV["modules"] || "all"), type: :array
@@ -155,7 +155,7 @@ class Setting < RailsSettings::Base
 
   # = UI custom html
   field :navbar_brand_html, default: -> { %(<a href="/" class="navbar-brand"><b>#{self.app_name}</b></a>) }
-  field :default_locale, default: "zh-CN"
+  field :default_locale, default: "zh-CN", validates: { presence: true, inclusion: { in: %w[zh-CN en] } }
   field :auto_locale, default: "false", type: :boolean
   field :custom_head_html, default: ""
   field :navbar_html, default: ""

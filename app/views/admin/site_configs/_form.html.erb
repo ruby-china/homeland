@@ -1,4 +1,5 @@
 <%= form_for @site_config, url: admin_site_config_path(@site_config.var), method: 'patch' do |f| %>
+  <%= render "/shared/error_messages", target: @site_config %>
   <div class="form-group">
     <label>
       <%= @site_config.var %>
@@ -8,7 +9,7 @@
     </label>
     <%
 
-    value = Setting.send(@site_config.var)
+    value = params.dig(:setting, :value) || Setting.send(@site_config.var)
     value = value.join("\n") if value.is_a?(Array)
     %>
     <% if @site_config.var == "timezone" %>

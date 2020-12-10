@@ -72,12 +72,8 @@ gem "omniauth-wechat-oauth2"
 # Permission
 gem "cancancan"
 
-# Redis
-gem "redis"
-gem "redis-namespace", github: "resque/redis-namespace"
-gem "redis-objects"
-
 # Cache
+gem "redis"
 gem "second_level_cache"
 
 # Setting

@@ -12,8 +12,6 @@ gem "turbolinks"
 gem "uglifier"
 gem "webpacker", "~> 5.x"
 
-gem "sanitize"
-
 gem "pg"
 gem "jieba-rb"
 gem "pghero"

@@ -243,8 +243,6 @@ GEM
     nio4r (2.5.4)
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
-    nokogumbo (2.0.4)
-      nokogiri (~> 1.8, >= 1.8.4)
     notifications (1.1.0)
       kaminari (>= 0.15)
       rails (>= 5.2)
@@ -373,10 +371,6 @@ GEM
     ruby2_keywords (0.0.2)
     rucaptcha (2.5.3)
       railties (>= 3.2)
-    sanitize (5.2.1)
-      crass (~> 1.0.2)
-      nokogiri (>= 1.8.0)
-      nokogumbo (~> 2.0)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
     sassc (2.4.0)
@@ -504,7 +498,6 @@ DEPENDENCIES
   rubocop
   ruby-push-notifications
   rucaptcha
-  sanitize
   sass-rails
   sdoc
   second_level_cache

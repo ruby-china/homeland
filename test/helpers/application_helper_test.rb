@@ -8,8 +8,12 @@ class ApplicationHelperTest < ActionView::TestCase
   end
 
   test "markdown" do
-    assert_equal "<p> foo</p>", markdown("<script>alert()</script> foo")
-    assert_equal "<p> foo</p>", markdown("<style>.body {}</style> foo")
+    assert_equal "<p>foo <strong>bar</strong>alert()</p>", markdown("foo **bar**<script>alert()</script>")
+    assert_equal "<p>Hello world alert()</p>", markdown("Hello world <script>alert()</script>")
+  end
+
+  test "sanitize_html" do
+    assert_equal "<p>Hello world alert()</p>", sanitize_html("<p>Hello world <script>alert()</script></p>")
   end
 
   test "formats the flash messages" do

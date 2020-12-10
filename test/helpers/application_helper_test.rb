@@ -12,8 +12,8 @@ class ApplicationHelperTest < ActionView::TestCase
     assert_equal "<p>Hello world alert()</p>", markdown("Hello world <script>alert()</script>")
   end
 
-  test "sanitize_html" do
-    assert_equal "<p>Hello world alert()</p>", sanitize_html("<p>Hello world <script>alert()</script></p>")
+  test "sanitize_markdown" do
+    assert_equal "<p>Hello world alert()</p>", sanitize_markdown("<p>Hello world <script>alert()</script></p>")
   end
 
   test "formats the flash messages" do

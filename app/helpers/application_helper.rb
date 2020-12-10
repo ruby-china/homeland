@@ -4,11 +4,12 @@ module ApplicationHelper
   def markdown(text)
     return nil if text.blank?
     Rails.cache.fetch(["markdown", "v1.1", Digest::MD5.hexdigest(text)]) do
-      sanitize_html(Homeland::Markdown.call(text))
+      sanitize_markdown(Homeland::Markdown.call(text))
     end
   end
 
-  def sanitize_html(html)
+  # plugins/jobs required this method
+  def sanitize_markdown(html)
     sanitize(html, scrubber: Homeland::Sanitize::TOPIC_SCRUBBER)
   end
 

@@ -74,6 +74,7 @@ gem "cancancan"
 
 # Cache
 gem "redis"
+gem "redis-namespace", github: "resque/redis-namespace"
 gem "second_level_cache"
 
 # Setting

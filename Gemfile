@@ -68,6 +68,7 @@ gem "omniauth"
 gem "omniauth-github"
 gem "omniauth-twitter"
 gem "omniauth-wechat-oauth2"
+gem "omniauth-rails_csrf_protection"
 
 # Permission
 gem "cancancan"

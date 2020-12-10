@@ -1,0 +1,52 @@
+name: Test
+
+on: [push]
+jobs:
+  test:
+    name: CI Test
+    runs-on: ubuntu-latest
+    container: homeland/base:2.7.2-slim-buster
+    services:
+      postgres:
+        image: postgres:10
+        env:
+          POSTGRES_DB: homeland-test
+          POSTGRES_USER: "admin"
+          POSTGRES_PASSWORD: "123456"
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      redis:
+        image: redis:latest
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      RAILS_ENV: test
+      REDIS_URL: redis://redis:6379/1
+      DATABASE_URL: postgres://admin:123456@postgres:5432/homeland-test
+    steps:
+    - uses: actions/checkout@v2
+    - name: RubyGems cache
+      uses: actions/cache@v1
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gems-
+    - name: Install dependencies
+      run: |
+        bundle config path vendor/bundle
+        bundle install
+    - name: Before tests
+      run: |
+        sed -i "s/gems.ruby-china.org/rubygems.org/g" Gemfile.lock
+        bundle exec rails db:migrate 
+    - name: Run Rubocop
+      run: bundle exec rubocop .
+    - name: Run tests
+      run: bundle exec rails test

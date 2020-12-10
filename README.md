@@ -3,8 +3,8 @@
   <p align="center">Open source discussion website.</p>
   <p align="center">开源的论坛／社区网站系统，基于 <a href="https://ruby-china.org">Ruby China</a> 发展而来。</p>
   <p align="center">
-    <a href="https://travis-ci.org/ruby-china/homeland">
-      <img src="https://travis-ci.org/ruby-china/homeland.svg?branch=master" />
+    <a href="https://github.com/ruby-china/homeland/actions">
+      <img src="https://github.com/ruby-china/homeland/workflows/Test/badge.svg" />
     </a>
     <a href="https://codecov.io/github/ruby-china/homeland?branch=master">
       <img src="https://codecov.io/github/ruby-china/homeland/coverage.svg?branch=master" />
@@ -25,10 +25,10 @@ Copyright (c) 2011-2017 Ruby China
 
 Released under the MIT license:
 
-* [www.opensource.org/licenses/MIT](http://www.opensource.org/licenses/MIT)
+- [www.opensource.org/licenses/MIT](http://www.opensource.org/licenses/MIT)
 
 Emojis under the CC-BY 4.0 license from [Twitter/Twemoji][twemoji]:
 
-* https://github.com/twitter/twemoji#license
+- https://github.com/twitter/twemoji#license
 
 [twemoji]: https://github.com/twitter/twemoji

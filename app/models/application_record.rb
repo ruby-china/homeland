@@ -3,7 +3,7 @@
 class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
 
-  include Redis::Objects
+  include Counterable
 
   scope :recent, -> { order(id: :desc) }
   scope :exclude_ids, ->(ids) { where.not(id: ids.map(&:to_i)) }

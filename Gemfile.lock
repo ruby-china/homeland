@@ -16,13 +16,6 @@ GIT
       rest-client (~> 2.0)
       rexml (~> 3.2)
 
-GIT
-  remote: https://github.com/resque/redis-namespace.git
-  revision: c31e63dc3cd5e59ef5ea394d4d46ac60d1e6f82e
-  specs:
-    redis-namespace (1.8.0)
-      redis (>= 3.0.4)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -339,8 +332,6 @@ GEM
       json
     redcarpet (3.5.0)
     redis (4.2.5)
-    redis-objects (1.5.0)
-      redis (~> 4.0)
     regexp_parser (2.0.0)
     responders (3.0.1)
       actionpack (>= 5.0)
@@ -492,8 +483,6 @@ DEPENDENCIES
   recaptcha
   redcarpet
   redis
-  redis-namespace!
-  redis-objects
   rouge
   rubocop
   ruby-push-notifications

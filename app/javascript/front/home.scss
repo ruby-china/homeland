@@ -10,8 +10,7 @@
     margin-bottom: 15px;
     border-radius: 3px;
     background: var(--card-background-color);
-    border: 1px;
-    border-color: var(--card-border-color);
+    border: 1px solid var(--card-border-color);
 
     .icon {
       display: block;
@@ -26,7 +25,7 @@
     .text {
       display: block;
       text-align: left;
-      background: var(--card-background-color);
+      background: transparent;
       border-top: 1px solid var(--card-border-color);
       font-size: 14px;
       font-weight: bold;

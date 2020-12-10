@@ -13,7 +13,7 @@
           </div>
         </div>
         <div class="summary<%= ' collapse' if node.collapse_summary? %>" id="node-summary">
-          <%= sanitize_html node.summary_html %>
+          <%= sanitize_markdown node.summary_html %>
         </div>
       <% else %>
         <%= render 'node_selector' %>

@@ -7,6 +7,7 @@ module Api
     class ApplicationController < ActionController::Base
       include ActionController::Caching
       include ActionView::Helpers::OutputSafetyHelper
+      include ActionView::Helpers::SanitizeHelper
       include ApplicationHelper
       include ::ApplicationController::CurrentInfo
 

@@ -68,6 +68,7 @@ class Setting < RailsSettings::Base
     editor_languages
     sorted_plugins
     profile_fields
+    google_analytics_key
   ]
 
   # = System

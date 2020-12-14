@@ -88,8 +88,8 @@ class Setting < RailsSettings::Base
 
   # = Rack Attach
   field :rack_attack, type: :hash, default: {
-    limit: ENV["rack_attack.limit"] || 0,
-    period: ENV["rack_attack.period"] || 3.minutes,
+    limit: 0,
+    period: 3.minutes,
   }
 
   # = Uploader
@@ -108,27 +108,27 @@ class Setting < RailsSettings::Base
   field :mailer_provider, default: (ENV["mailer_provider"] || "smtp"), readonly: true
   field :mailer_sender, default: (ENV["mailer_sender"] || "no-reply@localhost"), readonly: true
   field :mailer_options, type: :hash, readonly: true, default: {
-    api_key: (ENV["mailer_options_api_key"] || ENV["mailer_options.api_key"]),
-    address: (ENV["mailer_options_address"] || ENV["mailer_options.address"]),
-    port: (ENV["mailer_options_port"] || ENV["mailer_options.port"]),
-    domain: (ENV["mailer_options_domain"] || ENV["mailer_options.domain"]),
-    user_name: (ENV["mailer_options_user_name"] || ENV["mailer_options.user_name"]),
-    password: (ENV["mailer_options_password"] || ENV["mailer_options.password"]),
-    authentication: (ENV["mailer_options_authentication"] || ENV["mailer_options.authentication"] || "login"),
-    enable_starttls_auto: (ENV["mailer_options_enable_starttls_auto"] || ENV["mailer_options.enable_starttls_auto"])
+    api_key: ENV["mailer_options_api_key"],
+    address: ENV["mailer_options_address"],
+    port: ENV["mailer_options_port"],
+    domain: ENV["mailer_options_domain"],
+    user_name: ENV["mailer_options_user_name"],
+    password: ENV["mailer_options_password"],
+    authentication: (ENV["mailer_options_authentication"] || "login"),
+    enable_starttls_auto: ENV["mailer_options_enable_starttls_auto"]
   }
 
   # = SSO
   field :sso, type: :hash, readonly: true, default: {
-    enable: (ENV["sso_enable"] || ENV["sso.enable"] || false),
-    enable_provider: (ENV["sso_enable_provider"] || ENV["sso_enable.provider"] || false),
-    url: (ENV["sso_url"] || ENV["sso.url"]),
-    secret: (ENV["sso_secret"] || ENV["sso.secret"]),
+    enable: (ENV["sso_enable"] || false),
+    enable_provider: (ENV["sso_enable_provider"] || false),
+    url: ENV["sso_url"],
+    secret: ENV["sso_secret"],
   }
 
   # = Omniauth API Keys
-  field :github_api_key, default: (ENV["github_api_key"] || ENV["github_token"])
-  field :github_api_secret, default: (ENV["github_api_secret"] || ENV["github_secret"])
+  field :github_api_key, default: ENV["github_api_key"]
+  field :github_api_secret, default: ENV["github_api_secret"]
   field :twitter_api_key, default: ENV["twitter_api_key"]
   field :twitter_api_secret, default: ENV["twitter_api_secret"]
   field :wechat_api_key, default: ENV["wechat_api_key"]

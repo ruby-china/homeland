@@ -144,7 +144,7 @@ GEM
     erubi (1.10.0)
     et-orbi (1.2.4)
       tzinfo
-    exception-track (1.1.0)
+    exception-track (1.2.0)
       exception_notification (~> 4)
       kaminari (>= 0.15)
       rails (>= 5.2)
@@ -412,7 +412,7 @@ GEM
     turbolinks-source (5.2.0)
     twemoji (3.1.7)
       nokogiri (~> 1.6)
-    tzinfo (2.0.3)
+    tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)

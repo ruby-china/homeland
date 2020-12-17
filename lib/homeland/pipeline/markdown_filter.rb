@@ -7,41 +7,11 @@ require "nokogiri"
 module Homeland
   class Pipeline
     class MarkdownFilter < HTML::Pipeline::TextFilter
-      DEFAULT_OPTIONS = {
-        no_styles: true,
-        hard_wrap: true,
-        autolink: true,
-        fenced_code_blocks: true,
-        strikethrough: true,
-        underline: true,
-        superscript: false,
-        footnotes: false,
-        highlight: false,
-        tables: true,
-        lax_spacing: true,
-        space_after_headers: true,
-        disable_indented_code_blocks: true,
-        no_intra_emphasis: true
-      }
-
-      def call
-        html = Render.to_html(@text)
-        html.strip!
-        html
-      end
-
       class Render < Redcarpet::Render::HTML
         include Rouge::Plugins::Redcarpet
 
-        attr_accessor :domain
-
-        class << self
-          def to_html(raw)
-            renderer = self.new
-            renderer.domain = Setting.domain
-            @render ||= Redcarpet::Markdown.new(renderer, DEFAULT_OPTIONS)
-            @render.render(raw)
-          end
+        def domain
+          Setting.domain
         end
 
         def block_code(code, lang)
@@ -119,6 +89,35 @@ module Homeland
             %(<a href="#{link}" rel="nofollow" target="_blank">#{link}</a>#{bad_text})
           end
         end
+      end
+
+      DEFAULT_OPTIONS = {
+        no_styles: true,
+        hard_wrap: true,
+        autolink: true,
+        fenced_code_blocks: true,
+        strikethrough: true,
+        underline: true,
+        superscript: false,
+        footnotes: false,
+        highlight: false,
+        tables: true,
+        lax_spacing: true,
+        space_after_headers: true,
+        disable_indented_code_blocks: true,
+        no_intra_emphasis: true
+      }
+
+      def renderer
+        # Do not share a single Redcarpet::Markdown object across threads
+        # https://github.com/vmg/redcarpet/pull/672
+        Thread.current[:homeland_markdown_renderer] ||= begin
+          Redcarpet::Markdown.new(Render, DEFAULT_OPTIONS)
+        end
+      end
+
+      def call
+        renderer.render(@text)
       end
     end
   end

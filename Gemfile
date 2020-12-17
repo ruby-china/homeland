@@ -34,7 +34,7 @@ gem "carrierwave"
 gem "carrierwave-aliyun"
 gem "carrierwave-upyun"
 gem "carrierwave-qiniu"
-gem "qiniu", github: "qiniu/ruby-sdk", branch: "develop"
+gem "qiniu"
 
 # Lazy load
 gem "mini_magick", require: false

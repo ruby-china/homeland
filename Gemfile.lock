@@ -7,16 +7,6 @@ GIT
       rb-inotify (~> 0.9, >= 0.9.10)
 
 GIT
-  remote: https://github.com/qiniu/ruby-sdk.git
-  revision: 24ba7c7bcde4b51e8b9ecbee08ede5c12293c92d
-  branch: develop
-  specs:
-    qiniu (6.9.0)
-      mime-types (~> 3.1)
-      rest-client (~> 2.0)
-      rexml (~> 3.2)
-
-GIT
   remote: https://github.com/resque/redis-namespace.git
   revision: c31e63dc3cd5e59ef5ea394d4d46ac60d1e6f82e
   specs:
@@ -289,6 +279,10 @@ GEM
     public_suffix (4.0.6)
     puma (5.1.0)
       nio4r (~> 2.0)
+    qiniu (6.9.1)
+      mime-types (~> 3.1)
+      rest-client (~> 2.0)
+      rexml (~> 3.2)
     raabro (1.4.0)
     rack (2.2.3)
     rack-attack (6.3.1)
@@ -484,7 +478,7 @@ DEPENDENCIES
   postmark
   postmark-rails
   puma
-  qiniu!
+  qiniu
   rack-attack
   rack-cors
   rails

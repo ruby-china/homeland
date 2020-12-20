@@ -9,7 +9,7 @@
           <div class="item name-box flex aic jcsb">
             <div>
               <% if @user.name.present? %>
-                <div class="fullname"><%= @user.name %></div>
+                <div class="fullname"><%= @user.name %>(积分: <%= @user.current_score %>)</div>
               <% end %>
               <div class="login">@<%= @user.login %></div>
             </div>

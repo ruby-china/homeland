@@ -33,7 +33,7 @@ module Api
       # GET /api/v3/users/:id
       # @return [UserDetailSerializer]
       def show
-        @meta = { followed: false, blocked: false }
+        @meta = { followed: false, blocked: false, score: current_user.current_score }
 
         if current_user
           @meta[:followed] = current_user.follow_user?(@user)

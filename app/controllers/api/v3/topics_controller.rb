@@ -88,6 +88,8 @@ module Api
         @topic.node_id = params[:node_id]
         @topic.save!
 
+        current_user.change_score(:create_topic)
+
         render "show"
       end
 
@@ -128,6 +130,7 @@ module Api
       def destroy
         raise AccessDenied unless can?(:destroy, @topic)
         @topic.destroy_by(current_user)
+        current_user.change_score(:delete_topic)
         render json: { ok: 1 }
       end
 

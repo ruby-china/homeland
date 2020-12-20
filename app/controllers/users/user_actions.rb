@@ -46,11 +46,13 @@ module Users
 
     def follow
       current_user.follow_user(@user)
+      @user.change_score(:followed)
       render json: { code: 0, data: { followers_count: @user.reload.followers_count } }
     end
 
     def unfollow
       current_user.unfollow_user(@user)
+      @user.change_score(:unfollowed)
       render json: { code: 0, data: { followers_count: @user.reload.followers_count } }
     end
 

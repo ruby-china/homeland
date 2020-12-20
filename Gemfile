@@ -114,6 +114,7 @@ gem "exception-track"
 
 gem "bootsnap"
 gem "lograge"
+gem "grade", git: "git@github.com:w2solo/dreamland-grade.git", branch: "main"
 
 group :development do
   gem "spring"

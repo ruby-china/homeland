@@ -84,6 +84,7 @@ class TopicsController < ApplicationController
     @topic.node_id = params[:node] || topic_params[:node_id]
     @topic.team_id = ability_team_id
     @topic.save
+    current_user.change_score(:create_topic)
   end
 
   def preview
@@ -111,7 +112,9 @@ class TopicsController < ApplicationController
   end
 
   def destroy
+    topic_user = @topic.user
     @topic.destroy_by(current_user)
+    topic_user.change_score(:delete_topic)
     redirect_to(topics_path, notice: t("topics.delete_topic_success"))
   end
 
@@ -145,13 +148,16 @@ class TopicsController < ApplicationController
     case params[:type]
     when "excellent"
       @topic.excellent!
+      @topic.user.change_score(:add_precision)
       redirect_to @topic, notice: "加精成功。"
     when "normal"
       @topic.normal!
+      @topic.user.change_score(:remove_precision)
       redirect_to @topic, notice: "话题已恢复到普通评级。"
     when "ban"
       params[:reason_text] ||= params[:reason] || ""
       @topic.ban!(reason: params[:reason_text].strip)
+      @topic.user.change_score(:topic_break_rule)
       redirect_to @topic, notice: "话题已放进屏蔽栏目。"
     when "close"
       @topic.close!

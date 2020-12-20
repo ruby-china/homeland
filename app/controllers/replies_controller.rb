@@ -13,6 +13,7 @@ class RepliesController < ApplicationController
 
     if @reply.save
       current_user.read_topic(@topic)
+      current_user.change_score(:creat_comment) if @topic.replies.where(user_id: current_user.id).size == 1
       @msg = t("topics.reply_success")
     else
       @msg = @reply.errors.full_messages.join("<br />")
@@ -49,6 +50,7 @@ class RepliesController < ApplicationController
 
   def destroy
     if @reply.destroy
+      current_user.change_score(:delete_comment) if @topic.replies.where(user_id: current_user.id).size == 0
       redirect_to(topic_path(@reply.topic_id), notice: "回帖删除成功。")
     else
       redirect_to(topic_path(@reply.topic_id), alert: "程序异常，删除失败。")

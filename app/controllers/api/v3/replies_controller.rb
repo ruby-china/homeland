@@ -33,9 +33,11 @@ module Api
       #
       # DELETE /api/v3/replies/:id
       def destroy
+        @topic = @reply.topic
         raise AccessDenied unless can?(:destroy, @reply)
 
         @reply.destroy
+        current_user.change_score(:delete_comment) if @topic.replies.where(user_id: current_user.id).size == 0
         render json: { ok: 1 }
       end
 

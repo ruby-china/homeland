@@ -6,7 +6,7 @@ class User < ApplicationRecord
   include Searchable
   include User::Roles, User::Blockable, User::Likeable, User::Followable, User::TopicActions,
           User::GitHubRepository, User::ProfileFields, User::RewardFields, User::Deviseable,
-          User::Avatar
+          User::Avatar, User::Scores
 
   second_level_cache version: 4, expires_in: 2.weeks
 
@@ -104,6 +104,7 @@ class User < ApplicationRecord
   end
 
   def send_welcome_mail
+    self.change_score(:register)
     UserMailer.welcome(id).deliver_later
   end
 

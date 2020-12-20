@@ -33,7 +33,7 @@ module Api
       # GET /api/v3/users/:id
       # @return [UserDetailSerializer]
       def show
-        @meta = { followed: false, blocked: false }
+        @meta = { followed: false, blocked: false, score: current_user.current_score }
 
         if current_user
           @meta[:followed] = current_user.follow_user?(@user)
@@ -148,6 +148,7 @@ module Api
       # POST /api/v3/users/:id/follow
       def follow
         current_user.follow_user(@user)
+        @user.change_score(:followed)
         render json: { ok: 1 }
       end
 
@@ -156,6 +157,7 @@ module Api
       # POST /api/v3/users/:id/unfollow
       def unfollow
         current_user.unfollow_user(@user)
+        @user.change_score(:unfollowed)
         render json: { ok: 1 }
       end
 

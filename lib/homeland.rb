@@ -3,6 +3,11 @@
 require "homeland/version"
 require "homeland/plugin"
 
+unless ENV["RAILS_PRECOMPILE"]
+  # Preload Jieba
+  require "homeland/search"
+end
+
 module Homeland
   cattr_reader :boot_at
 

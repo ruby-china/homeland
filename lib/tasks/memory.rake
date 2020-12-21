@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 task memory: :environment do
   require "homeland"
   include ApplicationHelper
@@ -13,7 +15,7 @@ task memory: :environment do
   puts "Before =>"
   print_memory
 
-  count = 5_000_000
+  count = 500_000
   step = (count / 100).to_i
   count.times do |i|
     sanitize_markdown(Homeland::Markdown.call(str))

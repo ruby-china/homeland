@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
 app_root = "/home/app/homeland"
-daemonize false
 environment ENV.fetch("RAILS_ENV") { "production" }
 port 7001
-workers 1
 threads (ENV["min_threads"] || 8), (ENV["max_threads"] || 8)
 preload_app!
 

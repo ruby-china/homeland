@@ -33,7 +33,7 @@ module Api
       # GET /api/v3/users/:id
       # @return [UserDetailSerializer]
       def show
-        @meta = { followed: false, blocked: false, score: current_user.current_score }
+        @meta = { followed: false, blocked: false }
 
         if current_user
           @meta[:followed] = current_user.follow_user?(@user)
@@ -175,6 +175,17 @@ module Api
       def unblock
         current_user.unblock_user(@user.id)
         render json: { ok: 1 }
+      end
+
+      # 获取积分变动
+      #
+      # GET /api/v3/users/:id/scores
+      def scores
+        optional! :offset, type: Integer, default: 0
+        optional! :limit, type: Integer, default: 20, values: 1..150
+
+        @scores = @user.score_logs.reorder(id: :desc)
+        @scores = @scores.offset(params[:offset]).limit(params[:limit])
       end
 
       private

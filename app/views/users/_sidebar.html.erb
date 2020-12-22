@@ -9,7 +9,7 @@
           <div class="item name-box flex aic jcsb">
             <div>
               <% if @user.name.present? %>
-                <div class="fullname"><%= @user.name %>(积分: <%= @user.current_score %>)</div>
+                <div class="fullname"><%= @user.name %></div>
               <% end %>
               <div class="login">@<%= @user.login %></div>
             </div>
@@ -74,6 +74,10 @@
         <div class="col-sm-4 stars">
           <%= link_to @user.favorites_count, favorites_user_path(@user), class: "counter" %>
           <%= link_to "收藏", favorites_user_path(@user), class: "text" %>
+        </div>
+        <div class="col-sm-4 stars">
+          <%= link_to @user.current_score, scores_user_path(@user), class: "counter" %>
+          <%= link_to "积分", scores_user_path(@user), class: "text" %>
         </div>
       </div>
       <% if !owner? @user %>

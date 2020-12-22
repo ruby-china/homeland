@@ -75,6 +75,12 @@ module Users
     def reward
     end
 
+    def scores
+      @scores = @user.score_logs.order(id: :desc)
+      @scores = @scores.page(params[:page]).per(60)
+      render template: "/users/scores"
+    end
+
     private
 
       def only_user!

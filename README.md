@@ -6,9 +6,6 @@
     <a href="https://github.com/ruby-china/homeland/actions">
       <img src="https://github.com/ruby-china/homeland/workflows/Test/badge.svg" />
     </a>
-    <a href="https://codecov.io/github/ruby-china/homeland?branch=master">
-      <img src="https://codecov.io/github/ruby-china/homeland/coverage.svg?branch=master" />
-    </a>
   </p>
 </p>
 

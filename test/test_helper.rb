@@ -8,13 +8,6 @@ ENV["github_api_key"] = "fake-key"
 ENV["twitter_api_key"] = "fake-key"
 ENV["wechat_api_key"] = "fake-key"
 
-require "simplecov"
-if ENV["CI"] == "true"
-  require "codecov"
-  SimpleCov.formatter = SimpleCov::Formatter::Codecov
-end
-SimpleCov.start "rails"
-
 require_relative "../config/environment"
 require "minitest/autorun"
 require "mocha/minitest"

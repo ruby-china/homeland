@@ -113,17 +113,17 @@ gem "puma_worker_killer"
 group :development do
   gem "spring"
   gem "byebug"
+  gem "sdoc"
+  gem "letter_opener"
+  gem "derailed_benchmarks"
 end
 
 group :development, :test do
-  gem "sdoc"
-  gem "letter_opener"
-  gem "listen", github: "guard/listen"
+  gem "listen"
 
   gem "mocha"
   gem "minitest-spec-rails"
   gem "factory_bot_rails"
 
   gem "rubocop", require: false
-  gem "codecov", require: false
 end

@@ -3,7 +3,7 @@ if($("#replies").length == 0){
 } else {
   if ($(".reply[data-id=<%= reply.id %>]").length == 0) {
     var current_floor = parseInt($("#replies").data("last-floor")) + 1;
-    var dom = $('<%= j(render("reply", reply: reply, reply_counter: reply.topic.replies_count - 1, display_edit: true)) %>');
+    var dom = $('<%= j(render(ReplyComponent.new(reply: reply, topic: reply.topic, reply_counter: reply.topic.replies_count - 1))) %>');
     $("#replies .items").append(dom);
     $("#replies .total b").text('<%= reply.topic.replies_count %>');
     $('#topic-sidebar .total b').text('<%= reply.topic.replies_count %>');

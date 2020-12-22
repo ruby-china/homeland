@@ -1,7 +1,7 @@
 <div id="topic-sidebar" data-spy="affix" data-offset-bottom="65">
   <div class="card">
     <div class="card-body">
-      <%= render "users/profile_card", user: @topic.user %>
+      <%= render ProfileCardComponent.new(user: @topic.user) %>
     </div>
   </div>
   <div class="card">

@@ -399,6 +399,7 @@ window.TopicView = Backbone.View.extend({
   },
 
   topicRowClick(e) {
+    console.log(e);
     const target = $(e.currentTarget).find(".title a");
     if (e.target.tagName === "A") {
       return true;

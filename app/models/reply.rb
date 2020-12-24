@@ -7,6 +7,7 @@ class Reply < ApplicationRecord
 
   belongs_to :user, counter_cache: true
   belongs_to :topic, touch: true
+  broadcasts_to :topic
   belongs_to :target, polymorphic: true, optional: true
   belongs_to :reply_to, class_name: "Reply", optional: true
 

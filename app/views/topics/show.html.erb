@@ -19,6 +19,9 @@
     })
   </script>
 <% end %>
+
+<%= turbo_stream_from @topic %>
+<%= turbo_frame_tag "topic" do %>
 <div class="row">
   <div class="col-lg-9">
     <div class="topic-detail card">
@@ -44,7 +47,7 @@
     </div>
     <%= render partial: "ban_reason" %>
     <% if @replies.blank? %>
-      <div class="no-result">
+      <div id="replies" class="no-result">
         <%= t("topics.no_replies") %>
       </div>
     <% else %>
@@ -90,3 +93,4 @@
     </div>
   <% end %>
 </div>
+<% end %>

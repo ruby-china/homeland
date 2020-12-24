@@ -172,6 +172,10 @@ GEM
     hashie (4.1.0)
     heapy (0.2.0)
       thor
+    hotwire-rails (0.1.1)
+      rails (>= 6.0.0)
+      stimulus-rails
+      turbo-rails
     html-pipeline (2.14.0)
       activesupport (>= 2)
       nokogiri (>= 1.4)
@@ -411,6 +415,8 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    stimulus-rails (0.1.1)
+      rails (>= 6.0.0)
     thor (1.0.1)
     tilt (2.0.10)
     turbo-rails (0.5.1)
@@ -461,6 +467,7 @@ DEPENDENCIES
   exception-track
   factory_bot_rails
   form-select
+  hotwire-rails
   html-pipeline
   html-pipeline-auto-correct
   http_accept_language
@@ -506,7 +513,6 @@ DEPENDENCIES
   sidekiq-cron
   social-share-button
   spring
-  turbo-rails (~> 0.5.1)
   twemoji
   uglifier
   webpacker (~> 5.x)

@@ -11,6 +11,8 @@ gem "sass-rails"
 gem "uglifier"
 gem "webpacker", "~> 5.x"
 
+gem "hotwire-rails"
+
 gem "pg"
 gem "jieba-rb"
 gem "pghero"
@@ -126,5 +128,3 @@ group :development, :test do
 
   gem "rubocop", require: false
 end
-
-gem "turbo-rails", "~> 0.5.1"

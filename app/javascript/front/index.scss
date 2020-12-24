@@ -218,7 +218,7 @@ hr {
         a:link,
         a:visited,
         a:hover {
-          color: var(--primary);
+          color: var(--filter-active-color);
           text-decoration: none;
         }
       }
@@ -229,15 +229,9 @@ hr {
         padding: 8px 8px;
         margin-right: 5px;
         font-size: 14px;
-        border-bottom: 2px dotted transparent;
         text-decoration: none;
         display: inline-block;
-        color: var(--secondary);
-
-        &:hover {
-          border-color: var(--gray);
-          background: transparent;
-        }
+        color: var(--filter-color);
 
         &.all-nodes {
           border-radius: 3px;

@@ -105,12 +105,8 @@
         platform: 类型
         token: Token
         alive: 是否有效
-      section:
-        name: 名称
-        sort: 排序
       node:
         name: 名称
-        section_id: 分类
         sort: 排序
         summary: 简介
     errors:

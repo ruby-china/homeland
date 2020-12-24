@@ -1,16 +1,11 @@
-<%= render 'node_selector', node: @topic.node %>
-
 <%= form_for @topic, remote: true, class: "form", html: { tb: 'edit-topic' } do |f| %>
   <%= render "shared/error_messages", target: @topic %>
   <%= f.hidden_field :node_id %>
 
   <div class="form-group">
     <div class="input-group">
-      <div class="input-group-prepend">
-        <button type="button" class="btn btn-default" id="node-selector-button"
-          data-toggle="modal" data-target="#node-selector">
-          <%= @topic.node&.name || '选择节点...' %>
-        </button>
+      <div class="input-group-prepend mr-1">
+        <%= f.select :node_id, Node.sorted.name_options, {}, class: "bootstrap-select", data: { "live-search": true } %>
       </div>
       <%= f.text_field :title, class: "form-control", placeholder: "在这里填写标题" %>
     </div>
@@ -25,7 +20,7 @@
   <% if Setting.has_module?(:team) %>
     <% if current_user.team_options.any? %>
     <div class='form-group'>
-      <%= f.select :team_id, current_user.team_options, { include_blank: "不要关联组织" }, { class: "form-control" } %>
+      <%= f.select :team_id, current_user.team_options, { include_blank: "不要关联组织" }, { class: "bootstrap-select", data: { "live-search": true } } %>
     </div>
     <% end %>
   <% end %>

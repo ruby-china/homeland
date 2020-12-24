@@ -13,7 +13,9 @@
 # - *sort* {Integer} 排序优先级
 # - *updated_at* [DateTime] 更新时间
 if node
-  json.cache! ["v1", node] do
-    json.(node, :id, :name, :topics_count, :summary, :section_id, :sort, :section_name, :updated_at)
+  json.cache! ["v2", node] do
+    json.(node, :id, :name, :topics_count, :summary, :sort, :updated_at)
+    json.section_id 1
+    json.section_name "Default"
   end
 end

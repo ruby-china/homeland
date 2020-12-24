@@ -8,25 +8,10 @@ class NodeTest < ActiveSupport::TestCase
     @node = create(:node)
   end
 
-  test "should fail saving without specifing a section" do
+  test "should valid with only name present" do
     node = Node.new
     node.name = "Cersei"
-    node.summary = "the Queue"
-    node.save == false
-  end
-
-  test "should update CacheVersion on save" do
-    old_time = 1.minutes.ago
-    CacheVersion.section_node_updated_at = old_time
-    create(:node)
-    refute_equal old_time, CacheVersion.section_node_updated_at
-  end
-
-  test "should update on destroy" do
-    old_time = 5.minutes.ago
-    CacheVersion.section_node_updated_at = old_time
-    node.destroy!
-    refute_equal old_time, CacheVersion.section_node_updated_at
+    assert_equal true, node.valid?
   end
 
   test ".summary_html should return html" do

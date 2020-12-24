@@ -22,7 +22,7 @@ if Sidekiq.server?
 end
 
 
-SecondLevelCache.configure.cache_key_prefix = "slc:2"
+SecondLevelCache.configure.cache_key_prefix = "slc:3"
 
 # FIXME: Upgrade redis-objects then remove this line.
 # `Redis#exists(key)` will return an Integer in redis-rb 4.3. `exists?` returns a boolean,

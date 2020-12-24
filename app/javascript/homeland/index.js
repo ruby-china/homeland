@@ -180,5 +180,5 @@ window.App = {
 };
 
 document.addEventListener("turbolinks:load", () => {
-  $("select.bootstrap-select").selectpicker({ size: 10 });
+  $("select.bootstrap-select").selectpicker({ size: 10, style: "btn-default" });
 });

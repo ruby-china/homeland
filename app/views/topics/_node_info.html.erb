@@ -16,9 +16,7 @@
           <%= sanitize_markdown node.summary_html %>
         </div>
       <% else %>
-        <%= render 'node_selector' %>
         <ul class="filter nav nav-pills">
-          <li><a href="#" class="all-nodes" data-toggle="modal" data-target="#node-selector">所有节点 <span class="caret-right"></span></a></li>
           <li class="<%= ' active' if action_name == 'index' %>">
             <a href="<%= main_app.topics_path %>" data-turbolinks-action="replace">默认</a>
           </li>
@@ -34,9 +32,6 @@
             </li>
           <% end %>
           <% if !mobile? %>
-            <li class="<%= ' active' if action_name == 'no_reply' %>">
-              <%= link_to('无人问津', main_app.no_reply_topics_path, data: { 'turbolinks-action': 'replace' }) %>
-            </li>
             <li class="<%= ' active' if action_name == 'last_reply' %>">
               <%= link_to('最新回复', main_app.last_reply_topics_path, data: { 'turbolinks-action': 'replace' }) %>
             </li>

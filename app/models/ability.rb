@@ -54,7 +54,6 @@ class Ability
     def roles_for_maintainer
       can :create, Team
       can :manage, Node
-      can :manage, Section
       can :manage, Topic
       can :lock_node, Topic
       can :manage, Reply
@@ -114,7 +113,6 @@ class Ability
       can %i[read feed node], Topic
       can %i[read reply_to], Reply
       can :read, Photo
-      can :read, Section
       can :read, Comment
       can :read, Team
     end

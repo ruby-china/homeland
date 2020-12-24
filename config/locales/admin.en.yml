@@ -4,7 +4,6 @@
       root_path: "Dashboard"
       site_configs: "Settings"
       users: "Users"
-      sections: "Sections"
       nodes: "Nodes"
       wiki: "Wiki"
       topics: "Topics"

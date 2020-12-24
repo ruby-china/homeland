@@ -4,23 +4,19 @@
   <div class="form-group">
     <%= f.label :title %>
     <div class="input-group">
+      <%= f.select :node_id, Node.name_options, {}, class: "bootstrap-select mr-1" %>
       <%= f.text_field :title, class: "form-control" %>
-      <%= link_to "前台预览", @topic, target: "_blank", class: "btn btn-default ml-2" %>
+      <%= link_to icon_tag("link"), @topic, target: "_blank", class: "btn btn-default ml-2" %>
     </div>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :node_id %>
-    <%= f.select :node_id, Node.name_options, {}, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    发布者：<%= user_name_tag @topic.user %>
   </div>
 
   <div class="form-group">
     <%= f.label :body %>
     <%= f.text_area :body, class: "form-control", rows: 20 %>
+  </div>
+
+  <div class="form-group">
+    Created by <%= user_name_tag @topic.user %>
   </div>
 
   <div class="form-actions">

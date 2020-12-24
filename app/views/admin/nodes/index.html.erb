@@ -10,7 +10,6 @@
   <tr class="head">
     <td class="first">#</td>
     <td>名称</td>
-    <td>分类</td>
     <td>排序</td>
     <td>帖子数量</td>
     <td></td>
@@ -20,7 +19,6 @@
   <tr>
     <td class="first"><%= node.id %></td>
     <td><%= link_to node.name, node_topics_path(node.id) %></td>
-    <td><%= node&.section&.name %></td>
     <td><%= node.sort %></td>
     <td><%= node.topics_count %></td>
     <td><%= link_to '', edit_admin_node_path(node), class: "fa fa-edit" %>

@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_21_082655) do
+ActiveRecord::Schema.define(version: 2020_12_24_095900) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
 
   create_table "actions", id: :serial, force: :cascade do |t|
@@ -35,14 +36,6 @@ ActiveRecord::Schema.define(version: 2020_12_21_082655) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["provider", "uid"], name: "index_authorizations_on_provider_and_uid"
-  end
-
-  create_table "commentable_pages", force: :cascade do |t|
-    t.string "name"
-    t.integer "user_id"
-    t.integer "comments_count", default: 0, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "comments", id: :serial, force: :cascade do |t|
@@ -83,23 +76,13 @@ ActiveRecord::Schema.define(version: 2020_12_21_082655) do
     t.index ["name"], name: "index_locations_on_name"
   end
 
-  create_table "monkeys", force: :cascade do |t|
-    t.string "name"
-    t.integer "user_id"
-    t.integer "comments_count"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "nodes", id: :serial, force: :cascade do |t|
     t.string "name", null: false
     t.string "summary"
-    t.integer "section_id", null: false
     t.integer "sort", default: 0, null: false
     t.integer "topics_count", default: 0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["section_id"], name: "index_nodes_on_section_id"
     t.index ["sort"], name: "index_nodes_on_sort"
   end
 
@@ -197,8 +180,8 @@ ActiveRecord::Schema.define(version: 2020_12_21_082655) do
     t.integer "changes_cout", default: 1, null: false
     t.integer "comments_count", default: 0, null: false
     t.datetime "deleted_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["slug"], name: "index_pages_on_slug", unique: true
   end
 
@@ -208,6 +191,25 @@ ActiveRecord::Schema.define(version: 2020_12_21_082655) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["user_id"], name: "index_photos_on_user_id"
+  end
+
+  create_table "posts", id: :serial, force: :cascade do |t|
+    t.string "title", null: false
+    t.string "slug", null: false
+    t.text "body", null: false
+    t.string "summary", limit: 5000
+    t.string "banner"
+    t.integer "user_id"
+    t.integer "likes_count", default: 0, null: false
+    t.integer "comments_count", default: 0, null: false
+    t.integer "status", default: 0, null: false
+    t.datetime "published_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["published_at"], name: "index_posts_on_published_at"
+    t.index ["slug"], name: "index_posts_on_slug"
+    t.index ["status"], name: "index_posts_on_status"
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -248,14 +250,6 @@ ActiveRecord::Schema.define(version: 2020_12_21_082655) do
     t.index ["tokens"], name: "index_search_documents_on_tokens", using: :gin
   end
 
-  create_table "sections", id: :serial, force: :cascade do |t|
-    t.string "name", null: false
-    t.integer "sort", default: 0, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["sort"], name: "index_sections_on_sort"
-  end
-
   create_table "settings", id: :serial, force: :cascade do |t|
     t.string "var", null: false
     t.text "value"
@@ -283,7 +277,7 @@ ActiveRecord::Schema.define(version: 2020_12_21_082655) do
     t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["site_node_id", "deleted_at"], name: "index_sites_on_site_node_id_and_deleted_at"
+    t.index ["deleted_at"], name: "index_sites_on_deleted_at"
     t.index ["site_node_id"], name: "index_sites_on_site_node_id"
     t.index ["url"], name: "index_sites_on_url"
   end
@@ -299,15 +293,6 @@ ActiveRecord::Schema.define(version: 2020_12_21_082655) do
     t.index ["user_id"], name: "index_team_users_on_user_id"
   end
 
-  create_table "test_documents", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "reply_to_id"
-    t.integer "mentioned_user_ids", default: [], array: true
-    t.text "body"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "topics", id: :serial, force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "node_id", null: false
@@ -317,7 +302,7 @@ ActiveRecord::Schema.define(version: 2020_12_21_082655) do
     t.integer "last_reply_user_id"
     t.string "last_reply_user_login"
     t.string "who_deleted"
-    t.integer "last_active_mark"
+    t.float "last_active_mark", default: 0.0, null: false
     t.boolean "lock_node", default: false
     t.datetime "suggested_at"
     t.integer "grade", default: 0
@@ -400,14 +385,6 @@ ActiveRecord::Schema.define(version: 2020_12_21_082655) do
     t.index ["location"], name: "index_users_on_location"
     t.index ["login"], name: "index_users_on_login", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
-  end
-
-  create_table "walking_deads", force: :cascade do |t|
-    t.string "name"
-    t.string "tag"
-    t.datetime "deleted_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
 end

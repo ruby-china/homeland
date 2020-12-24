@@ -5,6 +5,15 @@
 @import "./iconfont.scss";
 @import "./markdown.scss";
 
+@import "bootstrap-select/dist/css/bootstrap-select.min";
+.bootstrap-select {
+  .dropdown-toggle {
+    border: 1px solid var(--form-control-border-color);
+    border-radius: 3px;
+    outline: 0 !important;
+  }
+}
+
 .flex {
   display: flex;
 }

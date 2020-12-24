@@ -22,8 +22,8 @@
     <meta name="apple-mobile-web-app-capable" content="no">
     <meta content='True' name='HandheldFriendly' />
     <link rel="alternate" type="application/rss+xml" title="订阅最新帖" href="<%= main_app.feed_topics_url %>" />
-    <%= stylesheet_pack_tag "front", "data-turbolinks-track": "reload" %>
-    <%= stylesheet_pack_tag "turbolinks-app", 'data-turbolinks-track': 'reload' if turbolinks_app? %>
+    <%= stylesheet_pack_tag "front", "data-turbo-track": "reload" %>
+    <%= stylesheet_pack_tag "turbo-app", 'data-turbo-track': 'reload' if turbo_app? %>
     <%= yield :stylesheets %>
     <%= action_cable_meta_tag %>
     <%= csrf_meta_tag %>
@@ -36,13 +36,13 @@
     <% if current_user %>
       <meta name="current-user" data-user-id="<%= current_user.id %>" data-user-login="<%= current_user.login %>" data-user-name="<%= current_user.name %>" data-user-email="<%= current_user.email %>" data-user-avatar-url="<%= current_user.avatar? ? current_user.avatar.url(:md) : current_user.letter_avatar_url(96) %>">
     <% end %>
-    <%= javascript_packs_with_chunks_tag "application", 'data-turbolinks-track': "reload" %>
+    <%= javascript_packs_with_chunks_tag "application", 'data-turbo-track': "reload" %>
     <%= yield :javascripts %>
   </head>
-  <body class="page-<%= controller_name %><%= ' infinite-scroll' if turbolinks_app? %>" data-controller-name="<%= controller_name %>">
+  <body class="page-<%= controller_name %><%= ' infinite-scroll' if turbo_app? %>" data-controller-name="<%= controller_name %>">
     <div class="header navbar navbar-expand-md">
       <div class="container">
-        <div class="navbar-header" data-turbolinks-permanent>
+        <div class="navbar-header" data-turbo-permanent>
           <%= raw Setting.navbar_brand_html %>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar">
@@ -67,7 +67,7 @@
     <%= content_for?(:main) ? yield(:main) : yield %>
   </div>
   <% if !mobile? %>
-    <footer class="footer" id="footer" data-turbolinks-permanent>
+    <footer class="footer" id="footer" data-turbo-permanent>
       <div class="container">
         <%= raw Setting.footer_html %>
       </div>
@@ -78,7 +78,7 @@
       App.mobile = true;
     </script>
   <% end %>
-  <script type="text/javascript" data-turbolinks-eval="false">
+  <script type="text/javascript" data-turbo-eval="false">
     App.root_url = "<%= main_app.root_url %>";
     App.asset_url = "<%= Setting.upload_url -%>";
     App.twemoji_url = "<%= Twemoji.configuration.asset_root %>";
@@ -86,8 +86,8 @@
     <% if current_user %>
       App.current_user_id = <%= current_user.id %>;
     <% end %>
-    <% if turbolinks_app? %>
-      App.turbolinks = true;
+    <% if turbo_app? %>
+      App.turbo = true;
     <% end %>
   </script>
   <%= yield :scripts %>

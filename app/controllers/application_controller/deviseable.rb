@@ -23,7 +23,7 @@ class ApplicationController
 
     def authenticate_user!(opts = {})
       return if current_user
-      if turbolinks_app?
+      if turbo_app?
         render plain: "401 Unauthorized", status: 401
         return
       end

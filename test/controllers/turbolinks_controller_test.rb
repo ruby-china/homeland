@@ -7,7 +7,7 @@ describe TopicsController do
   let(:user1) { create(:user) }
   let(:headers) { { "User-Agent": "turbolinks-app, test" } }
 
-  it "GET /topics/new should got 401 with turbolinks-app" do
+  it "GET /topics/new should got 401 with turbo-app" do
     get new_topic_path, headers: headers
     assert_equal 401, response.status
   end

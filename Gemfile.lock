@@ -413,9 +413,8 @@ GEM
       sprockets (>= 3.0.0)
     thor (1.0.1)
     tilt (2.0.10)
-    turbolinks (5.2.1)
-      turbolinks-source (~> 5.2)
-    turbolinks-source (5.2.0)
+    turbo-rails (0.5.1)
+      rails (>= 6.0.0)
     twemoji (3.1.7)
       nokogiri (~> 1.6)
     tzinfo (2.0.4)
@@ -507,10 +506,10 @@ DEPENDENCIES
   sidekiq-cron
   social-share-button
   spring
-  turbolinks
+  turbo-rails (~> 0.5.1)
   twemoji
   uglifier
   webpacker (~> 5.x)
 
 BUNDLED WITH
-   2.2.0
+   2.2.2

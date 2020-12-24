@@ -2,7 +2,7 @@
   _topicView.replyCallback(0, '<%= raw(@msg) %>');
 <% else %>
   <% if @reply.upvote? %>
-    Turbolinks.visit(location.href);
+    Turbo.visit(location.href);
   <% else %>
     <%= render 'create_callback', reply: @reply %>
 

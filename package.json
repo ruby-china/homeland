@@ -7,8 +7,8 @@
   "dependencies": {
     "@babel/preset-react": "~7.10",
     "@fortawesome/fontawesome-free": "~5.15",
+    "@hotwired/turbo-rails": "^7.0.0-beta.1",
     "@rails/actioncable": "~6.0",
-    "@rails/ujs": "~6.0",
     "@rails/webpacker": "~5.2",
     "babel-plugin-transform-react-remove-prop-types": "~0.4.24",
     "backbone": "~1.4",
@@ -20,8 +20,7 @@
     "prop-types": "~15.7.2",
     "react": "~16.13",
     "react-dom": "~16.13",
-    "turbolinks": "~5.2",
-    "turbolinks-prefetch": "~1.0",
+    "turbolinks-prefetch": "^1.0.3",
     "underscore": "~1.11"
   },
   "devDependencies": {

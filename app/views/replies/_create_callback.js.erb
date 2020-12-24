@@ -1,5 +1,5 @@
 if($("#replies").length == 0){
-  Turbolinks.visit(location.href);
+  Turbo.visit(location.href);
 } else {
   if ($(".reply[data-id=<%= reply.id %>]").length == 0) {
     var current_floor = parseInt($("#replies").data("last-floor")) + 1;

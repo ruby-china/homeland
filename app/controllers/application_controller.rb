@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   include Localize
   include Deviseable
   include CurrentInfo
-  include Turbolinks
+  include Turbo
   include UserNotifications
 
   protect_from_forgery prepend: true

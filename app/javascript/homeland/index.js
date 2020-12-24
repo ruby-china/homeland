@@ -1,25 +1,14 @@
-import 'bootstrap';
-import jQuery from 'jquery';
+import "bootstrap";
+import jQuery from "jquery";
 window.jQuery = jQuery;
 window.$ = jQuery;
-window.Backbone = require('backbone');
-window._ = require('underscore');
+window.Backbone = require("backbone");
+window._ = require("underscore");
 
-import Turbolinks from 'turbolinks';
-import TubrolinksPrefetch from 'turbolinks-prefetch'
+import { Turbo, cable } from "@hotwired/turbo-rails";
+window.Turbo = Turbo;
+Turbo.start();
 
-
-window.Turbolinks = Turbolinks;
-Turbolinks.start();
-Turbolinks.setProgressBarDelay(200);
-// Increment Turbolinks cache size upto 30
-Turbolinks.controller.cache.size = 30
-TubrolinksPrefetch.start()
-
-window.Rails = require('@rails/ujs');
-Rails.start();
-
-require("pagination");
 require("jquery.timeago");
 require("jquery.timeago.settings");
 require("jquery.hotkeys");
@@ -32,24 +21,25 @@ require("jquery.atwho.min");
 require("google_analytics");
 require("jquery.infinitescroll.min");
 require("jquery.mobile-events");
+require("vendor/pagination");
 require("vendor/social-share-button");
 
-import { createConsumer } from '@rails/actioncable';
+import { createConsumer } from "@rails/actioncable";
 
 window.App = {
-  turbolinks: false,
+  turbo: false,
   mobile: false,
-  locale: 'zh-CN',
+  locale: "zh-CN",
   notifier: null,
   current_user_id: null,
-  access_token: '',
-  asset_url: '',
-  twemoji_url: 'https://twemoji.maxcdn.com/',
-  root_url: '',
+  access_token: "",
+  asset_url: "",
+  twemoji_url: "https://twemoji.maxcdn.com/",
+  root_url: "",
   cable: createConsumer(),
 
   isLogined() {
-    return document.getElementsByName('current-user').length > 0;
+    return document.getElementsByName("current-user").length > 0;
   },
 
   loading() {
@@ -88,7 +78,7 @@ window.App = {
 
   // Use this method to redirect so that it can be stubbed in test
   gotoUrl(url) {
-    return Turbolinks.visit(url);
+    return Turbo.visit(url);
   },
 
   // scan logins in jQuery collection and returns as a object,
@@ -100,13 +90,19 @@ window.App = {
       const $e = $(e);
       const item = {
         login: $e.find(".user-name").first().text(),
-        name: $e.find(".user-name").first().attr('data-name'),
-        avatar_url: $e.find(".avatar img").first().attr("src")
+        name: $e.find(".user-name").first().attr("data-name"),
+        avatar_url: $e.find(".avatar img").first().attr("src"),
       };
 
-      if (!item.login) { continue; }
-      if (!item.name) { continue; }
-      if (logins.indexOf(item.login) !== -1) { continue; }
+      if (!item.login) {
+        continue;
+      }
+      if (!item.name) {
+        continue;
+      }
+      if (logins.indexOf(item.login) !== -1) {
+        continue;
+      }
 
       logins.push(item.login);
       result.push(item);
@@ -117,46 +113,58 @@ window.App = {
   },
 
   mentionable(el, logins) {
-    if (!logins) { logins = []; }
-    $(el).atwho({
-      at: "@",
-      limit: 8,
-      searchKey: 'login',
-      callbacks: {
-        filter(query, data, searchKey) {
-          return data;
+    if (!logins) {
+      logins = [];
+    }
+    $(el)
+      .atwho({
+        at: "@",
+        limit: 8,
+        searchKey: "login",
+        callbacks: {
+          filter(query, data, searchKey) {
+            return data;
+          },
+          sorter(query, items, searchKey) {
+            return items;
+          },
+          remoteFilter(query, callback) {
+            const r = new RegExp(`^${query}`);
+            // 过滤出本地匹配的数据
+            const localMatches = _.filter(
+              logins,
+              (u) => r.test(u.login) || r.test(u.name)
+            );
+            // Remote 匹配
+            return $.getJSON(
+              "/search/users.json",
+              { q: query },
+              function (data) {
+                // 本地的排前面
+                for (let u of Array.from(localMatches)) {
+                  data.unshift(u);
+                }
+                // 去重复
+                data = _.uniq(data, false, (item) => item.login);
+                // 限制数量
+                data = _.first(data, 8);
+                return callback(data);
+              }
+            );
+          },
         },
-        sorter(query, items, searchKey) {
-          return items;
-        },
-        remoteFilter(query, callback) {
-          const r = new RegExp(`^${query}`);
-          // 过滤出本地匹配的数据
-          const localMatches = _.filter(logins, u => r.test(u.login) || r.test(u.name));
-          // Remote 匹配
-          return $.getJSON('/search/users.json', { q: query }, function (data) {
-            // 本地的排前面
-            for (let u of Array.from(localMatches)) {
-              data.unshift(u);
-            }
-            // 去重复
-            data = _.uniq(data, false, item => item.login);
-            // 限制数量
-            data = _.first(data, 8);
-            return callback(data);
-          });
-        }
-      },
-      displayTpl: "<li data-value='${login}'><img src='${avatar_url}' height='20' width='20'/> ${login} <small>${name}</small></li>",
-      insertTpl: "@${login}"
-    }).atwho({
-      at: ":",
-      limit: 8,
-      searchKey: 'code',
-      data: window.EMOJI_LIST,
-      displayTpl: `<li data-value='\${code}'><img src='${App.twemoji_url}/svg/\${url}.svg' class='twemoji' /> \${code} </li>`,
-      insertTpl: "${code}"
-    });
+        displayTpl:
+          "<li data-value='${login}'><img src='${avatar_url}' height='20' width='20'/> ${login} <small>${name}</small></li>",
+        insertTpl: "@${login}",
+      })
+      .atwho({
+        at: ":",
+        limit: 8,
+        searchKey: "code",
+        data: window.EMOJI_LIST,
+        displayTpl: `<li data-value='\${code}'><img src='${App.twemoji_url}/svg/\${url}.svg' class='twemoji' /> \${code} </li>`,
+        insertTpl: "${code}",
+      });
     return true;
-  }
+  },
 };

@@ -935,6 +935,19 @@
   resolved "https://registry.npm.taobao.org/@fortawesome/fontawesome-free/download/@fortawesome/fontawesome-free-5.15.1.tgz#ccfef6ddbe59f8fe8f694783e1d3eb88902dc5eb"
   integrity sha1-zP723b5Z+P6PaUeD4dPriJAtxes=
 
+"@hotwired/turbo-rails@^7.0.0-beta.1":
+  version "7.0.0-beta.1"
+  resolved "https://registry.npmjs.org/@hotwired/turbo-rails/-/turbo-rails-7.0.0-beta.1.tgz#90399dd43616efee263b4c8391aa302559c3a17e"
+  integrity sha512-5Y8rq4PUAAk3+yiTFJxOEMQbrfo9cY5E9+nQYUifColm/GdX1IHV6rJvj0+ND/jdniTL6E3eaI5biBkVis57dA==
+  dependencies:
+    "@hotwired/turbo" "^7.0.0-beta.1"
+    "@rails/actioncable" "^6.1.0"
+
+"@hotwired/turbo@^7.0.0-beta.1":
+  version "7.0.0-beta.1"
+  resolved "https://registry.npmjs.org/@hotwired/turbo/-/turbo-7.0.0-beta.1.tgz#0111db8a80a7bb308c4cfdd2720112d06bf25c33"
+  integrity sha512-V7hhELbDkYUGaHw/Yw4tu9pDUT1WE4t3A7tRs7Zh0Uwtk2vaJnmykNZ2uq20BnLjofufA1+MLJZ6AXJ3B/Il5A==
+
 "@npmcli/move-file@^1.0.1":
   version "1.0.1"
   resolved "https://registry.npm.taobao.org/@npmcli/move-file/download/@npmcli/move-file-1.0.1.tgz#de103070dac0f48ce49cf6693c23af59c0f70464"
@@ -942,15 +955,15 @@
   dependencies:
     mkdirp "^1.0.4"
 
+"@rails/actioncable@^6.1.0":
+  version "6.1.0"
+  resolved "https://registry.npm.taobao.org/@rails/actioncable/download/@rails/actioncable-6.1.0.tgz#f336f25450b1bc43b99bc60557a70b6e6bb1d3d2"
+  integrity sha1-8zbyVFCxvEO5m8YFV6cLbmux09I=
+
 "@rails/actioncable@~6.0":
   version "6.0.3"
   resolved "https://registry.npm.taobao.org/@rails/actioncable/download/@rails/actioncable-6.0.3.tgz#722b4b639936129307ddbab3a390f6bcacf3e7bc"
   integrity sha1-citLY5k2EpMH3bqzo5D2vKzz57w=
-
-"@rails/ujs@~6.0":
-  version "6.0.3"
-  resolved "https://registry.npm.taobao.org/@rails/ujs/download/@rails/ujs-6.0.3.tgz#e68a03278e30daea6a110aac5dfa33c60c53055d"
-  integrity sha1-5ooDJ44w2upqEQqsXfozxgxTBV0=
 
 "@rails/webpacker@~5.2":
   version "5.2.1"
@@ -7301,15 +7314,10 @@ tunnel-agent@^0.6.0:
   dependencies:
     safe-buffer "^5.0.1"
 
-turbolinks-prefetch@~1.0:
+turbolinks-prefetch@^1.0.3:
   version "1.0.3"
-  resolved "https://registry.npm.taobao.org/turbolinks-prefetch/download/turbolinks-prefetch-1.0.3.tgz?cache=0&sync_timestamp=1602300605488&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fturbolinks-prefetch%2Fdownload%2Fturbolinks-prefetch-1.0.3.tgz#9818c6ceab6ef36e5fd2d095235389f71485a6dc"
+  resolved "https://registry.npm.taobao.org/turbolinks-prefetch/download/turbolinks-prefetch-1.0.3.tgz#9818c6ceab6ef36e5fd2d095235389f71485a6dc"
   integrity sha1-mBjGzqtu825f0tCVI1OJ9xSFptw=
-
-turbolinks@~5.2:
-  version "5.2.0"
-  resolved "https://registry.npm.taobao.org/turbolinks/download/turbolinks-5.2.0.tgz#e6877a55ea5c1cb3bb225f0a4ae303d6d32ff77c"
-  integrity sha1-5od6VepcHLO7Il8KSuMD1tMv93w=
 
 tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   version "0.14.5"

@@ -8,7 +8,6 @@ gem "jbuilder"
 gem "rails"
 gem "rails_autolink"
 gem "sass-rails"
-gem "turbolinks"
 gem "uglifier"
 gem "webpacker", "~> 5.x"
 
@@ -127,3 +126,5 @@ group :development, :test do
 
   gem "rubocop", require: false
 end
+
+gem "turbo-rails", "~> 0.5.1"

@@ -39,7 +39,7 @@ describe Api::V3::NodesController do
 
       # Keep old section attribute for iOS App
       assert_equal 1, json["node"]["section_id"]
-      assert_equal "Default", json["node"]["section_name"]
+      assert_equal "Nodes", json["node"]["section_name"]
     end
   end
 end

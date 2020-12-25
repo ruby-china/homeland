@@ -1,5 +1,5 @@
 # NAME:     homeland/homeland
-FROM homeland/base:3.0.0-rc1-jemalloc-slim-buster
+FROM homeland/base:3.0.0-jemalloc-slim-buster
 
 ENV RAILS_ENV "production"
 ENV HOMELAND_VERSION "master"

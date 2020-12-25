@@ -30,7 +30,7 @@ module TopicsHelper
     if opts[:class].present?
       class_name += " " + opts[:class]
     end
-    icon = content_tag("i", "", class: "fa fa-eye")
+    icon = content_tag("i", "", class: "fa fa-bell")
     link_to(raw("#{icon} 订阅"), "#", "data-id" => topic.id, class: class_name)
   end
 

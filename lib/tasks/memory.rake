@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 task memory: :environment do
   require "homeland"
   include ApplicationHelper

@@ -342,7 +342,6 @@ GEM
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    rdoc (6.2.1)
     recaptcha (5.6.0)
       json
     redcarpet (3.5.1)
@@ -388,8 +387,6 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
-    sdoc (2.0.3)
-      rdoc (>= 5.0)
     second_level_cache (2.6.4)
       activerecord (>= 5.2, < 7)
       activesupport (>= 5.2, < 7)
@@ -501,7 +498,6 @@ DEPENDENCIES
   ruby-push-notifications
   rucaptcha
   sass-rails
-  sdoc
   second_level_cache
   sidekiq
   sidekiq-cron
@@ -513,4 +509,4 @@ DEPENDENCIES
   webpacker (~> 5.x)
 
 BUNDLED WITH
-   2.2.0
+   2.2.3

@@ -28,12 +28,13 @@ $yellow: #fee209;
   --filter-active-color: #202020;
 
   // speical vars
-  --btn-default-text-color: #202020;
-  --btn-default-background-color: #fcfcfc;
-  --btn-default-border-color: #ced4da;
+  --btn-default-text-color: #5f5f5f;
+  --btn-default-background-color: #f3f3f3;
+  --btn-default-border-color: #cad0d8;
   --btn-default-active-background-color: #e0e0e0;
   --btn-default-active-border-color: #c0c0c0;
   --btn-default-active-text-color: #aaa;
+  --btn-default-hover-background-color: #f3f3f388;
   --btn-default-hover-border-color: #73739038;
 
   --form-control-background-color: #fff;
@@ -41,14 +42,14 @@ $yellow: #fee209;
   --form-control-disabled-background-color: #e9ecef;
 
   --input-group-background-color: #e9ecef;
-  --input-group-border-color: #ced4da;
+  --input-group-border-color: #e2e6eb;
 
-  --body-background-color: #e5e5e566;
+  --body-background-color: #f6f7fa;
 
   --navbar-background-color: #fff;
   --navbar-text-color: #404040;
-  --navbar-shadow-color: rgba(0, 0, 0, 0.05);
-  --navbar-fixed-shadow-color: rgba(0, 0, 0, 0.07);
+  --navbar-shadow-color: rgba(0, 0, 0, 0.06);
+  --navbar-fixed-shadow-color: rgba(0, 0, 0, 0.09);
   --navbar-item-link-active-background-color: #f2f2f2;
   --navbar-item-active-text-color: #eb5424;
 
@@ -60,7 +61,7 @@ $yellow: #fee209;
   --navbar-dropdown-show-background-color: rgba(0, 0, 0, 0.04);
 
   --sub-navbar-background-color: #fff;
-  --sub-navbar-shadow-color: rgba(0, 0, 0, 0.04);
+  --sub-navbar-shadow-color: rgba(0, 0, 0, 0.02);
 
   --card-border-color: hsla(210, 8%, 51%, 0.09);
   --card-background-color: #fff;

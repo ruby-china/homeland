@@ -360,6 +360,7 @@ body {
   color: var(--btn-default-text-color) !important;
 
   &:hover {
+    background: var(--btn-default-hover-background-color);
     border-color: var(--btn-default-hover-border-color);
   }
   &:active,
@@ -899,7 +900,7 @@ img.emoji {
       line-height: 14px;
       display: inline-block;
       border-radius: 3px;
-      padding: 8px;
+      padding: 6px;
       margin: 0;
     }
 

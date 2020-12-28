@@ -73,7 +73,6 @@ class Setting < RailsSettings::Base
   # = System
   field :require_restart, default: false, type: :boolean
   field :domain, default: (ENV["domain"] || "localhost"), readonly: true
-  field :https, type: :boolean, default: (ENV["https"] || "true"), readonly: true
   field :asset_host, default: (ENV["asset_host"] || nil), readonly: true
 
   # = Basic
@@ -185,7 +184,7 @@ class Setting < RailsSettings::Base
 
   class << self
     def protocol
-      self.https? ? "https" : "http"
+      Rails.env.production? ? "https" : "http"
     end
 
     def base_url

@@ -15,14 +15,8 @@ log_format timed_combined '$remote_addr - $remote_user [$time_local] '
 server {
   listen 80 default_server;
 
-  <% if ENV['https'] == "true" || ENV["https"] == "1" %>
-  include /etc/nginx/ssl.conf;
-  <% end %>
-
   location /nginx_status {
-    allow 127.0.0.1;
-    deny all;
-    stub_status on;
+    return 200 "ok";
   }
 
   root /home/app/homeland/public;

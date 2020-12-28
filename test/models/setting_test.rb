@@ -42,10 +42,8 @@ class SettingTest < ActiveSupport::TestCase
 
   test "base_url" do
     Setting.stubs(:domain).returns("homeland.io")
-    Rails.env.stub(:development?, false) do
-      Rails.env.stub(:production?, false) do
-        assert_equal "https://homeland.io", Setting.base_url
-      end
+    Setting.stub(:protocol, "https") do
+      assert_equal "https://homeland.io", Setting.base_url
     end
 
     Rails.env.stub(:development?, true) do

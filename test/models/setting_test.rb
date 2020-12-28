@@ -35,16 +35,17 @@ class SettingTest < ActiveSupport::TestCase
 
   test "protocol" do
     assert_equal "http", Setting.protocol
-    Setting.stub(:https, true) do
+    Rails.env.stub(:production?, true) do
       assert_equal "https", Setting.protocol
     end
   end
 
   test "base_url" do
     Setting.stubs(:domain).returns("homeland.io")
-    Setting.stubs(:https).returns(true)
     Rails.env.stub(:development?, false) do
-      assert_equal "https://homeland.io", Setting.base_url
+      Rails.env.stub(:production?, false) do
+        assert_equal "https://homeland.io", Setting.base_url
+      end
     end
 
     Rails.env.stub(:development?, true) do

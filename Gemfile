@@ -15,7 +15,7 @@ gem "webpacker", "~> 5.x"
 gem "sanitize"
 
 gem "pg"
-gem "jieba-rb"
+# gem "jieba-rb"
 gem "pghero", github: "ankane/pghero"
 
 gem "dotenv-rails"
@@ -133,3 +133,6 @@ group :development, :test do
   gem "rubocop", require: false
   gem "codecov", require: false
 end
+
+# dreamland-grade 积分插件
+gem "grade", github: "w2solo/dreamland-grade", branch: "main"

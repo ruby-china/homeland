@@ -19,6 +19,15 @@ module UsersHelper
       name      = user.name
     end
 
+    if (options.has_key?(:data))
+      data = options[:data]
+      if (data.has_key?(:author))
+        if (user_type != :team)
+          label = (user.login == user.name) ? user.login : "#{user.login}(#{user.name})"
+        end
+      end
+    end
+
     name ||= login
     options[:class] ||= "#{user_type}-name"
     options["data-name"] = name

@@ -38,6 +38,14 @@ GIT
     redis-namespace (1.8.0)
       redis (>= 3.0.4)
 
+GIT
+  remote: https://github.com/w2solo/dreamland-grade.git
+  revision: c2fcaf8ab2009c583495ea96062ceb29808caae3
+  branch: main
+  specs:
+    grade (0.1.0)
+      rails (>= 5.2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -211,7 +219,6 @@ GEM
       ruby-vips (>= 2.0.17, < 3)
     jbuilder (2.10.1)
       activesupport (>= 5.0.0)
-    jieba-rb (5.0.0)
     json (2.3.1)
     jwt (2.2.2)
     kaminari (1.2.1)
@@ -489,11 +496,11 @@ DEPENDENCIES
   exception-track
   factory_bot_rails
   form-select
+  grade!
   html-pipeline
   html-pipeline-auto-correct
   http_accept_language
   jbuilder
-  jieba-rb
   kaminari
   letter_opener
   listen!

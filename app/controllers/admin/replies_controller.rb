@@ -23,7 +23,10 @@ module Admin
     end
 
     def destroy
-      @reply.destroy
+      if @reply.destroy
+        # 积分变动：管理员删除用户评论 如果只剩一条评论被删除时，则扣除积分
+        @reply.user.change_score(:delete_comment) if @topic.replies.where(user_id: current_user.id).size == 1
+      end
     end
 
     private

@@ -49,12 +49,15 @@ module Admin
 
     def destroy
       @topic.destroy_by(current_user)
-
+      # 积分变动：管理员删帖
+      @topic.user.change_score(:delete_topic)
       redirect_to(admin_topics_path)
     end
 
     def undestroy
       @topic.update_attribute(:deleted_at, nil)
+      # 积分变动：管理员恢复删帖
+      @topic.user.change_score(:create_topic)
       redirect_to(admin_topics_path)
     end
 

@@ -1,0 +1,33 @@
+<% title_tag [@user.fullname, t('users.menu.scores')].join(' · ') %>
+
+<div class="row">
+  <%= render "sidebar", user: @user %>
+  <div class="col-lg-8">
+    <%= render "menu" %>
+    <div class="card">
+      <div class="card-footer clearfix">
+      </div>
+      <div>
+        <table class="table table-bordered table-striped">
+          <tr class="head">
+            <td>变动时间</td>
+            <td>变动原因</td>
+            <td>积分变化</td>
+            <td>变动后积分</td>
+          </tr>
+          <% @scores.each do |score| %>
+            <tr class="<%= cycle("","even") %>">
+              <td><%= score.created_at.strftime("%F %T")%></td>
+              <td><%= score.message %></td>
+              <td><%= score.increase? ? "+" : "-" %><%= score.score %></td>
+              <td><%= score.after_score %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+      <div class="card-footer clearfix">
+        <%= paginate @scores %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -176,6 +176,7 @@ Rails.application.routes.draw do
           get :followers
           get :following
           get :blocked
+          get :scores
           post :follow
           post :unfollow
           post :block
@@ -217,6 +218,7 @@ Rails.application.routes.draw do
         get :following
         get :calendar
         get :reward
+        get :scores
       end
 
       resources :team_users, path: "people" do

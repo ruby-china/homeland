@@ -46,14 +46,6 @@ GIT
     redis-namespace (1.8.0)
       redis (>= 3.0.4)
 
-GIT
-  remote: https://github.com/w2solo/dreamland-grade.git
-  revision: c2fcaf8ab2009c583495ea96062ceb29808caae3
-  branch: main
-  specs:
-    grade (0.1.0)
-      rails (>= 5.2.0)
-
 GEM
   remote: https://rubygems.org/
   specs:

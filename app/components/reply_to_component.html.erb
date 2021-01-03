@@ -1,8 +1,4 @@
-<% if reply.reply_to && reply.reply_to&.user %>
-  <%
-    reply_to = reply.reply_to
-    user = reply_to.user
-  %>
+<% if reply_to && user %>
   <div class="reply-to-block" data-reply-to-id="<%= reply_to.id %>">
     <div class="info">
       对

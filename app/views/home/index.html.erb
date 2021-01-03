@@ -7,17 +7,17 @@
 <% if !@excellent_topics.blank? %>
 <div class="home_suggest_topics card">
   <div class="card-body topics row">
-    <% cache(["home_suggest_topics", @excellent_topics]) do %>
-    <%
-      odd_topics, even_topics = @excellent_topics.partition.each_with_index { |t, i| i.odd?  }
-    %>
-    <div class="col-md-6 topics-group">
-      <%= render partial: "topics/topic", collection: even_topics, locals: { suggest: false } %>
-    </div>
+    <% cache(["home_suggest_topics2", @excellent_topics]) do %>
+      <%
+        odd_topics, even_topics = @excellent_topics.partition.each_with_index { |t, i| i.odd?  }
+      %>
+      <div class="col-md-6 topics-group">
+        <%= render TopicComponent.with_collection(even_topics) %>
+      </div>
 
-    <div class="col-md-6 topics-group">
-      <%= render partial: "topics/topic", collection: odd_topics, locals: { suggest: false } %>
-    </div>
+      <div class="col-md-6 topics-group">
+        <%= render TopicComponent.with_collection(odd_topics) %>
+      </div>
     <% end %>
   </div>
   <div class="card-footer hidden-mobile">

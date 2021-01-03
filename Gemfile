@@ -12,6 +12,8 @@ gem "turbolinks"
 gem "uglifier"
 gem "webpacker", "~> 5.x"
 
+gem "view_component", require: "view_component/engine"
+
 gem "pg"
 
 gem "devise"

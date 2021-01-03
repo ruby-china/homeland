@@ -62,8 +62,6 @@
     editor_insert_codes: "Insert Codes"
     by: "by"
     at: "on"
-    hot_topics: "Hot topics"
-    hot_locations: "Hot cities"
     has_deleted: "has deleted"
     auth_with_other_services: "Sign in with other services"
     captcha: 'Captcha'
@@ -76,7 +74,7 @@
     upload_and_insert_code: "Upload and insert code"
     uploading: "Uploading"
   menu:
-    topics: "Discussion"
+    topics: "Topics"
     wiki: "Wiki"
     gems: "Gems"
     users: "Users"
@@ -107,6 +105,7 @@
   topics:
     new_topic: "New Topic"
     edit_topic: "Edit Topic"
+    reply: "Reply"
     no_replies: "No Reply at the moment."
     recent_topics: "Recent Topics"
     recent_replies: "Recent Replies"
@@ -116,13 +115,12 @@
     subscribe_with_rss: "Subscribe to %{name} RSS feed."
     submit_reply: "Reply"
     topic_list:
-      hot_topic: "Active Topics"
-      recent: "Recent Topics"
-      last_reply: "Recent Reply Topics"
-      popular: "Popular Topics"
-      no_reply: "Unactive Topics"
-      excellent: "Excellent Topics"
-      favorites: "Favorite Topics"
+      latest: "Latest"
+      recent: "Newest"
+      last_reply: "Latest Reply"
+      popular: "Popular"
+      excellent: "Excellent"
+      banned: "Banned"
     read_topic: "Read Topic"
     create_topic_success: "Topic created successfully."
     delete_topic_success: "Topic deleted successfully.."
@@ -132,6 +130,10 @@
     topic_was_deleted: "[Topic was deleted]"
     have_no_new_reply: "No new activites since your last read."
     have_no_avatar: "You can't create a new Topic, before you upload a avatar."
+    excellent_info_html: "Topic has been selected as the excellent topic by the admin."
+    need_login_to_reply_html: You need to <a href="/account/sign_in" class="btn btn-sm btn-primary">Sign in</a> before reply, if you don't have an account, please <a href="/account/sign_up" class="btn btn-default btn-sm">Sign up</a> first.
+    newbi_info_html: "Newbi users cannot reply between 22:00 - 9:00."
+    closed_info_html: Topic has been closed at %{closed_at}, is not accepting any replies.
   users:
     bios: "Bio"
     city: "City"
@@ -163,7 +165,7 @@
     hot_users: "Top 100 active users"
     hot_teams: "Top active teams"
     recent_joined: "Most recently joined users"
-    submit_new_user: "Submit Information"
+    submit_new_user: "Sign Up"
     update_profile: "Update"
     update_password: "Update password"
     email_permission: "Show my email to others"

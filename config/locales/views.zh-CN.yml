@@ -62,8 +62,6 @@
     node: "节点"
     by: "由"
     at: "在"
-    hot_topics: "热门讨论"
-    hot_locations: "热门城市"
     replies_count: "回复"
     likes_count: 赞
     has_deleted: 已删除
@@ -162,6 +160,7 @@
   topics:
     new_topic: "发布新话题"
     edit_topic: "修改话题"
+    reply: "回复"
     no_replies: "暂无回复。"
     recent_topics: "最近发布的话题"
     recent_replies: "最近回复的话题"
@@ -171,14 +170,12 @@
     subscribe_with_rss: "订阅 %{name} 社区新话题"
     submit_reply: "提交回复"
     topic_list:
-      hot_topic: "活跃话题"
-      recent: "最新创建"
+      recent: "新帖"
       last_reply: "最新回复"
-      popular: "优质话题"
+      popular: "优质讨论"
       banned: "已屏蔽"
-      no_reply: "无人问津"
       excellent: "精华帖"
-      favorites: "我的收藏"
+      latest: "默认"
     read_topic: "浏览话题"
     create_topic_success: "话题创建成功。"
     delete_topic_success: "话题删除成功。"
@@ -191,6 +188,10 @@
     more_like_this: "相关话题"
     node_recent_topics: "节点下其他话题"
     have_no_avatar: "你还未设置头像，不能发布新话题。"
+    excellent_info_html: "本帖已被管理员设置为精华贴"
+    need_login_to_reply_html: 需要 <a href="/account/sign_in" class="btn btn-primary">登陆</a> 后方可回复, 如果你还没有账号请 <a href="/account/sign_up">注册新账号</a>
+    newbi_info_html: "当前设置新手用户不能在 22:00 ~ 9:00 发帖。"
+    closed_info_html: 此话题已于 %{closed_at} 关闭讨论，不在接受任何回复。
   users:
     bios: "个人介绍"
     city: "城市"

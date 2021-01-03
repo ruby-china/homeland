@@ -55,7 +55,7 @@
         <div class="ml-auto d-flex navbar-right">
           <form class="navbar-form d-none d-lg-flex mr-2 form-search active" action="/search" method="GET">
             <i class="fa btn-search fa-search"></i>
-            <input type="text" name="q" class="form-control" value="<%= params[:q] %>" placeholder="搜索"></input>
+            <input type="text" name="q" class="form-control" value="<%= params[:q] %>" placeholder="<%= t("common.search") %>"></input>
         </form>
         <%= render "shared/usernav" %>
       </div>

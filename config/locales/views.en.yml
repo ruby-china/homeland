@@ -1,0 +1,207 @@
+"en":
+  common:
+    justnow: 'Just Now'
+    hour: 'Hour'
+    minute: 'Minute'
+    edit: "Edit"
+    create: "Create"
+    avatar: "Avatar"
+    save: "Save"
+    saving: "Saving"
+    submitting: "Submitting"
+    delete: "Delete"
+    revert: "Revert"
+    place_top: "Stick Top"
+    un_top: "Un-Stick Top"
+    upload: "Upload"
+    uploading: "Uploading"
+    published_at: "Published At"
+    register: "Sign Up"
+    login: "Sign In"
+    logining: "Sign In..."
+    logout: "Sign Out"
+    remember_me: "Remember me (2 months)"
+    cancel: "Cancel"
+    created_at: "Created at %{time}"
+    until: "until"
+    last_by: "Last by"
+    floor: "Floor"
+    reply_at: "replied at %{time}"
+    create_item: "Create Item"
+    read_times: "hits"
+    confirm_delete: "Are you sure you want to delete?"
+    search: "Search"
+    public: "Public"
+    create_success: "Created successfully."
+    delete_success: "Deleted successfully."
+    update_success: "Updated successfully."
+    mark_all_as_read: "Mark all as read"
+    last_modified_at: "Last modified at"
+    index: "Index"
+    you_may_like: "You may also like"
+    read: "read"
+    admin_user: "Admin"
+    vip_user: "VIP"
+    normal_user: "Member"
+    newbie_user: "Newbie"
+    blocked_user: "Blocked User"
+    hr_user: "HR"
+    title: "Title"
+    reply_count: "Reply count"
+    last_reply_time: "Last replied at"
+    reply: "Reply"
+    index_node_navigation: "Node Navigation"
+    highlight_topic: "Sticky Topic"
+    statics: "Statistics"
+    comments: "Comments"
+    no_search_result: "No search result"
+    access_denied: "Access denied, Please sign in and make sure you have proper permission."
+    editor_toolbar_edit: "Edit"
+    editor_toolbar_preview: "Preview"
+    editor_add_image: "Upload image"
+    editor_insert_codes: "Insert Codes"
+    by: "by"
+    at: "on"
+    hot_topics: "Hot topics"
+    hot_locations: "Hot cities"
+    has_deleted: "has deleted"
+    auth_with_other_services: "Sign in with other services"
+    captcha: 'Captcha'
+    search_result: 'Search results'
+  reply:
+    edit_reply: "Edit Reply"
+    delete_reply_success: 'Delete successfully.'
+    topic_location: 'Replied to'
+  photos:
+    upload_and_insert_code: "Upload and insert code"
+    uploading: "Uploading"
+  menu:
+    topics: "Discussion"
+    wiki: "Wiki"
+    gems: "Gems"
+    users: "Users"
+    admin: "Control Panel"
+    nodes: "Nodes"
+    edit_account_path: "Account Profile"
+    likes: "Favorites"
+    teams: "Teams"
+  comments:
+    create_comment: "Comment"
+    no_comment: "No Comment at the moment"
+  mail:
+    login_from: "Sign in from"
+    this_is_a_notification_mail_please_do_not_reply: "This is an email notification. Please do not reply."
+    welcome_subject: "Welcome to %{app_name} community"
+    welcome_title: "Welcome to %{app_name}"
+    you_have_successfully: "You have successfully registered an account in"
+    registered_an_account: "."
+  rss:
+    recent_topics_description: "Recent Topics in %{name} Forum."
+    recent_topics_title: "%{name} Forum"
+    recent_node_topics_description: "Recent Topic in %{node_name} of %{name} Forum."
+    recent_node_topics_title: "%{node_name} node of %{name} Forum"
+  pagination:
+    next: "Next"
+    prev: "Prev"
+    gap: "&hellip;"
+  topics:
+    new_topic: "New Topic"
+    edit_topic: "Edit Topic"
+    no_replies: "No Reply at the moment."
+    recent_topics: "Recent Topics"
+    recent_replies: "Recent Replies"
+    check_recent_topics: "Read more recent topics..."
+    reply_this_fllor: "Reply to this floor"
+    tips_for_create_topic: "Tips for New Topics"
+    subscribe_with_rss: "Subscribe to %{name} RSS feed."
+    submit_reply: "Reply"
+    topic_list:
+      hot_topic: "Active Topics"
+      recent: "Recent Topics"
+      last_reply: "Recent Reply Topics"
+      popular: "Popular Topics"
+      no_reply: "Unactive Topics"
+      excellent: "Excellent Topics"
+      favorites: "Favorite Topics"
+    read_topic: "Read Topic"
+    create_topic_success: "Topic created successfully."
+    delete_topic_success: "Topic deleted successfully.."
+    update_topic_success: "Topic modified successfully.."
+    reply_success: "Replied Successfully"
+    reply_this_floor: "Reply to this floor"
+    topic_was_deleted: "[Topic was deleted]"
+    have_no_new_reply: "No new activites since your last read."
+    have_no_avatar: "You can't create a new Topic, before you upload a avatar."
+  users:
+    bios: "Bio"
+    city: "City"
+    join_time: "Joined at"
+    signature: "Status"
+    personal_website: "Blog"
+    recent_publish_topic: "Recent Topics"
+    recent_reply_topic: "Recent Replies"
+    unbind_warning: "You need at least one binded account. Cannot unbind as this is your last account."
+    unbind_success: "%{provider} unbinded successfully."
+    please_be_careful: "Please proceed with caution."
+    be_sure_to_use_twitter_id: "This will change reply binding, Twitter ID is recommanded."
+    personal_information: "Personal Information"
+    edit_password: "Edit Password"
+    delete_my_account: "Delete My Account"
+    delete_this_account: "Delete This Account"
+    dont_like_it: "Do not like it?"
+    bind_another_account: "Bind another account"
+    register_user: "Sign Up"
+    login: "Pick a username"
+    suggest_using_twitter_id: "Cannot modify after create."
+    already_have_account: "Already have an account?"
+    forget_password: "Forgot your password?"
+    not_recieve_confirm_mail: "Havn't received your confirmation email?"
+    not_recieve_unlock_mail: "Havn't received your unlock email?"
+    current_have: "Current have"
+    users_joined: "users joined"
+    teams_joined: "teams joined"
+    hot_users: "Top 100 active users"
+    hot_teams: "Top active teams"
+    recent_joined: "Most recently joined users"
+    submit_new_user: "Submit Information"
+    update_profile: "Update"
+    update_password: "Update password"
+    email_permission: "Show my email to others"
+    manage_my_apps: "Manage applications"
+    delete_account: "Delete account"
+    confirm_delete_account: "Enter password to delete your account"
+    ensure_to_delete: "Delete my account"
+    menu:
+      topics: "Topics"
+      recent_reply_topics: "Recent replies"
+      like: "Likes"
+      overview: "Overview"
+      profile: "Profile"
+      favorites: "Favorites"
+      replies: "Replies"
+      following: "Following"
+      followers: "Followers"
+      blocked: "Blocked"
+  team_user_status:
+    pendding: 'Awaiting response'
+    acceped: 'Accepted'
+  team_user_role:
+    owner: 'Owner'
+    member: 'Member'
+  teams:
+    teams: 'Team'
+    user_existed: 'Already in this team'
+    new_team: 'New team'
+    edit_team: 'Edit team profile'
+    new_team_user: 'Add a member'
+    edit_team_user: 'Change team roles'
+    delete_team_user: 'Remove member'
+    show_team_user: 'View invitations'
+    accept_team_user: 'Accept invitation'
+    reject_team_user: 'Decline'
+    delete_team_user_confirm: 'Are you sure you want to remove this user from team?'
+    topics: 'Topics of members'
+    users: 'Members'
+    team_user_pendding: 'Awaiting response'
+    settings: 'Settings'
+    team_users_count: "%{count} team members"

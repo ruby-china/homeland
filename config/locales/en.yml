@@ -19,7 +19,7 @@ en:
     attributes:
       user:
         name: "Name"
-        login: "Login name"
+        login: "Username"
         email: "Email"
         email_public: "Public Email"
         avatar: "Avatar"

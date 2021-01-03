@@ -159,3 +159,108 @@
     next: "下一页"
     prev: "上一页"
     gap: "&hellip;"
+  topics:
+    new_topic: "发布新话题"
+    edit_topic: "修改话题"
+    no_replies: "暂无回复。"
+    recent_topics: "最近发布的话题"
+    recent_replies: "最近回复的话题"
+    check_recent_topics: "查看更多最近发布的话题..."
+    reply_this_fllor: "回复此楼"
+    tips_for_create_topic: "发帖说明"
+    subscribe_with_rss: "订阅 %{name} 社区新话题"
+    submit_reply: "提交回复"
+    topic_list:
+      hot_topic: "活跃话题"
+      recent: "最新创建"
+      last_reply: "最新回复"
+      popular: "优质话题"
+      banned: "已屏蔽"
+      no_reply: "无人问津"
+      excellent: "精华帖"
+      favorites: "我的收藏"
+    read_topic: "浏览话题"
+    create_topic_success: "话题创建成功。"
+    delete_topic_success: "话题删除成功。"
+    update_topic_success: "话题修改成功。"
+    reply_success: "回复成功。"
+    reply_this_floor: "回复此楼"
+    topic_was_deleted: "[该话题已被删除]"
+    have_no_new_reply: "在你读过以后还没有新变化"
+    has_new_replies: "有新内容"
+    more_like_this: "相关话题"
+    node_recent_topics: "节点下其他话题"
+    have_no_avatar: "你还未设置头像，不能发布新话题。"
+  users:
+    bios: "个人介绍"
+    city: "城市"
+    company: "公司"
+    join_time: "Since"
+    signature: "签名"
+    personal_website: "博客"
+    recent_publish_topic: "最近发布的帖子"
+    recent_reply_topic: "最近回复过的帖子"
+    unbind_warning: "至少要保留一个关联账号，现在不能解绑。"
+    unbind_success: "%{provider} 账号解绑成功。"
+    please_be_careful: "谨慎修改"
+    be_sure_to_use_twitter_id: "此项将会影响回复信息关联,建议用 Twitter ID"
+    personal_information: "个人资料设置"
+    edit_password: "修改密码"
+    delete_this_account: "删除此账号"
+    dont_like_it: "不喜欢?"
+    bind_another_account: "绑定其他账号用于登录"
+    register_user: "注册新用户"
+    login: "用户名"
+    suggest_using_twitter_id: "谨慎填写，以后不可修改，建议用 Twitter ID。"
+    already_have_account: "已经有账号了？"
+    forget_password: "忘记了密码?"
+    not_recieve_confirm_mail: "未收到确认邮件?"
+    not_recieve_unlock_mail: "未收到解锁邮件?"
+    current_have: "目前已经有"
+    users_joined: "位会员加入了"
+    teams_joined: "个团队加入了"
+    hot_users: "TOP 100 活跃会员"
+    hot_teams: "TOP 活跃团队"
+    recent_joined: "最新加入的会员"
+    submit_new_user: "提交注册信息"
+    update_profile: "更新"
+    update_password: "修改密码"
+    email_permission: "公开 Email"
+    manage_my_apps: "管理我的应用"
+    delete_account: "删除账号"
+    confirm_delete_account: "要删除账号，请输入你的密码"
+    ensure_to_delete: "确定删除我的账号"
+    menu:
+      topics: "话题"
+      recent_reply_topics: "最近回帖"
+      like: "赞"
+      overview: "概况"
+      profile: "个人信息"
+      favorites: "收藏"
+      replies: "回帖"
+      following: "正在关注"
+      followers: "关注者"
+      blocked: "已屏蔽"
+  team_user_status:
+    pendding: '等待接受'
+    acceped: '已加入'
+  team_user_role:
+    owner: '组管理员'
+    member: '成员'
+  teams:
+    teams: '组织'
+    user_existed: '已经在组里面了'
+    new_team: '创建公司／组织'
+    edit_team: '设置公司／组织资料'
+    new_team_user: '邀请成员'
+    edit_team_user: '修改成员权限'
+    delete_team_user: '移除成员'
+    show_team_user: '查看邀请'
+    accept_team_user: '接受邀请'
+    reject_team_user: '拒绝'
+    delete_team_user_confirm: '确定要将他从组里面移除掉么？'
+    topics: '成员的话题列表'
+    users: '成员列表'
+    team_user_pendding: '等待接受'
+    settings: '设置'
+    team_users_count: "%{count} 个团队成员"

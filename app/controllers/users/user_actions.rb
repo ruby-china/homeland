@@ -8,7 +8,7 @@ module Users
       before_action :authenticate_user!, only: %i[block unblock blocked follow unfollow]
       before_action :only_user!, only: %i[topics replies favorites
                                           block unblock follow unfollow
-                                          followers following calendar reward]
+                                          followers following reward]
     end
 
     def topics
@@ -63,11 +63,6 @@ module Users
       @users = @user.follow_users.order("actions.id asc")
       @users = @users.page(params[:page]).per(60)
       render template: "/users/followers"
-    end
-
-    def calendar
-      data = @user.calendar_data
-      render json: data
     end
 
     def reward

@@ -214,7 +214,6 @@ Rails.application.routes.draw do
         post :unfollow
         get :followers
         get :following
-        get :calendar
         get :reward
       end
 

@@ -142,23 +142,6 @@ class User < ApplicationRecord
     !legacy_omniauth_logined?
   end
 
-  def calendar_data
-    Rails.cache.fetch(["user", self.id, "calendar_data", Date.today, "by-months"]) do
-      calendar_data_without_cache
-    end
-  end
-
-  def calendar_data_without_cache
-    date_from = 12.months.ago.beginning_of_month.to_date
-    replies = self.replies.where("created_at > ?", date_from)
-                  .group("date(created_at AT TIME ZONE 'CST')")
-                  .select("date(created_at AT TIME ZONE 'CST') AS date, count(id) AS total_amount").all
-
-    replies.each_with_object({}) do |reply, timestamps|
-      timestamps[reply["date"].to_time.to_i.to_s] = reply["total_amount"]
-    end
-  end
-
   def team_options
     return @team_options if defined? @team_options
     teams = self.admin? ? Team.all : self.teams

@@ -13,65 +13,52 @@ gem "uglifier"
 gem "webpacker", "~> 5.x"
 
 gem "pg"
-gem "jieba-rb"
-gem "pghero"
 
-gem "dotenv-rails"
-
-gem "rack-attack"
-
-gem "http_accept_language"
-gem "rails-i18n"
-gem "twemoji"
-
-# OAuth Provider
-gem "doorkeeper"
-gem "doorkeeper-i18n"
-
-# 上传组件
-gem "carrierwave"
-# Aliyun / Upyun / Qiniu 可选项
-gem "carrierwave-aliyun"
-gem "carrierwave-upyun"
-gem "carrierwave-qiniu"
-gem "qiniu"
-
-# Lazy load
-gem "mini_magick", require: false
-
-# 验证码
-gem "rucaptcha"
-gem "recaptcha"
-
-# 用户系统
 gem "devise"
 gem "devise-encryptable"
-
-# 通知系统
-gem "notifications"
-gem "ruby-push-notifications"
-
-# 赞、关注、收藏、屏蔽等功能的数据结构
-gem "action-store"
-
-# Rails Enum 扩展
-gem "enumize"
-
-# 分页
-gem "kaminari"
-
-# Form select 选项
-gem "form-select"
-
-# 三方平台 OAuth 验证登录
+gem "cancancan"
+gem "doorkeeper"
+gem "doorkeeper-i18n"
 gem "omniauth"
 gem "omniauth-github"
 gem "omniauth-twitter"
 gem "omniauth-wechat-oauth2"
 gem "omniauth-rails_csrf_protection"
 
-# Permission
-gem "cancancan"
+gem "jieba-rb"
+gem "dotenv-rails"
+
+gem "rack-attack"
+gem "http_accept_language"
+gem "rails-i18n"
+gem "twemoji"
+
+# Uploader
+gem "carrierwave"
+# Aliyun / Upyun / Qiniu
+gem "carrierwave-aliyun"
+gem "carrierwave-upyun"
+gem "carrierwave-qiniu"
+gem "qiniu"
+
+gem "mini_magick", require: false
+
+# Captcha
+gem "rucaptcha"
+gem "recaptcha"
+
+# Notification
+gem "notifications"
+gem "ruby-push-notifications"
+
+gem "action-store"
+
+gem "kaminari"
+gem "form-select"
+gem "enumize"
+
+gem "pghero"
+gem "exception-track"
 
 # Cache
 gem "redis"
@@ -88,11 +75,9 @@ gem "html-pipeline-auto-correct"
 gem "redcarpet"
 gem "rouge"
 
-# 队列
 gem "sidekiq"
 gem "sidekiq-cron"
 
-# 分享功能
 gem "social-share-button"
 
 # Mailer Service
@@ -104,11 +89,10 @@ gem "puma"
 # API cors
 gem "rack-cors", require: "rack/cors"
 
-gem "exception-track"
-
 gem "bootsnap"
 
 gem "puma_worker_killer"
+gem "nokogiri", ">= 1.11.0.rc4"
 
 group :development do
   gem "spring"

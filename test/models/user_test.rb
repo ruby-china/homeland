@@ -435,22 +435,6 @@ class UserTest < ActiveSupport::TestCase
     assert_equal false, User.new(email: "foobar@example.com").email_locked?
   end
 
-  test ".calendar_data" do
-    d1 = "1576339200"
-    d2 = "1576944000"
-    d3 = "1577116800"
-    create(:reply, user: user, created_at: Time.at(d1.to_i + 2.hours))
-    create_list(:reply, 2, user: user, created_at: Time.at(d2.to_i + 2.hours))
-    create_list(:reply, 6, user: user, created_at: Time.at(d3.to_i + 2.hours))
-
-    data = user.calendar_data
-    assert_equal 3, data.keys.count
-    # expect(data.keys).to include(d1, d2, d3)
-    # expect(data[d1]).to eq 1
-    # expect(data[d2]).to eq 2
-    # expect(data[d3]).to eq 6
-  end
-
   test ".team_options" do
     user2 = create(:user)
 

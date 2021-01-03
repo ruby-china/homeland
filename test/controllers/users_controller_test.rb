@@ -148,13 +148,6 @@ describe UsersController do
     end
   end
 
-  describe "GET /users/:id/calendar" do
-    it "should work" do
-      get calendar_user_path(user)
-      assert_equal 200, response.status
-    end
-  end
-
   describe "GET /users/:id/reward" do
     it "should not allow user close" do
       user.update_reward_fields(alipay: "XXXXXXX")

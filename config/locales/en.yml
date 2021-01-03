@@ -11,6 +11,26 @@ en:
     messages:
       extension_whitelist_error: "Invalid file format, only image allowed [jpg, jpeg, gif, png]"
   activerecord:
+    enums:
+      user:
+        state:
+          deleted: Deleted
+          newbie: Newbi
+          member: Member
+          blocked: Banned
+          vip: VIP
+          hr: HR
+          maintainer: Maintainer
+          admin: Admin
+        state_color:
+          deleted: "#777777"
+          newbie: "#564cf5"
+          member: "#564cf5"
+          blocked: "#505050"
+          vip: "#12ce0f"
+          hr: "#12ce0f"
+          maintainer: "#c800cc"
+          admin: "#f54821"
     models:
       user: "User"
       topic: "Topic"

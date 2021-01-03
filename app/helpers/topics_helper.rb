@@ -6,10 +6,10 @@ module TopicsHelper
     return "" if current_user.blank?
     opts[:class] ||= ""
     class_name = ""
-    link_title = "收藏"
+    link_title = t("common.favorite")
     if current_user&.favorite_topic?(topic)
       class_name = "active"
-      link_title = "取消收藏"
+      link_title = t("common.unfavorite")
     end
 
     icon = raw(content_tag("i", "", class: "fa fa-bookmark"))
@@ -17,7 +17,7 @@ module TopicsHelper
       class_name += " " + opts[:class]
     end
 
-    link_to(raw("#{icon} 收藏"), "#", title: link_title, class: "bookmark #{class_name}", "data-id" => topic.id)
+    link_to(raw("#{icon} #{t("common.favorite")}"), "#", title: link_title, class: "bookmark #{class_name}", "data-id" => topic.id)
   end
 
   def topic_follow_tag(topic, opts = {})

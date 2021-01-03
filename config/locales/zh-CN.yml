@@ -29,7 +29,7 @@
           maintainer: 版主
           admin: 管理员
         state_color:
-          deleted: 已注销
+          deleted: "#777777"
           newbie: "#564cf5"
           member: "#564cf5"
           blocked: "#505050"

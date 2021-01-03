@@ -1,4 +1,6 @@
-// TopicsController 下所有页面的 JS 功能
+import i18n from "homeland/i18n";
+
+// TopicsController
 window.Topics = {
   topic_id: null,
   user_liked_reply_ids: [],
@@ -27,7 +29,6 @@ window.TopicView = Backbone.View.extend({
     this.initComponents();
     this.initCableUpdate();
     this.initContentImageZoom();
-    this.initCloseWarning();
     this.checkRepliesLikeStatus();
     return this.itemsUpdated();
   },
@@ -46,7 +47,6 @@ window.TopicView = Backbone.View.extend({
     ));
   },
 
-  // 回复
   reply(e) {
     const _el = $(e.target);
     const reply_to_id = _el.data("id");
@@ -81,10 +81,7 @@ window.TopicView = Backbone.View.extend({
     return this.gotoFloor(floor);
   },
 
-  // 跳到指定楼。如果楼层在当前页，高亮该层，否则跳转到楼层所在页面并添
-  // 加楼层的 anchor。返回楼层 DOM Element 的 jQuery 对象
-  //
-  // -   floor: 回复的楼层数，从1开始
+  // go to replies floor
   gotoFloor(floor) {
     const replyEl = $(`#reply${floor}`);
 
@@ -93,15 +90,11 @@ window.TopicView = Backbone.View.extend({
     return replyEl;
   },
 
-  // 高亮指定楼。取消其它楼的高亮
-  //
-  // -   replyEl: 需要高亮的 DOM Element，须要 jQuery 对象
   highlightReply(replyEl) {
     $("#replies .reply").removeClass("light");
     return replyEl.addClass("light");
   },
 
-  // 异步更改用户 like 过的回复的 like 按钮的状态
   checkRepliesLikeStatus() {
     return (() => {
       const result = [];
@@ -113,7 +106,6 @@ window.TopicView = Backbone.View.extend({
     })();
   },
 
-  // Ajax 回复后的事件
   replyCallback(success, msg) {
     if (msg === "") {
       return;
@@ -134,7 +126,6 @@ window.TopicView = Backbone.View.extend({
     return this.unsetReplyTo();
   },
 
-  // 图片点击增加全屏预览功能
   initContentImageZoom() {
     const exceptClasses = ["emoji", "twemoji", "media-object avatar-16"];
     const imgEls = $(".markdown img");
@@ -202,27 +193,6 @@ window.TopicView = Backbone.View.extend({
     });
   },
 
-  initCloseWarning() {
-    let msg;
-    const text = $("textarea.closewarning");
-    if (text.length === 0) {
-      return false;
-    }
-    if (!msg) {
-      msg = "离开本页面将丢失未保存页面!";
-    }
-    $("input[type=submit]").click(() => $(window).unbind("beforeunload"));
-    return text.change(function () {
-      if (text.val().length > 0) {
-        return $(window).bind("beforeunload", function (e) {
-          return msg;
-        });
-      } else {
-        return $(window).unbind("beforeunload");
-      }
-    });
-  },
-
   bookmark(e) {
     const target = $(e.currentTarget);
     const topic_id = target.data("id");
@@ -233,10 +203,10 @@ window.TopicView = Backbone.View.extend({
         url: `/topics/${topic_id}/unfavorite`,
         type: "DELETE",
       });
-      link.attr("title", "收藏").removeClass("active");
+      link.attr("title", i18n.t("common.favorite")).removeClass("active");
     } else {
       $.post(`/topics/${topic_id}/favorite`);
-      link.attr("title", "取消收藏").addClass("active");
+      link.attr("title", i18n.t("common.unfavorite")).addClass("active");
     }
     return false;
   },

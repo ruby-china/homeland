@@ -62,6 +62,11 @@
     editor_insert_codes: "Insert Codes"
     by: "by"
     at: "on"
+    like: "Like"
+    unlike: "Unlike"
+    likes: likes
+    favorite: "Favorite"
+    unfavorite: "Unfavorite"
     has_deleted: "has deleted"
     auth_with_other_services: "Sign in with other services"
     captcha: 'Captcha'

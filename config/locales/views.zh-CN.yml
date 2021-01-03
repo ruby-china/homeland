@@ -63,7 +63,11 @@
     by: "由"
     at: "在"
     replies_count: "回复"
-    likes_count: 赞
+    like: "赞"
+    unlike: "取消赞"
+    likes: 个赞
+    favorite: "收藏"
+    unfavorite: "取消收藏"
     has_deleted: 已删除
     auth_with_other_services: "用其他平台的账号登录"
     captcha: "验证码"

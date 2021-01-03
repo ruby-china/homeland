@@ -13,11 +13,7 @@ Rails.application.routes.draw do
   resources :devices
   resources :teams
 
-  if Setting.has_module?(:home)
-    root to: "home#index"
-  else
-    root to: "topics#index"
-  end
+  root to: "topics#index"
   match "/uploads/:path(![large|lg|md|sm|xs])", to: "home#uploads", via: :get, constraints: {
     path: /[\w\d\.\/\-]+/i
   }

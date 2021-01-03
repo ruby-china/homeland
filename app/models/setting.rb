@@ -38,7 +38,6 @@ class Setting < RailsSettings::Base
     custom_head_html
     navbar_html
     footer_html
-    index_html
     wiki_index_html
     wiki_sidebar_html
     site_index_html
@@ -79,7 +78,7 @@ class Setting < RailsSettings::Base
   # = Basic
   field :app_name, default: (ENV["app_name"] || "Homeland"), validates: { presence: true }
   field :timezone, default: "UTC"
-  # Module [topic,home,team,github,editor.code]
+  # Module [topic,team,github,editor.code]
   field :modules, default: (ENV["modules"] || "all"), type: :array
   # Plugin sort
   field :sorted_plugins, default: [], type: :array, separator: /[\s,]+/
@@ -160,7 +159,6 @@ class Setting < RailsSettings::Base
   field :custom_head_html, default: ""
   field :navbar_html, default: ""
   field :footer_html, default: ""
-  field :index_html, default: ""
   field :wiki_index_html, default: ""
   field :wiki_sidebar_html, default: ""
   field :site_index_html, default: ""

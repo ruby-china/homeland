@@ -85,7 +85,6 @@
     users: "会员"
     admin: "后台"
     nodes: "节点"
-    my_home_page: "我的主页"
     edit_account_path: "个人资料设置"
     likes: "我的收藏"
     teams: "公司／组织"
@@ -144,7 +143,7 @@
     sorted_plugins: 插件排序，调整这个可以影响插件在导航栏的顺序。请用换行或逗号间隔，比如："jobs, wiki, press, site"。
     timezone: "日期时间显示时区，默认: UTC"
     profile_fields: "用户个性资料支持字段，默认：all 可选：[company,twitter,website,tagline,location,alipay,paypal,qq,weibo,wechat,douban,dingding,aliwangwang,facebook,instagram,dribbble,battle_tag,psn_id,steam_id]"
-    modules: "启用模块，默认 all 全部开启，可选：[topic,home,team,github,editor.code]"
+    modules: "启用模块，默认 all 全部开启，可选：[topic,team,github,editor.code]"
     domain: "网站域名，默认: localhost"
     asset_host: "静态资源 CDN，比如：https://assets.your-host.com (如果没有，请留空)"
     https: "是否启用 HTTPS"

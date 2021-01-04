@@ -182,3 +182,8 @@ window.App = {
 document.addEventListener("turbolinks:load", () => {
   $("select.bootstrap-select").selectpicker({ size: 10, style: "btn-default" });
 });
+document.addEventListener("turbolinks:before-cache", () => {
+  $("select.bootstrap-select")
+    .selectpicker("destroy")
+    .addClass("bootstrap-select");
+});

@@ -177,27 +177,28 @@ window.TopicView = Backbone.View.extend({
 
   hookPreview(switcher, textarea) {
     // put div#preview after textarea
-    const self = this;
     const preview_box = $(document.createElement("div")).attr("id", "preview");
     preview_box.addClass("markdown form-control");
     $(textarea).after(preview_box);
     preview_box.hide();
 
-    return $(".preview", switcher).click(function () {
-      if ($(this).hasClass("active")) {
-        $(this).removeClass("active");
-        $(preview_box).hide();
+    return $(".preview", switcher).click((e) => {
+      e.preventDefault();
+      const target = e.currentTarget;
+
+      if ($(target).hasClass("active")) {
+        $(target).removeClass("active");
+        preview_box.hide();
         $(textarea).show();
       } else {
-        $(this).addClass("active");
-        $box = $(preview_box);
-        $box.show();
+        $(target).addClass("active");
         $(textarea).hide();
-        $box.css("height", "auto");
-        $box.css("min-height", $(textarea).height());
-        self.preview($(textarea).val());
+        preview_box
+          .show()
+          .css("height", "auto")
+          .css("min-height", $(textarea).height());
+        this.preview($(textarea).val());
       }
-      return false;
     });
   },
 

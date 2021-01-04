@@ -85,11 +85,12 @@
     wiki: "Wiki"
     gems: "Gems"
     users: "会员"
-    admin: "后台"
+    admin: "管理后台"
     nodes: "节点"
-    edit_account_path: "个人资料设置"
-    likes: "我的收藏"
+    edit_account_path: "个人设置"
+    likes: "你收藏的话题"
     teams: "公司／组织"
+    back_to_front: "回到前台"
   comments:
     create_comment: "发表评论"
     no_comment: "暂无评论"
@@ -196,6 +197,10 @@
     need_login_to_reply_html: 需要 <a href="/account/sign_in" class="btn btn-primary">登陆</a> 后方可回复, 如果你还没有账号请 <a href="/account/sign_up">注册新账号</a>
     newbi_info_html: "当前设置新手用户不能在 22:00 ~ 9:00 发帖。"
     closed_info_html: 此话题已于 %{closed_at} 关闭讨论，不在接受任何回复。
+    form:
+      title_placeholder: 在这里输入标题
+      no_team: 不关联组织
+      markdown_guides: 排版说明
   users:
     bios: "个人介绍"
     city: "城市"
@@ -235,6 +240,9 @@
     delete_account: "删除账号"
     confirm_delete_account: "要删除账号，请输入你的密码"
     ensure_to_delete: "确定删除我的账号"
+    complete_your_info: "完善你的账户信息"
+    binding_via_html: "您必须填写以下表单才能完成绑定 <strong>%{provider}</strong> 的登录方式。"
+    binding_has_account_html: 如果你已经有账号，你可以通过 <a href="/account/sign_in">登陆</a> 来绑定账号。
     menu:
       topics: "话题"
       recent_reply_topics: "最近回帖"
@@ -269,3 +277,10 @@
     team_user_pendding: '等待接受'
     settings: '设置'
     team_users_count: "%{count} 个团队成员"
+  user_setting:
+    profile: "个人信息"
+    profile_detail: 详细资料
+    reward: 打赏
+    password: 密码
+    account: 账户设置
+    applications: 我的应用

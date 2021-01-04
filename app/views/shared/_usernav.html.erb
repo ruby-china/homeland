@@ -27,18 +27,18 @@
       </a>
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-user-menu">
         <%= link_to current_user.login, main_app.user_path(current_user), class: "dropdown-item" %>
+        <%= link_to t("menu.likes"), main_app.favorites_user_path(current_user), class: "dropdown-item" %>
         <div class="dropdown-divider"></div>
         <%= link_to t("menu.edit_account_path"), main_app.setting_path, class: "dropdown-item" %>
-        <%= link_to t("menu.likes"), main_app.favorites_topics_path, class: "dropdown-item" %>
         <% Homeland.user_menu_plugins.each do |plugin| %>
           <%= link_to plugin.display_name, plugin.root_path, class: "dropdown-item" %>
         <% end %>
         <% if current_user&.admin? %>
           <div class="dropdown-divider"></div>
           <% if params[:controller].start_with?("admin/") %>
-            <%= link_to "回到前台", main_app.root_path, class: "dropdown-item" %>
+            <%= link_to t("menu.back_to_front"), main_app.root_path, class: "dropdown-item" %>
           <% else %>
-            <%= link_to "管理后台", main_app.admin_root_path, class: "dropdown-item" %>
+            <%= link_to t("menu.admin"), main_app.admin_root_path, class: "dropdown-item" %>
           <% end %>
         <% end %>
         <div class="dropdown-divider"></div>

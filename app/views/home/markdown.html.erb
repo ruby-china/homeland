@@ -1,16 +1,16 @@
 <% title_tag 'Markdown 教程' %>
 
-<% cache(['markdown-guide', Digest::MD5.hexdigest(Homeland::Markdown.example)]) do %>
+<% cache(['markdown-guide', I18n.locale, Digest::MD5.hexdigest(Homeland::Markdown.example(I18n.locale))]) do %>
 
 <div class="card">
   <div class="card-body">
     <h1>Markdown 教程</h1>
     <div class="row">
       <div class="col-md-6">
-        <pre><code><%= Homeland::Markdown.example %></code></pre>
+        <pre><code><%= Homeland::Markdown.example(I18n.locale) %></code></pre>
       </div>
       <div class="col-md-6 markdown">
-        <%= markdown(Homeland::Markdown.example)%>
+        <%= markdown(Homeland::Markdown.example(I18n.locale))%>
       </div>
     </div>
   </div>

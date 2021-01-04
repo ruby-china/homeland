@@ -6,14 +6,14 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
   test "GET / without signed in" do
     get root_path
     assert_equal 200, response.status
-    assert_select ".navbar .nav-link", text: "注册"
+    assert_select ".navbar .nav-link", text: "Sign Up"
   end
 
   test "GET / with SSO enabled" do
     Setting.stubs(:sso_enabled?).returns(true)
     get root_path
     assert_equal 200, response.status
-    assert_equal false, response.body.include?("注册")
+    assert_equal false, response.body.include?("Sign Up")
   end
 
   test "GET / with signed in" do

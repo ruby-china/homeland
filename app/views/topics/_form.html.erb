@@ -7,7 +7,7 @@
       <div class="input-group-prepend mr-1">
         <%= f.select :node_id, Node.sorted.name_options, {}, class: "bootstrap-select", data: { "live-search": true } %>
       </div>
-      <%= f.text_field :title, class: "form-control", placeholder: "在这里填写标题" %>
+      <%= f.text_field :title, class: "form-control", placeholder: t("topics.form.title_placeholder") %>
     </div>
   </div>
 
@@ -20,14 +20,14 @@
   <% if Setting.has_module?(:team) %>
     <% if current_user.team_options.any? %>
     <div class='form-group'>
-      <%= f.select :team_id, current_user.team_options, { include_blank: "不要关联组织" }, { class: "bootstrap-select", data: { "live-search": true } } %>
+      <%= f.select :team_id, current_user.team_options, { include_blank: t("topics.form.no_team") }, { class: "bootstrap-select", data: { "live-search": true } } %>
     </div>
     <% end %>
   <% end %>
 
   <div class="form-actions hide-ios">
-    <%= f.submit t("common.save"), class: "btn btn-primary", style: "min-width: 200px", 'data-disable-with' => t("common.saving"), 'data-tb' => "save-topic" %>
+    <%= f.submit t("common.create"), class: "btn btn-primary", style: "min-width: 200px", 'data-disable-with' => t("common.saving"), 'data-tb' => "save-topic" %>
 
-    <div class="pull-right hide-ios"><a href="/markdown" target="_blank"><i class="fa fa-life-ring"></i> 排版说明</a></div>
+    <div class="pull-right hide-ios"><a href="/markdown" target="_blank"><i class="fa fa-life-ring"></i> <%= t("topics.form.markdown_guides") %></a></div>
   </div>
 <% end %>

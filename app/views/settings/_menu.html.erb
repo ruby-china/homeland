@@ -1,12 +1,12 @@
 <div class="col-sm-2 col-md-offset-1 setting-menu">
   <div class="card">
     <%= render_list class: "nav nav-pills flex-column nav-stacked" do |li|
-      li << link_to(icon_tag('user-circle', label: '基本设置'), setting_path, class: "nav-link")
-      li << link_to(icon_tag('address-card', label: '详细资料'), profile_setting_path, class: "nav-link hide-ios")
-      li << link_to(icon_tag('qrcode', label: '打赏'), reward_setting_path, class: "nav-link hide-ios")
-      li << link_to(icon_tag('cog', label: '账户设置'), account_setting_path, class: "nav-link hide-ios")
-      li << link_to(icon_tag('keyboard', label: '登录密码'), password_setting_path, class: "nav-link hide-ios") unless Setting.sso_enabled?
-      li << link_to(icon_tag('cube', label: '管理我的应用'), oauth_applications_path, class: "nav-link hide-ios")
+      li << link_to(icon_tag('user-circle', label: t("user_setting.profile")), setting_path, class: "nav-link")
+      li << link_to(icon_tag('address-card', label: t("user_setting.profile_detail")), profile_setting_path, class: "nav-link hide-ios")
+      li << link_to(icon_tag('qrcode', label: t("user_setting.reward")), reward_setting_path, class: "nav-link hide-ios")
+      li << link_to(icon_tag('cog', label: t("user_setting.account")), account_setting_path, class: "nav-link hide-ios")
+      li << link_to(icon_tag('keyboard', label: t("user_setting.password")), password_setting_path, class: "nav-link hide-ios") unless Setting.sso_enabled?
+      li << link_to(icon_tag('cube', label: t("user_setting.applications")), oauth_applications_path, class: "nav-link hide-ios")
     end %>
   </div>
 </div>

@@ -4,12 +4,8 @@
   "application.js": "/packs-test/js/application-21d15317dc24791b3259.js",
   "entrypoints": {
     "admin": {
-      "css": [
-        "/packs-test/css/admin-49f09330.css"
-      ],
-      "js": [
-        "/packs-test/js/admin-ffcf61e7b3c79ae446a5.js"
-      ]
+      "css": ["/packs-test/css/admin-49f09330.css"],
+      "js": ["/packs-test/js/admin-ffcf61e7b3c79ae446a5.js"]
     },
     "application": {
       "js": [
@@ -18,20 +14,12 @@
       ]
     },
     "front": {
-      "css": [
-        "/packs-test/css/front-f40de984.css"
-      ],
-      "js": [
-        "/packs-test/js/front-c53a5cbd9c08e94d7f27.js"
-      ]
+      "css": ["/packs-test/css/front-f40de984.css"],
+      "js": ["/packs-test/js/front-c53a5cbd9c08e94d7f27.js"]
     },
     "turbolinks-app": {
-      "css": [
-        "/packs-test/css/turbolinks-app-48ddf659.css"
-      ],
-      "js": [
-        "/packs-test/js/turbolinks-app-1e26708b9ea93cb5371f.js"
-      ]
+      "css": ["/packs-test/css/turbolinks-app-b1ce5136.css"],
+      "js": ["/packs-test/js/turbolinks-app-59e4c994eb7334914c46.js"]
     }
   },
   "front.css": "/packs-test/css/front-f40de984.css",
@@ -46,7 +34,7 @@
   "media/webfonts/fa-solid-900.ttf": "/packs-test/media/webfonts/fa-solid-900-10ecefc2.ttf",
   "media/webfonts/fa-solid-900.woff": "/packs-test/media/webfonts/fa-solid-900-46fdbd2d.woff",
   "media/webfonts/fa-solid-900.woff2": "/packs-test/media/webfonts/fa-solid-900-3ceb50e7.woff2",
-  "turbolinks-app.css": "/packs-test/css/turbolinks-app-48ddf659.css",
-  "turbolinks-app.js": "/packs-test/js/turbolinks-app-1e26708b9ea93cb5371f.js",
-  "vendors.js": "/packs-test/js/vendors-0afc9b9df4177732e4b5.chunk.js"
+  "turbolinks-app.css": "/packs-test/css/turbolinks-app-b1ce5136.css",
+  "turbolinks-app.js": "/packs-test/js/turbolinks-app-59e4c994eb7334914c46.js",
+  "vendors.js": "/packs-test/js/vendors-ec56b41034e7611e207b.chunk.js"
 }

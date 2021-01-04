@@ -10,7 +10,7 @@ class Users::SessionsControllerTest < ActionDispatch::IntegrationTest
   test "GET /account/sign_in" do
     get new_user_session_path
     assert_equal 200, response.status
-    assert_select "title", text: /登录/
+    assert_select "title", text: /Sign In/
 
     assert_select ".omniauth-github"
     assert_select ".omniauth-twitter"
@@ -24,11 +24,11 @@ class Users::SessionsControllerTest < ActionDispatch::IntegrationTest
   test "POST /account/sign_in with login" do
     post user_session_path, params: { user: { login: "huacnlee" } }
     assert_equal 200, response.status
-    assert_select ".alert", text: /账号或密码错误/
+    assert_select ".alert", text: /Invalid Username or password/
 
     post user_session_path, params: { user: { login: "huacnlee", password: "1234" } }
     assert_equal 200, response.status
-    assert_select ".alert", text: /账号或密码错误/
+    assert_select ".alert", text: /Invalid Username or password/
 
     # Do sign in
     post user_session_path, params: { user: { login: "huacnlee", password: "123456" } }
@@ -44,11 +44,11 @@ class Users::SessionsControllerTest < ActionDispatch::IntegrationTest
   test "POST /account/sign_in with email" do
     post user_session_path, params: { user: { login: "huacnlee@gmail.com" } }
     assert_equal 200, response.status
-    assert_select ".alert", text: /账号或密码错误/
+    assert_select ".alert", text: /Invalid Username or password/
 
     post user_session_path, params: { user: { login: "huacnlee@gmail.com", password: "1234" } }
     assert_equal 200, response.status
-    assert_select ".alert", text: /账号或密码错误/
+    assert_select ".alert", text: /Invalid Username or password/
 
     # Do sign in
     post user_session_path, params: { user: { login: "huacnlee@gmail.com", password: "123456" } }
@@ -85,7 +85,7 @@ class Users::SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to new_user_registration_path
     post user_session_path, params: { user: { login: user1.email, password: "123456" } }
     assert_signed_in
-    assert_select ".alert-success", text: /登录成功，并成功绑定 GitHub/
+    assert_select ".alert-success", text: /Sign in successfully with bind GitHub/
 
     auth = user1.authorizations.where(provider: "github").first
     assert_not_nil auth
@@ -100,7 +100,7 @@ class Users::SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to new_user_registration_path
     post user_session_path, params: { user: { login: user1.email, password: "123456" } }
     assert_signed_in
-    assert_select ".alert-success", text: /登录成功，并成功绑定 微信/
+    assert_select ".alert-success", text: /Sign in successfully with bind 微信/
 
     auth = user1.authorizations.where(provider: "wechat").first
     assert_not_nil auth

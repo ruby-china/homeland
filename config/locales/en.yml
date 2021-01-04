@@ -9,7 +9,7 @@ en:
     not_found: "Sorry, this have an unknown error with SSO login."
   errors:
     messages:
-      extension_whitelist_error: "Invalid file format, only image allowed [jpg, jpeg, gif, png]"
+      extension_whitelist_error: "Invalid file format, only image allowed [jpg, jpeg, gif, png, svg]"
   activerecord:
     enums:
       user:

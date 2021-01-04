@@ -14,7 +14,7 @@ class Users::SessionsController < Devise::SessionsController
         return
       end
 
-      set_flash_message(:notice, "登录成功，并成功绑定 #{Homeland::Utils.omniauth_name(session[:omniauth]["provider"])}")
+      set_flash_message(:notice, "Sign in successfully with bind #{Homeland::Utils.omniauth_name(session[:omniauth]["provider"])}")
       session[:omniauth] = nil
     end
 

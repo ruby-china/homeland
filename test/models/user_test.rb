@@ -368,36 +368,36 @@ class UserTest < ActiveSupport::TestCase
   test ".level / .level_name" do
     u1 = User.new(state: :member)
     assert_equal "member", u1.level
-    assert_equal "会员", u1.level_name
+    assert_equal "Member", u1.level_name
 
     # newbie
     u1.stub(:newbie?, true) do
       assert_equal "newbie", u1.level
-      assert_equal "新手", u1.level_name
+      assert_equal "Newbi", u1.level_name
     end
 
     u1 = User.new(state: :admin)
     assert_equal "admin", u1.level
-    assert_equal "管理员", u1.level_name
+    assert_equal "Admin", u1.level_name
 
     u1 = User.new(state: :maintainer)
     assert_equal "maintainer", u1.level
-    assert_equal "版主", u1.level_name
+    assert_equal "Maintainer", u1.level_name
 
     # vip
     u1 = User.new(state: :vip)
     assert_equal "vip", u1.level
-    assert_equal "高级会员", u1.level_name
+    assert_equal "VIP", u1.level_name
 
     # blocked
     u1 = User.new(state: :blocked)
     assert_equal "blocked", u1.level
-    assert_equal "禁言用户", u1.level_name
+    assert_equal "Banned", u1.level_name
 
     # blocked
     u1 = User.new(state: :deleted)
     assert_equal "deleted", u1.level
-    assert_equal "已注销", u1.level_name
+    assert_equal "Deleted", u1.level_name
   end
 
 

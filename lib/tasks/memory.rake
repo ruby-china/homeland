@@ -6,7 +6,7 @@ task memory: :environment do
   include ActionView::Helpers::OutputSafetyHelper
   include ActionView::Helpers::TextHelper
 
-  str = Homeland::Markdown.example
+  str = Homeland::Markdown.example("zh-CN")
 
   a = []
 

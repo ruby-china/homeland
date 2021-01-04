@@ -34,7 +34,7 @@ describe RepliesController, type: :controller do
       sign_in user
       post topic_replies_path(topic), params: { reply: { body: "" }, format: :js }
       assert_equal 200, response.status
-      assert_match /回复内容不能为空字符/, response.body
+      assert_match /Reply Content can't be blank/, response.body
       assert_equal false, user.topic_read?(topic)
     end
 

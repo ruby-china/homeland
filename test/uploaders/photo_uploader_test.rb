@@ -23,7 +23,7 @@ class PhotoUploaderTest < ActiveSupport::TestCase
 
     photo = build(:photo, image: not_an_image)
     assert_equal false, photo.valid?
-    assert_equal ["Image仅允许图片文件上传 [jpg, jpeg, gif, png, svg]"], photo.errors.full_messages_for(:image)
+    assert_equal ["Image Invalid file format, only image allowed [jpg, jpeg, gif, png, svg]"], photo.errors.full_messages_for(:image)
 
     photo = build(:photo, image: svg_image)
     assert_equal true, photo.valid?

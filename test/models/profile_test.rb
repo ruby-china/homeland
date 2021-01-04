@@ -35,7 +35,7 @@ class ProfileTest < ActiveSupport::TestCase
   end
 
   test "#reward_field_label" do
-    assert_equal "微信", Profile.reward_field_label(:wechat)
-    assert_equal "支付宝", Profile.reward_field_label(:alipay)
+    assert_equal "Wechat", Profile.reward_field_label(:wechat)
+    assert_equal "Alipay", Profile.reward_field_label(:alipay)
   end
 end

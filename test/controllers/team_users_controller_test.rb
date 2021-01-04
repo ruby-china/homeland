@@ -12,7 +12,7 @@ describe TeamUsersController do
     it "should work" do
       get user_team_users_path(team)
       assert_equal 200, response.status
-      assert_equal true, response.body.include?("成员列表")
+      assert_equal true, response.body.include?("Members")
     end
 
     describe "Normal user" do
@@ -29,7 +29,7 @@ describe TeamUsersController do
         sign_in team_member.user
         get user_team_users_path(team)
         assert_equal 200, response.status
-        assert_equal false, response.body.include?("邀请成员")
+        assert_equal false, response.body.include?("Add a member")
         assert_equal false, response.body.include?("/people/new")
       end
     end
@@ -39,7 +39,7 @@ describe TeamUsersController do
         sign_in team_owner.user
         get user_team_users_path(team)
         assert_equal 200, response.status
-        assert_equal true, response.body.include?("邀请成员")
+        assert_equal true, response.body.include?("Add a member")
         assert_equal true, response.body.include?("/people/new")
       end
     end

@@ -29,8 +29,8 @@ module Homeland
         result
       end
 
-      def example
-        @example ||= open(Rails.root.join("lib/homeland/markdown_guides.md")).read
+      def example(locale)
+        open(Rails.root.join("lib/homeland/markdown/guides.#{locale}.md")).read
       end
     end
   end

@@ -11,13 +11,13 @@ describe SettingsController do
       Setting.stubs(:sso_enabled?).returns(false)
       get setting_path
       assert_equal 200, response.status
-      assert_equal true, response.body.include?("更新")
-      assert_equal true, response.body.include?("登录密码")
+      assert_equal true, response.body.include?("Update")
+      assert_equal true, response.body.include?("Password")
       assert_equal true, response.body.include?(%(enctype="multipart/form-data"))
 
       Setting.stubs(:sso_enabled?).returns(true)
       get setting_path
-      assert_equal false, response.body.include?("登录密码")
+      assert_equal false, response.body.include?("Password")
     end
 
     it "should new work with non user" do
@@ -52,7 +52,7 @@ describe SettingsController do
       Setting.stubs(:sso_enabled?).returns(false)
       get password_setting_path
       assert_equal 200, response.status
-      assert_equal true, response.body.include?("修改密码")
+      assert_equal true, response.body.include?("Update password")
     end
 
     it "should not open when sso enabled" do

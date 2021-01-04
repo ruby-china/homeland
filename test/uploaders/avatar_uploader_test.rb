@@ -9,7 +9,7 @@ class AvatarUploaderTest < ActiveSupport::TestCase
 
     user = build(:user, avatar: not_an_image)
     assert_equal false, user.valid?
-    assert_equal ["头像仅允许图片文件上传 [jpg, jpeg, gif, png, svg]"], user.errors.full_messages_for(:avatar)
+    assert_equal ["Avatar Invalid file format, only image allowed [jpg, jpeg, gif, png, svg]"], user.errors.full_messages_for(:avatar)
 
     user = build(:user, avatar: image)
     assert_equal true, user.valid?

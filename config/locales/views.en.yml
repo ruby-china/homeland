@@ -83,11 +83,12 @@
     wiki: "Wiki"
     gems: "Gems"
     users: "Users"
-    admin: "Control Panel"
+    admin: "Admin Panel"
     nodes: "Nodes"
-    edit_account_path: "Account Profile"
-    likes: "Favorites"
+    edit_account_path: "Settings"
+    likes: "Your favorites"
     teams: "Teams"
+    back_to_front: "Back to front"
   comments:
     create_comment: "Comment"
     no_comment: "No Comment at the moment"
@@ -139,6 +140,10 @@
     need_login_to_reply_html: You need to <a href="/account/sign_in" class="btn btn-sm btn-primary">Sign in</a> before reply, if you don't have an account, please <a href="/account/sign_up" class="btn btn-default btn-sm">Sign up</a> first.
     newbi_info_html: "Newbi users cannot reply between 22:00 - 9:00."
     closed_info_html: Topic has been closed at %{closed_at}, is not accepting any replies.
+    form:
+      title_placeholder: Type a topic title
+      no_team: No team
+      markdown_guides: Markdown Guides
   users:
     bios: "Bio"
     city: "City"
@@ -178,6 +183,9 @@
     delete_account: "Delete account"
     confirm_delete_account: "Enter password to delete your account"
     ensure_to_delete: "Delete my account"
+    complete_your_info: "Complete your account information"
+    binding_via_html: You must fill out the form below to complete the binding login method of <strong>%{provider}</strong>.
+    binding_has_account_html: If you already have an account, you can use <a href="/account/sign_in">Sign in</a> to bind the account.
     menu:
       topics: "Topics"
       recent_reply_topics: "Recent replies"
@@ -212,3 +220,10 @@
     team_user_pendding: 'Awaiting response'
     settings: 'Settings'
     team_users_count: "%{count} team members"
+  user_setting:
+    profile: Profile
+    profile_detail: Social Profiles
+    reward: Reward
+    password: Password
+    account: Account setting
+    applications: Applications

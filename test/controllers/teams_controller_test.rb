@@ -20,7 +20,7 @@ describe TeamsController do
     sign_in user
     get new_team_path
     assert_equal 200, response.status
-    assert_equal true, response.body.include?("创建公司／组织")
+    assert_equal true, response.body.include?("New team")
   end
 
   describe "POST /teams" do

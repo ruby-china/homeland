@@ -11,9 +11,15 @@
           <%= likeable_tag(@topic) %>
         </div>
         <div class="group">
-          <div class="btn-group" role="group">
-            <%= topic_follow_tag(@topic, class: 'btn btn-default') %>
-            <%= topic_favorite_tag(@topic, class: 'btn btn-default') %>
+          <div class="opts">
+            <%= topic_follow_tag(@topic) %>
+            <%= topic_favorite_tag(@topic) %>
+            <% if can?(:manage, @topic) || can?(:close, @topic) %>
+              <a href="#" data-toggle="dropdown">
+                <%= icon_tag("ellipsis-v") %>
+              </a>
+              <%= render "menu" %>
+            <% end %>
           </div>
         </div>
       </div>
@@ -28,43 +34,6 @@
         </div>
         <%= reward_user_tag(@topic.user) %>
       </div>
-      <% if can?(:manage, @topic) || can?(:close, @topic) %>
-      <hr />
-      <div class="group opts">
-        <% if can?(:manage, @topic) %>
-          <div style="margin-bottom: 8px">
-            <% if !@topic.suggested_at.blank? %>
-              <%= link_to raw("<i class='fa fa-pin'></i> 取消"), unsuggest_admin_topic_path(@topic), method: :post, remote: true %>
-            <% else %>
-              <%= link_to raw("<i class='fa fa-pin'></i> 置顶"), suggest_admin_topic_path(@topic), method: :post, remote: true %>
-            <% end %>
-            <% if !@topic.excellent? %>
-              <%= link_to raw("<i class='fa fa-award'></i> 加精"), action_topic_path(@topic, type: 'excellent'), method: "post", remote: true %>
-            <% end %>
-            <% if !@topic.ban? %>
-              <%= link_to raw("<i class='fa fa-ban'></i> 屏蔽"), ban_topic_path(@topic), remote: true, title: "全站屏蔽此贴" %>
-            <% else %>
-              <%= link_to raw("<i class='fa fa-ban'></i> 取消"), action_topic_path(@topic, type: 'normal'), method: :post, remote: true, title: "取消全站屏蔽此贴" %>
-            <% end %>
-          </div>
-        <% end %>
-        <div>
-          <% if can?(:close, @topic) %>
-            <% if !@topic.closed? %>
-              <%= link_to raw("<i class='fa fa-check-circle'></i> 结束"), action_topic_path(@topic, type: 'close'), method: 'post', title: "关闭讨论／问题已解决", remote: true, data: { toggle: 'tooltip' } %>
-            <% else %>
-              <%= link_to raw("<i class='fa fa-undo'></i> 开启"), action_topic_path(@topic, type: 'open'), method: 'post', title: "重新开启话题", remote: true, data: { toggle: 'tooltip' } %>
-            <% end %>
-          <% end %>
-          <% if can?(:edit, @topic) %>
-            <%= link_to raw('<i class="fa fa-edit"></i> 编辑'), edit_topic_path(@topic), title: "修改本帖", data: { prefetch: false } %>
-          <% end %>
-          <% if can?(:destroy, @topic) %>
-            <%= link_to raw('<i class="fa fa-trash"></i> 删除'), topic_path(@topic.id), method: :delete, 'data-confirm' => t("common.confirm_delete"), title: "删除本帖", remote: true %>
-          <% end %>
-        </div>
-      </div>
-      <% end %>
     </div>
   </div>
   <div class="notify-updated">

@@ -491,13 +491,6 @@ hr {
     em {
       font-style: normal;
     }
-
-    .opts {
-      a {
-        margin-left: 5px;
-        color: var(--primary);
-      }
-    }
   }
 }
 
@@ -525,7 +518,11 @@ hr {
   }
 
   .buttons {
+    .opts {
+      font-size: 17px;
+    }
     .likes {
+      font-size: 15px;
       a {
         display: block;
         width: 90px;
@@ -537,7 +534,6 @@ hr {
       a:hover,
       a:visited {
         text-decoration: none;
-        color: var(--primary);
       }
       a:hover {
         background: rgba(0, 0, 0, 0.03);
@@ -545,13 +541,7 @@ hr {
       i.fa {
         display: block;
         font-size: 40px;
-        color: var(--primary);
         margin-bottom: 6px;
-      }
-      a.active {
-        i.fa {
-          color: var(--red);
-        }
       }
       span {
         display: block;

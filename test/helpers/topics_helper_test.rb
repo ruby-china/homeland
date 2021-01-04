@@ -15,12 +15,12 @@ class TopicsHelperTest < ActionView::TestCase
     sign_in user
     user.stub(:favorite_topic?, false) do
       res = topic_favorite_tag(topic)
-      assert_equal "<a title=\"Favorite\" class=\"bookmark \" data-id=\"#{topic.id}\" href=\"#\"><i class=\"fa fa-bookmark\"></i> Favorite</a>", res
+      assert_equal "<a title=\"Favorite\" class=\"bookmark \" data-id=\"#{topic.id}\" href=\"#\"><i class='icon fa fa-bookmark'></i></a>", res
     end
 
     # should result when logined user favorited topic
     user.stub(:favorite_topic?, true) do
-      assert_equal "<a title=\"Unfavorite\" class=\"bookmark active\" data-id=\"#{topic.id}\" href=\"#\"><i class=\"fa fa-bookmark\"></i> Favorite</a>", topic_favorite_tag(topic)
+      assert_equal "<a title=\"Unfavorite\" class=\"bookmark active\" data-id=\"#{topic.id}\" href=\"#\"><i class='icon fa fa-bookmark'></i></a>", topic_favorite_tag(topic)
     end
 
     # should result blank when unlogin user
@@ -55,11 +55,11 @@ class TopicsHelperTest < ActionView::TestCase
     assert_equal "", topic_follow_tag(nil)
 
     # was unfollow
-    assert_html_equal %(<a data-id="#{topic.id}" class="follow" href="#"><i class="fa fa-bell"></i> 订阅</a>), topic_follow_tag(topic)
+    assert_html_equal %(<a title="Subscribe" data-id="#{topic.id}" class="follow" href="#"><i class='icon fa fa-bell'></i></a>), topic_follow_tag(topic)
 
     # was active
     user.stub(:follow_topic?, true) do
-      assert_html_equal %(<a data-id="#{topic.id}" class="follow active" href="#"><i class="fa fa-bell"></i> 订阅</a>), topic_follow_tag(topic)
+      assert_html_equal %(<a title="Subscribe" data-id="#{topic.id}" class="follow active" href="#"><i class='icon fa fa-bell'></i></a>), topic_follow_tag(topic)
     end
   end
 

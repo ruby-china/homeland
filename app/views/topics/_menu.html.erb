@@ -1,0 +1,32 @@
+<div class="dropdown-menu">
+  <% if can?(:edit, @topic) %>
+    <%= link_to t("topics.menu.edit"), edit_topic_path(@topic), class: "dropdown-item", data: { prefetch: false }  %>
+  <% end %>
+  <% if can?(:close, @topic) %>
+    <% if !@topic.closed? %>
+      <%= link_to t("topics.menu.close"), action_topic_path(@topic, type: 'close'), class: "dropdown-item", method: 'post', remote: true, data: { toggle: 'tooltip' } %>
+    <% else %>
+      <%= link_to t("topics.menu.reopen"), action_topic_path(@topic, type: 'open'), class: "dropdown-item", method: 'post', remote: true, data: { toggle: 'tooltip' } %>
+    <% end %>
+  <% end %>
+  <% if can? :suggest, @topic %>
+    <div class="dropdown-divider"></div>
+    <% if !@topic.suggested_at.blank? %>
+      <%= link_to t("topics.menu.unpin"), unsuggest_admin_topic_path(@topic), class: "dropdown-item", method: :post, remote: true %>
+    <% else %>
+      <%= link_to t("topics.menu.pin"), suggest_admin_topic_path(@topic), class: "dropdown-item", method: :post, remote: true %>
+    <% end %>
+    <% if !@topic.excellent? %>
+      <%= link_to t("topics.menu.excellent"), action_topic_path(@topic.id, type: 'excellent'), class: "dropdown-item", method: :post, remote: true %>
+    <% end %>
+    <% if !@topic.ban? %>
+      <%= link_to t("topics.menu.ban"), ban_topic_path(@topic), class: "dropdown-item", remote: true %>
+    <% else %>
+      <%= link_to t("topics.menu.unban"), action_topic_path(@topic, type: 'normal'), class: "dropdown-item", method: :post, remote: true %>
+    <% end %>
+  <% end %>
+  <% if can?(:destroy, @topic) %>
+    <div class="dropdown-divider"></div>
+    <%= link_to t("topics.menu.delete"), topic_path(@topic.id), class: "dropdown-item", method: :delete, remote: true, 'data-confirm': t("common.confirm_delete"), title: "删除本帖" %>
+  <% end %>
+</div>

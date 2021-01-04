@@ -96,7 +96,9 @@ module ApplicationHelper
     if opts[:label]
       label = %(<span>#{opts[:label]}</span>)
     end
-    raw "<i class='icon fa fa-#{name}'></i> #{label}"
+    icon = "<i class='icon fa fa-#{name}'></i>"
+    icon = "#{icon} #{label}" if label.present?
+    raw icon
   end
 
   def icon_bold_tag(name, opts = {})

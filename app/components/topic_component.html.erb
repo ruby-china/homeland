@@ -9,9 +9,7 @@
           <span class="node"><%= topic.node&.name %></span>
           <%= topic.title %>
         <% end %>
-        <% if type == "suggest" %>
-          <i class="fa fa-pin" title="置顶"></i>
-        <% end %>
+        <%= icon_tag("pin") if type == "suggest" %>
         <%= topic_excellent_tag(topic) %>
         <%= topic_close_tag(topic) %>
       </div>

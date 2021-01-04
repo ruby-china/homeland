@@ -17,7 +17,7 @@ module TopicsHelper
       class_name += " " + opts[:class]
     end
 
-    link_to(raw("#{icon} #{t("common.favorite")}"), "#", title: link_title, class: "bookmark #{class_name}", "data-id" => topic.id)
+    link_to(icon_tag("bookmark"), "#", title: link_title, class: "bookmark #{class_name}", "data-id" => topic.id)
   end
 
   def topic_follow_tag(topic, opts = {})
@@ -30,8 +30,7 @@ module TopicsHelper
     if opts[:class].present?
       class_name += " " + opts[:class]
     end
-    icon = content_tag("i", "", class: "fa fa-bell")
-    link_to(raw("#{icon} 订阅"), "#", "data-id" => topic.id, class: class_name)
+    link_to(icon_tag("bell"), "#", title: t("common.subscribe"), "data-id" => topic.id, class: class_name)
   end
 
   def topic_title_tag(topic, opts = {})
@@ -47,7 +46,7 @@ module TopicsHelper
 
   def topic_excellent_tag(topic)
     return "" unless topic.excellent?
-    content_tag(:i, "", title: "精华帖", class: "fa fa-award", data: { toggle: "tooltip" })
+    icon_tag("award")
   end
 
   def topic_close_tag(topic)

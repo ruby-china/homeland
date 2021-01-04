@@ -53,6 +53,9 @@
     index_node_navigation: "Node Navigation"
     highlight_topic: "Sticky Topic"
     statics: "Statistics"
+    statics_users_count: "Users: %{count}"
+    statics_topics_count: "Topics: %{count}"
+    statics_replies_count: "Replies: %{count}"
     comments: "Comments"
     no_search_result: "No search result"
     access_denied: "Access denied, Please sign in and make sure you have proper permission."
@@ -67,10 +70,12 @@
     likes: likes
     favorite: "Favorite"
     unfavorite: "Unfavorite"
+    subscribe: "Subscribe"
     has_deleted: "has deleted"
     auth_with_other_services: "Sign in with other services"
     captcha: 'Captcha'
     search_result: 'Search results'
+    tips: Tips
   reply:
     edit_reply: "Edit Reply"
     delete_reply_success: 'Delete successfully.'
@@ -140,10 +145,22 @@
     need_login_to_reply_html: You need to <a href="/account/sign_in" class="btn btn-sm btn-primary">Sign in</a> before reply, if you don't have an account, please <a href="/account/sign_up" class="btn btn-default btn-sm">Sign up</a> first.
     newbi_info_html: "Newbi users cannot reply between 22:00 - 9:00."
     closed_info_html: Topic has been closed at %{closed_at}, is not accepting any replies.
+    topic_pin_successfully: Topic has pinned successfully.
+    topic_unpin_successfully: Topic has canceled pin.
     form:
       title_placeholder: Type a topic title
       no_team: No team
       markdown_guides: Markdown Guides
+    menu:
+      pin: Pin
+      unpin: Unpin
+      excellent: Excellent
+      ban: Ban
+      unban: Unban
+      close: Close
+      reopen: Reopen
+      edit: Edit
+      delete: Delete
   users:
     bios: "Bio"
     city: "City"

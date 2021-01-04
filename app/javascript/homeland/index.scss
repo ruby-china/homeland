@@ -749,20 +749,37 @@ kbd {
 /* App Style */
 .opts {
   color: var(--opts-text-color);
-  a {
+  a:not(.dropdown-item) {
     display: inline-block;
     border-radius: 5px;
   }
-  a:link,
-  a:visited {
+  a:link:not(.dropdown-item),
+  a:visited:not(.dropdown-item) {
+    min-width: 28px;
+    text-align: center;
     color: var(--opts-link-color);
     line-height: 100%;
     padding: 5px 8px;
     text-decoration: none;
   }
-  a:hover {
+  a:hover:not(.dropdown-item) {
     background: var(--opts-link-hover-background-color);
     text-decoration: none;
+  }
+
+  a.active:not(.dropdown-item) {
+    .fa {
+      color: var(--opts-active-icon-color);
+      &.fa-heart {
+        color: var(--red);
+      }
+    }
+    &.animate {
+      .fa {
+        @extend .animated;
+        @extend .bounceIn;
+      }
+    }
   }
 }
 
@@ -771,12 +788,6 @@ kbd {
   height: 2px !important;
 }
 
-.pull-right.opts {
-  a {
-    margin-left: 5px;
-    margin-right: 0px;
-  }
-}
 .avatar {
   .uface,
   .media-object {
@@ -864,18 +875,6 @@ img.emoji {
   font-family: sans-serif;
   background: #564cf5;
   color: #fff;
-}
-
-.opts a.active {
-  .fa {
-    color: var(--red);
-  }
-  &.animate {
-    .fa {
-      @extend .animated;
-      @extend .bounceIn;
-    }
-  }
 }
 
 .setting-menu {

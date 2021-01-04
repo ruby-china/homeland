@@ -22,9 +22,9 @@
 <div class="card">
   <div class="card-header"><%= t("common.statics")%></div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item">社区会员: <%= User.unscoped.count %> 人</li>
-    <li class="list-group-item">帖子数: <%= Topic.unscoped.count %> 个</li>
-    <li class="list-group-item">回帖数: <%= Reply.unscoped.count %> 条</li>
+    <li class="list-group-item"><%= t("common.statics_users_count", count: User.unscoped.count) %></li>
+    <li class="list-group-item"><%= t("common.statics_topics_count", count: Topic.unscoped.count) %></li>
+    <li class="list-group-item"><%= t("common.statics_replies_count", count: Reply.unscoped.count) %></li>
   </ul>
 </div>
 <% end %>

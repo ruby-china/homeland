@@ -52,6 +52,9 @@
     index_node_navigation: "讨论节点分类导航"
     highlight_topic: "置顶话题"
     statics: "统计信息"
+    statics_users_count: "会员数: %{count} 个"
+    statics_topics_count: "话题数: %{count} 篇"
+    statics_replies_count: "回帖数: %{count} 条"
     comments: "条评论"
     no_search_result: "没有搜索到相关内容。"
     access_denied: "访问被拒绝，你可能没有权限或未登录。"
@@ -68,10 +71,17 @@
     likes: 个赞
     favorite: "收藏"
     unfavorite: "取消收藏"
+    subscribe: "订阅"
     has_deleted: 已删除
     auth_with_other_services: "用其他平台的账号登录"
     captcha: "验证码"
     search_result: "搜索结果"
+    tips: 小帖士
+    pin: 置顶
+    unpin: 取消
+    excellent: 加精华
+    ban: 屏蔽
+    unban: 取消
   reply:
     edit_reply: "修改回帖"
     delete_reply_success: "回帖删除成功."
@@ -197,6 +207,8 @@
     need_login_to_reply_html: 需要 <a href="/account/sign_in" class="btn btn-primary">登陆</a> 后方可回复, 如果你还没有账号请 <a href="/account/sign_up">注册新账号</a>
     newbi_info_html: "当前设置新手用户不能在 22:00 ~ 9:00 发帖。"
     closed_info_html: 此话题已于 %{closed_at} 关闭讨论，不在接受任何回复。
+    topic_pin_successfully: 话题置顶成功。
+    topic_unpin_successfully: 话题取消置顶成功。
     form:
       title_placeholder: 在这里输入标题
       no_team: 不关联组织

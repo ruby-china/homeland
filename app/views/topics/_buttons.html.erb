@@ -4,34 +4,13 @@
     <%= topic_follow_tag(@topic) %>
     <%= topic_favorite_tag(@topic) %>
   <% end %>
-  <% if can? :suggest, @topic %>
-    <% if !@topic.suggested_at.blank? %>
-      <%= link_to raw("<i class='fa fa-pin'></i> 取消"), unsuggest_admin_topic_path(@topic), method: :post, remote: true %>
-    <% else %>
-      <%= link_to raw("<i class='fa fa-pin'></i> 置顶"), suggest_admin_topic_path(@topic), method: :post, remote: true %>
-    <% end %>
-    <% if !@topic.excellent? %>
-      <%= link_to raw("<i class='fa fa-award'></i> 加精"), action_topic_path(@topic.id, type: 'excellent'), title: "设为精华帖" , method: :post, remote: true %>
-    <% end %>
-    <% if !@topic.ban? %>
-      <%= link_to raw("<i class='fa fa-ban'></i> 屏蔽"), ban_topic_path(@topic), remote: true, title: "全站屏蔽此贴" %>
-    <% else %>
-      <%= link_to raw("<i class='fa fa-ban'></i> 取消"), action_topic_path(@topic, type: 'normal'), method: :post, remote: true, title: "取消全站屏蔽此贴" %>
-    <% end %>
-  <% end %>
-  <span class="pull-right opts">
-    <% if can?(:close, @topic) %>
-      <% if !@topic.closed? %>
-        <%= link_to raw("<i class='fa fa-check-circle'></i>"), action_topic_path(@topic, type: 'close'), method: 'post', title: "关闭讨论／问题已解决", remote: true, data: { toggle: 'tooltip' } %>
-      <% else %>
-        <%= link_to raw("<i class='fa fa-undo'></i>"), action_topic_path(@topic, type: 'open'), method: 'post', title: "重新开启话题", remote: true, data: { toggle: 'tooltip' } %>
-      <% end %>
-    <% end %>
-    <% if can?(:edit, @topic) %>
-      <%= link_to "", edit_topic_path(@topic), class: "fa fa-edit", title: "修改本帖", data: { prefetch: false }  %>
-    <% end %>
-    <% if can?(:destroy, @topic) %>
-      <%= link_to "", topic_path(@topic.id), method: :delete, remote: true, 'data-confirm': t("common.confirm_delete"), class: "fa fa-trash", title: "删除本帖" %>
-    <% end %>
-  </span>
+
+  <div class="pull-right">
+    <div class="dropdown">
+      <a href="#" data-toggle="dropdown">
+        <%= icon_tag("ellipsis-v") %>
+      </a>
+      <%= render "menu" %>
+    </div>
+  </div>
 </div>

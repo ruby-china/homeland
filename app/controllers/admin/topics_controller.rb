@@ -60,12 +60,12 @@ module Admin
 
     def suggest
       @topic.update_attribute(:suggested_at, Time.now)
-      redirect_to(@topic, notice: "话题置顶成功")
+      redirect_to(@topic, notice: t("topics.topic_pin_successfully"))
     end
 
     def unsuggest
       @topic.update_attribute(:suggested_at, nil)
-      redirect_to(@topic, notice: "话题已取消置顶")
+      redirect_to(@topic, notice: t("topics.topic_unpin_successfully"))
     end
 
     private

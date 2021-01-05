@@ -11,7 +11,7 @@ describe PhotosController do
     post photos_path, params: { file: file }
     assert_equal 200, response.status
     assert_equal true, response.parsed_body["ok"]
-    assert_match Regexp.new("/uploads/photo/#{Date.today.year}/[a-zA-Z0-9\\-]+.png!large"), response.parsed_body["url"]
+    assert_match Regexp.new("/uploads/photo/#{user.login}/[a-zA-Z0-9\\-]+.png!large"), response.parsed_body["url"]
   end
 
   it "POST /photos failure for blank data" do

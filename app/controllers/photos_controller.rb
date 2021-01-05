@@ -10,7 +10,7 @@ class PhotosController < ApplicationController
     end
 
     # 浮动窗口上传
-    @photo = Photo.new(image: params[:file], user_id: current_user.id)
+    @photo = Photo.new(image: params[:file], user: current_user)
     if @photo.save
       render json: { ok: true, url: @photo.image.url(:large) }
     else

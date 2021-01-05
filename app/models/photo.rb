@@ -5,4 +5,5 @@ class Photo < ApplicationRecord
 
   # 封面图
   mount_uploader :image, PhotoUploader
+  after_commit :remove_image!, on: :destroy
 end

@@ -87,6 +87,8 @@ module Admin
         _clean_replies
       when "topics"
         _clean_topics
+      when "photos"
+        _clean_photos
       end
     end
 
@@ -99,12 +101,19 @@ module Admin
       topics.each(&:touch)
 
       count = Reply.unscoped.where(user_id: @user.id).count
-      redirect_to edit_admin_user_path(@user.id), notice: "最近 10 条删除，成功 #{@user.login} 还有 #{count} 条回帖。"
+      redirect_to edit_admin_user_path(@user.id), notice: "Recent 10 replies has been deleted successfully, now #{@user.login} still #{count} replies"
     end
 
     def _clean_topics
       Topic.unscoped.where(user_id: @user.id).recent.limit(10).delete_all
-      redirect_to edit_admin_user_path(@user.id), notice: "最近 10 条删除成功。"
+      count = Topic.unscoped.where(user_id: @user.id).count
+      redirect_to edit_admin_user_path(@user.id), notice: "Recent 10 topics has been deleted successfully, now #{@user.login} still #{count} topics"
+    end
+
+    def _clean_photos
+      Photo.unscoped.where(user_id: @user.id).recent.limit(10).delete_all
+      count = Photo.unscoped.where(user_id: @user.id).count
+      redirect_to edit_admin_user_path(@user.id), notice: "Recent 10 photos has been deleted successfully, now #{@user.login} still #{count} photos"
     end
   end
 end

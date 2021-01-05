@@ -81,6 +81,13 @@
     search_result: 'Search results'
     tips: Tips
     unknow_error: Unknow error, please try out later.
+    unknow_user: Unknow user
+    block_node: Block node
+    unblock_node: Unblock node
+    block_node_title: Block this node, you will not see topics in this node.
+    block_user: Block
+    unblock_user: Unblock
+    block_user_title: Block this user, you will not see him topics.
   reply:
     edit_reply: "Edit Reply"
     delete_reply_success: 'Delete successfully.'
@@ -169,9 +176,11 @@
     ban_successfully: Topic has banned.
     unban_successfully: Topic has canceled ban.
     total_replies_html: Total <b>%{count}</b> replies
+    total_topics_html: Total <b>%{count}</b> topics
     ban_title: Ban reason
     ban_directly: Ban without reason
     ban_with_reason: "Input the ban reason:"
+    closed_tooltip: Topic has closed
     form:
       title_placeholder: Type a topic title
       no_team: No team

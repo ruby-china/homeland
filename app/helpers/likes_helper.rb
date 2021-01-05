@@ -3,10 +3,10 @@
 module LikesHelper
   # Likeable Helper
   #
-  # 参数
-  # - likeable - Like 的对象
-  # - :cache - 当为 true 时将不会监测用户是否赞过，直接返回未赞过的状态，以用于 cache 的场景
-  # - :class - 增加 a 标签的 css class, 例如 "btn btn-default"
+  # params
+  # - likeable - Like target
+  # - :cache - when true, will not check current user is liked, directly return no like status for cache.
+  # - :class - Add class for link, for example: "btn btn-default"
   def likeable_tag(likeable, opts = {})
     return "" if likeable.blank?
 

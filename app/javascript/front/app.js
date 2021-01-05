@@ -281,12 +281,12 @@ const AppView = Backbone.View.extend({
       $.post(`/${userId}/unblock`);
       btn
         .removeClass("active")
-        .attr("title", "忽略后，社区首页列表将不会显示此用户发布的内容。");
-      span.text("屏蔽");
+        .attr("title", i18n.t("common.block_user_title"));
+      span.text(i18n.t("common.block_user"));
     } else {
       $.post(`/${userId}/block`);
       btn.addClass("active").attr("title", "");
-      span.text("取消屏蔽");
+      span.text(i18n.t("common.unblock_user"));
     }
     return false;
   },
@@ -299,12 +299,12 @@ const AppView = Backbone.View.extend({
       $.post(`/nodes/${nodeId}/unblock`);
       btn
         .removeClass("active")
-        .attr("title", "忽略后，社区首页列表将不会显示这里的内容。");
-      span.text("忽略节点");
+        .attr("title", i18n.t("common.block_node_title"));
+      span.text(i18n.t("common.block_node"));
     } else {
       $.post(`/nodes/${nodeId}/block`);
       btn.addClass("active").attr("title", "");
-      span.text("取消屏蔽");
+      span.text(i18n.t("common.unblock_node"));
     }
     return false;
   },
@@ -343,10 +343,9 @@ const AppView = Backbone.View.extend({
       bufferPx: 50,
       localMode: true,
       loading: {
-        finishedMsg:
-          '<div style="text-align: center; padding: 5px;">已到末尾</div>',
+        finishedMsg: '<div style="text-align: center; padding: 5px;">EOF</div>',
         msgText:
-          '<div style="text-align: center; padding: 5px;">载入中...</div>',
+          '<div style="text-align: center; padding: 5px;">Loading...</div>',
         img:
           "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==",
       },

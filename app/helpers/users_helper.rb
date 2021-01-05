@@ -3,9 +3,9 @@
 require "digest/md5"
 
 module UsersHelper
-  # 生成用户 login 的链接，user 参数可接受 user 对象或者 字符串的 login
+  # Genrate a user name link
   def user_name_tag(user, options = {})
-    return "匿名" if user.blank?
+    return t("common.unknow_user") if user.blank?
 
     user_type = :user
     login     = user
@@ -73,12 +73,11 @@ module UsersHelper
 
     blocked     = current_user.block_node?(node)
     class_names = "btn btn-default button-block-node"
-    icon        = '<i class="fa fa-eye-slash"></i>'
 
     if blocked
-      link_to raw("#{icon} <span>取消屏蔽</span>"), "#", title: "忽略后，社区首页列表将不会显示这里的内容。", "data-id" => node.id, class: "#{class_names} active"
+      link_to icon_tag("eye-slash", label: t("common.unblock_node")), "#", "data-id" => node.id, class: "#{class_names} active"
     else
-      link_to raw("#{icon} <span>忽略节点</span>"), "#", title: "", "data-id" => node.id, class: class_names
+      link_to icon_tag("eye-slash", label: t("common.block_node")), "#", title: t("common.block_node_title"), "data-id" => node.id, class: class_names
     end
   end
 
@@ -92,9 +91,9 @@ module UsersHelper
     icon        = '<i class="fa fa-eye-slash"></i>'
 
     if blocked
-      link_to raw("#{icon} <span>取消屏蔽</span>"), "#", title: "忽略后，社区首页列表将不会显示此用户发布的内容。", "data-id" => user.login, class: "#{class_names} active"
+      link_to icon_tag("eye-slash", label: t("common.unblock_user")), "#", "data-id" => user.login, class: "#{class_names} active"
     else
-      link_to raw("#{icon} <span>屏蔽</span>"), "#", title: "", "data-id" => user.login, class: class_names
+      link_to icon_tag("eye-slash", label: t("common.block_user")), "#", title: t("common.block_user_title"), "data-id" => user.login, class: class_names
     end
   end
 
@@ -112,7 +111,7 @@ module UsersHelper
     if followed
       link_to icon_tag("user", label: t("common.unfollow_user")), "#", "data-id" => login, class: "#{class_names} active"
     else
-      link_to icon_tag("user", label: t("common.follow_user")), "#", title: "", "data-id" => login, class: class_names
+      link_to icon_tag("user", label: t("common.follow_user")), "#", "data-id" => login, class: class_names
     end
   end
 

@@ -29,7 +29,7 @@ class UsersHelperTest < ActionView::TestCase
   end
 
   test "user_name_tag should result empty with nil param" do
-    assert_equal "匿名", user_name_tag(nil)
+    assert_equal "Unknow user", user_name_tag(nil)
   end
 
   test "user_avatar_tag should work if user not exist" do

@@ -4,7 +4,7 @@
       <% if !node.blank? %>
         <div class="title">
           <%= node.name %>
-          <span class="total">共有 <%= node.topics_count %> 个讨论主题</span>
+          <span class="total"><%= t("topics.total_topics_html", count: node.topics_count) %>
           <div class="pull-right">
             <% if node.collapse_summary? %>
               <a class="btn btn-sm btn-default" data-toggle="collapse" href="#node-summary"><i class="fa fa-lightbulb-o"></i> 节点介绍</a>

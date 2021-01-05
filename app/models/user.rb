@@ -17,7 +17,6 @@ class User < ApplicationRecord
                         current_password password password_confirmation _rucaptcha]
 
   has_one :profile, dependent: :destroy
-
   has_many :topics, dependent: :destroy
   has_many :replies, dependent: :destroy
   has_many :authorizations, dependent: :destroy

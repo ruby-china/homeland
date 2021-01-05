@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 class Team < User
+  has_one :profile, foreign_key: :user_id, dependent: :nullify
+  has_many :replies, foreign_key: :user_id
+  has_many :authorizations, foreign_key: :user_id
+  has_many :notifications, foreign_key: :user_id
+  has_one :sso, class_name: "UserSSO", foreign_key: :user_id, dependent: :destroy
+
   has_many :team_users
   has_many :users, through: :team_users
 

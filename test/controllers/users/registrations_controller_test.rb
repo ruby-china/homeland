@@ -53,6 +53,14 @@ class Users::RegistrationsControllerTest < ActionDispatch::IntegrationTest
     assert_signed_in
   end
 
+  it "should not has captcha" do
+    Setting.stubs(:captcha_enable?).returns(false)
+    get new_user_registration_path
+    assert_equal 200, response.status
+    assert_select ".rucaptcha-image", 0
+  end
+
+
   test "Signup with captcha disabled" do
     Setting.stub(:use_recaptcha, "false") do
       get new_user_registration_path

@@ -4,12 +4,8 @@
   "application.js": "/packs-test/js/application-afb598184845268b886d.js",
   "entrypoints": {
     "admin": {
-      "css": [
-        "/packs-test/css/admin-2d80fa33.css"
-      ],
-      "js": [
-        "/packs-test/js/admin-ffcf61e7b3c79ae446a5.js"
-      ]
+      "css": ["/packs-test/css/admin-2d80fa33.css"],
+      "js": ["/packs-test/js/admin-ffcf61e7b3c79ae446a5.js"]
     },
     "application": {
       "js": [
@@ -18,20 +14,12 @@
       ]
     },
     "front": {
-      "css": [
-        "/packs-test/css/front-4459c932.css"
-      ],
-      "js": [
-        "/packs-test/js/front-c53a5cbd9c08e94d7f27.js"
-      ]
+      "css": ["/packs-test/css/front-4459c932.css"],
+      "js": ["/packs-test/js/front-c53a5cbd9c08e94d7f27.js"]
     },
     "turbolinks-app": {
-      "css": [
-        "/packs-test/css/turbolinks-app-653f8ab1.css"
-      ],
-      "js": [
-        "/packs-test/js/turbolinks-app-1e26708b9ea93cb5371f.js"
-      ]
+      "css": ["/packs-test/css/turbolinks-app-653f8ab1.css"],
+      "js": ["/packs-test/js/turbolinks-app-1e26708b9ea93cb5371f.js"]
     }
   },
   "front.css": "/packs-test/css/front-4459c932.css",

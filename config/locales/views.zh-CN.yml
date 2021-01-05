@@ -74,6 +74,7 @@
     subscribe: "订阅"
     follow_user: "关注"
     unfollow_user: "已关注"
+    reward: "打赏作者"
     has_deleted: 已删除
     auth_with_other_services: "用其他平台的账号登录"
     captcha: "验证码"
@@ -211,6 +212,7 @@
     closed_info_html: 此话题已于 %{closed_at} 关闭讨论，不在接受任何回复。
     topic_pin_successfully: 话题置顶成功。
     topic_unpin_successfully: 话题取消置顶成功。
+    total_replies_html: 共收到 <b>%{count}</b> 条回复
     form:
       title_placeholder: 在这里输入标题
       no_team: 不关联组织
@@ -257,6 +259,7 @@
     complete_your_info: "完善你的账户信息"
     binding_via_html: "您必须填写以下表单才能完成绑定 <strong>%{provider}</strong> 的登录方式。"
     binding_has_account_html: 如果你已经有账号，你可以通过 <a href="/account/sign_in">登陆</a> 来绑定账号。
+    reward_tip_html: 如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作！
     menu:
       topics: "话题"
       recent_reply_topics: "最近回帖"
@@ -298,3 +301,13 @@
     password: 密码
     account: 账户设置
     applications: 我的应用
+  notifications:
+    source_deleted: 相关信息已删除
+    mention_title_html: 在 <a href="%{url}">%{title}</a> 提及了你
+    comment_title_html: 在你发布的 <a href="%{url}">%{title}</a> 评论了
+    reply_title_html: 在话题中 %{topic} 回复了你
+    topic_title_html: 创建了话题 %{topic} 
+    follow_you: 关注了你。
+    node_changed_html: 你发布的话题 %{topic} 由于内容原因被管理员移动到了 %{node}  节点，请注意查看节点说明。
+    invite_you_join: 邀请你加入
+    show_invite: 查看邀请

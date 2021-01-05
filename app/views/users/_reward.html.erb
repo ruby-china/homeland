@@ -7,13 +7,15 @@
       <div class="modal-body clearfix">
         <div class="message">
           <div class="user-info"><%= user_avatar_tag(@user, :md, link: false) %></div>
-          <p><i class="fa fa-quote-left pull-left"></i>如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作！<i class="fa fa-quote-right pull-right"></i></p>
+          <p><i class="fa fa-quote-left pull-left"></i><%= t("users.reward_tip_html") %><i class="fa fa-quote-right pull-right"></i></p>
         </div>
-        <% if @user.rewards %>
-          <% @user.rewards.each_with_index do |(field, val), idx| %>
-            <div class="reward-image"><img src="<%= @user.reward_field(field) %>"></div>
+        <div class="reward-images">
+          <% if @user.rewards %>
+            <% @user.rewards.each_with_index do |(field, val), idx| %>
+              <div class="reward-image"><img src="<%= @user.reward_field(field) %>"></div>
+            <% end %>
           <% end %>
-        <% end %>
+        </div>
       </div>
     </div>
   </div>

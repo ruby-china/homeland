@@ -73,6 +73,7 @@
     subscribe: "Subscribe"
     follow_user: "Follow"
     unfollow_user: "Followed"
+    reward: "Reward"
     has_deleted: "has deleted"
     auth_with_other_services: "Sign in with other services"
     captcha: 'Captcha'
@@ -149,6 +150,7 @@
     closed_info_html: Topic has been closed at %{closed_at}, is not accepting any replies.
     topic_pin_successfully: Topic has pinned successfully.
     topic_unpin_successfully: Topic has canceled pin.
+    total_replies_html: Total <b>%{count}</b> replies
     form:
       title_placeholder: Type a topic title
       no_team: No team
@@ -205,6 +207,7 @@
     complete_your_info: "Complete your account information"
     binding_via_html: You must fill out the form below to complete the binding login method of <strong>%{provider}</strong>.
     binding_has_account_html: If you already have an account, you can use <a href="/account/sign_in">Sign in</a> to bind the account.
+    reward_tip_html: If you find my topic useful to you, please feel free to give a reward. Your support will encourage me to continue creating!
     menu:
       topics: "Topics"
       recent_reply_topics: "Recent replies"
@@ -246,3 +249,13 @@
     password: Password
     account: Account setting
     applications: Applications
+  notifications:
+    source_deleted: Notification source has been deleted.
+    mention_title_html: Mentioned you in <a href="%{url}">%{title}</a>
+    comment_title_html: Commented in your <a href="%{url}">%{title}</a>
+    reply_title_html: Replied you in %{topic}
+    topic_title_html: Created topic %{topic}
+    follow_you: has followed you.
+    node_changed_html: Your topic %{topic} has moved into %{node} node.
+    invite_you_join: Invite you to join
+    show_invite: Show invite

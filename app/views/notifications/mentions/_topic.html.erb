@@ -3,10 +3,10 @@
 %>
 
 <% if topic.blank? %>
-  <div class="media-body">相关信息已删除</div>
+  <div class="media-body"><%= t("notifications.source_deleted") %></div>
 <% else %>
   <div class="media-heading">
-    在 <%= topic_title_tag(topic) %> 提及你：
+    <%= t("notifications.mention_title_html", url: main_app.topic_path(topic), title: topic.title) %>
   </div>
   <div class="media-content summary markdown">
     <%= topic.body_html %>

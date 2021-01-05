@@ -30,7 +30,7 @@
       <hr />
       <div class="reply-buttons">
         <div class="total">
-          共收到 <b><%= @topic.replies_count %></b> 条回复
+          <%= t("topics.total_replies_html", count: @topic.replies_count) %>
         </div>
         <%= reward_user_tag(@topic.user) %>
       </div>

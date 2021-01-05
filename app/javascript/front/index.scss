@@ -1009,14 +1009,18 @@ textarea.div-dropzone-focus {
 }
 
 #reward-modal {
-  padding-top: 50px;
+  top: 30px;
   text-align: center;
   .modal-dialog {
     max-width: 750px;
     min-height: 300px;
   }
+  .reward-images {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+  }
   .reward-image {
-    display: inline-block;
     padding: 0px 20px 10px 20px;
   }
   .message {

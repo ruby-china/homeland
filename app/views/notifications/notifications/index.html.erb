@@ -1,11 +1,13 @@
 <div class="notifications card card-lg">
   <div class="card-body">
-    <div class="card-title hide-ios clearfix">
-      <%= t('notifications.all_notifications') %>
-      <span class="counter"><%= @notifications.total_count %></span>
-      <span class="actions">
+    <div class="card-title hide-ios flex jcsb">
+      <div>
+        <%= t('notifications.all_notifications') %>
+        <span class="counter"><%= @notifications.total_count %></span>
+      </div>
+      <div class="actions">
         <%= link_to icon_tag("trash", label: t('notifications.clean_all')), notifications.clean_notifications_path, class: "text-danger", id: 'btn-remove-all', method: 'delete', remote: true %>
-      </span>
+      </div>
     </div>
     <% if @notifications.blank? %>
       <div class="notification-group">
@@ -22,6 +24,6 @@
     <script type="text/javascript">
       $.post("<%= notifications.read_notifications_path %>", { ids: <%= j @unread_ids.as_json %> })
     </script>
-    <%= paginate @notifications %>
+    <%= paginate @notifications  %>
   </div>
 </div>

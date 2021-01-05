@@ -120,6 +120,6 @@ module UsersHelper
     return "" if user.blank?
     return "" unless user.reward_enabled?
     opts[:class] ||= "btn btn-success"
-    link_to icon_tag("qrcode", label: "打赏支持"), main_app.reward_user_path(user), remote: true, class: opts[:class]
+    link_to icon_tag("qrcode", label: t("common.reward")), main_app.reward_user_path(user), remote: true, class: opts[:class]
   end
 end

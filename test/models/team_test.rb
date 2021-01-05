@@ -16,6 +16,12 @@ class TeamTest < ActiveSupport::TestCase
     assert_equal true, team.valid?
   end
 
+  test "destroy" do
+    team = create(:team)
+    team.destroy
+    assert_nil Team.find_by(id: team.id)
+  end
+
   test ".owner? / .member?" do
     team = create(:team)
     team_owner = create(:team_owner, team: team)

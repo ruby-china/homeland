@@ -18,4 +18,8 @@ class ReplyToComponent < ApplicationComponent
   def user
     reply_to&.user
   end
+
+  def render?
+    !!@reply
+  end
 end

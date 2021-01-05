@@ -11,5 +11,7 @@ class ProfileCardComponentTest < ViewComponent::TestCase
       assert_equal user.name, doc.css(".user-profile-card .fullname").text.strip
       assert_equal "@#{user.login}", doc.css(".user-profile-card .login").text.strip
     end
+
+    assert_equal "", render_inline(ProfileCardComponent.new(user: nil)).to_html
   end
 end

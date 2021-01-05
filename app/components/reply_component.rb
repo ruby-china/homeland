@@ -12,6 +12,10 @@ class ReplyComponent < ApplicationComponent
     @reply_counter = reply_counter
   end
 
+  def render?
+    @reply && @topic
+  end
+
   def show_deleted?
     reply.deleted? && !@show_raw
   end

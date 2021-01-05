@@ -20,4 +20,8 @@ class ReplyToComponentTest < ViewComponent::TestCase
     doc = render_inline(component)
     assert_equal 1, doc.css(".markdown").length
   end
+
+  test "nil" do
+    assert_equal "", render_inline(ReplyToComponent.new(reply: nil, topic: @topic)).to_html
+  end
 end

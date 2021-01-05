@@ -11,4 +11,8 @@ class TopicComponent < ApplicationComponent
     @topic = topic
     @type = type
   end
+
+  def render?
+    !!@topic
+  end
 end

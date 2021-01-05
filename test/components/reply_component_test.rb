@@ -10,4 +10,9 @@ class ReplyComponentTest < ViewComponent::TestCase
     doc = render_inline(component)
     assert_equal 1, doc.css("#reply-#{reply.id}").length
   end
+
+  test "nil" do
+    assert_equal "", render_inline(ReplyComponent.new(reply: nil, topic: create(:topic))).to_html
+    assert_equal "", render_inline(ReplyComponent.new(reply: create(:reply), topic: nil)).to_html
+  end
 end

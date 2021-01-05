@@ -8,4 +8,8 @@ class ProfileCardComponent < ApplicationComponent
   def initialize(user:)
     @user = user
   end
+
+  def render?
+    !!user
+  end
 end

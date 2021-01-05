@@ -5,12 +5,22 @@ module Admin
     before_action :set_photo, only: %i[show destroy]
 
     def index
-      @photos = Photo.recent.includes(:user).page(params[:page])
+      @photos = Photo.recent.includes(:user)
+      if params[:login].present?
+        u = User.find_by_login(params[:login])
+        @photos = @photos.where("user_id = ?", u&.id)
+      end
+      @photos = @photos.page(params[:page])
     end
 
     def destroy
       @photo.destroy
-      redirect_to(admin_photos_url)
+
+
+      respond_to do |format|
+        format.js
+        format.html { redirect_to(admin_photos_url) }
+      end
     end
 
     private

@@ -1,0 +1,36 @@
+<tr id="<%= dom_id(user) %>" class="user <%= "ban" if user.deleted? %>">
+  <td width="100"><%= user.id %></td>
+  <td width="32"><%= user_avatar_tag(user, :md) %></td>
+  <td>
+    <div class="flex aic jcsb">
+      <div class="username">
+        <%= link_to user.fullname, user_path(user), target: "_blank" %> 
+      </div>
+
+      <div class="flex aic">
+        <%= user_level_tag(user) unless user.member? %>
+        <div class="time ml-2">
+          <%= icon_tag("clock") %> <%= user.created_at&.to_date %>
+        </div>
+      </div>
+    </div>
+    <% if user.bio.present? %>
+    <div class="description mt-2">
+      Bio: <%= truncate user.bio, length: 300 %>
+    </div>
+    <% end %>
+    <% if user.tagline.present? %>
+    <div class="description mt-2">
+      Tagline: <%= truncate user.tagline %>
+    </div>
+    <% end %>
+  </td>
+  <td>
+    <div class="btn-group">
+      <%= link_to icon_tag("edit"), edit_admin_user_path(user.id), class: "btn btn-default btn-sm" %>
+      <% if !user.deleted? %>
+        <%= link_to icon_tag("ban"), admin_user_path(user.id), class: "btn btn-default btn-sm", method: :delete, remote: true, data: { confirm: "Are you sure to ban this user?" } %>
+      <% end %>
+    </div>
+  </td>
+</tr>

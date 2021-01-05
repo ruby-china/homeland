@@ -66,24 +66,7 @@ class UserTest < ActiveSupport::TestCase
     user.read_topic(topic)
     assert_equal true, user.topic_read?(topic)
   end
-
-  test "#read_topic? user can soft_delete" do
-    topic = create(:topic)
-
-    user_for_delete1 = create(:user)
-    user_for_delete2 = create(:user)
-
-    User.any_instance.stubs(:update_index).returns(true)
-    Rails.cache.write("user:#{user.id}:topic_read:#{topic.id}", nil)
-    user_for_delete1.soft_delete
-    user_for_delete1.reload
-    assert_equal "deleted", user_for_delete1.state
-    user_for_delete2.soft_delete
-    user_for_delete1.reload
-    assert_equal "deleted", user_for_delete1.state
-    assert_equal [], user_for_delete1.authorizations
-  end
-
+  
   test "#filter_readed_topics" do
     topics = create_list(:topic, 3)
 

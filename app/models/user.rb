@@ -6,7 +6,7 @@ class User < ApplicationRecord
   include Searchable
   include User::Roles, User::Blockable, User::Likeable, User::Followable, User::TopicActions,
           User::GitHubRepository, User::ProfileFields, User::RewardFields, User::Deviseable,
-          User::Avatar
+          User::Avatar, User::SoftDelete
 
   second_level_cache version: 4, expires_in: 2.weeks
 
@@ -128,12 +128,6 @@ class User < ApplicationRecord
   def fullname
     return login if name.blank?
     "#{login} (#{name})"
-  end
-
-  # 软删除
-  def soft_delete
-    self.state = "deleted"
-    save(validate: false)
   end
 
   # @example.com 的可以修改邮件地址

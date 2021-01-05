@@ -8,9 +8,15 @@ class User
 
     included do
       mount_uploader :avatar, AvatarUploader
+      after_commit :remove_avatar!, on: :destroy
 
       define_method :avatar? do
         self[:avatar].present?
+      end
+
+      set_callback :soft_delete, :before do |u|
+        u.remove_avatar!
+        u.avatar = nil
       end
     end
 

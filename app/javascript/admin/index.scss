@@ -109,6 +109,17 @@ table {
   .time {
     color: #aaa;
   }
+  .info {
+    color: #aaa;
+
+    .badge {
+      color: var(--gray);
+      border-radius: 12px;
+      border: 1px solid var(--btn-default-border-color);
+      font-size: 12px;
+      font-weight: normal;
+    }
+  }
 }
 
 table tr.deleted td {

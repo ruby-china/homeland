@@ -27,6 +27,6 @@
     <td></td>
   </tr>
 
-  <%= render @users %>
+  <%= render collection: @users, partial: "user", as: :user %>
 </table>
 <%= paginate @users %>

@@ -191,3 +191,32 @@ table tr td a.fa {
     }
   }
 }
+
+.photos {
+  display: flex;
+  flex-wrap: wrap;
+  columns: 4;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .card {
+    border: 1px solid #e0e0e0;
+    width: 185px;
+    margin-bottom: 15px;
+    overflow: hidden;
+
+    .card-img-top {
+      img {
+        width: 185px;
+        height: 180px;
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+    }
+
+    .card-body {
+      padding: 12px;
+    }
+  }
+}

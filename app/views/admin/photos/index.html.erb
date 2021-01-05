@@ -2,24 +2,24 @@
   <span class="current"><%= t('admin.menu.photos') %></span>
 <% end %>
 
-<table class="table table-bordered table-striped table-condensed">
-  <tr>
-    <td>#</td>
-    <td>预览</td>
-    <td>上传者</td>
-    <td></td>
-  </tr>
+<div class="toolbar">
+  <form class="form-inline" action="<%= admin_photos_path %>">
+    <div class="form-group mr-sm-2">
+      <input type="text" name="login" class="form-control" value="<%= params[:login] %>" placeholder="Username" />
+    </div>
+    <button class="btn btn-default">Search</button>
+  </form>
+</div>
 
-<% @photos.each do |photo| %>
-  <tr>
-    <td><%= photo.id %></td>
-    <td><%= link_to image_tag(photo.image.url(:md), style: "width: 150px"), photo.image.url, target: "_blank" if !photo[:image].blank? %></td>
-    <td><%= photo.user.login if !photo.user.blank? %></td>
-    <td><%= link_to '', admin_photo_path(photo), 'data-confirm' => 'Are you sure?', method: :delete, class: "fa fa-trash" %></td>
-  </tr>
-<% end %>
-</table>
+<div class="photos">
+  <% @photos.each do |photo| %>
+    <div class="card" id="<%= dom_id(photo) %>">
+      <div class="card-img-top"><%= link_to image_tag(photo.image.url(:md)), photo.image.url, target: "_blank" if !photo[:image].blank? %></div>
+      <div class="card-body">
+        <div class="card-text mb-2"><%= photo.user&.login %></div>
+        <%= link_to icon_tag("trash", label: "Delete"), admin_photo_path(photo), 'data-confirm' => 'Are you sure?', method: :delete, remote: true, class: "btn btn-default btn-sm btn-block" %>
+      </div>
+    </div>
+  <% end %>
+</div>
 <%= paginate @photos %>
-<br />
-
-<%= link_to 'New Photo', new_admin_photo_path %>

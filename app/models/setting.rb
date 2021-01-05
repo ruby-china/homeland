@@ -59,6 +59,7 @@ class Setting < RailsSettings::Base
     topic_create_hour_limit_count
     allow_change_login
     sign_up_daily_limit
+    captcha_enable
     use_recaptcha
     recaptcha_key
     recaptcha_secret
@@ -175,6 +176,7 @@ class Setting < RailsSettings::Base
   field :editor_languages, default: %w[rb go js py java rs php css html yml json xml], type: :array, separator: /[\s,]+/
 
   # = ReCaptcha
+  field :captcha_enable, default: false, type: :boolean
   field :use_recaptcha, default: false, type: :boolean
   # default key for development env
   field :recaptcha_key, default: "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"

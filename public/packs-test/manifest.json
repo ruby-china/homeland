@@ -1,11 +1,11 @@
 {
-  "admin.css": "/packs-test/css/admin-e9f4bbf8.css",
+  "admin.css": "/packs-test/css/admin-af13b44e.css",
   "admin.js": "/packs-test/js/admin-ffcf61e7b3c79ae446a5.js",
   "application.js": "/packs-test/js/application-21d15317dc24791b3259.js",
   "entrypoints": {
     "admin": {
       "css": [
-        "/packs-test/css/admin-e9f4bbf8.css"
+        "/packs-test/css/admin-af13b44e.css"
       ],
       "js": [
         "/packs-test/js/admin-ffcf61e7b3c79ae446a5.js"

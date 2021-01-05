@@ -45,6 +45,7 @@ class ActiveSupport::TestCase
   # parallelize(workers: :number_of_processors, with: :threads)
 
   setup do
+    Setting.stubs(:captcha_enable?).returns(true)
     Setting.stubs(:topic_create_limit_interval).returns("")
     Setting.stubs(:topic_create_hour_limit_count).returns("")
   end

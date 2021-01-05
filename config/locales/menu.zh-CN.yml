@@ -134,6 +134,7 @@
     topic_create_hour_limit_count: "1 小时内，创建话题的数量限制（单位：篇）"
     sign_up_daily_limit: "单日每个 IP 的注册用户数量限制，(0 不限制)"
     use_recaptcha: "启用 Google reCaptcha 开启更强的验证码保护"
+    captcha_enable: "启用验证码"
     recaptcha_key: "Google reCaptcha 网站密钥"
     recaptcha_secret: "Google reCaptcha 密钥"
     allow_change_login: "允许用户修改用户名"

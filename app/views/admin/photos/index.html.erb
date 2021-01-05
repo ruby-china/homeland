@@ -16,7 +16,11 @@
     <div class="card" id="<%= dom_id(photo) %>">
       <div class="card-img-top"><%= link_to image_tag(photo.image.url(:md)), photo.image.url, target: "_blank" if !photo[:image].blank? %></div>
       <div class="card-body">
-        <div class="card-text mb-2"><%= link_to photo.user&.login, edit_admin_user_path(photo.user_id), target: "_blank" %></div>
+        <div class="card-text mb-2">
+          <% if photo.user %>
+            <%= link_to photo.user&.login, edit_admin_user_path(photo.user_id), target: "_blank" %>
+          <% end %>
+        </div>
         <%= link_to icon_tag("trash", label: "Delete"), admin_photo_path(photo), 'data-confirm' => 'Are you sure?', method: :delete, remote: true, class: "btn btn-default btn-sm btn-block" %>
       </div>
     </div>

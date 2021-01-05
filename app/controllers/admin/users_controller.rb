@@ -76,7 +76,7 @@ module Admin
 
       respond_to do |format|
         format.js
-        format.html { redirect_to(admin_users_url) }
+        format.html { redirect_to(edit_admin_user_url(@user.id)) }
       end
     end
 

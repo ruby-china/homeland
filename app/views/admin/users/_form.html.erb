@@ -129,7 +129,7 @@
     </div>
     <div class="col-sm-6">
       <% if !@user.deleted? %>
-        <%= link_to 'Ban', admin_user_path(@user.id), method: :delete, remote: true, data: { confirm: "Are you sure to ban this user?" }, class: "btn btn-danger"  %>
+        <%= link_to 'Ban', admin_user_path(@user.id), method: :delete, data: { confirm: "Are you sure to ban this user?" }, class: "btn btn-danger"  %>
       <% end %>
     </div>
   </div>

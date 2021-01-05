@@ -252,7 +252,7 @@ const AppView = Backbone.View.extend({
         success(res) {
           if (res.code === 0) {
             btn.removeClass("active");
-            span.text("关注");
+            span.text(i18n.t("common.follow_user"));
             return followerCounter.text(res.data.followers_count);
           }
         },
@@ -264,7 +264,7 @@ const AppView = Backbone.View.extend({
         success(res) {
           if (res.code === 0) {
             btn.addClass("active").attr("title", "");
-            span.text("已关注");
+            span.text(i18n.t("common.unfollow_user"));
             return followerCounter.text(res.data.followers_count);
           }
         },

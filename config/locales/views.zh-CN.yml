@@ -72,6 +72,8 @@
     favorite: "收藏"
     unfavorite: "取消收藏"
     subscribe: "订阅"
+    follow_user: "关注"
+    unfollow_user: "已关注"
     has_deleted: 已删除
     auth_with_other_services: "用其他平台的账号登录"
     captcha: "验证码"

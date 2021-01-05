@@ -110,9 +110,9 @@ module UsersHelper
     login       = user.login
 
     if followed
-      link_to raw("#{icon} <span>已关注</span>"), "#", "data-id" => login, class: "#{class_names} active"
+      link_to icon_tag("user", label: t("common.unfollow_user")), "#", "data-id" => login, class: "#{class_names} active"
     else
-      link_to raw("#{icon} <span>关注</span>"), "#", title: "", "data-id" => login, class: class_names
+      link_to icon_tag("user", label: t("common.follow_user")), "#", title: "", "data-id" => login, class: class_names
     end
   end
 

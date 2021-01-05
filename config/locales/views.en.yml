@@ -71,6 +71,8 @@
     favorite: "Favorite"
     unfavorite: "Unfavorite"
     subscribe: "Subscribe"
+    follow_user: "Follow"
+    unfollow_user: "Followed"
     has_deleted: "has deleted"
     auth_with_other_services: "Sign in with other services"
     captcha: 'Captcha'

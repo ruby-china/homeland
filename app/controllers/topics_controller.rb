@@ -52,15 +52,12 @@ class TopicsController < ApplicationController
     @replies = Reply.unscoped.where(topic_id: @topic.id).order(:id).all
     @user_like_reply_ids = current_user&.like_reply_ids_by_replies(@replies) || []
 
-    # 是否关注过
     @has_followed = current_user&.follow_topic?(@topic)
-    # 是否收藏
     @has_favorited = current_user&.favorite_topic?(@topic)
   end
 
   def read
     @topic.hits.incr(1)
-    # 通知处理
     current_user&.read_topic(@topic)
     render plain: "1"
   end

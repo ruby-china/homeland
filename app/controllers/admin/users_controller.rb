@@ -111,7 +111,7 @@ module Admin
     end
 
     def _clean_photos
-      Photo.unscoped.where(user_id: @user.id).recent.limit(10).delete_all
+      Photo.unscoped.where(user_id: @user.id).recent.limit(10).destroy_all
       count = Photo.unscoped.where(user_id: @user.id).count
       redirect_to edit_admin_user_path(@user.id), notice: "Recent 10 photos has been deleted successfully, now #{@user.login} still #{count} photos"
     end

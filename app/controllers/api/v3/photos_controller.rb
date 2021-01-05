@@ -16,9 +16,7 @@ module Api
       def create
         requires! :file
 
-        @photo = Photo.new
-        @photo.image   = params[:file]
-        @photo.user_id = current_user.id
+        @photo = Photo.new(image: params[:file], user: current_user)
         @photo.save!
       end
     end

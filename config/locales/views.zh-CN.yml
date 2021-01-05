@@ -219,6 +219,12 @@
     closed_info_html: 此话题已于 %{closed_at} 关闭讨论，不在接受任何回复。
     topic_pin_successfully: 话题置顶成功。
     topic_unpin_successfully: 话题取消置顶成功。
+    excellent_successfully: 话题已设置为精华贴。
+    close_successfully: 话题已关闭，将不再接受任何新的回复。
+    reopen_successfully: 话题讨论重新开启成功。
+    normal_successfully: 话题恢复到正常状态。
+    ban_successfully: 屏蔽话题成功。
+    unban_successfully: 话题已取消了屏蔽。
     total_replies_html: 共收到 <b>%{count}</b> 条回复
     ban_title: 屏蔽原因
     ban_directly: 直接屏蔽

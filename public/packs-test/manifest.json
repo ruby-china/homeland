@@ -9,8 +9,8 @@
     },
     "application": {
       "js": [
-        "/packs-test/js/vendors-0afc9b9df4177732e4b5.chunk.js",
-        "/packs-test/js/application-21d15317dc24791b3259.js"
+        "/packs-test/js/vendors-ec56b41034e7611e207b.chunk.js",
+        "/packs-test/js/application-d268e085397369f71c68.js"
       ]
     },
     "front": {
@@ -18,7 +18,7 @@
       "js": ["/packs-test/js/front-c53a5cbd9c08e94d7f27.js"]
     },
     "turbolinks-app": {
-      "css": ["/packs-test/css/turbolinks-app-b1ce5136.css"],
+      "css": ["/packs-test/css/turbolinks-app-3962fa61.css"],
       "js": ["/packs-test/js/turbolinks-app-59e4c994eb7334914c46.js"]
     }
   },

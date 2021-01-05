@@ -93,11 +93,10 @@ class TopicsController < ApplicationController
 
   def update
     if can?(:change_node, @topic)
-      # 锁定接点的时候，只有管理员可以修改节点
       @topic.node_id = topic_params[:node_id]
 
       if @topic.node_id_changed? && can?(:lock_node, @topic)
-        # 当管理员修改节点的时候，锁定节点
+        # Lock node when admin update
         @topic.lock_node = true
       end
     end
@@ -142,20 +141,20 @@ class TopicsController < ApplicationController
     case params[:type]
     when "excellent"
       @topic.excellent!
-      redirect_to @topic, notice: "加精成功。"
+      redirect_to @topic, notice: t("topics.excellent_successfully")
     when "normal"
       @topic.normal!
-      redirect_to @topic, notice: "话题已恢复到普通评级。"
+      redirect_to @topic, notice: t("topics.normal_successfully")
     when "ban"
       params[:reason_text] ||= params[:reason] || ""
       @topic.ban!(reason: params[:reason_text].strip)
-      redirect_to @topic, notice: "话题已放进屏蔽栏目。"
+      redirect_to @topic, notice: t("topics.ban_successfully")
     when "close"
       @topic.close!
-      redirect_to @topic, notice: "话题已关闭，将不再接受任何新的回复。"
+      redirect_to @topic, notice: t("topics.close_successfully")
     when "open"
       @topic.open!
-      redirect_to @topic, notice: "话题已重启开启。"
+      redirect_to @topic, notice: t("topics.reopen_successfully")
     end
   end
 

@@ -162,6 +162,12 @@
     closed_info_html: Topic has been closed at %{closed_at}, is not accepting any replies.
     topic_pin_successfully: Topic has pinned successfully.
     topic_unpin_successfully: Topic has canceled pin.
+    excellent_successfully: Topic has marked as excellent.
+    normal_successfully: Topic reset into normal state.
+    close_successfully: Topic has closed successfully.
+    reopen_successfully: Topic has reopen successfully.
+    ban_successfully: Topic has banned.
+    unban_successfully: Topic has canceled ban.
     total_replies_html: Total <b>%{count}</b> replies
     ban_title: Ban reason
     ban_directly: Ban without reason

@@ -55,7 +55,7 @@ describe Api::V3::UsersController do
           assert_equal val, json["user"][field]
         end
       end
-      assert_equal "<p>hello world</p>", json["user"]["bio"]
+      assert_equal "", json["user"]["bio"]
       assert_has_keys json["meta"], "blocked", "followed"
     end
 

@@ -1,18 +1,15 @@
+ <% if @user.contacts.present? %>
 <div class="card userinfo">
   <div class="card-body">
-    <div class="user-bio">
-      <%= auto_link(simple_format(@user.bio)) %>
-    </div>
-    <% if @user.contacts.present? %>
       <div class="user-profile-fields">
         <% @user.contacts.each_key do |field| %>
           <% next if @user.profile_field(field).blank? %>
           <div class="field">
             <label><%= Profile.contact_field_label(field) %></label>
-            <span class="value"><%= auto_link @user.full_profile_field(field), link: :urls, html: { target: '_blank' } %></span>
+            <span class="value"><%= @user.full_profile_field(field) %></span>
           </div>
         <% end %>
       </div>
-    <% end %>
   </div>
 </div>
+<% end %>

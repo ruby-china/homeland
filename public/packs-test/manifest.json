@@ -1,11 +1,11 @@
 {
-  "admin.css": "/packs-test/css/admin-6162a439.css",
+  "admin.css": "/packs-test/css/admin-e9f4bbf8.css",
   "admin.js": "/packs-test/js/admin-ffcf61e7b3c79ae446a5.js",
-  "application.js": "/packs-test/js/application-ac1ab7b9e66fbb31940a.js",
+  "application.js": "/packs-test/js/application-21d15317dc24791b3259.js",
   "entrypoints": {
     "admin": {
       "css": [
-        "/packs-test/css/admin-6162a439.css"
+        "/packs-test/css/admin-e9f4bbf8.css"
       ],
       "js": [
         "/packs-test/js/admin-ffcf61e7b3c79ae446a5.js"
@@ -14,7 +14,7 @@
     "application": {
       "js": [
         "/packs-test/js/vendors-0afc9b9df4177732e4b5.chunk.js",
-        "/packs-test/js/application-ac1ab7b9e66fbb31940a.js"
+        "/packs-test/js/application-21d15317dc24791b3259.js"
       ]
     },
     "front": {

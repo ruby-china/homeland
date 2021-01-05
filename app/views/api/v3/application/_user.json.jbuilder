@@ -41,12 +41,13 @@ if user
             :topics_count, :replies_count,
             :following_count, :followers_count, :favorites_count,
             :level, :level_name)
-      json.bio markdown(user.bio)
       if owner?(user) || user.email_public
         json.email user.email
       else
         json.email ""
       end
+      # [Deprecated] bio fields not support in Homeland 3.9+, API keep return empty
+      json.bio ""
     end
     json.partial! "abilities", object: user
   end

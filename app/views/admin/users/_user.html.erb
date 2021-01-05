@@ -15,15 +15,23 @@
       </div>
     </div>
     <% if user.bio.present? %>
-    <div class="description mt-2">
-      Bio: <%= truncate user.bio, length: 300 %>
+    <div class="description mt-2" title="Bio">
+      <%= truncate user.bio, length: 300 %>
     </div>
     <% end %>
     <% if user.tagline.present? %>
-    <div class="description mt-2">
-      Tagline: <%= truncate user.tagline %>
+    <div class="description mt-2" title="Tagline">
+      <%= truncate user.tagline %>
     </div>
     <% end %>
+    <div class="info mt-2">
+      <% if user.topics_count > 0 %>
+        <span class="badge"><%= user.topics_count %> Topics</span>
+      <% end %>
+      <% if user.replies_count > 0 %>
+        <span class="badge"><%= user.replies_count %> Replies</span>
+      <% end %>
+    </div>
   </td>
   <td>
     <div class="btn-group">

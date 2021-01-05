@@ -3,6 +3,8 @@
 require "test_helper"
 
 class User::AvatarTest < ActiveSupport::TestCase
+  include ActiveJob::TestHelper
+
   test "letter_avatar_char" do
     u = User.new(login: "hello")
     assert_equal "h", u.letter_avatar_char
@@ -44,5 +46,37 @@ class User::AvatarTest < ActiveSupport::TestCase
 
     user.avatar = nil
     assert_includes user.large_avatar_url, "/system/letter_avatars/h.png"
+  end
+
+  test "upload and soft_delete" do
+    file = fixture_file_upload("test.png")
+    user = create(:user)
+    user.avatar = file
+    user.save!
+    assert_match Regexp.new("/uploads/user/avatar/#{user.id}/[a-zA-Z0-9\\-]+.png"), user.avatar.url
+    image_file_path = Rails.root.join("public/uploads/user/#{user[:avatar]}")
+    assert File.exists?(image_file_path), "#{image_file_path} not exist"
+
+    perform_enqueued_jobs do
+      user.soft_delete
+    end
+    user.reload
+    assert_nil user[:avatar]
+    refute File.exists?(image_file_path), "#{image_file_path} still exist"
+  end
+
+  test "upload and destroy" do
+    file = fixture_file_upload("test.png")
+    user = create(:user)
+    user.avatar = file
+    user.save!
+    assert_match Regexp.new("/uploads/user/avatar/#{user.id}/[a-zA-Z0-9\\-]+.png"), user.avatar.url
+    image_file_path = Rails.root.join("public/uploads/user/#{user[:avatar]}")
+    assert File.exists?(image_file_path), "#{image_file_path} not exist"
+
+    perform_enqueued_jobs do
+      user.destroy
+    end
+    refute File.exists?(image_file_path), "#{image_file_path} still exist"
   end
 end

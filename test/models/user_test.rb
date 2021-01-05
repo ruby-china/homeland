@@ -66,7 +66,7 @@ class UserTest < ActiveSupport::TestCase
     user.read_topic(topic)
     assert_equal true, user.topic_read?(topic)
   end
-  
+
   test "#filter_readed_topics" do
     topics = create_list(:topic, 3)
 

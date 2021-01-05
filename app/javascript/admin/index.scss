@@ -94,17 +94,36 @@ pre {
   }
 }
 
+table {
+  tr.user {
+    .username {
+      font-size: 14px;
+      a {
+        color: #555;
+      }
+    }
+  }
+  .description {
+    color: #999;
+  }
+  .time {
+    color: #aaa;
+  }
+}
+
 table tr.deleted td {
   text-decoration: line-through;
   color: #999 !important;
-  a {
+  a,
+  .description {
     color: #999 !important;
   }
 }
 table tr.ban td {
   text-decoration: line-through;
   color: #ccc !important;
-  a {
+  a,
+  .description {
     color: #ccc !important;
   }
 }

@@ -74,7 +74,10 @@ module Admin
         @user.destroy
       end
 
-      redirect_to(admin_users_url)
+      respond_to do |format|
+        format.js
+        format.html { redirect_to(admin_users_url) }
+      end
     end
 
     def clean

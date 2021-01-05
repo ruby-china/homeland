@@ -10,36 +10,23 @@
       <input type="text" name="q" class="form-control" value="<%= params[:q] %>" placeholder="搜索" />
     </div>
     <div class="form-group mr-sm-2">
-      <%= select_tag(:type, options_for_select([['全部类别',''], ['组织','Team']], params[:type]), class: 'form-control') %>
+      <%= select_tag(:type, options_for_select([['All',''], ['Team','Team']], params[:type]), class: 'form-control') %>
     </div>
     <div class="form-group mr-sm-2">
-      <%= select_tag(:state, options_for_select(User.state_options, params[:state]), class: 'form-control', include_blank: "所有等级") %>
+      <%= select_tag(:state, options_for_select(User.state_options, params[:state]), class: 'form-control', include_blank: "All state") %>
     </div>
-    <button class="btn btn-default">搜索</button>
+    <button class="btn btn-default">Search</button>
   </form>
 </div>
 
 <table class="table table-bordered table-striped table-condensed">
   <tr class="head">
     <td class="first">#</td>
-    <td>头像</td>
-    <td>账号</td>
-    <td>注册时间</td>
-    <td>操作</td>
+    <td>Avatar</td>
+    <td>User Info</td>
+    <td></td>
   </tr>
 
-<% @users.each do |user| %>
-  <tr>
-    <td class="first"><%= user.id %></td>
-    <td width="32"><%= user_avatar_tag(user, :sm) %></td>
-    <td>
-      <%= link_to user.fullname, user_path(user), target: "_blank" %> <%= user_level_tag(user) unless user.member? %>
-    </td>
-    <td width="120"><%= user.created_at&.to_date %></td>
-    <td>
-      <%= link_to '', edit_admin_user_path(user.id), class: "fa fa-edit" %>
-    </td>
-  </tr>
-<% end %>
+  <%= render @users %>
 </table>
 <%= paginate @users %>

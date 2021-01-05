@@ -5,7 +5,7 @@ class PhotoUploader < BaseUploader
   def filename
     if super.present?
       @name ||= SecureRandom.uuid
-      "#{Time.now.year}/#{@name}.#{file.extension.downcase}"
+      "#{model.user&.login || Time.now.year}/#{@name}.#{file.extension.downcase}"
     end
   end
 end

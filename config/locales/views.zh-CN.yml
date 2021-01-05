@@ -6,6 +6,8 @@
     edit: "修改"
     create: "新建"
     avatar: "头像"
+    ok: "确定"
+    cancel: "取消"
     save: "保存"
     saving: "正在保存"
     submitting: "正在提交"
@@ -21,7 +23,6 @@
     logining: "正在登录"
     logout: "退出"
     remember_me: "记住登录状态（60 天）"
-    cancel: "取消"
     created_at: "发布于 %{time}"
     until: "截止"
     last_by: "最后由"
@@ -80,11 +81,7 @@
     captcha: "验证码"
     search_result: "搜索结果"
     tips: 小帖士
-    pin: 置顶
-    unpin: 取消
-    excellent: 加精华
-    ban: 屏蔽
-    unban: 取消
+    unknow_error: 请求异常，请稍后重试。
   reply:
     edit_reply: "修改回帖"
     delete_reply_success: "回帖删除成功."
@@ -187,6 +184,16 @@
     tips_for_create_topic: "发帖说明"
     subscribe_with_rss: "订阅 %{name} 社区新话题"
     submit_reply: "提交回复"
+    reply_to1: 对
+    reply_to2: 回复
+    in: 在
+    mentioned_this_topic: 提及了此话题。
+    excellent_topic: 将本帖设为了精华贴。
+    unexcellent_topic: 取消了精华贴。
+    closed_topic: 关闭了讨论。
+    reopen_topic: 重新开启了讨论。
+    banned_topic_with_reason_html: '屏蔽了此话题: <span class="ban-reason">%{reason}</span>'
+    banned_topic: 内容不符合版规屏蔽此话题。
     topic_list:
       recent: "新帖"
       last_reply: "最新回复"
@@ -213,10 +220,18 @@
     topic_pin_successfully: 话题置顶成功。
     topic_unpin_successfully: 话题取消置顶成功。
     total_replies_html: 共收到 <b>%{count}</b> 条回复
+    ban_title: 屏蔽原因
+    ban_directly: 直接屏蔽
+    ban_with_reason: 输入屏蔽原因：
     form:
       title_placeholder: 在这里输入标题
       no_team: 不关联组织
       markdown_guides: 排版说明
+  replies:
+    edit_reply: 修改回帖
+    created_successfully: 回帖提交成功。
+    updated_successfully: 回帖修改成功。
+    deleted_successfully: 回帖删除成功。
   users:
     bios: "个人介绍"
     city: "城市"

@@ -13,7 +13,7 @@ class RepliesController < ApplicationController
 
     if @reply.save
       current_user.read_topic(@topic)
-      @msg = t("topics.reply_success")
+      @msg = t("replies.created_successfully")
     else
       @msg = @reply.errors.full_messages.join("<br />")
     end
@@ -49,9 +49,9 @@ class RepliesController < ApplicationController
 
   def destroy
     if @reply.destroy
-      redirect_to(topic_path(@reply.topic_id), notice: "回帖删除成功。")
+      redirect_to(topic_path(@reply.topic_id), notice: t("replies.deleted_successfully"))
     else
-      redirect_to(topic_path(@reply.topic_id), alert: "程序异常，删除失败。")
+      redirect_to(topic_path(@reply.topic_id), alert: t("common.unknow_error"))
     end
   end
 

@@ -1,5 +1,5 @@
 <% if reply.body.present? %>
-屏蔽了此话题：<span class="ban-reason"><%= reply.body %></span>
+  <%= t("topics.banned_topic_with_reason_html", reason: reply.body) %>
 <% else %>
-内容不符合版规屏蔽此话题
+  <%= t("topics.banned_topic", reason: reply.body) %>
 <% end %>

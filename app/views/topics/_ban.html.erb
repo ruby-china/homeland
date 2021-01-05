@@ -3,26 +3,26 @@
     <div class="modal-content">
       <%= form_for('', url: action_topic_path(topic, type: "ban"), method: "POST", remote: true) do |f| %>
       <div class="modal-header">
-        <div class="modal-title">屏蔽原因</div>
+        <div class="modal-title"><%= t("topics.ban_title") %></div>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body">
         <div class="form-group">
           <select class="form-control" onchange="$('#ban-modal textarea').val($(this).val())" name="reason">
-            <option value="" selected>直接屏蔽</option>
+            <option value="" selected><%= t("topics.ban_directly") %></option>
             <% Setting.ban_reasons.each do |str| %>
             <option value="<%= str %>"><%= str %></option>
             <% end %>
           </select>
         </div>
         <div class="form-group">
-          <label>或手工输入原因:</label>
+          <label><%= t("topics.ban_with_reason") %></label>
           <textarea class="form-control" name="reason_text" rows="4"></textarea>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">确定</button>
-        <a class="btn btn-default" data-dismiss="modal">取消</a>
+        <button type="submit" class="btn btn-primary"><%= t("common.ok") %></button>
+        <a class="btn btn-default" data-dismiss="modal"><%= t("common.cancel") %></a>
       </div>
       <% end %>
     </div>

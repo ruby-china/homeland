@@ -5,6 +5,8 @@
     minute: 'Minute'
     edit: "Edit"
     create: "Create"
+    ok: "OK"
+    cancel: "Cancel"
     avatar: "Avatar"
     save: "Save"
     saving: "Saving"
@@ -21,7 +23,6 @@
     logining: "Sign In..."
     logout: "Sign Out"
     remember_me: "Remember me (2 months)"
-    cancel: "Cancel"
     created_at: "Created at %{time}"
     until: "until"
     last_by: "Last by"
@@ -79,6 +80,7 @@
     captcha: 'Captcha'
     search_result: 'Search results'
     tips: Tips
+    unknow_error: Unknow error, please try out later.
   reply:
     edit_reply: "Edit Reply"
     delete_reply_success: 'Delete successfully.'
@@ -128,6 +130,16 @@
     tips_for_create_topic: "Tips for New Topics"
     subscribe_with_rss: "Subscribe to %{name} RSS feed."
     submit_reply: "Reply"
+    reply_to1: Reply to
+    reply_to2: ""
+    in: in
+    mentioned_this_topic: mention this topic.
+    excellent_topic: mark as excellent topic.
+    unexcellent_topic: canceled excellent.
+    closed_topic: closed this topic.
+    reopen_topic: reopened this topic.
+    banned_topic_with_reason_html: 'banned this topic: <span class="ban-reason">%{reason}</span>'
+    banned_topic: banned this topic.
     topic_list:
       latest: "Latest"
       recent: "Newest"
@@ -151,6 +163,9 @@
     topic_pin_successfully: Topic has pinned successfully.
     topic_unpin_successfully: Topic has canceled pin.
     total_replies_html: Total <b>%{count}</b> replies
+    ban_title: Ban reason
+    ban_directly: Ban without reason
+    ban_with_reason: "Input the ban reason:"
     form:
       title_placeholder: Type a topic title
       no_team: No team
@@ -165,6 +180,11 @@
       reopen: Reopen
       edit: Edit
       delete: Delete
+  replies:
+    edit_reply: Edit reply
+    created_successfully: Reply has created successfully.
+    updated_successfully: Reply has updated successfully.
+    deleted_successfully: Reply has deleted successfully.
   users:
     bios: "Bio"
     city: "City"
@@ -228,7 +248,7 @@
   teams:
     teams: 'Team'
     user_existed: 'Already in this team'
-    new_team: 'New team'
+    new_team: 'New Team'
     edit_team: 'Edit team profile'
     new_team_user: 'Add a member'
     edit_team_user: 'Change team roles'

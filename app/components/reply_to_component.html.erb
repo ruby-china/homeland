@@ -1,7 +1,7 @@
 <% if reply_to && user %>
   <div class="reply-to-block" data-reply-to-id="<%= reply_to.id %>">
     <div class="info">
-      对
+      <%= t("topics.reply_to1") %>
       <% if show_body %>
         <%= user_avatar_tag(user, :xs) %><%= user_name_tag(user) %>
       <% else %>
@@ -10,7 +10,7 @@
           <span class='reply-floor'></span>
         <% end %>
       <% end %>
-      回复
+      <%= t("topics.reply_to2") %>
     </div>
     <% if show_body %>
     <div class="markdown">

@@ -1,7 +1,7 @@
 <div class="edit-reply card card-lg">
   <div class="card-body">
     <div class="card-title">
-      修改回帖
+      <%= t("replies.edit_reply") %>
       <div class="actions">
         <div class="topic-link"><%= topic_title_tag(@topic) %></div>
       </div>
@@ -16,7 +16,7 @@
       <div class="form-actions">
         <%= f.submit t("common.save"), class: "btn btn-primary col-xs-2 hide-ios", 'data-disable-with' => t("common.saving") %>
         <% if can? :destroy, @reply %>
-        <%= link_to "删除",[@topic,@reply], class: "btn btn-danger", method: :delete, data: { confirm: "确定要删除此回复么？" } %>
+        <%= link_to t("common.delete"),[@topic,@reply], class: "btn btn-danger", method: :delete, data: { confirm: t("common.confirm_delete") } %>
         <% end %>
       </div>
     <% end %>

@@ -332,6 +332,7 @@ table.node-topics {
       }
       a.counter {
         font-size: 32px;
+        line-height: 32px;
         color: var(--primary);
         &:hover {
           color: var(--primary);
@@ -402,10 +403,6 @@ table.node-topics {
 }
 
 .user-profile-fields {
-  margin-top: 20px;
-  border-top: 1px solid var(--gray);
-  padding-top: 20px;
-
   .field {
     padding: 2px 0;
     label {

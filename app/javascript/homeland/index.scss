@@ -848,7 +848,7 @@ img.emoji {
 }
 .deleted {
   text-decoration: line-through;
-  color: #e0e0e0;
+  color: var(--default);
 }
 .no-result {
   color: #aaa;

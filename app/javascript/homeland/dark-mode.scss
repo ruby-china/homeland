@@ -5,10 +5,11 @@
   --text-color2: #999;
   --text-color3: #666;
   --link-color: #222;
-  --gray: #36373ab5;
+  --default: #333;
+  --gray: #5d637314;
   --secondary: #6f6f6f;
   --link-color: #eeeeeebd;
-  --red: #eb5424aa;
+  --red: #a0051d;
   --red-light: #fdf1ed10;
   --yellow: #fee209aa;
   --yellow-light: #fffdee10;
@@ -40,44 +41,44 @@
 
   --body-background-color: #000;
 
-  --navbar-background-color: #151516;
+  --navbar-background-color: #0e0e10;
   --navbar-text-color: #a4a8bbde;
   --navbar-shadow-color: #c3c3c526;
-  --navbar-fixed-shadow-color: rgba(144, 144, 144, 0.37);
+  --navbar-fixed-shadow-color: rgba(144, 144, 144, 0.27);
   --navbar-brand-text-color: #aaa;
   --navbar-brand-text-strong-color: #1a5092;
   --navbar-item-link-active-background-color: #151516;
 
-  --sub-navbar-background-color: #23232338;
-  --sub-navbar-shadow-color: #7e7e8638;
+  --sub-navbar-background-color: tranparent;
+  --sub-navbar-shadow-color: #7e7e8632;
 
-  --navbar-topic-title-background-color: #151516;
+  --navbar-topic-title-background-color: #0e0e10;
 
   --card-border-color: #a3acd024;
   --card-background-color: #dcdcff0f;
   --card-title-secondary-color: #777;
 
-  --dropdown-menu-background-color: #1a1a1aee;
+  --dropdown-menu-background-color: #1d1d1f;
   --dropdown-menu-text-color: #a9a9a9a8;
   --dropdown-menu-divider-color: #32323299;
 
   --dropdown-item-active-background-color: rgba(200, 200, 200, 0.1);
   --dropdown-item-active-text-color: #fff;
 
-  --modal-background-color: #1a1a1a;
-  --modal-shadow-color: rgba(0, 0, 0, 0.19);
+  --modal-background-color: #16161b;
+  --modal-shadow-color: rgba(0, 0, 0, 0.39);
 
   --list-group-item-border-color: #3d3d3d99;
 
   --table-border-color: #36373ab5;
 
   --topic-item-border-color: #a3acd024;
-  --topic-item-hover-background-color: #dcdcff0f;
+  --topic-item-hover-background-color: #7a85980f;
 
   --label-awesome-background-color: #f9cd940d;
 
   --opts-text-color: #6f6f6f;
-  --opts-link-color: #f7f7f7a6;
+  --opts-link-color: #f7f7f77c;
   --opts-link-hover-background-color: #77787926;
 
   --scrollbar-thumb-color: #333333aa;
@@ -98,10 +99,10 @@
 
   .markdown {
     code {
-      background: #33333347;
+      background: #33333330;
     }
     pre {
-      background: #33333347;
+      background: #33333330;
       color: #eee;
       code {
         background: transparent !important;

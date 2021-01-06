@@ -579,16 +579,6 @@ hr {
     .uname {
       color: var(--primary);
     }
-    .opts {
-      a {
-        font-size: 14px;
-        margin-left: 5px;
-        color: var(--primary);
-      }
-      a.edit {
-        display: none;
-      }
-    }
   }
   .reply {
     padding: 15px 25px 25px 25px;
@@ -613,7 +603,7 @@ hr {
     &.reply-deleted {
       padding: 10px calc(25px + 10px);
       margin-bottom: 0;
-      color: #666;
+      color: var(--text-color1);
 
       img.media-object {
         border-radius: 180px;
@@ -624,7 +614,7 @@ hr {
 
       .time {
         margin-left: 4px;
-        color: #aaa;
+        color: var(--text-color3);
       }
       .ban-reason {
         color: #444;
@@ -659,24 +649,37 @@ hr {
       }
 
       .floor {
+        font-size: 0.8em;
         color: #7aa87a;
       }
       a.time {
+        font-size: 0.8em;
         color: #999;
         text-decoration: none !important;
         cursor: pointer;
 
         &:hover {
-          border-bottom: 1px dashed #ccc;
+          border-bottom: 1px dashed var(--text-color3);
         }
       }
     }
 
-    .opts {
+    .actions {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+
       a {
         display: inline-block;
         vertical-align: baseline;
         text-align: center;
+      }
+
+      a.edit {
+        display: none;
       }
     }
 
@@ -728,16 +731,25 @@ hr {
 
   @media (max-width: 480px) {
     .reply {
-      padding: 10px;
+      padding: 15px 10px;
       padding-left: 58px;
 
       .avatar {
         left: calc(10px + 6px);
       }
 
+      .actions {
+        position: static;
+        top: auto;
+        right: auto;
+        margin-left: -5px;
+        margin-top: 0px;
+        flex-direction: row-reverse;
+      }
+
       &.reply-system,
       &.reply-deleted {
-        padding: 10px 18px;
+        padding: 15px 18px;
       }
     }
   }

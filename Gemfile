@@ -94,7 +94,6 @@ gem "rack-cors", require: "rack/cors"
 gem "bootsnap"
 
 gem "puma_worker_killer"
-gem "nokogiri", ">= 1.11.0.rc4"
 
 group :development do
   gem "spring"

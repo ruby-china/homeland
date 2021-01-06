@@ -1,12 +1,6 @@
 # DO NOT CHANGE THIS
 proxy_cache_path /home/app/cache/uploads-thumb levels=1:2 keys_zone=uploads_thumb:10m max_size=50G;
 
-upstream app_backend {
-  server app:7000 fail_timeout=0;
-  server app_backup:7001 backup;
-  keepalive 3;
-}
-
 log_format timed_combined '$remote_addr - $remote_user [$time_local] '
 '"$request" $status $body_bytes_sent '
 '"$http_referer" "$http_user_agent" '
@@ -22,7 +16,7 @@ server {
   root /home/app/homeland/public;
 
   # DO NOT CHANGE THIS
-  location ~ (/system|.well-known|/avatar.png|/favicon.ico|/*.txt) {
+  location ~ (/system|/avatar.png|/favicon.ico|/*.txt) {
     access_log off;
     expires 7d;
     gzip_static on;
@@ -140,7 +134,7 @@ server {
     proxy_http_version 1.1;
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection "Upgrade";
-    proxy_pass http://app_backend;
+    proxy_pass http://app:7000;
     gzip on;
   }
 }

@@ -1,11 +1,11 @@
 {
-  "admin.css": "/packs-test/css/admin-af13b44e.css",
+  "admin.css": "/packs-test/css/admin-49f09330.css",
   "admin.js": "/packs-test/js/admin-ffcf61e7b3c79ae446a5.js",
   "application.js": "/packs-test/js/application-21d15317dc24791b3259.js",
   "entrypoints": {
     "admin": {
       "css": [
-        "/packs-test/css/admin-af13b44e.css"
+        "/packs-test/css/admin-49f09330.css"
       ],
       "js": [
         "/packs-test/js/admin-ffcf61e7b3c79ae446a5.js"
@@ -19,7 +19,7 @@
     },
     "front": {
       "css": [
-        "/packs-test/css/front-71c456da.css"
+        "/packs-test/css/front-f40de984.css"
       ],
       "js": [
         "/packs-test/js/front-c53a5cbd9c08e94d7f27.js"
@@ -34,7 +34,7 @@
       ]
     }
   },
-  "front.css": "/packs-test/css/front-71c456da.css",
+  "front.css": "/packs-test/css/front-f40de984.css",
   "front.js": "/packs-test/js/front-c53a5cbd9c08e94d7f27.js",
   "media/webfonts/fa-brands-400.eot": "/packs-test/media/webfonts/fa-brands-400-0fea2496.eot",
   "media/webfonts/fa-brands-400.svg": "/packs-test/media/webfonts/fa-brands-400-e33e2cf6.svg",

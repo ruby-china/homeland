@@ -12,9 +12,22 @@
       comments: "Comments"
       locations: "Locations"
       exception_logs: "Errors"
+      plugins: "Plugins"
+      applications: "Applications"
+      background_jobs: "Background Jobs"
+      database: "Database"
     overview: "Overview"
+    dashboard:
+      boot_at_html: Application boot at %{time}
+      topics_count: Topics Total
+      replies_count: Replies Total
+      users_count: Users Total
+      notifications_count: Notifications Total
+      photos_count: Photos Total
+      comments_count: Comments Total
     recent_topics: "Recent Topics"
     statics: "Statistics"
+    reboot: Reboot
     site_configs:
       settings: "Settings"
       please_do_not_modify_key: "Please do not modify key"

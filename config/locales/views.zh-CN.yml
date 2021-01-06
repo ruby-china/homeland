@@ -141,7 +141,6 @@
     footer_html: "页脚 HTML"
     wiki_index_html: "WIKI 首页 HTML"
     wiki_sidebar_html: "WIKI 边栏 HTML"
-    index_html: "网站首页 HTML"
     tips: "随机显示的小帖士（一行一个）"
     ban_words_on_reply: "回帖禁止内容（一行一个）"
     ban_words_in_body: "正文里面禁止提及的内容，为避免误判，请准确描述，不要写太短的词"

@@ -12,9 +12,22 @@
       comments: "评论"
       locations: "城市"
       exception_logs: "异常"
+      plugins: "插件"
+      applications: "三方应用"
+      background_jobs: "异步任务"
+      database: "数据库状态"
     overview: "概览"
+    dashboard:
+      boot_at_html: 服务启动于：%{time}
+      topics_count: 话题总数
+      replies_count: 回帖总数
+      users_count: 用户总数
+      notifications_count: 通知总数
+      photos_count: 上传图片总数
+      comments_count: 评论总数
     recent_topics: "最近帖子"
     statics: "统计信息"
+    reboot: 重启应用
     site_configs:
       settings: "全局设置"
       please_do_not_modify_key: "请勿修改 key"

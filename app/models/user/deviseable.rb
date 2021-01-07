@@ -9,18 +9,19 @@ class User
       attr_accessor :omniauth_provider, :omniauth_uid
 
       devise :database_authenticatable, :registerable, :recoverable, :lockable,
-         :rememberable, :trackable, :validatable, :omniauthable
+             :rememberable, :trackable, :validatable, :omniauthable
 
       after_create :bind_omniauth_on_create
-    end
 
-    def password_required?
-      (authorizations.empty? || !password.blank?) && super
-    end
+      # Override Devise to send mails with async
+      def send_devise_notification(notification, *args)
+        devise_mailer.send(notification, self, *args).deliver_later
+      end
 
-    # Override Devise to send mails with async
-    def send_devise_notification(notification, *args)
-      devise_mailer.send(notification, self, *args).deliver_later
+      # Override Devise password_required?
+      def password_required?
+        (authorizations.empty? || !password.blank?) && super
+      end
     end
 
     def bind?(provider)
@@ -95,7 +96,7 @@ class User
             return user
           end
 
-          Rails.logger.warn("User.create_from_hash 失败，#{user.errors.inspect}")
+          Rails.logger.warn("User.create_from_hash error: #{user.errors.inspect}")
           return nil
         end
       end

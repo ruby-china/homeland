@@ -3,6 +3,8 @@
 require "test_helper"
 
 class User::DeviseableTest < ActiveSupport::TestCase
+  include ActiveJob::TestHelper
+
   class Monkey < ApplicationRecord
     include User::Deviseable
   end
@@ -61,5 +63,13 @@ class User::DeviseableTest < ActiveSupport::TestCase
   test "new_from_provider_data should set user tagline" do
     description = data["description"] = "A newbie Ruby developer"
     assert_equal description, Monkey.new_from_provider_data(nil, nil, data).tagline
+  end
+
+  test "async mailer" do
+    user = create(:user)
+
+    assert_performed_jobs 1 do
+      user.send(:send_devise_notification, :reset_password_instructions, "foobar")
+    end
   end
 end

@@ -42,7 +42,7 @@ describe SettingsController do
       get account_setting_path
       assert_equal 200, response.status
       assert_select ".authorizations", 0
-      assert_select ".delete-account", text: /删除账号/
+      assert_select ".delete-account", text: /Delete account/
     end
   end
 

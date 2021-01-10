@@ -11,18 +11,18 @@
               <div class="card-section">
                 <% if Setting.allow_change_login? %>
                   <div class="form-group">
-                    <label class="control-label">用户名</label>
-                    <%= f.text_field :login, style: "width: 200px", class: "form-control", placeholder: "用户名" %>
+                    <label class="control-label"><%= t("activerecord.attributes.user.login") %></label>
+                    <%= f.text_field :login, style: "width: 200px", class: "form-control", placeholder: t("activerecord.attributes.user.login") %>
                   </div>
                   <% end %>
 
                   <div class="form-group">
-                    <label class="control-label">姓名</label>
-                    <%= f.text_field :name, style: "width: 200px", class: "form-control", placeholder: "姓名" %>
+                    <label class="control-label"><%= t("activerecord.attributes.user.name") %></label>
+                    <%= f.text_field :name, style: "width: 200px", class: "form-control", placeholder: t("activerecord.attributes.user.name") %>
                   </div>
 
                   <div class="form-group">
-                    <label class="control-label">头像</label>
+                    <label class="control-label"><%= t("activerecord.attributes.user.avatar") %></label>
                     <%= f.file_field :avatar, class: "form-control" %>
                   </div>
 
@@ -46,19 +46,19 @@
               </div>
 
               <div class="card-section themes">
-                <div class="heading">主题偏好</div>
+                <div class="heading"><%= t("activerecord.attributes.user.theme") %></div>
                 <div class="flex aic">
                   <div class="form-check">
                     <%= f.radio_button :theme, "auto", checked: ["auto", nil].include?(@user.theme), class: "form-check-input" %>
-                    <%= f.label :theme_auto, "自动切换", class: "form-check-label" %>
+                    <%= f.label :theme_auto, t("users.theme_auto"), class: "form-check-label" %>
                   </div>
                   <div class="form-check">
                     <%= f.radio_button :theme, "light", class: "form-check-input" %>
-                    <%= f.label :theme_light, "浅色模式", class: "form-check-label" %>
+                    <%= f.label :theme_light, t("users.theme_light"), class: "form-check-label" %>
                   </div>
                   <div class="form-check">
                     <%= f.radio_button :theme, "dark", class: "form-check-input" %>
-                    <%= f.label :theme_dark, "深色模式", class: "form-check-label" %>
+                    <%= f.label :theme_dark, t("users.theme_dark"), class: "form-check-label" %>
                   </div>
                 </div>
               </div>

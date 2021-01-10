@@ -3,7 +3,7 @@
 class PushJob < ApplicationJob
   queue_as :notifications
 
-  # user_ids: 用户编号列表
+  # user_ids: Receiver ids
   # note: { alert: 'Hello APNS World!', sound: 'true', badge: 1 }
   def perform(user_ids, note = {})
     return false if Setting.apns_pem.blank?

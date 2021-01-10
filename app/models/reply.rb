@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "digest/md5"
+
 class Reply < ApplicationRecord
   include SoftDelete, MarkdownBody, Mentionable, MentionTopic, UserAvatarDelegate
   include Reply::Notify, Reply::Voteable
@@ -17,15 +18,15 @@ class Reply < ApplicationRecord
   scope :fields_for_list, -> { select(:topic_id, :id, :body, :updated_at, :created_at) }
 
   validates :body, presence: true, unless: -> { system_event? }
-  validates :body, uniqueness: { scope: %i[topic_id user_id], message: "不能重复提交。" }, unless: -> { system_event? }
+  validates :body, uniqueness: { scope: %i[topic_id user_id], message: I18n.t("replies.duplicate_error") }, unless: -> { system_event? }
   validate do
     ban_words = Setting.ban_words_on_reply.collect(&:strip)
     if !system_event? && body&.strip.downcase.in?(ban_words)
-      errors.add(:body, "请勿回复无意义的内容，如你想收藏或赞这篇帖子，请用帖子后面的功能。")
+      errors.add(:body, I18n.t("replies.nopoint_limit"))
     end
 
     if topic&.closed?
-      errors.add(:topic, "已关闭，不再接受回帖或修改回帖。") unless system_event?
+      errors.add(:topic, I18n.t("replies.close_limit")) unless system_event?
     end
 
     if reply_to_id
@@ -38,17 +39,15 @@ class Reply < ApplicationRecord
     topic.update_last_reply(self) if topic.present?
   end
 
-  # 删除的时候也要更新 Topic 的 updated_at 以便清理缓存
+  # Touch updated_at for expire Topic cache
   after_destroy :update_parent_topic_updated_at
   def update_parent_topic_updated_at
     unless topic.blank?
       topic.update_deleted_last_reply(self)
-      # FIXME: 本应该 belongs_to :topic, touch: true 来实现的，但貌似有个 Bug 哪里没起作用
       topic.touch
     end
   end
 
-  # 是否热门
   def popular?
     likes_count >= 5
   end
@@ -59,7 +58,6 @@ class Reply < ApplicationRecord
     delete_notification_mentions
   end
 
-  # 是否是系统事件
   def system_event?
     action.present?
   end

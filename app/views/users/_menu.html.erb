@@ -1,5 +1,5 @@
 <% content_for :javascripts do %>
-  <link rel="alternate" type="application/rss+xml" title="个人 RSS" href="<%= main_app.feed_user_url(@user) %>" />
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="<%= main_app.feed_user_url(@user) %>" />
 <% end %>
 <%= render_list class: "users-menu nav nav-tabs" do |li|
   li << link_to(t("users.menu.overview"), user_path(@user), class: "nav-link")

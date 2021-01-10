@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta name="theme" content="<%= user_theme %>">
-    <title><%= Setting.app_name %> - 控制台</title>
+    <title><%= Setting.app_name %> - Admin Panel</title>
     <%= stylesheet_pack_tag "admin" %>
     <%= javascript_packs_with_chunks_tag "application" %>
     <%= csrf_meta_tag %>
@@ -12,7 +12,7 @@
       <div class="header navbar navbar-expand flex-md-row bd-navbar">
         <div class="container d-sm-flex">
           <div class="navbar-header d-none d-md-flex" data-turbolinks-permanent>
-            <%= link_to("控制台", main_app.admin_root_path, class: "navbar-brand") %>
+            <%= link_to("Admin Panel", main_app.admin_root_path, class: "navbar-brand") %>
           </div>
           <div class="navbar-nav-scroll">
             <%= render_list class: "nav navbar-nav" do |li|
@@ -40,7 +40,7 @@
         <div class="card-body">
           <% if Setting.require_restart == true %>
             <div class="alert alert-warning">
-              已修改了系统设置，需要重启应用方可生效 <%= link_to icon_tag("power-off", label: "立即重启"), reboot_admin_dashboards_path, data: { method: :post, confirm: "你确定要重启 Homeland 吗？", disable_with: "请求中..." }, class: "text-danger pull-right" %>
+              System settings have been updated, need to restart the application to take effect <%= link_to icon_tag("power-off", label: "Reboot now"), reboot_admin_dashboards_path, data: { method: :post, confirm: "Are you sure to reboot Homeland?", disable_with: "Rebooting..." }, class: "text-danger pull-right" %>
             </div>
           <% end %>
           <%= notice_message %>
@@ -51,7 +51,6 @@
     <footer class="footer">
       <div class="container">
         <p>Powered by <a href="https://github.com/ruby-china/homeland/blob/master/CHANGELOG.md">Homeland <%= Homeland.version %></a></p>
-        <p class="suggest">使用 <a href="http://www.mozillaonline.com/" target="_blank" rel="nofollow">Firefox</a> 或 <a href="http://www.google.com/chrome" target="_blank" rel="nofollow">Chrome</a> 浏览访问本站将会获得更佳的视觉体验.</p>
       </div>
     </footer>
   </body>

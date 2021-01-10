@@ -5,7 +5,7 @@
     <div class="card-body">
       <div class="card-title">
         <div><%= t("users.hot_users") %></div>
-        <div class="counter">已注册 <%= @total_user_count %> 人</div>
+        <div class="counter">Total <%= @total_user_count %> users</div>
       </div>
 
       <%= render "user_list", users: @active_users, columns: 4 %>

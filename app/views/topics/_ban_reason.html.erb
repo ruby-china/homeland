@@ -1,6 +1,6 @@
 <% if @topic.ban? %>
 <div class="alert alert-warning alert-block">
-  <h5 class="title">此贴已暂时被屏蔽!</h5>
+  <h5 class="title"><%= t("topics.topic_has_been_banned_html") %></h5>
   <div class="markdown">
     <%= raw Setting.ban_reason_html %>
   </div>

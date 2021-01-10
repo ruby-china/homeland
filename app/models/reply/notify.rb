@@ -17,17 +17,16 @@ class Reply
 
     def notification_receiver_ids
       return @notification_receiver_ids if defined? @notification_receiver_ids
-      # 加入帖子关注着
+      # Topic followers
       follower_ids = self.topic.try(:follow_by_user_ids) || []
-      # 加入回帖人的关注者
+      # Reply user's followers
       follower_ids += self.user.try(:follow_by_user_ids) || []
-      # 加入发帖人
+      # Topic creator
       follower_ids << self.topic.try(:user_id)
-      # 去重复
       follower_ids.uniq!
-      # 排除回帖人
+      # Exclude reply user
       follower_ids.delete(self.user_id)
-      # 排除同一个回复过程中已经提醒过的人
+      # Exclude people who have been notified during the same reply
       follower_ids -= self.mentioned_user_ids
       @notification_receiver_ids = follower_ids
     end

@@ -5,14 +5,13 @@
     <div class="card card-lg">
       <div class="card-body">
         <div class="card-section delete-account">
-          <div class="heading">删除我的账号</div>
+          <div class="heading"><%= t("users.delete_account") %></div>
 
           <%= form_for(@user, url: setting_path, method: :delete) do |f| %>
             <%= render "shared/error_messages", :target => resource if params[:by] == "destroy" %>
             <input type="hidden" name="by" value="destroy" />
             <div class="form-group">
-              <p>当然不想使用这个账号的时候，可以选择删除账号。</p>
-              <p>删除以后数据将会保留，以匿名的方式存在，你的账号将无法再登录。</p>
+              <%= t("users.delete_account_tips_html") %>
             </div>
             <div class="form-group">
               <%= f.password_field :current_password, class: "form-control", style: "max-width: 400px", placeholder: t("users.confirm_delete_account") %>
@@ -23,13 +22,13 @@
 
         <% if !Setting.sso_enabled? && @user.authorizations.any? %>
           <div class="card-section authorizations">
-            <div class="heading">绑定其他账号用于登录</div>
+            <div class="heading"><%= t("users.bind_another_account") %></div>
 
             <ul class="list-group col-sm-6">
               <% @user.authorizations.each do |authorizaion| %>
               <li class="list-group-item">
                 <%= Homeland::Utils.omniauth_name(authorizaion.provider) %>
-                <%= link_to(raw('<i class="fas fa-minus-circle"></i>'), auth_unbind_setting_path(authorizaion.provider), rel: "twitsy", title: "点击解除绑定", method: 'delete' )%>
+                <%= link_to(raw('<i class="fas fa-minus-circle"></i>'), auth_unbind_setting_path(authorizaion.provider), rel: "twitsy", title: ("users.click_to_unbind"), method: 'delete' )%>
               </li>
               <% end %>
             </ul>

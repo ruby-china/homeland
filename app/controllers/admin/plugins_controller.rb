@@ -12,18 +12,18 @@ module Admin
     def create
       if Homeland::Plugin.install(params[:file])
         Homeland.reboot
-        redirect_to admin_plugins_path, notice: "插件安装成功，如列表没有更新，请再次刷新页面。"
+        redirect_to admin_plugins_path, notice: "Plugin was install successfully, if page not refresh, please refresh it."
       else
-        redirect_to admin_plugins_path, alert: "插件安装失败，请检查 ZIP 包确定是否正确。"
+        redirect_to admin_plugins_path, alert: "Plugin was install error, please check the zip to determine that is correct."
       end
     end
 
     def destroy
       if @plugin.destroy
         Homeland.reboot
-        redirect_to admin_plugins_path, notice: "卸载成功，如列表没有更新，请再次刷新页面"
+        redirect_to admin_plugins_path, notice: "Plugn was uninstall successfully."
       else
-        redirect_to admin_plugins_path, alert: "卸载失败。"
+        redirect_to admin_plugins_path, alert: "Plugn was uninstall error."
       end
     end
 

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class User
-  # 允许用户配置 Alipay|Weichat 的打赏二维码
   module RewardFields
     extend ActiveSupport::Concern
 

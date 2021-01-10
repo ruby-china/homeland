@@ -1,6 +1,6 @@
 <% if current_user && current_user.newbie? %>
 <div class="card">
-  <div class="card-header">新手必读</div>
+  <div class="card-header"><%= t("topics.newbie_tip") %></div>
   <div class="card-body">
     <%= raw Setting.newbie_notices %>
   </div>

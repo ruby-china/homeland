@@ -13,6 +13,7 @@
     submitting: "正在提交"
     delete: "删除"
     revert: "恢复"
+    revoke: "注销"
     place_top: "置顶"
     un_top: "去置顶"
     upload: "上传"
@@ -56,7 +57,8 @@
     statics_users_count: "会员数: %{count} 个"
     statics_topics_count: "话题数: %{count} 篇"
     statics_replies_count: "回帖数: %{count} 条"
-    comments: "条评论"
+    comments: "评论"
+    new_comment: "发表新评论"
     no_search_result: "没有搜索到相关内容。"
     access_denied: "访问被拒绝，你可能没有权限或未登录。"
     editor_toolbar_edit: "编辑"
@@ -64,6 +66,7 @@
     editor_add_image: "上传图片"
     editor_insert_codes: "插入代码"
     node: "节点"
+    notifications: "通知"
     by: "由"
     at: "在"
     replies_count: "回复"
@@ -89,6 +92,7 @@
     block_user: 屏蔽
     unblock_user: 取消屏蔽
     block_user_title: 屏蔽或，社区列表将不会出现此用户发布的内容。
+    error_message_title: 有 %{count} 处问题导致无法提交
   reply:
     edit_reply: "修改回帖"
     delete_reply_success: "回帖删除成功."
@@ -200,6 +204,7 @@
     reopen_topic: 重新开启了讨论。
     banned_topic_with_reason_html: '屏蔽了此话题: <span class="ban-reason">%{reason}</span>'
     banned_topic: 内容不符合版规屏蔽此话题。
+    topic_has_been_banned_html: 此话题已暂时被管理员屏蔽。
     topic_list:
       recent: "新帖"
       last_reply: "最新回复"
@@ -230,13 +235,18 @@
     reopen_successfully: 话题讨论重新开启成功。
     normal_successfully: 话题恢复到正常状态。
     ban_successfully: 屏蔽话题成功。
+    create_too_frequently: 创建太频繁，请稍后再试。
+    create_limit: 1 小时内创建话题量不允许超过 %{count} 篇，无法再次发布。
     unban_successfully: 话题已取消了屏蔽。
     total_replies_html: 共收到 <b>%{count}</b> 条回复
     total_topics_html: 共 <b>%{count}</b> 个讨论
+    newbie_tip: 新手提示
     ban_title: 屏蔽原因
     ban_directly: 直接屏蔽
     ban_with_reason: 输入屏蔽原因：
     closed_tooltip: "问题已解决／话题已结束讨论"
+    sensitive_word_limit: '创建失败，内容包含敏感词：“%{word}”'
+    new_reply_received_html: 收到新回复，点击立即加载
     form:
       title_placeholder: 在这里输入标题
       no_team: 不关联组织
@@ -246,13 +256,22 @@
     created_successfully: 回帖提交成功。
     updated_successfully: 回帖修改成功。
     deleted_successfully: 回帖删除成功。
+    duplicate_error: "不可以重复提交相同内容。"
+    nopoint_limit: "请勿回复无意义的内容，如你想收藏或赞这篇帖子，请用帖子后面的功能。"
+    close_limit: "已关闭，不再接受回帖或修改回帖。"
   users:
+    theme_auto: 自动切换
+    theme_light: 浅色模式
+    theme_dark: 深色模式
     bios: "个人介绍"
     city: "城市"
     company: "公司"
+    number_of_user: 第 %{no} 位会员 
     join_time: "Since"
     signature: "签名"
     personal_website: "博客"
+    topics_count_html: <span>%{count}</span> 篇帖子
+    replies_count_html: <span>%{count}</span> 条回帖
     recent_publish_topic: "最近发布的帖子"
     recent_reply_topic: "最近回复过的帖子"
     unbind_warning: "至少要保留一个关联账号，现在不能解绑。"
@@ -264,6 +283,7 @@
     delete_this_account: "删除此账号"
     dont_like_it: "不喜欢?"
     bind_another_account: "绑定其他账号用于登录"
+    click_to_unbind: "点击接触登陆绑定"
     register_user: "注册新用户"
     login: "用户名"
     suggest_using_twitter_id: "谨慎填写，以后不可修改，建议用 Twitter ID。"
@@ -280,15 +300,19 @@
     submit_new_user: "提交注册信息"
     update_profile: "更新"
     update_password: "修改密码"
+    need_login_again_after_password_updated_html: 注意！更新密码以后需要重新登录。
     email_permission: "公开 Email"
-    manage_my_apps: "管理我的应用"
     delete_account: "删除账号"
+    delete_account_tips_html: "<p>当你不想使用这个账号的时候，可以选择删除账号。</p><p>删除以后数据将会保留，以匿名的方式存在，你的账号将无法再登录。</p>"
     confirm_delete_account: "要删除账号，请输入你的密码"
     ensure_to_delete: "确定删除我的账号"
     complete_your_info: "完善你的账户信息"
     binding_via_html: "您必须填写以下表单才能完成绑定 <strong>%{provider}</strong> 的登录方式。"
     binding_has_account_html: 如果你已经有账号，你可以通过 <a href="/account/sign_in">登陆</a> 来绑定账号。
     reward_tip_html: 如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作！
+    username_allows_format: 只允许数字、大小写字母、中横线、下划线。
+    no_replies: 还未参与讨论。
+    no_github: 未设置 GitHub 信息.
     menu:
       topics: "话题"
       recent_reply_topics: "最近回帖"
@@ -312,12 +336,14 @@
     new_team: '创建公司／组织'
     edit_team: '设置公司／组织资料'
     new_team_user: '邀请成员'
+    all_members: "所有成员"
     edit_team_user: '修改成员权限'
     delete_team_user: '移除成员'
     show_team_user: '查看邀请'
     accept_team_user: '接受邀请'
     reject_team_user: '拒绝'
     delete_team_user_confirm: '确定要将他从组里面移除掉么？'
+    do_you_want_accept_team_user_html: "你是否要接受邀请加入 <b>%{team}</b>？"
     topics: '成员的话题列表'
     users: '成员列表'
     team_user_pendding: '等待接受'
@@ -340,3 +366,8 @@
     node_changed_html: 你发布的话题 %{topic} 由于内容原因被管理员移动到了 %{node}  节点，请注意查看节点说明。
     invite_you_join: 邀请你加入
     show_invite: 查看邀请
+    created_topic: "%{actor} 创建了话题 %{target}"
+    created_reply: "%{actor} 回复了话题 %{target}"
+    followed_you: "%{actor} 关注了你。"
+    mentioned_you: "%{actor} 提及了你。"
+    node_changed: "你创建的话题被调整到了 %{node} 节点。"

@@ -1,14 +1,14 @@
 <div class="editor-toolbar clearfix">
-  <div class="reply-to pull-right" style="display:none;">
-    <i class="fa fa-reply" title="回复"></i>
+  <div class="reply-to pull-right" style="display: none;">
+    <%= icon_tag("reply") %>
     <a href="#" class="user"></a>
-    <a href="#" class="close"><i class="fa fa-close"></i></a>
+    <a href="#" class="close"><%= icon_tag("close") %></a>
   </div>
   <div class="toolbar-buttons">
-    <a href="#" class="nav-link pickup-emoji"><i class="fa fa-smile"></i></a>
+    <a href="#" class="nav-link pickup-emoji"><%= icon_tag("smile") %></a>
     <% if Setting.has_module? 'editor.code' %>
     <span class="dropdown" id="dropdown-insert-codes">
-      <a href="#editor-toolbar-insert-code" class="nav-link dropdown-toggle" data-toggle="dropdown" title="<%= t("common.editor_insert_codes") %>"><i class="fa fa-code"></i></a>
+      <a href="#editor-toolbar-insert-code" class="nav-link dropdown-toggle" data-toggle="dropdown" title="<%= t("common.editor_insert_codes") %>"><%= icon_tag("code") %></a>
       <div class="dropdown-menu insert-codes" aria-labelledby="dropdown-insert-codes">
         <%= insert_code_menu_items_tag %>
       </div>

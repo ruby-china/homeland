@@ -43,6 +43,7 @@ en:
         email: "Email"
         email_public: "Public Email"
         avatar: "Avatar"
+        theme: "Theme"
         location: "City"
         bio: "Bio"
         password: "Password"

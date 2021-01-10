@@ -2,94 +2,78 @@
 
 <%= render '/teams/header' %>
 
-<div class="row">
-  <div class="col-sm-8">
-    <div class="card">
-      <div class="card-body">
-        <%= form_for @team do |f| %>
-          <%= render "shared/error_messages", target: @team %>
+<div class="card">
+  <div class="card-body">
+    <%= form_for @team do |f| %>
+      <%= render "shared/error_messages", target: @team %>
 
-          <div class="form-group">
-            <%= f.label :login %>
-            <%= f.text_field :login, class: "form-control", placeholder: user_url('xxx').gsub('xxx', ':slug') %>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :name %>
-            <%= f.text_field :name, class: "form-control" %>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :email %>
-            <%= f.email_field :email, class: "form-control" %>
-          </div>
-
-          <div class="form-group form-check">
-            <%= f.check_box :email_public, class: "form-check-input" %>
-            <label for="user_email_public" class="checkbox"><%= t("users.email_permission")%></label>
-          </div>
-
-          <div class="form-group row">
-            <div class="col-sm-7">
-              <%= f.label :avatar %>
-              <%= f.file_field :avatar, class: "form-control" %>
-            </div>
-            <div class="col-sm-5">
-              <%= user_avatar_tag(@team, :lg, link: false) %>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :location %>
-            <%= f.text_field :location, class: "form-control" %>
-          </div>
-
-          <% if Setting.has_module? :github %>
-          <div class="form-group">
-            <%= f.label :github %>
-            <div class="input-group">
-              <span class="input-group-prepend"><span class="input-group-text">https://github.com/</span></span>
-              <%= f.text_field :github, class: "form-control" %>
-            </div>
-          </div>
-          <% end %>
-
-          <div class="form-group">
-            <%= f.label :twitter %>
-            <div class="input-group">
-              <span class="input-group-prepend"><span class="input-group-text">https://twitter.com/</span></span>
-              <%= f.text_field :twitter, class: "form-control" %>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :website %>
-            <%= f.url_field :website, class: "form-control", placeholder: "http://" %>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :bio %>
-            <%= f.text_area :bio, class: "form-control", rows: 3 %>
-          </div>
-
-          <div class="form-actions">
-            <%= f.submit t("common.save"), class: "btn btn-primary btn-block", 'data-disable-with' => t("common.saving") %>
-          </div>
-        <% end %>
-
+      <div class="form-group">
+        <%= f.label :login %>
+        <%= f.text_field :login, class: "form-control", placeholder: user_url('xxx').gsub('xxx', ':slug') %>
       </div>
-    </div>
-  </div>
 
-  <div class="col-sm-4">
-    <div class="card">
-      <div class="card-header"><%= t('teams.teams')%></div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">公司／组织品牌展示；</li>
-        <li class="list-group-item">独立的组织首页；</li>
-        <li class="list-group-item">汇集成员在社区里面的话题；</li>
-        <li class="list-group-item">为团队招揽人才；</li>
-      </ul>
-    </div>
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= f.email_field :email, class: "form-control" %>
+      </div>
+
+      <div class="form-group form-check">
+        <%= f.check_box :email_public, class: "form-check-input" %>
+        <label for="user_email_public" class="checkbox"><%= t("users.email_permission")%></label>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-7">
+          <%= f.label :avatar %>
+          <%= f.file_field :avatar, class: "form-control" %>
+        </div>
+        <div class="col-sm-5">
+          <%= user_avatar_tag(@team, :lg, link: false) %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :location %>
+        <%= f.text_field :location, class: "form-control" %>
+      </div>
+
+      <% if Setting.has_module? :github %>
+      <div class="form-group">
+        <%= f.label :github %>
+        <div class="input-group">
+          <span class="input-group-prepend"><span class="input-group-text">https://github.com/</span></span>
+          <%= f.text_field :github, class: "form-control" %>
+        </div>
+      </div>
+      <% end %>
+
+      <div class="form-group">
+        <%= f.label :twitter %>
+        <div class="input-group">
+          <span class="input-group-prepend"><span class="input-group-text">https://twitter.com/</span></span>
+          <%= f.text_field :twitter, class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :website %>
+        <%= f.url_field :website, class: "form-control", placeholder: "http://" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :bio %>
+        <%= f.text_area :bio, class: "form-control", rows: 3 %>
+      </div>
+
+      <div class="form-actions">
+        <%= f.submit t("common.save"), class: "btn btn-primary btn-block", 'data-disable-with' => t("common.saving") %>
+      </div>
+    <% end %>
+
   </div>
 </div>

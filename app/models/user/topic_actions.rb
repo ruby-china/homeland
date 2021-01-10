@@ -13,9 +13,9 @@ class User
       favorite_topic_actions.count
     end
 
-    # 是否读过 topic 的最近更新
+    # Determine user was read topic latest updates
     def topic_read?(topic)
-      # 用 last_reply_id 作为 cache key ，以便不热门的数据自动被 Memcached 挤掉
+      # Use last_reply_id as cache key, for implement cache by LRU, so the popular cache will keep
       last_reply_id = topic.last_reply_id || -1
       Rails.cache.read("user:#{id}:topic_read:#{topic.id}") == last_reply_id
     end
@@ -37,7 +37,7 @@ class User
       ids
     end
 
-    # 将 topic 的最后回复设置为已读
+    # Mark latest topic update as read
     def read_topic(topic)
       TopicReadJob.perform_later(topic_id: topic.id, user_id: self.id)
     end

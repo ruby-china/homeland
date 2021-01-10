@@ -13,6 +13,7 @@
     submitting: "Submitting"
     delete: "Delete"
     revert: "Revert"
+    revoke: "Revoke"
     place_top: "Stick Top"
     un_top: "Un-Stick Top"
     upload: "Upload"
@@ -58,12 +59,15 @@
     statics_topics_count: "Topics: %{count}"
     statics_replies_count: "Replies: %{count}"
     comments: "Comments"
+    new_comment: "Write comment"
     no_search_result: "No search result"
     access_denied: "Access denied, Please sign in and make sure you have proper permission."
     editor_toolbar_edit: "Edit"
     editor_toolbar_preview: "Preview"
     editor_add_image: "Upload image"
     editor_insert_codes: "Insert Codes"
+    node: "Node"
+    notifications: "Notifications"
     by: "by"
     at: "on"
     like: "Like"
@@ -88,6 +92,7 @@
     block_user: Block
     unblock_user: Unblock
     block_user_title: Block this user, you will not see him topics.
+    error_message_title: There have %{count} issues can not submit
   reply:
     edit_reply: "Edit Reply"
     delete_reply_success: 'Delete successfully.'
@@ -195,6 +200,7 @@
     reopen_topic: reopened this topic.
     banned_topic_with_reason_html: 'banned this topic: <span class="ban-reason">%{reason}</span>'
     banned_topic: banned this topic.
+    topic_has_been_banned_html: Topic has been banned by admin.
     topic_list:
       latest: "Latest"
       recent: "Newest"
@@ -225,10 +231,15 @@
     unban_successfully: Topic has canceled ban.
     total_replies_html: Total <b>%{count}</b> replies
     total_topics_html: Total <b>%{count}</b> topics
+    newbie_tip: Newbie Tip
     ban_title: Ban reason
     ban_directly: Ban without reason
     ban_with_reason: "Input the ban reason:"
     closed_tooltip: Topic has closed
+    create_too_frequently: Create too frequently, please try again later.
+    create_limit: Creation has been rejected by limit %{count} topics created within 1 hour.
+    sensitive_word_limit: 'Create failed, because content has sensitive word "%{word}".'
+    new_reply_received_html: New reply received, click here to load it
     form:
       title_placeholder: Type a topic title
       no_team: No team
@@ -248,11 +259,20 @@
     created_successfully: Reply has created successfully.
     updated_successfully: Reply has updated successfully.
     deleted_successfully: Reply has deleted successfully.
+    duplicate_error: "Cannot submit same content in repeatedly."
+    nopoint_limit: "Please do not reply to meaningless content. If you want to bookmark or like this Topic, please use the function behind the Topic."
+    close_limit: "Topic has been closed, no longer accepting create or update replies."
   users:
     bios: "Bio"
     city: "City"
+    theme_auto: Auto
+    theme_light: Light
+    theme_dark: Dark
+    number_of_user: NO. %{no}
     join_time: "Joined at"
     signature: "Status"
+    topics_count_html: <span>%{count}</span> Topics
+    replies_count_html: <span>%{count}</span> Replies
     personal_website: "Blog"
     recent_publish_topic: "Recent Topics"
     recent_reply_topic: "Recent Replies"
@@ -266,6 +286,7 @@
     delete_this_account: "Delete This Account"
     dont_like_it: "Do not like it?"
     bind_another_account: "Bind another account"
+    click_to_unbind: "Click this button to unbind."
     register_user: "Sign Up"
     login: "Pick a username"
     suggest_using_twitter_id: "Cannot modify after create."
@@ -282,15 +303,19 @@
     submit_new_user: "Sign Up"
     update_profile: "Update"
     update_password: "Update password"
+    need_login_again_after_password_updated_html: NOTE! You need to login again after updating the password.
     email_permission: "Show my email to others"
-    manage_my_apps: "Manage applications"
     delete_account: "Delete account"
+    delete_account_tips_html: "<p>You can choice to delete your account when you don't need it.</p><p>Your datas will keeping and your account will lock as anonymous after delete.</p>"
     confirm_delete_account: "Enter password to delete your account"
     ensure_to_delete: "Delete my account"
     complete_your_info: "Complete your account information"
     binding_via_html: You must fill out the form below to complete the binding login method of <strong>%{provider}</strong>.
     binding_has_account_html: If you already have an account, you can use <a href="/account/sign_in">Sign in</a> to bind the account.
     reward_tip_html: If you find my topic useful to you, please feel free to give a reward. Your support will encourage me to continue creating!
+    username_allows_format: Only allow numbers, letters, dashline, underline.
+    no_replies: No replies.
+    no_github: No GitHub.
     menu:
       topics: "Topics"
       recent_reply_topics: "Recent replies"
@@ -314,10 +339,12 @@
     new_team: 'New Team'
     edit_team: 'Edit team profile'
     new_team_user: 'Add a member'
+    all_members: "All members"
     edit_team_user: 'Change team roles'
     delete_team_user: 'Remove member'
     show_team_user: 'View invitations'
     accept_team_user: 'Accept invitation'
+    do_you_want_accept_team_user_html: "Do you want to accept invitation to join <b>%{team}</b>?"
     reject_team_user: 'Decline'
     delete_team_user_confirm: 'Are you sure you want to remove this user from team?'
     topics: 'Topics of members'
@@ -342,3 +369,8 @@
     node_changed_html: Your topic %{topic} has moved into %{node} node.
     invite_you_join: Invite you to join
     show_invite: Show invite
+    created_topic: "%{actor} created %{target}"
+    created_reply: "%{actor} created reply %{target}"
+    followed_you: "%{actor} has been followed you."
+    mentioned_you: "%{actor} mentioned you."
+    node_changed: "Your topic has moved into %{node} node."

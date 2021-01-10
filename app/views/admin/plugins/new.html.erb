@@ -1,11 +1,11 @@
-<div class="card-title">安装插件</div>
+<div class="card-title">Install Plugin</div>
 <%= form_for User.new, url: admin_plugins_path, method: :post, html: { enctype: "multipart/form-data" } do |f| %>
   <div class="form-group">
-    <label class="control-label">选择插件包</label>
+    <label class="control-label">Select plugin zip</label>
     <input name="file" type="file" accept="*.zip" class="form-control" />
-    <div class="form-text">请选择 Homeland 的插件 zip 包，并安装。请勿安装非 Homeland 插件，否则会导致无法预期的问题！</div>
+    <div class="form-text">Please select the Homeland plugin zip package and install it. Do not install non-Homeland plugins, otherwise it will cause unexpected problems!</div>
   </div>
   <div class="form-actions">
-    <button type="submit" class="btn btn-primary">安装</button>
+    <button type="submit" class="btn btn-primary">Install</button>
   </div>
 <% end %>

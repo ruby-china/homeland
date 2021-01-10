@@ -4,7 +4,7 @@
     <div class="card-title hide-ios">
       <%= t('topics.edit_topic') %>
       <div class="actions">
-        <%= link_to "返回", topic_path(@topic) %>
+        <%= link_to t("common.back"), topic_path(@topic) %>
       </div>
     </div>
     <%= render 'form' %>

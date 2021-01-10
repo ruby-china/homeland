@@ -21,7 +21,7 @@ module Admin
           Setting.require_restart = true
         end
 
-        redirect_to admin_site_configs_path, notice: "保存成功."
+        redirect_to admin_site_configs_path, notice: "Update successfully."
       else
         render "edit"
       end

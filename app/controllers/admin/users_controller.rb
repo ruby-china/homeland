@@ -93,7 +93,7 @@ module Admin
     end
 
     def _clean_replies
-      # 为了避免误操作删除大量，限制一次清理 10 条，这个数字对刷垃圾回复的够用了。
+      # For avoid mistakenly deelete a lot of record, we limit delete 10 items.
       ids = Reply.unscoped.where(user_id: @user.id).recent.limit(10).pluck(:id)
       replies = Reply.unscoped.where(id: ids)
       topics = Topic.where(id: replies.collect(&:topic_id))

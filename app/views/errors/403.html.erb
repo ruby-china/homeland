@@ -1,12 +1,15 @@
 <% content_for :sitemap do %><span class="current">404</span><% end %>
 <div id="error-page" class="card">
   <div class="card-body">
-    <h1>>403 没有权限</h1>
+    <h1>>403 Access denied</h1>
     <p>
-      抱歉，你没有做此操作的权限，如有问题，请到社区发帖询问。
+      Sorry, you do not have the authority to do this operation. 
     </p>
     <p>
-      <a href="/" class="btn">返回首页</a>
+    If you have any questions, please post to the community to ask.
+    </p>
+    <p>
+      <a href="/" class="btn"><%= t("common.back") %></a>
     </p>
   </div>
 </div>

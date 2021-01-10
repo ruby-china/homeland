@@ -1,5 +1,5 @@
-<p class="lead">你好 <%= @user.fullname %></p>
+<p class="lead">Hi <%= @user.fullname %></p>
 <p><%= t("mail.you_have_successfully") %> <%= link_to Setting.app_name, root_url %> <%= t("mail.registered_an_account") %></p>
 <p><%= t("mail.welcome_title", app_name: Setting.app_name) %></p>
-<p><%= link_to '立即登录', new_user_session_url, class: 'btn btn-primary' %></p>
+<p><%= link_to t("common.login"), new_user_session_url, class: 'btn btn-primary' %></p>
 <p><%= t("mail.login_from") %>：<%= link_to new_user_session_url, new_user_session_url %></p>

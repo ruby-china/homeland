@@ -2,11 +2,11 @@
 <div class="search-results card card-lg">
   <div class="card-body">
     <div class="card-title clearfix">
-      关于 “<%= params[:q] %>” 的搜索结果
-      <div class="counter">共 <%= @result.count %> 条</div>
+      Search result of: <%= params[:q] %>
+      <div class="counter">Total <%= @result.count %> records</div>
     </div>
     <% if @result.count == 0 %>
-      <div class="no-result">没有搜索到任何有关 “<%= params[:q]%>” 的内容</div>
+      <div class="no-result">Can not find anything about: <%= params[:q]%></div>
     <% else %>
       <% @result.each do |doc| %>
         <% partial_view_name = doc.searchable_type.downcase -%>

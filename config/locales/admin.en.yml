@@ -34,5 +34,9 @@
       edit_setting: "Edit Settings"
     users:
       trust_user_can_modify_wiki: "Allow user to modify Wiki"
+    nodes:
+      new: New Node
+      edit: Edit Node
     topic_list: "Topic List"
     check_photo: "View Photo"
+    reboot_successfully: A reboot command has been initiated, and the Homeland is restarting in the background. You can refresh the page and determine whether the restart is complete by boot time.

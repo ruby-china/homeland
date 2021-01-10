@@ -23,7 +23,7 @@
             </div>
           </div>
           <div class="item number">
-            第 <%= @user.id %> 位<%= t("menu.users")%> / <span title="注册日期"><%= @user.created_at.to_date %></span>
+            <%= t("users.number_of_user", no: @user.id)%> / <span title="<%= t("users.join_time") %>"><%= @user.created_at.to_date %></span>
           </div>
         </div>
       </div>
@@ -38,14 +38,14 @@
           </div>
         <% end %>
         <% if @user.location.present? %>
-        <div class="item location" title="所在地">
+        <div class="item location" title="Location">
           <%= icon_tag("location") %> <%= location_name_tag(@user.location) %>
         </div>
         <% end %>
         <div class="item counts">
-          <span><%= @user.topics_count %></span> 篇帖子
+          <%= t("users.topics_count_html", count: @user.topics_count) %>
           <span class="divider">/</span>
-          <span><%= @user.replies_count %></span> 条回帖
+          <%= t("users.replies_count_html", count: @user.replies_count) %>
         </div>
         <div class="item social">
           <% if !@user.twitter.blank? %>
@@ -65,15 +65,15 @@
       <div class="follow-info flex aic jcsb hide-ios">
         <div class="followers" data-login="<%= @user.login %>">
           <%= link_to @user.followers_count, followers_user_path(@user), class: "counter" %>
-          <%= link_to "关注者", followers_user_path(@user), class: "text" %>
+          <%= link_to t("users.menu.followers"), followers_user_path(@user), class: "text" %>
         </div>
         <div class="following">
           <%= link_to @user.following_count, following_user_path(@user), class: "counter" %>
-          <%= link_to "正在关注", following_user_path(@user), class: "text" %>
+          <%= link_to t("users.menu.following"), following_user_path(@user), class: "text" %>
         </div>
         <div class="stars">
           <%= link_to @user.favorites_count, favorites_user_path(@user), class: "counter" %>
-          <%= link_to "收藏", favorites_user_path(@user), class: "text" %>
+          <%= link_to t("users.menu.favorites"), favorites_user_path(@user), class: "text" %>
         </div>
       </div>
       <% if !owner? @user %>

@@ -222,7 +222,7 @@ class TopicTest < ActiveSupport::TestCase
     t = build(:topic, user_id: user_id)
     assert_equal false, t.save
     assert_equal 1, t.errors.count
-    assert_equal ["创建太频繁，请稍后再试"], t.errors&.messages.dig(:base)
+    assert_equal ["Create too frequently, please try again later."], t.errors&.messages.dig(:base)
 
     Rails.cache.delete("users:#{user_id}:topic-create")
     Setting.stubs(:topic_create_limit_interval).returns(0)
@@ -246,7 +246,7 @@ class TopicTest < ActiveSupport::TestCase
     Rails.cache.write("users:#{user_id}:topic-create-by-hour", 10)
     topic = build(:topic, user_id: user_id)
     assert_equal false, topic.save
-    assert_equal ["1 小时内创建话题量不允许超过 10 篇，无法再次发布"], topic.errors&.messages.dig(:base)
+    assert_equal ["Creation has been rejected by limit 10 topics created within 1 hour."], topic.errors&.messages.dig(:base)
 
     Setting.stubs(:topic_create_hour_limit_count).returns(0)
     topic = build(:topic, user_id: user_id)
@@ -259,10 +259,10 @@ class TopicTest < ActiveSupport::TestCase
     assert_equal true, topic.valid?
     topic = build(:topic, body: "This is FFFF")
     assert_equal false, topic.valid?
-    assert_equal ["敏感词 “FFF” 禁止发布！"],  topic.errors&.messages.dig(:body)
+    assert_equal ["Create failed, because content has sensitive word \"FFF\"."],  topic.errors&.messages.dig(:body)
     topic = build(:topic, body: "This is AAAA")
     assert_equal false, topic.valid?
-    assert_equal ["敏感词 “AAAA” 禁止发布！"],  topic.errors&.messages.dig(:body)
+    assert_equal ["Create failed, because content has sensitive word \"AAAA\"."],  topic.errors&.messages.dig(:body)
   end
 
   test "as_indexed_json" do

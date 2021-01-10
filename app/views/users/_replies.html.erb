@@ -1,6 +1,6 @@
 <% if replies.blank? %>
 <div class="card-body">
-  <div class="no-result" style="padding:20px">还未参与讨论</div>
+  <div class="no-result" style="padding:20px"><%= t("users.no_replies") %></div>
 </div>
 <% else %>
 <ul class="list-group list-group-flush recent-replies">

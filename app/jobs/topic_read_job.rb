@@ -16,7 +16,7 @@ class TopicReadJob < AsyncJob
                   .where(any_sql, topic.id, replies_ids)
                   .update_all(read_at: Time.now)
     Notification.realtime_push_to_client(user)
-    # 处理 last_reply_id 是空的情况
+    # For last_reply_id is nil
     last_reply_id = topic.last_reply_id || -1
     Rails.cache.write("user:#{user.id}:topic_read:#{topic.id}", last_reply_id)
   end

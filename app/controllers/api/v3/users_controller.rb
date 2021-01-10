@@ -6,7 +6,7 @@ module Api
       before_action :doorkeeper_authorize!, only: %i[me follow unfollow block unblock blocked]
       before_action :set_user, except: %i[index me]
 
-      # 获取热门用户
+      # Get Hot User List
       #
       # GET /api/v3/users
       #
@@ -20,7 +20,7 @@ module Api
         @users = User.fields_for_list.hot.limit(limit)
       end
 
-      # 获取当前用户的完整信息，用于个人设置修改资料
+      # Get full detail of current user, for account setting.
       #
       # GET /api/v3/users/me
       def me
@@ -28,7 +28,7 @@ module Api
         render "show"
       end
 
-      # 获取某个用户的详细信息
+      # Get user profile, for show user detail
       #
       # GET /api/v3/users/:id
       # @return [UserDetailSerializer]
@@ -41,15 +41,15 @@ module Api
         end
       end
 
-      # 获取某个用户的话题列表
+      # Get user's topics
       #
       # GET /api/v3/users/:id/topics
       #
-      # @param order [String] 排序方式, default: 'recent', range: %w(recent likes replies)
+      # @param order [String] order type, default: 'recent', range: %w(recent likes replies)
       # @param offset [Integer] default: 0
       # @param limit [Integer] default: 20, range: 1..150
       #
-      # @return [Array<TopicSerializer>] 话题列表
+      # @return [Array<TopicSerializer>] Topic List
       def topics
         optional! :order, type: String, default: "recent", values: %w[recent likes replies]
         optional! :offset, type: Integer, default: 0
@@ -67,12 +67,12 @@ module Api
         @topics = @topics.includes(:user).offset(params[:offset]).limit(params[:limit])
       end
 
-      # 获取某个用户的回帖列表
+      # Get user's replies
       #
       # GET /api/v3/users/:id/replies
       # == params:
       #
-      # @param order [String] 排序方式, default: 'recent', range: %w(recent)
+      # @param order [String] order type, default: 'recent', range: %w(recent)
       # @param offset [Integer] default: 0
       # @param limit [Integer] default: 20, range: 1..150
       #
@@ -86,13 +86,13 @@ module Api
         @replies = @replies.includes(:user, :topic).offset(params[:offset]).limit(params[:limit])
       end
 
-      # 获取某个用户的收藏列表
+      # Get user's favroites
       #
       # GET /api/v3/users/:id/favorites
       #
       # @param offset [Integer] default: 0
       # @param limit [Integer] default: 20, range: 1..150
-      # @return <Array[TopicSerializer]> 收藏的话题列表
+      # @return <Array[TopicSerializer]> topic list
       def favorites
         optional! :offset, type: Integer, default: 0
         optional! :limit, type: Integer, default: 20, values: 1..150
@@ -101,13 +101,13 @@ module Api
         render "topics"
       end
 
-      # 获取某个用户关注的人的列表
+      # Get user's followers
       #
       # GET /api/v3/users/:id/followers
       #
       # @param offset [Integer] default: 0
       # @param limit [Integer] default: 20, range: 1..150
-      # @return <Array[UserSerializer]> 用户列表
+      # @return <Array[UserSerializer]> User List
       def followers
         optional! :offset, type: Integer, default: 0
         optional! :limit, type: Integer, default: 20, values: 1..150
@@ -115,7 +115,7 @@ module Api
         @users = @user.follow_by_users.fields_for_list.order("actions.id asc").offset(params[:offset]).limit(params[:limit])
       end
 
-      # 获取某个用户的关注者列表
+      # Get user's following
       #
       # GET /api/v3/users/:id/following
       #
@@ -128,7 +128,7 @@ module Api
         @users = @user.follow_users.fields_for_list.order("actions.id asc").offset(params[:offset]).limit(params[:limit])
       end
 
-      # 获取用户的已屏蔽的人（只能获取自己的）
+      # Get current_user's blocked users
       #
       # GET /api/v3/users/:id/blocked
       #
@@ -143,7 +143,7 @@ module Api
         @users = current_user.block_users.fields_for_list.order("actions.id asc").offset(params[:offset]).limit(params[:limit])
       end
 
-      # 关注用户
+      # Follow user
       #
       # POST /api/v3/users/:id/follow
       def follow
@@ -151,7 +151,7 @@ module Api
         render json: { ok: 1 }
       end
 
-      # 取消关注用户
+      # Unfollow user
       #
       # POST /api/v3/users/:id/unfollow
       def unfollow
@@ -159,7 +159,7 @@ module Api
         render json: { ok: 1 }
       end
 
-      # 屏蔽用户
+      # Block user
       #
       # POST /api/v3/users/:id/block
       def block
@@ -167,7 +167,7 @@ module Api
         render json: { ok: 1 }
       end
 
-      # 取消屏蔽用户
+      # Unblock user
       #
       # POST /api/v3/users/:id/unblock
       def unblock

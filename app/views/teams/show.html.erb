@@ -5,7 +5,7 @@
     <div class="card topics">
       <div class="card-body">
         <% if @topics.blank? %>
-        <div class="topic"><div class="no-result">暂无任何话题</div></div>
+        <div class="topic"><div class="no-result">No records</div></div>
         <% else %>
           <%= render TopicComponent.with_collection(@topics, type: "team") %>
         <% end %>

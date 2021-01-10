@@ -12,12 +12,10 @@
         <span class="level"><%= user_level_tag(item) %></span>
       </div>
       <div class="info number">
-        第 <%= item.id %> 位<%= t("menu.users")%>
+        <span title="Created At"><%= item.created_at.to_date %></span>
+        <% if item.location.present? %> • <span title="Location"><%= location_name_tag(item.location) %></span><% end %>
          •
-        <span title="注册日期"><%= item.created_at.to_date %></span>
-        <% if item.location.present? %> • <span title="所在地"><%= location_name_tag(item.location) %></span><% end %>
-         •
-        <span><%= item.topics_count %></span> 篇帖子 • <span><%= item.replies_count %></span> 条回帖
+        <span><%= item.topics_count %></span> Topics • <span><%= item.replies_count %></span> Replies
       </div>
     </div>
   </div>

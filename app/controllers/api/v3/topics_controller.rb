@@ -6,12 +6,12 @@ module Api
       before_action :doorkeeper_authorize!, except: %i[index show replies]
       before_action :set_topic, except: %i[index create]
 
-      # 获取话题列表，类似网站的 /topics 的结构，支持多种排序方式。
+      # Get Topic List, like /topics page.
       #
       # GET /api/v3/topics
       #
-      # @param type [String] 排序类型, default: `last_actived`, %w(last_actived recent no_reply popular excellent)
-      # @param node_id [Integer] 节点编号，如果有给，就会只去节点下的话题
+      # @param type [String] order type, default: `last_actived`, %w(last_actived recent no_reply popular excellent)
+      # @param node_id [Integer] Node ID, if present, will filter with node.
       # @param offset [Integer] default: 0
       # @param limit [Integer] default: 20, range: 1..150
       #
@@ -47,21 +47,21 @@ module Api
         @topics = @topics.offset(params[:offset]).limit(params[:limit])
       end
 
-      # 获取话题详情（不含回帖）
+      # Get Topic Detail (not including replies)
       #
       # GET /api/v3/topics/:id
       #
-      # @param id [Integer] 话题编号
-      # @return [TopicDetailSerializer] 此外 meta 里面包含当前用户对此话题的状态
+      # @param id [Integer] Topic ID
+      # @return [TopicDetailSerializer] In addition, meta contains the status of the current user on this topic.
       #
       # ```json
-      # { followed: '是否已关注', liked: '是否已赞', favorited: '是否已收藏' }
+      # { followed: 'Is followed this Topic', liked: 'Is liked this Topic', favorited: 'Is favorited this Topic' }
       # ```
       def show
         @meta = { followed: false, liked: false, favorited: false }
 
         if current_user
-          # 处理通知
+          # Create Notifications
           current_user.read_topic(@topic)
           @meta[:followed] = current_user.follow_topic?(@topic)
           @meta[:liked] = current_user.like_topic?(@topic)
@@ -69,20 +69,20 @@ module Api
         end
       end
 
-      # 创建新话题
+      # Create Topic
       #
       # POST /api/v3/topics
       #
-      # @param title [String] 标题, [required]
-      # @param node_id [Integer] 节点编号, [required]
-      # @param body [Markdown] 格式的正文, [required]
+      # @param title [String] Title, [required]
+      # @param node_id [Integer] Node ID, [required]
+      # @param body [Markdown] format body, [required]
       # @return [TopicDetailSerializer]
       def create
         requires! :title
         requires! :body
         requires! :node_id
 
-        raise AccessDenied.new("当前登录的用户没有发帖权限，具体请参考官网的相关说明。") unless can?(:create, Topic)
+        raise AccessDenied.new("The current user does not have permission to create Topic.") unless can?(:create, Topic)
 
         @topic = current_user.topics.new(title: params[:title], body: params[:body])
         @topic.node_id = params[:node_id]
@@ -91,13 +91,13 @@ module Api
         render "show"
       end
 
-      # 更新话题
+      # Update Topic
       #
       # POST /api/v3/topics/:id
       #
-      # @param title [String] 标题, [required]
-      # @param node_id [Integer] 节点编号, [required]
-      # @param body [String] Markdown 格式的正文, [required]
+      # @param title [String] Title, [required]
+      # @param node_id [Integer] Node ID, [required]
+      # @param body [String] Markdown format body, [required]
       # @return [TopicDetailSerializer]
       def update
         requires! :title
@@ -107,11 +107,11 @@ module Api
         raise AccessDenied unless can?(:update, @topic)
 
         if @topic.lock_node == false || can?(:lock_node, @topic)
-          # 锁定接点的时候，只有管理员可以修改节点
+          # Only admin can change node, when it's has been locked
           @topic.node_id = params[:node_id]
 
           if @topic.node_id_changed? || can?(:lock_node, @topic)
-            # 当管理员修改节点的时候，锁定节点
+            # Lock node when admin update
             @topic.lock_node = true
           end
         end
@@ -163,7 +163,7 @@ module Api
 
         requires! :body
 
-        raise AccessDenied.new("当前用户没有回帖权限，具体请参考官网的说明。") unless can?(:create, Reply)
+        raise AccessDenied.new("The current user does not have permission to reply to topics.") unless can?(:create, Reply)
 
         @reply = @topic.replies.build(body: params[:body])
         @reply.user_id = current_user.id
@@ -171,7 +171,7 @@ module Api
         render "api/v3/replies/show"
       end
 
-      # 关注话题
+      # Follow Topic
       #
       # POST /api/v3/topics/:id/follow
       def follow
@@ -179,7 +179,7 @@ module Api
         render json: { ok: 1 }
       end
 
-      # 取消关注话题
+      # Unfollow Topic
       #
       # POST /api/v3/topics/:id/unfollow
       def unfollow
@@ -187,7 +187,7 @@ module Api
         render json: { ok: 1 }
       end
 
-      # 收藏话题
+      # Favorite Topic
       #
       # POST /api/v3/topics/:id/favorite
       def favorite
@@ -195,7 +195,7 @@ module Api
         render json: { ok: 1 }
       end
 
-      # 取消收藏话题
+      # Unfovorite Topic
       #
       # POST /api/v3/topics/:id/unfavorite
       def unfavorite
@@ -203,21 +203,21 @@ module Api
         render json: { ok: 1 }
       end
 
-      # 屏蔽话题 (Admin only)
-      # [废弃] 请用 POST /api/v3/topics/:id/action
+      # Ban Topic (Admin only)
+      # [Deprecated] use POST /api/v3/topics/:id/action
       #
       # POST /api/v3/topics/:id/ban
       def ban
-        raise AccessDenied.new("当前用户没有屏蔽别人话题的权限，具体请参考官网的说明。") unless can?(:ban, @topic)
+        raise AccessDenied.new("The current user does not have the authority to block other people's topics.") unless can?(:ban, @topic)
         @topic.ban!
         render json: { ok: 1 }
       end
 
-      # 更多功能
-      # 注意类型有不同的权限，详见 GET /api/v3/topics/:id 返回的 abilities
+      # Actions
+      # NOTE: The types have different permissions, see GET /api/v3/topics/:id retrurn abilities
       #
       # POST /api/v3/topics/:id/action?type=:type
-      # @param type [String] 动作类型, ban - 屏蔽话题, normal - 取消屏蔽, excellent - 加精华, unexcellent - 取消精华, close - 关闭回复, open - 开启回复
+      # @param type [String] action type, ban - Ban, normal - Unban, excellent - Excellent, unexcellent - Unexcellent, close - Close Topic, open - Reopen Topic
       def action
         raise AccessDenied unless can?(params[:type].to_sym, @topic)
 

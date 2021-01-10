@@ -2,7 +2,7 @@
 
 module Admin
   class RepliesController < Admin::ApplicationController
-    before_action :set_reply, only: %i[show edit update destroy]
+    before_action :set_reply, only: %i[show edit update destroy revert]
 
     def index
       @replies = Reply.unscoped
@@ -24,6 +24,11 @@ module Admin
 
     def destroy
       @reply.destroy
+    end
+
+    def revert
+      @reply.update_attribute(:deleted_at, nil)
+      redirect_to(admin_replies_path)
     end
 
     private

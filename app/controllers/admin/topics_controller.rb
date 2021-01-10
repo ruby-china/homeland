@@ -2,7 +2,7 @@
 
 module Admin
   class TopicsController < Admin::ApplicationController
-    before_action :set_topic, only: %i[show edit update destroy undestroy suggest unsuggest]
+    before_action :set_topic, only: %i[show edit update destroy revert suggest unsuggest]
 
     def index
       @topics = Topic.unscoped
@@ -53,19 +53,19 @@ module Admin
       redirect_to(admin_topics_path)
     end
 
-    def undestroy
+    def revert
       @topic.update_attribute(:deleted_at, nil)
       redirect_to(admin_topics_path)
     end
 
     def suggest
       @topic.update_attribute(:suggested_at, Time.now)
-      redirect_to(@topic, notice: "话题置顶成功")
+      redirect_to(@topic, notice: t("topics.topic_pin_successfully"))
     end
 
     def unsuggest
       @topic.update_attribute(:suggested_at, nil)
-      redirect_to(@topic, notice: "话题已取消置顶")
+      redirect_to(@topic, notice: t("topics.topic_unpin_successfully"))
     end
 
     private

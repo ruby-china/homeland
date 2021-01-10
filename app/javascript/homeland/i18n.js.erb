@@ -1,0 +1,32 @@
+/* eslint-disable */
+import i18n from "i18next";
+const deepAssign = require('deep-assign');
+const metaLocale = document.querySelector('meta[name=locale]');
+const lang = (metaLocale && metaLocale.content || 'en').replace('-', '_');
+<% I18n.backend.eager_load! %>
+const RAILS_I18N = <%= I18n.backend.translations.to_json %>;
+i18n.init({
+  // we init with resources
+  resources: {
+    en: {
+      locales: deepAssign(RAILS_I18N["en"], {})
+    },
+    zh_CN: {
+      locales: deepAssign(RAILS_I18N["zh-CN"], {}),
+    }
+  },
+  fallbackLng: "en",
+  debug: false,
+  lng: lang,
+  // have a common namespace used around the full app
+  ns: ["locales"],
+  defaultNS: "locales",
+  interpolation: {
+    prefix: "%{",
+    suffix: "}",
+  },
+  react: {
+    wait: true
+  }
+});
+export default i18n;

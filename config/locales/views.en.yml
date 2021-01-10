@@ -1,0 +1,376 @@
+"en":
+  common:
+    justnow: 'Just Now'
+    hour: 'Hour'
+    minute: 'Minute'
+    edit: "Edit"
+    create: "Create"
+    ok: "OK"
+    cancel: "Cancel"
+    avatar: "Avatar"
+    save: "Save"
+    saving: "Saving"
+    submitting: "Submitting"
+    delete: "Delete"
+    revert: "Revert"
+    revoke: "Revoke"
+    place_top: "Stick Top"
+    un_top: "Un-Stick Top"
+    upload: "Upload"
+    uploading: "Uploading"
+    published_at: "Published At"
+    register: "Sign Up"
+    login: "Sign In"
+    logining: "Sign In..."
+    logout: "Sign Out"
+    remember_me: "Remember me (2 months)"
+    created_at: "Created at %{time}"
+    until: "until"
+    last_by: "Last by"
+    floor: "Floor"
+    reply_at: "replied at %{time}"
+    create_item: "Create Item"
+    read_times: "hits"
+    confirm_delete: "Are you sure you want to delete?"
+    search: "Search"
+    public: "Public"
+    create_success: "Created successfully."
+    delete_success: "Deleted successfully."
+    update_success: "Updated successfully."
+    mark_all_as_read: "Mark all as read"
+    last_modified_at: "Last modified at"
+    index: "Index"
+    you_may_like: "You may also like"
+    read: "read"
+    admin_user: "Admin"
+    vip_user: "VIP"
+    normal_user: "Member"
+    newbie_user: "Newbie"
+    blocked_user: "Blocked User"
+    hr_user: "HR"
+    title: "Title"
+    reply_count: "Reply count"
+    last_reply_time: "Last replied at"
+    reply: "Reply"
+    index_node_navigation: "Node Navigation"
+    highlight_topic: "Sticky Topic"
+    statics: "Statistics"
+    statics_users_count: "Users: %{count}"
+    statics_topics_count: "Topics: %{count}"
+    statics_replies_count: "Replies: %{count}"
+    comments: "Comments"
+    new_comment: "Write comment"
+    no_search_result: "No search result"
+    access_denied: "Access denied, Please sign in and make sure you have proper permission."
+    editor_toolbar_edit: "Edit"
+    editor_toolbar_preview: "Preview"
+    editor_add_image: "Upload image"
+    editor_insert_codes: "Insert Codes"
+    node: "Node"
+    notifications: "Notifications"
+    by: "by"
+    at: "on"
+    like: "Like"
+    unlike: "Unlike"
+    likes: likes
+    favorite: "Favorite"
+    unfavorite: "Unfavorite"
+    subscribe: "Subscribe"
+    follow_user: "Follow"
+    unfollow_user: "Followed"
+    reward: "Reward"
+    has_deleted: "has deleted"
+    auth_with_other_services: "Sign in with other services"
+    captcha: 'Captcha'
+    search_result: 'Search results'
+    tips: Tips
+    unknow_error: Unknow error, please try out later.
+    unknow_user: Unknow user
+    block_node: Block node
+    unblock_node: Unblock node
+    block_node_title: Block this node, you will not see topics in this node.
+    block_user: Block
+    unblock_user: Unblock
+    block_user_title: Block this user, you will not see him topics.
+    error_message_title: There have %{count} issues can not submit
+  reply:
+    edit_reply: "Edit Reply"
+    delete_reply_success: 'Delete successfully.'
+    topic_location: 'Replied to'
+  photos:
+    upload_and_insert_code: "Upload and insert code"
+    uploading: "Uploading"
+  menu:
+    topics: "Topics"
+    wiki: "Wiki"
+    gems: "Gems"
+    users: "Users"
+    admin: "Admin Panel"
+    nodes: "Nodes"
+    edit_account_path: "Settings"
+    likes: "Your favorites"
+    teams: "Teams"
+    back_to_front: "Back to front"
+  comments:
+    create_comment: "Comment"
+    no_comment: "No Comment at the moment"
+  mail:
+    login_from: "Sign in from"
+    this_is_a_notification_mail_please_do_not_reply: "This is an email notification. Please do not reply."
+    welcome_subject: "Welcome to %{app_name} community"
+    welcome_title: "Welcome to %{app_name}"
+    you_have_successfully: "You have successfully registered an account in"
+    registered_an_account: "."
+  rss:
+    recent_topics_description: "Recent Topics in %{name} Forum."
+    recent_topics_title: "%{name} Forum"
+    recent_node_topics_description: "Recent Topic in %{node_name} of %{name} Forum."
+    recent_node_topics_title: "%{node_name} node of %{name} Forum"
+  setting:
+    app_name: "Application name"
+    newbie_notices: "Notifce for newbie (HTML)"
+    admin_emails: "Admin emails, in this list email who will get the admin role."
+    reject_newbie_reply_in_the_evening: "Disallow newbie replying at night."
+    node_ids_hide_in_topics_index: "Node ids hide in topic list (Split with comma)."
+    default_locale: "User default language [zh-CN, en]"
+    auto_locale: "Enable auto switch language by user browser setting. [true | false]"
+    custom_head_html: "Customize HTML in head."
+    site_index_html: "Customize HTML in site index page."
+    navbar_brand_html: "Customize HTML in navbar logo region."
+    navbar_html: "Customize HTML in navbar."
+    topic_index_sidebar_html: "Customize HTML in topic index page."
+    before_topic_html: "Customize HTML before the topic content."
+    after_topic_html: "Customize HTML after the topic content"
+    footer_html: "Customize HTML in page footer."
+    wiki_index_html: "Customize HTML in WIKI index page."
+    wiki_sidebar_html: "Customize HTML in WIKI sidebar."
+    tips: "Tips for random display."
+    ban_words_on_reply: "Content that will disallow with reply."
+    ban_words_in_body: "The disallow words in topic body."
+    apns_pem: "Apple Push Notification pem file contents, keep empty will not trigger push."
+    blacklist_ips: "IP Blacklist for block visit."
+    newbie_limit_time: "New registered user (Newbie) limit period (second), Newbie will not allow to create topic, but reply can. (0 to limited)"
+    ban_reasons: "The optional reasons for ban topic."
+    ban_reason_html: "The notice text (HTML format) for banned topic, this will show up under that then banned topic."
+    topic_create_limit_interval: "Topic create limit interval second. (0 no limit)"
+    topic_create_hour_limit_count: "Limit number of topics create in 1 hour. (0 no limit)"
+    sign_up_daily_limit: "Limit number of users register for each IP in every day. (0 no limit)"
+    use_recaptcha: "Use Google reCaptcha as captcha provider."
+    captcha_enable: "Enable captcha."
+    recaptcha_key: "Google reCaptcha key"
+    recaptcha_secret: "Google reCaptcha secret"
+    allow_change_login: "Allow users to change username"
+    twitter_id: "Twitter ID for mention when Twitter shere. For example: homeland (without @)"
+    share_allow_sites: "Social share targets, options [twitter,weibo,facebook,wechat,google_plus,douban,tumblr,pinterest,linkedin,email,reddit,hacker_news]"
+    editor_languages: 'Code languages for text editor insert menu. For example: "rb, go, php, js, html"'
+    sorted_plugins: 'Plugin order for adjust the navbar menu order. For example: "jobs, wiki, press, site"'
+    timezone: "Timezone, default: UTC"
+    profile_fields: "User profile fields, default: all, options: [company,twitter,website,tagline,location,alipay,paypal,qq,weibo,wechat,douban,dingding,aliwangwang,facebook,instagram,dribbble,battle_tag,psn_id,steam_id]"
+    modules: "Enable modules, default: all, options: [topic,team,github,editor.code]"
+    rack_attack: "Request rate limit. limit - Limit on the number of single IP requests per cycle, period - How much time (seconds) is a request limit period"
+    github_api_key: "GitHub login API key (Keep empty to disable)"
+    github_api_secret: "GitHub login API secret key"
+    twitter_api_key: "Twitter login API key (Keep empty to disable)"
+    twitter_api_secret: "Twitter login API secret key"
+    wechat_api_key: "Wechat API key (Keep empty to disable)"
+    wechat_api_secret: "Wechat API secret key"
+  pagination:
+    next: "Next"
+    prev: "Prev"
+    gap: "&hellip;"
+  topics:
+    new_topic: "New Topic"
+    edit_topic: "Edit Topic"
+    reply: "Reply"
+    no_replies: "No Reply at the moment."
+    recent_topics: "Recent Topics"
+    recent_replies: "Recent Replies"
+    check_recent_topics: "Read more recent topics..."
+    reply_this_fllor: "Reply to this floor"
+    tips_for_create_topic: "Tips for New Topics"
+    subscribe_with_rss: "Subscribe to %{name} RSS feed."
+    submit_reply: "Reply"
+    reply_to1: Reply to
+    reply_to2: ""
+    in: in
+    mentioned_this_topic: mention this topic.
+    excellent_topic: mark as excellent topic.
+    unexcellent_topic: canceled excellent.
+    closed_topic: closed this topic.
+    reopen_topic: reopened this topic.
+    banned_topic_with_reason_html: 'banned this topic: <span class="ban-reason">%{reason}</span>'
+    banned_topic: banned this topic.
+    topic_has_been_banned_html: Topic has been banned by admin.
+    topic_list:
+      latest: "Latest"
+      recent: "Newest"
+      last_reply: "Latest Reply"
+      popular: "Popular"
+      excellent: "Excellent"
+      banned: "Banned"
+    read_topic: "Read Topic"
+    create_topic_success: "Topic created successfully."
+    delete_topic_success: "Topic deleted successfully.."
+    update_topic_success: "Topic modified successfully.."
+    reply_success: "Replied Successfully"
+    reply_this_floor: "Reply to this floor"
+    topic_was_deleted: "[Topic was deleted]"
+    have_no_new_reply: "No new activites since your last read."
+    have_no_avatar: "You can't create a new Topic, before you upload a avatar."
+    excellent_info_html: "Topic has been selected as the excellent topic by the admin."
+    need_login_to_reply_html: You need to <a href="/account/sign_in" class="btn btn-sm btn-primary">Sign in</a> before reply, if you don't have an account, please <a href="/account/sign_up" class="btn btn-default btn-sm">Sign up</a> first.
+    newbi_info_html: "Newbi users cannot reply between 22:00 - 9:00."
+    closed_info_html: Topic has been closed at %{closed_at}, is not accepting any replies.
+    topic_pin_successfully: Topic has pinned successfully.
+    topic_unpin_successfully: Topic has canceled pin.
+    excellent_successfully: Topic has marked as excellent.
+    normal_successfully: Topic reset into normal state.
+    close_successfully: Topic has closed successfully.
+    reopen_successfully: Topic has reopen successfully.
+    ban_successfully: Topic has banned.
+    unban_successfully: Topic has canceled ban.
+    total_replies_html: Total <b>%{count}</b> replies
+    total_topics_html: Total <b>%{count}</b> topics
+    newbie_tip: Newbie Tip
+    ban_title: Ban reason
+    ban_directly: Ban without reason
+    ban_with_reason: "Input the ban reason:"
+    closed_tooltip: Topic has closed
+    create_too_frequently: Create too frequently, please try again later.
+    create_limit: Creation has been rejected by limit %{count} topics created within 1 hour.
+    sensitive_word_limit: 'Create failed, because content has sensitive word "%{word}".'
+    new_reply_received_html: New reply received, click here to load it
+    form:
+      title_placeholder: Type a topic title
+      no_team: No team
+      markdown_guides: Markdown Guides
+    menu:
+      pin: Pin
+      unpin: Unpin
+      excellent: Excellent
+      ban: Ban
+      unban: Unban
+      close: Close
+      reopen: Reopen
+      edit: Edit
+      delete: Delete
+  replies:
+    edit_reply: Edit reply
+    created_successfully: Reply has created successfully.
+    updated_successfully: Reply has updated successfully.
+    deleted_successfully: Reply has deleted successfully.
+    duplicate_error: "Cannot submit same content in repeatedly."
+    nopoint_limit: "Please do not reply to meaningless content. If you want to bookmark or like this Topic, please use the function behind the Topic."
+    close_limit: "Topic has been closed, no longer accepting create or update replies."
+  users:
+    bios: "Bio"
+    city: "City"
+    theme_auto: Auto
+    theme_light: Light
+    theme_dark: Dark
+    number_of_user: NO. %{no}
+    join_time: "Joined at"
+    signature: "Status"
+    topics_count_html: <span>%{count}</span> Topics
+    replies_count_html: <span>%{count}</span> Replies
+    personal_website: "Blog"
+    recent_publish_topic: "Recent Topics"
+    recent_reply_topic: "Recent Replies"
+    unbind_warning: "You need at least one binded account. Cannot unbind as this is your last account."
+    unbind_success: "%{provider} unbinded successfully."
+    please_be_careful: "Please proceed with caution."
+    be_sure_to_use_twitter_id: "This will change reply binding, Twitter ID is recommanded."
+    personal_information: "Personal Information"
+    edit_password: "Edit Password"
+    delete_my_account: "Delete My Account"
+    delete_this_account: "Delete This Account"
+    dont_like_it: "Do not like it?"
+    bind_another_account: "Bind another account"
+    click_to_unbind: "Click this button to unbind."
+    register_user: "Sign Up"
+    login: "Pick a username"
+    suggest_using_twitter_id: "Cannot modify after create."
+    already_have_account: "Already have an account?"
+    forget_password: "Forgot your password?"
+    not_recieve_confirm_mail: "Havn't received your confirmation email?"
+    not_recieve_unlock_mail: "Havn't received your unlock email?"
+    current_have: "Current have"
+    users_joined: "users joined"
+    teams_joined: "teams joined"
+    hot_users: "Top 100 active users"
+    hot_teams: "Top active teams"
+    recent_joined: "Most recently joined users"
+    submit_new_user: "Sign Up"
+    update_profile: "Update"
+    update_password: "Update password"
+    need_login_again_after_password_updated_html: NOTE! You need to login again after updating the password.
+    email_permission: "Show my email to others"
+    delete_account: "Delete account"
+    delete_account_tips_html: "<p>You can choice to delete your account when you don't need it.</p><p>Your datas will keeping and your account will lock as anonymous after delete.</p>"
+    confirm_delete_account: "Enter password to delete your account"
+    ensure_to_delete: "Delete my account"
+    complete_your_info: "Complete your account information"
+    binding_via_html: You must fill out the form below to complete the binding login method of <strong>%{provider}</strong>.
+    binding_has_account_html: If you already have an account, you can use <a href="/account/sign_in">Sign in</a> to bind the account.
+    reward_tip_html: If you find my topic useful to you, please feel free to give a reward. Your support will encourage me to continue creating!
+    username_allows_format: Only allow numbers, letters, dashline, underline.
+    no_replies: No replies.
+    no_github: No GitHub.
+    menu:
+      topics: "Topics"
+      recent_reply_topics: "Recent replies"
+      like: "Likes"
+      overview: "Overview"
+      profile: "Profile"
+      favorites: "Favorites"
+      replies: "Replies"
+      following: "Following"
+      followers: "Followers"
+      blocked: "Blocked"
+  team_user_status:
+    pendding: 'Awaiting response'
+    acceped: 'Accepted'
+  team_user_role:
+    owner: 'Owner'
+    member: 'Member'
+  teams:
+    teams: 'Team'
+    user_existed: 'Already in this team'
+    new_team: 'New Team'
+    edit_team: 'Edit team profile'
+    new_team_user: 'Add a member'
+    all_members: "All members"
+    edit_team_user: 'Change team roles'
+    delete_team_user: 'Remove member'
+    show_team_user: 'View invitations'
+    accept_team_user: 'Accept invitation'
+    do_you_want_accept_team_user_html: "Do you want to accept invitation to join <b>%{team}</b>?"
+    reject_team_user: 'Decline'
+    delete_team_user_confirm: 'Are you sure you want to remove this user from team?'
+    topics: 'Topics of members'
+    users: 'Members'
+    team_user_pendding: 'Awaiting response'
+    settings: 'Settings'
+    team_users_count: "%{count} team members"
+  user_setting:
+    profile: Profile
+    profile_detail: Social Profiles
+    reward: Reward
+    password: Password
+    account: Account setting
+    applications: Applications
+  notifications:
+    source_deleted: Notification source has been deleted.
+    mention_title_html: Mentioned you in <a href="%{url}">%{title}</a>
+    comment_title_html: Commented in your <a href="%{url}">%{title}</a>
+    reply_title_html: Replied you in %{topic}
+    topic_title_html: Created topic %{topic}
+    follow_you: has followed you.
+    node_changed_html: Your topic %{topic} has moved into %{node} node.
+    invite_you_join: Invite you to join
+    show_invite: Show invite
+    created_topic: "%{actor} created %{target}"
+    created_reply: "%{actor} created reply %{target}"
+    followed_you: "%{actor} has been followed you."
+    mentioned_you: "%{actor} mentioned you."
+    node_changed: "Your topic has moved into %{node} node."

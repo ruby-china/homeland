@@ -4,9 +4,9 @@
     <div class="card card-lg">
       <div class="card-body">
         <div class="card-title clearfix">
-          管理的应用列表
+          <%= t("user_setting.applciations") %>
           <div class="actions">
-            <%= link_to "注册新应用", new_oauth_application_path, class: 'btn btn-primary btn-sm' %>
+            <%= link_to "New Application", new_oauth_application_path, class: 'btn btn-primary btn-sm' %>
           </div>
         </div>
         <table class="table table-bordered table-striped">
@@ -15,7 +15,7 @@
               <th><%= t('.name') %></th>
               <th>Client Id</th>
               <th>Level</th>
-              <th>用户量</th>
+              <th>Users Count</th>
               <th></th>
             </tr>
           </thead>
@@ -28,7 +28,7 @@
                 <td><%= app.access_tokens.count %></td>
                 <td class="opts">
                   <%= link_to icon_tag('edit'), edit_oauth_application_path(app)%>
-                  <%= link_to icon_tag('trash'), oauth_application_path(app), data: { method: :delete, confirm: "确定要删除么？" }%>
+                  <%= link_to icon_tag('trash'), oauth_application_path(app), data: { method: :delete, confirm: t("common.confirm_delete") }%>
                 </td>
               </tr>
             <% end %>
@@ -39,9 +39,9 @@
     <div class="card card-lg">
       <div class="card-body">
         <div class="card-title clearfix">
-          <div>已授权的应用</div>
+          <div>Authorized Apps</div>
         </div>
-        <p>下面列表是已经认证的应用，它们可以访问你的账号。</p>
+        <p>You have granted <%= @authorized_applications.count %> applications access to your account.</p>
         <table class="table table-bordered table-striped table-condensed">
           <thead>
             <tr>
@@ -56,7 +56,7 @@
                 <td><%= app.name %></td>
                 <td><%= app.created_at.strftime(t('doorkeeper.authorized_applications.index.date_format')) %></td>
                 <td>
-                  <%= link_to "注销", oauth_authorized_application_path(app), class: "btn btn-default btn-sm", data: { confirm: "确定要注销么？", method: :delete } %>
+                  <%= link_to t("common.revoke"), oauth_authorized_application_path(app), class: "btn btn-default btn-sm", data: { confirm: "Are you sure?", method: :delete } %>
                 </td>
               </tr>
             <% end %>
@@ -67,10 +67,10 @@
     <% if @devices.length > 0 %>
       <div class="card">
         <div class="card-header clearfix">
-          我的设备信息
+          Devices
         </div>
         <div class="card-body">
-          <p>下面列表是已经连接上的设备，它们将会收到 Push 通知。</p>
+          <p>You has granted devices, it will get push notifications.</p>
           <table class="table table-bordered table-striped table-condensed">
             <thead>
               <tr>
@@ -86,7 +86,7 @@
                   <td><%= device.platform_name %></td>
                   <td><%= device.token %></td>
                   <td><%= device.alive? %></td>
-                  <td><%= link_to '删除', device, class: "btn btn-default btn-sm", data: { confirm: '确定要删除么？', method: :delete } %></td>
+                  <td><%= link_to t("common.delete"), device, class: "btn btn-default btn-sm", data: { confirm: t("common.confirm_delete"), method: :delete } %></td>
                 </tr>
               <% end %>
             </tbody>

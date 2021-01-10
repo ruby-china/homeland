@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class User
-  # Omniauth 认证函数
+  # Omniauth
   module Deviseable
     extend ActiveSupport::Concern
 
@@ -73,7 +73,8 @@ class User
           end
 
           if User.where(login: user.login).exists?
-            user.login = "#{user.github}-github" # TODO: possibly duplicated user login here. What should we do?
+            # TODO: possibly duplicated user login here. What should we do?
+            user.login = "#{user.github}-github" 
           end
 
           user.password = Devise.friendly_token[0, 20]

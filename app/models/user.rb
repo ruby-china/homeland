@@ -30,7 +30,7 @@ class User < ApplicationRecord
 
   attr_accessor :password_confirmation
 
-  validates :login, format: { with: ALLOW_LOGIN_FORMAT_REGEXP, message: "只允许数字、大小写字母、中横线、下划线" },
+  validates :login, format: { with: ALLOW_LOGIN_FORMAT_REGEXP, message: I18n.t("users.username_allows_format") },
                     length: { in: 2..20 },
                     presence: true,
                     uniqueness: { case_sensitive: false }
@@ -130,7 +130,7 @@ class User < ApplicationRecord
     "#{login} (#{name})"
   end
 
-  # @example.com 的可以修改邮件地址
+  # Only suffix as @example.com can modify email
   def email_locked?
     !legacy_omniauth_logined?
   end

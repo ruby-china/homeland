@@ -21,14 +21,14 @@ class Topic
 
       def _rate_limit_create
         if Rails.cache.read(_rate_limit_key)
-          self.errors.add(:base, "创建太频繁，请稍后再试")
+          self.errors.add(:base, I18n.t("topics.create_too_frequently"))
         end
 
         count_limit = Setting.topic_create_hour_limit_count.to_i
         if count_limit > 0
           count = Rails.cache.read(_rate_limit_hour_key) || 0
           if count >= count_limit
-            self.errors.add(:base, "1 小时内创建话题量不允许超过 #{count_limit} 篇，无法再次发布")
+            self.errors.add(:base, I18n.t("topics.create_limit", count: count_limit))
           end
         end
       end

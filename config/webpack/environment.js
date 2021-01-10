@@ -1,4 +1,5 @@
-const { environment } = require('@rails/webpacker')
+const { environment } = require("@rails/webpacker");
+const erb = require("./loaders/erb");
 
 const extendConfig = {
   devtool: false,
@@ -7,9 +8,9 @@ const extendConfig = {
       cacheGroups: {
         vendors: {
           test: /node_modules|lib\/assets|vendor/,
-          name: 'vendors',
+          name: "vendors",
           enforce: true,
-          chunks: 'all',
+          chunks: "all",
         },
       },
     },
@@ -17,5 +18,5 @@ const extendConfig = {
 };
 
 environment.config.merge(extendConfig);
-
-module.exports = environment
+environment.loaders.prepend("erb", erb);
+module.exports = environment;

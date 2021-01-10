@@ -3,9 +3,9 @@
   node = notification.second_target
  %>
 <% if topic.blank? or node.blank? %>
-  相关信息已删除
+  <%= t("notifications.source_deleted") %>
 <% else %>
   <div class="media-heading">
-    你发布的话题 <%= topic_title_tag(topic) %> 由于内容原因被管理员移动到了 <%= render_node_name(node) %> 节点，请注意查看节点说明。
+    <%= t("notifications.node_changed_html", topic: topic_title_tag(topic), node: render_node_name(node)) %>
   </div>
 <% end %>

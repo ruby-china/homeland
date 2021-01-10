@@ -2,7 +2,7 @@
   <div><%= icon_tag("plug") %> <%= @plugin.display_name %></div>
   <div class="counter"><%= @plugin.version %></div>
   <div class="actions">
-    <%= link_to "返回", admin_plugins_path, class: "btn btn-default btn-sm" %>
+    <%= link_to t("common.back"), admin_plugins_path, class: "btn btn-default btn-sm" %>
   </div>
 </div>
 <form class="form">
@@ -16,13 +16,13 @@
   <% end %>
   <div class="form-group">
     <% if @plugin.navbar_link %>
-      <span class="badge badge-primary">导航链接</span>
+      <span class="badge badge-primary">Navbar Link</span>
     <% end %>
     <% if @plugin.user_menu_link %>
-      <span class="badge badge-primary">用户菜单</span>
+      <span class="badge badge-primary">User menu link</span>
     <% end %>
     <% if @plugin.admin_path %>
-      <span class="badge badge-primary">管理界面</span>
+      <span class="badge badge-primary">Admin panel</span>
     <% end %>
   </div>
   <p>

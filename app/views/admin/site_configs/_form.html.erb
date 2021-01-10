@@ -4,7 +4,7 @@
     <label>
       <%= @site_config.var %>
       <% if @site_config.require_restart? %>
-        <span class="badge badge-warning">需要重启方可生效</span>
+        <span class="badge badge-warning">reboot required.</span>
       <% end %>
     </label>
     <%

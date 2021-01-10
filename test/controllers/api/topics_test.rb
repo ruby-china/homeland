@@ -426,7 +426,7 @@ describe Api::V3::TopicsController do
       t = create(:topic, title: "new topic 1", closed_at: Time.now)
       post "/api/v3/topics/#{t.id}/replies.json", body: "new reply body"
       assert_equal 400, response.status
-      assert_includes json["message"], "已关闭，不再接受回帖"
+      assert_includes json["message"], "Topic has been closed, no longer accepting create or update replies."
       assert_nil t.reload.replies.first
     end
   end

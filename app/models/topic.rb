@@ -4,7 +4,6 @@ class Topic < ApplicationRecord
   include SoftDelete, MarkdownBody, Mentionable, MentionTopic, Closeable, Searchable, UserAvatarDelegate
   include Topic::Actions, Topic::AutoCorrect, Topic::Search, Topic::Notify, Topic::RateLimit
 
-  # 临时存储检测用户是否读过的结果
   attr_accessor :read_state
 
   belongs_to :user, inverse_of: :topics, counter_cache: true, required: false
@@ -60,15 +59,16 @@ class Topic < ApplicationRecord
     Setting.node_ids_hide_in_topics_index.collect(&:to_i)
   end
 
-  # 所有的回复编号
+  # All reply ids
   def reply_ids
     Rails.cache.fetch([self, "reply_ids"]) do
       self.replies.order("id asc").pluck(:id)
     end
   end
 
+  # Update the topic last reply
+  # Ignore this method if Topic has created at 1 month ago
   def update_last_reply(reply, force: false)
-    # replied_at 用于最新回复的排序，如果帖着创建时间在一个月以前，就不再往前面顶了
     return false if reply.blank? && !force
 
     self.last_active_mark      = Time.now.to_i if created_at > 1.month.ago
@@ -81,7 +81,7 @@ class Topic < ApplicationRecord
     save
   end
 
-  # 更新最后更新人，当最后个回帖删除的时候
+  # Update last update user, when reply deleting
   def update_deleted_last_reply(deleted_reply)
     return false if deleted_reply.blank?
     return false if last_reply_user_id != deleted_reply.user_id
@@ -99,7 +99,7 @@ class Topic < ApplicationRecord
     ban_words = Setting.ban_words_in_body.collect(&:strip)
     ban_words.each do |word|
       if body.include?(word)
-        errors.add(:body, "敏感词 “#{word}” 禁止发布！")
+        errors.add(:body, I18n.t("topics.sensitive_word_limit", word: word))
         return false
       end
     end

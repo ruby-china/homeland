@@ -11,10 +11,10 @@
     <% if !Setting::SYSTEM_KEYS.include?(key) %>
     <li class="list-group-item">
       <div class="mb-1">
-        <%= icon_tag("cog") %><a href="<%= edit_admin_site_config_path(key) %>"><%= key %></a>
+        <%= icon_tag("cog") %><a href="<%= edit_admin_site_config_path(key) %>" class="ml-1"><%= key %></a>
         <% if key == "timezone" %>
           <div class="badge">
-            当前时区: <%= Time.zone %>
+            Current Timezone: <%= Time.zone %>
           </div>
         <% end %>
       </div>

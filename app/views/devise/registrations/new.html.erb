@@ -30,9 +30,9 @@ end
 
         <% if auth_info.present? %>
         <div class="alert">
-          <h4 class="alert-heading">完善您的账号信息</h4>
-          <p>您必须填写以下表单才能完成绑定 <strong><%= Homeland::Utils.omniauth_name(resource.omniauth_provider) %></strong> 的登录方式。</p>
-          <p>如果你已经有账号，你可以通过 <%= link_to "登录", new_session_path(resource_name) %> 来绑定账号。</p>
+          <h4 class="alert-heading"><%= t("users.complete_your_info") %></h4>
+          <p><%= t("users.binding_via_binding_via_html", provider: Homeland::Utils.omniauth_name(resource.omniauth_provider)) %></p>
+          <p><%= t("users.binding_has_account_html") %></p>
         </div>
         <% end %>
 

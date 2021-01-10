@@ -25,7 +25,7 @@
           <div class="actions opts">
             <div class="hideable">
               <%= link_to('', "#", 'data-id' => reply.id, 'data-login' => reply.user_login, title: t("topics.reply_this_floor"), class: "btn-reply fa fa-reply" ) %>
-              <%= link_to('', edit_topic_reply_path(@topic,reply), class: "edit fa fa-edit", title: "修改回帖", data: { uid: reply.user_id, prefetch: false } )%>
+              <%= link_to('', edit_topic_reply_path(@topic,reply), class: "edit fa fa-edit", title: t("common.edit"), data: { uid: reply.user_id, prefetch: false } )%>
             </div>
             <div class="actions-left">
               <%= likeable_tag(reply, cache: true) %>

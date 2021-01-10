@@ -1,8 +1,9 @@
-在
+<%= t("topics.in") %>
 <span class='topic'>
 <% if reply.target_type == "Topic" %>
   <%= topic_title_tag(reply&.target) %>
 <% else %>
   <%= topic_title_tag(reply&.target&.topic) %>
 <% end %>
-</span> 中提及了此贴
+</span> 
+<%= t("topics.mentioned_this_topic") %>

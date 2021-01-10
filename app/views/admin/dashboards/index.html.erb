@@ -4,89 +4,89 @@
 <div class="toolbar">
   <div class="btn-group">
     <a href="/admin/site_configs" class="btn btn-default"><i class="fa fa-cogs"></i> <%= t("admin.site_configs.settings") %></a>
-    <a href="/admin/plugins" class="btn btn-default"><i class="fa fa-plug"></i> 插件</a>
-    <a href="/admin/applications" class="btn btn-default"><i class="fa fa-cubes"></i> 三方应用</a>
-    <a href="/sidekiq" class="btn btn-default" target="_blank"><i class="fa fa-tasks"></i> 异步任务...</a>
-    <a href="/pghero" class="btn btn-default" target="_blank"><i class="fa fa-database"></i> 数据库状态...</a>
+    <a href="/admin/plugins" class="btn btn-default"><i class="fa fa-plug"></i> <%= t("admin.menu.plugins") %></a>
+    <a href="/admin/applications" class="btn btn-default"><i class="fa fa-cubes"></i> <%= t("admin.menu.applications") %></a>
+    <a href="/sidekiq" class="btn btn-default" target="_blank"><i class="fa fa-tasks"></i> <%= t("admin.menu.background_jobs") %></a>
+    <a href="/pghero" class="btn btn-default" target="_blank"><i class="fa fa-database"></i> <%= t("admin.menu.database") %></a>
     <a href="/exception-track" class="btn btn-default" target="_blank"><i class="fa fa-warning"></i> <%= t("admin.menu.exception_logs") %>...</a>
   </div>
 </div>
 <div class="alert alert-info">
-  服务启动于：<%= l Homeland.boot_at.in_time_zone(Time.zone), format: :long %> (<%= timeago Homeland.boot_at %>)
-  <%= link_to icon_tag("power-off", label: "重启应用"), reboot_admin_dashboards_path, data: { method: :post, confirm: "你确定要重启 Homeland 吗？", disable_with: "请求中..." }, class: "text-danger pull-right" %>
+  <%= t("admin.dashboard.boot_at_html", time: (l(Homeland.boot_at.in_time_zone(Time.zone), format: :long)) ) %> (<%= timeago Homeland.boot_at %>)
+  <%= link_to icon_tag("power-off", label: t("admin.reboot")), reboot_admin_dashboards_path, data: { method: :post, confirm: "你确定要重启 Homeland 吗？", disable_with: "请求中..." }, class: "text-danger pull-right" %>
 </div>
 <% if Setting.legecy_envs.any? %>
 <div class="alert alert-warning">
-  <h4 class="alert-heading">检测到废弃的环境配置</h4>
+  <h4 class="alert-heading">Deprecated configuration detected</h4>
   <ul>
     <% Setting.legecy_envs.each do |key| %>
-    <li><code><%= key %></code> 已经废弃，请改用 <code><%= Setting.legecy_env_instead(key) %></code></li>
+    <li>Deprecated <code><%= key %></code> use <code><%= Setting.legecy_env_instead(key) %></code> instead.</li>
     <% end %>
   </ul>
-  <div>关于更多的配置说明，请参考: <a href="https://homeland.ruby-china.org/docs/configuration/config-file/" target="_blank">Homeland 配置文档</a></div>
+  <div>More about the configuration: <a href="https://homeland.ruby-china.org/docs/configuration/config-file/" target="_blank">Homeland Document</a></div>
 </div>
 <% end %>
 <div class="clearfix">
-  <div class="row">
-    <div class="col-sm-4" id="user-stat">
+  <div class="flex aic jcsb">
+    <div id="user-stat">
       <div class="stat">
         <div class="total">0</div>
         <div class="name">
-          用户总数
-          <span class="total-week" rel="twipsy" title="本周新增">+0</span>
-          <span class="total-month" rel="twipsy" title="本月新增">+0</span>
+          <%= t("admin.dashboard.users_count") %>
+          <span class="total-week" rel="twipsy" title="Weely">+0</span>
+          <span class="total-month" rel="twipsy" title="Monthly">+0</span>
         </div>
       </div>
     </div>
-    <div class="col-sm-4" id="topic-stat">
+    <div id="topic-stat">
       <div class="stat">
         <div class="total">0</div>
         <div class="name">
-          话题总数
-          <span class="total-week" rel="twipsy" title="本周新增">+0</span>
-          <span class="total-month" rel="twipsy" title="本月新增">+0</span>
+          <%= t("admin.dashboard.topics_count") %>
+          <span class="total-week" rel="twipsy" title="Weely">+0</span>
+          <span class="total-month" rel="twipsy" title="Monthly">+0</span>
         </div>
       </div>
     </div>
-    <div class="col-sm-4" id="reply-stat">
+    <div id="reply-stat">
       <div class="stat">
         <div class="total">0</div>
         <div class="name">
-          回帖总数
-          <span class="total-week" rel="twipsy" title="本周新增">+0</span>
-          <span class="total-month" rel="twipsy" title="本月新增">+0</span>
+          <%= t("admin.dashboard.replies_count") %>
+          <span class="total-week" rel="twipsy" title="Weely">+0</span>
+          <span class="total-month" rel="twipsy" title="Monthly">+0</span>
         </div>
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-sm-3" id="notification-stat">
+  <div class="flex aic jcsb">
+    <div id="notification-stat">
       <div class="stat">
         <div class="total">0</div>
         <div class="name">
-          通知总数
-          <span class="total-week" rel="twipsy" title="本周新增">+0</span>
-          <span class="total-month" rel="twipsy" title="本月新增">+0</span>
+          <%= t("admin.dashboard.notifications_count") %>
+          <span class="total-week" rel="twipsy" title="Weely">+0</span>
+          <span class="total-month" rel="twipsy" title="Monthly">+0</span>
         </div>
       </div>
     </div>
-    <div class="col-sm-3" id="comment-stat">
+    <div id="comment-stat">
       <div class="stat">
         <div class="total">0</div>
         <div class="name">
-          评论总数
-          <span class="total-week" rel="twipsy" title="本周新增">+0</span>
-          <span class="total-month" rel="twipsy" title="本月新增">+0</span>
+          <%= t("admin.dashboard.comments_count") %>
+          <span class="total-week" rel="twipsy" title="Weely">+0</span>
+          <span class="total-month" rel="twipsy" title="Monthly">+0</span>
         </div>
       </div>
     </div>
-    <div class="col-sm-3" id="photo-stat">
+    <div id="photo-stat">
       <div class="stat">
         <div class="total">0</div>
         <div class="name">
-          照片总数
-          <span class="total-week" rel="twipsy" title="本周新增">+0</span>
-          <span class="total-month" rel="twipsy" title="本月新增">+0</span>
+          <%= t("admin.dashboard.photos_count") %>
+          <span class="total-week" rel="twipsy" title="Weely">+0</span>
+          <span class="total-month" rel="twipsy" title="Monthly">+0</span>
         </div>
       </div>
     </div>

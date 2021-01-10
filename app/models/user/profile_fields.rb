@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class User
-  # 用户个性资料，支持任意扩展，基于 rails-settings-cached 的特性
   module ProfileFields
     extend ActiveSupport::Concern
 
@@ -41,7 +40,7 @@ class User
     end
 
     private
-      # 在用户设置 user.location 保存的时候，自动创建 Location 数据，并更新统计
+      # Store user location into Location
       def store_location
         return if !self.location_changed?
 

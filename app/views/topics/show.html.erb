@@ -25,7 +25,7 @@
       <%= render partial: "topics/topic_info", locals: { topic: @topic, node: @node } %>
       <% if @topic.excellent? %>
         <div class="label-awesome">
-          <i class="fa fa-award awesome"></i> 本帖已被设为精华帖！
+          <i class="fa fa-award awesome"></i> <%= t("topics.excellent_info_html") %>
           <% if can?(:close, @topic) %>
             <div class="pull-right">
               <%= link_to icon_tag("close"), action_topic_path(@topic.id, type: 'normal'), method: :post, remote: true %>
@@ -56,16 +56,16 @@
     <% end %>
     <% if current_user %>
       <% if @topic.closed? %>
-        <div class="alert alert-info">此话题已经于 <%= l @topic.closed_at, format: :long %> 关闭，不再接受任何回帖。</div>
+        <div class="alert alert-info"><%= t("topics.closed_info_html", closed_at: l(@topic.closed_at, format: :long)) %></div>
       <% else %>
         <div id="reply" class="card">
           <div class="card-body">
-            <div class="card-title hide-ios">发起回帖</div>
+            <div class="card-title hide-ios"><%= t("topcs.reply") %></div>
             <% if can? :create, Reply %>
               <%= render 'reply_form' %>
             <% else %>
               <div class="alert alert-info">
-                当前设置新手用户不能在 22:00 ~ 9:00 发帖。
+                <%= t("topics.newbi_info_html") %>
               </div>
             <% end %>
           </div>
@@ -74,7 +74,11 @@
     <% else %>
       <div class="card">
         <div class="card-body">
-          <%= render partial: "topics/translation/need_login_to_reply" %>
+          <div id="reply" class="form box">
+            <div style="padding:20px;" data-turbolinks-action="replace">
+              <%= t("topics.need_login_to_reply_html") %>
+            </div>
+          </div>
         </div>
       </div>
     <% end %>

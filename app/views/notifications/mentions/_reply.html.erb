@@ -2,11 +2,15 @@
   reply = notification.target
   topic = notification.second_target || reply.topic
 %>
-<div class="media-heading">
-  <span class="info">在 <%= topic_title_tag(topic) %> 提及你：</span>
-</div>
-<% if reply.present? %>
-  <div class="media-content summary markdown">
-    <%= reply.body_html %>
+<% if topic.blank? %>
+  <div class="media-body"><%= t("notifications.source_deleted") %></div>
+<% else %>
+  <div class="media-heading">
+    <span class="info"><%= t("notifications.mention_title_html", url: main_app.topic_path(topic), title: topic.title) %></span>
   </div>
+  <% if reply.present? %>
+    <div class="media-content summary markdown">
+      <%= reply.body_html %>
+    </div>
+  <% end %>
 <% end %>

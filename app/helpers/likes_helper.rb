@@ -3,14 +3,14 @@
 module LikesHelper
   # Likeable Helper
   #
-  # 参数
-  # - likeable - Like 的对象
-  # - :cache - 当为 true 时将不会监测用户是否赞过，直接返回未赞过的状态，以用于 cache 的场景
-  # - :class - 增加 a 标签的 css class, 例如 "btn btn-default"
+  # params
+  # - likeable - Like target
+  # - :cache - when true, will not check current user is liked, directly return no like status for cache.
+  # - :class - Add class for link, for example: "btn btn-default"
   def likeable_tag(likeable, opts = {})
     return "" if likeable.blank?
 
-    label = "#{likeable.likes_count} 个赞"
+    label = "#{likeable.likes_count} #{t("common.likes")}"
     label = "" if likeable.likes_count == 0
 
     liked = false
@@ -23,14 +23,15 @@ module LikesHelper
       liked = current_user.send("like_#{defined_action[:action_name]}_ids").include?(likeable.id)
     end
 
-    title, state, icon_name =
-      if opts[:cache].blank? && liked
-        %w[取消赞 active heart]
-      else
-        %w[赞 deactive heart]
-      end
+    if opts[:cache].blank? && liked
+      title = t("common.unlike")
+      state = "active"
+    else
+      title = t("common.unlike")
+      state = "deactive"
+    end
 
-    icon_label = icon_tag(icon_name, label: label)
+    icon_label = icon_tag("heart", label: label)
     css_classes = ["likeable", state]
     css_classes << opts[:class] if opts[:class]
 

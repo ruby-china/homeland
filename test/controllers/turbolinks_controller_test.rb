@@ -19,7 +19,7 @@ describe TopicsController do
     it "should work" do
       get new_topic_path, params: { access_token: access_token.token }, headers: headers
       assert_equal 200, response.status
-      assert_includes response.body, "发布新话题"
+      assert_includes response.body, "New Topic"
       assert_includes response.body, "App.current_user_id = #{user.id}"
     end
 

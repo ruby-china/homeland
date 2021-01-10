@@ -7,7 +7,6 @@ class User
     included do
     end
 
-    # GitHub 项目
     def github_repositories
       cache_key = github_repositories_cache_key
       items = Homeland.file_store.read(cache_key)

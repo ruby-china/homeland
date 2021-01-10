@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-header">
-    <% if application.new_record? %>注册新应用<% else %>修改应用信息<% end %>
+    <% if application.new_record? %>Create Application<% else %>Edit Application<% end %>
   </div>
   <div class="card-body">
     <%= form_for(application, url: doorkeeper_submit_path(application), html: { role: 'form'}) do |f| %>
@@ -40,8 +40,8 @@
       <% end %>
 
       <div class="form-group">
-        <%= f.submit "提交", class: "btn btn-primary" %>
-        <%= link_to "取消", oauth_applications_path, :class => "btn btn-default" %>
+        <%= f.submit t("common.save"), class: "btn btn-primary" %>
+        <%= link_to t("common.cancel"), oauth_applications_path, :class => "btn btn-default" %>
       </div>
     <% end %>
   </div>

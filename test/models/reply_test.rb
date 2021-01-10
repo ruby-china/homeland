@@ -27,7 +27,7 @@ class ReplyTest < ActiveSupport::TestCase
     r.body = "new body"
     refute_equal true, r.valid?
     assert_equal false, r.save
-    assert_includes r.errors.full_messages.join(""), "已关闭，不再接受回帖或修改回帖"
+    assert_includes r.errors.full_messages.join(""), "Topic has been closed, no longer accepting create or update replies."
   end
 
   test "should remove bas reply_to_id" do

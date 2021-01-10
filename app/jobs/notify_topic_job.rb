@@ -12,14 +12,14 @@ class NotifyTopicJob < ApplicationJob
 
     notified_user_ids = topic.mentioned_user_ids
 
-    # 给关注者发通知
+    # Send notification for followers
     default_note = { notify_type: "topic", target_type: "Topic", target_id: topic.id, actor_id: topic.user_id, created_at: Time.now, updated_at: Time.now }
 
     all_records = []
     follower_ids.each do |uid|
-      # 排除同一个回复过程中已经提醒过的人
+      # Without users that has been notified
       next if notified_user_ids.include?(uid)
-      # 排除回帖人
+      # Without topic author
       next if uid == topic.user_id
       all_records << default_note.merge(user_id: uid)
     end

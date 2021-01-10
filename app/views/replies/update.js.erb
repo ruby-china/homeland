@@ -1,5 +1,5 @@
 <% if @reply.errors.empty? %>
-  <% flash[:notice] = '回帖更新成功。' %>
+  <% flash[:notice] = t("replies.updated_successfully") %>
   Turbolinks.visit('<%= topic_path(@reply.topic_id) %>');
 <% else %>
   $('form[tb="edit-reply"] .alert').remove();

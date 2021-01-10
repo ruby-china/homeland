@@ -11,7 +11,7 @@
 这段内容展示了在内容里面一些小的格式，比如：
 
 - **加粗** - `**加粗**`
-- *倾斜* - `*倾斜*`
+- _倾斜_ - `*倾斜*`
 - ~~删除线~~ - `~~删除线~~`
 - `Code 标记` - `\`Code 标记\``
 - [超级链接](http://github.com) - `[超级链接](http://github.com)`
@@ -28,7 +28,7 @@
 
 #### 一些表情例子
 
-:smile: :laughing: :dizzy_face: :sob: :cold_sweat: :sweat_smile:  :cry: :triumph: :heart_eyes: :relaxed: :sunglasses: :weary:
+:smile: :laughing: :dizzy_face: :sob: :cold_sweat: :sweat_smile: :cry: :triumph: :heart_eyes: :relaxed: :sunglasses: :weary:
 
 :+1: :-1: :100: :clap: :bell: :gift: :question: :bomb: :heart: :coffee: :cyclone: :bow: :kiss: :pray: :sweat_drops: :hankey: :exclamation: :anger:
 
@@ -113,13 +113,13 @@ zh-CN:
 #### 有序列表
 
 1. Node.js
-  1. Express
-  2. Koa
-  3. Sails
-2. Ruby
-  1. Rails
-  2. Sinatra
-3. Go
+1. Express
+1. Koa
+1. Sails
+1. Ruby
+1. Rails
+1. Sinatra
+1. Go
 
 ### 表格
 
@@ -145,14 +145,17 @@ zh-CN:
 
 **Youtube**
 
-https://www.youtube.com/watch?v=CvVvwh3BRq8
+https://www.youtube.com/watch?v=52AMJwF7P0w
 
 **Vimeo**
 
-https://vimeo.com/199770305
+https://vimeo.com/460511888
 
 **Youku**
 
-http://v.youku.com/v_show/id_XMjQzMTY1MDk3Ng==.html
+https://v.youku.com/v_show/id_XNDU4Mzg4Mjc2OA==.html
 
+**BiliBili**
+
+https://www.bilibili.com/video/BV1uv411B7MK
 ···

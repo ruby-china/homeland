@@ -19,12 +19,10 @@ class Node < ApplicationRecord
     self.create(id: id, name: name)
   end
 
-  # 是否 Summary 过多需要折叠
   def collapse_summary?
     @collapse_summary ||= self.summary_html.scan(/\<p\>|\<ul\>/).size > 2
   end
 
-  # Markdown 转换过后的 HTML
   def summary_html
     Rails.cache.fetch("#{cache_key_with_version}/summary_html") do
       Homeland::Markdown.call(summary || "")

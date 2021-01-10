@@ -3,9 +3,9 @@
   <div class="col-md-6">
     <div class="card">
       <div class="card-body">
-        <div class="card-title">OAuth 2 登录授权</div>
+        <div class="card-title">Sign in to <%= @pre_auth.client.name %></div>
         <p>
-          应用 <strong class="text-danger"><%= @pre_auth.client.name %></strong> 希望你授权使用你的账号
+          Application <strong class="text-danger"><%= @pre_auth.client.name %></strong> wants you to authorize your account to login.
         </p>
 
         <% if @pre_auth.scopes %>

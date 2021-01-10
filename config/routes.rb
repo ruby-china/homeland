@@ -102,12 +102,16 @@ Rails.application.routes.draw do
       end
     end
     resources :site_configs
-    resources :replies
+    resources :replies do
+      member do
+        post :revert
+      end
+    end
     resources :topics do
       member do
         post :suggest
         post :unsuggest
-        post :undestroy
+        post :revert
       end
     end
     resources :nodes

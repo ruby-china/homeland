@@ -1,29 +1,29 @@
 <% content_for :sitemap do %>
-  <span class="current">OAuth 应用</span>
+  <span class="current">OAuth Applications</span>
 <% end %>
 
 <div class="toolbar">
   <form class="form-inline" action="<%= admin_applications_path %>">
     <div class="form-group">
-      <input type="text" name="q" class="form-control" value="<%= params[:q] %>" placeholder="名称" />
+      <input type="text" name="q" class="form-control" value="<%= params[:q] %>" placeholder="Name" />
     </div>
     <div class="form-group">
-      <%= select_tag(:level, options_for_select([['全部 Level',''], ['Level 0', 0], ['Level 1', 1], ['Level 2', 2], ['Level 3', 3]], params[:level]), class: 'form-control') %>
+      <%= select_tag(:level, options_for_select([['All Level',''], ['Level 0', 0], ['Level 1', 1], ['Level 2', 2], ['Level 3', 3]], params[:level]), class: 'form-control') %>
     </div>
-    <button class="btn btn-default">搜索</button>
+    <button class="btn btn-default">Search</button>
   </form>
 </div>
 
 <div id="admin_applications">
   <table class="table table-bordered table-striped table-condensed">
     <tr class="head">
-      <th>编号</th>
-      <th>名称</th>
-      <th>uid</th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Uid</th>
       <th>Owner</th>
       <th>Tokens</th>
       <th>Level</th>
-      <th>创建时间</th>
+      <th>Time</th>
       <th class="opts"></th>
     </tr>
     <% @applications.each do |item| %>
@@ -36,7 +36,7 @@
       <td><%= item.level %></td>
       <td><%= l(item.created_at, format: :long) %></td>
       <td>
-        <%= link_to '修改', edit_admin_application_path(item) %>
+        <%= link_to icon_tag("pencil"), edit_admin_application_path(item) %>
       </td>
     </tr>
     <% end %>

@@ -18,7 +18,7 @@ class SettingTest < ActiveSupport::TestCase
   end
 
   test "default_locale" do
-    assert_equal "zh-CN", Setting.default_locale
+    assert_equal "en", Setting.default_locale
   end
 
   test "auto_locale" do

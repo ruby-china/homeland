@@ -18,7 +18,7 @@ module Mentionable
   end
 
   def mentioned_user_logins
-    # 用于作为缓存 key
+    # as cache key
     ids_md5 = Digest::MD5.hexdigest(mentioned_user_ids.to_s)
     Rails.cache.fetch("#{self.class.name.downcase}:#{id}:mentioned_user_logins:#{ids_md5}") do
       self.mentioned_users.pluck(:login)

@@ -3,17 +3,15 @@
 class BaseUploader < CarrierWave::Uploader::Base
   THUMB_IMAGE_EXTS = %w[.jpg .jpeg .gif .png]
 
-  # 在 UpYun 或其他平台配置图片缩略图
-  # http://docs.upyun.com/guide/#_12
   # Avatar
-  # 固定宽度和高度
+  #
   # xs - 32x32
   # sm - 48x48
   # md - 96x96
   # lg - 192x192
   #
   # Photo
-  # large - 1920x? - 限定宽度，高度自适应
+  # large - 1920x? - Limited width, auto height
   ALLOW_VERSIONS = %w[xs sm md lg large]
 
   def store_dir

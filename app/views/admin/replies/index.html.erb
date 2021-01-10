@@ -5,12 +5,12 @@
 <div class="toolbar">
   <form class="form-inline" action="<%= admin_replies_path %>">
     <div class="form-group mr-sm-2">
-      <input type="text" name="q" class="form-control" value="<%= params[:q] %>" placeholder="标题" />
+      <input type="text" name="q" class="form-control" value="<%= params[:q] %>" placeholder="Title" />
     </div>
     <div class="form-group mr-sm-2">
-      <input type="text" name="login" class="form-control" value="<%= params[:login] %>" placeholder="用户名" />
+      <input type="text" name="login" class="form-control" value="<%= params[:login] %>" placeholder="Username" />
     </div>
-    <button class="btn btn-default">搜索</button>
+    <button class="btn btn-default">Search</button>
   </form>
 </div>
 
@@ -18,10 +18,10 @@
 <table class="table table-bordered table-striped table-condensed">
   <tr class="head">
     <td class="first">#</td>
-    <td style="width:500px">回帖内容</td>
-    <td>话题</td>
-    <td>回复人</td>
-    <td>时间</td>
+    <td style="width:500px">Body</td>
+    <td>Topic</td>
+    <td>Creator</td>
+    <td>Time</td>
     <td></td>
   </tr>
 
@@ -39,7 +39,11 @@
     <td><%= link_to(reply.user.login, edit_admin_user_path(reply.user_id), target: "_blank") if reply.user %></td>
     <td><%= l reply.created_at, format: :short %></td>
     <td><%= link_to '', edit_admin_reply_path(reply), class: "fa fa-edit" %>
-    <%= link_to '', admin_reply_path(reply), 'data-confirm' => 'Are you sure?', method: :delete, remote: true, class: "fa fa-trash" %></td>
+    <% if reply.deleted_at.blank? %>
+      <%= link_to '', admin_reply_path(reply), 'data-confirm' => 'Are you sure?', method: :delete, remote: true, class: "fa fa-trash" %></td>
+    <% else %>
+      <%= link_to "", revert_admin_reply_path(reply), title: t("common.revert"), 'data-confirm' => 'Are you sure?', method: :post, class: "fa fa-undo" %>
+    <% end %>
   </tr>
 <% end %>
 </table>

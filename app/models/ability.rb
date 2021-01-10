@@ -28,7 +28,7 @@ class Ability
 
   protected
 
-    # 普通会员权限
+    # Normal user
     def roles_for_members
       roles_for_topics
       roles_for_replies
@@ -39,18 +39,18 @@ class Ability
       basic_read_only
     end
 
-    # 未登录用户权限
+    # Anonymous User
     def roles_for_anonymous
       cannot :manage, :all
       basic_read_only
     end
 
-    # Vip 用户权限
+    # VIP
     def roles_for_vip
       can :create, Team
     end
 
-    # 版主权限
+    # Mantainer
     def roles_for_maintainer
       can :create, Team
       can :manage, Node
@@ -72,7 +72,7 @@ class Ability
     end
 
     def roles_for_replies
-      # 新手用户晚上禁止回帖，防 spam，可在面板设置是否打开
+      # For block spam, disalow Newbie reply at night.
       can :create, Reply unless current_lock_reply?
       can %i[update destroy], Reply, user_id: user.id
       cannot %i[create update destroy], Reply, topic: { closed?: true }

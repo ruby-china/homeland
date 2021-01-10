@@ -1,5 +1,3 @@
 <% if @success %>
-  $("#<%= @element_id %>").attr("class","icon small_liked").data("method","delete").attr("title", "取消赞");
-<% else %>
-  App.alert("提交失败.")
+  $("#<%= @element_id %>").attr("class","icon small_liked").data("method","delete");
 <% end %>

@@ -26,15 +26,15 @@ class Notification < ActiveRecord::Base
   def notify_title
     return "" if self.actor.blank?
     if notify_type == "topic"
-      "#{self.actor.login} 创建了话题 《#{self.target.title}》"
+      I18n.t("notifications.created_topic", actor: self.actor.login, target: self.target.title)
     elsif notify_type == "topic_reply"
-      "#{self.actor.login} 回复了话题 《#{self.second_target.title}》"
+      I18n.t("notifications.created_reply", actor: self.actor.login, target: self.second_target.title)
     elsif notify_type == "follow"
-      "#{self.actor.login} 开始关注你了"
+      I18n.t("notifications.followed_you", actor: self.actor.login)
     elsif notify_type == "mention"
-      "#{self.actor.login} 提及了你"
+      I18n.t("notifications.mentioned_you", actor: self.actor.login)
     elsif notify_type == "node_changed"
-      "你的话题被移动了节点到 #{self.second_target.name}"
+      I18n.t("notifications.node_changed", node: self.second_target.name)
     else
       ""
     end

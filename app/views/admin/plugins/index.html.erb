@@ -1,10 +1,10 @@
 <div class="card-title">
-  已启用插件
+  Plugins
 </div>
 <div class="mb-3 clearfix">
-  <%= link_to "安装插件...", new_admin_plugin_path, class: "btn btn-primary" %>
-  <%= link_to "查找插件", "https://github.com/topics/homeland-plugin", class: "btn btn-default", target: "_blank" %>
-  <%= link_to "导航排序调整...", edit_admin_site_config_path("sorted_plugins"), class: "btn btn-default pull-right" %>
+  <%= link_to "Install...", new_admin_plugin_path, class: "btn btn-primary" %>
+  <%= link_to "Find plugins", "https://github.com/topics/homeland-plugin", class: "btn btn-default", target: "_blank" %>
+  <%= link_to "Navbar order...", edit_admin_site_config_path("sorted_plugins"), class: "btn btn-default pull-right" %>
 </div>
 <ul class="list-group plugin-list">
   <% Homeland.plugins.each do |plugin| %>
@@ -15,7 +15,7 @@
         <span class="version"><%= plugin.version %></span>
       </div>
       <% if plugin.uninstallable? %>
-        <%= link_to "卸载", admin_plugin_path(plugin.name), data: { method: :delete, confirm: "确定要卸载这个插件吗？", confirm_with: "卸载中..." }, class: "btn btn-default btn-sm pull-right" %>
+        <%= link_to "Uninstall", admin_plugin_path(plugin.name), data: { method: :delete, confirm: "Are you sure to uninstall this Plugin?", confirm_with: "Uninstalling..." }, class: "btn btn-default btn-sm pull-right" %>
       <% end %>
     </li>
   <% end %>

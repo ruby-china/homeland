@@ -1,8 +1,8 @@
 <% user = notification.actor %>
 <% if user.blank? %>
-  相关信息已删除
+  <%= t("notifications.source_deleted") %>
 <% else %>
   <div class="media-heading">
-    <%= user_name_tag(user) %> 开始关注你了。
+    <%= user_name_tag(user) %> <%= t("notifications.follow_you") %>
   </div>
 <% end %>

@@ -34,7 +34,7 @@ class Topic
 
     end
 
-    # 删除并记录删除人
+    # Destroy record, and then log who deleted.
     def destroy_by(user)
       return false if user.blank?
       update_attribute(:who_deleted, user.login)

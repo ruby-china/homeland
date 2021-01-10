@@ -34,7 +34,7 @@
     </table>
   </div>
   <div class="card-footer">
-    <%= link_to "修改应用信息", edit_oauth_application_path(@application), class: 'btn btn-primary' %>
-    <%= link_to "删除应用", oauth_application_path(@application), class: "btn btn-danger pull-right", data: { method: :delete, confirm: "确定要删除么？" } %>
+    <%= link_to t("common.edit"), edit_oauth_application_path(@application), class: 'btn btn-primary' %>
+    <%= link_to t("common.delete"), oauth_application_path(@application), class: "btn btn-danger pull-right", data: { method: :delete, confirm: t("common.confirm_delete") } %>
   </div>
 </div>

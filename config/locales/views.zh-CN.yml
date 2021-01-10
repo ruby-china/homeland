@@ -1,0 +1,373 @@
+"zh-CN":
+  common:
+    justnow: "刚刚"
+    hour: "小时"
+    minute: "分钟"
+    edit: "修改"
+    create: "新建"
+    avatar: "头像"
+    ok: "确定"
+    cancel: "取消"
+    save: "保存"
+    saving: "正在保存"
+    submitting: "正在提交"
+    delete: "删除"
+    revert: "恢复"
+    revoke: "注销"
+    place_top: "置顶"
+    un_top: "去置顶"
+    upload: "上传"
+    uploading: "正在上传"
+    published_at: "发表于"
+    register: "注册"
+    login: "登录"
+    logining: "正在登录"
+    logout: "退出"
+    remember_me: "记住登录状态（60 天）"
+    created_at: "发布于 %{time}"
+    until: "截止"
+    last_by: "最后由"
+    floor: "楼"
+    reply_at: "回复于 %{time}"
+    create_item: "中发起"
+    read_times: "次阅读"
+    confirm_delete: "确定要删除么？"
+    search: "搜索"
+    public: "公开"
+    create_success: "创建成功."
+    delete_success: "删除成功."
+    update_success: "修改成功."
+    clear: "清空"
+    last_modified_at: "最后更新于"
+    index: "目录"
+    you_may_like: "你可能也喜欢"
+    read: "阅读"
+    admin_user: "管理员"
+    vip_user: "高级会员"
+    normal_user: "会员"
+    newbie_user: "新手"
+    blocked_user: "禁言用户"
+    hr_user: "企业 HR"
+    title: "标题"
+    last_reply_time: "最后回复时间"
+    reply: "回复"
+    index_node_navigation: "讨论节点分类导航"
+    highlight_topic: "置顶话题"
+    statics: "统计信息"
+    statics_users_count: "会员数: %{count} 个"
+    statics_topics_count: "话题数: %{count} 篇"
+    statics_replies_count: "回帖数: %{count} 条"
+    comments: "评论"
+    new_comment: "发表新评论"
+    no_search_result: "没有搜索到相关内容。"
+    access_denied: "访问被拒绝，你可能没有权限或未登录。"
+    editor_toolbar_edit: "编辑"
+    editor_toolbar_preview: "预览"
+    editor_add_image: "上传图片"
+    editor_insert_codes: "插入代码"
+    node: "节点"
+    notifications: "通知"
+    by: "由"
+    at: "在"
+    replies_count: "回复"
+    like: "赞"
+    unlike: "取消赞"
+    likes: 个赞
+    favorite: "收藏"
+    unfavorite: "取消收藏"
+    subscribe: "订阅"
+    follow_user: "关注"
+    unfollow_user: "已关注"
+    reward: "打赏作者"
+    has_deleted: 已删除
+    auth_with_other_services: "用其他平台的账号登录"
+    captcha: "验证码"
+    search_result: "搜索结果"
+    tips: 小帖士
+    unknow_error: 请求异常，请稍后重试。
+    unknow_user: 匿名
+    block_node: 屏蔽节点
+    unblock_node: 取消节点屏蔽
+    block_node_title: 屏蔽后，社区列表将不会显示此节点有关的内容。
+    block_user: 屏蔽
+    unblock_user: 取消屏蔽
+    block_user_title: 屏蔽或，社区列表将不会出现此用户发布的内容。
+    error_message_title: 有 %{count} 处问题导致无法提交
+  reply:
+    edit_reply: "修改回帖"
+    delete_reply_success: "回帖删除成功."
+    topic_location: "回帖所在文章"
+  photos:
+    upload_and_insert_code: "上传并插入代码"
+    uploading: "正在上传"
+  menu:
+    home: "首页"
+    topics: "社区"
+    wiki: "Wiki"
+    gems: "Gems"
+    users: "会员"
+    admin: "管理后台"
+    nodes: "节点"
+    edit_account_path: "个人设置"
+    likes: "你收藏的话题"
+    teams: "公司／组织"
+    back_to_front: "回到前台"
+  comments:
+    create_comment: "发表评论"
+    no_comment: "暂无评论"
+  mail:
+    login_from: "登录页面地址"
+    this_is_a_notification_mail_please_do_not_reply: "这是一封提醒邮件，请勿直接通过邮件回复."
+    welcome_subject: "欢迎加入 %{app_name} 社区"
+    welcome_title: "欢迎加入 %{app_name}"
+    you_have_successfully: "你已经成功在"
+    registered_an_account: "注册了账号。"
+  rss:
+    recent_topics_description: "%{name}社区最新发帖."
+    recent_topics_title: "%{name}社区"
+    recent_node_topics_description: "%{name} 社区 %{node_name} 节点最新发帖."
+    recent_node_topics_title: "%{name} 社区 %{node_name} 节点"
+  setting:
+    app_name: "网站名称"
+    newbie_notices: "新手提示信息（支持 HTML）"
+    admin_emails: "管理员 Email，在此名单的将有管理员权限（一行一个）"
+    reject_newbie_reply_in_the_evening: "禁止新手在晚上回帖"
+    node_ids_hide_in_topics_index: "要在论坛首页列表隐藏的节点,以逗号隔开"
+    default_locale: "默认语言 可选值: [zh-CN, en]"
+    auto_locale: "是否自动根据用户浏览器语言来切换显示语言 [true | false]"
+    custom_head_html: "自定 HTML head 区域的内容"
+    site_index_html: "酷站列表首页头的 HTML"
+    navbar_brand_html: "导航栏 Logo"
+    navbar_html: "导航栏自定义 HTML"
+    topic_index_sidebar_html: "话题列表首页边栏 HTML"
+    before_topic_html: "话题正文前面的 HTML"
+    after_topic_html: "话题后面的 HTML"
+    footer_html: "页脚 HTML"
+    wiki_index_html: "WIKI 首页 HTML"
+    wiki_sidebar_html: "WIKI 边栏 HTML"
+    tips: "随机显示的小帖士（一行一个）"
+    ban_words_on_reply: "回帖禁止内容（一行一个）"
+    ban_words_in_body: "正文里面禁止提及的内容，为避免误判，请准确描述，不要写太短的词"
+    apns_pem: "Apple Push 证书内容，保持为空将不会触发 Push 发送动作"
+    blacklist_ips: "黑名单 IP 列表，将会直接拦截请求（一行一个）"
+    newbie_limit_time: "新注册用户（新手）限制期，单位秒（0 不限制），在新手期不能创建新话题，仅能回帖"
+    ban_reasons: "屏蔽原因，将会在屏蔽话题的时候作为选项（一行一个）"
+    ban_reason_html: "屏蔽原因详细描述，用于在被屏蔽的话题后面给做补充提示（HTML 格式编写）"
+    topic_create_limit_interval: "话题创建频率限制，间隔多久（单位: 秒）"
+    topic_create_hour_limit_count: "1 小时内，创建话题的数量限制（单位：篇）"
+    sign_up_daily_limit: "单日每个 IP 的注册用户数量限制，(0 不限制)"
+    use_recaptcha: "启用 Google reCaptcha 开启更强的验证码保护"
+    captcha_enable: "启用验证码"
+    recaptcha_key: "Google reCaptcha 网站密钥"
+    recaptcha_secret: "Google reCaptcha 密钥"
+    allow_change_login: "允许用户修改用户名"
+    twitter_id: "Twitter ID 用于 Twitter 分享的时候提及，比如: ruby_china，不带 @"
+    share_allow_sites: "分享目标，可选 [twitter,weibo,facebook,wechat,google_plus,douban,tumblr,pinterest,linkedin,email,reddit,hacker_news]"
+    editor_languages: 编辑器插入代码语言可选项（一行一个），填写文件扩展名比如："rb, go, php, js, html"
+    sorted_plugins: 插件排序，调整这个可以影响插件在导航栏的顺序。请用换行或逗号间隔，比如："jobs, wiki, press, site"。
+    timezone: "日期时间显示时区，默认: UTC"
+    profile_fields: "用户个性资料支持字段，默认：all 可选：[company,twitter,website,tagline,location,alipay,paypal,qq,weibo,wechat,douban,dingding,aliwangwang,facebook,instagram,dribbble,battle_tag,psn_id,steam_id]"
+    modules: "启用模块，默认 all 全部开启，可选：[topic,team,github,editor.code]"
+    domain: "网站域名，默认: localhost"
+    asset_host: "静态资源 CDN，比如：https://assets.your-host.com (如果没有，请留空)"
+    https: "是否启用 HTTPS"
+    rack_attack: "访问频率限制，limit - 每个周期单个 IP 请求次数限制, period - 多少时间（秒）为一个请求限制周期"
+    github_api_key: "GitHub 登录 API key (留空禁用）"
+    github_api_secret: "GitHub 登录 API secret key"
+    twitter_api_key: "Twitter 登录 API key (留空禁用）"
+    twitter_api_secret: "Twitter 登录 API secret key"
+    wechat_api_key: "微信登录 API key (留空禁用）"
+    wechat_api_secret: "微信登录 API secret key"
+  pagination:
+    next: "下一页"
+    prev: "上一页"
+    gap: "&hellip;"
+  topics:
+    new_topic: "发布新话题"
+    edit_topic: "修改话题"
+    reply: "回复"
+    no_replies: "暂无回复。"
+    recent_topics: "最近发布的话题"
+    recent_replies: "最近回复的话题"
+    check_recent_topics: "查看更多最近发布的话题..."
+    reply_this_fllor: "回复此楼"
+    tips_for_create_topic: "发帖说明"
+    subscribe_with_rss: "订阅 %{name} 社区新话题"
+    submit_reply: "提交回复"
+    reply_to1: 对
+    reply_to2: 回复
+    in: 在
+    mentioned_this_topic: 提及了此话题。
+    excellent_topic: 将本帖设为了精华贴。
+    unexcellent_topic: 取消了精华贴。
+    closed_topic: 关闭了讨论。
+    reopen_topic: 重新开启了讨论。
+    banned_topic_with_reason_html: '屏蔽了此话题: <span class="ban-reason">%{reason}</span>'
+    banned_topic: 内容不符合版规屏蔽此话题。
+    topic_has_been_banned_html: 此话题已暂时被管理员屏蔽。
+    topic_list:
+      recent: "新帖"
+      last_reply: "最新回复"
+      popular: "优质讨论"
+      banned: "已屏蔽"
+      excellent: "精华帖"
+      latest: "默认"
+    read_topic: "浏览话题"
+    create_topic_success: "话题创建成功。"
+    delete_topic_success: "话题删除成功。"
+    update_topic_success: "话题修改成功。"
+    reply_success: "回复成功。"
+    reply_this_floor: "回复此楼"
+    topic_was_deleted: "[该话题已被删除]"
+    have_no_new_reply: "在你读过以后还没有新变化"
+    has_new_replies: "有新内容"
+    more_like_this: "相关话题"
+    node_recent_topics: "节点下其他话题"
+    have_no_avatar: "你还未设置头像，不能发布新话题。"
+    excellent_info_html: "本帖已被管理员设置为精华贴"
+    need_login_to_reply_html: 需要 <a href="/account/sign_in" class="btn btn-primary">登陆</a> 后方可回复, 如果你还没有账号请 <a href="/account/sign_up">注册新账号</a>
+    newbi_info_html: "当前设置新手用户不能在 22:00 ~ 9:00 发帖。"
+    closed_info_html: 此话题已于 %{closed_at} 关闭讨论，不在接受任何回复。
+    topic_pin_successfully: 话题置顶成功。
+    topic_unpin_successfully: 话题取消置顶成功。
+    excellent_successfully: 话题已设置为精华贴。
+    close_successfully: 话题已关闭，将不再接受任何新的回复。
+    reopen_successfully: 话题讨论重新开启成功。
+    normal_successfully: 话题恢复到正常状态。
+    ban_successfully: 屏蔽话题成功。
+    create_too_frequently: 创建太频繁，请稍后再试。
+    create_limit: 1 小时内创建话题量不允许超过 %{count} 篇，无法再次发布。
+    unban_successfully: 话题已取消了屏蔽。
+    total_replies_html: 共收到 <b>%{count}</b> 条回复
+    total_topics_html: 共 <b>%{count}</b> 个讨论
+    newbie_tip: 新手提示
+    ban_title: 屏蔽原因
+    ban_directly: 直接屏蔽
+    ban_with_reason: 输入屏蔽原因：
+    closed_tooltip: "问题已解决／话题已结束讨论"
+    sensitive_word_limit: '创建失败，内容包含敏感词：“%{word}”'
+    new_reply_received_html: 收到新回复，点击立即加载
+    form:
+      title_placeholder: 在这里输入标题
+      no_team: 不关联组织
+      markdown_guides: 排版说明
+  replies:
+    edit_reply: 修改回帖
+    created_successfully: 回帖提交成功。
+    updated_successfully: 回帖修改成功。
+    deleted_successfully: 回帖删除成功。
+    duplicate_error: "不可以重复提交相同内容。"
+    nopoint_limit: "请勿回复无意义的内容，如你想收藏或赞这篇帖子，请用帖子后面的功能。"
+    close_limit: "已关闭，不再接受回帖或修改回帖。"
+  users:
+    theme_auto: 自动切换
+    theme_light: 浅色模式
+    theme_dark: 深色模式
+    bios: "个人介绍"
+    city: "城市"
+    company: "公司"
+    number_of_user: 第 %{no} 位会员 
+    join_time: "Since"
+    signature: "签名"
+    personal_website: "博客"
+    topics_count_html: <span>%{count}</span> 篇帖子
+    replies_count_html: <span>%{count}</span> 条回帖
+    recent_publish_topic: "最近发布的帖子"
+    recent_reply_topic: "最近回复过的帖子"
+    unbind_warning: "至少要保留一个关联账号，现在不能解绑。"
+    unbind_success: "%{provider} 账号解绑成功。"
+    please_be_careful: "谨慎修改"
+    be_sure_to_use_twitter_id: "此项将会影响回复信息关联,建议用 Twitter ID"
+    personal_information: "个人资料设置"
+    edit_password: "修改密码"
+    delete_this_account: "删除此账号"
+    dont_like_it: "不喜欢?"
+    bind_another_account: "绑定其他账号用于登录"
+    click_to_unbind: "点击接触登陆绑定"
+    register_user: "注册新用户"
+    login: "用户名"
+    suggest_using_twitter_id: "谨慎填写，以后不可修改，建议用 Twitter ID。"
+    already_have_account: "已经有账号了？"
+    forget_password: "忘记了密码?"
+    not_recieve_confirm_mail: "未收到确认邮件?"
+    not_recieve_unlock_mail: "未收到解锁邮件?"
+    current_have: "目前已经有"
+    users_joined: "位会员加入了"
+    teams_joined: "个团队加入了"
+    hot_users: "TOP 100 活跃会员"
+    hot_teams: "TOP 活跃团队"
+    recent_joined: "最新加入的会员"
+    submit_new_user: "提交注册信息"
+    update_profile: "更新"
+    update_password: "修改密码"
+    need_login_again_after_password_updated_html: 注意！更新密码以后需要重新登录。
+    email_permission: "公开 Email"
+    delete_account: "删除账号"
+    delete_account_tips_html: "<p>当你不想使用这个账号的时候，可以选择删除账号。</p><p>删除以后数据将会保留，以匿名的方式存在，你的账号将无法再登录。</p>"
+    confirm_delete_account: "要删除账号，请输入你的密码"
+    ensure_to_delete: "确定删除我的账号"
+    complete_your_info: "完善你的账户信息"
+    binding_via_html: "您必须填写以下表单才能完成绑定 <strong>%{provider}</strong> 的登录方式。"
+    binding_has_account_html: 如果你已经有账号，你可以通过 <a href="/account/sign_in">登陆</a> 来绑定账号。
+    reward_tip_html: 如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作！
+    username_allows_format: 只允许数字、大小写字母、中横线、下划线。
+    no_replies: 还未参与讨论。
+    no_github: 未设置 GitHub 信息.
+    menu:
+      topics: "话题"
+      recent_reply_topics: "最近回帖"
+      like: "赞"
+      overview: "概况"
+      profile: "个人信息"
+      favorites: "收藏"
+      replies: "回帖"
+      following: "正在关注"
+      followers: "关注者"
+      blocked: "已屏蔽"
+  team_user_status:
+    pendding: '等待接受'
+    acceped: '已加入'
+  team_user_role:
+    owner: '组管理员'
+    member: '成员'
+  teams:
+    teams: '组织'
+    user_existed: '已经在组里面了'
+    new_team: '创建公司／组织'
+    edit_team: '设置公司／组织资料'
+    new_team_user: '邀请成员'
+    all_members: "所有成员"
+    edit_team_user: '修改成员权限'
+    delete_team_user: '移除成员'
+    show_team_user: '查看邀请'
+    accept_team_user: '接受邀请'
+    reject_team_user: '拒绝'
+    delete_team_user_confirm: '确定要将他从组里面移除掉么？'
+    do_you_want_accept_team_user_html: "你是否要接受邀请加入 <b>%{team}</b>？"
+    topics: '成员的话题列表'
+    users: '成员列表'
+    team_user_pendding: '等待接受'
+    settings: '设置'
+    team_users_count: "%{count} 个团队成员"
+  user_setting:
+    profile: "个人信息"
+    profile_detail: 详细资料
+    reward: 打赏
+    password: 密码
+    account: 账户设置
+    applications: 我的应用
+  notifications:
+    source_deleted: 相关信息已删除
+    mention_title_html: 在 <a href="%{url}">%{title}</a> 提及了你
+    comment_title_html: 在你发布的 <a href="%{url}">%{title}</a> 评论了
+    reply_title_html: 在话题中 %{topic} 回复了你
+    topic_title_html: 创建了话题 %{topic} 
+    follow_you: 关注了你。
+    node_changed_html: 你发布的话题 %{topic} 由于内容原因被管理员移动到了 %{node}  节点，请注意查看节点说明。
+    invite_you_join: 邀请你加入
+    show_invite: 查看邀请
+    created_topic: "%{actor} 创建了话题 %{target}"
+    created_reply: "%{actor} 回复了话题 %{target}"
+    followed_you: "%{actor} 关注了你。"
+    mentioned_you: "%{actor} 提及了你。"
+    node_changed: "你创建的话题被调整到了 %{node} 节点。"

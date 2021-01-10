@@ -2,7 +2,7 @@
 
 module Admin
   class TopicsController < Admin::ApplicationController
-    before_action :set_topic, only: %i[show edit update destroy undestroy suggest unsuggest]
+    before_action :set_topic, only: %i[show edit update destroy revert suggest unsuggest]
 
     def index
       @topics = Topic.unscoped
@@ -53,7 +53,7 @@ module Admin
       redirect_to(admin_topics_path)
     end
 
-    def undestroy
+    def revert
       @topic.update_attribute(:deleted_at, nil)
       redirect_to(admin_topics_path)
     end

@@ -49,7 +49,7 @@
   <% if topic.deleted_at.blank? %>
     <%= link_to "", admin_topic_path(topic), 'data-confirm' => 'Are you sure?', method: :delete, class: "fa fa-trash" %>
   <% else %>
-    <%= link_to "", undestroy_admin_topic_path(topic), title: t("common.undelete"), 'data-confirm' => 'Are you sure?', method: :post, class: "fa fa-undo" %>
+    <%= link_to "", revert_admin_topic_path(topic), title: t("common.revert"), 'data-confirm' => 'Are you sure?', method: :post, class: "fa fa-undo" %>
   <% end %>
 </td>
 </tr>

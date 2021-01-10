@@ -74,7 +74,7 @@ class User
 
           if User.where(login: user.login).exists?
             # TODO: possibly duplicated user login here. What should we do?
-            user.login = "#{user.github}-github" 
+            user.login = "#{user.github}-github"
           end
 
           user.password = Devise.friendly_token[0, 20]

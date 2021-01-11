@@ -1,5 +1,6 @@
 AllCops:
   DisabledByDefault: true
+  SuggestExtensions: false
   Exclude:
     - 'vendor/**/*'
     - 'node_modules/**/*'

@@ -259,10 +259,10 @@ class TopicTest < ActiveSupport::TestCase
     assert_equal true, topic.valid?
     topic = build(:topic, body: "This is FFFF")
     assert_equal false, topic.valid?
-    assert_equal ["Create failed, because content has sensitive word \"FFF\"."],  topic.errors&.messages.dig(:body)
+    assert_equal ["Create failed, because content has sensitive word \"FFF\"."], topic.errors&.messages.dig(:body)
     topic = build(:topic, body: "This is AAAA")
     assert_equal false, topic.valid?
-    assert_equal ["Create failed, because content has sensitive word \"AAAA\"."],  topic.errors&.messages.dig(:body)
+    assert_equal ["Create failed, because content has sensitive word \"AAAA\"."], topic.errors&.messages.dig(:body)
   end
 
   test "as_indexed_json" do

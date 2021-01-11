@@ -33,7 +33,7 @@ class Homeland::MarkdownTest < ActiveSupport::TestCase
   test "auto link match complex urls" do
     cases = {
       "http://movie.douban.com/tag/%E7%BE%8E%E5%9B%BD": '<p><a href="http://movie.douban.com/tag/%E7%BE%8E%E5%9B%BD" rel="nofollow" target="_blank">http://movie.douban.com/tag/%E7%BE%8E%E5%9B%BD</a></p>',
-      "http://ruby-china.org/self_posts/11?datas=20,33|100&format=.jpg": '<p><a href="http://ruby-china.org/self_posts/11?datas=20,33%7C100&amp;format=.jpg" rel="nofollow" target="_blank">http://ruby-china.org/self_posts/11?datas=20,33|100&amp;format=.jpg</a></p>'
+      "http://ruby-china.org/self_posts/11?datas=20,33|100&format=.jpg": '<p><a href="http://ruby-china.org/self_posts/11?datas=20,33%7C100&amp;format=.jpg" rel="nofollow" target="_blank">http://ruby-china.org/self_posts/11?datas=20,33|100&amp;format=.jpg</a></p>',
     }
 
     assert_render_with_cases(cases)

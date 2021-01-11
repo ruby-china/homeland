@@ -53,7 +53,7 @@ class User
               url: a1["html_url"],
               watchers: a1["watchers"],
               language: a1["language"],
-              description: a1["description"]
+              description: a1["description"],
             }
           end
           items.sort! { |a, b| b[:watchers] <=> a[:watchers] }.take(10)

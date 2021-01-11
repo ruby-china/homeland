@@ -40,7 +40,7 @@ class Reply
         second_target_id: self.topic_id,
         actor_id: self.user_id,
         created_at: Time.now,
-        updated_at: Time.now
+        updated_at: Time.now,
       }
     end
   end

@@ -65,7 +65,7 @@ describe TeamUsersController do
 
     team_user = {
       login: user.login,
-      role: :member
+      role: :member,
     }
     post user_team_users_path(team), params: { team_user: team_user }
     assert_redirected_to user_team_users_path(team)
@@ -99,7 +99,7 @@ describe TeamUsersController do
       sign_in team_owner.user
       params = {
         user_id: 123,
-        role: :owner
+        role: :owner,
       }
       put user_team_user_path(team, team_user), params: { team_user: params }
       old_user_id = team_user.user_id
@@ -114,7 +114,7 @@ describe TeamUsersController do
       sign_in team_member.user
       params = {
         login: user.login,
-        role: :member
+        role: :member,
       }
       get edit_user_team_user_path(team, team_user), params: { team_user: params }
       assert_redirected_to root_path

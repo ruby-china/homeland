@@ -85,7 +85,7 @@ module Homeland
           email: email,
           name: name,
           login: Homeland::Username.sanitize(username || name),
-          password: Devise.friendly_token[0, 20]
+          password: Devise.friendly_token[0, 20],
         }
         user = User.new(user_params)
 
@@ -102,7 +102,7 @@ module Homeland
         username: username,
         email: email,
         name: name,
-        avatar_url: avatar_url
+        avatar_url: avatar_url,
       )
 
       sso_record.last_payload = unsigned_payload

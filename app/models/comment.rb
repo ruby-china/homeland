@@ -44,7 +44,7 @@ class Comment < ApplicationRecord
       target: self,
       second_target: self.commentable,
       actor_id: self.user_id,
-      user_id: receiver_id
+      user_id: receiver_id,
     )
   end
 end

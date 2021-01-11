@@ -39,7 +39,7 @@ module LikesHelper
       count: likeable.likes_count,
       state: state,
       type: likeable.class.name,
-      id: likeable.id
+      id: likeable.id,
     }
 
     link_to(icon_label, "#", title: title, data: data, class: css_classes.join(" "))

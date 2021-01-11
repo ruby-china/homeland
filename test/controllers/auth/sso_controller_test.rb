@@ -12,7 +12,7 @@ describe Auth::SSOController do
       Setting.stubs(:sso).returns(
         "enable" => true,
         "url"    => @sso_url,
-        "secret" => sso_secret
+        "secret" => sso_secret,
       )
       Setting.stubs(:sso_enabled?).returns(true)
     end
@@ -47,7 +47,7 @@ describe Auth::SSOController do
       Setting.stubs(:sso).returns(
         "enable" => true,
         "url"    => @sso_url,
-        "secret" => sso_secret
+        "secret" => sso_secret,
       )
       Setting.stubs(:sso_enabled?).returns(true)
     end
@@ -106,7 +106,7 @@ describe Auth::SSOController do
       sso.bio = "This is a bio text"
       sso.avatar_url = "http://foobar.com/avatar/1.jpg"
 
-      assert_no_changes -> { User.count }  do
+      assert_no_changes -> { User.count } do
         get login_auth_sso_path, params: Rack::Utils.parse_query(sso.payload), headers: @headers
       end
       assert_redirected_to "/"
@@ -174,7 +174,7 @@ describe Auth::SSOController do
 
     before do
       Setting.stubs(:sso).returns(
-        "secret" => sso_secret
+        "secret" => sso_secret,
       )
       Setting.stubs(:sso_provider_enabled?).returns(true)
 

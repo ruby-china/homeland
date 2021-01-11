@@ -14,7 +14,7 @@ class User::ProfileFiledsTest < ActiveSupport::TestCase
     params = {
       weibo: "weibo1",
       douban: "douban1",
-      dribbble: "dribbble1"
+      dribbble: "dribbble1",
     }
     user.update_profile_fields(params)
     assert_equal params, user.contacts

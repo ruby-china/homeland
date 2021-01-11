@@ -105,7 +105,7 @@ module Homeland
         lax_spacing: true,
         space_after_headers: true,
         disable_indented_code_blocks: true,
-        no_intra_emphasis: true
+        no_intra_emphasis: true,
       }
 
       def renderer

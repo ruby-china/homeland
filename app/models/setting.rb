@@ -115,7 +115,7 @@ class Setting < RailsSettings::Base
     user_name: ENV["mailer_options_user_name"],
     password: ENV["mailer_options_password"],
     authentication: (ENV["mailer_options_authentication"] || "login"),
-    enable_starttls_auto: ENV["mailer_options_enable_starttls_auto"]
+    enable_starttls_auto: ENV["mailer_options_enable_starttls_auto"],
   }
 
   # = SSO

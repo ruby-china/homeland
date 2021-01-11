@@ -17,9 +17,9 @@ before_fork do
   max_memory = ((ENV["workers"] || 4).to_i + 1) * 380
   puts "=> Max Memory limit: #{max_memory}MB"
   PumaWorkerKiller.config do |config|
-    config.ram           = max_memory  # mb
+    config.ram           = max_memory # mb
     config.percent_usage = 0.98
-    config.frequency     = 20   # seconds
+    config.frequency     = 20 # seconds
     # config.reaper_status_logs = true # setting this to false will not log lines like:
     # PumaWorkerKiller: Consuming 54.34765625 mb with master and 2 workers.
 

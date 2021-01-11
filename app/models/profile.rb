@@ -19,7 +19,7 @@ class Profile < ApplicationRecord
     facebook: "https://facebook.com/",
     instagram: "https://instagram.com/",
     dribbble: "https://dribbble.com/",
-    battle_tag: "#"
+    battle_tag: "#",
   }
 
   def self.contact_field_label(field)

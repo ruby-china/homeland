@@ -51,8 +51,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
             "name" => auth.info&.name,
             "login" => login,
             "image" => auth.info&.image,
-            "email" => auth.info&.email
-          }
+            "email" => auth.info&.email,
+          },
         }
       end
   end

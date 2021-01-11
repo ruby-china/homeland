@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   root to: "topics#index"
   match "/uploads/:path(![large|lg|md|sm|xs])", to: "home#uploads", via: :get, constraints: {
-    path: /[\w\d\.\/\-]+/i
+    path: /[\w\d\.\/\-]+/i,
   }
   get "status", to: "home#status"
 
@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     registrations: "users/registrations",
     sessions: "users/sessions",
     passwords: "users/passwords",
-    omniauth_callbacks: "users/omniauth_callbacks"
+    omniauth_callbacks: "users/omniauth_callbacks",
   }
 
   resource :setting do

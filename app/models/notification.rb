@@ -44,7 +44,7 @@ class Notification < ActiveRecord::Base
     opts = {
       notify_type: "follow",
       user_id: user_id,
-      actor_id: follower_id
+      actor_id: follower_id,
     }
     return if Notification.where(opts).count > 0
     Notification.create opts

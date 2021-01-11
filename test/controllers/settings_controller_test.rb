@@ -101,7 +101,7 @@ describe SettingsController do
       password_params = {
         current_password: user.password,
         password: "123",
-        password_confirmation: "123123"
+        password_confirmation: "123123",
       }
       User.any_instance.stubs(:update_with_password).returns(true)
       put setting_path, params: { by: "password", user: password_params }

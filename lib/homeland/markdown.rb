@@ -5,7 +5,7 @@ require "html/pipeline"
 context = {
   gfm: true,
   video_width: 700,
-  video_height: 387
+  video_height: 387,
 }
 
 filters = [

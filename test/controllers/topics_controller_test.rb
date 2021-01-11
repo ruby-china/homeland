@@ -14,6 +14,7 @@ describe TopicsController do
     it "should have an index action" do
       get topics_path
       assert_equal 200, response.status
+      assert_select "title", text: Setting.app_name
     end
 
     it "should work when login" do
@@ -40,6 +41,7 @@ describe TopicsController do
     it "should have a recent action" do
       get last_topics_path
       assert_equal 200, response.status
+      assert_select "title", text: "Newest · Topics · #{Setting.app_name}"
     end
   end
 
@@ -69,6 +71,7 @@ describe TopicsController do
     it "should have a node action" do
       get node_topics_path(topic.node_id)
       assert_equal 200, response.status
+      assert_select "title", text: "#{topic.node.name} · Topics · #{Setting.app_name}"
     end
   end
 

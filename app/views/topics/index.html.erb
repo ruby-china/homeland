@@ -1,4 +1,6 @@
-<% title_tag(@page_title || t('menu.topics')) %>
+<% if action_name != "index" %>
+  <% title_tag(@page_title || t('menu.topics')) %>
+<% end %>
 <!-- @suggest_topics maybe nil or ActiveRecord::Relation, but we need an array -->
 <% @suggest_topics = @suggest_topics.to_a %>
 <%= render "topics/node_info", node: @node %>

@@ -35,7 +35,7 @@ class ActiveSupport::TestCase
     Setting.stubs(:topic_create_hour_limit_count).returns("")
   end
 
-  parallelize_teardown do
+  teardown do
     Rails.cache.clear
   end
 

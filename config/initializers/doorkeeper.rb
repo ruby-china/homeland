@@ -114,3 +114,11 @@ Doorkeeper.configure do
   # WWW-Authenticate Realm (default "Doorkeeper").
   realm Setting.app_name
 end
+
+# https://github.com/doorkeeper-gem/doorkeeper/issues/1467
+# HOTFIX: find_access_token_in_batches with Ruby 3.0
+Doorkeeper::AccessTokenMixin::ClassMethods.module_eval do
+  def find_access_token_in_batches(relation, **args, &block)
+    relation.find_in_batches(**args, &block)
+  end
+end

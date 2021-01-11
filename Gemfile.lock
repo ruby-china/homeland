@@ -372,6 +372,8 @@ GEM
       unicode-display_width (>= 1.4.0, < 2.0)
     rubocop-ast (1.3.0)
       parser (>= 2.7.1.5)
+    rubocop-daemon (0.3.2)
+      rubocop
     ruby-progressbar (1.10.1)
     ruby-push-notifications (1.3.0)
       builder (~> 3.0)
@@ -501,6 +503,7 @@ DEPENDENCIES
   redis-namespace!
   rouge
   rubocop
+  rubocop-daemon
   ruby-push-notifications
   rucaptcha
   sass-rails

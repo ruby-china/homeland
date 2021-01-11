@@ -176,9 +176,3 @@ Naming/MethodName:
 
 Naming/ClassAndModuleCamelCase:
   Enabled: true
-
-Naming/FileName:
-  Enabled: true
-
-Naming/PredicateName:
-  Enabled: true

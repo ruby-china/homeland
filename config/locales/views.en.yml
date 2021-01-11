@@ -8,7 +8,9 @@
     ok: "OK"
     cancel: "Cancel"
     avatar: "Avatar"
+    back: "Back"
     save: "Save"
+    publish: "Publish"
     saving: "Saving"
     submitting: "Submitting"
     delete: "Delete"
@@ -363,7 +365,7 @@
     source_deleted: Notification source has been deleted.
     mention_title_html: Mentioned you in <a href="%{url}">%{title}</a>
     comment_title_html: Commented in your <a href="%{url}">%{title}</a>
-    reply_title_html: Replied you in %{topic}
+    reply_title_html: Replied topic %{topic}
     topic_title_html: Created topic %{topic}
     follow_you: has followed you.
     node_changed_html: Your topic %{topic} has moved into %{node} node.

@@ -41,7 +41,7 @@ module TopicsHelper
     else
       path = main_app.topic_path(topic)
     end
-    link_to(topic.title, path, title: topic.title)
+    link_to(topic.title, path, title: topic.title, class: "topic-title")
   end
 
   def topic_excellent_tag(topic)

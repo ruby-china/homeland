@@ -9,6 +9,8 @@
     ok: "确定"
     cancel: "取消"
     save: "保存"
+    back: "返回"
+    publish: "发布"
     saving: "正在保存"
     submitting: "正在提交"
     delete: "删除"
@@ -251,6 +253,16 @@
       title_placeholder: 在这里输入标题
       no_team: 不关联组织
       markdown_guides: 排版说明
+    menu:
+      pin: 置顶话题
+      unpin: 取消话题置顶
+      excellent: 设置为精华帖
+      ban: 屏蔽话题
+      unban: 取消屏蔽
+      close: 关闭/结束讨论
+      reopen: 重新打开讨论
+      edit: 修改话题
+      delete: 删除
   replies:
     edit_reply: 修改回帖
     created_successfully: 回帖提交成功。
@@ -360,7 +372,7 @@
     source_deleted: 相关信息已删除
     mention_title_html: 在 <a href="%{url}">%{title}</a> 提及了你
     comment_title_html: 在你发布的 <a href="%{url}">%{title}</a> 评论了
-    reply_title_html: 在话题中 %{topic} 回复了你
+    reply_title_html: 回复了话题 %{topic}
     topic_title_html: 创建了话题 %{topic} 
     follow_you: 关注了你。
     node_changed_html: 你发布的话题 %{topic} 由于内容原因被管理员移动到了 %{node}  节点，请注意查看节点说明。

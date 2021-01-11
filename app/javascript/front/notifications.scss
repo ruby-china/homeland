@@ -37,14 +37,19 @@
       }
     }
 
-    a {
-      color: var(--link-color);
+    .media-heading {
+      color: var(--text-color2);
+
+      a {
+        color: var(--link-color);
+      }
     }
 
     &.unread {
       color: var(--text-color1);
 
       .media-heading {
+        color: var(--text-color1);
         font-weight: bold;
       }
 
@@ -53,6 +58,15 @@
         color: var(--link-color);
         text-decoration: underline;
       }
+    }
+
+    .topic-title {
+      display: inline-block;
+      max-width: 400px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      vertical-align: bottom;
     }
 
     .media-content {

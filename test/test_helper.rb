@@ -13,36 +13,21 @@ require "minitest/autorun"
 require "mocha/minitest"
 require "rails/test_help"
 require "sidekiq/testing"
+require_relative "./support/model"
 
 FileUtils.mkdir_p(Rails.root.join("tmp/cache"))
 
 OmniAuth.config.test_mode = true
 FactoryBot.use_parent_strategy = false
 
-ActiveRecord::Base.connection.create_table(:monkeys, force: true) do |t|
-  t.string :name
-  t.integer :user_id
-  t.integer :comments_count
-  t.timestamps null: false
-end
-
-ActiveRecord::Base.connection.create_table(:commentable_pages, force: true) do |t|
-  t.string :name
-  t.integer :user_id
-  t.integer :comments_count, default: 0, null: false
-  t.timestamps null: false
-end
-
-class CommentablePage < ApplicationRecord
-end
-
-class Monkey < ApplicationRecord
-end
-
 class ActiveSupport::TestCase
   include FactoryBot::Syntax::Methods
 
-  # parallelize(workers: :number_of_processors, with: :threads)
+  parallelize
+
+  parallelize_setup do |worker|
+    setup_test_db!
+  end
 
   setup do
     Setting.stubs(:captcha_enable?).returns(true)
@@ -50,7 +35,7 @@ class ActiveSupport::TestCase
     Setting.stubs(:topic_create_hour_limit_count).returns("")
   end
 
-  teardown do
+  parallelize_teardown do
     Rails.cache.clear
   end
 

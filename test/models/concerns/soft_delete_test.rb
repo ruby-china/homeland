@@ -3,13 +3,6 @@
 require "spec_helper"
 
 class SoftDeleteTest < ActiveSupport::TestCase
-  ActiveRecord::Base.connection.create_table(:walking_deads, force: true) do |t|
-    t.string :name
-    t.string :tag
-    t.datetime :deleted_at
-    t.timestamps null: false
-  end
-
   class WalkingDead < ApplicationRecord
     include SoftDelete
 

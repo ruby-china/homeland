@@ -3,14 +3,6 @@
 require "test_helper"
 
 class MentionableTest < ActiveSupport::TestCase
-  ActiveRecord::Base.connection.create_table(:test_documents, force: true) do |t|
-    t.integer :user_id
-    t.integer :reply_to_id
-    t.integer :mentioned_user_ids, array: true, default: []
-    t.text :body
-    t.timestamps null: false
-  end
-
   class TestDocument < ApplicationRecord
     include Mentionable
 

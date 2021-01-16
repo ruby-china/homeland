@@ -227,7 +227,7 @@
     node_recent_topics: "节点下其他话题"
     have_no_avatar: "你还未设置头像，不能发布新话题。"
     excellent_info_html: "本帖已被管理员设置为精华贴"
-    need_login_to_reply_html: 需要 <a href="/account/sign_in" class="btn btn-primary">登陆</a> 后方可回复, 如果你还没有账号请 <a href="/account/sign_up">注册新账号</a>
+    need_login_to_reply_html: 需要 <a href="/account/sign_in" class="btn btn-primary">登录</a> 后方可回复, 如果你还没有账号请 <a href="/account/sign_up">注册新账号</a>
     newbi_info_html: "当前设置新手用户不能在 22:00 ~ 9:00 发帖。"
     closed_info_html: 此话题已于 %{closed_at} 关闭讨论，不在接受任何回复。
     topic_pin_successfully: 话题置顶成功。

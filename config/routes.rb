@@ -183,11 +183,14 @@ Rails.application.routes.draw do
           post :unblock
         end
       end
+      resource :home, only: [] do
+        collection do
+          post :check_in, to: "home#check_in"
+          get :show_check_in, to: "home#show_check_in"
+        end
+      end
 
       match "*path", to: "root#not_found", via: :all
-
-      post :check_in, to: "home#check_in"
-      get :show_check_in, to: "home#show_check_in"
     end
   end
 

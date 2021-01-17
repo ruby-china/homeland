@@ -20,7 +20,7 @@ class Reply
       # 加入帖子关注着
       follower_ids = self.topic.try(:follow_by_user_ids) || []
       # 加入回帖人的关注者
-      follower_ids += self.user.try(:follow_by_user_ids) || []
+      # follower_ids += self.user.try(:follow_by_user_ids) || []
       # 加入发帖人
       follower_ids << self.topic.try(:user_id)
       # 去重复

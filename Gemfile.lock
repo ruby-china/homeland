@@ -1,12 +1,4 @@
 GIT
-  remote: git@github.com:w2solo/dreamland-grade.git
-  revision: c2fcaf8ab2009c583495ea96062ceb29808caae3
-  branch: main
-  specs:
-    grade (0.1.0)
-      rails (>= 5.2.0)
-
-GIT
   remote: https://github.com/ankane/pghero.git
   revision: ebc926c04cd67950d428b6eb02096769030efcb8
   specs:
@@ -47,7 +39,7 @@ GIT
       redis (>= 3.0.4)
 
 GEM
-  remote: https://rubygems.org/
+  remote: https://gems.ruby-china.com/
   specs:
     action-store (1.0.0)
       rails (>= 5.2, < 7)
@@ -201,6 +193,8 @@ GEM
       raabro (~> 1.4)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    grade (0.1.0)
+      rails (>= 5.2.0)
     hashie (4.1.0)
     html-pipeline (2.14.0)
       activesupport (>= 2)
@@ -219,6 +213,7 @@ GEM
       ruby-vips (>= 2.0.17, < 3)
     jbuilder (2.10.1)
       activesupport (>= 5.0.0)
+    jieba-rb (5.0.0)
     json (2.3.1)
     jwt (2.2.2)
     kaminari (1.2.1)
@@ -496,11 +491,12 @@ DEPENDENCIES
   exception-track
   factory_bot_rails
   form-select
-  grade!
+  grade (= 0.1.0)
   html-pipeline
   html-pipeline-auto-correct
   http_accept_language
   jbuilder
+  jieba-rb
   kaminari
   letter_opener
   listen!

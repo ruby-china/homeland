@@ -400,5 +400,5 @@ window.TopicView = Backbone.View.extend({
       const floor = $(`#reply-${replyToId}`).data('floor');
       return $(el).find('.reply-floor').text(`\#${floor}`);
     });
-  }
+  },
 });

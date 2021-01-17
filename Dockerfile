@@ -8,12 +8,12 @@ ENV RUBYOPT "W0"
 WORKDIR /home/app/homeland
 
 VOLUME /home/app/homeland/plugins
-
 RUN mkdir -p /home/app &&\
   rm -rf '/tmp/*' &&\
   rm -rf /etc/nginx/conf.d/default.conf
 
 ADD Gemfile Gemfile.lock package.json yarn.lock /home/app/homeland/
+RUN gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.org/
 RUN gem install puma
 RUN bundle config set deployment 'true' && bundle install && yarn &&\
   find /home/app/homeland/vendor/bundle -name tmp -type d -exec rm -rf {} +

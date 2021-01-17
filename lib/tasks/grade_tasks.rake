@@ -14,4 +14,19 @@ namespace :grade do
     Grade::Rule.create(action: "delete_comment", message: "删除评论", score: 2, change_type: :decrease)
     Grade::Rule.create(action: "comment_break_rule", message: "评论违规", score: 10, change_type: :decrease)
   end
+
+  desc "初始化积分"
+  task init_grade: :environment do
+    User.where("created_at < ?", Date.parse("2021-1-4")).find_each do |user|
+      user.change_score(:register)
+    end
+    Topic.where("created_at < ?", Date.parse("2021-1-4")).find_each do |topic|
+      next if topic.user.blank?
+      topic.user.change_score(:create_topic)
+      reply_users_ids = topic.replies.pluck(:user_id).uniq
+      User.where(id: reply_users_ids).find_each do |u|
+        u.change_score(:creat_comment)
+      end
+    end
+  end
 end

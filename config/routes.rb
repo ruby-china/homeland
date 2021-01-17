@@ -185,6 +185,9 @@ Rails.application.routes.draw do
       end
 
       match "*path", to: "root#not_found", via: :all
+
+      post :check_in, to: "home#check_in"
+      get :show_check_in, to: "home#show_check_in"
     end
   end
 
@@ -229,6 +232,8 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  post :check_in, to: "home#check_in"
 
   match "*path", to: "home#error_404", via: :all
 end

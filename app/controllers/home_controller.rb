@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class HomeController < ApplicationController
+  before_action :authenticate_user!, only: [:check_in]
+
   def index
     @excellent_topics = Topic.excellent.recent.fields_for_list.limit(20).to_a
   end
@@ -31,5 +33,11 @@ class HomeController < ApplicationController
 
   def status
     render plain: "OK #{Time.now.iso8601}"
+  end
+
+  def check_in
+    Rails.cache.write("check_in:user_id#{@current_user.id}", Time.current.strftime("%F"))
+    @current_user.change_score("signin")
+    render plain: "1"
   end
 end

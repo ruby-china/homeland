@@ -179,4 +179,13 @@ class User < ApplicationRecord
     end
     false
   end
+
+  def show_signin?
+    result = Rails.cache.fetch("check_in:user_id#{self.id}")
+    return true if result.nil?
+    date = Date.parse(result) rescue nil
+    return true if date.nil?
+    return true if date != Time.current.to_date
+    false
+  end
 end

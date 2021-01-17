@@ -7,6 +7,8 @@ default: &default
 development:
   <<: *default
   database: homeland-dev
+  username: postgres
+  password: 123456
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -14,6 +16,8 @@ development:
 test:
   <<: *default
   database: homeland-test
+  username: postgres
+  password: 123456
 
 production:
   <<: *default

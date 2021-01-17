@@ -19,7 +19,8 @@ window.TopicView = Backbone.View.extend({
     "click .notify-updated .update": "updateReplies",
     "click #node-selector .nodes .name a": "nodeSelectorNodeSelected",
     "click .editor-toolbar .reply-to a.close": "unsetReplyTo",
-    "tap .topics .topic": "topicRowClick"
+    "tap .topics .topic": "topicRowClick",
+    "click .check-in": "checkIn"
   },
 
   initialize(opts) {
@@ -401,4 +402,11 @@ window.TopicView = Backbone.View.extend({
       return $(el).find('.reply-floor').text(`\#${floor}`);
     });
   },
+
+  checkIn() {
+    $.post(`/check_in`);
+    $(".check-in").hide();
+    const html = `<div class='alert alert-success'><button class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span></button>签到成功，积分+2</div>`;
+    $("#main").prepend(html);
+  }
 });

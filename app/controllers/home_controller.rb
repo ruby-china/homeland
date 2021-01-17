@@ -36,8 +36,12 @@ class HomeController < ApplicationController
   end
 
   def check_in
-    Rails.cache.write("check_in:user_id#{@current_user.id}", Time.current.strftime("%F"))
-    @current_user.change_score("signin")
-    render plain: "1"
+    if !@current_user.show_signin?
+      render plain: "0"
+    else
+      Rails.cache.write("check_in:user_id#{@current_user.id}", Time.current.strftime("%F"))
+      @current_user.change_score("signin")
+      render plain: "1"
+    end
   end
 end

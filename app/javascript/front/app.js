@@ -243,7 +243,7 @@ const AppView = Backbone.View.extend({
     const userId = btn.data("id");
     const span = btn.find("span");
     const followerCounter = $(
-      `.follow-info .followers[data-login=${userId}] .counter`
+      `.follow-info .followers[data-login="${userId}"] .counter`
     );
     if (btn.hasClass("active")) {
       $.ajax({

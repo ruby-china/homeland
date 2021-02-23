@@ -83,8 +83,7 @@ class TopicsController < ApplicationController
     @topic.user_id = current_user.id
     @topic.node_id = params[:node] || topic_params[:node_id]
     @topic.team_id = ability_team_id
-    @topic.save
-    current_user.change_score(:create_topic)
+    current_user.change_score(:create_topic) if @topic.save
   end
 
   def preview

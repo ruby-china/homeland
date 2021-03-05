@@ -15,10 +15,12 @@
             <%= topic_follow_tag(@topic) %>
             <%= topic_favorite_tag(@topic) %>
             <% if can?(:manage, @topic) || can?(:close, @topic) %>
-              <a href="#" data-toggle="dropdown">
-                <%= icon_tag("ellipsis-v") %>
-              </a>
-              <%= render "menu" %>
+              <span class="dropdown">
+                <a href="#" data-toggle="dropdown">
+                  <%= icon_tag("ellipsis-v") %>
+                </a>
+                <%= render "menu" %>
+              </span>
             <% end %>
           </div>
         </div>

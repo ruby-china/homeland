@@ -767,6 +767,8 @@ kbd {
     padding: 5px 8px;
     text-decoration: none;
   }
+
+  .dropdown.show a[data-toggle="dropdown"],
   a:hover:not(.dropdown-item) {
     background: var(--opts-link-hover-background-color);
     text-decoration: none;

@@ -1,4 +1,4 @@
-<div class="dropdown-menu">
+<div class="dropdown-menu dropdown-menu-right">
   <% if can?(:edit, @topic) %>
     <%= link_to t("topics.menu.edit"), edit_topic_path(@topic), class: "dropdown-item", data: { prefetch: false }  %>
   <% end %>

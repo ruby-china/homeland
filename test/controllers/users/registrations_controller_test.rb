@@ -29,16 +29,16 @@ class Users::RegistrationsControllerTest < ActionDispatch::IntegrationTest
       name: "Monster",
       email_public: "1",
       password: "123456",
-      password_confimation: "123456",
+      password_confimation: "123456"
     }
 
     # Check captcha
-    post user_registration_path, params: { user: user_params }
+    post user_registration_path, params: {user: user_params}
     assert_equal 200, response.status
     assert_match "The captcha code is incorrect", response.body
 
     ActionController::Base.any_instance.stubs(:verify_complex_captcha?).returns(true)
-    post user_registration_path, params: { user: user_params }
+    post user_registration_path, params: {user: user_params}
     assert_sign_up_success
 
     user = User.last
@@ -48,7 +48,7 @@ class Users::RegistrationsControllerTest < ActionDispatch::IntegrationTest
     assert_equal true, user.email_public?
     assert_equal true, user.valid_password?(user_params[:password])
 
-    post user_session_path, params: { user: { login: user_params[:email], password: user_params[:password] } }
+    post user_session_path, params: {user: {login: user_params[:email], password: user_params[:password]}}
     assert_redirected_to root_path
     assert_signed_in
   end
@@ -59,7 +59,6 @@ class Users::RegistrationsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 200, response.status
     assert_select ".rucaptcha-image", 0
   end
-
 
   test "Signup with captcha disabled" do
     Setting.stub(:use_recaptcha, "false") do
@@ -75,11 +74,11 @@ class Users::RegistrationsControllerTest < ActionDispatch::IntegrationTest
         name: "Monster",
         email: "monster@gmail.com",
         password: "123456",
-        password_confimation: "123456",
+        password_confimation: "123456"
       }
 
       # Check captcha
-      post user_registration_path, params: { user: user_params }
+      post user_registration_path, params: {user: user_params}
       assert_sign_up_success
 
       user = User.last
@@ -90,7 +89,7 @@ class Users::RegistrationsControllerTest < ActionDispatch::IntegrationTest
 
   test "Sign up with Omniauth" do
     ActionController::Base.any_instance.stubs(:verify_complex_captcha?).returns(true)
-    OmniAuth.config.add_mock(:github, uid: "github-123", info: { "name" => "Fake Name", "email" => "fake@gmail.com" })
+    OmniAuth.config.add_mock(:github, uid: "github-123", info: {"name" => "Fake Name", "email" => "fake@gmail.com"})
 
     get "/account/auth/github/callback"
     assert_redirected_to new_user_registration_path
@@ -130,10 +129,10 @@ class Users::RegistrationsControllerTest < ActionDispatch::IntegrationTest
       name: "Fake Foo Foo",
       email: "bad email",
       password: "123456",
-      password_confimation: "123456",
+      password_confimation: "123456"
     }
 
-    post user_registration_path, params: { user: user_params }
+    post user_registration_path, params: {user: user_params}
     assert_equal 200, response.status
     assert_select ".alert", text: /Email/
 
@@ -166,9 +165,9 @@ class Users::RegistrationsControllerTest < ActionDispatch::IntegrationTest
       name: "Fake Foo Foo",
       email: "fake@gmail.com",
       password: "123456",
-      password_confimation: "123456",
+      password_confimation: "123456"
     }
-    post user_registration_path, params: { user: user_params }
+    post user_registration_path, params: {user: user_params}
     assert_sign_up_success
 
     assert_nil session[:omniauth]

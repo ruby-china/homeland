@@ -8,10 +8,7 @@ task memory: :environment do
 
   str = Homeland::Markdown.example("zh-CN")
 
-  a = []
-
   puts "Starting to profile memory..."
-  b = {}
   puts "Before =>"
   print_memory
 

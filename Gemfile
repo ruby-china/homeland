@@ -109,6 +109,5 @@ group :development, :test do
   gem "minitest-spec-rails"
   gem "factory_bot_rails"
 
-  gem "rubocop", require: false
-  gem "rubocop-daemon"
+  gem "standard"
 end

@@ -24,21 +24,21 @@ module Homeland
 
     def register_nonce(return_path)
       if nonce
-        $redis.setex(nonce_key, NONCE_EXPIRY_TIME, return_path)
+        Redis.current.setex(nonce_key, NONCE_EXPIRY_TIME, return_path)
       end
     end
 
     def nonce_valid?
-      nonce && $redis.get(nonce_key).present?
+      nonce && Redis.current.get(nonce_key).present?
     end
 
     def return_path
-      $redis.get(nonce_key) || "/"
+      Redis.current.get(nonce_key) || "/"
     end
 
     def expire_nonce!
       if nonce
-        $redis.del nonce_key
+        Redis.current.del nonce_key
       end
     end
 
@@ -85,7 +85,7 @@ module Homeland
           email: email,
           name: name,
           login: Homeland::Username.sanitize(username || name),
-          password: Devise.friendly_token[0, 20],
+          password: Devise.friendly_token[0, 20]
         }
         user = User.new(user_params)
 
@@ -102,7 +102,7 @@ module Homeland
         username: username,
         email: email,
         name: name,
-        avatar_url: avatar_url,
+        avatar_url: avatar_url
       )
 
       sso_record.last_payload = unsigned_payload

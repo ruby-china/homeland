@@ -14,7 +14,7 @@
 # - *updated_at* [DateTime] 更新时间
 if node
   json.cache! ["v2", node] do
-    json.(node, :id, :name, :topics_count, :summary, :sort, :updated_at)
+    json.call(node, :id, :name, :topics_count, :summary, :sort, :updated_at)
     json.section_id 1
     json.section_name "Nodes"
   end

@@ -29,10 +29,9 @@
 
 if topic
   json.cache! ["v1.1", topic, defined?(detail)] do
-    json.(topic, :id, :title, :created_at, :updated_at, :replied_at, :replies_count,
-          :node_id, :last_reply_user_id, :last_reply_user_login,
-          :grade, :likes_count, :suggested_at, :closed_at)
-    json.merge!(node_name: topic.node&.name)
+    json.call(topic, :id, :title, :created_at, :updated_at, :replied_at, :replies_count,
+      :node_id, :node_name, :last_reply_user_id, :last_reply_user_login,
+      :grade, :likes_count, :suggested_at, :closed_at)
     json.deleted topic.deleted_at.present?
     json.user do
       json.partial! "user", user: topic.user
@@ -42,7 +41,7 @@ if topic
     json.excellent topic.excellent? ? 1 : 0
 
     if defined?(detail)
-      json.(topic, :body, :body_html)
+      json.call(topic, :body, :body_html)
     end
   end
   json.hits topic.hits.to_i

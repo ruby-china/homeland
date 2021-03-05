@@ -82,7 +82,6 @@ class TopicTest < ActiveSupport::TestCase
     assert_includes Topic.excellent, topic
   end
 
-
   test ".update_last_reply should work" do
     old_updated_at = topic.updated_at
     r = create(:reply, topic: topic)
@@ -169,7 +168,7 @@ class TopicTest < ActiveSupport::TestCase
   end
 
   test ".excellent! / .unexcellent!" do
-    admin = create(:admin)
+    create(:admin)
     topic = create(:topic, user: user)
 
     Current.stubs(:user).returns(user)
@@ -222,7 +221,7 @@ class TopicTest < ActiveSupport::TestCase
     t = build(:topic, user_id: user_id)
     assert_equal false, t.save
     assert_equal 1, t.errors.count
-    assert_equal ["Create too frequently, please try again later."], t.errors&.messages.dig(:base)
+    assert_equal ["Create too frequently, please try again later."], t.errors.messages_for(:base)
 
     Rails.cache.delete("users:#{user_id}:topic-create")
     Setting.stubs(:topic_create_limit_interval).returns(0)
@@ -246,7 +245,7 @@ class TopicTest < ActiveSupport::TestCase
     Rails.cache.write("users:#{user_id}:topic-create-by-hour", 10)
     topic = build(:topic, user_id: user_id)
     assert_equal false, topic.save
-    assert_equal ["Creation has been rejected by limit 10 topics created within 1 hour."], topic.errors&.messages.dig(:base)
+    assert_equal ["Creation has been rejected by limit 10 topics created within 1 hour."], topic.errors.messages_for(:base)
 
     Setting.stubs(:topic_create_hour_limit_count).returns(0)
     topic = build(:topic, user_id: user_id)
@@ -259,10 +258,10 @@ class TopicTest < ActiveSupport::TestCase
     assert_equal true, topic.valid?
     topic = build(:topic, body: "This is FFFF")
     assert_equal false, topic.valid?
-    assert_equal ["Create failed, because content has sensitive word \"FFF\"."], topic.errors&.messages.dig(:body)
+    assert_equal ["Create failed, because content has sensitive word \"FFF\"."], topic.errors.messages_for(:body)
     topic = build(:topic, body: "This is AAAA")
     assert_equal false, topic.valid?
-    assert_equal ["Create failed, because content has sensitive word \"AAAA\"."], topic.errors&.messages.dig(:body)
+    assert_equal ["Create failed, because content has sensitive word \"AAAA\"."], topic.errors.messages_for(:body)
   end
 
   test "as_indexed_json" do

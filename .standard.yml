@@ -1,0 +1,6 @@
+ignore:
+  - tmp/**/*
+  - test/fixture/**/*
+  - lib/templates/**/*
+  - plugins/**/*
+

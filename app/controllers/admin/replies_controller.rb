@@ -33,8 +33,8 @@ module Admin
 
     private
 
-      def set_reply
-        @reply = Reply.unscoped.find(params[:id])
-      end
+    def set_reply
+      @reply = Reply.unscoped.find(params[:id])
+    end
   end
 end

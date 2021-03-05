@@ -118,7 +118,7 @@ Devise.setup do |config|
 
   # Regex to use to validate the email address
   # before updating rails 4:
-  config.email_regexp = /\A([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})\z/i
+  config.email_regexp = /\A([\w.%+\-]+)@([\w\-]+\.)+(\w{2,})\z/i
   # Devise default:
   # config.email_regexp = /\A[^@]+@[^@]+\z/
 
@@ -187,7 +187,7 @@ Devise.setup do |config|
     config.omniauth :twitter, Setting.twitter_api_key, Setting.twitter_api_secret
   end
   if Setting.has_omniauth? :wechat
-    config.omniauth :wechat, Setting.wechat_api_key, Setting.wechat_api_secret, authorize_params: { scope: "snsapi_base" }
+    config.omniauth :wechat, Setting.wechat_api_key, Setting.wechat_api_secret, authorize_params: {scope: "snsapi_base"}
   end
   # config.omniauth :open_id, :store => OpenID::Store::Filesystem.new('/tmp'), :name => 'google', :identifier => 'https://www.google.com/accounts/o8/id', :require => 'omniauth-openid'
 

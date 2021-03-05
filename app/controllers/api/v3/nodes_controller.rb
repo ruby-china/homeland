@@ -9,7 +9,7 @@ module Api
       # @return [Array<NodeSerializer>]
       def index
         @nodes = Node.sorted.all
-        @meta = { total: Node.count }
+        @meta = {total: Node.count}
       end
 
       ##

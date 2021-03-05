@@ -54,8 +54,8 @@ module Admin
 
     private
 
-      def set_application
-        @application = Doorkeeper::Application.find(params[:id])
-      end
+    def set_application
+      @application = Doorkeeper::Application.find(params[:id])
+    end
   end
 end

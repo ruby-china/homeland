@@ -21,7 +21,7 @@ class ApplicationController
     def turbolinks_app_version
       return "" unless turbolinks_app?
       return @turbolinks_app_version if defined? @turbolinks_app_version
-      version_str = request.user_agent.to_s.match(/version:[\d\.]+/).to_s
+      version_str = request.user_agent.to_s.match(/version:[\d.]+/).to_s
       @turbolinks_app_version = version_str.split(":").last
       @turbolinks_app_version
     end

@@ -11,7 +11,7 @@ class Profile < ApplicationRecord
   validates :theme, inclusion: %w[auto light dark], allow_nil: true
 
   CONTACT_FIELDS = %i[alipay paypal qq weibo wechat douban dingding aliwangwang
-                      facebook instagram dribbble battle_tag psn_id steam_id]
+    facebook instagram dribbble battle_tag psn_id steam_id]
 
   CONTACT_FIELD_PREFIXS = {
     douban: "https://www.douban.com/people/",
@@ -19,7 +19,7 @@ class Profile < ApplicationRecord
     facebook: "https://facebook.com/",
     instagram: "https://instagram.com/",
     dribbble: "https://dribbble.com/",
-    battle_tag: "#",
+    battle_tag: "#"
   }
 
   def self.contact_field_label(field)

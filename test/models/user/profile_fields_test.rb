@@ -9,12 +9,11 @@ class User::ProfileFiledsTest < ActiveSupport::TestCase
 
   attr_accessor :user
 
-
   test "profile_field" do
     params = {
       weibo: "weibo1",
       douban: "douban1",
-      dribbble: "dribbble1",
+      dribbble: "dribbble1"
     }
     user.update_profile_fields(params)
     assert_equal params, user.contacts

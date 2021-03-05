@@ -39,7 +39,7 @@ class User
 
     # Mark latest topic update as read
     def read_topic(topic)
-      TopicReadJob.perform_later(topic_id: topic.id, user_id: self.id)
+      TopicReadJob.perform_later(topic_id: topic.id, user_id: id)
     end
   end
 end

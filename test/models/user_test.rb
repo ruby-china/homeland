@@ -9,7 +9,9 @@ class UserTest < ActiveSupport::TestCase
     @user = nil
   end
 
-  def user; @user ||= create(:user); end
+  def user
+    @user ||= create(:user)
+  end
 
   test "user_type" do
     assert_equal :user, user.user_type
@@ -27,7 +29,7 @@ class UserTest < ActiveSupport::TestCase
       assert_equal true, user.valid?
     end
 
-    invalid_logins = %w[*ll&&^12 abdddddc$ $abdddddc aaa*11 ]
+    invalid_logins = %w[*ll&&^12 abdddddc$ $abdddddc aaa*11]
     invalid_logins.each do |login|
       user = build(:user, login: login)
       assert_equal false, user.valid?
@@ -80,13 +82,13 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "location" do
-    Location.count == 0
+    assert_equal 0, Location.count
 
     # should get results when user location is set
     user.location = "hangzhou"
     user.reload
     create(:user, location: "Hongkong")
-    Location.count == 2
+    assert_equal 2, Location.count
 
     # should update users_count when user location changed
     old_name = user.location
@@ -266,7 +268,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "like reply" do
-    topic = create(:topic)
+    create(:topic)
     reply = create(:reply)
 
     user.like(reply)
@@ -296,11 +298,9 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "#find_by_login!" do
-
     u = User.find_by_login!(user.login)
     assert_equal user.id, u.id
     assert_equal user.login, u.login
-
 
     # should ignore case
     u = User.find_by_login!(user.login.upcase)
@@ -319,8 +319,8 @@ class UserTest < ActiveSupport::TestCase
 
   test "find_by_login! Simple prefix user exists" do
     user1 = create :user, login: "foo"
-    user2 = create :user, login: "foobar"
-    user2 = create :user, login: "a2foo"
+    create :user, login: "foobar"
+    create :user, login: "a2foo"
 
     u = User.find_by_login!(user1.login)
     assert_equal user1.id, u.id
@@ -400,7 +400,6 @@ class UserTest < ActiveSupport::TestCase
     assert_equal "Deleted", u1.level_name
   end
 
-
   test "#find_for_database_authentication" do
     user = create(:user, login: "foo", email: "foobar@gmail.com")
 
@@ -419,7 +418,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test ".team_options" do
-    user2 = create(:user)
+    create(:user)
 
     team_users = create_list(:team_user, 2, user: user)
     teams = team_users.collect(&:team).sort

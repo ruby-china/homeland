@@ -24,8 +24,8 @@ class User
     end
 
     def update_theme(value)
-      self.create_profile if self.profile.blank?
-      self.profile.update(theme: value)
+      create_profile if profile.blank?
+      profile.update(theme: value)
     end
 
     def update_profile_fields(field_values)
@@ -35,28 +35,29 @@ class User
         val[key.to_sym] = value
       end
 
-      self.create_profile if self.profile.blank?
-      self.profile.update(contacts: val)
+      create_profile if profile.blank?
+      profile.update(contacts: val)
     end
 
     private
-      # Store user location into Location
-      def store_location
-        return if !self.location_changed?
 
-        if location.blank?
-          self.location_id = nil
-          return
-        end
+    # Store user location into Location
+    def store_location
+      return unless location_changed?
 
-        old_location = Location.location_find_by_name(self.location_was)
-        old_location&.decrement!(:users_count)
-
-        location = Location.location_find_or_create_by_name(self.location)
-        if !location.new_record?
-          location.increment!(:users_count)
-          self.location_id = location.id
-        end
+      if location.blank?
+        self.location_id = nil
+        return
       end
+
+      old_location = Location.location_find_by_name(location_was)
+      old_location&.decrement!(:users_count)
+
+      location = Location.location_find_or_create_by_name(self.location)
+      if !location.new_record?
+        location.increment!(:users_count)
+        self.location_id = location.id
+      end
+    end
   end
 end

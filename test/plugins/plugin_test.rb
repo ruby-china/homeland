@@ -5,21 +5,21 @@ require "test_helper"
 class Homeland::PluginTest < ActiveSupport::TestCase
   setup do
     @plugin = Homeland.register_plugin do |plugin|
-      plugin.name              = "foo"
-      plugin.version           = "0.1.0"
-      plugin.display_name      = "Foo bar"
-      plugin.root_path         = "/foo"
-      plugin.admin_path        = "/admin/foo"
-      plugin.description       = "Hello this is foo bar"
-      plugin.navbar_link       = true
-      plugin.user_menu_link    = true
+      plugin.name = "foo"
+      plugin.version = "0.1.0"
+      plugin.display_name = "Foo bar"
+      plugin.root_path = "/foo"
+      plugin.admin_path = "/admin/foo"
+      plugin.description = "Hello this is foo bar"
+      plugin.navbar_link = true
+      plugin.user_menu_link = true
       plugin.admin_navbar_link = true
     end
 
     @plugin1 = Homeland.register_plugin do |plugin|
-      plugin.name           = "dar"
-      plugin.display_name   = "Dar bar"
-      plugin.navbar_link    = false
+      plugin.name = "dar"
+      plugin.display_name = "Dar bar"
+      plugin.navbar_link = false
       plugin.user_menu_link = false
     end
   end

@@ -12,7 +12,7 @@ Doorkeeper.configure do
   end
 
   resource_owner_from_credentials do
-    request.params[:user] = { login: request.params[:username], password: request.params[:password] }
+    request.params[:user] = {login: request.params[:username], password: request.params[:password]}
     request.env["devise.allow_params_authentication"] = true
     # 清理之前的 warden 信息
     request.env["warden"].logout(:user)

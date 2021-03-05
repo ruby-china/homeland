@@ -22,9 +22,9 @@ class User
     end
 
     def github_repos_path
-      return nil if self.github.blank?
+      return nil if github.blank?
       resource_name = organization? ? "orgs" : "users"
-      "/#{resource_name}/#{self.github}/repos?type=owner&sort=pushed"
+      "/#{resource_name}/#{github}/repos?type=owner&sort=pushed"
     end
 
     module ClassMethods
@@ -38,7 +38,7 @@ class User
             conn.basic_auth Setting.github_api_key, Setting.github_api_secret
           end
           resp = conn.get(user.github_repos_path)
-        rescue StandardError => e
+        rescue => e
           Rails.logger.error("GitHub Repositiory fetch Error: #{e}")
           Homeland.file_store.write(user.github_repositories_cache_key, [], expires_in: 1.minutes)
           return
@@ -53,7 +53,7 @@ class User
               url: a1["html_url"],
               watchers: a1["watchers"],
               language: a1["language"],
-              description: a1["description"],
+              description: a1["description"]
             }
           end
           items.sort! { |a, b| b[:watchers] <=> a[:watchers] }.take(10)

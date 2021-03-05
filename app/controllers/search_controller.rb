@@ -13,6 +13,6 @@ class SearchController < ApplicationController
 
   def users
     @result = User.search(params[:q], user: current_user, limit: params[:limit] || 10)
-    render json: @result.collect { |u| { login: u.login, name: u.name, avatar_url: u.large_avatar_url } }
+    render json: @result.collect { |u| {login: u.login, name: u.name, avatar_url: u.large_avatar_url} }
   end
 end

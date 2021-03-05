@@ -24,7 +24,7 @@ class Homeland::SanitizeTest < ActiveSupport::TestCase
   end
 
   test "block script" do
-    assert_sanitize_html "alert("");foo", "<script>alert("");</script>foo"
+    assert_sanitize_html 'alert("");foo', '<script>alert("");</script>foo'
   end
 
   test "block style" do
@@ -108,7 +108,7 @@ class Homeland::SanitizeTest < ActiveSupport::TestCase
   end
 
   test "img src" do
-    html = '<img src="javascript:alert('')">'
+    html = %(<img src="javascript:alert('')">)
     assert_sanitize_html "<img>", html
   end
 

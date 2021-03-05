@@ -33,7 +33,7 @@ class APIControllerTest < ActionDispatch::IntegrationTest
 
   # 覆盖 get, post .. 方法，让他们自己带上登录信息
   %i[get post put delete head].each do |method|
-    class_eval <<~EOV
+    class_eval <<~EOV, __FILE__, __LINE__ + 1
       def #{method}(path, parameters = nil, headers = nil)
         # override empty params and headers with default
         parameters = combine_parameters(parameters, default_parameters)
@@ -45,15 +45,15 @@ class APIControllerTest < ActionDispatch::IntegrationTest
 
   private
 
-    def combine_parameters(argument, default)
-      # if both of them are hashes combine them
-      if argument.is_a?(Hash) && default.is_a?(Hash)
-        default.merge(argument)
-      else
-        # otherwise return not nil arg or eventually nil if both of them are nil
-        argument || default
-      end
+  def combine_parameters(argument, default)
+    # if both of them are hashes combine them
+    if argument.is_a?(Hash) && default.is_a?(Hash)
+      default.merge(argument)
+    else
+      # otherwise return not nil arg or eventually nil if both of them are nil
+      argument || default
     end
+  end
 end
 
-MiniTest::Spec.register_spec_type /^Api::V3/, APIControllerTest
+MiniTest::Spec.register_spec_type(/^Api::V3/, APIControllerTest)

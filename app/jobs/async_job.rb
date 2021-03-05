@@ -5,5 +5,6 @@
 class AsyncJob < ActiveJob::Base
   self.queue_adapter = Rails.env.test? ? :inline : ActiveJob::QueueAdapters::AsyncAdapter.new(
     min_threads: 4,
-    max_threads: 10 * Concurrent.processor_count)
+    max_threads: 10 * Concurrent.processor_count
+  )
 end

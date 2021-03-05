@@ -21,15 +21,15 @@
 # - *body* [String] 回帖正文，原始 Markdown
 if reply
   json.cache! ["v1.2", reply, defined?(detail)] do
-    json.(reply, :id, :body_html, :body, :topic_id, :created_at, :updated_at,
-          :likes_count, :action, :target_type)
+    json.call(reply, :id, :body_html, :body, :topic_id, :created_at, :updated_at,
+      :likes_count, :action, :target_type)
     json.deleted reply.deleted_at.present?
     json.user do
       json.partial! "user", user: reply.user
     end
 
     if defined?(detail)
-      json.(reply, :body)
+      json.call(reply, :body)
       json.topic_title reply.topic.try(:title)
     end
   end

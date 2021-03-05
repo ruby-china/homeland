@@ -9,7 +9,7 @@ class User
       attr_accessor :omniauth_provider, :omniauth_uid
 
       devise :database_authenticatable, :registerable, :recoverable, :lockable,
-             :rememberable, :trackable, :validatable, :omniauthable
+        :rememberable, :trackable, :validatable, :omniauthable
 
       after_create :bind_omniauth_on_create
 
@@ -30,20 +30,20 @@ class User
 
     def bind_service(response)
       provider = response["provider"]
-      uid      = response["uid"].to_s
+      uid = response["uid"].to_s
 
       authorizations.create(provider: provider, uid: uid)
     end
 
     def bind_omniauth_on_create
-      if self.omniauth_provider
-        Authorization.find_or_create_by!(provider: self.omniauth_provider, uid: self.omniauth_uid, user_id: self.id)
+      if omniauth_provider
+        Authorization.find_or_create_by!(provider: omniauth_provider, uid: omniauth_uid, user_id: id)
       end
     end
 
     # User who was logined with omniauth but not bind user info (email and password)
     def legacy_omniauth_logined?
-      self.email.include?("@example.com")
+      email.include?("@example.com")
     end
 
     module ClassMethods
@@ -61,7 +61,7 @@ class User
               "#{provider}+#{uid}@example.com"
             end
 
-          user.name  = data["name"]
+          user.name = data["name"]
           user.login = Homeland::Username.sanitize(data["nickname"])
 
           if provider == "github"
@@ -79,13 +79,13 @@ class User
 
           user.password = Devise.friendly_token[0, 20]
           user.location = data["location"]
-          user.tagline  = data["description"]
+          user.tagline = data["description"]
         end
       end
 
       %w[github].each do |provider|
         define_method "find_or_create_for_#{provider}" do |response|
-          uid  = response["uid"].to_s
+          uid = response["uid"].to_s
           data = response["info"]
 
           user = Authorization.find_by(provider: provider, uid: uid).try(:user)

@@ -70,8 +70,8 @@ module Admin
 
     private
 
-      def set_topic
-        @topic = Topic.unscoped.find(params[:id])
-      end
+    def set_topic
+      @topic = Topic.unscoped.find(params[:id])
+    end
   end
 end

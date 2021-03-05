@@ -46,7 +46,7 @@ jobs:
       run: |
         sed -i "s/gems.ruby-china.org/rubygems.org/g" Gemfile.lock
         bundle exec rails db:migrate 
-    - name: Run Rubocop
-      run: bundle exec rubocop .
+    - name: Run Standard
+      run: bundle exec standardrb
     - name: Run tests
       run: bundle exec rails test

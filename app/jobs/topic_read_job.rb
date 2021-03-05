@@ -13,8 +13,8 @@ class TopicReadJob < AsyncJob
     any_sql = "(target_type = 'Topic' AND target_id = ?) OR (target_type = 'Reply' AND target_id in (?))"
 
     user.notifications.unread
-                  .where(any_sql, topic.id, replies_ids)
-                  .update_all(read_at: Time.now)
+      .where(any_sql, topic.id, replies_ids)
+      .update_all(read_at: Time.now)
     Notification.realtime_push_to_client(user)
     # For last_reply_id is nil
     last_reply_id = topic.last_reply_id || -1

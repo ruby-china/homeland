@@ -67,19 +67,19 @@ class TeamUsersController < ApplicationController
 
   private
 
-    def authorize_team_owner!
-      authorize! :update, @team
-    end
+  def authorize_team_owner!
+    authorize! :update, @team
+  end
 
-    def set_team_user
-      @team_user = @team.team_users.find(params[:id])
-    end
+  def set_team_user
+    @team_user = @team.team_users.find(params[:id])
+  end
 
-    def set_team
-      @team = Team.find_by_login!(params[:user_id])
-    end
+  def set_team
+    @team = Team.find_by_login!(params[:user_id])
+  end
 
-    def team_user_params
-      params.require(:team_user).permit(:login, :user_id, :role)
-    end
+  def team_user_params
+    params.require(:team_user).permit(:login, :user_id, :role)
+  end
 end

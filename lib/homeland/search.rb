@@ -35,10 +35,10 @@ module Homeland
 
     def ts_query
       @ts_query ||= begin
-                      all_terms = @term.split
-                      query = SearchDocument.sanitize_sql(all_terms.map { |t| "#{PG::Connection.escape_string(t)}:*" }.join(" & "))
-                      "TO_TSQUERY('simple', '#{query}')"
-                    end
+        all_terms = @term.split
+        query = SearchDocument.sanitize_sql(all_terms.map { |t| "#{PG::Connection.escape_string(t)}:*" }.join(" & "))
+        "TO_TSQUERY('simple', '#{query}')"
+      end
     end
   end
 end

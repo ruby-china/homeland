@@ -26,8 +26,8 @@ module Oauth
 
     # only needed if each application must have some owner
     def create
-      @application       = Doorkeeper::Application.new(application_params)
-      @application.uid   = SecureRandom.hex(4)
+      @application = Doorkeeper::Application.new(application_params)
+      @application.uid = SecureRandom.hex(4)
       @application.owner = current_user if Doorkeeper.configuration.confirm_application_owner?
 
       if @application.save
@@ -38,7 +38,8 @@ module Oauth
       end
     end
 
-    def edit; end
+    def edit
+    end
 
     def update
       if @application.update(application_params)
@@ -51,7 +52,7 @@ module Oauth
       else
         respond_to do |format|
           format.html { render :edit }
-          format.json { render json: { errors: @application.errors.full_messages }, status: :unprocessable_entity }
+          format.json { render json: {errors: @application.errors.full_messages}, status: :unprocessable_entity }
         end
       end
     end

@@ -49,22 +49,22 @@ module Topics
 
     private
 
-      def render_index(name)
-        @page_title = [t("topics.topic_list.#{name.to_s}"), t("menu.topics")].join(" · ")
-        render action: "index"
+    def render_index(name)
+      @page_title = [t("topics.topic_list.#{name}"), t("menu.topics")].join(" · ")
+      render action: "index"
+    end
+
+    def topics_scope(base_scope = Topic, without_nodes: true)
+      scope = base_scope.without_ban.fields_for_list
+      scope = scope.without_hide_nodes if without_nodes
+
+      if current_user
+        scope = scope.without_nodes(current_user.block_node_ids) if without_nodes
+        scope = scope.without_users(current_user.block_user_ids)
       end
 
-      def topics_scope(base_scope = Topic, without_nodes: true)
-        scope = base_scope.without_ban.fields_for_list
-        scope = scope.without_hide_nodes if without_nodes
-
-        if current_user
-          scope = scope.without_nodes(current_user.block_node_ids) if without_nodes
-          scope = scope.without_users(current_user.block_user_ids)
-        end
-
-        # must include :user, because it's uses for _topic.html.erb fragment cache_key
-        scope.includes(:user)
-      end
+      # must include :user, because it's uses for _topic.html.erb fragment cache_key
+      scope.includes(:user)
+    end
   end
 end

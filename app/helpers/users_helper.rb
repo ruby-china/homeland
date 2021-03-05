@@ -8,15 +8,15 @@ module UsersHelper
     return t("common.unknow_user") if user.blank?
 
     user_type = :user
-    login     = user
-    label     = login
-    name      = login
+    login = user
+    label = login
+    name = login
 
     if user.is_a? User
       user_type = user.user_type
-      login     = user.login
-      label     = user_type == :team ? user.name : user.login
-      name      = user.name
+      login = user.login
+      label = user_type == :team ? user.name : user.login
+      name = user.name
     end
 
     name ||= login
@@ -25,7 +25,7 @@ module UsersHelper
 
     link_to(label, "/#{login}", options)
   end
-  alias team_name_tag user_name_tag
+  alias_method :team_name_tag, :user_name_tag
 
   def user_avatar_width_for_size(size)
     case size
@@ -38,7 +38,7 @@ module UsersHelper
   end
 
   def user_avatar_tag(user, version = :md, link: true, timestamp: nil)
-    width     = user_avatar_width_for_size(version)
+    width = user_avatar_width_for_size(version)
     img_class = "media-object avatar-#{width}"
 
     return "" if user.blank?
@@ -71,13 +71,13 @@ module UsersHelper
     return "" if current_user.blank?
     return "" if node.blank?
 
-    blocked     = current_user.block_node?(node)
+    blocked = current_user.block_node?(node)
     class_names = "btn btn-default button-block-node"
 
     if blocked
-      link_to icon_tag("eye-slash", label: t("common.unblock_node")), "#", "data-id" => node.id, class: "#{class_names} active"
+      link_to icon_tag("eye-slash", label: t("common.unblock_node")), "#", "data-id" => node.id, :class => "#{class_names} active"
     else
-      link_to icon_tag("eye-slash", label: t("common.block_node")), "#", title: t("common.block_node_title"), "data-id" => node.id, class: class_names
+      link_to icon_tag("eye-slash", label: t("common.block_node")), "#", :title => t("common.block_node_title"), "data-id" => node.id, :class => class_names
     end
   end
 
@@ -86,14 +86,13 @@ module UsersHelper
     return "" if user.blank?
     return "" if current_user.id == user.id
 
-    blocked     = current_user.block_user?(user)
+    blocked = current_user.block_user?(user)
     class_names = "button-block-user btn btn-default btn-block"
-    icon        = '<i class="fa fa-eye-slash"></i>'
 
     if blocked
-      link_to icon_tag("eye-slash", label: t("common.unblock_user")), "#", "data-id" => user.login, class: "#{class_names} active"
+      link_to icon_tag("eye-slash", label: t("common.unblock_user")), "#", "data-id" => user.login, :class => "#{class_names} active"
     else
-      link_to icon_tag("eye-slash", label: t("common.block_user")), "#", title: t("common.block_user_title"), "data-id" => user.login, class: class_names
+      link_to icon_tag("eye-slash", label: t("common.block_user")), "#", :title => t("common.block_user_title"), "data-id" => user.login, :class => class_names
     end
   end
 
@@ -105,13 +104,12 @@ module UsersHelper
     opts[:class] ||= "btn btn-primary btn-block"
 
     class_names = "button-follow-user #{opts[:class]}"
-    icon        = '<i class="fa fa-user"></i>'
-    login       = user.login
+    login = user.login
 
     if followed
-      link_to icon_tag("user", label: t("common.unfollow_user")), "#", "data-id" => login, class: "#{class_names} active"
+      link_to icon_tag("user", label: t("common.unfollow_user")), "#", "data-id" => login, :class => "#{class_names} active"
     else
-      link_to icon_tag("user", label: t("common.follow_user")), "#", "data-id" => login, class: class_names
+      link_to icon_tag("user", label: t("common.follow_user")), "#", "data-id" => login, :class => class_names
     end
   end
 

@@ -14,25 +14,25 @@ class User
 
     def like(likeable)
       return false if likeable.blank?
-      return false if likeable.user_id == self.id
-      self.create_action(:like, target: likeable)
+      return false if likeable.user_id == id
+      create_action(:like, target: likeable)
     end
 
     def unlike(likeable)
       return false if likeable.blank?
-      self.destroy_action(:like, target: likeable)
+      destroy_action(:like, target: likeable)
     end
 
     def liked?(likeable)
-      self.find_action(:like, target: likeable).present?
+      find_action(:like, target: likeable).present?
     end
 
     # Get user liked replies by a reply list
     def like_reply_ids_by_replies(replies)
       return [] if replies.blank?
-      return [] if self.like_reply_ids.blank?
+      return [] if like_reply_ids.blank?
       # Intersection between reply ids and user like_reply_ids
-      self.like_reply_actions.where(target_id: replies.collect(&:id)).pluck(:target_id)
+      like_reply_actions.where(target_id: replies.collect(&:id)).pluck(:target_id)
     end
   end
 end

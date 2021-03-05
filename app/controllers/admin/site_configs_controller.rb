@@ -33,8 +33,8 @@ module Admin
 
     private
 
-      def setting_param
-        params[:setting].permit!
-      end
+    def setting_param
+      params[:setting].permit!
+    end
   end
 end

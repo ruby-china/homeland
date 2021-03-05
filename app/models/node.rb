@@ -14,13 +14,13 @@ class Node < ApplicationRecord
   form_select :name
 
   def self.find_builtin_node(id, name)
-    node = self.find_by_id(id)
+    node = find_by_id(id)
     return node if node
-    self.create(id: id, name: name)
+    create(id: id, name: name)
   end
 
   def collapse_summary?
-    @collapse_summary ||= self.summary_html.scan(/\<p\>|\<ul\>/).size > 2
+    @collapse_summary ||= summary_html.scan(/<p>|<ul>/).size > 2
   end
 
   def summary_html

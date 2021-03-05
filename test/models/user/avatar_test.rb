@@ -55,14 +55,14 @@ class User::AvatarTest < ActiveSupport::TestCase
     user.save!
     assert_match Regexp.new("/uploads/user/avatar/#{user.id}/[a-zA-Z0-9\\-]+.png"), user.avatar.url
     image_file_path = Rails.root.join("public/uploads/user/#{user[:avatar]}")
-    assert File.exists?(image_file_path), "#{image_file_path} not exist"
+    assert File.exist?(image_file_path), "#{image_file_path} not exist"
 
     perform_enqueued_jobs do
       user.soft_delete
     end
     user.reload
     assert_nil user[:avatar]
-    refute File.exists?(image_file_path), "#{image_file_path} still exist"
+    refute File.exist?(image_file_path), "#{image_file_path} still exist"
   end
 
   test "upload and destroy" do
@@ -72,11 +72,11 @@ class User::AvatarTest < ActiveSupport::TestCase
     user.save!
     assert_match Regexp.new("/uploads/user/avatar/#{user.id}/[a-zA-Z0-9\\-]+.png"), user.avatar.url
     image_file_path = Rails.root.join("public/uploads/user/#{user[:avatar]}")
-    assert File.exists?(image_file_path), "#{image_file_path} not exist"
+    assert File.exist?(image_file_path), "#{image_file_path} not exist"
 
     perform_enqueued_jobs do
       user.destroy
     end
-    refute File.exists?(image_file_path), "#{image_file_path} still exist"
+    refute File.exist?(image_file_path), "#{image_file_path} still exist"
   end
 end

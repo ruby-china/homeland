@@ -15,11 +15,11 @@ class PhotoTest < ActiveSupport::TestCase
     photo.save!
     assert_match Regexp.new("/uploads/photo/#{@user.login}/[a-zA-Z0-9\\-]+.png"), photo.image.url
     image_file_path = Rails.root.join("public/uploads/photo/#{photo[:image]}")
-    assert File.exists?(image_file_path), "#{image_file_path} not exist"
+    assert File.exist?(image_file_path), "#{image_file_path} not exist"
 
     perform_enqueued_jobs do
       photo.destroy
     end
-    refute File.exists?(image_file_path), "#{image_file_path} still exist"
+    refute File.exist?(image_file_path), "#{image_file_path} still exist"
   end
 end

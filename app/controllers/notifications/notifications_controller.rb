@@ -10,7 +10,7 @@ module Notifications
 
     def read
       Notification.read!(current_user, params[:ids])
-      render json: { ok: 1 }
+      render json: {ok: 1}
     end
 
     def clean
@@ -20,8 +20,8 @@ module Notifications
 
     private
 
-      def notifications
-        Notification.where(user_id: current_user.id)
-      end
+    def notifications
+      Notification.where(user_id: current_user.id)
+    end
   end
 end

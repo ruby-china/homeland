@@ -35,7 +35,7 @@ class CommentTest < ActiveSupport::TestCase
 
   test "Base notify for commentable should notify commentable creator" do
     monkey_user = create("user")
-    monkey =  Monkey.create(name: "Bar", user_id: monkey_user.id)
+    monkey = Monkey.create(name: "Bar", user_id: monkey_user.id)
     comment = build(:comment, commentable: monkey, body: "Hello")
     comment.save!
     note = monkey_user.notifications.last

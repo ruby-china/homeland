@@ -10,7 +10,7 @@ class User::DeviseableTest < ActiveSupport::TestCase
   end
 
   setup do
-    @data = { "email" => "email@example.com", "nickname" => "_why", "name" => "why" }
+    @data = {"email" => "email@example.com", "nickname" => "_why", "name" => "why"}
     @uid = "42"
   end
 
@@ -47,7 +47,7 @@ class User::DeviseableTest < ActiveSupport::TestCase
     Monkey.new_from_provider_data("github", nil, data).save # create a new user first
     time = Time.now
     Time.stub(:now, time) do
-      assert_equal "#{data['nickname']}-github", Monkey.new_from_provider_data("github", nil, data).login
+      assert_equal "#{data["nickname"]}-github", Monkey.new_from_provider_data("github", nil, data).login
     end
   end
 

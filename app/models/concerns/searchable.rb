@@ -7,11 +7,11 @@ module Searchable
     has_one :search_document, as: :searchable, dependent: :delete
 
     after_commit on: :create do
-      self.reindex!
+      reindex!
     end
 
     after_update do
-      self.reindex! # if self&.indexed_changed?
+      reindex! # if self&.indexed_changed?
     end
   end
 

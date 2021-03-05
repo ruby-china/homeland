@@ -22,7 +22,7 @@ module Api
       def create
         current_user.like(likeable)
         likeable.reload
-        data = { obj_type: params[:obj_type], obj_id: likeable.id, count: likeable.likes_count }
+        data = {obj_type: params[:obj_type], obj_id: likeable.id, count: likeable.likes_count}
         render json: data
       end
 
@@ -35,21 +35,21 @@ module Api
       def destroy
         current_user.unlike(likeable)
         likeable.reload
-        data = { obj_type: params[:obj_type], obj_id: likeable.id, count: likeable.likes_count }
+        data = {obj_type: params[:obj_type], obj_id: likeable.id, count: likeable.likes_count}
         render json: data
       end
 
       private
 
-        def likeable
-          return @likeable if defined? @likeable
-          @likeable =
-            if params[:obj_type] == "topic"
-              Topic.find(params[:obj_id])
-            else
-              Reply.find(params[:obj_id])
-            end
-        end
+      def likeable
+        return @likeable if defined? @likeable
+        @likeable =
+          if params[:obj_type] == "topic"
+            Topic.find(params[:obj_id])
+          else
+            Reply.find(params[:obj_id])
+          end
+      end
     end
   end
 end

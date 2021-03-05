@@ -29,8 +29,8 @@ module Admin
 
     private
 
-      def set_plugin
-        @plugin = Homeland.find_plugin(params[:id])
-      end
+    def set_plugin
+      @plugin = Homeland.find_plugin(params[:id])
+    end
   end
 end

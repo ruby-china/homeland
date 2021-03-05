@@ -19,7 +19,7 @@ class NotifyTopicJobTest < ActiveSupport::TestCase
     end
 
     perform_enqueued_jobs do
-      topic = create(:topic, user: user)
+      create(:topic, user: user)
     end
 
     followers.each do |f|

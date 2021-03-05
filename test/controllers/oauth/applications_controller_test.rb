@@ -17,21 +17,21 @@ describe Oauth::ApplicationsController do
       sign_in user
       get oauth_applications_path
       assert_equal 200, response.status
-      assert_match /Applications/, response.body
+      assert_match(/Applications/, response.body)
     end
 
     it "should :new" do
       sign_in user
       get new_oauth_application_path
       assert_equal 200, response.status
-      assert_match /Create Application/, response.body
+      assert_match(/Create Application/, response.body)
     end
 
     it "should :edit" do
       sign_in user
       get edit_oauth_application_path(application)
       assert_equal 200, response.status
-      assert_match /Edit Application/, response.body
+      assert_match(/Edit Application/, response.body)
     end
   end
 end

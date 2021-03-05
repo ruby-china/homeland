@@ -3,7 +3,7 @@
 class UsersController < ApplicationController
   before_action :set_user, except: %i[index city]
   before_action :check_exist!, except: %i[index city block unblock
-                                          follow unfollow]
+    follow unfollow]
 
   etag { @user }
   etag { @user&.teams if @user&.user_type == :user }
@@ -35,28 +35,28 @@ class UsersController < ApplicationController
 
   protected
 
-    def set_user
-      @user = User.find_by_login!(params[:id])
+  def set_user
+    @user = User.find_by_login!(params[:id])
 
-      # 转向正确的拼写
-      if @user.login != params[:id]
-        redirect_to user_path(@user.login), status: 301
-        return
-      end
-
-      @user_type = @user.user_type
+    # 转向正确的拼写
+    if @user.login != params[:id]
+      redirect_to user_path(@user.login), status: 301
+      return
     end
 
-    def check_exist!
-      render_404 if @user.deleted?
-    end
+    @user_type = @user.user_type
+  end
 
-    # Override render method to render difference view path
-    def render(*args)
-      options = args.extract_options!
-      if @user_type
-        options[:template] ||= "/#{@user_type.to_s.tableize}/#{params[:action]}"
-      end
-      super(*(args << options))
+  def check_exist!
+    render_404 if @user.deleted?
+  end
+
+  # Override render method to render difference view path
+  def render(*args)
+    options = args.extract_options!
+    if @user_type
+      options[:template] ||= "/#{@user_type.to_s.tableize}/#{params[:action]}"
     end
+    super(*(args << options))
+  end
 end

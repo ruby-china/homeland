@@ -5,7 +5,7 @@ class Topic
     extend ActiveSupport::Concern
 
     included do
-      enum grade: { ban: -1, normal: 0, excellent: 1 }
+      enum grade: {ban: -1, normal: 0, excellent: 1}
 
       # Follow enum method override methods must in `included` block.
 
@@ -13,25 +13,24 @@ class Topic
         transaction do
           update!(grade: :ban)
           if reason
-            Reply.create_system_event!(action: "ban", topic_id: self.id, body: reason)
+            Reply.create_system_event!(action: "ban", topic_id: id, body: reason)
           end
         end
       end
 
       def excellent!
         transaction do
-          Reply.create_system_event!(action: "excellent", topic_id: self.id)
+          Reply.create_system_event!(action: "excellent", topic_id: id)
           update!(grade: :excellent)
         end
       end
 
       def unexcellent!
         transaction do
-          Reply.create_system_event!(action: "unexcellent", topic_id: self.id)
+          Reply.create_system_event!(action: "unexcellent", topic_id: id)
           update!(grade: :normal)
         end
       end
-
     end
 
     # Destroy record, and then log who deleted.

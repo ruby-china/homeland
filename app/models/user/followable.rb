@@ -12,8 +12,8 @@ class User
 
     def follow_user(user)
       return unless user
-      self.create_action(:follow, target: user)
-      Notification.notify_follow(user.id, self.id)
+      create_action(:follow, target: user)
+      Notification.notify_follow(user.id, id)
     end
   end
 end

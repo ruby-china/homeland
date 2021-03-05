@@ -39,7 +39,7 @@ module Homeland
     end
 
     def <=>(other)
-      self_idx = Setting.sorted_plugins.index(self.name)
+      self_idx = Setting.sorted_plugins.index(name)
       self_idx = 99999999 if self_idx.nil?
       other_idx = Setting.sorted_plugins.index(other.name)
       other_idx = 99999999 if other_idx.nil?
@@ -48,8 +48,8 @@ module Homeland
     end
 
     def destroy
-      return false unless self.uninstallable?
-      FileUtils.rm_rf(self.source_path)
+      return false unless uninstallable?
+      FileUtils.rm_rf(source_path)
       true
     end
 
@@ -58,7 +58,7 @@ module Homeland
       def boot
         Dir.glob(Rails.root.join("plugins", "*")).each do |path|
           boot_file = File.join(path, "boot.rb")
-          if File.exists?(boot_file)
+          if File.exist?(boot_file)
             require boot_file
           end
         end
@@ -68,10 +68,8 @@ module Homeland
         # ActiveSupport.on_load(:after_initialize) do
         ActiveSupport.on_load(:after_initialize) do
           Homeland.plugins.each do |plugin|
-            begin
-              require plugin.name
-            rescue LoadError
-            end
+            require plugin.name
+          rescue LoadError
           end
         end
       end

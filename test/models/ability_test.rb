@@ -60,7 +60,6 @@ class AbilityTest < ActiveSupport::TestCase
     assert ability.can?(:destroy, reply)
   end
 
-
   test "Member" do
     user = create :avatar_user
     topic = create :topic, user: user

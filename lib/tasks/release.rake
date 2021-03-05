@@ -9,14 +9,14 @@ if Rails.env.development? || Rails.env.test?
       sh "git tag -m \"Version #{version}\" #{version_tag}"
       puts "Tagged #{version_tag}."
     rescue
-      "Untagging #{version_tag} due to error."
+      puts "Untagging #{version_tag} due to error."
       sh "git tag -d #{version_tag}"
     end
 
-    return false if not `git tag`.split(/\n/).include?(version_tag)
+    return false unless `git tag`.split(/\n/).include?(version_tag)
     puts "Tag #{version_tag} has already been created."
 
-    git_push('origin')
+    git_push("origin")
   end
 end
 

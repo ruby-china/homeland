@@ -43,8 +43,8 @@ describe Api::V3::UsersController do
       get "/api/v3/users/test_user.json"
       assert_equal 200, response.status
       fields = %w[id name login email avatar_url location company twitter github website bio tagline
-                  topics_count replies_count following_count followers_count favorites_count
-                  level level_name]
+        topics_count replies_count following_count followers_count favorites_count
+        level level_name]
 
       assert_has_keys json["user"], *fields
       fields.reject { |f| f.in? %w[avatar_url bio] }.each do |field|
@@ -156,7 +156,7 @@ describe Api::V3::UsersController do
       assert_equal 200, response.status
       assert_equal 2, json["topics"].size
       fields = %w[id title user node_name node_id last_reply_user_id
-                  last_reply_user_login created_at updated_at replies_count]
+        last_reply_user_login created_at updated_at replies_count]
       assert_has_keys json["topics"][0], *fields
       assert_equal @topics[1].id, json["topics"][0]["id"]
       assert_equal @topics[0].id, json["topics"][1]["id"]

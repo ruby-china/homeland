@@ -24,7 +24,7 @@ class Homeland::MarkdownTest < ActiveSupport::TestCase
       "http://foo.com,的???": '<p><a href="http://foo.com," rel="nofollow" target="_blank">http://foo.com,</a>的???</p>',
       "http://foo.com，的???": '<p><a href="http://foo.com" rel="nofollow" target="_blank">http://foo.com</a>，的???</p>',
       "http://foo.com。的???": '<p><a href="http://foo.com" rel="nofollow" target="_blank">http://foo.com</a>。的???</p>',
-      "http://foo.com；的???": '<p><a href="http://foo.com" rel="nofollow" target="_blank">http://foo.com</a>；的???</p>',
+      "http://foo.com；的???": '<p><a href="http://foo.com" rel="nofollow" target="_blank">http://foo.com</a>；的???</p>'
     }
 
     assert_render_with_cases(cases)
@@ -33,7 +33,7 @@ class Homeland::MarkdownTest < ActiveSupport::TestCase
   test "auto link match complex urls" do
     cases = {
       "http://movie.douban.com/tag/%E7%BE%8E%E5%9B%BD": '<p><a href="http://movie.douban.com/tag/%E7%BE%8E%E5%9B%BD" rel="nofollow" target="_blank">http://movie.douban.com/tag/%E7%BE%8E%E5%9B%BD</a></p>',
-      "http://ruby-china.org/self_posts/11?datas=20,33|100&format=.jpg": '<p><a href="http://ruby-china.org/self_posts/11?datas=20,33%7C100&amp;format=.jpg" rel="nofollow" target="_blank">http://ruby-china.org/self_posts/11?datas=20,33|100&amp;format=.jpg</a></p>',
+      "http://ruby-china.org/self_posts/11?datas=20,33|100&format=.jpg": '<p><a href="http://ruby-china.org/self_posts/11?datas=20,33%7C100&amp;format=.jpg" rel="nofollow" target="_blank">http://ruby-china.org/self_posts/11?datas=20,33|100&amp;format=.jpg</a></p>'
     }
 
     assert_render_with_cases(cases)
@@ -61,11 +61,11 @@ class Homeland::MarkdownTest < ActiveSupport::TestCase
     user = create(:user)
 
     html = <<~HTML
-    <p>hello <a href="/#{user.name}" class="user-mention" title="@#{user.name}"><i>@</i>#{user.name}</a>
-    <a href="/b" class="user-mention" title="@b"><i>@</i>b</a>
-    <a href="/a" class="user-mention" title="@a"><i>@</i>a</a>
-    <a href="/#{user.name}" class="user-mention" title="@#{user.name}"><i>@</i>#{user.name}</a>
-    </p>
+      <p>hello <a href="/#{user.name}" class="user-mention" title="@#{user.name}"><i>@</i>#{user.name}</a>
+      <a href="/b" class="user-mention" title="@b"><i>@</i>b</a>
+      <a href="/a" class="user-mention" title="@a"><i>@</i>a</a>
+      <a href="/#{user.name}" class="user-mention" title="@#{user.name}"><i>@</i>#{user.name}</a>
+      </p>
     HTML
 
     assert_markdown_render html, "hello @#{user.name} @b @a @#{user.name}"
@@ -75,7 +75,7 @@ class Homeland::MarkdownTest < ActiveSupport::TestCase
     cases = {
       "[Hello](http://hello.com)": %(<p><a href="http://hello.com" rel="nofollow" target="_blank" title="">Hello</a></p>),
       "[Hello](http://#{Setting.domain}/foo/bar \"This is title\")": %(<p><a href="http://#{Setting.domain}/foo/bar" title="This is title">Hello</a></p>),
-      "[Hello](/foo/bar)": %(<p><a href="/foo/bar" title="">Hello</a></p>),
+      "[Hello](/foo/bar)": %(<p><a href="/foo/bar" title="">Hello</a></p>)
     }
 
     assert_render_with_cases(cases)
@@ -131,9 +131,9 @@ class Homeland::MarkdownTest < ActiveSupport::TestCase
 
   test "highlight code block" do
     html = <<~HTML
-    <div class="highlight">
-    <pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">Hello</span>\n\n<span class="k">end</span></code></pre>
-    </div>
+      <div class="highlight">
+      <pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">Hello</span>\n\n<span class="k">end</span></code></pre>
+      </div>
     HTML
 
     assert_markdown_render html do
@@ -141,10 +141,10 @@ class Homeland::MarkdownTest < ActiveSupport::TestCase
     end
 
     html = <<~HTML
-    <div class="highlight">
-    <pre class="highlight plaintext"><code>Hello world
-    </code></pre>
-    </div>
+      <div class="highlight">
+      <pre class="highlight plaintext"><code>Hello world
+      </code></pre>
+      </div>
     HTML
 
     assert_markdown_render html do
@@ -152,9 +152,9 @@ class Homeland::MarkdownTest < ActiveSupport::TestCase
     end
 
     html = <<~HTML
-    <div class="highlight">
-    <pre class="highlight objective_c"><code><span class="n">Hello</span><span class="n">world</span></code></pre>
-    </div>
+      <div class="highlight">
+      <pre class="highlight objective_c"><code><span class="n">Hello</span><span class="n">world</span></code></pre>
+      </div>
     HTML
 
     assert_markdown_render html do
@@ -251,7 +251,6 @@ class Homeland::MarkdownTest < ActiveSupport::TestCase
     assert_markdown_render %(<p>some <del>strikethrough</del> text</p>), "some ~~strikethrough~~ text"
   end
 
-
   test "image" do
     assert_markdown_render %(<p><img src="foo.jpg" title="" alt=""></p>), "![](foo.jpg)"
     assert_markdown_render %(<p><img src="foo.jpg" title="titlebb" alt="alt text"></p>), '![alt text](foo.jpg "titlebb")'
@@ -274,25 +273,25 @@ class Homeland::MarkdownTest < ActiveSupport::TestCase
       "@ruby-china": %(<p><a href="/ruby-china" class="user-mention" title="@ruby-china"><i>@</i>ruby-china</a></p>),
       "@small_fish__": %(<p><a href="/small_fish__" class="user-mention" title="@small_fish__"><i>@</i>small_fish__</a></p>),
       "`@small_fish__`": %(<p><code>@small_fish__</code></p>),
-      "`@user`": %(<p><code>@user</code></p>),
+      "`@user`": %(<p><code>@user</code></p>)
     }
 
     assert_render_with_cases cases
 
     assert_markdown_render "<div class=\"highlight\"><pre class=\"highlight ruby\"><code><span class=\"vi\">@small_fish__</span><span class=\"o\">=</span><span class=\"mi\">100</span></code></pre></div>" do
       <<~MD
-      ```ruby
-      @small_fish__ = 100
-      ```
+        ```ruby
+        @small_fish__ = 100
+        ```
       MD
     end
 
     assert_markdown_render "<div class=\"highlight\"><pre class=\"highlight plaintext\"><code>@user\n</code></pre></div>" do
       <<~MD
-          ```
-          @user
-          ```
-        MD
+        ```
+        @user
+        ```
+      MD
     end
 
     # @user in link
@@ -316,9 +315,9 @@ class Homeland::MarkdownTest < ActiveSupport::TestCase
 
   test "mention floor #12f in block code" do
     raw = <<~MD
-    ```
-    #12f
-    ```
+      ```
+      #12f
+      ```
     MD
 
     doc = parse_markdown_doc(raw)
@@ -350,9 +349,9 @@ class Homeland::MarkdownTest < ActiveSupport::TestCase
 
   test "emoji :apple: in block code" do
     raw = <<~MD
-    ```
-    :apple:
-    ```
+      ```
+      :apple:
+      ```
     MD
     doc = parse_markdown_doc(raw)
 
@@ -362,9 +361,9 @@ class Homeland::MarkdownTest < ActiveSupport::TestCase
 
   test "``` use with code" do
     raw = <<~MD
-    ```
-    class Foo; end
-    ```
+      ```
+      class Foo; end
+      ```
     MD
     doc = parse_markdown_doc(raw)
     assert_equal "highlight plaintext", doc.css("pre").attr("class").value
@@ -372,9 +371,9 @@ class Homeland::MarkdownTest < ActiveSupport::TestCase
 
   test "```ruby use with code" do
     raw = <<~MD
-    ```ruby
-    class Foo; end
-    ```
+      ```ruby
+      class Foo; end
+      ```
     MD
 
     doc = parse_markdown_doc(raw)
@@ -399,10 +398,10 @@ class Homeland::MarkdownTest < ActiveSupport::TestCase
 
   test "tables" do
     raw = <<~MD
-    | header 1 | header 3 |
-    | -------- | -------- |
-    | cell 1   | cell 2   |
-    | cell 3   | cell 4   |
+      | header 1 | header 3 |
+      | -------- | -------- |
+      | cell 1   | cell 2   |
+      | cell 3   | cell 4   |
     MD
 
     assert_markdown_render "<div class=\"table-responsive\"><table class=\"table table-bordered table-striped\">\n<tr>\n<th>header 1</th>\n<th>header 3</th>\n</tr>\n<tr>\n<td>cell 1</td>\n<td>cell 2</td>\n</tr>\n<tr>\n<td>cell 3</td>\n<td>cell 4</td>\n</tr>\n</table></div>", raw

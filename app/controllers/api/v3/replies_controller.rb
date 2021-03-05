@@ -36,14 +36,14 @@ module Api
         raise AccessDenied unless can?(:destroy, @reply)
 
         @reply.destroy
-        render json: { ok: 1 }
+        render json: {ok: 1}
       end
 
       private
 
-        def set_reply
-          @reply = Reply.find(params[:id])
-        end
+      def set_reply
+        @reply = Reply.find(params[:id])
+      end
     end
   end
 end

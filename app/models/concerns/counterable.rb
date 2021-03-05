@@ -13,7 +13,7 @@ module Counterable
     end
 
     def redis
-      @redis || $redis || Redis.current
+      Redis.current
     end
 
     def incr(by = 1)
@@ -24,7 +24,9 @@ module Counterable
       redis.get(key).to_i
     end
 
-    def to_s; value.to_s; end
+    def to_s
+      value.to_s
+    end
     alias_method :to_i, :value
 
     def nil?
@@ -39,8 +41,8 @@ module Counterable
     def counter(name, **options)
       ivar_name = :"@#{name}"
       define_method(name) do
-        instance_variable_get(ivar_name) or
-        instance_variable_set(ivar_name, Counter.new([self.class.name, self.id, name], **options))
+        instance_variable_get(ivar_name) ||
+          instance_variable_set(ivar_name, Counter.new([self.class.name, id, name], **options))
       end
     end
   end

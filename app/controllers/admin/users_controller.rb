@@ -11,7 +11,7 @@ module Admin
       if params[:q].present?
         qstr = "%#{params[:q].downcase}%"
         scope = begin
-          case params[:field]
+          case field
           when "login"
             scope.where("lower(login) LIKE ?", qstr)
           when "email"

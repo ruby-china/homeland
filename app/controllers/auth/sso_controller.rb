@@ -10,7 +10,7 @@ module Auth
 
       if destination_url && return_path == root_path
         uri = URI.parse(destination_url)
-        return_path = "#{uri.path}#{uri.query ? '?' + uri.query : ''}"
+        return_path = "#{uri.path}#{uri.query ? "?" + uri.query : ""}"
       end
 
       sso = Homeland::SSO.generate_sso(return_path)
@@ -32,7 +32,7 @@ module Auth
       begin
         user = sso.find_or_create_user(request)
         sign_in :user, user
-      rescue StandardError => e
+      rescue => e
         message = sso.diagnostics
         message += "\n\n" + "-" * 100 + "\n\n"
         message += e.message

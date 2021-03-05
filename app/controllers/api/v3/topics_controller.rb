@@ -58,7 +58,7 @@ module Api
       # { followed: 'Is followed this Topic', liked: 'Is liked this Topic', favorited: 'Is favorited this Topic' }
       # ```
       def show
-        @meta = { followed: false, liked: false, favorited: false }
+        @meta = {followed: false, liked: false, favorited: false}
 
         if current_user
           # Create Notifications
@@ -128,7 +128,7 @@ module Api
       def destroy
         raise AccessDenied unless can?(:destroy, @topic)
         @topic.destroy_by(current_user)
-        render json: { ok: 1 }
+        render json: {ok: 1}
       end
 
       # 获取话题的回帖列表
@@ -149,7 +149,7 @@ module Api
         @replies = Reply.unscoped.where(topic_id: @topic.id).order(:id).includes(:user)
         @replies = @replies.offset(params[:offset].to_i).limit(params[:limit].to_i)
         @user_liked_reply_ids = current_user&.like_reply_ids_by_replies(@replies) || []
-        @meta = { user_liked_reply_ids: @user_liked_reply_ids }
+        @meta = {user_liked_reply_ids: @user_liked_reply_ids}
       end
 
       # 创建对话题的回帖
@@ -176,7 +176,7 @@ module Api
       # POST /api/v3/topics/:id/follow
       def follow
         current_user.follow_topic(@topic)
-        render json: { ok: 1 }
+        render json: {ok: 1}
       end
 
       # Unfollow Topic
@@ -184,7 +184,7 @@ module Api
       # POST /api/v3/topics/:id/unfollow
       def unfollow
         current_user.unfollow_topic(@topic)
-        render json: { ok: 1 }
+        render json: {ok: 1}
       end
 
       # Favorite Topic
@@ -192,7 +192,7 @@ module Api
       # POST /api/v3/topics/:id/favorite
       def favorite
         current_user.favorite_topic(@topic.id)
-        render json: { ok: 1 }
+        render json: {ok: 1}
       end
 
       # Unfovorite Topic
@@ -200,7 +200,7 @@ module Api
       # POST /api/v3/topics/:id/unfavorite
       def unfavorite
         current_user.unfavorite_topic(@topic.id)
-        render json: { ok: 1 }
+        render json: {ok: 1}
       end
 
       # Ban Topic (Admin only)
@@ -210,7 +210,7 @@ module Api
       def ban
         raise AccessDenied.new("The current user does not have the authority to block other people's topics.") unless can?(:ban, @topic)
         @topic.ban!
-        render json: { ok: 1 }
+        render json: {ok: 1}
       end
 
       # Actions
@@ -235,26 +235,26 @@ module Api
         when "open"
           @topic.open!
         end
-        render json: { ok: 1 }
+        render json: {ok: 1}
       end
 
       private
 
-        def set_topic
-          @topic = Topic.find(params[:id])
-        end
+      def set_topic
+        @topic = Topic.find(params[:id])
+      end
 
-        def scope_method_by_type
-          case params[:type]
-          when "last_actived" then :last_actived
-          when "recent" then :recent
-          when "no_reply" then :no_reply
-          when "popular" then :popular
-          when "excellent" then :excellent
-          else
-            :last_actived
-          end
+      def scope_method_by_type
+        case params[:type]
+        when "last_actived" then :last_actived
+        when "recent" then :recent
+        when "no_reply" then :no_reply
+        when "popular" then :popular
+        when "excellent" then :excellent
+        else
+          :last_actived
         end
+      end
     end
   end
 end

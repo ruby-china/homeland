@@ -14,25 +14,29 @@ class ApplicationController
     end
 
     def http_head_locale
-      return nil if !Setting.auto_locale?
+      return nil unless Setting.auto_locale?
       http_accept_language.language_region_compatible_from(I18n.available_locales)
     end
 
     private
 
-      def set_time_zone(&block)
-        tz = Setting.timezone
-        ActiveSupport::TimeZone.find_tzinfo(tz) rescue tz = "UTC"
-        Time.use_zone(tz, &block)
+    def set_time_zone(&block)
+      tz = Setting.timezone
+      begin
+        ActiveSupport::TimeZone.find_tzinfo(tz)
+      rescue
+        tz = "UTC"
       end
+      Time.use_zone(tz, &block)
+    end
 
-      def set_locale
-        I18n.locale = user_locale
+    def set_locale
+      I18n.locale = user_locale
 
-        # after store current locale
-        cookies[:locale] = params[:locale] if params[:locale]
-      rescue I18n::InvalidLocale
-        I18n.locale = I18n.default_locale
-      end
+      # after store current locale
+      cookies[:locale] = params[:locale] if params[:locale]
+    rescue I18n::InvalidLocale
+      I18n.locale = I18n.default_locale
+    end
   end
 end

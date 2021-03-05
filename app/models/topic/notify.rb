@@ -12,12 +12,13 @@ class Topic
     end
 
     private
-      def notify_admin_editing_node_changed
-        return unless self.node_id_changed?
 
-        if Current.user&.admin? || Current.user&.maintainer?
-          NotifyTopicNodeChangedJob.perform_later(id, node_id: node_id)
-        end
+    def notify_admin_editing_node_changed
+      return unless node_id_changed?
+
+      if Current.user&.admin? || Current.user&.maintainer?
+        NotifyTopicNodeChangedJob.perform_later(id, node_id: node_id)
       end
+    end
   end
 end

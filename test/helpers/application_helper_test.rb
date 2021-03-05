@@ -104,9 +104,9 @@ class ApplicationHelperTest < ActionView::TestCase
   test "insert_code_menu_items_tag" do
     Setting.stubs(:editor_languages).returns(%w[go rb 123 js])
     html = <<~HTML
-    <a class="dropdown-item" data-lang="go" href="#">Go</a>
-    <a class="dropdown-item" data-lang="rb" href="#">Ruby</a>
-    <a class="dropdown-item" data-lang="js" href="#">JavaScript</a>
+      <a class="dropdown-item" data-lang="go" href="#">Go</a>
+      <a class="dropdown-item" data-lang="rb" href="#">Ruby</a>
+      <a class="dropdown-item" data-lang="js" href="#">JavaScript</a>
     HTML
 
     assert_html_equal html, insert_code_menu_items_tag

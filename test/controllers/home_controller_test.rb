@@ -24,7 +24,7 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "GET /uploads/:id with not exist file" do
-    get "/uploads/what", params: { format: "jpg" }
+    get "/uploads/what", params: {format: "jpg"}
     assert_equal 404, response.status
   end
 

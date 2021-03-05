@@ -190,7 +190,7 @@ class ReplyTest < ActiveSupport::TestCase
   test "#broadcast_to_client" do
     reply = create(:reply)
 
-    args = ["topics/#{reply.topic_id}/replies", { id: reply.id, user_id: reply.user_id, action: :create }]
+    args = ["topics/#{reply.topic_id}/replies", {id: reply.id, user_id: reply.user_id, action: :create}]
     ActionCable.server.expects(:broadcast).with(*args).once
     reply.broadcast_to_client
   end

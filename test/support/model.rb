@@ -1,4 +1,3 @@
-
 class CommentablePage < ApplicationRecord
 end
 

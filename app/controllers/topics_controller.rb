@@ -4,8 +4,8 @@ class TopicsController < ApplicationController
   include Topics::ListActions
 
   before_action :authenticate_user!, only: %i[new edit create update destroy
-                                              favorite unfavorite follow unfollow
-                                              action favorites]
+    favorite unfavorite follow unfollow
+    action favorites]
   load_and_authorize_resource only: %i[new edit create update destroy favorite unfavorite follow unfollow]
   before_action :set_topic, only: %i[edit read update destroy follow unfollow action ban]
 
@@ -30,7 +30,7 @@ class TopicsController < ApplicationController
   def node
     @node = Node.find(params[:id])
     @topics = topics_scope(@node.topics, without_nodes: false).last_actived.page(params[:page])
-    @page_title = "#{@node.name} &raquo; #{t('menu.topics')}"
+    @page_title = "#{@node.name} &raquo; #{t("menu.topics")}"
     @page_title = [@node.name, t("menu.topics")].join(" · ")
     render action: "index"
   end
@@ -160,18 +160,18 @@ class TopicsController < ApplicationController
 
   private
 
-    def set_topic
-      @topic ||= Topic.find(params[:id])
-    end
+  def set_topic
+    @topic ||= Topic.find(params[:id])
+  end
 
-    def topic_params
-      params.require(:topic).permit(:title, :body, :node_id, :team_id)
-    end
+  def topic_params
+    params.require(:topic).permit(:title, :body, :node_id, :team_id)
+  end
 
-    def ability_team_id
-      team = Team.find_by_id(topic_params[:team_id])
-      return nil if team.blank?
-      return nil if cannot?(:show, team)
-      team.id
-    end
+  def ability_team_id
+    team = Team.find_by_id(topic_params[:team_id])
+    return nil if team.blank?
+    return nil if cannot?(:show, team)
+    team.id
+  end
 end

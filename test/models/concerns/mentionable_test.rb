@@ -31,9 +31,9 @@ class MentionableTest < ActiveSupport::TestCase
   end
 
   test "limtest 5 mentioned user" do
-    logins = "".dup
-    6.times { logins << " @#{create(:user).login}" }
-    doc = TestDocument.create body: logins, user: create(:user)
+    logins = []
+    6.times { logins << "@#{create(:user).login}" }
+    doc = TestDocument.create body: logins.join(" "), user: create(:user)
     assert_equal 5, doc.mentioned_user_ids.count
   end
 

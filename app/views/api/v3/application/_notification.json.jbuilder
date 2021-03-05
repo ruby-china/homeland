@@ -12,7 +12,7 @@
 # - *created_at* [DateTime] 创建时间
 # - *updated_at* [DateTime] 更新时间
 json.cache! ["v2", notification] do
-  json.(notification, :id, :created_at, :updated_at)
+  json.call(notification, :id, :created_at, :updated_at)
   json.type notification.notify_type.classify
   json.read notification.read?
   json.actor do

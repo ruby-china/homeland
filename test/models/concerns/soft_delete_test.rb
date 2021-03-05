@@ -12,7 +12,7 @@ class SoftDeleteTest < ActiveSupport::TestCase
 
     before_validation :check_name_not_exist
     def check_name_not_exist
-      if WalkingDead.unscoped.where(name: self.name).count > 0
+      if WalkingDead.unscoped.where(name: name).count > 0
         errors.add("name", "已经存在")
       end
     end

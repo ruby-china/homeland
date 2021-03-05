@@ -43,8 +43,8 @@ module Admin
 
     private
 
-      def set_node
-        @node = Node.find(params[:id])
-      end
+    def set_node
+      @node = Node.find(params[:id])
+    end
   end
 end

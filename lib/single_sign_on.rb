@@ -2,9 +2,9 @@
 
 # From: https://github.com/discourse/discourse/blob/master/lib/single_sign_on.rb
 class SingleSignOn
-  ACCESSORS         = %i[nonce name username email avatar_url bio external_id return_sso_url admin]
-  FIXNUMS           = []
-  BOOLS             = [:admin]
+  ACCESSORS = %i[nonce name username email avatar_url bio external_id return_sso_url admin]
+  FIXNUMS = []
+  BOOLS = [:admin]
   NONCE_EXPIRY_TIME = 10.minutes
 
   attr_accessor(*ACCESSORS)
@@ -24,7 +24,7 @@ class SingleSignOn
 
     parsed = Rack::Utils.parse_query(payload)
     if sso.sign(parsed["sso"]) != parsed["sig"]
-      diags = "\n\nsso: #{parsed['sso']}\n\nsig: #{parsed['sig']}\n\nexpected sig: #{sso.sign(parsed['sso'])}"
+      diags = "\n\nsso: #{parsed["sso"]}\n\nsig: #{parsed["sig"]}\n\nexpected sig: #{sso.sign(parsed["sso"])}"
       if parsed["sso"].match?(%r{[^a-zA-Z0-9=\r\n/+]}m)
         raise "The SSO field should be Base64 encoded, using only A-Z, a-z, 0-9, +, /, and = characters. Your input contains characters we don't understand as Base64, see http://en.wikipedia.org/wiki/Base64 #{diags}"
       else
@@ -49,7 +49,7 @@ class SingleSignOn
       # custom.
       #
       if k[0..6] == "custom."
-        field = k[7..-1]
+        field = k[7..]
         sso.custom_fields[field] = v
       end
     end
@@ -82,7 +82,7 @@ class SingleSignOn
 
   def to_url(base_url = nil)
     base = (base_url || sso_url).to_s
-    "#{base}#{base.include?('?') ? '&' : '?'}#{payload}"
+    "#{base}#{base.include?("?") ? "&" : "?"}#{payload}"
   end
 
   def payload

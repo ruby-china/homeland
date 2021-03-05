@@ -20,49 +20,49 @@ module Homeland
 
       protected
 
-        def allowed_node?(node)
-          allowed = super
-          return true if allowed
+      def allowed_node?(node)
+        allowed = super
+        return true if allowed
 
-          case node.name
-          when "iframe"
-            return allowed_iframe?(node)
-          end
-
-          false
+        case node.name
+        when "iframe"
+          return allowed_iframe?(node)
         end
 
-        def allowed_iframe?(node)
-          # Verify that the video URL is actually a valid YouTube video URL.
-          valid = false
-          attributes = node.attributes
-
-          src = attributes["src"]&.value
-
-          return false if src.blank?
-
-          # Youtube
-          if src.match?(%r{\A(?:https?:)?//(?:www\.)?youtube(?:-nocookie)?\.com/embed/})
-            valid = true
-          end
-
-          # Vimeo
-          if src.match?(%r{\Ahttps://player\.vimeo\.com/video/})
-            valid = true
-          end
-
-          # Youku
-          if src.match?(%r{\A(?:http[s]{0,1}?:)?//player\.youku\.com/embed/})
-            valid = true
-          end
-
-          # Bilibili
-          if src.match?(%r{\A(?:http[s]{0,1}?:)?//player\.bilibili\.com/player\.html})
-            valid = true
-          end
-
-          valid
-        end
+        false
       end
+
+      def allowed_iframe?(node)
+        # Verify that the video URL is actually a valid YouTube video URL.
+        valid = false
+        attributes = node.attributes
+
+        src = attributes["src"]&.value
+
+        return false if src.blank?
+
+        # Youtube
+        if src.match?(%r{\A(?:https?:)?//(?:www\.)?youtube(?:-nocookie)?\.com/embed/})
+          valid = true
+        end
+
+        # Vimeo
+        if src.start_with?("https://player.vimeo.com/video/")
+          valid = true
+        end
+
+        # Youku
+        if src.match?(%r{\A(?:https{0,1}?:)?//player\.youku\.com/embed/})
+          valid = true
+        end
+
+        # Bilibili
+        if src.match?(%r{\A(?:https{0,1}?:)?//player\.bilibili\.com/player\.html})
+          valid = true
+        end
+
+        valid
+      end
+    end
   end
 end

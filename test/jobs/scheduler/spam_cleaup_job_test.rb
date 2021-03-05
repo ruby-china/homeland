@@ -6,7 +6,8 @@ class Scheduler::SpamCleanupJobTest < ActiveSupport::TestCase
   include ActiveJob::TestHelper
 
   test ".perform" do
-    topics0 = create_list(:topic, 3, grade: :ban, created_at: 40.days.ago)
+    create_list(:topic, 3, grade: :ban, created_at: 40.days.ago)
+
     topics1 = create_list(:topic, 2, created_at: 40.days.ago)
     topics2 = create_list(:topic, 2, grade: :ban, created_at: 3.days.ago)
     topics3 = create_list(:topic, 1, created_at: 6.days.ago)

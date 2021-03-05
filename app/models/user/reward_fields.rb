@@ -18,19 +18,19 @@ class User
     end
 
     def reward_field(field)
-      return nil if self.rewards.blank?
+      return nil if rewards.blank?
       rewards[field.to_sym]
     end
 
     def update_reward_fields(field_values)
-      val = self.rewards || {}
+      val = rewards || {}
       field_values.each do |key, value|
         next unless REWARD_FIELDS.include?(key.to_sym)
         val[key.to_sym] = value
       end
 
-      self.create_profile if self.profile.blank?
-      self.profile.update(rewards: val)
+      create_profile if profile.blank?
+      profile.update(rewards: val)
     end
   end
 end

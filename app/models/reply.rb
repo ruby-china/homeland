@@ -3,8 +3,13 @@
 require "digest/md5"
 
 class Reply < ApplicationRecord
-  include SoftDelete, MarkdownBody, Mentionable, MentionTopic, UserAvatarDelegate
-  include Reply::Notify, Reply::Voteable
+  include UserAvatarDelegate
+  include MentionTopic
+  include Mentionable
+  include MarkdownBody
+  include SoftDelete
+  include Reply::Voteable
+  include Reply::Notify
 
   belongs_to :user, counter_cache: true
   belongs_to :topic, touch: true
@@ -18,10 +23,10 @@ class Reply < ApplicationRecord
   scope :fields_for_list, -> { select(:topic_id, :id, :body, :updated_at, :created_at) }
 
   validates :body, presence: true, unless: -> { system_event? }
-  validates :body, uniqueness: { scope: %i[topic_id user_id], message: I18n.t("replies.duplicate_error") }, unless: -> { system_event? }
+  validates :body, uniqueness: {scope: %i[topic_id user_id], message: I18n.t("replies.duplicate_error")}, unless: -> { system_event? }
   validate do
     ban_words = Setting.ban_words_on_reply.collect(&:strip)
-    if !system_event? && body&.strip.downcase.in?(ban_words)
+    if !system_event? && body&.strip&.downcase&.in?(ban_words)
       errors.add(:body, I18n.t("replies.nopoint_limit"))
     end
 
@@ -30,7 +35,7 @@ class Reply < ApplicationRecord
     end
 
     if reply_to_id
-      self.reply_to_id = nil if reply_to&.topic_id != self.topic_id
+      self.reply_to_id = nil if reply_to&.topic_id != topic_id
     end
   end
 
@@ -67,6 +72,6 @@ class Reply < ApplicationRecord
     opts[:user] ||= Current.user
     return false if opts[:action].blank?
     return false if opts[:user].blank?
-    self.create!(opts)
+    create!(opts)
   end
 end

@@ -60,12 +60,12 @@ module Homeland
       @plugins << plugin
       @sorted_plugins = nil
       plugin.version ||= "0.0.0"
-      plugin.source_path = File.dirname(caller[0])
+      plugin.source_path = File.dirname(caller(1..1).first)
       plugin
     end
 
     def find_plugin(name)
-      self.plugins.find { |p| p.name == name.strip }
+      plugins.find { |p| p.name == name.strip }
     end
 
     def boot

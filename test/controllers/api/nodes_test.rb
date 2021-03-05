@@ -20,9 +20,9 @@ describe Api::V3::NodesController do
       end
 
       expected = [
-        { "id" => 1, "name" => "fun" },
-        { "id" => 2, "name" => "ruby" },
-        { "id" => 3, "name" => "nodes" },
+        {"id" => 1, "name" => "fun"},
+        {"id" => 2, "name" => "ruby"},
+        {"id" => 3, "name" => "nodes"}
       ]
       assert_equal expected, json["nodes"]
     end

@@ -6,7 +6,7 @@ class Device < ApplicationRecord
   enum platform: %i[ios android]
 
   validates :platform, :token, presence: true
-  validates :token, uniqueness: { scope: %i[user_id platform] }
+  validates :token, uniqueness: {scope: %i[user_id platform]}
 
   def alive?
     return true if last_actived_at.blank?
@@ -14,6 +14,6 @@ class Device < ApplicationRecord
   end
 
   def platform_name
-    @platform_name ||= I18n.t "device_platform.#{self.platform}"
+    @platform_name ||= I18n.t "device_platform.#{platform}"
   end
 end

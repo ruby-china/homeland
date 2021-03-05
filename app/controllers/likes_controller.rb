@@ -21,18 +21,18 @@ class LikesController < ApplicationController
 
   private
 
-    def set_likeable
-      @success = false
-      @element_id = "likeable_#{params[:type]}_#{params[:id]}"
+  def set_likeable
+    @success = false
+    @element_id = "likeable_#{params[:type]}_#{params[:id]}"
 
-      defined_action = User.find_defined_action(:like, params[:type])
+    defined_action = User.find_defined_action(:like, params[:type])
 
-      if defined_action.blank?
-        render plain: "-1"
-        return false
-      end
-
-      @item = defined_action[:target_klass].find_by(id: params[:id])
-      render plain: "-2" if @item.blank?
+    if defined_action.blank?
+      render plain: "-1"
+      return false
     end
+
+    @item = defined_action[:target_klass].find_by(id: params[:id])
+    render plain: "-2" if @item.blank?
+  end
 end

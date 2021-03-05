@@ -12,12 +12,11 @@ module TopicsHelper
       link_title = t("common.unfavorite")
     end
 
-    icon = raw(content_tag("i", "", class: "fa fa-bookmark"))
     if opts[:class].present?
       class_name += " " + opts[:class]
     end
 
-    link_to(icon_tag("bookmark"), "#", title: link_title, class: "bookmark #{class_name}", "data-id" => topic.id)
+    link_to(icon_tag("bookmark"), "#", :title => link_title, :class => "bookmark #{class_name}", "data-id" => topic.id)
   end
 
   def topic_follow_tag(topic, opts = {})
@@ -30,7 +29,7 @@ module TopicsHelper
     if opts[:class].present?
       class_name += " " + opts[:class]
     end
-    link_to(icon_tag("bell"), "#", title: t("common.subscribe"), "data-id" => topic.id, class: class_name)
+    link_to(icon_tag("bell"), "#", :title => t("common.subscribe"), "data-id" => topic.id, :class => class_name)
   end
 
   def topic_title_tag(topic, opts = {})
@@ -51,7 +50,7 @@ module TopicsHelper
 
   def topic_close_tag(topic)
     return "" unless topic.closed?
-    content_tag(:i, "", title: t("topics.closed_tooltip"), class: "fa fa-check-circle", data: { toggle: "tooltip" })
+    content_tag(:i, "", title: t("topics.closed_tooltip"), class: "fa fa-check-circle", data: {toggle: "tooltip"})
   end
 
   def render_node_name(node)

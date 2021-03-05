@@ -58,8 +58,12 @@ module Homeland
         def link(link, title, content)
           external = false
           safe_link = link&.split("?")&.first
-          uri = URI.parse(safe_link) rescue nil
-          if uri&.host && uri&.host&.downcase != self.domain
+          uri = begin
+            URI.parse(safe_link)
+          rescue
+            nil
+          end
+          if uri&.host && uri&.host&.downcase != domain
             external = true
           end
 
@@ -80,7 +84,7 @@ module Homeland
               # 防止 C 的 autolink 出来的内容有编码错误，万一有就直接跳过转换
               # 比如这句: 此版本并非线上的http://yavaeye.com的源码.
               link.match(/.+?/)
-            rescue StandardError
+            rescue
               return link
             end
             # Fix Chinese neer the URL
@@ -105,7 +109,7 @@ module Homeland
         lax_spacing: true,
         space_after_headers: true,
         disable_indented_code_blocks: true,
-        no_intra_emphasis: true,
+        no_intra_emphasis: true
       }
 
       def renderer

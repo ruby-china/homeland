@@ -17,7 +17,7 @@ class MentionTopicJob < ApplicationJob
         topic: topic,
         target_type: target_type,
         target_id: target_id,
-        user_id: user_id,
+        user_id: user_id
       }
 
       Reply.create!(reply_param)

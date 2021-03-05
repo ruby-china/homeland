@@ -23,12 +23,12 @@ module LikesHelper
       liked = current_user.send("like_#{defined_action[:action_name]}_ids").include?(likeable.id)
     end
 
-    if opts[:cache].blank? && liked
-      title = t("common.unlike")
-      state = "active"
+    title = t("common.unlike")
+
+    state = if opts[:cache].blank? && liked
+      "active"
     else
-      title = t("common.unlike")
-      state = "deactive"
+      "deactive"
     end
 
     icon_label = icon_tag("heart", label: label)
@@ -39,7 +39,7 @@ module LikesHelper
       count: likeable.likes_count,
       state: state,
       type: likeable.class.name,
-      id: likeable.id,
+      id: likeable.id
     }
 
     link_to(icon_label, "#", title: title, data: data, class: css_classes.join(" "))

@@ -110,7 +110,7 @@ class SettingTest < ActiveSupport::TestCase
     Setting.node_ids_hide_in_topics_index = <<~LINES
       100
       101,102,103
-      LINES
+    LINES
     assert_equal %w[100 101 102 103], Setting.node_ids_hide_in_topics_index
   end
 
@@ -118,7 +118,7 @@ class SettingTest < ActiveSupport::TestCase
     Setting.blacklist_ips = <<~LINES
       10.10.10.10
       11.11.11.11,12.12.12.12
-      LINES
+    LINES
     assert_equal ["10.10.10.10", "11.11.11.11", "12.12.12.12"], Setting.blacklist_ips
   end
 
@@ -126,32 +126,32 @@ class SettingTest < ActiveSupport::TestCase
     Setting.ban_words_on_reply = <<~LINES
       This is first line.
       And, this is second line.
-      LINES
+    LINES
     assert_equal ["This is first line.", "And, this is second line."], Setting.ban_words_on_reply
   end
 
   test "tips" do
     Setting.tips = <<~LINES
-    This is first line.
-    And, this is second line.
+      This is first line.
+      And, this is second line.
     LINES
     assert_equal ["This is first line.", "And, this is second line."], Setting.tips
   end
 
   test "share_allow_sites" do
     Setting.share_allow_sites = <<~LINES
-    weibo
-    facebook
-    twitter
+      weibo
+      facebook
+      twitter
     LINES
     assert_equal ["weibo", "facebook", "twitter"], Setting.share_allow_sites
   end
 
   test "editor_languages" do
     Setting.editor_languages = <<~LINES
-    rb
-    html
-    js
+      rb
+      html
+      js
     LINES
 
     assert_equal ["rb", "html", "js"], Setting.editor_languages

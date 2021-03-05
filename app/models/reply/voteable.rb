@@ -15,9 +15,10 @@ class Reply
     end
 
     private
-      def check_vote_chars_for_like_topic
-        return unless upvote?
-        user.like(topic)
-      end
+
+    def check_vote_chars_for_like_topic
+      return unless upvote?
+      user.like(topic)
+    end
   end
 end

@@ -7,8 +7,8 @@ module Users
     included do
       before_action :authenticate_user!, only: %i[block unblock blocked follow unfollow]
       before_action :only_user!, only: %i[topics replies favorites
-                                          block unblock follow unfollow
-                                          followers following reward]
+        block unblock follow unfollow
+        followers following reward]
     end
 
     def topics
@@ -28,12 +28,12 @@ module Users
 
     def block
       current_user.block_user(@user.id)
-      render json: { code: 0 }
+      render json: {code: 0}
     end
 
     def unblock
       current_user.unblock_user(@user.id)
-      render json: { code: 0 }
+      render json: {code: 0}
     end
 
     def blocked
@@ -46,12 +46,12 @@ module Users
 
     def follow
       current_user.follow_user(@user)
-      render json: { code: 0, data: { followers_count: @user.reload.followers_count } }
+      render json: {code: 0, data: {followers_count: @user.reload.followers_count}}
     end
 
     def unfollow
       current_user.unfollow_user(@user)
-      render json: { code: 0, data: { followers_count: @user.reload.followers_count } }
+      render json: {code: 0, data: {followers_count: @user.reload.followers_count}}
     end
 
     def followers
@@ -70,13 +70,13 @@ module Users
 
     private
 
-      def only_user!
-        render_404 if @user_type != :user
-      end
+    def only_user!
+      render_404 if @user_type != :user
+    end
 
-      def user_show
-        @topics = @user.topics.fields_for_list.high_likes.page(params[:page])
-        @replies = @user.replies.without_system.fields_for_list.recent.includes(:topic).limit(10)
-      end
+    def user_show
+      @topics = @user.topics.fields_for_list.high_likes.page(params[:page])
+      @replies = @user.replies.without_system.fields_for_list.recent.includes(:topic).limit(10)
+    end
   end
 end

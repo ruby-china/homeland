@@ -3,11 +3,11 @@
 module Homeland
   class Pipeline
     class EmbedVideoFilter < HTML::Pipeline::TextFilter
-      YOUTUBE_URL_REGEXP = %r{(\s|^|<div>|<br>)(https?://)(www.)?(youtube\.com/watch\?v=|youtu\.be/|youtube\.com/watch\?feature=player_embedded&v=)([A-Za-z0-9_\-]*)(\&\S+)?(\?\S+)?}
-      YOUKU_URL_REGEXP   = %r{(\s|^|<div>|<br>)(https?://)(v\.youku\.com/v_show/id_)([a-zA-Z0-9\-_\=]*)(\.html)(\&\S+)?(\?\S+)?}
-      VIMEO_URL_REGEXP   = %r{(\s|^|<div>|<br>)(https://)(vimeo\.com/)([0-9]+)(\&\S+)?(\?\S+)?}
-      BILI_URL_REGEXP    = %r{(\s|^|<div>|<br>)(https?://)(www.)?(bilibili\.com/video/av)([0-9]+)(\&\S+)?(\?\S+)?}
-      BILI_B_URL_REGEXP  = %r{(\s|^|<div>|<br>)(https?://)(www.)?(bilibili\.com/video/BV)([a-zA-Z0-9]+)(\&\S+)?(\?\S+)?}
+      YOUTUBE_URL_REGEXP = %r{(\s|^|<div>|<br>)(https?://)(www.)?(youtube\.com/watch\?v=|youtu\.be/|youtube\.com/watch\?feature=player_embedded&v=)([A-Za-z0-9_\-]*)(&\S+)?(\?\S+)?}
+      YOUKU_URL_REGEXP = %r{(\s|^|<div>|<br>)(https?://)(v\.youku\.com/v_show/id_)([a-zA-Z0-9\-_=]*)(\.html)(&\S+)?(\?\S+)?}
+      VIMEO_URL_REGEXP = %r{(\s|^|<div>|<br>)(https://)(vimeo\.com/)([0-9]+)(&\S+)?(\?\S+)?}
+      BILI_URL_REGEXP = %r{(\s|^|<div>|<br>)(https?://)(www.)?(bilibili\.com/video/av)([0-9]+)(&\S+)?(\?\S+)?}
+      BILI_B_URL_REGEXP = %r{(\s|^|<div>|<br>)(https?://)(www.)?(bilibili\.com/video/BV)([a-zA-Z0-9]+)(&\S+)?(\?\S+)?}
 
       def call
         wmode = context[:video_wmode]
@@ -22,7 +22,7 @@ module Homeland
           params << "wmode=#{wmode}" if wmode
           params << "autoplay=1" if autoplay
           params << "rel=0" if hide_related
-          src += "?#{params.join '&'}" unless params.empty?
+          src += "?#{params.join "&"}" unless params.empty?
           embed_tag(close_tag, src)
         end
 

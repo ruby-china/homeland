@@ -30,7 +30,6 @@ class TopicsHelperTest < ActionView::TestCase
 
   test "topic_title_tag" do
     topic = create :topic, title: "test title"
-    user = create :user
 
     # should return topic_was_deleted without a topic
     assert_equal t("topics.topic_was_deleted"), topic_title_tag(nil)

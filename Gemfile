@@ -21,7 +21,7 @@ gem "devise-encryptable"
 gem "cancancan"
 gem "doorkeeper"
 gem "doorkeeper-i18n"
-gem "omniauth"
+gem "omniauth", "~> 1.x"
 gem "omniauth-github"
 gem "omniauth-twitter"
 gem "omniauth-wechat-oauth2"
@@ -64,7 +64,7 @@ gem "exception-track"
 
 # Cache
 gem "redis"
-gem "redis-namespace", github: "resque/redis-namespace"
+gem "redis-namespace"
 gem "second_level_cache"
 
 # Setting

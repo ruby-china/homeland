@@ -5,6 +5,8 @@ class ApplicationController
     extend ActiveSupport::Concern
 
     included do
+      helper_method :user_locale
+
       around_action :set_time_zone
       before_action :set_locale
     end

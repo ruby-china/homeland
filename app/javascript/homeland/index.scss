@@ -9,6 +9,8 @@
 
 .bootstrap-select {
   .dropdown-toggle {
+    background-color: var(--form-control-background-color);
+    box-shadow: var(--form-control-box-shadow);
     border: 1px solid var(--form-control-border-color);
     border-radius: 3px;
     outline: 0 !important;
@@ -270,6 +272,7 @@ body {
       background: transparent;
       transition: all 0.3s;
       box-sizing: border-box;
+      box-shadow: none !important;
       color: #333;
       &:focus {
         outline: none;
@@ -294,16 +297,6 @@ body {
 
   .dropdown.show {
     background: var(--navbar-dropdown-show-background-color);
-  }
-
-  .dropdown-menu {
-    border-radius: 0;
-    border: 0px;
-    border-left: 1px solid rgba(0, 0, 0, 0.04);
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.08);
-    .dropdown-item {
-      padding: 0.4rem 1.5rem;
-    }
   }
 
   .dropdown-avatar {
@@ -353,6 +346,8 @@ body {
 
 .btn {
   outline: none;
+  box-shadow: var(--btn-box-shaodw);
+  border-radius: var(--btn-border-radius);
 
   &:focus {
     box-shadow: none;
@@ -376,6 +371,17 @@ body {
   }
 }
 
+.btn-warning {
+  background: var(--yellow);
+  border-color: var(--yellow);
+  color: #333 !important;
+
+  &:hover {
+    background: var(--yellow);
+    border-color: var(--yellow);
+  }
+}
+
 .form-error {
   margin-top: 5px;
   color: #ee4343;
@@ -384,6 +390,7 @@ body {
 .form-control {
   background-color: var(--form-control-background-color);
   border-color: var(--form-control-border-color);
+  box-shadow: var(--form-control-box-shadow);
   color: var(--primary);
 
   &:-internal-autofill-selected {
@@ -395,8 +402,11 @@ body {
   &:focus {
     background-color: var(--form-control-background-color);
     border-color: var(--form-control-border-color);
+    outline-offset: 2px;
+    border-color: #2563eb;
+    outline: 2px solid transparent;
+    outline: var(--form-control-focus-border-color);
     color: var(--primary);
-    box-shadow: 0 0 0 0.2rem rgba(34, 117, 218, 0.08);
   }
 
   &[readonly],
@@ -412,6 +422,7 @@ input[type="file"] {
 .input-group-text {
   background-color: var(--input-group-background-color);
   border-color: var(--input-group-border-color);
+  box-shadow: var(--form-control-box-shadow);
   color: var(--primary);
 }
 
@@ -462,11 +473,19 @@ input[type="file"] {
 }
 
 .dropdown-menu {
+  line-height: 1.8em;
+  border-radius: 0.375rem;
   background-color: var(--dropdown-menu-background-color);
   border-color: var(--dropdown-menu-border-color);
+  box-shadow: var(--dropdown-menu-box-shadow);
   color: var(--dropdown-menu-text-color);
+  transform-origin: top right;
 
   .dropdown-item {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
     color: var(--dropdown-menu-text-color);
 
     &:hover {
@@ -482,6 +501,7 @@ input[type="file"] {
   }
 
   .dropdown-divider {
+    margin: 4px 0;
     border-color: var(--dropdown-menu-divider-color);
   }
 }
@@ -608,7 +628,8 @@ kbd {
   margin-bottom: 25px;
   border-top: 0;
   box-shadow: 0 0 0;
-  border: 1px solid var(--card-border-color);
+  box-shadow: var(--card-box-shadow);
+  border: 0;
   background: var(--card-background-color);
 
   .card-header {

@@ -5,15 +5,15 @@
 <% if @user.user_type == :user %>
 <div class="toolbar clearfix">
   <span class="pull-right">
-   <%= link_to 'Delete recent 10 photos', clean_admin_user_path(@user, type: 'photos'),
+   <%= link_to t('admin.users.Delete recent 10 photos'), clean_admin_user_path(@user, type: 'photos'),
                 method: 'delete', class: 'btn btn-warning',
                 data: { confirm: 'This action is not recoverable, are you sure?' } %>
 
-    <%= link_to 'Delete recent 10 topics', clean_admin_user_path(@user, type: 'topics'),
+    <%= link_to t('admin.users.Delete recent 10 topics'), clean_admin_user_path(@user, type: 'topics'),
                 method: 'delete', class: 'btn btn-warning',
                 data: { confirm: 'This action is not recoverable, are you sure?' } %>
 
-    <%= link_to 'Delete recent 10 replies', clean_admin_user_path(@user, type: 'replies'),
+    <%= link_to t('admin.users.Delete recent 10 replies'), clean_admin_user_path(@user, type: 'replies'),
                 method: 'delete', class: 'btn btn-warning',
                 data: { confirm: 'This action is not recoverable, are you sure?' } %>
   </span>

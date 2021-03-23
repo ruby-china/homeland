@@ -34,6 +34,9 @@
       edit_setting: "Edit Settings"
     users:
       trust_user_can_modify_wiki: "Allow user to modify Wiki"
+      "Delete recent 10 photos": "Delete recent 10 photos"
+      "Delete recent 10 topics": "Delete recent 10 topics"
+      "Delete recent 10 replies": "Delete recent 10 replies"
     nodes:
       new: New Node
       edit: Edit Node

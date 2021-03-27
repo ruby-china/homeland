@@ -21,8 +21,8 @@ class ApplicationController < ActionController::Base
 
   rescue_from ActiveRecord::RecordNotFound do |exception|
     respond_to do |format|
-      format.json { head :not_found }
-      format.html { render "/errors/404", status: :not_found }
+      format.json { head status }
+      format.html { render "/errors/404", status: status }
     end
   end
 

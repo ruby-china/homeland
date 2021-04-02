@@ -352,6 +352,12 @@ body {
   &:focus {
     box-shadow: none;
   }
+
+  &:hover {
+    transition-property: background-color;
+    transition-duration: 0.7s;
+    transition-timing-function: ease-out;
+  }
 }
 
 .btn-default {
@@ -777,7 +783,7 @@ kbd {
   color: var(--opts-text-color);
   a:not(.dropdown-item) {
     display: inline-block;
-    border-radius: 5px;
+    border-radius: var(--btn-border-radius);
   }
   a:link:not(.dropdown-item),
   a:visited:not(.dropdown-item) {
@@ -791,6 +797,9 @@ kbd {
 
   .dropdown.show a[data-toggle="dropdown"],
   a:hover:not(.dropdown-item) {
+    transition-property: background-color;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-out;
     background: var(--opts-link-hover-background-color);
     text-decoration: none;
   }

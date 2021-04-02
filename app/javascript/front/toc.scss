@@ -3,52 +3,44 @@
 .toc-container {
   display: none;
   z-index: 999;
-  padding-left: 10px;
-  padding-bottom: 10px;
+  text-align: right;
+  margin-bottom: 25px;
+  margin-left: 25px;
+  float: right;
 
   .dropdown-menu {
-    background: var(--dropdown-menu-background-color);
-    border-radius: 3px;
-    padding: 15px;
-    border: 1px solid var(--dropdown-menu-border-color);
-    width: 300px;
+    width: 360px;
     z-index: 1031;
-  }
-
-  .list-container {
     max-height: 400px;
+    overflow: hidden;
     overflow-y: scroll;
+  }
 
-    .list {
-      padding: 0;
-      margin-bottom: 0 !important;
+  .dropdown-item {
+    text-decoration: none !important;
+    color: var(--primary) !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 
-      a {
-        color: var(--primary) !important;
-      }
+    &.toc-level-2 {
     }
-  }
-}
 
-.toc-item {
-  &.toc-level-2 {
-    margin-left: 0;
-  }
+    &.toc-level-3 {
+      padding-left: 2em;
+    }
 
-  &.toc-level-3 {
-    margin-left: 15px;
-  }
+    &.toc-level-4 {
+      padding-left: 3em;
+    }
 
-  &.toc-level-4 {
-    margin-left: 30px;
-  }
+    &.toc-level-5 {
+      padding-left: 4em;
+    }
 
-  &.toc-level-5 {
-    margin-left: 45px;
-  }
-
-  &.toc-level-6 {
-    margin-left: 60px;
+    &.toc-level-6 {
+      padding-left: 5em;
+    }
   }
 }
 

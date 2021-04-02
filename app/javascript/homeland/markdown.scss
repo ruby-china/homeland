@@ -135,12 +135,12 @@
   }
   a:link,
   a:visited {
-    color: $blue !important;
-    text-decoration: none !important;
+    color: $blue;
+    text-decoration: none;
   }
   a:hover {
-    text-decoration: underline !important;
-    color: var(--primary) !important;
+    text-decoration: underline;
+    color: var(--primary);
   }
   a.mention-floor {
     color: #60b566 !important;

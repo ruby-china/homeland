@@ -1,5 +1,21 @@
 # frozen_string_literal: true
 
+TWITTER_OMNIAUTH_SETUP = lambda do |env|
+  env["omniauth.strategy"].options[:consumer_key] = Setting.twitter_api_key
+  env["omniauth.strategy"].options[:consumer_secret] = Setting.twitter_api_secret
+end
+
+WECHAT_OMNIAUTH_SETUP = lambda do |env|
+  env["omniauth.strategy"].options[:consumer_key] = Setting.wechat_api_key
+  env["omniauth.strategy"].options[:consumer_secret] = Setting.wechat_api_secret
+end
+
+GITHUB_OMNIUATH_SETUP = lambda do |env|
+  env["omniauth.strategy"].options[:client_id] = Setting.github_api_key
+  env["omniauth.strategy"].options[:client_secret] = Setting.github_api_secret
+  env["omniauth.strategy"].options[:scope] = "user:email"
+end
+
 # Use this hook to configure devise mailer, warden hooks and so forth. The first
 # four configuration values can also be set straight in your models.
 Devise.setup do |config|
@@ -180,15 +196,9 @@ Devise.setup do |config|
   # If you have any extra navigational formats, like :iphone or :mobile, you
   # should add them to the navigational formats lists. Default is [:html]
   # config.navigational_formats = [:html, :iphone]
-  if Setting.has_omniauth? :github
-    config.omniauth :github, Setting.github_api_key, Setting.github_api_secret
-  end
-  if Setting.has_omniauth? :twitter
-    config.omniauth :twitter, Setting.twitter_api_key, Setting.twitter_api_secret
-  end
-  if Setting.has_omniauth? :wechat
-    config.omniauth :wechat, Setting.wechat_api_key, Setting.wechat_api_secret, authorize_params: {scope: "snsapi_base"}
-  end
+  config.omniauth :github, setup: GITHUB_OMNIUATH_SETUP
+  config.omniauth :twitter, setup: TWITTER_OMNIAUTH_SETUP
+  config.omniauth :wechat, setup: WECHAT_OMNIAUTH_SETUP
   # config.omniauth :open_id, :store => OpenID::Store::Filesystem.new('/tmp'), :name => 'google', :identifier => 'https://www.google.com/accounts/o8/id', :require => 'omniauth-openid'
 
   # ==> Warden configuration

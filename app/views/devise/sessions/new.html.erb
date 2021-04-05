@@ -36,11 +36,11 @@ auth_info = auth_session["info"]
         <% end %>
       </div>
     </div>
-    <% if User.omniauth_providers.any? %>
+    <% if Setting.omniauth_providers.any? %>
       <div class="card omniauth-buttons">
         <div class="card-header"><%= t("common.auth_with_other_services") %></div>
         <div class="card-body flex aic jcc">
-          <% User.omniauth_providers.each do |provider| %>
+          <% Setting.omniauth_providers.each do |provider| %>
             <%= link_to raw("<i class='fab fa-#{provider}'></i> #{Homeland::Utils.omniauth_name(provider)}"), omniauth_authorize_path(:user, provider), method: :post, class: "btn btn-default omniauth-#{provider}" %>
           <% end %>
         </div>

@@ -69,6 +69,12 @@ class Setting < RailsSettings::Base
     sorted_plugins
     profile_fields
     google_analytics_key
+    twitter_api_key
+    twitter_api_secret
+    github_api_key
+    github_api_secret
+    wechat_api_key
+    wechat_api_secret
   ]
 
   # = System
@@ -208,6 +214,10 @@ class Setting < RailsSettings::Base
       else
         false
       end
+    end
+
+    def omniauth_providers
+      User.omniauth_providers.filter { |provider| has_omniauth?(provider) }
     end
 
     def has_profile_field?(name)

@@ -1,4 +1,4 @@
-FROM rubychina/ruby:3.0.0-slim-buster
+FROM ruby:3.0.1-slim-buster
 
 RUN gem install bundler
 RUN sed -i 's#http://deb.debian.org#https://mirrors.163.com#g' /etc/apt/sources.list && \

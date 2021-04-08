@@ -28,9 +28,8 @@
         <%= f.text_area :value, value: value, class: 'form-control', rows: 15 %>
       <% end %>
     <% end %>
-
     <% if @site_config.type != :boolean %>
-    <div class="form-text"><%= t("setting.#{@site_config.var}") %></div>
+      <div class="form-text mt-2"><%= raw t("setting.#{@site_config.var}") %></div>
     <% end %>
   </div>
   <div class="form-actions">

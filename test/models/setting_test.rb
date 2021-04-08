@@ -190,4 +190,14 @@ class SettingTest < ActiveSupport::TestCase
       assert_equal true, Setting.cable_allowed_request_origin.match?("https://www.foo.com:3000")
     end
   end
+
+  test "imageproxy_ignore_hosts" do
+    Setting.stub(:upload_url, "https://bar.com") do
+      assert_equal ["bar.com", "localhost"], Setting.imageproxy_ignore_hosts
+
+      Setting.stub(:asset_host, "https://asset.bar.com") do
+        assert_equal ["bar.com", "asset.bar.com", "localhost"], Setting.imageproxy_ignore_hosts
+      end
+    end
+  end
 end

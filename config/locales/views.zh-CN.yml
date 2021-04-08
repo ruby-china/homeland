@@ -180,6 +180,7 @@
     twitter_api_secret: "Twitter 登录 API secret key"
     wechat_api_key: "微信登录 API key (留空禁用）"
     wechat_api_secret: "微信登录 API secret key"
+    imageproxy_url: '配置外部图片代理，利用 <a href="https://www.github.com/willnorris/imageproxy">ImageProxy</a> 来实现，例如 <code>https://imageproxy.your-host.com/1000x/</code>，留空则不启用'
   pagination:
     next: "下一页"
     prev: "上一页"
@@ -247,7 +248,7 @@
     ban_directly: 直接屏蔽
     ban_with_reason: 输入屏蔽原因：
     closed_tooltip: "问题已解决／话题已结束讨论"
-    sensitive_word_limit: '创建失败，内容包含敏感词：“%{word}”'
+    sensitive_word_limit: "创建失败，内容包含敏感词：“%{word}”"
     new_reply_received_html: 收到新回复，点击立即加载
     form:
       title_placeholder: 在这里输入标题
@@ -278,7 +279,7 @@
     bios: "个人介绍"
     city: "城市"
     company: "公司"
-    number_of_user: 第 %{no} 位会员 
+    number_of_user: 第 %{no} 位会员
     join_time: "Since"
     signature: "签名"
     personal_website: "博客"
@@ -337,29 +338,29 @@
       followers: "关注者"
       blocked: "已屏蔽"
   team_user_status:
-    pendding: '等待接受'
-    acceped: '已加入'
+    pendding: "等待接受"
+    acceped: "已加入"
   team_user_role:
-    owner: '组管理员'
-    member: '成员'
+    owner: "组管理员"
+    member: "成员"
   teams:
-    teams: '组织'
-    user_existed: '已经在组里面了'
-    new_team: '创建公司／组织'
-    edit_team: '设置公司／组织资料'
-    new_team_user: '邀请成员'
+    teams: "组织"
+    user_existed: "已经在组里面了"
+    new_team: "创建公司／组织"
+    edit_team: "设置公司／组织资料"
+    new_team_user: "邀请成员"
     all_members: "所有成员"
-    edit_team_user: '修改成员权限'
-    delete_team_user: '移除成员'
-    show_team_user: '查看邀请'
-    accept_team_user: '接受邀请'
-    reject_team_user: '拒绝'
-    delete_team_user_confirm: '确定要将他从组里面移除掉么？'
+    edit_team_user: "修改成员权限"
+    delete_team_user: "移除成员"
+    show_team_user: "查看邀请"
+    accept_team_user: "接受邀请"
+    reject_team_user: "拒绝"
+    delete_team_user_confirm: "确定要将他从组里面移除掉么？"
     do_you_want_accept_team_user_html: "你是否要接受邀请加入 <b>%{team}</b>？"
-    topics: '成员的话题列表'
-    users: '成员列表'
-    team_user_pendding: '等待接受'
-    settings: '设置'
+    topics: "成员的话题列表"
+    users: "成员列表"
+    team_user_pendding: "等待接受"
+    settings: "设置"
     team_users_count: "%{count} 个团队成员"
   user_setting:
     profile: "个人信息"
@@ -373,7 +374,7 @@
     mention_title_html: 在 <a href="%{url}">%{title}</a> 提及了你
     comment_title_html: 在你发布的 <a href="%{url}">%{title}</a> 评论了
     reply_title_html: 回复了话题 %{topic}
-    topic_title_html: 创建了话题 %{topic} 
+    topic_title_html: 创建了话题 %{topic}
     follow_you: 关注了你。
     node_changed_html: 你发布的话题 %{topic} 由于内容原因被管理员移动到了 %{node}  节点，请注意查看节点说明。
     invite_you_join: 邀请你加入

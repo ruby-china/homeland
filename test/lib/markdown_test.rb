@@ -443,6 +443,33 @@ class Homeland::MarkdownTest < ActiveSupport::TestCase
     end
   end
 
+  test "imageproxy" do
+    raw = <<~MD
+      ![](https://homeland.ruby-china.org/images/text-logo.svg)
+      ![](http://localhost/foo/bar.jpg)
+    MD
+
+    expect = <<~HTML
+      <p>
+        <img src="https://homeland.ruby-china.org/images/text-logo.svg" title="" alt="">
+        <img src="http://localhost/foo/bar.jpg" title="" alt="">
+      </p>
+    HTML
+
+    assert_markdown_render expect, raw
+
+    Setting.stub(:imageproxy_url, "https://imageproxy.ruby-china.com/1000x/") do
+      expect = <<~HTML
+        <p>
+          <img src="https://imageproxy.ruby-china.com/1000x/https://homeland.ruby-china.org/images/text-logo.svg" title="" alt="">
+          <img src="http://localhost/foo/bar.jpg" title="" alt="">
+        </p>
+      HTML
+
+      assert_markdown_render expect, raw
+    end
+  end
+
   test "Full example" do
     raw = read_file("markdown/raw.md")
     out = read_file("markdown/out.html.txt")

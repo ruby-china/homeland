@@ -109,6 +109,7 @@ class Setting < RailsSettings::Base
   field :upload_url, default: ENV["upload_url"], readonly: true
   field :upload_aliyun_internal, type: :boolean, default: (ENV["upload_aliyun_internal"] || "false"), readonly: true
   field :upload_aliyun_region, default: (ENV["upload_aliyun_region"] || ENV["upload_aliyun_area"]), readonly: true
+  field :imageproxy_url
 
   # = Mailer
   field :mailer_provider, default: (ENV["mailer_provider"] || "smtp"), readonly: true
@@ -241,6 +242,15 @@ class Setting < RailsSettings::Base
     # https://regex101.com/r/m1UOqT/1
     def cable_allowed_request_origin
       /http(s)?:\/\/#{Setting.domain}(:\d+)?/
+    end
+
+    # Host that ImageProxy will ignore
+    def imageproxy_ignore_hosts
+      [upload_url, asset_host, base_url].map do |url|
+        URI(url).host
+      rescue
+        return nil
+      end.compact
     end
   end
 

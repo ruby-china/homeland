@@ -15,7 +15,8 @@ filters = [
   Homeland::Pipeline::MentionFilter,
   Homeland::Pipeline::FloorFilter,
   HTML::Pipeline::AutoCorrectFilter,
-  Homeland::Pipeline::TwemojiFilter
+  Homeland::Pipeline::TwemojiFilter,
+  Homeland::Pipeline::ImageproxyFilter
 ]
 
 TopicPipeline = HTML::Pipeline.new(filters, context)

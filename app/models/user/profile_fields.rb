@@ -13,7 +13,7 @@ class User
 
     def profile_field(field)
       return nil if contacts.nil?
-      contacts[field.to_sym]
+      contacts[field.to_s]
     end
 
     def full_profile_field(field)
@@ -32,7 +32,7 @@ class User
       val = contacts || {}
       field_values.each do |key, value|
         next unless Profile.has_field?(key)
-        val[key.to_sym] = value
+        val[key.to_s] = value
       end
 
       create_profile if profile.blank?

@@ -11,7 +11,7 @@ class ProfileTest < ActiveSupport::TestCase
 
   test "contacts" do
     @user.create_profile(contacts: {weibo: "huacnlee", twitter: "huacnlee"})
-    assert_equal({weibo: "huacnlee", twitter: "huacnlee"}, @user.contacts)
+    assert_equal({weibo: "huacnlee", twitter: "huacnlee"}.as_json, @user.contacts)
   end
 
   test "#contact_field_prefix" do

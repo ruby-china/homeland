@@ -53,7 +53,7 @@
                 <div class="input-group">
                   <span class="input-group-prepend"><span class="input-group-text"><%= field_prefix %></span></span>
                 <% end %>
-                <input class="form-control" type="text" value="<%= @user.profile_field(field) %>" name="user[profiles][<%= field %>]" id="user_profile_<%= field %>">
+                <input class="form-control" type="text" value="<%= @user.profile_field(field) %>" name="user_profile[<%= field %>]" id="user_profile_<%= field %>">
                 <% if field_prefix %></div>
               <% end %>
             </div>

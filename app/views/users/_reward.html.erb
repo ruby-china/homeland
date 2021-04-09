@@ -12,7 +12,9 @@
         <div class="reward-images">
           <% if @user.rewards %>
             <% @user.rewards.each_with_index do |(field, val), idx| %>
-              <div class="reward-image"><img src="<%= @user.reward_field(field) %>"></div>
+              <% if @user.reward_field(field).present? %>
+                <div class="reward-image"><img src="<%= @user.reward_field(field) %>"></div>
+              <% end %>
             <% end %>
           <% end %>
         </div>

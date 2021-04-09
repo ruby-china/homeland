@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_24_095900) do
+ActiveRecord::Schema.define(version: 2021_04_09_032709) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -302,7 +302,7 @@ ActiveRecord::Schema.define(version: 2020_12_24_095900) do
     t.integer "last_reply_user_id"
     t.string "last_reply_user_login"
     t.string "who_deleted"
-    t.float "last_active_mark", default: 0.0, null: false
+    t.integer "last_active_mark"
     t.boolean "lock_node", default: false
     t.datetime "suggested_at"
     t.integer "grade", default: 0

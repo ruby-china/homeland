@@ -1,5 +1,5 @@
 # NAME:     homeland/homeland
-FROM homeland/base:3.0.0-slim-buster
+FROM homeland/base:3.0.1-slim-buster
 
 ENV RAILS_ENV "production"
 ENV RUBYOPT "W0"

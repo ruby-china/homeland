@@ -19,14 +19,14 @@ class User
 
     def reward_field(field)
       return nil if rewards.blank?
-      rewards[field.to_sym]
+      rewards[field.to_s]
     end
 
     def update_reward_fields(field_values)
       val = rewards || {}
       field_values.each do |key, value|
         next unless REWARD_FIELDS.include?(key.to_sym)
-        val[key.to_sym] = value
+        val[key.to_s] = value
       end
 
       create_profile if profile.blank?

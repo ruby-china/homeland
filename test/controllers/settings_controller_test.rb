@@ -81,7 +81,7 @@ describe SettingsController do
       assert_equal "new-#{old_login}", user.login
 
       sign_in user
-      put setting_path, params: {user: {location: "BeiJing", profiles: {alipay: "alipay"}}}
+      put setting_path, params: {user: {location: "BeiJing"}, user_profile: {alipay: "alipay"}}
       assert_redirected_to setting_path
 
       put setting_path, params: {user: {location: "BeiJing", theme: "dark"}}
@@ -95,7 +95,7 @@ describe SettingsController do
       assert_equal old_theme, user.theme
       assert_redirected_to setting_path
 
-      put setting_path, params: {by: "profile", user: {location: "BeiJing", profiles: {alipay: "alipay"}}}
+      put setting_path, params: {by: "profile", user: {location: "BeiJing"}, user_profile: {alipay: "alipay"}}
       assert_redirected_to profile_setting_path
 
       password_params = {

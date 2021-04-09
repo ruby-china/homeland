@@ -67,15 +67,17 @@ class SettingsController < ApplicationController
 
   def user_params
     attrs = User::ACCESSABLE_ATTRS.dup
-    if Setting.allow_change_login?
-      attrs << :login
-    end
-
-    if !current_user.email_locked?
-      attrs << :email
-    end
-
+    attrs << :login if Setting.allow_change_login?
+    attrs << :email unless current_user.email_locked?
     params.require(:user).permit(*attrs)
+  end
+
+  def user_profile_params
+    params.permit(user_profile: {})[:user_profile]
+  end
+
+  def user_reward_params
+    params.permit(user_reward: {})[:user_reward]
   end
 
   def update_basic
@@ -90,7 +92,7 @@ class SettingsController < ApplicationController
 
   def update_profile
     if @user.update(user_params)
-      @user.update_profile_fields(params[:user][:profiles])
+      @user.update_profile_fields(user_profile_params)
       redirect_to profile_setting_path, notice: "更新成功"
     else
       render "profile"
@@ -98,7 +100,7 @@ class SettingsController < ApplicationController
   end
 
   def update_reward
-    reward_fields = params[:user][:rewards] || {}
+    reward_fields = user_reward_params || {}
 
     res = {}
     reward_fields.each do |key, value|

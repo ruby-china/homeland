@@ -13,7 +13,7 @@
               <% User::REWARD_FIELDS.each do |field| %>
                 <div class="form-group form-group-reward-field-<%= field %>">
                   <label class="control-label"><%= Profile.reward_field_label(field) %></label>
-                  <input class="form-control" type="file" name="user[rewards][<%= field %>]" id="user_reward_<%= field %>">
+                  <input class="form-control" type="file" name="user_reward[<%= field %>]" id="user_reward_<%= field %>">
                   <div class="form-text">
                     <% if field == :alipay %>
                     打开支付宝客户端：右上角 “+” -> 我要收款 -> 设定金额 -> 保存二维码图片

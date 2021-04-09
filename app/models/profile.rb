@@ -3,15 +3,15 @@
 class Profile < ApplicationRecord
   belongs_to :user
 
-  serialize :contacts
-  serialize :rewards
+  CONTACT_FIELDS = %i[alipay paypal qq weibo wechat douban dingding aliwangwang
+    facebook instagram dribbble battle_tag psn_id steam_id]
 
+  # store :contacts, coder: JSON
+  # store :rewards, coder: JSON
+  # store_accessor :contacts, *CONTACT_FIELDS
   store_accessor :preferences, :theme
 
   validates :theme, inclusion: %w[auto light dark], allow_nil: true
-
-  CONTACT_FIELDS = %i[alipay paypal qq weibo wechat douban dingding aliwangwang
-    facebook instagram dribbble battle_tag psn_id steam_id]
 
   CONTACT_FIELD_PREFIXS = {
     douban: "https://www.douban.com/people/",

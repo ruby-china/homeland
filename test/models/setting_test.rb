@@ -40,6 +40,22 @@ class SettingTest < ActiveSupport::TestCase
     end
   end
 
+  test "domain" do
+    assert_equal "localhost", Setting.safe_domain
+
+    ENV["domain"] = "ruby-china.org"
+    assert_equal "ruby-china.org", Setting.safe_domain
+
+    ENV["domain"] = "*.ruby-china.org"
+    assert_equal "ruby-china.org", Setting.safe_domain
+
+    ENV["domain"] = "*.ruby-china.org,www.ruby-china.org"
+    assert_equal "ruby-china.org", Setting.safe_domain
+
+    ENV["domain"] = "www.ruby-china.org,*.ruby-china.org"
+    assert_equal "www.ruby-china.org", Setting.safe_domain
+  end
+
   test "base_url" do
     Setting.stubs(:domain).returns("homeland.io")
     Setting.stub(:protocol, "https") do

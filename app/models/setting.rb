@@ -158,6 +158,14 @@ class Setting < RailsSettings::Base
       self.https? ? "https" : "http"
     end
 
+    def safe_domain
+      ENV.fetch("domain", "localhost").split(",").first.delete_prefix("*.")
+    end
+
+    def domain
+      @domain ||= safe_domain
+    end
+
     def base_url
       return "http://localhost:3000" if Rails.env.development?
       [self.protocol, self.domain].join("://")

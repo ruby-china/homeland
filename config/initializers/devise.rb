@@ -6,8 +6,8 @@ TWITTER_OMNIAUTH_SETUP = lambda do |env|
 end
 
 WECHAT_OMNIAUTH_SETUP = lambda do |env|
-  env["omniauth.strategy"].options[:consumer_key] = Setting.wechat_api_key
-  env["omniauth.strategy"].options[:consumer_secret] = Setting.wechat_api_secret
+  env["omniauth.strategy"].options[:client_id] = Setting.wechat_api_key
+  env["omniauth.strategy"].options[:client_secret] = Setting.wechat_api_secret
 end
 
 GITHUB_OMNIUATH_SETUP = lambda do |env|

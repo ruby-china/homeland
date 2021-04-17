@@ -1,32 +1,28 @@
 <% title_tag t("teams.edit_team") %>
-
 <%= render '/teams/header' %>
-
 <div class="card">
   <div class="card-body">
     <%= form_for @team do |f| %>
       <%= render "shared/error_messages", target: @team %>
-
       <div class="form-group">
         <%= f.label :login %>
-        <%= f.text_field :login, class: "form-control", placeholder: user_url('xxx').gsub('xxx', ':slug') %>
+        <div class="input-group">
+          <span class="input-group-text"><%= Setting.base_url %>/</span>
+          <%= f.text_field :login, class: "form-control", placeholder: user_url('xxx').gsub('xxx', ':slug') %>
+        </div>
       </div>
-
       <div class="form-group">
         <%= f.label :name %>
         <%= f.text_field :name, class: "form-control" %>
       </div>
-
       <div class="form-group">
         <%= f.label :email %>
         <%= f.email_field :email, class: "form-control" %>
       </div>
-
       <div class="form-group form-check">
         <%= f.check_box :email_public, class: "form-check-input" %>
         <label for="user_email_public" class="checkbox"><%= t("users.email_permission")%></label>
       </div>
-
       <div class="form-group row">
         <div class="col-sm-7">
           <%= f.label :avatar %>
@@ -36,22 +32,19 @@
           <%= user_avatar_tag(@team, :lg, link: false) %>
         </div>
       </div>
-
       <div class="form-group">
         <%= f.label :location %>
         <%= f.text_field :location, class: "form-control" %>
       </div>
-
       <% if Setting.has_module? :github %>
-      <div class="form-group">
-        <%= f.label :github %>
-        <div class="input-group">
-          <span class="input-group-prepend"><span class="input-group-text">https://github.com/</span></span>
-          <%= f.text_field :github, class: "form-control" %>
+        <div class="form-group">
+          <%= f.label :github %>
+          <div class="input-group">
+            <span class="input-group-prepend"><span class="input-group-text">https://github.com/</span></span>
+            <%= f.text_field :github, class: "form-control" %>
+          </div>
         </div>
-      </div>
       <% end %>
-
       <div class="form-group">
         <%= f.label :twitter %>
         <div class="input-group">
@@ -59,21 +52,17 @@
           <%= f.text_field :twitter, class: "form-control" %>
         </div>
       </div>
-
       <div class="form-group">
         <%= f.label :website %>
         <%= f.url_field :website, class: "form-control", placeholder: "http://" %>
       </div>
-
       <div class="form-group">
         <%= f.label :bio %>
         <%= f.text_area :bio, class: "form-control", rows: 3 %>
       </div>
-
       <div class="form-actions">
         <%= f.submit t("common.save"), class: "btn btn-primary btn-block", 'data-disable-with' => t("common.saving") %>
       </div>
     <% end %>
-
   </div>
 </div>

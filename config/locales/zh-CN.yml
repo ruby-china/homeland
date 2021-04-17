@@ -81,7 +81,7 @@
           steam_id: Stream ID
       team:
         name: "公司／组织名称"
-        login: "Slug"
+        login: "访问路径"
         bio: "公司／组织介绍"
         website: "公司 / 项目网址"
       team_user:

@@ -391,11 +391,18 @@ table.node-topics {
     font-weight: bold;
     a {
       color: var(--text-color);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
   .infos {
     color: var(--text-color2);
     font-size: 12px;
+    .tagline {
+      width: 100%;
+      white-space: nowrap;
+    }
     .item {
       margin-top: 5px;
     }

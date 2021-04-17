@@ -1,5 +1,4 @@
 <% title_tag t("teams.new_team") %>
-
 <div class="row">
   <div class="col-sm-2"></div>
   <div class="col-sm-8">
@@ -7,36 +6,32 @@
       <div class="card-body">
         <%= form_for @team do |f| %>
           <%= render "shared/error_messages", target: @team %>
-
           <div class="form-group">
             <%= f.label :login %>
-            <%= f.text_field :login, class: "form-control", placeholder: user_url('xxx').gsub('xxx', ':slug') %>
+            <div class="input-group">
+              <span class="input-group-text"><%= Setting.base_url %>/</span>
+              <%= f.text_field :login, class: "form-control", placeholder: ":slug" %>
+            </div>
           </div>
-
           <div class="form-group">
             <%= f.label :name %>
             <%= f.text_field :name, class: "form-control" %>
           </div>
-
           <div class="form-group">
             <%= f.label :email %>
             <%= f.email_field :email, class: "form-control" %>
           </div>
-
           <div class="form-group">
             <%= f.label :bio %>
             <%= f.text_area :bio, class: "form-control", rows: 3 %>
           </div>
-
           <div class="form-group">
             <%= f.submit t("teams.new_team"), class: "btn btn-primary btn-block", 'data-disable-with' => t("common.saving") %>
           </div>
-
           <div class="form-text">
             如你发现你的公司或团队名称被抢注，可以尝试联系管理员，我们可以尽可能的协调。
           </div>
         <% end %>
-
       </div>
     </div>
     <div class="col-sm-2"></div>

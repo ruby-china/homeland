@@ -1,15 +1,16 @@
 <div class="row">
   <% users.each do |user| %>
-  <div class="col-xs-12 col-sm-6 col-md-4">
-    <div class="media user-card">
-      <div class="media-left mr-2"><%= user_avatar_tag(user, :md) %></div>
-      <div class="media-body">
-        <div class="media-heading"><%= user_name_tag(user) %></div>
-        <div class="infos">
-          <div class="item opts"><%= follow_user_tag(user, class: "") %></div>
+    <div class="col-xs-12 col-sm-6 col-md-4 text-truncate">
+      <div class="media user-card mb-4">
+        <div class="media-left mr-3"><%= user_avatar_tag(user, :md) %></div>
+        <div class="media-body">
+          <div class="media-heading"><%= user_name_tag(user) %></div>
+          <div class="infos mr-2">
+            <div class="item tagline"><%= user.tagline %></div>
+            <div class="item"><%= follow_user_tag(user, class: "") %></div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
   <% end %>
 </div>

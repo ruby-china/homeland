@@ -145,6 +145,7 @@ Rails.application.routes.draw do
           post :read
           get :unread_count
           delete :all
+          post :push_all
         end
       end
       resources :topics do

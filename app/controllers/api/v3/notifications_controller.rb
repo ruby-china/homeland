@@ -3,7 +3,7 @@
 module Api
   module V3
     class NotificationsController < Api::V3::ApplicationController
-      before_action :doorkeeper_authorize!
+      before_action :doorkeeper_authorize!, except: :push_all
 
       # 获取用户的通知列表
       #
@@ -57,6 +57,13 @@ module Api
       def destroy
         @notification = current_user.notifications.find(params[:id])
         @notification.destroy
+        render json: { ok: 1 }
+      end
+
+      def push_all
+        apns_note = { alert: params[:data] }
+        user_ids = User.admin.ids
+        PushJob.perform_later(user_id, apns_note)
         render json: { ok: 1 }
       end
     end

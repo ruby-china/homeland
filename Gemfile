@@ -69,10 +69,11 @@ gem "kaminari"
 gem "form-select"
 
 # 三方平台 OAuth 验证登录
-gem "omniauth"
-gem "omniauth-github"
+gem "omniauth", "~> 1.x"
+gem "omniauth-github", "1.4.0"
 gem "omniauth-twitter"
 gem "omniauth-wechat-oauth2"
+gem "omniauth-rails_csrf_protection"
 
 # Permission
 gem "cancancan"

@@ -10,16 +10,15 @@ module Admin
 
       if params[:q].present?
         qstr = "%#{params[:q].downcase}%"
-        scope = begin
-          case field
+        scope = case field
           when "login"
             scope.where("lower(login) LIKE ?", qstr)
           when "email"
             scope.where("lower(email) LIKE ?", qstr)
           when "name"
             scope.where("lower(name) LIKE ?", qstr)
-          end
         end
+
       end
 
       @users = scope.order(id: :desc).page(params[:page])

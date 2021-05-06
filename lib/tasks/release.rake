@@ -13,7 +13,7 @@ if Rails.env.development? || Rails.env.test?
       sh "git tag -d #{version_tag}"
     end
 
-    return false unless `git tag`.split(/\n/).include?(version_tag)
+    return false unless `git tag`.split("\n").include?(version_tag)
     puts "Tag #{version_tag} has already been created."
 
     git_push("origin")

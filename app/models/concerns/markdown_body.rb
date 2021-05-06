@@ -13,11 +13,9 @@ module MarkdownBody
   end
 
   def description
-    @description = begin
-      Rails.cache.fetch([self, "description"]) do
-        text = Homeland::Html.plain(body_html)
-        truncate(text, length: 120)
-      end
+    @description = Rails.cache.fetch([self, "description"]) do
+      text = Homeland::Html.plain(body_html)
+      truncate(text, length: 120)
     end
   end
 end

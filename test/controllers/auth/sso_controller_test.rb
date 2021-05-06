@@ -26,7 +26,7 @@ describe Auth::SSOController do
     end
 
     it "should work with destination_url" do
-      get auth_sso_path, headers: {"Cookie": "destination_url=/topics/123"}
+      get auth_sso_path, headers: {Cookie: "destination_url=/topics/123"}
       assert_equal 302, response.status
 
       # javascript code will handle redirection of user to return_sso_url
@@ -40,8 +40,8 @@ describe Auth::SSOController do
       @sso_url = "http://somesite.com/homeland-sso"
 
       @headers = {
-        "HTTP_CLIENT_IP": mock_ip,
-        "Host": Setting.domain
+        HTTP_CLIENT_IP: mock_ip,
+        Host: Setting.domain
       }
 
       Setting.stubs(:sso).returns(

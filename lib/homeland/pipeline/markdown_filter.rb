@@ -115,9 +115,7 @@ module Homeland
       def renderer
         # Do not share a single Redcarpet::Markdown object across threads
         # https://github.com/vmg/redcarpet/pull/672
-        Thread.current[:homeland_markdown_renderer] ||= begin
-          Redcarpet::Markdown.new(Render, DEFAULT_OPTIONS)
-        end
+        Thread.current[:homeland_markdown_renderer] ||= Redcarpet::Markdown.new(Render, DEFAULT_OPTIONS)
       end
 
       def call

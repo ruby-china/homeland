@@ -9,6 +9,6 @@ team_user = notification.target
     <%= t("notifications.invite_you_join") %> <%= user_name_tag(team) %>
   </div>
   <div class="media-content summary markdown">
-    <%= link_to t("notifications.show_invite"), main_app.user_team_user_path(team, team_user), class: 'btn btn-default btn-sm' %>
+    <%= link_to t("notifications.show_invite"), main_app.user_team_user_path(team, team_user), class: 'btn btn-secondary btn-sm' %>
   </div>
 <% end %>

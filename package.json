@@ -7,14 +7,14 @@
   "dependencies": {
     "@babel/preset-react": "~7.10",
     "@fortawesome/fontawesome-free": "~5.15",
+    "@popperjs/core": "^2.9.2",
     "@rails/actioncable": "~6.0",
     "@rails/ujs": "~6.0",
     "@rails/webpacker": "~5.2",
-    "add": "^2.0.6",
     "babel-plugin-transform-react-remove-prop-types": "~0.4.24",
     "backbone": "~1.4",
-    "bootstrap": "~4.5",
-    "bootstrap-select": "^1.13.18",
+    "bootstrap": "~5",
+    "bootstrap-select": "^1.14.0-beta2",
     "deep-assign": "^3.0.0",
     "dropzone": "~5.7",
     "i18next": "^19.8.4",
@@ -31,6 +31,9 @@
     "yarn": "^1.22.10"
   },
   "devDependencies": {
+    "@prettier/plugin-ruby": "^1.5.5",
+    "prettier": "^2.2.1",
+    "prettier-plugin-erb": "^0.1.0",
     "webpack-dev-server": "~3.11"
   }
 }

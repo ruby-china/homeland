@@ -6,7 +6,7 @@ module LikesHelper
   # params
   # - likeable - Like target
   # - :cache - when true, will not check current user is liked, directly return no like status for cache.
-  # - :class - Add class for link, for example: "btn btn-default"
+  # - :class - Add class for link, for example: "btn btn-secondary"
   def likeable_tag(likeable, opts = {})
     return "" if likeable.blank?
 

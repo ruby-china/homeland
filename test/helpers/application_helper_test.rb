@@ -20,7 +20,7 @@ class ApplicationHelperTest < ActionView::TestCase
     assert_equal "", notice_message
     assert_equal true, notice_message.html_safe?
 
-    close_html = %(<button name="button" type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>)
+    close_html = %(<button name="button" type="button" class="close" data-bs-dismiss ="alert"><span aria-hidden="true">&times;</span></button>)
 
     controller.flash[:notice] = "hello"
     assert_equal %(<div class="alert alert-success">#{close_html}hello</div>), notice_message

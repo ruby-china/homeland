@@ -1,9 +1,9 @@
-import "bootstrap";
 import jQuery from "jquery";
 window.jQuery = jQuery;
 window.$ = jQuery;
 window.Backbone = require("backbone");
 window._ = require("underscore");
+window.bootstrap = require("bootstrap");
 
 import Turbolinks from "turbolinks";
 import TubrolinksPrefetch from "turbolinks-prefetch";
@@ -63,7 +63,7 @@ window.App = {
   // 警告信息显示, to 显示在那个 DOM 前 (可以用 css selector)
   alert(msg, to) {
     $(".alert").remove();
-    const html = `<div class='alert alert-warning'><button class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span></button>${msg}</div>`;
+    const html = `<div class='alert alert-warning'><button class='close' data-bs-dismiss ='alert'><span aria-hidden='true'>&times;</span></button>${msg}</div>`;
     if (to) {
       return $(to).before(html);
     } else {
@@ -74,7 +74,7 @@ window.App = {
   // 成功信息显示, to 显示在那个 DOM 前 (可以用 css selector)
   notice(msg, to) {
     $(".alert").remove();
-    const html = `<div class='alert alert-success'><button class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span></button>${msg}</div>`;
+    const html = `<div class='alert alert-success'><button class='close' data-bs-dismiss ='alert'><span aria-hidden='true'>&times;</span></button>${msg}</div>`;
     if (to) {
       return $(to).before(html);
     } else {
@@ -164,7 +164,7 @@ window.App = {
           },
         },
         displayTpl:
-          "<li data-value='${login}'><img src='${avatar_url}' height='20' width='20'/> ${login} <small>${name}</small></li>",
+          "<li data-value='${login}'><img src='${avatar_url}' height='20' width='20'> ${login} <small>${name}</small></li>",
         insertTpl: "@${login}",
       })
       .atwho({
@@ -172,7 +172,7 @@ window.App = {
         limit: 8,
         searchKey: "code",
         data: window.EMOJI_LIST,
-        displayTpl: `<li data-value='\${code}'><img src='${App.twemoji_url}/svg/\${url}.svg' class='twemoji' /> \${code} </li>`,
+        displayTpl: `<li data-value='\${code}'><img src='${App.twemoji_url}/svg/\${url}.svg' class='twemoji'> \${code} </li>`,
         insertTpl: "${code}",
       });
     return true;
@@ -180,7 +180,10 @@ window.App = {
 };
 
 document.addEventListener("turbolinks:load", () => {
-  $("select.bootstrap-select").selectpicker({ size: 10, style: "btn-default" });
+  $("select.bootstrap-select").selectpicker({
+    size: 10,
+    style: "btn-secondary",
+  });
 });
 document.addEventListener("turbolinks:before-cache", () => {
   $("select.bootstrap-select")

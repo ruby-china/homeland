@@ -16,7 +16,7 @@ module ApplicationHelper
   def notice_message
     flash_messages = []
 
-    close_html = %(<button name="button" type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>)
+    close_html = %(<button name="button" type="button" class="close" data-bs-dismiss ="alert"><span aria-hidden="true">&times;</span></button>)
 
     flash.each do |type, message|
       type = :success if type.to_sym == :notice
@@ -154,7 +154,7 @@ module ApplicationHelper
     opts[:class] += " has-error" if has_errors
 
     content_tag :div, class: opts[:class] do
-      concat form.label field, class: "control-label" if opts[:label] != false
+      concat form.label field, class: "form-label" if opts[:label] != false
       concat capture(&block)
       concat errors_for(form, field)
     end

@@ -1,15 +1,13 @@
 <%%= render 'base' %>
-
 <div class="toolbar">
   <%%= link_to '修改', edit_<%= singular_table_name %>_path(@<%= file_name %>), class: "btn btn-sm btn-success" %>
-  <%%= link_to '返回', <%= index_helper %>_path, class: "btn btn-sm btn-default" %>
+  <%%= link_to '返回', <%= index_helper %>_path, class: "btn btn-sm btn-secondary" %>
 </div>
-
 <div id="<%= singular_table_name %>">
   <% for attribute in attributes -%>
-  <p>
-    <b><%= attribute.human_name %>:</b>
-    <%%= @<%= file_name %>.<%= attribute.name %> %>
-  </p>
+    <p>
+      <b><%= attribute.human_name %>:</b>
+      <%%= @<%= file_name %>.<%= attribute.name %> %>
+    </p>
   <% end -%>
 </div>

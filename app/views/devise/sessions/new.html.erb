@@ -26,7 +26,7 @@ auth_info = auth_session["info"]
             <div class="form-group">
               <div class="custom-control custom-checkbox">
                 <%= f.check_box :remember_me, class: "custom-control-input" %>
-                <label class="custom-control-label" for="user_remember_me"><%= t("common.remember_me") %></label>
+                <label class="custom-form-label" for="user_remember_me"><%= t("common.remember_me") %></label>
               </div>
             </div>
           <% end -%>
@@ -41,7 +41,7 @@ auth_info = auth_session["info"]
         <div class="card-header"><%= t("common.auth_with_other_services") %></div>
         <div class="card-body flex aic jcc">
           <% Setting.omniauth_providers.each do |provider| %>
-            <%= link_to raw("<i class='fab fa-#{provider}'></i> #{Homeland::Utils.omniauth_name(provider)}"), omniauth_authorize_path(:user, provider), method: :post, class: "btn btn-default omniauth-#{provider}" %>
+            <%= link_to raw("<i class='fab fa-#{provider}'></i> #{Homeland::Utils.omniauth_name(provider)}"), omniauth_authorize_path(:user, provider), method: :post, class: "btn btn-secondary omniauth-#{provider}" %>
           <% end %>
         </div>
       </div>

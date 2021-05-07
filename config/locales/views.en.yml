@@ -221,7 +221,7 @@
     have_no_new_reply: "No new activites since your last read."
     have_no_avatar: "You can't create a new Topic, before you upload a avatar."
     excellent_info_html: "Topic has been selected as the excellent topic by the admin."
-    need_login_to_reply_html: You need to <a href="/account/sign_in" class="btn btn-sm btn-primary">Sign in</a> before reply, if you don't have an account, please <a href="/account/sign_up" class="btn btn-default btn-sm">Sign up</a> first.
+    need_login_to_reply_html: You need to <a href="/account/sign_in" class="btn btn-sm btn-primary">Sign in</a> before reply, if you don't have an account, please <a href="/account/sign_up" class="btn btn-secondary btn-sm">Sign up</a> first.
     newbi_info_html: "Newbi users cannot reply between 22:00 - 9:00."
     closed_info_html: Topic has been closed at %{closed_at}, is not accepting any replies.
     topic_pin_successfully: Topic has pinned successfully.

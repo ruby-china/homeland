@@ -1,7 +1,7 @@
 $red: #eb5424;
 $blue: #225eda;
 $green: #19a302;
-$yellow: #fee209;
+$yellow: #dbc12d;
 
 :root {
   --primary: #404040 !important;
@@ -15,7 +15,7 @@ $yellow: #fee209;
   --gray: #f2f2f2;
   --red: #eb5424;
   --red-light: #fdf1ed;
-  --yellow: #fee209;
+  --yellow: #dbc12d;
   --yellow-light: #fffdee;
   --blue: #225eda;
   --blue-light: #e6f0fb;
@@ -30,14 +30,14 @@ $yellow: #fee209;
   // speical vars
   --btn-border-radius: 0.375rem;
   --btn-box-shaodw: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --btn-default-text-color: rgba(55, 65, 81, 1);
-  --btn-default-background-color: #fff;
-  --btn-default-border-color: rgba(209, 213, 219, 1);
-  --btn-default-active-background-color: #fff;
-  --btn-default-active-border-color: rgba(209, 213, 219, 1);
-  --btn-default-active-text-color: rgba(55, 65, 81, 1);
-  --btn-default-hover-background-color: rgba(249, 250, 251, 1);
-  --btn-default-hover-border-color: rgba(209, 213, 219, 1);
+  --btn-secondary-text-color: rgba(55, 65, 81, 1);
+  --btn-secondary-background-color: #fff;
+  --btn-secondary-border-color: rgba(209, 213, 219, 1);
+  --btn-secondary-active-background-color: #fff;
+  --btn-secondary-active-border-color: rgba(209, 213, 219, 1);
+  --btn-secondary-active-text-color: rgba(55, 65, 81, 1);
+  --btn-secondary-hover-background-color: rgba(249, 250, 251, 1);
+  --btn-secondary-hover-border-color: rgba(209, 213, 219, 1);
 
   --form-control-background-color: #fff;
   --form-control-border-color: rgba(209, 213, 219, 1);
@@ -108,7 +108,6 @@ $yellow: #fee209;
   --nav-pills-active-text-color: #fff;
 }
 
-$spacer: 15px;
 $font-size-base: 0.875rem;
 $font-family-sans-serif: Helvetica, Arial, "PingFang SC", "Noto Sans", Roboto,
   "Microsoft Yahei", sans-serif;

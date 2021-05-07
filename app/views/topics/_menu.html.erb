@@ -1,12 +1,12 @@
-<div class="dropdown-menu dropdown-menu-right">
+<div class="dropdown-menu dropdown-menu-end">
   <% if can?(:edit, @topic) %>
     <%= link_to t("topics.menu.edit"), edit_topic_path(@topic), class: "dropdown-item", data: { prefetch: false }  %>
   <% end %>
   <% if can?(:close, @topic) %>
     <% if !@topic.closed? %>
-      <%= link_to t("topics.menu.close"), action_topic_path(@topic, type: 'close'), class: "dropdown-item", method: 'post', remote: true, data: { toggle: 'tooltip' } %>
+      <%= link_to t("topics.menu.close"), action_topic_path(@topic, type: 'close'), class: "dropdown-item", method: 'post', remote: true, "data-bs-toggle": 'tooltip' %>
     <% else %>
-      <%= link_to t("topics.menu.reopen"), action_topic_path(@topic, type: 'open'), class: "dropdown-item", method: 'post', remote: true, data: { toggle: 'tooltip' } %>
+      <%= link_to t("topics.menu.reopen"), action_topic_path(@topic, type: 'open'), class: "dropdown-item", method: 'post', remote: true, "data-bs-toggle": 'tooltip' %>
     <% end %>
   <% end %>
   <% if can? :suggest, @topic %>

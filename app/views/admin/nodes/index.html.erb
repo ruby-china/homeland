@@ -1,11 +1,9 @@
 <% content_for :sitemap do %>
   <span class="current"><%= t("admin.menu.nodes")%></span>
 <% end %>
-
 <div class="toolbar">
-  <%= link_to t("admin.nodes.new"), new_admin_node_path, class: "btn btn-default" %>
+  <%= link_to t("admin.nodes.new"), new_admin_node_path, class: "btn btn-secondary" %>
 </div>
-
 <table class="table table-bordered table-striped table-condensed">
   <tr class="head">
     <td class="first">#</td>
@@ -14,15 +12,14 @@
     <td>Topics Count</td>
     <td></td>
   </tr>
-
-<% @nodes.each do |node| %>
-  <tr>
-    <td class="first"><%= node.id %></td>
-    <td><%= link_to node.name, node_topics_path(node.id) %></td>
-    <td><%= node.sort %></td>
-    <td><%= node.topics_count %></td>
-    <td><%= link_to '', edit_admin_node_path(node), class: "fa fa-edit" %>
-    <%= link_to '', admin_node_path(node), 'data-confirm' => 'Are you sure?' , method: :delete, class: "fa fa-trash" %></td>
-  </tr>
-<% end %>
+  <% @nodes.each do |node| %>
+    <tr>
+      <td class="first"><%= node.id %></td>
+      <td><%= link_to node.name, node_topics_path(node.id) %></td>
+      <td><%= node.sort %></td>
+      <td><%= node.topics_count %></td>
+      <td><%= link_to '', edit_admin_node_path(node), class: "fa fa-edit" %>
+        <%= link_to '', admin_node_path(node), 'data-confirm' => 'Are you sure?' , method: :delete, class: "fa fa-trash" %></td>
+    </tr>
+  <% end %>
 </table>

@@ -27,6 +27,7 @@
 }
 
 hr {
+  background: var(--divider-color);
   border-top: 1px solid var(--divider-color);
 }
 
@@ -741,14 +742,6 @@ hr {
       &.reply-deleted {
         padding: 15px 18px;
       }
-    }
-  }
-}
-
-.edit-reply {
-  form {
-    .btn-primary {
-      margin-right: 10px;
     }
   }
 }

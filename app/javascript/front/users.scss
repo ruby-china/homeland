@@ -13,7 +13,7 @@
 
   .nav-tabs > .active > a,
   .nav-tabs > .active > a:hover {
-    color: var(--btn-default-text-color);
+    color: var(--btn-secondary-text-color);
     background: var(--card-background-color);
     border: 1px solid var(--card-border-color);
     border-bottom-color: transparent;
@@ -548,8 +548,8 @@ table.node-topics {
 }
 
 .button-follow-user.btn-primary.active {
-  background: var(--btn-default-active-background-color) !important;
-  border-color: var(--btn-default-active-border-color) !important;
+  background: var(--btn-secondary-active-background-color) !important;
+  border-color: var(--btn-secondary-active-border-color) !important;
   color: var(--text-color1) !important;
 }
 

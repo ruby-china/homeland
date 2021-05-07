@@ -4,9 +4,8 @@
   <td>
     <div class="flex aic jcsb">
       <div class="username">
-        <%= link_to user.fullname, user_path(user), target: "_blank" %> 
+        <%= link_to user.fullname, user_path(user), target: "_blank" %>
       </div>
-
       <div class="flex aic">
         <%= user_level_tag(user) unless user.member? %>
         <div class="time ml-2">
@@ -15,14 +14,14 @@
       </div>
     </div>
     <% if user.bio.present? %>
-    <div class="description mt-2" title="Bio">
-      <%= truncate user.bio, length: 300 %>
-    </div>
+      <div class="description mt-2" title="Bio">
+        <%= truncate user.bio, length: 300 %>
+      </div>
     <% end %>
     <% if user.tagline.present? %>
-    <div class="description mt-2" title="Tagline">
-      <%= truncate user.tagline %>
-    </div>
+      <div class="description mt-2" title="Tagline">
+        <%= truncate user.tagline %>
+      </div>
     <% end %>
     <div class="info mt-2">
       <% if user.topics_count > 0 %>
@@ -35,9 +34,9 @@
   </td>
   <td>
     <div class="btn-group">
-      <%= link_to icon_tag("edit"), edit_admin_user_path(user.id), class: "btn btn-default btn-sm" %>
+      <%= link_to icon_tag("edit"), edit_admin_user_path(user.id), class: "btn btn-secondary btn-sm" %>
       <% if !user.deleted? %>
-        <%= link_to icon_tag("ban"), admin_user_path(user.id), class: "btn btn-default btn-sm", method: :delete, remote: true, data: { confirm: "Are you sure to ban this user?" } %>
+        <%= link_to icon_tag("ban"), admin_user_path(user.id), class: "btn btn-secondary btn-sm", method: :delete, remote: true, data: { confirm: "Are you sure to ban this user?" } %>
       <% end %>
     </div>
   </td>

@@ -1,0 +1,30 @@
+{
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "aeschli.vscode-css-formatter"
+  },
+  "[erb]": {
+    "editor.defaultFormatter": "aliariff.vscode-erb-beautify"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "ruby.lint": {
+    "standard": {
+      "useBundler": true
+    }
+  }
+}

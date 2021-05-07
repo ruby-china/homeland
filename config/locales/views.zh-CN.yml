@@ -295,7 +295,7 @@
     edit_password: "修改密码"
     delete_this_account: "删除此账号"
     dont_like_it: "不喜欢?"
-    bind_another_account: "绑定其他账号用于登录"
+    bind_another_account: "三方登陆绑定"
     click_to_unbind: "点击接触登陆绑定"
     register_user: "注册新用户"
     login: "用户名"

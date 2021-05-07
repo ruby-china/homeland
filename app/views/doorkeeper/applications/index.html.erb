@@ -56,7 +56,7 @@
                 <td><%= app.name %></td>
                 <td><%= app.created_at.strftime(t('doorkeeper.authorized_applications.index.date_format')) %></td>
                 <td>
-                  <%= link_to t("common.revoke"), oauth_authorized_application_path(app), class: "btn btn-default btn-sm", data: { confirm: "Are you sure?", method: :delete } %>
+                  <%= link_to t("common.revoke"), oauth_authorized_application_path(app), class: "btn btn-secondary btn-sm", data: { confirm: "Are you sure?", method: :delete } %>
                 </td>
               </tr>
             <% end %>
@@ -86,7 +86,7 @@
                   <td><%= device.platform_name %></td>
                   <td><%= device.token %></td>
                   <td><%= device.alive? %></td>
-                  <td><%= link_to t("common.delete"), device, class: "btn btn-default btn-sm", data: { confirm: t("common.confirm_delete"), method: :delete } %></td>
+                  <td><%= link_to t("common.delete"), device, class: "btn btn-secondary btn-sm", data: { confirm: t("common.confirm_delete"), method: :delete } %></td>
                 </tr>
               <% end %>
             </tbody>

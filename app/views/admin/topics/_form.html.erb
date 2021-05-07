@@ -1,24 +1,20 @@
 <%= form_for [:admin,@topic] do |f| %>
   <%= render 'shared/error_messages', target: @topic %>
-
   <div class="form-group">
     <%= f.label :title %>
     <div class="input-group">
       <%= f.select :node_id, Node.name_options, {}, class: "bootstrap-select mr-1" %>
       <%= f.text_field :title, class: "form-control" %>
-      <%= link_to icon_tag("link"), @topic, target: "_blank", class: "btn btn-default ml-2" %>
+      <%= link_to icon_tag("link"), @topic, target: "_blank", class: "btn btn-secondary ml-2" %>
     </div>
   </div>
-
   <div class="form-group">
     <%= f.label :body %>
     <%= f.text_area :body, class: "form-control", rows: 20 %>
   </div>
-
   <div class="form-group">
     Created by <%= user_name_tag @topic.user %>
   </div>
-
   <div class="form-actions">
     <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving") %>
   </div>

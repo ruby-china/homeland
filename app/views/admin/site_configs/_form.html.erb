@@ -1,7 +1,7 @@
 <%= form_for @site_config, url: admin_site_config_path(@site_config.var), method: 'patch' do |f| %>
   <%= render "/shared/error_messages", target: @site_config %>
   <div class="form-group">
-    <label>
+    <label class="form-label">
       <%= @site_config.var %>
       <% if @site_config.require_restart? %>
         <span class="badge badge-warning">reboot required.</span>
@@ -32,8 +32,8 @@
       <div class="form-text mt-2"><%= raw t("setting.#{@site_config.var}") %></div>
     <% end %>
   </div>
-  <div class="form-actions">
+  <div class="form-actions d-flex col-md-6">
     <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving") %>
-    <a href="<%= admin_site_configs_path %>" class="btn"><%= t("common.cancel") %></a>
+    <a href="<%= admin_site_configs_path %>" class="btn btn-secondary"><%= t("common.cancel") %></a>
   </div>
 <% end %>

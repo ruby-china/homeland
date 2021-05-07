@@ -15,7 +15,7 @@ class RepliesController < ApplicationController
       current_user.read_topic(@topic)
       @msg = t("replies.created_successfully")
     else
-      @msg = @reply.errors.full_messages.join("<br />")
+      @msg = @reply.errors.full_messages.join("<br>")
     end
   end
 

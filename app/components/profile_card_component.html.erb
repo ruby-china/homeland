@@ -1,9 +1,9 @@
 <div class="user-profile-card">
-  <div class="media">
+  <div class="d-flex">
     <div class="avatar-box">
       <%= user_avatar_tag(user, :md) %>
     </div>
-    <div class="media-meta">
+    <div class="flex-grow-1">
       <%= link_to user, class: "name-box" do %>
         <div class="fullname">
           <%= user.name %>
@@ -17,7 +17,7 @@
   <% if user.tagline.present? %>
     <div class="item tagline"><%= user.tagline %></div>
   <% end %>
-  <hr />
+  <hr>
   <div class="item social">
     <% if !user.twitter.blank? %>
       <%= link_to icon_bold_tag("twitter"), user.twitter_url, class: "twitter", rel: "nofollow" %>
@@ -42,7 +42,7 @@
     </div>
   <% end %>
   <% if !owner? user %>
-    <hr />
+    <hr>
     <div class="item buttons flex aic">
       <%= follow_user_tag(user) %>
     </div>

@@ -1,6 +1,5 @@
 <div class="row">
   <%= render 'menu' %>
-
   <div class="col-md-10">
     <div class="card card-lg">
       <div class="card-body">
@@ -8,30 +7,27 @@
           <div class="col-md-8">
             <%= form_for @user, url: setting_path, method: :put, html: { enctype: "multipart/form-data" } do |f| %>
               <%= render "shared/error_messages", target: @user %>
-              <input type="hidden" name="by" value="reward" />
-
+              <input type="hidden" name="by" value="reward">
               <% User::REWARD_FIELDS.each do |field| %>
                 <div class="form-group form-group-reward-field-<%= field %>">
-                  <label class="control-label"><%= Profile.reward_field_label(field) %></label>
+                  <label class="form-label"><%= Profile.reward_field_label(field) %></label>
                   <input class="form-control" type="file" name="user_reward[<%= field %>]" id="user_reward_<%= field %>">
                   <div class="form-text">
                     <% if field == :alipay %>
-                    打开支付宝客户端：右上角 “+” -> 我要收款 -> 设定金额 -> 保存二维码图片
+                      打开支付宝客户端：右上角 “+” -> 我要收款 -> 设定金额 -> 保存二维码图片
                     <% elsif field == :wechat %>
-                    打开微信手机客户端：右上角 “+” -> 收付款 -> 我要收款 -> 保存二维码图片
+                      打开微信手机客户端：右上角 “+” -> 收付款 -> 我要收款 -> 保存二维码图片
                     <% end %>
                   </div>
                 </div>
-
                 <% if @user.reward_field(field) %>
-                <div class="form-group">
-                  <div class="reward-image">
-                    <img src="<%= @user.reward_field(field) %>" >
+                  <div class="form-group">
+                    <div class="reward-image">
+                      <img src="<%= @user.reward_field(field) %>" >
+                    </div>
                   </div>
-                </div>
                 <% end %>
               <% end %>
-
               <div class="form-actions hide-ios">
                 <button type="submit" class="btn btn-primary" data-disable-with="<%= t("common.saving") %>"><%= t("users.update_profile")%></button>
               </div>
@@ -50,6 +46,6 @@
         </div>
       </div>
     </div>
-    </div>
   </div>
+</div>
 </div>

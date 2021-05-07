@@ -17,10 +17,10 @@ window.TOCView = Backbone.View.extend({
     const markdownEl = $(".markdown-toc");
     markdownEl.prepend(`\
 <div class="toc-container dropdown">
-  <button data-toggle="dropdown" class="btn btn-default">
+  <button data-bs-toggle ="dropdown" class="btn btn-secondary">
     <i class="fa fa-list"></i> 目录
   </button>
-  <div class="dropdown-menu dropdown-menu-right">
+  <div class="dropdown-menu dropdown-menu-end">
   </div>
 </div>\
 `);

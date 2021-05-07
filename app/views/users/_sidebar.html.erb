@@ -27,7 +27,7 @@
           </div>
         </div>
       </div>
-      <hr />
+      <hr>
       <div class="user-items">
         <% if @user.email.present? && @user.email_public %>
           <div class="item"><a href="mailto: <%= @user.email %>"><%= icon_tag("email") %> <%= @user.email %></a></div>
@@ -38,9 +38,9 @@
           </div>
         <% end %>
         <% if @user.location.present? %>
-        <div class="item location" title="Location">
-          <%= icon_tag("location") %> <%= location_name_tag(@user.location) %>
-        </div>
+          <div class="item location" title="Location">
+            <%= icon_tag("location") %> <%= location_name_tag(@user.location) %>
+          </div>
         <% end %>
         <div class="item counts">
           <%= t("users.topics_count_html", count: @user.topics_count) %>
@@ -92,7 +92,7 @@
         </div>
       <% end %>
       <div class="buttons">
-        <%= reward_user_tag(@user, class: "btn btn-block btn-default") %>
+        <%= reward_user_tag(@user, class: "btn btn-block btn-secondary") %>
       </div>
     </div>
   </div>

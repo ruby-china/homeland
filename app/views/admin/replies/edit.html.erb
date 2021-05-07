@@ -3,10 +3,8 @@
 <% end %>
 <div class="flex aib">
   <h1><%= t("common.edit") %><%= t('admin.menu.replies') %></h1>
-
   <div class="ml-2">
-    <%= link_to '返回', admin_replies_path, class: "btn btn-default btn-sm" %>
+    <%= link_to '返回', admin_replies_path, class: "btn btn-secondary btn-sm" %>
   </div>
 </div>
-
 <%= render 'form' %>

@@ -949,6 +949,18 @@
   dependencies:
     mkdirp "^1.0.4"
 
+"@popperjs/core@^2.9.2":
+  version "2.9.2"
+  resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.9.2.tgz#adea7b6953cbb34651766b0548468e743c6a2353"
+  integrity sha512-VZMYa7+fXHdwIq1TDhSXoVmSPEGM/aa+6Aiq3nVVJ9bXr24zScr+NlKFKC3iPljA7ho/GAZr+d2jOf5GIRC30Q==
+
+"@prettier/plugin-ruby@^1.5.5":
+  version "1.5.5"
+  resolved "https://registry.yarnpkg.com/@prettier/plugin-ruby/-/plugin-ruby-1.5.5.tgz#9e206fc856a182a292fcfab9043f53c7a3d0af97"
+  integrity sha512-b387GdXU+LrnY+oaKWRUI5EnsUvrQ0G1jUSVPkvUTGzp/w+BB9/n4SICVPY3V9/wYsvWpAZq4LkE4FdBufXUtA==
+  dependencies:
+    prettier ">=1.10"
+
 "@rails/actioncable@~6.0":
   version "6.0.3"
   resolved "https://registry.npm.taobao.org/@rails/actioncable/download/@rails/actioncable-6.0.3.tgz#722b4b639936129307ddbab3a390f6bcacf3e7bc"
@@ -1208,11 +1220,6 @@ acorn@^6.4.1:
   version "6.4.2"
   resolved "https://registry.npm.taobao.org/acorn/download/acorn-6.4.2.tgz?cache=0&sync_timestamp=1601885832302&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Facorn%2Fdownload%2Facorn-6.4.2.tgz#35866fd710528e92de10cf06016498e47e39e1e6"
   integrity sha1-NYZv1xBSjpLeEM8GAWSY5H454eY=
-
-add@^2.0.6:
-  version "2.0.6"
-  resolved "https://registry.npm.taobao.org/add/download/add-2.0.6.tgz#248f0a9f6e5a528ef2295dbeec30532130ae2235"
-  integrity sha1-JI8Kn25aUo7yKV2+7DBTITCuIjU=
 
 aggregate-error@^3.0.0:
   version "3.1.0"
@@ -1613,15 +1620,15 @@ boolbase@^1.0.0, boolbase@~1.0.0:
   resolved "https://registry.npm.taobao.org/boolbase/download/boolbase-1.0.0.tgz#68dff5fbe60c51eb37725ea9e3ed310dcc1e776e"
   integrity sha1-aN/1++YMUes3cl6p4+0xDcwed24=
 
-bootstrap-select@^1.13.18:
-  version "1.13.18"
-  resolved "https://registry.npm.taobao.org/bootstrap-select/download/bootstrap-select-1.13.18.tgz#4557119d58dc1159189977161c803962220e4dda"
-  integrity sha1-RVcRnVjcEVkYmXcWHIA5YiIOTdo=
+bootstrap-select@^1.14.0-beta2:
+  version "1.14.0-beta2"
+  resolved "https://registry.yarnpkg.com/bootstrap-select/-/bootstrap-select-1.14.0-beta2.tgz#3abc9f778435238669f70d0af3615d0198ec4291"
+  integrity sha512-Q63QUbConUwA+/Te7tCJcv0nE3SI/J+rNI5A1mdX1KxP6lW0pFQy+4KVP6VwgZEcwkoPfrwjvAo6WT7fdl+Sdg==
 
-bootstrap@~4.5:
-  version "4.5.3"
-  resolved "https://registry.npm.taobao.org/bootstrap/download/bootstrap-4.5.3.tgz#c6a72b355aaf323920be800246a6e4ef30997fe6"
-  integrity sha1-xqcrNVqvMjkgvoACRqbk7zCZf+Y=
+bootstrap@~5:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-5.0.0.tgz#97635ac0e0d6cb466700ebf0fd266bfabf352ed2"
+  integrity sha512-tmhPET9B9qCl8dCofvHeiIhi49iBt0EehmIsziZib65k1erBW1rHhj2s/2JsuQh5Pq+xz2E9bEbzp9B7xHG+VA==
 
 brace-expansion@^1.1.7:
   version "1.1.11"
@@ -6012,6 +6019,23 @@ prepend-http@^1.0.0:
   version "1.0.4"
   resolved "https://registry.npm.taobao.org/prepend-http/download/prepend-http-1.0.4.tgz#d4f4562b0ce3696e41ac52d0e002e57a635dc6dc"
   integrity sha1-1PRWKwzjaW5BrFLQ4ALlemNdxtw=
+
+prettier-html-templates@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/prettier-html-templates/-/prettier-html-templates-0.1.0.tgz#dfa12bd71c032e3b796e8c645210c5614403575d"
+  integrity sha512-KdLveYzO2kJLiwUAebd5UFeKP8h3OqFhOiLbkgeIuS1WNoCRTyxW4KuyGfbh3F+Rp/2A6mipRxCq2zPi+//pmg==
+
+prettier-plugin-erb@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/prettier-plugin-erb/-/prettier-plugin-erb-0.1.0.tgz#02e1b05ed0736adb5ac46642d2c093126540d390"
+  integrity sha512-tBtVX7THf5YrOPl7ssoFHllehT8jXCZJuu+7EdrRdQ6yPsyqYkZo2fUJkP0lhufOBnd494QmSIjHcAwankKiHg==
+  dependencies:
+    prettier-html-templates "^0.1.0"
+
+prettier@>=1.10, prettier@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.2.1.tgz#795a1a78dd52f073da0cd42b21f9c91381923ff5"
+  integrity sha512-PqyhM2yCjg/oKkFPtTGUojv7gnZAoG80ttl45O6x2Ug/rMJw4wcc9k6aaf2hibP7BGVCCM33gZoGjyvt9mm16Q==
 
 process-nextick-args@~2.0.0:
   version "2.0.1"

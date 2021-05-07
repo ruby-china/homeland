@@ -6,7 +6,7 @@
         <span class="counter"><%= @notifications.total_count %></span>
       </div>
       <div class="actions">
-        <%= link_to icon_tag("trash", label: t('notifications.clean_all')), notifications.clean_notifications_path, class: "text-danger", id: 'btn-remove-all', method: 'delete', remote: true %>
+        <%= link_to icon_tag("trash", label: t('notifications.clean_all')), notifications.clean_notifications_path, class: "btn btn-outline-danger btn-sm", id: 'btn-remove-all', method: 'delete', remote: true %>
       </div>
     </div>
     <% if @notifications.blank? %>

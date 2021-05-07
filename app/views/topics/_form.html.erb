@@ -1,7 +1,6 @@
 <%= form_for @topic, remote: true, class: "form", html: { tb: 'edit-topic' } do |f| %>
   <%= render "shared/error_messages", target: @topic %>
   <%= f.hidden_field :node_id %>
-
   <div class="form-group">
     <div class="input-group">
       <div class="input-group-prepend mr-1">
@@ -10,24 +9,19 @@
       <%= f.text_field :title, class: "form-control", placeholder: t("topics.form.title_placeholder") %>
     </div>
   </div>
-
   <%= render "/shared/editor_toolbar" %>
-
   <div class="form-group">
     <%= f.text_area :body, class: "topic-editor form-control", rows: 20 %>
   </div>
-
   <% if Setting.has_module?(:team) %>
     <% if current_user.team_options.any? %>
-    <div class='form-group'>
-      <%= f.select :team_id, current_user.team_options, { include_blank: t("topics.form.no_team") }, { class: "bootstrap-select", data: { "live-search": true } } %>
-    </div>
+      <div class='form-group'>
+        <%= f.select :team_id, current_user.team_options, { include_blank: t("topics.form.no_team") }, { class: "bootstrap-select", data: { "live-search": true } } %>
+      </div>
     <% end %>
   <% end %>
-
-  <div class="form-actions hide-ios">
-    <%= f.submit t("common.publish"), class: "btn btn-primary", style: "min-width: 200px", 'data-disable-with' => t("common.saving"), 'data-tb' => "save-topic" %>
-
-    <div class="pull-right hide-ios"><a href="/markdown" target="_blank"><i class="fa fa-life-ring"></i> <%= t("topics.form.markdown_guides") %></a></div>
+  <div class="form-actions jcsb hide-ios">
+    <%= f.submit t("common.publish"), class: "btn btn-primary", 'data-disable-with' => t("common.saving"), 'data-tb' => "save-topic" %>
+    <div class="hide-ios"><a href="/markdown" target="_blank"><i class="fa fa-life-ring"></i> <%= t("topics.form.markdown_guides") %></a></div>
   </div>
 <% end %>

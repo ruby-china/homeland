@@ -7,11 +7,9 @@
     </div>
   <% else %>
     <div class="form-group">
-      <div class="media">
-        <div class="media-left">
-          <%= user_avatar_tag(@team_user.user, :sm) %>
-        </div>
-        <div class="media-body"><%= user_name_tag(@team_user.user) %></div>
+      <div class="d-flex">
+        <%= user_avatar_tag(@team_user.user, :sm) %>
+        <div class="ml-2"><%= user_name_tag(@team_user.user) %></div>
       </div>
     </div>
   <% end %>
@@ -19,21 +17,15 @@
     <%= f.label :role %>
     <%= f.select :role, TeamUser.roles.keys, {}, class: "form-control" %>
   </div>
-  <div class="form-actions">
+  <div class="form-actions jcsb">
     <% if @team_user.new_record? %>
       <%= f.submit t("teams.new_team_user"), class: "btn btn-primary btn-block", 'data-disable-with' => t("common.saving") %>
     <% else %>
-      <div class="row">
-        <div class="col-sm-8">
-          <%= f.submit t("common.save"), class: "btn btn-primary btn-block", 'data-disable-with' => t("common.saving") %>
-        </div>
-        <div class="col-sm-4">
-          <%= link_to t('teams.delete_team_user'),
+      <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving") %>
+      <%= link_to t('teams.delete_team_user'),
                       user_team_user_path(@team, @team_user),
                       data: { method: 'DELETE', confirm: t('teams.delete_team_user_confirm') },
-                      class: 'btn btn-danger btn-block' %>
-        </div>
-      </div>
+                      class: 'btn btn-danger' %>
     <% end %>
   </div>
 <% end %>

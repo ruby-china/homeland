@@ -431,7 +431,7 @@ class Homeland::MarkdownTest < ActiveSupport::TestCase
 
   test "Escape HTML tags" do
     assert_markdown_render %(<p><img src="aaa.jpg" class="bb"> aaa</p>) do
-      %(<img src="aaa.jpg" class="bb" /> aaa)
+      %(<img src="aaa.jpg" class="bb"> aaa)
     end
 
     assert_markdown_render "<script>aaa</script>" do

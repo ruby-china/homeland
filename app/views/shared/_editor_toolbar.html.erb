@@ -7,12 +7,12 @@
   <div class="toolbar-buttons">
     <a href="#" class="nav-link pickup-emoji"><%= icon_tag("smile") %></a>
     <% if Setting.has_module? 'editor.code' %>
-    <span class="dropdown" id="dropdown-insert-codes">
-      <a href="#editor-toolbar-insert-code" class="nav-link dropdown-toggle" data-toggle="dropdown" title="<%= t("common.editor_insert_codes") %>"><%= icon_tag("code") %></a>
-      <div class="dropdown-menu insert-codes" aria-labelledby="dropdown-insert-codes">
-        <%= insert_code_menu_items_tag %>
-      </div>
-    </span>
+      <span class="dropdown" id="dropdown-insert-codes">
+        <a href="#editor-toolbar-insert-code" class="nav-link dropdown-toggle" data-bs-toggle ="dropdown" title="<%= t("common.editor_insert_codes") %>"><%= icon_tag("code") %></a>
+        <div class="dropdown-menu insert-codes">
+          <%= insert_code_menu_items_tag %>
+        </div>
+      </span>
     <% end %>
     <a id="editor-upload-image" href="#" title="<%= t("common.editor_add_image") %>" class="nav-link upload-button">
       <i class="upload-icon fa fa-image"></i>

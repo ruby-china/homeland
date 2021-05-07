@@ -1,7 +1,7 @@
 <% title_tag t("teams.edit_team") %>
 <%= render '/teams/header' %>
 <div class="card">
-  <div class="card-body">
+  <div class="card-body col-md-8 mx-auto">
     <%= form_for @team do |f| %>
       <%= render "shared/error_messages", target: @team %>
       <div class="form-group">
@@ -40,7 +40,7 @@
         <div class="form-group">
           <%= f.label :github %>
           <div class="input-group">
-            <span class="input-group-prepend"><span class="input-group-text">https://github.com/</span></span>
+            <span class="input-group-text">https://github.com/</span>
             <%= f.text_field :github, class: "form-control" %>
           </div>
         </div>
@@ -48,7 +48,7 @@
       <div class="form-group">
         <%= f.label :twitter %>
         <div class="input-group">
-          <span class="input-group-prepend"><span class="input-group-text">https://twitter.com/</span></span>
+          <span class="input-group-text">https://twitter.com/</span>
           <%= f.text_field :twitter, class: "form-control" %>
         </div>
       </div>
@@ -61,7 +61,7 @@
         <%= f.text_area :bio, class: "form-control", rows: 3 %>
       </div>
       <div class="form-actions">
-        <%= f.submit t("common.save"), class: "btn btn-primary btn-block", 'data-disable-with' => t("common.saving") %>
+        <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving") %>
       </div>
     <% end %>
   </div>

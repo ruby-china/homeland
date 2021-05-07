@@ -88,8 +88,13 @@ pre {
   margin-bottom: 15px;
 
   .form-inline {
-    .form-group {
-      margin-right: 10px;
+    @extend .d-grid;
+    @extend .gap-2;
+    @extend .d-sm-block;
+    @extend .d-md-flex;
+
+    .form-control {
+      width: auto;
     }
   }
 }
@@ -115,7 +120,7 @@ table {
     .badge {
       color: var(--gray);
       border-radius: 12px;
-      border: 1px solid var(--btn-default-border-color);
+      border: 1px solid var(--btn-secondary-border-color);
       font-size: 12px;
       font-weight: normal;
     }

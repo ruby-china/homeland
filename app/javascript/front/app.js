@@ -40,9 +40,6 @@ const AppView = Backbone.View.extend({
 
   initComponents() {
     $("abbr.timeago").timeago();
-    $(".alert").alert();
-    $(".dropdown-toggle").dropdown();
-    $('[data-toggle="tooltip"]').tooltip();
 
     // Bind Ctrl+Enter for submit
     $(".cell_comments_new textarea").unbind("keydown");

@@ -38,6 +38,6 @@ class LikesHelperTest < ActionView::TestCase
 
   test "should allow addition class" do
     sign_in user
-    assert_equal %(<a title="Unlike" data-count="0" data-state="deactive" data-type="Reply" data-id="#{reply.id}" class="likeable deactive btn btn-default" href="#"><i class='icon fa fa-heart'></i> <span></span></a>), likeable_tag(reply, class: "btn btn-default")
+    assert_equal %(<a title="Unlike" data-count="0" data-state="deactive" data-type="Reply" data-id="#{reply.id}" class="likeable deactive btn btn-secondary" href="#"><i class='icon fa fa-heart'></i> <span></span></a>), likeable_tag(reply, class: "btn btn-secondary")
   end
 end

@@ -6,17 +6,16 @@
         <div class="topic-link"><%= topic_title_tag(@topic) %></div>
       </div>
     </div>
-
     <%= form_for [@topic, @reply], remote: true, html: { tb: 'edit-reply' }  do |f| %>
       <%= render "shared/error_messages", target: @reply %>
       <%= render "/shared/editor_toolbar" %>
       <div class="form-group">
         <%= f.text_area :body, class: "topic-editor form-control", rows: 10 %>
       </div>
-      <div class="form-actions">
-        <%= f.submit t("common.save"), class: "btn btn-primary col-xs-2 hide-ios", 'data-disable-with' => t("common.saving") %>
+      <div class="form-actions justify-content-sm-between">
+        <%= f.submit t("common.save"), class: "btn btn-primary hide-ios", 'data-disable-with' => t("common.saving") %>
         <% if can? :destroy, @reply %>
-        <%= link_to t("common.delete"),[@topic,@reply], class: "btn btn-danger", method: :delete, data: { confirm: t("common.confirm_delete") } %>
+          <%= link_to t("common.delete"),[@topic,@reply], class: "btn btn-danger", method: :delete, data: { confirm: t("common.confirm_delete") } %>
         <% end %>
       </div>
     <% end %>

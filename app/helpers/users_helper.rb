@@ -72,7 +72,7 @@ module UsersHelper
     return "" if node.blank?
 
     blocked = current_user.block_node?(node)
-    class_names = "btn btn-default button-block-node"
+    class_names = "btn btn-secondary button-block-node"
 
     if blocked
       link_to icon_tag("eye-slash", label: t("common.unblock_node")), "#", "data-id" => node.id, :class => "#{class_names} active"
@@ -87,7 +87,7 @@ module UsersHelper
     return "" if current_user.id == user.id
 
     blocked = current_user.block_user?(user)
-    class_names = "button-block-user btn btn-default btn-block"
+    class_names = "button-block-user btn btn-secondary btn-block"
 
     if blocked
       link_to icon_tag("eye-slash", label: t("common.unblock_user")), "#", "data-id" => user.login, :class => "#{class_names} active"

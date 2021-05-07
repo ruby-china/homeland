@@ -3,12 +3,12 @@
 <% end %>
 <div class="toolbar">
   <div class="btn-group">
-    <a href="/admin/site_configs" class="btn btn-default"><i class="fa fa-cogs"></i> <%= t("admin.site_configs.settings") %></a>
-    <a href="/admin/plugins" class="btn btn-default"><i class="fa fa-plug"></i> <%= t("admin.menu.plugins") %></a>
-    <a href="/admin/applications" class="btn btn-default"><i class="fa fa-cubes"></i> <%= t("admin.menu.applications") %></a>
-    <a href="/sidekiq" class="btn btn-default" target="_blank"><i class="fa fa-tasks"></i> <%= t("admin.menu.background_jobs") %></a>
-    <a href="/pghero" class="btn btn-default" target="_blank"><i class="fa fa-database"></i> <%= t("admin.menu.database") %></a>
-    <a href="/exception-track" class="btn btn-default" target="_blank"><i class="fa fa-warning"></i> <%= t("admin.menu.exception_logs") %>...</a>
+    <a href="/admin/site_configs" class="btn btn-secondary"><i class="fa fa-cogs"></i> <%= t("admin.site_configs.settings") %></a>
+    <a href="/admin/plugins" class="btn btn-secondary"><i class="fa fa-plug"></i> <%= t("admin.menu.plugins") %></a>
+    <a href="/admin/applications" class="btn btn-secondary"><i class="fa fa-cubes"></i> <%= t("admin.menu.applications") %></a>
+    <a href="/sidekiq" class="btn btn-secondary" target="_blank"><i class="fa fa-tasks"></i> <%= t("admin.menu.background_jobs") %></a>
+    <a href="/pghero" class="btn btn-secondary" target="_blank"><i class="fa fa-database"></i> <%= t("admin.menu.database") %></a>
+    <a href="/exception-track" class="btn btn-secondary" target="_blank"><i class="fa fa-warning"></i> <%= t("admin.menu.exception_logs") %>...</a>
   </div>
 </div>
 <div class="alert alert-info">
@@ -16,15 +16,15 @@
   <%= link_to icon_tag("power-off", label: t("admin.reboot")), reboot_admin_dashboards_path, data: { method: :post, confirm: "你确定要重启 Homeland 吗？", disable_with: "请求中..." }, class: "text-danger pull-right" %>
 </div>
 <% if Setting.legecy_envs.any? %>
-<div class="alert alert-warning">
-  <h4 class="alert-heading">Deprecated configuration detected</h4>
-  <ul>
-    <% Setting.legecy_envs.each do |key| %>
-    <li>Deprecated <code><%= key %></code> use <code><%= Setting.legecy_env_instead(key) %></code> instead.</li>
-    <% end %>
-  </ul>
-  <div>More about the configuration: <a href="https://homeland.ruby-china.org/docs/configuration/config-file/" target="_blank">Homeland Document</a></div>
-</div>
+  <div class="alert alert-warning">
+    <h4 class="alert-heading">Deprecated configuration detected</h4>
+    <ul>
+      <% Setting.legecy_envs.each do |key| %>
+        <li>Deprecated <code><%= key %></code> use <code><%= Setting.legecy_env_instead(key) %></code> instead.</li>
+      <% end %>
+    </ul>
+    <div>More about the configuration: <a href="https://homeland.ruby-china.org/docs/configuration/config-file/" target="_blank">Homeland Document</a></div>
+  </div>
 <% end %>
 <div class="clearfix">
   <div class="flex aic jcsb">
@@ -98,7 +98,7 @@
       el.find(".total-week").text('+' + data.week_count);
       el.find(".total-month").text('+' + data.month_count);
     }
-
+    
     var models = ['user', 'topic', 'reply', 'notification', 'photo', 'comment'];
     for (var i = 0; i < models.length; i ++) {
       var model = models[i];

@@ -85,7 +85,7 @@ class UsersHelperTest < ActionView::TestCase
     user.update_reward_fields(alipay: "xxx")
     html = reward_user_tag(user)
     assert_equal %(<a class="btn btn-success" data-remote="true" href="/#{user.login}/reward"><i class='icon fa fa-qrcode'></i> <span>Reward</span></a>), html
-    html = reward_user_tag(user, class: "btn btn-default")
-    assert_equal %(<a class="btn btn-default" data-remote="true" href="/#{user.login}/reward"><i class='icon fa fa-qrcode'></i> <span>Reward</span></a>), html
+    html = reward_user_tag(user, class: "btn btn-secondary")
+    assert_equal %(<a class="btn btn-secondary" data-remote="true" href="/#{user.login}/reward"><i class='icon fa fa-qrcode'></i> <span>Reward</span></a>), html
   end
 end

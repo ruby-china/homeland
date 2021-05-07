@@ -189,6 +189,9 @@ body {
     &:active {
       background: var(--navbar-background-color);
     }
+    &:focus {
+      box-shadow: none;
+    }
 
     .navbar-toggler-icon {
       color: var(--navbar-text-color);

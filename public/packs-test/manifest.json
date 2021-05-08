@@ -1,7 +1,7 @@
 {
   "admin.css": "/packs-test/css/admin-5f3ac295.css",
   "admin.js": "/packs-test/js/admin-4560e590dd1d9a147365.js",
-  "application.js": "/packs-test/js/application-a658e6482b97d504c926.js",
+  "application.js": "/packs-test/js/application-2a9780fcd5ba2cf16e6e.js",
   "entrypoints": {
     "admin": {
       "css": [
@@ -14,7 +14,7 @@
     "application": {
       "js": [
         "/packs-test/js/vendors-70f6db0d01db25a081c8.chunk.js",
-        "/packs-test/js/application-a658e6482b97d504c926.js"
+        "/packs-test/js/application-2a9780fcd5ba2cf16e6e.js"
       ]
     },
     "front": {

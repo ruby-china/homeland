@@ -13,21 +13,6 @@ module ApplicationHelper
     sanitize(html, scrubber: Homeland::Sanitize::TOPIC_SCRUBBER)
   end
 
-  def notice_message
-    flash_messages = []
-
-    close_html = %(<button name="button" type="button" class="close" data-bs-dismiss ="alert"><span aria-hidden="true">&times;</span></button>)
-
-    flash.each do |type, message|
-      type = :success if type.to_sym == :notice
-      type = :danger if type.to_sym == :alert
-      text = content_tag(:div, raw(close_html) + message, class: "alert alert-#{type}")
-      flash_messages << text if message
-    end
-
-    flash_messages.join("\n").html_safe
-  end
-
   # used in Plugin
   def admin?(user = nil)
     user ||= current_user

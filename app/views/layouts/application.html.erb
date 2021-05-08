@@ -64,7 +64,7 @@
   </div>
   <%= yield :sub_navbar %>
   <div id="main" class="main-container container">
-    <%= notice_message %>
+    <%= render AlertComponent.new %>
     <%= content_for?(:main) ? yield(:main) : yield %>
   </div>
   <% if !mobile? %>

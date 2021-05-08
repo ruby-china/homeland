@@ -40,10 +40,10 @@
         <div class="card-body">
           <% if Setting.require_restart == true %>
             <div class="alert alert-warning">
-              System settings have been updated, need to restart the application to take effect <%= link_to icon_tag("power-off", label: "Reboot now"), reboot_admin_dashboards_path, data: { method: :post, confirm: "Are you sure to reboot Homeland?", disable_with: "Rebooting..." }, class: "text-danger pull-right" %>
+              System settings have been updated, need to restart the application to take effect <%= link_to icon_tag("power-off", label: "Reboot now"), main_app.reboot_admin_dashboards_path, data: { method: :post, confirm: "Are you sure to reboot Homeland?", disable_with: "Rebooting..." }, class: "text-danger pull-right" %>
             </div>
           <% end %>
-          <%= notice_message %>
+          <%= render AlertComponent.new %>
           <%= yield %>
         </div>
       </div>

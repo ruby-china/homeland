@@ -69,6 +69,7 @@ module Homeland
     end
 
     def boot
+      Setting.require_restart = "0"
       # puts "=> Booting Homeland" unless Rails.env.test?
       Homeland::Plugin.boot
       # puts "=> Plugins: #{Homeland.plugins.collect(&:name).join(", ")}" unless Rails.env.test?
@@ -77,7 +78,6 @@ module Homeland
     end
 
     def reboot
-      Setting.require_restart = "0"
       FileUtils.touch(Rails.root.join("tmp/restart.txt"))
     end
 
@@ -93,5 +93,3 @@ module Homeland
     end
   end
 end
-
-Homeland.boot

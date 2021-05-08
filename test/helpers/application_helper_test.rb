@@ -16,24 +16,6 @@ class ApplicationHelperTest < ActionView::TestCase
     assert_equal "<p>Hello world alert()</p>", sanitize_markdown("<p>Hello world <script>alert()</script></p>")
   end
 
-  test "formats the flash messages" do
-    assert_equal "", notice_message
-    assert_equal true, notice_message.html_safe?
-
-    close_html = %(<button name="button" type="button" class="close" data-bs-dismiss ="alert"><span aria-hidden="true">&times;</span></button>)
-
-    controller.flash[:notice] = "hello"
-    assert_equal %(<div class="alert alert-success">#{close_html}hello</div>), notice_message
-    controller.flash[:notice] = nil
-
-    controller.flash[:warning] = "hello"
-    assert_equal %(<div class="alert alert-warning">#{close_html}hello</div>), notice_message
-    controller.flash[:warning] = nil
-
-    controller.flash[:alert] = "hello"
-    assert_equal %(<div class="alert alert-danger">#{close_html}hello</div>), notice_message
-  end
-
   test "admin?" do
     user = create :user
     admin = create :admin

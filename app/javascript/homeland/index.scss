@@ -116,9 +116,10 @@ textarea,
   box-shadow: 0 0 0;
   padding: 0.65rem 1.25rem;
   border: 2px solid transparent !important;
-  .close {
+  .btn-close {
     color: var(--primary);
     opacity: 0.7;
+    padding: 1em;
   }
 }
 .alert-block {

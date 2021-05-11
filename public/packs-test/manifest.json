@@ -1,11 +1,12 @@
 {
-  "admin.css": "/packs-test/css/admin-5f3ac295.css",
+  "admin.css": "/packs-test/css/admin-0691a026.css",
   "admin.js": "/packs-test/js/admin-4560e590dd1d9a147365.js",
-  "application.js": "/packs-test/js/application-2a9780fcd5ba2cf16e6e.js",
+  "application.js": "/packs-test/js/application-e42e7ee58ca198cc51e9.js",
+  "bootstrap.js": "/packs-test/js/bootstrap-c4550d9028dda001313f.js",
   "entrypoints": {
     "admin": {
       "css": [
-        "/packs-test/css/admin-5f3ac295.css"
+        "/packs-test/css/admin-0691a026.css"
       ],
       "js": [
         "/packs-test/js/admin-4560e590dd1d9a147365.js"
@@ -14,12 +15,18 @@
     "application": {
       "js": [
         "/packs-test/js/vendors-70f6db0d01db25a081c8.chunk.js",
-        "/packs-test/js/application-2a9780fcd5ba2cf16e6e.js"
+        "/packs-test/js/application-e42e7ee58ca198cc51e9.js"
+      ]
+    },
+    "bootstrap": {
+      "js": [
+        "/packs-test/js/vendors-70f6db0d01db25a081c8.chunk.js",
+        "/packs-test/js/bootstrap-c4550d9028dda001313f.js"
       ]
     },
     "front": {
       "css": [
-        "/packs-test/css/front-f54f4ed7.css"
+        "/packs-test/css/front-8205a27d.css"
       ],
       "js": [
         "/packs-test/js/front-d92d07559dc663e62049.js"
@@ -34,7 +41,7 @@
       ]
     }
   },
-  "front.css": "/packs-test/css/front-f54f4ed7.css",
+  "front.css": "/packs-test/css/front-8205a27d.css",
   "front.js": "/packs-test/js/front-d92d07559dc663e62049.js",
   "media/webfonts/fa-brands-400.eot": "/packs-test/media/webfonts/fa-brands-400-0fea2496.eot",
   "media/webfonts/fa-brands-400.svg": "/packs-test/media/webfonts/fa-brands-400-e33e2cf6.svg",

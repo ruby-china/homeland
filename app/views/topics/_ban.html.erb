@@ -1,13 +1,13 @@
-<div class="modal" id="ban-modal">
+<div class="modal" id="ban-modal" data-bs-backdrop="static">
   <div class="modal-dialog">
     <div class="modal-content">
       <%= form_for('', url: action_topic_path(topic, type: "ban"), method: "POST", remote: true) do |f| %>
         <div class="modal-header">
           <div class="modal-title"><%= t("topics.ban_title") %></div>
-          <button type="button" class="close" data-bs-dismiss ="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
-          <div class="form-group">
+          <div class="mb-3">
             <select class="form-control" onchange="$('#ban-modal textarea').val($(this).val())" name="reason">
               <option value="" selected><%= t("topics.ban_directly") %></option>
               <% Setting.ban_reasons.each do |str| %>
@@ -15,7 +15,7 @@
               <% end %>
             </select>
           </div>
-          <div class="form-group">
+          <div>
             <label><%= t("topics.ban_with_reason") %></label>
             <textarea class="form-control" name="reason_text" rows="4"></textarea>
           </div>

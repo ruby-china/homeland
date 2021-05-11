@@ -41,6 +41,7 @@
     <%= yield :javascripts %>
   </head>
   <body class="page-<%= controller_name %><%= ' infinite-scroll' if turbolinks_app? %>" data-controller-name="<%= controller_name %>">
+    <%= javascript_pack_tag "bootstrap", 'data-turbolinks-eval': "false" %>
     <div class="header navbar navbar-expand-md">
       <div class="container">
         <div class="navbar-header" data-turbolinks-permanent>

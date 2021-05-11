@@ -3,7 +3,6 @@ window.jQuery = jQuery;
 window.$ = jQuery;
 window.Backbone = require("backbone");
 window._ = require("underscore");
-window.bootstrap = require("bootstrap");
 
 import Turbolinks from "turbolinks";
 import TubrolinksPrefetch from "turbolinks-prefetch";
@@ -32,7 +31,6 @@ require("google_analytics");
 require("jquery.infinitescroll.min");
 require("jquery.mobile-events");
 require("vendor/social-share-button");
-require("bootstrap-select");
 
 import { createConsumer } from "@rails/actioncable";
 
@@ -177,16 +175,16 @@ window.App = {
       });
     return true;
   },
-};
 
-document.addEventListener("turbolinks:load", () => {
-  $("select.bootstrap-select").selectpicker({
-    size: 10,
-    style: "btn-secondary",
-  });
-});
-document.addEventListener("turbolinks:before-cache", () => {
-  $("select.bootstrap-select")
-    .selectpicker("destroy")
-    .addClass("bootstrap-select");
-});
+  modal(html) {
+    let modalWrap = document.querySelector(".root-modal-wrap");
+    if (!modalWrap) {
+      modalWrap = document.createElement("div");
+      modalWrap.className = "root-modal-wrap";
+      document.body.append(modalWrap);
+    }
+    modalWrap.innerHTML = html;
+    const modal = new bootstrap.Modal(modalWrap.firstChild);
+    modal.show();
+  },
+};

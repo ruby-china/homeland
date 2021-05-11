@@ -102,7 +102,6 @@ const AppView = Backbone.View.extend({
     if (App.mobile !== false) {
       return;
     }
-    $("a[rel=twipsy]").tooltip();
 
     // CommentAble @ 回复功能
     return App.mentionable(".cell_comments_new textarea");

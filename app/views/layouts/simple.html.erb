@@ -13,6 +13,7 @@
     <%= raw Setting.custom_head_html %>
   </head>
   <body data-controller-name="<%= controller_name %>">
+    <%= javascript_pack_tag "bootstrap", 'data-turbolinks-eval': "false" %>
     <div class="header">
       <div class="header navbar navbar-expand flex-md-row bd-navbar">
         <div class="container d-sm-flex flex-wrap">

@@ -1,8 +1,15 @@
 const { environment } = require("@rails/webpacker");
 const erb = require("./loaders/erb");
+const webpack = require("webpack");
 
 const extendConfig = {
   devtool: false,
+  plugins: [
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery",
+    }),
+  ],
   optimization: {
     splitChunks: {
       cacheGroups: {

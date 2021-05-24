@@ -188,3 +188,21 @@ window.App = {
     modal.show();
   },
 };
+
+/**
+ * iOS App used $('form[tb="edit-topic"]').submit()
+ * https://github.com/ruby-china/ruby-china-ios/blob/dbebf9f78320f09bed169141c70b59251dd30de3/ruby-china-ios/Controllers/NewTopicViewController.swift#L12
+ *
+ * This for back forward compatibility with jquery_ujs form submit.
+ */
+document.addEventListener("turbolinks:load", () => {
+  $(document).on("submit.rails", "form", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    // call rails-ujs form submit.
+    Rails.fire($(this)[0], "submit");
+
+    return false;
+  });
+});

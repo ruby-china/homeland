@@ -64,9 +64,9 @@ class TopicsController < ApplicationController
 
   def new
     @topic = Topic.new(user_id: current_user.id)
-    unless params[:node].blank?
-      @topic.node_id = params[:node]
-      @node = Node.find_by_id(params[:node])
+    unless params[:node_id].blank?
+      @topic.node_id = params[:node_id]
+      @node = Node.find_by_id(params[:node_id])
       render_404 if @node.blank?
     end
   end

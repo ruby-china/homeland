@@ -117,10 +117,10 @@ describe TopicsController do
         get new_topic_path
         assert_equal 200, response.status
       end
-
+      
       it "should render 404 for invalid node id" do
         sign_in user
-        get new_topic_path, params: {node: (node.id + 1)}
+        get new_topic_path, params: {node_id: (node.id + 1)}
         refute_equal 200, response.status
       end
 

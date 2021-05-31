@@ -61,7 +61,7 @@ window.App = {
   // 警告信息显示, to 显示在那个 DOM 前 (可以用 css selector)
   alert(msg, to) {
     $(".alert").remove();
-    const html = `<div class='alert alert-warning'><button class='close' data-bs-dismiss ='alert'><span aria-hidden='true'>&times;</span></button>${msg}</div>`;
+    const html = `<div class='alert alert-warning'><button type="button" class="btn-close" data-bs-dismiss="alert"></button>${msg}</div>`;
     if (to) {
       return $(to).before(html);
     } else {
@@ -72,7 +72,7 @@ window.App = {
   // 成功信息显示, to 显示在那个 DOM 前 (可以用 css selector)
   notice(msg, to) {
     $(".alert").remove();
-    const html = `<div class='alert alert-success'><button class='close' data-bs-dismiss ='alert'><span aria-hidden='true'>&times;</span></button>${msg}</div>`;
+    const html = `<div class='alert alert-success'><button type="button" class="btn-close" data-bs-dismiss="alert"></button>${msg}</div>`;
     if (to) {
       return $(to).before(html);
     } else {

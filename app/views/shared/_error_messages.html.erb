@@ -2,7 +2,7 @@
   <div class="alert alert-block alert-danger">
     <div class="d-flex jcsb">
       <strong><%= t("common.error_message_title", count: target.errors.count) %></strong>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
     <ul>
       <% target.errors.full_messages.each do |msg| %>

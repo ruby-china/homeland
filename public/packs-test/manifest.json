@@ -1,7 +1,7 @@
 {
   "admin.css": "/packs-test/css/admin-79637719.css",
   "admin.js": "/packs-test/js/admin-4560e590dd1d9a147365.js",
-  "application.js": "/packs-test/js/application-1f77fda9cbe2365a8e3b.js",
+  "application.js": "/packs-test/js/application-f7a57ca63bbf9057ef1b.js",
   "bootstrap.js": "/packs-test/js/bootstrap-004dc218fb3ad5c5670e.js",
   "entrypoints": {
     "admin": {
@@ -14,13 +14,13 @@
     },
     "application": {
       "js": [
-        "/packs-test/js/vendors-82111a27fc1adae9b922.chunk.js",
-        "/packs-test/js/application-1f77fda9cbe2365a8e3b.js"
+        "/packs-test/js/vendors-feef429975a3f789dd59.chunk.js",
+        "/packs-test/js/application-f7a57ca63bbf9057ef1b.js"
       ]
     },
     "bootstrap": {
       "js": [
-        "/packs-test/js/vendors-82111a27fc1adae9b922.chunk.js",
+        "/packs-test/js/vendors-feef429975a3f789dd59.chunk.js",
         "/packs-test/js/bootstrap-004dc218fb3ad5c5670e.js"
       ]
     },
@@ -55,5 +55,5 @@
   "media/webfonts/fa-solid-900.woff2": "/packs-test/media/webfonts/fa-solid-900-3ceb50e7.woff2",
   "turbolinks-app.css": "/packs-test/css/turbolinks-app-c9749b45.css",
   "turbolinks-app.js": "/packs-test/js/turbolinks-app-59e4c994eb7334914c46.js",
-  "vendors.js": "/packs-test/js/vendors-82111a27fc1adae9b922.chunk.js"
+  "vendors.js": "/packs-test/js/vendors-feef429975a3f789dd59.chunk.js"
 }

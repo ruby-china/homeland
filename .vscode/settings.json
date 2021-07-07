@@ -10,6 +10,9 @@
   "[scss]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
   "[css]": {
     "editor.defaultFormatter": "aeschli.vscode-css-formatter"
   },
@@ -19,6 +22,9 @@
   "[javascriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "[yaml]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
@@ -26,5 +32,8 @@
     "standard": {
       "useBundler": true
     }
-  }
+  },
+  "prettier.singleQuote": false,
+  "autocorrect.enable": true,
+  "autocorrect.formatOnSave": true
 }

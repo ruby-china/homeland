@@ -722,6 +722,10 @@ kbd {
   border: 0;
   background: var(--card-background-color);
 
+  .card {
+    border: 1px solid var(--card-inset-border-color);
+  }
+
   .card-header {
     padding: 15px 25px 0 25px;
     border: 0px;
@@ -765,8 +769,16 @@ kbd {
     padding: 25px;
   }
 
-  .list-group-item {
-    padding: 15px 25px;
+  .list-group {
+    padding-top: 15px;
+    border: 0;
+
+    .list-group-item {
+      padding: 15px 25px;
+      border-radius: 0;
+      border-left: 0;
+      border-right: 0;
+    }
   }
 }
 

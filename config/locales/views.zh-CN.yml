@@ -130,6 +130,15 @@
     recent_node_topics_description: "%{name} 社区 %{node_name} 节点最新发帖."
     recent_node_topics_title: "%{name} 社区 %{node_name} 节点"
   setting:
+    scope:
+      basic: 基本设置
+      uploader: 文件上传
+      mailer: 邮件
+      auth: 用户认证
+      limits: 限制规则
+      appearance: 用户界面配置
+      captcha: 验证码
+      other: 其他
     app_name: "网站名称"
     newbie_notices: "新手提示信息（支持 HTML）"
     admin_emails: "管理员 Email，在此名单的将有管理员权限（一行一个）"

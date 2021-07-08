@@ -1,9 +1,17 @@
 <% content_for :sitemap do %>
   <span class="current"><%= t("admin.site_configs.settings") %></span>
 <% end %>
-<h1><%= t("admin.site_configs.settings") %></h1>
-<ul class="list-group">
-  <% Setting.editable_keys.each do |key| %>
+<div class="btn-group mb-3">
+  <% @setting_groups.each_key do |name| %>
+    <a href="<%= admin_site_configs_path(scope: name) %>" class="btn btn-secondary<% " active" if params[:scope] == name.to_s %>"><%= t("setting.scope.#{name}") %></a>
+  <% end %>
+</div>
+<div class="card">
+  <div class="card-header"><%= t("setting.scope.#{@scope}") %></div>
+  <ul class="list-group">
+    <% @settings.each do |field|
+      key = field[:key]
+    %>
     <% next if !Setting.captcha_enable? && key.in?(%w[use_recaptcha recaptcha_key recaptcha_secret]) %>
     <% next if !Setting.use_recaptcha? && key.in?(%w[recaptcha_key recaptcha_secret]) %>
     <% if !Setting::SYSTEM_KEYS.include?(key) %>
@@ -20,4 +28,4 @@
       </li>
     <% end %>
   <% end %>
-</ul>
+</div>

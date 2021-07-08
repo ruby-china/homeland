@@ -129,6 +129,15 @@
     recent_node_topics_description: "Recent Topic in %{node_name} of %{name} Forum."
     recent_node_topics_title: "%{node_name} node of %{name} Forum"
   setting:
+    scope:
+      basic: General
+      uploader: Uploader
+      mailer: Mailer
+      auth: Authorization
+      limits: Rules / Limits
+      appearance: Appearance
+      captcha: Captcha
+      other: Other
     app_name: "Application name"
     newbie_notices: "Notifce for newbie (HTML)"
     admin_emails: "Admin emails, in this list email who will get the admin role."

@@ -14,6 +14,8 @@
     %>
     <% if @site_config.var == "timezone" %>
       <%= f.select :value, ActiveSupport::TimeZone.all.collect(&:name), { value: value }, { class: 'form-control' } %>
+    <% elsif @site_config.var == "mailer_provider" %>
+      <%= f.select :value, [["LetterOpener", "letter_opener"], ["SMTP", "smtp"],["PostMark", "postmark"]], { value: value }, { class: 'form-control' } %>
     <% else %>
       <% if @site_config.type == :boolean %>
         <label class="form-check">

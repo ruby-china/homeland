@@ -177,6 +177,9 @@
     wechat_api_key: "Wechat API key (Keep empty to disable)"
     wechat_api_secret: "Wechat API secret key"
     imageproxy_url: 'Use <a href="https://www.github.com/willnorris/imageproxy">ImageProxy</a> as outside image proxy. For example: <code>https://imageproxy.your-host.com/1000x/</code>, leave empty to disable.'
+    mailer_provider: "Mail delivery method"
+    mailer_sender: "Mail sender, for example: no-reply@your-host.com"
+    mailer_options: 'Mail options for differences delivery method, see: <a href="https://homeland.ruby-china.org/docs/configuration/mailer/">Mailer Confguration</a>'
   pagination:
     next: "Next"
     prev: "Prev"

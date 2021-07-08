@@ -28,6 +28,10 @@
   "[yaml]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
+  "[ruby]": {
+    "editor.defaultFormatter": "rebornix.ruby"
+  },
+  "ruby.format": "standard",
   "ruby.lint": {
     "standard": {
       "useBundler": true

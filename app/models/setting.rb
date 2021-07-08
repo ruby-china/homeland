@@ -75,6 +75,10 @@ class Setting < RailsSettings::Base
     github_api_secret
     wechat_api_key
     wechat_api_secret
+    imageproxy_url
+    mailer_provider
+    mailer_sender
+    mailer_options
   ]
 
   # = System
@@ -112,9 +116,9 @@ class Setting < RailsSettings::Base
   field :imageproxy_url
 
   # = Mailer
-  field :mailer_provider, default: (ENV["mailer_provider"] || "smtp"), readonly: true
-  field :mailer_sender, default: (ENV["mailer_sender"] || "no-reply@localhost"), readonly: true
-  field :mailer_options, type: :hash, readonly: true, default: {
+  field :mailer_provider, default: (ENV["mailer_provider"] || "smtp")
+  field :mailer_sender, default: (ENV["mailer_sender"] || "no-reply@localhost")
+  field :mailer_options, type: :hash, default: {
     api_key: ENV["mailer_options_api_key"],
     address: ENV["mailer_options_address"],
     port: ENV["mailer_options_port"],

@@ -4,11 +4,7 @@
   </div>
   <div class="card-body">
     <%= form_for(application, url: doorkeeper_submit_path(application), html: { role: 'form'}) do |f| %>
-      <% if application.errors.any? %>
-        <div class="alert alert-danger" data-alert>
-          <p><%= t('doorkeeper.applications.form.error') %></p>
-        </div>
-      <% end %>
+      <%= render "/shared/error_messages", target: application %>
       <%= content_tag :div, class: "form-group#{' has-error' if application.errors[:name].present?}" do %>
         <%= f.label :name %>
         <%= f.text_field :name, class: 'form-control' %>
@@ -31,9 +27,9 @@
         <span class="form-text">
           <%= t('doorkeeper.applications.help.redirect_uri') %>
         </span>
-        <% if Doorkeeper.configuration.native_redirect_uri %>
-          <span class="form-text">
-            <%= raw t('doorkeeper.applications.help.native_redirect_uri', native_redirect_uri: "<code>#{ Doorkeeper.configuration.native_redirect_uri }</code>") %>
+        <% if Doorkeeper.configuration.allow_blank_redirect_uri?(application) %>
+          <span class="form-text text-secondary">
+            <%= t('doorkeeper.applications.help.blank_redirect_uri') %>
           </span>
         <% end %>
       <% end %>

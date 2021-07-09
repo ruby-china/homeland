@@ -123,9 +123,13 @@ textarea,
   }
 }
 .alert-block {
+  .alert-block-title {
+    font-weight: bold;
+    font-size: 18px;
+  }
   ul {
+    margin: 0;
     margin-bottom: 0;
-    margin-top: 1.25em;
   }
 }
 .alert-danger {
@@ -477,6 +481,12 @@ body {
   color: #ee4343;
 }
 
+.form-text {
+  display: block;
+  margin-top: 5px;
+  font-size: 14px;
+}
+
 .form-control {
   background-color: var(--form-control-background-color);
   border-color: var(--form-control-border-color);
@@ -711,7 +721,7 @@ kbd {
 .table > tfoot > tr > th,
 .table > thead > tr > td,
 .table > thead > tr > th {
-  padding: 4px 5px;
+  padding: 0.65rem 1rem;
 }
 
 .card {

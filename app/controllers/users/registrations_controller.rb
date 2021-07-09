@@ -47,4 +47,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def after_inactive_sign_up_path_for(resource_or_scope)
     new_user_session_path
   end
+
+  # For Ruby China iOS Edit profile button, visit /account/edit
+  def edit
+    redirect_to setting_path
+  end
 end

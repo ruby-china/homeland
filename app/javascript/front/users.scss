@@ -400,8 +400,10 @@ table.node-topics {
     color: var(--text-color2);
     font-size: 12px;
     .tagline {
-      width: 100%;
+      width: 200px;
       white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .item {
       margin-top: 5px;

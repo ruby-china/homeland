@@ -13,7 +13,7 @@
 - **加粗** - `**加粗**`
 - _倾斜_ - `*倾斜*`
 - ~~删除线~~ - `~~删除线~~`
-- `Code 标记` - `\`Code 标记\``
+- `Code 标记` - `` `Code 标记` ``
 - [超级链接](http://github.com) - `[超级链接](http://github.com)`
 - [username@gmail.com](mailto:username@gmail.com) - `[username@gmail.com](mailto:username@gmail.com)`
 

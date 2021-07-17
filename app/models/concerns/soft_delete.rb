@@ -6,6 +6,8 @@ module SoftDelete
   included do
     default_scope -> { where(deleted_at: nil) }
 
+    scope :with_deleted, -> { unscope(where: :deleted_at) }
+
     alias_method :destroy!, :destroy
   end
 

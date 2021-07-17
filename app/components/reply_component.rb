@@ -21,7 +21,7 @@ class ReplyComponent < ApplicationComponent
   end
 
   def floor
-    @floor ||= @reply_counter + 1
+    @floor ||= @reply_counter
   end
 
   def class_names

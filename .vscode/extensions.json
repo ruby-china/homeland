@@ -1,0 +1,23 @@
+{
+  "recommendations": [
+    "aeschli.vscode-css-formatter",
+    "ahmadalli.vscode-nginx-conf",
+    "aliariff.vscode-erb-beautify",
+    "csstools.postcss",
+    "dbaeumer.vscode-eslint",
+    "dsznajder.es7-react-js-snippets",
+    "esbenp.prettier-vscode",
+    "firsttris.vscode-jest-runner",
+    "hbenl.vscode-test-explorer",
+    "huacnlee.auto-correct",
+    "mgmcdermott.vscode-language-babel",
+    "ms-azuretools.vscode-docker",
+    "ms-vscode.test-adapter-converter",
+    "NuclleaR.vscode-extension-auto-import",
+    "rebornix.ruby",
+    "redhat.vscode-yaml",
+    "sibiraj-s.vscode-scss-formatter",
+    "william-voyek.vscode-nginx",
+    "wingrunr21.vscode-ruby"
+  ]
+}

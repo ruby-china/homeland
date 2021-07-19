@@ -1,0 +1,4 @@
+*.md
+lib/homeland/pipeline/markdown_filter.rb
+lib/homeland/pipeline/floor_filter.rb
+test/**/*

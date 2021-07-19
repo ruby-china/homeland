@@ -194,7 +194,7 @@ Rails.application.routes.draw do
 
   mount Notifications::Engine, at: "notifications"
 
-  # WARRING! 请保持 User 的 routes 在所有路由的最后，以便于可以让用户名在根目录下面使用，而又不影响到其他的 routes
+  # WARRING！请保持 User 的 routes 在所有路由的最后，以便于可以让用户名在根目录下面使用，而又不影响到其他的 routes
   # 比如 http://localhost:3000/huacnlee
   get "users/city/:id", to: "users#city", as: "location_users"
   get "users", to: "users#index", as: "users"

@@ -2,6 +2,13 @@ name: Test
 
 on: [push]
 jobs:
+  lint:
+    name: AutoCorrect Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: huacnlee.autocorrect
+        uses: huacnlee/autocorrect-action@0.0.3
   test:
     name: CI Test
     runs-on: ubuntu-latest
@@ -30,23 +37,24 @@ jobs:
       REDIS_URL: redis://redis:6379/1
       DATABASE_URL: postgres://admin:123456@postgres:5432/homeland-test
     steps:
-    - uses: actions/checkout@v2
-    - name: RubyGems cache
-      uses: actions/cache@v1
-      with:
-        path: vendor/bundle
-        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-gems-
-    - name: Install dependencies
-      run: |
-        bundle config path vendor/bundle
-        bundle install
-    - name: Before tests
-      run: |
-        sed -i "s/gems.ruby-china.org/rubygems.org/g" Gemfile.lock
-        bundle exec rails db:migrate 
-    - name: Run Standard
-      run: bundle exec standardrb
-    - name: Run tests
-      run: bundle exec rails test
+      - uses: actions/checkout@v2
+      - uses: huacnlee/autocorrect-action@main
+      - name: RubyGems cache
+        uses: actions/cache@v1
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+      - name: Install dependencies
+        run: |
+          bundle config path vendor/bundle
+          bundle install
+      - name: Before tests
+        run: |
+          sed -i "s/gems.ruby-china.org/rubygems.org/g" Gemfile.lock
+          bundle exec rails db:migrate
+      - name: Run Standard
+        run: bundle exec standardrb
+      - name: Run tests
+        run: bundle exec rails test

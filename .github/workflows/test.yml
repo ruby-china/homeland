@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: huacnlee.autocorrect
-        uses: huacnlee/autocorrect-action@0.0.3
+        uses: huacnlee/autocorrect-action@main
   test:
     name: CI Test
     runs-on: ubuntu-latest

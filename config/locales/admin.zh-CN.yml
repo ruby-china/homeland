@@ -37,6 +37,7 @@
       "Delete recent 10 photos": "删除最近 10 个图片"
       "Delete recent 10 topics": "删除最近 10 篇话题"
       "Delete recent 10 replies": "删除最近 10 条回复"
+      "Delete recent 10 notes": "删除最近 10 条记事本"
     nodes:
       new: 新建节点
       edit: 修改节点

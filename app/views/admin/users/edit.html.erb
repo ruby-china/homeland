@@ -13,6 +13,9 @@
       <%= link_to t('admin.users.Delete recent 10 replies'), clean_admin_user_path(@user, type: 'replies'),
                 method: 'delete', class: 'btn btn-sm btn-outline-danger',
                 data: { confirm: 'This action is not recoverable, are you sure?' } %>
+      <%= link_to t('admin.users.Delete recent 10 notes'), clean_admin_user_path(@user, type: 'notes'),
+                method: 'delete', class: 'btn btn-sm btn-outline-danger',
+                data: { confirm: 'This action is not recoverable, are you sure?' } %>
     </div>
   </div>
 <% end %>

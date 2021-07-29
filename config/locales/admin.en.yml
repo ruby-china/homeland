@@ -37,6 +37,7 @@
       "Delete recent 10 photos": "Delete recent 10 photos"
       "Delete recent 10 topics": "Delete recent 10 topics"
       "Delete recent 10 replies": "Delete recent 10 replies"
+      "Delete recent 10 notes": "Delete recent 10 notes"
     nodes:
       new: New Node
       edit: Edit Node

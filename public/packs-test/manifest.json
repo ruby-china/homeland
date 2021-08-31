@@ -1,59 +1,59 @@
 {
-  "admin.css": "/packs-test/css/admin-43b7e01a.css",
-  "admin.js": "/packs-test/js/admin-59d913c83fb20f698d81.js",
-  "application.js": "/packs-test/js/application-1d177f11f3618717e6f8.js",
+  "admin.css": "/packs-test/css/admin-b2035c97.css",
+  "admin.js": "/packs-test/js/admin-4560e590dd1d9a147365.js",
+  "application.js": "/packs-test/js/application-d361d8acfc78eace9c92.js",
   "bootstrap.js": "/packs-test/js/bootstrap-004dc218fb3ad5c5670e.js",
   "entrypoints": {
     "admin": {
       "css": [
-        "/packs-test/css/admin-43b7e01a.css"
+        "/packs-test/css/admin-b2035c97.css"
       ],
       "js": [
-        "/packs-test/js/admin-59d913c83fb20f698d81.js"
+        "/packs-test/js/admin-4560e590dd1d9a147365.js"
       ]
     },
     "application": {
       "js": [
-        "/packs-test/js/vendors-d51a8a488245693ef5d7.chunk.js",
-        "/packs-test/js/application-1d177f11f3618717e6f8.js"
+        "/packs-test/js/vendors-604fbfd3c7c964cb647d.chunk.js",
+        "/packs-test/js/application-d361d8acfc78eace9c92.js"
       ]
     },
     "bootstrap": {
       "js": [
-        "/packs-test/js/vendors-d51a8a488245693ef5d7.chunk.js",
+        "/packs-test/js/vendors-604fbfd3c7c964cb647d.chunk.js",
         "/packs-test/js/bootstrap-004dc218fb3ad5c5670e.js"
       ]
     },
     "front": {
       "css": [
-        "/packs-test/css/front-9d8ab508.css"
+        "/packs-test/css/front-204f8947.css"
       ],
       "js": [
-        "/packs-test/js/front-24779c0bc1186d9e24a0.js"
+        "/packs-test/js/front-d92d07559dc663e62049.js"
       ]
     },
     "turbolinks-app": {
       "css": [
-        "/packs-test/css/turbolinks-app-66fa8453.css"
+        "/packs-test/css/turbolinks-app-2d305895.css"
       ],
       "js": [
-        "/packs-test/js/turbolinks-app-e852ba856de7c3550b17.js"
+        "/packs-test/js/turbolinks-app-59e4c994eb7334914c46.js"
       ]
     }
   },
-  "front.css": "/packs-test/css/front-9d8ab508.css",
-  "front.js": "/packs-test/js/front-24779c0bc1186d9e24a0.js",
-  "media/webfonts/fa-brands-400.eot": "/packs-test/media/webfonts/fa-brands-400-0fea2496.eot",
-  "media/webfonts/fa-brands-400.svg": "/packs-test/media/webfonts/fa-brands-400-e33e2cf6.svg",
-  "media/webfonts/fa-brands-400.ttf": "/packs-test/media/webfonts/fa-brands-400-ec82f282.ttf",
-  "media/webfonts/fa-brands-400.woff": "/packs-test/media/webfonts/fa-brands-400-dc2cbadd.woff",
-  "media/webfonts/fa-brands-400.woff2": "/packs-test/media/webfonts/fa-brands-400-c967a94c.woff2",
-  "media/webfonts/fa-solid-900.eot": "/packs-test/media/webfonts/fa-solid-900-3a24a60e.eot",
-  "media/webfonts/fa-solid-900.svg": "/packs-test/media/webfonts/fa-solid-900-371dbce0.svg",
-  "media/webfonts/fa-solid-900.ttf": "/packs-test/media/webfonts/fa-solid-900-10ecefc2.ttf",
-  "media/webfonts/fa-solid-900.woff": "/packs-test/media/webfonts/fa-solid-900-46fdbd2d.woff",
-  "media/webfonts/fa-solid-900.woff2": "/packs-test/media/webfonts/fa-solid-900-3ceb50e7.woff2",
-  "turbolinks-app.css": "/packs-test/css/turbolinks-app-66fa8453.css",
-  "turbolinks-app.js": "/packs-test/js/turbolinks-app-e852ba856de7c3550b17.js",
-  "vendors.js": "/packs-test/js/vendors-d51a8a488245693ef5d7.chunk.js"
+  "front.css": "/packs-test/css/front-204f8947.css",
+  "front.js": "/packs-test/js/front-d92d07559dc663e62049.js",
+  "media/webfonts/fa-brands-400.eot": "/packs-test/media/webfonts/fa-brands-400-89a52ae1.eot",
+  "media/webfonts/fa-brands-400.svg": "/packs-test/media/webfonts/fa-brands-400-216edb96.svg",
+  "media/webfonts/fa-brands-400.ttf": "/packs-test/media/webfonts/fa-brands-400-9e138496.ttf",
+  "media/webfonts/fa-brands-400.woff": "/packs-test/media/webfonts/fa-brands-400-329a95a9.woff",
+  "media/webfonts/fa-brands-400.woff2": "/packs-test/media/webfonts/fa-brands-400-c1210e5e.woff2",
+  "media/webfonts/fa-solid-900.eot": "/packs-test/media/webfonts/fa-solid-900-efbd5d20.eot",
+  "media/webfonts/fa-solid-900.svg": "/packs-test/media/webfonts/fa-solid-900-13de59f1.svg",
+  "media/webfonts/fa-solid-900.ttf": "/packs-test/media/webfonts/fa-solid-900-07c3313b.ttf",
+  "media/webfonts/fa-solid-900.woff": "/packs-test/media/webfonts/fa-solid-900-c6ec0800.woff",
+  "media/webfonts/fa-solid-900.woff2": "/packs-test/media/webfonts/fa-solid-900-ada6e6df.woff2",
+  "turbolinks-app.css": "/packs-test/css/turbolinks-app-2d305895.css",
+  "turbolinks-app.js": "/packs-test/js/turbolinks-app-59e4c994eb7334914c46.js",
+  "vendors.js": "/packs-test/js/vendors-604fbfd3c7c964cb647d.chunk.js"
 }

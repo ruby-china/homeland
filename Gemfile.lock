@@ -336,7 +336,7 @@ GEM
     rails-i18n (6.0.0)
       i18n (>= 0.7, < 2)
       railties (>= 6.0.0, < 7)
-    rails-settings-cached (2.7.1)
+    rails-settings-cached (2.8.0)
       rails (>= 5.0.0)
     rails_autolink (1.1.6)
       rails (> 3.1)

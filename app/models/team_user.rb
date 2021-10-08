@@ -32,9 +32,9 @@ class TeamUser < ApplicationRecord
   def notify_user_to_accept
     return unless pendding?
     Notification.create notify_type: "team_invite",
-                        actor_id: actor_id,
-                        user_id: user_id,
-                        target: self,
-                        second_target: team
+      actor_id: actor_id,
+      user_id: user_id,
+      target: self,
+      second_target: team
   end
 end

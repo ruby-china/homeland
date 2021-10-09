@@ -23,7 +23,7 @@ class BaseUploader < CarrierWave::Uploader::Base
   end
 
   def extension_allowlist
-    %w[jpg jpeg gif png svg]
+    %w[jpg jpeg gif png]
   end
 
   def allow_thumb?(url)

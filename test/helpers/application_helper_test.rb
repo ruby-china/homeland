@@ -16,6 +16,10 @@ class ApplicationHelperTest < ActionView::TestCase
     assert_equal "<p>Hello world alert()</p>", sanitize_markdown("<p>Hello world <script>alert()</script></p>")
   end
 
+  test "sanitize_markdown sup and sub" do
+    assert_equal "<p>L<sup>A</sup>T<sub>E</sub>X 结构化的路径覆盖（C<sub>i</sub>(k)-覆盖）</p>", sanitize_markdown("<p>L<sup>A</sup>T<sub>E</sub>X 结构化的路径覆盖（C<sub>i</sub>(k)-覆盖）</p>")
+  end
+
   test "admin?" do
     user = create :user
     admin = create :admin

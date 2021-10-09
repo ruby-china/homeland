@@ -243,6 +243,10 @@ class Homeland::MarkdownTest < ActiveSupport::TestCase
     end
   end
 
+  test "sup and sub" do
+    assert_markdown_render %(<p>L<sup>A</sup>T<sub>E</sub>X 结构化的路径覆盖（C<sub>i</sub>(k)-覆盖）</p>), "L<sup>A</sup>T<sub>E</sub>X结构化的路径覆盖（C<sub>i</sub>(k)-覆盖）"
+  end
+
   test "footnotes" do
     assert_markdown_render %(<p>some ^strikethrough^</p>), "some ^strikethrough^"
   end

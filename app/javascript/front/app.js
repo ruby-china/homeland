@@ -10,8 +10,6 @@ const AppView = Backbone.View.extend({
 
   events: {
     "click a.likeable": "likeable",
-    "click .header .form-search .btn-search": "openHeaderSearchBox",
-    "click .header .form-search .btn-close": "closeHeaderSearchBox",
     "click a.button-block-user": "blockUser",
     "click a.button-follow-user": "followUser",
     "click a.button-block-node": "blockNode",
@@ -220,18 +218,6 @@ const AppView = Backbone.View.extend({
       const q = results && decodeURIComponent(results[1]);
       return $searchInput.val(q);
     }
-  },
-
-  openHeaderSearchBox(e) {
-    $(".header .form-search").addClass("active");
-    $(".header .form-search input").focus();
-    return false;
-  },
-
-  closeHeaderSearchBox(e) {
-    $(".header .form-search input").val("");
-    $(".header .form-search").removeClass("active");
-    return false;
   },
 
   followUser(e) {

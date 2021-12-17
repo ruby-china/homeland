@@ -10,9 +10,9 @@ gem "rails_autolink"
 gem "sass-rails"
 gem "turbolinks"
 gem "uglifier"
-gem "webpacker", "~> 5.x"
+gem "webpacker"
 
-gem "view_component", require: "view_component/engine"
+gem "view_component"
 
 gem "pg"
 
@@ -32,7 +32,8 @@ gem "dotenv-rails"
 
 gem "rack-attack"
 gem "http_accept_language"
-gem "rails-i18n"
+# https://github.com/svenfuchs/rails-i18n/pull/957
+gem "rails-i18n", github: "f6p/rails-i18n", branch: "rails7"
 gem "twemoji"
 
 # Uploader
@@ -61,6 +62,8 @@ gem "enumize"
 
 gem "pghero"
 gem "exception-track"
+# https://github.com/smartinez87/exception_notification/pull/519
+gem "exception_notification", github: "zlei1/exception_notification"
 
 # Cache
 gem "redis"

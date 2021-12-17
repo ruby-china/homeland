@@ -38,7 +38,7 @@ class TopicsController < ApplicationController
   def node_feed
     @node = Node.find(params[:id])
     @topics = @node.topics.recent.limit(20)
-    render layout: false if stale?([@node, @topics])
+    render layout: false
   end
 
   def show

@@ -9,9 +9,9 @@ ENV["twitter_api_key"] = "fake-key"
 ENV["wechat_api_key"] = "fake-key"
 
 require_relative "../config/environment"
+require "rails/test_help"
 require "minitest/autorun"
 require "mocha/minitest"
-require "rails/test_help"
 require "sidekiq/testing"
 require_relative "./support/model"
 

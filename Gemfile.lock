@@ -518,7 +518,7 @@ DEPENDENCIES
   qiniu
   rack-attack
   rack-cors
-  rails (= 7)
+  rails
   rails-i18n!
   rails-settings-cached
   rails_autolink

@@ -5,7 +5,7 @@ source "https://rubygems.org"
 git_source(:github) { |repo_name| "https://github.com/#{repo_name}.git" }
 
 gem "jbuilder"
-gem "rails", "7"
+gem "rails"
 gem "rails_autolink"
 gem "sass-rails"
 gem "turbolinks"

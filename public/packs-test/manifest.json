@@ -1,12 +1,12 @@
 {
-  "admin.css": "/packs-test/css/admin-b2035c97.css",
+  "admin.css": "/packs-test/css/admin-9868493b.css",
   "admin.js": "/packs-test/js/admin-4560e590dd1d9a147365.js",
-  "application.js": "/packs-test/js/application-d361d8acfc78eace9c92.js",
+  "application.js": "/packs-test/js/application-411720331865fd4e9f31.js",
   "bootstrap.js": "/packs-test/js/bootstrap-004dc218fb3ad5c5670e.js",
   "entrypoints": {
     "admin": {
       "css": [
-        "/packs-test/css/admin-b2035c97.css"
+        "/packs-test/css/admin-9868493b.css"
       ],
       "js": [
         "/packs-test/js/admin-4560e590dd1d9a147365.js"
@@ -14,19 +14,19 @@
     },
     "application": {
       "js": [
-        "/packs-test/js/vendors-604fbfd3c7c964cb647d.chunk.js",
-        "/packs-test/js/application-d361d8acfc78eace9c92.js"
+        "/packs-test/js/vendors-b5bd6adf846bc1cbd9d5.chunk.js",
+        "/packs-test/js/application-411720331865fd4e9f31.js"
       ]
     },
     "bootstrap": {
       "js": [
-        "/packs-test/js/vendors-604fbfd3c7c964cb647d.chunk.js",
+        "/packs-test/js/vendors-b5bd6adf846bc1cbd9d5.chunk.js",
         "/packs-test/js/bootstrap-004dc218fb3ad5c5670e.js"
       ]
     },
     "front": {
       "css": [
-        "/packs-test/css/front-204f8947.css"
+        "/packs-test/css/front-68a837f9.css"
       ],
       "js": [
         "/packs-test/js/front-d92d07559dc663e62049.js"
@@ -41,19 +41,13 @@
       ]
     }
   },
-  "front.css": "/packs-test/css/front-204f8947.css",
+  "front.css": "/packs-test/css/front-68a837f9.css",
   "front.js": "/packs-test/js/front-d92d07559dc663e62049.js",
-  "media/webfonts/fa-brands-400.eot": "/packs-test/media/webfonts/fa-brands-400-89a52ae1.eot",
-  "media/webfonts/fa-brands-400.svg": "/packs-test/media/webfonts/fa-brands-400-216edb96.svg",
-  "media/webfonts/fa-brands-400.ttf": "/packs-test/media/webfonts/fa-brands-400-9e138496.ttf",
-  "media/webfonts/fa-brands-400.woff": "/packs-test/media/webfonts/fa-brands-400-329a95a9.woff",
-  "media/webfonts/fa-brands-400.woff2": "/packs-test/media/webfonts/fa-brands-400-c1210e5e.woff2",
-  "media/webfonts/fa-solid-900.eot": "/packs-test/media/webfonts/fa-solid-900-efbd5d20.eot",
-  "media/webfonts/fa-solid-900.svg": "/packs-test/media/webfonts/fa-solid-900-13de59f1.svg",
-  "media/webfonts/fa-solid-900.ttf": "/packs-test/media/webfonts/fa-solid-900-07c3313b.ttf",
-  "media/webfonts/fa-solid-900.woff": "/packs-test/media/webfonts/fa-solid-900-c6ec0800.woff",
-  "media/webfonts/fa-solid-900.woff2": "/packs-test/media/webfonts/fa-solid-900-ada6e6df.woff2",
+  "media/webfonts/fa-brands-400.ttf": "/packs-test/media/webfonts/fa-brands-400-c90f83fd.ttf",
+  "media/webfonts/fa-brands-400.woff2": "/packs-test/media/webfonts/fa-brands-400-123e8cfb.woff2",
+  "media/webfonts/fa-solid-900.ttf": "/packs-test/media/webfonts/fa-solid-900-de78ce19.ttf",
+  "media/webfonts/fa-solid-900.woff2": "/packs-test/media/webfonts/fa-solid-900-5cb518f1.woff2",
   "turbolinks-app.css": "/packs-test/css/turbolinks-app-2d305895.css",
   "turbolinks-app.js": "/packs-test/js/turbolinks-app-59e4c994eb7334914c46.js",
-  "vendors.js": "/packs-test/js/vendors-604fbfd3c7c964cb647d.chunk.js"
+  "vendors.js": "/packs-test/js/vendors-b5bd6adf846bc1cbd9d5.chunk.js"
 }

@@ -10,7 +10,7 @@ gem "rails_autolink"
 gem "sass-rails"
 gem "turbolinks"
 gem "uglifier"
-gem "webpacker"
+gem "webpacker", "6.0.0.rc.6"
 
 gem "view_component"
 
@@ -33,7 +33,7 @@ gem "dotenv-rails"
 gem "rack-attack"
 gem "http_accept_language"
 # https://github.com/svenfuchs/rails-i18n/pull/957
-gem "rails-i18n", github: "f6p/rails-i18n", branch: "rails7"
+gem "rails-i18n", github: "f6p/rails-i18n", branch: "rails7-hotfix"
 gem "twemoji"
 
 # Uploader

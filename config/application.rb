@@ -54,5 +54,7 @@ module Homeland
   end
 end
 
-# Homeland boot must keep in here
-require "homeland"
+unless ENV["RAILS_PRECOMPILE"].present?
+  # Homeland boot must keep in here
+  require "homeland"
+end

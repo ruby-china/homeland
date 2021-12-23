@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/f6p/rails-i18n.git
-  revision: 751d497ed2a7b16927b14bbe6096d4b44d7e8a2c
-  branch: rails7
+  revision: a2102371c5f46fd1bdc49d5ec9c99fbe9a375bc8
+  branch: rails7-hotfix
   specs:
     rails-i18n (7.0.0)
       i18n (>= 0.7, < 2)
@@ -457,7 +457,7 @@ GEM
       method_source (~> 1.0)
     warden (1.2.9)
       rack (>= 2.0.9)
-    webpacker (5.4.2)
+    webpacker (6.0.0.rc.6)
       activesupport (>= 5.2)
       rack-proxy (>= 0.6.1)
       railties (>= 5.2)
@@ -540,7 +540,7 @@ DEPENDENCIES
   twemoji
   uglifier
   view_component
-  webpacker
+  webpacker (= 6.0.0.rc.6)
 
 BUNDLED WITH
    2.2.3

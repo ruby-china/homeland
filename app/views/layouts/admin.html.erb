@@ -4,11 +4,10 @@
     <meta name="theme" content="<%= user_theme %>">
     <title><%= Setting.app_name %> - Admin Panel</title>
     <%= stylesheet_pack_tag "admin" %>
-    <%= javascript_packs_with_chunks_tag "application" %>
+    <%= javascript_pack_tag "application", defer: false %>
     <%= csrf_meta_tag %>
   </head>
   <body>
-    <%= javascript_pack_tag "bootstrap", 'data-turbolinks-eval': "false" %>
     <div class="header">
       <div class="header navbar navbar-expand flex-md-row bd-navbar">
         <div class="container d-sm-flex">

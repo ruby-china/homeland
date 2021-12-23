@@ -10,7 +10,7 @@ jobs:
       - name: huacnlee.autocorrect
         uses: huacnlee/autocorrect-action@main
   assets_compile:
-    name: Assets Precompile
+    name: Assets Compile
     runs-on: ubuntu-latest
     container: homeland/base:3.0.1-slim-buster
     steps:

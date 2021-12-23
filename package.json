@@ -28,9 +28,7 @@
     "turbolinks-prefetch": "~1.0",
     "underscore": "~1.12",
     "webpack": "^5.53.0",
-    "webpack-cli": "^4.8.0"
-  },
-  "devDependencies": {
+    "webpack-cli": "^4.8.0",
     "@babel/preset-typescript": "^7.16.5",
     "@prettier/plugin-ruby": "^2",
     "@webpack-cli/serve": "^1.6.0",

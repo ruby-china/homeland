@@ -1,53 +1,77 @@
 {
-  "admin.css": "/packs-test/css/admin-9868493b.css",
-  "admin.js": "/packs-test/js/admin-4560e590dd1d9a147365.js",
-  "application.js": "/packs-test/js/application-411720331865fd4e9f31.js",
-  "bootstrap.js": "/packs-test/js/bootstrap-004dc218fb3ad5c5670e.js",
+  "admin.css": "/packs-test/css/admin.css",
+  "admin.js": "/packs-test/js/admin.js",
+  "application.js": "/packs-test/js/application.js",
+  "css/admin.css.map": "/packs-test/css/admin.css.map",
+  "css/front.css.map": "/packs-test/css/front.css.map",
+  "css/turbolinks-app.css.map": "/packs-test/css/turbolinks-app.css.map",
   "entrypoints": {
     "admin": {
-      "css": [
-        "/packs-test/css/admin-9868493b.css"
-      ],
-      "js": [
-        "/packs-test/js/admin-4560e590dd1d9a147365.js"
-      ]
+      "assets": {
+        "js": [
+          "/packs-test/js/runtime.js",
+          "/packs-test/js/admin.js"
+        ],
+        "css": [
+          "/packs-test/css/admin.css"
+        ]
+      }
     },
     "application": {
-      "js": [
-        "/packs-test/js/vendors-b5bd6adf846bc1cbd9d5.chunk.js",
-        "/packs-test/js/application-411720331865fd4e9f31.js"
-      ]
-    },
-    "bootstrap": {
-      "js": [
-        "/packs-test/js/vendors-b5bd6adf846bc1cbd9d5.chunk.js",
-        "/packs-test/js/bootstrap-004dc218fb3ad5c5670e.js"
-      ]
+      "assets": {
+        "js": [
+          "/packs-test/js/runtime.js",
+          "/packs-test/js/vendors-node_modules_rails_actioncable_app_assets_javascripts_actioncable_esm_js-node_modules-bd7f5f.js",
+          "/packs-test/js/application.js"
+        ]
+      }
     },
     "front": {
-      "css": [
-        "/packs-test/css/front-68a837f9.css"
-      ],
-      "js": [
-        "/packs-test/js/front-d92d07559dc663e62049.js"
-      ]
+      "assets": {
+        "js": [
+          "/packs-test/js/runtime.js",
+          "/packs-test/js/front.js"
+        ],
+        "css": [
+          "/packs-test/css/front.css"
+        ]
+      }
+    },
+    "jsconfig": {
+      "assets": {
+        "js": [
+          "/packs-test/js/runtime.js",
+          "/packs-test/js/jsconfig.js"
+        ]
+      }
     },
     "turbolinks-app": {
-      "css": [
-        "/packs-test/css/turbolinks-app-2d305895.css"
-      ],
-      "js": [
-        "/packs-test/js/turbolinks-app-59e4c994eb7334914c46.js"
-      ]
+      "assets": {
+        "js": [
+          "/packs-test/js/runtime.js",
+          "/packs-test/js/turbolinks-app.js"
+        ],
+        "css": [
+          "/packs-test/css/turbolinks-app.css"
+        ]
+      }
     }
   },
-  "front.css": "/packs-test/css/front-68a837f9.css",
-  "front.js": "/packs-test/js/front-d92d07559dc663e62049.js",
-  "media/webfonts/fa-brands-400.ttf": "/packs-test/media/webfonts/fa-brands-400-c90f83fd.ttf",
-  "media/webfonts/fa-brands-400.woff2": "/packs-test/media/webfonts/fa-brands-400-123e8cfb.woff2",
-  "media/webfonts/fa-solid-900.ttf": "/packs-test/media/webfonts/fa-solid-900-de78ce19.ttf",
-  "media/webfonts/fa-solid-900.woff2": "/packs-test/media/webfonts/fa-solid-900-5cb518f1.woff2",
-  "turbolinks-app.css": "/packs-test/css/turbolinks-app-2d305895.css",
-  "turbolinks-app.js": "/packs-test/js/turbolinks-app-59e4c994eb7334914c46.js",
-  "vendors.js": "/packs-test/js/vendors-b5bd6adf846bc1cbd9d5.chunk.js"
+  "front.css": "/packs-test/css/front.css",
+  "front.js": "/packs-test/js/front.js",
+  "js/admin.js.map": "/packs-test/js/admin.js.map",
+  "js/application.js.map": "/packs-test/js/application.js.map",
+  "js/front.js.map": "/packs-test/js/front.js.map",
+  "js/runtime.js.map": "/packs-test/js/runtime.js.map",
+  "js/turbolinks-app.js.map": "/packs-test/js/turbolinks-app.js.map",
+  "js/vendors-node_modules_rails_actioncable_app_assets_javascripts_actioncable_esm_js-node_modules-bd7f5f.js": "/packs-test/js/vendors-node_modules_rails_actioncable_app_assets_javascripts_actioncable_esm_js-node_modules-bd7f5f.js",
+  "js/vendors-node_modules_rails_actioncable_app_assets_javascripts_actioncable_esm_js-node_modules-bd7f5f.js.map": "/packs-test/js/vendors-node_modules_rails_actioncable_app_assets_javascripts_actioncable_esm_js-node_modules-bd7f5f.js.map",
+  "jsconfig.js": "/packs-test/js/jsconfig.js",
+  "runtime.js": "/packs-test/js/runtime.js",
+  "static/fa-brands-400.ttf": "/packs-test/static/fa-brands-400-c90f83fd0c6c34dd638f.ttf",
+  "static/fa-brands-400.woff2": "/packs-test/static/fa-brands-400-123e8cfb2b8bcdef2c3a.woff2",
+  "static/fa-solid-900.ttf": "/packs-test/static/fa-solid-900-de78ce19b6954a6f4144.ttf",
+  "static/fa-solid-900.woff2": "/packs-test/static/fa-solid-900-5cb518f1dd00e7374eb8.woff2",
+  "turbolinks-app.css": "/packs-test/css/turbolinks-app.css",
+  "turbolinks-app.js": "/packs-test/js/turbolinks-app.js"
 }

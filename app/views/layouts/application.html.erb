@@ -26,7 +26,7 @@
     <%= stylesheet_pack_tag "front", "data-turbolinks-track": "reload" %>
     <%= stylesheet_pack_tag "turbolinks-app", 'data-turbolinks-track': 'reload' if turbolinks_app? %>
     <%= yield :stylesheets %>
-    <%= javascript_pack_tag "application", "bootstrap", defer: false %>
+    <%= javascript_pack_tag "application",  defer: false %>
     <%= yield :javascripts %>
     <%= action_cable_meta_tag %>
     <%= csrf_meta_tag %>

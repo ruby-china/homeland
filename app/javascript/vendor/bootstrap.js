@@ -1,4 +1,5 @@
-window.bootstrap = require("bootstrap");
+import * as bootstrap from "bootstrap/dist/js/bootstrap.esm";
+window.bootstrap = bootstrap;
 require("bootstrap-select");
 
 document.addEventListener("turbolinks:load", () => {

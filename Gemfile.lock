@@ -1,13 +1,4 @@
 GIT
-  remote: https://github.com/f6p/rails-i18n.git
-  revision: a2102371c5f46fd1bdc49d5ec9c99fbe9a375bc8
-  branch: rails7-hotfix
-  specs:
-    rails-i18n (7.0.0)
-      i18n (>= 0.7, < 2)
-      railties (>= 7.0.0, < 8)
-
-GIT
   remote: https://github.com/zlei1/exception_notification.git
   revision: 25df64501fc8961fe0b4b0b1ee9e35130cb2beb1
   specs:
@@ -346,6 +337,9 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.4.2)
       loofah (~> 2.3)
+    rails-i18n (7.0.1)
+      i18n (>= 0.7, < 2)
+      railties (>= 6.0.0, < 8)
     rails-settings-cached (2.8.0)
       rails (>= 5.0.0)
     rails_autolink (1.1.6)
@@ -519,7 +513,7 @@ DEPENDENCIES
   rack-attack
   rack-cors
   rails
-  rails-i18n!
+  rails-i18n
   rails-settings-cached
   rails_autolink
   recaptcha

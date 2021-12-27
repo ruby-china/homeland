@@ -32,8 +32,7 @@ gem "dotenv-rails"
 
 gem "rack-attack"
 gem "http_accept_language"
-# https://github.com/svenfuchs/rails-i18n/pull/957
-gem "rails-i18n", github: "f6p/rails-i18n", branch: "rails7-hotfix"
+gem "rails-i18n"
 gem "twemoji"
 
 # Uploader

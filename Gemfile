@@ -61,8 +61,6 @@ gem "enumize"
 
 gem "pghero"
 gem "exception-track"
-# https://github.com/smartinez87/exception_notification/pull/519
-gem "exception_notification", github: "zlei1/exception_notification"
 
 # Cache
 gem "redis"

@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
 class HomeController < ApplicationController
-  def index
-  end
-
   def uploads
     return render_404 if Rails.env.production?
 

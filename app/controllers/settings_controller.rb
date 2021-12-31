@@ -44,14 +44,14 @@ class SettingsController < ApplicationController
 
     @user.soft_delete
     sign_out
-    redirect_to root_path, notice: t('users.account_deleted')
+    redirect_to root_path, notice: t("users.account_deleted")
   end
 
   def auth_unbind
     provider = params[:provider]
 
     if current_user.legacy_omniauth_logined?
-      redirect_to account_setting_path, alert: t('users.legacy_unbind_tip')
+      redirect_to account_setting_path, alert: t("users.legacy_unbind_tip")
       return
     end
 
@@ -84,7 +84,7 @@ class SettingsController < ApplicationController
     if @user.update(user_params)
       theme = params[:user][:theme]
       @user.update_theme(theme)
-      redirect_to setting_path, notice: t('common.update_success')
+      redirect_to setting_path, notice: t("common.update_success")
     else
       render "show"
     end
@@ -93,7 +93,7 @@ class SettingsController < ApplicationController
   def update_profile
     if @user.update(user_params)
       @user.update_profile_fields(user_profile_params)
-      redirect_to profile_setting_path, notice: t('common.update_success')
+      redirect_to profile_setting_path, notice: t("common.update_success")
     else
       render "profile"
     end
@@ -109,7 +109,7 @@ class SettingsController < ApplicationController
     end
 
     if @user.update_reward_fields(res)
-      redirect_to reward_setting_path, notice: t('common.update_success')
+      redirect_to reward_setting_path, notice: t("common.update_success")
     else
       render "reward"
     end
@@ -117,7 +117,7 @@ class SettingsController < ApplicationController
 
   def update_password
     if @user.update_with_password(user_params)
-      redirect_to new_session_path(:user), notice: t('users.password_update_success')
+      redirect_to new_session_path(:user), notice: t("users.password_update_success")
     else
       render "password"
     end

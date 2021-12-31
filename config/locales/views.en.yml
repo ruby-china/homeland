@@ -307,6 +307,8 @@
     suggest_using_twitter_id: "Cannot modify after create."
     already_have_account: "Already have an account?"
     forget_password: "Forgot your password?"
+    find_password: "Find password"
+    find_password_help_text: "A mail will send to your mailbox, that you can reset your password via a special link."
     not_recieve_confirm_mail: "Havn't received your confirmation email?"
     not_recieve_unlock_mail: "Havn't received your unlock email?"
     current_have: "Current have"

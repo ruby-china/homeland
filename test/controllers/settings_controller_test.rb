@@ -167,7 +167,7 @@ describe SettingsController do
 
       assert_redirected_to account_setting_path
       follow_redirect!
-      assert_select ".alert", text: /账户三方账号登录且未设置 Email 和密码，不允许解绑/
+      assert_select ".alert", text: /Three-party account has not beeen set email address and password, unbinding is not allowed, please set account password and modify email address./
     end
   end
 end

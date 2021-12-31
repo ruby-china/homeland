@@ -293,10 +293,12 @@
     recent_reply_topic: "Recent Replies"
     unbind_warning: "You need at least one binded account. Cannot unbind as this is your last account."
     unbind_success: "%{provider} unbinded successfully."
+    legacy_unbind_tip: "Three-party account has not beeen set email address and password, unbinding is not allowed, please set account password and modify email address."
     please_be_careful: "Please proceed with caution."
     be_sure_to_use_twitter_id: "This will change reply binding, Twitter ID is recommanded."
     personal_information: "Personal Information"
     edit_password: "Edit Password"
+    password_update_success: "Password has been updated successfully, now you need to log in again."
     delete_my_account: "Delete My Account"
     delete_this_account: "Delete This Account"
     dont_like_it: "Do not like it?"
@@ -307,8 +309,11 @@
     suggest_using_twitter_id: "Cannot modify after create."
     already_have_account: "Already have an account?"
     forget_password: "Forgot your password?"
+    find_password: "Find password"
+    find_password_help_text: "A mail will send to your mailbox, that you can reset your password via a special link."
     not_recieve_confirm_mail: "Havn't received your confirmation email?"
     not_recieve_unlock_mail: "Havn't received your unlock email?"
+    resend_unlock_mail: "Resend unlock email"
     current_have: "Current have"
     users_joined: "users joined"
     teams_joined: "teams joined"
@@ -324,6 +329,7 @@
     delete_account_tips_html: "<p>You can choice to delete your account when you don't need it.</p><p>Your datas will keeping and your account will lock as anonymous after delete.</p>"
     confirm_delete_account: "Enter password to delete your account"
     ensure_to_delete: "Delete my account"
+    account_deleted: "Your account has been deleted."
     complete_your_info: "Complete your account information"
     binding_via_html: You must fill out the form below to complete the binding login method of <strong>%{provider}</strong>.
     binding_has_account_html: If you already have an account, you can use <a href="/account/sign_in">Sign in</a> to bind the account.
@@ -367,6 +373,10 @@
     team_user_pendding: "Awaiting response"
     settings: "Settings"
     team_users_count: "%{count} team members"
+    invite_success: "Invite success."
+    remove_success: "Leaved team successfully"
+    accept_success: "Accept successfully, you are a member of team."
+    reject_success: "Successfully rejected."
   user_setting:
     profile: Profile
     profile_detail: Social Profiles

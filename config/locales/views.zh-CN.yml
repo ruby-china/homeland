@@ -93,7 +93,7 @@
     block_node_title: 屏蔽后，社区列表将不会显示此节点有关的内容。
     block_user: 屏蔽
     unblock_user: 取消屏蔽
-    block_user_title: 屏蔽或，社区列表将不会出现此用户发布的内容。
+    block_user_title: 屏蔽后，社区列表将不会出现此用户发布的内容。
     error_message_title: 有 %{count} 处问题导致无法提交
   reply:
     edit_reply: "修改回帖"
@@ -301,10 +301,12 @@
     recent_reply_topic: "最近回复过的帖子"
     unbind_warning: "至少要保留一个关联账号，现在不能解绑。"
     unbind_success: "%{provider} 账号解绑成功。"
+    legacy_unbind_tip: "账户三方账号登录且未设置 Email 和密码，不允许解绑，请设置密码，并修改 Email。"
     please_be_careful: "谨慎修改"
     be_sure_to_use_twitter_id: "此项将会影响回复信息关联，建议用 Twitter ID"
     personal_information: "个人资料设置"
     edit_password: "修改密码"
+    password_update_success: "密码更新成功，现在你需要重新登录。"
     delete_this_account: "删除此账号"
     dont_like_it: "不喜欢？"
     bind_another_account: "三方登陆绑定"
@@ -314,8 +316,11 @@
     suggest_using_twitter_id: "谨慎填写，以后不可修改，建议用 Twitter ID。"
     already_have_account: "已经有账号了？"
     forget_password: "忘记了密码？"
+    find_password: "找回密码"
+    find_password_help_text: "此功能将会发送一个找回密码的特别链接到你的邮箱，通过该链接可以进入重置密码的页面。"    
     not_recieve_confirm_mail: "未收到确认邮件？"
     not_recieve_unlock_mail: "未收到解锁邮件？"
+    resend_unlock_mail: "重新发送解锁邮件"
     current_have: "目前已经有"
     users_joined: "位会员加入了"
     teams_joined: "个团队加入了"
@@ -331,6 +336,7 @@
     delete_account_tips_html: "<p>当你不想使用这个账号的时候，可以选择删除账号。</p><p>删除以后数据将会保留，以匿名的方式存在，你的账号将无法再登录。</p>"
     confirm_delete_account: "要删除账号，请输入你的密码"
     ensure_to_delete: "确定删除我的账号"
+    account_deleted: "账号删除成功。"
     complete_your_info: "完善你的账户信息"
     binding_via_html: "您必须填写以下表单才能完成绑定 <strong>%{provider}</strong> 的登录方式。"
     binding_has_account_html: 如果你已经有账号，你可以通过 <a href="/account/sign_in">登陆</a> 来绑定账号。
@@ -374,6 +380,10 @@
     team_user_pendding: "等待接受"
     settings: "设置"
     team_users_count: "%{count} 个团队成员"
+    invite_success: "邀请成功。"
+    remove_success: "移除成功"
+    accept_success: "接受成功，已加入组织"
+    reject_success: "已拒绝成功"
   user_setting:
     profile: "个人信息"
     profile_detail: 详细资料

@@ -5,7 +5,7 @@
   <div class="col-md-6">
     <div class="card card-lg">
       <div class="card-body">
-        <div class="card-title">重新发送解锁邮件</div>
+        <div class="card-title"><%= t('users.resend_unlock_mail') %></div>
 
         <%= form_for resource, as: resource_name, url: unlock_path(resource_name), method: :post do |f| %>
           <%= render "shared/error_messages", target: resource %>
@@ -15,7 +15,7 @@
           </div>
 
           <div class="form-actions">
-            <%= f.submit "重新发送解锁邮件", class: 'btn btn-primary btn-lg btn-block' %>
+            <%= f.submit t('users.resend_unlock_mail'), class: 'btn btn-primary btn-lg btn-block', 'data-disable-with' => t("common.submitting") %>
           </div>
         <% end %>
       </div>

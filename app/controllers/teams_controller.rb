@@ -24,7 +24,7 @@ class TeamsController < ApplicationController
     @team = Team.new(team_params)
     @team.owner_id = current_user.id
     if @team.save
-      redirect_to(edit_team_path(@team), notice: "创建成功")
+      redirect_to(edit_team_path(@team), notice: t("common.create_success"))
     else
       render action: "new"
     end

@@ -17,10 +17,12 @@ auth_info = auth_session["info"]
         <%= form_for resource, as: resource_name, url: session_path(resource_name) do |f| %>
           <%= render "/shared/error_messages", target: resource %>
           <div class="form-group">
-            <%= f.text_field :login, class: "form-control form-control-lg", placeholder: "用户名 / Email" %>
+            <%= f.text_field :login, class: "form-control form-control-lg", 
+              placeholder: t("activerecord.attributes.user.login") + " / " + t("activerecord.attributes.user.email") %>
           </div>
           <div class="form-group">
-            <%= f.text_field :password, type: :password, class: "form-control form-control-lg", placeholder: "密码" %>
+            <%= f.text_field :password, type: :password, class: "form-control form-control-lg", 
+              placeholder: t("activerecord.attributes.user.password") %>
           </div>
           <% if devise_mapping.rememberable? -%>
             <div class="form-group">

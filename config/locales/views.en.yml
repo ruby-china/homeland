@@ -373,6 +373,10 @@
     team_user_pendding: "Awaiting response"
     settings: "Settings"
     team_users_count: "%{count} team members"
+    invite_success: "Invite success."
+    remove_success: "Leaved team successfully"
+    accept_success: "Accept successfully, you are a member of team."
+    reject_success: "Successfully rejected."
   user_setting:
     profile: Profile
     profile_detail: Social Profiles

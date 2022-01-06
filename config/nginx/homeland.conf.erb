@@ -124,6 +124,10 @@ server {
 
   # DO NOT CHANGE THIS
   location / {
+    try_files $uri @rails;
+  }
+
+  location @rails {
     proxy_redirect off;
     proxy_set_header Host $http_host;
     proxy_set_header X-Forwarded-Host $http_host;

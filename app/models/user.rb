@@ -16,7 +16,8 @@ class User < ApplicationRecord
   include User::Blockable
   include User::Roles
 
-  second_level_cache version: 4, expires_in: 2.weeks
+  # Temp quick fix issue #1313, wait second_level_cache issue #132 fixed
+  # second_level_cache version: 4, expires_in: 2.weeks
 
   LOGIN_FORMAT = 'A-Za-z0-9\-\_\.'
   ALLOW_LOGIN_FORMAT_REGEXP = /\A[#{LOGIN_FORMAT}]+\z/

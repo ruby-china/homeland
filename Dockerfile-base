@@ -1,14 +1,12 @@
-FROM ruby:3.0.1-slim-buster
+FROM ruby:3.1.0-slim-buster
 
 RUN gem install bundler
 RUN sed -i 's#http://deb.debian.org#https://mirrors.163.com#g' /etc/apt/sources.list && \
-  apt update && apt install -y curl gnupg && \
-  curl -sL https://deb.nodesource.com/setup_14.x |  bash - && \
-  curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
-  echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
-  apt update
+  apt update && apt install -y curl gcc g++ gnupg make && \
+  curl -fsSL https://deb.nodesource.com/setup_current.x | bash -
 
 RUN apt install -y ca-certificates nodejs cron socat curl git htop tzdata imagemagick nginx libnginx-mod-http-image-filter libnginx-mod-http-geoip  \
-  build-essential ruby-dev openssl libpq-dev libxml2-dev libxslt-dev yarn
+  build-essential ruby-dev openssl libpq-dev libxml2-dev libxslt-dev nodejs
+RUN npm i -g corepack
 
 RUN curl https://get.acme.sh | sh

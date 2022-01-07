@@ -99,7 +99,6 @@ group :development do
   gem "spring"
   gem "byebug"
   gem "letter_opener"
-  gem "derailed_benchmarks"
 end
 
 group :development, :test do

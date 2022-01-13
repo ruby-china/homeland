@@ -8,5 +8,6 @@ class CreateCounters < ActiveRecord::Migration[7.0]
     end
 
     add_index :counters, [:countable_type, :countable_id, :key], unique: true
+    add_index :counters, [:countable_type, :key, :value]
   end
 end

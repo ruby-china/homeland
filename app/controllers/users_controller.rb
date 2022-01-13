@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
   def index
     @total_user_count = User.count
-    @active_users = User.without_team.fields_for_list.hot.limit(100)
+    @active_users = Counter.where(countable_type: "User", key: :yearly_replies_count).includes(:countable).order("value desc").limit(100).map(&:countable)
   end
 
   def feed

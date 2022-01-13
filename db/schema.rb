@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 2022_01_13_130722) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["countable_type", "countable_id", "key"], name: "index_counters_on_countable_type_and_countable_id_and_key", unique: true
     t.index ["countable_type", "countable_id"], name: "index_counters_on_countable"
+    t.index ["countable_type", "key", "value"], name: "index_counters_on_countable_type_and_key_and_value"
   end
 
   create_table "devices", id: :serial, force: :cascade do |t|

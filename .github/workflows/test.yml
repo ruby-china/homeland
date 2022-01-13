@@ -12,7 +12,7 @@ jobs:
   assets_compile:
     name: Assets Compile
     runs-on: ubuntu-latest
-    container: homeland/base:3.0.1-slim-buster
+    container: homeland/base:3.1.0-slim-buster
     steps:
       - uses: actions/checkout@v2
       - name: Install dependencies
@@ -27,7 +27,7 @@ jobs:
   test:
     name: CI Test
     runs-on: ubuntu-latest
-    container: homeland/base:3.0.1-slim-buster
+    container: homeland/base:3.1.0-slim-buster
     services:
       postgres:
         image: postgres:10

@@ -1,8 +1,7 @@
 FROM ruby:3.1.0-slim-buster
 
 RUN gem install bundler
-RUN sed -i 's#http://deb.debian.org#https://mirrors.163.com#g' /etc/apt/sources.list && \
-  apt update && apt install -y curl gcc g++ gnupg make && \
+RUN apt update && apt install -y curl gcc g++ gnupg make && \
   curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
 
 RUN apt install -y ca-certificates nodejs cron socat curl git htop tzdata imagemagick nginx libnginx-mod-http-image-filter libnginx-mod-http-geoip  \

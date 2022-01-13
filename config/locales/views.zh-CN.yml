@@ -295,8 +295,8 @@
     join_time: "Since"
     signature: "签名"
     personal_website: "博客"
-    topics_count_html: 累计 <span>%{count}</span> 篇帖子
-    replies_count_html: 累计 <span>%{count}</span> 条回帖 (最近一年 %{yearly_count} 条)
+    topics_count_html: <span>%{count}</span> 篇帖子
+    replies_count_html: <span>%{count}</span> 条回帖
     recent_publish_topic: "最近发布的帖子"
     recent_reply_topic: "最近回复过的帖子"
     unbind_warning: "至少要保留一个关联账号，现在不能解绑。"
@@ -317,7 +317,7 @@
     already_have_account: "已经有账号了？"
     forget_password: "忘记了密码？"
     find_password: "找回密码"
-    find_password_help_text: "此功能将会发送一个找回密码的特别链接到你的邮箱，通过该链接可以进入重置密码的页面。"
+    find_password_help_text: "此功能将会发送一个找回密码的特别链接到你的邮箱，通过该链接可以进入重置密码的页面。"    
     not_recieve_confirm_mail: "未收到确认邮件？"
     not_recieve_unlock_mail: "未收到解锁邮件？"
     resend_unlock_mail: "重新发送解锁邮件"

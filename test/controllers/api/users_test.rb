@@ -5,13 +5,18 @@ require "spec_helper"
 describe Api::V3::UsersController do
   describe "GET /api/v3/users.json" do
     before do
-      create_list(:user, 10)
+      @users = create_list(:user, 10)
+
+      @users.each do |user|
+        user.yearly_replies_count.to_i
+        user.monthly_replies_count.to_i
+      end
     end
 
     it "should work" do
       get "/api/v3/users.json"
       assert_equal 200, response.status
-      assert_equal User.count, json["users"].size
+      assert_equal @users.count, json["users"].size
       assert_has_keys json["users"][0], "id", "name", "login", "avatar_url"
     end
 
@@ -90,7 +95,7 @@ describe Api::V3::UsersController do
 
     describe "recent order" do
       it "should work" do
-        @topics = create_list(:topic, 3, user: user)
+        @topics = create_list(:topic, 3, user:)
         get "/api/v3/users/#{user.login}/topics.json", offset: 0, limit: 2
         assert_equal 200, response.status
         assert_equal 2, json["topics"].size
@@ -103,8 +108,8 @@ describe Api::V3::UsersController do
 
     describe "hot order" do
       it "should work" do
-        @hot_topic = create(:topic, user: user, likes_count: 4)
-        @topics = create_list(:topic, 3, user: user)
+        @hot_topic = create(:topic, user:, likes_count: 4)
+        @topics = create_list(:topic, 3, user:)
 
         get "/api/v3/users/#{user.login}/topics.json", order: "likes", offset: 0, limit: 3
         assert_equal 200, response.status
@@ -115,8 +120,8 @@ describe Api::V3::UsersController do
 
     describe "hot order" do
       it "should work" do
-        @hot_topic = create(:topic, user: user, replies_count: 4)
-        @topics = create_list(:topic, 3, user: user)
+        @hot_topic = create(:topic, user:, replies_count: 4)
+        @topics = create_list(:topic, 3, user:)
 
         get "/api/v3/users/#{user.login}/topics.json", order: "replies", offset: 0, limit: 3
         assert_equal 200, response.status
@@ -132,7 +137,7 @@ describe Api::V3::UsersController do
 
     describe "recent order" do
       it "should work" do
-        @replies = create_list(:reply, 3, user: user, topic: topic)
+        @replies = create_list(:reply, 3, user:, topic:)
         get "/api/v3/users/#{user.login}/replies.json", offset: 0, limit: 2
         assert_equal 2, json["replies"].size
         fields = %w[id user body_html topic_id topic_title]
@@ -148,7 +153,7 @@ describe Api::V3::UsersController do
     let(:user) { create(:user) }
 
     it "should work" do
-      @topics = create_list(:topic, 4, user: user)
+      @topics = create_list(:topic, 4, user:)
       user.favorite_topic(@topics[0].id)
       user.favorite_topic(@topics[1].id)
       user.favorite_topic(@topics[3].id)

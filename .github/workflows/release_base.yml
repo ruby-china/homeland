@@ -11,7 +11,7 @@ jobs:
       - uses: olegtarasov/get-tag@v2.1
         id: tagName
         with:
-          tagRegex: "base-(.*)"
+          tagRegex: 'base-([\w\d\-_\.]+)'
           tagRegexGroup: 1
 
       - name: Set up QEMU

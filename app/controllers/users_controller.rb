@@ -13,8 +13,15 @@ class UsersController < ApplicationController
 
   def index
     @total_user_count = User.count
-    key = params[:type] = "monthly" ? :monthly_replies_count : :yearly_replies_count
-    @active_users = Counter.where(countable_type: "User", key: key).includes(:countable).order("value desc").limit(100).map(&:countable)
+
+    @counters = Counter.where(countable_type: "User")
+    @counters = if params[:type] == "monthly"
+      @counters.where(key: :monthly_replies_count)
+    else
+      @counters.where(key: :yearly_replies_count)
+    end
+
+    @active_users = @counters.includes(:countable).order("value desc").limit(100).map(&:countable)
   end
 
   def feed

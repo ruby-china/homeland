@@ -1015,6 +1015,19 @@ img.emoji {
   color: #fff;
 }
 
+.embed-responsive {
+  @extend .ratio;
+
+  &-16by9 {
+    @extend .ratio-16x9;
+  }
+
+  &-item {
+    width: 100%;
+    height: 100%;
+  }
+}
+
 .setting-menu {
   padding-right: 0;
   padding-left: 0px;
@@ -1135,18 +1148,5 @@ img.emoji {
     li.next {
       float: right;
     }
-  }
-}
-
-.embed-responsive {
-  @extend .ratio;
-
-  &-16by9 {
-    @extend .ratio-16x9;
-  }
-
-  &-item {
-    width: 100%;
-    height: 100%;
   }
 }

@@ -17,7 +17,7 @@ module Api
 
         limit = params[:limit].to_i
         limit = 100 if limit > 100
-        @users = User.fields_for_list.hot.limit(limit)
+        @users = @active_users = Counter.where(countable_type: "User", key: "yearly_replies_count").includes(:countable).order("value desc").limit(limit).map(&:countable)
       end
 
       # Get full detail of current user, for account setting.

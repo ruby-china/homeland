@@ -3,7 +3,8 @@
 class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
 
-  include Counterable
+  include RedisCountable
+  include Countable
 
   scope :recent, -> { order(id: :desc) }
   scope :exclude_ids, ->(ids) { where.not(id: ids.map(&:to_i)) }

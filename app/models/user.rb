@@ -36,6 +36,8 @@ class User < ApplicationRecord
   has_many :teams, through: :team_users
   has_one :sso, class_name: "UserSSO", dependent: :destroy
 
+  countable :monthly_replies_count, :yearly_replies_count
+
   attr_accessor :password_confirmation
 
   validates :login, format: {with: ALLOW_LOGIN_FORMAT_REGEXP, message: I18n.t("users.username_allows_format")},
@@ -62,11 +64,11 @@ class User < ApplicationRecord
   end
 
   def self.find_by_email(email)
-    fetch_by_uniq_keys(email: email)
+    fetch_by_uniq_keys(email:)
   end
 
   def self.find_by_login!(slug)
-    find_by_login(slug) || raise(ActiveRecord::RecordNotFound.new(slug: slug))
+    find_by_login(slug) || raise(ActiveRecord::RecordNotFound.new(slug:))
   end
 
   def self.find_by_login(slug)

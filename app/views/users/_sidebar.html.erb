@@ -25,6 +25,7 @@
           <div class="item number">
             <%= t("users.number_of_user", no: @user.id)%> / <span title="<%= t("users.join_time") %>"><%= @user.created_at.to_date %></span>
           </div>
+        </ul>
         </div>
       </div>
       <hr>
@@ -42,11 +43,10 @@
             <%= icon_tag("location") %> <%= location_name_tag(@user.location) %>
           </div>
         <% end %>
-        <div class="item counts">
-          <%= t("users.topics_count_html", count: @user.topics_count) %>
-          <span class="divider">/</span>
-          <%= t("users.replies_count_html", count: @user.replies_count) %>
-        </div>
+        <hr>
+        <div class="item number"><%= t("users.topics_count_html", count: @user.topics_count) %></div>
+        <div class="item number"><%= t("users.replies_count_html", count: @user.replies_count, yearly_count: @user.yearly_replies_count) %></div>
+        <hr>
         <div class="item social">
           <% if !@user.twitter.blank? %>
             <%= link_to icon_bold_tag("twitter"), @user.twitter_url, class: "twitter", rel: "nofollow" %>

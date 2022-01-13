@@ -1,4 +1,4 @@
-name: Release
+name: Release Base
 on:
   push:
     tags:
@@ -31,7 +31,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          file: Dockerfile-base
+          file: ./Dockerfile-base
           tags: |
             homeland/base:${{ steps.tagName.outputs.tag }}
 

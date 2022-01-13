@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # 增加访问量的功能
-module Counterable
+module RedisCountable
   extend ActiveSupport::Concern
 
   class Counter

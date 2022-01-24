@@ -12,6 +12,10 @@ class Counter < ApplicationRecord
     decrement!(:value, by).value
   end
 
+  def respond_to_missing?
+    true
+  end
+
   def method_missing(method, *args, &block)
     if value.respond_to?(method)
       value.send(method, *args, &block)

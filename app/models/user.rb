@@ -41,9 +41,9 @@ class User < ApplicationRecord
   attr_accessor :password_confirmation
 
   validates :login, format: {with: ALLOW_LOGIN_FORMAT_REGEXP, message: I18n.t("users.username_allows_format")},
-                    length: {in: 2..20},
-                    presence: true,
-                    uniqueness: {case_sensitive: false}
+    length: {in: 2..20},
+    presence: true,
+    uniqueness: {case_sensitive: false}
   validates :name, length: {maximum: 20}
 
   after_commit :send_welcome_mail, on: :create

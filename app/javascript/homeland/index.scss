@@ -1016,13 +1016,15 @@ img.emoji {
 }
 
 .embed-responsive {
+  display: block;
+
   @extend .ratio;
 
   &-16by9 {
     @extend .ratio-16x9;
   }
 
-  &-item {
+  iframe {
     width: 100%;
     height: 100%;
   }

@@ -26,6 +26,10 @@ class BaseUploader < CarrierWave::Uploader::Base
     %w[jpg jpeg gif png]
   end
 
+  def content_type_allowlist
+    /image\//
+  end
+
   def allow_thumb?(url)
     return false if url.nil?
     THUMB_IMAGE_EXTS.include?(File.extname(url))

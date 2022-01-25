@@ -48,6 +48,14 @@ class User::AvatarTest < ActiveSupport::TestCase
     assert_includes user.large_avatar_url, "/system/letter_avatars/h.png"
   end
 
+  test "non-image upload" do
+    file = fixture_file_upload("test.png", "text/html")
+    user = create(:user)
+    user.avatar = file
+    user.save
+    assert_equal "You are not allowed to upload text/html files, allowed types: image/*", user.errors.messages[:avatar]&.first
+  end
+
   test "upload and soft_delete" do
     file = fixture_file_upload("test.png")
     user = create(:user)

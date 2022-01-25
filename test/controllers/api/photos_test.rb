@@ -16,7 +16,7 @@ describe Api::V3::PhotosController do
 
     it "with login should work" do
       login_user!
-      post "/api/v3/photos.json", file: fixture_file_upload("test.png")
+      post "/api/v3/photos.json", file: fixture_file_upload("test.png", "image/png")
       @photo = Photo.last
       assert_equal 200, response.status
       assert_equal current_user.id, @photo.user_id

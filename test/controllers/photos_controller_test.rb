@@ -4,10 +4,11 @@ require "spec_helper"
 
 describe PhotosController do
   let(:user) { create(:user) }
-  let(:file) { fixture_file_upload("test.png") }
+  let(:file) { fixture_file_upload("test.png", "image/png") }
 
   it "POST /photos success for valid image" do
     sign_in user
+    assert_equal "image/png", file.content_type
     post photos_path, params: {file: file}
     assert_equal 200, response.status
     assert_equal true, response.parsed_body["ok"]

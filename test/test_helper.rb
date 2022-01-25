@@ -69,8 +69,12 @@ class ActiveSupport::TestCase
     end
   end
 
-  def fixture_file_upload(name, content_type = "text/plain")
-    Rack::Test::UploadedFile.new(File.join("test", "fixtures", "files", name), content_type)
+  def fixture_file_upload(name, content_type = "image/png")
+    ActionDispatch::Http::UploadedFile.new(
+      filename: name,
+      type: content_type,
+      tempfile: File.new(File.join("test", "fixtures", "files", name))
+    )
   end
 end
 

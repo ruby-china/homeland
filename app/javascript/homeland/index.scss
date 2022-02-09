@@ -317,7 +317,7 @@ body {
       transition: all 0.3s;
       box-sizing: border-box;
       box-shadow: none !important;
-      color: #333;
+      color: var(--text-color1);
       &:focus {
         outline: none;
         border: none;

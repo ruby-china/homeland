@@ -176,7 +176,7 @@ GEM
     http-cookie (1.0.4)
       domain_name (~> 0.5)
     http_accept_language (2.1.1)
-    i18n (1.8.11)
+    i18n (1.9.1)
       concurrent-ruby (~> 1.0)
     image_processing (1.12.1)
       mini_magick (>= 4.9.5, < 5)
@@ -245,10 +245,10 @@ GEM
       timeout
     netrc (0.11.0)
     nio4r (2.5.8)
-    nokogiri (1.13.0)
+    nokogiri (1.13.1)
       mini_portile2 (~> 2.7.0)
       racc (~> 1.4)
-    nokogiri (1.13.0-x86_64-darwin)
+    nokogiri (1.13.1-x86_64-darwin)
       racc (~> 1.4)
     notifications (1.1.0)
       kaminari (>= 0.15)
@@ -389,7 +389,7 @@ GEM
     ruby-vips (2.1.2)
       ffi (~> 1.12)
     ruby2_keywords (0.0.4)
-    rucaptcha (2.5.5)
+    rucaptcha (2.6.1)
       railties (>= 3.2)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
@@ -456,7 +456,7 @@ GEM
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    zeitwerk (2.5.3)
+    zeitwerk (2.5.4)
 
 PLATFORMS
   ruby

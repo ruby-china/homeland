@@ -401,7 +401,7 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
-    second_level_cache (2.7.0)
+    second_level_cache (2.7.1)
       activerecord (>= 6.0)
       activesupport (>= 6.0)
     semantic_range (3.0.0)

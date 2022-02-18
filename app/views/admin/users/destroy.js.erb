@@ -1,1 +1,5 @@
-$("#<%= dom_id(@user) %>").replaceWith('<%= j(render "user", user: @user.reload) %>')
+<% if @user.destroyed? %>
+$("#<%= dom_id(@user) %>").replaceWith("")
+<% else %>
+$("#<%= dom_id(@user) %>").replaceWith("<%= j(render "user", user: @user.reload) %>")
+<% end %>

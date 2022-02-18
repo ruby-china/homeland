@@ -6,6 +6,10 @@ class SearchController < ApplicationController
   def index
     params[:q] ||= ""
 
+    if params[:q].size > 64
+      redirect_to root_path
+    end
+
     @search = Homeland::Search.new(params[:q])
 
     @result = @search.query_results.includes(:searchable).page(params[:page])

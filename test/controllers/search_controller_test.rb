@@ -3,12 +3,10 @@
 require "spec_helper"
 
 describe SearchController do
-
   describe "GET /search" do
-
-    it "should work" do      
+    it "should work" do
       get search_path
-      assert_equal 200, response.status      
+      assert_equal 200, response.status
     end
   end
 

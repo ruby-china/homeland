@@ -34,6 +34,9 @@ module Homeland
 
     config.to_prepare do
       Devise::Mailer.layout "mailer"
+    end
+
+    config.after_initialize do
       Doorkeeper::ApplicationController.include Homeland::UserNotificationHelper
       # Only Applications list
       Doorkeeper::ApplicationsController.layout "simple"

@@ -23,6 +23,7 @@ class NullStorage
   end
 end
 
+Rails.application.config.to_prepare do
 CarrierWave.configure do |config|
   # http://stackoverflow.com/questions/7534341/rails-3-test-fixtures-with-carrierwave/25315883#25315883
   config.storage NullStorage if Rails.env.test?
@@ -56,4 +57,5 @@ CarrierWave.configure do |config|
   else
     config.storage = :file
   end
+end
 end

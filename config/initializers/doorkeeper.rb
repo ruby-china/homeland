@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+Rails.application.config.to_prepare do
 Doorkeeper.configure do
   # Change the ORM that doorkeeper will use.
   # Currently supported options are :active_record, :mongoid2, :mongoid3,
@@ -113,6 +114,7 @@ Doorkeeper.configure do
 
   # WWW-Authenticate Realm (default "Doorkeeper").
   realm Setting.app_name
+end
 end
 
 # https://github.com/doorkeeper-gem/doorkeeper/issues/1467

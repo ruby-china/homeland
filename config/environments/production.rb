@@ -1,5 +1,4 @@
 require "active_support/core_ext/integer/time"
-require_relative "../../app/models/setting"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -32,8 +31,10 @@ Rails.application.configure do
   config.assets.compile = false
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  if Setting.asset_host.present?
-    config.asset_host = Setting.asset_host
+  config.to_prepare do
+    if Setting.asset_host.present?
+      Rails.application.config.asset_host = Setting.asset_host      
+    end
   end
 
   # Specifies the header that your server uses for sending files.
@@ -47,7 +48,9 @@ Rails.application.configure do
   # config.action_cable.mount_path = nil
   # config.action_cable.url = 'wss://example.com/cable'
   # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
-  config.action_cable.allowed_request_origins = [Setting.cable_allowed_request_origin]
+  config.to_prepare do
+    Rails.application.config.action_cable.allowed_request_origins = [Setting.cable_allowed_request_origin]    
+  end
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   config.force_ssl = false

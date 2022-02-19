@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+Rails.application.config.to_prepare do
 LIMIT = Setting.rack_attack[:limit].to_s.to_i
 PERIOD = Setting.rack_attack[:period].to_s.to_i || 5.minutes
 BLOCK_MESSAGE = ["你请求过快，超过了频率限制，暂时屏蔽一段时间。"]
@@ -30,4 +31,5 @@ if LIMIT > 0
     req = payload[:request]
     Rails.logger.info "  RackAttack: #{req.ip} #{request_id} blocked."
   end
+end
 end

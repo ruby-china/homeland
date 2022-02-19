@@ -33,7 +33,7 @@ Rails.application.configure do
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   config.to_prepare do
     if Setting.asset_host.present?
-      Rails.application.config.asset_host = Setting.asset_host      
+      Rails.application.config.asset_host = Setting.asset_host
     end
   end
 
@@ -49,7 +49,7 @@ Rails.application.configure do
   # config.action_cable.url = 'wss://example.com/cable'
   # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
   config.to_prepare do
-    Rails.application.config.action_cable.allowed_request_origins = [Setting.cable_allowed_request_origin]    
+    Rails.application.config.action_cable.allowed_request_origins = [Setting.cable_allowed_request_origin]
   end
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.

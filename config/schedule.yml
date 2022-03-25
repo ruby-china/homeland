@@ -21,3 +21,9 @@ update_user_stats:
   class: "Scheduler::TotalUserStatsJob"
   queue: default
   description: "Update user stats"
+
+online_users_cleanup:
+  cron: "0 2 * * 6"
+  class: "Scheduler::OnlineUserStatsJob"
+  queue: default
+  description: "Update online users stats"  

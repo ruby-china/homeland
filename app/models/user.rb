@@ -15,6 +15,7 @@ class User < ApplicationRecord
   include User::Likeable
   include User::Blockable
   include User::Roles
+  include User::RedisOnlineTrackable
 
   second_level_cache version: 4, expires_in: 2.weeks
 

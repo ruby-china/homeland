@@ -28,6 +28,7 @@ class ApplicationController < ActionController::Base
 
   before_action do
     cookies.signed[:user_id] ||= current_user.try(:id)
+    current_user.try(:touch_last_online_ts) # current_user.touch_last_online_ts
 
     # hit unread_notify_count
     unread_notify_count

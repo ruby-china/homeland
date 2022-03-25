@@ -59,6 +59,8 @@
     statics_users_count: "会员数: %{count} 个"
     statics_topics_count: "话题数: %{count} 篇"
     statics_replies_count: "回帖数: %{count} 条"
+    statics_online_users_count: "%{count} 人在线"
+    online: "在线"
     comments: "评论"
     new_comment: "发表新评论"
     no_search_result: "没有搜索到相关内容。"

@@ -2,14 +2,14 @@
   "name": "homeland",
   "private": true,
   "scripts": {
-    "start": "./bin/webpack-dev-server"
+    "start": "./bin/webpacker-dev-server"
   },
-  "dependencies": {    
+  "dependencies": {
     "@fortawesome/fontawesome-free": "6.0.0-beta3",
     "@popperjs/core": "^2.9.2",
     "@rails/actioncable": "~7.0",
     "@rails/ujs": "~7.0",
-    "@rails/webpacker": "^6.0.0-rc.6",
+    "shakapacker": "6.2.0",
     "backbone": "~1.4",
     "bootstrap": "~5",
     "bootstrap-select": "^1.14.0-beta2",
@@ -27,8 +27,17 @@
     "webpack-cli": "^4.8.0",
     "@babel/preset-typescript": "^7.16.5",
     "@prettier/plugin-ruby": "^2",
-    "@webpack-cli/serve": "^1.6.0",
-    "babel-plugin-macros": "^3.1.0",
+
+    "@babel/core": "7",
+    "@babel/plugin-transform-runtime": "7",
+    "@babel/preset-env": "7",
+    "@babel/runtime": "7",
+    "babel-loader": "8",
+    "compression-webpack-plugin": "9",
+    "terser-webpack-plugin": "5",
+    "webpack-assets-manifest": "5",
+    "webpack-merge": "5",
+
     "css-loader": "^6.5.1",
     "css-minimizer-webpack-plugin": "^3.3.1",
     "mini-css-extract-plugin": "^2.4.5",
@@ -42,12 +51,14 @@
     "sass": "^1.45.1",
     "sass-loader": "^12.4.0",
     "style-loader": "^3.3.1",
-    "typescript": "^4.5.4",
-    "webpack-dev-server": "^4.7.1"
-  },
+    "typescript": "^4.5.4"
+  },  
   "babel": {
     "presets": [
-      "./node_modules/@rails/webpacker/package/babel/preset.js"
+      "./node_modules/shakapacker/package/babel/preset.js"
     ]
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^4.7.4"
   }
 }

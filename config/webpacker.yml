@@ -1,4 +1,4 @@
-# Note: You must restart bin/webpack-dev-server for changes to take effect
+# Note: You must restart bin/webpacker-dev-server for changes to take effect
 
 default: &default
   source_path: app/javascript
@@ -8,12 +8,21 @@ default: &default
   cache_path: tmp/webpacker
   webpack_compile_output: true
 
+  # Location for manifest.json, defaults to {public_output_path}/manifest.json if unset
+  # manifest_path: public/packs/manifest.json
+
   # Additional paths webpack should look up modules
-  # ['app/assets', 'engine/foo/app/assets']
+  # ['app/assets', 'engine/foo/app/assets']  
   additional_paths: ["lib/assets/javascripts"]
 
   # Reload manifest.json on all requests so we reload latest compiled packs
   cache_manifest: false
+
+  # Select loader to use, available options are 'babel' (default), 'swc' or 'esbuild'
+  webpack_loader: 'babel'
+
+  # Set to true to enable check for matching versions of shakapacker gem and NPM package - will raise an error if there is a mismatch or wildcard versioning is used
+  ensure_consistent_versioning: false
 
 development:
   <<: *default
@@ -26,6 +35,14 @@ development:
     port: 3035
     # Hot Module Replacement updates modules while the application is running without a full reload
     hmr: false
+    # If HMR is on, CSS will by inlined by delivering it as part of the script payload via style-loader. Be sure
+    # that you add style-loader to your project dependencies.
+    #
+    # If you want to instead deliver CSS via <link> with the mini-extract-css-plugin, set inline_css to false.
+    # In that case, style-loader is not needed as a dependency.
+    #
+    # mini-extract-css-plugin is a required dependency in both cases.
+    inline_css: true
     # Defaults to the inverse of hmr. Uncomment to manually set this.
     # live_reload: true
     client:

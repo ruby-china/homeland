@@ -310,7 +310,7 @@ GEM
       rack (>= 1.0, < 3)
     rack-cors (1.1.1)
       rack (>= 2.0.0)
-    rack-proxy (0.7.0)
+    rack-proxy (0.7.2)
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -405,6 +405,11 @@ GEM
       activerecord (>= 6.0)
       activesupport (>= 6.0)
     semantic_range (3.0.0)
+    shakapacker (6.2.0)
+      activesupport (>= 5.2)
+      rack-proxy (>= 0.6.1)
+      railties (>= 5.2)
+      semantic_range (>= 2.3.0)
     sidekiq (6.4.0)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
@@ -448,11 +453,6 @@ GEM
       method_source (~> 1.0)
     warden (1.2.9)
       rack (>= 2.0.9)
-    webpacker (6.0.0.rc.6)
-      activesupport (>= 5.2)
-      rack-proxy (>= 0.6.1)
-      railties (>= 5.2)
-      semantic_range (>= 2.3.0)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -520,6 +520,7 @@ DEPENDENCIES
   rucaptcha
   sass-rails
   second_level_cache
+  shakapacker (= 6.2.0)
   sidekiq
   sidekiq-cron
   social-share-button
@@ -529,7 +530,6 @@ DEPENDENCIES
   twemoji
   uglifier
   view_component
-  webpacker (= 6.0.0.rc.6)
 
 BUNDLED WITH
    2.3.3

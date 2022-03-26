@@ -5,7 +5,7 @@ class User
   module RedisOnlineTrackable
     extend ActiveSupport::Concern
 
-    REDIS_ONLINE_KEY = "online_users_set".freeze
+    REDIS_ONLINE_KEY = "online_users_set"
 
     # Track user online timestamp
     # Example: Invoke `current_user.touch_last_online_ts` in a controller request.

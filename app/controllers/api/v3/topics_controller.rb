@@ -37,7 +37,7 @@ module Api
           @topics = @node.topics
         end
 
-        current_user.try(:touch_last_online_ts) # current_user.touch_last_online_ts
+        current_user&.touch_last_online_ts
 
         @topics = @topics.without_ban.fields_for_list.includes(:node, :user).send(scope_method_by_type)
         if %w[no_reply popular].index(params[:type])

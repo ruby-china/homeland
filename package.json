@@ -22,7 +22,7 @@
     "rails-erb-loader": "^5.5.2",
     "turbolinks": "~5.2",
     "turbolinks-prefetch": "~1.0",
-    "underscore": "~1.12",
+    "underscore": "~1.13",
     "webpack": "^5.53.0",
     "webpack-cli": "^4.8.0",
     "@babel/preset-typescript": "^7.16.5",

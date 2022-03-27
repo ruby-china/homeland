@@ -1,9 +1,9 @@
 <div class="user-profile-card">
   <div class="d-flex">
-    <div class="avatar-box">
+    <div class="avatar-box"> 
       <%= user_avatar_tag(user, :md) %>
     </div>
-    <div class="flex-grow-1">
+    <div class="flex-grow-1 d-flex justify-content-between">
       <%= link_to user, class: "name-box" do %>
         <div class="fullname">
           <%= user.name %>
@@ -11,6 +11,9 @@
         <div class="login">
           <%= "@#{user.login}" %>
         </div>
+      <% end %>
+      <% if user.online? %>
+      <div style="width:8px;height:8px;background-color:green;" class="rounded-circle" title="<%= t('common.online')%>"></div>
       <% end %>
     </div>
   </div>

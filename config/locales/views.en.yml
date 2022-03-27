@@ -60,6 +60,8 @@
     statics_users_count: "Users: %{count}"
     statics_topics_count: "Topics: %{count}"
     statics_replies_count: "Replies: %{count}"
+    statics_online_users_count: "%{count} users online"
+    online: "Online"
     comments: "Comments"
     new_comment: "Write comment"
     no_search_result: "No search result"

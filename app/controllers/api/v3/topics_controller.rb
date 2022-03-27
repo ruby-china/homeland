@@ -37,6 +37,8 @@ module Api
           @topics = @node.topics
         end
 
+        current_user&.touch_last_online_ts
+
         @topics = @topics.without_ban.fields_for_list.includes(:node, :user).send(scope_method_by_type)
         if %w[no_reply popular].index(params[:type])
           @topics = @topics.last_actived
@@ -61,6 +63,7 @@ module Api
         @meta = {followed: false, liked: false, favorited: false}
 
         if current_user
+          current_user.touch_last_online_ts
           # Create Notifications
           current_user.read_topic(@topic)
           @meta[:followed] = current_user.follow_topic?(@topic)

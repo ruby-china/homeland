@@ -35,6 +35,7 @@
           <%= t("admin.dashboard.users_count") %>
           <span class="total-week" rel="twipsy" title="Weekly">+0</span>
           <span class="total-month" rel="twipsy" title="Monthly">+0</span>
+          <span><%= t("common.statics_online_users_count", count: User.online_users_count) %></span>
         </div>
       </div>
     </div>

@@ -33,6 +33,7 @@
     <%= raw Setting.custom_head_html %>
     <meta name="twitter:card" content="summary">
     <meta property="twitter:title" content="<%= @content_title || Setting.app_name %>">
+    <meta name="generator" content="Homeland <%= Homeland.version %>" />
     <% if @content_description %>
       <meta property="twitter:description" content="<%= @content_description %>">
     <% end %>

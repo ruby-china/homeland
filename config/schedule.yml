@@ -1,3 +1,4 @@
+# View the cron expression detail at https://crontab.cronhub.io/
 doorkeeper_cleanup:
   cron: "<%= Random.rand(0..59) %> <%= Random.rand(3..5) %> * * *"
   class: "Scheduler::DoorkeeperCleanupJob"

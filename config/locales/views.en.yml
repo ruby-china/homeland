@@ -1,5 +1,6 @@
 "en":
   common:
+    active_users: "Active users"
     justnow: "Just Now"
     hour: "Hour"
     minute: "Minute"

@@ -1,5 +1,6 @@
 "zh-CN":
   common:
+    active_users: "活跃会员"
     justnow: "刚刚"
     hour: "小时"
     minute: "分钟"

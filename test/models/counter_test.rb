@@ -39,4 +39,18 @@ class CounterTest < ActiveSupport::TestCase
     user.monthly_replies_count.decr
     assert_equal 0, user.monthly_replies_count.to_i
   end
+
+  test "Top active users from counter" do
+    user1 = create(:user)
+    user2 = create(:user)
+    user3 = create(:user)
+    user4 = create(:user)
+
+    create(:counter, countable: user1, key: "monthly_replies_count", value: 10)
+    create(:counter, countable: user2, key: "monthly_replies_count", value: 1)
+    create(:counter, countable: user3, key: "monthly_replies_count", value: 30)
+    create(:counter, countable: user4, key: "monthly_replies_count", value: 28)
+
+    assert_equal [user3, user4, user1, user2], Counter.active_users
+  end
 end

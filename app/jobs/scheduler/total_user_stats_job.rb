@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Scheduler
-  # cleanup spam topic at 1 month ago
+  # Count user replies count in recent
   class TotalUserStatsJob < ApplicationJob
     def perform(limit: 2000)
       users = User.where("replies_count > 0")

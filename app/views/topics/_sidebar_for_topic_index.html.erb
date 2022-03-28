@@ -18,6 +18,23 @@
 
 <%= raw Setting.topic_index_sidebar_html %>
 
+<% cache(["sidebar_active_users",Time.now.strftime("%Y-%m-%d %H")]) do %>
+<div class="card">
+  <div class="card-header tw-flex tw-justify-between tw-text-black">
+    <%= t('common.active_users') %>
+    <a href="<%= main_app.users_path %>" class="tw-text-gray-400"><i class="icon fa fa-circle-info"></i></a>
+  </div>
+  <div class="card-body tw-grid tw-grid-cols-4 tw-gap-4">
+    <% Counter.active_users(limit: 20).each do |user| %>
+      <div class="tw-flex tw-flex-col gap-1">
+        <%= user_avatar_tag(user, :md) %>
+        <%= user_name_tag(user, class: "tw-text-sm tw-text-gray-600 tw-truncate") %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<% end %>
+
 <% cache(["sidebar_statistics",Time.now.strftime("%Y-%m-%d %H")]) do %>
 <div class="card">
   <div class="card-header"><%= t("common.statics")%></div>

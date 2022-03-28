@@ -3,7 +3,7 @@ Contribute Guide
 
 ## Requirements
 
-* Ruby 2.4.0 +
+* Ruby 3.1 +
 * PostgreSQL 9.4 +
 * Redis 2.8 +
 

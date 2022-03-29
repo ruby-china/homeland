@@ -98,6 +98,7 @@
     unblock_user: Unblock
     block_user_title: Block this user, you will not see him topics.
     error_message_title: There have %{count} issues can not submit
+    more: "More"
   reply:
     edit_reply: "Edit Reply"
     delete_reply_success: "Delete successfully."

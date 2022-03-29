@@ -20,15 +20,15 @@
 
 <% cache(["sidebar_active_users",Time.now.strftime("%Y-%m-%d %H")]) do %>
 <div class="card">
-  <div class="card-header tw-flex tw-justify-between tw-text-black">
+  <div class="flex items-baseline justify-between text-black card-header">
     <%= t('common.active_users') %>
-    <a href="<%= main_app.users_path %>" class="tw-text-gray-400"><i class="icon fa fa-circle-info"></i></a>
+    <a href="<%= main_app.users_path %>" class="text-sm text-gray-400"><%= t("common.more") %></a>
   </div>
-  <div class="card-body tw-grid tw-grid-cols-4 tw-gap-4">
+  <div class="grid grid-cols-4 gap-2 p-3">
     <% Counter.active_users(limit: 20).each do |user| %>
-      <div class="tw-flex tw-flex-col gap-1">
+      <div class="flex flex-col gap-1 text-center">
         <%= user_avatar_tag(user, :md) %>
-        <%= user_name_tag(user, class: "tw-text-sm tw-text-gray-600 tw-truncate") %>
+        <%= user_name_tag(user, class: "text-sm text-gray-600 truncate") %>
       </div>
     <% end %>
   </div>

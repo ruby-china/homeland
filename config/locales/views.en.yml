@@ -352,6 +352,8 @@
       following: "Following"
       followers: "Followers"
       blocked: "Blocked"
+    yearly: "Yearly"
+    monthly: "Monthly"
   team_user_status:
     pendding: "Awaiting response"
     acceped: "Accepted"

@@ -1,20 +1,16 @@
 <% title_tag t('users.hot_users') %>
 
-<div id="users">
-  <div id="hot_users" class="user-list card card-lg">
-    <div class="card-body">
-      <div class="flex jcsb items-center">
-        <div class="card-title">
-          <div><%= t("users.hot_users") %></div>
-          <div class="counter">Total <%= @total_user_count %> users</div>
-        </div>
-        <div class="tabs">
-          <a href="<%= users_path %>" class="<%= "active" if params[:type].blank? %>">Yearly</a> <span class="divider">/</span>
-          <a href="<%= users_path(type: "monthly") %>" class="<%= "active" if params[:type] == "monthly" %>">Monthly</a>
-        </div>
-      </div>
-
-      <%= render "user_list", users: @active_users, columns: 4 %>
+<div class="p-4 bg-white rounded">
+  <div class="flex justify-between items-center">
+    <div class="text-xl">
+      <div><%= t("users.hot_users") %></div>
+      <div class="text-sm text-gray-400">Total <%= @total_user_count %> users</div>
+    </div>
+    <div class="">
+      <a href="<%= users_path %>" class="p-2 rounded <%= "active bg-gray-200 text-gray-700" if params[:type].blank? %> text-gray-400 hover:bg-gray-200 hover:text-gray-700"><%= t("users.yearly") %></a> <span class="divider">/</span>
+      <a href="<%= users_path(type: "monthly") %>" class="p-2 rounded <%= "active bg-gray-200 text-gray-700" if params[:type] == "monthly" %> text-gray-400 hover:bg-gray-200 hover:text-gray-700"><%= t("users.monthly") %></a>
     </div>
   </div>
+
+  <%= render "user_list", users: User.limit(100), columns: 4 %>
 </div>

@@ -359,6 +359,8 @@
       following: "正在关注"
       followers: "关注者"
       blocked: "已屏蔽"
+    yearly: "年度排行"
+    monthly: "月度排行"
   team_user_status:
     pendding: "等待接受"
     acceped: "已加入"

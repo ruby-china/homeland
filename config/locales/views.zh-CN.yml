@@ -98,6 +98,7 @@
     unblock_user: 取消屏蔽
     block_user_title: 屏蔽后，社区列表将不会出现此用户发布的内容。
     error_message_title: 有 %{count} 处问题导致无法提交
+    more: "更多"
   reply:
     edit_reply: "修改回帖"
     delete_reply_success: "回帖删除成功."
@@ -320,7 +321,7 @@
     already_have_account: "已经有账号了？"
     forget_password: "忘记了密码？"
     find_password: "找回密码"
-    find_password_help_text: "此功能将会发送一个找回密码的特别链接到你的邮箱，通过该链接可以进入重置密码的页面。"    
+    find_password_help_text: "此功能将会发送一个找回密码的特别链接到你的邮箱，通过该链接可以进入重置密码的页面。"
     not_recieve_confirm_mail: "未收到确认邮件？"
     not_recieve_unlock_mail: "未收到解锁邮件？"
     resend_unlock_mail: "重新发送解锁邮件"

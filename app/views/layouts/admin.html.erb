@@ -10,7 +10,7 @@
   <body>
     <div class="header">
       <div class="header navbar navbar-expand flex-md-row bd-navbar">
-        <div class="container d-sm-flex">
+        <div class="container mx-auto d-sm-flex">
           <div class="navbar-header d-none d-md-flex" data-turbolinks-permanent>
             <%= link_to("Admin Panel", main_app.admin_root_path, class: "navbar-brand") %>
           </div>
@@ -35,7 +35,7 @@
         </div>
       </div>
     </div>
-    <div class="container">
+    <div class="container mx-auto">
       <div id="main" class="card">
         <div class="card-body">
           <% if Setting.require_restart == true %>
@@ -49,7 +49,7 @@
       </div>
     </div>
     <footer class="footer">
-      <div class="container">
+      <div class="container mx-auto">
         <p>Powered by <a href="https://github.com/ruby-china/homeland/blob/master/CHANGELOG.md">Homeland <%= Homeland.version %></a></p>
       </div>
     </footer>

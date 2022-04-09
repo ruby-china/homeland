@@ -4,8 +4,8 @@
 <!-- @suggest_topics maybe nil or ActiveRecord::Relation, but we need an array -->
 <% @suggest_topics = @suggest_topics.to_a %>
 <%= render "topics/node_info", node: @node %>
-<div class="row">
-  <div class="col-lg-9">
+<div class="flex flex-col sm:flex-row gap-4">
+  <div class="grow">
     <div class="topics topics-<%= action_name %> card">
       <div class="card-body item-list">
         <% if @suggest_topics.present? %>
@@ -34,7 +34,7 @@
       </script>
     <% end %>
   </div>
-  <div class="sidebar col-lg-3">
+  <div class="w-full sm:w-1/4">
     <%= render "topics/sidebar_for_topic_index" %>
   </div>
 </div>

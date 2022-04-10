@@ -496,19 +496,6 @@ hr {
 }
 
 #topic-sidebar {
-  position: fixed;
-  display: none;
-  width: 260px;
-
-  @media (min-width: 960px) {
-    display: block;
-    width: 224px;
-  }
-
-  @media (min-width: 1200px) {
-    display: block;
-    width: 272px;
-  }
 
   .group {
     text-align: center;

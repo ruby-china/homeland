@@ -2,11 +2,11 @@
   <td width="100"><%= user.id %></td>
   <td width="32"><%= user_avatar_tag(user, :md) %></td>
   <td>
-    <div class="flex aic jcsb">
+    <div class="flex items-center jcsb">
       <div class="username">
         <%= link_to user.fullname, user_path(user), target: "_blank" %>
       </div>
-      <div class="flex aic">
+      <div class="flex items-center">
         <%= user_level_tag(user) unless user.member? %>
         <div class="time ml-2">
           <%= icon_tag("clock") %> <%= user.created_at&.to_date %>

@@ -6,7 +6,7 @@
           <div class='image'><%= user_avatar_tag(@user, :lg, link: false) %></div>
         </div>
         <div class="media-body">
-          <div class="item name-box flex aic jcsb">
+          <div class="item name-box flex items-center jcsb">
             <div>
               <% if @user.name.present? %>
                 <div class="fullname"><%= @user.name %></div>
@@ -65,7 +65,7 @@
           <%= link_to(icon_tag("rss"), feed_user_url(@user), target: '_blank', rel: 'nofollow') %>
         </div>
       </div>
-      <div class="follow-info flex aic jcsb hide-ios">
+      <div class="follow-info flex items-center jcsb hide-ios">
         <div class="followers" data-login="<%= @user.login %>">
           <%= link_to @user.followers_count, followers_user_path(@user), class: "counter" %>
           <%= link_to t("users.menu.followers"), followers_user_path(@user), class: "text" %>

@@ -20,7 +20,7 @@
       </div>
     <% end %>
   <% end %>
-  <div class="form-actions jcsb hide-ios">
+  <div class="form-actions md:justify-between hide-ios">
     <%= f.submit t("common.publish"), class: "btn btn-primary", 'data-disable-with' => t("common.saving"), 'data-tb' => "save-topic" %>
     <div class="hide-ios"><a href="/markdown" target="_blank"><i class="fa fa-life-ring"></i> <%= t("topics.form.markdown_guides") %></a></div>
   </div>

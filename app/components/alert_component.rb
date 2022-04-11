@@ -13,6 +13,6 @@ class AlertComponent < ApplicationComponent
     type = "alert-success" if type == "notice"
     type = "alert-danger" if type == "alert"
 
-    ["alert alert-dismissible fade show flex items-center jcsb", type].join(" ")
+    ["alert alert-dismissible fade show flex items-center md:justify-between", type].join(" ")
   end
 end

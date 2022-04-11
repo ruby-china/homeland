@@ -1,9 +1,9 @@
 <div class="user-profile-card">
-  <div class="d-flex">
+  <div class="flex">
     <div class="avatar-box"> 
       <%= user_avatar_tag(user, :md) %>
     </div>
-    <div class="flex-grow-1 d-flex justify-content-between">
+    <div class="flex-grow-1 flex justify-content-between">
       <%= link_to user, class: "name-box" do %>
         <div class="fullname">
           <%= user.name %>

@@ -22,7 +22,7 @@
               <% end %>
             </div>
           </div>
-          <div class="item number d-flex align-items-center">
+          <div class="item number flex align-items-center">
             <%= t("users.number_of_user", no: @user.id)%> / <span title="<%= t("users.join_time") %>"><%= @user.created_at.to_date %></span>
             <% if @user.online? %>
             <div class="ml-2 w-2 h-2 rounded bg-green-600" title="<%= t('common.online')%>"></div>

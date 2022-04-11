@@ -1,7 +1,7 @@
 <% content_for :sitemap do %>
   <a href="<%= admin_replies_path %>"><%= t('admin.menu.replies') %></a> <i class="fa fa-angle-right"></i> <span class="current"><%= t("common.edit") %></span>
 <% end %>
-<div class="flex aib">
+<div class="flex items-baseline">
   <h1><%= t("common.edit") %><%= t('admin.menu.replies') %></h1>
   <div class="ml-2">
     <%= link_to '返回', admin_replies_path, class: "btn btn-secondary btn-sm" %>

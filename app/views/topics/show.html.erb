@@ -21,7 +21,7 @@
 <% end %>
 <div class="flex gap-4">
   <div class="grow">
-    <div class="topic-detail card">
+    <div class="topic-detail card mb-4">
       <%= render partial: "topics/topic_info", locals: { topic: @topic, node: @node } %>
       <% if @topic.excellent? %>
         <div class="label-awesome">
@@ -48,7 +48,7 @@
         <%= t("topics.no_replies") %>
       </div>
     <% else %>
-      <div id="replies" class="card" data-last-floor="<%= @replies.count(:all) %>">
+      <div id="replies" class="card mb-4" data-last-floor="<%= @replies.count(:all) %>">
         <div class="items card-body">
           <%= render ReplyComponent.with_collection(@replies, topic: @topic, show_raw: @show_raw) %>
         </div>
@@ -58,7 +58,7 @@
       <% if @topic.closed? %>
         <div class="alert alert-info"><%= t("topics.closed_info_html", closed_at: l(@topic.closed_at, format: :long)) %></div>
       <% else %>
-        <div id="reply" class="card">
+        <div id="reply" class="card mb-4">
           <div class="card-body">
             <div class="card-title hide-ios"><%= t("topics.reply") %></div>
             <% if can? :create, Reply %>
@@ -72,7 +72,7 @@
         </div>
       <% end %>
     <% else %>
-      <div class="card">
+      <div class="card mb-4">
         <div class="card-body">
           <div id="reply" class="form box">
             <div style="padding:20px;" data-turbolinks-action="replace">

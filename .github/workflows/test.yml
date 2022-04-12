@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: huacnlee.autocorrect
-        uses: huacnlee/autocorrect-action@v1.5.5
+        uses: huacnlee/autocorrect-action@v1.5.9
   assets_compile:
     name: Assets Compile
     runs-on: ubuntu-latest

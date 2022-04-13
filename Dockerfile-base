@@ -4,7 +4,7 @@ RUN gem install bundler
 RUN apt update && apt install -y curl gcc g++ gnupg make && \
   curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
 
-RUN apt install -y ca-certificates nodejs cron socat curl git htop tzdata imagemagick nginx libnginx-mod-http-image-filter libnginx-mod-http-geoip  \
+RUN apt install -y ca-certificates cron socat curl git htop tzdata imagemagick nginx libnginx-mod-http-image-filter libnginx-mod-http-geoip  \
   build-essential ruby-dev openssl libpq-dev libxml2-dev libxslt-dev nodejs
 RUN npm i -g corepack
 

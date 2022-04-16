@@ -27,7 +27,7 @@ $utilities: map-merge(
 /* TODO: Remove Bootstrap, its utilities class conflict with tailwindcss
   eg: mb-4(margin-bottom: 1rem) in Tailwind, and margin-bottom: 1.5rem !important; in Bootstrap.
 */
-@import "~bootstrap/scss/bootstrap";
+@import "./bootstrap_custom";
 @import "./iconfont.scss";
 @import "./markdown.scss";
 

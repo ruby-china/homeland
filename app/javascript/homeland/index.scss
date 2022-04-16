@@ -137,11 +137,6 @@ body {
   z-index: 1030;
   line-height: 100%;
 
-  .container {
-    justify-content: unset;
-    position: relative;
-  }
-
   .navbar-toggler {
     outline: none !important;
     padding: 5px 5px;
@@ -1045,9 +1040,7 @@ img.emoji {
     font-size: 14px;
     line-height: 100%;
   }
-  .container {
-    padding: 0;
-  }
+
   .card {
     border-radius: 0;
     border-left: 0px;

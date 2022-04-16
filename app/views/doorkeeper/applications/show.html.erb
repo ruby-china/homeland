@@ -35,6 +35,6 @@
   </div>
   <div class="card-footer">
     <%= link_to t("common.edit"), edit_oauth_application_path(@application), class: 'btn btn-primary' %>
-    <%= link_to t("common.delete"), oauth_application_path(@application), class: "btn btn-danger pull-right", data: { method: :delete, confirm: t("common.confirm_delete") } %>
+    <%= link_to t("common.delete"), oauth_application_path(@application), class: "btn btn-danger float-right", data: { method: :delete, confirm: t("common.confirm_delete") } %>
   </div>
 </div>

@@ -32,7 +32,7 @@
   <div class="form-actions">
     <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => "Saving..." %>
     <%= link_to t("common.cancel"), admin_applications_path, class: "btn" %>
-    <span class="pull-right">
+    <span class="float-right">
       <%= link_to t("common.delete"), admin_application_path(@application.id), class: 'btn btn-danger', method: :delete, 'data-confirm' => t("common.confirm_delete") %>
     </span>
   </div>

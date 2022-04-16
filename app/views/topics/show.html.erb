@@ -27,7 +27,7 @@
         <div class="label-awesome">
           <i class="fa fa-award awesome"></i> <%= t("topics.excellent_info_html") %>
           <% if can?(:close, @topic) %>
-            <div class="pull-right">
+            <div class="float-right">
               <%= link_to icon_tag("close"), action_topic_path(@topic.id, type: 'normal'), method: :post, remote: true %>
             </div>
           <% end %>

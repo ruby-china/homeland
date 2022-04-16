@@ -1,29 +1,6 @@
 @import "_mixins";
 @import "_vars";
 
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
-@import "~bootstrap/scss/utilities"; /* TODO: Remove Bootstrap utilities class */
-
-$utilities: map-merge(
-  $utilities,
-  (
-    "margin-start":
-      map-merge(
-        map-get($utilities, "margin-start"),
-        (
-          class: ml,
-        )
-      ),
-    "margin-end":
-      map-merge(
-        map-get($utilities, "margin-end"),
-        (
-          class: mr,
-        )
-      ),
-  )
-);
 /* TODO: Remove Bootstrap, its utilities class conflict with tailwindcss
   eg: mb-4(margin-bottom: 1rem) in Tailwind, and margin-bottom: 1.5rem !important; in Bootstrap.
 */

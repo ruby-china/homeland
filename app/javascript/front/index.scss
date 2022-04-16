@@ -174,21 +174,7 @@ hr {
 }
 
 .node-header {
-  .container {
-    padding: 5px 20px;
-  }
-
-  &.node-header-with-node {
-    .container {
-      padding: 15px 20px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .container {
-      padding: 5px 8px;
-    }
-
+  @media (max-width: 480px) {    
     .filter {
       .all-nodes {
         display: none;

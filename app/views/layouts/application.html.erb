@@ -42,22 +42,22 @@
     <% end %>
   </head>
   <body class="page-<%= controller_name %><%= ' infinite-scroll' if turbolinks_app? %>" data-controller-name="<%= controller_name %>">
-    <div class="header navbar navbar-expand-md items-stretch">
-      <div class="container mx-auto relative">
-        <div class="navbar-header" data-turbolinks-permanent>
+    <div class="header flex bg-white navbar navbar-expand-md items-stretch">
+      <div class="container mx-auto flex items-center relative flex-wrap md:flex-nowrap z-50">
+        <div class="navbar-header py-2 text-xl font-bold" data-turbolinks-permanent>
           <%= raw Setting.navbar_brand_html %>
         </div>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-navbar">
-          <span class="navbar-toggler-icon"><i class="fa fa-bars"></i></span>
+        <button id="navbar-toggler" class="p-1 md:hidden border-none bg-white" type="button">
+          <span class="flex justify-center items-center"><i class="fa fa-bars"></i></span>
         </button>
-        <div id="main-navbar"  class="collapse navbar-collapse">
+        <div id="main-navbar"  class="hidden md:flex grow items-center basis-full md:basis-auto">
           <%= yield :header %>
           <%= render "shared/navbar" %>
         </div>
         <div class="ml-auto flex navbar-right">
-          <form class="navbar-form d-none d-lg-flex mr-2 form-search active" action="/search" method="GET">
+          <form class="navbar-form hidden lg:flex items-center mr-2 rounded-full form-search active" action="/search" method="GET">
             <i class="fa btn-search fa-search"></i>
-            <input type="text" name="q" class="form-control" value="<%= params[:q] %>" placeholder="<%= t("common.search") %>"></input>
+            <input type="text" name="q" class="form-control border-none" value="<%= params[:q] %>" placeholder="<%= t("common.search") %>"></input>
         </form>
         <%= render "shared/usernav" %>
       </div>

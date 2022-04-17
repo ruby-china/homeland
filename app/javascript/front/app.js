@@ -395,6 +395,17 @@ mediaDark.addEventListener("change", () => {
 document.addEventListener("turbolinks:load", () => {
   window._appView = new AppView();
   switchTheme();
+
+  let navbar_toggle = document.getElementById("navbar-toggler");
+  if(navbar_toggle) {
+    navbar_toggle.addEventListener("click", (event) => {
+      let navmenu = document.getElementById("main-navbar");
+      if(navmenu) {
+        navmenu.classList.toggle("hidden");
+      }
+    });
+  }
+
 });
 
 document.addEventListener("turbolinks:click", (event) => {

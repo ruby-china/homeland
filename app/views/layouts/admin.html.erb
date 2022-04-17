@@ -10,8 +10,8 @@
   <body>
     <div class="header">
       <div class="header navbar navbar-expand flex-md-row bd-navbar">
-        <div class="container mx-auto d-sm-flex">
-          <div class="navbar-header d-none d-md-flex" data-turbolinks-permanent>
+        <div class="container mx-auto sm:flex">
+          <div class="navbar-header hidden md:flex items-center" data-turbolinks-permanent>
             <%= link_to("Admin Panel", main_app.admin_root_path, class: "navbar-brand") %>
           </div>
           <div class="navbar-nav-scroll">
@@ -29,7 +29,7 @@
             end
           end  %>
           </div>
-          <div class="ml-auto d-md-flex">
+          <div class="ml-auto md:flex">
             <%= render "shared/usernav" %>
           </div>
         </div>

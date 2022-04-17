@@ -5,3 +5,8 @@
 .page-notifications #main {
   @apply max-w-4xl;
 }
+
+/*TODO: Create user/team avatar component style. */
+.team-name {
+  @apply text-gray-700;
+}

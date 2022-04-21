@@ -1,9 +1,9 @@
-<div class="row">
+<div class="flex flex-col sm:flex-row gap-4">
   <%= render "/settings/menu" %>
-  <div class="col-md-10">
-    <div class="card card-lg">
-      <div class="card-body">
-        <div class="card-title clearfix">
+  <div class="grow">
+    <div class="p-4 bg-white rounded mb-4">
+      <div class="">
+        <div class="flex justify-between items-center mb-4">
           <%= t("user_setting.applciations") %>
           <div class="actions">
             <%= link_to "New Application", new_oauth_application_path, class: 'btn btn-primary btn-sm' %>
@@ -36,9 +36,9 @@
         </table>
       </div>
     </div>
-    <div class="card card-lg">
-      <div class="card-body">
-        <div class="card-title clearfix">
+    <div class="p-4 bg-white rounded mb-4">
+      <div class="">
+        <div class="flex justify-between items-center mb-4">
           <div>Authorized Apps</div>
         </div>
         <p>You have granted <%= @authorized_applications.count %> applications access to your account.</p>
@@ -65,11 +65,11 @@
       </div>
     </div>
     <% if @devices.length > 0 %>
-      <div class="card">
-        <div class="card-header clearfix">
+      <div class="p-4 bg-white rounded mb-4">
+        <div class="flex justify-between items-center mb-4">
           Devices
         </div>
-        <div class="card-body">
+        <div class="">
           <p>You has granted devices, it will get push notifications.</p>
           <table class="table table-bordered table-striped table-condensed">
             <thead>

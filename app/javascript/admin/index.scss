@@ -75,18 +75,11 @@ pre {
 }
 
 .toolbar {
-  margin-bottom: 15px;
+  @apply mb-4 flex gap-4;  
+}
 
-  .form-inline {
-    @extend .d-grid;
-    @extend .gap-2;
-    @extend .d-sm-block;
-    @extend .d-md-flex;
-
-    .form-control {
-      width: auto;
-    }
-  }
+.toolbar .form-inline {
+  @apply flex space-x-2;
 }
 
 table {

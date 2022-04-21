@@ -1,6 +1,6 @@
-<div class="row">
+<div class="flex flex-col sm:flex-row gap-4">
   <%= render 'menu' %>
-  <div class="col-md-10">
+  <div class="grow">
     <div class="card card-lg">
       <div class="card-body">
         <%= form_for @user, url: setting_path, method: :put, html: { enctype: "multipart/form-data" } do |f| %>

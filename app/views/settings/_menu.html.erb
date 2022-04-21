@@ -1,4 +1,4 @@
-<div class="col-sm-2 col-md-offset-1 setting-menu">
+<div class="w-full sm:w-4/12 md:w-3/12 lg:w-2/12 setting-menu">
   <div class="card">
     <%= render_list class: "nav nav-pills flex-column nav-stacked" do |li|
       li << link_to(icon_tag('user-circle', label: t("user_setting.profile")), setting_path, class: "nav-link")

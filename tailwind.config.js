@@ -6,6 +6,7 @@ module.exports = {
     "./app/components/**/*.html.erb",
     "./app/helpers/**/*.rb",
     "./app/javascript/**/*.js",
+    "./plugins/**/*.erb",
   ],
   theme: {
     screens: {

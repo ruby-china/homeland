@@ -42,7 +42,7 @@
     <% end %>
   </head>
   <body class="page-<%= controller_name %><%= ' infinite-scroll' if turbolinks_app? %>" data-controller-name="<%= controller_name %>">
-    <div class="header flex bg-white navbar navbar-expand-md items-stretch">
+    <div class="header flex navbar navbar-expand-md items-stretch">
       <div class="container mx-auto flex items-center relative flex-wrap md:flex-nowrap z-50">
         <div class="navbar-header py-2 text-xl font-bold" data-turbolinks-permanent>
           <%= raw Setting.navbar_brand_html %>

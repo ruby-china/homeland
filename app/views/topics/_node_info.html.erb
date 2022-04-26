@@ -1,11 +1,11 @@
 <% content_for :sub_navbar do %>
   <div class="sub-navbar node-header <%= "node-header-with-node" if node %> hide-ios">
-    <div class="container">
+    <div class="container mx-auto px-4 py-2">
       <% if !node.blank? %>
         <div class="title">
           <%= node.name %>
           <span class="total"><%= t("topics.total_topics_html", count: node.topics_count) %></span>
-          <div class="pull-right">
+          <div class="float-right">
             <% if node.collapse_summary? %>
               <a class="btn btn-sm btn-secondary" data-bs-toggle ="collapse" href="#node-summary"><i class="fa fa-lightbulb-o"></i></a>
             <% end %>

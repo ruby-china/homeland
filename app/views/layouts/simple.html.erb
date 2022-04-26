@@ -13,27 +13,27 @@
     <%= raw Setting.custom_head_html %>
   </head>
   <body data-controller-name="<%= controller_name %>">
-    <div class="header">
-      <div class="header navbar navbar-expand flex-md-row bd-navbar">
-        <div class="container d-sm-flex flex-wrap">
-          <div class="navbar-header d-none d-md-flex" data-turbolinks-permanent>
+    <div class="header flex bg-white navbar navbar-expand-md items-stretch">
+      <div class="container mx-auto flex items-center relative flex-wrap md:flex-nowrap z-50">
+        <div class="container mx-auto flex flex-wrap">
+          <div class="navbar-header hidden sm:flex items-center text-xl font-bold" data-turbolinks-permanent>
             <%= raw Setting.navbar_brand_html %>
           </div>
           <div class="navbar-nav-scroll">
             <%= render "shared/navbar" %>
           </div>
-          <div class="ml-auto d-md-flex">
+          <div class="ml-auto flex">
             <%= render "shared/usernav" %>
           </div>
         </div>
       </div>
     </div>
-    <div id="main" class="container">
+    <div id="main" class="container mx-auto">
       <%= render AlertComponent.new %>
       <%= yield %>
     </div>
     <footer class="footer">
-      <div class="container">
+      <div class="container mx-auto">
         <%= raw Setting.footer_html %>
       </div>
     </footer>

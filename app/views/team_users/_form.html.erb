@@ -7,7 +7,7 @@
     </div>
   <% else %>
     <div class="form-group">
-      <div class="d-flex">
+      <div class="flex">
         <%= user_avatar_tag(@team_user.user, :sm) %>
         <div class="ml-2"><%= user_name_tag(@team_user.user) %></div>
       </div>
@@ -17,7 +17,7 @@
     <%= f.label :role %>
     <%= f.select :role, TeamUser.roles.keys, {}, class: "form-control" %>
   </div>
-  <div class="form-actions jcsb">
+  <div class="form-actions md:justify-between">
     <% if @team_user.new_record? %>
       <%= f.submit t("teams.new_team_user"), class: "btn btn-primary btn-block", 'data-disable-with' => t("common.saving") %>
     <% else %>

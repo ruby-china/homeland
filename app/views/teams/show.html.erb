@@ -1,9 +1,9 @@
 <%= render '/teams/header' %>
 
-<div class="row">
-  <div class="col-md-8">
-    <div class="card topics">
-      <div class="card-body">
+<div class="flex flex-col md:flex-row justify-center gap-4">
+  <div class="grow">
+    <div class="bg-white topics rounded">
+      <div class="px-4">
         <% if @topics.blank? %>
         <div class="topic"><div class="no-result">No records</div></div>
         <% else %>

@@ -1,8 +1,8 @@
 <% title_tag [@user.fullname, t('users.menu.replies')].join(' · ') %>
 
-<div class="row">
+<div class="flex flex-col md:flex-row gap-4">
   <%= render "sidebar", user: @user %>
-  <div class="col-lg-8">
+  <div class="grow">
     <%= render "menu" %>
     <div class="card">
       <%= render "replies", replies: @replies %>

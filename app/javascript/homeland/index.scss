@@ -1,31 +1,10 @@
 @import "_mixins";
 @import "_vars";
 
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
-@import "~bootstrap/scss/utilities";
-
-$utilities: map-merge(
-  $utilities,
-  (
-    "margin-start":
-      map-merge(
-        map-get($utilities, "margin-start"),
-        (
-          class: ml,
-        )
-      ),
-    "margin-end":
-      map-merge(
-        map-get($utilities, "margin-end"),
-        (
-          class: mr,
-        )
-      ),
-  )
-);
-
-@import "~bootstrap/scss/bootstrap";
+/* TODO: Remove Bootstrap, its utilities class conflict with tailwindcss
+  eg: mb-4(margin-bottom: 1rem) in Tailwind, and margin-bottom: 1.5rem !important; in Bootstrap.
+*/
+@import "./bootstrap_custom";
 @import "./iconfont.scss";
 @import "./markdown.scss";
 
@@ -47,30 +26,6 @@ $utilities: map-merge(
 
 a {
   text-decoration: none;
-}
-
-.aic {
-  align-items: center !important;
-}
-
-.aib {
-  align-items: baseline !important;
-}
-
-.jcc {
-  @extend .justify-content-md-center;
-}
-
-.jcsb {
-  @extend .justify-content-md-between;
-}
-
-.jcsa {
-  justify-content: space-around !important;
-}
-
-.pull-right {
-  float: right;
 }
 
 .divider {
@@ -177,11 +132,6 @@ body {
   color: var(--navbar-text-color);
   z-index: 1030;
   line-height: 100%;
-
-  .container {
-    justify-content: unset;
-    position: relative;
-  }
 
   .navbar-toggler {
     outline: none !important;
@@ -717,8 +667,7 @@ kbd {
   padding: 0.65rem 1rem;
 }
 
-.card {
-  margin-bottom: 25px;
+.card {  
   border-top: 0;
   box-shadow: 0 0 0;
   box-shadow: var(--card-box-shadow);
@@ -934,8 +883,8 @@ kbd {
   border-radius: 120px;
 }
 .avatar-32 {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   border-radius: 120px;
 }
 .avatar-48 {
@@ -1087,9 +1036,7 @@ img.emoji {
     font-size: 14px;
     line-height: 100%;
   }
-  .container {
-    padding: 0;
-  }
+
   .card {
     border-radius: 0;
     border-left: 0px;

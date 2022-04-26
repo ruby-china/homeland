@@ -1,5 +1,5 @@
 <% if current_user && current_user.newbie? %>
-<div class="card">
+<div class="card mb-4">
   <div class="card-header"><%= t("topics.newbie_tip") %></div>
   <div class="card-body">
     <%= raw Setting.newbie_notices %>
@@ -7,7 +7,7 @@
 </div>
 <% else %>
 
-<div class="card">
+<div class="card mb-4">
   <div class="card-body">
     <%= link_to t('topics.new_topic'), main_app.new_topic_path(node: @node&.id), class: 'btn btn-primary btn-block' %>
   </div>
@@ -19,7 +19,7 @@
 <%= raw Setting.topic_index_sidebar_html %>
 
 <% cache(["sidebar_active_users",Time.now.strftime("%Y-%m-%d %H")]) do %>
-<div class="card">
+<div class="card mb-4">
   <div class="flex items-baseline justify-between text-black card-header">
     <%= t('common.active_users') %>
     <a href="<%= main_app.users_path %>" class="text-sm text-gray-400"><%= t("common.more") %></a>
@@ -36,7 +36,7 @@
 <% end %>
 
 <% cache(["sidebar_statistics",Time.now.strftime("%Y-%m-%d %H")]) do %>
-<div class="card">
+<div class="card mb-4">
   <div class="card-header"><%= t("common.statics")%></div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item"><%= t("common.statics_users_count", count: User.unscoped.count) %></li>

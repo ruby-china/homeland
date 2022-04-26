@@ -1,6 +1,6 @@
-<div class="row">
+<div class="flex flex-col sm:flex-row gap-4">
   <%= render 'menu' %>
-  <div class="col-md-10">
+  <div class="grow">
     <div class="card card-lg">
       <div class="card-body">
         <div class="card-section delete-account">
@@ -17,10 +17,11 @@
             <%= f.submit t("users.ensure_to_delete"), :class => "btn btn-danger", 'data-disable-with' => t("common.submitting") %>
           <% end %>
         </div>
+
         <% if !Setting.sso_enabled? && @user.authorizations.any? %>
           <div class="card-section authorizations">
             <div class="heading"><%= t("users.bind_another_account") %></div>
-            <div class="d-block d-md-flex d-grid">
+            <div class="flex">
               <div class="btn-group">
                 <% @user.authorizations.each do |authorizaion| %>
                   <%= link_to auth_unbind_setting_path(authorizaion.provider), class: "btn btn-outline-warning", title: ("users.click_to_unbind"), method: 'delete' do %>

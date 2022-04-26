@@ -10,8 +10,8 @@
   <body>
     <div class="header">
       <div class="header navbar navbar-expand flex-md-row bd-navbar">
-        <div class="container d-sm-flex">
-          <div class="navbar-header d-none d-md-flex" data-turbolinks-permanent>
+        <div class="container mx-auto sm:flex">
+          <div class="navbar-header hidden md:flex items-center" data-turbolinks-permanent>
             <%= link_to("Admin Panel", main_app.admin_root_path, class: "navbar-brand") %>
           </div>
           <div class="navbar-nav-scroll">
@@ -29,18 +29,18 @@
             end
           end  %>
           </div>
-          <div class="ml-auto d-md-flex">
+          <div class="ml-auto md:flex">
             <%= render "shared/usernav" %>
           </div>
         </div>
       </div>
     </div>
-    <div class="container">
+    <div class="container mx-auto">
       <div id="main" class="card">
         <div class="card-body">
           <% if Setting.require_restart == true %>
             <div class="alert alert-warning">
-              System settings have been updated, need to restart the application to take effect <%= link_to icon_tag("power-off", label: "Reboot now"), main_app.reboot_admin_dashboards_path, data: { method: :post, confirm: "Are you sure to reboot Homeland?", disable_with: "Rebooting..." }, class: "text-danger pull-right" %>
+              System settings have been updated, need to restart the application to take effect <%= link_to icon_tag("power-off", label: "Reboot now"), main_app.reboot_admin_dashboards_path, data: { method: :post, confirm: "Are you sure to reboot Homeland?", disable_with: "Rebooting..." }, class: "text-danger float-right" %>
             </div>
           <% end %>
           <%= render AlertComponent.new %>
@@ -49,7 +49,7 @@
       </div>
     </div>
     <footer class="footer">
-      <div class="container">
+      <div class="container mx-auto">
         <p>Powered by <a href="https://github.com/ruby-china/homeland/blob/master/CHANGELOG.md">Homeland <%= Homeland.version %></a></p>
       </div>
     </footer>

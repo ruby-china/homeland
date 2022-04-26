@@ -174,21 +174,7 @@ hr {
 }
 
 .node-header {
-  .container {
-    padding: 5px 20px;
-  }
-
-  &.node-header-with-node {
-    .container {
-      padding: 15px 20px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .container {
-      padding: 5px 8px;
-    }
-
+  @media (max-width: 480px) {    
     .filter {
       .all-nodes {
         display: none;
@@ -399,8 +385,6 @@ hr {
 }
 
 .topic-detail {
-  margin-bottom: 15px;
-
   .card-body {
     padding-top: 20px;
     padding-bottom: 20px;
@@ -484,11 +468,7 @@ hr {
     .user-name {
       color: var(--primary);
       font-size: 14px;
-    }
-    .team-name {
-      font-size: 14px;
-      color: $green;
-    }
+    }    
     em {
       font-style: normal;
     }
@@ -496,19 +476,6 @@ hr {
 }
 
 #topic-sidebar {
-  position: fixed;
-  display: none;
-  width: 260px;
-
-  @media (min-width: 960px) {
-    display: block;
-    width: 224px;
-  }
-
-  @media (min-width: 1200px) {
-    display: block;
-    width: 272px;
-  }
 
   .group {
     text-align: center;
@@ -561,8 +528,7 @@ hr {
   }
 }
 
-#replies {
-  margin-bottom: 15px;
+#replies {  
   .card-body {
     padding-bottom: 10px;
   }
@@ -801,10 +767,6 @@ hr {
 }
 
 .sidebar {
-  .card {
-    margin-bottom: 1.25rem;
-  }
-
   .card-body {
     word-break: break-all;
   }

@@ -20,7 +20,7 @@
   </script>
 <% end %>
 <div class="flex gap-4">
-  <div class="grow">
+  <div class="grow w-3/4">
     <div class="topic-detail card mb-4">
       <%= render partial: "topics/topic_info", locals: { topic: @topic, node: @node } %>
       <% if @topic.excellent? %>

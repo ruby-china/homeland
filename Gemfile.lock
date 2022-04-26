@@ -358,18 +358,18 @@ GEM
       netrc (~> 0.8)
     rexml (3.2.5)
     rouge (3.28.0)
-    rubocop (1.28.2)
+    rubocop (1.25.0)
       parallel (~> 1.10)
       parser (>= 3.1.0.0)
       rainbow (>= 2.2.2, < 4.0)
       regexp_parser (>= 1.8, < 3.0)
       rexml
-      rubocop-ast (>= 1.17.0, < 2.0)
+      rubocop-ast (>= 1.15.1, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 3.0)
     rubocop-ast (1.17.0)
       parser (>= 3.1.1.0)
-    rubocop-performance (1.13.3)
+    rubocop-performance (1.13.2)
       rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
     ruby-progressbar (1.11.0)
@@ -417,9 +417,9 @@ GEM
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
     ssrf_filter (1.0.7)
-    standard (1.11.0)
-      rubocop (= 1.28.2)
-      rubocop-performance (= 1.13.3)
+    standard (1.7.0)
+      rubocop (= 1.25.0)
+      rubocop-performance (= 1.13.2)
     strscan (3.0.1)
     thor (1.2.1)
     tilt (2.0.10)
@@ -514,7 +514,7 @@ DEPENDENCIES
   sidekiq-cron
   social-share-button
   spring
-  standard
+  standard (= 1.7.0)
   turbolinks
   twemoji
   uglifier

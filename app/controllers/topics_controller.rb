@@ -57,7 +57,11 @@ class TopicsController < ApplicationController
   end
 
   def read
-    @topic.hits.incr(1)
+    cookie_read_flag = "_topic_#{@topic.id}_read".to_sym
+    if cookies[cookie_read_flag].blank?
+      cookies[cookie_read_flag] = {value: "1", expires: 1.minutes}
+      @topic.hits.incr(1)
+    end
     current_user&.read_topic(@topic)
     render plain: "1"
   end

@@ -108,5 +108,5 @@ group :development, :test do
   gem "minitest-spec-rails"
   gem "factory_bot_rails"
 
-  gem "standard", "1.7.0"
+  gem "standard"
 end

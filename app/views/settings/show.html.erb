@@ -5,8 +5,8 @@
       <div class="card-body">
         <%= form_for @user, url: setting_path, method: :put, html: { enctype: "multipart/form-data" } do |f| %>
           <%= render "shared/error_messages", target: @user %>
-          <div class="row">
-            <div class="col-sm-9">
+          <div class="flex gap-4">
+            <div class="grow">
               <div class="card-section">
                 <% if Setting.allow_change_login? %>
                   <div class="form-group">
@@ -56,7 +56,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-sm-3">
+            <div class="w-1/3 shrink-0">
               <div class="form-group avatar-preview" style="text-align: center;">
                 <%= user_avatar_tag(@user, :lg, link: false) %>
               </div>

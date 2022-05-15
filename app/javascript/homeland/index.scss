@@ -256,7 +256,6 @@ body {
       font-size: 14px;
       border: none;
       cursor: text;
-      width: 140px;
       height: 18px;
       line-height: 18px;
       background: transparent;
@@ -299,7 +298,7 @@ body {
   }
 
   .user-bar {
-    min-width: 150px;
+    min-width: 130px;
     display: flex;
     align-items: center;
     justify-content: flex-end;

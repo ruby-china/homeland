@@ -6,6 +6,7 @@ db/*.sqlite3
 tmp/
 log/*.log
 log/*.log*
+*.log
 tmp/**/*
 .sass-cache/
 .yardoc/

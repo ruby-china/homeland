@@ -655,11 +655,9 @@ kbd {
 }
 
 .card {
-  border-top: 0;
-  box-shadow: 0 0 0;
-  box-shadow: var(--card-box-shadow);
-  border: 0;
-  background: var(--card-background-color);
+  @apply border-none bg-white shadow-sm sm:rounded-lg;
+  @apply bg-white;
+  @apply dark:bg-gray-800;
 
   .card {
     border: 1px solid var(--card-inset-border-color);

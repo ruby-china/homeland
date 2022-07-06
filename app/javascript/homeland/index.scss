@@ -116,33 +116,29 @@ textarea,
 
 /* Bootstrap Theme */
 body {
-  background: var(--body-background-color);
-  color: var(--primary);
-  font-family: PingFang SC, Noto Sans, Roboto, Microsoft Yahei, sans-serif;
-  font-size: 14px;
-  letter-spacing: 0.03em;
+  @apply bg-gray-100 text-gray-800 font-sans;
+  @apply dark:bg-gray-900 dark:text-gray-100;
 }
 
 .header {
-  height: 50px;
   padding: 0;
-  background: var(--navbar-background-color);
-  box-shadow: 0 1px 1px var(--navbar-shadow-color);
-  border: 0px;
-  color: var(--navbar-text-color);
+  @apply bg-white shadow-sm border-none text-gray-800;
+  @apply dark:bg-gray-800 dark:text-gray-200;
+
   z-index: 1030;
   line-height: 100%;
 
   .navbar-toggler {
     outline: none !important;
-    padding: 5px 5px;
-    height: 50px;
+
+    @apply p-2 rounded bg-transparent border-none md:hidden text-gray-600;
+    @apply dark:text-gray-200;
 
     &:active {
-      background: var(--navbar-background-color);
+      @apply bg-gray-200 dark:bg-gray-700;
     }
     &:focus {
-      box-shadow: none;
+      @apply shadow-none;
     }
 
     .navbar-toggler-icon {
@@ -155,24 +151,22 @@ body {
   }
 
   .navbar-right {
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 50px;
+    @apply flex items-center ml-auto space-x-6;
   }
 
   .navbar-nav {
-    background: var(--navbar-background-color);
-    padding: 0px;
+    @apply bg-transparent p-0;
+
     .nav-link {
       padding: 15px 15px;
-      color: var(--navbar-text-color);
+      @apply text-gray-800;
+      @apply dark:text-gray-200;
     }
   }
 
   .collapse.show {
     .navbar-nav {
-      box-shadow: 0 2px 5px var(--navbar-fixed-shadow-color);
+      @apply shadow-sm;
     }
   }
 
@@ -182,18 +176,18 @@ body {
   }
 
   &.navbar-fixed-active {
-    box-shadow: 0 1px 1px var(--navbar-fixed-shadow-color);
+    @apply shadow-md;
   }
 
   .navbar-brand {
     line-height: 100%;
-    color: var(--navbar-brand-text-color) !important;
-    font-weight: bold;
-    margin-left: 1em;
-    margin-right: 1em;
-    border-bottom: 0px;
+    font-family: PingFang SC, Noto Sans, Roboto, Microsoft Yahei, sans-serif;
+    @apply text-lg py-2 mr-6 text-gray-500 border-none;
+    @apply dark:text-gray-100;
+
     b {
-      color: var(--navbar-brand-text-strong-color);
+      @apply text-blue-600;
+      @apply dark:text-gray-300;
     }
   }
 
@@ -204,75 +198,70 @@ body {
     }
   }
 
+  .main-navbar-open {
+    @apply flex md:flex absolute top-12 w-52;
+    @apply rounded bg-white shadow border-none text-gray-800;
+    @apply dark:bg-gray-800 dark:text-gray-200;
+  }
+
   #main-nav-menu {
     &.navbar-nav .nav-item a.nav-link {
-      color: var(--navbar-text-color);
-      font-size: 15px;
-      border-top: 3px solid var(--navbar-background-color);
-      border-bottom: 3px solid var(--navbar-background-color);
-      transition: all 0.2s ease-in-out;
+      border: 0;
+
+      padding: 15px 16px;
+
+      @apply border-none md:border-solid border-b-2 transition-all duration-200 ease-in-out;
+      @apply border-transparent text-gray-800;
+      @apply dark:text-gray-300;
+      font-size: 16px;
     }
     &.navbar-nav .nav-item a.nav-link:active {
-      background-color: var(--navbar-item-link-active-background-color);
-      border-bottom-color: var(--navbar-item-link-active-background-color);
+      @apply border-blue-600 text-blue-600;
+      @apply dark:border-gray-600 dark:text-gray-100;
     }
     &.navbar-nav .nav-item {
       a:hover,
       a.active,
       a.active:focus,
       a.active:hover {
-        color: var(--navbar-item-active-text-color);
-        background: transparent;
-        border-bottom-color: var(--navbar-item-active-text-color);
+        @apply text-blue-600 border-blue-600;
+        @apply dark:border-gray-600 dark:text-gray-200;
       }
     }
   }
 
   .form-search {
-    font-size: 14px;
     position: relative;
-    margin: 10px 0 9px 0;
     padding: 15px 0;
     height: 18px;
-    border-radius: 20px;
-    border: 1px solid var(--input-group-border-color);
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+    @apply text-sm hidden lg:flex items-center justify-around bg-gray-100 rounded-3xl space-x-2;
+    @apply dark:bg-gray-900;
 
-    .fa {
-      color: #333;
-      &:hover {
-        color: #666;
-      }
-    }
     .fa-search {
-      margin-left: 10px;
-      cursor: pointer;
-      color: var(--text-color2);
-      transition: all 0.3s;
+      @apply ml-3 cursor-pointer text-gray-200;
+      @apply dark:text-gray-700;
     }
-    .form-control {
-      font-size: 14px;
-      border: none;
-      cursor: text;
+
+    input {
       height: 18px;
       line-height: 18px;
-      background: transparent;
-      transition: all 0.3s;
       box-sizing: border-box;
       box-shadow: none !important;
-      color: var(--text-color1);
+      @apply w-28 focus:w-48 transition-all duration-300 ease-in-out;
+      @apply outline-none border-none shadow-none text-sm cursor-text bg-transparent text-gray-600;
+      @apply dark:text-gray-300;
+
       &:focus {
-        outline: none;
-        border: none;
-        box-shadow: none;
+        @apply outline-none border-none shadow-none appearance-none;
+
         &::-webkit-input-placeholder {
-          color: var(--text-color1);
+          @apply text-gray-400;
+          @apply dark:text-gray-600;
         }
       }
       &::-webkit-input-placeholder {
-        color: #aaa;
+        @apply text-gray-300;
+        @apply dark:text-gray-700;
       }
     }
   }
@@ -308,8 +297,6 @@ body {
     }
 
     .nav-link {
-      height: 50px;
-      line-height: 50px;
       padding: 15px 10px;
       display: flex;
       align-items: center;
@@ -326,8 +313,8 @@ body {
 }
 
 .sub-navbar {
-  background: var(--sub-navbar-background-color);
-  box-shadow: 0 1px 0px var(--sub-navbar-shadow-color);
+  @apply bg-white shadow-sm;
+  @apply dark:bg-gray-800;
 
   a {
     color: $blue;
@@ -667,7 +654,7 @@ kbd {
   padding: 0.65rem 1rem;
 }
 
-.card {  
+.card {
   border-top: 0;
   box-shadow: 0 0 0;
   box-shadow: var(--card-box-shadow);

@@ -91,7 +91,8 @@ hr {
       overflow: hidden;
       top: 0;
       position: absolute;
-      background: var(--navbar-topic-title-background-color);
+      @apply bg-white;
+      @apply dark:bg-gray-800;
       display: none;
       min-width: 400px;
 
@@ -174,7 +175,7 @@ hr {
 }
 
 .node-header {
-  @media (max-width: 480px) {    
+  @media (max-width: 480px) {
     .filter {
       .all-nodes {
         display: none;
@@ -468,7 +469,7 @@ hr {
     .user-name {
       color: var(--primary);
       font-size: 14px;
-    }    
+    }
     em {
       font-style: normal;
     }
@@ -476,7 +477,6 @@ hr {
 }
 
 #topic-sidebar {
-
   .group {
     text-align: center;
     margin-bottom: 20px;
@@ -528,7 +528,7 @@ hr {
   }
 }
 
-#replies {  
+#replies {
   .card-body {
     padding-bottom: 10px;
   }

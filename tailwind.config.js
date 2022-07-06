@@ -1,4 +1,5 @@
-const defaultTheme = require('tailwindcss/defaultTheme')
+const defaultTheme = require("tailwindcss/defaultTheme");
+const colors = require("tailwindcss/colors");
 
 module.exports = {
   content: [
@@ -9,9 +10,10 @@ module.exports = {
     "./plugins/**/*.erb",
   ],
   theme: {
-    screens: {
-      'xs': '480px',
-      ...defaultTheme.screens,
+    colors: {
+      ...colors,
+      gray: colors.zinc,
+      red: colors.rose,
     },
     extend: {},
   },

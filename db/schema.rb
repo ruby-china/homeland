@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_13_130722) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_01_13_130722) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,8 +21,8 @@ ActiveRecord::Schema.define(version: 2022_01_13_130722) do
     t.integer "target_id"
     t.string "user_type"
     t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["target_type", "target_id", "action_type"], name: "index_actions_on_target_type_and_target_id_and_action_type"
     t.index ["user_type", "user_id", "action_type"], name: "index_actions_on_user_type_and_user_id_and_action_type"
   end
@@ -32,8 +31,8 @@ ActiveRecord::Schema.define(version: 2022_01_13_130722) do
     t.string "provider", null: false
     t.string "uid", limit: 1000, null: false
     t.integer "user_id", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["provider", "uid"], name: "index_authorizations_on_provider_and_uid"
   end
 
@@ -42,9 +41,9 @@ ActiveRecord::Schema.define(version: 2022_01_13_130722) do
     t.integer "user_id", null: false
     t.string "commentable_type"
     t.integer "commentable_id"
-    t.datetime "deleted_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "deleted_at", precision: nil
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["commentable_id"], name: "index_comments_on_commentable_id"
     t.index ["commentable_type"], name: "index_comments_on_commentable_type"
     t.index ["user_id"], name: "index_comments_on_user_id"
@@ -55,8 +54,8 @@ ActiveRecord::Schema.define(version: 2022_01_13_130722) do
     t.bigint "countable_id"
     t.string "key", null: false
     t.integer "value", default: 0, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["countable_type", "countable_id", "key"], name: "index_counters_on_countable_type_and_countable_id_and_key", unique: true
     t.index ["countable_type", "countable_id"], name: "index_counters_on_countable"
     t.index ["countable_type", "key", "value"], name: "index_counters_on_countable_type_and_key_and_value"
@@ -66,24 +65,24 @@ ActiveRecord::Schema.define(version: 2022_01_13_130722) do
     t.integer "platform", null: false
     t.integer "user_id", null: false
     t.string "token", null: false
-    t.datetime "last_actived_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "last_actived_at", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["user_id"], name: "index_devices_on_user_id"
   end
 
   create_table "exception_tracks", id: :serial, force: :cascade do |t|
     t.string "title"
     t.text "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "locations", id: :serial, force: :cascade do |t|
     t.string "name", null: false
     t.integer "users_count", default: 0, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["name"], name: "index_locations_on_name"
   end
 
@@ -92,8 +91,8 @@ ActiveRecord::Schema.define(version: 2022_01_13_130722) do
     t.string "summary"
     t.integer "sort", default: 0, null: false
     t.integer "topics_count", default: 0, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["sort"], name: "index_nodes_on_sort"
   end
 
@@ -104,8 +103,8 @@ ActiveRecord::Schema.define(version: 2022_01_13_130722) do
     t.integer "word_count", default: 0, null: false
     t.integer "changes_count", default: 0, null: false
     t.boolean "publish", default: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["user_id"], name: "index_notes_on_user_id"
   end
 
@@ -119,9 +118,9 @@ ActiveRecord::Schema.define(version: 2022_01_13_130722) do
     t.integer "second_target_id"
     t.string "third_target_type"
     t.integer "third_target_id"
-    t.datetime "read_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "read_at", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
@@ -131,8 +130,8 @@ ActiveRecord::Schema.define(version: 2022_01_13_130722) do
     t.string "token", null: false
     t.bigint "expires_in"
     t.text "redirect_uri", null: false
-    t.datetime "created_at", null: false
-    t.datetime "revoked_at"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "revoked_at", precision: nil
     t.string "scopes"
     t.index ["token"], name: "index_oauth_access_grants_on_token", unique: true
   end
@@ -143,8 +142,8 @@ ActiveRecord::Schema.define(version: 2022_01_13_130722) do
     t.string "token", null: false
     t.string "refresh_token"
     t.bigint "expires_in"
-    t.datetime "revoked_at"
-    t.datetime "created_at", null: false
+    t.datetime "revoked_at", precision: nil
+    t.datetime "created_at", precision: nil, null: false
     t.string "scopes"
     t.index ["refresh_token"], name: "index_oauth_access_tokens_on_refresh_token", unique: true
     t.index ["resource_owner_id"], name: "index_oauth_access_tokens_on_resource_owner_id"
@@ -157,8 +156,8 @@ ActiveRecord::Schema.define(version: 2022_01_13_130722) do
     t.string "secret", null: false
     t.text "redirect_uri", null: false
     t.string "scopes", default: "", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.integer "owner_id"
     t.string "owner_type"
     t.integer "level", default: 0, null: false
@@ -175,8 +174,8 @@ ActiveRecord::Schema.define(version: 2022_01_13_130722) do
     t.string "title", null: false
     t.text "desc", null: false
     t.text "body", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["page_id"], name: "index_page_versions_on_page_id"
   end
 
@@ -190,17 +189,17 @@ ActiveRecord::Schema.define(version: 2022_01_13_130722) do
     t.integer "word_count", default: 0, null: false
     t.integer "changes_cout", default: 1, null: false
     t.integer "comments_count", default: 0, null: false
-    t.datetime "deleted_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "deleted_at", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["slug"], name: "index_pages_on_slug", unique: true
   end
 
   create_table "photos", id: :serial, force: :cascade do |t|
     t.integer "user_id"
     t.string "image", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["user_id"], name: "index_photos_on_user_id"
   end
 
@@ -219,9 +218,9 @@ ActiveRecord::Schema.define(version: 2022_01_13_130722) do
     t.integer "state", default: 1, null: false
     t.integer "likes_count", default: 0
     t.integer "mentioned_user_ids", default: [], array: true
-    t.datetime "deleted_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "deleted_at", precision: nil
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.string "action"
     t.string "target_type"
     t.string "target_id"
@@ -236,8 +235,8 @@ ActiveRecord::Schema.define(version: 2022_01_13_130722) do
     t.integer "searchable_id", null: false
     t.tsvector "tokens"
     t.text "content"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["searchable_type", "searchable_id"], name: "index_search_documents_on_searchable_type_and_searchable_id", unique: true
     t.index ["tokens"], name: "index_search_documents_on_tokens", using: :gin
   end
@@ -247,16 +246,16 @@ ActiveRecord::Schema.define(version: 2022_01_13_130722) do
     t.text "value"
     t.integer "thing_id"
     t.string "thing_type", limit: 30
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true
   end
 
   create_table "site_nodes", id: :serial, force: :cascade do |t|
     t.string "name", null: false
     t.integer "sort", default: 0, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["sort"], name: "index_site_nodes_on_sort"
   end
 
@@ -266,9 +265,9 @@ ActiveRecord::Schema.define(version: 2022_01_13_130722) do
     t.string "name", null: false
     t.string "url", null: false
     t.string "desc"
-    t.datetime "deleted_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "deleted_at", precision: nil
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["site_node_id", "deleted_at"], name: "index_sites_on_site_node_id_and_deleted_at"
     t.index ["site_node_id"], name: "index_sites_on_site_node_id"
     t.index ["url"], name: "index_sites_on_url"
@@ -279,8 +278,8 @@ ActiveRecord::Schema.define(version: 2022_01_13_130722) do
     t.integer "user_id", null: false
     t.integer "role"
     t.integer "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["team_id"], name: "index_team_users_on_team_id"
     t.index ["user_id"], name: "index_team_users_on_user_id"
   end
@@ -296,16 +295,16 @@ ActiveRecord::Schema.define(version: 2022_01_13_130722) do
     t.string "who_deleted"
     t.integer "last_active_mark"
     t.boolean "lock_node", default: false
-    t.datetime "suggested_at"
+    t.datetime "suggested_at", precision: nil
     t.integer "grade", default: 0
-    t.datetime "replied_at"
+    t.datetime "replied_at", precision: nil
     t.integer "replies_count", default: 0, null: false
     t.integer "likes_count", default: 0
     t.integer "mentioned_user_ids", default: [], array: true
-    t.datetime "deleted_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.datetime "closed_at"
+    t.datetime "deleted_at", precision: nil
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
+    t.datetime "closed_at", precision: nil
     t.integer "team_id"
     t.index ["deleted_at"], name: "index_topics_on_deleted_at"
     t.index ["grade"], name: "index_topics_on_grade"
@@ -326,8 +325,8 @@ ActiveRecord::Schema.define(version: 2022_01_13_130722) do
     t.string "name"
     t.string "avatar_url"
     t.text "last_payload", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["uid"], name: "index_user_ssos_on_uid", unique: true
   end
 
@@ -347,15 +346,15 @@ ActiveRecord::Schema.define(version: 2022_01_13_130722) do
     t.string "avatar"
     t.integer "state", default: 1, null: false
     t.string "tagline"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
+    t.datetime "reset_password_sent_at", precision: nil
+    t.datetime "remember_created_at", precision: nil
     t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
+    t.datetime "current_sign_in_at", precision: nil
+    t.datetime "last_sign_in_at", precision: nil
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
     t.string "password_salt", default: "", null: false
@@ -367,7 +366,7 @@ ActiveRecord::Schema.define(version: 2022_01_13_130722) do
     t.string "type", limit: 20
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
-    t.datetime "locked_at"
+    t.datetime "locked_at", precision: nil
     t.integer "team_users_count"
     t.integer "followers_count", default: 0
     t.integer "following_count", default: 0

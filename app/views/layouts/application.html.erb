@@ -42,26 +42,26 @@
     <% end %>
   </head>
   <body class="page-<%= controller_name %><%= ' infinite-scroll' if turbolinks_app? %>" data-controller-name="<%= controller_name %>">
-    <div class="header flex navbar navbar-expand-md items-stretch">
-      <div class="container mx-auto flex items-center relative flex-wrap md:flex-nowrap z-50">
-        <div class="navbar-header py-2 text-xl font-bold" data-turbolinks-permanent>
+    <div class="flex items-stretch header navbar navbar-expand-md">
+      <div class="container relative z-50 flex flex-wrap items-center px-3 mx-auto md:px-0 md:flex-nowrap">
+        <div class="navbar-header" data-turbolinks-permanent>
           <%= raw Setting.navbar_brand_html %>
         </div>
-        <button id="navbar-toggler" class="p-1 md:hidden border-none bg-white" type="button">
-          <span class="flex justify-center items-center"><i class="fa fa-bars"></i></span>
+        <button id="navbar-toggler" class="navbar-toggler" type="button">
+          <span class="flex items-center justify-center"><i class="fa fa-bars"></i></span>
         </button>
-        <div id="main-navbar"  class="hidden md:flex grow items-center basis-full md:basis-auto">
+        <div id="main-navbar"  class="items-center flex-1 hidden md:flex grow basis-full md:basis-auto">
           <%= yield :header %>
           <%= render "shared/navbar" %>
         </div>
-        <div class="ml-auto flex navbar-right">
-          <form class="navbar-form hidden lg:flex items-center mr-2 rounded-full form-search active" action="/search" method="GET">
+        <div class="navbar-right">
+          <form class="form-search active" action="/search" method="GET">
             <i class="fa btn-search fa-search"></i>
-            <input type="text" name="q" class="form-control border-none w-20 sm:w-64" value="<%= params[:q] %>" placeholder="<%= t("common.search") %>"></input>
-        </form>
-        <%= render "shared/usernav" %>
-      </div>
-    </div>
+            <input type="text" name="q" value="<%= params[:q] %>" placeholder="<%= t("common.search") %>"></input>
+          </form>
+          <%= render "shared/usernav" %>
+        </div>
+     </div>
   </div>
   <%= yield :sub_navbar %>
   <div id="main" class="container mx-auto">

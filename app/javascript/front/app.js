@@ -328,8 +328,7 @@ const AppView = Backbone.View.extend({
         finishedMsg: '<div style="text-align: center; padding: 5px;">EOF</div>',
         msgText:
           '<div style="text-align: center; padding: 5px;">Loading...</div>',
-        img:
-          "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==",
+        img: "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==",
       },
     });
   },
@@ -397,15 +396,14 @@ document.addEventListener("turbolinks:load", () => {
   switchTheme();
 
   let navbar_toggle = document.getElementById("navbar-toggler");
-  if(navbar_toggle) {
+  if (navbar_toggle) {
     navbar_toggle.addEventListener("click", (event) => {
       let navmenu = document.getElementById("main-navbar");
-      if(navmenu) {
-        navmenu.classList.toggle("hidden");
+      if (navmenu) {
+        navmenu.classList.toggle("main-navbar-open");
       }
     });
   }
-
 });
 
 document.addEventListener("turbolinks:click", (event) => {

@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
 class AlertComponent < ApplicationComponent
-  def initialize
-  end
-
   def render?
     !!flash.any?
   end

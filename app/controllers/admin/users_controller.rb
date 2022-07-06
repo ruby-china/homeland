@@ -11,14 +11,14 @@ module Admin
       if params[:q].present?
         qstr = "%#{params[:q].downcase}%"
         scope = case field
-          when "login"
-            scope.where("lower(login) LIKE ?", qstr)
-          when "email"
-            scope.where("lower(email) LIKE ?", qstr)
-          when "name"
-            scope.where("lower(name) LIKE ?", qstr)
-          when "tagline"
-            scope.where("lower(tagline) LIKE ?", qstr)  
+        when "login"
+          scope.where("lower(login) LIKE ?", qstr)
+        when "email"
+          scope.where("lower(email) LIKE ?", qstr)
+        when "name"
+          scope.where("lower(name) LIKE ?", qstr)
+        when "tagline"
+          scope.where("lower(tagline) LIKE ?", qstr)
         end
 
       end

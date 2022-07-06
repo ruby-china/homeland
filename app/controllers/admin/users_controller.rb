@@ -17,6 +17,8 @@ module Admin
             scope.where("lower(email) LIKE ?", qstr)
           when "name"
             scope.where("lower(name) LIKE ?", qstr)
+          when "tagline"
+            scope.where("lower(tagline) LIKE ?", qstr)  
         end
 
       end

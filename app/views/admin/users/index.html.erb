@@ -3,7 +3,7 @@
 <% end %>
 <div class="toolbar">
   <form class="form-inline" action="<%= admin_users_path %>">
-    <%= select_tag(:field, options_for_select([['Username','login'], ['Email','email'], ['Name','name']], params[:field]), class: 'form-control') %>
+    <%= select_tag(:field, options_for_select([['Username','login'], ['Email','email'], ['Name','name'], ['Tagline','tagline']], params[:field]), class: 'form-control') %>
     <input type="text" name="q" class="form-control" value="<%= params[:q] %>" placeholder="Search">
     <%= select_tag(:type, options_for_select([['All',''], ['Team','Team']], params[:type]), class: 'form-control') %>
     <%= select_tag(:state, options_for_select(User.state_options, params[:state]), class: 'form-control', include_blank: "All state") %>

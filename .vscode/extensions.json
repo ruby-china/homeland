@@ -17,6 +17,7 @@
     "redhat.vscode-yaml",
     "sibiraj-s.vscode-scss-formatter",
     "william-voyek.vscode-nginx",
-    "wingrunr21.vscode-ruby"
+    "wingrunr21.vscode-ruby",
+    "lokalise.i18n-ally"
   ]
 }

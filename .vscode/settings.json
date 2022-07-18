@@ -39,5 +39,13 @@
   },
   "prettier.singleQuote": false,
   "autocorrect.enable": true,
-  "autocorrect.formatOnSave": true
+  "autocorrect.formatOnSave": true,
+  "i18n-ally.sortKeys": true,
+  "i18n-ally.keepFulfilled": true,
+  "i18n-ally.localesPaths": "config/locales",
+  "i18n-ally.sourceLanguage": "zh-CN",
+  "i18n-ally.displayLanguage": "zh-CN",
+  "i18n-ally.keystyle": "flat",
+  "i18n-ally.pathMatcher": "*.{locale}.yml",
+  "i18n-ally.translate.engines": ["google-cn", "google"]
 }

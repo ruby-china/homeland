@@ -1,5 +1,5 @@
 <% content_for :sitemap do %>
-  <a href="<%= admin_applications_path %>">OAuth Applications</a> <i class="fa fa-angle-right"></i> <span class="current">Detail</span>
+  <a href="<%= admin_applications_path %>">t("views.admin.oauth_applications")</a> <i class="fa fa-angle-right"></i> <span class="current">t("common.detail")</span>
 <% end %>
 <ul class="list-group">
   <li class="list-group-item">
@@ -15,7 +15,7 @@
   <li class="list-group-item">
     <label class="col-sm-1">Level:</label> <%= @application.level %></li>
 </ul>
-<div class="toolbar">
-  <%= link_to t("common.edit"), edit_admin_application_path(@application), class: "btn btn-sm btn-success" %>
-  <%= link_to t("common.back"), admin_applications_path, class: "btn btn-sm btn-secondary" %>
+<div class="mt-5 toolbar">
+  <%= link_to t("common.edit"), edit_admin_application_path(@application), class: "btn btn-success" %>
+  <%= link_to t("common.back"), admin_applications_path, class: "btn btn-secondary" %>
 </div>

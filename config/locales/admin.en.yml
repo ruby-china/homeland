@@ -1,22 +1,22 @@
-"en":
+en:
   admin:
     menu:
-      root_path: "Dashboard"
-      site_configs: "Settings"
-      users: "Users"
-      nodes: "Nodes"
-      wiki: "Wiki"
-      topics: "Topics"
-      replies: "Replies"
-      photos: "Photos"
-      comments: "Comments"
-      locations: "Locations"
-      exception_logs: "Errors"
-      plugins: "Plugins"
-      applications: "Applications"
-      background_jobs: "Background Jobs"
-      database: "Database"
-    overview: "Overview"
+      root_path: Dashboard
+      site_configs: Settings
+      users: Users
+      nodes: Nodes
+      wiki: Wiki
+      topics: Topics
+      replies: Replies
+      photos: Photos
+      comments: Comments
+      locations: Locations
+      exception_logs: Errors
+      plugins: Plugins
+      applications: Applications
+      background_jobs: Background Jobs
+      database: Database
+    overview: Overview
     dashboard:
       boot_at_html: Application boot at %{time}
       topics_count: Topics Total
@@ -25,22 +25,49 @@
       notifications_count: Notifications Total
       photos_count: Photos Total
       comments_count: Comments Total
-    recent_topics: "Recent Topics"
-    statics: "Statistics"
+    recent_topics: Recent Topics
+    statics: Statistics
     reboot: Reboot
     site_configs:
-      settings: "Settings"
-      please_do_not_modify_key: "Please do not modify key"
-      edit_setting: "Edit Settings"
+      settings: Settings
+      please_do_not_modify_key: Please do not modify key
+      edit_setting: Edit Settings
     users:
-      trust_user_can_modify_wiki: "Allow user to modify Wiki"
-      "Delete recent 10 photos": "Delete recent 10 photos"
-      "Delete recent 10 topics": "Delete recent 10 topics"
-      "Delete recent 10 replies": "Delete recent 10 replies"
-      "Delete recent 10 notes": "Delete recent 10 notes"
+      trust_user_can_modify_wiki: Allow user to modify Wiki
+      Delete recent 10 photos: Delete recent 10 photos
+      Delete recent 10 topics: Delete recent 10 topics
+      Delete recent 10 replies: Delete recent 10 replies
+      Delete recent 10 notes: Delete recent 10 notes
     nodes:
       new: New Node
       edit: Edit Node
-    topic_list: "Topic List"
-    check_photo: "View Photo"
-    reboot_successfully: A reboot command has been initiated, and the Homeland is restarting in the background. You can refresh the page and determine whether the restart is complete by boot time.
+    topic_list: Topic List
+    check_photo: View Photo
+    reboot_successfully: >-
+      A reboot command has been initiated, and the Homeland is restarting in the
+      background. You can refresh the page and determine whether the restart is
+      complete by boot time.
+  views.admin.node_was_successfully_created: Node was successfully created.
+  views.admin.location_was_update_successfully: Location was update successfully.
+  view.admin.plugin_was_install_success: Plugin was install successfully, if page not refresh, please refresh it.
+  views.admin.plugin_was_install_error: Plugin was install error, please check the zip to determine that is correct.
+  views.admin.plugn_was_uninstall_successfully: Plugn was uninstall successfully.
+  views.admin.plugn_was_uninstall_error: Plugn was uninstall error.
+  views.admin.update_successfully: Update successfully.
+  views.admin.topic_created_successfully: Topic created successfully.
+  views.admin.topic_updated_successfully: Topic updated successfully.
+  views.admin.user_updated_successfully: User updated successfully.
+  views.admin.recent_10_replies_has_been_deleted_successfully: >-
+    Recent 10 replies has been deleted successfully, now %{name} still %{count}
+    replies
+  views.admin.node_update_successfully: Node was successfully updated.
+  views.admin.recent_10_topics_has_been_deleted_successfully: >-
+    Recent 10 topics has been deleted successfully, now %{name} still have
+    %{count} topics.
+  views.admin.recent_10_photos_has_been_deleted_successfully: >-
+    Recent 10 photos has been deleted successfully, now %{name} still have
+    %{count} photos.
+  views.admin.recent_10_notes_has_been_deleted_successfully: >-
+    Recent 10 notes has been deleted successfully, now %{user} still have
+    %{count} notes.
+  views.admin.oauth_applications: OAuth Applications

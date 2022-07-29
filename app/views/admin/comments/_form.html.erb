@@ -6,7 +6,7 @@
   </div>
 
   <div class="form-actions">
-    <%= f.submit "Save", class: "btn btn-primary", 'data-disable-with' => "Saving..." %> or
-    <%= link_to 'Cancel', admin_comments_path, class: "btn" %>
+    <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving") %> or
+    <%= link_to t("common.cancel"), admin_comments_path, class: "btn" %>
   </div>
 <% end %>

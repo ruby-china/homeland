@@ -14,7 +14,7 @@ module Admin
 
     def update
       if @comment.update(params[:comment].permit!)
-        redirect_to admin_comments_path(@admin_comment), notice: "Comment was successfully updated."
+        redirect_to admin_comments_path(@admin_comment), notice: t("views.admin.comment_was_successfully_updated")
       else
         render action: "edit"
       end

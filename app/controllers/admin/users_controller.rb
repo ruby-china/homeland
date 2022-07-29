@@ -61,7 +61,7 @@ module Admin
       @user.state = params[type][:state] if params[type][:state] # Avoid `ActiveRecord::NotNullViolation` exception for Team entity.
 
       if @user.update(params[type].permit!)
-        redirect_to(edit_admin_user_path(@user.id), notice: "User was successfully updated.")
+        redirect_to(edit_admin_user_path(@user.id), notice: t("views.admin.user_updated_successfully"))
       else
         render action: "edit"
       end
@@ -104,19 +104,19 @@ module Admin
       topics.each(&:touch)
 
       count = Reply.unscoped.where(user_id: @user.id).count
-      redirect_to edit_admin_user_path(@user.id), notice: "Recent 10 replies has been deleted successfully, now #{@user.login} still #{count} replies"
+      redirect_to edit_admin_user_path(@user.id), notice: t("views.admin.recent_10_replies_has_been_deleted_successfully", name: @user.login, count: count)
     end
 
     def _clean_topics
       Topic.unscoped.where(user_id: @user.id).recent.limit(10).delete_all
       count = Topic.unscoped.where(user_id: @user.id).count
-      redirect_to edit_admin_user_path(@user.id), notice: "Recent 10 topics has been deleted successfully, now #{@user.login} still #{count} topics"
+      redirect_to edit_admin_user_path(@user.id), notice: t("views.admin.recent_10_topics_has_been_deleted_successfully", name: @user.login, count: count)
     end
 
     def _clean_photos
       Photo.unscoped.where(user_id: @user.id).recent.limit(10).destroy_all
       count = Photo.unscoped.where(user_id: @user.id).count
-      redirect_to edit_admin_user_path(@user.id), notice: "Recent 10 photos has been deleted successfully, now #{@user.login} still #{count} photos"
+      redirect_to edit_admin_user_path(@user.id), notice: t("views.admin.recent_10_photos_has_been_deleted_successfully", name: @user.login, count: count)
     end
 
     def _clean_notes
@@ -125,7 +125,7 @@ module Admin
         Note.unscoped.where(user_id: @user.id).recent.limit(10).destroy_all
         count = Note.unscoped.where(user_id: @user.id).count
       end
-      redirect_to edit_admin_user_path(@user.id), notice: "Recent 10 notes has been deleted successfully, now #{@user.login} still #{count} notes"
+      redirect_to edit_admin_user_path(@user.id), notice: t("views.admin.recent_10_notes_has_been_deleted_successfully", name: @user.login, count: count)
     end
   end
 end

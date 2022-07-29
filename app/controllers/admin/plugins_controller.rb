@@ -12,18 +12,18 @@ module Admin
     def create
       if Homeland::Plugin.install(params[:file])
         Homeland.reboot
-        redirect_to admin_plugins_path, notice: "Plugin was install successfully, if page not refresh, please refresh it."
+        redirect_to admin_plugins_path, notice: t("view.admin.plugin_was_install_success")
       else
-        redirect_to admin_plugins_path, alert: "Plugin was install error, please check the zip to determine that is correct."
+        redirect_to admin_plugins_path, alert: t("views.admin.plugin_was_install_error")
       end
     end
 
     def destroy
       if @plugin.destroy
         Homeland.reboot
-        redirect_to admin_plugins_path, notice: "Plugn was uninstall successfully."
+        redirect_to admin_plugins_path, notice: t("views.admin.plugn_was_uninstall_successfully")
       else
-        redirect_to admin_plugins_path, alert: "Plugn was uninstall error."
+        redirect_to admin_plugins_path, alert: t("views.admin.plugn_was_uninstall_error")
       end
     end
 

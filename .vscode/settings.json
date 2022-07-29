@@ -1,25 +1,26 @@
 {
-  "editor.formatOnSave": true,
-  "editor.tabSize": 2,
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[scss]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[html]": {
-    "editor.defaultFormatter": "vscode.html-language-features"
-  },
   "[css]": {
     "editor.defaultFormatter": "aeschli.vscode-css-formatter"
   },
   "[erb]": {
     "editor.defaultFormatter": "aliariff.vscode-erb-beautify"
   },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[ruby]": {
+    "editor.defaultFormatter": "rebornix.ruby"
+  },
+  "[scss]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[typescript]": {
@@ -28,24 +29,21 @@
   "[yaml]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
-  "[ruby]": {
-    "editor.defaultFormatter": "rebornix.ruby"
-  },
+  "autocorrect.enable": true,
+  "autocorrect.formatOnSave": true,
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "i18n-ally.displayLanguage": "zh-CN",
+  "i18n-ally.keystyle": "flat",
+  "i18n-ally.localesPaths": ["config/locales"],
+  "i18n-ally.pathMatcher": "*.{locale}.yml|{locale}.yml",
+  "i18n-ally.sourceLanguage": "zh-CN",
+  "i18n-ally.translate.engines": ["opencc", "google"],
+  "prettier.singleQuote": false,
   "ruby.format": "standard",
   "ruby.lint": {
     "standard": {
       "useBundler": true
     }
-  },
-  "prettier.singleQuote": false,
-  "autocorrect.enable": true,
-  "autocorrect.formatOnSave": true,
-  "i18n-ally.sortKeys": true,
-  "i18n-ally.keepFulfilled": true,
-  "i18n-ally.localesPaths": "config/locales",
-  "i18n-ally.sourceLanguage": "zh-CN",
-  "i18n-ally.displayLanguage": "zh-CN",
-  "i18n-ally.keystyle": "flat",
-  "i18n-ally.pathMatcher": "*.{locale}.yml",
-  "i18n-ally.translate.engines": ["google-cn", "google"]
+  }
 }

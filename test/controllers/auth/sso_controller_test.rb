@@ -163,7 +163,7 @@ describe Auth::SSOController do
       sso.avatar_url = "http://foobar.com/avatar/1.jpg"
       sso.admin = false
 
-      Redis.current.del("SSO_NONCE_#{sso.nonce}")
+      Current.redis.del("SSO_NONCE_#{sso.nonce}")
       get login_auth_sso_path, params: Rack::Utils.parse_query(sso.payload), headers: @headers
       assert_equal 419, response.status
     end

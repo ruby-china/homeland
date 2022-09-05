@@ -4,7 +4,6 @@ return if ENV["RAILS_PRECOMPILE"]
 
 redis_config = Rails.application.config_for(:redis)
 
-Redis.current = Redis.new(url: redis_config["url"], db: 0)
 sidekiq_url = redis_config["url"]
 
 # Sidekiq require redis-namespace gem

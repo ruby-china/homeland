@@ -4286,10 +4286,10 @@ setprototypeof@1.2.0:
   resolved "https://registry.npmmirror.com/setprototypeof/-/setprototypeof-1.2.0.tgz#66c9a24a73f9fc28cbe66b09fed3d33dcaf1b424"
   integrity sha512-E5LDX7Wrp85Kil5bhZv46j8jOeboKq5JMmYM3gVGdGH8xFpPWXUMsNrlODCrkoxMEeNi/XZIwuRvY4XNwYMJpw==
 
-shakapacker@6.3.0:
-  version "6.3.0"
-  resolved "https://registry.npmmirror.com/shakapacker/-/shakapacker-6.3.0.tgz#bca78307ab1a18eb9ba3d01b66c39e1fb898cdaa"
-  integrity sha512-u75erqMnpRH7IjRZWjyZD6W04569g53X7PLaWBolgrwTkNDXX28qbmICBRJNO3F4tOmuVaiWS6fhy3Awp0raew==
+shakapacker@6.5.1:
+  version "6.5.1"
+  resolved "https://registry.npmmirror.com/shakapacker/-/shakapacker-6.5.1.tgz#3c1554771c0498ea757cb86dfc06811875f4c2bd"
+  integrity sha512-yOVvek0fxAU3FUjWcT7GxpJ/zAbhKbGEw78HHYfMAHE95cDhxTAQjBwvChP/PlceiteXUryRI0Mrdy7jqXvmnw==
   dependencies:
     glob "^7.2.0"
     js-yaml "^4.1.0"

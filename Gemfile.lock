@@ -400,7 +400,7 @@ GEM
       activerecord (>= 6.0)
       activesupport (>= 6.0)
     semantic_range (3.0.0)
-    shakapacker (6.3.0)
+    shakapacker (6.5.1)
       activesupport (>= 5.2)
       rack-proxy (>= 0.6.1)
       railties (>= 5.2)
@@ -520,7 +520,7 @@ DEPENDENCIES
   rucaptcha
   sass-rails
   second_level_cache
-  shakapacker (= 6.3.0)
+  shakapacker
   sidekiq
   sidekiq-cron
   social-share-button

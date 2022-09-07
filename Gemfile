@@ -10,7 +10,7 @@ gem "rails_autolink"
 gem "sass-rails"
 gem "turbolinks"
 gem "uglifier"
-gem "shakapacker", "6.3.0"
+gem "shakapacker"
 
 gem "view_component"
 

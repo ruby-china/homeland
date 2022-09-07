@@ -10,9 +10,9 @@ describe Auth::SSOController do
       @sso_url = "http://somesite.com/homeland-sso"
 
       Setting.stubs(:sso).returns(
-        "enable" => true,
-        "url" => @sso_url,
-        "secret" => sso_secret
+        enable: true,
+        url: @sso_url,
+        secret: sso_secret
       )
       Setting.stubs(:sso_enabled?).returns(true)
     end
@@ -45,9 +45,9 @@ describe Auth::SSOController do
       }
 
       Setting.stubs(:sso).returns(
-        "enable" => true,
-        "url" => @sso_url,
-        "secret" => sso_secret
+        enable: true,
+        url: @sso_url,
+        secret: sso_secret
       )
       Setting.stubs(:sso_enabled?).returns(true)
     end
@@ -174,7 +174,7 @@ describe Auth::SSOController do
 
     before do
       Setting.stubs(:sso).returns(
-        "secret" => sso_secret
+        secret: sso_secret
       )
       Setting.stubs(:sso_provider_enabled?).returns(true)
 

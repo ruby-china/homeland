@@ -243,11 +243,11 @@ class Setting < RailsSettings::Base
 
     def sso_enabled?
       return false if sso_provider_enabled?
-      sso[:enable] == true
+      sso[:enable] == "true"
     end
 
     def sso_provider_enabled?
-      sso[:enable_provider] == true
+      sso[:enable_provider] == "true"
     end
 
     def rails_initialized?

@@ -66,6 +66,7 @@ gem "exception-track"
 gem "redis"
 gem "redis-namespace"
 gem "second_level_cache"
+gem "connection_pool", "~> 2.2"
 
 # Setting
 gem "rails-settings-cached"
@@ -107,8 +108,7 @@ group :development, :test do
   gem "mocha"
   gem "minitest-spec-rails"
   gem "factory_bot_rails"
+  gem "faraday-rack"
 
   gem "standard"
 end
-
-gem "connection_pool", "~> 2.2"

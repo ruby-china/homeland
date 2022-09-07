@@ -146,6 +146,8 @@ GEM
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
     faraday-net_http (3.0.0)
+    faraday-rack (2.0.0)
+      faraday (~> 2.0)
     ffi (1.15.5)
     form-select (0.3.2)
       rails (>= 4.2)
@@ -481,6 +483,7 @@ DEPENDENCIES
   enumize
   exception-track
   factory_bot_rails
+  faraday-rack
   form-select
   html-pipeline
   html-pipeline-auto-correct

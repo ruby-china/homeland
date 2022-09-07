@@ -472,6 +472,7 @@ DEPENDENCIES
   carrierwave-aliyun
   carrierwave-qiniu
   carrierwave-upyun
+  connection_pool (~> 2.2)
   devise
   devise-encryptable
   doorkeeper

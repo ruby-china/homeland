@@ -4,7 +4,7 @@ require "test_helper"
 
 class User::OnlineTrackableTest < ActiveSupport::TestCase
   def setup
-    Redis.current.del(User::REDIS_ONLINE_KEY)
+    Homeland.redis.del(User::REDIS_ONLINE_KEY)
   end
 
   test "online query methods should work" do

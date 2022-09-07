@@ -13,7 +13,7 @@ module RedisCountable
     end
 
     def redis
-      Redis.current
+      Homeland.redis
     end
 
     def incr(by = 1)

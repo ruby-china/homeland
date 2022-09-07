@@ -24,21 +24,21 @@ module Homeland
 
     def register_nonce(return_path)
       if nonce
-        Redis.current.setex(nonce_key, NONCE_EXPIRY_TIME, return_path)
+        Homeland.redis.setex(nonce_key, NONCE_EXPIRY_TIME, return_path)
       end
     end
 
     def nonce_valid?
-      nonce && Redis.current.get(nonce_key).present?
+      nonce && Homeland.redis.get(nonce_key).present?
     end
 
     def return_path
-      Redis.current.get(nonce_key) || "/"
+      Homeland.redis.get(nonce_key) || "/"
     end
 
     def expire_nonce!
       if nonce
-        Redis.current.del nonce_key
+        Homeland.redis.del nonce_key
       end
     end
 

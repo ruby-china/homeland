@@ -40,6 +40,7 @@ gem "carrierwave"
 # Aliyun / Upyun / Qiniu
 gem "carrierwave-aliyun"
 gem "carrierwave-upyun"
+gem "faraday", "~> 1.10" # upyun not ready for new version
 gem "carrierwave-qiniu"
 gem "qiniu"
 

@@ -65,7 +65,7 @@ module Auth
         return
       end
 
-      sso = SingleSignOn.parse(payload, Setting.sso["secret"])
+      sso = SingleSignOn.parse(payload, Setting.sso[:secret])
       sso.name = current_user.name
       sso.username = current_user.login
       sso.email = current_user.email

@@ -3,11 +3,11 @@
 module Homeland
   class SSO < SingleSignOn
     def self.sso_url
-      Setting.sso["url"]
+      Setting.sso[:url]
     end
 
     def self.sso_secret
-      Setting.sso["secret"]
+      Setting.sso[:secret]
     end
 
     def self.generate_sso(return_path = "/")

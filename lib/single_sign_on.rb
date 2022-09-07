@@ -10,14 +10,6 @@ class SingleSignOn
   attr_accessor(*ACCESSORS)
   attr_writer :sso_secret, :sso_url
 
-  def self.sso_secret
-    raise "sso_secret not implemented on class, be sure to set it on instance"
-  end
-
-  def self.sso_url
-    raise "sso_url not implemented on class, be sure to set it on instance"
-  end
-
   def self.parse(payload, sso_secret = nil)
     sso = new
     sso.sso_secret = sso_secret if sso_secret

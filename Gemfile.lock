@@ -383,7 +383,7 @@ GEM
     ruby-vips (2.1.4)
       ffi (~> 1.12)
     ruby2_keywords (0.0.5)
-    rucaptcha (3.0.0-arm64-darwin)
+    rucaptcha (3.0.1-arm64-darwin)
       railties (>= 3.2)
       rb_sys (>= 0.9.18)
     sass-rails (6.0.0)

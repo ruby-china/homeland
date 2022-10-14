@@ -199,7 +199,7 @@ GEM
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    loofah (2.18.0)
+    loofah (2.19.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
@@ -383,8 +383,9 @@ GEM
     ruby-vips (2.1.4)
       ffi (~> 1.12)
     ruby2_keywords (0.0.5)
-    rucaptcha (2.6.1)
+    rucaptcha (3.0.0-arm64-darwin)
       railties (>= 3.2)
+      rb_sys (>= 0.9.18)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
     sassc (2.4.0)
@@ -455,7 +456,7 @@ GEM
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    zeitwerk (2.6.0)
+    zeitwerk (2.6.1)
 
 PLATFORMS
   arm64-darwin-21

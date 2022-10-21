@@ -76,6 +76,8 @@ GEM
     ast (2.4.2)
     autocorrect-rb (2.1.2-arm64-darwin)
       rb_sys (>= 0.9.18)
+    autocorrect-rb (2.1.2-x86_64-linux)
+      rb_sys (>= 0.9.18)
     bcrypt (3.1.18)
     bootsnap (1.13.0)
       msgpack (~> 1.2)
@@ -234,7 +236,9 @@ GEM
       timeout
     netrc (0.11.0)
     nio4r (2.5.8)
-    nokogiri (1.13.8-arm64-darwin)
+    nokogiri (1.13.9-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.13.9-x86_64-linux)
       racc (~> 1.4)
     notifications (1.1.0)
       kaminari (>= 0.15)
@@ -386,6 +390,9 @@ GEM
     rucaptcha (3.0.2-arm64-darwin)
       railties (>= 3.2)
       rb_sys (>= 0.9.18)
+    rucaptcha (3.0.2-x86_64-linux)
+      railties (>= 3.2)
+      rb_sys (>= 0.9.18)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
     sassc (2.4.0)
@@ -460,6 +467,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-21
+  x86_64-linux
 
 DEPENDENCIES
   action-store

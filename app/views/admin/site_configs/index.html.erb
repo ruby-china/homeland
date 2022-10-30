@@ -1,7 +1,7 @@
 <% content_for :sitemap do %>
   <span class="current"><%= t("admin.site_configs.settings") %></span>
 <% end %>
-<div class="btn-group mb-3">
+<div class="mb-3 btn-group">
   <% @setting_groups.each_key do |name| %>
     <a href="<%= admin_site_configs_path(scope: name) %>" class="btn btn-secondary<% " active" if params[:scope] == name.to_s %>"><%= t("setting.scope.#{name}") %></a>
   <% end %>
@@ -16,15 +16,16 @@
     <% next if !Setting.use_recaptcha? && key.in?(%w[recaptcha_key recaptcha_secret]) %>
     <% if !Setting::SYSTEM_KEYS.include?(key) %>
       <li class="list-group-item">
-        <div class="mb-1">
-          <%= icon_tag("cog") %><a href="<%= edit_admin_site_config_path(key) %>" class="ml-1"><%= key %></a>
+        <div class="flex items-center mb-1 space-x-2 dark:text-gray-50">
+          <%= icon_tag("cog") %>
+          <a href="<%= edit_admin_site_config_path(key) %>" class="ml-1 font-bold uppercase"><%= key %></a>
           <% if key == "timezone" %>
-            <div class="badge">
+            <div class="badge dark:text-gray-500">
               Current Timezone: <%= Time.zone %>
             </div>
           <% end %>
         </div>
-        <div class="text-gray"><%= raw t("setting.#{key}") %></div>
+        <div class="text-gray dark:text-gray-500"><%= raw t("setting.#{key}") %></div>
       </li>
     <% end %>
   <% end %>

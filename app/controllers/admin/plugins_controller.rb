@@ -12,7 +12,7 @@ module Admin
     def create
       if Homeland::Plugin.install(params[:file])
         Homeland.reboot
-        redirect_to admin_plugins_path, notice: t("view.admin.plugin_was_install_success")
+        redirect_to admin_plugins_path, notice: t("views.admin.plugin_was_install_success")
       else
         redirect_to admin_plugins_path, alert: t("views.admin.plugin_was_install_error")
       end

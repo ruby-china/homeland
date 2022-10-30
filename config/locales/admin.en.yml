@@ -47,27 +47,29 @@ en:
       A reboot command has been initiated, and the Homeland is restarting in the
       background. You can refresh the page and determine whether the restart is
       complete by boot time.
-  views.admin.node_was_successfully_created: Node was successfully created.
-  views.admin.location_was_update_successfully: Location was update successfully.
-  view.admin.plugin_was_install_success: Plugin was install successfully, if page not refresh, please refresh it.
-  views.admin.plugin_was_install_error: Plugin was install error, please check the zip to determine that is correct.
-  views.admin.plugn_was_uninstall_successfully: Plugn was uninstall successfully.
-  views.admin.plugn_was_uninstall_error: Plugn was uninstall error.
-  views.admin.update_successfully: Update successfully.
-  views.admin.topic_created_successfully: Topic created successfully.
-  views.admin.topic_updated_successfully: Topic updated successfully.
-  views.admin.user_updated_successfully: User updated successfully.
-  views.admin.recent_10_replies_has_been_deleted_successfully: >-
-    Recent 10 replies has been deleted successfully, now %{name} still %{count}
-    replies
-  views.admin.node_update_successfully: Node was successfully updated.
-  views.admin.recent_10_topics_has_been_deleted_successfully: >-
-    Recent 10 topics has been deleted successfully, now %{name} still have
-    %{count} topics.
-  views.admin.recent_10_photos_has_been_deleted_successfully: >-
-    Recent 10 photos has been deleted successfully, now %{name} still have
-    %{count} photos.
-  views.admin.recent_10_notes_has_been_deleted_successfully: >-
-    Recent 10 notes has been deleted successfully, now %{user} still have
-    %{count} notes.
-  views.admin.oauth_applications: OAuth Applications
+  views:
+    admin:
+      node_was_successfully_created: Node was successfully created.
+      location_was_update_successfully: Location was update successfully.
+      plugin_was_install_success: Plugin was install successfully, if page not refresh, please refresh it.
+      plugin_was_install_error: Plugin was install error, please check the zip to determine that is correct.
+      plugn_was_uninstall_successfully: Plugn was uninstall successfully.
+      plugn_was_uninstall_error: Plugn was uninstall error.
+      update_successfully: Update successfully.
+      topic_created_successfully: Topic created successfully.
+      topic_updated_successfully: Topic updated successfully.
+      user_updated_successfully: User updated successfully.
+      recent_10_replies_has_been_deleted_successfully: >-
+        Recent 10 replies has been deleted successfully, now %{name} still %{count}
+        replies
+      node_update_successfully: Node was successfully updated.
+      recent_10_topics_has_been_deleted_successfully: >-
+        Recent 10 topics has been deleted successfully, now %{name} still have
+        %{count} topics.
+      recent_10_photos_has_been_deleted_successfully: >-
+        Recent 10 photos has been deleted successfully, now %{name} still have
+        %{count} photos.
+      recent_10_notes_has_been_deleted_successfully: >-
+        Recent 10 notes has been deleted successfully, now %{user} still have
+        %{count} notes.
+      oauth_applications: OAuth Applications

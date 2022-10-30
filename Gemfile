@@ -100,6 +100,7 @@ group :development do
   gem "byebug"
   gem "letter_opener"
   gem "spring"
+  gem "derailed_benchmarks"
 end
 
 group :development, :test do

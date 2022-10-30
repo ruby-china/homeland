@@ -13,7 +13,7 @@ on_worker_boot do
 end
 
 before_fork do
-  max_memory = ((ENV["workers"] || 4).to_i + 1) * 380
+  max_memory = ((ENV["workers"] || 4).to_i + 1) * 450
   puts "=> Max Memory limit: #{max_memory}MB"
   PumaWorkerKiller.config do |config|
     config.ram = max_memory # mb

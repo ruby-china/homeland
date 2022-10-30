@@ -18,4 +18,4 @@ docker\:install:
 	@$(RUN) bundle exec rails db:seed RAILS_ENV=production
 	@$(RUN) bundle exec rails assets:precompile RAILS_ENV=production
 memory:
-	PATH_TO_HIT=/topics/18 bundle exec derailed exec perf:objects
+	TEST_COUNT=10 PATH_TO_HIT=/ bundle exec derailed exec perf:objects

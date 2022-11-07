@@ -182,6 +182,7 @@ const AppView = Backbone.View.extend({
           },
 
           subscribe() {
+            console.log("NotificationsChannel.subscibe");
             return this.perform("subscribed");
           },
         }

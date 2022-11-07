@@ -302,10 +302,11 @@ window.TopicView = Backbone.View.extend({
 
     if (!window.repliesChannel) {
       return (window.repliesChannel = App.cable.subscriptions.create(
-        "RepliesChannel",
         {
-          topicId: null,
-
+          channel: "RepliesChannel",
+          topic_id: Topics.topic_id,
+        },
+        {
           connected() {
             return this.subscribe();
           },
@@ -323,19 +324,10 @@ window.TopicView = Backbone.View.extend({
               return $(".notify-updated").show();
             }
           },
-
-          subscribe() {
-            this.topicId = Topics.topic_id;
-            return this.perform("follow", { topic_id: Topics.topic_id });
-          },
-
-          unfollow() {
-            return this.perform("unfollow");
-          },
         }
       ));
     } else if (window.repliesChannel.topicId !== Topics.topic_id) {
-      window.repliesChannel.unfollow();
+      window.repliesChannel.unsubscribe();
       return window.repliesChannel.subscribe();
     }
   },

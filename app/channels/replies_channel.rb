@@ -1,11 +1,7 @@
 # frozen_string_literal: true
 
 class RepliesChannel < ApplicationCable::Channel
-  def follow(data)
-    stream_from "topics/#{data["topic_id"]}/replies"
-  end
-
-  def unfollow
-    stop_all_streams
+  def subscribed
+    stream_from "topics/#{params[:topic_id]}/replies"
   end
 end

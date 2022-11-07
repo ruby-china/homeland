@@ -52,8 +52,7 @@ module Homeland
     config.active_job.queue_adapter = :sidekiq
     config.middleware.use Rack::Attack
 
-    config.action_cable.mount_path = "/cable"
-    config.action_cable.logger = Logger.new("/dev/null")
+    config.action_cable.mount_path = ENV["ACTIONCABLE_DISABLE"].present? ? "/_cable" : "/cable"
   end
 end
 

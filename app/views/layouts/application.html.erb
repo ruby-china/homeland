@@ -91,6 +91,9 @@
     <% if turbolinks_app? %>
       App.turbolinks = true;
     <% end %>
+    <% if ENV["ACTIONCABLE_DISABLE"].present? %>
+      App.cable = null;
+    <% end %>
   </script>
   <%= yield :scripts %>
   <script>

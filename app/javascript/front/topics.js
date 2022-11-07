@@ -300,7 +300,7 @@ window.TopicView = Backbone.View.extend({
       return;
     }
 
-    if (!window.repliesChannel) {
+    if (!window.repliesChannel && App.cable) {
       return (window.repliesChannel = App.cable.subscriptions.create(
         {
           channel: "RepliesChannel",

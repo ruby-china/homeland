@@ -169,7 +169,7 @@ const AppView = Backbone.View.extend({
   },
 
   initCable() {
-    if (!window.notificationChannel && App.isLogined()) {
+    if (!window.notificationChannel && App.isLogined() && App.cable) {
       return (window.notificationChannel = App.cable.subscriptions.create(
         "NotificationsChannel",
         {

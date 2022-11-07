@@ -826,15 +826,19 @@ footer {
 
 .notify-updated {
   display: none;
-  padding: 4px 15px;
-  margin-bottom: 20px;
-  text-align: left;
-  background: var(--yellow-light);
-  border: 1px solid var(--yellow-light);
-  color: var(--red);
+  @apply border bg-blue-50 hover:bg-blue-100 border-blue-500 text-blue-700 dark:bg-blue-900 hover:dark:bg-blue-800 dark:border-blue-900 dark:text-gray-200 py-1 px-3 mb-5 rounded;
+
   a:link,
   a:visited {
-    color: var(--yellow);
+    @apply text-blue-700 dark:text-gray-200;
+  }
+
+  a {
+    @apply flex items-center;
+  }
+
+  .notify-badge {
+    @apply w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded mr-2;
   }
 }
 

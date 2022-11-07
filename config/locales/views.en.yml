@@ -58,10 +58,10 @@ en:
     index_node_navigation: Node Navigation
     highlight_topic: Sticky Topic
     statics: Statistics
-    statics_users_count: 'Users: %{count}'
-    statics_topics_count: 'Topics: %{count}'
-    statics_replies_count: 'Replies: %{count}'
-    statics_online_users_count: '%{count} users online'
+    statics_users_count: "Users: %{count}"
+    statics_topics_count: "Topics: %{count}"
+    statics_replies_count: "Replies: %{count}"
+    statics_online_users_count: "%{count} users online"
     online: Online
     comments: Comments
     new_comment: Write comment
@@ -74,7 +74,7 @@ en:
     node: Node
     notifications: Notifications
     by: by
-    at: 'on'
+    at: "on"
     like: Like
     unlike: Unlike
     likes: likes
@@ -131,9 +131,9 @@ en:
     registered_an_account: .
   rss:
     recent_topics_description: Recent Topics in %{name} Forum.
-    recent_topics_title: '%{name} Forum'
+    recent_topics_title: "%{name} Forum"
     recent_node_topics_description: Recent Topic in %{node_name} of %{name} Forum.
-    recent_node_topics_title: '%{node_name} node of %{name} Forum'
+    recent_node_topics_title: "%{node_name} node of %{name} Forum"
   setting:
     scope:
       basic: General
@@ -195,11 +195,11 @@ en:
     sorted_plugins: >-
       Plugin order for adjust the navbar menu order. For example: "jobs, wiki,
       press, site"
-    timezone: 'Timezone, default: UTC'
+    timezone: "Timezone, default: UTC"
     profile_fields: >-
       User profile fields, default: all, options:
       [company,twitter,website,tagline,location,alipay,paypal,qq,weibo,wechat,douban,dingding,aliwangwang,facebook,instagram,dribbble,battle_tag,psn_id,steam_id]
-    modules: 'Enable modules, default: all, options: [topic,team,github,editor.code]'
+    modules: "Enable modules, default: all, options: [topic,team,github,editor.code]"
     rack_attack: >-
       Request rate limit. limit - Limit on the number of single IP requests per
       cycle, period - How much time (seconds) is a request limit period
@@ -215,7 +215,7 @@ en:
       <code>https://imageproxy.your-host.com/1000x/</code>, leave empty to
       disable.
     mailer_provider: Mail delivery method
-    mailer_sender: 'Mail sender, for example: no-reply@your-host.com'
+    mailer_sender: "Mail sender, for example: no-reply@your-host.com"
     mailer_options: >-
       Mail options for differences delivery method, see: <a
       href="https://homeland.ruby-china.org/docs/configuration/mailer/">Mailer
@@ -223,7 +223,7 @@ en:
   pagination:
     next: Next
     prev: Prev
-    gap: '&hellip;'
+    gap: "&hellip;"
   topics:
     new_topic: New Topic
     edit_topic: Edit Topic
@@ -237,7 +237,7 @@ en:
     subscribe_with_rss: Subscribe to %{name} RSS feed.
     submit_reply: Reply
     reply_to1: Reply to
-    reply_to2: ''
+    reply_to2: ""
     in: in
     mentioned_this_topic: mention this topic.
     excellent_topic: mark as excellent topic.
@@ -260,7 +260,7 @@ en:
     update_topic_success: Topic modified successfully..
     reply_success: Replied Successfully
     reply_this_floor: Reply to this floor
-    topic_was_deleted: '[Topic was deleted]'
+    topic_was_deleted: "[Topic was deleted]"
     have_no_new_reply: No new activites since your last read.
     have_no_avatar: You can't create a new Topic, before you upload a avatar.
     excellent_info_html: Topic has been selected as the excellent topic by the admin.
@@ -284,12 +284,12 @@ en:
     newbie_tip: Newbie Tip
     ban_title: Ban reason
     ban_directly: Ban without reason
-    ban_with_reason: 'Input the ban reason:'
+    ban_with_reason: "Input the ban reason:"
     closed_tooltip: Topic has closed
     create_too_frequently: Create too frequently, please try again later.
     create_limit: Creation has been rejected by limit %{count} topics created within 1 hour.
     sensitive_word_limit: Create failed, because content has sensitive word "%{word}".
-    new_reply_received_html: New reply received, click here to load it
+    new_reply_received_html: New Reply comming, click to load.
     form:
       title_placeholder: Type a topic title
       no_team: No team
@@ -331,7 +331,7 @@ en:
     unbind_warning: >-
       You need at least one binded account. Cannot unbind as this is your last
       account.
-    unbind_success: '%{provider} unbinded successfully.'
+    unbind_success: "%{provider} unbinded successfully."
     legacy_unbind_tip: >-
       Three-party account has not beeen set email address and password,
       unbinding is not allowed, please set account password and modify email
@@ -427,7 +427,7 @@ en:
     users: Members
     team_user_pendding: Awaiting response
     settings: Settings
-    team_users_count: '%{count} team members'
+    team_users_count: "%{count} team members"
     invite_success: Invite success.
     remove_success: Leaved team successfully
     accept_success: Accept successfully, you are a member of team.
@@ -449,8 +449,8 @@ en:
     node_changed_html: Your topic %{topic} has moved into %{node} node.
     invite_you_join: Invite you to join
     show_invite: Show invite
-    created_topic: '%{actor} created %{target}'
-    created_reply: '%{actor} created reply %{target}'
-    followed_you: '%{actor} has been followed you.'
-    mentioned_you: '%{actor} mentioned you.'
+    created_topic: "%{actor} created %{target}"
+    created_reply: "%{actor} created reply %{target}"
+    followed_you: "%{actor} has been followed you."
+    mentioned_you: "%{actor} mentioned you."
     node_changed: Your topic has moved into %{node} node.

@@ -120,6 +120,12 @@ body {
   @apply dark:bg-gray-900 dark:text-gray-100;
 }
 
+body {
+  .container {
+    @apply max-w-7xl;
+  }
+}
+
 .header {
   padding: 0;
   @apply bg-white shadow-sm border-none text-gray-800;

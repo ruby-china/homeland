@@ -369,7 +369,7 @@ GEM
     rb-fsevent (0.11.2)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    rb_sys (0.9.31)
+    rb_sys (0.9.37)
     recaptcha (5.12.3)
       json
     redcarpet (3.5.1)
@@ -409,10 +409,10 @@ GEM
     ruby-vips (2.1.4)
       ffi (~> 1.12)
     ruby2_keywords (0.0.5)
-    rucaptcha (3.0.2-arm64-darwin)
+    rucaptcha (3.1.0-arm64-darwin)
       railties (>= 3.2)
       rb_sys (>= 0.9.18)
-    rucaptcha (3.0.2-x86_64-linux)
+    rucaptcha (3.1.0-x86_64-linux)
       railties (>= 3.2)
       rb_sys (>= 0.9.18)
     sass-rails (6.0.0)
@@ -485,7 +485,7 @@ GEM
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    zeitwerk (2.6.1)
+    zeitwerk (2.6.5)
 
 PLATFORMS
   arm64-darwin-21

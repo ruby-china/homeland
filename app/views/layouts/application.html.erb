@@ -43,7 +43,7 @@
   </head>
   <body class="page-<%= controller_name %><%= ' infinite-scroll' if turbolinks_app? %>" data-controller-name="<%= controller_name %>">
     <div class="flex items-stretch header navbar navbar-expand-md">
-      <div class="container relative z-50 flex flex-wrap items-center px-3 mx-auto md:px-0 md:flex-nowrap">
+      <div class="container relative z-50 flex flex-wrap items-center px-3 mx-auto lg:px-0 md:flex-nowrap">
         <div class="navbar-header" data-turbolinks-permanent>
           <%= raw Setting.navbar_brand_html %>
         </div>
@@ -64,7 +64,7 @@
      </div>
   </div>
   <%= yield :sub_navbar %>
-  <div id="main" class="container mx-auto">
+  <div id="main" class="container px-3 mx-auto lg:px-0">
     <%= render AlertComponent.new %>
     <%= content_for?(:main) ? yield(:main) : yield %>
   </div>

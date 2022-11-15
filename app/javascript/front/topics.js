@@ -307,10 +307,6 @@ window.TopicView = Backbone.View.extend({
           topic_id: Topics.topic_id,
         },
         {
-          connected() {
-            return this.subscribe();
-          },
-
           received: (json) => {
             if (json.user_id === App.current_user_id) {
               return false;

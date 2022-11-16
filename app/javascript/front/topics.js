@@ -300,32 +300,28 @@ window.TopicView = Backbone.View.extend({
       return;
     }
 
-    if (!window.repliesChannel && App.cable) {
-      return (window.repliesChannel = App.cable.subscriptions.create(
-        {
-          channel: "RepliesChannel",
-          topic_id: Topics.topic_id,
+    window.repliesChannel?.unsubscribe();
+    window.repliesChannel = App.cable.subscriptions.create(
+      {
+        channel: "RepliesChannel",
+        topic_id: Topics.topic_id,
+      },
+      {
+        received: (json) => {
+          if (json.user_id === App.current_user_id) {
+            return false;
+          }
+          if (json.action !== "create") {
+            return false;
+          }
+          if (App.windowInActive) {
+            return this.updateReplies();
+          } else {
+            return $(".notify-updated").show();
+          }
         },
-        {
-          received: (json) => {
-            if (json.user_id === App.current_user_id) {
-              return false;
-            }
-            if (json.action !== "create") {
-              return false;
-            }
-            if (App.windowInActive) {
-              return this.updateReplies();
-            } else {
-              return $(".notify-updated").show();
-            }
-          },
-        }
-      ));
-    } else if (window.repliesChannel.topicId !== Topics.topic_id) {
-      window.repliesChannel.unsubscribe();
-      return window.repliesChannel.subscribe();
-    }
+      }
+    );
   },
 
   updateReplies() {

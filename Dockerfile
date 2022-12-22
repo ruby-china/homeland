@@ -2,7 +2,7 @@
 FROM homeland/base:3.1.0-slim-buster
 
 ENV RAILS_ENV "production"
-ENV RUBYOPT "W0"
+ENV RUBY_YJIT_ENABLE "true"
 
 WORKDIR /home/app/homeland
 

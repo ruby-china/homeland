@@ -1,11 +1,10 @@
 # NAME:     homeland/homeland
-FROM homeland/base:3.1.0-slim-buster
+FROM homeland/base:3.2-rc-slim-buster
 
 ENV RAILS_ENV "production"
 ENV RUBY_YJIT_ENABLE "true"
 
 WORKDIR /home/app/homeland
-
 VOLUME /home/app/homeland/plugins
 
 RUN mkdir -p /home/app &&\

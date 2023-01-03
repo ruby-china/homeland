@@ -7,5 +7,5 @@ curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
 RUN apt install -y ca-certificates cron socat curl git htop tzdata imagemagick nginx libnginx-mod-http-image-filter libnginx-mod-http-geoip  \
 build-essential ruby-dev openssl libpq-dev libxml2-dev libxslt-dev nodejs cmake
 RUN npm i -g corepack
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 RUN curl https://get.acme.sh | sh

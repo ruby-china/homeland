@@ -14,7 +14,7 @@ jobs:
   assets_compile:
     name: Assets Compile
     runs-on: ubuntu-latest
-    container: homeland/base:3.1.0-slim-buster
+    container: homeland/base:3.2-slim-buster
     steps:
       - uses: actions/checkout@v2
       - name: Install dependencies

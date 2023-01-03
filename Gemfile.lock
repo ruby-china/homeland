@@ -74,7 +74,7 @@ GEM
       nokogiri (~> 1.6)
       rest-client (~> 2.0)
     ast (2.4.2)
-    autocorrect-rb (2.5.6.pre2)
+    autocorrect-rb (2.5.6)
       rb_sys (>= 0.9.18)
     bcrypt (3.1.18)
     benchmark-ips (2.10.0)
@@ -489,7 +489,7 @@ PLATFORMS
 
 DEPENDENCIES
   action-store
-  autocorrect-rb (= 2.5.6.pre2)
+  autocorrect-rb (= 2.5.6)
   bootsnap
   byebug
   cancancan

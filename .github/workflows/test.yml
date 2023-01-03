@@ -8,7 +8,7 @@ jobs:
     name: AutoCorrect Check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: huacnlee.autocorrect
         uses: huacnlee/autocorrect-action@v1.9.5
   assets_compile:
@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     container: homeland/base:3.2-slim-buster
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Install dependencies
         run: |
           sed -i "s/gems.ruby-china.org/rubygems.org/g" Gemfile.lock
@@ -29,7 +29,7 @@ jobs:
   test:
     name: CI Test
     runs-on: ubuntu-latest
-    container: homeland/base:3.1.0-slim-buster
+    container: homeland/base:3.2-slim-buster
     services:
       postgres:
         image: postgres:10
@@ -54,7 +54,7 @@ jobs:
       REDIS_URL: redis://redis:6379/1
       DATABASE_URL: postgres://admin:123456@postgres:5432/homeland-test
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: huacnlee/autocorrect-action@main
       - name: RubyGems cache
         uses: actions/cache@v1

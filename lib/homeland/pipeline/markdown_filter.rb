@@ -95,7 +95,7 @@ module Homeland
         end
       end
 
-      DEFAULT_OPTIONS = {
+      RENDERDER = Redcarpet::Markdown.new(Render, {
         no_styles: true,
         hard_wrap: true,
         autolink: true,
@@ -110,16 +110,10 @@ module Homeland
         space_after_headers: true,
         disable_indented_code_blocks: true,
         no_intra_emphasis: true
-      }
-
-      def renderer
-        # Do not share a single Redcarpet::Markdown object across threads
-        # https://github.com/vmg/redcarpet/pull/672
-        Thread.current[:homeland_markdown_renderer] ||= Redcarpet::Markdown.new(Render, DEFAULT_OPTIONS)
-      end
+      })
 
       def call
-        renderer.render(@text)
+        RENDERDER.render(@text)
       end
     end
   end

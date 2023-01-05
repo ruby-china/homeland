@@ -12,12 +12,14 @@ RUN mkdir -p /home/app &&\
   rm -rf /etc/nginx/conf.d/default.conf
 
 ADD Gemfile Gemfile.lock package.json yarn.lock /home/app/homeland/
-ENV RUSTFLAGS="-C target-feature=-crt-static"
-RUN gem install autocorrect-rb -V
 # Do not enable bundle deployment, use globalize mode, Puma tmp_restart need it.
 RUN bundle install && yarn &&\
   find /usr/local/bundle -name tmp -type d -exec rm -rf {} + && \
-  find /usr/local/bundle -name "*.gem" -type f -exec rm -rf {} +
+  find /usr/local/bundle -name "*.gem" -type f -exec rm -rf {} + && \
+  find /usr/local/lib/ruby -name "*.gem" -type f -exec rm -rf {} + && \
+  rm /usr/local/share/.cache/ && \
+  rm /root/.cargo/registry/cache
+
 ADD . /home/app/homeland
 ADD ./config/nginx/ /etc/nginx
 

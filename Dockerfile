@@ -17,8 +17,8 @@ RUN bundle install && yarn &&\
   find /usr/local/bundle -name tmp -type d -exec rm -rf {} + && \
   find /usr/local/bundle -name "*.gem" -type f -exec rm -rf {} + && \
   find /usr/local/lib/ruby -name "*.gem" -type f -exec rm -rf {} + && \
-  rm /usr/local/share/.cache/ && \
-  rm /root/.cargo/registry/cache
+  rm -Rf /usr/local/share/.cache/ && \
+  rm -Rf /root/.cargo/registry/cache
 
 ADD . /home/app/homeland
 ADD ./config/nginx/ /etc/nginx

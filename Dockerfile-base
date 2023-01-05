@@ -7,6 +7,7 @@ imagemagick nginx nginx-mod-http-image-filter nginx-mod-http-geoip  \
 ruby-dev openssl libpq-dev libxml2-dev libxslt-dev nodejs-current npm yarn \
 cmake clang clang-dev
 
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 RUN curl https://get.acme.sh | sh
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --profile minimal -y
 ENV PATH="/root/.cargo/bin:$PATH"
+ENV RUSTFLAGS="-C target-feature=-crt-static"

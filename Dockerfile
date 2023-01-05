@@ -11,6 +11,7 @@ RUN mkdir -p /home/app &&\
   rm -rf '/tmp/*' &&\
   rm -rf /etc/nginx/conf.d/default.conf
 
+RUN gem install bundler
 ADD Gemfile Gemfile.lock package.json yarn.lock /home/app/homeland/
 # Do not enable bundle deployment, use globalize mode, Puma tmp_restart need it.
 RUN bundle install && yarn &&\

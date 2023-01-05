@@ -2,7 +2,7 @@ RUN  = docker-compose run app
 RAKE = docker-compose run app bundle exec rake
 
 docker\:base:
-	docker build -f Dockerfile-base . -t homeland/base:latest
+	docker buildx build -f Dockerfile-base . -t homeland/base:latest
 docker\:build:
 	docker buildx build . -t homeland/homeland:latest
 docker\:stop:

@@ -1,7 +1,7 @@
 <% title_tag t("teams.new_team") %>
-<div class="flex flex-col md:flex-row justify-center gap-4">  
+<div class="flex flex-col justify-center gap-4 md:flex-row">  
   <div class="w-full md:w-2/3">
-    <div class="p-4 bg-white rounded">
+    <div class="p-4 card">
         <%= form_for @team do |f| %>
           <%= render "shared/error_messages", target: @team %>
           <div class="form-group">

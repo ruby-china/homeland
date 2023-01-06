@@ -1,9 +1,9 @@
-<div class="flex flex-col sm:flex-row gap-4">
+<div class="flex flex-col gap-4 sm:flex-row">
   <%= render "/settings/menu" %>
   <div class="grow">
-    <div class="p-4 bg-white rounded mb-4">
+    <div class="p-4 mb-4 rounded card">
       <div class="">
-        <div class="flex justify-between items-center mb-4">
+        <div class="flex items-center justify-between mb-4">
           <%= t("user_setting.applciations") %>
           <div class="actions">
             <%= link_to "New Application", new_oauth_application_path, class: 'btn btn-primary btn-sm' %>
@@ -36,9 +36,9 @@
         </table>
       </div>
     </div>
-    <div class="p-4 bg-white rounded mb-4">
+    <div class="p-4 mb-4 card">
       <div class="">
-        <div class="flex justify-between items-center mb-4">
+        <div class="flex items-center justify-between mb-4">
           <div>Authorized Apps</div>
         </div>
         <p>You have granted <%= @authorized_applications.count %> applications access to your account.</p>
@@ -65,8 +65,8 @@
       </div>
     </div>
     <% if @devices.length > 0 %>
-      <div class="p-4 bg-white rounded mb-4">
-        <div class="flex justify-between items-center mb-4">
+      <div class="p-4 mb-4 card">
+        <div class="flex items-center justify-between mb-4">
           Devices
         </div>
         <div class="">

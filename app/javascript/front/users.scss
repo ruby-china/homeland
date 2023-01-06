@@ -24,7 +24,7 @@
 .page-users {
   .nav-tabs {
     border-bottom: 0px;
-  }  
+  }
 }
 
 .node-topics {
@@ -242,6 +242,16 @@ table.node-topics {
       a {
         color: var(--text-color);
       }
+    }
+  }
+}
+
+.user-list-tabs {
+  .user-list-tab {
+    @apply p-2 rounded text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-600 dark:hover:text-gray-400;
+
+    &.active {
+      @apply bg-gray-200 dark:bg-gray-700 dark:text-gray-400 text-gray-700;
     }
   }
 }

@@ -13,16 +13,16 @@
     <%= raw Setting.custom_head_html %>
   </head>
   <body data-controller-name="<%= controller_name %>">
-    <div class="header flex bg-white navbar navbar-expand-md items-stretch">
-      <div class="container mx-auto flex items-center relative flex-wrap md:flex-nowrap z-50">
-        <div class="container mx-auto flex flex-wrap">
-          <div class="navbar-header hidden sm:flex items-center text-xl font-bold" data-turbolinks-permanent>
+    <div class="flex items-stretch header navbar navbar-expand-md">
+      <div class="container relative z-50 flex flex-wrap items-center mx-auto md:flex-nowrap">
+        <div class="container flex flex-wrap mx-auto">
+          <div class="items-center hidden text-xl font-bold navbar-header sm:flex" data-turbolinks-permanent>
             <%= raw Setting.navbar_brand_html %>
           </div>
           <div class="navbar-nav-scroll">
             <%= render "shared/navbar" %>
           </div>
-          <div class="ml-auto flex">
+          <div class="flex ml-auto">
             <%= render "shared/usernav" %>
           </div>
         </div>

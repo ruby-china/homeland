@@ -12,7 +12,7 @@ module.exports = {
   theme: {
     colors: {
       ...colors,
-      gray: colors.zinc,
+      gray: colors.neutral,
       red: colors.rose,
     },
     extend: {},

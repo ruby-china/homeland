@@ -1,14 +1,14 @@
 <% title_tag t('users.hot_users') %>
 
-<div class="p-4 bg-white rounded">
-  <div class="flex justify-between items-center">
+<div class="p-4 card">
+  <div class="flex items-center justify-between">
     <div class="text-xl">
       <div><%= t("users.hot_users") %></div>
-      <div class="text-sm text-gray-400">Total <%= @total_user_count %> users</div>
+      <div class="text-sm text-gray-400 dark:text-gray-700">Total <%= @total_user_count %> users</div>
     </div>
-    <div class="">
-      <a href="<%= users_path %>" class="p-2 rounded <%= "active bg-gray-200 text-gray-700" if params[:type].blank? %> text-gray-400 hover:bg-gray-200 hover:text-gray-700"><%= t("users.yearly") %></a> <span class="divider">/</span>
-      <a href="<%= users_path(type: "monthly") %>" class="p-2 rounded <%= "active bg-gray-200 text-gray-700" if params[:type] == "monthly" %> text-gray-400 hover:bg-gray-200 hover:text-gray-700"><%= t("users.monthly") %></a>
+    <div class="user-list-tabs">
+      <a href="<%= users_path %>" class="user-list-tab <%= "active" if params[:type].blank? %>"><%= t("users.yearly") %></a> <span class="divider">/</span>
+      <a href="<%= users_path(type: "monthly") %>" class="user-list-tab <%= "active" if params[:type] == 'monthly' %>"><%= t("users.monthly") %></a>
     </div>
   </div>
 

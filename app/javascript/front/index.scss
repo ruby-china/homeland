@@ -362,6 +362,8 @@ hr {
       a:visited {
         line-height: 11px;
         color: var(--secondary);
+        @apply dark:text-white dark:text-opacity-30;
+
         font-size: 13px;
         min-width: 32px;
         text-align: center;
@@ -373,13 +375,16 @@ hr {
 
       a:link {
         background: rgba(79, 147, 248, 0.24);
+        @apply dark:bg-blue-800 dark:bg-opacity-70;
       }
       a:hover {
         background: var(--gray);
+        @apply dark:bg-blue-800 dark:bg-opacity-100;
       }
       a.state-true,
       a:visited {
         background: var(--gray);
+        @apply dark:bg-gray-800;
       }
     }
   }

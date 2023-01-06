@@ -117,7 +117,7 @@ textarea,
 /* Bootstrap Theme */
 body {
   @apply bg-gray-100 text-gray-800 font-sans;
-  @apply dark:bg-gray-900 dark:text-gray-100;
+  @apply dark:bg-black dark:text-gray-100;
 }
 
 body {
@@ -129,7 +129,7 @@ body {
 .header {
   padding: 0;
   @apply bg-white shadow-sm border-none text-gray-800;
-  @apply dark:bg-gray-800 dark:text-gray-200;
+  @apply dark:bg-gray-900 dark:text-gray-200 dark:border-b dark:border-solid dark:border-gray-800;
 
   z-index: 1030;
   line-height: 100%;
@@ -141,7 +141,7 @@ body {
     @apply dark:text-gray-200;
 
     &:active {
-      @apply bg-gray-200 dark:bg-gray-700;
+      @apply bg-gray-200 dark:bg-gray-800;
     }
     &:focus {
       @apply shadow-none;
@@ -207,7 +207,7 @@ body {
   .main-navbar-open {
     @apply flex md:flex absolute top-12 w-52;
     @apply rounded bg-white shadow border-none text-gray-800;
-    @apply dark:bg-gray-800 dark:text-gray-200;
+    @apply dark:bg-gray-900 dark:text-gray-200 dark:shadow-lg;
   }
 
   #main-nav-menu {
@@ -241,7 +241,7 @@ body {
     padding: 15px 0;
     height: 18px;
     @apply text-sm hidden lg:flex items-center justify-around bg-gray-100 rounded-3xl space-x-2;
-    @apply dark:bg-gray-900;
+    @apply dark:bg-black dark:bg-opacity-80 dark:border dark:border-solid dark:border-gray-800;
 
     .fa-search {
       @apply ml-3 cursor-pointer text-gray-200;
@@ -320,7 +320,7 @@ body {
 
 .sub-navbar {
   @apply bg-white shadow-sm;
-  @apply dark:bg-gray-800;
+  @apply dark:bg-gray-900 dark:border-t dark:bg-opacity-70 dark:border-solid dark:border-gray-900;
 
   a {
     color: $blue;
@@ -432,6 +432,8 @@ body {
   border-color: var(--form-control-border-color);
   box-shadow: var(--form-control-box-shadow);
   color: var(--primary);
+
+  @apply dark:border-gray-800 dark:bg-black;
 
   &:-internal-autofill-selected {
     background-color: var(--form-control-background-color) !important;
@@ -644,6 +646,7 @@ kbd {
 }
 
 .table {
+  border-color: var(--table-border-color) !important;
   th,
   td {
     color: var(--text-color);
@@ -660,10 +663,14 @@ kbd {
   padding: 0.65rem 1rem;
 }
 
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+  color: var(--text-color1);
+}
+
 .card {
   @apply border-none bg-white shadow-sm sm:rounded-lg;
   @apply bg-white;
-  @apply dark:bg-gray-800;
+  @apply dark:bg-gray-900 dark:border dark:border-solid dark:border-gray-800;
 
   .card {
     border: 1px solid var(--card-inset-border-color);
@@ -721,6 +728,7 @@ kbd {
       border-radius: 0;
       border-left: 0;
       border-right: 0;
+      color: var(--text-color1);
     }
   }
 }
@@ -759,6 +767,8 @@ kbd {
     border: 0px;
     background-color: var(--modal-background-color);
     box-shadow: 0 2px 15px var(--modal-shadow-color) !important;
+
+    @apply dark:bg-gray-900 dark:border dark:border-solid dark:border-gray-800 dark:shadow-2xl;
 
     .card {
       background-color: var(--modal-background-color);

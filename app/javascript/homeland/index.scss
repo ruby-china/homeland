@@ -293,23 +293,19 @@ body {
   }
 
   .user-bar {
-    min-width: 130px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+    @apply flex items-center justify-end min-w-[130px] gap-1;
 
     .nav-item {
-      display: block;
+      @apply block;
     }
 
     .nav-link {
-      padding: 15px 10px;
-      display: flex;
-      align-items: center;
+      @apply flex items-center rounded p-2 hover:bg-gray-100;
+      @apply dark:hover:bg-gray-800;
     }
 
     .dropdown-menu {
-      position: absolute;
+      @apply absolute;
     }
   }
 }

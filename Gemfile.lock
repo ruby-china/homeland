@@ -78,6 +78,8 @@ GEM
       rb_sys (>= 0.9.54)
     autocorrect-rb (2.5.8.pre-x86_64-linux)
       rb_sys (>= 0.9.54)
+    autocorrect-rb (2.5.8.pre-x86_64-linux-musl)
+      rb_sys (>= 0.9.54)
     bcrypt (3.1.18)
     benchmark-ips (2.10.0)
     bootsnap (1.13.0)
@@ -415,6 +417,9 @@ GEM
     rucaptcha (3.1.4.pre-x86_64-linux)
       railties (>= 3.2)
       rb_sys (>= 0.9.18)
+    rucaptcha (3.1.4.pre-x86_64-linux-musl)
+      railties (>= 3.2)
+      rb_sys (>= 0.9.18)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
     sassc (2.4.0)
@@ -491,6 +496,7 @@ PLATFORMS
   arm64-darwin-21
   arm64-darwin-22
   x86_64-linux
+  x86_64-linux-musl
 
 DEPENDENCIES
   action-store

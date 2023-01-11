@@ -47,7 +47,7 @@ gem "mini_magick", require: false
 
 # Captcha
 gem "recaptcha"
-gem "rucaptcha"
+gem "rucaptcha", "3.1.4.pre"
 
 # Notification
 gem "notifications"
@@ -72,7 +72,7 @@ gem "second_level_cache"
 gem "rails-settings-cached"
 
 # HTML Pipeline
-gem "autocorrect-rb"
+gem "autocorrect-rb", "2.5.8.pre"
 gem "html-pipeline"
 gem "html-pipeline-auto-correct"
 gem "redcarpet"

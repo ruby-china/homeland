@@ -74,9 +74,9 @@ GEM
       nokogiri (~> 1.6)
       rest-client (~> 2.0)
     ast (2.4.2)
-    autocorrect-rb (2.5.7-arm64-darwin)
+    autocorrect-rb (2.5.8.pre-arm64-darwin)
       rb_sys (>= 0.9.54)
-    autocorrect-rb (2.5.7-x86_64-linux)
+    autocorrect-rb (2.5.8.pre-x86_64-linux)
       rb_sys (>= 0.9.54)
     bcrypt (3.1.18)
     benchmark-ips (2.10.0)
@@ -409,10 +409,10 @@ GEM
     ruby-vips (2.1.4)
       ffi (~> 1.12)
     ruby2_keywords (0.0.5)
-    rucaptcha (3.1.3-arm64-darwin)
+    rucaptcha (3.1.4.pre-arm64-darwin)
       railties (>= 3.2)
       rb_sys (>= 0.9.18)
-    rucaptcha (3.1.3-x86_64-linux)
+    rucaptcha (3.1.4.pre-x86_64-linux)
       railties (>= 3.2)
       rb_sys (>= 0.9.18)
     sass-rails (6.0.0)
@@ -490,11 +490,10 @@ GEM
 PLATFORMS
   arm64-darwin-21
   arm64-darwin-22
-  x86_64-linux
 
 DEPENDENCIES
   action-store
-  autocorrect-rb
+  autocorrect-rb (= 2.5.8.pre)
   bootsnap
   byebug
   cancancan
@@ -550,7 +549,7 @@ DEPENDENCIES
   redis-namespace
   rouge
   ruby-push-notifications
-  rucaptcha
+  rucaptcha (= 3.1.4.pre)
   sass-rails
   second_level_cache
   shakapacker

@@ -64,7 +64,7 @@
      </div>
   </div>
   <%= yield :sub_navbar %>
-  <div id="main" class="container px-3 mx-auto lg:px-0">
+  <div id="main" class="container px-0 md:px-4 lg:px-0">
     <%= render AlertComponent.new %>
     <%= content_for?(:main) ? yield(:main) : yield %>
   </div>

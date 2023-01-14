@@ -233,7 +233,6 @@ GEM
     mini_histogram (0.3.1)
     mini_magick (4.11.0)
     mini_mime (1.1.2)
-    mini_portile2 (2.8.1)
     minitest (5.17.0)
     minitest-spec-rails (6.1.0)
       minitest (>= 5.0)
@@ -257,8 +256,9 @@ GEM
       timeout
     netrc (0.11.0)
     nio4r (2.5.8)
-    nokogiri (1.13.10)
-      mini_portile2 (~> 2.8.0)
+    nokogiri (1.13.10-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.13.10-x86_64-linux)
       racc (~> 1.4)
     notifications (1.1.0)
       kaminari (>= 0.15)
@@ -303,7 +303,7 @@ GEM
     parser (3.1.2.1)
       ast (~> 2.4.1)
     pg (1.4.3)
-    pghero (3.0.1)
+    pghero (3.1.0)
       activerecord (>= 6)
     postmark (1.22.1)
       json

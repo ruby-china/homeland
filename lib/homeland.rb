@@ -60,7 +60,7 @@ module Homeland
     #     plugin.root_path = "/test"
     #   end
     #
-    # More example see: https://github.com/ruby-china/homeland-press
+    # More example see: https://github.com/homeland-plugins/press
     #
     def register_plugin
       @plugins ||= []

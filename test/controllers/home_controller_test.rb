@@ -40,4 +40,13 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
       assert_equal 200, response.status
     end
   end
+
+  test "GET /mainfest.webmanifest" do
+    Setting.stub(:mainfest, {foo: 1}) do
+      get "/mainfest.webmanifest"
+      assert_equal 200, response.status
+      assert_equal "application/json", response.media_type
+      assert_equal '{"foo":1}', response.body
+    end
+  end
 end

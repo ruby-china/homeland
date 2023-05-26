@@ -146,7 +146,7 @@ zh-CN:
       captcha: 验证码
       other: 其他
     app_name: 网站名称
-    mainfest: PWA Web app manifests 配置信息（JSON 格式）
+    manifest: PWA Web app manifests 配置信息（JSON 格式）
     newbie_notices: 新手提示信息（支持 HTML）
     admin_emails: 管理员 Email，在此名单的将有管理员权限（一行一个）
     reject_newbie_reply_in_the_evening: 禁止新手在晚上回帖

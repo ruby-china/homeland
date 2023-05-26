@@ -96,7 +96,7 @@ class Setting < RailsSettings::Base
     field :share_allow_sites, default: %w[twitter weibo facebook wechat], type: :array, separator: /\s+/
     field :editor_languages, default: %w[rb go js py java rs php css html yml json xml], type: :array, separator: /[\s,]+/
     field :google_analytics_key, default: ""
-    field :mainfest, type: :hash, default: {
+    field :manifest, type: :hash, default: {
       name: "Homeland",
       short_name: "Homeland",
       description: "Open source discussion website.",

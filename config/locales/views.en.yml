@@ -145,7 +145,7 @@ en:
       captcha: Captcha
       other: Other
     app_name: Application name
-    mainfest: PWA Web app manifests JSON
+    manifest: PWA Web app manifests JSON
     newbie_notices: Notifce for newbie (HTML)
     admin_emails: Admin emails, in this list email who will get the admin role.
     reject_newbie_reply_in_the_evening: Disallow newbie replying at night.

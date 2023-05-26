@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     path: /[\w\d.\/\-]+/i
   }
   get "status", to: "home#status"
-  get "mainfest.webmanifest", to: "home#mainfest"
+  get "manifest.webmanifest", to: "home#manifest"
 
   devise_for :users, path: "account", controllers: {
     registrations: "users/registrations",

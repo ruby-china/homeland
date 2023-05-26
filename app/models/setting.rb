@@ -106,7 +106,7 @@ class Setting < RailsSettings::Base
       theme_color: "#FFFFFF",
       icons: [
         {
-          src: "/https://l.ruby-china.com/photo/2018/bd93b12d-98d0-47a4-9f7a-128b8a3271f7.png",
+          src: "https://l.ruby-china.com/photo/2018/bd93b12d-98d0-47a4-9f7a-128b8a3271f7.png",
           sizes: "512x512",
           type: "image/png"
         }

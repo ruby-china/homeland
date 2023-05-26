@@ -79,6 +79,7 @@ class Setting < RailsSettings::Base
     mailer_provider
     mailer_sender
     mailer_options
+    mainfest
   ]
 
   scope :basic do
@@ -95,6 +96,22 @@ class Setting < RailsSettings::Base
     field :share_allow_sites, default: %w[twitter weibo facebook wechat], type: :array, separator: /\s+/
     field :editor_languages, default: %w[rb go js py java rs php css html yml json xml], type: :array, separator: /[\s,]+/
     field :google_analytics_key, default: ""
+    field :mainfest, type: :hash, default: {
+      name: "Homeland",
+      short_name: "Homeland",
+      description: "Open source discussion website.",
+      start_url: "/",
+      display: "standalone",
+      background_color: "#FFFFFF",
+      theme_color: "#FFFFFF",
+      icons: [
+        {
+          src: "/https://l.ruby-china.com/photo/2018/bd93b12d-98d0-47a4-9f7a-128b8a3271f7.png",
+          sizes: "512x512",
+          type: "image/png"
+        }
+      ]
+    }
   end
 
   scope :appearance do

@@ -60,7 +60,7 @@ zh-CN:
     statics_users_count: 会员数：%{count} 个
     statics_topics_count: 话题数：%{count} 篇
     statics_replies_count: 回帖数：%{count} 条
-    statics_online_users_count: '%{count} 人在线'
+    statics_online_users_count: "%{count} 人在线"
     online: 在线
     comments: 评论
     new_comment: 发表新评论
@@ -131,10 +131,10 @@ zh-CN:
     you_have_successfully: 你已经成功在
     registered_an_account: 注册了账号。
   rss:
-    recent_topics_description: '%{name}社区最新发帖。'
-    recent_topics_title: '%{name}社区'
-    recent_node_topics_description: '%{name} 社区 %{node_name} 节点最新发帖。'
-    recent_node_topics_title: '%{name} 社区 %{node_name} 节点'
+    recent_topics_description: "%{name}社区最新发帖。"
+    recent_topics_title: "%{name}社区"
+    recent_node_topics_description: "%{name} 社区 %{node_name} 节点最新发帖。"
+    recent_node_topics_title: "%{name} 社区 %{node_name} 节点"
   setting:
     scope:
       basic: 基本设置
@@ -146,6 +146,7 @@ zh-CN:
       captcha: 验证码
       other: 其他
     app_name: 网站名称
+    mainfest: PWA Web app manifests 配置信息（JSON 格式）
     newbie_notices: 新手提示信息（支持 HTML）
     admin_emails: 管理员 Email，在此名单的将有管理员权限（一行一个）
     reject_newbie_reply_in_the_evening: 禁止新手在晚上回帖
@@ -211,7 +212,7 @@ zh-CN:
   pagination:
     next: 下一页
     prev: 上一页
-    gap: '&hellip;'
+    gap: "&hellip;"
   topics:
     new_topic: 发布新话题
     edit_topic: 修改话题
@@ -248,7 +249,7 @@ zh-CN:
     update_topic_success: 话题修改成功。
     reply_success: 回复成功。
     reply_this_floor: 回复此楼
-    topic_was_deleted: '[该话题已被删除]'
+    topic_was_deleted: "[该话题已被删除]"
     have_no_new_reply: 在你读过以后还没有新变化
     has_new_replies: 有新内容
     more_like_this: 相关话题
@@ -317,7 +318,7 @@ zh-CN:
     recent_publish_topic: 最近发布的帖子
     recent_reply_topic: 最近回复过的帖子
     unbind_warning: 至少要保留一个关联账号，现在不能解绑。
-    unbind_success: '%{provider} 账号解绑成功。'
+    unbind_success: "%{provider} 账号解绑成功。"
     legacy_unbind_tip: 账户三方账号登录且未设置 Email 和密码，不允许解绑，请设置密码，并修改 Email。
     please_be_careful: 谨慎修改
     be_sure_to_use_twitter_id: 此项将会影响回复信息关联，建议用 Twitter ID
@@ -398,7 +399,7 @@ zh-CN:
     users: 成员列表
     team_user_pendding: 等待接受
     settings: 设置
-    team_users_count: '%{count} 个团队成员'
+    team_users_count: "%{count} 个团队成员"
     invite_success: 邀请成功。
     remove_success: 移除成功
     accept_success: 接受成功，已加入组织
@@ -420,8 +421,8 @@ zh-CN:
     node_changed_html: 你发布的话题 %{topic} 由于内容原因被管理员移动到了 %{node}  节点，请注意查看节点说明。
     invite_you_join: 邀请你加入
     show_invite: 查看邀请
-    created_topic: '%{actor} 创建了话题 %{target}'
-    created_reply: '%{actor} 回复了话题 %{target}'
-    followed_you: '%{actor} 关注了你。'
-    mentioned_you: '%{actor} 提及了你。'
+    created_topic: "%{actor} 创建了话题 %{target}"
+    created_reply: "%{actor} 回复了话题 %{target}"
+    followed_you: "%{actor} 关注了你。"
+    mentioned_you: "%{actor} 提及了你。"
     node_changed: 你创建的话题被调整到了 %{node} 节点。

@@ -28,4 +28,8 @@ class HomeController < ApplicationController
   def status
     render plain: "OK #{Time.now.iso8601}"
   end
+
+  def mainfest
+    render json: Setting.mainfest.to_json
+  end
 end

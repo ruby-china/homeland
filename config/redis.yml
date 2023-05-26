@@ -3,10 +3,13 @@ defaults: &defaults
 
 development:
   <<: *defaults
+  host: localhost
+  port: 63791
 
 test:
   <<: *defaults
+  host: localhost
+  port: 63791
 
 production:
   <<: *defaults
-

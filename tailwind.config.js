@@ -2,6 +2,7 @@ const defaultTheme = require("tailwindcss/defaultTheme");
 const colors = require("tailwindcss/colors");
 
 module.exports = {
+  darkMode: ["class", '[data-theme="dark"]'],
   content: [
     "./app/views/**/*.html.erb",
     "./app/components/**/*.html.erb",

@@ -11,7 +11,7 @@
     <div class="header">
       <div class="header navbar navbar-expand flex-md-row bd-navbar">
         <div class="container mx-auto sm:flex">
-          <div class="navbar-header hidden md:flex items-center" data-turbolinks-permanent>
+          <div class="items-center hidden navbar-header md:flex" data-turbolinks-permanent>
             <%= link_to("Admin Panel", main_app.admin_root_path, class: "navbar-brand") %>
           </div>
           <div class="navbar-nav-scroll">
@@ -48,7 +48,7 @@
         </div>
       </div>
     </div>
-    <footer class="footer">
+    <footer class="mt-6 footer">
       <div class="container mx-auto">
         <p>Powered by <a href="https://github.com/ruby-china/homeland/blob/master/CHANGELOG.md">Homeland <%= Homeland.version %></a></p>
       </div>

@@ -86,13 +86,13 @@ hr {
     }
     .navbar-topic-title {
       display: none;
-      height: 50px;
+      height: 45px;
       text-align: left;
       overflow: hidden;
       top: 0;
       position: absolute;
       @apply bg-white;
-      @apply dark:bg-gray-800;
+      @apply dark:bg-gray-900;
       display: none;
       min-width: 400px;
 
@@ -356,7 +356,7 @@ hr {
     .count {
       width: 100px;
       text-align: right;
-      padding-top: 1.25rem;
+      padding-top: 1em;
       a:link,
       a:hover,
       a:visited {

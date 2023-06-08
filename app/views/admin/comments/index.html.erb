@@ -3,11 +3,11 @@
 <% end %>
 <table class='table table-bordered table-striped table-condensed'>
   <tr>
-    <td style="width:100px">Target</th>
+    <th style="width:100px">Target</th>
     <th><%= t("common.creator") %></th>
     <th>Body</th>
-    <td style="width:120px;">Time</td>
-    <td style="width:60px;"></td>
+    <th>Time</td>
+    <th></td>
   </tr>
   <% @comments.each do |item| %>
     <tr id="comment<%= item.id %>">
@@ -15,8 +15,12 @@
       <td><%= item.user.login if !item.user.blank? %></td>
       <td><%= item.body %></td>
       <td><%= l item.created_at, format: :short %></td>
-      <td><%= link_to '', edit_admin_comment_path(item), class: "fa fa-edit" %>
-        <%= link_to '', admin_comment_path(item), 'data-confirm' => 'Are you sure?', method: :delete, remote: true, class: "fa fa-trash" %></td>
+      <td class="actions">
+        <div class="btn-group">
+          <%= link_to icon_tag("edit"), edit_admin_comment_path(item), class: "btn" %>
+          <%= link_to icon_tag("trash"), admin_comment_path(item), 'data-confirm' => 'Are you sure?', method: :delete, remote: true, class: "btn" %>
+        </div>
+      </td>
     </tr>
   <% end %>
 </table>

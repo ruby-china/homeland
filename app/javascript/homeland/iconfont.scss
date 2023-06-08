@@ -8,6 +8,9 @@ $fa-font-path: "@fortawesome/fontawesome-free/webfonts";
   &-pin {
     @extend .fa-chevron-circle-up;
   }
+  &-unpin {
+    @extend .fa-chevron-circle-down;
+  }
   &-close {
     @extend .fa-times;
   }

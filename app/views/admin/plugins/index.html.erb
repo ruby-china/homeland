@@ -1,22 +1,24 @@
 <div class="card-title">
   Plugins
 </div>
-<div class="mb-3 clearfix">
+<div class="clearfix mb-3">
   <%= link_to "Install...", new_admin_plugin_path, class: "btn btn-primary" %>
   <%= link_to "Find plugins", "https://github.com/topics/homeland-plugin", class: "btn btn-secondary", target: "_blank" %>
   <%= link_to "Navbar order...", edit_admin_site_config_path("sorted_plugins"), class: "btn btn-secondary float-right" %>
 </div>
 <ul class="list-group plugin-list">
   <% Homeland.plugins.each do |plugin| %>
-    <li class="list-group-item plugin-item flex items-center md:justify-between">
-      <div class="plugin-title">
-        <%= icon_tag("plug") %>
-        <%= link_to plugin.display_name, admin_plugin_path(plugin.name) %>
-        <span class="version"><%= plugin.version %></span>
+    <li class="list-group-item plugin-item">
+      <div class="flex items-center md:justify-between">
+        <div class="plugin-title">
+          <%= icon_tag("plug") %>
+          <%= link_to plugin.display_name, admin_plugin_path(plugin.name) %>
+          <span class="version"><%= plugin.version %></span>
+        </div>
+        <% if plugin.uninstallable? %>
+          <%= link_to "Uninstall", admin_plugin_path(plugin.name), data: { method: :delete, confirm: "Are you sure to uninstall this Plugin?", confirm_with: "Uninstalling..." }, class: "btn btn-secondary btn-sm" %>
+        <% end %>
       </div>
-      <% if plugin.uninstallable? %>
-        <%= link_to "Uninstall", admin_plugin_path(plugin.name), data: { method: :delete, confirm: "Are you sure to uninstall this Plugin?", confirm_with: "Uninstalling..." }, class: "btn btn-secondary btn-sm float-right" %>
-      <% end %>
     </li>
   <% end %>
 </ul>

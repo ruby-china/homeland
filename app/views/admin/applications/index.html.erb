@@ -9,7 +9,7 @@
   </form>
 </div>
 <div id="admin_applications">
-  <table class="table table-bordered table-striped table-condensed">
+  <table class="table">
     <tr class="head">
       <th>ID</th>
       <th>Name</th>
@@ -18,7 +18,7 @@
       <th>Tokens</th>
       <th>Level</th>
       <th>Time</th>
-      <th class="opts"></th>
+      <th></th>
     </tr>
     <% @applications.each do |item| %>
       <tr class="<%= cycle("","even") %>">
@@ -29,8 +29,10 @@
         <td><%= item.access_tokens.count %></td>
         <td><%= item.level %></td>
         <td><%= l(item.created_at, format: :long) %></td>
-        <td>
-          <%= link_to icon_tag("pencil"), edit_admin_application_path(item) %>
+        <td class="actions">
+          <div class="btn-group">
+            <%= link_to icon_tag("pencil"), edit_admin_application_path(item), class: "btn" %>
+          </div>
         </td>
       </tr>
     <% end %>

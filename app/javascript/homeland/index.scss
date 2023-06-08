@@ -641,25 +641,20 @@ kbd {
 }
 
 .table {
-  border-color: var(--table-border-color) !important;
-  th,
-  td {
-    color: var(--text-color);
-    border-color: var(--table-border-color) !important;
+  @apply min-w-full divide-y divide-gray-300 table-auto;
+
+  th {
+    @apply py-3.5 pl-4 pr-3 text-left text-sm font-normal text-gray-500;
   }
-}
 
-.table > tbody > tr > td,
-.table > tbody > tr > th,
-.table > tfoot > tr > td,
-.table > tfoot > tr > th,
-.table > thead > tr > td,
-.table > thead > tr > th {
-  padding: 0.65rem 1rem;
-}
-
-.table-striped > tbody > tr:nth-of-type(odd) > * {
-  color: var(--text-color1);
+  tr:not(first-child) {
+    td {
+      @apply border-t border-gray-200 dark:border-gray-800;
+    }
+  }
+  td {
+    @apply hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell;
+  }
 }
 
 .card {

@@ -2,18 +2,20 @@
 <div id="admin_locations">
   <table class="table table-bordered table-striped table-condensed">
     <tr class="head">
-      <td>#</td>
-      <td>Location</td>
-      <td>Users</td>
-      <td class="opts"></td>
+      <th>#</th>
+      <th>Location</th>
+      <th>Users</th>
+      <th></th>
     </tr>
     <% @locations.each do |item| %>
       <tr class="<%= cycle("","even") %>">
         <td><%= item.id %></td>
         <td><%= item.name %></td>
         <td><%= item.users_count %></td>
-        <td>
-          <%= link_to "", edit_admin_location_path(item.id), class: "fa fa-edit" %>
+        <td class="actions">
+          <div class="btn-group">
+            <%= link_to icon_tag("edit"), edit_admin_location_path(item.id), class: "btn" %>
+          </div>
         </td>
       </tr>
     <% end %>

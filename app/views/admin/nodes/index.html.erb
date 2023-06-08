@@ -6,11 +6,11 @@
 </div>
 <table class="table table-bordered table-striped table-condensed">
   <tr class="head">
-    <td class="first">#</td>
-    <td>Name</td>
-    <td>Order</td>
-    <td>Topics Count</td>
-    <td></td>
+    <th class="first">#</th>
+    <th>Name</th>
+    <th>Order</th>
+    <th>Topics Count</th>
+    <th></th>
   </tr>
   <% @nodes.each do |node| %>
     <tr>
@@ -18,8 +18,12 @@
       <td><%= link_to node.name, node_topics_path(node.id) %></td>
       <td><%= node.sort %></td>
       <td><%= node.topics_count %></td>
-      <td><%= link_to '', edit_admin_node_path(node), class: "fa fa-edit" %>
-        <%= link_to '', admin_node_path(node), 'data-confirm' => 'Are you sure?' , method: :delete, class: "fa fa-trash" %></td>
+      <td class="actions">
+        <div class="btn-group">
+          <%= link_to icon_tag("edit"), edit_admin_node_path(node), class: "btn" %>
+          <%= link_to icon_tag("trash"), admin_node_path(node), 'data-confirm' => 'Are you sure?' , method: :delete, class: "btn" %>
+        </div>
+      </td>
     </tr>
   <% end %>
 </table>

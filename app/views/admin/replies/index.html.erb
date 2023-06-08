@@ -10,12 +10,12 @@
 </div>
 <table class="table table-bordered table-striped table-condensed">
   <tr class="head">
-    <td class="first">#</td>
-    <td style="width:500px">Body</td>
-    <td>Topic</td>
-    <td>Creator</td>
-    <td>Time</td>
-    <td></td>
+    <th class="first">#</th>
+    <th style="width:500px">Body</th>
+    <th>Topic</th>
+    <th>Creator</th>
+    <th>Time</th>
+    <th></th>
   </tr>
   <% @replies.each do |reply| %>
     <tr id="reply-<%= reply.id %>" class="<%= 'deleted' if !reply.deleted_at.blank? %>">
@@ -30,12 +30,15 @@
       <% end %>
       <td><%= link_to(reply.user.login, edit_admin_user_path(reply.user_id), target: "_blank") if reply.user %></td>
       <td><%= l reply.created_at, format: :short %></td>
-      <td><%= link_to '', edit_admin_reply_path(reply), class: "fa fa-edit" %>
+      <td class="actions">
+        <div class="btn-group">
+        <%= link_to icon_tag("edit"), edit_admin_reply_path(reply), class: "btn" %>
         <% if reply.deleted_at.blank? %>
-          <%= link_to '', admin_reply_path(reply), 'data-confirm' => 'Are you sure?', method: :delete, remote: true, class: "fa fa-trash" %></td>
-      <% else %>
-        <%= link_to "", revert_admin_reply_path(reply), title: t("common.revert"), 'data-confirm' => 'Are you sure?', method: :post, class: "fa fa-undo" %>
-      <% end %>
+          <%= link_to icon_tag("trash"), admin_reply_path(reply), 'data-confirm' => 'Are you sure?', method: :delete, remote: true, class: "btn" %>
+        <% else %>
+          <%= link_to icon_tag("undo"), revert_admin_reply_path(reply), title: t("common.revert"), 'data-confirm' => 'Are you sure?', method: :post, class: "btn" %>
+        <% end %>
+      </td>
     </tr>
   <% end %>
 </table>

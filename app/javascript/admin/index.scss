@@ -12,6 +12,19 @@ td {
   line-height: 18px;
 }
 
+.table {
+  td.actions {
+    @apply text-right;
+  }
+  td {
+    .btn-group {
+      .btn {
+        @apply btn-sm btn-secondary;
+      }
+    }
+  }
+}
+
 .header {
   .navbar-nav-scroll {
     .navbar-nav {
@@ -75,7 +88,7 @@ pre {
 }
 
 .toolbar {
-  @apply mb-4 flex gap-4;  
+  @apply mb-4 flex gap-4;
 }
 
 .toolbar .form-inline {

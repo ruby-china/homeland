@@ -123,7 +123,7 @@ textarea,
 /* Bootstrap Theme */
 body {
   @apply bg-gray-100 text-gray-800 font-sans;
-  @apply dark:bg-black dark:text-gray-100;
+  @apply dark:bg-black dark:text-gray-100 pt-[48px];
 }
 
 body {
@@ -134,7 +134,7 @@ body {
 
 .header {
   padding: 0;
-  @apply bg-white shadow-sm border-none text-gray-800;
+  @apply bg-white shadow-sm border-none text-gray-800 fixed left-0 right-0 top-0 h-[48px];
   @apply dark:bg-gray-900 dark:text-gray-200 dark:border-b dark:border-solid dark:border-gray-800;
 
   z-index: 1030;
@@ -203,14 +203,6 @@ body {
     }
   }
 
-  @include media-breakpoint-up(md) {
-    @supports (position: sticky) {
-      position: sticky;
-      top: 0;
-      height: 50px;
-    }
-  }
-
   .main-navbar-open {
     @apply flex md:flex absolute top-12 w-52;
     @apply rounded bg-white shadow border-none text-gray-800;
@@ -221,7 +213,7 @@ body {
     &.navbar-nav .nav-item a.nav-link {
       border: 0;
 
-      padding: 15px 16px;
+      padding: 16px 16px;
 
       @apply border-none md:border-solid border-b-2 transition-all duration-200 ease-in-out;
       @apply border-transparent text-gray-800;

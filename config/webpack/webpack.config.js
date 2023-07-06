@@ -1,4 +1,5 @@
 const { globalMutableWebpackConfig: webpackConfig, merge } = require('shakapacker')
+const webpack = require("webpack");
 
 // See the shakacode/shakapacker README and docs directory for advice on customizing your webpackConfig.
 const customConfig = {

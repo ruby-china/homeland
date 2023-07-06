@@ -1,4 +1,4 @@
-const { environment } = require("@rails/webpacker");
+const { environment } = require("shakapacker");
 const erb = require("./loaders/erb");
 const webpack = require("webpack");
 

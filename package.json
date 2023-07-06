@@ -2,7 +2,7 @@
   "name": "homeland",
   "private": true,
   "scripts": {
-    "start": "./bin/webpacker-dev-server"
+    "start": "./bin/shakapacker-dev-server"
   },
   "dependencies": {
     "@babel/core": "7.18.2",

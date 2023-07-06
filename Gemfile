@@ -12,7 +12,7 @@ gem "shakapacker"
 gem "turbolinks"
 gem "uglifier"
 
-gem "view_component"
+gem "view_component", "~> 2.82"
 
 gem "pg"
 
@@ -36,7 +36,7 @@ gem "rails-i18n"
 gem "twemoji"
 
 # Uploader
-gem "carrierwave"
+gem "carrierwave", "~> 2.2"
 # Aliyun / Upyun / Qiniu
 gem "carrierwave-aliyun"
 gem "carrierwave-qiniu"
@@ -78,7 +78,7 @@ gem "html-pipeline-auto-correct"
 gem "redcarpet"
 gem "rouge"
 
-gem "sidekiq"
+gem "sidekiq", "~> 6.5.9"
 gem "sidekiq-cron"
 
 gem "social-share-button"

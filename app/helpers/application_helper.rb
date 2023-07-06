@@ -106,7 +106,7 @@ module ApplicationHelper
     items = []
     list.each do |link|
       urls = link.match(/href=(["'])(.*?)(\1)/) || []
-      url = urls.length > 2 ? urls[2] : nil
+      url = (urls.length > 2) ? urls[2] : nil
       if url && current_page?(url) || @current&.include?(url)
         link = link.gsub("nav-link", "nav-link active")
       end

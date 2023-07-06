@@ -36,7 +36,7 @@ gem "rails-i18n"
 gem "twemoji"
 
 # Uploader
-gem "carrierwave"
+gem "carrierwave", "~> 2.2"
 # Aliyun / Upyun / Qiniu
 gem "carrierwave-aliyun"
 gem "carrierwave-qiniu"

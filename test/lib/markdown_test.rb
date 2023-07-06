@@ -70,7 +70,7 @@ class Homeland::MarkdownTest < ActiveSupport::TestCase
   test "link with nofollow" do
     cases = {
       "[Hello](http://hello.com)": %(<p><a href="http://hello.com" rel="nofollow" target="_blank" title="">Hello</a></p>),
-      "[Hello](http://#{Setting.domain}/foo/bar \"This is title\")": %(<p><a href="http://#{Setting.domain}/foo/bar" title="This is title">Hello</a></p>),
+      "[Hello](http://#{Setting.domain}/foo/bar ""This is title"")": %(<p><a href="http://#{Setting.domain}/foo/bar" title="This is title">Hello</a></p>),
       "[Hello](/foo/bar)": %(<p><a href="/foo/bar" title="">Hello</a></p>)
     }
 

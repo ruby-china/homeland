@@ -25,7 +25,7 @@ module Homeland
         end
 
         def header(text, header_level)
-          l = header_level <= 2 ? 2 : header_level
+          l = (header_level <= 2) ? 2 : header_level
           raw_text = Nokogiri::HTML(text).xpath("//text()")
           %(<h#{l} id="#{raw_text}">#{text}</h#{l}>)
         end

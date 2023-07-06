@@ -38,7 +38,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user_type == :team ? team_show : user_show
+    (@user_type == :team) ? team_show : user_show
   end
 
   protected

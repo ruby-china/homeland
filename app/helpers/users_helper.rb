@@ -15,7 +15,7 @@ module UsersHelper
     if user.is_a? User
       user_type = user.user_type
       login = user.login
-      label = user_type == :team ? user.name : user.login
+      label = (user_type == :team) ? user.name : user.login
       name = user.name
     end
 

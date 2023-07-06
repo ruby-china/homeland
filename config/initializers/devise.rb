@@ -134,7 +134,7 @@ Devise.setup do |config|
 
   # Regex to use to validate the email address
   # before updating rails 4:
-  config.email_regexp = /\A([\w.%+\-]+)@([\w\-]+\.)+(\w{2,})\z/i
+  config.email_regexp = /\A([\w.%+-]+)@([\w-]+\.)+(\w{2,})\z/i
   # Devise default:
   # config.email_regexp = /\A[^@]+@[^@]+\z/
 

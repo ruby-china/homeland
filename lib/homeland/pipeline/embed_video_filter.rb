@@ -3,7 +3,7 @@
 module Homeland
   class Pipeline
     class EmbedVideoFilter < HTML::Pipeline::TextFilter
-      YOUTUBE_URL_REGEXP = %r{(\s|^|<div>|<br>)(https?://)(www.)?(youtube\.com/watch\?v=|youtu\.be/|youtube\.com/watch\?feature=player_embedded&v=)([A-Za-z0-9_\-]*)(&\S+)?(\?\S+)?}
+      YOUTUBE_URL_REGEXP = %r{(\s|^|<div>|<br>)(https?://)(www.)?(youtube\.com/watch\?v=|youtu\.be/|youtube\.com/watch\?feature=player_embedded&v=)([A-Za-z0-9_-]*)(&\S+)?(\?\S+)?}
       YOUKU_URL_REGEXP = %r{(\s|^|<div>|<br>)(https?://)(v\.youku\.com/v_show/id_)([a-zA-Z0-9\-_=]*)(\.html)(&\S+)?(\?\S+)?}
       VIMEO_URL_REGEXP = %r{(\s|^|<div>|<br>)(https://)(vimeo\.com/)([0-9]+)(&\S+)?(\?\S+)?}
       BILI_URL_REGEXP = %r{(\s|^|<div>|<br>)(https?://)(www.)?(bilibili\.com/video/av)([0-9]+)(&\S+)?(\?\S+)?}

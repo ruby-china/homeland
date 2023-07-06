@@ -494,7 +494,7 @@ GEM
     unf_ext (0.0.8.2)
     unicode-display_width (2.4.2)
     version_gem (1.1.3)
-    view_component (3.3.0)
+    view_component (2.82.0)
       activesupport (>= 5.2.0, < 8.0)
       concurrent-ruby (~> 1.0)
       method_source (~> 1.0)
@@ -581,7 +581,7 @@ DEPENDENCIES
   turbolinks
   twemoji
   uglifier
-  view_component
+  view_component (~> 2.82)
 
 BUNDLED WITH
    2.4.15

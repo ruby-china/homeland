@@ -23,7 +23,7 @@ module LikesHelper
       liked = current_user.send("like_#{defined_action[:action_name]}_ids").include?(likeable.id)
     end
 
-    title = t("common.unlike")
+    title = t("common.like")
 
     state = if opts[:cache].blank? && liked
       "active"

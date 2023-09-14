@@ -323,7 +323,7 @@ GEM
       rexml (~> 3.2)
     raabro (1.4.0)
     racc (1.7.1)
-    rack (2.2.7)
+    rack (2.2.8)
     rack-attack (6.6.1)
       rack (>= 1.0, < 3)
     rack-cors (2.0.1)
@@ -381,6 +381,8 @@ GEM
     recaptcha (5.14.0)
     redcarpet (3.6.0)
     redis (4.8.1)
+    redis-client (0.17.0)
+      connection_pool
     redis-namespace (1.11.0)
       redis (>= 4)
     regexp_parser (2.8.1)
@@ -444,10 +446,11 @@ GEM
       rack-proxy (>= 0.6.1)
       railties (>= 5.2)
       semantic_range (>= 2.3.0)
-    sidekiq (6.5.9)
-      connection_pool (>= 2.2.5, < 3)
-      rack (~> 2.0)
-      redis (>= 4.5.0, < 5)
+    sidekiq (7.1.3)
+      concurrent-ruby (< 2)
+      connection_pool (>= 2.3.0)
+      rack (>= 2.2.4)
+      redis-client (>= 0.14.0)
     sidekiq-cron (1.10.1)
       fugit (~> 1.8)
       globalid (>= 1.0.1)
@@ -574,7 +577,7 @@ DEPENDENCIES
   sass-rails
   second_level_cache
   shakapacker
-  sidekiq (~> 6.5.9)
+  sidekiq (~> 7.1.3)
   sidekiq-cron
   social-share-button
   spring

@@ -20,8 +20,8 @@
   </script>
 <% end %>
 <div class="flex gap-4">
-  <div class="grow w-3/4">
-    <div class="topic-detail card mb-4">
+  <div class="w-3/4 grow">
+    <div class="mb-4 topic-detail card">
       <%= render partial: "topics/topic_info", locals: { topic: @topic, node: @node } %>
       <% if @topic.excellent? %>
         <div class="label-awesome">
@@ -38,17 +38,18 @@
         <%= @topic.body_html %>
         <%= raw Setting.after_topic_html %>
       </div>
-      <div class="card-footer clearfix">
+      <div class="clearfix card-footer">
         <%= render "buttons" %>
       </div>
     </div>
+    <%= render partial: "references" %>
     <%= render partial: "ban_reason" %>
     <% if @replies.blank? %>
       <div class="no-result">
         <%= t("topics.no_replies") %>
       </div>
     <% else %>
-      <div id="replies" class="card mb-4" data-last-floor="<%= @replies.count(:all) %>">
+      <div id="replies" class="mb-4 card" data-last-floor="<%= @replies.count(:all) %>">
         <div class="items card-body">
           <%= render ReplyComponent.with_collection(@replies, topic: @topic, show_raw: @show_raw) %>
         </div>
@@ -58,7 +59,7 @@
       <% if @topic.closed? %>
         <div class="alert alert-info"><%= t("topics.closed_info_html", closed_at: l(@topic.closed_at, format: :long)) %></div>
       <% else %>
-        <div id="reply" class="card mb-4">
+        <div id="reply" class="mb-4 card">
           <div class="card-body">
             <div class="card-title hide-ios"><%= t("topics.reply") %></div>
             <% if can? :create, Reply %>
@@ -72,7 +73,7 @@
         </div>
       <% end %>
     <% else %>
-      <div class="card mb-4">
+      <div class="mb-4 card">
         <div class="card-body">
           <div id="reply" class="form box">
             <div style="padding:20px;" data-turbolinks-action="replace">

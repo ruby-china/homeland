@@ -294,6 +294,9 @@ zh-CN:
       reopen: 重新打开讨论
       edit: 修改话题
       delete: 删除
+    references: 引用文章
+    reference_by: 被文章引用
+    no_reference: 无引用文章
   replies:
     edit_reply: 修改回帖
     created_successfully: 回帖提交成功。

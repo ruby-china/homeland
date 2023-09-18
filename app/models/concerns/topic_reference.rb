@@ -6,6 +6,6 @@ module TopicReference
   end
 
   def extract_references
-    TopicReferenceJob.perform_later(self.class.name, self.id)
+    TopicReferenceJob.perform_later(self.class.name, id)
   end
 end

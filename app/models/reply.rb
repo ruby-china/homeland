@@ -8,6 +8,7 @@ class Reply < ApplicationRecord
   include Mentionable
   include MarkdownBody
   include SoftDelete
+  include TopicReference
   include Reply::Voteable
   include Reply::Notify
 

@@ -305,6 +305,9 @@ en:
       reopen: Reopen
       edit: Edit
       delete: Delete
+    references: References
+    reference_by: Reference By
+    no_reference: No reference
   replies:
     edit_reply: Edit reply
     created_successfully: Reply has created successfully.

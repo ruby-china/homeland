@@ -1003,3 +1003,29 @@ textarea.div-dropzone-focus {
     }
   }
 }
+
+.topic-references {
+  .nav {
+    @apply px-4 pt-2 space-x-4;
+
+    .nav-link {
+      @apply px-0 py-1 border-0 hover:underline underline-offset-4;
+
+      &.active {
+        @apply font-semibold text-gray-800 dark:text-gray-200;
+      }
+    }
+  }
+
+  .tab-content {
+    @apply py-2 divide-x divide-gray-400 max-h-[330px] overflow-y-scroll;
+
+    .ref-topic-item {
+      @apply py-1.5 px-4 block bg-transparent hover:bg-gray-100 underline-offset-2 text-gray-700 dark:hover:bg-gray-800 dark:text-gray-200;
+    }
+
+    .no-result {
+      @apply py-2 px-4 text-gray-300 dark:text-gray-600 text-center;
+    }
+  }
+}

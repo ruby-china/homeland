@@ -134,8 +134,9 @@ body {
 
 .header {
   padding: 0;
-  @apply bg-white border-none text-gray-800 fixed left-0 right-0 top-0 h-[48px];
-  @apply dark:bg-gray-900 dark:text-gray-200 dark:border-b dark:border-solid dark:border-gray-800;
+  @apply border-solid border-l-0 border-r-0 border-t-0;
+  @apply bg-white text-gray-800 fixed left-0 right-0 top-0 h-[48px] border-b border-gray-200;
+  @apply dark:bg-gray-900 dark:text-gray-200 dark:border-b dark:border-gray-800;
 
   z-index: 1030;
   line-height: 100%;
@@ -188,7 +189,7 @@ body {
   }
 
   &.navbar-fixed-active {
-    @apply shadow-md;
+    @apply shadow-sm;
   }
 
   .navbar-brand {

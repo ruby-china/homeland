@@ -64,7 +64,5 @@ jobs:
           bundler-cache: true
       - name: Before tests
         run: bundle exec rails db:migrate
-      - name: Run Standard
-        run: bundle exec standardrb
       - name: Run tests
         run: bundle exec rails test

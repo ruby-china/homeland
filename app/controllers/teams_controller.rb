@@ -5,10 +5,10 @@ class TeamsController < ApplicationController
   load_resource find_by: :login
   load_and_authorize_resource
 
-  before_action :set_team, only: %i[show edit update destroy]
+  before_action :set_team, only: %i[show edit update]
 
   def index
-    @total_team_count = Team.count
+    @total_team_count = Team.async_count
     @active_teams = Team.fields_for_list.hot.limit(60)
   end
 

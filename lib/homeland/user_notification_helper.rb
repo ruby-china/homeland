@@ -10,7 +10,7 @@ module Homeland
 
     def unread_notify_count
       return 0 if current_user.blank?
-      @unread_notify_count ||= Notification.unread_count(current_user)
+      @unread_notify_count ||= Notification.async_unread_count(current_user).value
     end
   end
 end

@@ -52,6 +52,8 @@ module Homeland
     config.active_job.queue_adapter = :sidekiq
     config.middleware.use Rack::Attack
 
+    config.active_record.async_query_executor = :multi_thread_pool
+
     config.action_cable.mount_path = ENV["ACTIONCABLE_DISABLE"].present? ? "/_cable" : "/cable"
   end
 end

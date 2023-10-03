@@ -1,30 +1,34 @@
 <%= cache([@topic, "reference_topics"]) do %>
-<% if @topic.reference_topics.length > 0 || @topic.reference_by_topics.length > 0 %>
-  <div class="mb-4 topic-references card">
-    <ul class="nav" role="tablist">
-      <li class="nav-item"><a href="#" data-bs-toggle="tab" data-bs-target="#references" class="nav-link active"><%= t("topics.references") %></a></li>
-      <li class="nav-item"><a href="#" data-bs-toggle="tab" data-bs-target="#reference_by" class="nav-link"><%= t("topics.reference_by") %></a></li>
-    </ul>
-    <div class="py-2 divide-x divide-gray-400 tab-content">
-      <div class="tab-pane active" id="references">
-        <% if @topic.reference_topics.length > 0 %>
-          <% @topic.reference_topics.each do |topic| %>
-            <%= link_to topic.title, topic, class: "ref-topic-item" %>
+  <%
+    @reference_topics = @topic.reference_topics.load_async
+    @reference_by_topics = @topic.reference_by_topics.load_async
+  %>
+  <% if @reference_topics.length > 0 || @reference_by_topics.length > 0 %>
+    <div class="mb-4 topic-references card">
+      <ul class="nav" role="tablist">
+        <li class="nav-item"><a href="#" data-bs-toggle="tab" data-bs-target="#references" class="nav-link active"><%= t("topics.references") %></a></li>
+        <li class="nav-item"><a href="#" data-bs-toggle="tab" data-bs-target="#reference_by" class="nav-link"><%= t("topics.reference_by") %></a></li>
+      </ul>
+      <div class="py-2 divide-x divide-gray-400 tab-content">
+        <div class="tab-pane active" id="references">
+          <% if @reference_topics.length > 0 %>
+            <% @reference_topics.each do |topic| %>
+              <%= link_to topic.title, topic, class: "ref-topic-item" %>
+            <% end %>
+          <% else %>
+            <div class="no-result"><%= t("topics.no_reference") %></div>
           <% end %>
-        <% else %>
-          <div class="no-result"><%= t("topics.no_reference") %></div>
-        <% end %>
-      </div>
-      <div class="tab-pane" id="reference_by">
-        <% if @topic.reference_by_topics.length > 0 %>
-          <% @topic.reference_by_topics.each do |topic| %>
-            <%= link_to topic.title, topic, class: "ref-topic-item" %>
+        </div>
+        <div class="tab-pane" id="reference_by">
+          <% if @reference_by_topics.length > 0 %>
+            <% @reference_by_topics.each do |topic| %>
+              <%= link_to topic.title, topic, class: "ref-topic-item" %>
+            <% end %>
+          <% else %>
+            <div class="no-result"><%= t("topics.no_reference") %></div>
           <% end %>
-        <% else %>
-          <div class="no-result"><%= t("topics.no_reference") %></div>
-        <% end %>
+        </div>
       </div>
     </div>
-  </div>
-<% end %>
-<% end %>
+  <% end %>
+<% end %> 

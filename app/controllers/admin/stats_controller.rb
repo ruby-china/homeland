@@ -8,9 +8,9 @@ module Admin
     # by - day, week, month
     def index
       result = {model: params[:model]}
-      result[:count] = klass.unscoped.count
-      result[:week_count] = klass.unscoped.where("created_at >= ?", Date.today.beginning_of_week).count
-      result[:month_count] = klass.unscoped.where("created_at >= ?", Date.today.beginning_of_month).count
+      result[:count] = klass.unscoped.async_count.value
+      result[:week_count] = klass.unscoped.where("created_at >= ?", Date.today.beginning_of_week).async_count.value
+      result[:month_count] = klass.unscoped.where("created_at >= ?", Date.today.beginning_of_month).async_count.value
       render json: result.as_json
     end
 

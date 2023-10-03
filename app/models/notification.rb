@@ -19,8 +19,12 @@ class Notification < ActiveRecord::Base
     ActionCable.server.broadcast("notifications_count/#{user.id}", message)
   end
 
+  def self.async_unread_count(user)
+    where(user: user).unread.async_count
+  end
+
   def apns_note
-    @note ||= {alert: notify_title, badge: Notification.unread_count(user)}
+    @note ||= {alert: notify_title, badge: Notification.async_unread_count(user)}
   end
 
   def notify_title

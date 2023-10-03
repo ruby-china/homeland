@@ -12,7 +12,7 @@ class TopicsController < ApplicationController
   def index
     @suggest_topics = []
     if params[:page].to_i <= 1
-      @suggest_topics = topics_scope.suggest.includes(:node).limit(3)
+      @suggest_topics = topics_scope.suggest.includes(:node).limit(3).load_async
     end
     @topics = topics_scope.without_suggest.last_actived.includes(:node).page(params[:page])
     @page_title = t("menu.topics")
@@ -49,7 +49,7 @@ class TopicsController < ApplicationController
     @show_raw = params[:raw] == "1"
     @can_reply = can?(:create, Reply)
 
-    @replies = Reply.unscoped.where(topic_id: @topic.id).order(:id).all
+    @replies = Reply.unscoped.where(topic_id: @topic.id).order(:id).all.load_async
     @user_like_reply_ids = current_user&.like_reply_ids_by_replies(@replies) || []
 
     @has_followed = current_user&.follow_topic?(@topic)

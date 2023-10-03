@@ -3,7 +3,7 @@
   <div id="hot_teams" class="p-4 team-list card">
     <div class="flex justify-between">
       <strong class="text-lg"><%= t("users.hot_teams") %></strong>
-      <div class="hidden-mobile"><%= t("users.current_have") %> <%= @total_team_count %> <%= t("users.teams_joined") %> <%= Setting.app_name %></div>
+      <div class="hidden-mobile"><%= t("users.current_have") %> <%= @total_team_count.value %> <%= t("users.teams_joined") %> <%= Setting.app_name %></div>
     </div>
     <div class="py-4">
       <%= render "team_list", teams: @active_teams %>

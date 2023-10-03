@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
-require_relative "./test_helper"
+require_relative "test_helper"
 require "minitest/spec"
+require "minitest/autorun"
 
-MiniTest::Spec.register_spec_type(/Controller$/, ActionDispatch::IntegrationTest)
+Minitest::Spec.register_spec_type(/Controller$/, ActionDispatch::IntegrationTest)
 
-require_relative "./support/api_controller_test"
+require_relative "support/api_controller_test"

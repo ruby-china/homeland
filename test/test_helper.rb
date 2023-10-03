@@ -13,7 +13,7 @@ require "rails/test_help"
 require "minitest/autorun"
 require "mocha/minitest"
 require "sidekiq/testing"
-require_relative "./support/model"
+require_relative "support/model"
 
 FileUtils.mkdir_p(Rails.root.join("tmp/cache"))
 

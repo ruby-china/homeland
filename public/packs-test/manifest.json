@@ -2,6 +2,9 @@
   "admin.css": "/packs-test/css/admin.css",
   "admin.js": "/packs-test/js/admin.js",
   "application.js": "/packs-test/js/application.js",
+  "css/admin.css.map": "/packs-test/css/admin.css.map",
+  "css/front.css.map": "/packs-test/css/front.css.map",
+  "css/turbolinks-app.css.map": "/packs-test/css/turbolinks-app.css.map",
   "entrypoints": {
     "admin": {
       "assets": {
@@ -18,7 +21,7 @@
       "assets": {
         "js": [
           "/packs-test/js/runtime.js",
-          "/packs-test/js/562.js",
+          "/packs-test/js/vendors-node_modules_rails_actioncable_app_assets_javascripts_actioncable_esm_js-node_modules-3eece7.js",
           "/packs-test/js/application.js"
         ]
       }
@@ -56,15 +59,19 @@
   },
   "front.css": "/packs-test/css/front.css",
   "front.js": "/packs-test/js/front.js",
-  "js/562.js": "/packs-test/js/562.js",
-  "js/562.js.LICENSE.txt": "/packs-test/js/562.js.LICENSE.txt",
-  "js/application.js.LICENSE.txt": "/packs-test/js/application.js.LICENSE.txt",
+  "js/admin.js.map": "/packs-test/js/admin.js.map",
+  "js/application.js.map": "/packs-test/js/application.js.map",
+  "js/front.js.map": "/packs-test/js/front.js.map",
+  "js/runtime.js.map": "/packs-test/js/runtime.js.map",
+  "js/turbolinks-app.js.map": "/packs-test/js/turbolinks-app.js.map",
+  "js/vendors-node_modules_rails_actioncable_app_assets_javascripts_actioncable_esm_js-node_modules-3eece7.js": "/packs-test/js/vendors-node_modules_rails_actioncable_app_assets_javascripts_actioncable_esm_js-node_modules-3eece7.js",
+  "js/vendors-node_modules_rails_actioncable_app_assets_javascripts_actioncable_esm_js-node_modules-3eece7.js.map": "/packs-test/js/vendors-node_modules_rails_actioncable_app_assets_javascripts_actioncable_esm_js-node_modules-3eece7.js.map",
   "jsconfig.js": "/packs-test/js/jsconfig.js",
   "runtime.js": "/packs-test/js/runtime.js",
-  "static/@fortawesome/fontawesome-free/webfonts/fa-brands-400.ttf": "/packs-test/static/@fortawesome/fontawesome-free/webfonts/fa-brands-400-f9ee61fab3c11e2f3ed3.ttf",
-  "static/@fortawesome/fontawesome-free/webfonts/fa-brands-400.woff2": "/packs-test/static/@fortawesome/fontawesome-free/webfonts/fa-brands-400-e1a247a5ef41e1975742.woff2",
-  "static/@fortawesome/fontawesome-free/webfonts/fa-solid-900.ttf": "/packs-test/static/@fortawesome/fontawesome-free/webfonts/fa-solid-900-b48ad290d0335879a92b.ttf",
-  "static/@fortawesome/fontawesome-free/webfonts/fa-solid-900.woff2": "/packs-test/static/@fortawesome/fontawesome-free/webfonts/fa-solid-900-66104b766c3d0462b3c5.woff2",
+  "static/node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.ttf": "/packs-test/static/node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400-150de8eaa454d669c405.ttf",
+  "static/node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.woff2": "/packs-test/static/node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400-e033a13ee751afc1860c.woff2",
+  "static/node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.ttf": "/packs-test/static/node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900-4a2cd718d7031b732e76.ttf",
+  "static/node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.woff2": "/packs-test/static/node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900-bb975c966c37455a1bc3.woff2",
   "turbolinks-app.css": "/packs-test/css/turbolinks-app.css",
   "turbolinks-app.js": "/packs-test/js/turbolinks-app.js"
 }

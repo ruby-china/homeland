@@ -5,7 +5,7 @@ source "https://rubygems.org"
 git_source(:github) { |repo_name| "https://github.com/#{repo_name}.git" }
 
 gem "jbuilder"
-gem "rails", "~> 7.0"
+gem "rails", "~> 7.1.0.rc2"
 gem "rails_autolink"
 gem "sass-rails"
 gem "shakapacker"
@@ -98,16 +98,15 @@ gem "puma_worker_killer"
 
 group :development do
   gem "byebug"
+  gem "derailed_benchmarks"
   gem "letter_opener"
   gem "spring"
-  gem "derailed_benchmarks"
 end
 
 group :development, :test do
-  gem "listen"
-
   gem "factory_bot_rails"
   gem "faraday-rack"
+  gem "listen"
   gem "minitest-spec-rails"
   gem "mocha"
 

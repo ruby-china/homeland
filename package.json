@@ -30,7 +30,7 @@
     "jquery.caret": "~0.3.1",
     "mini-css-extract-plugin": "^2.4.5",
     "popper.js": "~1.16",
-    "postcss": "^8.4.5",
+    "postcss": "^8.4.31",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-import": "^14.0.2",
     "postcss-loader": "^6.2.1",

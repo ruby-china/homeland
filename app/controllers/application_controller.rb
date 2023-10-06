@@ -27,7 +27,8 @@ class ApplicationController < ActionController::Base
   end
 
   before_action do
-    cookies.signed[:user_id] ||= current_user.try(:id)
+    # always set user_id into cookie, to make sure ActionCable connection is current user.
+    cookies.signed[:user_id] = current_user.try(:id)
     current_user&.touch_last_online_ts
 
     # hit unread_notify_count

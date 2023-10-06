@@ -8,8 +8,7 @@ class User
     end
 
     def github_repositories
-      cache_key = github_repositories_cache_key
-      items = Homeland.file_store.read(cache_key)
+      items = Rails.cache.read(github_repositories_cache_key)
       if items.nil?
         GitHubRepoFetcherJob.perform_later(id)
         items = []
@@ -33,14 +32,14 @@ class User
         return unless user
         return if user.github_repos_path.blank?
 
+        conn = Faraday.new("https://api.github.com")
+        conn.set_basic_auth(Setting.github_api_key, Setting.github_api_secret)
+        
         begin
-          conn = Faraday.new("https://api.github.com") do |conn|
-            conn.basic_auth Setting.github_api_key, Setting.github_api_secret
-          end
           resp = conn.get(user.github_repos_path)
         rescue => e
           Rails.logger.error("GitHub Repositiory fetch Error: #{e}")
-          Homeland.file_store.write(user.github_repositories_cache_key, [], expires_in: 1.minutes)
+          Rails.cache.write(user.github_repositories_cache_key, [], expires_in: 1.minutes)
           return
         end
 
@@ -59,7 +58,7 @@ class User
           items.sort! { |a, b| b[:watchers] <=> a[:watchers] }.take(10)
         end
 
-        Homeland.file_store.write(user.github_repositories_cache_key, items, expires_in: 15.days)
+        Rails.cache.write(user.github_repositories_cache_key, items, expires_in: 15.days)
         items
       end
     end

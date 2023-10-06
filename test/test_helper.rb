@@ -18,6 +18,7 @@ require_relative "support/model"
 FileUtils.mkdir_p(Rails.root.join("tmp/cache"))
 
 OmniAuth.config.test_mode = true
+OmniAuth.logger.level = Logger::INFO
 FactoryBot.use_parent_strategy = false
 
 class ActiveSupport::TestCase

@@ -1,5 +1,6 @@
-require("./app");
-require("./topics");
-require("./toc");
-require("./notifier");
-require("./editor");
+import("./emoji-modal");
+import("./notifier");
+import("./app");
+import("./topics");
+import("./toc");
+import("./editor");

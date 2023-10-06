@@ -1,7 +1,4 @@
-import i18n from "homeland/i18n";
-
-require("./emoji-modal");
-require("./notifier");
+import i18n from "~/homeland/i18n";
 
 const AppView = Backbone.View.extend({
   el: "body",
@@ -37,8 +34,6 @@ const AppView = Backbone.View.extend({
   },
 
   initComponents() {
-    $("abbr.timeago").timeago();
-
     // Bind Ctrl+Enter for submit
     $(".cell_comments_new textarea").unbind("keydown");
     $(".cell_comments_new textarea").bind(

@@ -24,10 +24,10 @@
       <% end %>
     </div>
     <% if current_user %>
-      <script type="text/javascript">
-        var readed_topic_ids = <%= @read_topic_ids || [] %>;
+      <script type="module">
+        let readed_topic_ids = <%= @read_topic_ids || [] %>;
         for (var i = 0; i < readed_topic_ids.length; i++) {
-          topic_id = readed_topic_ids[i];
+          let topic_id = readed_topic_ids[i];
           $(".topic-"+ topic_id).addClass('topic-visited');
           $(".topic-"+ topic_id + " .count a").addClass("state-true");
         }

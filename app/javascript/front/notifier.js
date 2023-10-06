@@ -41,7 +41,7 @@ class Notifier {
         }
       }
     } else {
-      return console.log(
+      return console.warn(
         "Desktop notifications are not supported for this Browser/OS version yet."
       );
     }

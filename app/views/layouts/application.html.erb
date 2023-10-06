@@ -26,10 +26,11 @@
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFFFFF">
     <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#171717">
     <link rel="manifest" href="/manifest.webmanifest">
-    <%= stylesheet_pack_tag "front", "data-turbolinks-track": "reload" %>
-    <%= stylesheet_pack_tag "turbolinks-app", 'data-turbolinks-track': 'reload' if turbolinks_app? %>
+    <%= vite_client_tag %>
+    <%= vite_stylesheet_tag "front", "data-turbolinks-track": "reload" %>
+    <%= vite_stylesheet_tag "turbolinks-app", 'data-turbolinks-track': 'reload' if turbolinks_app? %>
     <%= yield :stylesheets %>
-    <%= javascript_pack_tag "application",  defer: false %>
+    <%= vite_javascript_tag "application",  defer: false %>
     <%= yield :javascripts %>
     <%= action_cable_meta_tag %>
     <%= csrf_meta_tag %>
@@ -79,11 +80,11 @@
     </footer>
   <% end %>
   <% if mobile? %>
-    <script type="text/javascript">
+    <script type="module">
       App.mobile = true;
     </script>
   <% end %>
-  <script type="text/javascript" data-turbolinks-eval="false">
+  <script type="module" data-turbolinks-eval="false">
     App.root_url = "<%= main_app.root_url %>";
     App.asset_url = "<%= Setting.upload_url -%>";
     App.twemoji_url = "<%= Twemoji.configuration.asset_root %>";
@@ -100,6 +101,12 @@
   </script>
   <%= yield :scripts %>
   <script>
+    // Loading Google Analytics
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
     ga('create', '<%= Setting.google_analytics_key %>', 'auto');
     ga('require', 'displayfeatures');
     ga('send', 'pageview');

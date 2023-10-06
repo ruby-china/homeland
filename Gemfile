@@ -63,9 +63,8 @@ gem "exception-track"
 gem "pghero"
 
 # Cache
-gem "connection_pool", "~> 2.2"
+gem "connection_pool"
 gem "redis"
-gem "redis-namespace"
 gem "second_level_cache"
 
 # Setting
@@ -78,7 +77,7 @@ gem "html-pipeline-auto-correct"
 gem "redcarpet"
 gem "rouge"
 
-gem "sidekiq", "~> 6.5.9"
+gem "sidekiq", "< 8"
 gem "sidekiq-cron"
 
 gem "social-share-button"

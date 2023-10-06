@@ -408,9 +408,10 @@ GEM
       psych (>= 4.0.0)
     recaptcha (5.15.0)
     redcarpet (3.6.0)
-    redis (4.8.1)
-    redis-namespace (1.11.0)
-      redis (>= 4)
+    redis (5.0.7)
+      redis-client (>= 0.9.0)
+    redis-client (0.17.0)
+      connection_pool
     regexp_parser (2.8.1)
     reline (0.3.9)
       io-console (~> 0.5)
@@ -476,10 +477,11 @@ GEM
       rack-proxy (>= 0.6.1)
       railties (>= 5.2)
       semantic_range (>= 2.3.0)
-    sidekiq (6.5.11)
-      connection_pool (>= 2.2.5, < 3)
-      rack (~> 2.0)
-      redis (>= 4.5.0, < 5)
+    sidekiq (7.1.5)
+      concurrent-ruby (< 2)
+      connection_pool (>= 2.3.0)
+      rack (>= 2.2.4)
+      redis-client (>= 0.14.0)
     sidekiq-cron (1.10.1)
       fugit (~> 1.8)
       globalid (>= 1.0.1)
@@ -557,7 +559,7 @@ DEPENDENCIES
   carrierwave-aliyun
   carrierwave-qiniu
   carrierwave-upyun
-  connection_pool (~> 2.2)
+  connection_pool
   derailed_benchmarks
   devise
   devise-encryptable
@@ -602,14 +604,13 @@ DEPENDENCIES
   recaptcha
   redcarpet
   redis
-  redis-namespace
   rouge
   ruby-push-notifications
   rucaptcha
   sass-rails
   second_level_cache
   shakapacker
-  sidekiq (~> 6.5.9)
+  sidekiq (< 8)
   sidekiq-cron
   social-share-button
   spring

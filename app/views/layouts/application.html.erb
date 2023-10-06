@@ -44,18 +44,6 @@
     <% if current_user %>
       <meta name="current-user" data-user-id="<%= current_user.id %>" data-user-login="<%= current_user.login %>" data-user-name="<%= current_user.name %>" data-user-email="<%= current_user.email %>" data-user-avatar-url="<%= current_user.avatar? ? current_user.avatar.url(:md) : current_user.letter_avatar_url(96) %>">
     <% end %>
-    <%= vite_client_tag %>
-    <%= vite_javascript_tag 'application' %>
-    <!--
-      If using a TypeScript entrypoint file:
-        vite_typescript_tag 'application'
-
-      If using a .jsx or .tsx entrypoint, add the extension:
-        vite_javascript_tag 'application.jsx'
-
-      Visit the guide for more information: https://vite-ruby.netlify.app/guide/rails
-    -->
-
   </head>
   <body class="page-<%= controller_name %><%= ' infinite-scroll' if turbolinks_app? %>" data-controller-name="<%= controller_name %>">
     <div class="flex items-stretch header navbar navbar-expand-md">
@@ -92,11 +80,11 @@
     </footer>
   <% end %>
   <% if mobile? %>
-    <script type="text/javascript">
+    <script type="module">
       App.mobile = true;
     </script>
   <% end %>
-  <script type="text/javascript" data-turbolinks-eval="false">
+  <script type="module" data-turbolinks-eval="false">
     App.root_url = "<%= main_app.root_url %>";
     App.asset_url = "<%= Setting.upload_url -%>";
     App.twemoji_url = "<%= Twemoji.configuration.asset_root %>";
@@ -113,6 +101,12 @@
   </script>
   <%= yield :scripts %>
   <script>
+    // Loading Google Analytics
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
     ga('create', '<%= Setting.google_analytics_key %>', 'auto');
     ga('require', 'displayfeatures');
     ga('send', 'pageview');

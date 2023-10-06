@@ -2,10 +2,8 @@
   <%= render "shared/error_messages", target: @topic %>
   <%= f.hidden_field :node_id %>
   <div class="form-group">
-    <div class="input-group">
-      <div class="input-group-prepend mr-1">
-        <%= f.select :node_id, Node.sorted.name_options, {}, class: "bootstrap-select", data: { "live-search": true } %>
-      </div>
+    <div class="flex flex-col items-center gap-2 md:flex-row">
+      <%= f.select :node_id, Node.sorted.name_options, {}, class: "form-select md:w-[200px]", data: { "live-search": true } %>
       <%= f.text_field :title, class: "form-control", placeholder: t("topics.form.title_placeholder") %>
     </div>
   </div>

@@ -1,7 +1,7 @@
 import i18n from "~/homeland/i18n";
 
 // TopicsController
-window.Topics = {
+window.Topics = window.Topics || {
   topic_id: null,
   user_liked_reply_ids: [],
 };
@@ -28,7 +28,6 @@ window.TopicView = Backbone.View.extend({
 
     this.initComponents();
     this.initCableUpdate();
-    this.initContentImageZoom();
     this.checkRepliesLikeStatus();
     return this.itemsUpdated();
   },
@@ -126,35 +125,6 @@ window.TopicView = Backbone.View.extend({
     return this.unsetReplyTo();
   },
 
-  initContentImageZoom() {
-    const exceptClasses = ["emoji", "twemoji", "media-object avatar-16"];
-    const imgEls = $(".markdown img");
-    for (let el of Array.from(imgEls)) {
-      if (exceptClasses.indexOf($(el).attr("class")) === -1) {
-        $(el).wrap(
-          `<a href='${$(el).attr(
-            "src"
-          )}' class='zoom-image' data-action='zoom'></a>`
-        );
-      }
-    }
-
-    // Bind click event
-    if (App.turbolinks || App.mobile) {
-      $("a.zoom-image").attr("target", "_blank");
-    } else {
-      $("a.zoom-image").fluidbox({
-        closeTrigger: [
-          {
-            selector: "window",
-            event: "scroll",
-          },
-        ],
-      });
-    }
-    return true;
-  },
-
   preview(body) {
     $("#preview").text("Loading...");
 
@@ -174,6 +144,7 @@ window.TopicView = Backbone.View.extend({
     preview_box.hide();
 
     return $(".preview", switcher).click((e) => {
+      debugger;
       e.preventDefault();
       const target = e.currentTarget;
 

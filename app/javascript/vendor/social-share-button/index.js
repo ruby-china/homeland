@@ -1,5 +1,5 @@
-require("~/jquery.qrcode.min");
-require("./wechat");
+import("~/vendor/jquery.qrcode.min");
+import("./wechat");
 
 window.SocialShareButton = {
   openUrl(url, width, height) {

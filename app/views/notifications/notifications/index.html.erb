@@ -1,6 +1,6 @@
 <div class="notifications card card-lg">
   <div class="card-body">
-    <div class="card-title hide-ios flex md:justify-between">
+    <div class="flex card-title hide-ios md:justify-between">
       <div>
         <%= t('notifications.all_notifications') %>
         <span class="counter"><%= @notifications.total_count %></span>
@@ -21,7 +21,7 @@
         </div>
       <% end %>
     <% end %>
-    <script type="text/javascript">
+    <script type="module">
       $.post("<%= notifications.read_notifications_path %>", { ids: <%= j @unread_ids.as_json %> })
     </script>
     <%= paginate @notifications  %>

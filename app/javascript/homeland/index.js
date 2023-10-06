@@ -1,38 +1,40 @@
-import jQuery from "jquery";
-window.jQuery = jQuery;
-window.$ = jQuery;
-window.Backbone = require("backbone");
-window._ = require("underscore");
-
-import Turbolinks from "turbolinks";
+import { createConsumer } from "@rails/actioncable";
+import * as Rails from "@rails/ujs";
 import TubrolinksPrefetch from "turbolinks-prefetch";
 
+import Backbone from "backbone";
+import jQuery from "jquery";
+import Turbolinks from "turbolinks";
+import * as Underscore from "underscore";
+
+import("dropzone");
+import("jquery.caret");
+
+window.jQuery = jQuery;
+window.$ = jQuery;
+window.Backbone = Backbone;
+window._ = Underscore;
 window.Turbolinks = Turbolinks;
+
 Turbolinks.start();
 Turbolinks.setProgressBarDelay(200);
 // Increment Turbolinks cache size upto 30
 Turbolinks.controller.cache.size = 30;
 TubrolinksPrefetch.start();
 
-window.Rails = require("@rails/ujs");
+window.Rails = Rails;
 Rails.start();
 
-require("~/pagination");
-require("~/jquery.timeago");
-require("~/jquery.timeago.settings");
-require("~/jquery.hotkeys");
-require("~/jquery.autogrow-textarea");
-require("~/tooltipster.bundle.min");
-require("~/dropzone");
-require("~/jquery.fluidbox.min");
-require("~/jquery.caret");
-require("~/jquery.atwho.min");
-require("~/google_analytics");
-require("~/jquery.infinitescroll.min");
-require("~/jquery.mobile-events");
-require("~/vendor/social-share-button");
+import("~/vendor/pagination");
+import("~/vendor/jquery.hotkeys");
+import("~/vendor/jquery.autogrow-textarea");
+import("~/vendor/tooltipster.bundle.min");
+import("~/vendor/jquery.atwho.min");
+import("~/vendor/jquery.infinitescroll.min");
+import("~/vendor/jquery.mobile-events");
+import("~/vendor/social-share-button");
 
-import { createConsumer } from "@rails/actioncable";
+import("./timeago.settings");
 
 window.App = {
   turbolinks: false,

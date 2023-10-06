@@ -7,8 +7,9 @@
     <title><%= content_for?(:title) ? yield(:title) : Setting.app_name %></title>
     <meta name="apple-mobile-web-app-capable" content="no">
     <meta content='True' name='HandheldFriendly'>
-    <%= stylesheet_pack_tag "front" %>
-    <%= javascript_pack_tag "application", defer: false %>
+    <%= vite_client_tag %>
+    <%= vite_stylesheet_tag "front" %>
+    <%= vite_javascript_tag "application", defer: false %>
     <%= csrf_meta_tag %>
     <%= raw Setting.custom_head_html %>
   </head>

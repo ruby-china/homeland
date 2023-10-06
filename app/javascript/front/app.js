@@ -1,4 +1,4 @@
-import i18n from "homeland/i18n";
+import i18n from "~/homeland/i18n";
 
 require("./emoji-modal");
 require("./notifier");

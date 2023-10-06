@@ -4,15 +4,10 @@
  * Copyright 2011-2021 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
-
-// scss-docs-start import-stack
-// Configuration
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
 @import "~bootstrap/scss/utilities";
-
-// Layout & components
 @import "~bootstrap/scss/root";
 @import "~bootstrap/scss/reboot";
 @import "~bootstrap/scss/images";
@@ -34,10 +29,5 @@
 @import "~bootstrap/scss/tooltip";
 @import "~bootstrap/scss/popover";
 @import "~bootstrap/scss/spinners";
-
-// Helpers
 @import "~bootstrap/scss/helpers";
-
-// Utilities
 @import "~bootstrap/scss/utilities/api";
-// scss-docs-end import-stack

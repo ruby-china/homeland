@@ -8,10 +8,10 @@ gem "jbuilder"
 gem "rails", "~> 7.1.0"
 gem "rails_autolink"
 gem "sass-rails"
-gem "shakapacker"
 gem "turbolinks"
 gem "uglifier"
 
+gem "vite_rails"
 gem "view_component", "~> 2.82"
 
 gem "pg"

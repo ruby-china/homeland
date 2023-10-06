@@ -1,10 +1,10 @@
-@import "_mixins";
-@import "_vars";
+@import "_mixins.scss";
+@import "_vars.scss";
 
 /* TODO: Remove Bootstrap, its utilities class conflict with tailwindcss
   eg: mb-4(margin-bottom: 1rem) in Tailwind, and margin-bottom: 1.5rem !important; in Bootstrap.
 */
-@import "./bootstrap_custom";
+@import "./bootstrap_custom.scss";
 @import "./iconfont.scss";
 @import "./markdown.scss";
 

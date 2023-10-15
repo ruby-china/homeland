@@ -609,7 +609,7 @@ DEPENDENCIES
   rucaptcha
   sass-rails
   second_level_cache
-  shakapacker
+  shakapacker (~> 7.1.0)
   sidekiq (< 8)
   sidekiq-cron
   social-share-button

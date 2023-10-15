@@ -8,7 +8,7 @@ gem "jbuilder"
 gem "rails", "~> 7.1.1"
 gem "rails_autolink"
 gem "sass-rails"
-gem "shakapacker"
+gem "shakapacker", "~> 7.1.0"
 gem "turbolinks"
 gem "uglifier"
 

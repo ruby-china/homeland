@@ -20,6 +20,7 @@ FileUtils.mkdir_p(Rails.root.join("tmp/cache"))
 OmniAuth.config.test_mode = true
 OmniAuth.logger.level = Logger::INFO
 FactoryBot.use_parent_strategy = false
+Sidekiq.logger.level = Logger::ERROR
 
 class ActiveSupport::TestCase
   include FactoryBot::Syntax::Methods

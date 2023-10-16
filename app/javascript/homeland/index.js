@@ -14,7 +14,8 @@ Turbolinks.setProgressBarDelay(200);
 Turbolinks.controller.cache.size = 30;
 TubrolinksPrefetch.start();
 
-window.Rails = require("@rails/ujs");
+import Rails from "@rails/ujs"
+window.Rails = Rails
 Rails.start();
 
 require("pagination");

@@ -97,7 +97,7 @@ GEM
     builder (3.2.4)
     byebug (11.1.3)
     cancancan (3.5.0)
-    carrierwave (2.2.4)
+    carrierwave (2.2.5)
       activemodel (>= 5.0.0)
       activesupport (>= 5.0.0)
       addressable (~> 2.6)
@@ -156,7 +156,7 @@ GEM
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
       railties (>= 3.2)
-    drb (2.1.1)
+    drb (2.2.0)
       ruby2_keywords
     enumize (0.2.1)
       rails (>= 5.0.0)
@@ -263,7 +263,7 @@ GEM
       ruby2_keywords (>= 0.0.5)
     msgpack (1.7.2)
     multi_xml (0.6.0)
-    mutex_m (0.1.2)
+    mutex_m (0.2.0)
     net-imap (0.4.1)
       date
       net-protocol
@@ -331,7 +331,7 @@ GEM
       postmark (>= 1.21.3, < 2.0)
     psych (5.1.1)
       stringio
-    public_suffix (5.0.3)
+    public_suffix (5.0.4)
     puma (6.4.0)
       nio4r (~> 2.0)
     puma_worker_killer (0.3.1)
@@ -446,7 +446,7 @@ GEM
     ruby-push-notifications (1.3.0)
       builder (~> 3.0)
     ruby-statistics (3.0.2)
-    ruby-vips (2.1.4)
+    ruby-vips (2.2.0)
       ffi (~> 1.12)
     ruby2_keywords (0.0.5)
     rucaptcha (3.2.1-arm64-darwin)

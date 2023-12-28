@@ -72,7 +72,7 @@ gem "rails-settings-cached"
 
 # HTML Pipeline
 gem "autocorrect-rb"
-gem "html-pipeline"
+gem "html-pipeline", "~> 2.14"
 gem "html-pipeline-auto-correct"
 gem "redcarpet"
 gem "rouge"

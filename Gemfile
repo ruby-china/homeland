@@ -12,7 +12,7 @@ gem "shakapacker", "~> 7.2.0"
 gem "turbolinks"
 gem "uglifier"
 
-gem "view_component", "~> 2.82"
+gem "view_component", "~> 3.9"
 
 gem "pg"
 

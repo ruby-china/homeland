@@ -63,6 +63,7 @@
     "webpack-dev-server": "4.9.0"
   },
   "resolutions": {
-    "autoprefixer": "10.4.5"
+    "autoprefixer": "10.4.5",
+    "mdn-data": "~2.0.30"
   }
 }

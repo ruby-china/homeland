@@ -5,14 +5,14 @@ source "https://rubygems.org"
 git_source(:github) { |repo_name| "https://github.com/#{repo_name}.git" }
 
 gem "jbuilder"
-gem "rails", "~> 7.1.2"
+gem "rails", "~> 7.1.3"
 gem "rails_autolink"
 gem "sass-rails"
-gem "shakapacker", "~> 7.2.0"
+gem "shakapacker", "~> 7.2.1"
 gem "turbolinks"
 gem "uglifier"
 
-gem "view_component", "~> 2.82"
+gem "view_component", "~> 2.83"
 
 gem "pg"
 

@@ -20,7 +20,6 @@ class UsersController < ApplicationController
     else
       @counters.where(key: :yearly_replies_count)
     end
-    @counters = @counters.load_async
 
     @active_users = @counters.includes(:countable).order("value desc").limit(100).map(&:countable)
   end

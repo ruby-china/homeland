@@ -1,7 +1,7 @@
 <%= cache([@topic, "reference_topics"]) do %>
   <%
-    @reference_topics = @topic.reference_topics.load_async
-    @reference_by_topics = @topic.reference_by_topics.load_async
+    @reference_topics = @topic.reference_topics
+    @reference_by_topics = @topic.reference_by_topics
   %>
   <% if @reference_topics.length > 0 || @reference_by_topics.length > 0 %>
     <div class="mb-4 topic-references card">

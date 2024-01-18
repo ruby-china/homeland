@@ -100,7 +100,7 @@
     </div>
   </div>
   <% if Setting.has_module?(:team) %>
-    <% @user_teams = @user.teams.load_async %>
+    <% @user_teams = @user.teams %>
     <% if !@user_teams.blank? %>
       <div class="mb-4 card user-teams">
         <div class="card-body">

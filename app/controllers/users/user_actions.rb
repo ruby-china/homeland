@@ -75,7 +75,7 @@ module Users
     end
 
     def user_show
-      @replies = @user.replies.without_system.fields_for_list.recent.includes(:topic).limit(10).load_async
+      @replies = @user.replies.without_system.fields_for_list.recent.includes(:topic).limit(10)
       @topics = @user.topics.fields_for_list.high_likes.page(params[:page])
     end
   end

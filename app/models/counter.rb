@@ -28,6 +28,6 @@ class Counter < ApplicationRecord
   def self.active_users(limit: 32)
     counter_scope = where(countable_type: "User")
     counter_scope = counter_scope.where(key: :monthly_replies_count)
-    counter_scope.includes(:countable).order("value desc").limit(limit).load_async.map(&:countable)
+    counter_scope.includes(:countable).order("value desc").limit(limit).map(&:countable)
   end
 end

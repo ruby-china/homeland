@@ -8,7 +8,7 @@ class TeamsController < ApplicationController
   before_action :set_team, only: %i[show edit update]
 
   def index
-    @total_team_count = Team.async_count
+    @total_team_count = Team.count
     @active_teams = Team.fields_for_list.hot.limit(60)
   end
 

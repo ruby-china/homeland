@@ -1,9 +1,9 @@
 <ul class="nav navbar-nav user-bar">
   <% if current_user %>
     <%
-  badge_class = ""
-  badge_class = "new" if unread_notify_count > 0
-  %>
+    badge_class = ""
+    badge_class = "new" if unread_notify_count > 0
+    %>
     <li class="nav-item notification-count">
       <a href="<%= main_app.notifications_path %>" class="nav-link <%= badge_class %>" title="<%= t("common.notifications") %>"><i class="fa fa-bell"></i><span class="count"><%= unread_notify_count %></span></a>
     </li>

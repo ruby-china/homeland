@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   include Users::UserActions
 
   def index
-    @total_user_count = User.async_count
+    @total_user_count = User.count
 
     @counters = Counter.where(countable_type: "User")
     @counters = if params[:type] == "monthly"

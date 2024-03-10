@@ -12,9 +12,13 @@ module Homeland
   cattr_reader :boot_at
 
   class << self
-    
+    # Follow Redis offical guides make redis thread safety
+    # https://github.com/redis/redis-rb#connection-pooling-and-thread-safety
     def redis
-      Rails.cache.redis.then {|redis| redis }
+      @redis ||= ConnectionPool::Wrapper.new do
+        config = Rails.application.config_for(:redis)
+        Redis.new(url: config["url"], db: 0)
+      end
     end
 
     def file_store

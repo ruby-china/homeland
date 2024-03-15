@@ -28,8 +28,9 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
+          platforms: linux/arm64
           tags: |
-            homeland/homeland:${{ steps.tagName.outputs.tag }}
+            codming/homeland-arm:${{ steps.tagName.outputs.tag }}
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}

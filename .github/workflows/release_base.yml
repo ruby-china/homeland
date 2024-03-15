@@ -32,8 +32,9 @@ jobs:
         with:
           push: true
           file: ./Dockerfile-base
+          platforms: linux/arm64
           tags: |
-            homeland/base:${{ steps.tagName.outputs.tag }}
+            codming/homeland-base-arm:${{ steps.tagName.outputs.tag }}
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}

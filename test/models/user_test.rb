@@ -498,4 +498,20 @@ class UserTest < ActiveSupport::TestCase
     assert_nil user.github_repos_path
     assert_nil User.fetch_github_repositories(user.id)
   end
+
+  test "login unique with case insensitive" do
+    u = create(:user, login: "Huacnlee")
+    assert_raise ActiveRecord::RecordInvalid do
+      create(:user, login: "huacnlee")
+    end
+
+    u.update!(name: "New Name")
+    assert_equal "New Name", u.reload.name
+  end
+
+  test "github user to update name" do
+    u = create(:user, login: "GitHub-User", email: "github+12345@example.com")
+    u.update!(name: "New Name")
+    assert_equal "GitHub-User", u.reload.login
+  end
 end

@@ -317,6 +317,7 @@ body {
 .sub-navbar {
   @apply bg-white shadow-sm;
   @apply dark:bg-gray-900 dark:border-t dark:bg-opacity-70 dark:border-solid dark:border-gray-900;
+  @apply border-b-0 md:border-b;
 
   a {
     color: $blue;
@@ -450,6 +451,10 @@ body {
   &[readonly],
   &:disabled {
     background: var(--form-control-disabled-background-color);
+  }
+
+  &::placeholder {
+    @apply text-gray-400 dark:text-gray-600;
   }
 }
 
@@ -668,6 +673,7 @@ kbd {
   }
 
   .card-header {
+    @apply text-gray-800 dark:text-gray-100 text-lg mb-6 leading-4;
     padding: 15px 25px 0 25px;
     border: 0px;
     border: 0;
@@ -683,11 +689,7 @@ kbd {
   }
 
   .card-title {
-    margin-bottom: 25px;
-    font-size: 18px;
-    line-height: 100%;
-    display: flex;
-    align-items: center;
+    @apply flex items-center text-gray-800 dark:text-gray-100 text-lg mb-6 leading-4;
 
     .card-subtitle {
       margin-top: 20px;
@@ -708,6 +710,7 @@ kbd {
 
   .card-body {
     padding: 25px;
+    @apply text-gray-800 dark:text-gray-100;
   }
 
   .list-group {
@@ -1036,7 +1039,7 @@ img.emoji {
   }
 
   #main {
-    margin-top: 1px;
+    margin-top: -1px;
   }
 
   .row {

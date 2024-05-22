@@ -4,7 +4,7 @@
   <div class="flex items-center justify-between">
     <div class="text-xl">
       <div><%= t("users.hot_users") %></div>
-      <div class="text-sm text-gray-400 dark:text-gray-700">Total <%= @total_user_count %> users</div>
+      <div class="text-sm text-gray-400 dark:text-gray-500">Total <%= @total_user_count %> users</div>
     </div>
     <div class="user-list-tabs">
       <a href="<%= users_path %>" class="user-list-tab <%= "active" if params[:type].blank? %>"><%= t("users.yearly") %></a> <span class="divider">/</span>

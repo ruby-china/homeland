@@ -36,5 +36,13 @@ $ rails s
 ## Testing
 
 ```bash
-bundle exec rake
+$ rails test
 ```
+
+## Troubleshooting
+
+- On macOS ARM, you may casue an crash error when running `rails s`, just we Webrick instead of Puma.
+
+  ```bash
+  $ rails s -u webrick
+  ```

@@ -585,8 +585,8 @@ input[type="file"] {
 
   li.active > a,
   li.active > a:hover {
-    @extend .btn-primary;
     color: #fff !important;
+    background-color: var(--blue);
     border-color: var(--blue) !important;
   }
 }

@@ -1,5 +1,4 @@
-const { generateWebpackConfig } = require('shakapacker');
-const { merge } = require('webpack-merge');
+const { generateWebpackConfig, merge } = require('shakapacker');
 const webpack = require("webpack");
 const webpackConfig = generateWebpackConfig();
 

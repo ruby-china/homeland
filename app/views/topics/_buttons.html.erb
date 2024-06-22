@@ -4,12 +4,14 @@
     <%= topic_follow_tag(@topic) %>
     <%= topic_favorite_tag(@topic) %>
   <% end %>
+  <% if current_user %>
   <div class="float-right">
     <div class="dropdown">
-      <a href="#" data-bs-toggle ="dropdown">
+      <a href="#" data-bs-toggle="dropdown">
         <%= icon_tag("ellipsis-v") %>
       </a>
       <%= render "menu" %>
     </div>
   </div>
+  <% end %>
 </div>

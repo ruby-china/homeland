@@ -29,7 +29,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if resource.persisted?
       session[:omniauth] = nil
       if resource.active_for_authentication?
-        set_flash_message! :notice, "您的账号已注册成功，欢迎来到 SolDev。"
+        set_flash_message! :notice, :signed_up
         sign_up(resource_name, resource)
         respond_with resource, location: after_sign_up_path_for(resource)
       else

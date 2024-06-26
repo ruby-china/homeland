@@ -1,5 +1,5 @@
 "zh-CN":
   account:
-    signed_up: 'Sign up successed.'
-    updated: 'Profile update successed.'
+    signed_up: 'Successfully created your account. Welcome to SolDev.'
+    updated: 'Profile updated successfully.'
     destroyed: 'Goodbye! You account was deleted.'

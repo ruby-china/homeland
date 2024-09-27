@@ -3,7 +3,7 @@
 class Device < ApplicationRecord
   belongs_to :user
 
-  enum platform: %i[ios android]
+  enum :platform, %i[ios android]
 
   validates :platform, :token, presence: true
   validates :token, uniqueness: {scope: %i[user_id platform]}

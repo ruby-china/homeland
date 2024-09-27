@@ -17,8 +17,6 @@ class User < ApplicationRecord
   include User::Roles
   include User::RedisOnlineTrackable
 
-  second_level_cache version: 4, expires_in: 2.weeks
-
   LOGIN_FORMAT = 'A-Za-z0-9\-\_\.'
   ALLOW_LOGIN_FORMAT_REGEXP = /\A[#{LOGIN_FORMAT}]+\z/
 

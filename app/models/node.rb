@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class Node < ApplicationRecord
-  second_level_cache expires_in: 2.weeks
-
   has_many :topics
 
   validates :name, presence: true

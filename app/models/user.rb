@@ -63,7 +63,7 @@ class User < ApplicationRecord
   end
 
   def self.find_by_email(email)
-    fetch_by_uniq_keys(email:)
+    find_by(email:)
   end
 
   def self.find_by_login!(slug)
@@ -72,7 +72,7 @@ class User < ApplicationRecord
 
   def self.find_by_login(slug)
     return nil unless slug.match? ALLOW_LOGIN_FORMAT_REGEXP
-    fetch_by_uniq_keys(login: slug) || where("lower(login) = ?", slug.downcase).take
+    find_by(login: slug) || where("lower(login) = ?", slug.downcase).take
   end
 
   def self.find_by_login_or_email(login_or_email)

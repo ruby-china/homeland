@@ -21,7 +21,6 @@ describe Admin::CommentsController do
   describe "PUT /admin/comments/:id" do
     it "updates the requested comment" do
       comment_param = {body: "123"}
-      # expect_any_instance_of(Comment).to receive(:update).with("body" => '123')
       put admin_comment_path(@comment), params: {comment: comment_param}
       @comment.reload
       assert_equal "123", @comment.body

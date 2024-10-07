@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 return if ENV["RAILS_PRECOMPILE"]
 
 redis_config = Rails.application.config_for(:redis)

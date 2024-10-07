@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Admin
   class PluginsController < Admin::ApplicationController
     before_action :set_plugin, only: %i[show destroy]

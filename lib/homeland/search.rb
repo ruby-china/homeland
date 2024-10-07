@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Homeland
   class Search
     attr_accessor :term, :terms

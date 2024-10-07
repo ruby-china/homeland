@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Admin
   class PhotosController < Admin::ApplicationController
     before_action :set_photo, only: %i[show destroy]

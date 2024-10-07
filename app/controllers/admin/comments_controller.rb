@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Admin
   class CommentsController < Admin::ApplicationController
     before_action :set_comment, only: %i[show edit update destroy]

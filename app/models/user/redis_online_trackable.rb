@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Track user online status
 class User
   module RedisOnlineTrackable

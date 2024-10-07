@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require "carrierwave"
 require "carrierwave/validations/active_model"
 

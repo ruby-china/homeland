@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Admin
   class TopicsController < Admin::ApplicationController
     before_action :set_topic, only: %i[show edit update destroy revert suggest unsuggest]

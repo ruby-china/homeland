@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class APIControllerTest < ActionDispatch::IntegrationTest
   include FactoryBot::Syntax::Methods
 

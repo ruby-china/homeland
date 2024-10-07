@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # 用户 API 返回数据结构
 # @class UserSerializer
 #

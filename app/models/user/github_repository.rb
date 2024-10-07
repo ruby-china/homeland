@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class User
   module GitHubRepository
     extend ActiveSupport::Concern
@@ -34,7 +32,7 @@ class User
 
         conn = Faraday.new("https://api.github.com")
         conn.set_basic_auth(Setting.github_api_key, Setting.github_api_secret)
-        
+
         begin
           resp = conn.get(user.github_repos_path)
         rescue => e

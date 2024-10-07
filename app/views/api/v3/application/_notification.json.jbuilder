@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # 通知
 # @class NotificationSerializer
 #

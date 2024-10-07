@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class User
   # 用户对话题的动作
   module TopicActions

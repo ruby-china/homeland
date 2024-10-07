@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Topic
   module AutoCorrect
     extend ActiveSupport::Concern

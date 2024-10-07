@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Scheduler
   # cleanup spam topic at 1 month ago
   class SpamCleanupJob < ApplicationJob

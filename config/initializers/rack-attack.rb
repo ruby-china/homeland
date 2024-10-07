@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 Rails.application.config.to_prepare do
   limit_value = Setting.rack_attack[:limit].to_s.to_i
   period_value = Setting.rack_attack[:period].to_s.to_i || 5.minutes

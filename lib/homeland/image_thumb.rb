@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Homeland
   # Generate Upload Image thumbs for development environment.
   class ImageThumb

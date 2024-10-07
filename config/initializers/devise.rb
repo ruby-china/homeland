@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 TWITTER_OMNIAUTH_SETUP = lambda do |env|
   env["omniauth.strategy"].options[:consumer_key] = Setting.twitter_api_key
   env["omniauth.strategy"].options[:consumer_secret] = Setting.twitter_api_secret

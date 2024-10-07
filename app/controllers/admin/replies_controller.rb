@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Admin
   class RepliesController < Admin::ApplicationController
     before_action :set_reply, only: %i[show edit update destroy revert]

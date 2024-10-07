@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class TeamUsersController < ApplicationController
   require_module_enabled! :team
 

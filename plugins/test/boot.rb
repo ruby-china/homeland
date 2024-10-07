@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 Homeland.register_plugin do |s|
   s.name = "test"
   s.display_name = "Test plugin"

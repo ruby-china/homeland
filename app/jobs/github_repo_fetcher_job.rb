@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class GitHubRepoFetcherJob < ApplicationJob
   queue_as :http_request
 

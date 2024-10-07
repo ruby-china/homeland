@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Api
   module V3
     class NotificationsController < Api::V3::ApplicationController

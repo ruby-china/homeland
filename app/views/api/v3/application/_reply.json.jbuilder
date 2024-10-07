@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # 话题信息
 # @class ReplySerializer
 #

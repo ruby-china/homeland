@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Scheduler
   class DoorkeeperCleanupJob < ApplicationJob
     def perform

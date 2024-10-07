@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class AddUniqueIndexToUsers < ActiveRecord::Migration[6.0]
   def up
     execute <<~SQL

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Homeland
   class Html
     def self.plain(html)

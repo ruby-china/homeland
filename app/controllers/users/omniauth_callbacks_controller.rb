@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   User.omniauth_providers.each do |provider|
     send(:define_method, provider) do

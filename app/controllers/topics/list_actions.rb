@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Topics
   module ListActions
     extend ActiveSupport::Concern

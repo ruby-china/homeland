@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Admin
   class SiteConfigsController < Admin::ApplicationController
     before_action :set_setting, only: %i[edit update]

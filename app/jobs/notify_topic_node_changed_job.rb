@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class NotifyTopicNodeChangedJob < AsyncJob
   def perform(topic_id, node_id:)
     topic = Topic.find_by_id(topic_id)

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class MentionTopicJob < ApplicationJob
   queue_as :notifications
 

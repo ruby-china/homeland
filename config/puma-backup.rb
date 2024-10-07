@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 environment ENV.fetch("RAILS_ENV", "production")
 port 7001
 threads (ENV["min_threads"] || 8), (ENV["max_threads"] || 8)

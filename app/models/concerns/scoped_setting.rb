@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Backward compatible to support RailsSettingsCached 0.x scoped settings
 module ScopedSetting
   extend ActiveSupport::Concern

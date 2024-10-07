@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Auth
   class SSOController < ApplicationController
     def show

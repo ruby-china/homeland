@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class ApplicationController
   module UserNotifications
     extend ActiveSupport::Concern

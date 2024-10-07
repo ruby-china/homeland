@@ -1,6 +1,0 @@
-ignore:
-  - tmp/**/*
-  - test/fixture/**/*
-  - lib/templates/**/*
-  - plugins/**/*
-  - test/lib/markdown_test.rb

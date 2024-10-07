@@ -42,10 +42,5 @@
   "i18n-ally.sourceLanguage": "zh-CN",
   "i18n-ally.translate.engines": ["opencc", "google"],
   "prettier.singleQuote": false,
-  "ruby.format": "standard",
-  "ruby.lint": {
-    "standard": {
-      "useBundler": true
-    }
-  }
+  "ruby.format": "rubocop"
 }

@@ -106,5 +106,5 @@ group :development, :test do
   gem "minitest-spec-rails"
   gem "mocha"
 
-  gem "standard"
+  gem "rubocop-rails-omakase", require: false
 end

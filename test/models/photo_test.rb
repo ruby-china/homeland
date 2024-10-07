@@ -18,6 +18,6 @@ class PhotoTest < ActiveSupport::TestCase
     perform_enqueued_jobs do
       photo.destroy
     end
-    refute File.exist?(image_file_path), "#{image_file_path} still exist"
+    assert_not File.exist?(image_file_path), "#{image_file_path} still exist"
   end
 end

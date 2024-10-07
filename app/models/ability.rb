@@ -73,7 +73,7 @@ class Ability
     # For block spam, disalow Newbie reply at night.
     can :create, Reply unless current_lock_reply?
     can %i[update destroy], Reply, user_id: user.id
-    cannot %i[create update destroy], Reply, topic: {closed?: true}
+    cannot %i[create update destroy], Reply, topic: { closed?: true }
   end
 
   def current_lock_reply?

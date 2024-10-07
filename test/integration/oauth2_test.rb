@@ -22,7 +22,7 @@ class OAuth2Test < ActiveSupport::TestCase
       @access_token = client.auth_code.get_token(grant.token, redirect_uri: grant.redirect_uri)
     end
 
-    refute_nil @access_token.token
+    assert_not_nil @access_token.token
     response = @access_token.get(test_url)
     assert_equal 200, response.status
 
@@ -30,8 +30,8 @@ class OAuth2Test < ActiveSupport::TestCase
     assert_changes -> { Doorkeeper::AccessToken.count }, 1 do
       @new_token = @access_token.refresh!
     end
-    refute_nil @new_token.token
-    refute_equal @access_token.token, @new_token.token
+    assert_not_nil @new_token.token
+    assert_not_equal @access_token.token, @new_token.token
 
     # Revoke a new access_token, old access_token will invalid
     grant = FactoryBot.create(:access_grant, application: app, redirect_uri: "#{app.redirect_uri}/callback")
@@ -48,14 +48,14 @@ class OAuth2Test < ActiveSupport::TestCase
     assert_changes -> { Doorkeeper::AccessToken.count }, 1 do
       @access_token = client.password.get_token(user.email, password)
     end
-    refute_nil @access_token.token
+    assert_not_nil @access_token.token
 
     # Refresh Token
     assert_changes -> { Doorkeeper::AccessToken.count }, 1 do
       @new_token = @access_token.refresh!
     end
 
-    refute_nil @new_token.token
-    refute_equal @access_token.token, @new_token.token
+    assert_not_nil @new_token.token
+    assert_not_equal @access_token.token, @new_token.token
   end
 end

@@ -31,7 +31,7 @@ module Api
       # GET /api/v3/users/:id
       # @return [UserDetailSerializer]
       def show
-        @meta = {followed: false, blocked: false}
+        @meta = { followed: false, blocked: false }
 
         if current_user
           @meta[:followed] = current_user.follow_user?(@user)
@@ -146,7 +146,7 @@ module Api
       # POST /api/v3/users/:id/follow
       def follow
         current_user.follow_user(@user)
-        render json: {ok: 1}
+        render json: { ok: 1 }
       end
 
       # Unfollow user
@@ -154,7 +154,7 @@ module Api
       # POST /api/v3/users/:id/unfollow
       def unfollow
         current_user.unfollow_user(@user)
-        render json: {ok: 1}
+        render json: { ok: 1 }
       end
 
       # Block user
@@ -162,7 +162,7 @@ module Api
       # POST /api/v3/users/:id/block
       def block
         current_user.block_user(@user.id)
-        render json: {ok: 1}
+        render json: { ok: 1 }
       end
 
       # Unblock user
@@ -170,7 +170,7 @@ module Api
       # POST /api/v3/users/:id/unblock
       def unblock
         current_user.unblock_user(@user.id)
-        render json: {ok: 1}
+        render json: { ok: 1 }
       end
 
       private

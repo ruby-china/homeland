@@ -8,7 +8,7 @@ describe Oauth::ApplicationsController do
 
     it "should show register link if user not signed in" do
       get oauth_applications_path
-      refute_equal 200, response.status
+      assert_not_equal 200, response.status
     end
 
     it "should have hot topic lists if user is signed in" do

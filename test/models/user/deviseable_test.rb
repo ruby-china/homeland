@@ -8,7 +8,7 @@ class User::DeviseableTest < ActiveSupport::TestCase
   end
 
   setup do
-    @data = {"email" => "email@example.com", "nickname" => "_why", "name" => "why"}
+    @data = { "email" => "email@example.com", "nickname" => "_why", "name" => "why" }
     @uid = "42"
   end
 

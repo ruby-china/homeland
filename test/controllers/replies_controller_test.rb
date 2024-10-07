@@ -8,7 +8,7 @@ describe RepliesController, type: :controller do
       replies = create_list :reply, 3
 
       sign_in user
-      get topic_replies_path(topic), params: {last_id: replies.first.id}, xhr: true
+      get topic_replies_path(topic), params: { last_id: replies.first.id }, xhr: true
       assert_equal 200, response.status
       assert_equal 0, user.notifications.unread.count
     end
@@ -16,7 +16,7 @@ describe RepliesController, type: :controller do
     it "render blank for params last_id 0" do
       topic = create :topic
       create_list :reply, 3
-      get topic_replies_path(topic), params: {last_id: 0}, xhr: true
+      get topic_replies_path(topic), params: { last_id: 0 }, xhr: true
       assert_equal 200, response.status
       assert_equal "", response.body
     end
@@ -30,7 +30,7 @@ describe RepliesController, type: :controller do
 
       create :reply, topic: topic
       sign_in user
-      post topic_replies_path(topic), params: {reply: {body: ""}, format: :js}
+      post topic_replies_path(topic), params: { reply: { body: "" }, format: :js }
       assert_equal 200, response.status
       assert_match(/Reply Content can't be blank/, response.body)
       assert_equal false, user.topic_read?(topic)
@@ -45,7 +45,7 @@ describe RepliesController, type: :controller do
 
       create :reply, topic: topic
       perform_enqueued_jobs do
-        post topic_replies_path(topic), params: {reply: {body: "content"}, format: :js}
+        post topic_replies_path(topic), params: { reply: { body: "content" }, format: :js }
         assert_equal 200, response.status
       end
       topic.reload
@@ -60,7 +60,7 @@ describe RepliesController, type: :controller do
 
     it "should not change topic's last reply info to previous one" do
       sign_in user
-      post topic_reply_path(topic, reply), params: {reply: {body: "content"}, format: :js}
+      post topic_reply_path(topic, reply), params: { reply: { body: "content" }, format: :js }
       assert_equal user.login, topic.reload.last_reply_user_login
     end
   end
@@ -75,13 +75,13 @@ describe RepliesController, type: :controller do
 
     it "should require login to destroy reply" do
       delete topic_reply_path(topic, reply)
-      refute_equal 200, response.status
+      assert_not_equal 200, response.status
     end
 
     it "user1 should not allow destroy reply" do
       sign_in user1
       delete topic_reply_path(topic, reply)
-      refute_equal 200, response.status
+      assert_not_equal 200, response.status
     end
 
     it "user should destroy reply with itself" do

@@ -69,13 +69,13 @@ describe Api::V3::DevicesController do
         delete "/api/v3/devices.json", platform: "android", token: android.token
       end
       assert_equal 200, response.status
-      refute_includes current_user.devices.android.pluck(:token), android.token
+      assert_not_includes current_user.devices.android.pluck(:token), android.token
 
       assert_changes -> { current_user.devices.ios.count }, -1 do
         delete "/api/v3/devices.json", platform: "ios", token: ios.token
       end
       assert_equal 200, response.status
-      refute_includes current_user.devices.ios.pluck(:token), token
+      assert_not_includes current_user.devices.ios.pluck(:token), token
     end
   end
 end

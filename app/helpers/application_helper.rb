@@ -64,7 +64,7 @@ module ApplicationHelper
     Setting.editor_languages.each do |lang|
       lexer = Rouge::Lexer.find(lang)
       if lexer
-        dropdown_items << link_to(lexer.title, "#", class: "dropdown-item", data: {lang: lang})
+        dropdown_items << link_to(lexer.title, "#", class: "dropdown-item", data: { lang: lang })
       end
     end
     raw dropdown_items.join("")

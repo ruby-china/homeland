@@ -22,7 +22,7 @@ describe TopicsController do
     end
 
     it "should 404 with non integer :page value" do
-      get topics_path, params: {page: "2/*"}
+      get topics_path, params: { page: "2/*" }
       assert_equal 200, response.status
     end
   end
@@ -105,7 +105,7 @@ describe TopicsController do
     describe "unauthenticated" do
       it "should not allow anonymous access" do
         get new_topic_path
-        refute_equal 200, response.status
+        assert_not_equal 200, response.status
       end
     end
 
@@ -118,15 +118,15 @@ describe TopicsController do
 
       it "should render 404 for invalid node id" do
         sign_in user
-        get new_topic_path, params: {node_id: (node.id + 1)}
-        refute_equal 200, response.status
+        get new_topic_path, params: { node_id: (node.id + 1) }
+        assert_not_equal 200, response.status
       end
 
       it "should not allow access from newbie user" do
         Setting.stubs(:newbie_limit_time).returns("100000")
         sign_in newbie
         get new_topic_path
-        refute_equal 200, response.status
+        assert_not_equal 200, response.status
       end
     end
   end
@@ -135,7 +135,7 @@ describe TopicsController do
     describe "unauthenticated" do
       it "should not allow anonymous access" do
         get edit_topic_path(topic)
-        refute_equal 200, response.status
+        assert_not_equal 200, response.status
       end
     end
 
@@ -155,7 +155,7 @@ describe TopicsController do
           topic_of_other_user = create(:topic, user: other_user)
           sign_in user
           get edit_topic_path(topic_of_other_user)
-          refute_equal 200, response.status
+          assert_not_equal 200, response.status
         end
       end
     end
@@ -164,20 +164,20 @@ describe TopicsController do
   describe "POST /topics" do
     describe "unauthenticated" do
       it "should not allow anonymous access" do
-        post topics_path, params: {title: "Hello world"}
-        refute_equal 200, response.status
+        post topics_path, params: { title: "Hello world" }
+        assert_not_equal 200, response.status
       end
     end
 
     describe "authenticated" do
       it "should allow access from authenticated user" do
         sign_in user
-        post topics_path, params: {format: :js, topic: {title: "new topic", body: "new body", node_id: node.id}}
+        post topics_path, params: { format: :js, topic: { title: "new topic", body: "new body", node_id: node.id } }
         assert_equal 200, response.status
       end
       it "should allow access from authenticated user with team" do
         sign_in user
-        post topics_path, params: {format: :js, topic: {title: "new topic", body: "new body", node_id: node.id, team_id: team.id}}
+        post topics_path, params: { format: :js, topic: { title: "new topic", body: "new body", node_id: node.id, team_id: team.id } }
         assert_equal 200, response.status
       end
     end
@@ -186,7 +186,7 @@ describe TopicsController do
   describe "POST /topics/preview" do
     it "should work" do
       sign_in user
-      post preview_topics_path, params: {format: :json, body: "new body"}
+      post preview_topics_path, params: { format: :json, body: "new body" }
       assert_equal 200, response.status
     end
   end
@@ -195,13 +195,13 @@ describe TopicsController do
     it "should work" do
       sign_in user
       topic = create :topic, user_id: user.id, title: "new title", body: "new body"
-      put topic_path(topic), params: {format: :js, topic: {title: "new topic 2", body: "new body 2"}}
+      put topic_path(topic), params: { format: :js, topic: { title: "new topic 2", body: "new body 2" } }
       assert_equal 200, response.status
     end
 
     it "should update with admin user" do
       sign_in admin
-      put topic_path(topic), params: {format: :js, topic: {title: "new topic 2", body: "new body 2", node_id: node.id}}
+      put topic_path(topic), params: { format: :js, topic: { title: "new topic 2", body: "new body 2", node_id: node.id } }
       assert_equal 200, response.status
       topic.reload
       assert_equal true, topic.lock_node
@@ -281,14 +281,14 @@ describe TopicsController do
   describe "POST /topics/:id/action?type=excellent" do
     it "should not allow user suggest" do
       sign_in user
-      post action_topic_path(topic), params: {type: "excellent"}
+      post action_topic_path(topic), params: { type: "excellent" }
       assert_redirected_to root_path
       assert_equal false, topic.reload.excellent?
     end
 
     it "should not allow user suggest by admin" do
       sign_in admin
-      post action_topic_path(topic), params: {type: "excellent"}
+      post action_topic_path(topic), params: { type: "excellent" }
       assert_redirected_to topic_path(topic)
       assert_equal true, topic.reload.excellent?
     end
@@ -299,7 +299,7 @@ describe TopicsController do
       it "should not allow user suggest" do
         topic = create(:topic, grade: :excellent)
         sign_in user
-        post action_topic_path(topic), params: {type: "normal"}
+        post action_topic_path(topic), params: { type: "normal" }
         assert_redirected_to root_path
         assert_equal true, topic.reload.excellent?
       end
@@ -307,7 +307,7 @@ describe TopicsController do
       it "should not allow user suggest by admin" do
         topic = create(:topic, grade: :excellent)
         sign_in admin
-        post action_topic_path(topic), params: {type: "normal"}
+        post action_topic_path(topic), params: { type: "normal" }
         assert_redirected_to topic_path(topic)
         assert_equal false, topic.reload.excellent?
       end
@@ -331,19 +331,19 @@ describe TopicsController do
   describe "POST /topics/:id/action?type=ban" do
     it "should not allow user ban" do
       sign_in user
-      post action_topic_path(topic), params: {type: "ban"}
+      post action_topic_path(topic), params: { type: "ban" }
       assert_redirected_to root_path
       assert_equal false, topic.reload.ban?
     end
 
     it "should allow by admin" do
       sign_in admin
-      post action_topic_path(topic), params: {type: "ban"}
+      post action_topic_path(topic), params: { type: "ban" }
       assert_redirected_to topic_path(topic)
       assert_equal true, topic.reload.ban?
 
       assert_changes -> { topic.replies.count }, 1 do
-        post action_topic_path(topic), params: {type: "ban", reason: "Foobar"}
+        post action_topic_path(topic), params: { type: "ban", reason: "Foobar" }
       end
       assert_redirected_to topic_path(topic)
       r = topic.replies.last
@@ -351,7 +351,7 @@ describe TopicsController do
       assert_equal "Foobar", r.body
 
       assert_changes -> { topic.replies.count }, 1 do
-        post action_topic_path(topic), params: {type: "ban", reason: "Foobar", reason_text: "Barfoo"}
+        post action_topic_path(topic), params: { type: "ban", reason: "Foobar", reason_text: "Barfoo" }
       end
       assert_redirected_to topic_path(topic)
       r = topic.replies.last
@@ -363,14 +363,14 @@ describe TopicsController do
   describe "POST /topics/:id/action?type=close" do
     it "should not allow user close" do
       sign_in user
-      post action_topic_path(topic), params: {type: "close"}
+      post action_topic_path(topic), params: { type: "close" }
       assert_redirected_to topic_path(topic)
       assert_equal false, topic.reload.ban?
     end
 
     it "should not allow user suggest by admin" do
       sign_in admin
-      post action_topic_path(topic), params: {type: "close"}
+      post action_topic_path(topic), params: { type: "close" }
       assert_redirected_to topic_path(topic)
       assert_equal true, topic.reload.closed_at.present?
     end
@@ -379,7 +379,7 @@ describe TopicsController do
   describe "POST /topics/:id/action?type=copen" do
     it "should not allow user close" do
       sign_in user
-      post action_topic_path(topic), params: {type: "open"}
+      post action_topic_path(topic), params: { type: "open" }
       assert_redirected_to topic_path(topic)
       assert_equal false, topic.reload.ban?
     end
@@ -387,7 +387,7 @@ describe TopicsController do
     it "should not allow user suggest by admin" do
       sign_in admin
       topic.close!
-      post action_topic_path(topic), params: {type: "open"}
+      post action_topic_path(topic), params: { type: "open" }
       assert_redirected_to topic_path(topic)
       assert_nil topic.reload.closed_at
     end

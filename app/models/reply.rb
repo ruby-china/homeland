@@ -22,7 +22,7 @@ class Reply < ApplicationRecord
   scope :fields_for_list, -> { select(:topic_id, :id, :body, :updated_at, :created_at) }
 
   validates :body, presence: true, unless: -> { system_event? }
-  validates :body, uniqueness: {scope: %i[topic_id user_id], message: I18n.t("replies.duplicate_error")}, unless: -> { system_event? }
+  validates :body, uniqueness: { scope: %i[topic_id user_id], message: I18n.t("replies.duplicate_error") }, unless: -> { system_event? }
   validate do
     ban_words = Setting.ban_words_on_reply.collect(&:strip)
     if !system_event? && body&.strip&.downcase&.in?(ban_words)

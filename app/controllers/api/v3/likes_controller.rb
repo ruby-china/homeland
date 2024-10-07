@@ -20,7 +20,7 @@ module Api
       def create
         current_user.like(likeable)
         likeable.reload
-        data = {obj_type: params[:obj_type], obj_id: likeable.id, count: likeable.likes_count}
+        data = { obj_type: params[:obj_type], obj_id: likeable.id, count: likeable.likes_count }
         render json: data
       end
 
@@ -33,7 +33,7 @@ module Api
       def destroy
         current_user.unlike(likeable)
         likeable.reload
-        data = {obj_type: params[:obj_type], obj_id: likeable.id, count: likeable.likes_count}
+        data = { obj_type: params[:obj_type], obj_id: likeable.id, count: likeable.likes_count }
         render json: data
       end
 

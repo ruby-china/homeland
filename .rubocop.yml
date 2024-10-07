@@ -1,3 +1,6 @@
+AllCops:
+  Exclude:
+    - lib/templates/**/*
 # Omakase Ruby styling for Rails
 inherit_gem: { rubocop-rails-omakase: rubocop.yml }
 # Overwrite or add rules to create your own house style

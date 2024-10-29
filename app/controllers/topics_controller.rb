@@ -10,9 +10,9 @@ class TopicsController < ApplicationController
   def index
     @suggest_topics = []
     if params[:page].to_i <= 1
-      @suggest_topics = topics_scope.suggest.includes(:node).limit(3)
+      @suggest_topics = topics_scope.suggest.limit(3)
     end
-    @topics = topics_scope.without_suggest.last_actived.includes(:node).page(params[:page])
+    @topics = topics_scope.without_suggest.last_actived.page(params[:page])
     @page_title = t("menu.topics")
     @read_topic_ids = []
     if current_user
@@ -21,7 +21,7 @@ class TopicsController < ApplicationController
   end
 
   def feed
-    @topics = Topic.recent.without_ban.without_hide_nodes.includes(:node, :user, :last_reply_user).limit(20)
+    @topics = Topic.recent.without_ban.without_hide_nodes.limit(20)
     render layout: false if stale?(@topics)
   end
 
@@ -35,19 +35,19 @@ class TopicsController < ApplicationController
 
   def node_feed
     @node = Node.find(params[:id])
-    @topics = @node.topics.recent.limit(20)
+    @topics = @node.topics.includes(:user, :node, :last_reply_user).recent.limit(20)
     render layout: false
   end
 
   def show
-    @topic = Topic.unscoped.includes(:user).find(params[:id])
+    @topic = Topic.unscoped.includes(:user, :last_reply_user).find(params[:id])
     render_404 if @topic.deleted?
 
     @node = @topic.node
     @show_raw = params[:raw] == "1"
     @can_reply = can?(:create, Reply)
 
-    @replies = Reply.unscoped.where(topic_id: @topic.id).order(:id).all
+    @replies = Reply.unscoped.where(topic_id: @topic.id).includes(:user).order(:id).all
     @user_like_reply_ids = current_user&.like_reply_ids_by_replies(@replies) || []
 
     @has_followed = current_user&.follow_topic?(@topic)

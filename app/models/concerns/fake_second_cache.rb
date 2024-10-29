@@ -3,7 +3,7 @@ module FakeSecondCache
   extend ActiveSupport::Concern
 
   class_methods do
-    def second_level_cache(args)
+    def second_level_cache(args = {})
     end
   end
 end

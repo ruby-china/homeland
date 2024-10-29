@@ -54,7 +54,6 @@ gem "ruby-push-notifications"
 gem "action-store"
 
 gem "enumize"
-gem "form-select"
 gem "kaminari"
 
 gem "exception-track"

@@ -187,8 +187,6 @@ GEM
     ffi (1.17.0-arm64-darwin)
     ffi (1.17.0-x86_64-linux-gnu)
     ffi (1.17.0-x86_64-linux-musl)
-    form-select (0.3.2)
-      rails (>= 4.2)
     fugit (1.11.1)
       et-orbi (~> 1, >= 1.2.11)
       raabro (~> 1.4)
@@ -587,7 +585,6 @@ DEPENDENCIES
   exception-track
   factory_bot_rails
   faraday-rack
-  form-select
   html-pipeline (~> 2.14)
   html-pipeline-auto-correct
   http_accept_language

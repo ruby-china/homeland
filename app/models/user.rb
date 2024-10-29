@@ -53,6 +53,8 @@ class User < ApplicationRecord
       :location_id, :twitter, :team_users_count, :created_at, :updated_at)
   }
 
+  form_select :state
+
   # Override Devise database authentication
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup

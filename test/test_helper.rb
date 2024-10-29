@@ -26,15 +26,11 @@ class ActiveSupport::TestCase
   parallelize
 
   parallelize_setup do |worker|
-    if Concurrent.physical_processor_count > 1
-      setup_test_db!
-    end
+    setup_test_db!
   end
 
   setup do
-    if Concurrent.physical_processor_count <= 1
-      setup_test_db!
-    end
+    setup_test_db!
     Setting.stubs(:captcha_enable?).returns(true)
     Setting.stubs(:topic_create_limit_interval).returns("")
     Setting.stubs(:topic_create_hour_limit_count).returns("")

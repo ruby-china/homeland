@@ -1,6 +1,6 @@
 module Admin
   class PhotosController < Admin::ApplicationController
-    before_action :set_photo, only: %i[show destroy]
+    before_action :set_photo, only: %i[destroy]
 
     def index
       @photos = Photo.recent.includes(:user)

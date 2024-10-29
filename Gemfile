@@ -15,7 +15,7 @@ gem "view_component", "~> 2.83"
 gem "pg"
 
 gem "cancancan"
-gem "devise", github: "jeromedalbert/devise", branch: "fix-test-helpers"
+gem "devise"
 gem "devise-encryptable"
 gem "doorkeeper"
 gem "doorkeeper-i18n"

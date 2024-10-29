@@ -28,7 +28,7 @@ Rails.application.configure do
   # Disable request forgery protection in test environment.
   config.action_controller.allow_forgery_protection = false
 
-  config.active_job.queue_adapter = :test
+  config.active_job.queue_adapter = :inline
 
   # Store uploaded files on the local file system in a temporary directory.
   config.active_storage.service = :test

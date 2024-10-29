@@ -8,7 +8,7 @@ class OAuth2Test < ActiveSupport::TestCase
     @password = "123123"
     @user = FactoryBot.create(:user, password: password, password_confirmation: password)
     @app = FactoryBot.create(:application)
-    @client = OAuth2::Client.new(app.uid, app.secret) do |b|
+    @client = OAuth2::Client.new(@app.uid, @app.secret) do |b|
       b.request :url_encoded
       b.adapter :rack, Rails.application
     end

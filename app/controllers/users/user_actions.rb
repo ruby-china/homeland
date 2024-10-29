@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Users
   module UserActions
     extend ActiveSupport::Concern
@@ -28,12 +26,12 @@ module Users
 
     def block
       current_user.block_user(@user.id)
-      render json: {code: 0}
+      render json: { code: 0 }
     end
 
     def unblock
       current_user.unblock_user(@user.id)
-      render json: {code: 0}
+      render json: { code: 0 }
     end
 
     def blocked
@@ -46,12 +44,12 @@ module Users
 
     def follow
       current_user.follow_user(@user)
-      render json: {code: 0, data: {followers_count: @user.reload.followers_count}}
+      render json: { code: 0, data: { followers_count: @user.reload.followers_count } }
     end
 
     def unfollow
       current_user.unfollow_user(@user)
-      render json: {code: 0, data: {followers_count: @user.reload.followers_count}}
+      render json: { code: 0, data: { followers_count: @user.reload.followers_count } }
     end
 
     def followers

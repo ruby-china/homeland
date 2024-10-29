@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require "test_helper"
 
 class ReplyTest < ActiveSupport::TestCase
@@ -16,7 +14,7 @@ class ReplyTest < ActiveSupport::TestCase
     r = build(:reply)
     assert_equal true, r.valid?
     r.topic_id = t.id
-    refute_equal true, r.valid?
+    assert_not_equal true, r.valid?
   end
 
   test "should not allowed update replies when Topic was closed" do
@@ -25,7 +23,7 @@ class ReplyTest < ActiveSupport::TestCase
     assert_equal true, r.valid?
     t.close!
     r.body = "new body"
-    refute_equal true, r.valid?
+    assert_not_equal true, r.valid?
     assert_equal false, r.save
     assert_includes r.errors.full_messages.join(""), "Topic has been closed, no longer accepting create or update replies."
   end
@@ -94,13 +92,13 @@ class ReplyTest < ActiveSupport::TestCase
     old_updated_at = topic.updated_at
     reply.body = "foobar"
     reply.save
-    refute_equal old_updated_at, topic.updated_at
+    assert_not_equal old_updated_at, topic.updated_at
 
     # should update Topic updated_at on Reply deleted
     old_updated_at = topic.updated_at
     reply.body = "foobar"
     reply.destroy
-    refute_equal old_updated_at, topic.updated_at
+    assert_not_equal old_updated_at, topic.updated_at
 
     # system reply
     target = create(:topic)
@@ -190,7 +188,7 @@ class ReplyTest < ActiveSupport::TestCase
   test "#broadcast_to_client" do
     reply = create(:reply)
 
-    args = ["topics/#{reply.topic_id}/replies", {id: reply.id, user_id: reply.user_id, action: :create}]
+    args = ["topics/#{reply.topic_id}/replies", { id: reply.id, user_id: reply.user_id, action: :create }]
     ActionCable.server.expects(:broadcast).with(*args).once
     reply.broadcast_to_client
   end

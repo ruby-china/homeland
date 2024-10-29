@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # 增加访问量的功能
 module RedisCountable
   extend ActiveSupport::Concern

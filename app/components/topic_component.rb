@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class TopicComponent < ApplicationComponent
   attr_reader :topic, :type
 

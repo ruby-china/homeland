@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Topic
   module Notify
     extend ActiveSupport::Concern

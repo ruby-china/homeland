@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class ProfileCardComponent < ApplicationComponent
   delegate :follow_user_tag, to: :helpers
 

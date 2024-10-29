@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require "spec_helper"
 
 describe TeamsController do
@@ -28,7 +26,7 @@ describe TeamsController do
 
     it "should work" do
       sign_in user
-      post teams_path, params: {team: {login: team.login, name: team.name, email: team.email}}
+      post teams_path, params: { team: { login: team.login, name: team.name, email: team.email } }
       new_team = Team.last
       assert_redirected_to edit_team_path(new_team)
 
@@ -46,7 +44,7 @@ describe TeamsController do
 
       create(:team_owner, team: team, user: user)
 
-      put team_path(team), params: {team: {login: team.login, name: team.name, email: team.email}}
+      put team_path(team), params: { team: { login: team.login, name: team.name, email: team.email } }
       assert_redirected_to edit_team_path(team)
     end
   end

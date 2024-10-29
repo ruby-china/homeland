@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class NotifyTopicJob < ApplicationJob
   queue_as :notifications
 
@@ -13,7 +11,7 @@ class NotifyTopicJob < ApplicationJob
     notified_user_ids = topic.mentioned_user_ids
 
     # Send notification for followers
-    default_note = {notify_type: "topic", target_type: "Topic", target_id: topic.id, actor_id: topic.user_id, created_at: Time.now, updated_at: Time.now}
+    default_note = { notify_type: "topic", target_type: "Topic", target_id: topic.id, actor_id: topic.user_id, created_at: Time.now, updated_at: Time.now }
 
     all_records = []
     follower_ids.each do |uid|

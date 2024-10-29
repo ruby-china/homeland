@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require "spec_helper"
 
 describe Api::V3::TopicsController do
@@ -242,7 +240,7 @@ describe Api::V3::TopicsController do
         node_id = create(:node).id
         post "/api/v3/topics/#{topic.id}.json", title: "api create topic", body: "here we go", node_id: node_id
         topic.reload
-        refute_equal node_id, topic.node_id
+        assert_not_equal node_id, topic.node_id
       end
     end
   end

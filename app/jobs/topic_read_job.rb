@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class TopicReadJob < AsyncJob
   def perform(topic_id:, user_id:, replies_ids: nil)
     topic = Topic.find_by_id(topic_id)

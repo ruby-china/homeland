@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require "digest/md5"
 
 class User < ApplicationRecord
@@ -16,8 +14,6 @@ class User < ApplicationRecord
   include User::Blockable
   include User::Roles
   include User::RedisOnlineTrackable
-
-  second_level_cache version: 4, expires_in: 2.weeks
 
   LOGIN_FORMAT = 'A-Za-z0-9\-\_\.'
   ALLOW_LOGIN_FORMAT_REGEXP = /\A[#{LOGIN_FORMAT}]+\z/
@@ -41,11 +37,11 @@ class User < ApplicationRecord
 
   attr_accessor :password_confirmation
 
-  validates :login, format: {with: ALLOW_LOGIN_FORMAT_REGEXP, message: I18n.t("users.username_allows_format")},
-    length: {in: 2..20},
+  validates :login, format: { with: ALLOW_LOGIN_FORMAT_REGEXP, message: I18n.t("users.username_allows_format") },
+    length: { in: 2..20 },
     presence: true,
-    uniqueness: {case_sensitive: false}
-  validates :name, length: {maximum: 20}
+    uniqueness: { case_sensitive: false }
+  validates :name, length: { maximum: 20 }
 
   after_commit :send_welcome_mail, on: :create
 
@@ -57,15 +53,17 @@ class User < ApplicationRecord
       :location_id, :twitter, :team_users_count, :created_at, :updated_at)
   }
 
+  form_select :state
+
   # Override Devise database authentication
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
     login = conditions.delete(:login).downcase
-    where(conditions.to_h).where(["(lower(login) = :value OR lower(email) = :value) and state != -1", {value: login}]).first
+    where(conditions.to_h).where(["(lower(login) = :value OR lower(email) = :value) and state != -1", { value: login }]).first
   end
 
   def self.find_by_email(email)
-    fetch_by_uniq_keys(email:)
+    find_by(email:)
   end
 
   def self.find_by_login!(slug)
@@ -74,7 +72,7 @@ class User < ApplicationRecord
 
   def self.find_by_login(slug)
     return nil unless slug.match? ALLOW_LOGIN_FORMAT_REGEXP
-    fetch_by_uniq_keys(login: slug) || where("lower(login) = ?", slug.downcase).take
+    find_by(login: slug) || where("lower(login) = ?", slug.downcase).take
   end
 
   def self.find_by_login_or_email(login_or_email)

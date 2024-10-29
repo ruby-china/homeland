@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Team < User
   has_one :profile, foreign_key: :user_id, dependent: :nullify
   has_many :replies, foreign_key: :user_id

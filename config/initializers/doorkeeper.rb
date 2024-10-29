@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 Doorkeeper.configure do
   # Change the ORM that doorkeeper will use.
   # Currently supported options are :active_record, :mongoid2, :mongoid3,
@@ -12,7 +10,7 @@ Doorkeeper.configure do
   end
 
   resource_owner_from_credentials do
-    request.params[:user] = {login: request.params[:username], password: request.params[:password]}
+    request.params[:user] = { login: request.params[:username], password: request.params[:password] }
     request.env["devise.allow_params_authentication"] = true
     # 清理之前的 warden 信息
     request.env["warden"].logout(:user)
@@ -113,12 +111,4 @@ Doorkeeper.configure do
 
   # WWW-Authenticate Realm (default "Doorkeeper").
   realm(ENV["app_name"] || "Homeland")
-end
-
-# https://github.com/doorkeeper-gem/doorkeeper/issues/1467
-# HOTFIX: find_access_token_in_batches with Ruby 3.0
-Doorkeeper::AccessTokenMixin::ClassMethods.module_eval do
-  def find_access_token_in_batches(relation, **args, &block)
-    relation.find_in_batches(**args, &block)
-  end
 end

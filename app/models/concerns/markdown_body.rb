@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # 转换 body -> html
 # [Plugin API]
 module MarkdownBody

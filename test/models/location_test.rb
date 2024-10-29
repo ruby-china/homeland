@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require "test_helper"
 
 class LocationTest < ActiveSupport::TestCase
@@ -26,7 +24,7 @@ class LocationTest < ActiveSupport::TestCase
 
   test "should find_by_name will create new item when test not exist" do
     item = Location.location_find_or_create_by_name("Beijing")
-    refute_equal nil, item.id
+    assert_not_equal nil, item.id
     assert_equal "Beijing".downcase, item.name
   end
 end

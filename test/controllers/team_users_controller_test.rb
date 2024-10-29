@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require "spec_helper"
 
 describe TeamUsersController do
@@ -67,7 +65,7 @@ describe TeamUsersController do
       login: user.login,
       role: :member
     }
-    post user_team_users_path(team), params: {team_user: team_user}
+    post user_team_users_path(team), params: { team_user: team_user }
     assert_redirected_to user_team_users_path(team)
 
     team_user = team.team_users.last
@@ -101,7 +99,7 @@ describe TeamUsersController do
         user_id: 123,
         role: :owner
       }
-      put user_team_user_path(team, team_user), params: {team_user: params}
+      put user_team_user_path(team, team_user), params: { team_user: params }
       old_user_id = team_user.user_id
       team_user.reload
       assert_equal old_user_id, team_user.user_id
@@ -116,7 +114,7 @@ describe TeamUsersController do
         login: user.login,
         role: :member
       }
-      get edit_user_team_user_path(team, team_user), params: {team_user: params}
+      get edit_user_team_user_path(team, team_user), params: { team_user: params }
       assert_redirected_to root_path
     end
   end

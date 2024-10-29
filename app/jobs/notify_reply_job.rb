@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class NotifyReplyJob < ApplicationJob
   queue_as :notifications
 

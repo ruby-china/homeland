@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require "test_helper"
 
 class GitHubRepoFetcherJobTest < ActiveSupport::TestCase
@@ -9,5 +7,6 @@ class GitHubRepoFetcherJobTest < ActiveSupport::TestCase
     User.stub(:fetch_github_repositories, 234) do
       GitHubRepoFetcherJob.perform_now(234)
     end
+    assert true
   end
 end

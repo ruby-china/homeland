@@ -1,11 +1,9 @@
-# frozen_string_literal: true
-
 class Topic
   module Actions
     extend ActiveSupport::Concern
 
     included do
-      enum grade: {ban: -1, normal: 0, excellent: 1}
+      enum :grade, { ban: -1, normal: 0, excellent: 1 }
 
       # Follow enum method override methods must in `included` block.
 

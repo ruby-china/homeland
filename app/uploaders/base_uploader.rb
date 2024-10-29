@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class BaseUploader < CarrierWave::Uploader::Base
   THUMB_IMAGE_EXTS = %w[.jpg .jpeg .gif .png]
 

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 task reindex: :environment do
   print "Reindexing topics"
   Topic.find_each do |t|

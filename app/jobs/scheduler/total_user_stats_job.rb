@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Scheduler
   # Count user replies count in recent
   class TotalUserStatsJob < ApplicationJob

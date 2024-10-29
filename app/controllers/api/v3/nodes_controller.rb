@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Api
   module V3
     class NodesController < Api::V3::ApplicationController
@@ -9,7 +7,7 @@ module Api
       # @return [Array<NodeSerializer>]
       def index
         @nodes = Node.sorted.all
-        @meta = {total: Node.count}
+        @meta = { total: Node.count }
       end
 
       ##

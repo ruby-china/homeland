@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Oauth
   class ApplicationsController < Doorkeeper::ApplicationsController
     before_action :authenticate_user!
@@ -52,7 +50,7 @@ module Oauth
       else
         respond_to do |format|
           format.html { render :edit }
-          format.json { render json: {errors: @application.errors.full_messages}, status: :unprocessable_entity }
+          format.json { render json: { errors: @application.errors.full_messages }, status: :unprocessable_entity }
         end
       end
     end

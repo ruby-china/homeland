@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class TeamsController < ApplicationController
   require_module_enabled! :team
   load_resource find_by: :login

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require "test_helper"
 
 class ProfileTest < ActiveSupport::TestCase
@@ -10,8 +8,8 @@ class ProfileTest < ActiveSupport::TestCase
   attr_accessor :user
 
   test "contacts" do
-    @user.create_profile(contacts: {weibo: "huacnlee", twitter: "huacnlee"})
-    assert_equal({weibo: "huacnlee", twitter: "huacnlee"}.as_json, @user.contacts)
+    @user.create_profile(contacts: { weibo: "huacnlee", twitter: "huacnlee" })
+    assert_equal({ weibo: "huacnlee", twitter: "huacnlee" }.as_json, @user.contacts)
   end
 
   test "#contact_field_prefix" do

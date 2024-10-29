@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Api
   module V3
     class RepliesController < Api::V3::ApplicationController
@@ -36,7 +34,7 @@ module Api
         raise AccessDenied unless can?(:destroy, @reply)
 
         @reply.destroy
-        render json: {ok: 1}
+        render json: { ok: 1 }
       end
 
       private

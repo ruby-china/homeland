@@ -1,12 +1,10 @@
-# frozen_string_literal: true
-
 class User
   # 用户权限相关
   module Roles
     extend ActiveSupport::Concern
 
     included do
-      enum state: {deleted: -1, member: 1, blocked: 2, vip: 3, hr: 4, maintainer: 90, admin: 99}
+      enum :state, { deleted: -1, member: 1, blocked: 2, vip: 3, hr: 4, maintainer: 90, admin: 99 }
 
       # user.admin?
       define_method :admin? do

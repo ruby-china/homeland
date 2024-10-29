@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Reply
   module Voteable
     extend ActiveSupport::Concern

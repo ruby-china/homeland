@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require "test_helper"
 
 class HomeControllerTest < ActionDispatch::IntegrationTest
@@ -24,7 +22,7 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "GET /uploads/:id with not exist file" do
-    get "/uploads/what", params: {format: "jpg"}
+    get "/uploads/what", params: { format: "jpg" }
     assert_equal 404, response.status
   end
 
@@ -42,7 +40,7 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "GET /manifest.webmanifest" do
-    Setting.stub(:manifest, {foo: 1}) do
+    Setting.stub(:manifest, { foo: 1 }) do
       get "/manifest.webmanifest"
       assert_equal 200, response.status
       assert_equal "application/json", response.media_type

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class UpgradeUserState < ActiveRecord::Migration[6.0]
   def up
     # vip: 3, admin: 99

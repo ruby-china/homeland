@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require "test_helper"
 
 class TeamTest < ActiveSupport::TestCase
@@ -35,13 +33,13 @@ class TeamTest < ActiveSupport::TestCase
     team.team_users.last.destroy!
     team.reload
     sleep 0.01
-    refute_equal old_updated_at.to_f, team.updated_at.to_f
+    assert_not_equal old_updated_at.to_f, team.updated_at.to_f
 
     old_updated_at = team.updated_at
     team.team_users.create!(user: create(:user))
     sleep 0.01
     team.reload
-    refute_equal old_updated_at.to_f, team.updated_at.to_f
+    assert_not_equal old_updated_at.to_f, team.updated_at.to_f
   end
 
   test "has_many" do

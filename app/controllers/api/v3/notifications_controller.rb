@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Api
   module V3
     class NotificationsController < Api::V3::ApplicationController
@@ -31,7 +29,7 @@ module Api
         ids = current_user.notifications.where(id: params[:ids]).pluck(:id)
         Notification.read!(current_user, ids)
 
-        render json: {ok: 1}
+        render json: { ok: 1 }
       end
 
       # 删除当前用户的所有通知
@@ -39,7 +37,7 @@ module Api
       # DELETE /api/v3/notifications/all
       def all
         current_user.notifications.delete_all
-        render json: {ok: 1}
+        render json: { ok: 1 }
       end
 
       # 获得未读通知数量
@@ -48,7 +46,7 @@ module Api
       # == returns
       # - count [Integer] 消息数量
       def unread_count
-        render json: {count: Notification.unread_count(current_user)}
+        render json: { count: Notification.unread_count(current_user) }
       end
 
       # 删除当前用户的某个通知
@@ -57,7 +55,7 @@ module Api
       def destroy
         @notification = current_user.notifications.find(params[:id])
         @notification.destroy
-        render json: {ok: 1}
+        render json: { ok: 1 }
       end
     end
   end

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class PhotoUploader < BaseUploader
   # Override the filename of the uploaded files:
   def filename

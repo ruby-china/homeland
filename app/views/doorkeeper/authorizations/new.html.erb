@@ -20,7 +20,7 @@
           </div>
         <% end %>
 
-        <div class="actions flex mt-4 mb-2 items-center">
+        <div class="actions flex mt-4 mb-2 gap-2 items-center">
           <%= form_tag oauth_authorization_path, class: "col-md-6", style: "margin-bottom: 0", method: :post do %>
             <%= hidden_field_tag :client_id, @pre_auth.client.uid %>
             <%= hidden_field_tag :redirect_uri, @pre_auth.redirect_uri %>

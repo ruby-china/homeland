@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require "test_helper"
 
 class Homeland::PluginTest < ActiveSupport::TestCase
@@ -50,13 +48,13 @@ class Homeland::PluginTest < ActiveSupport::TestCase
   end
 
   test ".plugins work" do
-    refute_equal nil, Homeland.plugins.find { |p| p.name == "foo" }
-    refute_equal nil, Homeland.plugins.find { |p| p.name == "dar" }
+    assert_not_equal nil, Homeland.plugins.find { |p| p.name == "foo" }
+    assert_not_equal nil, Homeland.plugins.find { |p| p.name == "dar" }
   end
 
   test ".sorted_plugins work" do
-    refute_equal nil, Homeland.plugins.sort.find { |p| p.name == "foo" }
-    refute_equal nil, Homeland.plugins.sort.find { |p| p.name == "dar" }
+    assert_not_equal nil, Homeland.plugins.sort.find { |p| p.name == "foo" }
+    assert_not_equal nil, Homeland.plugins.sort.find { |p| p.name == "dar" }
 
     Setting.stub(:sorted_plugins, ["wiki", "site", "note"]) do
       assert_kind_of Array, Homeland.plugins.sort
@@ -64,17 +62,17 @@ class Homeland::PluginTest < ActiveSupport::TestCase
   end
 
   test ".navbar_plugins work" do
-    refute_equal nil, Homeland.navbar_plugins.find { |p| p.name == "foo" }
+    assert_not_equal nil, Homeland.navbar_plugins.find { |p| p.name == "foo" }
     assert_nil Homeland.navbar_plugins.find { |p| p.name == "dar" }
   end
 
   test ".admin_navbar_plugins work" do
-    refute_equal nil, Homeland.admin_navbar_plugins.find { |p| p.name == "foo" }
+    assert_not_equal nil, Homeland.admin_navbar_plugins.find { |p| p.name == "foo" }
     assert_nil Homeland.admin_navbar_plugins.find { |p| p.name == "dar" }
   end
 
   test ".user_menu_plugins work" do
-    refute_equal nil, Homeland.user_menu_plugins.find { |p| p.name == "foo" }
+    assert_not_equal nil, Homeland.user_menu_plugins.find { |p| p.name == "foo" }
     assert_nil Homeland.user_menu_plugins.find { |p| p.name == "dar" }
   end
 end

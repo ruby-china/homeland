@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Admin
   class ApplicationsController < Admin::ApplicationController
     before_action :set_application, only: %i[show edit update destroy]

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Homeland
   class SSO < SingleSignOn
     def self.sso_url

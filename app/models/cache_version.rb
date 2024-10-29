@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Save speical cache version
 # For example:
 #    Record last update, pin topic time for update cache_key to expire cache that used this key.

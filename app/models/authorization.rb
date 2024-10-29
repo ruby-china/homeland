@@ -1,10 +1,8 @@
-# frozen_string_literal: true
-
 class Authorization < ApplicationRecord
   belongs_to :user
 
   validates :uid, :provider, presence: true
-  validates :uid, uniqueness: {scope: :provider}
+  validates :uid, uniqueness: { scope: :provider }
 
   def self.find_user_by_provider(provider, uid)
     where(provider: provider, uid: uid).first&.user

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Reply
   module Notify
     extend ActiveSupport::Concern
@@ -11,7 +9,7 @@ class Reply
     end
 
     def broadcast_to_client
-      message = {id: id, user_id: user_id, action: :create}
+      message = { id: id, user_id: user_id, action: :create }
       ActionCable.server.broadcast("topics/#{topic_id}/replies", message)
     end
 

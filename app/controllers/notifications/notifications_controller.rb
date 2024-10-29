@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Notifications
   class NotificationsController < Notifications::ApplicationController
     def index
@@ -10,7 +8,7 @@ module Notifications
 
     def read
       Notification.read!(current_user, params[:ids])
-      render json: {ok: 1}
+      render json: { ok: 1 }
     end
 
     def clean

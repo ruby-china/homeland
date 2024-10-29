@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require "homeland/version"
 require "homeland/plugin"
 

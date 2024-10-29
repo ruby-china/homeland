@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require "test_helper"
 
 class Users::SessionsControllerTest < ActionDispatch::IntegrationTest
@@ -22,42 +20,42 @@ class Users::SessionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "POST /account/sign_in with login" do
-    post user_session_path, params: {user: {login: "huacnlee"}}
+    post user_session_path, params: { user: { login: "huacnlee" } }
     assert_equal 200, response.status
     assert_select ".alert", text: /Invalid Username or password/
 
-    post user_session_path, params: {user: {login: "huacnlee", password: "1234"}}
+    post user_session_path, params: { user: { login: "huacnlee", password: "1234" } }
     assert_equal 200, response.status
     assert_select ".alert", text: /Invalid Username or password/
 
     # Do sign in
-    post user_session_path, params: {user: {login: "huacnlee", password: "123456"}}
+    post user_session_path, params: { user: { login: "huacnlee", password: "123456" } }
     assert_signed_in
   end
 
   test "POST /account/sign_in with login insensitive" do
     # Do sign in
-    post user_session_path, params: {user: {login: "HUacnlee", password: "123456"}}
+    post user_session_path, params: { user: { login: "HUacnlee", password: "123456" } }
     assert_signed_in
   end
 
   test "POST /account/sign_in with email" do
-    post user_session_path, params: {user: {login: "huacnlee@gmail.com"}}
+    post user_session_path, params: { user: { login: "huacnlee@gmail.com" } }
     assert_equal 200, response.status
     assert_select ".alert", text: /Invalid Username or password/
 
-    post user_session_path, params: {user: {login: "huacnlee@gmail.com", password: "1234"}}
+    post user_session_path, params: { user: { login: "huacnlee@gmail.com", password: "1234" } }
     assert_equal 200, response.status
     assert_select ".alert", text: /Invalid Username or password/
 
     # Do sign in
-    post user_session_path, params: {user: {login: "huacnlee@gmail.com", password: "123456"}}
+    post user_session_path, params: { user: { login: "huacnlee@gmail.com", password: "123456" } }
     assert_signed_in
   end
 
   test "POST /account/sign_in with email insensitive" do
     # Do sign in
-    post user_session_path, params: {user: {login: "HUacnlee@Gmail.com", password: "123456"}}
+    post user_session_path, params: { user: { login: "HUacnlee@Gmail.com", password: "123456" } }
     assert_signed_in
   end
 
@@ -68,7 +66,7 @@ class Users::SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to new_user_registration_path
 
     # go to sign in page to bind user
-    post user_session_path, params: {user: {login: "huacnlee", password: "123456"}}
+    post user_session_path, params: { user: { login: "huacnlee", password: "123456" } }
     assert_signed_in
 
     auth = @user.authorizations.where(provider: "github").first
@@ -83,7 +81,7 @@ class Users::SessionsControllerTest < ActionDispatch::IntegrationTest
     OmniAuth.config.add_mock(:github, uid: "github-234")
     get "/account/auth/github/callback"
     assert_redirected_to new_user_registration_path
-    post user_session_path, params: {user: {login: user1.email, password: "123456"}}
+    post user_session_path, params: { user: { login: user1.email, password: "123456" } }
     assert_signed_in
     assert_select ".alert-success", text: /Sign in successfully with bind GitHub/
 
@@ -98,7 +96,7 @@ class Users::SessionsControllerTest < ActionDispatch::IntegrationTest
     OmniAuth.config.add_mock(:wechat, uid: "wechat-123")
     get "/account/auth/wechat/callback"
     assert_redirected_to new_user_registration_path
-    post user_session_path, params: {user: {login: user1.email, password: "123456"}}
+    post user_session_path, params: { user: { login: user1.email, password: "123456" } }
     assert_signed_in
     assert_select ".alert-success", text: /Sign in successfully with bind 微信/
 
@@ -121,7 +119,7 @@ class Users::SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to new_user_registration_path
 
     # make sure sign in will bind
-    post user_session_path, params: {user: {login: "huacnlee", password: "123456"}}
+    post user_session_path, params: { user: { login: "huacnlee", password: "123456" } }
     assert_signed_in
 
     auth = @user.authorizations.where(provider: "github").first
@@ -154,7 +152,7 @@ class Users::SessionsControllerTest < ActionDispatch::IntegrationTest
 
   test "POST /account/sign_in should render json" do
     user = create(:user)
-    post "/account/sign_in", params: {format: :json, user: {login: user.login, password: user.password}}
+    post "/account/sign_in", params: { format: :json, user: { login: user.login, password: user.password } }
     assert_equal 201, response.status
     assert_equal user.login, response.parsed_body["login"]
     assert_equal user.email, response.parsed_body["email"]

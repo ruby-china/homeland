@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require "spec_helper"
 
 describe Admin::CommentsController do
@@ -20,15 +18,14 @@ describe Admin::CommentsController do
 
   describe "PUT /admin/comments/:id" do
     it "updates the requested comment" do
-      comment_param = {body: "123"}
-      # expect_any_instance_of(Comment).to receive(:update).with("body" => '123')
-      put admin_comment_path(@comment), params: {comment: comment_param}
+      comment_param = { body: "123" }
+      put admin_comment_path(@comment), params: { comment: comment_param }
       @comment.reload
       assert_equal "123", @comment.body
     end
 
     it "redirects to the comment" do
-      put admin_comment_path(@comment), params: {comment: {"body" => "body"}}
+      put admin_comment_path(@comment), params: { comment: { "body" => "body" } }
       assert_redirected_to admin_comments_url
     end
   end

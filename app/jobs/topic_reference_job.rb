@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class TopicReferenceJob < AsyncJob
   REFERENCE_PATTERN = %r{/topics/(\d+)}
 

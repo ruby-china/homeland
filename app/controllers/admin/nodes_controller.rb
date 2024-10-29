@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Admin
   class NodesController < Admin::ApplicationController
     before_action :set_node, only: %i[show edit update destroy]

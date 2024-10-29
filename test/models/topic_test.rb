@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require "test_helper"
 
 class TopicTest < ActiveSupport::TestCase
@@ -11,13 +9,13 @@ class TopicTest < ActiveSupport::TestCase
   end
 
   test "should no save invalid node_id" do
-    refute_equal true, build(:topic, node_id: nil).valid?
+    assert_not_equal true, build(:topic, node_id: nil).valid?
   end
 
   test "should set last_active_mark on created" do
     # because the Topic index is sort by replied_at,
     # so the new Topic need to set a Time, that test will display in index page
-    refute_nil create(:topic).last_active_mark
+    assert_not_nil create(:topic).last_active_mark
   end
 
   test "should not update last_active_mark on save" do
@@ -28,7 +26,7 @@ class TopicTest < ActiveSupport::TestCase
 
   test "should update after reply" do
     reply = create :reply, topic: topic, user: user
-    refute_nil topic.last_active_mark
+    assert_not_nil topic.last_active_mark
     assert_equal reply.created_at.to_i, topic.replied_at.to_i
     assert_equal reply.id, topic.last_reply_id
     assert_equal reply.user_id, topic.last_reply_user_id
@@ -39,7 +37,7 @@ class TopicTest < ActiveSupport::TestCase
     topic.stubs(:created_at).returns(1.month.ago)
     topic.stubs(:last_active_mark).returns(1)
     reply = create :reply, topic: topic, user: user
-    refute_equal reply.created_at.to_i, topic.last_active_mark
+    assert_not_equal reply.created_at.to_i, topic.last_active_mark
     assert_equal reply.user_id, topic.last_reply_user_id
     assert_equal reply.user.login, topic.last_reply_user_login
   end
@@ -64,7 +62,7 @@ class TopicTest < ActiveSupport::TestCase
   test "should log deleted user name when use destroy_by" do
     topic.destroy_by(user)
     assert_equal user.login, topic.who_deleted
-    refute_equal nil, topic.deleted_at
+    assert_not_equal nil, topic.deleted_at
     topic1 = create(:topic)
     assert_equal false, topic1.destroy_by(nil)
   end
@@ -90,8 +88,8 @@ class TopicTest < ActiveSupport::TestCase
     assert_equal r.id, topic.last_reply_id
     assert_equal r.user_id, topic.last_reply_user_id
     assert_equal r.user.login, topic.last_reply_user_login
-    refute_nil topic.last_active_mark
-    refute_equal old_updated_at, topic.updated_at
+    assert_not_nil topic.last_active_mark
+    assert_not_equal old_updated_at, topic.updated_at
   end
 
   test ".update_last_reply should update with nil when have :force" do
@@ -100,7 +98,7 @@ class TopicTest < ActiveSupport::TestCase
     assert_nil topic.last_reply_id
     assert_nil topic.last_reply_user_id
     assert_nil topic.last_reply_user_login
-    refute_nil topic.last_active_mark
+    assert_not_nil topic.last_active_mark
   end
 
   test ".update_deleted_last_reply when have last Reply and param test that Reply" do

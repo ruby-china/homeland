@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class RemoveVerifiedFromUsers < ActiveRecord::Migration[6.0]
   def up
     remove_column :users, :verified

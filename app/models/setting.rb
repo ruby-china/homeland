@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # RailsSettings Model
 class Setting < RailsSettings::Base
   LEGECY_ENVS = {
@@ -83,7 +81,7 @@ class Setting < RailsSettings::Base
   ]
 
   scope :basic do
-    field :app_name, default: (ENV["app_name"] || "Homeland"), validates: {presence: true}
+    field :app_name, default: (ENV["app_name"] || "Homeland"), validates: { presence: true }
     field :timezone, default: "UTC"
     # Module [topic,team,github,editor.code]
     field :modules, default: (ENV["modules"] || "all"), type: :array
@@ -116,7 +114,7 @@ class Setting < RailsSettings::Base
 
   scope :appearance do
     field :navbar_brand_html, default: -> { %(<a href="/" class="navbar-brand"><b>#{app_name}</b></a>) }
-    field :default_locale, default: "en", validates: {presence: true, inclusion: {in: %w[en zh-CN]}}
+    field :default_locale, default: "en", validates: { presence: true, inclusion: { in: %w[en zh-CN] } }
     field :auto_locale, default: "false", type: :boolean
     field :custom_head_html, default: ""
     field :navbar_html, default: ""

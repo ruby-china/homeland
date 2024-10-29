@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Oauth
   class AuthorizedApplicationsController < Doorkeeper::ApplicationController
     before_action :authenticate_resource_owner!

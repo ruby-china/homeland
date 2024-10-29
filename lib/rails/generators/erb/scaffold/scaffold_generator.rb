@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require "rails/generators/erb"
 require "rails/generators/resource_helpers"
 

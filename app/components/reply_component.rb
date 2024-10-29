@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class ReplyComponent < ApplicationComponent
   attr_reader :reply
 

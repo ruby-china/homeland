@@ -6,6 +6,10 @@ class User
     included do
       enum :state, { deleted: -1, member: 1, blocked: 2, vip: 3, hr: 4, maintainer: 90, admin: 99 }
 
+      def self.state_options
+        self.states.map { |key, value| [I18n.t("activerecord.enums.user.state.#{key}"), value] }
+      end
+
       # user.admin?
       define_method :admin? do
         state.to_s == "admin" || Setting.admin_emails.include?(email)

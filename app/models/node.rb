@@ -7,7 +7,9 @@ class Node < ApplicationRecord
   scope :hots, -> { order(topics_count: :desc) }
   scope :sorted, -> { order(sort: :desc) }
 
-  form_select :name
+  def self.name_options
+    self.all.collect { |node| [node.name, node.id] }
+  end
 
   def self.find_builtin_node(id, name)
     node = find_by_id(id)

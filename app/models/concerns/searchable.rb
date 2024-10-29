@@ -18,6 +18,6 @@ module Searchable
   end
 
   def reindex!
-    SearchDocument.index(self)
+    # SearchDocument.index(self)
   end
 end

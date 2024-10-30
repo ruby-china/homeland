@@ -1,0 +1,12 @@
+//= link_tree ../../javascript .js
+//= link_tree ../../../vendor/javascript .js
+//= link turbolinks-prefetch/index.js
+//= link bootstrap/dist/js/bootstrap.js
+//= link bootstrap-select/dist/js/bootstrap-select.js
+//= link jquery.caret/src/jquery.caret.js
+//= link jquery/dist/jquery.js
+//= link dropzone/dist/dropzone.js
+//= link backbone/backbone.js
+//= link underscore/underscore-umd.js
+//= link_tree ../builds
+//= link_directory ../stylesheets .scss

@@ -3,8 +3,8 @@
   <head>
     <meta name="theme" content="<%= user_theme %>">
     <title><%= Setting.app_name %> - Admin Panel</title>
-    <%= stylesheet_pack_tag "admin" %>
-    <%= javascript_pack_tag "application", defer: false %>
+    <%= stylesheet_link_tag "admin" %>
+    <%= javascript_importmap_tags %>
     <%= csrf_meta_tag %>
   </head>
   <body>
@@ -41,7 +41,7 @@
           System settings have been updated, need to restart the application to take effect <%= link_to icon_tag("power-off", label: "Reboot now"), main_app.reboot_admin_dashboards_path, data: { method: :post, confirm: "Are you sure to reboot Homeland?", disable_with: "Rebooting..." }, class: "text-danger float-right" %>
         </div>
       <% end %>
-          
+
       <div id="main" class="card">
         <div class="card-body">
           <%= render AlertComponent.new %>

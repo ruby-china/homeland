@@ -26,10 +26,10 @@
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFFFFF">
     <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#171717">
     <link rel="manifest" href="/manifest.webmanifest">
-    <%= stylesheet_pack_tag "front", "data-turbolinks-track": "reload" %>
-    <%= stylesheet_pack_tag "turbolinks-app", 'data-turbolinks-track': 'reload' if turbolinks_app? %>
+    <%= stylesheet_link_tag "front", "data-turbolinks-track": "reload" %>
+    <%= stylesheet_link_tag "turbolinks-app", 'data-turbolinks-track': 'reload' if turbolinks_app? %>
     <%= yield :stylesheets %>
-    <%= javascript_pack_tag "application",  defer: false %>
+    <%= javascript_importmap_tags %>
     <%= yield :javascripts %>
     <%= action_cable_meta_tag %>
     <%= csrf_meta_tag %>

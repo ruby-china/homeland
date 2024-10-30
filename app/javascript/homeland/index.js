@@ -4,6 +4,22 @@ window.$ = jQuery;
 window.Backbone = require("backbone");
 window._ = require("underscore");
 
+import * as bootstrap from "bootstrap";
+window.bootstrap = bootstrap;
+require("bootstrap-select");
+
+document.addEventListener("turbolinks:load", () => {
+  $("select.bootstrap-select").selectpicker({
+    size: 10,
+    style: "btn-secondary",
+  });
+});
+document.addEventListener("turbolinks:before-cache", () => {
+  $("select.bootstrap-select")
+    .selectpicker("destroy")
+    .addClass("bootstrap-select");
+});
+
 import Turbolinks from "turbolinks";
 import TubrolinksPrefetch from "turbolinks-prefetch";
 
@@ -14,23 +30,10 @@ Turbolinks.setProgressBarDelay(200);
 Turbolinks.controller.cache.size = 30;
 TubrolinksPrefetch.start();
 
-import Rails from "@rails/ujs"
-window.Rails = Rails
+import Rails from "@rails/ujs";
+window.Rails = Rails;
 Rails.start();
 
-require("pagination");
-require("jquery.timeago");
-require("jquery.timeago.settings");
-require("jquery.hotkeys");
-require("jquery.autogrow-textarea");
-require("tooltipster.bundle.min");
-require("dropzone");
-require("jquery.fluidbox.min");
-require("jquery.caret");
-require("jquery.atwho.min");
-require("google_analytics");
-require("jquery.infinitescroll.min");
-require("jquery.mobile-events");
 require("vendor/social-share-button");
 
 import { createConsumer } from "@rails/actioncable";

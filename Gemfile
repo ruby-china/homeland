@@ -3,12 +3,12 @@ source "https://rubygems.org"
 git_source(:github) { |repo_name| "https://github.com/#{repo_name}.git" }
 
 gem "jbuilder"
-gem "rails", "~> 8.0.0.beta1"
+gem "rails", "~> 8.0.0.rc2"
 gem "rails_autolink"
-gem "sass-rails"
-gem "shakapacker", "~> 7.2.1"
 gem "turbolinks"
 gem "uglifier"
+gem "sass-rails"
+gem "importmap-rails", "~> 2.0"
 
 gem "view_component", "~> 2.83"
 
@@ -107,3 +107,5 @@ group :development, :test do
 
   gem "rubocop-rails-omakase", require: false
 end
+
+gem "tailwindcss-rails", "~> 3.0"

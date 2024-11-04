@@ -223,7 +223,7 @@ class ReplyTest < ActiveSupport::TestCase
 
   test ".notification_receiver_ids" do
     mentioned_user_ids = [1, 2, 3]
-    user = create(:user)
+    user = create(:user, id: 99)
     topic = create(:topic, user_id: 10)
     reply = create(:reply, user: user, topic: topic, mentioned_user_ids: mentioned_user_ids)
 

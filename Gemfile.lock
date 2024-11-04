@@ -80,6 +80,8 @@ GEM
       nokogiri (~> 1.6)
       rest-client (~> 2.0)
     ast (2.4.2)
+    autocorrect-rb (2.13.0-aarch64-linux)
+      rb_sys (>= 0.9.54)
     autocorrect-rb (2.13.0-arm64-darwin)
       rb_sys (>= 0.9.54)
     autocorrect-rb (2.13.0-x86_64-linux)
@@ -184,6 +186,7 @@ GEM
       net-http
     faraday-rack (2.0.0)
       faraday (~> 2.0)
+    ffi (1.17.0-aarch64-linux-musl)
     ffi (1.17.0-arm64-darwin)
     ffi (1.17.0-x86_64-linux-gnu)
     ffi (1.17.0-x86_64-linux-musl)
@@ -287,6 +290,8 @@ GEM
       net-protocol
     netrc (0.11.0)
     nio4r (2.7.4)
+    nokogiri (1.16.7-aarch64-linux)
+      racc (~> 1.4)
     nokogiri (1.16.7-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.16.7-x86_64-linux)
@@ -373,9 +378,8 @@ GEM
       rack (>= 3.0.0)
     rack-test (2.1.0)
       rack (>= 1.3)
-    rackup (2.1.0)
+    rackup (2.2.0)
       rack (>= 3)
-      webrick (~> 1.8)
     rails (8.0.0.rc2)
       actioncable (= 8.0.0.rc2)
       actionmailbox (= 8.0.0.rc2)
@@ -478,13 +482,16 @@ GEM
       ffi (~> 1.12)
       logger
     ruby2_keywords (0.0.5)
-    rucaptcha (3.2.3-arm64-darwin)
+    rucaptcha (3.2.4-aarch64-linux-musl)
       railties (>= 3.2)
       rb_sys (>= 0.9.86)
-    rucaptcha (3.2.3-x86_64-linux)
+    rucaptcha (3.2.4-arm64-darwin)
       railties (>= 3.2)
       rb_sys (>= 0.9.86)
-    rucaptcha (3.2.3-x86_64-linux-musl)
+    rucaptcha (3.2.4-x86_64-linux)
+      railties (>= 3.2)
+      rb_sys (>= 0.9.86)
+    rucaptcha (3.2.4-x86_64-linux-musl)
       railties (>= 3.2)
       rb_sys (>= 0.9.86)
     sass-rails (6.0.0)
@@ -551,13 +558,13 @@ GEM
       method_source (~> 1.0)
     warden (1.2.9)
       rack (>= 2.0.9)
-    webrick (1.8.2)
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
     zeitwerk (2.7.1)
 
 PLATFORMS
+  aarch64-linux-musl
   arm64-darwin-21
   arm64-darwin-22
   arm64-darwin-23

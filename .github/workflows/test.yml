@@ -62,6 +62,9 @@ jobs:
         with:
           ruby-version: 3.2.0
           bundler-cache: true
+      - name: Install dependencies
+        run: |
+          sudo apt install -y imagemagick
       - name: Before tests
         run: bundle exec rails db:migrate
       - name: Run tests

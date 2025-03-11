@@ -9,7 +9,7 @@
     "@babel/plugin-transform-runtime": "7.18.2",
     "@babel/preset-env": "7.18.2",
     "@babel/preset-typescript": "7.17.12",
-    "@babel/runtime": "7.18.3",
+    "@babel/runtime": "7.26.10",
     "@fortawesome/fontawesome-free": "^6.2.0",
     "@popperjs/core": "^2.11.8",
     "@prettier/plugin-ruby": "^2",

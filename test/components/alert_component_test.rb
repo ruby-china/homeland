@@ -6,11 +6,11 @@ class AlertComponentTest < ViewComponent::TestCase
     doc = render_inline(component)
     assert_nil doc.css(".alert").first
 
-    controller.flash[:notice] = "hello"
+    vc_test_controller.flash[:notice] = "hello"
     doc = render_inline(component)
     assert_equal "hello", doc.css(".alert.alert-success .alert-message").text.strip
 
-    controller.flash[:alert] = "hello"
+    vc_test_controller.flash[:alert] = "hello"
     doc = render_inline(component)
     assert_equal "hello", doc.css(".alert.alert-danger .alert-message").text.strip
   end

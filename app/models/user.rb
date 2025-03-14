@@ -1,7 +1,7 @@
 require "digest/md5"
 
 class User < ApplicationRecord
-  # include Searchable
+  include Searchable
   include User::SoftDelete
   include User::Avatar
   include User::Deviseable

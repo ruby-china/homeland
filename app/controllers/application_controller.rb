@@ -17,6 +17,20 @@ class ApplicationController < ActionController::Base
   etag { Setting.footer_html }
   etag { Rails.env.development? ? Time.now : Date.current }
 
+  # Add login check
+  before_action :check_login_required
+
+  def check_login_required
+    return unless ENV['logged_in_required'] == 'true'
+    return if current_user
+    return if devise_controller?
+    return if controller_name == 'sso' && action_name == 'show'
+    return if controller_name == 'sso' && action_name == 'login'
+    
+    store_location
+    redirect_to new_user_session_path
+  end
+
   rescue_from ActiveRecord::RecordNotFound do |exception|
     respond_to do |format|
       format.json { head :not_found }

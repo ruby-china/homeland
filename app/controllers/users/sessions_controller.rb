@@ -23,4 +23,28 @@ class Users::SessionsController < Devise::SessionsController
       format.json { render status: "201", json: resource.as_json(only: %i[login email]) }
     end
   end
+
+  def destroy
+    Rails.logger.info "Destroying session for user: #{current_user&.id}"
+    
+    # Clean cookies
+    cookies.delete(:user_id)
+    cookies.delete(:remember_user_token)
+    
+    # Perform logout operation
+    sign_out(current_user)
+    
+    # If SSO logout URL is set, redirect to that URL
+    if ENV['sso_logout_url'].present?
+      Rails.logger.info "Redirecting to SSO logout URL: #{ENV['sso_logout_url']}"
+      redirect_to ENV['sso_logout_url'], allow_other_host: true
+    else
+      Rails.logger.info "Redirecting to root path"
+      redirect_to root_path
+    end
+  rescue => e
+    Rails.logger.error "Error during logout: #{e.message}"
+    Rails.logger.error e.backtrace.join("\n")
+    raise e
+  end
 end

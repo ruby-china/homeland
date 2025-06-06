@@ -60,7 +60,7 @@
   },
   "devDependencies": {
     "prettier-plugin-sort-json": "^0.0.2",
-    "webpack-dev-server": "4.9.0"
+    "webpack-dev-server": "5.2.1"
   },
   "resolutions": {
     "@types/retry": "~0.12.5",

@@ -7,7 +7,7 @@ class User
       attr_accessor :omniauth_provider, :omniauth_uid
 
       devise :database_authenticatable, :registerable, :recoverable, :lockable,
-        :rememberable, :trackable, :validatable, :omniauthable
+        :rememberable, :trackable, :validatable, :omniauthable, :confirmable
 
       after_create :bind_omniauth_on_create
 

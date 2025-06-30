@@ -73,8 +73,9 @@ describe Auth::SSOController do
       sso.avatar_url = "http://foobar.com/avatar/1.jpg"
       sso.admin = false
 
+      # first sign up
       get login_auth_sso_path, params: Rack::Utils.parse_query(sso.payload), headers: @headers
-      assert_redirected_to "/topics/123"
+      assert_redirected_to "/account/sign_in"
 
       user = User.find_by_email(sso.email)
       assert_equal false, user.new_record?
@@ -106,8 +107,8 @@ describe Auth::SSOController do
 
       assert_no_changes -> { User.count } do
         get login_auth_sso_path, params: Rack::Utils.parse_query(sso.payload), headers: @headers
+        assert_redirected_to root_path
       end
-      assert_redirected_to "/"
 
       user1 = User.find_by_id(user.id)
       assert_equal sso.name, user1.name
@@ -125,7 +126,7 @@ describe Auth::SSOController do
       sso.admin = true
 
       get login_auth_sso_path, params: Rack::Utils.parse_query(sso.payload), headers: @headers
-      assert_redirected_to "/hello/world"
+      assert_redirected_to "/account/sign_in"
 
       user = User.find_by_email(sso.email)
       assert_equal "admin", user.state
@@ -151,7 +152,7 @@ describe Auth::SSOController do
     end
 
     it "show error when timeout expried" do
-      user_template = build(:user)
+      user_template = create(:user)
       sso = get_sso("/topics/123")
       sso.email = user_template.email
       sso.external_id = "abc123"

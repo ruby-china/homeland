@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_03_022421) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_30_092055) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension "pg_catalog.plpgsql"
+  enable_extension "pg_stat_statements"
 
   create_table "actions", id: :serial, force: :cascade do |t|
     t.string "action_type", null: false
@@ -69,13 +70,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_03_022421) do
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.index ["user_id"], name: "index_devices_on_user_id"
-  end
-
-  create_table "exception_tracks", id: :serial, force: :cascade do |t|
-    t.string "title"
-    t.text "body"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "locations", id: :serial, force: :cascade do |t|
@@ -179,12 +173,47 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_03_022421) do
     t.index ["page_id"], name: "index_page_versions_on_page_id"
   end
 
+  create_table "pages", id: :serial, force: :cascade do |t|
+    t.string "slug", null: false
+    t.string "title", null: false
+    t.text "body", null: false
+    t.boolean "locked", default: false
+    t.integer "version", default: 0, null: false
+    t.integer "editor_ids", default: [], null: false, array: true
+    t.integer "word_count", default: 0, null: false
+    t.integer "changes_cout", default: 1, null: false
+    t.integer "comments_count", default: 0, null: false
+    t.datetime "deleted_at", precision: nil
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
+    t.index ["slug"], name: "index_pages_on_slug", unique: true
+  end
+
   create_table "photos", id: :serial, force: :cascade do |t|
     t.integer "user_id"
     t.string "image", null: false
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
     t.index ["user_id"], name: "index_photos_on_user_id"
+  end
+
+  create_table "posts", id: :serial, force: :cascade do |t|
+    t.string "title", null: false
+    t.string "slug", null: false
+    t.text "body", null: false
+    t.string "summary", limit: 5000
+    t.string "banner"
+    t.integer "user_id"
+    t.integer "likes_count", default: 0, null: false
+    t.integer "comments_count", default: 0, null: false
+    t.integer "status", default: 0, null: false
+    t.datetime "published_at", precision: nil, null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.index ["published_at"], name: "index_posts_on_published_at"
+    t.index ["slug"], name: "index_posts_on_slug"
+    t.index ["status"], name: "index_posts_on_status"
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -214,17 +243,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_03_022421) do
     t.index ["user_id"], name: "index_replies_on_user_id"
   end
 
-  create_table "search_documents", force: :cascade do |t|
-    t.string "searchable_type", limit: 32, null: false
-    t.integer "searchable_id", null: false
-    t.tsvector "tokens"
-    t.text "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["searchable_type", "searchable_id"], name: "index_search_documents_on_searchable_type_and_searchable_id", unique: true
-    t.index ["tokens"], name: "index_search_documents_on_tokens", using: :gin
-  end
-
   create_table "settings", id: :serial, force: :cascade do |t|
     t.string "var", null: false
     t.text "value"
@@ -233,6 +251,28 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_03_022421) do
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
     t.index ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true
+  end
+
+  create_table "site_nodes", id: :serial, force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "sort", default: 0, null: false
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
+    t.index ["sort"], name: "index_site_nodes_on_sort"
+  end
+
+  create_table "sites", id: :serial, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "site_node_id"
+    t.string "name", null: false
+    t.string "url", null: false
+    t.string "desc"
+    t.datetime "deleted_at", precision: nil
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
+    t.index ["deleted_at"], name: "index_sites_on_deleted_at"
+    t.index ["site_node_id"], name: "index_sites_on_site_node_id"
+    t.index ["url"], name: "index_sites_on_url"
   end
 
   create_table "team_users", id: :serial, force: :cascade do |t|
@@ -332,12 +372,15 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_03_022421) do
     t.integer "team_users_count"
     t.integer "followers_count", default: 0
     t.integer "following_count", default: 0
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
     t.index "lower((login)::text) varchar_pattern_ops", name: "index_users_on_lower_login_varchar_pattern_ops"
     t.index "lower((name)::text) varchar_pattern_ops", name: "index_users_on_lower_name_varchar_pattern_ops"
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["location"], name: "index_users_on_location"
     t.index ["login"], name: "index_users_on_login", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
-
 end

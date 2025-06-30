@@ -6,6 +6,7 @@ on:
 jobs:
   lint:
     name: AutoCorrect Check
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -13,6 +14,7 @@ jobs:
         uses: huacnlee/autocorrect-action@main
   assets_compile:
     name: Assets Compile
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -28,6 +30,7 @@ jobs:
 
   test:
     name: CI Test
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name
     runs-on: ubuntu-latest
     services:
       postgres:

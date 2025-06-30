@@ -23,11 +23,6 @@ jobs:
       - name: Install dependencies
         run: |
           yarn
-      - name: Add plugins
-        run: |
-          git clone https://github.com/homeland-plugins/note.git plugins/note
-          git clone https://github.com/homeland-plugins/site.git plugins/site
-          git clone https://github.com/homeland-plugins/jobs.git plugins/jobs
       - name: Assets Precompile
         run: bundle exec rails assets:precompile RAILS_PRECOMPILE=1 RAILS_ENV=production SECRET_KEY_BASE=fake_secure_for_compile
 
@@ -65,7 +60,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.2.0
+          ruby-version: 3.4
           bundler-cache: true
       - name: Install dependencies
         run: |

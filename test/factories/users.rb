@@ -7,6 +7,7 @@ FactoryBot.define do
     password_confirmation { "password" }
     location { "China" }
     created_at { 100.days.ago }
+    confirmed_at { created_at }
   end
 
   factory :avatar_user, parent: :user do

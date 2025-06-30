@@ -45,6 +45,7 @@ class Users::RegistrationsControllerTest < ActionDispatch::IntegrationTest
     assert_equal user_params[:name], user.name
     assert_equal true, user.email_public?
     assert_equal true, user.valid_password?(user_params[:password])
+    user.confirm
 
     post user_session_path, params: { user: { login: user_params[:email], password: user_params[:password] } }
     assert_redirected_to root_path
@@ -180,8 +181,6 @@ class Users::RegistrationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   def assert_sign_up_success
-    assert_redirected_to root_path
-    follow_redirect!
-    assert_select ".alert-success", text: /Welcome! You have signed up successfully/
+    assert_redirected_to "/account/sign_in"
   end
 end

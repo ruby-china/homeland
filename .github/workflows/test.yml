@@ -74,6 +74,6 @@ jobs:
           git clone https://github.com/homeland-plugins/site.git plugins/site
           git clone https://github.com/homeland-plugins/jobs.git plugins/jobs
       - name: Before tests
-        run: RAILS_ENV=test bundle exec rails db:migrate
+        run: bundle exec rails db:migrate
       - name: Run tests
         run: bundle exec rails test

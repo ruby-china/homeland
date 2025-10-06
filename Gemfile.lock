@@ -286,7 +286,7 @@ GEM
     mutex_m (0.3.0)
     net-http (0.6.0)
       uri
-    net-imap (0.5.11)
+    net-imap (0.5.12)
       date
       net-protocol
     net-pop (0.1.2)
@@ -612,7 +612,7 @@ DEPENDENCIES
   bootsnap
   byebug
   cancancan
-  carrierwave (~> 2.2)
+  carrierwave (~> 2.2.6)
   carrierwave-aliyun
   carrierwave-qiniu
   carrierwave-upyun

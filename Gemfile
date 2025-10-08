@@ -6,7 +6,7 @@ gem "jbuilder"
 gem "rails", "~> 8"
 gem "rails_autolink"
 gem "sass-rails"
-gem "shakapacker", "~> 7.2.1"
+gem "shakapacker", "~> 8.0"
 gem "turbolinks"
 gem "uglifier"
 
@@ -34,7 +34,7 @@ gem "rails-i18n"
 gem "twemoji"
 
 # Uploader
-gem "carrierwave", "~> 2.2"
+gem "carrierwave", "~> 2.2.6"
 # Aliyun / Upyun / Qiniu
 gem "carrierwave-aliyun"
 gem "carrierwave-qiniu"

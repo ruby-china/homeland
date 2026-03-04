@@ -47,7 +47,7 @@
     "turbolinks": "~5.2",
     "turbolinks-prefetch": "~1.0",
     "typescript": "~4.9",
-    "underscore": "~1.13.3",
+    "underscore": "~1.13.8",
     "webpack": "^5.99.7",
     "webpack-assets-manifest": "5",
     "webpack-cli": "^6.0.1"

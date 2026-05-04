@@ -130,7 +130,7 @@ GEM
     cronex (0.15.0)
       tzinfo
       unicode (>= 0.4.4.5)
-    date (3.4.1)
+    date (3.5.1)
     derailed_benchmarks (2.2.1)
       base64
       benchmark-ips (~> 2)
@@ -286,7 +286,7 @@ GEM
     mutex_m (0.3.0)
     net-http (0.6.0)
       uri
-    net-imap (0.5.12)
+    net-imap (0.5.14)
       date
       net-protocol
     net-pop (0.1.2)
@@ -568,7 +568,7 @@ GEM
     stringio (3.1.7)
     thor (1.4.0)
     tilt (2.6.1)
-    timeout (0.4.3)
+    timeout (0.6.1)
     tsort (0.2.0)
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)

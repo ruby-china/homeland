@@ -5,7 +5,7 @@
     "start": "./bin/shakapacker-dev-server"
   },
   "dependencies": {
-    "@babel/core": "7.18.2",
+    "@babel/core": "7.29.6",
     "@babel/plugin-transform-runtime": "7.18.2",
     "@babel/preset-env": "7.18.2",
     "@babel/preset-typescript": "7.17.12",

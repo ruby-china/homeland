@@ -3,7 +3,7 @@ source "https://rubygems.org"
 git_source(:github) { |repo_name| "https://github.com/#{repo_name}.git" }
 
 gem "jbuilder"
-gem "rails", "~> 8"
+gem "rails", "~> 8.1"
 gem "rails_autolink"
 gem "sass-rails"
 gem "shakapacker", "~> 8.0"

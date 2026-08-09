@@ -1,5 +1,5 @@
 # NAME:     homeland/homeland
-FROM homeland/base:3.4-alpine
+FROM homeland/base:4.0-alpine
 
 ENV RAILS_ENV "production"
 ENV RUBY_YJIT_ENABLE "true"
